@@ -5,11 +5,25 @@ import random
 # Use None for "Void" (don't render anything)
 DECOR_TABLE = {
     "grass": [
-        (None, 85),          # 85% Empty/Void
-        ("grass", 10) # 10% Standard
+        (None, 60),          
+        ("grass_1", 20), 
+        ("grass_2", 10),
+        ("flower_1", 1),
+        ("flower_2", 1),
+        ("shroom_1", 1),
+        ("shroom_2", 1),
+        ("rocks_1", 1),
+        ("rocks_2", 1)
     ],
     "tree": [
-        ("tree", 100) 
+        ("tree_1", 25),
+        ("tree_2", 25),
+        ("tree_3", 25),
+        ("tree_4", 5) 
+    ],
+    "gravel": [
+        ("gravel_1", 25),
+        ("gravel_2", 75)
     ]
 }
 
