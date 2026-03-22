@@ -334,3 +334,6 @@ The terrain name is in sprite_map.json and tiles.json but
 missing from terrain.json. Add walkable/transparent/description.
 Or the terrain name used in the building layout legend doesn't
 match the key in terrain.json — check spelling.
+
+# NOTE
+By default the engine will convert the sprite name into the display name of the tile (used in Look Mode). However a separate display_name field can be used to define a different one in terrain.json.

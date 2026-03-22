@@ -147,14 +147,20 @@ class LookMode:
 
         # Terrain
         terrain_def = dict(engine.data.terrain.get(terrain, {}))
+        # Look for 'display_name' in data, fallback to title-cased ID
+        raw_name = terrain_def.get("display_name")
+        if not raw_name:
+            raw_name = terrain.replace("_", " ").title()
+            
         if terrain == "stairs_down":
             terrain_def["description"] = "Stone steps descend into darkness. Press > to descend."
         elif terrain == "stairs_up":
             terrain_def["description"] = "Stone steps ascend toward the surface. Press < to ascend."
+            
         things.append({
             "type":        "terrain",
             "id":          terrain,
-            "name":        terrain.replace("_", " ").title(),
+            "name":        raw_name, # Use the resolved display name
             "description": terrain_def.get(
                 "description", "Unremarkable ground."
             ),

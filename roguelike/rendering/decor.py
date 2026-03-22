@@ -27,6 +27,23 @@ DECOR_TABLE = {
     ]
 }
 
+# Maps a 'varied_' prefix to actual terrain keys from your tiles.json/terrain_data
+FUNCTIONAL_VARIANTS = {
+    "varied_grass": [
+        ("grass", 95), 
+        ("flower_1", 1), 
+        ("flower_2", 1),
+        ("shroom_1", 1),
+        ("shroom_2", 1)
+    ],
+    "varied_forest": [
+        ("tree_1", 70),
+        ("tree_2", 20),
+        ("tree_3", 10),
+        ("tree_4", 5) 
+    ]
+}
+
 def get_procedural_key(mx: int, my: int, terrain: str) -> str | None:
     if terrain not in DECOR_TABLE:
         return terrain # Fallback: use terrain name as sprite key
@@ -45,3 +62,19 @@ def get_procedural_key(mx: int, my: int, terrain: str) -> str | None:
         if roll <= cursor:
             return key
     return None
+
+def resolve_functional_variant(terrain: str) -> str:
+    """If terrain starts with varied_, pick a random real terrain type."""
+    if not terrain.startswith("varied_") or terrain not in FUNCTIONAL_VARIANTS:
+        return terrain
+    
+    variants = FUNCTIONAL_VARIANTS[terrain]
+    total_weight = sum(w for _, w in variants)
+    roll = random.randint(1, total_weight)
+    
+    cursor = 0
+    for variant_name, weight in variants:
+        cursor += weight
+        if roll <= cursor:
+            return variant_name
+    return terrain

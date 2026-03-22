@@ -578,7 +578,7 @@ def _carve_path_connector(
     Carve a dirt path from entry edge to opposite edge.
     More meandering than a road, uses floor/grass terrain.
     """
-    floor = terrain_data.get("grass", terrain_data["floor"])
+    floor = terrain_data.get("varied_grass", terrain_data["floor"])
     start_x, start_y = _edge_to_tile(
         entry_edge, position, map_width, map_height
     )
@@ -594,7 +594,7 @@ def _carve_path_connector(
     while (x, y) != (end_x, end_y):
         if local_map.in_bounds(x, y):
             local_map.set_tile(
-                x, y, "grass",
+                x, y, "varied_grass",
                 floor["walkable"],
                 floor["transparent"],
             )

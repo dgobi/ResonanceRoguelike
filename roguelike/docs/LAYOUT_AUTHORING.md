@@ -366,3 +366,7 @@ for large layouts. A planned Tier 4 tool would provide:
 
 Until that tool exists, the text editor workflow with this guide is
 the primary authoring method.
+
+# NOTE:
+Varied tiles: using prefix varied_ for the tile name in a layout will cause the engine to insert tiles from the FUNCTIONAL_VARIANTS list found in decor.py
+For just cosmetic swaps the engine searches DECOR_TABLE for a matching tile name.

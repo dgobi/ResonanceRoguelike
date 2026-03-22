@@ -38,7 +38,14 @@ class LocalMap:
 
     def set_tile(self, x: int, y: int, terrain: str,
                  walkable: bool, transparent: bool) -> None:
-        self.tiles[x, y] = make_tile(terrain, walkable, transparent)
+        # Import inside the function to avoid circular imports
+        from rendering.decor import resolve_functional_variant
+        
+        # Resolve 'varied_x' to a specific type like 'mud' or 'dirt'
+        actual_terrain = resolve_functional_variant(terrain)
+        
+        # Store the actual resolved terrain in the map
+        self.tiles[x, y] = make_tile(actual_terrain, walkable, transparent)
 
     def in_bounds(self, x: int, y: int) -> bool:
         return 0 <= x < self.width and 0 <= y < self.height
