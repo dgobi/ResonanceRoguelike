@@ -1,8 +1,10 @@
 # rendering/renderer.py
 from __future__ import annotations
 import pygame
+import random
 from typing import TYPE_CHECKING
 from config import UI_PANEL_INSET
+from rendering.decor import get_procedural_key
 
 if TYPE_CHECKING:
     from world.local_map import LocalMap
@@ -11,7 +13,6 @@ if TYPE_CHECKING:
     from rendering.tile_registry import TileRegistry
     from rendering.sprite_registry import SpriteRegistry
     from engine.display_config import DisplayConfig
-
 
 class Renderer:
     """
@@ -488,14 +489,21 @@ class Renderer:
                             fg = (30, 32, 38)
                             bg = None
 
-                    # Determine the specific sprite variant (Autotiling)
-                    if any(key in terrain for key in ["wall", "water"]):
-                        variant_name = self._get_autotile_name(local_map, mx, my, terrain)
-                        # Fallback to base terrain name if the specific variant isn't in sprite_map.json
-                        sprite_name = variant_name if self.sprite_registry.has(variant_name) else terrain
-                    else:
-                        sprite_name = terrain
+                    # 1. Resolve procedural name (intercepts "grass" or "tree" here)
+                    decorated_name = get_procedural_key(mx, my, terrain)
 
+                    # 2. Skip rendering if the result is None (Void)
+                    if decorated_name is None:
+                        continue
+
+                    # 3. Determine the specific sprite variant (Autotiling)
+                    if any(key in decorated_name for key in ["wall", "water"]):
+                        variant_name = self._get_autotile_name(local_map, mx, my, decorated_name)
+                        sprite_name = variant_name if self.sprite_registry.has(variant_name) else decorated_name
+                    else:
+                        sprite_name = decorated_name
+
+                    # 4. Draw the resolved sprite
                     self._draw_sprite(surface, sprite_name,
                                       fg, None, tx, ty, zoom=zoom)
 
