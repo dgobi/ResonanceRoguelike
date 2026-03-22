@@ -1,0 +1,22 @@
+{
+  "id": "hollow_revenant",
+  "name": "Hollow Revenant",
+  "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+  "tile": "hollow_revenant",
+  "blocks_movement": true,
+  "fighter": { "max_hp": 10, "power": 3, "defense": 1 },
+  "perception": {
+    "sight_radius": 7, "hearing_radius": 6,
+    "sees_in_dark": true, "faction": "hollow", "hostile_to": ["player"]
+  },
+  "ai_type": "wandering",
+  "wander_radius": 8,
+  "spawn_zones": ["undercroft", "dead_ground", "vault"],
+  "damage_dice": "1d4",
+  "damage_bonus": 1,
+  "body_id": "body_hollow_revenant",
+  "essence_modifiers": {
+    "Dissolution": 0.2, "Quickening": 1.5, "Binding": 2.0,
+    "Severance": 2.5, "Consumption": 0.1, "Revelation": 1.8
+  }
+}

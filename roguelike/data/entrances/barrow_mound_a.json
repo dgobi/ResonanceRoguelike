@@ -1,0 +1,29 @@
+{
+  "id": "barrow_mound_a",
+  "entrance_type": "barrow_mound",
+  "variant": "a",
+  "width": 13,
+  "height": 9,
+  "legend": {
+    "r": "rock",
+    "w": "worn_stone",
+    ".": "floor",
+    ",": "gravel",
+    ">": "stairs_down",
+    " ": null
+  },
+  "layers": [
+    "    rrrrrrr    ",
+    "  rrwwwwwwwrr  ",
+    " rrw.......wrr ",
+    "rrw....>....wrr",
+    "rrw.........wrr",
+    " rrwww...wwwrr ",
+    "   rr,,,,,rr   ",
+    "    r,,,,,r    ",
+    "      ,,,      "
+  ],
+  "connection_point": {"x": 6, "y": 0},
+  "spawn_offset":     {"x": 6, "y": 4},
+  "edges": ["north"]
+}

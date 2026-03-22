@@ -1,0 +1,21 @@
+{
+  "id": "sanctum",
+  "name": "Sanctum Precinct",
+  "category": "settlement",
+  "description": "The god here may be dead. Shrines attended by hollow-eyed wardens. Ossuaries older than the town itself.",
+  "terrain_palette": ["flagstone", "worn_stone"],
+  "between_buildings": "flagstone_path",
+  "structures": [
+    {"id": "wayside_shrine",    "weight": 25},
+    {"id": "ossuary",           "weight": 15},
+    {"id": "reliquary_vault",   "weight": 8}
+  ],
+  "creatures": [
+    {"id": "shrine_warden_npc", "weight": 10, "chance": 0.4},
+    {"id": "hollow_penitent",   "weight": 8,  "chance": 0.2}
+  ],
+  "ambient_loot": "ritual_goods",
+  "light_level": "dim",
+  "tags": ["settlement", "religious", "sanctum"],
+  "ambient_light": 0.4
+}

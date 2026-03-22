@@ -1,0 +1,29 @@
+{
+  "id": "plague_crow",
+  "name": "Plague Crow",
+  "description": "Larger than it should be. The feathers are wrong. It lands, examines, departs. What it is examining for is unclear. What it reports to is less clear still.",
+  "tile": "plague_crow",
+  "blocks_movement": true,
+  "fighter": {
+    "max_hp":  6,
+    "power":   3,
+    "defense": 0
+  },
+  "perception": {
+    "sight_radius":   10,
+    "hearing_radius": 8,
+    "sees_in_dark":   false,
+    "faction":        "corruption",
+    "hostile_to":     ["player"]
+  },
+  "ai_type": "circling",
+  "wander_radius": 15,
+  "spawn_zones": ["dead_ground", "mere", "deepwood", "pale_quarter"],
+  "damage_dice": "1d3",
+  "damage_bonus": 0,
+  "body_id": "body_plague_crow",
+  "essence_modifiers": {
+    "Dissolution": 1.0, "Quickening": 1.1, "Binding": 1.0,
+    "Severance": 1.0, "Consumption": 1.5, "Revelation": 0.9
+  }
+}

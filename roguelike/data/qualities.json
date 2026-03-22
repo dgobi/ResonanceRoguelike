@@ -1,0 +1,12 @@
+{
+  "CUTTING":   {"name": "Cutting",   "description": "Ability to cut flesh, rope, and soft materials."},
+  "CHOPPING":  {"name": "Chopping",  "description": "Ability to chop wood and bone."},
+  "HAMMERING": {"name": "Hammering", "description": "Ability to drive nails and crush."},
+  "PIERCING":  {"name": "Piercing",  "description": "Ability to pierce hide and flesh."},
+  "SEWING":    {"name": "Sewing",    "description": "Ability to work with cloth and hide."},
+  "SAWING":    {"name": "Sawing",    "description": "Ability to saw through wood and bone."},
+  "PRYING":    {"name": "Prying",    "description": "Ability to force open containers and doors."},
+  "ARCANE":    {"name": "Arcane",    "description": "Attunement to occult forces. Required for ritual work."},
+  "BINDING":   {"name": "Binding",   "description": "Ability to bind, wrap, and restrain."},
+  "DIGGING":   {"name": "Digging",   "description": "Ability to move earth and soft stone."}
+}

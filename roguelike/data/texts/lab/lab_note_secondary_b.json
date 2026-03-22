@@ -1,0 +1,9 @@
+{
+  "id": "lab_note_secondary_b",
+  "title": "Working Notes — Second Hand, Later",
+  "type": "document",
+  "condition": "damaged",
+  "reads_as": "single",
+  "lacunae": true,
+  "pages": [{"text": "I have agreed to the sarcophagus project. I want the record to show that I agreed to it because the alternative was doing nothing, and I have run the numbers on doing nothing, and doing nothing is [DAMAGED]. The subject knows enough. The subject does not know everything. I console myself that this is true of most decisions made under these circumstances, and I am not consoled.", "damaged": true}]
+}

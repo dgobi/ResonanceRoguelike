@@ -1,0 +1,37 @@
+{
+  "id": "house_damaged_a",
+  "category": "residential",
+  "width": 10,
+  "height": 8,
+  "facing": "south",
+  "condition": "damaged",
+  "district_weights": {
+    "residential": 3,
+    "ruins": 2
+  },
+  "interior_loot_table": "residential_common",
+  "description": "A house with partial roof collapse on the east side. Still partially habitable. Contents may be exposed to weather.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "######    ",
+    "#....#    ",
+    "#....#    ",
+    "#....#### ",
+    "#........#",
+    "#........#",
+    "#.......w#",
+    "####.#####"
+  ],
+  "special_tiles": [],
+  "note": "PLACEHOLDER \u2014 redesign. East wing open (null tiles = sky/rubble). Door at (4,7)."
+}

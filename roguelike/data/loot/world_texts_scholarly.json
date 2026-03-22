@@ -1,0 +1,14 @@
+{
+  "id": "world_texts_scholarly",
+  "rolls": 1,
+  "entries": [
+    {"type": "text", "text_id": "sermon_a",       "weight": 6},
+    {"type": "text", "text_id": "sermon_b",       "weight": 6},
+    {"type": "text", "text_id": "sermon_c",       "weight": 6},
+    {"type": "text", "text_id": "sermon_d",       "weight": 4},
+    {"type": "text", "text_id": "sermon_e",       "weight": 4},
+    {"type": "text", "text_id": "sermon_f",       "weight": 4},
+    {"type": "text", "text_id": "broken_ones_b",  "weight": 2},
+    {"type": "text", "text_id": "broken_ones_c",  "weight": 1}
+  ]
+}

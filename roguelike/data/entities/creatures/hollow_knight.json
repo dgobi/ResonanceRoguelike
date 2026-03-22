@@ -1,0 +1,29 @@
+{
+  "id": "hollow_knight",
+  "name": "Hollow Knight",
+  "description": "What remains when personhood is extracted and the body continues regardless. It moves on the momentum of old habit. It was going somewhere once. It no longer knows where.",
+  "tile": "hollow_knight",
+  "blocks_movement": true,
+  "fighter": {
+    "max_hp":  12,
+    "power":   4,
+    "defense": 1
+  },
+  "perception": {
+    "sight_radius":   8,
+    "hearing_radius": 5,
+    "sees_in_dark":   true,
+    "faction":        "hollow",
+    "hostile_to":     ["player"]
+  },
+  "ai_type": "wandering",
+  "wander_radius": 10,
+  "spawn_zones": ["barrow", "undercroft", "dead_ground"],
+  "damage_dice": "1d8",
+  "damage_bonus": 2,
+  "body_id": "body_hollow_knight",
+  "essence_modifiers": {
+    "Dissolution": 0.5, "Quickening": 1.8, "Binding": 0.7,
+    "Severance": 2.5, "Consumption": 0.4, "Revelation": 1.5
+  }
+}

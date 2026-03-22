@@ -1,0 +1,29 @@
+{
+  "id": "grave_thing",
+  "name": "Grave Thing",
+  "description": "It came out of the ground. It is going back in. In the meantime it is angry about the interruption.",
+  "tile": "grave_thing",
+  "blocks_movement": true,
+  "fighter": {
+    "max_hp":  8,
+    "power":   5,
+    "defense": 0
+  },
+  "perception": {
+    "sight_radius":   5,
+    "hearing_radius": 6,
+    "sees_in_dark":   true,
+    "faction":        "hollow",
+    "hostile_to":     ["player"]
+  },
+  "ai_type": "wandering",
+  "wander_radius": 6,
+  "spawn_zones": ["barrow", "undercroft"],
+  "damage_dice": "1d6",
+  "damage_bonus": 0,
+  "body_id": "body_grave_thing",
+  "essence_modifiers": {
+    "Dissolution": 0.7, "Quickening": 1.2, "Binding": 0.8,
+    "Severance": 1.0, "Consumption": 0.6, "Revelation": 2.8
+  }
+}

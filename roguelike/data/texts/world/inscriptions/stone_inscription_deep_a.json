@@ -1,0 +1,9 @@
+{
+  "id": "stone_inscription_deep_a",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Voss zhar zhal. Vrath kur skral.", "damaged": false, "deep_tongue": true}]
+}

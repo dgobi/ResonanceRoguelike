@@ -1,0 +1,15 @@
+{
+  "id": "lab_note_final",
+  "title": null,
+  "type": "document",
+  "condition": "fragmentary",
+  "reads_as": "single",
+  "lacunae": true,
+  "pages": [
+    {
+      "text": "The bells have sounded. Not one bell — all of them, as though the hills themselves remembered what they were made to do. R. went toward the sound. I did not go. Something moves in the passage beyond the door that walks with R.'s gait and is not R. The sarcophagite holds. I have checked the seal. I have checked it again. I am writing this because my hands require [DAMAGED]",
+      "damaged": true,
+      "trailing": true
+    }
+  ]
+}

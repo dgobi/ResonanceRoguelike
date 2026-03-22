@@ -1,0 +1,16 @@
+{
+  "id": "crude_blade",
+  "name": "a crude blade",
+  "description": "Iron, poorly kept. It will serve.",
+  "tile": "generic_item",
+  "category": "weapon",
+  "slot": "weapon",
+  "weight": 1.5,
+  "stackable": false,
+  "damage_dice": "1d6",
+  "damage_bonus": 0,
+  "essence": "Dissolution",
+  "essence_strength": 0.2,
+  "_essence_note": "Iron corrodes. Poor maintenance accelerates it. The dissolution is incidental, not deliberate.",
+  "on_use": "equip_toggle"
+}

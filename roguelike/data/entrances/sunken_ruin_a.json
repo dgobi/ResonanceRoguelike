@@ -1,0 +1,32 @@
+{
+  "id": "sunken_ruin_a",
+  "entrance_type": "sunken_ruin",
+  "variant": "a",
+  "width": 11,
+  "height": 11,
+  "legend": {
+    "W": "wall",
+    "w": "worn_stone",
+    ".": "flagstone",
+    "r": "rock",
+    ">": "stairs_down",
+    ",": "gravel",
+    " ": null
+  },
+  "layers": [
+    "   WWWWWWWWW   ",
+    "   W.......W   ",
+    "   W.......W   ",
+    "   W...>...W   ",
+    "   W.......W   ",
+    "   W.......r   ",
+    "   WWW,,,WWW   ",
+    "    ,,,,,,,,   ",
+    "     ,,,,,,    ",
+    "     ,,,,,     ",
+    "               "
+  ],
+  "connection_point": {"x": 6, "y": 0},
+  "spawn_offset":     {"x": 6, "y": 4},
+  "edges": ["north"]
+}

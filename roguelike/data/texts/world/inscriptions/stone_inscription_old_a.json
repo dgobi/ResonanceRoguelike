@@ -1,0 +1,9 @@
+{
+  "id": "stone_inscription_old_a",
+  "title": null,
+  "type": "inscription",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Kethavel stood here. Kethavel is gone. The stone remains and has not forgotten either fact.", "damaged": false}]
+}

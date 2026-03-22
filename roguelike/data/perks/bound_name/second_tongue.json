@@ -1,0 +1,15 @@
+{
+  "id": "second_tongue",
+  "name": "The Second Tongue",
+  "affinity": "the_bound_name",
+  "description": "Thou hast learned enough of the deep tongue to make thyself understood to things that predate language. Not to speak fluently — the deep tongue cannot be spoken fluently by anything with a mouth — but to make thy intentions clear. They may still refuse. They will understand what thou art refusing.",
+  "effect_type": "new_interaction",
+  "effect_params": {
+    "context": "encounter_ancient_creature",
+    "interaction_type": "deep_tongue_parley"
+  },
+  "unlock_conditions": {
+    "deep_words_min": 10,
+    "perks_required": []
+  }
+}

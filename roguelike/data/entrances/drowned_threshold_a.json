@@ -1,0 +1,29 @@
+{
+  "id": "drowned_threshold_a",
+  "entrance_type": "drowned_threshold",
+  "variant": "a",
+  "width": 11,
+  "height": 9,
+  "legend": {
+    "w": "worn_stone",
+    ".": "floor",
+    "~": "water",
+    ">": "stairs_down",
+    "r": "rock",
+    " ": null
+  },
+  "layers": [
+    "    ~~.~~    ",
+    "  ~~wwwww~~  ",
+    " ~~w.....w~~ ",
+    "~~w...>...w~~",
+    "~~w.......w~~",
+    " ~~wwwwwww~~ ",
+    "  ~~~...~~~  ",
+    "    ~~~~~    ",
+    "             "
+  ],
+  "connection_point": {"x": 5, "y": 0},
+  "spawn_offset":     {"x": 5, "y": 3},
+  "edges": ["north"]
+}

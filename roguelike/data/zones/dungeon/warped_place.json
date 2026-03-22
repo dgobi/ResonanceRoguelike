@@ -1,0 +1,20 @@
+{
+  "id": "warped_place",
+  "name": "A Warped Place",
+  "category": "dungeon",
+  "description": "Geometry that does not resolve. Echoes of things that have not happened yet. The Kirkbride zone. Do not look directly at the corners.",
+  "terrain_palette": ["warped_stone", "void_floor", "wrong_wall"],
+  "structures": [
+    {"id": "impossible_room",   "weight": 15},
+    {"id": "echo_chamber",      "weight": 10},
+    {"id": "fold_in_space",     "weight": 8}
+  ],
+  "creatures": [
+    {"id": "resonance_wraith",  "weight": 15, "chance": 0.5},
+    {"id": "void_seeker",       "weight": 10, "chance": 0.3}
+  ],
+  "ambient_loot": "void_residue",
+  "light_level": "wrong",
+  "tags": ["dungeon", "warped", "strange", "void", "warped_place"],
+  "ambient_light": 0.0
+}

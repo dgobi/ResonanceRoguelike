@@ -1,0 +1,22 @@
+{
+  "note": "Deep tongue lexicon. Consonant-heavy, ancient Assyrian/Sumerian register. Words are learned one at a time. Common translations are approximations only.",
+  "words": [
+    {"deep": "vrath",  "common": "threshold",  "concept": "a place of transition between states"},
+    {"deep": "sketh",  "common": "remembers",  "concept": "holds the record of, is shaped by"},
+    {"deep": "urath",  "common": "the dead",   "concept": "those who have completed transition"},
+    {"deep": "quz",    "common": "listen",     "concept": "attend to the resonance of"},
+    {"deep": "keth",   "common": "stone",      "concept": "that which endures and accumulates"},
+    {"deep": "vrass",  "common": "the pattern","concept": "the underlying structure of a thing"},
+    {"deep": "dur",    "common": "before",     "concept": "in a state prior to the current order"},
+    {"deep": "skur",   "common": "open",       "concept": "permeable, traversable, receptive"},
+    {"deep": "zhal",   "common": "the bell",   "concept": "the instrument of completion"},
+    {"deep": "greth",  "common": "binds",      "concept": "holds in relationship, prevents departure"},
+    {"deep": "kur",    "common": "the void",   "concept": "the space that precedes structure"},
+    {"deep": "uthar",  "common": "speaks",     "concept": "emits in a way that changes the receiver"},
+    {"deep": "voss",   "common": "bone",       "concept": "the accumulating structure of a living thing"},
+    {"deep": "skral",  "common": "truth",      "concept": "the state of a thing as it actually is"},
+    {"deep": "mrath",  "common": "the hollow", "concept": "absence that retains the shape of presence"},
+    {"deep": "grath",  "common": "ware",       "concept": "be cautious of, attend with fear to"},
+    {"deep": "zhar",   "common": "song",       "concept": "the resonant emission of a thing acting according to its nature"}
+  ]
+}

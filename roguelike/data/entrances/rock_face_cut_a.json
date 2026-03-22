@@ -1,0 +1,26 @@
+{
+  "id": "rock_face_cut_a",
+  "entrance_type": "rock_face_cut",
+  "variant": "a",
+  "width": 13,
+  "height": 7,
+  "legend": {
+    "r": "rock",
+    ".": "floor",
+    ",": "gravel",
+    ">": "stairs_down",
+    " ": null
+  },
+  "layers": [
+    "rrrrrrrrrrrrrr",
+    "rrrrrrrrrrrrrr",
+    "rrr,,.....,,rr",
+    "rrr,,..>..,,rr",
+    "rrr,,.....,,rr",
+    "  ,,,,,,,,,,  ",
+    "  ,,,,,,,,,,  "
+  ],
+  "connection_point": {"x": 6, "y": 0},
+  "spawn_offset":     {"x": 6, "y": 3},
+  "edges": ["north"]
+}

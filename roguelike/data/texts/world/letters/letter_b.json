@@ -1,0 +1,9 @@
+{
+  "id": "letter_b",
+  "title": "A Letter, Unsent",
+  "type": "letter",
+  "condition": "damaged",
+  "reads_as": "single",
+  "lacunae": true,
+  "pages": [{"text": "Father — I know you said the stones were safe. I know you believed that. I am not writing to tell you that you were wrong. I am writing because I need to say your name somewhere that is not just inside my head. Your name was [DAMAGED]. I will remember it. I will remember it as long as [DAMAGED].", "damaged": true}]
+}

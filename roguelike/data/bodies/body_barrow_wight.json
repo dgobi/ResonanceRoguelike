@@ -1,0 +1,19 @@
+{
+  "id": "body_barrow_wight",
+  "locations": [
+    {"id": "head", "size": 1, "vital": false, "hp_mult": 0.10,
+     "destroyed_impairment": "head_destroyed",
+     "natural_armor": [{"name": "desiccated flesh", "coverage": 1.0, "armor_value": 1, "material": "flesh"},
+                       {"name": "dense skull",      "coverage": 0.5, "armor_value": 3, "material": "bone"}]},
+    {"id": "form", "size": 5, "vital": true, "hp_mult": 0.60,
+     "damage_threshold": 0.4, "threshold_impairment": "form_destabilising",
+     "destroyed_impairment": "death",
+     "natural_armor": [{"name": "resonance charge", "coverage": 1.0, "armor_value": 2, "material": "resonance"},
+                       {"name": "desiccated flesh",  "coverage": 1.0, "armor_value": 1, "material": "flesh"},
+                       {"name": "dense bone",        "coverage": 0.6, "armor_value": 3, "material": "bone"}]},
+    {"id": "limbs", "size": 3, "vital": false, "hp_mult": 0.30,
+     "destroyed_impairment": "limbs_failing",
+     "natural_armor": [{"name": "desiccated flesh", "coverage": 1.0, "armor_value": 1, "material": "flesh"},
+                       {"name": "bone",             "coverage": 0.5, "armor_value": 2, "material": "bone"}]}
+  ]
+}

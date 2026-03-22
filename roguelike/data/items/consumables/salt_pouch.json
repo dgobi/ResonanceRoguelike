@@ -1,0 +1,10 @@
+{
+  "id": "salt_pouch",
+  "name": "Salt Pouch",
+  "description": "A cloth pouch of coarse salt. Useful for preserving meat, for certain preparations, and for laying at thresholds that should not be crossed.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.15,
+  "stackable": true,
+  "on_use": null
+}

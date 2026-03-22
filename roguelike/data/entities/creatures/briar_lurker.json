@@ -1,0 +1,22 @@
+{
+  "id": "briar_lurker",
+  "name": "Briar Lurker",
+  "description": "Something that has learned to be very still among thorns. The thorns have learned to accommodate it.",
+  "tile": "briar_lurker",
+  "blocks_movement": true,
+  "fighter": { "max_hp": 8, "power": 5, "defense": 0 },
+  "perception": {
+    "sight_radius": 6, "hearing_radius": 4,
+    "sees_in_dark": false, "faction": "predator", "hostile_to": ["player"]
+  },
+  "ai_type": "ambush",
+  "wander_radius": 5,
+  "spawn_zones": ["briarwood"],
+  "damage_dice": "1d4",
+  "damage_bonus": 0,
+  "body_id": "body_briar_lurker",
+  "essence_modifiers": {
+    "Dissolution": 2.0, "Quickening": 1.5, "Binding": 0.6,
+    "Severance": 1.8, "Consumption": 1.6, "Revelation": 0.7
+  }
+}

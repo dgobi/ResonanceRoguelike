@@ -1,0 +1,24 @@
+{
+  "id": "mere",
+  "name": "The Mere",
+  "category": "wilderness",
+  "description": "Boggy wetland. Mist that doesn't move with the wind. Black water. Old drownings that didn't stay drowned.",
+  "terrain_palette": ["grass", "water", "mud"],
+  "tree_density": 0.15,
+  "scatter": [
+    {"terrain": "water",        "chance": 0.20},
+    {"terrain": "mud",          "chance": 0.15}
+  ],
+  "structures": [
+    {"id": "fishing_dock",      "weight": 6},
+    {"id": "bog_marker",        "weight": 8}
+  ],
+  "creatures": [
+    {"id": "bog_wraith",        "weight": 20, "chance": 0.4},
+    {"id": "drowned_revenant",  "weight": 15, "chance": 0.3}
+  ],
+  "ambient_loot": "bog_salvage",
+  "light_level": "dim",
+  "tags": ["wilderness", "wetland", "mere", "water"],
+  "ambient_light": 0.6
+}

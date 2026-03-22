@@ -1,0 +1,17 @@
+{
+  "id": "leather_cap",
+  "name": "a leather cap",
+  "description": "Hardened leather. Better than nothing for the head.",
+  "tile": "generic_item",
+  "category": "armor",
+  "slot": "armor_head",
+  "weight": 0.5,
+  "stackable": false,
+  "armor_layers": [
+    {"name": "leather cap", "coverage": 0.7, "armor_value": 1, "material": "leather"}
+  ],
+  "essence": "Binding",
+  "essence_strength": 0.2,
+  "_essence_note": "Leather holds form. A cap is a smaller expression of the same property — less mass, fainter resonance.",
+  "on_use": "equip_toggle"
+}

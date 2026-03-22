@@ -1,0 +1,121 @@
+{
+  "wall": {
+    "tile": "wall",
+    "walkable": false,
+    "transparent": false,
+    "description": "A solid wall."
+  },
+  "floor": {
+    "tile": "floor",
+    "walkable": true,
+    "transparent": true,
+    "description": "A stone floor."
+  },
+  "grass": {
+    "tile": "grass",
+    "walkable": true,
+    "transparent": true,
+    "description": "Open grassland."
+  },
+  "tree": {
+    "tile": "tree",
+    "walkable": false,
+    "transparent": false,
+    "description": "A dense tree."
+  },
+  "water": {
+    "tile": "water",
+    "walkable": false,
+    "transparent": true,
+    "description": "Deep water."
+  },
+  "door_closed": {
+    "tile": "door_closed",
+    "walkable": false,
+    "transparent": false,
+    "description": "A closed door. You could open it."
+  },
+  "door_open": {
+    "tile": "door_open",
+    "walkable": true,
+    "transparent": true,
+    "description": "An open door."
+  },"mud": {
+    "tile": "mud",
+    "walkable": true,
+    "transparent": true,
+    "description": "Wet, sucking mud."
+  },
+  "gravel": {
+    "tile": "gravel",
+    "walkable": true,
+    "transparent": true,
+    "description": "Loose gravel and shale."
+  },
+  "rock": {
+    "tile": "rock",
+    "walkable": false,
+    "transparent": false,
+    "description": "Solid rock face."
+  },
+  "cobblestone": {
+    "tile": "cobblestone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Old cobblestones, worn smooth."
+  },
+  "flagstone": {
+    "tile": "flagstone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Laid flagstone."
+  },
+  "worn_stone": {
+    "tile": "worn_stone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn stone floor, ancient."
+  },
+  "ash": {
+    "tile": "ash",
+    "walkable": true,
+    "transparent": true,
+    "description": "Ash and cinders."
+  },
+  "stairs_down": {
+    "tile": "stairs_down",
+    "walkable": true,
+    "transparent": true,
+    "description": "Steps descend into darkness."
+  },
+  "stairs_up": {
+    "tile": "stairs_up",
+    "walkable": true,
+    "transparent": true,
+    "description": "Steps rise toward light."
+  },
+  "grey_stone": {
+    "tile": "grey_stone",
+    "walkable": false,
+    "transparent": false,
+    "description": "The cold grey stone. It hums faintly. Or perhaps that is something else."
+  },
+  "ancient_floor": {
+    "tile": "ancient_floor",
+    "walkable": true,
+    "transparent": true,
+    "description": "Stone laid before the current age. The joins are too precise."
+  },
+  "table": {
+    "tile": "table",
+    "walkable": false,
+    "transparent": true,
+    "description": "A table. Something was left on it."
+  },
+  "old_wall": {
+    "tile": "stone_wall",
+    "walkable": false,
+    "transparent": false,
+    "description": "Rough and weathered stone. Reassuringly silent."
+  }
+}

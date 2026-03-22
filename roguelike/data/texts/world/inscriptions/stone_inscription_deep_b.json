@@ -1,0 +1,9 @@
+{
+  "id": "stone_inscription_deep_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Sketh. Sketh. Sketh. Uthar urath keth.", "damaged": false, "deep_tongue": true}]
+}

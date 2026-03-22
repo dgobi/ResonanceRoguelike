@@ -1,0 +1,9 @@
+{
+  "id": "official_a",
+  "title": "Bell Registry — Dunmere Settlement",
+  "type": "official",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "The great bell of Dunmere was retuned in the third month of the current year by Master Bellwright H. Corrach of the Guild of the Resonant Stone. The bell was found to have drifted 0.002 hz from its registered frequency, likely due to thermal expansion over the summer months. It hath been returned to the correct frequency and sealed against further drift. The standing stones of Dunmere register nominal harmonic response. Settlement resonance index: 0.97. Satisfactory.", "damaged": false}]
+}

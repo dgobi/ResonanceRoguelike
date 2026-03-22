@@ -1,0 +1,9 @@
+{
+  "id": "official_c",
+  "title": "Notice — Guild of the Resonant Stone",
+  "type": "official",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Let it be known that the ringing of settlement bells at any hour other than those prescribed by the Guild of the Resonant Stone is prohibited under the Third Compact. Bells rung out of sequence disrupt the harmonic register of the settlement and may cause distress in livestock and persons of sensitive constitution. Offenders will be subject to fine and compulsory retuning at their expense. This notice is the fourth such issued in the current year. The Guild notes with concern that this frequency of violation is itself a disruption to the harmonic record.", "damaged": false}]
+}

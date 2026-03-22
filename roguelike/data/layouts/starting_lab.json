@@ -1,0 +1,145 @@
+{
+  "id": "starting_lab",
+  "type": "submap_layout",
+  "description": "The underground laboratory where the player wakes. Three zones: sarcophagus chamber (west), research area (centre), exit corridor (east), lower corridor (south). Redesign the layers array to taste \u2014 the system renders whatever ASCII grid is placed here.",
+  "width": 60,
+  "height": 35,
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "f": "flagstone",
+    "w": "worn_stone",
+    "+": "door_closed",
+    "D": "door_open",
+    "^": "stairs_up",
+    "Z": "old_wall",
+    " ": null
+  },
+  "layers": [
+    "ZZZZZZZZZZZZZZZZZZZZZZZZ",
+    "Z...........Z..........Z",
+    "Z...........Z..........Z",
+    "Z...........+....ww....Z",
+    "Z...........Z....ww....Z",
+    "Z...........Z....ww....Z",
+    "ZZZZZZZZZZZZZ....ww....Z",
+    "Z....^......Z..........Z",
+    "Z...........Z..........Z",
+    "ZZZZZ+ZZZZZZZZZZZZ+ZZZZZ",
+    "Z...........Z..........Z",
+    "Z.w.......w.Z..........Z",
+    "Z.....w.....+..........Z",
+    "Z.w.......w.Z..........Z",
+    "Z...........Z..........Z",
+    "ZZZZZZZZZZZZZZZZZZZZZZZZ"
+  ],
+  "special_tiles": [
+    {
+      "x": 4,
+      "y": 5,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "lab_inscription_entry",
+      "note": "Inscription on west wall of sarcophagus chamber"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "lab_label_sarcophagus",
+      "note": "Label on sarcophagus exterior"
+    },
+    {
+      "x": 15,
+      "y": 8,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "lab_note_primary_a",
+      "note": "Research notes, north bench"
+    },
+    {
+      "x": 17,
+      "y": 8,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "lab_note_primary_b",
+      "note": "Research notes, north bench"
+    },
+    {
+      "x": 25,
+      "y": 12,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "lab_note_secondary_a",
+      "note": "Secondary researcher notes, mid area"
+    },
+    {
+      "x": 27,
+      "y": 12,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "lab_note_secondary_b",
+      "note": "Secondary researcher notes, mid area"
+    },
+    {
+      "x": 42,
+      "y": 15,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "lab_note_final",
+      "note": "Final note, near chalkboard wall"
+    },
+    {
+      "x": 35,
+      "y": 8,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "lab_label_equipment",
+      "note": "Equipment rack label"
+    },
+    {
+      "x": 55,
+      "y": 4,
+      "type": "body",
+      "name": "remains of R.",
+      "note": "R.'s body in exit corridor near forced door"
+    },
+    {
+      "x": 20,
+      "y": 8,
+      "type": "item",
+      "item_id": "binding_knife",
+      "note": "Research area — the notched knife used in resonance experiments"
+    },
+    {
+      "x": 22,
+      "y": 8,
+      "type": "item",
+      "item_id": "dissolution_blade",
+      "note": "Research area — the pitted blade from the stone sample work"
+    },
+    {
+      "x": 45,
+      "y": 8,
+      "type": "item",
+      "item_id": "severance_blade",
+      "note": "Research area — the narrow grey blade from the hollow specimen work"
+    },
+    {
+      "x": 47,
+      "y": 12,
+      "type": "item",
+      "item_id": "revelation_lens",
+      "note": "Research area — the glass fragment used for internal resonance examination"
+    }
+  ],
+  "player_start": {
+    "x": 5,
+    "y": 7
+  },
+  "stairs_up": {
+    "x": 5,
+    "y": 7
+  }
+}

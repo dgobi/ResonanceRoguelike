@@ -1,0 +1,14 @@
+{
+  "id": "lab_label_sarcophagus",
+  "title": "Label — Sarcophagus Exterior",
+  "type": "label",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": true,
+  "pages": [
+    {
+      "text": "Herein lies [REDACTED], in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If thou readest this in ignorance of these matters, know only: do not ring the bells.",
+      "damaged": false
+    }
+  ]
+}

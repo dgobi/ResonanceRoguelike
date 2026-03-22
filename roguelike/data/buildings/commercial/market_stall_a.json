@@ -1,0 +1,32 @@
+{
+  "id": "market_stall_a",
+  "category": "commercial",
+  "width": 6,
+  "height": 4,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 5
+  },
+  "interior_loot_table": "market_goods",
+  "description": "An open-fronted market stall. No south wall \u2014 opens directly onto the street. Goods displayed on worn stone shelf.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "######",
+    "#wwww#",
+    "#....#",
+    "#    #"
+  ],
+  "special_tiles": [],
+  "note": "PLACEHOLDER \u2014 redesign. South row open (null) = open frontage onto street. Shelf = worn_stone."
+}

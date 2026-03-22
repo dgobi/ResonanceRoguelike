@@ -1,0 +1,34 @@
+{
+  "id": "cellar_a",
+  "category": "storage",
+  "width": 7,
+  "height": 6,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 3
+  },
+  "interior_loot_table": "residential_common",
+  "description": "A small storage cellar or root store. Flagstone floor \u2014 below street level implied. Single door.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "#######",
+    "#fffff#",
+    "#fffff#",
+    "#fffff#",
+    "#fffff#",
+    "###.###"
+  ],
+  "special_tiles": [],
+  "note": "PLACEHOLDER \u2014 redesign. Flagstone throughout (below-ground feel). Door at (3,5)."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "stone_lurker",
+  "name": "Stone Lurker",
+  "description": "It is very good at being a rock. When it stops being a rock it is very fast.",
+  "tile": "stone_lurker",
+  "blocks_movement": true,
+  "fighter": { "max_hp": 20, "power": 6, "defense": 3 },
+  "perception": {
+    "sight_radius": 5, "hearing_radius": 4,
+    "sees_in_dark": false, "faction": "predator", "hostile_to": ["player"]
+  },
+  "ai_type": "ambush",
+  "wander_radius": 4,
+  "spawn_zones": ["highstone"],
+  "damage_dice": "1d8",
+  "damage_bonus": 2,
+  "body_id": "body_stone_lurker",
+  "essence_modifiers": {
+    "Dissolution": 1.8, "Quickening": 0.8, "Binding": 0.5,
+    "Severance": 0.7, "Consumption": 0.3, "Revelation": 1.6
+  }
+}

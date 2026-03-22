@@ -1,0 +1,9 @@
+{
+  "id": "label_a",
+  "title": "Label",
+  "type": "label",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "DO NOT BRING INSIDE. Leave at threshold. The stone in this crate hath not been tested.", "damaged": false}]
+}

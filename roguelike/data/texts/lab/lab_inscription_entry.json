@@ -1,0 +1,15 @@
+{
+  "id": "lab_inscription_entry",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [
+    {
+      "text": "Vrath sketh urath. Grath zhar keth.",
+      "damaged": false,
+      "deep_tongue": true
+    }
+  ]
+}

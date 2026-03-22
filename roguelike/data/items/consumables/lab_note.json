@@ -1,0 +1,10 @@
+{
+  "id": "lab_note",
+  "name": "a research note",
+  "description": "Pages of careful handwriting in a hand that grew less careful toward the end. The ink hath not run.",
+  "tile": "document",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": false,
+  "on_use": "read"
+}

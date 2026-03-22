@@ -1,0 +1,26 @@
+{
+  "id": "briarwood",
+  "name": "The Briarwood",
+  "category": "wilderness",
+  "description": "Tangled, thorned. The paths here close behind you. Things nest in the dark between the roots and you will not see them until they move.",
+  "terrain_palette": ["grass", "tree"],
+  "tree_density": 0.45,
+  "ambient_light": 0.4,
+  "scatter": [
+    {"terrain": "tree", "chance": 0.45},
+    {"terrain": "grass", "chance": 0.55}
+  ],
+  "structures": [
+    {"id": "hermit_cave",       "weight": 4},
+    {"id": "hunter_cabin",      "weight": 3},
+    {"id": "standing_stone_ring", "weight": 2}
+  ],
+  "creatures": [
+    {"id": "briar_lurker",      "weight": 15, "chance": 0.35},
+    {"id": "hollow_knight",     "weight": 8,  "chance": 0.15},
+    {"id": "plague_crow",       "weight": 12, "chance": 0.25}
+  ],
+  "ambient_loot": "wilderness_forage",
+  "light_level": "dim",
+  "tags": ["wilderness", "forest", "briarwood", "tangled"]
+}

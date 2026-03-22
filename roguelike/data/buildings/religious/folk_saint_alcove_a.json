@@ -1,0 +1,46 @@
+{
+  "id": "folk_saint_alcove_a",
+  "category": "religious",
+  "width": 3,
+  "height": 4,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "waystone_square": 4,
+    "residential": 2,
+    "ossuary": 3
+  },
+  "interior_loot_table": "offering_goods",
+  "description": "A stone niche set into a wall. Contains a ceremonial skeleton with talismans and offerings. Readable prayer inside.",
+  "legend": {
+    "#": "wall",
+    "w": "worn_stone",
+    "f": "flagstone",
+    ".": "floor",
+    " ": null
+  },
+  "layers": [
+    "###",
+    "#w#",
+    "#f#",
+    "###"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "body",
+      "name": "the saint",
+      "note": "Ceremonial skeleton in alcove"
+    },
+    {
+      "x": 1,
+      "y": 2,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "world_sermon_a",
+      "note": "Prayer or votive text at alcove"
+    }
+  ],
+  "note": "PLACEHOLDER \u2014 redesign. This stamps into an existing wall, not freestanding. The body = ceremonial saint skeleton."
+}

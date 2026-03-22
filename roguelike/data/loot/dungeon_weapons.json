@@ -1,0 +1,13 @@
+{
+  "id": "dungeon_weapons",
+  "rolls": 1,
+  "entries": [
+    {"item_id": "crude_blade",        "weight": 40},
+    {"item_id": "heavy_blade",        "weight": 25},
+    {"item_id": "binding_knife",      "weight": 15},
+    {"item_id": "dissolution_blade",  "weight": 15},
+    {"item_id": "severance_blade",    "weight": 12},
+    {"item_id": "revelation_lens",    "weight": 10},
+    {"item_id": "nothing",            "weight": 5}
+  ]
+}

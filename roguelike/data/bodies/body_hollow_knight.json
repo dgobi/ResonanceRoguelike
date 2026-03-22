@@ -1,0 +1,26 @@
+{
+  "id": "body_hollow_knight",
+  "locations": [
+    {"id": "head",  "size": 1, "vital": true, "hp_mult": 0.15,
+     "destroyed_impairment": "death",
+     "natural_armor": [{"name": "fused helm",  "coverage": 0.9, "armor_value": 5, "material": "iron"},
+                       {"name": "skull",       "coverage": 0.4, "armor_value": 2, "material": "bone"},
+                       {"name": "flesh",       "coverage": 1.0, "armor_value": 0, "material": "flesh"}]},
+    {"id": "torso", "size": 4, "vital": true, "hp_mult": 0.45,
+     "damage_threshold": 0.5, "threshold_impairment": "form_cracking",
+     "destroyed_impairment": "death",
+     "natural_armor": [{"name": "fused plate", "coverage": 0.9, "armor_value": 6, "material": "iron"},
+                       {"name": "dense bone",  "coverage": 0.6, "armor_value": 3, "material": "bone"},
+                       {"name": "flesh",       "coverage": 1.0, "armor_value": 0, "material": "flesh"}]},
+    {"id": "arms",  "size": 2, "vital": false, "hp_mult": 0.20,
+     "destroyed_impairment": "arms_failing",
+     "natural_armor": [{"name": "fused vambrace", "coverage": 0.7, "armor_value": 4, "material": "iron"},
+                       {"name": "bone",           "coverage": 0.5, "armor_value": 2, "material": "bone"},
+                       {"name": "flesh",          "coverage": 1.0, "armor_value": 0, "material": "flesh"}]},
+    {"id": "legs",  "size": 2, "vital": false, "hp_mult": 0.20,
+     "destroyed_impairment": "legs_failing",
+     "natural_armor": [{"name": "fused greave", "coverage": 0.7, "armor_value": 4, "material": "iron"},
+                       {"name": "bone",         "coverage": 0.5, "armor_value": 2, "material": "bone"},
+                       {"name": "flesh",        "coverage": 1.0, "armor_value": 0, "material": "flesh"}]}
+  ]
+}

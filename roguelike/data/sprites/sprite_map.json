@@ -1,0 +1,292 @@
+{
+  "sheets": {
+    "urizen": {
+      "file": "assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png",
+      "tile_w": 16,
+      "tile_h": 16
+    },
+    "pixel": {
+      "file": "assets/sprites/PixelAsciiSpritesheet.png",
+      "tile_w": 16,
+      "tile_h": 16
+    },
+    "hexany_creatures": {
+      "file": "assets/sprites/HexanyCreatures.png",
+      "tile_w": 16,
+      "tile_h": 16
+    },
+    "terrain": {
+      "file": "assets/sprites/terrain.png",
+      "tile_w": 16,
+      "tile_h": 16
+    },
+    "objects": {
+      "file": "assets/sprites/objects.png",
+      "tile_w": 16,
+      "tile_h": 16
+    }
+  },
+  "tiles": {
+    "player": {
+      "sheet": "hexany_creatures",
+      "col": 0,
+      "row": 0
+    },
+    "hollow_knight": {
+      "sheet": "urizen",
+      "col": 1844,
+      "row": 0
+    },
+    "plague_crow": {
+      "sheet": "urizen",
+      "col": 2890,
+      "row": 0
+    },
+    "bog_wraith": {
+      "sheet": "urizen",
+      "col": 8762,
+      "row": 0
+    },
+    "grave_thing": {
+      "sheet": "urizen",
+      "col": 2756,
+      "row": 0
+    },
+    "heath_stalker": {
+      "sheet": "urizen",
+      "col": 2884,
+      "row": 0
+    },
+    "barrow_wight": {
+      "sheet": "urizen",
+      "col": 1999,
+      "row": 0
+    },
+    "briar_lurker": {
+      "sheet": "urizen",
+      "col": 8763,
+      "row": 0
+    },
+    "drowned_revenant": {
+      "sheet": "urizen",
+      "col": 3887,
+      "row": 0
+    },
+    "hollow_revenant": {
+      "sheet": "urizen",
+      "col": 1958,
+      "row": 0
+    },
+    "sewer_thing": {
+      "sheet": "urizen",
+      "col": 8758,
+      "row": 0
+    },
+    "stone_lurker": {
+      "sheet": "urizen",
+      "col": 8553,
+      "row": 0
+    },
+    "highland_bandit": {
+      "sheet": "urizen",
+      "col": 362,
+      "row": 0
+    },
+    "floor": {
+      "sheet": "terrain",
+      "col": 17,
+      "row": 0
+    },
+    "grass": {
+      "sheet": "pixel",
+      "col": 70,
+      "row": 0
+    },
+    "tree": {
+      "sheet": "pixel",
+      "col": 12,
+      "row": 0
+    },
+    "water": {
+      "sheet": "urizen",
+      "col": 847,
+      "row": 0
+    },
+    "mud": {
+      "sheet": "urizen",
+      "col": 1049,
+      "row": 0
+    },
+    "rock": {
+      "sheet": "urizen",
+      "col": 413,
+      "row": 0
+    },
+    "gravel": {
+      "sheet": "urizen",
+      "col": 20,
+      "row": 0
+    },
+    "cobblestone": {
+      "sheet": "urizen",
+      "col": 19,
+      "row": 0
+    },
+    "flagstone": {
+      "sheet": "pixel",
+      "col": 89,
+      "row": 0
+    },
+    "worn_stone": {
+      "sheet": "terrain",
+      "col": 18,
+      "row": 0
+    },
+    "ash": {
+      "sheet": "urizen",
+      "col": 1236,
+      "row": 0
+    },
+    "ancient_floor": {
+      "sheet": "urizen",
+      "col": 1240,
+      "row": 0
+    },
+    "grey_stone": {
+      "sheet": "urizen",
+      "col": 14,
+      "row": 0
+    },
+    "wall": {
+      "sheet": "pixel",
+      "col": 126,
+      "row": 0
+    },
+    "wall_pillar": {
+      "sheet": "urizen",
+      "col": 3,
+      "row": 0
+    },
+    "door_closed": {
+      "sheet": "pixel",
+      "col": 47,
+      "row": 0
+    },
+    "door_open": {
+      "sheet": "pixel",
+      "col": 68,
+      "row": 0
+    },
+    "stairs_down": {
+      "sheet": "terrain",
+      "col": 20,
+      "row": 0
+    },
+    "stairs_up": {
+      "sheet": "terrain",
+      "col": 19,
+      "row": 0
+    },
+    "table": {
+      "sheet": "urizen",
+      "col": 7225,
+      "row": 0
+    },
+    "tallow_torch": {
+      "sheet": "urizen",
+      "col": 8656,
+      "row": 0
+    },
+    "oil_lantern": {
+      "sheet": "urizen",
+      "col": 8664,
+      "row": 0
+    },
+    "food_item": {
+      "sheet": "urizen",
+      "col": 4123,
+      "row": 0
+    },
+    "water_flask": {
+      "sheet": "urizen",
+      "col": 4328,
+      "row": 0
+    },
+    "generic_item": {
+      "sheet": "urizen",
+      "col": 9477,
+      "row": 0
+    },
+    "corpse": {
+      "sheet": "urizen",
+      "col": 2055,
+      "row": 0
+    },
+    "document": {
+      "sheet": "objects",
+      "col": 0,
+      "row": 0
+    },
+    "inscription": {
+      "sheet": "objects",
+      "col": 10,
+      "row": 0
+    },
+    "overmap_plains": {
+      "sheet": "urizen",
+      "col": 871,
+      "row": 0
+    },
+    "overmap_forest": {
+      "sheet": "urizen",
+      "col": 7014,
+      "row": 0
+    },
+    "overmap_town": {
+      "sheet": "urizen",
+      "col": 6816,
+      "row": 0
+    },
+    "overmap_swamp": {
+      "sheet": "urizen",
+      "col": 7015,
+      "row": 0
+    },
+    "overmap_mountain": {
+      "sheet": "urizen",
+      "col": 7021,
+      "row": 0
+    },
+    "overmap_heath": {
+      "sheet": "urizen",
+      "col": 7018,
+      "row": 0
+    },
+    "overmap_unknown": {
+      "sheet": "urizen",
+      "col": 7022,
+      "row": 0
+    },
+    "overmap_player": {
+      "sheet": "urizen",
+      "col": 6895,
+      "row": 0
+    },
+    "old_wall": {"sheet": "terrain", "col": 0, "row": 0},
+    "old_wall_1": {"sheet": "terrain", "col": 1, "row": 0},
+    "old_wall_2": {"sheet": "terrain", "col": 2, "row": 0},
+    "old_wall_3": {"sheet": "terrain", "col": 3, "row": 0},
+    "old_wall_4": {"sheet": "terrain", "col": 4, "row": 0},
+    "old_wall_5": {"sheet": "terrain", "col": 5, "row": 0},
+    "old_wall_6": {"sheet": "terrain", "col": 6, "row": 0},
+    "old_wall_7": {"sheet": "terrain", "col": 7, "row": 0},
+    "old_wall_8": {"sheet": "terrain", "col": 8, "row": 0},
+    "old_wall_9": {"sheet": "terrain", "col": 9, "row": 0},
+    "old_wall_10": {"sheet": "terrain", "col": 10, "row": 0},
+    "old_wall_11": {"sheet": "terrain", "col": 11, "row": 0},
+    "old_wall_12": {"sheet": "terrain", "col": 12, "row": 0},
+    "old_wall_13": {"sheet": "terrain", "col": 13, "row": 0},
+    "old_wall_14": {"sheet": "terrain", "col": 14, "row": 0},
+    "old_wall_15": {"sheet": "terrain", "col": 15, "row": 0}
+  }
+}

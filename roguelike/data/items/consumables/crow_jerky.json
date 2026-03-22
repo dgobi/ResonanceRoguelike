@@ -1,0 +1,14 @@
+{
+  "id": "crow_jerky",
+  "name": "Crow Jerky",
+  "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+  "tile": "food_item",
+  "category": "consumable",
+  "weight": 0.2,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 0.35,
+  "essence": "Consumption",
+  "essence_strength": 0.2,
+  "_essence_note": "Something ate the crow. The crow ate other things. The consumption is layered. Dried meat carries the property of what it was."
+}

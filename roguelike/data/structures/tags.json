@@ -1,0 +1,31 @@
+{
+  "wilderness": [
+    "hunter_cabin",
+    "hermit_cave"
+  ],
+  "forest": [
+    "hunter_cabin",
+    "woodcutter_shelter"
+  ],
+  "riverside": [
+    "fishing_dock"
+  ],
+  "residential": [
+    "hovel",
+    "longhouse"
+  ],
+  "religious": [
+    "wayside_shrine",
+    "ossuary"
+  ],
+  "military": [
+    "watchtower",
+    "gatehouse"
+  ],
+  "town": [
+    "hovel",
+    "longhouse",
+    "wayside_shrine",
+    "watchtower"
+  ]
+}

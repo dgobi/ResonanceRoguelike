@@ -1,0 +1,9 @@
+{
+  "id": "body_bog_wraith",
+  "locations": [
+    {"id": "form", "size": 1, "vital": true, "hp_mult": 1.0,
+     "damage_threshold": 0.3, "threshold_impairment": "form_dispersing",
+     "destroyed_impairment": "death",
+     "natural_armor": [{"name": "diffuse form", "coverage": 1.0, "armor_value": 3, "material": "mist"}]}
+  ]
+}

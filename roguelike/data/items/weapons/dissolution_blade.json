@@ -1,0 +1,15 @@
+{
+  "id": "dissolution_blade",
+  "name": "a pitted blade",
+  "description": "The pitting is not rust. Something ate into the iron from inside. It still holds an edge, after a fashion.",
+  "tile": "generic_item",
+  "category": "weapon",
+  "slot": "weapon",
+  "weight": 1.2,
+  "stackable": false,
+  "damage_dice": "1d6",
+  "damage_bonus": 0,
+  "essence": "Dissolution",
+  "essence_strength": 0.5,
+  "on_use": "equip_toggle"
+}

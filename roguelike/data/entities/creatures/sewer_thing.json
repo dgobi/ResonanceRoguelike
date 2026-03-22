@@ -1,0 +1,17 @@
+{
+  "id": "sewer_thing",
+  "name": "Sewer Thing",
+  "description": "It has been down here long enough to stop being whatever it was before. It is a sewer thing now. That is sufficient identity.",
+  "tile": "sewer_thing",
+  "blocks_movement": true,
+  "fighter": { "max_hp": 7, "power": 3, "defense": 0 },
+  "perception": {
+    "sight_radius": 4, "hearing_radius": 8,
+    "sees_in_dark": true, "faction": "predator", "hostile_to": ["player"]
+  },
+  "damage_dice": "1d4",
+  "damage_bonus": 0,
+  "ai_type": "wandering",
+  "wander_radius": 6,
+  "spawn_zones": ["undercroft"]
+}

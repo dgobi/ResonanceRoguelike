@@ -1,0 +1,21 @@
+{
+  "id": "dead_ground",
+  "name": "Dead Ground",
+  "category": "settlement",
+  "description": "Abandoned, cursed, or destroyed. Burnt timbers, collapsed roofs. Something still moves in the wreckage at night.",
+  "terrain_palette": ["ash", "charred_floor", "rubble"],
+  "between_buildings": "ash_path",
+  "structures": [
+    {"id": "burnt_hovel",       "weight": 25},
+    {"id": "collapsed_roof",    "weight": 20},
+    {"id": "plague_marker",     "weight": 10}
+  ],
+  "creatures": [
+    {"id": "hollow_revenant",   "weight": 15, "chance": 0.5},
+    {"id": "plague_crow",       "weight": 20, "chance": 0.6}
+  ],
+  "ambient_loot": "ruins_debris",
+  "light_level": "dark",
+  "tags": ["settlement", "dead", "ruined", "dead_ground"],
+  "ambient_light": 0.5
+}

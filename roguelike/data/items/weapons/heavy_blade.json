@@ -1,0 +1,16 @@
+{
+  "id": "heavy_blade",
+  "name": "a heavy blade",
+  "description": "Old iron, well-balanced. Someone cared for this once.",
+  "tile": "generic_item",
+  "category": "weapon",
+  "slot": "weapon",
+  "weight": 2.5,
+  "stackable": false,
+  "damage_dice": "2d4",
+  "damage_bonus": 1,
+  "essence": "Dissolution",
+  "essence_strength": 0.3,
+  "_essence_note": "Heavier iron, more mass behind the edge. The dissolution is stronger — it cuts deeper into structure.",
+  "on_use": "equip_toggle"
+}

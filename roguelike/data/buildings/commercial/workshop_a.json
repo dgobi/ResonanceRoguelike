@@ -1,0 +1,38 @@
+{
+  "id": "workshop_a",
+  "category": "commercial",
+  "width": 12,
+  "height": 9,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 3,
+    "residential": 1
+  },
+  "interior_loot_table": "market_goods",
+  "description": "A craftsman's workshop. Large open floor for work. Heavy worn stone surfaces. Double door wide enough for goods.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "############",
+    "#w........w#",
+    "#..........#",
+    "#..........#",
+    "#w........w#",
+    "#..........#",
+    "#..........#",
+    "#..........#",
+    "#####..#####"
+  ],
+  "special_tiles": [],
+  "note": "PLACEHOLDER \u2014 redesign. Double door at (5,8)+(6,8). Work surfaces = worn_stone corners."
+}

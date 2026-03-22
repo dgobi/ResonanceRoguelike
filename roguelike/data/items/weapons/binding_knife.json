@@ -1,0 +1,15 @@
+{
+  "id": "binding_knife",
+  "name": "a notched iron knife",
+  "description": "The notches were cut at intervals someone calculated carefully. The iron holds something. It is not comfortable to carry.",
+  "tile": "generic_item",
+  "category": "weapon",
+  "slot": "weapon",
+  "weight": 0.8,
+  "stackable": false,
+  "damage_dice": "1d4",
+  "damage_bonus": 1,
+  "essence": "Binding",
+  "essence_strength": 0.6,
+  "on_use": "equip_toggle"
+}

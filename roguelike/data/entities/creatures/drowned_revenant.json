@@ -1,0 +1,22 @@
+{
+  "id": "drowned_revenant",
+  "name": "Drowned Revenant",
+  "description": "It came up from the black water. It is still going down, in a sense. Everything about it is the texture of something waterlogged.",
+  "tile": "drowned_revenant",
+  "blocks_movement": true,
+  "fighter": { "max_hp": 14, "power": 4, "defense": 1 },
+  "perception": {
+    "sight_radius": 6, "hearing_radius": 9,
+    "sees_in_dark": true, "faction": "hollow", "hostile_to": ["player"]
+  },
+  "ai_type": "wandering",
+  "wander_radius": 8,
+  "spawn_zones": ["mere"],
+  "damage_dice": "1d4",
+  "damage_bonus": 1,
+  "body_id": "body_drowned_revenant",
+  "essence_modifiers": {
+    "Dissolution": 1.4, "Quickening": 1.6, "Binding": 2.2,
+    "Severance": 1.8, "Consumption": 0.5, "Revelation": 1.3
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "body_drowned_revenant",
+  "locations": [
+    {"id": "torso", "size": 3, "vital": true, "hp_mult": 0.60,
+     "destroyed_impairment": "death",
+     "natural_armor": [{"name": "waterlogged flesh", "coverage": 1.0, "armor_value": 1, "material": "flesh"},
+                       {"name": "swollen bone",      "coverage": 0.4, "armor_value": 2, "material": "bone"}]},
+    {"id": "limbs", "size": 2, "vital": false, "hp_mult": 0.40,
+     "destroyed_impairment": "limbs_dissolving",
+     "natural_armor": [{"name": "waterlogged flesh", "coverage": 1.0, "armor_value": 1, "material": "flesh"}]}
+  ]
+}

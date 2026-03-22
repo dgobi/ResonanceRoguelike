@@ -1,0 +1,17 @@
+{
+  "id": "leather_jack",
+  "name": "a leather jack",
+  "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+  "tile": "generic_item",
+  "category": "armor",
+  "slot": "armor_torso",
+  "weight": 3.0,
+  "stackable": false,
+  "armor_layers": [
+    {"name": "leather jack", "coverage": 1.0, "armor_value": 2, "material": "leather"}
+  ],
+  "essence": "Binding",
+  "essence_strength": 0.3,
+  "_essence_note": "Leather holds shape. It was an animal that held its form. Curing fixes that form permanently.",
+  "on_use": "equip_toggle"
+}

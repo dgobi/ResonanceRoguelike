@@ -1,0 +1,39 @@
+{
+  "id": "warehouse_a",
+  "category": "storage",
+  "width": 14,
+  "height": 10,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 4,
+    "residential": 1
+  },
+  "interior_loot_table": "market_goods",
+  "description": "A large warehouse. High ceiling implied by proportions. Open floor with pillars (worn_stone) at intervals. Double door.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "##############",
+    "#............#",
+    "#.w........w.#",
+    "#............#",
+    "#............#",
+    "#.w........w.#",
+    "#............#",
+    "#............#",
+    "#.w........w.#",
+    "#####..#######"
+  ],
+  "special_tiles": [],
+  "note": "PLACEHOLDER \u2014 redesign. Worn_stone pillars at regular intervals. Double door at (5,9)+(6,9)."
+}

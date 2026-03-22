@@ -1,0 +1,25 @@
+{
+  "id": "hovel",
+  "name": "Hovel",
+  "tags": ["building", "residential", "town"],
+  "size": [7, 5],
+  "weight": 20,
+  "rotatable": true,
+  "layout": [
+    "#######",
+    "#.+.b.#",
+    "#.....#",
+    "#.cc..#",
+    "#######"
+  ],
+  "legend": {
+    "#": {"terrain": "wall"},
+    ".": {"terrain": "floor"},
+    "+": {"terrain": "door_closed"},
+    "b": {"terrain": "floor", "furniture": "bed"},
+    "c": {"terrain": "floor", "furniture": "chest", "loot": "poor_household"}
+  },
+  "spawns": [
+    {"entity": "peasant_npc", "chance": 0.7, "on": "."}
+  ]
+}

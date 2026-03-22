@@ -1,0 +1,1372 @@
+{
+  "PALETTE_NOTE": "Punolite Plus Remake - lit tiles use palette colors. Dark (explored) tiles use near-black with cold blue tint - intentional deviation from palette.",
+  "PALETTE": {
+    "void_purple": [
+      159,
+      60,
+      145
+    ],
+    "deep_purple": [
+      69,
+      32,
+      96
+    ],
+    "night_purple": [
+      41,
+      21,
+      70
+    ],
+    "void_black": [
+      7,
+      12,
+      29
+    ],
+    "blood_dark": [
+      61,
+      20,
+      48
+    ],
+    "blood_mid": [
+      99,
+      34,
+      64
+    ],
+    "blood_rose": [
+      145,
+      58,
+      82
+    ],
+    "dusty_rose": [
+      188,
+      89,
+      96
+    ],
+    "old_gold": [
+      226,
+      181,
+      112
+    ],
+    "pale_yellow": [
+      238,
+      233,
+      138
+    ],
+    "bright_green": [
+      183,
+      217,
+      116
+    ],
+    "mid_green": [
+      93,
+      167,
+      93
+    ],
+    "dark_green": [
+      57,
+      117,
+      92
+    ],
+    "teal_dark": [
+      40,
+      84,
+      84
+    ],
+    "slate_blue": [
+      31,
+      57,
+      77
+    ],
+    "midnight": [
+      25,
+      27,
+      63
+    ],
+    "deep_blue": [
+      25,
+      45,
+      80
+    ],
+    "steel_blue": [
+      40,
+      96,
+      128
+    ],
+    "cyan_teal": [
+      63,
+      160,
+      164
+    ],
+    "pale_cyan": [
+      134,
+      224,
+      206
+    ],
+    "near_white": [
+      227,
+      245,
+      241
+    ],
+    "mist_blue": [
+      129,
+      175,
+      181
+    ],
+    "slate_mid": [
+      68,
+      99,
+      116
+    ],
+    "slate_dark": [
+      50,
+      73,
+      95
+    ],
+    "navy_dark": [
+      24,
+      46,
+      65
+    ]
+  },
+  "ADDING_NEW_TILES": {
+    "note": "To add a new tile type: (1) add entry here with ascii/color_fg/color_bg/color_fg_dark/color_bg_dark/sprite fields, (2) add entry in data/sprites/sprite_map.json pointing to sheet coordinates, (3) use the tile name as terrain value in generation code. No other changes needed.",
+    "dark_color_note": "color_fg_dark and color_bg_dark are intentionally near-black. Use [10,12,18] fg and [4,5,9] bg as defaults for dark versions unless the tile needs a specific dark hue."
+  },
+  "tiles": {
+    "floor": {
+      "ascii": ".",
+      "color_fg": [
+        40,
+        84,
+        84
+      ],
+      "color_bg": [
+        7,
+        12,
+        29
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        14
+      ]
+    },
+    "wall": {
+      "ascii": "#",
+      "color_fg": [
+        40,
+        96,
+        128
+      ],
+      "color_bg": [
+        7,
+        12,
+        29
+      ],
+      "color_fg_dark": [
+        12,
+        15,
+        22
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        5,
+        17
+      ]
+    },
+    "grass": {
+      "ascii": ".",
+      "color_fg": [
+        93,
+        167,
+        93
+      ],
+      "color_bg": [
+        57,
+        117,
+        92
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        2,
+        16
+      ]
+    },
+    "tree": {
+      "ascii": "T",
+      "color_fg": [
+        57,
+        117,
+        92
+      ],
+      "color_bg": [
+        7,
+        12,
+        29
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        16
+      ]
+    },
+    "water": {
+      "ascii": "~",
+      "color_fg": [
+        63,
+        160,
+        164
+      ],
+      "color_bg": [
+        25,
+        45,
+        80
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        7,
+        19
+      ]
+    },
+    "mud": {
+      "ascii": ".",
+      "color_fg": [
+        57,
+        117,
+        92
+      ],
+      "color_bg": [
+        25,
+        27,
+        63
+      ],
+      "color_fg_dark": [
+        8,
+        10,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        2,
+        18
+      ]
+    },
+    "gravel": {
+      "ascii": ".",
+      "color_fg": [
+        50,
+        73,
+        95
+      ],
+      "color_bg": [
+        25,
+        45,
+        80
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        15
+      ]
+    },
+    "rock": {
+      "ascii": "#",
+      "color_fg": [
+        50,
+        73,
+        95
+      ],
+      "color_bg": [
+        7,
+        12,
+        29
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        8,
+        16
+      ]
+    },
+    "cobblestone": {
+      "ascii": ".",
+      "color_fg": [
+        68,
+        99,
+        116
+      ],
+      "color_bg": [
+        25,
+        45,
+        80
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        4,
+        15
+      ]
+    },
+    "flagstone": {
+      "ascii": ".",
+      "color_fg": [
+        50,
+        73,
+        95
+      ],
+      "color_bg": [
+        25,
+        27,
+        63
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        5,
+        14
+      ]
+    },
+    "worn_stone": {
+      "ascii": ".",
+      "color_fg": [
+        40,
+        84,
+        84
+      ],
+      "color_bg": [
+        25,
+        27,
+        63
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        1,
+        14
+      ]
+    },
+    "ash": {
+      "ascii": ".",
+      "color_fg": [
+        50,
+        73,
+        95
+      ],
+      "color_bg": [
+        25,
+        27,
+        63
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        18
+      ]
+    },
+    "door_closed": {
+      "ascii": "+",
+      "color_fg": [
+        226,
+        181,
+        112
+      ],
+      "color_bg": [
+        25,
+        45,
+        80
+      ],
+      "color_fg_dark": [
+        14,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        5,
+        17
+      ]
+    },
+    "door_open": {
+      "ascii": "/",
+      "color_fg": [
+        226,
+        181,
+        112
+      ],
+      "color_bg": [
+        7,
+        12,
+        29
+      ],
+      "color_fg_dark": [
+        14,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        6,
+        17
+      ]
+    },
+    "stairs_down": {
+      "ascii": ">",
+      "color_fg": [
+        226,
+        181,
+        112
+      ],
+      "color_bg": [
+        7,
+        12,
+        29
+      ],
+      "color_fg_dark": [
+        14,
+        14,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        4,
+        13
+      ]
+    },
+    "stairs_up": {
+      "ascii": "<",
+      "color_fg": [
+        238,
+        233,
+        138
+      ],
+      "color_bg": [
+        7,
+        12,
+        29
+      ],
+      "color_fg_dark": [
+        14,
+        14,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        5,
+        13
+      ]
+    },
+    "player": {
+      "ascii": "@",
+      "color_fg": [
+        227,
+        245,
+        241
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        227,
+        245,
+        241
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        1
+      ]
+    },
+    "hollow_knight": {
+      "ascii": "K",
+      "color_fg": [
+        129,
+        175,
+        181
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        3
+      ]
+    },
+    "plague_crow": {
+      "ascii": "c",
+      "color_fg": [
+        99,
+        34,
+        64
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        6,
+        10
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        6,
+        9
+      ]
+    },
+    "bog_wraith": {
+      "ascii": "W",
+      "color_fg": [
+        63,
+        160,
+        164
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        2,
+        6
+      ]
+    },
+    "grave_thing": {
+      "ascii": "g",
+      "color_fg": [
+        68,
+        99,
+        116
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        4,
+        4
+      ]
+    },
+    "heath_stalker": {
+      "ascii": "s",
+      "color_fg": [
+        99,
+        34,
+        64
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        6,
+        10
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        11
+      ]
+    },
+    "barrow_wight": {
+      "ascii": "B",
+      "color_fg": [
+        188,
+        89,
+        96
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        12,
+        8,
+        10
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        8,
+        3
+      ]
+    },
+    "briar_lurker": {
+      "ascii": "l",
+      "color_fg": [
+        57,
+        117,
+        92
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        9
+      ]
+    },
+    "drowned_revenant": {
+      "ascii": "D",
+      "color_fg": [
+        40,
+        96,
+        128
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        4,
+        5
+      ]
+    },
+    "hollow_revenant": {
+      "ascii": "r",
+      "color_fg": [
+        41,
+        21,
+        70
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        6,
+        12
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        8,
+        6
+      ]
+    },
+    "sewer_thing": {
+      "ascii": "t",
+      "color_fg": [
+        40,
+        84,
+        84
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        12
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        4,
+        10
+      ]
+    },
+    "stone_lurker": {
+      "ascii": "S",
+      "color_fg": [
+        50,
+        73,
+        95
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        13
+      ]
+    },
+    "highland_bandit": {
+      "ascii": "b",
+      "color_fg": [
+        226,
+        181,
+        112
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        4,
+        2
+      ]
+    },
+    "tallow_torch": {
+      "ascii": "(",
+      "color_fg": [
+        226,
+        181,
+        112
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        7
+      ]
+    },
+    "oil_lantern": {
+      "ascii": "(",
+      "color_fg": [
+        238,
+        233,
+        138
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        14,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        1,
+        7
+      ]
+    },
+    "food_item": {
+      "ascii": "%",
+      "color_fg": [
+        226,
+        181,
+        112
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        2,
+        2
+      ]
+    },
+    "water_flask": {
+      "ascii": "!",
+      "color_fg": [
+        63,
+        160,
+        164
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        5,
+        3
+      ]
+    },
+    "generic_item": {
+      "ascii": "?",
+      "color_fg": [
+        129,
+        175,
+        181
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        8,
+        1
+      ]
+    },
+    "corpse": {
+      "ascii": "%",
+      "color_fg": [
+        99,
+        34,
+        64
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        6,
+        10
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        9,
+        2
+      ]
+    },
+    "overmap_plains": {
+      "ascii": ".",
+      "color_fg": [
+        93,
+        167,
+        93
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        2,
+        16
+      ]
+    },
+    "overmap_forest": {
+      "ascii": "\u2663",
+      "color_fg": [
+        57,
+        117,
+        92
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        16
+      ]
+    },
+    "overmap_town": {
+      "ascii": "\u221a",
+      "color_fg": [
+        226,
+        181,
+        112
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        3,
+        17
+      ]
+    },
+    "overmap_dungeon": {
+      "ascii": ">",
+      "color_fg": [
+        188,
+        89,
+        96
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        12,
+        8,
+        10
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        4,
+        12
+      ]
+    },
+    "overmap_swamp": {
+      "ascii": "~",
+      "color_fg": [
+        40,
+        84,
+        84
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        12
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        7,
+        19
+      ]
+    },
+    "overmap_mountain": {
+      "ascii": "^",
+      "color_fg": [
+        68,
+        99,
+        116
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        8,
+        16
+      ]
+    },
+    "overmap_heath": {
+      "ascii": ",",
+      "color_fg": [
+        93,
+        167,
+        93
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        3,
+        16
+      ]
+    },
+    "overmap_unknown": {
+      "ascii": " ",
+      "color_fg": [
+        25,
+        27,
+        63
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        4,
+        5,
+        9
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        14
+      ]
+    },
+    "overmap_player": {
+      "ascii": "@",
+      "color_fg": [
+        227,
+        245,
+        241
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        227,
+        245,
+        241
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        1
+      ]
+    },
+    "document": {
+      "ascii": "?",
+      "color_fg": [226, 181, 112],
+      "color_bg": [0, 0, 0],
+      "color_fg_dark": [14, 12, 8],
+      "color_bg_dark": [0, 0, 0],
+      "sprite": [3, 0]
+    },
+    "inscription": {
+      "ascii": "\"",
+      "color_fg": [129, 175, 181],
+      "color_bg": [0, 0, 0],
+      "color_fg_dark": [4, 5, 9],
+      "color_bg_dark": [0, 0, 0],
+      "sprite": [4, 0]
+    },
+    "grey_stone": {
+      "ascii": "X",
+      "color_fg": [100, 100, 112],
+      "color_bg": [15,  15,  22 ],
+      "color_fg_dark": [20, 20, 28],
+      "color_bg_dark": [7,  12, 29],
+      "sprite": [0, 0]
+    },
+    "ancient_floor": {
+      "ascii": ":",
+      "color_fg": [60,  65,  80 ],
+      "color_bg": [12,  12,  20 ],
+      "color_fg_dark": [10, 10, 18],
+      "color_bg_dark": [7,  12, 29],
+      "sprite": [0, 0]
+    },
+    "table": {
+      "ascii": "=",
+      "color_fg": [88,  75,  55 ],
+      "color_bg": [20,  20,  28 ],
+      "color_fg_dark": [14, 12, 8 ],
+      "color_bg_dark": [7,  12, 29],
+      "sprite": [0, 0]
+    },
+    "old_wall": {
+      "ascii": "#",
+      "color_fg": [40, 95, 128 ],
+      "color_bg": [7, 12, 29 ],
+      "color_fg_dark": [12, 15, 22 ],
+      "color_bg_dark": [4, 5, 9 ],
+      "sprite": [0, 0]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.env
+
+# Claude Code
+.claude/
+claude.md
+.claude-code/
+
+# OS and Editors
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

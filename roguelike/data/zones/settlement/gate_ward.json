@@ -1,0 +1,22 @@
+{
+  "id": "gate_ward",
+  "name": "Gate Ward",
+  "category": "settlement",
+  "description": "Walls, barracks, a gibbet with something in it. The transition between the relative safety of inside and whatever waits outside.",
+  "terrain_palette": ["cobblestone", "flagstone"],
+  "between_buildings": "cobblestone_street",
+  "structures": [
+    {"id": "gatehouse",         "weight": 5},
+    {"id": "watchtower",        "weight": 15},
+    {"id": "barracks",          "weight": 10},
+    {"id": "gibbet_post",       "weight": 20}
+  ],
+  "creatures": [
+    {"id": "guard_npc",         "weight": 20, "chance": 0.7},
+    {"id": "militia_npc",       "weight": 15, "chance": 0.5}
+  ],
+  "ambient_loot": "military_scraps",
+  "light_level": "normal",
+  "tags": ["settlement", "military", "gate_ward"],
+  "ambient_light": 0.9
+}
