@@ -172,6 +172,13 @@
     "display_name": "varied_grass",
     "walkable": true,
     "transparent": true,
-    "description": "If you are reading this the game will self destruct in 10 seconds."
+    "description": "This text should never be seen!."
+  },
+  "wood_wall": {
+    "tile": "wall",
+    "display_name": "Wooden Wall",
+    "walkable": false,
+    "transparent": false,
+    "description": "Weathered wood. The rot has begun to set in."
   }
 }

@@ -132,6 +132,24 @@
     "rock_12": {"sheet": "terrain","col": 12,"row": 2},
     "rock_13": {"sheet": "terrain","col": 13,"row": 2},
     "rock_14": {"sheet": "terrain","col": 14,"row": 2},
-    "rock_15": {"sheet": "terrain","col": 15,"row": 2}
+    "rock_15": {"sheet": "terrain","col": 15,"row": 2},
+
+    "wood_wall": {"sheet": "terrain", "col": 0, "row": 4},
+    "wood_wall_1": {"sheet": "terrain", "col": 1, "row": 4},
+    "wood_wall_2": {"sheet": "terrain", "col": 2, "row": 4},
+    "wood_wall_3": {"sheet": "terrain", "col": 3, "row": 4},
+    "wood_wall_4": {"sheet": "terrain", "col": 4, "row": 4},
+    "wood_wall_5": {"sheet": "terrain", "col": 5, "row": 4},
+    "wood_wall_6": {"sheet": "terrain", "col": 6, "row": 4},
+    "wood_wall_7": {"sheet": "terrain", "col": 7, "row": 4},
+    "wood_wall_8": {"sheet": "terrain", "col": 8, "row": 4},
+    "wood_wall_9": {"sheet": "terrain", "col": 9, "row": 4},
+    "wood_wall_10": {"sheet": "terrain", "col": 10, "row": 4},
+    "wood_wall_11": {"sheet": "terrain", "col": 11, "row": 4},
+    "wood_wall_12": {"sheet": "terrain", "col": 12, "row": 4},
+    "wood_wall_13": {"sheet": "terrain", "col": 13, "row": 4},
+    "wood_wall_14": {"sheet": "terrain", "col": 14, "row": 4},
+    "wood_wall_15": {"sheet": "terrain", "col": 15, "row": 4}
+
   }
 }
