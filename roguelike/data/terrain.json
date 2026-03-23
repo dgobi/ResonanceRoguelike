@@ -4,7 +4,7 @@
     "display_name": "Crumbling Wall",
     "walkable": false,
     "transparent": false,
-    "description": "A damp, solid stone wall. It is blessedly silent."
+    "description": "A silent and damp stone wall."
   },
   "floor": {
     "tile": "floor",
@@ -22,10 +22,10 @@
   },
   "tree": {
     "tile": "tree",
-    "display_name": "Gnarled Tree",
+    "display_name": "Ancient Tree",
     "walkable": false,
     "transparent": false,
-    "description": "A gnarled ancient tree, draped in lichen."
+    "description": "A gnarled tree draped in lichen."
   },
   "water": {
     "tile": "water",
@@ -138,5 +138,40 @@
     "walkable": false,
     "transparent": false,
     "description": "Rough and weathered stone. Reassuringly silent."
+  },
+  "flower_pilgrims_woe": {
+    "tile": "flower",
+    "display_name": "Pilgrim's Woe",
+    "walkable": true,
+    "transparent": true,
+    "description": "Pallid blooms sway atop dark fronds."
+  },
+  "flower_murk_violet": {
+    "tile": "flower",
+    "display_name": "Murk Violet",
+    "walkable": true,
+    "transparent": true,
+    "description": "Bruised purple petals release a sickly sweet perfume."
+  },
+  "shroom_sulphur_cap": {
+    "tile": "mushroom",
+    "display_name": "Sulphur Cap",
+    "walkable": true,
+    "transparent": true,
+    "description": "The fleshy orange cap exudes a pungent aroma."
+  },
+  "shroom_prophets_eye": {
+    "tile": "mushroom",
+    "display_name": "Prophet's Eye",
+    "walkable": true,
+    "transparent": true,
+    "description": "Used in the foul liquors an unguents of the Alchemists. It is said to bring true visions, before the end."
+  },
+  "varied_grass": {
+    "tile": "grass",
+    "display_name": "varied_grass",
+    "walkable": true,
+    "transparent": true,
+    "description": "If you are reading this the game will self destruct in 10 seconds."
   }
 }

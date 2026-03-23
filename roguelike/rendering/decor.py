@@ -8,10 +8,6 @@ DECOR_TABLE = {
         (None, 60),          
         ("grass_1", 20), 
         ("grass_2", 10),
-        ("flower_1", 1),
-        ("flower_2", 1),
-        ("shroom_1", 1),
-        ("shroom_2", 1),
         ("rocks_1", 1),
         ("rocks_2", 1)
     ],
@@ -24,6 +20,12 @@ DECOR_TABLE = {
     "gravel": [
         ("gravel_1", 25),
         ("gravel_2", 75)
+    ],
+    "mud": [
+        ("mud_1", 25),
+        ("mud_2", 25),
+        ("mud_3", 25),
+        ("mud_4", 25)
     ]
 }
 
@@ -31,10 +33,10 @@ DECOR_TABLE = {
 FUNCTIONAL_VARIANTS = {
     "varied_grass": [
         ("grass", 95), 
-        ("flower_1", 1), 
-        ("flower_2", 1),
-        ("shroom_1", 1),
-        ("shroom_2", 1)
+        ("flower_pilgrims_woe", 1), 
+        ("flower_murk_violet", 1),
+        ("shroom_sulphur_cap", 1),
+        ("shroom_prophets_eye", 1)
     ],
     "varied_forest": [
         ("tree_1", 70),

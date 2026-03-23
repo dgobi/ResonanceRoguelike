@@ -69,7 +69,7 @@ def generate_region(
     elif chunk.region_type == RegionType.HEATH:
         local_map, spawn = _generate_open(
             map_width, map_height, terrain_data, rng,
-            floor_terrain="grass", tree_chance=0.03,
+            floor_terrain="varied_grass", tree_chance=0.03,
         )
 
     elif chunk.region_type == RegionType.MOUNTAIN:
@@ -80,7 +80,7 @@ def generate_region(
     else:  # PLAINS default
         local_map, spawn = _generate_open(
             map_width, map_height, terrain_data, rng,
-            floor_terrain="grass", tree_chance=0.06,
+            floor_terrain="varied_grass", tree_chance=0.06,
         )
 
     # Carve rivers, roads, paths from edge connectors
@@ -105,7 +105,7 @@ def _generate_open(
     map_height: int,
     terrain_data: dict,
     rng: random.Random,
-    floor_terrain: str = "grass",
+    floor_terrain: str = "varied_grass",
     tree_chance: float = 0.06,
 ) -> tuple[LocalMap, tuple[int, int]]:
     local_map = LocalMap(map_width, map_height)
@@ -175,7 +175,7 @@ def _ensure_forest_connectivity(local_map: LocalMap, map_w: int, map_h: int) -> 
                     if (x + dx, y + dy) in visited
                 )
                 if neighbours >= 3:
-                    local_map.tiles[x, y]["terrain"] = b"grass"
+                    local_map.tiles[x, y]["terrain"] = b"varied_grass"
                     local_map.walkable[x, y]    = True
                     local_map.transparent[x, y] = True
 
@@ -187,7 +187,7 @@ def _generate_forest(
     rng: random.Random,
 ) -> tuple[LocalMap, tuple[int, int]]:
     local_map = LocalMap(map_width, map_height)
-    grass = terrain_data["grass"]
+    grass = terrain_data["varied_grass"]
     tree  = terrain_data["tree"]
 
     for x in range(map_width):
@@ -196,14 +196,14 @@ def _generate_forest(
                 local_map.set_tile(x, y, "tree",
                                    tree["walkable"], tree["transparent"])
             else:
-                local_map.set_tile(x, y, "grass",
+                local_map.set_tile(x, y, "varied_grass",
                                    grass["walkable"], grass["transparent"])
 
     cx, cy = map_width // 2, map_height // 2
     for x in range(cx - 2, cx + 3):
         for y in range(cy - 2, cy + 3):
             if local_map.in_bounds(x, y):
-                local_map.set_tile(x, y, "grass",
+                local_map.set_tile(x, y, "varied_grass",
                                    grass["walkable"], grass["transparent"])
 
     _ensure_forest_connectivity(local_map, map_width, map_height)
@@ -261,7 +261,7 @@ def _generate_town_base(
     grass = terrain_data["grass"]
     for x in range(map_width):
         for y in range(map_height):
-            local_map.set_tile(x, y, "grass",
+            local_map.set_tile(x, y, "varied_grass",
                                grass["walkable"], grass["transparent"])
     return local_map
 

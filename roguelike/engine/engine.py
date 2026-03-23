@@ -980,6 +980,19 @@ class Engine:
 
     def _update_fov(self) -> None:
         import math as _math
+        from engine.engine import GameMode
+        
+        if getattr(self, "mode", None) == GameMode.OVERMAP:
+            # Reveal the map grid
+            self.local_map.tiles["visible"][:] = True
+            self.local_map.tiles["explored"][:] = True
+            
+            # Set the lighting multiplier to 1.0 (True Color)
+            if hasattr(self, "light_map"):
+                self.light_map.fill(1.0)
+            
+            self._update_last_known_positions()
+            return
         # Recalculate wraith penalty fresh from current entity positions.
         # This ensures every FOV call — post-move, turn-end, etc. — sees
         # the correct penalty without staleness from ability execution order.

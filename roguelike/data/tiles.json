@@ -1241,84 +1241,27 @@
     },
     "overmap_heath": {
       "ascii": ",",
-      "color_fg": [
-        93,
-        167,
-        93
-      ],
-      "color_bg": [
-        0,
-        0,
-        0
-      ],
-      "color_fg_dark": [
-        8,
-        12,
-        8
-      ],
-      "color_bg_dark": [
-        0,
-        0,
-        0
-      ],
-      "sprite": [
-        3,
-        16
-      ]
+      "color_fg": [93,167,93],
+      "color_bg": [0,0,0],
+      "color_fg_dark": [8,12,8],
+      "color_bg_dark": [0,0,0],
+      "sprite": [3,16]
     },
     "overmap_unknown": {
       "ascii": " ",
-      "color_fg": [
-        25,
-        27,
-        63
-      ],
-      "color_bg": [
-        0,
-        0,
-        0
-      ],
-      "color_fg_dark": [
-        4,
-        5,
-        9
-      ],
-      "color_bg_dark": [
-        0,
-        0,
-        0
-      ],
-      "sprite": [
-        0,
-        14
-      ]
+      "color_fg": [25,27,63],
+      "color_bg": [0,0,0],
+      "color_fg_dark": [4,5,9],
+      "color_bg_dark": [0,0,0],
+      "sprite": [0,14]
     },
     "overmap_player": {
       "ascii": "@",
-      "color_fg": [
-        227,
-        245,
-        241
-      ],
-      "color_bg": [
-        0,
-        0,
-        0
-      ],
-      "color_fg_dark": [
-        227,
-        245,
-        241
-      ],
-      "color_bg_dark": [
-        0,
-        0,
-        0
-      ],
-      "sprite": [
-        0,
-        1
-      ]
+      "color_fg": [227,245,241],
+      "color_bg": [0,0,0],
+      "color_fg_dark": [227,245,241],
+      "color_bg_dark": [0,0,0],
+      "sprite": [0,1]
     },
     "document": {
       "ascii": "?",
@@ -1362,6 +1305,22 @@
     },
     "old_wall": {
       "ascii": "#",
+      "color_fg": [40, 95, 128 ],
+      "color_bg": [7, 12, 29 ],
+      "color_fg_dark": [12, 15, 22 ],
+      "color_bg_dark": [4, 5, 9 ],
+      "sprite": [0, 0]
+    },
+    "flower": {
+      "ascii": "+",
+      "color_fg": [40, 95, 128 ],
+      "color_bg": [7, 12, 29 ],
+      "color_fg_dark": [12, 15, 22 ],
+      "color_bg_dark": [4, 5, 9 ],
+      "sprite": [0, 0]
+    },
+    "mushroom": {
+      "ascii": "T",
       "color_fg": [40, 95, 128 ],
       "color_bg": [7, 12, 29 ],
       "color_fg_dark": [12, 15, 22 ],

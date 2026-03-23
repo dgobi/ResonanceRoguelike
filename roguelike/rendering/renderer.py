@@ -652,12 +652,15 @@ class Renderer:
                     if not chunk or not chunk.explored:
                         continue
                     key = chunk.region_type.overmap_tile()
-                    fg  = self.registry.fg(key) \
-                        if key in self.registry._data \
-                        else (120, 110, 140)
-                    bg  = self.registry.bg(key) \
-                        if key in self.registry._data \
-                        else (0, 0, 0)
+
+                    if not getattr(self.display, "use_sprite_tint", True):
+                        # Full-color mode: Force 100% brightness (True Color)
+                        fg = (255, 255, 255)
+                    else:
+                        # 1-bit mode: Keep existing tile-defined colors
+                        fg = self.registry.fg(key) if key in self.registry._data else (120, 110, 140)
+                    
+                    bg = self.registry.bg(key) if key in self.registry._data else (0, 0, 0)
 
                 if self._sprite_mode:
                     self._draw_sprite(surf, key, fg, bg, sx, sy, zoom=1)
