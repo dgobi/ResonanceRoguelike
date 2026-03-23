@@ -42,7 +42,7 @@ FPS = 20
 DEBUG_MODE = True   # set False for release builds
 
 RENDER_MODE = "sprite"
-ZOOM_LEVEL  = 2    # 3× zoom → 24px tiles, comfortable on modern monitors
+ZOOM_LEVEL  = 3    # 3× zoom → 24px tiles, comfortable on modern monitors
 FONT_PATH   = "assets/fonts/dejavu10x10_gs_tc.png"  # keep for ASCII fallback
 
 # --- UI Layout ---

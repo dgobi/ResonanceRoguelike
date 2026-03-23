@@ -497,7 +497,7 @@ class Renderer:
                         continue
 
                     # 3. Determine the specific sprite variant (Autotiling)
-                    if any(key in decorated_name for key in ["wall", "water"]):
+                    if any(key in decorated_name for key in ["wall", "water", "rock"]):
                         variant_name = self._get_autotile_name(local_map, mx, my, decorated_name)
                         sprite_name = variant_name if self.sprite_registry.has(variant_name) else decorated_name
                     else:

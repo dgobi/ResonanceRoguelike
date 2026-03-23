@@ -8,8 +8,8 @@ DECOR_TABLE = {
         (None, 60),          
         ("grass_1", 20), 
         ("grass_2", 10),
-        ("rocks_1", 1),
-        ("rocks_2", 1)
+        ("stones_1", 1),
+        ("stones_2", 1)
     ],
     "tree": [
         ("tree_1", 25),
