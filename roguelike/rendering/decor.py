@@ -65,15 +65,18 @@ def get_procedural_key(mx: int, my: int, terrain: str) -> str | None:
             return key
     return None
 
-def resolve_functional_variant(terrain: str) -> str:
-    """If terrain starts with varied_, pick a random real terrain type."""
+def resolve_functional_variant(terrain: str, mx: int = 0, my: int = 0) -> str:
+    """Pick a deterministic real terrain type from a varied_ terrain."""
     if not terrain.startswith("varied_") or terrain not in FUNCTIONAL_VARIANTS:
         return terrain
-    
-    variants = FUNCTIONAL_VARIANTS[terrain]
+
+    seed = (mx * 374761393) ^ (my * 668265263) ^ hash(terrain)
+    rng  = random.Random(seed)
+
+    variants     = FUNCTIONAL_VARIANTS[terrain]
     total_weight = sum(w for _, w in variants)
-    roll = random.randint(1, total_weight)
-    
+    roll         = rng.randint(1, total_weight)
+
     cursor = 0
     for variant_name, weight in variants:
         cursor += weight

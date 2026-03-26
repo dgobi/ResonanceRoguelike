@@ -137,9 +137,20 @@ class DisplayConfig:
         self.font_ui_tiny:       pygame.font.Font | None = None
         self.font_ui_italic:     pygame.font.Font | None = None
         self.font_ui_bold:       pygame.font.Font | None = None
-        self.font_ui_bold_large: pygame.font.Font | None = None
-        self.font_deep:          pygame.font.Font | None = None
+        self.font_ui_bold_large:    pygame.font.Font | None = None
+        self.font_deep:             pygame.font.Font | None = None
+        # Callout / floating text fonts — populated in init()
+        self.font_callout_damage:   "pygame.font.Font | None" = None
+        self.font_callout_status:   "pygame.font.Font | None" = None
+        self.font_callout_creature: "pygame.font.Font | None" = None
+        self.font_callout_crit:     "pygame.font.Font | None" = None
+        self.CALLOUT_FONTS: dict = {}
         self.use_sprite_tint = False
+
+        # Callout visibility toggles
+        self.CALLOUT_DAMAGE_NUMBERS:  bool = True
+        self.CALLOUT_CREATURE_SOUNDS: bool = True
+        self.CALLOUT_STATUS_EFFECTS:  bool = True
 
     def init(self) -> None:
         """Call after pygame.init() to load font assets."""
@@ -159,6 +170,25 @@ class DisplayConfig:
         self.font_deep          = pygame.font.Font(italic, 18)
         # font_deep: italic Junicode as placeholder until custom bitmap font
         # All deep tongue text renders in night_purple [41,21,70] using this font
+
+        # Callout / floating text sizes
+        CALLOUT_DAMAGE_SIZE   = 13
+        CALLOUT_STATUS_SIZE   = 12
+        CALLOUT_CREATURE_SIZE = 11
+        CALLOUT_CRIT_SIZE     = 18
+
+        self.font_callout_damage   = pygame.font.Font(base, CALLOUT_DAMAGE_SIZE)
+        self.font_callout_status   = pygame.font.Font(base, CALLOUT_STATUS_SIZE)
+        self.font_callout_creature = pygame.font.Font(base, CALLOUT_CREATURE_SIZE)
+        self.font_callout_crit     = pygame.font.Font(bold, CALLOUT_CRIT_SIZE)
+        self.CALLOUT_FONTS = {
+            "damage":   self.font_callout_damage,
+            "status":   self.font_callout_status,
+            "creature": self.font_callout_creature,
+            "crit":     self.font_callout_crit,
+            "small":    self.font_callout_damage,    # alias
+            "tiny":     self.font_callout_creature,  # alias
+        }
 
     # ------------------------------------------------------------------ #
     #  Font discovery
@@ -268,6 +298,33 @@ class DisplayConfig:
     @property
     def tile_height(self) -> int:
         return self.font_sheet.tile_height * self.zoom_level
+
+    def line_height(self, font_key: str = "normal") -> int:
+        """Return line height for layout calculations."""
+        fonts = {
+            "large":      self.font_ui_large,
+            "normal":     self.font_ui_normal,
+            "small":      self.font_ui_small,
+            "tiny":       self.font_ui_tiny,
+            "bold":       self.font_ui_bold,
+            "bold_large": self.font_ui_bold_large,
+        }
+        f = fonts.get(font_key, self.font_ui_normal)
+        return f.get_linesize() if f else 18
+
+    def status_bar_height(self) -> int:
+        """Minimum height for the status bar based on current font."""
+        from config import UI_PANEL_INSET
+        lh = self.line_height("tiny")
+        return max(120, lh * 3 + UI_PANEL_INSET * 2)
+
+    def icon_size(self) -> int:
+        """Sprite icon size at current zoom (matches 8px sprite × zoom)."""
+        return self.zoom_level * 8
+
+    def context_strip_height(self) -> int:
+        """Context strip is eliminated. Returns 0."""
+        return 0
 
     def effective_tile_size(
         self,

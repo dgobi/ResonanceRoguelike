@@ -25,5 +25,13 @@
   "essence_modifiers": {
     "Dissolution": 1.0, "Quickening": 1.1, "Binding": 1.0,
     "Severance": 1.0, "Consumption": 1.5, "Revelation": 0.9
+  },
+  "attack_verb": "dives at thee",
+  "blood_type": "red",
+  "corpse_sprite": {"col": 2055, "row": 0},
+  "callout_sounds": {
+    "on_spot":   {"text": "kraw",  "color": [99,  34,  64]},
+    "on_attack": {"text": "kraw",  "color": [99,  34,  64]},
+    "on_death":  {"text": "kk...", "color": [99,  34,  64]}
   }
 }

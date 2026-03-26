@@ -1,0 +1,37 @@
+{
+  "id": "heath",
+  "display_name": "Heath",
+  "overmap_tile": "overmap_heath",
+  "overmap_color": [
+    187,
+    117,
+    71
+  ],
+  "base_resonance": 0.25,
+  "elevation_range": [
+    0.1,
+    0.5
+  ],
+  "moisture_range": [
+    0.1,
+    0.5
+  ],
+  "difficulty_base": 0.25,
+  "river_adjacent": false,
+  "generator": "heath",
+  "creature_zones": [
+    "wilderness_heath"
+  ],
+  "submap_types": [
+    "barrow"
+  ],
+  "submap_weight": 0.15,
+  "entry_messages": [
+    "Open ground. The wind carries something old.",
+    "The heath stretches in every direction. Nothing is hidden here."
+  ],
+  "resonance_messages": {
+    "moderate": "The standing stones are more numerous here.",
+    "high": "A waystone nearby. Avoid touching it."
+  }
+}

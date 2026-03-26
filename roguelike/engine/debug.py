@@ -2,10 +2,574 @@
 from __future__ import annotations
 import pygame
 from typing import TYPE_CHECKING
+from engine.palette import *
 
 if TYPE_CHECKING:
     from engine.engine import Engine
 
+
+# ------------------------------------------------------------------ #
+#  Console command functions
+#  Each takes (parts: list[str], engine: Engine) and logs results.
+# ------------------------------------------------------------------ #
+
+def _cc_spawn_creature(parts: list[str], engine: "Engine") -> None:
+    if len(parts) < 2:
+        engine.log.add("[DEBUG] Usage: spawn_creature <id>", FRESH_WOUND)
+        return
+    creature_id = parts[1]
+    px, py = engine.player.x, engine.player.y
+    for dx, dy in [(1,0),(-1,0),(0,1),(0,-1),(1,1),(-1,1),(1,-1),(-1,-1)]:
+        tx, ty = px + dx, py + dy
+        if engine.local_map.in_bounds(tx, ty) and engine.local_map.walkable[tx, ty]:
+            creature = engine.creature_factory.spawn(creature_id, tx, ty)
+            if creature:
+                engine.entities.append(creature)
+                engine.log.add(f"[DEBUG] Spawned {creature_id} at ({tx},{ty}).", AGED_WOOD)
+            else:
+                engine.log.add(f"[DEBUG] Unknown creature: {creature_id}.", FRESH_WOUND)
+            return
+    engine.log.add("[DEBUG] No adjacent walkable tile.", FRESH_WOUND)
+
+
+def _cc_spawn_item(parts: list[str], engine: "Engine") -> None:
+    if len(parts) < 2:
+        engine.log.add("[DEBUG] Usage: spawn_item <id>", FRESH_WOUND)
+        return
+    item_id = parts[1]
+    px, py = engine.player.x, engine.player.y
+    item = engine.item_factory.create(item_id, px, py)
+    if item:
+        engine.entities.append(item)
+        engine.log.add(f"[DEBUG] Spawned {item_id} at ({px},{py}).", AGED_WOOD)
+    else:
+        engine.log.add(f"[DEBUG] Unknown item: {item_id}.", FRESH_WOUND)
+
+
+def _cc_grant_perk(parts: list[str], engine: "Engine") -> None:
+    if len(parts) < 2:
+        engine.log.add("[DEBUG] Usage: grant_perk <id>", FRESH_WOUND)
+        return
+    perk_id = parts[1]
+    perks_comp = getattr(engine.player, "perks", None)
+    if perks_comp is None:
+        engine.log.add("[DEBUG] Player has no perks component.", FRESH_WOUND)
+    elif perk_id not in engine.data.perks:
+        engine.log.add(f"[DEBUG] Unknown perk: {perk_id}.", FRESH_WOUND)
+    else:
+        perks_comp.add_perk(perk_id)
+        engine._register_player_perks()
+        engine.log.add(f"[DEBUG] perk granted: {perk_id}", AGED_WOOD)
+
+
+def _cc_remove_perk(parts: list[str], engine: "Engine") -> None:
+    if len(parts) < 2:
+        engine.log.add("[DEBUG] Usage: remove_perk <id>", FRESH_WOUND)
+        return
+    perk_id = parts[1]
+    perks_comp = getattr(engine.player, "perks", None)
+    if perks_comp is None:
+        engine.log.add("[DEBUG] Player has no perks component.", FRESH_WOUND)
+    else:
+        perks_comp.remove_perk(perk_id)
+        engine._register_player_perks()
+        engine.log.add(f"[DEBUG] perk removed: {perk_id}", AGED_WOOD)
+
+
+def _cc_list_perks(parts: list[str], engine: "Engine") -> None:
+    perks_comp = getattr(engine.player, "perks", None)
+    if perks_comp is None or not perks_comp.active_perks:
+        engine.log.add("[DEBUG] No active perks.", AGED_WOOD)
+    else:
+        for pid in perks_comp.active_perks:
+            engine.log.add(f"  {pid}", AGED_WOOD)
+
+
+def _cc_set_exposure(parts: list[str], engine: "Engine") -> None:
+    if len(parts) < 2:
+        engine.log.add("[DEBUG] Usage: set_exposure <0.0-1.5>", FRESH_WOUND)
+        return
+    try:
+        val = float(parts[1])
+        engine.resonance_exposure = max(0.0, min(1.5, val))
+        engine._last_exposure_tier = 0   # force tier re-check next turn
+        engine.log.add(
+            f"[DEBUG] exposure={engine.resonance_exposure:.3f}", AGED_WOOD)
+    except ValueError:
+        engine.log.add("[DEBUG] Invalid value.", FRESH_WOUND)
+
+
+def _cc_set_corruption(parts: list[str], engine: "Engine") -> None:
+    if len(parts) < 2:
+        engine.log.add("[DEBUG] Usage: set_corruption <0.0-1.0>", FRESH_WOUND)
+        return
+    try:
+        val = float(parts[1])
+        from engine.resonance_system import _check_corruption_thresholds
+        old = engine.corruption
+        engine.corruption = max(0.0, min(1.0, val))
+        # Sync player corruption component so UI reflects the change
+        player_corr = getattr(engine.player, "corruption", None)
+        if player_corr is not None:
+            player_corr.value = engine.corruption
+        effects: dict = {}
+        _check_corruption_thresholds(engine, old, engine.corruption, effects)
+        if effects.get("add_message"):
+            engine.log.add(effects["add_message"],
+                           effects.get("message_color", AGED_WOOD))
+        engine.log.add(
+            f"[DEBUG] corruption={engine.corruption:.3f}", AGED_WOOD)
+    except ValueError:
+        engine.log.add("[DEBUG] Invalid value.", FRESH_WOUND)
+
+
+def _cc_pulse_bell(parts: list[str], engine: "Engine") -> None:
+    from engine.discharge import trigger_discharge
+    effects: dict = {}
+    trigger_discharge(engine, engine.player.x, engine.player.y, "intact", effects)
+    msg = effects.get("add_message")
+    col = effects.get("message_color", AGED_WOOD)
+    if msg:
+        engine.log.add(msg, col)
+    engine.log.add("[DEBUG] Intact bell pulse triggered.", AGED_WOOD)
+
+
+def _cc_pulse_cracked(parts: list[str], engine: "Engine") -> None:
+    from engine.discharge import trigger_discharge
+    effects: dict = {}
+    trigger_discharge(engine, engine.player.x, engine.player.y, "cracked", effects)
+    msg = effects.get("add_message")
+    col = effects.get("message_color", AGED_WOOD)
+    if msg:
+        engine.log.add(msg, col)
+    engine.log.add("[DEBUG] Cracked bell pulse triggered.", AGED_WOOD)
+
+
+def _cc_show_resonance(parts: list[str], engine: "Engine") -> None:
+    exp  = getattr(engine, "resonance_exposure", 0.0)
+    corr = getattr(engine, "corruption",         0.0)
+    wind = getattr(engine, "wind_turn",          0)
+    tier = getattr(engine, "_last_exposure_tier", 0)
+    thresholds = getattr(engine, "_corruption_thresholds", set())
+    engine.log.add(
+        f"[DEBUG] exposure={exp:.3f}  corruption={corr:.3f}  "
+        f"wind={wind}/40  tier={tier}",
+        AGED_WOOD,
+    )
+    engine.log.add(
+        f"[DEBUG] thresholds: {', '.join(sorted(thresholds)) or 'none'}",
+        STONE_BLUE,
+    )
+
+
+def _cc_scan_resonance(_parts: list[str], engine: "Engine") -> None:
+    """Scan all tiles within 20 tiles for resonant terrain."""
+    import math
+    px, py = engine.player.x, engine.player.y
+    found = []
+    for x in range(engine.local_map.width):
+        for y in range(engine.local_map.height):
+            dist = math.sqrt((x - px) ** 2 + (y - py) ** 2)
+            if dist > 20.0:
+                continue
+            terrain_id = str(engine.local_map.tiles["terrain"][x, y])
+            td = engine.data.terrain.get(terrain_id, {})
+            emit = td.get("resonance_emit", 0.0)
+            if emit > 0.0:
+                found.append((dist, terrain_id, x, y, emit))
+    if not found:
+        engine.log.add("No resonant terrain in range.", STONE_BLUE)
+        return
+    found.sort()
+    for dist, tid, x, y, emit in found[:10]:
+        engine.log.add(
+            f"  {tid} at ({x},{y}) emit={emit:.2f} dist={dist:.1f}",
+            VERDANT_MID,
+        )
+
+
+def _cc_show_corruption_rate(_parts: list[str], engine: "Engine") -> None:
+    """Show current per-turn corruption growth/decay rate."""
+    exp  = getattr(engine, "resonance_exposure", 0.0)
+    corr = getattr(engine, "corruption",         0.0)
+    # Mirror resonance_system.py logic to compute tick
+    decay = -0.008   # base per-turn decay
+    from engine.resonance_system import _scan_resonant_terrain
+    try:
+        nearest_emit, nearest_dist = _scan_resonant_terrain(engine)
+    except Exception:
+        nearest_emit, nearest_dist = 0.0, 999.0
+    if nearest_emit > 0.0 and nearest_dist <= 20.0:
+        proximity  = 1.0 - (nearest_dist / 20.0)
+        exp_tick   = nearest_emit * proximity * 0.015
+        decay_net  = exp_tick   # no net decay when near resonant terrain
+    else:
+        exp_tick   = 0.0
+        decay_net  = decay
+    engine.log.add(
+        f"[DEBUG] corruption={corr:.4f}  exposure={exp:.4f}  "
+        f"exp_tick/turn={decay_net:+.4f}",
+        AGED_WOOD,
+    )
+    engine.log.add(
+        f"[DEBUG] nearest_emit={nearest_emit:.3f}  dist={nearest_dist:.1f}",
+        STONE_BLUE,
+    )
+
+
+def _cc_set_weather(parts: list[str], engine: "Engine") -> None:
+    weather = getattr(engine, "weather", None)
+    if weather is None:
+        engine.log.add("[DEBUG] No weather system present.", FRESH_WOUND)
+        return
+    if len(parts) < 2:
+        valid = ", ".join(weather.VALID_STATES)
+        engine.log.add(f"[DEBUG] Usage: set_weather <state>  valid: {valid}", FRESH_WOUND)
+        return
+    state = parts[1]
+    if state not in weather.VALID_STATES:
+        engine.log.add(f"[DEBUG] Unknown weather state: {state}.", FRESH_WOUND)
+        return
+    weather.force_state(state)
+    engine.log.add(f"[DEBUG] Weather set to: {state}", AGED_WOOD)
+
+
+def _cc_show_weather(parts: list[str], engine: "Engine") -> None:
+    weather = getattr(engine, "weather", None)
+    if weather is None:
+        engine.log.add("[DEBUG] No weather system present.", FRESH_WOUND)
+        return
+    engine.log.add(
+        f"[DEBUG] weather={weather.state}  "
+        f"intensity={weather.intensity:.2f}  "
+        f"turns_left={weather.turns_remaining}",
+        AGED_WOOD,
+    )
+
+
+def _cc_stop_weather(_parts: list[str], engine: "Engine") -> None:
+    """Clear all weather: force clear state, remove emitters, clear particles and fog cache."""
+    weather = getattr(engine, "weather", None)
+    if weather is None:
+        engine.log.add("[DEBUG] No weather system present.", FRESH_WOUND)
+        return
+    weather.force_state("clear")
+    from rendering.particles import update_weather_emitters
+    update_weather_emitters(engine)
+    ps = getattr(engine, "particle_system", None)
+    if ps is not None:
+        ps.clear()
+    engine._fog_surface = None
+    engine.log.add("[debug] weather cleared — sky blank, particles gone.", AGED_WOOD)
+
+
+def _cc_force_weird_weather(_parts: list[str], engine: "Engine") -> None:
+    import random as _random
+    weather = getattr(engine, "weather", None)
+    if weather is None:
+        engine.log.add("[DEBUG] No weather system present.", FRESH_WOUND)
+        return
+    _WEIRD = ["resonance_storm", "forgetting_fog", "bone_snow", "dead_calm"]
+    state = _random.choice(_WEIRD)
+    weather.force_state(state)
+    engine.log.add(f"[DEBUG] Weird weather forced: {state}", AGED_WOOD)
+
+
+def _cc_toggle_move_log(_parts: list[str], engine: "Engine") -> None:
+    engine.debug_move_log = not getattr(engine, "debug_move_log", False)
+    state = "ON" if engine.debug_move_log else "OFF"
+    engine.log.add(f"[DEBUG] Move log {state}.", AGED_WOOD)
+
+
+def _cc_give_debug_weapon(_parts: list[str], engine: "Engine") -> None:
+    item = engine.item_factory.create("debug_blade", engine.player.x, engine.player.y)
+    if item is None:
+        engine.log.add("[DEBUG] debug_blade not found in data.", FRESH_WOUND)
+        return
+    inv = getattr(engine.player, "inventory", None)
+    if inv is None:
+        engine.entities.append(item)
+        engine.log.add("[DEBUG] debug_blade dropped at feet (no inventory).", AGED_WOOD)
+        return
+    inv.add(item)
+    engine.log.add("[DEBUG] debug_blade added to inventory.", AGED_WOOD)
+
+
+def _cc_particle_stats(_parts: list[str], engine: "Engine") -> None:
+    ps = getattr(engine, "particle_system", None)
+    if ps is None:
+        engine.log.add("[DEBUG] No particle system.", FRESH_WOUND)
+        return
+    n_particles = len(ps.particles)
+    cap         = int(ps._cap)
+    n_emitters  = len(ps.emitters)
+    avg_fps: float = 0.0
+    if ps._frame_times:
+        avg_fps = sum(ps._frame_times) / len(ps._frame_times)
+    engine.log.add(
+        f"[particles] active={n_particles}/{cap}  "
+        f"emitters={n_emitters}  avg_fps={avg_fps:.1f}",
+        AGED_WOOD,
+    )
+
+
+def _cc_test_rain(parts: list[str], engine: "Engine") -> None:
+    weather = getattr(engine, "weather", None)
+    if weather is None:
+        engine.log.add("[DEBUG] No weather system.", FRESH_WOUND)
+        return
+    kind = parts[1].lower() if len(parts) > 1 else "light"
+    state_map = {
+        "light": "light_rain",
+        "heavy": "heavy_rain",
+        "storm": "resonance_storm",
+    }
+    state = state_map.get(kind, "light_rain")
+    weather.force_state(state)
+    engine.log.add(f"[debug] rain test: {kind}", AGED_WOOD)
+
+
+def _cc_test_fog(parts: list[str], engine: "Engine") -> None:
+    weather = getattr(engine, "weather", None)
+    if weather is None:
+        engine.log.add("[DEBUG] No weather system.", FRESH_WOUND)
+        return
+    kind = parts[1].lower() if len(parts) > 1 else "fog"
+    state = "forgetting_fog" if kind in ("forgetting", "forgetting_fog") else "fog"
+    weather.force_state(state)
+    engine.log.add(f"[debug] fog test: {state}", AGED_WOOD)
+
+
+def _cc_test_snow(_parts: list[str], engine: "Engine") -> None:
+    weather = getattr(engine, "weather", None)
+    if weather is None:
+        engine.log.add("[DEBUG] No weather system.", FRESH_WOUND)
+        return
+    weather.force_state("bone_snow")
+    engine.log.add("[debug] bone snow test", AGED_WOOD)
+
+
+def _cc_test_waystone_ring(_parts: list[str], engine: "Engine") -> None:
+    ps = getattr(engine, "particle_system", None)
+    if ps is None:
+        engine.log.add("[DEBUG] No particle system.", FRESH_WOUND)
+        return
+    import random as _rand
+    from rendering.particles import make_waystone_ring
+    ring = make_waystone_ring(
+        float(engine.player.x), float(engine.player.y), _rand.Random())
+    ps.emit(ring)
+    engine.log.add("[debug] waystone ring emitted at player position.", AGED_WOOD)
+
+
+def _cc_clear_particles(_parts: list[str], engine: "Engine") -> None:
+    ps = getattr(engine, "particle_system", None)
+    if ps is None:
+        engine.log.add("[DEBUG] No particle system.", FRESH_WOUND)
+        return
+    ps.clear()
+    engine.log.add("[debug] particles cleared", AGED_WOOD)
+
+
+def _cc_toggle_callouts(parts: list[str], engine: "Engine") -> None:
+    which = parts[1].lower() if len(parts) > 1 else "all"
+    d = engine.display
+    if which in ("damage", "all"):
+        d.CALLOUT_DAMAGE_NUMBERS  = not d.CALLOUT_DAMAGE_NUMBERS
+    if which in ("sounds", "all"):
+        d.CALLOUT_CREATURE_SOUNDS = not d.CALLOUT_CREATURE_SOUNDS
+    if which in ("status", "all"):
+        d.CALLOUT_STATUS_EFFECTS  = not d.CALLOUT_STATUS_EFFECTS
+    engine.log.add(
+        f"[callouts] damage={d.CALLOUT_DAMAGE_NUMBERS}  "
+        f"sounds={d.CALLOUT_CREATURE_SOUNDS}  "
+        f"status={d.CALLOUT_STATUS_EFFECTS}",
+        AGED_WOOD,
+    )
+
+
+def _cc_help(parts: list[str], engine: "Engine") -> None:
+    for cat in ("RESONANCE", "ENTITIES", "PERKS", "WEATHER", "VISUAL", "SYSTEM"):
+        items = [(n, m) for n, m in CONSOLE_COMMANDS.items()
+                 if m["category"] == cat]
+        if not items:
+            continue
+        engine.log.add(f"  [{cat}]", STEEL_WATER)
+        for _name, meta in items:
+            engine.log.add(
+                f"    {meta['usage']:<34} {meta['desc']}",
+                STONE_BLUE,
+            )
+
+
+# ------------------------------------------------------------------ #
+#  Command registry — edit here to add / remove console commands
+# ------------------------------------------------------------------ #
+
+CONSOLE_COMMANDS: dict = {
+    # RESONANCE -------------------------------------------------------
+    "set_exposure":   {
+        "fn":       _cc_set_exposure,
+        "usage":    "set_exposure <0.0-1.5>",
+        "desc":     "Set resonance exposure directly.",
+        "category": "RESONANCE",
+    },
+    "set_corruption": {
+        "fn":       _cc_set_corruption,
+        "usage":    "set_corruption <0.0-1.0>",
+        "desc":     "Set corruption, fire thresholds.",
+        "category": "RESONANCE",
+    },
+    "pulse_bell": {
+        "fn":       _cc_pulse_bell,
+        "usage":    "pulse_bell",
+        "desc":     "Simulate intact bell discharge.",
+        "category": "RESONANCE",
+    },
+    "pulse_cracked": {
+        "fn":       _cc_pulse_cracked,
+        "usage":    "pulse_cracked",
+        "desc":     "Simulate cracked bell partial discharge.",
+        "category": "RESONANCE",
+    },
+    "show_resonance": {
+        "fn":       _cc_show_resonance,
+        "usage":    "show_resonance",
+        "desc":     "Print resonance/corruption/wind state.",
+        "category": "RESONANCE",
+    },
+    "scan_resonance": {
+        "fn":       _cc_scan_resonance,
+        "usage":    "scan_resonance",
+        "desc":     "List resonant tiles within 20 tiles of player.",
+        "category": "RESONANCE",
+    },
+    "show_corruption_rate": {
+        "fn":       _cc_show_corruption_rate,
+        "usage":    "show_corruption_rate",
+        "desc":     "Show per-turn corruption/exposure rate.",
+        "category": "RESONANCE",
+    },
+    # ENTITIES --------------------------------------------------------
+    "spawn_creature": {
+        "fn":       _cc_spawn_creature,
+        "usage":    "spawn_creature <id>",
+        "desc":     "Spawn creature on adjacent walkable tile.",
+        "category": "ENTITIES",
+    },
+    "spawn_item": {
+        "fn":       _cc_spawn_item,
+        "usage":    "spawn_item <id>",
+        "desc":     "Drop item at player position.",
+        "category": "ENTITIES",
+    },
+    "give_debug_weapon": {
+        "fn":       _cc_give_debug_weapon,
+        "usage":    "give_debug_weapon",
+        "desc":     "Add debug_blade to inventory.",
+        "category": "ENTITIES",
+    },
+    "toggle_move_log": {
+        "fn":       _cc_toggle_move_log,
+        "usage":    "toggle_move_log",
+        "desc":     "Toggle per-step terrain/cost logging.",
+        "category": "SYSTEM",
+    },
+    "stop_weather": {
+        "fn":       _cc_stop_weather,
+        "usage":    "stop_weather",
+        "desc":     "Force clear sky, remove emitters, clear particles and fog.",
+        "category": "WEATHER",
+    },
+    "force_weird_weather": {
+        "fn":       _cc_force_weird_weather,
+        "usage":    "force_weird_weather",
+        "desc":     "Force a random rare weather state.",
+        "category": "WEATHER",
+    },
+    # PERKS -----------------------------------------------------------
+    "grant_perk": {
+        "fn":       _cc_grant_perk,
+        "usage":    "grant_perk <id>",
+        "desc":     "Grant perk to player.",
+        "category": "PERKS",
+    },
+    "remove_perk": {
+        "fn":       _cc_remove_perk,
+        "usage":    "remove_perk <id>",
+        "desc":     "Remove perk from player.",
+        "category": "PERKS",
+    },
+    "list_perks": {
+        "fn":       _cc_list_perks,
+        "usage":    "list_perks",
+        "desc":     "List active perks.",
+        "category": "PERKS",
+    },
+    # WEATHER ---------------------------------------------------------
+    "set_weather": {
+        "fn":       _cc_set_weather,
+        "usage":    "set_weather <state>",
+        "desc":     "Force a weather state.",
+        "category": "WEATHER",
+    },
+    "show_weather": {
+        "fn":       _cc_show_weather,
+        "usage":    "show_weather",
+        "desc":     "Print current weather state.",
+        "category": "WEATHER",
+    },
+    # VISUAL ----------------------------------------------------------
+    "particle_stats": {
+        "fn":       _cc_particle_stats,
+        "usage":    "particle_stats",
+        "desc":     "Show active particle count, cap, emitters, avg fps.",
+        "category": "VISUAL",
+    },
+    "test_rain": {
+        "fn":       _cc_test_rain,
+        "usage":    "test_rain [light|heavy|storm]",
+        "desc":     "Set weather to rain state.",
+        "category": "VISUAL",
+    },
+    "test_fog": {
+        "fn":       _cc_test_fog,
+        "usage":    "test_fog [fog|forgetting]",
+        "desc":     "Set weather to fog state.",
+        "category": "VISUAL",
+    },
+    "test_snow": {
+        "fn":       _cc_test_snow,
+        "usage":    "test_snow",
+        "desc":     "Set weather to bone_snow.",
+        "category": "VISUAL",
+    },
+    "test_waystone_ring": {
+        "fn":       _cc_test_waystone_ring,
+        "usage":    "test_waystone_ring",
+        "desc":     "Emit one waystone ring at player position.",
+        "category": "VISUAL",
+    },
+    "clear_particles": {
+        "fn":       _cc_clear_particles,
+        "usage":    "clear_particles",
+        "desc":     "Remove all active particles and emitters.",
+        "category": "VISUAL",
+    },
+    "toggle_callouts": {
+        "fn":       _cc_toggle_callouts,
+        "usage":    "toggle_callouts [damage|sounds|status|all]",
+        "desc":     "Toggle floating callout categories.",
+        "category": "VISUAL",
+    },
+    # SYSTEM ----------------------------------------------------------
+    "help": {
+        "fn":       _cc_help,
+        "usage":    "help",
+        "desc":     "List all console commands by category.",
+        "category": "SYSTEM",
+    },
+}
 
 
 class DebugOverlay:
@@ -23,6 +587,8 @@ class DebugOverlay:
         self._input_mode:    str  = ""
         self._input_buffer:  str  = ""
         self._input_prompt:  str  = ""
+        self._console_history:     list[str] = []
+        self._console_history_idx: int       = -1   # -1 = not browsing
 
     def init(self) -> None:
         self._font = pygame.font.SysFont("monospace", 13)
@@ -31,13 +597,17 @@ class DebugOverlay:
     #  Key handling — returns True if the key was consumed
     # ------------------------------------------------------------------ #
 
-    def handle_key(self, key: int, engine: Engine) -> bool:
+    def handle_key(self, key: int, engine: "Engine") -> bool:
         """
         Handle a keypress. Returns True if consumed by debug system.
         Call this BEFORE normal input handling.
         """
         if self._input_mode:
             return self._handle_input(key, engine)
+
+        if key == pygame.K_ESCAPE and self.show_overlay:
+            self.show_overlay = False
+            return True
 
         if key == pygame.K_F1:
             self.show_overlay = not self.show_overlay
@@ -78,7 +648,7 @@ class DebugOverlay:
             if mods & pygame.KMOD_SHIFT:
                 engine.player_invincible = not engine.player_invincible
                 state = "ON" if engine.player_invincible else "OFF"
-                engine.log.add(f"[DEBUG] Invincibility {state}.", (150, 150, 100))
+                engine.log.add(f"[DEBUG] Invincibility {state}.", AGED_WOOD)
             else:
                 self._force_regen(engine)
             return True
@@ -93,7 +663,7 @@ class DebugOverlay:
                 "Teleport to chunk wx,wy (e.g. 3,7): "
             )
             return True
-        
+
         if key == pygame.K_F11:
             import shutil
             from pathlib import Path
@@ -102,10 +672,10 @@ class DebugOverlay:
                 shutil.rmtree(save_path)
             engine.log.add(
                 "[DEBUG] Save data cleared. Wipe complete.",
-                (200, 80, 80),
+                FRESH_WOUND,
             )
             return True
-        
+
         if key == pygame.K_F12:
             self._start_input(
                 "remap_tile",
@@ -120,37 +690,66 @@ class DebugOverlay:
         return False
 
     # ------------------------------------------------------------------ #
-    #  Text input handling for commands that need parameters
+    #  Text input handling
     # ------------------------------------------------------------------ #
 
     def _start_input(self, mode: str, prompt: str) -> None:
-        self._input_mode   = mode
-        self._input_buffer = ""
-        self._input_prompt = prompt
+        self._input_mode          = mode
+        self._input_buffer        = ""
+        self._input_prompt        = prompt
+        self._console_history_idx = -1
 
-    def _handle_input(self, key: int, engine: Engine) -> bool:
+    def _handle_input(self, key: int, engine: "Engine") -> bool:
         if key == pygame.K_ESCAPE:
-            self._input_mode   = ""
-            self._input_buffer = ""
+            self._input_mode          = ""
+            self._input_buffer        = ""
+            self._console_history_idx = -1
             return True
 
         if key == pygame.K_RETURN:
+            buf = self._input_buffer.strip()
+            if buf and self._input_mode == "debug_cmd":
+                # Prepend to history, cap at 20
+                if not self._console_history or self._console_history[0] != buf:
+                    self._console_history.insert(0, buf)
+                    if len(self._console_history) > 20:
+                        self._console_history = self._console_history[:20]
+            self._console_history_idx = -1
             self._execute_input(engine)
             self._input_mode   = ""
             self._input_buffer = ""
             return True
 
         if key == pygame.K_BACKSPACE:
-            self._input_buffer = self._input_buffer[:-1]
+            self._input_buffer        = self._input_buffer[:-1]
+            self._console_history_idx = -1
             return True
 
-        # Append printable characters
+        if key == pygame.K_UP and self._input_mode == "debug_cmd":
+            if self._console_history:
+                self._console_history_idx = min(
+                    self._console_history_idx + 1,
+                    len(self._console_history) - 1,
+                )
+                self._input_buffer = self._console_history[self._console_history_idx]
+            return True
+
+        if key == pygame.K_DOWN and self._input_mode == "debug_cmd":
+            if self._console_history_idx > 0:
+                self._console_history_idx -= 1
+                self._input_buffer = self._console_history[self._console_history_idx]
+            else:
+                self._console_history_idx = -1
+                self._input_buffer = ""
+            return True
+
         char = self._key_to_char(key)
         if char:
-            self._input_buffer += char
+            self._input_buffer        += char
+            self._console_history_idx  = -1
         return True
 
-    def _execute_input(self, engine: Engine) -> None:
+    def _execute_input(self, engine: "Engine") -> None:
         buf = self._input_buffer.strip()
 
         if self._input_mode == "teleport":
@@ -178,15 +777,15 @@ class DebugOverlay:
                         engine._update_fov()
                         engine.log.add(
                             f"[DEBUG] Teleported to chunk ({wx},{wy}).",
-                            (150, 150, 100)
+                            AGED_WOOD
                         )
                 else:
                     engine.log.add(
                         f"[DEBUG] Chunk ({wx},{wy}) out of bounds.",
-                        (200, 80, 80)
+                        FRESH_WOUND
                     )
             except Exception as e:
-                engine.log.add(f"[DEBUG] Teleport failed: {e}", (200, 80, 80))
+                engine.log.add(f"[DEBUG] Teleport failed: {e}", FRESH_WOUND)
 
         elif self._input_mode == "set_time":
             try:
@@ -200,10 +799,10 @@ class DebugOverlay:
                 engine._update_fov()
                 engine.log.add(
                     f"[DEBUG] Time set to {engine.world_time.time_string}.",
-                    (150, 150, 100)
+                    AGED_WOOD
                 )
             except Exception as e:
-                engine.log.add(f"[DEBUG] Set time failed: {e}", (200, 80, 80))
+                engine.log.add(f"[DEBUG] Set time failed: {e}", FRESH_WOUND)
 
         elif self._input_mode == "set_values":
             try:
@@ -225,63 +824,15 @@ class DebugOverlay:
                 engine.log.add(
                     f"[DEBUG] Set hunger={hunger:.2f} "
                     f"thirst={thirst:.2f} corruption={corrupt:.2f}.",
-                    (150, 150, 100)
+                    AGED_WOOD
                 )
             except Exception as e:
                 engine.log.add(
-                    f"[DEBUG] Set values failed: {e}", (200, 80, 80)
+                    f"[DEBUG] Set values failed: {e}", FRESH_WOUND
                 )
 
         elif self._input_mode == "debug_cmd":
-            parts = buf.strip().split()
-            if not parts:
-                pass
-            elif parts[0] == "spawn_creature" and len(parts) > 1:
-                creature_id = parts[1]
-                px, py = engine.player.x, engine.player.y
-                spawned = False
-                for dx, dy in [(1,0),(-1,0),(0,1),(0,-1),(1,1),(-1,1),(1,-1),(-1,-1)]:
-                    tx, ty = px + dx, py + dy
-                    if (engine.local_map.in_bounds(tx, ty)
-                            and engine.local_map.walkable[tx, ty]):
-                        creature = engine.creature_factory.spawn(creature_id, tx, ty)
-                        if creature:
-                            engine.entities.append(creature)
-                            engine.log.add(
-                                f"[DEBUG] Spawned {creature_id} at ({tx},{ty}).",
-                                (150, 150, 100),
-                            )
-                        else:
-                            engine.log.add(
-                                f"[DEBUG] Unknown creature: {creature_id}.",
-                                (200, 80, 80),
-                            )
-                        spawned = True
-                        break
-                if not spawned:
-                    engine.log.add("[DEBUG] No adjacent walkable tile.", (200, 80, 80))
-
-            elif parts[0] == "spawn_item" and len(parts) > 1:
-                item_id = parts[1]
-                px, py  = engine.player.x, engine.player.y
-                item    = engine.item_factory.create(item_id, px, py)
-                if item:
-                    engine.entities.append(item)
-                    engine.log.add(
-                        f"[DEBUG] Spawned {item_id} at ({px},{py}).",
-                        (150, 150, 100),
-                    )
-                else:
-                    engine.log.add(
-                        f"[DEBUG] Unknown item: {item_id}.",
-                        (200, 80, 80),
-                    )
-            else:
-                engine.log.add(
-                    f"[DEBUG] Unknown command '{parts[0]}'. "
-                    "Use: spawn_creature <id>  spawn_item <id>",
-                    (200, 80, 80),
-                )
+            self._dispatch_console(buf, engine)
 
         elif self._input_mode == "remap_tile":
             try:
@@ -296,15 +847,33 @@ class DebugOverlay:
                     engine.log.add(
                         f"[DEBUG] Remapped {tile_id} → {sheet_id} "
                         f"({col},{row})",
-                        (150, 150, 100),
+                        AGED_WOOD,
                     )
                 else:
                     engine.log.add(
                         "[DEBUG] No sprite registry loaded.",
-                        (200, 80, 80),
+                        FRESH_WOUND,
                     )
             except Exception as e:
-                engine.log.add(f"[DEBUG] Remap failed: {e}", (200, 80, 80))
+                engine.log.add(f"[DEBUG] Remap failed: {e}", FRESH_WOUND)
+
+    def _dispatch_console(self, buf: str, engine: "Engine") -> None:
+        """Look up and execute a command from CONSOLE_COMMANDS."""
+        parts = buf.strip().split()
+        if not parts:
+            return
+        cmd   = parts[0]
+        entry = CONSOLE_COMMANDS.get(cmd)
+        if entry is None:
+            engine.log.add(
+                f"[DEBUG] Unknown command '{cmd}'. Type 'help' for list.",
+                FRESH_WOUND,
+            )
+            return
+        try:
+            entry["fn"](parts, engine)
+        except Exception as e:
+            engine.log.add(f"[DEBUG] {cmd} error: {e}", FRESH_WOUND)
 
     @staticmethod
     def _key_to_char(key: int) -> str:
@@ -327,11 +896,11 @@ class DebugOverlay:
     #  Actions
     # ------------------------------------------------------------------ #
 
-    def _reveal_local_map(self, engine: Engine) -> None:
+    def _reveal_local_map(self, engine: "Engine") -> None:
         engine.local_map.tiles["explored"][:] = True
-        engine.log.add("[DEBUG] Local map revealed.", (150, 150, 100))
+        engine.log.add("[DEBUG] Local map revealed.", AGED_WOOD)
 
-    def _reveal_world_map_submaps(self, engine: Engine) -> None:
+    def _reveal_world_map_submaps(self, engine: "Engine") -> None:
         for chunk in engine.world_map.chunks.values():
             chunk.explored = True
         self.show_submap_highlights = not self.show_submap_highlights
@@ -344,10 +913,10 @@ class DebugOverlay:
         status = "on" if self.show_submap_highlights else "off"
         engine.log.add(
             f"[DEBUG] World map revealed. SubMap highlights {status}.",
-            (150, 150, 100),
+            AGED_WOOD,
         )
 
-    def _teleport_to_nearest_submap(self, engine: Engine) -> None:
+    def _teleport_to_nearest_submap(self, engine: "Engine") -> None:
         """Teleport to the nearest chunk that has a SubMap entry."""
         from config import MAP_WIDTH, MAP_HEIGHT
 
@@ -358,7 +927,7 @@ class DebugOverlay:
                 candidates.append((dist, wx, wy, chunk))
 
         if not candidates:
-            engine.log.add("[DEBUG] No submaps found in world.", (200, 80, 80))
+            engine.log.add("[DEBUG] No submaps found in world.", FRESH_WOUND)
             return
 
         candidates.sort()
@@ -369,10 +938,8 @@ class DebugOverlay:
             chunk, MAP_WIDTH, MAP_HEIGHT, engine.data.terrain
         )
 
-        # Place player near the submap entrance if a submap_link exists
         spawn_x, spawn_y = MAP_WIDTH // 2, MAP_HEIGHT // 2
         if local_map.submap_links:
-            # Use first registered stairs_down tile
             sx, sy = next(iter(local_map.submap_links))
             spawn_x, spawn_y = engine._find_walkable_near(local_map, sx, sy)
         else:
@@ -392,15 +959,15 @@ class DebugOverlay:
         name = chunk.submaps[0].name if chunk.submaps[0].name else chunk.submaps[0].submap_type
         engine.log.add(
             f"[DEBUG] Teleported to submap chunk ({wx},{wy}): {name}",
-            (150, 150, 100),
+            AGED_WOOD,
         )
 
-    def _force_regen(self, engine: Engine) -> None:
+    def _force_regen(self, engine: "Engine") -> None:
         from generation.region_gen import generate_region
         from config import MAP_WIDTH, MAP_HEIGHT
         chunk = engine.world_map.get(engine.world_x, engine.world_y)
         if chunk:
-            chunk.seed += 1   # increment seed for different layout
+            chunk.seed += 1
             new_map, (sx, sy) = generate_region(
                 chunk, MAP_WIDTH, MAP_HEIGHT, engine.data.terrain
             )
@@ -412,10 +979,10 @@ class DebugOverlay:
             engine._update_fov()
             engine.log.add(
                 f"[DEBUG] Chunk regenerated (seed {chunk.seed}).",
-                (150, 150, 100)
+                AGED_WOOD
             )
 
-    def _dump_state(self, engine: Engine) -> None:
+    def _dump_state(self, engine: "Engine") -> None:
         chunk = engine.world_map.get(engine.world_x, engine.world_y)
         needs = getattr(engine.player, "needs", None)
         corr  = getattr(engine.player, "corruption", None)
@@ -436,6 +1003,13 @@ class DebugOverlay:
             print(f"Thirst:       {needs.thirst:.4f} ({needs.thirst_state})")
         if corr:
             print(f"Corruption:   {corr.value:.4f} ({corr.state})")
+        # Resonance state
+        print(f"Res. exposure:{getattr(engine, 'resonance_exposure', 0.0):.4f}")
+        print(f"Res. corrupt: {getattr(engine, 'corruption', 0.0):.4f}")
+        print(f"Thresholds:   {sorted(getattr(engine, '_corruption_thresholds', set()))}")
+        weather = getattr(engine, "weather", None)
+        if weather:
+            print(f"Weather:      {weather.state} (intensity {weather.intensity:.2f}, {weather.turns_remaining} turns)")
         lm = engine.local_map.light_map
         px, py = engine.player.x, engine.player.y
         print(f"Light at @:   {lm[px, py]}")
@@ -460,7 +1034,7 @@ class DebugOverlay:
             print(f"  Locus:     {myth.locus_name} at ({myth.locus_wx},{myth.locus_wy})")
             print(f"  Factions:  {myth.faction_a} vs {myth.faction_b}")
         print("========================\n")
-        engine.log.add("[DEBUG] State dumped to console.", (150, 150, 100))
+        engine.log.add("[DEBUG] State dumped to console.", AGED_WOOD)
 
     # ------------------------------------------------------------------ #
     #  Overlay rendering
@@ -469,7 +1043,7 @@ class DebugOverlay:
     def render(
         self,
         screen:  pygame.Surface,
-        engine:  Engine,
+        engine:  "Engine",
     ) -> None:
         """Render all active debug visuals onto screen."""
         if self.show_fov_viz:
@@ -486,12 +1060,10 @@ class DebugOverlay:
         """Draw the debug registry sigil — asymmetric angular rune."""
         import math
         s = size / 32
-        col_dim    = (30, 48, 80)
-        col_mid    = (40, 72, 128)
-        col_bright = (72, 120, 184)
-        # Outer circle
+        col_dim    = DEEP_STONE_BLUE
+        col_mid    = STEEL_WATER
+        col_bright = STEEL_WATER
         pygame.draw.circle(surf, col_dim, (cx, cy), int(30 * s), 1)
-        # Inner dashed circle
         for i in range(24):
             if i % 3 == 2:
                 continue
@@ -499,35 +1071,26 @@ class DebugOverlay:
             px = int(cx + 20 * s * math.cos(a))
             py = int(cy + 20 * s * math.sin(a))
             pygame.draw.circle(surf, col_dim, (px, py), 1)
-        # Vertical spine
         pygame.draw.line(surf, col_mid, (cx, int(cy - 28 * s)), (cx, int(cy + 28 * s)), 1)
-        # Upper left arm
         pygame.draw.line(surf, col_mid, (cx, int(cy - 14 * s)), (int(cx - 20 * s), cy), 1)
-        # Upper right arm (shorter)
         pygame.draw.line(surf, col_mid, (cx, int(cy - 14 * s)), (int(cx + 16 * s), int(cy - 6 * s)), 1)
-        # Lower arm
         pygame.draw.line(surf, col_mid, (cx, int(cy + 12 * s)), (int(cx - 18 * s), int(cy + 20 * s)), 1)
-        # Cross bar (offset from centre)
         pygame.draw.line(surf, col_dim, (int(cx - 14 * s), int(cy - 2 * s)), (int(cx + 16 * s), int(cy + 3 * s)), 1)
-        # Tick marks
         pygame.draw.line(surf, col_mid, (int(cx - 4 * s), int(cy - 10 * s)), (cx, int(cy - 10 * s)), 1)
         pygame.draw.line(surf, col_mid, (int(cx - 4 * s), int(cy + 2 * s)),  (cx, int(cy + 2 * s)),  1)
         pygame.draw.line(surf, col_mid, (int(cx - 4 * s), int(cy + 14 * s)), (int(cx + 4 * s), int(cy + 14 * s)), 1)
-        # Node dots
         pygame.draw.circle(surf, col_bright, (cx, int(cy - 28 * s)), 3)
         pygame.draw.circle(surf, col_mid,    (cx, int(cy - 14 * s)), 2)
         pygame.draw.circle(surf, col_mid,    (int(cx - 20 * s), cy), 2)
         pygame.draw.circle(surf, col_mid,    (cx, int(cy + 12 * s)), 2)
-        # Bright accent lines
         pygame.draw.line(surf, col_bright, (cx, int(cy - 28 * s)), (cx, int(cy - 14 * s)), 2)
         pygame.draw.line(surf, col_bright, (cx, int(cy - 14 * s)), (int(cx - 20 * s), cy), 1)
 
     def _render_overlay(
         self,
         screen: pygame.Surface,
-        engine: Engine,
+        engine: "Engine",
     ) -> None:
-        # Font access — prefer engine display fonts, fall back to monospace
         display   = getattr(engine, "display", None)
         fn_small  = getattr(display, "font_ui_small",      None) or self._font
         fn_bold   = getattr(display, "font_ui_bold",       None) or self._font
@@ -536,24 +1099,23 @@ class DebugOverlay:
             return
 
         sw, sh   = screen.get_width(), screen.get_height()
-        VOID     = (7, 12, 29)
-        STEEL    = (40, 96, 128)
-        DIM      = (68, 99, 116)
-        BRIGHT   = (140, 200, 200)
-        RED_DIM  = (145, 58, 82)
-        GREEN    = (93, 167, 93)
-        SECTION  = (72, 120, 184)
+        VOID     = VOID_BLACK
+        STEEL    = STEEL_WATER
+        DIM      = STONE_BLUE
+        BRIGHT   = PALE_RESONANCE
+        RED_DIM  = BLOOD_STONE
+        GREEN    = LIFE_GREEN
+        SECTION  = STEEL_WATER
         pad      = 14
-        lh       = 16   # small line height
-        sh_lh    = 18   # section heading height
+        lh       = 16
+        sh_lh    = 18
 
-        # Full-screen panel
         panel = pygame.Surface((sw, sh), pygame.SRCALPHA)
         panel.fill((*VOID, 230))
         pygame.draw.rect(panel, STEEL, (0, 0, sw, sh), 2)
         screen.blit(panel, (0, 0))
 
-        # ── Header strip ────────────────────────────────────────────────
+        # ── Header ───────────────────────────────────────────────────────
         SIG_CX, SIG_CY, SIG_R = 44, 44, 32
         self._draw_rune_sigil(screen, SIG_CX, SIG_CY, SIG_R)
         pygame.draw.line(screen, STEEL, (SIG_CX * 2 + 4, 0), (SIG_CX * 2 + 4, 88), 1)
@@ -563,11 +1125,10 @@ class DebugOverlay:
         sub   = fn_small.render("engine/debug.py  ·  DEBUG_MODE = True", True, DIM)
         screen.blit(sub, (SIG_CX * 2 + 14, pad + 26))
 
-        # Invincibility indicator
         inv   = getattr(engine, "player_invincible", False)
         dot_x = sw - pad - 8
         dot_y = pad + 8
-        pygame.draw.circle(screen, GREEN if inv else (50, 60, 70), (dot_x, dot_y), 6)
+        pygame.draw.circle(screen, GREEN if inv else SLATE_DARK, (dot_x, dot_y), 6)
         pygame.draw.circle(screen, STEEL, (dot_x, dot_y), 6, 1)
         inv_label = fn_small.render("INVINCIBLE" if inv else "mortal", True, GREEN if inv else DIM)
         screen.blit(inv_label, (dot_x - inv_label.get_width() - 10, dot_y - 6))
@@ -613,13 +1174,12 @@ class DebugOverlay:
             ("F7",        "Set needs / corruption"),
             ("F8",        "Force chunk regeneration"),
         ])
-        # Destructive section in red tint
         dest_y = y2
         h = fn_bold.render("DESTRUCTIVE", True, RED_DIM)
         screen.blit(h, (col2_x, dest_y))
         dest_y += sh_lh
-        k = fn_small.render("F11", True, (188, 89, 96))
-        d = fn_small.render("Wipe entire saves/ directory", True, (145, 80, 80))
+        k = fn_small.render("F11", True, DUSTY_ROSE)
+        d = fn_small.render("Wipe entire saves/ directory", True, BLOOD_STONE)
         screen.blit(k, (col2_x, dest_y))
         screen.blit(d, (col2_x + 80, dest_y))
         dest_y += lh
@@ -630,37 +1190,52 @@ class DebugOverlay:
         pygame.draw.line(screen, STEEL, (0, content_bottom), (sw, content_bottom), 1)
         cy = content_bottom + pad
 
-        h = fn_bold.render("DEBUG CONSOLE", True, SECTION)
-        screen.blit(h, (pad, cy))
-        trig = fn_small.render("trigger: ` (backtick)", True, DIM)
-        screen.blit(trig, (pad + h.get_width() + 20, cy + 2))
+        h_surf = fn_bold.render("DEBUG CONSOLE", True, SECTION)
+        screen.blit(h_surf, (pad, cy))
+        trig = fn_small.render("trigger: ` (backtick)  —  type 'help' for full list", True, DIM)
+        screen.blit(trig, (pad + h_surf.get_width() + 20, cy + 2))
         cy += sh_lh
 
-        cmds = [
-            ("spawn_creature <id>", "Spawns creature on nearest adjacent walkable tile"),
-            ("spawn_item <id>",     "Drops item at player's current position"),
-        ]
-        for cmd, desc in cmds:
-            c = fn_small.render(cmd, True, BRIGHT)
-            d_surf = fn_small.render(f"— {desc}", True, DIM)
-            screen.blit(c,      (pad + 12, cy))
-            screen.blit(d_surf, (pad + 12 + c.get_width() + 8, cy))
-            cy += lh
+        # Commands grouped by category, two columns
+        cat_order  = ["RESONANCE", "ENTITIES", "PERKS", "WEATHER", "SYSTEM"]
+        col_half   = (sw - pad * 3) // 2
+        cc_col1_x  = pad + 12
+        cc_col2_x  = pad * 2 + col_half + 12
+        cy1 = cy
+        cy2 = cy
+        col_toggle = 0
 
-        ids_c = fn_small.render(
-            "creature IDs: bog_wraith  barrow_wight  hollow_knight  hollow_revenant  "
-            "grave_thing  heath_stalker  briar_lurker  stone_lurker  plague_crow  highland_bandit",
-            True, (50, 70, 90),
-        )
-        screen.blit(ids_c, (pad + 12, cy))
-        cy += lh
-        ids_i = fn_small.render(
-            "item IDs: crude_blade  heavy_blade  binding_knife  dissolution_blade  "
-            "leather_jack  leather_cap  tallow_torch  oil_lantern  crow_jerky  water_flask  moist_pebble",
-            True, (50, 70, 90),
-        )
-        screen.blit(ids_i, (pad + 12, cy))
-        cy += lh + pad
+        for cat in cat_order:
+            items = [(n, m) for n, m in CONSOLE_COMMANDS.items()
+                     if m["category"] == cat]
+            if not items:
+                continue
+            if col_toggle == 0:
+                hdr = fn_bold.render(cat, True, SECTION)
+                screen.blit(hdr, (cc_col1_x, cy1))
+                cy1 += sh_lh
+                for _, meta in items:
+                    u_surf = fn_small.render(meta["usage"], True, BRIGHT)
+                    d_surf = fn_small.render(f"— {meta['desc']}", True, DIM)
+                    screen.blit(u_surf, (cc_col1_x, cy1))
+                    screen.blit(d_surf, (cc_col1_x + u_surf.get_width() + 6, cy1))
+                    cy1 += lh
+                cy1 += 4
+                col_toggle = 1
+            else:
+                hdr = fn_bold.render(cat, True, SECTION)
+                screen.blit(hdr, (cc_col2_x, cy2))
+                cy2 += sh_lh
+                for _, meta in items:
+                    u_surf = fn_small.render(meta["usage"], True, BRIGHT)
+                    d_surf = fn_small.render(f"— {meta['desc']}", True, DIM)
+                    screen.blit(u_surf, (cc_col2_x, cy2))
+                    screen.blit(d_surf, (cc_col2_x + u_surf.get_width() + 6, cy2))
+                    cy2 += lh
+                cy2 += 4
+                col_toggle = 0
+
+        cy = max(cy1, cy2) + pad
 
         # ── Footer status bar ────────────────────────────────────────────
         footer_y = sh - lh - pad - 4
@@ -668,14 +1243,17 @@ class DebugOverlay:
 
         chunk       = engine.world_map.get(engine.world_x, engine.world_y)
         corr        = getattr(engine.player, "corruption", None)
+        weather     = getattr(engine, "weather", None)
         submap_label = engine.current_submap_id or "surface"
         region_label = chunk.region_type.value if chunk else "?"
         corr_label   = corr.state if corr else "?"
+        weather_label = weather.state if weather else "—"
 
         footer = fn_small.render(
             f"mode: {engine.mode.value}  |  submap: {submap_label}  |  "
             f"chunk: ({engine.world_x},{engine.world_y}) {region_label}  |  "
-            f"corruption: {corr_label}  |  turn: {engine.world_time.turn}",
+            f"corruption: {corr_label}  |  weather: {weather_label}  |  "
+            f"turn: {engine.world_time.turn}",
             True, DIM,
         )
         screen.blit(footer, (pad, footer_y))
@@ -683,7 +1261,7 @@ class DebugOverlay:
     def _render_fov_viz(
         self,
         screen: pygame.Surface,
-        engine: Engine,
+        engine: "Engine",
     ) -> None:
         """Tint visible tiles green, FOV boundary cyan."""
         from engine.engine import GameMode
@@ -693,7 +1271,6 @@ class DebugOverlay:
         tw = engine.display.tile_width
         th = engine.display.tile_height
 
-        # We need a viewport rect — approximate from screen and panel
         from config import STATUS_BAR_H, MSG_PANEL_W
         viewport_w = screen.get_width() - MSG_PANEL_W
         viewport_h = screen.get_height() - STATUS_BAR_H
@@ -728,12 +1305,12 @@ class DebugOverlay:
         if not self._font:
             return
         text = f"{self._input_prompt}{self._input_buffer}_"
-        surf = self._font.render(text, True, (255, 220, 80))
+        surf = self._font.render(text, True, RESONANCE_GOLD)
         bg   = pygame.Surface(
             (surf.get_width() + 12, surf.get_height() + 8),
             pygame.SRCALPHA
         )
-        bg.fill((10, 8, 16, 230))
+        bg.fill(DEEP_NOTHING + (230,))
         y = screen.get_height() // 2
         screen.blit(bg,  (10, y))
         screen.blit(surf, (16, y + 4))

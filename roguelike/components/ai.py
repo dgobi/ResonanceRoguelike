@@ -3,6 +3,7 @@ from __future__ import annotations
 import random
 import enum
 from typing import TYPE_CHECKING
+from engine.palette import *
 
 if TYPE_CHECKING:
     from entities.actor import Actor
@@ -37,7 +38,7 @@ class AI:
 
     def __init__(
         self,
-        state:           AIState = AIState.DORMANT,
+        state:           AIState = AIState.WANDERING,
         wander_radius:   int     = 8,
         alert_memory:    int     = 10,
     ) -> None:
@@ -70,7 +71,10 @@ class AI:
         Process one AI turn. Subclasses override
         specific state behaviours.
         """
+        _prev_state = self.state
         self._update_state(actor, local_map, player, ambient_light)
+        if engine is not None:
+            _fire_creature_callout(actor, engine, _prev_state, self.state)
         self._act(actor, local_map, entities, player, log, rng, engine=engine)
 
     # ------------------------------------------------------------------ #
@@ -88,13 +92,7 @@ class AI:
         if not perception:
             return
 
-        can_see_player = False
-        if local_map.tiles[player.x, player.y]["visible"]:
-            can_see_player = perception.can_see(
-                actor.x, actor.y,
-                player.x, player.y,
-                True, ambient_light,
-            )
+        can_see_player = _creature_can_see_player(actor, player, local_map, ambient_light)
 
         dist = _distance(actor, player)
 
@@ -105,7 +103,6 @@ class AI:
             self.target_x         = player.x
             self.target_y         = player.y
             self.memory_turns     = self.alert_memory
-
             if dist <= 1.5:
                 self.state = AIState.ATTACKING
             else:
@@ -139,9 +136,7 @@ class AI:
                               AIState.HUNTING,
                               AIState.ATTACKING):
                 self.state = AIState.WANDERING
-            elif self.state == AIState.DORMANT:
-                if rng_chance(0.05):
-                    self.state = AIState.WANDERING
+
 
     # ------------------------------------------------------------------ #
     #  Actions
@@ -164,17 +159,33 @@ class AI:
             self._wander(actor, local_map, entities, rng)
 
         elif self.state == AIState.ALERTED:
-            self._move_toward(
-                actor, local_map, entities,
-                self.target_x or actor.x,
-                self.target_y or actor.y,
-            )
+            dist_to_player = _distance(actor, player)
+            if dist_to_player <= 1.5:
+                self._attack(actor, player, log, engine=engine)
+            else:
+                terrain_data = getattr(engine, "data", None)
+                terrain_data = getattr(terrain_data, "terrain", None) if terrain_data else None
+                self._move_toward(
+                    actor, local_map, entities,
+                    self.target_x or actor.x,
+                    self.target_y or actor.y,
+                    player=player,
+                    terrain_data=terrain_data,
+                )
 
         elif self.state == AIState.HUNTING:
-            self._move_toward(
-                actor, local_map, entities,
-                player.x, player.y,
-            )
+            dist_to_player = _distance(actor, player)
+            if dist_to_player <= 1.5:
+                self._attack(actor, player, log, engine=engine)
+            else:
+                terrain_data = getattr(engine, "data", None)
+                terrain_data = getattr(terrain_data, "terrain", None) if terrain_data else None
+                self._move_toward(
+                    actor, local_map, entities,
+                    player.x, player.y,
+                    player=player,
+                    terrain_data=terrain_data,
+                )
 
         elif self.state == AIState.ATTACKING:
             self._attack(actor, player, log, engine=engine)
@@ -226,11 +237,13 @@ class AI:
 
     def _move_toward(
         self,
-        actor:     Actor,
-        local_map: LocalMap,
-        entities:  list[Actor],
-        tx:        int,
-        ty:        int,
+        actor:        Actor,
+        local_map:    LocalMap,
+        entities:     list[Actor],
+        tx:           int,
+        ty:           int,
+        player:       "Actor | None" = None,
+        terrain_data: "dict | None"  = None,
     ) -> None:
         """Step one tile toward (tx, ty) using tcod pathfinding."""
         import tcod.path
@@ -240,12 +253,27 @@ class AI:
 
         cost = local_map.walkable.astype("int8")
 
+        # Apply terrain move cost (multiply by 10, floor 1) for pathfinding preference
+        if terrain_data:
+            for tx2 in range(cost.shape[0]):
+                for ty2 in range(cost.shape[1]):
+                    if cost[tx2, ty2] == 0:
+                        continue
+                    t = local_map.tiles[tx2, ty2]["terrain"]
+                    if isinstance(t, bytes):
+                        t = t.decode()
+                    entry = terrain_data.get(str(t), {})
+                    mc = entry.get("move_cost", 1.0)
+                    cost[tx2, ty2] = max(1, int(mc * 10))
+
         # Mark other blocking entities as impassable
         for e in entities:
             if e is actor:
                 continue
-            if getattr(e, "blocks_movement", False):
-                if local_map.in_bounds(e.x, e.y):
+            if player is not None and e is player:
+                continue  # target tile must remain reachable
+            if getattr(e, "blocks_movement", True):
+                if 0 <= e.x < cost.shape[0] and 0 <= e.y < cost.shape[1]:
                     cost[e.x, e.y] = 0
 
         graph  = tcod.path.SimpleGraph(cost=cost, cardinal=2, diagonal=3)
@@ -255,7 +283,7 @@ class AI:
 
         if len(path) >= 2:
             next_x, next_y = path[1]
-            if not _blocked_by_entity(next_x, next_y, entities, actor):
+            if not _is_tile_occupied(entities, next_x, next_y, exclude=actor):
                 actor.x, actor.y = next_x, next_y
 
     def _flee(
@@ -314,7 +342,7 @@ class AI:
         if damage == 0:
             log.add(
                 f"The {actor.name} strikes but cannot penetrate.",
-                (140, 120, 100),
+                WORN_STONE,
             )
             return
 
@@ -392,12 +420,7 @@ class FleeingAI(AI):
         if not perception:
             return
 
-        can_see = perception.can_see(
-            actor.x, actor.y,
-            player.x, player.y,
-            local_map.tiles[player.x, player.y]["visible"],
-            ambient_light,
-        )
+        can_see = _creature_can_see_player(actor, player, local_map, ambient_light)
         if can_see:
             self.state = AIState.FLEEING
         else:
@@ -429,6 +452,62 @@ class CirclingAI(AI):
 #  Helpers
 # ------------------------------------------------------------------ #
 
+def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1.0) -> bool:
+    """
+    True if the creature can see the player.
+    Checks sight_radius, ambient light / darkvision, and Bresenham LOS
+    through local_map.transparent.  Does NOT read the player-facing
+    'visible' flag — that is player-centric, not creature-centric.
+    """
+    import math
+    dx   = player.x - entity.x
+    dy   = player.y - entity.y
+    dist = math.sqrt(dx * dx + dy * dy)
+
+    perception = getattr(entity, "perception", None)
+    sight      = perception.sight_radius if perception else 8
+
+    if dist > sight:
+        return False
+
+    # Darkvision: creatures without it have sharply reduced range in darkness
+    if perception and not perception.sees_in_dark and ambient_light < 0.1:
+        if dist > max(1, sight // 4):
+            return False
+
+    # Concealment: tall grass reduces effective sight by 2 tiles
+    if getattr(player, "_in_concealment", False):
+        if dist > max(1, sight - 2):
+            return False
+
+    # Bresenham LOS — walk the line, check every intermediate tile
+    x0, y0   = entity.x, entity.y
+    x1, y1   = player.x, player.y
+    dx_abs   = abs(x1 - x0)
+    dy_abs   = abs(y1 - y0)
+    sx       = 1 if x0 < x1 else -1
+    sy       = 1 if y0 < y1 else -1
+    err      = dx_abs - dy_abs
+    x, y     = x0, y0
+
+    while True:
+        if x == x1 and y == y1:
+            break
+        e2 = 2 * err
+        if e2 > -dy_abs:
+            err -= dy_abs
+            x   += sx
+        if e2 < dx_abs:
+            err += dx_abs
+            y   += sy
+        if x == x1 and y == y1:
+            break
+        if not local_map.in_bounds(x, y) or not local_map.transparent[x, y]:
+            return False
+
+    return True
+
+
 def _distance(a: Actor, b: Actor) -> float:
     import math
     return math.sqrt((a.x - b.x)**2 + (a.y - b.y)**2)
@@ -448,7 +527,22 @@ def _blocked_by_entity(
     for e in entities:
         if e is exclude:
             continue
-        if e.x == x and e.y == y and getattr(e, "blocks_movement", False):
+        if e.x == x and e.y == y and getattr(e, "blocks_movement", True):
+            return True
+    return False
+
+
+def _is_tile_occupied(
+    entities: list,
+    x:        int,
+    y:        int,
+    exclude:  object = None,
+) -> bool:
+    """Return True if any blocking entity occupies (x, y)."""
+    for e in entities:
+        if e is exclude:
+            continue
+        if e.x == x and e.y == y and getattr(e, "blocks_movement", True):
             return True
     return False
 
@@ -484,16 +578,27 @@ def _monster_attack_entity(monster, target, engine) -> None:
     ):
         return
 
-    # Invincibility check (player only)
-    if is_player and getattr(engine, "player_invincible", False):
-        engine.log.add(
-            f"The {monster.name} strikes — thou art untouched.",
-            (99, 120, 140),
-        )
-        return
-
     # Build synthetic weapon from monster JSON
     monster_def = engine.data.entities.get(monster.tile, {})
+    attack_verb = monster_def.get("attack_verb", "strikes at thee")
+
+    # Invincibility check (player only)
+    if is_player and getattr(engine, "player_invincible", False):
+        from config import DEBUG_MODE as _DEBUG_MODE
+        inv_msg = f"The {monster.name} {attack_verb} — thou art untouched."
+        if _DEBUG_MODE:
+            from engine.combat import roll_dice as _roll_dice
+            _d_str = monster_def.get("damage_dice", "1d4")
+            _d_bon = monster_def.get("damage_bonus", 0)
+            _r     = _roll_dice(_d_str, _random.Random()) + _d_bon
+            _suf   = f"+{_d_bon}" if _d_bon > 0 else (str(_d_bon) if _d_bon < 0 else "")
+            inv_msg += f"  [{_d_str}{_suf} → {_r}] (invincible)"
+        engine.log.add(inv_msg, STONE_BLUE)
+        return
+
+    # Pre-attack announcement
+    engine.log.add(f"The {monster.name} {attack_verb}.", WORN_STONE)
+
     weapon = {
         "damage_dice":      monster_def.get("damage_dice",              "1d4"),
         "damage_bonus":     monster_def.get("damage_bonus",             0),
@@ -524,19 +629,71 @@ def _monster_attack_entity(monster, target, engine) -> None:
     )
 
     # Log messages — incoming damage (creature→player/entity): dusty_rose family
+    from config import DEBUG_MODE as _DEBUG_MODE
+    _dbg_appended = False
     for msg, mtype in zip(result.messages, result.message_types):
         if mtype == "deflect":
-            color = (99, 120, 140)       # slate_mid — dim
+            color = STONE_BLUE       # slate_mid — dim
         elif mtype == "impair":
-            color = (188, 89, 96)        # dusty_rose — player impaired
+            color = DUSTY_ROSE        # dusty_rose — player impaired
         else:                            # hit / death
-            color = (188, 89, 96)        # dusty_rose
+            color = DUSTY_ROSE        # dusty_rose
+        if _DEBUG_MODE and not _dbg_appended and result.debug_formula:
+            msg = msg + "  " + result.debug_formula
+            _dbg_appended = True
         engine.log.add(f"› {msg}", color)
+    if _DEBUG_MODE and not _dbg_appended and result.debug_formula:
+        engine.log.add(f"  {result.debug_formula}", OLD_GROWTH)
     if result.damage_number > 0:
-        engine.log.add(f"  {result.damage_number} damage.", (220, 120, 120))  # bright red
+        engine.log.add(f"  {result.damage_number} damage.", DUSTY_ROSE)  # bright red
+        if is_player and getattr(engine.display, "CALLOUT_DAMAGE_NUMBERS", True):
+            _num_y = target.y - 0.3 if result.is_crit else float(target.y)
+            engine.callouts.add(str(result.damage_number),
+                                target.x, _num_y, DUSTY_ROSE,
+                                font_size="damage")
+    elif result.damage_dealt == 0 and is_player and any(
+            mt == "deflect" for mt in result.message_types):
+        if getattr(engine.display, "CALLOUT_DAMAGE_NUMBERS", True):
+            engine.callouts.add("—", target.x, float(target.y),
+                                STONE_BLUE, font_size="creature")
+
+    # Critical hit — creature crits deal "CRITICAL" in blood_rose + stronger shake
+    if result.is_crit and result.damage_dealt > 0 and is_player:
+        if getattr(engine.display, "CALLOUT_DAMAGE_NUMBERS", True):
+            engine.callouts.add("CRITICAL", target.x, target.y - 0.8,
+                                BLOOD_STONE, lifetime=1.2,
+                                font_size="crit")
+        engine.trigger_screenshake(5)
 
     if result.damage_dealt > 0 and is_player:
         target.took_damage_this_turn = True
+
+    # Fire ON_DAMAGE_TAKEN hook when player is hit
+    if result.damage_dealt > 0 and is_player:
+        from engine.hooks import HookEvent
+        from engine.engine import _apply_effects
+        effects = engine.hooks.fire(HookEvent.ON_DAMAGE_TAKEN, {
+            "damage":       result.damage_dealt,
+            "raw_damage":   result.damage_raw,
+            "essence":      result.essence_applied,
+            "hit_location": result.location_id,
+            "attacker":     monster,
+            "player":       target,
+            "engine":       engine,
+        })
+        _apply_effects(effects, engine)
+
+    # Blood placement — player bleeds red when struck
+    if result.damage_dealt > 0 and is_player:
+        engine._place_blood_tile(target.x, target.y, "red")
+        from rendering.particles import BLOOD_COLORS
+        _bcolor = BLOOD_COLORS.get("red")
+        if _bcolor is not None:
+            engine._pending_blood.append({
+                "defender_tile": (target.x, target.y),
+                "attacker_tile": (monster.x, monster.y),
+                "color": _bcolor,
+            })
 
     # Plague crow sickness — 30% chance on hit
     if monster.tile == "plague_crow" and result.damage_dealt > 0 and is_player:
@@ -548,8 +705,50 @@ def _monster_attack_entity(monster, target, engine) -> None:
                 engine.log.add(
                     "The crow's touch carries something wrong. "
                     "Thy body knows it.",
-                    (99, 34, 64),
+                    DRIED_BLOOD,
                 )
 
     if result.defender_dead:
         target.is_alive = False
+        if is_player:
+            engine._death_killer = monster.name
+
+
+# ------------------------------------------------------------------ #
+#  Callout helpers
+# ------------------------------------------------------------------ #
+
+def _fire_creature_callout(actor, engine, prev_state, new_state) -> None:
+    """
+    Fire a creature sound callout when an AI state transition occurs.
+    Reads callout_sounds from the creature JSON via engine.data.
+    """
+    if not getattr(engine.display, "CALLOUT_CREATURE_SOUNDS", True):
+        return
+
+    creature_def   = engine.data.entities.get(actor.tile, {})
+    callout_sounds = creature_def.get("callout_sounds", {})
+    if not callout_sounds:
+        return
+
+    trigger = None
+    if prev_state == AIState.WANDERING and new_state == AIState.HUNTING:
+        trigger = "on_spot"
+    elif (prev_state not in (AIState.ATTACKING,)
+          and new_state == AIState.ATTACKING):
+        trigger = "on_attack"
+
+    if trigger is None:
+        return
+
+    entry = callout_sounds.get(trigger)
+    if not entry:
+        return
+
+    engine._pending_callouts.append({
+        "text":    entry.get("text", ""),
+        "world_x": actor.x,
+        "world_y": actor.y,
+        "color":   tuple(entry.get("color", [200, 180, 150])),
+        "lifetime": 2.0,
+    })

@@ -1,6 +1,7 @@
 import pygame
 import random
 from pathlib import Path
+from engine.palette import *
 
 class DrawingStep:
     def __init__(self, shape: str, color: tuple, points: list):
@@ -13,7 +14,7 @@ class ProceduralDesigner:
         self.active = False
         self.steps: list[DrawingStep] = []
         self.mirror_mode = True
-        self.current_color = (210, 180, 110) # Default Gold
+        self.current_color = OLD_GOLD # Default Gold
         self.tool = "polygon" # "rect", "circle", "line", "polygon"
         self.working_points = []
 
@@ -41,7 +42,7 @@ class ProceduralDesigner:
         func_name = f"_draw_{name.lower().replace(' ', '_')}"
         lines = [
             f"def {func_name}(surf: pygame.Surface, rng: random.Random) -> None:",
-            "    surf.fill((7, 12, 29))"
+            "    surf.fill(VOID_BLACK)"
         ]
         for s in self.steps:
             if s.shape == "polygon":

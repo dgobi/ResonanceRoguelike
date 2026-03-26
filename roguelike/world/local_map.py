@@ -41,8 +41,8 @@ class LocalMap:
         # Import inside the function to avoid circular imports
         from rendering.decor import resolve_functional_variant
         
-        # Resolve 'varied_x' to a specific type like 'mud' or 'dirt'
-        actual_terrain = resolve_functional_variant(terrain)
+        # Resolve 'varied_x' to a deterministic specific type using tile coords
+        actual_terrain = resolve_functional_variant(terrain, mx=x, my=y)
         
         # Store the actual resolved terrain in the map
         self.tiles[x, y] = make_tile(actual_terrain, walkable, transparent)

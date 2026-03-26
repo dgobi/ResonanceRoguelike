@@ -26,7 +26,7 @@ class SpriteSheet:
     def loaded(self) -> bool:
         return self._sheet is not None
 
-    def get_tile(self, col: int, row: int) -> pygame.Surface:
+    def get_tile(self, col: int, row: int) -> "pygame.Surface | None":
         key = (col, row)
         if key in self._cache:
             return self._cache[key]
@@ -37,6 +37,12 @@ class SpriteSheet:
         tile = pygame.Surface((self.tile_w, self.tile_h), pygame.SRCALPHA)
         tile.blit(self._sheet, (0, 0),
                 pygame.Rect(x, y, self.tile_w, self.tile_h))
+        # Detect completely transparent (blank) tiles — return None so callers
+        # trigger their ASCII fallback rather than drawing an invisible sprite.
+        br = tile.get_bounding_rect()
+        if br.width == 0 or br.height == 0:
+            self._cache[key] = None
+            return None
         self._cache[key] = tile
         return tile
 
@@ -123,8 +129,10 @@ class SpriteRegistry:
         tw  = mapping.get("tile_w", sheet.tile_w)
         th  = mapping.get("tile_h", sheet.tile_h)
 
-        # Get raw white-on-transparent tile
+        # Get raw white-on-transparent tile (None = blank/invisible tile)
         raw = sheet.get_tile(col, row)
+        if raw is None:
+            return None
 
         # Apply fg tint via multiply blend
         tinted = raw.copy()
@@ -227,6 +235,8 @@ class SpriteRegistry:
         th  = mapping.get("tile_h", sheet.tile_h)
 
         raw = sheet.get_tile(col, row)
+        if raw is None:
+            return None
 
         if zoom == 1:
             return raw

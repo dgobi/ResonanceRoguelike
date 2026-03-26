@@ -22,15 +22,16 @@ class DataLoader:
         self.items:      dict = self._load_dir("items")
         self.loot:       dict = self._load_dir("loot")
         self.recipes:    dict = self._load_dir("recipes")
-        self.structures: dict = self._load_dir("structures",
-                                               exclude={"tags.json"})
-        self.structure_tags: dict = self._load("structures/tags.json")
+        self.structures: dict = self._load_dir("buildings")
+        self.biomes:     dict = self._load_dir("biomes")
         self.entrances:   dict = self._load_dir("entrances")
         self.texts:       dict = self._load_dir("texts")
         self.perks:       dict = self._load_dir("perks")
         self.bodies:      dict = self._load_dir("bodies")
-        self.deep_tongue: dict = self._load_deep_tongue()
-        self.buildings:   dict = self._load_dir_nested("buildings")
+        self.deep_tongue:       dict = self._load_deep_tongue()
+        self.buildings:         dict = self._load_dir_nested("buildings")
+        self.resonance_spawns:  list = self._load_list("resonance_spawns.json")
+        self.weather_defs:      dict = self._load("weather.json")
 
     # ------------------------------------------------------------------ #
 
@@ -98,6 +99,15 @@ class DataLoader:
                 except Exception as e:
                     print(f"Warning: failed to load {f}: {e}")
         return result
+
+    def _load_list(self, relative_path: str) -> list:
+        """Load a JSON file that contains a top-level list."""
+        path = self.root / relative_path
+        if not path.exists():
+            return []
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        return data if isinstance(data, list) else []
 
     def _load_deep_tongue(self) -> dict:
         """Load deep_tongue.json and return a dict keyed by the 'deep' field."""

@@ -5,6 +5,7 @@ import pickle
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
+from engine.palette import *
 
 if TYPE_CHECKING:
     from engine.engine import Engine
@@ -207,7 +208,7 @@ class SaveManager:
         }
         _write_json(self.save_path / "meta.json", meta)
 
-        engine.log.add("Progress preserved.", (140, 180, 140))
+        engine.log.add("Progress preserved.", LIFE_GREEN)
 
     def load(self, engine: "Engine") -> bool:
         meta_path = self.save_path / "meta.json"
@@ -216,7 +217,7 @@ class SaveManager:
             if meta.get("save_version", 0) < 1:
                 engine.log.add(
                     "Save file is outdated and cannot be loaded.",
-                    (200, 80, 80)
+                    FRESH_WOUND
                 )
                 return False
         """
@@ -225,7 +226,7 @@ class SaveManager:
         """
         if not self.save_path.exists():
             engine.log.add(
-                "No save found.", (180, 100, 100)
+                "No save found.", BLOOD_STONE
             )
             return False
 
@@ -264,7 +265,7 @@ class SaveManager:
             engine._update_fov()
             engine.log.add(
                 "The world reassembles itself around you.",
-                (140, 180, 140)
+                LIFE_GREEN
             )
             return True
 
@@ -273,7 +274,7 @@ class SaveManager:
             import traceback
             traceback.print_exc()
             engine.log.add(
-                f"Load failed: {e}", (200, 80, 80)
+                f"Load failed: {e}", FRESH_WOUND
             )
             return False
 
@@ -305,16 +306,25 @@ def _serialize_world(world_map: "WorldMap") -> dict:
     chunks = {}
     for (wx, wy), chunk in world_map.chunks.items():
         chunks[f"{wx},{wy}"] = {
-            "region_type":   chunk.region_type.value,
-            "seed":          chunk.seed,
-            "explored":      chunk.explored,
-            "visited":       chunk.visited,
-            "is_locus":      chunk.is_locus,
-            "zones":         chunk.zones,
-            "name":          chunk.name,
-            "name_register": chunk.name_register,
-            "town_id":       chunk.town_id,
-            "town_role":     chunk.town_role,
+            "region_type":        chunk.region_type.value,
+            "seed":               chunk.seed,
+            "explored":           chunk.explored,
+            "visited":            chunk.visited,
+            "is_locus":           chunk.is_locus,
+            "zones":              chunk.zones,
+            "name":               chunk.name,
+            "name_register":      chunk.name_register,
+            "town_id":            chunk.town_id,
+            "town_role":          chunk.town_role,
+            "biome_id":           chunk.biome_id,
+            "elevation":          chunk.elevation,
+            "moisture":           chunk.moisture,
+            "resonance":          chunk.resonance,
+            "difficulty":         chunk.difficulty,
+            "distance_from_peak": chunk.distance_from_peak,
+            "is_river":           chunk.is_river,
+            "is_capital":         chunk.is_capital,
+            "river_connections":  chunk.river_connections,
             "edges": {
                 edge: [
                     {
@@ -346,10 +356,21 @@ def _serialize_world(world_map: "WorldMap") -> dict:
             ],
         }
     return {
-        "width":  world_map.width,
-        "height": world_map.height,
-        "chunks": chunks,
-        "myth":   world_map.myth.to_dict() if world_map.myth else None,
+        "width":          world_map.width,
+        "height":         world_map.height,
+        "seed":           world_map.seed,
+        "vukh_x":         world_map.vukh_x,
+        "vukh_y":         world_map.vukh_y,
+        "start_wx":       world_map.start_wx,
+        "start_wy":       world_map.start_wy,
+        "capital_chunks": list(world_map.capital_chunks),
+        "town_chunks":    list(world_map.town_chunks),
+        "road_tiles":     [[k[0], k[1], v] for k, v in world_map.road_tiles.items()],
+        "chunks":         chunks,
+        "myth":           world_map.myth.to_dict() if world_map.myth else None,
+        "town_groups":    {str(k): v for k, v in world_map.town_groups.items()},
+        "town_chunk_ids": [[k[0], k[1], v] for k, v in world_map.town_chunk_ids.items()],
+        "chunk_names":    [[k[0], k[1], v] for k, v in world_map.chunk_names.items()],
     }
 
 
@@ -365,18 +386,27 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
             # Treat as plains so the chunk is still accessible.
             region_type = RegionType.PLAINS
         chunk = Chunk(
-            wx            = wx,
-            wy            = wy,
-            region_type   = region_type,
-            seed          = cdata["seed"],
-            explored      = cdata["explored"],
-            visited       = cdata["visited"],
-            is_locus      = cdata.get("is_locus", False),
-            zones         = cdata.get("zones", []),
-            name          = cdata.get("name", ""),
-            name_register = cdata.get("name_register", "common"),
-            town_id       = cdata.get("town_id"),
-            town_role     = cdata.get("town_role"),
+            wx                  = wx,
+            wy                  = wy,
+            region_type         = region_type,
+            seed                = cdata["seed"],
+            explored            = cdata["explored"],
+            visited             = cdata["visited"],
+            is_locus            = cdata.get("is_locus",            False),
+            zones               = cdata.get("zones",               []),
+            name                = cdata.get("name",                ""),
+            name_register       = cdata.get("name_register",       "common"),
+            town_id             = cdata.get("town_id") if cdata.get("town_id") is not None else -1,
+            town_role           = cdata.get("town_role") or "",
+            biome_id            = cdata.get("biome_id",            "plains"),
+            elevation           = cdata.get("elevation",           0.5),
+            moisture            = cdata.get("moisture",            0.5),
+            resonance           = cdata.get("resonance",           0.1),
+            difficulty          = cdata.get("difficulty",          0.1),
+            distance_from_peak  = cdata.get("distance_from_peak",  999.0),
+            is_river            = cdata.get("is_river",            False),
+            is_capital          = cdata.get("is_capital",          False),
+            river_connections   = cdata.get("river_connections",   []),
         )
         # Restore town_data
         td_raw = cdata.get("town_data")
@@ -420,6 +450,21 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
             )
             chunk.submaps.append(sm)
         world_map.chunks[(wx, wy)] = chunk
+
+    world_map.seed           = data.get("seed",     0)
+    world_map.vukh_x         = data.get("vukh_x",   world_map.width  // 2)
+    world_map.vukh_y         = data.get("vukh_y",   world_map.height // 2)
+    world_map.start_wx       = data.get("start_wx", world_map.width  // 2)
+    world_map.start_wy       = data.get("start_wy", world_map.height // 2)
+    world_map.capital_chunks = set(tuple(c) for c in data.get("capital_chunks", []))
+    world_map.town_chunks    = set(tuple(c) for c in data.get("town_chunks",    []))
+    world_map.road_tiles     = {(r[0], r[1]): r[2] for r in data.get("road_tiles", [])}
+    world_map.town_groups    = {int(k): [tuple(coord) for coord in v]
+                                for k, v in data.get("town_groups", {}).items()}
+    world_map.town_chunk_ids = {(r[0], r[1]): r[2]
+                                for r in data.get("town_chunk_ids", [])}
+    world_map.chunk_names    = {(r[0], r[1]): r[2]
+                                for r in data.get("chunk_names", [])}
 
     from world.world_myth import WorldMyth
     myth_data = data.get("myth")
@@ -475,6 +520,7 @@ def _serialize_player(engine: "Engine") -> dict:
                     "turns_lit":    i.turns_lit,
                     "liquid":       i.liquid,
                     "liquid_volume": i.liquid_volume,
+                    "text_id":      getattr(i, "text_id", None),
                 }
                 for i in inv.items
                 if getattr(i, "item_id", "")
@@ -502,6 +548,19 @@ def _serialize_player(engine: "Engine") -> dict:
             slot: item.item_id if item else None
             for slot, item in p.equipment.slots.items()
         } if getattr(p, "equipment", None) else None,
+        "level": {
+            "level":               p.level.level,
+            "exp":                 p.level.exp,
+            "exp_to_next":         p.level.exp_to_next,
+            "perk_points":         p.level.perk_points,
+            "total_levels_gained": p.level.total_levels_gained,
+        } if getattr(p, "level", None) else None,
+        "resonance": {
+            "exposure":   engine.resonance_exposure,
+            "corruption": engine.corruption,
+            "thresholds": list(getattr(engine, "_corruption_thresholds", set())),
+        },
+        "weather": getattr(engine, "weather", None) and engine.weather.to_dict(),
     }
 
 
@@ -561,6 +620,9 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
             item.turns_lit     = idata.get("turns_lit",     0)
             item.liquid        = idata.get("liquid",        item.liquid)
             item.liquid_volume = idata.get("liquid_volume", item.liquid_volume)
+            text_id = idata.get("text_id")
+            if text_id:
+                item.text_id = text_id
             p.inventory.add(item)
 
     if data.get("light_source"):
@@ -594,6 +656,29 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
         perks.perk_state      = pd.get("perk_state", {})
         perks.affinity_scores = pd.get("affinity_scores", {})
         p.perks = perks
+
+    if data.get("level"):
+        from components.level import LevelComponent
+        ld = data["level"]
+        lc = LevelComponent()
+        lc.level               = ld.get("level", 1)
+        lc.exp                 = ld.get("exp", 0)
+        lc.exp_to_next         = ld.get("exp_to_next", 100)
+        lc.perk_points         = ld.get("perk_points", 0)
+        lc.total_levels_gained = ld.get("total_levels_gained", 0)
+        p.level = lc
+
+    # Resonance / corruption state
+    if data.get("resonance"):
+        r = data["resonance"]
+        engine.resonance_exposure      = r.get("exposure", 0.0)
+        engine.corruption              = r.get("corruption", 0.0)
+        engine._corruption_thresholds  = set(r.get("thresholds", []))
+
+    # Weather state
+    if data.get("weather") and hasattr(engine, "weather"):
+        from engine.weather import WeatherSystem
+        engine.weather = WeatherSystem.from_dict(data["weather"], engine.rng)
 
     # Restore equipped items after inventory is fully reconstructed
     _restore_equipment(p, data.get("equipment", {}), engine.data)

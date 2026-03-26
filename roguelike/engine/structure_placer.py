@@ -38,16 +38,16 @@ class StructurePlacer:
             print(f"Warning: structure '{structure_id}' not found.")
             return False
 
-        layout  = structure["layout"]
+        layers  = structure.get("layers") or structure.get("layout") or []
         legend  = structure["legend"]
-        rows    = len(layout)
-        cols    = max(len(row) for row in layout)
+        rows    = len(layers)
+        cols    = max(len(row) for row in layers)
 
         # Apply rotation if requested and structure allows it
         if rotate and structure.get("rotatable", False):
-            layout = self._rotate_layout(layout, rotate)
-            rows   = len(layout)
-            cols   = max(len(row) for row in layout)
+            layers = self._rotate_layout(layers, rotate)
+            rows   = len(layers)
+            cols   = max(len(row) for row in layers)
 
         # Bounds check
         if (origin_x + cols > local_map.width or
@@ -56,7 +56,7 @@ class StructurePlacer:
 
         terrain_data = self.data.terrain
 
-        for row_idx, row in enumerate(layout):
+        for row_idx, row in enumerate(layers):
             for col_idx, char in enumerate(row):
                 if char not in legend:
                     continue
@@ -65,7 +65,14 @@ class StructurePlacer:
                 ty = origin_y + row_idx
                 entry = legend[char]
 
-                terrain_key = entry.get("terrain", "floor")
+                # Legend values may be plain strings ("wall") or dicts ({"terrain": "wall"})
+                if entry is None:
+                    continue
+                if isinstance(entry, str):
+                    terrain_key = entry
+                    entry = {}
+                else:
+                    terrain_key = entry.get("terrain", "floor")
                 t = terrain_data.get(terrain_key, terrain_data["floor"])
                 local_map.set_tile(
                     tx, ty,

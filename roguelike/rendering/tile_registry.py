@@ -29,8 +29,19 @@ class TileRegistry:
         return self._data[tile_name]
 
     def char(self, tile_name: str) -> int:
-        """Return the integer codepoint of the ASCII character for this tile."""
-        return ord(self._data[tile_name]["ascii"])
+        """Return the integer codepoint of the ASCII character for this tile.
+        Handles both the rich format ("ascii": "<char>") and the compact
+        format ("char": <codepoint int>) used by newer tile entries."""
+        data = self._data.get(tile_name)
+        if data is None:
+            print(f"[tile_registry] unknown tile: {tile_name}")
+            return ord("?")
+        if "ascii" in data:
+            return ord(data["ascii"])
+        if "char" in data:
+            return int(data["char"])
+        print(f"[tile_registry] tile missing ascii/char: {tile_name}")
+        return ord("?")
 
     def fg(self, tile_name: str, dark: bool = False) -> tuple[int, int, int]:
         """Return foreground RGB. dark=True for out-of-FOV version."""

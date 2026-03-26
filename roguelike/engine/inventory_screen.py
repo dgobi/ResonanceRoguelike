@@ -1,8 +1,9 @@
 # engine/inventory_screen.py
 from __future__ import annotations
 import pygame
+from config import UI_PANEL_INSET, DEBUG_MODE
 from typing import TYPE_CHECKING
-from config import UI_PANEL_INSET
+from engine.palette import *
 
 if TYPE_CHECKING:
     from engine.engine import Engine
@@ -11,7 +12,106 @@ if TYPE_CHECKING:
 
 
 # ------------------------------------------------------------------ #
-#  Module-level helpers
+#  Palette constants (Punolite Plus)
+# ------------------------------------------------------------------ #
+_NEAR_WHITE   = FROST_WHITE
+_PALE_YELLOW  = BONE_PALE
+_OLD_GOLD     = OLD_GOLD
+_DUSTY_ROSE   = DUSTY_ROSE
+_BLOOD_MID    = DRIED_BLOOD
+_BLOOD_ROSE   = BLOOD_STONE
+_MIST_BLUE    = SLATE_MID
+_NIGHT_PURPLE = DEEP_PURPLE
+_SLATE_MID    = STONE_BLUE
+_SLATE_DARK   = SLATE_DARK
+
+
+# ------------------------------------------------------------------ #
+#  Health bearing — per palette spec
+# ------------------------------------------------------------------ #
+
+_BEARINGS: list[tuple[float, str, tuple]] = [
+    (0.99, "Unmarked",      _NEAR_WHITE),
+    (0.75, "Lightly Worn",  _PALE_YELLOW),
+    (0.50, "Worn",          _OLD_GOLD),
+    (0.30, "Heavily Worn",  _DUSTY_ROSE),
+    (0.15, "Damaged",       _BLOOD_MID),
+    (0.05, "Badly Damaged", _BLOOD_ROSE),
+    (0.00, "Undone",        FRESH_WOUND),
+]
+
+
+def _bearing(frac: float) -> tuple[str, tuple]:
+    for thresh, label, col in _BEARINGS:
+        if frac >= thresh:
+            return label, col
+    return "Undone", FRESH_WOUND
+
+
+# ------------------------------------------------------------------ #
+#  Equipment slot display order
+# ------------------------------------------------------------------ #
+
+_EQUIP_SLOT_DISPLAY: list[tuple[str, str]] = [
+    ("Head",      "armor_head"),
+    ("Torso",     "armor_torso"),
+    ("Arms",      "armor_arms"),
+    ("Legs",      "armor_legs"),
+    ("Main Hand", "weapon"),
+    ("Off Hand",  "offhand"),
+    ("Belt",      "belt_1"),
+    ("Belt",      "belt_2"),
+    ("Belt",      "belt_3"),
+    ("Light",     "light"),
+]
+
+
+# ------------------------------------------------------------------ #
+#  Item category helpers
+# ------------------------------------------------------------------ #
+
+_CATEGORIES = ["Weapons", "Armour", "Consumables", "Documents", "Misc"]
+
+_CAT_MAP: dict[str, str] = {
+    "weapon":     "Weapons",
+    "armor":      "Armour",
+    "consumable": "Consumables",
+    "tool":       "Consumables",
+    "document":   "Documents",
+    "text":       "Documents",
+}
+
+
+def _item_category(item: "Item", engine: "Engine") -> str:
+    item_id  = getattr(item, "item_id", "") or ""
+    item_def = engine.data.items.get(item_id, {}) if item_id else {}
+    raw = item_def.get("category", "")
+    if getattr(item, "on_use", "") == "read" or raw in ("document", "text"):
+        return "Documents"
+    return _CAT_MAP.get(raw, "Misc")
+
+
+def _group_items(items: list, engine: "Engine") -> dict[str, list]:
+    groups: dict[str, list] = {c: [] for c in _CATEGORIES}
+    for item in items:
+        groups[_item_category(item, engine)].append(item)
+    return groups
+
+
+def _flat_list(groups: dict[str, list]) -> list:
+    flat = []
+    for cat in _CATEGORIES:
+        items = groups[cat]
+        if not items:
+            continue
+        flat.append((None, True, cat))
+        for item in items:
+            flat.append((item, False, ""))
+    return flat
+
+
+# ------------------------------------------------------------------ #
+#  Helpers
 # ------------------------------------------------------------------ #
 
 def _render_stat(
@@ -19,11 +119,10 @@ def _render_stat(
     font: pygame.font.Font,
     label: str,
     value: str,
-    x: int,
-    y: int,
+    x: int, y: int,
     label_col: tuple,
     val_col: tuple,
-    label_w: int = 100,
+    label_w: int = 90,
 ) -> None:
     lbl = font.render(f"{label}:", True, label_col)
     val = font.render(str(value),  True, val_col)
@@ -31,49 +130,64 @@ def _render_stat(
     surf.blit(val, (x + label_w, y))
 
 
-def _draw_pips(
-    surf: pygame.Surface,
-    x: int, y: int,
-    filled: int, total: int,
-    col_filled: tuple, col_empty: tuple,
-) -> None:
-    r, gap = max(1, 4), 11
-    for i in range(total):
-        cx, cy = x + i * gap + r, y + r
-        if i < filled:
-            pygame.draw.circle(surf, col_filled, (cx, cy), r)
+def _wrap_text(font: pygame.font.Font, text: str, max_w: int) -> list[str]:
+    words = text.split()
+    lines: list[str] = []
+    line  = ""
+    for word in words:
+        test = line + (" " if line else "") + word
+        if font.size(test)[0] <= max_w or not line:
+            line = test
         else:
-            pygame.draw.circle(surf, col_empty,  (cx, cy), r)
-            pygame.draw.circle(surf, col_filled, (cx, cy), r, 1)
+            lines.append(line)
+            line = word
+    if line:
+        lines.append(line)
+    return lines
 
+
+def _has_floor_item(engine: "Engine", x: int, y: int) -> bool:
+    """Return True if any floor item entity is at (x, y)."""
+    return any(
+        getattr(e, "item_id", None) is not None
+        and e.x == x and e.y == y
+        for e in engine.entities
+        if e is not engine.player
+    )
+
+
+# ------------------------------------------------------------------ #
+#  Main class
+# ------------------------------------------------------------------ #
 
 class InventoryScreen:
     """
-    Inventory overlay. Press I to open.
-    Shows carried items with weight.
-    Use / Drop / Examine from here.
+    Three-panel inventory overlay.
+    LEFT (28%): Equipped / Body / Condition  MIDDLE (28%): item list
+    RIGHT (44%): item detail
     """
 
-    BG       = (12, 10, 18)
-    BORDER   = (100, 80, 140)
-    TITLE    = (200, 180, 255)
-    TEXT     = (180, 165, 145)
-    DIM      = (110, 100, 90)
-    SELECTED = (255, 220, 100)
-    STAT     = (140, 200, 140)
-    LABEL_C  = (68,  99, 116)
-    VALUE_C  = (227, 245, 241)
+    BG       = DEEP_NOTHING
+    BORDER   = VOID_PURPLE
+    TITLE    = SPIRIT_BLUE
+    TEXT     = WORN_STONE
+    DIM      = _SLATE_DARK
+    SELECTED = RESONANCE_GOLD
+    LABEL_C  = _SLATE_MID
+    VALUE_C  = _NEAR_WHITE
+    HDR_C    = _NEAR_WHITE      # section header colour
+    SEP_C    = _SLATE_DARK      # horizontal rules
 
     def __init__(self) -> None:
-        self.open:           bool         = False
-        self.selected:       int          = 0
-        self._examining:     "Item | None" = None
+        self.open:           bool = False
+        self.selected:       int  = 0
         self._font_title:    pygame.font.Font | None = None
         self._font_normal:   pygame.font.Font | None = None
         self._font_small:    pygame.font.Font | None = None
         self._font_large:    pygame.font.Font | None = None
         self._font_bold:     pygame.font.Font | None = None
-        self._row_height:    int          = 20
+        self._row_height:    int  = 20
+        self._flat:          list = []
 
     def init(self, display: "DisplayConfig") -> None:
         self._font_title  = getattr(display, "font_ui_bold",       None) or display.font_ui_normal
@@ -84,90 +198,112 @@ class InventoryScreen:
         self._row_height  = self._font_normal.get_linesize() + 4
 
     def toggle(self) -> None:
-        self.open      = not self.open
-        self.selected  = 0
-        self._examining = None
+        self.open     = not self.open
+        self.selected = 0
+        self._flat    = []
 
     # ------------------------------------------------------------------ #
     #  Input
     # ------------------------------------------------------------------ #
 
     def handle_key(self, key: int, engine: "Engine") -> bool:
-        """Returns True if key was consumed."""
         if not self.open:
             return False
 
-        # If examining an item, ESC or X closes just the examine popup
-        if self._examining is not None:
-            if key in (pygame.K_ESCAPE, pygame.K_x):
-                self._examining = None
+        if key in (pygame.K_ESCAPE, pygame.K_i):
+            self.open = False
+            ui = getattr(engine, "ui", None)
+            if ui:
+                ui.clear_context_prompt()
             return True
 
         inv = getattr(engine.player, "inventory", None)
         if not inv:
             return False
 
-        items = inv.items
+        selectables = [i for i, (item, is_hdr, _) in enumerate(self._flat)
+                       if not is_hdr]
 
-        if key in (pygame.K_ESCAPE, pygame.K_i):
-            self.open = False
+        if key in (pygame.K_UP, pygame.K_KP8):
+            self._move_selection(-1, selectables)
             return True
 
-        if key in (pygame.K_UP, pygame.K_k, pygame.K_KP8):
-            self.selected = max(0, self.selected - 1)
+        if key in (pygame.K_DOWN, pygame.K_KP2):
+            self._move_selection(1, selectables)
             return True
 
-        if key in (pygame.K_DOWN, pygame.K_j, pygame.K_KP2):
-            self.selected = min(len(items) - 1, self.selected + 1)
+        item = self._selected_item()
+        if item is None:
             return True
 
-        if key == pygame.K_x:
-            if 0 <= self.selected < len(items):
-                self._examining = items[self.selected]
-            return True
-
-        if key in (pygame.K_RETURN, pygame.K_KP_ENTER, pygame.K_u):
-            if 0 <= self.selected < len(items):
-                item     = items[self.selected]
-                consumed = engine.item_system.use(item, engine)
-                if consumed:
-                    inv.remove(item)
-                    self.selected = min(
-                        self.selected,
-                        max(0, len(inv.items) - 1)
-                    )
-                engine._advance_turn()
+        if key in (pygame.K_RETURN, pygame.K_KP_ENTER, pygame.K_e):
+            consumed = engine.item_system.use(item, engine)
+            if consumed:
+                inv.remove(item)
+                self._flat = []
+                self.selected = max(0, self.selected - 1)
+            engine._advance_turn()
             return True
 
         if key == pygame.K_d:
-            if 0 <= self.selected < len(items):
-                item = items[self.selected]
-                inv.remove(item)
-                item.x = engine.player.x
-                item.y = engine.player.y
-                engine.entities.append(item)
-                engine.log.add(
-                    f"You drop the {item.name}.",
-                    (160, 150, 130),
-                )
-                self.selected = min(
-                    self.selected,
-                    max(0, len(inv.items) - 1)
-                )
-                engine._advance_turn()
+            self._drop_item(item, inv, engine)
             return True
 
         return True
 
+    def _drop_item(self, item: "Item", inv, engine: "Engine") -> None:
+        px, py = engine.player.x, engine.player.y
+        drop_x, drop_y = px, py
+
+        if _has_floor_item(engine, px, py):
+            found = False
+            for dx in (-1, 0, 1):
+                for dy in (-1, 0, 1):
+                    if dx == 0 and dy == 0:
+                        continue
+                    tx, ty = px + dx, py + dy
+                    if (engine.local_map.in_bounds(tx, ty)
+                            and engine.local_map.walkable[tx, ty]
+                            and not _has_floor_item(engine, tx, ty)):
+                        drop_x, drop_y = tx, ty
+                        found = True
+                        break
+                if found:
+                    break
+            else:
+                engine.log.add("No room to drop.", _SLATE_MID)
+                return
+
+        inv.remove(item)
+        item.x = drop_x
+        item.y = drop_y
+        engine.entities.append(item)
+        self._flat = []
+        self.selected = max(0, self.selected - 1)
+        engine.log.add("Dropped.", _SLATE_MID)
+        engine._advance_turn()
+
+    def _move_selection(self, delta: int, selectables: list[int]) -> None:
+        if not selectables:
+            return
+        if self.selected not in selectables:
+            self.selected = selectables[0]
+            return
+        idx = selectables.index(self.selected)
+        idx = max(0, min(len(selectables) - 1, idx + delta))
+        self.selected = selectables[idx]
+
+    def _selected_item(self) -> "Item | None":
+        if not self._flat or self.selected >= len(self._flat):
+            return None
+        item, is_hdr, _ = self._flat[self.selected]
+        return None if is_hdr else item
+
     # ------------------------------------------------------------------ #
-    #  Rendering
+    #  Rendering — outer
     # ------------------------------------------------------------------ #
 
-    def render(
-        self,
-        surface: pygame.Surface,
-        engine:  "Engine",
-    ) -> None:
+    def render(self, surface: pygame.Surface, engine: "Engine") -> None:
         if not self.open or not self._font_normal:
             return
         try:
@@ -177,286 +313,437 @@ class InventoryScreen:
             traceback.print_exc()
             self.open = False
 
-    def _render_inner(
-        self,
-        surface: pygame.Surface,
-        engine:  "Engine",
-    ) -> None:
-        inv = getattr(engine.player, "inventory", None)
-        if not inv:
-            return
+    def _render_inner(self, surface: pygame.Surface, engine: "Engine") -> None:
+        # Set context strip hint
+        ui = getattr(engine, "ui", None)
+        if ui:
+            ui.set_context_prompt(
+                "\u2191\u2193 navigate   E use/equip   D drop   I/ESC close",
+                _SLATE_MID,
+            )
 
-        sw = surface.get_width()
-        sh = surface.get_height()
-        pw = min(500, sw - 80)
-        ph = min(400, sh - 80)
+        sw, sh = surface.get_width(), surface.get_height()
+        pw = min(920, sw - 40)
+        ph = min(560, sh - 40)
         px = (sw - pw) // 2
         py = (sh - ph) // 2
 
         popup = pygame.Surface((pw, ph), pygame.SRCALPHA)
         engine.ui_registry.draw_panel(
             popup, pygame.Rect(0, 0, pw, ph), "weathered_temple",
-            tint_color=self.BORDER, fill_color=self.BG, fill_alpha=245,
+            tint_color=self.BORDER, fill_color=self.BG, fill_alpha=248,
         )
 
-        y = UI_PANEL_INSET
+        PAD = UI_PANEL_INSET
+        lw  = int(pw * 0.28)   # left panel   28%
+        mw  = int(pw * 0.28)   # middle panel 28%
+        rw  = pw - lw - mw     # right panel  44%
 
-        # Title
-        title = self._font_title.render("INVENTORY", True, self.TITLE)
-        popup.blit(title, (UI_PANEL_INSET, y))
+        lx = 0
+        mx = lw
+        rx = lw + mw
 
-        # Weight
-        weight_str = f"{inv.current_weight:.1f} / {inv.capacity:.1f} kg"
-        ws = self._font_small.render(weight_str, True, self.DIM)
-        popup.blit(ws, (pw - ws.get_width() - UI_PANEL_INSET, y + 2))
-        y += 22
+        pygame.draw.line(popup, self.BORDER, (mx, PAD), (mx, ph - PAD), 1)
+        pygame.draw.line(popup, self.BORDER, (rx, PAD), (rx, ph - PAD), 1)
 
-        pygame.draw.line(popup, self.BORDER,
-                         (UI_PANEL_INSET, y), (pw - UI_PANEL_INSET, y), 1)
-        y += 8
-
-        if not inv.items:
-            empty = self._font_normal.render(
-                "You carry nothing.", True, self.DIM
-            )
-            popup.blit(empty, (UI_PANEL_INSET, y))
-        else:
-            for i, item in enumerate(inv.items):
-                try:
-                    self._render_item_row(popup, item, engine, i, y, pw)
-                except Exception as e:
-                    print(f"[INV] Failed to render item "
-                          f"{getattr(item, 'item_id', '?')}: {e}")
-                y += self._row_height
-                if y > ph - self._row_height * 3:
-                    break
-
-        # Footer
-        footer = self._font_small.render(
-            "^ v select   Enter/U use   X examine   D drop   ESC/I close",
-            True, self.DIM
-        )
-        footer_y = ph - UI_PANEL_INSET - footer.get_height()
-        pygame.draw.line(popup, self.BORDER,
-                         (UI_PANEL_INSET, footer_y - 6),
-                         (pw - UI_PANEL_INSET, footer_y - 6), 1)
-        popup.blit(footer, (UI_PANEL_INSET, footer_y))
+        self._draw_left_panel(  popup, engine, lx, 0, lw, ph, PAD)
+        self._draw_carried_panel(popup, engine, mx, 0, mw, ph, PAD)
+        self._draw_detail_panel(popup, engine, rx, 0, rw, ph, PAD)
 
         surface.blit(popup, (px, py))
 
-        # Examine popup drawn on top if active
-        if self._examining is not None:
-            self._render_item_examine(surface, engine)
+    # ------------------------------------------------------------------ #
+    #  Left panel — EQUIPPED / BODY / CONDITION + EXP bar
+    # ------------------------------------------------------------------ #
 
-    def _render_item_row(
-        self,
-        popup: pygame.Surface,
-        item:  "Item",
-        engine: "Engine",
-        idx:   int,
-        y:     int,
-        pw:    int,
+    def _draw_left_panel(
+        self, surf: pygame.Surface, engine: "Engine",
+        ox: int, oy: int, w: int, h: int, pad: int,
     ) -> None:
-        is_sel  = (idx == self.selected)
-        equip   = getattr(engine.player, "equipment", None)
-        equipped = equip.is_equipped(item) if equip else False
+        x       = ox + pad
+        lh      = self._font_small.get_linesize() + 2
+        col_mid = x + (w - pad * 2) // 2   # second-column x within panel
 
-        name_color = (226, 181, 112) if equipped else self.TEXT
-        color      = self.SELECTED if is_sel else name_color
-        bg_col     = (40, 30, 60) if is_sel else None
+        player  = engine.player
+        fighter = getattr(player, "fighter", None)
+        equip   = getattr(player, "equipment", None)
+        show_hp = getattr(player, "true_sight", False) or DEBUG_MODE
 
-        if bg_col:
-            pygame.draw.rect(
-                popup, bg_col,
-                (UI_PANEL_INSET - 4, y - 2,
-                 pw - UI_PANEL_INSET * 2 + 8, self._row_height)
+        # ── Reserve bottom area for EXP section ──────────────────────
+        # From bottom: pad + 3px bar + 2px gap + lh (text) + 4px gap + 1px sep + 5px gap
+        exp_reserved = pad + 3 + 2 + lh + 4 + 1 + 5
+        content_bottom = oy + h - exp_reserved
+
+        y = oy + pad
+
+        # ── Section 1: EQUIPPED ───────────────────────────────────────
+        hdr = self._font_normal.render("EQUIPPED", True, self.HDR_C)
+        surf.blit(hdr, (x, y))
+        y += hdr.get_height() + 3
+
+        for disp_name, slot_id in _EQUIP_SLOT_DISPLAY:
+            if y >= content_bottom - lh:
+                break
+            item = equip.slots.get(slot_id) if equip else None
+
+            slot_s = self._font_small.render(disp_name, True, _SLATE_MID)
+            surf.blit(slot_s, (x, y))
+
+            if item:
+                item_s = self._font_small.render(item.name, True, _NEAR_WHITE)
+            else:
+                item_s = self._font_small.render("\u2014", True, _SLATE_DARK)
+            surf.blit(item_s, (col_mid, y))
+            y += lh
+
+        # ── Divider ───────────────────────────────────────────────────
+        if y < content_bottom - 4:
+            y += 3
+            pygame.draw.line(surf, self.SEP_C, (ox + pad, y), (ox + w - pad, y), 1)
+            y += 5
+
+        # ── Section 2: BODY ───────────────────────────────────────────
+        if y < content_bottom - lh:
+            hdr2 = self._font_normal.render("BODY", True, self.HDR_C)
+            surf.blit(hdr2, (x, y))
+            y += hdr2.get_height() + 3
+
+        if fighter and fighter.location_hp:
+            for loc_id, cur_hp in fighter.location_hp.items():
+                if y >= content_bottom - lh:
+                    break
+                max_hp = fighter.location_max.get(loc_id, max(1, cur_hp))
+                frac   = cur_hp / max(1, max_hp)
+                label, col = _bearing(frac)
+                disp_name  = loc_id.replace("_", " ").title()
+
+                nm = self._font_small.render(disp_name, True, _SLATE_MID)
+                surf.blit(nm, (x, y))
+
+                brng = self._font_small.render(label, True, col)
+                surf.blit(brng, (col_mid, y))
+
+                if show_hp:
+                    hp_s = self._font_small.render(
+                        f"  {cur_hp}/{max_hp}", True, _SLATE_MID
+                    )
+                    surf.blit(hp_s, (col_mid + brng.get_width(), y))
+
+                y += lh
+        else:
+            if y < content_bottom:
+                ns = self._font_small.render("No body data.", True, _SLATE_DARK)
+                surf.blit(ns, (x, y))
+                y += lh
+
+        # ── Divider ───────────────────────────────────────────────────
+        if y < content_bottom - 4:
+            y += 3
+            pygame.draw.line(surf, self.SEP_C, (ox + pad, y), (ox + w - pad, y), 1)
+            y += 5
+
+        # ── Section 3: CONDITION ──────────────────────────────────────
+        if y < content_bottom - lh:
+            hdr3 = self._font_normal.render("CONDITION", True, self.HDR_C)
+            surf.blit(hdr3, (x, y))
+            y += hdr3.get_height() + 3
+
+        conditions: list[tuple[str, tuple]] = []
+
+        needs = getattr(player, "needs", None)
+        if needs:
+            if needs.hunger > 0.7:
+                conditions.append(("Hunger.", _SLATE_MID))
+            if needs.thirst > 0.7:
+                conditions.append(("Thirst.", _SLATE_MID))
+
+        chilled = getattr(player, "chilled_turns", 0)
+        if chilled > 0:
+            conditions.append((f"Chilled. ({chilled})", _MIST_BLUE))
+
+        sickness = getattr(player, "_sickness_turns", 0)
+        if sickness > 0:
+            conditions.append((f"Sickened. ({sickness})", _DUSTY_ROSE))
+
+        corrupt = getattr(player, "corruption", None)
+        if corrupt and getattr(corrupt, "value", 0) > 0.2:
+            conditions.append(("The change moves in thee.", _NIGHT_PURPLE))
+
+        if conditions:
+            for msg, col in conditions:
+                if y >= content_bottom:
+                    break
+                cs = self._font_small.render(msg, True, col)
+                surf.blit(cs, (x, y))
+                y += lh
+        else:
+            if y < content_bottom:
+                cs = self._font_small.render("Unmarked.", True, _SLATE_DARK)
+                surf.blit(cs, (x, y))
+
+        # ── Level / EXP bar at bottom ─────────────────────────────────
+        level_comp = getattr(player, "level", None)
+        if level_comp:
+            sep_y    = oy + h - exp_reserved + 5
+            bar_y    = oy + h - pad - 3
+            text_y   = bar_y - lh - 2
+
+            pygame.draw.line(surf, self.SEP_C,
+                             (ox + pad, sep_y), (ox + w - pad, sep_y), 1)
+
+            exp_label = f"Level {level_comp.level}   EXP  {level_comp.exp} / {level_comp.exp_to_next}"
+            exp_s = self._font_small.render(exp_label, True, _SLATE_MID)
+            surf.blit(exp_s, (x, text_y))
+
+            if level_comp.perk_points > 0:
+                pp_s = self._font_small.render(
+                    f"  · {level_comp.perk_points}pt", True, _OLD_GOLD
+                )
+                surf.blit(pp_s, (x + exp_s.get_width(), text_y))
+
+            bar_w  = w - pad * 2
+            frac   = min(1.0, level_comp.exp / max(1, level_comp.exp_to_next))
+            filled = max(0, int(frac * bar_w))
+            pygame.draw.rect(surf, MIDNIGHT_DEEP,  (x, bar_y, bar_w, 3))
+            pygame.draw.rect(surf, _OLD_GOLD,     (x, bar_y, filled, 3))
+
+    # ------------------------------------------------------------------ #
+    #  Middle panel — Carried items
+    # ------------------------------------------------------------------ #
+
+    def _draw_carried_panel(
+        self, surf: pygame.Surface, engine: "Engine",
+        ox: int, oy: int, w: int, h: int, pad: int,
+    ) -> None:
+        x = ox + pad
+        y = oy + pad
+
+        inv = getattr(engine.player, "inventory", None)
+
+        title = self._font_title.render("CARRIED", True, self.TITLE)
+        surf.blit(title, (x, y))
+
+        if inv:
+            wt_s = self._font_small.render(
+                f"{inv.current_weight:.1f}/{inv.capacity:.1f}kg", True, self.DIM
             )
+            surf.blit(wt_s, (ox + w - wt_s.get_width() - pad, y + 2))
+        y += title.get_height() + 4
+        pygame.draw.line(surf, self.BORDER, (ox + pad, y), (ox + w - pad, y), 1)
+        y += 6
 
-        # Tile glyph
-        tile = getattr(item, "tile", "")
-        if tile and tile in engine.registry._data:
-            ch = chr(engine.registry.char(tile))
-            fg = engine.registry.fg(tile)
-            g  = self._font_normal.render(ch, True, fg)
-            popup.blit(g, (UI_PANEL_INSET, y))
-
-        # Name + count
-        prefix   = "[E] " if equipped else "    "
-        name_str = prefix + getattr(item, "name", "?")
-        if getattr(item, "stackable", False) and getattr(item, "count", 1) > 1:
-            name_str += f" x{item.count}"
-        n = self._font_normal.render(name_str, True, color)
-        popup.blit(n, (UI_PANEL_INSET + 20, y))
-
-        # Weight
-        w_str = f"{getattr(item, 'weight', 0.0):.1f}kg"
-        ws2   = self._font_small.render(w_str, True, self.DIM)
-        popup.blit(ws2, (pw - ws2.get_width() - UI_PANEL_INSET, y + 2))
-
-    def _render_item_examine(
-        self,
-        surface: pygame.Surface,
-        engine:  "Engine",
-    ) -> None:
-        item = self._examining
-        if not item or not self._font_normal:
+        if not inv or not inv.items:
+            none_s = self._font_normal.render("Nothing has taken root yet.", True, self.DIM)
+            surf.blit(none_s, (x, y))
             return
 
-        sw = surface.get_width()
-        sh = surface.get_height()
-        pw = min(520, sw - 60)
-        ph = min(360, sh - 60)
-        px = (sw - pw) // 2
-        py = (sh - ph) // 2
+        equip  = getattr(engine.player, "equipment", None)
+        groups = _group_items(inv.items, engine)
+        flat   = _flat_list(groups)
 
-        popup = pygame.Surface((pw, ph), pygame.SRCALPHA)
-        engine.ui_registry.draw_panel(
-            popup, pygame.Rect(0, 0, pw, ph), "weathered_temple",
-            tint_color=self.BORDER, fill_color=self.BG, fill_alpha=250,
-        )
+        if not self._flat:
+            self._flat = flat
+            selectables = [i for i, (_, is_hdr, _) in enumerate(flat) if not is_hdr]
+            if selectables and self.selected not in selectables:
+                self.selected = selectables[0]
+        else:
+            flat = self._flat
 
-        y = UI_PANEL_INSET
+        lh    = self._row_height
+        max_y = oy + h - pad - lh
 
-        # Title — bold large
-        title_font = self._font_bold or self._font_large
-        title = title_font.render(
-            getattr(item, "name", "Unknown"), True, self.TITLE
-        )
-        popup.blit(title, (UI_PANEL_INSET, y))
-        y += title.get_height() + 6
+        clip     = pygame.Rect(ox, oy + pad, w, h - pad * 2)
+        old_clip = surf.get_clip()
+        surf.set_clip(clip)
 
-        pygame.draw.line(popup, self.BORDER,
-                         (UI_PANEL_INSET, y), (pw - UI_PANEL_INSET, y), 1)
-        y += 8
+        selectables = [i for i, (_, hdr, _) in enumerate(flat) if not hdr]
+        if selectables and self.selected in selectables:
+            sel_rank     = selectables.index(self.selected)
+            vis_rows     = max(1, (max_y - y) // lh)
+            scroll_start = max(0, sel_rank - vis_rows + 1)
+        else:
+            scroll_start = 0
 
-        # Description — word-wrapped
-        desc  = getattr(item, "description", "") or "No description available."
-        words = desc.split()
-        lines = []
-        line  = ""
-        max_w = pw - UI_PANEL_INSET * 2 - 14
-
-        for word in words:
-            test = line + (" " if line else "") + word
-            if self._font_normal.size(test)[0] <= max_w or not line:
-                line = test
-            else:
-                lines.append(line)
-                line = word
-        if line:
-            lines.append(line)
-
-        for ln in lines:
-            t = self._font_normal.render(ln, True, self.TEXT)
-            popup.blit(t, (UI_PANEL_INSET + 14, y))
-            y += self._font_normal.get_linesize()
-            if y > ph - 130:
+        row = 0
+        for idx, (item, is_hdr, label) in enumerate(flat):
+            if y >= max_y:
                 break
+            if is_hdr:
+                if row < scroll_start:
+                    row += 1; y += lh; continue
+                hdr_s = self._font_small.render(label.upper(), True, VOID_PURPLE)
+                surf.blit(hdr_s, (x, y))
+                y += lh
+                continue
+            if row < scroll_start:
+                row += 1; y += lh; continue
+            row += 1
 
+            is_sel   = (idx == self.selected)
+            equipped = equip.is_equipped(item) if equip else False
+            name_col = _OLD_GOLD if equipped else self.TEXT
+            row_col  = self.SELECTED if is_sel else name_col
+
+            if is_sel:
+                pygame.draw.rect(surf, MIDNIGHT_DEEP, (ox + 2, y - 2, w - 4, lh))
+
+            tile        = getattr(item, "tile", "")
+            sprite_reg  = getattr(engine, "sprite_registry", None)
+            render_mode = getattr(getattr(engine, "display", None), "render_mode", "ascii")
+            icon_drawn  = False
+            if tile and render_mode == "sprite" and sprite_reg:
+                fg   = engine.registry.fg(tile) if tile in engine.registry._data else TRUE_WHITE
+                icon = sprite_reg.get_tinted(tile, fg, zoom=2)
+                if icon:
+                    surf.blit(icon, (x, y))
+                    icon_drawn = True
+            if not icon_drawn and tile and tile in engine.registry._data:
+                ch = chr(engine.registry.char(tile))
+                fg = engine.registry.fg(tile)
+                g  = self._font_normal.render(ch, True, fg)
+                surf.blit(g, (x, y))
+
+            prefix   = "[E] " if equipped else "    "
+            name_str = prefix + getattr(item, "name", "?")
+            if getattr(item, "stackable", False) and getattr(item, "count", 1) > 1:
+                name_str += f" x{item.count}"
+            ns = self._font_normal.render(name_str, True, row_col)
+            surf.blit(ns, (x + 20, y))
+
+            wt_s2 = self._font_small.render(
+                f"{getattr(item, 'weight', 0.0):.1f}kg", True, self.DIM
+            )
+            surf.blit(wt_s2, (ox + w - wt_s2.get_width() - pad, y + 2))
+            y += lh
+
+        surf.set_clip(old_clip)
+
+    # ------------------------------------------------------------------ #
+    #  Right panel — Detail
+    # ------------------------------------------------------------------ #
+
+    def _draw_detail_panel(
+        self, surf: pygame.Surface, engine: "Engine",
+        ox: int, oy: int, w: int, h: int, pad: int,
+    ) -> None:
+        x = ox + pad
+        y = oy + pad
+
+        title = self._font_title.render("DETAIL", True, self.TITLE)
+        surf.blit(title, (x, y))
+        y += title.get_height() + 4
+        pygame.draw.line(surf, self.BORDER, (ox + pad, y), (ox + w - pad, y), 1)
         y += 6
-        pygame.draw.line(popup, (40, 50, 65),
-                         (UI_PANEL_INSET, y), (pw - UI_PANEL_INSET, y), 1)
-        y += 8
 
-        # Item stats block
+        item = self._selected_item()
+        if item is None:
+            none_s = self._font_small.render("Select an item.", True, self.DIM)
+            surf.blit(none_s, (x, y))
+            return
+
+        lh       = self._font_small.get_linesize() + 2
         item_id  = getattr(item, "item_id", "") or ""
         item_def = engine.data.items.get(item_id, {}) if item_id else {}
-        category = item_def.get("category", "")
-        slot     = item_def.get("slot", "")
-        lh       = self._font_small.get_linesize() + 2
-        x        = UI_PANEL_INSET
+        equip    = getattr(engine.player, "equipment", None)
+        max_w    = w - pad * 2
 
-        if category == "weapon":
-            dice    = item_def.get("damage_dice", "\u2014")
-            bonus   = item_def.get("damage_bonus", 0)
-            dmg_str = f"{dice}+{bonus}" if bonus else dice
-            _render_stat(popup, self._font_small, "Damage", dmg_str,
-                         x, y, self.LABEL_C, self.VALUE_C)
+        # Name
+        nm = self._font_bold.render(getattr(item, "name", "?"), True, self.TITLE)
+        if nm.get_width() > max_w:
+            nm = self._font_normal.render(getattr(item, "name", "?"), True, self.TITLE)
+        surf.blit(nm, (x, y))
+        y += nm.get_height() + 4
+
+        # Category + slot
+        cat  = item_def.get("category", "")
+        slot = item_def.get("slot", "")
+        sub  = cat.title()
+        if slot:
+            sub += f" \u00b7 {slot.replace('_', ' ').title()}"
+        if sub:
+            sub_s = self._font_small.render(sub, True, _SLATE_MID)
+            surf.blit(sub_s, (x, y))
             y += lh
 
-            slot_disp = slot.replace("_", " ").title()
-            _render_stat(popup, self._font_small, "Slot", slot_disp,
-                         x, y, self.LABEL_C, self.VALUE_C)
+        if equip and equip.is_equipped(item):
+            eq_s = self._font_small.render("[Equipped]", True, _OLD_GOLD)
+            surf.blit(eq_s, (x, y))
             y += lh
 
-        elif category == "armor":
-            slot_disp = slot.replace("_", " ").replace("armor ", "").title()
-            _render_stat(popup, self._font_small, "Protects", slot_disp,
-                         x, y, self.LABEL_C, self.VALUE_C)
+        y += 4
+        pygame.draw.line(surf, SLATE_DARK, (ox + pad, y), (ox + w - pad, y), 1)
+        y += 6
+
+        # Description
+        desc = getattr(item, "description", "") or item_def.get("description", "")
+        if desc:
+            for ln in _wrap_text(self._font_small, desc, max_w - 8):
+                if y > oy + h - pad * 3:
+                    break
+                ls = self._font_small.render(ln, True, self.TEXT)
+                surf.blit(ls, (x, y))
+                y += lh
+            y += 4
+
+        pygame.draw.line(surf, SLATE_DARK, (ox + pad, y), (ox + w - pad, y), 1)
+        y += 6
+
+        # Stats block
+        if cat == "weapon":
+            dice  = item_def.get("damage_dice", "\u2014")
+            bonus = item_def.get("damage_bonus", 0)
+            dmg   = f"{dice}+{bonus}" if bonus else str(dice)
+            _render_stat(surf, self._font_small, "Damage", dmg,
+                         x, y, _SLATE_MID, self.VALUE_C)
             y += lh
 
+        elif cat == "armor":
             for layer in item_def.get("armor_layers", []):
-                av   = layer.get("armor_value", 0)
-                cov  = layer.get("coverage", 1.0)
-                mat  = layer.get("material", "").title()
-                name = layer.get("name", "layer")
-                # Line 1: layer name + AV + material
-                _render_stat(popup, self._font_small,
-                             name, f"AV {av}  {mat}",
-                             x, y, self.LABEL_C, self.VALUE_C)
+                av  = layer.get("armor_value", 0)
+                mat = layer.get("material", "").title()
+                nm2 = layer.get("name", "layer")
+                _render_stat(surf, self._font_small,
+                             nm2, f"AV {av}  {mat}",
+                             x, y, _SLATE_MID, self.VALUE_C)
                 y += lh
-                # Line 2: coverage bar indented under value column
-                bar_x    = x + 100
-                bar_w    = max(1, 80)
-                bar_h    = 5
-                filled   = max(0, min(int(cov * bar_w), bar_w))
-                cov_pct  = int(cov * 100)
-                pygame.draw.rect(popup, (30, 40, 50),    (bar_x, y, bar_w, bar_h))
-                pygame.draw.rect(popup, (129, 175, 181), (bar_x, y, filled, bar_h))
-                cov_s = self._font_small.render(
-                    f"{cov_pct}% coverage", True, (68, 99, 116)
-                )
-                popup.blit(cov_s, (bar_x + bar_w + 8, y - 1))
-                y += bar_h + 6
+                cov        = layer.get("coverage", 1.0)
+                cov_label  = f"{int(cov * 100)}%"
+                label_w    = self._font_small.size("100%")[0]  # worst-case width
+                bar_x      = x + 6
+                panel_right = ox + w - pad
+                bar_w      = max(1, panel_right - bar_x - label_w - 6)
+                filled     = max(0, min(int(cov * bar_w), bar_w))
+                pygame.draw.rect(surf, MIDNIGHT_DEEP,   (bar_x, y, bar_w, 4))
+                pygame.draw.rect(surf, _MIST_BLUE,     (bar_x, y, filled, 4))
+                cov_s = self._font_small.render(cov_label, True, _SLATE_MID)
+                surf.blit(cov_s, (bar_x + bar_w + 6, y - 1))
+                y += 8
 
-        elif category in ("tool", "consumable"):
-            on_use = item_def.get("on_use", "")
-            if on_use and on_use not in ("equip_toggle",):
-                _render_stat(popup, self._font_small,
-                             "Use", on_use.replace("_", " ").title(),
-                             x, y, self.LABEL_C, self.VALUE_C)
+        # Essence — supports both "essences" list and single "essence"
+        essences_list = item_def.get("essences", [])
+        if essences_list:
+            for idx, ess_entry in enumerate(essences_list):
+                ename   = ess_entry.get("name", "")
+                estr    = float(ess_entry.get("strength", 0.0))
+                pips    = min(5, round(estr * 5))
+                ess_str = ename + "  " + "\u2022" * pips + "\u00b7" * max(0, 5 - pips)
+                label   = "Essences" if idx == 0 else ""
+                _render_stat(surf, self._font_small, label, ess_str,
+                             x, y, _SLATE_MID, self.VALUE_C)
                 y += lh
-
-        # Belt / light slot label
-        if slot.startswith("belt") or slot == "light":
-            slot_disp = "Belt" if slot.startswith("belt") else "Light"
-            _render_stat(popup, self._font_small, "Slot", slot_disp,
-                         x, y, self.LABEL_C, self.VALUE_C)
-            y += lh
-
-        # Essence — every item has one
-        essence  = item_def.get("essence") or ""
-        strength = float(item_def.get("essence_strength", 0.0))
-        pips     = round(strength * 5)
-        lbl_s    = self._font_small.render("Essence:", True, self.LABEL_C)
-        popup.blit(lbl_s, (x, y))
-        ess_s = self._font_small.render(essence or "\u2014", True, self.VALUE_C)
-        popup.blit(ess_s, (x + 100, y))
-        if pips > 0:
-            _draw_pips(popup, x + 100 + ess_s.get_width() + 10, y + 2,
-                       pips, 5, (129, 175, 181), (30, 35, 50))
-        y += lh
+        else:
+            essence  = item_def.get("essence") or ""
+            strength = float(item_def.get("essence_strength", 0.0))
+            if essence:
+                ess_str = essence
+                if strength > 0:
+                    pips    = round(strength * 5)
+                    ess_str += "  " + "\u2022" * pips + "\u00b7" * max(0, 5 - pips)
+                _render_stat(surf, self._font_small, "Essence", ess_str,
+                             x, y, _SLATE_MID, self.VALUE_C)
+                y += lh
 
         # Weight
-        _render_stat(popup, self._font_small,
-                     "Weight", f"{item_def.get('weight', getattr(item, 'weight', 0)):.1f} kg",
-                     x, y, self.LABEL_C, self.VALUE_C)
-        y += lh
-
-        # Equipped indicator
-        equip = getattr(engine.player, "equipment", None)
-        if equip and equip.is_equipped(item):
-            eq_s = self._font_small.render("[Equipped]", True, (226, 181, 112))
-            popup.blit(eq_s, (x, y))
-            y += lh
-
-        # Footer
-        pygame.draw.line(popup, (40, 50, 65),
-                         (UI_PANEL_INSET, ph - 22),
-                         (pw - UI_PANEL_INSET, ph - 22), 1)
-        footer = self._font_small.render(
-            "ESC / X to close", True, self.DIM
-        )
-        popup.blit(footer, (UI_PANEL_INSET, ph - 16))
-
-        surface.blit(popup, (px, py))
+        wt = item_def.get("weight", getattr(item, "weight", 0))
+        _render_stat(surf, self._font_small, "Weight", f"{wt:.1f} kg",
+                     x, y, _SLATE_MID, self.VALUE_C)

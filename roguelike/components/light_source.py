@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 import numpy as np
 from typing import TYPE_CHECKING
+from engine.palette import *
 
 if TYPE_CHECKING:
     from world.local_map import LocalMap
@@ -14,8 +15,8 @@ class LightSource:
     Attach to player, monsters, furniture, or terrain features.
 
     color:   RGB tuple — the tint of this light.
-             Torch = (255, 180, 60), moonlight = (180, 200, 255),
-             corpse-light = (80, 255, 80), void-lantern = (180, 60, 255)
+             Torch = BELL_BRASS, moonlight = SPIRIT_BLUE,
+             corpse-light = VERDANT, void-lantern = RESONANCE_BLOOM
     radius:  tiles of illumination at full intensity
     falloff: how quickly light fades. 1.0 = linear, 2.0 = quadratic
     flicker: if True, radius varies slightly each render tick
@@ -25,7 +26,7 @@ class LightSource:
     def __init__(
         self,
         radius:  int                    = 8,
-        color:   tuple[int, int, int]   = (255, 180, 60),
+        color:   tuple[int, int, int]   = BELL_BRASS,
         falloff: float                  = 1.8,
         flicker: bool                   = False,
         active:  bool                   = True,

@@ -18,5 +18,8 @@
   "essence_modifiers": {
     "Dissolution": 1.4, "Quickening": 1.6, "Binding": 2.2,
     "Severance": 1.8, "Consumption": 0.5, "Revelation": 1.3
-  }
+  },
+  "attack_verb": "grasps at thee",
+  "blood_type": "red",
+  "corpse_sprite": {"col": 2055, "row": 0}
 }

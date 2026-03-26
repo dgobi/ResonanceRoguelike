@@ -7,6 +7,7 @@ Cached after first generation.
 from __future__ import annotations
 import pygame
 import random
+from engine.palette import *
 
 _CACHE: dict[tuple[str, int], pygame.Surface] = {}
 
@@ -15,88 +16,88 @@ _CACHE: dict[tuple[str, int], pygame.Surface] = {}
 # ------------------------------------------------------------------ #
 
 def _draw_heath(surf: pygame.Surface, rng: random.Random) -> None:
-    surf.fill((7, 12, 29))
+    surf.fill(VOID_BLACK)
     for i in range(10):
         x = 4 + i * 6 + rng.randint(-1, 1)
         h = rng.randint(18, 42)
-        pygame.draw.line(surf, (57, 117, 92), (x, 60), (x, 60 - h), 2)
-        pygame.draw.line(surf, (93, 167, 93), (x - 2, 60 - h + 8), (x, 60 - h), 1)
-        pygame.draw.line(surf, (93, 167, 93), (x + 2, 60 - h + 8), (x, 60 - h), 1)
+        pygame.draw.line(surf, FOREST_DEEP, (x, 60), (x, 60 - h), 2)
+        pygame.draw.line(surf, LIFE_GREEN, (x - 2, 60 - h + 8), (x, 60 - h), 1)
+        pygame.draw.line(surf, LIFE_GREEN, (x + 2, 60 - h + 8), (x, 60 - h), 1)
 
 
 def _draw_forest(surf: pygame.Surface, rng: random.Random) -> None:
-    surf.fill((7, 12, 29))
+    surf.fill(VOID_BLACK)
     for i in range(4):
         cx = 8 + i * 16 + rng.randint(-3, 3)
         cy = 30 + rng.randint(-5, 5)
         r  = rng.randint(10, 16)
-        pygame.draw.circle(surf, (40, 80, 50),   (cx, cy), r)
-        pygame.draw.circle(surf, (57, 117, 92),  (cx - 2, cy - 3), r - 4)
-        pygame.draw.line(surf,   (80, 60, 30),   (cx, cy + r), (cx, 62), 3)
+        pygame.draw.circle(surf, FOREST_DEEP,   (cx, cy), r)
+        pygame.draw.circle(surf, FOREST_DEEP,  (cx - 2, cy - 3), r - 4)
+        pygame.draw.line(surf,   RUST_BROWN,   (cx, cy + r), (cx, 62), 3)
 
 
 def _draw_dungeon(surf: pygame.Surface, rng: random.Random) -> None:
-    surf.fill((4, 6, 14))
+    surf.fill(VOID_BLACK)
     for row in range(4):
         offset = (row % 2) * 9
         for col in range(5):
             x = offset + col * 18 - 4
             y = 10 + row * 14
-            pygame.draw.rect(surf, (30, 55, 75),  (x, y, 16, 12))
-            pygame.draw.rect(surf, (40, 84, 84),  (x + 1, y + 1, 14, 10))
+            pygame.draw.rect(surf, DEEP_STONE_BLUE,  (x, y, 16, 12))
+            pygame.draw.rect(surf, TEAL_DEEP,  (x + 1, y + 1, 14, 10))
     # Dark archway
-    pygame.draw.rect(surf,   (4, 6, 14), (22, 28, 20, 34))
-    pygame.draw.circle(surf, (4, 6, 14), (32, 28), 10)
+    pygame.draw.rect(surf,   VOID_BLACK, (22, 28, 20, 34))
+    pygame.draw.circle(surf, VOID_BLACK, (32, 28), 10)
 
 
 def _draw_plains(surf: pygame.Surface, rng: random.Random) -> None:
-    surf.fill((7, 12, 29))
-    pygame.draw.rect(surf, (20, 35, 60),  (0, 0,  64, 30))
-    pygame.draw.rect(surf, (40, 70, 50),  (0, 30, 64, 34))
+    surf.fill(VOID_BLACK)
+    pygame.draw.rect(surf, DEEP_STONE_BLUE,  (0, 0,  64, 30))
+    pygame.draw.rect(surf, MOSS_DARK,  (0, 30, 64, 34))
     for _ in range(12):
         x = rng.randint(2, 60)
         h = rng.randint(4, 10)
-        pygame.draw.line(surf, (57, 117, 92), (x, 62), (x, 62 - h), 1)
+        pygame.draw.line(surf, FOREST_DEEP, (x, 62), (x, 62 - h), 1)
 
 
 def _draw_swamp(surf: pygame.Surface, rng: random.Random) -> None:
-    surf.fill((15, 25, 35))
+    surf.fill(DEEP_STONE_BLUE)
     for row in range(3):
         y = 20 + row * 16
-        pygame.draw.ellipse(surf, (25, 60, 70),   (4,  y,     56, 10))
-        pygame.draw.ellipse(surf, (40, 100, 110), (8,  y + 1, 48,  7))
+        pygame.draw.ellipse(surf, TEAL_DEEP,   (4,  y,     56, 10))
+        pygame.draw.ellipse(surf, TEAL_DEEP, (8,  y + 1, 48,  7))
     for _ in range(5):
         x  = rng.randint(5, 55)
         hy = 15 + rng.randint(0, 20)
-        pygame.draw.line(surf,    (57, 90, 60),  (x, 60), (x, hy), 2)
-        pygame.draw.ellipse(surf, (70, 110, 70), (x - 4, hy - 3, 8, 5))
+        pygame.draw.line(surf,    FOREST_DEEP,  (x, 60), (x, hy), 2)
+        pygame.draw.ellipse(surf, OLD_GROWTH, (x - 4, hy - 3, 8, 5))
 
 
 def _draw_mountain(surf: pygame.Surface, rng: random.Random) -> None:
-    surf.fill((7, 12, 29))
+    surf.fill(VOID_BLACK)
     peaks = [(12, 48, 24, 8), (32, 44, 52, 5), (20, 52, 48, 6)]
     for (x1, y1, x2, _) in peaks:
         mid     = (x1 + x2) // 2
         snow_h  = (62 - y1) // 3
-        pygame.draw.polygon(surf, (50, 75, 95),
+        pygame.draw.polygon(surf, SLATE_DARK,
                             [(x1, 62), (mid, y1), (x2, 62)])
-        pygame.draw.polygon(surf, (180, 200, 210),
+        pygame.draw.polygon(surf, FROST_WHITE,
                             [(mid - 4, y1 + snow_h), (mid, y1), (mid + 4, y1 + snow_h)])
 
 
 def _draw_town(surf: pygame.Surface, rng: random.Random) -> None:
-    surf.fill((7, 12, 29))
-    pygame.draw.rect(surf, (35, 50, 40), (0, 40, 64, 24))
+    surf.fill(VOID_BLACK)
+    pygame.draw.rect(surf, MOSS_DARK, (0, 40, 64, 24))
     buildings = [(4, 20, 18, 22), (24, 15, 18, 27), (44, 22, 16, 20)]
     for (x, y, w, h) in buildings:
-        pygame.draw.rect(surf, (40, 55, 70),  (x, y, w, h))
-        pygame.draw.rect(surf, (50, 73, 95),  (x + 1, y + 1, w - 2, h - 2))
+        pygame.draw.rect(surf, SLATE_DARK,  (x, y, w, h))
+        pygame.draw.rect(surf, SLATE_DARK,  (x + 1, y + 1, w - 2, h - 2))
         roof_mid = x + w // 2
-        pygame.draw.polygon(surf, (80, 60, 40),
+        pygame.draw.polygon(surf, RUST_BROWN,
                             [(x, y), (roof_mid, y - 8), (x + w, y)])
         win_x = x + w // 2 - 3
         win_y = y + h // 2 - 3
-        pygame.draw.rect(surf, (180, 150, 80), (win_x, win_y, 6, 6))
+        pygame.draw.rect(surf, OLD_GOLD, (win_x, win_y, 6, 6))
 
 
 # ------------------------------------------------------------------ #
@@ -129,8 +130,8 @@ def get_biome_icon(region_type: str, seed: int = 42) -> pygame.Surface:
         draw_fn(surf, random.Random(seed))
     else:
         # Unknown biome — plain dark square with a question mark feel
-        surf.fill((15, 15, 25))
-        pygame.draw.rect(surf, (50, 50, 80), (4, 4, 56, 56), 1)
+        surf.fill(DEEP_NOTHING)
+        pygame.draw.rect(surf, MIDNIGHT_DEEP, (4, 4, 56, 56), 1)
 
     _CACHE[key] = surf
     return surf

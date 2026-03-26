@@ -5,6 +5,7 @@ from engine.data_loader import DataLoader
 from rendering.tile_registry import TileRegistry
 from generation.world_gen import generate_world
 from generation.region_gen import generate_region
+from world.world_map import WorldMap
 from generation.local_gen import generate_submap
 from entities.actor import Actor
 from engine.engine import Engine
@@ -15,6 +16,7 @@ from components.inventory import Inventory
 from components.language import Language
 from components.perks import Perks
 from components.equipment import Equipment
+from components.level import LevelComponent
 from engine.item_factory import ItemFactory
 
 
@@ -28,9 +30,13 @@ def main() -> None:
     data         = DataLoader("data")
     registry     = TileRegistry("data/tiles.json", mode=display.render_mode)
 
-    world_map    = generate_world(WORLD_WIDTH, WORLD_HEIGHT, seed=WORLD_SEED)
-    start_wx     = WORLD_WIDTH  // 2
-    start_wy     = WORLD_HEIGHT // 2
+    import random as _random
+    rng           = _random.Random(WORLD_SEED)
+    world_map     = WorldMap(WORLD_WIDTH, WORLD_HEIGHT)
+    world_map.seed = WORLD_SEED
+    world_map     = generate_world(world_map, data, rng)
+    start_wx      = world_map.start_wx
+    start_wy      = world_map.start_wy
     world_map.mark_explored_radius(start_wx, start_wy, radius=1)
     chunk = world_map.get(start_wx, start_wy)
     if chunk:
@@ -48,8 +54,29 @@ def main() -> None:
         surface_map = LocalMap(MAP_WIDTH, MAP_HEIGHT)
         start_x, start_y = MAP_WIDTH // 2, MAP_HEIGHT // 2
 
+    # Place 2 waystones within 3-6 tiles of player spawn — establishes the mechanic
+    import math as _math
+    wt_def = data.terrain.get("waystone_plinth", {})
+    if wt_def:
+        _placed = 0
+        _attempts = 0
+        while _placed < 2 and _attempts < 50:
+            _attempts += 1
+            _dist  = rng.randint(3, 6)
+            _angle = rng.uniform(0, 2 * _math.pi)
+            _tx = int(start_x + _math.cos(_angle) * _dist)
+            _ty = int(start_y + _math.sin(_angle) * _dist)
+            if not surface_map.in_bounds(_tx, _ty):
+                continue
+            if not surface_map.walkable[_tx, _ty]:
+                continue
+            surface_map.set_tile(_tx, _ty, "waystone_plinth",
+                                 wt_def.get("walkable", False),
+                                 wt_def.get("transparent", True))
+            _placed += 1
+
     player = Actor(x=start_x, y=start_y, tile="player", name="Player")
-    player.fighter    = Fighter(max_hp=20, power=5, defense=1)
+    player.fighter    = Fighter(max_hp=30, power=5, defense=1)
     body_def = data.bodies.get("body_player", {})
     player.fighter.body_id = "body_player"
     if body_def:
@@ -60,6 +87,7 @@ def main() -> None:
     player.language   = Language()
     player.perks      = Perks()
     player.equipment  = Equipment()
+    player.level      = LevelComponent()
     player.true_sight = False
 
     # Starting inventory
@@ -138,4 +166,11 @@ def _start_in_lab(engine: Engine, surface_map) -> None:
 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+            break
+        except SystemExit as _e:
+            if getattr(_e, "code", None) == 2:
+                continue   # new game requested — re-run main()
+            raise

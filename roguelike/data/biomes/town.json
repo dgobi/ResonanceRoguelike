@@ -1,0 +1,33 @@
+{
+  "id": "town",
+  "display_name": "Town",
+  "overmap_tile": "overmap_town",
+  "overmap_color": [
+    186,
+    117,
+    106
+  ],
+  "base_resonance": 0.5,
+  "elevation_range": [
+    0.1,
+    0.6
+  ],
+  "moisture_range": [
+    0.1,
+    0.8
+  ],
+  "difficulty_base": 0.45,
+  "river_adjacent": false,
+  "generator": "town",
+  "creature_zones": [],
+  "submap_types": [],
+  "submap_weight": 0.0,
+  "entry_messages": [
+    "A settlement. Was one.",
+    "Someone built this. Lived here. Rang the bell at dawn and at the close of day."
+  ],
+  "resonance_messages": {
+    "moderate": "The waystone at the centre is still warm.",
+    "high": "There is a bell here. Do not touch it."
+  }
+}

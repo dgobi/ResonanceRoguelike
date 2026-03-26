@@ -135,14 +135,14 @@
     "floor": {
       "ascii": ".",
       "color_fg": [
-        40,
-        84,
-        84
+        71,
+        125,
+        133
       ],
       "color_bg": [
-        7,
-        12,
-        29
+        6,
+        6,
+        8
       ],
       "color_fg_dark": [
         10,
@@ -162,14 +162,14 @@
     "wall": {
       "ascii": "#",
       "color_fg": [
-        40,
-        96,
-        128
+        88,
+        141,
+        190
       ],
       "color_bg": [
-        7,
-        12,
-        29
+        6,
+        6,
+        8
       ],
       "color_fg_dark": [
         12,
@@ -190,13 +190,13 @@
       "ascii": ".",
       "color_fg": [
         93,
-        167,
-        93
+        175,
+        141
       ],
       "color_bg": [
-        57,
-        117,
-        92
+        35,
+        103,
+        78
       ],
       "color_fg_dark": [
         8,
@@ -216,14 +216,14 @@
     "tree": {
       "ascii": "T",
       "color_fg": [
-        57,
-        117,
-        92
+        35,
+        103,
+        78
       ],
       "color_bg": [
-        7,
-        12,
-        29
+        6,
+        6,
+        8
       ],
       "color_fg_dark": [
         8,
@@ -243,14 +243,14 @@
     "water": {
       "ascii": "~",
       "color_fg": [
-        63,
-        160,
-        164
+        32,
+        214,
+        199
       ],
       "color_bg": [
-        25,
-        45,
-        80
+        20,
+        52,
+        100
       ],
       "color_fg_dark": [
         8,
@@ -270,14 +270,14 @@
     "mud": {
       "ascii": ".",
       "color_fg": [
-        57,
-        117,
-        92
+        35,
+        103,
+        78
       ],
       "color_bg": [
-        25,
-        27,
-        63
+        36,
+        34,
+        52
       ],
       "color_fg_dark": [
         8,
@@ -297,14 +297,14 @@
     "gravel": {
       "ascii": ".",
       "color_fg": [
-        50,
-        73,
-        95
+        74,
+        84,
+        98
       ],
       "color_bg": [
-        25,
-        45,
-        80
+        20,
+        52,
+        100
       ],
       "color_fg_dark": [
         10,
@@ -324,14 +324,14 @@
     "rock": {
       "ascii": "#",
       "color_fg": [
-        50,
-        73,
-        95
+        74,
+        84,
+        98
       ],
       "color_bg": [
-        7,
-        12,
-        29
+        6,
+        6,
+        8
       ],
       "color_fg_dark": [
         10,
@@ -351,14 +351,14 @@
     "cobblestone": {
       "ascii": ".",
       "color_fg": [
-        68,
-        99,
-        116
+        109,
+        117,
+        141
       ],
       "color_bg": [
-        25,
-        45,
-        80
+        20,
+        52,
+        100
       ],
       "color_fg_dark": [
         10,
@@ -378,14 +378,14 @@
     "flagstone": {
       "ascii": ".",
       "color_fg": [
-        50,
-        73,
-        95
+        74,
+        84,
+        98
       ],
       "color_bg": [
-        25,
-        27,
-        63
+        36,
+        34,
+        52
       ],
       "color_fg_dark": [
         10,
@@ -405,14 +405,14 @@
     "worn_stone": {
       "ascii": ".",
       "color_fg": [
-        40,
-        84,
-        84
+        71,
+        125,
+        133
       ],
       "color_bg": [
-        25,
-        27,
-        63
+        36,
+        34,
+        52
       ],
       "color_fg_dark": [
         10,
@@ -432,14 +432,14 @@
     "ash": {
       "ascii": ".",
       "color_fg": [
-        50,
-        73,
-        95
+        74,
+        84,
+        98
       ],
       "color_bg": [
-        25,
-        27,
-        63
+        36,
+        34,
+        52
       ],
       "color_fg_dark": [
         10,
@@ -459,14 +459,14 @@
     "door_closed": {
       "ascii": "+",
       "color_fg": [
-        226,
-        181,
-        112
+        219,
+        164,
+        99
       ],
       "color_bg": [
-        25,
-        45,
-        80
+        20,
+        52,
+        100
       ],
       "color_fg_dark": [
         14,
@@ -486,14 +486,14 @@
     "door_open": {
       "ascii": "/",
       "color_fg": [
-        226,
-        181,
-        112
+        219,
+        164,
+        99
       ],
       "color_bg": [
-        7,
-        12,
-        29
+        6,
+        6,
+        8
       ],
       "color_fg_dark": [
         14,
@@ -513,14 +513,14 @@
     "stairs_down": {
       "ascii": ">",
       "color_fg": [
-        226,
-        181,
-        112
+        219,
+        164,
+        99
       ],
       "color_bg": [
-        7,
-        12,
-        29
+        6,
+        6,
+        8
       ],
       "color_fg_dark": [
         14,
@@ -540,14 +540,14 @@
     "stairs_up": {
       "ascii": "<",
       "color_fg": [
-        238,
-        233,
-        138
+        254,
+        243,
+        192
       ],
       "color_bg": [
-        7,
-        12,
-        29
+        6,
+        6,
+        8
       ],
       "color_fg_dark": [
         14,
@@ -567,9 +567,9 @@
     "player": {
       "ascii": "@",
       "color_fg": [
-        227,
-        245,
-        241
+        218,
+        224,
+        234
       ],
       "color_bg": [
         0,
@@ -594,9 +594,9 @@
     "hollow_knight": {
       "ascii": "K",
       "color_fg": [
-        129,
-        175,
-        181
+        139,
+        147,
+        175
       ],
       "color_bg": [
         0,
@@ -621,9 +621,9 @@
     "plague_crow": {
       "ascii": "c",
       "color_fg": [
-        99,
-        34,
-        64
+        115,
+        23,
+        45
       ],
       "color_bg": [
         0,
@@ -648,9 +648,9 @@
     "bog_wraith": {
       "ascii": "W",
       "color_fg": [
-        63,
-        160,
-        164
+        32,
+        214,
+        199
       ],
       "color_bg": [
         0,
@@ -670,14 +670,15 @@
       "sprite": [
         2,
         6
-      ]
+      ],
+      "visual_fx": "pulse_dim"
     },
     "grave_thing": {
       "ascii": "g",
       "color_fg": [
-        68,
-        99,
-        116
+        109,
+        117,
+        141
       ],
       "color_bg": [
         0,
@@ -702,9 +703,9 @@
     "heath_stalker": {
       "ascii": "s",
       "color_fg": [
-        99,
-        34,
-        64
+        115,
+        23,
+        45
       ],
       "color_bg": [
         0,
@@ -729,9 +730,9 @@
     "barrow_wight": {
       "ascii": "B",
       "color_fg": [
-        188,
-        89,
-        96
+        186,
+        117,
+        106
       ],
       "color_bg": [
         0,
@@ -756,9 +757,9 @@
     "briar_lurker": {
       "ascii": "l",
       "color_fg": [
-        57,
-        117,
-        92
+        35,
+        103,
+        78
       ],
       "color_bg": [
         0,
@@ -783,9 +784,9 @@
     "drowned_revenant": {
       "ascii": "D",
       "color_fg": [
-        40,
-        96,
-        128
+        88,
+        141,
+        190
       ],
       "color_bg": [
         0,
@@ -810,9 +811,9 @@
     "hollow_revenant": {
       "ascii": "r",
       "color_fg": [
-        41,
-        21,
-        70
+        64,
+        51,
+        83
       ],
       "color_bg": [
         0,
@@ -837,9 +838,9 @@
     "sewer_thing": {
       "ascii": "t",
       "color_fg": [
-        40,
-        84,
-        84
+        71,
+        125,
+        133
       ],
       "color_bg": [
         0,
@@ -864,9 +865,9 @@
     "stone_lurker": {
       "ascii": "S",
       "color_fg": [
-        50,
-        73,
-        95
+        74,
+        84,
+        98
       ],
       "color_bg": [
         0,
@@ -886,14 +887,15 @@
       "sprite": [
         0,
         13
-      ]
+      ],
+      "visual_fx": "flicker"
     },
     "highland_bandit": {
       "ascii": "b",
       "color_fg": [
-        226,
-        181,
-        112
+        219,
+        164,
+        99
       ],
       "color_bg": [
         0,
@@ -918,9 +920,9 @@
     "tallow_torch": {
       "ascii": "(",
       "color_fg": [
-        226,
-        181,
-        112
+        219,
+        164,
+        99
       ],
       "color_bg": [
         0,
@@ -945,9 +947,9 @@
     "oil_lantern": {
       "ascii": "(",
       "color_fg": [
-        238,
-        233,
-        138
+        254,
+        243,
+        192
       ],
       "color_bg": [
         0,
@@ -972,9 +974,9 @@
     "food_item": {
       "ascii": "%",
       "color_fg": [
-        226,
-        181,
-        112
+        219,
+        164,
+        99
       ],
       "color_bg": [
         0,
@@ -999,9 +1001,9 @@
     "water_flask": {
       "ascii": "!",
       "color_fg": [
-        63,
-        160,
-        164
+        32,
+        214,
+        199
       ],
       "color_bg": [
         0,
@@ -1026,9 +1028,9 @@
     "generic_item": {
       "ascii": "?",
       "color_fg": [
-        129,
-        175,
-        181
+        139,
+        147,
+        175
       ],
       "color_bg": [
         0,
@@ -1053,9 +1055,9 @@
     "corpse": {
       "ascii": "%",
       "color_fg": [
-        99,
-        34,
-        64
+        115,
+        23,
+        45
       ],
       "color_bg": [
         0,
@@ -1081,8 +1083,8 @@
       "ascii": ".",
       "color_fg": [
         93,
-        167,
-        93
+        175,
+        141
       ],
       "color_bg": [
         0,
@@ -1107,9 +1109,9 @@
     "overmap_forest": {
       "ascii": "\u2663",
       "color_fg": [
-        57,
-        117,
-        92
+        35,
+        103,
+        78
       ],
       "color_bg": [
         0,
@@ -1134,9 +1136,9 @@
     "overmap_town": {
       "ascii": "\u221a",
       "color_fg": [
-        226,
-        181,
-        112
+        219,
+        164,
+        99
       ],
       "color_bg": [
         0,
@@ -1161,9 +1163,9 @@
     "overmap_dungeon": {
       "ascii": ">",
       "color_fg": [
-        188,
-        89,
-        96
+        186,
+        117,
+        106
       ],
       "color_bg": [
         0,
@@ -1188,9 +1190,9 @@
     "overmap_swamp": {
       "ascii": "~",
       "color_fg": [
-        40,
-        84,
-        84
+        71,
+        125,
+        133
       ],
       "color_bg": [
         0,
@@ -1215,9 +1217,9 @@
     "overmap_mountain": {
       "ascii": "^",
       "color_fg": [
-        68,
-        99,
-        116
+        109,
+        117,
+        141
       ],
       "color_bg": [
         0,
@@ -1241,91 +1243,1221 @@
     },
     "overmap_heath": {
       "ascii": ",",
-      "color_fg": [93,167,93],
-      "color_bg": [0,0,0],
-      "color_fg_dark": [8,12,8],
-      "color_bg_dark": [0,0,0],
-      "sprite": [3,16]
+      "color_fg": [
+        93,
+        175,
+        141
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        3,
+        16
+      ]
     },
     "overmap_unknown": {
       "ascii": " ",
-      "color_fg": [25,27,63],
-      "color_bg": [0,0,0],
-      "color_fg_dark": [4,5,9],
-      "color_bg_dark": [0,0,0],
-      "sprite": [0,14]
+      "color_fg": [
+        36,
+        34,
+        52
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        4,
+        5,
+        9
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        14
+      ]
+    },
+    "overmap_deep_mountain": {
+      "ascii": "^",
+      "color_fg": [
+        40,
+        40,
+        60
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        8,
+        12
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        1,
+        3
+      ]
+    },
+    "overmap_capital": {
+      "ascii": "#",
+      "color_fg": [
+        120,
+        100,
+        60
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        20,
+        16,
+        10
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        5,
+        3
+      ]
+    },
+    "overmap_drowned_wood": {
+      "ascii": "~",
+      "color_fg": [
+        40,
+        70,
+        80
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        8,
+        14,
+        16
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        2,
+        3
+      ]
+    },
+    "overmap_ash_wastes": {
+      "ascii": ".",
+      "color_fg": [
+        80,
+        75,
+        70
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        16,
+        15,
+        14
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        4,
+        3
+      ]
     },
     "overmap_player": {
       "ascii": "@",
-      "color_fg": [227,245,241],
-      "color_bg": [0,0,0],
-      "color_fg_dark": [227,245,241],
-      "color_bg_dark": [0,0,0],
-      "sprite": [0,1]
+      "color_fg": [
+        218,
+        224,
+        234
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        227,
+        245,
+        241
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        1
+      ]
     },
     "document": {
       "ascii": "?",
-      "color_fg": [226, 181, 112],
-      "color_bg": [0, 0, 0],
-      "color_fg_dark": [14, 12, 8],
-      "color_bg_dark": [0, 0, 0],
-      "sprite": [3, 0]
+      "color_fg": [
+        219,
+        164,
+        99
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        3,
+        0
+      ]
     },
     "inscription": {
       "ascii": "\"",
-      "color_fg": [129, 175, 181],
-      "color_bg": [0, 0, 0],
-      "color_fg_dark": [4, 5, 9],
-      "color_bg_dark": [0, 0, 0],
-      "sprite": [4, 0]
+      "color_fg": [
+        139,
+        147,
+        175
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        4,
+        5,
+        9
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        4,
+        0
+      ]
     },
     "grey_stone": {
       "ascii": "X",
-      "color_fg": [100, 100, 112],
-      "color_bg": [15,  15,  22 ],
-      "color_fg_dark": [20, 20, 28],
-      "color_bg_dark": [7,  12, 29],
-      "sprite": [0, 0]
+      "color_fg": [
+        100,
+        100,
+        112
+      ],
+      "color_bg": [
+        15,
+        15,
+        22
+      ],
+      "color_fg_dark": [
+        20,
+        20,
+        28
+      ],
+      "color_bg_dark": [
+        7,
+        12,
+        29
+      ],
+      "sprite": [
+        0,
+        0
+      ]
     },
     "ancient_floor": {
       "ascii": ":",
-      "color_fg": [60,  65,  80 ],
-      "color_bg": [12,  12,  20 ],
-      "color_fg_dark": [10, 10, 18],
-      "color_bg_dark": [7,  12, 29],
-      "sprite": [0, 0]
+      "color_fg": [
+        60,
+        65,
+        80
+      ],
+      "color_bg": [
+        12,
+        12,
+        20
+      ],
+      "color_fg_dark": [
+        10,
+        10,
+        18
+      ],
+      "color_bg_dark": [
+        7,
+        12,
+        29
+      ],
+      "sprite": [
+        0,
+        0
+      ]
     },
     "table": {
       "ascii": "=",
-      "color_fg": [88,  75,  55 ],
-      "color_bg": [20,  20,  28 ],
-      "color_fg_dark": [14, 12, 8 ],
-      "color_bg_dark": [7,  12, 29],
-      "sprite": [0, 0]
+      "color_fg": [
+        88,
+        75,
+        55
+      ],
+      "color_bg": [
+        20,
+        20,
+        28
+      ],
+      "color_fg_dark": [
+        14,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        7,
+        12,
+        29
+      ],
+      "sprite": [
+        0,
+        0
+      ]
     },
     "old_wall": {
       "ascii": "#",
-      "color_fg": [40, 95, 128 ],
-      "color_bg": [7, 12, 29 ],
-      "color_fg_dark": [12, 15, 22 ],
-      "color_bg_dark": [4, 5, 9 ],
-      "sprite": [0, 0]
+      "color_fg": [
+        40,
+        95,
+        128
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        12,
+        15,
+        22
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        0
+      ]
     },
     "flower": {
       "ascii": "+",
-      "color_fg": [40, 95, 128 ],
-      "color_bg": [7, 12, 29 ],
-      "color_fg_dark": [12, 15, 22 ],
-      "color_bg_dark": [4, 5, 9 ],
-      "sprite": [0, 0]
+      "color_fg": [
+        40,
+        95,
+        128
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        12,
+        15,
+        22
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        0
+      ]
     },
     "mushroom": {
       "ascii": "T",
-      "color_fg": [40, 95, 128 ],
-      "color_bg": [7, 12, 29 ],
-      "color_fg_dark": [12, 15, 22 ],
-      "color_bg_dark": [4, 5, 9 ],
-      "sprite": [0, 0]
+      "color_fg": [
+        40,
+        95,
+        128
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        12,
+        15,
+        22
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        0
+      ]
+    },
+    "street_lamp_working": {
+      "ascii": "!",
+      "color_fg": [
+        219,
+        164,
+        99
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        14,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        820,
+        0
+      ],
+      "light_radius": 3,
+      "light_color": [
+        226,
+        181,
+        112
+      ],
+      "light_intensity": 0.7
+    },
+    "street_lamp_sputtering": {
+      "ascii": "!",
+      "color_fg": [
+        186,
+        117,
+        106
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        12,
+        10,
+        10
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        820,
+        0
+      ],
+      "light_radius": 1,
+      "light_color": [
+        188,
+        89,
+        96
+      ],
+      "light_intensity": 0.4,
+      "visual_fx": "flicker"
+    },
+    "street_lamp_dead": {
+      "ascii": "!",
+      "color_fg": [
+        74,
+        84,
+        98
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        8,
+        10,
+        12
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        820,
+        0
+      ],
+      "light_radius": 0
+    },
+    "road_0": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_1": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_2": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_3": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_4": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_5": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_6": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_7": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_8": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_9": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_10": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_11": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_12": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_13": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_14": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "road_15": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        120,
+        100,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "cobblestone_cracked": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        100,
+        90,
+        75
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "cobblestone_mossy": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        80,
+        100,
+        75
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "puddle": {
+      "char": 126,
+      "ascii": "~",
+      "color_fg": [
+        63,
+        120,
+        130
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "debris_scatter": {
+      "char": 44,
+      "ascii": ",",
+      "color_fg": [
+        100,
+        90,
+        70
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "waystone_plinth": {
+      "char": 111,
+      "ascii": "o",
+      "color_fg": [
+        140,
+        130,
+        115
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": true,
+      "transparent": true,
+      "visual_fx": "pulse_glow"
+    },
+    "packed_earth": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        110,
+        90,
+        65
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "dirt_path": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        130,
+        105,
+        75
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "weedy_cobble": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        90,
+        105,
+        75
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "tall_grass": {
+      "char": 34,
+      "ascii": "\"",
+      "color_fg": [
+        93,
+        175,
+        141
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "brambles": {
+      "char": 37,
+      "ascii": "%",
+      "color_fg": [
+        35,
+        103,
+        78
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "shallow_water": {
+      "char": 126,
+      "ascii": "~",
+      "color_fg": [
+        32,
+        214,
+        199
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "deep_water": {
+      "char": 126,
+      "ascii": "~",
+      "color_fg": [
+        20,
+        52,
+        100
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "river_water": {
+      "char": 126,
+      "ascii": "~",
+      "color_fg": [
+        32,
+        214,
+        199
+      ],
+      "color_bg": [
+        20,
+        52,
+        100
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "river_bank": {
+      "char": 46,
+      "ascii": ".",
+      "color_fg": [
+        93,
+        84,
+        60
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "river_stones": {
+      "char": 58,
+      "ascii": ":",
+      "color_fg": [
+        90,
+        90,
+        90
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "blood_pool": {
+      "char": 183,
+      "ascii": "\u00b7",
+      "color_fg": [
+        142,
+        82,
+        82
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "bone_dust": {
+      "char": 183,
+      "ascii": "\u00b7",
+      "color_fg": [
+        200,
+        195,
+        180
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "ectoplasm_pool": {
+      "char": 183,
+      "ascii": "\u00b7",
+      "color_fg": [
+        32,
+        214,
+        199
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "ichor_seep": {
+      "char": 183,
+      "ascii": "\u00b7",
+      "color_fg": [
+        64,
+        51,
+        83
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "verdigris_fluid": {
+      "char": 183,
+      "ascii": "\u00b7",
+      "color_fg": [
+        93,
+        175,
+        141
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": false,
+      "transparent": true
+    },
+    "bell_intact": {
+      "ascii": "B",
+      "color_fg": [
+        219,
+        164,
+        99
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        30,
+        24,
+        15
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        860,
+        0
+      ],
+      "visual_fx": "pulse_glow"
+    },
+    "bell_cracked": {
+      "ascii": "B",
+      "color_fg": [
+        186,
+        117,
+        106
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        25,
+        12,
+        13
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        861,
+        0
+      ],
+      "visual_fx": "pulse_dim"
+    },
+    "bell_dead": {
+      "ascii": "B",
+      "color_fg": [
+        74,
+        84,
+        98
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        8,
+        10,
+        12
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        862,
+        0
+      ]
+    },
+    "coldbell_flower": {
+      "ascii": "*",
+      "color_fg": [
+        139,
+        147,
+        175
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        20,
+        35,
+        40
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        86,
+        0
+      ],
+      "visual_fx": "sparkle"
+    },
+    "resonance_stone": {
+      "ascii": "o",
+      "color_fg": [
+        109,
+        117,
+        141
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        12,
+        18,
+        22
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        3,
+        0
+      ],
+      "visual_fx": "pulse_dim"
     }
   }
 }

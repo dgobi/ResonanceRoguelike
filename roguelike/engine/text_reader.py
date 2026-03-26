@@ -18,6 +18,7 @@ import re
 import pygame
 from typing import TYPE_CHECKING
 from config import UI_PANEL_INSET
+from engine.palette import *
 
 if TYPE_CHECKING:
     from engine.display_config import DisplayConfig
@@ -35,19 +36,19 @@ _CORRUPT = list(
 
 # Border color per document condition (fallback when no ui_registry)
 _BORDERS: dict[str, tuple[int, int, int]] = {
-    "pristine":    (227, 245, 241),   # near_white
-    "worn":        (180, 165, 130),   # warm parchment
-    "damaged":     (145,  58,  82),   # blood_rose
-    "fragmentary": ( 99,  34,  64),   # blood_mid
+    "pristine":    FROST_WHITE,   # near_white
+    "worn":        WORN_STONE,   # warm parchment
+    "damaged":     BLOOD_STONE,   # blood_rose
+    "fragmentary": DRIED_BLOOD,   # blood_mid
 }
 
 # Panel tint per document condition (draw_panel tint_color)
 _TINTS: dict[str, tuple[int, int, int]] = {
-    "pristine":    ( 68,  99, 116),
-    "worn":        ( 50,  73,  95),
-    "damaged":     ( 40,  60,  75),
-    "fragmentary": ( 31,  57,  77),
-    "burned":      ( 61,  20,  48),
+    "pristine":    STONE_BLUE,
+    "worn":        SLATE_DARK,
+    "damaged":     DEEP_STONE_BLUE,
+    "fragmentary": DEEP_STONE_BLUE,
+    "burned":      BLOOD_CELLAR,
 }
 
 
@@ -123,13 +124,13 @@ class TextReader:
     Call open_text(text_def) to display; ESC/Enter to close.
     """
 
-    BG      = (  7,  12,  29)   # void_black
-    NORMAL  = (180, 165, 130)   # warm parchment text
-    DEEP    = ( 41,  21,  70)   # night_purple — deep tongue
-    DAMAGE  = ( 99,  34,  64)   # blood_mid — corrupted glyphs
-    REDACT  = ( 20,  22,  50)   # near-void block
-    TITLE_C = (226, 181, 112)   # old_gold
-    DIM     = ( 80,  70,  60)   # dim grey for meta text
+    BG      = VOID_BLACK   # void_black
+    NORMAL  = WORN_STONE   # warm parchment text
+    DEEP    = DEEP_PURPLE   # night_purple — deep tongue
+    DAMAGE  = DRIED_BLOOD   # blood_mid — corrupted glyphs
+    REDACT  = MIDNIGHT_DEEP   # near-void block
+    TITLE_C = OLD_GOLD   # old_gold
+    DIM     = DEEP_EARTH   # dim grey for meta text
 
     PAD  = 60    # px from screen edge
     FSZ  = 14    # body font size
@@ -186,7 +187,7 @@ class TextReader:
     #  Render
     # ------------------------------------------------------------------ #
 
-    RECOVERED = (134, 224, 206)   # pale_cyan — recovered/inferred text
+    RECOVERED = COLDBELL_LIGHT   # pale_cyan — recovered/inferred text
 
     def render(self, screen: pygame.Surface, engine=None) -> None:
         if not self.open or not self._def:
@@ -205,7 +206,7 @@ class TextReader:
                                  sw - (p - 10) * 2, sh - (p - 10) * 2)
 
         if engine is not None and hasattr(engine, "ui_registry"):
-            tint = _TINTS.get(cond, (50, 73, 95))
+            tint = _TINTS.get(cond, SLATE_DARK)
             engine.ui_registry.draw_panel(
                 screen, frame_rect, "weathered_temple",
                 tint_color=tint, fill_color=self.BG, fill_alpha=248,
@@ -215,7 +216,7 @@ class TextReader:
             bg.fill(self.BG)
             bg.set_alpha(248)
             screen.blit(bg, (0, 0))
-            bcol = _BORDERS.get(cond, (100, 90, 80))
+            bcol = _BORDERS.get(cond, EARTH_BROWN)
             pygame.draw.rect(screen, bcol, frame_rect, 1)
 
         cx = frame_rect.x + UI_PANEL_INSET

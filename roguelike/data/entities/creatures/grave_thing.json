@@ -25,5 +25,13 @@
   "essence_modifiers": {
     "Dissolution": 0.7, "Quickening": 1.2, "Binding": 0.8,
     "Severance": 1.0, "Consumption": 0.6, "Revelation": 2.8
+  },
+  "attack_verb": "tears at thee",
+  "blood_type": "bone_dust",
+  "corpse_sprite": {"col": 2055, "row": 0},
+  "callout_sounds": {
+    "on_spot":   {"text": "rrrk",  "color": [145, 58,  82]},
+    "on_attack": {"text": "grnnh", "color": [145, 58,  82]},
+    "on_death":  {"text": "k.kk",  "color": [120, 45,  65]}
   }
 }

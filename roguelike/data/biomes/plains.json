@@ -1,0 +1,38 @@
+{
+  "id": "plains",
+  "display_name": "Plains",
+  "overmap_tile": "overmap_plains",
+  "overmap_color": [
+    93,
+    175,
+    141
+  ],
+  "base_resonance": 0.2,
+  "elevation_range": [
+    0.1,
+    0.5
+  ],
+  "moisture_range": [
+    0.3,
+    0.7
+  ],
+  "difficulty_base": 0.15,
+  "river_adjacent": false,
+  "generator": "plains",
+  "creature_zones": [
+    "wilderness_plains"
+  ],
+  "submap_types": [
+    "barrow",
+    "vault"
+  ],
+  "submap_weight": 0.06,
+  "entry_messages": [
+    "Flat land. Easy to cross. Easy to be seen crossing.",
+    "Fields. Someone planted them. Someone expected to harvest."
+  ],
+  "resonance_messages": {
+    "moderate": "The earth remembers footsteps here.",
+    "high": "Stone underfoot, even where the soil looks deep."
+  }
+}

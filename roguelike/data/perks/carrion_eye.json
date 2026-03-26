@@ -1,0 +1,19 @@
+{
+    "id": "carrion_eye",
+    "name": "Carrion Eye",
+    "description": "Something in the back of your eyes has changed. The residue of the dead becomes legible.",
+    "category": "Perception",
+    "cost": 1,
+    "effects": [
+        "On kill: if a blood tile exists within 3 tiles, heal 1 HP to the least damaged body part.",
+        "Triggers on: blood_pool, ectoplasm_pool, bone_dust, ichor_seep, verdigris_fluid."
+    ],
+    "hooks": [
+        {
+            "event": "ON_ENTITY_KILLED",
+            "handler": "perk_carrion_eye_entity_killed"
+        }
+    ],
+    "conflicts": [],
+    "requires": []
+}

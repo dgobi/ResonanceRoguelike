@@ -52,3 +52,20 @@ class Perks:
 
     def affinity_score(self, affinity: str) -> float:
         return self.affinity_scores.get(affinity, 0.0)
+
+    # ── Hook system aliases ──────────────────────────────────────────
+    # Used by the hook registry and debug console.
+
+    @property
+    def active_perks(self) -> list[str]:
+        """Ordered list of acquired perk ids (for hook registration)."""
+        return list(self.acquired)
+
+    def has_perk(self, perk_id: str) -> bool:
+        return perk_id in self.acquired
+
+    def add_perk(self, perk_id: str) -> None:
+        self.acquired.add(perk_id)
+
+    def remove_perk(self, perk_id: str) -> None:
+        self.acquired.discard(perk_id)

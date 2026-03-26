@@ -2,6 +2,7 @@
 from __future__ import annotations
 import random
 from typing import TYPE_CHECKING
+from config import MAP_WIDTH, MAP_HEIGHT
 
 if TYPE_CHECKING:
     from entities.actor import Actor
@@ -52,6 +53,8 @@ class AISystem:
             zone_ambient, is_outdoor
         )
 
+        ACTIVE_RADIUS = 30   # fallback constant — kept for Tier 3 bubble radius use
+
         # Process each non-player actor with an AI component
         for entity in list(entities):
             if entity is player:
@@ -61,6 +64,18 @@ class AISystem:
             ai = getattr(entity, "ai", None)
             if ai is None:
                 continue
+
+            # Chunk membership gate — replaces ACTIVE_RADIUS tile-distance check.
+            # Step A: entities have local-map coordinates, so all loaded entities
+            #         belong to the player's current chunk (world_x, world_y).
+            # Step B: use global coords → ent_wx = entity.x // MAP_WIDTH
+            if engine is not None and hasattr(engine, "reality_bubble"):
+                ent_wx, ent_wy = world_x, world_y  # Step B: entity.x // MAP_WIDTH
+                if not engine.reality_bubble.is_active(ent_wx, ent_wy):
+                    continue
+            else:
+                if abs(entity.x - player.x) + abs(entity.y - player.y) > ACTIVE_RADIUS:
+                    continue
 
             # Creature special abilities — passive effects, state changes
             if engine is not None:

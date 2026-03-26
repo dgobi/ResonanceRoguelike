@@ -25,5 +25,8 @@
   "essence_modifiers": {
     "Dissolution": 0.3, "Quickening": 0.8, "Binding": 3.0,
     "Severance": 2.5, "Consumption": 0.5, "Revelation": 1.2
-  }
+  },
+  "attack_verb": "pours through thee",
+  "blood_type": "ectoplasm",
+  "corpse_sprite": {"col": 2055, "row": 0}
 }

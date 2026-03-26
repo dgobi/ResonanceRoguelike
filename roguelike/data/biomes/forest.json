@@ -1,0 +1,38 @@
+{
+  "id": "forest",
+  "display_name": "Forest",
+  "overmap_tile": "overmap_forest",
+  "overmap_color": [
+    35,
+    103,
+    78
+  ],
+  "base_resonance": 0.15,
+  "elevation_range": [
+    0.15,
+    0.75
+  ],
+  "moisture_range": [
+    0.4,
+    1.0
+  ],
+  "difficulty_base": 0.2,
+  "river_adjacent": false,
+  "generator": "forest",
+  "creature_zones": [
+    "wilderness_forest"
+  ],
+  "submap_types": [
+    "cave",
+    "barrow"
+  ],
+  "submap_weight": 0.1,
+  "entry_messages": [
+    "The trees here are old. They remember more than they should.",
+    "A forest. Dense, quiet, patient."
+  ],
+  "resonance_messages": {
+    "moderate": "Something accumulates in the silence here.",
+    "high": "The grey stone is close."
+  }
+}

@@ -11,5 +11,6 @@
   "damage_bonus": 1,
   "essence": "Binding",
   "essence_strength": 0.6,
-  "on_use": "equip_toggle"
+  "on_use": "equip_toggle",
+  "crit_chance": 0.08
 }

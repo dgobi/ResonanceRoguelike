@@ -1,5 +1,6 @@
 # generation/local_gen.py
 from __future__ import annotations
+import math
 import random
 import tcod.bsp
 from world.local_map import LocalMap
@@ -356,19 +357,22 @@ def punch_edge_transitions(
     rng: random.Random,
     n_per_edge: int = 2,
     corridor_depth: int = 5,
+    edge_terrain: str = "floor",
 ) -> None:
     """
     Punch n_per_edge openings into each map edge and carve a short
     corridor inward so the player can reach them from the interior.
     Called after any local map generation.
+    edge_terrain should match the biome floor type so edge corridors
+    don't leave strips of dungeon floor in wilderness chunks.
     """
-    t = terrain_data["floor"]
+    t = terrain_data.get(edge_terrain, terrain_data["floor"])
     w = local_map.width
     h = local_map.height
 
     def carve(x: int, y: int) -> None:
         if local_map.in_bounds(x, y):
-            local_map.set_tile(x, y, "floor",
+            local_map.set_tile(x, y, edge_terrain,
                                t["walkable"], t["transparent"])
 
     # For each edge, pick n_per_edge random positions and carve inward
@@ -392,6 +396,152 @@ def punch_edge_transitions(
             for step in range(corridor_depth):
                 carve(ex + dx * step, ey + dy * step)
 
+def _walk_tiles(x0: int, y0: int, x1: int, y1: int) -> list[tuple[int, int]]:
+    """Cardinal-only Bresenham walk at local tile scale."""
+    path = [(x0, y0)]
+    cx, cy = x0, y0
+    dx = abs(x1 - cx); dy = abs(y1 - cy)
+    sx = 1 if x1 > cx else -1
+    sy = 1 if y1 > cy else -1
+    err = dx - dy
+    while (cx, cy) != (x1, y1):
+        e2 = 2 * err
+        if e2 > -dy:
+            err -= dy; cx += sx
+        elif e2 < dx:
+            err += dx; cy += sy
+        else:
+            err -= dy; cx += sx
+        path.append((cx, cy))
+    return path
+
+
+def _road_pairs(connections: list[str]) -> list[tuple[str, str]]:
+    """
+    Decompose connection directions into entry/exit pairs.
+    1 connection → dead end (centre→edge).
+    2 connections → single through path.
+    3 connections → T-junction (3 spokes from centre).
+    4 connections → crossroads (N↔S, E↔W).
+    """
+    if len(connections) == 1:
+        return [("centre", connections[0])]
+    if len(connections) == 2:
+        return [(connections[0], connections[1])]
+    if len(connections) == 3:
+        return [(c, "centre") for c in connections]
+    if len(connections) == 4:
+        pairs: list[tuple[str,str]] = []
+        if "N" in connections and "S" in connections:
+            pairs.append(("N", "S"))
+        if "E" in connections and "W" in connections:
+            pairs.append(("E", "W"))
+        paired = {d for p in pairs for d in p}
+        for c in connections:
+            if c not in paired:
+                pairs.append((c, "centre"))
+        return pairs
+    return []
+
+
+def _road_endpoint(direction: str, w: int, h: int,
+                   rng: random.Random) -> tuple[int, int]:
+    """Local tile entry/exit point for a road direction. Slight rng jitter."""
+    mid_x, mid_y = w // 2, h // 2
+    jitter = rng.randint(-2, 2)
+    if direction == "N":      return (mid_x + jitter, 0)
+    if direction == "S":      return (mid_x + jitter, h - 1)
+    if direction == "E":      return (w - 1, mid_y + jitter)
+    if direction == "W":      return (0, mid_y + jitter)
+    # centre
+    return (mid_x, mid_y)
+
+
+def _local_road_walk(x0: int, y0: int, x1: int, y1: int,
+                     w: int, h: int, rng: random.Random) -> list[tuple[int, int]]:
+    """
+    Walk x0,y0 → x1,y1 at local tile scale with a single midpoint displacement
+    for gentle winding. Returns a cardinal-step path.
+    """
+    mx, my = (x0 + x1) // 2, (y0 + y1) // 2
+    dx, dy = x1 - x0, y1 - y0
+    length = math.sqrt(dx * dx + dy * dy)
+
+    if length > 8:
+        perp_x = -dy / length
+        perp_y =  dx / length
+        offset = rng.uniform(0.10, 0.20) * length
+        if rng.random() < 0.5:
+            offset = -offset
+        mx = int(mx + perp_x * offset)
+        my = int(my + perp_y * offset)
+        mx = max(1, min(w - 2, mx))
+        my = max(1, min(h - 2, my))
+
+    path: list[tuple[int, int]] = []
+    path.extend(_walk_tiles(x0, y0, mx, my))
+    path.extend(_walk_tiles(mx, my, x1, y1)[1:])
+    return path
+
+
+def _carve_road_path(
+    path: list[tuple[int, int]],
+    local_map: "LocalMap",
+    terrain_data: dict,
+    w: int,
+    h: int,
+) -> None:
+    """
+    Write road_0 tiles along path with 3-tile width (centre + 1 either side
+    perpendicular to direction of travel). Never overwrites river_water.
+    """
+    road = terrain_data.get("road_0", terrain_data.get("cobblestone", terrain_data["floor"]))
+    for i, (tx, ty) in enumerate(path):
+        if i < len(path) - 1:
+            nx, ny = path[i + 1]
+        elif i > 0:
+            nx, ny = path[i - 1]
+            nx, ny = 2 * tx - nx, 2 * ty - ny   # extrapolate
+        else:
+            nx, ny = tx, ty
+
+        ddx, ddy = nx - tx, ny - ty
+
+        offsets = [(0, 0)]
+        if ddx != 0:       # travelling E/W — widen N/S
+            offsets += [(0, -1), (0, 1)]
+        elif ddy != 0:     # travelling N/S — widen E/W
+            offsets += [(-1, 0), (1, 0)]
+
+        for ox, oy in offsets:
+            fx, fy = tx + ox, ty + oy
+            if 0 <= fx < w and 0 <= fy < h and local_map.in_bounds(fx, fy):
+                cur = str(local_map.tiles[fx, fy]["terrain"])
+                if cur != "river_water":
+                    local_map.set_tile(fx, fy, "road_0",
+                                       road["walkable"], road["transparent"])
+
+
+def _carve_road_network(
+    local_map: "LocalMap",
+    terrain_data: dict,
+    connections: list[str],
+    w: int,
+    h: int,
+    rng: random.Random,
+) -> None:
+    """
+    Carve road terrain for all connection pairs in this chunk.
+    Uses the pair model so corners/T-junctions/crossroads are correct.
+    """
+    pairs = _road_pairs(connections)
+    for a, b in pairs:
+        p0 = _road_endpoint(a, w, h, rng)
+        p1 = _road_endpoint(b, w, h, rng)
+        path = _local_road_walk(p0[0], p0[1], p1[0], p1[1], w, h, rng)
+        _carve_road_path(path, local_map, terrain_data, w, h)
+
+
 def carve_connectors(
     local_map: LocalMap,
     terrain_data: dict,
@@ -399,12 +549,21 @@ def carve_connectors(
     map_width: int,
     map_height: int,
     rng: random.Random,
+    town_id: int = -1,
 ) -> None:
     """
     Read edge connectors from a chunk and carve their features
     into the local map. Called after base terrain generation.
+    Roads are handled as a network (all connections at once) so corners,
+    T-junctions and crossroads produce correct geometry. Town chunks skip
+    road carving — town_gen manages their road terrain.
     """
     from world.world_map import ConnectorType
+
+    EDGE_TO_DIR = {"north": "N", "south": "S", "east": "E", "west": "W"}
+
+    # Collect all road edges first; carve as a single network
+    road_edges: list[str] = []
 
     for edge, connectors in edges.items():
         for connector in connectors:
@@ -415,17 +574,21 @@ def carve_connectors(
                     map_width, map_height, rng,
                 )
             elif connector.connector_type == ConnectorType.ROAD:
-                _carve_road_connector(
-                    local_map, terrain_data,
-                    edge, connector.position,
-                    map_width, map_height, rng,
-                )
+                if edge in EDGE_TO_DIR and EDGE_TO_DIR[edge] not in road_edges:
+                    road_edges.append(EDGE_TO_DIR[edge])
             elif connector.connector_type == ConnectorType.PATH:
                 _carve_path_connector(
                     local_map, terrain_data,
                     edge, connector.position,
                     map_width, map_height, rng,
                 )
+
+    # Carve road network — skip town chunks (town_gen handles their roads)
+    if road_edges and town_id == -1:
+        _carve_road_network(
+            local_map, terrain_data, road_edges,
+            map_width, map_height, rng,
+        )
 
 
 def _edge_to_tile(
@@ -463,11 +626,14 @@ def _carve_river_connector(
     rng: random.Random,
 ) -> None:
     """
-    Carve a river from the entry edge toward the opposite edge or
-    a natural interior terminus (a pool). Rivers are 2-3 tiles wide
-    and meander slightly.
+    Carve a river corridor from the entry edge to the opposite edge.
+    Core: 8-12 tiles wide of river_water. Bank: 2-3 tiles of river_bank
+    and river_stones. Rivers cut through all terrain.
     """
-    water = terrain_data.get("water", terrain_data["floor"])
+    rw = terrain_data.get("river_water",  terrain_data.get("shallow_water", terrain_data["floor"]))
+    rb = terrain_data.get("river_bank",   terrain_data.get("gravel",        terrain_data["floor"]))
+    rs = terrain_data.get("river_stones", terrain_data.get("gravel",        terrain_data["floor"]))
+
     start_x, start_y = _edge_to_tile(
         entry_edge, position, map_width, map_height
     )
@@ -479,90 +645,51 @@ def _carve_river_connector(
     end_x = max(1, min(map_width  - 2, end_x))
     end_y = max(1, min(map_height - 2, end_y))
 
-    # Carve a meandering path
-    x, y = start_x, start_y
-    while (x, y) != (end_x, end_y):
-        # Carve a 2-wide river
-        for ox in range(-1, 2):
-            for oy in range(-1, 2):
-                nx, ny = x + ox, y + oy
-                if local_map.in_bounds(nx, ny):
-                    local_map.set_tile(
-                        nx, ny, "water",
-                        water["walkable"],
-                        water["transparent"],
-                    )
+    # Midpoint displacement for mild winding
+    mid_x = (start_x + end_x) // 2
+    mid_y = (start_y + end_y) // 2
+    if entry_edge in ("north", "south"):
+        mid_x = max(2, min(map_width  - 3, mid_x + rng.randint(-6, 6)))
+    else:
+        mid_y = max(2, min(map_height - 3, mid_y + rng.randint(-6, 6)))
 
-        # Step toward exit with slight drift
-        dx = 0 if end_x == x else (1 if end_x > x else -1)
-        dy = 0 if end_y == y else (1 if end_y > y else -1)
+    # Half-width: 4-6 tiles, deterministic from start position
+    half_width = 4 + ((start_x * 7 + start_y * 13) % 3)
 
-        if dx != 0 and dy != 0:
-            if rng.random() < 0.5:
-                dx = 0
-            else:
-                dy = 0
+    def _stamp_at(cx, cy) -> None:
+        """Stamp river water core and bank around a path point."""
+        outer = half_width + 3
+        for ox in range(-outer, outer + 1):
+            for oy in range(-outer, outer + 1):
+                nx, ny = cx + ox, cy + oy
+                if not local_map.in_bounds(nx, ny):
+                    continue
+                dist_sq = ox * ox + oy * oy
+                if dist_sq <= half_width * half_width:
+                    local_map.set_tile(nx, ny, "river_water",
+                                       rw["walkable"], rw["transparent"])
+                elif dist_sq <= outer * outer:
+                    cur = str(local_map.tiles[nx, ny]["terrain"])
+                    if cur == "river_water":
+                        continue
+                    if (nx * 7 + ny * 13) % 10 < 3:
+                        local_map.set_tile(nx, ny, "river_stones",
+                                           rs["walkable"], rs["transparent"])
+                    else:
+                        local_map.set_tile(nx, ny, "river_bank",
+                                           rb["walkable"], rb["transparent"])
 
-        if rng.random() < 0.2:
-            drift_choices = []
-            if entry_edge in ("north", "south"):
-                drift_choices = [(-1, 0), (1, 0)]
-            else:
-                drift_choices = [(0, -1), (0, 1)]
-            if drift_choices:
-                dx, dy = rng.choice(drift_choices)
+    # Build two-segment path: start→mid→end (~60 steps each half)
+    def _lerp_segment(ax, ay, bx, by, steps: int) -> None:
+        for i in range(steps + 1):
+            t  = i / max(steps, 1)
+            px = int(ax + (bx - ax) * t)
+            py = int(ay + (by - ay) * t)
+            _stamp_at(px, py)
 
-        new_x = x + dx
-        new_y = y + dy
-        if not local_map.in_bounds(new_x, new_y):
-            break
-        x, y = new_x, new_y
+    _lerp_segment(start_x, start_y, mid_x, mid_y, 30)
+    _lerp_segment(mid_x, mid_y, end_x, end_y, 30)
 
-def _carve_road_connector(
-    local_map: LocalMap,
-    terrain_data: dict,
-    entry_edge: str,
-    position: float,
-    map_width: int,
-    map_height: int,
-    rng: random.Random,
-) -> None:
-    """
-    Carve a road from the entry edge to the opposite edge.
-    Roads are 1 tile wide, cobblestone, mostly straight.
-    """
-    cobble = terrain_data.get("cobblestone", terrain_data["floor"])
-    start_x, start_y = _edge_to_tile(
-        entry_edge, position, map_width, map_height
-    )
-    exit_edge = _opposite_edge(entry_edge)
-    end_x, end_y = _edge_to_tile(
-        exit_edge, position, map_width, map_height
-    )
-
-    x, y = start_x, start_y
-    while (x, y) != (end_x, end_y):
-        if local_map.in_bounds(x, y):
-            local_map.set_tile(
-                x, y, "cobblestone",
-                cobble["walkable"],
-                cobble["transparent"],
-            )
-
-        dx = 0 if end_x == x else (1 if end_x > x else -1)
-        dy = 0 if end_y == y else (1 if end_y > y else -1)
-
-        if dx != 0 and dy != 0:
-            if rng.random() < 0.5:
-                dx = 0
-            else:
-                dy = 0
-
-        new_x = x + dx
-        new_y = y + dy
-        if not local_map.in_bounds(new_x, new_y):
-            break
-        x, y = new_x, new_y
 
 
 def _carve_path_connector(

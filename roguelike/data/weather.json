@@ -1,0 +1,46 @@
+{
+  "light_rain": {
+    "type": "streak",
+    "spacing": 60,
+    "speed_y": 380,
+    "speed_x": 45,
+    "streak_len": 5,
+    "color": [88, 141, 190],
+    "alpha": 75,
+    "width": 1,
+    "intensity_scale": true
+  },
+  "heavy_rain": {
+    "type": "streak",
+    "spacing": 35,
+    "speed_y": 460,
+    "speed_x": 60,
+    "streak_len": 7,
+    "color": [88, 141, 190],
+    "alpha": 95,
+    "width": 1,
+    "intensity_scale": true
+  },
+  "bone_snow": {
+    "type": "dot",
+    "spacing": 40,
+    "speed_y": 48,
+    "speed_x_oscillate": 7,
+    "oscillate_period": 1900,
+    "dot_size": 2,
+    "color": [254, 243, 192],
+    "alpha": 140,
+    "intensity_scale": true
+  },
+  "resonance_storm": {
+    "type": "streak",
+    "spacing": 20,
+    "speed_y": 480,
+    "speed_x": 35,
+    "streak_len": 8,
+    "color": [64, 51, 83],
+    "alpha": 100,
+    "width": 1,
+    "intensity_scale": true
+  }
+}

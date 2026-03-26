@@ -7,7 +7,7 @@
   "fighter": { "max_hp": 20, "power": 6, "defense": 3 },
   "perception": {
     "sight_radius": 5, "hearing_radius": 4,
-    "sees_in_dark": false, "faction": "predator", "hostile_to": ["player"]
+    "sees_in_dark": true, "faction": "predator", "hostile_to": ["player"]
   },
   "ai_type": "ambush",
   "wander_radius": 4,
@@ -18,5 +18,14 @@
   "essence_modifiers": {
     "Dissolution": 1.8, "Quickening": 0.8, "Binding": 0.5,
     "Severance": 0.7, "Consumption": 0.3, "Revelation": 1.6
+  },
+  "attack_verb": "crashes down upon thee",
+  "blood_type": "none",
+  "crit_chance": 0.15,
+  "corpse_sprite": {"col": 2055, "row": 0},
+  "callout_sounds": {
+    "on_spot":   {"text": "krak",  "color": [160, 150, 130]},
+    "on_attack": {"text": "CRASH", "color": [160, 150, 130]},
+    "on_death":  {"text": "rrumble", "color": [130, 120, 105]}
   }
 }

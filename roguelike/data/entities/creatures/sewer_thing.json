@@ -13,5 +13,8 @@
   "damage_bonus": 0,
   "ai_type": "wandering",
   "wander_radius": 6,
-  "spawn_zones": ["undercroft"]
+  "spawn_zones": ["undercroft"],
+  "attack_verb": "lurches toward thee",
+  "blood_type": "red",
+  "corpse_sprite": {"col": 2055, "row": 0}
 }

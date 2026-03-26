@@ -7,7 +7,7 @@
   "fighter": { "max_hp": 8, "power": 5, "defense": 0 },
   "perception": {
     "sight_radius": 6, "hearing_radius": 4,
-    "sees_in_dark": false, "faction": "predator", "hostile_to": ["player"]
+    "sees_in_dark": true, "faction": "predator", "hostile_to": ["player"]
   },
   "ai_type": "ambush",
   "wander_radius": 5,
@@ -18,5 +18,8 @@
   "essence_modifiers": {
     "Dissolution": 2.0, "Quickening": 1.5, "Binding": 0.6,
     "Severance": 1.8, "Consumption": 1.6, "Revelation": 0.7
-  }
+  },
+  "attack_verb": "lashes at thee",
+  "blood_type": "none",
+  "corpse_sprite": {"col": 2055, "row": 0}
 }

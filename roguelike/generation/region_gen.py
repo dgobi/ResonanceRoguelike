@@ -2,7 +2,7 @@
 from __future__ import annotations
 import random
 from world.local_map import LocalMap
-from world.world_map import Chunk, RegionType
+from world.world_map import Chunk, RegionType, ConnectorType
 from generation.local_gen import (
     punch_edge_transitions,
     carve_connectors,
@@ -77,17 +77,70 @@ def generate_region(
             map_width, map_height, terrain_data, rng
         )
 
-    else:  # PLAINS default
+    elif chunk.region_type == RegionType.DEEP_MOUNTAIN:
+        local_map, spawn = _generate_mountain(
+            map_width, map_height, terrain_data, rng
+        )
+
+    elif chunk.region_type == RegionType.CAPITAL:
+        local_map, spawn = _generate_open(
+            map_width, map_height, terrain_data, rng,
+            floor_terrain="cobblestone", tree_chance=0.0,
+        )
+
+    elif chunk.region_type == RegionType.DROWNED_WOOD:
+        local_map, spawn = _generate_open(
+            map_width, map_height, terrain_data, rng,
+            floor_terrain="mud", tree_chance=0.20,
+        )
+
+    elif chunk.region_type == RegionType.ASH_WASTES:
+        local_map, spawn = _generate_open(
+            map_width, map_height, terrain_data, rng,
+            floor_terrain="varied_grass", tree_chance=0.01,
+        )
+
+    else:  # PLAINS / UNKNOWN default
         local_map, spawn = _generate_open(
             map_width, map_height, terrain_data, rng,
             floor_terrain="varied_grass", tree_chance=0.06,
         )
 
+    # B1: Tall grass scatter — before connectors so roads don't get covered
+    _GRASS = {"varied_grass", "grass"}
+    _MUD   = {"mud"}
+    if chunk.region_type == RegionType.FOREST:
+        _scatter_terrain(local_map, terrain_data, rng, _GRASS, "tall_grass",
+                         n_clusters=8,  cluster_r=4)
+        _scatter_terrain(local_map, terrain_data, rng, _GRASS, "shallow_water",
+                         n_clusters=3,  cluster_r=3)
+    elif chunk.region_type == RegionType.SWAMP:
+        _scatter_terrain(local_map, terrain_data, rng, _MUD,   "tall_grass",
+                         n_clusters=5,  cluster_r=3)
+        _scatter_terrain(local_map, terrain_data, rng, _MUD,   "shallow_water",
+                         n_clusters=12, cluster_r=5)
+    elif chunk.region_type == RegionType.DROWNED_WOOD:
+        _scatter_terrain(local_map, terrain_data, rng, _MUD,   "shallow_water",
+                         n_clusters=10, cluster_r=5)
+    elif chunk.region_type == RegionType.HEATH:
+        _scatter_terrain(local_map, terrain_data, rng, _GRASS, "tall_grass",
+                         n_clusters=6,  cluster_r=3)
+    elif chunk.region_type not in (RegionType.TOWN, RegionType.CAPITAL,
+                                   RegionType.MOUNTAIN, RegionType.DEEP_MOUNTAIN):
+        # PLAINS / ASH_WASTES / default open
+        _scatter_terrain(local_map, terrain_data, rng, _GRASS, "tall_grass",
+                         n_clusters=14, cluster_r=4)
+
     # Carve rivers, roads, paths from edge connectors
     carve_connectors(
         local_map, terrain_data,
         chunk.edges, map_width, map_height, rng,
+        town_id=getattr(chunk, "town_id", -1),
     )
+
+    # B4: Waystones — after connectors so road terrain is present
+    if chunk.region_type not in (RegionType.TOWN, RegionType.CAPITAL):
+        _place_waystones(local_map, terrain_data, chunk, rng)
 
     # Place submap entrances AFTER connectors so roads can't overwrite stairs
     for submap in chunk.submaps:
@@ -125,7 +178,7 @@ def _generate_open(
     local_map.set_tile(cx, cy, floor_terrain,
                        floor["walkable"], floor["transparent"])
 
-    punch_edge_transitions(local_map, terrain_data, rng)
+    punch_edge_transitions(local_map, terrain_data, rng, edge_terrain=floor_terrain)
     return local_map, (cx, cy)
 
 
@@ -207,7 +260,7 @@ def _generate_forest(
                                    grass["walkable"], grass["transparent"])
 
     _ensure_forest_connectivity(local_map, map_width, map_height)
-    punch_edge_transitions(local_map, terrain_data, rng)
+    punch_edge_transitions(local_map, terrain_data, rng, edge_terrain="varied_grass")
     return local_map, (cx, cy)
 
 
@@ -247,7 +300,7 @@ def _generate_mountain(
     local_map.set_tile(spawn_x, spawn_y, "gravel",
                        gravel["walkable"], gravel["transparent"])
 
-    punch_edge_transitions(local_map, terrain_data, rng)
+    punch_edge_transitions(local_map, terrain_data, rng, edge_terrain="gravel")
     return local_map, (spawn_x, spawn_y)
 
 
@@ -283,10 +336,12 @@ def _generate_town(
     floor  = terrain_data["floor"]
 
     # Cobblestone base
+    grass = terrain_data["grass"]
+
     for x in range(map_width):
         for y in range(map_height):
-            local_map.set_tile(x, y, "cobblestone",
-                               cobble["walkable"], cobble["transparent"])
+            local_map.set_tile(x, y, "varied_grass",
+                            grass["walkable"], grass["transparent"])
 
     # Scatter a few building footprints
     n_buildings = rng.randint(4, 8)
@@ -354,13 +409,20 @@ def _place_submap_entrance(
     # Keep layout center at least 20 tiles from any edge so the structure fits
     margin = 20
 
+    _BLOCKED_TERRAIN = (
+        {"river_water", "river_bank", "river_stones", "cobblestone",
+         "cobblestone_cracked", "cobblestone_mossy"}
+        | {f"road_{i}" for i in range(16)}
+    )
+
     if layout is not None:
         # Search for a walkable interior centre position
         placed = False
         for _ in range(300):
             cx = sub_rng.randint(margin, w - margin - 1)
             cy = sub_rng.randint(margin, h - margin - 1)
-            if local_map.walkable[cx, cy]:
+            if local_map.walkable[cx, cy] and \
+               str(local_map.tiles[cx, cy]["terrain"]) not in _BLOCKED_TERRAIN:
                 stairs_x, stairs_y = stamp_layout_interior(
                     local_map, layout, cx, cy, terrain_data
                 )
@@ -385,7 +447,8 @@ def _place_submap_entrance(
         for _ in range(200):
             x = sub_rng.randint(margin, w - margin - 1)
             y = sub_rng.randint(margin, h - margin - 1)
-            if local_map.walkable[x, y]:
+            if local_map.walkable[x, y] and \
+               str(local_map.tiles[x, y]["terrain"]) not in _BLOCKED_TERRAIN:
                 local_map.set_tile(x, y, "stairs_down",
                                    t["walkable"], t["transparent"])
                 local_map.submap_links[(x, y)] = submap.submap_id
@@ -399,3 +462,126 @@ def _place_submap_entrance(
         local_map.submap_links[(cx, cy)] = submap.submap_id
         submap.surface_x = cx
         submap.surface_y = cy
+
+
+# ------------------------------------------------------------------ #
+#  Terrain scatter helpers (B1, B2)
+# ------------------------------------------------------------------ #
+
+def _scatter_terrain(
+    local_map:      LocalMap,
+    terrain_data:   dict,
+    rng:            random.Random,
+    source_terrains: set[str],
+    target_terrain: str,
+    n_clusters:     int,
+    cluster_r:      int = 4,
+) -> None:
+    """
+    Place clustered patches of target_terrain over source_terrain tiles.
+    Each cluster is a blob centred on a random source tile with a
+    radial probability falloff so the edges are ragged.
+    """
+    if target_terrain not in terrain_data:
+        return
+    tgt = terrain_data[target_terrain]
+
+    w, h = local_map.width, local_map.height
+    eligible = [
+        (x, y)
+        for x in range(1, w - 1)
+        for y in range(1, h - 1)
+        if str(local_map.tiles[x, y]["terrain"]) in source_terrains
+    ]
+    if not eligible:
+        return
+
+    for _ in range(n_clusters):
+        cx, cy = rng.choice(eligible)
+        for dx in range(-cluster_r, cluster_r + 1):
+            for dy in range(-cluster_r, cluster_r + 1):
+                dist = (dx * dx + dy * dy) ** 0.5
+                if dist > cluster_r:
+                    continue
+                prob = 1.0 - (dist / cluster_r) ** 1.5
+                if rng.random() > prob:
+                    continue
+                tx, ty = cx + dx, cy + dy
+                if not local_map.in_bounds(tx, ty):
+                    continue
+                if str(local_map.tiles[tx, ty]["terrain"]) in source_terrains:
+                    local_map.set_tile(tx, ty, target_terrain,
+                                       tgt["walkable"], tgt["transparent"])
+
+
+# ------------------------------------------------------------------ #
+#  Waystone placement helper (B4)
+# ------------------------------------------------------------------ #
+
+_ROAD_TERRAIN = {"cobblestone"} | {f"road_{i}" for i in range(16)}
+
+
+def _place_waystones(
+    local_map:    LocalMap,
+    terrain_data: dict,
+    chunk:        Chunk,
+    rng:          random.Random,
+) -> None:
+    """
+    Place 1-2 waystone_plinth tiles adjacent to road terrain.
+    Crossroads chunks (4 road edges) always get a waystone at the
+    road intersection. Other road chunks get one at 25% probability.
+    """
+    if "waystone_plinth" not in terrain_data:
+        return
+
+    # Count road-type edge connectors
+    road_edges = [
+        edge for edge, conns in chunk.edges.items()
+        if any(c.connector_type == ConnectorType.ROAD for c in conns)
+    ]
+    if not road_edges:
+        return
+
+    is_crossroads = len(road_edges) >= 4
+    if not is_crossroads and rng.random() > 0.25:
+        return
+
+    n_waystones = 2 if is_crossroads else 1
+    wt = terrain_data["waystone_plinth"]
+    w, h = local_map.width, local_map.height
+
+    # Find tiles adjacent to road terrain
+    road_adjacent: list[tuple[int, int]] = []
+    for x in range(1, w - 1):
+        for y in range(1, h - 1):
+            if str(local_map.tiles[x, y]["terrain"]) in _ROAD_TERRAIN:
+                continue  # skip road tiles themselves
+            if not local_map.walkable[x, y]:
+                continue
+            for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                nx, ny = x + dx, y + dy
+                if local_map.in_bounds(nx, ny) and \
+                        str(local_map.tiles[nx, ny]["terrain"]) in _ROAD_TERRAIN:
+                    road_adjacent.append((x, y))
+                    break
+
+    if not road_adjacent:
+        return
+
+    rng.shuffle(road_adjacent)
+    placed = 0
+    used: set[tuple[int, int]] = set()
+    for (x, y) in road_adjacent:
+        # Keep waystones at least 5 tiles apart
+        if any(abs(x - ux) + abs(y - uy) < 5 for ux, uy in used):
+            continue
+        local_map.set_tile(x, y, "waystone_plinth",
+                           wt["walkable"], wt["transparent"])
+        used.add((x, y))
+        placed += 1
+        if placed >= n_waystones:
+            break
+    wx = getattr(chunk, "wx", "?")
+    wy = getattr(chunk, "wy", "?")
+    print(f"[gen] waystones placed in chunk ({wx},{wy}): {placed}")

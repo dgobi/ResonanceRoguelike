@@ -2,6 +2,7 @@
 from __future__ import annotations
 import math
 from typing import TYPE_CHECKING
+from engine.palette import *
 
 if TYPE_CHECKING:
     from entities.actor import Actor
@@ -43,7 +44,7 @@ def _ability_bog_wraith(entity: "Actor", engine: "Engine") -> None:
         engine.log.add(
             "Something bleeds from thy sight. "
             "The edges of the world soften.",
-            (41, 21, 70),
+            DEEP_PURPLE,
         )
     elif penalty < 2:
         player._wraith_warned = False
@@ -75,14 +76,14 @@ def _ability_barrow_wight(entity: "Actor", engine: "Engine") -> None:
         engine.log.add(
             "The wight presses close. "
             "Something in thy bones answers it.",
-            (99, 34, 64),
+            DRIED_BLOOD,
         )
 
     # Visual pulse — slow blood-rose discharge emanating from wight
     from engine.visual_events import VisualEvent
     engine.visual_events.add(VisualEvent(
         type="pulse", x=entity.x, y=entity.y,
-        color=(99, 34, 64), duration=8, intensity=0.6,
+        color=DRIED_BLOOD, duration=8, intensity=0.6,
     ))
 
 
@@ -105,7 +106,7 @@ def _ability_hollow_knight(entity: "Actor", engine: "Engine") -> None:
         engine.log.add(
             "A grinding sound. Below hearing, almost. "
             "Thy hands feel wrong.",
-            (68, 99, 116),
+            STONE_BLUE,
         )
     elif not in_range and was_in_range:
         player._hollow_knight_disruption = False
@@ -122,6 +123,14 @@ def _ability_stone_lurker(entity: "Actor", engine: "Engine") -> None:
     While hibernating: renders as rock tile, stays motionless.
     First attack after waking is free (ambush).
     """
+    # Ensure hibernation is set up on first call regardless of AI default state
+    if not hasattr(entity, "_hibernating"):
+        entity._hibernating = True
+        entity.tile = "rock"
+        if hasattr(entity, "ai"):
+            from components.ai import AIState
+            entity.ai.state = AIState.WAITING
+
     player = engine.player
     dist = math.sqrt(
         (entity.x - player.x) ** 2 +
@@ -137,7 +146,7 @@ def _ability_stone_lurker(entity: "Actor", engine: "Engine") -> None:
             entity.tile = "stone_lurker"
             engine.log.add(
                 "The stone moves. It was never stone.",
-                (100, 100, 110),
+                DUNGEON_SHADOW,
             )
         else:
             entity.tile = "rock"

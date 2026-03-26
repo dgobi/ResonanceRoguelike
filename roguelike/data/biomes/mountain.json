@@ -1,0 +1,39 @@
+{
+  "id": "mountain",
+  "display_name": "Mountain",
+  "overmap_tile": "overmap_mountain",
+  "overmap_color": [
+    139,
+    147,
+    175
+  ],
+  "base_resonance": 0.35,
+  "elevation_range": [
+    0.7,
+    1.0
+  ],
+  "moisture_range": [
+    0.0,
+    1.0
+  ],
+  "difficulty_base": 0.5,
+  "river_adjacent": false,
+  "generator": "mountain",
+  "creature_zones": [
+    "wilderness_mountain"
+  ],
+  "submap_types": [
+    "cave",
+    "vault",
+    "barrow"
+  ],
+  "submap_weight": 0.18,
+  "entry_messages": [
+    "The mountain does not acknowledge you.",
+    "Stone and cold. The ascent narrows the world to the next step."
+  ],
+  "resonance_messages": {
+    "moderate": "The rock hums at a frequency you feel more than hear.",
+    "high": "VUKH is near. The stone is wrong here. It has always been wrong."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "drowned_wood",
+  "display_name": "Drowned Wood",
+  "overmap_tile": "overmap_drowned_wood",
+  "overmap_color": [
+    71,
+    125,
+    133
+  ],
+  "base_resonance": 0.35,
+  "elevation_range": [
+    0.05,
+    0.35
+  ],
+  "moisture_range": [
+    0.6,
+    1.0
+  ],
+  "difficulty_base": 0.4,
+  "river_adjacent": true,
+  "generator": "swamp",
+  "creature_zones": [
+    "wilderness_swamp"
+  ],
+  "submap_types": [
+    "cave",
+    "vault"
+  ],
+  "submap_weight": 0.12,
+  "entry_messages": [
+    "Trees stand in water. Some are still alive.",
+    "The forest drowned slowly. The water is the same colour as the sky."
+  ],
+  "resonance_messages": {
+    "moderate": "Resonance travels through water. It has been travelling a long time.",
+    "high": "Something below the surface carries a tone."
+  }
+}

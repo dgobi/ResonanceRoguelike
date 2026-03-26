@@ -1,0 +1,33 @@
+{
+  "id": "capital",
+  "display_name": "Valdremor",
+  "overmap_tile": "overmap_capital",
+  "overmap_color": [
+    142,
+    82,
+    82
+  ],
+  "base_resonance": 0.7,
+  "elevation_range": [
+    0.3,
+    0.75
+  ],
+  "moisture_range": [
+    0.0,
+    1.0
+  ],
+  "difficulty_base": 0.85,
+  "river_adjacent": false,
+  "generator": "town",
+  "creature_zones": [],
+  "submap_types": [],
+  "submap_weight": 0.0,
+  "entry_messages": [
+    "The city. What remains of it.",
+    "Valdremor. Once the greatest city in the world. The world is no longer what it was."
+  ],
+  "resonance_messages": {
+    "moderate": "The bells here were the largest ever made. They are silent now. They are not empty.",
+    "high": "Do not go near the tower. Do not go near any tower."
+  }
+}

@@ -15,6 +15,7 @@ This folder contains technical documentation for the codebase. Use this as your 
 | [SYSTEMS.md](SYSTEMS.md) | Engine systems: turns, time, save/load, AI, items |
 | [DATA_REFERENCE.md](DATA_REFERENCE.md) | JSON data formats for tiles, entities, items, zones |
 | [CREATURES.md](CREATURES.md) | Full creature roster, body definitions, abilities |
+| [ESSENCE.md](ESSENCE.md) | All six essences, descriptions, weapons, creature modifier table |
 | [LAYOUT_AUTHORING.md](LAYOUT_AUTHORING.md) | *(existing)* How to write hand-crafted map layouts |
 | [SPRITESHEET_GUIDE.md](SPRITESHEET_GUIDE.md) | *(existing)* Sprite coordinate system |
 | [DEBUG.md](DEBUG.md) | *(existing)* F-key debug overlay reference |

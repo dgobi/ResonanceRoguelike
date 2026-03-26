@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 import pygame
 import numpy as np
+from engine.palette import *
 
 
 BORDER_PX = 15   # border region width in the 96×96 source
@@ -15,7 +16,7 @@ class UIRegistry:
 
     Source format (confirmed via pixel analysis):
       - 96×96, all pixels alpha=255
-      - Center pixels: pure black (0,0,0)
+      - Center pixels: pure black VOID_BLACK
       - Border pixels: brightness (r+g+b) > 15, outer ~15px
       - 883 bright (>200) pixels = flourishes, 306 medium (15-200) = fill
 
@@ -108,7 +109,7 @@ class UIRegistry:
         rect:         pygame.Rect,
         panel_id:     str,
         tint_color:   tuple[int, int, int],
-        fill_color:   tuple[int, int, int] = (7, 12, 29),
+        fill_color:   tuple[int, int, int] = VOID_BLACK,
         fill_alpha:   int  = 245,
         border_scale: int  = 2,
     ) -> None:

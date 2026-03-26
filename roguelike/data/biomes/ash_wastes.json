@@ -1,0 +1,38 @@
+{
+  "id": "ash_wastes",
+  "display_name": "Ash Wastes",
+  "overmap_tile": "overmap_ash_wastes",
+  "overmap_color": [
+    50,
+    43,
+    40
+  ],
+  "base_resonance": 0.6,
+  "elevation_range": [
+    0.0,
+    0.4
+  ],
+  "moisture_range": [
+    0.0,
+    0.2
+  ],
+  "difficulty_base": 0.7,
+  "river_adjacent": false,
+  "generator": "plains",
+  "creature_zones": [
+    "wilderness_heath"
+  ],
+  "submap_types": [
+    "vault",
+    "barrow"
+  ],
+  "submap_weight": 0.08,
+  "entry_messages": [
+    "The ground is grey. Not from ash \u2014 from the stone beneath. Always from the stone.",
+    "Nothing grows here. Nothing has grown here since the bells."
+  ],
+  "resonance_messages": {
+    "moderate": "The discharge was concentrated here. The ground still holds it.",
+    "high": "Maximum saturation. The stones are not dormant \u2014 they are full."
+  }
+}

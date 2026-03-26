@@ -35,11 +35,18 @@ class Fighter:
 
         for loc in body_def.get("locations", []):
             loc_id = loc["id"]
-            hp_mult = loc.get("hp_mult", 0.1)
-            loc_max = max(1, int(self.max_hp * hp_mult))
+            if "hp" in loc:
+                loc_max = int(loc["hp"])
+            else:
+                hp_mult = loc.get("hp_mult", 0.1)
+                loc_max = max(1, int(self.max_hp * hp_mult))
             self.location_hp[loc_id]  = loc_max
             self.location_max[loc_id] = loc_max
             self.armor_layers[loc_id] = list(loc.get("natural_armor", []))
+
+        # Sync max_hp to the sum of all location max HP so hp_fraction is correct
+        if self.location_max:
+            self.max_hp = sum(self.location_max.values())
 
     @property
     def hp(self) -> int:

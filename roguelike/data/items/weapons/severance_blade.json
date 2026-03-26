@@ -1,7 +1,7 @@
 {
   "id": "severance_blade",
   "name": "Severance Blade",
-  "type": "weapon",
+  "category": "weapon",
   "slot": "weapon",
   "damage_dice": "1d6+1",
   "essence": "Severance",
@@ -9,5 +9,6 @@
   "weight": 1.8,
   "description": "A narrow blade of dull grey metal, the edge ground at an angle that catches nothing. The bindings of the hollow yield before it.",
   "color_fg": [68, 99, 116],
-  "sprite": "crude_blade"
+  "sprite": "crude_blade",
+  "crit_chance": 0.06
 }

@@ -25,5 +25,13 @@
   "essence_modifiers": {
     "Dissolution": 0.5, "Quickening": 1.8, "Binding": 0.7,
     "Severance": 2.5, "Consumption": 0.4, "Revelation": 1.5
+  },
+  "attack_verb": "drives its blade toward thee",
+  "blood_type": "bone_dust",
+  "corpse_sprite": {"col": 2055, "row": 0},
+  "callout_sounds": {
+    "on_spot":   {"text": "thrum",   "color": [129, 175, 181]},
+    "on_attack": {"text": "crack",   "color": [129, 175, 181]},
+    "on_death":  {"text": "shatter", "color": [129, 175, 181]}
   }
 }

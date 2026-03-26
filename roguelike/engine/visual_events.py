@@ -1,6 +1,7 @@
 # engine/visual_events.py
 from __future__ import annotations
 from dataclasses import dataclass, field
+from engine.palette import *
 
 
 @dataclass
@@ -19,7 +20,7 @@ class VisualEvent:
     x:         int           # world tile x (for world-space effects)
     y:         int           # world tile y
     radius:    float = 0.0
-    color:     tuple = (255, 255, 255)
+    color:     tuple = TRUE_WHITE
     duration:  int   = 1     # frames to display (1 = single frame flash)
     intensity: float = 1.0
     data:      dict  = field(default_factory=dict)

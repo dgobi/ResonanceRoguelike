@@ -33,5 +33,8 @@ class Actor(Entity):
         self.language                      = None   # Language
         self.perks                         = None   # Perks
         self.equipment                     = None   # Equipment
+        self.level                         = None   # LevelComponent
         self.true_sight:             bool  = False
         self.took_damage_this_turn:  bool  = False
+        self.chilled_turns:          int   = 0
+        self._in_concealment:        bool  = False

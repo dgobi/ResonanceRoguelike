@@ -1,0 +1,33 @@
+{
+  "id": "deep_mountain",
+  "display_name": "VUKH",
+  "overmap_tile": "overmap_deep_mountain",
+  "overmap_color": [
+    109,
+    117,
+    141
+  ],
+  "base_resonance": 0.8,
+  "elevation_range": [
+    0.85,
+    1.0
+  ],
+  "moisture_range": [
+    0.0,
+    1.0
+  ],
+  "difficulty_base": 0.95,
+  "river_adjacent": false,
+  "generator": "mountain",
+  "creature_zones": [],
+  "submap_types": [],
+  "submap_weight": 0.0,
+  "entry_messages": [
+    "VUKH. The mountain's name in the old tongue means something that does not translate.",
+    "The stone here is wrong. It has always been wrong. This is where wrong began."
+  ],
+  "resonance_messages": {
+    "moderate": "The resonance here is not a danger. It is a state of being.",
+    "high": "The source. Everything downstream of this is downstream of this."
+  }
+}

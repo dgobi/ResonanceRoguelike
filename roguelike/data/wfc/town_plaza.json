@@ -1,0 +1,37 @@
+{
+  "tiles": [
+    {"name": "cobble_clean",   "terrain": "cobblestone",         "weight": 30},
+    {"name": "cobble_cracked", "terrain": "cobblestone_cracked", "weight": 25},
+    {"name": "cobble_mossy",   "terrain": "cobblestone_mossy",   "weight": 15},
+    {"name": "puddle",         "terrain": "puddle",              "weight": 6},
+    {"name": "debris",         "terrain": "debris_scatter",      "weight": 8},
+    {"name": "waystone_base",  "terrain": "waystone_plinth",     "weight": 1}
+  ],
+  "adjacency": {
+    "cobble_clean":   {"N":["cobble_clean","cobble_cracked"],
+                       "E":["cobble_clean","cobble_cracked"],
+                       "S":["cobble_clean","cobble_cracked"],
+                       "W":["cobble_clean","cobble_cracked"]},
+    "cobble_cracked": {"N":["cobble_clean","cobble_cracked","cobble_mossy","debris"],
+                       "E":["cobble_clean","cobble_cracked","cobble_mossy","debris"],
+                       "S":["cobble_clean","cobble_cracked","cobble_mossy","debris"],
+                       "W":["cobble_clean","cobble_cracked","cobble_mossy","debris"]},
+    "cobble_mossy":   {"N":["cobble_cracked","cobble_mossy","puddle"],
+                       "E":["cobble_cracked","cobble_mossy","puddle"],
+                       "S":["cobble_cracked","cobble_mossy","puddle"],
+                       "W":["cobble_cracked","cobble_mossy","puddle"]},
+    "puddle":         {"N":["cobble_mossy","cobble_cracked"],
+                       "E":["cobble_mossy","cobble_cracked"],
+                       "S":["cobble_mossy","cobble_cracked"],
+                       "W":["cobble_mossy","cobble_cracked"]},
+    "debris":         {"N":["cobble_cracked","debris"],
+                       "E":["cobble_cracked","debris"],
+                       "S":["cobble_cracked","debris"],
+                       "W":["cobble_cracked","debris"]},
+    "waystone_base":  {"N":["cobble_clean"],
+                       "E":["cobble_clean"],
+                       "S":["cobble_clean"],
+                       "W":["cobble_clean"]}
+  },
+  "fallback": "cobble_cracked"
+}

@@ -1,6 +1,7 @@
 # engine/item_system.py
 from __future__ import annotations
 from typing import TYPE_CHECKING
+from engine.palette import *
 
 if TYPE_CHECKING:
     from engine.engine import Engine
@@ -22,7 +23,7 @@ class ItemSystem:
         if not effect:
             engine.log.add(
                 f"You hold the {item.name}. Nothing happens.",
-                (160, 150, 130),
+                WORN_STONE,
             )
             return False
 
@@ -30,7 +31,7 @@ class ItemSystem:
         if not handler:
             engine.log.add(
                 f"[DEBUG] Unknown effect: {effect}",
-                (150, 150, 100),
+                AGED_WOOD,
             )
             return False
 
@@ -45,12 +46,12 @@ class ItemSystem:
         if not text_id:
             engine.log.add(
                 f"The {item.name} hath nothing legible upon it.",
-                (160, 150, 130),
+                WORN_STONE,
             )
             return False
         text_def = engine.data.texts.get(text_id)
         if not text_def:
-            engine.log.add(f"[DEBUG] text '{text_id}' not found.", (150, 150, 100))
+            engine.log.add(f"[DEBUG] text '{text_id}' not found.", AGED_WOOD)
             return False
         engine.text_reader.open_text(text_def)
         return False   # not consumed
@@ -64,11 +65,11 @@ class ItemSystem:
         needs.eat(nutrition)
         engine.log.add(
             f"You eat the {item.name}.",
-            (180, 160, 100),
+            AGED_WOOD,
         )
 
         if needs.hunger < 0.15:
-            engine.log.add("You are sated.", (180, 160, 100))
+            engine.log.add("You are sated.", AGED_WOOD)
         return True   # consumed
 
     def _use_drink(self, item: "Item", engine: "Engine") -> bool:
@@ -80,11 +81,11 @@ class ItemSystem:
         needs.drink(hydration)
         engine.log.add(
             f"You drink from the {item.name}.",
-            (100, 160, 200),
+            CLEAR_WATER,
         )
 
         if needs.thirst < 0.15:
-            engine.log.add("Your thirst is slaked.", (100, 160, 200))
+            engine.log.add("Your thirst is slaked.", CLEAR_WATER)
 
         # Empty the flask
         item.liquid        = None
@@ -105,13 +106,13 @@ class ItemSystem:
         if actual == 0:
             engine.log.add(
                 f"You take the {item.name}. Your wounds are already closed.",
-                (140, 180, 140),
+                LIFE_GREEN,
             )
         else:
             engine.log.add(
                 f"You take the {item.name}. "
                 f"You recover {actual} HP.",
-                (140, 180, 140),
+                LIFE_GREEN,
             )
         return True   # consumed
 
@@ -120,25 +121,35 @@ class ItemSystem:
     ) -> bool:
         """
         Light a torch or lantern.
-        Replaces the player's current light source.
-        Starts the burn timer.
+        Equips to off-hand slot while lit. Frees off-hand on extinguish.
         """
         from components.light_source import LightSource
 
         if not item.light_data:
             return False
 
-        # If already lit — extinguish
-        current = engine.player.light_source
+        equipment = getattr(engine.player, "equipment", None)
+        current   = engine.player.light_source
+
+        # If already lit — extinguish and unequip from off-hand
         if (current and current.active and
-                getattr(current, "_item_id", None) == item.item_id):
+                getattr(current, "_item_ref", None) is item):
             current.active = False
+            if equipment and equipment.slots.get("offhand") is item:
+                equipment.unequip("offhand")
             engine.log.add(
                 f"You extinguish the {item.name}.",
-                (160, 140, 100),
+                AGED_WOOD,
             )
             engine._update_fov()
             return False
+
+        # Check off-hand availability before lighting
+        if equipment:
+            offhand_item = equipment.slots.get("offhand")
+            if offhand_item is not None and offhand_item is not item:
+                engine.log.add("Off hand is full.", STONE_BLUE)
+                return False
 
         # Light it
         ld = item.light_data
@@ -157,11 +168,24 @@ class ItemSystem:
         engine.player.light_source = light
         engine._update_fov()
 
+        # Equip to off-hand slot
+        if equipment:
+            equipment.equip(item, "offhand")
+
         engine.log.add(
             f"You light the {item.name}.",
-            (220, 180, 80),
+            RESONANCE_GOLD,
         )
         return False   # not consumed — torch remains until burned out
+
+    def _use_grant_perk_point(self, item: "Item", engine: "Engine") -> bool:
+        """Consumable that grants one perk point."""
+        level_comp = getattr(engine.player, "level", None)
+        if level_comp is None:
+            return False
+        level_comp.perk_points += 1
+        engine.log.add("A point waits to be spent. Press K.", OLD_GOLD)
+        return True   # consumed
 
     def _use_equip_toggle(self, item: "Item", engine: "Engine") -> bool:
         """Equip or unequip an item. Returns False (not consumed)."""
@@ -172,7 +196,7 @@ class ItemSystem:
         item_def = engine.data.items.get(item.item_id, {})
         slot = item_def.get("slot")
         if not slot:
-            engine.log.add("This cannot be equipped.", (120, 110, 90))
+            engine.log.add("This cannot be equipped.", EARTH_BROWN)
             return False
 
         if equipment.is_equipped(item):
@@ -183,7 +207,7 @@ class ItemSystem:
                 _deactivate_light(item, engine)
             engine.log.add(
                 f"Thou removest {item.name}.",
-                (160, 150, 120),
+                WORN_STONE,
             )
         else:
             # Equip — unequip whatever is currently in that slot first
@@ -193,17 +217,22 @@ class ItemSystem:
                 _remove_armor_from_fighter(engine.player, prev_def)
                 if slot == "light":
                     _deactivate_light(prev, engine)
-                engine.log.add(
-                    f"Thou removest {prev.name}.",
-                    (120, 110, 90),
-                )
+                elif slot == "offhand" and prev.light_data:
+                    # Displacing a torch from the off-hand — extinguish it first
+                    _deactivate_light(prev, engine)
+                    engine.log.add("The torch goes out.", STONE_BLUE)
+                else:
+                    engine.log.add(
+                        f"Thou removest {prev.name}.",
+                        EARTH_BROWN,
+                    )
             equipment.equip(item, slot)
             _apply_armor_to_fighter(engine.player, item_def)
             if slot == "light":
                 _activate_light(item, engine)
             engine.log.add(
                 f"Thou takest up {item.name}.",
-                (180, 165, 130),
+                WORN_STONE,
             )
 
         return False  # not consumed
@@ -285,6 +314,6 @@ def _activate_light(item, engine) -> None:
 def _deactivate_light(item, engine) -> None:
     """Deactivate the player's light if it belongs to the given item."""
     current = getattr(engine.player, "light_source", None)
-    if current and getattr(current, "_item_id", None) == item.item_id:
+    if current and getattr(current, "_item_ref", None) is item:
         current.active = False
         engine._update_fov()

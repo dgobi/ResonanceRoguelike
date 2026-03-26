@@ -1,0 +1,33 @@
+{
+  "id": "hunter_cabin",
+  "category": "wilderness",
+  "width": 8,
+  "height": 6,
+  "facing": "south",
+  "condition": "intact",
+  "tags": ["building", "wilderness", "forest", "habitable"],
+  "weight": 10,
+  "rotatable": true,
+  "district_weights": {},
+  "interior_loot_table": "hunting_supplies",
+  "description": "A timber cabin set back from the tree line. Tools hanging, pelts on the floor. The last occupant left in a hurry or didn't leave at all.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "+": "door_closed",
+    "c": "floor",
+    "b": "floor",
+    "t": "floor",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#..+..b#",
+    "#.cc...#",
+    "#......#",
+    "#..tt..#",
+    "########"
+  ],
+  "special_tiles": [],
+  "note": "b=workbench, c=chest (hunting_supplies), t=table. Furniture system pending."
+}

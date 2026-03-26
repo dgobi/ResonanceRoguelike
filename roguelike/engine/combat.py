@@ -21,12 +21,15 @@ class CombatResult:
     impairments:       list   = field(default_factory=list)   # new impairments triggered
     essence_applied:   str    = ""   # which essence interacted
     essence_modifier:  float  = 1.0  # net modifier applied
-    attacker_dead:     bool   = False
-    defender_dead:     bool   = False
-    messages:          list   = field(default_factory=list)   # archaic-register strings
-    message_types:     list   = field(default_factory=list)   # parallel tags: "hit","deflect","impair","death"
-    damage_number:     int    = 0    # damage dealt, logged separately
-    is_player_hit:     bool   = False  # True when defender is the player
+    attacker_dead:          bool   = False
+    defender_dead:          bool   = False
+    messages:               list   = field(default_factory=list)   # archaic-register strings
+    message_types:          list   = field(default_factory=list)   # parallel tags: "hit","deflect","impair","death"
+    damage_number:          int    = 0    # damage dealt, logged separately
+    is_player_hit:          bool   = False  # True when defender is the player
+    damage_raw_post_essence: int   = 0    # after essence, before armor
+    debug_formula:          str    = ""   # pre-built debug string for DEBUG_MODE display
+    is_crit:                bool   = False  # True when critical hit multiplier fired
 
 
 LOCATION_DISPLAY = {
@@ -228,14 +231,46 @@ def resolve_attack(
     result.damage_raw = raw
 
     # 3. Essence modifier
-    essence          = weapon.get("essence") if weapon else None
-    essence_strength = weapon.get("essence_strength", 0.0) if weapon else 0.0
-    raw, ess_mod     = apply_essence(raw, essence, essence_strength,
-                                     creature_essence_mods)
+    if weapon:
+        essences_list = weapon.get("essences", [])
+        if essences_list:
+            # Multi-essence: apply each, keep the best outcome
+            best_raw  = -1
+            best_ess  = ""
+            best_mod  = 1.0
+            for ess_entry in essences_list:
+                ename = ess_entry.get("name", "")
+                estr  = float(ess_entry.get("strength", 0.0))
+                d, m  = apply_essence(raw, ename, estr, creature_essence_mods)
+                if d > best_raw:
+                    best_raw = d
+                    best_ess = ename
+                    best_mod = m
+            raw      = best_raw
+            essence  = best_ess
+            ess_mod  = best_mod
+        else:
+            essence  = weapon.get("essence") or None
+            estr     = weapon.get("essence_strength", 0.0)
+            raw, ess_mod = apply_essence(raw, essence, estr,
+                                         creature_essence_mods)
+    else:
+        essence = None
+        raw, ess_mod = apply_essence(raw, None, 0.0, creature_essence_mods)
     result.essence_applied  = essence or ""
     result.essence_modifier = ess_mod
 
+    # 3b. Critical hit check — applied after essence, before armour
+    _base_crit   = 0.05
+    _weapon_crit = (weapon.get("crit_chance", 0.0) if weapon else 0.0)
+    _total_crit  = _base_crit + _weapon_crit
+    if rng.random() < _total_crit:
+        raw = int(raw * 2.5)
+        result.is_crit = True
+
     # 4. Roll through armor layers
+    raw_post_essence = raw   # save for debug formula (includes crit multiplier)
+    result.damage_raw_post_essence = raw_post_essence
     layers = defender_fighter.armor_layers.get(loc_id, [])
     damage_after, struck, bypassed = roll_layers(layers, raw, rng)
     result.layers_struck   = struck
@@ -271,6 +306,13 @@ def resolve_attack(
                 f"The blow finds no purchase.",
                 "deflect",
             )
+        elif struck and raw > 0:
+            blocking_layer = struck[-1]
+            _msg(f"The blow is turned by {blocking_layer}.", "deflect")
+        elif not struck and raw <= 0:
+            _msg("Thy blow carries no force enough to matter.", "deflect")
+        elif not struck:
+            _msg("The strike finds no vital mark.", "deflect")
         else:
             _msg("The blow finds no purchase.", "deflect")
     elif struck:
@@ -296,5 +338,30 @@ def resolve_attack(
             _msg(f"The {defender_name} is destroyed.", "death")
 
     result.damage_number = result.damage_dealt
+
+    # Debug formula — always built, caller logs when DEBUG_MODE
+    if weapon and weapon.get("damage_dice"):
+        _d_str = weapon["damage_dice"]
+        _mod   = weapon.get("damage_bonus", 0)
+    else:
+        _d_str = "1d4"
+        _mod   = 0
+    _roll = result.damage_raw
+    if _mod > 0:
+        _formula = f"[{_d_str}+{_mod} \u2192 {_roll}]"
+    elif _mod < 0:
+        _formula = f"[{_d_str}{_mod} \u2192 {_roll}]"
+    else:
+        _formula = f"[{_d_str} \u2192 {_roll}]"
+    _av = max(0, result.damage_raw_post_essence - damage_after)
+    result.debug_formula = (
+        f"{_formula} \u2212 AV[{loc_id}]={_av} \u2192 {damage_after}"
+    )
+    _ess_reduc = result.damage_raw - result.damage_raw_post_essence
+    if result.is_crit:
+        # Show crit multiply in formula (damage_raw_post_essence includes ×2.5)
+        result.debug_formula += " \u00d72.5 !!CRIT!!"
+    elif _ess_reduc > 0 and result.essence_applied:
+        result.debug_formula += f" (\u2212{_ess_reduc} {result.essence_applied} resist)"
 
     return result

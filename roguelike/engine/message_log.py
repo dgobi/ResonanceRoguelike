@@ -1,16 +1,17 @@
 # engine/message_log.py
 from __future__ import annotations
 from dataclasses import dataclass, field
+from engine.palette import *
 
 
 # Message colors — thematic palette
-MSG_NORMAL    = (200, 200, 180)   # default parchment
-MSG_IMPORTANT = (255, 220, 100)   # gold — significant events
-MSG_DANGER    = (220, 80,  60)    # blood red — injury, threat
-MSG_WORLD     = (140, 180, 140)   # muted green — world/environment
-MSG_CORRUPT   = (180, 80, 220)    # void purple — corruption events
-MSG_SYSTEM    = (120, 120, 120)   # grey — system messages
-MSG_WHISPER   = (100, 100, 140)   # dim blue — things half-heard
+MSG_NORMAL    = BONE_PALE   # default parchment
+MSG_IMPORTANT = RESONANCE_GOLD   # gold — significant events
+MSG_DANGER    = EMBER_GLOW    # blood red — injury, threat
+MSG_WORLD     = LIFE_GREEN   # muted green — world/environment
+MSG_CORRUPT   = RESONANCE_BLOOM    # void purple — corruption events
+MSG_SYSTEM    = SLATE_DARK   # grey — system messages
+MSG_WHISPER   = STONE_BLUE   # dim blue — things half-heard
 
 
 @dataclass

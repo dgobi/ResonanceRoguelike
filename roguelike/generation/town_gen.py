@@ -83,6 +83,368 @@ BELL_WEIGHTS = [15,       25,        30,        20,        10        ]
 
 
 # ------------------------------------------------------------------ #
+#  2×2 town generation constants
+# ------------------------------------------------------------------ #
+
+# Primary road bands in local-chunk coordinates.
+# These straddle the chunk seam so roads connect across all 4 chunks.
+# N-S road occupies east 4 tiles of left chunks, west 4 tiles of right.
+# E-W road occupies south 4 tiles of top chunks, north 4 tiles of bottom.
+NS_SEAM_LO = 76    # left chunks:  road at local x = 76..79
+NS_SEAM_HI = 4     # right chunks: road at local x = 0..3
+EW_SEAM_LO = 39    # top chunks:   road at local y = 39..42
+EW_SEAM_HI = 4     # bottom chunks: road at local y = 0..3
+SEAM_ROAD_W = 4    # tiles wide
+
+# How many tiles each road band extends from the seam edge into the chunk
+ROAD_MARGIN = 3    # keep buildings at least this far from road band edge
+
+
+def _road_bands_for_role(role: str) -> tuple[tuple[int,int], tuple[int,int]]:
+    """
+    Return (ns_band, ew_band) as (x_start, x_end_excl) and
+    (y_start, y_end_excl) for the primary road bands in a chunk with
+    the given role.
+    """
+    if role in ("NW", "SW"):
+        ns = (NS_SEAM_LO, 80)       # x 76-79 (east edge)
+    else:
+        ns = (0, NS_SEAM_HI)        # x 0-3   (west edge)
+
+    if role in ("NW", "NE"):
+        ew = (EW_SEAM_LO, 43)       # y 39-42 (south edge)
+    else:
+        ew = (0, EW_SEAM_HI)        # y 0-3   (north edge)
+
+    return ns, ew
+
+
+def _safe_zone_for_role(role: str, map_w: int, map_h: int) -> tuple[int,int,int,int]:
+    """
+    Return (x0, y0, w, h) of the safe interior zone for block-grid
+    placement — avoids all road bands and map edges.
+    """
+    ns, ew = _road_bands_for_role(role)
+
+    if role in ("NW", "SW"):
+        x0 = TOWN_MARGIN
+        x1 = ns[0] - ROAD_MARGIN           # left of N-S road
+    else:
+        x0 = ns[1] + ROAD_MARGIN           # right of N-S road
+        x1 = map_w - TOWN_MARGIN
+
+    if role in ("NW", "NE"):
+        y0 = TOWN_MARGIN
+        y1 = ew[0] - ROAD_MARGIN           # above E-W road
+    else:
+        y0 = ew[1] + ROAD_MARGIN           # below E-W road
+        y1 = map_h - TOWN_MARGIN
+
+    w = max(0, x1 - x0)
+    h = max(0, y1 - y0)
+    return x0, y0, w, h
+
+
+def _place_town_lamps(
+    local_map,
+    terrain_data: dict,
+    ns: tuple[int,int],
+    ew: tuple[int,int],
+    map_w:    int,
+    map_h:    int,
+    town_id:  int,
+) -> None:
+    """
+    Place street-lamp terrain tiles along the edges of the primary road
+    bands. Lamps are placed one tile OUTSIDE the road band so they don't
+    block movement on the road itself.
+
+    State distribution is seeded by tile position + town_id:
+      near plaza  (dist ≤ 8):  50% working, 30% sputtering, 20% dead
+      mid-town   (≤ 20):       20% working, 40% sputtering, 40% dead
+      periphery  (> 20):       10% working, 20% sputtering, 70% dead
+    """
+    ns_cx = (ns[0] + ns[1]) // 2
+    ew_cy = (ew[0] + ew[1]) // 2
+
+    def state_for(x: int, y: int) -> str:
+        dist = ((x - ns_cx) ** 2 + (y - ew_cy) ** 2) ** 0.5
+        h    = hash((x * 7919, y * 6271, town_id)) & 0xFF
+        if dist <= 8:
+            if h < 128: return "street_lamp_working"
+            if h < 204: return "street_lamp_sputtering"
+            return "street_lamp_dead"
+        elif dist <= 20:
+            if h < 51:  return "street_lamp_working"
+            if h < 153: return "street_lamp_sputtering"
+            return "street_lamp_dead"
+        else:
+            if h < 26:  return "street_lamp_working"
+            if h < 77:  return "street_lamp_sputtering"
+            return "street_lamp_dead"
+
+    LAMP_STEP = 8   # place a lamp every N tiles along the road
+
+    # Lamps flanking the E-W road band — one tile above and below
+    for x in range(0, map_w, LAMP_STEP):
+        if ns[0] <= x < ns[1]:
+            continue  # skip the N-S crossing
+        for y_off in [ew[0] - 1, ew[1]]:
+            if local_map.in_bounds(x, y_off):
+                _set_terrain(local_map, x, y_off, state_for(x, y_off), terrain_data)
+
+    # Lamps flanking the N-S road band — one tile left and right
+    for y in range(0, map_h, LAMP_STEP):
+        if ew[0] <= y < ew[1]:
+            continue  # skip the E-W crossing
+        for x_off in [ns[0] - 1, ns[1]]:
+            if local_map.in_bounds(x_off, y):
+                _set_terrain(local_map, x_off, y, state_for(x_off, y), terrain_data)
+
+
+def generate_town_quadrant(
+    chunk,
+    local_map,
+    map_w:         int,
+    map_h:         int,
+    terrain_data:  dict,
+    building_data: dict,
+    rng:           random.Random,
+) -> tuple:
+    """
+    Generate one 2×2 quadrant of a multi-chunk town.
+    Uses chunk.town_role ("NW"|"NE"|"SW"|"SE") to determine which
+    primary road bands to stamp and which safe zone to fill.
+    """
+    from world.world_map import TownData
+
+    role = chunk.town_role or "NW"
+    ns, ew = _road_bands_for_role(role)
+
+    # ── Primary roads ────────────────────────────────────────────────
+    street_tiles: set[tuple[int, int]] = set()
+
+    # N-S road band
+    for x in range(ns[0], ns[1]):
+        for y in range(map_h):
+            if local_map.in_bounds(x, y):
+                _set_terrain(local_map, x, y, "road_0", terrain_data)
+                street_tiles.add((x, y))
+
+    # E-W road band
+    for y in range(ew[0], ew[1]):
+        for x in range(map_w):
+            if local_map.in_bounds(x, y):
+                _set_terrain(local_map, x, y, "road_0", terrain_data)
+                street_tiles.add((x, y))
+
+    # Plaza: intersection of both road bands → flagstone
+    for x in range(ns[0], ns[1]):
+        for y in range(ew[0], ew[1]):
+            if local_map.in_bounds(x, y):
+                _set_terrain(local_map, x, y, "flagstone", terrain_data)
+
+    # ── Safe zone block grid ─────────────────────────────────────────
+    zone_x0, zone_y0, zone_w, zone_h = _safe_zone_for_role(role, map_w, map_h)
+
+    if zone_w < MIN_BLOCK_W or zone_h < MIN_BLOCK_H:
+        # Too small — just place a lamp and return
+        spawn = _find_spawn_on_street(local_map, 0, 0, map_w, map_h, street_tiles)
+        chunk.town_data = TownData(
+            name=chunk.name or "Settlement", size="large", districts=[],
+            bell_state="spent", is_festival=False,
+            waystone_pos=(map_w // 2, map_h // 2), bell_tower_pos=None,
+            buildings=[], creature_spawns=[],
+        )
+        return local_map, spawn
+
+    blocks, col_starts, col_widths, row_starts, row_heights = _generate_block_grid(
+        (zone_x0, zone_y0, zone_w, zone_h), rng
+    )
+
+    additional_streets = _stamp_streets(
+        local_map,
+        col_starts, col_widths,
+        row_starts, row_heights,
+        zone_x0, zone_y0, zone_w, zone_h,
+        terrain_data,
+    )
+    street_tiles.update(additional_streets)
+
+    # ── Special blocks (NW only) ────────────────────────────────────
+    bell_state     = rng.choices(BELL_STATES, weights=BELL_WEIGHTS, k=1)[0]
+    waystone_pos   = (map_w // 2, map_h // 2)
+    bell_tower_pos = None
+    placed_buildings: list[dict] = []
+
+    if role == "NW" and len(blocks) >= 2:
+        waystone_idx, bell_idx = _pick_special_blocks(blocks, rng)
+        block_districts        = _assign_block_districts(blocks, waystone_idx, bell_idx)
+
+        waystone_pos   = _place_waystone_square(local_map, blocks[waystone_idx],
+                                                building_data, terrain_data)
+        bell_tower_pos = _place_bell_tower(local_map, blocks[bell_idx],
+                                           building_data, terrain_data, bell_state, rng)
+        for idx, block in enumerate(blocks):
+            if idx in (waystone_idx, bell_idx):
+                continue
+            district = block_districts[idx]
+            placed_buildings.extend(
+                _fill_block_with_buildings(local_map, block, district,
+                                           building_data, terrain_data, rng)
+            )
+    else:
+        # Non-NW chunks fill with district-appropriate buildings
+        bell_state = "spent"
+        district_cycle = ["residential", "market_quarter", "ossuary", "residential"]
+        for idx, block in enumerate(blocks):
+            district = district_cycle[idx % len(district_cycle)]
+            placed_buildings.extend(
+                _fill_block_with_buildings(local_map, block, district,
+                                           building_data, terrain_data, rng)
+            )
+
+    # ── Alleys ────────────────────────────────────────────────────────
+    _add_alleys(local_map, blocks,
+                0 if role == "NW" else -1,
+                1 if role == "NW" else -1,
+                terrain_data, rng)
+
+    # ── WFC ground fill ──────────────────────────────────────────────
+    import os
+    from generation.wfc import WFCSolver
+
+    wfc_rng = random.Random(hash((chunk.town_id, role)) & 0xFFFFFFFF)
+
+    # Identify building footprints for exclusion
+    building_cells: set[tuple[int, int]] = set()
+    for bld in placed_buildings:
+        for bx2 in range(bld["x"] - 1, bld["x"] + bld["w"] + 1):
+            for by2 in range(bld["y"] - 1, bld["y"] + bld["h"] + 1):
+                building_cells.add((bx2, by2))
+
+    # Helper: is tile currently a road/structure (skip for WFC)?
+    def _is_road_or_structure(x2: int, y2: int) -> bool:
+        if not local_map.in_bounds(x2, y2):
+            return True
+        t2 = local_map.tiles[x2, y2]["terrain"]
+        if isinstance(t2, bytes):
+            t2 = t2.decode()
+        # Roads — don't overwrite
+        if str(t2).startswith("road"):
+            return True
+        # Structures (walls, floors, doors, lamps, stairs) — don't overwrite
+        non_overwrit = {"wall", "wood_wall", "floor", "door_closed", "door_open",
+                        "stairs_down", "stairs_up", "grey_stone", "ancient_floor",
+                        "table", "gravel", "street_lamp_working",
+                        "street_lamp_sputtering", "street_lamp_dead"}
+        return str(t2) in non_overwrit
+
+    # Plaza WFC (NW chunk only — around road crossing)
+    base_path = os.path.join(os.path.dirname(__file__), "..", "data", "wfc")
+    plaza_json = os.path.normpath(os.path.join(base_path, "town_plaza.json"))
+    block_json = os.path.normpath(os.path.join(base_path, "town_block.json"))
+
+    # WFC tile name → terrain name mapping (from plaza tileset)
+    PLAZA_TERRAIN = {
+        "cobble_clean":   "cobblestone",
+        "cobble_cracked": "cobblestone_cracked",
+        "cobble_mossy":   "cobblestone_mossy",
+        "puddle":         "puddle",
+        "debris":         "debris_scatter",
+        "waystone_base":  "waystone_plinth",
+    }
+    BLOCK_TERRAIN = {
+        "packed_earth":  "packed_earth",
+        "dirt_path":     "dirt_path",
+        "weedy_cobble":  "weedy_cobble",
+        "mud_patch":     "mud",
+        "tall_grass":    "tall_grass",
+        "debris":        "debris_scatter",
+    }
+
+    if role == "NW" and os.path.exists(plaza_json):
+        ns_cx = (ns[0] + ns[1]) // 2
+        ew_cy = (ew[0] + ew[1]) // 2
+        px0 = max(0, ns_cx - 8)
+        py0 = max(0, ew_cy - 5)
+        pw  = min(map_w, ns_cx + 8) - px0
+        ph  = min(map_h, ew_cy + 5) - py0
+        if pw >= 4 and ph >= 4:
+            try:
+                solver  = WFCSolver.from_json(plaza_json, wfc_rng)
+                grid    = solver.solve(pw, ph)
+                fallback_t = "cobblestone_cracked"
+                for lx in range(pw):
+                    for ly in range(ph):
+                        wx2 = px0 + lx
+                        wy2 = py0 + ly
+                        if (wx2, wy2) in building_cells:
+                            continue
+                        if _is_road_or_structure(wx2, wy2):
+                            continue
+                        tile_name = grid[lx][ly] if grid else fallback_t
+                        terrain_name = PLAZA_TERRAIN.get(tile_name, fallback_t)
+                        _set_terrain(local_map, wx2, wy2, terrain_name, terrain_data)
+            except Exception:
+                pass   # WFC failure is non-fatal
+
+    # Block interior WFC (all roles)
+    if os.path.exists(block_json):
+        for bx3, by3, bw3, bh3 in blocks:
+            # Define interior as block rect minus 1-tile edge margin
+            ix0 = bx3 + 1
+            iy0 = by3 + 1
+            iw  = bw3 - 2
+            ih  = bh3 - 2
+            if iw < 4 or ih < 4:
+                continue
+            try:
+                solver  = WFCSolver.from_json(block_json, wfc_rng)
+                grid    = solver.solve(iw, ih)
+                fallback_t = "packed_earth"
+                for lx in range(iw):
+                    for ly in range(ih):
+                        wx2 = ix0 + lx
+                        wy2 = iy0 + ly
+                        if (wx2, wy2) in building_cells:
+                            continue
+                        if _is_road_or_structure(wx2, wy2):
+                            continue
+                        tile_name = grid[lx][ly] if grid else fallback_t
+                        terrain_name = BLOCK_TERRAIN.get(tile_name, fallback_t)
+                        _set_terrain(local_map, wx2, wy2, terrain_name, terrain_data)
+            except Exception:
+                pass
+
+    # ── Street lamps ─────────────────────────────────────────────────
+    town_id = chunk.town_id if chunk.town_id >= 0 else 0
+    _place_town_lamps(local_map, terrain_data, ns, ew, map_w, map_h, town_id)
+
+    # ── Creature spawns ───────────────────────────────────────────────
+    district_name = "bell_quarter" if role == "NW" else "residential"
+    district_rects = [(district_name, (zone_x0, zone_y0, zone_w, zone_h))]
+    creature_spawns = _compute_creature_spawns(local_map, district_rects, bell_state, rng)
+
+    # ── TownData ──────────────────────────────────────────────────────
+    chunk.town_data = TownData(
+        name            = chunk.name or "Settlement",
+        size            = "large",
+        districts       = [district_name],
+        bell_state      = bell_state,
+        is_festival     = rng.random() < 0.2,
+        waystone_pos    = waystone_pos,
+        bell_tower_pos  = bell_tower_pos,
+        buildings       = placed_buildings,
+        creature_spawns = creature_spawns,
+    )
+
+    spawn = _find_spawn_on_street(local_map, zone_x0, zone_y0, zone_w, zone_h,
+                                  street_tiles)
+    return local_map, spawn
+
+
+# ------------------------------------------------------------------ #
 #  Terrain stamping helper with validation
 # ------------------------------------------------------------------ #
 
@@ -120,6 +482,11 @@ def generate_town(
     Populates chunk.town_data and returns (local_map, spawn_xy).
     """
     from world.world_map import TownData
+
+    # 2×2 multi-chunk mode when chunk has a role assigned
+    if chunk.town_role:
+        return generate_town_quadrant(chunk, local_map, map_w, map_h,
+                                      terrain_data, building_data, rng)
 
     town_x = TOWN_MARGIN
     town_y = TOWN_MARGIN
@@ -456,6 +823,27 @@ def _place_bell_tower(
     cy = max(by + tlh // 2 + 1, min(by + bh - tlh // 2 - 1, cy))
 
     stamp_layout_interior(local_map, layout, cx, cy, terrain_data)
+
+    # Place the actual bell tile at the inner chamber centre
+    BELL_TERRAIN = {
+        "intact":    "bell_intact",
+        "cracked":   "bell_cracked",
+        "spent":     "bell_dead",
+        "destroyed": "bell_dead",
+    }
+    bell_terrain = BELL_TERRAIN.get(bell_state)
+    if bell_terrain:
+        bx_bell = cx
+        by_bell = cy
+        td = terrain_data.get(bell_terrain, {})
+        if local_map.in_bounds(bx_bell, by_bell):
+            local_map.set_tile(bx_bell, by_bell, bell_terrain,
+                               td.get("walkable", False),
+                               td.get("transparent", False))
+            print(f"[town] bell placed: {bell_terrain} at local ({bx_bell},{by_bell})")
+    else:
+        print(f"[town] bell NOT placed — bell_state={bell_state!r} not in BELL_TERRAIN")
+
     return (cx, cy)
 
 
@@ -516,7 +904,7 @@ def _plot_is_clear(local_map, ox: int, oy: int, w: int, h: int) -> bool:
             t = local_map.tiles[x, y]["terrain"]
             if isinstance(t, bytes):
                 t = t.decode()
-            if t not in ("grass", "cobblestone", "gravel", "flagstone"):
+            if t not in ("grass", "cobblestone", "gravel", "flagstone", "road_0", "cobblestone_cracked", "cobblestone_mossy", "puddle", "debris_scatter", "packed_earth", "dirt_path", "weedy_cobble", "mud", "tall_grass"):
                 return False
     return True
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 import pygame
 from typing import TYPE_CHECKING
 from config import UI_PANEL_INSET
+from engine.palette import *
 
 if TYPE_CHECKING:
     from engine.engine import Engine
@@ -40,14 +41,14 @@ class LookMode:
     and examine what is on each tile.
     """
 
-    CURSOR_COLOR    = (255, 255, 100)
+    CURSOR_COLOR    = DISCHARGE_FLASH
     CURSOR_CHAR     = "X"
-    EXAMINE_BG      = (12, 10, 18)
-    EXAMINE_BORDER  = (100, 80, 140)
-    EXAMINE_TITLE   = (200, 180, 255)
-    EXAMINE_TEXT    = (180, 165, 145)
-    EXAMINE_DIM     = (110, 100, 90)
-    EXAMINE_STAT    = (140, 200, 140)
+    EXAMINE_BG      = DEEP_NOTHING
+    EXAMINE_BORDER  = VOID_PURPLE
+    EXAMINE_TITLE   = SPIRIT_BLUE
+    EXAMINE_TEXT    = WORN_STONE
+    EXAMINE_DIM     = EARTH_BROWN
+    EXAMINE_STAT    = LIFE_GREEN
 
     def __init__(self) -> None:
         self.cursor_x:      int  = 0
@@ -298,7 +299,7 @@ class LookMode:
 
         # Highlight using a transparent surface blit
         highlight = pygame.Surface((tw, th), pygame.SRCALPHA)
-        highlight.fill((255, 255, 100, 60))
+        highlight.fill(DISCHARGE_FLASH + (60,))
         surface.blit(highlight, (screen_x, screen_y))
 
         # Border
@@ -308,6 +309,42 @@ class LookMode:
             (screen_x, screen_y, tw, th),
             1,
         )
+
+    def render_hint_overlay(
+        self,
+        screen:   pygame.Surface,
+        viewport: pygame.Rect,
+        display:  "DisplayConfig",
+    ) -> None:
+        """
+        Draw look-mode hint text in the top-left of the viewport,
+        overlaid on the map with a dark background behind each line.
+        """
+        if not self._font_small:
+            return
+
+        hint_lines = [
+            "[ LOOK ]",
+            "Move cursor to examine",
+            "X / Enter for details",
+            "ESC / L to exit",
+        ]
+
+        x      = viewport.left + 8
+        y      = viewport.top  + 8
+        line_h = display.line_height("small")
+
+        for line in hint_lines:
+            text_surf = self._font_small.render(line, True, UI_TEXT_MID)
+            bg_rect   = pygame.Rect(x - 2, y - 1,
+                                    text_surf.get_width() + 4,
+                                    text_surf.get_height() + 2)
+            bg_surf   = pygame.Surface((bg_rect.w, bg_rect.h), pygame.SRCALPHA)
+            bg_surf.fill(VOID_BLACK + (180,))
+            screen.blit(bg_surf,   bg_rect)
+            screen.blit(text_surf, (x, y))
+            y += line_h
+
 
     def render_look_bar(
         self,
@@ -328,17 +365,10 @@ class LookMode:
         pygame.draw.line(surf, self.EXAMINE_BORDER,
                          (0, 0), (panel_rect.width, 0), 1)
 
-        # Header
-        header = self._font_title.render(
-            "[ LOOK ]  Move cursor to examine  —  X / Enter for details  —  ESC / L to exit",
-            True, (140, 120, 180)
-        )
-        surf.blit(header, (4, 4))
-
         # Cursor coords
         coord_str  = f"({self.cursor_x}, {self.cursor_y})"
-        coord_surf = self._font_small.render(coord_str, True, (100, 90, 75))
-        surf.blit(coord_surf, (panel_rect.width - coord_surf.get_width() - 8, 4))
+        coord_surf = self._font_small.render(coord_str, True, EARTH_BROWN)
+        surf.blit(coord_surf, (4, 4))
 
         things = self._get_things_at(engine, self.cursor_x, self.cursor_y)
         y = 22
@@ -353,9 +383,9 @@ class LookMode:
                 # Name only — no tile glyph
                 color = {
                     "terrain":  self.EXAMINE_DIM,
-                    "creature": (220, 160, 120),
-                    "item":     (160, 200, 160),
-                    "player":   (227, 245, 241),
+                    "creature": PALE_FLESH,
+                    "item":     PALE_LIFE,
+                    "player":   FROST_WHITE,
                 }.get(thing["type"], self.EXAMINE_TEXT)
 
                 name_surf = self._font_normal.render(
@@ -372,7 +402,7 @@ class LookMode:
                         d = self._font_small.render(desc, True, self.EXAMINE_DIM)
                         surf.blit(d, (name_end, y + 2))
 
-                y += 18
+                y += self._font_normal.get_linesize() + 2
                 if y > panel_rect.height - 4:
                     break
 
@@ -453,6 +483,22 @@ class LookMode:
 
         y = max(text_y + 8, y + 52)
 
+        # Stats for terrain — resonance_emit shown at threshold_resonance_sight
+        if subject["type"] == "terrain":
+            thresholds = getattr(engine, "_corruption_thresholds", set())
+            if "threshold_resonance_sight" in thresholds:
+                terrain_id  = subject.get("id", "")
+                terrain_def = engine.data.terrain.get(terrain_id, {})
+                emit = terrain_def.get("resonance_emit", 0.0)
+                if emit > 0.0:
+                    lbl_s = self._font_small.render(
+                        "resonance_emit", True, STONE_BLUE)
+                    val_s = self._font_small.render(
+                        f"{emit:.2f}", True, SLATE_MID)
+                    popup.blit(lbl_s, (UI_PANEL_INSET, y))
+                    popup.blit(val_s, (UI_PANEL_INSET + lbl_s.get_width() + 8, y))
+                    y += 14
+
         # Stats for items
         if subject["type"] == "item":
             entity  = subject.get("entity")
@@ -467,8 +513,8 @@ class LookMode:
 
             def render_stat_line(label: str, value: str) -> None:
                 nonlocal y
-                lbl_s = self._font_small.render(label, True, (68, 99, 116))
-                val_s = self._font_small.render(value, True, (227, 245, 241))
+                lbl_s = self._font_small.render(label, True, STONE_BLUE)
+                val_s = self._font_small.render(value, True, FROST_WHITE)
                 popup.blit(lbl_s, (UI_PANEL_INSET, y))
                 popup.blit(val_s, (value_col_x, y))
                 y += 14
@@ -482,9 +528,9 @@ class LookMode:
                 strength = item_def.get("essence_strength", 0.0)
                 if essence:
                     pips  = round(strength * 5)
-                    lbl_s = self._font_small.render("Essence", True, (68, 99, 116))
+                    lbl_s = self._font_small.render("Essence", True, STONE_BLUE)
                     popup.blit(lbl_s, (UI_PANEL_INSET, y))
-                    ess_s = self._font_small.render(essence + "  ", True, (227, 245, 241))
+                    ess_s = self._font_small.render(essence + "  ", True, FROST_WHITE)
                     popup.blit(ess_s, (value_col_x, y))
                     pip_x   = value_col_x + ess_s.get_width()
                     pip_r   = max(1, 4)
@@ -493,10 +539,10 @@ class LookMode:
                     for i in range(5):
                         cx = pip_x + i * pip_gap + pip_r
                         if i < pips:
-                            pygame.draw.circle(popup, (129, 175, 181), (cx, cy), pip_r)
+                            pygame.draw.circle(popup, SLATE_MID, (cx, cy), pip_r)
                         else:
-                            pygame.draw.circle(popup, (30, 35, 50), (cx, cy), pip_r)
-                            pygame.draw.circle(popup, (129, 175, 181), (cx, cy), pip_r, 1)
+                            pygame.draw.circle(popup, MIDNIGHT_DEEP, (cx, cy), pip_r)
+                            pygame.draw.circle(popup, SLATE_MID, (cx, cy), pip_r, 1)
                     y += 14
                 render_stat_line("Slot",   item_def.get("slot", "\u2014").replace("_", " ").title())
                 render_stat_line("Weight", f"{item_def.get('weight', 0)}kg")
@@ -513,14 +559,14 @@ class LookMode:
                     bar_total = max(1, 64)
                     bar_h_px  = 5
                     filled    = max(0, min(int(cov * bar_total), bar_total))
-                    lbl_s = self._font_small.render(layer["name"], True, (68, 99, 116))
+                    lbl_s = self._font_small.render(layer["name"], True, STONE_BLUE)
                     popup.blit(lbl_s, (UI_PANEL_INSET, y))
                     bar_y_px = y + 3
-                    pygame.draw.rect(popup, (40, 50, 60),
+                    pygame.draw.rect(popup, SLATE_DARK,
                                      (value_col_x, bar_y_px, bar_total, bar_h_px))
-                    pygame.draw.rect(popup, (129, 175, 181),
+                    pygame.draw.rect(popup, SLATE_MID,
                                      (value_col_x, bar_y_px, filled, bar_h_px))
-                    av_s = self._font_small.render(f"  AV {av}  {mat}", True, (227, 245, 241))
+                    av_s = self._font_small.render(f"  AV {av}  {mat}", True, FROST_WHITE)
                     popup.blit(av_s, (value_col_x + bar_total + 4, y))
                     y += 14
                 render_stat_line("Weight", f"{item_def.get('weight', 0)}kg")
@@ -538,7 +584,7 @@ class LookMode:
             # Equipped tag
             equip = getattr(engine.player, "equipment", None)
             if equip and entity and equip.is_equipped(entity):
-                eq_s = self._font_small.render("[Equipped]", True, (226, 181, 112))
+                eq_s = self._font_small.render("[Equipped]", True, OLD_GOLD)
                 popup.blit(eq_s, (UI_PANEL_INSET, y))
                 y += 14
 
@@ -569,10 +615,10 @@ class LookMode:
                 for loc_id, loc_hp in fighter.location_hp.items():
                     loc_max  = fighter.location_max.get(loc_id, max(loc_hp, 1))
                     frac     = loc_hp / loc_max if loc_max > 0 else 0.0
-                    color    = (93, 167, 93)  if frac > 0.5  else \
-                               (226, 181, 112) if frac > 0.25 else \
-                               (188, 89, 96)
-                    empty_color = (40, 40, 50)
+                    color    = LIFE_GREEN  if frac > 0.5  else \
+                               OLD_GOLD if frac > 0.25 else \
+                               DUSTY_ROSE
+                    empty_color = SLATE_DARK
                     filled_w    = int(frac * bar_total_w)
 
                     label = self._font_small.render(loc_id, True, self.EXAMINE_DIM)
@@ -594,7 +640,7 @@ class LookMode:
                     imp_str = ", ".join(sorted(fighter.impairments))
                     popup.blit(
                         self._font_small.render(
-                            f"Impairments: {imp_str}", True, (188, 89, 96)
+                            f"Impairments: {imp_str}", True, DUSTY_ROSE
                         ),
                         (UI_PANEL_INSET, y),
                     )
@@ -606,7 +652,7 @@ class LookMode:
                 if essence_mods:
                     y += 4
                     popup.blit(
-                        self._font_small.render("Essence:", True, (68, 99, 116)),
+                        self._font_small.render("Essence:", True, STONE_BLUE),
                         (UI_PANEL_INSET, y),
                     )
                     y += 14
@@ -618,19 +664,19 @@ class LookMode:
                         mod = essence_mods.get(ess, 1.0)
                         if mod >= 1.8:
                             indicator = "++"
-                            col = (93, 167, 93)
+                            col = LIFE_GREEN
                         elif mod >= 1.3:
                             indicator = "+"
-                            col = (180, 165, 80)
+                            col = OLD_GOLD
                         elif mod <= 0.3:
                             indicator = "--"
-                            col = (145, 58, 82)
+                            col = BLOOD_STONE
                         elif mod <= 0.6:
                             indicator = "-"
-                            col = (188, 89, 96)
+                            col = DUSTY_ROSE
                         else:
                             indicator = "="
-                            col = (68, 99, 116)
+                            col = STONE_BLUE
                         line = self._font_small.render(
                             f"  {ess:<12} {indicator}", True, col
                         )
@@ -651,30 +697,33 @@ class LookMode:
                 frac = fighter.hp / fighter.max_hp if fighter.max_hp > 0 else 0.0
                 if frac > 0.75:
                     status_word  = "Unmarked"
-                    status_color = (93, 167, 93)
+                    status_color = LIFE_GREEN
                 elif frac > 0.5:
                     status_word  = "Bloodied"
-                    status_color = (180, 165, 80)
+                    status_color = OLD_GOLD
                 elif frac > 0.25:
                     status_word  = "Grievous"
-                    status_color = (226, 181, 112)
+                    status_color = OLD_GOLD
                 elif frac > 0.0:
                     status_word  = "Failing"
-                    status_color = (188, 89, 96)
+                    status_color = DUSTY_ROSE
                 else:
                     status_word  = "Undone"
-                    status_color = (145, 58, 82)
+                    status_color = BLOOD_STONE
 
-                label_surf  = self._font_small.render("Bearing: ", True, (68, 99, 116))
+                label_surf  = self._font_small.render("Bearing: ", True, STONE_BLUE)
                 status_surf = self._font_small.render(status_word, True, status_color)
                 popup.blit(label_surf,  (UI_PANEL_INSET, y))
                 popup.blit(status_surf, (UI_PANEL_INSET + label_surf.get_width(), y))
                 y += 16
 
-        # Footer
+        # Footer — positioned inside the panel border (UI_PANEL_INSET from bottom)
+        _footer_text_h = 14   # small font nominal height
+        _footer_y = ph - UI_PANEL_INSET - _footer_text_h
+        _divider_y = _footer_y - 5
         pygame.draw.line(popup, self.EXAMINE_BORDER,
-                         (UI_PANEL_INSET, ph - 22),
-                         (pw - UI_PANEL_INSET, ph - 22), 1)
+                         (UI_PANEL_INSET, _divider_y),
+                         (pw - UI_PANEL_INSET, _divider_y), 1)
         n = len(things)
         if n > 1:
             footer_text = (f"Tab / N \u00b7 P to cycle  ({idx + 1}/{n})   "
@@ -682,6 +731,6 @@ class LookMode:
         else:
             footer_text = "ESC / X to close"
         footer = self._font_small.render(footer_text, True, self.EXAMINE_DIM)
-        popup.blit(footer, (UI_PANEL_INSET, ph - 16))
+        popup.blit(footer, (UI_PANEL_INSET, _footer_y))
 
         surface.blit(popup, (px, py))

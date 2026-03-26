@@ -18,5 +18,13 @@
   "essence_modifiers": {
     "Dissolution": 0.4, "Quickening": 2.2, "Binding": 1.3,
     "Severance": 0.9, "Consumption": 0.3, "Revelation": 2.0
+  },
+  "attack_verb": "claws at thee",
+  "blood_type": "bone_dust",
+  "corpse_sprite": {"col": 2055, "row": 0},
+  "callout_sounds": {
+    "on_spot":   {"text": "...hhh", "color": [68,  99,  116]},
+    "on_attack": {"text": "~hhh~",  "color": [68,  99,  116]},
+    "on_death":  {"text": "...~",   "color": [68,  99,  116]}
   }
 }
