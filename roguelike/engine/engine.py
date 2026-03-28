@@ -8,7 +8,7 @@ import numpy as np
 import random
 
 from pathlib import Path
-from config import FOV_RADIUS, MAP_WIDTH, MAP_HEIGHT, MSG_PANEL_W, STATUS_BAR_H, OVERMAP_SIDEBAR_W, UI_PANEL_INSET
+from config import MAP_WIDTH, MAP_HEIGHT, MSG_PANEL_W, STATUS_BAR_H, OVERMAP_SIDEBAR_W, UI_PANEL_INSET
 from rendering.sprite_registry import SpriteRegistry
 from rendering.tile_registry import TileRegistry
 from rendering.ui_registry import UIRegistry
@@ -23,12 +23,15 @@ from components.needs import Needs
 from components.corruption import Corruption
 from components.inventory import Inventory
 from engine.look_mode import LookMode
+from engine.interaction_cursor import InteractionCursor
 from engine.save_manager import SaveManager
 from engine.item_factory import ItemFactory
 from engine.item_system import ItemSystem
 from engine.inventory_screen import InventoryScreen
+from engine.health_screen import HealthScreen
 from engine.text_reader import TextReader
 from rendering.perk_screen import PerkScreen
+from rendering.craft_screen import CraftScreen
 
 from typing import TYPE_CHECKING
 from engine.palette import *
@@ -105,44 +108,38 @@ def _do_level_up(player: "Actor", engine: "Engine") -> None:
     lc.exp_to_next  = lc.exp_threshold(lc.level)
     lc.perk_points += 1
 
-    # Scale body part HP by 1.08
+    # Scale max HP by 1.08 and restore the gain
     fighter = getattr(player, "fighter", None)
     if fighter:
-        loc_hp  = getattr(fighter, "location_hp",  {})
-        loc_max = getattr(fighter, "location_max", {})
-        for loc in list(loc_max.keys()):
-            old_max          = loc_max[loc]
-            new_max          = max(1, int(old_max * 1.08))
-            gain             = new_max - old_max
-            loc_max[loc]     = new_max
-            loc_hp[loc]      = loc_hp.get(loc, old_max) + gain
+        old_max      = fighter.max_hp
+        new_max      = max(1, int(old_max * 1.08))
+        gain         = new_max - old_max
+        fighter.max_hp = new_max
+        fighter.hp     = fighter.hp + gain
 
     engine.log.add("Something shifts in you.", OLD_GOLD)   # old_gold
     engine.log.add("A perk point awaits. Press K to spend it.", STONE_BLUE)   # slate_mid
 
+    # Prolonged level-up callout — slow upward drift, 2.0–2.5s
+    import random as _lrng
+    _levelup_texts = ["ASCENSION", "SOMETHING SHIFTS", "A THRESHOLD CROSSED"]
+    _ltext = _lrng.choice(_levelup_texts)
+    engine.callouts.add(
+        _ltext,
+        float(player.x), float(player.y) - 1.0,
+        OLD_GOLD,
+        lifetime=_lrng.uniform(2.0, 2.5),
+        font_size="levelup",
+        vy=-12.0,    # slow upward drift
+    )
+
 
 def _heal_least_damaged(player: "Actor", amount: int) -> None:
-    """Heal `amount` HP to the body part with the most room to heal."""
+    """Heal `amount` HP from the single pool."""
     fighter = getattr(player, "fighter", None)
     if not fighter:
         return
-    loc_hp  = getattr(fighter, "location_hp",  None)
-    loc_max = getattr(fighter, "location_max", None)
-    if not loc_hp or not loc_max:
-        return
-    # Find the location with the most healing room (max_hp - current_hp)
-    best_loc  = None
-    best_room = -1
-    for loc, cur in loc_hp.items():
-        room = loc_max.get(loc, cur) - cur
-        if room > best_room:
-            best_room = room
-            best_loc  = loc
-    if best_loc is None or best_room <= 0:
-        return   # all parts at max — nothing to heal
-    fighter.location_hp[best_loc] = min(
-        loc_hp[best_loc] + amount, loc_max.get(best_loc, loc_hp[best_loc] + amount)
-    )
+    fighter.heal(amount)
 
 
 # Unarmed combat profile — used when no weapon is equipped.
@@ -196,9 +193,11 @@ _RESONANCE_MESSAGES: dict[str, list[tuple[str, tuple]]] = {
 
 
 class GameMode(enum.Enum):
-    LOCAL   = "local"
-    OVERMAP = "overmap"
-    LOOK    = "look"
+    LOCAL               = "local"
+    OVERMAP             = "overmap"
+    LOOK                = "look"
+    INTERACTION_CURSOR  = "interaction_cursor"
+    PLACEMENT_CURSOR    = "placement_cursor"
 
 
 MOVE_KEYS: dict[int, tuple[int, int]] = {
@@ -263,12 +262,15 @@ class Engine:
         self._held_key_timer:  int        = 0
         self.log              = MessageLog()
         self.world_time       = WorldTime()
-        self.look_mode        = LookMode()
+        self.look_mode          = LookMode()
+        self.interaction_cursor = InteractionCursor()
         self.save_manager     = SaveManager(slot=0)
         self.item_factory     = ItemFactory(data)
         self.item_system      = ItemSystem()
         self.inventory_screen = InventoryScreen()
+        self.health_screen    = HealthScreen()
         self.perk_screen      = PerkScreen()
+        self.craft_screen     = CraftScreen()
         self.text_reader      = TextReader()
         self._pickup_mode:    bool = False
         self._player_is_dead:   bool = False
@@ -299,6 +301,14 @@ class Engine:
         # Terrain movement debt and concealment
         self._move_debt:             float = 0.0
         self._player_in_concealment: bool  = False
+        # Warmth system
+        self.player_near_fire:       bool  = False
+        self._warm_tile_ids:         set   = set()
+        # Placement cursor
+        self._pending_placement_tile:   str | None  = None
+        self._pending_placement_recipe: dict | None = None
+        self._placement_cursor_x:       int         = 0
+        self._placement_cursor_y:       int         = 0
 
         # Resonance / corruption state
         self.resonance_exposure:     float = 0.0
@@ -306,6 +316,7 @@ class Engine:
         self.wind_turn:              int   = 0
         self._last_exposure_tier:    int   = 0
         self._corruption_thresholds: set   = set()
+        self._resonance_sight_active: bool  = False
         self._discharge_flash:       tuple | None = None
         self._discharge_flash_turns: int   = 0
         self._log_scroll:            int   = 0
@@ -316,6 +327,7 @@ class Engine:
         # Weather
         from engine.weather import WeatherSystem
         self.weather = WeatherSystem(self.rng)
+        self.weather.load_mechanics(data.weather_defs)
 
         # Particle system (visual only — no game state)
         from rendering.particles import ParticleSystem
@@ -333,13 +345,27 @@ class Engine:
         self._fog_surface_cx:        int                     = -1
         self._fog_surface_cy:        int                     = -1
         self._effective_fov_radius:  int                     = 8
+        # Wraith aura state: entity id → consecutive turns in radius
+        self._wraith_aura_state:     dict                    = {}
+        # Overcorrect turns remaining after wraith death (adds +3 to FOV for 3 turns)
+        self._wraith_overcorrect_turns: int                  = 0
         # Deferred blood emissions — resolved to screen coords in the render loop
         self._pending_blood: list = []
+        # Entities pursuing the player across chunk boundaries — populated in
+        # _transition_chunk before cache.store, merged into new chunk after load
+        self._pending_transfer: list = []
+        # Live pursuers: entities extracted from their chunk/submap, ticked every turn.
+        # tuple: (Actor, wx, wy, submap_id_or_None)
+        # submap_id_or_None=None  → entity is in surface chunk (wx,wy)
+        # submap_id_or_None=str   → entity is in a submap; (wx,wy) is the surface chunk
+        self._live_pursuers: list = []
         # Callout system — floating text above entities (damage, sounds, status)
         from rendering.callouts import CalloutSystem
         self.callouts = CalloutSystem()
         # Deferred creature sound callouts — resolved from AI turns
         self._pending_callouts: list = []
+        # Projectile tween animations (generic, data-driven per creature JSON)
+        self._projectile_tweens: list = []
 
         # Hook registry — perk/system event dispatch
         from engine.hooks import HookRegistry, HookEvent
@@ -355,6 +381,14 @@ class Engine:
         self.hooks.register(HookEvent.ON_TILE_ENTERED,   system_resonance_on_tile_entered)
         self.hooks.register(HookEvent.ON_CHUNK_ENTERED,  system_resonance_chunk_entered)
         self._register_player_perks()
+        self._configure_player_needs()
+        self._build_warm_tile_ids()
+
+    def _configure_player_needs(self) -> None:
+        """Configure player needs from survival.json. Called at startup and after load."""
+        needs = getattr(self.player, "needs", None)
+        if needs and self.data.survival:
+            needs.configure(self.data.survival)
 
     @property
     def map_width(self) -> int:
@@ -409,7 +443,10 @@ class Engine:
         Called on game start and after any perk is gained or lost.
         """
         from engine.hooks import HookEvent
-        from engine.perk_handlers import HANDLER_MAP
+        from engine.perk_handlers import HANDLER_MAP, cleanup_perk_state
+
+        # Clean up stateful perk side-effects before clearing handlers
+        cleanup_perk_state(self)
 
         # Clear any previously registered perk handlers
         for event in HookEvent:
@@ -469,8 +506,11 @@ class Engine:
         self.ui_registry = UIRegistry()
         self.ui_registry.load()
         self.look_mode.init(self.display)
+        self.interaction_cursor.init(self.display)
         self.inventory_screen.init(self.display)
+        self.health_screen.init(self.display)
         self.perk_screen.init(self.display)
+        self.craft_screen.init(self.display)
         self.text_reader.init(self.display)
 
         if self.debug:
@@ -524,16 +564,6 @@ class Engine:
                 sw - MSG_PANEL_W - 2 * (UI_PANEL_INSET + _MAP_INSET),
                 sh - STATUS_BAR_H - 2 * (UI_PANEL_INSET + _MAP_INSET),
             )
-            if not getattr(self, "_layout_printed", False):
-                self._layout_printed = True
-                print(f"[layout] sh={sh} sw={sw}")
-                print(f"[layout] STATUS_BAR_H={STATUS_BAR_H}")
-                print(f"[layout] strip_h=0")
-                print(f"[layout] UI_PANEL_INSET={UI_PANEL_INSET}")
-                print(f"[layout] MAP_INSET={_MAP_INSET}")
-                print(f"[layout] viewport={viewport}")
-                print(f"[layout] viewport.bottom={viewport.bottom}")
-
             self._viewport   = viewport
             self._msg_panel  = msg_panel
             self._status_bar = status_bar
@@ -596,13 +626,20 @@ class Engine:
             )
 
             # --- Game world ---
-            if self.mode in (GameMode.LOCAL, GameMode.LOOK):
+            if self.mode in (GameMode.LOCAL, GameMode.LOOK,
+                             GameMode.INTERACTION_CURSOR, GameMode.PLACEMENT_CURSOR):
                 # Fill full game panel area with void color first — covers the
                 # border inset zone on all sides before panel/tiles are drawn.
                 screen.fill(VOID_BLACK, game_panel_rect)
                 cam_x, cam_y = self._get_camera(viewport)
                 shake_offset = self._update_screenshake()
                 self.visual_events.tick()
+                # Entities with active tweens are drawn at their tween position;
+                # suppress their normal tile render to avoid doubling.
+                _suppressed_ids = {
+                    t["entity_id"] for t in self._projectile_tweens
+                    if t["elapsed"] < t["duration"]
+                }
                 renderer.render(
                     screen, self.local_map, self.entities,
                     cam_x, cam_y, viewport,
@@ -611,18 +648,25 @@ class Engine:
                     void_rect=game_panel_rect,
                     player_x=self.player.x,
                     player_y=self.player.y,
+                    suppressed_entity_ids=_suppressed_ids,
                 )
                 if self.mode == GameMode.LOOK:
                     self.look_mode.render_cursor(screen, self, cam_x, cam_y)
                     self.look_mode.render_hint_overlay(screen, viewport, self.display)
                     if self.look_mode.examining:
                         self.look_mode.render_examine_popup(screen, self)
+                elif self.mode == GameMode.INTERACTION_CURSOR:
+                    self.interaction_cursor.render(screen, self, cam_x, cam_y, viewport)
+                elif self.mode == GameMode.PLACEMENT_CURSOR:
+                    self._render_placement_cursor(screen, cam_x, cam_y, viewport)
 
                 # --- Particle system (steps 4-9) ---
                 # Skip when any screen overlay is open
                 _overlay_open = (
                     self.inventory_screen.open or
+                    self.health_screen.open or
                     self.perk_screen.open or
+                    self.craft_screen.open or
                     self.text_reader.open
                 )
                 if not _overlay_open:
@@ -693,6 +737,57 @@ class Engine:
                                 _ms(_mx, _my, _SPARKLE_COLORS[_t],
                                     _spk_rng.Random(_seed)))
 
+                    # Flame / ember emitter pass — visible tiles with fire visual_fx.
+                    # Checks both terrain and decor layers. Each flame tier fires
+                    # at a different frame cadence:
+                    #   flame_low / smoke_incense : every 4-5 frames (slow flicker)
+                    #   flame_med / embers        : every 3 frames (campfire)
+                    #   flame_high                : every 2 frames (roaring fire)
+                    _flame_fx_any = (
+                        _frame_tick % 2 == 0 or
+                        _frame_tick % 3 == 0 or
+                        _frame_tick % 4 == 0 or
+                        _frame_tick % 5 == 0
+                    )
+                    if _flame_fx_any:
+                        from rendering.particles import (
+                            make_ember_particles       as _mep,
+                            make_flame_low_particles   as _mfl,
+                            make_flame_med_particles   as _mfm,
+                            make_flame_high_particles  as _mfh,
+                            make_smoke_incense_particles as _msi,
+                        )
+                        _emb_mo_x = viewport.x + shake_offset[0]
+                        _emb_mo_y = viewport.y + shake_offset[1]
+                        _FLAME_FUNCS = {
+                            "embers":        (_mep, 3),
+                            "flame_low":     (_mfl, 4),
+                            "flame_med":     (_mfm, 3),
+                            "flame_high":    (_mfh, 2),
+                            "smoke_incense": (_msi, 5),
+                        }
+                        for _ey in range(cam_y, cam_y + _tiles_y):
+                            for _ex in range(cam_x, cam_x + _tiles_x):
+                                if not self.local_map.in_bounds(_ex, _ey):
+                                    continue
+                                if not self.local_map.visible[_ex, _ey]:
+                                    continue
+                                _et = self._resolve_terrain_id(_ex, _ey)
+                                _etd = self.data.terrain.get(_et, {})
+                                _edid = self.local_map.decor.get((_ex, _ey))
+                                _edd  = self.data.decoratives.get(_edid, {}) if _edid else {}
+                                _efx = _etd.get("visual_fx") or _edd.get("visual_fx")
+                                if _efx not in _FLAME_FUNCS:
+                                    continue
+                                _efunc, _ecadence = _FLAME_FUNCS[_efx]
+                                if _frame_tick % _ecadence != 0:
+                                    continue
+                                _eseed = (_frame_tick + _ex * 6113 + _ey * 9311) & 0xFFFF
+                                _esx = int(_emb_mo_x + (_ex - cam_x) * _tile_w + _tile_w // 2)
+                                _esy = int(_emb_mo_y + (_ey - cam_y) * _tile_h + _tile_h // 2)
+                                self.particle_system.emit_burst(
+                                    _efunc(_esx, _esy, _spk_rng.Random(_eseed)))
+
                     # Resolve deferred blood emissions: convert tile coords to
                     # screen coords here where cam/tile size are all available.
                     if self._pending_blood:
@@ -742,6 +837,87 @@ class Engine:
                     )
                     screen.set_clip(None)
 
+                    # Step 7b: projectile tween animations (generic, data-driven)
+                    if self._projectile_tweens:
+                        screen.set_clip(viewport)
+                        _living = []
+                        _sreg     = self.sprite_registry
+                        _use_tint = getattr(self.display, "use_sprite_tint", False)
+                        for _tween in self._projectile_tweens:
+                            _tween["elapsed"] += _dt
+                            _frac = _tween["elapsed"] / _tween["duration"]
+                            if _frac >= 1.0:
+                                continue   # expired
+                            _living.append(_tween)
+
+                            # 3-phase position
+                            if _frac < 0.60:
+                                _pt = _frac / 0.60
+                                _wx = _tween["sx"] + (_tween["apex_x"] - _tween["sx"]) * _pt
+                                _wy = _tween["sy"] + (_tween["apex_y"] - _tween["sy"]) * _pt
+                            elif _frac < 0.70:
+                                _wx = _tween["apex_x"]
+                                _wy = _tween["apex_y"]
+                                # Fire impact FX once when entering phase 2
+                                if not _tween["_impact_fired"]:
+                                    _tween["_impact_fired"] = True
+                                    if _tween["on_hit"]:
+                                        from rendering.particles import (
+                                            make_blood_particles, BLOOD_COLORS)
+                                        _bc = BLOOD_COLORS.get(
+                                            _tween.get("blood_type", "red"))
+                                        if _bc:
+                                            # Convert tile coords → absolute screen
+                                            # coords before passing to make_blood_particles.
+                                            # apex = impact point; sx/sy = attacker origin.
+                                            _b_sx = int(viewport.x + shake_offset[0]
+                                                        + (_tween["apex_x"] - cam_x + 0.5) * _tile_w)
+                                            _b_sy = int(viewport.y + shake_offset[1]
+                                                        + (_tween["apex_y"] - cam_y + 0.5) * _tile_h)
+                                            _a_sx = int(viewport.x + shake_offset[0]
+                                                        + (_tween["sx"] - cam_x + 0.5) * _tile_w)
+                                            _a_sy = int(viewport.y + shake_offset[1]
+                                                        + (_tween["sy"] - cam_y + 0.5) * _tile_h)
+                                            self.particle_system.emit_burst(
+                                                make_blood_particles(
+                                                    _b_sx, _b_sy,
+                                                    _bc,
+                                                    _a_sx, _a_sy,
+                                                    count=5))
+                                    else:
+                                        if getattr(self.display,
+                                                   "CALLOUT_DAMAGE_NUMBERS", True):
+                                            self.callouts.add(
+                                                "—",
+                                                _tween["apex_x"], _tween["apex_y"],
+                                                COMBAT_INCOMING,
+                                                lifetime=0.3, font_size="tiny")
+                            else:
+                                _pt = (_frac - 0.70) / 0.30
+                                _wx = _tween["apex_x"] + (_tween["sx"] - _tween["apex_x"]) * _pt
+                                _wy = _tween["apex_y"] + (_tween["sy"] - _tween["apex_y"]) * _pt
+
+                            # Screen position (centred on tile)
+                            _psx = int(viewport.x + shake_offset[0]
+                                       + (_wx - cam_x + 0.5) * _tile_w)
+                            _psy = int(viewport.y + shake_offset[1]
+                                       + (_wy - cam_y + 0.5) * _tile_h)
+
+                            if viewport.collidepoint(_psx, _psy) and _sreg and getattr(_sreg, "_loaded", False):
+                                if _use_tint:
+                                    _psurf = _sreg.get_tinted(
+                                        _tween["tile_id"], TRUE_WHITE, zoom=_zoom)
+                                else:
+                                    _psurf = _sreg.get(_tween["tile_id"], zoom=_zoom)
+                                if _psurf is not None:
+                                    screen.blit(
+                                        _psurf,
+                                        (_psx - _psurf.get_width() // 2,
+                                         _psy - _psurf.get_height() // 2))
+
+                        self._projectile_tweens = _living
+                        screen.set_clip(None)
+
                     # Player screen pos relative to viewport top-left
                     # Used by both precipitation vignette and fog vignette.
                     _player_sx = int(shake_offset[0]
@@ -754,7 +930,7 @@ class Engine:
                     # Step 8a: rain / snow tile-layer overlay (data-driven)
                     _wstate = self.weather.state
                     if _wstate in ("light_rain", "heavy_rain",
-                                   "resonance_storm", "bone_snow"):
+                                   "resonance_storm", "bone_snow", "wind"):
                         screen.set_clip(viewport)
                         renderer.draw_weather_overlay(
                             screen, viewport,
@@ -776,6 +952,48 @@ class Engine:
                             effective_fov=self._effective_fov_radius,
                             tile_w=_tile_w, tile_h=_tile_h,
                             centre_x=_player_sx, centre_y=_player_sy)
+                        # Wisp particle layer — drifting soft blobs over the gradient
+                        if "fog_wisps" in self.data.weather_defs:
+                            screen.set_clip(viewport)
+                            renderer.draw_weather_overlay(
+                                screen, viewport,
+                                "fog_wisps", self.weather.intensity,
+                                self,
+                                player_screen_x=viewport.x + _player_sx,
+                                player_screen_y=viewport.y + _player_sy,
+                                tile_w=_tile_w, tile_h=_tile_h,
+                            )
+                            screen.set_clip(None)
+
+                    # Step 8c: resonance emit overlay (gated on _resonance_sight_active)
+                    if getattr(self, "_resonance_sight_active", False):
+                        import math as _rmath
+                        _ticks = pygame.time.get_ticks()
+                        _re_surf = pygame.Surface((_tile_w, _tile_h), pygame.SRCALPHA)
+                        _res_tiles_x = viewport.width // _tile_w + 2
+                        _res_tiles_y = viewport.height // _tile_h + 2
+                        screen.set_clip(viewport)
+                        for _rx in range(cam_x, cam_x + _res_tiles_x):
+                            for _ry in range(cam_y, cam_y + _res_tiles_y):
+                                if not self.local_map.in_bounds(_rx, _ry):
+                                    continue
+                                if not self.local_map.visible[_rx, _ry]:
+                                    continue
+                                _rterrain = self.local_map.tiles["terrain"][_rx, _ry]
+                                if isinstance(_rterrain, bytes):
+                                    _rterrain = _rterrain.decode()
+                                _rtd = self.data.terrain.get(str(_rterrain), {})
+                                _remit = _rtd.get("resonance_emit", 0.0)
+                                if _remit <= 0.0:
+                                    continue
+                                _phase = (_ticks + _rx * 1300 + _ry * 1700) % 4000
+                                _pulse = (_rmath.sin(_phase / 4000.0 * _rmath.pi * 2) + 1.0) * 0.5
+                                _alpha = int(25 + _pulse * 40)
+                                _re_surf.fill((80, 0, 120, _alpha))
+                                _rsx = int(viewport.x + shake_offset[0] + (_rx - cam_x) * _tile_w)
+                                _rsy = int(viewport.y + shake_offset[1] + (_ry - cam_y) * _tile_h)
+                                screen.blit(_re_surf, (_rsx, _rsy))
+                        screen.set_clip(None)
 
                     # Step 9: floating callouts
                     # Resolve deferred pending_callouts (from AI turns)
@@ -827,8 +1045,9 @@ class Engine:
                     self,
                 )
 
-            # --- UI panel frames + content (LOCAL / LOOK only) ---
-            if self.mode in (GameMode.LOCAL, GameMode.LOOK):
+            # --- UI panel frames + content (LOCAL / LOOK / INTERACTION_CURSOR / PLACEMENT_CURSOR) ---
+            if self.mode in (GameMode.LOCAL, GameMode.LOOK,
+                             GameMode.INTERACTION_CURSOR, GameMode.PLACEMENT_CURSOR):
                 if _panels:
                     self.ui_registry.draw_panel(
                         screen, game_panel_rect, "weathered_temple",
@@ -886,7 +1105,9 @@ class Engine:
                 self.debug.render(screen, self)
 
             self.inventory_screen.render(screen, self)
+            self.health_screen.render(screen, self)
             self.perk_screen.render(screen, self)
+            self.craft_screen.render(screen, self)
 
             if self.text_reader.open:
                 self.text_reader.render(screen, self)
@@ -927,6 +1148,39 @@ class Engine:
         self._shake_x = magnitude * (dx if dx != 0 else 1)
         self._shake_y = magnitude * (dy if dy != 0 else 0)
 
+    def spawn_projectile(
+        self,
+        sx: float, sy: float,
+        tx: float, ty: float,
+        tile_id: str,
+        entity_id: int,
+        duration:   float = 0.45,
+        on_hit:     bool  = False,
+        blood_type: str   = "red",
+    ) -> None:
+        """
+        Spawn a 3-phase swoop tween from world tile (sx,sy) to halfway toward (tx,ty)
+        and back. Damage is resolved before this call; on_hit drives impact FX.
+        entity_id: id(entity) — suppresses the entity's normal render during the tween.
+        tile_id: sprite tile key from sprite_map.json.
+        Phases: 0-60% approach apex, 60-70% hold (impact FX), 70-100% retreat.
+        """
+        apex_x = sx + (tx - sx) * 0.5
+        apex_y = sy + (ty - sy) * 0.5
+        self._projectile_tweens.append({
+            "sx": sx, "sy": sy,
+            "tx": tx, "ty": ty,
+            "apex_x": apex_x,
+            "apex_y": apex_y,
+            "tile_id": tile_id,
+            "entity_id": entity_id,
+            "elapsed": 0.0,
+            "duration": max(0.05, duration),
+            "on_hit": on_hit,
+            "blood_type": blood_type,
+            "_impact_fired": False,
+        })
+
     def _confirm_quit(self) -> bool:
         """Show 'Press ESC again to quit' on first ESC; quit on second."""
         if self._quit_pending:
@@ -960,8 +1214,40 @@ class Engine:
         if needs and not self.player_invincible:
             prev_h = needs.hunger
             prev_t = needs.thirst
-            needs.advance()
+
+            # Compute biome-modified tick rates from survival.json
+            h_rate = None
+            t_rate = None
+            if needs._configured and self.data.survival:
+                chunk = self.world_map.get(self.world_x, self.world_y)
+                if chunk:
+                    mods = self.data.survival.get("biome_modifiers", {}).get(
+                        chunk.biome_id, {}
+                    )
+                    h_rate = needs._h_tick * mods.get("hunger", 1.0)
+                    t_rate = needs._t_tick * mods.get("thirst", 1.0)
+
+            needs.advance(hunger_rate=h_rate, thirst_rate=t_rate)
             needs.drain_messages(self.log, prev_h, prev_t)
+
+            # HP drain at critical stages — every hp_drain_interval turns
+            if needs._configured:
+                turn     = self.world_time.turn
+                interval = needs._hp_drain_interval
+                if turn > 0 and interval > 0 and turn % interval == 0:
+                    total_drain = int(needs.hunger_hp_drain + needs.thirst_hp_drain)
+                    if total_drain > 0:
+                        fighter = getattr(self.player, "fighter", None)
+                        if fighter:
+                            fighter.take_damage(total_drain)
+                            self.player.took_damage_this_turn = True
+                            if fighter.is_dead:
+                                h_d = needs.hunger_hp_drain
+                                t_d = needs.thirst_hp_drain
+                                self._death_killer = (
+                                    "starvation" if h_d >= t_d else "thirst"
+                                )
+                                self._on_player_death()
 
         # Plague crow sickness — accelerated needs drain (also suppressed by invincibility)
         sickness = getattr(self.player, "_sickness_turns", 0)
@@ -977,6 +1263,8 @@ class Engine:
             self.player.chilled_turns = chilled - 1
             if self.player.chilled_turns == 0:
                 self.log.add("The chill passes.", STONE_BLUE)
+
+        self._update_warmth()
 
         corrupt = getattr(self.player, "corruption", None)
         if corrupt:
@@ -1017,6 +1305,11 @@ class Engine:
                         BELL_BRASS,
                     )
 
+        self._update_wraith_aura()
+
+        # Snapshot positions before AI processes for concealment free-hit detection
+        _pre_ai_pos = {id(e): (e.x, e.y) for e in self.entities}
+
         self.ai_system.process(
             entities   = self.entities,
             player     = self.player,
@@ -1029,6 +1322,26 @@ class Engine:
             data       = self.data,
             engine     = self,
         )
+
+        # Concealment free-hit: player gets one free attack when a hostile
+        # creature steps into a concealment tile while adjacent.
+        for _ce in self.entities:
+            if _ce is self.player or not getattr(_ce, "is_alive", True):
+                continue
+            _old_pos = _pre_ai_pos.get(id(_ce))
+            if _old_pos is None or (_ce.x, _ce.y) == _old_pos:
+                continue  # didn't move
+            _ct = self._resolve_terrain_id(_ce.x, _ce.y)
+            _ctd = self.data.terrain.get(_ct, {})
+            if _ctd.get("secondary_effect") != "concealment":
+                continue
+            if max(abs(_ce.x - self.player.x), abs(_ce.y - self.player.y)) > 1:
+                continue
+            equip = getattr(self.player, "equipment", None)
+            if equip and equip.slots.get("weapon") is None:
+                continue  # bare-handed — no free strike in grass
+            self.log.add("It steps into your reach through the grass.", MSG_DEFAULT)
+            self._player_attack(_ce)
 
         if getattr(self.player, "took_damage_this_turn", False):
             if hasattr(self, "ui"):
@@ -1043,6 +1356,54 @@ class Engine:
             e for e in self.entities
             if getattr(e, "is_alive", True)
         ]
+
+        self._process_creature_stair_transfers()
+        self._check_entity_chunk_crossings()
+        self._tick_live_pursuers()
+
+        # Corpse decay — current chunk only; cached chunks decay on load
+        if self.local_map.corpse_decay:
+            from generation.decor_utils import clear_decor as _clr_d
+            _expired_d: list = []
+            for _dp, _dt in list(self.local_map.corpse_decay.items()):
+                if _dt <= 1:
+                    _expired_d.append(_dp)
+                else:
+                    self.local_map.corpse_decay[_dp] = _dt - 1
+            for _dp in _expired_d:
+                _clr_d(self.local_map, _dp[0], _dp[1])
+                self.local_map.corpse_data.pop(_dp, None)
+                self.local_map.corpse_decay.pop(_dp, None)
+
+        # Passive processing queue — tick all pending processes
+        if self.local_map.processing_queue:
+            _proc_msgs = getattr(self.data, "processing_messages", {})
+            _done: list[int] = []
+            for _pi, _proc in enumerate(self.local_map.processing_queue):
+                _proc["turns_remaining"] -= 1
+                if _proc["turns_remaining"] <= 0:
+                    _done.append(_pi)
+                    _result_id = _proc.get("item_id", "")
+                    _result_item = self.item_factory.create(
+                        _result_id, self.player.x, self.player.y
+                    ) if _result_id else None
+                    inv = getattr(self.player, "inventory", None)
+                    _src = _proc.get("source", "")
+                    _tmpl = _proc_msgs.get(_src, {}).get("complete", "{item_name} is ready.")
+                    if _result_item:
+                        _msg = _tmpl.format(item_name=_result_item.name)
+                        if inv and inv.add(_result_item):
+                            self.log.add(_msg, MSG_LORE)
+                        else:
+                            # Inventory full — drop at player position
+                            self.entities.append(_result_item)
+                            self.log.add(_msg + " It falls at your feet.", MSG_LORE)
+            for _pi in reversed(_done):
+                self.local_map.processing_queue.pop(_pi)
+
+        # Recompute FOV after every turn so wraith penalty (and all other
+        # per-turn modifiers) are reflected immediately, not one turn late.
+        self._update_fov()
 
 
     # ------------------------------------------------------------------ #
@@ -1079,8 +1440,36 @@ class Engine:
             self.inventory_screen.handle_key(key, self)
             return
 
+        if self.health_screen.open:
+            self.health_screen.handle_key(key, self)
+            return
+
         if self.perk_screen.open:
             self.perk_screen.handle_key(key, self)
+            return
+
+        if self.craft_screen.open:
+            self.craft_screen.handle_key(key, self)
+            return
+
+        if self.mode == GameMode.INTERACTION_CURSOR:
+            self.interaction_cursor.handle_key(key, self)
+            return
+
+        if self.mode == GameMode.PLACEMENT_CURSOR:
+            self._handle_key_placement(key)
+            return
+
+        # E key — open interaction cursor from LOCAL and LOOK modes.
+        # Works without modifier. Closes look mode first if open.
+        if key == pygame.K_e and self.mode not in (
+            GameMode.PLACEMENT_CURSOR, GameMode.INTERACTION_CURSOR,
+        ) and not getattr(self.inventory_screen, "open", False) \
+          and not getattr(self.craft_screen, "open", False) \
+          and not getattr(self.perk_screen, "open", False):
+            if self.mode == GameMode.LOOK:
+                self.mode = GameMode.LOCAL
+            self._try_open_interaction_cursor()
             return
 
         if self.mode == GameMode.LOOK:
@@ -1117,11 +1506,14 @@ class Engine:
             return
 
         if key == pygame.K_m:
-            self.overmap_cursor_x = self.world_x
-            self.overmap_cursor_y = self.world_y
-            self.overmap_cam_x    = self.world_x
-            self.overmap_cam_y    = self.world_y
-            self.mode = GameMode.OVERMAP
+            if self.current_submap_id is None:
+                self.overmap_cursor_x = self.world_x
+                self.overmap_cursor_y = self.world_y
+                self.overmap_cam_x    = self.world_x
+                self.overmap_cam_y    = self.world_y
+                self.mode = GameMode.OVERMAP
+            else:
+                self.log.add("No sky. No bearings.", MSG_DEFAULT)
             return
 
         if key == pygame.K_EQUALS or key == pygame.K_PLUS:
@@ -1146,6 +1538,10 @@ class Engine:
             self._log_scroll = max(0, self._log_scroll - 5)
             return
 
+        if key == pygame.K_h:
+            self.health_screen.toggle()
+            return
+
         self.player._in_concealment = False
         acted = False
 
@@ -1167,6 +1563,8 @@ class Engine:
                 if blocker:
                     self._player_attack(blocker)
                     acted = True
+                elif self._decor_blocks_movement(dest_x, dest_y):
+                    pass  # blocked by decor object (campfire, barrel, etc.)
                 else:
                     self.player.move(dx, dy)
                     self._update_fov()
@@ -1186,6 +1584,7 @@ class Engine:
 
         elif key == pygame.K_F9 and not self.debug:
             self.save_manager.load(self)
+            self._configure_player_needs()
 
         elif key == pygame.K_i:
             self.inventory_screen.toggle()
@@ -1195,9 +1594,24 @@ class Engine:
             self.perk_screen.toggle()
             return
 
-        elif key in (pygame.K_g, pygame.K_COMMA):
+        elif key == pygame.K_c:
+            self.craft_screen.toggle()
+            return
+
+        elif key == pygame.K_COMMA:
             self._pick_up_item()
             acted = True
+
+        elif key == pygame.K_g:
+            acted = self._try_harvest()
+            if not acted:
+                acted = self._try_gather(self.player.x, self.player.y)
+            if not acted:
+                self._pick_up_item()
+                acted = True
+
+        elif key == pygame.K_w:
+            acted = self._try_drink_terrain()
 
         if acted:
             self._log_scroll = 0
@@ -1252,7 +1666,7 @@ class Engine:
         self.world_x   = wx
         self.world_y   = wy
         chunk.visited  = True
-        # Spawn town creatures from town_data if available
+        # Spawn town creatures and items from town_data if available
         from world.world_map import RegionType
         town_entities = []
         if chunk.region_type == RegionType.TOWN and chunk.town_data:
@@ -1262,6 +1676,12 @@ class Engine:
                 )
                 if actor:
                     town_entities.append(actor)
+            for ispec in chunk.town_data.item_spawns:
+                item = self.item_factory.create(ispec.get("item_id", ""), ispec["x"], ispec["y"])
+                if item is not None:
+                    if ispec.get("text_id"):
+                        item.text_id = ispec["text_id"]
+                    town_entities.append(item)
         self.entities  = [self.player] + town_entities
         self.world_map.mark_explored_radius(wx, wy, radius=2)
         self._update_fov()
@@ -1283,6 +1703,12 @@ class Engine:
         if self.mode == GameMode.LOOK:
             cx = self.look_mode.cursor_x
             cy = self.look_mode.cursor_y
+        elif self.mode == GameMode.INTERACTION_CURSOR:
+            cx = self.interaction_cursor.cursor_x
+            cy = self.interaction_cursor.cursor_y
+        elif self.mode == GameMode.PLACEMENT_CURSOR:
+            cx = self._placement_cursor_x
+            cy = self._placement_cursor_y
         else:
             cx = self.player.x
             cy = self.player.y
@@ -1338,8 +1764,25 @@ class Engine:
     # ------------------------------------------------------------------ #
 
     def _transition_chunk(self, dx: int, dy: int) -> None:
-        new_wx = self.world_x + dx
-        new_wy = self.world_y + dy
+        # Stale transfers from interrupted transitions must never accumulate.
+        self._pending_transfer = []
+
+        # Determine which chunk to enter based on which boundary was crossed,
+        # not the movement direction. Diagonal only when both x AND y are
+        # simultaneously out of bounds (true corner exit).
+        dest_x = self.player.x + dx
+        dest_y = self.player.y + dy
+
+        x_under = dest_x < 0
+        x_over  = dest_x >= MAP_WIDTH
+        y_under = dest_y < 0
+        y_over  = dest_y >= MAP_HEIGHT
+
+        wx_off = -1 if x_under else (1 if x_over else 0)
+        wy_off = -1 if y_under else (1 if y_over else 0)
+
+        new_wx = self.world_x + wx_off
+        new_wy = self.world_y + wy_off
 
         if not self.world_map.in_bounds(new_wx, new_wy):
             return
@@ -1347,6 +1790,9 @@ class Engine:
         chunk = self.world_map.get(new_wx, new_wy)
         if not chunk:
             return
+
+        self._wraith_aura_state = {}
+        self._wraith_overcorrect_turns = 0
 
         # Clear ephemeral tiles (blood, etc.) from the departing chunk's local_map
         # before caching so they don't persist across visits.
@@ -1360,12 +1806,62 @@ class Engine:
                                             t.get("transparent", True))
             current_chunk.ephemeral_tiles.clear()
 
+        # Extract pursuing entities into _live_pursuers before caching the old chunk.
+        # They will be ticked every turn and promoted back to self.entities when they
+        # cross into the player's current chunk.
+        from components.ai import AIState as _AIState_tp
+        from config import DEBUG_MODE as _DM_tp
+        _pursuing_tp = (_AIState_tp.HUNTING, _AIState_tp.ALERTED, _AIState_tp.ATTACKING)
+        _threshold_tp = self.data.ai_config.get("pursuit_boundary_threshold", 3)
+        _extract_ids_tp: set[int] = set()
+        for _ep in self.entities:
+            if _ep is self.player:
+                continue
+            if not getattr(_ep, "is_alive", True):
+                continue
+            _eai_tp = getattr(_ep, "ai", None)
+            if _eai_tp is None or _eai_tp.state not in _pursuing_tp:
+                continue
+            _can_cross_tp = self.data.entities.get(_ep.tile, {}).get("can_cross_chunks", False)
+            _dist_tp = max(abs(_ep.x - self.player.x), abs(_ep.y - self.player.y))
+            _extracted_tp = _can_cross_tp and _dist_tp <= _threshold_tp
+            if _DM_tp:
+                print(f"[LP-CHECK] {_ep.name} state={_eai_tp.state.name} "
+                      f"dist={_dist_tp} can_cross={_can_cross_tp} "
+                      f"threshold={_threshold_tp} -> {'EXTRACTED' if _extracted_tp else 'SKIPPED'}")
+            if _extracted_tp:
+                _extract_ids_tp.add(id(_ep))
+                self._live_pursuers.append((_ep, self.world_x, self.world_y, None))
+                # Point entity toward the boundary edge it needs to cross to follow player.
+                if _eai_tp is not None:
+                    from config import MAP_WIDTH as _MWtp, MAP_HEIGHT as _MHtp
+                    if wx_off == -1:
+                        _ep._last_known_px = 0;          _ep._last_known_py = _ep.y
+                        _eai_tp.target_x   = 0;          _eai_tp.target_y   = _ep.y
+                    elif wx_off == 1:
+                        _ep._last_known_px = _MWtp - 1;  _ep._last_known_py = _ep.y
+                        _eai_tp.target_x   = _MWtp - 1;  _eai_tp.target_y   = _ep.y
+                    elif wy_off == -1:
+                        _ep._last_known_px = _ep.x;      _ep._last_known_py = 0
+                        _eai_tp.target_x   = _ep.x;      _eai_tp.target_y   = 0
+                    elif wy_off == 1:
+                        _ep._last_known_px = _ep.x;      _ep._last_known_py = _MHtp - 1
+                        _eai_tp.target_x   = _ep.x;      _eai_tp.target_y   = _MHtp - 1
+                if _DM_tp:
+                    print(f"[LIVE-EXTRACT] {_ep.name} from ({self.world_x},{self.world_y}) "
+                          f"lk=({getattr(_ep,'_last_known_px',None)},{getattr(_ep,'_last_known_py',None)})")
+        if _extract_ids_tp:
+            self.entities = [_e for _e in self.entities if id(_e) not in _extract_ids_tp]
+
         self.save_manager.cache.store(
             self.world_x,
             self.world_y,
             self.local_map,
             self.entities,
         )
+        if _DM_tp:
+            print(f"[LP-STORED] {len(self._live_pursuers)} live pursuers: "
+                  f"{[e.name for e, wx, wy, si in self._live_pursuers]}")
 
         cached = self.save_manager.cache.load(new_wx, new_wy)
 
@@ -1388,6 +1884,12 @@ class Engine:
                     )
                     if actor:
                         new_entities.append(actor)
+                for ispec in chunk.town_data.item_spawns:
+                    item = self.item_factory.create(ispec.get("item_id", ""), ispec["x"], ispec["y"])
+                    if item is not None:
+                        if ispec.get("text_id"):
+                            item.text_id = ispec["text_id"]
+                        new_entities.append(item)
             else:
                 chunk_rng = random.Random(chunk.seed + 1)
                 for zone_id, _ in chunk.zones:
@@ -1396,41 +1898,48 @@ class Engine:
                     )
                     new_entities.extend(creatures)
 
-        # Determine spawn from PASSAGE connector on the entry edge, else
-        # fall back to a few tiles inside the edge we crossed.
-        from world.world_map import ConnectorType
-        entry_edge = {
-            ( 1,  0): "west",
-            (-1,  0): "east",
-            ( 0,  1): "north",
-            ( 0, -1): "south",
-        }.get((dx, dy))
-
-        spawn_x = MAP_WIDTH  // 2
-        spawn_y = MAP_HEIGHT // 2
-
-        passage = None
-        if entry_edge:
-            for conn in chunk.edges.get(entry_edge, []):
-                if conn.connector_type == ConnectorType.PASSAGE:
-                    passage = conn
-                    break
-
-        if passage and entry_edge:
-            from generation.local_gen import _edge_to_tile
-            ex, ey = _edge_to_tile(entry_edge, passage.position,
-                                   MAP_WIDTH, MAP_HEIGHT)
-            step = {"west": (3, 0), "east": (-3, 0),
-                    "north": (0, 3), "south": (0, -3)}[entry_edge]
-            spawn_x = ex + step[0]
-            spawn_y = ey + step[1]
+        # ── Mirror entry position from boundary violations ─────────────
+        # Cardinal crossing: preserve the perpendicular axis.
+        # True diagonal (both x and y out of bounds): land at the corner.
+        if wx_off != 0 and wy_off != 0:
+            # True diagonal — both x and y simultaneously out of bounds
+            entry_x = MAP_WIDTH  - 1 if wx_off == -1 else 0
+            entry_y = MAP_HEIGHT - 1 if wy_off == -1 else 0
+        elif wx_off != 0:
+            # East or west crossing — preserve y
+            entry_x = MAP_WIDTH - 1 if wx_off == -1 else 0
+            entry_y = max(0, min(MAP_HEIGHT - 1, dest_y))
         else:
-            if dx ==  1: spawn_x = 1
-            if dx == -1: spawn_x = MAP_WIDTH  - 2
-            if dy ==  1: spawn_y = 1
-            if dy == -1: spawn_y = MAP_HEIGHT - 2
+            # North or south crossing — preserve x
+            entry_x = max(0, min(MAP_WIDTH  - 1, dest_x))
+            entry_y = MAP_HEIGHT - 1 if wy_off == -1 else 0
 
-        spawn_x, spawn_y = self._find_walkable_near(new_map, spawn_x, spawn_y)
+        # Diagnostic (DEBUG_MODE): log boundary violations and entry
+        from config import DEBUG_MODE as _DM
+        if _DM:
+            _dir_map = {
+                (-1,-1):"NW", (0,-1):"N", (1,-1):"NE",
+                (-1, 0):"W",              (1, 0):"E",
+                (-1, 1):"SW", (0, 1):"S", (1, 1):"SE",
+            }
+            dir_name = _dir_map.get((wx_off, wy_off), f"({wx_off},{wy_off})")
+            print(
+                f"[CHUNK] {dir_name} player=({self.player.x},{self.player.y}) "
+                f"dest=({dest_x},{dest_y}) "
+                f"-> entry=({entry_x},{entry_y}) "
+                f"world ({self.world_x},{self.world_y})->({new_wx},{new_wy})"
+            )
+
+        # Find the nearest walkable tile to the mirror entry point.
+        # max_radius=3 searches a 7×7 area; falls back to map centre if blocked.
+        spawn_x, spawn_y = self._find_walkable_near(new_map, entry_x, entry_y,
+                                                    max_radius=3)
+        _centre = (new_map.width // 2, new_map.height // 2)
+        if (spawn_x, spawn_y) == _centre and (entry_x, entry_y) != _centre:
+            print(
+                f"[CHUNK] WARNING: no walkable tile near entry ({entry_x},{entry_y}) "
+                f"in chunk ({new_wx},{new_wy}), falling back to centre"
+            )
 
         self.player.x  = spawn_x
         self.player.y  = spawn_y
@@ -1444,6 +1953,59 @@ class Engine:
         for _e in new_entities:
             _e.last_known_x = None
             _e.last_known_y = None
+
+        # Promote any live pursuers that were already in the new chunk
+        _promo_keep: list = []
+        _promo_list: list = []
+        for (_lpe, _lpwx, _lpwy, _lpsi) in self._live_pursuers:
+            # Only promote surface-chunk pursuers that are now in the player's chunk.
+            # Submap pursuers (lpsi != None) are never promoted via chunk crossing.
+            if _lpsi is None and _lpwx == self.world_x and _lpwy == self.world_y:
+                _promo_list.append(_lpe)
+            else:
+                _promo_keep.append((_lpe, _lpwx, _lpwy, _lpsi))
+        if _promo_list:
+            self._live_pursuers = _promo_keep
+            _occ_promo: set[tuple[int, int]] = {(self.player.x, self.player.y)}
+            for _ne_promo in self.entities:
+                if getattr(_ne_promo, "blocks_movement", True):
+                    _occ_promo.add((_ne_promo.x, _ne_promo.y))
+            for _lpe in _promo_list:
+                _placed_promo = False
+                for _r_promo in range(0, 12):
+                    for _rdx_promo in range(-_r_promo, _r_promo + 1):
+                        for _rdy_promo in range(-_r_promo, _r_promo + 1):
+                            if _r_promo > 0 and abs(_rdx_promo) != _r_promo and abs(_rdy_promo) != _r_promo:
+                                continue
+                            _nx_promo = _lpe.x + _rdx_promo
+                            _ny_promo = _lpe.y + _rdy_promo
+                            if (self.local_map.in_bounds(_nx_promo, _ny_promo)
+                                    and self.local_map.walkable[_nx_promo, _ny_promo]
+                                    and (_nx_promo, _ny_promo) not in _occ_promo):
+                                _lpe.x, _lpe.y = _nx_promo, _ny_promo
+                                _occ_promo.add((_nx_promo, _ny_promo))
+                                _placed_promo = True
+                                break
+                        if _placed_promo:
+                            break
+                    if _placed_promo:
+                        break
+                if not _placed_promo:
+                    _lpe.x, _lpe.y = self._find_walkable_near(
+                        self.local_map, _lpe.x, _lpe.y, max_radius=50
+                    )
+                _lpe._last_known_px = self.player.x
+                _lpe._last_known_py = self.player.y
+                _lpe.last_known_x   = None
+                _lpe.last_known_y   = None
+                if _lpe.ai is not None:
+                    _lpe.ai.target_x = self.player.x
+                    _lpe.ai.target_y = self.player.y
+                self.entities.append(_lpe)
+                if _DM_tp:
+                    print(f"[LIVE-PROMOTE] {_lpe.name} -> new chunk ({self.world_x},{self.world_y}) "
+                          f"at ({_lpe.x},{_lpe.y})")
+
         self._update_fov()
 
         self.save_manager.cache.evict_distant(new_wx, new_wy)
@@ -1550,8 +2112,8 @@ class Engine:
     def _descend_to_submap(self, submap_id: str) -> None:
         """Cache surface, generate/load submap, place player at entry."""
         # Clear creature ability state that doesn't survive transitions
-        self.player._wraith_fov_penalty = 0
-        self.player._wraith_overcorrect = 0
+        self._wraith_aura_state = {}
+        self._wraith_overcorrect_turns = 0
         self.player._hollow_knight_disruption = False
 
         chunk = self.world_map.get(self.world_x, self.world_y)
@@ -1560,6 +2122,73 @@ class Engine:
         submap = next((s for s in chunk.submaps if s.submap_id == submap_id), None)
         if not submap:
             return
+
+        # Clear ephemeral tiles (blood, bone dust, etc.) from the surface
+        # before caching — same as _transition_chunk does on chunk exit.
+        surface_chunk = self.world_map.get(self.world_x, self.world_y)
+        if surface_chunk and surface_chunk.ephemeral_tiles:
+            for _ex, _ey, _orig in surface_chunk.ephemeral_tiles:
+                if self.local_map.in_bounds(_ex, _ey):
+                    _t = self.data.terrain.get(_orig, {})
+                    self.local_map.set_tile(
+                        _ex, _ey, _orig,
+                        _t.get("walkable", True),
+                        _t.get("transparent", True),
+                    )
+            surface_chunk.ephemeral_tiles.clear()
+
+        # Identify hot entities to transfer into the submap with the player.
+        # Criteria: HUNTING/ALERTED, alive, can_cross_chunks, within threshold of
+        # the stair tile. can_use_stairs entities always transfer regardless of distance.
+        from components.ai import AIState as _AIState
+        _stair_x, _stair_y = self.player.x, self.player.y
+        self._pending_transfer = []
+        _hot_ids_stair: set[int] = set()
+        for _e in self.entities:
+            if _e is self.player:
+                continue
+            _eai = getattr(_e, "ai", None)
+            if _eai is None or _eai.state not in (_AIState.HUNTING, _AIState.ALERTED, _AIState.ATTACKING):
+                continue
+            if not getattr(_e, "is_alive", True):
+                continue
+            _cdef = self.data.entities.get(_e.tile, {})
+            if not _cdef.get("can_cross_chunks", False):
+                continue
+            _dist = max(abs(_e.x - _stair_x), abs(_e.y - _stair_y))
+            if _dist <= 1:
+                self._pending_transfer.append(_e)
+                _hot_ids_stair.add(id(_e))
+        self.entities = [_e for _e in self.entities if id(_e) not in _hot_ids_stair]
+
+        # Non-adjacent live pursuer extraction: pursuing entities too far for the
+        # 1-tile proactive transfer still follow the player through the stair.
+        _lp_ids_sd: set[int] = set()
+        for _lpe_sd in list(self.entities):
+            if _lpe_sd is self.player:
+                continue
+            _lpeai_sd = getattr(_lpe_sd, "ai", None)
+            if _lpeai_sd is None or _lpeai_sd.state not in (_AIState.HUNTING, _AIState.ALERTED, _AIState.ATTACKING):
+                continue
+            if not getattr(_lpe_sd, "is_alive", True):
+                continue
+            _lpcd_sd = self.data.entities.get(_lpe_sd.tile, {})
+            if not _lpcd_sd.get("can_cross_chunks", False):
+                continue
+            _lpt_sd = getattr(_lpeai_sd, "pursuit_turns_without_contact", 0)
+            _lpto_sd = _lpcd_sd.get("pursuit_timeout", 20)
+            if _lpt_sd >= _lpto_sd:
+                continue
+            _lpe_sd._last_known_px = _stair_x
+            _lpe_sd._last_known_py = _stair_y
+            _lpeai_sd.target_x = _stair_x
+            _lpeai_sd.target_y = _stair_y
+            _lp_ids_sd.add(id(_lpe_sd))
+            self._live_pursuers.append((_lpe_sd, self.world_x, self.world_y, None))
+            if DEBUG_MODE:
+                print(f"[LIVE-EXTRACT-STAIR-DOWN] {_lpe_sd.name} from ({self.world_x},{self.world_y}) lk=({_stair_x},{_stair_y})")
+        if _lp_ids_sd:
+            self.entities = [_e for _e in self.entities if id(_e) not in _lp_ids_sd]
 
         # Cache current surface state
         self.save_manager.cache.store(
@@ -1591,6 +2220,50 @@ class Engine:
         self.player.y  = spawn_y
         self.local_map = new_map
         self.entities  = [self.player] + new_entities
+
+        # Merge transferred entities into the submap near the entry stair
+        if self._pending_transfer:
+            _occ_stair: set[tuple[int, int]] = {(self.player.x, self.player.y)}
+            for _ne in new_entities:
+                if getattr(_ne, "blocks_movement", True):
+                    _occ_stair.add((_ne.x, _ne.y))
+            _ex_s, _ey_s = submap.entry_x, submap.entry_y
+            for _te in self._pending_transfer:
+                _placed_s = False
+                for _pr_s in range(0, 12):
+                    for _pdx_s in range(-_pr_s, _pr_s + 1):
+                        for _pdy_s in range(-_pr_s, _pr_s + 1):
+                            if _pr_s > 0 and abs(_pdx_s) != _pr_s and abs(_pdy_s) != _pr_s:
+                                continue
+                            _nx_s = _ex_s + _pdx_s
+                            _ny_s = _ey_s + _pdy_s
+                            if (new_map.in_bounds(_nx_s, _ny_s)
+                                    and new_map.walkable[_nx_s, _ny_s]
+                                    and (_nx_s, _ny_s) not in _occ_stair):
+                                _te.x, _te.y = _nx_s, _ny_s
+                                _occ_stair.add((_nx_s, _ny_s))
+                                _placed_s = True
+                                break
+                        if _placed_s:
+                            break
+                    if _placed_s:
+                        break
+                if not _placed_s:
+                    _fx_s, _fy_s = self._find_walkable_near(new_map, _ex_s, _ey_s, max_radius=50)
+                    _te.x, _te.y = _fx_s, _fy_s
+                    _occ_stair.add((_fx_s, _fy_s))
+                if hasattr(_te, "ai"):
+                    _te.ai._last_known_px = self.player.x
+                    _te.ai._last_known_py = self.player.y
+                    _te.ai.target_x = self.player.x
+                    _te.ai.target_y = self.player.y
+                _te._last_known_px = self.player.x
+                _te._last_known_py = self.player.y
+                self.entities.append(_te)
+                if DEBUG_MODE:
+                    print(f"[TRANSFER-STAIR-DOWN] {_te.name} -> submap ({_te.x},{_te.y})")
+            self._pending_transfer = []
+
         self._update_fov()
         label = submap.name or submap.submap_type
         self.log.add_world(f"You descend into {label}.")
@@ -1599,10 +2272,68 @@ class Engine:
 
     def _ascend_from_submap(self) -> None:
         """Cache submap, restore surface, place player at return coords."""
-        self.player._wraith_fov_penalty = 0
-        self.player._wraith_overcorrect = 0
+        self._wraith_aura_state = {}
+        self._wraith_overcorrect_turns = 0
         self.player._hollow_knight_disruption = False
-        # Cache the current submap state
+
+        # Identify hot entities to transfer to the surface with the player.
+        from components.ai import AIState as _AIState
+        _stair_x2, _stair_y2 = self.player.x, self.player.y
+        self._pending_transfer = []
+        _hot_ids_asc: set[int] = set()
+        for _e in self.entities:
+            if _e is self.player:
+                continue
+            _eai2 = getattr(_e, "ai", None)
+            if _eai2 is None or _eai2.state not in (_AIState.HUNTING, _AIState.ALERTED, _AIState.ATTACKING):
+                continue
+            if not getattr(_e, "is_alive", True):
+                continue
+            _cdef2 = self.data.entities.get(_e.tile, {})
+            if not _cdef2.get("can_cross_chunks", False):
+                continue
+            _dist2 = max(abs(_e.x - _stair_x2), abs(_e.y - _stair_y2))
+            if _dist2 <= 1:
+                self._pending_transfer.append(_e)
+                _hot_ids_asc.add(id(_e))
+        self.entities = [_e for _e in self.entities if id(_e) not in _hot_ids_asc]
+
+        # Non-adjacent live pursuer extraction (submap -> surface followers).
+        # current_submap_id is still valid here (cleared below after surface reload).
+        _lp_ids_su: set[int] = set()
+        _submap_id_su = self.current_submap_id
+        for _lpe_su in list(self.entities):
+            if _lpe_su is self.player:
+                continue
+            _lpeai_su = getattr(_lpe_su, "ai", None)
+            if _lpeai_su is None or _lpeai_su.state not in (_AIState.HUNTING, _AIState.ALERTED, _AIState.ATTACKING):
+                continue
+            if not getattr(_lpe_su, "is_alive", True):
+                continue
+            _lpcd_su = self.data.entities.get(_lpe_su.tile, {})
+            if not _lpcd_su.get("can_cross_chunks", False):
+                continue
+            _lpt_su = getattr(_lpeai_su, "pursuit_turns_without_contact", 0)
+            _lpto_su = _lpcd_su.get("pursuit_timeout", 20)
+            if _lpt_su >= _lpto_su:
+                continue
+            # Stamp surface exit coords so _transfer_submap_pursuer_to_surface() knows placement
+            _lpe_su._surface_exit_x  = self.surface_return_x
+            _lpe_su._surface_exit_y  = self.surface_return_y
+            _lpe_su._surface_exit_wx = self.world_x
+            _lpe_su._surface_exit_wy = self.world_y
+            _lpe_su._last_known_px   = _stair_x2
+            _lpe_su._last_known_py   = _stair_y2
+            _lpeai_su.target_x = _stair_x2
+            _lpeai_su.target_y = _stair_y2
+            _lp_ids_su.add(id(_lpe_su))
+            self._live_pursuers.append((_lpe_su, self.world_x, self.world_y, _submap_id_su))
+            if DEBUG_MODE:
+                print(f"[LIVE-EXTRACT-STAIR-UP] {_lpe_su.name} from {_submap_id_su} lk=({_stair_x2},{_stair_y2})")
+        if _lp_ids_su:
+            self.entities = [_e for _e in self.entities if id(_e) not in _lp_ids_su]
+
+        # Cache the current submap state (without transferred entities)
         self.save_manager.cache.store_submap(
             self.current_submap_id,
             self.local_map,
@@ -1634,11 +2365,698 @@ class Engine:
         self.local_map = new_map
         self.entities  = [self.player] + new_entities
         self.current_submap_id = None
+
+        # Merge transferred entities onto the surface near the stair exit
+        if self._pending_transfer:
+            _occ_asc: set[tuple[int, int]] = {(self.player.x, self.player.y)}
+            for _ne2 in new_entities:
+                if getattr(_ne2, "blocks_movement", True):
+                    _occ_asc.add((_ne2.x, _ne2.y))
+            _ex_a, _ey_a = self.surface_return_x, self.surface_return_y
+            for _te2 in self._pending_transfer:
+                _placed_a = False
+                for _pr_a in range(0, 12):
+                    for _pdx_a in range(-_pr_a, _pr_a + 1):
+                        for _pdy_a in range(-_pr_a, _pr_a + 1):
+                            if _pr_a > 0 and abs(_pdx_a) != _pr_a and abs(_pdy_a) != _pr_a:
+                                continue
+                            _nx_a = _ex_a + _pdx_a
+                            _ny_a = _ey_a + _pdy_a
+                            if (new_map.in_bounds(_nx_a, _ny_a)
+                                    and new_map.walkable[_nx_a, _ny_a]
+                                    and (_nx_a, _ny_a) not in _occ_asc):
+                                _te2.x, _te2.y = _nx_a, _ny_a
+                                _occ_asc.add((_nx_a, _ny_a))
+                                _placed_a = True
+                                break
+                        if _placed_a:
+                            break
+                    if _placed_a:
+                        break
+                if not _placed_a:
+                    _fx_a, _fy_a = self._find_walkable_near(new_map, _ex_a, _ey_a, max_radius=50)
+                    _te2.x, _te2.y = _fx_a, _fy_a
+                    _occ_asc.add((_fx_a, _fy_a))
+                if hasattr(_te2, "ai"):
+                    _te2.ai._last_known_px = self.player.x
+                    _te2.ai._last_known_py = self.player.y
+                    _te2.ai.target_x = self.player.x
+                    _te2.ai.target_y = self.player.y
+                _te2._last_known_px = self.player.x
+                _te2._last_known_py = self.player.y
+                self.entities.append(_te2)
+                if DEBUG_MODE:
+                    print(f"[TRANSFER-STAIR-UP] {_te2.name} -> surface ({_te2.x},{_te2.y})")
+            self._pending_transfer = []
+
         self._update_fov()
         chunk = self.world_map.get(self.world_x, self.world_y)
         label = (chunk.name if chunk and chunk.name else "the surface")
         self.log.add_world(f"You emerge into {label}.")
         self._update_context_prompt()
+
+    def _check_entity_chunk_crossings(self) -> None:
+        """Detect entities that have reached a chunk boundary during their AI turn.
+
+        Entities with can_cross_chunks whose last-known player position is at the
+        same edge are transferred to the adjacent chunk.  If the adjacent chunk is
+        the player's current chunk they are merged immediately; otherwise they are
+        cached there (the player will load them on next entry).
+
+        Entities without can_cross_chunks are clamped inside bounds.
+        """
+        from components.ai import AIState as _AIState
+        from config import DEBUG_MODE as _DM_cc
+
+        _pursuing = (_AIState.HUNTING, _AIState.ALERTED, _AIState.ATTACKING)
+        _crossed: list = []
+        _to_remove: set[int] = set()
+
+        for _e in self.entities:
+            if _e is self.player:
+                continue
+            if not getattr(_e, "is_alive", True):
+                continue
+            _eai = getattr(_e, "ai", None)
+            if _eai is None or _eai.state not in _pursuing:
+                continue
+            _lkx = getattr(_e, "_last_known_px", None)
+            _lky = getattr(_e, "_last_known_py", None)
+            if _lkx is None:
+                continue
+            _cdef = self.data.entities.get(_e.tile, {})
+            if not _cdef.get("can_cross_chunks", False):
+                # Non-mobile: clamp inside bounds
+                _e.x = max(0, min(MAP_WIDTH  - 1, _e.x))
+                _e.y = max(0, min(MAP_HEIGHT - 1, _e.y))
+                continue
+
+            # Determine crossing direction: entity at boundary edge, last-known
+            # position confirms player exited that way.
+            _wx_off = 0
+            _wy_off = 0
+            if _e.x <= 0 and _lkx <= 1:
+                _wx_off = -1
+            elif _e.x >= MAP_WIDTH - 1 and _lkx >= MAP_WIDTH - 2:
+                _wx_off = 1
+            if _e.y <= 0 and _lky <= 1:
+                _wy_off = -1
+            elif _e.y >= MAP_HEIGHT - 1 and _lky >= MAP_HEIGHT - 2:
+                _wy_off = 1
+
+            if _wx_off == 0 and _wy_off == 0:
+                continue
+
+            _new_wx = self.world_x + _wx_off
+            _new_wy = self.world_y + _wy_off
+            if not self.world_map.in_bounds(_new_wx, _new_wy):
+                _e.x = max(0, min(MAP_WIDTH  - 1, _e.x))
+                _e.y = max(0, min(MAP_HEIGHT - 1, _e.y))
+                continue
+
+            _crossed.append((_e, _wx_off, _wy_off, _new_wx, _new_wy))
+            _to_remove.add(id(_e))
+
+        if not _crossed:
+            return
+
+        self.entities = [e for e in self.entities if id(e) not in _to_remove]
+
+        for _te, _wx_off, _wy_off, _new_wx, _new_wy in _crossed:
+            # Mirror entry position to the opposite edge of the target chunk
+            if _wx_off != 0 and _wy_off != 0:
+                _ex = MAP_WIDTH  - 1 if _wx_off == -1 else 0
+                _ey = MAP_HEIGHT - 1 if _wy_off == -1 else 0
+            elif _wx_off != 0:
+                _ex = MAP_WIDTH - 1 if _wx_off == -1 else 0
+                _ey = max(0, min(MAP_HEIGHT - 1, _te.y))
+            else:
+                _ex = max(0, min(MAP_WIDTH  - 1, _te.x))
+                _ey = MAP_HEIGHT - 1 if _wy_off == -1 else 0
+
+            # Shell-search helper (shared by both branches)
+            def _shell_place(target_map, occ):
+                for _r in range(0, 12):
+                    for _rdx in range(-_r, _r + 1):
+                        for _rdy in range(-_r, _r + 1):
+                            if _r > 0 and abs(_rdx) != _r and abs(_rdy) != _r:
+                                continue
+                            _nx, _ny = _ex + _rdx, _ey + _rdy
+                            if (target_map.in_bounds(_nx, _ny)
+                                    and target_map.walkable[_nx, _ny]
+                                    and (_nx, _ny) not in occ):
+                                occ.add((_nx, _ny))
+                                return _nx, _ny
+                return self._find_walkable_near(target_map, _ex, _ey, max_radius=50)
+
+            if _new_wx == self.world_x and _new_wy == self.world_y:
+                # Arriving in player's current chunk — merge immediately
+                _occ: set[tuple[int, int]] = {(self.player.x, self.player.y)}
+                for _ne in self.entities:
+                    if getattr(_ne, "blocks_movement", True):
+                        _occ.add((_ne.x, _ne.y))
+                _te.x, _te.y = _shell_place(self.local_map, _occ)
+                if _te.ai is not None:
+                    _te.ai.target_x = self.player.x
+                    _te.ai.target_y = self.player.y
+                _te._last_known_px = self.player.x
+                _te._last_known_py = self.player.y
+                _te.last_known_x   = None
+                _te.last_known_y   = None
+                self.entities.append(_te)
+                if _DM_cc:
+                    print(f"[ENTITY-CROSS] {_te.name} -> player chunk "
+                          f"({self.world_x},{self.world_y}) at ({_te.x},{_te.y})")
+            else:
+                # Third chunk — cache the entity there; player will load it on entry
+                _tgt_chunk = self.world_map.get(_new_wx, _new_wy)
+                if _tgt_chunk is None:
+                    continue
+                _cached_t = self.save_manager.cache.load(_new_wx, _new_wy)
+                if _cached_t:
+                    _t_map  = _cached_t.local_map
+                    _t_ents = _deserialize_entities_inline(_cached_t.entities, self)
+                else:
+                    from generation.region_gen import generate_region
+                    _t_map, _ = generate_region(
+                        _tgt_chunk, MAP_WIDTH, MAP_HEIGHT,
+                        self.data.terrain, data=self.data,
+                    )
+                    _t_ents = []
+                _occ2: set[tuple[int, int]] = {
+                    (e.x, e.y) for e in _t_ents
+                    if getattr(e, "blocks_movement", True)
+                }
+                _te.x, _te.y = _shell_place(_t_map, _occ2)
+                # Guard: if last-known already points at a stair tile in the
+                # player's current map, preserve it — entity is stair-following.
+                _lkx_g = getattr(_te, "_last_known_px", None)
+                _lky_g = getattr(_te, "_last_known_py", None)
+                _lk_is_stair_g = False
+                if _lkx_g is not None and _lky_g is not None:
+                    _lkx_gi, _lky_gi = int(_lkx_g), int(_lky_g)
+                    if self.local_map.in_bounds(_lkx_gi, _lky_gi):
+                        _lk_t_g = self.local_map.tiles[_lkx_gi, _lky_gi]["terrain"]
+                        if isinstance(_lk_t_g, bytes):
+                            _lk_t_g = _lk_t_g.decode()
+                        _lk_is_stair_g = str(_lk_t_g) in ("stairs_down", "stairs_up")
+                if not _lk_is_stair_g:
+                    # Update last-known to the boundary edge facing back toward player,
+                    # so entity waits there (boundary suppression) rather than wandering
+                    # to the old player-chunk-space coordinates inside the third chunk.
+                    _blkx = MAP_WIDTH  - 1 if _wx_off == -1 else (0 if _wx_off == 1 else _te.x)
+                    _blky = MAP_HEIGHT - 1 if _wy_off == -1 else (0 if _wy_off == 1 else _te.y)
+                    _te._last_known_px = _blkx
+                    _te._last_known_py = _blky
+                    if _te.ai is not None:
+                        _te.ai.target_x = _blkx
+                        _te.ai.target_y = _blky
+                _t_ents.append(_te)
+                self.save_manager.cache.store(_new_wx, _new_wy, _t_map, _t_ents)
+                if _DM_cc:
+                    print(f"[ENTITY-CROSS] {_te.name} -> third chunk "
+                          f"({_new_wx},{_new_wy}) at ({_te.x},{_te.y})")
+
+    def _get_chunk_local_map(self, wx: int, wy: int):
+        """Return the LocalMap for chunk (wx, wy) from cache, or None."""
+        cached = self.save_manager.cache.load(wx, wy)
+        return cached.local_map if cached else None
+
+    def _tick_live_pursuers(self) -> None:
+        """Tick entities in self._live_pursuers each turn.
+
+        Tuple format: (Actor, wx, wy, submap_id_or_None).
+          submap_id=None → entity is in surface chunk (wx,wy).
+          submap_id=str  → entity is in a submap; (wx,wy) is its surface chunk.
+
+        Surface entities: offset virtual player across boundary; detect chunk
+        crossings and stair descents.
+        Submap entities: virtual player at stairs_up (last_known); detect stair
+        ascent to transfer back to surface.
+        """
+        if not self._live_pursuers:
+            return
+
+        from components.ai import AIState as _AIState_lp
+        from config import DEBUG_MODE as _DM_lp, MAP_WIDTH, MAP_HEIGHT
+
+        _pursuing = (_AIState_lp.HUNTING, _AIState_lp.ALERTED, _AIState_lp.ATTACKING)
+        _remaining: list = []
+        _to_promote: list = []
+
+        for (_entity, _wx, _wy, _sub_id) in self._live_pursuers:
+            # --- Dead ---
+            if not getattr(_entity, "is_alive", True):
+                if _DM_lp:
+                    print(f"[LIVE-DEAD] {_entity.name} removed from live pursuers")
+                continue
+
+            _eai = getattr(_entity, "ai", None)
+
+            # --- Timed-out or abandoned — return to cache ---
+            if _eai is None or _eai.state not in _pursuing:
+                if _DM_lp:
+                    print(f"[LIVE-TIMEOUT] {_entity.name} abandoned pursuit")
+                if _sub_id is None:
+                    _ret_c = self.save_manager.cache.load(_wx, _wy)
+                    if _ret_c is not None:
+                        _ret_e = _deserialize_entities_inline(_ret_c.entities, self)
+                        _ret_e.append(_entity)
+                        self.save_manager.cache.store(_wx, _wy, _ret_c.local_map, _ret_e)
+                else:
+                    _ret_c = self.save_manager.cache.load_submap(_sub_id)
+                    if _ret_c is not None:
+                        _ret_e = _deserialize_entities_inline(_ret_c.entities, self)
+                        _ret_e.append(_entity)
+                        self.save_manager.cache.store_submap(_sub_id, _ret_c.local_map, _ret_e)
+                continue
+
+            # --- Load map ---
+            if _sub_id is None:
+                _map = self._get_chunk_local_map(_wx, _wy)
+            else:
+                _map = self._get_submap_local_map(_sub_id)
+            if _map is None:
+                if _DM_lp:
+                    _loc = f"submap:{_sub_id}" if _sub_id else f"chunk({_wx},{_wy})"
+                    print(f"[LP-TICK] {_entity.name} — map NOT FOUND for {_loc}, deferring")
+                _remaining.append((_entity, _wx, _wy, _sub_id))
+                continue
+
+            # --- Virtual player ---
+            # Always out-of-bounds: keeps can_see_player False so entity stays
+            # HUNTING/ALERTED.  Navigation is driven entirely by last_known, which
+            # is set at extraction time (boundary edge for chunk crossing, stair
+            # tile for stair following).  Calculated offsets are not needed and
+            # actively harmful for CirclingAI state transitions.
+            _virt_px = -999
+            _virt_py = -999
+
+            if _DM_lp:
+                _loc2 = f"submap:{_sub_id}" if _sub_id else f"chunk({_wx},{_wy})"
+                print(f"[LP-TICK] {_entity.name} at ({_entity.x},{_entity.y}) in {_loc2} "
+                      f"virtual_player=({_virt_px},{_virt_py}) "
+                      f"state={_eai.state.name} lkx={getattr(_entity,'_last_known_px',None)}")
+
+            # Move directly toward target (boundary edge or stair tile).
+            # Bypass process_single entirely — entity is not seeing the player,
+            # it just needs to walk to a known point.  _update_state() and the
+            # full state machine are skipped; only the movement and timeout
+            # counter matter during live pursuer ticks.
+            _lp_tx = getattr(_eai, "target_x", None)
+            _lp_ty = getattr(_eai, "target_y", None)
+            if _lp_tx is None:
+                _lp_tx = getattr(_entity, "_last_known_px", None)
+            if _lp_ty is None:
+                _lp_ty = getattr(_entity, "_last_known_py", None)
+            if _lp_tx is not None and _lp_ty is not None:
+                _lp_tx_c = max(0, min(MAP_WIDTH  - 1, int(_lp_tx)))
+                _lp_ty_c = max(0, min(MAP_HEIGHT - 1, int(_lp_ty)))
+                _eai._move_toward(
+                    actor     = _entity,
+                    local_map = _map,
+                    entities  = [],
+                    tx        = _lp_tx_c,
+                    ty        = _lp_ty_c,
+                )
+
+            # Timeout accounting (replaces _update_state() incrementing the counter).
+            _eai.pursuit_turns_without_contact += 1
+            _lp_cdef = self.data.entities.get(_entity.tile, {})
+            _lp_timeout = _lp_cdef.get("pursuit_timeout", 20)
+            if _eai.pursuit_turns_without_contact >= _lp_timeout:
+                _eai.state = _AIState_lp.WANDERING  # triggers timeout/return-to-cache next tick
+
+            if _DM_lp:
+                print(f"[LP-POST] {_entity.name} now at ({_entity.x},{_entity.y}) "
+                      f"state={_eai.state.name} lkx={getattr(_entity,'_last_known_px',None)}")
+
+            # --- Stair detection ---
+            _t_raw = _map.tiles[_entity.x, _entity.y]["terrain"]
+            if isinstance(_t_raw, bytes):
+                _t_raw = _t_raw.decode()
+            _t_id_lp = str(_t_raw)
+
+            if _sub_id is None and _t_id_lp == "stairs_down":
+                if self._transfer_live_pursuer_through_stair(_entity, _wx, _wy, _map):
+                    if _DM_lp:
+                        print(f"[LIVE-STAIR-DOWN] {_entity.name} entered submap")
+                    continue
+            elif _sub_id is not None and _t_id_lp == "stairs_up":
+                if self._transfer_submap_pursuer_to_surface(_entity, _wx, _wy, _sub_id):
+                    if _DM_lp:
+                        print(f"[LIVE-STAIR-UP] {_entity.name} returned to surface")
+                    continue
+
+            # --- Submap entities stay in submap; no chunk crossings ---
+            if _sub_id is not None:
+                _remaining.append((_entity, _wx, _wy, _sub_id))
+                continue
+
+            # --- Boundary crossing detection (surface entities only) ---
+            _lkx = getattr(_entity, "_last_known_px", None)
+            _lky = getattr(_entity, "_last_known_py", None)
+
+            _cox, _coy = 0, 0
+            if _lkx is not None:
+                if _entity.x <= 0 and _lkx <= 1:
+                    _cox = -1
+                elif _entity.x >= MAP_WIDTH - 1 and _lkx >= MAP_WIDTH - 2:
+                    _cox = 1
+                if _entity.y <= 0 and _lky <= 1:
+                    _coy = -1
+                elif _entity.y >= MAP_HEIGHT - 1 and _lky >= MAP_HEIGHT - 2:
+                    _coy = 1
+
+            if _DM_lp:
+                print(f"[LP-CROSS-CHECK] {_entity.name} pos=({_entity.x},{_entity.y}) "
+                      f"lkx={_lkx} lky={_lky} cox={_cox} coy={_coy} "
+                      f"MAP_W={MAP_WIDTH} MAP_H={MAP_HEIGHT}")
+
+            if _cox == 0 and _coy == 0:
+                _remaining.append((_entity, _wx, _wy, None))
+                continue
+
+            _new_wx = _wx + _cox
+            _new_wy = _wy + _coy
+
+            if not self.world_map.in_bounds(_new_wx, _new_wy):
+                if _DM_lp:
+                    print(f"[LP-CROSSING] {_entity.name} -> ({_new_wx},{_new_wy}) — OUT OF WORLD BOUNDS, clamped")
+                _entity.x = max(0, min(MAP_WIDTH  - 1, _entity.x))
+                _entity.y = max(0, min(MAP_HEIGHT - 1, _entity.y))
+                _remaining.append((_entity, _wx, _wy, None))
+                continue
+
+            # Mirror entry to facing edge of target chunk
+            if _cox != 0 and _coy != 0:
+                _entry_x = MAP_WIDTH  - 1 if _cox == -1 else 0
+                _entry_y = MAP_HEIGHT - 1 if _coy == -1 else 0
+            elif _cox != 0:
+                _entry_x = MAP_WIDTH  - 1 if _cox == -1 else 0
+                _entry_y = max(0, min(MAP_HEIGHT - 1, _entity.y))
+            else:
+                _entry_x = max(0, min(MAP_WIDTH  - 1, _entity.x))
+                _entry_y = MAP_HEIGHT - 1 if _coy == -1 else 0
+
+            _entity.x = _entry_x
+            _entity.y = _entry_y
+
+            if _DM_lp:
+                print(f"[LP-CROSSING] {_entity.name} crossed to ({_new_wx},{_new_wy}) "
+                      f"player_chunk=({self.world_x},{self.world_y}) entry=({_entry_x},{_entry_y})")
+
+            if _new_wx == self.world_x and _new_wy == self.world_y:
+                _to_promote.append(_entity)
+                if _DM_lp:
+                    print(f"[LIVE-CROSS] {_entity.name} ({_wx},{_wy}) -> player chunk "
+                          f"({self.world_x},{self.world_y}) entry ({_entry_x},{_entry_y})")
+            else:
+                _remaining.append((_entity, _new_wx, _new_wy, None))
+                if _DM_lp:
+                    print(f"[LIVE-MOVE] {_entity.name} ({_wx},{_wy}) -> ({_new_wx},{_new_wy})")
+
+        self._live_pursuers = _remaining
+
+        # Promote surface live pursuers that crossed into the player's chunk
+        for _pe in _to_promote:
+            _occ_lp: set[tuple[int, int]] = {(self.player.x, self.player.y)}
+            for _ne_lp in self.entities:
+                if getattr(_ne_lp, "blocks_movement", True):
+                    _occ_lp.add((_ne_lp.x, _ne_lp.y))
+            _placed_lp = False
+            for _r_lp in range(0, 12):
+                for _rdx_lp in range(-_r_lp, _r_lp + 1):
+                    for _rdy_lp in range(-_r_lp, _r_lp + 1):
+                        if _r_lp > 0 and abs(_rdx_lp) != _r_lp and abs(_rdy_lp) != _r_lp:
+                            continue
+                        _nx_lp = _pe.x + _rdx_lp
+                        _ny_lp = _pe.y + _rdy_lp
+                        if (self.local_map.in_bounds(_nx_lp, _ny_lp)
+                                and self.local_map.walkable[_nx_lp, _ny_lp]
+                                and (_nx_lp, _ny_lp) not in _occ_lp):
+                            _pe.x, _pe.y = _nx_lp, _ny_lp
+                            _occ_lp.add((_nx_lp, _ny_lp))
+                            _placed_lp = True
+                            break
+                    if _placed_lp:
+                        break
+                if _placed_lp:
+                    break
+            if not _placed_lp:
+                _pe.x, _pe.y = self._find_walkable_near(
+                    self.local_map, _pe.x, _pe.y, max_radius=50
+                )
+            _pe._last_known_px = self.player.x
+            _pe._last_known_py = self.player.y
+            _pe.last_known_x   = None
+            _pe.last_known_y   = None
+            if _pe.ai is not None:
+                _pe.ai.target_x = self.player.x
+                _pe.ai.target_y = self.player.y
+            self.entities.append(_pe)
+            if _DM_lp:
+                print(f"[LIVE-ARRIVE] {_pe.name} -> player chunk ({self.world_x},{self.world_y}) "
+                      f"at ({_pe.x},{_pe.y})")
+
+    def _get_submap_local_map(self, submap_id: str):
+        """Return the LocalMap for a cached submap, or None."""
+        cached = self.save_manager.cache.load_submap(submap_id)
+        return cached.local_map if cached else None
+
+    def _transfer_live_pursuer_through_stair(self, entity, wx: int, wy: int, surface_map) -> bool:
+        """Transfer a surface live pursuer through stairs_down into its linked submap.
+
+        Returns True if the transfer was handled (entity removed from live pursuers).
+        """
+        from config import DEBUG_MODE as _DM_st2
+        _linked_id = surface_map.submap_links.get((entity.x, entity.y))
+        if _linked_id is None:
+            return False  # stair tile with no linked submap
+
+        # Load or generate the submap
+        _sub_cached = self.save_manager.cache.load_submap(_linked_id)
+        if _sub_cached is None:
+            _chunk_wm = self.world_map.get(wx, wy)
+            if _chunk_wm is None:
+                return False
+            _smeta = next((s for s in _chunk_wm.submaps if s.submap_id == _linked_id), None)
+            if _smeta is None:
+                return False
+            from generation.local_gen import generate_submap
+            from config import MAP_WIDTH as _MW2, MAP_HEIGHT as _MH2
+            _smap, _slents = generate_submap(
+                _smeta, _MW2, _MH2, self.data.terrain, data=self.data
+            )
+            _sents = self._spawn_layout_entities(_slents)
+            self.save_manager.cache.store_submap(_linked_id, _smap, _sents)
+            _sub_cached = self.save_manager.cache.load_submap(_linked_id)
+        if _sub_cached is None:
+            return False
+
+        _sub_map  = _sub_cached.local_map
+        _sub_ents = _deserialize_entities_inline(_sub_cached.entities, self)
+
+        # Find entry point
+        _chunk_wm2 = self.world_map.get(wx, wy)
+        _smeta2 = None
+        if _chunk_wm2:
+            _smeta2 = next((s for s in _chunk_wm2.submaps if s.submap_id == _linked_id), None)
+        _ex = _smeta2.entry_x if _smeta2 else _sub_map.width  // 2
+        _ey = _smeta2.entry_y if _smeta2 else _sub_map.height // 2
+
+        # Shell-search for placement
+        _occ_st: set[tuple[int, int]] = set()
+        for _se2 in _sub_ents:
+            if getattr(_se2, "blocks_movement", True):
+                _occ_st.add((_se2.x, _se2.y))
+        _placed_st = False
+        for _r_st in range(0, 12):
+            for _dx_st in range(-_r_st, _r_st + 1):
+                for _dy_st in range(-_r_st, _r_st + 1):
+                    if _r_st > 0 and abs(_dx_st) != _r_st and abs(_dy_st) != _r_st:
+                        continue
+                    _nx_st, _ny_st = _ex + _dx_st, _ey + _dy_st
+                    if (_sub_map.in_bounds(_nx_st, _ny_st)
+                            and _sub_map.walkable[_nx_st, _ny_st]
+                            and (_nx_st, _ny_st) not in _occ_st):
+                        entity.x, entity.y = _nx_st, _ny_st
+                        _placed_st = True
+                        break
+                if _placed_st:
+                    break
+            if _placed_st:
+                break
+        if not _placed_st:
+            entity.x, entity.y = self._find_walkable_near(_sub_map, _ex, _ey, max_radius=50)
+
+        if _linked_id == self.current_submap_id:
+            # Player is in this submap — add entity to active scene
+            entity._last_known_px = self.player.x
+            entity._last_known_py = self.player.y
+            if entity.ai is not None:
+                entity.ai.target_x = self.player.x
+                entity.ai.target_y = self.player.y
+            self.entities.append(entity)
+            if _DM_st2:
+                print(f"[LIVE-STAIR-DOWN-ARRIVE] {entity.name} -> submap {_linked_id} "
+                      f"at ({entity.x},{entity.y}) [player present]")
+        else:
+            # Player not in this submap — cache entity into it
+            _sub_ents.append(entity)
+            self.save_manager.cache.store_submap(_linked_id, _sub_map, _sub_ents)
+            if _DM_st2:
+                print(f"[LIVE-STAIR-DOWN-CACHE] {entity.name} cached into submap {_linked_id} "
+                      f"at ({entity.x},{entity.y})")
+        return True
+
+    def _transfer_submap_pursuer_to_surface(self, entity, wx: int, wy: int, submap_id: str) -> bool:
+        """Transfer a submap live pursuer through stairs_up back to the surface.
+
+        Returns True if the transfer was handled (entity removed from live pursuers).
+        """
+        from config import DEBUG_MODE as _DM_su
+        # Surface exit coords were stamped on entity at extraction time
+        _exit_x  = getattr(entity, "_surface_exit_x",  None)
+        _exit_y  = getattr(entity, "_surface_exit_y",  None)
+        _exit_wx = getattr(entity, "_surface_exit_wx", wx)
+        _exit_wy = getattr(entity, "_surface_exit_wy", wy)
+        if _exit_x is None:
+            _exit_x = self.surface_return_x if hasattr(self, "surface_return_x") else 0
+            _exit_y = self.surface_return_y if hasattr(self, "surface_return_y") else 0
+
+        if (self.current_submap_id is None
+                and _exit_wx == self.world_x
+                and _exit_wy == self.world_y):
+            # Player is on this surface chunk — add directly to active scene
+            _occ_su: set[tuple[int, int]] = {(self.player.x, self.player.y)}
+            for _se_su in self.entities:
+                if getattr(_se_su, "blocks_movement", True):
+                    _occ_su.add((_se_su.x, _se_su.y))
+            _placed_su = False
+            for _r_su in range(0, 12):
+                for _dx_su in range(-_r_su, _r_su + 1):
+                    for _dy_su in range(-_r_su, _r_su + 1):
+                        if _r_su > 0 and abs(_dx_su) != _r_su and abs(_dy_su) != _r_su:
+                            continue
+                        _nx_su, _ny_su = _exit_x + _dx_su, _exit_y + _dy_su
+                        if (self.local_map.in_bounds(_nx_su, _ny_su)
+                                and self.local_map.walkable[_nx_su, _ny_su]
+                                and (_nx_su, _ny_su) not in _occ_su):
+                            entity.x, entity.y = _nx_su, _ny_su
+                            _placed_su = True
+                            break
+                    if _placed_su:
+                        break
+                if _placed_su:
+                    break
+            if not _placed_su:
+                entity.x, entity.y = self._find_walkable_near(
+                    self.local_map, _exit_x, _exit_y, max_radius=50
+                )
+            entity._last_known_px = self.player.x
+            entity._last_known_py = self.player.y
+            if entity.ai is not None:
+                entity.ai.target_x = self.player.x
+                entity.ai.target_y = self.player.y
+            self.entities.append(entity)
+            if _DM_su:
+                print(f"[LIVE-STAIR-UP-ARRIVE] {entity.name} -> surface "
+                      f"({_exit_wx},{_exit_wy}) at ({entity.x},{entity.y}) [player present]")
+        else:
+            # Player not on this surface chunk — cache entity there
+            _surf_c = self.save_manager.cache.load(_exit_wx, _exit_wy)
+            if _surf_c is None:
+                return False
+            _surf_ents = _deserialize_entities_inline(_surf_c.entities, self)
+            entity.x, entity.y = self._find_walkable_near(
+                _surf_c.local_map, _exit_x, _exit_y, max_radius=50
+            )
+            _surf_ents.append(entity)
+            self.save_manager.cache.store(_exit_wx, _exit_wy, _surf_c.local_map, _surf_ents)
+            if _DM_su:
+                print(f"[LIVE-STAIR-UP-CACHE] {entity.name} cached onto surface "
+                      f"({_exit_wx},{_exit_wy}) at ({entity.x},{entity.y})")
+        return True
+
+    def _process_creature_stair_transfers(self) -> None:
+        """Process stair-use flags set by AI when a creature reached a stair tile.
+
+        Handles two cases:
+          stairs_down: creature on surface wants to descend; player must be
+                       underground in the linked submap.
+          stairs_up:   creature in submap wants to ascend; player must be on
+                       the surface (no current_submap_id).
+        """
+        from config import DEBUG_MODE as _DM_st
+
+        for _e in list(self.entities):
+            if _e is self.player:
+                continue
+            _psu = getattr(_e, "_pending_stair_use", None)
+            if not _psu:
+                continue
+            _e._pending_stair_use = None
+
+            if _psu == "stairs_down":
+                # Surface-to-submap creature stair use requires surface entities
+                # to get AI ticks while the player is underground — deferred to
+                # full reality bubble implementation.
+                pass
+
+            elif _psu == "stairs_up":
+                # Creature is in submap (self.entities), player has ascended
+                # (current_submap_id is None). Transfer creature to surface.
+                if self.current_submap_id:
+                    continue  # player still underground
+                # Remove from current entities list
+                self.entities = [_x for _x in self.entities if _x is not _e]
+                # Load surface cache and place creature near surface return pos
+                _cached_surf = self.save_manager.cache.load(self.world_x, self.world_y)
+                if _cached_surf is None:
+                    continue
+                _surf_ents = _deserialize_entities_inline(_cached_surf.entities, self)
+                _occ_s2: set[tuple[int, int]] = {(self.player.x, self.player.y)}
+                for _se in _surf_ents:
+                    if getattr(_se, "blocks_movement", True):
+                        _occ_s2.add((_se.x, _se.y))
+                _ex_s2, _ey_s2 = self.surface_return_x, self.surface_return_y
+                _placed_s2 = False
+                for _pr_s2 in range(0, 12):
+                    for _pdx_s2 in range(-_pr_s2, _pr_s2 + 1):
+                        for _pdy_s2 in range(-_pr_s2, _pr_s2 + 1):
+                            if _pr_s2 > 0 and abs(_pdx_s2) != _pr_s2 and abs(_pdy_s2) != _pr_s2:
+                                continue
+                            _nx_s2 = _ex_s2 + _pdx_s2
+                            _ny_s2 = _ey_s2 + _pdy_s2
+                            if (_cached_surf.local_map.in_bounds(_nx_s2, _ny_s2)
+                                    and _cached_surf.local_map.walkable[_nx_s2, _ny_s2]
+                                    and (_nx_s2, _ny_s2) not in _occ_s2):
+                                _e.x, _e.y = _nx_s2, _ny_s2
+                                _placed_s2 = True
+                                break
+                        if _placed_s2:
+                            break
+                    if _placed_s2:
+                        break
+                if not _placed_s2:
+                    _e.x, _e.y = self._find_walkable_near(
+                        _cached_surf.local_map, _ex_s2, _ey_s2, max_radius=50
+                    )
+                if hasattr(_e, "ai"):
+                    _e.ai._last_known_px = self.player.x
+                    _e.ai._last_known_py = self.player.y
+                    _e.ai.target_x = self.player.x
+                    _e.ai.target_y = self.player.y
+                _e._last_known_px = self.player.x
+                _e._last_known_py = self.player.y
+                _surf_ents.append(_e)
+                self.save_manager.cache.store(
+                    self.world_x, self.world_y,
+                    _cached_surf.local_map, _surf_ents,
+                )
+                if _DM_st:
+                    print(f"[TRANSFER-STAIR-UP-DELAYED] {_e.name} -> surface ({_e.x},{_e.y})")
 
     def _spawn_layout_entities(self, layout_entities: list) -> list:
         """
@@ -1671,6 +3089,498 @@ class Engine:
             t = t.decode()
         return str(t)
 
+    def _try_drink_terrain(self) -> bool:
+        """Drink from drinkable terrain at player's position (W key). Returns True if a turn was spent."""
+        terrain_id    = self._resolve_terrain_id(self.player.x, self.player.y)
+        terrain_entry = self.data.terrain.get(terrain_id, {})
+
+        if not terrain_entry.get("drinkable", False):
+            return False
+
+        if self.current_submap_id is not None:
+            self.log.add(
+                "The water here has a wrong quality. You do not drink.",
+                STONE_BLUE,
+            )
+            return True  # intent was clear — spend the turn
+
+        needs = getattr(self.player, "needs", None)
+        if not needs:
+            return False
+
+        raw      = terrain_entry.get("drink_hydration", 400)
+        survival = self.data.survival or {}
+        t_max    = survival.get("thirst", {}).get("max", 800)
+        needs.drink(raw / t_max)
+        self.log.add("The water is cold. Grit between the teeth.", CLEAR_WATER)
+        return True
+
+    def _try_harvest(self, x: int | None = None, y: int | None = None) -> bool:
+        """Harvest a plant at (x, y), defaulting to player position. Returns True if a turn was spent."""
+        from config import DEBUG_MODE as _DM
+        hx = x if x is not None else self.player.x
+        hy = y if y is not None else self.player.y
+
+        terrain_id    = self._resolve_terrain_id(hx, hy)
+        terrain_entry = self.data.terrain.get(terrain_id, {})
+
+        if _DM:
+            print(f"[harvest] tile=({hx},{hy}) terrain={terrain_id} harvestable={terrain_entry.get('harvestable', False)}")
+
+        if not terrain_entry.get("harvestable", False):
+            return False
+
+        harvest_item_id = terrain_entry.get("harvest_item", "")
+        depleted_tile   = terrain_entry.get("depleted_tile", terrain_id)
+        if not harvest_item_id:
+            return False
+
+        item = self.item_factory.create(harvest_item_id, hx, hy)
+        if item is None:
+            return False
+
+        inv = getattr(self.player, "inventory", None)
+        if inv is None:
+            return False
+
+        inv.add(item)
+        display_name = terrain_entry.get("display_name", "plant")
+        self.log.add(f"You take a cutting of {display_name.lower()}.", MSG_DEFAULT)
+
+        dep_entry = self.data.terrain.get(depleted_tile, {})
+        self.local_map.set_tile(
+            hx, hy, depleted_tile,
+            dep_entry.get("walkable", True),
+            dep_entry.get("transparent", True),
+        )
+        return True
+
+    def _try_gather(self, x: int, y: int) -> bool:
+        """
+        Attempt to gather a material from terrain at (x, y).
+        gather_chance roll decides success/fail.
+        If gather_depletes is true, tile changes to depleted_tile on success.
+        Returns True if a turn was spent.
+        """
+        terrain_id    = self._resolve_terrain_id(x, y)
+        terrain_entry = self.data.terrain.get(terrain_id, {})
+        if not terrain_entry.get("gatherable", False):
+            return False
+
+        gather_item_id = terrain_entry.get("gather_item", "")
+        if not gather_item_id:
+            return False
+
+        inv = getattr(self.player, "inventory", None)
+        if inv is None:
+            return False
+
+        chance = terrain_entry.get("gather_chance", 0.5)
+        if self.rng.random() >= chance:
+            dname = terrain_entry.get("display_name", "there")
+            self.log.add(f"Nothing useful from the {dname.lower()}.", MSG_DEFAULT)
+            return True  # turn spent on the attempt
+
+        item = self.item_factory.create(gather_item_id, x, y)
+        if item is None:
+            return False
+
+        if not inv.add(item):
+            self.log.add("No room.", MSG_DEFAULT)
+            return True
+
+        dname = terrain_entry.get("display_name", "terrain")
+        self.log.add(f"You take {item.name} from the {dname.lower()}.", MSG_DEFAULT)
+
+        if terrain_entry.get("gather_depletes", False):
+            dep_id    = terrain_entry.get("depleted_tile", terrain_id)
+            dep_entry = self.data.terrain.get(dep_id, {})
+            self.local_map.set_tile(
+                x, y, dep_id,
+                dep_entry.get("walkable", True),
+                dep_entry.get("transparent", True),
+            )
+
+        return True
+
+    def _get_interaction_candidates(self) -> list[tuple[int, int]]:
+        """
+        Return all tiles (including the player's own) with harvestable terrain,
+        gatherable terrain, an interactable, or floor items.
+        Scan order: self, then N/NE/E/SE/S/SW/W/NW.
+        """
+        _OFFSETS = [(0, 0),
+                    (0, -1), (1, -1), (1, 0), (1, 1),
+                    (0, 1), (-1, 1), (-1, 0), (-1, -1)]
+        candidates: list[tuple[int, int]] = []
+        for dx, dy in _OFFSETS:
+            ax, ay = self.player.x + dx, self.player.y + dy
+            if not self.local_map.in_bounds(ax, ay):
+                continue
+            terrain_id    = self._resolve_terrain_id(ax, ay)
+            terrain_entry = self.data.terrain.get(terrain_id, {})
+            decor_id      = self.local_map.decor.get((ax, ay))
+            decor_entry   = self.data.decoratives.get(decor_id, {}) if decor_id else {}
+            if (terrain_entry.get("harvestable", False)
+                    or terrain_entry.get("gatherable", False)
+                    or terrain_entry.get("interactable")
+                    or decor_entry.get("interactable")):
+                candidates.append((ax, ay))
+                continue
+            if self._items_at(ax, ay):
+                candidates.append((ax, ay))
+        return candidates
+
+    # ------------------------------------------------------------------ #
+    #  Interactable tile handlers
+    # ------------------------------------------------------------------ #
+
+    def _dispatch_interactable(self, x: int, y: int) -> bool:
+        """Call the named handler for the interactable at (x, y). Checks decor first, then terrain."""
+        # Decor layer — campfires and other placed objects live here
+        decor_id = self.local_map.decor.get((x, y))
+        if decor_id:
+            decor_entry  = self.data.decoratives.get(decor_id, {})
+            handler_name = decor_entry.get("interactable", "")
+            if handler_name:
+                handler = getattr(self, f"_interactable_{handler_name}", None)
+                if handler:
+                    return handler(x, y)
+        # Terrain layer
+        terrain_id    = self._resolve_terrain_id(x, y)
+        terrain_entry = self.data.terrain.get(terrain_id, {})
+        handler_name  = terrain_entry.get("interactable", "")
+        if not handler_name:
+            return False
+        handler = getattr(self, f"_interactable_{handler_name}", None)
+        if handler is None:
+            return False
+        return handler(x, y)
+
+    def _interactable_butcher(self, x: int, y: int) -> bool:
+        """Butcher the corpse at (x, y). Data-driven yield from creature JSON."""
+        import random as _brng
+        from generation.decor_utils import clear_decor as _bclr
+        from engine.message_log import MSG_DEFAULT
+
+        creature_id = self.local_map.corpse_data.get((x, y))
+        if creature_id is None:
+            return False
+
+        cdef = self.data.entities.get(creature_id, {})
+        by   = cdef.get("butcher_yield")
+        if not by:
+            self.log.add("This cannot be butchered.", MSG_DEFAULT)
+            return False  # no turn spent
+
+        # Highest cutting tier across weapon + offhand
+        cutting_tier = 0
+        equip = getattr(self.player, "equipment", None)
+        if equip:
+            for _slot in ("weapon", "offhand"):
+                _it = equip.slots.get(_slot)
+                if _it:
+                    for _kw in getattr(_it, "keywords", []):
+                        if _kw.get("tag") == "cutting":
+                            cutting_tier = max(cutting_tier, _kw.get("tier", 0))
+
+        # Highest qualifying tier block
+        tiers = by.get("tiers", [])
+        qualified = [t for t in tiers if t.get("min_cutting_tier", 1) <= cutting_tier]
+        if not qualified:
+            self.log.add("Your tools are not sufficient for this.", MSG_DEFAULT)
+            return True  # turn spent — attempt happened
+
+        best = max(qualified, key=lambda t: t.get("min_cutting_tier", 1))
+        min_req = best.get("min_cutting_tier", 1)
+
+        # Turn cost: base 5, reduced by tier excess, minimum 1
+        turn_cost = max(1, 5 - (cutting_tier - min_req))
+        if turn_cost > 1:
+            self._move_debt += turn_cost - 1
+
+        # Structured log line 1: creature name + tool used
+        _creature_name = cdef.get("name", creature_id)
+        _tool_names: list[str] = []
+        if equip:
+            for _slot in ("weapon", "offhand"):
+                _it = equip.slots.get(_slot)
+                if _it:
+                    for _kw in getattr(_it, "keywords", []):
+                        if _kw.get("tag") == "cutting":
+                            _tool_names.append(getattr(_it, "name", _slot))
+                            break
+        _tool_str = " and ".join(_tool_names) if _tool_names else "bare hands"
+        self.log.add(f"You butcher the {_creature_name} using {_tool_str}.", MSG_DEFAULT)
+
+        # Roll yields and add to inventory
+        inv = getattr(self.player, "inventory", None)
+        _got_any = False
+        for _ydef in best.get("yields", []):
+            _iid  = _ydef.get("item_id", "")
+            _qty  = _brng.randint(
+                _ydef.get("quantity_min", 0),
+                _ydef.get("quantity_max", 1),
+            )
+            if _qty <= 0:
+                continue
+            for _ in range(_qty):
+                _new = self.item_factory.create(_iid, x=self.player.x, y=self.player.y)
+                if _new and inv:
+                    inv.add(_new)
+            _idef = self.data.items.get(_iid, {})
+            self.log.add(f"  {_idef.get('name', _iid).capitalize()} \xd7{_qty}.", MSG_DEFAULT)
+            _got_any = True
+
+        # Remove corpse
+        _bclr(self.local_map, x, y)
+        self.local_map.corpse_data.pop((x, y), None)
+        self.local_map.corpse_decay.pop((x, y), None)
+
+        if not _got_any:
+            self.log.add("  The remains yield nothing useful.", MSG_DEFAULT)
+
+        return True
+
+    def _interactable_light_campfire(self, x: int, y: int) -> bool:
+        from generation.decor_utils import place_decor
+        place_decor(self.local_map, x, y, "campfire_lit")
+        self.log.add("The fire takes.", MSG_DEFAULT)
+        return True
+
+    def _interactable_extinguish_campfire(self, x: int, y: int) -> bool:
+        from generation.decor_utils import place_decor
+        place_decor(self.local_map, x, y, "campfire_unlit")
+        self.log.add("The fire dies.", MSG_DEFAULT)
+        return True
+
+    def _build_warm_tile_ids(self) -> None:
+        """Rebuild the set of terrain IDs that emit warmth."""
+        self._warm_tile_ids = {
+            tid for tid, entry in self.data.terrain.items()
+            if entry.get("warmth_radius", 0) > 0
+        }
+
+    def _update_warmth(self) -> None:
+        """Check player proximity to warm tiles and warm decor. Fire transition messages on state change."""
+        was_warm = self.player_near_fire
+        near     = False
+        px, py   = self.player.x, self.player.y
+        for dx in range(-4, 5):
+            if near:
+                break
+            for dy in range(-4, 5):
+                wx, wy = px + dx, py + dy
+                if not self.local_map.in_bounds(wx, wy):
+                    continue
+                # Terrain warmth
+                if self._warm_tile_ids:
+                    tid = self._resolve_terrain_id(wx, wy)
+                    if tid in self._warm_tile_ids:
+                        entry  = self.data.terrain.get(tid, {})
+                        radius = entry.get("warmth_radius", 0)
+                        if abs(dx) <= radius and abs(dy) <= radius:
+                            near = True
+                            break
+                # Decor warmth (campfire_lit and any future warm decor)
+                if not near:
+                    _did = self.local_map.decor.get((wx, wy))
+                    if _did:
+                        _de = self.data.decoratives.get(_did, {})
+                        _dr = _de.get("warmth_radius", 0)
+                        if _dr > 0 and abs(dx) <= _dr and abs(dy) <= _dr:
+                            near = True
+                            break
+        self.player_near_fire = near
+        if near and not was_warm:
+            self.log.add("The fire takes the edge off.", MSG_DEFAULT)
+        elif was_warm and not near:
+            self.log.add("The cold returns.", STONE_BLUE)
+
+    # ------------------------------------------------------------------ #
+    #  Placement cursor
+    # ------------------------------------------------------------------ #
+
+    def _start_placement_cursor(self, tile_id: str, recipe: dict) -> None:
+        """Enter PLACEMENT_CURSOR mode after a places_in_world craft succeeds."""
+        self._pending_placement_tile   = tile_id
+        self._pending_placement_recipe = recipe
+        # Start on the tile adjacent to the player (north) as a sensible default
+        self._placement_cursor_x = self.player.x
+        self._placement_cursor_y = max(0, self.player.y - 1)
+        self.mode = GameMode.PLACEMENT_CURSOR
+        msg = recipe.get("placement_message", "Where will you set it?")
+        self.log.add(msg, MSG_DEFAULT)
+
+    def _is_valid_placement(self, x: int, y: int) -> bool:
+        """True if (x, y) is a legal tile to place a world object on."""
+        if not self.local_map.in_bounds(x, y):
+            return False
+        if not self.local_map.walkable[x, y]:
+            return False
+        if self._get_blocking_entity(x, y):
+            return False
+        if self._decor_blocks_movement(x, y):
+            return False
+        return True
+
+    def _decor_blocks_movement(self, x: int, y: int) -> bool:
+        """True if the decorative tile at (x, y) has blocks_movement: true."""
+        decor_id = self.local_map.decor.get((x, y))
+        if not decor_id:
+            return False
+        return self.data.decoratives.get(decor_id, {}).get("blocks_movement", False)
+
+    def _handle_key_placement(self, key: int) -> None:
+        """Input handler for PLACEMENT_CURSOR mode."""
+        from engine.engine import MOVE_KEYS
+
+        if key in MOVE_KEYS:
+            dx, dy = MOVE_KEYS[key]
+            px, py = self.player.x, self.player.y
+            ox = self._placement_cursor_x - px
+            oy = self._placement_cursor_y - py
+            self._placement_cursor_x = px + max(-1, min(1, ox + dx))
+            self._placement_cursor_y = py + max(-1, min(1, oy + dy))
+            return
+
+        if key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+            cx, cy = self._placement_cursor_x, self._placement_cursor_y
+            if cx == self.player.x and cy == self.player.y:
+                self.log.add("You cannot place it at your own feet.", MSG_DEFAULT)
+                return
+            if not self._is_valid_placement(cx, cy):
+                self.log.add("You cannot place it there.", MSG_DEFAULT)
+                return
+            # Place the tile — decor tiles go to the decor layer, terrain to terrain
+            tile_id = self._pending_placement_tile
+            _placed = False
+            if tile_id and tile_id in self.data.decoratives:
+                from generation.decor_utils import place_decor
+                place_decor(self.local_map, cx, cy, tile_id)
+                _placed = True
+            elif tile_id and tile_id in self.data.terrain:
+                t = self.data.terrain[tile_id]
+                self.local_map.set_tile(cx, cy, tile_id,
+                                        t.get("walkable", False),
+                                        t.get("transparent", True))
+                _placed = True
+            if _placed:
+                recipe = self._pending_placement_recipe or {}
+                self.log.add(recipe.get("result_message",
+                             f"{recipe.get('name', 'It')} placed."), MSG_DEFAULT)
+                self._emit_placement_burst(cx, cy)
+            self._pending_placement_tile   = None
+            self._pending_placement_recipe = None
+            self.mode = GameMode.LOCAL
+            self._log_scroll = 0
+            self._advance_turn()
+            return
+
+        if key == pygame.K_ESCAPE:
+            # Return components to inventory
+            recipe = self._pending_placement_recipe
+            if recipe:
+                inv = getattr(self.player, "inventory", None)
+                if inv:
+                    for ing in recipe.get("ingredients", []):
+                        for _ in range(ing["count"]):
+                            item = self.item_factory.create(
+                                ing["item"],
+                                self.player.x, self.player.y,
+                            )
+                            if item:
+                                inv.add(item)
+            self.log.add("You decide against it.", MSG_DEFAULT)
+            self._pending_placement_tile   = None
+            self._pending_placement_recipe = None
+            self.mode = GameMode.LOCAL
+            return
+
+    def _emit_placement_burst(self, wx: int, wy: int) -> None:
+        """World-space burst particles + ring on successful tile placement."""
+        import math as _pm
+        import random as _pr
+        from rendering.particles import Particle as _Pp
+        _rng = _pr.Random()
+        _cx = float(wx) + 0.5
+        _cy = float(wy) + 0.5
+        # 8-12 outward circle particles
+        for _ in range(_rng.randint(8, 12)):
+            _angle = _rng.uniform(0, _pm.pi * 2)
+            _speed = _rng.uniform(1.5, 3.5)
+            _lt    = _rng.uniform(0.35, 0.55)
+            self.particle_system.emit(_Pp(
+                x=_cx, y=_cy,
+                vx=_pm.cos(_angle) * _speed,
+                vy=_pm.sin(_angle) * _speed,
+                lifetime=_lt, max_lifetime=_lt,
+                r=OLD_GOLD[0], g=OLD_GOLD[1], b=OLD_GOLD[2],
+                alpha=220, size=2.5,
+                space="world", shape="circle",
+            ))
+        # Expanding ring
+        _rlt = 0.6
+        self.particle_system.emit(_Pp(
+            x=_cx, y=_cy,
+            vx=0.0, vy=0.0,
+            lifetime=_rlt, max_lifetime=_rlt,
+            r=OLD_GOLD[0], g=OLD_GOLD[1], b=OLD_GOLD[2],
+            alpha=180, size=1.0,
+            space="world", shape="ring",
+            ring_radius=0.0, ring_max_radius=0.75, ring_width=2,
+        ))
+
+    def _render_placement_cursor(
+        self,
+        screen:   pygame.Surface,
+        cam_x:    int,
+        cam_y:    int,
+        viewport: pygame.Rect,
+    ) -> None:
+        """Draw the placement cursor and a one-line hint."""
+        cx, cy   = self._placement_cursor_x, self._placement_cursor_y
+        valid    = self._is_valid_placement(cx, cy)
+        color    = DISCHARGE_FLASH if valid else FRESH_WOUND
+        self.look_mode.render_cursor(screen, self, cam_x, cam_y,
+                                     x=cx, y=cy, color=color)
+        self._render_placement_hint(screen, viewport, valid)
+
+    def _render_placement_hint(
+        self,
+        screen:   pygame.Surface,
+        viewport: pygame.Rect,
+        valid:    bool,
+    ) -> None:
+        font = getattr(self.display, "font_ui_small", None)
+        if not font:
+            return
+        if valid:
+            hint = "[ ENTER ] place     [ ESC ] cancel"
+            col  = DISCHARGE_FLASH
+        else:
+            hint = "Cannot place here.     [ ESC ] cancel"
+            col  = FRESH_WOUND
+        text_surf = font.render(hint, True, col)
+        x = viewport.left + (viewport.width - text_surf.get_width()) // 2
+        y = viewport.bottom - text_surf.get_height() - 10
+        bg_w = text_surf.get_width() + 10
+        bg_h = text_surf.get_height() + 6
+        bg_surf = pygame.Surface((bg_w, bg_h), pygame.SRCALPHA)
+        bg_surf.fill((*VOID_BLACK, 210))
+        screen.blit(bg_surf,   (x - 5, y - 3))
+        screen.blit(text_surf, (x, y))
+
+    def _try_open_interaction_cursor(self) -> None:
+        """
+        Shift+G: always open the interaction cursor over the 3×3 grid.
+        candidates is passed through to the cursor for ENTER handling;
+        zero or one candidate both work — the player navigates and confirms.
+        """
+        candidates = self._get_interaction_candidates()
+        self.interaction_cursor.enter(candidates, self.player.x, self.player.y)
+        self.mode = GameMode.INTERACTION_CURSOR
+
     def _on_player_step(self, x: int, y: int) -> None:
         """Called after player moves to (x, y). Applies move_cost debt and effects."""
         from engine.hooks import HookEvent
@@ -1696,6 +3606,11 @@ class Engine:
 
         self._move_debt += max(0.0, move_cost - 1.0)
 
+        # Needs move penalty — stacks with terrain cost
+        needs = getattr(self.player, "needs", None)
+        if needs:
+            self._move_debt += needs.hunger_move_penalty + needs.thirst_move_penalty
+
         if self.debug_move_log:
             self.log.add(
                 f"[D] step ({x},{y}) terrain={terrain_id}"
@@ -1710,26 +3625,18 @@ class Engine:
 
         elif effect == "thorns":
             fighter = getattr(self.player, "fighter", None)
-            if fighter and getattr(fighter, "location_hp", None):
-                exposed = [
-                    loc for loc, layers in fighter.armor_layers.items()
-                    if sum(layer.get("armor_value", 0) for layer in layers) < 3
-                ]
-                target_loc = random.choice(exposed) if exposed else None
-                if target_loc:
-                    fighter.location_hp[target_loc] = max(
-                        0, fighter.location_hp.get(target_loc, 1) - 1
-                    )
-                    self.log.add("The briars catch at you.", DUSTY_ROSE)
-                    if self.display.CALLOUT_STATUS_EFFECTS:
-                        self.callouts.add("thorns",
-                                          self.player.x, self.player.y,
-                                          DUSTY_ROSE, font_size="status")
-                    self.player.took_damage_this_turn = True
-                    if fighter.location_hp[target_loc] <= 0:
-                        fighter._dead = True
-                else:
-                    self.log.add("The briars scrape harmlessly.", STONE_BLUE)
+            if fighter:
+                thorn_dmg = max(1, 1 - fighter.effective_av // 3)
+                fighter.take_damage(thorn_dmg)
+                self.log.add("The briars catch at you.", DUSTY_ROSE)
+                if self.display.CALLOUT_STATUS_EFFECTS:
+                    self.callouts.add("thorns",
+                                      self.player.x, self.player.y,
+                                      DUSTY_ROSE, font_size="status")
+                self.player.took_damage_this_turn = True
+                if fighter.is_dead:
+                    self._death_killer = "briars"
+                    self._on_player_death()
 
         elif effect in ("chill", "chill_heavy"):
             turns = 60 if effect == "chill_heavy" else 30
@@ -1772,8 +3679,86 @@ class Engine:
     #  FOV + lighting
     # ------------------------------------------------------------------ #
 
+    # Surface-night FOV radius by moon phase name
+    _MOON_FOV: dict[str, int] = {
+        "The Full Witness": 18,
+        "The Swelling Eye": 14,
+        "The Dimming Eye":  14,
+        "The Half Truth":   10,
+        "The Half Lie":     10,
+        "The Thin Knife":    6,
+        "The Waning Knife":  6,
+        "The Dark Seal":     3,
+    }
+
+    # Dusk/dawn transition windows (hours, inclusive)
+    _DUSK_START:  float = 19.0   # dusk ramp begins
+    _DUSK_END:    float = 21.0   # full night
+    _DAWN_START:  float =  5.0   # dawn ramp begins
+    _DAWN_END:    float =  7.0   # full day
+
+    # Surface day radius (full daylight)
+    _DAY_FOV: int = 40
+
+    def _compute_fov_base(self) -> int:
+        """Underground=1, surface day=40, surface night=moon phase table.
+        Dusk and dawn transition windows interpolate smoothly."""
+        try:
+            if self.current_submap_id is not None:
+                return 1
+
+            hour       = self.world_time.hour
+            night_fov  = self._MOON_FOV.get(self.world_time.moon_phase_name, 6)
+            day_fov    = self._DAY_FOV
+
+            # Dawn ramp: _DAWN_START → _DAWN_END  (night → day)
+            if self._DAWN_START <= hour < self._DAWN_END:
+                t = (hour - self._DAWN_START) / (self._DAWN_END - self._DAWN_START)
+                return int(night_fov + t * (day_fov - night_fov))
+
+            # Dusk ramp: _DUSK_START → _DUSK_END  (day → night)
+            if self._DUSK_START <= hour < self._DUSK_END:
+                t = (hour - self._DUSK_START) / (self._DUSK_END - self._DUSK_START)
+                return int(day_fov + t * (night_fov - day_fov))
+
+            # Full day
+            if self._DAWN_END <= hour < self._DUSK_START:
+                return day_fov
+
+            # Full night
+            return night_fov
+
+        except Exception as e:
+            import traceback
+            print(f"[CRITICAL] _compute_fov_base() crashed: {e}")
+            traceback.print_exc()
+            return 40  # safe surface default
+
+    def _get_equipped_light_radius(self) -> int:
+        """Return light_radius from equipped light item JSON. 0 if none or inactive."""
+        light = getattr(self.player, "light_source", None)
+        if not (light and light.active):
+            return 0
+        # item_system stores a reference to the lighting item on the LightSource component
+        item_ref = getattr(light, "_item_ref", None)
+        if item_ref is not None:
+            item_def = self.data.items.get(getattr(item_ref, "item_id", ""), {})
+            lr = item_def.get("light_radius", 0)
+            if lr > 0:
+                return lr
+        # Fallback: scan all equipment slots for any item with light_data
+        equip = getattr(self.player, "equipment", None)
+        if not equip:
+            return 0
+        for slot_item in equip.slots.values():
+            if slot_item and getattr(slot_item, "light_data", None):
+                item_def = self.data.items.get(getattr(slot_item, "item_id", ""), {})
+                lr = item_def.get("light_radius", 0)
+                if lr > 0:
+                    return lr
+        return 0
+
     def _update_fov(self) -> None:
-        import math as _math
         from engine.engine import GameMode
         
         if getattr(self, "mode", None) == GameMode.OVERMAP:
@@ -1787,31 +3772,63 @@ class Engine:
             
             self._update_last_known_positions()
             return
-        # Recalculate wraith penalty fresh from current entity positions.
-        # This ensures every FOV call — post-move, turn-end, etc. — sees
-        # the correct penalty without staleness from ability execution order.
-        wraith_penalty = 0
-        for _e in self.entities:
-            if _e.tile == "bog_wraith":
-                _dist = _math.sqrt(
-                    (_e.x - self.player.x) ** 2 +
-                    (_e.y - self.player.y) ** 2
+        # ── Unconditional surface guard ───────────────────────────────
+        # If current_submap_id is set but no matching submap exists in the
+        # current chunk, the ID is stale (e.g. from a debug teleport that
+        # skipped _ascend_from_submap). Clear it and log so the root cause
+        # can be traced. Generation functions must never write this field.
+        if self.current_submap_id is not None:
+            _guard_chunk = self.world_map.get(self.world_x, self.world_y) if hasattr(self, "world_map") else None
+            _chunk_subs  = getattr(_guard_chunk, "submaps", []) or []
+            if not any(getattr(s, "submap_id", None) == self.current_submap_id for s in _chunk_subs):
+                print(
+                    f"[FOV WARNING] current_submap_id={self.current_submap_id!r} has no matching "
+                    f"submap in chunk ({self.world_x},{self.world_y}) "
+                    f"biome={getattr(_guard_chunk, 'biome_id', '?')}. "
+                    f"Forcing surface. Check generation/debug teleport code for stale writes."
                 )
-                if _dist <= 8:
-                    wraith_penalty = max(wraith_penalty, max(0, int(8 - _dist)))
-        self.player._wraith_fov_penalty = wraith_penalty
+                self.current_submap_id = None
 
-        needs   = getattr(self.player, "needs",        None)
-        corrupt = getattr(self.player, "corruption",   None)
-        light   = getattr(self.player, "light_source", None)
+        # ── FOV formula (single definition) ──────────────────────────
+        # base → with_light = max(base, light_radius)
+        # with wraiths: snap to ability_range, then drain 1/turn/wraith, floor 2
+        # on wraith death: +3 overcorrect for 3 turns
+        base         = self._compute_fov_base()
+        if self.current_submap_id is None and base < 3:
+            print(f"[WARNING] FOV radius {base} on surface — clamping to 8. Check _compute_fov_base().")
+            base = 8
+        light_radius = self._get_equipped_light_radius()
+        with_light   = max(base, light_radius)
 
-        from config import DARK_VISION_RADIUS
+        # Mark whether the torch is actually extending vision beyond ambient.
+        # When ambient dominates, suppress torch colour/brightness overlay in renderer.
+        _player_ls = getattr(self.player, "light_source", None)
+        if _player_ls and _player_ls.active:
+            _player_ls.is_dominant = (light_radius > base)
 
-        # ── Zone ambient ─────────────────────────────────────────────
+        if self._wraith_aura_state:
+            _wraith_range  = self.data.entities.get("bog_wraith", {}).get("ability_range", 8)
+            snap_penalty   = max(0, with_light - _wraith_range)
+            drain_penalty  = sum(max(0, t - 1) for t in self._wraith_aura_state.values())
+            wraith_penalty = snap_penalty + drain_penalty
+            overcorrect    = 3 if self._wraith_overcorrect_turns > 0 else 0
+            active_radius  = max(2, with_light - wraith_penalty + overcorrect)
+        else:
+            active_radius = with_light
+
+        # Weather FOV cap (fog, forgetting_fog) — values from weather.json mechanics
+        _weather = getattr(self, "weather", None)
+        _fov_cap = None
+        if _weather:
+            _fov_cap_val = _weather.get_mechanic("fov_cap", None)
+            if _fov_cap_val is not None:
+                _fov_cap = int(_fov_cap_val)
+                active_radius = min(active_radius, _fov_cap)
+
+        # ── Zone ambient for lighting (still needed for light_map) ───
         chunk        = self.world_map.get(self.world_x, self.world_y)
         zone_ambient = 0.0
         is_outdoor   = True
-
         if chunk:
             for zone_id, _ in chunk.zones:
                 zone = self.data.zones.get(zone_id)
@@ -1820,38 +3837,9 @@ class Engine:
                     if zone.get("category") == "dungeon":
                         is_outdoor = False
                     break
-
         ambient_intensity, _ = self.world_time.get_ambient_light(
             zone_ambient, is_outdoor
         )
-
-        # ── Active FOV radius (live — entities visible here) ─────────
-        # Step 1: gather all radius sources and take the largest
-        ambient_sight = int(FOV_RADIUS * ambient_intensity * 3)
-        torch_sight   = light.effective_radius() \
-                        if (light and light.active) else 0
-        active_radius = max(ambient_sight, torch_sight, DARK_VISION_RADIUS)
-
-        # Step 2: apply all penalties AFTER combining sources so that
-        # a large torch radius does not cancel out the wraith drain.
-        if needs:
-            active_radius -= needs.fov_penalty
-        if corrupt:
-            active_radius -= corrupt.fov_penalty
-        active_radius -= wraith_penalty  # already computed above from entity scan
-
-        overcorrect = getattr(self.player, "_wraith_overcorrect", 0)
-        if overcorrect > 0:
-            active_radius += 3
-            self.player._wraith_overcorrect = overcorrect - 1
-
-        active_radius = max(2, active_radius)
-
-        # Forgetting fog — mechanical FOV shrink (only fog weather effect)
-        _weather = getattr(self, "weather", None)
-        if _weather and _weather.state == "forgetting_fog":
-            _fog_reduction = int(_weather.intensity * 3)
-            active_radius = max(3, active_radius - _fog_reduction)
 
         # Store for fog vignette clear-radius calculation
         self._effective_fov_radius = active_radius
@@ -1878,11 +3866,13 @@ class Engine:
         # everything reachable to explored (memory) even beyond active FOV.
         # Tiles are remembered but not live — entities won't show there.
         if ambient_intensity > 0.4:
-            # Full raycast to map edge — no radius cap
+            # In fog/forgetting_fog, cap passive memory to active_radius so tiles
+            # beyond the fog cap don't render as dim memory tiles (making fog appear broken).
+            _passive_radius = active_radius if _fov_cap is not None else 0
             passive_fov = tcod.map.compute_fov(
                 self.local_map.transparent,
                 (self.player.x, self.player.y),
-                radius=0,   # 0 = unlimited in tcod
+                radius=_passive_radius,  # 0 = unlimited in tcod
             )
             # Only commit to memory — do not mark as visible
             self.local_map.tiles["explored"] |= passive_fov
@@ -1934,48 +3924,58 @@ class Engine:
 
         for entity in self.entities:
             light = getattr(entity, "light_source", None)
-            if light:
+            if light and getattr(light, "is_dominant", True):
                 light.apply_to_light_map(lm, entity.x, entity.y, fov)
 
-        # Terrain light sources (street lamps)
-        lamp_tiles = {"street_lamp_working", "street_lamp_sputtering"}
-        for mx in range(self.local_map.width):
-            for my in range(self.local_map.height):
-                if not bool(fov[mx, my]):
+        # Terrain light sources — any terrain tile with light_emit > 0 participates.
+        # Data-driven: add light_emit + light_mode fields to terrain.json, no code changes needed.
+        import math as _lm_math
+        _now_s = pygame.time.get_ticks() / 1000.0
+        for _lx in range(self.local_map.width):
+            for _ly in range(self.local_map.height):
+                if not bool(fov[_lx, _ly]):
                     continue
-                terrain = str(self.local_map.tiles[mx, my]["terrain"])
-                if terrain not in lamp_tiles:
+                _terrain = str(self.local_map.tiles[_lx, _ly]["terrain"])
+                _td = self.data.terrain.get(_terrain, {})
+                _emit = _td.get("light_emit", 0)
+                if _emit <= 0:
                     continue
-                td = self.registry._data.get(terrain, {})
-                light_radius    = td.get("light_radius",    0)
-                light_intensity = td.get("light_intensity", 1.0)
-                light_color_raw = td.get("light_color",     [255, 255, 255])
-                if light_radius <= 0:
+                _mode      = _td.get("light_mode", "steady")
+                _lc_raw    = _td.get("light_color", [255, 220, 150])
+                _lc_r = _lc_raw[0] / 255.0
+                _lc_g = _lc_raw[1] / 255.0
+                _lc_b = _lc_raw[2] / 255.0
+                # Determine effective radius for this frame
+                if _mode == "pulse":
+                    _pmin  = float(_td.get("light_pulse_min", _emit // 2))
+                    _pmax  = float(_td.get("light_pulse_max", _emit))
+                    _prate = float(_td.get("light_pulse_rate", 0.5))
+                    # Per-tile phase offset so lamps don't all pulse in sync
+                    _phase = (_lx * 0.37 + _ly * 0.59) % 1.0
+                    _sine  = _lm_math.sin(
+                        2.0 * _lm_math.pi * (_prate * _now_s + _phase)
+                    )
+                    # sine in [-1, 1] → radius in [pmin, pmax]
+                    _radius = int(round(_pmin + (_pmax - _pmin) * (_sine * 0.5 + 0.5)))
+                else:  # "steady"
+                    _radius = int(_emit)
+                if _radius <= 0:
                     continue
-                # Sputtering: time-based flicker suppression
-                if terrain == "street_lamp_sputtering":
-                    flicker_seed = ((mx * 7 + my * 13) % 60) or 1
-                    frame_off    = (mx * 3 + my * 5) % flicker_seed
-                    tick = (pygame.time.get_ticks() // 200 + frame_off) % flicker_seed
-                    if tick == 0:
-                        continue
-                lc_r = light_color_raw[0] / 255.0
-                lc_g = light_color_raw[1] / 255.0
-                lc_b = light_color_raw[2] / 255.0
-                for dx2 in range(-light_radius, light_radius + 1):
-                    for dy2 in range(-light_radius, light_radius + 1):
-                        nx, ny = mx + dx2, my + dy2
-                        if not self.local_map.in_bounds(nx, ny):
+                for _dx2 in range(-_radius, _radius + 1):
+                    for _dy2 in range(-_radius, _radius + 1):
+                        _nx, _ny = _lx + _dx2, _ly + _dy2
+                        if not self.local_map.in_bounds(_nx, _ny):
                             continue
-                        if not bool(fov[nx, ny]):
+                        if not bool(fov[_nx, _ny]):
                             continue
-                        dist = (dx2 * dx2 + dy2 * dy2) ** 0.5
-                        if dist > light_radius:
+                        _dist = (_dx2 * _dx2 + _dy2 * _dy2) ** 0.5
+                        if _dist > _radius:
                             continue
-                        strength = light_intensity * max(0.0, 1.0 - dist / light_radius)
-                        lm[nx, ny, 0] = min(1.0, lm[nx, ny, 0] + lc_r * strength)
-                        lm[nx, ny, 1] = min(1.0, lm[nx, ny, 1] + lc_g * strength)
-                        lm[nx, ny, 2] = min(1.0, lm[nx, ny, 2] + lc_b * strength)
+                        # Same falloff as LightSource.apply_to_light_map (linear, falloff=1)
+                        _strength = max(0.0, 1.0 - _dist / _radius)
+                        lm[_nx, _ny, 0] = min(1.0, lm[_nx, _ny, 0] + _lc_r * _strength)
+                        lm[_nx, _ny, 1] = min(1.0, lm[_nx, _ny, 1] + _lc_g * _strength)
+                        lm[_nx, _ny, 2] = min(1.0, lm[_nx, _ny, 2] + _lc_b * _strength)
 
     # ------------------------------------------------------------------ #
     #  Combat
@@ -2057,8 +4057,8 @@ class Engine:
         weapon = self._get_equipped_weapon() or _UNARMED_PROFILE
 
         # Get body def for target
-        body_id  = target_fighter.body_id
-        body_def = self.data.bodies.get(body_id, {})
+        from engine.combat import get_body_def
+        body_def = get_body_def(target_fighter, self.data.bodies)
 
         # Fallback: if no body def, use legacy combat
         if not body_def:
@@ -2077,23 +4077,70 @@ class Engine:
                 self._on_entity_death(target)
             return
 
-        creature_essence_mods = self.data.entities.get(target.tile, {}).get(
-            "essence_modifiers", {}
-        )
+        creature_def          = self.data.entities.get(target.tile, {})
+        creature_essence_mods = creature_def.get("essence_modifiers", {})
+        target_dodge_chance   = float(creature_def.get("dodge_chance", 0.0))
 
         rng = _random.Random()
         disrupted = getattr(self.player, "_hollow_knight_disruption", False)
 
+        # Flat damage bonus from The Indifference perk (+1 per corruption threshold)
+        _corr_bonus = getattr(player_fighter, "corruption_damage_bonus", 0)
+        if _corr_bonus > 0:
+            weapon = dict(weapon) if weapon else {}
+            weapon["damage_bonus"] = weapon.get("damage_bonus", 0) + _corr_bonus
+
+        # Temporary essence coating — merge active charges into weapon dict
+        _weapon_entity = None
+        _equip = getattr(self.player, "equipment", None)
+        if _equip:
+            _weapon_entity = _equip.slots.get("weapon")
+        if _weapon_entity and getattr(_weapon_entity, "temporary_essence", []):
+            _active_te = [e for e in _weapon_entity.temporary_essence
+                          if e.get("hits_remaining", 0) > 0]
+            if _active_te:
+                weapon = dict(weapon) if weapon else {}
+                _base_ess = weapon.get("essences", [])
+                if not _base_ess and weapon.get("essence"):
+                    _base_ess = [{"name": weapon["essence"],
+                                  "strength": weapon.get("essence_strength", 0.0)}]
+                weapon["essences"] = list(_base_ess) + [
+                    {"name": te["essence"], "strength": te["strength"]}
+                    for te in _active_te
+                ]
+                weapon.pop("essence", None)
+                weapon.pop("essence_strength", None)
+
         result = resolve_attack(
-            attacker_name         = "thou",
-            defender_name         = target.name,
-            defender_fighter      = target_fighter,
-            body_def              = body_def,
-            weapon                = weapon,
-            creature_essence_mods = creature_essence_mods,
-            rng                   = rng,
-            attacker_disrupted    = disrupted,
+            attacker_name          = "thou",
+            defender_name          = target.name,
+            defender_fighter       = target_fighter,
+            body_def               = body_def,
+            weapon                 = weapon,
+            creature_essence_mods  = creature_essence_mods,
+            rng                    = rng,
+            attacker_disrupted     = disrupted,
+            defender_dodge_chance  = target_dodge_chance,
+            shield_def             = None,   # creatures have no shield equipment
         )
+
+        # Decrement temporary essence hits on connecting blow
+        if result.hit and not getattr(result, "dodged", False) and _weapon_entity:
+            _te = getattr(_weapon_entity, "temporary_essence", [])
+            if _te:
+                for _te_entry in _te:
+                    _te_entry["hits_remaining"] = _te_entry.get("hits_remaining", 0) - 1
+                _weapon_entity.temporary_essence = [
+                    e for e in _te if e.get("hits_remaining", 0) > 0
+                ]
+                if not _weapon_entity.temporary_essence:
+                    self.log.add("The coating has worn off the blade.", SLATE_MID)
+                    if getattr(self.display, "CALLOUT_STATUS_EFFECTS", False):
+                        self.callouts.add(
+                            "coating gone",
+                            float(self.player.x), float(self.player.y),
+                            SLATE_MID, size="status",
+                        )
 
         # Log messages — outgoing damage (player→creature): mist_blue family
         from config import DEBUG_MODE as _DEBUG_MODE
@@ -2179,15 +4226,14 @@ class Engine:
         if target.tile == "briar_lurker" and result.damage_dealt > 0:
             thorn = _random.randint(1, 2)
             if player_fighter:
-                torso_hp = player_fighter.location_hp.get("torso", 0)
-                player_fighter.location_hp["torso"] = max(0, torso_hp - thorn)
+                player_fighter.take_damage(thorn)
                 self.log.add(
                     "The briars find thee as thou strikest.",
                     FOREST_DEEP,
                 )
                 self.log.add(f"  {thorn} damage.", LIFE_GREEN)
                 self.player.took_damage_this_turn = True
-                if player_fighter.location_hp.get("torso", 1) <= 0:
+                if player_fighter.is_dead:
                     self._death_killer = target.name
                     self._on_player_death()
 
@@ -2211,31 +4257,34 @@ class Engine:
     }
 
     def _place_blood_tile(self, x: int, y: int, blood_type: str) -> None:
-        """Write a blood/fluid tile onto the local map at (x, y).
-        Skips non-walkable tiles and tiles already marked blood.
-        Tracks placement in the current chunk's ephemeral_tiles for later cleanup."""
-        terrain_id = self._BLOOD_TERRAIN.get(blood_type)
-        if not terrain_id:
+        """Write a blood/fluid decor tile at (x, y).
+        Skips non-walkable tiles, stairs, and tiles already marked blood.
+        Blood persists with the chunk via the decor layer — no ephemeral cleanup needed."""
+        from generation.decor_utils import place_decor
+        decor_id = self._BLOOD_TERRAIN.get(blood_type)
+        if not decor_id:
             return  # blood_type "none" → no tile
         if not self.local_map.in_bounds(x, y):
             return
+        # Don't place blood at the player's own tile — the blood_pool tile's dark
+        # background shows through the transparent player sprite, making it appear
+        # black. Blood particles already convey the visual effect at this position.
+        if x == self.player.x and y == self.player.y:
+            return
         if not self.local_map.walkable[x, y]:
             return
-        orig_terrain = str(self.local_map.tiles[x, y]["terrain"])
-        # Don't overwrite stairs or other blood tiles
-        if orig_terrain in ("stairs_down", "stairs_up") or orig_terrain in self._BLOOD_TERRAIN.values():
+        terrain_id = str(self.local_map.tiles[x, y]["terrain"])
+        # Don't place over stairs
+        if terrain_id in ("stairs_down", "stairs_up"):
             return
-        t = self.data.terrain.get(terrain_id, {})
-        self.local_map.set_tile(x, y, terrain_id,
-                                t.get("walkable", True), t.get("transparent", True))
-        chunk = self.world_map.get(self.world_x, self.world_y)
-        if chunk is not None:
-            chunk.ephemeral_tiles.append((x, y, orig_terrain))
+        # Don't overwrite existing blood decor
+        if self.local_map.decor.get((x, y)) in self._BLOOD_TERRAIN.values():
+            return
+        place_decor(self.local_map, x, y, decor_id)
 
     def _on_entity_death(self, entity: "Actor") -> None:
         from engine.message_log import MSG_DANGER
         from engine.hooks import HookEvent
-        from entities.item import Item
 
         self.log.add(f"The {entity.name} is destroyed.", MSG_DANGER)
         entity.is_alive = False
@@ -2265,29 +4314,55 @@ class Engine:
         })
         _apply_effects(effects, self)
 
-        corpse = Item(
-            x    = entity.x,
-            y    = entity.y,
-            tile = "corpse",
-            name = f"remains of {entity.name}",
-        )
-        creature_def = self.data.entities.get(entity.tile, {})
-        cs = creature_def.get("corpse_sprite")
-        if cs:
-            corpse.sprite_col = cs.get("col", 2055)
-            corpse.sprite_row = cs.get("row", 0)
-        self.entities.append(corpse)
+        # Ephemeral creatures dissolve — no corpse tile
+        _ephemeral = creature_def.get("ephemeral", False)
+        if not _ephemeral:
+            from generation.decor_utils import place_decor as _pd
+            _by = creature_def.get("butcher_yield", {})
+            _decay = _by.get("decay_turns", 200)
+            _pd(self.local_map, entity.x, entity.y, "corpse")
+            self.local_map.corpse_data[(entity.x, entity.y)]  = entity.tile
+            self.local_map.corpse_decay[(entity.x, entity.y)] = _decay
 
-        # Bog wraith death — lift FOV drain, brief overcorrection
+        # Bog wraith death — remove from aura state immediately
         if entity.tile == "bog_wraith":
-            self.player._wraith_fov_penalty  = 0
-            self.player._wraith_overcorrect  = 3
-            self.log.add(
-                "The forgetting lifts. "
-                "The world rushes back — too much of it, briefly.",
-                COLDBELL_LIGHT,
-            )
+            eid = id(entity)
+            if eid in self._wraith_aura_state:
+                del self._wraith_aura_state[eid]
+                self._wraith_overcorrect_turns = 3
+            self.log.add("The forgetting lifts.", COLDBELL_LIGHT)
             self._update_fov()
+
+    def _update_wraith_aura(self) -> None:
+        """
+        Called once per turn. Tracks consecutive turns each bog wraith spends
+        within ability_range tiles of the player. Fires "Sight dims." on turn 2+.
+        Penalty = sum of max(0, turns - 1) per wraith, read by _update_fov.
+        """
+        _wraith_range = self.data.entities.get("bog_wraith", {}).get("ability_range", 8)
+        px, py = self.player.x, self.player.y
+        active: dict[int, int] = {}
+        for e in self.entities:
+            if (e.tile == "bog_wraith"
+                    and not getattr(e, "is_dead", False)
+                    and abs(e.x - px) + abs(e.y - py) <= _wraith_range):
+                eid       = id(e)
+                prev      = self._wraith_aura_state.get(eid, 0)
+                new_turns = prev + 1
+                active[eid] = new_turns
+                if new_turns == 1:
+                    self.callouts.add(
+                        "Sight dims.",
+                        float(self.player.x),
+                        float(self.player.y) - 1.0,
+                        STONE_BLUE,
+                        lifetime=1.2,
+                        font_size="status",
+                    )
+                    self.log.add("Sight dims.", STONE_BLUE)
+        self._wraith_aura_state = active
+        if self._wraith_overcorrect_turns > 0:
+            self._wraith_overcorrect_turns -= 1
 
     def _on_player_death(self) -> None:
         self.trigger_screenshake(6.0)

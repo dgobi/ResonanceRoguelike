@@ -12,5 +12,6 @@
   "essence": "Dissolution",
   "essence_strength": 0.2,
   "_essence_note": "Iron corrodes. Poor maintenance accelerates it. The dissolution is incidental, not deliberate.",
-  "on_use": "equip_toggle"
+  "on_use": "equip_toggle",
+  "keywords": [{"tag": "cutting", "tier": 1}]
 }

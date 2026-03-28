@@ -72,6 +72,16 @@ class WeatherSystem:
         self.intensity:       float = 0.0
         self.turns_remaining: int   = rng.randint(*_DURATIONS["clear"])
         self._pending_msg:    tuple | None = None   # (text, color)
+        self._weather_defs:   dict        = {}      # injected from data loader
+
+    def load_mechanics(self, weather_defs: dict) -> None:
+        """Inject weather_defs from DataLoader so get_mechanic() can read tunable values."""
+        self._weather_defs = weather_defs
+
+    def get_mechanic(self, key: str, default):
+        """Return the mechanic value for the current state, or default if not defined."""
+        state_data = self._weather_defs.get(self.state, {})
+        return state_data.get("mechanics", {}).get(key, default)
 
     # ------------------------------------------------------------------ #
 

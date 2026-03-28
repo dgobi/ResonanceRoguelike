@@ -1,0 +1,15 @@
+{
+  "id": "wight_essence_residue",
+  "name": "Wight Essence Residue",
+  "description": "A crystalline deposit found in the chest cavity. The thing that inhabited the body left this behind when it departed. What inhabited it is unclear. What it wanted is less clear still.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.05,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "resonant",
+      "tier": 3
+    }
+  ]
+}

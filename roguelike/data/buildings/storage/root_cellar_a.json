@@ -1,0 +1,24 @@
+{
+  "id": "root_cellar_a",
+  "category": "storage",
+  "width": 7,
+  "height": 5,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {"storage": 4, "residential": 2},
+  "interior_loot_table": "storage_food",
+  "legend": {
+    "#": "wall",
+    ".": "packed_earth",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "#######",
+    "#.....#",
+    "#.....#",
+    "#.....#",
+    "###+###"
+  ],
+  "note": "A root cellar. Low and broad, packed earth floor, no windows. Single door opens south."
+}

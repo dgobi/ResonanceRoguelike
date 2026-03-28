@@ -1,0 +1,9 @@
+{
+  "id": "world_sermon_a",
+  "title": null,
+  "type": "document",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Blessed is the saint who did not run. Who stood in the square and faced the stone and opened their hands when the tone came.\n\nThe running ones were lost in the fields. The hiding ones were lost in their cellars. The saint was lost too — but lost toward something.\n\nLeave your name at this stone. The stone remembers names. That is what it was built for.", "damaged": false}]
+}

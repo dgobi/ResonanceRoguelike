@@ -1,0 +1,14 @@
+{
+  "id": "clay_pot",
+  "name": "clay pot",
+  "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+  "tile": "generic_item",
+  "category": "component",
+  "weight": 0.6,
+  "stackable": false,
+  "on_use": null,
+  "keywords": [
+    {"tag": "vessel", "tier": 1},
+    {"tag": "heatproof", "tier": 1}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "bellwarden_log_a",
+  "title": "A Bell Warden's Log",
+  "type": "log",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "11th of Greywood — Wind from the north. Bell stable. No resonance shift.\n\n14th of Greywood — Old Petrs heard something in the upper chamber. I went up. Nothing. The bell looks the same.\n\n17th of Greywood — The bell is cracked. I did not see it happen. I am not going up there again until the guild sends someone.\n\n[The remaining pages are stuck together.]", "damaged": false}]
+}

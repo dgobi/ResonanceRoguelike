@@ -28,6 +28,12 @@
     "#..tt..#",
     "########"
   ],
-  "special_tiles": [],
+  "special_tiles": [
+    {
+      "x": 1, "y": 3,
+      "type": "item", "item_id": "lab_note", "text_id": "herbalist_scrap_a",
+      "note": "Working notes left on the floor"
+    }
+  ],
   "note": "b=workbench, c=chest (hunting_supplies), t=table. Furniture system pending."
 }

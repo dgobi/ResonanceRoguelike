@@ -1,0 +1,19 @@
+{
+  "id": "briar_sap",
+  "name": "Briar Sap",
+  "description": "Dark amber fluid from the interior channels. Sticky at first, then sets hard. The properties it imparts to whatever it dries on are not yet understood.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.1,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "viscous",
+      "tier": 2
+    },
+    {
+      "tag": "binding",
+      "tier": 2
+    }
+  ]
+}

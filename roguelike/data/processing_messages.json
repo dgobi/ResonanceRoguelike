@@ -1,0 +1,18 @@
+{
+  "drying": {
+    "start": "You spread {item_name} to dry.",
+    "complete": "{item_name} is ready."
+  },
+  "cooking": {
+    "start": "You set {item_name} to cook.",
+    "complete": "{item_name} is done."
+  },
+  "steeping": {
+    "start": "You set {item_name} to steep.",
+    "complete": "{item_name} is ready."
+  },
+  "rendering": {
+    "start": "You begin rendering {item_name}.",
+    "complete": "{item_name} is rendered."
+  }
+}

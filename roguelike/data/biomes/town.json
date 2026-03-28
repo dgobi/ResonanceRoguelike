@@ -29,5 +29,6 @@
   "resonance_messages": {
     "moderate": "The waystone at the centre is still warm.",
     "high": "There is a bell here. Do not touch it."
-  }
+  },
+  "flint_scatter_rate": 0.0
 }

@@ -33,5 +33,6 @@
   "resonance_messages": {
     "moderate": "The standing stones are more numerous here.",
     "high": "A waystone nearby. Avoid touching it."
-  }
+  },
+  "flint_scatter_rate": 0.008
 }

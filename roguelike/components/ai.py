@@ -51,6 +51,7 @@ class AI:
         self.target_x:       int | None = None
         self.target_y:       int | None = None
         self.memory_turns:   int        = 0
+        self.pursuit_turns_without_contact: int = 0
 
     def set_home(self, x: int, y: int) -> None:
         self.home_x = x
@@ -72,7 +73,7 @@ class AI:
         specific state behaviours.
         """
         _prev_state = self.state
-        self._update_state(actor, local_map, player, ambient_light)
+        self._update_state(actor, local_map, player, ambient_light, engine=engine)
         if engine is not None:
             _fire_creature_callout(actor, engine, _prev_state, self.state)
         self._act(actor, local_map, entities, player, log, rng, engine=engine)
@@ -87,16 +88,19 @@ class AI:
         local_map:     LocalMap,
         player:        Actor,
         ambient_light: float,
+        engine=None,
     ) -> None:
         perception = getattr(actor, "perception", None)
         if not perception:
             return
 
-        can_see_player = _creature_can_see_player(actor, player, local_map, ambient_light)
+        can_see_player = _creature_can_see_player(actor, player, local_map, ambient_light, engine=engine)
 
         dist = _distance(actor, player)
 
         if can_see_player:
+            # Reset pursuit timeout — entity has eyes on player
+            self.pursuit_turns_without_contact = 0
             # Update last known player position
             actor._last_known_px  = player.x
             actor._last_known_py  = player.y
@@ -109,29 +113,104 @@ class AI:
                 self.state = AIState.HUNTING
 
         elif getattr(actor, "_last_known_px", None) is not None:
-            # Pursue toward last known player position
             lkx = actor._last_known_px
             lky = actor._last_known_py
+
+            # Pursuit timeout — increment when chasing without LOS
+            if self.state in (AIState.HUNTING, AIState.ALERTED, AIState.ATTACKING):
+                _increment = 1
+                if engine is not None:
+                    _lm = getattr(engine, "local_map", None)
+                    if _lm is not None:
+                        try:
+                            _ptile = str(_lm.tiles["terrain"][player.x, player.y])
+                            _tdef = engine.data.terrain.get(_ptile, {})
+                            if _tdef.get("secondary_effect") == "concealment":
+                                _increment = int(
+                                    engine.data.ai_config.get(
+                                        "concealment_timeout_multiplier", 2.0
+                                    )
+                                )
+                        except Exception:
+                            pass
+                self.pursuit_turns_without_contact += _increment
+                _timeout = 20
+                if engine is not None:
+                    _cdef = getattr(engine, "data", None)
+                    if _cdef is not None:
+                        _timeout = _cdef.entities.get(actor.tile, {}).get(
+                            "pursuit_timeout", 20
+                        )
+                if self.pursuit_turns_without_contact >= _timeout:
+                    self.pursuit_turns_without_contact = 0
+                    actor._last_known_px = None
+                    actor._last_known_py = None
+                    self.state = AIState.WANDERING
+                    return
+
+            # Pursue toward last known player position
             at_edge = (
                 actor.x <= 1 or actor.x >= local_map.width - 2 or
                 actor.y <= 1 or actor.y >= local_map.height - 2
             )
             if actor.x == lkx and actor.y == lky:
-                # Reached last known position — trail lost
-                actor._last_known_px = None
-                actor._last_known_py = None
-                self.state = AIState.WANDERING
+                # Check if creature should follow player through a stair
+                _used_stair = False
+                if engine is not None:
+                    _lm2 = getattr(engine, "local_map", None)
+                    if _lm2 is not None:
+                        try:
+                            _stile = str(_lm2.tiles["terrain"][actor.x, actor.y])
+                            _cdef2 = engine.data.entities.get(actor.tile, {})
+                            if _stile in ("stairs_down", "stairs_up") and _cdef2.get("can_use_stairs", False):
+                                actor._pending_stair_use = _stile
+                                _used_stair = True
+                        except Exception:
+                            pass
+                if not _used_stair:
+                    _at_boundary = (
+                        actor.x <= 0 or actor.x >= local_map.width - 1 or
+                        actor.y <= 0 or actor.y >= local_map.height - 1
+                    )
+                    _can_cross_bdry = False
+                    if engine is not None and _at_boundary:
+                        _cdb = engine.data.entities.get(actor.tile, {})
+                        _can_cross_bdry = _cdb.get("can_cross_chunks", False)
+                    if not _can_cross_bdry:
+                        # Reached last known position — trail lost
+                        actor._last_known_px = None
+                        actor._last_known_py = None
+                        self.state = AIState.WANDERING
+                    # else: at boundary, can cross — engine detects and transfers
             elif at_edge and not can_see_player:
-                # Hit map boundary without finding player — abandon pursuit
-                actor._last_known_px = None
-                actor._last_known_py = None
-                self.state = AIState.WANDERING
+                # Only abandon if last known position is also near the edge,
+                # meaning the player crossed into a different chunk.
+                # If last known is in the interior, keep pursuing.
+                _lk_near_edge = (
+                    lkx <= 2 or lkx >= local_map.width - 3 or
+                    lky <= 2 or lky >= local_map.height - 3
+                )
+                if _lk_near_edge:
+                    _can_cross_edge = False
+                    if engine is not None:
+                        _cde = engine.data.entities.get(actor.tile, {})
+                        _can_cross_edge = _cde.get("can_cross_chunks", False)
+                    if not _can_cross_edge:
+                        actor._last_known_px = None
+                        actor._last_known_py = None
+                        self.state = AIState.WANDERING
+                    # else: continue pursuing — engine detects boundary crossing
+                else:
+                    self.target_x = lkx
+                    self.target_y = lky
+                    self.state    = AIState.ALERTED
             else:
                 self.target_x = lkx
                 self.target_y = lky
                 self.state    = AIState.ALERTED
 
         else:
+            self.pursuit_turns_without_contact = 0
             if self.state in (AIState.ALERTED,
                               AIState.HUNTING,
                               AIState.ATTACKING):
@@ -171,6 +250,7 @@ class AI:
                     self.target_y or actor.y,
                     player=player,
                     terrain_data=terrain_data,
+                    engine=engine,
                 )
 
         elif self.state == AIState.HUNTING:
@@ -180,15 +260,29 @@ class AI:
             else:
                 terrain_data = getattr(engine, "data", None)
                 terrain_data = getattr(terrain_data, "terrain", None) if terrain_data else None
+                # Clamp target to map bounds: live pursuer phantom may have out-of-bounds coords.
+                # TCOD pathfinding crashes on negative or oversized targets.
+                _htx = max(0, min(local_map.width - 1, player.x))
+                _hty = max(0, min(local_map.height - 1, player.y))
                 self._move_toward(
                     actor, local_map, entities,
-                    player.x, player.y,
+                    _htx, _hty,
                     player=player,
                     terrain_data=terrain_data,
+                    engine=engine,
                 )
 
         elif self.state == AIState.ATTACKING:
-            self._attack(actor, player, log, engine=engine)
+            # Guard: don't attack a phantom outside map bounds (live pursuer virtual target).
+            if 0 <= player.x < local_map.width and 0 <= player.y < local_map.height:
+                self._attack(actor, player, log, engine=engine)
+            else:
+                terrain_data = getattr(engine, "data", None)
+                terrain_data = getattr(terrain_data, "terrain", None) if terrain_data else None
+                _atx = max(0, min(local_map.width - 1, player.x))
+                _aty = max(0, min(local_map.height - 1, player.y))
+                self._move_toward(actor, local_map, entities, _atx, _aty,
+                                  player=player, terrain_data=terrain_data, engine=engine)
 
         elif self.state == AIState.FLEEING:
             self._flee(actor, local_map, entities, player, rng)
@@ -244,6 +338,7 @@ class AI:
         ty:           int,
         player:       "Actor | None" = None,
         terrain_data: "dict | None"  = None,
+        engine=None,
     ) -> None:
         """Step one tile toward (tx, ty) using tcod pathfinding."""
         import tcod.path
@@ -265,6 +360,19 @@ class AI:
                     entry = terrain_data.get(str(t), {})
                     mc = entry.get("move_cost", 1.0)
                     cost[tx2, ty2] = max(1, int(mc * 10))
+
+        # forgetting_fog: random per-tile noise disrupts pathfinding
+        weather = getattr(engine, "weather", None)
+        if weather and weather.state == "forgetting_fog":
+            noise_range = int(weather.get_mechanic("pathfind_noise", 3))
+            _entity_id  = getattr(actor, "entity_id", id(actor))
+            _turn       = getattr(engine, "turn", 0)
+            _noise_rng  = random.Random(_entity_id + _turn)
+            for _nx in range(cost.shape[0]):
+                for _ny in range(cost.shape[1]):
+                    if cost[_nx, _ny] == 0:
+                        continue
+                    cost[_nx, _ny] = max(1, int(cost[_nx, _ny]) + _noise_rng.randint(-noise_range, noise_range))
 
         # Mark other blocking entities as impassable
         for e in entities:
@@ -387,7 +495,7 @@ class AmbushAI(AI):
         super().__init__(state=AIState.WAITING, **kwargs)
         self._triggered = False
 
-    def _update_state(self, actor, local_map, player, ambient_light):
+    def _update_state(self, actor, local_map, player, ambient_light, engine=None):
         perception = getattr(actor, "perception", None)
         if not perception:
             return
@@ -404,7 +512,7 @@ class AmbushAI(AI):
                 self.state       = AIState.HUNTING
         else:
             super()._update_state(
-                actor, local_map, player, ambient_light
+                actor, local_map, player, ambient_light, engine=engine
             )
 
 
@@ -415,12 +523,12 @@ class FleeingAI(AI):
     corrupted prey animals, fleeing civilians.
     """
 
-    def _update_state(self, actor, local_map, player, ambient_light):
+    def _update_state(self, actor, local_map, player, ambient_light, engine=None):
         perception = getattr(actor, "perception", None)
         if not perception:
             return
 
-        can_see = _creature_can_see_player(actor, player, local_map, ambient_light)
+        can_see = _creature_can_see_player(actor, player, local_map, ambient_light, engine=engine)
         if can_see:
             self.state = AIState.FLEEING
         else:
@@ -436,13 +544,15 @@ class CirclingAI(AI):
 
     PREFERRED_DIST = 3
 
-    def _update_state(self, actor, local_map, player, ambient_light):
-        super()._update_state(actor, local_map, player, ambient_light)
+    def _update_state(self, actor, local_map, player, ambient_light, engine=None):
+        super()._update_state(actor, local_map, player, ambient_light, engine=engine)
 
         dist = _distance(actor, player)
         if self.state == AIState.HUNTING:
             if dist <= self.PREFERRED_DIST:
-                self.state = AIState.ATTACKING
+                # Guard: don't attack a phantom outside map bounds (live pursuer virtual target).
+                if 0 <= player.x < local_map.width and 0 <= player.y < local_map.height:
+                    self.state = AIState.ATTACKING
         elif self.state == AIState.ATTACKING:
             if dist > self.PREFERRED_DIST + 1:
                 self.state = AIState.HUNTING
@@ -452,12 +562,13 @@ class CirclingAI(AI):
 #  Helpers
 # ------------------------------------------------------------------ #
 
-def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1.0) -> bool:
+def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1.0, engine=None) -> bool:
     """
     True if the creature can see the player.
     Checks sight_radius, ambient light / darkvision, and Bresenham LOS
     through local_map.transparent.  Does NOT read the player-facing
     'visible' flag — that is player-centric, not creature-centric.
+    dead_calm weather adds creature_alert_radius_bonus to effective sight range.
     """
     import math
     dx   = player.x - entity.x
@@ -466,6 +577,10 @@ def _creature_can_see_player(entity, player, local_map, ambient_light: float = 1
 
     perception = getattr(entity, "perception", None)
     sight      = perception.sight_radius if perception else 8
+
+    weather = getattr(engine, "weather", None)
+    if weather:
+        sight += weather.get_mechanic("creature_alert_radius_bonus", 0)
 
     if dist > sight:
         return False
@@ -582,6 +697,18 @@ def _monster_attack_entity(monster, target, engine) -> None:
     monster_def = engine.data.entities.get(monster.tile, {})
     attack_verb = monster_def.get("attack_verb", "strikes at thee")
 
+    # Check ranged attack conditions once — used on both the invincible path
+    # and the normal path so the tween fires unconditionally.
+    import math as _ra_m
+    _ranged_def  = monster_def.get("ranged_attack")
+    _do_ranged   = False
+    _ranged_dist = 0.0
+    if _ranged_def and hasattr(engine, "spawn_projectile"):
+        _ranged_dist = _ra_m.sqrt(
+            (target.x - monster.x) ** 2 + (target.y - monster.y) ** 2)
+        if _ranged_dist >= _ranged_def.get("min_range", 2):
+            _do_ranged = True
+
     # Invincibility check (player only)
     if is_player and getattr(engine, "player_invincible", False):
         from config import DEBUG_MODE as _DEBUG_MODE
@@ -594,6 +721,15 @@ def _monster_attack_entity(monster, target, engine) -> None:
             _suf   = f"+{_d_bon}" if _d_bon > 0 else (str(_d_bon) if _d_bon < 0 else "")
             inv_msg += f"  [{_d_str}{_suf} → {_r}] (invincible)"
         engine.log.add(inv_msg, STONE_BLUE)
+        if _do_ranged:
+            engine.spawn_projectile(
+                float(monster.x), float(monster.y),
+                float(target.x), float(target.y),
+                _ranged_def.get("tile", monster.tile),
+                id(monster),
+                _ranged_def.get("duration", 0.45),
+                on_hit=False,
+            )
         return
 
     # Pre-attack announcement
@@ -607,8 +743,8 @@ def _monster_attack_entity(monster, target, engine) -> None:
     }
 
     # Defender body def
-    body_id  = target_fighter.body_id
-    body_def = engine.data.bodies.get(body_id, {})
+    from engine.combat import get_body_def
+    body_def = get_body_def(target_fighter, engine.data.bodies)
 
     # Defender essence mods (player has none for now)
     defender_essence_mods = {}
@@ -618,14 +754,34 @@ def _monster_attack_entity(monster, target, engine) -> None:
 
     defender_name = "thee" if is_player else target.name
 
+    # Dodge chance
+    if is_player:
+        defender_dodge_chance = float(getattr(target, "dodge_chance", 0.05))
+    else:
+        defender_def2 = engine.data.entities.get(target.tile, {})
+        defender_dodge_chance = float(defender_def2.get("dodge_chance", 0.0))
+
+    # Shield (block) — only relevant when player is defending
+    shield_def = None
+    if is_player:
+        equip = getattr(target, "equipment", None)
+        if equip:
+            offhand = equip.slots.get("offhand")
+            if offhand:
+                offhand_def = engine.data.items.get(getattr(offhand, "item_id", ""), {})
+                if offhand_def.get("category") == "shield":
+                    shield_def = offhand_def
+
     result = resolve_attack(
-        attacker_name         = monster.name,
-        defender_name         = defender_name,
-        defender_fighter      = target_fighter,
-        body_def              = body_def,
-        weapon                = weapon,
-        creature_essence_mods = defender_essence_mods,
-        rng                   = _random.Random(),
+        attacker_name          = monster.name,
+        defender_name          = defender_name,
+        defender_fighter       = target_fighter,
+        body_def               = body_def,
+        weapon                 = weapon,
+        creature_essence_mods  = defender_essence_mods,
+        rng                    = _random.Random(),
+        defender_dodge_chance  = defender_dodge_chance,
+        shield_def             = shield_def,
     )
 
     # Log messages — incoming damage (creature→player/entity): dusty_rose family
@@ -656,6 +812,11 @@ def _monster_attack_entity(monster, target, engine) -> None:
         if getattr(engine.display, "CALLOUT_DAMAGE_NUMBERS", True):
             engine.callouts.add("—", target.x, float(target.y),
                                 STONE_BLUE, font_size="creature")
+
+    # Block callout — "BLOCKED" in muted colour above defender
+    if result.blocked and is_player and getattr(engine.display, "CALLOUT_DAMAGE_NUMBERS", True):
+        engine.callouts.add("BLOCKED", target.x, float(target.y) - 0.6,
+                            STONE_BLUE, font_size="status")
 
     # Critical hit — creature crits deal "CRITICAL" in blood_rose + stronger shake
     if result.is_crit and result.damage_dealt > 0 and is_player:
@@ -712,6 +873,18 @@ def _monster_attack_entity(monster, target, engine) -> None:
         target.is_alive = False
         if is_player:
             engine._death_killer = monster.name
+
+    # Ranged attack tween — fires on hit, miss, and deflect alike.
+    if _do_ranged:
+        engine.spawn_projectile(
+            float(monster.x), float(monster.y),
+            float(target.x), float(target.y),
+            _ranged_def.get("tile", monster.tile),
+            id(monster),
+            _ranged_def.get("duration", 0.45),
+            on_hit=result.damage_dealt > 0,
+            blood_type="red",   # target (player) blood
+        )
 
 
 # ------------------------------------------------------------------ #

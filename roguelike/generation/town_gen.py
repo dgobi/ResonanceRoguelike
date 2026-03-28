@@ -2,22 +2,178 @@
 """
 Town generator. Called by region_gen for RegionType.TOWN chunks.
 
-Architecture:
-  - Wilderness (grass) base — no cobblestone flood-fill.
-  - Block grid: rectangular blocks separated by street corridors.
-  - Streets stamped as narrow cobblestone corridors between blocks.
-  - Buildings fill the south face of each block (facing the street).
-  - Waystone square: central block left open as flagstone + plinth.
-  - Bell tower: perimeter block, tower stamped in.
-  - Alleys: gravel cuts through wide blocks.
+Architecture (new 3×3, plaza-anchored):
+  - 3×3 chunk footprint per town.
+  - Centre chunk holds the plaza (bell tower + waystone plinth).
+  - Cardinal chunks hold the inner grid (streets + buildings).
+  - Corner chunks hold the outer ring (organic scatter + dirt tracks).
+  - All tunable values read from data/generation/town_config.json.
+  - Building categories auto-discovered from data/buildings/ subdirs.
+
+Legacy 2×2 code retained below the new code until Phase 5 cleanup.
 """
 from __future__ import annotations
+import json
 import random
+from dataclasses import dataclass, field
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from world.local_map import LocalMap
     from world.world_map import Chunk
+
+
+# ------------------------------------------------------------------ #
+#  BuildingDef dataclass
+# ------------------------------------------------------------------ #
+
+@dataclass
+class BuildingDef:
+    """Represents one loaded building layout."""
+    id:         str
+    category:   str
+    layout:     list[str]      # 2D array of tile chars (rows top→bottom)
+    allowed_in: str            = "town"
+    weight:     float          = 1.0
+    width:      int            = 0
+    height:     int            = 0
+    legend:     dict           = field(default_factory=dict)
+    has_submap: bool           = False
+
+    def __post_init__(self) -> None:
+        if self.layout:
+            self.height = len(self.layout)
+            self.width  = max(len(row) for row in self.layout) if self.layout else 0
+
+
+# ------------------------------------------------------------------ #
+#  BuildingLoader
+# ------------------------------------------------------------------ #
+
+class BuildingLoader:
+    """
+    Scans data/buildings/ for subdirectory categories and loads all
+    JSON building layouts. Each subdirectory name is a category.
+    Adding a new category folder makes it available automatically.
+
+    Also loads plaza variants from data/buildings/plaza/.
+    """
+
+    def __init__(self, buildings_root: str = "data/buildings") -> None:
+        self._root:    Path                    = Path(buildings_root)
+        self.buildings: dict[str, list[BuildingDef]] = {}  # category → [BuildingDef]
+        self.plazas:    list[BuildingDef]      = []
+
+    def load(self) -> None:
+        """Scan and load all building JSONs. Call once at startup."""
+        if not self._root.exists():
+            print(f"Warning: buildings root not found: {self._root}")
+            return
+
+        for subdir in sorted(self._root.iterdir()):
+            if not subdir.is_dir():
+                continue
+            category = subdir.name
+            defs: list[BuildingDef] = []
+            for fpath in sorted(subdir.glob("*.json")):
+                bdef = self._load_file(fpath, category)
+                if bdef is None:
+                    continue
+                defs.append(bdef)
+                if category == "plaza":
+                    self.plazas.append(bdef)
+            if defs:
+                self.buildings[category] = defs
+
+        # Print summary
+        counts = " ".join(
+            f"{cat}={len(lst)}"
+            for cat, lst in sorted(self.buildings.items())
+            if cat != "plaza"
+        )
+        plaza_n = len(self.plazas)
+        print(f"Town buildings loaded: {counts} | plaza={plaza_n}")
+
+    def _load_file(self, path: Path, category: str) -> "BuildingDef | None":
+        try:
+            with open(path, encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception as e:
+            print(f"Warning: failed to load building {path}: {e}")
+            return None
+
+        bid = data.get("id")
+        if not bid:
+            print(f"Warning: building {path} has no 'id', skipping.")
+            return None
+
+        # Accept 'layout' or 'layers' as the 2D array field
+        layout = data.get("layout") or data.get("layers") or []
+        if not layout:
+            print(f"Warning: building {bid} has no layout/layers, skipping.")
+            return None
+
+        has_submap = "submap" in data
+        if has_submap:
+            print(f"  [submap stub] {bid} has 'submap' field — noted, not processed.")
+
+        return BuildingDef(
+            id         = bid,
+            category   = category,
+            layout     = layout,
+            allowed_in = data.get("allowed_in", "town"),
+            weight     = float(data.get("weight", 1.0)),
+            legend     = data.get("legend", {}),
+            has_submap = has_submap,
+        )
+
+    def get(self, category: str) -> list[BuildingDef]:
+        """Return all BuildingDef entries for a category."""
+        return self.buildings.get(category, [])
+
+    def pick(
+        self,
+        category: str,
+        rng: random.Random,
+        allowed_in: str = "town",
+    ) -> "BuildingDef | None":
+        """
+        Return a weighted-random BuildingDef from a category,
+        filtered by allowed_in. Returns None if no valid entries.
+        """
+        pool = [
+            b for b in self.buildings.get(category, [])
+            if b.allowed_in in (allowed_in, "both")
+        ]
+        if not pool:
+            return None
+        weights = [b.weight for b in pool]
+        return rng.choices(pool, weights=weights, k=1)[0]
+
+    def pick_plaza(self, rng: random.Random) -> "BuildingDef | None":
+        """Return a weighted-random plaza variant."""
+        if not self.plazas:
+            return None
+        weights = [p.weight for p in self.plazas]
+        return rng.choices(self.plazas, weights=weights, k=1)[0]
+
+
+# ------------------------------------------------------------------ #
+#  Module-level singleton (populated by data_loader via wire_building_loader)
+# ------------------------------------------------------------------ #
+
+_building_loader: "BuildingLoader | None" = None
+
+
+def wire_building_loader(loader: "BuildingLoader") -> None:
+    """Called by data_loader after BuildingLoader.load() to make it available here."""
+    global _building_loader
+    _building_loader = loader
+
+
+def get_building_loader() -> "BuildingLoader | None":
+    return _building_loader
 
 # ------------------------------------------------------------------ #
 #  Constants
@@ -83,364 +239,847 @@ BELL_WEIGHTS = [15,       25,        30,        20,        10        ]
 
 
 # ------------------------------------------------------------------ #
-#  2×2 town generation constants
+#  3×3 town generation — Phases 2, 3, 4
 # ------------------------------------------------------------------ #
 
-# Primary road bands in local-chunk coordinates.
-# These straddle the chunk seam so roads connect across all 4 chunks.
-# N-S road occupies east 4 tiles of left chunks, west 4 tiles of right.
-# E-W road occupies south 4 tiles of top chunks, north 4 tiles of bottom.
-NS_SEAM_LO = 76    # left chunks:  road at local x = 76..79
-NS_SEAM_HI = 4     # right chunks: road at local x = 0..3
-EW_SEAM_LO = 39    # top chunks:   road at local y = 39..42
-EW_SEAM_HI = 4     # bottom chunks: road at local y = 0..3
-SEAM_ROAD_W = 4    # tiles wide
+_NEW_ROLES = {"NW", "N", "NE", "W", "C", "E", "SW", "S", "SE"}
 
-# How many tiles each road band extends from the seam edge into the chunk
-ROAD_MARGIN = 3    # keep buildings at least this far from road band edge
-
-
-def _road_bands_for_role(role: str) -> tuple[tuple[int,int], tuple[int,int]]:
-    """
-    Return (ns_band, ew_band) as (x_start, x_end_excl) and
-    (y_start, y_end_excl) for the primary road bands in a chunk with
-    the given role.
-    """
-    if role in ("NW", "SW"):
-        ns = (NS_SEAM_LO, 80)       # x 76-79 (east edge)
-    else:
-        ns = (0, NS_SEAM_HI)        # x 0-3   (west edge)
-
-    if role in ("NW", "NE"):
-        ew = (EW_SEAM_LO, 43)       # y 39-42 (south edge)
-    else:
-        ew = (0, EW_SEAM_HI)        # y 0-3   (north edge)
-
-    return ns, ew
+# Config-driven constants (matching data/generation/town_config.json)
+_SECONDARY_W        = 3         # secondary street width in tiles
+_SECONDARY_NS_COUNT = (1, 2)    # cross-street count range for N/S chunks
+_SECONDARY_EW_COUNT = (2, 3)    # cross-street count range for E/W chunks
+_INNER_LAMP_STEP    = 6         # lamps.inner_grid_spacing
+_OUTER_LAMP_STEP    = 14        # lamps.outer_ring_spacing
+_SCATTER_ATTEMPTS   = 40        # outer_ring.scatter_attempts
+_EDGE_DEPTH         = 10        # tiles-from-edge that count as "outer ring"
+_DIRT_TRACK_W       = 2         # dirt track width in tiles
+_PATH_WANDER        = 0.25      # outer_ring.path_wander_chance
+# Lamp state probability (working, sputtering) — dead = remainder
+_LAMP_P_PLAZA  = (0.25, 0.45)
+_LAMP_P_INNER  = (0.08, 0.25)
+_LAMP_P_OUTER  = (0.01, 0.12)
 
 
-def _safe_zone_for_role(role: str, map_w: int, map_h: int) -> tuple[int,int,int,int]:
-    """
-    Return (x0, y0, w, h) of the safe interior zone for block-grid
-    placement — avoids all road bands and map edges.
-    """
-    ns, ew = _road_bands_for_role(role)
-
-    if role in ("NW", "SW"):
-        x0 = TOWN_MARGIN
-        x1 = ns[0] - ROAD_MARGIN           # left of N-S road
-    else:
-        x0 = ns[1] + ROAD_MARGIN           # right of N-S road
-        x1 = map_w - TOWN_MARGIN
-
-    if role in ("NW", "NE"):
-        y0 = TOWN_MARGIN
-        y1 = ew[0] - ROAD_MARGIN           # above E-W road
-    else:
-        y0 = ew[1] + ROAD_MARGIN           # below E-W road
-        y1 = map_h - TOWN_MARGIN
-
-    w = max(0, x1 - x0)
-    h = max(0, y1 - y0)
-    return x0, y0, w, h
+def _artery_positions(map_w: int, map_h: int) -> tuple[int, int, int, int]:
+    """Return (ns_x0, ns_x1_excl, ew_y0, ew_y1_excl) for 3-wide arteries."""
+    return (
+        map_w // 2 - 1,
+        map_w // 2 + 2,
+        map_h // 2 - 1,
+        map_h // 2 + 2,
+    )
 
 
-def _place_town_lamps(
+def _stamp_artery(
     local_map,
     terrain_data: dict,
-    ns: tuple[int,int],
-    ew: tuple[int,int],
-    map_w:    int,
-    map_h:    int,
-    town_id:  int,
-) -> None:
-    """
-    Place street-lamp terrain tiles along the edges of the primary road
-    bands. Lamps are placed one tile OUTSIDE the road band so they don't
-    block movement on the road itself.
-
-    State distribution is seeded by tile position + town_id:
-      near plaza  (dist ≤ 8):  50% working, 30% sputtering, 20% dead
-      mid-town   (≤ 20):       20% working, 40% sputtering, 40% dead
-      periphery  (> 20):       10% working, 20% sputtering, 70% dead
-    """
-    ns_cx = (ns[0] + ns[1]) // 2
-    ew_cy = (ew[0] + ew[1]) // 2
-
-    def state_for(x: int, y: int) -> str:
-        dist = ((x - ns_cx) ** 2 + (y - ew_cy) ** 2) ** 0.5
-        h    = hash((x * 7919, y * 6271, town_id)) & 0xFF
-        if dist <= 8:
-            if h < 128: return "street_lamp_working"
-            if h < 204: return "street_lamp_sputtering"
-            return "street_lamp_dead"
-        elif dist <= 20:
-            if h < 51:  return "street_lamp_working"
-            if h < 153: return "street_lamp_sputtering"
-            return "street_lamp_dead"
-        else:
-            if h < 26:  return "street_lamp_working"
-            if h < 77:  return "street_lamp_sputtering"
-            return "street_lamp_dead"
-
-    LAMP_STEP = 8   # place a lamp every N tiles along the road
-
-    # Lamps flanking the E-W road band — one tile above and below
-    for x in range(0, map_w, LAMP_STEP):
-        if ns[0] <= x < ns[1]:
-            continue  # skip the N-S crossing
-        for y_off in [ew[0] - 1, ew[1]]:
-            if local_map.in_bounds(x, y_off):
-                _set_terrain(local_map, x, y_off, state_for(x, y_off), terrain_data)
-
-    # Lamps flanking the N-S road band — one tile left and right
-    for y in range(0, map_h, LAMP_STEP):
-        if ew[0] <= y < ew[1]:
-            continue  # skip the E-W crossing
-        for x_off in [ns[0] - 1, ns[1]]:
-            if local_map.in_bounds(x_off, y):
-                _set_terrain(local_map, x_off, y, state_for(x_off, y), terrain_data)
+    axis: str,
+    a0: int, a1: int,
+    length: int,
+) -> set:
+    """Stamp cobblestone for one artery. Returns stamped tile set."""
+    tiles: set = set()
+    for a in range(a0, a1):
+        for b in range(length):
+            x, y = (a, b) if axis == "ns" else (b, a)
+            if local_map.in_bounds(x, y):
+                _set_terrain(local_map, x, y, "cobblestone", terrain_data)
+                tiles.add((x, y))
+    return tiles
 
 
-def generate_town_quadrant(
-    chunk,
+def _stamp_secondary_streets(
     local_map,
+    terrain_data: dict,
+    perp_axis: str,     # "ew" = horizontal streets; "ns" = vertical streets
+    count: int,
+    width: int,
+    full_length: int,   # how far the streets span (the other dimension)
+    full_breadth: int,  # dimension streets are distributed across
+    margin: int,
+) -> set:
+    """
+    Stamp evenly-distributed secondary cross-streets.
+    perp_axis='ew': horizontal bands at evenly spaced y values.
+    perp_axis='ns': vertical bands at evenly spaced x values.
+    """
+    tiles: set = set()
+    avail = full_breadth - 2 * margin - count * width
+    if count <= 0 or avail <= 0:
+        return tiles
+    step = max(1, avail // (count + 1))
+    pos = margin + step
+    for _ in range(count):
+        for w in range(width):
+            a = pos + w
+            for b in range(full_length):
+                x, y = (b, a) if perp_axis == "ew" else (a, b)
+                if local_map.in_bounds(x, y):
+                    _set_terrain(local_map, x, y, "cobblestone", terrain_data)
+                    tiles.add((x, y))
+        pos += step + width
+    return tiles
+
+
+def _stamp_plaza_def(
+    local_map,
+    plaza: "BuildingDef",
+    ox: int,
+    oy: int,
+    terrain_data: dict,
+) -> None:
+    """Stamp a BuildingDef plaza (legend-based layout) at top-left (ox, oy)."""
+    for row_idx, row in enumerate(plaza.layout):
+        for col_idx, ch in enumerate(row):
+            terrain = plaza.legend.get(ch)
+            if terrain is None:
+                continue
+            tx = ox + col_idx
+            ty = oy + row_idx
+            if local_map.in_bounds(tx, ty):
+                _set_terrain(local_map, tx, ty, terrain, terrain_data)
+
+
+def _find_plaza_tile(
+    plaza: "BuildingDef",
+    terrain_id: str,
+    ox: int,
+    oy: int,
+) -> "tuple[int,int] | None":
+    """Find the first occurrence of terrain_id in the plaza layout; return world coord."""
+    for ch, t in plaza.legend.items():
+        if t == terrain_id:
+            for row_idx, row in enumerate(plaza.layout):
+                for col_idx, c in enumerate(row):
+                    if c == ch:
+                        return (ox + col_idx, oy + row_idx)
+    return None
+
+
+def _pick_raw_building(
+    category: str,
+    building_data: dict,
+    rng: random.Random,
+) -> "dict | None":
+    """Return a weighted-random raw building dict from building_data[category]."""
+    pool = building_data.get(category, [])
+    if not pool:
+        return None
+    weights = [float(b.get("weight", 1.0)) for b in pool]
+    return rng.choices(pool, weights=weights, k=1)[0]
+
+
+def _try_stamp_buildings(
+    local_map,
+    terrain_data: dict,
+    building_data: dict,
+    rng: random.Random,
+    categories: list[str],
+    zone: tuple[int, int, int, int],
+    max_buildings: int = 4,
+    south_align: bool = True,
+    flip_v: bool = False,
+    _debug_label: str = "",
+) -> tuple[list[dict], int]:
+    """Pack buildings into a zone and return the placed list.
+
+    south_align=True (default): row-packs left-to-right along the bottom edge of the
+    zone, then starts a second row above the first if space permits.  This eliminates
+    the random-x overlap problem that produced 60+ wasted attempts per zone.
+
+    south_align=False: random scatter (used for interior/non-aligned fills).
+    """
+    from config import DEBUG_MODE
+    placed: list[dict] = []
+    zx0, zy0, zw, zh = zone
+    if zw < 8 or zh < 6:
+        if DEBUG_MODE:
+            print(f"[town_gen] {_debug_label} zone ({zx0},{zy0},{zw},{zh}) too small — skipped")
+        return placed, 0
+
+    _skip_no_bld  = 0
+    _skip_too_big = 0
+    _skip_overlap = 0
+    attempts      = 0
+
+    if south_align:
+        # Multi-row pack: fills the zone from south to north, one row at a time.
+        # Each row left-to-right cursor-packs buildings against the current bottom edge,
+        # then raises the bottom by the tallest building in that row + 1 gap tile.
+        # Continues until max_buildings reached or no vertical space remains.
+        row_bottom = zy0 + zh - 1   # exclusive bottom of the current row slot
+
+        while len(placed) < max_buildings:
+            avail_h = row_bottom - zy0  # rows available from zone top to current bottom
+            if avail_h < 4:
+                break  # not enough vertical space for any building
+
+            cursor_x   = zx0 + 1
+            row_min_y  = None   # topmost building y placed in this row (tracks row height)
+            row_placed = 0
+
+            while cursor_x < zx0 + zw - 1 and len(placed) < max_buildings:
+                remaining_w = (zx0 + zw - 1) - cursor_x
+                if remaining_w < 4:
+                    break
+
+                fits = []
+                for _c in categories:
+                    for b in building_data.get(_c, []):
+                        layers = b.get("layers", [])
+                        if not layers:
+                            continue
+                        bw2 = max(len(r) for r in layers)
+                        bh2 = len(layers)
+                        if bw2 <= remaining_w and 3 <= bh2 <= avail_h - 1:
+                            fits.append((_c, b, bw2, bh2))
+
+                if not fits:
+                    cursor_x = zx0 + zw   # exhaust this horizontal pass
+                    _skip_too_big += 1
+                    break
+
+                attempts += 1
+                _c, bld, bw, bh = rng.choice(fits)
+                ox = cursor_x
+                oy = row_bottom - bh   # pack against the current row bottom
+
+                if DEBUG_MODE:
+                    print(f"[town_gen] {_debug_label} SLOT ox={ox} oy={oy} bw={bw} bh={bh} row_bottom={row_bottom}")
+
+                if _plot_is_clear(local_map, ox, oy, bw, bh):
+                    _item_specs = _stamp_building_at(local_map, bld, ox, oy, terrain_data, flip_v=flip_v)
+                    placed.append({
+                        "id": bld.get("id", "unknown"),
+                        "x": ox, "y": oy, "w": bw, "h": bh,
+                        "district": _c,
+                        "loot_table": bld.get("interior_loot_table"),
+                        "item_specs": _item_specs,
+                    })
+                    if row_min_y is None or oy < row_min_y:
+                        row_min_y = oy
+                    row_placed += 1
+                    cursor_x += bw
+                else:
+                    _skip_overlap += 1
+                    cursor_x += bw
+
+            if row_placed == 0:
+                break  # couldn't fit anything in this pass — stop
+
+            # Raise the bottom for the next row: above the tallest building + 1 gap
+            row_bottom = row_min_y - 1
+
+    else:
+        # Random scatter — used when south_align is explicitly False
+        while len(placed) < max_buildings and attempts < max_buildings * 8:
+            attempts += 1
+            cat = rng.choice(categories)
+            bld = _pick_raw_building(cat, building_data, rng)
+            if bld is None:
+                _skip_no_bld += 1
+                continue
+            layers = bld.get("layers", [])
+            if not layers:
+                _skip_no_bld += 1
+                continue
+            bw = max(len(row) for row in layers)
+            bh = len(layers)
+            if bw > zw - 2 or bh > zh - 2:
+                _skip_too_big += 1
+                continue
+            ox = rng.randint(zx0 + 1, max(zx0 + 1, zx0 + zw - bw - 1))
+            oy = rng.randint(zy0 + 1, max(zy0 + 1, zy0 + zh - bh - 1))
+            if _plot_is_clear(local_map, ox, oy, bw, bh):
+                _item_specs = _stamp_building_at(local_map, bld, ox, oy, terrain_data, flip_v=flip_v)
+                placed.append({
+                    "id": bld.get("id", "unknown"),
+                    "x": ox, "y": oy, "w": bw, "h": bh,
+                    "district": cat,
+                    "loot_table": bld.get("interior_loot_table"),
+                    "item_specs": _item_specs,
+                })
+            else:
+                _skip_overlap += 1
+
+    if DEBUG_MODE:
+        print(
+            f"[town_gen] {_debug_label} zone ({zx0},{zy0},{zw},{zh}) "
+            f"placed={len(placed)}/{max_buildings}  attempts={attempts}  "
+            f"skip_no_bld={_skip_no_bld}  skip_too_big={_skip_too_big}  skip_overlap={_skip_overlap}"
+        )
+    return placed, attempts
+
+
+def _place_artery_lamps(
+    local_map,
+    terrain_data: dict,
+    town_id: int,
+    axis: str,
+    a0: int, a1: int,
+    skip_a0: int, skip_a1: int,
+    length: int,
+    step: int = _INNER_LAMP_STEP,
+    lamp_probs: tuple = _LAMP_P_INNER,
+) -> None:
+    """Place street lamps flanking an artery, skipping the crossing band."""
+    wp, sp = lamp_probs
+    for b in range(0, length, step):
+        if skip_a0 <= b < skip_a1:
+            continue
+        for a_off in (a0 - 1, a1):
+            x, y = (a_off, b) if axis == "ns" else (b, a_off)
+            if not local_map.in_bounds(x, y):
+                continue
+            r = (hash((x * 7919, y * 6271, town_id)) & 0xFF) / 255.0
+            if   r < wp:      lamp = "street_lamp_working"
+            elif r < wp + sp: lamp = "street_lamp_sputtering"
+            else:             lamp = "street_lamp_dead"
+            _set_terrain(local_map, x, y, lamp, terrain_data)
+
+
+def _stamp_dirt_track(
+    local_map,
+    terrain_data: dict,
+    start_x: int,
+    start_y: int,
+    direction: str,
+    track_w: int,
+    wander_chance: float,
+    rng: random.Random,
+) -> None:
+    """Stamp a gravel dirt track from (start_x, start_y) toward the chunk edge."""
+    x, y = start_x, start_y
+    while local_map.in_bounds(x, y):
+        for dw in range(track_w):
+            tx = x + (dw if direction in ("N", "S") else 0)
+            ty = y + (dw if direction in ("E", "W") else 0)
+            if local_map.in_bounds(tx, ty):
+                t = local_map.tiles[tx, ty]["terrain"]
+                if isinstance(t, bytes):
+                    t = t.decode()
+                if t in ("grass", "packed_earth", "tall_grass", "weedy_cobble"):
+                    _set_terrain(local_map, tx, ty, "gravel", terrain_data)
+        if rng.random() < wander_chance:
+            if direction in ("N", "S"):
+                x = max(1, min(local_map.width - 2, x + rng.choice([-1, 0, 1])))
+            else:
+                y = max(1, min(local_map.height - 2, y + rng.choice([-1, 0, 1])))
+        if   direction == "N": y -= 1
+        elif direction == "S": y += 1
+        elif direction == "E": x += 1
+        elif direction == "W": x -= 1
+
+
+def _split_zone_by_streets(
+    zone: tuple[int, int, int, int],
+    street_tiles: set,
+    axis: str,
+) -> list[tuple[int, int, int, int]]:
+    """Split a zone into sub-zones that exclude street tile rows (axis='y') or
+    columns (axis='x').  Returns the original zone unchanged if no streets fall
+    inside it.  Handles runs of consecutive blocked rows/cols correctly.
+
+    axis='y': secondary E-W streets (horizontal bands) in N/S chunks.
+    axis='x': secondary N-S streets (vertical bands) in E/W chunks.
+    """
+    zx0, zy0, zw, zh = zone
+
+    if axis == "y":
+        blocked: set[int] = set()
+        for (sx, sy) in street_tiles:
+            if zy0 <= sy < zy0 + zh and zx0 <= sx < zx0 + zw:
+                blocked.add(sy)
+        if not blocked:
+            return [zone]
+        segs: list[tuple[int, int, int, int]] = []
+        seg_start = zy0
+        for y in range(zy0, zy0 + zh):
+            if y in blocked:
+                if y > seg_start:
+                    segs.append((zx0, seg_start, zw, y - seg_start))
+                seg_start = y + 1
+        if seg_start < zy0 + zh:
+            segs.append((zx0, seg_start, zw, zy0 + zh - seg_start))
+        return segs if segs else [zone]
+
+    else:  # axis == "x"
+        blocked_x: set[int] = set()
+        for (sx, sy) in street_tiles:
+            if zy0 <= sy < zy0 + zh and zx0 <= sx < zx0 + zw:
+                blocked_x.add(sx)
+        if not blocked_x:
+            return [zone]
+        segs_x: list[tuple[int, int, int, int]] = []
+        seg_start_x = zx0
+        for x in range(zx0, zx0 + zw):
+            if x in blocked_x:
+                if x > seg_start_x:
+                    segs_x.append((seg_start_x, zy0, x - seg_start_x, zh))
+                seg_start_x = x + 1
+        if seg_start_x < zx0 + zw:
+            segs_x.append((seg_start_x, zy0, zx0 + zw - seg_start_x, zh))
+        return segs_x if segs_x else [zone]
+
+
+_PATH_TILES = frozenset({
+    "gravel", "cobblestone", "flagstone", "cobblestone_cracked",
+    "cobblestone_mossy", "weedy_cobble", "dirt_path", "packed_earth",
+})
+_PATH_OVERWRITE = frozenset({
+    "grass", "varied_grass", "packed_earth", "tall_grass", "mud",
+    "flower_pilgrims_woe", "flower_murk_violet",
+    "shroom_sulphur_cap", "shroom_prophets_eye",
+})
+
+
+def _connect_building_to_path(
+    local_map,
+    terrain_data: dict,
+    bld_info: dict,
+    search_radius: int = 24,
+) -> None:
+    """Stamp a gravel L-path from the building exit point to the nearest road/path tile.
+
+    The exit point is one tile south of the building's bottom-centre.
+    Only overwrites soft terrain — never streets, walls, or water.
+    """
+    ox, oy = bld_info["x"], bld_info["y"]
+    bw, bh = bld_info["w"], bld_info["h"]
+    ex = ox + bw // 2
+    ey = oy + bh        # one tile below bottom row
+
+    if not local_map.in_bounds(ex, ey):
+        return
+
+    # Find nearest path/road tile by Manhattan distance
+    best_dist = search_radius + 1
+    best_x, best_y = -1, -1
+    for dy in range(-search_radius, search_radius + 1):
+        for dx in range(-search_radius, search_radius + 1):
+            tx, ty = ex + dx, ey + dy
+            if not local_map.in_bounds(tx, ty):
+                continue
+            t = local_map.tiles[tx, ty]["terrain"]
+            if isinstance(t, bytes):
+                t = t.decode()
+            if t in _PATH_TILES:
+                d = abs(dx) + abs(dy)
+                if d < best_dist:
+                    best_dist = d
+                    best_x, best_y = tx, ty
+
+    if best_x == -1:
+        return  # No road found within radius
+
+    # Stamp L-shaped path: horizontal first, then vertical
+    cx, cy = ex, ey
+    while cx != best_x:
+        if local_map.in_bounds(cx, cy):
+            t = local_map.tiles[cx, cy]["terrain"]
+            if isinstance(t, bytes):
+                t = t.decode()
+            if t in _PATH_OVERWRITE:
+                _set_terrain(local_map, cx, cy, "gravel", terrain_data)
+        cx += 1 if best_x > cx else -1
+    while cy != best_y:
+        if local_map.in_bounds(cx, cy):
+            t = local_map.tiles[cx, cy]["terrain"]
+            if isinstance(t, bytes):
+                t = t.decode()
+            if t in _PATH_OVERWRITE:
+                _set_terrain(local_map, cx, cy, "gravel", terrain_data)
+        cy += 1 if best_y > cy else -1
+
+
+def _apply_wfc_fill(
+    local_map,
+    terrain_data: dict,
+    wfc_rng: random.Random,
+    tileset_path: str,
+    fill_rect: tuple[int, int, int, int],
+    terrain_map: dict,
+    fallback: str,
+) -> None:
+    """Apply WFC tileset to a rectangle, skipping non-grass tiles."""
+    import os
+    from generation.wfc import WFCSolver
+    x0, y0, w, h = fill_rect
+    if w < 4 or h < 4 or not os.path.exists(tileset_path):
+        return
+    try:
+        solver = WFCSolver.from_json(tileset_path, wfc_rng)
+        grid   = solver.solve(w, h)
+        for lx in range(w):
+            for ly in range(h):
+                wx2, wy2 = x0 + lx, y0 + ly
+                if not local_map.in_bounds(wx2, wy2):
+                    continue
+                t = local_map.tiles[wx2, wy2]["terrain"]
+                if isinstance(t, bytes):
+                    t = t.decode()
+                if t not in ("grass", "varied_grass"):
+                    continue
+                tile_name    = grid[lx][ly] if grid else fallback
+                terrain_name = terrain_map.get(tile_name, fallback)
+                _set_terrain(local_map, wx2, wy2, terrain_name, terrain_data)
+    except Exception as e:
+        from config import DEBUG_MODE
+        if DEBUG_MODE:
+            print(f"[town_gen] WFC fill failed for {tileset_path}: {e}")
+
+
+def generate_town_chunk(
+    chunk,
+    local_map:     "LocalMap",
     map_w:         int,
     map_h:         int,
     terrain_data:  dict,
     building_data: dict,
+    name_gen,
     rng:           random.Random,
-) -> tuple:
+) -> "tuple[LocalMap, tuple[int,int]]":
     """
-    Generate one 2×2 quadrant of a multi-chunk town.
-    Uses chunk.town_role ("NW"|"NE"|"SW"|"SE") to determine which
-    primary road bands to stamp and which safe zone to fill.
+    Generate one chunk of a 3×3 town.
+    C    — both arteries + drift-placed plaza + quad buildings + WFC fill.
+    N/S  — N-S artery + 1-2 E-W cross-streets + buildings + WFC fill.
+    E/W  — E-W artery + 2-3 N-S cross-streets + buildings + WFC fill.
+    NW/NE/SW/SE — outer ring: scatter_attempts buildings (edge-only ruins),
+                  dirt track paths toward inner grid, outskirts WFC fill.
     """
+    import os
     from world.world_map import TownData
 
-    role = chunk.town_role or "NW"
-    ns, ew = _road_bands_for_role(role)
+    role = chunk.town_role or "C"
+    ns_x0, ns_x1, ew_y0, ew_y1 = _artery_positions(map_w, map_h)
 
-    # ── Primary roads ────────────────────────────────────────────────
-    street_tiles: set[tuple[int, int]] = set()
-
-    # N-S road band
-    for x in range(ns[0], ns[1]):
-        for y in range(map_h):
-            if local_map.in_bounds(x, y):
-                _set_terrain(local_map, x, y, "road_0", terrain_data)
-                street_tiles.add((x, y))
-
-    # E-W road band
-    for y in range(ew[0], ew[1]):
-        for x in range(map_w):
-            if local_map.in_bounds(x, y):
-                _set_terrain(local_map, x, y, "road_0", terrain_data)
-                street_tiles.add((x, y))
-
-    # Plaza: intersection of both road bands → flagstone
-    for x in range(ns[0], ns[1]):
-        for y in range(ew[0], ew[1]):
-            if local_map.in_bounds(x, y):
-                _set_terrain(local_map, x, y, "flagstone", terrain_data)
-
-    # ── Safe zone block grid ─────────────────────────────────────────
-    zone_x0, zone_y0, zone_w, zone_h = _safe_zone_for_role(role, map_w, map_h)
-
-    if zone_w < MIN_BLOCK_W or zone_h < MIN_BLOCK_H:
-        # Too small — just place a lamp and return
-        spawn = _find_spawn_on_street(local_map, 0, 0, map_w, map_h, street_tiles)
-        chunk.town_data = TownData(
-            name=chunk.name or "Settlement", size="large", districts=[],
-            bell_state="spent", is_festival=False,
-            waystone_pos=(map_w // 2, map_h // 2), bell_tower_pos=None,
-            buildings=[], creature_spawns=[],
-        )
-        return local_map, spawn
-
-    blocks, col_starts, col_widths, row_starts, row_heights = _generate_block_grid(
-        (zone_x0, zone_y0, zone_w, zone_h), rng
-    )
-
-    additional_streets = _stamp_streets(
-        local_map,
-        col_starts, col_widths,
-        row_starts, row_heights,
-        zone_x0, zone_y0, zone_w, zone_h,
-        terrain_data,
-    )
-    street_tiles.update(additional_streets)
-
-    # ── Special blocks (NW only) ────────────────────────────────────
-    bell_state     = rng.choices(BELL_STATES, weights=BELL_WEIGHTS, k=1)[0]
-    waystone_pos   = (map_w // 2, map_h // 2)
-    bell_tower_pos = None
+    street_tiles:     set[tuple[int, int]] = set()
+    bell_state        = rng.choices(BELL_STATES, weights=BELL_WEIGHTS, k=1)[0]
+    bell_tower_pos    = None
+    waystone_pos      = (map_w // 2, map_h // 2)
     placed_buildings: list[dict] = []
+    town_id           = chunk.town_id if chunk.town_id >= 0 else 0
+    _total_attempts   = 0
 
-    if role == "NW" and len(blocks) >= 2:
-        waystone_idx, bell_idx = _pick_special_blocks(blocks, rng)
-        block_districts        = _assign_block_districts(blocks, waystone_idx, bell_idx)
+    wfc_rng    = random.Random(hash((town_id, role)) & 0xFFFFFFFF)
+    wfc_base   = os.path.normpath(
+        os.path.join(os.path.dirname(__file__), "..", "data", "wfc"))
+    block_json = os.path.join(wfc_base, "town_block.json")
+    out_json   = os.path.join(wfc_base, "town_outskirts.json")
 
-        waystone_pos   = _place_waystone_square(local_map, blocks[waystone_idx],
-                                                building_data, terrain_data)
-        bell_tower_pos = _place_bell_tower(local_map, blocks[bell_idx],
-                                           building_data, terrain_data, bell_state, rng)
-        for idx, block in enumerate(blocks):
-            if idx in (waystone_idx, bell_idx):
-                continue
-            district = block_districts[idx]
-            placed_buildings.extend(
-                _fill_block_with_buildings(local_map, block, district,
-                                           building_data, terrain_data, rng)
-            )
-    else:
-        # Non-NW chunks fill with district-appropriate buildings
+    BLOCK_MAP = {
+        "packed_earth": "packed_earth", "dirt_path":  "dirt_path",
+        "weedy_cobble": "weedy_cobble", "mud_patch":  "mud",
+        "tall_grass":   "tall_grass",   "debris":     "debris_scatter",
+    }
+    OUTSKIRTS_MAP = {
+        "packed_earth": "packed_earth", "tall_grass": "tall_grass",
+        "weedy_cobble": "weedy_cobble", "debris":     "debris_scatter",
+        "gravel":       "gravel",
+    }
+    PLAZA_MAP = {
+        "cobble_clean":   "cobblestone",       "cobble_cracked": "cobblestone_cracked",
+        "cobble_mossy":   "cobblestone_mossy", "puddle":         "puddle",
+        "debris":         "debris_scatter",    "waystone_base":  "waystone_plinth",
+    }
+
+    # ── Primary arteries ───────────────────────────────────────────────
+    if role in ("C", "N", "S"):
+        street_tiles |= _stamp_artery(local_map, terrain_data,
+                                      "ns", ns_x0, ns_x1, map_h)
+    if role in ("C", "E", "W"):
+        street_tiles |= _stamp_artery(local_map, terrain_data,
+                                      "ew", ew_y0, ew_y1, map_w)
+
+    # ── Centre chunk ───────────────────────────────────────────────────
+    if role == "C":
+        for x in range(ns_x0, ns_x1):
+            for y in range(ew_y0, ew_y1):
+                if local_map.in_bounds(x, y):
+                    _set_terrain(local_map, x, y, "flagstone", terrain_data)
+
+        loader    = get_building_loader()
+        plaza_def = loader.pick_plaza(rng) if loader else None
+        plaza_json = os.path.join(wfc_base, "town_plaza.json")
+
+        if plaza_def:
+            drift_x = rng.randint(-4, 4)   # drift_range = 8 → ±4
+            drift_y = rng.randint(-4, 4)
+            ox = max(0, min(map_w - plaza_def.width,
+                            map_w // 2 - plaza_def.width  // 2 + drift_x))
+            oy = max(0, min(map_h - plaza_def.height,
+                            map_h // 2 - plaza_def.height // 2 + drift_y))
+            _stamp_plaza_def(local_map, plaza_def, ox, oy, terrain_data)
+
+            BELL_TERRAIN = {
+                "intact": "bell_intact", "cracked": "bell_cracked",
+                "spent":  "bell_dead",   "destroyed": "bell_dead",
+            }
+            bt = BELL_TERRAIN.get(bell_state, "bell_cracked")
+            for bsearch in ("bell_cracked", "bell_intact", "bell_dead"):
+                pos = _find_plaza_tile(plaza_def, bsearch, ox, oy)
+                if pos:
+                    bell_tower_pos = pos
+                    if local_map.in_bounds(pos[0], pos[1]):
+                        _set_terrain(local_map, pos[0], pos[1], bt, terrain_data)
+                    break
+            pos = _find_plaza_tile(plaza_def, "waystone_plinth", ox, oy)
+            if pos:
+                waystone_pos = pos
+
+            for row_idx, row in enumerate(plaza_def.layout):
+                for col_idx, ch in enumerate(row):
+                    t = plaza_def.legend.get(ch)
+                    if t in ("flagstone", "town_plaza", "cobblestone"):
+                        tx2, ty2 = ox + col_idx, oy + row_idx
+                        if local_map.in_bounds(tx2, ty2):
+                            street_tiles.add((tx2, ty2))
+
+            # WFC fill around plaza intersection
+            pz_x0 = max(0,     ns_x0 - 6)
+            pz_y0 = max(0,     ew_y0 - 4)
+            pz_x1 = min(map_w, ns_x1 + 6)
+            pz_y1 = min(map_h, ew_y1 + 4)
+            _apply_wfc_fill(local_map, terrain_data, wfc_rng, plaza_json,
+                            (pz_x0, pz_y0, pz_x1 - pz_x0, pz_y1 - pz_y0),
+                            PLAZA_MAP, "cobblestone_cracked")
+        else:
+            for x in range(ns_x0 - 4, ns_x1 + 4):
+                for y in range(ew_y0 - 4, ew_y1 + 4):
+                    if local_map.in_bounds(x, y):
+                        _set_terrain(local_map, x, y, "flagstone", terrain_data)
+                        street_tiles.add((x, y))
+
+        quad_zones = [
+            (TOWN_MARGIN,   TOWN_MARGIN,   ns_x0 - TOWN_MARGIN - 2,         ew_y0 - TOWN_MARGIN - 2),
+            (ns_x1 + 2,     TOWN_MARGIN,   map_w - ns_x1 - 2 - TOWN_MARGIN, ew_y0 - TOWN_MARGIN - 2),
+            (TOWN_MARGIN,   ew_y1 + 2,     ns_x0 - TOWN_MARGIN - 2,         map_h - ew_y1 - 2 - TOWN_MARGIN),
+            (ns_x1 + 2,     ew_y1 + 2,     map_w - ns_x1 - 2 - TOWN_MARGIN, map_h - ew_y1 - 2 - TOWN_MARGIN),
+        ]
+        centre_cats = ["civic", "religious", "commercial"]
+        for qi, zone in enumerate(quad_zones):
+            _apply_wfc_fill(local_map, terrain_data, wfc_rng, block_json,
+                            zone, BLOCK_MAP, "packed_earth")
+            _p, _a = _try_stamp_buildings(local_map, terrain_data, building_data, rng,
+                                          centre_cats, zone, max_buildings=5,
+                                          flip_v=(qi >= 2),   # qi 2/3 are south of EW road
+                                          _debug_label=f"C-quad{qi}")
+            placed_buildings.extend(_p)
+            _total_attempts += _a
+
+        _place_artery_lamps(local_map, terrain_data, town_id,
+                            "ns", ns_x0, ns_x1, ew_y0, ew_y1, map_h,
+                            step=_INNER_LAMP_STEP, lamp_probs=_LAMP_P_PLAZA)
+        _place_artery_lamps(local_map, terrain_data, town_id,
+                            "ew", ew_y0, ew_y1, ns_x0, ns_x1, map_w,
+                            step=_INNER_LAMP_STEP, lamp_probs=_LAMP_P_PLAZA)
+
+    # ── Cardinal N / S ──────────────────────────────────────────────────
+    elif role in ("N", "S"):
+        n_cross = rng.randint(*_SECONDARY_NS_COUNT)
+        street_tiles |= _stamp_secondary_streets(
+            local_map, terrain_data, "ew",
+            n_cross, _SECONDARY_W, map_w, map_h, TOWN_MARGIN)
+
+        cats = ["residential", "commercial", "storage"]
+        for zi, zone in enumerate([
+            (TOWN_MARGIN, TOWN_MARGIN, ns_x0 - TOWN_MARGIN - 2, map_h - TOWN_MARGIN * 2),
+            (ns_x1 + 2,   TOWN_MARGIN, map_w - ns_x1 - 2 - TOWN_MARGIN, map_h - TOWN_MARGIN * 2),
+        ]):
+            _apply_wfc_fill(local_map, terrain_data, wfc_rng, block_json,
+                            zone, BLOCK_MAP, "packed_earth")
+            for sub_zone in _split_zone_by_streets(zone, street_tiles, "y"):
+                _p, _a = _try_stamp_buildings(local_map, terrain_data, building_data, rng,
+                                              cats, sub_zone, max_buildings=8,
+                                              _debug_label=f"{role}-zone{zi}")
+                placed_buildings.extend(_p)
+                _total_attempts += _a
+
         bell_state = "spent"
-        district_cycle = ["residential", "market_quarter", "ossuary", "residential"]
-        for idx, block in enumerate(blocks):
-            district = district_cycle[idx % len(district_cycle)]
-            placed_buildings.extend(
-                _fill_block_with_buildings(local_map, block, district,
-                                           building_data, terrain_data, rng)
+        _place_artery_lamps(local_map, terrain_data, town_id,
+                            "ns", ns_x0, ns_x1, ew_y0, ew_y1, map_h,
+                            step=_INNER_LAMP_STEP, lamp_probs=_LAMP_P_INNER)
+
+    # ── Cardinal E / W ──────────────────────────────────────────────────
+    elif role in ("E", "W"):
+        n_cross = rng.randint(*_SECONDARY_EW_COUNT)
+        street_tiles |= _stamp_secondary_streets(
+            local_map, terrain_data, "ns",
+            n_cross, _SECONDARY_W, map_h, map_w, TOWN_MARGIN)
+
+        cats = ["commercial", "storage", "residential"]
+        for zi, zone in enumerate([
+            (TOWN_MARGIN, TOWN_MARGIN,   map_w - TOWN_MARGIN * 2, ew_y0 - TOWN_MARGIN - 2),
+            (TOWN_MARGIN, ew_y1 + 2,     map_w - TOWN_MARGIN * 2, map_h - ew_y1 - 2 - TOWN_MARGIN),
+        ]):
+            _apply_wfc_fill(local_map, terrain_data, wfc_rng, block_json,
+                            zone, BLOCK_MAP, "packed_earth")
+            for sub_zone in _split_zone_by_streets(zone, street_tiles, "x"):
+                _p, _a = _try_stamp_buildings(local_map, terrain_data, building_data, rng,
+                                              cats, sub_zone, max_buildings=8,
+                                              flip_v=(zi == 1),   # zi 1 is south of EW road
+                                              _debug_label=f"{role}-zone{zi}")
+                placed_buildings.extend(_p)
+                _total_attempts += _a
+
+        bell_state = "spent"
+        _place_artery_lamps(local_map, terrain_data, town_id,
+                            "ew", ew_y0, ew_y1, ns_x0, ns_x1, map_w,
+                            step=_INNER_LAMP_STEP, lamp_probs=_LAMP_P_INNER)
+
+    # ── Corner chunks — Phase 3 outer ring ────────────────────────────
+    else:
+        bell_state = "spent"
+
+        # Dirt tracks toward adjacent cardinal chunks
+        _track_dirs = {
+            "NW": ("E", "S"), "NE": ("W", "S"),
+            "SW": ("E", "N"), "SE": ("W", "N"),
+        }
+        for d in _track_dirs.get(role, ()):
+            if d == "E":
+                sx2 = TOWN_MARGIN + rng.randint(2, 8)
+                sy2 = map_h // 3 + rng.randint(-3, 3)
+            elif d == "W":
+                sx2 = map_w - TOWN_MARGIN - rng.randint(3, 10)
+                sy2 = map_h // 3 + rng.randint(-3, 3)
+            elif d == "S":
+                sx2 = map_w // 3 + rng.randint(-3, 3)
+                sy2 = TOWN_MARGIN + rng.randint(2, 8)
+            else:  # "N"
+                sx2 = map_w // 3 + rng.randint(-3, 3)
+                sy2 = map_h - TOWN_MARGIN - rng.randint(3, 10)
+            _stamp_dirt_track(local_map, terrain_data, sx2, sy2, d,
+                              _DIRT_TRACK_W, _PATH_WANDER, rng)
+
+        # Phase 4: outskirts WFC fill — runs before building scatter
+        _apply_wfc_fill(local_map, terrain_data, wfc_rng, out_json,
+                        (TOWN_MARGIN, TOWN_MARGIN,
+                         map_w - TOWN_MARGIN * 2, map_h - TOWN_MARGIN * 2),
+                        OUTSKIRTS_MAP, "packed_earth")
+
+        # Scatter buildings: ruins/wilderness restricted to edge zone
+        from config import DEBUG_MODE as _DBG
+        edge_cats     = ["residential", "storage", "ruins", "wilderness"]
+        interior_cats = ["residential", "storage"]
+        placed_count  = 0
+        _sc_no_bld    = 0
+        _sc_oob       = 0
+        _sc_overlap   = 0
+        for attempt_i in range(_SCATTER_ATTEMPTS):
+            if placed_count >= 15:
+                break
+            ox = rng.randint(TOWN_MARGIN, map_w - TOWN_MARGIN - 16)
+            oy = rng.randint(TOWN_MARGIN, map_h - TOWN_MARGIN - 10)
+            on_edge = (ox < _EDGE_DEPTH
+                       or ox > map_w - _EDGE_DEPTH - 16
+                       or oy < _EDGE_DEPTH
+                       or oy > map_h - _EDGE_DEPTH - 10)
+            cats = edge_cats if on_edge else interior_cats
+            cat  = rng.choice(cats)
+            bld  = _pick_raw_building(cat, building_data, rng)
+            if bld is None:
+                _sc_no_bld += 1
+                continue
+            layers = bld.get("layers", [])
+            if not layers:
+                _sc_no_bld += 1
+                continue
+            bw = max(len(row) for row in layers)
+            bh = len(layers)
+            if ox + bw > map_w - TOWN_MARGIN or oy + bh > map_h - TOWN_MARGIN:
+                _sc_oob += 1
+                continue
+            if _plot_is_clear(local_map, ox, oy, bw, bh):
+                _item_specs = _stamp_building_at(local_map, bld, ox, oy, terrain_data)
+                bld_info = {
+                    "id": bld.get("id", "unknown"),
+                    "x": ox, "y": oy, "w": bw, "h": bh,
+                    "district": cat,
+                    "loot_table": bld.get("interior_loot_table"),
+                    "item_specs": _item_specs,
+                }
+                placed_buildings.append(bld_info)
+                _connect_building_to_path(local_map, terrain_data, bld_info)
+                placed_count += 1
+            else:
+                _sc_overlap += 1
+        if _DBG:
+            print(
+                f"[town_gen] {role}-scatter  placed={placed_count}/15  "
+                f"attempts={attempt_i+1}/{_SCATTER_ATTEMPTS}  "
+                f"skip_no_bld={_sc_no_bld}  skip_oob={_sc_oob}  skip_overlap={_sc_overlap}"
             )
 
-    # ── Alleys ────────────────────────────────────────────────────────
-    _add_alleys(local_map, blocks,
-                0 if role == "NW" else -1,
-                1 if role == "NW" else -1,
-                terrain_data, rng)
+        # Sparse lamps
+        for lx in range(0, map_w, _OUTER_LAMP_STEP):
+            for ly in range(0, map_h, _OUTER_LAMP_STEP):
+                jx = lx + rng.randint(-2, 2)
+                jy = ly + rng.randint(-2, 2)
+                if not local_map.in_bounds(jx, jy):
+                    continue
+                r = (hash((jx * 7919, jy * 6271, town_id)) & 0xFF) / 255.0
+                wp, sp = _LAMP_P_OUTER
+                if   r < wp:      _set_terrain(local_map, jx, jy, "street_lamp_working",     terrain_data)
+                elif r < wp + sp: _set_terrain(local_map, jx, jy, "street_lamp_sputtering",  terrain_data)
 
-    # ── WFC ground fill ──────────────────────────────────────────────
-    import os
-    from generation.wfc import WFCSolver
+    # ── Per-chunk diagnostic summary ───────────────────────────────────
+    from config import DEBUG_MODE as _DBG2
+    if _DBG2 and _total_attempts > 0:
+        _wx = getattr(chunk, "wx", "?")
+        _wy = getattr(chunk, "wy", "?")
+        print(
+            f"[TOWN seed={town_id} wx={_wx} wy={_wy} role={role} "
+            f"slots_attempted={_total_attempts} slots_filled={len(placed_buildings)}]"
+        )
 
-    wfc_rng = random.Random(hash((chunk.town_id, role)) & 0xFFFFFFFF)
-
-    # Identify building footprints for exclusion
-    building_cells: set[tuple[int, int]] = set()
-    for bld in placed_buildings:
-        for bx2 in range(bld["x"] - 1, bld["x"] + bld["w"] + 1):
-            for by2 in range(bld["y"] - 1, bld["y"] + bld["h"] + 1):
-                building_cells.add((bx2, by2))
-
-    # Helper: is tile currently a road/structure (skip for WFC)?
-    def _is_road_or_structure(x2: int, y2: int) -> bool:
-        if not local_map.in_bounds(x2, y2):
-            return True
-        t2 = local_map.tiles[x2, y2]["terrain"]
-        if isinstance(t2, bytes):
-            t2 = t2.decode()
-        # Roads — don't overwrite
-        if str(t2).startswith("road"):
-            return True
-        # Structures (walls, floors, doors, lamps, stairs) — don't overwrite
-        non_overwrit = {"wall", "wood_wall", "floor", "door_closed", "door_open",
-                        "stairs_down", "stairs_up", "grey_stone", "ancient_floor",
-                        "table", "gravel", "street_lamp_working",
-                        "street_lamp_sputtering", "street_lamp_dead"}
-        return str(t2) in non_overwrit
-
-    # Plaza WFC (NW chunk only — around road crossing)
-    base_path = os.path.join(os.path.dirname(__file__), "..", "data", "wfc")
-    plaza_json = os.path.normpath(os.path.join(base_path, "town_plaza.json"))
-    block_json = os.path.normpath(os.path.join(base_path, "town_block.json"))
-
-    # WFC tile name → terrain name mapping (from plaza tileset)
-    PLAZA_TERRAIN = {
-        "cobble_clean":   "cobblestone",
-        "cobble_cracked": "cobblestone_cracked",
-        "cobble_mossy":   "cobblestone_mossy",
-        "puddle":         "puddle",
-        "debris":         "debris_scatter",
-        "waystone_base":  "waystone_plinth",
+    # ── District and creature spawns ───────────────────────────────────
+    _district_by_role = {
+        "C":  "bell_quarter",
+        "N":  "residential",   "S": "residential",
+        "E":  "market_quarter", "W": "market_quarter",
+        "NW": "residential",  "NE": "residential",
+        "SW": "ossuary",      "SE": "residential",
     }
-    BLOCK_TERRAIN = {
-        "packed_earth":  "packed_earth",
-        "dirt_path":     "dirt_path",
-        "weedy_cobble":  "weedy_cobble",
-        "mud_patch":     "mud",
-        "tall_grass":    "tall_grass",
-        "debris":        "debris_scatter",
-    }
+    district_for_spawn = _district_by_role.get(role, "residential")
+    safe_rect = (TOWN_MARGIN, TOWN_MARGIN,
+                 map_w - TOWN_MARGIN * 2, map_h - TOWN_MARGIN * 2)
+    creature_spawns = _compute_creature_spawns(
+        local_map, [(district_for_spawn, safe_rect)], bell_state, rng
+    )
 
-    if role == "NW" and os.path.exists(plaza_json):
-        ns_cx = (ns[0] + ns[1]) // 2
-        ew_cy = (ew[0] + ew[1]) // 2
-        px0 = max(0, ns_cx - 8)
-        py0 = max(0, ew_cy - 5)
-        pw  = min(map_w, ns_cx + 8) - px0
-        ph  = min(map_h, ew_cy + 5) - py0
-        if pw >= 4 and ph >= 4:
-            try:
-                solver  = WFCSolver.from_json(plaza_json, wfc_rng)
-                grid    = solver.solve(pw, ph)
-                fallback_t = "cobblestone_cracked"
-                for lx in range(pw):
-                    for ly in range(ph):
-                        wx2 = px0 + lx
-                        wy2 = py0 + ly
-                        if (wx2, wy2) in building_cells:
-                            continue
-                        if _is_road_or_structure(wx2, wy2):
-                            continue
-                        tile_name = grid[lx][ly] if grid else fallback_t
-                        terrain_name = PLAZA_TERRAIN.get(tile_name, fallback_t)
-                        _set_terrain(local_map, wx2, wy2, terrain_name, terrain_data)
-            except Exception:
-                pass   # WFC failure is non-fatal
+    # Aggregate item spawns from all building special_tiles
+    item_spawns: list[dict] = []
+    for _b in placed_buildings:
+        item_spawns.extend(_b.get("item_specs", []))
+    # Waystone prayer near the waystone plinth (role "C" chunk)
+    if role == "C" and waystone_pos != (map_w // 2, map_h // 2):
+        wx_p, wy_p = waystone_pos
+        if local_map.in_bounds(wx_p + 1, wy_p):
+            item_spawns.append({
+                "kind": "item", "item_id": "lab_note",
+                "text_id": "waystone_prayer_a",
+                "x": wx_p + 1, "y": wy_p,
+            })
 
-    # Block interior WFC (all roles)
-    if os.path.exists(block_json):
-        for bx3, by3, bw3, bh3 in blocks:
-            # Define interior as block rect minus 1-tile edge margin
-            ix0 = bx3 + 1
-            iy0 = by3 + 1
-            iw  = bw3 - 2
-            ih  = bh3 - 2
-            if iw < 4 or ih < 4:
-                continue
-            try:
-                solver  = WFCSolver.from_json(block_json, wfc_rng)
-                grid    = solver.solve(iw, ih)
-                fallback_t = "packed_earth"
-                for lx in range(iw):
-                    for ly in range(ih):
-                        wx2 = ix0 + lx
-                        wy2 = iy0 + ly
-                        if (wx2, wy2) in building_cells:
-                            continue
-                        if _is_road_or_structure(wx2, wy2):
-                            continue
-                        tile_name = grid[lx][ly] if grid else fallback_t
-                        terrain_name = BLOCK_TERRAIN.get(tile_name, fallback_t)
-                        _set_terrain(local_map, wx2, wy2, terrain_name, terrain_data)
-            except Exception:
-                pass
-
-    # ── Street lamps ─────────────────────────────────────────────────
-    town_id = chunk.town_id if chunk.town_id >= 0 else 0
-    _place_town_lamps(local_map, terrain_data, ns, ew, map_w, map_h, town_id)
-
-    # ── Creature spawns ───────────────────────────────────────────────
-    district_name = "bell_quarter" if role == "NW" else "residential"
-    district_rects = [(district_name, (zone_x0, zone_y0, zone_w, zone_h))]
-    creature_spawns = _compute_creature_spawns(local_map, district_rects, bell_state, rng)
-
-    # ── TownData ──────────────────────────────────────────────────────
     chunk.town_data = TownData(
         name            = chunk.name or "Settlement",
         size            = "large",
-        districts       = [district_name],
+        districts       = [district_for_spawn],
         bell_state      = bell_state,
-        is_festival     = rng.random() < 0.2,
+        is_festival     = rng.random() < 0.15,
         waystone_pos    = waystone_pos,
         bell_tower_pos  = bell_tower_pos,
         buildings       = placed_buildings,
         creature_spawns = creature_spawns,
+        item_spawns     = item_spawns,
     )
 
-    spawn = _find_spawn_on_street(local_map, zone_x0, zone_y0, zone_w, zone_h,
-                                  street_tiles)
+    spawn = _find_spawn_on_street(
+        local_map, TOWN_MARGIN, TOWN_MARGIN,
+        map_w - TOWN_MARGIN * 2, map_h - TOWN_MARGIN * 2,
+        street_tiles,
+    )
     return local_map, spawn
 
 
@@ -483,10 +1122,10 @@ def generate_town(
     """
     from world.world_map import TownData
 
-    # 2×2 multi-chunk mode when chunk has a role assigned
-    if chunk.town_role:
-        return generate_town_quadrant(chunk, local_map, map_w, map_h,
-                                      terrain_data, building_data, rng)
+    # 3×3 multi-chunk mode (new system — 9 roles)
+    if chunk.town_role in _NEW_ROLES:
+        return generate_town_chunk(chunk, local_map, map_w, map_h,
+                                   terrain_data, building_data, name_gen, rng)
 
     town_x = TOWN_MARGIN
     town_y = TOWN_MARGIN
@@ -552,6 +1191,18 @@ def generate_town(
 
     # ── Store TownData ────────────────────────────────────────────────
     district_names = list(dict.fromkeys(block_districts.values()))
+    _item_spawns: list[dict] = []
+    for _b in placed_buildings:
+        _item_spawns.extend(_b.get("item_specs", []))
+    # Waystone prayer near the waystone plinth
+    if waystone_pos:
+        wx_p, wy_p = waystone_pos
+        if local_map.in_bounds(wx_p + 1, wy_p):
+            _item_spawns.append({
+                "kind": "item", "item_id": "lab_note",
+                "text_id": "waystone_prayer_a",
+                "x": wx_p + 1, "y": wy_p,
+            })
     chunk.town_data = TownData(
         name            = chunk.name or "Unknown Town",
         size            = "small",
@@ -562,6 +1213,7 @@ def generate_town(
         bell_tower_pos  = bell_tower_pos,
         buildings       = placed_buildings,
         creature_spawns = creature_spawns,
+        item_spawns     = _item_spawns,
     )
 
     spawn = _find_spawn_on_street(
@@ -877,6 +1529,14 @@ def _apply_bell_state(layout: dict, bell_state: str) -> dict:
 #  Building filling
 # ------------------------------------------------------------------ #
 
+def _building_size(bld: dict) -> tuple[int, int]:
+    """Return (width, height) computed from layers (not stored .get('width') defaults)."""
+    layers = bld.get("layers", [])
+    if not layers:
+        return (0, 0)
+    return (max(len(row) for row in layers), len(layers))
+
+
 def _get_block_buildings(district_name: str, building_data: dict) -> list[dict]:
     """
     Return a weighted pool of building candidates for a district.
@@ -904,7 +1564,14 @@ def _plot_is_clear(local_map, ox: int, oy: int, w: int, h: int) -> bool:
             t = local_map.tiles[x, y]["terrain"]
             if isinstance(t, bytes):
                 t = t.decode()
-            if t not in ("grass", "cobblestone", "gravel", "flagstone", "road_0", "cobblestone_cracked", "cobblestone_mossy", "puddle", "debris_scatter", "packed_earth", "dirt_path", "weedy_cobble", "mud", "tall_grass"):
+            if t not in ("grass", "varied_grass", "gravel",
+                         "puddle", "debris_scatter",
+                         "packed_earth", "dirt_path", "mud", "tall_grass",
+                         # WFC block-fill outputs — must be overwritable so buildings can stamp over them
+                         "weedy_cobble",
+                         # Flora variants resolved from varied_grass by set_tile → must be overwritable
+                         "flower_pilgrims_woe", "flower_murk_violet",
+                         "shroom_sulphur_cap", "shroom_prophets_eye"):
                 return False
     return True
 
@@ -915,9 +1582,20 @@ def _stamp_building_at(
     ox:           int,
     oy:           int,
     terrain_data: dict,
-) -> None:
-    """Stamp a building with its top-left corner at (ox, oy)."""
+    flip_v:       bool = False,
+) -> list[dict]:
+    """Stamp a building with its top-left corner at (ox, oy).
+    flip_v=True reverses the rows so the entrance (bottom gap) faces north.
+    Use for buildings placed south of a road.
+    Also stamps the optional decor_layer if present in the building definition.
+    Returns a list of item spawn specs with world-space coordinates.
+    """
+    from generation.decor_utils import place_decor
+
     layers = building.get("layers", [])
+    bh     = len(layers)
+    if flip_v:
+        layers = list(reversed(layers))
     legend = building.get("legend", {})
     for row_idx, row in enumerate(layers):
         for col_idx, ch in enumerate(row):
@@ -928,6 +1606,36 @@ def _stamp_building_at(
             ty = oy + row_idx
             if local_map.in_bounds(tx, ty):
                 _set_terrain(local_map, tx, ty, terrain, terrain_data)
+
+    # Optional decorative layer — same grid format as layers, values are decor ids or null
+    decor_layer = building.get("decor_layer", [])
+    if flip_v:
+        decor_layer = list(reversed(decor_layer))
+    for row_idx, row in enumerate(decor_layer):
+        for col_idx, decor_id in enumerate(row):
+            if decor_id is None:
+                continue
+            tx = ox + col_idx
+            ty = oy + row_idx
+            place_decor(local_map, tx, ty, decor_id)
+
+    # Collect special_tiles as world-space item spawn specs
+    item_specs: list[dict] = []
+    for st in building.get("special_tiles", []):
+        if st.get("type") != "item":
+            continue
+        sx = st.get("x", 0)
+        sy = st.get("y", 0)
+        if flip_v:
+            sy = bh - 1 - sy
+        item_specs.append({
+            "kind":    "item",
+            "item_id": st.get("item_id", ""),
+            "text_id": st.get("text_id", ""),
+            "x": ox + sx,
+            "y": oy + sy,
+        })
+    return item_specs
 
 
 def _fill_block_with_buildings(
@@ -960,21 +1668,20 @@ def _fill_block_with_buildings(
             remaining_w = bx + bw - x
             fits = [
                 b for b in pool
-                if b.get("width",  10) <= remaining_w
-                and b.get("height",  8) <= max_h
+                if _building_size(b)[0] <= remaining_w
+                and _building_size(b)[1] <= max_h
             ]
             if not fits:
                 x += 2   # small gap skip — try with tighter remaining width
                 continue
 
             building = rng.choice(fits)
-            bldw = building.get("width",  10)
-            bldh = building.get("height",  8)
+            bldw, bldh = _building_size(building)
             ox   = x
             oy   = start_y_fn(bldh)
 
             if _plot_is_clear(local_map, ox, oy, bldw, bldh):
-                _stamp_building_at(local_map, building, ox, oy, terrain_data)
+                _item_specs = _stamp_building_at(local_map, building, ox, oy, terrain_data)
                 placed.append({
                     "id":         building.get("id", "unknown"),
                     "x":          ox,
@@ -983,6 +1690,7 @@ def _fill_block_with_buildings(
                     "h":          bldh,
                     "district":   district_name,
                     "loot_table": building.get("interior_loot_table"),
+                    "item_specs": _item_specs,
                 })
             x += bldw   # advance regardless — maintains party-wall spacing
 

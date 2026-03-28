@@ -34,5 +34,6 @@
   "resonance_messages": {
     "moderate": "The water carries resonance downstream.",
     "high": "The grey stones are submerged here. Still active."
-  }
+  },
+  "flint_scatter_rate": 0.001
 }

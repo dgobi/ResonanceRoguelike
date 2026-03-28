@@ -17,5 +17,6 @@
     {"name": "Consumption",  "strength": 3.0},
     {"name": "Revelation",   "strength": 3.0}
   ],
-  "on_use": "equip_toggle"
+  "on_use": "equip_toggle",
+  "keywords": [{"tag": "cutting", "tier": 3}, {"tag": "resonant", "tier": 3}]
 }

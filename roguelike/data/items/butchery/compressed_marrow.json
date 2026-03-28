@@ -1,0 +1,23 @@
+{
+  "id": "compressed_marrow",
+  "name": "Compressed Marrow",
+  "description": "The interior of old bone, densified by whatever process produced what this thing was. Waxy at room temperature. Melts slowly. Burns with a pale flame.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.2,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "bony",
+      "tier": 2
+    },
+    {
+      "tag": "waxy",
+      "tier": 1
+    },
+    {
+      "tag": "resonant",
+      "tier": 1
+    }
+  ]
+}

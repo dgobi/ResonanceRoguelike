@@ -42,9 +42,12 @@ class ItemFactory:
         item.description = defn.get("description", "")
 
         # Consumable properties
-        item.nutrition   = defn.get("nutrition",   None)
-        item.hydration   = defn.get("hydration",   None)
-        item.heal_amount = defn.get("heal_amount", None)
+        item.nutrition    = defn.get("nutrition",    None)
+        item.hydration    = defn.get("hydration",    None)
+        item.heal_amount  = defn.get("heal_amount",  None)
+        item.eat_message  = defn.get("eat_message",  None)
+        item.drink_message = defn.get("drink_message", None)
+        item.harvest_from = defn.get("harvest_from", None)
 
         # Light source properties
         item.burn_turns  = defn.get("burn_turns",  None)
@@ -56,6 +59,9 @@ class ItemFactory:
 
         # Tool qualities
         item.qualities = defn.get("qualities", {})
+
+        # Crafting keyword tags
+        item.keywords = defn.get("keywords", [])
 
         return item
 

@@ -1,0 +1,19 @@
+{
+  "id": "inner_stone_core",
+  "name": "Stone Core",
+  "description": "The dense centre of a stone lurker. Perfectly smooth. The temperature does not change regardless of environment. Something inside it is still completing a function.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 1.2,
+  "stackable": false,
+  "keywords": [
+    {
+      "tag": "bony",
+      "tier": 3
+    },
+    {
+      "tag": "resonant",
+      "tier": 2
+    }
+  ]
+}

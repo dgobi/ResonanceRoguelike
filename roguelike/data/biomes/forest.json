@@ -34,5 +34,6 @@
   "resonance_messages": {
     "moderate": "Something accumulates in the silence here.",
     "high": "The grey stone is close."
-  }
+  },
+  "flint_scatter_rate": 0.002
 }

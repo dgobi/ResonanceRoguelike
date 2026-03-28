@@ -1,10 +1,18 @@
 {
-    "id": "perk_vessel",
-    "name": "Perk Vessel",
-    "description": "A small grey stone, worn smooth. It hums faintly against the palm. Something accumulated here once. It can be directed.",
-    "category": "consumable",
-    "on_use": "grant_perk_point",
-    "weight": 0.1,
-    "essence": "Resonance",
-    "essence_strength": 0.4
+  "id": "perk_vessel",
+  "name": "Perk Vessel",
+  "description": "A small grey stone, worn smooth. It hums faintly against the palm. Something accumulated here once. It can be directed.",
+  "category": "consumable",
+  "on_use": "grant_perk_point",
+  "weight": 0.1,
+  "keywords": [
+    {
+      "tag": "resonant",
+      "tier": 3
+    },
+    {
+      "tag": "vital",
+      "tier": 2
+    }
+  ]
 }

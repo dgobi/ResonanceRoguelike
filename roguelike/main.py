@@ -22,7 +22,6 @@ from engine.item_factory import ItemFactory
 
 WORLD_WIDTH  = 128
 WORLD_HEIGHT = 128
-WORLD_SEED   = 42
 
 
 def main() -> None:
@@ -31,9 +30,30 @@ def main() -> None:
     registry     = TileRegistry("data/tiles.json", mode=display.render_mode)
 
     import random as _random
-    rng           = _random.Random(WORLD_SEED)
+    import json   as _json
+    from pathlib import Path as _Path
+
+    # Determine world seed.
+    # New game: generate a fresh random seed so each world is unique.
+    # Load:     read the stored seed from world.json so regenerated chunks
+    #           are consistent with the original world.
+    _save_world_path = _Path("saves") / "slot_0" / "world.json"
+    if _save_world_path.exists():
+        try:
+            _w = _json.loads(_save_world_path.read_text(encoding="utf-8"))
+            world_seed = int(_w.get("seed", 0)) or _random.randint(0, 2**32 - 1)
+        except Exception:
+            world_seed = _random.randint(0, 2**32 - 1)
+    else:
+        world_seed = _random.randint(0, 2**32 - 1)
+
+    # Seed the global random module as a safety net (generation uses
+    # Random(seed) instances, but this covers any stray global calls).
+    _random.seed(world_seed)
+
+    rng           = _random.Random(world_seed)
     world_map     = WorldMap(WORLD_WIDTH, WORLD_HEIGHT)
-    world_map.seed = WORLD_SEED
+    world_map.seed = world_seed
     world_map     = generate_world(world_map, data, rng)
     start_wx      = world_map.start_wx
     start_wy      = world_map.start_wy
@@ -54,13 +74,19 @@ def main() -> None:
         surface_map = LocalMap(MAP_WIDTH, MAP_HEIGHT)
         start_x, start_y = MAP_WIDTH // 2, MAP_HEIGHT // 2
 
-    # Place 2 waystones within 3-6 tiles of player spawn — establishes the mechanic
+    # Place 1 waystone within 3-6 tiles of player spawn — establishes the mechanic.
+    # Guard: skip if region_gen already placed one (e.g. forest chunk on a road).
     import math as _math
     wt_def = data.terrain.get("waystone_plinth", {})
-    if wt_def:
+    _existing_wt = any(
+        str(surface_map.tiles[_cx, _cy]["terrain"]) == "waystone_plinth"
+        for _cx in range(surface_map.width)
+        for _cy in range(surface_map.height)
+    )
+    if wt_def and not _existing_wt:
         _placed = 0
         _attempts = 0
-        while _placed < 2 and _attempts < 50:
+        while _placed < 1 and _attempts < 50:
             _attempts += 1
             _dist  = rng.randint(3, 6)
             _angle = rng.uniform(0, 2 * _math.pi)
@@ -76,11 +102,10 @@ def main() -> None:
             _placed += 1
 
     player = Actor(x=start_x, y=start_y, tile="player", name="Player")
-    player.fighter    = Fighter(max_hp=30, power=5, defense=1)
     body_def = data.bodies.get("body_player", {})
+    base_hp  = body_def.get("base_hp", 60)
+    player.fighter         = Fighter(max_hp=base_hp, power=5, defense=1)
     player.fighter.body_id = "body_player"
-    if body_def:
-        player.fighter.initialize_from_body(body_def)
     player.needs      = Needs()
     player.corruption = Corruption()
     player.inventory  = Inventory(capacity=20.0)
@@ -88,19 +113,22 @@ def main() -> None:
     player.perks      = Perks()
     player.equipment  = Equipment()
     player.level      = LevelComponent()
-    player.true_sight = False
+    player.true_sight   = False
+    player.dodge_chance = 0.05   # 5% base dodge — read by combat system
 
     # Starting inventory
-    torch       = item_factory.create("tallow_torch")
-    jerky       = item_factory.create("crow_jerky")
-    flask       = item_factory.create("water_flask")
-    crude_blade = item_factory.create("crude_blade")
+    torch        = item_factory.create("tallow_torch")
+    jerky        = item_factory.create("crow_jerky")
+    flask        = item_factory.create("water_flask")
+    crude_blade  = item_factory.create("crude_blade")
     leather_jack = item_factory.create("leather_jack")
+    pebble       = item_factory.create("moist_pebble")   # talisman — for testability
     if torch:        player.inventory.add(torch)
     if jerky:        player.inventory.add(jerky)
     if flask:        player.inventory.add(flask)
     if crude_blade:  player.inventory.add(crude_blade)
     if leather_jack: player.inventory.add(leather_jack)
+    if pebble:       player.inventory.add(pebble)
 
     engine = Engine(
         player=player,
@@ -124,6 +152,13 @@ def main() -> None:
     else:
         # No save: descend directly into the starting lab
         _start_in_lab(engine, surface_map)
+
+    # FOV integrity check — catches silent _compute_fov_base() failures at startup
+    if engine.current_submap_id is None:
+        _test_radius = engine._compute_fov_base()
+        if _test_radius < 3:
+            print(f"[STARTUP WARNING] _compute_fov_base() returned {_test_radius} on surface. FOV may be broken.")
+            print("Check for diagnostic code, file writes, or silent exceptions in _compute_fov_base().")
 
     engine.run()
 
@@ -163,6 +198,9 @@ def _start_in_lab(engine: Engine, surface_map) -> None:
     # Place player at the sarcophagus (player_start in layout)
     engine.player.x = start_sub.entry_x
     engine.player.y = start_sub.entry_y
+
+    # Recompute FOV now that we're on the lab map
+    engine._update_fov()
 
 
 if __name__ == "__main__":

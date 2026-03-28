@@ -81,6 +81,140 @@ def perk_carrion_eye_entity_killed(payload: dict) -> dict | None:
 
 
 # ------------------------------------------------------------------ #
+#  Perk 3 — Marrow Drink (Viscera, cost 2)
+# ------------------------------------------------------------------ #
+
+_BLOOD_TILES: frozenset[str] = frozenset({
+    "blood_pool", "bone_dust", "ectoplasm_pool",
+    "ichor_seep", "verdigris_fluid",
+})
+
+
+def handle_marrow_drink_turn(payload: dict) -> dict | None:
+    """
+    'Something in you has learned to feed. It is not a pleasant thing
+     to have learned.'
+
+    Heals 1 HP per turn while standing on any blood/fluid tile.
+    """
+    engine = payload.get("engine")
+    if engine is None:
+        return None
+    terrain = engine.get_terrain(engine.player.x, engine.player.y)
+    if terrain not in _BLOOD_TILES:
+        return None
+    return {
+        "heal":          1,
+        "add_message":   "The residue enters. A wound closes slightly.",
+        "message_color": BLOOD_STONE,
+    }
+
+
+# ------------------------------------------------------------------ #
+#  Perk 4 — Attuned (Resonance, cost 2)
+# ------------------------------------------------------------------ #
+
+_ATTUNED_THRESHOLD = 0.3
+_ATTUNED_AV_BONUS  = 2
+
+
+def handle_attuned_turn(payload: dict) -> dict | None:
+    """
+    'The stone in your bones remembers the frequency. Blows find less
+     purchase than they should.'
+
+    +2 effective_av while resonance exposure >= 0.3.
+    Applies and removes cleanly as exposure crosses the threshold.
+    """
+    engine = payload.get("engine")
+    if engine is None:
+        return None
+
+    exposure = getattr(engine, "resonance_exposure", 0.0)
+    active   = getattr(engine, "_attuned_bonus_active", False)
+    fighter  = getattr(engine.player, "fighter", None)
+    if fighter is None:
+        return None
+
+    if exposure >= _ATTUNED_THRESHOLD and not active:
+        fighter.effective_av      += _ATTUNED_AV_BONUS
+        engine._attuned_bonus_active = True
+    elif exposure < _ATTUNED_THRESHOLD and active:
+        fighter.effective_av      -= _ATTUNED_AV_BONUS
+        engine._attuned_bonus_active = False
+
+    return None
+
+
+# ------------------------------------------------------------------ #
+#  Perk 5 — The Indifference (Ontology, cost 3)
+# ------------------------------------------------------------------ #
+
+def handle_indifference_turn(payload: dict) -> dict | None:
+    """
+    'You have stopped flinching at what you are becoming. The change
+     moves through you more cleanly now.'
+
+    Each corruption threshold crossed grants +1 flat damage.
+    Recalculated from threshold count every turn — stays correct on load.
+    """
+    engine = payload.get("engine")
+    if engine is None:
+        return None
+    fighter = getattr(engine.player, "fighter", None)
+    if fighter is None:
+        return None
+    thresholds = getattr(engine, "_corruption_thresholds", set())
+    fighter.corruption_damage_bonus = len(thresholds)
+    return None
+
+
+# ------------------------------------------------------------------ #
+#  Perk 6 — Lithic Seep (Creation, cost 2)
+# ------------------------------------------------------------------ #
+
+def handle_lithic_seep_kill(payload: dict) -> dict | None:
+    """
+    'What dies near you leaves a residue. You have learned to fix it
+     in place.'
+
+    On kill, places a resonance_stone at the entity's position as an
+    ephemeral tile. The stone emits resonance and sparkles — it does
+    not persist across chunk exits.
+    """
+    x = payload.get("x")
+    y = payload.get("y")
+    if x is None or y is None:
+        return None
+    return {
+        "place_terrain": {"x": x, "y": y, "terrain_id": "resonance_seep"},
+    }
+
+
+# ------------------------------------------------------------------ #
+#  Stateful perk cleanup — called by _register_player_perks before
+#  clearing handlers, so bonuses don't persist after perk removal.
+# ------------------------------------------------------------------ #
+
+def cleanup_perk_state(engine) -> None:
+    """Remove any transient stat modifications applied by stateful perks."""
+    # Attuned: remove AV bonus if it was active
+    if getattr(engine, "_attuned_bonus_active", False):
+        fighter = getattr(getattr(engine, "player", None), "fighter", None)
+        if fighter is not None:
+            fighter.effective_av -= _ATTUNED_AV_BONUS
+        engine._attuned_bonus_active = False
+
+    # The Indifference: reset corruption damage bonus
+    fighter = getattr(getattr(engine, "player", None), "fighter", None)
+    if fighter is not None and getattr(fighter, "corruption_damage_bonus", 0) != 0:
+        # Only reset if the perk is no longer active
+        perks = getattr(getattr(engine, "player", None), "perks", None)
+        if perks is None or not perks.has_perk("the_indifference"):
+            fighter.corruption_damage_bonus = 0
+
+
+# ------------------------------------------------------------------ #
 #  System handler — EXP on kill (permanent, not a perk handler)
 # ------------------------------------------------------------------ #
 
@@ -148,6 +282,10 @@ def system_exp_on_kill(payload: dict) -> dict | None:
 HANDLER_MAP: dict[str, callable] = {
     "perk_hardened_step_tile_entered":  perk_hardened_step_tile_entered,
     "perk_carrion_eye_entity_killed":   perk_carrion_eye_entity_killed,
+    "handle_marrow_drink_turn":         handle_marrow_drink_turn,
+    "handle_attuned_turn":              handle_attuned_turn,
+    "handle_indifference_turn":         handle_indifference_turn,
+    "handle_lithic_seep_kill":          handle_lithic_seep_kill,
 }
 
 # Tag all handlers so they can be cleared on perk change without

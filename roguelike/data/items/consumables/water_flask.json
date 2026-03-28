@@ -10,7 +10,11 @@
   "hydration": 0.5,
   "liquid": "water",
   "liquid_volume": 0.5,
-  "essence": "Consumption",
-  "essence_strength": 0.2,
+  "keywords": [
+    {
+      "tag": "drinkable",
+      "tier": 1
+    }
+  ],
   "_essence_note": "Water passes through everything. It takes and is taken. The consumption is reciprocal — it feeds and is consumed in the feeding."
 }

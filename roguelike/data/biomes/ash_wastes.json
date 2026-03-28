@@ -34,5 +34,6 @@
   "resonance_messages": {
     "moderate": "The discharge was concentrated here. The ground still holds it.",
     "high": "Maximum saturation. The stones are not dormant \u2014 they are full."
-  }
+  },
+  "flint_scatter_rate": 0.01
 }

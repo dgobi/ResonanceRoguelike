@@ -30,8 +30,16 @@ class DataLoader:
         self.bodies:      dict = self._load_dir("bodies")
         self.deep_tongue:       dict = self._load_deep_tongue()
         self.buildings:         dict = self._load_dir_nested("buildings")
+        self.town_config:       dict = self._load("generation/town_config.json")
+        self._init_building_loader()
         self.resonance_spawns:  list = self._load_list("resonance_spawns.json")
         self.weather_defs:      dict = self._load("weather.json")
+        self.survival:          dict = self._load("survival.json")
+        self.keywords:          dict = self._load("keywords.json")
+        self.ai_config:            dict = self._load("ai_config.json")
+        self.processing_messages:  dict = self._load("processing_messages.json")
+        _decor_list = self._load_list("decoratives.json")
+        self.decoratives: dict = {e["id"]: e for e in _decor_list if "id" in e}
 
     # ------------------------------------------------------------------ #
 
@@ -108,6 +116,18 @@ class DataLoader:
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
         return data if isinstance(data, list) else []
+
+    def _init_building_loader(self) -> None:
+        """Initialise and wire the BuildingLoader singleton in town_gen."""
+        try:
+            from generation.town_gen import BuildingLoader, wire_building_loader
+            loader = BuildingLoader(str(self.root / "buildings"))
+            loader.load()
+            wire_building_loader(loader)
+            self.building_loader = loader
+        except Exception as e:
+            print(f"Warning: BuildingLoader init failed: {e}")
+            self.building_loader = None
 
     def _load_deep_tongue(self) -> dict:
         """Load deep_tongue.json and return a dict keyed by the 'deep' field."""

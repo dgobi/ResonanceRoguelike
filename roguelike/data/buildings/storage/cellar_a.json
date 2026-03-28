@@ -29,6 +29,12 @@
     "#fffff#",
     "###.###"
   ],
-  "special_tiles": [],
+  "special_tiles": [
+    {
+      "x": 1, "y": 3,
+      "type": "item", "item_id": "lab_note", "text_id": "cellar_scratching_a",
+      "note": "Words scratched into the flagstone wall"
+    }
+  ],
   "note": "PLACEHOLDER \u2014 redesign. Flagstone throughout (below-ground feel). Door at (3,5)."
 }

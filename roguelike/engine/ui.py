@@ -132,19 +132,57 @@ class UI:
         line_h = self._font_tiny.get_linesize() if self._font_tiny else 16
         y      = UI_PANEL_INSET
 
-        # --- Row 1: HP bar + time ---
-        self._draw_hp_bar(surf, player, col1_x, y, 200, 14)
+        # --- Row 1: HP bar + EXP bar + time ---
+        _HP_BAR_W  = 200
+        _EXP_BAR_W = 110
+        _BAR_H     = 14
+        self._draw_hp_bar(surf, player, col1_x, y, _HP_BAR_W, _BAR_H)
+        self._draw_exp_bar(surf, player,
+                           col1_x + _HP_BAR_W + 12, y, _EXP_BAR_W, _BAR_H)
         time_str = world_time.status_string
         self._text(surf, time_str, col3_x, y, self.C_TEXT_DIM, self._font_tiny)
         y += line_h
 
-        # --- Row 2: Needs + moon phase ---
+        # --- Row 2: Needs bars + AV + moon phase ---
         needs = getattr(player, "needs", None)
         if needs:
-            hunger_str = f"Hunger: {needs.hunger_state}"
-            thirst_str = f"Thirst: {needs.thirst_state}"
-            self._text(surf, hunger_str, col1_x, y, self.C_HUNGER, self._font_tiny)
-            self._text(surf, thirst_str, col2_x, y, self.C_THIRST, self._font_tiny)
+            _BAR_W = 60
+            _BAR_H = 8
+            _bar_y = y + (line_h - _BAR_H) // 2
+
+            # Hunger bar — colour shifts with severity
+            if needs.hunger >= 0.80:
+                h_color = FRESH_WOUND
+            elif needs.hunger >= 0.30:
+                h_color = OLD_GOLD
+            else:
+                h_color = EARTH_TONE
+            h_label = needs.hunger_state
+            self._text(surf, h_label, col1_x, y, h_color, self._font_tiny)
+            h_label_w = self._font_tiny.size(h_label)[0] + 4 if self._font_tiny else 50
+            h_frac = 1.0 - needs.hunger  # full bar = not hungry
+            self._draw_need_bar(surf, col1_x + h_label_w, _bar_y, _BAR_W, _BAR_H,
+                                h_frac, h_color)
+
+            # Thirst bar — colour shifts with severity
+            if needs.thirst >= 0.81:
+                t_color = FRESH_WOUND
+            elif needs.thirst >= 0.25:
+                t_color = OLD_GOLD
+            else:
+                t_color = STEEL_WATER
+            t_label = needs.thirst_state
+            self._text(surf, t_label, col2_x, y, t_color, self._font_tiny)
+            t_label_w = self._font_tiny.size(t_label)[0] + 4 if self._font_tiny else 50
+            t_frac = 1.0 - needs.thirst
+            self._draw_need_bar(surf, col2_x + t_label_w, _bar_y, _BAR_W, _BAR_H,
+                                t_frac, t_color)
+        fighter = getattr(player, "fighter", None)
+        if fighter:
+            av = getattr(fighter, "effective_av", 0)
+            av_str = f"AV:{av}"
+            av_x = col3_x - (self._font_tiny.size(av_str)[0] + 6) if self._font_tiny else col3_x
+            self._text(surf, av_str, av_x, y, self.C_TEXT_DIM, self._font_tiny)
         moon_str = world_time.moon_string
         self._text(surf, moon_str, col3_x, y, self.C_TEXT_DIM, self._font_tiny)
         y += line_h
@@ -293,12 +331,47 @@ class UI:
         rendered = f.render(text, True, color)
         surf.blit(rendered, (x, y))
 
+    # HP bands shown in non-debug mode (fraction threshold → label, colour)
+    _HP_BANDS = [
+        (0.90, "Unharmed",    WORN_STONE),
+        (0.60, "Bloodied",    OLD_GOLD),
+        (0.35, "Wounded",     DUSTY_ROSE),
+        (0.15, "Grievous",    DRIED_BLOOD),
+        (0.00, "Death's door", FRESH_WOUND),
+    ]
+
+    def _draw_bar(
+        self, surf: pygame.Surface,
+        x: int, y: int, width: int, height: int,
+        frac: float,
+        fill_color: tuple,
+        label: str,
+    ) -> None:
+        """Draw a generic progress bar with a text label overlaid."""
+        pygame.draw.rect(surf, self.C_BAR_BG, (x, y, width, height))
+        fill_w = max(1, int(width * max(0.0, min(1.0, frac))))
+        pygame.draw.rect(surf, fill_color, (x, y, fill_w, height))
+        pygame.draw.rect(surf, self.C_BORDER, (x, y, width, height), 1)
+        if label and self._font_tiny:
+            self._text(surf, label, x + 4, y + 1, self.C_TEXT, self._font_tiny)
+
+    def _draw_need_bar(
+        self, surf: pygame.Surface,
+        x: int, y: int, width: int, height: int,
+        frac: float,
+        fill_color: tuple,
+    ) -> None:
+        """Draw a small needs bar (no label). frac=1.0 is full/safe."""
+        pygame.draw.rect(surf, self.C_BAR_BG, (x, y, width, height))
+        fill_w = max(1, int(width * max(0.0, min(1.0, frac))))
+        pygame.draw.rect(surf, fill_color, (x, y, fill_w, height))
+        pygame.draw.rect(surf, self.C_BORDER, (x, y, width, height), 1)
+
     def _draw_hp_bar(self, surf, player, x, y, width, height):
         fighter = getattr(player, "fighter", None)
         if not fighter:
             return
-
-        pygame.draw.rect(surf, self.C_BAR_BG, (x, y, width, height))
+        from config import DEBUG_MODE as _DM
 
         frac = fighter.hp_fraction
         if self._damage_flash > 0:
@@ -309,12 +382,23 @@ class UI:
         else:
             color = self.C_HP_LOW
 
-        fill_w = max(1, int(width * frac))
-        pygame.draw.rect(surf, color, (x, y, fill_w, height))
-        pygame.draw.rect(surf, self.C_BORDER, (x, y, width, height), 1)
+        if _DM:
+            label = f"HP {fighter.hp}/{fighter.max_hp}"
+        else:
+            label = next(
+                (lbl for thr, lbl, _ in self._HP_BANDS if frac >= thr),
+                "Death's door",
+            )
 
-        hp_text = f"HP {fighter.hp}/{fighter.max_hp}"
-        self._text(surf, hp_text, x + 4, y + 1, self.C_TEXT, self._font_tiny)
+        self._draw_bar(surf, x, y, width, height, frac, color, label)
+
+    def _draw_exp_bar(self, surf, player, x, y, width, height):
+        lv = getattr(player, "level", None)
+        if not lv:
+            return
+        frac = lv.exp / lv.exp_to_next if lv.exp_to_next > 0 else 0.0
+        label = f"Lv{lv.level}"
+        self._draw_bar(surf, x, y, width, height, frac, RESONANCE_GOLD, label)
 
     def notify_damage(self) -> None:
         """Call when player takes damage to trigger HP bar flash."""

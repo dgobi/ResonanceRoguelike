@@ -11,5 +11,6 @@
   "damage_bonus": 0,
   "essence": "Dissolution",
   "essence_strength": 0.5,
-  "on_use": "equip_toggle"
+  "on_use": "equip_toggle",
+  "keywords": [{"tag": "cutting", "tier": 2}, {"tag": "corrosive", "tier": 2}]
 }

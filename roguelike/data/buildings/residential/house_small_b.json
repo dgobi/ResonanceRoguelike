@@ -31,6 +31,12 @@
     "#.....w#",
     "###.####"
   ],
-  "special_tiles": [],
+  "special_tiles": [
+    {
+      "x": 2, "y": 1,
+      "type": "item", "item_id": "lab_note", "text_id": "family_record_a",
+      "note": "A family record book, left open near the hearth"
+    }
+  ],
   "note": "PLACEHOLDER \u2014 redesign layers to taste. Door at (3,6) faces south street."
 }

@@ -19,6 +19,7 @@ class TownData:
     bell_tower_pos:  tuple[int, int] | None = None
     buildings:       list[dict] = field(default_factory=list)
     creature_spawns: list[dict] = field(default_factory=list)  # [{creature_id, x, y}, ...]
+    item_spawns:     list[dict] = field(default_factory=list)  # [{kind, item_id, text_id, x, y}, ...]
 
 
 class RegionType(enum.Enum):

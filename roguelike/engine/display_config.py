@@ -177,15 +177,17 @@ class DisplayConfig:
         CALLOUT_CREATURE_SIZE = 11
         CALLOUT_CRIT_SIZE     = 18
 
-        self.font_callout_damage   = pygame.font.Font(base, CALLOUT_DAMAGE_SIZE)
-        self.font_callout_status   = pygame.font.Font(base, CALLOUT_STATUS_SIZE)
-        self.font_callout_creature = pygame.font.Font(base, CALLOUT_CREATURE_SIZE)
+        self.font_callout_damage   = pygame.font.Font(bold, CALLOUT_DAMAGE_SIZE)
+        self.font_callout_status   = pygame.font.Font(bold, CALLOUT_STATUS_SIZE)
+        self.font_callout_creature = pygame.font.Font(bold, CALLOUT_CREATURE_SIZE)
         self.font_callout_crit     = pygame.font.Font(bold, CALLOUT_CRIT_SIZE)
+        self.font_callout_levelup  = pygame.font.Font(bold, 21)
         self.CALLOUT_FONTS = {
             "damage":   self.font_callout_damage,
             "status":   self.font_callout_status,
             "creature": self.font_callout_creature,
             "crit":     self.font_callout_crit,
+            "levelup":  self.font_callout_levelup,
             "small":    self.font_callout_damage,    # alias
             "tiny":     self.font_callout_creature,  # alias
         }

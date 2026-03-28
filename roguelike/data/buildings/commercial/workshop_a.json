@@ -33,6 +33,12 @@
     "#..........#",
     "#####..#####"
   ],
-  "special_tiles": [],
+  "special_tiles": [
+    {
+      "x": 1, "y": 1,
+      "type": "item", "item_id": "lab_note", "text_id": "apothecary_notes_a",
+      "note": "Notes on the worn stone work surface"
+    }
+  ],
   "note": "PLACEHOLDER \u2014 redesign. Double door at (5,8)+(6,8). Work surfaces = worn_stone corners."
 }

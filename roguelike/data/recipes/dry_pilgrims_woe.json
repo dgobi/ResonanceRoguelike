@@ -1,0 +1,14 @@
+{
+  "id": "dry_pilgrims_woe",
+  "name": "dry pilgrim's woe",
+  "description": "Press the petals flat and leave them. The medicinal compounds strengthen as they dry.",
+  "known": true,
+  "components": [
+    {"tag": "fibrous", "min_tier": 1, "quantity": 1},
+    {"tag": "aromatic", "min_tier": 1, "quantity": 1}
+  ],
+  "result_item": "dried_pilgrims_woe",
+  "passive_processing": true,
+  "processing_turns": 30,
+  "processing_source": "drying"
+}

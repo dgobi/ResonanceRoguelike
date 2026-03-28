@@ -1,0 +1,19 @@
+{
+    "id": "attuned",
+    "name": "Attuned",
+    "description": "The stone in your bones remembers the frequency. Blows find less purchase than they should.",
+    "category": "Resonance",
+    "cost": 2,
+    "effects": [
+        "While resonance exposure is above 0.3, effective AV increases by 2.",
+        "Drops immediately when exposure falls below threshold."
+    ],
+    "hooks": [
+        {
+            "event": "ON_TURN",
+            "handler": "handle_attuned_turn"
+        }
+    ],
+    "conflicts": [],
+    "requires": []
+}

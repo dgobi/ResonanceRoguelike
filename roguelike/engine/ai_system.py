@@ -99,3 +99,54 @@ class AISystem:
                 ambient_light = intensity,
                 engine        = engine,
             )
+
+    def process_single(
+        self,
+        entity,
+        local_map,
+        player_x:      int,
+        player_y:      int,
+        entities:      list,
+        log,
+        ambient_light: float = 1.0,
+        engine=None,
+    ) -> None:
+        """Tick a single entity with explicit player coordinates.
+
+        Used by _tick_live_pursuers() to advance pursuing entities that are
+        not in the player's current chunk.  A phantom player is placed at
+        (player_x, player_y) with fighter=None so attacks are no-ops.
+        """
+        from types import SimpleNamespace
+
+        ai = getattr(entity, "ai", None)
+        if ai is None:
+            return
+        if not getattr(entity, "is_alive", True):
+            return
+
+        phantom = SimpleNamespace(
+            x               = player_x,
+            y               = player_y,
+            is_alive        = True,
+            fighter         = None,
+            _in_concealment = False,
+            blocks_movement = False,
+            tile            = "",
+            name            = "__live_pursuer_target__",
+        )
+
+        if engine is not None:
+            from engine.creature_abilities import process_abilities
+            process_abilities(entity, engine)
+
+        ai.take_turn(
+            actor         = entity,
+            local_map     = local_map,
+            entities      = entities,
+            player        = phantom,
+            log           = log,
+            rng           = self._rng,
+            ambient_light = ambient_light,
+            engine        = engine,
+        )

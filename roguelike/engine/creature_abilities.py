@@ -13,8 +13,11 @@ def process_abilities(entity: "Actor", engine: "Engine") -> None:
     """
     Process passive and triggered abilities for a creature.
     Called each turn the creature takes an action, before movement.
+    Uses _creature_id (set at spawn) as the stable registry key so that
+    creatures whose tile changes (e.g. stone_lurker → rock) keep their ability.
     """
-    ability_fn = ABILITY_REGISTRY.get(entity.tile)
+    key = getattr(entity, "_creature_id", entity.tile)
+    ability_fn = ABILITY_REGISTRY.get(key)
     if ability_fn:
         ability_fn(entity, engine)
 
@@ -25,18 +28,21 @@ def process_abilities(entity: "Actor", engine: "Engine") -> None:
 
 def _ability_bog_wraith(entity: "Actor", engine: "Engine") -> None:
     """
-    Proximity to the wraith interferes with perception (radius 8).
+    Proximity to the wraith interferes with perception.
+    Drain radius is read from ability_range in the creature JSON
+    (same value as sight_radius — awareness and drain activate together).
     Penalty is recalculated inside _update_fov() on every FOV call —
     this ability only manages the atmospheric message threshold.
     On wraith death: brief FOV overcorrection (+3 for 3 turns).
     """
+    drain_radius = engine.data.entities.get("bog_wraith", {}).get("ability_range", 8)
     player = engine.player
     dist = math.sqrt(
         (entity.x - player.x) ** 2 +
         (entity.y - player.y) ** 2
     )
 
-    penalty = max(0, int(8 - dist)) if dist <= 8 else 0
+    penalty = max(0, int(drain_radius - dist)) if dist <= drain_radius else 0
 
     warned = getattr(player, "_wraith_warned", False)
     if penalty >= 4 and not warned:

@@ -49,6 +49,7 @@ class CalloutSystem:
         color:     tuple[int, int, int],
         lifetime:  float = 1.5,
         font_size: str   = "damage",
+        vy:        float = -28.0,
     ) -> None:
         """Spawn a new callout. Silently dropped if cap is reached."""
         if len(self._callouts) < self.MAX:
@@ -60,6 +61,7 @@ class CalloutSystem:
                 r=r, g=g, b=b,
                 lifetime=lifetime,
                 max_lifetime=lifetime,
+                vy=vy,
                 font_size=font_size,
             ))
 

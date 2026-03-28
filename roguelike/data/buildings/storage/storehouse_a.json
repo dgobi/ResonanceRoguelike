@@ -1,0 +1,36 @@
+{
+  "id": "storehouse_a",
+  "category": "storage",
+  "width": 14,
+  "height": 7,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {"storage": 5, "market": 2, "residential": 1},
+  "interior_loot_table": "storage_common",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "##############",
+    "#............#",
+    "#.w........w.#",
+    "#............#",
+    "#............#",
+    "#.w........w.#",
+    "#####+++#+####"
+  ],
+  "decor_layer": [
+    [null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+    [null,null,"decor_barrel",null,null,null,null,null,null,null,null,"decor_barrel",null,null],
+    [null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null,null,null,null,null]
+  ],
+  "note": "A working storehouse. Long rectangular plan with pillar supports at corners. Two barrels stand against the north wall. Wide double doors open south for cart access."
+}

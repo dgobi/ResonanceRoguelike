@@ -1,0 +1,127 @@
+{
+  "cutting": {
+    "display": "cutting",
+    "color": "COMBAT_OUTGOING",
+    "description": "An edge. Separates things."
+  },
+  "binding": {
+    "display": "binding",
+    "color": "RESONANCE_LOW",
+    "description": "Holds form. Resists dissolution."
+  },
+  "fuel": {
+    "display": "fuel",
+    "color": "COMBAT_CRIT",
+    "description": "Burns. Sustains fire."
+  },
+  "edible": {
+    "display": "edible",
+    "color": "BIOME_FOREST",
+    "description": "Can be eaten. Nutritional value varies."
+  },
+  "drinkable": {
+    "display": "drinkable",
+    "color": "OVERMAP_RIVER",
+    "description": "Liquid. Addresses thirst."
+  },
+  "resonant": {
+    "display": "resonant",
+    "color": "RESONANCE_HIGH",
+    "description": "Tuned to grey stone. Handle with care."
+  },
+  "vital": {
+    "display": "vital",
+    "color": "BLOOD_RED",
+    "description": "Living tissue. Quickening essence."
+  },
+  "corrosive": {
+    "display": "corrosive",
+    "color": "CORRUPTION_COLOUR",
+    "description": "Breaks down structure. Dissolves."
+  },
+  "soporific": {
+    "display": "soporific",
+    "color": "UI_TEXT_DIM",
+    "description": "Dulls. Induces sleep or stupor."
+  },
+  "purgative": {
+    "display": "purgative",
+    "color": "COMBAT_INCOMING",
+    "description": "Violent cleansing. Expels what should not be."
+  },
+  "bitter": {
+    "display": "bitter",
+    "color": "BIOME_PLAINS",
+    "description": "Alchemical base note. Preserves."
+  },
+  "waxy": {
+    "display": "waxy",
+    "color": "BELL_COLOUR",
+    "description": "Seals surfaces. Slow burn."
+  },
+  "fibrous": {
+    "display": "fibrous",
+    "color": "BIOME_FOREST",
+    "description": "Structural. Can be twisted or woven."
+  },
+  "bony": {
+    "display": "bony",
+    "color": "BLOOD_BONE_DUST",
+    "description": "Calcium and resonance. Carries origin."
+  },
+  "viscous": {
+    "display": "viscous",
+    "color": "BLOOD_ICHOR",
+    "description": "Thick fluid. Coats and adheres."
+  },
+  "malleable": {
+    "display": "malleable",
+    "color": "EARTH_TONE",
+    "description": "Yields to pressure. Can be shaped."
+  },
+  "vessel": {
+    "display": "vessel",
+    "color": "WORN_STONE",
+    "description": "Holds things. Contains without reacting."
+  },
+  "heatproof": {
+    "display": "heatproof",
+    "color": "FORGE_FIRE",
+    "description": "Does not crack or burn. Survives direct flame."
+  },
+  "alchemical": {
+    "display": "alchemical",
+    "color": "RESONANCE_MID",
+    "description": "Prepared. Essence has been concentrated or altered."
+  },
+  "volatile": {
+    "display": "volatile",
+    "color": "RESONANCE_HIGH",
+    "description": "Unstable. Reacts unpredictably under heat or pressure."
+  },
+  "solvent": {
+    "display": "solvent",
+    "color": "OVERMAP_RIVER",
+    "description": "Dissolves. Extracts essence from material when applied."
+  },
+  "fixative": {
+    "display": "fixative",
+    "color": "BELL_COLOUR",
+    "description": "Stabilises preparations. Prevents decay or evaporation."
+  },
+  "caustic": {
+    "display": "caustic",
+    "color": "CORRUPTION_COLOUR",
+    "description": "Burns and corrodes on contact. Handle with care."
+  },
+  "inert": {
+    "display": "inert",
+    "color": "SLATE_MID",
+    "description": "Does not react. Neutral carrier or preservative base."
+  },
+  "aromatic": {
+    "display": "aromatic",
+    "color": "LIFE_GREEN",
+    "description": "Strong scent. Carries volatile compounds."
+  }
+}

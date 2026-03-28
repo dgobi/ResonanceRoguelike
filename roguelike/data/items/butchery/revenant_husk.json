@@ -1,0 +1,19 @@
+{
+  "id": "revenant_husk",
+  "name": "Revenant Husk",
+  "description": "The shell. The thing that wore it has come apart. The husk retains the shape of something human without being one. Useful to those who understand why shells hold their form.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.3,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "bony",
+      "tier": 1
+    },
+    {
+      "tag": "resonant",
+      "tier": 1
+    }
+  ]
+}

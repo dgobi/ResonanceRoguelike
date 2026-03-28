@@ -53,21 +53,21 @@ class CreatureFactory:
             tile = defn.get("tile", "hollow_knight"),
             name = defn.get("name", creature_id),
         )
-        actor.is_alive = True
+        actor.is_alive    = True
+        actor._creature_id = creature_id  # stable; never changes even if tile changes
 
-        # Fighter component
-        f = defn.get("fighter", {})
-        if f:
-            actor.fighter = Fighter(
-                max_hp  = f.get("max_hp",  10),
-                power   = f.get("power",   3),
-                defense = f.get("defense", 0),
-            )
-            body_id  = defn.get("body_id", "body_human")
-            body_def = self.data.bodies.get(body_id, {})
-            actor.fighter.body_id = body_id
-            if body_def:
-                actor.fighter.initialize_from_body(body_def)
+        # Fighter component — hp from base_hp in creature JSON (preferred) or fighter block
+        f        = defn.get("fighter", {})
+        base_hp  = defn.get("base_hp", f.get("max_hp", 10))
+        body_id  = defn.get("body_id", "body_human")
+        actor.fighter = Fighter(
+            max_hp  = base_hp,
+            power   = f.get("power",   3),
+            defense = f.get("defense", 0),
+        )
+        actor.fighter.body_id    = body_id
+        actor.fighter.body_limbs = defn.get("limbs", [])
+        actor.fighter.effective_av = defn.get("armour_value", 0)
 
         # Perception component
         p = defn.get("perception", {})

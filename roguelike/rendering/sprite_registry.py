@@ -242,3 +242,29 @@ class SpriteRegistry:
             return raw
 
         return pygame.transform.scale(raw, (tw * zoom, th * zoom))
+
+    def get_at_coords(
+        self,
+        sheet_id: str,
+        col:      int,
+        row:      int,
+        zoom:     int = 1,
+    ) -> pygame.Surface | None:
+        """
+        Return a raw sprite surface directly by sheet + col + row.
+        Used for entities that store their own sprite coordinates
+        (e.g. corpses) rather than a registry tile_id.
+        """
+        if not self._loaded:
+            return None
+        sheet = self._sheets.get(sheet_id)
+        if not sheet:
+            return None
+        raw = sheet.get_tile(col, row)
+        if raw is None:
+            return None
+        if zoom == 1:
+            return raw
+        tw = sheet.tile_w
+        th = sheet.tile_h
+        return pygame.transform.scale(raw, (tw * zoom, th * zoom))

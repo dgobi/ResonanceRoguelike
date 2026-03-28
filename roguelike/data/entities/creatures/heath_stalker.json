@@ -4,27 +4,118 @@
   "description": "It moves low across the open ground, using the horizon. You see it only when it has already decided to close the distance.",
   "tile": "heath_stalker",
   "blocks_movement": true,
-  "fighter": { "max_hp": 10, "power": 4, "defense": 1 },
+  "base_hp": 16,
+  "armour_value": 2,
+  "fighter": {
+    "max_hp": 16,
+    "power": 4,
+    "defense": 1
+  },
   "perception": {
-    "sight_radius": 12, "hearing_radius": 6,
-    "sees_in_dark": false, "faction": "predator", "hostile_to": ["player"]
+    "sight_radius": 12,
+    "hearing_radius": 6,
+    "sees_in_dark": false,
+    "faction": "predator",
+    "hostile_to": [
+      "player"
+    ]
   },
   "ai_type": "wandering",
   "wander_radius": 14,
-  "spawn_zones": ["heath", "highstone"],
+  "can_cross_chunks": true,
+  "can_use_stairs": true,
+  "pursuit_timeout": 20,
+  "spawn_zones": [
+    "heath",
+    "highstone"
+  ],
   "damage_dice": "1d6",
   "damage_bonus": 0,
-  "body_id": "body_heath_stalker",
   "essence_modifiers": {
-    "Dissolution": 1.0, "Quickening": 1.0, "Binding": 1.2,
-    "Severance": 1.0, "Consumption": 1.3, "Revelation": 0.8
+    "Dissolution": 1.0,
+    "Quickening": 1.0,
+    "Binding": 1.2,
+    "Severance": 1.0,
+    "Consumption": 1.3,
+    "Revelation": 0.8
   },
   "attack_verb": "lunges at thee",
   "blood_type": "red",
-  "corpse_sprite": {"col": 2055, "row": 0},
+  "limbs": [
+    {
+      "id": "head",
+      "size": 1,
+      "damage_multiplier": 1.5
+    },
+    {
+      "id": "torso",
+      "size": 5,
+      "damage_multiplier": 1.0
+    },
+    {
+      "id": "forelegs",
+      "size": 2,
+      "damage_multiplier": 0.8
+    },
+    {
+      "id": "hindlegs",
+      "size": 2,
+      "damage_multiplier": 0.8
+    }
+  ],
+  "butcher_yield": {
+    "decay_turns": 150,
+    "tiers": [
+      {
+        "min_cutting_tier": 1,
+        "yields": [
+          {"item_id": "stalker_meat", "quantity_min": 1, "quantity_max": 3},
+          {"item_id": "animal_sinew", "quantity_min": 1, "quantity_max": 2},
+          {"item_id": "animal_bone",  "quantity_min": 1, "quantity_max": 2},
+          {"item_id": "crude_viscera","quantity_min": 0, "quantity_max": 1}
+        ]
+      },
+      {
+        "min_cutting_tier": 2,
+        "yields": [
+          {"item_id": "stalker_meat",       "quantity_min": 2, "quantity_max": 4},
+          {"item_id": "animal_sinew",       "quantity_min": 2, "quantity_max": 3},
+          {"item_id": "animal_bone",        "quantity_min": 2, "quantity_max": 3},
+          {"item_id": "crude_viscera",      "quantity_min": 1, "quantity_max": 1},
+          {"item_id": "stalker_musk_gland", "quantity_min": 0, "quantity_max": 1}
+        ]
+      }
+    ]
+  },
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  },
   "callout_sounds": {
-    "on_spot":   {"text": "sss",  "color": [188, 89,  96]},
-    "on_attack": {"text": "hss",  "color": [188, 89,  96]},
-    "on_death":  {"text": "hrk",  "color": [145, 58,  82]}
+    "on_spot": {
+      "text": "sss",
+      "color": [
+        188,
+        89,
+        96
+      ]
+    },
+    "on_attack": {
+      "text": "hss",
+      "color": [
+        188,
+        89,
+        96
+      ]
+    },
+    "on_death": {
+      "text": "hrk",
+      "color": [
+        145,
+        58,
+        82
+      ]
+    }
   }
 }

@@ -1,0 +1,15 @@
+{
+  "id": "animal_bone",
+  "name": "Bone",
+  "description": "Clean or close to it. The resonance content varies by source. A craftsman would weigh it before deciding what to do with it.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.2,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "bony",
+      "tier": 1
+    }
+  ]
+}

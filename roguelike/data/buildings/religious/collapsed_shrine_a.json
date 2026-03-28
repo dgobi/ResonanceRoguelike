@@ -1,0 +1,37 @@
+{
+  "id": "collapsed_shrine_a",
+  "category": "religious",
+  "width": 10,
+  "height": 8,
+  "facing": "south",
+  "condition": "ruined",
+  "district_weights": {"religious": 4, "ruins": 2},
+  "interior_loot_table": "shrine_ruins",
+  "legend": {
+    "#": "wall",
+    ".": "worn_stone",
+    "r": "rock",
+    " ": null
+  },
+  "layers": [
+    "##########",
+    "#.r......#",
+    "#........#",
+    "#..r.r...#",
+    "##.....r.#",
+    " #..r....#",
+    " #.......r",
+    " ###  ### "
+  ],
+  "decor_layer": [
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,"decor_bone_pile",null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null]
+  ],
+  "note": "A collapsed shrine. Three walls standing, south face open and scattered. Bone piles suggest the site served as a resting place for the faithful."
+}

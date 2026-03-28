@@ -1,0 +1,31 @@
+{
+  "id": "murk_violet_stem",
+  "name": "murk violet stem",
+  "description": "A dark stem from the murk violet. The petals have been stripped. The remaining stalk is fibrous, faintly damp, and smells of marsh water.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.03,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 10,
+  "eat_message": "Faintly sweet and then sour. Something in it pulls at the back of the jaw.",
+  "harvest_from": "flower_murk_violet",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "soporific",
+      "tier": 1
+    },
+    {
+      "tag": "aromatic",
+      "tier": 1
+    },
+    {
+      "tag": "volatile",
+      "tier": 1
+    }
+  ]
+}

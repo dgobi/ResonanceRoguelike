@@ -7,8 +7,16 @@
   "weight": 0.2,
   "stackable": true,
   "on_use": "eat",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 2
+    },
+    {
+      "tag": "bitter",
+      "tier": 1
+    }
+  ],
   "nutrition": 0.35,
-  "essence": "Consumption",
-  "essence_strength": 0.2,
   "_essence_note": "Something ate the crow. The crow ate other things. The consumption is layered. Dried meat carries the property of what it was."
 }

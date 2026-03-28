@@ -1,0 +1,9 @@
+{
+  "id": "herbalist_scrap_a",
+  "title": "A Herbalist's Working Notes",
+  "type": "note",
+  "condition": "stained",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Coldbell: do not dry indoors. The smell accumulates. Hang outside only.\n\nPilgrim's woe: roots no good. Petals only. Wash three times.\n\nMurk violet: twelve bundles ordered, I have six. The marsh is lower than usual. Going back tomorrow.\n\n[Tomorrow's entry is blank.]", "damaged": false}]
+}

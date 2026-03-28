@@ -201,6 +201,15 @@ def _generate_submap_from_layout(
     entry_x = origin_x + ps["x"]
     entry_y = origin_y + ps["y"]
 
+    # Place a candle near the player start in the starting lab
+    if getattr(submap, "layout_id", None) == "starting_lab":
+        from generation.decor_utils import place_decor
+        for dx, dy in ((1, 0), (0, 1), (-1, 0), (0, -1)):
+            cx, cy = entry_x + dx, entry_y + dy
+            if local_map.in_bounds(cx, cy) and local_map.walkable[cx, cy]:
+                place_decor(local_map, cx, cy, "decor_candle")
+                break
+
     # If stairs_up not in layout, place via exit_direction fallback
     if stairs_up_pos is None:
         exit_dir = layout.get("exit_direction", "south")

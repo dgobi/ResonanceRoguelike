@@ -1,0 +1,99 @@
+[
+  {
+    "id": "decor_candle",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A stub of tallow, burned low.",
+    "visual_fx": "flame_low"
+  },
+  {
+    "id": "decor_barrel",
+    "ascii": "0",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A cask, staved and empty."
+  },
+  {
+    "id": "decor_bone_pile",
+    "ascii": "%",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Old bones. No orientation to any stone."
+  },
+  {
+    "id": "decor_flower_pot",
+    "ascii": "\"",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Cracked clay. Something grey still grows."
+  },
+  {
+    "id": "decor_hanging_cloth",
+    "ascii": "|",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Cloth hung from a beam. The pattern is gone."
+  },
+  {
+    "id": "campfire_unlit",
+    "ascii": "*",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A ring of stones with wood laid within. Unlit.",
+    "interactable": "light_campfire"
+  },
+  {
+    "id": "campfire_lit",
+    "ascii": "*",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A ring of stones. Fire within.",
+    "interactable": "extinguish_campfire",
+    "warmth_radius": 3,
+    "visual_fx": "flame_med"
+  },
+  {
+    "id": "blood_pool",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Blood, dark and pooled."
+  },
+  {
+    "id": "bone_dust",
+    "ascii": ".",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Pale residue. The bone has given up its shape."
+  },
+  {
+    "id": "ectoplasm_pool",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A slick of something cold. Faintly luminous."
+  },
+  {
+    "id": "ichor_seep",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Dark fluid, slow-moving. The smell is wrong."
+  },
+  {
+    "id": "verdigris_fluid",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Green-black fluid. Corroded where it settles."
+  },
+  {
+    "id": "corpse",
+    "ascii": "%",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Something that was a creature. Already cooling.",
+    "interactable": "butcher"
+  }
+]

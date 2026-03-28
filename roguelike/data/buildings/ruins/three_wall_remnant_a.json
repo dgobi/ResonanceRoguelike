@@ -1,0 +1,25 @@
+{
+  "id": "three_wall_remnant_a",
+  "category": "ruins",
+  "width": 8,
+  "height": 6,
+  "facing": "south",
+  "condition": "ruined",
+  "district_weights": {"ruins": 5, "religious": 1, "wilderness": 1},
+  "interior_loot_table": null,
+  "legend": {
+    "#": "wall",
+    ".": "worn_stone",
+    "r": "rock",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#......#",
+    "#......#",
+    "#.....r#",
+    "#....r.r",
+    "#.r.    "
+  ],
+  "note": "Three walls standing. The south-east corner is gone. Rock scattered where the fourth wall collapsed outward. No door — there is no frame left to hang one from."
+}

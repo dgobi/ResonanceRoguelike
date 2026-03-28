@@ -90,6 +90,23 @@ class ChunkCache:
 
         return None
 
+    def store_hot_only(
+        self,
+        wx:        int,
+        wy:        int,
+        local_map: "LocalMap",
+        entities:  list["Actor"],
+    ) -> None:
+        """Update hot cache only — no disk write. Used for adjacent-chunk ticking."""
+        entity_dicts = [
+            _serialize_entity(e) for e in entities
+            if not _is_player(e)
+        ]
+        self.hot[(wx, wy)] = CachedChunk(
+            local_map = local_map,
+            entities  = entity_dicts,
+        )
+
     def evict_distant(self, player_wx: int, player_wy: int) -> None:
         """
         Move chunks far from the player out of hot cache to disk.
@@ -299,6 +316,7 @@ def _serialize_town_data(td) -> dict | None:
         "bell_tower_pos":  list(td.bell_tower_pos) if td.bell_tower_pos else None,
         "buildings":       td.buildings,
         "creature_spawns": td.creature_spawns,
+        "item_spawns":     td.item_spawns,
     }
 
 
@@ -422,6 +440,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
                 bell_tower_pos  = tuple(td_raw["bell_tower_pos"]) if td_raw.get("bell_tower_pos") else None,
                 buildings       = td_raw.get("buildings", []),
                 creature_spawns = td_raw.get("creature_spawns", []),
+                item_spawns     = td_raw.get("item_spawns", []),
             )
         # Restore edge connectors
         for edge, connectors in cdata.get("edges", {}).items():
@@ -490,18 +509,16 @@ def _serialize_player(engine: "Engine") -> dict:
         "current_submap_id":  engine.current_submap_id,
         "surface_return_x":   engine.surface_return_x,
         "surface_return_y":   engine.surface_return_y,
-        "true_sight": getattr(p, "true_sight", False),
+        "true_sight":   getattr(p, "true_sight",   False),
+        "dodge_chance": getattr(p, "dodge_chance", 0.05),
         "turn":      engine.world_time.turn,
         "fighter": {
-            "hp":          fighter.hp,
-            "max_hp":      fighter.max_hp,
-            "power":       fighter.power,
-            "defense":     fighter.defense,
-            "body_id":     fighter.body_id,
-            "location_hp": fighter.location_hp,
-            "location_max":fighter.location_max,
-            "impairments": list(fighter.impairments),
-            "armor_layers":fighter.armor_layers,
+            "hp":           fighter.hp,
+            "max_hp":       fighter.max_hp,
+            "power":        fighter.power,
+            "defense":      fighter.defense,
+            "body_id":      fighter.body_id,
+            "effective_av": fighter.effective_av,
         } if fighter else None,
         "needs": {
             "hunger": needs.hunger,
@@ -514,13 +531,14 @@ def _serialize_player(engine: "Engine") -> dict:
             "capacity": inv.capacity,
             "items": [
                 {
-                    "item_id":      i.item_id,
-                    "name":         i.name,
-                    "on_use":       i.on_use,
-                    "turns_lit":    i.turns_lit,
-                    "liquid":       i.liquid,
-                    "liquid_volume": i.liquid_volume,
-                    "text_id":      getattr(i, "text_id", None),
+                    "item_id":           i.item_id,
+                    "name":              i.name,
+                    "on_use":            i.on_use,
+                    "turns_lit":         i.turns_lit,
+                    "liquid":            i.liquid,
+                    "liquid_volume":     i.liquid_volume,
+                    "text_id":           getattr(i, "text_id", None),
+                    "temporary_essence": getattr(i, "temporary_essence", []) or None,
                 }
                 for i in inv.items
                 if getattr(i, "item_id", "")
@@ -561,6 +579,10 @@ def _serialize_player(engine: "Engine") -> dict:
             "thresholds": list(getattr(engine, "_corruption_thresholds", set())),
         },
         "weather": getattr(engine, "weather", None) and engine.weather.to_dict(),
+        "live_pursuers": [
+            {"entity": _serialize_entity(e), "wx": wx, "wy": wy, "submap_id": sub_id}
+            for e, wx, wy, sub_id in getattr(engine, "_live_pursuers", [])
+        ],
     }
 
 
@@ -579,7 +601,8 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
     engine.current_submap_id  = data.get("current_submap_id")
     engine.surface_return_x   = data.get("surface_return_x", 0)
     engine.surface_return_y   = data.get("surface_return_y", 0)
-    p.true_sight = data.get("true_sight", False)
+    p.true_sight   = data.get("true_sight",   False)
+    p.dodge_chance = data.get("dodge_chance", 0.05)
 
     engine.world_time.turn = data.get("turn", 0)
 
@@ -587,10 +610,8 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
         f = data["fighter"]
         p.fighter              = Fighter(f["max_hp"], f["power"], f["defense"])
         p.fighter.body_id      = f.get("body_id", "body_player")
-        p.fighter.location_hp  = f.get("location_hp", {})
-        p.fighter.location_max = f.get("location_max", {})
-        p.fighter.impairments  = set(f.get("impairments", []))
-        p.fighter.armor_layers = f.get("armor_layers", {})
+        p.fighter.hp           = f.get("hp", f["max_hp"])
+        p.fighter.effective_av = f.get("effective_av", 0)
 
     if data.get("needs"):
         n = data["needs"]
@@ -623,6 +644,9 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
             text_id = idata.get("text_id")
             if text_id:
                 item.text_id = text_id
+            te = idata.get("temporary_essence")
+            if te:
+                item.temporary_essence = list(te)
             p.inventory.add(item)
 
     if data.get("light_source"):
@@ -679,6 +703,14 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
     if data.get("weather") and hasattr(engine, "weather"):
         from engine.weather import WeatherSystem
         engine.weather = WeatherSystem.from_dict(data["weather"], engine.rng)
+        engine.weather.load_mechanics(engine.data.weather_defs)
+
+    # Live pursuers
+    engine._live_pursuers = []
+    for lp in data.get("live_pursuers", []):
+        ents = _deserialize_entities([lp["entity"]], engine)
+        if ents:
+            engine._live_pursuers.append((ents[0], lp["wx"], lp["wy"], lp.get("submap_id")))
 
     # Restore equipped items after inventory is fully reconstructed
     _restore_equipment(p, data.get("equipment", {}), engine.data)
@@ -690,7 +722,7 @@ def _restore_equipment(player, saved_equipment: dict, data) -> None:
     against the reconstructed inventory.
     """
     from components.equipment import Equipment
-    from engine.item_system import _apply_armor_to_fighter
+    from engine.item_system import _recompute_effective_av
 
     if not saved_equipment:
         return
@@ -720,8 +752,6 @@ def _restore_equipment(player, saved_equipment: dict, data) -> None:
         item.equipped = True
 
         item_def = data.items.get(item_id, {})
-        if item_def.get("category") == "armor":
-            _apply_armor_to_fighter(player, item_def)
 
         if slot == "light":
             light_data = item_def.get("light", {})
@@ -739,6 +769,9 @@ def _restore_equipment(player, saved_equipment: dict, data) -> None:
                 ls._burn_turns = item.burn_turns or 600
                 ls._turns_used = item.turns_lit
                 player.light_source = ls
+
+    # Recompute effective_av from all equipped armor after everything is restored
+    _recompute_effective_av(player, data)
 
 
 def _serialize_entity(entity: "Actor") -> dict:
@@ -758,20 +791,18 @@ def _serialize_entity(entity: "Actor") -> dict:
         "is_alive":        getattr(entity, "is_alive", True),
         "blocks_movement": entity.blocks_movement,
         "fighter": {
-            "hp":          fighter.hp,
-            "max_hp":      fighter.max_hp,
-            "power":       fighter.power,
-            "defense":     fighter.defense,
-            "body_id":     fighter.body_id,
-            "location_hp": fighter.location_hp,
-            "location_max":fighter.location_max,
-            "impairments": list(fighter.impairments),
-            "armor_layers":fighter.armor_layers,
+            "hp":           fighter.hp,
+            "max_hp":       fighter.max_hp,
+            "power":        fighter.power,
+            "defense":      fighter.defense,
+            "body_id":      fighter.body_id,
+            "effective_av": fighter.effective_av,
         } if fighter else None,
         "ai_type":  type(ai).__name__ if ai else None,
         "ai_state": ai.state.value    if ai else None,
         "home_x":   ai.home_x         if ai else None,
         "home_y":   ai.home_y         if ai else None,
+        "pursuit_turns_without_contact": ai.pursuit_turns_without_contact if ai else 0,
         "faction":  percep.faction    if percep else None,
         "hostile_to": percep.hostile_to if percep else None,
         "sight_radius":   percep.sight_radius   if percep else 8,
@@ -819,10 +850,8 @@ def _deserialize_entities(
         if fighter and d.get("fighter"):
             fd = d["fighter"]
             fighter.body_id      = fd.get("body_id", "body_human")
-            fighter.location_hp  = fd.get("location_hp", {})
-            fighter.location_max = fd.get("location_max", {})
-            fighter.impairments  = set(fd.get("impairments", []))
-            fighter.armor_layers = fd.get("armor_layers", {})
+            fighter.hp           = fd.get("hp", fighter.max_hp)
+            fighter.effective_av = fd.get("effective_av", fighter.effective_av)
 
         # Restore AI state
         ai = getattr(actor, "ai", None)
@@ -835,6 +864,7 @@ def _deserialize_entities(
             if d.get("home_x") is not None:
                 ai.home_x = d["home_x"]
                 ai.home_y = d["home_y"]
+            ai.pursuit_turns_without_contact = d.get("pursuit_turns_without_contact", 0)
 
         restored.append(actor)
 

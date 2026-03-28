@@ -6,5 +6,6 @@
   "category": "consumable",
   "weight": 0.05,
   "stackable": false,
-  "on_use": "read"
+  "on_use": "read",
+  "keywords": [{"tag": "fibrous", "tier": 1}]
 }

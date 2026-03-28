@@ -1,0 +1,20 @@
+{
+    "id": "lithic_seep",
+    "name": "Lithic Seep",
+    "description": "What dies near you leaves a residue. You have learned to fix it in place.",
+    "category": "Creation",
+    "cost": 2,
+    "effects": [
+        "On kill, a resonance stone forms at the creature's position.",
+        "These stones emit resonance and contribute to local exposure.",
+        "They do not persist between sessions."
+    ],
+    "hooks": [
+        {
+            "event": "ON_ENTITY_KILLED",
+            "handler": "handle_lithic_seep_kill"
+        }
+    ],
+    "conflicts": [],
+    "requires": []
+}

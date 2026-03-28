@@ -6,5 +6,6 @@
   "category": "consumable",
   "weight": 0.15,
   "stackable": true,
-  "on_use": null
+  "on_use": null,
+  "keywords": [{"tag": "binding", "tier": 1}, {"tag": "bitter", "tier": 1}, {"tag": "inert", "tier": 1}, {"tag": "fixative", "tier": 1}]
 }

@@ -9,5 +9,6 @@
   "weight": 0.9,
   "description": "A fragment of ground glass set in tarnished copper, sharpened to a point. What hides inside compressed bone does not hide from this.",
   "color_fg": [226, 181, 112],
-  "sprite": "crude_blade"
+  "sprite": "crude_blade",
+  "keywords": [{"tag": "resonant", "tier": 2}]
 }

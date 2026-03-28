@@ -1,0 +1,46 @@
+{
+  "plaza": {
+    "drift_range": 8,
+    "variant_folder": "data/buildings/plaza"
+  },
+  "streets": {
+    "primary_width": 3,
+    "secondary_count_ns": [1, 2],
+    "secondary_count_ew": [2, 3],
+    "secondary_width": 3
+  },
+  "lamps": {
+    "inner_grid_spacing": 6,
+    "outer_ring_spacing": 14,
+    "working_weight_plaza": 0.25,
+    "working_weight_inner": 0.08,
+    "working_weight_outer": 0.01,
+    "sputtering_weight_plaza": 0.45,
+    "sputtering_weight_inner": 0.25,
+    "sputtering_weight_outer": 0.12
+  },
+  "outer_ring": {
+    "scatter_attempts": 40,
+    "clearance_tiles": 1,
+    "path_wander_chance": 0.25
+  },
+  "zones": {
+    "centre": {
+      "categories": ["civic", "religious"],
+      "weights": [1.0, 1.0]
+    },
+    "inner_cardinal": {
+      "categories": ["commercial", "aristocratic", "civic", "tavern"],
+      "weights": [1.0, 0.6, 0.4, 0.8]
+    },
+    "outer_corner": {
+      "categories": ["residential", "storage", "ruins", "wilderness"],
+      "weights": [1.0, 0.7, 0.5, 0.4],
+      "edge_only_categories": ["ruins", "wilderness"]
+    }
+  },
+  "separation": {
+    "min_chunks": 12
+  },
+  "town_count_range": [2, 4]
+}

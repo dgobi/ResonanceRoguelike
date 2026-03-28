@@ -61,15 +61,18 @@ class ItemSystem:
         if not needs:
             return False
 
-        nutrition = item.nutrition or 0.3
-        needs.eat(nutrition)
-        engine.log.add(
-            f"You eat the {item.name}.",
-            AGED_WOOD,
-        )
+        raw = item.nutrition if item.nutrition is not None else 300
+        survival = getattr(engine.data, "survival", {})
+        h_max = survival.get("hunger", {}).get("max", 1000)
+        # Values <= 1.0 are legacy float fractions; values > 1.0 are integers to normalise
+        fraction = raw if raw <= 1.0 else raw / h_max
+        needs.eat(fraction)
 
-        if needs.hunger < 0.15:
-            engine.log.add("You are sated.", AGED_WOOD)
+        msg = getattr(item, "eat_message", None)
+        if msg:
+            engine.log.add(msg, AGED_WOOD)
+        else:
+            engine.log.add(f"{item.name.capitalize()}. Something in it helps.", AGED_WOOD)
         return True   # consumed
 
     def _use_drink(self, item: "Item", engine: "Engine") -> bool:
@@ -77,23 +80,19 @@ class ItemSystem:
         if not needs:
             return False
 
-        hydration = item.hydration or 0.3
-        needs.drink(hydration)
-        engine.log.add(
-            f"You drink from the {item.name}.",
-            CLEAR_WATER,
-        )
+        raw = item.hydration if item.hydration is not None else 400
+        survival = getattr(engine.data, "survival", {})
+        t_max = survival.get("thirst", {}).get("max", 800)
+        # Values <= 1.0 are legacy float fractions; values > 1.0 are integers to normalise
+        fraction = raw if raw <= 1.0 else raw / t_max
+        needs.drink(fraction)
 
-        if needs.thirst < 0.15:
-            engine.log.add("Your thirst is slaked.", CLEAR_WATER)
-
-        # Empty the flask
-        item.liquid        = None
-        item.liquid_volume = 0.0
-        item.hydration     = None
-        item.on_use        = None
-        item.name          = f"empty {item.name}"
-        return False   # not consumed — flask remains as empty container
+        msg = getattr(item, "drink_message", None)
+        if msg:
+            engine.log.add(msg, CLEAR_WATER)
+        else:
+            engine.log.add("The liquid steadies something.", CLEAR_WATER)
+        return True   # consumed
 
     def _use_heal_minor(self, item: "Item", engine: "Engine") -> bool:
         fighter = getattr(engine.player, "fighter", None)
@@ -144,12 +143,18 @@ class ItemSystem:
             engine._update_fov()
             return False
 
-        # Check off-hand availability before lighting
+        # Displace whatever is currently in offhand (shield, another torch, etc.)
         if equipment:
             offhand_item = equipment.slots.get("offhand")
             if offhand_item is not None and offhand_item is not item:
-                engine.log.add("Off hand is full.", STONE_BLUE)
-                return False
+                if getattr(offhand_item, "light_data", None):
+                    # Another lit light source — extinguish it first
+                    _deactivate_light(offhand_item, engine)
+                    engine.log.add(f"The {offhand_item.name} goes out.", STONE_BLUE)
+                else:
+                    # Non-light item (shield, etc.) — simply remove it
+                    engine.log.add(f"Thou removest {offhand_item.name}.", EARTH_BROWN)
+                equipment.unequip("offhand")
 
         # Light it
         ld = item.light_data
@@ -199,22 +204,42 @@ class ItemSystem:
             engine.log.add("This cannot be equipped.", EARTH_BROWN)
             return False
 
+        _TALISMAN_SLOTS = ("talisman_1", "talisman_2", "talisman_3")
+        is_talisman = (item_def.get("category") == "talisman")
+
         if equipment.is_equipped(item):
-            # Unequip
-            equipment.unequip(slot)
-            _remove_armor_from_fighter(engine.player, item_def)
-            if slot == "light":
+            # Find the actual slot this item occupies (important for talismans)
+            actual_slot = slot
+            for s, occupant in equipment.slots.items():
+                if occupant is item:
+                    actual_slot = s
+                    break
+            equipment.unequip(actual_slot)
+            _remove_armor_from_fighter(engine.player, item_def, engine.data)
+            if actual_slot == "light":
                 _deactivate_light(item, engine)
             engine.log.add(
                 f"Thou removest {item.name}.",
                 WORN_STONE,
             )
         else:
+            if is_talisman:
+                # Find first free talisman slot
+                target_slot = None
+                for ts in _TALISMAN_SLOTS:
+                    if equipment.slots.get(ts) is None:
+                        target_slot = ts
+                        break
+                if target_slot is None:
+                    engine.log.add("No talisman slot is free.", EARTH_BROWN)
+                    return False
+                slot = target_slot
+
             # Equip — unequip whatever is currently in that slot first
             prev = equipment.slots.get(slot)
             if prev:
                 prev_def = engine.data.items.get(prev.item_id, {})
-                _remove_armor_from_fighter(engine.player, prev_def)
+                _remove_armor_from_fighter(engine.player, prev_def, engine.data)
                 if slot == "light":
                     _deactivate_light(prev, engine)
                 elif slot == "offhand" and prev.light_data:
@@ -227,7 +252,7 @@ class ItemSystem:
                         EARTH_BROWN,
                     )
             equipment.equip(item, slot)
-            _apply_armor_to_fighter(engine.player, item_def)
+            _apply_armor_to_fighter(engine.player, item_def, engine.data)
             if slot == "light":
                 _activate_light(item, engine)
             engine.log.add(
@@ -237,57 +262,103 @@ class ItemSystem:
 
         return False  # not consumed
 
+    def _use_reduce_resonance_exposure(self, item: "Item", engine: "Engine") -> bool:
+        """Consume item, reduce resonance_exposure by reduce_exposure_amount."""
+        item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
+        amount   = float(item_def.get("reduce_exposure_amount", 0.2))
+        engine.resonance_exposure = max(0.0, engine.resonance_exposure - amount)
+        msg = getattr(item, "drink_message", None) or "The resonance in you eases."
+        engine.log.add(msg, RESONANCE_LOW)
+        return True  # consumed
+
+    def _use_apply_to_weapon(self, item: "Item", engine: "Engine") -> bool:
+        """Coat the equipped weapon with temporary essence charges."""
+        equip = getattr(engine.player, "equipment", None)
+        if equip is None:
+            engine.log.add("Nothing to apply it to.", WORN_STONE)
+            return False
+        weapon = equip.slots.get("weapon")
+        if weapon is None:
+            engine.log.add("No weapon equipped.", WORN_STONE)
+            return False
+
+        item_def  = engine.data.items.get(getattr(item, "item_id", ""), {})
+        temp_ess  = item_def.get("temporary_essence", [])
+        if not temp_ess:
+            engine.log.add("The preparation has no effect on the blade.", WORN_STONE)
+            return False
+
+        # Merge onto weapon's temporary_essence list, replacing matching essences
+        existing = getattr(weapon, "temporary_essence", [])
+        for te in temp_ess:
+            ess = te.get("essence", "")
+            existing = [e for e in existing if e.get("essence") != ess]
+            existing.append({
+                "essence":        ess,
+                "strength":       float(te.get("strength", 0.5)),
+                "hits_remaining": int(te.get("hits", 5)),
+            })
+        weapon.temporary_essence = existing
+
+        apply_msg = item_def.get("apply_message", f"The blade is coated.")
+        engine.log.add(apply_msg, RESONANCE_MID)
+        return True  # consumed
+
 
 # ------------------------------------------------------------------ #
 #  Equipment armor helpers (module-level, not ItemSystem methods)
 # ------------------------------------------------------------------ #
 
-SLOT_TO_LOCATION: dict[str, list[str]] = {
-    "armor_head":  ["head"],
-    "armor_torso": ["torso"],
-    "armor_arms":  ["right_arm", "left_arm", "arms"],
-    "armor_legs":  ["right_leg", "left_leg", "legs"],
-    # belt_1/belt_2/belt_3 and light are intentionally absent — they carry no armor layers
-}
+def _sum_item_av(item_def: dict) -> int:
+    """Sum all armor_value entries in an item's armor_layers list."""
+    return sum(
+        layer.get("armor_value", 0)
+        for layer in item_def.get("armor_layers", [])
+    )
 
 
-def _apply_armor_to_fighter(player, item_def: dict) -> None:
-    """Prepend armor layers to player fighter for relevant locations."""
-    fighter = getattr(player, "fighter", None)
-    if not fighter:
+def _recompute_effective_av(player, data) -> None:
+    """
+    Recompute fighter.effective_av from all currently equipped armor items.
+    Called after any equip/unequip action.
+    """
+    fighter   = getattr(player, "fighter", None)
+    equipment = getattr(player, "equipment", None)
+    if not fighter or not equipment:
         return
-    slot   = item_def.get("slot", "")
-    layers = item_def.get("armor_layers", [])
-    if not layers:
-        return
-    layer_names = {l["name"] for l in layers}
-    for loc in SLOT_TO_LOCATION.get(slot, []):
-        if loc not in fighter.armor_layers:
+
+    total = 0
+    for slot, item in equipment.slots.items():
+        if item is None:
             continue
-        # Don't add if already present — prevents doubling on repeated load
-        existing_names = {l["name"] for l in fighter.armor_layers[loc]}
-        if layer_names & existing_names:
-            continue
-        # Prepend — equipment goes outermost
-        fighter.armor_layers[loc] = list(layers) + fighter.armor_layers[loc]
+        item_def = data.items.get(getattr(item, "item_id", ""), {})
+        if item_def.get("category") == "armor":
+            total += _sum_item_av(item_def)
+    fighter.effective_av = total
 
 
-def _remove_armor_from_fighter(player, item_def: dict) -> None:
-    """Remove armor layers added by an item from player fighter."""
-    fighter = getattr(player, "fighter", None)
-    if not fighter:
-        return
-    slot        = item_def.get("slot", "")
-    layers      = item_def.get("armor_layers", [])
-    if not layers:
-        return
-    layer_names = {l["name"] for l in layers}
-    for loc in SLOT_TO_LOCATION.get(slot, []):
-        if loc in fighter.armor_layers:
-            fighter.armor_layers[loc] = [
-                l for l in fighter.armor_layers[loc]
-                if l["name"] not in layer_names
-            ]
+# Legacy names kept so save_manager._restore_equipment can call _apply_armor_to_fighter.
+# They now simply trigger a full recompute.
+def _apply_armor_to_fighter(player, item_def: dict, data=None) -> None:
+    """Equip path: recompute effective_av if data is available."""
+    if data is not None:
+        _recompute_effective_av(player, data)
+    else:
+        # Fallback: add the item's AV directly (used during save restore
+        # where data is not passed through).
+        fighter = getattr(player, "fighter", None)
+        if fighter:
+            fighter.effective_av += _sum_item_av(item_def)
+
+
+def _remove_armor_from_fighter(player, item_def: dict, data=None) -> None:
+    """Unequip path: recompute effective_av if data is available."""
+    if data is not None:
+        _recompute_effective_av(player, data)
+    else:
+        fighter = getattr(player, "fighter", None)
+        if fighter:
+            fighter.effective_av = max(0, fighter.effective_av - _sum_item_av(item_def))
 
 
 def _activate_light(item, engine) -> None:

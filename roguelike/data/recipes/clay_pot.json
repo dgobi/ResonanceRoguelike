@@ -1,0 +1,14 @@
+{
+  "id": "clay_pot",
+  "name": "clay pot",
+  "description": "Shape clay by hand, then fire it in open flame until it hardens.",
+  "known": true,
+  "components": [
+    {"tag": "malleable", "min_tier": 1, "quantity": 2}
+  ],
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 2}
+  ],
+  "result_item": "clay_pot",
+  "apply_turns": 5
+}

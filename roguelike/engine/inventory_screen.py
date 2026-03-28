@@ -21,7 +21,6 @@ _DUSTY_ROSE   = DUSTY_ROSE
 _BLOOD_MID    = DRIED_BLOOD
 _BLOOD_ROSE   = BLOOD_STONE
 _MIST_BLUE    = SLATE_MID
-_NIGHT_PURPLE = DEEP_PURPLE
 _SLATE_MID    = STONE_BLUE
 _SLATE_DARK   = SLATE_DARK
 
@@ -52,17 +51,22 @@ def _bearing(frac: float) -> tuple[str, tuple]:
 #  Equipment slot display order
 # ------------------------------------------------------------------ #
 
-_EQUIP_SLOT_DISPLAY: list[tuple[str, str]] = [
-    ("Head",      "armor_head"),
-    ("Torso",     "armor_torso"),
-    ("Arms",      "armor_arms"),
-    ("Legs",      "armor_legs"),
-    ("Main Hand", "weapon"),
-    ("Off Hand",  "offhand"),
-    ("Belt",      "belt_1"),
-    ("Belt",      "belt_2"),
-    ("Belt",      "belt_3"),
-    ("Light",     "light"),
+_EQUIP_SLOT_DISPLAY: list[tuple[str, str | None]] = [
+    ("Head",         "armor_head"),
+    ("Torso",        "armor_torso"),
+    ("Arms",         "armor_arms"),
+    ("Legs",         "armor_legs"),
+    ("Main Hand",    "weapon"),
+    ("Off Hand",     "offhand"),
+    ("Belt",         "belt_1"),
+    ("Belt",         "belt_2"),
+    ("Belt",         "belt_3"),
+    ("Light",        "light"),
+    # Section header — slot_id = None means draw as label, not a slot row
+    ("TALISMANS",    None),
+    ("Talisman I",   "talisman_1"),
+    ("Talisman II",  "talisman_2"),
+    ("Talisman III", "talisman_3"),
 ]
 
 
@@ -74,9 +78,11 @@ _CATEGORIES = ["Weapons", "Armour", "Consumables", "Documents", "Misc"]
 
 _CAT_MAP: dict[str, str] = {
     "weapon":     "Weapons",
+    "shield":     "Weapons",
     "armor":      "Armour",
     "consumable": "Consumables",
     "tool":       "Consumables",
+    "talisman":   "Misc",
     "document":   "Documents",
     "text":       "Documents",
 }
@@ -99,14 +105,29 @@ def _group_items(items: list, engine: "Engine") -> dict[str, list]:
 
 
 def _flat_list(groups: dict[str, list]) -> list:
+    """
+    Build flat display list with items grouped by item_id within each category.
+    Tuple format: (item, is_header, label)
+      - item: None for headers; first item in group for item rows
+      - is_header: True for category separators
+      - label: "" for singles; "×N" for groups of N (rendered appended to name)
+    """
     flat = []
     for cat in _CATEGORIES:
         items = groups[cat]
         if not items:
             continue
         flat.append((None, True, cat))
+        # Group by item_id — preserve insertion order, first-seen order
+        seen: dict[str, list] = {}
         for item in items:
-            flat.append((item, False, ""))
+            iid = getattr(item, "item_id", "") or id(item)
+            seen.setdefault(str(iid), []).append(item)
+        for group in seen.values():
+            first = group[0]
+            count = len(group)
+            label = f"\xd7{count}" if count > 1 else ""
+            flat.append((first, False, label))
     return flat
 
 
@@ -163,7 +184,7 @@ def _has_floor_item(engine: "Engine", x: int, y: int) -> bool:
 class InventoryScreen:
     """
     Three-panel inventory overlay.
-    LEFT (28%): Equipped / Body / Condition  MIDDLE (28%): item list
+    LEFT (28%): Equipped / Bearing  MIDDLE (28%): item list
     RIGHT (44%): item detail
     """
 
@@ -384,6 +405,16 @@ class InventoryScreen:
         for disp_name, slot_id in _EQUIP_SLOT_DISPLAY:
             if y >= content_bottom - lh:
                 break
+            # Section header sentinel (slot_id is None)
+            if slot_id is None:
+                if y < content_bottom - 4:
+                    y += 2
+                    pygame.draw.line(surf, self.SEP_C, (ox + pad, y), (ox + w - pad, y), 1)
+                    y += 4
+                hdr_s = self._font_small.render(disp_name, True, self.HDR_C)
+                surf.blit(hdr_s, (x, y))
+                y += lh
+                continue
             item = equip.slots.get(slot_id) if equip else None
 
             slot_s = self._font_small.render(disp_name, True, _SLATE_MID)
@@ -402,84 +433,29 @@ class InventoryScreen:
             pygame.draw.line(surf, self.SEP_C, (ox + pad, y), (ox + w - pad, y), 1)
             y += 5
 
-        # ── Section 2: BODY ───────────────────────────────────────────
-        if y < content_bottom - lh:
-            hdr2 = self._font_normal.render("BODY", True, self.HDR_C)
-            surf.blit(hdr2, (x, y))
-            y += hdr2.get_height() + 3
+        # ── Section 2: BEARING (single HP pool) ───────────────────────
+        if fighter and y < content_bottom - lh:
+            frac = fighter.hp_fraction
+            label, col = _bearing(frac)
+            nm_s = self._font_small.render("Bearing", True, _SLATE_MID)
+            surf.blit(nm_s, (x, y))
+            brng_s = self._font_small.render(label, True, col)
+            surf.blit(brng_s, (col_mid, y))
+            if show_hp:
+                hp_s = self._font_small.render(
+                    f"  {fighter.hp}/{fighter.max_hp}", True, _SLATE_MID
+                )
+                surf.blit(hp_s, (col_mid + brng_s.get_width(), y))
+            y += lh
 
-        if fighter and fighter.location_hp:
-            for loc_id, cur_hp in fighter.location_hp.items():
-                if y >= content_bottom - lh:
-                    break
-                max_hp = fighter.location_max.get(loc_id, max(1, cur_hp))
-                frac   = cur_hp / max(1, max_hp)
-                label, col = _bearing(frac)
-                disp_name  = loc_id.replace("_", " ").title()
-
-                nm = self._font_small.render(disp_name, True, _SLATE_MID)
-                surf.blit(nm, (x, y))
-
-                brng = self._font_small.render(label, True, col)
-                surf.blit(brng, (col_mid, y))
-
-                if show_hp:
-                    hp_s = self._font_small.render(
-                        f"  {cur_hp}/{max_hp}", True, _SLATE_MID
-                    )
-                    surf.blit(hp_s, (col_mid + brng.get_width(), y))
-
-                y += lh
-        else:
-            if y < content_bottom:
-                ns = self._font_small.render("No body data.", True, _SLATE_DARK)
-                surf.blit(ns, (x, y))
-                y += lh
-
-        # ── Divider ───────────────────────────────────────────────────
-        if y < content_bottom - 4:
-            y += 3
-            pygame.draw.line(surf, self.SEP_C, (ox + pad, y), (ox + w - pad, y), 1)
-            y += 5
-
-        # ── Section 3: CONDITION ──────────────────────────────────────
-        if y < content_bottom - lh:
-            hdr3 = self._font_normal.render("CONDITION", True, self.HDR_C)
-            surf.blit(hdr3, (x, y))
-            y += hdr3.get_height() + 3
-
-        conditions: list[tuple[str, tuple]] = []
-
-        needs = getattr(player, "needs", None)
-        if needs:
-            if needs.hunger > 0.7:
-                conditions.append(("Hunger.", _SLATE_MID))
-            if needs.thirst > 0.7:
-                conditions.append(("Thirst.", _SLATE_MID))
-
-        chilled = getattr(player, "chilled_turns", 0)
-        if chilled > 0:
-            conditions.append((f"Chilled. ({chilled})", _MIST_BLUE))
-
-        sickness = getattr(player, "_sickness_turns", 0)
-        if sickness > 0:
-            conditions.append((f"Sickened. ({sickness})", _DUSTY_ROSE))
-
-        corrupt = getattr(player, "corruption", None)
-        if corrupt and getattr(corrupt, "value", 0) > 0.2:
-            conditions.append(("The change moves in thee.", _NIGHT_PURPLE))
-
-        if conditions:
-            for msg, col in conditions:
-                if y >= content_bottom:
-                    break
-                cs = self._font_small.render(msg, True, col)
-                surf.blit(cs, (x, y))
-                y += lh
-        else:
-            if y < content_bottom:
-                cs = self._font_small.render("Unmarked.", True, _SLATE_DARK)
-                surf.blit(cs, (x, y))
+        # AV display
+        if fighter and y < content_bottom - lh:
+            av = getattr(fighter, "effective_av", 0)
+            av_label = self._font_small.render("Ward", True, _SLATE_MID)
+            surf.blit(av_label, (x, y))
+            av_val = self._font_small.render(str(av) if av > 0 else "\u2014", True, _NEAR_WHITE)
+            surf.blit(av_val, (col_mid, y))
+            y += lh
 
         # ── Level / EXP bar at bottom ─────────────────────────────────
         level_comp = getattr(player, "level", None)
@@ -590,6 +566,9 @@ class InventoryScreen:
             tile        = getattr(item, "tile", "")
             sprite_reg  = getattr(engine, "sprite_registry", None)
             render_mode = getattr(getattr(engine, "display", None), "render_mode", "ascii")
+            _ICON_COL = 26   # icon column width (24px sprite + 2px gap)
+            _E_COL    = 26   # [E] badge column width (fixed, keeps name aligned)
+            name_x    = x + _ICON_COL + _E_COL
             icon_drawn  = False
             if tile and render_mode == "sprite" and sprite_reg:
                 fg   = engine.registry.fg(tile) if tile in engine.registry._data else TRUE_WHITE
@@ -603,12 +582,17 @@ class InventoryScreen:
                 g  = self._font_normal.render(ch, True, fg)
                 surf.blit(g, (x, y))
 
-            prefix   = "[E] " if equipped else "    "
-            name_str = prefix + getattr(item, "name", "?")
-            if getattr(item, "stackable", False) and getattr(item, "count", 1) > 1:
-                name_str += f" x{item.count}"
+            if equipped:
+                e_s = self._font_small.render("[E]", True, _OLD_GOLD)
+                surf.blit(e_s, (x + _ICON_COL, y + (lh - e_s.get_height()) // 2))
+
+            name_str = getattr(item, "name", "?")
+            if label:
+                name_str += f" ({label})"
+            elif getattr(item, "stackable", False) and getattr(item, "count", 1) > 1:
+                name_str += f" \xd7{item.count}"
             ns = self._font_normal.render(name_str, True, row_col)
-            surf.blit(ns, (x + 20, y))
+            surf.blit(ns, (name_x, y))
 
             wt_s2 = self._font_small.render(
                 f"{getattr(item, 'weight', 0.0):.1f}kg", True, self.DIM
@@ -687,6 +671,27 @@ class InventoryScreen:
 
         pygame.draw.line(surf, SLATE_DARK, (ox + pad, y), (ox + w - pad, y), 1)
         y += 6
+
+        # Keyword tags
+        keywords = getattr(item, "keywords", [])
+        kw_data  = getattr(engine.data, "keywords", {})
+        if keywords:
+            import engine.palette as _pal
+            for kw_entry in keywords:
+                tag          = kw_entry.get("tag", "")
+                tier         = kw_entry.get("tier", 1)
+                kw_def       = kw_data.get(tag, {})
+                display_name = kw_def.get("display", tag)
+                color_alias  = kw_def.get("color", "UI_TEXT_MID")
+                try:
+                    kw_color = getattr(_pal, color_alias)
+                except AttributeError:
+                    kw_color = UI_TEXT_MID
+                kw_line  = f"[{display_name}: {tier}]"
+                kw_s     = self._font_small.render(kw_line, True, kw_color)
+                surf.blit(kw_s, (x, y))
+                y += lh
+            y += 4
 
         # Stats block
         if cat == "weapon":

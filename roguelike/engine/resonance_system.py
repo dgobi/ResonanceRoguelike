@@ -143,6 +143,17 @@ def system_resonance_on_tile_entered(payload: dict) -> dict | None:
                         "The crack breathes against you."
                     effects["message_color"] = DUSTY_ROSE
 
+    # bone_snow: each step accumulates a small amount of corruption
+    weather = getattr(engine, "weather", None)
+    if weather and weather.state == "bone_snow":
+        corruption_tick = weather.get_mechanic("corruption_per_step", 0.003)
+        old_corruption  = engine.corruption
+        engine.corruption = min(1.0, engine.corruption + corruption_tick)
+        player_corr = getattr(engine.player, "corruption", None)
+        if player_corr is not None:
+            player_corr.value = engine.corruption
+        _check_corruption_thresholds(engine, old_corruption, engine.corruption, effects)
+
     return effects if effects else None
 
 
@@ -200,10 +211,15 @@ def _scan_resonant_terrain(engine: "Engine") -> tuple[float, float]:
 def _check_wind_discharge(engine: "Engine", effects: dict) -> None:
     """
     Check cracked bells on the current map.
-    Each has a 12% chance to partially discharge on wind turn.
+    Each has a 12% base chance to partially discharge on wind turn.
+    dead_calm increases range; resonance_storm increases discharge chance.
     """
     px, py     = engine.player.x, engine.player.y
     discharged = False
+
+    weather = getattr(engine, "weather", None)
+    bell_range       = 25 + (weather.get_mechanic("bell_range_bonus", 0) if weather else 0)
+    discharge_chance = 0.12 + (weather.get_mechanic("discharge_chance_bonus", 0.0) if weather else 0.0)
 
     for ty in range(engine.map_height):
         for tx in range(engine.map_width):
@@ -212,9 +228,9 @@ def _check_wind_discharge(engine: "Engine", effects: dict) -> None:
             if terrain_data.get("bell_state") != "cracked":
                 continue
             dist = math.sqrt((tx - px) ** 2 + (ty - py) ** 2)
-            if dist > 25:
+            if dist > bell_range:
                 continue
-            if engine.rng.random() < 0.12:
+            if engine.rng.random() < discharge_chance:
                 from engine.discharge import trigger_discharge
                 trigger_discharge(engine, tx, ty, "cracked", effects)
                 discharged = True
@@ -233,19 +249,24 @@ def _check_corruption_thresholds(
     if not hasattr(engine, "_corruption_thresholds"):
         engine._corruption_thresholds = set()
 
+    # The Indifference perk suppresses threshold messages (mechanical effects still apply)
+    _perks = getattr(getattr(engine, "player", None), "perks", None)
+    _suppress_messages = _perks is not None and _perks.has_perk("the_indifference")
+
     for threshold, key in THRESHOLDS:
         if old < threshold <= new:
             if key not in engine._corruption_thresholds:
                 engine._corruption_thresholds.add(key)
-                msg = _THRESHOLD_MESSAGES[key]
-                if "add_message" not in effects:
-                    effects["add_message"]   = msg
-                    effects["message_color"] = DEEP_PURPLE
-                else:
-                    # Queue as secondary message — append after flush
-                    effects.setdefault("_queued_messages", []).append(
-                        (msg, DEEP_PURPLE)
-                    )
+                if not _suppress_messages:
+                    msg = _THRESHOLD_MESSAGES[key]
+                    if "add_message" not in effects:
+                        effects["add_message"]   = msg
+                        effects["message_color"] = DEEP_PURPLE
+                    else:
+                        # Queue as secondary message — append after flush
+                        effects.setdefault("_queued_messages", []).append(
+                            (msg, DEEP_PURPLE)
+                        )
 
 
 def _check_exposure_messages(engine: "Engine", effects: dict) -> None:

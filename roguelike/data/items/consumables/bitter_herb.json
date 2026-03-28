@@ -1,14 +1,22 @@
 {
   "id": "bitter_herb",
-  "name": "Bitter Herb",
-  "description": "A dried bundle of something that grows in dark places. Apothecaries use it. Hedge witches use it differently. It reduces fever and also several other things.",
+  "name": "bitter herb",
+  "description": "A dried sprig of something that grows near water and stone. Hedge practitioners harvest it. It is edible in the way that most things are edible — with consequences.",
   "tile": "generic_item",
   "category": "consumable",
   "weight": 0.05,
   "stackable": true,
-  "on_use": "heal_minor",
-  "heal_amount": 3,
-  "essence": "Dissolution",
-  "essence_strength": 0.3,
-  "_essence_note": "It breaks down what should not be there. Fever, wound-poison, accumulated harm — the herb dissolves the wrong accumulation. It is not gentle about it."
+  "on_use": "eat",
+  "nutrition": 80,
+  "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "bitter",
+      "tier": 1
+    }
+  ]
 }

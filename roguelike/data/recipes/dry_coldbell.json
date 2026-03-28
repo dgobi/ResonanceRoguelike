@@ -1,0 +1,14 @@
+{
+  "id": "dry_coldbell",
+  "name": "dry coldbell",
+  "description": "Lay the cutting flat in open air. The resonance in the fibres concentrates as moisture leaves.",
+  "known": true,
+  "components": [
+    {"tag": "resonant", "min_tier": 1, "quantity": 1},
+    {"tag": "aromatic", "min_tier": 1, "quantity": 1}
+  ],
+  "result_item": "dried_coldbell",
+  "passive_processing": true,
+  "processing_turns": 40,
+  "processing_source": "drying"
+}

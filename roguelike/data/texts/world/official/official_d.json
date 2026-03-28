@@ -1,0 +1,9 @@
+{
+  "id": "world_official_a",
+  "title": "Duty Ledger — Belfry Watch",
+  "type": "official",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Third watch. Bell nominal. Wind from the east — logged per standing order. No visitors to the tower. Candles consumed: four. Bell temperature taken at the third hour and again at the sixth. Variance within acceptable range. No ringing incidents. No cracks observed. The resonance index stone in the lower chamber reads 0.94. No action required. Warden H. Vass, signing off.", "damaged": false}]
+}

@@ -13,5 +13,6 @@
   "essence": "Binding",
   "essence_strength": 0.2,
   "_essence_note": "Leather holds form. A cap is a smaller expression of the same property — less mass, fainter resonance.",
-  "on_use": "equip_toggle"
+  "on_use": "equip_toggle",
+  "keywords": [{"tag": "fibrous", "tier": 1}]
 }

@@ -4,17 +4,42 @@
   "description": "It has been down here long enough to stop being whatever it was before. It is a sewer thing now. That is sufficient identity.",
   "tile": "sewer_thing",
   "blocks_movement": true,
-  "fighter": { "max_hp": 7, "power": 3, "defense": 0 },
-  "perception": {
-    "sight_radius": 4, "hearing_radius": 8,
-    "sees_in_dark": true, "faction": "predator", "hostile_to": ["player"]
+  "base_hp": 10,
+  "armour_value": 0,
+  "fighter": {
+    "max_hp": 10,
+    "power": 3,
+    "defense": 0
   },
-  "damage_dice": "1d4",
-  "damage_bonus": 0,
+  "perception": {
+    "sight_radius": 4,
+    "hearing_radius": 8,
+    "sees_in_dark": true,
+    "faction": "predator",
+    "hostile_to": [
+      "player"
+    ]
+  },
   "ai_type": "wandering",
   "wander_radius": 6,
-  "spawn_zones": ["undercroft"],
+  "pursuit_timeout": 15,
+  "spawn_zones": [
+    "undercroft"
+  ],
+  "damage_dice": "1d4",
+  "damage_bonus": 0,
   "attack_verb": "lurches toward thee",
   "blood_type": "red",
-  "corpse_sprite": {"col": 2055, "row": 0}
+  "limbs": [
+    {
+      "id": "body",
+      "size": 3,
+      "damage_multiplier": 1.0
+    }
+  ],
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  }
 }

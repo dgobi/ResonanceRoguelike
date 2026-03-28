@@ -1,0 +1,16 @@
+{
+  "id": "water_skin",
+  "name": "water skin",
+  "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+  "category": "consumable",
+  "on_use": "drink",
+  "hydration": 400,
+  "weight": 0.5,
+  "drink_message": "Cold and flat. The thirst retreats.",
+  "keywords": [
+    {
+      "tag": "drinkable",
+      "tier": 2
+    }
+  ]
+}

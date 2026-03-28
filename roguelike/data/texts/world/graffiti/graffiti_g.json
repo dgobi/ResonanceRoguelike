@@ -1,0 +1,9 @@
+{
+  "id": "world_graffiti_a",
+  "title": null,
+  "type": "graffiti",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "They locked the bell chamber from the inside. I watched the door for three days. No one came out.", "damaged": false}]
+}

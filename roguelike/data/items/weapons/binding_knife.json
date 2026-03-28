@@ -12,5 +12,6 @@
   "essence": "Binding",
   "essence_strength": 0.6,
   "on_use": "equip_toggle",
-  "crit_chance": 0.08
+  "crit_chance": 0.08,
+  "keywords": [{"tag": "cutting", "tier": 1}, {"tag": "binding", "tier": 2}]
 }

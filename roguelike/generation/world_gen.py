@@ -742,32 +742,32 @@ def _place_starting_location(world_map: WorldMap, rng: random.Random) -> None:
 
 def _place_towns(world_map: WorldMap, rng: random.Random) -> None:
     """
-    Place 5-8 towns as 2×2 chunk footprints scattered across the world.
-    Quadrant-balanced: guarantees at least one town per NW/NE/SW/SE quadrant.
-    Each town occupies NW/NE/SW/SE chunks. Roads cross seams for continuity.
+    Place 2-4 towns as 3×3 chunk footprints scattered across the world.
+    Quadrant-balanced: at most one town per NW/NE/SW/SE quadrant; allows
+    empty quadrants when town count is fewer than 4.
+    Centre chunk of each 3×3 is the town anchor.
     """
     from world.name_gen import assign_chunk_name
 
     cx, cy = world_map.vukh_x, world_map.vukh_y
     sx, sy = world_map.start_wx, world_map.start_wy
 
-    print(f"[town_gen] VUKH at ({cx},{cy}), world size {world_map.width}×{world_map.height}")
-
     vukh_set = {(cx + dx, cy + dy) for dx in range(2) for dy in range(2)}
 
     STRICT_EXCLUDE   = {"deep_mountain", "capital", "ash_wastes", "swamp"}
     RELAXED_EXCLUDE  = {"deep_mountain", "capital"}
     MIN_DIST_VUKH    = 6
-    N_TOWNS          = rng.randint(5, 8)
+    N_TOWNS          = rng.randint(2, 4)
     PREFERRED_BIOMES = {"forest", "heath", "plains"}
     world_radius     = min(world_map.width, world_map.height) // 2
     MAX_DIST_STRICT  = world_radius * 0.72
     MAX_DIST_RELAXED = world_radius * 0.85
+    MIN_DIST_TOWNS   = 12  # minimum distance between town centres (wx+1,wy+1)
 
     def footprint_clear(wx: int, wy: int, exclude: set, max_dist: float) -> bool:
-        """Check 2×2 footprint — biome/distance/overlap validity."""
-        for dx in range(2):
-            for dy in range(2):
+        """Check 3×3 footprint — biome/distance/overlap validity."""
+        for dx in range(3):
+            for dy in range(3):
                 p = (wx + dx, wy + dy)
                 if not world_map.in_bounds(wx + dx, wy + dy):
                     return False
@@ -782,12 +782,13 @@ def _place_towns(world_map: WorldMap, rng: random.Random) -> None:
                     return False
                 if chunk.biome_id in exclude:
                     return False
+        # Distance check uses the NW corner as reference
         dist_vukh = math.sqrt((wx - cx) ** 2 + (wy - cy) ** 2)
         return MIN_DIST_VUKH <= dist_vukh <= max_dist
 
     def score_entry(wx: int, wy: int) -> float:
-        nw_chunk = world_map.get(wx, wy)
-        return 2.0 if (nw_chunk and nw_chunk.biome_id in PREFERRED_BIOMES) else 1.0
+        centre_chunk = world_map.get(wx + 1, wy + 1)
+        return 2.0 if (centre_chunk and centre_chunk.biome_id in PREFERRED_BIOMES) else 1.0
 
     def build_quad_cands(quad_chunks: list[tuple[int,int]]) -> list[tuple[int,int,float]]:
         """Build candidate list for one quadrant with strict→relaxed→expanded fallback."""
@@ -812,52 +813,38 @@ def _place_towns(world_map: WorldMap, rng: random.Random) -> None:
             if footprint_clear(wx, wy, RELAXED_EXCLUDE, MAX_DIST_RELAXED)
         ]
 
-    # Partition all NW-anchor positions by quadrant
+    # NW-corner anchor positions for 3×3 footprints (need 2 tiles of margin on each side)
     raw_nw, raw_ne, raw_sw, raw_se = [], [], [], []
-    for wx in range(world_map.width - 1):
-        for wy in range(world_map.height - 1):
-            if wx < cx:
-                (raw_nw if wy < cy else raw_sw).append((wx, wy))
+    for wx in range(world_map.width - 2):
+        for wy in range(world_map.height - 2):
+            # Quadrant is determined by the centre chunk (wx+1, wy+1)
+            if wx + 1 < cx:
+                (raw_nw if wy + 1 < cy else raw_sw).append((wx, wy))
             else:
-                (raw_ne if wy < cy else raw_se).append((wx, wy))
+                (raw_ne if wy + 1 < cy else raw_se).append((wx, wy))
 
     q_nw = sorted(build_quad_cands(raw_nw), key=lambda c: -c[2])
     q_ne = sorted(build_quad_cands(raw_ne), key=lambda c: -c[2])
     q_sw = sorted(build_quad_cands(raw_sw), key=lambda c: -c[2])
     q_se = sorted(build_quad_cands(raw_se), key=lambda c: -c[2])
 
-    # Global pool: strict filter only (relaxed extras come from quadrant phase)
-    all_cands = sorted(
-        [
-            (wx, wy, score_entry(wx, wy))
-            for wx in range(world_map.width - 1)
-            for wy in range(world_map.height - 1)
-            if footprint_clear(wx, wy, STRICT_EXCLUDE, MAX_DIST_STRICT)
-        ],
-        key=lambda c: -c[2],
-    )
-
-    placed_towns: list[tuple[int, int]] = []
-
-    MIN_DIST_TOWNS = 8  # minimum distance between any two corner pairs of 2×2 footprints
+    placed_towns: list[tuple[int, int]] = []  # NW corner of each 3×3
 
     def too_close(wx: int, wy: int) -> bool:
-        """Check all 4 corners of new footprint against all 4 corners of each placed footprint."""
+        """Centre-to-centre distance must be >= MIN_DIST_TOWNS."""
+        ncx, ncy = wx + 1, wy + 1
         for tx, ty in placed_towns:
-            for adx in range(2):
-                for ady in range(2):
-                    for bdx in range(2):
-                        for bdy in range(2):
-                            d = math.sqrt(
-                                (wx + adx - tx - bdx) ** 2 +
-                                (wy + ady - ty - bdy) ** 2
-                            )
-                            if d < MIN_DIST_TOWNS:
-                                return True
+            tcx, tcy = tx + 1, ty + 1
+            d = math.sqrt((ncx - tcx) ** 2 + (ncy - tcy) ** 2)
+            if d < MIN_DIST_TOWNS:
+                return True
         return False
 
-    # Phase 1: one town per quadrant (guaranteed distribution, fallback-aware)
-    for quad in (q_nw, q_ne, q_sw, q_se):
+    # Place at most one town per quadrant; stop when N_TOWNS reached.
+    # Shuffle quadrant order so no quadrant is always tried first.
+    quads = [q_nw, q_ne, q_sw, q_se]
+    rng.shuffle(quads)
+    for quad in quads:
         if len(placed_towns) >= N_TOWNS:
             break
         for wx, wy, _ in quad:
@@ -865,44 +852,42 @@ def _place_towns(world_map: WorldMap, rng: random.Random) -> None:
                 placed_towns.append((wx, wy))
                 break
 
-    # Phase 2: fill remaining slots from the global strict list
-    for wx, wy, _ in all_cands:
-        if len(placed_towns) >= N_TOWNS:
-            break
-        if (wx, wy) in placed_towns:
-            continue
-        if not too_close(wx, wy):
-            placed_towns.append((wx, wy))
-
-    # Quadrant distribution diagnostic
-    nw_count = sum(1 for wx, wy in placed_towns if wx < cx and wy < cy)
-    ne_count = sum(1 for wx, wy in placed_towns if wx >= cx and wy < cy)
-    sw_count = sum(1 for wx, wy in placed_towns if wx < cx and wy >= cy)
-    se_count = sum(1 for wx, wy in placed_towns if wx >= cx and wy >= cy)
-    print(f"[towns] NW:{nw_count} NE:{ne_count} SW:{sw_count} SE:{se_count}")
-
-    # Guarantee one town within 8 chunks of player start
+    # Guarantee one town within 14 chunks of player start
     near_start = any(
-        math.sqrt((wx - sx) ** 2 + (wy - sy) ** 2) <= 8
+        math.sqrt((wx + 1 - sx) ** 2 + (wy + 1 - sy) ** 2) <= 14
         for wx, wy in placed_towns
     )
     if not near_start:
+        all_cands = sorted(
+            [
+                (wx, wy, score_entry(wx, wy))
+                for wx in range(world_map.width - 2)
+                for wy in range(world_map.height - 2)
+                if footprint_clear(wx, wy, STRICT_EXCLUDE, MAX_DIST_STRICT)
+            ],
+            key=lambda c: -c[2],
+        )
         for wx, wy, _ in all_cands:
-            dist_start = math.sqrt((wx - sx) ** 2 + (wy - sy) ** 2)
-            if 6 <= dist_start <= 8:
+            dist_start = math.sqrt((wx + 1 - sx) ** 2 + (wy + 1 - sy) ** 2)
+            if 6 <= dist_start <= 14 and not too_close(wx, wy):
                 placed_towns.append((wx, wy))
                 break
 
     world_map.town_groups    = {}
     world_map.town_chunk_ids = {}
 
-    ROLES = [("NW", 0, 0), ("NE", 1, 0), ("SW", 0, 1), ("SE", 1, 1)]
+    # 3×3 roles: (name, dx, dy) — centre is "C" at (1,1)
+    ROLES = [
+        ("NW", 0, 0), ("N",  1, 0), ("NE", 2, 0),
+        ("W",  0, 1), ("C",  1, 1), ("E",  2, 1),
+        ("SW", 0, 2), ("S",  1, 2), ("SE", 2, 2),
+    ]
 
     for town_id, (nw_wx, nw_wy) in enumerate(placed_towns):
-        # Derive town name from NW chunk seed
-        nw_chunk = world_map.get(nw_wx, nw_wy)
-        nw_seed  = nw_chunk.seed if nw_chunk else (nw_wx * 31 + nw_wy * 37)
-        town_name, _ = assign_chunk_name("town", nw_seed)
+        # Derive town name from centre chunk seed
+        centre_chunk = world_map.get(nw_wx + 1, nw_wy + 1)
+        seed = centre_chunk.seed if centre_chunk else (nw_wx * 31 + nw_wy * 37)
+        town_name, _ = assign_chunk_name("town", seed)
 
         group: list[tuple[int, int]] = []
         for role, dx, dy in ROLES:
@@ -959,12 +944,12 @@ def _generate_roads(world_map: WorldMap, rng: random.Random) -> None:
     if not capital_chunks and not town_groups:
         return
 
-    # NW anchor per town group (role "NW" is at dx=0,dy=0 offset)
+    # Centre chunk per town group (role "C" is at dx=1,dy=1 offset in 3×3 footprint)
     town_anchors: list[tuple[int,int]] = []
     for group in town_groups.values():
         for wx, wy in group:
             chunk = world_map.get(wx, wy)
-            if chunk and getattr(chunk, "town_role", None) == "NW":
+            if chunk and getattr(chunk, "town_role", None) == "C":
                 town_anchors.append((wx, wy))
                 break
 
@@ -1032,7 +1017,16 @@ def _generate_roads(world_map: WorldMap, rng: random.Random) -> None:
             _stamp_road_connection(wx, wy, px, py)
             _stamp_road_connection(px, py, wx, wy)
 
-    # Primary roads: each town NW anchor → nearest capital chunk
+    # Track road connections per town centre — max 2 per town total.
+    town_road_count: dict[tuple[int,int], int] = {t: 0 for t in town_anchors}
+
+    def _town_can_connect(anchor: tuple[int,int]) -> bool:
+        return town_road_count.get(anchor, 0) < 2
+
+    def _record_town_road(anchor: tuple[int,int]) -> None:
+        town_road_count[anchor] = town_road_count.get(anchor, 0) + 1
+
+    # Primary roads: each town centre → nearest capital chunk (1 connection)
     if capital_chunks:
         for tx, ty in town_anchors:
             nearest = min(
@@ -1040,60 +1034,33 @@ def _generate_roads(world_map: WorldMap, rng: random.Random) -> None:
                 key=lambda c: (c[0] - tx) ** 2 + (c[1] - ty) ** 2,
             )
             _build_road(tx, ty, nearest[0], nearest[1], "primary")
+            _record_town_road((tx, ty))
 
-    # Secondary roads: up to 4 closest town-anchor pairs within 16 chunks
+    # Secondary road: player start → nearest town that still has capacity
+    sx, sy = world_map.start_wx, world_map.start_wy
+    if town_anchors:
+        eligible = [t for t in town_anchors if _town_can_connect(t)]
+        if eligible:
+            nearest_town = min(
+                eligible,
+                key=lambda t: (t[0] - sx) ** 2 + (t[1] - sy) ** 2,
+            )
+            _build_road(sx, sy, nearest_town[0], nearest_town[1], "secondary")
+            _record_town_road(nearest_town)
+
+    # Secondary roads: closest town-anchor pairs within 16 chunks, max 1 connection each
     pairs = sorted(
         (math.sqrt((ax - bx) ** 2 + (ay - by) ** 2), ax, ay, bx, by)
         for i, (ax, ay) in enumerate(town_anchors)
         for bx, by in town_anchors[i + 1:]
         if math.sqrt((ax - bx) ** 2 + (ay - by) ** 2) <= 16
     )
-    for _, ax, ay, bx, by in pairs[:4]:
-        _build_road(ax, ay, bx, by, "secondary")
-
-    # Secondary road: player start → nearest town anchor
-    sx, sy = world_map.start_wx, world_map.start_wy
-    if town_anchors:
-        nearest_town = min(
-            town_anchors,
-            key=lambda t: (t[0] - sx) ** 2 + (t[1] - sy) ** 2,
-        )
-        _build_road(sx, sy, nearest_town[0], nearest_town[1], "secondary")
-
-    # Third pass: distant town pairs (10–22 chunks) with no existing road corridor
-    def _has_road_corridor(ax: int, ay: int, bx: int, by: int) -> bool:
-        """Check if any road tile exists within 2 chunks of the straight line between a and b."""
-        steps = max(abs(bx - ax), abs(by - ay))
-        if steps == 0:
-            return False
-        for i in range(steps + 1):
-            t   = i / steps
-            mx  = int(round(ax + t * (bx - ax)))
-            my  = int(round(ay + t * (by - ay)))
-            for odx in range(-2, 3):
-                for ody in range(-2, 3):
-                    if (mx + odx, my + ody) in world_map.road_tiles:
-                        return True
-        return False
-
-    distant_pairs = sorted(
-        (math.sqrt((ax - bx) ** 2 + (ay - by) ** 2), ax, ay, bx, by)
-        for i, (ax, ay) in enumerate(town_anchors)
-        for bx, by in town_anchors[i + 1:]
-        if 10 <= math.sqrt((ax - bx) ** 2 + (ay - by) ** 2) <= 22
-        and not _has_road_corridor(ax, ay, bx, by)
-    )
-    used_in_distant: set[tuple[int,int]] = set()
-    distant_count = 0
-    for _, ax, ay, bx, by in distant_pairs:
-        if distant_count >= 3:
-            break
-        if (ax, ay) in used_in_distant or (bx, by) in used_in_distant:
+    for _, ax, ay, bx, by in pairs:
+        if not _town_can_connect((ax, ay)) or not _town_can_connect((bx, by)):
             continue
         _build_road(ax, ay, bx, by, "secondary")
-        used_in_distant.add((ax, ay))
-        used_in_distant.add((bx, by))
-        distant_count += 1
+        _record_town_road((ax, ay))
+        _record_town_road((bx, by))
 
     # Stamp road EdgeConnectors so local map generator carves cobblestone roads
     _stamp_road_connectors(world_map)

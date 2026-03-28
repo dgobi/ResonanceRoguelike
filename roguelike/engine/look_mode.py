@@ -168,6 +168,18 @@ class LookMode:
             "tile":        terrain_def.get("tile", terrain),
         })
 
+        # Decorative on this tile
+        decor_id = getattr(engine.local_map, "decor", {}).get((x, y))
+        if decor_id:
+            decor_def = engine.data.decoratives.get(decor_id, {})
+            raw_dname = decor_def.get("display_name") or decor_id.replace("_", " ").replace("decor ", "").title()
+            things.append({
+                "type":        "decor",
+                "id":          decor_id,
+                "name":        raw_dname,
+                "description": decor_def.get("description", ""),
+            })
+
         # Player at this tile
         if engine.player.x == x and engine.player.y == y:
             fighter = getattr(engine.player, "fighter", None)
@@ -284,8 +296,17 @@ class LookMode:
         engine:     "Engine",
         cam_x:      int,
         cam_y:      int,
+        x:          int | None = None,
+        y:          int | None = None,
+        color:      tuple | None = None,
     ) -> None:
-        """Draw the look cursor onto the game surface."""
+        """
+        Draw the look cursor onto the game surface.
+        x, y override the cursor position — used by InteractionCursor and the
+        placement cursor to reuse this draw logic without duplicating it.
+        color overrides the border colour — used by the placement cursor to
+        signal valid vs invalid placement positions.
+        """
         tw, th = engine.display.effective_tile_size(
             getattr(engine, "sprite_registry", None)
         )
@@ -294,18 +315,22 @@ class LookMode:
         vp_x = vp.x if vp else 0
         vp_y = vp.y if vp else 0
 
-        screen_x = (self.cursor_x - cam_x) * tw + vp_x
-        screen_y = (self.cursor_y - cam_y) * th + vp_y
+        cx = x if x is not None else self.cursor_x
+        cy = y if y is not None else self.cursor_y
+        screen_x = (cx - cam_x) * tw + vp_x
+        screen_y = (cy - cam_y) * th + vp_y
+
+        border_color = color if color is not None else self.CURSOR_COLOR
 
         # Highlight using a transparent surface blit
         highlight = pygame.Surface((tw, th), pygame.SRCALPHA)
-        highlight.fill(DISCHARGE_FLASH + (60,))
+        highlight.fill(border_color + (40,))
         surface.blit(highlight, (screen_x, screen_y))
 
         # Border
         pygame.draw.rect(
             surface,
-            self.CURSOR_COLOR,
+            border_color,
             (screen_x, screen_y, tw, th),
             1,
         )
@@ -383,6 +408,7 @@ class LookMode:
                 # Name only — no tile glyph
                 color = {
                     "terrain":  self.EXAMINE_DIM,
+                    "decor":    WORN_STONE,
                     "creature": PALE_FLESH,
                     "item":     PALE_LIFE,
                     "player":   FROST_WHITE,
@@ -609,42 +635,28 @@ class LookMode:
             from config import DEBUG_MODE
 
             if fighter and _can_see_exact_hp(engine, entity):
-                # Full per-location HP bars (drawn rects)
+                # Single HP bar
                 bar_total_w = 80
                 bar_h       = 6
-                for loc_id, loc_hp in fighter.location_hp.items():
-                    loc_max  = fighter.location_max.get(loc_id, max(loc_hp, 1))
-                    frac     = loc_hp / loc_max if loc_max > 0 else 0.0
-                    color    = LIFE_GREEN  if frac > 0.5  else \
-                               OLD_GOLD if frac > 0.25 else \
-                               DUSTY_ROSE
-                    empty_color = SLATE_DARK
-                    filled_w    = int(frac * bar_total_w)
+                frac        = fighter.hp_fraction
+                color       = LIFE_GREEN if frac > 0.5 else \
+                              OLD_GOLD   if frac > 0.25 else \
+                              DUSTY_ROSE
+                filled_w    = int(frac * bar_total_w)
 
-                    label = self._font_small.render(loc_id, True, self.EXAMINE_DIM)
-                    popup.blit(label, (UI_PANEL_INSET, y))
+                label = self._font_small.render("HP", True, self.EXAMINE_DIM)
+                popup.blit(label, (UI_PANEL_INSET, y))
 
-                    bar_x = UI_PANEL_INSET + 80
-                    bar_y = y + 2
-                    pygame.draw.rect(popup, empty_color, (bar_x, bar_y, bar_total_w, bar_h))
-                    pygame.draw.rect(popup, color,       (bar_x, bar_y, filled_w,    bar_h))
+                bar_x = UI_PANEL_INSET + 80
+                bar_y = y + 2
+                pygame.draw.rect(popup, SLATE_DARK, (bar_x, bar_y, bar_total_w, bar_h))
+                pygame.draw.rect(popup, color,      (bar_x, bar_y, filled_w,    bar_h))
 
-                    hp_text = self._font_small.render(f"{loc_hp}/{loc_max}", True, color)
-                    popup.blit(hp_text, (bar_x + bar_total_w + 6, y))
-
-                    y += 14
-                    if y > ph - 40:
-                        break
-
-                if fighter.impairments:
-                    imp_str = ", ".join(sorted(fighter.impairments))
-                    popup.blit(
-                        self._font_small.render(
-                            f"Impairments: {imp_str}", True, DUSTY_ROSE
-                        ),
-                        (UI_PANEL_INSET, y),
-                    )
-                    y += 14
+                hp_text = self._font_small.render(
+                    f"{fighter.hp}/{fighter.max_hp}", True, color
+                )
+                popup.blit(hp_text, (bar_x + bar_total_w + 6, y))
+                y += 14
 
                 # Essence profile — visible with true_sight or DEBUG_MODE
                 creature_def   = engine.data.entities.get(getattr(entity, "tile", ""), {})

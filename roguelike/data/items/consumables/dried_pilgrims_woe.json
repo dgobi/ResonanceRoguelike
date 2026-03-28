@@ -1,0 +1,15 @@
+{
+  "id": "dried_pilgrims_woe",
+  "name": "dried pilgrim's woe",
+  "description": "Pressed petals from the pilgrim's woe, dried between flat stones. The medicinal smell is stronger now.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.01,
+  "stackable": true,
+  "on_use": null,
+  "keywords": [
+    {"tag": "fibrous", "tier": 1},
+    {"tag": "aromatic", "tier": 2},
+    {"tag": "alchemical", "tier": 1}
+  ]
+}

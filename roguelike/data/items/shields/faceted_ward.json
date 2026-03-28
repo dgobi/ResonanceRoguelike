@@ -1,0 +1,16 @@
+{
+  "id": "faceted_ward",
+  "name": "The Faceted Ward",
+  "tile": "faceted_ward",
+  "type": "shield",
+  "category": "shield",
+  "slot": "offhand",
+  "block_chance": 0.22,
+  "block_value": 2,
+  "weight": 3.2,
+  "description": "A warped disc of verdigris bronze, the metal buckled and re-set so many times the original form is barely legible. A face was once pressed into the front — mouth open, eyes shut. Most of the features have been beaten flat. It turns a blow poorly. It is better than nothing.",
+  "essence": "Binding",
+  "essence_strength": 0.5,
+  "on_use": "equip_toggle",
+  "keywords": [{"tag": "binding", "tier": 2}, {"tag": "resonant", "tier": 1}]
+}

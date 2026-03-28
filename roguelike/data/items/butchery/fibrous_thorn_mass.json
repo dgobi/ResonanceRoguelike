@@ -1,0 +1,19 @@
+{
+  "id": "fibrous_thorn_mass",
+  "name": "Thorn Mass",
+  "description": "Densely interlocked fibres. The thorns are integrated into the structure, not superficial. Cutting through this took more effort than it looked like it would.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.3,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "fibrous",
+      "tier": 2
+    },
+    {
+      "tag": "cutting",
+      "tier": 1
+    }
+  ]
+}

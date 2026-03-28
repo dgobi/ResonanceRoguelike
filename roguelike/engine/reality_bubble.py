@@ -25,6 +25,12 @@ class RealityBubble:
         group = world_map.get_town_group(player_wx, player_wy)
         if group:
             self.active_chunks.update(group)
+        # Chebyshev-1: all 8 adjacent chunks also active for cross-chunk entity ticking
+        for _dx in (-1, 0, 1):
+            for _dy in (-1, 0, 1):
+                if _dx == 0 and _dy == 0:
+                    continue
+                self.active_chunks.add((player_wx + _dx, player_wy + _dy))
 
     def is_active(self, wx: int, wy: int) -> bool:
         return (wx, wy) in self.active_chunks

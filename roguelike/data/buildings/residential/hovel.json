@@ -26,6 +26,12 @@
     "#.cc..#",
     "#######"
   ],
-  "special_tiles": [],
+  "special_tiles": [
+    {
+      "x": 4, "y": 1,
+      "type": "item", "item_id": "lab_note", "text_id": "door_notice_a",
+      "note": "A notice nailed to the inside of the door"
+    }
+  ],
   "note": "b=bed position, c=chest position. Furniture system pending — map to floor until wired."
 }

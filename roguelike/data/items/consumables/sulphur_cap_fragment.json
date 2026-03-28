@@ -1,0 +1,31 @@
+{
+  "id": "sulphur_cap_fragment",
+  "name": "sulphur cap fragment",
+  "description": "A wedge of orange fungus cut from the cap. The bitter oil beneath is the useful part. The smell lingers on the hands for days.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.04,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 20,
+  "eat_message": "Bitter. Leaves a faint chemical taste at the back of the throat.",
+  "harvest_from": "shroom_sulphur_cap",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "corrosive",
+      "tier": 1
+    },
+    {
+      "tag": "caustic",
+      "tier": 1
+    },
+    {
+      "tag": "aromatic",
+      "tier": 1
+    }
+  ]
+}

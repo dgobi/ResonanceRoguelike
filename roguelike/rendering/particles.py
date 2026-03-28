@@ -115,7 +115,7 @@ class ParticleSystem:
 
     def emit_burst(self, particles: list[Particle]) -> None:
         """Add multiple particles at once."""
-        remaining = int(self._cap) - len(self.particles)
+        remaining = max(0, int(self._cap) - len(self.particles))
         for p in particles[:remaining]:
             self.particles.append(p)
 
@@ -181,6 +181,9 @@ class ParticleSystem:
                     continue
             alive.append(p)
         self.particles = alive
+        # Hard cap: if update() grew the list past MAX_PARTICLES, trim oldest first.
+        if len(self.particles) > self.MAX_PARTICLES:
+            self.particles = self.particles[-self.MAX_PARTICLES:]
 
     def _track_performance(self, dt: float) -> None:
         fps = 1.0 / dt if dt > 0 else 999.0
@@ -225,15 +228,17 @@ class ParticleSystem:
 
         Uses a single shared scratch surface — zero per-particle allocations.
         """
-        if not self.particles:
-            return
-
-        # Lazily create / resize scratch surface
+        # Always clear scratch first — prevents sprite accumulation across frames.
+        # Must happen before the early-return guard; a dirty scratch from a
+        # prior frame must never survive to the next draw call.
         surf_w, surf_h = surf.get_size()
         if self._scratch is None or self._scratch_size != (surf_w, surf_h):
             self._scratch = pygame.Surface((surf_w, surf_h), pygame.SRCALPHA)
             self._scratch_size = (surf_w, surf_h)
         self._scratch.fill((0, 0, 0, 0))
+
+        if not self.particles:
+            return
 
         _bounds = pygame.Rect(0, 0, surf_w, surf_h)
 
@@ -252,9 +257,10 @@ class ParticleSystem:
                 if sy < _vp_y1 - 100 or sy > _vp_y2 + 100:
                     continue
             else:
-                # Screen-space: viewport-relative coords added to viewport origin
-                sx = int(map_origin_x + p.x)
-                sy = int(map_origin_y + p.y)
+                # Screen-space: p.x/y hold absolute screen pixel coordinates.
+                # Do NOT add map_origin — that would double-count viewport.x.
+                sx = int(p.x)
+                sy = int(p.y)
 
             color = (p.r, p.g, p.b, p.alpha)
 
@@ -522,6 +528,148 @@ def make_sparkle(
 
 
 # ------------------------------------------------------------------ #
+#  Ember particle factory (campfire_lit and future fire tiles)
+# ------------------------------------------------------------------ #
+
+def make_ember_particles(
+        screen_x: float,
+        screen_y: float,
+        rng:      random.Random,
+) -> list[Particle]:
+    """
+    1-2 screen-space square particles rising from a fire tile.
+    screen_x/y: centre of the tile in absolute screen pixels.
+    Gravity (220 px/s²) counters the upward velocity, giving a brief arc.
+    """
+    count = rng.randint(1, 2)
+    result = []
+    for _ in range(count):
+        col = rng.choice((OLD_GOLD, EMBER_GLOW))
+        lt = rng.uniform(0.4, 0.7)
+        result.append(Particle(
+            x=screen_x + rng.uniform(-4, 4),
+            y=screen_y + rng.uniform(-2, 2),
+            vx=rng.uniform(-8.0, 8.0),
+            vy=rng.uniform(-70.0, -90.0),   # upward; gravity pulls back
+            lifetime=lt, max_lifetime=lt,
+            r=col[0], g=col[1], b=col[2],
+            alpha=200,
+            size=rng.uniform(1.5, 2.5),
+            space="screen", shape="square",
+        ))
+    return result
+
+
+# ------------------------------------------------------------------ #
+#  Tiered flame particle factories
+# ------------------------------------------------------------------ #
+
+def make_flame_low_particles(
+        screen_x: float,
+        screen_y: float,
+        rng:      random.Random,
+) -> list[Particle]:
+    """
+    Small flicker: candles, stub torches. 1 particle per 4 frames.
+    Uses dim amber (EARTH_TONE) and forge orange (FORGE_FIRE).
+    """
+    col = rng.choice((EARTH_TONE, FORGE_FIRE))
+    lt  = rng.uniform(0.25, 0.45)
+    return [Particle(
+        x=screen_x + rng.uniform(-2, 2),
+        y=screen_y + rng.uniform(-1, 1),
+        vx=rng.uniform(-4.0, 4.0),
+        vy=rng.uniform(-45.0, -60.0),
+        lifetime=lt, max_lifetime=lt,
+        r=col[0], g=col[1], b=col[2],
+        alpha=180,
+        size=rng.uniform(1.0, 2.0),
+        space="screen", shape="square",
+    )]
+
+
+def make_flame_med_particles(
+        screen_x: float,
+        screen_y: float,
+        rng:      random.Random,
+) -> list[Particle]:
+    """
+    Medium fire: campfire_lit. 1-2 particles per 3 frames.
+    Uses OLD_GOLD and EMBER_GLOW.
+    """
+    count = rng.randint(1, 2)
+    result = []
+    for _ in range(count):
+        col = rng.choice((OLD_GOLD, EMBER_GLOW))
+        lt  = rng.uniform(0.4, 0.7)
+        result.append(Particle(
+            x=screen_x + rng.uniform(-5, 5),
+            y=screen_y + rng.uniform(-2, 2),
+            vx=rng.uniform(-8.0, 8.0),
+            vy=rng.uniform(-70.0, -90.0),
+            lifetime=lt, max_lifetime=lt,
+            r=col[0], g=col[1], b=col[2],
+            alpha=200,
+            size=rng.uniform(1.5, 2.5),
+            space="screen", shape="square",
+        ))
+    return result
+
+
+def make_flame_high_particles(
+        screen_x: float,
+        screen_y: float,
+        rng:      random.Random,
+) -> list[Particle]:
+    """
+    Large fire: bonfire, burning terrain. 2-3 particles per 2 frames.
+    Uses FORGE_FIRE, BELL_BRASS, RESONANCE_GOLD for a roaring palette.
+    """
+    count = rng.randint(2, 3)
+    result = []
+    for _ in range(count):
+        col = rng.choice((FORGE_FIRE, BELL_BRASS, RESONANCE_GOLD))
+        lt  = rng.uniform(0.5, 0.8)
+        result.append(Particle(
+            x=screen_x + rng.uniform(-8, 8),
+            y=screen_y + rng.uniform(-3, 3),
+            vx=rng.uniform(-12.0, 12.0),
+            vy=rng.uniform(-90.0, -120.0),
+            lifetime=lt, max_lifetime=lt,
+            r=col[0], g=col[1], b=col[2],
+            alpha=220,
+            size=rng.uniform(2.0, 3.5),
+            space="screen", shape="square",
+        ))
+    return result
+
+
+def make_smoke_incense_particles(
+        screen_x: float,
+        screen_y: float,
+        rng:      random.Random,
+) -> list[Particle]:
+    """
+    Thin drifting smoke: incense burners, smouldering embers.
+    1 particle per 5 frames. SLATE_MID fading to DUNGEON_SHADOW.
+    """
+    col = rng.choice((SLATE_MID, DUNGEON_SHADOW))
+    lt  = rng.uniform(0.8, 1.4)
+    ox  = rng.uniform(-3, 3)
+    return [Particle(
+        x=screen_x + ox,
+        y=screen_y + rng.uniform(-2, 0),
+        vx=rng.uniform(-3.0, 3.0),
+        vy=rng.uniform(-30.0, -50.0),
+        lifetime=lt, max_lifetime=lt,
+        r=col[0], g=col[1], b=col[2],
+        alpha=120,
+        size=rng.uniform(1.5, 2.5),
+        space="screen", shape="circle",
+    )]
+
+
+# ------------------------------------------------------------------ #
 #  Blood / fluid particle factories
 # ------------------------------------------------------------------ #
 
@@ -690,11 +838,11 @@ def _build_fog_surface(
     sh = max(1, h // _FOG_SCALE)
 
     if fog_type == "forgetting_fog":
-        r_base, g_base, b_base = 180, 195, 240   # strong blue-white
-        max_alpha = 240.0
+        r_base, g_base, b_base = 227, 230, 255   # GHOST_WHITE — spirit-light blue-white
+        fov_shrink = 0.75  # encroaches further than normal fog
     else:
-        r_base, g_base, b_base = 210, 215, 220
-        max_alpha = 200.0
+        r_base, g_base, b_base = 218, 224, 234   # FROST_WHITE — cold grey-white
+        fov_shrink = 1.0
 
     # Centre: player screen position scaled to small surface, or fallback to centre
     if centre_x >= 0 and centre_y >= 0:
@@ -704,24 +852,22 @@ def _build_fog_surface(
         cx = sw / 2.0
         cy = sh / 2.0
 
-    # max_dist from the chosen centre to the farthest corner
-    corners = [
-        (0 - cx, 0 - cy),
-        (sw - cx, 0 - cy),
-        (0 - cx, sh - cy),
-        (sw - cx, sh - cy),
-    ]
-    max_dist = max(math.sqrt(dx * dx + dy * dy) for dx, dy in corners)
-    # Clear radius derived from FOV: effective_fov tiles × min tile dimension,
-    # scaled down to the small surface space.
-    fov_px_small = (effective_fov * min(tile_w, tile_h)) / _FOG_SCALE
-    clear_dist = min(fov_px_small, max_dist * 0.95)
-    # Forgetting fog encroaches further — smaller clear centre
-    if fog_type == "forgetting_fog":
-        clear_dist *= 0.75
-    denom = max(0.001, max_dist - clear_dist)
+    # FOV radius in scaled-surface pixels.
+    # Multi-segment strength ramp for additive blending.
+    # Surface stores premultiplied fog colour (fog_rgb × strength/255) in RGB,
+    # no alpha needed — BLEND_RGBA_ADD adds raw RGB channels to destination:
+    #   inside s45          → strength 0    (inner area completely unaffected)
+    #   s45 → s70           → cubic 0→160  (fog brightens rapidly toward edge)
+    #   s70 → s90           → linear 160→230 (dense luminous haze)
+    #   beyond s90          → flat 245     (world lost in fog colour)
+    fov_px_small = (effective_fov * min(tile_w, tile_h)) / _FOG_SCALE * fov_shrink
+    s45 = fov_px_small * 0.45
+    s70 = fov_px_small * 0.70
+    s90 = fov_px_small * 0.90
 
-    small = pygame.Surface((sw, sh), pygame.SRCALPHA)
+    # Plain surface — no SRCALPHA. RGB carries premultiplied fog colour.
+    # BLEND_RGBA_ADD ignores per-pixel alpha; strength is baked into RGB.
+    small = pygame.Surface((sw, sh))
 
     try:
         import numpy as np
@@ -730,30 +876,63 @@ def _build_fog_surface(
         dx   = xs[:, None] - cx
         dy   = ys[None, :] - cy
         dist = np.sqrt(dx * dx + dy * dy)
-        t    = (dist - clear_dist) / denom
-        t    = np.clip(t, 0.0, 1.0) ** 2.2
-        alpha_arr = (t * max_alpha * intensity).astype(np.uint8)
+
+        # Angular noise — ragged organic boundary instead of perfect circle.
+        # Sum of sines at different frequencies; no external library needed.
+        angle = np.arctan2(dy, dx)          # (sw, sh) array of angles -π..π
+        noise = (
+            np.sin(angle * 3.7 + 1.1) * 0.35 +
+            np.sin(angle * 7.1 + 2.3) * 0.20 +
+            np.sin(angle * 13.3 + 0.7) * 0.10
+        )                                   # roughly -0.65 to +0.65
+        # Perturb: shrink or expand the effective distance by noise
+        pdist = dist / np.maximum(0.001, 1.0 + noise * 0.25)
+
+        # Zone 2: cubic 0→160 over s45..s70
+        t2 = np.clip((pdist - s45) / max(0.001, s70 - s45), 0.0, 1.0) ** 3
+        # Zone 3: linear 160→230 over s70..s90
+        t3 = np.clip((pdist - s70) / max(0.001, s90 - s70), 0.0, 1.0)
+
+        strength = np.where(pdist <= s45,  0.0,
+                   np.where(pdist <= s70,  160.0 * t2,
+                   np.where(pdist <= s90,  160.0 + 70.0 * t3,
+                                           245.0)))
+        strength = np.clip(strength * intensity, 0.0, 245.0)
+
+        # Premultiply: baked fog colour = fog_rgb × strength / 255
         pix = pygame.surfarray.pixels3d(small)
-        pix[:, :, 0] = r_base
-        pix[:, :, 1] = g_base
-        pix[:, :, 2] = b_base
+        pix[:, :, 0] = np.clip(r_base * strength / 255.0, 0, 255).astype(np.uint8)
+        pix[:, :, 1] = np.clip(g_base * strength / 255.0, 0, 255).astype(np.uint8)
+        pix[:, :, 2] = np.clip(b_base * strength / 255.0, 0, 255).astype(np.uint8)
         del pix
-        a_ch = pygame.surfarray.pixels_alpha(small)
-        a_ch[:, :] = alpha_arr
-        del a_ch
     except Exception:
         # Pure Python fallback
         for px in range(sw):
             for py in range(sh):
                 ddx = px - cx
                 ddy = py - cy
-                dist = math.sqrt(ddx * ddx + ddy * ddy)
-                if dist <= clear_dist:
-                    continue
-                t = ((dist - clear_dist) / denom) ** 2.2
-                t = max(0.0, min(1.0, t))
-                small.set_at((px, py),
-                             (r_base, g_base, b_base, int(t * max_alpha * intensity)))
+                d    = math.sqrt(ddx * ddx + ddy * ddy)
+                ang  = math.atan2(ddy, ddx)
+                noise_v = (
+                    math.sin(ang * 3.7 + 1.1) * 0.35 +
+                    math.sin(ang * 7.1 + 2.3) * 0.20 +
+                    math.sin(ang * 13.3 + 0.7) * 0.10
+                )
+                pd = d / max(0.001, 1.0 + noise_v * 0.25)
+                if pd <= s45:
+                    s = 0.0
+                elif pd <= s70:
+                    s = 160.0 * min(1.0, (pd - s45) / max(0.001, s70 - s45)) ** 3
+                elif pd <= s90:
+                    s = 160.0 + 70.0 * min(1.0, (pd - s70) / max(0.001, s90 - s70))
+                else:
+                    s = 245.0
+                s = min(245.0, s * intensity)
+                small.set_at((px, py), (
+                    int(r_base * s / 255.0),
+                    int(g_base * s / 255.0),
+                    int(b_base * s / 255.0),
+                ))
 
     return pygame.transform.smoothscale(small, (w, h))
 
@@ -816,10 +995,12 @@ def draw_fog_vignette(
             engine._fog_surface_cx        = centre_x
             engine._fog_surface_cy        = centre_y
 
-        surf.blit(engine._fog_surface, (ox, oy))
+        surf.blit(engine._fog_surface, (ox, oy),
+                  special_flags=pygame.BLEND_RGBA_ADD)
         return
 
     # No engine — build each frame (fallback, not ideal)
     surf.blit(_build_fog_surface(w, h, intensity, fog_type,
                                  effective_fov, tile_w, tile_h,
-                                 centre_x, centre_y), (ox, oy))
+                                 centre_x, centre_y), (ox, oy),
+              special_flags=pygame.BLEND_RGBA_ADD)

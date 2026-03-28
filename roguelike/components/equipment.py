@@ -17,6 +17,9 @@ SLOTS = [
     "belt_2",
     "belt_3",
     "light",
+    "talisman_1",
+    "talisman_2",
+    "talisman_3",
 ]
 
 

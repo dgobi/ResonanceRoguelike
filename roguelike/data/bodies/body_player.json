@@ -1,30 +1,12 @@
 {
   "id": "body_player",
+  "base_hp": 60,
   "locations": [
-    {"id": "head",      "size": 1, "vital": true,  "hp": 10,
-     "damage_threshold": 0.5, "threshold_impairment": "head_wounded",
-     "destroyed_impairment": "death",
-     "natural_armor": [{"name": "skull", "coverage": 0.4, "armor_value": 1, "material": "bone"},
-                       {"name": "flesh", "coverage": 1.0, "armor_value": 0, "material": "flesh"}]},
-    {"id": "torso",     "size": 4, "vital": true,  "hp": 16,
-     "damage_threshold": 0.5, "threshold_impairment": "torso_wounded",
-     "destroyed_impairment": "death",
-     "natural_armor": [{"name": "flesh", "coverage": 1.0, "armor_value": 0, "material": "flesh"}]},
-    {"id": "right_arm", "size": 2, "vital": false, "hp": 8,
-     "damage_threshold": 0.5, "threshold_impairment": "arm_weakened",
-     "destroyed_impairment": "dominant_hand_lost",
-     "natural_armor": [{"name": "flesh", "coverage": 1.0, "armor_value": 0, "material": "flesh"}]},
-    {"id": "left_arm",  "size": 2, "vital": false, "hp": 8,
-     "damage_threshold": 0.5, "threshold_impairment": "arm_weakened",
-     "destroyed_impairment": "off_hand_lost",
-     "natural_armor": [{"name": "flesh", "coverage": 1.0, "armor_value": 0, "material": "flesh"}]},
-    {"id": "right_leg", "size": 2, "vital": false, "hp": 8,
-     "damage_threshold": 0.5, "threshold_impairment": "leg_impaired",
-     "destroyed_impairment": "leg_lost",
-     "natural_armor": [{"name": "flesh", "coverage": 1.0, "armor_value": 0, "material": "flesh"}]},
-    {"id": "left_leg",  "size": 2, "vital": false, "hp": 8,
-     "damage_threshold": 0.5, "threshold_impairment": "leg_impaired",
-     "destroyed_impairment": "leg_lost",
-     "natural_armor": [{"name": "flesh", "coverage": 1.0, "armor_value": 0, "material": "flesh"}]}
+    {"id": "head",      "size": 1, "damage_multiplier": 1.5},
+    {"id": "torso",     "size": 4, "damage_multiplier": 1.0},
+    {"id": "right_arm", "size": 2, "damage_multiplier": 0.8},
+    {"id": "left_arm",  "size": 2, "damage_multiplier": 0.8},
+    {"id": "right_leg", "size": 2, "damage_multiplier": 0.8},
+    {"id": "left_leg",  "size": 2, "damage_multiplier": 0.8}
   ]
 }

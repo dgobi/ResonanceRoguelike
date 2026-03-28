@@ -2431,6 +2431,141 @@
       ],
       "visual_fx": "sparkle"
     },
+    "coldbell_flower_depleted": {
+      "ascii": ".",
+      "color_fg": [
+        60,
+        70,
+        80
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        15,
+        20,
+        25
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        86,
+        0
+      ]
+    },
+    "flower_pilgrims_woe_depleted": {
+      "ascii": ".",
+      "color_fg": [
+        50,
+        60,
+        50
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        12,
+        15,
+        12
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        0
+      ]
+    },
+    "flower_murk_violet_depleted": {
+      "ascii": ".",
+      "color_fg": [
+        50,
+        40,
+        55
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        12,
+        10,
+        15
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        0
+      ]
+    },
+    "shroom_sulphur_cap_depleted": {
+      "ascii": ".",
+      "color_fg": [
+        60,
+        55,
+        30
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        15,
+        14,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        0
+      ]
+    },
+    "shroom_prophets_eye_depleted": {
+      "ascii": ".",
+      "color_fg": [
+        55,
+        55,
+        55
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        14,
+        14,
+        14
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ],
+      "sprite": [
+        0,
+        0
+      ]
+    },
     "resonance_stone": {
       "ascii": "o",
       "color_fg": [
@@ -2458,6 +2593,137 @@
         0
       ],
       "visual_fx": "pulse_dim"
+    },
+    "resonance_seep": {
+      "ascii": ".",
+      "color_fg": [
+        95,
+        80,
+        120
+      ],
+      "color_bg": [
+        6,
+        5,
+        9
+      ],
+      "color_fg_dark": [
+        18,
+        12,
+        24
+      ],
+      "color_bg_dark": [
+        4,
+        4,
+        7
+      ],
+      "sprite": [
+        3,
+        0
+      ],
+      "visual_fx": ["sparkle", "pulse_dim"]
+    },
+    "faceted_ward": {
+      "ascii": ")",
+      "color_fg": [
+        105,
+        155,
+        120
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        22,
+        18
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        0,
+        7
+      ]
+    },
+    "pebble": {
+      "ascii": "\u00b7",
+      "color_fg": [
+        109,
+        117,
+        141
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        16,
+        20
+      ],
+      "color_bg_dark": [
+        0,
+        0,
+        0
+      ],
+      "sprite": [
+        3,
+        0
+      ]
+    },
+    "dead_wood": {
+      "ascii": "%",
+      "color_fg": [115, 84, 52],
+      "color_bg": [6, 6, 8],
+      "color_fg_dark": [12, 10, 8],
+      "color_bg_dark": [4, 5, 9]
+    },
+    "flint_rock": {
+      "ascii": "'",
+      "color_fg": [74, 84, 98],
+      "color_bg": [6, 6, 8],
+      "color_fg_dark": [10, 12, 18],
+      "color_bg_dark": [4, 5, 9]
+    },
+    "flint_rock_depleted": {
+      "ascii": ".",
+      "color_fg": [42, 48, 56],
+      "color_bg": [6, 6, 8],
+      "color_fg_dark": [8, 9, 12],
+      "color_bg_dark": [4, 5, 9]
+    },
+    "campfire_unlit": {
+      "ascii": "*",
+      "color_fg": [74, 84, 98],
+      "color_bg": [6, 6, 8],
+      "color_fg_dark": [10, 12, 18],
+      "color_bg_dark": [4, 5, 9]
+    },
+    "campfire_lit": {
+      "ascii": "*",
+      "color_fg": [226, 181, 112],
+      "color_bg": [61, 20, 48],
+      "color_fg_dark": [10, 12, 8],
+      "color_bg_dark": [4, 5, 9]
+    },
+    "clay_deposit": {
+      "ascii": "o",
+      "color_fg": [164, 104, 72],
+      "color_bg": [6, 6, 8],
+      "color_fg_dark": [14, 10, 8],
+      "color_bg_dark": [4, 5, 9]
+    },
+    "clay_deposit_depleted": {
+      "ascii": ".",
+      "color_fg": [88, 72, 64],
+      "color_bg": [6, 6, 8],
+      "color_fg_dark": [10, 9, 8],
+      "color_bg_dark": [4, 5, 9]
     }
   }
 }

@@ -1,0 +1,9 @@
+{
+  "id": "world_label_a",
+  "title": "A Merchant's Ledger, Last Page",
+  "type": "record",
+  "condition": "stained",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Bolts of cloth (4). Cord, oiled (2 bundles). Worked iron, hinges (6 pairs). Lamp oil, sealed flask (3).\n\nOwing: Dunner. Pietskar. The woman from the mill — I never learned her name.\n\nNote: Do not resupply from Keth until the bell-business is resolved. The stone in his cellar is wrong.", "damaged": false}]
+}

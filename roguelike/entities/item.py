@@ -32,9 +32,11 @@ class Item(Entity):
         self.on_use:    str | None = None
 
         # Type-specific data — populated by ItemFactory
-        self.nutrition:    float | None = None
-        self.hydration:    float | None = None
-        self.heal_amount:  int   | None = None
+        self.nutrition:     float | None = None
+        self.hydration:     float | None = None
+        self.heal_amount:   int   | None = None
+        self.eat_message:   str   | None = None
+        self.drink_message: str   | None = None
         self.burn_turns:   int   | None = None
         self.turns_lit:    int          = 0
         self.light_data:   dict | None  = None
@@ -43,3 +45,9 @@ class Item(Entity):
         self.qualities:    dict         = {}
         self.description:  str          = ""
         self.equipped:     bool         = False
+        self.harvest_from: str | None   = None
+        self.keywords:          list         = []
+        self.decay_timer:       int | None   = None
+        # Temporary essence coating — list of {essence, strength, hits_remaining}
+        # Applied via apply_to_weapon handler. Each hit consumes one charge.
+        self.temporary_essence: list         = []

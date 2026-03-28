@@ -1,0 +1,19 @@
+{
+  "id": "grave_dust",
+  "name": "Grave Dust",
+  "description": "What remains when something that should have stayed buried is cut apart. Fine and grey. It settles slowly. The resonance content is measurable.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.1,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "resonant",
+      "tier": 1
+    },
+    {
+      "tag": "bony",
+      "tier": 1
+    }
+  ]
+}

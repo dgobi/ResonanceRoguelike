@@ -4,29 +4,53 @@
   "description": "Old drownings that did not stay drowned. It does not pursue. It is already where you need to go, patient in the dark water, knowing you will come.",
   "tile": "bog_wraith",
   "blocks_movement": true,
+  "base_hp": 20,
+  "armour_value": 3,
   "fighter": {
-    "max_hp":  18,
-    "power":   6,
+    "max_hp": 20,
+    "power": 6,
     "defense": 2
   },
+  "ability_range": 8,
   "perception": {
-    "sight_radius":   6,
+    "sight_radius": 8,
     "hearing_radius": 10,
-    "sees_in_dark":   true,
-    "faction":        "void",
-    "hostile_to":     ["player"]
+    "sees_in_dark": true,
+    "faction": "void",
+    "hostile_to": [
+      "player"
+    ]
   },
   "ai_type": "ambush",
   "wander_radius": 4,
-  "spawn_zones": ["mere", "deepwood"],
+  "pursuit_timeout": 20,
+  "spawn_zones": [
+    "mere",
+    "deepwood"
+  ],
   "damage_dice": "1d4",
   "damage_bonus": 0,
-  "body_id": "body_bog_wraith",
   "essence_modifiers": {
-    "Dissolution": 0.3, "Quickening": 0.8, "Binding": 3.0,
-    "Severance": 2.5, "Consumption": 0.5, "Revelation": 1.2
+    "Dissolution": 0.3,
+    "Quickening": 0.8,
+    "Binding": 3.0,
+    "Severance": 2.5,
+    "Consumption": 0.5,
+    "Revelation": 1.2
   },
+  "ephemeral": true,
   "attack_verb": "pours through thee",
   "blood_type": "ectoplasm",
-  "corpse_sprite": {"col": 2055, "row": 0}
+  "limbs": [
+    {
+      "id": "form",
+      "size": 1,
+      "damage_multiplier": 1.0
+    }
+  ],
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  }
 }

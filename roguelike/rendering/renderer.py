@@ -100,15 +100,18 @@ class Renderer:
         bg:      tuple[int, int, int] | None,
         tx:      int,
         ty:      int,
+        zoom:    int = 1,
     ) -> None:
         fs  = self.display.font_sheet
-        tw  = fs.tile_width
-        th  = fs.tile_height
+        tw  = fs.tile_width  * zoom
+        th  = fs.tile_height * zoom
         px  = tx * tw
         py  = ty * th
         if bg is not None:
             pygame.draw.rect(surface, bg, (px, py, tw, th))
         glyph = fs.get_glyph_char(char).copy()
+        if zoom != 1:
+            glyph = pygame.transform.scale(glyph, (tw, th))
         tint  = pygame.Surface((tw, th), pygame.SRCALPHA)
         tint.fill((*fg, 255))
         glyph.blit(tint, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
@@ -168,7 +171,7 @@ class Renderer:
                 ch  = chr(self.registry.char(tile_id))
                 afg = self.registry.fg(tile_id)
                 abg = self.registry.bg(tile_id)
-                self._draw_glyph(surface, ch, afg, abg, tx, ty)
+                self._draw_glyph(surface, ch, afg, abg, tx, ty, zoom=zoom)
             return
 
         # Full-colour mode: apply brightness overlay if fg provided
@@ -242,17 +245,18 @@ class Renderer:
 
     def render(
         self,
-        display_surface: pygame.Surface,
-        local_map:       "LocalMap",
-        entities:        list["Entity"],
-        cam_x:           int,
-        cam_y:           int,
-        viewport_rect:   pygame.Rect | None = None,
-        shake_offset:    tuple[int, int]    = (0, 0),
-        visual_events:   list | None        = None,
-        void_rect:       pygame.Rect | None = None,
-        player_x:        int                = -999,
-        player_y:        int                = -999,
+        display_surface:      pygame.Surface,
+        local_map:            "LocalMap",
+        entities:             list["Entity"],
+        cam_x:                int,
+        cam_y:                int,
+        viewport_rect:        pygame.Rect | None = None,
+        shake_offset:         tuple[int, int]    = (0, 0),
+        visual_events:        list | None        = None,
+        void_rect:            pygame.Rect | None = None,
+        player_x:             int                = -999,
+        player_y:             int                = -999,
+        suppressed_entity_ids: "set | None"      = None,
     ) -> None:
         if viewport_rect is None:
             viewport_rect = display_surface.get_rect()
@@ -279,23 +283,37 @@ class Renderer:
         for e in entities:
             if e.name == "Player":
                 ls = getattr(e, "light_source", None)
-                if ls and ls.active and hasattr(ls, "color"):
+                if ls and ls.active and hasattr(ls, "color") and getattr(ls, "is_dominant", True):
                     light_color = ls.color
                 break
+
+        # Compute blit position first so assertion inside _draw_map_to sees
+        # the actual screen landing coordinates (shake included).
+        blit_x = viewport_rect.x + shake_offset[0]
+        blit_y = viewport_rect.y + shake_offset[1]
 
         self._draw_map_to(terrain_surf, local_map,
                           cam_x, cam_y, tiles_x, tiles_y, zoom,
                           light_color=light_color,
-                          player_x=player_x, player_y=player_y)
+                          player_x=player_x, player_y=player_y,
+                          blit_x=blit_x, blit_y=blit_y,
+                          viewport_w=vw, viewport_h=vh)
+
+        decor_surf = pygame.Surface((disp_w, disp_h), pygame.SRCALPHA)
+        decor_surf.fill((0, 0, 0, 0))
+        self._draw_decor_to(decor_surf, local_map,
+                            cam_x, cam_y, tiles_x, tiles_y, zoom,
+                            light_color=light_color)
 
         entity_surf = pygame.Surface((disp_w, disp_h), pygame.SRCALPHA)
+        entity_surf.fill((0, 0, 0, 0))
         self._draw_entities_to(entity_surf, local_map, entities,
-                               cam_x, cam_y, zoom)
+                               cam_x, cam_y, zoom,
+                               suppressed_ids=suppressed_entity_ids)
 
         display_surface.set_clip(viewport_rect)
-        blit_x = viewport_rect.x + shake_offset[0]
-        blit_y = viewport_rect.y + shake_offset[1]
         display_surface.blit(terrain_surf, (blit_x, blit_y))
+        display_surface.blit(decor_surf,   (blit_x, blit_y))
         display_surface.blit(entity_surf,  (blit_x, blit_y))
 
         self._draw_wraith_aura(display_surface, entities, local_map,
@@ -498,9 +516,11 @@ class Renderer:
             pulsed = self._storm_vignette.copy()
             pulsed.set_alpha(int(200 + pulse * 55))
             surf.blit(pulsed, (vx, vy))
-            # Flickering dark glyphs
+            # Flickering dark glyphs (sprite-driven if glyph_tiles in wdef)
+            _sreg = getattr(engine, "sprite_registry", None)
             self._draw_storm_glyph_overlay(
-                surf, now_ms, intensity, vx, vy, vw, vh)
+                surf, now_ms, intensity, vx, vy, vw, vh,
+                wdef=wdef, sprite_registry=_sreg)
 
     def _draw_precipitation(
         self,
@@ -535,6 +555,10 @@ class Renderer:
                 spacing, color, alpha, vw, vh)
         elif ptype == "dot":
             self._draw_dot_grid(
+                self._weather_surf, now_ms, wdef,
+                spacing, color, alpha, vw, vh)
+        elif ptype == "soft_blob":
+            self._draw_soft_blob_grid(
                 self._weather_surf, now_ms, wdef,
                 spacing, color, alpha, vw, vh)
 
@@ -613,44 +637,97 @@ class Renderer:
         dot_size   = wdef.get("dot_size", 2)
         full_color = (*color, alpha)
 
-        sp = max(1, spacing)
+        sp          = max(1, spacing)
+        rows_count  = vh // sp + 3
+        # total_height is the full modular cycle — always larger than vh so
+        # wrap points (total_height → 0) are off-screen below the viewport.
+        total_height = rows_count * sp
+        # Float scroll — no int truncation so 48 px/s still advances smoothly
+        # each frame rather than advancing 0 px/frame at 60fps.
+        scroll_y = now_ms / 1000.0 * speed_y
 
-        total_scroll_y   = int(now_ms / 1000.0 * speed_y)
-        first_row        = total_scroll_y // sp
-        row_pixel_offset = total_scroll_y % sp
-
-        for row in range(first_row, first_row + vh // sp + 3):
+        for row in range(rows_count):
             for col in range(-1, vw // sp + 2):
-                # Fixed cell identity
+                # Stable cell identity — same hash for (row, col) every frame
                 key = ((col * 1234567) ^ (row * 7654321)) & 0xFFFF
 
                 jx = key % sp
                 jy = (key >> 8) % sp
 
-                # Oscillation on screen position only (not cell identity)
+                # Oscillation — horizontal only, does not affect scroll
                 phase = row * 1.3 + col * 0.7
                 drift_x = int(math.sin(
                     now_ms / osc_period * math.pi * 2 + phase
                 ) * osc_amp)
 
                 screen_x = col * sp + jx + drift_x
-                screen_y = (row - first_row) * sp + jy + row_pixel_offset
+                # True modular scroll: each particle moves down continuously.
+                # Wrap from total_height→0 only happens when screen_y ≥ vh
+                # (off-screen), so no visible upward jump.
+                screen_y = int((row * sp + jy + scroll_y) % total_height)
 
                 if 0 <= screen_x < vw and 0 <= screen_y < vh:
                     pygame.draw.circle(surf, full_color,
                                        (screen_x, screen_y), dot_size)
 
+    def _draw_soft_blob_grid(
+        self,
+        surf:    pygame.Surface,
+        now_ms:  int,
+        wdef:    dict,
+        spacing: int,
+        color:   tuple,
+        alpha:   int,
+        vw: int, vh: int,
+    ) -> None:
+        """Slow drifting soft blobs: inner filled circle + outer halo at half alpha.
+        Moves diagonally using speed_x and speed_y from JSON. Used for fog wisps."""
+        speed_y  = wdef.get("speed_y", 14)
+        speed_x  = wdef.get("speed_x", 22)
+        dot_size = wdef.get("dot_size", 9)
+
+        sp          = max(1, spacing)
+        rows_count  = vh // sp + 3
+        cols_count  = vw // sp + 3
+        total_height = rows_count * sp
+        total_width  = cols_count * sp
+
+        scroll_y = now_ms / 1000.0 * speed_y
+        scroll_x = now_ms / 1000.0 * speed_x
+
+        inner_color = (*color, alpha)
+        outer_color = (*color, alpha // 2)
+        outer_r     = max(dot_size + 3, int(dot_size * 1.8))
+
+        for row in range(rows_count):
+            for col in range(cols_count):
+                key = ((col * 1234567) ^ (row * 7654321)) & 0xFFFF
+                jx  = key % sp
+                jy  = (key >> 8) % sp
+
+                screen_x = int((col * sp + jx + scroll_x) % total_width)
+                screen_y = int((row * sp + jy + scroll_y) % total_height)
+
+                if not (0 <= screen_x < vw and 0 <= screen_y < vh):
+                    continue
+                # Outer halo first (drawn under inner circle)
+                pygame.draw.circle(surf, outer_color, (screen_x, screen_y), outer_r)
+                pygame.draw.circle(surf, inner_color, (screen_x, screen_y), dot_size)
+
     def _draw_storm_glyph_overlay(
         self,
-        surf:      pygame.Surface,
-        now_ms:    float,
-        intensity: float,
+        surf:            pygame.Surface,
+        now_ms:          float,
+        intensity:       float,
         vx: int, vy: int, vw: int, vh: int,
+        wdef:            "dict | None"  = None,
+        sprite_registry: "SpriteRegistry | None" = None,
     ) -> None:
         """
         Flickering dark archaic glyphs across the screen during resonance_storm.
         Glyphs fade in, hold briefly, then fade out and die.
-        Uses a fixed ~60fps dt assumption for simplicity.
+        If wdef contains a 'glyph_tiles' list and a sprite_registry is provided,
+        sprite tiles are used instead of text characters.
         """
         GLYPH_CHARS = [
             "\u2234", "\u2237", "\u25c6", "\u25c7", "\u25aa", "\u25ab",
@@ -667,26 +744,35 @@ class Renderer:
             VOID_PURPLE,
         ]
 
+        glyph_tiles = (wdef or {}).get("glyph_tiles", [])
+        use_sprites = bool(
+            glyph_tiles
+            and sprite_registry is not None
+            and getattr(sprite_registry, "_loaded", False)
+        )
+
         dt = 0.016  # assume ~60fps for glyph system
 
         # Spawn new glyphs up to target count
-        target_count = int(12 * intensity)
+        target_count = int(20 * intensity)
         if len(self._storm_glyphs) < target_count:
             rng = random.Random()
             glyph: dict = {
+                "tile_id":      rng.choice(glyph_tiles) if use_sprites else None,
                 "char":         rng.choice(GLYPH_CHARS),
                 "x":            rng.randint(vx, vx + vw - 20),
                 "y":            rng.randint(vy, vy + vh - 20),
                 "color":        rng.choice(GLYPH_COLORS),
-                "alpha":        rng.randint(60, 140),
-                "lifetime":     rng.uniform(0.3, 1.4),
+                "alpha":        rng.randint(80, 170),
+                "lifetime":     rng.uniform(0.4, 1.8),
                 "max_lifetime": 0.0,
+                "zoom":         rng.choice([1, 1, 2]),
             }
             glyph["max_lifetime"] = glyph["lifetime"]
             self._storm_glyphs.append(glyph)
 
         font = self.display.font_ui_tiny
-        if font is None:
+        if font is None and not use_sprites:
             return
 
         alive = []
@@ -705,9 +791,18 @@ class Renderer:
 
             r, gr, b = g["color"]
             try:
-                glyph_surf = font.render(g["char"], True, (r, gr, b))
-                glyph_surf.set_alpha(alpha)
-                surf.blit(glyph_surf, (g["x"], g["y"]))
+                if use_sprites and g.get("tile_id"):
+                    zoom  = g.get("zoom", 1)
+                    sprite_surf = sprite_registry.get_tinted(
+                        g["tile_id"], (r, gr, b), zoom=zoom)
+                    if sprite_surf is not None:
+                        sprite_surf = sprite_surf.copy()
+                        sprite_surf.set_alpha(alpha)
+                        surf.blit(sprite_surf, (g["x"], g["y"]))
+                elif font is not None:
+                    glyph_surf = font.render(g["char"], True, (r, gr, b))
+                    glyph_surf.set_alpha(alpha)
+                    surf.blit(glyph_surf, (g["x"], g["y"]))
             except Exception:
                 pass  # never crash on glyph render
 
@@ -755,6 +850,10 @@ class Renderer:
         light_color: tuple[int,int,int] = TRUE_WHITE,
         player_x:    int = -999,
         player_y:    int = -999,
+        blit_x:      int = 0,
+        blit_y:      int = 0,
+        viewport_w:  int = 0,
+        viewport_h:  int = 0,
     ) -> None:
         has_lm    = hasattr(local_map, "light_map")
         use_tint  = getattr(self.display, "use_sprite_tint", True)
@@ -814,34 +913,15 @@ class Renderer:
                             )
                     else:
                         # ── Full-colour mode ──────────────────────────────
-                        # Light map drives brightness. Light source colour
-                        # (lc_r/g/b) drives tint — passed from the active
-                        # light source directly, not from the light map RGB.
-                        if vis and has_lm:
-                            lm        = local_map.light_map[mx, my]
-                            intensity = max(float(lm[0]), float(lm[1]),
-                                           float(lm[2]))
-                            if intensity < 0.05:
-                                # Barely lit — very dim, cool
-                                fg = VOID_BLACK
-                            else:
-                                # Brightness: 30% ambient + 70% light-driven
-                                brightness = 0.3 + 0.7 * intensity
-                                # Tint: blend neutral brightness with light colour
-                                # 65% neutral preserves sprite colour, 35% tint
-                                # adds torch warmth / other light character
-                                fg = (
-                                    min(255, int(255 * (brightness * 0.65
-                                                        + lc_r * brightness * 0.35))),
-                                    min(255, int(255 * (brightness * 0.65
-                                                        + lc_g * brightness * 0.35))),
-                                    min(255, int(255 * (brightness * 0.65
-                                                        + lc_b * brightness * 0.35))),
-                                )
-                            bg = None
-                        elif vis:
-                            # Visible but no light map — full neutral brightness
-                            fg = TRUE_WHITE
+                        # Visible tiles always render at full brightness.
+                        # Torch colour tint (lc_r/g/b) applies when is_dominant.
+                        # Ambient light drives FOV radius only — not tile brightness.
+                        if vis:
+                            fg = (
+                                min(255, int(255 * (0.65 + lc_r * 0.35))),
+                                min(255, int(255 * (0.65 + lc_g * 0.35))),
+                                min(255, int(255 * (0.65 + lc_b * 0.35))),
+                            )
                             bg = None
                         else:
                             # Memory tile — dark, cool blue cast
@@ -904,7 +984,78 @@ class Renderer:
                                 min(255, int(fg[2] * _bmod)),
                             )
 
-                    self._draw_glyph(surface, char, fg, bg, tx, ty)
+                    self._draw_glyph(surface, char, fg, bg, tx, ty, zoom=zoom)
+
+    # ------------------------------------------------------------------ #
+    #  Decorative layer rendering
+    # ------------------------------------------------------------------ #
+
+    def _draw_decor_to(
+        self,
+        surface:     pygame.Surface,
+        local_map:   "LocalMap",
+        cam_x:       int,
+        cam_y:       int,
+        tiles_x:     int,
+        tiles_y:     int,
+        zoom:        int = 1,
+        light_color: tuple[int,int,int] = TRUE_WHITE,
+    ) -> None:
+        """Render the decorative layer — above terrain, below entities.
+
+        Uses the same fog/lighting rules as the terrain pass.
+        Sprites are blitted with bg=None so floor shows through (SRCALPHA surface).
+        Falls back to ASCII glyph if the sprite entry is missing or blank.
+        """
+        decor = getattr(local_map, "decor", None)
+        if not decor:
+            return
+
+        use_tint = getattr(self.display, "use_sprite_tint", True)
+        has_lm   = hasattr(local_map, "light_map")
+        lc_r = light_color[0] / 255.0
+        lc_g = light_color[1] / 255.0
+        lc_b = light_color[2] / 255.0
+
+        for tx in range(tiles_x):
+            for ty in range(tiles_y):
+                mx = tx + cam_x
+                my = ty + cam_y
+                if not local_map.in_bounds(mx, my):
+                    continue
+
+                decor_id = decor.get((mx, my))
+                if decor_id is None:
+                    continue
+
+                tile = local_map.tiles[mx, my]
+                vis  = bool(tile["visible"])
+                exp  = bool(tile["explored"])
+                if not vis and not exp:
+                    continue
+
+                # Compute same fg brightness as terrain pass
+                if use_tint:
+                    if vis and has_lm:
+                        lm    = local_map.light_map[mx, my]
+                        light = (float(lm[0]), float(lm[1]), float(lm[2]))
+                        fg = self._apply_light(TRUE_WHITE, light, dark=False)
+                    elif vis:
+                        fg = TRUE_WHITE
+                    else:
+                        fg = (40, 40, 40)
+                else:
+                    if vis:
+                        fg = (
+                            min(255, int(255 * (0.65 + lc_r * 0.35))),
+                            min(255, int(255 * (0.65 + lc_g * 0.35))),
+                            min(255, int(255 * (0.65 + lc_b * 0.35))),
+                        )
+                    else:
+                        fg = DUNGEON_SHADOW
+
+                # Draw sprite with no background (transparent — floor shows through)
+                self._draw_sprite(surface, decor_id, fg, None, tx, ty, zoom=zoom)
 
     # ------------------------------------------------------------------ #
     #  Entity rendering
@@ -912,12 +1063,13 @@ class Renderer:
 
     def _draw_entities_to(
         self,
-        surface:   pygame.Surface,
-        local_map: "LocalMap",
-        entities:  list,
-        cam_x:     int,
-        cam_y:     int,
-        zoom:      int,
+        surface:        pygame.Surface,
+        local_map:      "LocalMap",
+        entities:       list,
+        cam_x:          int,
+        cam_y:          int,
+        zoom:           int,
+        suppressed_ids: "set | None" = None,
     ) -> None:
         GHOST_COLOR = MIDNIGHT_DEEP
         use_tint    = getattr(self.display, "use_sprite_tint", True)
@@ -966,6 +1118,9 @@ class Renderer:
                 continue
             if not bool(local_map.tiles[entity.x, entity.y]["visible"]):
                 continue
+            # Skip entities currently drawn at their tween position
+            if suppressed_ids and id(entity) in suppressed_ids:
+                continue
 
             tx = entity.x - cam_x
             ty = entity.y - cam_y
@@ -990,8 +1145,23 @@ class Renderer:
                         min(255, int(fg[2] * _ebmod)),
                     )
 
-                self._draw_sprite(surface, entity.tile,
-                                  fg, None, tx, ty, zoom=zoom)
+                # Entities with direct sprite coordinates (e.g. corpses with
+                # corpse_sprite.sheet) bypass the tile_id registry lookup.
+                _spr_col   = getattr(entity, "sprite_col",   None)
+                _spr_row   = getattr(entity, "sprite_row",   None)
+                _spr_sheet = getattr(entity, "sprite_sheet", None)
+                if _spr_col is not None and _spr_row is not None and _spr_sheet:
+                    _sr  = self.sprite_registry
+                    _raw = _sr.get_at_coords(_spr_sheet, _spr_col, _spr_row, zoom=zoom)
+                    if _raw is not None:
+                        tw, th = _sr.tile_size()
+                        surface.blit(_raw, (tx * tw * zoom, ty * th * zoom))
+                    else:
+                        self._draw_sprite(surface, entity.tile,
+                                          fg, None, tx, ty, zoom=zoom)
+                else:
+                    self._draw_sprite(surface, entity.tile,
+                                      fg, None, tx, ty, zoom=zoom)
             else:
                 char = chr(self.registry.char(entity.tile))
                 fg   = self.registry.fg(entity.tile)
@@ -1108,13 +1278,16 @@ class Renderer:
                     continue
                 cx_ = sx * tw + tw // 2
                 cy_ = sy * th + th // 2
-                for d in getattr(chunk, "river_connections", []):
+                _rconns = getattr(chunk, "river_connections", [])
+                for d in _rconns:
                     if   d == "N": em = (sx * tw + tw // 2, sy * th)
                     elif d == "S": em = (sx * tw + tw // 2, sy * th + th)
                     elif d == "E": em = (sx * tw + tw,      sy * th + th // 2)
                     else:          em = (sx * tw,            sy * th + th // 2)
                     pygame.draw.line(surf, _CYAN, (cx_, cy_), em, 3)
-                pygame.draw.circle(surf, _CYAN, (cx_, cy_), 2)
+                # Draw junction dot only at actual junctions (3+ connections)
+                if len(_rconns) >= 3:
+                    pygame.draw.circle(surf, _CYAN, (cx_, cy_), 2)
 
         # Road lines — use stored connections for clean path lines
         for sx in range(tiles_x):
@@ -1420,12 +1593,10 @@ class Renderer:
             pygame.draw.line(surface, DEEP_STONE_BLUE, (sx, y), (sx + sw, y), 1)
             y += 8
 
-        # Overlay legend — river / road / capital / vukh
+        # Overlay legend — river / road only
         _overlay_legend = [
             ("River",   COLDBELL_LIGHT),
             ("Road",    EARTH_TONE),
-            ("Capital", BLOOD_STONE),
-            ("Vukh",    OLD_GOLD),
         ]
         for _name, _color in _overlay_legend:
             pygame.draw.rect(surface, _color, (sx, y + 2, 10, 10))
@@ -1447,37 +1618,6 @@ class Renderer:
         )
         surface.blit(pl_surf, (sx, y))
         y += slh + 4
-
-        pygame.draw.line(surface, DEEP_STONE_BLUE, (sx, y), (sx + sw, y), 1)
-        y += 8
-
-        from world.world_map import RegionType
-        _LEGEND_COLORS = {
-            "heath":          FOREST_DEEP,
-            "forest":         FOREST_DEEP,
-            "plains":         LIFE_GREEN,
-            "swamp":          COLDBELL_LIGHT,
-            "mountain":       STONE_BLUE,
-            "town":           OLD_GOLD,
-            "deep_mountain":  SLATE_DARK,
-            "capital":        BLOOD_STONE,
-            "drowned_wood":   TEAL_DEEP,
-            "ash_wastes":     EARTH_BROWN,
-            "unknown":        DUNGEON_SHADOW,
-        }
-        legend_items = [(rt.value, _LEGEND_COLORS.get(rt.value, SLATE_DARK))
-                        for rt in RegionType]
-        col_w = sw // 2
-        for i, (name, color) in enumerate(legend_items):
-            col  = i % 2
-            row  = i // 2
-            lx   = sx + col * col_w
-            ly   = y + row * (slh + 2)
-            pygame.draw.rect(surface, color, (lx, ly + 2, 10, 10))
-            lbl  = fs.render(name, True, EARTH_BROWN)
-            surface.blit(lbl, (lx + 14, ly))
-        legend_rows = (len(legend_items) + 1) // 2
-        y += legend_rows * (slh + 2) + 6
 
         pygame.draw.line(surface, DEEP_STONE_BLUE, (sx, y), (sx + sw, y), 1)
         y += 8

@@ -1,0 +1,14 @@
+{
+  "id": "dry_bitter_herb",
+  "name": "dry bitter herb",
+  "description": "Dry the sprig. The bitterness sharpens. What remains is a better fixative than the fresh form.",
+  "known": true,
+  "components": [
+    {"tag": "bitter", "min_tier": 1, "quantity": 1},
+    {"tag": "edible", "min_tier": 1, "quantity": 1}
+  ],
+  "result_item": "dried_bitter_herb",
+  "passive_processing": true,
+  "processing_turns": 30,
+  "processing_source": "drying"
+}

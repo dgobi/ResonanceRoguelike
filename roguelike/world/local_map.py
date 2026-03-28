@@ -36,6 +36,26 @@ class LocalMap:
         # SubMap links — maps tile (x,y) → submap_id for stairs_down tiles
         self.submap_links: dict[tuple[int, int], str] = {}
 
+        # Decorative overlay layer — (lx, ly) → decor_id string.
+        # Rendered above terrain, below entities. Serialised with the chunk.
+        # Never write to this directly — use generation.decor_utils.place_decor().
+        self.decor: dict[tuple[int, int], str] = {}
+
+        # Corpse tracking — maps tile position to creature tile_id and decay counter.
+        # Serialised with the local_map via pickle (CachedChunk).
+        self.corpse_data:  dict[tuple[int, int], str] = {}
+        self.corpse_decay: dict[tuple[int, int], int] = {}
+
+        # Passive processing queue — items being transformed over time.
+        # Each entry: {
+        #   "item_id": str,       # result item to create on completion
+        #   "turns_remaining": int,
+        #   "x": int, "y": int,   # where to deliver result (player position at initiation)
+        #   "source": str,        # recipe id, for log messages
+        # }
+        # Serialised with the local_map via pickle (CachedChunk).
+        self.processing_queue: list[dict] = []
+
     def set_tile(self, x: int, y: int, terrain: str,
                  walkable: bool, transparent: bool) -> None:
         # Import inside the function to avoid circular imports

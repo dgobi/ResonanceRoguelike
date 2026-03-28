@@ -30,17 +30,62 @@
     "dot_size": 2,
     "color": [254, 243, 192],
     "alpha": 140,
-    "intensity_scale": true
+    "intensity_scale": true,
+    "mechanics": {
+      "corruption_per_step": 0.003
+    }
   },
   "resonance_storm": {
     "type": "streak",
-    "spacing": 20,
-    "speed_y": 480,
-    "speed_x": 35,
-    "streak_len": 8,
-    "color": [64, 51, 83],
-    "alpha": 100,
+    "spacing": 12,
+    "speed_y": 520,
+    "speed_x": 40,
+    "streak_len": 10,
+    "color": [80, 48, 110],
+    "alpha": 140,
     "width": 1,
+    "intensity_scale": true,
+    "glyph_tiles": ["waystone_plinth", "resonance_stone", "inscription", "document", "bell_intact"],
+    "mechanics": {
+      "discharge_chance_bonus": 0.10
+    }
+  },
+  "wind": {
+    "type": "streak",
+    "spacing": 143,
+    "speed_x": 300,
+    "speed_y": 18,
+    "streak_len": 2,
+    "color": [210, 218, 230],
+    "alpha": 42,
+    "width": 1,
+    "intensity_scale": true
+  },
+  "dead_calm": {
+    "mechanics": {
+      "bell_range_bonus": 10,
+      "creature_alert_radius_bonus": 4
+    }
+  },
+  "fog": {
+    "mechanics": {
+      "fov_cap": 6
+    }
+  },
+  "forgetting_fog": {
+    "mechanics": {
+      "pathfind_noise": 3,
+      "fov_cap": 4
+    }
+  },
+  "fog_wisps": {
+    "type": "soft_blob",
+    "spacing": 175,
+    "speed_x": 22,
+    "speed_y": 14,
+    "dot_size": 9,
+    "color": [218, 224, 234],
+    "alpha": 38,
     "intensity_scale": true
   }
 }

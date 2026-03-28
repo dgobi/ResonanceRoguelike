@@ -4,34 +4,118 @@
   "description": "Larger than it should be. The feathers are wrong. It lands, examines, departs. What it is examining for is unclear. What it reports to is less clear still.",
   "tile": "plague_crow",
   "blocks_movement": true,
+  "base_hp": 8,
+  "armour_value": 0,
   "fighter": {
-    "max_hp":  6,
-    "power":   3,
+    "max_hp": 8,
+    "power": 3,
     "defense": 0
   },
   "perception": {
-    "sight_radius":   10,
+    "sight_radius": 10,
     "hearing_radius": 8,
-    "sees_in_dark":   false,
-    "faction":        "corruption",
-    "hostile_to":     ["player"]
+    "sees_in_dark": false,
+    "faction": "corruption",
+    "hostile_to": [
+      "player"
+    ]
   },
   "ai_type": "circling",
   "wander_radius": 15,
-  "spawn_zones": ["dead_ground", "mere", "deepwood", "pale_quarter"],
+  "can_cross_chunks": true,
+  "can_use_stairs": true,
+  "pursuit_timeout": 22,
+  "spawn_zones": [
+    "dead_ground",
+    "mere",
+    "deepwood",
+    "pale_quarter"
+  ],
   "damage_dice": "1d3",
   "damage_bonus": 0,
-  "body_id": "body_plague_crow",
   "essence_modifiers": {
-    "Dissolution": 1.0, "Quickening": 1.1, "Binding": 1.0,
-    "Severance": 1.0, "Consumption": 1.5, "Revelation": 0.9
+    "Dissolution": 1.0,
+    "Quickening": 1.1,
+    "Binding": 1.0,
+    "Severance": 1.0,
+    "Consumption": 1.5,
+    "Revelation": 0.9
   },
   "attack_verb": "dives at thee",
+  "ranged_attack": {
+    "min_range": 2,
+    "tile": "plague_crow",
+    "duration": 0.45
+  },
   "blood_type": "red",
-  "corpse_sprite": {"col": 2055, "row": 0},
+  "limbs": [
+    {
+      "id": "head",
+      "size": 1,
+      "damage_multiplier": 1.5
+    },
+    {
+      "id": "torso",
+      "size": 2,
+      "damage_multiplier": 1.0
+    },
+    {
+      "id": "wings",
+      "size": 2,
+      "damage_multiplier": 0.8
+    }
+  ],
+  "butcher_yield": {
+    "decay_turns": 80,
+    "tiers": [
+      {
+        "min_cutting_tier": 1,
+        "yields": [
+          {"item_id": "crow_meat",   "quantity_min": 1, "quantity_max": 2},
+          {"item_id": "animal_bone", "quantity_min": 1, "quantity_max": 1},
+          {"item_id": "crow_bile",   "quantity_min": 0, "quantity_max": 1}
+        ]
+      },
+      {
+        "min_cutting_tier": 2,
+        "yields": [
+          {"item_id": "crow_meat",            "quantity_min": 2, "quantity_max": 3},
+          {"item_id": "animal_bone",          "quantity_min": 1, "quantity_max": 2},
+          {"item_id": "crow_bile",            "quantity_min": 1, "quantity_max": 1},
+          {"item_id": "crow_flight_membrane", "quantity_min": 0, "quantity_max": 1}
+        ]
+      }
+    ]
+  },
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  },
   "callout_sounds": {
-    "on_spot":   {"text": "kraw",  "color": [99,  34,  64]},
-    "on_attack": {"text": "kraw",  "color": [99,  34,  64]},
-    "on_death":  {"text": "kk...", "color": [99,  34,  64]}
+    "on_spot": {
+      "text": "kraw",
+      "color": [
+        99,
+        34,
+        64
+      ]
+    },
+    "on_attack": {
+      "text": "kraw",
+      "color": [
+        99,
+        34,
+        64
+      ]
+    },
+    "on_death": {
+      "text": "kk...",
+      "color": [
+        99,
+        34,
+        64
+      ]
+    }
   }
 }

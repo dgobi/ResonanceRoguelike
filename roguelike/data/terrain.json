@@ -166,7 +166,18 @@
     "walkable": true,
     "transparent": true,
     "description": "Pallid blooms sway atop dark fronds.",
-    "move_cost": 1.2
+    "move_cost": 1.2,
+    "harvestable": true,
+    "harvest_item": "pilgrims_woe_petals",
+    "depleted_tile": "flower_pilgrims_woe_depleted"
+  },
+  "flower_pilgrims_woe_depleted": {
+    "tile": "flower",
+    "display_name": "Pilgrim's Woe",
+    "walkable": true,
+    "transparent": true,
+    "description": "Dark fronds remain. The pale blooms have been stripped.",
+    "move_cost": 1.1
   },
   "flower_murk_violet": {
     "tile": "flower",
@@ -174,7 +185,18 @@
     "walkable": true,
     "transparent": true,
     "description": "Bruised purple petals release a sickly sweet perfume.",
-    "move_cost": 1.2
+    "move_cost": 1.2,
+    "harvestable": true,
+    "harvest_item": "murk_violet_stem",
+    "depleted_tile": "flower_murk_violet_depleted"
+  },
+  "flower_murk_violet_depleted": {
+    "tile": "flower",
+    "display_name": "Murk Violet",
+    "walkable": true,
+    "transparent": true,
+    "description": "The stem is bare. Whatever grew from it has been taken.",
+    "move_cost": 1.1
   },
   "shroom_sulphur_cap": {
     "tile": "mushroom",
@@ -182,7 +204,18 @@
     "walkable": true,
     "transparent": true,
     "description": "The fleshy orange cap exudes a pungent aroma.",
-    "move_cost": 1.1
+    "move_cost": 1.1,
+    "harvestable": true,
+    "harvest_item": "sulphur_cap_fragment",
+    "depleted_tile": "shroom_sulphur_cap_depleted"
+  },
+  "shroom_sulphur_cap_depleted": {
+    "tile": "mushroom",
+    "display_name": "Sulphur Cap",
+    "walkable": true,
+    "transparent": true,
+    "description": "The stem remains. The cap has been cut away.",
+    "move_cost": 1.0
   },
   "shroom_prophets_eye": {
     "tile": "mushroom",
@@ -190,7 +223,18 @@
     "walkable": true,
     "transparent": true,
     "description": "Used in the foul liquors an unguents of the Alchemists. It is said to bring true visions, before the end.",
-    "move_cost": 1.1
+    "move_cost": 1.1,
+    "harvestable": true,
+    "harvest_item": "prophets_eye_cap",
+    "depleted_tile": "shroom_prophets_eye_depleted"
+  },
+  "shroom_prophets_eye_depleted": {
+    "tile": "mushroom",
+    "display_name": "Prophet's Eye",
+    "walkable": true,
+    "transparent": true,
+    "description": "The stalk is all that remains. The cap is gone.",
+    "move_cost": 1.0
   },
   "varied_grass": {
     "tile": "grass",
@@ -214,7 +258,10 @@
     "walkable": false,
     "transparent": true,
     "description": "An iron lamp post. The flame within burns steady.",
-    "move_cost": 1.0
+    "move_cost": 1.0,
+    "light_emit": 5,
+    "light_mode": "steady",
+    "light_color": [226, 181, 112]
   },
   "street_lamp_sputtering": {
     "tile": "street_lamp_sputtering",
@@ -222,7 +269,13 @@
     "walkable": false,
     "transparent": true,
     "description": "The flame gutters. Something is wrong with the oil.",
-    "move_cost": 1.0
+    "move_cost": 1.0,
+    "light_emit": 4,
+    "light_mode": "pulse",
+    "light_pulse_min": 2,
+    "light_pulse_max": 4,
+    "light_pulse_rate": 0.4,
+    "light_color": [210, 150, 80]
   },
   "street_lamp_dead": {
     "tile": "street_lamp_dead",
@@ -256,9 +309,9 @@
   "packed_earth":        {"tile": "packed_earth",        "display_name": "Packed Earth",         "walkable": true, "transparent": true, "description": "Firm earth worn flat by years of passing feet.", "move_cost": 1.0},
   "dirt_path":           {"tile": "dirt_path",           "display_name": "Dirt Path",            "walkable": true, "transparent": true, "description": "A worn path. The ground remembers the walking.", "move_cost": 1.0},
   "weedy_cobble":        {"tile": "weedy_cobble",        "display_name": "Weedy Cobblestone",    "walkable": true, "transparent": true, "description": "Old cobbles split by weeds. The stones are losing their arrangement.", "move_cost": 1.2},
-  "tall_grass":          {"tile": "tall_grass",          "display_name": "Tall Grass",           "walkable": true, "transparent": true, "description": "Rank grass grown head-high in neglected places.", "move_cost": 1.5, "secondary_effect": "concealment"},
+  "tall_grass":          {"tile": "tall_grass",          "display_name": "Tall Grass",           "walkable": true, "transparent": true, "description": "Rank grass grown head-high in neglected places.", "move_cost": 2.5, "secondary_effect": "concealment"},
   "brambles":            {"tile": "brambles",            "display_name": "Brambles",             "walkable": true, "transparent": true, "description": "Thorned growth. It will take its tithe.", "move_cost": 2.0, "secondary_effect": "thorns"},
-  "shallow_water":       {"tile": "shallow_water",       "display_name": "Shallow Water",        "walkable": true, "transparent": true, "description": "Cold water, ankle-deep. The cold moves upward.", "move_cost": 1.5, "secondary_effect": "chill"},
+  "shallow_water":       {"tile": "shallow_water",       "display_name": "Shallow Water",        "walkable": true, "transparent": true, "description": "Cold water, ankle-deep. The cold moves upward.", "move_cost": 1.5, "secondary_effect": "chill", "drinkable": true, "drink_hydration": 400},
   "deep_water":          {"tile": "deep_water",          "display_name": "Deep Water",           "walkable": true, "transparent": true, "description": "Dark water, waist-deep. The cold is complete.", "move_cost": 3.0, "secondary_effect": "chill_heavy"},
   "river_water":         {"tile": "river_water",         "display_name": "River Water",           "walkable": true, "transparent": true, "description": "a swift dark river",         "move_cost": 2.5, "secondary_effect": "chill"},
   "river_bank":          {"tile": "river_bank",          "display_name": "Riverbank",             "walkable": true, "transparent": true, "description": "soft churned bank",           "move_cost": 1.3},
@@ -306,7 +359,19 @@
     "description": "A pale blue flower that grows near resonant stone. Its petals never quite dry.",
     "move_cost": 1.0,
     "resonance_emit": 0.04,
-    "visual_fx": "sparkle"
+    "visual_fx": "sparkle",
+    "harvestable": true,
+    "harvest_item": "coldbell_cutting",
+    "depleted_tile": "coldbell_flower_depleted"
+  },
+  "coldbell_flower_depleted": {
+    "tile": "coldbell_flower",
+    "display_name": "Coldbell Flower",
+    "walkable": true,
+    "transparent": true,
+    "description": "The pale stem remains, cut at the base. The petals and cutting are gone.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.02
   },
   "resonance_stone": {
     "tile": "resonance_stone",
@@ -316,5 +381,92 @@
     "description": "A fragment of grey stone still vibrating at frequencies the body registers before the ear.",
     "move_cost": 1.0,
     "resonance_emit": 0.12
+  },
+  "resonance_seep": {
+    "tile": "resonance_seep",
+    "display_name": "Resonance Seep",
+    "walkable": true,
+    "transparent": true,
+    "description": "Something has died here. The floor holds a frequency the living body registers as a faint pressure behind the eyes.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.15,
+    "visual_fx": ["sparkle", "pulse_dim"]
+  },
+  "dead_wood": {
+    "tile": "dead_wood",
+    "display_name": "Dead Branch",
+    "walkable": true,
+    "transparent": true,
+    "description": "A fallen branch, dry enough.",
+    "move_cost": 1.0,
+    "gatherable": true,
+    "gather_item": "wood_bundle",
+    "gather_depletes": true,
+    "gather_chance": 1.0,
+    "depleted_tile": "varied_grass"
+  },
+  "flint_rock": {
+    "tile": "flint_rock",
+    "display_name": "Flint Rock",
+    "walkable": true,
+    "transparent": true,
+    "description": "Grey-black stone. Fractures cleanly.",
+    "move_cost": 1.0,
+    "gatherable": true,
+    "gather_item": "flint_shard",
+    "gather_depletes": true,
+    "gather_chance": 0.5,
+    "depleted_tile": "flint_rock_depleted"
+  },
+  "flint_rock_depleted": {
+    "tile": "flint_rock_depleted",
+    "display_name": "Worked Stone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worked stone. Nothing left to take.",
+    "move_cost": 1.0
+  },
+  "clay_deposit": {
+    "tile": "clay_deposit",
+    "display_name": "Clay Deposit",
+    "walkable": true,
+    "transparent": true,
+    "description": "A pocket of dense river clay. Reddish-grey. Yields to the hand.",
+    "move_cost": 1.2,
+    "gatherable": true,
+    "gather_item": "clay_lump",
+    "gather_depletes": true,
+    "gather_chance": 0.8,
+    "depleted_tile": "clay_deposit_depleted"
+  },
+  "clay_deposit_depleted": {
+    "tile": "clay_deposit_depleted",
+    "display_name": "Worked Clay",
+    "walkable": true,
+    "transparent": true,
+    "description": "Scraped out. What was here has been taken.",
+    "move_cost": 1.0
+  },
+  "campfire_unlit": {
+    "tile": "campfire_unlit",
+    "display_name": "Dead Campfire",
+    "walkable": false,
+    "transparent": true,
+    "description": "A ring of stones with wood laid within. Unlit.",
+    "move_cost": 1.0,
+    "interactable": "light_campfire"
+  },
+  "campfire_lit": {
+    "tile": "campfire_lit",
+    "display_name": "Campfire",
+    "walkable": false,
+    "transparent": true,
+    "description": "A low fire burns steadily.",
+    "move_cost": 1.0,
+    "light_emit": 0.7,
+    "warmth_radius": 3,
+    "warmth_strength": 1.0,
+    "visual_fx": "embers",
+    "interactable": "extinguish_campfire"
   }
 }

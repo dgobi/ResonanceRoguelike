@@ -12,5 +12,6 @@
   "essence": "Dissolution",
   "essence_strength": 0.3,
   "_essence_note": "Heavier iron, more mass behind the edge. The dissolution is stronger — it cuts deeper into structure.",
-  "on_use": "equip_toggle"
+  "on_use": "equip_toggle",
+  "keywords": [{"tag": "cutting", "tier": 2}]
 }

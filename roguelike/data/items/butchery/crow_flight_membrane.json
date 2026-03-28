@@ -1,0 +1,15 @@
+{
+  "id": "crow_flight_membrane",
+  "name": "Flight Membrane",
+  "description": "Thin as old parchment. The veining is wrong — the pattern is not consistent with ordinary feather development. Someone with the right knowledge would know what to do with this.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.05,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "fibrous",
+      "tier": 1
+    }
+  ]
+}

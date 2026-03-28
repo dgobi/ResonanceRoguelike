@@ -46,6 +46,26 @@ def _cc_spawn_item(parts: list[str], engine: "Engine") -> None:
         engine.log.add(f"[DEBUG] Unknown item: {item_id}.", FRESH_WOUND)
 
 
+def _cc_place_decor(parts: list[str], engine: "Engine") -> None:
+    if len(parts) < 2:
+        engine.log.add("[DEBUG] Usage: place_decor <id>  (places at player pos)", FRESH_WOUND)
+        engine.log.add("[DEBUG]        place_decor clear  (removes at player pos)", FRESH_WOUND)
+        return
+    from generation.decor_utils import place_decor, clear_decor
+    px, py = engine.player.x, engine.player.y
+    decor_id = parts[1]
+    if decor_id == "clear":
+        clear_decor(engine.local_map, px, py)
+        engine.log.add(f"[DEBUG] Cleared decor at ({px},{py}).", AGED_WOOD)
+    elif decor_id not in engine.data.decoratives:
+        engine.log.add(f"[DEBUG] Unknown decor id: {decor_id}.", FRESH_WOUND)
+        ids = ", ".join(sorted(engine.data.decoratives.keys()))
+        engine.log.add(f"[DEBUG] Known: {ids}", AGED_WOOD)
+    else:
+        place_decor(engine.local_map, px, py, decor_id)
+        engine.log.add(f"[DEBUG] Placed {decor_id} at ({px},{py}).", AGED_WOOD)
+
+
 def _cc_grant_perk(parts: list[str], engine: "Engine") -> None:
     if len(parts) < 2:
         engine.log.add("[DEBUG] Usage: grant_perk <id>", FRESH_WOUND)
@@ -371,6 +391,43 @@ def _cc_clear_particles(_parts: list[str], engine: "Engine") -> None:
     engine.log.add("[debug] particles cleared", AGED_WOOD)
 
 
+def _cc_toggle_resonance_sight(_parts: list[str], engine: "Engine") -> None:
+    engine._resonance_sight_active = not getattr(engine, "_resonance_sight_active", False)
+    state = "ON" if engine._resonance_sight_active else "OFF"
+    engine.log.add(f"[debug] resonance sight {state}.", RESONANCE_MID)
+
+
+def _cc_test_camera_drift(_parts: list[str], engine: "Engine") -> None:
+    """
+    Teleport player 15 tiles N/S/E/W and back, then visually flag the
+    four corners of the viewport for manual inspection.
+    Reports the player's start position to console — the player ends up
+    back there after the round trip.
+    """
+    ox, oy = engine.player.x, engine.player.y
+    lm = engine.local_map
+    DIST = 15
+
+    def _try_move(dx, dy):
+        nx = max(0, min(lm.width  - 1, engine.player.x + dx))
+        ny = max(0, min(lm.height - 1, engine.player.y + dy))
+        engine.player.x, engine.player.y = nx, ny
+
+    # Move in 4 cardinal directions and back each time
+    for dx, dy in ((0, -DIST), (0, DIST), (-DIST, 0), (DIST, 0)):
+        _try_move(dx, dy)
+        _try_move(-dx, -dy)
+
+    # Return to origin
+    engine.player.x, engine.player.y = ox, oy
+
+    engine.log.add(
+        "[debug] Camera drift test complete — inspect viewport corners for "
+        "pixel accumulation. Origin: ({ox},{oy})".format(ox=ox, oy=oy),
+        AGED_WOOD,
+    )
+
+
 def _cc_toggle_callouts(parts: list[str], engine: "Engine") -> None:
     which = parts[1].lower() if len(parts) > 1 else "all"
     d = engine.display
@@ -462,6 +519,12 @@ CONSOLE_COMMANDS: dict = {
         "usage":    "spawn_item <id>",
         "desc":     "Drop item at player position.",
         "category": "ENTITIES",
+    },
+    "place_decor": {
+        "fn":       _cc_place_decor,
+        "usage":    "place_decor <id>|clear",
+        "desc":     "Place or clear a decorative tile at player position.",
+        "category": "VISUAL",
     },
     "give_debug_weapon": {
         "fn":       _cc_give_debug_weapon,
@@ -560,6 +623,18 @@ CONSOLE_COMMANDS: dict = {
         "fn":       _cc_toggle_callouts,
         "usage":    "toggle_callouts [damage|sounds|status|all]",
         "desc":     "Toggle floating callout categories.",
+        "category": "VISUAL",
+    },
+    "toggle_resonance_sight": {
+        "fn":       _cc_toggle_resonance_sight,
+        "usage":    "toggle_resonance_sight",
+        "desc":     "Toggle resonance emit overlay (purple pulse on resonant tiles).",
+        "category": "VISUAL",
+    },
+    "test_camera_drift": {
+        "fn":       _cc_test_camera_drift,
+        "usage":    "test_camera_drift",
+        "desc":     "Teleport player 15 tiles in 4 directions and back. Check corners for drift.",
         "category": "VISUAL",
     },
     # SYSTEM ----------------------------------------------------------
@@ -766,14 +841,15 @@ class DebugOverlay:
                             engine.data.terrain
                         )
                         sx, sy = engine._find_walkable_near(new_map, sx, sy)
-                        engine.player.x  = sx
-                        engine.player.y  = sy
-                        engine.local_map = new_map
-                        engine.world_x   = wx
-                        engine.world_y   = wy
+                        engine.player.x           = sx
+                        engine.player.y           = sy
+                        engine.local_map          = new_map
+                        engine.world_x            = wx
+                        engine.world_y            = wy
+                        engine.current_submap_id  = None   # surface teleport — clear stale submap state
                         engine.world_map.mark_explored_radius(wx, wy, radius=2)
-                        chunk.visited    = True
-                        engine.entities  = [engine.player]
+                        chunk.visited             = True
+                        engine.entities           = [engine.player]
                         engine._update_fov()
                         engine.log.add(
                             f"[DEBUG] Teleported to chunk ({wx},{wy}).",
@@ -947,13 +1023,14 @@ class DebugOverlay:
                 local_map, MAP_WIDTH // 2, MAP_HEIGHT // 2
             )
 
-        engine.world_x       = wx
-        engine.world_y       = wy
-        engine.local_map     = local_map
-        engine.entities      = [engine.player]
-        engine.player.x      = spawn_x
-        engine.player.y      = spawn_y
-        chunk.visited        = True
+        engine.world_x            = wx
+        engine.world_y            = wy
+        engine.local_map          = local_map
+        engine.entities           = [engine.player]
+        engine.player.x           = spawn_x
+        engine.player.y           = spawn_y
+        engine.current_submap_id  = None   # surface teleport — clear stale submap state
+        chunk.visited             = True
         engine.world_map.mark_explored_radius(wx, wy, radius=2)
         engine._update_fov()
         name = chunk.submaps[0].name if chunk.submaps[0].name else chunk.submaps[0].submap_type
@@ -972,10 +1049,11 @@ class DebugOverlay:
                 chunk, MAP_WIDTH, MAP_HEIGHT, engine.data.terrain
             )
             sx, sy = engine._find_walkable_near(new_map, sx, sy)
-            engine.player.x  = sx
-            engine.player.y  = sy
-            engine.local_map = new_map
-            engine.entities  = [engine.player]
+            engine.player.x           = sx
+            engine.player.y           = sy
+            engine.local_map          = new_map
+            engine.current_submap_id  = None   # force regen always produces surface map
+            engine.entities           = [engine.player]
             engine._update_fov()
             engine.log.add(
                 f"[DEBUG] Chunk regenerated (seed {chunk.seed}).",
@@ -1271,9 +1349,11 @@ class DebugOverlay:
         tw = engine.display.tile_width
         th = engine.display.tile_height
 
-        from config import STATUS_BAR_H, MSG_PANEL_W
-        viewport_w = screen.get_width() - MSG_PANEL_W
-        viewport_h = screen.get_height() - STATUS_BAR_H
+        vp = getattr(engine, "_viewport", None)
+        vp_x = vp.x if vp else 0
+        vp_y = vp.y if vp else 0
+        viewport_w = vp.width  if vp else screen.get_width()
+        viewport_h = vp.height if vp else screen.get_height()
 
         cam_x = engine.player.x - (viewport_w // tw) // 2
         cam_y = engine.player.y - (viewport_h // th) // 2
@@ -1299,7 +1379,8 @@ class DebugOverlay:
                         (px_x, px_y, tw, th)
                     )
 
-        screen.blit(viz_surf, (0, 0))
+        # Blit at viewport origin, not (0,0) — viewport is inset from screen edge.
+        screen.blit(viz_surf, (vp_x, vp_y))
 
     def _render_input_prompt(self, screen: pygame.Surface) -> None:
         if not self._font:

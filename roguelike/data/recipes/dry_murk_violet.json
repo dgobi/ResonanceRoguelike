@@ -1,0 +1,13 @@
+{
+  "id": "dry_murk_violet",
+  "name": "dry murk violet",
+  "description": "Dry the stem until the soporific oils concentrate into the fibres. Takes time. Handle carefully.",
+  "known": true,
+  "components": [
+    {"tag": "soporific", "min_tier": 1, "quantity": 1}
+  ],
+  "result_item": "dried_murk_violet",
+  "passive_processing": true,
+  "processing_turns": 35,
+  "processing_source": "drying"
+}

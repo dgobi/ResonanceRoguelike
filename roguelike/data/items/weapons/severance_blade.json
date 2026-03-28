@@ -10,5 +10,6 @@
   "description": "A narrow blade of dull grey metal, the edge ground at an angle that catches nothing. The bindings of the hollow yield before it.",
   "color_fg": [68, 99, 116],
   "sprite": "crude_blade",
-  "crit_chance": 0.06
+  "crit_chance": 0.06,
+  "keywords": [{"tag": "cutting", "tier": 3}]
 }

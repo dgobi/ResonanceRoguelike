@@ -144,7 +144,7 @@ class PerkScreen:
         return True
 
     def _handle_confirm_key(self, key: int, engine: "Engine") -> bool:
-        if key == pygame.K_y:
+        if key in (pygame.K_y, pygame.K_RETURN, pygame.K_KP_ENTER):
             self._commit(engine)
             self._confirming = False
         elif key in (pygame.K_n, pygame.K_ESCAPE):
@@ -317,8 +317,14 @@ class PerkScreen:
 
             is_sel = (idx == self.selected)
             if is_sel:
-                pygame.draw.rect(surf, MIDNIGHT_DEEP,
-                                 (ox + 2, y - 2, w - 4, lh))
+                # Build highlight from known interior rect (BORDER_PX=15 × scale=2 = 30px)
+                _BORDER = 30
+                _inner  = pygame.Rect(ox, oy, w, h).inflate(-2 * _BORDER, -2 * _BORDER)
+                _hl_y   = max(y - 2, _inner.top)
+                _hl_b   = min(y - 2 + lh, max_y - 2)
+                if _hl_b > _hl_y:
+                    pygame.draw.rect(surf, MIDNIGHT_DEEP,
+                                     pygame.Rect(_inner.x, _hl_y, _inner.width, _hl_b - _hl_y))
 
             mark = "\u2713 " if acquired else "  "
             nm   = self._font_normal.render(

@@ -34,5 +34,6 @@
   "resonance_messages": {
     "moderate": "The earth remembers footsteps here.",
     "high": "Stone underfoot, even where the soil looks deep."
-  }
+  },
+  "flint_scatter_rate": 0.004
 }

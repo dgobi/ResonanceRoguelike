@@ -34,5 +34,6 @@
   "resonance_messages": {
     "moderate": "Resonance travels through water. It has been travelling a long time.",
     "high": "Something below the surface carries a tone."
-  }
+  },
+  "flint_scatter_rate": 0.001
 }

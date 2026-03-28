@@ -7,13 +7,27 @@
   "weight": 0.6,
   "stackable": false,
   "on_use": "equip_light",
-  "essence": "Quickening",
-  "essence_strength": 0.4,
   "_essence_note": "Refined oil burns with more intent than tallow. The Quickening is more concentrated — controlled combustion rather than animal fat catching.",
+  "keywords": [
+    {
+      "tag": "waxy",
+      "tier": 1
+    },
+    {
+      "tag": "fuel",
+      "tier": 2
+    }
+  ],
+  "provides_burning": 2,
   "burn_turns": 1800,
+  "light_radius": 6,
   "light": {
     "radius": 10,
-    "color": [220, 200, 120],
+    "color": [
+      220,
+      200,
+      120
+    ],
     "falloff": 1.5,
     "flicker": false
   }

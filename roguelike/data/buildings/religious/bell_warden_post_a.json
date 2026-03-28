@@ -1,0 +1,41 @@
+{
+  "id": "bell_warden_post_a",
+  "category": "religious",
+  "width": 8,
+  "height": 6,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {"religious": 4, "civic": 1},
+  "interior_loot_table": "shrine_common",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#......#",
+    "#.ww...#",
+    "#......#",
+    "#......#",
+    "###++###"
+  ],
+  "decor_layer": [
+    [null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null],
+    [null,null,null,null,"decor_candle",null,null,null],
+    [null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null]
+  ],
+  "special_tiles": [
+    {
+      "x": 1, "y": 3,
+      "type": "item", "item_id": "lab_note", "text_id": "bellwarden_log_a",
+      "note": "A log left on the floor near the old bracket position"
+    }
+  ],
+  "note": "A bell warden's post. Small rectangular station. Two worn stone blocks mark the old bell bracket position along the north wall. A candle burns — or burned — on the work surface."
+}

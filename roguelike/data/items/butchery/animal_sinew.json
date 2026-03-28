@@ -1,0 +1,19 @@
+{
+  "id": "animal_sinew",
+  "name": "Sinew",
+  "description": "Stripped carefully and dried it becomes cord. Stripped carelessly it becomes rope. Either way it is strong.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.1,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "fibrous",
+      "tier": 1
+    },
+    {
+      "tag": "binding",
+      "tier": 1
+    }
+  ]
+}

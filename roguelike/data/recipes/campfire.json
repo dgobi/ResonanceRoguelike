@@ -1,0 +1,14 @@
+{
+  "id": "campfire",
+  "name": "Field Campfire",
+  "description": "A ring of stones and dry wood. Needs a spark to light.",
+  "components": [
+    {"tag": "fuel", "min_tier": 1, "quantity": 2},
+    {"tag": "cutting", "min_tier": 1, "quantity": 1}
+  ],
+  "result_tile": "campfire_unlit",
+  "places_in_world": true,
+  "known": true,
+  "placement_message": "Where will you set the fire?",
+  "result_message": "The tinder catches. A small fire takes hold."
+}
