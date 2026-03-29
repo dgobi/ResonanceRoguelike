@@ -42,3 +42,74 @@ def get_floor_objects(local_map: "LocalMap", lx: int, ly: int) -> list:
 def clear_floor_objects(local_map: "LocalMap", lx: int, ly: int) -> None:
     """Remove all items at (lx, ly)."""
     local_map.floor_objects.pop((lx, ly), None)
+
+
+# ------------------------------------------------------------------ #
+#  Container API
+# ------------------------------------------------------------------ #
+
+def place_container(
+    local_map: "LocalMap",
+    lx: int,
+    ly: int,
+    decor_id: str,
+    item_list: list,
+) -> None:
+    """Place a closed container with items at (lx, ly)."""
+    from generation.decor_utils import place_decor
+    local_map.container_state[(lx, ly)] = {
+        "state": "closed",
+        "items": [_serialize_container_item(it) for it in item_list],
+        "decor_id": decor_id,
+    }
+    place_decor(local_map, lx, ly, decor_id)
+
+
+def open_container(local_map: "LocalMap", lx: int, ly: int) -> bool:
+    """Transition container from closed to open. Returns True if opened.
+    Visual does not change — container state is tracked in container_state."""
+    entry = local_map.container_state.get((lx, ly))
+    if not entry or entry["state"] != "closed":
+        return False
+    entry["state"] = "open"
+    return True
+
+
+def take_from_container(local_map: "LocalMap", lx: int, ly: int, item) -> None:
+    """Remove a specific item from an open container by item_id match."""
+    entry = local_map.container_state.get((lx, ly))
+    if not entry:
+        return
+    item_id = getattr(item, "item_id", "")
+    # Remove first matching item_id from the serialised list
+    for i, d in enumerate(entry["items"]):
+        if d.get("item_id") == item_id:
+            entry["items"].pop(i)
+            break
+    if not entry["items"]:
+        entry["state"] = "looted"
+
+
+def get_container_items(local_map: "LocalMap", lx: int, ly: int, item_factory) -> list:
+    """Return current items in an open container as Item objects."""
+    entry = local_map.container_state.get((lx, ly))
+    if not entry or entry["state"] not in ("open", "closed"):
+        return []
+    results = []
+    for d in entry["items"]:
+        item_id = d.get("item_id", "")
+        if item_id:
+            item = item_factory.create(item_id)
+            if item is not None:
+                if d.get("text_id"):
+                    item.text_id = d["text_id"]
+                results.append(item)
+    return results
+
+
+def _serialize_container_item(item) -> dict:
+    """Serialize an Item to a minimal dict for container storage."""
+    return {
+        "item_id": getattr(item, "item_id", ""),
+        "text_id": getattr(item, "text_id", ""),
+    }

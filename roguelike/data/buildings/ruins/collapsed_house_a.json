@@ -28,6 +28,16 @@
     "#.......r.#",
     "##r###r####"
   ],
-  "special_tiles": [],
-  "note": "PLACEHOLDER \u2014 redesign. Rock tiles = rubble/fallen masonry. Partial floor accessible. No door."
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": [
+        "ruins_scatter"
+      ]
+    }
+  ],
+  "note": "PLACEHOLDER — redesign. Rock tiles = rubble/fallen masonry. Partial floor accessible. No door."
 }

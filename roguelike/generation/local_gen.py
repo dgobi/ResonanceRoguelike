@@ -264,6 +264,15 @@ def _generate_submap_from_layout(
                 "name": spec.get("name", "remains"),
                 "x": sx, "y": sy,
             })
+        elif spec["type"] == "container":
+            entities.append({
+                "kind":       "container",
+                "decor_id":   spec.get("decor_id", "crate"),
+                "loot_pools": spec.get("loot_pools", []),
+                "x": sx, "y": sy,
+            })
+        elif spec["type"] == "stele":
+            local_map.stele_text_ids[(sx, sy)] = spec.get("text_id", "")
 
     return local_map, entities, entry_x, entry_y
 

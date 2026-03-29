@@ -32,6 +32,16 @@
     "#.......w#",
     "####.#####"
   ],
-  "special_tiles": [],
-  "note": "PLACEHOLDER \u2014 redesign. East wing open (null tiles = sky/rubble). Door at (4,7)."
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
+    }
+  ],
+  "note": "PLACEHOLDER — redesign. East wing open (null tiles = sky/rubble). Door at (4,7)."
 }

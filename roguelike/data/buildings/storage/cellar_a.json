@@ -9,7 +9,7 @@
     "residential": 3
   },
   "interior_loot_table": "residential_common",
-  "description": "A small storage cellar or root store. Flagstone floor \u2014 below street level implied. Single door.",
+  "description": "A small storage cellar or root store. Flagstone floor — below street level implied. Single door.",
   "legend": {
     "#": "wall",
     ".": "floor",
@@ -31,10 +31,22 @@
   ],
   "special_tiles": [
     {
-      "x": 1, "y": 3,
-      "type": "item", "item_id": "lab_note", "text_id": "cellar_scratching_a",
+      "x": 1,
+      "y": 3,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "cellar_scratching_a",
       "note": "Words scratched into the flagstone wall"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "storage_general"
+      ]
     }
   ],
-  "note": "PLACEHOLDER \u2014 redesign. Flagstone throughout (below-ground feel). Door at (3,5)."
+  "note": "PLACEHOLDER — redesign. Flagstone throughout (below-ground feel). Door at (3,5)."
 }

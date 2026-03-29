@@ -1,0 +1,12 @@
+{
+  "id": "leather_satchel",
+  "name": "Leather Satchel",
+  "category": "equipment",
+  "slot": "satchel",
+  "tile": "leather_satchel",
+  "weight": 0.8,
+  "description": "Worn leather, stitched at the seams. Carries more than it looks.",
+  "weight_reductions": {"all": 0.10},
+  "keywords": [{"tag": "vessel", "tier": 1}, {"tag": "fibrous", "tier": 2}],
+  "consumed_on_use": false
+}

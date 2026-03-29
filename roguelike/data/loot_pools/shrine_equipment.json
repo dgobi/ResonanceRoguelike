@@ -1,0 +1,10 @@
+{
+  "id": "shrine_equipment",
+  "description": "Practical supplies kept near a shrine or bell warden post.",
+  "roll_count": [1, 2],
+  "items": [
+    {"item_id": "tallow_torch", "weight": 60},
+    {"item_id": "oil_lantern", "weight": 30},
+    {"item_id": "leather_satchel", "weight": 20}
+  ]
+}

@@ -20,6 +20,7 @@ SLOTS = [
     "talisman_1",
     "talisman_2",
     "talisman_3",
+    "satchel",
 ]
 
 

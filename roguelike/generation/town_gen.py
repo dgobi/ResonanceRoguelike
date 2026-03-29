@@ -1619,22 +1619,30 @@ def _stamp_building_at(
             ty = oy + row_idx
             place_decor(local_map, tx, ty, decor_id)
 
-    # Collect special_tiles as world-space item spawn specs
+    # Collect special_tiles as world-space item/container spawn specs
     item_specs: list[dict] = []
     for st in building.get("special_tiles", []):
-        if st.get("type") != "item":
-            continue
         sx = st.get("x", 0)
         sy = st.get("y", 0)
         if flip_v:
             sy = bh - 1 - sy
-        item_specs.append({
-            "kind":    "item",
-            "item_id": st.get("item_id", ""),
-            "text_id": st.get("text_id", ""),
-            "x": ox + sx,
-            "y": oy + sy,
-        })
+        st_type = st.get("type", "")
+        if st_type == "item":
+            item_specs.append({
+                "kind":    "item",
+                "item_id": st.get("item_id", ""),
+                "text_id": st.get("text_id", ""),
+                "x": ox + sx,
+                "y": oy + sy,
+            })
+        elif st_type == "container":
+            item_specs.append({
+                "kind":       "container",
+                "decor_id":   st.get("decor_id", "barrel"),
+                "loot_pools": st.get("loot_pools", []),
+                "x": ox + sx,
+                "y": oy + sy,
+            })
     return item_specs
 
 

@@ -18,6 +18,7 @@ class Language:
     """
     known_deep_words:   set[str]          = field(default_factory=set)
     translation_events: dict[str, int]    = field(default_factory=dict)
+    taught_texts:       set[str]          = field(default_factory=set)
     recovered_spans:    set[tuple]        = field(default_factory=set)
     recovered_text:     dict[tuple, str]  = field(default_factory=dict)
 

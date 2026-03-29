@@ -5,6 +5,11 @@
   "condition": "pristine",
   "reads_as": "single",
   "lacunae": false,
+  "teach_words": {
+    "count": 1,
+    "categories": ["place", "essence"],
+    "tier": 1
+  },
   "pages": [
     {
       "text": "Vrath sketh urath. Grath zhar keth.",

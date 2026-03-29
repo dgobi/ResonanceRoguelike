@@ -2080,6 +2080,23 @@
       "transparent": true,
       "visual_fx": "pulse_glow"
     },
+    "stele": {
+      "char": 84,
+      "ascii": "T",
+      "color_fg": [
+        140,
+        130,
+        115
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "blocks_move": true,
+      "transparent": true,
+      "visual_fx": "pulse_dim"
+    },
     "packed_earth": {
       "char": 46,
       "ascii": ".",
@@ -2620,7 +2637,10 @@
         3,
         0
       ],
-      "visual_fx": ["sparkle", "pulse_dim"]
+      "visual_fx": [
+        "sparkle",
+        "pulse_dim"
+      ]
     },
     "faceted_ward": {
       "ascii": ")",
@@ -2678,66 +2698,463 @@
     },
     "dead_wood": {
       "ascii": "%",
-      "color_fg": [115, 84, 52],
-      "color_bg": [6, 6, 8],
-      "color_fg_dark": [12, 10, 8],
-      "color_bg_dark": [4, 5, 9]
+      "color_fg": [
+        115,
+        84,
+        52
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        12,
+        10,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
     },
     "flint_rock": {
       "ascii": "'",
-      "color_fg": [74, 84, 98],
-      "color_bg": [6, 6, 8],
-      "color_fg_dark": [10, 12, 18],
-      "color_bg_dark": [4, 5, 9]
+      "color_fg": [
+        74,
+        84,
+        98
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
     },
     "flint_rock_depleted": {
       "ascii": ".",
-      "color_fg": [42, 48, 56],
-      "color_bg": [6, 6, 8],
-      "color_fg_dark": [8, 9, 12],
-      "color_bg_dark": [4, 5, 9]
+      "color_fg": [
+        42,
+        48,
+        56
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        8,
+        9,
+        12
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
     },
     "campfire_unlit": {
       "ascii": "*",
-      "color_fg": [74, 84, 98],
-      "color_bg": [6, 6, 8],
-      "color_fg_dark": [10, 12, 18],
-      "color_bg_dark": [4, 5, 9]
+      "color_fg": [
+        74,
+        84,
+        98
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        18
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
     },
     "campfire_lit": {
       "ascii": "*",
-      "color_fg": [226, 181, 112],
-      "color_bg": [61, 20, 48],
-      "color_fg_dark": [10, 12, 8],
-      "color_bg_dark": [4, 5, 9]
+      "color_fg": [
+        226,
+        181,
+        112
+      ],
+      "color_bg": [
+        61,
+        20,
+        48
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
     },
     "clay_deposit": {
       "ascii": "o",
-      "color_fg": [164, 104, 72],
-      "color_bg": [6, 6, 8],
-      "color_fg_dark": [14, 10, 8],
-      "color_bg_dark": [4, 5, 9]
+      "color_fg": [
+        164,
+        104,
+        72
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        14,
+        10,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
     },
     "clay_deposit_depleted": {
       "ascii": ".",
-      "color_fg": [88, 72, 64],
-      "color_bg": [6, 6, 8],
-      "color_fg_dark": [10, 9, 8],
-      "color_bg_dark": [4, 5, 9]
+      "color_fg": [
+        88,
+        72,
+        64
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        10,
+        9,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
     },
     "drying_herb": {
       "ascii": "~",
-      "color_fg": [168, 164, 100],
-      "color_bg": [6, 6, 8],
-      "color_fg_dark": [14, 14, 9],
-      "color_bg_dark": [4, 5, 9]
+      "color_fg": [
+        168,
+        164,
+        100
+      ],
+      "color_bg": [
+        6,
+        6,
+        8
+      ],
+      "color_fg_dark": [
+        14,
+        14,
+        9
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
     },
     "cooking_meat": {
       "ascii": "%",
-      "color_fg": [188, 89, 60],
-      "color_bg": [61, 20, 48],
-      "color_fg_dark": [12, 8, 6],
-      "color_bg_dark": [4, 5, 9]
+      "color_fg": [
+        188,
+        89,
+        60
+      ],
+      "color_bg": [
+        61,
+        20,
+        48
+      ],
+      "color_fg_dark": [
+        12,
+        8,
+        6
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "leather_satchel": {
+      "ascii": ")",
+      "color_fg": [
+        168,
+        121,
+        70
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        10,
+        6
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "herbalist_pouch": {
+      "ascii": ")",
+      "color_fg": [
+        119,
+        148,
+        85
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        12,
+        7
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "component_satchel": {
+      "ascii": ")",
+      "color_fg": [
+        145,
+        131,
+        116
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        12,
+        11,
+        10
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "barrel": {
+      "ascii": "o",
+      "color_fg": [
+        168,
+        121,
+        70
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        10,
+        6
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "barrel_open": {
+      "ascii": "o",
+      "color_fg": [
+        145,
+        131,
+        116
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        12,
+        11,
+        10
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "crate": {
+      "ascii": "[",
+      "color_fg": [
+        168,
+        121,
+        70
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        10,
+        6
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "crate_open": {
+      "ascii": "[",
+      "color_fg": [
+        145,
+        131,
+        116
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        12,
+        11,
+        10
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "sack": {
+      "ascii": "(",
+      "color_fg": [
+        168,
+        164,
+        100
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        14,
+        14,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "sack_open": {
+      "ascii": "(",
+      "color_fg": [
+        145,
+        131,
+        116
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        12,
+        11,
+        10
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "coffer": {
+      "ascii": "{",
+      "color_fg": [
+        145,
+        131,
+        116
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        12,
+        11,
+        10
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
+    },
+    "coffer_open": {
+      "ascii": "{",
+      "color_fg": [
+        119,
+        113,
+        100
+      ],
+      "color_bg": [
+        0,
+        0,
+        0
+      ],
+      "color_fg_dark": [
+        10,
+        10,
+        8
+      ],
+      "color_bg_dark": [
+        4,
+        5,
+        9
+      ]
     }
   }
 }

@@ -31,6 +31,7 @@ def generate_starting_lab(
     map_h:        int,
     terrain_data: dict,
     item_factory: "ItemFactory",
+    data_loader=None,
 ) -> tuple["LocalMap", tuple[int, int], list]:
     """
     Build the starting underground lab.
@@ -58,8 +59,9 @@ def generate_starting_lab(
     ps    = layout["player_start"]
     spawn = (ox + ps["x"], oy + ps["y"])
 
-    # Special tile entities
-    entities = _build_entities(layout, item_factory, ox, oy)
+    # Special tile entities (containers written directly to local_map)
+    entities = _build_entities(layout, item_factory, ox, oy,
+                               local_map=local_map, data_loader=data_loader)
 
     return local_map, spawn, entities
 
@@ -109,6 +111,8 @@ def _build_entities(
     item_factory: "ItemFactory",
     ox:           int,
     oy:           int,
+    local_map:    "LocalMap | None" = None,
+    data_loader=None,
 ) -> list:
     from entities.item import Item
 
@@ -135,5 +139,21 @@ def _build_entities(
             )
             body.weight = 0.0
             entities.append(body)
+
+        elif st["type"] == "stele" and local_map is not None:
+            # Store text_id for stele lookup by engine._find_stele_text_id
+            local_map.stele_text_ids[(wx, wy)] = st.get("text_id", "")
+
+        elif st["type"] == "container" and local_map is not None:
+            from generation.floor_object_utils import place_container
+            from engine.loot_roller import roll_pools
+            import random
+            loot_pools = data_loader.loot_pools if data_loader else {}
+            items = roll_pools(
+                st.get("loot_pools", []), loot_pools,
+                item_factory, random.Random(),
+            )
+            if local_map.in_bounds(wx, wy) and local_map.tiles[wx, wy]["walkable"]:
+                place_container(local_map, wx, wy, st.get("decor_id", "crate"), items)
 
     return entities

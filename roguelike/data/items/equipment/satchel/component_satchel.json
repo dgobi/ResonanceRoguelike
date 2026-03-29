@@ -1,0 +1,12 @@
+{
+  "id": "component_satchel",
+  "name": "Component Satchel",
+  "category": "equipment",
+  "slot": "satchel",
+  "tile": "component_satchel",
+  "weight": 0.6,
+  "description": "Heavy canvas with reinforced base. Built for bulk materials.",
+  "weight_reductions": {"Components": 0.35, "Tools": 0.20},
+  "keywords": [{"tag": "vessel", "tier": 1}, {"tag": "fibrous", "tier": 1}],
+  "consumed_on_use": false
+}

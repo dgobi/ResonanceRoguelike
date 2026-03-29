@@ -554,6 +554,7 @@ def _serialize_player(engine: "Engine") -> dict:
         "language": {
             "known_deep_words":   list(p.language.known_deep_words),
             "translation_events": p.language.translation_events,
+            "taught_texts":       list(p.language.taught_texts),
             "recovered_spans":    [list(s) for s in p.language.recovered_spans],
             "recovered_text":     {str(k): v for k, v in p.language.recovered_text.items()},
         } if getattr(p, "language", None) else None,
@@ -665,6 +666,7 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
         lang = Language()
         lang.known_deep_words   = set(ld.get("known_deep_words", []))
         lang.translation_events = ld.get("translation_events", {})
+        lang.taught_texts       = set(ld.get("taught_texts", []))
         lang.recovered_spans    = set(tuple(s) for s in ld.get("recovered_spans", []))
         lang.recovered_text     = {
             tuple(eval(k)): v

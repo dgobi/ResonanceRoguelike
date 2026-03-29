@@ -54,6 +54,24 @@ class ItemSystem:
             engine.log.add(f"[DEBUG] text '{text_id}' not found.", AGED_WOOD)
             return False
         engine.text_reader.open_text(text_def)
+        # Teach deep tongue words if text has teach_words block — once per text_id
+        if text_def.get("teach_words"):
+            lang = getattr(engine.player, "language", None)
+            if lang is not None and text_id not in lang.taught_texts:
+                from engine.language_system import learn_from_text
+                learned = learn_from_text(
+                    text_def, lang, engine.data.deep_tongue, engine.rng,
+                )
+                lang.taught_texts.add(text_id)
+                for wid in learned:
+                    wdef = engine.data.deep_tongue.get(wid, {})
+                    deep = wdef.get("deep", wid)
+                    common = wdef.get("common", "")
+                    lang.translation_events[wid] = engine.world_time.turn
+                    engine.log.add(
+                        f"Something stirs in the bone. A word surfaces — [{deep}]: {common}.",
+                        DEEP_TONGUE_COLOUR,
+                    )
         return False   # not consumed
 
     def _use_eat(self, item: "Item", engine: "Engine") -> bool:

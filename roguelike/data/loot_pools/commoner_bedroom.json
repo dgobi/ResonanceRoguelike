@@ -1,0 +1,12 @@
+{
+  "id": "commoner_bedroom",
+  "description": "Personal effects in a common bedroom. Letters, herbs, a light source.",
+  "roll_count": [1, 2],
+  "items": [
+    {"item_id": "pilgrims_woe_petals", "weight": 40},
+    {"item_id": "dried_aromatic_herb", "weight": 35},
+    {"item_id": "moist_pebble", "weight": 20},
+    {"item_id": "tallow_torch", "weight": 50},
+    {"item_id": "lab_note", "weight": 30, "text_pool": true}
+  ]
+}

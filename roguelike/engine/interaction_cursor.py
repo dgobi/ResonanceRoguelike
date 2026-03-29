@@ -169,6 +169,8 @@ class InteractionCursor:
                     return  # no turn spent yet, prompt takes over
         if not acted:
             acted = engine._dispatch_interactable(cx, cy)
+        if self._selection_prompt is not None:
+            return  # prompt opened by interactable handler (e.g. browse_container)
         if not acted:
             _proc_layer = getattr(engine.local_map, "processing_layer", {})
             if (cx, cy) in _proc_layer:
@@ -202,8 +204,11 @@ class InteractionCursor:
         if key in (pygame.K_RETURN, pygame.K_KP_ENTER):
             sel = prompt["selected"]
             lx, ly = prompt["lx"], prompt["ly"]
+            is_container = prompt.get("source") == "container"
             self._selection_prompt = None
-            if sel < len(items):
+            if is_container:
+                self._handle_container_take(sel, items, lx, ly, engine)
+            elif sel < len(items):
                 # Single item selected
                 item = items[sel]
                 if getattr(item, "source_creature", None):
@@ -243,6 +248,39 @@ class InteractionCursor:
         if key == pygame.K_ESCAPE:
             self._selection_prompt = None
             return
+
+    def _handle_container_take(
+        self, sel: int, items: list, lx: int, ly: int, engine: "Engine",
+    ) -> None:
+        """Handle taking items from a container selection prompt."""
+        from generation.floor_object_utils import take_from_container
+        inv = getattr(engine.player, "inventory", None)
+        if not inv:
+            return
+        if sel < len(items):
+            item = items[sel]
+            if inv.add(item):
+                take_from_container(engine.local_map, lx, ly, item)
+                _dname = getattr(item, "name", "") or "something"
+                engine.log.add(f"Thou takest the {_dname}.", WORN_STONE)
+            else:
+                engine.log.add("Thou canst not carry more.", EARTH_BROWN)
+        else:
+            # "Take all"
+            _taken_names = []
+            for it in items:
+                if inv.add(it):
+                    take_from_container(engine.local_map, lx, ly, it)
+                    _taken_names.append(getattr(it, "name", "") or "something")
+            if _taken_names:
+                _parts = [f"the {n}" for n in _taken_names]
+                if len(_parts) == 1:
+                    _list = _parts[0]
+                elif len(_parts) == 2:
+                    _list = f"{_parts[0]} and {_parts[1]}"
+                else:
+                    _list = ", ".join(_parts[:-1]) + f", and {_parts[-1]}"
+                engine.log.add(f"Thou takest {_list}.", WORN_STONE)
 
     def _emit_empty_message(self, engine: "Engine", x: int, y: int) -> None:
         """

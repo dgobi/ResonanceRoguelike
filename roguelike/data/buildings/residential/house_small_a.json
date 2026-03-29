@@ -40,7 +40,16 @@
       "item_id": "lab_note",
       "text_id": "world_graffiti_a",
       "note": "Personal letter or note on table"
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
     }
   ],
-  "note": "PLACEHOLDER \u2014 redesign layers to taste. Door at (4,7) faces south street."
+  "note": "PLACEHOLDER — redesign layers to taste. Door at (4,7) faces south street."
 }

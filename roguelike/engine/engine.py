@@ -32,6 +32,7 @@ from engine.health_screen import HealthScreen
 from engine.text_reader import TextReader
 from rendering.perk_screen import PerkScreen
 from rendering.craft_screen import CraftScreen
+from rendering.lexicon_screen import LexiconScreen
 
 from typing import TYPE_CHECKING
 from engine.palette import *
@@ -271,6 +272,7 @@ class Engine:
         self.health_screen    = HealthScreen()
         self.perk_screen      = PerkScreen()
         self.craft_screen     = CraftScreen()
+        self.lexicon_screen   = LexiconScreen()
         self.text_reader      = TextReader()
         self._pickup_mode:    bool = False
         self._player_is_dead:   bool = False
@@ -513,6 +515,7 @@ class Engine:
         self.health_screen.init(self.display)
         self.perk_screen.init(self.display)
         self.craft_screen.init(self.display)
+        self.lexicon_screen.init(self.display)
         self.text_reader.init(self.display)
 
         if self.debug:
@@ -672,7 +675,9 @@ class Engine:
                     self.health_screen.open or
                     self.perk_screen.open or
                     self.craft_screen.open or
-                    self.text_reader.open
+                    self.lexicon_screen.open or
+                    self.text_reader.open or
+                    self.look_mode.examining
                 )
                 if not _overlay_open:
                     import time as _time
@@ -1113,6 +1118,7 @@ class Engine:
             self.health_screen.render(screen, self)
             self.perk_screen.render(screen, self)
             self.craft_screen.render(screen, self)
+            self.lexicon_screen.render(screen, self)
 
             if self.text_reader.open:
                 self.text_reader.render(screen, self)
@@ -1495,6 +1501,10 @@ class Engine:
             self.craft_screen.handle_key(key, self)
             return
 
+        if self.lexicon_screen.open:
+            self.lexicon_screen.handle_key(key, self)
+            return
+
         if self.mode == GameMode.INTERACTION_CURSOR:
             self.interaction_cursor.handle_key(key, self)
             return
@@ -1509,7 +1519,8 @@ class Engine:
             GameMode.PLACEMENT_CURSOR, GameMode.INTERACTION_CURSOR,
         ) and not getattr(self.inventory_screen, "open", False) \
           and not getattr(self.craft_screen, "open", False) \
-          and not getattr(self.perk_screen, "open", False):
+          and not getattr(self.perk_screen, "open", False) \
+          and not getattr(self.lexicon_screen, "open", False):
             if self.mode == GameMode.LOOK:
                 self.mode = GameMode.LOCAL
             self._try_open_interaction_cursor()
@@ -1583,6 +1594,10 @@ class Engine:
 
         if key == pygame.K_h:
             self.health_screen.toggle()
+            return
+
+        if key == pygame.K_l:
+            self.lexicon_screen.toggle()
             return
 
         self.player._in_concealment = False
@@ -1720,7 +1735,17 @@ class Engine:
                 if actor:
                     town_entities.append(actor)
             from generation.floor_object_utils import place_floor_object as _pfo_town
+            from generation.floor_object_utils import place_container as _pc_town
+            from engine.loot_roller import roll_pools as _roll_pools
             for ispec in chunk.town_data.item_spawns:
+                if ispec.get("kind") == "container":
+                    _lx, _ly = ispec["x"], ispec["y"]
+                    if self.local_map.in_bounds(_lx, _ly) and self.local_map.tiles[_lx, _ly]["walkable"]:
+                        _items = _roll_pools(ispec.get("loot_pools", []), self.data.loot_pools, self.item_factory, self.rng)
+                        _pc_town(self.local_map, _lx, _ly, ispec.get("decor_id", "barrel"), _items)
+                    elif DEBUG_MODE:
+                        print(f"[LAYOUT] container at ({_lx},{_ly}) non-walkable, skipped.")
+                    continue
                 item = self.item_factory.create(ispec.get("item_id", ""), ispec["x"], ispec["y"])
                 if item is not None:
                     if ispec.get("text_id"):
@@ -1808,6 +1833,10 @@ class Engine:
     # ------------------------------------------------------------------ #
 
     def _transition_chunk(self, dx: int, dy: int) -> None:
+        # Clear screen-space particles — their absolute pixel coords become
+        # invalid when the camera shifts to a new chunk.
+        self.particle_system.particles.clear()
+
         # Stale transfers from interrupted transitions must never accumulate.
         self._pending_transfer = []
 
@@ -1929,7 +1958,15 @@ class Engine:
                     if actor:
                         new_entities.append(actor)
                 from generation.floor_object_utils import place_floor_object as _pfo_town2
+                from generation.floor_object_utils import place_container as _pc_town2
+                from engine.loot_roller import roll_pools as _roll_pools2
                 for ispec in chunk.town_data.item_spawns:
+                    if ispec.get("kind") == "container":
+                        _lx2, _ly2 = ispec["x"], ispec["y"]
+                        if new_map.in_bounds(_lx2, _ly2) and new_map.tiles[_lx2, _ly2]["walkable"]:
+                            _items2 = _roll_pools2(ispec.get("loot_pools", []), self.data.loot_pools, self.item_factory, self.rng)
+                            _pc_town2(new_map, _lx2, _ly2, ispec.get("decor_id", "barrel"), _items2)
+                        continue
                     item = self.item_factory.create(ispec.get("item_id", ""), ispec["x"], ispec["y"])
                     if item is not None:
                         if ispec.get("text_id"):
@@ -2172,6 +2209,7 @@ class Engine:
 
     def _descend_to_submap(self, submap_id: str) -> None:
         """Cache surface, generate/load submap, place player at entry."""
+        self.particle_system.particles.clear()
         # Clear creature ability state that doesn't survive transitions
         self._wraith_aura_state = {}
         self._wraith_overcorrect_turns = 0
@@ -2333,6 +2371,7 @@ class Engine:
 
     def _ascend_from_submap(self) -> None:
         """Cache submap, restore surface, place player at return coords."""
+        self.particle_system.particles.clear()
         self._wraith_aura_state = {}
         self._wraith_overcorrect_turns = 0
         self.player._hollow_knight_disruption = False
@@ -3163,6 +3202,19 @@ class Engine:
                     if text_id:
                         item.text_id = text_id
                     _pfo_layout(_target_map, _px, _py, item)
+            elif kind == "container":
+                from generation.floor_object_utils import place_container as _pc_layout
+                from engine.loot_roller import roll_pools as _rp_layout
+                if _target_map.in_bounds(x, y) and _target_map.walkable[x, y]:
+                    _c_items = _rp_layout(
+                        spec.get("loot_pools", []),
+                        self.data.loot_pools,
+                        self.item_factory,
+                        self.rng,
+                    )
+                    _pc_layout(_target_map, x, y, spec.get("decor_id", "crate"), _c_items)
+                elif DEBUG_MODE:
+                    print(f"[LAYOUT] container at ({x},{y}) non-walkable, skipped.")
             # "body" type — skip for now (Tier 2 content)
         return result
 
@@ -3389,7 +3441,7 @@ class Engine:
         tiers = by.get("tiers", [])
         qualified = [t for t in tiers if t.get("min_cutting_tier", 1) <= cutting_tier]
         if not qualified:
-            self.log.add("Your tools are not sufficient for this.", MSG_DEFAULT)
+            self.log.add("Thy equipped tool is insufficient for this task.", MSG_DEFAULT)
             return True
 
         best = max(qualified, key=lambda t: t.get("min_cutting_tier", 1))
@@ -3448,6 +3500,156 @@ class Engine:
         place_decor(self.local_map, x, y, "campfire_unlit")
         self.log.add("The fire dies.", MSG_DEFAULT)
         return True
+
+    # ── Container messages — one dict, one place ─────────────────
+    _CONTAINER_OPEN_MSG: dict[str, str] = {
+        "barrel": "The barrel opens with a dull report. The smell of old wood and whatever was sealed within.",
+        "crate":  "The lid comes free. The crate yields its contents to examination.",
+        "sack":   "The knot gives. The sack falls open.",
+        "coffer": "The coffer opens. Someone closed this carefully, once.",
+    }
+    _CONTAINER_LOOTED_MSG: dict[str, str] = {
+        "barrel": "The barrel is empty. It has been so for some time.",
+        "crate":  "The crate holds nothing. The lid was already off.",
+        "sack":   "The sack is empty. Already searched.",
+        "coffer": "The coffer is bare. Whatever it kept is gone.",
+    }
+
+    def _interactable_container(self, x: int, y: int) -> bool:
+        """Single-step container interaction: open + browse in one action."""
+        from generation.floor_object_utils import open_container, get_container_items
+        entry = self.local_map.container_state.get((x, y))
+        if not entry:
+            return False
+        decor_id = entry.get("decor_id", "")
+        state = entry["state"]
+
+        if state == "looted" or not entry["items"]:
+            msg = self._CONTAINER_LOOTED_MSG.get(decor_id, "Nothing within.")
+            self.log.add(msg, MSG_DEFAULT)
+            return False  # no turn
+
+        if state == "closed":
+            open_container(self.local_map, x, y)
+            msg = self._CONTAINER_OPEN_MSG.get(decor_id, "It opens.")
+            self.log.add(msg, MSG_DEFAULT)
+
+        # Now open — show browse prompt
+        items = get_container_items(self.local_map, x, y, self.item_factory)
+        if not items:
+            entry["state"] = "looted"
+            msg = self._CONTAINER_LOOTED_MSG.get(decor_id, "Nothing within.")
+            self.log.add(msg, MSG_DEFAULT)
+            return False
+
+        self.interaction_cursor._selection_prompt = {
+            "items": items,
+            "selected": 0,
+            "lx": x, "ly": y,
+            "source": "container",
+        }
+        return False  # prompt takes over — no turn yet
+
+    # ------------------------------------------------------------------ #
+    #  Deep tongue learning interactables
+    # ------------------------------------------------------------------ #
+
+    # Biome-weighted category lists for waystone learning
+    _WAYSTONE_CATEGORIES = {
+        "forest":        ["place", "body", "action"],
+        "heath":         ["time", "essence", "cosmic"],
+        "swamp":         ["body", "time", "cosmic"],
+        "mountain":      ["place", "cosmic", "number"],
+        "plains":        ["action", "people", "time"],
+        "drowned_wood":  ["body", "time", "cosmic"],
+        "ash_wastes":    ["essence", "cosmic", "number"],
+        "town":          ["people", "action", "place"],
+        "capital":       ["people", "action", "cosmic"],
+        "deep_mountain": ["cosmic", "essence", "number"],
+    }
+    _WAYSTONE_DEFAULT = ["action", "cosmic", "place"]
+
+    def _interactable_examine_waystone(self, x: int, y: int) -> bool:
+        """Examine a waystone — teach one deep tongue word. Once per waystone."""
+        if not hasattr(self.local_map, "interacted_waystones"):
+            self.local_map.interacted_waystones = set()
+        if (x, y) in self.local_map.interacted_waystones:
+            self.log.add("The inscription is familiar. Nothing new surfaces.", WORN_STONE)
+            return False
+        lang = getattr(self.player, "language", None)
+        if lang is None:
+            return False
+        from engine.language_system import learn_from_category
+        # Pick one category randomly from biome's weighted list
+        chunk = self.world_map.get(self.world_x, self.world_y) if self.world_map else None
+        biome_id = getattr(chunk, "biome_id", "forest") if chunk else "forest"
+        cat_list = self._WAYSTONE_CATEGORIES.get(biome_id, self._WAYSTONE_DEFAULT)
+        cat = self.rng.choice(cat_list)
+        ok, wid = learn_from_category(cat, 1, "waystone", lang,
+                                       self.data.deep_tongue, self.rng)
+        if ok:
+            wdef = self.data.deep_tongue.get(wid, {})
+            deep = wdef.get("deep", wid)
+            common = wdef.get("common", "")
+            # Update turn on language component
+            lang.translation_events[wid] = self.world_time.turn
+            self.log.add(
+                f"Something stirs in the bone. A word surfaces — [{deep}]: {common}.",
+                DEEP_TONGUE_COLOUR,
+            )
+            self.local_map.interacted_waystones.add((x, y))
+            return True
+        self.log.add("The stone hums. Nothing new surfaces.", WORN_STONE)
+        self.local_map.interacted_waystones.add((x, y))
+        return False
+
+    def _interactable_examine_stele(self, x: int, y: int) -> bool:
+        """Examine a stele — teach words on first examine, always open inscription."""
+        if not hasattr(self.local_map, "examined_steles"):
+            self.local_map.examined_steles = set()
+
+        # Find and load the inscription text
+        text_id = self._find_stele_text_id(x, y)
+        if not text_id:
+            self.log.add("The marks are too worn to read.", WORN_STONE)
+            return False
+        text_def = self.data.texts.get(text_id, {})
+        if not text_def:
+            self.log.add("The marks are too worn to read.", WORN_STONE)
+            return False
+
+        # Teach words on first examine only
+        lang = getattr(self.player, "language", None)
+        first_time = (x, y) not in self.local_map.examined_steles
+        if first_time and lang is not None:
+            if text_id not in lang.taught_texts:
+                from engine.language_system import learn_from_text
+                learned = learn_from_text(text_def, lang, self.data.deep_tongue, self.rng)
+                lang.taught_texts.add(text_id)
+                for wid in learned:
+                    wdef = self.data.deep_tongue.get(wid, {})
+                    deep = wdef.get("deep", wid)
+                    common = wdef.get("common", "")
+                    lang.translation_events[wid] = self.world_time.turn
+                    self.log.add(
+                        f"Something stirs in the bone. A word surfaces — [{deep}]: {common}.",
+                        DEEP_TONGUE_COLOUR,
+                    )
+            self.local_map.examined_steles.add((x, y))
+
+        # Always open the inscription for reading
+        self.text_reader.open_text(
+            text_def,
+            panel_style="ziggurat",
+            text_align="center",
+            line_spacing_bonus=6,
+            panel_size="inscription",
+        )
+        return first_time
+
+    def _find_stele_text_id(self, x: int, y: int) -> str:
+        """Look up the text_id for a stele special_tile at (x, y)."""
+        return self.local_map.stele_text_ids.get((x, y), "")
 
     def _build_warm_tile_ids(self) -> None:
         """Rebuild the set of terrain IDs that emit warmth."""

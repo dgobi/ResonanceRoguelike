@@ -40,6 +40,8 @@ class DataLoader:
         self.processing_messages:  dict = self._load("processing_messages.json")
         _decor_list = self._load_list("decoratives.json")
         self.decoratives: dict = {e["id"]: e for e in _decor_list if "id" in e}
+        self.loot_pools: dict = self._load_dir("loot_pools")
+        print(f"  Loot pools loaded: {len(self.loot_pools)}")
 
     # ------------------------------------------------------------------ #
 
@@ -130,9 +132,19 @@ class DataLoader:
             self.building_loader = None
 
     def _load_deep_tongue(self) -> dict:
-        """Load deep_tongue.json and return a dict keyed by the 'deep' field."""
+        """Load deep_tongue.json and return a dict keyed by the 'id' (or 'deep') field."""
         raw = self._load("deep_tongue.json")
-        return {w["deep"]: w for w in raw.get("words", [])}
+        if isinstance(raw, dict) and "words" in raw:
+            words = raw["words"]
+        else:
+            words = raw if isinstance(raw, list) else []
+        result = {}
+        for w in words:
+            key = w.get("id", w.get("deep", ""))
+            if key:
+                result[key] = w
+        print(f"  Deep tongue loaded: {len(result)} words")
+        return result
 
     def structures_with_tags(self, tags: list[str]) -> list[dict]:
         """

@@ -75,6 +75,28 @@ class LocalMap:
         # Each entry: {"item_id": str, "lx": int, "ly": int}
         self.ready_items: list[dict] = []
 
+        # Interacted waystones — set of (lx, ly) that the player has already
+        # examined for deep tongue learning. Prevents repeat word grants.
+        self.interacted_waystones: set[tuple[int, int]] = set()
+
+        # Examined steles — set of (lx, ly) that have already taught words.
+        self.examined_steles: set[tuple[int, int]] = set()
+
+        # Stele text IDs — maps (lx, ly) → text_id string.
+        # Set during layout stamping for stele special tiles.
+        # Serialised with the local_map via pickle (CachedChunk).
+        self.stele_text_ids: dict[tuple[int, int], str] = {}
+
+        # Container state — (lx, ly) -> container entry dict.
+        # Each entry: {
+        #   "state": "closed" | "open" | "looted",
+        #   "items": [serialised item dicts],
+        #   "decor_id": str,  # the container's closed decor id
+        # }
+        # Never write directly — use generation.floor_object_utils container API.
+        # Serialised with the local_map via pickle (CachedChunk).
+        self.container_state: dict[tuple[int, int], dict] = {}
+
     def set_tile(self, x: int, y: int, terrain: str,
                  walkable: bool, transparent: bool) -> None:
         # Import inside the function to avoid circular imports

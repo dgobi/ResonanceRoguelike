@@ -34,6 +34,26 @@
     "#.w........w.#",
     "#####..#######"
   ],
-  "special_tiles": [],
-  "note": "PLACEHOLDER \u2014 redesign. Worn_stone pillars at regular intervals. Double door at (5,9)+(6,9)."
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "storage_general"
+      ]
+    },
+    {
+      "x": 12,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": [
+        "storage_general",
+        "storage_tools"
+      ]
+    }
+  ],
+  "note": "PLACEHOLDER — redesign. Worn_stone pillars at regular intervals. Double door at (5,9)+(6,9)."
 }

@@ -5,7 +5,10 @@
   "height": 8,
   "facing": "south",
   "condition": "ruined",
-  "district_weights": {"religious": 4, "ruins": 2},
+  "district_weights": {
+    "religious": 4,
+    "ruins": 2
+  },
   "interior_loot_table": "shrine_ruins",
   "legend": {
     "#": "wall",
@@ -24,14 +27,113 @@
     " ###  ### "
   ],
   "decor_layer": [
-    [null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,"decor_bone_pile",null,null,null,null],
-    [null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,null,null,null,null,null]
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      "decor_bone_pile",
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
   ],
-  "note": "A collapsed shrine. Three walls standing, south face open and scattered. Bone piles suggest the site served as a resting place for the faithful."
+  "note": "A collapsed shrine. Three walls standing, south face open and scattered. Bone piles suggest the site served as a resting place for the faithful.",
+  "special_tiles": [
+    {
+      "x": 3,
+      "y": 2,
+      "type": "container",
+      "decor_id": "coffer",
+      "loot_pools": [
+        "shrine_offering"
+      ]
+    }
+  ]
 }

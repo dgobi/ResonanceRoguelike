@@ -8,13 +8,6 @@
     "visual_fx": "flame_low"
   },
   {
-    "id": "decor_barrel",
-    "ascii": "0",
-    "blocks_movement": true,
-    "blocks_sight": false,
-    "description": "A cask, staved and empty."
-  },
-  {
     "id": "decor_bone_pile",
     "ascii": "%",
     "blocks_movement": false,
@@ -116,5 +109,41 @@
     "description": "Meat set over the fire. The fat runs and spits.",
     "visual_fx": "flame_low",
     "processing": true
+  },
+  {
+    "id": "barrel",
+    "ascii": "o",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A barrel. Staved wood, iron-banded.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "crate",
+    "ascii": "[",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A wooden crate.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "sack",
+    "ascii": "(",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A sack, tied at the neck.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "coffer",
+    "ascii": "{",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A coffer. Hinged and clasped.",
+    "container": true,
+    "interactable": "container"
   }
 ]

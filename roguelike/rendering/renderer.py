@@ -167,12 +167,10 @@ class Renderer:
             sprite = sr.get(tile_id, zoom=zoom)
 
         if sprite is None:
-            # Fallback to ASCII
-            if tile_id in self.registry._data:
-                ch  = chr(self.registry.char(tile_id))
-                afg = self.registry.fg(tile_id)
-                abg = self.registry.bg(tile_id)
-                self._draw_glyph(surface, ch, afg, abg, tx, ty, zoom=zoom)
+            # Placeholder system should prevent this — log if it happens
+            from config import DEBUG_MODE
+            if DEBUG_MODE:
+                print(f"[SPRITE] tile '{tile_id}' has no sprite and no placeholder — check sprite_map.json")
             return
 
         # Full-colour mode: apply brightness overlay if fg provided

@@ -5,7 +5,10 @@
   "height": 5,
   "facing": "south",
   "condition": "intact",
-  "district_weights": {"storage": 4, "residential": 2},
+  "district_weights": {
+    "storage": 4,
+    "residential": 2
+  },
   "interior_loot_table": "storage_food",
   "legend": {
     "#": "wall",
@@ -20,5 +23,16 @@
     "#.....#",
     "###+###"
   ],
-  "note": "A root cellar. Low and broad, packed earth floor, no windows. Single door opens south."
+  "note": "A root cellar. Low and broad, packed earth floor, no windows. Single door opens south.",
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": [
+        "storage_general"
+      ]
+    }
+  ]
 }

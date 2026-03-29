@@ -68,6 +68,8 @@ _EQUIP_SLOT_DISPLAY: list[tuple[str, str | None]] = [
     ("Talisman I",   "talisman_1"),
     ("Talisman II",  "talisman_2"),
     ("Talisman III", "talisman_3"),
+    ("SATCHEL",      None),
+    ("Satchel",      "satchel"),
 ]
 
 
@@ -90,9 +92,31 @@ _CAT_MAP: dict[str, str] = {
     "butchery":    "Components",
     "tool":        "Tools",
     "talisman":    "Miscellaneous",
+    "equipment":   "Miscellaneous",
     "document":    "Miscellaneous",
     "text":        "Miscellaneous",
 }
+
+
+def _get_satchel_reductions(engine: "Engine") -> dict:
+    """Return weight_reductions dict from equipped satchel, or empty dict."""
+    equip = getattr(engine.player, "equipment", None)
+    if not equip:
+        return {}
+    satchel = equip.equipped_in("satchel")
+    if not satchel:
+        return {}
+    item_def = engine.data.items.get(getattr(satchel, "item_id", ""), {})
+    return item_def.get("weight_reductions", {})
+
+
+def _effective_weight(item: "Item", category: str, reductions: dict) -> float:
+    """Apply satchel weight reductions to an item's weight at read time."""
+    base = getattr(item, "weight", 0.0)
+    red = reductions.get(category, reductions.get("all", 0.0))
+    if red > 0:
+        return base * (1.0 - red)
+    return base
 
 
 def _item_category(item: "Item", engine: "Engine") -> str:
@@ -211,7 +235,7 @@ class InventoryScreen:
         self.open:           bool      = False
         self.selected:       int       = 0
         self.scroll:         int       = 0
-        self._collapsed:     set[str]  = {"Miscellaneous"}
+        self._collapsed:     set[str]  = set()
         self._font_title:    pygame.font.Font | None = None
         self._font_normal:   pygame.font.Font | None = None
         self._font_small:    pygame.font.Font | None = None
@@ -511,8 +535,13 @@ class InventoryScreen:
         surf.blit(title, (x, y))
 
         if inv:
+            _reductions = _get_satchel_reductions(engine)
+            _eff_total = sum(
+                _effective_weight(i, _item_category(i, engine), _reductions)
+                for i in inv.items
+            )
             wt_s = self._font_small.render(
-                f"{inv.current_weight:.1f}/{inv.capacity:.1f}kg", True, self.DIM
+                f"{_eff_total:.1f}/{inv.capacity:.1f}kg", True, self.DIM
             )
             surf.blit(wt_s, (ox + w - wt_s.get_width() - pad, y + 2))
         y += title.get_height() + 4
@@ -621,9 +650,10 @@ class InventoryScreen:
             ns = self._font_normal.render(name_str, True, row_col)
             surf.blit(ns, (COL_NAME, _row_cy - ns.get_height() // 2))
 
-            # Weight at COL_WEIGHT — right-aligned
+            # Weight at COL_WEIGHT — right-aligned (satchel reduction applied)
+            _item_wt = _effective_weight(item, _item_category(item, engine), _reductions)
             wt_s2 = self._font_small.render(
-                f"{getattr(item, 'weight', 0.0):.1f}kg", True, self.DIM
+                f"{_item_wt:.1f}kg", True, self.DIM
             )
             surf.blit(wt_s2, (COL_WEIGHT + 50 - wt_s2.get_width(), _row_cy - wt_s2.get_height() // 2))
             y += lh

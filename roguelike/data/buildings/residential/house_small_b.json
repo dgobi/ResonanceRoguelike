@@ -33,10 +33,22 @@
   ],
   "special_tiles": [
     {
-      "x": 2, "y": 1,
-      "type": "item", "item_id": "lab_note", "text_id": "family_record_a",
+      "x": 2,
+      "y": 1,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "family_record_a",
       "note": "A family record book, left open near the hearth"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
     }
   ],
-  "note": "PLACEHOLDER \u2014 redesign layers to taste. Door at (3,6) faces south street."
+  "note": "PLACEHOLDER — redesign layers to taste. Door at (3,6) faces south street."
 }

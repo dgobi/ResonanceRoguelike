@@ -5,7 +5,10 @@
   "height": 6,
   "facing": "south",
   "condition": "intact",
-  "district_weights": {"religious": 4, "civic": 1},
+  "district_weights": {
+    "religious": 4,
+    "civic": 1
+  },
   "interior_loot_table": "shrine_common",
   "legend": {
     "#": "wall",
@@ -23,18 +26,84 @@
     "###++###"
   ],
   "decor_layer": [
-    [null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,null,null,null],
-    [null,null,null,null,"decor_candle",null,null,null],
-    [null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,null,null,null]
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      "decor_candle",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
   ],
   "special_tiles": [
     {
-      "x": 1, "y": 3,
-      "type": "item", "item_id": "lab_note", "text_id": "bellwarden_log_a",
+      "x": 1,
+      "y": 3,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "bellwarden_log_a",
       "note": "A log left on the floor near the old bracket position"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "shrine_equipment"
+      ]
     }
   ],
   "note": "A bell warden's post. Small rectangular station. Two worn stone blocks mark the old bell bracket position along the north wall. A candle burns — or burned — on the work surface."

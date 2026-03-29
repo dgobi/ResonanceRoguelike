@@ -5,5 +5,10 @@
   "condition": "weathered",
   "reads_as": "single",
   "lacunae": false,
+  "teach_words": {
+    "count": 1,
+    "categories": ["place", "cosmic"],
+    "tier": 1
+  },
   "pages": [{"text": "Sketh voss keth.\nSketh voss keth.\nThe stone remembers what the bone carried.\nThe road does not forget what walked on it.\n\nWho passes this stone has been counted.\nWho stops to read has been measured.\nWho speaks the words aloud has been marked.\n\nThat is not a warning. It is a courtesy.", "damaged": false}]
 }

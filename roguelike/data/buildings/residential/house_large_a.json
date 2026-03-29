@@ -10,7 +10,7 @@
     "market": 2
   },
   "interior_loot_table": "residential_rare",
-  "description": "A larger dwelling suggesting moderate wealth. Three rooms \u2014 main hall, side chamber, back storeroom. Door faces street.",
+  "description": "A larger dwelling suggesting moderate wealth. Three rooms — main hall, side chamber, back storeroom. Door faces street.",
   "legend": {
     "#": "wall",
     ".": "floor",
@@ -42,7 +42,16 @@
       "item_id": "lab_note",
       "text_id": "world_letter_a",
       "note": "Letter on table in main hall"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
     }
   ],
-  "note": "PLACEHOLDER \u2014 redesign layers to taste. Door at (5,9) faces south street."
+  "note": "PLACEHOLDER — redesign layers to taste. Door at (5,9) faces south street."
 }

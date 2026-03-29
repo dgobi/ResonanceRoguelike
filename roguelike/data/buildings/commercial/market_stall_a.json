@@ -9,7 +9,7 @@
     "market": 5
   },
   "interior_loot_table": "market_goods",
-  "description": "An open-fronted market stall. No south wall \u2014 opens directly onto the street. Goods displayed on worn stone shelf.",
+  "description": "An open-fronted market stall. No south wall — opens directly onto the street. Goods displayed on worn stone shelf.",
   "legend": {
     "#": "wall",
     ".": "floor",
@@ -27,6 +27,16 @@
     "#....#",
     "#    #"
   ],
-  "special_tiles": [],
-  "note": "PLACEHOLDER \u2014 redesign. South row open (null) = open frontage onto street. Shelf = worn_stone."
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 2,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "storage_general"
+      ]
+    }
+  ],
+  "note": "PLACEHOLDER — redesign. South row open (null) = open frontage onto street. Shelf = worn_stone."
 }

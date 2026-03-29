@@ -37,8 +37,8 @@ class SpriteSheet:
         tile = pygame.Surface((self.tile_w, self.tile_h), pygame.SRCALPHA)
         tile.blit(self._sheet, (0, 0),
                 pygame.Rect(x, y, self.tile_w, self.tile_h))
-        # Detect completely transparent (blank) tiles — return None so callers
-        # trigger their ASCII fallback rather than drawing an invisible sprite.
+        # Detect completely transparent (blank) tiles — return None so the
+        # registry can substitute the universal placeholder sprite.
         br = tile.get_bounding_rect()
         if br.width == 0 or br.height == 0:
             self._cache[key] = None
@@ -101,6 +101,16 @@ class SpriteRegistry:
         print(f"SpriteRegistry: {len(self._map)} tiles across "
               f"{len(self._sheets)} sheets")
 
+    def _get_placeholder_raw(self) -> "pygame.Surface | None":
+        """Return the universal placeholder sprite (? glyph at terrain col 1 row 7)."""
+        ph = self._map.get("sprite_placeholder")
+        if not ph:
+            return None
+        sheet = self._sheets.get(ph["sheet"])
+        if not sheet:
+            return None
+        return sheet.get_tile(ph["col"], ph["row"])
+
     def has(self, tile_id: str) -> bool:
         return self._loaded and tile_id in self._map
 
@@ -132,7 +142,9 @@ class SpriteRegistry:
         # Get raw white-on-transparent tile (None = blank/invisible tile)
         raw = sheet.get_tile(col, row)
         if raw is None:
-            return None
+            raw = self._get_placeholder_raw()
+            if raw is None:
+                return None
 
         # Apply fg tint via multiply blend
         tinted = raw.copy()
@@ -236,7 +248,9 @@ class SpriteRegistry:
 
         raw = sheet.get_tile(col, row)
         if raw is None:
-            return None
+            raw = self._get_placeholder_raw()
+            if raw is None:
+                return None
 
         if zoom == 1:
             return raw
@@ -262,7 +276,9 @@ class SpriteRegistry:
             return None
         raw = sheet.get_tile(col, row)
         if raw is None:
-            return None
+            raw = self._get_placeholder_raw()
+            if raw is None:
+                return None
         if zoom == 1:
             return raw
         tw = sheet.tile_w

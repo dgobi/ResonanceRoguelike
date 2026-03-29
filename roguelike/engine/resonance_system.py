@@ -267,6 +267,9 @@ def _check_corruption_thresholds(
                         effects.setdefault("_queued_messages", []).append(
                             (msg, DEEP_PURPLE)
                         )
+                # Deep tongue threshold — learn a body word from corruption
+                if key == "threshold_deep_tongue":
+                    _learn_deep_tongue_from_corruption(engine, effects)
 
 
 def _check_exposure_messages(engine: "Engine", effects: dict) -> None:
@@ -294,3 +297,29 @@ def _check_exposure_messages(engine: "Engine", effects: dict) -> None:
                 effects["add_message"]   = msg
                 effects["message_color"] = col
             break
+
+
+def _learn_deep_tongue_from_corruption(engine: "Engine", effects: dict) -> None:
+    """Called when corruption crosses 0.70 — learn a body word."""
+    lang = getattr(getattr(engine, "player", None), "language", None)
+    if lang is None:
+        return
+    try:
+        from engine.language_system import learn_from_category
+        ok, wid = learn_from_category(
+            "body", 1, "corruption", lang,
+            engine.data.deep_tongue, engine.rng,
+        )
+        if ok:
+            wdef = engine.data.deep_tongue.get(wid, {})
+            deep = wdef.get("deep", wid)
+            common = wdef.get("common", "")
+            lang.translation_events[wid] = engine.world_time.turn
+            # Post directly to engine log since effects pipeline may not
+            # process additional messages past the threshold message
+            engine.log.add(
+                f"Something ancient surfaces — [{deep}]: {common}.",
+                CORRUPTION_COLOUR,
+            )
+    except Exception:
+        pass  # never crash on learning failure

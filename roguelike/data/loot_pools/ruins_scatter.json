@@ -1,0 +1,13 @@
+{
+  "id": "ruins_scatter",
+  "description": "Remnants found among collapsed structures. Little of value.",
+  "roll_count": [1, 2],
+  "items": [
+    {"item_id": "animal_bone", "weight": 50},
+    {"item_id": "grave_dust", "weight": 40},
+    {"item_id": "crow_jerky", "weight": 35},
+    {"item_id": "dried_bitter_herb", "weight": 30},
+    {"item_id": "moist_pebble", "weight": 20},
+    {"item_id": "resonant_bone_fragment", "weight": 15}
+  ]
+}

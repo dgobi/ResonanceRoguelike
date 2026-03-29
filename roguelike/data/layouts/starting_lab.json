@@ -13,12 +13,13 @@
     "D": "door_open",
     "^": "stairs_up",
     "Z": "old_wall",
+    "S": "stele",
     " ": null
   },
   "layers": [
     "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
     "Z..........Z....................Z..........................Z",
-    "Z..........Z....................Z..........................Z",
+    "Z.S........Z....................Z..........................Z",
     "Z..........Z....................Z........................D.Z",
     "Z..........+....................+..........................Z",
     "Z....ww....Z....................Z..........................Z",
@@ -34,6 +35,13 @@
     "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
   ],
   "special_tiles": [
+    {
+      "x": 2,
+      "y": 2,
+      "type": "stele",
+      "text_id": "lab_stele_inscription",
+      "note": "Standing stone in sarcophagus chamber — teaches deep tongue words on examine"
+    },
     {
       "x": 4,
       "y": 5,
@@ -65,6 +73,14 @@
       "item_id": "lab_note",
       "text_id": "lab_note_primary_b",
       "note": "Research notes, north bench"
+    },
+    {
+      "x": 19,
+      "y": 2,
+      "type": "item",
+      "item_id": "lab_note",
+      "text_id": "deep_tongue_alphabet",
+      "note": "Phoneme reference chart on research bench"
     },
     {
       "x": 20,
@@ -132,6 +148,14 @@
       "type": "body",
       "name": "remains of R.",
       "note": "R.'s body near forced exit door"
+    },
+    {
+      "x": 16,
+      "y": 4,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": ["storage_tools"],
+      "note": "Research supplies — guaranteed crate for testing container interaction"
     }
   ],
   "player_start": {

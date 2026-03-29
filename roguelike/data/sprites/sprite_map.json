@@ -213,14 +213,14 @@
       "row": 0
     },
     "ash": {
-      "sheet": "urizen",
-      "col": 1236,
-      "row": 0
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     },
     "ancient_floor": {
-      "sheet": "urizen",
-      "col": 1240,
-      "row": 0
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     },
     "grey_stone": {
       "sheet": "urizen",
@@ -364,8 +364,8 @@
     },
     "old_wall": {
       "sheet": "terrain",
-      "col": 0,
-      "row": 0
+      "col": 1,
+      "row": 7
     },
     "old_wall_1": {
       "sheet": "terrain",
@@ -698,14 +698,14 @@
       "row": 6
     },
     "cobblestone_cracked": {
-      "sheet": "urizen",
-      "col": 1000,
-      "row": 0
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     },
     "cobblestone_mossy": {
-      "sheet": "urizen",
-      "col": 1001,
-      "row": 0
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     },
     "puddle": {
       "sheet": "terrain",
@@ -713,14 +713,19 @@
       "row": 6
     },
     "debris_scatter": {
-      "sheet": "urizen",
-      "col": 1003,
-      "row": 0
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     },
     "waystone_plinth": {
       "sheet": "terrain",
       "col": 13,
       "row": 5
+    },
+    "stele": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     },
     "packed_earth": {
       "sheet": "terrain",
@@ -747,54 +752,246 @@
       "col": 19,
       "row": 5
     },
-    "shallow_water": {"sheet": "terrain","col": 0,"row": 10},
-    "shallow_water_1": {"sheet": "terrain","col": 1,"row": 10},
-    "shallow_water_2": {"sheet": "terrain","col": 2,"row": 10},
-    "shallow_water_3": {"sheet": "terrain","col": 3,"row": 10},
-    "shallow_water_4": {"sheet": "terrain","col": 4,"row": 10},
-    "shallow_water_5": {"sheet": "terrain","col": 5,"row": 10},
-    "shallow_water_6": {"sheet": "terrain","col": 6,"row": 10},
-    "shallow_water_7": {"sheet": "terrain","col": 7,"row": 10},
-    "shallow_water_8": {"sheet": "terrain","col": 8,"row": 10},
-    "shallow_water_9": {"sheet": "terrain","col": 9,"row": 10},
-    "shallow_water_10": {"sheet": "terrain","col": 10,"row": 10},
-    "shallow_water_11": {"sheet": "terrain","col": 11,"row": 10},
-    "shallow_water_12": {"sheet": "terrain","col": 12,"row": 10},
-    "shallow_water_13": {"sheet": "terrain","col": 13,"row": 10},
-    "shallow_water_14": {"sheet": "terrain","col": 14,"row": 10},
-    "shallow_water_15": {"sheet": "terrain","col": 15,"row": 10},
-    "deep_water": {"sheet": "terrain","col": 0,"row": 9},
-    "deep_water_1": {"sheet": "terrain","col": 1,"row": 9},
-    "deep_water_2": {"sheet": "terrain","col": 2,"row": 9},
-    "deep_water_3": {"sheet": "terrain","col": 3,"row": 9},
-    "deep_water_4": {"sheet": "terrain","col": 4,"row": 9},
-    "deep_water_5": {"sheet": "terrain","col": 5,"row": 9},
-    "deep_water_6": {"sheet": "terrain","col": 6,"row": 9},
-    "deep_water_7": {"sheet": "terrain","col": 0,"row": 9},
-    "deep_water_8": {"sheet": "terrain","col": 7,"row": 9},
-    "deep_water_9": {"sheet": "terrain","col": 8,"row": 9},
-    "deep_water_10": {"sheet": "terrain","col": 10,"row": 9},
-    "deep_water_11": {"sheet": "terrain","col": 11,"row": 9},
-    "deep_water_12": {"sheet": "terrain","col": 12,"row": 9},
-    "deep_water_13": {"sheet": "terrain","col": 13,"row": 9},
-    "deep_water_14": {"sheet": "terrain","col": 14,"row": 9},
-    "deep_water_15": {"sheet": "terrain","col": 15,"row": 9},
-    "river_water": {"sheet": "terrain", "col": 0, "row": 9},
-    "river_water_1": {"sheet": "terrain", "col": 1, "row": 9},
-    "river_water_2": {"sheet": "terrain", "col": 2, "row": 9},
-    "river_water_3": {"sheet": "terrain", "col": 3, "row": 9},
-    "river_water_4": {"sheet": "terrain", "col": 4, "row": 9},
-    "river_water_5": {"sheet": "terrain", "col": 5, "row": 9},
-    "river_water_6": {"sheet": "terrain", "col": 6, "row": 9},
-    "river_water_7": {"sheet": "terrain", "col": 7, "row": 9},
-    "river_water_8": {"sheet": "terrain", "col": 8, "row": 9},
-    "river_water_9": {"sheet": "terrain", "col": 9, "row": 9},
-    "river_water_10": {"sheet": "terrain", "col": 10, "row": 9},
-    "river_water_11": {"sheet": "terrain", "col": 11, "row": 9},
-    "river_water_12": {"sheet": "terrain", "col": 12, "row": 9},
-    "river_water_13": {"sheet": "terrain", "col": 13, "row": 9},
-    "river_water_14": {"sheet": "terrain", "col": 14, "row": 9},
-    "river_water_15": {"sheet": "terrain", "col": 15, "row": 9},
+    "shallow_water": {
+      "sheet": "terrain",
+      "col": 0,
+      "row": 10
+    },
+    "shallow_water_1": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 10
+    },
+    "shallow_water_2": {
+      "sheet": "terrain",
+      "col": 2,
+      "row": 10
+    },
+    "shallow_water_3": {
+      "sheet": "terrain",
+      "col": 3,
+      "row": 10
+    },
+    "shallow_water_4": {
+      "sheet": "terrain",
+      "col": 4,
+      "row": 10
+    },
+    "shallow_water_5": {
+      "sheet": "terrain",
+      "col": 5,
+      "row": 10
+    },
+    "shallow_water_6": {
+      "sheet": "terrain",
+      "col": 6,
+      "row": 10
+    },
+    "shallow_water_7": {
+      "sheet": "terrain",
+      "col": 7,
+      "row": 10
+    },
+    "shallow_water_8": {
+      "sheet": "terrain",
+      "col": 8,
+      "row": 10
+    },
+    "shallow_water_9": {
+      "sheet": "terrain",
+      "col": 9,
+      "row": 10
+    },
+    "shallow_water_10": {
+      "sheet": "terrain",
+      "col": 10,
+      "row": 10
+    },
+    "shallow_water_11": {
+      "sheet": "terrain",
+      "col": 11,
+      "row": 10
+    },
+    "shallow_water_12": {
+      "sheet": "terrain",
+      "col": 12,
+      "row": 10
+    },
+    "shallow_water_13": {
+      "sheet": "terrain",
+      "col": 13,
+      "row": 10
+    },
+    "shallow_water_14": {
+      "sheet": "terrain",
+      "col": 14,
+      "row": 10
+    },
+    "shallow_water_15": {
+      "sheet": "terrain",
+      "col": 15,
+      "row": 10
+    },
+    "deep_water": {
+      "sheet": "terrain",
+      "col": 0,
+      "row": 9
+    },
+    "deep_water_1": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 9
+    },
+    "deep_water_2": {
+      "sheet": "terrain",
+      "col": 2,
+      "row": 9
+    },
+    "deep_water_3": {
+      "sheet": "terrain",
+      "col": 3,
+      "row": 9
+    },
+    "deep_water_4": {
+      "sheet": "terrain",
+      "col": 4,
+      "row": 9
+    },
+    "deep_water_5": {
+      "sheet": "terrain",
+      "col": 5,
+      "row": 9
+    },
+    "deep_water_6": {
+      "sheet": "terrain",
+      "col": 6,
+      "row": 9
+    },
+    "deep_water_7": {
+      "sheet": "terrain",
+      "col": 0,
+      "row": 9
+    },
+    "deep_water_8": {
+      "sheet": "terrain",
+      "col": 7,
+      "row": 9
+    },
+    "deep_water_9": {
+      "sheet": "terrain",
+      "col": 8,
+      "row": 9
+    },
+    "deep_water_10": {
+      "sheet": "terrain",
+      "col": 10,
+      "row": 9
+    },
+    "deep_water_11": {
+      "sheet": "terrain",
+      "col": 11,
+      "row": 9
+    },
+    "deep_water_12": {
+      "sheet": "terrain",
+      "col": 12,
+      "row": 9
+    },
+    "deep_water_13": {
+      "sheet": "terrain",
+      "col": 13,
+      "row": 9
+    },
+    "deep_water_14": {
+      "sheet": "terrain",
+      "col": 14,
+      "row": 9
+    },
+    "deep_water_15": {
+      "sheet": "terrain",
+      "col": 15,
+      "row": 9
+    },
+    "river_water": {
+      "sheet": "terrain",
+      "col": 0,
+      "row": 9
+    },
+    "river_water_1": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 9
+    },
+    "river_water_2": {
+      "sheet": "terrain",
+      "col": 2,
+      "row": 9
+    },
+    "river_water_3": {
+      "sheet": "terrain",
+      "col": 3,
+      "row": 9
+    },
+    "river_water_4": {
+      "sheet": "terrain",
+      "col": 4,
+      "row": 9
+    },
+    "river_water_5": {
+      "sheet": "terrain",
+      "col": 5,
+      "row": 9
+    },
+    "river_water_6": {
+      "sheet": "terrain",
+      "col": 6,
+      "row": 9
+    },
+    "river_water_7": {
+      "sheet": "terrain",
+      "col": 7,
+      "row": 9
+    },
+    "river_water_8": {
+      "sheet": "terrain",
+      "col": 8,
+      "row": 9
+    },
+    "river_water_9": {
+      "sheet": "terrain",
+      "col": 9,
+      "row": 9
+    },
+    "river_water_10": {
+      "sheet": "terrain",
+      "col": 10,
+      "row": 9
+    },
+    "river_water_11": {
+      "sheet": "terrain",
+      "col": 11,
+      "row": 9
+    },
+    "river_water_12": {
+      "sheet": "terrain",
+      "col": 12,
+      "row": 9
+    },
+    "river_water_13": {
+      "sheet": "terrain",
+      "col": 13,
+      "row": 9
+    },
+    "river_water_14": {
+      "sheet": "terrain",
+      "col": 14,
+      "row": 9
+    },
+    "river_water_15": {
+      "sheet": "terrain",
+      "col": 15,
+      "row": 9
+    },
     "river_bank": {
       "sheet": "terrain",
       "col": 16,
@@ -880,25 +1077,20 @@
       "col": 23,
       "row": 6
     },
-    "decor_barrel": {
-      "sheet": "urizen",
-      "col": 450,
-      "row": 0
-    },
     "decor_bone_pile": {
-      "sheet": "urizen",
-      "col": 1050,
-      "row": 0
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     },
     "decor_flower_pot": {
-      "sheet": "urizen",
-      "col": 460,
-      "row": 0
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     },
     "decor_hanging_cloth": {
-      "sheet": "urizen",
-      "col": 520,
-      "row": 0
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     },
     "dead_wood": {
       "sheet": "terrain",
@@ -932,18 +1124,58 @@
     },
     "clay_deposit_depleted": {
       "sheet": "terrain",
-      "col": 0,
-      "row": 0
+      "col": 1,
+      "row": 7
     },
     "drying_herb": {
       "sheet": "terrain",
-      "col": 0,
-      "row": 0
+      "col": 1,
+      "row": 7
     },
     "cooking_meat": {
       "sheet": "terrain",
-      "col": 0,
-      "row": 0
+      "col": 1,
+      "row": 7
+    },
+    "leather_satchel": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
+    },
+    "herbalist_pouch": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
+    },
+    "component_satchel": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
+    },
+    "barrel": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
+    },
+    "crate": {
+      "sheet": "terrain",
+      "col": 2,
+      "row": 7
+    },
+    "sack": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
+    },
+    "coffer": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
+    },
+    "sprite_placeholder": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 7
     }
   }
 }

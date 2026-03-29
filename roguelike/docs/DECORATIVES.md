@@ -160,7 +160,7 @@ take a single string value.
 | ID | ASCII | Blocks Move | Blocks Sight | Used In |
 |---|---|---|---|---|
 | `decor_candle` | `*` | no | no | bell_warden_post_a, starting lab |
-| `decor_barrel` | `0` | yes | no | storehouse_a, market_stall_b |
+| `barrel` | `o` | yes | no | storehouse_a, market_stall_b (container) |
 | `decor_bone_pile` | `%` | no | no | collapsed_shrine_a |
 | `decor_flower_pot` | `"` | no | no | (available) |
 | `decor_hanging_cloth` | `\|` | no | no | (available) |

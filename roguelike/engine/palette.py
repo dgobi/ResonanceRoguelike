@@ -122,6 +122,9 @@ CORRUPTION_COLOUR   = VOID_PURPLE
 BELL_COLOUR         = OLD_GOLD
 DISCHARGE_COLOUR    = RESONANCE_GOLD
 
+# ── Deep Tongue ────────────────────────────────────────────────────────────────
+DEEP_TONGUE_COLOUR  = (162, 120, 218)  # legible purple — glyphs and translations
+
 # ── Status Effects ─────────────────────────────────────────────────────────────
 STATUS_CHILL        = HOLLOW_BLUE
 STATUS_THORNS       = OLD_GROWTH

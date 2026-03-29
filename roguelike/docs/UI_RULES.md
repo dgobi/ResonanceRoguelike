@@ -89,9 +89,10 @@ The rect passed to draw_panel is the OUTER panel rect, not the content rect.
 Content draws within content_rect = panel_rect.inflate(-18, -18).
 
 Available panel styles (border PNG files in assets/ui/):
-    weathered_temple  -- default, used for inventory/health screens
+    weathered_temple  -- default, used for inventory/health screens, text reader (default)
     thorny_growth     -- craft screen
-    polis_sanctuary   -- perk screen
+    polis_sanctuary   -- perk screen, lexicon screen
+    ziggurat          -- stele inscription text reader
     (add others here as they are assigned)
 
 When assigning a new panel style, add it to this list.
