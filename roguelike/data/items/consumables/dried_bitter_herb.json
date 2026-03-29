@@ -1,7 +1,7 @@
 {
   "id": "dried_bitter_herb",
   "name": "dried bitter herb",
-  "description": "A bitter herb cutting, dried. The bitterness has increased. Useful as a preservative base or alchemical fixative.",
+  "description": "A dried sprig. The bitterness concentrates.",
   "tile": "generic_item",
   "category": "consumable",
   "weight": 0.02,
@@ -9,7 +9,6 @@
   "on_use": null,
   "keywords": [
     {"tag": "bitter", "tier": 2},
-    {"tag": "fixative", "tier": 1},
-    {"tag": "alchemical", "tier": 1}
+    {"tag": "fixative", "tier": 1}
   ]
 }

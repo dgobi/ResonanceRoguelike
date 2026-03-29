@@ -54,6 +54,7 @@ class Renderer:
         self.registry        = registry
         self.display         = display
         self.sprite_registry = sprite_registry
+        self._river_connections: list = []  # set by engine each frame for river OOB
         # Weather tile-layer overlay — single surface, absolute-time grid scroll
         self._weather_surf:      "pygame.Surface | None" = None
         self._weather_surf_size: tuple[int, int]         = (0, 0)
@@ -305,6 +306,16 @@ class Renderer:
                             cam_x, cam_y, tiles_x, tiles_y, zoom,
                             light_color=light_color)
 
+        # Processing layer + floor objects share a surface (above decor, below entities)
+        floor_surf = pygame.Surface((disp_w, disp_h), pygame.SRCALPHA)
+        floor_surf.fill((0, 0, 0, 0))
+        self._draw_processing_layer(floor_surf, local_map,
+                                    cam_x, cam_y, tiles_x, tiles_y, zoom,
+                                    light_color=light_color)
+        self._draw_floor_objects(floor_surf, local_map,
+                                cam_x, cam_y, tiles_x, tiles_y, zoom,
+                                light_color=light_color)
+
         entity_surf = pygame.Surface((disp_w, disp_h), pygame.SRCALPHA)
         entity_surf.fill((0, 0, 0, 0))
         self._draw_entities_to(entity_surf, local_map, entities,
@@ -314,6 +325,7 @@ class Renderer:
         display_surface.set_clip(viewport_rect)
         display_surface.blit(terrain_surf, (blit_x, blit_y))
         display_surface.blit(decor_surf,   (blit_x, blit_y))
+        display_surface.blit(floor_surf,   (blit_x, blit_y))
         display_surface.blit(entity_surf,  (blit_x, blit_y))
 
         self._draw_wraith_aura(display_surface, entities, local_map,
@@ -937,7 +949,10 @@ class Renderer:
 
                     # 3. Determine the specific sprite variant (Autotiling)
                     if any(key in decorated_name for key in ["wall", "water", "rock"]):
-                        variant_name = self._get_autotile_name(local_map, mx, my, decorated_name)
+                        # Water tiles: out-of-bounds does NOT count as a connection
+                        # (rivers don't continue off the map edge).
+                        _oob_connects = "water" not in decorated_name
+                        variant_name = self._get_autotile_name(local_map, mx, my, decorated_name, _oob_connects)
                         sprite_name = variant_name if self.sprite_registry.has(variant_name) else decorated_name
                     elif decorated_name.startswith("road"):
                         variant_name = self._get_road_autotile_name(local_map, mx, my)
@@ -1056,6 +1071,151 @@ class Renderer:
 
                 # Draw sprite with no background (transparent — floor shows through)
                 self._draw_sprite(surface, decor_id, fg, None, tx, ty, zoom=zoom)
+
+    # ------------------------------------------------------------------ #
+    #  Processing layer rendering
+    # ------------------------------------------------------------------ #
+
+    def _draw_processing_layer(
+        self,
+        surface:     pygame.Surface,
+        local_map:   "LocalMap",
+        cam_x:       int,
+        cam_y:       int,
+        tiles_x:     int,
+        tiles_y:     int,
+        zoom:        int = 1,
+        light_color: tuple[int,int,int] = TRUE_WHITE,
+    ) -> None:
+        """Render in-progress processing indicators above decor, below floor objects."""
+        proc = getattr(local_map, "processing_layer", None)
+        if not proc:
+            return
+
+        use_tint = getattr(self.display, "use_sprite_tint", True)
+        has_lm   = hasattr(local_map, "light_map")
+        lc_r = light_color[0] / 255.0
+        lc_g = light_color[1] / 255.0
+        lc_b = light_color[2] / 255.0
+
+        for (mx, my), entry in proc.items():
+            tx = mx - cam_x
+            ty = my - cam_y
+            if tx < 0 or ty < 0 or tx >= tiles_x or ty >= tiles_y:
+                continue
+            if not local_map.in_bounds(mx, my):
+                continue
+            tile = local_map.tiles[mx, my]
+            vis  = bool(tile["visible"])
+            exp  = bool(tile["explored"])
+            if not vis and not exp:
+                continue
+
+            # Don't render indicator for on_fire entries (campfire is the visual)
+            if entry.get("on_fire"):
+                continue
+
+            # Use the processing decor sprite if available
+            decor_id = entry.get("decor_id", "")
+            if not decor_id:
+                decor_id = "drying_herb"  # fallback
+
+            if use_tint:
+                if vis and has_lm:
+                    lm    = local_map.light_map[mx, my]
+                    light = (float(lm[0]), float(lm[1]), float(lm[2]))
+                    fg = self._apply_light(TRUE_WHITE, light, dark=False)
+                elif vis:
+                    fg = TRUE_WHITE
+                else:
+                    fg = (40, 40, 40)
+            else:
+                if vis:
+                    fg = (
+                        min(255, int(255 * (0.65 + lc_r * 0.35))),
+                        min(255, int(255 * (0.65 + lc_g * 0.35))),
+                        min(255, int(255 * (0.65 + lc_b * 0.35))),
+                    )
+                else:
+                    fg = DUNGEON_SHADOW
+
+            self._draw_sprite(surface, decor_id, fg, None, tx, ty, zoom=zoom)
+
+    # ------------------------------------------------------------------ #
+    #  Floor objects rendering
+    # ------------------------------------------------------------------ #
+
+    def _draw_floor_objects(
+        self,
+        surface:     pygame.Surface,
+        local_map:   "LocalMap",
+        cam_x:       int,
+        cam_y:       int,
+        tiles_x:     int,
+        tiles_y:     int,
+        zoom:        int = 1,
+        light_color: tuple[int,int,int] = TRUE_WHITE,
+    ) -> None:
+        """Render floor objects above processing layer, below entities."""
+        floor_objs = getattr(local_map, "floor_objects", None)
+        if not floor_objs:
+            return
+
+        use_tint = getattr(self.display, "use_sprite_tint", True)
+        has_lm   = hasattr(local_map, "light_map")
+        lc_r = light_color[0] / 255.0
+        lc_g = light_color[1] / 255.0
+        lc_b = light_color[2] / 255.0
+        tw = self.display.TILE_W * zoom if hasattr(self.display, "TILE_W") else 16 * zoom
+
+        for (mx, my), items in floor_objs.items():
+            if not items:
+                continue
+            tx = mx - cam_x
+            ty = my - cam_y
+            if tx < 0 or ty < 0 or tx >= tiles_x or ty >= tiles_y:
+                continue
+            if not local_map.in_bounds(mx, my):
+                continue
+            tile = local_map.tiles[mx, my]
+            vis  = bool(tile["visible"])
+            exp  = bool(tile["explored"])
+            if not vis and not exp:
+                continue
+
+            # Render the top item (last in list)
+            top_item = items[-1]
+            item_tile = getattr(top_item, "tile", "generic_item")
+
+            if use_tint:
+                if vis and has_lm:
+                    lm    = local_map.light_map[mx, my]
+                    light = (float(lm[0]), float(lm[1]), float(lm[2]))
+                    fg = self._apply_light(TRUE_WHITE, light, dark=False)
+                elif vis:
+                    fg = TRUE_WHITE
+                else:
+                    fg = (40, 40, 40)
+            else:
+                if vis:
+                    fg = (
+                        min(255, int(255 * (0.65 + lc_r * 0.35))),
+                        min(255, int(255 * (0.65 + lc_g * 0.35))),
+                        min(255, int(255 * (0.65 + lc_b * 0.35))),
+                    )
+                else:
+                    fg = DUNGEON_SHADOW
+
+            self._draw_sprite(surface, item_tile, fg, None, tx, ty, zoom=zoom)
+
+            # Stack indicator: + in top-right corner if multiple items
+            if len(items) > 1 and vis:
+                _font = getattr(self.display, "font_ui_small", None)
+                if _font:
+                    _plus = _font.render("+", True, UI_TEXT_DIM)
+                    _px = tx * tw + tw - _plus.get_width() - 1
+                    _py = ty * tw + 1
+                    surface.blit(_plus, (_px, _py))
 
     # ------------------------------------------------------------------ #
     #  Entity rendering
@@ -1632,24 +1792,39 @@ class Renderer:
         close_surf = fs.render("M / ESC — close", True, MOSS_DARK)
         surface.blit(close_surf, (sx, footer_y))
 
-    def _is_wall_connection(self, local_map: "LocalMap", x: int, y: int, base_terrain: str) -> bool:
-        """Checks if a neighbor should connect to the current wall."""
+    def _is_wall_connection(self, local_map: "LocalMap", x: int, y: int, base_terrain: str, oob_connects: bool = True) -> bool:
+        """Checks if a neighbor should connect to the current tile.
+        oob_connects=True: out-of-bounds counts as a connection (walls, rocks).
+        oob_connects=False: out-of-bounds does not connect (water/rivers)
+        unless chunk.river_connections records a river exit in that direction."""
         if not local_map.in_bounds(x, y):
-            # Treat out-of-bounds as a connection to prevent 'open' edges at map borders
-            return True
+            if oob_connects:
+                return True
+            # For river tiles, check if chunk has a river connection on the OOB edge
+            if "water" in base_terrain and self._river_connections:
+                w = local_map.width
+                h = local_map.height
+                if y < 0 and "N" in self._river_connections:
+                    return True
+                if y >= h and "S" in self._river_connections:
+                    return True
+                if x >= w and "E" in self._river_connections:
+                    return True
+                if x < 0 and "W" in self._river_connections:
+                    return True
+            return False
         neighbor_terrain = str(local_map.tiles[x, y]["terrain"])
-        # Connect if it's the exact same wall type (e.g., 'stone_wall' connects to 'stone_wall')
         return neighbor_terrain == base_terrain
 
-    def _get_autotile_name(self, local_map: "LocalMap", mx: int, my: int, terrain: str) -> str:
+    def _get_autotile_name(self, local_map: "LocalMap", mx: int, my: int, terrain: str, oob_connects: bool = True) -> str:
         """Generates a bitmasked name like 'wall_10' based on N, E, S, W neighbors."""
         # Standard bitmask: N=1, E=2, S=4, W=8
         mask = 0
-        if self._is_wall_connection(local_map, mx, my - 1, terrain): mask |= 1
-        if self._is_wall_connection(local_map, mx + 1, my,     terrain): mask |= 2
-        if self._is_wall_connection(local_map, mx, my + 1, terrain): mask |= 4
-        if self._is_wall_connection(local_map, mx - 1, my,     terrain): mask |= 8
-        
+        if self._is_wall_connection(local_map, mx, my - 1, terrain, oob_connects): mask |= 1
+        if self._is_wall_connection(local_map, mx + 1, my,     terrain, oob_connects): mask |= 2
+        if self._is_wall_connection(local_map, mx, my + 1, terrain, oob_connects): mask |= 4
+        if self._is_wall_connection(local_map, mx - 1, my,     terrain, oob_connects): mask |= 8
+
         return f"{terrain}_{mask}"
 
     def _is_road_tile(self, local_map: "LocalMap", x: int, y: int) -> bool:

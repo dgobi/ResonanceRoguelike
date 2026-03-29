@@ -41,7 +41,8 @@
     "blocks_movement": true,
     "blocks_sight": false,
     "description": "A ring of stones with wood laid within. Unlit.",
-    "interactable": "light_campfire"
+    "interactable": "light_campfire",
+    "consumed_on_use": false
   },
   {
     "id": "campfire_lit",
@@ -51,7 +52,9 @@
     "description": "A ring of stones. Fire within.",
     "interactable": "extinguish_campfire",
     "warmth_radius": 3,
-    "visual_fx": "flame_med"
+    "visual_fx": "flame_med",
+    "consumed_on_use": false,
+    "light_emit": 5
   },
   {
     "id": "blood_pool",
@@ -95,5 +98,23 @@
     "blocks_sight": false,
     "description": "Something that was a creature. Already cooling.",
     "interactable": "butcher"
+  },
+  {
+    "id": "drying_herb",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Herb spread to dry. The heat draws out what it holds.",
+    "visual_fx": "smoke_incense",
+    "processing": true
+  },
+  {
+    "id": "cooking_meat",
+    "ascii": "%",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Meat set over the fire. The fat runs and spits.",
+    "visual_fx": "flame_low",
+    "processing": true
   }
 ]

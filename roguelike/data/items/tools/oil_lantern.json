@@ -7,6 +7,7 @@
   "weight": 0.6,
   "stackable": false,
   "on_use": "equip_light",
+  "consumed_on_use": false,
   "_essence_note": "Refined oil burns with more intent than tallow. The Quickening is more concentrated — controlled combustion rather than animal fat catching.",
   "keywords": [
     {

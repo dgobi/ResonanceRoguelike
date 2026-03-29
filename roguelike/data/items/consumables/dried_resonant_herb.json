@@ -1,0 +1,15 @@
+{
+  "id": "dried_resonant_herb",
+  "name": "dried resonant herb",
+  "description": "A dried stem. Still faintly metallic.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.02,
+  "stackable": true,
+  "on_use": null,
+  "keywords": [
+    {"tag": "resonant", "tier": 2},
+    {"tag": "binding", "tier": 1},
+    {"tag": "fixative", "tier": 1}
+  ]
+}

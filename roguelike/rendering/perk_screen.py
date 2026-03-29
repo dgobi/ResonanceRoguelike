@@ -1,4 +1,5 @@
 # rendering/perk_screen.py
+# UI RULES: read docs/UI_RULES.md before modifying this file.
 from __future__ import annotations
 import pygame
 from config import UI_PANEL_INSET
@@ -10,7 +11,16 @@ if TYPE_CHECKING:
     from engine.display_config import DisplayConfig
 
 
-_CATEGORIES = ["Viscera", "Perception", "Resonance", "Creation", "Ontology"]
+_CATEGORIES = [
+    "The Hollow Road",
+    "The Witnessing",
+    "The Green Patience",
+    "The Bound Name",
+    "The Unmarked Way",
+    "The Consuming",
+    "The Sutured Work",
+    "The Red Accounting",
+]
 
 
 def _wrap_text(font: pygame.font.Font, text: str, max_w: int) -> list[str]:
@@ -49,17 +59,19 @@ class PerkScreen:
     CONFIRM_BG = DEEP_NOTHING
 
     def __init__(self) -> None:
-        self.open:            bool = False
+        self.open:            bool      = False
         self._font_title:     pygame.font.Font | None = None
         self._font_normal:    pygame.font.Font | None = None
         self._font_small:     pygame.font.Font | None = None
         self._font_bold:      pygame.font.Font | None = None
-        self._row_height:     int  = 20
+        self._row_height:     int       = 20
         # Navigation state
-        self._flat:           list = []   # (perk_id, is_hdr, label)
-        self.selected:        int  = 0
+        self._flat:           list      = []   # (perk_id, is_hdr, label)
+        self.selected:        int       = 0
+        self.scroll:          int       = 0
+        self._collapsed:      set[str]  = set()
         # Confirmation overlay
-        self._confirming:     bool = False
+        self._confirming:     bool      = False
 
     def init(self, display: "DisplayConfig") -> None:
         self._font_title  = getattr(display, "font_ui_bold",      None) or display.font_ui_normal
@@ -73,14 +85,19 @@ class PerkScreen:
         self._confirming = False
         self._flat       = []
         self.selected    = 0
+        self.scroll      = 0
 
     # ------------------------------------------------------------------ #
     #  Flat list of perks by category
     # ------------------------------------------------------------------ #
 
     def _build_flat(self, engine: "Engine") -> list:
+        """
+        Returns list of (perk_id_or_None, is_hdr, label).
+        Headers are selectable and can be toggled to collapse/expand.
+        """
         flat = []
-        perks_data = engine.data.perks   # dict perk_id → def
+        perks_data = engine.data.perks
         by_cat: dict[str, list] = {c: [] for c in _CATEGORIES}
         for perk_id, pdef in perks_data.items():
             cat = pdef.get("category", "Misc")
@@ -92,20 +109,33 @@ class PerkScreen:
             ids = by_cat.get(cat, [])
             if not ids:
                 continue
-            flat.append((None, True, cat))
-            for pid in sorted(ids):
-                flat.append((pid, False, ""))
+            arrow = "v" if cat not in self._collapsed else ">"
+            flat.append((None, True, f"{arrow} {cat}"))
+            if cat not in self._collapsed:
+                for pid in sorted(ids):
+                    flat.append((pid, False, ""))
 
         return flat
 
     def _selectable(self, flat: list) -> list[int]:
-        return [i for i, (_, hdr, _) in enumerate(flat) if not hdr]
+        """All rows (headers and perks) are navigable."""
+        return list(range(len(flat)))
 
     def _selected_perk_id(self) -> str | None:
         if not self._flat or self.selected >= len(self._flat):
             return None
         pid, is_hdr, _ = self._flat[self.selected]
         return None if is_hdr else pid
+
+    def _selected_category(self) -> str | None:
+        """Return the raw category string if the selected item is a header, else None."""
+        if not self._flat or self.selected >= len(self._flat):
+            return None
+        pid, is_hdr, label = self._flat[self.selected]
+        if not is_hdr:
+            return None
+        # Strip the arrow prefix
+        return label[2:] if len(label) > 2 else label
 
     # ------------------------------------------------------------------ #
     #  Input
@@ -135,10 +165,27 @@ class PerkScreen:
             self._move(1, sel)
             return True
 
+        if key in (pygame.K_PAGEUP,):
+            self._move(-6, sel)
+            return True
+
+        if key in (pygame.K_PAGEDOWN,):
+            self._move(6, sel)
+            return True
+
         if key in (pygame.K_RETURN, pygame.K_KP_ENTER):
-            perk_id = self._selected_perk_id()
-            if perk_id and self._can_afford(perk_id, engine):
-                self._confirming = True
+            cat = self._selected_category()
+            if cat is not None:
+                # Toggle collapse on this affinity
+                if cat in self._collapsed:
+                    self._collapsed.discard(cat)
+                else:
+                    self._collapsed.add(cat)
+                self._flat = []   # force rebuild
+            else:
+                perk_id = self._selected_perk_id()
+                if perk_id and self._can_afford(perk_id, engine):
+                    self._confirming = True
             return True
 
         return True
@@ -159,6 +206,13 @@ class PerkScreen:
             return
         idx = sel.index(self.selected)
         self.selected = sel[max(0, min(len(sel) - 1, idx + delta))]
+        # Scroll to keep selected visible (approximate 10 visible rows)
+        vis = 10
+        if self.selected < self.scroll:
+            self.scroll = self.selected
+        elif self.selected >= self.scroll + vis:
+            self.scroll = self.selected - vis + 1
+        self.scroll = max(0, self.scroll)
 
     def _can_afford(self, perk_id: str, engine: "Engine") -> bool:
         perks      = getattr(engine.player, "perks", None)
@@ -211,34 +265,40 @@ class PerkScreen:
 
         popup = pygame.Surface((pw, ph), pygame.SRCALPHA)
         engine.ui_registry.draw_panel(
-            popup, pygame.Rect(0, 0, pw, ph), "weathered_temple",
-            tint_color=self.BORDER, fill_color=self.BG, fill_alpha=252,
+            popup, pygame.Rect(0, 0, pw, ph), "polis_sanctuary",
+            tint_color=self.BORDER, fill_color=self.BG, fill_alpha=255,
         )
 
         PAD = UI_PANEL_INSET
         lw  = int(pw * 0.30)
         rw  = pw - lw
 
-        pygame.draw.line(popup, self.BORDER, (lw, PAD), (lw, ph - PAD), 1)
-
         if not self._flat:
             self._flat = self._build_flat(engine)
-            sel = self._selectable(self._flat)
-            if sel and self.selected not in sel:
-                self.selected = sel[0]
+            if self._flat and self.selected >= len(self._flat):
+                self.selected = 0
+
+        # Hint row at bottom of content rect
+        _fh = self._font_small.get_linesize()
+        _HINT_ROW_H = _fh + 8
+        _hint_row_top = ph - PAD - _HINT_ROW_H
 
         self._draw_left(popup, engine, 0, 0, lw, ph, PAD)
         self._draw_right(popup, engine, lw, 0, rw, ph, PAD)
 
-        # Footer
+        # Vertical divider: stops at hint row separator, never crosses it
+        pygame.draw.line(popup, self.BORDER,
+                         (lw, PAD), (lw, _hint_row_top - 1), 1)
+
+        # Hint row separator + text
+        pygame.draw.line(popup, self.BORDER,
+                         (PAD, _hint_row_top), (pw - PAD, _hint_row_top), 1)
         footer = self._font_small.render(
             "^ v navigate   Enter confirm   K/ESC close",
             True, self.DIM,
         )
-        fy = ph - PAD - footer.get_height()
-        pygame.draw.line(popup, self.BORDER,
-                         (PAD, fy - 4), (pw - PAD, fy - 4), 1)
-        popup.blit(footer, (PAD, fy))
+        _hint_text_y = _hint_row_top + (_HINT_ROW_H - footer.get_height()) // 2
+        popup.blit(footer, (PAD, _hint_text_y))
 
         surface.blit(popup, (px, py))
 
@@ -272,35 +332,29 @@ class PerkScreen:
             surf.blit(pts_s, (x, y))
             y += lh + 2
 
-        # Scroll so selected is visible
-        sel = self._selectable(self._flat)
-        if sel and self.selected in sel:
-            sel_rank  = sel.index(self.selected)
-            vis_rows  = (max_y - y) // lh
-            scroll_st = max(0, sel_rank - vis_rows + 1)
-        else:
-            scroll_st = 0
+        scroll_st = self.scroll
 
-        row = 0
+        # Highlight rect uses content_rect boundaries (UI_RULES.md)
+        _hl_left  = ox + pad
+        _hl_width = w - pad * 2
+
         for idx, (perk_id, is_hdr, label) in enumerate(self._flat):
             if y >= max_y:
                 break
+            if idx < scroll_st:
+                continue
+
+            is_sel = (idx == self.selected)
 
             if is_hdr:
-                if row < scroll_st:
-                    row += 1
-                    y += lh
-                    continue
-                hs = self._font_small.render(label.upper(), True, self.HDR_C)
+                if is_sel:
+                    pygame.draw.rect(surf, UI_PANEL_DARK,
+                                     (_hl_left, y, _hl_width, lh))
+                hs = self._font_small.render(label, True,
+                                             self.SELECTED if is_sel else self.HDR_C)
                 surf.blit(hs, (x, y))
                 y += lh
                 continue
-
-            if row < scroll_st:
-                row += 1
-                y += lh
-                continue
-            row += 1
 
             pdef     = engine.data.perks.get(perk_id, {})
             acquired = perks.has(perk_id) if perks else False
@@ -315,16 +369,9 @@ class PerkScreen:
             else:
                 col = self.LOCKED
 
-            is_sel = (idx == self.selected)
             if is_sel:
-                # Build highlight from known interior rect (BORDER_PX=15 × scale=2 = 30px)
-                _BORDER = 30
-                _inner  = pygame.Rect(ox, oy, w, h).inflate(-2 * _BORDER, -2 * _BORDER)
-                _hl_y   = max(y - 2, _inner.top)
-                _hl_b   = min(y - 2 + lh, max_y - 2)
-                if _hl_b > _hl_y:
-                    pygame.draw.rect(surf, MIDNIGHT_DEEP,
-                                     pygame.Rect(_inner.x, _hl_y, _inner.width, _hl_b - _hl_y))
+                pygame.draw.rect(surf, UI_PANEL_DARK,
+                                 (_hl_left, y, _hl_width, lh))
 
             mark = "\u2713 " if acquired else "  "
             nm   = self._font_normal.render(

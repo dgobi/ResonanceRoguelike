@@ -1,7 +1,8 @@
 {
   "id": "the_opened_page",
   "name": "The Opened Page",
-  "affinity": "the_witnessing",
+  "category": "The Witnessing",
+  "cost": 1,
   "description": "When thou readest a damaged document, some portion of what was lost becomes legible to thee — not restored, but inferred, as a scholar infers a word from the shape of its absence. The recovered text appears in a colour distinct from the original, that thou mayest know it for reconstruction and not record.",
   "effect_type": "language",
   "effect_params": {

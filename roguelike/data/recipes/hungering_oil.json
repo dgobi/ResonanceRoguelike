@@ -1,7 +1,8 @@
 {
   "id": "hungering_oil",
   "name": "hungering oil",
-  "description": "Render crude viscera and crow bile together in a clay vessel over heat. The reduction takes time and smells wrong.",
+  "category": "alchemy",
+  "description": "Render caustic fluids and viscous oil together in a clay vessel over heat. The reduction takes time and smells of pain.",
   "known": true,
   "components": [
     {"tag": "viscous", "min_tier": 1, "quantity": 1},

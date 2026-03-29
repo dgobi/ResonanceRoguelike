@@ -1,4 +1,5 @@
 # engine/ui.py
+# UI RULES: read docs/UI_RULES.md before modifying this file.
 from __future__ import annotations
 import pygame
 from typing import TYPE_CHECKING

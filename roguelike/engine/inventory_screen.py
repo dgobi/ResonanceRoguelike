@@ -1,4 +1,5 @@
 # engine/inventory_screen.py
+# UI RULES: read docs/UI_RULES.md before modifying this file.
 from __future__ import annotations
 import pygame
 from config import UI_PANEL_INSET, DEBUG_MODE
@@ -74,17 +75,23 @@ _EQUIP_SLOT_DISPLAY: list[tuple[str, str | None]] = [
 #  Item category helpers
 # ------------------------------------------------------------------ #
 
-_CATEGORIES = ["Weapons", "Armour", "Consumables", "Documents", "Misc"]
+_CATEGORIES = [
+    "Weapons", "Armour & Shields", "Light Sources", "Consumables",
+    "Preparations", "Components", "Tools", "Miscellaneous",
+]
 
 _CAT_MAP: dict[str, str] = {
-    "weapon":     "Weapons",
-    "shield":     "Weapons",
-    "armor":      "Armour",
-    "consumable": "Consumables",
-    "tool":       "Consumables",
-    "talisman":   "Misc",
-    "document":   "Documents",
-    "text":       "Documents",
+    "weapon":      "Weapons",
+    "shield":      "Armour & Shields",
+    "armor":       "Armour & Shields",
+    "consumable":  "Consumables",
+    "preparation": "Preparations",
+    "component":   "Components",
+    "butchery":    "Components",
+    "tool":        "Tools",
+    "talisman":    "Miscellaneous",
+    "document":    "Miscellaneous",
+    "text":        "Miscellaneous",
 }
 
 
@@ -93,8 +100,10 @@ def _item_category(item: "Item", engine: "Engine") -> str:
     item_def = engine.data.items.get(item_id, {}) if item_id else {}
     raw = item_def.get("category", "")
     if getattr(item, "on_use", "") == "read" or raw in ("document", "text"):
-        return "Documents"
-    return _CAT_MAP.get(raw, "Misc")
+        return "Miscellaneous"
+    if item_def.get("slot") == "light":
+        return "Light Sources"
+    return _CAT_MAP.get(raw, "Miscellaneous")
 
 
 def _group_items(items: list, engine: "Engine") -> dict[str, list]:
@@ -104,29 +113,37 @@ def _group_items(items: list, engine: "Engine") -> dict[str, list]:
     return groups
 
 
-def _flat_list(groups: dict[str, list]) -> list:
+def _flat_list(groups: dict[str, list], collapsed: "set[str] | None" = None) -> list:
     """
-    Build flat display list with items grouped by item_id within each category.
+    Build flat display list with collapsible category headers.
     Tuple format: (item, is_header, label)
       - item: None for headers; first item in group for item rows
-      - is_header: True for category separators
-      - label: "" for singles; "×N" for groups of N (rendered appended to name)
+      - is_header: True for category headers
+      - label: category name for headers; "" for single items; "×N" for stacks
     """
+    if collapsed is None:
+        collapsed = set()
     flat = []
     for cat in _CATEGORIES:
         items = groups[cat]
         if not items:
             continue
         flat.append((None, True, cat))
-        # Group by item_id — preserve insertion order, first-seen order
+        if cat in collapsed:
+            continue
+        # Group by item_id — only stackable items merge; non-stackable always separate
         seen: dict[str, list] = {}
         for item in items:
-            iid = getattr(item, "item_id", "") or id(item)
-            seen.setdefault(str(iid), []).append(item)
+            if getattr(item, "stackable", False):
+                iid = getattr(item, "item_id", "") or str(id(item))
+                seen.setdefault(iid, []).append(item)
+            else:
+                # Non-stackable: each item is its own entry
+                flat.append((item, False, ""))
         for group in seen.values():
             first = group[0]
             count = len(group)
-            label = f"\xd7{count}" if count > 1 else ""
+            label = f"x{count}" if count > 1 else ""
             flat.append((first, False, label))
     return flat
 
@@ -167,15 +184,6 @@ def _wrap_text(font: pygame.font.Font, text: str, max_w: int) -> list[str]:
     return lines
 
 
-def _has_floor_item(engine: "Engine", x: int, y: int) -> bool:
-    """Return True if any floor item entity is at (x, y)."""
-    return any(
-        getattr(e, "item_id", None) is not None
-        and e.x == x and e.y == y
-        for e in engine.entities
-        if e is not engine.player
-    )
-
 
 # ------------------------------------------------------------------ #
 #  Main class
@@ -200,8 +208,10 @@ class InventoryScreen:
     SEP_C    = _SLATE_DARK      # horizontal rules
 
     def __init__(self) -> None:
-        self.open:           bool = False
-        self.selected:       int  = 0
+        self.open:           bool      = False
+        self.selected:       int       = 0
+        self.scroll:         int       = 0
+        self._collapsed:     set[str]  = {"Miscellaneous"}
         self._font_title:    pygame.font.Font | None = None
         self._font_normal:   pygame.font.Font | None = None
         self._font_small:    pygame.font.Font | None = None
@@ -221,6 +231,7 @@ class InventoryScreen:
     def toggle(self) -> None:
         self.open     = not self.open
         self.selected = 0
+        self.scroll   = 0
         self._flat    = []
 
     # ------------------------------------------------------------------ #
@@ -242,77 +253,77 @@ class InventoryScreen:
         if not inv:
             return False
 
-        selectables = [i for i, (item, is_hdr, _) in enumerate(self._flat)
-                       if not is_hdr]
+        n = len(self._flat)
 
         if key in (pygame.K_UP, pygame.K_KP8):
-            self._move_selection(-1, selectables)
+            self.selected = max(0, self.selected - 1)
+            self._clamp_scroll()
             return True
 
         if key in (pygame.K_DOWN, pygame.K_KP2):
-            self._move_selection(1, selectables)
+            self.selected = min(max(0, n - 1), self.selected + 1)
+            self._clamp_scroll()
             return True
 
-        item = self._selected_item()
-        if item is None:
+        if key == pygame.K_PAGEUP:
+            self.selected = max(0, self.selected - 6)
+            self._clamp_scroll()
             return True
 
-        if key in (pygame.K_RETURN, pygame.K_KP_ENTER, pygame.K_e):
-            consumed = engine.item_system.use(item, engine)
-            if consumed:
-                inv.remove(item)
-                self._flat = []
-                self.selected = max(0, self.selected - 1)
-            engine._advance_turn()
+        if key == pygame.K_PAGEDOWN:
+            self.selected = min(max(0, n - 1), self.selected + 6)
+            self._clamp_scroll()
             return True
 
-        if key == pygame.K_d:
-            self._drop_item(item, inv, engine)
-            return True
+        if 0 <= self.selected < n:
+            row_item, is_hdr, row_label = self._flat[self.selected]
+
+            if key in (pygame.K_RETURN, pygame.K_KP_ENTER, pygame.K_e):
+                if is_hdr:
+                    cat = row_label
+                    if cat in self._collapsed:
+                        self._collapsed.discard(cat)
+                    else:
+                        self._collapsed.add(cat)
+                    groups = _group_items(inv.items, engine)
+                    self._flat = _flat_list(groups, self._collapsed)
+                    self.selected = min(self.selected, max(0, len(self._flat) - 1))
+                    self._clamp_scroll()
+                else:
+                    consumed = engine.item_system.use(row_item, engine)
+                    if consumed:
+                        inv.remove(row_item)
+                        self._flat = []
+                        self.selected = max(0, self.selected - 1)
+                    engine._advance_turn()
+                return True
+
+            if key == pygame.K_d and not is_hdr:
+                self._drop_item(row_item, inv, engine)
+                return True
 
         return True
 
+    def _clamp_scroll(self) -> None:
+        vis = 10
+        if self.selected < self.scroll:
+            self.scroll = self.selected
+        elif self.selected >= self.scroll + vis:
+            self.scroll = self.selected - vis + 1
+        self.scroll = max(0, self.scroll)
+
     def _drop_item(self, item: "Item", inv, engine: "Engine") -> None:
+        from generation.floor_object_utils import place_floor_object
         px, py = engine.player.x, engine.player.y
-        drop_x, drop_y = px, py
-
-        if _has_floor_item(engine, px, py):
-            found = False
-            for dx in (-1, 0, 1):
-                for dy in (-1, 0, 1):
-                    if dx == 0 and dy == 0:
-                        continue
-                    tx, ty = px + dx, py + dy
-                    if (engine.local_map.in_bounds(tx, ty)
-                            and engine.local_map.walkable[tx, ty]
-                            and not _has_floor_item(engine, tx, ty)):
-                        drop_x, drop_y = tx, ty
-                        found = True
-                        break
-                if found:
-                    break
-            else:
-                engine.log.add("No room to drop.", _SLATE_MID)
-                return
-
         inv.remove(item)
-        item.x = drop_x
-        item.y = drop_y
-        engine.entities.append(item)
+        item.x = px
+        item.y = py
+        place_floor_object(engine.local_map, px, py, item)
         self._flat = []
         self.selected = max(0, self.selected - 1)
-        engine.log.add("Dropped.", _SLATE_MID)
+        _dname = getattr(item, "name", "") or "something"
+        engine.log.add(f"Thou settest down the {_dname}.", _SLATE_MID)
         engine._advance_turn()
-
-    def _move_selection(self, delta: int, selectables: list[int]) -> None:
-        if not selectables:
-            return
-        if self.selected not in selectables:
-            self.selected = selectables[0]
-            return
-        idx = selectables.index(self.selected)
-        idx = max(0, min(len(selectables) - 1, idx + delta))
-        self.selected = selectables[idx]
 
     def _selected_item(self) -> "Item | None":
         if not self._flat or self.selected >= len(self._flat):
@@ -339,7 +350,7 @@ class InventoryScreen:
         ui = getattr(engine, "ui", None)
         if ui:
             ui.set_context_prompt(
-                "\u2191\u2193 navigate   E use/equip   D drop   I/ESC close",
+                "^/v navigate   E use/equip   D drop   I/ESC close",
                 _SLATE_MID,
             )
 
@@ -352,7 +363,7 @@ class InventoryScreen:
         popup = pygame.Surface((pw, ph), pygame.SRCALPHA)
         engine.ui_registry.draw_panel(
             popup, pygame.Rect(0, 0, pw, ph), "weathered_temple",
-            tint_color=self.BORDER, fill_color=self.BG, fill_alpha=248,
+            tint_color=self.BORDER, fill_color=self.BG, fill_alpha=255,
         )
 
         PAD = UI_PANEL_INSET
@@ -515,47 +526,61 @@ class InventoryScreen:
 
         equip  = getattr(engine.player, "equipment", None)
         groups = _group_items(inv.items, engine)
-        flat   = _flat_list(groups)
+        flat   = _flat_list(groups, self._collapsed)
 
         if not self._flat:
             self._flat = flat
-            selectables = [i for i, (_, is_hdr, _) in enumerate(flat) if not is_hdr]
-            if selectables and self.selected not in selectables:
-                self.selected = selectables[0]
+            if self.selected >= len(self._flat):
+                self.selected = 0
         else:
             flat = self._flat
 
         lh    = self._row_height
         max_y = oy + h - pad - lh
 
+        # Clamp scroll to actual content
+        vis_rows = max(1, (max_y - y) // lh)
+        self.scroll = max(0, min(self.scroll, max(0, len(flat) - vis_rows)))
+
+        # Column constants — all row content positions derived from these.
+        # Sprite is 32px wide at zoom=2 (16px base * 2). Columns must not overlap.
+        _content_left  = x             # = ox + pad
+        _content_right = ox + w - pad
+        COL_SPRITE  = _content_left + 2    # sprite: pixels 2..33 (32px wide)
+        COL_BADGE   = _content_left + 36   # [E] badge starts after sprite + 2px gap
+        COL_NAME    = _content_left + 58   # name starts after badge column
+        COL_WEIGHT  = _content_right - 50  # weight right-aligned
+        _max_name_w = COL_WEIGHT - COL_NAME - 4
+
+        sprite_reg  = getattr(engine, "sprite_registry", None)
+        render_mode = getattr(getattr(engine, "display", None), "render_mode", "ascii")
+
         clip     = pygame.Rect(ox, oy + pad, w, h - pad * 2)
         old_clip = surf.get_clip()
         surf.set_clip(clip)
 
-        selectables = [i for i, (_, hdr, _) in enumerate(flat) if not hdr]
-        if selectables and self.selected in selectables:
-            sel_rank     = selectables.index(self.selected)
-            vis_rows     = max(1, (max_y - y) // lh)
-            scroll_start = max(0, sel_rank - vis_rows + 1)
-        else:
-            scroll_start = 0
-
-        row = 0
         for idx, (item, is_hdr, label) in enumerate(flat):
             if y >= max_y:
                 break
+            if idx < self.scroll:
+                continue
+
+            is_sel = (idx == self.selected)
+
             if is_hdr:
-                if row < scroll_start:
-                    row += 1; y += lh; continue
-                hdr_s = self._font_small.render(label.upper(), True, VOID_PURPLE)
-                surf.blit(hdr_s, (x, y))
+                cat    = label
+                arrow  = "v" if cat not in self._collapsed else ">"
+                hdr_text = f" {arrow} {label.upper()}"
+                if is_sel:
+                    pygame.draw.rect(surf, MIDNIGHT_DEEP, (ox + 2, y - 2, w - 4, lh))
+                hdr_col = self.SELECTED if is_sel else VOID_PURPLE
+                hdr_s = self._font_small.render(hdr_text, True, hdr_col)
+                surf.blit(hdr_s, (_content_left, y + (lh - hdr_s.get_height()) // 2))
                 y += lh
                 continue
-            if row < scroll_start:
-                row += 1; y += lh; continue
-            row += 1
 
-            is_sel   = (idx == self.selected)
+            _row_cy = y + lh // 2
+
             equipped = equip.is_equipped(item) if equip else False
             name_col = _OLD_GOLD if equipped else self.TEXT
             row_col  = self.SELECTED if is_sel else name_col
@@ -563,41 +588,44 @@ class InventoryScreen:
             if is_sel:
                 pygame.draw.rect(surf, MIDNIGHT_DEEP, (ox + 2, y - 2, w - 4, lh))
 
-            tile        = getattr(item, "tile", "")
-            sprite_reg  = getattr(engine, "sprite_registry", None)
-            render_mode = getattr(getattr(engine, "display", None), "render_mode", "ascii")
-            _ICON_COL = 26   # icon column width (24px sprite + 2px gap)
-            _E_COL    = 26   # [E] badge column width (fixed, keeps name aligned)
-            name_x    = x + _ICON_COL + _E_COL
-            icon_drawn  = False
+            # Sprite at COL_SPRITE
+            tile = getattr(item, "tile", "")
+            icon_drawn = False
             if tile and render_mode == "sprite" and sprite_reg:
                 fg   = engine.registry.fg(tile) if tile in engine.registry._data else TRUE_WHITE
                 icon = sprite_reg.get_tinted(tile, fg, zoom=2)
                 if icon:
-                    surf.blit(icon, (x, y))
+                    surf.blit(icon, (COL_SPRITE, _row_cy - icon.get_height() // 2))
                     icon_drawn = True
             if not icon_drawn and tile and tile in engine.registry._data:
                 ch = chr(engine.registry.char(tile))
                 fg = engine.registry.fg(tile)
                 g  = self._font_normal.render(ch, True, fg)
-                surf.blit(g, (x, y))
+                surf.blit(g, (COL_SPRITE, _row_cy - g.get_height() // 2))
 
+            # [E] badge at COL_BADGE — separate from name, never concatenated
             if equipped:
                 e_s = self._font_small.render("[E]", True, _OLD_GOLD)
-                surf.blit(e_s, (x + _ICON_COL, y + (lh - e_s.get_height()) // 2))
+                surf.blit(e_s, (COL_BADGE, _row_cy - e_s.get_height() // 2))
 
+            # Item name at COL_NAME — truncated before COL_WEIGHT
             name_str = getattr(item, "name", "?")
             if label:
                 name_str += f" ({label})"
             elif getattr(item, "stackable", False) and getattr(item, "count", 1) > 1:
-                name_str += f" \xd7{item.count}"
+                name_str += f" x{item.count}"
+            if self._font_normal.size(name_str)[0] > _max_name_w:
+                while len(name_str) > 1 and self._font_normal.size(name_str + "...")[0] > _max_name_w:
+                    name_str = name_str[:-1]
+                name_str += "..."
             ns = self._font_normal.render(name_str, True, row_col)
-            surf.blit(ns, (name_x, y))
+            surf.blit(ns, (COL_NAME, _row_cy - ns.get_height() // 2))
 
+            # Weight at COL_WEIGHT — right-aligned
             wt_s2 = self._font_small.render(
                 f"{getattr(item, 'weight', 0.0):.1f}kg", True, self.DIM
             )
-            surf.blit(wt_s2, (ox + w - wt_s2.get_width() - pad, y + 2))
+            surf.blit(wt_s2, (COL_WEIGHT + 50 - wt_s2.get_width(), _row_cy - wt_s2.get_height() // 2))
             y += lh
 
         surf.set_clip(old_clip)

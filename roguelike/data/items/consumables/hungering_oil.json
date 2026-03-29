@@ -1,7 +1,7 @@
 {
   "id": "hungering_oil",
   "name": "hungering oil",
-  "description": "A dark preparation rendered from crude viscera and crow bile, reduced in a clay vessel. It smells of rotting things. Applied to a blade it temporarily draws on Consumption essence — the weapon hungers for a short while.",
+  "description": "Viscous and caustic in equal measure. The two properties do not cancel -- they compound. Apply quickly. It will eat the container.",
   "tile": "generic_item",
   "category": "consumable",
   "weight": 0.15,

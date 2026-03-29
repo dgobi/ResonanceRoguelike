@@ -1,9 +1,9 @@
 {
   "id": "starting_lab",
   "type": "submap_layout",
-  "description": "The underground laboratory where the player wakes. Three zones: sarcophagus chamber (west), research area (centre), exit corridor (east), lower corridor (south). Redesign the layers array to taste \u2014 the system renders whatever ASCII grid is placed here.",
+  "description": "The underground laboratory where the player wakes. West: sarcophagus chamber. Centre: research area with benches. East: equipment store and exit corridor. South: lower corridor connecting all zones.",
   "width": 60,
-  "height": 35,
+  "height": 16,
   "legend": {
     "#": "wall",
     ".": "floor",
@@ -16,22 +16,22 @@
     " ": null
   },
   "layers": [
-    "ZZZZZZZZZZZZZZZZZZZZZZZZ",
-    "Z...........Z..........Z",
-    "Z...........Z..........Z",
-    "Z...........+....ww....Z",
-    "Z...........Z....ww....Z",
-    "Z...........Z....ww....Z",
-    "ZZZZZZZZZZZZZ....ww....Z",
-    "Z....^......Z..........Z",
-    "Z...........Z..........Z",
-    "ZZZZZ+ZZZZZZZZZZZZ+ZZZZZ",
-    "Z...........Z..........Z",
-    "Z.w.......w.Z..........Z",
-    "Z.....w.....+..........Z",
-    "Z.w.......w.Z..........Z",
-    "Z...........Z..........Z",
-    "ZZZZZZZZZZZZZZZZZZZZZZZZ"
+    "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
+    "Z..........Z....................Z..........................Z",
+    "Z..........Z....................Z..........................Z",
+    "Z..........Z....................Z........................D.Z",
+    "Z..........+....................+..........................Z",
+    "Z....ww....Z....................Z..........................Z",
+    "Z....ww....Z....................Z..........................Z",
+    "Z....^.....Z....................Z..........................Z",
+    "Z..........Z....................Z..........................Z",
+    "ZZZZZ+ZZZZZZZZZZZZZZZZ+ZZZZZZZZZZZZZZZZZZZZZZZ+ZZZZZZZZZZZZZ",
+    "Z..........Z....................Z..........................Z",
+    "Z.w......w.Z....................Z..........................Z",
+    "Z....w.....+...................w+.....w....................Z",
+    "Z.w......w.Z....................Z..........................Z",
+    "Z..........Z....................Z..........................Z",
+    "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
   ],
   "special_tiles": [
     {
@@ -52,7 +52,7 @@
     },
     {
       "x": 15,
-      "y": 8,
+      "y": 2,
       "type": "item",
       "item_id": "lab_note",
       "text_id": "lab_note_primary_a",
@@ -60,11 +60,25 @@
     },
     {
       "x": 17,
-      "y": 8,
+      "y": 2,
       "type": "item",
       "item_id": "lab_note",
       "text_id": "lab_note_primary_b",
       "note": "Research notes, north bench"
+    },
+    {
+      "x": 20,
+      "y": 4,
+      "type": "item",
+      "item_id": "binding_knife",
+      "note": "Research area -- the notched knife used in resonance experiments"
+    },
+    {
+      "x": 22,
+      "y": 4,
+      "type": "item",
+      "item_id": "dissolution_blade",
+      "note": "Research area -- the pitted blade from the stone sample work"
     },
     {
       "x": 25,
@@ -72,7 +86,7 @@
       "type": "item",
       "item_id": "lab_note",
       "text_id": "lab_note_secondary_a",
-      "note": "Secondary researcher notes, mid area"
+      "note": "Secondary researcher notes, south wing"
     },
     {
       "x": 27,
@@ -80,58 +94,44 @@
       "type": "item",
       "item_id": "lab_note",
       "text_id": "lab_note_secondary_b",
-      "note": "Secondary researcher notes, mid area"
+      "note": "Secondary researcher notes, south wing"
     },
     {
       "x": 42,
-      "y": 15,
+      "y": 5,
       "type": "item",
       "item_id": "lab_note",
       "text_id": "lab_note_final",
-      "note": "Final note, near chalkboard wall"
+      "note": "Final note, east equipment area"
     },
     {
-      "x": 35,
-      "y": 8,
+      "x": 38,
+      "y": 2,
       "type": "item",
       "item_id": "lab_note",
       "text_id": "lab_label_equipment",
       "note": "Equipment rack label"
     },
     {
-      "x": 55,
-      "y": 4,
-      "type": "body",
-      "name": "remains of R.",
-      "note": "R.'s body in exit corridor near forced door"
-    },
-    {
-      "x": 20,
-      "y": 8,
-      "type": "item",
-      "item_id": "binding_knife",
-      "note": "Research area — the notched knife used in resonance experiments"
-    },
-    {
-      "x": 22,
-      "y": 8,
-      "type": "item",
-      "item_id": "dissolution_blade",
-      "note": "Research area — the pitted blade from the stone sample work"
-    },
-    {
       "x": 45,
-      "y": 8,
+      "y": 4,
       "type": "item",
       "item_id": "severance_blade",
-      "note": "Research area — the narrow grey blade from the hollow specimen work"
+      "note": "East equipment store -- the narrow grey blade"
     },
     {
       "x": 47,
       "y": 12,
       "type": "item",
       "item_id": "revelation_lens",
-      "note": "Research area — the glass fragment used for internal resonance examination"
+      "note": "South wing -- the glass fragment for resonance examination"
+    },
+    {
+      "x": 55,
+      "y": 4,
+      "type": "body",
+      "name": "remains of R.",
+      "note": "R.'s body near forced exit door"
     }
   ],
   "player_start": {

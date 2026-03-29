@@ -12,5 +12,6 @@
   "essence": "Binding",
   "essence_strength": 0.5,
   "on_use": "equip_toggle",
+  "consumed_on_use": false,
   "keywords": [{"tag": "binding", "tier": 2}, {"tag": "resonant", "tier": 1}]
 }

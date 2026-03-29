@@ -1,0 +1,14 @@
+{
+  "id": "empty_water_skin",
+  "name": "empty water skin",
+  "description": "A leather skin, empty. The seams are still sound. Could be refilled from clean water.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.2,
+  "stackable": false,
+  "on_use": null,
+  "consumed_on_use": false,
+  "keywords": [
+    {"tag": "vessel", "tier": 1}
+  ]
+}

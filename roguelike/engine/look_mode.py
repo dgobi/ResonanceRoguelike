@@ -1,4 +1,5 @@
 # engine/look_mode.py
+# UI RULES: read docs/UI_RULES.md before modifying this file.
 from __future__ import annotations
 import pygame
 from typing import TYPE_CHECKING
@@ -178,6 +179,33 @@ class LookMode:
                 "id":          decor_id,
                 "name":        raw_dname,
                 "description": decor_def.get("description", ""),
+            })
+
+        # Processing layer
+        _proc_layer = getattr(engine.local_map, "processing_layer", {})
+        _proc_entry = _proc_layer.get((x, y))
+        if _proc_entry:
+            _psource = _proc_entry.get("source", "processing")
+            things.append({
+                "type":        "processing",
+                "name":        f"Something {_psource}.",
+                "description": f"Something {_psource}.",
+            })
+
+        # Floor objects
+        from generation.floor_object_utils import get_floor_objects as _gfo_look
+        _floor_items = _gfo_look(engine.local_map, x, y)
+        for _fi in _floor_items:
+            _fname = getattr(_fi, "name", "something")
+            if getattr(_fi, "source_creature", None):
+                _fname = f"Remains of {_fname.replace('remains of ', '')}"
+            _fw = getattr(_fi, "weight", 0.0)
+            things.append({
+                "type":        "floor_object",
+                "name":        _fname,
+                "description": f"{_fname[0].upper()}{_fname[1:]}. {_fw:.1f}kg." if _fw > 0 else f"{_fname[0].upper()}{_fname[1:]}.",
+                "entity":      _fi,
+                "tile":        getattr(_fi, "tile", "generic_item"),
             })
 
         # Player at this tile
@@ -378,59 +406,72 @@ class LookMode:
         engine:     "Engine",
     ) -> None:
         """
-        Render the look-mode UI panel — replaces the normal
+        Render the look-mode UI panel -- replaces the normal
         UI panel while look mode is active.
-        Shows terrain, items, and creatures at cursor position.
+        All content within content_rect per UI_RULES.md.
         """
         if not self._font_normal:
             return
+
+        # Content rect = panel_rect.inflate(-18, -18) per UI_RULES.md
+        _CPAD = 18
+        _cx = _CPAD
+        _cy_top = _CPAD
+        _cr = panel_rect.width - _CPAD
+        _cb = panel_rect.height - _CPAD
+        _lh = self._font_normal.get_linesize() + 2
 
         surf = pygame.Surface((panel_rect.width, panel_rect.height), pygame.SRCALPHA)
         surf.fill((0, 0, 0, 0))
         pygame.draw.line(surf, self.EXAMINE_BORDER,
                          (0, 0), (panel_rect.width, 0), 1)
 
-        # Cursor coords
+        y = _cy_top
+
+        # Cursor coords on first line
         coord_str  = f"({self.cursor_x}, {self.cursor_y})"
         coord_surf = self._font_small.render(coord_str, True, EARTH_BROWN)
-        surf.blit(coord_surf, (4, 4))
+        surf.blit(coord_surf, (_cx, y))
+        y += coord_surf.get_height() + 2
 
         things = self._get_things_at(engine, self.cursor_x, self.cursor_y)
-        y = 22
 
         if not things:
-            t = self._font_normal.render(
-                "Nothing here.", True, self.EXAMINE_DIM
-            )
-            surf.blit(t, (4, y))
+            if y + _lh <= _cb:
+                t = self._font_normal.render(
+                    "Nothing here.", True, self.EXAMINE_DIM
+                )
+                surf.blit(t, (_cx, y))
         else:
             for thing in things:
-                # Name only — no tile glyph
+                if y + _lh > _cb:
+                    break
+
                 color = {
-                    "terrain":  self.EXAMINE_DIM,
-                    "decor":    WORN_STONE,
-                    "creature": PALE_FLESH,
-                    "item":     PALE_LIFE,
-                    "player":   FROST_WHITE,
+                    "terrain":      self.EXAMINE_DIM,
+                    "decor":        WORN_STONE,
+                    "processing":   WORN_STONE,
+                    "floor_object": PALE_LIFE,
+                    "creature":     PALE_FLESH,
+                    "item":         PALE_LIFE,
+                    "player":       FROST_WHITE,
                 }.get(thing["type"], self.EXAMINE_TEXT)
 
                 name_surf = self._font_normal.render(
                     thing["name"], True, color
                 )
-                surf.blit(name_surf, (4, y))
+                surf.blit(name_surf, (_cx, y))
 
-                # Brief description — full or nothing, no truncation
+                # Brief description beside name if it fits
                 desc = thing.get("description", "")
                 if desc and self._font_small:
-                    name_end = 4 + name_surf.get_width() + 12
-                    avail_px = panel_rect.width - name_end - 8
+                    name_end = _cx + name_surf.get_width() + 12
+                    avail_px = _cr - name_end
                     if avail_px > 40 and _fits(desc, self._font_small, avail_px):
                         d = self._font_small.render(desc, True, self.EXAMINE_DIM)
                         surf.blit(d, (name_end, y + 2))
 
-                y += self._font_normal.get_linesize() + 2
-                if y > panel_rect.height - 4:
-                    break
+                y += _lh
 
         surface.blit(surf, (panel_rect.x, panel_rect.y))
 
@@ -464,7 +505,7 @@ class LookMode:
         engine.ui_registry.draw_panel(
             popup, pygame.Rect(0, 0, pw, ph), "weathered_temple",
             tint_color=self.EXAMINE_BORDER, fill_color=self.EXAMINE_BG,
-            fill_alpha=240,
+            fill_alpha=255,
         )
 
         y = UI_PANEL_INSET

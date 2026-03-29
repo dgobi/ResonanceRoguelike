@@ -7,10 +7,9 @@
   "hydration": 400,
   "weight": 0.5,
   "drink_message": "Cold and flat. The thirst retreats.",
+  "empty_form": "empty_water_skin",
   "keywords": [
-    {
-      "tag": "drinkable",
-      "tier": 2
-    }
+    {"tag": "drinkable", "tier": 2},
+    {"tag": "vessel", "tier": 1}
   ]
 }

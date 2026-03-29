@@ -309,6 +309,8 @@ class Engine:
         self._pending_placement_recipe: dict | None = None
         self._placement_cursor_x:       int         = 0
         self._placement_cursor_y:       int         = 0
+        self._placement_mode:           str         = "campfire"   # "campfire"|"drying"|"cooking"
+        self._pending_processing:       dict | None = None
 
         # Resonance / corruption state
         self.resonance_exposure:     float = 0.0
@@ -640,6 +642,9 @@ class Engine:
                     t["entity_id"] for t in self._projectile_tweens
                     if t["elapsed"] < t["duration"]
                 }
+                # Set river connections for autotile OOB checks
+                _rc_chunk = self.world_map.get(self.world_x, self.world_y) if hasattr(self, "world_map") else None
+                renderer._river_connections = getattr(_rc_chunk, "river_connections", []) if _rc_chunk else []
                 renderer.render(
                     screen, self.local_map, self.entities,
                     cam_x, cam_y, viewport,
@@ -1361,45 +1366,83 @@ class Engine:
         self._check_entity_chunk_crossings()
         self._tick_live_pursuers()
 
-        # Corpse decay — current chunk only; cached chunks decay on load
-        if self.local_map.corpse_decay:
-            from generation.decor_utils import clear_decor as _clr_d
-            _expired_d: list = []
-            for _dp, _dt in list(self.local_map.corpse_decay.items()):
-                if _dt <= 1:
-                    _expired_d.append(_dp)
-                else:
-                    self.local_map.corpse_decay[_dp] = _dt - 1
-            for _dp in _expired_d:
-                _clr_d(self.local_map, _dp[0], _dp[1])
-                self.local_map.corpse_data.pop(_dp, None)
-                self.local_map.corpse_decay.pop(_dp, None)
+        # Floor object decay — tick decay_timer on all floor objects in current chunk
+        if self.local_map.floor_objects:
+            from generation.floor_object_utils import remove_floor_object as _rfo_decay
+            _decay_removals: list[tuple[tuple[int,int], object]] = []
+            for _dpos, _ditems in self.local_map.floor_objects.items():
+                for _ditem in _ditems:
+                    _dt = getattr(_ditem, "decay_timer", None)
+                    if _dt is not None:
+                        if _dt <= 1:
+                            _decay_removals.append((_dpos, _ditem))
+                        else:
+                            _ditem.decay_timer = _dt - 1
+            for _dpos, _ditem in _decay_removals:
+                _rfo_decay(self.local_map, _dpos[0], _dpos[1], _ditem)
 
-        # Passive processing queue — tick all pending processes
-        if self.local_map.processing_queue:
+        # Passive processing layer -- tick current chunk
+        if self.local_map.processing_layer:
+            from generation.floor_object_utils import place_floor_object as _pfo_proc
             _proc_msgs = getattr(self.data, "processing_messages", {})
-            _done: list[int] = []
-            for _pi, _proc in enumerate(self.local_map.processing_queue):
+            _done_keys: list[tuple[int, int]] = []
+            for (_lx, _ly), _proc in self.local_map.processing_layer.items():
                 _proc["turns_remaining"] -= 1
                 if _proc["turns_remaining"] <= 0:
-                    _done.append(_pi)
+                    _done_keys.append((_lx, _ly))
                     _result_id = _proc.get("item_id", "")
+                    _dec_id    = _proc.get("decor_id", "")
+                    # Clear processing decor from world (not for on_fire entries)
+                    if _dec_id and self.local_map.decor.get((_lx, _ly)) == _dec_id:
+                        from generation.decor_utils import clear_decor as _clr_proc
+                        _clr_proc(self.local_map, _lx, _ly)
                     _result_item = self.item_factory.create(
-                        _result_id, self.player.x, self.player.y
+                        _result_id, _lx, _ly
                     ) if _result_id else None
-                    inv = getattr(self.player, "inventory", None)
-                    _src = _proc.get("source", "")
-                    _tmpl = _proc_msgs.get(_src, {}).get("complete", "{item_name} is ready.")
+                    _custom_msg = _proc.get("completion_message", "")
+                    if _custom_msg:
+                        _tmpl = _custom_msg
+                    else:
+                        _src  = _proc.get("source", "")
+                        _tmpl = _proc_msgs.get(_src, {}).get("complete", "{item_name} is ready.")
                     if _result_item:
-                        _msg = _tmpl.format(item_name=_result_item.name)
-                        if inv and inv.add(_result_item):
-                            self.log.add(_msg, MSG_LORE)
-                        else:
-                            # Inventory full — drop at player position
-                            self.entities.append(_result_item)
-                            self.log.add(_msg + " It falls at your feet.", MSG_LORE)
-            for _pi in reversed(_done):
-                self.local_map.processing_queue.pop(_pi)
+                        _msg = _tmpl.format(item_name=_result_item.name) if "{item_name}" in _tmpl else _tmpl
+                        # Place on tile as floor object
+                        _result_item.x = _lx
+                        _result_item.y = _ly
+                        _pfo_proc(self.local_map, _lx, _ly, _result_item)
+                        self.log.add(_msg, MSG_LORE)
+                        _wx = self.world_x * MAP_WIDTH  + _lx
+                        _wy = self.world_y * MAP_HEIGHT + _ly
+                        self.callouts.add("ready", _wx, _wy, LIFE_GREEN, font_size="status")
+            for _dk in _done_keys:
+                del self.local_map.processing_layer[_dk]
+
+        # Tick processing layers for all hot-cached chunks (not current chunk)
+        _hot = getattr(self.save_manager, "hot", {})
+        for (_hwx, _hwy), _cached in list(_hot.items()):
+            if (_hwx, _hwy) == (self.world_x, self.world_y):
+                continue
+            _clm = getattr(_cached, "local_map", None)
+            if _clm is None or not getattr(_clm, "processing_layer", None):
+                continue
+            _done_h_keys: list[tuple[int, int]] = []
+            for (_lx_h, _ly_h), _proc_h in _clm.processing_layer.items():
+                _proc_h["turns_remaining"] -= 1
+                if _proc_h["turns_remaining"] <= 0:
+                    _done_h_keys.append((_lx_h, _ly_h))
+                    _dec_id_h = _proc_h.get("decor_id", "")
+                    if _dec_id_h and _clm.decor.get((_lx_h, _ly_h)) == _dec_id_h:
+                        from generation.decor_utils import clear_decor as _clr_hot
+                        _clr_hot(_clm, _lx_h, _ly_h)
+                    _result_id_h = _proc_h.get("item_id", "")
+                    if _result_id_h:
+                        if not hasattr(_clm, "ready_items"):
+                            _clm.ready_items = []
+                        _clm.ready_items.append({"item_id": _result_id_h,
+                                                 "lx": _lx_h, "ly": _ly_h})
+            for _dk_h in _done_h_keys:
+                del _clm.processing_layer[_dk_h]
 
         # Recompute FOV after every turn so wraith penalty (and all other
         # per-turn modifiers) are reflected immediately, not one turn late.
@@ -1676,12 +1719,13 @@ class Engine:
                 )
                 if actor:
                     town_entities.append(actor)
+            from generation.floor_object_utils import place_floor_object as _pfo_town
             for ispec in chunk.town_data.item_spawns:
                 item = self.item_factory.create(ispec.get("item_id", ""), ispec["x"], ispec["y"])
                 if item is not None:
                     if ispec.get("text_id"):
                         item.text_id = ispec["text_id"]
-                    town_entities.append(item)
+                    _pfo_town(self.local_map, ispec["x"], ispec["y"], item)
         self.entities  = [self.player] + town_entities
         self.world_map.mark_explored_radius(wx, wy, radius=2)
         self._update_fov()
@@ -1884,12 +1928,13 @@ class Engine:
                     )
                     if actor:
                         new_entities.append(actor)
+                from generation.floor_object_utils import place_floor_object as _pfo_town2
                 for ispec in chunk.town_data.item_spawns:
                     item = self.item_factory.create(ispec.get("item_id", ""), ispec["x"], ispec["y"])
                     if item is not None:
                         if ispec.get("text_id"):
                             item.text_id = ispec["text_id"]
-                        new_entities.append(item)
+                        _pfo_town2(new_map, ispec["x"], ispec["y"], item)
             else:
                 chunk_rng = random.Random(chunk.seed + 1)
                 for zone_id, _ in chunk.zones:
@@ -2066,6 +2111,22 @@ class Engine:
         })
         _apply_effects(effects, self)
 
+        # Deliver any items that completed processing while player was away
+        _ready = getattr(self.local_map, "ready_items", [])
+        if _ready:
+            from generation.floor_object_utils import place_floor_object as _pfo_ri
+            for _ri in _ready:
+                _ri_id   = _ri.get("item_id", "")
+                _ri_lx   = _ri.get("lx", self.player.x)
+                _ri_ly   = _ri.get("ly", self.player.y)
+                _ri_item = self.item_factory.create(_ri_id, _ri_lx, _ri_ly)
+                if _ri_item:
+                    _ri_item.x = _ri_lx
+                    _ri_item.y = _ri_ly
+                    _pfo_ri(self.local_map, _ri_lx, _ri_ly, _ri_item)
+                    self.log.add(f"{_ri_item.name} is ready.", MSG_LORE)
+            self.local_map.ready_items = []
+
         self.save_manager.save(self)
         self._update_context_prompt()
 
@@ -2211,7 +2272,7 @@ class Engine:
             new_map, layout_entities = generate_submap(
                 submap, MAP_WIDTH, MAP_HEIGHT, self.data.terrain, data=self.data
             )
-            new_entities = self._spawn_layout_entities(layout_entities)
+            new_entities = self._spawn_layout_entities(layout_entities, local_map=new_map)
 
         spawn_x, spawn_y = self._find_walkable_near(
             new_map, submap.entry_x, submap.entry_y
@@ -2848,7 +2909,7 @@ class Engine:
             _smap, _slents = generate_submap(
                 _smeta, _MW2, _MH2, self.data.terrain, data=self.data
             )
-            _sents = self._spawn_layout_entities(_slents)
+            _sents = self._spawn_layout_entities(_slents, local_map=_smap)
             self.save_manager.cache.store_submap(_linked_id, _smap, _sents)
             _sub_cached = self.save_manager.cache.load_submap(_linked_id)
         if _sub_cached is None:
@@ -3058,23 +3119,50 @@ class Engine:
                 if _DM_st:
                     print(f"[TRANSFER-STAIR-UP-DELAYED] {_e.name} -> surface ({_e.x},{_e.y})")
 
-    def _spawn_layout_entities(self, layout_entities: list) -> list:
+    def _spawn_layout_entities(self, layout_entities: list,
+                               local_map=None) -> list:
         """
-        Convert layout entity dicts returned by generate_submap into real
-        Item / Actor instances and return them as a list.
+        Convert layout entity dicts returned by generate_submap.
+        Items are placed as floor_objects on the local_map.
+        Creature-type entities are returned as a list (currently none from layouts).
+        Checks walkability before placement; spirals outward to find fallback.
         """
+        from generation.floor_object_utils import place_floor_object as _pfo_layout
+        from config import DEBUG_MODE
+        _target_map = local_map or self.local_map
         result = []
         for spec in layout_entities:
             kind = spec.get("kind")
             x, y = spec["x"], spec["y"]
             if kind == "item":
+                # Walkability check — find nearest walkable tile within 3
+                _px, _py = x, y
+                if not (_target_map.in_bounds(x, y) and _target_map.walkable[x, y]):
+                    _found = False
+                    for _sr in range(1, 4):
+                        for _sdx in range(-_sr, _sr + 1):
+                            for _sdy in range(-_sr, _sr + 1):
+                                _nx, _ny = x + _sdx, y + _sdy
+                                if (_target_map.in_bounds(_nx, _ny)
+                                        and _target_map.walkable[_nx, _ny]):
+                                    _px, _py = _nx, _ny
+                                    _found = True
+                                    break
+                            if _found:
+                                break
+                        if _found:
+                            break
+                    if not _found:
+                        if DEBUG_MODE:
+                            print(f"[LAYOUT] special_tile item at ({x},{y}) is non-walkable, skipped.")
+                        continue
                 item_id = spec.get("item_id", "")
                 text_id = spec.get("text_id", "")
-                item = self.item_factory.create(item_id, x, y)
+                item = self.item_factory.create(item_id, _px, _py)
                 if item is not None:
                     if text_id:
                         item.text_id = text_id
-                    result.append(item)
+                    _pfo_layout(_target_map, _px, _py, item)
             # "body" type — skip for now (Tier 2 content)
         return result
 
@@ -3221,14 +3309,20 @@ class Engine:
             terrain_entry = self.data.terrain.get(terrain_id, {})
             decor_id      = self.local_map.decor.get((ax, ay))
             decor_entry   = self.data.decoratives.get(decor_id, {}) if decor_id else {}
+            # Floor objects take priority as interaction candidates
+            if self._items_at(ax, ay):
+                candidates.append((ax, ay))
+                continue
+            # Processing layer tiles are candidates (shows "not ready" on interact)
+            if (ax, ay) in self.local_map.processing_layer:
+                candidates.append((ax, ay))
+                continue
             if (terrain_entry.get("harvestable", False)
                     or terrain_entry.get("gatherable", False)
                     or terrain_entry.get("interactable")
                     or decor_entry.get("interactable")):
                 candidates.append((ax, ay))
                 continue
-            if self._items_at(ax, ay):
-                candidates.append((ax, ay))
         return candidates
 
     # ------------------------------------------------------------------ #
@@ -3258,20 +3352,28 @@ class Engine:
         return handler(x, y)
 
     def _interactable_butcher(self, x: int, y: int) -> bool:
-        """Butcher the corpse at (x, y). Data-driven yield from creature JSON."""
+        """Butcher a corpse at (x, y). Reads from floor_objects layer."""
         import random as _brng
-        from generation.decor_utils import clear_decor as _bclr
+        from generation.floor_object_utils import get_floor_objects as _gfo_b
+        from generation.floor_object_utils import remove_floor_object as _rfo_b
+        from generation.floor_object_utils import place_floor_object as _pfo_b
         from engine.message_log import MSG_DEFAULT
 
-        creature_id = self.local_map.corpse_data.get((x, y))
-        if creature_id is None:
+        # Find corpse item in floor objects
+        _corpse_item = None
+        for _fi in _gfo_b(self.local_map, x, y):
+            if getattr(_fi, "source_creature", None):
+                _corpse_item = _fi
+                break
+        if _corpse_item is None:
             return False
 
+        creature_id = _corpse_item.source_creature
         cdef = self.data.entities.get(creature_id, {})
         by   = cdef.get("butcher_yield")
         if not by:
             self.log.add("This cannot be butchered.", MSG_DEFAULT)
-            return False  # no turn spent
+            return False
 
         # Highest cutting tier across weapon + offhand
         cutting_tier = 0
@@ -3284,22 +3386,18 @@ class Engine:
                         if _kw.get("tag") == "cutting":
                             cutting_tier = max(cutting_tier, _kw.get("tier", 0))
 
-        # Highest qualifying tier block
         tiers = by.get("tiers", [])
         qualified = [t for t in tiers if t.get("min_cutting_tier", 1) <= cutting_tier]
         if not qualified:
             self.log.add("Your tools are not sufficient for this.", MSG_DEFAULT)
-            return True  # turn spent — attempt happened
+            return True
 
         best = max(qualified, key=lambda t: t.get("min_cutting_tier", 1))
         min_req = best.get("min_cutting_tier", 1)
-
-        # Turn cost: base 5, reduced by tier excess, minimum 1
         turn_cost = max(1, 5 - (cutting_tier - min_req))
         if turn_cost > 1:
             self._move_debt += turn_cost - 1
 
-        # Structured log line 1: creature name + tool used
         _creature_name = cdef.get("name", creature_id)
         _tool_names: list[str] = []
         if equip:
@@ -3313,8 +3411,7 @@ class Engine:
         _tool_str = " and ".join(_tool_names) if _tool_names else "bare hands"
         self.log.add(f"You butcher the {_creature_name} using {_tool_str}.", MSG_DEFAULT)
 
-        # Roll yields and add to inventory
-        inv = getattr(self.player, "inventory", None)
+        # Roll yields and drop as floor objects at corpse tile
         _got_any = False
         for _ydef in best.get("yields", []):
             _iid  = _ydef.get("item_id", "")
@@ -3325,17 +3422,15 @@ class Engine:
             if _qty <= 0:
                 continue
             for _ in range(_qty):
-                _new = self.item_factory.create(_iid, x=self.player.x, y=self.player.y)
-                if _new and inv:
-                    inv.add(_new)
+                _new = self.item_factory.create(_iid, x=x, y=y)
+                if _new:
+                    _pfo_b(self.local_map, x, y, _new)
             _idef = self.data.items.get(_iid, {})
-            self.log.add(f"  {_idef.get('name', _iid).capitalize()} \xd7{_qty}.", MSG_DEFAULT)
+            self.log.add(f"  {_idef.get('name', _iid).capitalize()} x{_qty}.", MSG_DEFAULT)
             _got_any = True
 
-        # Remove corpse
-        _bclr(self.local_map, x, y)
-        self.local_map.corpse_data.pop((x, y), None)
-        self.local_map.corpse_decay.pop((x, y), None)
+        # Remove corpse floor object
+        _rfo_b(self.local_map, x, y, _corpse_item)
 
         if not _got_any:
             self.log.add("  The remains yield nothing useful.", MSG_DEFAULT)
@@ -3431,6 +3526,78 @@ class Engine:
             return False
         return self.data.decoratives.get(decor_id, {}).get("blocks_movement", False)
 
+    def _is_valid_drying(self, x: int, y: int) -> bool:
+        """Valid drying spot: walkable, no blocking decor, no active processing, within warmth_radius of campfire_lit."""
+        if not self.local_map.in_bounds(x, y):
+            return False
+        if not self.local_map.walkable[x, y]:
+            return False
+        if self.local_map.decor.get((x, y)):
+            return False   # any existing decor blocks drying
+        if (x, y) in self.local_map.processing_layer:
+            return False   # already processing here
+        # Must be within warmth_radius of a nearby campfire_lit
+        px, py = x, y
+        for (dx, dy), did in self.local_map.decor.items():
+            if did == "campfire_lit":
+                decor_def = self.data.decoratives.get(did, {})
+                radius    = decor_def.get("warmth_radius", 3)
+                if max(abs(dx - px), abs(dy - py)) <= radius and (dx, dy) != (px, py):
+                    return True
+        return False
+
+    def _is_valid_cooking(self, x: int, y: int) -> bool:
+        """Valid cooking spot: campfire_lit decor, no existing processing at this tile."""
+        if not self.local_map.in_bounds(x, y):
+            return False
+        decor_id = self.local_map.decor.get((x, y))
+        if decor_id != "campfire_lit":
+            return False
+        # One item at a time on the fire -- O(1) lookup via processing_layer
+        if (x, y) in self.local_map.processing_layer:
+            return False
+        return True
+
+    def _start_processing_placement(self, recipe: dict) -> None:
+        """Enter PLACEMENT_CURSOR mode for a passive_processing recipe."""
+        decor_id = recipe.get("processing_decor", "")
+        self._pending_processing   = recipe
+        self._pending_placement_recipe = recipe
+        self._pending_placement_tile   = decor_id
+        source = recipe.get("processing_source", "drying")
+        self._placement_mode = "cooking" if source == "cooking" else "drying"
+
+        px, py = self.player.x, self.player.y
+        if self._placement_mode == "drying":
+            # Find nearest valid drying tile by Chebyshev distance
+            # Scan order: N, NE, E, SE, S, SW, W, NW (ties broken by scan order)
+            _best = None
+            _best_dist = 999
+            # Search outward by Chebyshev distance from player
+            for _r in range(1, 8):
+                for _dx in range(-_r, _r + 1):
+                    for _dy in range(-_r, _r + 1):
+                        _tx, _ty = px + _dx, py + _dy
+                        if self._is_valid_drying(_tx, _ty):
+                            _cd = max(abs(_dx), abs(_dy))
+                            if _cd < _best_dist:
+                                _best_dist = _cd
+                                _best = (_tx, _ty)
+                if _best is not None:
+                    break
+            if _best:
+                self._placement_cursor_x, self._placement_cursor_y = _best
+            else:
+                self._placement_cursor_x = px
+                self._placement_cursor_y = py
+        else:
+            self._placement_cursor_x = px
+            self._placement_cursor_y = max(0, py - 1)
+
+        self.mode = GameMode.PLACEMENT_CURSOR
+        msg = recipe.get("placement_message", "Where will you set it to work?")
+        self.log.add(msg, MSG_DEFAULT)
+
     def _handle_key_placement(self, key: int) -> None:
         """Input handler for PLACEMENT_CURSOR mode."""
         from engine.engine import MOVE_KEYS
@@ -3446,6 +3613,91 @@ class Engine:
 
         if key in (pygame.K_RETURN, pygame.K_KP_ENTER):
             cx, cy = self._placement_cursor_x, self._placement_cursor_y
+
+            if self._placement_mode in ("drying", "cooking"):
+                # Processing placement — items not yet consumed; validate then craft
+                if not self._check_placement_valid(cx, cy):
+                    if self._placement_mode == "drying":
+                        self.log.add("Too far from the fire.", MSG_DEFAULT)
+                    else:
+                        self.log.add("Must be placed on the fire.", MSG_DEFAULT)
+                    return
+                recipe = self._pending_processing
+                if recipe is None:
+                    self.mode = GameMode.LOCAL
+                    return
+                from engine.crafting import can_craft, attempt_craft
+                inv     = getattr(self.player, "inventory", None)
+                kw_data = getattr(self.data, "keywords", {})
+                # Build ambient for the campfire at (cx, cy)
+                from rendering.craft_screen import CraftScreen
+                ambient = CraftScreen._build_ambient_sources(self)
+                craftable, _ = can_craft(recipe, inv, kw_data, ambient)
+                if not craftable:
+                    self.log.add("The materials are not here.", MSG_DEFAULT)
+                    self._pending_processing       = None
+                    self._pending_placement_tile   = None
+                    self._pending_placement_recipe = None
+                    self.mode = GameMode.LOCAL
+                    return
+                # Capture ingredient name before consumption
+                _ingredient_name = ""
+                _rsi = recipe.get("requires_single_item")
+                if _rsi:
+                    from engine.crafting import _item_has_all_tags
+                    _rsi_tags = _rsi.get("tags", [])
+                    for _inv_item in (inv.items if inv else []):
+                        if _item_has_all_tags(_inv_item, _rsi_tags):
+                            _ingredient_name = getattr(_inv_item, "name", "")
+                            break
+                if not _ingredient_name:
+                    # Fall back to first component match
+                    from engine.crafting import _item_has_tag
+                    for _comp in recipe.get("components", []):
+                        for _inv_item in (inv.items if inv else []):
+                            if _item_has_tag(_inv_item, _comp["tag"], _comp.get("min_tier", 1)):
+                                _ingredient_name = getattr(_inv_item, "name", "")
+                                break
+                        if _ingredient_name:
+                            break
+                attempt_craft(recipe, inv, kw_data, ambient)
+                # Place processing decor — skip for cooking (fire tile stays)
+                decor_id = recipe.get("processing_decor", "")
+                source   = recipe.get("processing_source", "drying")
+                _on_fire = (source == "cooking")
+                if not _on_fire and decor_id and decor_id in self.data.decoratives:
+                    from generation.decor_utils import place_decor
+                    place_decor(self.local_map, cx, cy, decor_id)
+                # Push to processing queue (with world position)
+                result_id  = recipe.get("result_item", "")
+                turns      = recipe.get("processing_turns", 20)
+                proc_msgs  = getattr(self.data, "processing_messages", {})
+                start_tmpl = proc_msgs.get(source, {}).get("start", "The work begins.")
+                result_def  = self.data.items.get(result_id, {})
+                result_name = result_def.get("name", result_id)
+                # Use ingredient name in start message, fall back to result name
+                _msg_name = _ingredient_name or result_name
+                _completion_msg = recipe.get("completion_message", "")
+                self.local_map.processing_layer[(cx, cy)] = {
+                    "item_id":         result_id,
+                    "turns_remaining": turns,
+                    "decor_id":        "" if _on_fire else decor_id,
+                    "source":          source,
+                    "completion_message": _completion_msg,
+                    "on_fire":         _on_fire,
+                }
+                self.log.add(start_tmpl.format(item_name=_msg_name), MSG_LORE)
+                self._emit_placement_burst(cx, cy)
+                self._pending_processing       = None
+                self._pending_placement_tile   = None
+                self._pending_placement_recipe = None
+                self._placement_mode           = "campfire"
+                self.mode = GameMode.LOCAL
+                self._log_scroll = 0
+                self._advance_turn()
+                return
+
+            # Standard campfire/world-object placement
             if cx == self.player.x and cy == self.player.y:
                 self.log.add("You cannot place it at your own feet.", MSG_DEFAULT)
                 return
@@ -3472,13 +3724,23 @@ class Engine:
                 self._emit_placement_burst(cx, cy)
             self._pending_placement_tile   = None
             self._pending_placement_recipe = None
+            self._placement_mode           = "campfire"
             self.mode = GameMode.LOCAL
             self._log_scroll = 0
             self._advance_turn()
             return
 
         if key == pygame.K_ESCAPE:
-            # Return components to inventory
+            if self._placement_mode in ("drying", "cooking"):
+                # Items not yet consumed — just cancel
+                self.log.add("You decide against it.", MSG_DEFAULT)
+                self._pending_processing       = None
+                self._pending_placement_tile   = None
+                self._pending_placement_recipe = None
+                self._placement_mode           = "campfire"
+                self.mode = GameMode.LOCAL
+                return
+            # Standard campfire ESC — return components to inventory
             recipe = self._pending_placement_recipe
             if recipe:
                 inv = getattr(self.player, "inventory", None)
@@ -3494,6 +3756,7 @@ class Engine:
             self.log.add("You decide against it.", MSG_DEFAULT)
             self._pending_placement_tile   = None
             self._pending_placement_recipe = None
+            self._placement_mode           = "campfire"
             self.mode = GameMode.LOCAL
             return
 
@@ -3531,6 +3794,14 @@ class Engine:
             ring_radius=0.0, ring_max_radius=0.75, ring_width=2,
         ))
 
+    def _check_placement_valid(self, cx: int, cy: int) -> bool:
+        """Dispatch to the appropriate validity checker based on _placement_mode."""
+        if self._placement_mode == "drying":
+            return self._is_valid_drying(cx, cy)
+        elif self._placement_mode == "cooking":
+            return self._is_valid_cooking(cx, cy)
+        return self._is_valid_placement(cx, cy)
+
     def _render_placement_cursor(
         self,
         screen:   pygame.Surface,
@@ -3540,7 +3811,7 @@ class Engine:
     ) -> None:
         """Draw the placement cursor and a one-line hint."""
         cx, cy   = self._placement_cursor_x, self._placement_cursor_y
-        valid    = self._is_valid_placement(cx, cy)
+        valid    = self._check_placement_valid(cx, cy)
         color    = DISCHARGE_FLASH if valid else FRESH_WOUND
         self.look_mode.render_cursor(screen, self, cam_x, cam_y,
                                      x=cx, y=cy, color=color)
@@ -3556,10 +3827,20 @@ class Engine:
         if not font:
             return
         if valid:
-            hint = "[ ENTER ] place     [ ESC ] cancel"
+            if self._placement_mode == "drying":
+                hint = "[ ENTER ] spread here to dry     [ ESC ] cancel"
+            elif self._placement_mode == "cooking":
+                hint = "[ ENTER ] set to cook     [ ESC ] cancel"
+            else:
+                hint = "[ ENTER ] place     [ ESC ] cancel"
             col  = DISCHARGE_FLASH
         else:
-            hint = "Cannot place here.     [ ESC ] cancel"
+            if self._placement_mode == "drying":
+                hint = "Too far from the fire.     [ ESC ] cancel"
+            elif self._placement_mode == "cooking":
+                hint = "Must be placed on the fire.     [ ESC ] cancel"
+            else:
+                hint = "Cannot place here.     [ ESC ] cancel"
             col  = FRESH_WOUND
         text_surf = font.render(hint, True, col)
         x = viewport.left + (viewport.width - text_surf.get_width()) // 2
@@ -3859,6 +4140,56 @@ class Engine:
         circle_mask = dist_sq <= (active_radius ** 2)
 
         visible = raw_fov & circle_mask
+
+        # ── Light source FOV contribution ───────────────────────────
+        # For each light source the player can see, compute a secondary
+        # FOV from that source and union it with the visible mask.
+        _light_sources: list[tuple[int, int, int, float]] = []  # (lx, ly, radius, dist_to_player)
+        _max_light_radius = 0
+
+        # Terrain light sources (street lamps etc.)
+        _search_r = active_radius + 10  # generous search radius
+        _px, _py = self.player.x, self.player.y
+        _lm_w, _lm_h = self.local_map.width, self.local_map.height
+        for _slx in range(max(0, _px - _search_r), min(_lm_w, _px + _search_r + 1)):
+            for _sly in range(max(0, _py - _search_r), min(_lm_h, _py + _search_r + 1)):
+                if not bool(visible[_slx, _sly]):
+                    continue
+                _sterrain = str(self.local_map.tiles[_slx, _sly]["terrain"])
+                _std = self.data.terrain.get(_sterrain, {})
+                _semit = _std.get("light_emit", 0)
+                if _semit > 0:
+                    _sdist = abs(_slx - _px) + abs(_sly - _py)
+                    _light_sources.append((_slx, _sly, int(_semit), _sdist))
+                    _max_light_radius = max(_max_light_radius, int(_semit))
+
+        # Decor light sources (campfire_lit etc.)
+        _decor = getattr(self.local_map, "decor", {})
+        for (_dlx, _dly), _did in _decor.items():
+            if not (0 <= _dlx < _lm_w and 0 <= _dly < _lm_h):
+                continue
+            if not bool(visible[_dlx, _dly]):
+                continue
+            _dentry = self.data.decoratives.get(_did, {})
+            _demit = _dentry.get("light_emit", 0)
+            if _demit > 0:
+                _ddist = abs(_dlx - _px) + abs(_dly - _py)
+                _light_sources.append((_dlx, _dly, int(_demit), _ddist))
+                _max_light_radius = max(_max_light_radius, int(_demit))
+
+        # Cap at 20 nearest, then compute secondary FOVs
+        if _light_sources:
+            _light_sources.sort(key=lambda t: t[3])
+            for _llx, _lly, _lrad, _ in _light_sources[:20]:
+                _lfov = tcod.map.compute_fov(
+                    self.local_map.transparent,
+                    (_llx, _lly),
+                    radius=_lrad,
+                    light_walls=True,
+                    algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+                )
+                visible |= _lfov
+
         self.local_map.tiles["visible"][:] = visible
 
         # ── Passive memory — lit zones only ──────────────────────────
@@ -4314,15 +4645,18 @@ class Engine:
         })
         _apply_effects(effects, self)
 
-        # Ephemeral creatures dissolve — no corpse tile
+        # Ephemeral creatures dissolve — no corpse
         _ephemeral = creature_def.get("ephemeral", False)
         if not _ephemeral:
-            from generation.decor_utils import place_decor as _pd
+            from generation.floor_object_utils import place_floor_object as _pfo_corpse
             _by = creature_def.get("butcher_yield", {})
             _decay = _by.get("decay_turns", 200)
-            _pd(self.local_map, entity.x, entity.y, "corpse")
-            self.local_map.corpse_data[(entity.x, entity.y)]  = entity.tile
-            self.local_map.corpse_decay[(entity.x, entity.y)] = _decay
+            _corpse_item = self.item_factory.create("corpse", entity.x, entity.y)
+            if _corpse_item:
+                _corpse_item.name = f"remains of {entity.name}"
+                _corpse_item.source_creature = entity.tile
+                _corpse_item.decay_timer = _decay
+                _pfo_corpse(self.local_map, entity.x, entity.y, _corpse_item)
 
         # Bog wraith death — remove from aura state immediately
         if entity.tile == "bog_wraith":
@@ -4445,15 +4779,30 @@ class Engine:
         if not inv:
             return
 
-        items_here = self._items_at(self.player.x, self.player.y)
+        px, py = self.player.x, self.player.y
+        items_here = self._items_at(px, py)
 
         if items_here:
-            self._take_item(items_here[-1], inv)
+            if len(items_here) == 1:
+                _top = items_here[0]
+                if getattr(_top, "source_creature", None):
+                    self._interactable_butcher(px, py)
+                else:
+                    self._take_item(_top, inv)
+            else:
+                # Multiple items — open interaction cursor with selection prompt
+                self.interaction_cursor.enter([(px, py)], px, py)
+                self.interaction_cursor._selection_prompt = {
+                    "items": list(items_here),
+                    "selected": 0,
+                    "lx": px, "ly": py,
+                }
+                self.mode = GameMode.INTERACTION_CURSOR
         else:
             adjacent = self._adjacent_items()
             if not adjacent:
                 self.log.add(
-                    "There is nothing here or nearby to take.",
+                    "Nothing here.",
                     WORN_STONE,
                 )
                 return
@@ -4464,6 +4813,12 @@ class Engine:
             )
 
     def _items_at(self, x: int, y: int) -> list:
+        """Return items at tile — checks floor_objects first, falls back to entities."""
+        from generation.floor_object_utils import get_floor_objects as _gfo_at
+        floor = _gfo_at(self.local_map, x, y)
+        if floor:
+            return list(floor)
+        # Fallback: legacy entity items (during migration)
         return [
             e for e in self.entities
             if (e is not self.player and
@@ -4487,15 +4842,15 @@ class Engine:
 
     def _take_item(self, item: "Item", inv: "Inventory") -> None:
         if inv.is_full:
-            self.log.add(
-                f"You cannot carry the {item.name}. "
-                f"You are overburdened.",
-                OLD_GOLD,
-            )
+            self.log.add("Overburdened.", OLD_GOLD)
             return
         if inv.add(item):
-            self.entities.remove(item)
-            self.log.add(f"You take the {item.name}.", WORN_STONE)
+            from generation.floor_object_utils import remove_floor_object as _rfo_take
+            _rfo_take(self.local_map, item.x, item.y, item)
+            if item in self.entities:
+                self.entities.remove(item)
+            _iname = getattr(item, "name", "") or "something"
+            self.log.add(f"Thou takest the {_iname}.", WORN_STONE)
 
     # ------------------------------------------------------------------ #
     #  Spawn safety

@@ -1,6 +1,7 @@
 {
   "id": "campfire",
   "name": "Field Campfire",
+  "category": "campfire",
   "description": "A ring of stones and dry wood. Needs a spark to light.",
   "components": [
     {"tag": "fuel", "min_tier": 1, "quantity": 2},

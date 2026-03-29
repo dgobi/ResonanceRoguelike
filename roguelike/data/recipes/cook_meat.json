@@ -1,6 +1,7 @@
 {
   "id": "cook_meat",
   "name": "cook meat",
+  "category": "cooking",
   "description": "Hold raw meat over open flame until it chars. Direct heat required.",
   "known": true,
   "components": [
@@ -12,5 +13,7 @@
   "result_item": "cooked_meat",
   "passive_processing": true,
   "processing_turns": 8,
-  "processing_source": "cooking"
+  "processing_source": "cooking",
+  "processing_decor": "cooking_meat",
+  "placement_message": "Set it on the fire."
 }

@@ -747,21 +747,54 @@
       "col": 19,
       "row": 5
     },
-    "shallow_water": {
-      "sheet": "terrain",
-      "col": 18,
-      "row": 4
-    },
-    "deep_water": {
-      "sheet": "terrain",
-      "col": 18,
-      "row": 4
-    },
-    "river_water": {
-      "sheet": "terrain",
-      "col": 22,
-      "row": 1
-    },
+    "shallow_water": {"sheet": "terrain","col": 0,"row": 10},
+    "shallow_water_1": {"sheet": "terrain","col": 1,"row": 10},
+    "shallow_water_2": {"sheet": "terrain","col": 2,"row": 10},
+    "shallow_water_3": {"sheet": "terrain","col": 3,"row": 10},
+    "shallow_water_4": {"sheet": "terrain","col": 4,"row": 10},
+    "shallow_water_5": {"sheet": "terrain","col": 5,"row": 10},
+    "shallow_water_6": {"sheet": "terrain","col": 6,"row": 10},
+    "shallow_water_7": {"sheet": "terrain","col": 7,"row": 10},
+    "shallow_water_8": {"sheet": "terrain","col": 8,"row": 10},
+    "shallow_water_9": {"sheet": "terrain","col": 9,"row": 10},
+    "shallow_water_10": {"sheet": "terrain","col": 10,"row": 10},
+    "shallow_water_11": {"sheet": "terrain","col": 11,"row": 10},
+    "shallow_water_12": {"sheet": "terrain","col": 12,"row": 10},
+    "shallow_water_13": {"sheet": "terrain","col": 13,"row": 10},
+    "shallow_water_14": {"sheet": "terrain","col": 14,"row": 10},
+    "shallow_water_15": {"sheet": "terrain","col": 15,"row": 10},
+    "deep_water": {"sheet": "terrain","col": 0,"row": 9},
+    "deep_water_1": {"sheet": "terrain","col": 1,"row": 9},
+    "deep_water_2": {"sheet": "terrain","col": 2,"row": 9},
+    "deep_water_3": {"sheet": "terrain","col": 3,"row": 9},
+    "deep_water_4": {"sheet": "terrain","col": 4,"row": 9},
+    "deep_water_5": {"sheet": "terrain","col": 5,"row": 9},
+    "deep_water_6": {"sheet": "terrain","col": 6,"row": 9},
+    "deep_water_7": {"sheet": "terrain","col": 0,"row": 9},
+    "deep_water_8": {"sheet": "terrain","col": 7,"row": 9},
+    "deep_water_9": {"sheet": "terrain","col": 8,"row": 9},
+    "deep_water_10": {"sheet": "terrain","col": 10,"row": 9},
+    "deep_water_11": {"sheet": "terrain","col": 11,"row": 9},
+    "deep_water_12": {"sheet": "terrain","col": 12,"row": 9},
+    "deep_water_13": {"sheet": "terrain","col": 13,"row": 9},
+    "deep_water_14": {"sheet": "terrain","col": 14,"row": 9},
+    "deep_water_15": {"sheet": "terrain","col": 15,"row": 9},
+    "river_water": {"sheet": "terrain", "col": 0, "row": 9},
+    "river_water_1": {"sheet": "terrain", "col": 1, "row": 9},
+    "river_water_2": {"sheet": "terrain", "col": 2, "row": 9},
+    "river_water_3": {"sheet": "terrain", "col": 3, "row": 9},
+    "river_water_4": {"sheet": "terrain", "col": 4, "row": 9},
+    "river_water_5": {"sheet": "terrain", "col": 5, "row": 9},
+    "river_water_6": {"sheet": "terrain", "col": 6, "row": 9},
+    "river_water_7": {"sheet": "terrain", "col": 7, "row": 9},
+    "river_water_8": {"sheet": "terrain", "col": 8, "row": 9},
+    "river_water_9": {"sheet": "terrain", "col": 9, "row": 9},
+    "river_water_10": {"sheet": "terrain", "col": 10, "row": 9},
+    "river_water_11": {"sheet": "terrain", "col": 11, "row": 9},
+    "river_water_12": {"sheet": "terrain", "col": 12, "row": 9},
+    "river_water_13": {"sheet": "terrain", "col": 13, "row": 9},
+    "river_water_14": {"sheet": "terrain", "col": 14, "row": 9},
+    "river_water_15": {"sheet": "terrain", "col": 15, "row": 9},
     "river_bank": {
       "sheet": "terrain",
       "col": 16,
@@ -895,9 +928,19 @@
     "clay_deposit": {
       "sheet": "terrain",
       "col": 0,
-      "row": 0
+      "row": 7
     },
     "clay_deposit_depleted": {
+      "sheet": "terrain",
+      "col": 0,
+      "row": 0
+    },
+    "drying_herb": {
+      "sheet": "terrain",
+      "col": 0,
+      "row": 0
+    },
+    "cooking_meat": {
       "sheet": "terrain",
       "col": 0,
       "row": 0

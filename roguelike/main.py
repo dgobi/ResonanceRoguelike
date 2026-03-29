@@ -178,7 +178,7 @@ def _start_in_lab(engine: Engine, surface_map) -> None:
     lab_map, lab_entities = generate_submap(
         start_sub, MAP_WIDTH, MAP_HEIGHT, engine.data.terrain, data=engine.data
     )
-    spawned = engine._spawn_layout_entities(lab_entities)
+    spawned = engine._spawn_layout_entities(lab_entities, local_map=lab_map)
 
     # Cache the surface so ascending later restores it
     engine.save_manager.cache.store(

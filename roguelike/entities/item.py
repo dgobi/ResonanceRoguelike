@@ -48,6 +48,11 @@ class Item(Entity):
         self.harvest_from: str | None   = None
         self.keywords:          list         = []
         self.decay_timer:       int | None   = None
+        # Corpse identity — set on corpse floor objects to track source creature
+        self.source_creature:   str | None   = None
         # Temporary essence coating — list of {essence, strength, hits_remaining}
         # Applied via apply_to_weapon handler. Each hit consumes one charge.
         self.temporary_essence: list         = []
+        # If False, item is not removed from inventory when used as a crafting component.
+        # Set on tools, vessels, weapons, armour — anything that survives the process.
+        self.consumed_on_use:   bool         = True

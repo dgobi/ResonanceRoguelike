@@ -209,7 +209,7 @@ class TextReader:
             tint = _TINTS.get(cond, SLATE_DARK)
             engine.ui_registry.draw_panel(
                 screen, frame_rect, "weathered_temple",
-                tint_color=tint, fill_color=self.BG, fill_alpha=248,
+                tint_color=tint, fill_color=self.BG, fill_alpha=255,
             )
         else:
             bg = pygame.Surface((sw, sh))

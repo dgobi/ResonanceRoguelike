@@ -14,5 +14,6 @@
   "essence_strength": 0.3,
   "_essence_note": "Leather holds shape. It was an animal that held its form. Curing fixes that form permanently.",
   "on_use": "equip_toggle",
+  "consumed_on_use": false,
   "keywords": [{"tag": "fibrous", "tier": 1}]
 }

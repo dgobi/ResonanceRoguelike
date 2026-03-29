@@ -1,7 +1,7 @@
 {
   "id": "dried_pilgrims_woe",
   "name": "dried pilgrim's woe",
-  "description": "Pressed petals from the pilgrim's woe, dried between flat stones. The medicinal smell is stronger now.",
+  "description": "Dried pilgrim's woe petals. Deprecated — use dried_aromatic_herb.",
   "tile": "generic_item",
   "category": "consumable",
   "weight": 0.01,

@@ -7,6 +7,7 @@
   "weight": 0.6,
   "stackable": false,
   "on_use": null,
+  "consumed_on_use": false,
   "keywords": [
     {"tag": "vessel", "tier": 1},
     {"tag": "heatproof", "tier": 1}

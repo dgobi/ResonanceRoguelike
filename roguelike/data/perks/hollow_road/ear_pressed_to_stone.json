@@ -1,7 +1,8 @@
 {
   "id": "ear_pressed_to_stone",
   "name": "The Ear Pressed to Stone",
-  "affinity": "the_hollow_road",
+  "category": "The Hollow Road",
+  "cost": 1,
   "description": "Thou mayest place thy hand upon any corpse dead less than three days and ask of it one question. It will answer with what it knew at the moment of its death, not what it wished it knew. It cannot lie. It may not know.",
   "effect_type": "new_interaction",
   "effect_params": {

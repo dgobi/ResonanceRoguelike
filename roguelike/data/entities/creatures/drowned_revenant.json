@@ -4,6 +4,7 @@
   "description": "It came up from the black water. It is still going down, in a sense. Everything about it is the texture of something waterlogged.",
   "tile": "drowned_revenant",
   "blocks_movement": true,
+  "can_swim": true,
   "base_hp": 14,
   "armour_value": 2,
   "fighter": {

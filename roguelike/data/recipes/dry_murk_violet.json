@@ -1,13 +1,23 @@
 {
-  "id": "dry_murk_violet",
-  "name": "dry murk violet",
+  "id": "dry_soporific_herb",
+  "name": "dry soporific herb",
+  "category": "wildcrafting",
   "description": "Dry the stem until the soporific oils concentrate into the fibres. Takes time. Handle carefully.",
   "known": true,
-  "components": [
-    {"tag": "soporific", "min_tier": 1, "quantity": 1}
+  "requires_single_item": {
+    "tags": [
+      {"tag": "soporific", "min_tier": 1},
+      {"tag": "edible", "min_tier": 1}
+    ],
+    "max_quantity": 1
+  },
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 1}
   ],
-  "result_item": "dried_murk_violet",
+  "result_item": "dried_soporific_herb",
   "passive_processing": true,
-  "processing_turns": 35,
-  "processing_source": "drying"
+  "processing_turns": 20,
+  "processing_source": "drying",
+  "processing_decor": "drying_herb",
+  "placement_message": "Where will you spread it to dry?"
 }

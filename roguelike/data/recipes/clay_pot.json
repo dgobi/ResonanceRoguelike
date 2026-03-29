@@ -1,6 +1,7 @@
 {
   "id": "clay_pot",
   "name": "clay pot",
+  "category": "campfire",
   "description": "Shape clay by hand, then fire it in open flame until it hardens.",
   "known": true,
   "components": [
@@ -10,5 +11,10 @@
     {"tag": "burning", "min_tier": 2}
   ],
   "result_item": "clay_pot",
-  "apply_turns": 5
+  "passive_processing": true,
+  "processing_turns": 12,
+  "processing_source": "cooking",
+  "processing_decor": "cooking_meat",
+  "placement_message": "Where will you set it to fire?",
+  "completion_message": "The clay has fired. A crude pot."
 }

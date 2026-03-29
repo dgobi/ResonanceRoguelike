@@ -1,7 +1,7 @@
 {
   "id": "dried_murk_violet",
   "name": "dried murk violet",
-  "description": "A murk violet stem, dried. The soporific compounds have intensified. The smell is sour and faintly sweet.",
+  "description": "A murk violet stem, dried. Deprecated — use dried_soporific_herb.",
   "tile": "generic_item",
   "category": "consumable",
   "weight": 0.01,

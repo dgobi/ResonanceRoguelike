@@ -2,7 +2,7 @@
     "id": "lithic_seep",
     "name": "Lithic Seep",
     "description": "What dies near you leaves a residue. You have learned to fix it in place.",
-    "category": "Creation",
+    "category": "The Sutured Work",
     "cost": 2,
     "effects": [
         "On kill, a resonance stone forms at the creature's position.",

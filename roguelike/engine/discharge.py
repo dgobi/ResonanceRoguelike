@@ -239,6 +239,11 @@ def _spawn_creatures(
             continue
         if not engine.local_map.walkable[tx, ty]:
             continue
+        # Check creature_passable terrain restriction
+        _terrain_id = str(engine.local_map.tiles[tx, ty]["terrain"])
+        _td = engine.data.terrain.get(_terrain_id, {})
+        if not _td.get("creature_passable", True):
+            continue
         # Don't spawn on the player
         if tx == engine.player.x and ty == engine.player.y:
             continue

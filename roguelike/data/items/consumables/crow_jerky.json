@@ -11,10 +11,6 @@
     {
       "tag": "edible",
       "tier": 2
-    },
-    {
-      "tag": "bitter",
-      "tier": 1
     }
   ],
   "nutrition": 0.35,

@@ -2,7 +2,7 @@
     "id": "the_indifference",
     "name": "The Indifference",
     "description": "You have stopped flinching at what you are becoming. The change moves through you more cleanly now.",
-    "category": "Ontology",
+    "category": "The Bound Name",
     "cost": 3,
     "effects": [
         "Corruption threshold warnings are no longer shown.",

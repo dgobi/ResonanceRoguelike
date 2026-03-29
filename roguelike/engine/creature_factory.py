@@ -120,15 +120,23 @@ class CreatureFactory:
             if not creature_id:
                 continue
 
+            cdef = self.data.entities.get(creature_id, {})
+            _can_swim = cdef.get("can_swim", False)
             attempts = 0
             while attempts < 20:
                 attempts += 1
                 x = rng.randint(1, local_map.width  - 2)
                 y = rng.randint(1, local_map.height - 2)
-                if local_map.walkable[x, y]:
-                    actor = self.spawn(creature_id, x, y, rng)
-                    if actor:
-                        spawned.append(actor)
-                    break
+                if not local_map.walkable[x, y]:
+                    continue
+                # Check creature_passable terrain restriction
+                _terrain_id = str(local_map.tiles[x, y]["terrain"])
+                _td = self.data.terrain.get(_terrain_id, {})
+                if not _td.get("creature_passable", True) and not _can_swim:
+                    continue
+                actor = self.spawn(creature_id, x, y, rng)
+                if actor:
+                    spawned.append(actor)
+                break
 
         return spawned

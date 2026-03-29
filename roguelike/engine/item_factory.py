@@ -63,6 +63,10 @@ class ItemFactory:
         # Crafting keyword tags
         item.keywords = defn.get("keywords", [])
 
+        # Whether this item is consumed when used as a crafting component.
+        # Default True (consumable). Set False on tools, weapons, vessels, armour.
+        item.consumed_on_use = defn.get("consumed_on_use", True)
+
         return item
 
     def create_at_player(

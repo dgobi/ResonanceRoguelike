@@ -112,7 +112,7 @@ class HealthScreen:
         popup = pygame.Surface((pw, ph), pygame.SRCALPHA)
         engine.ui_registry.draw_panel(
             popup, pygame.Rect(0, 0, pw, ph), "weathered_temple",
-            tint_color=self.BORDER, fill_color=self.BG, fill_alpha=252,
+            tint_color=self.BORDER, fill_color=self.BG, fill_alpha=255,
         )
 
         PAD = UI_PANEL_INSET

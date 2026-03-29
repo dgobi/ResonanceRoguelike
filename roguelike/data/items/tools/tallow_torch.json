@@ -7,6 +7,7 @@
   "weight": 0.3,
   "stackable": false,
   "on_use": "equip_light",
+  "consumed_on_use": false,
   "_essence_note": "Fire is Quickening made visible. Tallow burns fast and hungrily — animal fat converting itself into light and heat.",
   "keywords": [
     {

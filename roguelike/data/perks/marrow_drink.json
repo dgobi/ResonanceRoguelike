@@ -2,7 +2,7 @@
     "id": "marrow_drink",
     "name": "Marrow Drink",
     "description": "Something in you has learned to feed. It is not a pleasant thing to have learned.",
-    "category": "Viscera",
+    "category": "The Consuming",
     "cost": 2,
     "effects": [
         "Recover 1 HP per turn while standing on a blood, bone dust, or fluid tile."

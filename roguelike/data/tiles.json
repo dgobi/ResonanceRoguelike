@@ -2724,6 +2724,20 @@
       "color_bg": [6, 6, 8],
       "color_fg_dark": [10, 9, 8],
       "color_bg_dark": [4, 5, 9]
+    },
+    "drying_herb": {
+      "ascii": "~",
+      "color_fg": [168, 164, 100],
+      "color_bg": [6, 6, 8],
+      "color_fg_dark": [14, 14, 9],
+      "color_bg_dark": [4, 5, 9]
+    },
+    "cooking_meat": {
+      "ascii": "%",
+      "color_fg": [188, 89, 60],
+      "color_bg": [61, 20, 48],
+      "color_fg_dark": [12, 8, 6],
+      "color_bg_dark": [4, 5, 9]
     }
   }
 }

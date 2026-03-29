@@ -46,15 +46,34 @@ class LocalMap:
         self.corpse_data:  dict[tuple[int, int], str] = {}
         self.corpse_decay: dict[tuple[int, int], int] = {}
 
-        # Passive processing queue — items being transformed over time.
+        # Processing layer — (lx, ly) -> processing entry dict.
+        # Replaces the old processing_queue list with O(1) position lookup.
         # Each entry: {
         #   "item_id": str,       # result item to create on completion
         #   "turns_remaining": int,
-        #   "x": int, "y": int,   # where to deliver result (player position at initiation)
-        #   "source": str,        # recipe id, for log messages
+        #   "source": str,        # "drying" or "cooking"
+        #   "decor_id": str,      # processing decor to clear on completion (empty for on_fire)
+        #   "on_fire": bool,      # true = cooking on campfire, no decor placed
+        #   "completion_message": str,  # per-recipe override
         # }
+        # Never write directly — use processing_layer[(lx,ly)] = entry.
         # Serialised with the local_map via pickle (CachedChunk).
+        self.processing_layer: dict[tuple[int, int], dict] = {}
+
+        # Backward compat alias — old code that still references processing_queue
+        # gets redirected. Will be removed once all references are migrated.
         self.processing_queue: list[dict] = []
+
+        # Floor objects layer — (lx, ly) -> list[Item].
+        # Multiple items can occupy the same tile.
+        # Never write directly — use generation.floor_object_utils functions.
+        # Serialised with the local_map via pickle (CachedChunk).
+        self.floor_objects: dict[tuple[int, int], list] = {}
+
+        # Items completed in a hot-cached chunk (player not present).
+        # Delivered to floor when player enters the chunk.
+        # Each entry: {"item_id": str, "lx": int, "ly": int}
+        self.ready_items: list[dict] = []
 
     def set_tile(self, x: int, y: int, terrain: str,
                  walkable: bool, transparent: bool) -> None:

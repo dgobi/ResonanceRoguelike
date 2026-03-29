@@ -1,13 +1,15 @@
 {
-  "id": "coldbell_extract",
+  "id": "coldbell_extract_deprecated",
+  "_deprecated": true,
   "name": "coldbell extract",
+  "category": "alchemy",
   "description": "Steep dried coldbell in a clay vessel over heat. The resonance draws out into the water.",
   "known": true,
   "components": [
     {"tag": "resonant", "min_tier": 2, "quantity": 1}
   ],
   "requires_ambient": [
-    {"tag": "burning", "min_tier": 2},
+    {"tag": "burning", "min_tier": 1},
     {"tag": "vessel", "min_tier": 1}
   ],
   "result_item": "coldbell_extract",

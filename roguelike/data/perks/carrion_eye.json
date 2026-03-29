@@ -2,7 +2,7 @@
     "id": "carrion_eye",
     "name": "Carrion Eye",
     "description": "Something in the back of your eyes has changed. The residue of the dead becomes legible.",
-    "category": "Perception",
+    "category": "The Witnessing",
     "cost": 1,
     "effects": [
         "On kill: if a blood tile exists within 3 tiles, heal 1 HP to the least damaged body part.",

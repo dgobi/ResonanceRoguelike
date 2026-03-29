@@ -1,14 +1,23 @@
 {
-  "id": "dry_pilgrims_woe",
-  "name": "dry pilgrim's woe",
-  "description": "Press the petals flat and leave them. The medicinal compounds strengthen as they dry.",
+  "id": "dry_aromatic_herb",
+  "name": "dry aromatic herb",
+  "category": "wildcrafting",
+  "description": "Press the petals flat and leave them near heat. The medicinal compounds strengthen as they dry.",
   "known": true,
-  "components": [
-    {"tag": "fibrous", "min_tier": 1, "quantity": 1},
-    {"tag": "aromatic", "min_tier": 1, "quantity": 1}
+  "requires_single_item": {
+    "tags": [
+      {"tag": "aromatic", "min_tier": 1},
+      {"tag": "edible", "min_tier": 1}
+    ],
+    "max_quantity": 1
+  },
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 1}
   ],
-  "result_item": "dried_pilgrims_woe",
+  "result_item": "dried_aromatic_herb",
   "passive_processing": true,
-  "processing_turns": 30,
-  "processing_source": "drying"
+  "processing_turns": 20,
+  "processing_source": "drying",
+  "processing_decor": "drying_herb",
+  "placement_message": "Where will you spread it to dry?"
 }

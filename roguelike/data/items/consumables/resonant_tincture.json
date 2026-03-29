@@ -1,0 +1,19 @@
+{
+  "id": "resonant_tincture",
+  "name": "resonant tincture",
+  "description": "Grey water. Flat taste. Something in the blood stirs.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": true,
+  "on_use": "drink",
+  "hydration": 50,
+  "drink_message": "Cold. The resonance in the body quietens briefly.",
+  "on_use_effects": [
+    {"type": "reduce_resonance_exposure", "amount": 0.15}
+  ],
+  "keywords": [
+    {"tag": "resonant", "tier": 2},
+    {"tag": "solvent", "tier": 1}
+  ]
+}

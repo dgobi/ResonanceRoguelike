@@ -2,7 +2,7 @@
     "id": "attuned",
     "name": "Attuned",
     "description": "The stone in your bones remembers the frequency. Blows find less purchase than they should.",
-    "category": "Resonance",
+    "category": "The Witnessing",
     "cost": 2,
     "effects": [
         "While resonance exposure is above 0.3, effective AV increases by 2.",

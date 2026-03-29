@@ -161,6 +161,24 @@ def _generate_submap_from_layout(
     with open(layout_path, encoding="utf-8") as f:
         layout = json.load(f)
 
+    # DEBUG_MODE layout validation
+    from config import DEBUG_MODE
+    if DEBUG_MODE:
+        _lay_w = layout.get("width", 0)
+        _lay_rows = layout.get("layers", [])
+        for _ri, _rr in enumerate(_lay_rows):
+            if len(_rr) != _lay_w:
+                print(f"[LAYOUT ERROR] {layout.get('id','?')} row {_ri} has length {len(_rr)}, expected {_lay_w}")
+        _leg = layout.get("legend", {})
+        _wall_ch = {ch for ch, tid in _leg.items() if tid in ("wall", "old_wall", None) or tid is None}
+        for _st in layout.get("special_tiles", []):
+            _stx, _sty = _st.get("x", -1), _st.get("y", -1)
+            if 0 <= _sty < len(_lay_rows) and 0 <= _stx < len(_lay_rows[_sty]):
+                if _lay_rows[_sty][_stx] in _wall_ch:
+                    print(f"[LAYOUT ERROR] {layout.get('id','?')} special_tile at ({_stx},{_sty}) is on wall char '{_lay_rows[_sty][_stx]}'")
+            else:
+                print(f"[LAYOUT ERROR] {layout.get('id','?')} special_tile at ({_stx},{_sty}) is out of bounds")
+
     # Fill map with walls
     wall = terrain_data.get("wall", terrain_data["floor"])
     local_map = LocalMap(map_width, map_height)
@@ -571,17 +589,15 @@ def carve_connectors(
 
     EDGE_TO_DIR = {"north": "N", "south": "S", "east": "E", "west": "W"}
 
-    # Collect all road edges first; carve as a single network
+    # Collect all road and river edges first; carve as networks
     road_edges: list[str] = []
+    river_edges: list[str] = []
 
     for edge, connectors in edges.items():
         for connector in connectors:
             if connector.connector_type == ConnectorType.RIVER:
-                _carve_river_connector(
-                    local_map, terrain_data,
-                    edge, connector.position,
-                    map_width, map_height, rng,
-                )
+                if edge in EDGE_TO_DIR and EDGE_TO_DIR[edge] not in river_edges:
+                    river_edges.append(EDGE_TO_DIR[edge])
             elif connector.connector_type == ConnectorType.ROAD:
                 if edge in EDGE_TO_DIR and EDGE_TO_DIR[edge] not in road_edges:
                     road_edges.append(EDGE_TO_DIR[edge])
@@ -591,6 +607,13 @@ def carve_connectors(
                     edge, connector.position,
                     map_width, map_height, rng,
                 )
+
+    # Carve rivers as paired network (same pairing model as roads)
+    if river_edges:
+        _carve_river_network(
+            local_map, terrain_data, river_edges,
+            map_width, map_height, rng,
+        )
 
     # Carve road network — skip town chunks (town_gen handles their roads)
     if road_edges and town_id == -1:
@@ -625,48 +648,46 @@ def _opposite_edge(edge: str) -> str:
             "east": "west",   "west": "east"}[edge]
 
 
-def _carve_river_connector(
+def _river_endpoint(direction: str, w: int, h: int,
+                    rng: random.Random) -> tuple[int, int]:
+    """Local tile entry/exit point for a river direction. Same pattern as roads."""
+    mid_x, mid_y = w // 2, h // 2
+    jitter = rng.randint(-2, 2)
+    if direction == "N":  return (mid_x + jitter, 0)
+    if direction == "S":  return (mid_x + jitter, h - 1)
+    if direction == "E":  return (w - 1, mid_y + jitter)
+    if direction == "W":  return (0, mid_y + jitter)
+    return (mid_x, mid_y)  # centre
+
+
+def _carve_river_pair(
     local_map: LocalMap,
     terrain_data: dict,
-    entry_edge: str,
-    position: float,
+    x0: int, y0: int,
+    x1: int, y1: int,
     map_width: int,
     map_height: int,
     rng: random.Random,
 ) -> None:
     """
-    Carve a river corridor from the entry edge to the opposite edge.
-    Core: 8-12 tiles wide of river_water. Bank: 2-3 tiles of river_bank
-    and river_stones. Rivers cut through all terrain.
+    Carve a river corridor from (x0,y0) to (x1,y1).
+    Core: 4-6 tiles half-width of river_water. Bank: 2-3 tiles of
+    river_bank and river_stones. Uses midpoint displacement for winding.
     """
     rw = terrain_data.get("river_water",  terrain_data.get("shallow_water", terrain_data["floor"]))
     rb = terrain_data.get("river_bank",   terrain_data.get("gravel",        terrain_data["floor"]))
     rs = terrain_data.get("river_stones", terrain_data.get("gravel",        terrain_data["floor"]))
 
-    start_x, start_y = _edge_to_tile(
-        entry_edge, position, map_width, map_height
-    )
-    exit_edge = _opposite_edge(entry_edge)
-    end_x, end_y = _edge_to_tile(
-        exit_edge, position + rng.uniform(-0.1, 0.1),
-        map_width, map_height,
-    )
-    end_x = max(1, min(map_width  - 2, end_x))
-    end_y = max(1, min(map_height - 2, end_y))
+    # Half-width: 4-6 tiles, deterministic from start position
+    half_width = 4 + ((x0 * 7 + y0 * 13) % 3)
 
     # Midpoint displacement for mild winding
-    mid_x = (start_x + end_x) // 2
-    mid_y = (start_y + end_y) // 2
-    if entry_edge in ("north", "south"):
-        mid_x = max(2, min(map_width  - 3, mid_x + rng.randint(-6, 6)))
-    else:
-        mid_y = max(2, min(map_height - 3, mid_y + rng.randint(-6, 6)))
+    mid_x = (x0 + x1) // 2 + rng.randint(-6, 6)
+    mid_y = (y0 + y1) // 2 + rng.randint(-6, 6)
+    mid_x = max(2, min(map_width  - 3, mid_x))
+    mid_y = max(2, min(map_height - 3, mid_y))
 
-    # Half-width: 4-6 tiles, deterministic from start position
-    half_width = 4 + ((start_x * 7 + start_y * 13) % 3)
-
-    def _stamp_at(cx, cy) -> None:
-        """Stamp river water core and bank around a path point."""
+    def _stamp_at(cx: int, cy: int) -> None:
         outer = half_width + 3
         for ox in range(-outer, outer + 1):
             for oy in range(-outer, outer + 1):
@@ -688,16 +709,30 @@ def _carve_river_connector(
                         local_map.set_tile(nx, ny, "river_bank",
                                            rb["walkable"], rb["transparent"])
 
-    # Build two-segment path: start→mid→end (~60 steps each half)
-    def _lerp_segment(ax, ay, bx, by, steps: int) -> None:
-        for i in range(steps + 1):
-            t  = i / max(steps, 1)
-            px = int(ax + (bx - ax) * t)
-            py = int(ay + (by - ay) * t)
-            _stamp_at(px, py)
+    # Walk the path: start -> mid -> end
+    path = _walk_tiles(x0, y0, mid_x, mid_y) + _walk_tiles(mid_x, mid_y, x1, y1)[1:]
+    for px, py in path:
+        _stamp_at(px, py)
 
-    _lerp_segment(start_x, start_y, mid_x, mid_y, 30)
-    _lerp_segment(mid_x, mid_y, end_x, end_y, 30)
+
+def _carve_river_network(
+    local_map: LocalMap,
+    terrain_data: dict,
+    connections: list[str],
+    w: int, h: int,
+    rng: random.Random,
+) -> None:
+    """
+    Carve river terrain for all connection pairs in this chunk.
+    Uses same pair model as roads so bends/T-junctions/crossroads are correct.
+    """
+    pairs = _road_pairs(connections)
+    for a, b in pairs:
+        p0 = _river_endpoint(a, w, h, rng)
+        p1 = _river_endpoint(b, w, h, rng)
+        _carve_river_pair(local_map, terrain_data,
+                          p0[0], p0[1], p1[0], p1[1],
+                          w, h, rng)
 
 
 

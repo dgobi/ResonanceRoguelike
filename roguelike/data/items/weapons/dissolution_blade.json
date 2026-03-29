@@ -12,5 +12,6 @@
   "essence": "Dissolution",
   "essence_strength": 0.5,
   "on_use": "equip_toggle",
+  "consumed_on_use": false,
   "keywords": [{"tag": "cutting", "tier": 2}, {"tag": "corrosive", "tier": 2}]
 }
