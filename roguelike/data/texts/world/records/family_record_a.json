@@ -1,0 +1,9 @@
+{
+  "id": "family_record_a",
+  "title": "A Family Record Book",
+  "type": "record",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Births: Solenne, Year of Quiet Harvest. March, stillborn, same year. Bek, Year of Three Floods.\n\nDeaths: Oldfather Pesk, of lung-rot. Mother Veth, of the changing sickness. Solenne — she walked into the bell quarter and did not come back.\n\n[In a shaking hand:]\n\nI do not want to write what happened to Bek.", "damaged": false}]
+}

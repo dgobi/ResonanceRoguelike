@@ -1,0 +1,9 @@
+{
+  "id": "letter_d",
+  "title": "A Letter, Unsent",
+  "type": "letter",
+  "condition": "fragmentary",
+  "reads_as": "single",
+  "lacunae": true,
+  "pages": [{"text": "We had an argument about the standing stone in the east field. I wanted to pull it down. You said it was bad luck to touch them. We were both right about different things and neither of us knew it. I have been thinking about this for [DAMAGED] days and I cannot stop.", "damaged": true}]
+}

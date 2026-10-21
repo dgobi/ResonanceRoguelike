@@ -1,0 +1,72 @@
+[
+  {
+    "comment": "Terrain scatter — placed within pulse radius on walkable tiles",
+    "type": "terrain",
+    "terrain_id": "coldbell_flower",
+    "weight": 40,
+    "min_corruption": 0.0,
+    "biomes": null,
+    "max_per_pulse": 6,
+    "bell_types": ["intact", "cracked"]
+  },
+  {
+    "comment": "Resonance stone fragments — only intact bell, blocks movement",
+    "type": "terrain",
+    "terrain_id": "resonance_stone",
+    "weight": 20,
+    "min_corruption": 0.15,
+    "biomes": null,
+    "max_per_pulse": 3,
+    "bell_types": ["intact"]
+  },
+  {
+    "comment": "Bone dust scatter — intact bell only, requires corruption",
+    "type": "terrain",
+    "terrain_id": "bone_dust",
+    "weight": 15,
+    "min_corruption": 0.25,
+    "biomes": null,
+    "max_per_pulse": 4,
+    "bell_types": ["intact"]
+  },
+  {
+    "comment": "Grave thing — summoned by heavy resonance discharge",
+    "type": "creature",
+    "creature_id": "grave_thing",
+    "weight": 25,
+    "min_corruption": 0.30,
+    "biomes": null,
+    "max_per_pulse": 2,
+    "bell_types": ["intact"]
+  },
+  {
+    "comment": "Barrow wight — corrupted soil, intact bell only",
+    "type": "creature",
+    "creature_id": "barrow_wight",
+    "weight": 15,
+    "min_corruption": 0.45,
+    "biomes": ["heath", "plains", "drowned_wood"],
+    "max_per_pulse": 1,
+    "bell_types": ["intact"]
+  },
+  {
+    "comment": "Hollow revenant — resonance summons the hollowed",
+    "type": "creature",
+    "creature_id": "hollow_revenant",
+    "weight": 20,
+    "min_corruption": 0.40,
+    "biomes": null,
+    "max_per_pulse": 2,
+    "bell_types": ["intact"]
+  },
+  {
+    "comment": "Bog wraith — swamp and drowned wood intact bell discharge",
+    "type": "creature",
+    "creature_id": "bog_wraith",
+    "weight": 18,
+    "min_corruption": 0.35,
+    "biomes": ["swamp", "drowned_wood"],
+    "max_per_pulse": 1,
+    "bell_types": ["intact"]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "id": "stalker_meat",
+  "name": "Stalker Meat",
+  "description": "Dense and close-fibred. The animal was efficient. The meat reflects this. High in something the body can use immediately.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.5,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "vital",
+      "tier": 1
+    }
+  ]
+}

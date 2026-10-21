@@ -1,0 +1,43 @@
+{
+  "id": "collapsed_house_a",
+  "category": "ruins",
+  "width": 10,
+  "height": 8,
+  "facing": "south",
+  "condition": "collapsed",
+  "district_weights": {
+    "residential": 2,
+    "ruins": 5
+  },
+  "interior_loot_table": "residential_common",
+  "description": "A fully collapsed house. Only wall stubs remain. Floor partially accessible through rubble.",
+  "legend": {
+    "#": "wall",
+    "r": "rock",
+    ".": "floor",
+    "w": "worn_stone",
+    " ": null
+  },
+  "layers": [
+    "##r#r#####",
+    "#.......r#",
+    "r.........r",
+    "#....r....#",
+    "r.........#",
+    "#...r.....r",
+    "#.......r.#",
+    "##r###r####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": [
+        "ruins_scatter"
+      ]
+    }
+  ],
+  "note": "PLACEHOLDER — redesign. Rock tiles = rubble/fallen masonry. Partial floor accessible. No door."
+}

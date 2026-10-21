@@ -1,0 +1,4425 @@
+{
+  "version": 2,
+  "words": [
+    {
+      "id": "vrath",
+      "deep": "vrath",
+      "common": "threshold",
+      "concept": "a boundary between states, a liminal point",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 1,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "sketh",
+      "deep": "sketh",
+      "common": "to remember",
+      "concept": "the act of holding a past state in present awareness",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 2,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "urath",
+      "deep": "urath",
+      "common": "the dead",
+      "concept": "those who have ceased, collectively",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 3,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "quz",
+      "deep": "quz",
+      "common": "listen",
+      "concept": "to receive meaning through attention",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 4,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "keth",
+      "deep": "keth",
+      "common": "stone",
+      "concept": "the primary material, carrier of resonance",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 5,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vrass",
+      "deep": "vrass",
+      "common": "the pattern",
+      "concept": "underlying structure that precedes visible form",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 6,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "dur",
+      "deep": "dur",
+      "common": "before",
+      "concept": "that which preceded — temporal and causal",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 7,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skur",
+      "deep": "skur",
+      "common": "open",
+      "concept": "permeable, allowing passage",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 8,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhal",
+      "deep": "zhal",
+      "common": "the bell",
+      "concept": "the instrument of resonance, also means the system itself",
+      "category": "legacy",
+      "tier": 4,
+      "glyph_seed": 9,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "greth",
+      "deep": "greth",
+      "common": "binds",
+      "concept": "the active property of binding, not the noun",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 10,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kur",
+      "deep": "kur",
+      "common": "the void",
+      "concept": "absence, not emptiness but negation",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 11,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "uthar",
+      "deep": "uthar",
+      "common": "speaks",
+      "concept": "to make meaning through sound, active form",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 12,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "voss",
+      "deep": "voss",
+      "common": "bone",
+      "concept": "structural material, carries resonance of origin",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 13,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skral",
+      "deep": "skral",
+      "common": "truth",
+      "concept": "the actual state of a thing, independent of observation",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 14,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mrath",
+      "deep": "mrath",
+      "common": "the hollow",
+      "concept": "a being or space emptied of its original content",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 15,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "grath",
+      "deep": "grath",
+      "common": "to call",
+      "concept": "to summon through sound or intention",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 16,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhar",
+      "deep": "zhar",
+      "common": "song",
+      "concept": "structured resonance with intention behind it",
+      "category": "legacy",
+      "tier": 1,
+      "glyph_seed": 17,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhak",
+      "deep": "zhak",
+      "common": "to cut",
+      "concept": "clean severance, no remainder",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1001,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruun",
+      "deep": "kruun",
+      "common": "to end",
+      "concept": "cessation, the last act",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1002,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "sveth",
+      "deep": "sveth",
+      "common": "to seek",
+      "concept": "purposeful movement toward unknown",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1003,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thaass",
+      "deep": "thaass",
+      "common": "to hide",
+      "concept": "place beyond perception deliberately",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1004,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkurk",
+      "deep": "nkurk",
+      "common": "to remain",
+      "concept": "persist when others have not",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1005,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghael",
+      "deep": "ghael",
+      "common": "to strike",
+      "concept": "force applied with intent",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1006,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "drouv",
+      "deep": "drouv",
+      "common": "to change",
+      "concept": "move between two stable states",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1007,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mbuurv",
+      "deep": "mbuurv",
+      "common": "to build",
+      "concept": "impose form on raw material",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1008,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkiing",
+      "deep": "lkiing",
+      "common": "to open",
+      "concept": "make permeable, allow passage",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1009,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptaarn",
+      "deep": "ptaarn",
+      "common": "to bind",
+      "concept": "constrain through active force",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1010,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnurk",
+      "deep": "mnurk",
+      "common": "to fall",
+      "concept": "descent without resistance",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1011,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vraell",
+      "deep": "vraell",
+      "common": "to call",
+      "concept": "summon through sound or will",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1012,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skourk",
+      "deep": "skourk",
+      "common": "to consume",
+      "concept": "take irreversibly into the self",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1013,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkaeth",
+      "deep": "tkaeth",
+      "common": "to carry",
+      "concept": "bear a thing between places",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1014,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkiiv",
+      "deep": "kkiiv",
+      "common": "to wait",
+      "concept": "hold action in suspension",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1015,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssaaq",
+      "deep": "tssaaq",
+      "common": "to mark",
+      "concept": "leave permanent trace",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1016,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "aqurm",
+      "deep": "aqurm",
+      "common": "to give",
+      "concept": "transfer with deliberate intention",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1017,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tlaarr",
+      "deep": "tlaarr",
+      "common": "to wake",
+      "concept": "emerge from dormant state",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1018,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mboel",
+      "deep": "mboel",
+      "common": "to seal",
+      "concept": "close a boundary completely",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1019,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nghaekh",
+      "deep": "nghaekh",
+      "common": "to descend",
+      "concept": "move toward depth",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1020,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nhuurk",
+      "deep": "nhuurk",
+      "common": "to reveal",
+      "concept": "make visible what was concealed",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1021,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "qzhiiss",
+      "deep": "qzhiiss",
+      "common": "to break",
+      "concept": "destroy integrity of a form",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1022,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kpxaatl",
+      "deep": "kpxaatl",
+      "common": "to dream",
+      "concept": "experience without external input",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1023,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "dzhurv",
+      "deep": "dzhurv",
+      "common": "to flee",
+      "concept": "move away from threat",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1024,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "psaell",
+      "deep": "psaell",
+      "common": "to grow",
+      "concept": "increase through accumulation",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1025,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhoakk",
+      "deep": "zhoakk",
+      "common": "to gather",
+      "concept": "bring dispersed things into proximity",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1026,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "krurkh",
+      "deep": "krurkh",
+      "common": "to name",
+      "concept": "assign identity to a thing",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1027,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svuurk",
+      "deep": "svuurk",
+      "common": "to protect",
+      "concept": "interpose between thing and harm",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1028,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "therrk",
+      "deep": "therrk",
+      "common": "to dig",
+      "concept": "remove material to create depth",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1029,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkaevsh",
+      "deep": "nkaevsh",
+      "common": "to hold",
+      "concept": "maintain in current state",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1030,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghiint",
+      "deep": "ghiint",
+      "common": "to remember",
+      "concept": "bring past into present awareness",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1031,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "droass",
+      "deep": "droass",
+      "common": "to return",
+      "concept": "give a thing back to its origin",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1032,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmurkhn",
+      "deep": "bmurkhn",
+      "common": "to speak",
+      "concept": "make meaning through sound",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1033,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkuurm",
+      "deep": "lkuurm",
+      "common": "to listen",
+      "concept": "receive meaning through attention",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1034,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptaevshk",
+      "deep": "ptaevshk",
+      "common": "to shape",
+      "concept": "impose geometry on a thing",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1035,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnyrk",
+      "deep": "mnyrk",
+      "common": "to resist",
+      "concept": "maintain form against pressure",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1036,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vraetl",
+      "deep": "vraetl",
+      "common": "to ascend",
+      "concept": "move toward higher or lighter state",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1037,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skoull",
+      "deep": "skoull",
+      "common": "to scatter",
+      "concept": "disperse a gathered thing",
+      "category": "action",
+      "tier": 1,
+      "glyph_seed": 1038,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkuuvsh",
+      "deep": "tkuuvsh",
+      "common": "to know",
+      "concept": "hold a thing in permanent awareness",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1039,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkoarr",
+      "deep": "kkoarr",
+      "common": "to warn",
+      "concept": "signal danger through deliberate action",
+      "category": "action",
+      "tier": 2,
+      "glyph_seed": 1040,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhuurq",
+      "deep": "zhuurq",
+      "common": "the void",
+      "concept": "absolute absence — negation not emptiness",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1041,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruaell",
+      "deep": "kruaell",
+      "common": "the pattern",
+      "concept": "underlying order preceding visible form",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1042,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svoakk",
+      "deep": "svoakk",
+      "common": "the first",
+      "concept": "that which preceded all else",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1043,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tharrk",
+      "deep": "tharrk",
+      "common": "the deep",
+      "concept": "ancient, layered, pressured — quality not direction",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1044,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkiiss",
+      "deep": "nkiiss",
+      "common": "the cycle",
+      "concept": "return of a state after transformation",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1045,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghourkh",
+      "deep": "ghourkh",
+      "common": "the weight",
+      "concept": "felt presence of accumulated history",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1046,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "draent",
+      "deep": "draent",
+      "common": "the between",
+      "concept": "state existing in transitions",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1047,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmaarr",
+      "deep": "bmaarr",
+      "common": "the law",
+      "concept": "structural like geometry — not moral",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1048,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkaevsh",
+      "deep": "lkaevsh",
+      "common": "the wound",
+      "concept": "permanent alteration to a system",
+      "category": "cosmic",
+      "tier": 3,
+      "glyph_seed": 1049,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptuurll",
+      "deep": "ptuurll",
+      "common": "the witness",
+      "concept": "that which observes and thereby changes",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1050,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnaekh",
+      "deep": "mnaekh",
+      "common": "the resonance",
+      "concept": "property of stone that carries tone",
+      "category": "cosmic",
+      "tier": 3,
+      "glyph_seed": 1051,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vriirrk",
+      "deep": "vriirrk",
+      "common": "the origin",
+      "concept": "point from which a thing began",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1052,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skaatl",
+      "deep": "skaatl",
+      "common": "the dreaming",
+      "concept": "awareness persisting without a body",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1053,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkouv",
+      "deep": "tkouv",
+      "common": "the held",
+      "concept": "something maintained against dissolution",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1054,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkurrm",
+      "deep": "kkurrm",
+      "common": "the descent",
+      "concept": "movement toward a more ancient state",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1055,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssaell",
+      "deep": "tssaell",
+      "common": "the silence",
+      "concept": "absence of resonance — cessation not peace",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1056,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "aquull",
+      "deep": "aquull",
+      "common": "the tone",
+      "concept": "specific resonant frequency — not sound generally",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1057,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tlaakk",
+      "deep": "tlaakk",
+      "common": "the edge",
+      "concept": "boundary where a thing stops being itself",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1058,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mboerr",
+      "deep": "mboerr",
+      "common": "the current",
+      "concept": "directional force moving through a medium",
+      "category": "cosmic",
+      "tier": 3,
+      "glyph_seed": 1059,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nghaavn",
+      "deep": "nghaavn",
+      "common": "the fracture",
+      "concept": "break that changes how a thing resonates",
+      "category": "cosmic",
+      "tier": 3,
+      "glyph_seed": 1060,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nhuuth",
+      "deep": "nhuuth",
+      "common": "the all",
+      "concept": "totality — completeness not just quantity",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1061,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "qzhaarrk",
+      "deep": "qzhaarrk",
+      "common": "the true name",
+      "concept": "designation a thing has in the deep tongue",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1062,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kpxiiss",
+      "deep": "kpxiiss",
+      "common": "the consuming",
+      "concept": "entropic process at civilisational scale",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1063,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "dzhuurv",
+      "deep": "dzhuurv",
+      "common": "the mark",
+      "concept": "permanent alteration left by significant event",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1064,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "psourk",
+      "deep": "psourk",
+      "common": "the unseen",
+      "concept": "what exists but cannot be perceived directly",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1065,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhaetl",
+      "deep": "zhaetl",
+      "common": "the turning",
+      "concept": "point at which a system changes direction",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1066,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruurq",
+      "deep": "kruurq",
+      "common": "the ancient",
+      "concept": "quality of having preceded current understanding",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1067,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "sviirrk",
+      "deep": "sviirrk",
+      "common": "the geometry",
+      "concept": "precise arrangement underlying a structure",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1068,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thoall",
+      "deep": "thoall",
+      "common": "the remnant",
+      "concept": "what persists after the original has gone",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1069,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkaatl",
+      "deep": "nkaatl",
+      "common": "the unspoken",
+      "concept": "meaning that exists without being stated",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1070,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghuurnt",
+      "deep": "ghuurnt",
+      "common": "the return",
+      "concept": "a thing coming back to its origin state",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1071,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "druukh",
+      "deep": "druukh",
+      "common": "the pressure",
+      "concept": "accumulated force seeking release",
+      "category": "cosmic",
+      "tier": 4,
+      "glyph_seed": 1072,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmaevsh",
+      "deep": "bmaevsh",
+      "common": "the observer",
+      "concept": "presence that changes what it watches",
+      "category": "cosmic",
+      "tier": 3,
+      "glyph_seed": 1073,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkiiss",
+      "deep": "lkiiss",
+      "common": "the signal",
+      "concept": "deliberate mark left for future reading",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1074,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptarrk",
+      "deep": "ptarrk",
+      "common": "the stratum",
+      "concept": "one layer in a geological or historical stack",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1075,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnoerrkn",
+      "deep": "mnoerrkn",
+      "common": "the contrary",
+      "concept": "force opposing the dominant direction",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1076,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vraaell",
+      "deep": "vraaell",
+      "common": "the seat",
+      "concept": "place from which authority or power radiates",
+      "category": "cosmic",
+      "tier": 3,
+      "glyph_seed": 1077,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skoukh",
+      "deep": "skoukh",
+      "common": "the dispersed",
+      "concept": "a thing that was gathered and has scattered",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1078,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkiint",
+      "deep": "tkiint",
+      "common": "the known",
+      "concept": "what has been permanently incorporated into awareness",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1079,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkourv",
+      "deep": "kkourv",
+      "common": "the shaped",
+      "concept": "a thing that has had form imposed upon it",
+      "category": "cosmic",
+      "tier": 2,
+      "glyph_seed": 1080,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zharrv",
+      "deep": "zharrv",
+      "common": "blood",
+      "concept": "living fluid, specifically while in motion",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1081,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kriiml",
+      "deep": "kriiml",
+      "common": "the flesh",
+      "concept": "soft tissue, the perishable part",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1082,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svaakk",
+      "deep": "svaakk",
+      "common": "the skin",
+      "concept": "boundary between self and world",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1083,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thourkh",
+      "deep": "thourkh",
+      "common": "the marrow",
+      "concept": "innermost material, where resonance accumulates",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1084,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkuurll",
+      "deep": "nkuurll",
+      "common": "the organ",
+      "concept": "body part with specific function",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1085,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghaetl",
+      "deep": "ghaetl",
+      "common": "the change",
+      "concept": "transformation of tissue under resonance",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1086,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "droumm",
+      "deep": "droumm",
+      "common": "the hunger",
+      "concept": "the body's demand for material",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1087,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmiirkh",
+      "deep": "bmiirkh",
+      "common": "the scar",
+      "concept": "healed damage that altered the form",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1088,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkaeth",
+      "deep": "lkaeth",
+      "common": "the breath",
+      "concept": "movement of air that marks living state",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1089,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptoull",
+      "deep": "ptoull",
+      "common": "the eye",
+      "concept": "organ of perception, also means witness",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1090,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnaarrk",
+      "deep": "mnaarrk",
+      "common": "the tongue",
+      "concept": "organ of speech and taste, the naming organ",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1091,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vrourk",
+      "deep": "vrourk",
+      "common": "the spine",
+      "concept": "structural core, also means axis of will",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1092,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skerrv",
+      "deep": "skerrv",
+      "common": "the hand",
+      "concept": "the acting part, also means agency",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1093,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkiill",
+      "deep": "tkiill",
+      "common": "the hollow",
+      "concept": "cavity within living tissue, absence inside form",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1094,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkaeth",
+      "deep": "kkaeth",
+      "common": "the dead flesh",
+      "concept": "tissue that has ceased its process",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1095,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssourk",
+      "deep": "tssourk",
+      "common": "the skull",
+      "concept": "bone that protects the seat of awareness",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1096,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "aqumm",
+      "deep": "aqumm",
+      "common": "the transformed",
+      "concept": "tissue altered beyond its original function",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1097,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tlaurrk",
+      "deep": "tlaurrk",
+      "common": "the thirst",
+      "concept": "the body's demand for liquid",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1098,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mbaall",
+      "deep": "mbaall",
+      "common": "the nerve",
+      "concept": "thread that carries sensation",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1099,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nghurkh",
+      "deep": "nghurkh",
+      "common": "the gut",
+      "concept": "centre of processing, also means instinct",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1100,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nhoerr",
+      "deep": "nhoerr",
+      "common": "the muscle",
+      "concept": "tissue that enacts will on the world",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1101,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "qzhaavsh",
+      "deep": "qzhaavsh",
+      "common": "the fat",
+      "concept": "stored material, reserve against scarcity",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1102,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kpxuurm",
+      "deep": "kpxuurm",
+      "common": "the joint",
+      "concept": "point of articulation between rigid parts",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1103,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "dzhiint",
+      "deep": "dzhiint",
+      "common": "the living",
+      "concept": "quality of being animated — not a noun",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1104,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "psaakk",
+      "deep": "psaakk",
+      "common": "the blood vessel",
+      "concept": "channel through which living fluid moves",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1105,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhoerrk",
+      "deep": "zhoerrk",
+      "common": "the changed one",
+      "concept": "being whose tissue has been altered by resonance",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1106,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruuvsh",
+      "deep": "kruuvsh",
+      "common": "the rot",
+      "concept": "breakdown of tissue after living state ends",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1107,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "sviill",
+      "deep": "sviill",
+      "common": "the bile",
+      "concept": "fluid produced by organ function, also means excess",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1108,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thaetl",
+      "deep": "thaetl",
+      "common": "the sinew",
+      "concept": "connective tissue, that which holds form together",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1109,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkaarr",
+      "deep": "nkaarr",
+      "common": "the resonant body",
+      "concept": "living form saturated with stone-tone",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1110,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghoumm",
+      "deep": "ghoumm",
+      "common": "the numb",
+      "concept": "body part that has lost sensation",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1111,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "driirrk",
+      "deep": "driirrk",
+      "common": "the tremor",
+      "concept": "involuntary movement, also means fear-response",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1112,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmaall",
+      "deep": "bmaall",
+      "common": "the shell",
+      "concept": "outer protective layer of non-flesh creature",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1113,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkuutl",
+      "deep": "lkuutl",
+      "common": "the vessel-body",
+      "concept": "body considered as container for something else",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1114,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptiirrk",
+      "deep": "ptiirrk",
+      "common": "the seed",
+      "concept": "generative part, potential not yet expressed",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1115,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnoakk",
+      "deep": "mnoakk",
+      "common": "the wound",
+      "concept": "fresh damage to living tissue",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1116,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vraerrk",
+      "deep": "vraerrk",
+      "common": "the bone",
+      "concept": "structural calcium, carries resonance of origin",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1117,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skuurnt",
+      "deep": "skuurnt",
+      "common": "the breath-stop",
+      "concept": "moment living state ceases",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1118,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkaarrk",
+      "deep": "tkaarrk",
+      "common": "the marrow-light",
+      "concept": "bioluminescence found in resonance-saturated bone",
+      "category": "body",
+      "tier": 2,
+      "glyph_seed": 1119,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkiivsh",
+      "deep": "kkiivsh",
+      "common": "the husk",
+      "concept": "what remains of a body after transformation",
+      "category": "body",
+      "tier": 1,
+      "glyph_seed": 1120,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhourkh",
+      "deep": "zhourkh",
+      "common": "the named one",
+      "concept": "a being that has been assigned identity",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1121,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruaetl",
+      "deep": "kruaetl",
+      "common": "the seeker",
+      "concept": "one who moves toward unknown deliberately",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1122,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "sviirk",
+      "deep": "sviirk",
+      "common": "the hollow one",
+      "concept": "a being emptied of its original content",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1123,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thaavsh",
+      "deep": "thaavsh",
+      "common": "the watcher",
+      "concept": "one who observes without intervening",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1124,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkoull",
+      "deep": "nkoull",
+      "common": "the bound",
+      "concept": "a being constrained by obligation or force",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1125,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghuurkh",
+      "deep": "ghuurkh",
+      "common": "the elder",
+      "concept": "one whose age has made them a stratum",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1126,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "draell",
+      "deep": "draell",
+      "common": "the speaker",
+      "concept": "one whose function is to make meaning",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1127,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmuull",
+      "deep": "bmuull",
+      "common": "the silent",
+      "concept": "a being that does not or cannot speak",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1128,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkiirk",
+      "deep": "lkiirk",
+      "common": "the resistant",
+      "concept": "one who maintains form against pressure",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1129,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptaevsh",
+      "deep": "ptaevsh",
+      "common": "the shaped",
+      "concept": "a being whose form was imposed not grown",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1130,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnaoll",
+      "deep": "mnaoll",
+      "common": "the knowing",
+      "concept": "one who holds a thing in permanent awareness",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1131,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vraakk",
+      "deep": "vraakk",
+      "common": "the ancient one",
+      "concept": "a being that preceded current understanding",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1132,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skourrk",
+      "deep": "skourrk",
+      "common": "the walker",
+      "concept": "one who moves between places by nature",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1133,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkuull",
+      "deep": "tkuull",
+      "common": "the hidden",
+      "concept": "a being that exists beyond perception",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1134,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkaerrk",
+      "deep": "kkaerrk",
+      "common": "the consumed",
+      "concept": "a being taken irreversibly into another",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1135,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssiirrk",
+      "deep": "tssiirrk",
+      "common": "the given",
+      "concept": "a being that was transferred with intention",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1136,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "aqueth",
+      "deep": "aqueth",
+      "common": "the grown",
+      "concept": "a being that reached its state through accumulation",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1137,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tlaavsh",
+      "deep": "tlaavsh",
+      "common": "the severed",
+      "concept": "a being cut from its origin or connection",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1138,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mbourrk",
+      "deep": "mbourrk",
+      "common": "the geometric",
+      "concept": "a being whose nature is defined by precise arrangement",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1139,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nghiill",
+      "deep": "nghiill",
+      "common": "the unspoken one",
+      "concept": "a being whose name is deliberately withheld",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1140,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nhuurrk",
+      "deep": "nhuurrk",
+      "common": "the returning",
+      "concept": "a being coming back to a prior state",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1141,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "qzhourkh",
+      "deep": "qzhourkh",
+      "common": "the witness-bearer",
+      "concept": "one who carries the memory of an event",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1142,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kpxaell",
+      "deep": "kpxaell",
+      "common": "the deep one",
+      "concept": "self-designation of the builders — not a description",
+      "category": "people",
+      "tier": 4,
+      "glyph_seed": 1143,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "dzhaarr",
+      "deep": "dzhaarr",
+      "common": "the changed",
+      "concept": "a being whose nature has been fundamentally altered",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1144,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "psuurk",
+      "deep": "psuurk",
+      "common": "the last",
+      "concept": "the final remaining instance of a kind",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1145,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhaull",
+      "deep": "zhaull",
+      "common": "the dreaming one",
+      "concept": "a being whose awareness persists without a body",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1146,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruiikk",
+      "deep": "kruiikk",
+      "common": "the marked",
+      "concept": "a being upon whom a permanent trace has been left",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1147,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svourrm",
+      "deep": "svourrm",
+      "common": "the scattered",
+      "concept": "a being dispersed from a gathered state",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1148,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkiitl",
+      "deep": "nkiitl",
+      "common": "the vessel-born",
+      "concept": "a being whose identity comes from what it contains",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1149,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghaaerrk",
+      "deep": "ghaaerrk",
+      "common": "the warned",
+      "concept": "a being that has received a danger signal",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1150,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "droiint",
+      "deep": "droiint",
+      "common": "the unbounded",
+      "concept": "a being that has escaped its constraints",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1151,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmurkh",
+      "deep": "bmurkh",
+      "common": "the burden-bearer",
+      "concept": "one who carries a thing for others",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1152,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkaarrk",
+      "deep": "lkaarrk",
+      "common": "the first-made",
+      "concept": "the initial instance of a category",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1153,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptourkh",
+      "deep": "ptourkh",
+      "common": "the last-made",
+      "concept": "the terminal instance of a category",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1154,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnuuvsh",
+      "deep": "mnuuvsh",
+      "common": "the between-one",
+      "concept": "a being in transition between two states",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1155,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skaevsh",
+      "deep": "skaevsh",
+      "common": "the warded",
+      "concept": "a being protected by deliberate resonance",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1156,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkourv",
+      "deep": "tkourv",
+      "common": "the bone-speaker",
+      "concept": "one who reads resonance through physical contact",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1157,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkoarrk",
+      "deep": "kkoarrk",
+      "common": "the vukhar-born",
+      "concept": "a being of deep one lineage or making",
+      "category": "people",
+      "tier": 4,
+      "glyph_seed": 1158,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssaakk",
+      "deep": "tssaakk",
+      "common": "the exile",
+      "concept": "a being separated from its origin place",
+      "category": "people",
+      "tier": 1,
+      "glyph_seed": 1159,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "aquiill",
+      "deep": "aquiill",
+      "common": "the threshold-one",
+      "concept": "a being permanently in a liminal state",
+      "category": "people",
+      "tier": 2,
+      "glyph_seed": 1160,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vukhar",
+      "deep": "vukhar",
+      "common": "the deep ones",
+      "concept": "sacred self-designation — formal and ritual register only",
+      "category": "people",
+      "tier": 4,
+      "glyph_seed": 1161,
+      "learn_sources": [
+        "bellwright"
+      ]
+    },
+    {
+      "id": "zhuuvsh",
+      "deep": "zhuuvsh",
+      "common": "the moment",
+      "concept": "discrete unit of present awareness",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1162,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kroerrk",
+      "deep": "kroerrk",
+      "common": "the age",
+      "concept": "period defined by a dominant condition",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1163,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svaatl",
+      "deep": "svaatl",
+      "common": "the interval",
+      "concept": "space between two events",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1164,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thiirrk",
+      "deep": "thiirrk",
+      "common": "the deep past",
+      "concept": "time so ancient it is felt not remembered",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1165,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkourv",
+      "deep": "nkourv",
+      "common": "the cycle-end",
+      "concept": "point at which return becomes inevitable",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1166,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghaarkh",
+      "deep": "ghaarkh",
+      "common": "the waiting age",
+      "concept": "period of suspension before transformation",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1167,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "druull",
+      "deep": "druull",
+      "common": "the last age",
+      "concept": "terminal period of a system",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1168,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmaetl",
+      "deep": "bmaetl",
+      "common": "the first moment",
+      "concept": "instant a thing came into being",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1169,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkuurrk",
+      "deep": "lkuurrk",
+      "common": "the return",
+      "concept": "moment a cycle completes and restarts",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1170,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptaakk",
+      "deep": "ptaakk",
+      "common": "the measured span",
+      "concept": "duration defined by deliberate observation",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1171,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnoerrk",
+      "deep": "mnoerrk",
+      "common": "the unrecorded",
+      "concept": "time that passed without witness",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1172,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vrauull",
+      "deep": "vrauull",
+      "common": "the ending",
+      "concept": "final state before cessation",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1173,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skoiirk",
+      "deep": "skoiirk",
+      "common": "the waking",
+      "concept": "moment dormancy ends",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1174,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkurrm",
+      "deep": "tkurrm",
+      "common": "the suspended",
+      "concept": "time held still by deliberate action",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1175,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkiinth",
+      "deep": "kkiinth",
+      "common": "the brief",
+      "concept": "interval too short to accumulate meaning",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1176,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssuurkh",
+      "deep": "tssuurkh",
+      "common": "the layered time",
+      "concept": "duration experienced as geological strata",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1177,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "aquaell",
+      "deep": "aquaell",
+      "common": "the threshold moment",
+      "concept": "instant a system crosses point of no return",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1178,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tlaiirrk",
+      "deep": "tlaiirrk",
+      "common": "the inherited age",
+      "concept": "period whose conditions were set by prior events",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1179,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mburkh",
+      "deep": "mburkh",
+      "common": "the recurring",
+      "concept": "pattern that returns across multiple cycles",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1180,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nghaatl",
+      "deep": "nghaatl",
+      "common": "the unmarked",
+      "concept": "time that left no trace",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1181,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nhuuvsh",
+      "deep": "nhuuvsh",
+      "common": "the fractured age",
+      "concept": "period whose internal continuity was broken",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1182,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "qzhaell",
+      "deep": "qzhaell",
+      "common": "the counted",
+      "concept": "time deliberately measured and recorded",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1183,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kpxuurkh",
+      "deep": "kpxuurkh",
+      "common": "the present",
+      "concept": "what is currently happening — seldom used",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1184,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "dzhoerrk",
+      "deep": "dzhoerrk",
+      "common": "the overdue",
+      "concept": "a cycle that should have returned but has not",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1185,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "psiirk",
+      "deep": "psiirk",
+      "common": "the buried time",
+      "concept": "period concealed beneath subsequent events",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1186,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhouull",
+      "deep": "zhouull",
+      "common": "the resonant age",
+      "concept": "period defined by high accumulated tone",
+      "category": "time",
+      "tier": 4,
+      "glyph_seed": 1187,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruarrk",
+      "deep": "kruarrk",
+      "common": "the drift",
+      "concept": "gradual movement through time without markers",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1188,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svaell",
+      "deep": "svaell",
+      "common": "the unwitnessed",
+      "concept": "event that occurred without an observer",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1189,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thoiirk",
+      "deep": "thoiirk",
+      "common": "the echo",
+      "concept": "later event shaped by an earlier one",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1190,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkuurth",
+      "deep": "nkuurth",
+      "common": "the span",
+      "concept": "measurable duration with defined endpoints",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1191,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghaerrk",
+      "deep": "ghaerrk",
+      "common": "the compressed",
+      "concept": "time experienced as shorter than it was",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1192,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "drouull",
+      "deep": "drouull",
+      "common": "the precise moment",
+      "concept": "specific instant identified by measurement",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1193,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmiitl",
+      "deep": "bmiitl",
+      "common": "the turning point",
+      "concept": "moment from which a system cannot return",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1194,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkoerrk",
+      "deep": "lkoerrk",
+      "common": "the slow",
+      "concept": "duration experienced as longer than it was",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1195,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptuurkh",
+      "deep": "ptuurkh",
+      "common": "the final count",
+      "concept": "last measured interval before cessation",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1196,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnaatl",
+      "deep": "mnaatl",
+      "common": "the resonant moment",
+      "concept": "instant when accumulated tone discharges",
+      "category": "time",
+      "tier": 4,
+      "glyph_seed": 1197,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vraetln",
+      "deep": "vraetln",
+      "common": "the severed time",
+      "concept": "period cut from continuity by significant event",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1198,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skiirrk",
+      "deep": "skiirrk",
+      "common": "the long silence",
+      "concept": "interval so vast it reshapes what surrounds it",
+      "category": "time",
+      "tier": 2,
+      "glyph_seed": 1199,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkourm",
+      "deep": "tkourm",
+      "common": "the before",
+      "concept": "that which preceded — complement to legacy word dur",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1200,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkuuvsh",
+      "deep": "kkuuvsh",
+      "common": "the after",
+      "concept": "that which follows — no legacy word existed for this",
+      "category": "time",
+      "tier": 1,
+      "glyph_seed": 1201,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhaivsh",
+      "deep": "zhaivsh",
+      "common": "dissolution",
+      "concept": "property of breaking down structure",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1202,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruullk",
+      "deep": "kruullk",
+      "common": "binding",
+      "concept": "property of preserving and constraining form",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1203,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svoakr",
+      "deep": "svoakr",
+      "common": "quickening",
+      "concept": "property of animating and accelerating",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1204,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tharrng",
+      "deep": "tharrng",
+      "common": "consumption",
+      "concept": "property of feeding and draining",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1205,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkiivth",
+      "deep": "nkiivth",
+      "common": "revelation",
+      "concept": "property of exposing what is hidden",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1206,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghourkv",
+      "deep": "ghourkv",
+      "common": "severance",
+      "concept": "property of cutting connections",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1207,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "draavsh",
+      "deep": "draavsh",
+      "common": "the pure",
+      "concept": "an essence in undiluted form",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1208,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmuuell",
+      "deep": "bmuuell",
+      "common": "the mixed",
+      "concept": "two or more essences in combination",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1209,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkourng",
+      "deep": "lkourng",
+      "common": "the saturated",
+      "concept": "matter that has absorbed essence to capacity",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1210,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptaatl",
+      "deep": "ptaatl",
+      "common": "the vessel",
+      "concept": "matter that carries essence without being changed",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1211,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mniirrk",
+      "deep": "mniirrk",
+      "common": "the transfer",
+      "concept": "movement of essence from one matter to another",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1212,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vraarrk",
+      "deep": "vraarrk",
+      "common": "the residue",
+      "concept": "essence that remains after a process completes",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1213,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skerrng",
+      "deep": "skerrng",
+      "common": "the trace",
+      "concept": "mark left by essence that has moved on",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1214,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkuukh",
+      "deep": "tkuukh",
+      "common": "the concentrated",
+      "concept": "essence reduced to greater potency",
+      "category": "essence",
+      "tier": 4,
+      "glyph_seed": 1215,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkaavsh",
+      "deep": "kkaavsh",
+      "common": "the diluted",
+      "concept": "essence weakened by mixture or distance",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1216,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssoull",
+      "deep": "tssoull",
+      "common": "the consuming bond",
+      "concept": "connection that drains while it holds",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1217,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "aquarrk",
+      "deep": "aquarrk",
+      "common": "the revealed nature",
+      "concept": "essence of a thing made visible",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1218,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tlauull",
+      "deep": "tlauull",
+      "common": "the dissolved",
+      "concept": "matter whose structure has been removed",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1219,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mboiirk",
+      "deep": "mboiirk",
+      "common": "the quickened",
+      "concept": "matter animated beyond its nature",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1220,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nghuull",
+      "deep": "nghuull",
+      "common": "the consumed",
+      "concept": "matter that has been fully drained",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1221,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nhoerrk",
+      "deep": "nhoerrk",
+      "common": "the severed matter",
+      "concept": "material cut from its essential connections",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1222,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "qzhuuvth",
+      "deep": "qzhuuvth",
+      "common": "the bound form",
+      "concept": "matter held in shape by binding essence",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1223,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kpxiitl",
+      "deep": "kpxiitl",
+      "common": "the essence-blind",
+      "concept": "matter that neither carries nor responds to essence",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1224,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "dzhaarrk",
+      "deep": "dzhaarrk",
+      "common": "the living charge",
+      "concept": "quickening essence at moment of application",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1225,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "psourng",
+      "deep": "psourng",
+      "common": "the long drain",
+      "concept": "consumption operating across geological time",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1226,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhourkv",
+      "deep": "zhourkv",
+      "common": "the hidden nature",
+      "concept": "essence property concealed within matter",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1227,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruiith",
+      "deep": "kruiith",
+      "common": "the unstable mix",
+      "concept": "combined essences approaching contradiction",
+      "category": "essence",
+      "tier": 3,
+      "glyph_seed": 1228,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svaurrk",
+      "deep": "svaurrk",
+      "common": "the essence wound",
+      "concept": "damage caused by essence incompatibility",
+      "category": "essence",
+      "tier": 3,
+      "glyph_seed": 1229,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thoullk",
+      "deep": "thoullk",
+      "common": "the binding law",
+      "concept": "principle determining what can be preserved",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1230,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkaarrng",
+      "deep": "nkaarrng",
+      "common": "the motion",
+      "concept": "quickening as directional force not just animation",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1231,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghaevsh",
+      "deep": "ghaevsh",
+      "common": "the slow consuming",
+      "concept": "entropy at the scale of a single object",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1232,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "driitl",
+      "deep": "driitl",
+      "common": "the revealed wound",
+      "concept": "damage made visible by revelation essence",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1233,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmuurrk",
+      "deep": "bmuurrk",
+      "common": "the clean cut",
+      "concept": "severance that leaves no residue",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1234,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkiinth",
+      "deep": "lkiinth",
+      "common": "the dissolution law",
+      "concept": "principle governing what can be broken down",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1235,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptuurng",
+      "deep": "ptuurng",
+      "common": "the neutral",
+      "concept": "matter in perfect essence equilibrium",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1236,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnuull",
+      "deep": "mnuull",
+      "common": "the essence storm",
+      "concept": "multiple essences in violent interaction",
+      "category": "essence",
+      "tier": 4,
+      "glyph_seed": 1237,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vroerrk",
+      "deep": "vroerrk",
+      "common": "the drawn",
+      "concept": "matter actively pulling essence toward itself",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1238,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkiivsh",
+      "deep": "tkiivsh",
+      "common": "the repelled",
+      "concept": "matter that actively resists essence absorption",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1239,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkourrm",
+      "deep": "kkourrm",
+      "common": "the essence scar",
+      "concept": "permanent alteration to matter's essence properties",
+      "category": "essence",
+      "tier": 2,
+      "glyph_seed": 1240,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssaurrk",
+      "deep": "tssaurrk",
+      "common": "the resonant essence",
+      "concept": "essence property specific to grey stone",
+      "category": "essence",
+      "tier": 4,
+      "glyph_seed": 1241,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhuull",
+      "deep": "zhuull",
+      "common": "none",
+      "concept": "absolute absence of countable instances",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1242,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kraevsh",
+      "deep": "kraevsh",
+      "common": "one",
+      "concept": "a single discrete instance",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1243,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svourrk",
+      "deep": "svourrk",
+      "common": "two",
+      "concept": "a pair — implies opposition or balance",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1244,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thaarrk",
+      "deep": "thaarrk",
+      "common": "three",
+      "concept": "a triad — implies completion of a structure",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1245,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkiimm",
+      "deep": "nkiimm",
+      "common": "four",
+      "concept": "geometric foundation — the stable number",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1246,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghouull",
+      "deep": "ghouull",
+      "common": "five",
+      "concept": "number of imbalance — one beyond stable four",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1247,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "draatl",
+      "deep": "draatl",
+      "common": "six",
+      "concept": "completion of a cycle — the resonant number",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1248,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmuiirk",
+      "deep": "bmuiirk",
+      "common": "seven",
+      "concept": "the unknown quantity — what lies beyond the cycle",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1249,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkoerrng",
+      "deep": "lkoerrng",
+      "common": "many",
+      "concept": "more than can be counted with precision",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1250,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptaavsh",
+      "deep": "ptaavsh",
+      "common": "few",
+      "concept": "a quantity insufficient for a purpose",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1251,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnoullk",
+      "deep": "mnoullk",
+      "common": "half",
+      "concept": "a divided quantity — implies incompleteness",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1252,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vriirrng",
+      "deep": "vriirrng",
+      "common": "double",
+      "concept": "a quantity multiplied by its own measure",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1253,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skaurrk",
+      "deep": "skaurrk",
+      "common": "the count",
+      "concept": "the act of measuring quantity",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1254,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkuurrng",
+      "deep": "tkuurrng",
+      "common": "the uncounted",
+      "concept": "quantity that exists but was not measured",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1255,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkourkh",
+      "deep": "kkourkh",
+      "common": "the remainder",
+      "concept": "what is left after subtraction",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1256,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssaatl",
+      "deep": "tssaatl",
+      "common": "the sum",
+      "concept": "combined quantities considered as one",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1257,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "aquurrk",
+      "deep": "aquurrk",
+      "common": "the ratio",
+      "concept": "relationship between two quantities",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1258,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tlaoerrk",
+      "deep": "tlaoerrk",
+      "common": "the geometric",
+      "concept": "a quantity defined by spatial relationship",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1259,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mbuurng",
+      "deep": "mbuurng",
+      "common": "the progression",
+      "concept": "a sequence of quantities following a rule",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1260,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nghaivsh",
+      "deep": "nghaivsh",
+      "common": "the threshold number",
+      "concept": "quantity at which a system changes state",
+      "category": "number",
+      "tier": 4,
+      "glyph_seed": 1261,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nhuurrng",
+      "deep": "nhuurrng",
+      "common": "the resonant count",
+      "concept": "the specific quantity that triggers discharge",
+      "category": "number",
+      "tier": 4,
+      "glyph_seed": 1262,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "qzhourkv",
+      "deep": "qzhourkv",
+      "common": "the infinite",
+      "concept": "quantity beyond measurement or completion",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1263,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kpxaatln",
+      "deep": "kpxaatln",
+      "common": "the zero-point",
+      "concept": "the quantity from which measurement begins",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1264,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "dzhuurng",
+      "deep": "dzhuurng",
+      "common": "the excess",
+      "concept": "quantity beyond what a system can hold",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1265,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "psiinth",
+      "deep": "psiinth",
+      "common": "the deficit",
+      "concept": "quantity below what a system requires",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1266,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhourkng",
+      "deep": "zhourkng",
+      "common": "the precise",
+      "concept": "a quantity known to exact measurement",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1267,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruaevsh",
+      "deep": "kruaevsh",
+      "common": "the approximate",
+      "concept": "a quantity estimated rather than measured",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1268,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svaurrng",
+      "deep": "svaurrng",
+      "common": "the critical mass",
+      "concept": "quantity at which a process becomes irreversible",
+      "category": "number",
+      "tier": 4,
+      "glyph_seed": 1269,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thoiinth",
+      "deep": "thoiinth",
+      "common": "the diminishing",
+      "concept": "a quantity in the process of reduction",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1270,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkuurkh",
+      "deep": "nkuurkh",
+      "common": "the accumulating",
+      "concept": "a quantity in the process of increase",
+      "category": "number",
+      "tier": 1,
+      "glyph_seed": 1271,
+      "learn_sources": [
+        "waystone",
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "qzharrk",
+      "deep": "qzharrk",
+      "common": "do not",
+      "concept": "negation of command — the forbidden",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1272,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kruullng",
+      "deep": "kruullng",
+      "common": "the danger",
+      "concept": "a condition that threatens dissolution of form",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1273,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svaivsh",
+      "deep": "svaivsh",
+      "common": "the warning",
+      "concept": "a signal placed deliberately for future readers",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1274,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thourrk",
+      "deep": "thourrk",
+      "common": "the consequence",
+      "concept": "what follows from a violated boundary",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1275,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkaarrk",
+      "deep": "nkaarrk",
+      "common": "the irreversible",
+      "concept": "a change that cannot be undone",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1276,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ghiitl",
+      "deep": "ghiitl",
+      "common": "the sealed",
+      "concept": "closed against entry by deliberate force",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1277,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "druurrk",
+      "deep": "druurrk",
+      "common": "the forbidden",
+      "concept": "that which must not be approached",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1278,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "bmiirrk",
+      "deep": "bmiirrk",
+      "common": "the last warning",
+      "concept": "a signal that will not be repeated",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1279,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "lkuukh",
+      "deep": "lkuukh",
+      "common": "the price",
+      "concept": "what is lost when a boundary is crossed",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1280,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "ptaull",
+      "deep": "ptaull",
+      "common": "the death",
+      "concept": "cessation by external cause — not natural ending",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1281,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mnourrk",
+      "deep": "mnourrk",
+      "common": "the trap",
+      "concept": "a condition designed to catch the unwary",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1282,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "vraaetl",
+      "deep": "vraaetl",
+      "common": "the poison",
+      "concept": "a substance that disrupts living process",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1283,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "skaivsh",
+      "deep": "skaivsh",
+      "common": "the curse",
+      "concept": "a condition placed deliberately on a thing or being",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1284,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tkuurrkh",
+      "deep": "tkuurrkh",
+      "common": "the ruin",
+      "concept": "what remains when a deliberate thing has failed",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1285,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kkaetl",
+      "deep": "kkaetl",
+      "common": "the hunger that devours",
+      "concept": "consumption beyond need — appetite without end",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1286,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tssourng",
+      "deep": "tssourng",
+      "common": "the wrong tone",
+      "concept": "a resonant frequency that damages rather than tunes",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1287,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "aquiirkh",
+      "deep": "aquiirkh",
+      "common": "the waking dark",
+      "concept": "dormant threat that has become active",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1288,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "tlaarrng",
+      "deep": "tlaarrng",
+      "common": "the breach",
+      "concept": "a boundary that has been violated",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1289,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "mbuullk",
+      "deep": "mbuullk",
+      "common": "the infected",
+      "concept": "matter that carries harmful essence",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1290,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nghuurrk",
+      "deep": "nghuurrk",
+      "common": "the consuming place",
+      "concept": "a location that drains what enters it",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1291,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nhaatl",
+      "deep": "nhaatl",
+      "common": "the wrong",
+      "concept": "a condition contrary to deep one law",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1292,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "qzhourrk",
+      "deep": "qzhourrk",
+      "common": "the abandoned",
+      "concept": "a thing or place deliberately left without maintenance",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1293,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kpxuull",
+      "deep": "kpxuull",
+      "common": "the fell",
+      "concept": "a being whose nature is harmful by definition",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1294,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "dzhiirk",
+      "deep": "dzhiirk",
+      "common": "the weight of it",
+      "concept": "accumulated consequence that cannot be shed",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1295,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "psourrk",
+      "deep": "psourrk",
+      "common": "the teeth",
+      "concept": "the cutting edge of a dangerous thing",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1296,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "zhuurrk",
+      "deep": "zhuurrk",
+      "common": "the old anger",
+      "concept": "resentment accumulated across geological time",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1297,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "kraaivsh",
+      "deep": "kraaivsh",
+      "common": "the unmaking",
+      "concept": "dissolution of a thing's essential nature",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1298,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "svoullk",
+      "deep": "svoullk",
+      "common": "the coming",
+      "concept": "approach of a threat not yet arrived",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1299,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "thaivsh",
+      "deep": "thaivsh",
+      "common": "the already done",
+      "concept": "a harm that has already occurred — past warning",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1300,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    },
+    {
+      "id": "nkuurrk",
+      "deep": "nkuurrk",
+      "common": "turn back",
+      "concept": "a command — the strongest warning inscription",
+      "category": "ominous",
+      "tier": 3,
+      "glyph_seed": 1301,
+      "learn_sources": [
+        "text",
+        "corruption"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "plaza_market_a",
+  "category": "plaza",
+  "allowed_in": "town",
+  "weight": 1.0,
+  "description": "An open market square. Flagstone paving, a cracked bell tower at the north end, a waystone plinth near the centre.",
+  "legend": {
+    "#": "grey_stone",
+    ".": "flagstone",
+    "f": "flagstone",
+    "w": "waystone_plinth",
+    "B": "bell_cracked",
+    "p": "town_plaza",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "###+##+###",
+    "#........#",
+    "+........+",
+    "#..#.#...#",
+    "#...B....#",
+    "#..#.#...#",
+    "#........#",
+    "+...w....+",
+    "#........#",
+    "###+##+###"
+  ],
+  "note": "Plaza variant A — market square. B = bell_cracked tile. w = waystone_plinth. Facing south (entrance at bottom)."
+}

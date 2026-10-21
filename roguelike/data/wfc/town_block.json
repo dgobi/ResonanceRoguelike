@@ -1,0 +1,37 @@
+{
+  "tiles": [
+    {"name": "packed_earth",  "terrain": "packed_earth",   "weight": 35},
+    {"name": "dirt_path",     "terrain": "dirt_path",      "weight": 20},
+    {"name": "weedy_cobble",  "terrain": "weedy_cobble",   "weight": 15},
+    {"name": "mud_patch",     "terrain": "mud",            "weight": 10},
+    {"name": "tall_grass",    "terrain": "tall_grass",     "weight": 12},
+    {"name": "debris",        "terrain": "debris_scatter", "weight": 8}
+  ],
+  "adjacency": {
+    "packed_earth": {"N":["packed_earth","dirt_path","weedy_cobble","mud_patch"],
+                     "E":["packed_earth","dirt_path","weedy_cobble","mud_patch"],
+                     "S":["packed_earth","dirt_path","weedy_cobble","mud_patch"],
+                     "W":["packed_earth","dirt_path","weedy_cobble","mud_patch"]},
+    "dirt_path":    {"N":["packed_earth","dirt_path","mud_patch"],
+                     "E":["packed_earth","dirt_path","mud_patch"],
+                     "S":["packed_earth","dirt_path","mud_patch"],
+                     "W":["packed_earth","dirt_path","mud_patch"]},
+    "weedy_cobble": {"N":["packed_earth","weedy_cobble","tall_grass","debris"],
+                     "E":["packed_earth","weedy_cobble","tall_grass","debris"],
+                     "S":["packed_earth","weedy_cobble","tall_grass","debris"],
+                     "W":["packed_earth","weedy_cobble","tall_grass","debris"]},
+    "mud_patch":    {"N":["packed_earth","dirt_path","mud_patch","tall_grass"],
+                     "E":["packed_earth","dirt_path","mud_patch","tall_grass"],
+                     "S":["packed_earth","dirt_path","mud_patch","tall_grass"],
+                     "W":["packed_earth","dirt_path","mud_patch","tall_grass"]},
+    "tall_grass":   {"N":["weedy_cobble","tall_grass","mud_patch","packed_earth"],
+                     "E":["weedy_cobble","tall_grass","mud_patch","packed_earth"],
+                     "S":["weedy_cobble","tall_grass","mud_patch","packed_earth"],
+                     "W":["weedy_cobble","tall_grass","mud_patch","packed_earth"]},
+    "debris":       {"N":["weedy_cobble","debris","packed_earth"],
+                     "E":["weedy_cobble","debris","packed_earth"],
+                     "S":["weedy_cobble","debris","packed_earth"],
+                     "W":["weedy_cobble","debris","packed_earth"]}
+  },
+  "fallback": "packed_earth"
+}

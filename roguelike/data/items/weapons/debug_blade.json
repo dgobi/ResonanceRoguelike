@@ -1,0 +1,23 @@
+{
+  "id": "debug_blade",
+  "name": "the Arbiter",
+  "description": "A blade that names all things at once. Impossible to wield, impossible to ignore. It carries every essence and turns none aside.",
+  "tile": "generic_item",
+  "category": "weapon",
+  "slot": "weapon",
+  "weight": 1.0,
+  "stackable": false,
+  "damage_dice": "100d100",
+  "damage_bonus": 0,
+  "essences": [
+    {"name": "Dissolution",  "strength": 3.0},
+    {"name": "Quickening",   "strength": 3.0},
+    {"name": "Binding",      "strength": 3.0},
+    {"name": "Severance",    "strength": 3.0},
+    {"name": "Consumption",  "strength": 3.0},
+    {"name": "Revelation",   "strength": 3.0}
+  ],
+  "on_use": "equip_toggle",
+  "consumed_on_use": false,
+  "keywords": [{"tag": "cutting", "tier": 3}, {"tag": "resonant", "tier": 3}]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "text_shrine_inscription",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "teach_words": {"count": 1, "categories": ["essence", "cosmic"], "tier": 1},
+  "pages": [{"text": "Zhal keth.\nUthar vrath.\nQuz urath.\nSketh.", "damaged": false, "deep_tongue": true}]
+}

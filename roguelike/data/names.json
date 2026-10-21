@@ -1,0 +1,51 @@
+{
+  "common": {
+    "region_prefixes": [
+      "Ash", "Cold", "Grey", "Dun", "Mere", "Stone",
+      "Fen", "Helm", "Ward", "Croft", "Briar", "Hollow",
+      "Bog", "Burnt", "Chalk", "Fell", "Grim", "Hale",
+      "Low", "Mist", "Old", "Pale", "Salt", "Wether"
+    ],
+    "region_suffixes": [
+      "ford", "mere", "vale", "haven", "water", "wick",
+      "fell", "moor", "holt", "heath", "marsh", "run",
+      "burn", "dene", "holm", "ing", "lea", "shaw"
+    ],
+    "settlement_roots": [
+      "Ald", "Bren", "Cald", "Dorn", "Eld", "Farn",
+      "Glen", "Holt", "Irn", "Kern", "Lorn", "Marn",
+      "Nord", "Orm", "Pell", "Rand", "Seld", "Tarn",
+      "Ulm", "Varn", "Weld", "Yeld"
+    ],
+    "settlement_suffixes": [
+      "ford", "mere", "wick", "haven", "bridge",
+      "gate", "cross", "mill", "field", "end",
+      "bury", "caster", "ham", "stead", "ton"
+    ]
+  },
+  "old": {
+    "roots": [
+      "Kar", "Dun", "Rel", "Mor", "Sel", "Thar", "Oss",
+      "Vel", "Keth", "Arn", "Vreth", "Kal", "Drav",
+      "Brath", "Cors", "Ekk", "Fael", "Grav", "Ith",
+      "Jorn", "Leth", "Nrav", "Orv", "Preth", "Ravs"
+    ],
+    "suffixes": [
+      "ath", "is", "avar", "eth", "ane", "vel", "kin",
+      "mar", "vor", "an", "iss", "el",
+      "dar", "en", "har", "ith", "on", "ur", "ven"
+    ],
+    "connectors": ["a", "e", "", "ar", "o", "i"]
+  },
+  "deep": {
+    "openings": [
+      "Ae", "Oe", "Ui", "Iss", "Aur", "Eth", "Vai",
+      "Oen", "Uss", "Iae", "Uor", "Aov", "Eiss",
+      "Iel", "Oev", "Uath", "Aes", "Oirs"
+    ],
+    "closings": [
+      "s", "r", "th", "ve", "n", "re", "ss",
+      "m", "l", "sse", "rv", "nth"
+    ]
+  }
+}

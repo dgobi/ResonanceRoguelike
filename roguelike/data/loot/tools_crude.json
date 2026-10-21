@@ -1,0 +1,12 @@
+{
+  "id": "hunting_supplies",
+  "rolls": [1, 3],
+  "entries": [
+    {"item": "skinning_knife",  "weight": 20},
+    {"item": "salt_pouch",      "weight": 15},
+    {"item": "rabbit_snare",    "weight": 15},
+    {"item": "tallow_candle",   "weight": 20},
+    {"item": "crow_jerky",      "weight": 25},
+    {"table": "tools_crude",    "weight": 10}
+  ]
+}

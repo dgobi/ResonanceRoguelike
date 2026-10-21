@@ -1,0 +1,25 @@
+{
+  "id": "deepwood",
+  "name": "The Deepwood",
+  "category": "wilderness",
+  "description": "Old forest. The trees remember. Paths that move. Standing stones older than any name.",
+  "terrain_palette": ["grass", "tree", "deep_root"],
+  "tree_density": 0.55,
+  "scatter": [
+    {"terrain": "deep_root",    "chance": 0.05},
+    {"terrain": "standing_stone","chance": 0.01}
+  ],
+  "structures": [
+    {"id": "hunter_cabin",      "weight": 8},
+    {"id": "hermit_cave",       "weight": 5},
+    {"id": "standing_stone_ring","weight": 3}
+  ],
+  "creatures": [
+    {"id": "bog_wraith",        "weight": 10, "chance": 0.2},
+    {"id": "hollow_knight",     "weight": 8,  "chance": 0.15}
+  ],
+  "ambient_loot": "wilderness_forage",
+  "light_level": "dim",
+  "tags": ["wilderness", "forest", "deepwood", "old"],
+  "ambient_light": 0.3
+}

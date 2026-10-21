@@ -1,0 +1,14 @@
+{
+  "id": "flint_shard",
+  "name": "flint shard",
+  "category": "component",
+  "description": "A sharp-edged chip knocked from a larger piece of flint.",
+  "gather_from": "rock",
+  "weight": 0.2,
+  "keywords": [
+    {
+      "tag": "cutting",
+      "tier": 1
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "dried_pilgrims_woe",
+  "name": "dried pilgrim's woe",
+  "description": "Dried pilgrim's woe petals. Deprecated — use dried_aromatic_herb.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.01,
+  "stackable": true,
+  "on_use": null,
+  "keywords": [
+    {"tag": "fibrous", "tier": 1},
+    {"tag": "aromatic", "tier": 2},
+    {"tag": "alchemical", "tier": 1}
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "heath",
+  "name": "The Heath",
+  "category": "wilderness",
+  "description": "Open moorland. Exposed to everything. Wind-carved standing stones. Cairns of uncertain age built by uncertain hands.",
+  "terrain_palette": ["grass", "gravel", "standing_stone"],
+  "tree_density": 0.05,
+  "scatter": [
+    {"terrain": "standing_stone","chance": 0.02},
+    {"terrain": "cairn",         "chance": 0.03}
+  ],
+  "structures": [
+    {"id": "waystone",          "weight": 10},
+    {"id": "shepherd_shelter",  "weight": 8},
+    {"id": "barrow_mound",      "weight": 5}
+  ],
+  "creatures": [
+    {"id": "barrow_wight",      "weight": 8,  "chance": 0.15},
+    {"id": "heath_stalker",     "weight": 10, "chance": 0.2}
+  ],
+  "ambient_loot": "wilderness_forage",
+  "light_level": "normal",
+  "tags": ["wilderness", "open", "heath", "exposed"],
+  "ambient_light": 1.0
+}

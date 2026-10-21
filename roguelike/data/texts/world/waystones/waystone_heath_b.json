@@ -1,0 +1,10 @@
+{
+  "id": "waystone_heath_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Druull.\nQuz vrass.", "damaged": false, "deep_tongue": true}]
+}

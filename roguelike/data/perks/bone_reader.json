@@ -1,0 +1,16 @@
+{
+  "id": "bone_reader",
+  "name": "The Bone Reader",
+  "category": "The Hollow Road",
+  "cost": 1,
+  "description": "The dead have not stopped speaking. You have simply learned to listen at the right register.",
+  "effects": [
+    "Butchery always provides maximum yield regardless of whether you have a cutting tool.",
+    "Time cost unchanged."
+  ],
+  "hooks": [
+    {"event": "ON_TILE_ENTERED", "handler": "perk_bone_reader_tile_entered"}
+  ],
+  "conflicts": [],
+  "requires": []
+}

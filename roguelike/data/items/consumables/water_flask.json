@@ -1,0 +1,21 @@
+{
+  "id": "water_flask",
+  "name": "Water Flask",
+  "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+  "tile": "water_flask",
+  "category": "consumable",
+  "weight": 0.5,
+  "stackable": false,
+  "on_use": "drink",
+  "hydration": 0.5,
+  "empty_form": "empty_water_skin",
+  "liquid": "water",
+  "liquid_volume": 0.5,
+  "keywords": [
+    {
+      "tag": "drinkable",
+      "tier": 1
+    }
+  ],
+  "_essence_note": "Water passes through everything. It takes and is taken. The consumption is reciprocal — it feeds and is consumed in the feeding."
+}

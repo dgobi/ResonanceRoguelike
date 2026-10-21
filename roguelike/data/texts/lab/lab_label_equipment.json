@@ -1,0 +1,9 @@
+{
+  "id": "lab_label_equipment",
+  "title": "Label — Equipment Rack",
+  "type": "label",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Resonance measuring equipment. Do not use within 3 measures of active sarcophagite. The dampening field interferes with calibration. Results obtained within the dampening field are not wrong — they are measuring something different than you intend.", "damaged": false}]
+}

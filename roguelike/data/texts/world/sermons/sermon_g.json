@@ -1,0 +1,9 @@
+{
+  "id": "world_sermon_b",
+  "title": "An Offering Inscription",
+  "type": "inscription",
+  "condition": "weathered",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "To the Hollow One, thrice-petitioned: guide the bone-weary home. Do not let them walk crooked.\n\nTo the Hollow One, who knows the road: we left the festival lights burning. We always leave them burning.\n\nWe are not ashamed to ask.", "damaged": false}]
+}

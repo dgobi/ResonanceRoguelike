@@ -1,0 +1,777 @@
+{
+  "wall": {
+    "tile": "wall",
+    "display_name": "Crumbling Wall",
+    "walkable": false,
+    "transparent": false,
+    "description": "A silent and damp stone wall.",
+    "move_cost": 1.0
+  },
+  "floor": {
+    "tile": "floor",
+    "display_name": "Stone Tile",
+    "walkable": true,
+    "transparent": true,
+    "description": "Stone tiles carefully joined.",
+    "move_cost": 1.0
+  },
+  "grass": {
+    "tile": "grass",
+    "display_name": "Thick Grass",
+    "walkable": true,
+    "transparent": true,
+    "description": "All manner of corrupt life flourishes in the darkling gloom.",
+    "move_cost": 1.0
+  },
+  "tree": {
+    "tile": "tree",
+    "display_name": "Ancient Tree",
+    "walkable": false,
+    "transparent": false,
+    "description": "A gnarled tree draped in lichen.",
+    "move_cost": 1.0
+  },
+  "water": {
+    "tile": "water",
+    "display_name": "Murky Water",
+    "walkable": false,
+    "transparent": true,
+    "description": "Murky water dimly mirrors the darkling world.",
+    "move_cost": 1.5
+  },
+  "door_closed": {
+    "tile": "door_closed",
+    "display_name": "Closed Door",
+    "walkable": false,
+    "transparent": false,
+    "description": "The way is shut.",
+    "move_cost": 1.0
+  },
+  "door_open": {
+    "tile": "door_open",
+    "display_name": "Open Door",
+    "walkable": true,
+    "transparent": true,
+    "description": "The way is open.",
+    "move_cost": 1.0
+  },
+  "mud": {
+    "tile": "mud",
+    "display_name": "Cold Mud",
+    "walkable": true,
+    "transparent": true,
+    "description": "Cold, wet, sucking mud.",
+    "move_cost": 2.0,
+    "secondary_effect": "chill"
+  },
+  "gravel": {
+    "tile": "gravel",
+    "display_name": "Gravel Path",
+    "walkable": true,
+    "transparent": true,
+    "description": "Made from the strewn debris of ages.",
+    "move_cost": 1.1
+  },
+  "rock": {
+    "tile": "rock",
+    "display_name": "Natural Rock",
+    "walkable": false,
+    "transparent": false,
+    "description": "Craggy, moist rock.",
+    "move_cost": 1.0
+  },
+  "cobblestone": {
+    "tile": "cobblestone",
+    "display_name": "Cobblestone Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Old cobblestones, once carefully fitted. Now loose and crumbling.",
+    "move_cost": 1.0
+  },
+  "flagstone": {
+    "tile": "flagstone",
+    "display_name": "Flagstones",
+    "walkable": true,
+    "transparent": true,
+    "description": "Flagstone, expertly laid. Long neglected.",
+    "move_cost": 1.0
+  },
+  "worn_stone": {
+    "tile": "worn_stone",
+    "display_name": "Cracked Tile",
+    "walkable": true,
+    "transparent": true,
+    "description": "Cracked and weathered stone tiles.",
+    "move_cost": 1.0
+  },
+  "ash": {
+    "tile": "ash",
+    "display_name": "Drifting Ash",
+    "walkable": true,
+    "transparent": true,
+    "description": "Mortality quickened unto extremis.",
+    "move_cost": 1.5
+  },
+  "stairs_down": {
+    "tile": "stairs_down",
+    "display_name": "Downward Stairs",
+    "walkable": true,
+    "transparent": true,
+    "description": "Steps descend into the yawning dark.",
+    "move_cost": 1.0
+  },
+  "stairs_up": {
+    "tile": "stairs_up",
+    "display_name": "Upward Stairs",
+    "walkable": true,
+    "transparent": true,
+    "description": "Steps rise toward a dim and filtered light.",
+    "move_cost": 1.0
+  },
+  "grey_stone": {
+    "tile": "grey_stone",
+    "display_name": "Cold Grey Stone",
+    "walkable": false,
+    "transparent": false,
+    "description": "The Cold Grey Stone. It seems to vibrate to a faint hum on the edge of your hearing.",
+    "move_cost": 1.0
+  },
+  "ancient_floor": {
+    "tile": "ancient_floor",
+    "display_name": "Ancient Stone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Stone laid long before men walked the world. Cold and grey.",
+    "move_cost": 1.0
+  },
+  "table": {
+    "tile": "table",
+    "display_name": "Wooden Table",
+    "walkable": false,
+    "transparent": true,
+    "description": "A table. Something was left on it.",
+    "move_cost": 1.0
+  },
+  "old_wall": {
+    "tile": "stone_wall",
+    "display_name": "Stone Wall",
+    "walkable": false,
+    "transparent": false,
+    "description": "Rough and weathered stone. Reassuringly silent.",
+    "move_cost": 1.0
+  },
+  "flower_pilgrims_woe": {
+    "tile": "flower",
+    "display_name": "Pilgrim's Woe",
+    "walkable": true,
+    "transparent": true,
+    "description": "Pallid blooms sway atop dark fronds.",
+    "move_cost": 1.2,
+    "harvestable": true,
+    "harvest_item": "pilgrims_woe_petals",
+    "depleted_tile": "flower_pilgrims_woe_depleted"
+  },
+  "flower_pilgrims_woe_depleted": {
+    "tile": "flower",
+    "display_name": "Pilgrim's Woe",
+    "walkable": true,
+    "transparent": true,
+    "description": "Dark fronds remain. The pale blooms have been stripped.",
+    "move_cost": 1.1
+  },
+  "flower_murk_violet": {
+    "tile": "flower",
+    "display_name": "Murk Violet",
+    "walkable": true,
+    "transparent": true,
+    "description": "Bruised purple petals release a sickly sweet perfume.",
+    "move_cost": 1.2,
+    "harvestable": true,
+    "harvest_item": "murk_violet_stem",
+    "depleted_tile": "flower_murk_violet_depleted"
+  },
+  "flower_murk_violet_depleted": {
+    "tile": "flower",
+    "display_name": "Murk Violet",
+    "walkable": true,
+    "transparent": true,
+    "description": "The stem is bare. Whatever grew from it has been taken.",
+    "move_cost": 1.1
+  },
+  "shroom_sulphur_cap": {
+    "tile": "mushroom",
+    "display_name": "Sulphur Cap",
+    "walkable": true,
+    "transparent": true,
+    "description": "The fleshy orange cap exudes a pungent aroma.",
+    "move_cost": 1.1,
+    "harvestable": true,
+    "harvest_item": "sulphur_cap_fragment",
+    "depleted_tile": "shroom_sulphur_cap_depleted"
+  },
+  "shroom_sulphur_cap_depleted": {
+    "tile": "mushroom",
+    "display_name": "Sulphur Cap",
+    "walkable": true,
+    "transparent": true,
+    "description": "The stem remains. The cap has been cut away.",
+    "move_cost": 1.0
+  },
+  "shroom_prophets_eye": {
+    "tile": "mushroom",
+    "display_name": "Prophet's Eye",
+    "walkable": true,
+    "transparent": true,
+    "description": "Used in the foul liquors an unguents of the Alchemists. It is said to bring true visions, before the end.",
+    "move_cost": 1.1,
+    "harvestable": true,
+    "harvest_item": "prophets_eye_cap",
+    "depleted_tile": "shroom_prophets_eye_depleted"
+  },
+  "shroom_prophets_eye_depleted": {
+    "tile": "mushroom",
+    "display_name": "Prophet's Eye",
+    "walkable": true,
+    "transparent": true,
+    "description": "The stalk is all that remains. The cap is gone.",
+    "move_cost": 1.0
+  },
+  "varied_grass": {
+    "tile": "grass",
+    "display_name": "varied_grass",
+    "walkable": true,
+    "transparent": true,
+    "description": "This text should never be seen!.",
+    "move_cost": 1.0
+  },
+  "wood_wall": {
+    "tile": "wall",
+    "display_name": "Wooden Wall",
+    "walkable": false,
+    "transparent": false,
+    "description": "Weathered wood. The rot has begun to set in.",
+    "move_cost": 1.0
+  },
+  "street_lamp_working": {
+    "tile": "street_lamp_working",
+    "display_name": "Street Lamp",
+    "walkable": false,
+    "transparent": true,
+    "description": "An iron lamp post. The flame within burns steady.",
+    "move_cost": 1.0,
+    "light_emit": 5,
+    "light_mode": "steady",
+    "light_color": [
+      226,
+      181,
+      112
+    ]
+  },
+  "street_lamp_sputtering": {
+    "tile": "street_lamp_sputtering",
+    "display_name": "Failing Lamp",
+    "walkable": false,
+    "transparent": true,
+    "description": "The flame gutters. Something is wrong with the oil.",
+    "move_cost": 1.0,
+    "light_emit": 4,
+    "light_mode": "pulse",
+    "light_pulse_min": 2,
+    "light_pulse_max": 4,
+    "light_pulse_rate": 0.4,
+    "light_color": [
+      210,
+      150,
+      80
+    ]
+  },
+  "street_lamp_dead": {
+    "tile": "street_lamp_dead",
+    "display_name": "Dead Lamp",
+    "walkable": false,
+    "transparent": true,
+    "description": "A cold iron post. Whatever burned here is long exhausted.",
+    "move_cost": 1.0
+  },
+  "road_0": {
+    "tile": "road_0",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_1": {
+    "tile": "road_1",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_2": {
+    "tile": "road_2",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_3": {
+    "tile": "road_3",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_4": {
+    "tile": "road_4",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_5": {
+    "tile": "road_5",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_6": {
+    "tile": "road_6",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_7": {
+    "tile": "road_7",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_8": {
+    "tile": "road_8",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_9": {
+    "tile": "road_9",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_10": {
+    "tile": "road_10",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_11": {
+    "tile": "road_11",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_12": {
+    "tile": "road_12",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_13": {
+    "tile": "road_13",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_14": {
+    "tile": "road_14",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_15": {
+    "tile": "road_15",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "cobblestone_cracked": {
+    "tile": "cobblestone_cracked",
+    "display_name": "Cracked Cobblestone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Cobblestones broken by time and neglect.",
+    "move_cost": 1.0
+  },
+  "cobblestone_mossy": {
+    "tile": "cobblestone_mossy",
+    "display_name": "Mossy Cobblestone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Moss creeps between the old stones.",
+    "move_cost": 1.1
+  },
+  "puddle": {
+    "tile": "puddle",
+    "display_name": "Standing Puddle",
+    "walkable": true,
+    "transparent": true,
+    "description": "Rainwater collected between the stones.",
+    "move_cost": 1.2,
+    "secondary_effect": "chill"
+  },
+  "debris_scatter": {
+    "tile": "debris_scatter",
+    "display_name": "Scattered Debris",
+    "walkable": true,
+    "transparent": true,
+    "description": "Rubble and detritus strewn across the ground.",
+    "move_cost": 1.2
+  },
+  "waystone_plinth": {
+    "tile": "waystone_plinth",
+    "display_name": "Waystone",
+    "walkable": false,
+    "transparent": true,
+    "blocks_move": true,
+    "description": "The cold grey stone post. Faint resonance rises from its base.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.2,
+    "visual_fx": "sparkle",
+    "interactable": "examine_waystone"
+  },
+  "stele": {
+    "tile": "stele",
+    "display_name": "Stele",
+    "walkable": false,
+    "transparent": true,
+    "blocks_move": true,
+    "description": "A standing stone. Inscribed with marks that predate the settlement.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.05,
+    "visual_fx": "pulse_dim",
+    "interactable": "examine_stele"
+  },
+  "packed_earth": {
+    "tile": "packed_earth",
+    "display_name": "Packed Earth",
+    "walkable": true,
+    "transparent": true,
+    "description": "Firm earth worn flat by years of passing feet.",
+    "move_cost": 1.0
+  },
+  "dirt_path": {
+    "tile": "dirt_path",
+    "display_name": "Dirt Path",
+    "walkable": true,
+    "transparent": true,
+    "description": "A worn path. The ground remembers the walking.",
+    "move_cost": 1.0
+  },
+  "weedy_cobble": {
+    "tile": "weedy_cobble",
+    "display_name": "Weedy Cobblestone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Old cobbles split by weeds. The stones are losing their arrangement.",
+    "move_cost": 1.2
+  },
+  "tall_grass": {
+    "tile": "tall_grass",
+    "display_name": "Tall Grass",
+    "walkable": true,
+    "transparent": true,
+    "description": "Rank grass grown head-high in neglected places.",
+    "move_cost": 2.5,
+    "secondary_effect": "concealment"
+  },
+  "brambles": {
+    "tile": "brambles",
+    "display_name": "Brambles",
+    "walkable": true,
+    "transparent": true,
+    "description": "Thorned growth. It will take its tithe.",
+    "move_cost": 2.0,
+    "secondary_effect": "thorns"
+  },
+  "shallow_water": {
+    "tile": "shallow_water",
+    "display_name": "Shallow Water",
+    "walkable": true,
+    "transparent": true,
+    "description": "Cold water, ankle-deep. The cold moves upward.",
+    "move_cost": 1.5,
+    "secondary_effect": "chill",
+    "drinkable": true,
+    "drink_hydration": 400,
+    "interactable": "drink_source"
+  },
+  "deep_water": {
+    "tile": "deep_water",
+    "display_name": "Deep Water",
+    "walkable": true,
+    "transparent": true,
+    "description": "Dark water, waist-deep. The cold is complete.",
+    "move_cost": 3.0,
+    "secondary_effect": "chill_heavy",
+    "creature_passable": false
+  },
+  "river_water": {
+    "tile": "river_water",
+    "display_name": "River Water",
+    "walkable": true,
+    "transparent": true,
+    "description": "a swift dark river",
+    "move_cost": 2.5,
+    "secondary_effect": "chill",
+    "creature_passable": false
+  },
+  "river_bank": {
+    "tile": "river_bank",
+    "display_name": "Riverbank",
+    "walkable": true,
+    "transparent": true,
+    "description": "soft churned bank",
+    "move_cost": 1.3
+  },
+  "river_stones": {
+    "tile": "river_stones",
+    "display_name": "Wet Stones",
+    "walkable": true,
+    "transparent": true,
+    "description": "wet flat stones",
+    "move_cost": 1.4
+  },
+  "blood_pool": {
+    "tile": "blood_pool",
+    "display_name": "Blood Pool",
+    "walkable": true,
+    "transparent": true,
+    "description": "pooled blood",
+    "move_cost": 1.2
+  },
+  "bone_dust": {
+    "tile": "bone_dust",
+    "display_name": "Powdered Bone",
+    "walkable": true,
+    "transparent": true,
+    "description": "powdered bone",
+    "move_cost": 1.0,
+    "secondary_effect": "resonance_trace"
+  },
+  "ectoplasm_pool": {
+    "tile": "ectoplasm_pool",
+    "display_name": "Ectoplasm",
+    "walkable": true,
+    "transparent": true,
+    "description": "cold luminous fluid",
+    "move_cost": 1.5,
+    "secondary_effect": "chill",
+    "visual_fx": "sparkle"
+  },
+  "ichor_seep": {
+    "tile": "ichor_seep",
+    "display_name": "Ichor Seep",
+    "walkable": true,
+    "transparent": true,
+    "description": "dark iridescent seep",
+    "move_cost": 1.3,
+    "visual_fx": "sparkle"
+  },
+  "verdigris_fluid": {
+    "tile": "verdigris_fluid",
+    "display_name": "Verdigris Fluid",
+    "walkable": true,
+    "transparent": true,
+    "description": "verdigris-green fluid",
+    "move_cost": 1.2,
+    "secondary_effect": "poison_tile"
+  },
+  "bell_intact": {
+    "tile": "bell_intact",
+    "display_name": "Bell",
+    "walkable": false,
+    "transparent": false,
+    "description": "A bell. The metal hums at the edge of hearing.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.85,
+    "bell_state": "intact"
+  },
+  "bell_cracked": {
+    "tile": "bell_cracked",
+    "display_name": "Cracked Bell",
+    "walkable": false,
+    "transparent": false,
+    "description": "A cracked bell. Something leaks from the fracture.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.45,
+    "bell_state": "cracked",
+    "interactable": "examine_bell"
+  },
+  "bell_dead": {
+    "tile": "bell_dead",
+    "display_name": "Dead Bell",
+    "walkable": false,
+    "transparent": false,
+    "description": "A dead bell. The silence around it is complete.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.0,
+    "bell_state": "dead",
+    "interactable": "examine_bell"
+  },
+  "coldbell_flower": {
+    "tile": "coldbell_flower",
+    "display_name": "Coldbell Flower",
+    "walkable": true,
+    "transparent": true,
+    "description": "A pale blue flower that grows near resonant stone. Its petals never quite dry.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.04,
+    "visual_fx": "sparkle",
+    "harvestable": true,
+    "harvest_item": "coldbell_cutting",
+    "depleted_tile": "coldbell_flower_depleted"
+  },
+  "coldbell_flower_depleted": {
+    "tile": "coldbell_flower",
+    "display_name": "Coldbell Flower",
+    "walkable": true,
+    "transparent": true,
+    "description": "The pale stem remains, cut at the base. The petals and cutting are gone.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.02
+  },
+  "resonance_stone": {
+    "tile": "resonance_stone",
+    "display_name": "Resonance Stone",
+    "walkable": false,
+    "transparent": true,
+    "description": "A fragment of grey stone still vibrating at frequencies the body registers before the ear.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.12
+  },
+  "resonance_seep": {
+    "tile": "resonance_seep",
+    "display_name": "Resonance Seep",
+    "walkable": true,
+    "transparent": true,
+    "description": "Something has died here. The floor holds a frequency the living body registers as a faint pressure behind the eyes.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.15,
+    "visual_fx": [
+      "sparkle",
+      "pulse_dim"
+    ]
+  },
+  "dead_wood": {
+    "tile": "dead_wood",
+    "display_name": "Dead Branch",
+    "walkable": true,
+    "transparent": true,
+    "description": "A fallen branch, dry enough.",
+    "move_cost": 1.0,
+    "gatherable": true,
+    "gather_item": "wood_bundle",
+    "gather_depletes": true,
+    "gather_chance": 1.0,
+    "depleted_tile": "varied_grass"
+  },
+  "flint_rock": {
+    "tile": "flint_rock",
+    "display_name": "Flint Rock",
+    "walkable": true,
+    "transparent": true,
+    "description": "Grey-black stone. Fractures cleanly.",
+    "move_cost": 1.0,
+    "gatherable": true,
+    "gather_item": "flint_shard",
+    "gather_depletes": true,
+    "gather_chance": 0.5,
+    "depleted_tile": "flint_rock_depleted"
+  },
+  "flint_rock_depleted": {
+    "tile": "flint_rock_depleted",
+    "display_name": "Worked Stone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worked stone. Nothing left to take.",
+    "move_cost": 1.0
+  },
+  "clay_deposit": {
+    "tile": "clay_deposit",
+    "display_name": "Clay Deposit",
+    "walkable": true,
+    "transparent": true,
+    "description": "A pocket of dense river clay. Reddish-grey. Yields to the hand.",
+    "move_cost": 1.2,
+    "gatherable": true,
+    "gather_item": "clay_lump",
+    "gather_depletes": true,
+    "gather_chance": 0.8,
+    "depleted_tile": "clay_deposit_depleted"
+  },
+  "clay_deposit_depleted": {
+    "tile": "clay_deposit_depleted",
+    "display_name": "Worked Clay",
+    "walkable": true,
+    "transparent": true,
+    "description": "Scraped out. What was here has been taken.",
+    "move_cost": 1.0
+  },
+  "campfire_unlit": {
+    "tile": "campfire_unlit",
+    "display_name": "Dead Campfire",
+    "walkable": false,
+    "transparent": true,
+    "description": "A ring of stones with wood laid within. Unlit.",
+    "move_cost": 1.0,
+    "interactable": "light_campfire"
+  },
+  "campfire_lit": {
+    "tile": "campfire_lit",
+    "display_name": "Campfire",
+    "walkable": false,
+    "transparent": true,
+    "description": "A low fire burns steadily.",
+    "move_cost": 1.0,
+    "light_emit": 0.7,
+    "warmth_radius": 3,
+    "warmth_strength": 1.0,
+    "visual_fx": "embers",
+    "interactable": "extinguish_campfire"
+  },
+  "vine_growth": {
+    "tile": "vine_growth",
+    "display_name": "Vine Growth",
+    "walkable": true,
+    "transparent": true,
+    "description": "Dense vine growth. It shifts underfoot.",
+    "move_cost": 3.0
+  }
+}

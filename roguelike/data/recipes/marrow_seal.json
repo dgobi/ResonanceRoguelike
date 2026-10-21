@@ -1,0 +1,20 @@
+{
+  "id": "marrow_seal",
+  "name": "marrow seal",
+  "category": "alchemy",
+  "description": "Render compressed marrow until it hardens. Applied to armour, it resists what it once carried.",
+  "known": true,
+  "components": [
+    {"tag": "bony", "min_tier": 2, "quantity": 1},
+    {"tag": "waxy", "min_tier": 1, "quantity": 1}
+  ],
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 2}
+  ],
+  "result_item": "marrow_seal",
+  "passive_processing": true,
+  "processing_turns": 15,
+  "processing_source": "rendering",
+  "processing_decor": "cooking_meat",
+  "completion_message": "The marrow has set. Hard as stone."
+}

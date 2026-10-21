@@ -1,0 +1,24 @@
+{
+  "id": "covered_well_house_a",
+  "category": "civic",
+  "width": 6,
+  "height": 5,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {"civic": 4, "market": 2, "residential": 1},
+  "interior_loot_table": null,
+  "legend": {
+    "#": "wall",
+    ".": "worn_stone",
+    "~": "shallow_water",
+    " ": null
+  },
+  "layers": [
+    " #### ",
+    "#....#",
+    "#.~..#",
+    "#....#",
+    " #### "
+  ],
+  "note": "A covered well house. Open on east and west faces — passable from either direction. Worn stone surrounds a shallow water well at centre."
+}

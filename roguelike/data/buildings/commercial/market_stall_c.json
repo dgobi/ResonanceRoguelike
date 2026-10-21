@@ -1,0 +1,45 @@
+{
+  "id": "market_stall_c",
+  "category": "commercial",
+  "width": 8,
+  "height": 6,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 5,
+    "waystone_square": 2
+  },
+  "description": "An open-front market stall. Goods scattered across the counter. The weighing stone sits where it was set down last.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#w....w#",
+    "#......#",
+    "#......#",
+    "#......#",
+    "........"
+  ],
+  "special_tiles": [
+    {
+      "x": 6,
+      "y": 2,
+      "type": "container",
+      "decor_id": "clay_pot_cluster",
+      "loot_pools": ["commoner_kitchen"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, "measuring_stone", null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, "carved_post", null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null]
+  ]
+}

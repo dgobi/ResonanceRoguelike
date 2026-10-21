@@ -1,0 +1,19 @@
+{
+    "id": "hardened_step",
+    "name": "Hardened Step",
+    "description": "The soles of your feet have calcified. Difficult ground holds less purchase over you.",
+    "category": "The Hollow Road",
+    "cost": 1,
+    "effects": [
+        "Move debt from difficult terrain reduced by 30%.",
+        "Applies to: mud, tall grass, shallow water, brambles, swamp floor, and all terrain with move_cost > 1.0."
+    ],
+    "hooks": [
+        {
+            "event": "ON_TILE_ENTERED",
+            "handler": "perk_hardened_step_tile_entered"
+        }
+    ],
+    "conflicts": [],
+    "requires": []
+}

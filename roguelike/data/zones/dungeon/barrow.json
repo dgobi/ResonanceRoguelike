@@ -1,0 +1,20 @@
+{
+  "id": "barrow",
+  "name": "Barrow",
+  "category": "dungeon",
+  "description": "Pre-civilization dead. Tight ochre passages, grave-goods placed with intention. The dead here were put down carefully by people who understood exactly what they were sealing in.",
+  "terrain_palette": ["worn_stone", "floor"],
+  "ambient_light": 0.0,
+  "structures": [
+    {"id": "burial_chamber",    "weight": 20},
+    {"id": "offering_alcove",   "weight": 15},
+    {"id": "sealed_tomb",       "weight": 10}
+  ],
+  "creatures": [
+    {"id": "barrow_wight",      "weight": 20, "chance": 0.5},
+    {"id": "grave_thing",       "weight": 15, "chance": 0.4}
+  ],
+  "ambient_loot": "old_burial_goods",
+  "light_level": "dark",
+  "tags": ["dungeon", "dead", "ancient", "barrow"]
+}

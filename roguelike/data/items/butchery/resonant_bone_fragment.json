@@ -1,0 +1,19 @@
+{
+  "id": "resonant_bone_fragment",
+  "name": "Resonant Bone Fragment",
+  "description": "A splinter of something old. The tone in it is audible if you press it against your skull and hold still. Do not hold it near bells.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.1,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "resonant",
+      "tier": 2
+    },
+    {
+      "tag": "bony",
+      "tier": 2
+    }
+  ]
+}

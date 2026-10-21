@@ -1,0 +1,19 @@
+{
+  "id": "crow_meat",
+  "name": "Crow Meat",
+  "description": "Dark and stringy. The smell is wrong in a specific way. Something has accumulated here that ordinary meat does not carry.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.2,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "vital",
+      "tier": 1
+    }
+  ]
+}

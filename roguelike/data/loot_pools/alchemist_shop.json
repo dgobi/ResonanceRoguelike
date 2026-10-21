@@ -1,0 +1,15 @@
+{
+  "id": "alchemist_shop",
+  "description": "The stock of a village alchemist. Dried herbs, vessels, reagents.",
+  "roll_count": [3, 5],
+  "items": [
+    {"item_id": "dried_resonant_herb", "weight": 40},
+    {"item_id": "dried_soporific_herb", "weight": 40},
+    {"item_id": "dried_bitter_herb", "weight": 50},
+    {"item_id": "coldbell_cutting", "weight": 35},
+    {"item_id": "crow_bile", "weight": 30},
+    {"item_id": "sulphur_cap_fragment", "weight": 25},
+    {"item_id": "clay_pot", "weight": 120},
+    {"item_id": "herbalist_pouch", "weight": 15}
+  ]
+}

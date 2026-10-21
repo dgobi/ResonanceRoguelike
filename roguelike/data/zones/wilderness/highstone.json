@@ -1,0 +1,25 @@
+{
+  "id": "highstone",
+  "name": "The Highstone",
+  "category": "wilderness",
+  "description": "Rocky upland. The bones of the world showing through. Old watchtowers on ridgelines, built by people who feared what was below.",
+  "terrain_palette": ["gravel", "rock", "thin_soil"],
+  "tree_density": 0.08,
+  "scatter": [
+    {"terrain": "rock",          "chance": 0.20},
+    {"terrain": "gravel",        "chance": 0.15}
+  ],
+  "structures": [
+    {"id": "watchtower",         "weight": 8},
+    {"id": "hermit_cave",        "weight": 6},
+    {"id": "cairn_field",        "weight": 5}
+  ],
+  "creatures": [
+    {"id": "stone_lurker",       "weight": 10, "chance": 0.2},
+    {"id": "highland_bandit",    "weight": 12, "chance": 0.25}
+  ],
+  "ambient_loot": "highland_scraps",
+  "light_level": "normal",
+  "tags": ["wilderness", "highland", "highstone", "rocky"],
+  "ambient_light": 1.0
+}

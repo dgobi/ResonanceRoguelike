@@ -1,0 +1,16 @@
+{
+  "id": "growth_sense",
+  "name": "The Green Knows You",
+  "category": "The Green Patience",
+  "cost": 1,
+  "description": "Something in the living world has recognised your passage.",
+  "effects": [
+    "On first chunk entry, harvestable plant tiles within FOV pulse briefly.",
+    "Plants revealed in look mode as ripe for harvest."
+  ],
+  "hooks": [
+    {"event": "ON_CHUNK_ENTERED", "handler": "perk_growth_sense_chunk_entered"}
+  ],
+  "conflicts": [],
+  "requires": []
+}

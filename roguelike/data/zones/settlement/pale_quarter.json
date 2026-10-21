@@ -1,0 +1,22 @@
+{
+  "id": "pale_quarter",
+  "name": "The Pale Quarter",
+  "category": "settlement",
+  "description": "Surgeons, apothecaries, a door with no handle on the outside. The Pale Quarter exists in every town but no one admits to visiting it.",
+  "terrain_palette": ["flagstone", "worn_stone"],
+  "between_buildings": "narrow_alley",
+  "structures": [
+    {"id": "apothecary",        "weight": 15},
+    {"id": "surgeons_room",     "weight": 10},
+    {"id": "sealed_house",      "weight": 8},
+    {"id": "hovel",             "weight": 20}
+  ],
+  "creatures": [
+    {"id": "pale_surgeon_npc",  "weight": 8,  "chance": 0.3},
+    {"id": "plague_crow",       "weight": 12, "chance": 0.3}
+  ],
+  "ambient_loot": "arcane_oddities",
+  "light_level": "dim",
+  "tags": ["settlement", "strange", "alchemical", "pale_quarter"],
+  "ambient_light": 0.3
+}

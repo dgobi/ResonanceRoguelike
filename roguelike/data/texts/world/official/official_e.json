@@ -1,0 +1,9 @@
+{
+  "id": "world_official_b",
+  "title": "Notice — Bell Access Restriction",
+  "type": "official",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "By order of the Guild of the Resonant Stone: access to the belfry chamber is restricted to certified wardens and guild-approved bellwrights. Citizens are reminded that the bell must not be struck, rung, scraped, or caused to vibrate by any means outside of scheduled tuning periods. The bell is not decorative. The bell is not a place of prayer. The bell is an instrument of civic calibration and will be treated accordingly. Violations carry a fine of not less than six silver and may result in further penalties at the guild's discretion.", "damaged": false}]
+}

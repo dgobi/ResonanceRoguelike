@@ -1,0 +1,20 @@
+{
+  "id": "vault",
+  "name": "The Vault",
+  "category": "dungeon",
+  "description": "Deliberately sealed. Someone put something here and locked it. The mechanism for the lock is on the inside.",
+  "terrain_palette": ["dressed_stone", "iron_door", "worn_stone"],
+  "structures": [
+    {"id": "sealed_chamber",    "weight": 15},
+    {"id": "mechanism_room",    "weight": 10},
+    {"id": "containment_cell",  "weight": 12}
+  ],
+  "creatures": [
+    {"id": "vault_guardian",    "weight": 15, "chance": 0.4},
+    {"id": "hollow_revenant",   "weight": 10, "chance": 0.3}
+  ],
+  "ambient_loot": "arcane_oddities",
+  "light_level": "dark",
+  "tags": ["dungeon", "sealed", "vault", "strange"],
+  "ambient_light": 0.0
+}

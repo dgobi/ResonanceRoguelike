@@ -1,0 +1,9 @@
+{
+  "id": "door_notice_a",
+  "title": "A Notice, Nailed to a Door",
+  "type": "notice",
+  "condition": "weathered",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "CLOSED UNTIL THE BELL-FEAST IS DONE.\n\nMy family has gone to the square. If you have come for the rent, it is in the clay jar on the step. Do not come inside. We will be home by dark.", "damaged": false}]
+}

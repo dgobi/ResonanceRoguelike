@@ -1,0 +1,37 @@
+{
+  "id": "hovel",
+  "category": "residential",
+  "width": 7,
+  "height": 5,
+  "facing": "south",
+  "condition": "intact",
+  "tags": ["building", "residential", "town"],
+  "weight": 20,
+  "rotatable": true,
+  "district_weights": { "residential": 4, "market_quarter": 1 },
+  "interior_loot_table": "poor_household",
+  "description": "A single-room dwelling, low-ceilinged and cramped. Bed wedged into a corner. A chest beneath the window, lock broken long before the bells.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "+": "door_closed",
+    "b": "floor",
+    "c": "floor",
+    " ": null
+  },
+  "layers": [
+    "#######",
+    "#.+.b.#",
+    "#.....#",
+    "#.cc..#",
+    "#######"
+  ],
+  "special_tiles": [
+    {
+      "x": 4, "y": 1,
+      "type": "item", "item_id": "research_note", "text_id": "door_notice_a",
+      "note": "A notice nailed to the inside of the door"
+    }
+  ],
+  "note": "b=bed position, c=chest position. Furniture system pending — map to floor until wired."
+}

@@ -1,0 +1,31 @@
+{
+  "id": "coldbell_cutting",
+  "name": "coldbell cutting",
+  "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 40,
+  "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+  "harvest_from": "coldbell_flower",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "resonant",
+      "tier": 1
+    },
+    {
+      "tag": "binding",
+      "tier": 1
+    },
+    {
+      "tag": "aromatic",
+      "tier": 1
+    }
+  ]
+}

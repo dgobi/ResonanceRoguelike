@@ -1,0 +1,19 @@
+{
+  "id": "stalker_musk_gland",
+  "name": "Musk Gland",
+  "description": "A pale sac near the base of the spine. The secretion it produced was territorial in function. Rendered carefully, it might serve a different purpose.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.1,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "viscous",
+      "tier": 1
+    },
+    {
+      "tag": "purgative",
+      "tier": 1
+    }
+  ]
+}

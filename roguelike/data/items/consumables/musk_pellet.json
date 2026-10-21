@@ -1,0 +1,17 @@
+{
+  "id": "musk_pellet",
+  "name": "musk pellet",
+  "description": "A dried pellet of stalker musk. The smell is contained. Throw to release.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": true,
+  "on_use": "throw_musk_pellet",
+  "use_message": "The pellet shatters.",
+  "zone_radius": 3,
+  "zone_turns": 6,
+  "keywords": [
+    {"tag": "purgative", "tier": 2},
+    {"tag": "volatile", "tier": 1}
+  ]
+}

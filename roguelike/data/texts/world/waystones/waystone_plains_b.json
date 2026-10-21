@@ -1,0 +1,10 @@
+{
+  "id": "waystone_plains_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Dur skral.\nKeth uthar.", "damaged": false, "deep_tongue": true}]
+}

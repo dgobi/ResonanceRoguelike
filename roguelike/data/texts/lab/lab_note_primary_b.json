@@ -1,0 +1,22 @@
+{
+  "id": "lab_note_primary_b",
+  "title": "On the Nature of Sarcophagite — Later Observations",
+  "type": "document",
+  "condition": "damaged",
+  "reads_as": "pages",
+  "lacunae": true,
+  "pages": [
+    {
+      "text": "R. has looked at the ledgers. We do not speak of what we now know in the presence of [DAMAGED], whose loyalty to the Guilds of the Bell I cannot gauge and will not test. The argument between us hath changed in character. We no longer dispute what is coming. We dispute only what is owed to those who do not know.",
+      "damaged": true
+    },
+    {
+      "text": "The vessel must be prepared in sarcophagite throughout — the seams, the seals, the very air within must be kept from the stone's knowing. Whoever enters goes in ignorance of their waking, for the waking cannot be predicted, only awaited. I have explained this. I have not explained everything. I am uncertain whether those are different sins.",
+      "damaged": false
+    },
+    {
+      "text": "The subject hath entered the vessel of their own will, which is to say they entered it knowing less than I know, which is to say I am accountable for the gap between their knowing and mine. I have written this down so that I cannot pretend otherwise.",
+      "damaged": false
+    }
+  ]
+}

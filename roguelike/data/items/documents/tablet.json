@@ -1,0 +1,12 @@
+{
+  "id": "tablet",
+  "name": "clay tablet",
+  "description": "Pressed clay, fired. Marks in the surface.",
+  "tile": "document",
+  "category": "document",
+  "weight": 0.6,
+  "stackable": false,
+  "on_use": "read",
+  "render_mode": "deep_tongue",
+  "keywords": [{"tag": "bony", "tier": 1}]
+}

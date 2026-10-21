@@ -1,0 +1,101 @@
+{
+  "id": "drowned_revenant",
+  "name": "Drowned Revenant",
+  "description": "It came up from the black water. It is still going down, in a sense. Everything about it is the texture of something waterlogged.",
+  "tile": "drowned_revenant",
+  "blocks_movement": true,
+  "can_swim": true,
+  "base_hp": 14,
+  "armour_value": 2,
+  "fighter": {
+    "max_hp": 14,
+    "power": 4,
+    "defense": 1
+  },
+  "perception": {
+    "sight_radius": 6,
+    "hearing_radius": 9,
+    "sees_in_dark": true,
+    "faction": "hollow",
+    "hostile_to": [
+      "player"
+    ]
+  },
+  "ai_type": "wandering",
+  "wander_radius": 8,
+  "pursuit_timeout": 10,
+  "spawn_zones": [
+    "mere"
+  ],
+  "damage_dice": "1d4",
+  "damage_bonus": 1,
+  "essence_modifiers": {
+    "Dissolution": 1.4,
+    "Quickening": 1.6,
+    "Binding": 2.2,
+    "Severance": 1.8,
+    "Consumption": 0.5,
+    "Revelation": 1.3
+  },
+  "attack_verb": "grasps at thee",
+  "blood_type": "red",
+  "limbs": [
+    {
+      "id": "torso",
+      "size": 3,
+      "damage_multiplier": 1.0
+    },
+    {
+      "id": "limbs",
+      "size": 2,
+      "damage_multiplier": 0.8
+    }
+  ],
+  "butcher_yield": {
+    "decay_turns": 100,
+    "tiers": [
+      {
+        "min_cutting_tier": 1,
+        "yields": [
+          {
+            "item_id": "revenant_husk",
+            "quantity_min": 1,
+            "quantity_max": 1
+          },
+          {
+            "item_id": "crude_viscera",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
+        ]
+      },
+      {
+        "min_cutting_tier": 2,
+        "yields": [
+          {
+            "item_id": "revenant_husk",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "crude_viscera",
+            "quantity_min": 1,
+            "quantity_max": 1
+          },
+          {
+            "item_id": "compressed_marrow",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
+        ]
+      }
+    ]
+  },
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  },
+  "can_cross_chunks": true,
+  "speed": 0.75
+}

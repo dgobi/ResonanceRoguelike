@@ -1,0 +1,9 @@
+{
+  "id": "letter_c",
+  "title": "A Letter, Unsent",
+  "type": "letter",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "To whoever finds the grey house at the edge of Hollowhaven — the root cellar is unlocked. There is enough there for two months if you are careful. I have gone to find my sister at the mill. I do not think I will find her. I am going anyway. Use the root cellar. Use the blankets. I did not lock the door because I wanted someone to have these things.", "damaged": false}]
+}

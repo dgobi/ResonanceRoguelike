@@ -1,0 +1,27 @@
+{
+  "id": "crow_bile",
+  "name": "Crow Bile",
+  "description": "A small dark sac. What the crow has processed through it is unclear. The fluid inside is extremely bitter and faintly luminous.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.1,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "corrosive",
+      "tier": 1
+    },
+    {
+      "tag": "bitter",
+      "tier": 2
+    },
+    {
+      "tag": "caustic",
+      "tier": 2
+    },
+    {
+      "tag": "viscous",
+      "tier": 1
+    }
+  ]
+}

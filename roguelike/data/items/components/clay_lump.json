@@ -1,0 +1,13 @@
+{
+  "id": "clay_lump",
+  "name": "clay lump",
+  "description": "A handful of river clay, dense and slightly damp. Takes any shape pressed into it. Dries hard near heat.",
+  "tile": "generic_item",
+  "category": "component",
+  "weight": 0.5,
+  "stackable": true,
+  "on_use": null,
+  "keywords": [
+    {"tag": "malleable", "tier": 1}
+  ]
+}

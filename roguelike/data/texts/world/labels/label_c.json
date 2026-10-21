@@ -1,0 +1,9 @@
+{
+  "id": "label_c",
+  "title": "Label",
+  "type": "label",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Third bell. Do not tune without authorization. Do not ring under any circumstances. This means you, Corrach.", "damaged": false}]
+}

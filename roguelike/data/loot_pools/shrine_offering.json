@@ -1,0 +1,11 @@
+{
+  "id": "shrine_offering",
+  "description": "Offerings left at a shrine or folk saint alcove. Resonant things.",
+  "roll_count": [1, 3],
+  "items": [
+    {"item_id": "coldbell_cutting", "weight": 200},
+    {"item_id": "resonant_bone_fragment", "weight": 40},
+    {"item_id": "moist_pebble", "weight": 30},
+    {"item_id": "crow_bile", "weight": 25}
+  ]
+}

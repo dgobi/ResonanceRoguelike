@@ -1,0 +1,15 @@
+{
+  "id": "dried_aromatic_herb",
+  "name": "dried aromatic herb",
+  "description": "Grey-white petals, desiccated. Road dust and something older.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.02,
+  "stackable": true,
+  "on_use": null,
+  "keywords": [
+    {"tag": "fibrous", "tier": 2},
+    {"tag": "aromatic", "tier": 1},
+    {"tag": "fixative", "tier": 1}
+  ]
+}

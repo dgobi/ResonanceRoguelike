@@ -1,0 +1,13 @@
+{
+  "id": "wilderness_cache",
+  "description": "A traveller's cache, hidden or abandoned in the wild.",
+  "roll_count": [2, 3],
+  "items": [
+    {"item_id": "wood_bundle", "weight": 60},
+    {"item_id": "flint_shard", "weight": 50},
+    {"item_id": "bitter_herb", "weight": 40},
+    {"item_id": "pilgrims_woe_petals", "weight": 35},
+    {"item_id": "animal_sinew", "weight": 30},
+    {"item_id": "leather_satchel", "weight": 15}
+  ]
+}

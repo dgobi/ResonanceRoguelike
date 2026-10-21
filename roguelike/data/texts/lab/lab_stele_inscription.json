@@ -1,0 +1,21 @@
+{
+  "id": "lab_stele_inscription",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "teach_words": {
+    "count": 1,
+    "categories": ["place", "cosmic", "essence"],
+    "tier": 1
+  },
+  "pages": [
+    {
+      "text": "Keth sketh urath.\nVrath voss — vrath zhal.\nGreth kur. Greth mrath.\nUthar skral: zhal sketh keth.\nUrath dur. Urath skur.\nVrath sketh voss.\nQuz. Quz. Quz.",
+      "damaged": false,
+      "deep_tongue": true
+    }
+  ]
+}

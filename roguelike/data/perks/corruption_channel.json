@@ -1,0 +1,16 @@
+{
+  "id": "corruption_channel",
+  "name": "The Marked Path",
+  "category": "The Bound Name",
+  "cost": 2,
+  "description": "The change in you has found a direction. It moves with purpose now.",
+  "effects": [
+    "At corruption >= 0.40: attacks deal +1 flat damage.",
+    "At corruption >= 0.70: attacks deal +2 flat damage."
+  ],
+  "hooks": [
+    {"event": "ON_TURN", "handler": "perk_corruption_channel_turn"}
+  ],
+  "conflicts": [],
+  "requires": [{"type": "corruption_min", "value": 0.15}]
+}

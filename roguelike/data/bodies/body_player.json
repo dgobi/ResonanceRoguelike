@@ -1,0 +1,12 @@
+{
+  "id": "body_player",
+  "base_hp": 60,
+  "locations": [
+    {"id": "head",      "size": 1, "damage_multiplier": 1.5},
+    {"id": "torso",     "size": 4, "damage_multiplier": 1.0},
+    {"id": "right_arm", "size": 2, "damage_multiplier": 0.8},
+    {"id": "left_arm",  "size": 2, "damage_multiplier": 0.8},
+    {"id": "right_leg", "size": 2, "damage_multiplier": 0.8},
+    {"id": "left_leg",  "size": 2, "damage_multiplier": 0.8}
+  ]
+}

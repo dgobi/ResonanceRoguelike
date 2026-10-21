@@ -1,0 +1,21 @@
+{
+  "id": "high_seat",
+  "name": "The High Seat",
+  "category": "settlement",
+  "description": "Wealth expressed as architecture. Manicured gardens that are slightly wrong. Servants who do not meet your eyes.",
+  "terrain_palette": ["flagstone", "dressed_stone"],
+  "between_buildings": "dressed_stone_path",
+  "structures": [
+    {"id": "manor_house",       "weight": 10},
+    {"id": "garden_wall",       "weight": 20},
+    {"id": "counting_house",    "weight": 15}
+  ],
+  "creatures": [
+    {"id": "steward_npc",       "weight": 10, "chance": 0.4},
+    {"id": "guard_npc",         "weight": 15, "chance": 0.6}
+  ],
+  "ambient_loot": "wealthy_household",
+  "light_level": "normal",
+  "tags": ["settlement", "wealthy", "high_class", "high_seat"],
+  "ambient_light": 0.85
+}

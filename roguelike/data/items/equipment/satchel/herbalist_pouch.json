@@ -1,0 +1,12 @@
+{
+  "id": "herbalist_pouch",
+  "name": "Herbalist's Pouch",
+  "category": "equipment",
+  "slot": "satchel",
+  "tile": "herbalist_pouch",
+  "weight": 0.4,
+  "description": "Waxed cloth, many pockets. Smells of dried things.",
+  "weight_reductions": {"Consumables": 0.30, "Preparations": 0.30},
+  "keywords": [{"tag": "vessel", "tier": 1}, {"tag": "aromatic", "tier": 1}],
+  "consumed_on_use": false
+}

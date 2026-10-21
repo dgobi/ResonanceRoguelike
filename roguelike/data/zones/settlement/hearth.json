@@ -1,0 +1,20 @@
+{
+  "id": "hearth",
+  "name": "Hearth District",
+  "category": "settlement",
+  "description": "Where common folk survive. Cramped hovels, smoke-stained walls, a communal well that may or may not be clean.",
+  "terrain_palette": ["floor", "cobblestone"],
+  "between_buildings": "mud_path",
+  "structures": [
+    {"id": "hovel",             "weight": 30},
+    {"id": "longhouse",         "weight": 15},
+    {"id": "hunter_cabin",      "weight": 10}
+  ],
+  "creatures": [
+    {"id": "peasant_npc",       "weight": 20, "chance": 0.6}
+  ],
+  "ambient_loot": "poor_household",
+  "light_level": "normal",
+  "tags": ["settlement", "residential", "low_class", "hearth"],
+  "ambient_light": 0.8
+}

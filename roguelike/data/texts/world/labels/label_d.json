@@ -1,0 +1,9 @@
+{
+  "id": "label_d",
+  "title": "Label",
+  "type": "label",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Contents: census records, years 1 through 40. Cross-reference with bell registry before disposal. Do not dispose.", "damaged": false}]
+}

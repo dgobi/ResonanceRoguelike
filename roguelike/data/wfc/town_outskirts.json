@@ -1,0 +1,32 @@
+{
+  "tiles": [
+    {"name": "packed_earth",  "terrain": "packed_earth",   "weight": 25},
+    {"name": "tall_grass",    "terrain": "tall_grass",     "weight": 30},
+    {"name": "weedy_cobble",  "terrain": "weedy_cobble",   "weight": 15},
+    {"name": "debris",        "terrain": "debris_scatter", "weight": 20},
+    {"name": "gravel",        "terrain": "gravel",         "weight": 10}
+  ],
+  "adjacency": {
+    "packed_earth": {"N":["packed_earth","tall_grass","weedy_cobble","gravel"],
+                     "E":["packed_earth","tall_grass","weedy_cobble","gravel"],
+                     "S":["packed_earth","tall_grass","weedy_cobble","gravel"],
+                     "W":["packed_earth","tall_grass","weedy_cobble","gravel"]},
+    "tall_grass":   {"N":["tall_grass","packed_earth","debris"],
+                     "E":["tall_grass","packed_earth","debris"],
+                     "S":["tall_grass","packed_earth","debris"],
+                     "W":["tall_grass","packed_earth","debris"]},
+    "weedy_cobble": {"N":["packed_earth","weedy_cobble","debris","tall_grass"],
+                     "E":["packed_earth","weedy_cobble","debris","tall_grass"],
+                     "S":["packed_earth","weedy_cobble","debris","tall_grass"],
+                     "W":["packed_earth","weedy_cobble","debris","tall_grass"]},
+    "debris":       {"N":["weedy_cobble","debris","tall_grass"],
+                     "E":["weedy_cobble","debris","tall_grass"],
+                     "S":["weedy_cobble","debris","tall_grass"],
+                     "W":["weedy_cobble","debris","tall_grass"]},
+    "gravel":       {"N":["packed_earth","gravel","weedy_cobble"],
+                     "E":["packed_earth","gravel","weedy_cobble"],
+                     "S":["packed_earth","gravel","weedy_cobble"],
+                     "W":["packed_earth","gravel","weedy_cobble"]}
+  },
+  "fallback": "packed_earth"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "raw_meat_common",
+  "name": "Raw Meat",
+  "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.4,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "vital",
+      "tier": 1
+    }
+  ]
+}

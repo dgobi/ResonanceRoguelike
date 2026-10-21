@@ -1,0 +1,47 @@
+{
+  "id": "meeting_hall_a",
+  "category": "civic",
+  "width": 14,
+  "height": 10,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "waystone_square": 3,
+    "market": 2,
+    "residential": 1
+  },
+  "description": "A meeting hall. Wide open floor. Two carved posts support the roof. A weighing stone at the head of the room where disputes were settled.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "##############",
+    "#wwwwwwwwwwww#",
+    "#w..........w#",
+    "#w.ffffffff.w#",
+    "#w.f......f.w#",
+    "#w.f......f.w#",
+    "#w.ffffffff.w#",
+    "#w..........w#",
+    "#............#",
+    "#####..#######"
+  ],
+  "special_tiles": [],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, "carved_post", null, null, null, null, "carved_post", null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, "measuring_stone", null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}

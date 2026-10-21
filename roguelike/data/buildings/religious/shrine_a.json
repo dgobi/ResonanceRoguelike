@@ -1,0 +1,60 @@
+{
+  "id": "shrine_a",
+  "category": "religious",
+  "width": 8,
+  "height": 7,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "waystone_square": 3,
+    "ossuary": 4
+  },
+  "interior_loot_table": "offering_goods",
+  "description": "A small shrine building. Single chamber, flagstone floor, offering shelf along north wall.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#ffffff#",
+    "#ffffff#",
+    "#......#",
+    "#......#",
+    "#......#",
+    "###.####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "item",
+      "item_id": "inscription",
+      "text_id": "world_sermon_b",
+      "note": "Religious text on offering shelf"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "type": "item",
+      "item_id": "inscription",
+      "text_id": "text_shrine_inscription",
+      "note": "Deep tongue inscription at altar"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "type": "scene",
+      "scene_id": "shrine_offering_placed",
+      "note": "Offering left at the shrine"
+    }
+  ],
+  "note": "PLACEHOLDER \u2014 redesign. North flagstone rows = offering shelf/altar area. Door at (3,6)."
+}

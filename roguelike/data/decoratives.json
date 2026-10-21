@@ -1,0 +1,589 @@
+[
+  {
+    "id": "decor_candle",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A stub of tallow, burned low.",
+    "visual_fx": "flame_low"
+  },
+  {
+    "id": "decor_bone_pile",
+    "ascii": "%",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Old bones. No orientation to any stone."
+  },
+  {
+    "id": "decor_flower_pot",
+    "ascii": "\"",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Cracked clay. Something grey still grows."
+  },
+  {
+    "id": "decor_hanging_cloth",
+    "ascii": "|",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Cloth hung from a beam. The pattern is gone."
+  },
+  {
+    "id": "campfire_unlit",
+    "ascii": "*",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A ring of stones with wood laid within. Unlit.",
+    "interactable": "light_campfire",
+    "consumed_on_use": false
+  },
+  {
+    "id": "campfire_lit",
+    "ascii": "*",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A ring of stones. Fire within.",
+    "interactable": "extinguish_campfire",
+    "warmth_radius": 3,
+    "visual_fx": "flame_med",
+    "consumed_on_use": false,
+    "light_emit": 5
+  },
+  {
+    "id": "blood_pool",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Blood, dark and pooled."
+  },
+  {
+    "id": "bone_dust",
+    "ascii": ".",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Pale residue. The bone has given up its shape."
+  },
+  {
+    "id": "ectoplasm_pool",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A slick of something cold. Faintly luminous."
+  },
+  {
+    "id": "ichor_seep",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Dark fluid, slow-moving. The smell is wrong."
+  },
+  {
+    "id": "verdigris_fluid",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Green-black fluid. Corroded where it settles."
+  },
+  {
+    "id": "corpse",
+    "ascii": "%",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Something that was a creature. Already cooling.",
+    "interactable": "butcher"
+  },
+  {
+    "id": "drying_herb",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Herb spread to dry. The heat draws out what it holds.",
+    "visual_fx": "smoke_incense",
+    "processing": true
+  },
+  {
+    "id": "cooking_meat",
+    "ascii": "%",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Meat set over the fire. The fat runs and spits.",
+    "visual_fx": "flame_low",
+    "processing": true
+  },
+  {
+    "id": "barrel",
+    "ascii": "o",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A barrel. Staved wood, iron-banded.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "crate",
+    "ascii": "[",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A wooden crate.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "sack",
+    "ascii": "(",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A sack, tied at the neck.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "coffer",
+    "ascii": "{",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A coffer. Hinged and clasped.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "cracked_bell",
+    "ascii": "B",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A cracked bell. The metal carries marks.",
+    "interactable": "examine_bell",
+    "visual_fx": "pulse_dim"
+  },
+  {
+    "id": "intact_bell",
+    "ascii": "B",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A bell, whole. The marks on it are precise.",
+    "interactable": "examine_bell",
+    "visual_fx": "pulse_glow"
+  },
+  {
+    "id": "bell_dead",
+    "ascii": "B",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A dead bell. The silence around it is complete.",
+    "interactable": "examine_dead_bell"
+  },
+  {
+    "id": "waystone_plinth",
+    "ascii": "Y",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "The cold grey stone post. Faint resonance rises from its base.",
+    "interactable": "examine_waystone",
+    "visual_fx": "pulse_dim",
+    "resonance_emit": 0.2,
+    "light_emit": 1
+  },
+  {
+    "id": "stele",
+    "ascii": "I",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A standing stone. Inscribed with marks that predate the settlement.",
+    "interactable": "examine_stele",
+    "visual_fx": "pulse_dim",
+    "resonance_emit": 0.05
+  },
+  {
+    "id": "street_lamp_working",
+    "ascii": "!",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "An iron lamp post. The flame within burns steady.",
+    "visual_fx": "flame_low",
+    "light_emit": 5
+  },
+  {
+    "id": "street_lamp_sputtering",
+    "ascii": "!",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "The flame gutters. Something is wrong with the oil.",
+    "visual_fx": "flicker",
+    "light_emit": 3
+  },
+  {
+    "id": "street_lamp_dead",
+    "ascii": "!",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A cold iron post. Whatever burned here is long exhausted."
+  },
+  {
+    "id": "coldbell_flower",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A pale blue flower that grows near resonant stone. Its petals never quite dry.",
+    "visual_fx": "sparkle",
+    "resonance_emit": 0.04,
+    "harvestable": true,
+    "harvest_item": "coldbell_cutting",
+    "depleted_id": "coldbell_flower_depleted"
+  },
+  {
+    "id": "coldbell_flower_depleted",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "The pale stem remains, cut at the base. The petals and cutting are gone.",
+    "resonance_emit": 0.02
+  },
+  {
+    "id": "flower_pilgrims_woe",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Pallid blooms sway atop dark fronds.",
+    "harvestable": true,
+    "harvest_item": "pilgrims_woe_petals",
+    "depleted_id": "flower_pilgrims_woe_depleted"
+  },
+  {
+    "id": "flower_pilgrims_woe_depleted",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Dark fronds remain. The pale blooms have been stripped."
+  },
+  {
+    "id": "flower_murk_violet",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Bruised purple petals release a sickly sweet perfume.",
+    "harvestable": true,
+    "harvest_item": "murk_violet_stem",
+    "depleted_id": "flower_murk_violet_depleted"
+  },
+  {
+    "id": "flower_murk_violet_depleted",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "The stem is bare. Whatever grew from it has been taken."
+  },
+  {
+    "id": "shroom_sulphur_cap",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "The fleshy orange cap exudes a pungent aroma.",
+    "harvestable": true,
+    "harvest_item": "sulphur_cap_fragment",
+    "depleted_id": "shroom_sulphur_cap_depleted"
+  },
+  {
+    "id": "shroom_sulphur_cap_depleted",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "The stem remains. The cap has been cut away."
+  },
+  {
+    "id": "shroom_prophets_eye",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Used in the foul liquors an unguents of the Alchemists. It is said to bring true visions, before the end.",
+    "harvestable": true,
+    "harvest_item": "prophets_eye_cap",
+    "depleted_id": "shroom_prophets_eye_depleted"
+  },
+  {
+    "id": "shroom_prophets_eye_depleted",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "The stalk is all that remains. The cap is gone."
+  },
+  {
+    "id": "cold_hearth",
+    "ascii": "ψ",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A cold hearth. The ash is old.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "wooden_shelf",
+    "ascii": "≡",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A wooden shelf. Things were kept here.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "stone_coffer",
+    "ascii": "□",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A stone coffer. Heavy. The latch is cold iron.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "offering_bowl",
+    "ascii": "∪",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A stone bowl. The offering is still inside.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "rubble_pile",
+    "ascii": "%",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "Rubble. Something may be underneath.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "writing_desk",
+    "ascii": "╤",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A writing desk. Papers, or what remains of them.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "medicine_chest",
+    "ascii": "✛",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A small chest. Smells of dried herbs and rendered fat.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "bone_box",
+    "ascii": "☐",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A box of bone. Ceremonial. Someone counted these.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "iron_chest",
+    "ascii": "▣",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "An iron chest. Rusted at the hinges.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "clay_pot_cluster",
+    "ascii": "°",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Clay pots. Sealed with wax. Some still are.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "tool_rack",
+    "ascii": "┤",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A rack of tools. Most are still hung correctly.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "grain_sack_open",
+    "ascii": "&",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "An open sack. Grain, or what grain becomes.",
+    "container": true,
+    "interactable": "container"
+  },
+  {
+    "id": "meal_on_table",
+    "ascii": ",",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A meal. Set out. Cold now. The chair is pushed back."
+  },
+  {
+    "id": "overturned_chair",
+    "ascii": "↑",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A chair, overturned. The departure was sudden."
+  },
+  {
+    "id": "wound_cloth",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Cloth, wound tight. Someone dressed this carefully."
+  },
+  {
+    "id": "child_toy",
+    "ascii": "◦",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A toy. Carved wood. Well-used."
+  },
+  {
+    "id": "dried_herbs",
+    "ascii": "\"",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Dried herbs, hanging. The smell is still there."
+  },
+  {
+    "id": "tallow_dip",
+    "ascii": "i",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A tallow candle, burned to nothing. The pool is set."
+  },
+  {
+    "id": "offering_coins",
+    "ascii": "¤",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Coins in a bowl. No one has taken them."
+  },
+  {
+    "id": "measuring_stone",
+    "ascii": "▬",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A weighing stone. Trade was being conducted."
+  },
+  {
+    "id": "bell_rope",
+    "ascii": "|",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A bell rope, still hanging. It reaches upward into dark."
+  },
+  {
+    "id": "warning_mark",
+    "ascii": "×",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A mark cut into the stone. Not made by human tools."
+  },
+  {
+    "id": "bile_stain",
+    "ascii": "·",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A stain. Something was here. Recently."
+  },
+  {
+    "id": "shattered_vessel",
+    "ascii": "¥",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Shards. Whatever this held is long gone."
+  },
+  {
+    "id": "salt_block",
+    "ascii": "■",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A block of salt. For preservation. Pre-catastrophe stock."
+  },
+  {
+    "id": "inscription_stone",
+    "ascii": "Ξ",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A stone bearing marks. Not the common script."
+  },
+  {
+    "id": "worn_mat",
+    "ascii": "_",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A mat, worn flat by years of the same feet."
+  },
+  {
+    "id": "iron_hook",
+    "ascii": "⌐",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "An iron hook, set into the wall. Empty."
+  },
+  {
+    "id": "carved_post",
+    "ascii": "‡",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A carved post. Notices, still fixed. Unread now."
+  },
+  {
+    "id": "standing_water",
+    "ascii": "≈",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Standing water. Stagnant. The reflection is unclear."
+  },
+  {
+    "id": "web_cluster",
+    "ascii": "*",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A web. Larger than expected."
+  },
+  {
+    "id": "oriented_remains",
+    "ascii": "†",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "Remains, oriented toward the stone. Transfigured. Not dead."
+  },
+  {
+    "id": "vine_growth",
+    "ascii": "v",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A creeping growth. Grey-green. Moving toward something.",
+    "interactable": "vine"
+  },
+  {
+    "id": "vine_eyestalk",
+    "ascii": "Y",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "An eyestalk. It tracks you. Something looks through it.",
+    "interactable": "vine"
+  },
+  {
+    "id": "vine_spore_vent",
+    "ascii": "*",
+    "blocks_movement": true,
+    "blocks_sight": false,
+    "description": "A pulsing vent. The air around it is wrong.",
+    "visual_fx": "gas_overlay"
+  },
+  {
+    "id": "dissolution_pool",
+    "ascii": "~",
+    "blocks_movement": false,
+    "blocks_sight": false,
+    "description": "A corrosive pool. The stone beneath is already pitting.",
+    "visual_fx": "pulse_dim"
+  }
+]

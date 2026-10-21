@@ -1,0 +1,54 @@
+{
+  "id": "house_small_b",
+  "category": "residential",
+  "width": 8,
+  "height": 7,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 4,
+    "market": 1
+  },
+  "interior_loot_table": "residential_common",
+  "description": "A single-room dwelling. Smaller than house_small_a. Hearth implied by worn stone in north wall.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#w.....#",
+    "#......#",
+    "#......#",
+    "#......#",
+    "#.....w#",
+    "###.####"
+  ],
+  "special_tiles": [
+    {
+      "x": 2,
+      "y": 1,
+      "type": "item",
+      "item_id": "book",
+      "text_id": "family_record_a",
+      "note": "A family record book, left open near the hearth"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
+    }
+  ],
+  "note": "PLACEHOLDER — redesign layers to taste. Door at (3,6) faces south street."
+}

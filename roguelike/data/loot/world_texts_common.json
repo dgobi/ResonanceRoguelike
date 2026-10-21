@@ -1,0 +1,16 @@
+{
+  "id": "world_texts_common",
+  "rolls": 1,
+  "entries": [
+    {"type": "text", "text_id": "graffiti_a",     "weight": 10},
+    {"type": "text", "text_id": "graffiti_b",     "weight": 10},
+    {"type": "text", "text_id": "graffiti_c",     "weight": 8},
+    {"type": "text", "text_id": "graffiti_d",     "weight": 6},
+    {"type": "text", "text_id": "graffiti_e",     "weight": 8},
+    {"type": "text", "text_id": "graffiti_f",     "weight": 6},
+    {"type": "text", "text_id": "letter_a",       "weight": 5},
+    {"type": "text", "text_id": "letter_b",       "weight": 5},
+    {"type": "text", "text_id": "letter_c",       "weight": 5},
+    {"type": "text", "text_id": "letter_d",       "weight": 4}
+  ]
+}

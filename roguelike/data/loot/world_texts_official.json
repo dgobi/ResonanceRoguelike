@@ -1,0 +1,13 @@
+{
+  "id": "world_texts_official",
+  "rolls": 1,
+  "entries": [
+    {"type": "text", "text_id": "official_a",     "weight": 8},
+    {"type": "text", "text_id": "official_b",     "weight": 6},
+    {"type": "text", "text_id": "official_c",     "weight": 8},
+    {"type": "text", "text_id": "label_a",        "weight": 10},
+    {"type": "text", "text_id": "label_b",        "weight": 6},
+    {"type": "text", "text_id": "label_c",        "weight": 4},
+    {"type": "text", "text_id": "label_d",        "weight": 6}
+  ]
+}

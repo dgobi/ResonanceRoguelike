@@ -1,0 +1,18 @@
+{
+  "id": "lab_note_primary_a",
+  "title": "On the Nature of Sarcophagite — First Observations",
+  "type": "document",
+  "condition": "worn",
+  "reads_as": "pages",
+  "lacunae": true,
+  "pages": [
+    {
+      "text": "The differential hath been confirmed thrice over, and I will not call it instrument error again. At 0.003 hz the sarcophagite does not merely stand apart from the grey stone's singing — it answers in the contrary direction, as a shadow answers light. We have named it inert these many years. We were describing our own incuriosity.",
+      "damaged": false
+    },
+    {
+      "text": "I have set the census records against the bell-tuning ledgers of the last four great surveys. The correspondence is there to be read by any eye that will look. R. says I catastrophise. R. has not looked at the ledgers. R. looks instead at the window, at the hills, at the ordinary afternoon, as though ordinariness were evidence of safety.",
+      "damaged": false
+    }
+  ]
+}

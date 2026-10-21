@@ -1,0 +1,9 @@
+{
+  "id": "label_b",
+  "title": "Label",
+  "type": "label",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Bone meal — sourced from beyond the stone boundary. Clean. Suitable for ritual use.", "damaged": false}]
+}

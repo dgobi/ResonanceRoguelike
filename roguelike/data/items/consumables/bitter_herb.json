@@ -1,0 +1,22 @@
+{
+  "id": "bitter_herb",
+  "name": "bitter herb",
+  "description": "A dried sprig of something that grows near water and stone. Hedge practitioners harvest it. It is edible in the way that most things are edible — with consequences.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 80,
+  "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "bitter",
+      "tier": 1
+    }
+  ]
+}

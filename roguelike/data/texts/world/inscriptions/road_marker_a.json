@@ -1,0 +1,9 @@
+{
+  "id": "road_marker_a",
+  "title": "A Stone Marker",
+  "type": "inscription",
+  "condition": "weathered",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "VETHMARK — 3 HOURS EAST\nRIVER CROSSING — 2 HOURS NORTH\nVUKH — DO NOT FOLLOW THIS ROAD\n\n[Carved below, in cruder letters:]\n\nTHE ROAD TO VUKH LEADS NOWHERE NOW\nDO NOT FOLLOW ANY ROAD", "damaged": false}]
+}

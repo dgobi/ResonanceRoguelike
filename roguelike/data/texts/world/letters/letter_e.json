@@ -1,0 +1,9 @@
+{
+  "id": "world_letter_a",
+  "title": "A Letter, Found Open on the Table",
+  "type": "letter",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Sarra —\n\nI have gone to find Moth. She was not at the well this morning and her door was still latched from the inside. I do not know what to do with that.\n\nDo not wait up. There is bread.", "damaged": false}]
+}

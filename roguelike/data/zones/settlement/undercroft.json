@@ -1,0 +1,21 @@
+{
+  "id": "undercroft",
+  "name": "The Undercroft",
+  "category": "settlement",
+  "description": "What lies beneath. Crypts, pre-town foundations, old sewers built to a different plan. Always older than the town above.",
+  "terrain_palette": ["worn_stone", "rough_stone", "floor"],
+  "between_buildings": "tunnel",
+  "structures": [
+    {"id": "crypt_chamber",     "weight": 20},
+    {"id": "old_sewer",         "weight": 15},
+    {"id": "foundation_vault",  "weight": 10}
+  ],
+  "creatures": [
+    {"id": "hollow_revenant",   "weight": 15, "chance": 0.5},
+    {"id": "sewer_thing",       "weight": 10, "chance": 0.3}
+  ],
+  "ambient_loot": "old_burial_goods",
+  "light_level": "dark",
+  "tags": ["settlement", "underground", "dead", "undercroft"],
+  "ambient_light": 0.0
+}

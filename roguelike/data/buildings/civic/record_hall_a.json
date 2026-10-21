@@ -1,0 +1,59 @@
+{
+  "id": "record_hall_a",
+  "category": "civic",
+  "width": 12,
+  "height": 9,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 2,
+    "waystone_square": 3,
+    "residential": 1
+  },
+  "description": "A record hall. Flagstone floor, writing desk against the wall. Shelves of ledgers and tallies. A carved post marks official authority.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "f": "flagstone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "############",
+    "#ffffffffff#",
+    "#f........f#",
+    "#f........f#",
+    "#f........f#",
+    "#f........f#",
+    "#f........f#",
+    "#..........#",
+    "#####.######"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "writing_desk",
+      "loot_pools": ["noble_generic"]
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "type": "container",
+      "decor_id": "wooden_shelf",
+      "loot_pools": ["noble_generic"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, "carved_post", null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}

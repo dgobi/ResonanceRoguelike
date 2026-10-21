@@ -1,0 +1,42 @@
+{
+  "id": "swamp",
+  "display_name": "Swamp",
+  "overmap_tile": "overmap_swamp",
+  "overmap_color": [
+    36,
+    82,
+    59
+  ],
+  "base_resonance": 0.3,
+  "elevation_range": [
+    0.0,
+    0.3
+  ],
+  "moisture_range": [
+    0.7,
+    1.0
+  ],
+  "difficulty_base": 0.3,
+  "river_adjacent": true,
+  "generator": "swamp",
+  "creature_zones": [
+    "wilderness_swamp"
+  ],
+  "submap_types": [
+    "cave",
+    "vault"
+  ],
+  "submap_weight": 0.12,
+  "entry_messages": [
+    "The ground gives beneath each step. Something moves under the surface.",
+    "Water everywhere. The boundary between solid and liquid is a matter of opinion."
+  ],
+  "resonance_messages": {
+    "moderate": "The water carries resonance downstream.",
+    "high": "The grey stones are submerged here. Still active."
+  },
+  "flint_scatter_rate": 0.001,
+  "waystone_inscriptions": ["waystone_swamp_a", "waystone_swamp_b"],
+  "waystone_fallback_inscriptions": false,
+  "waystone_themes": ["decay", "depth", "transformation"]
+}

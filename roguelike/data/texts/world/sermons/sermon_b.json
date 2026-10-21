@@ -1,0 +1,13 @@
+{
+  "id": "sermon_b",
+  "title": "Fragment — On the Bells and Their Purpose",
+  "type": "document",
+  "condition": "worn",
+  "reads_as": "pages",
+  "lacunae": false,
+  "pages": [
+    {"text": "The bell is not a tool. A tool is wielded by the hand and put down. The bell is a relationship. When the bell is rung, it does not make sound — it reveals sound that was already present, waiting in the stone and the bone and the air between them. The bellwright who understandeth this rings differently. Those who have heard a master ring will understand. Those who have not cannot be told.", "damaged": false},
+    {"text": "The Guild teacheth that the bell must be tuned to the stone. This is correct but incomplete, as all Guild teachings are correct but incomplete. The stone must also be tuned to the bell. The bell must also be tuned to the bone. The bone must also be tuned to the bell. The tuning is not a one-time act. The tuning is the ongoing relationship between all resonant things. The bell ringeth, and everything that hath ever rung responds, and the response is itself a ringing, and the ringing never stops.", "damaged": false},
+    {"text": "The student asketh: if the ringing never stops, why do we not hear it always?\n\nThe teacher answereth: thou dost hear it always. Thou callest it silence.", "damaged": false}
+  ]
+}

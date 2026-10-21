@@ -1,0 +1,12 @@
+{
+  "id": "inscription",
+  "name": "stone inscription",
+  "description": "A heavy inscribed fragment. Broken from something larger.",
+  "tile": "document",
+  "category": "document",
+  "weight": 2.0,
+  "stackable": false,
+  "on_use": "read",
+  "render_mode": "deep_tongue",
+  "keywords": [{"tag": "bony", "tier": 1}]
+}

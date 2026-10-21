@@ -1,0 +1,16 @@
+{
+  "id": "resonance_sink",
+  "name": "The Hollow Vessel",
+  "category": "The Bound Name",
+  "cost": 2,
+  "description": "You have made room inside yourself. Things that would overwhelm others find only space.",
+  "effects": [
+    "Resonance exposure decays 50% faster.",
+    "Maximum resonance exposure before corruption conversion raised by 0.2."
+  ],
+  "hooks": [
+    {"event": "ON_TURN", "handler": "perk_resonance_sink_turn"}
+  ],
+  "conflicts": [],
+  "requires": []
+}

@@ -1,0 +1,58 @@
+{
+  "id": "severance_blade",
+  "name": "Severance Blade",
+  "category": "weapon",
+  "slot": "weapon",
+  "damage_dice": "1d6+1",
+  "essence": "Severance",
+  "essence_strength": 0.6,
+  "weight": 1.8,
+  "description": "A narrow blade of dull grey metal, the edge ground at an angle that catches nothing. The bindings of the hollow yield before it.",
+  "color_fg": [
+    68,
+    99,
+    116
+  ],
+  "sprite": "crude_blade",
+  "crit_chance": 0.06,
+  "consumed_on_use": false,
+  "keywords": [
+    {
+      "tag": "cutting",
+      "tier": 3
+    }
+  ],
+  "movesets": [
+    {
+      "id": "severing_cut",
+      "name": "Severing Cut",
+      "description": "Cut deep enough and something permanent breaks.",
+      "key": "Q",
+      "turn_cost": 1.2,
+      "cooldown": 10,
+      "range": 1,
+      "damage_mult": 1.2,
+      "callout": "SEVERED",
+      "effects": {
+        "screen_shake": 5
+      }
+    },
+    {
+      "id": "disconnect",
+      "name": "Disconnect",
+      "description": "Something shared between them breaks.",
+      "key": "R",
+      "turn_cost": 1.0,
+      "cooldown": 20,
+      "range": 1,
+      "damage_mult": 0.8,
+      "callout": "DISCONNECT",
+      "effects": {
+        "suppress_ability_turns": 5,
+        "aoe_disrupt_range": 6,
+        "aoe_disrupt_turns": 3
+      }
+    }
+  ],
+  "type": "weapon"
+}

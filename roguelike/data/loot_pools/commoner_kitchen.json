@@ -1,0 +1,14 @@
+{
+  "id": "commoner_kitchen",
+  "description": "What a common household kitchen might contain at the end of the world.",
+  "roll_count": [2, 4],
+  "items": [
+    {"item_id": "dried_provisions", "weight": 80},
+    {"item_id": "water_skin", "weight": 60},
+    {"item_id": "wood_bundle", "weight": 40},
+    {"item_id": "bitter_herb", "weight": 30},
+    {"item_id": "clay_lump", "weight": 20},
+    {"item_id": "crow_jerky", "weight": 50},
+    {"item_id": "empty_water_skin", "weight": 25}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "corpse",
+  "name": "remains",
+  "description": "Something that was a creature. Already cooling.",
+  "tile": "corpse",
+  "category": "special",
+  "weight": 0,
+  "stackable": false,
+  "on_use": null
+}

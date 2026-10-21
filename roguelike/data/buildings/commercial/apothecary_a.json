@@ -1,0 +1,64 @@
+{
+  "id": "apothecary_a",
+  "category": "commercial",
+  "width": 11,
+  "height": 8,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 3,
+    "residential": 2,
+    "tangle": 3
+  },
+  "description": "An apothecary. Herbs hang from every rafter. Clay pots line the shelves. The medicine chest stands open, half its contents gone.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "###########",
+    "#wwwwwwwww#",
+    "#.........#",
+    "#.........#",
+    "#...####..#",
+    "#...#..w..#",
+    "#...#.....#",
+    "####.######"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "medicine_chest",
+      "loot_pools": ["alchemist_reagents"]
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "type": "container",
+      "decor_id": "clay_pot_cluster",
+      "loot_pools": ["alchemist_shop"]
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "type": "container",
+      "decor_id": "writing_desk",
+      "loot_pools": ["noble_generic"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, "dried_herbs", null, null, null, null, "dried_herbs", null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}

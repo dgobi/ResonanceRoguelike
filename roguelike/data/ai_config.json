@@ -1,0 +1,4 @@
+{
+  "concealment_timeout_multiplier": 2.0,
+  "pursuit_boundary_threshold": 3
+}

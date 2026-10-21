@@ -1,0 +1,6 @@
+{
+  "id": "player",
+  "tile": "player",
+  "name": "Player",
+  "blocks_movement": true
+}

@@ -1,0 +1,60 @@
+{
+  "id": "tool_shed_a",
+  "category": "storage",
+  "width": 8,
+  "height": 6,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "storage": 4,
+    "residential": 2,
+    "market": 1
+  },
+  "description": "A tool shed. Implements on a rack. A chest with a heavy lock. A sack of something soft in the corner.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#......#",
+    "#......#",
+    "#......#",
+    "#.....w#",
+    "###.####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "tool_rack",
+      "loot_pools": ["storage_tools"]
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "type": "container",
+      "decor_id": "iron_chest",
+      "loot_pools": ["storage_general"]
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": ["storage_general"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null]
+  ]
+}

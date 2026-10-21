@@ -1,0 +1,27 @@
+{
+  "id": "resonant_tincture",
+  "name": "resonant tincture",
+  "category": "alchemy",
+  "description": "Steep a resonant preparation in water until the water remembers the stone.",
+  "known": true,
+  "requires_single_item": {
+    "tags": [
+      {"tag": "resonant", "min_tier": 2}
+    ],
+    "max_quantity": 1
+  },
+  "components": [
+    {"tag": "solvent", "min_tier": 1, "quantity": 1}
+  ],
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 1},
+    {"tag": "heatproof", "min_tier": 1}
+  ],
+  "result_item": "resonant_tincture",
+  "result_message": "The water takes on a grey quality.",
+  "passive_processing": true,
+  "processing_turns": 40,
+  "processing_source": "steeping",
+  "processing_decor": "drying_herb",
+  "placement_message": "Where will you set it to steep?"
+}

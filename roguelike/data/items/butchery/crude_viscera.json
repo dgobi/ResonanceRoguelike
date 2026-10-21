@@ -1,0 +1,19 @@
+{
+  "id": "crude_viscera",
+  "name": "Viscera",
+  "description": "The soft interior. Not useful raw. Rendered down it yields oil or binding fluid, depending on source. The smell discourages casual handling.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.3,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "viscous",
+      "tier": 1
+    },
+    {
+      "tag": "vital",
+      "tier": 1
+    }
+  ]
+}

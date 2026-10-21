@@ -1,0 +1,98 @@
+{
+  "id": "hollow_knight",
+  "name": "Hollow Knight",
+  "description": "What remains when personhood is extracted and the body continues regardless. It moves on the momentum of old habit. It was going somewhere once. It no longer knows where.",
+  "tile": "hollow_knight",
+  "blocks_movement": true,
+  "base_hp": 30,
+  "armour_value": 6,
+  "fighter": {
+    "max_hp": 30,
+    "power": 4,
+    "defense": 1
+  },
+  "perception": {
+    "sight_radius": 8,
+    "hearing_radius": 5,
+    "sees_in_dark": true,
+    "faction": "hollow",
+    "hostile_to": [
+      "player"
+    ]
+  },
+  "ai_type": "wandering",
+  "wander_radius": 10,
+  "pursuit_timeout": 25,
+  "spawn_zones": [
+    "barrow",
+    "undercroft",
+    "dead_ground"
+  ],
+  "damage_dice": "1d8",
+  "damage_bonus": 2,
+  "essence_modifiers": {
+    "Dissolution": 0.5,
+    "Quickening": 1.8,
+    "Binding": 0.7,
+    "Severance": 2.5,
+    "Consumption": 0.4,
+    "Revelation": 1.5
+  },
+  "attack_verb": "drives its blade toward thee",
+  "blood_type": "bone_dust",
+  "limbs": [
+    {
+      "id": "head",
+      "size": 1,
+      "damage_multiplier": 1.5
+    },
+    {
+      "id": "torso",
+      "size": 4,
+      "damage_multiplier": 1.0
+    },
+    {
+      "id": "arms",
+      "size": 2,
+      "damage_multiplier": 0.8
+    },
+    {
+      "id": "legs",
+      "size": 2,
+      "damage_multiplier": 0.8
+    }
+  ],
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  },
+  "callout_sounds": {
+    "on_spot": {
+      "text": "thrum",
+      "color": [
+        129,
+        175,
+        181
+      ]
+    },
+    "on_attack": {
+      "text": "crack",
+      "color": [
+        129,
+        175,
+        181
+      ]
+    },
+    "on_death": {
+      "text": "shatter",
+      "color": [
+        129,
+        175,
+        181
+      ]
+    }
+  },
+  "can_cross_chunks": true,
+  "speed": 0.5
+}

@@ -1,0 +1,46 @@
+{
+  "id": "shop_a",
+  "category": "commercial",
+  "width": 10,
+  "height": 8,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 4,
+    "residential": 1
+  },
+  "interior_loot_table": "market_goods",
+  "description": "A shop with a counter along the north wall (worn stone strip) and back storage room. Door wide \u2014 customers expected.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "##########",
+    "#wwwwwwww#",
+    "#........#",
+    "#........#",
+    "#...####.#",
+    "#...#...f#",
+    "#...#...f#",
+    "####.#####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "world_label_a",
+      "note": "Merchant's ledger or inventory list"
+    }
+  ],
+  "note": "PLACEHOLDER \u2014 redesign. Counter = north worn_stone strip. Back room = flagstone. Door at (4,7)."
+}

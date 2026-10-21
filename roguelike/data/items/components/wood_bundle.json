@@ -1,0 +1,17 @@
+{
+  "id": "wood_bundle",
+  "name": "bundle of wood",
+  "category": "component",
+  "description": "A loose bundle of dry branches. Snapped from dead fall.",
+  "weight": 1.0,
+  "keywords": [
+    {
+      "tag": "fuel",
+      "tier": 1
+    },
+    {
+      "tag": "fibrous",
+      "tier": 1
+    }
+  ]
+}

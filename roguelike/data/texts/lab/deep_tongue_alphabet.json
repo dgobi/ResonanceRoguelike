@@ -1,0 +1,15 @@
+{
+  "id": "deep_tongue_alphabet",
+  "title": "Phoneme Reference — Debug",
+  "type": "research_note",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "render_mode": "alphabet",
+  "pages": [
+    {
+      "text": "DEBUG: Full deep tongue phoneme inventory follows. [ALPHABET_RENDER]",
+      "damaged": false
+    }
+  ]
+}

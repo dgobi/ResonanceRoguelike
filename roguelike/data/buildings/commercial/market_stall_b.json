@@ -1,0 +1,42 @@
+{
+  "id": "market_stall_b",
+  "category": "commercial",
+  "width": 10,
+  "height": 6,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {"market": 5, "commercial": 4},
+  "interior_loot_table": "market_goods",
+  "legend": {
+    "#": "wall",
+    ".": "flagstone",
+    "w": "worn_stone",
+    " ": null
+  },
+  "layers": [
+    "##########",
+    "#........#",
+    "#.w....w.#",
+    "#........#",
+    "#........#",
+    "          "
+  ],
+  "decor_layer": [
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null],
+    [null,null,null,null,null,null,null,null,null,null]
+  ],
+  "special_tiles": [
+    {
+      "x": 3,
+      "y": 2,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": ["storage_general"]
+    }
+  ],
+  "note": "A market stall. Open south face, flagstone floor, worn stone counter along the back wall. A barrel stands behind the counter. Three walls, no door."
+}

@@ -1,0 +1,39 @@
+{
+  "id": "tallow_torch",
+  "name": "Tallow Torch",
+  "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+  "tile": "tallow_torch",
+  "category": "tool",
+  "weight": 0.3,
+  "stackable": false,
+  "on_use": "equip_light",
+  "consumed_on_use": false,
+  "_essence_note": "Fire is Quickening made visible. Tallow burns fast and hungrily — animal fat converting itself into light and heat.",
+  "keywords": [
+    {
+      "tag": "waxy",
+      "tier": 1
+    },
+    {
+      "tag": "fibrous",
+      "tier": 1
+    },
+    {
+      "tag": "fuel",
+      "tier": 1
+    }
+  ],
+  "provides_burning": true,
+  "burn_turns": 600,
+  "light_radius": 6,
+  "light": {
+    "radius": 8,
+    "color": [
+      255,
+      180,
+      60
+    ],
+    "falloff": 1.8,
+    "flicker": true
+  }
+}

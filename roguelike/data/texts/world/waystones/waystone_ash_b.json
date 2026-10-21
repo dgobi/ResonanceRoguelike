@@ -1,0 +1,10 @@
+{
+  "id": "waystone_ash_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Tssaell nkiiss.\nSkoukh.", "damaged": false, "deep_tongue": true}]
+}

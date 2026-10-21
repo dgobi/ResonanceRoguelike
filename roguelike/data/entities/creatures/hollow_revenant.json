@@ -1,0 +1,97 @@
+{
+  "id": "hollow_revenant",
+  "name": "Hollow Revenant",
+  "description": "Not quite the same thing as a Hollow Knight. The difference is meaningful to it, if to nothing else.",
+  "tile": "hollow_revenant",
+  "blocks_movement": true,
+  "base_hp": 14,
+  "armour_value": 1,
+  "fighter": {
+    "max_hp": 14,
+    "power": 3,
+    "defense": 1
+  },
+  "perception": {
+    "sight_radius": 7,
+    "hearing_radius": 6,
+    "sees_in_dark": true,
+    "faction": "hollow",
+    "hostile_to": [
+      "player"
+    ]
+  },
+  "ai_type": "wandering",
+  "wander_radius": 8,
+  "pursuit_timeout": 12,
+  "spawn_zones": [
+    "undercroft",
+    "dead_ground",
+    "vault"
+  ],
+  "damage_dice": "1d4",
+  "damage_bonus": 1,
+  "essence_modifiers": {
+    "Dissolution": 0.2,
+    "Quickening": 1.5,
+    "Binding": 2.0,
+    "Severance": 2.5,
+    "Consumption": 0.1,
+    "Revelation": 1.8
+  },
+  "attack_verb": "lurches at thee",
+  "blood_type": "bone_dust",
+  "limbs": [
+    {
+      "id": "form",
+      "size": 1,
+      "damage_multiplier": 1.0
+    }
+  ],
+  "butcher_yield": {
+    "decay_turns": 150,
+    "tiers": [
+      {
+        "min_cutting_tier": 1,
+        "yields": [
+          {
+            "item_id": "revenant_husk",
+            "quantity_min": 1,
+            "quantity_max": 1
+          },
+          {
+            "item_id": "grave_dust",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
+        ]
+      },
+      {
+        "min_cutting_tier": 2,
+        "yields": [
+          {
+            "item_id": "revenant_husk",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "grave_dust",
+            "quantity_min": 1,
+            "quantity_max": 1
+          },
+          {
+            "item_id": "compressed_marrow",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
+        ]
+      }
+    ]
+  },
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  },
+  "can_cross_chunks": true,
+  "speed": 0.8
+}

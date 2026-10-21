@@ -1,0 +1,28 @@
+{
+  "interrupted_meal": {
+    "description": "A meal left mid-course.",
+    "floor_objects": [
+      {"item_id": "dried_provisions"},
+      {"item_id": "water_skin"}
+    ]
+  },
+  "guard_post_abandoned": {
+    "description": "A post left in haste.",
+    "floor_objects": [
+      {"item_id": "tallow_torch"}
+    ]
+  },
+  "shrine_offering_placed": {
+    "description": "An offering left deliberately.",
+    "floor_objects": [
+      {"item_id": "coldbell_cutting"},
+      {"item_id": "moist_pebble"}
+    ]
+  },
+  "scholar_desk": {
+    "description": "Work left unfinished.",
+    "floor_objects": [
+      {"item_id": "flint_shard"}
+    ]
+  }
+}

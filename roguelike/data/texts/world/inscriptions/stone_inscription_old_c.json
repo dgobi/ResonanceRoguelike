@@ -1,0 +1,9 @@
+{
+  "id": "stone_inscription_old_c",
+  "title": null,
+  "type": "inscription",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Do not quarry the grey stone for building. Do not use it for thresholds. Do not use it for the floors of sleeping rooms. This instruction hath been given before. It will be given again. It is not followed.", "damaged": false}]
+}

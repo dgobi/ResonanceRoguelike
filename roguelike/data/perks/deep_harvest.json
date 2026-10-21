@@ -1,0 +1,16 @@
+{
+  "id": "deep_harvest",
+  "name": "The Patient Hand",
+  "category": "The Green Patience",
+  "cost": 1,
+  "description": "Some things give more to those who wait.",
+  "effects": [
+    "Harvesting a plant has a 30% chance to not deplete the tile.",
+    "Harvest item still obtained."
+  ],
+  "hooks": [
+    {"event": "ON_TILE_ENTERED", "handler": "perk_deep_harvest_tile_entered"}
+  ],
+  "conflicts": [],
+  "requires": []
+}

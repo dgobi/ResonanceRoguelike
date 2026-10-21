@@ -1,0 +1,57 @@
+{
+  "id": "house_large_a",
+  "category": "residential",
+  "width": 14,
+  "height": 10,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 2,
+    "market": 2
+  },
+  "interior_loot_table": "residential_rare",
+  "description": "A larger dwelling suggesting moderate wealth. Three rooms — main hall, side chamber, back storeroom. Door faces street.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "##############",
+    "#............#",
+    "#............#",
+    "#....######..#",
+    "#....#....#..#",
+    "#....#....+..#",
+    "#....#....#..#",
+    "#....######..#",
+    "#...........w#",
+    "#####.########"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 8,
+      "type": "item",
+      "item_id": "letter",
+      "text_id": "world_letter_a",
+      "note": "Letter on table in main hall"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
+    }
+  ],
+  "note": "PLACEHOLDER — redesign layers to taste. Door at (5,9) faces south street."
+}

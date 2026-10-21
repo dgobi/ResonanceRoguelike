@@ -1,0 +1,11 @@
+{
+  "id": "research_note",
+  "name": "research note",
+  "description": "Handwritten notes. The ink has survived.",
+  "tile": "document",
+  "category": "document",
+  "weight": 0.05,
+  "stackable": false,
+  "on_use": "read",
+  "keywords": [{"tag": "fibrous", "tier": 1}]
+}

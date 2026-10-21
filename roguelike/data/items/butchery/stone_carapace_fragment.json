@@ -1,0 +1,15 @@
+{
+  "id": "stone_carapace_fragment",
+  "name": "Carapace Fragment",
+  "description": "Not stone. Not quite. The material resists the knife and the file equally. Its origin in something living is the only reason it comes apart at all.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.6,
+  "stackable": true,
+  "keywords": [
+    {
+      "tag": "bony",
+      "tier": 3
+    }
+  ]
+}

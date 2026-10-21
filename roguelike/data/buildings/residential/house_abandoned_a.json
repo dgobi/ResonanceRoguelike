@@ -1,0 +1,55 @@
+{
+  "id": "house_abandoned_a",
+  "category": "residential",
+  "width": 9,
+  "height": 7,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 3,
+    "market": 1
+  },
+  "description": "A meal left mid-course. A chair thrown back. Something bile-dark stains the floor near the threshold.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "#########",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "#......w#",
+    "####+####"
+  ],
+  "special_tiles": [
+    {
+      "x": 7,
+      "y": 1,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": ["commoner_kitchen"]
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "type": "item",
+      "item_id": "letter",
+      "text_id": "letter_a",
+      "note": "A letter left on the table, unfinished"
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, "meal_on_table", null, null, null, null, null],
+    [null, null, null, null, null, "overturned_chair", null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, "bile_stain", null, null, null, null],
+    [null, null, null, null, null, null, null, null, null]
+  ]
+}

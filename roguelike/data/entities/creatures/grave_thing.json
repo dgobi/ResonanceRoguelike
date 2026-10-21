@@ -1,0 +1,127 @@
+{
+  "id": "grave_thing",
+  "name": "Grave Thing",
+  "description": "It came out of the ground. It is going back in. In the meantime it is angry about the interruption.",
+  "tile": "grave_thing",
+  "blocks_movement": true,
+  "base_hp": 18,
+  "armour_value": 3,
+  "fighter": {
+    "max_hp": 18,
+    "power": 5,
+    "defense": 0
+  },
+  "perception": {
+    "sight_radius": 5,
+    "hearing_radius": 6,
+    "sees_in_dark": true,
+    "faction": "hollow",
+    "hostile_to": [
+      "player"
+    ]
+  },
+  "ai_type": "wandering",
+  "wander_radius": 6,
+  "pursuit_timeout": 18,
+  "spawn_zones": [
+    "barrow",
+    "undercroft"
+  ],
+  "damage_dice": "1d6",
+  "damage_bonus": 0,
+  "essence_modifiers": {
+    "Dissolution": 0.7,
+    "Quickening": 1.2,
+    "Binding": 0.8,
+    "Severance": 1.0,
+    "Consumption": 0.6,
+    "Revelation": 2.8
+  },
+  "attack_verb": "tears at thee",
+  "blood_type": "bone_dust",
+  "limbs": [
+    {
+      "id": "core",
+      "size": 4,
+      "damage_multiplier": 1.0
+    },
+    {
+      "id": "limbs",
+      "size": 3,
+      "damage_multiplier": 0.8
+    }
+  ],
+  "butcher_yield": {
+    "decay_turns": 120,
+    "tiers": [
+      {
+        "min_cutting_tier": 1,
+        "yields": [
+          {
+            "item_id": "grave_dust",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "animal_bone",
+            "quantity_min": 1,
+            "quantity_max": 2
+          }
+        ]
+      },
+      {
+        "min_cutting_tier": 2,
+        "yields": [
+          {
+            "item_id": "grave_dust",
+            "quantity_min": 2,
+            "quantity_max": 3
+          },
+          {
+            "item_id": "compressed_marrow",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "resonant_bone_fragment",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
+        ]
+      }
+    ]
+  },
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  },
+  "callout_sounds": {
+    "on_spot": {
+      "text": "rrrk",
+      "color": [
+        145,
+        58,
+        82
+      ]
+    },
+    "on_attack": {
+      "text": "grnnh",
+      "color": [
+        145,
+        58,
+        82
+      ]
+    },
+    "on_death": {
+      "text": "k.kk",
+      "color": [
+        120,
+        45,
+        65
+      ]
+    }
+  },
+  "can_cross_chunks": true,
+  "speed": 0.6
+}

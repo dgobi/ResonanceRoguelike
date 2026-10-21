@@ -1,0 +1,11 @@
+{
+  "id": "poor_household",
+  "rolls": [0, 2],
+  "entries": [
+    {"item": "tallow_candle",  "weight": 30},
+    {"item": "crow_jerky",     "weight": 20},
+    {"item": "salt_pouch",     "weight": 15},
+    {"item": "linen_scrap",    "weight": 20},
+    {"item": "bitter_herb",    "weight": 15}
+  ]
+}

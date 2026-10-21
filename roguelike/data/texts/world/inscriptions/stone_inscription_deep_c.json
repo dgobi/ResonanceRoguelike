@@ -1,0 +1,9 @@
+{
+  "id": "stone_inscription_deep_c",
+  "title": null,
+  "type": "inscription",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Quz voss. Quz keth. Grath zhal zhar.", "damaged": false, "deep_tongue": true}]
+}

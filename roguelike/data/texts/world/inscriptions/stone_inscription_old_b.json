@@ -1,0 +1,9 @@
+{
+  "id": "stone_inscription_old_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "damaged",
+  "reads_as": "single",
+  "lacunae": true,
+  "pages": [{"text": "Here the Vrethimar made their accounting and found it [DAMAGED]. Here they laid the first stone of the second order. Here [DAMAGED] ended.", "damaged": true}]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "waystone_drowned_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Druull.\nMrath tharrk.", "damaged": false, "deep_tongue": true}]
+}

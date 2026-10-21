@@ -1,0 +1,27 @@
+{
+  "id": "prophets_eye_cap",
+  "name": "prophet's eye cap",
+  "description": "A pale, watery mushroom cap. The alchemists prized it. The cap alone is worthless — the liquid inside is what they wanted.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.03,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 15,
+  "eat_message": "Tasteless. Something shifts at the edge of sight for a moment, then is gone.",
+  "harvest_from": "shroom_prophets_eye",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "resonant",
+      "tier": 2
+    },
+    {
+      "tag": "volatile",
+      "tier": 2
+    }
+  ]
+}

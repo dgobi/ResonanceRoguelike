@@ -1,0 +1,20 @@
+{
+  "id": "dried_provisions",
+  "name": "dried provisions",
+  "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+  "category": "consumable",
+  "on_use": "eat",
+  "nutrition": 300,
+  "weight": 0.3,
+  "eat_message": "Dry and tasteless. It does what it needs to.",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 2
+    },
+    {
+      "tag": "binding",
+      "tier": 1
+    }
+  ]
+}

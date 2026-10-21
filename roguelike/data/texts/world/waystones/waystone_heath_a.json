@@ -1,0 +1,10 @@
+{
+  "id": "waystone_heath_a",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Tssaell.\nDur keth.", "damaged": false, "deep_tongue": true}]
+}

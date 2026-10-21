@@ -1,0 +1,18 @@
+{
+  "id": "coldbell_extract",
+  "name": "coldbell extract",
+  "description": "A dark preparation steeped from dried coldbell in a clay vessel over heat. The resonance in it has been drawn out and suspended. Consuming it briefly dulls resonance accumulation.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": true,
+  "on_use": "reduce_resonance_exposure",
+  "reduce_exposure_amount": 0.3,
+  "drink_message": "Cold and slightly bitter. The resonance in the air recedes — briefly.",
+  "keywords": [
+    {"tag": "alchemical", "tier": 2},
+    {"tag": "resonant", "tier": 2},
+    {"tag": "binding", "tier": 2},
+    {"tag": "drinkable", "tier": 1}
+  ]
+}

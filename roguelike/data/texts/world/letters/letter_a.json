@@ -1,0 +1,9 @@
+{
+  "id": "letter_a",
+  "title": "A Letter, Unsent",
+  "type": "letter",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Maren — I have found your house. I will not describe what I found in it. I am leaving this letter because I do not know what else to do with the fact that I came here looking for you and found your house instead. If you are alive and you find this, I am going north toward the high ground. I have food for perhaps six days. I am well. I am not well. I have food for six days.", "damaged": false}]
+}

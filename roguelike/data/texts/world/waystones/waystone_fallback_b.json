@@ -1,0 +1,10 @@
+{
+  "id": "waystone_fallback_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Quz.\nUrath dur.", "damaged": false, "deep_tongue": true}]
+}

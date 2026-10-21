@@ -1,0 +1,16 @@
+{
+  "id": "dried_coldbell",
+  "name": "dried coldbell",
+  "description": "A coldbell cutting, dried flat. Deprecated — use dried_resonant_herb.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.02,
+  "stackable": true,
+  "on_use": null,
+  "keywords": [
+    {"tag": "resonant", "tier": 2},
+    {"tag": "binding", "tier": 2},
+    {"tag": "aromatic", "tier": 1},
+    {"tag": "alchemical", "tier": 1}
+  ]
+}

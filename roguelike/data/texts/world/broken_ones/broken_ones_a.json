@@ -1,0 +1,9 @@
+{
+  "id": "broken_ones_a",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "Kur skur. Vrath sketh kur. Skral keth uthar kur. Urath quz kur.\n\nKur skur.", "damaged": false, "deep_tongue": true}]
+}

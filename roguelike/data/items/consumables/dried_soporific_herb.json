@@ -1,0 +1,14 @@
+{
+  "id": "dried_soporific_herb",
+  "name": "dried soporific herb",
+  "description": "Dried violet stem. The sedative quality persists.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.02,
+  "stackable": true,
+  "on_use": null,
+  "keywords": [
+    {"tag": "soporific", "tier": 2},
+    {"tag": "aromatic", "tier": 1}
+  ]
+}

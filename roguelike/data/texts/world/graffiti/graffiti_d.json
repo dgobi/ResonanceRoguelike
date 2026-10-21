@@ -1,0 +1,9 @@
+{
+  "id": "graffiti_d",
+  "title": null,
+  "type": "graffiti",
+  "condition": "damaged",
+  "reads_as": "single",
+  "lacunae": true,
+  "pages": [{"text": "My name is [DAMAGED]. I was a [DAMAGED] in the town of [DAMAGED]. I want someone to know I existed. I want someone to know [DAMAGED]", "damaged": true, "trailing": true}]
+}

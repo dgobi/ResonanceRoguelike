@@ -1,0 +1,15 @@
+{
+  "id": "dried_murk_violet",
+  "name": "dried murk violet",
+  "description": "A murk violet stem, dried. Deprecated — use dried_soporific_herb.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.01,
+  "stackable": true,
+  "on_use": null,
+  "keywords": [
+    {"tag": "soporific", "tier": 2},
+    {"tag": "aromatic", "tier": 2},
+    {"tag": "alchemical", "tier": 1}
+  ]
+}

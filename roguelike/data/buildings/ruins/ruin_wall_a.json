@@ -1,0 +1,26 @@
+{
+  "id": "ruin_wall_a",
+  "category": "ruins",
+  "width": 8,
+  "height": 3,
+  "facing": "south",
+  "condition": "collapsed",
+  "district_weights": {
+    "residential": 1,
+    "ruins": 5
+  },
+  "interior_loot_table": null,
+  "description": "A wall remnant \u2014 all that remains of a former building. Three-tile-high wall stub.",
+  "legend": {
+    "#": "wall",
+    "r": "rock",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "##r##r##",
+    " rr  rr "
+  ],
+  "special_tiles": [],
+  "note": "PLACEHOLDER \u2014 redesign. Wall stub with rubble at base. Mostly null (open) tiles."
+}

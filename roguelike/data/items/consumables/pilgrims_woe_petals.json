@@ -1,0 +1,27 @@
+{
+  "id": "pilgrims_woe_petals",
+  "name": "pilgrim's woe petals",
+  "description": "Dried petals from the pilgrim's woe flower, stripped from the dark fronds. Pale as old linen. The smell is faintly medicinal.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.02,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 25,
+  "eat_message": "Dry and slightly chalky. A faint warmth follows.",
+  "harvest_from": "flower_pilgrims_woe",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "fibrous",
+      "tier": 1
+    },
+    {
+      "tag": "aromatic",
+      "tier": 1
+    }
+  ]
+}
