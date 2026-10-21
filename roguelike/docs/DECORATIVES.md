@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
+
 # Decorative Tile System
 
 Decoratives are a second visual layer rendered above terrain and below entities.

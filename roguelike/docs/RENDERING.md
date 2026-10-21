@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
+
 # Rendering Pipeline
 
 All rendering code lives in `roguelike/rendering/`. The entry point is `renderer.py`, which is called once per frame from the main engine loop.

@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
+
 # Components Reference
 
 Components are plain Python objects attached to `Actor` instances. They hold state and expose methods — the engine and system modules call them rather than the actor doing logic itself.

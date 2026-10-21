@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](roguelike/docs/owner/STATUS.md). This banner does not resolve open design decisions.
+
 # Roguelike Project — Claude Context Document
 
 > This file is the canonical project brief for both Claude Code and Claude chat sessions.

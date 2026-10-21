@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "evidence_class": "real Engine + InventoryScreen.handle_key; no window or OS input",
+      "nutrition": 0.35,
+      "hunger_before": 0.5,
+      "expected_hunger_after": 0.15100000000000002,
+      "observed_hunger_after": 0.15100000000000002,
+      "turn_delta": 1,
+      "item_removed": true,
+      "property_passed": true
+    },
+    {
+      "evidence_class": "real Engine + InventoryScreen.handle_key; no window or OS input",
+      "nutrition": 0.2,
+      "hunger_before": 0.5,
+      "expected_hunger_after": 0.301,
+      "observed_hunger_after": 0.301,
+      "turn_delta": 1,
+      "item_removed": true,
+      "property_passed": true
+    }
+  ],
+  "restored_exact_bytes": true,
+  "definition_sha256": "49f65f227cb45a2d50001b7380bed1ed8700d2bddcd7afa2524fbe621a5cef6a",
+  "owner_learning_outcome": "awaiting owner validation",
+  "window_verification": "incomplete: native input automation stopped; do manual exercise",
+  "source_hashes": {
+    "tools/owner_lesson.py": "0397371cb8a57f91505eaea0c663c3966eeb18b5ceedf0b4006029a09a58c64b",
+    "roguelike/engine/item_system.py": "33a61c22684460d200697c473884539e55c88ef28ae7a9e0e8408b5f7f1e7f45",
+    "roguelike/engine/inventory_screen.py": "30404ef56981c9491cb1f5d9387cdb3c770a978cff7e77cc728c50ef632c7a31",
+    "roguelike/components/needs.py": "a5238691b740ee2f5a84adfa4dd26ffa2f277f5a63955a053de4f46ebdef76e4",
+    "roguelike/engine/item_factory.py": "d6ac5b0424113595bc6c46bdb69a7983a1c55f53cfa6b8be75ef1a8752b960dc",
+    "roguelike/data/survival.json": "07e93a1fce8a128d610540a7f0af03e17aaa4dc0da787f6420a46b33c6ad0e71"
+  }
+}

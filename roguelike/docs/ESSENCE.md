@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
+
 # Essence System
 
 Six essences describe the fundamental properties of weapons and the vulnerabilities of creatures. A weapon's essence interacts with a creature's essence profile to scale damage up or down. Nothing in this world is neutral — everything has an essence, even if weak.

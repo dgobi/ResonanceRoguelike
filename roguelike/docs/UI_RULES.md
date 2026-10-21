@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
+
 # UI Rules -- Non-Negotiable
 
 Read this before touching any file in engine/*_screen.py, rendering/*_screen.py,

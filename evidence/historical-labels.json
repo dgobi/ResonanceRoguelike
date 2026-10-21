@@ -1,0 +1,102 @@
+[
+  {
+    "path": "roguelike/docs/ARCHITECTURE.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "3ab98cdf809fae3a5a9f834578ef831f68c54ebbc4d6877af8381d68a8c53fcb"
+  },
+  {
+    "path": "roguelike/docs/COMBAT.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "49260f8cc30e82b148078c80a2c723d708506ddd11edbe18d6a9876ae2d00a57"
+  },
+  {
+    "path": "roguelike/docs/COMPONENTS.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "1de5f29d306ba32855ac4224884dacf272d40678c0e73397412ca420d70aedaf"
+  },
+  {
+    "path": "roguelike/docs/CREATURES.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "1156cd9cf157e66b5c1d56bd4a66c8bf63dbea82b200b695ea0cd12b5cf5c8ea"
+  },
+  {
+    "path": "roguelike/docs/DATA_REFERENCE.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "09f7315851910e93333fc7d3862d1b4488f9845fc759f39985cd2bfa4c6889a3"
+  },
+  {
+    "path": "roguelike/docs/DEBUG.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "b335f3e6ea6a4be472672941a117ea2d8db6f2fe583287d2e74b53eb2b012077"
+  },
+  {
+    "path": "roguelike/docs/DECOR AND RANDOM TILES.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "39f486058e1c9a190060a7b873bead5a7a499138d84e7a50773c9adee337ed4e"
+  },
+  {
+    "path": "roguelike/docs/DECORATIVES.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "81d2c8725538aa77c7945567f537c9366a456f091e2a6b6d9056b7bc4dc26dba"
+  },
+  {
+    "path": "roguelike/docs/ESSENCE.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "bd5b6e225920fded6a486327b60b65501f45af67d7604537f33a9eada8b534bc"
+  },
+  {
+    "path": "roguelike/docs/GENERATION.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "c8715588778500f4d68eac27fe1ff238e9808b2b751e0239b7a179a679dd936b"
+  },
+  {
+    "path": "roguelike/docs/INDEX.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "fad8b64c1e5de46954049a9e8537b27c33012897d046da61eb064282079c32f7"
+  },
+  {
+    "path": "roguelike/docs/LAYOUT_AUTHORING.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "1014f282757132854ccb4cef89325cb2e76b6344c611f0e5e574c685fab3c02a"
+  },
+  {
+    "path": "roguelike/docs/OMNIDOC.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "46ea0bec7d595f43f2c01319031db58ac50ac6d993e582e5a6f6f73469ac676d"
+  },
+  {
+    "path": "roguelike/docs/RENDERING.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "eb6a860cdaa250bddb89e2dea1de0de31ab0ee0d14b5cffb262a903ff2c9fb5c"
+  },
+  {
+    "path": "roguelike/docs/SPRITESHEET_GUIDE.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "42324bf68cc977bf95d1b5092e78a64c9b9dcf4a6912d11c3c736c846ff76c25"
+  },
+  {
+    "path": "roguelike/docs/SYSTEMS.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "e0a3ff3244d80b55fe12238fbf43a1fb231b6857490d27dd2aabca573dc4f865"
+  },
+  {
+    "path": "roguelike/docs/UI_RULES.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "c92c432e9b46c0db7373e85378d799dea7dfde6c53b59bc76c1a6b1d6ede1f69"
+  },
+  {
+    "path": "roguelike/docs/WFC_AUTHORING.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "3ac383b16bb8d98fe819d4175027d25a4357f1bc0fb66ccc2368ea2a12b45f8d"
+  },
+  {
+    "path": "CLAUDE.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "98b14ad7310514d33e54fddfe7a8c9f43bdc9b529e783b5a79d1660023c152ae"
+  },
+  {
+    "path": "roguelike/CLAUDE.md",
+    "original_bytes_preserved": true,
+    "original_sha256": "d1ee413f7a4f324666a0860ee43db0a13d6256fe655e1148f342560f1d9bd565"
+  }
+]

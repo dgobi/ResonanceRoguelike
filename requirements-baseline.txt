@@ -1,0 +1,7 @@
+# Verified on Windows x64 / CPython 3.11.0. See docs/owner/START_HERE.md.
+pygame==2.6.1
+tcod==19.3.0
+numpy==2.4.6
+cffi==2.1.1
+pycparser==3.11
+typing_extensions==4.16.0
