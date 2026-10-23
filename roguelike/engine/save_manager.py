@@ -290,9 +290,9 @@ class SaveManager:
                 'meta.json': encoded(dict(save_version=SAVE_VERSION, saved_at=datetime.datetime.now().isoformat(),
                     world_x=engine.world_x, world_y=engine.world_y, turn=engine.world_time.turn,
                     moon_phase=engine.world_time.moon_phase_name))})
-            generation, path = self.store.publish(payloads, self.generation, self._head_token, self._checkpoint_fault)
+            generation, path, token = self.store.publish(payloads, self.generation, self._head_token, self._checkpoint_fault)
             self.generation = generation
-            self._head_token = self.store.token()
+            self._head_token = token
             self.cache.base_path = path
             self.recovery_notice = None
             engine.log.add('Progress preserved.', LIFE_GREEN)
@@ -370,8 +370,14 @@ class SaveManager:
             self.last_error = 'No recoverable checkpoint: ' + '; '.join(errors or ['no published save'])
             engine.log.add('Load failed: ' + self.last_error, FRESH_WOUND)
             return False
-        if self.store.token() != token:
-            self.last_error = 'Checkpoint changed during load; retry loading'
+        try:
+            unchanged = self.store.token() == token
+            comparison_error = 'Checkpoint changed during load; retry loading'
+        except Exception as error:
+            unchanged = False
+            comparison_error = 'Cannot verify checkpoint after load: ' + str(error)
+        if not unchanged:
+            self.last_error = comparison_error
             engine.log.add('Load failed: ' + self.last_error, FRESH_WOUND)
             return False
         generation, (stage, world, cache, local_map, actors) = selected

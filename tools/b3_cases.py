@@ -255,6 +255,23 @@ def run_case(e, ev):
             ev.check('B3-07','busy diagnostic',True,'busy' in sm.last_error)
         finally: proc.kill();proc.communicate(timeout=10)
         checkpoint(e,ev,'lock automatically released by process death')
+        # A competing writer publishes immediately after our lock is released.
+        # The manager must retain its OWN publication token, then reject its
+        # next write until it has loaded the intervening checkpoint.
+        publish=sm.store.publish
+        competing={}
+        def publish_then_compete(*args,**kwargs):
+            result=publish(*args,**kwargs)
+            generation,path,token=result
+            payloads={p.relative_to(path).as_posix():p.read_bytes() for p in path.rglob('*') if p.is_file() and p.name!='manifest.json'}
+            competing['result']=CheckpointStore(sm.save_path).publish(payloads,generation,token)
+            return result
+        sm.store.publish=publish_then_compete
+        try: checkpoint(e,ev,'original publication returns after competing publication')
+        finally: sm.store.publish=publish
+        ev.check('B3-07','save retains its own token',False,sm._head_token==sm.store.token())
+        ev.check('B3-07','post-publication race cannot overwrite competing save',False,sm.save(e))
+        ev.check('B3-07','competing publication remains selected',competing['result'][0],read(sm.save_path/'HEAD.json')['current'])
     elif case=='legacy':
         before=hashes(sm.save_path)
         ev.check('B3-08','real pre-B3 flat checkpoint bootstraps',None,sm.generation)

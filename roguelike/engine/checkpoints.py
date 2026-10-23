@@ -215,7 +215,9 @@ class CheckpointStore:
             os.replace(temp, no_links(self.slot / 'HEAD.json'))
             sync_directory(self.slot)
             fault('published')
-            return generation, target
+            # Return this publication's token while still under the lock. A
+            # later writer must not be adopted by a post-unlock HEAD read.
+            return generation, target, record(head)
 
     def delete(self):
         """Retire precisely this slot. Never delete its saves root or other slots."""
