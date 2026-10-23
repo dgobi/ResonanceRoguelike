@@ -1,0 +1,12 @@
+Inspected actual offscreen game surfaces from the final source-bound run.
+Recovery: the laboratory and player HUD are restored; the message log explicitly
+reports recovery of an earlier complete checkpoint. Semantic checks prove the
+restored marker, HP, turn, world name, timer and inactive scene agree.
+Debug help: F11 description says "Clear current save slot"; the real app-local
+F11 test leaves the other campaign intact. Only this shorter existing help text
+changed; no panel geometry, columns, hint rows or scrolling code was changed.
+Existing document: sarcophagus label still cuts off after "If" (UI-TEXT-HEIGHT).
+Effects: the accepted B2 duration/hook behavior is exercised after a fresh load.
+No desktop images or external input were captured. These images support, rather
+than replace, semantic event/process assertions. Existing UI layout is not broadly
+recertified or redesigned by this persistence change.

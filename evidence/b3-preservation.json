@@ -1,0 +1,25 @@
+{
+  "production_root": "G:\\GameDev\\RoguelikeProject",
+  "branch": "main",
+  "pre_integration": "e484b47968324790403fd98e92e20f4b35226153",
+  "context_checkpoint": "0ac8de06d7728f1f7583d35e449843f974afc987",
+  "accepted_integration": "d179c0842771e69e27bccb29f9231aeefae29c4d",
+  "accepted_B2": "8eecc84ada0fc9b9e8bd662a7d6dd95828835fbc",
+  "validation_checkpoint": "31d217f2b6258acd4980aa7f1c21de7153bfce91",
+  "owner_ancestry_preserved": true,
+  "accepted_B2_ancestry_preserved": true,
+  "original_files_outside_authorized_integration_and_B3_changes_unchanged": 475,
+  "B3_content_assets_unchanged": true,
+  "original_only_game_log_unchanged": true,
+  "previous_development_copy_status": "clean at accepted B2; no tracked modifications",
+  "personal_saves": "not read, copied, changed, migrated or tested",
+  "source_copies_created": 0,
+  "tests": "production source in place, child-local disposable save roots",
+  "git_checkpoints": [
+    "checkpoint/b2-accepted-main-20261023",
+    "checkpoint/b3-implementation-20261023",
+    "checkpoint/b3-text-restored-20261023",
+    "checkpoint/b3-validation-start-20261023",
+    "checkpoint/pre-b3-main-20261023"
+  ]
+}

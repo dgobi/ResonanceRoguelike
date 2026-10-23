@@ -40,7 +40,7 @@ Only that last replacement publishes a checkpoint. A terminated writer before
 publication leaves the old checkpoint; termination after publication leaves the
 new complete checkpoint. Kernel locks release automatically on process death.
 
-Failed writes report failure and keep the previous published checkpoint. Failed
+Failures before publication report failure and keep the previous checkpoint. Failed
 eviction leaves the dirty entry in memory. Concurrent/stale writers cannot
 silently overwrite a newer checkpoint. Load checks that HEAD stayed unchanged
 while it reconstructed the state; a racing publication requires retrying load.

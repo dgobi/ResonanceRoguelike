@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "run_id": "b3-20261023-113640-99fb09b2",
+  "branch": "main",
+  "source_matches_gate": true,
+  "workers": 132,
+  "normal_workers": 119,
+  "intentional_terminated_writers": 13,
+  "checks": {
+    "checks": 2789,
+    "passed": 2789,
+    "failed": 0,
+    "workers": 132
+  },
+  "B3_groups": 10,
+  "B1_required_cases": 28,
+  "B1_characterization_cases": 6,
+  "original_diagnostic_properties": 32,
+  "runner_negative_controls": 7,
+  "repaired": [
+    "B3-GENERATIONS",
+    "B3-DIRTY-HOT"
+  ],
+  "deferred": [
+    {
+      "case": "E04",
+      "id": "C-DROP-EQUIPPED",
+      "scope": "C transfers",
+      "symptom": {
+        "inventory_contains": false,
+        "floor_contains": true,
+        "weapon_still_same": true
+      }
+    },
+    {
+      "case": "E04",
+      "id": "UI-TEXT-HEIGHT",
+      "scope": "UI",
+      "symptom": {
+        "text_id": "lab_label_sarcophagus",
+        "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+        "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+      }
+    }
+  ],
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_b3.py"
+  ],
+  "limitations": [
+    "Windows power-loss/device failure is not certified",
+    "Trusted local pickle payloads only",
+    "Legacy flat v2 slots are read-only; no implicit migration",
+    "Generations/session/staging files retained until slot retirement"
+  ],
+  "recommendation": "C ownership and transfer consistency on main"
+}
