@@ -1,3 +1,17 @@
+# Current status — C ownership on production main
+
+B3 is owner-accepted at `65b02df`. C repairs equipped-drop references and derived
+armor/light state, exact container transfers, take-all loss, empty-bag pickup,
+failed capacity transfers, crafting cancellation/output delivery and vessel/harvest
+ownership. [C_STATE](C_STATE.md) defines the bounded contract and remaining work.
+[C_VERIFICATION](C_VERIFICATION.md) defines the complete autonomous gate; final
+evidence is in `evidence/c-results.json`. No source copies or desktop control.
+
+The separate UI-TEXT-HEIGHT defect and combat/effect lifecycle boundaries remain.
+
+<details>
+<summary>Earlier accepted history — superseded where stated above</summary>
+
 # Current status — B3 on production main
 
 The owner accepted B2 and authorized integration into production `main`. Merge
@@ -112,6 +126,8 @@ All original text is retained below a short banner pointing here. The labels sco
 5. World/authoring: entrance footprint/link preservation, generation policy, active schemas/duplicate IDs, actual loot routes, painter losslessness, UI modes.
 
 These are retained findings, not fixes delivered in Arc A. Do not combine the whole backlog into B1.
+
+</details>
 
 </details>
 

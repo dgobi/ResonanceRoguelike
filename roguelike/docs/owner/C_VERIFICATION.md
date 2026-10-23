@@ -1,5 +1,10 @@
 # C autonomous verification
 
+Completed run `c-20261023-120603-d0b0e286`: **3,225/3,225 checks passed**, all
+143 required workers valid (130 normal, 13 deliberate interrupted writers),
+with seven negative harness controls. The tested implementation checkpoint is
+`22992f3`. Compilation, dependency consistency and whitespace checks also passed.
+
 Run from production `G:\GameDev\RoguelikeProject` on `main`:
 
 ```powershell

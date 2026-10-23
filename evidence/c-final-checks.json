@@ -1,0 +1,43 @@
+[
+  {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "compileall",
+      "-q",
+      "roguelike",
+      "tools"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeProject",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeProject",
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "core.whitespace=cr-at-eol",
+      "diff",
+      "--check"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeProject",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "warning: in the working copy of 'evidence/b3-latest.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'roguelike/docs/owner/B3_DEFERRED.md', LF will be replaced by CRLF the next time Git touches it\n"
+  }
+]

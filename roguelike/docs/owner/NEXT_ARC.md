@@ -1,3 +1,20 @@
+# Next arc — after C ownership
+
+B3 is owner-accepted and C ownership is implemented on production `main`.
+See [C_STATE](C_STATE.md) and [C_VERIFICATION](C_VERIFICATION.md) for scope and
+evidence. Continue in this checkout with named checkpoints and local commits;
+do not create more development copies, worktrees or task branches.
+
+The next proposed task is D combat/effect lifecycle: temporary armor hit counters,
+suppression/disruption consumers, wight confirmation, thrown-item targeting and
+salve movement timing. Scope and reproduce those behaviors before changing them.
+Treat UI text layout, carried decay, all butchery content, RNG replay, personal-save
+migration and checkpoint pruning as separately bounded work. This recommendation
+does not authorize starting another arc without the owner's request.
+
+<details>
+<summary>Earlier accepted history — superseded where stated above</summary>
+
 # Next arc — C ownership and transfers
 
 B2 is owner-accepted and merged with Arc A/B1 into production `main`. B3's scope
@@ -84,6 +101,8 @@ No creative redesign, save migration, engine swap, all-field persistence overhau
 Explain in plain language: surface and lab shared one address during full save; empty was mistaken for absent; a creature's costume was used as its identity. Show the new owners/keys/replacement order and what remains reset/recomputed or unsupported.
 
 Return a small patch, field/format changes, before/after diagnostics with independent processes, manual observations or an explicit blocker, and updates to WORLD_AND_STATE, STATUS and the decision log. Add an owner exercise that predicts two independent markers, saves/reloads, verifies both and reverses the fixture. Record owner learning separately from automated verification. Do not mark B1 complete merely because a harness exits zero.
+
+</details>
 
 </details>
 

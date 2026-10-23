@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "run_id": "c-20261023-120603-d0b0e286",
+  "branch": "main",
+  "source_matches_gate": true,
+  "workers": 143,
+  "normal_workers": 130,
+  "intentional_terminated_writers": 13,
+  "checks": {
+    "checks": 3225,
+    "passed": 3225,
+    "failed": 0,
+    "workers": 143
+  },
+  "C_workers": 11,
+  "C_case_groups": 8,
+  "B1_required_cases": 28,
+  "B1_characterization_cases": 6,
+  "original_diagnostic_properties": 32,
+  "runner_negative_controls": 7,
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_c.py"
+  ],
+  "completed": [
+    "equipped drop and derived armor/light release",
+    "exact floor/legacy/container transfer",
+    "capacity/stale selection rejection and partial take-all preservation",
+    "deferred crafting confirmation and cancellation",
+    "vessel exchange and harvest failure ownership"
+  ],
+  "deferred": [
+    {
+      "case": "E04",
+      "id": "UI-TEXT-HEIGHT",
+      "scope": "UI",
+      "symptom": {
+        "text_id": "lab_label_sarcophagus",
+        "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+        "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+      }
+    }
+  ],
+  "limitations": [
+    "C_STATE.md defines remaining effect/decay/butchery boundaries",
+    "No personal-save migration or pruning",
+    "Synchronous validation transactions; checkpoint boundary remains B3",
+    "Container state is trusted local pickle; old binaries are not promised forward compatibility"
+  ]
+}

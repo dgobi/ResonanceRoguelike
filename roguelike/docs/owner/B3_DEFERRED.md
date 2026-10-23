@@ -1,3 +1,5 @@
+> **Historical B3 boundary:** C now repairs equipped-drop and the bounded ownership/transfer/crafting paths in [C_STATE](C_STATE.md). The original B3 evidence and return ZIP remain unchanged. Other limits below remain unless C_STATE explicitly resolves them.
+
 # Boundaries after B3
 
 B3 repairs B3-GENERATIONS and B3-DIRTY-HOT. Whole checkpoint, dirty-owner,

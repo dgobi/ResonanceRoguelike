@@ -1,3 +1,5 @@
+> **C / production main:** B3 is owner-accepted. Exact equipped-drop, floor/container ownership, failed transfers and crafting cancellation are implemented; see [roguelike/docs/owner/C_STATE.md](roguelike/docs/owner/C_STATE.md). Run `tools/verify_c.py` for the complete autonomous C + B1/B2/B3 gate. Keep working in this checkout on main, preserve Git checkpoints, and commit accepted work. The older status below is historical.
+
 > **B3 / production main:** Accepted Arc A/B1/B2 are merged into main. Checkpoint generations, recovery, dirty-cache capture and slot-scoped deletion are documented in [roguelike/docs/owner/B3_STATE.md](roguelike/docs/owner/B3_STATE.md). Work only in this checkout on main, create Git checkpoints, commit accepted work, and verify autonomously with `tools/verify_b3.py`. Historical context follows.
 
 > **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](roguelike/docs/owner/STATUS.md). This banner does not resolve open design decisions.

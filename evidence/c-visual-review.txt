@@ -1,0 +1,21 @@
+Reviewed actual offscreen surfaces from c-20261023-120603-d0b0e286.
+
+c-drop-tallow_torch.png: inventory has no offhand/light equipment entry and no
+carried torch; the blade and leather jacket remain listed. Semantic checks prove
+the exact torch is floor-owned, inactive, then can be picked up again.
+
+c-take-all-partial.png: the log reports only the fitting item taken; the ground
+hint still lists the overweight item and remains. Exact-owner assertions confirm
+both stay on the floor while the fitting item belongs to inventory once.
+
+c-container-second-instance.png: the authored barrel is open and the log identifies
+the selected torch 77. Assertions establish its retained fuel and the other torch's
+separate container ownership; visual appearance alone cannot establish identity.
+
+c-craft-completed.png: the log shows cancellation, a new placement prompt and one
+confirmation; the placed campfire is visible north of the player. Assertions
+prove cancellation retained the exact fuel and confirmation consumed it once.
+
+Original renderer and Pygame surfaces at 1280x720, dummy SDL. No desktop capture
+or external input. No UI layout/render geometry was changed. The separate text
+height cutoff remains under its original exact behavioral oracle.
