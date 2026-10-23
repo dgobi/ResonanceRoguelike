@@ -35,7 +35,8 @@ def prepare(name, seed, resume=False):
     manifest = {p.relative_to(game).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in sorted(game.rglob("*")) if p.is_file()}
     marker.write_text(json.dumps({"seed": seed, "source_hashes": manifest}, indent=2), encoding="utf-8")
-    # The existing bootstrap reads this seed; no player.json means NEW GAME.
+    # v2 bootstrap accepts exactly this seed-only payload, with no other saved
+    # state. Missing player.json alone no longer authorizes a new game.
     save = game / "saves" / "slot_0"
     save.mkdir(parents=True)
     (save / "world.json").write_text(json.dumps({"seed": seed}), encoding="utf-8")

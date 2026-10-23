@@ -1,0 +1,32 @@
+{
+  "original_root": "G:\\GameDev\\RoguelikeProject",
+  "original_head_before": "9e1f32328a19aec88e818f552b7a4e36fcbb027f",
+  "original_head_after": "e484b47968324790403fd98e92e20f4b35226153",
+  "original_status_after": "",
+  "original_before_file_count": 502,
+  "original_changed_bytes": {},
+  "original_additions": [
+    "AGENTS.md"
+  ],
+  "reason_for_original_changes": "Owner explicitly requested committing existing work and recording accepted-work commit preference.",
+  "development_start_commit": "1b9531bda0ba593631ce7af4cb728165d7f4a7a9",
+  "development_start_clean": true,
+  "development_changed_existing_paths": [
+    "README.md",
+    "roguelike/docs/owner/CONTENT_ROUTES.md",
+    "roguelike/docs/owner/NEXT_ARC.md",
+    "roguelike/docs/owner/OBSERVATIONS.md",
+    "roguelike/docs/owner/START_HERE.md",
+    "roguelike/docs/owner/STATUS.md",
+    "roguelike/docs/owner/WORLD_AND_STATE.md",
+    "roguelike/engine/engine.py",
+    "roguelike/engine/save_manager.py",
+    "roguelike/main.py",
+    "tools/baseline.py",
+    "tools/owner_lesson.py",
+    "tools/persistence_diagnostics.py"
+  ],
+  "development_unchanged_file_count": 528,
+  "original_personal_saves": "not read/copied/tested",
+  "final_source_bound_to_gate": true
+}

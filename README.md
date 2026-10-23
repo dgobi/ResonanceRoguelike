@@ -1,11 +1,31 @@
-# Roguelike: owner entry point
+# Resonance roguelike — owner entry point
 
-This is the existing dark medieval, post-apocalypse roguelike. Arc A adds a disposable development recipe, orientation and diagnostic evidence. It changes no gameplay code or content.
+B1 repairs development save/load identity and explicit replacement in the existing
+isolated copy. Read [START_HERE](roguelike/docs/owner/START_HERE.md),
+[world and state](roguelike/docs/owner/WORLD_AND_STATE.md),
+[the v2 format](roguelike/docs/owner/B1_FORMAT.md), and
+[verification](roguelike/docs/owner/B1_VERIFICATION.md).
 
-Start with [the owner launch guide](roguelike/docs/owner/START_HERE.md). Then read the [runtime map](roguelike/docs/owner/RUNTIME_MAP.md), [world and state](roguelike/docs/owner/WORLD_AND_STATE.md), [content routes](roguelike/docs/owner/CONTENT_ROUTES.md), and [Crow Jerky lesson](roguelike/docs/owner/OWNER_LESSON.md).
+From this root, the enforced autonomous command is:
 
-[Implementation status and documentation authority](roguelike/docs/owner/STATUS.md) separate observed behavior, source-supported behavior and creative intent. [Owner decisions](roguelike/docs/owner/DECISIONS.md) remain open. [Evidence and remaining manual checks](roguelike/docs/owner/OBSERVATIONS.md) state the limits of this baseline. [The next repair brief](roguelike/docs/owner/NEXT_ARC.md) is limited to persistence identity and explicit replacement.
+```powershell
+.\.venv\Scripts\python.exe tools/verify_b1.py
+```
 
-Baseline: original `main` at `9e1f32328a19aec88e818f552b7a4e36fcbb027f`, **plus all 188 dirty/untracked paths**, not HEAD alone. All 503 exported project files matched the independent review. See [provenance](evidence/PROVENANCE.md). The independent development copy has its own baseline commit `863bc5f`; it is not an upstream commit.
+It uses only disposable sessions, headless SDL, subprocesses and app-local game
+events. Final evidence: [b1-results.json](evidence/b1-results.json).
+Known unrelated defects: [B1_DEFERRED](roguelike/docs/owner/B1_DEFERRED.md).
+Next recommendation: [B2](roguelike/docs/owner/NEXT_ARC.md). No mandatory manual
+verification or personal-save migration is required or provided.
 
-Use `.venv` and `tools/baseline.py`; do not launch experiments from the original project's save directory. Historical documents are retained and labeled. Their self-described authority does not approve conflicting design choices.
+The starting point is the complete preserved working copy plus Arc A commit
+`1b9531b`, not original HEAD alone. [Arc A provenance](evidence/PROVENANCE.md)
+retains that history. B1 uses branch `codex/b1-persistence` in
+`G:\GameDev\RoguelikeBaseline-20261020\project`; your original project stays
+separate. The owner requested a separate commit of its pre-existing work and a
+persistent accepted-work commit preference; these are recorded in its preservation
+commit and [AGENTS.md](AGENTS.md).
+
+The existing dark medieval setting, content and assets are unchanged. Broader
+Needs/hooks/timers remain B2; coherent checkpoints and failure recovery remain B3.
+Creative decisions stay in the [owner decision register](roguelike/docs/owner/DECISIONS.md).

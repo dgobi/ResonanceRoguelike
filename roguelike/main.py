@@ -25,27 +25,23 @@ WORLD_HEIGHT = 128
 
 
 def main() -> None:
+    from engine.save_manager import SaveManager
+    try:
+        startup, saved_seed = SaveManager().startup_state()
+    except Exception as error:
+        print(f"Startup load failed: {error}")
+        raise SystemExit(1) from error
     display      = DisplayConfig.from_config()
     data         = DataLoader("data")
     registry     = TileRegistry("data/tiles.json", mode=display.render_mode)
 
     import random as _random
-    import json   as _json
-    from pathlib import Path as _Path
 
     # Determine world seed.
     # New game: generate a fresh random seed so each world is unique.
     # Load:     read the stored seed from world.json so regenerated chunks
     #           are consistent with the original world.
-    _save_world_path = _Path("saves") / "slot_0" / "world.json"
-    if _save_world_path.exists():
-        try:
-            _w = _json.loads(_save_world_path.read_text(encoding="utf-8"))
-            world_seed = int(_w.get("seed", 0)) or _random.randint(0, 2**32 - 1)
-        except Exception:
-            world_seed = _random.randint(0, 2**32 - 1)
-    else:
-        world_seed = _random.randint(0, 2**32 - 1)
+    world_seed = saved_seed if saved_seed is not None else _random.randint(0, 2**32 - 1)
 
     # Seed the global random module as a safety net (generation uses
     # Random(seed) instances, but this covers any stray global calls).
@@ -180,8 +176,10 @@ def main() -> None:
         engine.item_system.use(torch, engine)
 
     # Load save if exists — skip the lab descent if a save is loaded
-    if engine.save_manager.save_exists():
-        engine.save_manager.load(engine)
+    if startup == "load":
+        if not engine.save_manager.load(engine):
+            print(f"Startup load failed: {engine.save_manager.last_error}")
+            raise SystemExit(1)
     else:
         # No save: descend directly into the starting lab
         _start_in_lab(engine, surface_map)

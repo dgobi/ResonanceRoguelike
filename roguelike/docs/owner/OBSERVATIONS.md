@@ -1,3 +1,51 @@
+# B1 observations and autonomous evidence — 22 October 2026
+
+Use [B1_VERIFICATION.md](B1_VERIFICATION.md) for the exact enforced command and
+[b1-results.json](../../../evidence/b1-results.json) for computed final outcomes.
+The Arc A desktop-input interruption below is dated history, superseded by
+original Engine.run tests using the game's own event queue. There is no mandatory
+owner test task.
+
+The unchanged baseline reproduced ten completed diagnostic workers, 32 assertions,
+17 pass / 15 fail, and expected exit 1 with `--assert-properties`. Independent
+component probes reproduced the hot-map alias, dropped dormant lurker, reset awake
+lurker, null empty inventory, ghost torch and wrong duplicate relinking. Those
+are failing-before observations, not successful persistence behavior.
+
+B1 checks cover separate surface/lab contents at multiple addresses, empty actor
+and item stores, repeated travel, saved HP/position, floor fuel/liquid, container
+contents, explored state, explicit empty belongings, duplicate row zero/one and
+reordering, inactive/absent light and burnout, immediate dormant/awake/pending
+lurker state, actual ability/AI ticks, all serialization owners, version/reference/
+scene rejection and strict new-game distinction. Writer checkpoints are immutable
+and fresh readers have distinct PIDs. The default command also tests its own
+failure handling and requires all matrix cases and parameter workers.
+
+The actual event loop completes movement, waiting, inventory selection/equip,
+pickup/drop, ordinary unarmed combat, existing lab label reading, dry-bitter-herb
+processing (one ingredient, one placed output, 20 turns), stairs, ordinary surface
+boundary crossing, debug-binding characterization and nondebug save/load with a
+fresh bootstrap. Shifted stair Unicode and real app-local modifier state are
+supplied; key releases prevent repeats. No desktop input or other-app capture is
+used. Fixture placement/acquisition is explicitly logged.
+
+Visual inspection: the lab and surface render with visible terrain and the expected
+panels. Inventory displays the torch in offhand and the current carried objects.
+The processing capture shows the lit fixture campfire and completion message;
+semantic checks locate the exact dried-herb output. The bound sarcophagus label
+opens with the correct title/redaction, but its last visible body word is `If`;
+the rest of its one-page text is omitted. Baseline/candidate rendered-span traces
+and captures agree. Equipped drop also leaves a stale slot on both sources.
+These and six B2/B3 controls are individually accounted for in
+[B1_DEFERRED.md](B1_DEFERRED.md), without broad repairs or blanket expected failures.
+
+No asset or font substitution was required. The observations are for this Windows
+runtime and 1280x720 default sprite render; they are not a cross-platform pixel or
+physical-keyboard guarantee. Optional owner exercises are educational only.
+
+<details>
+<summary>Archived Arc A text — 20 October 2026; superseded operational requirements and failure status</summary>
+
 # Bounded observation log and diagnostic recipe
 
 Date: October 20, 2026, America/Edmonton. Source: reviewed dirty snapshot, with gameplay code/data unchanged. Environment and launch are in [START_HERE](START_HERE.md). Evidence is limited to the rows below; no claim of a complete playthrough, save fidelity, balance or broad UI compatibility.
@@ -75,3 +123,5 @@ Use a new `--observe` session. These steps are a **pending checklist**, not reco
 Observation harness command example (while that particular marked session is running): write `{"action":"save"}` to its `.baseline/<name>/diagnostic-command.json`. The next event-poll wrapper invokes `SaveManager.save`; JSONL labels it diagnostic_before/after. Other bounded commands (capture, position, give, hunger, spawn) are explicit fixture operations in `tools/baseline.py`, never counted as player actions. Do not leave an old command for `--resume`: commands are read at first poll as well. Remove only that created command file before resuming, or use a session that has none.
 
 Normal-input checks need manual keyboard delivery or a separately repaired input-tool path. No change to game controls was made to hide this limitation.
+
+</details>

@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import pickle
+import math
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
@@ -15,6 +16,55 @@ if TYPE_CHECKING:
 
 
 SAVE_DIR = Path("saves")
+SAVE_VERSION = 2
+
+
+class SaveFormatError(ValueError):
+    """A required development-save field cannot be restored faithfully."""
+
+
+def _validate_version(meta) -> None:
+    version = meta.get("save_version") if isinstance(meta, dict) else None
+    if type(version) is not int:
+        raise SaveFormatError(f"Invalid save_version {version!r}; expected integer {SAVE_VERSION}")
+    if version != SAVE_VERSION:
+        raise SaveFormatError(f"Unsupported save version {version}; supported: {SAVE_VERSION}")
+
+
+@dataclass(frozen=True)
+class SceneAddress:
+    world_x: int
+    world_y: int
+    submap_id: str | None
+
+    @classmethod
+    def from_player(cls, player, world):
+        wx, wy = player.get("world_x"), player.get("world_y")
+        if type(wx) is not int or type(wy) is not int:
+            raise SaveFormatError("Scene world coordinates must be integers")
+        if "current_submap_id" not in player:
+            raise SaveFormatError("Missing current_submap_id scene field")
+        sid = player["current_submap_id"]
+        chunk = world.get("chunks", {}).get(f"{wx},{wy}")
+        if chunk is None:
+            raise SaveFormatError(f"Unknown scene world address ({wx}, {wy})")
+        if sid is not None:
+            if (not isinstance(sid, str) or not sid or
+                    any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-" for c in sid)):
+                raise SaveFormatError("Invalid submap_id")
+            if sum(s.get("submap_id") == sid for s in chunk.get("submaps", [])) != 1:
+                raise SaveFormatError(f"Submap {sid!r} does not belong to ({wx}, {wy})")
+        return cls(wx, wy, sid)
+
+    def store(self, cache, local_map, entities):
+        if self.submap_id is None:
+            cache.store(self.world_x, self.world_y, local_map, entities)
+        else:
+            cache.store_submap(self.submap_id, local_map, entities)
+
+    def load(self, cache):
+        return (cache.load(self.world_x, self.world_y) if self.submap_id is None
+                else cache.load_submap(self.submap_id))
 
 
 @dataclass
@@ -189,34 +239,51 @@ class SaveManager:
         self.slot      = slot
         self.save_path = SAVE_DIR / f"slot_{slot}"
         self.cache     = ChunkCache(self.save_path)
+        self.last_error: str | None = None
+
+    def startup_state(self) -> tuple[str, int | None]:
+        """Distinguish deliberate new-game seeds from incomplete existing saves.
+
+        Read-only, before bootstrap generation. A session marker is not authority
+        to discard an incomplete save. No format migration is performed.
+        """
+        files = {p.relative_to(self.save_path).as_posix()
+                 for p in self.save_path.rglob("*") if p.is_file()}
+        if not files:
+            return "new", None
+        world_path = self.save_path / "world.json"
+        world = _read_json(world_path) if world_path.is_file() else None
+        if (files == {"world.json"} and isinstance(world, dict)
+                and set(world) == {"seed"} and type(world["seed"]) is int):
+            return "new", world["seed"]
+        meta_path = self.save_path / "meta.json"
+        if not meta_path.is_file():
+            raise SaveFormatError("Incomplete save: missing meta.json")
+        _validate_version(_read_json(meta_path))
+        if not (self.save_path / "player.json").is_file() or not isinstance(world, dict):
+            raise SaveFormatError("Incomplete save: world.json and player.json are required")
+        if type(world.get("seed")) is not int or not isinstance(world.get("chunks"), dict):
+            raise SaveFormatError("Invalid saved world record")
+        return "load", world["seed"]
 
     def save(self, engine: "Engine") -> None:
         """
-        Full save. Writes world, player, current chunk,
-        and all cached chunks to disk.
+        Full save of world, player and the active scene. Inactive dirty hot
+        entries and coherent multi-file checkpoint generations remain separate.
         """
-        self.save_path.mkdir(parents=True, exist_ok=True)
-
-        # Store current chunk before saving
-        self.cache.store(
-            engine.world_x,
-            engine.world_y,
-            engine.local_map,
-            engine.entities,
-        )
-
-        # World map
         world_data = _serialize_world(engine.world_map)
-        _write_json(self.save_path / "world.json", world_data)
-
-        # Player state
         player_data = _serialize_player(engine)
+        _validate_player_references(player_data, engine.data)
+        address = SceneAddress.from_player(player_data, world_data)
+        self.save_path.mkdir(parents=True, exist_ok=True)
+        address.store(self.cache, engine.local_map, engine.entities)
+        _write_json(self.save_path / "world.json", world_data)
         _write_json(self.save_path / "player.json", player_data)
 
         # Meta
         import datetime
         meta = {
-            "save_version": 1,       # increment when save format changes
+            "save_version": SAVE_VERSION,
             "saved_at":   datetime.datetime.now().isoformat(),
             "world_x":    engine.world_x,
             "world_y":    engine.world_y,
@@ -228,71 +295,48 @@ class SaveManager:
         engine.log.add("Progress preserved.", LIFE_GREEN)
 
     def load(self, engine: "Engine") -> bool:
-        meta_path = self.save_path / "meta.json"
-        if meta_path.exists():
-            meta = _read_json(meta_path)
-            if meta.get("save_version", 0) < 1:
-                engine.log.add(
-                    "Save file is outdated and cannot be loaded.",
-                    FRESH_WOUND
-                )
-                return False
-        """
-        Full load. Restores world, player, and chunk cache.
-        Returns True on success.
-        """
-        if not self.save_path.exists():
-            engine.log.add(
-                "No save found.", BLOOD_STONE
-            )
-            return False
+        """Read supported persisted records, never flush/reuse unsaved hot maps.
 
+        B1 fields are validated before applying them. This is not general
+        transactional rollback for arbitrary component or filesystem failures.
+        """
+        self.last_error = None
         try:
-            # World map
+            _validate_version(_read_json(self.save_path / "meta.json"))
             world_data = _read_json(self.save_path / "world.json")
-            _deserialize_world(world_data, engine.world_map)
-
-            # Player state
             player_data = _read_json(self.save_path / "player.json")
+            address = SceneAddress.from_player(player_data, world_data)
+            _validate_player_references(player_data, engine.data)
+            cold_cache = ChunkCache(self.save_path)
+            cached = address.load(cold_cache)
+            from world.local_map import LocalMap
+            if not isinstance(cached, CachedChunk) or not isinstance(cached.local_map, LocalMap):
+                raise SaveFormatError(f"Missing or invalid active scene record: {address}")
+            if (type(player_data.get("x")) is not int or type(player_data.get("y")) is not int
+                    or not cached.local_map.in_bounds(player_data["x"], player_data["y"])):
+                raise SaveFormatError("Invalid player position in active scene")
+            _validate_entities(cached.entities, engine.data)
+            for owner in ("live_pursuers", "pending_pursuer_arrivals"):
+                for row in player_data.get(owner, []):
+                    _validate_entities([row["entity"]], engine.data)
+            # Construct actors and a world independently of the pre-load graph.
+            actors = _deserialize_entities(cached.entities, engine)
+            from world.world_map import WorldMap
+            world = WorldMap(world_data["width"], world_data["height"])
+            _deserialize_world(world_data, world)
             _deserialize_player(player_data, engine)
-
-            # Load the player's current chunk from cache
-            cached = self.cache.load(engine.world_x, engine.world_y)
-            if cached:
-                engine.local_map = cached.local_map
-                engine.entities  = [engine.player]
-                engine.entities += _deserialize_entities(
-                    cached.entities, engine
-                )
-            else:
-                # Chunk not cached — regenerate
-                from generation.region_gen import generate_region
-                from config import MAP_WIDTH, MAP_HEIGHT
-                chunk = engine.world_map.get(
-                    engine.world_x, engine.world_y
-                )
-                if chunk:
-                    new_map, _ = generate_region(
-                        chunk, MAP_WIDTH, MAP_HEIGHT,
-                        engine.data.terrain
-                    )
-                    engine.local_map = new_map
-                    engine.entities  = [engine.player]
-
+            engine.world_map = world
+            self.cache = cold_cache
+            engine.local_map = cached.local_map
+            engine.entities = [engine.player] + actors
+            engine._pending_transfer = []
             engine._update_fov()
-            engine.log.add(
-                "The world reassembles itself around you.",
-                LIFE_GREEN
-            )
+            engine.log.add("The world reassembles itself around you.", LIFE_GREEN)
             return True
-
-        except Exception as e:
-            print(f"Load failed: {e}")
-            import traceback
-            traceback.print_exc()
-            engine.log.add(
-                f"Load failed: {e}", FRESH_WOUND
-            )
+        except Exception as error:
+            self.last_error = str(error)
+            print(f"Load failed: {error}")
+            engine.log.add(f"Load failed: {error}", FRESH_WOUND)
             return False
 
     def save_exists(self) -> bool:
@@ -498,6 +542,19 @@ def _serialize_player(engine: "Engine") -> dict:
     corrupt = getattr(p, "corruption", None)
     inv     = getattr(p, "inventory",  None)
     light   = getattr(p, "light_source", None)
+    if inv is None:
+        raise SaveFormatError("Player inventory component is required")
+    # Object identity is used only to build this snapshot's row references.
+    # Every row is serialized; invalid definitions fail, never compact the list.
+    rows = {id(item): index for index, item in enumerate(inv.items)}
+    if len(rows) != len(inv.items):
+        raise SaveFormatError("Inventory contains the same object more than once")
+    equipment = {}
+    for slot, item in p.equipment.slots.items():
+        if item is not None and id(item) not in rows:
+            raise SaveFormatError(f"Equipment {slot} refers to an item outside inventory")
+        equipment[slot] = ({"inventory_index": rows[id(item)], "item_id": item.item_id}
+                           if item is not None else None)
 
     return {
         "x":         p.x,
@@ -541,9 +598,8 @@ def _serialize_player(engine: "Engine") -> dict:
                     "temporary_essence": getattr(i, "temporary_essence", []) or None,
                 }
                 for i in inv.items
-                if getattr(i, "item_id", "")
             ],
-        } if inv else None,
+        },
         "light_source": {
             "radius":  light.radius,
             "color":   list(light.color),
@@ -564,10 +620,7 @@ def _serialize_player(engine: "Engine") -> dict:
             "perk_state":      p.perks.perk_state,
             "affinity_scores": p.perks.affinity_scores,
         } if getattr(p, "perks", None) else None,
-        "equipment": {
-            slot: item.item_id if item else None
-            for slot, item in p.equipment.slots.items()
-        } if getattr(p, "equipment", None) else None,
+        "equipment": equipment,
         "level": {
             "level":               p.level.level,
             "exp":                 p.level.exp,
@@ -600,6 +653,43 @@ def _serialize_player(engine: "Engine") -> dict:
     }
 
 
+def _validate_player_references(saved: dict, data) -> None:
+    from components.equipment import SLOTS
+    inv = saved.get("inventory")
+    if not isinstance(inv, dict) or not isinstance(inv.get("items"), list):
+        raise SaveFormatError("inventory must be an object with capacity and items array")
+    capacity = inv.get("capacity")
+    if type(capacity) not in (int, float) or not math.isfinite(capacity) or capacity <= 0:
+        raise SaveFormatError("inventory.capacity must be a positive finite number")
+    for index, row in enumerate(inv["items"]):
+        item_id = row.get("item_id") if isinstance(row, dict) else None
+        if not isinstance(item_id, str) or item_id not in data.items:
+            raise SaveFormatError(f"inventory row {index}: unknown item definition {item_id!r}")
+    equipment = saved.get("equipment")
+    if not isinstance(equipment, dict):
+        raise SaveFormatError("equipment must be an object")
+    for slot, ref in equipment.items():
+        if slot not in SLOTS:
+            raise SaveFormatError(f"Unknown equipment slot {slot!r}")
+        if ref is None:
+            continue
+        if not isinstance(ref, dict):
+            raise SaveFormatError(f"Equipment {slot}: expected inventory reference object or null")
+        index = ref.get("inventory_index")
+        if type(index) is not int or not 0 <= index < len(inv["items"]):
+            raise SaveFormatError(f"Equipment {slot}: invalid inventory_index {index!r}")
+        if ref.get("item_id") != inv["items"][index]["item_id"]:
+            raise SaveFormatError(f"Equipment {slot}: item_id does not match inventory row {index}")
+    light = saved.get("light_source")
+    if light is not None:
+        if not isinstance(light, dict) or type(light.get("active")) is not bool:
+            raise SaveFormatError("light_source must be null or a light object with boolean active")
+        if light["active"]:
+            offhand = equipment.get("offhand")
+            if offhand is None or not data.items[offhand["item_id"]].get("light"):
+                raise SaveFormatError("Active item light requires an equipped offhand light")
+
+
 def _deserialize_player(data: dict, engine: "Engine") -> None:
     from components.fighter import Fighter
     from components.needs import Needs
@@ -607,7 +697,14 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
     from components.inventory import Inventory
     from components.light_source import LightSource
 
+    _validate_player_references(data, engine.data)
     p            = engine.player
+    # Clear flags even on old objects held by callers; then replace belongings.
+    old_items = list(getattr(getattr(p, "inventory", None), "items", []))
+    old_items += list(getattr(getattr(p, "equipment", None), "slots", {}).values())
+    for old in old_items:
+        if old is not None:
+            old.equipped = False
     p.x          = data["x"]
     p.y          = data["y"]
     engine.world_x            = data["world_x"]
@@ -643,13 +740,11 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
         inv_data = data["inventory"]
         p.inventory = Inventory(capacity=inv_data["capacity"])
         factory = ItemFactory(engine.data)
-        for idata in inv_data.get("items", []):
-            item_id = idata.get("item_id", "")
-            if not item_id:
-                continue
+        for idata in inv_data["items"]:
+            item_id = idata["item_id"]
             item = factory.create(item_id, p.x, p.y)
             if item is None:
-                continue
+                raise SaveFormatError(f"Cannot reconstruct inventory item {item_id!r}")
             item.name          = idata.get("name",         item.name)
             item.on_use        = idata.get("on_use",        item.on_use)
             item.turns_lit     = idata.get("turns_lit",     0)
@@ -661,8 +756,11 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
             te = idata.get("temporary_essence")
             if te:
                 item.temporary_essence = list(te)
-            p.inventory.add(item)
+            # Restoration is not acquisition. Preserve rows even if current
+            # definitions make the saved bag overweight (capacity policy: B2).
+            p.inventory.items.append(item)
 
+    p.light_source = None
     if data.get("light_source"):
         ls = data["light_source"]
         p.light_source = LightSource(
@@ -753,60 +851,28 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
 
 
 def _restore_equipment(player, saved_equipment: dict, data) -> None:
-    """
-    Re-equip items after load by matching saved slot→item_id
-    against the reconstructed inventory.
-    """
+    """Replace all slots, then link only exact validated inventory rows."""
     from components.equipment import Equipment
     from engine.item_system import _recompute_effective_av
 
-    if not saved_equipment:
-        return
+    for item in getattr(getattr(player, "equipment", None), "slots", {}).values():
+        if item is not None:
+            item.equipped = False
+    player.equipment = Equipment()
+    for item in player.inventory.items:
+        item.equipped = False
+    for slot, ref in saved_equipment.items():
+        if ref is not None:
+            item = player.inventory.items[ref["inventory_index"]]
+            player.equipment.equip(item, slot)
 
-    equipment = getattr(player, "equipment", None)
-    if not equipment:
-        player.equipment = Equipment()
-        equipment = player.equipment
-
-    inventory = getattr(player, "inventory", None)
-    if not inventory:
-        return
-
-    for slot, item_id in saved_equipment.items():
-        if not item_id:
-            continue
-
-        item = next(
-            (i for i in inventory.items
-             if getattr(i, "item_id", None) == item_id),
-            None,
-        )
-        if not item:
-            continue
-
-        equipment.slots[slot] = item
-        item.equipped = True
-
-        item_def = data.items.get(item_id, {})
-
-        if slot == "light":
-            light_data = item_def.get("light", {})
-            if light_data:
-                from components.light_source import LightSource
-                ls = LightSource(
-                    radius  = light_data.get("radius",  6),
-                    color   = tuple(light_data.get("color", [226, 181, 112])),
-                    falloff = light_data.get("falloff", 1.5),
-                    flicker = light_data.get("flicker", False),
-                    active  = True,
-                )
-                ls._item_id    = item_id
-                ls._item_ref   = item
-                ls._burn_turns = item.burn_turns or 600
-                ls._turns_used = item.turns_lit
-                player.light_source = ls
-
-    # Recompute effective_av from all equipped armor after everything is restored
+    light = player.light_source
+    offhand = player.equipment.slots["offhand"]
+    if light is not None and offhand is not None and offhand.light_data:
+        light._item_ref = offhand
+        light._item_id = offhand.item_id
+        light._burn_turns = offhand.burn_turns or 600
+        light._turns_used = offhand.turns_lit
     _recompute_effective_av(player, data)
 
 
@@ -815,11 +881,13 @@ def _serialize_entity(entity: "Actor") -> dict:
     fighter = getattr(entity, "fighter",    None)
     ai      = getattr(entity, "ai",         None)
     percep  = getattr(entity, "perception", None)
+    creature_id = getattr(entity, "_creature_id", None)
+    if getattr(entity, "is_alive", True) and not creature_id:
+        raise SaveFormatError(f"Actor {entity.name!r} has no stable _creature_id")
 
     return {
         "type":            "actor",
-        "id":              getattr(entity, "entity_id",
-                                  entity.tile),
+        "id":              creature_id,
         "x":               entity.x,
         "y":               entity.y,
         "tile":            entity.tile,
@@ -846,11 +914,37 @@ def _serialize_entity(entity: "Actor") -> dict:
         "hearing_radius": percep.hearing_radius if percep else 5,
         "sees_in_dark":   percep.sees_in_dark   if percep else False,
         "wander_radius":  ai.wander_radius      if ai else 8,
+        # Null hibernating means the first ability tick has not initialized it.
+        "lurker": {
+            "hibernating": getattr(entity, "_hibernating", None),
+            "ambush_ready": getattr(entity, "_ambush_ready", False),
+            "ai_triggered": getattr(ai, "_triggered", False),
+        } if creature_id == "stone_lurker" else None,
     }
 
 
 def _is_player(entity: "Actor") -> bool:
     return entity.name == "Player"
+
+
+def _validate_entities(rows, data) -> None:
+    if not isinstance(rows, list):
+        raise SaveFormatError("Scene entities must be an array (possibly empty)")
+    for index, row in enumerate(rows):
+        if not isinstance(row, dict):
+            raise SaveFormatError(f"Actor row {index} must be an object")
+        if not row.get("is_alive", True):
+            continue  # Existing corpse representation; broader remains state: B2.
+        identity = row.get("id")
+        if not isinstance(identity, str) or identity not in data.entities:
+            raise SaveFormatError(f"Actor row {index}: invalid stable creature identity {identity!r}")
+        if identity == "stone_lurker":
+            state = row.get("lurker")
+            if (not isinstance(state, dict) or "hibernating" not in state
+                    or (state["hibernating"] is not None and type(state["hibernating"]) is not bool)
+                    or type(state.get("ambush_ready")) is not bool
+                    or type(state.get("ai_triggered")) is not bool):
+                raise SaveFormatError(f"Actor row {index}: invalid stone_lurker lifecycle")
 
 
 def _deserialize_entities(
@@ -861,6 +955,7 @@ def _deserialize_entities(
     from engine.creature_factory import CreatureFactory
     factory  = CreatureFactory(engine.data)
     restored = []
+    _validate_entities(entity_dicts, engine.data)
 
     for d in entity_dicts:
         if not d.get("is_alive", True):
@@ -876,11 +971,23 @@ def _deserialize_entities(
             continue
 
         # Try to spawn from creature definition
-        creature_id = d.get("id", d.get("tile", ""))
+        creature_id = d["id"]
         actor = factory.spawn(creature_id, d["x"], d["y"])
 
         if actor is None:
-            continue
+            raise SaveFormatError(f"Cannot reconstruct creature {creature_id!r}")
+
+        actor.tile = d.get("tile", actor.tile)
+        actor.name = d.get("name", actor.name)
+        actor.blocks_movement = d.get("blocks_movement", actor.blocks_movement)
+        if creature_id == "stone_lurker":
+            state = d["lurker"]
+            if state["hibernating"] is not None:
+                actor._hibernating = state["hibernating"]
+                # Dormant presentation follows the current ability's rule.
+                actor.tile = "rock" if actor._hibernating else "stone_lurker"
+            actor._ambush_ready = state["ambush_ready"]
+            actor.ai._triggered = state["ai_triggered"]
 
         # Restore fighter state from saved state
         fighter = getattr(actor, "fighter", None)

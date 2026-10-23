@@ -1,3 +1,25 @@
+# Next arc — B2 component and derived-state reconstruction
+
+B1 is the current bounded identity/replacement task. Use its final enforced gate
+and return package for acceptance; do not reuse the superseded Arc A manual-window
+requirement. All routine verification is autonomous and headless.
+
+Proceed next to a separately scoped B2 task: inventory the saved/reconstructed/
+derived/reset component fields; address route-specific Needs configuration, perk
+hook reconstruction, omitted timers and remaining item instance state. Preserve
+the B1 format/reference/scene regressions. Record exact owners and measurable
+behavior rather than claiming all-field fidelity from identity tests.
+
+B3 remains separate: coherent checkpoint generations, inactive dirty flushing,
+interrupted-write recovery, rollback and slot/deletion policy. Travel currently
+writes scene records outside full saves. C owns transfer/equipped-drop behavior;
+UI owns text panel wrapping/height. The concrete reproductions and boundaries are
+in [B1_DEFERRED.md](B1_DEFERRED.md). Do not implement these later arcs as incidental
+B1 cleanup. No personal-save conversion is authorized.
+
+<details>
+<summary>Archived Arc A text — 20 October 2026; superseded operational requirements and failure status</summary>
+
 # Separate implementation brief: B1 persistence identity and explicit replacement
 
 This is a proposed next task, not authorization to implement it during Arc A.
@@ -29,3 +51,5 @@ No creative redesign, save migration, engine swap, all-field persistence overhau
 Explain in plain language: surface and lab shared one address during full save; empty was mistaken for absent; a creature's costume was used as its identity. Show the new owners/keys/replacement order and what remains reset/recomputed or unsupported.
 
 Return a small patch, field/format changes, before/after diagnostics with independent processes, manual observations or an explicit blocker, and updates to WORLD_AND_STATE, STATUS and the decision log. Add an owner exercise that predicts two independent markers, saves/reloads, verifies both and reverses the fixture. Record owner learning separately from automated verification. Do not mark B1 complete merely because a harness exits zero.
+
+</details>

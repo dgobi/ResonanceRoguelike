@@ -1,0 +1,17 @@
+{
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\brief\\Resonance_Arc_A_Review_and_B1_Brief_20261021\\review_tools\\persistence_component_probes.py",
+    "--project",
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source",
+    "--scratch-dir",
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022",
+    "--output",
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\before-component-probes.json",
+    "--assert-baseline"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeBaseline-20261020\\project",
+  "exit_code": 0,
+  "purpose": "12 failing-before observations reproduced, not B1 acceptance",
+  "reproduction_in_return": "Use changed_files/evidence/b1-before/component_probe.py with --project pointing to an unchanged reviewed Arc A export; use a new scratch/output directory."
+}

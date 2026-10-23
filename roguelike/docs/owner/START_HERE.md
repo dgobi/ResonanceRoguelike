@@ -1,3 +1,48 @@
+# Start here — B1 development copy
+
+The isolated project is `G:\GameDev\RoguelikeBaseline-20261020\project`, on
+`codex/b1-persistence`. The original project remains separate. B1 changes only
+persistence ownership/validation and startup rejection handling; it preserves the
+world, content, assets, controls and gameplay design.
+
+Run the autonomous acceptance command from this project root:
+
+```powershell
+.\.venv\Scripts\python.exe tools/verify_b1.py
+```
+
+The existing Python 3.11.0 / Pygame 2.6.1 / tcod 19.3.0 environment is retained.
+No new test dependencies are required. See [verification](B1_VERIFICATION.md),
+[the v2 format](B1_FORMAT.md), [observations](OBSERVATIONS.md) and
+[remaining scoped defects](B1_DEFERRED.md).
+
+For an optional playable disposable world:
+
+```powershell
+.\.venv\Scripts\python.exe tools/baseline.py --session owner-b1-first --seed 20261020
+```
+
+Choose a new session name. The launcher excludes saves and creates exactly a
+seed-only initialization file. Missing player data in a full save is now an error,
+not permission to start again. Existing Arc A/v1 development sessions cannot be
+resumed with v2; no personal-save migration is part of B1. The default debug
+bindings remain F5 teleport and F9 dump. The acceptance driver separately uses
+process-local `DEBUG_MODE=False` for real F5/F9 save/load tests.
+
+The default acceptance suite uses dummy SDL, its own Pygame events and offscreen
+captures. It needs no PC takeover or owner keyboard work. Physical keyboard,
+other display modes and other operating systems are not certified. Windows
+resolves the existing assets/Fonts path case; no asset-path or asset changes were
+needed in this environment.
+
+An empty bag remains empty. A removed torch stops lighting. The second of two
+torches remains the equipped second torch. Surface grass stays separate from
+laboratory flagstone. Sleeping lurkers retain their definition; awake lurkers
+remain awake. B2/B3 still own broader fidelity and checkpoint/crash guarantees.
+
+<details>
+<summary>Archived Arc A text — 20 October 2026; superseded operational requirements and failure status</summary>
+
 # Start here
 
 The current game starts beneath the surface in a laboratory. It contains surface exploration, underground maps, normal combat and weapon moves, weighted inventory and equipment, found texts and a lexicon, survival, gathering, containers, recipes and processing, weather, resonance, corruption and perks. Several of these are partial. This handbook teaches the captured implementation without promoting unfinished behavior to canon.
@@ -67,3 +112,5 @@ For diagnostic persistence use [the documented harness](OBSERVATIONS.md), which 
 Stop with the window close button after accepting that unsaved progress may be lost. Keep each experimental world in its own named session; restoration means a fresh named copy. Do not merge disposable saves into personal saves. Only load saves you created yourself: the present format uses pickle and an `eval` path and has no robust compatibility or transactional recovery contract.
 
 The startup, movement, manual wait and inventory screen were observed. Full normal-input combat/travel/crafting coverage remains incomplete because native letter/Enter/Escape injection did not reach the game and physical Escape then stopped desktop automation. [OBSERVATIONS.md](OBSERVATIONS.md) records each remaining scenario. Saving underground and explicit empty-state restoration demonstrably fail diagnostic invariants. This is a runnable development baseline, not a certified persistent campaign.
+
+</details>

@@ -124,6 +124,10 @@ def worker(session_name, case, phase):
                 result["before"] = {"stable_id": a._creature_id, "tile": a.tile,
                                     "hibernating": a._hibernating}
                 dump(payload, _serialize_entity(a))
+                # v2 bootstrap rejects a seed-only file beside scene records.
+                # Persist the host for the fresh reader; the lurker check below
+                # remains explicitly a standalone entity-payload diagnostic.
+                e.save_manager.save(e)
             serialized = json.loads(payload.read_text())
             restored = _deserialize_entities([serialized], e)
             result["serialized"] = serialized

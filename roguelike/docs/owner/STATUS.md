@@ -1,3 +1,30 @@
+# Current implementation and evidence status
+
+B1 (22 October 2026) implements scene identity, cold full-load replacement,
+explicit empty inventory/equipment, exact saved-copy references, ghost armor/light
+clearing, narrow lurker lifetime and v2 startup/format rejection. The final
+acceptance record is [b1-results.json](../../../evidence/b1-results.json); the exact
+command and evidence classes are in [B1_VERIFICATION.md](B1_VERIFICATION.md).
+
+The mandatory baseline journeys now run autonomously through original Engine.run
+and app-local events: movement/wait, inventory/equip, pickup/drop, ordinary combat,
+bound document reading, processing completion, stairs, surface-edge movement and
+nondebug save/load with a fresh-process bootstrap reader. Captures are offscreen
+game surfaces. The text cutoff and equipped-drop defect are reproduced and
+reported separately; completing dispatch is not certification of their correctness.
+
+B1 is a narrow persistence repair. The individually reproduced B2/B3/C/UI limits
+are in [B1_DEFERRED.md](B1_DEFERRED.md). No broad save fidelity, power-loss safety,
+all recipes/combat/effects, creative redesign, personal-save migration or physical
+keyboard certification is implied. Continue with [B2](NEXT_ARC.md).
+
+Creative authority and the original decision register remain unchanged. Arc A's
+historical diagnostics retain 17 pass / 15 fail; the corrected original properties
+now pass 32/32. Owner learning remains optional and separate from acceptance.
+
+<details>
+<summary>Archived Arc A text — 20 October 2026; superseded operational requirements and failure status</summary>
+
 # Current implementation and documentation authority
 
 These labels are independent: **implemented** means an active source path exists; **partial** means important contracts are incomplete; **legacy** means retained but inactive/alternate; **planned** means intended without a complete path; **unverified** means this baseline lacks the relevant observation. A feature can be implemented and still unverified through normal input.
@@ -54,3 +81,5 @@ All original text is retained below a short banner pointing here. The labels sco
 5. World/authoring: entrance footprint/link preservation, generation policy, active schemas/duplicate IDs, actual loot routes, painter losslessness, UI modes.
 
 These are retained findings, not fixes delivered in Arc A. Do not combine the whole backlog into B1.
+
+</details>

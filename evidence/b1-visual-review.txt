@@ -1,0 +1,15 @@
+Offscreen Pygame surfaces only, 1280x720, Windows runtime.
+Inspected the laboratory, inventory, surface ascent, ordinary combat, completed
+processing, equipped drop, bound lab document and fresh bootstrap captures.
+The lab/player/terrain and panels render, the inventory identifies the offhand
+torch, and processing shows the lit fixture campfire plus dried-herb completion.
+Semantic assertions separately verify item placement, ownership and turn effects.
+The surface ascent shows the surface ruin/vegetation scene rather than the lab.
+Fresh bootstrap shows the restored laboratory and a reassembly message.
+The sarcophagus label has its correct title and redaction but stops at 'If'; its
+final sentence is omitted. Baseline and candidate match. Recorded actual normal
+render-span calls corroborate this UI-TEXT-HEIGHT defect.
+Equipped drop leaves Main Hand stale while the object is on the floor; the
+C-DROP-EQUIPPED semantic trace is the authority for that ownership defect.
+No desktop or unrelated-application images were taken. Cosmetic pixel equality,
+other render modes, physical input and other operating systems are not certified.

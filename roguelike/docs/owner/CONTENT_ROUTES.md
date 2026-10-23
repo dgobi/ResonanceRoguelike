@@ -1,3 +1,5 @@
+> B1 update, 22 October 2026: item rows now have exact save-local equipment references; creature serialization uses `_creature_id`; armor and offhand light ownership are rebuilt. See [B1_FORMAT](B1_FORMAT.md). The authoring-route inventory below is preserved as Arc A context; its persistence-failure and input-coverage statements are historical. Current automated route evidence is in [B1_VERIFICATION](B1_VERIFICATION.md).
+
 # Content routes: status and consumer map
 
 Purpose: find a real definition, its active consumer and a route into play before changing it. This is the first concise map, not a universal schema. Paths below are game-relative (`roguelike/`). **Active JSON** means a named consumer reads that field; it does not mean every authored field works or that its route was window-tested. The complete contract/exercise is [Crow Jerky](OWNER_LESSON.md); detailed pages for the other families are subsequent work.

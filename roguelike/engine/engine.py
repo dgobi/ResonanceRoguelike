@@ -1834,8 +1834,8 @@ class Engine:
             self.save_manager.save(self)
 
         elif key == pygame.K_F9 and not self.debug:
-            self.save_manager.load(self)
-            self._configure_player_needs()
+            if self.save_manager.load(self):
+                self._configure_player_needs()
 
         elif key == pygame.K_i:
             self.inventory_screen.toggle()

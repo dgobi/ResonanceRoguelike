@@ -70,8 +70,8 @@ def main():
         definition.write_bytes(before)
     result = {"results": results, "restored_exact_bytes": definition.read_bytes() == before,
               "definition_sha256": hashlib.sha256(before).hexdigest(),
-              "owner_learning_outcome": "awaiting owner validation",
-              "window_verification": "incomplete: native input automation stopped; do manual exercise",
+              "owner_learning_outcome": "optional educational exercise; not an acceptance gate",
+              "window_verification": "this component lesson does not run input; tools/verify_b1.py provides autonomous real-loop coverage",
               "source_hashes": {name: hashlib.sha256((ROOT/name).read_bytes()).hexdigest()
                   for name in ("tools/owner_lesson.py", "roguelike/engine/item_system.py",
                       "roguelike/engine/inventory_screen.py", "roguelike/components/needs.py",

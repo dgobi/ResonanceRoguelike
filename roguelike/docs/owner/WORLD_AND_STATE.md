@@ -1,3 +1,33 @@
+# World and state — B1 current contract
+
+The full scene address is `(world_x, world_y, current_submap_id-or-None)`.
+`SaveManager` validates it and routes active state through the existing separate
+surface/submap stores. The surface and laboratory can share world `(0,64)` and
+local `(3,3)` while retaining different terrain, actors, floor items and containers.
+
+A full reload constructs a cold cache and reads the addressed persisted record.
+It replaces active actors and saved pursuer collections, clears pending transfers,
+and ignores later unsaved mutations in both old hot stores. It does not flush
+those mutations on the way into load. Scene contents, not just labels, are tested
+in independent fresh readers and same-process mutation branches.
+
+Inventory and equipment replace previous/bootstrap state, including empty state.
+Equipment references exact inventory rows rather than the first matching item
+ID. Old flags/references are cleared, offhand light ownership is reconstructed,
+and armor is recomputed. The active torch's next fuel tick is tested. Creature
+`id` uses `_creature_id`; presentation and the lurker's small lifecycle record are
+separate. See [B1_FORMAT.md](B1_FORMAT.md) for field policy and restoration order.
+
+Travel continues to write scene files immediately. A load reads those persisted
+records, even if later travel updated them after a full save. Inactive dirty hot
+maps are not all flushed by full save. These are B3 limitations, not rollback or
+atomic-save guarantees. Needs/hooks/timers and remaining item fields belong to
+B2. The coordinate/layer descriptions below remain useful, but the old failure
+statements are explicitly historical.
+
+<details>
+<summary>Archived Arc A text — 20 October 2026; superseded operational requirements and failure status</summary>
+
 # World and state
 
 Purpose: know which place and object a change belongs to, and what survives leaving or reloading. Source context is the Arc A reviewed working copy; persistence assertions below come from [arc-a2-results.json](../../../evidence/arc-a2-results.json). They are real-method diagnostics, not a game-window traversal.
@@ -56,3 +86,5 @@ The bounded fixture gives surface `(3,3)` a grass marker and a hollow revenant; 
 Example invariant: empty saved inventory/equipment should replace six bootstrap items and the bootstrap offhand torch. The actual fresh-process test leaves all six starter items. A one-jerky inventory with all empty saved slots replaces the inventory but retains an offhand torch **outside** it. These are separate failures.
 
 Check with `tools/persistence_diagnostics.py --prefix my-state-check` in a new session prefix. Each result separates harness completion from expected property and observed value. Treat its exits and JSON as explained in OBSERVATIONS.md. No save migration, arbitrary old-save loading, crash recovery or complete field ledger is certified here.
+
+</details>

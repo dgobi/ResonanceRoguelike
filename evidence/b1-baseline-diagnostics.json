@@ -1,0 +1,793 @@
+{
+  "process": {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-candidate\\tools\\b1_diagnostic_guard.py",
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\tools\\persistence_diagnostics.py",
+      "--prefix",
+      "diagnostics-2f4afa55",
+      "--assert-properties"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline",
+    "exit_code": 1,
+    "stdout": "{\"output\": \"G:\\\\GameDev\\\\RoguelikeBaseline-20261020\\\\project\\\\.baseline\\\\b1-20261022-233242-7db2d65d\\\\source-baseline\\\\evidence\\\\diagnostics-2f4afa55-results.json\", \"harness_completed\": true, \"all_properties_passed\": false}\n",
+    "stderr": "",
+    "elapsed_seconds": 17.0,
+    "timeout": false
+  },
+  "results": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "source_hashes": {
+      "roguelike/main.py": "f8a47a119245e229388f51dc44e1a633647a7e23f630012a2a6f57835c8014ad",
+      "roguelike/engine/engine.py": "d41760dc0c604804c6dd4a9b9bd1d60fe55ea6394ee5e6d19e7433efe5ebda10",
+      "roguelike/engine/save_manager.py": "10169ccbd369aee5095098d315c9afb6613f898a323a95530b64e065b61d6b56",
+      "roguelike/engine/creature_factory.py": "1e0f6d8efdf2d66b1df8943fa02647b83d62efe2b2e363aca089c039637f5fec",
+      "roguelike/engine/creature_abilities.py": "31c0786d200423147b48723febf69be3e700c5ac7458ab6070da284dab8bfd57",
+      "tools/persistence_diagnostics.py": "dd2ae4f883ff39248d1ef1e91f22c0795c98e9d94af3992d7ecafc1e6d0704a6",
+      "tools/baseline.py": "44357b667bce33e22bc14a643d8503eb80c9bfab60e45cf3308cacdd60b6e49b"
+    },
+    "harness_completed": true,
+    "all_properties_passed": false,
+    "evidence_class": "full bootstrap and real methods; no window/input loop",
+    "results": [
+      {
+        "case": "scenes",
+        "phase": "write",
+        "pid": 26704,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "in-session load completes",
+            "expected": true,
+            "observed": true,
+            "property_passed": true
+          },
+          {
+            "property": "loaded underground identity and contents",
+            "expected": [
+              "sub_0_64_0",
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "observed": [
+              "sub_0_64_0",
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "property_passed": true
+          },
+          {
+            "property": "surface identity and contents survive underground save/load/ascent",
+            "expected": [
+              null,
+              "grass",
+              [
+                "hollow_revenant"
+              ]
+            ],
+            "observed": [
+              null,
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "property_passed": false
+          },
+          {
+            "property": "underground identity and contents survive redescent",
+            "expected": [
+              "sub_0_64_0",
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "observed": [
+              "sub_0_64_0",
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "property_passed": true
+          }
+        ],
+        "underground_before": {
+          "world": [
+            0,
+            64
+          ],
+          "submap": "sub_0_64_0",
+          "marker": "flagstone",
+          "actors": [
+            "grave_thing"
+          ]
+        },
+        "initiating_entry": "SaveManager.save(engine), diagnostic full save",
+        "underground_after_load": {
+          "world": [
+            0,
+            64
+          ],
+          "submap": "sub_0_64_0",
+          "marker": "flagstone",
+          "actors": [
+            "grave_thing"
+          ]
+        },
+        "surface_after_ascent": {
+          "world": [
+            0,
+            64
+          ],
+          "submap": null,
+          "marker": "flagstone",
+          "actors": [
+            "grave_thing"
+          ]
+        },
+        "underground_after_redescent": {
+          "world": [
+            0,
+            64
+          ],
+          "submap": "sub_0_64_0",
+          "marker": "flagstone",
+          "actors": [
+            "grave_thing"
+          ]
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-scenes\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      },
+      {
+        "case": "scenes",
+        "phase": "read",
+        "pid": 23820,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "loaded underground identity and contents",
+            "expected": [
+              "sub_0_64_0",
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "observed": [
+              "sub_0_64_0",
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "property_passed": true
+          },
+          {
+            "property": "surface identity and contents survive underground save/load/ascent",
+            "expected": [
+              null,
+              "grass",
+              [
+                "hollow_revenant"
+              ]
+            ],
+            "observed": [
+              null,
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "property_passed": false
+          },
+          {
+            "property": "underground identity and contents survive redescent",
+            "expected": [
+              "sub_0_64_0",
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "observed": [
+              "sub_0_64_0",
+              "flagstone",
+              [
+                "grave_thing"
+              ]
+            ],
+            "property_passed": true
+          }
+        ],
+        "underground_after_load": {
+          "world": [
+            0,
+            64
+          ],
+          "submap": "sub_0_64_0",
+          "marker": "flagstone",
+          "actors": [
+            "grave_thing"
+          ]
+        },
+        "surface_after_ascent": {
+          "world": [
+            0,
+            64
+          ],
+          "submap": null,
+          "marker": "flagstone",
+          "actors": [
+            "grave_thing"
+          ]
+        },
+        "underground_after_redescent": {
+          "world": [
+            0,
+            64
+          ],
+          "submap": "sub_0_64_0",
+          "marker": "flagstone",
+          "actors": [
+            "grave_thing"
+          ]
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-scenes\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      },
+      {
+        "case": "empty",
+        "phase": "write",
+        "pid": 8516,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "in-session load completes",
+            "expected": true,
+            "observed": true,
+            "property_passed": true
+          },
+          {
+            "property": "saved inventory replaces starter or prior inventory",
+            "expected": [],
+            "observed": [
+              "leather_jack"
+            ],
+            "property_passed": false
+          },
+          {
+            "property": "equipped instances belong to restored inventory",
+            "expected": true,
+            "observed": true,
+            "property_passed": true
+          },
+          {
+            "property": "saved empty slots replace prior equipment",
+            "expected": true,
+            "observed": false,
+            "property_passed": false
+          }
+        ],
+        "before_save": {
+          "inventory": [],
+          "slots": {
+            "weapon": null,
+            "offhand": null,
+            "armor_head": null,
+            "armor_torso": null,
+            "armor_arms": null,
+            "armor_legs": null,
+            "belt_1": null,
+            "belt_2": null,
+            "belt_3": null,
+            "light": null,
+            "talisman_1": null,
+            "talisman_2": null,
+            "talisman_3": null,
+            "satchel": null
+          },
+          "all_equipped_owned": true
+        },
+        "after_load": {
+          "inventory": [
+            "leather_jack"
+          ],
+          "slots": {
+            "weapon": null,
+            "offhand": null,
+            "armor_head": null,
+            "armor_torso": "leather_jack",
+            "armor_arms": null,
+            "armor_legs": null,
+            "belt_1": null,
+            "belt_2": null,
+            "belt_3": null,
+            "light": null,
+            "talisman_1": null,
+            "talisman_2": null,
+            "talisman_3": null,
+            "satchel": null
+          },
+          "all_equipped_owned": true
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-empty\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      },
+      {
+        "case": "empty",
+        "phase": "read",
+        "pid": 11544,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "saved inventory replaces starter or prior inventory",
+            "expected": [],
+            "observed": [
+              "crow_jerky",
+              "crude_blade",
+              "leather_jack",
+              "moist_pebble",
+              "tallow_torch",
+              "water_flask"
+            ],
+            "property_passed": false
+          },
+          {
+            "property": "equipped instances belong to restored inventory",
+            "expected": true,
+            "observed": true,
+            "property_passed": true
+          },
+          {
+            "property": "saved empty slots replace prior equipment",
+            "expected": true,
+            "observed": false,
+            "property_passed": false
+          }
+        ],
+        "after_load": {
+          "inventory": [
+            "tallow_torch",
+            "crow_jerky",
+            "water_flask",
+            "crude_blade",
+            "leather_jack",
+            "moist_pebble"
+          ],
+          "slots": {
+            "weapon": null,
+            "offhand": "tallow_torch",
+            "armor_head": null,
+            "armor_torso": null,
+            "armor_arms": null,
+            "armor_legs": null,
+            "belt_1": null,
+            "belt_2": null,
+            "belt_3": null,
+            "light": null,
+            "talisman_1": null,
+            "talisman_2": null,
+            "talisman_3": null,
+            "satchel": null
+          },
+          "all_equipped_owned": true
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-empty\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      },
+      {
+        "case": "empty_slots",
+        "phase": "write",
+        "pid": 13228,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "in-session load completes",
+            "expected": true,
+            "observed": true,
+            "property_passed": true
+          },
+          {
+            "property": "saved inventory replaces starter or prior inventory",
+            "expected": [
+              "crow_jerky"
+            ],
+            "observed": [
+              "crow_jerky"
+            ],
+            "property_passed": true
+          },
+          {
+            "property": "equipped instances belong to restored inventory",
+            "expected": true,
+            "observed": false,
+            "property_passed": false
+          },
+          {
+            "property": "saved empty slots replace prior equipment",
+            "expected": true,
+            "observed": false,
+            "property_passed": false
+          }
+        ],
+        "before_save": {
+          "inventory": [
+            "crow_jerky"
+          ],
+          "slots": {
+            "weapon": null,
+            "offhand": null,
+            "armor_head": null,
+            "armor_torso": null,
+            "armor_arms": null,
+            "armor_legs": null,
+            "belt_1": null,
+            "belt_2": null,
+            "belt_3": null,
+            "light": null,
+            "talisman_1": null,
+            "talisman_2": null,
+            "talisman_3": null,
+            "satchel": null
+          },
+          "all_equipped_owned": true
+        },
+        "after_load": {
+          "inventory": [
+            "crow_jerky"
+          ],
+          "slots": {
+            "weapon": null,
+            "offhand": null,
+            "armor_head": null,
+            "armor_torso": "leather_jack",
+            "armor_arms": null,
+            "armor_legs": null,
+            "belt_1": null,
+            "belt_2": null,
+            "belt_3": null,
+            "light": null,
+            "talisman_1": null,
+            "talisman_2": null,
+            "talisman_3": null,
+            "satchel": null
+          },
+          "all_equipped_owned": false
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-empty_slots\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      },
+      {
+        "case": "empty_slots",
+        "phase": "read",
+        "pid": 4700,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "saved inventory replaces starter or prior inventory",
+            "expected": [
+              "crow_jerky"
+            ],
+            "observed": [
+              "crow_jerky"
+            ],
+            "property_passed": true
+          },
+          {
+            "property": "equipped instances belong to restored inventory",
+            "expected": true,
+            "observed": false,
+            "property_passed": false
+          },
+          {
+            "property": "saved empty slots replace prior equipment",
+            "expected": true,
+            "observed": false,
+            "property_passed": false
+          }
+        ],
+        "after_load": {
+          "inventory": [
+            "crow_jerky"
+          ],
+          "slots": {
+            "weapon": null,
+            "offhand": "tallow_torch",
+            "armor_head": null,
+            "armor_torso": null,
+            "armor_arms": null,
+            "armor_legs": null,
+            "belt_1": null,
+            "belt_2": null,
+            "belt_3": null,
+            "light": null,
+            "talisman_1": null,
+            "talisman_2": null,
+            "talisman_3": null,
+            "satchel": null
+          },
+          "all_equipped_owned": false
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-empty_slots\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      },
+      {
+        "case": "equipped",
+        "phase": "write",
+        "pid": 31432,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "in-session load completes",
+            "expected": true,
+            "observed": true,
+            "property_passed": true
+          },
+          {
+            "property": "saved inventory replaces starter or prior inventory",
+            "expected": [
+              "crude_blade",
+              "tallow_torch"
+            ],
+            "observed": [
+              "crude_blade",
+              "tallow_torch"
+            ],
+            "property_passed": true
+          },
+          {
+            "property": "equipped instances belong to restored inventory",
+            "expected": true,
+            "observed": false,
+            "property_passed": false
+          },
+          {
+            "property": "weapon relinks to restored blade",
+            "expected": "crude_blade",
+            "observed": "crude_blade",
+            "property_passed": true
+          }
+        ],
+        "before_save": {
+          "inventory": [
+            "crude_blade",
+            "tallow_torch"
+          ],
+          "slots": {
+            "weapon": "crude_blade",
+            "offhand": "tallow_torch",
+            "armor_head": null,
+            "armor_torso": null,
+            "armor_arms": null,
+            "armor_legs": null,
+            "belt_1": null,
+            "belt_2": null,
+            "belt_3": null,
+            "light": null,
+            "talisman_1": null,
+            "talisman_2": null,
+            "talisman_3": null,
+            "satchel": null
+          },
+          "all_equipped_owned": true
+        },
+        "after_load": {
+          "inventory": [
+            "crude_blade",
+            "tallow_torch"
+          ],
+          "slots": {
+            "weapon": "crude_blade",
+            "offhand": "tallow_torch",
+            "armor_head": null,
+            "armor_torso": "leather_jack",
+            "armor_arms": null,
+            "armor_legs": null,
+            "belt_1": null,
+            "belt_2": null,
+            "belt_3": null,
+            "light": null,
+            "talisman_1": null,
+            "talisman_2": null,
+            "talisman_3": null,
+            "satchel": null
+          },
+          "all_equipped_owned": false
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-equipped\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      },
+      {
+        "case": "equipped",
+        "phase": "read",
+        "pid": 7696,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "saved inventory replaces starter or prior inventory",
+            "expected": [
+              "crude_blade",
+              "tallow_torch"
+            ],
+            "observed": [
+              "crude_blade",
+              "tallow_torch"
+            ],
+            "property_passed": true
+          },
+          {
+            "property": "equipped instances belong to restored inventory",
+            "expected": true,
+            "observed": true,
+            "property_passed": true
+          },
+          {
+            "property": "weapon relinks to restored blade",
+            "expected": "crude_blade",
+            "observed": "crude_blade",
+            "property_passed": true
+          }
+        ],
+        "after_load": {
+          "inventory": [
+            "crude_blade",
+            "tallow_torch"
+          ],
+          "slots": {
+            "weapon": "crude_blade",
+            "offhand": "tallow_torch",
+            "armor_head": null,
+            "armor_torso": null,
+            "armor_arms": null,
+            "armor_legs": null,
+            "belt_1": null,
+            "belt_2": null,
+            "belt_3": null,
+            "light": null,
+            "talisman_1": null,
+            "talisman_2": null,
+            "talisman_3": null,
+            "satchel": null
+          },
+          "all_equipped_owned": true
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-equipped\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      },
+      {
+        "case": "lurker",
+        "phase": "write",
+        "pid": 28492,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "hibernating creature serializes stable definition identity",
+            "expected": "stone_lurker",
+            "observed": "rock",
+            "property_passed": false
+          },
+          {
+            "property": "hibernating creature reconstructs with stable identity",
+            "expected": [
+              "stone_lurker"
+            ],
+            "observed": [],
+            "property_passed": false
+          }
+        ],
+        "before": {
+          "stable_id": "stone_lurker",
+          "tile": "rock",
+          "hibernating": true
+        },
+        "serialized": {
+          "type": "actor",
+          "id": "rock",
+          "x": 60,
+          "y": 30,
+          "tile": "rock",
+          "name": "Stone Lurker",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 28,
+            "max_hp": 28,
+            "power": 6,
+            "defense": 3,
+            "body_id": "body_human",
+            "effective_av": 6
+          },
+          "ai_type": "AmbushAI",
+          "ai_state": "waiting",
+          "home_x": 60,
+          "home_y": 30,
+          "pursuit_turns_without_contact": 0,
+          "move_accumulator": 0.0,
+          "faction": "predator",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 5,
+          "hearing_radius": 4,
+          "sees_in_dark": true,
+          "wander_radius": 4
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\nWarning: creature 'rock' not found.\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-lurker\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      },
+      {
+        "case": "lurker",
+        "phase": "read",
+        "pid": 16640,
+        "harness_completed": true,
+        "checks": [
+          {
+            "property": "hibernating creature serializes stable definition identity",
+            "expected": "stone_lurker",
+            "observed": "rock",
+            "property_passed": false
+          },
+          {
+            "property": "hibernating creature reconstructs with stable identity",
+            "expected": [
+              "stone_lurker"
+            ],
+            "observed": [],
+            "property_passed": false
+          }
+        ],
+        "serialized": {
+          "type": "actor",
+          "id": "rock",
+          "x": 60,
+          "y": 30,
+          "tile": "rock",
+          "name": "Stone Lurker",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 28,
+            "max_hp": 28,
+            "power": 6,
+            "defense": 3,
+            "body_id": "body_human",
+            "effective_av": 6
+          },
+          "ai_type": "AmbushAI",
+          "ai_state": "waiting",
+          "home_x": 60,
+          "home_y": 30,
+          "pursuit_turns_without_contact": 0,
+          "move_accumulator": 0.0,
+          "faction": "predator",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 5,
+          "hearing_radius": 4,
+          "sees_in_dark": true,
+          "wander_radius": 4
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\nWarning: creature 'rock' not found.\n",
+        "stderr": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.baseline\\b1-20261022-233242-7db2d65d\\source-baseline\\.baseline\\diagnostics-2f4afa55-lurker\\roguelike\\engine\\engine.py:5074: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n"
+      }
+    ]
+  }
+}
