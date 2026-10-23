@@ -170,7 +170,7 @@ class GenerationGeometryTests(unittest.TestCase):
         self.assertFalse(any('bell' in d for d in result.local_map.decor.values()))
         self.assertFalse(any(a._creature_id == 'hollow_knight' for a in result.actors))
 
-    def test_actual_placed_notes_and_blocking_containers_have_legal_actions(self):
+    def test_actual_placed_notes_have_legal_actions(self):
         from test_generation_ownership import action_path
         from test_effect_persistence import make_engine
         from engine.engine import MOVE_KEYS
@@ -199,19 +199,50 @@ class GenerationGeometryTests(unittest.TestCase):
                     item = next(i for i in e.player.inventory.items if i.text_id == note['text_id'])
                     e.item_system.use(item, e)
                     self.assertTrue(e.text_reader.open)
-                    for s in b['item_specs']:
-                        if s['kind'] != 'container': continue
-                        approaches = []
-                        for dx in (-1, 0, 1):
-                            for dy in (-1, 0, 1):
-                                p = s['x'] + dx, s['y'] + dy
-                                route = action_path(e, (0, 0), p)
-                                if route:
-                                    e.player.x, e.player.y = p
-                                    if InteractionCursor.can_reach(e, s['x'], s['y']): approaches.append(p)
-                        self.assertTrue(approaches)
                     visited.add(b['id'])
         self.assertEqual(visited, {'hovel', 'hunter_cabin'})
+
+    def test_generated_market_crate_has_legal_approach_and_transfer(self):
+        from test_generation_ownership import action_path
+        from test_effect_persistence import make_engine
+        from engine.engine import MOVE_KEYS, GameMode
+        from engine.interaction_cursor import InteractionCursor
+        import pygame
+        import tempfile
+        matches = [(scene, b) for scene in self.scenes.values()
+                   for b in scene.metadata.town_data.buildings if b['id'] == 'market_stall_a']
+        self.assertTrue(matches, 'real generated market fixture must exist')
+        scene, building = matches[0]
+        with tempfile.TemporaryDirectory(prefix='resonance-g1-crate-') as root, patch('engine.save_manager.SAVE_DIR', Path(root)):
+            e = make_engine(self.data)
+            e.local_map = copy.deepcopy(scene.local_map)
+            spec = next(s for s in building['item_specs'] if s['kind'] == 'container')
+            target = spec['x'], spec['y']
+            container = e.local_map.container_state[target]
+            self.assertTrue(self.data.decoratives[container['decor_id']]['blocks_movement'])
+            self.assertTrue(container['items'])
+            self.assertIsNone(action_path(e, (0, 0), target))
+            routes = [action_path(e, (0, 0), (target[0] + dx, target[1] + dy))
+                      for dx, dy in ((0, 1), (1, 0), (0, -1), (-1, 0))]
+            routes = [route for route in routes if route]
+            self.assertTrue(routes, 'blocking crate needs a legal interaction approach')
+            e.player.x, e.player.y = 0, 0
+            for xy in min(routes, key=len)[1:]:
+                delta = xy[0] - e.player.x, xy[1] - e.player.y
+                key = next(k for k, d in MOVE_KEYS.items() if d == delta)
+                if str(e.local_map.tiles[xy]['terrain']) == 'door_closed': e._handle_key_local(key)
+                e._handle_key_local(key)
+                self.assertEqual((e.player.x, e.player.y), xy)
+            self.assertTrue(InteractionCursor.can_reach(e, *target))
+            e.mode = GameMode.INTERACTION_CURSOR
+            e.interaction_cursor._cursor_x, e.interaction_cursor._cursor_y = target
+            e.interaction_cursor.candidates = [target]
+            e._handle_key(pygame.K_RETURN)
+            self.assertIsNotNone(e.interaction_cursor._selection_prompt)
+            item = container['items'][0]
+            e._handle_key(pygame.K_RETURN)
+            self.assertIn(item, e.player.inventory.items)
+            self.assertNotIn(item, container['items'])
 
     def test_impossible_entrance_cannot_mutate_map_or_metadata(self):
         m = LocalMap(20, 14)
