@@ -1,0 +1,58 @@
+{
+  "id": "house_hearth_a",
+  "category": "residential",
+  "width": 12,
+  "height": 9,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 3,
+    "market": 1
+  },
+  "description": "The hearth dominates the north wall. A chair overturned beside it. Cloth soaked dark near the door.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "############",
+    "#..........#",
+    "#..........#",
+    "#..........#",
+    "#..........#",
+    "#..........#",
+    "#..........#",
+    "#.........w#",
+    "#####.######"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 2,
+      "type": "container",
+      "decor_id": "wooden_shelf",
+      "loot_pools": ["commoner_bedroom"]
+    },
+    {
+      "x": 10,
+      "y": 6,
+      "type": "container",
+      "decor_id": "clay_pot_cluster",
+      "loot_pools": ["commoner_kitchen"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, "cold_hearth", null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, "overturned_chair", null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, "wound_cloth", null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}

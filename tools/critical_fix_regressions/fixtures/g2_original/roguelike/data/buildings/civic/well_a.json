@@ -1,0 +1,31 @@
+{
+  "id": "well_a",
+  "category": "civic",
+  "width": 5,
+  "height": 5,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "waystone_square": 3,
+    "residential": 2,
+    "market": 3
+  },
+  "interior_loot_table": null,
+  "description": "A public well. Stone surround, water below. No roof \u2014 open to sky.",
+  "legend": {
+    "#": "wall",
+    "~": "water",
+    "w": "worn_stone",
+    ".": "floor",
+    " ": null
+  },
+  "layers": [
+    "  www  ",
+    " w~~~w ",
+    " w~~~w ",
+    " w~~~w ",
+    "  www  "
+  ],
+  "special_tiles": [],
+  "note": "PLACEHOLDER \u2014 redesign. Centre = water tile (well mouth). Worn_stone surround. No walls."
+}

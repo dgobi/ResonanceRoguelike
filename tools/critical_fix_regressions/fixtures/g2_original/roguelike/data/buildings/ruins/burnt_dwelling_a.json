@@ -1,0 +1,47 @@
+{
+  "id": "burnt_dwelling_a",
+  "category": "ruins",
+  "width": 8,
+  "height": 7,
+  "facing": "south",
+  "condition": "ruined",
+  "district_weights": {
+    "residential": 2,
+    "ruins": 4
+  },
+  "description": "Fire took this one. Ash underfoot, walls blackened. Water pooling in the low corner where the floor buckled.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "a": "ash",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#a.a..a#",
+    "#..a...#",
+    "#.a..a.#",
+    "#a.....#",
+    "#..a..a#",
+    "###.####"
+  ],
+  "special_tiles": [
+    {
+      "x": 5,
+      "y": 2,
+      "type": "container",
+      "decor_id": "rubble_pile",
+      "loot_pools": ["ruins_scatter"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, "shattered_vessel", null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, "standing_water", null, null, "bile_stain", null, null, null],
+    [null, null, null, null, null, null, null, null]
+  ]
+}

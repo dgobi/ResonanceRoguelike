@@ -1,0 +1,55 @@
+{
+  "id": "guard_post_a",
+  "category": "civic",
+  "width": 9,
+  "height": 7,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "gatehouse": 4,
+    "market": 2,
+    "bell_district": 2
+  },
+  "description": "A guard post. Chair overturned. Something dark on the floor. The tool rack still holds what was left behind.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "#########",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "#......w#",
+    "####+####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "tool_rack",
+      "loot_pools": ["storage_tools"]
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": ["commoner_kitchen"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, "overturned_chair", null, null, null, null, null],
+    [null, null, null, null, "bile_stain", null, null, null, null],
+    [null, null, "iron_hook", null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null]
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "foundation_outline_a",
+  "category": "ruins",
+  "width": 12,
+  "height": 8,
+  "facing": "south",
+  "condition": "ruined",
+  "district_weights": {"ruins": 5, "wilderness": 2},
+  "interior_loot_table": null,
+  "legend": {
+    "#": "wall",
+    "r": "rock",
+    " ": null
+  },
+  "layers": [
+    "############",
+    "#          #",
+    "#          #",
+    "#    r     #",
+    "#          #",
+    "#     r    #",
+    "#          #",
+    "############"
+  ],
+  "note": "A foundation outline. Walls stand only at ground level. Interior is open sky — packed earth and loose rock. Nothing of the structure above remains."
+}

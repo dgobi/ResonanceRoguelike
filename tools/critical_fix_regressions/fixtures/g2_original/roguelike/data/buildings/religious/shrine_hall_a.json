@@ -1,0 +1,59 @@
+{
+  "id": "shrine_hall_a",
+  "category": "religious",
+  "width": 13,
+  "height": 9,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "waystone_square": 3,
+    "ossuary": 4,
+    "bell_district": 2
+  },
+  "description": "A hall of worship. Flagstone floor worn smooth by generations of feet. The offering bowl at centre still holds something. A bell rope hangs from the ceiling.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "f": "flagstone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "#############",
+    "#fffffffffff#",
+    "#f.........f#",
+    "#f.........f#",
+    "#f.........f#",
+    "#f.........f#",
+    "#f.........f#",
+    "#...........#",
+    "#####.#######"
+  ],
+  "special_tiles": [
+    {
+      "x": 6,
+      "y": 4,
+      "type": "container",
+      "decor_id": "offering_bowl",
+      "loot_pools": ["shrine_offering"]
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "type": "container",
+      "decor_id": "bone_box",
+      "loot_pools": ["shrine_equipment"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, "tallow_dip", null, null, null, null, null, null, null, "tallow_dip", null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, "tallow_dip", null, null, null, null, null, null, null, "tallow_dip", null, null],
+    [null, null, null, null, null, null, null, null, null, "bell_rope", null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}

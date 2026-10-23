@@ -1,0 +1,30 @@
+{
+  "id": "fishing_dock",
+  "category": "wilderness",
+  "width": 6,
+  "height": 4,
+  "facing": "south",
+  "condition": "intact",
+  "tags": ["structure", "riverside", "wilderness"],
+  "weight": 8,
+  "rotatable": false,
+  "district_weights": {},
+  "interior_loot_table": null,
+  "description": "A short wooden dock extending over still water. A shack at the back holds fishing gear. The door is ajar. No one came back for any of it.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "+": "door_closed",
+    "~": "water",
+    "c": "floor",
+    " ": null
+  },
+  "layers": [
+    "...###",
+    "...#c#",
+    "~~~#+#",
+    "~~~~~~"
+  ],
+  "special_tiles": [],
+  "note": "c=crate position with fishing_supplies loot. Furniture system pending."
+}

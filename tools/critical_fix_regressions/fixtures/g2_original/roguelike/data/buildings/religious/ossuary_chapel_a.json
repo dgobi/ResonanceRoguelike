@@ -1,0 +1,58 @@
+{
+  "id": "ossuary_chapel_a",
+  "category": "religious",
+  "width": 11,
+  "height": 9,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "ossuary": 5,
+    "waystone_square": 2
+  },
+  "description": "A chapel for the honoured dead. Bone boxes line the walls. The remains face the waystone, even now. An inscription cut deep into the floor.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "f": "flagstone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "###########",
+    "#fffffffff#",
+    "#f.......f#",
+    "#f.......f#",
+    "#f.......f#",
+    "#f.......f#",
+    "#f.......f#",
+    "#.........#",
+    "#####+#####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "bone_box",
+      "loot_pools": ["shrine_equipment"]
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "type": "container",
+      "decor_id": "stone_coffer",
+      "loot_pools": ["shrine_offering"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, "oriented_remains", null, null, null, null, null, null, null],
+    [null, null, null, null, null, "inscription_stone", null, null, null, null, null],
+    [null, null, null, null, null, null, null, "oriented_remains", null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}

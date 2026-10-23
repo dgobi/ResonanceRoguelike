@@ -1,0 +1,53 @@
+{
+  "id": "house_old_stone_a",
+  "category": "residential",
+  "width": 10,
+  "height": 9,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 2,
+    "ossuary": 2,
+    "old_foundation": 3
+  },
+  "description": "Timber and plaster over ancient stone. An inner wall of cold grey masonry the family never removed. Something marked near it.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "Z": "old_wall",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "##########",
+    "#........#",
+    "#........#",
+    "#..ZZZZ..#",
+    "#..Z.....#",
+    "#..Z.....#",
+    "#..Z.....#",
+    "#........#",
+    "#####+####"
+  ],
+  "special_tiles": [
+    {
+      "x": 8,
+      "y": 1,
+      "type": "container",
+      "decor_id": "stone_coffer",
+      "loot_pools": ["noble_generic"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, "inscription_stone", null, null],
+    [null, null, null, null, "warning_mark", null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null]
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "id": "collapsed_shop_a",
+  "category": "ruins",
+  "width": 9,
+  "height": 7,
+  "facing": "south",
+  "condition": "ruined",
+  "district_weights": {
+    "market": 3,
+    "residential": 1,
+    "ruins": 2
+  },
+  "description": "A shop front caved in. Weighing stones scattered among broken shelves. What was sold here is lost to rubble.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "#########",
+    "#.......#",
+    "#.......#",
+    "#......w#",
+    "..w.....#",
+    ".......w#",
+    "####.####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "rubble_pile",
+      "loot_pools": ["ruins_scatter"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, "measuring_stone", null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null],
+    [null, null, null, "shattered_vessel", null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null]
+  ]
+}

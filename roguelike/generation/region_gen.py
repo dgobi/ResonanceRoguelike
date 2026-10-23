@@ -166,6 +166,12 @@ def generate_region(
         _scatter_clay(local_map, terrain_data, rng)
 
     # Place submap entrances AFTER connectors so roads can't overwrite stairs
+    from generation.access import arrival_anchor
+    spawn = arrival_anchor(local_map, spawn, data)
+    local_map.required_access_anchors = [spawn]
+    local_map.required_access_anchors.extend(sorted(
+        xy for xy in getattr(local_map, 'road_cells', set())
+        if xy[0] in (0, map_width-1) or xy[1] in (0, map_height-1)))
     if getattr(chunk, 'town_data', None):
         staged_content = chunk.town_data.item_spawns + chunk.town_data.creature_spawns
         local_map.protected_cells = set(getattr(local_map, 'protected_cells', set()))
@@ -425,7 +431,7 @@ def _generate_town(
 def _place_submap_entrance(local_map, submap, terrain_data, data=None):
     """Bounded whole-footprint placement; commit a real usable stair or fail closed."""
     import copy
-    from collections import deque
+    from generation.access import reachable, required_anchors
     from generation.context import map_context, GenerationError
     from generation.entrance_gen import _pick_layout
     from generation.layout_stamper import stamp_layout_interior
@@ -445,6 +451,8 @@ def _place_submap_entrance(local_map, submap, terrain_data, data=None):
                      {'stairs_up', 'stairs_down', 'river_water', 'river_bank', 'river_stones',
                       'cobblestone', 'flagstone'} or str(local_map.tiles[x, y]['terrain']).startswith('road_'))
     decor_data = data.decoratives if data is not None else {}
+    anchors = required_anchors(local_map, data)
+    protected.update(anchors)
 
     def enterable(m, xy):
         terrain = str(m.tiles[xy]['terrain'])
@@ -461,20 +469,8 @@ def _place_submap_entrance(local_map, submap, terrain_data, data=None):
                          if local_map.in_bounds(x + dx, y + dy) and enterable(local_map, (x + dx, y + dy)))
 
     def access(m, stair, footprint):
-        if not m.in_bounds(*stair) or not enterable(m, stair):
-            return False
-        seen, queue = {stair}, deque([stair])
-        while queue:
-            x, y = queue.popleft()
-            if (x, y) not in footprint:
-                return True
-            for dx in (-1, 0, 1):
-                for dy in (-1, 0, 1):
-                    xy = x + dx, y + dy
-                    if m.in_bounds(*xy) and xy not in seen and enterable(m, xy):
-                        seen.add(xy)
-                        queue.append(xy)
-        return False
+        reached = reachable(m, anchors[0], data)
+        return stair in reached and all(p in reached for p in [*anchors, *m.submap_links])
 
     candidates = [(x, y) for x in range(1, w - 1) for y in range(1, h - 1)]
     rng.shuffle(candidates)

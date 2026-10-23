@@ -1978,6 +1978,10 @@ class Engine:
         prepared = self._prepare_destination(wx, wy)
         if prepared is None:
             return
+        if (wx, wy, None) != (self.world_x, self.world_y, self.current_submap_id):
+            from engine.effect_lifecycle import reset_wraith_aura
+            reset_wraith_aura(self)
+            self._wraith_overcorrect_turns = 0
         from engine.save_manager import SceneAddress
         SceneAddress(self.world_x, self.world_y, self.current_submap_id).store(
             self.save_manager.cache, self.local_map, self.entities)

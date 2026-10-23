@@ -1,0 +1,51 @@
+{
+  "id": "ossuary_ruin_a",
+  "category": "ruins",
+  "width": 11,
+  "height": 8,
+  "facing": "south",
+  "condition": "ruined",
+  "district_weights": {
+    "ossuary": 4,
+    "old_foundation": 2,
+    "ruins": 3
+  },
+  "description": "Bone storage, collapsed. Walls buckled outward. Coins still glint among the dead. The remains are oriented toward the nearest stone.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "###########",
+    "#fff.fff.f#",
+    "#f.......f#",
+    ".f.......f#",
+    "#f........#",
+    "#f.......f.",
+    "#fff...fff#",
+    "#####.#####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "bone_box",
+      "loot_pools": ["shrine_equipment"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, "oriented_remains", null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, "offering_coins", null, null, null, null],
+    [null, null, null, null, null, null, null, null, "oriented_remains", null, null],
+    [null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}

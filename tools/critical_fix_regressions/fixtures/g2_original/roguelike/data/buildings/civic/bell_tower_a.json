@@ -1,0 +1,55 @@
+{
+  "id": "bell_tower_a",
+  "category": "civic",
+  "width": 8,
+  "height": 10,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "bell_quarter": 10
+  },
+  "interior_loot_table": "bell_tower_goods",
+  "bell_state_override": null,
+  "description": "A stone bell tower. Ground floor entry, upper belfry implied by height. Grey stone throughout \u2014 the dangerous material. The bell state is set by the town generator, not this layout.",
+  "legend": {
+    "#": "grey_stone",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "^": "stairs_up",
+    "B": "bell_dead",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#......#",
+    "#......#",
+    "#......#",
+    "#.#.##.#",
+    "#.#ww#.#",
+    "#.#Bw#.#",
+    "#.####.#",
+    "#......#",
+    "###+####"
+  ],
+  "special_tiles": [
+    {
+      "x": 3,
+      "y": 5,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "world_official_a",
+      "note": "Guild tuning record or bell registry"
+    },
+    {
+      "x": 4,
+      "y": 5,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "world_official_b",
+      "note": "Secondary record"
+    }
+  ],
+  "note": "PLACEHOLDER \u2014 redesign. Central chamber = belfry base (bell placed here by generator based on bell_state). Grey_stone walls throughout. Door at (3,9)."
+}

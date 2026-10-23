@@ -1,0 +1,306 @@
+{
+  "kind": "read-only review; no main-branch gate claim",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "source_sha256": {
+    "generation/feature_carving.py": "c40937c4647d0cfa511be28507830c1e51ec26b3c31b14b5bb92030aeeaa3d56",
+    "generation/ports.py": "049e3eb2659eb20f827eb0363bac00264aeed5c8ebe53cb6a2b81f261a24e85b",
+    "generation/region_gen.py": "204e201964c9f228c5d1c826aad39ed462a2b8bb8d8fb26285f603849d87ea7d",
+    "engine/scene_generation.py": "2f544666156e63443a569f3ed74a60e17d3ba9770ffae62b446abcba5e787538"
+  },
+  "near_corner_ports": [
+    {
+      "kind": "road",
+      "width": 3,
+      "position": 0.0,
+      "declared_in_bounds": [
+        0,
+        1,
+        2
+      ],
+      "actual": [
+        1,
+        2
+      ]
+    },
+    {
+      "kind": "road",
+      "width": 3,
+      "position": 1.0,
+      "declared_in_bounds": [
+        40,
+        41,
+        42
+      ],
+      "actual": [
+        40,
+        41
+      ]
+    },
+    {
+      "kind": "river",
+      "width": 13,
+      "position": 0.9,
+      "declared_in_bounds": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "actual": [
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "kind": "river",
+      "width": 9,
+      "position": 0.1,
+      "declared_in_bounds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "actual": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  ],
+  "mountain_entrances": [
+    {
+      "seed": 0,
+      "submap_seed": 1000,
+      "address": [
+        8,
+        8
+      ],
+      "stair": [
+        44,
+        14
+      ],
+      "spawn": [
+        40,
+        21
+      ],
+      "reachable_from_border": true,
+      "reachable_from_spawn": true,
+      "diagnostics": []
+    },
+    {
+      "seed": 1,
+      "submap_seed": 1001,
+      "address": [
+        8,
+        8
+      ],
+      "stair": [
+        34,
+        33
+      ],
+      "spawn": [
+        40,
+        21
+      ],
+      "reachable_from_border": true,
+      "reachable_from_spawn": true,
+      "diagnostics": []
+    },
+    {
+      "seed": 2,
+      "submap_seed": 1002,
+      "address": [
+        8,
+        8
+      ],
+      "stair": [
+        36,
+        18
+      ],
+      "spawn": [
+        40,
+        21
+      ],
+      "reachable_from_border": true,
+      "reachable_from_spawn": true,
+      "diagnostics": []
+    },
+    {
+      "seed": 3,
+      "submap_seed": 1003,
+      "address": [
+        8,
+        8
+      ],
+      "stair": [
+        45,
+        21
+      ],
+      "spawn": [
+        40,
+        21
+      ],
+      "reachable_from_border": true,
+      "reachable_from_spawn": true,
+      "diagnostics": []
+    },
+    {
+      "seed": 4,
+      "submap_seed": 1004,
+      "address": [
+        8,
+        8
+      ],
+      "stair": [
+        17,
+        8
+      ],
+      "spawn": [
+        40,
+        21
+      ],
+      "reachable_from_border": true,
+      "reachable_from_spawn": true,
+      "diagnostics": []
+    },
+    {
+      "seed": 5,
+      "submap_seed": 1005,
+      "address": [
+        8,
+        8
+      ],
+      "stair": [
+        52,
+        6
+      ],
+      "spawn": [
+        40,
+        21
+      ],
+      "reachable_from_border": true,
+      "reachable_from_spawn": true,
+      "diagnostics": []
+    },
+    {
+      "seed": 6,
+      "submap_seed": 1006,
+      "address": [
+        8,
+        8
+      ],
+      "stair": [
+        12,
+        20
+      ],
+      "spawn": [
+        40,
+        21
+      ],
+      "reachable_from_border": true,
+      "reachable_from_spawn": true,
+      "diagnostics": []
+    },
+    {
+      "seed": 7,
+      "submap_seed": 1007,
+      "address": [
+        8,
+        8
+      ],
+      "stair": [
+        58,
+        26
+      ],
+      "spawn": [
+        40,
+        21
+      ],
+      "reachable_from_border": true,
+      "reachable_from_spawn": true,
+      "diagnostics": []
+    }
+  ],
+  "corner_town_interface": {
+    "position": 0.0,
+    "width": 3,
+    "town_west": [
+      0,
+      1,
+      2,
+      14,
+      15,
+      27,
+      28
+    ],
+    "wilderness_east": [
+      1,
+      2,
+      14,
+      15,
+      27,
+      28
+    ],
+    "missing_in_wilderness": [
+      0
+    ],
+    "note": "all normal secondary mouths plus the extreme custom mouth are mirrored on both sides"
+  },
+  "isolated_pocket": {
+    "stair": [
+      11,
+      6
+    ],
+    "accepted_by_placement": true,
+    "accepted_by_final_validation": true,
+    "reachable_from_border": false,
+    "stair_component": [
+      [
+        10,
+        6
+      ],
+      [
+        11,
+        6
+      ]
+    ],
+    "diagnostics": [
+      {
+        "kind": "entrance",
+        "submap": "isolated-pocket",
+        "status": "bare-stair-fallback",
+        "reason": "no authored layout",
+        "revision": "wg1"
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 """Consume explicit road/river mouths while keeping wandering inside a chunk."""
 from __future__ import annotations
-from generation.ports import OFFSETS, mouth, quantize
+from generation.ports import OFFSETS, mouth, resolve_mouth
 
 
 def carve_feature(local_map, terrain_data, ports, kind, rng):
@@ -10,10 +10,10 @@ def carve_feature(local_map, terrain_data, ports, kind, rng):
     strips = {edge: set() for edge in OFFSETS}
     bank_strips = {edge: set() for edge in OFFSETS}
     for edge, connector in ports:
-        width = connector.width or (9 if kind == 'river' else 3)
+        _, width, _ = resolve_mouth(edge, connector.position, connector.width, w, h, kind)
         for depth in range(guard):
             strips[edge].update(mouth(edge, connector.position, width, w, h, depth))
-            bank_strips[edge].update(mouth(edge, connector.position, width + 6, w, h, depth))
+            bank_strips[edge].update(mouth(edge, connector.position, width, w, h, depth, bank=3))
 
     def allowed(x, y, banks=False):
         if not local_map.in_bounds(x, y): return False
@@ -27,18 +27,16 @@ def carve_feature(local_map, terrain_data, ports, kind, rng):
     core, banks = set(), set()
     hub = w // 2, h // 2
     for edge, connector in ports:
-        width = connector.width or (9 if kind == 'river' else 3)
+        _, width, center = resolve_mouth(edge, connector.position, connector.width, w, h, kind)
         half = width // 2
         depth = min(guard + half + 1, min(w, h) // 2 - 1)
-        length = w if edge in ('north', 'south') else h
-        center = quantize(connector.position, length)
         inward = {'north': (center, depth), 'south': (center, h - 1 - depth),
                   'west': (depth, center), 'east': (w - 1 - depth, center)}[edge]
         # Straight approach: no independent boundary jitter, and width is exact.
         for d in range(depth + 1):
             core.update(p for p in mouth(edge, connector.position, width, w, h, d) if allowed(*p))
             if kind == 'river':
-                banks.update(p for p in mouth(edge, connector.position, width + 6, w, h, d) if allowed(*p, True))
+                banks.update(p for p in mouth(edge, connector.position, width, w, h, d, bank=3) if allowed(*p, True))
         path = _local_road_walk(*inward, *hub, w, h, rng)
         for i, (x, y) in enumerate(path):
             if kind == 'river':
@@ -79,7 +77,8 @@ def reserve_town_routes(local_map, chunk, terrain_data, street_tiles, context):
     for edge, connectors in chunk.edges.items():
         for connector in connectors:
             if connector.connector_type == ConnectorType.ROAD:
-                ports[edge].append((connector.position, connector.width or 3))
+                _, width, _ = resolve_mouth(edge, connector.position, connector.width, w, h)
+                ports[edge].append((connector.position, width))
     corner = chunk.town_role in ('NW', 'NE', 'SW', 'SE')
     terrain = 'dirt_path' if corner else 'cobblestone'
     td = terrain_data[terrain]

@@ -1,0 +1,105 @@
+{
+  "debug_teleport_wraith": {
+    "away": {
+      "exposure_on_original": 4,
+      "radius": 40,
+      "serialized": {
+        "ai_state": "waiting",
+        "ai_type": "AmbushAI",
+        "blocks_movement": true,
+        "component_state": {
+          "actor": {
+            "_ability_suppressed_turns": 0,
+            "_arrival_cooldown": 0,
+            "_disrupted_turns": 0,
+            "_just_arrived": false,
+            "_last_known_px": null,
+            "_last_known_py": null,
+            "_pending_stair_use": null,
+            "_sickness_turns": 0,
+            "_surface_exit_wx": null,
+            "_surface_exit_wy": null,
+            "_surface_exit_x": null,
+            "_surface_exit_y": null,
+            "_wraith_exposure_turns": 4,
+            "chilled_turns": 0
+          },
+          "ai": {
+            "alert_memory": 10,
+            "memory_turns": 0,
+            "target_x": null,
+            "target_y": null
+          },
+          "version": 1
+        },
+        "faction": "void",
+        "fighter": {
+          "body_id": "body_human",
+          "defense": 2,
+          "effective_av": 3,
+          "hp": 20,
+          "max_hp": 20,
+          "power": 6
+        },
+        "hearing_radius": 10,
+        "home_x": 41,
+        "home_y": 21,
+        "hostile_to": [
+          "player"
+        ],
+        "id": "bog_wraith",
+        "is_alive": true,
+        "lurker": null,
+        "move_accumulator": 0.0,
+        "name": "Bog Wraith",
+        "pursuit_turns_without_contact": 0,
+        "sees_in_dark": true,
+        "sight_radius": 8,
+        "tile": "bog_wraith",
+        "type": "actor",
+        "wander_radius": 4,
+        "x": 41,
+        "y": 21
+      }
+    },
+    "before": {
+      "exposure": 4,
+      "radius": 5,
+      "turn": 480
+    },
+    "returned": {
+      "exposure": 4,
+      "radius": 5,
+      "turn": 480
+    }
+  },
+  "malformed_record": {
+    "containers": 0,
+    "diagnostic": "'NoneType' object has no attribute 'get'",
+    "exception": "AttributeError",
+    "floor_objects": 0
+  },
+  "native_placement": [
+    {
+      "blocking_decor": [],
+      "count": 5,
+      "role": "N",
+      "seed": 0,
+      "shared_positions": []
+    },
+    {
+      "blocking_decor": [],
+      "count": 6,
+      "role": "N",
+      "seed": 1,
+      "shared_positions": []
+    },
+    {
+      "blocking_decor": [],
+      "count": 6,
+      "role": "N",
+      "seed": 29417,
+      "shared_positions": []
+    }
+  ]
+}

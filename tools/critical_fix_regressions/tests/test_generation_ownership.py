@@ -19,7 +19,7 @@ from g1_support import fingerprint
 from components.ai import AIState
 from engine.engine import Engine, MOVE_KEYS
 from engine.save_manager import _serialize_world, _deserialize_world
-from generation.context import GenerationError
+from generation.context import GenerationError, GENERATION_REVISION
 from generation.region_gen import _generate_town_base
 from generation.town_gen import _stamp_building_at
 from world.world_map import Chunk, RegionType
@@ -252,7 +252,7 @@ class GenerationOwnershipTests(unittest.TestCase):
         e.save_manager.cache.store(0, 0, e.local_map, [])
         e.overmap_cursor_x, e.overmap_cursor_y = 1, 0
         e._teleport_to_overmap_cursor()
-        self.assertEqual(e.local_map.generation_revision, 'wg1')
+        self.assertEqual(e.local_map.generation_revision, GENERATION_REVISION)
         self.assertEqual(_serialize_world(e.world_map)['generation_revision'], 'legacy-unversioned')
         e.overmap_cursor_x = 0
         e._teleport_to_overmap_cursor()

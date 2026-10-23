@@ -164,8 +164,14 @@ class GenerationGeometryTests(unittest.TestCase):
     def test_no_plaza_has_no_fabricated_bell_or_guardian(self):
         world = self.worlds[20261020]
         chunk = next(c for c in world.chunks.values() if c.town_role == 'C')
+        # Isolate plaza ownership from authored ordinary bell decor. wg2's new
+        # stream can select those legitimate buildings in this same fixture.
+        data = copy.copy(self.data)
+        data.buildings = {cat: [b for b in rows if not any(
+            'bell' in str(v) for row in b.get('decor_layer', []) for v in row)]
+            for cat, rows in self.data.buildings.items()}
         with patch('generation.town_gen.BuildingLoader.pick_plaza', return_value=None):
-            result = create_surface(world, chunk, self.data, ItemFactory(self.data), CreatureFactory(self.data), 80, 43)
+            result = create_surface(world, chunk, data, ItemFactory(data), CreatureFactory(data), 80, 43)
         self.assertEqual(result.metadata.town_data.bell_state, 'missing')
         self.assertFalse(any('bell' in d for d in result.local_map.decor.values()))
         self.assertFalse(any(a._creature_id == 'hollow_knight' for a in result.actors))

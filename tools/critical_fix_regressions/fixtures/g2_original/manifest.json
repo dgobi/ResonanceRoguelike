@@ -1,0 +1,466 @@
+{
+  "source_commit": "05bcc4973b09e86afcd099af99b277eab92a2bec",
+  "total": 65,
+  "live_files": 64,
+  "example_files": 1,
+  "purpose": "Freeze these original assets before normalization for no-edit preservation regressions. Also validate the final delivered catalog separately.",
+  "hash_policy": "SHA256 of repository blob bytes, with LF line endings; a Windows checkout may require the documented LF/CRLF comparison.",
+  "storage": "Source JSON remains in Git. This manifest pins identities; it does not duplicate a game checkout or rewrite any asset.",
+  "assets": [
+    {
+      "repository_path": "roguelike/data/buildings/civic/bell_tower_a.json",
+      "sha256": "138701b2fa0e172a4c49feaa5f30d4dfb5038b6acfb423def85f7fbb57191ce5",
+      "bytes": 1373,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/civic/bell_tower_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/civic/covered_well_house_a.json",
+      "sha256": "83f4974e39dc3bafed96281975aa67b8137b6ad34b75b7b29ed6036f80496dee",
+      "bytes": 570,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/civic/covered_well_house_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/civic/guard_post_a.json",
+      "sha256": "013060d434366f69f8df6126079018404013c5caeb6ffbb6dc9231260133822f",
+      "bytes": 1365,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/civic/guard_post_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/civic/meeting_hall_a.json",
+      "sha256": "4435b5a96185b8af9c3afe660722510ff98ca09266021afaee87379540a9d723",
+      "bytes": 1731,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/civic/meeting_hall_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/civic/record_hall_a.json",
+      "sha256": "82a60f659cd4963441f336972261e75d8b89cb52f288381b59b49c6ec0d16a64",
+      "bytes": 1726,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/civic/record_hall_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/civic/waystone_plinth_a.json",
+      "sha256": "567f4ea32775a7084e63c1c5327479f290f4fe89f34132d0eb5a6f0180ba17e5",
+      "bytes": 942,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/civic/waystone_plinth_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/civic/well_a.json",
+      "sha256": "f2508a41f6555b3e447e7d5a8142b33cbc37caad2774ea3381515898fb2d0dc2",
+      "bytes": 666,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/civic/well_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/commercial/apothecary_a.json",
+      "sha256": "42967aa5dda169d65ea76ee1919cb122677e2ac33f1a0ef683b9e7eb41d5aef1",
+      "bytes": 1722,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/commercial/apothecary_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/commercial/market_stall_a.json",
+      "sha256": "f6d902985d4b035a93b6ec32663df713bfa3e585338a59946c47806bc52a1273",
+      "bytes": 1090,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/commercial/market_stall_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/commercial/market_stall_b.json",
+      "sha256": "3285cec383769c0ad125516c6ad88384f00a7a420577bef189515d9acc658634",
+      "bytes": 1136,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/commercial/market_stall_b.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/commercial/market_stall_c.json",
+      "sha256": "121d526dda1c28ae3b9e073472524881859b1ee4d85f3f762a2e3737b737f52e",
+      "bytes": 1108,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/commercial/market_stall_c.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/commercial/shop_a.json",
+      "sha256": "a55be1d5c591f271b4c3b031685de0844e865f003c8de4d3c83b7901347d40d9",
+      "bytes": 1053,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/commercial/shop_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/commercial/trader_shop_a.json",
+      "sha256": "192605beca4f221561276c7f965115bde4c0d8b8ab5ee6d3ff2f2b1442b65065",
+      "bytes": 1515,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/commercial/trader_shop_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/commercial/workshop_a.json",
+      "sha256": "848fdf1e7f4d7c980d31fdd0c28d65afb4ca6527a8c60daecc1edb762eb9752d",
+      "bytes": 1349,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/commercial/workshop_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/plaza/plaza_market_a.json",
+      "sha256": "cee059e53931f02dbb60c04e602afd28dfa95c7ddbe74ccc7bea61396f9d780c",
+      "bytes": 753,
+      "route": "plaza",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/plaza/plaza_market_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/plaza/plaza_ossuary_a.json",
+      "sha256": "99b7cf5dae3a6c7b71ca1e86745d388843f483104d6d25af958a6394a40e4093",
+      "bytes": 710,
+      "route": "plaza",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/plaza/plaza_ossuary_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/religious/bell_warden_post_a.json",
+      "sha256": "9d1070dd6b009f458e50a6441519024201ea3d6d90e6f47587faea49233c3657",
+      "bytes": 2061,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/religious/bell_warden_post_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/religious/collapsed_shrine_a.json",
+      "sha256": "f2405d0a5da93907543d65f01633a869c20724d8c02f2a6b654622634b550518",
+      "bytes": 1919,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/religious/collapsed_shrine_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/religious/folk_saint_alcove_a.json",
+      "sha256": "6164a27ddcb3e6c5edf7ad0875b0cb963274e49794bd81f6cbbef5aa385c4dee",
+      "bytes": 1050,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/religious/folk_saint_alcove_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/religious/folk_saint_niche_a.json",
+      "sha256": "fd38c9f4382c2bedb733dfa6d15ed64dc20fd66a716914923b47c8b76a772072",
+      "bytes": 1005,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/religious/folk_saint_niche_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/religious/ossuary_chapel_a.json",
+      "sha256": "136045c9e0c071a66812a712afb9e691685dfe41edc12c1e78da26646a06d4ea",
+      "bytes": 1688,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/religious/ossuary_chapel_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/religious/shrine_a.json",
+      "sha256": "2c6a8ba8293076cc6b40a5787807cfb1ca4388008471d048b8eca512ced916e4",
+      "bytes": 1326,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/religious/shrine_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/religious/shrine_hall_a.json",
+      "sha256": "81586092573f816ac8e487131eb44843c58b57d2600431770f1a95eca8434fce",
+      "bytes": 1851,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/religious/shrine_hall_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/religious/waystone_shrine_a.json",
+      "sha256": "ce0a42204a1e9b2b7dd6e2b6e44a4ac5cb1f324235d3686fae9dfa171d7c095d",
+      "bytes": 1301,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/religious/waystone_shrine_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_abandoned_a.json",
+      "sha256": "ec7676ae0bff9db9e382cd43f8af69334d723dba7f5ef995de89554e2ce6466f",
+      "bytes": 1386,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_abandoned_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_crowded_a.json",
+      "sha256": "8cdd0df26c8a7f08b2f561ce5d713cedeeade248dc406c087760c87820d45bef",
+      "bytes": 1552,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_crowded_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_damaged_a.json",
+      "sha256": "df6ec2e5cd534c742238e96bc9769830491b8d00da2fcad636cad5f04274af6b",
+      "bytes": 1013,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_damaged_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_hearth_a.json",
+      "sha256": "a10307b019f725ab9e381e260b4d6148ac1f52c15c085f67b9ae067075ffe0fd",
+      "bytes": 1706,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_hearth_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_large_a.json",
+      "sha256": "ade399d3cc8a64cc449608e303202b44dcaed24f56e2852874234146c666300d",
+      "bytes": 1257,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_large_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_old_stone_a.json",
+      "sha256": "77881c5a63551013b979bd6bd5faeed99d3aa6e4577f113161a500e526dc866e",
+      "bytes": 1498,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_old_stone_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_single_room_a.json",
+      "sha256": "a3cb2ab3e47737bb316202b223b7f87aa422fe3db1b0cdc6398e04360033a507",
+      "bytes": 1027,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_single_room_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_small_a.json",
+      "sha256": "af23a2c740260afc6c7561aa6e0d2e67417218f5fc5ab4fc9714ecaf28b643e8",
+      "bytes": 1483,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_small_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_small_b.json",
+      "sha256": "83128c73cbede618e58b414c36b3eaf030db831e9aa1da2670461e92fa8a9485",
+      "bytes": 1141,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_small_b.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/house_two_room_a.json",
+      "sha256": "b5bf731a655e9212d456c682592474b290afe3ef72c9523c0a22ffd1328ffc64",
+      "bytes": 1360,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/house_two_room_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/hovel.json",
+      "sha256": "8e866eaaa6e1dcae1fafc9494e593f9753e0d56fcc1a0a142e584387ee37892c",
+      "bytes": 995,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/hovel.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/residential/tenement_a.json",
+      "sha256": "6b4069025b2db7d30301c0f8340e74b40611505ae2d850e96a4458a54a3bef11",
+      "bytes": 1029,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/residential/tenement_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/ruins/burnt_dwelling_a.json",
+      "sha256": "6f579512e0eb7850739416f506aee23c5549f05d8c386f01f5b04d0a12191bbe",
+      "bytes": 1160,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/ruins/burnt_dwelling_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/ruins/collapsed_house_a.json",
+      "sha256": "ee49e01eb3444204a1c6d53149a6148ef084ac4adc1715e26461bbb3903032df",
+      "bytes": 919,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/ruins/collapsed_house_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/ruins/collapsed_shop_a.json",
+      "sha256": "88a2a46d91a2e790d7f52a386e40ceb65e6cf79999031883a1e26438a2680d67",
+      "bytes": 1226,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/ruins/collapsed_shop_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/ruins/deep_foundation_a.json",
+      "sha256": "44dc0b22b0bbd7267aed03217d795b362b2686249f6808b4a4e06d82031e750f",
+      "bytes": 1453,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/ruins/deep_foundation_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/ruins/foundation_outline_a.json",
+      "sha256": "a77608e472f9f67a401c2b4a7e3b3989e3f0814df136d99622f00e0f4fe0d44a",
+      "bytes": 626,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/ruins/foundation_outline_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/ruins/ossuary_ruin_a.json",
+      "sha256": "7e6a9b6184b59e9cf74ccd7757b903b8313f811719f7fc9fa11b3fe9461de9db",
+      "bytes": 1477,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/ruins/ossuary_ruin_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/ruins/ruin_wall_a.json",
+      "sha256": "e41755f1f4d8c09980b6ed94885dfdf1bc4ed2ea2ad45291e2a01936f1a250a5",
+      "bytes": 586,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/ruins/ruin_wall_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/ruins/three_wall_remnant_a.json",
+      "sha256": "4cf455d98c719b58edb8f0530414dd0015d110929dfc5b14fbb47a8cc83e51d3",
+      "bytes": 801,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/ruins/three_wall_remnant_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/storage/cellar_a.json",
+      "sha256": "4efb0c6add7d9cd78bc9257e0cf356d78667d0560ff9652887493790a613751a",
+      "bytes": 1099,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/storage/cellar_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/storage/food_store_a.json",
+      "sha256": "ede869d9c18bbfe1257db229ba9dcb12723cfe658ea4e5391b502cd199b696d2",
+      "bytes": 1572,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/storage/food_store_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/storage/goods_cellar_a.json",
+      "sha256": "f3513c5359ed1d18939c86daf48af28ab1d34417489ab2a16425dca6cc7af48d",
+      "bytes": 2114,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/storage/goods_cellar_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/storage/root_cellar_a.json",
+      "sha256": "9d44c4b8eaaea5c9d6db750be63d54649138e2e6d69423477390d308849806ad",
+      "bytes": 705,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/storage/root_cellar_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/storage/storehouse_a.json",
+      "sha256": "b2cae42027143bac512f2418e6ff18d282cd1c4a73c2a1a7c77a768e65ce4864",
+      "bytes": 2818,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/storage/storehouse_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/storage/tool_shed_a.json",
+      "sha256": "6f0ae2bc256c8809b7617055bb781ec1f41ac031fa0c05948c0711c3925bfc10",
+      "bytes": 1344,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/storage/tool_shed_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/storage/warehouse_a.json",
+      "sha256": "2818ec225140a04227e2f477f6fdbb01af0ed568f9cbf6db8cd5b20468719e1d",
+      "bytes": 1270,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/storage/warehouse_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/wilderness/fishing_dock.json",
+      "sha256": "e6613ce4a773eac6f2b372ba550eabbc59ef8917220c421163473bc54516c0ce",
+      "bytes": 743,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/wilderness/fishing_dock.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/wilderness/hunter_cabin.json",
+      "sha256": "37a306e710da8e8c4886881887c7221e19d5101a0e92d5795b541cfa4103d4d8",
+      "bytes": 995,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/wilderness/hunter_cabin.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/wilderness/roadside_shrine_a.json",
+      "sha256": "5aab2197a602d22c938be7c7eca67d8110feaba1f72a3cf5a76fbc15f07f919e",
+      "bytes": 919,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/wilderness/roadside_shrine_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/wilderness/shepherds_fold_a.json",
+      "sha256": "0c0766f9ac70e1a4f2a7c543cd60c8f6afe9cea05b052912948e68e6bd00b51a",
+      "bytes": 798,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/wilderness/shepherds_fold_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/wilderness/shepherds_hut_a.json",
+      "sha256": "5ff397121c0e0ca57c3062d41a20ec1a9e9160b47bb967ff431bb10941febb99",
+      "bytes": 979,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/wilderness/shepherds_hut_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/buildings/wilderness/waymarker_shelter_a.json",
+      "sha256": "d9859678c0ae3399b4e6ba5db108d6b7689dc5872ea9563d1dc7172fc5e60c2e",
+      "bytes": 1002,
+      "route": "ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/buildings/wilderness/waymarker_shelter_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/entrances/barrow_mound_a.json",
+      "sha256": "3ff43325349cf80600859bb335c9252f448dd4c163f51e1714d06532784b9445",
+      "bytes": 573,
+      "route": "entrance",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/entrances/barrow_mound_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/entrances/barrow_mound_b.json",
+      "sha256": "e0a8a91f028be5513ac119e0060d9a7fb7be06d4d985028e4ec83b5eb40cb6ed",
+      "bytes": 626,
+      "route": "entrance",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/entrances/barrow_mound_b.json"
+    },
+    {
+      "repository_path": "roguelike/data/entrances/drowned_threshold_a.json",
+      "sha256": "c98d03aca4b9b1219ef5804e3e2508885305c47bdb629ccf16af6612267cf88d",
+      "bytes": 564,
+      "route": "entrance",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/entrances/drowned_threshold_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/entrances/overgrown_gatehouse_a.json",
+      "sha256": "67464ecd82f9979c1351dce88d069100ed84c4e6e9f91850f8e7e75a9aa0883c",
+      "bytes": 503,
+      "route": "entrance",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/entrances/overgrown_gatehouse_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/entrances/rock_face_cut_a.json",
+      "sha256": "d30db08860639e23b8f9049d517fc3b542ab6674f1fa9b20373b54f70b958798",
+      "bytes": 499,
+      "route": "entrance",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/entrances/rock_face_cut_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/entrances/sunken_ruin_a.json",
+      "sha256": "81d6259b320f459af189c16ad979e4b892e962d741fc4e097aaf832dd7061e4a",
+      "bytes": 642,
+      "route": "entrance",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/entrances/sunken_ruin_a.json"
+    },
+    {
+      "repository_path": "roguelike/data/layouts/starting_lab.json",
+      "sha256": "76fe4388fb10d68269d2132c2ae1d2391efa0bd560f27cc73874ee46e46d20ff",
+      "bytes": 5042,
+      "route": "authored_submap",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/data/layouts/starting_lab.json"
+    },
+    {
+      "repository_path": "roguelike/docs/examples/author_cottage_a.json",
+      "sha256": "bb4d6b80cd47bb3150080fd2319bcfd48dc9d60de7483d1ec8581736f30c790e",
+      "bytes": 1126,
+      "route": "example_ordinary_building",
+      "immutable_url": "https://github.com/dgobi/ResonanceRoguelike/blob/05bcc4973b09e86afcd099af99b277eab92a2bec/roguelike/docs/examples/author_cottage_a.json"
+    }
+  ]
+}

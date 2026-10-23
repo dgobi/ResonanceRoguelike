@@ -1,0 +1,24 @@
+[
+  {
+    "omitted": [
+      "decor_id"
+    ],
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\dango\\AppData\\Local\\Temp\\tmpmvgvig3j\\baseline_checker.py\", line 209, in <module>\n    main()\n  File \"C:\\Users\\dango\\AppData\\Local\\Temp\\tmpmvgvig3j\\baseline_checker.py\", line 163, in main\n    place_container(local_map, x, y, spec[\"decor_id\"], items)\n                                     ~~~~^^^^^^^^^^^^\nKeyError: 'decor_id'\n"
+  },
+  {
+    "omitted": [
+      "loot_pools"
+    ],
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\dango\\AppData\\Local\\Temp\\tmpmvgvig3j\\baseline_checker.py\", line 209, in <module>\n    main()\n  File \"C:\\Users\\dango\\AppData\\Local\\Temp\\tmpmvgvig3j\\baseline_checker.py\", line 162, in main\n    items = roll_pools(spec[\"loot_pools\"], data.loot_pools, factory, random_source)\n                       ~~~~^^^^^^^^^^^^^^\nKeyError: 'loot_pools'\n"
+  },
+  {
+    "omitted": [
+      "decor_id",
+      "loot_pools"
+    ],
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\dango\\AppData\\Local\\Temp\\tmpmvgvig3j\\baseline_checker.py\", line 209, in <module>\n    main()\n  File \"C:\\Users\\dango\\AppData\\Local\\Temp\\tmpmvgvig3j\\baseline_checker.py\", line 162, in main\n    items = roll_pools(spec[\"loot_pools\"], data.loot_pools, factory, random_source)\n                       ~~~~^^^^^^^^^^^^^^\nKeyError: 'loot_pools'\n"
+  }
+]

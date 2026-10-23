@@ -1,0 +1,56 @@
+{
+  "id": "house_crowded_a",
+  "category": "residential",
+  "width": 11,
+  "height": 8,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 4,
+    "market": 1
+  },
+  "description": "Three sleeping mats crammed wall to wall. Herbs drying from a rafter. A child's toy kicked into a corner. Too many lived here.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "###########",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#........w#",
+    "#####.#####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 5,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": ["commoner_kitchen"]
+    },
+    {
+      "x": 9,
+      "y": 1,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": ["commoner_bedroom"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, "worn_mat", null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, "worn_mat", null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, "child_toy", null, null],
+    [null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, "worn_mat", null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}

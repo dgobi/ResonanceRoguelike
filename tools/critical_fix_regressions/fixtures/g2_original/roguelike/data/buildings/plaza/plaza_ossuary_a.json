@@ -1,0 +1,29 @@
+{
+  "id": "plaza_ossuary_a",
+  "category": "plaza",
+  "allowed_in": "town",
+  "weight": 0.7,
+  "description": "A funerary square. Bone dust on flagstone, a cracked bell tower at the centre, surrounded by worn stone markers.",
+  "legend": {
+    "#": "grey_stone",
+    ".": "flagstone",
+    "w": "worn_stone",
+    "B": "bell_cracked",
+    "p": "town_plaza",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "##+####+##",
+    "#........#",
+    "+.w.w.w..+",
+    "#........#",
+    "#.w.#.#..#",
+    "#....B...#",
+    "#.w.#.#..#",
+    "+........+",
+    "#........#",
+    "##+####+##"
+  ],
+  "note": "Plaza variant B — ossuary square. B = bell_cracked tile. w = worn stone markers. Entrance south."
+}

@@ -162,6 +162,7 @@ def _enterable(local_map, xy, data):
 
 
 def validate_scene(local_map, submaps, data):
+    from generation.access import validate_required_access
     for submap in submaps:
         xy = submap.surface_x, submap.surface_y
         if (not local_map.in_bounds(*xy) or str(local_map.tiles[xy]['terrain']) != 'stairs_down'
@@ -172,6 +173,8 @@ def validate_scene(local_map, submaps, data):
                 and _enterable(local_map, (xy[0] + dx, xy[1] + dy), data)
                 for dx in (-1, 0, 1) for dy in (-1, 0, 1) if dx or dy):
             raise GenerationError(f'{submap.submap_id}: blocked stair or approach at {xy}')
+    if submaps:
+        validate_required_access(local_map, [(s.surface_x, s.surface_y) for s in submaps], data)
 
 
 def publish_metadata(original, staged):

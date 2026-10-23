@@ -1,0 +1,26 @@
+{
+  "id": "overgrown_gatehouse_a",
+  "entrance_type": "overgrown_gatehouse",
+  "variant": "a",
+  "width": 13,
+  "height": 7,
+  "legend": {
+    "W": "wall",
+    "T": "tree",
+    ".": "cobblestone",
+    ",": "gravel",
+    " ": null
+  },
+  "layers": [
+    "WWWT  ,  TWWW",
+    "WWWT  .  TWWW",
+    "WWW   .   WWW",
+    "      .      ",
+    "      .      ",
+    "    ,,,,,    ",
+    "             "
+  ],
+  "connection_point": {"x": 6, "y": 0},
+  "spawn_offset":     {"x": 6, "y": 3},
+  "edges": ["north"]
+}

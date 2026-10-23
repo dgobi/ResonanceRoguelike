@@ -1,0 +1,49 @@
+{
+  "id": "house_two_room_a",
+  "category": "residential",
+  "width": 10,
+  "height": 8,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 4,
+    "market": 1
+  },
+  "description": "Two rooms divided by an internal wall. The sleeping area smells of old straw. A meal sits cold on the table.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "##########",
+    "#........#",
+    "#........#",
+    "#........#",
+    "#####+####",
+    "#........#",
+    "#........#",
+    "#####+####"
+  ],
+  "special_tiles": [
+    {
+      "x": 8,
+      "y": 1,
+      "type": "container",
+      "decor_id": "wooden_shelf",
+      "loot_pools": ["commoner_bedroom"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, "worn_mat", null, null, null, null, null, null, null, null],
+    [null, null, null, "child_toy", null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, "cold_hearth", null, null, "meal_on_table", null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null]
+  ]
+}

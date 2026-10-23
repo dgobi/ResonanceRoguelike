@@ -1,0 +1,46 @@
+{
+  "id": "tenement_a",
+  "category": "residential",
+  "width": 16,
+  "height": 8,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 3
+  },
+  "interior_loot_table": "residential_common",
+  "description": "A long tenement building suggesting several cramped dwellings sharing walls. Multiple doors.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "################",
+    "#..#.....#.....#",
+    "#..#.....#.....#",
+    "#..#.....#.....#",
+    "#w.#.....#....w#",
+    "#..#.....#.....#",
+    "#........#.....#",
+    "##.###.####.####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
+    }
+  ],
+  "note": "PLACEHOLDER — redesign. Three implied units sharing party walls. Doors at (2,7),(6,7),(11,7)."
+}

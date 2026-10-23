@@ -70,7 +70,9 @@ def main():
     config.DEBUG_MODE = False  # Process-local diagnostic setting, no file edit.
     from engine.data_loader import DataLoader
     from engine.item_factory import ItemFactory
-    from engine.loot_roller import roll_pools
+    from engine.scene_generation import populate
+    from engine.creature_factory import CreatureFactory
+    from generation.context import GenerationContext
     from generation.floor_object_utils import place_container, place_floor_object
     from generation.region_gen import generate_region
     from generation.town_gen import _stamp_building_at
@@ -141,7 +143,7 @@ def main():
                         require(spec["text_id"] in data.texts, "Unknown text_id")
                         require(spec["text_id"] in data.text_item_map, "Add a text_item_map entry for town text items")
                 else:
-                    container_id = spec.get("decor_id", "barrel")
+                    container_id = spec.get("decor_id", "crate")
                     require(data.decoratives.get(container_id, {}).get("container") is True,
                             "Container decor_id must identify an actual container")
                     require(isinstance(spec.get("loot_pools", []), list) and
@@ -155,19 +157,8 @@ def main():
                 ox, oy = (80 - width) // 2, (43 - height) // 2
                 specs = _stamp_building_at(local_map, definition, ox, oy, data.terrain, flip_v=flip)
                 require(len(specs) == len(definition.get("special_tiles", [])), "A supported special tile was dropped")
-                random_source = random.Random(20261023)
-                for spec in specs:
-                    x, y = spec["x"], spec["y"]
-                    if spec["kind"] == "container":
-                        items = roll_pools(spec["loot_pools"], data.loot_pools, factory, random_source)
-                        place_container(local_map, x, y, spec["decor_id"], items)
-                    else:
-                        item_id = data.text_item_map.get(spec.get("text_id"), spec["item_id"])
-                        item = factory.create(item_id, x, y)
-                        require(item is not None, "ItemFactory failed to create a placed item")
-                        if spec.get("text_id"):
-                            item.text_id = spec["text_id"]
-                        require(place_floor_object(local_map, x, y, item), "Floor placement failed")
+                local_map.generation_context = GenerationContext(20261023, 20261023, ('author-cottage', flip))
+                populate(data, factory, CreatureFactory(data), local_map, specs, map_text=True)
                 accessible = reachable(local_map, data)
                 for y, row in enumerate(rows):
                     for x, char in enumerate(row):

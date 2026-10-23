@@ -1,0 +1,40 @@
+{
+  "id": "roadside_shrine_a",
+  "category": "wilderness",
+  "width": 6,
+  "height": 5,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {},
+  "description": "A roadside shrine. Open to the air on the south side. Coins in the offering bowl. A mark scratched into the post.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "f": "flagstone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "######",
+    "#ffff#",
+    "#f..f#",
+    "#....#",
+    "......"
+  ],
+  "special_tiles": [
+    {
+      "x": 2,
+      "y": 1,
+      "type": "container",
+      "decor_id": "offering_bowl",
+      "loot_pools": ["shrine_offering"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, "offering_coins", null, null, "warning_mark", null],
+    [null, null, null, null, null, null]
+  ]
+}

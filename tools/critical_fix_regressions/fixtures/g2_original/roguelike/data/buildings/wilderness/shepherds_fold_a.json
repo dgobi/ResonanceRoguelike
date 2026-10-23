@@ -1,0 +1,39 @@
+{
+  "id": "shepherds_fold_a",
+  "category": "wilderness",
+  "width": 8,
+  "height": 7,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "wilderness": 5,
+    "storage": 1
+  },
+  "interior_loot_table": null,
+  "legend": {
+    "#": "wall",
+    ".": "packed_earth",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#......#",
+    "#......#",
+    "#......#",
+    "#......#",
+    "#.    .#",
+    "#.    .#"
+  ],
+  "note": "A shepherd's fold. U-shaped dry-stone enclosure, open on the south face. Packed earth floor worn smooth by generations of animals. The south gap is wide enough for a flock.",
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": [
+        "wilderness_cache"
+      ]
+    }
+  ]
+}

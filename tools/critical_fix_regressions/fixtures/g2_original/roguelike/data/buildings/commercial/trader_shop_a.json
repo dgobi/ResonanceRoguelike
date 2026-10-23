@@ -1,0 +1,56 @@
+{
+  "id": "trader_shop_a",
+  "category": "commercial",
+  "width": 10,
+  "height": 8,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 4,
+    "residential": 1
+  },
+  "description": "A trader's shop. Shelves along the wall. An iron chest bolted to the floor in the back room. The carved post at the entrance marks the guild.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "##########",
+    "#........#",
+    "#........#",
+    "#........#",
+    "#...####.#",
+    "#...#...w#",
+    "#...#....#",
+    "####.#####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "wooden_shelf",
+      "loot_pools": ["storage_general"]
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "type": "container",
+      "decor_id": "iron_chest",
+      "loot_pools": ["storage_tools"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, "measuring_stone", null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, "carved_post", null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null]
+  ]
+}

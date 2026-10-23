@@ -1,0 +1,44 @@
+{
+  "id": "folk_saint_niche_a",
+  "category": "religious",
+  "width": 6,
+  "height": 5,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "waystone_square": 4,
+    "ossuary": 3,
+    "residential": 1
+  },
+  "description": "A stone niche barely large enough to stand in. Candle wax pooled at the base. Coins left for a saint whose name is worn away.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "f": "flagstone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "######",
+    "#ffff#",
+    "#f..f#",
+    "#....#",
+    "##.###"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "stone_coffer",
+      "loot_pools": ["shrine_offering"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null],
+    [null, null, null, null, null, null],
+    [null, null, "tallow_dip", null, null, null],
+    [null, "offering_coins", null, null, "carved_post", null],
+    [null, null, null, null, null, null]
+  ]
+}
