@@ -1,5 +1,9 @@
 # D combat and effect lifecycle
 
+The owner accepted D on 23 October 2026: "D is accepted, commit."
+The accepted delivery is `016270061cc4fc1e596db743cb85a4b6a7dff4c3`, containing
+implementation `257b41d` and the passing 159-worker / 3,675-check evidence.
+
 C is owner-accepted at `288c70bb2105fc7770fa2c311cb983617bed933c`. D continues
 in production `main`, with `checkpoint/d-start-20261023` before edits. No source
 copies, task branches or worktrees were created. Local commits do not authorize push.

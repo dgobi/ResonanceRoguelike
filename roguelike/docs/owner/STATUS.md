@@ -1,5 +1,9 @@
 # Current status — D combat and effects on main
 
+D is owner-accepted on 23 October 2026 at `0162700`, including implementation
+`257b41d` and its completed verification evidence. The owner requested committing
+the acceptance. The accepted gate passed 159 workers and 3,675 checks.
+
 C is owner-accepted at `288c70b`. D implements temporary armor mitigation/contact
 charges, suppression/disruption expiry, aggregate creature auras, wight confirmation,
 pellet targeting/zones and salve movement timing. Coatings now work consistently
