@@ -52,5 +52,7 @@
     "col": 2055,
     "row": 0,
     "sheet": "urizen"
-  }
+  },
+  "can_cross_chunks": true,
+  "speed": 0.9
 }

@@ -35,5 +35,8 @@
     "moderate": "The earth remembers footsteps here.",
     "high": "Stone underfoot, even where the soil looks deep."
   },
-  "flint_scatter_rate": 0.004
+  "flint_scatter_rate": 0.004,
+  "waystone_inscriptions": ["waystone_plains_a", "waystone_plains_b"],
+  "waystone_fallback_inscriptions": false,
+  "waystone_themes": ["exposure", "passage", "the before"]
 }

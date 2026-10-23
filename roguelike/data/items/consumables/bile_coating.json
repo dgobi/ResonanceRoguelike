@@ -1,0 +1,18 @@
+{
+  "id": "bile_coating",
+  "name": "bile coating",
+  "description": "A corrosive coating rendered from crow bile. The blade will itch to cut.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": true,
+  "on_use": "apply_to_weapon",
+  "apply_message": "The blade darkens and fumes. It wants to cut.",
+  "temporary_essence": [
+    {"essence": "Dissolution", "strength": 0.4, "hits": 6}
+  ],
+  "keywords": [
+    {"tag": "caustic", "tier": 2},
+    {"tag": "corrosive", "tier": 1}
+  ]
+}

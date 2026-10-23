@@ -1,0 +1,14 @@
+{
+  "id": "vine_network",
+  "spread_interval": 5,
+  "spread_chance": 0.7,
+  "eyestalk_interval": 12,
+  "spore_interval": 25,
+  "max_tiles": 50,
+  "eyestalk_attack_range": 3,
+  "eyestalk_damage_dice": "1d3",
+  "spore_damage_per_turn": 2,
+  "spore_player_range": 2,
+  "spawn_trigger": "resonance_pulse",
+  "spawn_biomes": ["swamp", "drowned_wood", "forest"]
+}

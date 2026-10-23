@@ -35,5 +35,8 @@
     "moderate": "The discharge was concentrated here. The ground still holds it.",
     "high": "Maximum saturation. The stones are not dormant \u2014 they are full."
   },
-  "flint_scatter_rate": 0.01
+  "flint_scatter_rate": 0.01,
+  "waystone_inscriptions": ["waystone_ash_a", "waystone_ash_b"],
+  "waystone_fallback_inscriptions": false,
+  "waystone_themes": ["ending", "residue", "the discharge"]
 }

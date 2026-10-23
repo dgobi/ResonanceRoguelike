@@ -1,0 +1,17 @@
+{
+  "id": "stalker_unguent",
+  "name": "stalker unguent",
+  "description": "A salve rendered from stalker tissue. It quickens what it touches.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": true,
+  "on_use": "apply_stalker_unguent",
+  "use_message": "The unguent sinks in. Something quickens.",
+  "speed_bonus": 0.2,
+  "duration_turns": 15,
+  "keywords": [
+    {"tag": "vital", "tier": 2},
+    {"tag": "binding", "tier": 1}
+  ]
+}

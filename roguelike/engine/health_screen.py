@@ -35,13 +35,15 @@ def _bearing(frac: float) -> tuple[str, tuple]:
 #  Condition descriptions (in-world voice)
 # ------------------------------------------------------------------ #
 _CONDITION_DESCS: dict[str, str] = {
-    "Hunger":     "The body consumes itself. What remains of you is less than what began the day.",
+    "Hunger":          "The body consumes itself. What remains of you is less than what began the day.",
+    "Starving":        "The hunger has teeth now. Each step costs more than it should.",
     "Hunger.Critical": "A hollow pressure behind the sternum. Each movement costs something that does not return.",
-    "Thirst":     "The throat closes. Thought becomes imprecise. Water is the first thing the world took from you.",
+    "Thirst":          "The throat closes. Thought becomes imprecise. Water is the first thing the world took from you.",
+    "Parched":         "The throat has closed. The world dims at the edges.",
     "Thirst.Critical": "The veins run slow. The eyes cannot focus. You are becoming still.",
-    "Chilled":    "Cold has entered the joints. Movement is slower than it was. The chill is patient.",
-    "Sickened":   "Something from the crow's touch persists in the blood. Hunger and thirst advance faster than they should.",
-    "Corruption": "The discharge has left a mark. The body is remembering something it was never meant to know.",
+    "Chilled":         "Cold has entered the joints. Movement is slower than it was. The chill is patient.",
+    "Sickened":        "Something from the crow's touch persists in the blood. Hunger and thirst advance faster than they should.",
+    "Corruption":      "The discharge has left a mark. The body is remembering something it was never meant to know.",
 }
 
 
@@ -206,14 +208,18 @@ class HealthScreen:
         needs = getattr(player, "needs", None)
         if needs:
             h = needs.hunger
-            if h >= 0.85:
-                out.append(("Hunger", _CONDITION_DESCS["Hunger.Critical"], FRESH_WOUND))
+            if h >= 0.90:
+                out.append(("Collapsing", _CONDITION_DESCS["Hunger.Critical"], FRESH_WOUND))
+            elif h >= 0.75:
+                out.append(("Starving", _CONDITION_DESCS["Starving"], DRIED_BLOOD))
             elif h >= 0.5:
                 out.append(("Hunger", _CONDITION_DESCS["Hunger"], DUSTY_ROSE))
 
             t = needs.thirst
-            if t >= 0.85:
-                out.append(("Thirst", _CONDITION_DESCS["Thirst.Critical"], FRESH_WOUND))
+            if t >= 0.90:
+                out.append(("Desiccating", _CONDITION_DESCS["Thirst.Critical"], FRESH_WOUND))
+            elif t >= 0.75:
+                out.append(("Parched", _CONDITION_DESCS["Parched"], DRIED_BLOOD))
             elif t >= 0.5:
                 out.append(("Thirst", _CONDITION_DESCS["Thirst"], STONE_BLUE))
 

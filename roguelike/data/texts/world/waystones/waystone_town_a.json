@@ -1,0 +1,10 @@
+{
+  "id": "waystone_town_a",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Sketh urath.\nUrath vrath.", "damaged": false, "deep_tongue": true}]
+}

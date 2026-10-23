@@ -177,3 +177,8 @@ WEATHER_FOG         = FROST_WHITE
 WEATHER_FOG_FORGET  = GHOST_WHITE
 WEATHER_SNOW        = BONE_PALE
 WEATHER_EDGE_PULSE  = DEEP_PURPLE
+
+# ── Atmospheric ───────────────────────────────────────────────────────────────
+GROUND_MIST         = (140, 160, 180)   # pale grey-blue swamp mist
+DUST_MOTE           = (220, 215, 200)   # near-white interior dust
+CORRUPTION_WISP     = VOID_PURPLE       # dark purple player orbiter

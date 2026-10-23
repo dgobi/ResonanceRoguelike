@@ -36,9 +36,24 @@
       "x": 1,
       "y": 1,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "inscription",
       "text_id": "world_sermon_b",
       "note": "Religious text on offering shelf"
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "type": "item",
+      "item_id": "inscription",
+      "text_id": "text_shrine_inscription",
+      "note": "Deep tongue inscription at altar"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "type": "scene",
+      "scene_id": "shrine_offering_placed",
+      "note": "Offering left at the shrine"
     }
   ],
   "note": "PLACEHOLDER \u2014 redesign. North flagstone rows = offering shelf/altar area. Door at (3,6)."

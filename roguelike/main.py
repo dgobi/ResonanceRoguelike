@@ -74,7 +74,7 @@ def main() -> None:
         surface_map = LocalMap(MAP_WIDTH, MAP_HEIGHT)
         start_x, start_y = MAP_WIDTH // 2, MAP_HEIGHT // 2
 
-    # Place 1 waystone within 3-6 tiles of player spawn — establishes the mechanic.
+    # Place 1 waystone adjacent to road, within 8 tiles of chunk centre.
     # Guard: skip if region_gen already placed one (e.g. forest chunk on a road).
     import math as _math
     wt_def = data.terrain.get("waystone_plinth", {})
@@ -83,23 +83,56 @@ def main() -> None:
         for _cx in range(surface_map.width)
         for _cy in range(surface_map.height)
     )
+    # Also check decor layer for waystone_plinth (post-conversion)
+    if not _existing_wt:
+        _existing_wt = any(
+            v == "waystone_plinth"
+            for v in getattr(surface_map, "decor", {}).values()
+        )
     if wt_def and not _existing_wt:
-        _placed = 0
-        _attempts = 0
-        while _placed < 1 and _attempts < 50:
-            _attempts += 1
-            _dist  = rng.randint(3, 6)
-            _angle = rng.uniform(0, 2 * _math.pi)
-            _tx = int(start_x + _math.cos(_angle) * _dist)
-            _ty = int(start_y + _math.sin(_angle) * _dist)
-            if not surface_map.in_bounds(_tx, _ty):
-                continue
-            if not surface_map.walkable[_tx, _ty]:
-                continue
-            surface_map.set_tile(_tx, _ty, "waystone_plinth",
-                                 wt_def.get("walkable", False),
-                                 wt_def.get("transparent", True))
-            _placed += 1
+        _road_terrain = {f"road_{i}" for i in range(16)}
+        _cx, _cy = surface_map.width // 2, surface_map.height // 2
+        # Find road tiles within 8 of centre
+        _road_tiles: list[tuple[int, int]] = []
+        for _rx in range(max(1, _cx - 8), min(surface_map.width - 1, _cx + 9)):
+            for _ry in range(max(1, _cy - 8), min(surface_map.height - 1, _cy + 9)):
+                if str(surface_map.tiles[_rx, _ry]["terrain"]) in _road_terrain:
+                    _road_tiles.append((_rx, _ry))
+        # Find walkable non-road tiles adjacent to road, nearest to centre
+        _candidates: list[tuple[int, int, float]] = []
+        for _rx, _ry in _road_tiles:
+            for _dx, _dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                _ax, _ay = _rx + _dx, _ry + _dy
+                if not surface_map.in_bounds(_ax, _ay):
+                    continue
+                if str(surface_map.tiles[_ax, _ay]["terrain"]) in _road_terrain:
+                    continue
+                if not surface_map.walkable[_ax, _ay]:
+                    continue
+                _d = _math.sqrt((_ax - _cx) ** 2 + (_ay - _cy) ** 2)
+                _candidates.append((_ax, _ay, _d))
+        if _candidates:
+            from generation.decor_utils import place_decor as _pd_ws_main
+            _candidates.sort(key=lambda c: c[2])
+            _wx, _wy, _ = _candidates[0]
+            _pd_ws_main(surface_map, _wx, _wy, "waystone_plinth")
+        else:
+            # Fallback: place near player start (original logic)
+            _placed = 0
+            _attempts = 0
+            while _placed < 1 and _attempts < 50:
+                _attempts += 1
+                _dist  = rng.randint(3, 6)
+                _angle = rng.uniform(0, 2 * _math.pi)
+                _tx = int(start_x + _math.cos(_angle) * _dist)
+                _ty = int(start_y + _math.sin(_angle) * _dist)
+                if not surface_map.in_bounds(_tx, _ty):
+                    continue
+                if not surface_map.walkable[_tx, _ty]:
+                    continue
+                from generation.decor_utils import place_decor as _pd_ws_fb
+                _pd_ws_fb(surface_map, _tx, _ty, "waystone_plinth")
+                _placed += 1
 
     player = Actor(x=start_x, y=start_y, tile="player", name="Player")
     body_def = data.bodies.get("body_player", {})

@@ -1,0 +1,14 @@
+{
+  "id": "resonant_wayfarer",
+  "name": "Resonant Wayfarer",
+  "category": "The Witnessing",
+  "cost": 2,
+  "description": "The stones give more to those who return. But the stones remember what they give.",
+  "effects": [
+    "Learn one additional word from each waystone interaction.",
+    "Multiple waystone interactions carry inherent risk."
+  ],
+  "hooks": [],
+  "conflicts": [],
+  "requires": []
+}

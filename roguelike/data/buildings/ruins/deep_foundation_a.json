@@ -1,0 +1,51 @@
+{
+  "id": "deep_foundation_a",
+  "category": "ruins",
+  "width": 10,
+  "height": 8,
+  "facing": "south",
+  "condition": "ruined",
+  "district_weights": {
+    "old_foundation": 4,
+    "ossuary": 2,
+    "ruins": 3
+  },
+  "description": "The newer structure collapsed, exposing deep one stone beneath. Cold grey walls stand unnaturally true among the wreckage. Something marked the threshold.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "Z": "old_wall",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "##########",
+    "#........#",
+    "#.ZZZZ...#",
+    "#.Z....Z.#",
+    "#.Z....Z.#",
+    "#.ZZZZ...#",
+    "#........#",
+    "####.#####"
+  ],
+  "special_tiles": [
+    {
+      "x": 7,
+      "y": 2,
+      "type": "container",
+      "decor_id": "rubble_pile",
+      "loot_pools": ["ruins_scatter"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, "inscription_stone", null, null, null, null, null],
+    [null, null, null, null, null, "oriented_remains", null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, "warning_mark", null, null, null, "web_cluster", null, null],
+    [null, null, null, null, null, null, null, null, null, null]
+  ]
+}

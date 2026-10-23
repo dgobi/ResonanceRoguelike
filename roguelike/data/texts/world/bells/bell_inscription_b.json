@@ -1,0 +1,11 @@
+{
+  "id": "bell_inscription_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "teach_words": {"count": 1, "categories": ["essence", "cosmic"], "tier": 1},
+  "pages": [{"text": "Kruullk mnaekh.\nAquull svourrk.\nMnaekh ptaatl.\nZhuurq draent.", "damaged": false, "deep_tongue": true}]
+}

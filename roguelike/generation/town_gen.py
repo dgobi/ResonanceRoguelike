@@ -321,6 +321,9 @@ def _stamp_secondary_streets(
     return tiles
 
 
+_DECOR_TERRAIN_IDS = {"waystone_plinth", "stele", "street_lamp_working",
+                      "street_lamp_sputtering", "street_lamp_dead"}
+
 def _stamp_plaza_def(
     local_map,
     plaza: "BuildingDef",
@@ -329,6 +332,7 @@ def _stamp_plaza_def(
     terrain_data: dict,
 ) -> None:
     """Stamp a BuildingDef plaza (legend-based layout) at top-left (ox, oy)."""
+    from generation.decor_utils import place_decor as _pd_plaza
     for row_idx, row in enumerate(plaza.layout):
         for col_idx, ch in enumerate(row):
             terrain = plaza.legend.get(ch)
@@ -337,7 +341,11 @@ def _stamp_plaza_def(
             tx = ox + col_idx
             ty = oy + row_idx
             if local_map.in_bounds(tx, ty):
-                _set_terrain(local_map, tx, ty, terrain, terrain_data)
+                if terrain in _DECOR_TERRAIN_IDS:
+                    # Place as decor on top of existing floor tile
+                    _pd_plaza(local_map, tx, ty, terrain)
+                else:
+                    _set_terrain(local_map, tx, ty, terrain, terrain_data)
 
 
 def _find_plaza_tile(
@@ -511,6 +519,43 @@ def _try_stamp_buildings(
     return placed, attempts
 
 
+_LAMP_VALID_TERRAIN = frozenset({
+    "cobblestone", "flagstone", "cobblestone_cracked", "cobblestone_mossy",
+    "packed_earth", "dirt_path", "weedy_cobble", "gravel",
+    "grass", "tall_grass",
+}) | frozenset(f"road_{i}" for i in range(16))
+
+
+def _valid_lamp_pos(local_map, terrain_data: dict, x: int, y: int,
+                    placed_buildings: list | None = None,
+                    plaza_rect: tuple | None = None) -> bool:
+    """Return True if (x,y) is a valid position for a street lamp."""
+    if not local_map.in_bounds(x, y):
+        return False
+    terrain_id = str(local_map.tiles[x, y]["terrain"])
+    if isinstance(terrain_id, bytes):
+        terrain_id = terrain_id.decode()
+    # Must be a walkable exterior tile
+    if terrain_id not in _LAMP_VALID_TERRAIN:
+        return False
+    # Must not already have a decor tile
+    if local_map.decor.get((x, y)):
+        return False
+    # Must not be inside the plaza bounding rect
+    if plaza_rect is not None:
+        px, py, pw, ph = plaza_rect
+        if px <= x < px + pw and py <= y < py + ph:
+            return False
+    # Must not be inside a building footprint
+    if placed_buildings:
+        for bld in placed_buildings:
+            bx, by = bld.get("x", 0), bld.get("y", 0)
+            bw, bh = bld.get("w", 0), bld.get("h", 0)
+            if bx <= x < bx + bw and by <= y < by + bh:
+                return False
+    return True
+
+
 def _place_artery_lamps(
     local_map,
     terrain_data: dict,
@@ -521,6 +566,8 @@ def _place_artery_lamps(
     length: int,
     step: int = _INNER_LAMP_STEP,
     lamp_probs: tuple = _LAMP_P_INNER,
+    placed_buildings: list | None = None,
+    plaza_rect: tuple | None = None,
 ) -> None:
     """Place street lamps flanking an artery, skipping the crossing band."""
     wp, sp = lamp_probs
@@ -529,13 +576,15 @@ def _place_artery_lamps(
             continue
         for a_off in (a0 - 1, a1):
             x, y = (a_off, b) if axis == "ns" else (b, a_off)
-            if not local_map.in_bounds(x, y):
+            if not _valid_lamp_pos(local_map, terrain_data, x, y,
+                                   placed_buildings, plaza_rect):
                 continue
             r = (hash((x * 7919, y * 6271, town_id)) & 0xFF) / 255.0
             if   r < wp:      lamp = "street_lamp_working"
             elif r < wp + sp: lamp = "street_lamp_sputtering"
             else:             lamp = "street_lamp_dead"
-            _set_terrain(local_map, x, y, lamp, terrain_data)
+            from generation.decor_utils import place_decor as _pd_lamp
+            _pd_lamp(local_map, x, y, lamp)
 
 
 def _stamp_dirt_track(
@@ -783,6 +832,8 @@ def generate_town_chunk(
         "debris":         "debris_scatter",    "waystone_base":  "waystone_plinth",
     }
 
+    plaza_rect: tuple | None = None  # set in centre chunk if plaza is stamped
+
     # ── Primary arteries ───────────────────────────────────────────────
     if role in ("C", "N", "S"):
         street_tiles |= _stamp_artery(local_map, terrain_data,
@@ -810,18 +861,20 @@ def generate_town_chunk(
             oy = max(0, min(map_h - plaza_def.height,
                             map_h // 2 - plaza_def.height // 2 + drift_y))
             _stamp_plaza_def(local_map, plaza_def, ox, oy, terrain_data)
+            # Store plaza bounding rect — used to exclude lamps and bell_dead
+            plaza_rect = (ox, oy, plaza_def.width, plaza_def.height)
 
-            BELL_TERRAIN = {
-                "intact": "bell_intact", "cracked": "bell_cracked",
-                "spent":  "bell_dead",   "destroyed": "bell_dead",
-            }
-            bt = BELL_TERRAIN.get(bell_state, "bell_cracked")
+            # Plaza bell is always bell_cracked — layout legend is authoritative.
+            # bell_state only applies to standalone bell towers (cardinal chunks).
             for bsearch in ("bell_cracked", "bell_intact", "bell_dead"):
                 pos = _find_plaza_tile(plaza_def, bsearch, ox, oy)
                 if pos:
                     bell_tower_pos = pos
                     if local_map.in_bounds(pos[0], pos[1]):
-                        _set_terrain(local_map, pos[0], pos[1], bt, terrain_data)
+                        _set_terrain(local_map, pos[0], pos[1],
+                                     "bell_cracked", terrain_data)
+                        from generation.decor_utils import place_decor as _pbd
+                        _pbd(local_map, pos[0], pos[1], "cracked_bell")
                     break
             pos = _find_plaza_tile(plaza_def, "waystone_plinth", ox, oy)
             if pos:
@@ -869,10 +922,12 @@ def generate_town_chunk(
 
         _place_artery_lamps(local_map, terrain_data, town_id,
                             "ns", ns_x0, ns_x1, ew_y0, ew_y1, map_h,
-                            step=_INNER_LAMP_STEP, lamp_probs=_LAMP_P_PLAZA)
+                            step=_INNER_LAMP_STEP, lamp_probs=_LAMP_P_PLAZA,
+                            plaza_rect=plaza_rect)
         _place_artery_lamps(local_map, terrain_data, town_id,
                             "ew", ew_y0, ew_y1, ns_x0, ns_x1, map_w,
-                            step=_INNER_LAMP_STEP, lamp_probs=_LAMP_P_PLAZA)
+                            step=_INNER_LAMP_STEP, lamp_probs=_LAMP_P_PLAZA,
+                            plaza_rect=plaza_rect)
 
     # ── Cardinal N / S ──────────────────────────────────────────────────
     elif role in ("N", "S"):
@@ -1018,10 +1073,14 @@ def generate_town_chunk(
                 jy = ly + rng.randint(-2, 2)
                 if not local_map.in_bounds(jx, jy):
                     continue
+                if not _valid_lamp_pos(local_map, terrain_data, jx, jy,
+                                       plaza_rect=plaza_rect):
+                    continue
                 r = (hash((jx * 7919, jy * 6271, town_id)) & 0xFF) / 255.0
                 wp, sp = _LAMP_P_OUTER
-                if   r < wp:      _set_terrain(local_map, jx, jy, "street_lamp_working",     terrain_data)
-                elif r < wp + sp: _set_terrain(local_map, jx, jy, "street_lamp_sputtering",  terrain_data)
+                from generation.decor_utils import place_decor as _pd_lamp2
+                if   r < wp:      _pd_lamp2(local_map, jx, jy, "street_lamp_working")
+                elif r < wp + sp: _pd_lamp2(local_map, jx, jy, "street_lamp_sputtering")
 
     # ── Per-chunk diagnostic summary ───────────────────────────────────
     from config import DEBUG_MODE as _DBG2
@@ -1492,6 +1551,13 @@ def _place_bell_tower(
             local_map.set_tile(bx_bell, by_bell, bell_terrain,
                                td.get("walkable", False),
                                td.get("transparent", False))
+            # Add decor bell on top for visual/interaction layer
+            from generation.decor_utils import place_decor as _place_bell_decor
+            _BELL_DECOR = {"intact": "intact_bell", "cracked": "cracked_bell",
+                           "spent": "bell_dead", "destroyed": "bell_dead"}
+            _bd_id = _BELL_DECOR.get(bell_state)
+            if _bd_id:
+                _place_bell_decor(local_map, bx_bell, by_bell, _bd_id)
             print(f"[town] bell placed: {bell_terrain} at local ({bx_bell},{by_bell})")
     else:
         print(f"[town] bell NOT placed — bell_state={bell_state!r} not in BELL_TERRAIN")
@@ -1555,8 +1621,38 @@ def _get_block_buildings(district_name: str, building_data: dict) -> list[dict]:
     return pool
 
 
+_CLEAR_TERRAIN = frozenset({
+    "grass", "varied_grass", "gravel", "puddle", "debris_scatter",
+    "packed_earth", "dirt_path", "mud", "tall_grass",
+    # WFC block-fill outputs — must be overwritable so buildings can stamp over them
+    "weedy_cobble",
+    # Flora variants resolved from varied_grass by set_tile → must be overwritable
+    "flower_pilgrims_woe", "flower_murk_violet",
+    "shroom_sulphur_cap", "shroom_prophets_eye",
+})
+
+# Terrain that is NOT a building but should be allowed in the 1-tile buffer zone
+# (roads, cobblestone, flagstone — infrastructure, not structures)
+_BUFFER_EXEMPT = frozenset({
+    "cobblestone", "cobblestone_cracked", "cobblestone_mossy", "flagstone",
+}) | frozenset(f"road_{i}" for i in range(16))
+
+
 def _plot_is_clear(local_map, ox: int, oy: int, w: int, h: int) -> bool:
-    """True if every tile in the rect is still base terrain (grass/cobblestone/gravel)."""
+    """True if the footprint AND a 1-tile clearance buffer are free of buildings.
+
+    The core footprint (ox..ox+w, oy..oy+h) must be entirely base terrain.
+    The 1-tile buffer around it must not contain building tiles (walls, floor,
+    doors) — but roads, cobblestone, and out-of-bounds tiles are allowed in
+    the buffer zone.
+
+    The buffer prevents wall tiles from adjacent buildings ever touching,
+    eliminating cross-junction autotile artifacts and creating natural alleyways.
+
+    Extension point: if a layout has "allow_adjacent": true, callers should
+    skip the buffer check for that layout. No layouts currently use this.
+    """
+    # 1. Core footprint: every tile must be overwritable base terrain
     for x in range(ox, ox + w):
         for y in range(oy, oy + h):
             if not local_map.in_bounds(x, y):
@@ -1564,15 +1660,28 @@ def _plot_is_clear(local_map, ox: int, oy: int, w: int, h: int) -> bool:
             t = local_map.tiles[x, y]["terrain"]
             if isinstance(t, bytes):
                 t = t.decode()
-            if t not in ("grass", "varied_grass", "gravel",
-                         "puddle", "debris_scatter",
-                         "packed_earth", "dirt_path", "mud", "tall_grass",
-                         # WFC block-fill outputs — must be overwritable so buildings can stamp over them
-                         "weedy_cobble",
-                         # Flora variants resolved from varied_grass by set_tile → must be overwritable
-                         "flower_pilgrims_woe", "flower_murk_violet",
-                         "shroom_sulphur_cap", "shroom_prophets_eye"):
+            if str(t) not in _CLEAR_TERRAIN:
                 return False
+
+    # 2. Buffer zone: 1-tile border around footprint must not be a building
+    for x in range(ox - 1, ox + w + 1):
+        for y in range(oy - 1, oy + h + 1):
+            # Skip the core footprint (already checked above)
+            if ox <= x < ox + w and oy <= y < oy + h:
+                continue
+            # Out of bounds is fine — chunk edge, not a building
+            if not local_map.in_bounds(x, y):
+                continue
+            t = local_map.tiles[x, y]["terrain"]
+            if isinstance(t, bytes):
+                t = t.decode()
+            t = str(t)
+            # Allow base terrain and road/infrastructure in buffer
+            if t in _CLEAR_TERRAIN or t in _BUFFER_EXEMPT:
+                continue
+            # Anything else (wall, floor, door, etc.) means a building is adjacent
+            return False
+
     return True
 
 
@@ -1622,6 +1731,19 @@ def _stamp_building_at(
     # Collect special_tiles as world-space item/container spawn specs
     item_specs: list[dict] = []
     for st in building.get("special_tiles", []):
+        # Resolve weighted spawn tables first
+        if st.get("type") == "weighted":
+            _orig_x, _orig_y = st.get("x", 0), st.get("y", 0)
+            table = st.get("spawn_table", [])
+            if not table:
+                continue
+            weights = [e.get("weight", 1) for e in table]
+            chosen = rng.choices(table, weights=weights, k=1)[0]
+            if chosen.get("type") == "empty":
+                continue
+            st = dict(chosen)
+            st["x"] = _orig_x
+            st["y"] = _orig_y
         sx = st.get("x", 0)
         sy = st.get("y", 0)
         if flip_v:
@@ -1640,6 +1762,13 @@ def _stamp_building_at(
                 "kind":       "container",
                 "decor_id":   st.get("decor_id", "barrel"),
                 "loot_pools": st.get("loot_pools", []),
+                "x": ox + sx,
+                "y": oy + sy,
+            })
+        elif st_type == "scene":
+            item_specs.append({
+                "kind":     "scene",
+                "scene_id": st.get("scene_id", ""),
                 "x": ox + sx,
                 "y": oy + sy,
             })

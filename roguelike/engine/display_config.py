@@ -152,6 +152,17 @@ class DisplayConfig:
         self.CALLOUT_CREATURE_SOUNDS: bool = True
         self.CALLOUT_STATUS_EFFECTS:  bool = True
 
+        # Sprint constants
+        self.SPRINT_KEY:          int   = pygame.K_w  # Shift+this key activates sprint
+        self.SPRINT_DURATION:     int   = 8     # turns of sprint effect
+        self.SPRINT_COOLDOWN:     int   = 30    # turns before sprint available again
+        self.SPRINT_SPEED_MULT:   float = 2.0   # player moves twice per action
+        self.SPRINT_HIT_PENALTY:  float = -0.25 # damage multiplier during sprint (additive)
+
+        # Moveset keys
+        self.MOVESET_KEY_1: int = pygame.K_q  # First moveset action
+        self.MOVESET_KEY_2: int = pygame.K_r  # Second moveset action
+
     def init(self) -> None:
         """Call after pygame.init() to load font assets."""
         self._font_sheet.load()

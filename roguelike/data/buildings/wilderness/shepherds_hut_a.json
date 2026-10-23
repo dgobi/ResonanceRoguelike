@@ -1,0 +1,41 @@
+{
+  "id": "shepherds_hut_a",
+  "category": "wilderness",
+  "width": 7,
+  "height": 6,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {},
+  "description": "A shepherd's hut. Barely standing. A mat on the floor, herbs drying from a nail. The hearth holds cold ash.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "#######",
+    "#.....#",
+    "#.....#",
+    "#.....#",
+    "#.....#",
+    "###+###"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "cold_hearth",
+      "loot_pools": ["wilderness_cache"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, "dried_herbs", null, null],
+    [null, null, null, null, null, null, null],
+    [null, "worn_mat", null, null, null, null, null],
+    [null, null, null, null, null, null, null]
+  ]
+}

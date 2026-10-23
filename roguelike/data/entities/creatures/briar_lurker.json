@@ -56,15 +56,31 @@
       {
         "min_cutting_tier": 1,
         "yields": [
-          {"item_id": "fibrous_thorn_mass", "quantity_min": 1, "quantity_max": 2},
-          {"item_id": "briar_sap",          "quantity_min": 0, "quantity_max": 1}
+          {
+            "item_id": "fibrous_thorn_mass",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "briar_sap",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
         ]
       },
       {
         "min_cutting_tier": 2,
         "yields": [
-          {"item_id": "fibrous_thorn_mass", "quantity_min": 2, "quantity_max": 3},
-          {"item_id": "briar_sap",          "quantity_min": 1, "quantity_max": 2}
+          {
+            "item_id": "fibrous_thorn_mass",
+            "quantity_min": 2,
+            "quantity_max": 3
+          },
+          {
+            "item_id": "briar_sap",
+            "quantity_min": 1,
+            "quantity_max": 2
+          }
         ]
       }
     ]
@@ -73,5 +89,7 @@
     "col": 2055,
     "row": 0,
     "sheet": "urizen"
-  }
+  },
+  "can_cross_chunks": true,
+  "speed": 0.45
 }

@@ -14,5 +14,31 @@
   "_essence_note": "Heavier iron, more mass behind the edge. The dissolution is stronger — it cuts deeper into structure.",
   "on_use": "equip_toggle",
   "consumed_on_use": false,
-  "keywords": [{"tag": "cutting", "tier": 2}]
+  "keywords": [{"tag": "cutting", "tier": 2}],
+  "movesets": [
+    {
+      "id": "press",
+      "name": "Press",
+      "description": "The blade carries momentum. On a killing blow, press forward.",
+      "key": "Q",
+      "turn_cost": 1.0,
+      "cooldown": 3,
+      "range": 1,
+      "damage_mult": 1.0,
+      "callout": "PRESS",
+      "effects": {"free_move_on_kill": true, "on_kill_only": true}
+    },
+    {
+      "id": "rending_strike",
+      "name": "Rending Strike",
+      "description": "Tear through what protects. The armour will not survive.",
+      "key": "R",
+      "turn_cost": 1.2,
+      "cooldown": 6,
+      "range": 1,
+      "damage_mult": 1.0,
+      "callout": "REND",
+      "effects": {"destroy_armour": true, "screen_shake": 3}
+    }
+  ]
 }

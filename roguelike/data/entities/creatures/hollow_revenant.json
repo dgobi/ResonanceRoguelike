@@ -53,16 +53,36 @@
       {
         "min_cutting_tier": 1,
         "yields": [
-          {"item_id": "revenant_husk", "quantity_min": 1, "quantity_max": 1},
-          {"item_id": "grave_dust",    "quantity_min": 0, "quantity_max": 1}
+          {
+            "item_id": "revenant_husk",
+            "quantity_min": 1,
+            "quantity_max": 1
+          },
+          {
+            "item_id": "grave_dust",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
         ]
       },
       {
         "min_cutting_tier": 2,
         "yields": [
-          {"item_id": "revenant_husk",     "quantity_min": 1, "quantity_max": 2},
-          {"item_id": "grave_dust",        "quantity_min": 1, "quantity_max": 1},
-          {"item_id": "compressed_marrow", "quantity_min": 0, "quantity_max": 1}
+          {
+            "item_id": "revenant_husk",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "grave_dust",
+            "quantity_min": 1,
+            "quantity_max": 1
+          },
+          {
+            "item_id": "compressed_marrow",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
         ]
       }
     ]
@@ -71,5 +91,7 @@
     "col": 2055,
     "row": 0,
     "sheet": "urizen"
-  }
+  },
+  "can_cross_chunks": true,
+  "speed": 0.8
 }

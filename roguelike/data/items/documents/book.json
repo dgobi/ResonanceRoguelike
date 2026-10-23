@@ -1,0 +1,11 @@
+{
+  "id": "book",
+  "name": "a book",
+  "description": "Bound pages. Still legible in places.",
+  "tile": "document",
+  "category": "document",
+  "weight": 0.3,
+  "stackable": false,
+  "on_use": "read",
+  "keywords": [{"tag": "fibrous", "tier": 1}]
+}

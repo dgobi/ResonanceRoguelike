@@ -1,0 +1,10 @@
+{
+  "id": "waystone_mountain_a",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Ghourkh keth.\nMnaekh tharrk.", "damaged": false, "deep_tongue": true}]
+}

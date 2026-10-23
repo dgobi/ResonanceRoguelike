@@ -1,0 +1,10 @@
+{
+  "id": "waystone_forest_a",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Greth kur.\nVrath sketh.", "damaged": false, "deep_tongue": true}]
+}

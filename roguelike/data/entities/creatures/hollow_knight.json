@@ -92,5 +92,7 @@
         181
       ]
     }
-  }
+  },
+  "can_cross_chunks": true,
+  "speed": 0.5
 }

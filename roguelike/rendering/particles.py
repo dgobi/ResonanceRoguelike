@@ -41,6 +41,8 @@ class Particle:
     ring_radius: float     = 0.0      # current radius (tiles)
     ring_max_radius: float = 0.0      # max radius before fade
     ring_width: int        = 1        # pixel width
+    # Pool tag for two-pool cap system: "ambient" or "combat"
+    pool: str              = "combat"
 
     @property
     def life_fraction(self) -> float:
@@ -76,20 +78,24 @@ class ParticleSystem:
     Manages all active particles and emitters.
     Updated every frame (real-time delta, not turn-based).
     Drawn as the final pass in the render pipeline, before popups.
+
+    Two-pool cap system:
+      ambient pool (sparkles, flames, smoke, embers): max 200
+      combat pool  (blood, burst, rings, callout):    max 150
+      Total hard cap: 350
     """
 
-    TARGET_FPS  = 60
-    PERF_WINDOW = 30          # frames for rolling average
-    SCALE_STEP  = 0.10        # 10% cap adjustment per trigger
-    MAX_PARTICLES = 800       # absolute hard ceiling
-    _cap: float = 500.0       # current soft cap (adaptive)
+    AMBIENT_CAP = 200
+    COMBAT_CAP  = 150
+    MAX_PARTICLES = AMBIENT_CAP + COMBAT_CAP
 
     def __init__(self) -> None:
         self.particles:   list[Particle]            = []
         self.emitters:    dict[str, ParticleEmitter] = {}
-        self._frame_times: list[float]              = []
         self._last_frame:  float                    = time.monotonic()
-        self._cap_cooldown: float                   = 0.0
+        # Per-pool counts — recalculated each update() for accuracy
+        self._ambient_count: int = 0
+        self._combat_count:  int = 0
         # Shared scratch surface — avoids per-particle allocations in draw()
         self._scratch: "pygame.Surface | None"  = None
         self._scratch_size: tuple[int, int]     = (0, 0)
@@ -108,21 +114,60 @@ class ParticleSystem:
 
     # ── Manual one-shot emission ───────────────────────────────────
 
+    def _pool_count(self, pool: str) -> int:
+        """Return cached pool count (refreshed each update())."""
+        return self._ambient_count if pool == "ambient" else self._combat_count
+
+    def _pool_cap(self, pool: str) -> int:
+        """Return the cap for a given pool."""
+        return self.AMBIENT_CAP if pool == "ambient" else self.COMBAT_CAP
+
+    def _recount_pools(self) -> None:
+        """Recount pool sizes from the particle list."""
+        a = c = 0
+        for p in self.particles:
+            if p.pool == "ambient":
+                a += 1
+            else:
+                c += 1
+        self._ambient_count = a
+        self._combat_count  = c
+
     def emit(self, particle: Particle) -> None:
-        """Directly add a particle. Respects cap."""
-        if len(self.particles) < int(self._cap):
-            self.particles.append(particle)
+        """Directly add a particle. Respects pool cap."""
+        if particle.pool == "ambient":
+            if self._ambient_count >= self.AMBIENT_CAP:
+                return
+            self._ambient_count += 1
+        else:
+            if self._combat_count >= self.COMBAT_CAP:
+                return
+            self._combat_count += 1
+        self.particles.append(particle)
 
     def emit_burst(self, particles: list[Particle]) -> None:
-        """Add multiple particles at once."""
-        remaining = max(0, int(self._cap) - len(self.particles))
-        for p in particles[:remaining]:
+        """Add multiple particles at once. Respects pool caps."""
+        if not particles:
+            return
+        pool = particles[0].pool
+        if pool == "ambient":
+            remaining = max(0, self.AMBIENT_CAP - self._ambient_count)
+        else:
+            remaining = max(0, self.COMBAT_CAP - self._combat_count)
+        added = particles[:remaining]
+        for p in added:
             self.particles.append(p)
+        if pool == "ambient":
+            self._ambient_count += len(added)
+        else:
+            self._combat_count += len(added)
 
     def clear(self) -> None:
         """Remove all active particles and emitters."""
         self.particles.clear()
         self.emitters.clear()
+        self._ambient_count = 0
+        self._combat_count  = 0
 
     # ── Update (call every frame) ──────────────────────────────────
 
@@ -133,9 +178,6 @@ class ParticleSystem:
         viewport_w/h: game map area in pixels.
         zoom: current zoom level (tiles to pixels).
         """
-        self._track_performance(dt)
-        self._cap_cooldown = max(0.0, self._cap_cooldown - dt)
-
         # Emit from active emitters
         for emitter in self.emitters.values():
             if not emitter.active or emitter.rate <= 0:
@@ -144,7 +186,7 @@ class ParticleSystem:
             while emitter._accumulator >= 1.0:
                 emitter._accumulator -= 1.0
                 p = _make_particle(emitter, viewport_w, viewport_h, zoom)
-                if p and len(self.particles) < int(self._cap):
+                if p and len(self.particles) < self.MAX_PARTICLES:
                     self.particles.append(p)
 
         # Update particles
@@ -184,26 +226,8 @@ class ParticleSystem:
         # Hard cap: if update() grew the list past MAX_PARTICLES, trim oldest first.
         if len(self.particles) > self.MAX_PARTICLES:
             self.particles = self.particles[-self.MAX_PARTICLES:]
-
-    def _track_performance(self, dt: float) -> None:
-        fps = 1.0 / dt if dt > 0 else 999.0
-        self._frame_times.append(fps)
-        if len(self._frame_times) > self.PERF_WINDOW:
-            self._frame_times.pop(0)
-        if len(self._frame_times) < self.PERF_WINDOW:
-            return
-        if self._cap_cooldown > 0:
-            return
-        avg_fps = sum(self._frame_times) / len(self._frame_times)
-        if avg_fps < 50 and self._cap > 100:
-            self._cap *= (1.0 - self.SCALE_STEP)
-            self._cap_cooldown = 5.0
-            print(f"[particles] cap reduced to {self._cap:.0f}"
-                  f" (avg {avg_fps:.1f} fps)")
-        elif avg_fps > 65 and self._cap < self.MAX_PARTICLES:
-            self._cap = min(self.MAX_PARTICLES,
-                            self._cap * (1.0 + self.SCALE_STEP))
-            self._cap_cooldown = 5.0
+        # Refresh pool counts after pruning dead particles
+        self._recount_pools()
 
     # ── Draw ──────────────────────────────────────────────────────
 
@@ -369,6 +393,41 @@ def make_rain_particle(
     )
 
 
+def make_sprint_streaks(
+        world_x: float,
+        world_y: float,
+        dx: int,
+        dy: int,
+        color: tuple[int, int, int],
+        rng: random.Random,
+) -> list[Particle]:
+    """World-space speed-line streaks for sprint bonus step.
+    4-6 short-lived streaks angled in movement direction."""
+    r, g, b = color
+    n = rng.randint(4, 6)
+    particles = []
+    for _ in range(n):
+        # Scatter origin slightly around tile centre
+        ox = rng.uniform(-0.3, 0.3)
+        oy = rng.uniform(-0.3, 0.3)
+        # Velocity opposite to movement (trails behind)
+        speed = rng.uniform(1.5, 3.0)
+        vx = -dx * speed + rng.uniform(-0.3, 0.3)
+        vy = -dy * speed + rng.uniform(-0.3, 0.3)
+        lt = rng.uniform(0.08, 0.15)  # ~5-9 frames at 60fps
+        particles.append(Particle(
+            x=world_x + 0.5 + ox,
+            y=world_y + 0.5 + oy,
+            vx=vx, vy=vy,
+            lifetime=lt, max_lifetime=lt,
+            r=r, g=g, b=b, alpha=100,
+            size=rng.uniform(2.0, 4.0),
+            space="world", shape="streak",
+            pool="combat",
+        ))
+    return particles
+
+
 def make_fog_patch(
         viewport_w: int,
         viewport_h: int,
@@ -464,6 +523,7 @@ def make_waystone_ring(
         ring_radius=0.0,
         ring_max_radius=4.5,
         ring_width=1,
+        pool="ambient",
     )
 
 
@@ -524,6 +584,7 @@ def make_sparkle(
         alpha=rng.randint(160, 240),   # stored as max alpha
         size=rng.uniform(1.5, 3.5),
         space="world", shape="sparkle",
+        pool="ambient",
     )
 
 
@@ -556,6 +617,7 @@ def make_ember_particles(
             alpha=200,
             size=rng.uniform(1.5, 2.5),
             space="screen", shape="square",
+            pool="ambient",
         ))
     return result
 
@@ -585,6 +647,7 @@ def make_flame_low_particles(
         alpha=180,
         size=rng.uniform(1.0, 2.0),
         space="screen", shape="square",
+        pool="ambient",
     )]
 
 
@@ -612,6 +675,7 @@ def make_flame_med_particles(
             alpha=200,
             size=rng.uniform(1.5, 2.5),
             space="screen", shape="square",
+            pool="ambient",
         ))
     return result
 
@@ -640,6 +704,7 @@ def make_flame_high_particles(
             alpha=220,
             size=rng.uniform(2.0, 3.5),
             space="screen", shape="square",
+            pool="ambient",
         ))
     return result
 
@@ -666,6 +731,7 @@ def make_smoke_incense_particles(
         alpha=120,
         size=rng.uniform(1.5, 2.5),
         space="screen", shape="circle",
+        pool="ambient",
     )]
 
 
@@ -773,6 +839,117 @@ def make_crit_impact_sparkles(
             space="screen", shape="sparkle",
         ))
     return particles
+
+
+def make_resonance_ripple(
+    wx: float,
+    wy: float,
+    rng: "random.Random | None" = None,
+) -> list[Particle]:
+    """Expanding ring of dim dots from waystone/bell.  Pool: ambient."""
+    import math as _m
+    particles = []
+    for i in range(8):
+        angle = (i / 8) * _m.tau
+        particles.append(Particle(
+            x=wx + 0.5,
+            y=wy + 0.5,
+            vx=_m.cos(angle) * 0.033,
+            vy=_m.sin(angle) * 0.033,
+            lifetime=1.5,
+            max_lifetime=1.5,
+            r=DEEP_TONGUE_COLOUR[0],
+            g=DEEP_TONGUE_COLOUR[1],
+            b=DEEP_TONGUE_COLOUR[2],
+            alpha=120,
+            size=1.0,
+            space="world",
+            shape="circle",
+            pool="ambient",
+        ))
+    return particles
+
+
+def make_ground_mist(
+    wx: float,
+    wy: float,
+    rng: "random.Random",
+) -> Particle:
+    """Slow horizontal mist particle at terrain level.  Pool: ambient."""
+    return Particle(
+        x=wx + rng.uniform(0, 1),
+        y=wy + rng.uniform(0.6, 1.0),
+        vx=rng.uniform(0.005, 0.015) * rng.choice([-1, 1]),
+        vy=rng.uniform(-0.002, 0.002),
+        lifetime=rng.uniform(3.0, 5.0),
+        max_lifetime=5.0,
+        r=GROUND_MIST[0],
+        g=GROUND_MIST[1],
+        b=GROUND_MIST[2],
+        alpha=60,
+        size=rng.uniform(1.5, 2.5),
+        space="world",
+        shape="circle",
+        pool="ambient",
+    )
+
+
+def make_dust_mote(
+    wx: float,
+    wy: float,
+    rng: "random.Random",
+) -> Particle:
+    """Slow upward dust mote in abandoned building interiors.  Pool: ambient."""
+    return Particle(
+        x=wx + rng.uniform(0, 1),
+        y=wy + rng.uniform(0, 1),
+        vx=rng.uniform(-0.003, 0.003),
+        vy=-rng.uniform(0.005, 0.012),
+        lifetime=rng.uniform(2.0, 3.0),
+        max_lifetime=3.0,
+        r=DUST_MOTE[0],
+        g=DUST_MOTE[1],
+        b=DUST_MOTE[2],
+        alpha=50,
+        size=1.0,
+        space="world",
+        shape="circle",
+        pool="ambient",
+    )
+
+
+def make_corruption_wisp(
+    wx: float,
+    wy: float,
+    exposure: float,
+    rng: "random.Random",
+) -> Particle:
+    """Dark purple wisp orbiting the player.  Pool: ambient.
+
+    Orbit speed and alpha scale with resonance_exposure (0.5–1.5).
+    """
+    import math as _m
+    angle = rng.uniform(0, _m.tau)
+    orbit_r = 1.5
+    speed = 0.02 + (exposure - 0.5) * 0.04  # faster at higher exposure
+    alpha = int(40 + (exposure - 0.5) * 100)
+    alpha = min(160, max(40, alpha))
+    return Particle(
+        x=wx + 0.5 + orbit_r * _m.cos(angle),
+        y=wy + 0.5 + orbit_r * _m.sin(angle),
+        vx=-_m.sin(angle) * speed,
+        vy=_m.cos(angle) * speed,
+        lifetime=rng.uniform(1.0, 1.8),
+        max_lifetime=1.8,
+        r=CORRUPTION_WISP[0],
+        g=CORRUPTION_WISP[1],
+        b=CORRUPTION_WISP[2],
+        alpha=alpha,
+        size=rng.uniform(1.0, 2.0),
+        space="world",
+        shape="circle",
+        pool="ambient",
+    )
 
 
 def _make_particle(

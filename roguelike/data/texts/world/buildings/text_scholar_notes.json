@@ -1,0 +1,10 @@
+{
+  "id": "text_scholar_notes",
+  "title": "Field Notes — Incomplete",
+  "type": "notes",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "teach_words": {"count": 1, "categories": ["place", "legacy"], "tier": 1},
+  "pages": [{"text": "The marks on the standing stones are not decorative. I am certain of this.\nThey follow a grammar. Subject, then state, then object — I think.\nVrath appears at every threshold. Every door. Every edge.\nIf vrath means what I think it means, the builders were obsessed with what separates one thing from another.\nI never finished the work. The bell made that impossible.", "damaged": false}]
+}

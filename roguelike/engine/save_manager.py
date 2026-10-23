@@ -557,6 +557,7 @@ def _serialize_player(engine: "Engine") -> dict:
             "taught_texts":       list(p.language.taught_texts),
             "recovered_spans":    [list(s) for s in p.language.recovered_spans],
             "recovered_text":     {str(k): v for k, v in p.language.recovered_text.items()},
+            "shown_lexicon_hint": p.language.shown_lexicon_hint,
         } if getattr(p, "language", None) else None,
         "perks": {
             "acquired":        list(p.perks.acquired),
@@ -578,12 +579,24 @@ def _serialize_player(engine: "Engine") -> dict:
             "exposure":   engine.resonance_exposure,
             "corruption": engine.corruption,
             "thresholds": list(getattr(engine, "_corruption_thresholds", set())),
+            "pull_thresholds": list(getattr(engine, "_pull_thresholds_fired", set())),
         },
         "weather": getattr(engine, "weather", None) and engine.weather.to_dict(),
         "live_pursuers": [
             {"entity": _serialize_entity(e), "wx": wx, "wy": wy, "submap_id": sub_id}
             for e, wx, wy, sub_id in getattr(engine, "_live_pursuers", [])
         ],
+        "pending_pursuer_arrivals": [
+            {"entity": _serialize_entity(pa["entity"]),
+             "entry_x": pa["entry_x"], "entry_y": pa["entry_y"],
+             "delay": pa["delay"]}
+            for pa in getattr(engine, "_pending_pursuer_arrivals", [])
+        ],
+        "sprint_turns_remaining":    getattr(engine, "sprint_turns_remaining", 0),
+        "sprint_cooldown_remaining": getattr(engine, "sprint_cooldown_remaining", 0),
+        "player_move_accumulator":   getattr(engine, "player_move_accumulator", 0.0),
+        "moveset_cooldowns":         getattr(engine, "moveset_cooldowns", {}),
+        "creature_knowledge":        getattr(engine, "creature_knowledge", {}),
     }
 
 
@@ -672,6 +685,7 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
             tuple(eval(k)): v
             for k, v in ld.get("recovered_text", {}).items()
         }
+        lang.shown_lexicon_hint = ld.get("shown_lexicon_hint", False)
         p.language = lang
 
     if data.get("perks"):
@@ -700,6 +714,7 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
         engine.resonance_exposure      = r.get("exposure", 0.0)
         engine.corruption              = r.get("corruption", 0.0)
         engine._corruption_thresholds  = set(r.get("thresholds", []))
+        engine._pull_thresholds_fired  = set(r.get("pull_thresholds", []))
 
     # Weather state
     if data.get("weather") and hasattr(engine, "weather"):
@@ -713,6 +728,25 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
         ents = _deserialize_entities([lp["entity"]], engine)
         if ents:
             engine._live_pursuers.append((ents[0], lp["wx"], lp["wy"], lp.get("submap_id")))
+
+    # Pending pursuer arrivals
+    engine._pending_pursuer_arrivals = []
+    for pa in data.get("pending_pursuer_arrivals", []):
+        ents = _deserialize_entities([pa["entity"]], engine)
+        if ents:
+            engine._pending_pursuer_arrivals.append({
+                "entity":  ents[0],
+                "entry_x": pa["entry_x"],
+                "entry_y": pa["entry_y"],
+                "delay":   pa["delay"],
+            })
+
+    # Sprint state
+    engine.sprint_turns_remaining    = data.get("sprint_turns_remaining", 0)
+    engine.sprint_cooldown_remaining = data.get("sprint_cooldown_remaining", 0)
+    engine.player_move_accumulator   = data.get("player_move_accumulator", 0.0)
+    engine.moveset_cooldowns         = data.get("moveset_cooldowns", {})
+    engine.creature_knowledge        = data.get("creature_knowledge", {})
 
     # Restore equipped items after inventory is fully reconstructed
     _restore_equipment(p, data.get("equipment", {}), engine.data)
@@ -805,6 +839,7 @@ def _serialize_entity(entity: "Actor") -> dict:
         "home_x":   ai.home_x         if ai else None,
         "home_y":   ai.home_y         if ai else None,
         "pursuit_turns_without_contact": ai.pursuit_turns_without_contact if ai else 0,
+        "move_accumulator": ai.move_accumulator if ai else 0.0,
         "faction":  percep.faction    if percep else None,
         "hostile_to": percep.hostile_to if percep else None,
         "sight_radius":   percep.sight_radius   if percep else 8,
@@ -867,6 +902,7 @@ def _deserialize_entities(
                 ai.home_x = d["home_x"]
                 ai.home_y = d["home_y"]
             ai.pursuit_turns_without_contact = d.get("pursuit_turns_without_contact", 0)
+            ai.move_accumulator = d.get("move_accumulator", 0.0)
 
         restored.append(actor)
 

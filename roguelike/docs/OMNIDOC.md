@@ -2116,3 +2116,9 @@ Full inventory UI opened with `I`.
 | `D` | Drop to ground |
 | `Enter` / `U` | Use item |
 | `Esc` | Close |
+
+
+-we need to add a critical hit system, natural for perk tie-in, needs special callout
+-[future settings option when we implement that screen] we should ultimately be able to enable damage numbers as text callouts
+
+

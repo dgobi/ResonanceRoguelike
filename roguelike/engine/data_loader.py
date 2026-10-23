@@ -25,7 +25,7 @@ class DataLoader:
         self.structures: dict = self._load_dir("buildings")
         self.biomes:     dict = self._load_dir("biomes")
         self.entrances:   dict = self._load_dir("entrances")
-        self.texts:       dict = self._load_dir("texts")
+        self.texts:       dict = self._load_dir("texts", exclude={"text_item_map.json"})
         self.perks:       dict = self._load_dir("perks")
         self.bodies:      dict = self._load_dir("bodies")
         self.deep_tongue:       dict = self._load_deep_tongue()
@@ -42,8 +42,35 @@ class DataLoader:
         self.decoratives: dict = {e["id"]: e for e in _decor_list if "id" in e}
         self.loot_pools: dict = self._load_dir("loot_pools")
         print(f"  Loot pools loaded: {len(self.loot_pools)}")
+        self.scenes:     dict = self._load("scenes.json")
+        self.text_item_map: dict = self._load("texts/text_item_map.json")
+        self._validate_deep_tongue_texts()
 
     # ------------------------------------------------------------------ #
+
+    def _validate_deep_tongue_texts(self) -> None:
+        """In DEBUG_MODE, validate all deep_tongue texts against the lexicon."""
+        from config import DEBUG_MODE
+        if not DEBUG_MODE:
+            return
+        from engine.language_system import validate_deep_tongue_text
+        for text_id, text_def in self.texts.items():
+            is_deep = text_def.get("deep_tongue", False)
+            if not is_deep:
+                pages = text_def.get("pages", [])
+                if pages and pages[0].get("deep_tongue", False):
+                    is_deep = True
+            if not is_deep:
+                continue
+            body = ""
+            pages = text_def.get("pages", [])
+            if pages:
+                body = pages[0].get("text", "")
+            if not body:
+                continue
+            unknown = validate_deep_tongue_text(body, self.deep_tongue)
+            if unknown:
+                print(f"  [LANG] {text_id} contains non-lexicon tokens: {unknown}")
 
     def _load(self, relative_path: str) -> dict:
         path = self.root / relative_path

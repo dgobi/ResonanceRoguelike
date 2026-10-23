@@ -1,0 +1,20 @@
+{
+  "id": "musk_pellet",
+  "name": "musk pellet",
+  "category": "wildcrafting",
+  "description": "Dry the musk gland until it hardens. The smell will scatter anything with a nose.",
+  "known": true,
+  "requires_single_item": [
+    {"tag": "viscous", "min_tier": 1},
+    {"tag": "purgative", "min_tier": 1}
+  ],
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 1}
+  ],
+  "result_item": "musk_pellet",
+  "passive_processing": true,
+  "processing_turns": 10,
+  "processing_source": "drying",
+  "processing_decor": "drying_herb",
+  "completion_message": "The pellet has dried. The smell is contained. For now."
+}

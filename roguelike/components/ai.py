@@ -52,6 +52,7 @@ class AI:
         self.target_y:       int | None = None
         self.memory_turns:   int        = 0
         self.pursuit_turns_without_contact: int = 0
+        self.move_accumulator: float = 0.0
 
     def set_home(self, x: int, y: int) -> None:
         self.home_x = x

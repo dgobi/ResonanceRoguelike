@@ -1,0 +1,10 @@
+{
+  "id": "waystone_fallback_a",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Vrath keth.\nKeth sketh.", "damaged": false, "deep_tongue": true}]
+}

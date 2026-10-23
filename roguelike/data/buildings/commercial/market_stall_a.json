@@ -36,6 +36,14 @@
       "loot_pools": [
         "storage_general"
       ]
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "text_market_notice",
+      "note": "Suspension notice on counter"
     }
   ],
   "note": "PLACEHOLDER — redesign. South row open (null) = open frontage onto street. Shelf = worn_stone."

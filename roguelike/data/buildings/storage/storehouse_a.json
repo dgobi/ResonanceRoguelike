@@ -178,6 +178,14 @@
       "loot_pools": [
         "storage_general"
       ]
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "text_storehouse_manifest",
+      "note": "Supply manifest on bench"
     }
   ]
 }

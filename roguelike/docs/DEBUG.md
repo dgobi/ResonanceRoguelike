@@ -66,6 +66,9 @@ A text input opens at the bottom of the screen. Type a command and press Enter.
 |---|---|---|
 | `spawn_creature <id>` | Spawns creature on nearest adjacent walkable tile | `spawn_creature bog_wraith` |
 | `spawn_item <id>` | Drops item at player's current position | `spawn_item binding_knife` |
+| `teach_word <word_id>` | Teach a deep tongue word to player | `teach_word vrath` |
+| `list_known` | List all known deep tongue words by category | `list_known` |
+| `show_lexicon` | Show full lexicon with known/unknown markers | `show_lexicon` |
 
 **Valid creature IDs:**
 ```

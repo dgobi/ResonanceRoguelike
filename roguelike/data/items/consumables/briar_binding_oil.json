@@ -1,0 +1,18 @@
+{
+  "id": "briar_binding_oil",
+  "name": "briar binding oil",
+  "description": "The sap of the briar lurker, rendered to a coating. What it binds, stays bound.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": true,
+  "on_use": "apply_to_weapon",
+  "apply_message": "The binding takes. The blade holds.",
+  "temporary_essence": [
+    {"essence": "Binding", "strength": 0.5, "hits": 8}
+  ],
+  "keywords": [
+    {"tag": "viscous", "tier": 2},
+    {"tag": "binding", "tier": 2}
+  ]
+}

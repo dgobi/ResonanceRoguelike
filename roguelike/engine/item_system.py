@@ -53,7 +53,19 @@ class ItemSystem:
         if not text_def:
             engine.log.add(f"[DEBUG] text '{text_id}' not found.", AGED_WOOD)
             return False
-        engine.text_reader.open_text(text_def)
+        # Check item definition for render_mode — deep_tongue items use ziggurat panel
+        item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
+        item_render_mode = item_def.get("render_mode", "")
+        if item_render_mode == "deep_tongue":
+            engine.text_reader.open_text(
+                text_def,
+                panel_style="ziggurat",
+                text_align="center",
+                line_spacing_bonus=6,
+                panel_size="inscription",
+            )
+        else:
+            engine.text_reader.open_text(text_def)
         # Teach deep tongue words if text has teach_words block — once per text_id
         if text_def.get("teach_words"):
             lang = getattr(engine.player, "language", None)
@@ -110,6 +122,16 @@ class ItemSystem:
             engine.log.add(msg, CLEAR_WATER)
         else:
             engine.log.add("The liquid steadies something.", CLEAR_WATER)
+
+        # Transition to empty form if defined (e.g. water_skin → empty_water_skin)
+        item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
+        empty_id = item_def.get("empty_form")
+        if empty_id:
+            inv = getattr(engine.player, "inventory", None)
+            if inv:
+                empty = engine.item_factory.create(empty_id)
+                if empty:
+                    inv.add(empty)
         return True   # consumed
 
     def _use_heal_minor(self, item: "Item", engine: "Engine") -> bool:
@@ -321,6 +343,91 @@ class ItemSystem:
         apply_msg = item_def.get("apply_message", f"The blade is coated.")
         engine.log.add(apply_msg, RESONANCE_MID)
         return True  # consumed
+
+    def _use_learn_deep_word(self, item: "Item", engine: "Engine") -> bool:
+        """Consume tincture to learn a random tier-1 deep tongue word."""
+        lang = getattr(engine.player, "language", None)
+        if lang is None:
+            engine.log.add("Nothing stirs.", WORN_STONE)
+            return False
+        from engine.language_system import learn_from_category
+        # Use waystone category pool for the current biome
+        chunk = engine.world_map.get(engine.world_x, engine.world_y) if engine.world_map else None
+        biome_id = getattr(chunk, "biome_id", "forest") if chunk else "forest"
+        cats = engine._WAYSTONE_CATEGORIES.get(biome_id, engine._WAYSTONE_DEFAULT)
+        cat = engine.rng.choice(cats)
+        ok, wid = learn_from_category(cat, 1, "text", lang,
+                                       engine.data.deep_tongue, engine.rng)
+        item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
+        msg = item_def.get("use_message", "A word rises from the marrow. It was always there.")
+        if ok:
+            wdef = engine.data.deep_tongue.get(wid, {})
+            deep = wdef.get("deep", wid)
+            common = wdef.get("common", "")
+            lang.translation_events[wid] = engine.world_time.turn
+            engine.log.add(msg, DEEP_TONGUE_COLOUR)
+            engine.log.add(
+                f"  [{deep}]: {common}.",
+                DEEP_TONGUE_COLOUR,
+            )
+            engine._maybe_show_lexicon_hint()
+        else:
+            engine.log.add("The liquid is inert. Nothing remains to learn from it.", WORN_STONE)
+        return True  # consumed
+
+    def _use_apply_to_armor(self, item: "Item", engine: "Engine") -> bool:
+        """Apply a temporary AV bonus to equipped torso armour."""
+        equip = getattr(engine.player, "equipment", None)
+        if equip is None:
+            engine.log.add("Nothing to apply it to.", WORN_STONE)
+            return False
+        torso = equip.slots.get("armor_torso")
+        if torso is None:
+            engine.log.add("No armour worn.", WORN_STONE)
+            return False
+        item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
+        bonus = item_def.get("armor_bonus", 1)
+        hits = item_def.get("armor_hits", 20)
+        # Store temporary armor bonus on the armor item
+        torso._temp_av_bonus = getattr(torso, "_temp_av_bonus", 0) + bonus
+        torso._temp_av_hits = hits
+        msg = item_def.get("apply_message", "The armour hardens. Briefly.")
+        engine.log.add(msg, OLD_GOLD)
+        return True  # consumed
+
+    def _use_consume_wight_concentrate(self, item: "Item", engine: "Engine") -> bool:
+        """Consume wight concentrate: resonance, corruption, temporary true_sight."""
+        item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
+        # Warning prompt
+        warning = item_def.get("warning_prompt", "This will change you.")
+        engine.log.add(f"{warning} [Y/N]", MSG_DANGER)
+        engine._pending_consume = {
+            "item": item,
+            "item_def": item_def,
+        }
+        return False  # not consumed yet — awaiting confirmation
+
+    def _use_apply_stalker_unguent(self, item: "Item", engine: "Engine") -> bool:
+        """Apply speed bonus to player for N turns."""
+        item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
+        bonus = item_def.get("speed_bonus", 0.2)
+        duration = item_def.get("duration_turns", 15)
+        engine.player_speed_bonus = bonus
+        engine.player_speed_bonus_turns = duration
+        msg = item_def.get("use_message", "The unguent sinks in. Something quickens.")
+        engine.log.add(msg, LIFE_GREEN)
+        return True  # consumed
+
+    def _use_throw_musk_pellet(self, item: "Item", engine: "Engine") -> bool:
+        """Throw musk pellet — creates disruption zone. Uses placement cursor."""
+        item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
+        engine._pending_throw = {
+            "item": item,
+            "item_def": item_def,
+        }
+        # Activate placement cursor for throw targeting
+        engine.log.add("Choose a target tile.", UI_TEXT_MID)
+        return False  # not consumed yet — awaiting target selection
 
 
 # ------------------------------------------------------------------ #

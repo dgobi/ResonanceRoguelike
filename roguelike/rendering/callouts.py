@@ -129,7 +129,13 @@ class CalloutSystem:
 
             text_surf = font.render(c.text, True, (c.r, c.g, c.b))
             text_surf.set_alpha(alpha)
-            surf.blit(text_surf, (sx - text_surf.get_width() // 2, sy))
+            # Clamp position to viewport bounds
+            draw_x = sx - text_surf.get_width() // 2
+            draw_y = sy
+            if viewport is not None:
+                draw_x = max(viewport.left, min(viewport.right - text_surf.get_width(), draw_x))
+                draw_y = max(viewport.top, min(viewport.bottom - text_surf.get_height(), draw_y))
+            surf.blit(text_surf, (draw_x, draw_y))
 
         if viewport is not None:
             surf.set_clip(None)

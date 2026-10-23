@@ -21,6 +21,7 @@ class Language:
     taught_texts:       set[str]          = field(default_factory=set)
     recovered_spans:    set[tuple]        = field(default_factory=set)
     recovered_text:     dict[tuple, str]  = field(default_factory=dict)
+    shown_lexicon_hint: bool              = False
 
     def knows(self, word: str) -> bool:
         return word.lower() in self.known_deep_words

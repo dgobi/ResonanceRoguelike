@@ -13,5 +13,31 @@
   "essence_strength": 0.5,
   "on_use": "equip_toggle",
   "consumed_on_use": false,
-  "keywords": [{"tag": "cutting", "tier": 2}, {"tag": "corrosive", "tier": 2}]
+  "keywords": [{"tag": "cutting", "tier": 2}, {"tag": "corrosive", "tier": 2}],
+  "movesets": [
+    {
+      "id": "corrode",
+      "name": "Corrode",
+      "description": "The blade leaves something behind in the wound.",
+      "key": "Q",
+      "turn_cost": 1.0,
+      "cooldown": 8,
+      "range": 1,
+      "damage_mult": 1.0,
+      "callout": "CORRODE",
+      "effects": {"reduce_av": 1}
+    },
+    {
+      "id": "seep",
+      "name": "Seep",
+      "description": "On the killing stroke, the dissolution pools.",
+      "key": "R",
+      "turn_cost": 1.0,
+      "cooldown": 12,
+      "range": 1,
+      "damage_mult": 1.0,
+      "callout": "SEEP",
+      "effects": {"place_pool": "dissolution_pool", "pool_turns": 8, "on_kill_only": true}
+    }
+  ]
 }

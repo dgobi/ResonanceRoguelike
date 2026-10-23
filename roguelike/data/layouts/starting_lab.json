@@ -46,7 +46,7 @@
       "x": 4,
       "y": 5,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "inscription",
       "text_id": "lab_inscription_entry",
       "note": "Inscription on west wall of sarcophagus chamber"
     },
@@ -54,7 +54,7 @@
       "x": 5,
       "y": 4,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "lab_label_sarcophagus",
       "note": "Label on sarcophagus exterior"
     },
@@ -62,7 +62,7 @@
       "x": 15,
       "y": 2,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "lab_note_primary_a",
       "note": "Research notes, north bench"
     },
@@ -70,7 +70,7 @@
       "x": 17,
       "y": 2,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "lab_note_primary_b",
       "note": "Research notes, north bench"
     },
@@ -78,7 +78,7 @@
       "x": 19,
       "y": 2,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "deep_tongue_alphabet",
       "note": "Phoneme reference chart on research bench"
     },
@@ -100,7 +100,7 @@
       "x": 25,
       "y": 12,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "lab_note_secondary_a",
       "note": "Secondary researcher notes, south wing"
     },
@@ -108,7 +108,7 @@
       "x": 27,
       "y": 12,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "lab_note_secondary_b",
       "note": "Secondary researcher notes, south wing"
     },
@@ -116,7 +116,7 @@
       "x": 42,
       "y": 5,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "lab_note_final",
       "note": "Final note, east equipment area"
     },
@@ -124,7 +124,7 @@
       "x": 38,
       "y": 2,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "lab_label_equipment",
       "note": "Equipment rack label"
     },
@@ -156,6 +156,17 @@
       "decor_id": "crate",
       "loot_pools": ["storage_tools"],
       "note": "Research supplies — guaranteed crate for testing container interaction"
+    },
+    {
+      "x": 14,
+      "y": 12,
+      "type": "weighted",
+      "spawn_table": [
+        {"item_id": "dried_provisions", "type": "item", "weight": 40},
+        {"item_id": "water_skin", "type": "item", "weight": 30},
+        {"type": "empty", "weight": 30}
+      ],
+      "note": "Probabilistic supply cache — south corridor"
     }
   ],
   "player_start": {

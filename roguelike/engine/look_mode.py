@@ -571,6 +571,14 @@ class LookMode:
                 terrain_id  = subject.get("id", "")
                 terrain_def = engine.data.terrain.get(terrain_id, {})
                 emit = terrain_def.get("resonance_emit", 0.0)
+                # Also check decor layer for resonance_emit
+                _lk_x = subject.get("x", 0)
+                _lk_y = subject.get("y", 0)
+                _lk_did = engine.local_map.decor.get((_lk_x, _lk_y))
+                if _lk_did:
+                    _lk_demit = engine.data.decoratives.get(_lk_did, {}).get("resonance_emit", 0.0)
+                    if _lk_demit > emit:
+                        emit = _lk_demit
                 if emit > 0.0:
                     lbl_s = self._font_small.render(
                         "resonance_emit", True, STONE_BLUE)
@@ -713,8 +721,59 @@ class LookMode:
                 popup.blit(hp_text, (bar_x + bar_total_w + 6, y))
                 y += 14
 
-                # Essence profile — visible with true_sight or DEBUG_MODE
+                # Speed comparison — directly after HP
                 creature_def   = engine.data.entities.get(getattr(entity, "tile", ""), {})
+                _spd = creature_def.get("speed", 1.0)
+                if _spd < 0.5:
+                    _spd_text = "It moves as though mired. You could walk away."
+                elif _spd < 0.75:
+                    _spd_text = "Its pace is laboured. You are swifter."
+                elif _spd < 0.95:
+                    _spd_text = "Slower than you, but not by much."
+                elif _spd <= 1.05:
+                    _spd_text = "It matches your pace."
+                elif _spd <= 1.25:
+                    _spd_text = "It is faster than you."
+                else:
+                    _spd_text = "It is much faster. Do not let it close."
+                _show_num = DEBUG_MODE
+                if not _show_num:
+                    _perks = getattr(engine.player, "perks", None)
+                    if _perks and _perks.has("carrion_eye"):
+                        _show_num = True
+                if _show_num:
+                    _spd_text += f" ({_spd})"
+                popup.blit(
+                    self._font_small.render(_spd_text, True, UI_TEXT_MID),
+                    (UI_PANEL_INSET, y),
+                )
+                y += 14
+
+                # Revealed knowledge (from revelation_lens or creature_knowledge)
+                _ck = getattr(engine, "creature_knowledge", {}).get(
+                    getattr(entity, "tile", ""), {})
+                _show_ck = DEBUG_MODE or _ck
+                if not _show_ck:
+                    _perks_ck = getattr(engine.player, "perks", None)
+                    _show_ck = (_perks_ck and _perks_ck.has("carrion_eye"))
+                if not _show_ck:
+                    _thresholds_ck = getattr(engine, "_corruption_thresholds", set())
+                    _show_ck = "threshold_resonance_sight" in _thresholds_ck
+                if _show_ck and _ck:
+                    for _rw in _ck.get("revealed_weaknesses", []):
+                        popup.blit(
+                            self._font_small.render(f"Weak to: {_rw}", True, LIFE_GREEN),
+                            (UI_PANEL_INSET, y),
+                        )
+                        y += 13
+                    for _rs in _ck.get("revealed_strengths", []):
+                        popup.blit(
+                            self._font_small.render(f"Resists: {_rs}", True, DUSTY_ROSE),
+                            (UI_PANEL_INSET, y),
+                        )
+                        y += 13
+
+                # Essence profile — visible with true_sight or DEBUG_MODE
                 essence_mods   = creature_def.get("essence_modifiers", {})
                 if essence_mods:
                     y += 4

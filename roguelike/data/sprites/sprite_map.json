@@ -223,14 +223,164 @@
       "row": 7
     },
     "grey_stone": {
-      "sheet": "urizen",
+      "sheet": "terrain",
+      "col": 0,
+      "row": 12
+    },
+    "grey_stone_1": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 12
+    },
+    "grey_stone_2": {
+      "sheet": "terrain",
+      "col": 2,
+      "row": 12
+    },
+    "grey_stone_3": {
+      "sheet": "terrain",
+      "col": 3,
+      "row": 12
+    },
+    "grey_stone_4": {
+      "sheet": "terrain",
+      "col": 4,
+      "row": 12
+    },
+    "grey_stone_5": {
+      "sheet": "terrain",
+      "col": 5,
+      "row": 12
+    },
+    "grey_stone_6": {
+      "sheet": "terrain",
+      "col": 6,
+      "row": 12
+    },
+    "grey_stone_7": {
+      "sheet": "terrain",
+      "col": 7,
+      "row": 12
+    },
+    "grey_stone_8": {
+      "sheet": "terrain",
+      "col": 8,
+      "row": 12
+    },
+    "grey_stone_9": {
+      "sheet": "terrain",
+      "col": 9,
+      "row": 12
+    },
+    "grey_stone_10": {
+      "sheet": "terrain",
+      "col": 10,
+      "row": 12
+    },
+    "grey_stone_11": {
+      "sheet": "terrain",
+      "col": 11,
+      "row": 12
+    },
+    "grey_stone_12": {
+      "sheet": "terrain",
+      "col": 12,
+      "row": 12
+    },
+    "grey_stone_13": {
+      "sheet": "terrain",
+      "col": 13,
+      "row": 12
+    },
+    "grey_stone_14": {
+      "sheet": "terrain",
       "col": 14,
-      "row": 0
+      "row": 12
+    },
+    "grey_stone_15": {
+      "sheet": "terrain",
+      "col": 15,
+      "row": 12
     },
     "wall": {
-      "sheet": "pixel",
-      "col": 126,
-      "row": 0
+      "sheet": "terrain",
+      "col": 0,
+      "row": 11
+    },
+    "wall_1": {
+      "sheet": "terrain",
+      "col": 1,
+      "row": 11
+    },
+    "wall_2": {
+      "sheet": "terrain",
+      "col": 2,
+      "row": 11
+    },
+    "wall_3": {
+      "sheet": "terrain",
+      "col": 3,
+      "row": 11
+    },
+    "wall_4": {
+      "sheet": "terrain",
+      "col": 4,
+      "row": 11
+    },
+    "wall_5": {
+      "sheet": "terrain",
+      "col": 5,
+      "row": 11
+    },
+    "wall_6": {
+      "sheet": "terrain",
+      "col": 6,
+      "row": 11
+    },
+    "wall_7": {
+      "sheet": "terrain",
+      "col": 7,
+      "row": 11
+    },
+    "wall_8": {
+      "sheet": "terrain",
+      "col": 8,
+      "row": 11
+    },
+    "wall_9": {
+      "sheet": "terrain",
+      "col": 9,
+      "row": 11
+    },
+    "wall_10": {
+      "sheet": "terrain",
+      "col": 10,
+      "row": 11
+    },
+    "wall_11": {
+      "sheet": "terrain",
+      "col": 11,
+      "row": 11
+    },
+    "wall_12": {
+      "sheet": "terrain",
+      "col": 12,
+      "row": 11
+    },
+    "wall_13": {
+      "sheet": "terrain",
+      "col": 13,
+      "row": 11
+    },
+    "wall_14": {
+      "sheet": "terrain",
+      "col": 14,
+      "row": 11
+    },
+    "wall_15": {
+      "sheet": "terrain",
+      "col": 15,
+      "row": 11
     },
     "wall_pillar": {
       "sheet": "urizen",
@@ -699,13 +849,13 @@
     },
     "cobblestone_cracked": {
       "sheet": "terrain",
-      "col": 1,
+      "col": 5,
       "row": 7
     },
     "cobblestone_mossy": {
       "sheet": "terrain",
-      "col": 1,
-      "row": 7
+      "col": 22,
+      "row": 5
     },
     "puddle": {
       "sheet": "terrain",
@@ -714,8 +864,8 @@
     },
     "debris_scatter": {
       "sheet": "terrain",
-      "col": 1,
-      "row": 7
+      "col": 12,
+      "row": 1
     },
     "waystone_plinth": {
       "sheet": "terrain",
@@ -724,7 +874,7 @@
     },
     "stele": {
       "sheet": "terrain",
-      "col": 1,
+      "col": 4,
       "row": 7
     },
     "packed_earth": {
@@ -1037,6 +1187,11 @@
       "col": 18,
       "row": 6
     },
+    "cracked_bell": {
+      "sheet": "terrain",
+      "col": 18,
+      "row": 6
+    },
     "bell_dead": {
       "sheet": "terrain",
       "col": 19,
@@ -1154,12 +1309,12 @@
     },
     "barrel": {
       "sheet": "terrain",
-      "col": 1,
+      "col": 2,
       "row": 7
     },
     "crate": {
       "sheet": "terrain",
-      "col": 2,
+      "col": 6,
       "row": 7
     },
     "sack": {
@@ -1176,6 +1331,21 @@
       "sheet": "terrain",
       "col": 1,
       "row": 7
+    },
+    "vine_growth": {
+      "sheet": "creatures",
+      "col": 0,
+      "row": 2
+    },
+    "vine_eyestalk": {
+      "sheet": "creatures",
+      "col": 1,
+      "row": 2
+    },
+    "vine_spore_vent": {
+      "sheet": "creatures",
+      "col": 2,
+      "row": 2
     }
   }
 }

@@ -92,18 +92,51 @@ def _stamp(
     ox:           int,
     oy:           int,
 ) -> None:
+    import random as _random
     legend = layout["legend"]
+    legend_weights = layout.get("legend_weights", {})
     rows   = layout["layers"]
+    _rng = _random.Random()
 
     for row_idx, row in enumerate(rows):
         for col_idx, ch in enumerate(row):
-            terrain = legend.get(ch)
+            terrain = None
+            if legend_weights:
+                from generation.layout_stamper import _resolve_legend_weights
+                terrain = _resolve_legend_weights(ch, legend_weights, _rng)
+            if terrain is None:
+                terrain = legend.get(ch)
             if terrain is None:
                 continue   # space / null → leave existing tile (wall)
             x = ox + col_idx
             y = oy + row_idx
             if local_map.in_bounds(x, y):
-                _set_tile(local_map, x, y, terrain, terrain_data)
+                # Tiles that should be decor, not terrain
+                _DECOR_IDS = {"waystone_plinth", "stele", "street_lamp_working",
+                              "street_lamp_sputtering", "street_lamp_dead"}
+                if terrain in _DECOR_IDS:
+                    from generation.decor_utils import place_decor as _pd_lab
+                    # Place floor underneath first
+                    _set_tile(local_map, x, y, "floor", terrain_data)
+                    _pd_lab(local_map, x, y, terrain)
+                else:
+                    _set_tile(local_map, x, y, terrain, terrain_data)
+
+
+def _resolve_weighted_special(st: dict, rng) -> dict | None:
+    """Resolve a 'type': 'weighted' special tile entry to a concrete entry."""
+    table = st.get("spawn_table", [])
+    if not table:
+        return None
+    weights = [e.get("weight", 1) for e in table]
+    chosen = rng.choices(table, weights=weights, k=1)[0]
+    if chosen.get("type") == "empty":
+        return None
+    # Build a concrete special tile entry with position from parent
+    result = dict(chosen)
+    result["x"] = st["x"]
+    result["y"] = st["y"]
+    return result
 
 
 def _build_entities(
@@ -114,19 +147,35 @@ def _build_entities(
     local_map:    "LocalMap | None" = None,
     data_loader=None,
 ) -> list:
+    import random as _random
     from entities.item import Item
 
     entities: list = []
+    _rng = _random.Random()
 
     for st in layout.get("special_tiles", []):
+        # Resolve weighted spawn tables
+        if st.get("type") == "weighted":
+            st = _resolve_weighted_special(st, _rng)
+            if st is None:
+                continue
         wx = ox + st["x"]
         wy = oy + st["y"]
 
         if st["type"] == "item":
-            item = item_factory.create(st["item_id"], wx, wy)
+            text_id = st.get("text_id", "")
+            # text_item_map overrides item_id based on text_id
+            item_id = st["item_id"]
+            if text_id and data_loader and hasattr(data_loader, "text_item_map"):
+                mapped = data_loader.text_item_map.get(text_id)
+                if mapped:
+                    item_id = mapped
+                elif text_id:
+                    print(f"[TEXT-MAP] unknown text_id: {text_id}, defaulting to letter")
+                    item_id = "letter"
+            item = item_factory.create(item_id, wx, wy)
             if item:
-                # text_id comes from the layout entry, not the item definition
-                item.text_id = st.get("text_id", "")
+                item.text_id = text_id
                 entities.append(item)
 
         elif st["type"] == "body":

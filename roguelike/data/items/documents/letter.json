@@ -1,0 +1,11 @@
+{
+  "id": "letter",
+  "name": "a letter",
+  "description": "Folded paper. Someone meant to send this.",
+  "tile": "document",
+  "category": "document",
+  "weight": 0.02,
+  "stackable": false,
+  "on_use": "read",
+  "keywords": [{"tag": "fibrous", "tier": 1}]
+}

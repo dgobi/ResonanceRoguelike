@@ -57,16 +57,36 @@
       {
         "min_cutting_tier": 1,
         "yields": [
-          {"item_id": "grave_dust",  "quantity_min": 1, "quantity_max": 2},
-          {"item_id": "animal_bone", "quantity_min": 1, "quantity_max": 2}
+          {
+            "item_id": "grave_dust",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "animal_bone",
+            "quantity_min": 1,
+            "quantity_max": 2
+          }
         ]
       },
       {
         "min_cutting_tier": 2,
         "yields": [
-          {"item_id": "grave_dust",              "quantity_min": 2, "quantity_max": 3},
-          {"item_id": "compressed_marrow",       "quantity_min": 1, "quantity_max": 2},
-          {"item_id": "resonant_bone_fragment",  "quantity_min": 0, "quantity_max": 1}
+          {
+            "item_id": "grave_dust",
+            "quantity_min": 2,
+            "quantity_max": 3
+          },
+          {
+            "item_id": "compressed_marrow",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "resonant_bone_fragment",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
         ]
       }
     ]
@@ -101,5 +121,7 @@
         65
       ]
     }
-  }
+  },
+  "can_cross_chunks": true,
+  "speed": 0.6
 }

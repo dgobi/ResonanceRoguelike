@@ -77,6 +77,15 @@ def trigger_discharge(
             ai.last_known_x   = px
             ai.last_known_y   = py
 
+    # Vine spawn — resonance pulse may seed vine growth in valid biomes
+    vine_cfg = engine.data.entities.get("vine_network", {})
+    spawn_biomes = vine_cfg.get("spawn_biomes", [])
+    chunk = engine.world_map.get(engine.world_x, engine.world_y) if engine.world_map else None
+    biome_id = getattr(chunk, "biome_id", "") if chunk else ""
+    if biome_id in spawn_biomes:
+        from engine.vine_system import spawn_vine_network
+        spawn_vine_network(engine)
+
     # Corruption threshold check
     _check_corruption_thresholds(engine, old_corruption,
                                  engine.corruption, effects)

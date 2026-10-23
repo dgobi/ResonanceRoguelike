@@ -37,7 +37,7 @@
       "x": 1,
       "y": 1,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "world_label_a",
       "note": "Merchant's ledger or inventory list"
     }

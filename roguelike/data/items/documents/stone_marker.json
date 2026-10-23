@@ -1,0 +1,12 @@
+{
+  "id": "stone_marker",
+  "name": "stone marker",
+  "description": "A flat stone, inscribed. Portable.",
+  "tile": "document",
+  "category": "document",
+  "weight": 0.8,
+  "stackable": false,
+  "on_use": "read",
+  "render_mode": "deep_tongue",
+  "keywords": [{"tag": "bony", "tier": 1}]
+}

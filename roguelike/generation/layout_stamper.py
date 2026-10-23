@@ -9,10 +9,30 @@ Rotation convention (each step = 90° CW):
   north = 0   east = 1   south = 2   west = 3
 """
 from __future__ import annotations
+import random as _random
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from world.local_map import LocalMap
+
+
+def _resolve_legend_weights(
+    char: str,
+    legend_weights: dict,
+    rng: "_random.Random",
+) -> str | None:
+    """If char is in legend_weights, roll from the weight table.
+    Returns the chosen tile string, or None for the fixed legend path."""
+    entries = legend_weights.get(char)
+    if not entries:
+        return None
+    tiles = [e["tile"] for e in entries]
+    weights = [e.get("weight", 1) for e in entries]
+    return rng.choices(tiles, weights=weights, k=1)[0]
+
+
+_DECOR_TERRAIN_IDS = {"waystone_plinth", "stele", "street_lamp_working",
+                      "street_lamp_sputtering", "street_lamp_dead"}
 
 
 def _set_tile(
@@ -23,6 +43,11 @@ def _set_tile(
     terrain_data: dict,
 ) -> None:
     if not local_map.in_bounds(x, y):
+        return
+    # Tiles that should be decor, not terrain
+    if terrain in _DECOR_TERRAIN_IDS:
+        from generation.decor_utils import place_decor
+        place_decor(local_map, x, y, terrain)
         return
     # Derive walkable/transparent from terrain.json.
     # Any new terrain added there automatically gets correct behaviour here.
@@ -105,11 +130,18 @@ def stamp_layout(
     origin_y = edge_y - cp["y"]
 
     # Stamp each tile.
+    legend_weights = layout.get("legend_weights", {})
+    _rng = _random.Random()  # seeded by caller if needed
     for ly, row in enumerate(layers):
         for lx, char in enumerate(row):
             if char == " ":
                 continue
-            terrain = legend.get(char)
+            # Check legend_weights first for probabilistic terrain variation
+            terrain = None
+            if legend_weights:
+                terrain = _resolve_legend_weights(char, legend_weights, _rng)
+            if terrain is None:
+                terrain = legend.get(char)
             if terrain is None:
                 continue
             _set_tile(local_map, origin_x + lx, origin_y + ly,
@@ -139,10 +171,16 @@ def stamp_layout_interior(
     origin_y = centre_y - h // 2
 
     stairs_pos: tuple[int, int] | None = None
+    legend_weights = layout.get("legend_weights", {})
+    _rng = _random.Random()
 
     for row_idx, row in enumerate(layers):
         for col_idx, ch in enumerate(row):
-            terrain = legend.get(ch)
+            terrain = None
+            if legend_weights:
+                terrain = _resolve_legend_weights(ch, legend_weights, _rng)
+            if terrain is None:
+                terrain = legend.get(ch)
             if terrain is None:
                 continue
             tx = origin_x + col_idx

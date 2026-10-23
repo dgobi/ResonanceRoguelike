@@ -215,6 +215,71 @@ class TextReader:
 
     RECOVERED = COLDBELL_LIGHT   # pale_cyan — recovered/inferred text
 
+    def _measure_panel_size(
+        self,
+        body: str,
+        title: str | None,
+        font: pygame.font.Font,
+        display_w: int,
+        display_h: int,
+    ) -> tuple[int, int]:
+        """Measure content and return (panel_w, panel_h) to fit it."""
+        lines = body.split("\n") if body else [""]
+        is_deep = (self._panel_style == "ziggurat")
+
+        # Measure widest line
+        max_line_w = 0
+        for line in lines:
+            if is_deep:
+                w = self._measure_deep_tongue_line_width(line)
+            else:
+                w = font.size(line)[0] if line.strip() else 0
+            if w > max_line_w:
+                max_line_w = w
+
+        title_w = font.size(title)[0] if title else 0
+        content_w = max(max_line_w, title_w, 160)
+
+        # Line height
+        line_h = max(font.get_linesize(), GLYPH_SIZE_INLINE) + 4 + self._line_spacing_bonus
+        content_h = len(lines) * line_h
+        if title:
+            content_h += font.get_linesize() + 16
+
+        # Hint row
+        hint_h = font.get_linesize() + 8
+
+        # Panel = content + padding + hint
+        pw = content_w + 120   # 60px each side
+        ph = content_h + 120 + hint_h  # 60px top/bottom + hint
+
+        # Clamp to display
+        pw = min(pw, display_w - 80)
+        ph = min(ph, display_h - 80)
+
+        return pw, ph
+
+    def _measure_deep_tongue_line_width(self, line: str) -> int:
+        """Measure pixel width of a deep tongue inscription line."""
+        if not line.strip():
+            return 0
+        tokens = line.split()
+        total_w = 0
+        for i, token in enumerate(tokens):
+            if i > 0:
+                total_w += 6  # word spacing
+            clean = token.strip(_PUNCT).lower()
+            if clean:
+                total_w += _glyph_word_pw(clean, GLYPH_SIZE_INLINE)
+            # Punctuation width
+            lead = token[:len(token) - len(token.lstrip(_PUNCT))]
+            trail = token[len(token.rstrip(_PUNCT)):]
+            if lead and self._font:
+                total_w += self._font.size(lead)[0]
+            if trail and self._font:
+                total_w += self._font.size(trail)[0]
+        return total_w
+
     def render(self, screen: pygame.Surface, engine=None) -> None:
         if not self.open or not self._def:
             return
@@ -228,17 +293,19 @@ class TextReader:
 
         cond = self._def.get("condition", "worn")
 
-        # Panel rect — "inscription" mode centers a smaller panel
-        if self._panel_size == "inscription":
-            pw = min(420, sw - 120)
-            ph = min(540, sh - 80)
-            frame_rect = pygame.Rect(
-                (sw - pw) // 2, (sh - ph) // 2, pw, ph,
-            )
-        else:
-            p = self.PAD
-            frame_rect = pygame.Rect(p - 10, p - 10,
-                                     sw - (p - 10) * 2, sh - (p - 10) * 2)
+        # Content-sized panel — measure text then size panel to fit
+        pages = self._def.get("pages", [])
+        page_text = pages[0].get("text", "") if pages else ""
+        title = self._def.get("title")
+        is_deep = self._def.get("deep_tongue", False)
+        active_font = self._font_deep if (is_deep and self._font_deep) else self._font
+
+        pw, ph = self._measure_panel_size(
+            page_text, title, active_font, sw, sh,
+        )
+        frame_rect = pygame.Rect(
+            (sw - pw) // 2, (sh - ph) // 2, pw, ph,
+        )
 
         if engine is not None and hasattr(engine, "ui_registry"):
             tint = _TINTS.get(cond, SLATE_DARK)
@@ -360,13 +427,13 @@ class TextReader:
                 (cx, content_bottom - self.FSZ - 4),
             )
 
-        # Close hint
+        # Close hint — centred for inscription, right-aligned for other panels
         hint = self._font.render("ESC / Enter to close", True, self.DIM)
-        screen.blit(
-            hint,
-            (frame_rect.right - UI_PANEL_INSET - hint.get_width(),
-             content_bottom - self.FSZ - 4),
-        )
+        if self._panel_style == "ziggurat":
+            hint_x = frame_rect.x + (frame_rect.width - hint.get_width()) // 2
+        else:
+            hint_x = frame_rect.right - UI_PANEL_INSET - hint.get_width()
+        screen.blit(hint, (hint_x, content_bottom - self.FSZ - 4))
 
     # ------------------------------------------------------------------ #
     #  Deep tongue per-word rendering

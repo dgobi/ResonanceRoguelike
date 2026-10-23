@@ -195,6 +195,13 @@ def _cc_scan_resonance(_parts: list[str], engine: "Engine") -> None:
             terrain_id = str(engine.local_map.tiles["terrain"][x, y])
             td = engine.data.terrain.get(terrain_id, {})
             emit = td.get("resonance_emit", 0.0)
+            # Also check decor layer
+            _dbg_did = engine.local_map.decor.get((x, y))
+            if _dbg_did:
+                _dbg_demit = engine.data.decoratives.get(_dbg_did, {}).get("resonance_emit", 0.0)
+                if _dbg_demit > emit:
+                    emit = _dbg_demit
+                    terrain_id = _dbg_did
             if emit > 0.0:
                 found.append((dist, terrain_id, x, y, emit))
     if not found:
@@ -321,14 +328,14 @@ def _cc_particle_stats(_parts: list[str], engine: "Engine") -> None:
         engine.log.add("[DEBUG] No particle system.", FRESH_WOUND)
         return
     n_particles = len(ps.particles)
-    cap         = int(ps._cap)
+    n_ambient   = ps._pool_count("ambient")
+    n_combat    = ps._pool_count("combat")
     n_emitters  = len(ps.emitters)
-    avg_fps: float = 0.0
-    if ps._frame_times:
-        avg_fps = sum(ps._frame_times) / len(ps._frame_times)
     engine.log.add(
-        f"[particles] active={n_particles}/{cap}  "
-        f"emitters={n_emitters}  avg_fps={avg_fps:.1f}",
+        f"[particles] total={n_particles}/{ps.MAX_PARTICLES}  "
+        f"ambient={n_ambient}/{ps.AMBIENT_CAP}  "
+        f"combat={n_combat}/{ps.COMBAT_CAP}  "
+        f"emitters={n_emitters}",
         AGED_WOOD,
     )
 
@@ -445,8 +452,75 @@ def _cc_toggle_callouts(parts: list[str], engine: "Engine") -> None:
     )
 
 
+def _cc_teach_word(parts: list[str], engine: "Engine") -> None:
+    if len(parts) < 2:
+        engine.log.add("[DEBUG] Usage: teach_word <word_id>", FRESH_WOUND)
+        return
+    word_id = parts[1].lower()
+    wdef = engine.data.deep_tongue.get(word_id)
+    if wdef is None:
+        engine.log.add(f"[DEBUG] Unknown word: {word_id}", FRESH_WOUND)
+        return
+    lang = getattr(engine.player, "language", None)
+    if lang is None:
+        engine.log.add("[DEBUG] Player has no language component.", FRESH_WOUND)
+        return
+    if lang.knows(word_id):
+        engine.log.add(f"[DEBUG] {word_id}: already known", AGED_WOOD)
+        return
+    lang.learn(word_id, engine.world_time.turn)
+    deep = wdef.get("deep", word_id)
+    common = wdef.get("common", "?")
+    engine.log.add(f"[DEBUG] {word_id}: learned ({deep} / {common})", AGED_WOOD)
+
+
+def _cc_list_known(parts: list[str], engine: "Engine") -> None:
+    lang = getattr(engine.player, "language", None)
+    if lang is None or not lang.known_deep_words:
+        engine.log.add("[DEBUG] No words known.", AGED_WOOD)
+        return
+    _CATS = ["cosmic", "body", "time", "place", "people",
+             "action", "essence", "number", "ominous", "legacy"]
+    for cat in _CATS:
+        cat_all = [w for w in engine.data.deep_tongue.values()
+                   if w.get("category") == cat]
+        cat_known = [w for w in cat_all if lang.knows(w["id"])]
+        if not cat_known:
+            continue
+        engine.log.add(
+            f"  {cat.upper()} ({len(cat_known)} known / {len(cat_all)} total)",
+            STEEL_WATER,
+        )
+        for w in cat_known:
+            engine.log.add(
+                f"    {w['id']}: {w.get('deep', '?')} = "
+                f"{w.get('common', '?')} [tier {w.get('tier', 1)}]",
+                STONE_BLUE,
+            )
+
+
+def _cc_show_lexicon(parts: list[str], engine: "Engine") -> None:
+    lang = getattr(engine.player, "language", None)
+    _CATS = ["cosmic", "body", "time", "place", "people",
+             "action", "essence", "number", "ominous", "legacy"]
+    for cat in _CATS:
+        cat_words = [w for w in engine.data.deep_tongue.values()
+                     if w.get("category") == cat]
+        if not cat_words:
+            continue
+        engine.log.add(f"  {cat.upper()} ({len(cat_words)})", STEEL_WATER)
+        for w in cat_words:
+            known = lang and lang.knows(w["id"])
+            mark = "\u2713" if known else " "
+            if known:
+                line = f"    [{mark}] {w['id']}: {w.get('deep', '?')} = {w.get('common', '?')}"
+            else:
+                line = f"    [{mark}] {w['id']}: ???"
+            engine.log.add(line, STONE_BLUE if known else SLATE_DARK)
+
+
 def _cc_help(parts: list[str], engine: "Engine") -> None:
-    for cat in ("RESONANCE", "ENTITIES", "PERKS", "WEATHER", "VISUAL", "SYSTEM"):
+    for cat in ("RESONANCE", "ENTITIES", "PERKS", "WEATHER", "VISUAL", "LANGUAGE", "SYSTEM"):
         items = [(n, m) for n, m in CONSOLE_COMMANDS.items()
                  if m["category"] == cat]
         if not items:
@@ -636,6 +710,25 @@ CONSOLE_COMMANDS: dict = {
         "usage":    "test_camera_drift",
         "desc":     "Teleport player 15 tiles in 4 directions and back. Check corners for drift.",
         "category": "VISUAL",
+    },
+    # LANGUAGE --------------------------------------------------------
+    "teach_word": {
+        "fn":       _cc_teach_word,
+        "usage":    "teach_word <word_id>",
+        "desc":     "Teach a deep tongue word to the player.",
+        "category": "LANGUAGE",
+    },
+    "list_known": {
+        "fn":       _cc_list_known,
+        "usage":    "list_known",
+        "desc":     "List all known deep tongue words by category.",
+        "category": "LANGUAGE",
+    },
+    "show_lexicon": {
+        "fn":       _cc_show_lexicon,
+        "usage":    "show_lexicon",
+        "desc":     "Show full lexicon with known/unknown status.",
+        "category": "LANGUAGE",
     },
     # SYSTEM ----------------------------------------------------------
     "help": {

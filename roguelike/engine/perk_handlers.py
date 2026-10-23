@@ -276,16 +276,124 @@ def system_exp_on_kill(payload: dict) -> dict | None:
 
 
 # ------------------------------------------------------------------ #
+#  The Hollow Road: bone_reader
+# ------------------------------------------------------------------ #
+
+def perk_bone_reader_tile_entered(payload: dict) -> dict | None:
+    """Bone Reader: butchery always at max yield tier. Effect is checked
+    in _interactable_butcher, not here — this handler just marks the
+    perk as active so the butcher can read it."""
+    return None  # actual effect in butchery handler via perks.has("bone_reader")
+
+
+# ------------------------------------------------------------------ #
+#  The Hollow Road: road_knowledge
+# ------------------------------------------------------------------ #
+
+_ROAD_TILES_RK = frozenset(f"road_{i}" for i in range(16)) | {"cobblestone"}
+
+def perk_road_knowledge_tile_entered(payload: dict) -> dict | None:
+    """Road Knowledge: road tiles don't consume sprint charges and
+    grant +1 accumulator during sprint."""
+    engine = payload.get("engine")
+    if engine is None:
+        return None
+    terrain_id = payload.get("terrain_id", "")
+    if terrain_id not in _ROAD_TILES_RK:
+        return None
+    if engine.sprint_turns_remaining > 0:
+        # Refund the sprint charge that was consumed
+        engine.sprint_turns_remaining += 1
+        # Bonus accumulator
+        engine.player_move_accumulator += 1.0
+    return None
+
+
+# ------------------------------------------------------------------ #
+#  The Green Patience: deep_harvest
+# ------------------------------------------------------------------ #
+
+def perk_deep_harvest_tile_entered(payload: dict) -> dict | None:
+    """Deep Harvest: 30% chance harvest doesn't deplete. Actual effect
+    checked in _try_harvest via perks.has('deep_harvest')."""
+    return None  # actual effect in harvest handler
+
+
+# ------------------------------------------------------------------ #
+#  The Green Patience: growth_sense
+# ------------------------------------------------------------------ #
+
+def perk_growth_sense_chunk_entered(payload: dict) -> dict | None:
+    """Growth Sense: on first chunk entry, highlight harvestable plants."""
+    engine = payload.get("engine")
+    if engine is None:
+        return None
+    # Mark nearby harvestable decor with a brief visual pulse
+    for (dx, dy), did in engine.local_map.decor.items():
+        dentry = engine.data.decoratives.get(did, {})
+        if dentry.get("harvestable"):
+            if engine.local_map.in_bounds(dx, dy) and engine.local_map.visible[dx, dy]:
+                engine.callouts.add("*", float(dx), float(dy) - 0.3,
+                                    LIFE_GREEN, lifetime=1.5,
+                                    font_size="creature")
+    return None
+
+
+# ------------------------------------------------------------------ #
+#  The Bound Name: resonance_sink
+# ------------------------------------------------------------------ #
+
+def perk_resonance_sink_turn(payload: dict) -> dict | None:
+    """Resonance Sink: exposure decays 50% faster, corruption threshold +0.2."""
+    engine = payload.get("engine")
+    if engine is None:
+        return None
+    # Extra decay: base is 0.008/turn, add another 0.004 (50% faster)
+    engine.resonance_exposure = max(0.0, engine.resonance_exposure - 0.004)
+    return None
+
+
+# ------------------------------------------------------------------ #
+#  The Bound Name: corruption_channel
+# ------------------------------------------------------------------ #
+
+def perk_corruption_channel_turn(payload: dict) -> dict | None:
+    """Corruption Channel: set flat damage bonus based on corruption level.
+    +1 at corruption >= 0.40, +2 at >= 0.70. Applied in _player_attack via
+    fighter.corruption_channel_bonus (additive to weapon damage_bonus)."""
+    engine = payload.get("engine")
+    if engine is None:
+        return None
+    fighter = getattr(engine.player, "fighter", None)
+    if fighter is None:
+        return None
+    corruption = getattr(engine, "corruption", 0.0)
+    if corruption >= 0.70:
+        fighter.corruption_channel_bonus = 2
+    elif corruption >= 0.40:
+        fighter.corruption_channel_bonus = 1
+    else:
+        fighter.corruption_channel_bonus = 0
+    return None
+
+
+# ------------------------------------------------------------------ #
 #  Handler map — must match JSON "handler" field exactly
 # ------------------------------------------------------------------ #
 
 HANDLER_MAP: dict[str, callable] = {
-    "perk_hardened_step_tile_entered":  perk_hardened_step_tile_entered,
-    "perk_carrion_eye_entity_killed":   perk_carrion_eye_entity_killed,
-    "handle_marrow_drink_turn":         handle_marrow_drink_turn,
-    "handle_attuned_turn":              handle_attuned_turn,
-    "handle_indifference_turn":         handle_indifference_turn,
-    "handle_lithic_seep_kill":          handle_lithic_seep_kill,
+    "perk_hardened_step_tile_entered":     perk_hardened_step_tile_entered,
+    "perk_carrion_eye_entity_killed":      perk_carrion_eye_entity_killed,
+    "handle_marrow_drink_turn":            handle_marrow_drink_turn,
+    "handle_attuned_turn":                 handle_attuned_turn,
+    "handle_indifference_turn":            handle_indifference_turn,
+    "handle_lithic_seep_kill":             handle_lithic_seep_kill,
+    "perk_bone_reader_tile_entered":       perk_bone_reader_tile_entered,
+    "perk_road_knowledge_tile_entered":    perk_road_knowledge_tile_entered,
+    "perk_deep_harvest_tile_entered":      perk_deep_harvest_tile_entered,
+    "perk_growth_sense_chunk_entered":     perk_growth_sense_chunk_entered,
+    "perk_resonance_sink_turn":            perk_resonance_sink_turn,
+    "perk_corruption_channel_turn":         perk_corruption_channel_turn,
 }
 
 # Tag all handlers so they can be cleared on perk change without

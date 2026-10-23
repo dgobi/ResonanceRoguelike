@@ -579,8 +579,12 @@ class CraftScreen:
                 # requires_single_item
                 _rsi = sel_recipe.get("requires_single_item")
                 if _rsi and dy < max_dy:
-                    _rsi_tags = _rsi.get("tags", [])
-                    _rsi_qty = _rsi.get("max_quantity", 1)
+                    if isinstance(_rsi, list):
+                        _rsi_tags = _rsi
+                        _rsi_qty = 1
+                    else:
+                        _rsi_tags = _rsi.get("tags", [])
+                        _rsi_qty = _rsi.get("max_quantity", 1)
                     _rsi_x = _dx + 4
                     for _ri, _rt in enumerate(_rsi_tags):
                         _rkdef = kw_data.get(_rt["tag"], {})

@@ -1,0 +1,19 @@
+{
+  "id": "wight_concentrate",
+  "name": "wight concentrate",
+  "description": "Concentrated wight residue. Pulsing faintly. What you see after will cost you.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": true,
+  "on_use": "consume_wight_concentrate",
+  "warning_prompt": "This will change you.",
+  "use_message": "Something opens in you. The cost is immediate.",
+  "resonance_add": 0.4,
+  "corruption_add": 0.05,
+  "true_sight_turns": 20,
+  "keywords": [
+    {"tag": "resonant", "tier": 3},
+    {"tag": "volatile", "tier": 2}
+  ]
+}

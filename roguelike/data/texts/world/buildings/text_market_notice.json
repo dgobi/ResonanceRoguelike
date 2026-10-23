@@ -1,0 +1,9 @@
+{
+  "id": "text_market_notice",
+  "title": "Notice of Suspension",
+  "type": "notice",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "pages": [{"text": "By order of the council, the market is suspended until the bells are silent.\nThose found trading during the sounding will be held at the eastern post.\nThis is not a permanent order. This is a precaution.\nThe council meets at the third bell. If the bell sounds.", "damaged": false}]
+}

@@ -273,6 +273,12 @@ def _generate_submap_from_layout(
             })
         elif spec["type"] == "stele":
             local_map.stele_text_ids[(sx, sy)] = spec.get("text_id", "")
+        elif spec["type"] == "scene":
+            entities.append({
+                "kind":     "scene",
+                "scene_id": spec.get("scene_id", ""),
+                "x": sx, "y": sy,
+            })
 
     return local_map, entities, entry_x, entry_y
 
@@ -526,11 +532,13 @@ def _carve_road_path(
     terrain_data: dict,
     w: int,
     h: int,
-) -> None:
+) -> set[tuple[int, int]]:
     """
     Write road_0 tiles along path with 3-tile width (centre + 1 either side
     perpendicular to direction of travel). Never overwrites river_water.
+    Returns the full set of road path tiles (including those skipped due to river).
     """
+    all_road_tiles: set[tuple[int, int]] = set()
     road = terrain_data.get("road_0", terrain_data.get("cobblestone", terrain_data["floor"]))
     for i, (tx, ty) in enumerate(path):
         if i < len(path) - 1:
@@ -552,10 +560,12 @@ def _carve_road_path(
         for ox, oy in offsets:
             fx, fy = tx + ox, ty + oy
             if 0 <= fx < w and 0 <= fy < h and local_map.in_bounds(fx, fy):
+                all_road_tiles.add((fx, fy))
                 cur = str(local_map.tiles[fx, fy]["terrain"])
                 if cur != "river_water":
                     local_map.set_tile(fx, fy, "road_0",
                                        road["walkable"], road["transparent"])
+    return all_road_tiles
 
 
 def _carve_road_network(
@@ -565,17 +575,20 @@ def _carve_road_network(
     w: int,
     h: int,
     rng: random.Random,
-) -> None:
+) -> set[tuple[int, int]]:
     """
     Carve road terrain for all connection pairs in this chunk.
     Uses the pair model so corners/T-junctions/crossroads are correct.
+    Returns the full set of road path tiles (including those over river).
     """
+    all_tiles: set[tuple[int, int]] = set()
     pairs = _road_pairs(connections)
     for a, b in pairs:
         p0 = _road_endpoint(a, w, h, rng)
         p1 = _road_endpoint(b, w, h, rng)
         path = _local_road_walk(p0[0], p0[1], p1[0], p1[1], w, h, rng)
-        _carve_road_path(path, local_map, terrain_data, w, h)
+        all_tiles |= _carve_road_path(path, local_map, terrain_data, w, h)
+    return all_tiles
 
 
 def carve_connectors(
@@ -625,11 +638,175 @@ def carve_connectors(
         )
 
     # Carve road network — skip town chunks (town_gen handles their roads)
+    _road_path_tiles: set[tuple[int, int]] = set()
     if road_edges and town_id == -1:
-        _carve_road_network(
+        _road_path_tiles = _carve_road_network(
             local_map, terrain_data, road_edges,
             map_width, map_height, rng,
         )
+    elif road_edges and town_id >= 0:
+        # Town chunk: connect external road entry points to the nearest
+        # existing town road/path tile so the road network is seamless.
+        _connect_external_roads_to_town(
+            local_map, terrain_data, road_edges,
+            map_width, map_height, rng,
+        )
+
+    # Post-process: place river bank tiles at road-river crossings (fords)
+    if _road_path_tiles and river_edges and town_id == -1:
+        _place_ford_crossings(local_map, terrain_data, map_width, map_height, rng,
+                              _road_path_tiles)
+
+
+_TOWN_ROAD_TILES = frozenset({
+    "road_0", "cobblestone", "flagstone", "cobblestone_cracked",
+    "cobblestone_mossy", "weedy_cobble", "gravel", "dirt_path", "packed_earth",
+})
+
+_TOWN_ROAD_OVERWRITE = frozenset({
+    "grass", "varied_grass", "tall_grass", "mud", "packed_earth",
+})
+
+
+def _connect_external_roads_to_town(
+    local_map: "LocalMap",
+    terrain_data: dict,
+    road_edges: list[str],
+    map_width: int,
+    map_height: int,
+    rng: random.Random,
+) -> None:
+    """Connect external road entry points to the nearest town road tile.
+
+    For each road edge direction, compute the edge entry point, find the
+    nearest existing town road tile, and walk a road_0 path between them.
+    Only overwrites soft terrain — never buildings, walls, or water.
+    """
+    road_td = terrain_data.get("road_0", terrain_data.get("cobblestone",
+                               terrain_data.get("floor", {})))
+    if not road_td:
+        return
+
+    for direction in road_edges:
+        # Entry point at chunk edge
+        ex, ey = _road_endpoint(direction, map_width, map_height, rng)
+
+        # Find nearest town road tile by Manhattan distance
+        best_dist = map_width + map_height
+        best_x, best_y = map_width // 2, map_height // 2
+        for sy in range(map_height):
+            for sx in range(map_width):
+                if not local_map.in_bounds(sx, sy):
+                    continue
+                t = local_map.tiles[sx, sy]["terrain"]
+                if isinstance(t, bytes):
+                    t = t.decode()
+                t = str(t)
+                if t in _TOWN_ROAD_TILES:
+                    d = abs(sx - ex) + abs(sy - ey)
+                    if d < best_dist:
+                        best_dist = d
+                        best_x, best_y = sx, sy
+
+        # Walk from entry to nearest town road, placing road_0 tiles
+        path = _walk_tiles(ex, ey, best_x, best_y)
+        for (px, py) in path:
+            if not local_map.in_bounds(px, py):
+                continue
+            t = local_map.tiles[px, py]["terrain"]
+            if isinstance(t, bytes):
+                t = t.decode()
+            t = str(t)
+            if t in _TOWN_ROAD_TILES:
+                continue  # already a road tile
+            if t in _TOWN_ROAD_OVERWRITE:
+                local_map.set_tile(px, py, "road_0",
+                                   bool(road_td.get("walkable", True)),
+                                   bool(road_td.get("transparent", True)))
+            # Widen by 1 tile perpendicular (3-wide road appearance)
+            _idx = path.index((px, py))
+            if _idx < len(path) - 1:
+                _nx, _ny = path[_idx + 1]
+                _ddx, _ddy = _nx - px, _ny - py
+            elif _idx > 0:
+                _ppx, _ppy = path[_idx - 1]
+                _ddx, _ddy = px - _ppx, py - _ppy
+            else:
+                _ddx, _ddy = 0, 0
+            for ox, oy in ([(0, -1), (0, 1)] if _ddx != 0 else [(-1, 0), (1, 0)]):
+                wx, wy = px + ox, py + oy
+                if not local_map.in_bounds(wx, wy):
+                    continue
+                wt = local_map.tiles[wx, wy]["terrain"]
+                if isinstance(wt, bytes):
+                    wt = wt.decode()
+                wt = str(wt)
+                if wt in _TOWN_ROAD_OVERWRITE:
+                    local_map.set_tile(wx, wy, "road_0",
+                                       bool(road_td.get("walkable", True)),
+                                       bool(road_td.get("transparent", True)))
+
+
+def _place_ford_crossings(
+    local_map: "LocalMap",
+    terrain_data: dict,
+    map_width: int,
+    map_height: int,
+    rng: random.Random,
+    road_path_tiles: set[tuple[int, int]],
+) -> None:
+    """Place a natural-looking ford where road crosses river.
+
+    The ford is mostly water with occasional stone poking through —
+    a shallow crossing, not a stone bridge.
+
+    road_path_tiles includes ALL tiles the road intended to cover, including
+    those that were skipped during carving because they were river_water.
+    """
+    river_water_id = "river_water"
+    river_bank_id  = "river_bank"
+    road_tile_id   = "road_0"
+    bank_td = terrain_data.get(river_bank_id, terrain_data.get("floor", {}))
+    road_td = terrain_data.get(road_tile_id, terrain_data.get("cobblestone",
+                               terrain_data.get("floor", {})))
+    if not bank_td:
+        return
+
+    # Phase 1: probabilistic ford tiles on the road path itself
+    # 70% leave as water, 18% bank (wet stone), 12% road (stone poking through)
+    ford_tiles: set[tuple[int, int]] = set()
+    for (x, y) in road_path_tiles:
+        if not local_map.in_bounds(x, y):
+            continue
+        cur = str(local_map.tiles[x, y]["terrain"])
+        if cur == river_water_id:
+            ford_tiles.add((x, y))
+            roll = rng.random()
+            if roll < 0.70:
+                pass  # leave as river_water — ford is mostly water
+            elif roll < 0.88:
+                local_map.set_tile(x, y, river_bank_id,
+                                   bool(bank_td.get("walkable", True)),
+                                   bool(bank_td.get("transparent", True)))
+            else:
+                local_map.set_tile(x, y, road_tile_id,
+                                   bool(road_td.get("walkable", True)),
+                                   bool(road_td.get("transparent", True)))
+
+    # Phase 2: scatter bank tiles in the 1-tile margin on either side of
+    # the road path within the river — irregular shoreline approach.
+    for (fx, fy) in ford_tiles:
+        for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            nx, ny = fx + dx, fy + dy
+            if not (0 <= nx < map_width and 0 <= ny < map_height):
+                continue
+            if (nx, ny) in road_path_tiles:
+                continue  # already handled above
+            if str(local_map.tiles[nx, ny]["terrain"]) == river_water_id:
+                if rng.random() < 0.30:
+                    local_map.set_tile(nx, ny, river_bank_id,
+                                       bool(bank_td.get("walkable", True)),
+                                       bool(bank_td.get("transparent", True)))
 
 
 def _edge_to_tile(

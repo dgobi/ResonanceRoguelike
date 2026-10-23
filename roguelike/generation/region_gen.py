@@ -585,7 +585,7 @@ def _place_waystones(
     if not road_adjacent:
         return
 
-    # Collect positions already occupied by a waystone (e.g. from town_gen)
+    # Collect positions already occupied by a waystone (terrain or decor)
     rng.shuffle(road_adjacent)
     placed = 0
     existing_wt: set[tuple[int, int]] = {
@@ -593,15 +593,19 @@ def _place_waystones(
         for x in range(w) for y in range(h)
         if str(local_map.tiles[x, y]["terrain"]) == "waystone_plinth"
     }
+    # Also check decor layer for existing waystones
+    for (dx, dy), did in getattr(local_map, "decor", {}).items():
+        if did == "waystone_plinth":
+            existing_wt.add((dx, dy))
     used: set[tuple[int, int]] = set(existing_wt)
+    from generation.decor_utils import place_decor as _pd_ws
     for (x, y) in road_adjacent:
         if (x, y) in existing_wt:
             continue  # already a waystone here
         # Keep waystones at least 5 tiles apart from each other and existing ones
         if any(abs(x - ux) + abs(y - uy) < 5 for ux, uy in used):
             continue
-        local_map.set_tile(x, y, "waystone_plinth",
-                           wt["walkable"], wt["transparent"])
+        _pd_ws(local_map, x, y, "waystone_plinth")
         used.add((x, y))
         placed += 1
         if placed >= n_waystones:

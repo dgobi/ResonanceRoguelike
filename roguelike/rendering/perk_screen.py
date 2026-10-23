@@ -396,6 +396,28 @@ class PerkScreen:
         max_w   = w - pad * 2
 
         if not perk_id or not pdef:
+            # Check if a category header is selected — show affinity description
+            _sel_cat = self._selected_category()
+            if _sel_cat:
+                _AFFINITY_DESCS = {
+                    "The Hollow Road": "Paths walked in silence. The road does not ask where you are going.",
+                    "The Witnessing": "To see clearly is to carry what is seen. The witness is not neutral.",
+                    "The Green Patience": "The living world moves on a different clock. It has been waiting.",
+                    "The Bound Name": "Something in you has been named. It answers now. So does the world.",
+                    "The Unmarked Way": "Not all paths are made for feet. Some are made for what follows.",
+                    "The Consuming": "Everything taken becomes part of the taker. Nothing is neutral.",
+                    "The Sutured Work": "What was broken can be held together. The stitching shows.",
+                    "The Red Accounting": "Every blow is a ledger entry. The debt runs in both directions.",
+                }
+                _cat_desc = _AFFINITY_DESCS.get(_sel_cat, "Old knowledge. The shape of it is still forming.")
+                _cat_s = self._font_bold.render(_sel_cat, True, self.TITLE)
+                surf.blit(_cat_s, (x, y + 10))
+                _dy = y + 10 + _cat_s.get_height() + 8
+                for _ln in _wrap_text(self._font_small, _cat_desc, max_w):
+                    _ls = self._font_small.render(_ln, True, self.DIM)
+                    surf.blit(_ls, (x, _dy))
+                    _dy += lh
+                return
             none_s = self._font_normal.render("Nothing has taken root yet.", True, self.DIM)
             surf.blit(none_s, (x, y + 20))
             return
@@ -456,9 +478,20 @@ class PerkScreen:
             surf.blit(rq_h, (x, y))
             y += lh
             for req in reqs:
-                req_def  = engine.data.perks.get(req, {})
-                req_name = req_def.get("name", req)
-                met      = perks.has(req) if perks else False
+                if isinstance(req, dict):
+                    # Condition requirement (e.g. {"type": "corruption_min", "value": 0.15})
+                    req_type = req.get("type", "")
+                    req_val  = req.get("value", 0)
+                    if req_type == "corruption_min":
+                        req_name = f"corruption \u2265 {req_val}"
+                        met = getattr(engine, "corruption", 0.0) >= req_val
+                    else:
+                        req_name = f"{req_type}: {req_val}"
+                        met = False
+                else:
+                    req_def  = engine.data.perks.get(req, {})
+                    req_name = req_def.get("name", req)
+                    met      = perks.has(req) if perks else False
                 col      = self.ACQUIRED if met else self.LOCKED
                 rs = self._font_small.render(f"  {req_name}", True, col)
                 surf.blit(rs, (x, y))

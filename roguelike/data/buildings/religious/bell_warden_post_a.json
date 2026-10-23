@@ -92,7 +92,7 @@
       "x": 1,
       "y": 3,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "bellwarden_log_a",
       "note": "A log left on the floor near the old bracket position"
     },
@@ -104,6 +104,21 @@
       "loot_pools": [
         "shrine_equipment"
       ]
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "text_guard_log",
+      "note": "Watch log at the guard post"
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "type": "scene",
+      "scene_id": "guard_post_abandoned",
+      "note": "Abandoned post — torch left behind"
     }
   ],
   "note": "A bell warden's post. Small rectangular station. Two worn stone blocks mark the old bell bracket position along the north wall. A candle burns — or burned — on the work surface."

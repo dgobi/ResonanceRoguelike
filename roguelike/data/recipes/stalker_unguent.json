@@ -1,0 +1,22 @@
+{
+  "id": "stalker_unguent",
+  "name": "stalker unguent",
+  "category": "alchemy",
+  "description": "Render stalker tissue with sinew until it becomes a salve. What hunted you will quicken you.",
+  "known": true,
+  "components": [
+    {"tag": "vital", "min_tier": 1, "quantity": 1},
+    {"tag": "fibrous", "min_tier": 1, "quantity": 1},
+    {"tag": "binding", "min_tier": 1, "quantity": 1}
+  ],
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 2},
+    {"tag": "vessel", "min_tier": 1}
+  ],
+  "result_item": "stalker_unguent",
+  "passive_processing": true,
+  "processing_turns": 20,
+  "processing_source": "rendering",
+  "processing_decor": "cooking_meat",
+  "completion_message": "The unguent is ready. It glistens."
+}

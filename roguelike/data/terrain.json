@@ -261,7 +261,11 @@
     "move_cost": 1.0,
     "light_emit": 5,
     "light_mode": "steady",
-    "light_color": [226, 181, 112]
+    "light_color": [
+      226,
+      181,
+      112
+    ]
   },
   "street_lamp_sputtering": {
     "tile": "street_lamp_sputtering",
@@ -275,7 +279,11 @@
     "light_pulse_min": 2,
     "light_pulse_max": 4,
     "light_pulse_rate": 0.4,
-    "light_color": [210, 150, 80]
+    "light_color": [
+      210,
+      150,
+      80
+    ]
   },
   "street_lamp_dead": {
     "tile": "street_lamp_dead",
@@ -285,43 +293,326 @@
     "description": "A cold iron post. Whatever burned here is long exhausted.",
     "move_cost": 1.0
   },
-  "road_0":  {"tile": "road_0",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_1":  {"tile": "road_1",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_2":  {"tile": "road_2",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_3":  {"tile": "road_3",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_4":  {"tile": "road_4",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_5":  {"tile": "road_5",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_6":  {"tile": "road_6",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_7":  {"tile": "road_7",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_8":  {"tile": "road_8",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_9":  {"tile": "road_9",  "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_10": {"tile": "road_10", "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_11": {"tile": "road_11", "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_12": {"tile": "road_12", "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_13": {"tile": "road_13", "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_14": {"tile": "road_14", "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "road_15": {"tile": "road_15", "display_name": "Worn Road", "walkable": true, "transparent": true, "description": "Worn cobblestone road.", "move_cost": 1.0},
-  "cobblestone_cracked": {"tile": "cobblestone_cracked", "display_name": "Cracked Cobblestone", "walkable": true, "transparent": true, "description": "Cobblestones broken by time and neglect.", "move_cost": 1.0},
-  "cobblestone_mossy":   {"tile": "cobblestone_mossy",   "display_name": "Mossy Cobblestone",   "walkable": true, "transparent": true, "description": "Moss creeps between the old stones.", "move_cost": 1.1},
-  "puddle":              {"tile": "puddle",              "display_name": "Standing Puddle",      "walkable": true, "transparent": true, "description": "Rainwater collected between the stones.", "move_cost": 1.2, "secondary_effect": "chill"},
-  "debris_scatter":      {"tile": "debris_scatter",      "display_name": "Scattered Debris",     "walkable": true, "transparent": true, "description": "Rubble and detritus strewn across the ground.", "move_cost": 1.2},
-  "waystone_plinth":     {"tile": "waystone_plinth",     "display_name": "Waystone",             "walkable": false, "transparent": true, "blocks_move": true, "description": "The cold grey stone post. Faint resonance rises from its base.", "move_cost": 1.0, "resonance_emit": 0.20, "visual_fx": "sparkle", "interactable": "examine_waystone"},
-  "stele":               {"tile": "stele",               "display_name": "Stele",                "walkable": false, "transparent": true, "blocks_move": true, "description": "A standing stone. Inscribed with marks that predate the settlement.", "move_cost": 1.0, "resonance_emit": 0.05, "visual_fx": "pulse_dim", "interactable": "examine_stele"},
-  "packed_earth":        {"tile": "packed_earth",        "display_name": "Packed Earth",         "walkable": true, "transparent": true, "description": "Firm earth worn flat by years of passing feet.", "move_cost": 1.0},
-  "dirt_path":           {"tile": "dirt_path",           "display_name": "Dirt Path",            "walkable": true, "transparent": true, "description": "A worn path. The ground remembers the walking.", "move_cost": 1.0},
-  "weedy_cobble":        {"tile": "weedy_cobble",        "display_name": "Weedy Cobblestone",    "walkable": true, "transparent": true, "description": "Old cobbles split by weeds. The stones are losing their arrangement.", "move_cost": 1.2},
-  "tall_grass":          {"tile": "tall_grass",          "display_name": "Tall Grass",           "walkable": true, "transparent": true, "description": "Rank grass grown head-high in neglected places.", "move_cost": 2.5, "secondary_effect": "concealment"},
-  "brambles":            {"tile": "brambles",            "display_name": "Brambles",             "walkable": true, "transparent": true, "description": "Thorned growth. It will take its tithe.", "move_cost": 2.0, "secondary_effect": "thorns"},
-  "shallow_water":       {"tile": "shallow_water",       "display_name": "Shallow Water",        "walkable": true, "transparent": true, "description": "Cold water, ankle-deep. The cold moves upward.", "move_cost": 1.5, "secondary_effect": "chill", "drinkable": true, "drink_hydration": 400},
-  "deep_water":          {"tile": "deep_water",          "display_name": "Deep Water",           "walkable": true, "transparent": true, "description": "Dark water, waist-deep. The cold is complete.", "move_cost": 3.0, "secondary_effect": "chill_heavy", "creature_passable": false},
-  "river_water":         {"tile": "river_water",         "display_name": "River Water",           "walkable": true, "transparent": true, "description": "a swift dark river",         "move_cost": 2.5, "secondary_effect": "chill", "creature_passable": false},
-  "river_bank":          {"tile": "river_bank",          "display_name": "Riverbank",             "walkable": true, "transparent": true, "description": "soft churned bank",           "move_cost": 1.3},
-  "river_stones":        {"tile": "river_stones",        "display_name": "Wet Stones",            "walkable": true, "transparent": true, "description": "wet flat stones",             "move_cost": 1.4},
-  "blood_pool":          {"tile": "blood_pool",          "display_name": "Blood Pool",            "walkable": true, "transparent": true, "description": "pooled blood",                "move_cost": 1.2},
-  "bone_dust":           {"tile": "bone_dust",           "display_name": "Powdered Bone",         "walkable": true, "transparent": true, "description": "powdered bone",               "move_cost": 1.0, "secondary_effect": "resonance_trace"},
-  "ectoplasm_pool":      {"tile": "ectoplasm_pool",      "display_name": "Ectoplasm",             "walkable": true, "transparent": true, "description": "cold luminous fluid",         "move_cost": 1.5, "secondary_effect": "chill", "visual_fx": "sparkle"},
-  "ichor_seep":          {"tile": "ichor_seep",          "display_name": "Ichor Seep",            "walkable": true, "transparent": true, "description": "dark iridescent seep",        "move_cost": 1.3, "visual_fx": "sparkle"},
-  "verdigris_fluid":     {"tile": "verdigris_fluid",     "display_name": "Verdigris Fluid",       "walkable": true, "transparent": true, "description": "verdigris-green fluid",       "move_cost": 1.2, "secondary_effect": "poison_tile"},
+  "road_0": {
+    "tile": "road_0",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_1": {
+    "tile": "road_1",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_2": {
+    "tile": "road_2",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_3": {
+    "tile": "road_3",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_4": {
+    "tile": "road_4",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_5": {
+    "tile": "road_5",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_6": {
+    "tile": "road_6",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_7": {
+    "tile": "road_7",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_8": {
+    "tile": "road_8",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_9": {
+    "tile": "road_9",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_10": {
+    "tile": "road_10",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_11": {
+    "tile": "road_11",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_12": {
+    "tile": "road_12",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_13": {
+    "tile": "road_13",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_14": {
+    "tile": "road_14",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "road_15": {
+    "tile": "road_15",
+    "display_name": "Worn Road",
+    "walkable": true,
+    "transparent": true,
+    "description": "Worn cobblestone road.",
+    "move_cost": 1.0
+  },
+  "cobblestone_cracked": {
+    "tile": "cobblestone_cracked",
+    "display_name": "Cracked Cobblestone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Cobblestones broken by time and neglect.",
+    "move_cost": 1.0
+  },
+  "cobblestone_mossy": {
+    "tile": "cobblestone_mossy",
+    "display_name": "Mossy Cobblestone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Moss creeps between the old stones.",
+    "move_cost": 1.1
+  },
+  "puddle": {
+    "tile": "puddle",
+    "display_name": "Standing Puddle",
+    "walkable": true,
+    "transparent": true,
+    "description": "Rainwater collected between the stones.",
+    "move_cost": 1.2,
+    "secondary_effect": "chill"
+  },
+  "debris_scatter": {
+    "tile": "debris_scatter",
+    "display_name": "Scattered Debris",
+    "walkable": true,
+    "transparent": true,
+    "description": "Rubble and detritus strewn across the ground.",
+    "move_cost": 1.2
+  },
+  "waystone_plinth": {
+    "tile": "waystone_plinth",
+    "display_name": "Waystone",
+    "walkable": false,
+    "transparent": true,
+    "blocks_move": true,
+    "description": "The cold grey stone post. Faint resonance rises from its base.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.2,
+    "visual_fx": "sparkle",
+    "interactable": "examine_waystone"
+  },
+  "stele": {
+    "tile": "stele",
+    "display_name": "Stele",
+    "walkable": false,
+    "transparent": true,
+    "blocks_move": true,
+    "description": "A standing stone. Inscribed with marks that predate the settlement.",
+    "move_cost": 1.0,
+    "resonance_emit": 0.05,
+    "visual_fx": "pulse_dim",
+    "interactable": "examine_stele"
+  },
+  "packed_earth": {
+    "tile": "packed_earth",
+    "display_name": "Packed Earth",
+    "walkable": true,
+    "transparent": true,
+    "description": "Firm earth worn flat by years of passing feet.",
+    "move_cost": 1.0
+  },
+  "dirt_path": {
+    "tile": "dirt_path",
+    "display_name": "Dirt Path",
+    "walkable": true,
+    "transparent": true,
+    "description": "A worn path. The ground remembers the walking.",
+    "move_cost": 1.0
+  },
+  "weedy_cobble": {
+    "tile": "weedy_cobble",
+    "display_name": "Weedy Cobblestone",
+    "walkable": true,
+    "transparent": true,
+    "description": "Old cobbles split by weeds. The stones are losing their arrangement.",
+    "move_cost": 1.2
+  },
+  "tall_grass": {
+    "tile": "tall_grass",
+    "display_name": "Tall Grass",
+    "walkable": true,
+    "transparent": true,
+    "description": "Rank grass grown head-high in neglected places.",
+    "move_cost": 2.5,
+    "secondary_effect": "concealment"
+  },
+  "brambles": {
+    "tile": "brambles",
+    "display_name": "Brambles",
+    "walkable": true,
+    "transparent": true,
+    "description": "Thorned growth. It will take its tithe.",
+    "move_cost": 2.0,
+    "secondary_effect": "thorns"
+  },
+  "shallow_water": {
+    "tile": "shallow_water",
+    "display_name": "Shallow Water",
+    "walkable": true,
+    "transparent": true,
+    "description": "Cold water, ankle-deep. The cold moves upward.",
+    "move_cost": 1.5,
+    "secondary_effect": "chill",
+    "drinkable": true,
+    "drink_hydration": 400,
+    "interactable": "drink_source"
+  },
+  "deep_water": {
+    "tile": "deep_water",
+    "display_name": "Deep Water",
+    "walkable": true,
+    "transparent": true,
+    "description": "Dark water, waist-deep. The cold is complete.",
+    "move_cost": 3.0,
+    "secondary_effect": "chill_heavy",
+    "creature_passable": false
+  },
+  "river_water": {
+    "tile": "river_water",
+    "display_name": "River Water",
+    "walkable": true,
+    "transparent": true,
+    "description": "a swift dark river",
+    "move_cost": 2.5,
+    "secondary_effect": "chill",
+    "creature_passable": false
+  },
+  "river_bank": {
+    "tile": "river_bank",
+    "display_name": "Riverbank",
+    "walkable": true,
+    "transparent": true,
+    "description": "soft churned bank",
+    "move_cost": 1.3
+  },
+  "river_stones": {
+    "tile": "river_stones",
+    "display_name": "Wet Stones",
+    "walkable": true,
+    "transparent": true,
+    "description": "wet flat stones",
+    "move_cost": 1.4
+  },
+  "blood_pool": {
+    "tile": "blood_pool",
+    "display_name": "Blood Pool",
+    "walkable": true,
+    "transparent": true,
+    "description": "pooled blood",
+    "move_cost": 1.2
+  },
+  "bone_dust": {
+    "tile": "bone_dust",
+    "display_name": "Powdered Bone",
+    "walkable": true,
+    "transparent": true,
+    "description": "powdered bone",
+    "move_cost": 1.0,
+    "secondary_effect": "resonance_trace"
+  },
+  "ectoplasm_pool": {
+    "tile": "ectoplasm_pool",
+    "display_name": "Ectoplasm",
+    "walkable": true,
+    "transparent": true,
+    "description": "cold luminous fluid",
+    "move_cost": 1.5,
+    "secondary_effect": "chill",
+    "visual_fx": "sparkle"
+  },
+  "ichor_seep": {
+    "tile": "ichor_seep",
+    "display_name": "Ichor Seep",
+    "walkable": true,
+    "transparent": true,
+    "description": "dark iridescent seep",
+    "move_cost": 1.3,
+    "visual_fx": "sparkle"
+  },
+  "verdigris_fluid": {
+    "tile": "verdigris_fluid",
+    "display_name": "Verdigris Fluid",
+    "walkable": true,
+    "transparent": true,
+    "description": "verdigris-green fluid",
+    "move_cost": 1.2,
+    "secondary_effect": "poison_tile"
+  },
   "bell_intact": {
     "tile": "bell_intact",
     "display_name": "Bell",
@@ -340,7 +631,8 @@
     "description": "A cracked bell. Something leaks from the fracture.",
     "move_cost": 1.0,
     "resonance_emit": 0.45,
-    "bell_state": "cracked"
+    "bell_state": "cracked",
+    "interactable": "examine_bell"
   },
   "bell_dead": {
     "tile": "bell_dead",
@@ -350,7 +642,8 @@
     "description": "A dead bell. The silence around it is complete.",
     "move_cost": 1.0,
     "resonance_emit": 0.0,
-    "bell_state": "dead"
+    "bell_state": "dead",
+    "interactable": "examine_bell"
   },
   "coldbell_flower": {
     "tile": "coldbell_flower",
@@ -391,7 +684,10 @@
     "description": "Something has died here. The floor holds a frequency the living body registers as a faint pressure behind the eyes.",
     "move_cost": 1.0,
     "resonance_emit": 0.15,
-    "visual_fx": ["sparkle", "pulse_dim"]
+    "visual_fx": [
+      "sparkle",
+      "pulse_dim"
+    ]
   },
   "dead_wood": {
     "tile": "dead_wood",
@@ -469,5 +765,13 @@
     "warmth_strength": 1.0,
     "visual_fx": "embers",
     "interactable": "extinguish_campfire"
+  },
+  "vine_growth": {
+    "tile": "vine_growth",
+    "display_name": "Vine Growth",
+    "walkable": true,
+    "transparent": true,
+    "description": "Dense vine growth. It shifts underfoot.",
+    "move_cost": 3.0
   }
 }

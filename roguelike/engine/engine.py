@@ -363,6 +363,31 @@ class Engine:
         # submap_id_or_None=None  → entity is in surface chunk (wx,wy)
         # submap_id_or_None=str   → entity is in a submap; (wx,wy) is the surface chunk
         self._live_pursuers: list = []
+        # Deferred pursuer arrivals — entities waiting to materialise in player's chunk.
+        # Each entry: {entity, entry_x, entry_y, delay: int}
+        self._pending_pursuer_arrivals: list[dict] = []
+        # Last chunk entry position — used to place arriving pursuers at the
+        # same edge the player entered from.
+        self._last_chunk_entry: tuple[int, int] = (0, 0)
+        # Sprint state
+        self.sprint_turns_remaining:    int   = 0
+        self.sprint_cooldown_remaining: int   = 0
+        self.player_move_accumulator:   float = 0.0
+        # Speed bonus (stalker unguent)
+        self.player_speed_bonus:       float = 0.0
+        self.player_speed_bonus_turns: int   = 0
+        # True sight (wight concentrate)
+        self.true_sight_turns:         int   = 0
+        # Pending consume confirmation (wight concentrate warning prompt)
+        self._pending_consume:         dict | None = None
+        # Pending throw (musk pellet target selection)
+        self._pending_throw:           dict | None = None
+        # Rain collection accumulator (refilling empty_water_skin)
+        self.rain_collection_progress: int = 0
+        # Moveset cooldowns — action_id → turns remaining
+        self.moveset_cooldowns: dict[str, int] = {}
+        # Creature knowledge — creature_id → {revealed_weaknesses, revealed_strengths}
+        self.creature_knowledge: dict[str, dict] = {}
         # Callout system — floating text above entities (damage, sounds, status)
         from rendering.callouts import CalloutSystem
         self.callouts = CalloutSystem()
@@ -421,7 +446,10 @@ class Engine:
                 t = self.local_map.tiles[x, y]["terrain"]
                 if isinstance(t, bytes):
                     t = t.decode()
-                if str(t) == "waystone_plinth":
+                _is_ws = str(t) == "waystone_plinth"
+                if not _is_ws:
+                    _is_ws = self.local_map.decor.get((x, y)) == "waystone_plinth"
+                if _is_ws:
                     key = (x, y)
                     if key not in self._waystone_pulse_timers:
                         offset = _rand.uniform(0, 60)
@@ -528,6 +556,8 @@ class Engine:
             self.display,
             sprite_registry=self.sprite_registry,
         )
+        renderer._terrain_data = self.data.terrain
+        renderer._decor_defs   = self.data.decoratives
 
         self._update_fov()
 
@@ -703,17 +733,23 @@ class Engine:
                     self.particle_system.update(
                         _dt, viewport.width, viewport.height, _zoom)
 
-                    # Waystone pulse check
+                    # Waystone pulse check + resonance ripple
                     import random as _rand
                     from rendering.particles import make_waystone_ring as _mwr
+                    from rendering.particles import make_resonance_ripple as _mrr2
                     for (_wtx, _wty), _next_t in list(
                             self._waystone_pulse_timers.items()):
                         if _now >= _next_t:
                             if self.local_map.in_bounds(_wtx, _wty):
                                 _terrain = self._resolve_terrain_id(_wtx, _wty)
-                                if _terrain == "waystone_plinth":
+                                _is_ws2 = (_terrain == "waystone_plinth" or
+                                           self.local_map.decor.get((_wtx, _wty)) == "waystone_plinth")
+                                if _is_ws2:
                                     self.particle_system.emit(
                                         _mwr(_wtx, _wty, _rand.Random()))
+                                    # Resonance ripple — expanding dot ring
+                                    self.particle_system.emit_burst(
+                                        _mrr2(_wtx, _wty))
                             self._waystone_pulse_timers[(_wtx, _wty)] = (
                                 _now + _rand.uniform(60, 90))
 
@@ -739,7 +775,12 @@ class Engine:
                                 continue
                             _t = self._resolve_terrain_id(_mx, _my)
                             if _t not in _SPARKLE_COLORS:
-                                continue
+                                # Check decor layer for sparkle-eligible tiles
+                                _sdid = self.local_map.decor.get((_mx, _my))
+                                if _sdid in _SPARKLE_COLORS:
+                                    _t = _sdid
+                                else:
+                                    continue
                             _seed = (_frame_tick + _mx * 7919 + _my * 104729) & 0xFFFF
                             if _seed % _SPARKLE_PROB != 0:
                                 continue
@@ -830,6 +871,45 @@ class Engine:
                                 self.particle_system.emit_burst(
                                     _mbp(_dsx, _dsy, _evt["color"], _asx, _asy))
                         self._pending_blood.clear()
+
+                    # Step 5c: atmospheric particle emitters
+                    # (Resonance ripple is wired into the waystone pulse block above.)
+
+                    # Ground mist — swamp / drowned_wood biomes
+                    _biome_chunk = self.world_map.get(self.world_x, self.world_y)
+                    _biome_id_atm = getattr(_biome_chunk, "biome_id", "") if _biome_chunk else ""
+                    if _biome_id_atm in ("swamp", "drowned_wood") and self.current_submap_id is None:
+                        if _frame_tick % 20 == 0:
+                            from rendering.particles import make_ground_mist as _mgm
+                            _mist_count = _spk_rng.randint(2, 3)
+                            for _ in range(_mist_count):
+                                _mx2 = cam_x + _spk_rng.randint(0, _tiles_x - 1)
+                                _my2 = cam_y + _spk_rng.randint(0, _tiles_y - 1)
+                                if (self.local_map.in_bounds(_mx2, _my2)
+                                        and self.local_map.visible[_mx2, _my2]
+                                        and self.local_map.walkable[_mx2, _my2]):
+                                    self.particle_system.emit(
+                                        _mgm(_mx2, _my2, _spk_rng.Random(_frame_tick + _mx2)))
+
+                    # Dust motes — building interiors (non-town walkable tiles
+                    # with wall neighbours, as a heuristic for enclosed spaces)
+                    if _frame_tick % 30 == 0 and self.current_submap_id is not None:
+                        from rendering.particles import make_dust_mote as _mdu
+                        _dx2 = cam_x + _spk_rng.randint(0, _tiles_x - 1)
+                        _dy2 = cam_y + _spk_rng.randint(0, _tiles_y - 1)
+                        if (self.local_map.in_bounds(_dx2, _dy2)
+                                and self.local_map.visible[_dx2, _dy2]
+                                and self.local_map.walkable[_dx2, _dy2]):
+                            self.particle_system.emit(
+                                _mdu(_dx2, _dy2, _spk_rng.Random(_frame_tick + _dx2)))
+
+                    # Corruption wisps — orbit player when exposure > 0.5
+                    if self.resonance_exposure > 0.5 and _frame_tick % 4 == 0:
+                        from rendering.particles import make_corruption_wisp as _mcw
+                        self.particle_system.emit(
+                            _mcw(self.player.x, self.player.y,
+                                 self.resonance_exposure,
+                                 _spk_rng.Random(_frame_tick)))
 
                     # Steps 6-7: draw particles (clipped to viewport)
                     # map_origin = viewport top-left + shake (NO cam offset).
@@ -938,42 +1018,44 @@ class Engine:
                                      + _tile_h // 2)
 
                     # Step 8a: rain / snow tile-layer overlay (data-driven)
-                    _wstate = self.weather.state
-                    if _wstate in ("light_rain", "heavy_rain",
-                                   "resonance_storm", "bone_snow", "wind"):
-                        screen.set_clip(viewport)
-                        renderer.draw_weather_overlay(
-                            screen, viewport,
-                            _wstate, self.weather.intensity,
-                            self,
-                            player_screen_x=viewport.x + _player_sx,
-                            player_screen_y=viewport.y + _player_sy,
-                            tile_w=_tile_w, tile_h=_tile_h,
-                        )
-                        screen.set_clip(None)
-
-                    # Step 8b: fog vignette (cached on self, centred on player)
-                    _wstate = self.weather.state
-                    if _wstate in ("fog", "forgetting_fog"):
-                        from rendering.particles import draw_fog_vignette
-                        draw_fog_vignette(
-                            screen, self.weather.intensity, _wstate,
-                            rect=viewport, engine=self,
-                            effective_fov=self._effective_fov_radius,
-                            tile_w=_tile_w, tile_h=_tile_h,
-                            centre_x=_player_sx, centre_y=_player_sy)
-                        # Wisp particle layer — drifting soft blobs over the gradient
-                        if "fog_wisps" in self.data.weather_defs:
+                    # No weather effects underground — submaps are enclosed.
+                    if self.current_submap_id is None:
+                        _wstate = self.weather.state
+                        if _wstate in ("light_rain", "heavy_rain",
+                                       "resonance_storm", "bone_snow", "wind"):
                             screen.set_clip(viewport)
                             renderer.draw_weather_overlay(
                                 screen, viewport,
-                                "fog_wisps", self.weather.intensity,
+                                _wstate, self.weather.intensity,
                                 self,
                                 player_screen_x=viewport.x + _player_sx,
                                 player_screen_y=viewport.y + _player_sy,
                                 tile_w=_tile_w, tile_h=_tile_h,
                             )
                             screen.set_clip(None)
+
+                        # Step 8b: fog vignette (cached on self, centred on player)
+                        _wstate = self.weather.state
+                        if _wstate in ("fog", "forgetting_fog"):
+                            from rendering.particles import draw_fog_vignette
+                            draw_fog_vignette(
+                                screen, self.weather.intensity, _wstate,
+                                rect=viewport, engine=self,
+                                effective_fov=self._effective_fov_radius,
+                                tile_w=_tile_w, tile_h=_tile_h,
+                                centre_x=_player_sx, centre_y=_player_sy)
+                            # Wisp particle layer — drifting soft blobs over the gradient
+                            if "fog_wisps" in self.data.weather_defs:
+                                screen.set_clip(viewport)
+                                renderer.draw_weather_overlay(
+                                    screen, viewport,
+                                    "fog_wisps", self.weather.intensity,
+                                    self,
+                                    player_screen_x=viewport.x + _player_sx,
+                                    player_screen_y=viewport.y + _player_sy,
+                                    tile_w=_tile_w, tile_h=_tile_h,
+                                )
+                                screen.set_clip(None)
 
                     # Step 8c: resonance emit overlay (gated on _resonance_sight_active)
                     if getattr(self, "_resonance_sight_active", False):
@@ -994,6 +1076,11 @@ class Engine:
                                     _rterrain = _rterrain.decode()
                                 _rtd = self.data.terrain.get(str(_rterrain), {})
                                 _remit = _rtd.get("resonance_emit", 0.0)
+                                # Also check decor layer for resonance_emit
+                                _rdid = self.local_map.decor.get((_rx, _ry))
+                                if _rdid:
+                                    _rdd = self.data.decoratives.get(_rdid, {})
+                                    _remit = max(_remit, _rdd.get("resonance_emit", 0.0))
                                 if _remit <= 0.0:
                                     continue
                                 _phase = (_ticks + _rx * 1300 + _ry * 1700) % 4000
@@ -1097,6 +1184,15 @@ class Engine:
                         f" chunk({self.world_x},{self.world_y})"
                         f" t={self.world_time.turn}"
                     ) if _DM else None
+                    self.ui._engine_sprint_turns    = self.sprint_turns_remaining
+                    self.ui._engine_sprint_max      = self.display.SPRINT_DURATION
+                    self.ui._engine_sprint_cooldown = self.sprint_cooldown_remaining
+                    self.ui._engine_sprint_key      = self.display.SPRINT_KEY
+                    # Moveset HUD data
+                    _ms_weapon = self._get_equipped_weapon()
+                    self.ui._engine_movesets = _ms_weapon.get("movesets", []) if _ms_weapon else []
+                    self.ui._engine_moveset_cooldowns = self.moveset_cooldowns
+                    self.ui._engine_weapon_essence = _ms_weapon.get("essence", "") if _ms_weapon else ""
                     self.ui.render_status(
                         screen, status_bar, self.player,
                         self.world_time,
@@ -1221,6 +1317,44 @@ class Engine:
         self.world_time.advance()
         self.log.advance_turn()
 
+        # Speed bonus tick (stalker unguent)
+        if self.player_speed_bonus_turns > 0:
+            self.player_speed_bonus_turns -= 1
+            if self.player_speed_bonus_turns == 0:
+                self.player_speed_bonus = 0.0
+                self.log.add("The quickening fades.", UI_TEXT_DIM)
+
+        # True sight tick (wight concentrate)
+        if self.true_sight_turns > 0:
+            self.true_sight_turns -= 1
+            if self.true_sight_turns == 0:
+                self.player.true_sight = False
+                self.log.add("The sight closes. The cost remains.", UI_TEXT_DIM)
+
+        # Temp AV tick — decrement hits on equipped torso armour
+        _equip_av = getattr(self.player, "equipment", None)
+        if _equip_av:
+            _torso_av = _equip_av.slots.get("armor_torso")
+            if _torso_av and getattr(_torso_av, "_temp_av_hits", 0) > 0:
+                pass  # hits decremented in combat, not per-turn
+
+        # Sprint cooldown tick
+        if self.sprint_cooldown_remaining > 0:
+            self.sprint_cooldown_remaining -= 1
+
+        # Moveset cooldown tick
+        if self.moveset_cooldowns:
+            expired = [k for k, v in self.moveset_cooldowns.items() if v <= 1]
+            for k in expired:
+                del self.moveset_cooldowns[k]
+            for k in self.moveset_cooldowns:
+                self.moveset_cooldowns[k] -= 1
+
+        # Vine network tick
+        if self.local_map.vine_networks:
+            from engine.vine_system import tick_vine_networks
+            tick_vine_networks(self)
+
         needs = getattr(self.player, "needs", None)
         if needs and not self.player_invincible:
             prev_h = needs.hunger
@@ -1252,6 +1386,13 @@ class Engine:
                         if fighter:
                             fighter.take_damage(total_drain)
                             self.player.took_damage_this_turn = True
+                            # Post crisis message based on dominant drain source
+                            h_d = needs.hunger_hp_drain
+                            t_d = needs.thirst_hp_drain
+                            if h_d >= t_d:
+                                self.log.add("Starvation takes from you.", MSG_DANGER)
+                            else:
+                                self.log.add("The thirst takes from you.", MSG_DANGER)
                             if fighter.is_dead:
                                 h_d = needs.hunger_hp_drain
                                 t_d = needs.thirst_hp_drain
@@ -1368,9 +1509,18 @@ class Engine:
             if getattr(e, "is_alive", True)
         ]
 
+        # Clear _just_arrived flags from previous turn and decrement arrival cooldowns.
+        for _e_flag in self.entities:
+            if getattr(_e_flag, "_just_arrived", False):
+                _e_flag._just_arrived = False
+            _acd = getattr(_e_flag, "_arrival_cooldown", 0)
+            if _acd > 0:
+                _e_flag._arrival_cooldown = _acd - 1
+
         self._process_creature_stair_transfers()
         self._check_entity_chunk_crossings()
         self._tick_live_pursuers()
+        self._tick_pending_pursuer_arrivals()
 
         # Floor object decay — tick decay_timer on all floor objects in current chunk
         if self.local_map.floor_objects:
@@ -1602,15 +1752,33 @@ class Engine:
 
         self.player._in_concealment = False
         acted = False
+        _was_move = False   # True when action is directional movement (sprint budget applies)
+
+        # Sprint activation: Shift+SPRINT_KEY only (default W)
+        _sprint_key = self.display.SPRINT_KEY
+        if (key == _sprint_key
+                and pygame.key.get_mods() & pygame.KMOD_SHIFT
+                and self.sprint_turns_remaining == 0
+                and self.sprint_cooldown_remaining == 0):
+            self.sprint_turns_remaining = self.display.SPRINT_DURATION
+            self.sprint_cooldown_remaining = self.display.SPRINT_COOLDOWN
+            self.player_move_accumulator = 0.0
+            self.callouts.add("SPRINT", float(self.player.x),
+                              float(self.player.y) - 0.3,
+                              RESONANCE_LOW, lifetime=1.2,
+                              font_size="status")
+            # Sprint activation itself doesn't count as a move or advance turn
 
         if key in MOVE_KEYS:
             dx, dy = MOVE_KEYS[key]
+
             dest_x = self.player.x + dx
             dest_y = self.player.y + dy
 
             if not self.local_map.in_bounds(dest_x, dest_y):
                 self._transition_chunk(dx, dy)
                 acted = True
+                _was_move = True
             elif self.local_map.tiles['terrain'][dest_x, dest_y] == 'door_closed':
                 self.local_map.set_tile(dest_x, dest_y, 'door_open', True, True)
                 self._update_fov()
@@ -1624,13 +1792,38 @@ class Engine:
                 elif self._decor_blocks_movement(dest_x, dest_y):
                     pass  # blocked by decor object (campfire, barrel, etc.)
                 else:
+                    _prev_x, _prev_y = self.player.x, self.player.y
                     self.player.move(dx, dy)
                     self._update_fov()
                     self._on_player_step(dest_x, dest_y)
                     acted = True
+                    _was_move = True
+                    _is_sprint_move = self.sprint_turns_remaining > 0
+                    # Sprint turn decrement — counts player moves, not AI ticks
+                    if _is_sprint_move:
+                        self.sprint_turns_remaining -= 1
+                        # Streak particles on every sprint move
+                        import random as _sprint_rng
+                        from rendering.particles import make_sprint_streaks
+                        self.particle_system.emit_burst(
+                            make_sprint_streaks(
+                                float(_prev_x), float(_prev_y),
+                                dx, dy, RESONANCE_LOW,
+                                _sprint_rng.Random()))
+                        if self.sprint_turns_remaining == 0:
+                            self.callouts.add("\u2014", float(self.player.x),
+                                              float(self.player.y) - 0.3,
+                                              UI_TEXT_DIM, lifetime=0.8,
+                                              font_size="status")
+                            self.player_move_accumulator = 0.0
+
+        elif key in (self.display.MOVESET_KEY_1, self.display.MOVESET_KEY_2):
+            acted = self._try_moveset_action(key)
 
         elif key in WAIT_KEYS:
             acted = True
+            # Rain collection: accumulate toward filling empty_water_skin
+            self._tick_rain_collection()
 
         elif key == pygame.K_ESCAPE:
             if self._confirm_quit():
@@ -1668,15 +1861,31 @@ class Engine:
                 self._pick_up_item()
                 acted = True
 
-        elif key == pygame.K_w:
+        elif key == pygame.K_w and not (pygame.key.get_mods() & pygame.KMOD_SHIFT):
             acted = self._try_drink_terrain()
 
         if acted:
             self._log_scroll = 0
-            self._advance_turn()
-            while self._move_debt >= 1.0:
-                self._move_debt -= 1.0
+            if _was_move and self.sprint_turns_remaining > 0:
+                # Sprint accumulator: player_speed 2.0 → AI ticks every 2 moves.
+                # Budget refills by 1.0, costs 1/speed per move.
+                _player_speed = self.display.SPRINT_SPEED_MULT
+                self.player_move_accumulator += 1.0
+                _cost = 1.0 / _player_speed
+                self.player_move_accumulator -= _cost
+                if self.player_move_accumulator >= 1.0:
+                    self.player_move_accumulator -= 1.0
+                    self._advance_turn()
+                    while self._move_debt >= 1.0:
+                        self._move_debt -= 1.0
+                        self._advance_turn()
+                # else: AI skipped this move — player is outpacing creatures
+            else:
+                # Normal: non-movement actions and non-sprint moves always tick AI
                 self._advance_turn()
+                while self._move_debt >= 1.0:
+                    self._move_debt -= 1.0
+                    self._advance_turn()
         if self.mode == GameMode.LOCAL:
             self._update_context_prompt()
 
@@ -1746,10 +1955,19 @@ class Engine:
                     elif DEBUG_MODE:
                         print(f"[LAYOUT] container at ({_lx},{_ly}) non-walkable, skipped.")
                     continue
-                item = self.item_factory.create(ispec.get("item_id", ""), ispec["x"], ispec["y"])
+                _tid_t = ispec.get("text_id", "")
+                _iid_t = ispec.get("item_id", "")
+                if _tid_t:
+                    _mapped_t = self.data.text_item_map.get(_tid_t)
+                    if _mapped_t:
+                        _iid_t = _mapped_t
+                    else:
+                        print(f"[TEXT-MAP] unknown text_id: {_tid_t}, defaulting to letter")
+                        _iid_t = "letter"
+                item = self.item_factory.create(_iid_t, ispec["x"], ispec["y"])
                 if item is not None:
-                    if ispec.get("text_id"):
-                        item.text_id = ispec["text_id"]
+                    if _tid_t:
+                        item.text_id = _tid_t
                     _pfo_town(self.local_map, ispec["x"], ispec["y"], item)
         self.entities  = [self.player] + town_entities
         self.world_map.mark_explored_radius(wx, wy, radius=2)
@@ -1896,14 +2114,33 @@ class Engine:
             if _eai_tp is None or _eai_tp.state not in _pursuing_tp:
                 continue
             _can_cross_tp = self.data.entities.get(_ep.tile, {}).get("can_cross_chunks", False)
+            if not _can_cross_tp:
+                continue
+            # Allow re-extraction even with arrival cooldown — prevents losing
+            # pursuit on back-and-forth transitions. Cooldown only gates
+            # _check_entity_chunk_crossings (same-turn re-crossing), not re-extraction.
+            _acd_tp = getattr(_ep, "_arrival_cooldown", 0)
             _dist_tp = max(abs(_ep.x - self.player.x), abs(_ep.y - self.player.y))
-            _extracted_tp = _can_cross_tp and _dist_tp <= _threshold_tp
+            # State-gated: any HUNTING/ALERTED creature with can_cross_chunks
+            # is always extracted. pursuit_timeout handles true abandonment.
+            _extracted_tp = True
             if _DM_tp:
                 print(f"[LP-CHECK] {_ep.name} state={_eai_tp.state.name} "
                       f"dist={_dist_tp} can_cross={_can_cross_tp} "
-                      f"threshold={_threshold_tp} -> {'EXTRACTED' if _extracted_tp else 'SKIPPED'}")
+                      f"acd={_acd_tp} -> EXTRACTED")
             if _extracted_tp:
                 _extract_ids_tp.add(id(_ep))
+                # Avoid duplicate entries in _live_pursuers
+                _already_tracked = any(id(_lp[0]) == id(_ep) for _lp in self._live_pursuers)
+                if _already_tracked:
+                    if _DM_tp:
+                        print(f"[LP-RE-EXTRACT] {_ep.name} already tracked, updating position")
+                    self._live_pursuers = [
+                        _lp for _lp in self._live_pursuers if id(_lp[0]) != id(_ep)
+                    ]
+                elif _acd_tp > 0 and _DM_tp:
+                    print(f"[LP-RE-EXTRACT] {_ep.name} re-extracted from departing chunk (had cooldown {_acd_tp})")
+                _ep._arrival_cooldown = 0
                 self._live_pursuers.append((_ep, self.world_x, self.world_y, None))
                 # Point entity toward the boundary edge it needs to cross to follow player.
                 if _eai_tp is not None:
@@ -1967,10 +2204,19 @@ class Engine:
                             _items2 = _roll_pools2(ispec.get("loot_pools", []), self.data.loot_pools, self.item_factory, self.rng)
                             _pc_town2(new_map, _lx2, _ly2, ispec.get("decor_id", "barrel"), _items2)
                         continue
-                    item = self.item_factory.create(ispec.get("item_id", ""), ispec["x"], ispec["y"])
+                    _tid_t2 = ispec.get("text_id", "")
+                    _iid_t2 = ispec.get("item_id", "")
+                    if _tid_t2:
+                        _mapped_t2 = self.data.text_item_map.get(_tid_t2)
+                        if _mapped_t2:
+                            _iid_t2 = _mapped_t2
+                        else:
+                            print(f"[TEXT-MAP] unknown text_id: {_tid_t2}, defaulting to letter")
+                            _iid_t2 = "letter"
+                    item = self.item_factory.create(_iid_t2, ispec["x"], ispec["y"])
                     if item is not None:
-                        if ispec.get("text_id"):
-                            item.text_id = ispec["text_id"]
+                        if _tid_t2:
+                            item.text_id = _tid_t2
                         _pfo_town2(new_map, ispec["x"], ispec["y"], item)
             else:
                 chunk_rng = random.Random(chunk.seed + 1)
@@ -1995,6 +2241,10 @@ class Engine:
             # North or south crossing — preserve x
             entry_x = max(0, min(MAP_WIDTH  - 1, dest_x))
             entry_y = MAP_HEIGHT - 1 if wy_off == -1 else 0
+
+        # Store entry position for arriving pursuers — they must enter at
+        # the same edge the player used, not the opposite edge.
+        self._last_chunk_entry = (entry_x, entry_y)
 
         # Diagnostic (DEBUG_MODE): log boundary violations and entry
         from config import DEBUG_MODE as _DM
@@ -2076,6 +2326,17 @@ class Engine:
                     _lpe.x, _lpe.y = self._find_walkable_near(
                         self.local_map, _lpe.x, _lpe.y, max_radius=50
                     )
+                # Nudge one step inward from boundary to prevent immediate re-crossing
+                if _lpe.x <= 0:
+                    _lpe.x = 1
+                elif _lpe.x >= MAP_WIDTH - 1:
+                    _lpe.x = MAP_WIDTH - 2
+                if _lpe.y <= 0:
+                    _lpe.y = 1
+                elif _lpe.y >= MAP_HEIGHT - 1:
+                    _lpe.y = MAP_HEIGHT - 2
+                _lpe._just_arrived     = True
+                _lpe._arrival_cooldown = 3
                 _lpe._last_known_px = self.player.x
                 _lpe._last_known_py = self.player.y
                 _lpe.last_known_x   = None
@@ -2531,11 +2792,24 @@ class Engine:
         _pursuing = (_AIState.HUNTING, _AIState.ALERTED, _AIState.ATTACKING)
         _crossed: list = []
         _to_remove: set[int] = set()
+        # IDs of entities under live pursuer management — skip them
+        _managed_ids_cc = (
+            {id(lp[0]) for lp in self._live_pursuers} |
+            {id(p["entity"]) for p in self._pending_pursuer_arrivals}
+        )
 
         for _e in self.entities:
             if _e is self.player:
                 continue
             if not getattr(_e, "is_alive", True):
+                continue
+            # Skip entities managed by the live pursuer / pending arrival system
+            if id(_e) in _managed_ids_cc:
+                continue
+            # Skip entities that just arrived this turn — prevent immediate re-crossing
+            if getattr(_e, "_just_arrived", False):
+                if _DM_cc:
+                    print(f"[ENTITY-CROSS] SKIP {_e.name} — _just_arrived")
                 continue
             _eai = getattr(_e, "ai", None)
             if _eai is None or _eai.state not in _pursuing:
@@ -2610,23 +2884,25 @@ class Engine:
                 return self._find_walkable_near(target_map, _ex, _ey, max_radius=50)
 
             if _new_wx == self.world_x and _new_wy == self.world_y:
-                # Arriving in player's current chunk — merge immediately
-                _occ: set[tuple[int, int]] = {(self.player.x, self.player.y)}
-                for _ne in self.entities:
-                    if getattr(_ne, "blocks_movement", True):
-                        _occ.add((_ne.x, _ne.y))
-                _te.x, _te.y = _shell_place(self.local_map, _occ)
-                if _te.ai is not None:
-                    _te.ai.target_x = self.player.x
-                    _te.ai.target_y = self.player.y
-                _te._last_known_px = self.player.x
-                _te._last_known_py = self.player.y
-                _te.last_known_x   = None
-                _te.last_known_y   = None
-                self.entities.append(_te)
-                if _DM_cc:
-                    print(f"[ENTITY-CROSS] {_te.name} -> player chunk "
-                          f"({self.world_x},{self.world_y}) at ({_te.x},{_te.y})")
+                # Arriving in player's current chunk — defer arrival
+                _entry_x, _entry_y = self._last_chunk_entry
+                _cdef_cc = self.data.entities.get(_te.tile, {})
+                _delay_cc = _cdef_cc.get("chunk_cross_delay", 6)
+                _already_pending_cc = any(
+                    id(p["entity"]) == id(_te)
+                    for p in self._pending_pursuer_arrivals
+                )
+                if not _already_pending_cc:
+                    self._pending_pursuer_arrivals.append({
+                        "entity":  _te,
+                        "entry_x": _entry_x,
+                        "entry_y": _entry_y,
+                        "delay":   _delay_cc,
+                    })
+                    if _DM_cc:
+                        print(f"[LIVE-PENDING] {_te.name} delay={_delay_cc} "
+                              f"entry=({_entry_x},{_entry_y}) "
+                              f"(via entity-cross)")
             else:
                 # Third chunk — cache the entity there; player will load it on entry
                 _tgt_chunk = self.world_map.get(_new_wx, _new_wy)
@@ -2758,27 +3034,35 @@ class Engine:
                       f"virtual_player=({_virt_px},{_virt_py}) "
                       f"state={_eai.state.name} lkx={getattr(_entity,'_last_known_px',None)}")
 
+            # Speed accumulator — same logic as ai_system.process()
+            _lp_speed = self.data.entities.get(_entity.tile, {}).get("speed", 1.0)
+            _eai.move_accumulator += _lp_speed
+
             # Move directly toward target (boundary edge or stair tile).
             # Bypass process_single entirely — entity is not seeing the player,
             # it just needs to walk to a known point.  _update_state() and the
             # full state machine are skipped; only the movement and timeout
             # counter matter during live pursuer ticks.
-            _lp_tx = getattr(_eai, "target_x", None)
-            _lp_ty = getattr(_eai, "target_y", None)
-            if _lp_tx is None:
-                _lp_tx = getattr(_entity, "_last_known_px", None)
-            if _lp_ty is None:
-                _lp_ty = getattr(_entity, "_last_known_py", None)
-            if _lp_tx is not None and _lp_ty is not None:
-                _lp_tx_c = max(0, min(MAP_WIDTH  - 1, int(_lp_tx)))
-                _lp_ty_c = max(0, min(MAP_HEIGHT - 1, int(_lp_ty)))
-                _eai._move_toward(
-                    actor     = _entity,
-                    local_map = _map,
-                    entities  = [],
-                    tx        = _lp_tx_c,
-                    ty        = _lp_ty_c,
-                )
+            _lp_steps = 0
+            while _eai.move_accumulator >= 1.0 and _lp_steps < 2:
+                _eai.move_accumulator -= 1.0
+                _lp_steps += 1
+                _lp_tx = getattr(_eai, "target_x", None)
+                _lp_ty = getattr(_eai, "target_y", None)
+                if _lp_tx is None:
+                    _lp_tx = getattr(_entity, "_last_known_px", None)
+                if _lp_ty is None:
+                    _lp_ty = getattr(_entity, "_last_known_py", None)
+                if _lp_tx is not None and _lp_ty is not None:
+                    _lp_tx_c = max(0, min(MAP_WIDTH  - 1, int(_lp_tx)))
+                    _lp_ty_c = max(0, min(MAP_HEIGHT - 1, int(_lp_ty)))
+                    _eai._move_toward(
+                        actor     = _entity,
+                        local_map = _map,
+                        entities  = [],
+                        tx        = _lp_tx_c,
+                        ty        = _lp_ty_c,
+                    )
 
             # Timeout accounting (replaces _update_state() incrementing the counter).
             _eai.pursuit_turns_without_contact += 1
@@ -2872,52 +3156,151 @@ class Engine:
                     print(f"[LIVE-CROSS] {_entity.name} ({_wx},{_wy}) -> player chunk "
                           f"({self.world_x},{self.world_y}) entry ({_entry_x},{_entry_y})")
             else:
+                # Update target toward the player's chunk from the new position.
+                # Without this, the entity walks back to the edge it just crossed.
+                _pdx = self.world_x - _new_wx
+                _pdy = self.world_y - _new_wy
+                if _pdx < 0:
+                    _ntx, _nty = 0, _entity.y
+                elif _pdx > 0:
+                    _ntx, _nty = MAP_WIDTH - 1, _entity.y
+                elif _pdy < 0:
+                    _ntx, _nty = _entity.x, 0
+                elif _pdy > 0:
+                    _ntx, _nty = _entity.x, MAP_HEIGHT - 1
+                else:
+                    _ntx, _nty = _entity.x, _entity.y
+                _entity._last_known_px = _ntx
+                _entity._last_known_py = _nty
+                _eai.target_x = _ntx
+                _eai.target_y = _nty
+
                 _remaining.append((_entity, _new_wx, _new_wy, None))
                 if _DM_lp:
-                    print(f"[LIVE-MOVE] {_entity.name} ({_wx},{_wy}) -> ({_new_wx},{_new_wy})")
+                    print(f"[LIVE-MOVE] {_entity.name} ({_wx},{_wy}) -> ({_new_wx},{_new_wy}) "
+                          f"new_target=({_ntx},{_nty})")
 
         self._live_pursuers = _remaining
 
-        # Promote surface live pursuers that crossed into the player's chunk
+        # Defer promoted pursuers — they arrive after a delay, not immediately.
+        _arrive_x, _arrive_y = self._last_chunk_entry
         for _pe in _to_promote:
-            _occ_lp: set[tuple[int, int]] = {(self.player.x, self.player.y)}
-            for _ne_lp in self.entities:
-                if getattr(_ne_lp, "blocks_movement", True):
-                    _occ_lp.add((_ne_lp.x, _ne_lp.y))
-            _placed_lp = False
-            for _r_lp in range(0, 12):
-                for _rdx_lp in range(-_r_lp, _r_lp + 1):
-                    for _rdy_lp in range(-_r_lp, _r_lp + 1):
-                        if _r_lp > 0 and abs(_rdx_lp) != _r_lp and abs(_rdy_lp) != _r_lp:
-                            continue
-                        _nx_lp = _pe.x + _rdx_lp
-                        _ny_lp = _pe.y + _rdy_lp
-                        if (self.local_map.in_bounds(_nx_lp, _ny_lp)
-                                and self.local_map.walkable[_nx_lp, _ny_lp]
-                                and (_nx_lp, _ny_lp) not in _occ_lp):
-                            _pe.x, _pe.y = _nx_lp, _ny_lp
-                            _occ_lp.add((_nx_lp, _ny_lp))
-                            _placed_lp = True
-                            break
-                    if _placed_lp:
-                        break
-                if _placed_lp:
-                    break
-            if not _placed_lp:
-                _pe.x, _pe.y = self._find_walkable_near(
-                    self.local_map, _pe.x, _pe.y, max_radius=50
-                )
-            _pe._last_known_px = self.player.x
-            _pe._last_known_py = self.player.y
-            _pe.last_known_x   = None
-            _pe.last_known_y   = None
-            if _pe.ai is not None:
-                _pe.ai.target_x = self.player.x
-                _pe.ai.target_y = self.player.y
-            self.entities.append(_pe)
+            _cdef_pe = self.data.entities.get(_pe.tile, {})
+            _delay = _cdef_pe.get("chunk_cross_delay", 6)
+            # Skip if already pending
+            _already_pending = any(
+                id(p["entity"]) == id(_pe)
+                for p in self._pending_pursuer_arrivals
+            )
+            if _already_pending:
+                continue
+            self._pending_pursuer_arrivals.append({
+                "entity":  _pe,
+                "entry_x": _arrive_x,
+                "entry_y": _arrive_y,
+                "delay":   _delay,
+            })
             if _DM_lp:
-                print(f"[LIVE-ARRIVE] {_pe.name} -> player chunk ({self.world_x},{self.world_y}) "
-                      f"at ({_pe.x},{_pe.y})")
+                print(f"[LIVE-PENDING] {_pe.name} delay={_delay} "
+                      f"entry=({_arrive_x},{_arrive_y})")
+
+    def _tick_pending_pursuer_arrivals(self) -> None:
+        """Decrement delay on pending arrivals; materialise when delay hits 0."""
+        from config import DEBUG_MODE as _DM_pa
+        _still_pending: list[dict] = []
+        for _pa in self._pending_pursuer_arrivals:
+            _pa["delay"] -= 1
+            if _pa["delay"] > 0:
+                _still_pending.append(_pa)
+                continue
+            # Delay expired — materialise the entity
+            self._live_arrive(_pa["entity"], _pa["entry_x"], _pa["entry_y"])
+            if _DM_pa:
+                _pe = _pa["entity"]
+                print(f"[LIVE-ARRIVE-DEFERRED] {_pe.name} at ({_pe.x},{_pe.y}) "
+                      f"player=({self.player.x},{self.player.y})")
+        self._pending_pursuer_arrivals = _still_pending
+
+    def _live_arrive(self, entity, entry_x: int, entry_y: int) -> None:
+        """Place a pursuing entity into the player's current chunk at entry edge.
+
+        Uses a border-constrained strip search: tiles within 3 of the crossing
+        edge are tried first (lateral expansion, then inward), so the creature
+        materialises at the map boundary, not near the player.
+        """
+        # Clean up from tracking lists — entity becomes a normal entity
+        self._live_pursuers = [
+            lp for lp in self._live_pursuers if id(lp[0]) != id(entity)
+        ]
+        _occ: set[tuple[int, int]] = {(self.player.x, self.player.y)}
+        for _ne in self.entities:
+            if getattr(_ne, "blocks_movement", True):
+                _occ.add((_ne.x, _ne.y))
+
+        # Determine crossing axis and constrained strip (max 3 tiles inward)
+        _max_depth = 3
+        if entry_y <= 0:
+            _y_lo, _y_hi = 0, min(MAP_HEIGHT - 1, _max_depth)
+            _x_lo, _x_hi = 0, MAP_WIDTH - 1
+        elif entry_y >= MAP_HEIGHT - 1:
+            _y_lo, _y_hi = max(0, MAP_HEIGHT - 1 - _max_depth), MAP_HEIGHT - 1
+            _x_lo, _x_hi = 0, MAP_WIDTH - 1
+        elif entry_x <= 0:
+            _x_lo, _x_hi = 0, min(MAP_WIDTH - 1, _max_depth)
+            _y_lo, _y_hi = 0, MAP_HEIGHT - 1
+        elif entry_x >= MAP_WIDTH - 1:
+            _x_lo, _x_hi = max(0, MAP_WIDTH - 1 - _max_depth), MAP_WIDTH - 1
+            _y_lo, _y_hi = 0, MAP_HEIGHT - 1
+        else:
+            # Interior entry (shouldn't happen) — use full map
+            _x_lo, _x_hi = 0, MAP_WIDTH - 1
+            _y_lo, _y_hi = 0, MAP_HEIGHT - 1
+
+        # Search within constrained strip: expand laterally from entry, then inward
+        _placed = False
+        for _r in range(0, max(MAP_WIDTH, MAP_HEIGHT)):
+            if _placed:
+                break
+            for _rdx in range(-_r, _r + 1):
+                for _rdy in range(-_r, _r + 1):
+                    if _r > 0 and abs(_rdx) != _r and abs(_rdy) != _r:
+                        continue
+                    _nx = entry_x + _rdx
+                    _ny = entry_y + _rdy
+                    if not (_x_lo <= _nx <= _x_hi and _y_lo <= _ny <= _y_hi):
+                        continue
+                    if (self.local_map.in_bounds(_nx, _ny)
+                            and self.local_map.walkable[_nx, _ny]
+                            and (_nx, _ny) not in _occ):
+                        entity.x, entity.y = _nx, _ny
+                        _occ.add((_nx, _ny))
+                        _placed = True
+                        break
+                if _placed:
+                    break
+        if not _placed:
+            entity.x, entity.y = self._find_walkable_near(
+                self.local_map, entry_x, entry_y, max_radius=50
+            )
+        # Nudge one step inward from boundary to prevent immediate re-crossing
+        if entity.x <= 0:
+            entity.x = 1
+        elif entity.x >= MAP_WIDTH - 1:
+            entity.x = MAP_WIDTH - 2
+        if entity.y <= 0:
+            entity.y = 1
+        elif entity.y >= MAP_HEIGHT - 1:
+            entity.y = MAP_HEIGHT - 2
+        entity._just_arrived     = True
+        entity._arrival_cooldown = 3
+        entity._last_known_px = self.player.x
+        entity._last_known_py = self.player.y
+        entity.last_known_x   = None
+        entity.last_known_y   = None
+        if entity.ai is not None:
+            entity.ai.target_x = self.player.x
+            entity.ai.target_y = self.player.y
+        self.entities.append(entity)
 
     def _get_submap_local_map(self, submap_id: str):
         """Return the LocalMap for a cached submap, or None."""
@@ -3215,6 +3598,16 @@ class Engine:
                     _pc_layout(_target_map, x, y, spec.get("decor_id", "crate"), _c_items)
                 elif DEBUG_MODE:
                     print(f"[LAYOUT] container at ({x},{y}) non-walkable, skipped.")
+            elif kind == "scene":
+                scene_id = spec.get("scene_id", "")
+                scene_def = self.data.scenes.get(scene_id)
+                if scene_def and _target_map.in_bounds(x, y) and _target_map.walkable[x, y]:
+                    for fo in scene_def.get("floor_objects", []):
+                        fo_item = self.item_factory.create(fo["item_id"], x, y)
+                        if fo_item is not None:
+                            _pfo_layout(_target_map, x, y, fo_item)
+                elif DEBUG_MODE and not scene_def:
+                    print(f"[LAYOUT] scene '{scene_id}' not found in scenes.json.")
             # "body" type — skip for now (Tier 2 content)
         return result
 
@@ -3230,7 +3623,7 @@ class Engine:
         return str(t)
 
     def _try_drink_terrain(self) -> bool:
-        """Drink from drinkable terrain at player's position (W key). Returns True if a turn was spent."""
+        """Drink from drinkable terrain at player's position (W key). Drink only — flask fill uses E key."""
         terrain_id    = self._resolve_terrain_id(self.player.x, self.player.y)
         terrain_entry = self.data.terrain.get(terrain_id, {})
 
@@ -3242,7 +3635,7 @@ class Engine:
                 "The water here has a wrong quality. You do not drink.",
                 STONE_BLUE,
             )
-            return True  # intent was clear — spend the turn
+            return True
 
         needs = getattr(self.player, "needs", None)
         if not needs:
@@ -3255,6 +3648,49 @@ class Engine:
         self.log.add("The water is cold. Grit between the teeth.", CLEAR_WATER)
         return True
 
+    def _tick_rain_collection(self) -> None:
+        """Accumulate rain toward filling an empty_water_skin while waiting outdoors."""
+        if self.current_submap_id is not None:
+            self.rain_collection_progress = 0
+            return
+        weather = getattr(self, "weather", None)
+        if not weather:
+            self.rain_collection_progress = 0
+            return
+        state = weather.state
+        if state == "heavy_rain":
+            threshold = 4
+        elif state == "light_rain":
+            threshold = 8
+        else:
+            self.rain_collection_progress = 0
+            return
+        # Check for empty_water_skin
+        inv = getattr(self.player, "inventory", None)
+        if not inv:
+            self.rain_collection_progress = 0
+            return
+        has_empty = any(getattr(it, "item_id", "") == "empty_water_skin" for it in inv.items)
+        if not has_empty:
+            self.rain_collection_progress = 0
+            return
+        self.rain_collection_progress += 1
+        if self.rain_collection_progress >= threshold:
+            # Fill the water skin
+            for it in inv.items:
+                if getattr(it, "item_id", "") == "empty_water_skin":
+                    inv.remove(it)
+                    full = self.item_factory.create("water_skin")
+                    if full:
+                        inv.add(full)
+                    _item_name = full.name if full else "water skin"
+                    self.log.add(f"Rain fills the {_item_name}.", MSG_DEFAULT)
+                    self.callouts.add("FILLED", float(self.player.x),
+                                      float(self.player.y) - 0.3,
+                                      RESONANCE_LOW, lifetime=1.0, font_size="status")
+                    self.rain_collection_progress = 0
+                    return
+
     def _try_harvest(self, x: int | None = None, y: int | None = None) -> bool:
         """Harvest a plant at (x, y), defaulting to player position. Returns True if a turn was spent."""
         from config import DEBUG_MODE as _DM
@@ -3264,14 +3700,27 @@ class Engine:
         terrain_id    = self._resolve_terrain_id(hx, hy)
         terrain_entry = self.data.terrain.get(terrain_id, {})
 
-        if _DM:
-            print(f"[harvest] tile=({hx},{hy}) terrain={terrain_id} harvestable={terrain_entry.get('harvestable', False)}")
+        # Check decor layer for harvestable plants
+        _decor_id = self.local_map.decor.get((hx, hy))
+        _decor_entry = self.data.decoratives.get(_decor_id, {}) if _decor_id else {}
+        _harvest_from_decor = _decor_entry.get("harvestable", False)
 
-        if not terrain_entry.get("harvestable", False):
+        if _DM:
+            print(f"[harvest] tile=({hx},{hy}) terrain={terrain_id} "
+                  f"harvestable={terrain_entry.get('harvestable', False)} "
+                  f"decor={_decor_id} decor_harvestable={_harvest_from_decor}")
+
+        if _harvest_from_decor:
+            harvest_item_id = _decor_entry.get("harvest_item", "")
+            depleted_id     = _decor_entry.get("depleted_id", "")
+            display_name    = _decor_entry.get("description", "plant").split(".")[0].lower()
+        elif terrain_entry.get("harvestable", False):
+            harvest_item_id = terrain_entry.get("harvest_item", "")
+            depleted_id     = terrain_entry.get("depleted_tile", terrain_id)
+            display_name    = terrain_entry.get("display_name", "plant").lower()
+        else:
             return False
 
-        harvest_item_id = terrain_entry.get("harvest_item", "")
-        depleted_tile   = terrain_entry.get("depleted_tile", terrain_id)
         if not harvest_item_id:
             return False
 
@@ -3284,15 +3733,25 @@ class Engine:
             return False
 
         inv.add(item)
-        display_name = terrain_entry.get("display_name", "plant")
-        self.log.add(f"You take a cutting of {display_name.lower()}.", MSG_DEFAULT)
+        self.log.add(f"You take a cutting of {display_name}.", MSG_DEFAULT)
 
-        dep_entry = self.data.terrain.get(depleted_tile, {})
-        self.local_map.set_tile(
-            hx, hy, depleted_tile,
-            dep_entry.get("walkable", True),
-            dep_entry.get("transparent", True),
-        )
+        # deep_harvest perk: 30% chance to NOT deplete the tile
+        _perks_dh = getattr(self.player, "perks", None)
+        _skip_deplete = (_perks_dh and _perks_dh.has("deep_harvest")
+                         and self.rng.random() < 0.30)
+        if not _skip_deplete:
+            if _harvest_from_decor:
+                from generation.decor_utils import place_decor, clear_decor
+                clear_decor(self.local_map, hx, hy)
+                if depleted_id:
+                    place_decor(self.local_map, hx, hy, depleted_id)
+            else:
+                dep_entry = self.data.terrain.get(depleted_id, {})
+                self.local_map.set_tile(
+                    hx, hy, depleted_id,
+                    dep_entry.get("walkable", True),
+                    dep_entry.get("transparent", True),
+                )
         return True
 
     def _try_gather(self, x: int, y: int) -> bool:
@@ -3372,7 +3831,8 @@ class Engine:
             if (terrain_entry.get("harvestable", False)
                     or terrain_entry.get("gatherable", False)
                     or terrain_entry.get("interactable")
-                    or decor_entry.get("interactable")):
+                    or decor_entry.get("interactable")
+                    or decor_entry.get("harvestable", False)):
                 candidates.append((ax, ay))
                 continue
         return candidates
@@ -3439,7 +3899,12 @@ class Engine:
                             cutting_tier = max(cutting_tier, _kw.get("tier", 0))
 
         tiers = by.get("tiers", [])
-        qualified = [t for t in tiers if t.get("min_cutting_tier", 1) <= cutting_tier]
+        # bone_reader perk: always qualify at max tier regardless of cutting tool
+        _perks = getattr(self.player, "perks", None)
+        if _perks and _perks.has("bone_reader"):
+            qualified = list(tiers)  # all tiers qualify
+        else:
+            qualified = [t for t in tiers if t.get("min_cutting_tier", 1) <= cutting_tier]
         if not qualified:
             self.log.add("Thy equipped tool is insufficient for this task.", MSG_DEFAULT)
             return True
@@ -3554,6 +4019,17 @@ class Engine:
     #  Deep tongue learning interactables
     # ------------------------------------------------------------------ #
 
+    def _maybe_show_lexicon_hint(self) -> None:
+        """Fire the lexicon hint exactly once on first word learned."""
+        lang = getattr(self.player, "language", None)
+        if lang is None:
+            return
+        if lang.shown_lexicon_hint:
+            return
+        if len(lang.known_deep_words) >= 1:
+            lang.shown_lexicon_hint = True
+            self.log.add("Press [L] to open the Lexicon.", UI_TEXT_DIM)
+
     # Biome-weighted category lists for waystone learning
     _WAYSTONE_CATEGORIES = {
         "forest":        ["place", "body", "action"],
@@ -3569,39 +4045,126 @@ class Engine:
     }
     _WAYSTONE_DEFAULT = ["action", "cosmic", "place"]
 
+    _WAYSTONE_FALLBACK_IDS = ["waystone_fallback_a", "waystone_fallback_b"]
+
+    def _interactable_drink_source(self, x: int, y: int) -> bool:
+        """Fill empty_water_skin from drinkable terrain, or drink directly."""
+        terrain_id = self._resolve_terrain_id(x, y)
+        terrain_entry = self.data.terrain.get(terrain_id, {})
+        if not terrain_entry.get("drinkable", False):
+            return False
+
+        inv = getattr(self.player, "inventory", None)
+        if inv:
+            for it in inv.items:
+                if getattr(it, "item_id", "") == "empty_water_skin":
+                    inv.remove(it)
+                    full = self.item_factory.create("water_skin")
+                    if full:
+                        inv.add(full)
+                    item_name = full.name if full else "water skin"
+                    self.log.add(
+                        f"Thou fillest the {item_name} at the shallows.",
+                        MSG_DEFAULT,
+                    )
+                    return True
+
+        # No flask — drink directly
+        needs = getattr(self.player, "needs", None)
+        if needs:
+            raw = terrain_entry.get("drink_hydration", 400)
+            survival = self.data.survival or {}
+            t_max = survival.get("thirst", {}).get("max", 800)
+            needs.drink(raw / t_max)
+            self.log.add("The water is cold. Grit between the teeth.", CLEAR_WATER)
+            return True
+        return False
+
+    def _interactable_vine(self, x: int, y: int) -> bool:
+        """Cut a vine tile with an equipped cutting weapon."""
+        decor_id = self.local_map.decor.get((x, y))
+        if not decor_id or not decor_id.startswith("vine_"):
+            return False
+
+        # Check cutting weapon
+        equip = getattr(self.player, "equipment", None)
+        weapon = equip.slots.get("weapon") if equip else None
+        cutting_tier = 0
+        if weapon:
+            for kw in getattr(weapon, "keywords", []):
+                if isinstance(kw, dict) and kw.get("tag") == "cutting":
+                    cutting_tier = kw.get("tier", 1)
+                elif isinstance(kw, str) and kw == "cutting":
+                    cutting_tier = 1
+
+        # Eyestalk requires cutting tier >= 2
+        min_tier = 2 if decor_id == "vine_eyestalk" else 1
+        if cutting_tier < min_tier:
+            if cutting_tier == 0:
+                self.log.add("It resists. You need something sharp.", WORN_STONE)
+            else:
+                self.log.add("The growth is too thick. A sharper blade is needed.", WORN_STONE)
+            return False
+
+        from engine.vine_system import destroy_vine_tile
+        destroy_vine_tile(self, x, y)
+        self.log.add("The vine tears.", MSG_DEFAULT)
+        return True  # turn spent
+
     def _interactable_examine_waystone(self, x: int, y: int) -> bool:
-        """Examine a waystone — teach one deep tongue word. Once per waystone."""
+        """Examine a waystone — teach word on first visit, always open inscription."""
         if not hasattr(self.local_map, "interacted_waystones"):
             self.local_map.interacted_waystones = set()
-        if (x, y) in self.local_map.interacted_waystones:
-            self.log.add("The inscription is familiar. Nothing new surfaces.", WORN_STONE)
-            return False
-        lang = getattr(self.player, "language", None)
-        if lang is None:
-            return False
-        from engine.language_system import learn_from_category
-        # Pick one category randomly from biome's weighted list
-        chunk = self.world_map.get(self.world_x, self.world_y) if self.world_map else None
-        biome_id = getattr(chunk, "biome_id", "forest") if chunk else "forest"
-        cat_list = self._WAYSTONE_CATEGORIES.get(biome_id, self._WAYSTONE_DEFAULT)
-        cat = self.rng.choice(cat_list)
-        ok, wid = learn_from_category(cat, 1, "waystone", lang,
-                                       self.data.deep_tongue, self.rng)
-        if ok:
-            wdef = self.data.deep_tongue.get(wid, {})
-            deep = wdef.get("deep", wid)
-            common = wdef.get("common", "")
-            # Update turn on language component
-            lang.translation_events[wid] = self.world_time.turn
-            self.log.add(
-                f"Something stirs in the bone. A word surfaces — [{deep}]: {common}.",
-                DEEP_TONGUE_COLOUR,
-            )
+        if not hasattr(self.local_map, "waystone_inscriptions"):
+            self.local_map.waystone_inscriptions = {}
+
+        first_time = (x, y) not in self.local_map.interacted_waystones
+
+        # Teach one word on first examine only
+        if first_time:
+            lang = getattr(self.player, "language", None)
+            if lang is not None:
+                from engine.language_system import learn_from_category
+                chunk = self.world_map.get(self.world_x, self.world_y) if self.world_map else None
+                biome_id = getattr(chunk, "biome_id", "forest") if chunk else "forest"
+                cat_list = self._WAYSTONE_CATEGORIES.get(biome_id, self._WAYSTONE_DEFAULT)
+                cat = self.rng.choice(cat_list)
+                ok, wid = learn_from_category(cat, 1, "waystone", lang,
+                                               self.data.deep_tongue, self.rng)
+                if ok:
+                    wdef = self.data.deep_tongue.get(wid, {})
+                    deep = wdef.get("deep", wid)
+                    common = wdef.get("common", "")
+                    lang.translation_events[wid] = self.world_time.turn
+                    self.log.add(
+                        f"Something stirs in the bone. A word surfaces — [{deep}]: {common}.",
+                        DEEP_TONGUE_COLOUR,
+                    )
+                    self._maybe_show_lexicon_hint()
             self.local_map.interacted_waystones.add((x, y))
-            return True
-        self.log.add("The stone hums. Nothing new surfaces.", WORN_STONE)
-        self.local_map.interacted_waystones.add((x, y))
-        return False
+
+        # Select or retrieve inscription for this waystone
+        if (x, y) not in self.local_map.waystone_inscriptions:
+            chunk = self.world_map.get(self.world_x, self.world_y) if self.world_map else None
+            biome_id = getattr(chunk, "biome_id", "forest") if chunk else "forest"
+            biome_def = self.data.biomes.get(biome_id, {})
+            ins_ids = biome_def.get("waystone_inscriptions", [])
+            if not ins_ids:
+                ins_ids = self._WAYSTONE_FALLBACK_IDS
+            self.local_map.waystone_inscriptions[(x, y)] = self.rng.choice(ins_ids)
+
+        ins_id = self.local_map.waystone_inscriptions[(x, y)]
+        text_def = self.data.texts.get(ins_id)
+        if text_def:
+            self.text_reader.open_text(
+                text_def,
+                panel_style="ziggurat",
+                text_align="center",
+                line_spacing_bonus=6,
+                panel_size="inscription",
+            )
+
+        return first_time
 
     def _interactable_examine_stele(self, x: int, y: int) -> bool:
         """Examine a stele — teach words on first examine, always open inscription."""
@@ -3635,6 +4198,7 @@ class Engine:
                         f"Something stirs in the bone. A word surfaces — [{deep}]: {common}.",
                         DEEP_TONGUE_COLOUR,
                     )
+                    self._maybe_show_lexicon_hint()
             self.local_map.examined_steles.add((x, y))
 
         # Always open the inscription for reading
@@ -3650,6 +4214,123 @@ class Engine:
     def _find_stele_text_id(self, x: int, y: int) -> str:
         """Look up the text_id for a stele special_tile at (x, y)."""
         return self.local_map.stele_text_ids.get((x, y), "")
+
+    # ------------------------------------------------------------------ #
+    #  Bell interaction
+    # ------------------------------------------------------------------ #
+
+    _BELL_INSCRIPTION_IDS = [
+        "bell_inscription_a", "bell_inscription_b", "bell_inscription_c",
+        "bell_inscription_d", "bell_inscription_e", "bell_inscription_f",
+    ]
+
+    def _interactable_examine_bell(self, x: int, y: int) -> bool:
+        """Examine a bell — resonance pulse, teach word, show inscription."""
+        if not hasattr(self.local_map, "bell_inscriptions"):
+            self.local_map.bell_inscriptions = {}
+        if not hasattr(self.local_map, "examined_bells"):
+            self.local_map.examined_bells = set()
+
+        # Resonance pulse — every examination (reduced rate)
+        self.resonance_exposure = min(1.0, self.resonance_exposure + 0.02)
+        self.log.add("The metal hums against your hand.", RESONANCE_MID)
+
+        # Select or retrieve inscription for this bell
+        if (x, y) not in self.local_map.bell_inscriptions:
+            self.local_map.bell_inscriptions[(x, y)] = self.rng.choice(
+                self._BELL_INSCRIPTION_IDS)
+
+        ins_id = self.local_map.bell_inscriptions[(x, y)]
+        text_def = self.data.texts.get(ins_id)
+
+        # Teach word on first examine only
+        first_time = (x, y) not in self.local_map.examined_bells
+        if first_time:
+            if text_def and text_def.get("teach_words"):
+                lang = getattr(self.player, "language", None)
+                if lang and ins_id not in lang.taught_texts:
+                    from engine.language_system import learn_from_text
+                    learned = learn_from_text(
+                        text_def, lang, self.data.deep_tongue, self.rng)
+                    lang.taught_texts.add(ins_id)
+                    for wid in learned:
+                        wdef = self.data.deep_tongue.get(wid, {})
+                        deep = wdef.get("deep", wid)
+                        common = wdef.get("common", "")
+                        lang.translation_events[wid] = self.world_time.turn
+                        self.log.add(
+                            f"Something stirs. A word surfaces — [{deep}]: {common}.",
+                            DEEP_TONGUE_COLOUR,
+                        )
+                        self._maybe_show_lexicon_hint()
+            self.local_map.examined_bells.add((x, y))
+
+        # Open inscription
+        if text_def:
+            self.text_reader.open_text(
+                text_def,
+                panel_style="ziggurat",
+                text_align="center",
+                line_spacing_bonus=6,
+                panel_size="inscription",
+            )
+
+        return first_time
+
+    def _interactable_examine_dead_bell(self, x: int, y: int) -> bool:
+        """Examine a dead bell — inscription and word, but no resonance pulse."""
+        if not hasattr(self.local_map, "bell_inscriptions"):
+            self.local_map.bell_inscriptions = {}
+        if not hasattr(self.local_map, "examined_bells"):
+            self.local_map.examined_bells = set()
+
+        # No resonance pulse — bell is dead
+        self.log.add(
+            "The bell is cracked through. The metal is cold. The marks remain.",
+            UI_TEXT_MID,
+        )
+
+        # Select or retrieve inscription for this bell
+        if (x, y) not in self.local_map.bell_inscriptions:
+            self.local_map.bell_inscriptions[(x, y)] = self.rng.choice(
+                self._BELL_INSCRIPTION_IDS)
+
+        ins_id = self.local_map.bell_inscriptions[(x, y)]
+        text_def = self.data.texts.get(ins_id)
+
+        # Teach word on first examine only
+        first_time = (x, y) not in self.local_map.examined_bells
+        if first_time:
+            if text_def and text_def.get("teach_words"):
+                lang = getattr(self.player, "language", None)
+                if lang and ins_id not in lang.taught_texts:
+                    from engine.language_system import learn_from_text
+                    learned = learn_from_text(
+                        text_def, lang, self.data.deep_tongue, self.rng)
+                    lang.taught_texts.add(ins_id)
+                    for wid in learned:
+                        wdef = self.data.deep_tongue.get(wid, {})
+                        deep = wdef.get("deep", wid)
+                        common = wdef.get("common", "")
+                        lang.translation_events[wid] = self.world_time.turn
+                        self.log.add(
+                            f"Something stirs. A word surfaces — [{deep}]: {common}.",
+                            DEEP_TONGUE_COLOUR,
+                        )
+                        self._maybe_show_lexicon_hint()
+            self.local_map.examined_bells.add((x, y))
+
+        # Open inscription
+        if text_def:
+            self.text_reader.open_text(
+                text_def,
+                panel_style="ziggurat",
+                text_align="center",
+                line_spacing_bonus=6,
+                panel_size="inscription",
+            )
+
+        return first_time
 
     def _build_warm_tile_ids(self) -> None:
         """Rebuild the set of terrain IDs that emit warmth."""
@@ -4066,6 +4747,8 @@ class Engine:
 
     def _on_player_step(self, x: int, y: int) -> None:
         """Called after player moves to (x, y). Applies move_cost debt and effects."""
+        # Movement resets rain collection
+        self.rain_collection_progress = 0
         from engine.hooks import HookEvent
         terrain_id    = self._resolve_terrain_id(x, y)
         terrain_entry = self.data.terrain.get(terrain_id, {})
@@ -4618,7 +5301,9 @@ class Engine:
         disrupted = getattr(self.player, "_hollow_knight_disruption", False)
 
         # Flat damage bonus from The Indifference perk (+1 per corruption threshold)
+        # + The Marked Path corruption_channel_bonus
         _corr_bonus = getattr(player_fighter, "corruption_damage_bonus", 0)
+        _corr_bonus += getattr(player_fighter, "corruption_channel_bonus", 0)
         if _corr_bonus > 0:
             weapon = dict(weapon) if weapon else {}
             weapon["damage_bonus"] = weapon.get("damage_bonus", 0) + _corr_bonus
@@ -4656,6 +5341,17 @@ class Engine:
             defender_dodge_chance  = target_dodge_chance,
             shield_def             = None,   # creatures have no shield equipment
         )
+
+        # Sprint penalty — reduce pre-armour damage while sprinting
+        if self.sprint_turns_remaining > 0 and result.damage_dealt > 0:
+            _sprint_mult = max(0.0, 1.0 + self.display.SPRINT_HIT_PENALTY)
+            _reduced = max(0, int(result.damage_dealt * _sprint_mult))
+            _diff = result.damage_dealt - _reduced
+            if _diff > 0:
+                target_fighter.hp = min(target_fighter.max_hp,
+                                        target_fighter.hp + _diff)
+                result.damage_dealt = _reduced
+                result.damage_number = _reduced
 
         # Decrement temporary essence hits on connecting blow
         if result.hit and not getattr(result, "dodged", False) and _weapon_entity:
@@ -4769,6 +5465,233 @@ class Engine:
                 if player_fighter.is_dead:
                     self._death_killer = target.name
                     self._on_player_death()
+
+    def _try_moveset_action(self, key: int) -> bool:
+        """Attempt a moveset action (Q or R). Returns True if a turn was spent."""
+        from engine.movesets import get_moveset_action, execute_moveset, apply_damage_mult
+        from engine.combat import resolve_attack, get_body_def, roll_dice
+        import random as _random
+
+        weapon_def = self._get_equipped_weapon()
+        if not weapon_def or not weapon_def.get("movesets"):
+            return False
+
+        key_label = "Q" if key == self.display.MOVESET_KEY_1 else "R"
+        action = get_moveset_action(weapon_def, key_label)
+        if not action:
+            return False
+
+        # Cooldown check
+        aid = action["id"]
+        cd = self.moveset_cooldowns.get(aid, 0)
+        if cd > 0:
+            self.log.add(f"{action['name']}: {cd} turns remaining.", UI_TEXT_DIM)
+            return False
+
+        # Find adjacent target (closest hostile)
+        target = None
+        best_dist = 999.0
+        action_range = action.get("range", 1)
+        for e in self.entities:
+            if e is self.player or not getattr(e, "is_alive", True):
+                continue
+            if not getattr(e, "blocks_movement", True):
+                continue
+            import math
+            d = math.sqrt((e.x - self.player.x) ** 2 + (e.y - self.player.y) ** 2)
+            if d <= action_range + 0.5 and d < best_dist:
+                best_dist = d
+                target = e
+
+        if target is None:
+            self.log.add("Nothing in range.", UI_TEXT_DIM)
+            return False
+
+        # Execute moveset — checks positioning, HP gates
+        ms_result = execute_moveset(action, self, target, weapon_def)
+        if ms_result is None:
+            # Blocked by positioning or HP gate — messages already posted
+            return False
+
+        # Set cooldown
+        cooldown = action.get("cooldown", 0)
+        if cooldown > 0:
+            self.moveset_cooldowns[aid] = cooldown
+
+        # Resolve damage via normal combat pipeline with modifiers
+        player_fighter = getattr(self.player, "fighter", None)
+        target_fighter = getattr(target, "fighter", None)
+        if not player_fighter or not target_fighter:
+            return True
+
+        body_def = get_body_def(target_fighter, self.data.bodies)
+        creature_def = self.data.entities.get(target.tile, {})
+        creature_essence_mods = creature_def.get("essence_modifiers", {})
+        target_dodge = float(creature_def.get("dodge_chance", 0.0))
+        if ms_result.ignore_dodge:
+            target_dodge = 0.0
+
+        rng = _random.Random()
+
+        # Build weapon dict with damage multiplier
+        mod_weapon = dict(weapon_def)
+        base_dice = mod_weapon.get("damage_dice", "1d4")
+        base_dmg = roll_dice(base_dice, rng)
+        modified_dmg = apply_damage_mult(base_dmg, action)
+        mod_weapon["damage_dice"] = f"{modified_dmg}d1"  # pre-rolled damage
+        mod_weapon["damage_bonus"] = mod_weapon.get("damage_bonus", 0)
+
+        # Ignore armour: set target AV to 0 temporarily
+        saved_av = target_fighter.effective_av
+        if ms_result.ignore_armour:
+            target_fighter.effective_av = 0
+
+        result = resolve_attack(
+            attacker_name="thou",
+            defender_name=target.name,
+            defender_fighter=target_fighter,
+            body_def=body_def,
+            weapon=mod_weapon,
+            creature_essence_mods=creature_essence_mods,
+            rng=rng,
+            defender_dodge_chance=target_dodge,
+        )
+
+        # Restore AV
+        if ms_result.ignore_armour:
+            target_fighter.effective_av = saved_av
+
+        # Log combat messages
+        from config import DEBUG_MODE
+        for msg, mtype in zip(result.messages, result.message_types):
+            color = MSG_COMBAT_OUT if mtype == "hit" else STONE_BLUE
+            self.log.add(f"> {msg}", color)
+        if result.damage_number > 0:
+            self.log.add(f"  {result.damage_number} damage.", MSG_COMBAT_OUT)
+
+        # Callout
+        if ms_result.callout:
+            self.callouts.add(
+                ms_result.callout,
+                float(target.x), float(target.y) - 0.3,
+                ms_result.callout_colour,
+                lifetime=1.0, font_size="status",
+            )
+
+        # Screen shake
+        if ms_result.screen_shake > 0:
+            self.trigger_screenshake(ms_result.screen_shake)
+
+        # Post-hit effects
+        target_dead = target_fighter.is_dead
+
+        # Reduce AV
+        if ms_result.reduce_av > 0 and result.hit:
+            target_fighter.effective_av = max(0, target_fighter.effective_av - ms_result.reduce_av)
+            self.log.add("The blade leaves something behind in the wound.", MSG_COMBAT_OUT)
+
+        # Suppress ability
+        if ms_result.suppress_ability > 0 and result.hit:
+            target._ability_suppressed_turns = ms_result.suppress_ability
+            self.log.add("Something severs between it and its nature.", MSG_COMBAT_OUT)
+
+        # Destroy armour layer
+        if ms_result.destroy_armour and result.hit:
+            if target_fighter.effective_av > 0:
+                target_fighter.effective_av = max(0, target_fighter.effective_av - 2)
+                self.log.add("The armour tears.", MSG_COMBAT_OUT)
+
+        # AoE disrupt (disconnect)
+        if ms_result.aoe_disrupt_range > 0 and result.hit:
+            from components.ai import AIState
+            for e in self.entities:
+                if e is self.player or e is target or not getattr(e, "is_alive", True):
+                    continue
+                if e.tile != target.tile:
+                    continue
+                d = math.sqrt((e.x - target.x) ** 2 + (e.y - target.y) ** 2)
+                if d <= ms_result.aoe_disrupt_range:
+                    ai = getattr(e, "ai", None)
+                    if ai:
+                        ai.state = AIState.WANDERING
+                        e._disrupted_turns = ms_result.aoe_disrupt_turns
+            self.log.add("Something shared between them breaks.", MSG_COMBAT_OUT)
+
+        # Reveal knowledge (revelation_lens)
+        if ms_result.reveal_knowledge and result.hit:
+            self._reveal_creature_knowledge(target)
+
+        # On-kill effects
+        if target_dead:
+            # Free move on kill
+            if ms_result.free_move:
+                self.log.add("The momentum carries.", MSG_COMBAT_OUT)
+                # Player gets one free move — mark it
+                self._free_move_pending = True
+
+            # Place pool on kill
+            if ms_result.place_pool:
+                from generation.decor_utils import place_decor
+                place_decor(self.local_map, target.x, target.y, ms_result.place_pool)
+
+            self._on_entity_death(target)
+
+        # Move debt from turn cost
+        if ms_result.turn_cost != 1.0:
+            self._move_debt += ms_result.turn_cost - 1.0
+
+        return True
+
+    def _reveal_creature_knowledge(self, target: "Actor") -> None:
+        """Reveal one unknown weakness or strength of a creature type."""
+        creature_id = target.tile
+        creature_def = self.data.entities.get(creature_id, {})
+        essence_mods = creature_def.get("essence_modifiers", {})
+        if not essence_mods:
+            self.log.add("It holds no more secrets.", UI_TEXT_DIM)
+            return
+
+        knowledge = self.creature_knowledge.get(creature_id, {
+            "revealed_weaknesses": [],
+            "revealed_strengths": [],
+        })
+
+        all_known = set(knowledge["revealed_weaknesses"] + knowledge["revealed_strengths"])
+        if len(all_known) >= len(essence_mods):
+            self.log.add("It holds no more secrets.", UI_TEXT_DIM)
+            return
+
+        # Find weakest unknown (highest modifier = most weak to)
+        unknown_weak = [(ess, mod) for ess, mod in essence_mods.items()
+                        if ess not in all_known and mod > 1.0]
+        unknown_strong = [(ess, mod) for ess, mod in essence_mods.items()
+                          if ess not in all_known and mod < 1.0]
+
+        revealed_ess = None
+        revealed_type = None
+        if unknown_weak:
+            unknown_weak.sort(key=lambda x: -x[1])  # highest modifier first
+            revealed_ess = unknown_weak[0][0]
+            revealed_type = "weakness"
+            knowledge["revealed_weaknesses"].append(revealed_ess)
+        elif unknown_strong:
+            unknown_strong.sort(key=lambda x: x[1])  # lowest modifier first
+            revealed_ess = unknown_strong[0][0]
+            revealed_type = "strength"
+            knowledge["revealed_strengths"].append(revealed_ess)
+
+        self.creature_knowledge[creature_id] = knowledge
+
+        if revealed_ess:
+            self.log.add("Its nature opens to you.", MSG_ANCIENT)
+            if revealed_type == "weakness":
+                self.log.add(f"  Weak to: {revealed_ess}", RESONANCE_HIGH)
+            else:
+                self.log.add(f"  Resists: {revealed_ess}", DUSTY_ROSE)
+            # Screen flash + particles
+            self.callouts.add("REVEALED", float(self.player.x),
+                              float(self.player.y) - 0.5,
+                              RESONANCE_HIGH, lifetime=1.5, font_size="crit")
 
     def _get_equipped_weapon(self) -> dict | None:
         """Return equipped weapon item dict, or None for unarmed."""

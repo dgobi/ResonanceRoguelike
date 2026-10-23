@@ -1,0 +1,17 @@
+{
+  "id": "briar_binding_oil",
+  "name": "briar binding oil",
+  "category": "alchemy",
+  "description": "The sap preserves what it touches. On a blade, it holds what it cuts.",
+  "known": true,
+  "requires_single_item": [
+    {"tag": "viscous", "min_tier": 2},
+    {"tag": "binding", "min_tier": 2}
+  ],
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 1},
+    {"tag": "vessel", "min_tier": 1}
+  ],
+  "result_item": "briar_binding_oil",
+  "passive_processing": false
+}

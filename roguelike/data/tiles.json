@@ -1107,7 +1107,7 @@
       ]
     },
     "overmap_forest": {
-      "ascii": "\u2663",
+      "ascii": "♣",
       "color_fg": [
         35,
         103,
@@ -1134,7 +1134,7 @@
       ]
     },
     "overmap_town": {
-      "ascii": "\u221a",
+      "ascii": "√",
       "color_fg": [
         219,
         164,
@@ -2259,7 +2259,7 @@
     },
     "blood_pool": {
       "char": 183,
-      "ascii": "\u00b7",
+      "ascii": "·",
       "color_fg": [
         142,
         82,
@@ -2275,7 +2275,7 @@
     },
     "bone_dust": {
       "char": 183,
-      "ascii": "\u00b7",
+      "ascii": "·",
       "color_fg": [
         200,
         195,
@@ -2291,7 +2291,7 @@
     },
     "ectoplasm_pool": {
       "char": 183,
-      "ascii": "\u00b7",
+      "ascii": "·",
       "color_fg": [
         32,
         214,
@@ -2307,7 +2307,7 @@
     },
     "ichor_seep": {
       "char": 183,
-      "ascii": "\u00b7",
+      "ascii": "·",
       "color_fg": [
         64,
         51,
@@ -2323,7 +2323,7 @@
     },
     "verdigris_fluid": {
       "char": 183,
-      "ascii": "\u00b7",
+      "ascii": "·",
       "color_fg": [
         93,
         175,
@@ -2670,7 +2670,7 @@
       ]
     },
     "pebble": {
-      "ascii": "\u00b7",
+      "ascii": "·",
       "color_fg": [
         109,
         117,
@@ -3156,5 +3156,53 @@
         9
       ]
     }
+  },
+  "vine_growth": {
+    "ascii": "v",
+    "char": 118,
+    "color_fg": [
+      80,
+      110,
+      60
+    ],
+    "color_bg": [
+      0,
+      0,
+      0
+    ],
+    "blocks_move": false,
+    "transparent": true
+  },
+  "vine_eyestalk": {
+    "ascii": "Y",
+    "char": 89,
+    "color_fg": [
+      120,
+      90,
+      50
+    ],
+    "color_bg": [
+      0,
+      0,
+      0
+    ],
+    "blocks_move": true,
+    "transparent": true
+  },
+  "vine_spore_vent": {
+    "ascii": "*",
+    "char": 42,
+    "color_fg": [
+      90,
+      120,
+      70
+    ],
+    "color_bg": [
+      0,
+      0,
+      0
+    ],
+    "blocks_move": false,
+    "transparent": true
   }
 }

@@ -1,0 +1,16 @@
+{
+  "id": "bone_dust_draught",
+  "name": "bone dust draught",
+  "description": "Grey liquid. The resonance has been drawn out. What remains is quieter than water.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": true,
+  "on_use": "reduce_resonance_exposure",
+  "reduce_amount": 0.25,
+  "use_message": "The dust settles. The tone fades somewhat.",
+  "keywords": [
+    {"tag": "resonant", "tier": 1},
+    {"tag": "bony", "tier": 1}
+  ]
+}

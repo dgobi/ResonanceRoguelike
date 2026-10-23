@@ -178,3 +178,21 @@ inherits the local_map light level at its position. Memory tiles are dimmed to ~
 
 `data_loader.py` exposes `engine.data.decoratives` — a `dict[str, dict]` keyed
 by `decor_id`. Renderer and placement code look up entries here to validate IDs.
+
+
+
+# How to create a new decorative:
+
+Add entry to data/decoratives.json with all properties (blocks_movement, blocks_sight, description, interactable, visual_fx, light_emit etc.)
+Add sprite entry to data/sprites/sprite_map.json pointing to the correct sheet/col/row
+In generation code, call place_decor(chunk, lx, ly, "your_decor_id") — this writes to chunk.decor[(lx,ly)], not to local_map.tiles
+The renderer reads chunk.decor and draws above terrain automatically
+
+# How to convert a terrain tile to decor (why dead_bell overrides the tile beneath):
+The tile is being written to local_map.tiles[y][x] which replaces whatever terrain was there — that's what terrain tiles do. To make it decor:
+
+Keep or deprecate the data/terrain.json entry (keep for backward compat)
+Add entry to data/decoratives.json
+Keep sprite in data/sprites/sprite_map.json (same coords, different key name if needed)
+Find every place in generation/town_gen/local_gen that writes this tile ID to local_map.tiles[y][x] and replace with place_decor(chunk, lx, ly, decor_id) — the floor tile beneath is now preserved
+Find every engine reference that reads this as terrain and update to check chunk.decor

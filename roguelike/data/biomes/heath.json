@@ -34,5 +34,8 @@
     "moderate": "The standing stones are more numerous here.",
     "high": "A waystone nearby. Avoid touching it."
   },
-  "flint_scatter_rate": 0.008
+  "flint_scatter_rate": 0.008,
+  "waystone_inscriptions": ["waystone_heath_a", "waystone_heath_b"],
+  "waystone_fallback_inscriptions": false,
+  "waystone_themes": ["silence", "time", "isolation"]
 }

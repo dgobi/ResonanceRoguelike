@@ -89,16 +89,30 @@ class AISystem:
                     from components.ai import _monster_attack_entity
                     _monster_attack_entity(entity, player, engine)
 
-            ai.take_turn(
-                actor         = entity,
-                local_map     = local_map,
-                entities      = entities,
-                player        = player,
-                log           = log,
-                rng           = self._rng,
-                ambient_light = intensity,
-                engine        = engine,
-            )
+            # Speed accumulator — creatures with speed < 1.0 skip turns,
+            # creatures with speed > 1.0 occasionally get a second step.
+            _speed = 1.0
+            if engine is not None:
+                _speed = engine.data.entities.get(entity.tile, {}).get("speed", 1.0)
+            ai.move_accumulator += _speed
+            if ai.move_accumulator < 1.0:
+                continue  # not enough accumulated movement this turn
+            _steps = 0
+            while ai.move_accumulator >= 1.0 and _steps < 2:
+                ai.move_accumulator -= 1.0
+                _steps += 1
+                ai.take_turn(
+                    actor         = entity,
+                    local_map     = local_map,
+                    entities      = entities,
+                    player        = player,
+                    log           = log,
+                    rng           = self._rng,
+                    ambient_light = intensity,
+                    engine        = engine,
+                )
+                if not getattr(entity, "is_alive", True):
+                    break
 
     def process_single(
         self,

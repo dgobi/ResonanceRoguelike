@@ -35,5 +35,8 @@
     "moderate": "Resonance travels through water. It has been travelling a long time.",
     "high": "Something below the surface carries a tone."
   },
-  "flint_scatter_rate": 0.001
+  "flint_scatter_rate": 0.001,
+  "waystone_inscriptions": ["waystone_drowned_a", "waystone_drowned_b"],
+  "waystone_fallback_inscriptions": false,
+  "waystone_themes": ["submersion", "loss", "the long silence"]
 }

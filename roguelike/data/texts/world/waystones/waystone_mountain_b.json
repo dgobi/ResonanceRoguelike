@@ -1,0 +1,10 @@
+{
+  "id": "waystone_mountain_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Keth sketh keth.\nZhal keth.", "damaged": false, "deep_tongue": true}]
+}

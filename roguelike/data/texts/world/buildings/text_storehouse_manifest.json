@@ -1,0 +1,10 @@
+{
+  "id": "text_storehouse_manifest",
+  "title": "Manifest — Third Turning",
+  "type": "document",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "teach_words": {"count": 1, "categories": ["place", "time"], "tier": 1},
+  "pages": [{"text": "Received: twelve bundle wood, four skins water, dried provision sufficient for the watch.\nDisbursed: six bundle to the bell ward. Two skins to the eastern post.\nRemaining: as noted. The ward has not sent word in four days.\nNote: the vrath holds. We remain.", "damaged": false}]
+}

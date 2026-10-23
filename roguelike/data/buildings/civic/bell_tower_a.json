@@ -18,6 +18,7 @@
     "f": "flagstone",
     "+": "door_closed",
     "^": "stairs_up",
+    "B": "bell_dead",
     " ": null
   },
   "layers": [
@@ -27,17 +28,17 @@
     "#......#",
     "#.#.##.#",
     "#.#ww#.#",
-    "#.#ww#.#",
+    "#.#Bw#.#",
     "#.####.#",
     "#......#",
-    "###.####"
+    "###+####"
   ],
   "special_tiles": [
     {
       "x": 3,
       "y": 5,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "world_official_a",
       "note": "Guild tuning record or bell registry"
     },
@@ -45,7 +46,7 @@
       "x": 4,
       "y": 5,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "research_note",
       "text_id": "world_official_b",
       "note": "Secondary record"
     }

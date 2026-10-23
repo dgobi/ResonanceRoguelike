@@ -35,5 +35,8 @@
     "moderate": "Something accumulates in the silence here.",
     "high": "The grey stone is close."
   },
-  "flint_scatter_rate": 0.002
+  "flint_scatter_rate": 0.002,
+  "waystone_inscriptions": ["waystone_forest_a", "waystone_forest_b"],
+  "waystone_fallback_inscriptions": false,
+  "waystone_themes": ["memory", "growth", "concealment"]
 }

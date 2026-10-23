@@ -80,16 +80,20 @@ def can_craft(
     missing    = []
 
     # requires_single_item: find one item with ALL tags, consume it
+    # Accepts both list format [{"tag":..., "min_tier":...}] and dict format {"tags":[...]}
     rsi = recipe.get("requires_single_item")
     if rsi:
-        tags     = rsi.get("tags", [])
-        quantity = rsi.get("max_quantity", 1)
+        if isinstance(rsi, list):
+            tags = rsi  # list of {"tag": str, "min_tier": int} dicts
+            quantity = 1
+        else:
+            tags     = rsi.get("tags", [])
+            quantity = rsi.get("max_quantity", 1)
         qualifying = [item for item in remaining if _item_has_all_tags(item, tags)]
         if len(qualifying) < quantity:
-            # Report the first unsatisfied tag combination
             missing.append({
-                "tag": "+".join(t["tag"] for t in tags),
-                "min_tier": max((t.get("min_tier", 1) for t in tags), default=1),
+                "tag": "+".join(t["tag"] if isinstance(t, dict) else str(t) for t in tags),
+                "min_tier": max((t.get("min_tier", 1) if isinstance(t, dict) else 1 for t in tags), default=1),
                 "have": len(qualifying), "need": quantity,
                 "single_item": True,
             })
@@ -149,8 +153,12 @@ def attempt_craft(
     # requires_single_item: consume items with ALL tags
     rsi = recipe.get("requires_single_item")
     if rsi:
-        tags     = rsi.get("tags", [])
-        quantity = rsi.get("max_quantity", 1)
+        if isinstance(rsi, list):
+            tags = rsi
+            quantity = 1
+        else:
+            tags     = rsi.get("tags", [])
+            quantity = rsi.get("max_quantity", 1)
         qualifying = [item for item in remaining if _item_has_all_tags(item, tags)]
         for item in qualifying[:quantity]:
             remaining.remove(item)

@@ -1,0 +1,16 @@
+{
+  "id": "road_knowledge",
+  "name": "The Road Remembers",
+  "category": "The Hollow Road",
+  "cost": 1,
+  "description": "Every road was built for a purpose. You feel the purpose still.",
+  "effects": [
+    "Movement on road tiles does not consume sprint charges.",
+    "Roads grant +1 to player_move_accumulator during sprint."
+  ],
+  "hooks": [
+    {"event": "ON_TILE_ENTERED", "handler": "perk_road_knowledge_tile_entered"}
+  ],
+  "conflicts": [],
+  "requires": []
+}

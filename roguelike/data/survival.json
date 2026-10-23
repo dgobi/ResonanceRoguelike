@@ -6,7 +6,7 @@
     "stages": [
       {"threshold": 700, "id": "peckish",    "message": "Something gnaws at the edge of attention.",      "move_penalty": 0.0, "hp_drain": 0.0},
       {"threshold": 400, "id": "hungry",     "message": "Hunger moves through you.",                      "move_penalty": 0.0, "hp_drain": 0.0},
-      {"threshold": 200, "id": "starving",   "message": "The body is beginning to fail.",                 "move_penalty": 0.5, "hp_drain": 0.0},
+      {"threshold": 200, "id": "starving",   "message": "The hunger has teeth now. Your hands are unsteady.", "move_penalty": 0.5, "hp_drain": 0.0},
       {"threshold": 0,   "id": "collapsing", "message": "You are coming apart from the inside.",          "move_penalty": 1.0, "hp_drain": 1.0}
     ]
   },
@@ -16,7 +16,7 @@
     "stages": [
       {"threshold": 600, "id": "dry",         "message": "A dryness in the throat.",                      "move_penalty": 0.0, "hp_drain": 0.0},
       {"threshold": 350, "id": "thirsty",     "message": "The thirst is becoming difficult to ignore.",   "move_penalty": 0.0, "hp_drain": 0.0},
-      {"threshold": 150, "id": "parched",     "message": "Thought is slow. The world narrows.",           "move_penalty": 0.5, "hp_drain": 0.0},
+      {"threshold": 150, "id": "parched",     "message": "The throat has closed. The world dims at the edges.", "move_penalty": 0.5, "hp_drain": 0.0},
       {"threshold": 0,   "id": "desiccating", "message": "Something essential is leaving the body.",      "move_penalty": 1.0, "hp_drain": 2.0}
     ]
   },

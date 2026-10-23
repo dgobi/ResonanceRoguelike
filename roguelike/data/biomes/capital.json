@@ -30,5 +30,8 @@
     "moderate": "The bells here were the largest ever made. They are silent now. They are not empty.",
     "high": "Do not go near the tower. Do not go near any tower."
   },
-  "flint_scatter_rate": 0.0
+  "flint_scatter_rate": 0.0,
+  "waystone_inscriptions": [],
+  "waystone_fallback_inscriptions": true,
+  "waystone_themes": ["power", "the mechanism", "the builders"]
 }

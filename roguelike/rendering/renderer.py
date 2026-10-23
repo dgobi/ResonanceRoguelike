@@ -329,6 +329,11 @@ class Renderer:
         self._draw_wraith_aura(display_surface, entities, local_map,
                                cam_x, cam_y, zoom, blit_x, blit_y)
 
+        # Heat shimmer above campfires and other heat sources
+        self._apply_heat_shimmer(display_surface, local_map,
+                                 cam_x, cam_y, tiles_x, tiles_y, zoom,
+                                 blit_x, blit_y, viewport_rect)
+
         display_surface.set_clip(None)
 
         self._draw_void_pattern(display_surface, local_map,
@@ -381,6 +386,96 @@ class Renderer:
                 dx = int(cx + radius_inner * math.cos(angle))
                 dy = int(cy + radius_inner * math.sin(angle))
                 pygame.draw.circle(surface, DEEP_STONE_BLUE, (dx, dy), 1)
+
+    # ------------------------------------------------------------------ #
+    #  Heat shimmer distortion above campfires and heat sources
+    # ------------------------------------------------------------------ #
+
+    def _apply_heat_shimmer(
+        self,
+        surface:       pygame.Surface,
+        local_map:     "LocalMap",
+        cam_x:         int,
+        cam_y:         int,
+        tiles_x:       int,
+        tiles_y:       int,
+        zoom:          int,
+        blit_x:        int,
+        blit_y:        int,
+        viewport_rect: pygame.Rect,
+    ) -> None:
+        """Apply heat shimmer distortion above campfire/forge/heat tiles.
+
+        Reads a strip of pixels above each heat source and redraws them with
+        a time-varying horizontal offset.  Max 2px displacement.
+        """
+        import time as _t
+        tw, th = self._tile_wh()
+        tile_w = tw * zoom
+        tile_h = th * zoom
+        tick = _t.monotonic() * 60  # frame-like counter
+
+        decoratives = getattr(local_map, "decor", {})
+        terrain_data = getattr(self, "_terrain_data", None)
+
+        for tx in range(tiles_x):
+            for ty in range(tiles_y):
+                mx = tx + cam_x
+                my = ty + cam_y
+                if not local_map.in_bounds(mx, my):
+                    continue
+                if not bool(local_map.tiles[mx, my]["visible"]):
+                    continue
+
+                # Check for heat sources: decor with light_emit > 3 or
+                # campfire_lit, or terrain with light_emit > 3
+                _is_heat = False
+                did = decoratives.get((mx, my))
+                if did in ("campfire_lit",):
+                    _is_heat = True
+                elif terrain_data:
+                    _tr = local_map.tiles[mx, my]["terrain"]
+                    if isinstance(_tr, bytes):
+                        _tr = _tr.decode()
+                    _td = terrain_data.get(str(_tr), {})
+                    if _td.get("light_emit", 0) > 3:
+                        _is_heat = True
+
+                if not _is_heat:
+                    continue
+
+                # Screen position of heat source
+                sx = blit_x + tx * tile_w
+                # Shimmer region: 3 tiles wide, 2 tiles tall, above the source
+                shimmer_x = sx - tile_w
+                shimmer_y = blit_y + (ty - 2) * tile_h
+                shimmer_w = tile_w * 3
+                shimmer_h = tile_h * 2
+
+                shimmer_rect = pygame.Rect(shimmer_x, shimmer_y,
+                                           shimmer_w, shimmer_h)
+                shimmer_rect = shimmer_rect.clip(viewport_rect)
+                if shimmer_rect.width < 4 or shimmer_rect.height < 4:
+                    continue
+
+                # Sample and redraw with sinusoidal offset
+                try:
+                    strip = surface.subsurface(shimmer_rect).copy()
+                except ValueError:
+                    continue
+                for row in range(shimmer_rect.height):
+                    t = tick * 0.08 + row * 0.3 + mx * 1.7
+                    offset = int(math.sin(t) * 1.5)
+                    if offset == 0:
+                        continue
+                    try:
+                        src_row = strip.subsurface(
+                            (0, row, shimmer_rect.width, 1)).copy()
+                        surface.blit(src_row,
+                                     (shimmer_rect.x + offset,
+                                      shimmer_rect.y + row))
+                    except ValueError:
+                        continue
 
     # ------------------------------------------------------------------ #
     #  Void dot pattern
@@ -946,7 +1041,7 @@ class Renderer:
                         continue
 
                     # 3. Determine the specific sprite variant (Autotiling)
-                    if any(key in decorated_name for key in ["wall", "water", "rock"]):
+                    if any(key in decorated_name for key in ["wall", "water", "rock", "grey"]):
                         # Water tiles: out-of-bounds does NOT count as a connection
                         # (rivers don't continue off the map edge).
                         _oob_connects = "water" not in decorated_name
@@ -959,7 +1054,13 @@ class Renderer:
                         sprite_name = decorated_name
 
                     # Visual FX — brightness mod applied before sprite draw
+                    # Check both terrain and decor for visual_fx
                     _fx = self.registry._data.get(terrain, {}).get("visual_fx")
+                    if not _fx:
+                        _dfx_id = getattr(local_map, "decor", {}).get((mx, my))
+                        if _dfx_id:
+                            _dfx_defs = getattr(self, "_decor_defs", {})
+                            _fx = _dfx_defs.get(_dfx_id, {}).get("visual_fx")
                     if _fx and vis:
                         _ticks = pygame.time.get_ticks()
                         _bmod  = self._get_fx_brightness(_fx, _ticks, mx, my)
@@ -1068,7 +1169,20 @@ class Renderer:
                         fg = DUNGEON_SHADOW
 
                 # Draw sprite with no background (transparent — floor shows through)
-                self._draw_sprite(surface, decor_id, fg, None, tx, ty, zoom=zoom)
+                # Fallback to ASCII if sprite lookup fails
+                if self.sprite_registry and self.sprite_registry.has(decor_id):
+                    self._draw_sprite(surface, decor_id, fg, None, tx, ty, zoom=zoom)
+                elif decor_id in self.registry._data:
+                    # ASCII fallback: use tiles.json char + fg colour
+                    ch   = chr(self.registry.char(decor_id))
+                    t_fg = self.registry.fg(decor_id) if vis else (40, 40, 40)
+                    font = getattr(self.display, "font_ui_normal", None)
+                    if font:
+                        g = font.render(ch, True, t_fg)
+                        tw = self.display.zoom_level * 16
+                        th = tw
+                        surface.blit(g, (tx * tw + (tw - g.get_width()) // 2,
+                                         ty * th + (th - g.get_height()) // 2))
 
     # ------------------------------------------------------------------ #
     #  Processing layer rendering

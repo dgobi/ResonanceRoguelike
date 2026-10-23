@@ -30,5 +30,8 @@
     "moderate": "The resonance here is not a danger. It is a state of being.",
     "high": "The source. Everything downstream of this is downstream of this."
   },
-  "flint_scatter_rate": 0.01
+  "flint_scatter_rate": 0.01,
+  "waystone_inscriptions": [],
+  "waystone_fallback_inscriptions": true,
+  "waystone_themes": ["the deep ones", "origin", "the mountain"]
 }

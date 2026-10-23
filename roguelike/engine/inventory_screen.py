@@ -379,8 +379,8 @@ class InventoryScreen:
             )
 
         sw, sh = surface.get_width(), surface.get_height()
-        pw = min(920, sw - 40)
-        ph = min(560, sh - 40)
+        pw = sw - 40   # full screen with 20px margin
+        ph = sh - 40
         px = (sw - pw) // 2
         py = (sh - ph) // 2
 
@@ -391,9 +391,10 @@ class InventoryScreen:
         )
 
         PAD = UI_PANEL_INSET
-        lw  = int(pw * 0.28)   # left panel   28%
-        mw  = int(pw * 0.28)   # middle panel 28%
-        rw  = pw - lw - mw     # right panel  44%
+        content_w = pw - PAD * 2
+        lw  = int(content_w * 0.25) + PAD  # 25% equipped
+        mw  = int(content_w * 0.40)        # 40% carried
+        rw  = pw - lw - mw                 # remainder detail
 
         lx = 0
         mx = lw

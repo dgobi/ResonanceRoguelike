@@ -14,5 +14,32 @@
   "on_use": "equip_toggle",
   "consumed_on_use": false,
   "crit_chance": 0.08,
-  "keywords": [{"tag": "cutting", "tier": 1}, {"tag": "binding", "tier": 2}]
+  "keywords": [{"tag": "cutting", "tier": 1}, {"tag": "binding", "tier": 2}],
+  "movesets": [
+    {
+      "id": "connection_cut",
+      "name": "Connection Cut",
+      "description": "Sever what binds it to its nature.",
+      "key": "Q",
+      "turn_cost": 1.0,
+      "cooldown": 15,
+      "range": 1,
+      "damage_mult": 1.0,
+      "callout": "SEVERED",
+      "effects": {"suppress_ability_turns": 5}
+    },
+    {
+      "id": "slip_past",
+      "name": "Slip Past",
+      "description": "Find the gap where no armour stands.",
+      "key": "R",
+      "turn_cost": 0.8,
+      "cooldown": 5,
+      "range": 1,
+      "damage_mult": 1.0,
+      "callout": "SLIP",
+      "positioning": "behind",
+      "effects": {"ignore_armour": true}
+    }
+  ]
 }

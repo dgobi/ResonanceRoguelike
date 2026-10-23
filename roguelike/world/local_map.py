@@ -82,6 +82,18 @@ class LocalMap:
         # Examined steles — set of (lx, ly) that have already taught words.
         self.examined_steles: set[tuple[int, int]] = set()
 
+        # Waystone inscriptions — maps (lx, ly) → text_id string.
+        # Selected once per waystone, persists across examinations.
+        # Serialised with the local_map via pickle (CachedChunk).
+        self.waystone_inscriptions: dict[tuple[int, int], str] = {}
+
+        # Bell inscriptions — maps (lx, ly) → text_id string.
+        # Selected once per bell, persists across examinations.
+        self.bell_inscriptions: dict[tuple[int, int], str] = {}
+
+        # Examined bells — set of (lx, ly) that have already taught words.
+        self.examined_bells: set[tuple[int, int]] = set()
+
         # Stele text IDs — maps (lx, ly) → text_id string.
         # Set during layout stamping for stele special tiles.
         # Serialised with the local_map via pickle (CachedChunk).
@@ -97,16 +109,40 @@ class LocalMap:
         # Serialised with the local_map via pickle (CachedChunk).
         self.container_state: dict[tuple[int, int], dict] = {}
 
+        # Vine networks — growing terrain/decor patterns managed by vine_system.py.
+        # Each entry: {tiles, eyestalks, spore_vents, origin, age}
+        # Serialised with the local_map via pickle (CachedChunk).
+        self.vine_networks: list[dict] = []
+
+    # Terrain IDs where plants may grow — grass and soil only
+    _PLANT_VALID_TERRAIN = frozenset({
+        "grass", "varied_grass", "mud", "packed_earth", "dirt_path",
+        "tall_grass", "brambles",
+    })
+
     def set_tile(self, x: int, y: int, terrain: str,
                  walkable: bool, transparent: bool) -> None:
         # Import inside the function to avoid circular imports
-        from rendering.decor import resolve_functional_variant
-        
+        from rendering.decor import resolve_functional_variant, PLANT_DECOR_IDS
+
         # Resolve 'varied_x' to a deterministic specific type using tile coords
         actual_terrain = resolve_functional_variant(terrain, mx=x, my=y)
-        
-        # Store the actual resolved terrain in the map
-        self.tiles[x, y] = make_tile(actual_terrain, walkable, transparent)
+
+        # Plants go to decor layer, terrain stays as grass underneath
+        if actual_terrain in PLANT_DECOR_IDS:
+            # Only place plant if terrain is valid AND no existing decor
+            if terrain in self._PLANT_VALID_TERRAIN and (x, y) not in self.decor:
+                from generation.decor_utils import place_decor
+                self.tiles[x, y] = make_tile("grass", walkable, transparent)
+                place_decor(self, x, y, actual_terrain)
+            else:
+                # Invalid terrain or decor collision — just place grass
+                self.tiles[x, y] = make_tile("grass", walkable, transparent)
+        else:
+            self.tiles[x, y] = make_tile(actual_terrain, walkable, transparent)
+            # Clear any plant decor when terrain is overwritten (e.g. road carved over grass)
+            if (x, y) in self.decor and self.decor[(x, y)] in PLANT_DECOR_IDS:
+                del self.decor[(x, y)]
 
     def in_bounds(self, x: int, y: int) -> bool:
         return 0 <= x < self.width and 0 <= y < self.height

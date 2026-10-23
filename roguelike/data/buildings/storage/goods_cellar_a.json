@@ -1,0 +1,84 @@
+{
+  "id": "goods_cellar_a",
+  "category": "storage",
+  "width": 12,
+  "height": 8,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "storage": 5,
+    "market": 3
+  },
+  "description": "A large cellar packed with goods. Barrels, crates, sacks. Someone kept careful inventory here once. The air is still and cool.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "############",
+    "#..........#",
+    "#..........#",
+    "#..........#",
+    "#..........#",
+    "#..........#",
+    "#.........w#",
+    "#####.######"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": ["storage_general"]
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": ["storage_general"]
+    },
+    {
+      "x": 10,
+      "y": 1,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": ["storage_general"]
+    },
+    {
+      "x": 10,
+      "y": 3,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": ["storage_general"]
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "type": "container",
+      "decor_id": "coffer",
+      "loot_pools": ["noble_generic"]
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": ["storage_tools"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null, null, null, null, null]
+  ]
+}

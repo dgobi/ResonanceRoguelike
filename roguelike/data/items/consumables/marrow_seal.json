@@ -1,0 +1,17 @@
+{
+  "id": "marrow_seal",
+  "name": "marrow seal",
+  "description": "Hardened marrow. Applied to armour, it adds a temporary layer of resistance.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.15,
+  "stackable": true,
+  "on_use": "apply_to_armor",
+  "apply_message": "The armour hardens. Briefly.",
+  "armor_bonus": 1,
+  "armor_hits": 20,
+  "keywords": [
+    {"tag": "waxy", "tier": 1},
+    {"tag": "bony", "tier": 2}
+  ]
+}

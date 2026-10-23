@@ -69,20 +69,56 @@
       {
         "min_cutting_tier": 1,
         "yields": [
-          {"item_id": "stalker_meat", "quantity_min": 1, "quantity_max": 3},
-          {"item_id": "animal_sinew", "quantity_min": 1, "quantity_max": 2},
-          {"item_id": "animal_bone",  "quantity_min": 1, "quantity_max": 2},
-          {"item_id": "crude_viscera","quantity_min": 0, "quantity_max": 1}
+          {
+            "item_id": "stalker_meat",
+            "quantity_min": 1,
+            "quantity_max": 3
+          },
+          {
+            "item_id": "animal_sinew",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "animal_bone",
+            "quantity_min": 1,
+            "quantity_max": 2
+          },
+          {
+            "item_id": "crude_viscera",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
         ]
       },
       {
         "min_cutting_tier": 2,
         "yields": [
-          {"item_id": "stalker_meat",       "quantity_min": 2, "quantity_max": 4},
-          {"item_id": "animal_sinew",       "quantity_min": 2, "quantity_max": 3},
-          {"item_id": "animal_bone",        "quantity_min": 2, "quantity_max": 3},
-          {"item_id": "crude_viscera",      "quantity_min": 1, "quantity_max": 1},
-          {"item_id": "stalker_musk_gland", "quantity_min": 0, "quantity_max": 1}
+          {
+            "item_id": "stalker_meat",
+            "quantity_min": 2,
+            "quantity_max": 4
+          },
+          {
+            "item_id": "animal_sinew",
+            "quantity_min": 2,
+            "quantity_max": 3
+          },
+          {
+            "item_id": "animal_bone",
+            "quantity_min": 2,
+            "quantity_max": 3
+          },
+          {
+            "item_id": "crude_viscera",
+            "quantity_min": 1,
+            "quantity_max": 1
+          },
+          {
+            "item_id": "stalker_musk_gland",
+            "quantity_min": 0,
+            "quantity_max": 1
+          }
         ]
       }
     ]
@@ -117,5 +153,6 @@
         82
       ]
     }
-  }
+  },
+  "speed": 1.2
 }

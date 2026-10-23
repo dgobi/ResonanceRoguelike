@@ -37,7 +37,7 @@
       "x": 1,
       "y": 6,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "letter",
       "text_id": "world_graffiti_a",
       "note": "Personal letter or note on table"
     },
@@ -49,6 +49,21 @@
       "loot_pools": [
         "commoner_kitchen"
       ]
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "type": "item",
+      "item_id": "letter",
+      "text_id": "text_residential_letter",
+      "note": "Letter left near the door"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "type": "scene",
+      "scene_id": "interrupted_meal",
+      "note": "Meal left mid-course on table"
     }
   ],
   "note": "PLACEHOLDER — redesign layers to taste. Door at (4,7) faces south street."

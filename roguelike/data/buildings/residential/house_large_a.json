@@ -39,7 +39,7 @@
       "x": 1,
       "y": 8,
       "type": "item",
-      "item_id": "lab_note",
+      "item_id": "letter",
       "text_id": "world_letter_a",
       "note": "Letter on table in main hall"
     },

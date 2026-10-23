@@ -1,0 +1,10 @@
+{
+  "id": "text_guard_log",
+  "title": "Watch Log",
+  "type": "log",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "teach_words": {"count": 1, "categories": ["place", "cosmic"], "tier": 1},
+  "pages": [{"text": "Day 1: quiet. Replaced Aldric on the south road. Nothing moves.\nDay 3: the sound from the stone changed before dawn. Reported to the ward. No response.\nDay 4: Aldric has not returned from the heath. His post is empty.\nDay 7: something is wrong with the world above. I can hear the keth at night now. It speaks.\nI am not leaving my post.", "damaged": false}]
+}

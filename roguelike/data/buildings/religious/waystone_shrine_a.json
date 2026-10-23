@@ -1,0 +1,53 @@
+{
+  "id": "waystone_shrine_a",
+  "category": "religious",
+  "width": 8,
+  "height": 7,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "waystone_square": 5,
+    "ossuary": 2
+  },
+  "description": "Built around a waystone. The stone predates the walls by centuries. Offerings accumulate at its base. Candle stubs everywhere.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "f": "flagstone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "########",
+    "#ffffff#",
+    "#f....f#",
+    "#f....f#",
+    "#f....f#",
+    "#......#",
+    "###.####"
+  ],
+  "special_tiles": [
+    {
+      "x": 4,
+      "y": 3,
+      "type": "stele",
+      "note": "Waystone plinth at centre of shrine"
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "type": "container",
+      "decor_id": "offering_bowl",
+      "loot_pools": ["shrine_offering"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, "tallow_dip", null, null, null, null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, "offering_coins", null, null],
+    [null, null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null, null]
+  ]
+}

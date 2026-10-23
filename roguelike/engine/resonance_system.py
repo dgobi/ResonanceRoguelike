@@ -78,7 +78,7 @@ def system_resonance_on_turn(payload: dict) -> dict | None:
             engine.resonance_exposure + 0.008,
         )
         proximity_factor = 1.0 - (nearest_dist / 20.0)
-        exposure_tick    = nearest_emit * proximity_factor * 0.015
+        exposure_tick    = nearest_emit * proximity_factor * 0.0075
         engine.resonance_exposure = min(
             1.5,
             engine.resonance_exposure + exposure_tick,
@@ -93,16 +93,19 @@ def system_resonance_on_turn(payload: dict) -> dict | None:
     # 4. Corruption conversion at sustained high exposure
     if engine.resonance_exposure >= 0.70:
         old_corruption = engine.corruption
-        engine.corruption = min(1.0, engine.corruption + 0.002)
+        engine.corruption = min(1.0, engine.corruption + 0.0012)
         _check_corruption_thresholds(engine, old_corruption,
                                      engine.corruption, effects)
 
     # 5. Exposure tier messages — fire only on tier change
     _check_exposure_messages(engine, effects)
 
-    # 6. Weather tick
+    # 5b. Directional pull toward nearest bell at high exposure
+    _check_directional_pull(engine)
+
+    # 6. Weather tick — no weather underground
     weather = getattr(engine, "weather", None)
-    if weather is not None:
+    if weather is not None and engine.current_submap_id is None:
         result = weather.tick(engine.rng)
         if result and "add_message" not in effects:
             effects["add_message"]   = result[0]
@@ -137,7 +140,7 @@ def system_resonance_on_tile_entered(payload: dict) -> dict | None:
 
             elif bell_state == "cracked":
                 engine.resonance_exposure = min(
-                    1.5, engine.resonance_exposure + 0.12)
+                    1.5, engine.resonance_exposure + 0.06)
                 if "add_message" not in effects:
                     effects["add_message"] = \
                         "The crack breathes against you."
@@ -198,6 +201,13 @@ def _scan_resonant_terrain(engine: "Engine") -> tuple[float, float]:
             terrain_id   = engine.get_terrain(tx, ty)
             terrain_data = engine.data.terrain.get(terrain_id, {})
             emit = terrain_data.get("resonance_emit", 0.0)
+            # Also check decor layer for resonance_emit
+            _decor_id = engine.local_map.decor.get((tx, ty))
+            if _decor_id:
+                _decor_entry = engine.data.decoratives.get(_decor_id, {})
+                _decor_emit = _decor_entry.get("resonance_emit", 0.0)
+                if _decor_emit > emit:
+                    emit = _decor_emit
             if emit > 0.0:
                 dist = math.sqrt(dx * dx + dy * dy)
                 if emit > best_emit or (
@@ -300,26 +310,108 @@ def _check_exposure_messages(engine: "Engine", effects: dict) -> None:
 
 
 def _learn_deep_tongue_from_corruption(engine: "Engine", effects: dict) -> None:
-    """Called when corruption crosses 0.70 — learn a body word."""
+    """Called when corruption crosses 0.70 — teach 2-3 ominous words.
+
+    Bypasses the normal tier gate in get_learnable_words because corruption
+    IS the unlock condition for ominous (tier 3) words.
+    """
     lang = getattr(getattr(engine, "player", None), "language", None)
     if lang is None:
         return
     try:
-        from engine.language_system import learn_from_category
-        ok, wid = learn_from_category(
-            "body", 1, "corruption", lang,
-            engine.data.deep_tongue, engine.rng,
+        # Build pool: ominous tier-3 words not yet known, source=corruption
+        pool = [
+            wid for wid, wdef in engine.data.deep_tongue.items()
+            if wdef.get("category") == "ominous"
+            and wdef.get("tier", 1) == 3
+            and "corruption" in wdef.get("learn_sources", [])
+            and not lang.knows(wid)
+        ]
+        if not pool:
+            return
+
+        count = min(engine.rng.randint(2, 3), len(pool))
+        chosen = engine.rng.sample(pool, count)
+
+        # Intrusion tone — words force themselves in
+        engine.log.add(
+            "Something presses through the bone. A shape that was not invited.",
+            MSG_ANCIENT,
         )
-        if ok:
+
+        for wid in chosen:
+            lang.learn(wid, engine.world_time.turn)
             wdef = engine.data.deep_tongue.get(wid, {})
             deep = wdef.get("deep", wid)
             common = wdef.get("common", "")
             lang.translation_events[wid] = engine.world_time.turn
-            # Post directly to engine log since effects pipeline may not
-            # process additional messages past the threshold message
             engine.log.add(
-                f"Something ancient surfaces — [{deep}]: {common}.",
-                CORRUPTION_COLOUR,
+                f"  [{deep}]: {common}.",
+                MSG_ANCIENT,
             )
+        # Do NOT fire lexicon hint here — it fires on first word learned
     except Exception:
         pass  # never crash on learning failure
+
+
+# ------------------------------------------------------------------ #
+#  Directional pull toward nearest bell
+# ------------------------------------------------------------------ #
+
+_PULL_THRESHOLDS = [
+    (0.30, "Something pulls. A direction. You do not choose to feel it."),
+    (0.50, "The pull is stronger."),
+    (0.70, "The pull is a certainty now."),
+]
+
+
+def _find_nearest_bell_direction(engine: "Engine") -> str | None:
+    """Return cardinal direction toward nearest bell structure on overmap, or None."""
+    world_map = getattr(engine, "world_map", None)
+    if world_map is None:
+        return None
+    px, py = engine.world_x, engine.world_y
+    best_dist = 999999.0
+    best_dx, best_dy = 0, 0
+    for wy in range(world_map.height):
+        for wx in range(world_map.width):
+            chunk = world_map.get(wx, wy)
+            if chunk is None:
+                continue
+            # Check if chunk has a bell — look at chunk-level resonance
+            biome_id = getattr(chunk, "biome_id", "")
+            # Towns and capitals have bells
+            if biome_id in ("town", "capital"):
+                dist = math.sqrt((wx - px) ** 2 + (wy - py) ** 2)
+                if dist < best_dist:
+                    best_dist = dist
+                    best_dx = wx - px
+                    best_dy = wy - py
+    if best_dist >= 999999.0:
+        return None
+    # Convert to cardinal
+    if abs(best_dx) >= abs(best_dy):
+        return "east" if best_dx > 0 else "west"
+    else:
+        return "south" if best_dy > 0 else "north"
+
+
+def _check_directional_pull(engine: "Engine") -> None:
+    """Fire directional pull messages at exposure thresholds. Once per threshold."""
+    exposure = engine.resonance_exposure
+    if exposure < 0.30:
+        return
+    if not hasattr(engine, "_pull_thresholds_fired"):
+        engine._pull_thresholds_fired = set()
+    for threshold, msg in _PULL_THRESHOLDS:
+        if exposure >= threshold and threshold not in engine._pull_thresholds_fired:
+            engine._pull_thresholds_fired.add(threshold)
+            direction = _find_nearest_bell_direction(engine)
+            if direction is None:
+                from config import DEBUG_MODE
+                if DEBUG_MODE:
+                    print("[RESONANCE] no bell structure found on overmap, "
+                          "directional pull suppressed.")
+                return
+            engine.log.add(msg, DEEP_TONGUE_COLOUR)
+            engine.log.add(f"It is to the {direction}.", UI_TEXT_DIM)

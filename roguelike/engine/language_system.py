@@ -128,6 +128,16 @@ def learn_from_text(
     return [wid] if ok else []
 
 
+def validate_deep_tongue_text(body: str, all_words: dict) -> list[str]:
+    """Return list of tokens in body that are NOT in the deep tongue lexicon."""
+    unknown = []
+    for token in body.replace("\n", " ").split():
+        clean = token.strip(".,;:\u2014-!?\"'()[]").lower()
+        if clean and clean not in all_words:
+            unknown.append(clean)
+    return unknown
+
+
 def get_unknown_words_in_text(
     text_body: str,
     language: "Language",

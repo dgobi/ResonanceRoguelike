@@ -30,5 +30,8 @@
     "moderate": "The waystone at the centre is still warm.",
     "high": "There is a bell here. Do not touch it."
   },
-  "flint_scatter_rate": 0.0
+  "flint_scatter_rate": 0.0,
+  "waystone_inscriptions": ["waystone_town_a", "waystone_town_b"],
+  "waystone_fallback_inscriptions": false,
+  "waystone_themes": ["people", "the last days", "occupation"]
 }

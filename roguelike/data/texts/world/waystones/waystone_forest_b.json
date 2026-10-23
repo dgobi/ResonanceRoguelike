@@ -1,0 +1,10 @@
+{
+  "id": "waystone_forest_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Voss keth.\nSketh urath.", "damaged": false, "deep_tongue": true}]
+}

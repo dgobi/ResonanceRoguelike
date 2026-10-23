@@ -1,0 +1,45 @@
+{
+  "id": "house_single_room_a",
+  "category": "residential",
+  "width": 7,
+  "height": 6,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 4,
+    "market": 1
+  },
+  "description": "A single-room dwelling. Low ceiling, soot-darkened walls. Barely room to turn around.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "#######",
+    "#w...w#",
+    "#.....#",
+    "#.....#",
+    "#.....#",
+    "###+###"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": ["commoner_kitchen"]
+    }
+  ],
+  "decor_layer": [
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, "cold_hearth", null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, "worn_mat", null, null, null, "tallow_dip", null],
+    [null, null, null, null, null, null, null]
+  ]
+}

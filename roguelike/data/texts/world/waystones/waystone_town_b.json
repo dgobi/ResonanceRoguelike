@@ -1,0 +1,10 @@
+{
+  "id": "waystone_town_b",
+  "title": null,
+  "type": "inscription",
+  "condition": "pristine",
+  "reads_as": "single",
+  "lacunae": false,
+  "deep_tongue": true,
+  "pages": [{"text": "Grath urath.\nQuz vrath.", "damaged": false, "deep_tongue": true}]
+}

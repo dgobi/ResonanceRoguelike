@@ -36,5 +36,8 @@
     "moderate": "The rock hums at a frequency you feel more than hear.",
     "high": "VUKH is near. The stone is wrong here. It has always been wrong."
   },
-  "flint_scatter_rate": 0.015
+  "flint_scatter_rate": 0.015,
+  "waystone_inscriptions": ["waystone_mountain_a", "waystone_mountain_b"],
+  "waystone_fallback_inscriptions": false,
+  "waystone_themes": ["weight", "age", "resonance"]
 }

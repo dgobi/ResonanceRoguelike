@@ -8,6 +8,7 @@
   "stackable": false,
   "on_use": "drink",
   "hydration": 0.5,
+  "empty_form": "empty_water_skin",
   "liquid": "water",
   "liquid_volume": 0.5,
   "keywords": [

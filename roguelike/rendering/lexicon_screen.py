@@ -47,6 +47,19 @@ _CATEGORY_LABELS = {
     "legacy":  "Legacy",
 }
 
+_CATEGORY_DESCRIPTIONS = {
+    "action":   "Words of doing. Verbs of the deep tongue — what the builders caused to happen.",
+    "cosmic":   "Words of structure. The deep ones named the laws of the world before naming the world itself.",
+    "body":     "Words of flesh. Clinical, precise. The builders studied living tissue as they studied stone.",
+    "people":   "Words of being. Roles, states, categories of person — the deep ones classified before they named.",
+    "time":     "Words of duration. The builders experienced time as accumulation, not passage.",
+    "essence":  "Words of property. The six essences and their interactions — the deepest technical vocabulary.",
+    "number":   "Words of quantity. The builders counted in geometric progressions.",
+    "ominous":  "Words of warning. The register of inscriptions — commands, prohibitions, consequences.",
+    "legacy":   "The oldest words. Pre-systematic, pre-grammar. These came first.",
+    "place":    "Words of location. The builders named every threshold, depth, and boundary.",
+}
+
 
 def _wrap_text(font: pygame.font.Font, text: str, max_w: int) -> list[str]:
     words = text.split()
@@ -263,12 +276,23 @@ class LexiconScreen:
         # Hint row separator + text
         pygame.draw.line(popup, self.BORDER,
                          (PAD, _hint_row_top), (pw - PAD, _hint_row_top), 1)
+        _hint_text_y = _hint_row_top + (_HINT_ROW_H - self._font_small.get_height()) // 2
+
+        # Left: word count flavour
+        lang = getattr(engine.player, "language", None)
+        _wc = len(lang.known_deep_words) if lang else 0
+        _wc_s = self._font_small.render(
+            f"{_wc} word{'s' if _wc != 1 else ''} known. The tongue runs deeper.",
+            True, UI_TEXT_DIM,
+        )
+        popup.blit(_wc_s, (PAD, _hint_text_y))
+
+        # Right: navigation hints
         footer = self._font_small.render(
             "^ v navigate   Enter expand   L/ESC close",
             True, self.DIM,
         )
-        _hint_text_y = _hint_row_top + (_HINT_ROW_H - footer.get_height()) // 2
-        popup.blit(footer, (PAD, _hint_text_y))
+        popup.blit(footer, (pw - PAD - footer.get_width(), _hint_text_y))
 
         surface.blit(popup, (px, py))
 
@@ -356,6 +380,14 @@ class LexiconScreen:
         wdef = engine.data.deep_tongue.get(word_id, {}) if word_id else {}
 
         if not word_id or not wdef:
+            # Check if a category header is selected — show description
+            cat_key = self._selected_category()
+            if cat_key:
+                self._draw_category_detail(
+                    surf, engine, cat_key, detail_left, detail_top,
+                    detail_w, detail_bottom, lh,
+                )
+                return
             ns = self._font_normal.render(
                 "Nothing has been learned yet.", True, self.DIM,
             )
@@ -384,9 +416,9 @@ class LexiconScreen:
 
         glyph_w = glyph_sz + 4
         inset_content_w = num_phonemes * glyph_w
-        inset_w = max(inset_content_w + 40, 100)
+        inset_w = max(inset_content_w + 80, 120)
         inset_w = min(inset_w, max_inset_w)
-        inset_h = glyph_sz + 40
+        inset_h = glyph_sz + 80
 
         glyph_inset_rect = pygame.Rect(
             detail_left + (detail_w - inset_w) // 2,
@@ -407,7 +439,7 @@ class LexiconScreen:
             pygame.draw.rect(surf, UI_BORDER, glyph_inset_rect, 1)
 
         # Draw glyph sequence centred within inset content area
-        inset_inner = glyph_inset_rect.inflate(-20, -20)
+        inset_inner = glyph_inset_rect.inflate(-40, -40)
         gpw = _glyph_word_pw(deep, glyph_sz)
         gx = inset_inner.centerx - gpw // 2
         gy = inset_inner.centery - glyph_sz // 2
@@ -462,3 +494,52 @@ class LexiconScreen:
             src_y = detail_bottom - src_s.get_height() - 2
             src_x = detail_left + (detail_w - src_s.get_width()) // 2
             surf.blit(src_s, (src_x, src_y))
+
+    def _draw_category_detail(
+        self, surf: pygame.Surface, engine: "Engine",
+        cat_key: str,
+        detail_left: int, detail_top: int,
+        detail_w: int, detail_bottom: int,
+        lh: int,
+    ) -> None:
+        """Render category description when a header is selected."""
+        y = detail_top + 20
+
+        # Category name — large, centred
+        label = _CATEGORY_LABELS.get(cat_key, cat_key.title())
+        nm = self._font_bold.render(label, True, self.TITLE)
+        nm_x = detail_left + (detail_w - nm.get_width()) // 2
+        surf.blit(nm, (nm_x, y))
+        y += nm.get_height() + 12
+
+        # Separator
+        pygame.draw.line(surf, SLATE_DARK,
+                         (detail_left, y), (detail_left + detail_w, y), 1)
+        y += 8
+
+        # Description — wrapped, centred lines
+        desc = _CATEGORY_DESCRIPTIONS.get(cat_key, "")
+        if desc:
+            wrap_w = detail_w - 16
+            for ln in _wrap_text(self._font_small, desc, wrap_w):
+                ls = self._font_small.render(ln, True, UI_TEXT_DIM)
+                lx = detail_left + (detail_w - ls.get_width()) // 2
+                if y + lh > detail_bottom:
+                    break
+                surf.blit(ls, (lx, y))
+                y += lh
+
+        # Word count
+        y += 8
+        lang = getattr(engine.player, "language", None)
+        all_words = engine.data.deep_tongue
+        if lang:
+            count = sum(
+                1 for wid in lang.known_deep_words
+                if all_words.get(wid, {}).get("category") == cat_key
+            )
+            count_text = f"{count} word{'s' if count != 1 else ''} learned"
+            cs = self._font_small.render(count_text, True, self.LABEL_C)
+            cx = detail_left + (detail_w - cs.get_width()) // 2
+            if y + lh <= detail_bottom:
+                surf.blit(cs, (cx, y))

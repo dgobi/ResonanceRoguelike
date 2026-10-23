@@ -26,8 +26,23 @@ DECOR_TABLE = {
         ("mud_2", 25),
         ("mud_3", 25),
         ("mud_4", 25)
+    ],
+    "packed_earth": [
+        ("mud_1", 25),
+        ("mud_2", 25),
+        ("mud_3", 25),
+        ("mud_4", 25)
     ]
 }
+
+# Plant terrain IDs that should be placed as decor, not terrain
+PLANT_DECOR_IDS = frozenset({
+    "coldbell_flower", "coldbell_flower_depleted",
+    "flower_pilgrims_woe", "flower_pilgrims_woe_depleted",
+    "flower_murk_violet", "flower_murk_violet_depleted",
+    "shroom_sulphur_cap", "shroom_sulphur_cap_depleted",
+    "shroom_prophets_eye", "shroom_prophets_eye_depleted",
+})
 
 # Maps a 'varied_' prefix to actual terrain keys from your tiles.json/terrain_data
 FUNCTIONAL_VARIANTS = {

@@ -247,6 +247,75 @@ class UI:
                 surf.blit(name_surf, (item_x + glyph_w, y))
                 item_x += total_w
 
+        # --- Moveset HUD (bottom-left, above resonance if present) ---
+        _movesets = getattr(self, "_engine_movesets", [])
+        _ms_cds = getattr(self, "_engine_moveset_cooldowns", {})
+        if _movesets and self._font_tiny:
+            _ms_y = status_rect.height - 4 - self._font_tiny.get_linesize() * 2
+            _essence_colors = {
+                "Dissolution": CORRUPTION_COLOUR, "Binding": SPIRIT_BLUE,
+                "Severance": OLD_GOLD, "Revelation": RESONANCE_HIGH,
+            }
+            _ess = getattr(self, "_engine_weapon_essence", "")
+            _active_c = _essence_colors.get(_ess, VERDANT_MID)
+            for ms in _movesets:
+                key_label = ms.get("key", "?")
+                name = ms.get("name", "?")
+                cd = _ms_cds.get(ms.get("id", ""), 0)
+                if cd > 0:
+                    txt = f"[{key_label}] {name} ({cd})"
+                    col = UI_TEXT_DIM
+                else:
+                    txt = f"[{key_label}] {name}"
+                    col = _active_c
+                _ms_s = self._font_tiny.render(txt, True, col)
+                surf.blit(_ms_s, (col1_x, _ms_y))
+                _ms_y += self._font_tiny.get_linesize()
+
+        # --- Sprint slot (bottom-right): badge when active, hint when available ---
+        import math as _ui_math
+        _sprint_r = getattr(self, "_engine_sprint_turns", 0)
+        _sprint_max = getattr(self, "_engine_sprint_max", 8)
+        _sprint_cd = getattr(self, "_engine_sprint_cooldown", 0)
+        _sprint_key_id = getattr(self, "_engine_sprint_key", None)
+
+        if _sprint_r > 0 and self._font_tiny:
+            # Active: pulsing pip badge
+            _ticks_ms = pygame.time.get_ticks()
+            _pulse = 0.85 + 0.15 * _ui_math.sin(_ticks_ms / 1000.0 * _ui_math.pi * 2)
+            _pr, _pg, _pb = RESONANCE_LOW
+            _pc = (min(255, int(_pr * _pulse)),
+                   min(255, int(_pg * _pulse)),
+                   min(255, int(_pb * _pulse)))
+
+            _label_s = self._font_tiny.render("SPRINT", True, _pc)
+            _pip_str = "●" * _sprint_r + "○" * (_sprint_max - _sprint_r)
+            _pip_s = self._font_tiny.render(_pip_str, True, _pc)
+
+            _badge_w = max(_label_s.get_width(), _pip_s.get_width()) + 12
+            _badge_h = _label_s.get_height() + _pip_s.get_height() + 8
+            _badge_x = status_rect.width - _badge_w - UI_PANEL_INSET
+            _badge_y = status_rect.height - _badge_h - 4
+
+            _badge_rect = pygame.Rect(_badge_x, _badge_y, _badge_w, _badge_h)
+            pygame.draw.rect(surf, UI_PANEL_DARK, _badge_rect)
+            pygame.draw.rect(surf, _pc, _badge_rect, 1)
+
+            surf.blit(_label_s, (_badge_x + (_badge_w - _label_s.get_width()) // 2,
+                                 _badge_y + 3))
+            surf.blit(_pip_s, (_badge_x + (_badge_w - _pip_s.get_width()) // 2,
+                               _badge_y + 3 + _label_s.get_height() + 2))
+
+        elif _sprint_cd == 0 and _sprint_r == 0 and self._font_tiny and _sprint_key_id is not None:
+            # Available: show keybind hint, right-aligned
+            _key_name = pygame.key.name(_sprint_key_id)
+            _hint_str = f"shift-{_key_name}: sprint"
+            _hint_s = self._font_tiny.render(_hint_str, True, UI_TEXT_DIM)
+            _hint_x = status_rect.width - _hint_s.get_width() - UI_PANEL_INSET
+            _hint_y = status_rect.height - _hint_s.get_height() - 4
+            surf.blit(_hint_s, (_hint_x, _hint_y))
+        # On cooldown (cd > 0, not active): nothing shown — cooldown is silent
+
         # --- Debug info line (bottom-right, only when DEBUG_MODE) ---
         if debug_info and self._font_tiny:
             di = self._font_tiny.render(debug_info, True, OLD_GROWTH)

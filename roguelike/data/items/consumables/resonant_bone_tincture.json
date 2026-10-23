@@ -1,0 +1,15 @@
+{
+  "id": "resonant_bone_tincture",
+  "name": "resonant bone tincture",
+  "description": "A grey tincture steeped from resonant bone. The liquid holds something older than language.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": true,
+  "on_use": "learn_deep_word",
+  "use_message": "A word rises from the marrow. It was always there.",
+  "keywords": [
+    {"tag": "resonant", "tier": 2},
+    {"tag": "bony", "tier": 2}
+  ]
+}

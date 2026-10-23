@@ -1,0 +1,10 @@
+{
+  "id": "text_residential_letter",
+  "title": null,
+  "type": "letter",
+  "condition": "worn",
+  "reads_as": "single",
+  "lacunae": false,
+  "teach_words": {"count": 1, "categories": ["place", "cosmic"], "tier": 1},
+  "pages": [{"text": "They are not coming back from the heath. I have waited the count of days we agreed and there is nothing on the road.\nThe sound the stone makes at night has changed. It was low before. Now it carries.\nI am taking what I can and going south. If you find this, the keth sketh.\nThe stone remembers. Go south.", "damaged": false}]
+}
