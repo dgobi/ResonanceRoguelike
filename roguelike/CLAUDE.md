@@ -1,3 +1,5 @@
+> **B3 / production main:** Accepted Arc A/B1/B2 are merged into main. Checkpoint generations, recovery, dirty-cache capture and slot-scoped deletion are documented in [docs/owner/B3_STATE.md](docs/owner/B3_STATE.md). Work only in this checkout on main, create Git checkpoints, commit accepted work, and verify autonomously with `tools/verify_b3.py`. Historical context follows.
+
 > **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](docs/owner/STATUS.md). This banner does not resolve open design decisions.
 
 # Roguelike Project — Claude Context Document

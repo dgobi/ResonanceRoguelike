@@ -1,3 +1,21 @@
+# B3 decision record — 23 October 2026
+
+Owner directive: accept B2, merge accepted work into production main, stop creating
+development copies, checkpoint substantial changes and continue autonomous testing.
+The independent Git histories shared the same starting file content; all accepted
+changed paths were integrated, with original context files checkpointed first.
+
+Both B3 defects were reproduced on the merged B2 source before edits. The chosen
+repair separates immutable published checkpoints from mutable travel caches and
+flushes every hot owner conservatively. Publication uses a slot kernel lock,
+flushed payloads, a manifest and atomic HEAD replacement. Recovery is read-only;
+sealed but unpublished generations are never promoted. Legacy flat saves remain
+read-only. Death/F11 retire one slot. Retention favors recoverability over bounded
+disk use. [B3_STATE](B3_STATE.md) records the policies and measured limits.
+
+<details>
+<summary>Earlier accepted history — superseded where stated above</summary>
+
 # B2 observations — 23 October 2026
 
 The pre-B2 game source is the exact accepted `9bb0db8` tree, captured clean before
@@ -142,6 +160,8 @@ Use a new `--observe` session. These steps are a **pending checklist**, not reco
 Observation harness command example (while that particular marked session is running): write `{"action":"save"}` to its `.baseline/<name>/diagnostic-command.json`. The next event-poll wrapper invokes `SaveManager.save`; JSONL labels it diagnostic_before/after. Other bounded commands (capture, position, give, hunger, spawn) are explicit fixture operations in `tools/baseline.py`, never counted as player actions. Do not leave an old command for `--resume`: commands are read at first poll as well. Remove only that created command file before resuming, or use a session that has none.
 
 Normal-input checks need manual keyboard delivery or a separately repaired input-tool path. No change to game controls was made to hide this limitation.
+
+</details>
 
 </details>
 

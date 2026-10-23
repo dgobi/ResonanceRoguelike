@@ -1,3 +1,16 @@
+# B3 state owners
+
+`SaveManager` publishes immutable whole-slot generations via `CheckpointStore`.
+`ChunkCache` owns a mutable per-session overlay plus hot surface/submap entries.
+Travel writes only that overlay. Full saves capture all hot entries and cold
+records, then publish one reference. Full load validates all scenes/components
+before replacing live owners; invalid current generations fall back to a published
+ancestor. The exact order, format, compatibility, rollback and deletion policy are
+in [B3_STATE](B3_STATE.md). The flat-file persistence descriptions below are historical.
+
+<details>
+<summary>Earlier accepted history — superseded where stated above</summary>
+
 # World and state — B2 current contract (23 October 2026)
 
 B1's scene, row-reference and replacement guarantees remain. B2 adds explicit
@@ -100,6 +113,8 @@ The bounded fixture gives surface `(3,3)` a grass marker and a hollow revenant; 
 Example invariant: empty saved inventory/equipment should replace six bootstrap items and the bootstrap offhand torch. The actual fresh-process test leaves all six starter items. A one-jerky inventory with all empty saved slots replaces the inventory but retains an offhand torch **outside** it. These are separate failures.
 
 Check with `tools/persistence_diagnostics.py --prefix my-state-check` in a new session prefix. Each result separates harness completion from expected property and observed value. Treat its exits and JSON as explained in OBSERVATIONS.md. No save migration, arbitrary old-save loading, crash recovery or complete field ledger is certified here.
+
+</details>
 
 </details>
 

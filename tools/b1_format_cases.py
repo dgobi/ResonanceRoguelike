@@ -14,14 +14,15 @@ def format_cases(e, ev):
     import main
     setup_gear(e, "second")
     e.save_manager.save(e)
-    slot = e.save_manager.save_path
+    from b3_test_helpers import flatten_fixture
+    slot = flatten_fixture(e.save_manager, ev)
     original_files = {p.relative_to(slot): p.read_bytes() for p in slot.rglob("*") if p.is_file()}
     base_player = read(slot / "player.json")
     base_world = read(slot / "world.json")
     base_meta = read(slot / "meta.json")
     def restore_files():
         # Only this worker's verified disposable slot is touched.
-        assert slot.resolve().is_relative_to(Path(ev.job["game"]).resolve())
+        assert slot.resolve().is_relative_to(Path(ev.job.get("save_root", ev.job["game"])).resolve())
         for p in slot.rglob("*"):
             if p.is_file() and p.relative_to(slot) not in original_files:
                 p.unlink()
@@ -116,11 +117,12 @@ def format_cases(e, ev):
         # Serializer must reject invalid earlier rows instead of filtering and shifting.
         e.player.inventory.items[0].item_id = ""
         try:
-            e.save_manager.save(e)
+            result = e.save_manager.save(e)
         except ValueError as error:
             ev.check("F06", "invalid serialized row diagnosed", True, "row 0" in str(error))
         else:
-            ev.check("F06", "invalid row rejected", True, False)
+            ev.check("F06", "invalid row rejected", False, result)
+            ev.check("F06", "invalid row diagnostic", True, "row 0" in e.save_manager.last_error)
     elif variant == "scenes":
         for name, sid in (("unknown", "B1_unknown"), ("wrong-world", e.current_submap_id)):
             p = copy.deepcopy(base_player)

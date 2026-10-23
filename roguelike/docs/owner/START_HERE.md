@@ -1,3 +1,15 @@
+# Start here — production main, B3
+
+Accepted Arc A, B1 and B2 are integrated on production `main`. B3 adds coherent
+checkpoint generations, dirty-cache capture, recovery/rollback and slot-scoped
+deletion. Read [B3_STATE](B3_STATE.md), [B3_VERIFICATION](B3_VERIFICATION.md), and
+[B3_DEFERRED](B3_DEFERRED.md). Run `tools/verify_b3.py` with the existing environment
+against this checkout. All verification is autonomous and headless/app-local.
+The older isolated-copy instructions below are historical and superseded.
+
+<details>
+<summary>Earlier accepted history — superseded where stated above</summary>
+
 # Start here — B2 development copy (23 October 2026)
 
 Use `G:\GameDev\RoguelikeBaseline-20261020\project`, branch
@@ -126,6 +138,8 @@ For diagnostic persistence use [the documented harness](OBSERVATIONS.md), which 
 Stop with the window close button after accepting that unsaved progress may be lost. Keep each experimental world in its own named session; restoration means a fresh named copy. Do not merge disposable saves into personal saves. Only load saves you created yourself: the present format uses pickle and an `eval` path and has no robust compatibility or transactional recovery contract.
 
 The startup, movement, manual wait and inventory screen were observed. Full normal-input combat/travel/crafting coverage remains incomplete because native letter/Enter/Escape injection did not reach the game and physical Escape then stopped desktop automation. [OBSERVATIONS.md](OBSERVATIONS.md) records each remaining scenario. Saving underground and explicit empty-state restoration demonstrably fail diagnostic invariants. This is a runnable development baseline, not a certified persistent campaign.
+
+</details>
 
 </details>
 

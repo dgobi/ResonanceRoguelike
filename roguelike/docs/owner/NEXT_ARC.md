@@ -1,3 +1,19 @@
+# Next arc — C ownership and transfers
+
+B2 is owner-accepted and merged with Arc A/B1 into production `main`. B3's scope
+and evidence are in [B3_STATE](B3_STATE.md) and [B3_VERIFICATION](B3_VERIFICATION.md).
+Continue in this checkout on `main`, with named Git checkpoints and local commits.
+Do not create more development copies, worktrees or task branches.
+
+Recommend C next: exact ownership across inventory, floor, equipment and containers,
+beginning with the reproducible equipped-drop reference. Define transactional
+transfer/crafting cancellation boundaries, test failure cases and actual app-local
+inventory flows. Keep the separate effect lifecycle and text-layout work bounded.
+Personal-save migration and automatic checkpoint pruning need separate scope.
+
+<details>
+<summary>Earlier accepted history — superseded where stated above</summary>
+
 # Next arc — B3 checkpoint coherence and recovery
 
 B1 is accepted; B2 completes component/derived-state reconstruction with the
@@ -68,6 +84,8 @@ No creative redesign, save migration, engine swap, all-field persistence overhau
 Explain in plain language: surface and lab shared one address during full save; empty was mistaken for absent; a creature's costume was used as its identity. Show the new owners/keys/replacement order and what remains reset/recomputed or unsupported.
 
 Return a small patch, field/format changes, before/after diagnostics with independent processes, manual observations or an explicit blocker, and updates to WORLD_AND_STATE, STATUS and the decision log. Add an owner exercise that predicts two independent markers, saves/reloads, verifies both and reverses the fixture. Record owner learning separately from automated verification. Do not mark B1 complete merely because a harness exits zero.
+
+</details>
 
 </details>
 

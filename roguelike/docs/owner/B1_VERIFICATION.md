@@ -1,3 +1,5 @@
+> Historical accepted record. Current main-only verification and remaining scope: [B3_VERIFICATION](B3_VERIFICATION.md) and [B3_DEFERRED](B3_DEFERRED.md).
+
 > Historical accepted B1 contract. Current B2 status and commands are in [B2_VERIFICATION](B2_VERIFICATION.md). Four B2 defects below are now repaired; the current B1 regression runner asserts those repairs explicitly and retains the remaining baseline comparisons.
 
 # Autonomous B1 verification

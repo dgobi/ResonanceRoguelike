@@ -21,7 +21,8 @@ def run_case(e, ev):
         return
     setup_components(e)
     e.save_manager.save(e)
-    slot = e.save_manager.save_path
+    from b3_test_helpers import payload_path, author_payload
+    slot = payload_path(e.save_manager)
     original = read(slot / "player.json")
     ev.check("B2-07", "development format stays v2", 2, read(slot / "meta.json")["save_version"])
     variants = []
@@ -54,7 +55,7 @@ def run_case(e, ev):
         p[key] = value
         variants.append((key, p, key, False))
     for name, payload, diagnostic, startup in variants:
-        dump(slot / "player.json", payload)
+        author_payload(slot / "player.json", payload)
         before = hashes(slot)
         for mode in ("hot", "cold"):
             if mode == "cold":
@@ -85,7 +86,7 @@ def run_case(e, ev):
     legacy["corruption"].pop("whisper_cooldown")
     old_fields = {"item_id", "name", "on_use", "turns_lit", "liquid", "liquid_volume", "text_id", "temporary_essence"}
     legacy["inventory"]["items"] = [{k: v for k, v in row.items() if k in old_fields} for row in legacy["inventory"]["items"]]
-    dump(slot / "player.json", legacy)
+    author_payload(slot / "player.json", legacy)
     before = hashes(slot)
     ev.check("B2-07", "older v2 fields load", True, e.save_manager.load(e))
     ev.check("B2-07", "missing timer block resets session values", [0, 0.0, 0, 0.0, 0, 0, 0, 0, [0, 0]],
@@ -100,7 +101,7 @@ def run_case(e, ev):
         absent[key] = None
     item = absent["inventory"]["items"][1]
     item.update(on_use=None, text_id="", nutrition=None, temporary_essence=[])
-    dump(slot / "player.json", absent)
+    author_payload(slot / "player.json", absent)
     e._pending_consume = {"item": e.player.inventory.items[0]}
     e._pending_throw = {"item": e.player.inventory.items[0]}
     e.inventory_screen.open = True

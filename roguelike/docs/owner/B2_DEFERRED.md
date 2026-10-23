@@ -1,3 +1,5 @@
+> Historical accepted record. Current main-only verification and remaining scope: [B3_VERIFICATION](B3_VERIFICATION.md) and [B3_DEFERRED](B3_DEFERRED.md).
+
 # Boundaries after B2
 
 Four previously reproduced defects remain strict baseline comparisons in the

@@ -1,31 +1,32 @@
-# Resonance roguelike — owner entry point
+# Resonance roguelike — production main
 
-B2 reconstructs saved components and their derived systems in the same isolated
-copy, preserving accepted B1 scene/item identity guarantees. Read
-[START_HERE](roguelike/docs/owner/START_HERE.md), the
-[B2 field ledger](roguelike/docs/owner/B2_STATE.md), and
-[verification](roguelike/docs/owner/B2_VERIFICATION.md).
+Accepted Arc A, B1 and B2 are merged into `main` at `d179c08`. B3 implements
+coherent checkpoint generations, inactive dirty-cache capture, interruption
+recovery, previous-checkpoint rollback and slot-scoped deletion.
 
-From this root, run the enforced autonomous gate:
+Read [START_HERE](roguelike/docs/owner/START_HERE.md),
+[B3_STATE](roguelike/docs/owner/B3_STATE.md),
+[B3_VERIFICATION](roguelike/docs/owner/B3_VERIFICATION.md), and
+[B3_DEFERRED](roguelike/docs/owner/B3_DEFERRED.md).
+
+Run the complete autonomous gate from this production root:
 
 ```powershell
-.\.venv\Scripts\python.exe tools/verify_b2.py
+& 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe' tools/verify_b3.py
 ```
 
-It includes the complete B1 regression suite. All tests use disposable save roots,
-headless processes and app-local game events. Final evidence is
-[b2-results.json](evidence/b2-results.json). No routine verification is delegated
-to the owner. The supported environment remains the existing Python 3.11.0 /
-Pygame 2.6.1 / tcod 19.3.0 runtime with no added dependencies.
+The existing Python environment is reused; all game code runs directly from this
+checkout. Tests use disposable save roots, headless processes and app-local game
+events. No desktop control, new source checkout or owner verification is required.
+Final evidence: [b3-results.json](evidence/b3-results.json) and
+[b3-summary.json](evidence/b3-summary.json).
 
-B2 starts from accepted B1 commit `9bb0db8` on branch `codex/b2-reconstruction`
-in `G:\GameDev\RoguelikeBaseline-20261020\project`. The original project stays
-separate and untouched. Accepted-work commits follow [AGENTS.md](AGENTS.md).
-B1 and Arc A provenance remain in their dated evidence and owner handbook.
+Work stays on `main` with named Git checkpoints and local commits, as recorded in
+[AGENTS.md](AGENTS.md). The historical isolated copy and accepted B1/B2 evidence
+remain available. No push is implied. Content, assets and personal saves are
+preserved. Flat legacy v2 saves are loadable but read-only; no implicit migration
+occurs. Generation/session history is retained until slot retirement.
 
-The development format remains v2 with explicit B2 extension records. Older B1
-v2 synthetic saves are tested; no personal saves are used or migrated. Current
-[remaining boundaries](roguelike/docs/owner/B2_DEFERRED.md) include B3 checkpoint
-coherence/dirty flushing, C transfer ownership and UI text height. Recommend
-[B3 next](roguelike/docs/owner/NEXT_ARC.md). Content, assets, normal controls and
-creative decisions remain unchanged.
+The equipped-drop and text-height issues remain separate. Recommend C next for
+transfer ownership. Historical copy-based verification drivers are retained for
+provenance; use the B3 gate for this main-only workflow.

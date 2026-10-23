@@ -111,7 +111,7 @@ def scene_case(e, ev):
         ev.record["expected"] = {"scenes": expected, "address": [e.world_x, e.world_y, e.current_submap_id],
                                  "active": scene_state(e.local_map, e.entities)}
         ev.record["checkpoint"] = hashes(e.save_manager.save_path)
-        ev.check("F01", "writer version", 2, read(e.save_manager.save_path / "meta.json")["save_version"])
+        ev.check("F01", "writer version", 2, read((e.save_manager.checkpoint_path() if hasattr(e.save_manager, "checkpoint_path") else e.save_manager.save_path) / "meta.json")["save_version"])
         if phase == "write":
             ev.check("H04", "writer records checkpoint then stops", True, bool(ev.record["checkpoint"]))
             return
@@ -171,7 +171,7 @@ def gear_case(e, ev):
             ev.record["expected"]["light"]["item_index"] = None
         e.save_manager.save(e)
         ev.record["checkpoint"] = hashes(e.save_manager.save_path)
-        payload = read(e.save_manager.save_path / "player.json")
+        payload = read((e.save_manager.checkpoint_path() if hasattr(e.save_manager, "checkpoint_path") else e.save_manager.save_path) / "player.json")
         ev.check(case, "inventory object exists even when empty", True, isinstance(payload["inventory"], dict))
         if phase == "write":
             return

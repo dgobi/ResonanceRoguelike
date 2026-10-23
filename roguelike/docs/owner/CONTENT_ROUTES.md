@@ -1,3 +1,15 @@
+# B3 persistence route update
+
+Gameplay content and assets are unchanged by B3. Persistence routes are now:
+nondebug F5 and surface-boundary autosave -> whole generation publication;
+stairs/eviction -> session cache only; bootstrap/F9 -> validated generation
+selection and reconstruction; death/debug F11 -> active-slot retirement.
+See [B3_STATE](B3_STATE.md). No content authoring, generation redesign or personal
+save conversion is included.
+
+<details>
+<summary>Earlier accepted history — superseded where stated above</summary>
+
 # Current B2 route update — 23 October 2026
 
 Inventory now preserves explicit instance nutrition, hydration, weight, count,
@@ -60,5 +72,7 @@ The lab and town are also separate consumers, not interchangeable layout contrac
 ## Next documentation contracts
 
 After repairing the relevant boundary, expand one page at a time: transfers/equipment; combat/effects; processing/background time; creatures/pursuit; generation/entrances; language/discovery; rendering/tools; complete save-field ledger. Each needs owner/state/units, route, accepted fields, prerequisites, action cost, scene scope, persistence/reset/recompute, rejection behavior, one observed example and a reversible exercise. A successful constructor or parse is not sufficient evidence of gameplay support.
+
+</details>
 
 </details>

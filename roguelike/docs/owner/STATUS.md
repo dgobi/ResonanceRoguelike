@@ -1,3 +1,17 @@
+# Current status — B3 on production main
+
+The owner accepted B2 and authorized integration into production `main`. Merge
+`d179c08` joins the accepted history while preserving the original-only files.
+B3 makes player/world/all visited scene records a coherent checkpoint, captures
+inactive dirty owners, recovers published generations after interruption, and
+limits death/debug deletion to the active slot. [B3_STATE](B3_STATE.md) defines
+precise behavior and limitations; [B3_VERIFICATION](B3_VERIFICATION.md) specifies
+the enforced main-only gate. Final results are in `evidence/b3-results.json`.
+C equipped-drop and UI text height remain characterized; see [B3_DEFERRED](B3_DEFERRED.md).
+
+<details>
+<summary>Earlier accepted history — superseded where stated above</summary>
+
 # Current status — B2 (23 October 2026)
 
 Accepted B1 is the base. B2 implements component replacement, Needs configuration,
@@ -98,6 +112,8 @@ All original text is retained below a short banner pointing here. The labels sco
 5. World/authoring: entrance footprint/link preservation, generation policy, active schemas/duplicate IDs, actual loot routes, painter losslessness, UI modes.
 
 These are retained findings, not fixes delivered in Arc A. Do not combine the whole backlog into B1.
+
+</details>
 
 </details>
 

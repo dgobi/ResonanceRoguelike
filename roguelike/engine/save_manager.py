@@ -84,269 +84,332 @@ class CachedChunk:
 
 
 class ChunkCache:
+    """Mutable session overlay above an immutable checkpoint (or read-only legacy).
+
+    Every hot entry is considered potentially dirty: map layers can mutate in
+    place without going through store_hot_only. Full saves serialize all of them.
     """
-    In-memory + on-disk cache for visited chunks.
-    Fixes the explored tile reset problem.
+    def __init__(self, save_path: Path, base_path=None) -> None:
+        from engine.checkpoints import CheckpointStore, no_links
+        import uuid
+        self.save_path = no_links(Path(save_path))
+        if base_path is None:
+            store = CheckpointStore(self.save_path)
+            candidates = store.candidates()
+            base_path = candidates[0][1] if candidates else store.legacy()
+        self.base_path = Path(base_path) if base_path is not None else None
+        self.chunks_dir = self.save_path / '.sessions' / uuid.uuid4().hex / 'chunks'
+        self.hot: dict[tuple[int, int], CachedChunk] = {}
+        self.submap_hot: dict[str, CachedChunk] = {}
+        self.HOT_RADIUS = 3
 
-    hot:  chunks near the player, kept in memory
-    cold: all other visited chunks, stored on disk
-    """
+    def _chunk_path(self, wx, wy):
+        if type(wx) is not int or type(wy) is not int:
+            raise SaveFormatError('Scene coordinates must be integers')
+        return self.chunks_dir / f'{wx}_{wy}.pkl'
 
-    def __init__(self, save_path: Path) -> None:
-        self.save_path   = save_path
-        self.chunks_dir  = save_path / "chunks"
-        self.hot:  dict[tuple[int,int], CachedChunk] = {}
-        self.submap_hot: dict[str, CachedChunk]      = {}
-        self.HOT_RADIUS  = 3   # keep this many chunks around player in memory
+    def _submap_path(self, submap_id):
+        import re
+        if (not isinstance(submap_id, str) or not re.fullmatch(r'[A-Za-z0-9_-]+', submap_id)
+                or re.fullmatch(r'-?\d+_-?\d+', submap_id)):
+            raise SaveFormatError('Invalid or ambiguous submap_id')
+        return self.chunks_dir / (submap_id + '.pkl')
 
-    def has(self, wx: int, wy: int) -> bool:
-        if (wx, wy) in self.hot:
-            return True
-        return self._chunk_path(wx, wy).exists()
+    def _read_path(self, path):
+        from engine.checkpoints import no_links
+        if no_links(path).is_file():
+            return path
+        if self.base_path is not None:
+            base = no_links(self.base_path / 'chunks' / path.name)
+            if base.is_file():
+                return base
+        return None
 
-    def store(
-        self,
-        wx:        int,
-        wy:        int,
-        local_map: "LocalMap",
-        entities:  list["Actor"],
-    ) -> None:
-        """Serialize current chunk state into the cache."""
-        entity_dicts = [
-            _serialize_entity(e) for e in entities
-            if not _is_player(e)
-        ]
-        cached = CachedChunk(
-            local_map = local_map,
-            entities  = entity_dicts,
-        )
+    def has(self, wx, wy):
+        return (wx, wy) in self.hot or self._read_path(self._chunk_path(wx, wy)) is not None
+
+    @staticmethod
+    def _cached(local_map, entities):
+        return CachedChunk(local_map, [_serialize_entity(e) for e in entities if not _is_player(e)])
+
+    @staticmethod
+    def _read(path):
+        cached = pickle.loads(path.read_bytes())
+        from world.local_map import LocalMap
+        if not isinstance(cached, CachedChunk) or not isinstance(cached.local_map, LocalMap):
+            raise SaveFormatError(f'Missing or invalid active scene record: {path.name}')
+        return cached
+
+    def _write(self, path, cached):
+        from engine.checkpoints import atomic_write
+        atomic_write(path, pickle.dumps(cached, protocol=pickle.HIGHEST_PROTOCOL))
+
+    def store(self, wx, wy, local_map, entities):
+        cached = self._cached(local_map, entities)
+        self._write(self._chunk_path(wx, wy), cached)
         self.hot[(wx, wy)] = cached
-        self._write_to_disk(wx, wy, cached)
 
-    def load(
-        self,
-        wx: int,
-        wy: int,
-    ) -> CachedChunk | None:
-        """Load a cached chunk. Returns None if not cached."""
-        if (wx, wy) in self.hot:
-            return self.hot[(wx, wy)]
-
-        path = self._chunk_path(wx, wy)
-        if path.exists():
-            try:
-                with open(path, "rb") as f:
-                    cached = pickle.load(f)
-                self.hot[(wx, wy)] = cached
-                return cached
-            except Exception as e:
-                print(f"Warning: failed to load chunk ({wx},{wy}): {e}")
+    def load(self, wx, wy):
+        key = (wx, wy)
+        if key not in self.hot:
+            path = self._read_path(self._chunk_path(wx, wy))
+            if path is None:
                 return None
+            self.hot[key] = self._read(path)
+        return self.hot[key]
 
-        return None
+    def store_hot_only(self, wx, wy, local_map, entities):
+        self._chunk_path(wx, wy)  # validate before changing the cache
+        self.hot[(wx, wy)] = self._cached(local_map, entities)
 
-    def store_hot_only(
-        self,
-        wx:        int,
-        wy:        int,
-        local_map: "LocalMap",
-        entities:  list["Actor"],
-    ) -> None:
-        """Update hot cache only — no disk write. Used for adjacent-chunk ticking."""
-        entity_dicts = [
-            _serialize_entity(e) for e in entities
-            if not _is_player(e)
-        ]
-        self.hot[(wx, wy)] = CachedChunk(
-            local_map = local_map,
-            entities  = entity_dicts,
-        )
+    def evict_distant(self, player_wx, player_wy):
+        for key in list(self.hot):
+            if max(abs(key[0]-player_wx), abs(key[1]-player_wy)) > self.HOT_RADIUS:
+                self._write(self._chunk_path(*key), self.hot[key])
+                del self.hot[key]  # only after a successful durable overlay write
 
-    def evict_distant(self, player_wx: int, player_wy: int) -> None:
-        """
-        Move chunks far from the player out of hot cache to disk.
-        Called on chunk transition to keep memory bounded.
-        """
-        to_evict = []
-        for (wx, wy) in self.hot:
-            dist = max(abs(wx - player_wx), abs(wy - player_wy))
-            if dist > self.HOT_RADIUS:
-                to_evict.append((wx, wy))
-
-        for key in to_evict:
-            cached = self.hot.pop(key)
-            self._write_to_disk(key[0], key[1], cached)
-
-    def store_submap(
-        self,
-        submap_id: str,
-        local_map: "LocalMap",
-        entities:  list,
-    ) -> None:
-        """Cache a submap's state by its string ID."""
-        entity_dicts = [
-            _serialize_entity(e) for e in entities
-            if not _is_player(e)
-        ]
-        cached = CachedChunk(local_map=local_map, entities=entity_dicts)
+    def store_submap(self, submap_id, local_map, entities):
+        cached = self._cached(local_map, entities)
+        self._write(self._submap_path(submap_id), cached)
         self.submap_hot[submap_id] = cached
-        path = self._submap_path(submap_id)
-        self.chunks_dir.mkdir(parents=True, exist_ok=True)
-        try:
-            with open(path, "wb") as f:
-                pickle.dump(cached, f)
-        except Exception as e:
-            print(f"Warning: failed to write submap {submap_id}: {e}")
 
-    def load_submap(self, submap_id: str) -> "CachedChunk | None":
-        """Load a cached submap by ID. Returns None if not cached."""
-        if submap_id in self.submap_hot:
-            return self.submap_hot[submap_id]
-        path = self._submap_path(submap_id)
-        if path.exists():
-            try:
-                with open(path, "rb") as f:
-                    cached = pickle.load(f)
-                self.submap_hot[submap_id] = cached
-                return cached
-            except Exception as e:
-                print(f"Warning: failed to load submap {submap_id}: {e}")
-        return None
+    def load_submap(self, submap_id):
+        if submap_id not in self.submap_hot:
+            path = self._read_path(self._submap_path(submap_id))
+            if path is None:
+                return None
+            self.submap_hot[submap_id] = self._read(path)
+        return self.submap_hot[submap_id]
 
-    def _chunk_path(self, wx: int, wy: int) -> Path:
-        return self.chunks_dir / f"{wx}_{wy}.pkl"
-
-    def _submap_path(self, submap_id: str) -> Path:
-        return self.chunks_dir / f"{submap_id}.pkl"
-
-    def _write_to_disk(
-        self,
-        wx:     int,
-        wy:     int,
-        cached: CachedChunk,
-    ) -> None:
-        self.chunks_dir.mkdir(parents=True, exist_ok=True)
-        path = self._chunk_path(wx, wy)
-        try:
-            with open(path, "wb") as f:
-                pickle.dump(cached, f)
-        except Exception as e:
-            print(f"Warning: failed to write chunk ({wx},{wy}): {e}")
+    def snapshot(self, address, local_map, entities, data):
+        from engine.checkpoints import no_links, SCENE
+        payloads = {}
+        # Cold checkpoint -> session disk -> hot -> active. Active actors are
+        # serialized live; inactive hot actor rows belong to the cache owner.
+        for directory in ([self.base_path / 'chunks'] if self.base_path else []) + [self.chunks_dir]:
+            if directory.exists():
+                for path in sorted(directory.iterdir()):
+                    no_links(path)
+                    if not path.is_file() or not SCENE.fullmatch(path.name):
+                        raise SaveFormatError(f'Invalid scene cache member: {path.name}')
+                    payloads['chunks/' + path.name] = path.read_bytes()
+        for (wx, wy), cached in self.hot.items():
+            payloads['chunks/' + self._chunk_path(wx, wy).name] = pickle.dumps(cached, protocol=pickle.HIGHEST_PROTOCOL)
+        for sid, cached in self.submap_hot.items():
+            payloads['chunks/' + self._submap_path(sid).name] = pickle.dumps(cached, protocol=pickle.HIGHEST_PROTOCOL)
+        active = self._chunk_path(address.world_x, address.world_y) if address.submap_id is None else self._submap_path(address.submap_id)
+        payloads['chunks/' + active.name] = pickle.dumps(self._cached(local_map, entities), protocol=pickle.HIGHEST_PROTOCOL)
+        from world.local_map import LocalMap
+        for name, raw in payloads.items():
+            cached = pickle.loads(raw)
+            if not isinstance(cached, CachedChunk) or not isinstance(cached.local_map, LocalMap):
+                raise SaveFormatError(f'Invalid scene: {name}')
+            _validate_entities(cached.entities, data)
+        return payloads
 
 
 class SaveManager:
-    """
-    Handles full game save and load.
-    Coordinates ChunkCache, world map, and player state.
-    """
-
+    """Whole-slot generations with bounded recovery and isolated working caches."""
     def __init__(self, slot: int = 0) -> None:
-        self.slot      = slot
-        self.save_path = SAVE_DIR / f"slot_{slot}"
-        self.cache     = ChunkCache(self.save_path)
-        self.last_error: str | None = None
+        from engine.checkpoints import CheckpointStore
+        if type(slot) is not int or not 0 <= slot <= 999:
+            raise SaveFormatError('Slot must be an integer from 0 to 999')
+        self.slot = slot
+        self.save_path = Path(SAVE_DIR).absolute() / f'slot_{slot}'
+        self.store = CheckpointStore(self.save_path)
+        self.cache = ChunkCache(self.save_path)
+        self.generation = None
+        self.last_error = None
+        self.recovery_notice = None
+        self._head_token = self.store.token()
+        self._needs_load = self.cache.base_path is not None or self._head_token is not None
+        self._checkpoint_fault = lambda phase: None
 
-    def startup_state(self) -> tuple[str, int | None]:
-        """Distinguish deliberate new-game seeds from incomplete existing saves.
+    def _records(self, path):
+        _validate_version(_read_json(path / 'meta.json'))
+        world = _read_json(path / 'world.json')
+        player = _read_json(path / 'player.json')
+        if (not isinstance(world, dict) or type(world.get('seed')) is not int
+                or type(world.get('width')) is not int or world['width'] <= 0
+                or type(world.get('height')) is not int or world['height'] <= 0
+                or not isinstance(world.get('chunks'), dict)):
+            raise SaveFormatError('Invalid saved world record')
+        address = SceneAddress.from_player(player, world)
+        return world, player, address
 
-        Read-only, before bootstrap generation. A session marker is not authority
-        to discard an incomplete save. No format migration is performed.
-        """
-        files = {p.relative_to(self.save_path).as_posix()
-                 for p in self.save_path.rglob("*") if p.is_file()}
-        if not files:
-            return "new", None
-        world_path = self.save_path / "world.json"
-        world = _read_json(world_path) if world_path.is_file() else None
-        if (files == {"world.json"} and isinstance(world, dict)
-                and set(world) == {"seed"} and type(world["seed"]) is int):
-            return "new", world["seed"]
-        meta_path = self.save_path / "meta.json"
-        if not meta_path.is_file():
-            raise SaveFormatError("Incomplete save: missing meta.json")
-        _validate_version(_read_json(meta_path))
-        if not (self.save_path / "player.json").is_file() or not isinstance(world, dict):
-            raise SaveFormatError("Incomplete save: world.json and player.json are required")
-        if type(world.get("seed")) is not int or not isinstance(world.get("chunks"), dict):
-            raise SaveFormatError("Invalid saved world record")
-        return "load", world["seed"]
+    def _candidates(self):
+        candidates = self.store.candidates()
+        legacy = self.store.legacy()
+        return candidates or ([(None, legacy)] if legacy else [])
 
-    def save(self, engine: "Engine") -> None:
-        """
-        Full save of world, player and the active scene. Inactive dirty hot
-        entries and coherent multi-file checkpoint generations remain separate.
-        """
-        world_data = _serialize_world(engine.world_map)
-        player_data = _serialize_player(engine)
-        _validate_player_references(player_data, engine.data)
-        address = SceneAddress.from_player(player_data, world_data)
-        self.save_path.mkdir(parents=True, exist_ok=True)
-        address.store(self.cache, engine.local_map, engine.entities)
-        _write_json(self.save_path / "world.json", world_data)
-        _write_json(self.save_path / "player.json", player_data)
+    def startup_state(self):
+        candidates = self._candidates()
+        errors = list(self.store.errors)
+        for generation, path in candidates:
+            try:
+                world, _, _ = self._records(path)
+                return 'load', world['seed']
+            except Exception as error:
+                errors.append(str(error))
+        sealed = any(p.is_dir() for p in (self.save_path / 'generations').glob('g-*'))
+        if candidates or errors or sealed or any((self.save_path / n).exists() for n in ('HEAD.json', 'BACKUP.json')):
+            raise SaveFormatError('No recoverable checkpoint: ' + '; '.join(errors))
+        # Only a deliberate seed, session scratch, and our interrupted atomic
+        # temporary files are benign before the first published checkpoint.
+        files = {p.relative_to(self.save_path).as_posix() for p in self.save_path.rglob('*') if p.is_file()}
+        durable = {n for n in files if not n.startswith(('.sessions/', 'generations/')) and not (n.startswith('.') and n.endswith('.tmp'))}
+        if not durable:
+            return 'new', None
+        if durable == {'world.json'}:
+            world = _read_json(self.save_path / 'world.json')
+            if isinstance(world, dict) and set(world) == {'seed'} and type(world['seed']) is int:
+                return 'new', world['seed']
+        raise SaveFormatError('Incomplete save: missing meta.json or published checkpoint')
 
-        # Meta
+    def checkpoint_path(self):
+        if self.generation:
+            return self.store.validate(self.generation)
+        candidates = self._candidates()
+        if not candidates:
+            raise SaveFormatError('No recoverable checkpoint: ' + '; '.join(self.store.errors))
+        return candidates[0][1]
+
+    def save(self, engine):
+        from engine.checkpoints import encoded
         import datetime
-        meta = {
-            "save_version": SAVE_VERSION,
-            "saved_at":   datetime.datetime.now().isoformat(),
-            "world_x":    engine.world_x,
-            "world_y":    engine.world_y,
-            "turn":       engine.world_time.turn,
-            "moon_phase": engine.world_time.moon_phase_name,
-        }
-        _write_json(self.save_path / "meta.json", meta)
-
-        engine.log.add("Progress preserved.", LIFE_GREEN)
-
-    def load(self, engine: "Engine") -> bool:
-        """Read supported persisted records, never flush/reuse unsaved hot maps.
-
-        B1 fields are validated before applying them. This is not general
-        transactional rollback for arbitrary component or filesystem failures.
-        """
         self.last_error = None
         try:
-            _validate_version(_read_json(self.save_path / "meta.json"))
-            world_data = _read_json(self.save_path / "world.json")
-            player_data = _read_json(self.save_path / "player.json")
-            address = SceneAddress.from_player(player_data, world_data)
+            if self._needs_load:
+                raise SaveFormatError('Load the existing slot before saving; checkpoint ownership is not established')
+            world_data = _serialize_world(engine.world_map)
+            player_data = _serialize_player(engine)
             _validate_player_references(player_data, engine.data)
-            cold_cache = ChunkCache(self.save_path)
-            cached = address.load(cold_cache)
-            from world.local_map import LocalMap
-            if not isinstance(cached, CachedChunk) or not isinstance(cached.local_map, LocalMap):
-                raise SaveFormatError(f"Missing or invalid active scene record: {address}")
-            if (type(player_data.get("x")) is not int or type(player_data.get("y")) is not int
-                    or not cached.local_map.in_bounds(player_data["x"], player_data["y"])):
-                raise SaveFormatError("Invalid player position in active scene")
-            _validate_entities(cached.entities, engine.data)
-            for owner in ("live_pursuers", "pending_pursuer_arrivals"):
-                for row in player_data.get(owner, []):
-                    _validate_entities([row["entity"]], engine.data)
-            # Construct actors and a world independently of the pre-load graph.
-            actors = _deserialize_entities(cached.entities, engine)
-            from world.world_map import WorldMap
-            world = WorldMap(world_data["width"], world_data["height"])
-            _deserialize_world(world_data, world)
-            _deserialize_player(player_data, engine)
-            engine.world_map = world
-            self.cache = cold_cache
-            engine.local_map = cached.local_map
-            engine.entities = [engine.player] + actors
-            engine._pending_transfer = []
-            engine._restore_loaded_state()
-            engine._update_fov()
-            engine.log.add("The world reassembles itself around you.", LIFE_GREEN)
+            address = SceneAddress.from_player(player_data, world_data)
+            payloads = self.cache.snapshot(address, engine.local_map, engine.entities, engine.data)
+            payloads.update({'world.json': encoded(world_data), 'player.json': encoded(player_data),
+                'meta.json': encoded(dict(save_version=SAVE_VERSION, saved_at=datetime.datetime.now().isoformat(),
+                    world_x=engine.world_x, world_y=engine.world_y, turn=engine.world_time.turn,
+                    moon_phase=engine.world_time.moon_phase_name))})
+            generation, path = self.store.publish(payloads, self.generation, self._head_token, self._checkpoint_fault)
+            self.generation = generation
+            self._head_token = self.store.token()
+            self.cache.base_path = path
+            self.recovery_notice = None
+            engine.log.add('Progress preserved.', LIFE_GREEN)
             return True
         except Exception as error:
             self.last_error = str(error)
-            print(f"Load failed: {error}")
-            engine.log.add(f"Load failed: {error}", FRESH_WOUND)
+            engine.log.add(f'Save failed: {error}', FRESH_WOUND)
             return False
 
-    def save_exists(self) -> bool:
-        return (self.save_path / "player.json").exists()
+    def _prepare(self, engine, path):
+        world_data, player_data, address = self._records(path)
+        _validate_player_references(player_data, engine.data)
+        cold_cache = ChunkCache(self.save_path, base_path=path)
+        # All scenes belong to the checkpoint: validate even inactive owners
+        # before installing any player/world/cache reference.
+        for scene in sorted((path / 'chunks').glob('*.pkl')):
+            cached = cold_cache._read(scene)
+            _validate_entities(cached.entities, engine.data)
+            _deserialize_entities(cached.entities, engine)
+        cached = address.load(cold_cache)
+        if cached is None:
+            raise SaveFormatError(f'Missing or invalid active scene record: {address}')
+        if (type(player_data.get('x')) is not int or type(player_data.get('y')) is not int
+                or not cached.local_map.in_bounds(player_data['x'], player_data['y'])):
+            raise SaveFormatError('Invalid player position in active scene')
+        for owner in ('live_pursuers', 'pending_pursuer_arrivals'):
+            for row in player_data.get(owner, []):
+                _validate_entities([row['entity']], engine.data)
+        actors = _deserialize_entities(cached.entities, engine)
+        from world.world_map import WorldMap
+        world = WorldMap(world_data['width'], world_data['height'])
+        _deserialize_world(world_data, world)
+        stage = copy.copy(engine)
+        stage.player = copy.copy(engine.player)
+        for component in ('fighter', 'needs', 'corruption', 'inventory', 'equipment', 'light_source', 'language', 'perks', 'level'):
+            setattr(stage.player, component, None)
+        stage.world_time = copy.copy(engine.world_time)
+        stage.rng = copy.deepcopy(engine.rng)
+        _deserialize_player(player_data, stage)
+        # Preflight derived components without touching the old hook registry.
+        stage.hooks = copy.deepcopy(engine.hooks)
+        if stage.player.needs and stage.data.survival:
+            stage.player.needs.configure(stage.data.survival)
+        stage._register_player_perks()
+        stage._update_warmth()
+        return stage, world, cold_cache, cached.local_map, actors
+
+    def load(self, engine, previous=False):
+        self.last_error = None
+        try:
+            token = self.store.token()
+            candidates = self._candidates()
+        except Exception as error:
+            self.last_error = 'Cannot read checkpoint: ' + str(error)
+            engine.log.add('Load failed: ' + self.last_error, FRESH_WOUND)
+            return False
+        errors = list(self.store.errors)
+        if not candidates and not errors:
+            try:
+                self.startup_state()
+            except Exception as error:
+                errors.append(str(error))
+        if previous:
+            refs = self.store.references()
+            # Roll back relative to the published head, not the recovered list.
+            candidates = [(g, p) for g, p in candidates if refs and g != refs[0]]
+        selected = None
+        for generation, path in candidates:
+            try:
+                selected = (generation, self._prepare(engine, path))
+                break
+            except Exception as error:
+                errors.append(f'{generation or "legacy"}: {error}')
+        if selected is None:
+            self.last_error = 'No recoverable checkpoint: ' + '; '.join(errors or ['no published save'])
+            engine.log.add('Load failed: ' + self.last_error, FRESH_WOUND)
+            return False
+        if self.store.token() != token:
+            self.last_error = 'Checkpoint changed during load; retry loading'
+            engine.log.add('Load failed: ' + self.last_error, FRESH_WOUND)
+            return False
+        generation, (stage, world, cache, local_map, actors) = selected
+        # Everything that may reject persisted data has completed independently.
+        # Retain the player object's identity for other engine consumers.
+        old_player = engine.player
+        old_items = list(getattr(getattr(old_player, 'inventory', None), 'items', []))
+        old_items += list(getattr(getattr(old_player, 'equipment', None), 'slots', {}).values())
+        changes = {k: v for k, v in vars(stage).items() if k != 'player' and v is not vars(engine).get(k)}
+        engine.__dict__.update(changes)
+        old_player.__dict__.clear()
+        old_player.__dict__.update(vars(stage.player))
+        for item in old_items:
+            if item is not None:
+                item.equipped = False
+        engine.world_map, engine.local_map = world, local_map
+        engine.entities = [old_player] + actors
+        engine._pending_transfer = []
+        self.cache = cache
+        self.generation = generation
+        self._head_token = token
+        self._needs_load = False
+        refs = self.store.references()
+        recovered = bool(errors or (refs and generation != refs[0]))
+        self.recovery_notice = ('Previous checkpoint restored.' if previous else 'Recovered an earlier complete checkpoint.') if (previous or recovered) else None
+        engine._restore_loaded_state()
+        engine._update_fov()
+        engine.log.add(self.recovery_notice or 'The world reassembles itself around you.', LIFE_GREEN)
+        return True
+
+    def save_exists(self):
+        return bool(self._candidates())
+
+    def delete_slot(self):
+        self.store.delete()
+        self.cache = ChunkCache(self.save_path)
+        self.generation = self._head_token = None
+        self._needs_load = False
 
 
 # ------------------------------------------------------------------ #

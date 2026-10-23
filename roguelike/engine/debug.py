@@ -287,7 +287,7 @@ def _cc_stop_weather(_parts: list[str], engine: "Engine") -> None:
     if ps is not None:
         ps.clear()
     engine._fog_surface = None
-    engine.log.add("[debug] weather cleared — sky blank, particles gone.", AGED_WOOD)
+    engine.log.add("[debug] weather cleared â€” sky blank, particles gone.", AGED_WOOD)
 
 
 def _cc_force_weird_weather(_parts: list[str], engine: "Engine") -> None:
@@ -408,7 +408,7 @@ def _cc_test_camera_drift(_parts: list[str], engine: "Engine") -> None:
     """
     Teleport player 15 tiles N/S/E/W and back, then visually flag the
     four corners of the viewport for manual inspection.
-    Reports the player's start position to console — the player ends up
+    Reports the player's start position to console â€” the player ends up
     back there after the round trip.
     """
     ox, oy = engine.player.x, engine.player.y
@@ -429,7 +429,7 @@ def _cc_test_camera_drift(_parts: list[str], engine: "Engine") -> None:
     engine.player.x, engine.player.y = ox, oy
 
     engine.log.add(
-        "[debug] Camera drift test complete — inspect viewport corners for "
+        "[debug] Camera drift test complete â€” inspect viewport corners for "
         "pixel accumulation. Origin: ({ox},{oy})".format(ox=ox, oy=oy),
         AGED_WOOD,
     )
@@ -534,7 +534,7 @@ def _cc_help(parts: list[str], engine: "Engine") -> None:
 
 
 # ------------------------------------------------------------------ #
-#  Command registry — edit here to add / remove console commands
+#  Command registry â€” edit here to add / remove console commands
 # ------------------------------------------------------------------ #
 
 CONSOLE_COMMANDS: dict = {
@@ -762,7 +762,7 @@ class DebugOverlay:
         self._font = pygame.font.SysFont("monospace", 13)
 
     # ------------------------------------------------------------------ #
-    #  Key handling — returns True if the key was consumed
+    #  Key handling â€” returns True if the key was consumed
     # ------------------------------------------------------------------ #
 
     def handle_key(self, key: int, engine: "Engine") -> bool:
@@ -807,7 +807,7 @@ class DebugOverlay:
         if key == pygame.K_F7:
             self._start_input(
                 "set_values",
-                "Set values — hunger,thirst,corruption (0.0-1.0 each, e.g. 0.5,0.8,0.3): "
+                "Set values â€” hunger,thirst,corruption (0.0-1.0 each, e.g. 0.5,0.8,0.3): "
             )
             return True
 
@@ -833,15 +833,12 @@ class DebugOverlay:
             return True
 
         if key == pygame.K_F11:
-            import shutil
-            from pathlib import Path
-            save_path = Path("saves")
-            if save_path.exists():
-                shutil.rmtree(save_path)
-            engine.log.add(
-                "[DEBUG] Save data cleared. Wipe complete.",
-                FRESH_WOUND,
-            )
+            try:
+                engine.save_manager.delete_slot()
+            except Exception as error:
+                engine.log.add(f"[DEBUG] Slot clear failed: {error}", FRESH_WOUND)
+            else:
+                engine.log.add("[DEBUG] Current save slot cleared.", FRESH_WOUND)
             return True
 
         if key == pygame.K_F12:
@@ -939,7 +936,7 @@ class DebugOverlay:
                         engine.local_map          = new_map
                         engine.world_x            = wx
                         engine.world_y            = wy
-                        engine.current_submap_id  = None   # surface teleport — clear stale submap state
+                        engine.current_submap_id  = None   # surface teleport â€” clear stale submap state
                         engine.world_map.mark_explored_radius(wx, wy, radius=2)
                         chunk.visited             = True
                         engine.entities           = [engine.player]
@@ -1014,7 +1011,7 @@ class DebugOverlay:
                 if sr:
                     sr.remap(tile_id, sheet_id, col, row)
                     engine.log.add(
-                        f"[DEBUG] Remapped {tile_id} → {sheet_id} "
+                        f"[DEBUG] Remapped {tile_id} â†’ {sheet_id} "
                         f"({col},{row})",
                         AGED_WOOD,
                     )
@@ -1122,7 +1119,7 @@ class DebugOverlay:
         engine.entities           = [engine.player]
         engine.player.x           = spawn_x
         engine.player.y           = spawn_y
-        engine.current_submap_id  = None   # surface teleport — clear stale submap state
+        engine.current_submap_id  = None   # surface teleport â€” clear stale submap state
         chunk.visited             = True
         engine.world_map.mark_explored_radius(wx, wy, radius=2)
         engine._update_fov()
@@ -1228,7 +1225,7 @@ class DebugOverlay:
 
     @staticmethod
     def _draw_rune_sigil(surf: pygame.Surface, cx: int, cy: int, size: int = 32) -> None:
-        """Draw the debug registry sigil — asymmetric angular rune."""
+        """Draw the debug registry sigil â€” asymmetric angular rune."""
         import math
         s = size / 32
         col_dim    = DEEP_STONE_BLUE
@@ -1286,14 +1283,14 @@ class DebugOverlay:
         pygame.draw.rect(panel, STEEL, (0, 0, sw, sh), 2)
         screen.blit(panel, (0, 0))
 
-        # ── Header ───────────────────────────────────────────────────────
+        # â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         SIG_CX, SIG_CY, SIG_R = 44, 44, 32
         self._draw_rune_sigil(screen, SIG_CX, SIG_CY, SIG_R)
         pygame.draw.line(screen, STEEL, (SIG_CX * 2 + 4, 0), (SIG_CX * 2 + 4, 88), 1)
 
         title = fn_blarge.render("DEBUG REGISTRY", True, STEEL)
         screen.blit(title, (SIG_CX * 2 + 14, pad))
-        sub   = fn_small.render("engine/debug.py  ·  DEBUG_MODE = True", True, DIM)
+        sub   = fn_small.render("engine/debug.py  Â·  DEBUG_MODE = True", True, DIM)
         screen.blit(sub, (SIG_CX * 2 + 14, pad + 26))
 
         inv   = getattr(engine, "player_invincible", False)
@@ -1307,7 +1304,7 @@ class DebugOverlay:
         header_h = 88
         pygame.draw.line(screen, STEEL, (0, header_h), (sw, header_h), 1)
 
-        # ── Two-column key grid ──────────────────────────────────────────
+        # â”€â”€ Two-column key grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         col_w   = (sw - pad * 3) // 2
         col1_x  = pad
         col2_x  = pad * 2 + col_w
@@ -1350,20 +1347,20 @@ class DebugOverlay:
         screen.blit(h, (col2_x, dest_y))
         dest_y += sh_lh
         k = fn_small.render("F11", True, DUSTY_ROSE)
-        d = fn_small.render("Wipe entire saves/ directory", True, BLOOD_STONE)
+        d = fn_small.render("Clear current save slot", True, BLOOD_STONE)
         screen.blit(k, (col2_x, dest_y))
         screen.blit(d, (col2_x + 80, dest_y))
         dest_y += lh
 
         content_bottom = max(y1, dest_y) + pad
 
-        # ── Console section ──────────────────────────────────────────────
+        # â”€â”€ Console section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         pygame.draw.line(screen, STEEL, (0, content_bottom), (sw, content_bottom), 1)
         cy = content_bottom + pad
 
         h_surf = fn_bold.render("DEBUG CONSOLE", True, SECTION)
         screen.blit(h_surf, (pad, cy))
-        trig = fn_small.render("trigger: ` (backtick)  —  type 'help' for full list", True, DIM)
+        trig = fn_small.render("trigger: ` (backtick)  â€”  type 'help' for full list", True, DIM)
         screen.blit(trig, (pad + h_surf.get_width() + 20, cy + 2))
         cy += sh_lh
 
@@ -1387,7 +1384,7 @@ class DebugOverlay:
                 cy1 += sh_lh
                 for _, meta in items:
                     u_surf = fn_small.render(meta["usage"], True, BRIGHT)
-                    d_surf = fn_small.render(f"— {meta['desc']}", True, DIM)
+                    d_surf = fn_small.render(f"â€” {meta['desc']}", True, DIM)
                     screen.blit(u_surf, (cc_col1_x, cy1))
                     screen.blit(d_surf, (cc_col1_x + u_surf.get_width() + 6, cy1))
                     cy1 += lh
@@ -1399,7 +1396,7 @@ class DebugOverlay:
                 cy2 += sh_lh
                 for _, meta in items:
                     u_surf = fn_small.render(meta["usage"], True, BRIGHT)
-                    d_surf = fn_small.render(f"— {meta['desc']}", True, DIM)
+                    d_surf = fn_small.render(f"â€” {meta['desc']}", True, DIM)
                     screen.blit(u_surf, (cc_col2_x, cy2))
                     screen.blit(d_surf, (cc_col2_x + u_surf.get_width() + 6, cy2))
                     cy2 += lh
@@ -1408,7 +1405,7 @@ class DebugOverlay:
 
         cy = max(cy1, cy2) + pad
 
-        # ── Footer status bar ────────────────────────────────────────────
+        # â”€â”€ Footer status bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         footer_y = sh - lh - pad - 4
         pygame.draw.line(screen, STEEL, (0, footer_y - 6), (sw, footer_y - 6), 1)
 
@@ -1418,7 +1415,7 @@ class DebugOverlay:
         submap_label = engine.current_submap_id or "surface"
         region_label = chunk.region_type.value if chunk else "?"
         corr_label   = corr.state if corr else "?"
-        weather_label = weather.state if weather else "—"
+        weather_label = weather.state if weather else "â€”"
 
         footer = fn_small.render(
             f"mode: {engine.mode.value}  |  submap: {submap_label}  |  "
@@ -1472,7 +1469,7 @@ class DebugOverlay:
                         (px_x, px_y, tw, th)
                     )
 
-        # Blit at viewport origin, not (0,0) — viewport is inset from screen edge.
+        # Blit at viewport origin, not (0,0) â€” viewport is inset from screen edge.
         screen.blit(viz_surf, (vp_x, vp_y))
 
     def _render_input_prompt(self, screen: pygame.Surface) -> None:
