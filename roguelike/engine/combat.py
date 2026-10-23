@@ -127,6 +127,7 @@ def resolve_attack(
     attacker_disrupted:    bool  = False,
     defender_dodge_chance: float = 0.0,
     shield_def:            dict | None = None,
+    damage_scale:          float = 1.0,
 ) -> CombatResult:
     """
     Full combat resolution — single HP pool, single effective_av.
@@ -235,7 +236,7 @@ def resolve_attack(
     # ── 7. Apply effective_av + block reduction + location mult ─────
     effective_av = getattr(defender_fighter, "effective_av", 0)
     after_mitigation = max(0, raw - block_reduction - effective_av)
-    damage_dealt     = int(after_mitigation * loc_mult)
+    damage_dealt     = int(int(after_mitigation * loc_mult) * max(0.0, damage_scale))
     result.damage_dealt = damage_dealt
 
     # ── 8. Apply to HP pool ─────────────────────────────────────────

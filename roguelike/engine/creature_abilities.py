@@ -16,6 +16,9 @@ def process_abilities(entity: "Actor", engine: "Engine") -> None:
     Uses _creature_id (set at spawn) as the stable registry key so that
     creatures whose tile changes (e.g. stone_lurker → rock) keep their ability.
     """
+    from engine.effect_lifecycle import ability_enabled
+    if not ability_enabled(entity, engine.local_map):
+        return
     key = getattr(entity, "_creature_id", entity.tile)
     ability_fn = ABILITY_REGISTRY.get(key)
     if ability_fn:
@@ -98,15 +101,10 @@ def _ability_hollow_knight(entity: "Actor", engine: "Engine") -> None:
     The grinding from fused armor creates subsonic disruption within 5 tiles.
     Player attack rolls use the lower of two dice while in range.
     """
+    from engine.effect_lifecycle import knight_disruption
     player = engine.player
-    dist = math.sqrt(
-        (entity.x - player.x) ** 2 +
-        (entity.y - player.y) ** 2
-    )
-
-    in_range    = dist <= 5
     was_in_range = getattr(player, "_hollow_knight_disruption", False)
-    player._hollow_knight_disruption = in_range
+    in_range = knight_disruption(engine)
 
     if in_range and not was_in_range:
         engine.log.add(

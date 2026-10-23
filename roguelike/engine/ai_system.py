@@ -3,6 +3,7 @@ from __future__ import annotations
 import random
 from typing import TYPE_CHECKING
 from config import MAP_WIDTH, MAP_HEIGHT
+from engine.effect_lifecycle import disrupted, ability_enabled, creature_id
 
 if TYPE_CHECKING:
     from entities.actor import Actor
@@ -77,13 +78,16 @@ class AISystem:
                 if abs(entity.x - player.x) + abs(entity.y - player.y) > ACTIVE_RADIUS:
                     continue
 
+            if disrupted(entity, local_map):
+                continue
+
             # Creature special abilities — passive effects, state changes
             if engine is not None:
                 from engine.creature_abilities import process_abilities
                 process_abilities(entity, engine)
 
             # Ambush attack — fires immediately on wake, before normal turn
-            if getattr(entity, "_ambush_ready", False):
+            if getattr(entity, "_ambush_ready", False) and ability_enabled(entity, local_map):
                 entity._ambush_ready = False
                 if engine is not None:
                     from components.ai import _monster_attack_entity
@@ -93,7 +97,7 @@ class AISystem:
             # creatures with speed > 1.0 occasionally get a second step.
             _speed = 1.0
             if engine is not None:
-                _speed = engine.data.entities.get(entity.tile, {}).get("speed", 1.0)
+                _speed = engine.data.entities.get(creature_id(entity), {}).get("speed", 1.0)
             ai.move_accumulator += _speed
             if ai.move_accumulator < 1.0:
                 continue  # not enough accumulated movement this turn
@@ -139,6 +143,9 @@ class AISystem:
         if not getattr(entity, "is_alive", True):
             return
 
+        if disrupted(entity, local_map):
+            return
+
         phantom = SimpleNamespace(
             x               = player_x,
             y               = player_y,
@@ -150,7 +157,7 @@ class AISystem:
             name            = "__live_pursuer_target__",
         )
 
-        if engine is not None:
+        if engine is not None and local_map is engine.local_map:
             from engine.creature_abilities import process_abilities
             process_abilities(entity, engine)
 

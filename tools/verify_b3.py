@@ -23,17 +23,20 @@ FAULTS=('stage_created','first_scene','payload:meta.json','payload:player.json',
 
 def source_manifest():
     return {p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
-            for base in ('roguelike','tools') for p in (ROOT/base).rglob('*.py')
-            if '__pycache__' not in p.parts and 'saves' not in p.parts}
+            for base in ('roguelike','tools') for p in (ROOT/base).rglob('*')
+            if p.is_file() and (p.suffix == '.py' or
+                (p.suffix == '.json' and p.is_relative_to(GAME/'data')))
+            and '__pycache__' not in p.parts and 'saves' not in p.parts}
 
 
-def main(include_c=False):
+def main(include_c=False, include_d=False):
+    include_c = include_c or include_d
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--only',choices=['b3','b1','b2','diagnostic'] + (['c'] if include_c else []))
+    ap.add_argument('--only',choices=['b3','b1','b2','diagnostic'] + (['c'] if include_c else []) + (['d'] if include_d else []))
     ap.add_argument('--case',help='Optional single scenario/variant; partial runs never certify completion')
     args=ap.parse_args()
     stamp=datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
-    prefix='c' if include_c else 'b3'
+    prefix='d' if include_d else ('c' if include_c else 'b3')
     run=ROOT/'.baseline'/(prefix+'-'+stamp+'-'+uuid.uuid4().hex[:8]);run.mkdir(parents=True)
     dump(run/'disposable-b3.json',{'kind':'test saves and evidence only','production_source':str(GAME)})
     report=dict(run_id=run.name,source=source_manifest(),workers=[],checks=[],only=args.only,case=args.case,
@@ -161,6 +164,14 @@ def main(include_c=False):
         execute('c','roundtrip','owners','same')
         for variant in ('equipment','take-all','container','craft'):
             execute('c','journey',variant,'loop')
+    if include_d:
+        for variant in ('armor','coating','suppression','disruption','auras','confirmation','targeting','movement','owners'):
+            execute('d','contract',variant,'same')
+        writer=execute('d','roundtrip','effects','write')
+        if writer:execute('d','roundtrip','effects','read',writer)
+        execute('d','roundtrip','effects','same')
+        for variant in ('confirmation','throw','movement','combat'):
+            execute('d','journey',variant,'loop')
     for job,before in writers:
         check('B3-H',job['scenario']+job['variant']+' canonical writer immutable',before,hashes(Path(job['save_root'])/'slot_0'))
     check('B3-H','source stayed unchanged throughout gate',report['source'],source_manifest())
@@ -173,6 +184,10 @@ def main(include_c=False):
               drop_before['selected_tests_passed'] and any(d['id']=='C-DROP-EQUIPPED' for d in drop_before['deferred']))
         check('C-02','additional ownership defects actually reproduced before edits',True,
               c_before['passed'] and len(c_before['checks'])>=5 and c_before['commit']==drop_before['base_commit'])
+    if include_d:
+        before_d=read(ROOT/'evidence/d-before/result.json')
+        check('D-01','accepted C defects reproduced before edits',True,
+              before_d['passed'] and len(before_d['checks'])==8 and before_d['commit']=='288c70bb2105fc7770fa2c311cb983617bed933c')
     if not args.only and not args.case:
         required=[]
         for suite,scenario,variants in (
@@ -195,6 +210,10 @@ def main(include_c=False):
             required += [('c','contract',v,'same') for v in ('ownership','containers','crafting','production')]
             required += [('c','roundtrip','owners',p) for p in ('write','read','same')]
             required += [('c','journey',v,'loop') for v in ('equipment','take-all','container','craft')]
+        if include_d:
+            required += [('d','contract',v,'same') for v in ('armor','coating','suppression','disruption','auras','confirmation','targeting','movement','owners')]
+            required += [('d','roundtrip','effects',p) for p in ('write','read','same')]
+            required += [('d','journey',v,'loop') for v in ('confirmation','throw','movement','combat')]
         actual=[tuple(w['job'][k] for k in ('suite','scenario','variant','phase')) for w in report['workers']]
         check('H03','all independently enumerated required workers executed',sorted(required),sorted(actual))
         # C now has a positive drop oracle. Retain the separate UI observation.
@@ -213,6 +232,8 @@ def main(include_c=False):
         required_ids |= {'B2-'+str(n).zfill(2) for n in range(1,10)} | {'B2-H'}
         if include_c:
             required_ids |= {'C-'+str(n).zfill(2) for n in range(1,9)}
+        if include_d:
+            required_ids |= {'D-'+str(n).zfill(2) for n in range(1,12)}
         check('H03','every required case collected nonzero evidence',[],sorted(required_ids-{c['case'] for c in checks}))
         check('H01','original diagnostic properties still pass',32,sum(c['case']=='original' and c['passed'] for c in checks))
         checks=report['checks']+[c for w in report['workers'] if w['job']['phase']!='crash' for c in w['result'].get('checks',[])]

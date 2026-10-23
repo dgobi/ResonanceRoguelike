@@ -694,8 +694,10 @@ def _monster_attack_entity(monster, target, engine) -> None:
     ):
         return
 
+    from engine.effect_lifecycle import creature_id, armor_contact, ability_enabled
+
     # Build synthetic weapon from monster JSON
-    monster_def = engine.data.entities.get(monster.tile, {})
+    monster_def = engine.data.entities.get(creature_id(monster), {})
     attack_verb = monster_def.get("attack_verb", "strikes at thee")
 
     # Check ranged attack conditions once — used on both the invincible path
@@ -750,7 +752,7 @@ def _monster_attack_entity(monster, target, engine) -> None:
     # Defender essence mods (player has none for now)
     defender_essence_mods = {}
     if not is_player:
-        defender_def = engine.data.entities.get(target.tile, {})
+        defender_def = engine.data.entities.get(creature_id(target), {})
         defender_essence_mods = defender_def.get("essence_modifiers", {})
 
     defender_name = "thee" if is_player else target.name
@@ -759,7 +761,7 @@ def _monster_attack_entity(monster, target, engine) -> None:
     if is_player:
         defender_dodge_chance = float(getattr(target, "dodge_chance", 0.05))
     else:
-        defender_def2 = engine.data.entities.get(target.tile, {})
+        defender_def2 = engine.data.entities.get(creature_id(target), {})
         defender_dodge_chance = float(defender_def2.get("dodge_chance", 0.0))
 
     # Shield (block) — only relevant when player is defending
@@ -780,10 +782,13 @@ def _monster_attack_entity(monster, target, engine) -> None:
         body_def               = body_def,
         weapon                 = weapon,
         creature_essence_mods  = defender_essence_mods,
-        rng                    = _random.Random(),
+        rng                    = engine.rng,
         defender_dodge_chance  = defender_dodge_chance,
         shield_def             = shield_def,
     )
+
+    if is_player:
+        armor_contact(engine, result)
 
     # Log messages — incoming damage (creature→player/entity): dusty_rose family
     from config import DEBUG_MODE as _DEBUG_MODE
@@ -858,7 +863,8 @@ def _monster_attack_entity(monster, target, engine) -> None:
             })
 
     # Plague crow sickness — 30% chance on hit
-    if monster.tile == "plague_crow" and result.damage_dealt > 0 and is_player:
+    if (creature_id(monster) == "plague_crow" and result.damage_dealt > 0 and is_player
+            and ability_enabled(monster, engine.local_map)):
         if random.random() < 0.30:
             needs = getattr(engine.player, "needs", None)
             if needs:

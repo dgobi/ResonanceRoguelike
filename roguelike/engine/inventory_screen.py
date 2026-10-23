@@ -315,6 +315,8 @@ class InventoryScreen:
                     self._clamp_scroll()
                 else:
                     consumed = engine.item_system.use(row_item, engine)
+                    if engine._pending_consume or engine._pending_throw:
+                        return True  # Opening a confirmation/target command costs no turn.
                     if consumed:
                         from engine.item_transfers import consume
                         consume(engine, row_item)

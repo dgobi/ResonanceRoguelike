@@ -1,0 +1,47 @@
+from pathlib import Path
+import sys,os,json,subprocess
+ROOT=Path(__file__).resolve().parents[2];TASK=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT/'tools'))
+from b1_support import ENV,dump,boot
+from b2_worker import B2Evidence
+os.environ.update(ENV);sys.path.insert(0,str(ROOT/'roguelike'));os.chdir(ROOT/'roguelike')
+import engine.save_manager as sm
+sm.SAVE_DIR=TASK/'before-saves';(sm.SAVE_DIR/'slot_0').mkdir(parents=True,exist_ok=True)
+dump(sm.SAVE_DIR/'slot_0/world.json',{'seed':20261020})
+import config
+config.DEBUG_MODE=False
+ev=B2Evidence(dict(run_id='d-before-20261023',scenario='effects',phase='before',flavor='accepted-c'))
+def probe(e):
+    import pygame
+    from c_cases import fixture,make
+    from components.ai import _monster_attack_entity
+    from engine.creature_abilities import process_abilities
+    fixture(e);p=e.player;inv=p.inventory
+    armor=make(e,'leather_jack');seal=make(e,'marrow_seal');inv.items=[armor,seal]
+    e.item_system.use(armor,e);old=p.fighter.effective_av;e.item_system.use(seal,e)
+    ev.check('D-before','marrow seal adds no mitigation',old,p.fighter.effective_av)
+    armor._temp_av_hits=2;p.dodge_chance=0
+    enemy=e.creature_factory.spawn('hollow_revenant',21,20)
+    _monster_attack_entity(enemy,p,e)
+    ev.check('D-before','connecting attack never consumes armor hit',2,armor._temp_av_hits)
+    wight=e.creature_factory.spawn('barrow_wight',21,20);wight._ability_suppressed_turns=2
+    p.corruption.value=0;process_abilities(wight,e)
+    ev.check('D-before','suppressed wight still applies passive corruption',0.005,p.corruption.value)
+    wight.x=wight.y=40;wight._disrupted_turns=2;e.entities=[p,wight]
+    e._advance_turn()
+    ev.check('D-before','actor effect counters never expire',[2,2],[wight._ability_suppressed_turns,wight._disrupted_turns])
+    e.entities=[p];w=make(e,'wight_concentrate');inv.add(w);e.inventory_screen.open=True
+    e.item_system.use(w,e);e._handle_key(pygame.K_y)
+    ev.check('D-before','confirmation does not consume or enable sight',[True,False,True],[inv.contains(w),p.true_sight,e._pending_consume is not None])
+    e._pending_consume=None;pellet=make(e,'musk_pellet');inv.add(pellet);e.item_system.use(pellet,e)
+    ev.check('D-before','pellet targeting never opens','local',e.mode.value)
+    e._pending_throw=None;e.inventory_screen.open=False
+    e.player_speed_bonus=.2;e.player_speed_bonus_turns=100;start=e.world_time.turn
+    for key in [pygame.K_RIGHT,pygame.K_LEFT]*3:e._handle_key(key)
+    ev.check('D-before','speed salve gives six world turns for six moves',6,e.world_time.turn-start)
+    ev.bind_sources(ROOT/'roguelike')
+boot(probe,ev)
+ev.record['passed']=all(c['passed'] for c in ev.record['checks'])
+ev.record['commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+dump(TASK/'before.json',ev.record)
+print(json.dumps({'passed':ev.record['passed'],'checks':len(ev.record['checks'])}))

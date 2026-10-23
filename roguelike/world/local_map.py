@@ -59,6 +59,7 @@ class LocalMap:
         # Never write directly — use processing_layer[(lx,ly)] = entry.
         # Serialised with the local_map via pickle (CachedChunk).
         self.processing_layer: dict[tuple[int, int], dict] = {}
+        self.disruption_zones: list[dict] = []  # live map owner; cold maps freeze
 
         # Backward compat alias — old code that still references processing_queue
         # gets redirected. Will be removed once all references are migrated.

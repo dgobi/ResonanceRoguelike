@@ -44,6 +44,13 @@ def main():
                 module = __import__(suite + ('_format_cases' if job['scenario'] == 'format' else '_cases'))
                 callback = module.format_cases if suite == 'b1' and job['scenario'] == 'format' else module.run_case
                 boot(lambda e: callback(e, ev), ev)
+        elif suite == 'd':
+            from d_cases import run_case
+            if job['scenario'] == 'journey':
+                from d_journey import run_journey
+                run_journey(ev)
+            else:
+                boot(lambda e: run_case(e, ev), ev)
         elif suite == 'c':
             from c_cases import run_case
             if job['scenario'] == 'journey':

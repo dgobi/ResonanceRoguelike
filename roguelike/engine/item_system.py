@@ -393,8 +393,9 @@ class ItemSystem:
         bonus = item_def.get("armor_bonus", 1)
         hits = item_def.get("armor_hits", 20)
         # Store temporary armor bonus on the armor item
-        torso._temp_av_bonus = getattr(torso, "_temp_av_bonus", 0) + bonus
-        torso._temp_av_hits = hits
+        torso._temp_av_bonus = max(getattr(torso, "_temp_av_bonus", 0), bonus)
+        torso._temp_av_hits = max(getattr(torso, "_temp_av_hits", 0), hits)
+        _recompute_effective_av(engine.player, engine.data)
         msg = item_def.get("apply_message", "The armour hardens. Briefly.")
         engine.log.add(msg, OLD_GOLD)
         return True  # consumed
@@ -409,6 +410,7 @@ class ItemSystem:
             "item": item,
             "item_def": item_def,
         }
+        engine.inventory_screen.open = False
         return False  # not consumed yet — awaiting confirmation
 
     def _use_apply_stalker_unguent(self, item: "Item", engine: "Engine") -> bool:
@@ -429,6 +431,13 @@ class ItemSystem:
             "item": item,
             "item_def": item_def,
         }
+        from engine.engine import GameMode
+        engine._pending_throw['map'] = engine.local_map
+        engine.inventory_screen.open = False
+        engine.mode = GameMode.PLACEMENT_CURSOR
+        engine._placement_mode = 'throw'
+        engine._placement_cursor_x = engine.player.x
+        engine._placement_cursor_y = max(0, engine.player.y - 1)
         # Activate placement cursor for throw targeting
         engine.log.add("Choose a target tile.", UI_TEXT_MID)
         return False  # not consumed yet — awaiting target selection
@@ -463,6 +472,8 @@ def _recompute_effective_av(player, data) -> None:
         item_def = data.items.get(getattr(item, "item_id", ""), {})
         if item_def.get("category") == "armor":
             total += _sum_item_av(item_def)
+            if getattr(item, "_temp_av_hits", 0) > 0:
+                total += getattr(item, "_temp_av_bonus", 0)
     fighter.effective_av = total + getattr(fighter, "attuned_av_bonus", 0)
 
 

@@ -429,11 +429,8 @@ class Engine:
         self._configure_player_needs()
         self._register_player_perks()
         self._update_warmth()
-        self.player._hollow_knight_disruption = any(
-            getattr(a, "_creature_id", None) == "hollow_knight"
-            and getattr(a, "is_alive", True)
-            and (a.x - self.player.x)**2 + (a.y - self.player.y)**2 <= 25
-            for a in self.entities if a is not self.player)
+        from engine.effect_lifecycle import knight_disruption
+        knight_disruption(self)
         self._wraith_aura_state = {}  # runtime object IDs; only message bookkeeping
         self.player.took_damage_this_turn = False
         self._player_is_dead = not self.player.is_alive
@@ -1349,6 +1346,9 @@ class Engine:
         return self.entities
 
     def _advance_turn(self) -> None:
+        from engine.effect_lifecycle import live_actors, finish_turn
+        effect_actors = live_actors(self)
+        self._effect_aged_ids = set()
         from engine.hooks import HookEvent
         effects = self.hooks.fire(HookEvent.ON_TURN, {
             "turn":   self.world_time.turn,
@@ -1374,13 +1374,6 @@ class Engine:
             if self.true_sight_turns == 0:
                 self.player.true_sight = False
                 self.log.add("The sight closes. The cost remains.", UI_TEXT_DIM)
-
-        # Temp AV tick — decrement hits on equipped torso armour
-        _equip_av = getattr(self.player, "equipment", None)
-        if _equip_av:
-            _torso_av = _equip_av.slots.get("armor_torso")
-            if _torso_av and getattr(_torso_av, "_temp_av_hits", 0) > 0:
-                pass  # hits decremented in combat, not per-turn
 
         # Sprint cooldown tick
         if self.sprint_cooldown_remaining > 0:
@@ -1587,6 +1580,8 @@ class Engine:
                 seen.add(id(local_map))
                 self._tick_processing_map(local_map, active=False)
 
+        finish_turn(self, effect_actors)
+
         # Recompute FOV after every turn so wraith penalty (and all other
         # per-turn modifiers) are reflected immediately, not one turn late.
         self._update_fov()
@@ -1634,6 +1629,11 @@ class Engine:
                 raise SystemExit(2)
             return   # ignore all other keys
         
+        if self._pending_consume is not None:
+            from engine.effect_lifecycle import confirm_consume
+            confirm_consume(self, key)
+            return
+
         if self.debug and self.debug.handle_key(key, self):
             return
 
@@ -1758,7 +1758,12 @@ class Engine:
 
         self.player._in_concealment = False
         acted = False
-        _was_move = False   # True when action is directional movement (sprint budget applies)
+        _was_move = False
+        # Capture speed before consuming the final sprint move or salve turn.
+        _move_speed = self.display.SPRINT_SPEED_MULT if self.sprint_turns_remaining > 0 else 1.0
+        if self.player_speed_bonus_turns > 0:
+            _move_speed += max(0.0, self.player_speed_bonus)
+        _move_speed = max(1.0, _move_speed)
 
         # Sprint activation: Shift+SPRINT_KEY only (default W)
         _sprint_key = self.display.SPRINT_KEY
@@ -1821,7 +1826,6 @@ class Engine:
                                               float(self.player.y) - 0.3,
                                               UI_TEXT_DIM, lifetime=0.8,
                                               font_size="status")
-                            self.player_move_accumulator = 0.0
 
         elif key in (self.display.MOVESET_KEY_1, self.display.MOVESET_KEY_2):
             acted = self._try_moveset_action(key)
@@ -1871,26 +1875,19 @@ class Engine:
 
         if acted:
             self._log_scroll = 0
-            if _was_move and self.sprint_turns_remaining > 0:
-                # Sprint accumulator: player_speed 2.0 → AI ticks every 2 moves.
-                # Budget refills by 1.0, costs 1/speed per move.
-                _player_speed = self.display.SPRINT_SPEED_MULT
-                self.player_move_accumulator += 1.0
-                _cost = 1.0 / _player_speed
-                self.player_move_accumulator -= _cost
-                if self.player_move_accumulator >= 1.0:
-                    self.player_move_accumulator -= 1.0
-                    self._advance_turn()
-                    while self._move_debt >= 1.0:
-                        self._move_debt -= 1.0
-                        self._advance_turn()
-                # else: AI skipped this move — player is outpacing creatures
-            else:
-                # Normal: non-movement actions and non-sprint moves always tick AI
+            # Fractional credit earns skipped enemy phases, never extra ones.
+            # Non-movement actions always advance time and never spend this credit.
+            skip_turn = False
+            if _was_move:
+                self.player_move_accumulator += 1.0 - 1.0 / _move_speed
+                if self.player_move_accumulator >= 1.0 - 1e-9:
+                    self.player_move_accumulator = max(0.0, self.player_move_accumulator - 1.0)
+                    skip_turn = True
+            if not skip_turn:
                 self._advance_turn()
-                while self._move_debt >= 1.0:
-                    self._move_debt -= 1.0
-                    self._advance_turn()
+            while self._move_debt >= 1.0:
+                self._move_debt -= 1.0
+                self._advance_turn()
         if self.mode == GameMode.LOCAL:
             self._update_context_prompt()
 
@@ -2816,6 +2813,9 @@ class Engine:
                 if _DM_cc:
                     print(f"[ENTITY-CROSS] SKIP {_e.name} — _just_arrived")
                 continue
+            from engine.effect_lifecycle import disrupted
+            if disrupted(_e, self.local_map):
+                continue
             _eai = getattr(_e, "ai", None)
             if _eai is None or _eai.state not in _pursuing:
                 continue
@@ -2952,6 +2952,8 @@ class Engine:
                     if _te.ai is not None:
                         _te.ai.target_x = _blkx
                         _te.ai.target_y = _blky
+                from engine.effect_lifecycle import age_actor
+                age_actor(self, _te)
                 _t_ents.append(_te)
                 self.save_manager.cache.store(_new_wx, _new_wy, _t_map, _t_ents)
                 if _DM_cc:
@@ -2994,8 +2996,11 @@ class Engine:
 
             _eai = getattr(_entity, "ai", None)
 
+            from engine.effect_lifecycle import age_actor
+
             # --- Timed-out or abandoned — return to cache ---
             if _eai is None or _eai.state not in _pursuing:
+                age_actor(self, _entity)
                 if _DM_lp:
                     print(f"[LIVE-TIMEOUT] {_entity.name} abandoned pursuit")
                 if _sub_id is None:
@@ -3024,6 +3029,11 @@ class Engine:
                 _remaining.append((_entity, _wx, _wy, _sub_id))
                 continue
 
+            from engine.effect_lifecycle import disrupted, creature_id
+            if disrupted(_entity, _map):
+                _remaining.append((_entity, _wx, _wy, _sub_id))
+                continue
+
             # --- Virtual player ---
             # Always out-of-bounds: keeps can_see_player False so entity stays
             # HUNTING/ALERTED.  Navigation is driven entirely by last_known, which
@@ -3040,7 +3050,7 @@ class Engine:
                       f"state={_eai.state.name} lkx={getattr(_entity,'_last_known_px',None)}")
 
             # Speed accumulator — same logic as ai_system.process()
-            _lp_speed = self.data.entities.get(_entity.tile, {}).get("speed", 1.0)
+            _lp_speed = self.data.entities.get(creature_id(_entity), {}).get("speed", 1.0)
             _eai.move_accumulator += _lp_speed
 
             # Move directly toward target (boundary edge or stair tile).
@@ -3391,6 +3401,8 @@ class Engine:
                       f"at ({entity.x},{entity.y}) [player present]")
         else:
             # Player not in this submap — cache entity into it
+            from engine.effect_lifecycle import age_actor
+            age_actor(self, entity)
             _sub_ents.append(entity)
             self.save_manager.cache.store_submap(_linked_id, _sub_map, _sub_ents)
             if _DM_st2:
@@ -3460,6 +3472,8 @@ class Engine:
             entity.x, entity.y = self._find_walkable_near(
                 _surf_c.local_map, _exit_x, _exit_y, max_radius=50
             )
+            from engine.effect_lifecycle import age_actor
+            age_actor(self, entity)
             _surf_ents.append(entity)
             self.save_manager.cache.store(_exit_wx, _exit_wy, _surf_c.local_map, _surf_ents)
             if _DM_su:
@@ -4501,6 +4515,10 @@ class Engine:
 
     def _handle_key_placement(self, key: int) -> None:
         """Input handler for PLACEMENT_CURSOR mode."""
+        if self._pending_throw is not None:
+            from engine.effect_lifecycle import throw_key
+            throw_key(self, key)
+            return
         from engine.engine import MOVE_KEYS
 
         if key in MOVE_KEYS:
@@ -4698,6 +4716,9 @@ class Engine:
 
     def _check_placement_valid(self, cx: int, cy: int) -> bool:
         """Dispatch to the appropriate validity checker based on _placement_mode."""
+        if self._placement_mode == "throw":
+            from engine.effect_lifecycle import valid_throw
+            return valid_throw(self, cx, cy)
         if self._placement_mode == "drying":
             return self._is_valid_drying(cx, cy)
         elif self._placement_mode == "cooking":
@@ -4733,6 +4754,8 @@ class Engine:
                 hint = "[ ENTER ] spread here to dry     [ ESC ] cancel"
             elif self._placement_mode == "cooking":
                 hint = "[ ENTER ] set to cook     [ ESC ] cancel"
+            elif self._placement_mode == "throw":
+                hint = "[ ENTER ] throw     [ ESC ] cancel"
             else:
                 hint = "[ ENTER ] place     [ ESC ] cancel"
             col  = DISCHARGE_FLASH
@@ -4741,6 +4764,8 @@ class Engine:
                 hint = "Too far from the fire.     [ ESC ] cancel"
             elif self._placement_mode == "cooking":
                 hint = "Must be placed on the fire.     [ ESC ] cancel"
+            elif self._placement_mode == "throw":
+                hint = "Cannot throw here.     [ ESC ] cancel"
             else:
                 hint = "Cannot place here.     [ ESC ] cancel"
             col  = FRESH_WOUND
@@ -5270,7 +5295,7 @@ class Engine:
 
     def _player_attack(self, target: "Actor") -> None:
         from engine.combat import resolve_attack
-        import random as _random
+        from engine.effect_lifecycle import creature_id, coated_weapon, coating_contact, knight_disruption, ability_enabled
 
         player_fighter = getattr(self.player, "fighter", None)
         target_fighter = getattr(target,      "fighter", None)
@@ -5312,12 +5337,12 @@ class Engine:
                 self._on_entity_death(target)
             return
 
-        creature_def          = self.data.entities.get(target.tile, {})
+        creature_def          = self.data.entities.get(creature_id(target), {})
         creature_essence_mods = creature_def.get("essence_modifiers", {})
         target_dodge_chance   = float(creature_def.get("dodge_chance", 0.0))
 
-        rng = _random.Random()
-        disrupted = getattr(self.player, "_hollow_knight_disruption", False)
+        rng = self.rng
+        disrupted = knight_disruption(self)
 
         # Flat damage bonus from The Indifference perk (+1 per corruption threshold)
         # + The Marked Path corruption_channel_bonus
@@ -5327,26 +5352,8 @@ class Engine:
             weapon = dict(weapon) if weapon else {}
             weapon["damage_bonus"] = weapon.get("damage_bonus", 0) + _corr_bonus
 
-        # Temporary essence coating — merge active charges into weapon dict
-        _weapon_entity = None
-        _equip = getattr(self.player, "equipment", None)
-        if _equip:
-            _weapon_entity = _equip.slots.get("weapon")
-        if _weapon_entity and getattr(_weapon_entity, "temporary_essence", []):
-            _active_te = [e for e in _weapon_entity.temporary_essence
-                          if e.get("hits_remaining", 0) > 0]
-            if _active_te:
-                weapon = dict(weapon) if weapon else {}
-                _base_ess = weapon.get("essences", [])
-                if not _base_ess and weapon.get("essence"):
-                    _base_ess = [{"name": weapon["essence"],
-                                  "strength": weapon.get("essence_strength", 0.0)}]
-                weapon["essences"] = list(_base_ess) + [
-                    {"name": te["essence"], "strength": te["strength"]}
-                    for te in _active_te
-                ]
-                weapon.pop("essence", None)
-                weapon.pop("essence_strength", None)
+        _weapon_entity = self.player.equipment.slots.get("weapon")
+        weapon = coated_weapon(weapon, _weapon_entity)
 
         result = resolve_attack(
             attacker_name          = "thou",
@@ -5359,36 +5366,10 @@ class Engine:
             attacker_disrupted     = disrupted,
             defender_dodge_chance  = target_dodge_chance,
             shield_def             = None,   # creatures have no shield equipment
+            damage_scale           = max(0.0, 1.0 + self.display.SPRINT_HIT_PENALTY) if self.sprint_turns_remaining > 0 else 1.0,
         )
 
-        # Sprint penalty — reduce pre-armour damage while sprinting
-        if self.sprint_turns_remaining > 0 and result.damage_dealt > 0:
-            _sprint_mult = max(0.0, 1.0 + self.display.SPRINT_HIT_PENALTY)
-            _reduced = max(0, int(result.damage_dealt * _sprint_mult))
-            _diff = result.damage_dealt - _reduced
-            if _diff > 0:
-                target_fighter.hp = min(target_fighter.max_hp,
-                                        target_fighter.hp + _diff)
-                result.damage_dealt = _reduced
-                result.damage_number = _reduced
-
-        # Decrement temporary essence hits on connecting blow
-        if result.hit and not getattr(result, "dodged", False) and _weapon_entity:
-            _te = getattr(_weapon_entity, "temporary_essence", [])
-            if _te:
-                for _te_entry in _te:
-                    _te_entry["hits_remaining"] = _te_entry.get("hits_remaining", 0) - 1
-                _weapon_entity.temporary_essence = [
-                    e for e in _te if e.get("hits_remaining", 0) > 0
-                ]
-                if not _weapon_entity.temporary_essence:
-                    self.log.add("The coating has worn off the blade.", SLATE_MID)
-                    if getattr(self.display, "CALLOUT_STATUS_EFFECTS", False):
-                        self.callouts.add(
-                            "coating gone",
-                            float(self.player.x), float(self.player.y),
-                            SLATE_MID, size="status",
-                        )
+        coating_contact(self, _weapon_entity, result)
 
         # Log messages — outgoing damage (player→creature): mist_blue family
         from config import DEBUG_MODE as _DEBUG_MODE
@@ -5441,7 +5422,7 @@ class Engine:
             _apply_effects(effects, self)
 
         if result.damage_dealt > 0:
-            blood_type = self.data.entities.get(target.tile, {}).get("blood_type", "red")
+            blood_type = self.data.entities.get(creature_id(target), {}).get("blood_type", "red")
             self._place_blood_tile(target.x, target.y, blood_type)
             from rendering.particles import BLOOD_COLORS
             _bcolor = BLOOD_COLORS.get(blood_type)
@@ -5471,8 +5452,9 @@ class Engine:
             self._on_entity_death(target)
 
         # Briar lurker retaliation — thorns on melee contact
-        if target.tile == "briar_lurker" and result.damage_dealt > 0:
-            thorn = _random.randint(1, 2)
+        if (creature_id(target) == "briar_lurker" and result.damage_dealt > 0
+                and ability_enabled(target, self.local_map)):
+            thorn = rng.randint(1, 2)
             if player_fighter:
                 player_fighter.take_damage(thorn)
                 self.log.add(
@@ -5489,7 +5471,7 @@ class Engine:
         """Attempt a moveset action (Q or R). Returns True if a turn was spent."""
         from engine.movesets import get_moveset_action, execute_moveset, apply_damage_mult
         from engine.combat import resolve_attack, get_body_def, roll_dice
-        import random as _random
+        from engine.effect_lifecycle import creature_id, coated_weapon, coating_contact, knight_disruption
 
         weapon_def = self._get_equipped_weapon()
         if not weapon_def or not weapon_def.get("movesets"):
@@ -5518,7 +5500,8 @@ class Engine:
                 continue
             import math
             d = math.sqrt((e.x - self.player.x) ** 2 + (e.y - self.player.y) ** 2)
-            if d <= action_range + 0.5 and d < best_dist:
+            if (d <= action_range + 0.5 and d < best_dist
+                    and self._has_line_of_sight_adjacent(self.local_map, self.player.x, self.player.y, e.x, e.y)):
                 best_dist = d
                 target = e
 
@@ -5544,18 +5527,21 @@ class Engine:
             return True
 
         body_def = get_body_def(target_fighter, self.data.bodies)
-        creature_def = self.data.entities.get(target.tile, {})
+        creature_def = self.data.entities.get(creature_id(target), {})
         creature_essence_mods = creature_def.get("essence_modifiers", {})
         target_dodge = float(creature_def.get("dodge_chance", 0.0))
         if ms_result.ignore_dodge:
             target_dodge = 0.0
 
-        rng = _random.Random()
+        rng = self.rng
 
         # Build weapon dict with damage multiplier
-        mod_weapon = dict(weapon_def)
+        weapon_item = self.player.equipment.slots.get("weapon")
+        mod_weapon = dict(coated_weapon(weapon_def, weapon_item))
         base_dice = mod_weapon.get("damage_dice", "1d4")
         base_dmg = roll_dice(base_dice, rng)
+        if knight_disruption(self):
+            base_dmg = min(base_dmg, roll_dice(base_dice, rng))
         modified_dmg = apply_damage_mult(base_dmg, action)
         mod_weapon["damage_dice"] = f"{modified_dmg}d1"  # pre-rolled damage
         mod_weapon["damage_bonus"] = mod_weapon.get("damage_bonus", 0)
@@ -5565,20 +5551,23 @@ class Engine:
         if ms_result.ignore_armour:
             target_fighter.effective_av = 0
 
-        result = resolve_attack(
-            attacker_name="thou",
-            defender_name=target.name,
-            defender_fighter=target_fighter,
-            body_def=body_def,
-            weapon=mod_weapon,
-            creature_essence_mods=creature_essence_mods,
-            rng=rng,
-            defender_dodge_chance=target_dodge,
-        )
+        try:
+            result = resolve_attack(
+                attacker_name="thou",
+                defender_name=target.name,
+                defender_fighter=target_fighter,
+                body_def=body_def,
+                weapon=mod_weapon,
+                creature_essence_mods=creature_essence_mods,
+                rng=rng,
+                defender_dodge_chance=target_dodge,
+                damage_scale=max(0.0, 1.0 + self.display.SPRINT_HIT_PENALTY) if self.sprint_turns_remaining > 0 else 1.0,
+            )
+        finally:
+            if ms_result.ignore_armour:
+                target_fighter.effective_av = saved_av
 
-        # Restore AV
-        if ms_result.ignore_armour:
-            target_fighter.effective_av = saved_av
+        coating_contact(self, weapon_item, result)
 
         # Log combat messages
         from config import DEBUG_MODE
@@ -5611,7 +5600,7 @@ class Engine:
 
         # Suppress ability
         if ms_result.suppress_ability > 0 and result.hit:
-            target._ability_suppressed_turns = ms_result.suppress_ability
+            target._ability_suppressed_turns = max(getattr(target, "_ability_suppressed_turns", 0), ms_result.suppress_ability)
             self.log.add("Something severs between it and its nature.", MSG_COMBAT_OUT)
 
         # Destroy armour layer
@@ -5626,14 +5615,13 @@ class Engine:
             for e in self.entities:
                 if e is self.player or e is target or not getattr(e, "is_alive", True):
                     continue
-                if e.tile != target.tile:
+                if creature_id(e) != creature_id(target):
                     continue
                 d = math.sqrt((e.x - target.x) ** 2 + (e.y - target.y) ** 2)
                 if d <= ms_result.aoe_disrupt_range:
                     ai = getattr(e, "ai", None)
                     if ai:
-                        ai.state = AIState.WANDERING
-                        e._disrupted_turns = ms_result.aoe_disrupt_turns
+                        e._disrupted_turns = max(getattr(e, "_disrupted_turns", 0), ms_result.aoe_disrupt_turns)
             self.log.add("Something shared between them breaks.", MSG_COMBAT_OUT)
 
         # Reveal knowledge (revelation_lens)
@@ -5819,10 +5807,11 @@ class Engine:
         """
         _wraith_range = self.data.entities.get("bog_wraith", {}).get("ability_range", 8)
         px, py = self.player.x, self.player.y
+        from engine.effect_lifecycle import creature_id, ability_enabled
         active: dict[int, int] = {}
         for e in self.entities:
-            if (e.tile == "bog_wraith"
-                    and not getattr(e, "is_dead", False)
+            if (creature_id(e) == "bog_wraith"
+                    and ability_enabled(e, self.local_map)
                     and abs(e.x - px) + abs(e.y - py) <= _wraith_range):
                 eid       = id(e)
                 prev      = self._wraith_aura_state.get(eid, 0)
