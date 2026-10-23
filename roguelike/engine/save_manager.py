@@ -476,6 +476,7 @@ def _serialize_world(world_map: "WorldMap") -> dict:
             "seed":               chunk.seed,
             "explored":           chunk.explored,
             "visited":            chunk.visited,
+            "generation_revision": getattr(chunk, "generation_revision", None),
             "is_locus":           chunk.is_locus,
             "zones":              chunk.zones,
             "name":               chunk.name,
@@ -498,6 +499,7 @@ def _serialize_world(world_map: "WorldMap") -> dict:
                         "position":       c.position,
                         "feature_id":     c.feature_id,
                         "entrance_type":  c.entrance_type,
+                        "width": getattr(c, "width", 0),
                     }
                     for c in connectors
                 ]
@@ -525,6 +527,7 @@ def _serialize_world(world_map: "WorldMap") -> dict:
         "width":          world_map.width,
         "height":         world_map.height,
         "seed":           world_map.seed,
+        "generation_revision": getattr(world_map, "generation_revision", "legacy-unversioned"),
         "vukh_x":         world_map.vukh_x,
         "vukh_y":         world_map.vukh_y,
         "start_wx":       world_map.start_wx,
@@ -556,6 +559,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
             wy                  = wy,
             region_type         = region_type,
             seed                = cdata["seed"],
+            world_seed          = data.get("seed", 0),
             explored            = cdata["explored"],
             visited             = cdata["visited"],
             is_locus            = cdata.get("is_locus",            False),
@@ -574,6 +578,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
             is_capital          = cdata.get("is_capital",          False),
             river_connections   = cdata.get("river_connections",   []),
         )
+        chunk.generation_revision = cdata.get("generation_revision")
         # Restore town_data
         td_raw = cdata.get("town_data")
         if td_raw:
@@ -599,6 +604,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
                     c["position"],
                     c.get("feature_id",    ""),
                     c.get("entrance_type", ""),
+                    width=c.get("width", 0),
                 )
         # Restore submaps
         for s in cdata.get("submaps", []):
@@ -618,6 +624,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
             chunk.submaps.append(sm)
         world_map.chunks[(wx, wy)] = chunk
 
+    world_map.generation_revision = data.get("generation_revision", "legacy-unversioned")
     world_map.seed           = data.get("seed",     0)
     world_map.vukh_x         = data.get("vukh_x",   world_map.width  // 2)
     world_map.vukh_y         = data.get("vukh_y",   world_map.height // 2)

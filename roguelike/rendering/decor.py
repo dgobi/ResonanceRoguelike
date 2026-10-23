@@ -80,12 +80,14 @@ def get_procedural_key(mx: int, my: int, terrain: str) -> str | None:
             return key
     return None
 
-def resolve_functional_variant(terrain: str, mx: int = 0, my: int = 0) -> str:
+def resolve_functional_variant(terrain: str, mx: int = 0, my: int = 0, context=None) -> str:
     """Pick a deterministic real terrain type from a varied_ terrain."""
     if not terrain.startswith("varied_") or terrain not in FUNCTIONAL_VARIANTS:
         return terrain
 
-    seed = (mx * 374761393) ^ (my * 668265263) ^ hash(terrain)
+    from generation.context import GenerationContext
+    context = context or GenerationContext(0, 0, ('standalone',))
+    seed = context.seed('functional-decor', terrain, mx, my)
     rng  = random.Random(seed)
 
     variants     = FUNCTIONAL_VARIANTS[terrain]

@@ -4,6 +4,7 @@ import math
 import random
 import tcod.bsp
 from world.local_map import LocalMap
+from generation.context import GenerationContext
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -16,6 +17,7 @@ def generate_submap(
     map_height:   int,
     terrain_data: dict,
     data=None,
+    context=None,
 ) -> tuple[LocalMap, list]:
     """
     Generate a LocalMap for a SubMap. Returns (local_map, entities).
@@ -23,13 +25,14 @@ def generate_submap(
     Stores the player entry point on submap.entry_x/y.
     Marks submap.generated = True.
     """
+    context = context or GenerationContext(0, submap.seed, (submap.submap_id,))
     if submap.layout_id:
         local_map, entities, entry_x, entry_y = _generate_submap_from_layout(
-            submap, map_width, map_height, terrain_data
+            submap, map_width, map_height, terrain_data, context=context
         )
     else:
         local_map, entities, entry_x, entry_y = _generate_submap_bsp(
-            submap, map_width, map_height, terrain_data, data=data
+            submap, map_width, map_height, terrain_data, data=data, context=context
         )
 
     submap.entry_x  = entry_x
@@ -66,13 +69,14 @@ def _place_found_texts(
         return []
 
     table_names = _TEXT_TABLE_MAP.get(submap_type, ["world_texts_common"])
-    rng = random.Random(seed ^ 0xFEED_BEEF)
+    from generation.context import map_context
+    rng = map_context(local_map).rng('found-texts')
 
     eligible = [r for r in rooms if r["w"] >= 4 and r["h"] >= 4]
     if not eligible:
         return []
 
-    count        = rng.randint(2, min(4, len(eligible)))
+    count        = rng.randint(min(2, len(eligible)), min(4, len(eligible)))
     chosen_rooms = rng.sample(eligible, count)
     placed: list[dict] = []
 
@@ -115,10 +119,11 @@ def _generate_submap_bsp(
     map_height:   int,
     terrain_data: dict,
     data=None,
+    context=None,
 ) -> tuple[LocalMap, list, int, int]:
     """BSP dungeon generation. Returns (local_map, entities, entry_x, entry_y)."""
     local_map, (entry_x, entry_y) = generate_dungeon(
-        map_width, map_height, terrain_data, seed=submap.seed
+        map_width, map_height, terrain_data, seed=submap.seed, context=context
     )
 
     # Stamp stairs_up at the entry point
@@ -142,6 +147,7 @@ def _generate_submap_from_layout(
     map_width:    int,
     map_height:   int,
     terrain_data: dict,
+    context=None,
 ) -> tuple[LocalMap, list, int, int]:
     """
     Stamp a hand-crafted layout JSON as the entire submap.
@@ -155,8 +161,8 @@ def _generate_submap_from_layout(
         / "data" / "layouts" / f"{submap.layout_id}.json"
     )
     if not layout_path.exists():
-        # Fallback to BSP if layout file is missing
-        return _generate_submap_bsp(submap, map_width, map_height, terrain_data)
+        from generation.context import GenerationError
+        raise GenerationError(f'{submap.submap_id}: missing authored layout {submap.layout_id!r}')
 
     with open(layout_path, encoding="utf-8") as f:
         layout = json.load(f)
@@ -181,7 +187,7 @@ def _generate_submap_from_layout(
 
     # Fill map with walls
     wall = terrain_data.get("wall", terrain_data["floor"])
-    local_map = LocalMap(map_width, map_height)
+    local_map = LocalMap(map_width, map_height, generation_context=context)
     for x in range(map_width):
         for y in range(map_height):
             local_map.set_tile(x, y, "wall", wall["walkable"], wall["transparent"])
@@ -244,41 +250,12 @@ def _generate_submap_from_layout(
                                bool(t_up.get("walkable", True)),
                                bool(t_up.get("transparent", True)))
 
-    # Collect entity spawns from special_tiles
-    entities: list = []
-    for spec in layout.get("special_tiles", []):
-        sx = origin_x + spec["x"]
-        sy = origin_y + spec["y"]
-        if not local_map.in_bounds(sx, sy):
-            continue
-        if spec["type"] == "item":
-            entities.append({
-                "kind":    "item",
-                "item_id": spec.get("item_id", ""),
-                "text_id": spec.get("text_id", ""),
-                "x": sx, "y": sy,
-            })
-        elif spec["type"] == "body":
-            entities.append({
-                "kind": "body",
-                "name": spec.get("name", "remains"),
-                "x": sx, "y": sy,
-            })
-        elif spec["type"] == "container":
-            entities.append({
-                "kind":       "container",
-                "decor_id":   spec.get("decor_id", "crate"),
-                "loot_pools": spec.get("loot_pools", []),
-                "x": sx, "y": sy,
-            })
-        elif spec["type"] == "stele":
-            local_map.stele_text_ids[(sx, sy)] = spec.get("text_id", "")
-        elif spec["type"] == "scene":
-            entities.append({
-                "kind":     "scene",
-                "scene_id": spec.get("scene_id", ""),
-                "x": sx, "y": sy,
-            })
+    from generation.spawn_specs import transformed_specials
+    entities = transformed_specials(layout.get('special_tiles', []), context,
+                                    layout.get('id', submap.layout_id), origin_x, origin_y, lay_h)
+    for spec in entities:
+        if spec['kind'] == 'stele':
+            local_map.stele_text_ids[(spec['x'], spec['y'])] = spec.get('text_id', '')
 
     return local_map, entities, entry_x, entry_y
 
@@ -302,21 +279,26 @@ def generate_dungeon(
     map_height: int,
     terrain_data: dict,
     seed: int | None = None,
+    context=None,
 ) -> tuple[LocalMap, tuple[int, int]]:
     """
     BSP dungeon generator.
     Accepts an optional seed for deterministic generation.
     """
-    rng = random.Random(seed)
-    local_map = LocalMap(map_width, map_height)
+    context = context or GenerationContext(0, seed or 0, ('dungeon',))
+    rng = context.rng('rooms-corridors')
+    local_map = LocalMap(map_width, map_height, generation_context=context)
 
     bsp = tcod.bsp.BSP(x=1, y=1, width=map_width - 2, height=map_height - 2)
+    # tcod 19.3's installed wrapper passes seed straight to C (despite its annotation).
+    partition_rng = tcod.random.Random(seed=context.seed('bsp-partitions') % (2**32))
     bsp.split_recursive(
         depth=5,
         min_width=6,
         min_height=6,
         max_horizontal_ratio=1.5,
         max_vertical_ratio=1.5,
+        seed=partition_rng.random_c,
     )
 
     rooms: list[dict] = []
@@ -611,51 +593,23 @@ def carve_connectors(
 
     EDGE_TO_DIR = {"north": "N", "south": "S", "east": "E", "west": "W"}
 
-    # Collect all road and river edges first; carve as networks
-    road_edges: list[str] = []
-    river_edges: list[str] = []
-
-    for edge, connectors in edges.items():
-        for connector in connectors:
-            if connector.connector_type == ConnectorType.RIVER:
-                if edge in EDGE_TO_DIR and EDGE_TO_DIR[edge] not in river_edges:
-                    river_edges.append(EDGE_TO_DIR[edge])
-            elif connector.connector_type == ConnectorType.ROAD:
-                if edge in EDGE_TO_DIR and EDGE_TO_DIR[edge] not in road_edges:
-                    road_edges.append(EDGE_TO_DIR[edge])
+    from generation.feature_carving import carve_feature
+    ports = {kind: [] for kind in (ConnectorType.ROAD, ConnectorType.RIVER)}
+    for edge in sorted(edges):
+        for connector in edges[edge]:
+            if connector.connector_type in ports:
+                ports[connector.connector_type].append((edge, connector))
             elif connector.connector_type == ConnectorType.PATH:
-                _carve_path_connector(
-                    local_map, terrain_data,
-                    edge, connector.position,
-                    map_width, map_height, rng,
-                )
-
-    # Carve rivers as paired network (same pairing model as roads)
-    if river_edges:
-        _carve_river_network(
-            local_map, terrain_data, river_edges,
-            map_width, map_height, rng,
-        )
-
-    # Carve road network — skip town chunks (town_gen handles their roads)
-    _road_path_tiles: set[tuple[int, int]] = set()
-    if road_edges and town_id == -1:
-        _road_path_tiles = _carve_road_network(
-            local_map, terrain_data, road_edges,
-            map_width, map_height, rng,
-        )
-    elif road_edges and town_id >= 0:
-        # Town chunk: connect external road entry points to the nearest
-        # existing town road/path tile so the road network is seamless.
-        _connect_external_roads_to_town(
-            local_map, terrain_data, road_edges,
-            map_width, map_height, rng,
-        )
-
-    # Post-process: place river bank tiles at road-river crossings (fords)
-    if _road_path_tiles and river_edges and town_id == -1:
-        _place_ford_crossings(local_map, terrain_data, map_width, map_height, rng,
-                              _road_path_tiles)
+                _carve_path_connector(local_map, terrain_data, edge, connector.position,
+                                      map_width, map_height, rng)
+    if ports[ConnectorType.RIVER]:
+        carve_feature(local_map, terrain_data, ports[ConnectorType.RIVER], 'river', rng)
+    if ports[ConnectorType.ROAD] and town_id < 0:
+        road_cells = carve_feature(local_map, terrain_data, ports[ConnectorType.ROAD], 'road', rng)
+        # Preserve agreed water mouths; the existing ford semantics apply inland.
+        inland = {(x, y) for x, y in road_cells if 9 <= x < map_width - 9 and 9 <= y < map_height - 9}
+        if ports[ConnectorType.RIVER]:
+            _place_ford_crossings(local_map, terrain_data, map_width, map_height, rng, inland)
 
 
 _TOWN_ROAD_TILES = frozenset({
@@ -775,7 +729,7 @@ def _place_ford_crossings(
     # Phase 1: probabilistic ford tiles on the road path itself
     # 70% leave as water, 18% bank (wet stone), 12% road (stone poking through)
     ford_tiles: set[tuple[int, int]] = set()
-    for (x, y) in road_path_tiles:
+    for (x, y) in sorted(road_path_tiles):
         if not local_map.in_bounds(x, y):
             continue
         cur = str(local_map.tiles[x, y]["terrain"])
@@ -795,7 +749,7 @@ def _place_ford_crossings(
 
     # Phase 2: scatter bank tiles in the 1-tile margin on either side of
     # the road path within the river — irregular shoreline approach.
-    for (fx, fy) in ford_tiles:
+    for (fx, fy) in sorted(ford_tiles):
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             nx, ny = fx + dx, fy + dy
             if not (0 <= nx < map_width and 0 <= ny < map_height):

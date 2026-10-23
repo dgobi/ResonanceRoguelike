@@ -1918,66 +1918,83 @@ class Engine:
         elif key in {pygame.K_m, pygame.K_ESCAPE}:
             self.mode = GameMode.LOCAL
 
+    def _ensure_surface_scene(self, wx, wy):
+        """Active owner, existing cache, or one complete staged creation; never backfill."""
+        from engine.scene_generation import create_surface, publish_metadata
+        from generation.context import GenerationError
+        if (wx, wy, None) == (self.world_x, self.world_y, self.current_submap_id):
+            return self.local_map, [e for e in self.entities if e is not self.player]
+        cached = self.save_manager.cache.load(wx, wy)
+        if cached is not None:
+            return cached.local_map, _deserialize_entities_inline(cached.entities, self)
+        chunk = self.world_map.get(wx, wy)
+        if chunk is None:
+            raise GenerationError(f'surface ({wx},{wy}): unknown destination')
+        if chunk.visited or getattr(chunk, 'generation_revision', None):
+            raise GenerationError(f'surface ({wx},{wy}): missing previously owned scene; generation refused')
+        result = create_surface(self.world_map, chunk, self.data, self.item_factory,
+                                self.creature_factory, MAP_WIDTH, MAP_HEIGHT)
+        self.save_manager.cache.store(wx, wy, result.local_map, result.actors)
+        publish_metadata(chunk, result.metadata)
+        chunk.generation_revision = result.local_map.generation_revision
+        return result.local_map, result.actors
+
+    def _ensure_submap_scene(self, wx, wy, submap_id):
+        from engine.scene_generation import create_submap, publish_metadata
+        from generation.context import GenerationError
+        if (wx, wy, submap_id) == (self.world_x, self.world_y, self.current_submap_id):
+            return self.local_map, [e for e in self.entities if e is not self.player]
+        cached = self.save_manager.cache.load_submap(submap_id)
+        if cached is not None:
+            return cached.local_map, _deserialize_entities_inline(cached.entities, self)
+        chunk = self.world_map.get(wx, wy)
+        submap = next((s for s in chunk.submaps if s.submap_id == submap_id), None) if chunk else None
+        if submap is None:
+            raise GenerationError(f'{submap_id}: unknown submap destination ({wx},{wy})')
+        if submap.generated:
+            raise GenerationError(f'{submap_id}: missing previously owned scene; generation refused')
+        result = create_submap(self.world_map, wx, wy, submap, self.data, self.item_factory,
+                               self.creature_factory, MAP_WIDTH, MAP_HEIGHT)
+        self.save_manager.cache.store_submap(submap_id, result.local_map, result.actors)
+        publish_metadata(submap, result.metadata)
+        return result.local_map, result.actors
+
+    def _prepare_destination(self, wx, wy, submap_id=None):
+        """Expected creation/read failures leave the departing owners untouched."""
+        try:
+            if submap_id is None:
+                return self._ensure_surface_scene(wx, wy)
+            return self._ensure_submap_scene(wx, wy, submap_id)
+        except (ValueError, OSError) as error:
+            self.log.add(f'Scene entry failed: {error}', STONE_BLUE)
+            return None
+
     def _teleport_to_overmap_cursor(self) -> None:
-        """Generate and enter the chunk under the overmap cursor."""
+        """Debug travel shares normal scene ownership and complete creation."""
         wx, wy = self.overmap_cursor_x, self.overmap_cursor_y
-        chunk  = self.world_map.get(wx, wy)
-        if not chunk:
+        chunk = self.world_map.get(wx, wy)
+        if chunk is None:
             return
-        from generation.region_gen import generate_region
-        from config import MAP_WIDTH, MAP_HEIGHT
-        new_map, (sx, sy) = generate_region(
-            chunk, MAP_WIDTH, MAP_HEIGHT, self.data.terrain, data=self.data
-        )
-        sx, sy = self._find_walkable_near(new_map, sx, sy)
-        self.player.x  = sx
-        self.player.y  = sy
-        self.local_map = new_map
-        self.world_x   = wx
-        self.world_y   = wy
-        chunk.visited  = True
-        # Spawn town creatures and items from town_data if available
-        from world.world_map import RegionType
-        town_entities = []
-        if chunk.region_type == RegionType.TOWN and chunk.town_data:
-            for sd in chunk.town_data.creature_spawns:
-                actor = self.creature_factory.spawn(
-                    sd["creature_id"], sd["x"], sd["y"]
-                )
-                if actor:
-                    town_entities.append(actor)
-            from generation.floor_object_utils import place_floor_object as _pfo_town
-            from generation.floor_object_utils import place_container as _pc_town
-            from engine.loot_roller import roll_pools as _roll_pools
-            for ispec in chunk.town_data.item_spawns:
-                if ispec.get("kind") == "container":
-                    _lx, _ly = ispec["x"], ispec["y"]
-                    if self.local_map.in_bounds(_lx, _ly) and self.local_map.tiles[_lx, _ly]["walkable"]:
-                        _items = _roll_pools(ispec.get("loot_pools", []), self.data.loot_pools, self.item_factory, self.rng)
-                        _pc_town(self.local_map, _lx, _ly, ispec.get("decor_id", "barrel"), _items)
-                    elif DEBUG_MODE:
-                        print(f"[LAYOUT] container at ({_lx},{_ly}) non-walkable, skipped.")
-                    continue
-                _tid_t = ispec.get("text_id", "")
-                _iid_t = ispec.get("item_id", "")
-                if _tid_t:
-                    _mapped_t = self.data.text_item_map.get(_tid_t)
-                    if _mapped_t:
-                        _iid_t = _mapped_t
-                    else:
-                        print(f"[TEXT-MAP] unknown text_id: {_tid_t}, defaulting to letter")
-                        _iid_t = "letter"
-                item = self.item_factory.create(_iid_t, ispec["x"], ispec["y"])
-                if item is not None:
-                    if _tid_t:
-                        item.text_id = _tid_t
-                    _pfo_town(self.local_map, ispec["x"], ispec["y"], item)
-        self.entities  = [self.player] + town_entities
+        prepared = self._prepare_destination(wx, wy)
+        if prepared is None:
+            return
+        from engine.save_manager import SceneAddress
+        SceneAddress(self.world_x, self.world_y, self.current_submap_id).store(
+            self.save_manager.cache, self.local_map, self.entities)
+        self.local_map, natives = prepared
+        self.world_x, self.world_y, self.current_submap_id = wx, wy, None
+        self.player.x, self.player.y = self._find_walkable_near(
+            self.local_map, self.local_map.width // 2, self.local_map.height // 2)
+        self.entities = [self.player] + natives
+        # Live pursuers at this exact scene change owner once.
+        for actor, px, py, sid in list(self._live_pursuers):
+            if (px, py, sid) == (wx, wy, None):
+                self._live_arrive(actor, actor.x, actor.y)
+        chunk.visited = True
         self.world_map.mark_explored_radius(wx, wy, radius=2)
         self._update_fov()
         self.mode = GameMode.LOCAL
-        label = chunk.name if chunk.name else chunk.region_type.value
-        self.log.add(f"Arrived at {label}.", LIFE_GREEN)
+        self.log.add(f'Arrived at {chunk.name or chunk.region_type.value}.', LIFE_GREEN)
 
     # ------------------------------------------------------------------ #
     #  Camera
@@ -2085,6 +2102,11 @@ class Engine:
         if not chunk:
             return
 
+        prepared = self._prepare_destination(new_wx, new_wy)
+        if prepared is None:
+            return
+        new_map, new_entities = prepared
+
         from engine.effect_lifecycle import reset_wraith_aura
         reset_wraith_aura(self)
         self._wraith_overcorrect_turns = 0
@@ -2176,59 +2198,6 @@ class Engine:
         if _DM_tp:
             print(f"[LP-STORED] {len(self._live_pursuers)} live pursuers: "
                   f"{[e.name for e, wx, wy, si in self._live_pursuers]}")
-
-        cached = self.save_manager.cache.load(new_wx, new_wy)
-
-        if cached:
-            new_map      = cached.local_map
-            new_entities = _deserialize_entities_inline(
-                cached.entities, self
-            )
-        else:
-            from generation.region_gen import generate_region
-            from world.world_map import RegionType as _RT
-            new_map, _ = generate_region(
-                chunk, MAP_WIDTH, MAP_HEIGHT, self.data.terrain, data=self.data
-            )
-            new_entities = []
-            if chunk.region_type == _RT.TOWN and chunk.town_data:
-                for sd in chunk.town_data.creature_spawns:
-                    actor = self.creature_factory.spawn(
-                        sd["creature_id"], sd["x"], sd["y"]
-                    )
-                    if actor:
-                        new_entities.append(actor)
-                from generation.floor_object_utils import place_floor_object as _pfo_town2
-                from generation.floor_object_utils import place_container as _pc_town2
-                from engine.loot_roller import roll_pools as _roll_pools2
-                for ispec in chunk.town_data.item_spawns:
-                    if ispec.get("kind") == "container":
-                        _lx2, _ly2 = ispec["x"], ispec["y"]
-                        if new_map.in_bounds(_lx2, _ly2) and new_map.tiles[_lx2, _ly2]["walkable"]:
-                            _items2 = _roll_pools2(ispec.get("loot_pools", []), self.data.loot_pools, self.item_factory, self.rng)
-                            _pc_town2(new_map, _lx2, _ly2, ispec.get("decor_id", "barrel"), _items2)
-                        continue
-                    _tid_t2 = ispec.get("text_id", "")
-                    _iid_t2 = ispec.get("item_id", "")
-                    if _tid_t2:
-                        _mapped_t2 = self.data.text_item_map.get(_tid_t2)
-                        if _mapped_t2:
-                            _iid_t2 = _mapped_t2
-                        else:
-                            print(f"[TEXT-MAP] unknown text_id: {_tid_t2}, defaulting to letter")
-                            _iid_t2 = "letter"
-                    item = self.item_factory.create(_iid_t2, ispec["x"], ispec["y"])
-                    if item is not None:
-                        if _tid_t2:
-                            item.text_id = _tid_t2
-                        _pfo_town2(new_map, ispec["x"], ispec["y"], item)
-            else:
-                chunk_rng = random.Random(chunk.seed + 1)
-                for zone_id, _ in chunk.zones:
-                    creatures = self.creature_factory.spawn_for_zone(
-                        zone_id, new_map, chunk_rng, max_count=3
-                    )
-                    new_entities.extend(creatures)
 
         # ── Mirror entry position from boundary violations ─────────────
         # Cardinal crossing: preserve the perpendicular axis.
@@ -2490,19 +2459,23 @@ class Engine:
 
     def _descend_to_submap(self, submap_id: str) -> None:
         """Cache surface, generate/load submap, place player at entry."""
-        self.particle_system.particles.clear()
-        # Clear creature ability state that doesn't survive transitions
-        from engine.effect_lifecycle import reset_wraith_aura
-        reset_wraith_aura(self)
-        self._wraith_overcorrect_turns = 0
-        self.player._hollow_knight_disruption = False
-
         chunk = self.world_map.get(self.world_x, self.world_y)
         if not chunk:
             return
         submap = next((s for s in chunk.submaps if s.submap_id == submap_id), None)
         if not submap:
             return
+
+        prepared = self._prepare_destination(self.world_x, self.world_y, submap_id)
+        if prepared is None:
+            return
+        new_map, new_entities = prepared
+
+        self.particle_system.particles.clear()
+        from engine.effect_lifecycle import reset_wraith_aura
+        reset_wraith_aura(self)
+        self._wraith_overcorrect_turns = 0
+        self.player._hollow_knight_disruption = False
 
         # Clear ephemeral tiles (blood, bone dust, etc.) from the surface
         # before caching — same as _transition_chunk does on chunk exit.
@@ -2582,18 +2555,6 @@ class Engine:
         self.surface_return_y  = self.player.y
         self.current_submap_id = submap_id
 
-        # Load or generate the submap
-        cached = self.save_manager.cache.load_submap(submap_id)
-        if cached:
-            new_map      = cached.local_map
-            new_entities = _deserialize_entities_inline(cached.entities, self)
-        else:
-            from generation.local_gen import generate_submap
-            new_map, layout_entities = generate_submap(
-                submap, MAP_WIDTH, MAP_HEIGHT, self.data.terrain, data=self.data
-            )
-            new_entities = self._spawn_layout_entities(layout_entities, local_map=new_map)
-
         spawn_x, spawn_y = self._find_walkable_near(
             new_map, submap.entry_x, submap.entry_y
         )
@@ -2653,6 +2614,10 @@ class Engine:
 
     def _ascend_from_submap(self) -> None:
         """Cache submap, restore surface, place player at return coords."""
+        prepared = self._prepare_destination(self.world_x, self.world_y)
+        if prepared is None:
+            return
+        new_map, new_entities = prepared
         self.particle_system.particles.clear()
         from engine.effect_lifecycle import reset_wraith_aura
         reset_wraith_aura(self)
@@ -2722,21 +2687,6 @@ class Engine:
             self.local_map,
             self.entities,
         )
-
-        # Reload the surface chunk
-        cached = self.save_manager.cache.load(self.world_x, self.world_y)
-        if cached:
-            new_map      = cached.local_map
-            new_entities = _deserialize_entities_inline(cached.entities, self)
-        else:
-            from generation.region_gen import generate_region
-            chunk = self.world_map.get(self.world_x, self.world_y)
-            if not chunk:
-                return
-            new_map, _ = generate_region(
-                chunk, MAP_WIDTH, MAP_HEIGHT, self.data.terrain
-            )
-            new_entities = []
 
         self.player.x  = self.surface_return_x
         self.player.y  = self.surface_return_y
@@ -2879,7 +2829,6 @@ class Engine:
         if not _crossed:
             return
 
-        self.entities = [e for e in self.entities if id(e) not in _to_remove]
 
         for _te, _wx_off, _wy_off, _new_wx, _new_wy in _crossed:
             # Mirror entry position to the opposite edge of the target chunk
@@ -2936,17 +2885,10 @@ class Engine:
                 _tgt_chunk = self.world_map.get(_new_wx, _new_wy)
                 if _tgt_chunk is None:
                     continue
-                _cached_t = self.save_manager.cache.load(_new_wx, _new_wy)
-                if _cached_t:
-                    _t_map  = _cached_t.local_map
-                    _t_ents = _deserialize_entities_inline(_cached_t.entities, self)
-                else:
-                    from generation.region_gen import generate_region
-                    _t_map, _ = generate_region(
-                        _tgt_chunk, MAP_WIDTH, MAP_HEIGHT,
-                        self.data.terrain, data=self.data,
-                    )
-                    _t_ents = []
+                prepared = self._prepare_destination(_new_wx, _new_wy)
+                if prepared is None:
+                    continue
+                _t_map, _t_ents = prepared
                 _occ2: set[tuple[int, int]] = {
                     (e.x, e.y) for e in _t_ents
                     if getattr(e, "blocks_movement", True)
@@ -2983,8 +2925,12 @@ class Engine:
                     print(f"[ENTITY-CROSS] {_te.name} -> third chunk "
                           f"({_new_wx},{_new_wy}) at ({_te.x},{_te.y})")
 
+            self.entities = [e for e in self.entities if e is not _te]
+
     def _get_chunk_local_map(self, wx: int, wy: int):
         """Return the LocalMap for chunk (wx, wy) from cache, or None."""
+        if (wx, wy, None) == (self.world_x, self.world_y, self.current_submap_id):
+            return self.local_map
         cached = self.save_manager.cache.load(wx, wy)
         return cached.local_map if cached else None
 
@@ -3023,21 +2969,21 @@ class Engine:
 
             # --- Timed-out or abandoned — return to cache ---
             if _eai is None or _eai.state not in _pursuing:
+                prepared = self._prepare_destination(_wx, _wy, _sub_id)
+                if prepared is None:
+                    _remaining.append((_entity, _wx, _wy, _sub_id))
+                    continue
                 age_actor(self, _entity)
                 if _DM_lp:
                     print(f"[LIVE-TIMEOUT] {_entity.name} abandoned pursuit")
-                if _sub_id is None:
-                    _ret_c = self.save_manager.cache.load(_wx, _wy)
-                    if _ret_c is not None:
-                        _ret_e = _deserialize_entities_inline(_ret_c.entities, self)
-                        _ret_e.append(_entity)
-                        self.save_manager.cache.store(_wx, _wy, _ret_c.local_map, _ret_e)
+                if (_wx, _wy, _sub_id) == (self.world_x, self.world_y, self.current_submap_id):
+                    if _entity not in self.entities:
+                        self.entities.append(_entity)
                 else:
-                    _ret_c = self.save_manager.cache.load_submap(_sub_id)
-                    if _ret_c is not None:
-                        _ret_e = _deserialize_entities_inline(_ret_c.entities, self)
-                        _ret_e.append(_entity)
-                        self.save_manager.cache.store_submap(_sub_id, _ret_c.local_map, _ret_e)
+                    from engine.save_manager import SceneAddress
+                    _ret_map, _ret_e = prepared
+                    _ret_e.append(_entity)
+                    SceneAddress(_wx, _wy, _sub_id).store(self.save_manager.cache, _ret_map, _ret_e)
                 continue
 
             # --- Load map ---
@@ -3181,6 +3127,9 @@ class Engine:
                 _entry_x = max(0, min(MAP_WIDTH  - 1, _entity.x))
                 _entry_y = MAP_HEIGHT - 1 if _coy == -1 else 0
 
+            if self._prepare_destination(_new_wx, _new_wy) is None:
+                _remaining.append((_entity, _wx, _wy, None))
+                continue
             _entity.x = _entry_x
             _entity.y = _entry_y
 
@@ -3360,6 +3309,8 @@ class Engine:
 
     def _get_submap_local_map(self, submap_id: str):
         """Return the LocalMap for a cached submap, or None."""
+        if self.current_submap_id == submap_id:
+            return self.local_map
         cached = self.save_manager.cache.load_submap(submap_id)
         return cached.local_map if cached else None
 
@@ -3373,28 +3324,10 @@ class Engine:
         if _linked_id is None:
             return False  # stair tile with no linked submap
 
-        # Load or generate the submap
-        _sub_cached = self.save_manager.cache.load_submap(_linked_id)
-        if _sub_cached is None:
-            _chunk_wm = self.world_map.get(wx, wy)
-            if _chunk_wm is None:
-                return False
-            _smeta = next((s for s in _chunk_wm.submaps if s.submap_id == _linked_id), None)
-            if _smeta is None:
-                return False
-            from generation.local_gen import generate_submap
-            from config import MAP_WIDTH as _MW2, MAP_HEIGHT as _MH2
-            _smap, _slents = generate_submap(
-                _smeta, _MW2, _MH2, self.data.terrain, data=self.data
-            )
-            _sents = self._spawn_layout_entities(_slents, local_map=_smap)
-            self.save_manager.cache.store_submap(_linked_id, _smap, _sents)
-            _sub_cached = self.save_manager.cache.load_submap(_linked_id)
-        if _sub_cached is None:
+        prepared = self._prepare_destination(wx, wy, _linked_id)
+        if prepared is None:
             return False
-
-        _sub_map  = _sub_cached.local_map
-        _sub_ents = _deserialize_entities_inline(_sub_cached.entities, self)
+        _sub_map, _sub_ents = prepared
 
         # Find entry point
         _chunk_wm2 = self.world_map.get(wx, wy)
@@ -3508,17 +3441,17 @@ class Engine:
                       f"({_exit_wx},{_exit_wy}) at ({entity.x},{entity.y}) [player present]")
         else:
             # Player not on this surface chunk — cache entity there
-            _surf_c = self.save_manager.cache.load(_exit_wx, _exit_wy)
-            if _surf_c is None:
+            prepared = self._prepare_destination(_exit_wx, _exit_wy)
+            if prepared is None:
                 return False
-            _surf_ents = _deserialize_entities_inline(_surf_c.entities, self)
+            _surf_map, _surf_ents = prepared
             entity.x, entity.y = self._find_walkable_near(
-                _surf_c.local_map, _exit_x, _exit_y, max_radius=50
+                _surf_map, _exit_x, _exit_y, max_radius=50
             )
             from engine.effect_lifecycle import age_actor
             age_actor(self, entity)
             _surf_ents.append(entity)
-            self.save_manager.cache.store(_exit_wx, _exit_wy, _surf_c.local_map, _surf_ents)
+            self.save_manager.cache.store(_exit_wx, _exit_wy, _surf_map, _surf_ents)
             if _DM_su:
                 print(f"[LIVE-STAIR-UP-CACHE] {entity.name} cached onto surface "
                       f"({_exit_wx},{_exit_wy}) at ({entity.x},{entity.y})")
@@ -3603,75 +3536,10 @@ class Engine:
                 if _DM_st:
                     print(f"[TRANSFER-STAIR-UP-DELAYED] {_e.name} -> surface ({_e.x},{_e.y})")
 
-    def _spawn_layout_entities(self, layout_entities: list,
-                               local_map=None) -> list:
-        """
-        Convert layout entity dicts returned by generate_submap.
-        Items are placed as floor_objects on the local_map.
-        Creature-type entities are returned as a list (currently none from layouts).
-        Checks walkability before placement; spirals outward to find fallback.
-        """
-        from generation.floor_object_utils import place_floor_object as _pfo_layout
-        from config import DEBUG_MODE
-        _target_map = local_map or self.local_map
-        result = []
-        for spec in layout_entities:
-            kind = spec.get("kind")
-            x, y = spec["x"], spec["y"]
-            if kind == "item":
-                # Walkability check — find nearest walkable tile within 3
-                _px, _py = x, y
-                if not (_target_map.in_bounds(x, y) and _target_map.walkable[x, y]):
-                    _found = False
-                    for _sr in range(1, 4):
-                        for _sdx in range(-_sr, _sr + 1):
-                            for _sdy in range(-_sr, _sr + 1):
-                                _nx, _ny = x + _sdx, y + _sdy
-                                if (_target_map.in_bounds(_nx, _ny)
-                                        and _target_map.walkable[_nx, _ny]):
-                                    _px, _py = _nx, _ny
-                                    _found = True
-                                    break
-                            if _found:
-                                break
-                        if _found:
-                            break
-                    if not _found:
-                        if DEBUG_MODE:
-                            print(f"[LAYOUT] special_tile item at ({x},{y}) is non-walkable, skipped.")
-                        continue
-                item_id = spec.get("item_id", "")
-                text_id = spec.get("text_id", "")
-                item = self.item_factory.create(item_id, _px, _py)
-                if item is not None:
-                    if text_id:
-                        item.text_id = text_id
-                    _pfo_layout(_target_map, _px, _py, item)
-            elif kind == "container":
-                from generation.floor_object_utils import place_container as _pc_layout
-                from engine.loot_roller import roll_pools as _rp_layout
-                if _target_map.in_bounds(x, y) and _target_map.walkable[x, y]:
-                    _c_items = _rp_layout(
-                        spec.get("loot_pools", []),
-                        self.data.loot_pools,
-                        self.item_factory,
-                        self.rng,
-                    )
-                    _pc_layout(_target_map, x, y, spec.get("decor_id", "crate"), _c_items)
-                elif DEBUG_MODE:
-                    print(f"[LAYOUT] container at ({x},{y}) non-walkable, skipped.")
-            elif kind == "scene":
-                scene_id = spec.get("scene_id", "")
-                scene_def = self.data.scenes.get(scene_id)
-                if scene_def and _target_map.in_bounds(x, y) and _target_map.walkable[x, y]:
-                    for fo in scene_def.get("floor_objects", []):
-                        fo_item = self.item_factory.create(fo["item_id"], x, y)
-                        if fo_item is not None:
-                            _pfo_layout(_target_map, x, y, fo_item)
-                elif DEBUG_MODE and not scene_def:
-                    print(f"[LAYOUT] scene '{scene_id}' not found in scenes.json.")
-            # "body" type — skip for now (Tier 2 content)
-        return result
+    def _spawn_layout_entities(self, layout_entities: list, local_map=None) -> list:
+        from engine.scene_generation import populate
+        return populate(self.data, self.item_factory, self.creature_factory,
+                        local_map if local_map is not None else self.local_map, layout_entities)
 
     # ------------------------------------------------------------------ #
     #  Terrain step helpers

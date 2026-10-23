@@ -60,9 +60,25 @@ class WFCSolver:
         """
         for attempt in range(self.MAX_ATTEMPTS):
             result = self._attempt(width, height, fixed)
-            if result is not None:
+            if result is not None and self.valid(result, width, height):
                 return result
         return None
+
+    def valid(self, grid, width, height) -> bool:
+        """Check both directional constraints, including pre-collapsed singletons."""
+        if len(grid) != width or any(len(col) != height for col in grid):
+            return False
+        for x in range(width):
+            for y in range(height):
+                tile = grid[x][y]
+                if tile not in self._all_tiles:
+                    return False
+                for dx, dy, direction in ((0, -1, 'N'), (1, 0, 'E'), (0, 1, 'S'), (-1, 0, 'W')):
+                    nx, ny = x + dx, y + dy
+                    if 0 <= nx < width and 0 <= ny < height:
+                        if grid[nx][ny] not in self._adjacency.get(tile, {}).get(direction, []):
+                            return False
+        return True
 
     # ------------------------------------------------------------------ #
 
@@ -116,7 +132,7 @@ class WFCSolver:
 
             # Collapse: choose tile weighted by weights
             bx, by = best_pos
-            possible = list(cells[bx][by])
+            possible = sorted(cells[bx][by])
             weights  = [self._tile_weights.get(t, 1) for t in possible]
             chosen   = self._rng.choices(possible, weights=weights, k=1)[0]
             cells[bx][by] = {chosen}

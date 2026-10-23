@@ -86,6 +86,7 @@ class EdgeConnector:
     position:       float          # 0.0 = top/left, 1.0 = bottom/right
     feature_id:     str = ""       # e.g. river name, road name
     entrance_type:  str = ""       # entrance structure type for PASSAGE connectors
+    width:          int = 0        # 0: legacy default (road 3, river 9)
 
 
 @dataclass
@@ -142,6 +143,8 @@ class Chunk:
         "west":  [],
     })
 
+    world_seed: int = 0  # derived from the owning world, never a new chunk-seed range
+
     def add_submap(self, submap_type: str, name: str, seed: int,
                    layout_id: str = "") -> SubMap:
         """Create a SubMap attached to this chunk and return it."""
@@ -162,8 +165,9 @@ class Chunk:
         position: float,
         feature_id:    str = "",
         entrance_type: str = "",
+        width: int = 0,
     ) -> EdgeConnector:
-        connector = EdgeConnector(connector_type, position, feature_id, entrance_type)
+        connector = EdgeConnector(connector_type, position, feature_id, entrance_type, width)
         self.edges[edge].append(connector)
         return connector
 

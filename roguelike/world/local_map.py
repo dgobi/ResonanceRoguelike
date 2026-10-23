@@ -24,9 +24,11 @@ BLANK = make_tile("wall", False, False)
 
 
 class LocalMap:
-    def __init__(self, width: int = MAP_WIDTH, height: int = MAP_HEIGHT) -> None:
+    def __init__(self, width: int = MAP_WIDTH, height: int = MAP_HEIGHT,
+                 generation_context=None) -> None:
         self.width  = width
         self.height = height
+        self.generation_context = generation_context
         self.tiles  = np.full((width, height), fill_value=BLANK, dtype=tile_dt)
 
         # Light map — RGB float per tile, rebuilt each turn
@@ -127,7 +129,8 @@ class LocalMap:
         from rendering.decor import resolve_functional_variant, PLANT_DECOR_IDS
 
         # Resolve 'varied_x' to a deterministic specific type using tile coords
-        actual_terrain = resolve_functional_variant(terrain, mx=x, my=y)
+        actual_terrain = resolve_functional_variant(
+            terrain, mx=x, my=y, context=getattr(self, 'generation_context', None))
 
         # Plants go to decor layer, terrain stays as grass underneath
         if actual_terrain in PLANT_DECOR_IDS:

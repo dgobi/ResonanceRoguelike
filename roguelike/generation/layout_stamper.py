@@ -88,6 +88,7 @@ def stamp_layout(
     edge: str,
     connector_pos: float,
     terrain_data: dict,
+    rng: "_random.Random | None" = None,
 ) -> tuple[int, int]:
     """
     Stamp layout onto local_map, rotating to match edge.
@@ -131,7 +132,8 @@ def stamp_layout(
 
     # Stamp each tile.
     legend_weights = layout.get("legend_weights", {})
-    _rng = _random.Random()  # seeded by caller if needed
+    from generation.context import map_context
+    _rng = rng or map_context(local_map).rng('edge-entrance', layout.get('id', ''), edge)
     for ly, row in enumerate(layers):
         for lx, char in enumerate(row):
             if char == " ":
@@ -156,6 +158,7 @@ def stamp_layout_interior(
     centre_x: int,
     centre_y: int,
     terrain_data: dict,
+    rng: "_random.Random | None" = None,
 ) -> tuple[int, int]:
     """
     Stamp a layout centered at (centre_x, centre_y) with no edge alignment
@@ -172,7 +175,8 @@ def stamp_layout_interior(
 
     stairs_pos: tuple[int, int] | None = None
     legend_weights = layout.get("legend_weights", {})
-    _rng = _random.Random()
+    from generation.context import map_context
+    _rng = rng or map_context(local_map).rng('interior-entrance', layout.get('id', ''), centre_x, centre_y)
 
     for row_idx, row in enumerate(layers):
         for col_idx, ch in enumerate(row):

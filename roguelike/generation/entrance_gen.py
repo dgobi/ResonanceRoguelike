@@ -57,7 +57,7 @@ def _get_layouts() -> dict:
     if _LAYOUT_CACHE is not None:
         return _LAYOUT_CACHE
     _LAYOUT_CACHE = {}
-    base = Path("data/entrances")
+    base = Path(__file__).resolve().parents[1] / 'data' / 'entrances'
     if not base.exists():
         return _LAYOUT_CACHE
     for path in sorted(base.glob("*.json")):
@@ -128,7 +128,7 @@ def place_outdoor_entrance(
     layout = _pick_layout(entrance_type, rng)
     if layout is None:
         return
-    stamp_layout(local_map, layout, edge, position, terrain_data)
+    stamp_layout(local_map, layout, edge, position, terrain_data, rng=rng)
 
 
 def place_dungeon_entry(

@@ -28,23 +28,26 @@ def generate_region(
     map_height: int,
     terrain_data: dict,
     data=None,              # DataLoader — required for full town generation
+    context=None,
 ) -> tuple[LocalMap, tuple[int, int]]:
     """
     Dispatch to the correct generator based on chunk region type.
     After generation, carve edge connectors (rivers, roads, paths).
     Returns (LocalMap, player_spawn_xy).
     """
-    rng = random.Random(chunk.seed)
+    from generation.context import GenerationContext
+    context = context or GenerationContext(getattr(chunk, 'world_seed', 0), chunk.seed, (chunk.wx, chunk.wy, None))
+    rng = context.rng('terrain')
 
     if chunk.region_type == RegionType.FOREST:
         local_map, spawn = _generate_forest(
-            map_width, map_height, terrain_data, rng
+            map_width, map_height, terrain_data, rng, context=context
         )
 
     elif chunk.region_type == RegionType.TOWN:
         if data is not None:
             from generation.town_gen import generate_town
-            local_map = _generate_town_base(map_width, map_height, terrain_data)
+            local_map = _generate_town_base(map_width, map_height, terrain_data, context=context)
             local_map, spawn = generate_town(
                 chunk         = chunk,
                 local_map     = local_map,
@@ -53,56 +56,56 @@ def generate_region(
                 terrain_data  = terrain_data,
                 building_data = data.buildings,
                 name_gen      = None,
-                rng           = rng,
+                rng           = context.rng('buildings'),
             )
         else:
             local_map, spawn = _generate_town(
-                map_width, map_height, terrain_data, rng
+                map_width, map_height, terrain_data, rng, context=context
             )
 
     elif chunk.region_type == RegionType.SWAMP:
         local_map, spawn = _generate_open(
-            map_width, map_height, terrain_data, rng,
+            map_width, map_height, terrain_data, rng, context=context,
             floor_terrain="mud", tree_chance=0.12,
         )
 
     elif chunk.region_type == RegionType.HEATH:
         local_map, spawn = _generate_open(
-            map_width, map_height, terrain_data, rng,
+            map_width, map_height, terrain_data, rng, context=context,
             floor_terrain="varied_grass", tree_chance=0.03,
         )
 
     elif chunk.region_type == RegionType.MOUNTAIN:
         local_map, spawn = _generate_mountain(
-            map_width, map_height, terrain_data, rng
+            map_width, map_height, terrain_data, rng, context=context
         )
 
     elif chunk.region_type == RegionType.DEEP_MOUNTAIN:
         local_map, spawn = _generate_mountain(
-            map_width, map_height, terrain_data, rng
+            map_width, map_height, terrain_data, rng, context=context
         )
 
     elif chunk.region_type == RegionType.CAPITAL:
         local_map, spawn = _generate_open(
-            map_width, map_height, terrain_data, rng,
+            map_width, map_height, terrain_data, rng, context=context,
             floor_terrain="cobblestone", tree_chance=0.0,
         )
 
     elif chunk.region_type == RegionType.DROWNED_WOOD:
         local_map, spawn = _generate_open(
-            map_width, map_height, terrain_data, rng,
+            map_width, map_height, terrain_data, rng, context=context,
             floor_terrain="mud", tree_chance=0.20,
         )
 
     elif chunk.region_type == RegionType.ASH_WASTES:
         local_map, spawn = _generate_open(
-            map_width, map_height, terrain_data, rng,
+            map_width, map_height, terrain_data, rng, context=context,
             floor_terrain="varied_grass", tree_chance=0.01,
         )
 
     else:  # PLAINS / UNKNOWN default
         local_map, spawn = _generate_open(
-            map_width, map_height, terrain_data, rng,
+            map_width, map_height, terrain_data, rng, context=context,
             floor_terrain="varied_grass", tree_chance=0.06,
         )
 
@@ -134,9 +137,11 @@ def generate_region(
     # Carve rivers, roads, paths from edge connectors
     carve_connectors(
         local_map, terrain_data,
-        chunk.edges, map_width, map_height, rng,
+        chunk.edges, map_width, map_height, context.rng('roads'),
         town_id=getattr(chunk, "town_id", -1),
     )
+
+    rng = context.rng('dressing')
 
     # B2: Dead wood scatter near trees (surface wilderness only)
     if (chunk.region_type not in (RegionType.TOWN, RegionType.CAPITAL)
@@ -161,8 +166,12 @@ def generate_region(
         _scatter_clay(local_map, terrain_data, rng)
 
     # Place submap entrances AFTER connectors so roads can't overwrite stairs
+    if getattr(chunk, 'town_data', None):
+        staged_content = chunk.town_data.item_spawns + chunk.town_data.creature_spawns
+        local_map.protected_cells = set(getattr(local_map, 'protected_cells', set()))
+        local_map.protected_cells.update((s['x'], s['y']) for s in staged_content)
     for submap in chunk.submaps:
-        _place_submap_entrance(local_map, submap, terrain_data)
+        _place_submap_entrance(local_map, submap, terrain_data, data=data)
 
     return local_map, spawn
 
@@ -178,8 +187,9 @@ def _generate_open(
     rng: random.Random,
     floor_terrain: str = "varied_grass",
     tree_chance: float = 0.06,
+    context=None,
 ) -> tuple[LocalMap, tuple[int, int]]:
-    local_map = LocalMap(map_width, map_height)
+    local_map = LocalMap(map_width, map_height, generation_context=context)
     floor = terrain_data[floor_terrain]
     tree  = terrain_data["tree"]
 
@@ -254,8 +264,9 @@ def _generate_forest(
     map_height: int,
     terrain_data: dict,
     rng: random.Random,
+    context=None,
 ) -> tuple[LocalMap, tuple[int, int]]:
-    local_map = LocalMap(map_width, map_height)
+    local_map = LocalMap(map_width, map_height, generation_context=context)
     grass = terrain_data["varied_grass"]
     tree  = terrain_data["tree"]
 
@@ -285,8 +296,9 @@ def _generate_mountain(
     map_height: int,
     terrain_data: dict,
     rng: random.Random,
+    context=None,
 ) -> tuple[LocalMap, tuple[int, int]]:
-    local_map = LocalMap(map_width, map_height)
+    local_map = LocalMap(map_width, map_height, generation_context=context)
     rock   = terrain_data["rock"]
     gravel = terrain_data["gravel"]
 
@@ -324,9 +336,10 @@ def _generate_town_base(
     map_width: int,
     map_height: int,
     terrain_data: dict,
+    context=None,
 ) -> LocalMap:
     """Grass-filled base map for the full town generator to stamp over."""
-    local_map = LocalMap(map_width, map_height)
+    local_map = LocalMap(map_width, map_height, generation_context=context)
     grass = terrain_data["grass"]
     for x in range(map_width):
         for y in range(map_height):
@@ -340,13 +353,14 @@ def _generate_town(
     map_height: int,
     terrain_data: dict,
     rng: random.Random,
+    context=None,
 ) -> tuple[LocalMap, tuple[int, int]]:
     """
     Basic town generator — cobblestone base with scattered
     building footprints. Will be replaced by the full zone-based
     town generator once the structure placer is integrated.
     """
-    local_map = LocalMap(map_width, map_height)
+    local_map = LocalMap(map_width, map_height, generation_context=context)
     cobble = terrain_data.get("cobblestone", terrain_data["floor"])
     wall   = terrain_data["wall"]
     floor  = terrain_data["floor"]
@@ -401,83 +415,105 @@ def _generate_town(
     return local_map, (cx, cy)
 
 
-def _place_submap_entrance(
-    local_map:    LocalMap,
-    submap,
-    terrain_data: dict,
-) -> None:
-    """
-    Stamp the appropriate entrance structure (barrow_mound, rock_face_cut, or
-    sunken_ruin) at a walkable interior position, then register the stairs_down
-    tile it contains in local_map.submap_links.
-    Placement is deterministic per submap seed and avoids map edges.
-    """
+def _place_submap_entrance(local_map, submap, terrain_data, data=None):
+    """Bounded whole-footprint placement; commit a real usable stair or fail closed."""
+    import copy
+    from collections import deque
+    from generation.context import map_context, GenerationError
     from generation.entrance_gen import _pick_layout
     from generation.layout_stamper import stamp_layout_interior
+    from rendering.decor import PLANT_DECOR_IDS
+    from generation.decor_utils import clear_decor
+    context = map_context(local_map)
+    rng = context.rng('entrance-position', submap.submap_id, submap.seed)
+    layout = _pick_layout(SUBMAP_ENTRANCE.get(submap.submap_type), rng)
+    w, h = local_map.width, local_map.height
+    protected = set(getattr(local_map, 'protected_cells', set()))
+    protected.update(local_map.submap_links)
+    protected.update(local_map.floor_objects)
+    protected.update(local_map.container_state)
+    protected.update(xy for xy, decor in local_map.decor.items() if decor not in PLANT_DECOR_IDS)
+    protected.update((x, y) for x in range(w) for y in range(h)
+                     if str(local_map.tiles[x, y]['terrain']) in
+                     {'stairs_up', 'stairs_down', 'river_water', 'river_bank', 'river_stones',
+                      'cobblestone', 'flagstone'} or str(local_map.tiles[x, y]['terrain']).startswith('road_'))
+    decor_data = data.decoratives if data is not None else {}
 
-    entrance_type = SUBMAP_ENTRANCE.get(submap.submap_type)
-    sub_rng = random.Random(submap.seed ^ 0xBEEF_CAFE)
+    def enterable(m, xy):
+        terrain = str(m.tiles[xy]['terrain'])
+        return (m.walkable[xy] or terrain == 'door_closed') and not decor_data.get(
+            m.decor.get(xy), {}).get('blocks_movement', False)
 
-    layout = _pick_layout(entrance_type, sub_rng) if entrance_type else None
+    # Keep all currently legal interaction/arrival neighbours of mandatory
+    # objects. Candidate footprints must not wall in an untouched object.
+    objects = (set(local_map.submap_links) | set(local_map.floor_objects)
+               | set(local_map.container_state)
+               | {xy for xy, decor in local_map.decor.items() if decor not in PLANT_DECOR_IDS})
+    for x, y in objects:
+        protected.update((x + dx, y + dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1)
+                         if local_map.in_bounds(x + dx, y + dy) and enterable(local_map, (x + dx, y + dy)))
 
-    w = local_map.width
-    h = local_map.height
-    # Keep layout center at least 20 tiles from any edge so the structure fits
-    margin = 20
+    def access(m, stair, footprint):
+        if not m.in_bounds(*stair) or not enterable(m, stair):
+            return False
+        seen, queue = {stair}, deque([stair])
+        while queue:
+            x, y = queue.popleft()
+            if (x, y) not in footprint:
+                return True
+            for dx in (-1, 0, 1):
+                for dy in (-1, 0, 1):
+                    xy = x + dx, y + dy
+                    if m.in_bounds(*xy) and xy not in seen and enterable(m, xy):
+                        seen.add(xy)
+                        queue.append(xy)
+        return False
 
-    _BLOCKED_TERRAIN = (
-        {"river_water", "river_bank", "river_stones", "cobblestone",
-         "cobblestone_cracked", "cobblestone_mossy"}
-        | {f"road_{i}" for i in range(16)}
-    )
-
+    candidates = [(x, y) for x in range(1, w - 1) for y in range(1, h - 1)]
+    rng.shuffle(candidates)
     if layout is not None:
-        # Search for a walkable interior centre position
-        placed = False
-        for _ in range(300):
-            cx = sub_rng.randint(margin, w - margin - 1)
-            cy = sub_rng.randint(margin, h - margin - 1)
-            if local_map.walkable[cx, cy] and \
-               str(local_map.tiles[cx, cy]["terrain"]) not in _BLOCKED_TERRAIN:
-                stairs_x, stairs_y = stamp_layout_interior(
-                    local_map, layout, cx, cy, terrain_data
-                )
-                local_map.submap_links[(stairs_x, stairs_y)] = submap.submap_id
-                submap.surface_x = stairs_x
-                submap.surface_y = stairs_y
-                placed = True
-                break
-
-        if not placed:
-            # Fallback: stamp at centre
-            cx, cy = w // 2, h // 2
-            stairs_x, stairs_y = stamp_layout_interior(
-                local_map, layout, cx, cy, terrain_data
-            )
-            local_map.submap_links[(stairs_x, stairs_y)] = submap.submap_id
-            submap.surface_x = stairs_x
-            submap.surface_y = stairs_y
-    else:
-        # No layout available — place a bare stairs_down tile
-        t = terrain_data.get("stairs_down", terrain_data["floor"])
-        for _ in range(200):
-            x = sub_rng.randint(margin, w - margin - 1)
-            y = sub_rng.randint(margin, h - margin - 1)
-            if local_map.walkable[x, y] and \
-               str(local_map.tiles[x, y]["terrain"]) not in _BLOCKED_TERRAIN:
-                local_map.set_tile(x, y, "stairs_down",
-                                   t["walkable"], t["transparent"])
-                local_map.submap_links[(x, y)] = submap.submap_id
-                submap.surface_x = x
-                submap.surface_y = y
-                return
-        # Fallback
-        cx, cy = w // 2, h // 2
-        local_map.set_tile(cx, cy, "stairs_down",
-                           t["walkable"], t["transparent"])
-        local_map.submap_links[(cx, cy)] = submap.submap_id
-        submap.surface_x = cx
-        submap.surface_y = cy
+        rows = layout['layers']
+        lw, lh = max(map(len, rows)), len(rows)
+        for cx, cy in candidates[:300]:
+            ox, oy = cx - lw // 2, cy - lh // 2
+            footprint = {(x, y) for x in range(ox, ox + lw) for y in range(oy, oy + lh)}
+            if ox < 1 or oy < 1 or ox + lw >= w or oy + lh >= h or footprint & protected:
+                continue
+            staged = copy.deepcopy(local_map)
+            for xy in footprint:
+                clear_decor(staged, *xy)  # replace only natural vegetation, checked above
+            stair = stamp_layout_interior(staged, layout, cx, cy, terrain_data,
+                      rng=context.rng('entrance-layout', submap.submap_id, cx, cy))
+            if str(staged.tiles[stair]['terrain']) != 'stairs_down' or not access(staged, stair, footprint):
+                continue
+            staged.submap_links[stair] = submap.submap_id
+            staged.protected_cells = protected | footprint
+            # Only terrain/decor changed: preserve existing object identities.
+            for field in ('tiles', 'decor'):
+                setattr(local_map, field, getattr(staged, field))
+            local_map.submap_links[stair] = submap.submap_id
+            local_map.protected_cells = staged.protected_cells
+            submap.surface_x, submap.surface_y = stair
+            return
+    # Explicit small fallback: a bare stair on existing accessible ground, with
+    # a usable neighbouring tile. Never use a generic centre or overwrite content.
+    for xy in candidates[:300]:
+        if xy in protected or not enterable(local_map, xy):
+            continue
+        if not access(local_map, xy, {xy}):
+            continue
+        clear_decor(local_map, *xy)
+        td = terrain_data['stairs_down']
+        local_map.set_tile(*xy, 'stairs_down', td['walkable'], td['transparent'])
+        local_map.submap_links[xy] = submap.submap_id
+        local_map.protected_cells = protected | {xy}
+        local_map.generation_diagnostics = getattr(local_map, 'generation_diagnostics', []) + [
+            dict(kind='entrance', submap=submap.submap_id, status='bare-stair-fallback',
+                 reason='no valid authored footprint' if layout else 'no authored layout',
+                 revision=context.revision)]
+        submap.surface_x, submap.surface_y = xy
+        return
+    raise GenerationError(f'{submap.submap_id}: no valid entrance footprint or accessible fallback')
 
 
 # ------------------------------------------------------------------ #

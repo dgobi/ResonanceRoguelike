@@ -71,9 +71,12 @@ def generate_world(world_map: WorldMap, data, rng: random.Random,
                 wy          = wy,
                 region_type = RegionType.PLAINS,
                 seed        = rng.randint(0, 999999),
+                world_seed  = world_map.seed,
             )
             world_map.set(chunk)
 
+    from generation.context import GENERATION_REVISION
+    world_map.generation_revision = GENERATION_REVISION
     _place_vukh(world_map, rng)
     _generate_elevation(world_map, rng)
     _generate_moisture(world_map, rng)
@@ -84,6 +87,7 @@ def generate_world(world_map: WorldMap, data, rng: random.Random,
     _place_starting_location(world_map, rng)
     _place_towns(world_map, rng)             # Step 9
     _generate_roads(world_map, rng)          # Step 10
+    _stamp_town_ports(world_map)
     _calculate_difficulty_bands(world_map)   # Step 11
 
     # Post-processing — zones, submaps, names, myth
@@ -503,13 +507,15 @@ def _stamp_river_connectors(world_map: WorldMap, rng: random.Random) -> None:
             chunk = world_map.get(wx, wy)
             if not chunk or not chunk.is_river:
                 continue
-            river_id = f"river_{wx}_{wy}"
-            position = round(rng.uniform(0.3, 0.7), 2)
+            # Preserve macro RNG consumption/geography; mouths have shared edge keys.
+            rng.uniform(0.3, 0.7)
             for edge, (odx, ody) in EDGE_OFFSETS.items():
                 nb = world_map.get(wx + odx, wy + ody)
                 if nb and nb.is_river:
+                    from generation.ports import river_spec
+                    position, width, river_id = river_spec(world_map.seed, wx, wy, edge)
                     chunk.add_connector(edge, ConnectorType.RIVER,
-                                        position, river_id)
+                                        position, river_id, width=width)
 
 
 def _stamp_road_connectors(world_map: WorldMap) -> None:
@@ -927,6 +933,14 @@ def _place_towns(world_map: WorldMap, rng: random.Random) -> None:
                 c for c in chunk.edges[edge]
                 if c.connector_type != ConnectorType.RIVER
             ]
+    from generation.ports import OFFSETS, OPPOSITE
+    for wx, wy in sorted(world_map.town_chunks):
+        for edge, (dx, dy) in OFFSETS.items():
+            neighbour = world_map.get(wx + dx, wy + dy)
+            if neighbour:
+                reverse = OPPOSITE[edge]
+                neighbour.edges[reverse] = [c for c in neighbour.edges[reverse]
+                                            if c.connector_type != ConnectorType.RIVER]
 
 
 # ------------------------------------------------------------------ #
@@ -1162,3 +1176,26 @@ def _generate_world_myth(world_map: WorldMap, rng: random.Random) -> None:
         vukh_chunk.is_locus = True
 
     world_map.myth = myth
+
+
+def _stamp_town_ports(world_map):
+    """Publish existing town through-streets to both sides, including wilderness."""
+    from config import MAP_WIDTH, MAP_HEIGHT
+    from generation.ports import town_ports, OFFSETS, OPPOSITE, quantize
+    for wx, wy in sorted(world_map.town_chunks):
+        chunk = world_map.get(wx, wy)
+        for edge, ports in town_ports(world_map.seed, chunk.town_id, chunk.town_role,
+                                      MAP_WIDTH, MAP_HEIGHT).items():
+            dx, dy = OFFSETS[edge]
+            neighbour = world_map.get(wx + dx, wy + dy)
+            if neighbour is None:
+                continue
+            length = MAP_WIDTH if edge in ('north', 'south') else MAP_HEIGHT
+            for position, width in ports:
+                for owner, side in ((chunk, edge), (neighbour, OPPOSITE[edge])):
+                    # Keep distinct widths: overlapping declared bands are a union.
+                    if not any(c.connector_type == ConnectorType.ROAD and
+                               quantize(c.position, length) == quantize(position, length) and
+                               (c.width or 3) == width for c in owner.edges[side]):
+                        owner.add_connector(side, ConnectorType.ROAD, position,
+                                            f'town-{chunk.town_id}', width=width)
