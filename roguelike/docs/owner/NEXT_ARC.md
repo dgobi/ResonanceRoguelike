@@ -1,3 +1,18 @@
+# Next arc — after D combat and effects
+
+C is owner-accepted and D is implemented on production `main`. See
+[D_STATE](D_STATE.md) and [D_VERIFICATION](D_VERIFICATION.md). Continue in this
+checkout with named checkpoints and local commits, without additional copies,
+worktrees or task branches. Routine testing remains autonomous and headless.
+
+A next bounded task could address the preserved UI-TEXT-HEIGHT defect. Separate
+follow-ups include carried decay / butchery content, Heavy Blade free-move-on-kill,
+Dissolution Blade pool lifetime, full RNG replay, personal-save migration and
+checkpoint pruning. This list does not authorize a new arc without an owner request.
+
+<details>
+<summary>Earlier history — superseded only where stated above</summary>
+
 # Next arc — after C ownership
 
 B3 is owner-accepted and C ownership is implemented on production `main`.
@@ -101,6 +116,8 @@ No creative redesign, save migration, engine swap, all-field persistence overhau
 Explain in plain language: surface and lab shared one address during full save; empty was mistaken for absent; a creature's costume was used as its identity. Show the new owners/keys/replacement order and what remains reset/recomputed or unsupported.
 
 Return a small patch, field/format changes, before/after diagnostics with independent processes, manual observations or an explicit blocker, and updates to WORLD_AND_STATE, STATUS and the decision log. Add an owner exercise that predicts two independent markers, saves/reloads, verifies both and reverses the fixture. Record owner learning separately from automated verification. Do not mark B1 complete merely because a harness exits zero.
+
+</details>
 
 </details>
 

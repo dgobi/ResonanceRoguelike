@@ -1,3 +1,16 @@
+# Current D effect ownership
+
+See [D_STATE](D_STATE.md) for the current lifecycle contract. Armor/coatings live
+on exact item instances, actor counters on their active/live/pending owners, player
+timers and movement credit on the engine, and disruption zones on their LocalMap.
+Hit effects age on contact; actor effects after simulated enemy phases; player
+timers retain the application-turn convention. Active/hot map zones tick once;
+cold scenes freeze. B3 checkpoint ownership remains unchanged. No personal saves
+are migrated. Earlier descriptions below are historical where superseded.
+
+<details>
+<summary>Earlier history — superseded only where stated above</summary>
+
 # B3 state owners
 
 `SaveManager` publishes immutable whole-slot generations via `CheckpointStore`.
@@ -113,6 +126,8 @@ The bounded fixture gives surface `(3,3)` a grass marker and a hollow revenant; 
 Example invariant: empty saved inventory/equipment should replace six bootstrap items and the bootstrap offhand torch. The actual fresh-process test leaves all six starter items. A one-jerky inventory with all empty saved slots replaces the inventory but retains an offhand torch **outside** it. These are separate failures.
 
 Check with `tools/persistence_diagnostics.py --prefix my-state-check` in a new session prefix. Each result separates harness completion from expected property and observed value. Treat its exits and JSON as explained in OBSERVATIONS.md. No save migration, arbitrary old-save loading, crash recovery or complete field ledger is certified here.
+
+</details>
 
 </details>
 

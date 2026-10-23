@@ -1,3 +1,18 @@
+# Current status — D combat and effects on main
+
+C is owner-accepted at `288c70b`. D implements temporary armor mitigation/contact
+charges, suppression/disruption expiry, aggregate creature auras, wight confirmation,
+pellet targeting/zones and salve movement timing. Coatings now work consistently
+through normal/moveset attacks. Sprint damage is applied before death resolution.
+[D_STATE](D_STATE.md) specifies owners, timing and remaining boundaries;
+[D_VERIFICATION](D_VERIFICATION.md) specifies the full autonomous gate. Final evidence
+is in `evidence/d-results.json`. No source copies or desktop control.
+
+UI-TEXT-HEIGHT and separately listed content/moveset/decay work remain bounded.
+
+<details>
+<summary>Earlier history — superseded only where stated above</summary>
+
 # Current status — C ownership on production main
 
 B3 is owner-accepted at `65b02df`. C repairs equipped-drop references and derived
@@ -126,6 +141,8 @@ All original text is retained below a short banner pointing here. The labels sco
 5. World/authoring: entrance footprint/link preservation, generation policy, active schemas/duplicate IDs, actual loot routes, painter losslessness, UI modes.
 
 These are retained findings, not fixes delivered in Arc A. Do not combine the whole backlog into B1.
+
+</details>
 
 </details>
 

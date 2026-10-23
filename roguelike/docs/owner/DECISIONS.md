@@ -1,3 +1,21 @@
+# D implementation decisions — 23 October 2026
+
+The owner accepted C and authorized D combat/effect lifecycle on main, with Git
+checkpoints, autonomous headless/app-local tests and local commits. This is not
+new approval of the older open design questions below.
+
+D uses the existing authored durations and the player's existing application-turn
+timer convention. Suppression disables abilities; disruption pauses creature
+actions and abilities, retaining AI state. Armor reapplication refreshes the stronger
+bonus/longer count. Throw range defaults to six tiles; zones use authored radius and
+duration. Salve speed adds to sprint speed. These are bounded implementation choices
+made under D authorization, recorded for review, not claimed owner design decisions.
+Corruption ownership consolidation, offscreen simulation expansion and personal-save
+compatibility policy remain open. No owner-learning completion is claimed.
+
+<details>
+<summary>Earlier history — superseded only where stated above</summary>
+
 # Owner decisions
 
 All entries are **open**. Defaults below are proposals for discussion, not approvals. None blocks baseline/setup/documentation. Routine wrong field names, slots, cache owners or API arguments are implementation defects, not new creative choices.
@@ -15,3 +33,5 @@ All entries are **open**. Defaults below are proposals for discussion, not appro
 | Corruption ownership | Engine resonance corruption and player Corruption.value coexist. | Choose one authoritative mechanical value while preserving exposure as a separate concept if desired; coordinate thresholds/UI before implementation. |
 
 To close a decision, record date, owner wording/approval, scope, selected policy, affected source/documents and a visible acceptance example. No owner learning completion or creative approval was received in Arc A; the owner only confirmed a manual input sequence.
+
+</details>

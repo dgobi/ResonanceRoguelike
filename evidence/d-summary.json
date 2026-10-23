@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "run_id": "d-20261023-123410-e7af593e",
+  "branch": "main",
+  "source_matches_gate": true,
+  "workers": 159,
+  "normal_workers": 146,
+  "intentional_terminated_writers": 13,
+  "checks": {
+    "checks": 3675,
+    "passed": 3675,
+    "failed": 0,
+    "workers": 159
+  },
+  "D_workers": 16,
+  "D_case_groups": 11,
+  "D_original_loop_journeys": 4,
+  "B1_required_cases": 28,
+  "original_diagnostic_properties": 32,
+  "runner_negative_controls": 7,
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py"
+  ],
+  "completed": [
+    "armor mitigation/contact expiry",
+    "coating normal/moveset parity and lethal damage scaling",
+    "suppression/disruption consumers and ownership clocks",
+    "aggregate knight and wraith aura lifecycle",
+    "wight confirmation/cancellation/cost/expiry",
+    "pellet targeting and saved map-zone lifecycle",
+    "salve and sprint movement timing"
+  ],
+  "deferred": [
+    {
+      "case": "E04",
+      "id": "UI-TEXT-HEIGHT",
+      "scope": "UI",
+      "symptom": {
+        "text_id": "lab_label_sarcophagus",
+        "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+        "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+      }
+    }
+  ],
+  "limitations": [
+    "D_STATE.md bounds remaining moveset/content/decay work",
+    "No personal-save migration or pruning",
+    "No full RNG replay guarantee; inactive actor and cold map simulation remains frozen",
+    "Zones use trusted local scene pickle; no forward compatibility guarantee with old binaries"
+  ]
+}

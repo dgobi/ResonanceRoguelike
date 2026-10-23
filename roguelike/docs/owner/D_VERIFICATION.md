@@ -1,5 +1,13 @@
 # D autonomous verification
 
+Completed run `d-20261023-123410-e7af593e` tested implementation `257b41d`:
+**159 workers and 3,675 checks passed, zero failed**. This includes 146 normal
+workers and 13 deliberately terminated checkpoint writers, plus seven negative
+harness controls. Compilation, dependency consistency and whitespace checks pass.
+The final evidence commit changes documentation/evidence only; source hashes are
+rechecked before packaging. The preservation audit verifies 645 unchanged prior
+tracked files and the accepted C archive.
+
 Run from `G:\GameDev\RoguelikeProject`:
 
 ```powershell

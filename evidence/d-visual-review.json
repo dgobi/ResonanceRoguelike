@@ -1,0 +1,17 @@
+{
+  "run_id": "d-20261023-123410-e7af593e",
+  "method": "Assistant inspected offscreen captures from original Engine.run renderer; no desktop control.",
+  "observations": [
+    "Throw cursor and Enter/Escape hint are visible within the existing viewport.",
+    "Confirmed true sight exposes exact HP in the health panel; modal close hint is visible.",
+    "Combat shows coating expiry, suppression log/callout and ordinary incoming attacks with armor mitigation."
+  ],
+  "captures": {
+    "d-throw-cursor.png": "54a8167a46414a5e3db9ee76e0a5919e93253ebcae30d0771d498f49bb19ecdb",
+    "d-true-sight-health.png": "beaec0e92cece511ebe338b6d9006e7c62dd5e019516bc2c17d1f2e502a3140b",
+    "d-combat-suppressed.png": "bf4fbf678bb6ee7cb3ff38a528ab02c2c684a25cf022195ce8229bc8ab4ec0f0"
+  },
+  "limitations": [
+    "Existing UI-TEXT-HEIGHT remains independently reproduced; this does not certify unrelated panels or renderer modes."
+  ]
+}
