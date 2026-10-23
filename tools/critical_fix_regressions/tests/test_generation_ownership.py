@@ -271,6 +271,37 @@ class GenerationOwnershipTests(unittest.TestCase):
             create.assert_not_called()
         self.assertEqual((e.world_x, e.world_y), (0, 0))
 
+    def test_missing_or_corrupt_checkpoint_never_invokes_generation(self):
+        for mode in ('missing', 'corrupt'):
+            with patch('engine.save_manager.SAVE_DIR', self.root / mode):
+                e = self.engine()
+                self.assertTrue(e.save_manager.save(e), e.save_manager.last_error)
+                scene_file = next((e.save_manager.checkpoint_path() / 'chunks').glob('*.pkl'))
+                if mode == 'missing': scene_file.unlink()  # owned temporary fixture only
+                else: scene_file.write_bytes(b'injected corrupt test record')
+                original = e.local_map
+                with patch('engine.scene_generation.create_surface') as surface, patch('engine.scene_generation.create_submap') as submap:
+                    self.assertFalse(e.save_manager.load(e))
+                    surface.assert_not_called()
+                    submap.assert_not_called()
+                self.assertIs(e.local_map, original)
+                self.assertTrue(e.save_manager.last_error)
+
+    def test_validation_failure_cannot_publish_metadata(self):
+        e = self.engine()
+        c = e.world_map.get(1, 0)
+        sm = c.add_submap('barrow', 'Fixture', 29417)
+        before = (sm.surface_x, sm.surface_y, sm.generated)
+        with patch('engine.scene_generation.validate_scene', side_effect=GenerationError('injected validation failure')):
+            self.assertIsNone(e._prepare_destination(1, 0))
+        self.assertIsNone(c.town_data)
+        self.assertEqual(before, (sm.surface_x, sm.surface_y, sm.generated))
+        self.assertFalse(getattr(c, 'generation_revision', None))
+        self.assertIsNone(e.save_manager.cache.load(1, 0))
+        m, actors = e._ensure_surface_scene(1, 0)
+        self.assertTrue(m.generation_complete)
+        self.assertGreater(len(actors), 0)
+
     def test_repaired_notes_can_be_walked_to_picked_up_and_read(self):
         for category, bid in [('residential', 'hovel'), ('wilderness', 'hunter_cabin')]:
             building = next(b for b in self.data.buildings[category] if b['id'] == bid)

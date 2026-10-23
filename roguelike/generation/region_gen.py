@@ -169,7 +169,14 @@ def generate_region(
     if getattr(chunk, 'town_data', None):
         staged_content = chunk.town_data.item_spawns + chunk.town_data.creature_spawns
         local_map.protected_cells = set(getattr(local_map, 'protected_cells', set()))
-        local_map.protected_cells.update((s['x'], s['y']) for s in staged_content)
+        for spec in staged_content:
+            x, y = spec['x'], spec['y']
+            local_map.protected_cells.add((x, y))
+            local_map.protected_cells.update((x + dx, y + dy)
+                for dx in (-1, 0, 1) for dy in (-1, 0, 1)
+                if local_map.in_bounds(x + dx, y + dy)
+                and (local_map.walkable[x + dx, y + dy]
+                     or str(local_map.tiles[x + dx, y + dy]['terrain']) == 'door_closed'))
     for submap in chunk.submaps:
         _place_submap_entrance(local_map, submap, terrain_data, data=data)
 

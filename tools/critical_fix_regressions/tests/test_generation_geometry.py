@@ -257,6 +257,25 @@ class GenerationGeometryTests(unittest.TestCase):
         if target:
             Path(target, 'wfc-outskirts.json').write_text(json.dumps(rows, indent=2))
 
+    def test_full_authored_entrance_preserves_objects_and_their_approaches(self):
+        m = LocalMap(30, 24)
+        m.tiles[:] = make_tile('floor', True, True)
+        item = ItemFactory(self.data).create('flint_shard')
+        from generation.floor_object_utils import place_floor_object, place_container
+        place_floor_object(m, 8, 8, item)
+        place_container(m, 9, 8, 'crate', [])
+        preserved = {(x, y): str(m.tiles[x, y]['terrain']) for x in range(7, 11) for y in range(7, 10)}
+        layout = dict(id='g1-full-footprint', layers=['#####', '#...#', '#.>.#', '#...#', '##+##'],
+                      legend={'#':'wall', '.':'floor', '>':'stairs_down', '+':'door_closed'})
+        sm = SubMap('full', 'cave', 'Cave', 3)
+        with patch('generation.entrance_gen._pick_layout', return_value=layout):
+            _place_submap_entrance(m, sm, self.data.terrain, data=self.data)
+        self.assertFalse(getattr(m, 'generation_diagnostics', []))
+        self.assertIs(m.floor_objects[8, 8][0], item)
+        self.assertEqual(preserved, {p: str(m.tiles[p]['terrain']) for p in preserved})
+        self.assertEqual(m.submap_links[sm.surface_x, sm.surface_y], 'full')
+        self.assertIn((sm.surface_x, sm.surface_y), reachable(m, self.data))
+
 
 def connected(cells, start):
     seen, queue = {start}, deque([start])
