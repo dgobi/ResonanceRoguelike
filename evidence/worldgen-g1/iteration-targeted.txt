@@ -1,0 +1,129 @@
+test_bsp_repeats_same_seed (test_generation_g1.GenerationG1Tests.test_bsp_repeats_same_seed) ... ok
+test_debug_travel_reuses_modified_active_scene (test_generation_g1.GenerationG1Tests.test_debug_travel_reuses_modified_active_scene) ... G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5031: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+ok
+test_first_creator_preserves_native_town_contents (test_generation_g1.GenerationG1Tests.test_first_creator_preserves_native_town_contents) ... ok
+test_normal_town_travel_materializes_scene (test_generation_g1.GenerationG1Tests.test_normal_town_travel_materializes_scene) ... ok
+test_repaired_house_notes_reachable_in_both_transforms (test_generation_g1.GenerationG1Tests.test_repaired_house_notes_reachable_in_both_transforms) ... ok
+test_road_port_position_is_consumed (test_generation_g1.GenerationG1Tests.test_road_port_position_is_consumed) ... ok
+test_active_map_precedes_stale_cache (test_generation_content.GenerationContentTests.test_active_map_precedes_stale_cache) ... ok
+test_actual_lab_weighted_table_and_deferred_records (test_generation_content.GenerationContentTests.test_actual_lab_weighted_table_and_deferred_records) ... ok
+test_all_four_scenes_use_actual_adapter (test_generation_content.GenerationContentTests.test_all_four_scenes_use_actual_adapter) ... ok
+test_fresh_hashseed_order_and_gameplay_matrix (test_generation_content.GenerationContentTests.test_fresh_hashseed_order_and_gameplay_matrix) ... FAIL
+test_loot_stream_ignores_gameplay_and_other_decoration (test_generation_content.GenerationContentTests.test_loot_stream_ignores_gameplay_and_other_decoration) ... ok
+test_malformed_content_has_diagnostics_and_no_partial_objects (test_generation_content.GenerationContentTests.test_malformed_content_has_diagnostics_and_no_partial_objects) ... ok
+test_population_failure_preserves_metadata_player_and_migrant_then_retry (test_generation_content.GenerationContentTests.test_population_failure_preserves_metadata_player_and_migrant_then_retry) ... ok
+test_successful_wfc_obeys_adjacency (test_generation_content.GenerationContentTests.test_successful_wfc_obeys_adjacency) ... ok
+test_weighted_choices_and_transforms_are_exactly_once (test_generation_content.GenerationContentTests.test_weighted_choices_and_transforms_are_exactly_once) ... ok
+test_weighted_entrance_both_consumers_repeat (test_generation_content.GenerationContentTests.test_weighted_entrance_both_consumers_repeat) ... ok
+test_wfc_failure_and_exception_fallback_preserve_protected_cells (test_generation_content.GenerationContentTests.test_wfc_failure_and_exception_fallback_preserve_protected_cells) ... ok
+test_actual_placed_notes_and_blocking_containers_have_legal_actions (test_generation_geometry.GenerationGeometryTests.test_actual_placed_notes_and_blocking_containers_have_legal_actions) ... ok
+test_centre_bell_state_matches_physical_bell_before_population (test_generation_geometry.GenerationGeometryTests.test_centre_bell_state_matches_physical_bell_before_population) ... ok
+test_constructed_ports_consume_width_position_and_axis (test_generation_geometry.GenerationGeometryTests.test_constructed_ports_consume_width_position_and_axis) ... ok
+test_entrance_respects_objects_and_uses_valid_fallback (test_generation_geometry.GenerationGeometryTests.test_entrance_respects_objects_and_uses_valid_fallback) ... ok
+test_every_town_through_band_has_reciprocal_inward_street (test_generation_geometry.GenerationGeometryTests.test_every_town_through_band_has_reciprocal_inward_street) ... ERROR
+test_exact_nonriver_mountain_seam_and_inward_road_corridor (test_generation_geometry.GenerationGeometryTests.test_exact_nonriver_mountain_seam_and_inward_road_corridor) ... ok
+test_impossible_entrance_cannot_mutate_map_or_metadata (test_generation_geometry.GenerationGeometryTests.test_impossible_entrance_cannot_mutate_map_or_metadata) ... ok
+test_new_world_connectors_are_reciprocal_without_changing_scale (test_generation_geometry.GenerationGeometryTests.test_new_world_connectors_are_reciprocal_without_changing_scale) ... ok
+test_no_plaza_has_no_fabricated_bell_or_guardian (test_generation_geometry.GenerationGeometryTests.test_no_plaza_has_no_fabricated_bell_or_guardian) ... ok
+test_outskirts_seeds_zero_to_nine_are_bounded_and_reported_separately (test_generation_geometry.GenerationGeometryTests.test_outskirts_seeds_zero_to_nine_are_bounded_and_reported_separately) ... ok
+test_repaired_assets_remain_selected_accessible_without_overlaps (test_generation_geometry.GenerationGeometryTests.test_repaired_assets_remain_selected_accessible_without_overlaps) ... ok
+test_river_ford_retains_player_and_creature_semantics (test_generation_geometry.GenerationGeometryTests.test_river_ford_retains_player_and_creature_semantics) ... ok
+test_abandoned_pursuer_failure_keeps_owner_and_surface_return_creates_natives (test_generation_ownership.GenerationOwnershipTests.test_abandoned_pursuer_failure_keeps_owner_and_surface_return_creates_natives) ... ok
+test_authored_and_bsp_pursuer_first_match_player_first_and_return_links (test_generation_ownership.GenerationOwnershipTests.test_authored_and_bsp_pursuer_first_match_player_first_and_return_links) ... ok
+test_f5_exploration_migration_f9_does_not_advance_checkpoint (test_generation_ownership.GenerationOwnershipTests.test_f5_exploration_migration_f9_does_not_advance_checkpoint) ... ok
+test_legacy_empty_scene_is_authoritative_and_new_scene_does_not_relabel_world (test_generation_ownership.GenerationOwnershipTests.test_legacy_empty_scene_is_authoritative_and_new_scene_does_not_relabel_world) ... ok
+test_missing_owned_scene_is_not_regenerated (test_generation_ownership.GenerationOwnershipTests.test_missing_owned_scene_is_not_regenerated) ... ok
+test_mutated_scene_survives_hot_cold_and_fresh_process_return (test_generation_ownership.GenerationOwnershipTests.test_mutated_scene_survives_hot_cold_and_fresh_process_return) ... ok
+test_real_wilderness_first_creator_has_equivalent_positive_native_population (test_generation_ownership.GenerationOwnershipTests.test_real_wilderness_first_creator_has_equivalent_positive_native_population) ... ok
+test_repaired_notes_can_be_walked_to_picked_up_and_read (test_generation_ownership.GenerationOwnershipTests.test_repaired_notes_can_be_walked_to_picked_up_and_read) ... ok
+test_startup_uses_complete_surface_and_retains_its_actors_below (test_generation_ownership.GenerationOwnershipTests.test_startup_uses_complete_surface_and_retains_its_actors_below) ... ERROR
+test_submap_failure_does_not_transfer_or_mark_generated (test_generation_ownership.GenerationOwnershipTests.test_submap_failure_does_not_transfer_or_mark_generated) ... ok
+test_town_first_creator_semantics_and_abandoned_pursuer_active_owner (test_generation_ownership.GenerationOwnershipTests.test_town_first_creator_semantics_and_abandoned_pursuer_active_owner) ... ok
+
+======================================================================
+ERROR: test_every_town_through_band_has_reciprocal_inward_street (test_generation_geometry.GenerationGeometryTests.test_every_town_through_band_has_reciprocal_inward_street)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_generation_geometry.py", line 131, in test_every_town_through_band_has_reciprocal_inward_street
+    other, _ = generate_region(copy.deepcopy(world.get(*neighbour_xy)), 80, 43, self.data.terrain, self.data)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\roguelike\generation\region_gen.py", line 174, in generate_region
+    _place_submap_entrance(local_map, submap, terrain_data, data=data)
+  File "G:\GameDev\RoguelikeProject\roguelike\generation\region_gen.py", line 493, in _place_submap_entrance
+    setattr(local_map, field, getattr(staged, field))
+AttributeError: property 'walkable' of 'LocalMap' object has no setter
+
+======================================================================
+ERROR: test_startup_uses_complete_surface_and_retains_its_actors_below (test_generation_ownership.GenerationOwnershipTests.test_startup_uses_complete_surface_and_retains_its_actors_below)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_generation_ownership.py", line 181, in test_startup_uses_complete_surface_and_retains_its_actors_below
+    main.main()
+  File "G:\GameDev\RoguelikeProject\roguelike\main.py", line 71, in main
+    result = create_surface(world_map, chunk, data, item_factory,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\roguelike\engine\scene_generation.py", line 116, in create_surface
+    local_map, spawn = generate_region(staged, width, height, data.terrain, data=data, context=context)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\roguelike\generation\region_gen.py", line 174, in generate_region
+    _place_submap_entrance(local_map, submap, terrain_data, data=data)
+  File "G:\GameDev\RoguelikeProject\roguelike\generation\region_gen.py", line 493, in _place_submap_entrance
+    setattr(local_map, field, getattr(staged, field))
+AttributeError: property 'walkable' of 'LocalMap' object has no setter
+
+======================================================================
+FAIL: test_fresh_hashseed_order_and_gameplay_matrix (test_generation_content.GenerationContentTests.test_fresh_hashseed_order_and_gameplay_matrix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_generation_content.py", line 211, in test_fresh_hashseed_order_and_gameplay_matrix
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_generation_content.py", line 243, in <module>
+    process_fingerprints()
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_generation_content.py", line 231, in process_fingerprints
+    assert actors, 'native population fixture must be nonempty'
+AssertionError: native population fixture must be nonempty
+
+
+----------------------------------------------------------------------
+Ran 40 tests in 30.561s
+
+FAILED (failures=1, errors=2)
+[gen] waystones placed in chunk (4,5): 1
+[gen] waystones placed in chunk (4,5): 1
+[gen] waystones placed in chunk (4,5): 1
+[gen] waystones placed in chunk (17,63): 1
+[gen] waystones placed in chunk (19,66): 1
+[gen] waystones placed in chunk (23,52): 1
+[gen] waystones placed in chunk (65,74): 1
+[town_gen] C-quad0 SLOT ox=4 oy=8 bw=12 bh=9 row_bottom=17
+[town_gen] C-quad0 SLOT ox=16 oy=10 bw=9 bh=7 row_bottom=17
+[town_gen] C-quad0 SLOT ox=25 oy=13 bw=6 bh=4 row_bottom=17
+[town_gen] C-quad0 SLOT ox=31 oy=13 bw=3 bh=4 row_bottom=17
+[town_gen] C-quad0 zone (3,3,34,15) placed=2/5  attempts=4  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[town_gen] C-quad1 SLOT ox=45 oy=10 bw=8 bh=7 row_bottom=17
+[town_gen] C-quad1 SLOT ox=53 oy=12 bw=6 bh=5 row_bottom=17
+[town_gen] C-quad1 SLOT ox=59 oy=8 bw=11 bh=9 row_bottom=17
+[town_gen] C-quad1 SLOT ox=70 oy=13 bw=3 bh=4 row_bottom=17
+[town_gen] C-quad1 SLOT ox=45 oy=6 bw=7 bh=5 row_bottom=11
+[town_gen] C-quad1 SLOT ox=52 oy=5 bw=8 bh=6 row_bottom=11
+[town_gen] C-quad1 SLOT ox=60 oy=5 bw=8 bh=6 row_bottom=11
+[town_gen] C-quad1 SLOT ox=68 oy=7 bw=3 bh=4 row_bottom=11
+[town_gen] C-quad1 zone (44,3,33,15) placed=5/5  attempts=8  skip_no_bld=0  skip_too_big=0  skip_overlap=3
+[town_gen] C-quad2 SLOT ox=4 oy=35 bw=6 bh=4 row_bottom=39
+[town_gen] C-quad2 SLOT ox=10 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] C-quad2 SLOT ox=18 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] C-quad2 SLOT ox=25 oy=30 bw=11 bh=9 row_bottom=39
+[town_gen] C-quad2 zone (3,25,34,15) placed=3/5  attempts=4  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] C-quad3 SLOT ox=45 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] C-quad3 SLOT ox=52 oy=35 bw=6 bh=4 row_bottom=39
+[town_gen] C-quad3 SLOT ox=58 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] C-quad3 SLOT ox=65 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] C-quad3 SLOT ox=72 oy=35 bw=3 bh=4 row_bottom=39
+[town_gen] C-quad3 SLOT ox=45 oy=26 bw=8 bh=7 row_bottom=33
+[town_gen] C-quad3 SLOT ox=53 oy=28 bw=6 bh=5 row_bottom=33
+[town_gen] C-quad3 zone (44,25,33,15) placed=5/5  attempts=7  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[TOWN seed=2 wx=19 wy=64 role=C slots_attempted=23 slots_filled=15]

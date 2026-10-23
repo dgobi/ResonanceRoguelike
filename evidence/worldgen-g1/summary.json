@@ -1,0 +1,188 @@
+{
+  "baseline_commit": "ce1ef760d411a0d1e9dfec93f1addf149955ac8c",
+  "baseline_clean": true,
+  "start_checkpoint": "checkpoint/worldgen-g1-start-20261023-155942",
+  "core_commit": "1172080",
+  "runtime_commit": "2855dec",
+  "gate_source_commit": "5dc2f65d65274eec654bdbe52e8caa6aa528707f",
+  "generation_revision": "wg1",
+  "branch": "main",
+  "remote": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "brief_sha256": "19f11a22e7f361ead7aaff8cbc59a8c860a82fdc76f477c67ab2586ea8ed6828",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "dependencies": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "dependency_installation": null,
+  "focused": {
+    "passed": true,
+    "tests": 110,
+    "seconds": 77.663,
+    "log": "final-focused/focused-tests.txt"
+  },
+  "full_gate": {
+    "passed": true,
+    "command": "tools/verify_d.py",
+    "only": null,
+    "case": null,
+    "source_commit": "5dc2f65d65274eec654bdbe52e8caa6aa528707f",
+    "run_id": "d-20261023-163538-a59b2b99",
+    "totals": {
+      "checks": 3675,
+      "passed": 3675,
+      "failed": 0,
+      "workers": 159
+    },
+    "source_files": 486,
+    "source_hashes_still_match": true,
+    "log": "d-console.txt",
+    "report": "d-results.json.gz",
+    "uncompressed_sha256": "5e13995b64588a936d3e56689547869ae7e67e7e4e3f5719d8bfe239a46b5a02",
+    "compressed_sha256": "d8adfbff5cd5782645fff7d0fc95c8702195272a2a1df1a523024d6c2f3c11bf",
+    "compressed_bytes": 557609,
+    "earlier_attempt": "Interrupted intentionally to replace a vacuous container loop with a positive real-container action fixture; final gate restarted unfiltered."
+  },
+  "syntax_parse": {
+    "passed": true,
+    "python_files": 25
+  },
+  "pip_check": "No broken requirements found.",
+  "whitespace_check": {
+    "passed": true,
+    "git_options": "core.whitespace=cr-at-eol,-blank-at-eof",
+    "note": "Preserve pre-existing CRLF blobs; one harmless final blank line remains in scene_generation.py.",
+    "scope": "Runtime, tests and authoring documentation; verbatim evidence logs excluded."
+  },
+  "before": {
+    "town_chunks": 36,
+    "seam": [
+      [
+        41,
+        42,
+        43
+      ],
+      [
+        37,
+        38,
+        39
+      ]
+    ],
+    "unreachable_notes": {
+      "hunter_cabin": 16,
+      "hovel": 66,
+      "folk_saint_alcove_a": 6
+    },
+    "selected_assets": {
+      "hunter_cabin": 16,
+      "hovel": 66
+    },
+    "overlaps": 0
+  },
+  "after": {
+    "town_chunks": 36,
+    "seam": [
+      [
+        39,
+        40,
+        41
+      ],
+      [
+        39,
+        40,
+        41
+      ]
+    ],
+    "unreachable_notes": {
+      "folk_saint_alcove_a": 11
+    },
+    "selected_assets": {
+      "hovel": 55,
+      "hunter_cabin": 8
+    },
+    "overlaps": 0
+  },
+  "semantic_fingerprints": {
+    "equal_across_hashseeds_and_order": true,
+    "hashseeds": [
+      1,
+      2
+    ],
+    "files": [
+      "after/semantic-hash-1.json",
+      "after/semantic-hash-2.json"
+    ]
+  },
+  "wfc_outskirts": {
+    "width": 74,
+    "height": 37,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "solves": 0,
+    "fallbacks": 10,
+    "attempt_bound": 10
+  },
+  "authoring": {
+    "passed": true,
+    "game_source": "G:\\GameDev\\RoguelikeProject\\roguelike",
+    "building": "G:\\GameDev\\RoguelikeProject\\roguelike\\docs\\examples\\author_cottage_a.json",
+    "building_sha256": "bb4d6b80cd47bb3150080fd2319bcfd48dc9d60de7483d1ec8581736f30c790e",
+    "checks": [
+      {
+        "check": "stamp, materialize and reach interior",
+        "flip_v": false,
+        "item_specs": 2,
+        "containers": 1,
+        "floor_items": 1,
+        "passed": true
+      },
+      {
+        "check": "stamp, materialize and reach interior",
+        "flip_v": true,
+        "item_specs": 2,
+        "containers": 1,
+        "floor_items": 1,
+        "passed": true
+      },
+      {
+        "check": "actual generate_region town selection",
+        "role": "N",
+        "placements": 12,
+        "item_spawns": 24,
+        "passed": true
+      }
+    ],
+    "diagnostics": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=13 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+    "limitations": "Headless data/placement smoke only. No complete game-loop, rendered appearance, or world-frequency claim."
+  },
+  "deferred": [
+    "full settlement/plot planner",
+    "new structure schema/rotations",
+    "painter lossless round-trip",
+    "wilderness POIs and config activation",
+    "physical body/stele behavior",
+    "folk_saint_alcove_a placeholder",
+    "full gameplay RNG replay",
+    "historical generator archive and cross-version seams",
+    "personal-save migration and checkpoint pruning",
+    "UI-TEXT-HEIGHT and unrelated combat/survival follow-ups"
+  ],
+  "delivery_checkpoint": "checkpoint/worldgen-g1-verified-20261023",
+  "local_document_links": "All target files exist; cottage remains outside live pools.",
+  "implementation_and_authoring_commits": [
+    "1172080e327182f6eddb85c1eddc9e9319f3ae56 Make native scene generation deterministic and complete across entry routes",
+    "2855dec1409bbf805f0746b2026b891c7246d9cd Preserve staged entrance approaches and verify failed scene publication",
+    "5dc2f65d65274eec654bdbe52e8caa6aa528707f Verify generated crate interaction and document current structure authoring"
+  ]
+}

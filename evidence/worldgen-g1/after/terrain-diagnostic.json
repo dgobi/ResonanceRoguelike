@@ -1,0 +1,982 @@
+{
+  "commit": "2855dec1409bbf805f0746b2026b891c7246d9cd",
+  "world_seed": 20261020,
+  "hashseed": "0",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "town_chunks": [
+    {
+      "xy": [
+        63,
+        75
+      ],
+      "role": "NW",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "fishing_dock",
+        "hovel",
+        "tool_shed_a",
+        "collapsed_house_a",
+        "waymarker_shelter_a",
+        "hunter_cabin",
+        "waymarker_shelter_a",
+        "food_store_a",
+        "hunter_cabin"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        75
+      ],
+      "role": "N",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "workshop_a",
+        "market_stall_c",
+        "house_small_a",
+        "house_damaged_a",
+        "cellar_a",
+        "market_stall_b",
+        "market_stall_a",
+        "house_two_room_a",
+        "workshop_a",
+        "house_hearth_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        75
+      ],
+      "role": "NE",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "goods_cellar_a",
+        "hovel",
+        "waymarker_shelter_a",
+        "tool_shed_a",
+        "ossuary_ruin_a",
+        "hovel",
+        "goods_cellar_a",
+        "hovel",
+        "root_cellar_a"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        76
+      ],
+      "role": "W",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "food_store_a",
+        "hovel",
+        "house_abandoned_a",
+        "hovel",
+        "market_stall_b",
+        "market_stall_a",
+        "storehouse_a",
+        "market_stall_a",
+        "shop_a",
+        "market_stall_a",
+        "tool_shed_a",
+        "tool_shed_a",
+        "food_store_a",
+        "root_cellar_a",
+        "house_single_room_a",
+        "house_single_room_a"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        76
+      ],
+      "role": "C",
+      "unreachable_notes": [
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 5,
+            "y": 7,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 72,
+            "y": 15,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 55,
+            "y": 6,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 72,
+            "y": 28,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "bell_warden_post_a",
+        "guard_post_a",
+        "folk_saint_alcove_a",
+        "market_stall_a",
+        "covered_well_house_a",
+        "shop_a",
+        "folk_saint_alcove_a",
+        "market_stall_a",
+        "folk_saint_alcove_a",
+        "market_stall_a",
+        "shrine_hall_a",
+        "waystone_shrine_a",
+        "waystone_shrine_a",
+        "guard_post_a",
+        "waystone_plinth_a",
+        "market_stall_a",
+        "folk_saint_alcove_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        76
+      ],
+      "role": "E",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_small_b",
+        "market_stall_a",
+        "hovel",
+        "market_stall_a",
+        "trader_shop_a",
+        "market_stall_a",
+        "market_stall_a",
+        "workshop_a",
+        "workshop_a",
+        "root_cellar_a",
+        "food_store_a",
+        "house_small_a",
+        "market_stall_a",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        77
+      ],
+      "role": "SW",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "three_wall_remnant_a",
+        "house_single_room_a",
+        "fishing_dock",
+        "tool_shed_a",
+        "three_wall_remnant_a",
+        "hovel",
+        "collapsed_shop_a"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        77
+      ],
+      "role": "S",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "hovel",
+        "root_cellar_a",
+        "tool_shed_a",
+        "market_stall_a",
+        "hovel",
+        "storehouse_a",
+        "house_hearth_a",
+        "cellar_a",
+        "cellar_a",
+        "house_crowded_a",
+        "root_cellar_a",
+        "workshop_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        77
+      ],
+      "role": "SE",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "hovel",
+        "shepherds_hut_a",
+        "hovel",
+        "tool_shed_a",
+        "hovel",
+        "hovel",
+        "cellar_a",
+        "hovel",
+        "hovel",
+        "root_cellar_a",
+        "fishing_dock",
+        "deep_foundation_a"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        20
+      ],
+      "role": "NW",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "storehouse_a",
+        "hovel",
+        "goods_cellar_a",
+        "house_small_b",
+        "cellar_a",
+        "fishing_dock",
+        "ruin_wall_a",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        20
+      ],
+      "role": "N",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "tool_shed_a",
+        "house_hearth_a",
+        "house_small_b",
+        "house_crowded_a",
+        "house_small_a",
+        "house_abandoned_a",
+        "market_stall_a",
+        "goods_cellar_a",
+        "market_stall_b",
+        "house_damaged_a",
+        "workshop_a",
+        "house_abandoned_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        20
+      ],
+      "role": "NE",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "deep_foundation_a",
+        "house_damaged_a",
+        "root_cellar_a",
+        "root_cellar_a",
+        "hovel",
+        "hovel",
+        "house_two_room_a",
+        "hovel",
+        "root_cellar_a",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        21
+      ],
+      "role": "W",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_small_a",
+        "market_stall_a",
+        "tool_shed_a",
+        "house_single_room_a",
+        "house_large_a",
+        "hovel",
+        "tool_shed_a",
+        "house_crowded_a",
+        "market_stall_a",
+        "shop_a",
+        "market_stall_a",
+        "storehouse_a",
+        "root_cellar_a",
+        "trader_shop_a",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        21
+      ],
+      "role": "C",
+      "unreachable_notes": [
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 73,
+            "y": 15,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 33,
+            "y": 36,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 14,
+            "y": 27,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "market_stall_c",
+        "market_stall_a",
+        "folk_saint_niche_a",
+        "market_stall_a",
+        "bell_warden_post_a",
+        "market_stall_c",
+        "folk_saint_alcove_a",
+        "market_stall_a",
+        "market_stall_a",
+        "apothecary_a",
+        "waystone_plinth_a",
+        "folk_saint_alcove_a",
+        "market_stall_a",
+        "folk_saint_alcove_a",
+        "ossuary_chapel_a",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        21
+      ],
+      "role": "E",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_two_room_a",
+        "market_stall_a",
+        "house_small_a",
+        "market_stall_a",
+        "house_abandoned_a",
+        "market_stall_a",
+        "trader_shop_a",
+        "market_stall_a",
+        "tool_shed_a",
+        "tool_shed_a",
+        "house_small_b",
+        "hovel",
+        "workshop_a",
+        "house_small_b",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        22
+      ],
+      "role": "SW",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "food_store_a",
+        "hunter_cabin",
+        "hovel",
+        "hunter_cabin",
+        "fishing_dock",
+        "three_wall_remnant_a",
+        "cellar_a",
+        "storehouse_a",
+        "shepherds_fold_a"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        22
+      ],
+      "role": "S",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_small_b",
+        "house_small_b",
+        "market_stall_c",
+        "hovel",
+        "market_stall_c",
+        "shop_a",
+        "house_hearth_a",
+        "tool_shed_a",
+        "house_single_room_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        22
+      ],
+      "role": "SE",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "deep_foundation_a",
+        "roadside_shrine_a",
+        "fishing_dock",
+        "food_store_a",
+        "food_store_a",
+        "warehouse_a",
+        "goods_cellar_a"
+      ]
+    },
+    {
+      "xy": [
+        18,
+        63
+      ],
+      "role": "NW",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "ruin_wall_a",
+        "root_cellar_a",
+        "hovel",
+        "food_store_a",
+        "hovel",
+        "fishing_dock",
+        "fishing_dock",
+        "hovel",
+        "hovel",
+        "storehouse_a"
+      ]
+    },
+    {
+      "xy": [
+        19,
+        63
+      ],
+      "role": "N",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_single_room_a",
+        "market_stall_c",
+        "hovel",
+        "market_stall_b",
+        "shop_a",
+        "apothecary_a",
+        "hovel",
+        "house_single_room_a",
+        "hovel",
+        "house_damaged_a",
+        "market_stall_b",
+        "house_single_room_a",
+        "house_damaged_a",
+        "cellar_a",
+        "market_stall_b",
+        "tool_shed_a"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        63
+      ],
+      "role": "NE",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "hovel",
+        "hovel",
+        "tool_shed_a",
+        "hovel",
+        "hovel",
+        "burnt_dwelling_a",
+        "hovel",
+        "house_large_a",
+        "house_crowded_a",
+        "collapsed_shop_a"
+      ]
+    },
+    {
+      "xy": [
+        18,
+        64
+      ],
+      "role": "W",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "cellar_a",
+        "house_single_room_a",
+        "house_old_stone_a",
+        "house_large_a",
+        "house_hearth_a",
+        "storehouse_a",
+        "market_stall_a",
+        "food_store_a",
+        "hovel",
+        "hovel",
+        "house_single_room_a",
+        "house_hearth_a"
+      ]
+    },
+    {
+      "xy": [
+        19,
+        64
+      ],
+      "role": "C",
+      "unreachable_notes": [
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 46,
+            "y": 6,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 55,
+            "y": 6,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 61,
+            "y": 6,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "shrine_a",
+        "ossuary_chapel_a",
+        "waystone_plinth_a",
+        "collapsed_shrine_a",
+        "folk_saint_alcove_a",
+        "folk_saint_alcove_a",
+        "folk_saint_alcove_a",
+        "bell_tower_a",
+        "shrine_hall_a",
+        "workshop_a",
+        "bell_tower_a"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        64
+      ],
+      "role": "E",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_crowded_a",
+        "market_stall_a",
+        "house_crowded_a",
+        "market_stall_a",
+        "goods_cellar_a",
+        "market_stall_a",
+        "goods_cellar_a",
+        "market_stall_a",
+        "house_large_a",
+        "market_stall_c",
+        "market_stall_c",
+        "house_crowded_a",
+        "market_stall_a",
+        "warehouse_a"
+      ]
+    },
+    {
+      "xy": [
+        18,
+        65
+      ],
+      "role": "SW",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "ruin_wall_a",
+        "storehouse_a",
+        "fishing_dock",
+        "ossuary_ruin_a",
+        "burnt_dwelling_a",
+        "burnt_dwelling_a",
+        "cellar_a",
+        "hunter_cabin",
+        "collapsed_shop_a",
+        "fishing_dock"
+      ]
+    },
+    {
+      "xy": [
+        19,
+        65
+      ],
+      "role": "S",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "root_cellar_a",
+        "house_single_room_a",
+        "tool_shed_a",
+        "house_small_b",
+        "house_small_b",
+        "goods_cellar_a",
+        "market_stall_b",
+        "house_small_b",
+        "house_abandoned_a",
+        "house_small_b",
+        "house_single_room_a",
+        "market_stall_c",
+        "workshop_a",
+        "root_cellar_a",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        65
+      ],
+      "role": "SE",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "tool_shed_a",
+        "hovel",
+        "storehouse_a",
+        "house_single_room_a",
+        "hovel",
+        "cellar_a",
+        "house_small_b",
+        "cellar_a",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        51
+      ],
+      "role": "NW",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "tool_shed_a",
+        "burnt_dwelling_a",
+        "hovel",
+        "tool_shed_a",
+        "waymarker_shelter_a",
+        "root_cellar_a",
+        "hovel",
+        "three_wall_remnant_a",
+        "hovel",
+        "goods_cellar_a",
+        "deep_foundation_a",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        21,
+        51
+      ],
+      "role": "N",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_small_a",
+        "goods_cellar_a",
+        "market_stall_c",
+        "root_cellar_a",
+        "apothecary_a",
+        "market_stall_c",
+        "root_cellar_a",
+        "house_single_room_a",
+        "workshop_a",
+        "house_small_a",
+        "market_stall_a",
+        "root_cellar_a",
+        "house_large_a",
+        "root_cellar_a",
+        "hovel",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        22,
+        51
+      ],
+      "role": "NE",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "tenement_a",
+        "hovel",
+        "house_crowded_a",
+        "collapsed_shop_a",
+        "root_cellar_a",
+        "tenement_a",
+        "three_wall_remnant_a",
+        "waymarker_shelter_a"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        52
+      ],
+      "role": "W",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "root_cellar_a",
+        "market_stall_b",
+        "house_damaged_a",
+        "market_stall_a",
+        "market_stall_a",
+        "tool_shed_a",
+        "tool_shed_a",
+        "root_cellar_a",
+        "house_hearth_a",
+        "storehouse_a",
+        "market_stall_a",
+        "market_stall_a",
+        "root_cellar_a",
+        "market_stall_a",
+        "house_abandoned_a",
+        "cellar_a"
+      ]
+    },
+    {
+      "xy": [
+        21,
+        52
+      ],
+      "role": "C",
+      "unreachable_notes": [
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "x": 73,
+            "y": 15,
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "note": "Prayer or votive text at alcove",
+            "kind": "item",
+            "source": "folk_saint_alcove_a special[1]"
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "well_a",
+        "record_hall_a",
+        "record_hall_a",
+        "folk_saint_alcove_a",
+        "market_stall_c",
+        "ossuary_chapel_a",
+        "meeting_hall_a",
+        "folk_saint_niche_a"
+      ]
+    },
+    {
+      "xy": [
+        22,
+        52
+      ],
+      "role": "E",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "warehouse_a",
+        "warehouse_a",
+        "shop_a",
+        "market_stall_a",
+        "market_stall_a",
+        "trader_shop_a",
+        "market_stall_a",
+        "market_stall_a",
+        "warehouse_a",
+        "goods_cellar_a",
+        "market_stall_a",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        53
+      ],
+      "role": "SW",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "hovel",
+        "cellar_a",
+        "house_large_a",
+        "hunter_cabin",
+        "fishing_dock",
+        "hovel",
+        "cellar_a",
+        "hovel",
+        "hovel",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        21,
+        53
+      ],
+      "role": "S",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_single_room_a",
+        "house_damaged_a",
+        "food_store_a",
+        "house_abandoned_a",
+        "trader_shop_a",
+        "market_stall_a",
+        "root_cellar_a",
+        "market_stall_c",
+        "market_stall_b",
+        "house_old_stone_a",
+        "shop_a",
+        "tool_shed_a"
+      ]
+    },
+    {
+      "xy": [
+        22,
+        53
+      ],
+      "role": "SE",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "hunter_cabin",
+        "foundation_outline_a",
+        "hunter_cabin",
+        "cellar_a",
+        "three_wall_remnant_a",
+        "cellar_a"
+      ]
+    }
+  ],
+  "seam": [
+    [
+      39,
+      40,
+      41
+    ],
+    [
+      39,
+      40,
+      41
+    ]
+  ],
+  "source_sha256": {
+    "roguelike\\generation\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "roguelike\\generation\\context.py": "010db3ba96067a6c0819571b9e963e06b47d70b0854247224b2600106cb903ff",
+    "roguelike\\generation\\decor_utils.py": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93",
+    "roguelike\\generation\\entrance_gen.py": "e55a60dfd02d144fb517aded9f773e65f274cd1ad2cfac965470f19d404db760",
+    "roguelike\\generation\\feature_carving.py": "c40937c4647d0cfa511be28507830c1e51ec26b3c31b14b5bb92030aeeaa3d56",
+    "roguelike\\generation\\floor_object_utils.py": "ededc552d7530c146aec85fe569d661980697cce6f3e087039b1bb287b710319",
+    "roguelike\\generation\\layout_stamper.py": "2d60d9316d935c64ca27f44b0c4be397d39b3d98e65d3bba9dd7f1c0c77efdd8",
+    "roguelike\\generation\\local_gen.py": "3ae653c3e2d853375c14d4f16c74ddae1961609eb97ad633b2ef582ebc5260f5",
+    "roguelike\\generation\\ports.py": "049e3eb2659eb20f827eb0363bac00264aeed5c8ebe53cb6a2b81f261a24e85b",
+    "roguelike\\generation\\region_gen.py": "204e201964c9f228c5d1c826aad39ed462a2b8bb8d8fb26285f603849d87ea7d",
+    "roguelike\\generation\\spawn_specs.py": "3eed794daa52ade35fec5a2625bfe673857bdbaeeb04dd6d9416196d746f2411",
+    "roguelike\\generation\\town_gen.py": "980233a80bcc29ee72ee8752ede865d9b30f2e9701a969912408dca643072d59",
+    "roguelike\\generation\\wfc.py": "3e0b51d77bbb8b48b4d4f18b6db4dbf6e7a0deccd0c3ebfcb7b3b2ec62c8229d",
+    "roguelike\\generation\\world_gen.py": "3546c1bc249c1b23be54fda45e89f4e0afaa4ced5260fa4c962cf01ec1e13d0c"
+  }
+}

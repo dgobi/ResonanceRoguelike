@@ -1,3 +1,10 @@
+# Current status — G1 generation correctness
+
+G1 is implemented on production `main` with deterministic complete scene creation, reciprocal road/town/river mouths, protected stairs, repaired hovel/cabin access and coherent plaza bell metadata. See [WORLDGEN_G1](../../../docs/owner/WORLDGEN_G1.md) for final evidence, provenance and explicit limits. The prior accepted B–D history below remains intact. G1 completion is not a record of later owner acceptance.
+
+<details>
+<summary>Earlier status — retained; superseded only where stated above</summary>
+
 # Current status — D combat and effects on main
 
 D is owner-accepted on 23 October 2026 at `0162700`, including implementation
@@ -145,6 +152,8 @@ All original text is retained below a short banner pointing here. The labels sco
 5. World/authoring: entrance footprint/link preservation, generation policy, active schemas/duplicate IDs, actual loot routes, painter losslessness, UI modes.
 
 These are retained findings, not fixes delivered in Arc A. Do not combine the whole backlog into B1.
+
+</details>
 
 </details>
 

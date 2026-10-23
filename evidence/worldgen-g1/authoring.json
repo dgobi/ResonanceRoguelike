@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "game_source": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "building": "G:\\GameDev\\RoguelikeProject\\roguelike\\docs\\examples\\author_cottage_a.json",
+  "building_sha256": "bb4d6b80cd47bb3150080fd2319bcfd48dc9d60de7483d1ec8581736f30c790e",
+  "checks": [
+    {
+      "check": "stamp, materialize and reach interior",
+      "flip_v": false,
+      "item_specs": 2,
+      "containers": 1,
+      "floor_items": 1,
+      "passed": true
+    },
+    {
+      "check": "stamp, materialize and reach interior",
+      "flip_v": true,
+      "item_specs": 2,
+      "containers": 1,
+      "floor_items": 1,
+      "passed": true
+    },
+    {
+      "check": "actual generate_region town selection",
+      "role": "N",
+      "placements": 12,
+      "item_spawns": 24,
+      "passed": true
+    }
+  ],
+  "diagnostics": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=13 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n",
+  "limitations": "Headless data/placement smoke only. No complete game-loop, rendered appearance, or world-frequency claim."
+}

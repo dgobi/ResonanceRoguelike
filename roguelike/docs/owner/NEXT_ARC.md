@@ -1,3 +1,10 @@
+# Next arc — after G1 generation correctness
+
+The next bounded generation target is dependable structure authoring and access contracts, followed by a separately scoped lossless authoring workflow. See [WORLDGEN_G1](../../../docs/owner/WORLDGEN_G1.md) and [the proposal](../../../docs/owner/WORLD_GENERATION_AUDIT_AND_PROPOSAL.md). The full settlement planner, painter repair, new schemas and rural POIs remain proposed. This recommendation does not authorize beginning another arc. Continue on production `main`, with named checkpoints and autonomous headless verification.
+
+<details>
+<summary>Earlier status — retained; superseded only where stated above</summary>
+
 # Next arc — after D combat and effects
 
 C is owner-accepted and D is implemented on production `main`. See
@@ -116,6 +123,8 @@ No creative redesign, save migration, engine swap, all-field persistence overhau
 Explain in plain language: surface and lab shared one address during full save; empty was mistaken for absent; a creature's costume was used as its identity. Show the new owners/keys/replacement order and what remains reset/recomputed or unsupported.
 
 Return a small patch, field/format changes, before/after diagnostics with independent processes, manual observations or an explicit blocker, and updates to WORLD_AND_STATE, STATUS and the decision log. Add an owner exercise that predicts two independent markers, saves/reloads, verifies both and reverses the fixture. Record owner learning separately from automated verification. Do not mark B1 complete merely because a harness exits zero.
+
+</details>
 
 </details>
 

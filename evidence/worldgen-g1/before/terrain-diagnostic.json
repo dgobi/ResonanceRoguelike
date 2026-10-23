@@ -1,0 +1,1820 @@
+{
+  "commit": "ce1ef760d411a0d1e9dfec93f1addf149955ac8c",
+  "world_seed": 20261020,
+  "hashseed": "0",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "town_chunks": [
+    {
+      "xy": [
+        63,
+        75
+      ],
+      "role": "NW",
+      "unreachable_notes": [
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 11,
+            "y": 12
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 19,
+            "y": 20
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 61,
+            "y": 21
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 26,
+            "y": 6
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 8,
+            "y": 17
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "root_cellar_a",
+        "foundation_outline_a",
+        "hunter_cabin",
+        "tool_shed_a",
+        "hovel",
+        "hunter_cabin",
+        "three_wall_remnant_a",
+        "tool_shed_a",
+        "fishing_dock",
+        "fishing_dock",
+        "hunter_cabin",
+        "tool_shed_a",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        75
+      ],
+      "role": "N",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 69,
+            "y": 35
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "shop_a",
+        "storehouse_a",
+        "tool_shed_a",
+        "house_single_room_a",
+        "house_two_room_a",
+        "house_abandoned_a",
+        "market_stall_c",
+        "tool_shed_a",
+        "tool_shed_a",
+        "market_stall_b",
+        "food_store_a",
+        "market_stall_b",
+        "house_two_room_a",
+        "hovel",
+        "house_single_room_a",
+        "house_single_room_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        75
+      ],
+      "role": "NE",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 16,
+            "y": 22
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 38,
+            "y": 17
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 50,
+            "y": 12
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 29,
+            "y": 18
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "house_large_a",
+        "house_small_a",
+        "hovel",
+        "hovel",
+        "root_cellar_a",
+        "fishing_dock",
+        "tool_shed_a",
+        "hovel",
+        "hovel",
+        "burnt_dwelling_a",
+        "storehouse_a",
+        "fishing_dock"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        76
+      ],
+      "role": "W",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 65,
+            "y": 6
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 27,
+            "y": 37
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 65,
+            "y": 30
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "house_single_room_a",
+        "market_stall_a",
+        "shop_a",
+        "market_stall_a",
+        "cellar_a",
+        "house_single_room_a",
+        "house_single_room_a",
+        "hovel",
+        "shop_a",
+        "market_stall_a",
+        "hovel",
+        "market_stall_c",
+        "warehouse_a",
+        "cellar_a",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        76
+      ],
+      "role": "C",
+      "unreachable_notes": [
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "kind": "item",
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "x": 5,
+            "y": 36
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "kind": "item",
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "x": 24,
+            "y": 29
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "kind": "item",
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "x": 73,
+            "y": 36
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "market_stall_c",
+        "market_stall_a",
+        "market_stall_c",
+        "folk_saint_niche_a",
+        "guard_post_a",
+        "covered_well_house_a",
+        "waystone_plinth_a",
+        "waystone_plinth_a",
+        "covered_well_house_a",
+        "folk_saint_alcove_a",
+        "market_stall_b",
+        "market_stall_a",
+        "well_a",
+        "folk_saint_alcove_a",
+        "market_stall_a",
+        "folk_saint_niche_a",
+        "folk_saint_alcove_a",
+        "shrine_a",
+        "market_stall_c"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        76
+      ],
+      "role": "E",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 73,
+            "y": 30
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "house_large_a",
+        "warehouse_a",
+        "root_cellar_a",
+        "house_small_b",
+        "market_stall_a",
+        "house_two_room_a",
+        "market_stall_a",
+        "market_stall_a",
+        "house_two_room_a",
+        "market_stall_a",
+        "market_stall_a",
+        "cellar_a",
+        "cellar_a",
+        "root_cellar_a",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        77
+      ],
+      "role": "SW",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 33,
+            "y": 8
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 28,
+            "y": 33
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 35,
+            "y": 18
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "storehouse_a",
+        "tool_shed_a",
+        "collapsed_shop_a",
+        "ossuary_ruin_a",
+        "ruin_wall_a",
+        "hovel",
+        "three_wall_remnant_a",
+        "root_cellar_a",
+        "hunter_cabin",
+        "hovel",
+        "root_cellar_a",
+        "ossuary_ruin_a",
+        "ruin_wall_a",
+        "tool_shed_a"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        77
+      ],
+      "role": "S",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 67,
+            "y": 21
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "market_stall_b",
+        "house_crowded_a",
+        "house_small_b",
+        "goods_cellar_a",
+        "trader_shop_a",
+        "market_stall_c",
+        "cellar_a",
+        "market_stall_c",
+        "tool_shed_a",
+        "hovel",
+        "house_small_b",
+        "house_old_stone_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        77
+      ],
+      "role": "SE",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 27,
+            "y": 17
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 58,
+            "y": 23
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 65,
+            "y": 9
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 22,
+            "y": 30
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 34,
+            "y": 29
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "hovel",
+        "collapsed_house_a",
+        "hovel",
+        "house_hearth_a",
+        "ossuary_ruin_a",
+        "hovel",
+        "hovel",
+        "fishing_dock",
+        "ossuary_ruin_a",
+        "house_single_room_a",
+        "hovel",
+        "tool_shed_a",
+        "fishing_dock"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        20
+      ],
+      "role": "NW",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 13,
+            "y": 30
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 60,
+            "y": 29
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "storehouse_a",
+        "warehouse_a",
+        "fishing_dock",
+        "fishing_dock",
+        "ossuary_ruin_a",
+        "warehouse_a",
+        "hovel",
+        "root_cellar_a",
+        "three_wall_remnant_a",
+        "root_cellar_a",
+        "hunter_cabin",
+        "fishing_dock",
+        "fishing_dock"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        20
+      ],
+      "role": "N",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "market_stall_a",
+        "house_old_stone_a",
+        "market_stall_a",
+        "market_stall_a",
+        "root_cellar_a",
+        "root_cellar_a",
+        "house_small_b",
+        "food_store_a",
+        "market_stall_a",
+        "house_damaged_a",
+        "house_crowded_a",
+        "cellar_a",
+        "house_single_room_a",
+        "goods_cellar_a",
+        "market_stall_a",
+        "market_stall_b",
+        "market_stall_b"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        20
+      ],
+      "role": "NE",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 40,
+            "y": 30
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 16,
+            "y": 7
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 59,
+            "y": 18
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 15,
+            "y": 24
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "fishing_dock",
+        "house_damaged_a",
+        "warehouse_a",
+        "ossuary_ruin_a",
+        "house_small_b",
+        "root_cellar_a",
+        "house_small_b",
+        "cellar_a",
+        "hovel",
+        "hovel",
+        "hunter_cabin",
+        "hovel",
+        "cellar_a"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        21
+      ],
+      "role": "W",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "goods_cellar_a",
+        "market_stall_a",
+        "house_hearth_a",
+        "food_store_a",
+        "market_stall_a",
+        "house_small_b",
+        "root_cellar_a",
+        "food_store_a",
+        "root_cellar_a",
+        "market_stall_a",
+        "tool_shed_a",
+        "house_abandoned_a",
+        "root_cellar_a",
+        "food_store_a",
+        "root_cellar_a"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        21
+      ],
+      "role": "C",
+      "unreachable_notes": [
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "kind": "item",
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "x": 46,
+            "y": 29
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "well_a",
+        "workshop_a",
+        "bell_warden_post_a",
+        "waystone_plinth_a",
+        "market_stall_a",
+        "market_stall_b",
+        "folk_saint_niche_a",
+        "record_hall_a",
+        "bell_warden_post_a",
+        "market_stall_b",
+        "folk_saint_alcove_a",
+        "well_a",
+        "well_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        21
+      ],
+      "role": "E",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "root_cellar_a",
+        "cellar_a",
+        "market_stall_a",
+        "house_single_room_a",
+        "root_cellar_a",
+        "root_cellar_a",
+        "house_crowded_a",
+        "market_stall_a",
+        "market_stall_a",
+        "house_hearth_a",
+        "goods_cellar_a",
+        "market_stall_a",
+        "market_stall_a",
+        "house_damaged_a",
+        "market_stall_a",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        63,
+        22
+      ],
+      "role": "SW",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 32,
+            "y": 20
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 5,
+            "y": 29
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 19,
+            "y": 6
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 19,
+            "y": 30
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 44,
+            "y": 6
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "tool_shed_a",
+        "hovel",
+        "collapsed_house_a",
+        "cellar_a",
+        "waymarker_shelter_a",
+        "hovel",
+        "hunter_cabin",
+        "hovel",
+        "goods_cellar_a",
+        "hunter_cabin",
+        "food_store_a",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        64,
+        22
+      ],
+      "role": "S",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 8,
+            "y": 21
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 49,
+            "y": 8
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "market_stall_b",
+        "house_single_room_a",
+        "hovel",
+        "storehouse_a",
+        "trader_shop_a",
+        "root_cellar_a",
+        "hovel",
+        "tool_shed_a",
+        "tool_shed_a",
+        "house_two_room_a",
+        "trader_shop_a",
+        "house_two_room_a"
+      ]
+    },
+    {
+      "xy": [
+        65,
+        22
+      ],
+      "role": "SE",
+      "unreachable_notes": [
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 9,
+            "y": 16
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 22,
+            "y": 5
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 19,
+            "y": 30
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 65,
+            "y": 22
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 63,
+            "y": 9
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "goods_cellar_a",
+        "ossuary_ruin_a",
+        "ruin_wall_a",
+        "cellar_a",
+        "three_wall_remnant_a",
+        "fishing_dock",
+        "hunter_cabin",
+        "hovel",
+        "storehouse_a",
+        "food_store_a",
+        "hovel",
+        "fishing_dock",
+        "hovel",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        18,
+        63
+      ],
+      "role": "NW",
+      "unreachable_notes": [
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 10,
+            "y": 29
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 35,
+            "y": 21
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "fishing_dock",
+        "goods_cellar_a",
+        "deep_foundation_a",
+        "house_hearth_a",
+        "cellar_a",
+        "collapsed_house_a",
+        "fishing_dock",
+        "hunter_cabin",
+        "food_store_a",
+        "hovel",
+        "tool_shed_a",
+        "house_two_room_a"
+      ]
+    },
+    {
+      "xy": [
+        19,
+        63
+      ],
+      "role": "N",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 49,
+            "y": 15
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 73,
+            "y": 9
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 49,
+            "y": 35
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "house_hearth_a",
+        "house_abandoned_a",
+        "hovel",
+        "market_stall_a",
+        "market_stall_a",
+        "house_small_b",
+        "food_store_a",
+        "cellar_a",
+        "tool_shed_a",
+        "hovel",
+        "market_stall_a",
+        "storehouse_a",
+        "hovel",
+        "hovel",
+        "market_stall_a",
+        "house_old_stone_a",
+        "house_small_b"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        63
+      ],
+      "role": "NE",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 37,
+            "y": 16
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 28,
+            "y": 24
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 40,
+            "y": 32
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 25,
+            "y": 14
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 57,
+            "y": 14
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 58,
+            "y": 5
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "goods_cellar_a",
+        "hovel",
+        "deep_foundation_a",
+        "goods_cellar_a",
+        "hovel",
+        "burnt_dwelling_a",
+        "tool_shed_a",
+        "hunter_cabin",
+        "hovel",
+        "hunter_cabin",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        18,
+        64
+      ],
+      "role": "W",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 8,
+            "y": 30
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "market_stall_c",
+        "house_single_room_a",
+        "apothecary_a",
+        "market_stall_a",
+        "market_stall_a",
+        "market_stall_c",
+        "market_stall_a",
+        "market_stall_b",
+        "house_single_room_a",
+        "hovel",
+        "shop_a",
+        "market_stall_a",
+        "market_stall_a",
+        "apothecary_a",
+        "market_stall_a",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        19,
+        64
+      ],
+      "role": "C",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "meeting_hall_a",
+        "workshop_a",
+        "guard_post_a",
+        "market_stall_b",
+        "market_stall_a",
+        "folk_saint_niche_a",
+        "market_stall_a",
+        "waystone_plinth_a",
+        "shrine_a",
+        "market_stall_a",
+        "well_a",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        64
+      ],
+      "role": "E",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "root_cellar_a",
+        "food_store_a",
+        "food_store_a",
+        "market_stall_a",
+        "market_stall_a",
+        "house_old_stone_a",
+        "warehouse_a",
+        "house_small_a",
+        "market_stall_a",
+        "market_stall_a",
+        "house_small_a",
+        "market_stall_a",
+        "market_stall_a"
+      ]
+    },
+    {
+      "xy": [
+        18,
+        65
+      ],
+      "role": "SW",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 65,
+            "y": 14
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 13,
+            "y": 32
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 7,
+            "y": 26
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 23,
+            "y": 23
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 21,
+            "y": 17
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "hovel",
+        "hunter_cabin",
+        "warehouse_a",
+        "fishing_dock",
+        "fishing_dock",
+        "hovel",
+        "hovel",
+        "cellar_a",
+        "goods_cellar_a",
+        "house_hearth_a",
+        "hovel",
+        "fishing_dock"
+      ]
+    },
+    {
+      "xy": [
+        19,
+        65
+      ],
+      "role": "S",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 70,
+            "y": 21
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "house_two_room_a",
+        "house_abandoned_a",
+        "house_small_b",
+        "food_store_a",
+        "goods_cellar_a",
+        "tool_shed_a",
+        "root_cellar_a",
+        "house_crowded_a",
+        "apothecary_a",
+        "hovel",
+        "apothecary_a",
+        "food_store_a"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        65
+      ],
+      "role": "SE",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 41,
+            "y": 23
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 43,
+            "y": 17
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 28,
+            "y": 7
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 62,
+            "y": 29
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 22,
+            "y": 16
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "root_cellar_a",
+        "three_wall_remnant_a",
+        "food_store_a",
+        "hovel",
+        "hovel",
+        "waymarker_shelter_a",
+        "three_wall_remnant_a",
+        "ossuary_ruin_a",
+        "hovel",
+        "fishing_dock",
+        "food_store_a",
+        "hovel",
+        "hovel"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        51
+      ],
+      "role": "NW",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 37,
+            "y": 26
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 43,
+            "y": 12
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 29,
+            "y": 5
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 59,
+            "y": 11
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "cellar_a",
+        "house_old_stone_a",
+        "hovel",
+        "foundation_outline_a",
+        "hovel",
+        "hovel",
+        "storehouse_a",
+        "root_cellar_a",
+        "hunter_cabin",
+        "house_small_a",
+        "storehouse_a"
+      ]
+    },
+    {
+      "xy": [
+        21,
+        51
+      ],
+      "role": "N",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_two_room_a",
+        "house_crowded_a",
+        "tool_shed_a",
+        "food_store_a",
+        "house_crowded_a",
+        "house_old_stone_a",
+        "house_two_room_a",
+        "market_stall_b",
+        "shop_a",
+        "house_damaged_a",
+        "house_small_b",
+        "house_old_stone_a"
+      ]
+    },
+    {
+      "xy": [
+        22,
+        51
+      ],
+      "role": "NE",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 54,
+            "y": 16
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "tenement_a",
+        "food_store_a",
+        "tool_shed_a",
+        "foundation_outline_a",
+        "goods_cellar_a",
+        "root_cellar_a",
+        "root_cellar_a",
+        "hovel",
+        "collapsed_house_a",
+        "tool_shed_a",
+        "tool_shed_a",
+        "fishing_dock",
+        "fishing_dock"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        52
+      ],
+      "role": "W",
+      "unreachable_notes": [],
+      "overlaps": [],
+      "buildings": [
+        "house_small_a",
+        "market_stall_a",
+        "market_stall_a",
+        "house_hearth_a",
+        "trader_shop_a",
+        "market_stall_a",
+        "market_stall_a",
+        "shop_a",
+        "market_stall_a",
+        "market_stall_a",
+        "house_large_a",
+        "house_abandoned_a",
+        "root_cellar_a",
+        "root_cellar_a"
+      ]
+    },
+    {
+      "xy": [
+        21,
+        52
+      ],
+      "role": "C",
+      "unreachable_notes": [
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "kind": "item",
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "x": 72,
+            "y": 15
+          }
+        },
+        {
+          "id": "folk_saint_alcove_a",
+          "spec": {
+            "kind": "item",
+            "item_id": "letter",
+            "text_id": "world_sermon_a",
+            "x": 70,
+            "y": 36
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "shrine_a",
+        "ossuary_chapel_a",
+        "ossuary_chapel_a",
+        "folk_saint_alcove_a",
+        "trader_shop_a",
+        "shrine_hall_a",
+        "record_hall_a",
+        "folk_saint_alcove_a"
+      ]
+    },
+    {
+      "xy": [
+        22,
+        52
+      ],
+      "role": "E",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 58,
+            "y": 5
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "cellar_a",
+        "market_stall_a",
+        "cellar_a",
+        "market_stall_c",
+        "house_single_room_a",
+        "market_stall_a",
+        "food_store_a",
+        "hovel",
+        "root_cellar_a",
+        "house_single_room_a",
+        "market_stall_a",
+        "cellar_a",
+        "house_abandoned_a",
+        "root_cellar_a",
+        "root_cellar_a",
+        "house_small_b",
+        "root_cellar_a",
+        "root_cellar_a"
+      ]
+    },
+    {
+      "xy": [
+        20,
+        53
+      ],
+      "role": "SW",
+      "unreachable_notes": [
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 18,
+            "y": 10
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 55,
+            "y": 26
+          }
+        },
+        {
+          "id": "hunter_cabin",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "herbalist_scrap_a",
+            "x": 23,
+            "y": 29
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "storehouse_a",
+        "collapsed_house_a",
+        "root_cellar_a",
+        "hunter_cabin",
+        "hovel",
+        "cellar_a",
+        "ruin_wall_a",
+        "deep_foundation_a",
+        "deep_foundation_a",
+        "hunter_cabin",
+        "cellar_a",
+        "house_small_a"
+      ]
+    },
+    {
+      "xy": [
+        21,
+        53
+      ],
+      "role": "S",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 31,
+            "y": 8
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 27,
+            "y": 35
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 49,
+            "y": 21
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "house_crowded_a",
+        "hovel",
+        "house_two_room_a",
+        "cellar_a",
+        "root_cellar_a",
+        "hovel",
+        "house_crowded_a",
+        "food_store_a",
+        "hovel",
+        "market_stall_c",
+        "house_crowded_a",
+        "trader_shop_a"
+      ]
+    },
+    {
+      "xy": [
+        22,
+        53
+      ],
+      "role": "SE",
+      "unreachable_notes": [
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 65,
+            "y": 20
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 21,
+            "y": 17
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 51,
+            "y": 8
+          }
+        },
+        {
+          "id": "hovel",
+          "spec": {
+            "kind": "item",
+            "item_id": "research_note",
+            "text_id": "door_notice_a",
+            "x": 31,
+            "y": 18
+          }
+        }
+      ],
+      "overlaps": [],
+      "buildings": [
+        "storehouse_a",
+        "hovel",
+        "cellar_a",
+        "storehouse_a",
+        "hovel",
+        "foundation_outline_a",
+        "deep_foundation_a",
+        "hovel",
+        "cellar_a",
+        "storehouse_a",
+        "hovel"
+      ]
+    }
+  ],
+  "seam": [
+    [
+      41,
+      42,
+      43
+    ],
+    [
+      37,
+      38,
+      39
+    ]
+  ],
+  "source_sha256": {
+    "roguelike\\generation\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "roguelike\\generation\\decor_utils.py": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93",
+    "roguelike\\generation\\entrance_gen.py": "397e6b66c4cc14ae98dc5abc0d60b103d73e066952b122fb1f6d8d03ea6502ee",
+    "roguelike\\generation\\floor_object_utils.py": "ededc552d7530c146aec85fe569d661980697cce6f3e087039b1bb287b710319",
+    "roguelike\\generation\\layout_stamper.py": "ab448b82c7fab4b9abe80b820a45f61a5dca8d29ebbc8d098bd5e032d7eb4626",
+    "roguelike\\generation\\local_gen.py": "0c0b6d490850c4c917d48fb774072e9950eff6c6a2571df559faf6228017680d",
+    "roguelike\\generation\\region_gen.py": "a1e593c8b5ff388b170b3b0fe888255e959efe18dd1d78764b8a89160a427955",
+    "roguelike\\generation\\town_gen.py": "68b11fd299f0a5332f6218064639b52cde99bbef68a96bf78e33762c2e2d899d",
+    "roguelike\\generation\\wfc.py": "547e27d99e6cef395f7b9ebae61ab43a3db515d617cbd34fd2e7e98a934ac9e8",
+    "roguelike\\generation\\world_gen.py": "cc7d812cd67d30dfa8c18bb7a28eae7f2eee524ead96bb17c1e78827b0f63fa2"
+  }
+}

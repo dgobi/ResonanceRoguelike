@@ -1,0 +1,601 @@
+[town_gen] NW-scatter  placed=9/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=31
+[town_gen] N-zone0 SLOT ox=4 oy=4 bw=12 bh=9 row_bottom=13
+[town_gen] N-zone0 SLOT ox=16 oy=5 bw=10 bh=8 row_bottom=13
+[town_gen] N-zone0 SLOT ox=26 oy=7 bw=8 bh=6 row_bottom=13
+[town_gen] N-zone0 zone (3,3,34,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] N-zone0 SLOT ox=4 oy=18 bw=10 bh=8 row_bottom=26
+[town_gen] N-zone0 SLOT ox=14 oy=21 bw=7 bh=5 row_bottom=26
+[town_gen] N-zone0 SLOT ox=21 oy=18 bw=10 bh=8 row_bottom=26
+[town_gen] N-zone0 zone (3,16,34,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] N-zone0 SLOT ox=4 oy=33 bw=7 bh=6 row_bottom=39
+[town_gen] N-zone0 SLOT ox=11 oy=33 bw=7 bh=6 row_bottom=39
+[town_gen] N-zone0 SLOT ox=18 oy=33 bw=10 bh=6 row_bottom=39
+[town_gen] N-zone0 SLOT ox=28 oy=33 bw=7 bh=6 row_bottom=39
+[town_gen] N-zone0 zone (3,29,34,11) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] N-zone1 SLOT ox=45 oy=9 bw=6 bh=4 row_bottom=13
+[town_gen] N-zone1 SLOT ox=51 oy=5 bw=10 bh=8 row_bottom=13
+[town_gen] N-zone1 SLOT ox=61 oy=5 bw=10 bh=8 row_bottom=13
+[town_gen] N-zone1 zone (44,3,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] N-zone1 zone (44,23,33,4) too small — skipped
+[town_gen] N-zone1 SLOT ox=45 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] N-zone1 SLOT ox=57 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] N-zone1 SLOT ox=64 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] N-zone1 zone (44,29,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[TOWN seed=0 wx=64 wy=75 role=N slots_attempted=16 slots_filled=10]
+[town_gen] NE-scatter  placed=9/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=31
+[town_gen] W-zone0 SLOT ox=4 oy=10 bw=10 bh=7 row_bottom=17
+[town_gen] W-zone0 SLOT ox=4 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] W-zone0 SLOT ox=11 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] W-zone0 zone (3,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] W-zone0 SLOT ox=23 oy=10 bw=9 bh=7 row_bottom=17
+[town_gen] W-zone0 SLOT ox=32 oy=13 bw=6 bh=4 row_bottom=17
+[town_gen] W-zone0 SLOT ox=23 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] W-zone0 SLOT ox=30 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] W-zone0 zone (22,3,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] W-zone0 SLOT ox=42 oy=11 bw=10 bh=6 row_bottom=17
+[town_gen] W-zone0 SLOT ox=42 oy=6 bw=6 bh=4 row_bottom=10
+[town_gen] W-zone0 SLOT ox=48 oy=6 bw=6 bh=4 row_bottom=10
+[town_gen] W-zone0 zone (41,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] W-zone0 SLOT ox=61 oy=10 bw=14 bh=7 row_bottom=17
+[town_gen] W-zone0 SLOT ox=61 oy=5 bw=6 bh=4 row_bottom=9
+[town_gen] W-zone0 SLOT ox=67 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] W-zone0 zone (60,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] W-zone1 SLOT ox=4 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] W-zone1 SLOT ox=4 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] W-zone1 SLOT ox=10 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] W-zone1 zone (3,25,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] W-zone1 SLOT ox=23 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] W-zone1 SLOT ox=31 oy=33 bw=7 bh=6 row_bottom=39
+[town_gen] W-zone1 SLOT ox=23 oy=26 bw=8 bh=6 row_bottom=32
+[town_gen] W-zone1 SLOT ox=31 oy=26 bw=7 bh=6 row_bottom=32
+[town_gen] W-zone1 zone (22,25,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] W-zone1 SLOT ox=42 oy=32 bw=10 bh=7 row_bottom=39
+[town_gen] W-zone1 SLOT ox=42 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] W-zone1 SLOT ox=49 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] W-zone1 zone (41,25,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] W-zone1 SLOT ox=61 oy=33 bw=7 bh=6 row_bottom=39
+[town_gen] W-zone1 SLOT ox=68 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] W-zone1 SLOT ox=61 oy=26 bw=7 bh=6 row_bottom=32
+[town_gen] W-zone1 SLOT ox=68 oy=26 bw=7 bh=6 row_bottom=32
+[town_gen] W-zone1 zone (60,25,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[TOWN seed=0 wx=63 wy=76 role=W slots_attempted=27 slots_filled=16]
+[town_gen] C-quad0 SLOT ox=4 oy=11 bw=8 bh=6 row_bottom=17
+[town_gen] C-quad0 SLOT ox=12 oy=8 bw=12 bh=9 row_bottom=17
+[town_gen] C-quad0 SLOT ox=24 oy=10 bw=9 bh=7 row_bottom=17
+[town_gen] C-quad0 SLOT ox=4 oy=5 bw=3 bh=4 row_bottom=9
+[town_gen] C-quad0 SLOT ox=7 oy=5 bw=3 bh=4 row_bottom=9
+[town_gen] C-quad0 SLOT ox=10 oy=5 bw=6 bh=4 row_bottom=9
+[town_gen] C-quad0 SLOT ox=16 oy=4 bw=6 bh=5 row_bottom=9
+[town_gen] C-quad0 SLOT ox=22 oy=4 bw=6 bh=5 row_bottom=9
+[town_gen] C-quad0 zone (3,3,34,15) placed=5/5  attempts=8  skip_no_bld=0  skip_too_big=0  skip_overlap=3
+[town_gen] C-quad1 SLOT ox=45 oy=12 bw=6 bh=5 row_bottom=17
+[town_gen] C-quad1 SLOT ox=51 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] C-quad1 SLOT ox=61 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] C-quad1 SLOT ox=71 oy=13 bw=3 bh=4 row_bottom=17
+[town_gen] C-quad1 SLOT ox=45 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] C-quad1 SLOT ox=51 oy=4 bw=3 bh=4 row_bottom=8
+[town_gen] C-quad1 SLOT ox=54 oy=4 bw=3 bh=4 row_bottom=8
+[town_gen] C-quad1 SLOT ox=57 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] C-quad1 SLOT ox=63 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] C-quad1 zone (44,3,33,15) placed=5/5  attempts=9  skip_no_bld=0  skip_too_big=0  skip_overlap=4
+[town_gen] C-quad2 SLOT ox=4 oy=30 bw=13 bh=9 row_bottom=39
+[town_gen] C-quad2 SLOT ox=17 oy=32 bw=8 bh=7 row_bottom=39
+[town_gen] C-quad2 SLOT ox=25 oy=32 bw=8 bh=7 row_bottom=39
+[town_gen] C-quad2 zone (3,25,34,15) placed=2/5  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] C-quad3 SLOT ox=45 oy=32 bw=8 bh=7 row_bottom=39
+[town_gen] C-quad3 SLOT ox=53 oy=29 bw=8 bh=10 row_bottom=39
+[town_gen] C-quad3 SLOT ox=61 oy=32 bw=9 bh=7 row_bottom=39
+[town_gen] C-quad3 SLOT ox=70 oy=34 bw=6 bh=5 row_bottom=39
+[town_gen] C-quad3 SLOT ox=45 oy=26 bw=6 bh=5 row_bottom=31
+[town_gen] C-quad3 SLOT ox=51 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] C-quad3 SLOT ox=58 oy=27 bw=6 bh=4 row_bottom=31
+[town_gen] C-quad3 SLOT ox=64 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] C-quad3 SLOT ox=71 oy=27 bw=3 bh=4 row_bottom=31
+[town_gen] C-quad3 zone (44,25,33,15) placed=5/5  attempts=9  skip_no_bld=0  skip_too_big=0  skip_overlap=4
+[TOWN seed=0 wx=64 wy=76 role=C slots_attempted=29 slots_filled=17]
+[town_gen] E-zone0 SLOT ox=4 oy=10 bw=8 bh=7 row_bottom=17
+[town_gen] E-zone0 SLOT ox=12 oy=12 bw=7 bh=5 row_bottom=17
+[town_gen] E-zone0 SLOT ox=19 oy=13 bw=6 bh=4 row_bottom=17
+[town_gen] E-zone0 SLOT ox=4 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] E-zone0 SLOT ox=11 oy=5 bw=6 bh=4 row_bottom=9
+[town_gen] E-zone0 SLOT ox=17 oy=5 bw=6 bh=4 row_bottom=9
+[town_gen] E-zone0 zone (3,3,23,15) placed=4/8  attempts=6  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] E-zone0 SLOT ox=29 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] E-zone0 SLOT ox=39 oy=10 bw=9 bh=7 row_bottom=17
+[town_gen] E-zone0 SLOT ox=29 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=35 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=41 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 zone (28,3,23,15) placed=3/8  attempts=5  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] E-zone0 SLOT ox=54 oy=8 bw=12 bh=9 row_bottom=17
+[town_gen] E-zone0 SLOT ox=66 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] E-zone0 zone (53,3,24,15) placed=1/8  attempts=2  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] E-zone1 SLOT ox=4 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] E-zone1 SLOT ox=16 oy=35 bw=6 bh=4 row_bottom=39
+[town_gen] E-zone1 zone (3,25,23,15) placed=1/8  attempts=2  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] E-zone1 SLOT ox=29 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] E-zone1 SLOT ox=36 oy=32 bw=9 bh=7 row_bottom=39
+[town_gen] E-zone1 SLOT ox=29 oy=26 bw=10 bh=7 row_bottom=33
+[town_gen] E-zone1 SLOT ox=39 oy=26 bw=8 bh=7 row_bottom=33
+[town_gen] E-zone1 zone (28,25,23,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[town_gen] E-zone1 SLOT ox=54 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] E-zone1 SLOT ox=64 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] E-zone1 SLOT ox=54 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 SLOT ox=60 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 SLOT ox=66 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 zone (53,25,24,15) placed=3/8  attempts=5  skip_no_bld=0  skip_too_big=2  skip_overlap=2
+[TOWN seed=0 wx=65 wy=76 role=E slots_attempted=24 slots_filled=14]
+[town_gen] SW-scatter  placed=7/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=33
+[town_gen] S-zone0 SLOT ox=4 oy=8 bw=7 bh=5 row_bottom=13
+[town_gen] S-zone0 SLOT ox=11 oy=5 bw=10 bh=8 row_bottom=13
+[town_gen] S-zone0 SLOT ox=21 oy=8 bw=7 bh=5 row_bottom=13
+[town_gen] S-zone0 SLOT ox=28 oy=7 bw=8 bh=6 row_bottom=13
+[town_gen] S-zone0 zone (3,3,34,11) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[town_gen] S-zone0 SLOT ox=4 oy=20 bw=8 bh=6 row_bottom=26
+[town_gen] S-zone0 SLOT ox=12 oy=18 bw=12 bh=8 row_bottom=26
+[town_gen] S-zone0 SLOT ox=24 oy=22 bw=6 bh=4 row_bottom=26
+[town_gen] S-zone0 SLOT ox=30 oy=22 bw=6 bh=4 row_bottom=26
+[town_gen] S-zone0 zone (3,16,34,11) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] S-zone0 SLOT ox=4 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] S-zone0 SLOT ox=11 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] S-zone0 SLOT ox=21 oy=32 bw=14 bh=7 row_bottom=39
+[town_gen] S-zone0 zone (3,29,34,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] S-zone1 SLOT ox=45 oy=4 bw=12 bh=9 row_bottom=13
+[town_gen] S-zone1 SLOT ox=57 oy=5 bw=10 bh=8 row_bottom=13
+[town_gen] S-zone1 SLOT ox=67 oy=7 bw=7 bh=6 row_bottom=13
+[town_gen] S-zone1 zone (44,3,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] S-zone1 SLOT ox=45 oy=20 bw=7 bh=6 row_bottom=26
+[town_gen] S-zone1 SLOT ox=52 oy=19 bw=9 bh=7 row_bottom=26
+[town_gen] S-zone1 SLOT ox=61 oy=18 bw=11 bh=8 row_bottom=26
+[town_gen] S-zone1 zone (44,16,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] S-zone1 SLOT ox=45 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] S-zone1 SLOT ox=52 oy=31 bw=12 bh=8 row_bottom=39
+[town_gen] S-zone1 SLOT ox=64 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] S-zone1 zone (44,29,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[TOWN seed=0 wx=64 wy=77 role=S slots_attempted=20 slots_filled=12]
+[town_gen] SE-scatter  placed=12/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=28
+[town_gen] NW-scatter  placed=8/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=32
+[town_gen] N-zone0 SLOT ox=4 oy=7 bw=8 bh=6 row_bottom=13
+[town_gen] N-zone0 SLOT ox=12 oy=5 bw=10 bh=8 row_bottom=13
+[town_gen] N-zone0 SLOT ox=22 oy=4 bw=12 bh=9 row_bottom=13
+[town_gen] N-zone0 zone (3,3,34,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] N-zone0 SLOT ox=4 oy=19 bw=8 bh=7 row_bottom=26
+[town_gen] N-zone0 SLOT ox=12 oy=19 bw=9 bh=7 row_bottom=26
+[town_gen] N-zone0 SLOT ox=21 oy=18 bw=11 bh=8 row_bottom=26
+[town_gen] N-zone0 zone (3,16,34,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] N-zone0 SLOT ox=4 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] N-zone0 SLOT ox=14 oy=31 bw=11 bh=8 row_bottom=39
+[town_gen] N-zone0 SLOT ox=25 oy=32 bw=9 bh=7 row_bottom=39
+[town_gen] N-zone0 zone (3,29,34,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] N-zone1 SLOT ox=45 oy=9 bw=6 bh=4 row_bottom=13
+[town_gen] N-zone1 SLOT ox=51 oy=4 bw=10 bh=9 row_bottom=13
+[town_gen] N-zone1 SLOT ox=61 oy=5 bw=12 bh=8 row_bottom=13
+[town_gen] N-zone1 zone (44,3,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] N-zone1 SLOT ox=45 oy=20 bw=10 bh=6 row_bottom=26
+[town_gen] N-zone1 SLOT ox=55 oy=18 bw=11 bh=8 row_bottom=26
+[town_gen] N-zone1 SLOT ox=66 oy=18 bw=10 bh=8 row_bottom=26
+[town_gen] N-zone1 zone (44,16,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] N-zone1 SLOT ox=45 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] N-zone1 SLOT ox=57 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] N-zone1 SLOT ox=64 oy=32 bw=9 bh=7 row_bottom=39
+[town_gen] N-zone1 zone (44,29,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[TOWN seed=1 wx=64 wy=20 role=N slots_attempted=18 slots_filled=12]
+[town_gen] NE-scatter  placed=10/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=30
+[town_gen] W-zone0 SLOT ox=4 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] W-zone0 SLOT ox=4 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] W-zone0 SLOT ox=10 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] W-zone0 zone (3,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] W-zone0 SLOT ox=23 oy=11 bw=8 bh=6 row_bottom=17
+[town_gen] W-zone0 SLOT ox=31 oy=11 bw=7 bh=6 row_bottom=17
+[town_gen] W-zone0 SLOT ox=23 oy=4 bw=7 bh=6 row_bottom=10
+[town_gen] W-zone0 SLOT ox=30 oy=6 bw=6 bh=4 row_bottom=10
+[town_gen] W-zone0 zone (22,3,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] W-zone0 SLOT ox=42 oy=7 bw=14 bh=10 row_bottom=17
+[town_gen] W-zone0 zone (41,3,17,15) placed=1/8  attempts=1  skip_no_bld=0  skip_too_big=0  skip_overlap=0
+[town_gen] W-zone0 SLOT ox=61 oy=12 bw=7 bh=5 row_bottom=17
+[town_gen] W-zone0 SLOT ox=68 oy=13 bw=6 bh=4 row_bottom=17
+[town_gen] W-zone0 SLOT ox=61 oy=5 bw=8 bh=6 row_bottom=11
+[town_gen] W-zone0 SLOT ox=69 oy=5 bw=7 bh=6 row_bottom=11
+[town_gen] W-zone0 zone (60,3,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] W-zone1 SLOT ox=4 oy=31 bw=11 bh=8 row_bottom=39
+[town_gen] W-zone1 SLOT ox=4 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] W-zone1 SLOT ox=10 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] W-zone1 zone (3,25,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] W-zone1 SLOT ox=23 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] W-zone1 SLOT ox=23 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] W-zone1 SLOT ox=29 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] W-zone1 zone (22,25,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] W-zone1 SLOT ox=42 oy=32 bw=14 bh=7 row_bottom=39
+[town_gen] W-zone1 SLOT ox=42 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] W-zone1 SLOT ox=49 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] W-zone1 zone (41,25,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] W-zone1 SLOT ox=61 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] W-zone1 SLOT ox=61 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] W-zone1 SLOT ox=67 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] W-zone1 zone (60,25,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[TOWN seed=1 wx=63 wy=21 role=W slots_attempted=24 slots_filled=15]
+[town_gen] C-quad0 SLOT ox=4 oy=11 bw=8 bh=6 row_bottom=17
+[town_gen] C-quad0 SLOT ox=12 oy=7 bw=8 bh=10 row_bottom=17
+[town_gen] C-quad0 SLOT ox=20 oy=13 bw=6 bh=4 row_bottom=17
+[town_gen] C-quad0 SLOT ox=26 oy=12 bw=7 bh=5 row_bottom=17
+[town_gen] C-quad0 SLOT ox=4 oy=5 bw=6 bh=5 row_bottom=10
+[town_gen] C-quad0 SLOT ox=10 oy=5 bw=6 bh=5 row_bottom=10
+[town_gen] C-quad0 SLOT ox=16 oy=6 bw=6 bh=4 row_bottom=10
+[town_gen] C-quad0 SLOT ox=22 oy=6 bw=3 bh=4 row_bottom=10
+[town_gen] C-quad0 SLOT ox=25 oy=4 bw=8 bh=6 row_bottom=10
+[town_gen] C-quad0 zone (3,3,34,15) placed=5/5  attempts=9  skip_no_bld=0  skip_too_big=0  skip_overlap=4
+[town_gen] C-quad1 SLOT ox=45 oy=10 bw=8 bh=7 row_bottom=17
+[town_gen] C-quad1 SLOT ox=53 oy=11 bw=8 bh=6 row_bottom=17
+[town_gen] C-quad1 SLOT ox=61 oy=8 bw=11 bh=9 row_bottom=17
+[town_gen] C-quad1 SLOT ox=72 oy=13 bw=3 bh=4 row_bottom=17
+[town_gen] C-quad1 SLOT ox=45 oy=6 bw=6 bh=4 row_bottom=10
+[town_gen] C-quad1 SLOT ox=51 oy=5 bw=6 bh=5 row_bottom=10
+[town_gen] C-quad1 SLOT ox=57 oy=6 bw=6 bh=4 row_bottom=10
+[town_gen] C-quad1 SLOT ox=63 oy=4 bw=10 bh=6 row_bottom=10
+[town_gen] C-quad1 zone (44,3,33,15) placed=4/5  attempts=8  skip_no_bld=0  skip_too_big=0  skip_overlap=4
+[town_gen] C-quad2 SLOT ox=4 oy=31 bw=11 bh=8 row_bottom=39
+[town_gen] C-quad2 SLOT ox=15 oy=33 bw=10 bh=6 row_bottom=39
+[town_gen] C-quad2 SLOT ox=25 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] C-quad2 SLOT ox=32 oy=35 bw=3 bh=4 row_bottom=39
+[town_gen] C-quad2 SLOT ox=4 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] C-quad2 SLOT ox=10 oy=26 bw=3 bh=4 row_bottom=30
+[town_gen] C-quad2 SLOT ox=13 oy=26 bw=3 bh=4 row_bottom=30
+[town_gen] C-quad2 zone (3,25,34,15) placed=5/5  attempts=7  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] C-quad3 SLOT ox=45 oy=30 bw=11 bh=9 row_bottom=39
+[town_gen] C-quad3 SLOT ox=56 oy=30 bw=11 bh=9 row_bottom=39
+[town_gen] C-quad3 SLOT ox=67 oy=35 bw=6 bh=4 row_bottom=39
+[town_gen] C-quad3 zone (44,25,33,15) placed=2/5  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[TOWN seed=1 wx=64 wy=21 role=C slots_attempted=27 slots_filled=16]
+[town_gen] E-zone0 SLOT ox=4 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] E-zone0 SLOT ox=4 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=10 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 zone (3,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] E-zone0 SLOT ox=23 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] E-zone0 SLOT ox=23 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=29 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 zone (22,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] E-zone0 SLOT ox=42 oy=10 bw=9 bh=7 row_bottom=17
+[town_gen] E-zone0 SLOT ox=51 oy=13 bw=6 bh=4 row_bottom=17
+[town_gen] E-zone0 SLOT ox=42 oy=5 bw=6 bh=4 row_bottom=9
+[town_gen] E-zone0 SLOT ox=48 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] E-zone0 zone (41,3,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] E-zone0 SLOT ox=61 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] E-zone0 SLOT ox=61 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=67 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 zone (60,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] E-zone1 SLOT ox=4 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] E-zone1 SLOT ox=12 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] E-zone1 SLOT ox=4 oy=26 bw=8 bh=6 row_bottom=32
+[town_gen] E-zone1 SLOT ox=12 oy=26 bw=7 bh=6 row_bottom=32
+[town_gen] E-zone1 zone (3,25,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] E-zone1 SLOT ox=23 oy=32 bw=8 bh=7 row_bottom=39
+[town_gen] E-zone1 SLOT ox=31 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] E-zone1 SLOT ox=23 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] E-zone1 SLOT ox=30 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] E-zone1 zone (22,25,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] E-zone1 SLOT ox=42 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] E-zone1 zone (41,25,17,15) placed=1/8  attempts=1  skip_no_bld=0  skip_too_big=1  skip_overlap=0
+[town_gen] E-zone1 SLOT ox=61 oy=32 bw=8 bh=7 row_bottom=39
+[town_gen] E-zone1 SLOT ox=69 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] E-zone1 SLOT ox=61 oy=27 bw=6 bh=4 row_bottom=31
+[town_gen] E-zone1 SLOT ox=67 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] E-zone1 zone (60,25,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[TOWN seed=1 wx=65 wy=21 role=E slots_attempted=26 slots_filled=15]
+[town_gen] SW-scatter  placed=9/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=31
+[town_gen] S-zone0 SLOT ox=4 oy=6 bw=8 bh=7 row_bottom=13
+[town_gen] S-zone0 SLOT ox=12 oy=7 bw=10 bh=6 row_bottom=13
+[town_gen] S-zone0 SLOT ox=22 oy=6 bw=8 bh=7 row_bottom=13
+[town_gen] S-zone0 SLOT ox=30 oy=9 bw=6 bh=4 row_bottom=13
+[town_gen] S-zone0 zone (3,3,34,11) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] S-zone0 SLOT ox=4 oy=20 bw=8 bh=6 row_bottom=26
+[town_gen] S-zone0 SLOT ox=12 oy=18 bw=10 bh=8 row_bottom=26
+[town_gen] S-zone0 SLOT ox=22 oy=21 bw=7 bh=5 row_bottom=26
+[town_gen] S-zone0 SLOT ox=29 oy=21 bw=7 bh=5 row_bottom=26
+[town_gen] S-zone0 zone (3,16,34,11) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] S-zone0 SLOT ox=4 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] S-zone0 SLOT ox=12 oy=32 bw=8 bh=7 row_bottom=39
+[town_gen] S-zone0 SLOT ox=20 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] S-zone0 SLOT ox=30 oy=35 bw=6 bh=4 row_bottom=39
+[town_gen] S-zone0 zone (3,29,34,11) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] S-zone1 SLOT ox=45 oy=4 bw=12 bh=9 row_bottom=13
+[town_gen] S-zone1 SLOT ox=57 oy=6 bw=14 bh=7 row_bottom=13
+[town_gen] S-zone1 zone (44,3,33,11) placed=1/8  attempts=2  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] S-zone1 zone (44,23,33,4) too small — skipped
+[town_gen] S-zone1 SLOT ox=45 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] S-zone1 SLOT ox=53 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] S-zone1 SLOT ox=65 oy=33 bw=7 bh=6 row_bottom=39
+[town_gen] S-zone1 zone (44,29,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[TOWN seed=1 wx=64 wy=22 role=S slots_attempted=17 slots_filled=9]
+[town_gen] SE-scatter  placed=7/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=33
+[town_gen] NW-scatter  placed=10/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=30
+[town_gen] N-zone0 SLOT ox=4 oy=13 bw=7 bh=6 row_bottom=19
+[town_gen] N-zone0 SLOT ox=11 oy=10 bw=10 bh=9 row_bottom=19
+[town_gen] N-zone0 SLOT ox=21 oy=13 bw=8 bh=6 row_bottom=19
+[town_gen] N-zone0 SLOT ox=29 oy=14 bw=7 bh=5 row_bottom=19
+[town_gen] N-zone0 SLOT ox=4 oy=7 bw=7 bh=5 row_bottom=12
+[town_gen] N-zone0 SLOT ox=11 oy=8 bw=6 bh=4 row_bottom=12
+[town_gen] N-zone0 SLOT ox=17 oy=6 bw=10 bh=6 row_bottom=12
+[town_gen] N-zone0 SLOT ox=27 oy=7 bw=7 bh=5 row_bottom=12
+[town_gen] N-zone0 zone (3,3,34,17) placed=4/8  attempts=8  skip_no_bld=0  skip_too_big=0  skip_overlap=4
+[town_gen] N-zone0 SLOT ox=4 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] N-zone0 SLOT ox=14 oy=32 bw=8 bh=7 row_bottom=39
+[town_gen] N-zone0 SLOT ox=22 oy=31 bw=11 bh=8 row_bottom=39
+[town_gen] N-zone0 SLOT ox=4 oy=25 bw=7 bh=5 row_bottom=30
+[town_gen] N-zone0 SLOT ox=11 oy=25 bw=7 bh=5 row_bottom=30
+[town_gen] N-zone0 SLOT ox=18 oy=24 bw=7 bh=6 row_bottom=30
+[town_gen] N-zone0 SLOT ox=25 oy=25 bw=7 bh=5 row_bottom=30
+[town_gen] N-zone0 zone (3,23,34,17) placed=4/8  attempts=7  skip_no_bld=0  skip_too_big=1  skip_overlap=3
+[town_gen] N-zone1 SLOT ox=45 oy=14 bw=7 bh=5 row_bottom=19
+[town_gen] N-zone1 SLOT ox=52 oy=10 bw=12 bh=9 row_bottom=19
+[town_gen] N-zone1 SLOT ox=64 oy=11 bw=10 bh=8 row_bottom=19
+[town_gen] N-zone1 SLOT ox=45 oy=4 bw=10 bh=6 row_bottom=10
+[town_gen] N-zone1 SLOT ox=55 oy=4 bw=7 bh=6 row_bottom=10
+[town_gen] N-zone1 SLOT ox=62 oy=4 bw=7 bh=6 row_bottom=10
+[town_gen] N-zone1 SLOT ox=69 oy=5 bw=7 bh=5 row_bottom=10
+[town_gen] N-zone1 zone (44,3,33,17) placed=4/8  attempts=7  skip_no_bld=0  skip_too_big=0  skip_overlap=3
+[town_gen] N-zone1 SLOT ox=45 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] N-zone1 SLOT ox=55 oy=31 bw=12 bh=8 row_bottom=39
+[town_gen] N-zone1 SLOT ox=67 oy=33 bw=7 bh=6 row_bottom=39
+[town_gen] N-zone1 SLOT ox=45 oy=24 bw=10 bh=6 row_bottom=30
+[town_gen] N-zone1 SLOT ox=55 oy=24 bw=8 bh=6 row_bottom=30
+[town_gen] N-zone1 SLOT ox=63 oy=24 bw=8 bh=6 row_bottom=30
+[town_gen] N-zone1 zone (44,22,33,18) placed=4/8  attempts=6  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[TOWN seed=2 wx=19 wy=63 role=N slots_attempted=28 slots_filled=16]
+[town_gen] NE-scatter  placed=10/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=30
+[town_gen] W-zone0 SLOT ox=4 oy=11 bw=7 bh=6 row_bottom=17
+[town_gen] W-zone0 SLOT ox=11 oy=11 bw=8 bh=6 row_bottom=17
+[town_gen] W-zone0 SLOT ox=4 oy=4 bw=7 bh=6 row_bottom=10
+[town_gen] W-zone0 SLOT ox=11 oy=4 bw=7 bh=6 row_bottom=10
+[town_gen] W-zone0 zone (3,3,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] W-zone0 SLOT ox=23 oy=8 bw=10 bh=9 row_bottom=17
+[town_gen] W-zone0 zone (22,3,17,15) placed=1/8  attempts=1  skip_no_bld=0  skip_too_big=2  skip_overlap=0
+[town_gen] W-zone0 SLOT ox=42 oy=7 bw=14 bh=10 row_bottom=17
+[town_gen] W-zone0 zone (41,3,17,15) placed=1/8  attempts=1  skip_no_bld=0  skip_too_big=0  skip_overlap=0
+[town_gen] W-zone0 SLOT ox=61 oy=8 bw=12 bh=9 row_bottom=17
+[town_gen] W-zone0 zone (60,3,17,15) placed=1/8  attempts=1  skip_no_bld=0  skip_too_big=1  skip_overlap=0
+[town_gen] W-zone1 SLOT ox=4 oy=32 bw=14 bh=7 row_bottom=39
+[town_gen] W-zone1 SLOT ox=4 oy=27 bw=6 bh=4 row_bottom=31
+[town_gen] W-zone1 SLOT ox=10 oy=27 bw=6 bh=4 row_bottom=31
+[town_gen] W-zone1 zone (3,25,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] W-zone1 SLOT ox=23 oy=32 bw=10 bh=7 row_bottom=39
+[town_gen] W-zone1 SLOT ox=23 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] W-zone1 SLOT ox=30 oy=26 bw=7 bh=5 row_bottom=31
+[town_gen] W-zone1 zone (22,25,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] W-zone1 SLOT ox=42 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] W-zone1 SLOT ox=49 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] W-zone1 SLOT ox=42 oy=27 bw=7 bh=6 row_bottom=33
+[town_gen] W-zone1 SLOT ox=49 oy=28 bw=7 bh=5 row_bottom=33
+[town_gen] W-zone1 zone (41,25,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] W-zone1 SLOT ox=61 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] W-zone1 zone (60,25,17,15) placed=1/8  attempts=1  skip_no_bld=0  skip_too_big=1  skip_overlap=0
+[TOWN seed=2 wx=18 wy=64 role=W slots_attempted=18 slots_filled=12]
+[town_gen] C-quad0 SLOT ox=4 oy=10 bw=8 bh=7 row_bottom=17
+[town_gen] C-quad0 SLOT ox=12 oy=12 bw=6 bh=5 row_bottom=17
+[town_gen] C-quad0 SLOT ox=18 oy=8 bw=11 bh=9 row_bottom=17
+[town_gen] C-quad0 SLOT ox=29 oy=13 bw=6 bh=4 row_bottom=17
+[town_gen] C-quad0 zone (3,3,34,15) placed=2/5  attempts=4  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[town_gen] C-quad1 SLOT ox=45 oy=11 bw=8 bh=6 row_bottom=17
+[town_gen] C-quad1 SLOT ox=53 oy=12 bw=7 bh=5 row_bottom=17
+[town_gen] C-quad1 SLOT ox=60 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] C-quad1 SLOT ox=70 oy=13 bw=3 bh=4 row_bottom=17
+[town_gen] C-quad1 SLOT ox=45 oy=4 bw=3 bh=4 row_bottom=8
+[town_gen] C-quad1 SLOT ox=48 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] C-quad1 SLOT ox=54 oy=4 bw=3 bh=4 row_bottom=8
+[town_gen] C-quad1 SLOT ox=57 oy=4 bw=3 bh=4 row_bottom=8
+[town_gen] C-quad1 SLOT ox=60 oy=4 bw=3 bh=4 row_bottom=8
+[town_gen] C-quad1 zone (44,3,33,15) placed=5/5  attempts=9  skip_no_bld=0  skip_too_big=0  skip_overlap=4
+[town_gen] C-quad2 SLOT ox=4 oy=29 bw=8 bh=10 row_bottom=39
+[town_gen] C-quad2 SLOT ox=12 oy=32 bw=8 bh=7 row_bottom=39
+[town_gen] C-quad2 SLOT ox=20 oy=30 bw=13 bh=9 row_bottom=39
+[town_gen] C-quad2 zone (3,25,34,15) placed=2/5  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] C-quad3 SLOT ox=45 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] C-quad3 SLOT ox=57 oy=32 bw=9 bh=7 row_bottom=39
+[town_gen] C-quad3 SLOT ox=66 oy=29 bw=8 bh=10 row_bottom=39
+[town_gen] C-quad3 zone (44,25,33,15) placed=2/5  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[TOWN seed=2 wx=19 wy=64 role=C slots_attempted=19 slots_filled=11]
+[town_gen] E-zone0 SLOT ox=4 oy=9 bw=11 bh=8 row_bottom=17
+[town_gen] E-zone0 SLOT ox=4 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=10 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 zone (3,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] E-zone0 SLOT ox=23 oy=9 bw=11 bh=8 row_bottom=17
+[town_gen] E-zone0 SLOT ox=23 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=29 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 zone (22,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] E-zone0 SLOT ox=42 oy=9 bw=12 bh=8 row_bottom=17
+[town_gen] E-zone0 SLOT ox=42 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=48 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 zone (41,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] E-zone0 SLOT ox=61 oy=9 bw=12 bh=8 row_bottom=17
+[town_gen] E-zone0 SLOT ox=61 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=67 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 zone (60,3,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] E-zone1 SLOT ox=4 oy=29 bw=14 bh=10 row_bottom=39
+[town_gen] E-zone1 zone (3,25,17,15) placed=1/8  attempts=1  skip_no_bld=0  skip_too_big=0  skip_overlap=0
+[town_gen] E-zone1 SLOT ox=23 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] E-zone1 SLOT ox=31 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] E-zone1 SLOT ox=23 oy=26 bw=8 bh=6 row_bottom=32
+[town_gen] E-zone1 SLOT ox=31 oy=27 bw=7 bh=5 row_bottom=32
+[town_gen] E-zone1 zone (22,25,17,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] E-zone1 SLOT ox=42 oy=31 bw=11 bh=8 row_bottom=39
+[town_gen] E-zone1 SLOT ox=42 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 SLOT ox=48 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 zone (41,25,17,15) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] E-zone1 SLOT ox=61 oy=29 bw=14 bh=10 row_bottom=39
+[town_gen] E-zone1 zone (60,25,17,15) placed=1/8  attempts=1  skip_no_bld=0  skip_too_big=0  skip_overlap=0
+[TOWN seed=2 wx=20 wy=64 role=E slots_attempted=21 slots_filled=14]
+[town_gen] SW-scatter  placed=10/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=30
+[town_gen] S-zone0 SLOT ox=4 oy=14 bw=7 bh=5 row_bottom=19
+[town_gen] S-zone0 SLOT ox=11 oy=11 bw=16 bh=8 row_bottom=19
+[town_gen] S-zone0 SLOT ox=27 oy=13 bw=7 bh=6 row_bottom=19
+[town_gen] S-zone0 SLOT ox=4 oy=6 bw=8 bh=6 row_bottom=12
+[town_gen] S-zone0 SLOT ox=12 oy=5 bw=14 bh=7 row_bottom=12
+[town_gen] S-zone0 SLOT ox=26 oy=5 bw=8 bh=7 row_bottom=12
+[town_gen] S-zone0 zone (3,3,34,17) placed=4/8  attempts=6  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] S-zone0 SLOT ox=4 oy=32 bw=8 bh=7 row_bottom=39
+[town_gen] S-zone0 SLOT ox=12 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] S-zone0 SLOT ox=22 oy=31 bw=12 bh=8 row_bottom=39
+[town_gen] S-zone0 SLOT ox=4 oy=24 bw=10 bh=6 row_bottom=30
+[town_gen] S-zone0 SLOT ox=14 oy=25 bw=7 bh=5 row_bottom=30
+[town_gen] S-zone0 SLOT ox=21 oy=23 bw=8 bh=7 row_bottom=30
+[town_gen] S-zone0 SLOT ox=29 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] S-zone0 zone (3,22,34,18) placed=4/8  attempts=7  skip_no_bld=0  skip_too_big=0  skip_overlap=3
+[town_gen] S-zone1 SLOT ox=45 oy=12 bw=9 bh=7 row_bottom=19
+[town_gen] S-zone1 SLOT ox=54 oy=12 bw=14 bh=7 row_bottom=19
+[town_gen] S-zone1 SLOT ox=68 oy=12 bw=8 bh=7 row_bottom=19
+[town_gen] S-zone1 SLOT ox=45 oy=5 bw=7 bh=6 row_bottom=11
+[town_gen] S-zone1 SLOT ox=52 oy=4 bw=14 bh=7 row_bottom=11
+[town_gen] S-zone1 SLOT ox=66 oy=5 bw=8 bh=6 row_bottom=11
+[town_gen] S-zone1 zone (44,3,33,17) placed=4/8  attempts=6  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] S-zone1 SLOT ox=45 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] S-zone1 SLOT ox=57 oy=29 bw=14 bh=10 row_bottom=39
+[town_gen] S-zone1 SLOT ox=45 oy=24 bw=7 bh=5 row_bottom=29
+[town_gen] S-zone1 SLOT ox=52 oy=23 bw=8 bh=6 row_bottom=29
+[town_gen] S-zone1 SLOT ox=60 oy=24 bw=7 bh=5 row_bottom=29
+[town_gen] S-zone1 SLOT ox=67 oy=23 bw=7 bh=6 row_bottom=29
+[town_gen] S-zone1 zone (44,22,33,18) placed=3/8  attempts=6  skip_no_bld=0  skip_too_big=1  skip_overlap=3
+[TOWN seed=2 wx=19 wy=65 role=S slots_attempted=25 slots_filled=15]
+[town_gen] SE-scatter  placed=9/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=31
+[town_gen] NW-scatter  placed=12/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=28
+[town_gen] N-zone0 SLOT ox=4 oy=11 bw=10 bh=8 row_bottom=19
+[town_gen] N-zone0 SLOT ox=14 oy=12 bw=8 bh=7 row_bottom=19
+[town_gen] N-zone0 SLOT ox=22 oy=11 bw=12 bh=8 row_bottom=19
+[town_gen] N-zone0 SLOT ox=4 oy=4 bw=8 bh=6 row_bottom=10
+[town_gen] N-zone0 SLOT ox=12 oy=4 bw=7 bh=6 row_bottom=10
+[town_gen] N-zone0 SLOT ox=19 oy=5 bw=7 bh=5 row_bottom=10
+[town_gen] N-zone0 SLOT ox=26 oy=4 bw=7 bh=6 row_bottom=10
+[town_gen] N-zone0 zone (3,3,34,17) placed=4/8  attempts=7  skip_no_bld=0  skip_too_big=0  skip_overlap=3
+[town_gen] N-zone0 SLOT ox=4 oy=31 bw=11 bh=8 row_bottom=39
+[town_gen] N-zone0 SLOT ox=15 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] N-zone0 SLOT ox=27 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] N-zone0 SLOT ox=4 oy=25 bw=7 bh=5 row_bottom=30
+[town_gen] N-zone0 SLOT ox=11 oy=25 bw=7 bh=5 row_bottom=30
+[town_gen] N-zone0 SLOT ox=18 oy=24 bw=7 bh=6 row_bottom=30
+[town_gen] N-zone0 SLOT ox=25 oy=23 bw=10 bh=7 row_bottom=30
+[town_gen] N-zone0 zone (3,22,34,18) placed=4/8  attempts=7  skip_no_bld=0  skip_too_big=0  skip_overlap=3
+[town_gen] N-zone1 SLOT ox=45 oy=10 bw=12 bh=9 row_bottom=19
+[town_gen] N-zone1 SLOT ox=57 oy=13 bw=7 bh=6 row_bottom=19
+[town_gen] N-zone1 SLOT ox=64 oy=11 bw=10 bh=8 row_bottom=19
+[town_gen] N-zone1 SLOT ox=45 oy=5 bw=6 bh=4 row_bottom=9
+[town_gen] N-zone1 SLOT ox=51 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] N-zone1 SLOT ox=58 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] N-zone1 SLOT ox=65 oy=4 bw=7 bh=5 row_bottom=9
+[town_gen] N-zone1 zone (44,3,33,17) placed=4/8  attempts=7  skip_no_bld=0  skip_too_big=1  skip_overlap=3
+[town_gen] N-zone1 SLOT ox=45 oy=29 bw=14 bh=10 row_bottom=39
+[town_gen] N-zone1 SLOT ox=59 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] N-zone1 SLOT ox=69 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] N-zone1 SLOT ox=45 oy=23 bw=7 bh=5 row_bottom=28
+[town_gen] N-zone1 SLOT ox=52 oy=23 bw=7 bh=5 row_bottom=28
+[town_gen] N-zone1 SLOT ox=59 oy=24 bw=6 bh=4 row_bottom=28
+[town_gen] N-zone1 SLOT ox=65 oy=24 bw=6 bh=4 row_bottom=28
+[town_gen] N-zone1 zone (44,22,33,18) placed=4/8  attempts=7  skip_no_bld=0  skip_too_big=1  skip_overlap=3
+[TOWN seed=3 wx=21 wy=51 role=N slots_attempted=28 slots_filled=16]
+[town_gen] NE-scatter  placed=8/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=32
+[town_gen] W-zone0 SLOT ox=4 oy=12 bw=7 bh=5 row_bottom=17
+[town_gen] W-zone0 SLOT ox=11 oy=9 bw=11 bh=8 row_bottom=17
+[town_gen] W-zone0 SLOT ox=4 oy=5 bw=10 bh=6 row_bottom=11
+[town_gen] W-zone0 SLOT ox=14 oy=6 bw=7 bh=5 row_bottom=11
+[town_gen] W-zone0 zone (3,3,23,15) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[town_gen] W-zone0 SLOT ox=29 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] W-zone0 SLOT ox=39 oy=12 bw=7 bh=5 row_bottom=17
+[town_gen] W-zone0 SLOT ox=29 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] W-zone0 SLOT ox=35 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] W-zone0 SLOT ox=41 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] W-zone0 zone (28,3,23,15) placed=3/8  attempts=5  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[town_gen] W-zone0 SLOT ox=54 oy=11 bw=8 bh=6 row_bottom=17
+[town_gen] W-zone0 SLOT ox=62 oy=10 bw=9 bh=7 row_bottom=17
+[town_gen] W-zone0 SLOT ox=54 oy=4 bw=8 bh=6 row_bottom=10
+[town_gen] W-zone0 SLOT ox=62 oy=4 bw=7 bh=6 row_bottom=10
+[town_gen] W-zone0 SLOT ox=69 oy=5 bw=7 bh=5 row_bottom=10
+[town_gen] W-zone0 zone (53,3,24,15) placed=3/8  attempts=5  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[town_gen] W-zone1 SLOT ox=4 oy=30 bw=12 bh=9 row_bottom=39
+[town_gen] W-zone1 SLOT ox=16 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] W-zone1 zone (3,25,23,15) placed=1/8  attempts=2  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] W-zone1 SLOT ox=29 oy=32 bw=14 bh=7 row_bottom=39
+[town_gen] W-zone1 SLOT ox=43 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] W-zone1 SLOT ox=29 oy=27 bw=6 bh=4 row_bottom=31
+[town_gen] W-zone1 SLOT ox=35 oy=27 bw=6 bh=4 row_bottom=31
+[town_gen] W-zone1 SLOT ox=41 oy=27 bw=6 bh=4 row_bottom=31
+[town_gen] W-zone1 zone (28,25,23,15) placed=3/8  attempts=5  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] W-zone1 SLOT ox=54 oy=34 bw=7 bh=5 row_bottom=39
+[town_gen] W-zone1 SLOT ox=61 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] W-zone1 SLOT ox=69 oy=35 bw=6 bh=4 row_bottom=39
+[town_gen] W-zone1 SLOT ox=54 oy=26 bw=9 bh=7 row_bottom=33
+[town_gen] W-zone1 SLOT ox=63 oy=29 bw=6 bh=4 row_bottom=33
+[town_gen] W-zone1 SLOT ox=69 oy=27 bw=7 bh=6 row_bottom=33
+[town_gen] W-zone1 zone (53,25,24,15) placed=4/8  attempts=6  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[TOWN seed=3 wx=20 wy=52 role=W slots_attempted=27 slots_filled=16]
+[town_gen] C-quad0 SLOT ox=4 oy=12 bw=7 bh=5 row_bottom=17
+[town_gen] C-quad0 SLOT ox=11 oy=8 bw=12 bh=9 row_bottom=17
+[town_gen] C-quad0 SLOT ox=23 oy=8 bw=12 bh=9 row_bottom=17
+[town_gen] C-quad0 zone (3,3,34,15) placed=2/5  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] C-quad1 SLOT ox=45 oy=10 bw=9 bh=7 row_bottom=17
+[town_gen] C-quad1 SLOT ox=54 oy=8 bw=12 bh=9 row_bottom=17
+[town_gen] C-quad1 SLOT ox=66 oy=13 bw=6 bh=4 row_bottom=17
+[town_gen] C-quad1 SLOT ox=72 oy=13 bw=3 bh=4 row_bottom=17
+[town_gen] C-quad1 zone (44,3,33,15) placed=2/5  attempts=4  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[town_gen] C-quad2 SLOT ox=4 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] C-quad2 SLOT ox=12 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] C-quad2 SLOT ox=22 oy=30 bw=11 bh=9 row_bottom=39
+[town_gen] C-quad2 zone (3,25,34,15) placed=2/5  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[town_gen] C-quad3 SLOT ox=45 oy=29 bw=14 bh=10 row_bottom=39
+[town_gen] C-quad3 SLOT ox=59 oy=31 bw=11 bh=8 row_bottom=39
+[town_gen] C-quad3 SLOT ox=70 oy=34 bw=6 bh=5 row_bottom=39
+[town_gen] C-quad3 zone (44,25,33,15) placed=2/5  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[TOWN seed=3 wx=21 wy=52 role=C slots_attempted=13 slots_filled=8]
+[town_gen] E-zone0 SLOT ox=4 oy=7 bw=14 bh=10 row_bottom=17
+[town_gen] E-zone0 SLOT ox=18 oy=11 bw=7 bh=6 row_bottom=17
+[town_gen] E-zone0 zone (3,3,23,15) placed=1/8  attempts=2  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] E-zone0 SLOT ox=29 oy=7 bw=14 bh=10 row_bottom=17
+[town_gen] E-zone0 SLOT ox=43 oy=12 bw=7 bh=5 row_bottom=17
+[town_gen] E-zone0 zone (28,3,23,15) placed=1/8  attempts=2  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] E-zone0 SLOT ox=54 oy=9 bw=10 bh=8 row_bottom=17
+[town_gen] E-zone0 SLOT ox=64 oy=11 bw=7 bh=6 row_bottom=17
+[town_gen] E-zone0 SLOT ox=54 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=60 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 SLOT ox=66 oy=4 bw=6 bh=4 row_bottom=8
+[town_gen] E-zone0 zone (53,3,24,15) placed=3/8  attempts=5  skip_no_bld=0  skip_too_big=2  skip_overlap=2
+[town_gen] E-zone1 SLOT ox=4 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] E-zone1 SLOT ox=14 oy=33 bw=7 bh=6 row_bottom=39
+[town_gen] E-zone1 SLOT ox=4 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 SLOT ox=10 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 SLOT ox=16 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 zone (3,25,23,15) placed=3/8  attempts=5  skip_no_bld=0  skip_too_big=1  skip_overlap=2
+[town_gen] E-zone1 SLOT ox=29 oy=29 bw=14 bh=10 row_bottom=39
+[town_gen] E-zone1 SLOT ox=43 oy=33 bw=7 bh=6 row_bottom=39
+[town_gen] E-zone1 zone (28,25,23,15) placed=1/8  attempts=2  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] E-zone1 SLOT ox=54 oy=31 bw=12 bh=8 row_bottom=39
+[town_gen] E-zone1 SLOT ox=66 oy=35 bw=6 bh=4 row_bottom=39
+[town_gen] E-zone1 SLOT ox=54 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 SLOT ox=60 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 SLOT ox=66 oy=26 bw=6 bh=4 row_bottom=30
+[town_gen] E-zone1 zone (53,25,24,15) placed=3/8  attempts=5  skip_no_bld=0  skip_too_big=2  skip_overlap=2
+[TOWN seed=3 wx=22 wy=52 role=E slots_attempted=21 slots_filled=12]
+[town_gen] SW-scatter  placed=10/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=30
+[town_gen] S-zone0 SLOT ox=4 oy=7 bw=7 bh=6 row_bottom=13
+[town_gen] S-zone0 SLOT ox=11 oy=4 bw=12 bh=9 row_bottom=13
+[town_gen] S-zone0 SLOT ox=23 oy=5 bw=10 bh=8 row_bottom=13
+[town_gen] S-zone0 zone (3,3,34,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] S-zone0 SLOT ox=4 oy=19 bw=10 bh=7 row_bottom=26
+[town_gen] S-zone0 SLOT ox=14 oy=21 bw=7 bh=5 row_bottom=26
+[town_gen] S-zone0 SLOT ox=21 oy=19 bw=9 bh=7 row_bottom=26
+[town_gen] S-zone0 SLOT ox=30 oy=22 bw=6 bh=4 row_bottom=26
+[town_gen] S-zone0 zone (3,16,34,11) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] S-zone0 SLOT ox=4 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] S-zone0 SLOT ox=14 oy=31 bw=16 bh=8 row_bottom=39
+[town_gen] S-zone0 SLOT ox=30 oy=35 bw=6 bh=4 row_bottom=39
+[town_gen] S-zone0 zone (3,29,34,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] S-zone1 SLOT ox=45 oy=8 bw=7 bh=5 row_bottom=13
+[town_gen] S-zone1 SLOT ox=52 oy=5 bw=10 bh=8 row_bottom=13
+[town_gen] S-zone1 SLOT ox=62 oy=7 bw=8 bh=6 row_bottom=13
+[town_gen] S-zone1 SLOT ox=70 oy=9 bw=6 bh=4 row_bottom=13
+[town_gen] S-zone1 zone (44,3,33,11) placed=2/8  attempts=4  skip_no_bld=0  skip_too_big=0  skip_overlap=2
+[town_gen] S-zone1 SLOT ox=45 oy=20 bw=10 bh=6 row_bottom=26
+[town_gen] S-zone1 SLOT ox=55 oy=18 bw=11 bh=8 row_bottom=26
+[town_gen] S-zone1 SLOT ox=66 oy=17 bw=10 bh=9 row_bottom=26
+[town_gen] S-zone1 zone (44,16,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=0  skip_overlap=1
+[town_gen] S-zone1 SLOT ox=45 oy=31 bw=10 bh=8 row_bottom=39
+[town_gen] S-zone1 SLOT ox=55 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] S-zone1 SLOT ox=63 oy=33 bw=8 bh=6 row_bottom=39
+[town_gen] S-zone1 zone (44,29,33,11) placed=2/8  attempts=3  skip_no_bld=0  skip_too_big=1  skip_overlap=1
+[TOWN seed=3 wx=21 wy=53 role=S slots_attempted=20 slots_filled=12]
+[town_gen] SE-scatter  placed=6/15  attempts=40/40  skip_no_bld=0  skip_oob=0  skip_overlap=34
+[gen] waystones placed in chunk (65,74): 1

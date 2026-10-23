@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\.codex-review\worldgen-g1-input\Resonance_G1_Codex_Brief\reference\approved_review\evidence\town_roads\probe_access_and_atlas.py", line 21, in <module>
+    from PIL import Image, ImageColor, ImageDraw, ImageFont
+ModuleNotFoundError: No module named 'PIL'
