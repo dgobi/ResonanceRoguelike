@@ -1,3 +1,17 @@
+# Start here — B2 development copy (23 October 2026)
+
+Use `G:\GameDev\RoguelikeBaseline-20261020\project`, branch
+`codex/b2-reconstruction`. B1 was accepted; B2 repairs component, hook, timer and
+item reconstruction. Run `.\.venv\Scripts\python.exe tools/verify_b2.py` from the
+project root. This includes the complete B1 regression suite and requires no
+manual acceptance work. See [B2_STATE](B2_STATE.md), [B2_VERIFICATION](B2_VERIFICATION.md)
+and [B2_DEFERRED](B2_DEFERRED.md). For optional play, use the unchanged disposable
+launcher with a new name, e.g. `tools/baseline.py --session owner-b2-first --seed 20261020`.
+The existing `.venv` and normal debug bindings remain unchanged.
+
+<details>
+<summary>Accepted B1 checkpoint and earlier history — retained, superseded where stated above</summary>
+
 # Start here — B1 development copy
 
 The isolated project is `G:\GameDev\RoguelikeBaseline-20261020\project`, on
@@ -112,5 +126,7 @@ For diagnostic persistence use [the documented harness](OBSERVATIONS.md), which 
 Stop with the window close button after accepting that unsaved progress may be lost. Keep each experimental world in its own named session; restoration means a fresh named copy. Do not merge disposable saves into personal saves. Only load saves you created yourself: the present format uses pickle and an `eval` path and has no robust compatibility or transactional recovery contract.
 
 The startup, movement, manual wait and inventory screen were observed. Full normal-input combat/travel/crafting coverage remains incomplete because native letter/Enter/Escape injection did not reach the game and physical Escape then stopped desktop automation. [OBSERVATIONS.md](OBSERVATIONS.md) records each remaining scenario. Saving underground and explicit empty-state restoration demonstrably fail diagnostic invariants. This is a runnable development baseline, not a certified persistent campaign.
+
+</details>
 
 </details>

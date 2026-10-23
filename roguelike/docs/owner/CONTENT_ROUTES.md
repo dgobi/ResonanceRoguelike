@@ -1,3 +1,18 @@
+# Current B2 route update — 23 October 2026
+
+Inventory now preserves explicit instance nutrition, hydration, weight, count,
+qualities/keywords, fuel, liquid, text, remains/coatings and temporary armor fields.
+Factory mutable values belong to individual instances. Perk handlers and survival
+configuration derive after every successful full load. Existing actor stats and
+perception fields are applied on restoration. Processing in hot surface/submap
+maps now advances once per actual turn and produces its result on the owning map.
+See [B2_STATE](B2_STATE.md) for exact fields and [B2_DEFERRED](B2_DEFERRED.md) for
+unimplemented effect consumers and container/transfer boundaries. The dated route
+notes below are historical where superseded by B1/B2.
+
+<details>
+<summary>Accepted B1 checkpoint and earlier history — retained, superseded where stated above</summary>
+
 > B1 update, 22 October 2026: item rows now have exact save-local equipment references; creature serialization uses `_creature_id`; armor and offhand light ownership are rebuilt. See [B1_FORMAT](B1_FORMAT.md). The authoring-route inventory below is preserved as Arc A context; its persistence-failure and input-coverage statements are historical. Current automated route evidence is in [B1_VERIFICATION](B1_VERIFICATION.md).
 
 # Content routes: status and consumer map
@@ -45,3 +60,5 @@ The lab and town are also separate consumers, not interchangeable layout contrac
 ## Next documentation contracts
 
 After repairing the relevant boundary, expand one page at a time: transfers/equipment; combat/effects; processing/background time; creatures/pursuit; generation/entrances; language/discovery; rendering/tools; complete save-field ledger. Each needs owner/state/units, route, accepted fields, prerequisites, action cost, scene scope, persistence/reset/recompute, rejection behavior, one observed example and a reversible exercise. A successful constructor or parse is not sufficient evidence of gameplay support.
+
+</details>

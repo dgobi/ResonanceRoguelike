@@ -1,3 +1,17 @@
+# World and state — B2 current contract (23 October 2026)
+
+B1's scene, row-reference and replacement guarantees remain. B2 adds explicit
+component and item state, route-independent Needs setup, deterministic perk-hook
+replacement and immediate derived bonuses. Saved durations resume on the next
+turn; pending UI commands from the old graph are cancelled. In-memory processing
+uses both actual cache stores and ticks each map once. Full field policies,
+legacy-v2 defaults and deliberate resets are in [B2_STATE](B2_STATE.md).
+Travel writes, inactive dirty flushing and coherent whole-slot checkpoints remain
+B3; no campaign rollback or crash-safety claim follows from these repairs.
+
+<details>
+<summary>Accepted B1 checkpoint and earlier history — retained, superseded where stated above</summary>
+
 # World and state — B1 current contract
 
 The full scene address is `(world_x, world_y, current_submap_id-or-None)`.
@@ -86,5 +100,7 @@ The bounded fixture gives surface `(3,3)` a grass marker and a hollow revenant; 
 Example invariant: empty saved inventory/equipment should replace six bootstrap items and the bootstrap offhand torch. The actual fresh-process test leaves all six starter items. A one-jerky inventory with all empty saved slots replaces the inventory but retains an offhand torch **outside** it. These are separate failures.
 
 Check with `tools/persistence_diagnostics.py --prefix my-state-check` in a new session prefix. Each result separates harness completion from expected property and observed value. Treat its exits and JSON as explained in OBSERVATIONS.md. No save migration, arbitrary old-save loading, crash recovery or complete field ledger is certified here.
+
+</details>
 
 </details>

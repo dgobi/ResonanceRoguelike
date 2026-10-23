@@ -1,3 +1,20 @@
+# Current status — B2 (23 October 2026)
+
+Accepted B1 is the base. B2 implements component replacement, Needs configuration,
+perk-hook reconstruction and immediate bonuses, explicit timers and item instance
+values, restoration of already-written actor fields and correct offscreen hot-map
+processing ownership. The autonomous gate is `tools/verify_b2.py`; its final
+[evidence](../../../evidence/b2-results.json) contains B2 checks and the complete B1
+regression record. [B2_VERIFICATION](B2_VERIFICATION.md) defines its enforced cases.
+
+The four original B2 defects are now positive regression properties. The four
+remaining dynamically reproduced B3/C/UI defects and additional source limits are
+in [B2_DEFERRED](B2_DEFERRED.md). Recommend B3 next. Creative authority, content,
+normal controls, runtime versions and the original project are preserved.
+
+<details>
+<summary>Accepted B1 checkpoint and earlier history — retained, superseded where stated above</summary>
+
 # Current implementation and evidence status
 
 B1 (22 October 2026) implements scene identity, cold full-load replacement,
@@ -81,5 +98,7 @@ All original text is retained below a short banner pointing here. The labels sco
 5. World/authoring: entrance footprint/link preservation, generation policy, active schemas/duplicate IDs, actual loot routes, painter losslessness, UI modes.
 
 These are retained findings, not fixes delivered in Arc A. Do not combine the whole backlog into B1.
+
+</details>
 
 </details>

@@ -1,0 +1,3348 @@
+[
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-01",
+    "property": "Needs configured on every route",
+    "expected": true,
+    "observed": false
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-02",
+    "property": "acquired hooks reconstructed exactly once",
+    "expected": [
+      "handle_attuned_turn",
+      "handle_indifference_turn",
+      "handle_marrow_drink_turn",
+      "perk_corruption_channel_turn",
+      "perk_hardened_step_tile_entered"
+    ],
+    "observed": []
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-03",
+    "property": "immediate replacement: engine",
+    "expected": {
+      "true_sight_turns": 17,
+      "player_speed_bonus": 0.2,
+      "player_speed_bonus_turns": 3,
+      "_move_debt": 0.25,
+      "rain_collection_progress": 3,
+      "_wraith_overcorrect_turns": 2,
+      "wind_turn": 11,
+      "_last_exposure_tier": 3,
+      "_last_chunk_entry": [
+        11,
+        12
+      ]
+    },
+    "observed": {
+      "true_sight_turns": 0,
+      "player_speed_bonus": 0.0,
+      "player_speed_bonus_turns": 0,
+      "_move_debt": 0.0,
+      "rain_collection_progress": 0,
+      "_wraith_overcorrect_turns": 0,
+      "wind_turn": 0,
+      "_last_exposure_tier": 0,
+      "_last_chunk_entry": [
+        0,
+        0
+      ]
+    }
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-03",
+    "property": "immediate replacement: status",
+    "expected": {
+      "chilled_turns": 2,
+      "_sickness_turns": 3
+    },
+    "observed": {
+      "chilled_turns": 0,
+      "_sickness_turns": 0
+    }
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-01",
+    "property": "immediate replacement: needs",
+    "expected": {
+      "configured": true,
+      "hunger_rate": 0.001,
+      "thirst_rate": 0.00125,
+      "hunger_label": "Sated",
+      "stages": 4
+    },
+    "observed": {
+      "configured": false,
+      "hunger_rate": 0.001,
+      "thirst_rate": 0.00125,
+      "hunger_label": "Hungry",
+      "stages": 0
+    }
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-02",
+    "property": "immediate replacement: hooks",
+    "expected": [
+      "handle_attuned_turn",
+      "handle_indifference_turn",
+      "handle_marrow_drink_turn",
+      "perk_corruption_channel_turn",
+      "perk_hardened_step_tile_entered"
+    ],
+    "observed": []
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-02",
+    "property": "immediate replacement: bonuses",
+    "expected": [
+      2,
+      3,
+      2
+    ],
+    "observed": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-03",
+    "property": "immediate replacement: corruption",
+    "expected": [
+      0.5,
+      8
+    ],
+    "observed": [
+      0.5,
+      0
+    ]
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 17,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 3
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 40,
+      "bonuses": [
+        2,
+        3,
+        2
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        8
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 40,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        0
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 17,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 3
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 40,
+      "bonuses": [
+        2,
+        3,
+        2
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        8
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 40,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        0
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 17,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 3
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 40,
+      "bonuses": [
+        2,
+        3,
+        2
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        8
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 40,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        0
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-02",
+    "property": "Marrow Drink fires once after load",
+    "expected": 41,
+    "observed": 40
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-03",
+    "property": "first timer tick uses restored durations",
+    "expected": [
+      16,
+      2,
+      1,
+      2,
+      7,
+      1
+    ],
+    "observed": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-01",
+    "property": "configured hunger and sickness consume next turn",
+    "expected": 0.204,
+    "observed": 0.201
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-01",
+    "property": "configured thirst and sickness consume next turn",
+    "expected": 0.10625,
+    "observed": 0.10125
+  },
+  {
+    "worker": "before-components-filled-read",
+    "case": "B2-03",
+    "property": "durations expire without becoming permanent",
+    "expected": [
+      0,
+      false,
+      0,
+      0.0,
+      0,
+      0
+    ],
+    "observed": [
+      0,
+      true,
+      0,
+      0.0,
+      0,
+      0
+    ]
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-01",
+    "property": "Needs configured on every route",
+    "expected": true,
+    "observed": false
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-03",
+    "property": "immediate replacement: engine",
+    "expected": {
+      "true_sight_turns": 17,
+      "player_speed_bonus": 0.2,
+      "player_speed_bonus_turns": 3,
+      "_move_debt": 0.25,
+      "rain_collection_progress": 3,
+      "_wraith_overcorrect_turns": 2,
+      "wind_turn": 11,
+      "_last_exposure_tier": 3,
+      "_last_chunk_entry": [
+        11,
+        12
+      ]
+    },
+    "observed": {
+      "true_sight_turns": 99,
+      "player_speed_bonus": 0.2,
+      "player_speed_bonus_turns": 3,
+      "_move_debt": 0.25,
+      "rain_collection_progress": 3,
+      "_wraith_overcorrect_turns": 2,
+      "wind_turn": 11,
+      "_last_exposure_tier": 3,
+      "_last_chunk_entry": [
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-03",
+    "property": "immediate replacement: status",
+    "expected": {
+      "chilled_turns": 2,
+      "_sickness_turns": 3
+    },
+    "observed": {
+      "chilled_turns": 2,
+      "_sickness_turns": 99
+    }
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-01",
+    "property": "immediate replacement: needs",
+    "expected": {
+      "configured": true,
+      "hunger_rate": 0.001,
+      "thirst_rate": 0.00125,
+      "hunger_label": "Sated",
+      "stages": 4
+    },
+    "observed": {
+      "configured": false,
+      "hunger_rate": 0.001,
+      "thirst_rate": 0.00125,
+      "hunger_label": "Hungry",
+      "stages": 0
+    }
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-02",
+    "property": "immediate replacement: bonuses",
+    "expected": [
+      2,
+      3,
+      2
+    ],
+    "observed": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-03",
+    "property": "immediate replacement: corruption",
+    "expected": [
+      0.5,
+      8
+    ],
+    "observed": [
+      0.5,
+      0
+    ]
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 17,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 3
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 40,
+      "bonuses": [
+        2,
+        3,
+        2
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        8
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 99,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 99
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 40,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        0
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 17,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 3
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 40,
+      "bonuses": [
+        2,
+        3,
+        2
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        8
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 99,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 99
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 40,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        0
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 17,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 3
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 40,
+      "bonuses": [
+        2,
+        3,
+        2
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        8
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 99,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 99
+      },
+      "true_sight": true,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 40,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [
+          "attuned",
+          "corruption_channel",
+          "hardened_step",
+          "marrow_drink",
+          "the_indifference"
+        ],
+        {
+          "hardened_step": {
+            "uses": 7
+          }
+        },
+        {
+          "the_bound_name": 0.4
+        }
+      ],
+      "corruption": [
+        0.5,
+        0
+      ],
+      "language": [
+        [
+          "fixture_word"
+        ],
+        {
+          "fixture_word": 4
+        },
+        [
+          "lab_label_sarcophagus"
+        ],
+        [
+          [
+            "lab_label_sarcophagus",
+            0,
+            1
+          ]
+        ],
+        [
+          [
+            [
+              "lab_label_sarcophagus",
+              0
+            ],
+            "remembered"
+          ]
+        ],
+        true
+      ],
+      "level": [
+        3,
+        23,
+        200,
+        2,
+        2
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-03",
+    "property": "first timer tick uses restored durations",
+    "expected": [
+      16,
+      2,
+      1,
+      2,
+      7,
+      1
+    ],
+    "observed": [
+      98,
+      2,
+      1,
+      98,
+      0,
+      1
+    ]
+  },
+  {
+    "worker": "before-components-filled-same",
+    "case": "B2-03",
+    "property": "durations expire without becoming permanent",
+    "expected": [
+      0,
+      false,
+      0,
+      0.0,
+      0,
+      0
+    ],
+    "observed": [
+      82,
+      true,
+      0,
+      0.0,
+      0,
+      82
+    ]
+  },
+  {
+    "worker": "before-components-empty-read",
+    "case": "B2-01",
+    "property": "Needs configured on every route",
+    "expected": true,
+    "observed": false
+  },
+  {
+    "worker": "before-components-empty-read",
+    "case": "B2-01",
+    "property": "immediate replacement: needs",
+    "expected": {
+      "configured": true,
+      "hunger_rate": 0.001,
+      "thirst_rate": 0.00125,
+      "hunger_label": "Sated",
+      "stages": 4
+    },
+    "observed": {
+      "configured": false,
+      "hunger_rate": 0.001,
+      "thirst_rate": 0.00125,
+      "hunger_label": "Hungry",
+      "stages": 0
+    }
+  },
+  {
+    "worker": "before-components-empty-read",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-empty-read",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-empty-read",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-empty-same",
+    "case": "B2-01",
+    "property": "Needs configured on every route",
+    "expected": true,
+    "observed": false
+  },
+  {
+    "worker": "before-components-empty-same",
+    "case": "B2-02",
+    "property": "acquired hooks reconstructed exactly once",
+    "expected": [],
+    "observed": [
+      "handle_attuned_turn",
+      "handle_indifference_turn",
+      "handle_marrow_drink_turn",
+      "perk_corruption_channel_turn",
+      "perk_hardened_step_tile_entered"
+    ]
+  },
+  {
+    "worker": "before-components-empty-same",
+    "case": "B2-03",
+    "property": "immediate replacement: engine",
+    "expected": {
+      "true_sight_turns": 0,
+      "player_speed_bonus": 0.0,
+      "player_speed_bonus_turns": 0,
+      "_move_debt": 0.0,
+      "rain_collection_progress": 0,
+      "_wraith_overcorrect_turns": 0,
+      "wind_turn": 0,
+      "_last_exposure_tier": 0,
+      "_last_chunk_entry": [
+        0,
+        0
+      ]
+    },
+    "observed": {
+      "true_sight_turns": 99,
+      "player_speed_bonus": 0.2,
+      "player_speed_bonus_turns": 3,
+      "_move_debt": 0.25,
+      "rain_collection_progress": 3,
+      "_wraith_overcorrect_turns": 2,
+      "wind_turn": 11,
+      "_last_exposure_tier": 3,
+      "_last_chunk_entry": [
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "worker": "before-components-empty-same",
+    "case": "B2-03",
+    "property": "immediate replacement: status",
+    "expected": {
+      "chilled_turns": 0,
+      "_sickness_turns": 0
+    },
+    "observed": {
+      "chilled_turns": 2,
+      "_sickness_turns": 99
+    }
+  },
+  {
+    "worker": "before-components-empty-same",
+    "case": "B2-01",
+    "property": "immediate replacement: needs",
+    "expected": {
+      "configured": true,
+      "hunger_rate": 0.001,
+      "thirst_rate": 0.00125,
+      "hunger_label": "Sated",
+      "stages": 4
+    },
+    "observed": {
+      "configured": false,
+      "hunger_rate": 0.001,
+      "thirst_rate": 0.00125,
+      "hunger_label": "Hungry",
+      "stages": 0
+    }
+  },
+  {
+    "worker": "before-components-empty-same",
+    "case": "B2-02",
+    "property": "immediate replacement: hooks",
+    "expected": [],
+    "observed": [
+      "handle_attuned_turn",
+      "handle_indifference_turn",
+      "handle_marrow_drink_turn",
+      "perk_corruption_channel_turn",
+      "perk_hardened_step_tile_entered"
+    ]
+  },
+  {
+    "worker": "before-components-empty-same",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 99,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 99
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-empty-same",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 99,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 99
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-components-empty-same",
+    "case": "B2-02",
+    "property": "repeated load same derived state",
+    "expected": {
+      "engine": {
+        "true_sight_turns": 0,
+        "player_speed_bonus": 0.0,
+        "player_speed_bonus_turns": 0,
+        "_move_debt": 0.0,
+        "rain_collection_progress": 0,
+        "_wraith_overcorrect_turns": 0,
+        "wind_turn": 0,
+        "_last_exposure_tier": 0,
+        "_last_chunk_entry": [
+          0,
+          0
+        ]
+      },
+      "status": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": true,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Sated",
+        "stages": 4
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    },
+    "observed": {
+      "engine": {
+        "true_sight_turns": 99,
+        "player_speed_bonus": 0.2,
+        "player_speed_bonus_turns": 3,
+        "_move_debt": 0.25,
+        "rain_collection_progress": 3,
+        "_wraith_overcorrect_turns": 2,
+        "wind_turn": 11,
+        "_last_exposure_tier": 3,
+        "_last_chunk_entry": [
+          11,
+          12
+        ]
+      },
+      "status": {
+        "chilled_turns": 2,
+        "_sickness_turns": 99
+      },
+      "true_sight": false,
+      "needs": {
+        "configured": false,
+        "hunger_rate": 0.001,
+        "thirst_rate": 0.00125,
+        "hunger_label": "Hungry",
+        "stages": 0
+      },
+      "hunger": 0.2,
+      "thirst": 0.1,
+      "hooks": [
+        "handle_attuned_turn",
+        "handle_indifference_turn",
+        "handle_marrow_drink_turn",
+        "perk_corruption_channel_turn",
+        "perk_hardened_step_tile_entered"
+      ],
+      "hp": 60,
+      "bonuses": [
+        0,
+        0,
+        0
+      ],
+      "perks": [
+        [],
+        {},
+        {}
+      ],
+      "corruption": [
+        0.0,
+        0
+      ],
+      "language": [
+        [],
+        {},
+        [],
+        [],
+        [],
+        false
+      ],
+      "level": [
+        1,
+        0,
+        100,
+        1,
+        0
+      ],
+      "turn": 480
+    }
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 weight",
+    "expected": 0.25,
+    "observed": 0.2
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 count",
+    "expected": 2,
+    "observed": 1
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 nutrition",
+    "expected": 137,
+    "observed": 0.35
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 hydration",
+    "expected": 53,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 heal_amount",
+    "expected": 2,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 eat_message",
+    "expected": "Fixture ration consumed.",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 drink_message",
+    "expected": "Fixture drink.",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 qualities",
+    "expected": {
+      "fixture": 0
+    },
+    "observed": {}
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 description",
+    "expected": "Distinct preserved instance.",
+    "observed": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless."
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 harvest_from",
+    "expected": "corpse",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 decay_timer",
+    "expected": 9,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 source_creature",
+    "expected": "plague_crow",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 consumed_on_use",
+    "expected": false,
+    "observed": true
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 _temp_av_bonus",
+    "expected": 2,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 0 _temp_av_hits",
+    "expected": 4,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 weight",
+    "expected": 1.25,
+    "observed": 0.2
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 count",
+    "expected": 3,
+    "observed": 1
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 nutrition",
+    "expected": 237,
+    "observed": 0.35
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 hydration",
+    "expected": 54,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 heal_amount",
+    "expected": 3,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 eat_message",
+    "expected": "Fixture ration consumed.",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 drink_message",
+    "expected": "Fixture drink.",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 qualities",
+    "expected": {
+      "fixture": 1
+    },
+    "observed": {}
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 description",
+    "expected": "Distinct preserved instance.",
+    "observed": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless."
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 harvest_from",
+    "expected": "corpse",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 keywords",
+    "expected": [
+      {
+        "tag": "edible",
+        "tier": 3
+      }
+    ],
+    "observed": [
+      {
+        "tag": "edible",
+        "tier": 2
+      }
+    ]
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 decay_timer",
+    "expected": 10,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 source_creature",
+    "expected": "plague_crow",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 consumed_on_use",
+    "expected": false,
+    "observed": true
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 _temp_av_bonus",
+    "expected": 3,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 1 _temp_av_hits",
+    "expected": 5,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 2 _temp_av_bonus",
+    "expected": 3,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 2 _temp_av_hits",
+    "expected": 7,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 3 burn_turns",
+    "expected": 37,
+    "observed": 600
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "row 3 light_data",
+    "expected": {
+      "radius": 4,
+      "color": [
+        255,
+        180,
+        60
+      ],
+      "falloff": 1.8,
+      "flicker": true
+    },
+    "observed": {
+      "radius": 8,
+      "color": [
+        255,
+        180,
+        60
+      ],
+      "falloff": 1.8,
+      "flicker": true
+    }
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "restored light exact instance and custom burn limit",
+    "expected": [
+      true,
+      37
+    ],
+    "observed": [
+      true,
+      600
+    ]
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "factory instance owns its light data",
+    "expected": {
+      "radius": 8,
+      "color": [
+        255,
+        180,
+        60
+      ],
+      "falloff": 1.8,
+      "flicker": true
+    },
+    "observed": {
+      "radius": 99,
+      "color": [
+        255,
+        180,
+        60
+      ],
+      "falloff": 1.8,
+      "flicker": true
+    }
+  },
+  {
+    "worker": "before-items-distinct-read",
+    "case": "B2-04",
+    "property": "restored nutrition affects hunger",
+    "expected": 0.063,
+    "observed": 0.0
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 weight",
+    "expected": 0.25,
+    "observed": 0.2
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 count",
+    "expected": 2,
+    "observed": 1
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 nutrition",
+    "expected": 137,
+    "observed": 0.35
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 hydration",
+    "expected": 53,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 heal_amount",
+    "expected": 2,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 eat_message",
+    "expected": "Fixture ration consumed.",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 drink_message",
+    "expected": "Fixture drink.",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 qualities",
+    "expected": {
+      "fixture": 0
+    },
+    "observed": {}
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 description",
+    "expected": "Distinct preserved instance.",
+    "observed": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless."
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 harvest_from",
+    "expected": "corpse",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 decay_timer",
+    "expected": 9,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 source_creature",
+    "expected": "plague_crow",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 consumed_on_use",
+    "expected": false,
+    "observed": true
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 _temp_av_bonus",
+    "expected": 2,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 0 _temp_av_hits",
+    "expected": 4,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 weight",
+    "expected": 1.25,
+    "observed": 0.2
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 count",
+    "expected": 3,
+    "observed": 1
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 nutrition",
+    "expected": 237,
+    "observed": 0.35
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 hydration",
+    "expected": 54,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 heal_amount",
+    "expected": 3,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 eat_message",
+    "expected": "Fixture ration consumed.",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 drink_message",
+    "expected": "Fixture drink.",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 qualities",
+    "expected": {
+      "fixture": 1
+    },
+    "observed": {}
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 description",
+    "expected": "Distinct preserved instance.",
+    "observed": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless."
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 harvest_from",
+    "expected": "corpse",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 keywords",
+    "expected": [
+      {
+        "tag": "edible",
+        "tier": 3
+      }
+    ],
+    "observed": [
+      {
+        "tag": "edible",
+        "tier": 2
+      }
+    ]
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 decay_timer",
+    "expected": 10,
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 source_creature",
+    "expected": "plague_crow",
+    "observed": null
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 consumed_on_use",
+    "expected": false,
+    "observed": true
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 _temp_av_bonus",
+    "expected": 3,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 1 _temp_av_hits",
+    "expected": 5,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 2 _temp_av_bonus",
+    "expected": 3,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 2 _temp_av_hits",
+    "expected": 7,
+    "observed": 0
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "row 3 burn_turns",
+    "expected": 37,
+    "observed": 600
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "restored light exact instance and custom burn limit",
+    "expected": [
+      true,
+      37
+    ],
+    "observed": [
+      true,
+      600
+    ]
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "factory instance owns its light data",
+    "expected": {
+      "radius": 4,
+      "color": [
+        255,
+        180,
+        60
+      ],
+      "falloff": 1.8,
+      "flicker": true
+    },
+    "observed": {
+      "radius": 99,
+      "color": [
+        255,
+        180,
+        60
+      ],
+      "falloff": 1.8,
+      "flicker": true
+    }
+  },
+  {
+    "worker": "before-items-distinct-same",
+    "case": "B2-04",
+    "property": "restored nutrition affects hunger",
+    "expected": 0.063,
+    "observed": 0.0
+  },
+  {
+    "worker": "before-actors-modified-read",
+    "case": "B2-06",
+    "property": "actor restored fighter",
+    "expected": [
+      71,
+      37,
+      8,
+      4,
+      6
+    ],
+    "observed": [
+      14,
+      37,
+      3,
+      1,
+      6
+    ]
+  },
+  {
+    "worker": "before-actors-modified-read",
+    "case": "B2-06",
+    "property": "actor restored perception",
+    "expected": [
+      "fixture",
+      [
+        "fixture_enemy"
+      ],
+      3,
+      12,
+      true
+    ],
+    "observed": [
+      "hollow",
+      [
+        "player"
+      ],
+      7,
+      6,
+      true
+    ]
+  },
+  {
+    "worker": "before-actors-modified-read",
+    "case": "B2-06",
+    "property": "actor restored ai",
+    "expected": [
+      13,
+      14,
+      6,
+      19,
+      2
+    ],
+    "observed": [
+      null,
+      null,
+      0,
+      10,
+      8
+    ]
+  },
+  {
+    "worker": "before-actors-modified-read",
+    "case": "B2-06",
+    "property": "actor restored status",
+    "expected": [
+      2,
+      4,
+      5
+    ],
+    "observed": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "worker": "before-actors-modified-read",
+    "case": "B2-06",
+    "property": "actor restored last_target",
+    "expected": [
+      13,
+      14
+    ],
+    "observed": [
+      null,
+      null
+    ]
+  },
+  {
+    "worker": "before-actors-modified-read",
+    "case": "B2-06",
+    "property": "arrival countdown advances from restored value",
+    "expected": 1,
+    "observed": 0
+  },
+  {
+    "worker": "before-actors-modified-same",
+    "case": "B2-06",
+    "property": "actor restored fighter",
+    "expected": [
+      71,
+      37,
+      8,
+      4,
+      6
+    ],
+    "observed": [
+      14,
+      37,
+      3,
+      1,
+      6
+    ]
+  },
+  {
+    "worker": "before-actors-modified-same",
+    "case": "B2-06",
+    "property": "actor restored perception",
+    "expected": [
+      "fixture",
+      [
+        "fixture_enemy"
+      ],
+      3,
+      12,
+      true
+    ],
+    "observed": [
+      "hollow",
+      [
+        "player"
+      ],
+      7,
+      6,
+      true
+    ]
+  },
+  {
+    "worker": "before-actors-modified-same",
+    "case": "B2-06",
+    "property": "actor restored ai",
+    "expected": [
+      13,
+      14,
+      6,
+      19,
+      2
+    ],
+    "observed": [
+      null,
+      null,
+      0,
+      10,
+      8
+    ]
+  },
+  {
+    "worker": "before-actors-modified-same",
+    "case": "B2-06",
+    "property": "actor restored status",
+    "expected": [
+      2,
+      4,
+      5
+    ],
+    "observed": [
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "worker": "before-actors-modified-same",
+    "case": "B2-06",
+    "property": "actor restored last_target",
+    "expected": [
+      13,
+      14
+    ],
+    "observed": [
+      null,
+      null
+    ]
+  },
+  {
+    "worker": "before-actors-modified-same",
+    "case": "B2-06",
+    "property": "arrival countdown advances from restored value",
+    "expected": 1,
+    "observed": 0
+  },
+  {
+    "worker": "before-processing-owners-same",
+    "case": "B2-05",
+    "property": "all three maps tick exactly once including paired surface",
+    "expected": [
+      1,
+      1,
+      1
+    ],
+    "observed": [
+      1,
+      2,
+      2
+    ]
+  },
+  {
+    "worker": "before-processing-owners-same",
+    "case": "B2-05",
+    "property": "paired surface finishes",
+    "expected": {},
+    "observed": {
+      "(5, 5)": {
+        "item_id": "dried_bitter_herb",
+        "turns_remaining": 2,
+        "decor_id": "",
+        "source": "drying"
+      }
+    }
+  },
+  {
+    "worker": "before-processing-owners-same",
+    "case": "B2-05",
+    "property": "paired surface owns exactly one completed item",
+    "expected": [
+      "dried_bitter_herb"
+    ],
+    "observed": []
+  },
+  {
+    "worker": "before-processing-owners-same",
+    "case": "B2-05",
+    "property": "inactive submap finishes",
+    "expected": {},
+    "observed": {
+      "(5, 5)": {
+        "item_id": "dried_bitter_herb",
+        "turns_remaining": 2,
+        "decor_id": "",
+        "source": "drying"
+      }
+    }
+  },
+  {
+    "worker": "before-processing-owners-same",
+    "case": "B2-05",
+    "property": "inactive submap owns exactly one completed item",
+    "expected": [
+      "dried_bitter_herb"
+    ],
+    "observed": []
+  },
+  {
+    "worker": "before-processing-owners-same",
+    "case": "B2-05",
+    "property": "completion never duplicated",
+    "expected": [
+      1,
+      1,
+      1
+    ],
+    "observed": [
+      1,
+      0,
+      0
+    ]
+  }
+]

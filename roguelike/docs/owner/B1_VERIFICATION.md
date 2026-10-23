@@ -1,3 +1,5 @@
+> Historical accepted B1 contract. Current B2 status and commands are in [B2_VERIFICATION](B2_VERIFICATION.md). Four B2 defects below are now repaired; the current B1 regression runner asserts those repairs explicitly and retains the remaining baseline comparisons.
+
 # Autonomous B1 verification
 
 From `G:\GameDev\RoguelikeBaseline-20261020\project`, run:

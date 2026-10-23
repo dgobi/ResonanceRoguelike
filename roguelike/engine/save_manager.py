@@ -3,6 +3,11 @@ from __future__ import annotations
 import json
 import pickle
 import math
+import ast
+import copy
+from engine.save_components import (serialize_item, validate_item, restore_item,
+    serialize_runtime, restore_runtime, validate_components, serialize_actor_runtime,
+    validate_actor_runtime, restore_actor_runtime)
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
@@ -330,6 +335,7 @@ class SaveManager:
             engine.local_map = cached.local_map
             engine.entities = [engine.player] + actors
             engine._pending_transfer = []
+            engine._restore_loaded_state()
             engine._update_fov()
             engine.log.add("The world reassembles itself around you.", LIFE_GREEN)
             return True
@@ -566,6 +572,7 @@ def _serialize_player(engine: "Engine") -> dict:
         "current_submap_id":  engine.current_submap_id,
         "surface_return_x":   engine.surface_return_x,
         "surface_return_y":   engine.surface_return_y,
+        "component_state": serialize_runtime(engine),
         "true_sight":   getattr(p, "true_sight",   False),
         "dodge_chance": getattr(p, "dodge_chance", 0.05),
         "turn":      engine.world_time.turn,
@@ -583,22 +590,11 @@ def _serialize_player(engine: "Engine") -> dict:
         } if needs else None,
         "corruption": {
             "value": corrupt.value,
+            "whisper_cooldown": corrupt._whisper_cooldown,
         } if corrupt else None,
         "inventory": {
             "capacity": inv.capacity,
-            "items": [
-                {
-                    "item_id":           i.item_id,
-                    "name":              i.name,
-                    "on_use":            i.on_use,
-                    "turns_lit":         i.turns_lit,
-                    "liquid":            i.liquid,
-                    "liquid_volume":     i.liquid_volume,
-                    "text_id":           getattr(i, "text_id", None),
-                    "temporary_essence": getattr(i, "temporary_essence", []) or None,
-                }
-                for i in inv.items
-            ],
+            "items": [serialize_item(i) for i in inv.items],
         },
         "light_source": {
             "radius":  light.radius,
@@ -655,6 +651,7 @@ def _serialize_player(engine: "Engine") -> dict:
 
 def _validate_player_references(saved: dict, data) -> None:
     from components.equipment import SLOTS
+    validate_components(saved)
     inv = saved.get("inventory")
     if not isinstance(inv, dict) or not isinstance(inv.get("items"), list):
         raise SaveFormatError("inventory must be an object with capacity and items array")
@@ -665,6 +662,7 @@ def _validate_player_references(saved: dict, data) -> None:
         item_id = row.get("item_id") if isinstance(row, dict) else None
         if not isinstance(item_id, str) or item_id not in data.items:
             raise SaveFormatError(f"inventory row {index}: unknown item definition {item_id!r}")
+        validate_item(row, f"inventory row {index}")
     equipment = saved.get("equipment")
     if not isinstance(equipment, dict):
         raise SaveFormatError("equipment must be an object")
@@ -688,6 +686,9 @@ def _validate_player_references(saved: dict, data) -> None:
             offhand = equipment.get("offhand")
             if offhand is None or not data.items[offhand["item_id"]].get("light"):
                 raise SaveFormatError("Active item light requires an equipped offhand light")
+            row = inv["items"][offhand["inventory_index"]]
+            if "light_data" in row and not row["light_data"]:
+                raise SaveFormatError("Active item light requires restored offhand light_data")
 
 
 def _deserialize_player(data: dict, engine: "Engine") -> None:
@@ -699,6 +700,10 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
 
     _validate_player_references(data, engine.data)
     p            = engine.player
+    # Replacement is independent of the pre-load player component graph.
+    for component in ("fighter", "needs", "corruption", "language", "perks", "level"):
+        setattr(p, component, None)
+    engine._attuned_bonus_active = False
     # Clear flags even on old objects held by callers; then replace belongings.
     old_items = list(getattr(getattr(p, "inventory", None), "items", []))
     old_items += list(getattr(getattr(p, "equipment", None), "slots", {}).values())
@@ -717,23 +722,26 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
 
     engine.world_time.turn = data.get("turn", 0)
 
-    if data.get("fighter"):
+    if data.get("fighter") is not None:
         f = data["fighter"]
         p.fighter              = Fighter(f["max_hp"], f["power"], f["defense"])
         p.fighter.body_id      = f.get("body_id", "body_player")
         p.fighter.hp           = f.get("hp", f["max_hp"])
+        p.fighter._dead        = p.fighter.hp <= 0
+        p.is_alive             = not p.fighter._dead
         p.fighter.effective_av = f.get("effective_av", 0)
 
-    if data.get("needs"):
+    if data.get("needs") is not None:
         n = data["needs"]
         p.needs        = Needs()
         p.needs.hunger = n["hunger"]
         p.needs.thirst = n["thirst"]
 
-    if data.get("corruption"):
+    if data.get("corruption") is not None:
         c = data["corruption"]
         p.corruption       = Corruption()
         p.corruption.value = c["value"]
+        p.corruption._whisper_cooldown = c.get("whisper_cooldown", 0)
 
     if data.get("inventory"):
         from engine.item_factory import ItemFactory
@@ -745,17 +753,7 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
             item = factory.create(item_id, p.x, p.y)
             if item is None:
                 raise SaveFormatError(f"Cannot reconstruct inventory item {item_id!r}")
-            item.name          = idata.get("name",         item.name)
-            item.on_use        = idata.get("on_use",        item.on_use)
-            item.turns_lit     = idata.get("turns_lit",     0)
-            item.liquid        = idata.get("liquid",        item.liquid)
-            item.liquid_volume = idata.get("liquid_volume", item.liquid_volume)
-            text_id = idata.get("text_id")
-            if text_id:
-                item.text_id = text_id
-            te = idata.get("temporary_essence")
-            if te:
-                item.temporary_essence = list(te)
+            restore_item(item, idata)
             # Restoration is not acquisition. Preserve rows even if current
             # definitions make the saved bag overweight (capacity policy: B2).
             p.inventory.items.append(item)
@@ -771,7 +769,7 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
             active  = ls["active"],
         )
 
-    if data.get("language"):
+    if data.get("language") is not None:
         from components.language import Language
         ld   = data["language"]
         lang = Language()
@@ -780,13 +778,13 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
         lang.taught_texts       = set(ld.get("taught_texts", []))
         lang.recovered_spans    = set(tuple(s) for s in ld.get("recovered_spans", []))
         lang.recovered_text     = {
-            tuple(eval(k)): v
+            tuple(ast.literal_eval(k)): v
             for k, v in ld.get("recovered_text", {}).items()
         }
         lang.shown_lexicon_hint = ld.get("shown_lexicon_hint", False)
         p.language = lang
 
-    if data.get("perks"):
+    if data.get("perks") is not None:
         from components.perks import Perks
         pd     = data["perks"]
         perks  = Perks()
@@ -795,7 +793,7 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
         perks.affinity_scores = pd.get("affinity_scores", {})
         p.perks = perks
 
-    if data.get("level"):
+    if data.get("level") is not None:
         from components.level import LevelComponent
         ld = data["level"]
         lc = LevelComponent()
@@ -806,19 +804,17 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
         lc.total_levels_gained = ld.get("total_levels_gained", 0)
         p.level = lc
 
-    # Resonance / corruption state
-    if data.get("resonance"):
-        r = data["resonance"]
-        engine.resonance_exposure      = r.get("exposure", 0.0)
-        engine.corruption              = r.get("corruption", 0.0)
-        engine._corruption_thresholds  = set(r.get("thresholds", []))
-        engine._pull_thresholds_fired  = set(r.get("pull_thresholds", []))
-
-    # Weather state
-    if data.get("weather") and hasattr(engine, "weather"):
-        from engine.weather import WeatherSystem
-        engine.weather = WeatherSystem.from_dict(data["weather"], engine.rng)
-        engine.weather.load_mechanics(engine.data.weather_defs)
+    # Missing optional records reset; they never inherit unsaved session values.
+    r = data.get("resonance") or {}
+    engine.resonance_exposure = r.get("exposure", 0.0)
+    engine.corruption = r.get("corruption", 0.0)
+    engine._corruption_thresholds = set(r.get("thresholds", []))
+    engine._pull_thresholds_fired = set(r.get("pull_thresholds", []))
+    from engine.weather import WeatherSystem
+    engine.weather = (WeatherSystem.from_dict(data["weather"], engine.rng)
+                      if data.get("weather") else WeatherSystem(engine.rng))
+    engine.weather.load_mechanics(engine.data.weather_defs)
+    restore_runtime(engine, data)
 
     # Live pursuers
     engine._live_pursuers = []
@@ -902,6 +898,7 @@ def _serialize_entity(entity: "Actor") -> dict:
             "body_id":      fighter.body_id,
             "effective_av": fighter.effective_av,
         } if fighter else None,
+        "component_state": serialize_actor_runtime(entity),
         "ai_type":  type(ai).__name__ if ai else None,
         "ai_state": ai.state.value    if ai else None,
         "home_x":   ai.home_x         if ai else None,
@@ -938,6 +935,7 @@ def _validate_entities(rows, data) -> None:
         identity = row.get("id")
         if not isinstance(identity, str) or identity not in data.entities:
             raise SaveFormatError(f"Actor row {index}: invalid stable creature identity {identity!r}")
+        validate_actor_runtime(row)
         if identity == "stone_lurker":
             state = row.get("lurker")
             if (not isinstance(state, dict) or "hibernating" not in state
@@ -993,9 +991,13 @@ def _deserialize_entities(
         fighter = getattr(actor, "fighter", None)
         if fighter and d.get("fighter"):
             fd = d["fighter"]
+            fighter.max_hp       = fd.get("max_hp", fighter.max_hp)
+            fighter.power        = fd.get("power", fighter.power)
+            fighter.defense      = fd.get("defense", fighter.defense)
             fighter.body_id      = fd.get("body_id", "body_human")
             fighter.hp           = fd.get("hp", fighter.max_hp)
             fighter.effective_av = fd.get("effective_av", fighter.effective_av)
+            fighter._dead = fighter.hp <= 0
 
         # Restore AI state
         ai = getattr(actor, "ai", None)
@@ -1011,6 +1013,13 @@ def _deserialize_entities(
             ai.pursuit_turns_without_contact = d.get("pursuit_turns_without_contact", 0)
             ai.move_accumulator = d.get("move_accumulator", 0.0)
 
+        if actor.perception is not None:
+            for field in ("faction", "hostile_to", "sight_radius", "hearing_radius", "sees_in_dark"):
+                if field in d and d[field] is not None:
+                    setattr(actor.perception, field, copy.deepcopy(d[field]))
+        if ai is not None:
+            ai.wander_radius = d.get("wander_radius", ai.wander_radius)
+        restore_actor_runtime(actor, d)
         restored.append(actor)
 
     return restored

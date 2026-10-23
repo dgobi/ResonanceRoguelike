@@ -1,3 +1,20 @@
+# Next arc — B3 checkpoint coherence and recovery
+
+B1 is accepted; B2 completes component/derived-state reconstruction with the
+contract in [B2_STATE](B2_STATE.md) and the enforced autonomous gate in
+[B2_VERIFICATION](B2_VERIFICATION.md). Its completed changes are committed locally.
+
+B3 should define a coherent whole-slot checkpoint across player, world and scene
+records; flush inactive dirty state according to that policy; test interrupted
+writes and recoverable generations; and constrain rollback/slot/deletion behavior.
+Use the accepted B2 copy and new disposable save roots. Keep C transfer/crafting,
+D combat/effect lifecycle and UI text layout separate. No personal-save migration
+or destructive owner-save tests are implied. Headless/app-local verification remains
+the default; do not revive Arc A's superseded desktop/manual-window requirement.
+
+<details>
+<summary>Accepted B1 checkpoint and earlier history — retained, superseded where stated above</summary>
+
 # Next arc — B2 component and derived-state reconstruction
 
 B1 is the current bounded identity/replacement task. Use its final enforced gate
@@ -51,5 +68,7 @@ No creative redesign, save migration, engine swap, all-field persistence overhau
 Explain in plain language: surface and lab shared one address during full save; empty was mistaken for absent; a creature's costume was used as its identity. Show the new owners/keys/replacement order and what remains reset/recomputed or unsupported.
 
 Return a small patch, field/format changes, before/after diagnostics with independent processes, manual observations or an explicit blocker, and updates to WORLD_AND_STATE, STATUS and the decision log. Add an owner exercise that predicts two independent markers, saves/reloads, verifies both and reverses the fixture. Record owner learning separately from automated verification. Do not mark B1 complete merely because a harness exits zero.
+
+</details>
 
 </details>

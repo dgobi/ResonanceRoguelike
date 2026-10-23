@@ -1,31 +1,31 @@
 # Resonance roguelike — owner entry point
 
-B1 repairs development save/load identity and explicit replacement in the existing
-isolated copy. Read [START_HERE](roguelike/docs/owner/START_HERE.md),
-[world and state](roguelike/docs/owner/WORLD_AND_STATE.md),
-[the v2 format](roguelike/docs/owner/B1_FORMAT.md), and
-[verification](roguelike/docs/owner/B1_VERIFICATION.md).
+B2 reconstructs saved components and their derived systems in the same isolated
+copy, preserving accepted B1 scene/item identity guarantees. Read
+[START_HERE](roguelike/docs/owner/START_HERE.md), the
+[B2 field ledger](roguelike/docs/owner/B2_STATE.md), and
+[verification](roguelike/docs/owner/B2_VERIFICATION.md).
 
-From this root, the enforced autonomous command is:
+From this root, run the enforced autonomous gate:
 
 ```powershell
-.\.venv\Scripts\python.exe tools/verify_b1.py
+.\.venv\Scripts\python.exe tools/verify_b2.py
 ```
 
-It uses only disposable sessions, headless SDL, subprocesses and app-local game
-events. Final evidence: [b1-results.json](evidence/b1-results.json).
-Known unrelated defects: [B1_DEFERRED](roguelike/docs/owner/B1_DEFERRED.md).
-Next recommendation: [B2](roguelike/docs/owner/NEXT_ARC.md). No mandatory manual
-verification or personal-save migration is required or provided.
+It includes the complete B1 regression suite. All tests use disposable save roots,
+headless processes and app-local game events. Final evidence is
+[b2-results.json](evidence/b2-results.json). No routine verification is delegated
+to the owner. The supported environment remains the existing Python 3.11.0 /
+Pygame 2.6.1 / tcod 19.3.0 runtime with no added dependencies.
 
-The starting point is the complete preserved working copy plus Arc A commit
-`1b9531b`, not original HEAD alone. [Arc A provenance](evidence/PROVENANCE.md)
-retains that history. B1 uses branch `codex/b1-persistence` in
-`G:\GameDev\RoguelikeBaseline-20261020\project`; your original project stays
-separate. The owner requested a separate commit of its pre-existing work and a
-persistent accepted-work commit preference; these are recorded in its preservation
-commit and [AGENTS.md](AGENTS.md).
+B2 starts from accepted B1 commit `9bb0db8` on branch `codex/b2-reconstruction`
+in `G:\GameDev\RoguelikeBaseline-20261020\project`. The original project stays
+separate and untouched. Accepted-work commits follow [AGENTS.md](AGENTS.md).
+B1 and Arc A provenance remain in their dated evidence and owner handbook.
 
-The existing dark medieval setting, content and assets are unchanged. Broader
-Needs/hooks/timers remain B2; coherent checkpoints and failure recovery remain B3.
-Creative decisions stay in the [owner decision register](roguelike/docs/owner/DECISIONS.md).
+The development format remains v2 with explicit B2 extension records. Older B1
+v2 synthetic saves are tested; no personal saves are used or migrated. Current
+[remaining boundaries](roguelike/docs/owner/B2_DEFERRED.md) include B3 checkpoint
+coherence/dirty flushing, C transfer ownership and UI text height. Recommend
+[B3 next](roguelike/docs/owner/NEXT_ARC.md). Content, assets, normal controls and
+creative decisions remain unchanged.

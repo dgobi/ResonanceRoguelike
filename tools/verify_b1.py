@@ -68,6 +68,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--only", choices=["scenes", "gear", "lurker", "format", "journey", "characterize"])
     parser.add_argument("--baseline", type=Path, help="Reviewed baseline export if its Git commit is unavailable")
+    parser.add_argument("--runs-dir", type=Path, help="Parent for unique disposable runs (used by the B2 orchestrator)")
     parser.add_argument("--selfcheck-child", nargs=3, metavar=("MODE", "OUTPUT", "JOB"))
     parser.add_argument("--validate-evidence", nargs=4, metavar=("OUTPUT", "JOB", "EXIT_CODE", "TIMEOUT"))
     args = parser.parse_args()
@@ -82,7 +83,7 @@ def main():
         selfcheck_child(mode, path, json.loads(job))
         return 0
     run_id = "b1-" + time.strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:8]
-    run = ROOT / ".baseline" / run_id
+    run = (args.runs_dir or ROOT / ".baseline") / run_id
     run.mkdir(parents=True, exist_ok=False)
     dump(run / "disposable-b1.json", {"run_id": run_id, "seed": SEED, "purpose": "Disposable B1 acceptance; no personal saves"})
     env = dict(os.environ, **ENV)
@@ -96,7 +97,9 @@ def main():
         shutil.copytree(args.baseline, baseline, ignore=shutil.ignore_patterns(".git", ".venv", ".baseline", "saves", "__pycache__", "*.pyc"))
     else:
         zpath = run / "baseline.zip"
-        subprocess.run(["git", "archive", "--format=zip", "--output="+str(zpath), BASE_COMMIT], cwd=ROOT, check=True, timeout=30)
+        repository = subprocess.run(["git", "rev-parse", "--show-toplevel"], cwd=ROOT,
+                                    check=True, capture_output=True, text=True, timeout=10).stdout.strip()
+        subprocess.run(["git", "archive", "--format=zip", "--output="+str(zpath), BASE_COMMIT], cwd=repository, check=True, timeout=30)
         with zipfile.ZipFile(zpath) as z:
             if z.testzip():
                 raise RuntimeError("Baseline export CRC")
@@ -216,10 +219,16 @@ def main():
         check("H04",job["scenario"]+" canonical writer remains immutable",record["checkpoint"],hashes(Path(job["game"])/"saves/slot_0"))
     report["planned_workers"]=planned
     report["known_defect_ids"]=sorted(set(d["id"] for d in report["defects"]))
-    # Exact baseline/candidate characterization signatures must match.
+    # B2 intentionally repairs four characterized defects. Its positive behavior
+    # is enforced by b1_characterize; every remaining signature must still match.
+    resolved_b2 = {"B2-NEEDS", "B2-HOOKS", "B2-TIMER", "B2-OFFSCREEN-OWNER"}
+    report["resolved_by_b2"] = sorted(resolved_b2)
+    check("H03", "B2 repairs no longer reported as candidate defects", [],
+          sorted({d["id"] for d in report["defects"] if d["worker"].startswith("candidate") and d["id"] in resolved_b2}))
+    report["candidate_deferred_ids"] = sorted({d["id"] for d in report["defects"] if d["worker"].startswith("candidate")})
     signatures={}
     for flavor in ("baseline","candidate"):
-        signatures[flavor]=sorted((d["id"],json.dumps(d["symptom"],sort_keys=True)) for d in report["defects"] if d["worker"].startswith(flavor))
+        signatures[flavor]=sorted((d["id"],json.dumps(d["symptom"],sort_keys=True)) for d in report["defects"] if d["worker"].startswith(flavor) and d["id"] not in resolved_b2)
     check("H03","baseline/candidate exact deferred symptoms",signatures["baseline"],signatures["candidate"])
     required_keys = []
     for scenario, variants in (("scenes",("surface","submap")),

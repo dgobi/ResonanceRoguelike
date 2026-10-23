@@ -1,3 +1,22 @@
+# B2 observations — 23 October 2026
+
+The pre-B2 game source is the exact accepted `9bb0db8` tree, captured clean before
+edits. The new component probes reproduce missing Needs setup/hooks/timers, lost
+item/actor fields and offscreen processing failure on those bytes. Before evidence
+is under `evidence/b2-before`; the final current record is
+[b2-results.json](../../../evidence/b2-results.json).
+
+Fresh and same-process tests verify immediate reconstruction and subsequent actual
+turn consumers. Real original Engine.run journeys cover salve use, F5/F9,
+independent bootstrap readers, expiry, critical Needs damage, rain collection,
+Hardened Step movement and processing completion. Selected offscreen captures were
+inspected by Codex. The full B1 journeys/32 original diagnostic properties remain
+regressions. The [field ledger](B2_STATE.md) and [remaining defects](B2_DEFERRED.md)
+limit the claims; assertion totals count harness/source checks too.
+
+<details>
+<summary>Accepted B1 checkpoint and earlier history — retained, superseded where stated above</summary>
+
 # B1 observations and autonomous evidence — 22 October 2026
 
 Use [B1_VERIFICATION.md](B1_VERIFICATION.md) for the exact enforced command and
@@ -123,5 +142,7 @@ Use a new `--observe` session. These steps are a **pending checklist**, not reco
 Observation harness command example (while that particular marked session is running): write `{"action":"save"}` to its `.baseline/<name>/diagnostic-command.json`. The next event-poll wrapper invokes `SaveManager.save`; JSONL labels it diagnostic_before/after. Other bounded commands (capture, position, give, hunger, spawn) are explicit fixture operations in `tools/baseline.py`, never counted as player actions. Do not leave an old command for `--resume`: commands are read at first poll as well. Remove only that created command file before resuming, or use a session that has none.
 
 Normal-input checks need manual keyboard delivery or a separately repaired input-tool path. No change to game controls was made to hide this limitation.
+
+</details>
 
 </details>

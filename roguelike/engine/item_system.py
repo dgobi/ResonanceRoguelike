@@ -459,7 +459,7 @@ def _recompute_effective_av(player, data) -> None:
         item_def = data.items.get(getattr(item, "item_id", ""), {})
         if item_def.get("category") == "armor":
             total += _sum_item_av(item_def)
-    fighter.effective_av = total
+    fighter.effective_av = total + getattr(fighter, "attuned_av_bonus", 0)
 
 
 # Legacy names kept so save_manager._restore_equipment can call _apply_armor_to_fighter.

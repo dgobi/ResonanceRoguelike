@@ -138,9 +138,11 @@ def handle_attuned_turn(payload: dict) -> dict | None:
 
     if exposure >= _ATTUNED_THRESHOLD and not active:
         fighter.effective_av      += _ATTUNED_AV_BONUS
+        fighter.attuned_av_bonus = _ATTUNED_AV_BONUS
         engine._attuned_bonus_active = True
     elif exposure < _ATTUNED_THRESHOLD and active:
         fighter.effective_av      -= _ATTUNED_AV_BONUS
+        fighter.attuned_av_bonus = 0
         engine._attuned_bonus_active = False
 
     return None
@@ -202,16 +204,27 @@ def cleanup_perk_state(engine) -> None:
     if getattr(engine, "_attuned_bonus_active", False):
         fighter = getattr(getattr(engine, "player", None), "fighter", None)
         if fighter is not None:
-            fighter.effective_av -= _ATTUNED_AV_BONUS
+            fighter.effective_av -= getattr(fighter, "attuned_av_bonus", 0)
+            fighter.attuned_av_bonus = 0
         engine._attuned_bonus_active = False
 
-    # The Indifference: reset corruption damage bonus
     fighter = getattr(getattr(engine, "player", None), "fighter", None)
-    if fighter is not None and getattr(fighter, "corruption_damage_bonus", 0) != 0:
-        # Only reset if the perk is no longer active
-        perks = getattr(getattr(engine, "player", None), "perks", None)
-        if perks is None or not perks.has_perk("the_indifference"):
-            fighter.corruption_damage_bonus = 0
+    if fighter is not None:
+        fighter.corruption_damage_bonus = 0
+        fighter.corruption_channel_bonus = 0
+
+
+def restore_perk_bonuses(engine) -> None:
+    """Derive immediate bonuses without replaying ON_TURN healing or decay."""
+    perks = getattr(engine.player, "perks", None)
+    if perks is None:
+        return
+    payload = {"engine": engine, "player": engine.player}
+    for perk_id, handler in (("attuned", handle_attuned_turn),
+                             ("the_indifference", handle_indifference_turn),
+                             ("corruption_channel", perk_corruption_channel_turn)):
+        if perks.has(perk_id):
+            handler(payload)
 
 
 # ------------------------------------------------------------------ #

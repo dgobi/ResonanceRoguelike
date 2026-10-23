@@ -419,6 +419,47 @@ class Engine:
         if needs and self.data.survival:
             needs.configure(self.data.survival)
 
+    def _restore_loaded_state(self) -> None:
+        """Rebind derived owners once, after the full saved graph is installed.
+
+        This does not fire gameplay events, advance time, heal, consume fuel or
+        replay perk acquisition. Unfinished UI commands belong to the old graph.
+        """
+        self._configure_player_needs()
+        self._register_player_perks()
+        self._update_warmth()
+        self.player._hollow_knight_disruption = any(
+            getattr(a, "_creature_id", None) == "hollow_knight"
+            and getattr(a, "is_alive", True)
+            and (a.x - self.player.x)**2 + (a.y - self.player.y)**2 <= 25
+            for a in self.entities if a is not self.player)
+        self._wraith_aura_state = {}  # runtime object IDs; only message bookkeeping
+        self.player.took_damage_this_turn = False
+        self._player_is_dead = not self.player.is_alive
+        self._held_key = None
+        self._quit_pending = False
+        self._pickup_mode = False
+        self.mode = GameMode.LOCAL
+        for screen in (self.inventory_screen, self.health_screen, self.perk_screen,
+                       self.craft_screen, self.lexicon_screen, self.text_reader):
+            screen.open = False
+        self.inventory_screen._flat = []
+        self.inventory_screen.selected = 0
+        self._pending_consume = self._pending_throw = None
+        self._pending_processing = self._pending_placement_recipe = None
+        self._pending_placement_tile = None
+        self._pending_blood = []
+        self._pending_callouts = []
+        self._projectile_tweens = []
+        self.callouts.clear()
+        self.particle_system.clear()
+        self.visual_events.clear()
+        self._fog_surface = None
+        self._particle_map_id = 0
+        self._discharge_flash = None
+        self._discharge_flash_turns = 0
+        self._update_context_prompt()
+
     @property
     def map_width(self) -> int:
         return self.local_map.width
@@ -475,7 +516,7 @@ class Engine:
         Called on game start and after any perk is gained or lost.
         """
         from engine.hooks import HookEvent
-        from engine.perk_handlers import HANDLER_MAP, cleanup_perk_state
+        from engine.perk_handlers import HANDLER_MAP, cleanup_perk_state, restore_perk_bonuses
 
         # Clean up stateful perk side-effects before clearing handlers
         cleanup_perk_state(self)
@@ -507,6 +548,7 @@ class Engine:
                     self.hooks.register(event, handler)
                 else:
                     print(f"[perks] unknown handler '{handler_name}' in perk '{perk_id}'")
+        restore_perk_bonuses(self)
 
     @property
     def world_myth(self):
@@ -1537,73 +1579,46 @@ class Engine:
             for _dpos, _ditem in _decay_removals:
                 _rfo_decay(self.local_map, _dpos[0], _dpos[1], _ditem)
 
-        # Passive processing layer -- tick current chunk
-        if self.local_map.processing_layer:
-            from generation.floor_object_utils import place_floor_object as _pfo_proc
-            _proc_msgs = getattr(self.data, "processing_messages", {})
-            _done_keys: list[tuple[int, int]] = []
-            for (_lx, _ly), _proc in self.local_map.processing_layer.items():
-                _proc["turns_remaining"] -= 1
-                if _proc["turns_remaining"] <= 0:
-                    _done_keys.append((_lx, _ly))
-                    _result_id = _proc.get("item_id", "")
-                    _dec_id    = _proc.get("decor_id", "")
-                    # Clear processing decor from world (not for on_fire entries)
-                    if _dec_id and self.local_map.decor.get((_lx, _ly)) == _dec_id:
-                        from generation.decor_utils import clear_decor as _clr_proc
-                        _clr_proc(self.local_map, _lx, _ly)
-                    _result_item = self.item_factory.create(
-                        _result_id, _lx, _ly
-                    ) if _result_id else None
-                    _custom_msg = _proc.get("completion_message", "")
-                    if _custom_msg:
-                        _tmpl = _custom_msg
-                    else:
-                        _src  = _proc.get("source", "")
-                        _tmpl = _proc_msgs.get(_src, {}).get("complete", "{item_name} is ready.")
-                    if _result_item:
-                        _msg = _tmpl.format(item_name=_result_item.name) if "{item_name}" in _tmpl else _tmpl
-                        # Place on tile as floor object
-                        _result_item.x = _lx
-                        _result_item.y = _ly
-                        _pfo_proc(self.local_map, _lx, _ly, _result_item)
-                        self.log.add(_msg, MSG_LORE)
-                        _wx = self.world_x * MAP_WIDTH  + _lx
-                        _wy = self.world_y * MAP_HEIGHT + _ly
-                        self.callouts.add("ready", _wx, _wy, LIFE_GREEN, font_size="status")
-            for _dk in _done_keys:
-                del self.local_map.processing_layer[_dk]
-
-        # Tick processing layers for all hot-cached chunks (not current chunk)
-        _hot = getattr(self.save_manager, "hot", {})
-        for (_hwx, _hwy), _cached in list(_hot.items()):
-            if (_hwx, _hwy) == (self.world_x, self.world_y):
-                continue
-            _clm = getattr(_cached, "local_map", None)
-            if _clm is None or not getattr(_clm, "processing_layer", None):
-                continue
-            _done_h_keys: list[tuple[int, int]] = []
-            for (_lx_h, _ly_h), _proc_h in _clm.processing_layer.items():
-                _proc_h["turns_remaining"] -= 1
-                if _proc_h["turns_remaining"] <= 0:
-                    _done_h_keys.append((_lx_h, _ly_h))
-                    _dec_id_h = _proc_h.get("decor_id", "")
-                    if _dec_id_h and _clm.decor.get((_lx_h, _ly_h)) == _dec_id_h:
-                        from generation.decor_utils import clear_decor as _clr_hot
-                        _clr_hot(_clm, _lx_h, _ly_h)
-                    _result_id_h = _proc_h.get("item_id", "")
-                    if _result_id_h:
-                        if not hasattr(_clm, "ready_items"):
-                            _clm.ready_items = []
-                        _clm.ready_items.append({"item_id": _result_id_h,
-                                                 "lx": _lx_h, "ly": _ly_h})
-            for _dk_h in _done_h_keys:
-                del _clm.processing_layer[_dk_h]
+        # The actual cache owner contains both surface and underground maps.
+        # Identity de-duplication prevents the active map (or another alias) from
+        # consuming two turns. Cold maps remain outside this bounded simulation.
+        self._tick_processing_map(self.local_map, active=True)
+        seen = {id(self.local_map)}
+        cache = self.save_manager.cache
+        for cached in list(cache.hot.values()) + list(cache.submap_hot.values()):
+            local_map = cached.local_map
+            if id(local_map) not in seen:
+                seen.add(id(local_map))
+                self._tick_processing_map(local_map, active=False)
 
         # Recompute FOV after every turn so wraith penalty (and all other
         # per-turn modifiers) are reflected immediately, not one turn late.
         self._update_fov()
 
+
+    def _tick_processing_map(self, local_map, *, active: bool) -> None:
+        """Complete processing in its owning map, once per simulated turn."""
+        from generation.floor_object_utils import place_floor_object
+        from generation.decor_utils import clear_decor
+        for (x, y), record in list(local_map.processing_layer.items()):
+            record["turns_remaining"] -= 1
+            if record["turns_remaining"] > 0:
+                continue
+            decor_id = record.get("decor_id", "")
+            if decor_id and local_map.decor.get((x, y)) == decor_id:
+                clear_decor(local_map, x, y)
+            item_id = record.get("item_id", "")
+            item = self.item_factory.create(item_id, x, y) if item_id else None
+            if item is not None:
+                place_floor_object(local_map, x, y, item)
+                if active:
+                    messages = getattr(self.data, "processing_messages", {})
+                    template = record.get("completion_message") or messages.get(
+                        record.get("source", ""), {}).get("complete", "{item_name} is ready.")
+                    self.log.add(template.format(item_name=item.name), MSG_LORE)
+                    self.callouts.add("ready", self.world_x * MAP_WIDTH + x,
+                                      self.world_y * MAP_HEIGHT + y, LIFE_GREEN, font_size="status")
+            del local_map.processing_layer[(x, y)]
 
     # ------------------------------------------------------------------ #
     #  Input
@@ -1834,8 +1849,7 @@ class Engine:
             self.save_manager.save(self)
 
         elif key == pygame.K_F9 and not self.debug:
-            if self.save_manager.load(self):
-                self._configure_player_needs()
+            self.save_manager.load(self)
 
         elif key == pygame.K_i:
             self.inventory_screen.toggle()

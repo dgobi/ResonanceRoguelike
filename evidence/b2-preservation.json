@@ -1,0 +1,33 @@
+{
+  "original_root": "G:\\GameDev\\RoguelikeProject",
+  "original_head_before": "e484b47968324790403fd98e92e20f4b35226153",
+  "original_head_after": "e484b47968324790403fd98e92e20f4b35226153",
+  "original_file_count": 503,
+  "original_bytes_unchanged": true,
+  "original_status": "clean",
+  "development_baseline": "9bb0db884b989bb9a21f25387b5772e3246ba978",
+  "development_started_clean": true,
+  "development_changed_existing_files": [
+    "README.md",
+    "roguelike/components/perks.py",
+    "roguelike/docs/owner/B1_DEFERRED.md",
+    "roguelike/docs/owner/B1_VERIFICATION.md",
+    "roguelike/docs/owner/CONTENT_ROUTES.md",
+    "roguelike/docs/owner/NEXT_ARC.md",
+    "roguelike/docs/owner/OBSERVATIONS.md",
+    "roguelike/docs/owner/START_HERE.md",
+    "roguelike/docs/owner/STATUS.md",
+    "roguelike/docs/owner/WORLD_AND_STATE.md",
+    "roguelike/engine/engine.py",
+    "roguelike/engine/item_factory.py",
+    "roguelike/engine/item_system.py",
+    "roguelike/engine/perk_handlers.py",
+    "roguelike/engine/save_manager.py",
+    "tools/b1_characterize.py",
+    "tools/verify_b1.py"
+  ],
+  "development_unchanged_file_count": 565,
+  "content_assets_unchanged": true,
+  "personal_saves": "not read, copied, converted or tested",
+  "source_bound_to_final_gate": true
+}

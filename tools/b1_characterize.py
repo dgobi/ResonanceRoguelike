@@ -19,6 +19,7 @@ def characterize(e, ev):
     from engine.save_manager import ChunkCache
     from world.local_map import LocalMap
     phase = ev.job["phase"]
+    fixed = ev.job["flavor"] == "candidate"  # current candidate contract: B2, baseline remains Arc A
     if phase in ("write", "same"):
         e._ascend_from_submap()  # avoid baseline B1 scene alias in B2 controls
         e.entities = [e.player]
@@ -37,15 +38,18 @@ def characterize(e, ev):
         e.true_sight_turns = 3
         ev.check("B01", "direct load completed", True, e.save_manager.load(e))
     route = "fresh bootstrap" if phase == "read" else "direct SaveManager.load"
-    ev.check("B01", route + " Needs configuration omitted", False, e.player.needs._configured)
-    ev.check("B01", route + " fallback hunger label at 0.2", "Hungry", e.player.needs.hunger_state)
+    ev.check("B01", route + " Needs configuration contract", fixed, e.player.needs._configured)
+    ev.check("B01", route + " hunger label at 0.2", "Sated" if fixed else "Hungry", e.player.needs.hunger_state)
     ev.record["needs_after"] = needs_state(e)
-    ev.defect("B01", "B2-NEEDS", "B2", {"route": route, **needs_state(e)})
-    ev.check("B01", "omitted transient timer route signature", 0 if phase == "read" else 3, e.true_sight_turns)
-    ev.defect("B01", "B2-TIMER", "B2", {"route": route, "saved": 17, "observed": e.true_sight_turns})
+    if not fixed:
+        ev.defect("B01", "B2-NEEDS", "B2", {"route": route, **needs_state(e)})
+    ev.check("B01", "omitted transient timer route signature", 17 if fixed else 0 if phase == "read" else 3, e.true_sight_turns)
+    if not fixed:
+        ev.defect("B01", "B2-TIMER", "B2", {"route": route, "saved": 17, "observed": e.true_sight_turns})
     ev.check("B01", "perk remains acquired", True, "hardened_step" in e.player.perks.acquired)
-    ev.check("B01", "hook registration route signature", phase != "read", "perk_hardened_step_tile_entered" in perk_hooks(e))
-    ev.defect("B01", "B2-HOOKS", "B2", {"route": route, "hooks": perk_hooks(e)})
+    ev.check("B01", "hook registration route signature", fixed or phase != "read", "perk_hardened_step_tile_entered" in perk_hooks(e))
+    if not fixed:
+        ev.defect("B01", "B2-HOOKS", "B2", {"route": route, "hooks": perk_hooks(e)})
     # Travel writes the later surface mutation before full load. This separate
     # reader branch is never treated as the untouched writer checkpoint.
     before = hashes(e.save_manager.save_path)
@@ -71,5 +75,6 @@ def characterize(e, ev):
     other.processing_layer[(5, 5)] = {"item_id": "dried_bitter_herb", "turns_remaining": 2, "decor_id": "", "source": "drying"}
     ev.check("B03", "cache owner is SaveManager.cache.hot", [False, True], [hasattr(e.save_manager, "hot"), (wx, wy) in e.save_manager.cache.hot])
     e._advance_turn()
-    ev.check("B03", "inactive processing does not advance", 2, other.processing_layer[(5, 5)]["turns_remaining"])
-    ev.defect("B03", "B2-OFFSCREEN-OWNER", "B2/B3 simulation", {"before": 2, "after": 2, "actual_owner": "SaveManager.cache.hot"})
+    ev.check("B03", "inactive processing owner contract", 1 if fixed else 2, other.processing_layer[(5, 5)]["turns_remaining"])
+    if not fixed:
+        ev.defect("B03", "B2-OFFSCREEN-OWNER", "B2/B3 simulation", {"before": 2, "after": 2, "actual_owner": "SaveManager.cache.hot"})
