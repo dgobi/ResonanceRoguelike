@@ -5,7 +5,7 @@ Actor effects cover the next N simulated world turns; they age after AI, once pe
 live instance. Cold scene records do not simulate. Zone clocks follow hot maps.
 """
 from __future__ import annotations
-from engine.palette import MSG_DEFAULT, UI_TEXT_DIM, RESONANCE_MID
+from engine.palette import MSG_DEFAULT, UI_TEXT_DIM, RESONANCE_MID, STONE_BLUE
 
 
 def creature_id(actor):
@@ -42,6 +42,47 @@ def live_actors(engine):
     rows = list(engine.entities) + [r[0] for r in engine._live_pursuers]
     rows += [r['entity'] for r in engine._pending_pursuer_arrivals]
     return list({id(a):a for a in rows if a is not engine.player}.values())
+
+
+def refresh_wraith_aura(engine, *, advance=False):
+    """Derive the active aura from durable per-source exposure.
+
+    Only a simulated turn increments exposure. FOV refresh and restoration may
+    rebind fresh actor objects or remove an ineligible source without spending
+    a turn, restarting its drain, or replaying the first-exposure message.
+    """
+    active_ids = {id(a) for a in engine.entities if a is not engine.player}
+    ability_range = engine.data.entities.get('bog_wraith', {}).get('ability_range', 8)
+    px, py = engine.player.x, engine.player.y
+    active = {}
+    for actor in live_actors(engine):
+        if creature_id(actor) != 'bog_wraith':
+            continue
+        eligible = (id(actor) in active_ids and ability_enabled(actor, engine.local_map)
+                    and abs(actor.x - px) + abs(actor.y - py) <= ability_range)
+        if not eligible:
+            actor._wraith_exposure_turns = 0
+            continue
+        turns = getattr(actor, '_wraith_exposure_turns', 0)
+        if advance:
+            turns += 1
+            actor._wraith_exposure_turns = turns
+            if turns == 1:
+                engine.callouts.add('Sight dims.', float(px), float(py) - 1.0,
+                                    STONE_BLUE, lifetime=1.2, font_size='status')
+                engine.log.add('Sight dims.', STONE_BLUE)
+        if turns > 0:
+            active[id(actor)] = turns
+    engine._wraith_aura_state = active
+    return active
+
+
+def reset_wraith_aura(engine):
+    """Leaving a scene ends exposure before its actors are cached."""
+    for actor in live_actors(engine):
+        if creature_id(actor) == 'bog_wraith':
+            actor._wraith_exposure_turns = 0
+    engine._wraith_aura_state = {}
 
 
 def age_actor(engine, actor):

@@ -120,7 +120,7 @@ class DisplayConfig:
         font_type:    str  = "tcod",
         zoom_level:   int  = 2,
         render_mode:  str  = "ascii",
-        font_dir:     str  = "assets/fonts",
+        font_dir:     str  = "assets/Fonts",
     ) -> None:
         self.font_dir    = font_dir
         self.zoom_level  = max(1, zoom_level)
@@ -167,9 +167,9 @@ class DisplayConfig:
         """Call after pygame.init() to load font assets."""
         self._font_sheet.load()
 
-        base      = "assets/fonts/Junicode.ttf"
-        bold      = "assets/fonts/Junicode-Bold.ttf"
-        italic    = "assets/fonts/Junicode-Italic.ttf"
+        base      = "assets/Fonts/Junicode.ttf"
+        bold      = "assets/Fonts/Junicode-Bold.ttf"
+        italic    = "assets/Fonts/Junicode-Italic.ttf"
 
         self.font_ui_large      = pygame.font.Font(base,   22)
         self.font_ui_normal     = pygame.font.Font(base,   18)
@@ -281,7 +281,7 @@ class DisplayConfig:
     def from_dict(cls, d: dict) -> DisplayConfig:
         return cls(**{
             "font_path":    d.get("font_path",
-                                  "assets/fonts/dejavu10x10_gs_tc.png"),
+                                  "assets/Fonts/dejavu10x10_gs_tc.png"),
             "font_columns": d.get("font_columns", 32),
             "font_rows":    d.get("font_rows",    8),
             "font_type":    d.get("font_type",    "tcod"),

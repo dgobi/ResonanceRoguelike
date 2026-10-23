@@ -72,6 +72,33 @@ class SceneAddress:
                 else cache.load_submap(self.submap_id))
 
 
+def _pending_destination(row: dict, player: dict) -> dict:
+    """Additive v2 migration: old queues belonged to the saved active scene."""
+    fields = ("destination_wx", "destination_wy", "destination_submap_id")
+    present = [key in row for key in fields]
+    if any(present) and not all(present):
+        raise SaveFormatError("Incomplete pending-arrival destination")
+    if all(present):
+        return {key: row[key] for key in fields}
+    return {"destination_wx": player["world_x"],
+            "destination_wy": player["world_y"],
+            "destination_submap_id": player.get("current_submap_id")}
+
+
+def _validate_pending_arrivals(player: dict, world: dict) -> None:
+    for row in player.get("pending_pursuer_arrivals", []):
+        destination = _pending_destination(row, player)
+        SceneAddress.from_player({
+            "world_x": destination["destination_wx"],
+            "world_y": destination["destination_wy"],
+            "current_submap_id": destination["destination_submap_id"],
+        }, world)
+        if (type(row.get("delay")) is not int or row["delay"] < 0
+                or type(row.get("entry_x")) is not int
+                or type(row.get("entry_y")) is not int):
+            raise SaveFormatError("Invalid pending-arrival delay or entry")
+
+
 @dataclass
 class CachedChunk:
     """
@@ -285,6 +312,7 @@ class SaveManager:
             player_data = _serialize_player(engine)
             _validate_player_references(player_data, engine.data)
             address = SceneAddress.from_player(player_data, world_data)
+            _validate_pending_arrivals(player_data, world_data)
             payloads = self.cache.snapshot(address, engine.local_map, engine.entities, engine.data)
             payloads.update({'world.json': encoded(world_data), 'player.json': encoded(player_data),
                 'meta.json': encoded(dict(save_version=SAVE_VERSION, saved_at=datetime.datetime.now().isoformat(),
@@ -305,6 +333,7 @@ class SaveManager:
     def _prepare(self, engine, path):
         world_data, player_data, address = self._records(path)
         _validate_player_references(player_data, engine.data)
+        _validate_pending_arrivals(player_data, world_data)
         cold_cache = ChunkCache(self.save_path, base_path=path)
         # All scenes belong to the checkpoint: validate even inactive owners
         # before installing any player/world/cache reference.
@@ -707,7 +736,10 @@ def _serialize_player(engine: "Engine") -> dict:
         "pending_pursuer_arrivals": [
             {"entity": _serialize_entity(pa["entity"]),
              "entry_x": pa["entry_x"], "entry_y": pa["entry_y"],
-             "delay": pa["delay"]}
+             "delay": pa["delay"],
+             **_pending_destination(pa, {
+                 "world_x": engine.world_x, "world_y": engine.world_y,
+                 "current_submap_id": engine.current_submap_id})}
             for pa in getattr(engine, "_pending_pursuer_arrivals", [])
         ],
         "sprint_turns_remaining":    getattr(engine, "sprint_turns_remaining", 0),
@@ -902,6 +934,7 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
                 "entry_x": pa["entry_x"],
                 "entry_y": pa["entry_y"],
                 "delay":   pa["delay"],
+                **_pending_destination(pa, data),
             })
 
     # Sprint state

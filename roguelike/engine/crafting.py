@@ -54,45 +54,120 @@ class CraftPlan(list):
         self.choices = dict(chosen_items or {})
 
 
-def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_items=None):
-    """Resolve all requirements without mutating owners, lowest tier first.
+def _match_ingredients(slots, unavailable=()):
+    """Maximum physical matching, keeping every mandatory slot if possible.
 
-    Each physical instance can fill one slot. Available physical ingredients are
-    used before ambient shortfall; reusable tools are selected but not consumed.
-    Returns (exact selected instances, missing requirements).
+    An augmenting path can move an earlier ingredient to another valid slot.
+    That avoids the greedy failure where a multi-tag item steals the only match
+    for a later requirement. Ambient-backed slots are attempted after mandatory
+    ones, so environmental shortfall never displaces a required physical item.
     """
-    remaining = list(inv.items) if inv is not None else []
-    if len({id(i) for i in remaining}) != len(remaining):
+    owners = {}
+
+    def assign(slot_index, seen):
+        for item_index in slots[slot_index]["candidates"]:
+            if item_index in unavailable or item_index in seen:
+                continue
+            seen.add(item_index)
+            previous = owners.get(item_index)
+            if previous is None or assign(previous, seen):
+                owners[item_index] = slot_index
+                return True
+        return False
+
+    for slot_index in sorted(range(len(slots)), key=lambda n: slots[n]["ambient"]):
+        assign(slot_index, set())
+    return {slot_index: item_index for item_index, slot_index in owners.items()}
+
+
+def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_items=None):
+    """Find a complete exact-instance allocation without mutating owners.
+
+    Each instance fills one slot, including reusable tools. Prefer physical items
+    before ambient shortfall, then lower tiers in recipe order. A preference is
+    accepted only if the rest of the recipe remains satisfiable; inventory order
+    therefore cannot hide a valid allocation. Explicit component choices require
+    at least one instance of the chosen definition for that component.
+    """
+    items = list(inv.items) if inv is not None else []
+    if len({id(i) for i in items}) != len(items):
         return [], [{"tag": "duplicate instance", "min_tier": 1, "have": 0, "need": 1}]
     selected, missing = CraftPlan(chosen_items), []
     for req in recipe.get("requires_ambient", []):
         if not _ambient_satisfies(ambient_sources, req["tag"], req.get("min_tier", 1)):
             missing.append(dict(tag=req["tag"], min_tier=req.get("min_tier", 1), have=0, need=1, ambient=True))
+
+    groups, slots = [], []
+
+    def add_requirement(tags, quantity, details, *, ambient=False, component=None):
+        has_choice = component is not None and component in selected.choices
+        preferred = selected.choices.get(component)
+
+        def preference(index):
+            item = items[index]
+            tiers = tuple(_tag_tier_on_item(item, req["tag"]) for req in tags)
+            item_id = getattr(item, "item_id", "")
+            # Definition order is stable across inventory permutations. Identity
+            # only breaks ties between otherwise equivalent live instances.
+            return (has_choice and item_id != preferred, sum(tiers), tiers, item_id, id(item))
+
+        matches = sorted((n for n, item in enumerate(items) if _item_has_all_tags(item, tags)),
+                         key=preference)
+        group = len(groups)
+        groups.append(dict(details, need=quantity))
+        for unit in range(quantity):
+            # Same-component units are interchangeable: requiring the first to
+            # use the chosen definition preserves the UI choice without forcing
+            # the entire quantity to come from that definition.
+            requires_choice = has_choice and unit == 0
+            candidates = ([n for n in matches if items[n].item_id == preferred]
+                          if requires_choice else matches)
+            slots.append(dict(group=group, candidates=candidates,
+                              ambient=ambient and not requires_choice))
+
     rsi = recipe.get("requires_single_item")
     if rsi:
         tags = rsi if isinstance(rsi, list) else rsi.get("tags", [])
         quantity = 1 if isinstance(rsi, list) else rsi.get("max_quantity", 1)
-        matches = [i for i in remaining if _item_has_all_tags(i, tags)]
-        if len(matches) < quantity:
-            missing.append(dict(tag="+".join(t["tag"] for t in tags), min_tier=max((t.get("min_tier", 1) for t in tags), default=1),
-                                have=len(matches), need=quantity, single_item=True))
-        else:
-            for i in matches[:quantity]:
-                remaining.remove(i)
-                selected.append(i)
+        add_requirement(tags, quantity, dict(tag="+".join(t["tag"] for t in tags),
+                        min_tier=max((t.get("min_tier", 1) for t in tags), default=1), single_item=True))
     for ci, comp in enumerate(recipe.get("components", [])):
         tag, tier, quantity = comp["tag"], comp.get("min_tier", 1), comp.get("quantity", 1)
-        matches = sorted([i for i in remaining if _item_has_tag(i, tag, tier)], key=lambda i: _tag_tier_on_item(i, tag))
-        if chosen_items and ci in chosen_items:
-            preferred = chosen_items[ci]
-            matches.sort(key=lambda i: getattr(i, "item_id", "") != preferred)
-            if not any(i.item_id == preferred for i in matches):
-                missing.append(dict(tag=tag, min_tier=tier, have=0, need=quantity))
-        if len(matches) < quantity and not _ambient_satisfies(ambient_sources, tag, tier):
-            missing.append(dict(tag=tag, min_tier=tier, have=len(matches), need=quantity))
-        for i in matches[:quantity]:
-            remaining.remove(i)
-            selected.append(i)
+        add_requirement([dict(tag=tag, min_tier=tier)], quantity, dict(tag=tag, min_tier=tier),
+                        ambient=_ambient_satisfies(ambient_sources, tag, tier), component=ci)
+
+    matching = _match_ingredients(slots)
+    if any(n not in matching and not slot["ambient"] for n, slot in enumerate(slots)):
+        # Keep the established missing-requirement shape for the crafting UI.
+        for group, details in enumerate(groups):
+            have = sum(n in matching or slot["ambient"] for n, slot in enumerate(slots)
+                       if slot["group"] == group)
+            if have < details["need"]:
+                missing.append(dict(details, have=have))
+        selected.extend(items[matching[n]] for n in sorted(matching))
+        return selected, missing
+
+    # Choose a deterministic lowest-tier solution among complete allocations
+    # that use the maximum number of physical ingredients. Feasibility checks
+    # use matching, not exponential backtracking through inventory permutations.
+    physical_left, used = len(matching), set()
+    for n, slot in enumerate(slots):
+        options = list(slot["candidates"]) + ([None] if slot["ambient"] else [])
+        suffix = slots[n + 1:]
+        for candidate in options:
+            if candidate in used:
+                continue
+            reserved = used if candidate is None else used | {candidate}
+            remainder = _match_ingredients(suffix, reserved)
+            if (len(remainder) == physical_left - (candidate is not None)
+                    and all(k in remainder or rest["ambient"] for k, rest in enumerate(suffix))):
+                if candidate is not None:
+                    selected.append(items[candidate])
+                    used.add(candidate)
+                    physical_left -= 1
+                break
+        else:
+            raise RuntimeError("Craft allocation lost a previously validated matching")
     return selected, missing
 
 

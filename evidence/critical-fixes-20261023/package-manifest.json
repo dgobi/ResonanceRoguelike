@@ -1,0 +1,156 @@
+{
+  "package": "Resonance critical corrections 2026-10-23",
+  "base_archive": "FullGame.zip",
+  "base_archive_sha256": "ef7798ca414eb7f20a74d0663456aee0e92956ee6bf411aeb3d343ad6d11eba2",
+  "branch_policy": "existing main only; checkpoint before and after; preserve owner changes",
+  "runtime_modified_files": 10,
+  "files": {
+    "docs/owner/TUNING_EXISTING_FEATURES.md": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "7cedffdb5fd64c20fcf13901d641d9ac11d545a80194297ef8c8312c45cb812e",
+      "after_lf_sha256": "7cedffdb5fd64c20fcf13901d641d9ac11d545a80194297ef8c8312c45cb812e",
+      "bytes": 11585
+    },
+    "roguelike/config.py": {
+      "before_sha256": "5ecf552d300806b34fafb465ddbf788efa7d3bab7e3307b2c69c45abb797b9bf",
+      "before_lf_sha256": "5680db9fd6860c388d739a9919ea2b8a4c840c49b269ed0e430a7367bd3f623d",
+      "after_sha256": "35bd35b4f142c79c2ec891ac64ba218cc5e3f4b7d421fa836faa1eb7d0a279e8",
+      "after_lf_sha256": "dfa385cd8f89165ce323d2fd92c46992752d1de14612a51a1965fd507635d0ab",
+      "bytes": 1750
+    },
+    "roguelike/engine/crafting.py": {
+      "before_sha256": "a16e54645f6eb58b55d87b0e33aa8173e8523f9eefc0136ce9f6b813d23fc0f2",
+      "before_lf_sha256": "f606cba5f108140ddfd86f89e40c8f71d9c41bc24fba5a8713f450938cea7d09",
+      "after_sha256": "c2d205506a5392f8908b9c074891ab92f019c602191ea44f5fe5b84d4c92e6a2",
+      "after_lf_sha256": "22f61f3d37b2b1316bcb09c541d36551faa816d510d5cbb2b7d459d7d778e031",
+      "bytes": 10088
+    },
+    "roguelike/engine/display_config.py": {
+      "before_sha256": "6e4d1b6741f3f6da2682467bd52c14f3df59a112814ec31889c7a1a0290e94c1",
+      "before_lf_sha256": "733ccd85eb7c353d957be4b5841b7b2a48786e7544ae5d09128b5976c92700de",
+      "after_sha256": "42e08e5e32aa74c96172e5104a14ff09f43fdbb68251a0f2dfd909192a963ba8",
+      "after_lf_sha256": "07441d2685fe8e792862c4f25c81e9cf90bc6c23a0eb4cf1b9ac0d118c30f260",
+      "bytes": 13390
+    },
+    "roguelike/engine/effect_lifecycle.py": {
+      "before_sha256": "45a029d2cc93e93a96d5199363e7886c22cfe670300f9b424012f3a1d9633e3f",
+      "before_lf_sha256": "45a029d2cc93e93a96d5199363e7886c22cfe670300f9b424012f3a1d9633e3f",
+      "after_sha256": "ff3f792fe4f739489bba398745cee733754024d763ec2afc5729f4108ad09b1b",
+      "after_lf_sha256": "ff3f792fe4f739489bba398745cee733754024d763ec2afc5729f4108ad09b1b",
+      "bytes": 9777
+    },
+    "roguelike/engine/engine.py": {
+      "before_sha256": "5626b1587c976d7cdc0b422318c4067f32b141a3c95b4beff73e65937e58c7d7",
+      "before_lf_sha256": "d2b91a74dc55bd0e1f35236d4eaf0229018c7a7dc08a29d3e342f2449eca8f35",
+      "after_sha256": "282ee68cab26c10f6eacfcd469a615373fe5232fee9bfc99327c4739ce1eb609",
+      "after_lf_sha256": "fed6b8df5118b901465dfba9dce87d47ac4fa2ffd4857dd5e1b690730b2f9968",
+      "bytes": 284765
+    },
+    "roguelike/engine/interaction_cursor.py": {
+      "before_sha256": "70fb6d35c7e06bbc60cecdf94ea1224f519e3361c7efab6a8fafed36510bdf32",
+      "before_lf_sha256": "70fb6d35c7e06bbc60cecdf94ea1224f519e3361c7efab6a8fafed36510bdf32",
+      "after_sha256": "979b87b64cb959acf1def3674b4873184abd83f03c33f790109bf23fd260b2e1",
+      "after_lf_sha256": "979b87b64cb959acf1def3674b4873184abd83f03c33f790109bf23fd260b2e1",
+      "bytes": 20242
+    },
+    "roguelike/engine/look_mode.py": {
+      "before_sha256": "9926b1cc90277297a60291f1b48292cb545bdd17e04c45c838d263ebaf538e9c",
+      "before_lf_sha256": "498ab7ba76da313bad3d9e4e28217851b7d1918489c31ed96fadfa2dc1e76ee0",
+      "after_sha256": "2b3d32cdaaaa6304746b9d31e20db0b1d0827f7d11755912f2def25dbfadb04b",
+      "after_lf_sha256": "9f4b30cb708a4600ab0a6df53390a628cf620fc042b49e06ec1dd76e96ca28d6",
+      "bytes": 36320
+    },
+    "roguelike/engine/perk_handlers.py": {
+      "before_sha256": "3f4ead229c520cd0d6a14b8ebfeb92ad0bee27b3b5c352ae0bb618438c7bf92d",
+      "before_lf_sha256": "6f1b8abde96a0a9158d437ae5022e7cafd5b0e15f32171d2cf199fc61f02369f",
+      "after_sha256": "f8299dcca9dfdf043fade946957b9e163c97e5b140a1c15cf2e56ec8ec5ae3e8",
+      "after_lf_sha256": "3831f0f66d77e94417bb02706560cee1b692c776e10f91e7ed3c24ca87ae2b77",
+      "bytes": 15514
+    },
+    "roguelike/engine/save_components.py": {
+      "before_sha256": "fc52904cda55084c723a5876aa2bd2e2109f8340d27a385b6fc145e011df2767",
+      "before_lf_sha256": "2402e6cc8c6bab7d40e2d9fe27207181690a786fda7ebfc98b77131b8e85c91c",
+      "after_sha256": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+      "after_lf_sha256": "b2df939decdb283814a4c4ba94ec9c6d5339a0d05f78fad909e859d6f3475228",
+      "bytes": 10136
+    },
+    "roguelike/engine/save_manager.py": {
+      "before_sha256": "08a66e222d5617d942c29a4c15a436a224b04a33b93a7e27569f390a6a7e7748",
+      "before_lf_sha256": "4db7abe2a0555e7eb3469edc565473e3248f2c924f3b5688799f7e87862cb25b",
+      "after_sha256": "7b5f7a41697612a456449830837e413016ed5cdf0e3a8d77aa72e4bbd42f716c",
+      "after_lf_sha256": "8f530e7153054fe0c2d5786da9120208e3b352c0232fc0a15298c9cac82f0217",
+      "bytes": 53995
+    },
+    "tools/critical_fix_regressions/historical_tools/b1_cases.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "7010a606340eb69c9bd34c4831f7f44ed702c80943dceca856a5457da22d9a01",
+      "after_lf_sha256": "7010a606340eb69c9bd34c4831f7f44ed702c80943dceca856a5457da22d9a01",
+      "bytes": 15978
+    },
+    "tools/critical_fix_regressions/historical_tools/b1_characterize.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "fc2ae1291b0602c79d2c837e2f9c3d99a7d430998aecf07be96c56fa5b4c3aab",
+      "after_lf_sha256": "fc2ae1291b0602c79d2c837e2f9c3d99a7d430998aecf07be96c56fa5b4c3aab",
+      "bytes": 4592
+    },
+    "tools/critical_fix_regressions/historical_tools/b1_journey.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "04ab8ca28a9edb53e33d744044e47517fad2826361d04436ab7766c4d5e4d77e",
+      "after_lf_sha256": "04ab8ca28a9edb53e33d744044e47517fad2826361d04436ab7766c4d5e4d77e",
+      "bytes": 19438
+    },
+    "tools/critical_fix_regressions/historical_tools/b1_support.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "b6044395d3db3ec25085c0a7c6c9e3064ec13482ee1d2235cca8ed4373c761b4",
+      "after_lf_sha256": "b6044395d3db3ec25085c0a7c6c9e3064ec13482ee1d2235cca8ed4373c761b4",
+      "bytes": 5261
+    },
+    "tools/critical_fix_regressions/tests/test_action_routes.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "00e0dbe52886a2c9befa02a12d4625b4a9734d9f7740bf550529aae13da6e2b6",
+      "after_lf_sha256": "00e0dbe52886a2c9befa02a12d4625b4a9734d9f7740bf550529aae13da6e2b6",
+      "bytes": 24007
+    },
+    "tools/critical_fix_regressions/tests/test_combat_routes.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "f34f65204acf35aa771cf18fdcd4103cea7e4d1de2ddff74acbf54f4781f9209",
+      "after_lf_sha256": "f34f65204acf35aa771cf18fdcd4103cea7e4d1de2ddff74acbf54f4781f9209",
+      "bytes": 16449
+    },
+    "tools/critical_fix_regressions/tests/test_crafting.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "7109612f217fe2ef92d80b3f797ddd77f7d668722e00bc4bc958a9d7b10f65ec",
+      "after_lf_sha256": "7109612f217fe2ef92d80b3f797ddd77f7d668722e00bc4bc958a9d7b10f65ec",
+      "bytes": 12676
+    },
+    "tools/critical_fix_regressions/tests/test_effect_persistence.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "ad39e8d71f319da16f35b75d476e8e8a2c879388d33533db73d24ea540e5d612",
+      "after_lf_sha256": "ad39e8d71f319da16f35b75d476e8e8a2c879388d33533db73d24ea540e5d612",
+      "bytes": 14572
+    },
+    "tools/critical_fix_regressions/tests/test_pending_arrivals.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "9ed4b038a9a4df22a7216a2945331f367be9df008d2f78c29912480d57d37745",
+      "after_lf_sha256": "9ed4b038a9a4df22a7216a2945331f367be9df008d2f78c29912480d57d37745",
+      "bytes": 6215
+    },
+    "tools/critical_fix_regressions/verify_fixes.py": {
+      "before_sha256": null,
+      "before_lf_sha256": null,
+      "after_sha256": "41cb09c30beb20ed276113c5532273a8807f4e7aa0819c49467241b9f9a7c977",
+      "after_lf_sha256": "41cb09c30beb20ed276113c5532273a8807f4e7aa0819c49467241b9f9a7c977",
+      "bytes": 2976
+    }
+  }
+}

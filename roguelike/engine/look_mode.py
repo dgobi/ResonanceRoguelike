@@ -110,18 +110,28 @@ class LookMode:
             return True
 
         if key in (pygame.K_x, pygame.K_RETURN, pygame.K_KP_ENTER):
-            # Check for interactable terrain/decor — dispatch custom UI instead
-            # of the generic examine popup (e.g. stele opens inscription reader).
+            # Remote and remembered tiles are read-only. A visible nearby
+            # interactable uses the normal interaction route, including its
+            # selection prompt and turn cost (e.g. first reading of a stele).
             cx, cy = self.cursor_x, self.cursor_y
+            if not engine.local_map.in_bounds(cx, cy):
+                return True
             terrain_id = engine._resolve_terrain_id(cx, cy)
             terrain_entry = engine.data.terrain.get(terrain_id, {})
             decor_id = engine.local_map.decor.get((cx, cy))
             decor_entry = engine.data.decoratives.get(decor_id, {}) if decor_id else {}
             handler_name = decor_entry.get("interactable") or terrain_entry.get("interactable")
-            if handler_name:
+            cursor = engine.interaction_cursor
+            if handler_name and cursor.can_reach(engine, cx, cy):
                 handler = getattr(engine, f"_interactable_{handler_name}", None)
                 if handler:
-                    handler(cx, cy)
+                    cursor.enter([(cx, cy)], engine.player.x, engine.player.y)
+                    engine.mode = GameMode.INTERACTION_CURSOR
+                    cursor._interact(engine, interactable_only=True)
+                    # Container choices must own input until resolved. Other
+                    # interactions return to look after any inscription closes.
+                    if cursor._selection_prompt is None:
+                        engine.mode = GameMode.LOOK
                     return True
 
             # Open detailed examine if there is something to examine

@@ -5,9 +5,9 @@ TITLE = "Roguelike"
 
 # --- Font ---
 # Path to the font/tileset file.
-# Can be any tcod-compatible tilesheet in assets/fonts/
+# Can be any tcod-compatible tilesheet in assets/Fonts/
 # or eventually a spritesheet in assets/sprites/
-FONT_PATH      = "assets/fonts/dejavu10x10_gs_tc.png"
+FONT_PATH      = "assets/Fonts/dejavu10x10_gs_tc.png"
 FONT_COLUMNS   = 32   # glyphs across the sheet
 FONT_ROWS      = 8    # glyphs down the sheet
 FONT_TYPE      = "tcod"  # "tcod" | "cp437" | "sprite" (future)
@@ -43,7 +43,7 @@ DEBUG_MODE = True   # set False for release builds
 
 RENDER_MODE = "sprite"
 ZOOM_LEVEL  = 2    # 3× zoom → 24px tiles, comfortable on modern monitors
-FONT_PATH   = "assets/fonts/dejavu10x10_gs_tc.png"  # keep for ASCII fallback
+FONT_PATH   = "assets/Fonts/dejavu10x10_gs_tc.png"  # keep for ASCII fallback
 
 # --- UI Layout ---
 MSG_PANEL_W       = 300   # width of right-side message panel in pixels

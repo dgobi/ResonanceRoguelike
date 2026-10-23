@@ -1,0 +1,167 @@
+{
+  "date": "2026-10-23",
+  "branch": "main",
+  "base_commit": "04f703599f0e20c8a4b9f9dea256f66de0494bfd",
+  "checkpoint_before": "checkpoint/critical-fixes-start-20261023",
+  "checkpoint_after": "checkpoint/critical-fixes-verified-20261023",
+  "package_sha256": "56fa55b5abd5b6ba104b805052c2632d621e158ce8ab95ad92c5d50e7cc23cfd",
+  "base_archive_sha256": "ef7798ca414eb7f20a74d0663456aee0e92956ee6bf411aeb3d343ad6d11eba2",
+  "base_check": {
+    "original_files_matched": 10,
+    "reconciliation_required": false
+  },
+  "package_payload_matches_after_lf_normalization": true,
+  "payload": {
+    "docs/owner/TUNING_EXISTING_FEATURES.md": {
+      "sha256": "2bd1287c28bb869f3b3a73d42a896c5eb34348cb5213677f16cc338777bcd01e",
+      "lf_sha256": "7cedffdb5fd64c20fcf13901d641d9ac11d545a80194297ef8c8312c45cb812e"
+    },
+    "roguelike/config.py": {
+      "sha256": "35bd35b4f142c79c2ec891ac64ba218cc5e3f4b7d421fa836faa1eb7d0a279e8",
+      "lf_sha256": "dfa385cd8f89165ce323d2fd92c46992752d1de14612a51a1965fd507635d0ab"
+    },
+    "roguelike/engine/crafting.py": {
+      "sha256": "c2d205506a5392f8908b9c074891ab92f019c602191ea44f5fe5b84d4c92e6a2",
+      "lf_sha256": "22f61f3d37b2b1316bcb09c541d36551faa816d510d5cbb2b7d459d7d778e031"
+    },
+    "roguelike/engine/display_config.py": {
+      "sha256": "42e08e5e32aa74c96172e5104a14ff09f43fdbb68251a0f2dfd909192a963ba8",
+      "lf_sha256": "07441d2685fe8e792862c4f25c81e9cf90bc6c23a0eb4cf1b9ac0d118c30f260"
+    },
+    "roguelike/engine/effect_lifecycle.py": {
+      "sha256": "8486645aff1c325f67c30f38d4e5ff7852b5e249ed3ea06d69a94deb773c7c04",
+      "lf_sha256": "ff3f792fe4f739489bba398745cee733754024d763ec2afc5729f4108ad09b1b"
+    },
+    "roguelike/engine/engine.py": {
+      "sha256": "282ee68cab26c10f6eacfcd469a615373fe5232fee9bfc99327c4739ce1eb609",
+      "lf_sha256": "fed6b8df5118b901465dfba9dce87d47ac4fa2ffd4857dd5e1b690730b2f9968"
+    },
+    "roguelike/engine/interaction_cursor.py": {
+      "sha256": "07d4e9286d313238d82105154bd4d02398ca014e0629d929fe90d880d9a56019",
+      "lf_sha256": "979b87b64cb959acf1def3674b4873184abd83f03c33f790109bf23fd260b2e1"
+    },
+    "roguelike/engine/look_mode.py": {
+      "sha256": "2b3d32cdaaaa6304746b9d31e20db0b1d0827f7d11755912f2def25dbfadb04b",
+      "lf_sha256": "9f4b30cb708a4600ab0a6df53390a628cf620fc042b49e06ec1dd76e96ca28d6"
+    },
+    "roguelike/engine/perk_handlers.py": {
+      "sha256": "f8299dcca9dfdf043fade946957b9e163c97e5b140a1c15cf2e56ec8ec5ae3e8",
+      "lf_sha256": "3831f0f66d77e94417bb02706560cee1b692c776e10f91e7ed3c24ca87ae2b77"
+    },
+    "roguelike/engine/save_components.py": {
+      "sha256": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+      "lf_sha256": "b2df939decdb283814a4c4ba94ec9c6d5339a0d05f78fad909e859d6f3475228"
+    },
+    "roguelike/engine/save_manager.py": {
+      "sha256": "7b5f7a41697612a456449830837e413016ed5cdf0e3a8d77aa72e4bbd42f716c",
+      "lf_sha256": "8f530e7153054fe0c2d5786da9120208e3b352c0232fc0a15298c9cac82f0217"
+    },
+    "tools/critical_fix_regressions/historical_tools/b1_cases.py": {
+      "sha256": "c97beaea8c26cc8745ab2855ead3d2fe6cb50fd0d7182eb2be2bcd93ae5c37e6",
+      "lf_sha256": "7010a606340eb69c9bd34c4831f7f44ed702c80943dceca856a5457da22d9a01"
+    },
+    "tools/critical_fix_regressions/historical_tools/b1_characterize.py": {
+      "sha256": "3ec62f8c4346bec8dbef9e2cb14622c805ea2ff9f1de0d7933958c5b9a2ff1b6",
+      "lf_sha256": "fc2ae1291b0602c79d2c837e2f9c3d99a7d430998aecf07be96c56fa5b4c3aab"
+    },
+    "tools/critical_fix_regressions/historical_tools/b1_journey.py": {
+      "sha256": "8f57242ebf6ea648692810e6dce5e2ad5aa3610eb53326de95f3d90691c595e5",
+      "lf_sha256": "04ab8ca28a9edb53e33d744044e47517fad2826361d04436ab7766c4d5e4d77e"
+    },
+    "tools/critical_fix_regressions/historical_tools/b1_support.py": {
+      "sha256": "8c5f4f32a36e08f14b837cf0ad3ac37cd6d2dd98dd7954b25338a96c36713b7d",
+      "lf_sha256": "b6044395d3db3ec25085c0a7c6c9e3064ec13482ee1d2235cca8ed4373c761b4"
+    },
+    "tools/critical_fix_regressions/tests/test_action_routes.py": {
+      "sha256": "1043e8a49bef29ac4a3bc86939518db173b12540b294e37cb9bdb95a28623c96",
+      "lf_sha256": "00e0dbe52886a2c9befa02a12d4625b4a9734d9f7740bf550529aae13da6e2b6"
+    },
+    "tools/critical_fix_regressions/tests/test_combat_routes.py": {
+      "sha256": "f8b0b22b9f1c2fc95c43992f4ea4807091735e02400e566a5e58c751a909dcf6",
+      "lf_sha256": "f34f65204acf35aa771cf18fdcd4103cea7e4d1de2ddff74acbf54f4781f9209"
+    },
+    "tools/critical_fix_regressions/tests/test_crafting.py": {
+      "sha256": "67f95b10c700859e5a3315100bc9bbfbc0082f2d201edd93c1bb9d0340deed58",
+      "lf_sha256": "7109612f217fe2ef92d80b3f797ddd77f7d668722e00bc4bc958a9d7b10f65ec"
+    },
+    "tools/critical_fix_regressions/tests/test_effect_persistence.py": {
+      "sha256": "6c116aa535a9f3e042640f851c95d521f54693b61af8764a6e852453c035a594",
+      "lf_sha256": "ad39e8d71f319da16f35b75d476e8e8a2c879388d33533db73d24ea540e5d612"
+    },
+    "tools/critical_fix_regressions/tests/test_pending_arrivals.py": {
+      "sha256": "bbd4a691f8a364db9735bb41f5ee333757091d02e26d5fea0883dfa6d736049c",
+      "lf_sha256": "9ed4b038a9a4df22a7216a2945331f367be9df008d2f78c29912480d57d37745"
+    },
+    "tools/critical_fix_regressions/verify_fixes.py": {
+      "sha256": "0408b675cee66e645fa8151764e829caa3555360de1ded1a415ddc6b0a74639e",
+      "lf_sha256": "41cb09c30beb20ed276113c5532273a8807f4e7aa0819c49467241b9f9a7c977"
+    }
+  },
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "dependencies": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "focused": {
+    "passed": true,
+    "tests": 66,
+    "crafting_oracle_combinations": 4096
+  },
+  "production_gate": {
+    "command": "python -X utf8 tools/verify_d.py",
+    "run_id": "d-20261023-142750-f8c78916",
+    "passed": true,
+    "totals": {
+      "checks": 3675,
+      "passed": 3675,
+      "failed": 0,
+      "workers": 159
+    },
+    "intentional_terminated_writers": 13,
+    "negative_harness_controls": 7,
+    "source_matches_completed_gate": true,
+    "result": "d-results.json.gz",
+    "uncompressed_sha256": "93d05447640d0e44d0e24f621e3d77f2c855f1229b9c6b1b726dbc2065fc38cc"
+  },
+  "preservation": {
+    "preexisting_tracked_files": 687,
+    "unchanged_preexisting_tracked_files": 676,
+    "changed_preexisting_files": [
+      "evidence/d-latest.json",
+      "roguelike/config.py",
+      "roguelike/engine/crafting.py",
+      "roguelike/engine/display_config.py",
+      "roguelike/engine/effect_lifecycle.py",
+      "roguelike/engine/engine.py",
+      "roguelike/engine/interaction_cursor.py",
+      "roguelike/engine/look_mode.py",
+      "roguelike/engine/perk_handlers.py",
+      "roguelike/engine/save_components.py",
+      "roguelike/engine/save_manager.py"
+    ],
+    "personal_save_files_unchanged": 7,
+    "full_game_archive_unchanged": true,
+    "historical_helpers_match_originals_after_lf_normalization": true
+  },
+  "review": {
+    "blocking_findings": [],
+    "package_code_changes_during_application": [],
+    "syntax": "All packaged Python sources compiled successfully.",
+    "dependencies": "pip check: No broken requirements found.",
+    "whitespace": "Runtime, guide and new tests pass with cr-at-eol for existing CRLF blobs. The verbatim historical b1_support.py retains its original final blank line.",
+    "guide_path_references_verified": 27
+  },
+  "deferred": [
+    {
+      "case": "E04",
+      "id": "UI-TEXT-HEIGHT",
+      "scope": "UI",
+      "symptom": {
+        "text_id": "lab_label_sarcophagus",
+        "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+        "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+      }
+    }
+  ]
+}

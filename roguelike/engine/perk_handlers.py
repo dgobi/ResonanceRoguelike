@@ -263,7 +263,8 @@ def system_exp_on_kill(payload: dict) -> dict | None:
     if level_comp is None:
         return None
 
-    creature_key = getattr(entity, "tile", "") or ""
+    from engine.effect_lifecycle import creature_id
+    creature_key = creature_id(entity)
     creature_def = engine.data.entities.get(creature_key, {}) if creature_key else {}
     diff_str     = creature_def.get("difficulty", "standard")
     creature_tier = _DIFF_TO_TIER.get(diff_str, 0)

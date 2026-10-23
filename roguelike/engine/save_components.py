@@ -2,6 +2,7 @@
 
 Additive development-v2 fields. Missing extension blocks mean the B1 defaults;
 present blocks are complete versioned records, never partially applied overlays.
+Optional additive actor fields retain v1 compatibility and reset when absent.
 """
 from __future__ import annotations
 import copy
@@ -31,6 +32,15 @@ ACTOR_STATE = {
     "_arrival_cooldown": (0, "count"), "_just_arrived": (False, "bool"),
     "_pending_stair_use": (None, "string?"),
     "_ability_suppressed_turns": (0, "count"), "_disrupted_turns": (0, "count"),
+}
+# Additions must not make an existing development-v2/component-v1 record
+# unreadable. These fields are validated when present and defaulted on load.
+ACTOR_OPTIONAL_STATE = {
+    "_wraith_exposure_turns": (0, "count"),
+    "_surface_exit_x": (None, "coordinate?"),
+    "_surface_exit_y": (None, "coordinate?"),
+    "_surface_exit_wx": (None, "coordinate?"),
+    "_surface_exit_wy": (None, "coordinate?"),
 }
 AI_STATE = {
     "target_x": (None, "coordinate?"), "target_y": (None, "coordinate?"),
@@ -181,6 +191,7 @@ def validate_components(data):
 
 def serialize_actor_runtime(actor):
     result = {"version": 1, "actor": snapshot(actor, ACTOR_STATE)}
+    result["actor"].update(snapshot(actor, ACTOR_OPTIONAL_STATE))
     if getattr(actor, "ai", None) is not None:
         result["ai"] = snapshot(actor.ai, AI_STATE)
     return result
@@ -192,10 +203,18 @@ def validate_actor_runtime(row):
         if row.get("ai_type"):
             schemas["ai"] = AI_STATE
         validate_block(row["component_state"], schemas, "actor.component_state")
+        validate_fields(row["component_state"]["actor"], ACTOR_OPTIONAL_STATE,
+                        "actor.component_state.actor", complete=False)
+        actor_state = row["component_state"]["actor"]
+        for x_key, y_key in (("_surface_exit_x", "_surface_exit_y"),
+                             ("_surface_exit_wx", "_surface_exit_wy")):
+            if (actor_state.get(x_key) is None) != (actor_state.get(y_key) is None):
+                raise ValueError("actor.component_state.actor: incomplete " + x_key + "/" + y_key)
 
 
 def restore_actor_runtime(actor, row):
     record = row.get("component_state", {})
     restore(actor, record.get("actor", {}), ACTOR_STATE)
+    restore(actor, record.get("actor", {}), ACTOR_OPTIONAL_STATE)
     if actor.ai is not None and "ai" in record:
         restore(actor.ai, record["ai"], AI_STATE)

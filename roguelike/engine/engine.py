@@ -429,9 +429,9 @@ class Engine:
         self._configure_player_needs()
         self._register_player_perks()
         self._update_warmth()
-        from engine.effect_lifecycle import knight_disruption
+        from engine.effect_lifecycle import knight_disruption, refresh_wraith_aura
         knight_disruption(self)
-        self._wraith_aura_state = {}  # runtime object IDs; only message bookkeeping
+        refresh_wraith_aura(self)
         self.player.took_damage_this_turn = False
         self._player_is_dead = not self.player.is_alive
         self._held_key = None
@@ -660,21 +660,14 @@ class Engine:
                     if event.key != pygame.K_ESCAPE:
                         self._quit_pending = False
 
-                    # Stair keys — checked via unicode so Shift+. and Shift+, work
-                    if event.unicode == '>':
-                        self._try_descend()
-                        continue
-                    elif event.unicode == '<':
-                        self._try_ascend()
-                        continue
+                    # Every key follows the same death/modal guards. Unicode is
+                    # retained for Shift+. / Shift+, without bypassing those guards.
+                    self._handle_key(event.key, getattr(event, "unicode", ""))
 
-                    if self.debug and self.debug.handle_key(event.key, self):
+                    if getattr(event, "unicode", "") in ("<", ">"):
+                        # A held Shift+. must never repeat as unshifted wait.
                         self._held_key = None
-                        continue
-
-                    self._handle_key(event.key)
-
-                    if event.key in MOVE_KEYS or event.key in WAIT_KEYS:
+                    elif event.key in MOVE_KEYS or event.key in WAIT_KEYS:
                         self._held_key       = event.key
                         self._held_key_timer = current_ticks + KEY_REPEAT_DELAY
 
@@ -1615,7 +1608,7 @@ class Engine:
     #  Input
     # ------------------------------------------------------------------ #
 
-    def _handle_key(self, key: int) -> None:
+    def _handle_key(self, key: int, text: str = "") -> None:
         # Death screen — R to restart (exit for re-launch), N to quit
         if self._player_is_dead:
             if key == pygame.K_r:
@@ -1687,7 +1680,12 @@ class Engine:
             return
 
         if self.mode == GameMode.LOCAL:
-            self._handle_key_local(key)
+            if text == ">" and not self._pickup_mode:
+                self._try_descend()
+            elif text == "<" and not self._pickup_mode:
+                self._try_ascend()
+            else:
+                self._handle_key_local(key)
         elif self.mode == GameMode.OVERMAP:
             self._handle_key_overmap(key)
 
@@ -1702,11 +1700,16 @@ class Engine:
                 dx, dy = MOVE_KEYS[key]
                 tx = self.player.x + dx
                 ty = self.player.y + dy
+                if not self.interaction_cursor.can_reach(self, tx, ty):
+                    self.log.add("You cannot reach that.", MSG_DEFAULT)
+                    self._pickup_mode = False
+                    return
                 inv = getattr(self.player, "inventory", None)
                 if inv is not None:
                     items = self._items_at(tx, ty)
                     if items:
-                        self._take_item(items[-1], inv)
+                        if self._take_item(items[-1], inv):
+                            self._advance_turn()
                     else:
                         self.log.add(
                             "Nothing there to take.",
@@ -1859,16 +1862,14 @@ class Engine:
             return
 
         elif key == pygame.K_COMMA:
-            self._pick_up_item()
-            acted = True
+            acted = self._pick_up_item()
 
         elif key == pygame.K_g:
             acted = self._try_harvest()
             if not acted:
                 acted = self._try_gather(self.player.x, self.player.y)
             if not acted:
-                self._pick_up_item()
-                acted = True
+                acted = self._pick_up_item()
 
         elif key == pygame.K_w and not (pygame.key.get_mods() & pygame.KMOD_SHIFT):
             acted = self._try_drink_terrain()
@@ -2084,7 +2085,8 @@ class Engine:
         if not chunk:
             return
 
-        self._wraith_aura_state = {}
+        from engine.effect_lifecycle import reset_wraith_aura
+        reset_wraith_aura(self)
         self._wraith_overcorrect_turns = 0
 
         # Clear ephemeral tiles (blood, etc.) from the departing chunk's local_map
@@ -2427,15 +2429,29 @@ class Engine:
                     self.log.add(f"{_ri_item.name} is ready.", MSG_LORE)
             self.local_map.ready_items = []
 
-        self.save_manager.save(self)
+        # Travel writes the session cache; only an explicit save publishes a
+        # checkpoint. F9 must still restore the last F5 state after crossing.
         self._update_context_prompt()
 
     # ------------------------------------------------------------------ #
     #  SubMap traversal (stairs)
     # ------------------------------------------------------------------ #
 
+    def _can_use_stairs(self) -> bool:
+        """Stairs are physical actions and share the normal input guards."""
+        fighter = getattr(self.player, "fighter", None)
+        return (not self._player_is_dead and self.player.is_alive
+                and (fighter is None or not fighter.is_dead)
+                and self.mode == GameMode.LOCAL and not self._pickup_mode
+                and self._pending_consume is None
+                and not any(screen.open for screen in (
+                    self.text_reader, self.inventory_screen, self.health_screen,
+                    self.perk_screen, self.craft_screen, self.lexicon_screen)))
+
     def _try_descend(self) -> None:
         """Player attempts to descend. Must be standing on stairs_down."""
+        if not self._can_use_stairs():
+            return
         terrain = str(self.local_map.tiles["terrain"][self.player.x, self.player.y])
         if terrain != "stairs_down":
             self.log.add(
@@ -2456,6 +2472,8 @@ class Engine:
 
     def _try_ascend(self) -> None:
         """Player attempts to ascend. Must be standing on stairs_up."""
+        if not self._can_use_stairs():
+            return
         terrain = str(self.local_map.tiles["terrain"][self.player.x, self.player.y])
         if terrain == "stairs_up" and self.current_submap_id:
             self._ascend_from_submap()
@@ -2474,7 +2492,8 @@ class Engine:
         """Cache surface, generate/load submap, place player at entry."""
         self.particle_system.particles.clear()
         # Clear creature ability state that doesn't survive transitions
-        self._wraith_aura_state = {}
+        from engine.effect_lifecycle import reset_wraith_aura
+        reset_wraith_aura(self)
         self._wraith_overcorrect_turns = 0
         self.player._hollow_knight_disruption = False
 
@@ -2635,7 +2654,8 @@ class Engine:
     def _ascend_from_submap(self) -> None:
         """Cache submap, restore surface, place player at return coords."""
         self.particle_system.particles.clear()
-        self._wraith_aura_state = {}
+        from engine.effect_lifecycle import reset_wraith_aura
+        reset_wraith_aura(self)
         self._wraith_overcorrect_turns = 0
         self.player._hollow_knight_disruption = False
 
@@ -2903,6 +2923,9 @@ class Engine:
                         "entry_x": _entry_x,
                         "entry_y": _entry_y,
                         "delay":   _delay_cc,
+                        "destination_wx": self.world_x,
+                        "destination_wy": self.world_y,
+                        "destination_submap_id": None,
                     })
                     if _DM_cc:
                         print(f"[LIVE-PENDING] {_te.name} delay={_delay_cc} "
@@ -3214,22 +3237,40 @@ class Engine:
                 "entry_x": _arrive_x,
                 "entry_y": _arrive_y,
                 "delay":   _delay,
+                "destination_wx": self.world_x,
+                "destination_wy": self.world_y,
+                "destination_submap_id": None,
             })
             if _DM_lp:
                 print(f"[LIVE-PENDING] {_pe.name} delay={_delay} "
                       f"entry=({_arrive_x},{_arrive_y})")
 
     def _tick_pending_pursuer_arrivals(self) -> None:
-        """Decrement delay on pending arrivals; materialise when delay hits 0."""
+        """Age arrivals and deliver only into their recorded destination scene.
+
+        An expired arrival waits for that scene to become active. Travelling to
+        another chunk or underground cannot transplant the queued actor there.
+        """
         from config import DEBUG_MODE as _DM_pa
         _still_pending: list[dict] = []
+        active_scene = (self.world_x, self.world_y, self.current_submap_id)
         for _pa in self._pending_pursuer_arrivals:
-            _pa["delay"] -= 1
-            if _pa["delay"] > 0:
+            entity = _pa["entity"]
+            fighter = getattr(entity, "fighter", None)
+            if not entity.is_alive or (fighter is not None and fighter.is_dead):
+                continue
+            # Older in-memory callers receive the same migration as old saves.
+            _pa.setdefault("destination_wx", self.world_x)
+            _pa.setdefault("destination_wy", self.world_y)
+            _pa.setdefault("destination_submap_id", self.current_submap_id)
+            destination = (_pa["destination_wx"], _pa["destination_wy"],
+                           _pa["destination_submap_id"])
+            _pa["delay"] = max(0, _pa["delay"] - 1)
+            if _pa["delay"] > 0 or destination != active_scene:
                 _still_pending.append(_pa)
                 continue
-            # Delay expired — materialise the entity
-            self._live_arrive(_pa["entity"], _pa["entry_x"], _pa["entry_y"])
+            # Delay expired in the intended scene — materialise once.
+            self._live_arrive(entity, _pa["entry_x"], _pa["entry_y"])
             if _DM_pa:
                 _pe = _pa["entity"]
                 print(f"[LIVE-ARRIVE-DEFERRED] {_pe.name} at ({_pe.x},{_pe.y}) "
@@ -3419,8 +3460,10 @@ class Engine:
         # Surface exit coords were stamped on entity at extraction time
         _exit_x  = getattr(entity, "_surface_exit_x",  None)
         _exit_y  = getattr(entity, "_surface_exit_y",  None)
-        _exit_wx = getattr(entity, "_surface_exit_wx", wx)
-        _exit_wy = getattr(entity, "_surface_exit_wy", wy)
+        _exit_wx = getattr(entity, "_surface_exit_wx", None)
+        _exit_wy = getattr(entity, "_surface_exit_wy", None)
+        if _exit_wx is None:
+            _exit_wx, _exit_wy = wx, wy
         if _exit_x is None:
             _exit_x = self.surface_return_x if hasattr(self, "surface_return_x") else 0
             _exit_y = self.surface_return_y if hasattr(self, "surface_return_y") else 0
@@ -4298,7 +4341,7 @@ class Engine:
                 panel_size="inscription",
             )
 
-        return first_time
+        return True  # Every touch changes resonance, including rereads.
 
     def _interactable_examine_dead_bell(self, x: int, y: int) -> bool:
         """Examine a dead bell — inscription and word, but no resonance pulse."""
@@ -5016,6 +5059,8 @@ class Engine:
         if _player_ls and _player_ls.active:
             _player_ls.is_dominant = (light_radius > base)
 
+        from engine.effect_lifecycle import refresh_wraith_aura
+        refresh_wraith_aura(self)
         if self._wraith_aura_state:
             _wraith_range  = self.data.entities.get("bog_wraith", {}).get("ability_range", 8)
             snap_penalty   = max(0, with_light - _wraith_range)
@@ -5299,7 +5344,9 @@ class Engine:
 
         player_fighter = getattr(self.player, "fighter", None)
         target_fighter = getattr(target,      "fighter", None)
-        if not player_fighter or not target_fighter:
+        if (not player_fighter or not target_fighter
+                or not self.player.is_alive or not target.is_alive
+                or target_fighter.is_dead):
             return
 
         # Check impairment
@@ -5344,16 +5391,8 @@ class Engine:
         rng = self.rng
         disrupted = knight_disruption(self)
 
-        # Flat damage bonus from The Indifference perk (+1 per corruption threshold)
-        # + The Marked Path corruption_channel_bonus
-        _corr_bonus = getattr(player_fighter, "corruption_damage_bonus", 0)
-        _corr_bonus += getattr(player_fighter, "corruption_channel_bonus", 0)
-        if _corr_bonus > 0:
-            weapon = dict(weapon) if weapon else {}
-            weapon["damage_bonus"] = weapon.get("damage_bonus", 0) + _corr_bonus
-
         _weapon_entity = self.player.equipment.slots.get("weapon")
-        weapon = coated_weapon(weapon, _weapon_entity)
+        weapon = self._player_weapon_profile(weapon, _weapon_entity)
 
         result = resolve_attack(
             attacker_name          = "thou",
@@ -5398,6 +5437,27 @@ class Engine:
                 self.callouts.add("—", target.x, float(target.y),
                                   STONE_BLUE, font_size="creature")
 
+        self._apply_player_hit_effects(target, result)
+
+        if result.defender_dead or target_fighter.is_dead:
+            self._on_entity_death(target)
+
+        self._apply_melee_retaliation(target, result)
+
+    def _player_weapon_profile(self, weapon: dict, weapon_item) -> dict:
+        """Use the same perk and coating modifiers for both melee routes."""
+        from engine.effect_lifecycle import coated_weapon
+        fighter = self.player.fighter
+        bonus = (getattr(fighter, "corruption_damage_bonus", 0)
+                 + getattr(fighter, "corruption_channel_bonus", 0))
+        profile = dict(weapon)
+        if bonus > 0:
+            profile["damage_bonus"] = profile.get("damage_bonus", 0) + bonus
+        return coated_weapon(profile, weapon_item)
+
+    def _apply_player_hit_effects(self, target, result) -> None:
+        """Shared damage/critical hooks and blood effects for melee contact."""
+        from engine.effect_lifecycle import creature_id
         # Critical hit — "CRITICAL" callout, screenshake, extra particles, hook
         if result.is_crit and result.damage_dealt > 0:
             if self.display.CALLOUT_DAMAGE_NUMBERS:
@@ -5405,9 +5465,6 @@ class Engine:
                                   OLD_GOLD, lifetime=1.4,
                                   font_size="crit")
             self.trigger_screenshake(4)
-            # Mark pending blood as crit so render loop emits enhanced burst
-            if self._pending_blood:
-                self._pending_blood[-1]["is_crit"] = True
             # ON_CRITICAL_HIT hook
             from engine.hooks import HookEvent as _HookEvent
             _wcrit = self._get_equipped_weapon()
@@ -5431,6 +5488,7 @@ class Engine:
                     "defender_tile": (target.x, target.y),
                     "attacker_tile": (self.player.x, self.player.y),
                     "color": _bcolor,
+                    "is_crit": bool(result.is_crit),
                 })
 
         # Fire ON_DAMAGE_DEALT hook
@@ -5448,9 +5506,10 @@ class Engine:
             })
             _apply_effects(effects, self)
 
-        if result.defender_dead:
-            self._on_entity_death(target)
-
+    def _apply_melee_retaliation(self, target, result) -> None:
+        from engine.effect_lifecycle import creature_id, ability_enabled
+        player_fighter = self.player.fighter
+        rng = self.rng
         # Briar lurker retaliation — thorns on melee contact
         if (creature_id(target) == "briar_lurker" and result.damage_dealt > 0
                 and ability_enabled(target, self.local_map)):
@@ -5472,6 +5531,12 @@ class Engine:
         from engine.movesets import get_moveset_action, execute_moveset, apply_damage_mult
         from engine.combat import resolve_attack, get_body_def, roll_dice
         from engine.effect_lifecycle import creature_id, coated_weapon, coating_contact, knight_disruption
+
+        player_fighter = getattr(self.player, "fighter", None)
+        if (self._player_is_dead or not self.player.is_alive
+                or not player_fighter or not player_fighter.can_attack()):
+            self.log.add("Thou canst not strike.", AGED_WOOD)
+            return False
 
         weapon_def = self._get_equipped_weapon()
         if not weapon_def or not weapon_def.get("movesets"):
@@ -5496,7 +5561,9 @@ class Engine:
         for e in self.entities:
             if e is self.player or not getattr(e, "is_alive", True):
                 continue
-            if not getattr(e, "blocks_movement", True):
+            fighter = getattr(e, "fighter", None)
+            if (not getattr(e, "blocks_movement", True)
+                    or fighter is None or fighter.is_dead):
                 continue
             import math
             d = math.sqrt((e.x - self.player.x) ** 2 + (e.y - self.player.y) ** 2)
@@ -5537,7 +5604,7 @@ class Engine:
 
         # Build weapon dict with damage multiplier
         weapon_item = self.player.equipment.slots.get("weapon")
-        mod_weapon = dict(coated_weapon(weapon_def, weapon_item))
+        mod_weapon = dict(self._player_weapon_profile(weapon_def, weapon_item))
         base_dice = mod_weapon.get("damage_dice", "1d4")
         base_dmg = roll_dice(base_dice, rng)
         if knight_disruption(self):
@@ -5589,6 +5656,8 @@ class Engine:
         # Screen shake
         if ms_result.screen_shake > 0:
             self.trigger_screenshake(ms_result.screen_shake)
+
+        self._apply_player_hit_effects(target, result)
 
         # Post-hit effects
         target_dead = target_fighter.is_dead
@@ -5643,6 +5712,8 @@ class Engine:
 
             self._on_entity_death(target)
 
+        self._apply_melee_retaliation(target, result)
+
         # Move debt from turn cost
         if ms_result.turn_cost != 1.0:
             self._move_debt += ms_result.turn_cost - 1.0
@@ -5651,14 +5722,15 @@ class Engine:
 
     def _reveal_creature_knowledge(self, target: "Actor") -> None:
         """Reveal one unknown weakness or strength of a creature type."""
-        creature_id = target.tile
-        creature_def = self.data.entities.get(creature_id, {})
+        from engine.effect_lifecycle import creature_id
+        target_id = creature_id(target)
+        creature_def = self.data.entities.get(target_id, {})
         essence_mods = creature_def.get("essence_modifiers", {})
         if not essence_mods:
             self.log.add("It holds no more secrets.", UI_TEXT_DIM)
             return
 
-        knowledge = self.creature_knowledge.get(creature_id, {
+        knowledge = self.creature_knowledge.get(target_id, {
             "revealed_weaknesses": [],
             "revealed_strengths": [],
         })
@@ -5687,7 +5759,7 @@ class Engine:
             revealed_type = "strength"
             knowledge["revealed_strengths"].append(revealed_ess)
 
-        self.creature_knowledge[creature_id] = knowledge
+        self.creature_knowledge[target_id] = knowledge
 
         if revealed_ess:
             self.log.add("Its nature opens to you.", MSG_ANCIENT)
@@ -5748,13 +5820,20 @@ class Engine:
     def _on_entity_death(self, entity: "Actor") -> None:
         from engine.message_log import MSG_DANGER
         from engine.hooks import HookEvent
+        from engine.effect_lifecycle import creature_id
+
+        # Fighter death may already be set; this separate flag owns finalization.
+        if getattr(entity, "_death_finalized", False):
+            return
+        entity._death_finalized = True
+        target_id = creature_id(entity)
 
         self.log.add(f"The {entity.name} is destroyed.", MSG_DANGER)
         entity.is_alive = False
 
         # on_death creature sound callout
         if self.display.CALLOUT_CREATURE_SOUNDS:
-            _cdef = self.data.entities.get(entity.tile, {})
+            _cdef = self.data.entities.get(target_id, {})
             _csnd = _cdef.get("callout_sounds", {}).get("on_death")
             if _csnd:
                 self.callouts.add(
@@ -5766,10 +5845,10 @@ class Engine:
                 )
 
         # Fire ON_ENTITY_KILLED — perks that trigger on kills
-        creature_def = self.data.entities.get(entity.tile, {})
+        creature_def = self.data.entities.get(target_id, {})
         effects = self.hooks.fire(HookEvent.ON_ENTITY_KILLED, {
             "entity":     entity,
-            "entity_id":  getattr(entity, "tile", ""),
+            "entity_id":  target_id,
             "blood_type": creature_def.get("blood_type", "red"),
             "x": entity.x, "y": entity.y,
             "player": self.player,
@@ -5786,12 +5865,13 @@ class Engine:
             _corpse_item = self.item_factory.create("corpse", entity.x, entity.y)
             if _corpse_item:
                 _corpse_item.name = f"remains of {entity.name}"
-                _corpse_item.source_creature = entity.tile
+                _corpse_item.source_creature = target_id
                 _corpse_item.decay_timer = _decay
                 _pfo_corpse(self.local_map, entity.x, entity.y, _corpse_item)
 
         # Bog wraith death — remove from aura state immediately
-        if entity.tile == "bog_wraith":
+        if target_id == "bog_wraith":
+            entity._wraith_exposure_turns = 0
             eid = id(entity)
             if eid in self._wraith_aura_state:
                 del self._wraith_aura_state[eid]
@@ -5805,29 +5885,8 @@ class Engine:
         within ability_range tiles of the player. Fires "Sight dims." on turn 2+.
         Penalty = sum of max(0, turns - 1) per wraith, read by _update_fov.
         """
-        _wraith_range = self.data.entities.get("bog_wraith", {}).get("ability_range", 8)
-        px, py = self.player.x, self.player.y
-        from engine.effect_lifecycle import creature_id, ability_enabled
-        active: dict[int, int] = {}
-        for e in self.entities:
-            if (creature_id(e) == "bog_wraith"
-                    and ability_enabled(e, self.local_map)
-                    and abs(e.x - px) + abs(e.y - py) <= _wraith_range):
-                eid       = id(e)
-                prev      = self._wraith_aura_state.get(eid, 0)
-                new_turns = prev + 1
-                active[eid] = new_turns
-                if new_turns == 1:
-                    self.callouts.add(
-                        "Sight dims.",
-                        float(self.player.x),
-                        float(self.player.y) - 1.0,
-                        STONE_BLUE,
-                        lifetime=1.2,
-                        font_size="status",
-                    )
-                    self.log.add("Sight dims.", STONE_BLUE)
-        self._wraith_aura_state = active
+        from engine.effect_lifecycle import refresh_wraith_aura
+        refresh_wraith_aura(self, advance=True)
         if self._wraith_overcorrect_turns > 0:
             self._wraith_overcorrect_turns -= 1
 
@@ -5906,10 +5965,10 @@ class Engine:
     #  Items
     # ------------------------------------------------------------------ #
 
-    def _pick_up_item(self) -> None:
+    def _pick_up_item(self) -> bool:
         inv = getattr(self.player, "inventory", None)
         if inv is None:
-            return
+            return False
 
         px, py = self.player.x, self.player.y
         items_here = self._items_at(px, py)
@@ -5918,9 +5977,9 @@ class Engine:
             if len(items_here) == 1:
                 _top = items_here[0]
                 if getattr(_top, "source_creature", None):
-                    self._interactable_butcher(px, py)
+                    return self._interactable_butcher(px, py)
                 else:
-                    self._take_item(_top, inv)
+                    return self._take_item(_top, inv)
             else:
                 # Multiple items — open interaction cursor with selection prompt
                 self.interaction_cursor.enter([(px, py)], px, py)
@@ -5937,12 +5996,13 @@ class Engine:
                     "Nothing here.",
                     WORN_STONE,
                 )
-                return
+                return False
             self._pickup_mode = True
             self.log.add(
                 "Pick up from where? (movement key, ESC to cancel)",
                 WORN_STONE,
             )
+        return False
 
     def _items_at(self, x: int, y: int) -> list:
         """Return items at tile — checks floor_objects first, falls back to entities."""
@@ -5964,21 +6024,19 @@ class Engine:
             for dy in range(-1, 2):
                 if dx == 0 and dy == 0:
                     continue
-                results.extend(
-                    self._items_at(
-                        self.player.x + dx,
-                        self.player.y + dy,
-                    )
-                )
+                x, y = self.player.x + dx, self.player.y + dy
+                if self.interaction_cursor.can_reach(self, x, y):
+                    results.extend(self._items_at(x, y))
         return results
 
-    def _take_item(self, item: "Item", inv: "Inventory") -> None:
+    def _take_item(self, item: "Item", inv: "Inventory") -> bool:
         from engine.item_transfers import take_floor
         if take_floor(self, item):
             _iname = getattr(item, "name", "") or "something"
             self.log.add(f"Thou takest the {_iname}.", WORN_STONE)
-        else:
-            self.log.add("Thou canst not take that now.", OLD_GOLD)
+            return True
+        self.log.add("Thou canst not take that now.", OLD_GOLD)
+        return False
 
     # ------------------------------------------------------------------ #
     #  Spawn safety

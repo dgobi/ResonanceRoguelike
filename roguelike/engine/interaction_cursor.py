@@ -28,8 +28,8 @@ class InteractionCursor:
     Adjacent-tile selection cursor activated by Shift+G when 2+ candidates exist.
 
     Cursor position is stored as absolute world coords (_cursor_x, _cursor_y).
-    Navigation wraps within the 3×3 grid around the player — every adjacent tile
-    is always reachable. The player's own tile (offset 0,0) is skipped.
+    Navigation stays within the map and the 3×3 grid around the player.
+    The player's own tile (offset 0,0) is reachable.
 
     candidates  — (x, y) positions with harvestable terrain or floor items
     player_x/y  — player position at time of entering cursor mode
@@ -64,6 +64,7 @@ class InteractionCursor:
         Open cursor. Starts on the nearest candidate (manhattan, ties by scan order).
         If no candidates, starts on the player's own tile.
         """
+        self._selection_prompt = None
         self.candidates = list(candidates)
         self.player_x   = player_x
         self.player_y   = player_y
@@ -90,7 +91,7 @@ class InteractionCursor:
     #  Navigation
     # ------------------------------------------------------------------ #
 
-    def _move(self, dx: int, dy: int) -> None:
+    def _move(self, dx: int, dy: int, local_map) -> None:
         """
         Move cursor one step within the 3×3 grid centred on the player.
         Offsets are clamped to [-1, +1] — pressing into a boundary does nothing.
@@ -98,8 +99,38 @@ class InteractionCursor:
         """
         ox = self._cursor_x - self.player_x
         oy = self._cursor_y - self.player_y
-        self._cursor_x = self.player_x + max(-1, min(1, ox + dx))
-        self._cursor_y = self.player_y + max(-1, min(1, oy + dy))
+        self._cursor_x = max(0, min(local_map.width - 1,
+                                  self.player_x + max(-1, min(1, ox + dx))))
+        self._cursor_y = max(0, min(local_map.height - 1,
+                                  self.player_y + max(-1, min(1, oy + dy))))
+
+    @staticmethod
+    def can_reach(engine: "Engine", x: int, y: int) -> bool:
+        """Physical interactions need a visible adjacent tile in the current map."""
+        local_map = engine.local_map
+        px, py = engine.player.x, engine.player.y
+        if (not local_map.in_bounds(x, y)
+                or not bool(local_map.visible[x, y])
+                or max(abs(x - px), abs(y - py)) > 1):
+            return False
+        # The target itself may be solid (a stele or container). Only sealed
+        # diagonal corners obstruct reaching it; do not require a walkable target.
+        dx, dy = x - px, y - py
+        if dx and dy:
+            return bool(local_map.walkable[px + dx, py]
+                        or local_map.walkable[px, py + dy])
+        return True
+
+    @staticmethod
+    def _finish_action(engine: "Engine") -> None:
+        """Spend the action once, including any existing multi-turn work debt."""
+        from engine.engine import GameMode
+        engine._log_scroll = 0
+        engine._advance_turn()
+        while engine._move_debt >= 1.0 and not getattr(engine, "_player_is_dead", False):
+            engine._move_debt -= 1.0
+            engine._advance_turn()
+        engine.mode = GameMode.LOCAL
 
     # ------------------------------------------------------------------ #
     #  Input
@@ -119,11 +150,14 @@ class InteractionCursor:
 
         if key in MOVE_KEYS:
             dx, dy = MOVE_KEYS[key]
-            self._move(dx, dy)
+            self._move(dx, dy, engine.local_map)
             return
 
         if key in (pygame.K_RETURN, pygame.K_KP_ENTER, pygame.K_g):
             cx, cy = self._cursor_x, self._cursor_y
+            if not self.can_reach(engine, cx, cy):
+                engine.log.add("You cannot reach that.", MSG_DEFAULT)
+                return
             if (cx, cy) in self.candidates:
                 self._interact(engine)
                 return
@@ -139,15 +173,19 @@ class InteractionCursor:
             engine.mode = GameMode.LOCAL
             return
 
-    def _interact(self, engine: "Engine") -> None:
-        """Harvest, gather, interact with, or pick up at cursor position."""
-        from engine.engine import GameMode
+    def _interact(self, engine: "Engine", *, interactable_only: bool = False) -> None:
+        """Run a reachable action; look-mode dispatch shares this action clock."""
         cx, cy = self._cursor_x, self._cursor_y
+        if not self.can_reach(engine, cx, cy):
+            engine.log.add("You cannot reach that.", MSG_DEFAULT)
+            return
 
-        acted = engine._try_harvest(cx, cy)
-        if not acted:
+        acted = False
+        if not interactable_only:
+            acted = engine._try_harvest(cx, cy)
+        if not acted and not interactable_only:
             acted = engine._try_gather(cx, cy)
-        if not acted:
+        if not acted and not interactable_only:
             items = engine._items_at(cx, cy)
             if items:
                 if len(items) == 1:
@@ -157,8 +195,9 @@ class InteractionCursor:
                     else:
                         inv = getattr(engine.player, "inventory", None)
                         if inv is not None:
-                            engine._take_item(_top, inv)
-                            acted = True
+                            acted = engine._take_item(_top, inv)
+                    if not acted:
+                        return  # A rejected pickup must not trigger a different action.
                 else:
                     # Multiple items — open selection prompt
                     self._selection_prompt = {
@@ -177,12 +216,7 @@ class InteractionCursor:
                 engine.log.add("Not ready.", WORN_STONE)
                 return
         if acted:
-            engine._log_scroll = 0
-            engine._advance_turn()
-            while engine._move_debt >= 1.0:
-                engine._move_debt -= 1.0
-                engine._advance_turn()
-            engine.mode = GameMode.LOCAL
+            self._finish_action(engine)
 
     def _handle_selection_key(self, key: int, engine: "Engine") -> None:
         """Handle input for multi-item selection prompt."""
@@ -206,27 +240,36 @@ class InteractionCursor:
             lx, ly = prompt["lx"], prompt["ly"]
             is_container = prompt.get("source") == "container"
             self._selection_prompt = None
+            if not self.can_reach(engine, lx, ly):
+                engine.log.add("You cannot reach that.", MSG_DEFAULT)
+                return
+            acted = False
             if is_container:
-                self._handle_container_take(sel, items, lx, ly, engine)
-            elif sel < len(items):
-                # Single item selected
+                acted = self._handle_container_take(sel, items, lx, ly, engine)
+            elif 0 <= sel < len(items):
+                # A prompt owns no item: it can only take an instance still here.
                 item = items[sel]
+                if not any(owned is item for owned in engine._items_at(lx, ly)):
+                    engine.log.add("That item is no longer here.", MSG_DEFAULT)
+                    return
                 if getattr(item, "source_creature", None):
-                    engine._interactable_butcher(lx, ly)
+                    acted = engine._interactable_butcher(lx, ly)
                 else:
                     inv = getattr(engine.player, "inventory", None)
                     if inv is not None:
-                        engine._take_item(item, inv)
-            else:
+                        acted = engine._take_item(item, inv)
+            elif sel == len(items):
                 # "Take all"
                 from engine.item_transfers import take_floor
                 inv = getattr(engine.player, "inventory", None)
                 if inv is not None:
                     _taken_names = []
                     for it in items:
-                        if not getattr(it, "source_creature", None):
+                        if (not getattr(it, "source_creature", None)
+                                and any(owned is it for owned in engine._items_at(lx, ly))):
                             if take_floor(engine, it):
                                 _taken_names.append(getattr(it, "name", "") or "something")
+                    acted = bool(_taken_names)
                     if _taken_names:
                         _parts = [f"the {n}" for n in _taken_names]
                         if len(_parts) == 1:
@@ -236,12 +279,8 @@ class InteractionCursor:
                         else:
                             _list = ", ".join(_parts[:-1]) + f", and {_parts[-1]}"
                         engine.log.add(f"Thou takest {_list}.", WORN_STONE)
-            engine._log_scroll = 0
-            engine._advance_turn()
-            while engine._move_debt >= 1.0:
-                engine._move_debt -= 1.0
-                engine._advance_turn()
-            engine.mode = GameMode.LOCAL
+            if acted:
+                self._finish_action(engine)
             return
 
         if key == pygame.K_ESCAPE:
@@ -250,20 +289,21 @@ class InteractionCursor:
 
     def _handle_container_take(
         self, sel: int, items: list, lx: int, ly: int, engine: "Engine",
-    ) -> None:
-        """Handle taking items from a container selection prompt."""
+    ) -> bool:
+        """Take selected instances; report whether at least one transfer succeeded."""
         from engine.item_transfers import take_container
         inv = getattr(engine.player, "inventory", None)
         if inv is None:
-            return
-        if sel < len(items):
+            return False
+        if 0 <= sel < len(items):
             item = items[sel]
             if take_container(engine, lx, ly, item):
                 _dname = getattr(item, "name", "") or "something"
                 engine.log.add(f"Thou takest the {_dname}.", WORN_STONE)
-            else:
-                engine.log.add("Thou canst not carry more.", EARTH_BROWN)
-        else:
+                return True
+            engine.log.add("Thou canst not carry more.", EARTH_BROWN)
+            return False
+        elif sel == len(items):
             # "Take all"
             _taken_names = []
             for it in items:
@@ -278,12 +318,17 @@ class InteractionCursor:
                 else:
                     _list = ", ".join(_parts[:-1]) + f", and {_parts[-1]}"
                 engine.log.add(f"Thou takest {_list}.", WORN_STONE)
+            return bool(_taken_names)
+        return False
 
     def _emit_empty_message(self, engine: "Engine", x: int, y: int) -> None:
         """
         Log a contextual message for an empty tile. No turn spent.
         Uses the terrain description if present; falls back to walkability.
         """
+        if not engine.local_map.in_bounds(x, y):
+            engine.log.add("You cannot reach that.", MSG_DEFAULT)
+            return
         terrain_id    = engine._resolve_terrain_id(x, y)
         terrain_entry = engine.data.terrain.get(terrain_id, {})
         desc          = terrain_entry.get("description", "")
@@ -307,18 +352,20 @@ class InteractionCursor:
         viewport: pygame.Rect,
     ) -> None:
         """Draw cursor highlight, interaction hint, and selection prompt if active."""
-        engine.look_mode.render_cursor(
-            screen, engine, cam_x, cam_y,
-            x=self._cursor_x, y=self._cursor_y,
-        )
+        if engine.local_map.in_bounds(self._cursor_x, self._cursor_y):
+            engine.look_mode.render_cursor(
+                screen, engine, cam_x, cam_y,
+                x=self._cursor_x, y=self._cursor_y,
+            )
 
         if self._selection_prompt is not None:
             self._render_selection_prompt(screen, engine, cam_x, cam_y, viewport)
             return
 
         cx, cy = self._cursor_x, self._cursor_y
-        on_candidate = (cx, cy) in self.candidates
-        if not on_candidate:
+        reachable = self.can_reach(engine, cx, cy)
+        on_candidate = reachable and (cx, cy) in self.candidates
+        if reachable and not on_candidate:
             terrain_id    = engine._resolve_terrain_id(cx, cy)
             terrain_entry = engine.data.terrain.get(terrain_id, {})
             on_candidate  = bool(terrain_entry.get("interactable"))
