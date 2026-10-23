@@ -309,6 +309,7 @@ class Engine:
         # Placement cursor
         self._pending_placement_tile:   str | None  = None
         self._pending_placement_recipe: dict | None = None
+        self._pending_craft_items: list | None = None
         self._placement_cursor_x:       int         = 0
         self._placement_cursor_y:       int         = 0
         self._placement_mode:           str         = "campfire"   # "campfire"|"drying"|"cooking"
@@ -447,6 +448,7 @@ class Engine:
         self.inventory_screen.selected = 0
         self._pending_consume = self._pending_throw = None
         self._pending_processing = self._pending_placement_recipe = None
+        self._pending_craft_items = None
         self._pending_placement_tile = None
         self._pending_blood = []
         self._pending_callouts = []
@@ -1480,14 +1482,8 @@ class Engine:
                 remaining  = burn_turns - item_ref.turns_lit
                 if remaining <= 0:
                     light.active = False
-                    # Unequip from off-hand slot
-                    equip = getattr(self.player, "equipment", None)
-                    if equip and equip.slots.get("offhand") is item_ref:
-                        equip.unequip("offhand")
-                    # Remove burned-out torch from inventory
-                    inv = getattr(self.player, "inventory", None)
-                    if inv and item_ref in inv.items:
-                        inv.remove(item_ref)
+                    from engine.item_transfers import consume
+                    consume(self, item_ref)
                     self._update_fov()
                     self.log.add_danger(
                         f"Your {item_ref.name} gutters and dies. "
@@ -1707,7 +1703,7 @@ class Engine:
                 tx = self.player.x + dx
                 ty = self.player.y + dy
                 inv = getattr(self.player, "inventory", None)
-                if inv:
+                if inv is not None:
                     items = self._items_at(tx, ty)
                     if items:
                         self._take_item(items[-1], inv)
@@ -3688,10 +3684,11 @@ class Engine:
             # Fill the water skin
             for it in inv.items:
                 if getattr(it, "item_id", "") == "empty_water_skin":
-                    inv.remove(it)
                     full = self.item_factory.create("water_skin")
-                    if full:
-                        inv.add(full)
+                    from engine.item_transfers import exchange
+                    if full is None or not exchange(self, [it], [full]):
+                        self.rain_collection_progress = 0
+                        return
                     _item_name = full.name if full else "water skin"
                     self.log.add(f"Rain fills the {_item_name}.", MSG_DEFAULT)
                     self.callouts.add("FILLED", float(self.player.x),
@@ -3741,7 +3738,9 @@ class Engine:
         if inv is None:
             return False
 
-        inv.add(item)
+        if not inv.add(item):
+            self.log.add("No room.", MSG_DEFAULT)
+            return False
         self.log.add(f"You take a cutting of {display_name}.", MSG_DEFAULT)
 
         # deep_harvest perk: 30% chance to NOT deplete the tile
@@ -4067,10 +4066,11 @@ class Engine:
         if inv:
             for it in inv.items:
                 if getattr(it, "item_id", "") == "empty_water_skin":
-                    inv.remove(it)
                     full = self.item_factory.create("water_skin")
-                    if full:
-                        inv.add(full)
+                    from engine.item_transfers import exchange
+                    if full is None or not exchange(self, [it], [full]):
+                        self.log.add("No room for the filled skin.", MSG_DEFAULT)
+                        return False
                     item_name = full.name if full else "water skin"
                     self.log.add(
                         f"Thou fillest the {item_name} at the shallows.",
@@ -4388,10 +4388,15 @@ class Engine:
     #  Placement cursor
     # ------------------------------------------------------------------ #
 
-    def _start_placement_cursor(self, tile_id: str, recipe: dict) -> None:
+    def _start_placement_cursor(self, tile_id: str, recipe: dict, selected=None) -> None:
         """Enter PLACEMENT_CURSOR mode after a places_in_world craft succeeds."""
         self._pending_placement_tile   = tile_id
         self._pending_placement_recipe = recipe
+        from engine.crafting import plan_craft
+        from rendering.craft_screen import CraftScreen
+        self._pending_craft_items = selected if selected is not None else plan_craft(
+            recipe, self.player.inventory, ambient_sources=CraftScreen._build_ambient_sources(self))[0]
+        self._placement_mode = "campfire"
         # Start on the tile adjacent to the player (north) as a sensible default
         self._placement_cursor_x = self.player.x
         self._placement_cursor_y = max(0, self.player.y - 1)
@@ -4450,11 +4455,15 @@ class Engine:
             return False
         return True
 
-    def _start_processing_placement(self, recipe: dict) -> None:
+    def _start_processing_placement(self, recipe: dict, selected=None) -> None:
         """Enter PLACEMENT_CURSOR mode for a passive_processing recipe."""
         decor_id = recipe.get("processing_decor", "")
         self._pending_processing   = recipe
         self._pending_placement_recipe = recipe
+        from engine.crafting import plan_craft
+        from rendering.craft_screen import CraftScreen
+        self._pending_craft_items = selected if selected is not None else plan_craft(
+            recipe, self.player.inventory, ambient_sources=CraftScreen._build_ambient_sources(self))[0]
         self._pending_placement_tile   = decor_id
         source = recipe.get("processing_source", "drying")
         self._placement_mode = "cooking" if source == "cooking" else "drying"
@@ -4518,18 +4527,21 @@ class Engine:
                 if recipe is None:
                     self.mode = GameMode.LOCAL
                     return
-                from engine.crafting import can_craft, attempt_craft
+                from engine.crafting import commit_craft
                 inv     = getattr(self.player, "inventory", None)
                 kw_data = getattr(self.data, "keywords", {})
                 # Build ambient for the campfire at (cx, cy)
                 from rendering.craft_screen import CraftScreen
                 ambient = CraftScreen._build_ambient_sources(self)
-                craftable, _ = can_craft(recipe, inv, kw_data, ambient)
-                if not craftable:
+                result_id = recipe.get("result_item", "")
+                if result_id not in self.data.items or not commit_craft(
+                        self, recipe, self._pending_craft_items, ambient):
                     self.log.add("The materials are not here.", MSG_DEFAULT)
                     self._pending_processing       = None
                     self._pending_placement_tile   = None
                     self._pending_placement_recipe = None
+                    self._pending_craft_items = None
+                    self._placement_mode = "campfire"
                     self.mode = GameMode.LOCAL
                     return
                 # Capture ingredient name before consumption
@@ -4537,8 +4549,8 @@ class Engine:
                 _rsi = recipe.get("requires_single_item")
                 if _rsi:
                     from engine.crafting import _item_has_all_tags
-                    _rsi_tags = _rsi.get("tags", [])
-                    for _inv_item in (inv.items if inv else []):
+                    _rsi_tags = _rsi if isinstance(_rsi, list) else _rsi.get("tags", [])
+                    for _inv_item in (self._pending_craft_items or []):
                         if _item_has_all_tags(_inv_item, _rsi_tags):
                             _ingredient_name = getattr(_inv_item, "name", "")
                             break
@@ -4546,13 +4558,12 @@ class Engine:
                     # Fall back to first component match
                     from engine.crafting import _item_has_tag
                     for _comp in recipe.get("components", []):
-                        for _inv_item in (inv.items if inv else []):
+                        for _inv_item in (self._pending_craft_items or []):
                             if _item_has_tag(_inv_item, _comp["tag"], _comp.get("min_tier", 1)):
                                 _ingredient_name = getattr(_inv_item, "name", "")
                                 break
                         if _ingredient_name:
                             break
-                attempt_craft(recipe, inv, kw_data, ambient)
                 # Place processing decor — skip for cooking (fire tile stays)
                 decor_id = recipe.get("processing_decor", "")
                 source   = recipe.get("processing_source", "drying")
@@ -4583,6 +4594,7 @@ class Engine:
                 self._pending_processing       = None
                 self._pending_placement_tile   = None
                 self._pending_placement_recipe = None
+                self._pending_craft_items = None
                 self._placement_mode           = "campfire"
                 self.mode = GameMode.LOCAL
                 self._log_scroll = 0
@@ -4598,6 +4610,13 @@ class Engine:
                 return
             # Place the tile — decor tiles go to the decor layer, terrain to terrain
             tile_id = self._pending_placement_tile
+            from engine.crafting import commit_craft
+            from rendering.craft_screen import CraftScreen
+            if (tile_id not in self.data.decoratives and tile_id not in self.data.terrain
+                    or not commit_craft(self, self._pending_placement_recipe or {},
+                                        self._pending_craft_items, CraftScreen._build_ambient_sources(self))):
+                self.log.add("The work cannot be completed. The materials remain.", MSG_DEFAULT)
+                return
             _placed = False
             if tile_id and tile_id in self.data.decoratives:
                 from generation.decor_utils import place_decor
@@ -4616,6 +4635,7 @@ class Engine:
                 self._emit_placement_burst(cx, cy)
             self._pending_placement_tile   = None
             self._pending_placement_recipe = None
+            self._pending_craft_items = None
             self._placement_mode           = "campfire"
             self.mode = GameMode.LOCAL
             self._log_scroll = 0
@@ -4629,25 +4649,15 @@ class Engine:
                 self._pending_processing       = None
                 self._pending_placement_tile   = None
                 self._pending_placement_recipe = None
+                self._pending_craft_items = None
                 self._placement_mode           = "campfire"
                 self.mode = GameMode.LOCAL
                 return
-            # Standard campfire ESC — return components to inventory
-            recipe = self._pending_placement_recipe
-            if recipe:
-                inv = getattr(self.player, "inventory", None)
-                if inv:
-                    for ing in recipe.get("ingredients", []):
-                        for _ in range(ing["count"]):
-                            item = self.item_factory.create(
-                                ing["item"],
-                                self.player.x, self.player.y,
-                            )
-                            if item:
-                                inv.add(item)
+            # Nothing has been consumed; cancellation preserves exact instances.
             self.log.add("You decide against it.", MSG_DEFAULT)
             self._pending_placement_tile   = None
             self._pending_placement_recipe = None
+            self._pending_craft_items = None
             self._placement_mode           = "campfire"
             self.mode = GameMode.LOCAL
             return
@@ -5909,7 +5919,7 @@ class Engine:
 
     def _pick_up_item(self) -> None:
         inv = getattr(self.player, "inventory", None)
-        if not inv:
+        if inv is None:
             return
 
         px, py = self.player.x, self.player.y
@@ -5974,16 +5984,12 @@ class Engine:
         return results
 
     def _take_item(self, item: "Item", inv: "Inventory") -> None:
-        if inv.is_full:
-            self.log.add("Overburdened.", OLD_GOLD)
-            return
-        if inv.add(item):
-            from generation.floor_object_utils import remove_floor_object as _rfo_take
-            _rfo_take(self.local_map, item.x, item.y, item)
-            if item in self.entities:
-                self.entities.remove(item)
+        from engine.item_transfers import take_floor
+        if take_floor(self, item):
             _iname = getattr(item, "name", "") or "something"
             self.log.add(f"Thou takest the {_iname}.", WORN_STONE)
+        else:
+            self.log.add("Thou canst not take that now.", OLD_GOLD)
 
     # ------------------------------------------------------------------ #
     #  Spawn safety

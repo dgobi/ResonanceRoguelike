@@ -1,0 +1,62 @@
+from pathlib import Path
+import sys, os, hashlib, subprocess, json
+ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/'tools'))
+from b1_support import ENV, dump, boot
+os.environ.update(ENV)
+TASK=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT/'roguelike'))
+os.chdir(ROOT/'roguelike')
+import engine.save_manager as sm
+sm.SAVE_DIR=TASK/'before-saves'
+(sm.SAVE_DIR/'slot_0').mkdir(parents=True,exist_ok=True)
+dump(sm.SAVE_DIR/'slot_0/world.json',{'seed':20261020})
+import config
+config.DEBUG_MODE=False
+from b2_worker import B2Evidence
+ev=B2Evidence(dict(run_id='c-before-20261023',scenario='ownership',phase='before',flavor='accepted-b3'))
+def probe(e):
+    import pygame
+    from generation.floor_object_utils import place_container,get_container_items,take_from_container
+    e.entities=[e.player]
+    p=e.player; inv=p.inventory
+    p.x=p.y=20
+    e.local_map.floor_objects.clear()
+    for x in range(19,22):
+        for y in range(19,22):
+            e.local_map.set_tile(x,y,'flagstone',True,True)
+            e.local_map.decor.pop((x,y),None)
+    for slot in p.equipment.slots:p.equipment.unequip(slot)
+    p.light_source=None
+    inv.items=[]
+    a=e.item_factory.create('crude_blade',20,20)
+    e.local_map.floor_objects[(20,20)]=[a]
+    e._pick_up_item()
+    ev.check('C-before','empty inventory blocks pickup',True,a not in inv.items)
+    inv.items=[e.item_factory.create('crow_jerky')]; inv.capacity=inv.current_weight
+    corpse=e.item_factory.create('crow_jerky',20,20);corpse.source_creature='hollow_revenant'
+    e.local_map.floor_objects[(20,20)]=[a,corpse]
+    e.interaction_cursor._selection_prompt=dict(items=[a,corpse],selected=2,lx=20,ly=20)
+    e.interaction_cursor._handle_selection_key(pygame.K_RETURN,e)
+    ev.check('C-before','take-all deletes rejected item and skipped corpse',[],e.local_map.floor_objects.get((20,20),[]))
+    a=e.item_factory.create('tallow_torch'); b=e.item_factory.create('tallow_torch'); a.turns_lit=11;b.turns_lit=77
+    place_container(e.local_map,21,20,'coffer',[a,b])
+    first=get_container_items(e.local_map,21,20,e.item_factory)
+    second=get_container_items(e.local_map,21,20,e.item_factory)
+    ev.check('C-before','container loses instance fuel and recreates previews',[0,0,False],[first[0].turns_lit,first[1].turns_lit,first[1] is second[1]])
+    inv.capacity=100
+    wood=[e.item_factory.create('wood_bundle') for _ in range(2)]
+    inv.items=wood+[e.item_factory.create('crude_blade')]
+    recipe=e.data.recipes['campfire']
+    e.craft_screen._attempt_craft(e,recipe,chosen_items={})
+    e._handle_key_placement(pygame.K_ESCAPE)
+    ev.check('C-before','campfire cancellation loses exact fuel',False,all(i in inv.items for i in wood))
+    ev.bind_sources(ROOT/'roguelike')
+boot(probe,ev)
+ev.record['passed']=all(c['passed'] for c in ev.record['checks'])
+ev.record['commit']=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+dump(TASK/'before.json',ev.record)
+tracked=subprocess.check_output(['git','ls-files','-z'],cwd=ROOT).decode().strip('\0').split('\0')
+(ROOT/'evidence/b3-latest.json').write_bytes(subprocess.check_output(['git','show','HEAD:evidence/b3-latest.json'],cwd=ROOT))
+dump(TASK/'main-before.json',{'commit':ev.record['commit'],'files':{n:hashlib.sha256((ROOT/n).read_bytes()).hexdigest() for n in tracked}})
+print(json.dumps({'passed':ev.record['passed'],'checks':len(ev.record['checks'])}))

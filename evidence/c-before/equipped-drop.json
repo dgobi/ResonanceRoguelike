@@ -1,0 +1,1410 @@
+{
+  "run_id": "b3-20261023-115239-bc89536b",
+  "source": {
+    "roguelike/config.py": "5ecf552d300806b34fafb465ddbf788efa7d3bab7e3307b2c69c45abb797b9bf",
+    "roguelike/main.py": "84ffa2761cea7df7754670890086589f568f481a0b1e2c7701b73518243b124c",
+    "roguelike/components/ai.py": "bde48decfa8f9e52f84544e2e3b002719f63a93a0613332dd754f139c61adad6",
+    "roguelike/components/corruption.py": "70010c3875aa7b42b7285ee98aefb4ee50e2e579d07dfd0f9dafefff326517b1",
+    "roguelike/components/equipment.py": "a77ba430a60fc8df7b2938cb0bc0fcf4bb9d3df08f1875b24759545dfcc01c26",
+    "roguelike/components/fighter.py": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79",
+    "roguelike/components/inventory.py": "d7216045ca601fa31490cf336ac44e3fa94dc23a98d1c8573b03b0837f4b5106",
+    "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+    "roguelike/components/level.py": "001342e1479f20dcdccb0e12f1534172c59c4c20f7f96f2efdaa25263323a652",
+    "roguelike/components/light_source.py": "de612dbee3cabda4573e40eabe5e8ee8222e80ac77bb189b5728708dbdeefe7d",
+    "roguelike/components/needs.py": "a5238691b740ee2f5a84adfa4dd26ffa2f277f5a63955a053de4f46ebdef76e4",
+    "roguelike/components/perception.py": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a",
+    "roguelike/components/perks.py": "38325a0cc89f0acf23a16e3fb68b13ea3aaf50e3b58d7ec692b051c5c97f0915",
+    "roguelike/components/__init__.py": "08ff8eb2db6a3b581197d64e73937dfcf8d245bd6304fae4bb314cdd1fb72fdf",
+    "roguelike/engine/ai_system.py": "2642eebb3020e0b892380df61deb5a6dbf9b5f6908b420b6fbe6dba9680f3001",
+    "roguelike/engine/checkpoints.py": "5961f6e5c5c0561d95fd37056d55eebdfb90fa1ecde9540ef6c1c97ff9bf7c57",
+    "roguelike/engine/combat.py": "df8aae5c06f75774314722f1be90a5a10f6923e897389cd382613f6484b708e8",
+    "roguelike/engine/crafting.py": "7fd21f2869f8cfe108578ed035cce602eec8b61a425b5f92b9da68b9620f3430",
+    "roguelike/engine/creature_abilities.py": "31c0786d200423147b48723febf69be3e700c5ac7458ab6070da284dab8bfd57",
+    "roguelike/engine/creature_factory.py": "1e0f6d8efdf2d66b1df8943fa02647b83d62efe2b2e363aca089c039637f5fec",
+    "roguelike/engine/data_loader.py": "9cac98c6a5fc2ab09d8bfc968aa76e77562b29113f3dbeb50ff51c70d0e802f9",
+    "roguelike/engine/debug.py": "421f974675864114703c6436c3afabc9e241fdcf92286152155e7c7ccabafad1",
+    "roguelike/engine/designer.py": "35347cd0d71a8c91ce5cce04ea1d000e12d05b68ed1da407332f0700959279bb",
+    "roguelike/engine/discharge.py": "d3c36cfc2cfa3fb704ff33dac2bb138780a543af7f92ce5c5fcaaed179e2adcb",
+    "roguelike/engine/display_config.py": "6e4d1b6741f3f6da2682467bd52c14f3df59a112814ec31889c7a1a0290e94c1",
+    "roguelike/engine/engine.py": "5722ed730178f0ec57d804b80bcd0c83060082f4b67ea0162b774fd0b7fb5fb6",
+    "roguelike/engine/health_screen.py": "2d94f02896ae0ffa93a0ff8c9c4ae1bce500bcf3cc12fbc3a30f0a9a344b2ffd",
+    "roguelike/engine/hooks.py": "8bf5b46ef62f1331edb772b72b4f5b6ec3c1a8c2b392b9e26cbea584a64f4d2a",
+    "roguelike/engine/interaction_cursor.py": "f1087817a7f993b0256ed714539bb56fa873dc6202fbf03d6bd5ca1fce23d6f6",
+    "roguelike/engine/inventory_screen.py": "30404ef56981c9491cb1f5d9387cdb3c770a978cff7e77cc728c50ef632c7a31",
+    "roguelike/engine/item_factory.py": "2f4ae5c163b22486228f0d61ea54e1644ffa75f4027ffff130169ac55999cac3",
+    "roguelike/engine/item_system.py": "d2664fb688b848f7f36904c87efd20663e3d77480fa2203ef929dfe55b1362da",
+    "roguelike/engine/language_system.py": "7ce0d3dc55d81a4443c35701b53cbf206b6d00b8e087b03cd35efffb89c2e185",
+    "roguelike/engine/look_mode.py": "9926b1cc90277297a60291f1b48292cb545bdd17e04c45c838d263ebaf538e9c",
+    "roguelike/engine/loot_roller.py": "7bb1b1be54d63de5dd84483a15224e5584070772a7d38d75cfafd095bfdbdce1",
+    "roguelike/engine/loot_table.py": "94e1e5c74058c439d4cde968b78ca697806f242c422e603ffa4a2e3f4699d2b2",
+    "roguelike/engine/message_log.py": "c4a3e2049d21665e87aea57b8648624c60929fbab9a55cc751ba6f03af1d9ed3",
+    "roguelike/engine/movesets.py": "af880b2ca088465dea0a5e3be49e7bbe2a835b93560bdd248ba46f9a8a995a09",
+    "roguelike/engine/palette.py": "646457ba8998f32494169d1833c129fb4c64cab05a94c62eaaec3d696702baab",
+    "roguelike/engine/perk_handlers.py": "3f4ead229c520cd0d6a14b8ebfeb92ad0bee27b3b5c352ae0bb618438c7bf92d",
+    "roguelike/engine/reality_bubble.py": "d52f1f040ef988b70ae5ec9126ec1a95fa3649bfedf4c11da75d0386374dbded",
+    "roguelike/engine/resonance_system.py": "3211dcbb1062f5082399fd88f90f69f94e8332f7d9cb5290651267c267493da9",
+    "roguelike/engine/save_components.py": "fc52904cda55084c723a5876aa2bd2e2109f8340d27a385b6fc145e011df2767",
+    "roguelike/engine/save_manager.py": "08a66e222d5617d942c29a4c15a436a224b04a33b93a7e27569f390a6a7e7748",
+    "roguelike/engine/starting_location.py": "ced446a2aa8edac8eec6b8bb8e1ae003d0d47c88229a2b07b2c32d968e15e6c2",
+    "roguelike/engine/structure_placer.py": "98ab6820daaeba7ecb90bce45958eba270975f81b43b5018e883edd0e5d1ec3f",
+    "roguelike/engine/text_reader.py": "6a8932e43bb1bd78155ad80c644b55ae219da94c17f3a7d72b6085cde2044969",
+    "roguelike/engine/turn_queue.py": "dd2d68399a8563c280cd655dfc3fb3c6e1197f70eecaf65e297d3bde8128c58e",
+    "roguelike/engine/ui.py": "c041403400a300f54ce76e4e36157c91bae1aa60207821654a6d9125afd93655",
+    "roguelike/engine/vine_system.py": "f1119dcc9685d4a3a4bc36561822cbcc4bc567852da018d571cf184903028362",
+    "roguelike/engine/visual_events.py": "9950362cadb9819e25259457ed7061175e9cff5d2b6a23593ec3989251588d3b",
+    "roguelike/engine/weather.py": "51d4d49731e7687994db79b82dd6fe9e3f8ff0f4e309144be0e735f080108277",
+    "roguelike/engine/world_time.py": "b4669d0f4cfe4bb037a88b2170d606c29408b758f9f2375fba9ad46d02fbea6c",
+    "roguelike/engine/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "roguelike/entities/actor.py": "34600dc6f36d1f3f315f59ec296be4b4f1871bd3031ae582e8fdeda783702822",
+    "roguelike/entities/entity.py": "652c3124a2af45519a8c57f6aad1e4fe53f68477cdf8411ddb6c337f3f2b5a53",
+    "roguelike/entities/item.py": "d85214b852cf00d7b9b7615a388ec959a6ae94189e3a845b36729634a8a28e7b",
+    "roguelike/entities/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "roguelike/generation/decor_utils.py": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93",
+    "roguelike/generation/entrance_gen.py": "397e6b66c4cc14ae98dc5abc0d60b103d73e066952b122fb1f6d8d03ea6502ee",
+    "roguelike/generation/floor_object_utils.py": "99359d69f5907134f23cc31ac4fd82e552c7edb2b3989f4770b8543beb651711",
+    "roguelike/generation/layout_stamper.py": "ab448b82c7fab4b9abe80b820a45f61a5dca8d29ebbc8d098bd5e032d7eb4626",
+    "roguelike/generation/local_gen.py": "0c0b6d490850c4c917d48fb774072e9950eff6c6a2571df559faf6228017680d",
+    "roguelike/generation/region_gen.py": "a1e593c8b5ff388b170b3b0fe888255e959efe18dd1d78764b8a89160a427955",
+    "roguelike/generation/town_gen.py": "68b11fd299f0a5332f6218064639b52cde99bbef68a96bf78e33762c2e2d899d",
+    "roguelike/generation/wfc.py": "547e27d99e6cef395f7b9ebae61ab43a3db515d617cbd34fd2e7e98a934ac9e8",
+    "roguelike/generation/world_gen.py": "cc7d812cd67d30dfa8c18bb7a28eae7f2eee524ead96bb17c1e78827b0f63fa2",
+    "roguelike/generation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "roguelike/rendering/biome_icons.py": "04b81d46dddc2c3495fd883cbc659f1be901f533281914b6de9b78d17be3f144",
+    "roguelike/rendering/callouts.py": "325db657d9c74bea22e5e4200f7860bf2bfc7a816f16e1d53c348eeb5be75c6c",
+    "roguelike/rendering/coords.py": "1b65e4ce892bdd6f2b89891ae53615ddadcb95fd665779133c02b9ae71c36bd6",
+    "roguelike/rendering/craft_screen.py": "b173e2049782cf0141216f532565bbc9de16f69fa3dcb743d7844c7351201865",
+    "roguelike/rendering/decor.py": "dfb2480d8dbd2a47572c2ca2153580b269e328add18e7923a70526ca24cbf62b",
+    "roguelike/rendering/glyph_gen.py": "b7fde731fbadf2257cd2fa7c8fb3588348cfb929b419f23b8144c98d78037c45",
+    "roguelike/rendering/lexicon_screen.py": "1ebdd83253521a0644ac814152a89eafbb8174f31a9649affc671b622b7323f7",
+    "roguelike/rendering/particles.py": "76d7642d530bdf62a0412e1428f43b06aba9b6011327298b0cdcb92eeacf479d",
+    "roguelike/rendering/perk_screen.py": "02eeec7bc641f89cf79665f67f85efdd0895f25db54b47b6de4bb54c2b46dffd",
+    "roguelike/rendering/renderer.py": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08",
+    "roguelike/rendering/sprite_registry.py": "814c1a6c4c1d56a0744a93feeccc2bf2a851becd98c3d40d09ddf19e4f997323",
+    "roguelike/rendering/tile_registry.py": "9a9f07a3619d03401f6367601f00bd685024e1f0dc691a41c4cdfa0555c9162a",
+    "roguelike/rendering/ui_registry.py": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058",
+    "roguelike/rendering/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "roguelike/tools/extract_phonemes.py": "9f54e6ef24cd46f5b29f1f77281d585f50b0208bf141c5e4c382d7ba2357dd19",
+    "roguelike/world/local_map.py": "8432bee3b4ca2b9d0d2c6192e5c769997da656ff445b3e916ff5186bcdf4361a",
+    "roguelike/world/name_gen.py": "8e5d788c75b1e0d4183e83bb823298a4008d57ab84fda887cd6bb84648397546",
+    "roguelike/world/region.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "roguelike/world/world_map.py": "bd5328a3741c41498d385f059c24c8f5a7095aededdaee0349a3902c3d9be54f",
+    "roguelike/world/world_myth.py": "bf9ccc805b376deafd9e43f9f0cc092f2b2b6a1d66e967b2d9ea0ca76be9dc80",
+    "roguelike/world/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tools/b1_cases.py": "4ee4c9beab7b574e72d9fd4d7421e90e95edcace910921b619429bda78907689",
+    "tools/b1_characterize.py": "3ec62f8c4346bec8dbef9e2cb14622c805ea2ff9f1de0d7933958c5b9a2ff1b6",
+    "tools/b1_diagnostic_guard.py": "dc2b26c3d9ca5ed5b727adc0fe75362e4badb3e45d8adfffd5d976f44b7bc054",
+    "tools/b1_format_cases.py": "7bf9d216f9f3e912990c4811224c9cd31b0669a51fa8e5345ce7ca72ffb53090",
+    "tools/b1_journey.py": "12971c052daa25e7e6481003426c9807e54a57f69652d0f06978d34e8c6aa5b3",
+    "tools/b1_support.py": "8c5f4f32a36e08f14b837cf0ad3ac37cd6d2dd98dd7954b25338a96c36713b7d",
+    "tools/b1_worker.py": "fb9fb2d80c58fdf33a5e674c872d12a1fe121db8a1c89e2d2297393756e7d3a2",
+    "tools/b2_cases.py": "77a024948b8f9a32f6fbf72954c97aa59d0e16deee7727b2e7b5fac6f17a6b6e",
+    "tools/b2_format_cases.py": "dad8cd6d2610a1729d216f4b0211f54ccc4f4329c68f533b8627077b64b76373",
+    "tools/b2_journey.py": "dde4da53b106f36d45026ac50a574508acda04a814ceae8024e652e026c42d7a",
+    "tools/b2_worker.py": "318f988b21c2e05777efdf77b13ae0a5a5d4782b6009d24dcef456192294da9b",
+    "tools/b3_before.py": "cab24baa67f79780c9e81321c802473b9a37cf906f47403788c7967d757d7eb6",
+    "tools/b3_cases.py": "2195be2d2c7292dc6af6f8e01adccf507224b97125bb34476c4c0abba73fb8cd",
+    "tools/b3_test_helpers.py": "fd1ebcdd471a235eb7dc8c55416bd6cc236642e8642c5b1d6e3a3ba32f116541",
+    "tools/b3_worker.py": "20c9225706f6e8f21569ccf7b50a610dff8745e6f5a1fffe52c825789b15ad00",
+    "tools/baseline.py": "807721aca9e9ba756a98962a9e710234c18d541ad994364efbaec996c4c304ee",
+    "tools/owner_lesson.py": "9ad6daf9220bb68d3bf625e1baeae80e0e96b7e80c82f94d1f1635669c85e7a3",
+    "tools/persistence_diagnostics.py": "e54af11c73656828eea0fd88306393f1cfa621932a2fe80189772f215d859697",
+    "tools/render_baseline_screens.py": "b4bc2e413f344f33aea4a2c8ca477b9ac73f1bb9c3be618a9fc2a9ddcd925c9e",
+    "tools/verify_b1.py": "ae9bdc9aef1fc64f34e29e4506f00d0f24af5e8217a0d64bdd42d9935023a767",
+    "tools/verify_b2.py": "3c1f385d2c16be2ccd3db5f4681947c08a2bf46eeae9f47da6c0bf6965eb8691",
+    "tools/verify_b3.py": "a88f047f2062f85e0c3140aebc37787a007fcc930458a26ed6d6cc7b0bbe0d53"
+  },
+  "workers": [
+    {
+      "key": "b1-journey-transfer-loop",
+      "job": {
+        "run_id": "b3-20261023-115239-bc89536b",
+        "suite": "b1",
+        "scenario": "journey",
+        "variant": "transfer",
+        "phase": "loop",
+        "flavor": "candidate",
+        "run_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\b3-20261023-115239-bc89536b",
+        "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+        "save_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\b3-20261023-115239-bc89536b\\b1-journey-transfer-loop\\saves",
+        "result": "G:\\GameDev\\RoguelikeProject\\.baseline\\b3-20261023-115239-bc89536b\\b1-journey-transfer-loop\\result.json",
+        "debug": true
+      },
+      "process": {
+        "command": [
+          "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+          "G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py",
+          "G:\\GameDev\\RoguelikeProject\\.baseline\\b3-20261023-115239-bc89536b\\b1-journey-transfer-loop\\job.json"
+        ],
+        "cwd": "G:\\GameDev\\RoguelikeProject\\roguelike",
+        "environment": {
+          "SDL_VIDEODRIVER": "dummy",
+          "SDL_AUDIODRIVER": "dummy",
+          "PYTHONHASHSEED": "20261020",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONUTF8": "1",
+          "PYGAME_HIDE_SUPPORT_PROMPT": "1"
+        },
+        "exit_code": 0,
+        "stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\n  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png\n  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png\n  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png\n  Loaded sheet 'terrain': assets/sprites/terrain.png\n  Loaded sheet 'objects': assets/sprites/objects.png\n  Loaded sheet 'creatures': assets/sprites/creatures.png\nSpriteRegistry: 263 tiles across 6 sheets\n{'scenario': 'journey', 'phase': 'loop', 'completed': True, 'passed': True, 'assertion_count': 46, 'error': None}\n",
+        "stderr": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\engine.py:5083: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.\nAdd 'from tcod import libtcodpy' if you haven't already.\nReplace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'\n  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,\n",
+        "seconds": 1.2650000000139698
+      },
+      "result": {
+        "run_id": "b3-20261023-115239-bc89536b",
+        "scenario": "journey",
+        "phase": "loop",
+        "flavor": "candidate",
+        "pid": 22348,
+        "cwd": "G:\\GameDev\\RoguelikeProject\\roguelike",
+        "argv": [
+          "G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py",
+          "G:\\GameDev\\RoguelikeProject\\.baseline\\b3-20261023-115239-bc89536b\\b1-journey-transfer-loop\\job.json"
+        ],
+        "seed": 20261020,
+        "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+        "os": "Windows-10-10.0.26200-SP0",
+        "environment": {
+          "SDL_VIDEODRIVER": "dummy",
+          "SDL_AUDIODRIVER": "dummy",
+          "PYTHONHASHSEED": "20261020",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONUTF8": "1",
+          "PYGAME_HIDE_SUPPORT_PROMPT": "1"
+        },
+        "versions": {
+          "pygame": "2.6.1",
+          "tcod": "19.3.0",
+          "numpy": "2.4.6"
+        },
+        "checks": [
+          {
+            "case": "H02",
+            "property": "original loop dummy SDL",
+            "expected": "dummy",
+            "observed": "dummy",
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "paired release prevents repeats",
+            "expected": null,
+            "observed": null,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "app-local modifier state",
+            "expected": 0,
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "H02",
+            "property": "original loop dummy SDL",
+            "expected": "dummy",
+            "observed": "dummy",
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "paired release prevents repeats",
+            "expected": null,
+            "observed": null,
+            "passed": true
+          },
+          {
+            "case": "E04",
+            "property": "pickup actual item and one turn",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "app-local modifier state",
+            "expected": 0,
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "H02",
+            "property": "original loop dummy SDL",
+            "expected": "dummy",
+            "observed": "dummy",
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "paired release prevents repeats",
+            "expected": null,
+            "observed": null,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "app-local modifier state",
+            "expected": 0,
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "H02",
+            "property": "original loop dummy SDL",
+            "expected": "dummy",
+            "observed": "dummy",
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "paired release prevents repeats",
+            "expected": null,
+            "observed": null,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "app-local modifier state",
+            "expected": 0,
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "H02",
+            "property": "original loop dummy SDL",
+            "expected": "dummy",
+            "observed": "dummy",
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "paired release prevents repeats",
+            "expected": null,
+            "observed": null,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "app-local modifier state",
+            "expected": 0,
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "H02",
+            "property": "original loop dummy SDL",
+            "expected": "dummy",
+            "observed": "dummy",
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "paired release prevents repeats",
+            "expected": null,
+            "observed": null,
+            "passed": true
+          },
+          {
+            "case": "E04",
+            "property": "UI equips exact picked-up blade",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E04",
+            "property": "equip turn cost",
+            "expected": 482,
+            "observed": 482,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "app-local modifier state",
+            "expected": 0,
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "H02",
+            "property": "original loop dummy SDL",
+            "expected": "dummy",
+            "observed": "dummy",
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "paired release prevents repeats",
+            "expected": null,
+            "observed": null,
+            "passed": true
+          },
+          {
+            "case": "E04",
+            "property": "drop moves exact object to floor",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E04",
+            "property": "drop turn cost",
+            "expected": 483,
+            "observed": 483,
+            "passed": true
+          },
+          {
+            "case": "E04",
+            "property": "preexisting equipped drop stale-slot signature",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "app-local modifier state",
+            "expected": 0,
+            "observed": 0,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "event accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "H02",
+            "property": "original loop dummy SDL",
+            "expected": "dummy",
+            "observed": "dummy",
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "paired release prevents repeats",
+            "expected": null,
+            "observed": null,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "QUIT accepted",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "E01",
+            "property": "original loop completed bounded driver",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          },
+          {
+            "case": "H02",
+            "property": "actual copied source binding",
+            "expected": true,
+            "observed": true,
+            "passed": true
+          }
+        ],
+        "trace": [
+          {
+            "frame": 0,
+            "position": [
+              15,
+              20
+            ],
+            "scene": [
+              0,
+              64,
+              "sub_0_64_0"
+            ],
+            "turn": 480,
+            "mode": "local",
+            "inventory": false,
+            "text": false,
+            "counters": {
+              "save": 0,
+              "load": 0,
+              "configure": 1,
+              "teleport": 0,
+              "dump": 0
+            },
+            "event": {
+              "key": 44,
+              "unicode": ",",
+              "mod": 0,
+              "actual_mods": 0
+            }
+          },
+          {
+            "frame": 1,
+            "position": [
+              20,
+              20
+            ],
+            "scene": [
+              0,
+              64,
+              "sub_0_64_0"
+            ],
+            "turn": 481,
+            "mode": "local",
+            "inventory": false,
+            "text": false,
+            "counters": {
+              "save": 0,
+              "load": 0,
+              "configure": 1,
+              "teleport": 0,
+              "dump": 0
+            },
+            "event": {
+              "key": 105,
+              "unicode": "i",
+              "mod": 0,
+              "actual_mods": 0
+            }
+          },
+          {
+            "frame": 2,
+            "position": [
+              20,
+              20
+            ],
+            "scene": [
+              0,
+              64,
+              "sub_0_64_0"
+            ],
+            "turn": 481,
+            "mode": "local",
+            "inventory": true,
+            "text": false,
+            "counters": {
+              "save": 0,
+              "load": 0,
+              "configure": 1,
+              "teleport": 0,
+              "dump": 0
+            },
+            "event": {
+              "key": 1073741905,
+              "unicode": "",
+              "mod": 0,
+              "actual_mods": 0
+            }
+          },
+          {
+            "frame": 3,
+            "position": [
+              20,
+              20
+            ],
+            "scene": [
+              0,
+              64,
+              "sub_0_64_0"
+            ],
+            "turn": 481,
+            "mode": "local",
+            "inventory": true,
+            "text": false,
+            "counters": {
+              "save": 0,
+              "load": 0,
+              "configure": 1,
+              "teleport": 0,
+              "dump": 0
+            },
+            "event": {
+              "key": 1073741905,
+              "unicode": "",
+              "mod": 0,
+              "actual_mods": 0
+            }
+          },
+          {
+            "frame": 4,
+            "position": [
+              20,
+              20
+            ],
+            "scene": [
+              0,
+              64,
+              "sub_0_64_0"
+            ],
+            "turn": 481,
+            "mode": "local",
+            "inventory": true,
+            "text": false,
+            "counters": {
+              "save": 0,
+              "load": 0,
+              "configure": 1,
+              "teleport": 0,
+              "dump": 0
+            },
+            "event": {
+              "key": 13,
+              "unicode": "\r",
+              "mod": 0,
+              "actual_mods": 0
+            }
+          },
+          {
+            "frame": 5,
+            "position": [
+              20,
+              20
+            ],
+            "scene": [
+              0,
+              64,
+              "sub_0_64_0"
+            ],
+            "turn": 482,
+            "mode": "local",
+            "inventory": true,
+            "text": false,
+            "counters": {
+              "save": 0,
+              "load": 0,
+              "configure": 1,
+              "teleport": 0,
+              "dump": 0
+            },
+            "event": {
+              "key": 100,
+              "unicode": "d",
+              "mod": 0,
+              "actual_mods": 0
+            }
+          },
+          {
+            "frame": 6,
+            "position": [
+              20,
+              20
+            ],
+            "scene": [
+              0,
+              64,
+              "sub_0_64_0"
+            ],
+            "turn": 483,
+            "mode": "local",
+            "inventory": true,
+            "text": false,
+            "counters": {
+              "save": 0,
+              "load": 0,
+              "configure": 1,
+              "teleport": 0,
+              "dump": 0
+            },
+            "event": {
+              "key": 105,
+              "unicode": "i",
+              "mod": 0,
+              "actual_mods": 0
+            }
+          },
+          {
+            "frame": 7,
+            "position": [
+              20,
+              20
+            ],
+            "scene": [
+              0,
+              64,
+              "sub_0_64_0"
+            ],
+            "turn": 483,
+            "mode": "local",
+            "inventory": false,
+            "text": false,
+            "counters": {
+              "save": 0,
+              "load": 0,
+              "configure": 1,
+              "teleport": 0,
+              "dump": 0
+            }
+          }
+        ],
+        "defects": [
+          {
+            "case": "E04",
+            "id": "C-DROP-EQUIPPED",
+            "scope": "C transfers",
+            "symptom": {
+              "inventory_contains": false,
+              "floor_contains": true,
+              "weapon_still_same": true
+            }
+          }
+        ],
+        "completed": true,
+        "suite": "b1",
+        "variant": "transfer",
+        "fixture_setup": [
+          "Place player at walkable fixture (20,20); clear nearby decor",
+          "Factory crude_blade placed on floor at player; normal starting bag retained"
+        ],
+        "captures": [
+          "G:\\GameDev\\RoguelikeProject\\.baseline\\b3-20261023-115239-bc89536b\\b1-journey-transfer-loop\\dropped-equipped-blade.png"
+        ],
+        "frames": 8,
+        "actions": 7,
+        "counters": {
+          "save": 0,
+          "load": 0,
+          "configure": 1,
+          "teleport": 0,
+          "dump": 0
+        },
+        "elapsed_seconds": 0.7810000000172295,
+        "evidence_class": "Original Engine.run, real event.post/get, original handlers and renderer",
+        "imported_sources": {
+          "components.ai": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\ai.py",
+            "relative": "components/ai.py",
+            "sha256": "bde48decfa8f9e52f84544e2e3b002719f63a93a0613332dd754f139c61adad6"
+          },
+          "components.corruption": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\corruption.py",
+            "relative": "components/corruption.py",
+            "sha256": "70010c3875aa7b42b7285ee98aefb4ee50e2e579d07dfd0f9dafefff326517b1"
+          },
+          "components.equipment": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\equipment.py",
+            "relative": "components/equipment.py",
+            "sha256": "a77ba430a60fc8df7b2938cb0bc0fcf4bb9d3df08f1875b24759545dfcc01c26"
+          },
+          "components.fighter": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\fighter.py",
+            "relative": "components/fighter.py",
+            "sha256": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79"
+          },
+          "components.inventory": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\inventory.py",
+            "relative": "components/inventory.py",
+            "sha256": "d7216045ca601fa31490cf336ac44e3fa94dc23a98d1c8573b03b0837f4b5106"
+          },
+          "components.language": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\language.py",
+            "relative": "components/language.py",
+            "sha256": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4"
+          },
+          "components.level": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\level.py",
+            "relative": "components/level.py",
+            "sha256": "001342e1479f20dcdccb0e12f1534172c59c4c20f7f96f2efdaa25263323a652"
+          },
+          "components.light_source": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\light_source.py",
+            "relative": "components/light_source.py",
+            "sha256": "de612dbee3cabda4573e40eabe5e8ee8222e80ac77bb189b5728708dbdeefe7d"
+          },
+          "components.needs": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\needs.py",
+            "relative": "components/needs.py",
+            "sha256": "a5238691b740ee2f5a84adfa4dd26ffa2f277f5a63955a053de4f46ebdef76e4"
+          },
+          "components.perception": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\perception.py",
+            "relative": "components/perception.py",
+            "sha256": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a"
+          },
+          "components.perks": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\perks.py",
+            "relative": "components/perks.py",
+            "sha256": "38325a0cc89f0acf23a16e3fb68b13ea3aaf50e3b58d7ec692b051c5c97f0915"
+          },
+          "config": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\config.py",
+            "relative": "config.py",
+            "sha256": "5ecf552d300806b34fafb465ddbf788efa7d3bab7e3307b2c69c45abb797b9bf"
+          },
+          "engine.ai_system": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\ai_system.py",
+            "relative": "engine/ai_system.py",
+            "sha256": "2642eebb3020e0b892380df61deb5a6dbf9b5f6908b420b6fbe6dba9680f3001"
+          },
+          "engine.checkpoints": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\checkpoints.py",
+            "relative": "engine/checkpoints.py",
+            "sha256": "5961f6e5c5c0561d95fd37056d55eebdfb90fa1ecde9540ef6c1c97ff9bf7c57"
+          },
+          "engine.creature_factory": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\creature_factory.py",
+            "relative": "engine/creature_factory.py",
+            "sha256": "1e0f6d8efdf2d66b1df8943fa02647b83d62efe2b2e363aca089c039637f5fec"
+          },
+          "engine.data_loader": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\data_loader.py",
+            "relative": "engine/data_loader.py",
+            "sha256": "9cac98c6a5fc2ab09d8bfc968aa76e77562b29113f3dbeb50ff51c70d0e802f9"
+          },
+          "engine.debug": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\debug.py",
+            "relative": "engine/debug.py",
+            "sha256": "421f974675864114703c6436c3afabc9e241fdcf92286152155e7c7ccabafad1"
+          },
+          "engine.display_config": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\display_config.py",
+            "relative": "engine/display_config.py",
+            "sha256": "6e4d1b6741f3f6da2682467bd52c14f3df59a112814ec31889c7a1a0290e94c1"
+          },
+          "engine.engine": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\engine.py",
+            "relative": "engine/engine.py",
+            "sha256": "5722ed730178f0ec57d804b80bcd0c83060082f4b67ea0162b774fd0b7fb5fb6"
+          },
+          "engine.health_screen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\health_screen.py",
+            "relative": "engine/health_screen.py",
+            "sha256": "2d94f02896ae0ffa93a0ff8c9c4ae1bce500bcf3cc12fbc3a30f0a9a344b2ffd"
+          },
+          "engine.hooks": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\hooks.py",
+            "relative": "engine/hooks.py",
+            "sha256": "8bf5b46ef62f1331edb772b72b4f5b6ec3c1a8c2b392b9e26cbea584a64f4d2a"
+          },
+          "engine.interaction_cursor": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\interaction_cursor.py",
+            "relative": "engine/interaction_cursor.py",
+            "sha256": "f1087817a7f993b0256ed714539bb56fa873dc6202fbf03d6bd5ca1fce23d6f6"
+          },
+          "engine.inventory_screen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\inventory_screen.py",
+            "relative": "engine/inventory_screen.py",
+            "sha256": "30404ef56981c9491cb1f5d9387cdb3c770a978cff7e77cc728c50ef632c7a31"
+          },
+          "engine.item_factory": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\item_factory.py",
+            "relative": "engine/item_factory.py",
+            "sha256": "2f4ae5c163b22486228f0d61ea54e1644ffa75f4027ffff130169ac55999cac3"
+          },
+          "engine.item_system": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\item_system.py",
+            "relative": "engine/item_system.py",
+            "sha256": "d2664fb688b848f7f36904c87efd20663e3d77480fa2203ef929dfe55b1362da"
+          },
+          "engine.language_system": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\language_system.py",
+            "relative": "engine/language_system.py",
+            "sha256": "7ce0d3dc55d81a4443c35701b53cbf206b6d00b8e087b03cd35efffb89c2e185"
+          },
+          "engine.look_mode": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\look_mode.py",
+            "relative": "engine/look_mode.py",
+            "sha256": "9926b1cc90277297a60291f1b48292cb545bdd17e04c45c838d263ebaf538e9c"
+          },
+          "engine.loot_roller": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\loot_roller.py",
+            "relative": "engine/loot_roller.py",
+            "sha256": "7bb1b1be54d63de5dd84483a15224e5584070772a7d38d75cfafd095bfdbdce1"
+          },
+          "engine.message_log": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\message_log.py",
+            "relative": "engine/message_log.py",
+            "sha256": "c4a3e2049d21665e87aea57b8648624c60929fbab9a55cc751ba6f03af1d9ed3"
+          },
+          "engine.palette": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\palette.py",
+            "relative": "engine/palette.py",
+            "sha256": "646457ba8998f32494169d1833c129fb4c64cab05a94c62eaaec3d696702baab"
+          },
+          "engine.perk_handlers": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\perk_handlers.py",
+            "relative": "engine/perk_handlers.py",
+            "sha256": "3f4ead229c520cd0d6a14b8ebfeb92ad0bee27b3b5c352ae0bb618438c7bf92d"
+          },
+          "engine.reality_bubble": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\reality_bubble.py",
+            "relative": "engine/reality_bubble.py",
+            "sha256": "d52f1f040ef988b70ae5ec9126ec1a95fa3649bfedf4c11da75d0386374dbded"
+          },
+          "engine.resonance_system": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\resonance_system.py",
+            "relative": "engine/resonance_system.py",
+            "sha256": "3211dcbb1062f5082399fd88f90f69f94e8332f7d9cb5290651267c267493da9"
+          },
+          "engine.save_components": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\save_components.py",
+            "relative": "engine/save_components.py",
+            "sha256": "fc52904cda55084c723a5876aa2bd2e2109f8340d27a385b6fc145e011df2767"
+          },
+          "engine.save_manager": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\save_manager.py",
+            "relative": "engine/save_manager.py",
+            "sha256": "08a66e222d5617d942c29a4c15a436a224b04a33b93a7e27569f390a6a7e7748"
+          },
+          "engine.text_reader": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\text_reader.py",
+            "relative": "engine/text_reader.py",
+            "sha256": "6a8932e43bb1bd78155ad80c644b55ae219da94c17f3a7d72b6085cde2044969"
+          },
+          "engine.ui": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\ui.py",
+            "relative": "engine/ui.py",
+            "sha256": "c041403400a300f54ce76e4e36157c91bae1aa60207821654a6d9125afd93655"
+          },
+          "engine.visual_events": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\visual_events.py",
+            "relative": "engine/visual_events.py",
+            "sha256": "9950362cadb9819e25259457ed7061175e9cff5d2b6a23593ec3989251588d3b"
+          },
+          "engine.weather": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\weather.py",
+            "relative": "engine/weather.py",
+            "sha256": "51d4d49731e7687994db79b82dd6fe9e3f8ff0f4e309144be0e735f080108277"
+          },
+          "engine.world_time": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\world_time.py",
+            "relative": "engine/world_time.py",
+            "sha256": "b4669d0f4cfe4bb037a88b2170d606c29408b758f9f2375fba9ad46d02fbea6c"
+          },
+          "entities.actor": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\actor.py",
+            "relative": "entities/actor.py",
+            "sha256": "34600dc6f36d1f3f315f59ec296be4b4f1871bd3031ae582e8fdeda783702822"
+          },
+          "entities.entity": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\entity.py",
+            "relative": "entities/entity.py",
+            "sha256": "652c3124a2af45519a8c57f6aad1e4fe53f68477cdf8411ddb6c337f3f2b5a53"
+          },
+          "entities.item": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\item.py",
+            "relative": "entities/item.py",
+            "sha256": "d85214b852cf00d7b9b7615a388ec959a6ae94189e3a845b36729634a8a28e7b"
+          },
+          "generation.decor_utils": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\decor_utils.py",
+            "relative": "generation/decor_utils.py",
+            "sha256": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93"
+          },
+          "generation.entrance_gen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\entrance_gen.py",
+            "relative": "generation/entrance_gen.py",
+            "sha256": "397e6b66c4cc14ae98dc5abc0d60b103d73e066952b122fb1f6d8d03ea6502ee"
+          },
+          "generation.floor_object_utils": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\floor_object_utils.py",
+            "relative": "generation/floor_object_utils.py",
+            "sha256": "99359d69f5907134f23cc31ac4fd82e552c7edb2b3989f4770b8543beb651711"
+          },
+          "generation.layout_stamper": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\layout_stamper.py",
+            "relative": "generation/layout_stamper.py",
+            "sha256": "ab448b82c7fab4b9abe80b820a45f61a5dca8d29ebbc8d098bd5e032d7eb4626"
+          },
+          "generation.local_gen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\local_gen.py",
+            "relative": "generation/local_gen.py",
+            "sha256": "0c0b6d490850c4c917d48fb774072e9950eff6c6a2571df559faf6228017680d"
+          },
+          "generation.region_gen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\region_gen.py",
+            "relative": "generation/region_gen.py",
+            "sha256": "a1e593c8b5ff388b170b3b0fe888255e959efe18dd1d78764b8a89160a427955"
+          },
+          "generation.town_gen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\town_gen.py",
+            "relative": "generation/town_gen.py",
+            "sha256": "68b11fd299f0a5332f6218064639b52cde99bbef68a96bf78e33762c2e2d899d"
+          },
+          "generation.world_gen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\world_gen.py",
+            "relative": "generation/world_gen.py",
+            "sha256": "cc7d812cd67d30dfa8c18bb7a28eae7f2eee524ead96bb17c1e78827b0f63fa2"
+          },
+          "main": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\main.py",
+            "relative": "main.py",
+            "sha256": "84ffa2761cea7df7754670890086589f568f481a0b1e2c7701b73518243b124c"
+          },
+          "rendering.callouts": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\callouts.py",
+            "relative": "rendering/callouts.py",
+            "sha256": "325db657d9c74bea22e5e4200f7860bf2bfc7a816f16e1d53c348eeb5be75c6c"
+          },
+          "rendering.craft_screen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\craft_screen.py",
+            "relative": "rendering/craft_screen.py",
+            "sha256": "b173e2049782cf0141216f532565bbc9de16f69fa3dcb743d7844c7351201865"
+          },
+          "rendering.decor": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\decor.py",
+            "relative": "rendering/decor.py",
+            "sha256": "dfb2480d8dbd2a47572c2ca2153580b269e328add18e7923a70526ca24cbf62b"
+          },
+          "rendering.glyph_gen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\glyph_gen.py",
+            "relative": "rendering/glyph_gen.py",
+            "sha256": "b7fde731fbadf2257cd2fa7c8fb3588348cfb929b419f23b8144c98d78037c45"
+          },
+          "rendering.lexicon_screen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\lexicon_screen.py",
+            "relative": "rendering/lexicon_screen.py",
+            "sha256": "1ebdd83253521a0644ac814152a89eafbb8174f31a9649affc671b622b7323f7"
+          },
+          "rendering.particles": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\particles.py",
+            "relative": "rendering/particles.py",
+            "sha256": "76d7642d530bdf62a0412e1428f43b06aba9b6011327298b0cdcb92eeacf479d"
+          },
+          "rendering.perk_screen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\perk_screen.py",
+            "relative": "rendering/perk_screen.py",
+            "sha256": "02eeec7bc641f89cf79665f67f85efdd0895f25db54b47b6de4bb54c2b46dffd"
+          },
+          "rendering.renderer": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\renderer.py",
+            "relative": "rendering/renderer.py",
+            "sha256": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08"
+          },
+          "rendering.sprite_registry": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\sprite_registry.py",
+            "relative": "rendering/sprite_registry.py",
+            "sha256": "814c1a6c4c1d56a0744a93feeccc2bf2a851becd98c3d40d09ddf19e4f997323"
+          },
+          "rendering.tile_registry": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\tile_registry.py",
+            "relative": "rendering/tile_registry.py",
+            "sha256": "9a9f07a3619d03401f6367601f00bd685024e1f0dc691a41c4cdfa0555c9162a"
+          },
+          "rendering.ui_registry": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\ui_registry.py",
+            "relative": "rendering/ui_registry.py",
+            "sha256": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058"
+          },
+          "world.local_map": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\local_map.py",
+            "relative": "world/local_map.py",
+            "sha256": "8432bee3b4ca2b9d0d2c6192e5c769997da656ff445b3e916ff5186bcdf4361a"
+          },
+          "world.name_gen": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\name_gen.py",
+            "relative": "world/name_gen.py",
+            "sha256": "8e5d788c75b1e0d4183e83bb823298a4008d57ab84fda887cd6bb84648397546"
+          },
+          "world.world_map": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\world_map.py",
+            "relative": "world/world_map.py",
+            "sha256": "bd5328a3741c41498d385f059c24c8f5a7095aededdaee0349a3902c3d9be54f"
+          },
+          "world.world_myth": {
+            "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\world_myth.py",
+            "relative": "world/world_myth.py",
+            "sha256": "bf9ccc805b376deafd9e43f9f0cc092f2b2b6a1d66e967b2d9ea0ca76be9dc80"
+          }
+        },
+        "assertion_count": 46,
+        "passed": true
+      },
+      "valid": true,
+      "validation_error": null
+    }
+  ],
+  "checks": [
+    {
+      "case": "B3-H",
+      "property": "b1-journey-transfer-loop completed bounded contract",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B3-H",
+      "property": "source stayed unchanged throughout gate",
+      "expected": {
+        "roguelike/config.py": "5ecf552d300806b34fafb465ddbf788efa7d3bab7e3307b2c69c45abb797b9bf",
+        "roguelike/main.py": "84ffa2761cea7df7754670890086589f568f481a0b1e2c7701b73518243b124c",
+        "roguelike/components/ai.py": "bde48decfa8f9e52f84544e2e3b002719f63a93a0613332dd754f139c61adad6",
+        "roguelike/components/corruption.py": "70010c3875aa7b42b7285ee98aefb4ee50e2e579d07dfd0f9dafefff326517b1",
+        "roguelike/components/equipment.py": "a77ba430a60fc8df7b2938cb0bc0fcf4bb9d3df08f1875b24759545dfcc01c26",
+        "roguelike/components/fighter.py": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79",
+        "roguelike/components/inventory.py": "d7216045ca601fa31490cf336ac44e3fa94dc23a98d1c8573b03b0837f4b5106",
+        "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+        "roguelike/components/level.py": "001342e1479f20dcdccb0e12f1534172c59c4c20f7f96f2efdaa25263323a652",
+        "roguelike/components/light_source.py": "de612dbee3cabda4573e40eabe5e8ee8222e80ac77bb189b5728708dbdeefe7d",
+        "roguelike/components/needs.py": "a5238691b740ee2f5a84adfa4dd26ffa2f277f5a63955a053de4f46ebdef76e4",
+        "roguelike/components/perception.py": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a",
+        "roguelike/components/perks.py": "38325a0cc89f0acf23a16e3fb68b13ea3aaf50e3b58d7ec692b051c5c97f0915",
+        "roguelike/components/__init__.py": "08ff8eb2db6a3b581197d64e73937dfcf8d245bd6304fae4bb314cdd1fb72fdf",
+        "roguelike/engine/ai_system.py": "2642eebb3020e0b892380df61deb5a6dbf9b5f6908b420b6fbe6dba9680f3001",
+        "roguelike/engine/checkpoints.py": "5961f6e5c5c0561d95fd37056d55eebdfb90fa1ecde9540ef6c1c97ff9bf7c57",
+        "roguelike/engine/combat.py": "df8aae5c06f75774314722f1be90a5a10f6923e897389cd382613f6484b708e8",
+        "roguelike/engine/crafting.py": "7fd21f2869f8cfe108578ed035cce602eec8b61a425b5f92b9da68b9620f3430",
+        "roguelike/engine/creature_abilities.py": "31c0786d200423147b48723febf69be3e700c5ac7458ab6070da284dab8bfd57",
+        "roguelike/engine/creature_factory.py": "1e0f6d8efdf2d66b1df8943fa02647b83d62efe2b2e363aca089c039637f5fec",
+        "roguelike/engine/data_loader.py": "9cac98c6a5fc2ab09d8bfc968aa76e77562b29113f3dbeb50ff51c70d0e802f9",
+        "roguelike/engine/debug.py": "421f974675864114703c6436c3afabc9e241fdcf92286152155e7c7ccabafad1",
+        "roguelike/engine/designer.py": "35347cd0d71a8c91ce5cce04ea1d000e12d05b68ed1da407332f0700959279bb",
+        "roguelike/engine/discharge.py": "d3c36cfc2cfa3fb704ff33dac2bb138780a543af7f92ce5c5fcaaed179e2adcb",
+        "roguelike/engine/display_config.py": "6e4d1b6741f3f6da2682467bd52c14f3df59a112814ec31889c7a1a0290e94c1",
+        "roguelike/engine/engine.py": "5722ed730178f0ec57d804b80bcd0c83060082f4b67ea0162b774fd0b7fb5fb6",
+        "roguelike/engine/health_screen.py": "2d94f02896ae0ffa93a0ff8c9c4ae1bce500bcf3cc12fbc3a30f0a9a344b2ffd",
+        "roguelike/engine/hooks.py": "8bf5b46ef62f1331edb772b72b4f5b6ec3c1a8c2b392b9e26cbea584a64f4d2a",
+        "roguelike/engine/interaction_cursor.py": "f1087817a7f993b0256ed714539bb56fa873dc6202fbf03d6bd5ca1fce23d6f6",
+        "roguelike/engine/inventory_screen.py": "30404ef56981c9491cb1f5d9387cdb3c770a978cff7e77cc728c50ef632c7a31",
+        "roguelike/engine/item_factory.py": "2f4ae5c163b22486228f0d61ea54e1644ffa75f4027ffff130169ac55999cac3",
+        "roguelike/engine/item_system.py": "d2664fb688b848f7f36904c87efd20663e3d77480fa2203ef929dfe55b1362da",
+        "roguelike/engine/language_system.py": "7ce0d3dc55d81a4443c35701b53cbf206b6d00b8e087b03cd35efffb89c2e185",
+        "roguelike/engine/look_mode.py": "9926b1cc90277297a60291f1b48292cb545bdd17e04c45c838d263ebaf538e9c",
+        "roguelike/engine/loot_roller.py": "7bb1b1be54d63de5dd84483a15224e5584070772a7d38d75cfafd095bfdbdce1",
+        "roguelike/engine/loot_table.py": "94e1e5c74058c439d4cde968b78ca697806f242c422e603ffa4a2e3f4699d2b2",
+        "roguelike/engine/message_log.py": "c4a3e2049d21665e87aea57b8648624c60929fbab9a55cc751ba6f03af1d9ed3",
+        "roguelike/engine/movesets.py": "af880b2ca088465dea0a5e3be49e7bbe2a835b93560bdd248ba46f9a8a995a09",
+        "roguelike/engine/palette.py": "646457ba8998f32494169d1833c129fb4c64cab05a94c62eaaec3d696702baab",
+        "roguelike/engine/perk_handlers.py": "3f4ead229c520cd0d6a14b8ebfeb92ad0bee27b3b5c352ae0bb618438c7bf92d",
+        "roguelike/engine/reality_bubble.py": "d52f1f040ef988b70ae5ec9126ec1a95fa3649bfedf4c11da75d0386374dbded",
+        "roguelike/engine/resonance_system.py": "3211dcbb1062f5082399fd88f90f69f94e8332f7d9cb5290651267c267493da9",
+        "roguelike/engine/save_components.py": "fc52904cda55084c723a5876aa2bd2e2109f8340d27a385b6fc145e011df2767",
+        "roguelike/engine/save_manager.py": "08a66e222d5617d942c29a4c15a436a224b04a33b93a7e27569f390a6a7e7748",
+        "roguelike/engine/starting_location.py": "ced446a2aa8edac8eec6b8bb8e1ae003d0d47c88229a2b07b2c32d968e15e6c2",
+        "roguelike/engine/structure_placer.py": "98ab6820daaeba7ecb90bce45958eba270975f81b43b5018e883edd0e5d1ec3f",
+        "roguelike/engine/text_reader.py": "6a8932e43bb1bd78155ad80c644b55ae219da94c17f3a7d72b6085cde2044969",
+        "roguelike/engine/turn_queue.py": "dd2d68399a8563c280cd655dfc3fb3c6e1197f70eecaf65e297d3bde8128c58e",
+        "roguelike/engine/ui.py": "c041403400a300f54ce76e4e36157c91bae1aa60207821654a6d9125afd93655",
+        "roguelike/engine/vine_system.py": "f1119dcc9685d4a3a4bc36561822cbcc4bc567852da018d571cf184903028362",
+        "roguelike/engine/visual_events.py": "9950362cadb9819e25259457ed7061175e9cff5d2b6a23593ec3989251588d3b",
+        "roguelike/engine/weather.py": "51d4d49731e7687994db79b82dd6fe9e3f8ff0f4e309144be0e735f080108277",
+        "roguelike/engine/world_time.py": "b4669d0f4cfe4bb037a88b2170d606c29408b758f9f2375fba9ad46d02fbea6c",
+        "roguelike/engine/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/entities/actor.py": "34600dc6f36d1f3f315f59ec296be4b4f1871bd3031ae582e8fdeda783702822",
+        "roguelike/entities/entity.py": "652c3124a2af45519a8c57f6aad1e4fe53f68477cdf8411ddb6c337f3f2b5a53",
+        "roguelike/entities/item.py": "d85214b852cf00d7b9b7615a388ec959a6ae94189e3a845b36729634a8a28e7b",
+        "roguelike/entities/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/generation/decor_utils.py": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93",
+        "roguelike/generation/entrance_gen.py": "397e6b66c4cc14ae98dc5abc0d60b103d73e066952b122fb1f6d8d03ea6502ee",
+        "roguelike/generation/floor_object_utils.py": "99359d69f5907134f23cc31ac4fd82e552c7edb2b3989f4770b8543beb651711",
+        "roguelike/generation/layout_stamper.py": "ab448b82c7fab4b9abe80b820a45f61a5dca8d29ebbc8d098bd5e032d7eb4626",
+        "roguelike/generation/local_gen.py": "0c0b6d490850c4c917d48fb774072e9950eff6c6a2571df559faf6228017680d",
+        "roguelike/generation/region_gen.py": "a1e593c8b5ff388b170b3b0fe888255e959efe18dd1d78764b8a89160a427955",
+        "roguelike/generation/town_gen.py": "68b11fd299f0a5332f6218064639b52cde99bbef68a96bf78e33762c2e2d899d",
+        "roguelike/generation/wfc.py": "547e27d99e6cef395f7b9ebae61ab43a3db515d617cbd34fd2e7e98a934ac9e8",
+        "roguelike/generation/world_gen.py": "cc7d812cd67d30dfa8c18bb7a28eae7f2eee524ead96bb17c1e78827b0f63fa2",
+        "roguelike/generation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/rendering/biome_icons.py": "04b81d46dddc2c3495fd883cbc659f1be901f533281914b6de9b78d17be3f144",
+        "roguelike/rendering/callouts.py": "325db657d9c74bea22e5e4200f7860bf2bfc7a816f16e1d53c348eeb5be75c6c",
+        "roguelike/rendering/coords.py": "1b65e4ce892bdd6f2b89891ae53615ddadcb95fd665779133c02b9ae71c36bd6",
+        "roguelike/rendering/craft_screen.py": "b173e2049782cf0141216f532565bbc9de16f69fa3dcb743d7844c7351201865",
+        "roguelike/rendering/decor.py": "dfb2480d8dbd2a47572c2ca2153580b269e328add18e7923a70526ca24cbf62b",
+        "roguelike/rendering/glyph_gen.py": "b7fde731fbadf2257cd2fa7c8fb3588348cfb929b419f23b8144c98d78037c45",
+        "roguelike/rendering/lexicon_screen.py": "1ebdd83253521a0644ac814152a89eafbb8174f31a9649affc671b622b7323f7",
+        "roguelike/rendering/particles.py": "76d7642d530bdf62a0412e1428f43b06aba9b6011327298b0cdcb92eeacf479d",
+        "roguelike/rendering/perk_screen.py": "02eeec7bc641f89cf79665f67f85efdd0895f25db54b47b6de4bb54c2b46dffd",
+        "roguelike/rendering/renderer.py": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08",
+        "roguelike/rendering/sprite_registry.py": "814c1a6c4c1d56a0744a93feeccc2bf2a851becd98c3d40d09ddf19e4f997323",
+        "roguelike/rendering/tile_registry.py": "9a9f07a3619d03401f6367601f00bd685024e1f0dc691a41c4cdfa0555c9162a",
+        "roguelike/rendering/ui_registry.py": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058",
+        "roguelike/rendering/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/tools/extract_phonemes.py": "9f54e6ef24cd46f5b29f1f77281d585f50b0208bf141c5e4c382d7ba2357dd19",
+        "roguelike/world/local_map.py": "8432bee3b4ca2b9d0d2c6192e5c769997da656ff445b3e916ff5186bcdf4361a",
+        "roguelike/world/name_gen.py": "8e5d788c75b1e0d4183e83bb823298a4008d57ab84fda887cd6bb84648397546",
+        "roguelike/world/region.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/world/world_map.py": "bd5328a3741c41498d385f059c24c8f5a7095aededdaee0349a3902c3d9be54f",
+        "roguelike/world/world_myth.py": "bf9ccc805b376deafd9e43f9f0cc092f2b2b6a1d66e967b2d9ea0ca76be9dc80",
+        "roguelike/world/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tools/b1_cases.py": "4ee4c9beab7b574e72d9fd4d7421e90e95edcace910921b619429bda78907689",
+        "tools/b1_characterize.py": "3ec62f8c4346bec8dbef9e2cb14622c805ea2ff9f1de0d7933958c5b9a2ff1b6",
+        "tools/b1_diagnostic_guard.py": "dc2b26c3d9ca5ed5b727adc0fe75362e4badb3e45d8adfffd5d976f44b7bc054",
+        "tools/b1_format_cases.py": "7bf9d216f9f3e912990c4811224c9cd31b0669a51fa8e5345ce7ca72ffb53090",
+        "tools/b1_journey.py": "12971c052daa25e7e6481003426c9807e54a57f69652d0f06978d34e8c6aa5b3",
+        "tools/b1_support.py": "8c5f4f32a36e08f14b837cf0ad3ac37cd6d2dd98dd7954b25338a96c36713b7d",
+        "tools/b1_worker.py": "fb9fb2d80c58fdf33a5e674c872d12a1fe121db8a1c89e2d2297393756e7d3a2",
+        "tools/b2_cases.py": "77a024948b8f9a32f6fbf72954c97aa59d0e16deee7727b2e7b5fac6f17a6b6e",
+        "tools/b2_format_cases.py": "dad8cd6d2610a1729d216f4b0211f54ccc4f4329c68f533b8627077b64b76373",
+        "tools/b2_journey.py": "dde4da53b106f36d45026ac50a574508acda04a814ceae8024e652e026c42d7a",
+        "tools/b2_worker.py": "318f988b21c2e05777efdf77b13ae0a5a5d4782b6009d24dcef456192294da9b",
+        "tools/b3_before.py": "cab24baa67f79780c9e81321c802473b9a37cf906f47403788c7967d757d7eb6",
+        "tools/b3_cases.py": "2195be2d2c7292dc6af6f8e01adccf507224b97125bb34476c4c0abba73fb8cd",
+        "tools/b3_test_helpers.py": "fd1ebcdd471a235eb7dc8c55416bd6cc236642e8642c5b1d6e3a3ba32f116541",
+        "tools/b3_worker.py": "20c9225706f6e8f21569ccf7b50a610dff8745e6f5a1fffe52c825789b15ad00",
+        "tools/baseline.py": "807721aca9e9ba756a98962a9e710234c18d541ad994364efbaec996c4c304ee",
+        "tools/owner_lesson.py": "9ad6daf9220bb68d3bf625e1baeae80e0e96b7e80c82f94d1f1635669c85e7a3",
+        "tools/persistence_diagnostics.py": "e54af11c73656828eea0fd88306393f1cfa621932a2fe80189772f215d859697",
+        "tools/render_baseline_screens.py": "b4bc2e413f344f33aea4a2c8ca477b9ac73f1bb9c3be618a9fc2a9ddcd925c9e",
+        "tools/verify_b1.py": "ae9bdc9aef1fc64f34e29e4506f00d0f24af5e8217a0d64bdd42d9935023a767",
+        "tools/verify_b2.py": "3c1f385d2c16be2ccd3db5f4681947c08a2bf46eeae9f47da6c0bf6965eb8691",
+        "tools/verify_b3.py": "a88f047f2062f85e0c3140aebc37787a007fcc930458a26ed6d6cc7b0bbe0d53"
+      },
+      "observed": {
+        "roguelike/config.py": "5ecf552d300806b34fafb465ddbf788efa7d3bab7e3307b2c69c45abb797b9bf",
+        "roguelike/main.py": "84ffa2761cea7df7754670890086589f568f481a0b1e2c7701b73518243b124c",
+        "roguelike/components/ai.py": "bde48decfa8f9e52f84544e2e3b002719f63a93a0613332dd754f139c61adad6",
+        "roguelike/components/corruption.py": "70010c3875aa7b42b7285ee98aefb4ee50e2e579d07dfd0f9dafefff326517b1",
+        "roguelike/components/equipment.py": "a77ba430a60fc8df7b2938cb0bc0fcf4bb9d3df08f1875b24759545dfcc01c26",
+        "roguelike/components/fighter.py": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79",
+        "roguelike/components/inventory.py": "d7216045ca601fa31490cf336ac44e3fa94dc23a98d1c8573b03b0837f4b5106",
+        "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+        "roguelike/components/level.py": "001342e1479f20dcdccb0e12f1534172c59c4c20f7f96f2efdaa25263323a652",
+        "roguelike/components/light_source.py": "de612dbee3cabda4573e40eabe5e8ee8222e80ac77bb189b5728708dbdeefe7d",
+        "roguelike/components/needs.py": "a5238691b740ee2f5a84adfa4dd26ffa2f277f5a63955a053de4f46ebdef76e4",
+        "roguelike/components/perception.py": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a",
+        "roguelike/components/perks.py": "38325a0cc89f0acf23a16e3fb68b13ea3aaf50e3b58d7ec692b051c5c97f0915",
+        "roguelike/components/__init__.py": "08ff8eb2db6a3b581197d64e73937dfcf8d245bd6304fae4bb314cdd1fb72fdf",
+        "roguelike/engine/ai_system.py": "2642eebb3020e0b892380df61deb5a6dbf9b5f6908b420b6fbe6dba9680f3001",
+        "roguelike/engine/checkpoints.py": "5961f6e5c5c0561d95fd37056d55eebdfb90fa1ecde9540ef6c1c97ff9bf7c57",
+        "roguelike/engine/combat.py": "df8aae5c06f75774314722f1be90a5a10f6923e897389cd382613f6484b708e8",
+        "roguelike/engine/crafting.py": "7fd21f2869f8cfe108578ed035cce602eec8b61a425b5f92b9da68b9620f3430",
+        "roguelike/engine/creature_abilities.py": "31c0786d200423147b48723febf69be3e700c5ac7458ab6070da284dab8bfd57",
+        "roguelike/engine/creature_factory.py": "1e0f6d8efdf2d66b1df8943fa02647b83d62efe2b2e363aca089c039637f5fec",
+        "roguelike/engine/data_loader.py": "9cac98c6a5fc2ab09d8bfc968aa76e77562b29113f3dbeb50ff51c70d0e802f9",
+        "roguelike/engine/debug.py": "421f974675864114703c6436c3afabc9e241fdcf92286152155e7c7ccabafad1",
+        "roguelike/engine/designer.py": "35347cd0d71a8c91ce5cce04ea1d000e12d05b68ed1da407332f0700959279bb",
+        "roguelike/engine/discharge.py": "d3c36cfc2cfa3fb704ff33dac2bb138780a543af7f92ce5c5fcaaed179e2adcb",
+        "roguelike/engine/display_config.py": "6e4d1b6741f3f6da2682467bd52c14f3df59a112814ec31889c7a1a0290e94c1",
+        "roguelike/engine/engine.py": "5722ed730178f0ec57d804b80bcd0c83060082f4b67ea0162b774fd0b7fb5fb6",
+        "roguelike/engine/health_screen.py": "2d94f02896ae0ffa93a0ff8c9c4ae1bce500bcf3cc12fbc3a30f0a9a344b2ffd",
+        "roguelike/engine/hooks.py": "8bf5b46ef62f1331edb772b72b4f5b6ec3c1a8c2b392b9e26cbea584a64f4d2a",
+        "roguelike/engine/interaction_cursor.py": "f1087817a7f993b0256ed714539bb56fa873dc6202fbf03d6bd5ca1fce23d6f6",
+        "roguelike/engine/inventory_screen.py": "30404ef56981c9491cb1f5d9387cdb3c770a978cff7e77cc728c50ef632c7a31",
+        "roguelike/engine/item_factory.py": "2f4ae5c163b22486228f0d61ea54e1644ffa75f4027ffff130169ac55999cac3",
+        "roguelike/engine/item_system.py": "d2664fb688b848f7f36904c87efd20663e3d77480fa2203ef929dfe55b1362da",
+        "roguelike/engine/language_system.py": "7ce0d3dc55d81a4443c35701b53cbf206b6d00b8e087b03cd35efffb89c2e185",
+        "roguelike/engine/look_mode.py": "9926b1cc90277297a60291f1b48292cb545bdd17e04c45c838d263ebaf538e9c",
+        "roguelike/engine/loot_roller.py": "7bb1b1be54d63de5dd84483a15224e5584070772a7d38d75cfafd095bfdbdce1",
+        "roguelike/engine/loot_table.py": "94e1e5c74058c439d4cde968b78ca697806f242c422e603ffa4a2e3f4699d2b2",
+        "roguelike/engine/message_log.py": "c4a3e2049d21665e87aea57b8648624c60929fbab9a55cc751ba6f03af1d9ed3",
+        "roguelike/engine/movesets.py": "af880b2ca088465dea0a5e3be49e7bbe2a835b93560bdd248ba46f9a8a995a09",
+        "roguelike/engine/palette.py": "646457ba8998f32494169d1833c129fb4c64cab05a94c62eaaec3d696702baab",
+        "roguelike/engine/perk_handlers.py": "3f4ead229c520cd0d6a14b8ebfeb92ad0bee27b3b5c352ae0bb618438c7bf92d",
+        "roguelike/engine/reality_bubble.py": "d52f1f040ef988b70ae5ec9126ec1a95fa3649bfedf4c11da75d0386374dbded",
+        "roguelike/engine/resonance_system.py": "3211dcbb1062f5082399fd88f90f69f94e8332f7d9cb5290651267c267493da9",
+        "roguelike/engine/save_components.py": "fc52904cda55084c723a5876aa2bd2e2109f8340d27a385b6fc145e011df2767",
+        "roguelike/engine/save_manager.py": "08a66e222d5617d942c29a4c15a436a224b04a33b93a7e27569f390a6a7e7748",
+        "roguelike/engine/starting_location.py": "ced446a2aa8edac8eec6b8bb8e1ae003d0d47c88229a2b07b2c32d968e15e6c2",
+        "roguelike/engine/structure_placer.py": "98ab6820daaeba7ecb90bce45958eba270975f81b43b5018e883edd0e5d1ec3f",
+        "roguelike/engine/text_reader.py": "6a8932e43bb1bd78155ad80c644b55ae219da94c17f3a7d72b6085cde2044969",
+        "roguelike/engine/turn_queue.py": "dd2d68399a8563c280cd655dfc3fb3c6e1197f70eecaf65e297d3bde8128c58e",
+        "roguelike/engine/ui.py": "c041403400a300f54ce76e4e36157c91bae1aa60207821654a6d9125afd93655",
+        "roguelike/engine/vine_system.py": "f1119dcc9685d4a3a4bc36561822cbcc4bc567852da018d571cf184903028362",
+        "roguelike/engine/visual_events.py": "9950362cadb9819e25259457ed7061175e9cff5d2b6a23593ec3989251588d3b",
+        "roguelike/engine/weather.py": "51d4d49731e7687994db79b82dd6fe9e3f8ff0f4e309144be0e735f080108277",
+        "roguelike/engine/world_time.py": "b4669d0f4cfe4bb037a88b2170d606c29408b758f9f2375fba9ad46d02fbea6c",
+        "roguelike/engine/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/entities/actor.py": "34600dc6f36d1f3f315f59ec296be4b4f1871bd3031ae582e8fdeda783702822",
+        "roguelike/entities/entity.py": "652c3124a2af45519a8c57f6aad1e4fe53f68477cdf8411ddb6c337f3f2b5a53",
+        "roguelike/entities/item.py": "d85214b852cf00d7b9b7615a388ec959a6ae94189e3a845b36729634a8a28e7b",
+        "roguelike/entities/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/generation/decor_utils.py": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93",
+        "roguelike/generation/entrance_gen.py": "397e6b66c4cc14ae98dc5abc0d60b103d73e066952b122fb1f6d8d03ea6502ee",
+        "roguelike/generation/floor_object_utils.py": "99359d69f5907134f23cc31ac4fd82e552c7edb2b3989f4770b8543beb651711",
+        "roguelike/generation/layout_stamper.py": "ab448b82c7fab4b9abe80b820a45f61a5dca8d29ebbc8d098bd5e032d7eb4626",
+        "roguelike/generation/local_gen.py": "0c0b6d490850c4c917d48fb774072e9950eff6c6a2571df559faf6228017680d",
+        "roguelike/generation/region_gen.py": "a1e593c8b5ff388b170b3b0fe888255e959efe18dd1d78764b8a89160a427955",
+        "roguelike/generation/town_gen.py": "68b11fd299f0a5332f6218064639b52cde99bbef68a96bf78e33762c2e2d899d",
+        "roguelike/generation/wfc.py": "547e27d99e6cef395f7b9ebae61ab43a3db515d617cbd34fd2e7e98a934ac9e8",
+        "roguelike/generation/world_gen.py": "cc7d812cd67d30dfa8c18bb7a28eae7f2eee524ead96bb17c1e78827b0f63fa2",
+        "roguelike/generation/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/rendering/biome_icons.py": "04b81d46dddc2c3495fd883cbc659f1be901f533281914b6de9b78d17be3f144",
+        "roguelike/rendering/callouts.py": "325db657d9c74bea22e5e4200f7860bf2bfc7a816f16e1d53c348eeb5be75c6c",
+        "roguelike/rendering/coords.py": "1b65e4ce892bdd6f2b89891ae53615ddadcb95fd665779133c02b9ae71c36bd6",
+        "roguelike/rendering/craft_screen.py": "b173e2049782cf0141216f532565bbc9de16f69fa3dcb743d7844c7351201865",
+        "roguelike/rendering/decor.py": "dfb2480d8dbd2a47572c2ca2153580b269e328add18e7923a70526ca24cbf62b",
+        "roguelike/rendering/glyph_gen.py": "b7fde731fbadf2257cd2fa7c8fb3588348cfb929b419f23b8144c98d78037c45",
+        "roguelike/rendering/lexicon_screen.py": "1ebdd83253521a0644ac814152a89eafbb8174f31a9649affc671b622b7323f7",
+        "roguelike/rendering/particles.py": "76d7642d530bdf62a0412e1428f43b06aba9b6011327298b0cdcb92eeacf479d",
+        "roguelike/rendering/perk_screen.py": "02eeec7bc641f89cf79665f67f85efdd0895f25db54b47b6de4bb54c2b46dffd",
+        "roguelike/rendering/renderer.py": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08",
+        "roguelike/rendering/sprite_registry.py": "814c1a6c4c1d56a0744a93feeccc2bf2a851becd98c3d40d09ddf19e4f997323",
+        "roguelike/rendering/tile_registry.py": "9a9f07a3619d03401f6367601f00bd685024e1f0dc691a41c4cdfa0555c9162a",
+        "roguelike/rendering/ui_registry.py": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058",
+        "roguelike/rendering/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/tools/extract_phonemes.py": "9f54e6ef24cd46f5b29f1f77281d585f50b0208bf141c5e4c382d7ba2357dd19",
+        "roguelike/world/local_map.py": "8432bee3b4ca2b9d0d2c6192e5c769997da656ff445b3e916ff5186bcdf4361a",
+        "roguelike/world/name_gen.py": "8e5d788c75b1e0d4183e83bb823298a4008d57ab84fda887cd6bb84648397546",
+        "roguelike/world/region.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "roguelike/world/world_map.py": "bd5328a3741c41498d385f059c24c8f5a7095aededdaee0349a3902c3d9be54f",
+        "roguelike/world/world_myth.py": "bf9ccc805b376deafd9e43f9f0cc092f2b2b6a1d66e967b2d9ea0ca76be9dc80",
+        "roguelike/world/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tools/b1_cases.py": "4ee4c9beab7b574e72d9fd4d7421e90e95edcace910921b619429bda78907689",
+        "tools/b1_characterize.py": "3ec62f8c4346bec8dbef9e2cb14622c805ea2ff9f1de0d7933958c5b9a2ff1b6",
+        "tools/b1_diagnostic_guard.py": "dc2b26c3d9ca5ed5b727adc0fe75362e4badb3e45d8adfffd5d976f44b7bc054",
+        "tools/b1_format_cases.py": "7bf9d216f9f3e912990c4811224c9cd31b0669a51fa8e5345ce7ca72ffb53090",
+        "tools/b1_journey.py": "12971c052daa25e7e6481003426c9807e54a57f69652d0f06978d34e8c6aa5b3",
+        "tools/b1_support.py": "8c5f4f32a36e08f14b837cf0ad3ac37cd6d2dd98dd7954b25338a96c36713b7d",
+        "tools/b1_worker.py": "fb9fb2d80c58fdf33a5e674c872d12a1fe121db8a1c89e2d2297393756e7d3a2",
+        "tools/b2_cases.py": "77a024948b8f9a32f6fbf72954c97aa59d0e16deee7727b2e7b5fac6f17a6b6e",
+        "tools/b2_format_cases.py": "dad8cd6d2610a1729d216f4b0211f54ccc4f4329c68f533b8627077b64b76373",
+        "tools/b2_journey.py": "dde4da53b106f36d45026ac50a574508acda04a814ceae8024e652e026c42d7a",
+        "tools/b2_worker.py": "318f988b21c2e05777efdf77b13ae0a5a5d4782b6009d24dcef456192294da9b",
+        "tools/b3_before.py": "cab24baa67f79780c9e81321c802473b9a37cf906f47403788c7967d757d7eb6",
+        "tools/b3_cases.py": "2195be2d2c7292dc6af6f8e01adccf507224b97125bb34476c4c0abba73fb8cd",
+        "tools/b3_test_helpers.py": "fd1ebcdd471a235eb7dc8c55416bd6cc236642e8642c5b1d6e3a3ba32f116541",
+        "tools/b3_worker.py": "20c9225706f6e8f21569ccf7b50a610dff8745e6f5a1fffe52c825789b15ad00",
+        "tools/baseline.py": "807721aca9e9ba756a98962a9e710234c18d541ad994364efbaec996c4c304ee",
+        "tools/owner_lesson.py": "9ad6daf9220bb68d3bf625e1baeae80e0e96b7e80c82f94d1f1635669c85e7a3",
+        "tools/persistence_diagnostics.py": "e54af11c73656828eea0fd88306393f1cfa621932a2fe80189772f215d859697",
+        "tools/render_baseline_screens.py": "b4bc2e413f344f33aea4a2c8ca477b9ac73f1bb9c3be618a9fc2a9ddcd925c9e",
+        "tools/verify_b1.py": "ae9bdc9aef1fc64f34e29e4506f00d0f24af5e8217a0d64bdd42d9935023a767",
+        "tools/verify_b2.py": "3c1f385d2c16be2ccd3db5f4681947c08a2bf46eeae9f47da6c0bf6965eb8691",
+        "tools/verify_b3.py": "a88f047f2062f85e0c3140aebc37787a007fcc930458a26ed6d6cc7b0bbe0d53"
+      },
+      "passed": true
+    },
+    {
+      "case": "H01",
+      "property": "two B3 defects reproduced before implementation",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    }
+  ],
+  "only": "b1",
+  "case": "journey/transfer",
+  "source_policy": "All workers import production main in place; only disposable save data is cloned.",
+  "command": [
+    "tools/verify_b3.py",
+    "--only",
+    "b1",
+    "--case",
+    "journey/transfer"
+  ],
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "branch": "main",
+  "base_commit": "65b02dfa3cd4ade1b2d470646cd46347af2d1d56",
+  "totals": {
+    "checks": 49,
+    "passed": 49,
+    "failed": 0,
+    "workers": 1
+  },
+  "coverage": {
+    "B3-H": {
+      "checks": 2,
+      "passed": true
+    },
+    "E01": {
+      "checks": 31,
+      "passed": true
+    },
+    "E04": {
+      "checks": 6,
+      "passed": true
+    },
+    "H01": {
+      "checks": 1,
+      "passed": true
+    },
+    "H02": {
+      "checks": 9,
+      "passed": true
+    }
+  },
+  "deferred": [
+    {
+      "case": "E04",
+      "id": "C-DROP-EQUIPPED",
+      "scope": "C transfers",
+      "symptom": {
+        "inventory_contains": false,
+        "floor_contains": true,
+        "weapon_still_same": true
+      }
+    }
+  ],
+  "selected_tests_passed": true,
+  "passed": false
+}

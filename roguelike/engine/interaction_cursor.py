@@ -156,7 +156,7 @@ class InteractionCursor:
                         acted = engine._interactable_butcher(cx, cy)
                     else:
                         inv = getattr(engine.player, "inventory", None)
-                        if inv:
+                        if inv is not None:
                             engine._take_item(_top, inv)
                             acted = True
                 else:
@@ -215,19 +215,18 @@ class InteractionCursor:
                     engine._interactable_butcher(lx, ly)
                 else:
                     inv = getattr(engine.player, "inventory", None)
-                    if inv:
+                    if inv is not None:
                         engine._take_item(item, inv)
             else:
                 # "Take all"
-                from generation.floor_object_utils import clear_floor_objects as _cfo
+                from engine.item_transfers import take_floor
                 inv = getattr(engine.player, "inventory", None)
-                if inv:
+                if inv is not None:
                     _taken_names = []
                     for it in items:
                         if not getattr(it, "source_creature", None):
-                            if inv.add(it):
+                            if take_floor(engine, it):
                                 _taken_names.append(getattr(it, "name", "") or "something")
-                    _cfo(engine.local_map, lx, ly)
                     if _taken_names:
                         _parts = [f"the {n}" for n in _taken_names]
                         if len(_parts) == 1:
@@ -253,14 +252,13 @@ class InteractionCursor:
         self, sel: int, items: list, lx: int, ly: int, engine: "Engine",
     ) -> None:
         """Handle taking items from a container selection prompt."""
-        from generation.floor_object_utils import take_from_container
+        from engine.item_transfers import take_container
         inv = getattr(engine.player, "inventory", None)
-        if not inv:
+        if inv is None:
             return
         if sel < len(items):
             item = items[sel]
-            if inv.add(item):
-                take_from_container(engine.local_map, lx, ly, item)
+            if take_container(engine, lx, ly, item):
                 _dname = getattr(item, "name", "") or "something"
                 engine.log.add(f"Thou takest the {_dname}.", WORN_STONE)
             else:
@@ -269,8 +267,7 @@ class InteractionCursor:
             # "Take all"
             _taken_names = []
             for it in items:
-                if inv.add(it):
-                    take_from_container(engine.local_map, lx, ly, it)
+                if take_container(engine, lx, ly, it):
                     _taken_names.append(getattr(it, "name", "") or "something")
             if _taken_names:
                 _parts = [f"the {n}" for n in _taken_names]

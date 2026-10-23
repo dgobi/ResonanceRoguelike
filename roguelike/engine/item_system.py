@@ -19,6 +19,9 @@ class ItemSystem:
         Apply item use effect.
         Returns True if the item was consumed/used successfully.
         """
+        inv = getattr(engine.player, "inventory", None)
+        if inv is None or not inv.contains(item):
+            return False  # stale modal selection cannot apply effects or equip
         effect = item.on_use
         if not effect:
             engine.log.add(
@@ -110,6 +113,15 @@ class ItemSystem:
         if not needs:
             return False
 
+        # Exchange first so the old vessel's weight is released before checking
+        # the empty form. A failed factory/capacity check has no thirst effect.
+        empty_id = engine.data.items.get(item.item_id, {}).get("empty_form")
+        if empty_id:
+            from engine.item_transfers import exchange
+            empty = engine.item_factory.create(empty_id)
+            if empty is None or not exchange(engine, [item], [empty]):
+                return False
+
         raw = item.hydration if item.hydration is not None else 400
         survival = getattr(engine.data, "survival", {})
         t_max = survival.get("thirst", {}).get("max", 800)
@@ -123,16 +135,7 @@ class ItemSystem:
         else:
             engine.log.add("The liquid steadies something.", CLEAR_WATER)
 
-        # Transition to empty form if defined (e.g. water_skin → empty_water_skin)
-        item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
-        empty_id = item_def.get("empty_form")
-        if empty_id:
-            inv = getattr(engine.player, "inventory", None)
-            if inv:
-                empty = engine.item_factory.create(empty_id)
-                if empty:
-                    inv.add(empty)
-        return True   # consumed
+        return not bool(empty_id)  # replacement already committed above
 
     def _use_heal_minor(self, item: "Item", engine: "Engine") -> bool:
         fighter = getattr(engine.player, "fighter", None)
@@ -216,6 +219,7 @@ class ItemSystem:
         # Equip to off-hand slot
         if equipment:
             equipment.equip(item, "offhand")
+            _recompute_effective_av(engine.player, engine.data)
 
         engine.log.add(
             f"You light the {item.name}.",

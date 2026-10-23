@@ -7,7 +7,7 @@ from b1_cases import setup_gear
 from b1_characterize import needs_state
 
 
-def run_journey(ev):
+def run_journey(ev, custom_actions=None):
     import pygame
     from engine.engine import Engine
     from engine.save_manager import SaveManager
@@ -72,6 +72,9 @@ def run_journey(ev):
         raise AssertionError("Inventory selection event budget")
 
     def actions(e):
+        if custom_actions is not None:
+            yield from custom_actions(e, key, capture, choose_inventory)
+            return
         if ev.job["phase"] == "read":
             expected = read(ev.job["expected"])["expected"]
             ev.check("E02", "fresh-process bootstrap exact gear", expected["gear"], gear(e))
@@ -116,8 +119,8 @@ def run_journey(ev):
             yield key(pygame.K_d, "d")
             ev.check("E04", "drop moves exact object to floor", True, item not in e.player.inventory.items and any(i is item for i in e.local_map.floor_objects[(20, 20)]))
             ev.check("E04", "drop turn cost", turn+3, e.world_time.turn)
-            ev.check("E04", "preexisting equipped drop stale-slot signature", True, e.player.equipment.slots["weapon"] is item and item.equipped)
-            ev.defect("E04", "C-DROP-EQUIPPED", "C transfers", {"inventory_contains": False, "floor_contains": True, "weapon_still_same": True})
+            ev.check("E04", "equipped drop clears slot and flag", [None, False], [e.player.equipment.slots["weapon"], item.equipped])
+            ev.check("E04", "dropped equipment permits a coherent save", True, e.save_manager.save(e))
             capture("dropped-equipped-blade")
             yield key(pygame.K_i, "i")
         elif variant == "combat":

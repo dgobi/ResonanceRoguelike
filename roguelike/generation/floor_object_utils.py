@@ -15,14 +15,17 @@ if TYPE_CHECKING:
     from entities.item import Item
 
 
-def place_floor_object(local_map: "LocalMap", lx: int, ly: int, item: "Item") -> None:
+def place_floor_object(local_map: "LocalMap", lx: int, ly: int, item: "Item") -> bool:
     """Add item to floor_objects at (lx, ly). Creates list if absent."""
-    if not local_map.in_bounds(lx, ly):
-        return
+    if not local_map.in_bounds(lx, ly) or any(
+            existing is item for rows in local_map.floor_objects.values() for existing in rows):
+        return False
     key = (lx, ly)
     if key not in local_map.floor_objects:
         local_map.floor_objects[key] = []
     local_map.floor_objects[key].append(item)
+    item.x, item.y = lx, ly
+    return True
 
 
 def remove_floor_object(local_map: "LocalMap", lx: int, ly: int, item: "Item") -> None:
@@ -57,9 +60,13 @@ def place_container(
 ) -> None:
     """Place a closed container with items at (lx, ly)."""
     from generation.decor_utils import place_decor
+    if not local_map.in_bounds(lx, ly):
+        return
+    if len({id(it) for it in item_list}) != len(item_list):
+        raise ValueError("Duplicate container item instance")
     local_map.container_state[(lx, ly)] = {
         "state": "closed",
-        "items": [_serialize_container_item(it) for it in item_list],
+        "items": list(item_list),
         "decor_id": decor_id,
     }
     place_decor(local_map, lx, ly, decor_id)
@@ -75,19 +82,18 @@ def open_container(local_map: "LocalMap", lx: int, ly: int) -> bool:
     return True
 
 
-def take_from_container(local_map: "LocalMap", lx: int, ly: int, item) -> None:
-    """Remove a specific item from an open container by item_id match."""
+def take_from_container(local_map: "LocalMap", lx: int, ly: int, item) -> bool:
+    """Remove the exact live item from an open container."""
     entry = local_map.container_state.get((lx, ly))
-    if not entry:
-        return
-    item_id = getattr(item, "item_id", "")
-    # Remove first matching item_id from the serialised list
-    for i, d in enumerate(entry["items"]):
-        if d.get("item_id") == item_id:
+    if not entry or entry.get("state") != "open":
+        return False
+    for i, owned in enumerate(entry["items"]):
+        if owned is item:
             entry["items"].pop(i)
-            break
-    if not entry["items"]:
-        entry["state"] = "looted"
+            if not entry["items"]:
+                entry["state"] = "looted"
+            return True
+    return False
 
 
 def get_container_items(local_map: "LocalMap", lx: int, ly: int, item_factory) -> list:
@@ -95,21 +101,20 @@ def get_container_items(local_map: "LocalMap", lx: int, ly: int, item_factory) -
     entry = local_map.container_state.get((lx, ly))
     if not entry or entry["state"] not in ("open", "closed"):
         return []
+    # Old B1/B2/B3 maps contain definition rows. Resolve them once, atomically,
+    # then retain live instances like floor_objects (the map is pickled).
+    from engine.save_components import validate_item, restore_item
     results = []
     for d in entry["items"]:
-        item_id = d.get("item_id", "")
-        if item_id:
-            item = item_factory.create(item_id)
-            if item is not None:
-                if d.get("text_id"):
-                    item.text_id = d["text_id"]
-                results.append(item)
-    return results
-
-
-def _serialize_container_item(item) -> dict:
-    """Serialize an Item to a minimal dict for container storage."""
-    return {
-        "item_id": getattr(item, "item_id", ""),
-        "text_id": getattr(item, "text_id", ""),
-    }
+        if isinstance(d, dict):
+            validate_item(d, "container item")
+            item = item_factory.create(d.get("item_id", ""))
+            if item is None:
+                raise ValueError("Unknown container item definition")
+            restore_item(item, d)
+            item.x, item.y = lx, ly
+            results.append(item)
+        else:
+            results.append(d)
+    entry["items"] = results
+    return list(results)  # UI snapshots never own the list or recreate its items

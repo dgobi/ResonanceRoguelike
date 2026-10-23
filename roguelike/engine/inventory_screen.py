@@ -274,7 +274,7 @@ class InventoryScreen:
             return True
 
         inv = getattr(engine.player, "inventory", None)
-        if not inv:
+        if inv is None:
             return False
 
         n = len(self._flat)
@@ -316,7 +316,8 @@ class InventoryScreen:
                 else:
                     consumed = engine.item_system.use(row_item, engine)
                     if consumed:
-                        inv.remove(row_item)
+                        from engine.item_transfers import consume
+                        consume(engine, row_item)
                         self._flat = []
                         self.selected = max(0, self.selected - 1)
                     engine._advance_turn()
@@ -337,12 +338,9 @@ class InventoryScreen:
         self.scroll = max(0, self.scroll)
 
     def _drop_item(self, item: "Item", inv, engine: "Engine") -> None:
-        from generation.floor_object_utils import place_floor_object
-        px, py = engine.player.x, engine.player.y
-        inv.remove(item)
-        item.x = px
-        item.y = py
-        place_floor_object(engine.local_map, px, py, item)
+        from engine.item_transfers import drop
+        if not drop(engine, item):
+            return
         self._flat = []
         self.selected = max(0, self.selected - 1)
         _dname = getattr(item, "name", "") or "something"

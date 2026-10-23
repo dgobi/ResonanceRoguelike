@@ -31,16 +31,24 @@ class Inventory:
 
     def add(self, item: Item) -> bool:
         """Add item if capacity allows. Returns True on success."""
-        if self.current_weight + getattr(item, "weight", 0.0) > self.capacity:
+        if not self.can_add(item):
             return False
         self.items.append(item)
         return True
 
     def remove(self, item: Item) -> bool:
-        if item in self.items:
-            self.items.remove(item)
-            return True
+        for index, owned in enumerate(self.items):
+            if owned is item:
+                self.items.pop(index)
+                return True
         return False
+
+    def contains(self, item: Item) -> bool:
+        return any(owned is item for owned in self.items)
+
+    def can_add(self, item: Item) -> bool:
+        return (item is not None and not self.contains(item)
+                and self.current_weight + getattr(item, "weight", 0.0) <= self.capacity)
 
     def has(self, item_id: str) -> bool:
         return any(getattr(i, "item_id", None) == item_id

@@ -27,13 +27,14 @@ def source_manifest():
             if '__pycache__' not in p.parts and 'saves' not in p.parts}
 
 
-def main():
+def main(include_c=False):
     ap=argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--only',choices=['b3','b1','b2','diagnostic'])
+    ap.add_argument('--only',choices=['b3','b1','b2','diagnostic'] + (['c'] if include_c else []))
     ap.add_argument('--case',help='Optional single scenario/variant; partial runs never certify completion')
     args=ap.parse_args()
     stamp=datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
-    run=ROOT/'.baseline'/('b3-'+stamp+'-'+uuid.uuid4().hex[:8]);run.mkdir(parents=True)
+    prefix='c' if include_c else 'b3'
+    run=ROOT/'.baseline'/(prefix+'-'+stamp+'-'+uuid.uuid4().hex[:8]);run.mkdir(parents=True)
     dump(run/'disposable-b3.json',{'kind':'test saves and evidence only','production_source':str(GAME)})
     report=dict(run_id=run.name,source=source_manifest(),workers=[],checks=[],only=args.only,case=args.case,
                 source_policy='All workers import production main in place; only disposable save data is cloned.',
@@ -152,11 +153,26 @@ def main():
     for scenario in ('io','slots','concurrency','journey'):execute('b3',scenario,'contract','loop' if scenario=='journey' else 'same')
     execute('b3','journey','debug-delete','loop')
     execute('b3','legacy','b2','read',legacy=True)
+    if include_c:
+        for variant in ('ownership','containers','crafting','production'):
+            execute('c','contract',variant,'same')
+        writer=execute('c','roundtrip','owners','write')
+        if writer:execute('c','roundtrip','owners','read',writer)
+        execute('c','roundtrip','owners','same')
+        for variant in ('equipment','take-all','container','craft'):
+            execute('c','journey',variant,'loop')
     for job,before in writers:
         check('B3-H',job['scenario']+job['variant']+' canonical writer immutable',before,hashes(Path(job['save_root'])/'slot_0'))
     check('B3-H','source stayed unchanged throughout gate',report['source'],source_manifest())
     before=read(ROOT/'evidence/b3-before/result.json')
     check('H01','two B3 defects reproduced before implementation',True,before['passed'] and len(before['checks'])>=5)
+    if include_c:
+        c_before=read(ROOT/'evidence/c-before/result.json')
+        drop_before=read(ROOT/'evidence/c-before/equipped-drop.json')
+        check('C-01','accepted B3 equipped-drop defect actually reproduced',True,
+              drop_before['selected_tests_passed'] and any(d['id']=='C-DROP-EQUIPPED' for d in drop_before['deferred']))
+        check('C-02','additional ownership defects actually reproduced before edits',True,
+              c_before['passed'] and len(c_before['checks'])>=5 and c_before['commit']==drop_before['base_commit'])
     if not args.only and not args.case:
         required=[]
         for suite,scenario,variants in (
@@ -175,11 +191,15 @@ def main():
         required += [('b3','recovery',v,'same') for v in ('pointer','active','inactive','manifest','semantic','rollback','all-bad')]
         required += [('b3',s,'contract','loop' if s=='journey' else 'same') for s in ('io','slots','concurrency','journey')]
         required += [('b3','journey','debug-delete','loop'),('b3','legacy','b2','read')]
+        if include_c:
+            required += [('c','contract',v,'same') for v in ('ownership','containers','crafting','production')]
+            required += [('c','roundtrip','owners',p) for p in ('write','read','same')]
+            required += [('c','journey',v,'loop') for v in ('equipment','take-all','container','craft')]
         actual=[tuple(w['job'][k] for k in ('suite','scenario','variant','phase')) for w in report['workers']]
         check('H03','all independently enumerated required workers executed',sorted(required),sorted(actual))
-        # Preserve exact accepted C/UI observations, while B3 has positive oracles.
+        # C now has a positive drop oracle. Retain the separate UI observation.
         prior=read(ROOT/'evidence/b2-deferred-results.json')
-        wanted={d['id']:d['symptom'] for d in prior if d['id'] in ('C-DROP-EQUIPPED','UI-TEXT-HEIGHT')}
+        wanted={d['id']:d['symptom'] for d in prior if d['id'] == 'UI-TEXT-HEIGHT'}
         current={d['id']:d['symptom'] for w in report['workers'] for d in w['result'].get('defects',[])}
         check('H03','unchanged out-of-scope defect signatures',wanted,current)
         check('B02','checkpoint generation defect repaired',True,all(w['valid'] for w in report['workers'] if w['job']['scenario']=='coherence'))
@@ -191,6 +211,8 @@ def main():
         required_ids={c['id'] for c in read(ROOT/'tools/b1_acceptance_matrix.json')['cases']}
         required_ids |= {'B3-'+str(n).zfill(2) for n in range(1,10)} | {'B3-H'}
         required_ids |= {'B2-'+str(n).zfill(2) for n in range(1,10)} | {'B2-H'}
+        if include_c:
+            required_ids |= {'C-'+str(n).zfill(2) for n in range(1,9)}
         check('H03','every required case collected nonzero evidence',[],sorted(required_ids-{c['case'] for c in checks}))
         check('H01','original diagnostic properties still pass',32,sum(c['case']=='original' and c['passed'] for c in checks))
         checks=report['checks']+[c for w in report['workers'] if w['job']['phase']!='crash' for c in w['result'].get('checks',[])]
@@ -201,7 +223,7 @@ def main():
     report['selected_tests_passed']=selected
     report['passed']=selected and not args.only and not args.case
     dump(run/'results.json',report)
-    dump(ROOT/'evidence/b3-latest.json',dict(result=str(run/'results.json'),passed=report['passed'],selected_tests_passed=selected))
+    dump(ROOT/('evidence/'+prefix+'-latest.json'),dict(result=str(run/'results.json'),passed=report['passed'],selected_tests_passed=selected))
     print(json.dumps(dict(result=str(run/'results.json'),passed=report['passed'],selected_tests_passed=selected,totals=report['totals'])),flush=True)
     return 0 if selected else 1
 

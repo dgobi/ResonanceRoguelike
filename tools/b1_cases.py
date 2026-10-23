@@ -209,7 +209,9 @@ def gear_case(e, ev):
             ev.check("R06", "burnout clears exact offhand", None, e.player.equipment.slots["offhand"])
             ev.check("R06", "burnout removes selected, retains duplicate", True,
                      selected not in e.player.inventory.items and all(i in e.player.inventory.items for i, _ in others))
-            ev.check("R06", "burnout extinguishes", False, e.player.light_source.active)
+            ev.check("R06", "burnout extinguishes and releases owner reference", True,
+                     e.player.light_source is None or (not e.player.light_source.active and
+                     getattr(e.player.light_source, "_item_ref", None) is None))
 
 
 def lurker_case(e, ev):

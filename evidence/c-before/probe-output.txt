@@ -1,0 +1,8 @@
+G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5083: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+  Deep tongue loaded: 318 words
+Town buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2
+  Loot pools loaded: 11
+{"passed": true, "checks": 5}

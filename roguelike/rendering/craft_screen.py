@@ -261,7 +261,7 @@ class CraftScreen:
 
     def _attempt_craft(self, engine: "Engine", recipe: dict,
                        chosen_items: dict | None = None) -> None:
-        from engine.crafting import can_craft, attempt_craft
+        from engine.crafting import can_craft, plan_craft, commit_craft
         inv = getattr(engine.player, "inventory", None)
         if inv is None:
             return
@@ -291,25 +291,25 @@ class CraftScreen:
                 self._pending_recipe  = recipe
                 return
 
+        selected, missing = plan_craft(recipe, inv, kw_data, ambient, chosen_items)
+        if missing:
+            engine.log.add("The materials are not here.", MSG_DEFAULT)
+            return
         if recipe.get("places_in_world"):
-            attempt_craft(recipe, inv, kw_data, ambient, chosen_items=chosen_items)
             tile_id   = recipe.get("result_tile", "")
             self.open = False
-            engine._start_placement_cursor(tile_id, recipe)
+            engine._start_placement_cursor(tile_id, recipe, selected)
         elif recipe.get("passive_processing"):
             # Do NOT consume items yet -- placement cursor will craft on ENTER
             self.open = False
-            engine._start_processing_placement(recipe)
+            engine._start_processing_placement(recipe, selected)
         else:
-            attempt_craft(recipe, inv, kw_data, ambient, chosen_items=chosen_items)
             result_id = recipe.get("result_item") or recipe.get("result_tile", "")
-            if result_id:
-                item = engine.item_factory.create(result_id, engine.player.x, engine.player.y)
-                if item:
-                    if not inv.add(item):
-                        engine.log.add("No room. The work scatters.", MSG_DEFAULT)
-                    else:
-                        engine.log.add(f"{item.name} fashioned.", MSG_DEFAULT)
+            item = engine.item_factory.create(result_id, engine.player.x, engine.player.y) if result_id else None
+            if item is None or not commit_craft(engine, recipe, selected, ambient, [item]):
+                engine.log.add("The work cannot be completed. The materials remain.", MSG_DEFAULT)
+            else:
+                engine.log.add(f"{item.name} fashioned.", MSG_DEFAULT)
             self.open = False
 
     @staticmethod
