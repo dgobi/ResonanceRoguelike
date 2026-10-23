@@ -1,0 +1,15 @@
+Inspected actual offscreen Pygame game surfaces at 1280x720.
+Fresh effects reader: restored laboratory, player glyph, level 3, AV 2, Sated,
+Slaked, Stained and Chilled indicators. Later capture follows actual timer expiry
+and ordinary movement onto the controlled mud tile; semantic traces verify duration
+expiry and Hardened Step's 0.7 movement debt.
+Critical Needs: Collapsing/Desiccating indicators and 'The thirst takes from you.'
+after the actual wait; semantic check records 3 HP drain at turn 10.
+Rain: outdoor surface with heavy-rain presentation and water-skin completion
+message after one actual wait; semantic check proves exact replacement and weather tick.
+Processing: laboratory and completion message after the second actual wait;
+semantic check proves exactly one dried herb on its owning tile.
+Baseline/current lab label captures still omit the tail after 'If'; this is the
+separately measured UI-TEXT-HEIGHT limitation, not a newly certified UI layout.
+These are game surfaces only. No desktop captures/input, other-application control,
+cosmetic pixel-equivalence or physical keyboard/other-OS certification is claimed.

@@ -1,0 +1,52 @@
+{
+  "run_id": "b2-20261023-102540-3a9abf0d",
+  "passed": true,
+  "b2_gates": 10,
+  "b2_workers": 36,
+  "before_workers": 13,
+  "candidate_workers": 23,
+  "before_property_failures": 134,
+  "b2_checks": {
+    "total": 3261,
+    "passed": 3261,
+    "failed": 0
+  },
+  "b1_cases": {
+    "required": 28,
+    "characterizations": 6
+  },
+  "b1_workers": 72,
+  "b1_checks": {
+    "total": 6732,
+    "passed": 6732,
+    "failed": 0
+  },
+  "original_diagnostic_workers": 20,
+  "original_diagnostics": {
+    "baseline": {
+      "passed": 17,
+      "failed": 15
+    },
+    "candidate": {
+      "passed": 32,
+      "failed": 0
+    }
+  },
+  "repaired_b2_defects": [
+    "B2-HOOKS",
+    "B2-NEEDS",
+    "B2-OFFSCREEN-OWNER",
+    "B2-TIMER"
+  ],
+  "candidate_deferred_ids": [
+    "B3-DIRTY-HOT",
+    "B3-GENERATIONS",
+    "C-DROP-EQUIPPED",
+    "UI-TEXT-HEIGHT"
+  ],
+  "note": "Checks include harness/source bindings; before failures are separate exact baseline controls, not unmet B2 gates.",
+  "command": ".\\.venv\\Scripts\\python.exe tools/verify_b2.py",
+  "source_matches_tested_copy": true,
+  "no_unexpected_worker_tracebacks": true,
+  "next_recommendation": "B3 checkpoint coherence, dirty flushing and interrupted-write recovery"
+}

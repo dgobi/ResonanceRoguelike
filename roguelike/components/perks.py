@@ -59,7 +59,7 @@ class Perks:
     @property
     def active_perks(self) -> list[str]:
         """Ordered list of acquired perk ids (for hook registration)."""
-        return list(self.acquired)
+        return sorted(self.acquired)
 
     def has_perk(self, perk_id: str) -> bool:
         return perk_id in self.acquired

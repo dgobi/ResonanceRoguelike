@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
+
 # Layout Authoring Guide
 
 This document explains how to create hand-crafted map layouts for the game.

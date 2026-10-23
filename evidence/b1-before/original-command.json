@@ -1,0 +1,18 @@
+{
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source\\tools\\persistence_diagnostics.py",
+    "--prefix",
+    "b1-before-20261022",
+    "--assert-properties"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source",
+  "environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYTHONHASHSEED": "20261020"
+  },
+  "exit_code": 1,
+  "stdout": "{\"output\": \"G:\\\\GameDev\\\\RoguelikeBaseline-20261020\\\\b1-20261022\\\\baseline-source\\\\evidence\\\\b1-before-20261022-results.json\", \"harness_completed\": true, \"all_properties_passed\": false}\n",
+  "stderr": ""
+}

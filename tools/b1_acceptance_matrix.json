@@ -1,0 +1,1265 @@
+{
+  "schema_version": 1,
+  "document_kind": "acceptance_plan_not_test_results",
+  "title": "Arc B1 persistence identity, explicit replacement and autonomous headless acceptance",
+  "target_save_contract": {
+    "name": "development-only save v2",
+    "write_version": 2,
+    "read_versions": [
+      2
+    ],
+    "migration": "none",
+    "personal_saves": "never accessed",
+    "equipment_reference": "save-local index into the exact serialized inventory rows; optional item_id consistency check; no global UUID requirement"
+  },
+  "case_count": 34,
+  "case_count_note": "These planned cases are distinct from the 32 assertions in the original Arc A diagnostic evidence. Parametrized variants each require reported results.",
+  "classifications": {
+    "required_b1": "Every stated B1 invariant must pass with autonomous attributable evidence. No skip/xfail/manual substitution.",
+    "required_baseline_characterization": "Execution and accurate comparison are mandatory. Report functional completion or an exact reproduced preexisting out-of-scope defect. This is not an unconditional repair gate for B2/B3/C/D/E/UI defects; new regressions and B1 defects still fail."
+  },
+  "global_execution_contract": [
+    "Use unique disposable fixture roots and actual installed dependencies; all real-loop tests use dummy SDL and process-local events, never full PC control.",
+    "Run all cases and every listed meaningful variant autonomously. The owner has no mandatory functional test task.",
+    "Choose explicit bounded subprocess, frame, turn and action budgets; timeout/crash/missing result/zero collection fail the harness.",
+    "Record exact argv, cwd, child environment choices, runtime/OS/dependency versions, imported-source hashes, fixture seed, run ID, phase, PID, expected/observed assertions and exit code.",
+    "Keep terminal writer save bytes immutable and give each reader/travel branch its own clone. Never call a mutated reader fixture the original checkpoint.",
+    "Separate actual-component/minimal-host, full-bootstrap/direct-method and original-real-loop evidence labels. Source review or screenshots alone do not prove functional completion.",
+    "Use source-grounded invariants and selected meaningful state, not an assertion that mirrors the implementation or a screenshot hash. Instrumentation may observe/schedule but cannot bypass the behavior being certified.",
+    "Fix all B1-scoped failures and newly introduced regressions. For a broader preexisting defect, reproduce it on baseline and candidate, preserve its exact signature and later-arc owner, and complete other independent routes.",
+    "Do not add a global identity framework, all-field save overhaul, atomic generations or user-save migration merely to make this matrix green.",
+    "Before accepting B1, review every required_b1 result and every characterization outcome. Do not convert a known-defect reproduction into a gameplay pass or use blanket xfail."
+  ],
+  "source_reference_convention": "Paths refer to the reviewed project root; gameplay paths are relative to roguelike/. Function names are supplied because candidate line numbers will move.",
+  "groups": [
+    "setup_harness",
+    "scenes",
+    "replacement_light",
+    "lurker",
+    "format",
+    "real_loop_journey",
+    "scope_characterization"
+  ],
+  "cases": [
+    {
+      "id": "H01",
+      "group": "setup_harness",
+      "title": "Preserve the failing-before baseline without calling harness completion a pass",
+      "fixture": {
+        "project": "Immutable reviewed Arc A source; new disposable sessions",
+        "expected_workers": 10,
+        "expected_assertions": 32,
+        "expected_passed_assertions": 17,
+        "expected_failed_assertions": 15
+      },
+      "actions": [
+        "Run the original Arc A diagnostics on the unchanged reviewed baseline.",
+        "Retain raw worker records and separately report completion, assertion totals and acceptance exit policy."
+      ],
+      "assertions": [
+        "All 10 intended worker records belong to this run and completed.",
+        "The reviewed baseline reproduces 32 assertions: 17 true and 15 false; these are assertion counts, not independent bug counts.",
+        "Diagnostic exit 0 without --assert-properties is never reported as persistence acceptance."
+      ],
+      "classification": "required_baseline_characterization",
+      "evidence": {
+        "source_references": [
+          "tools/persistence_diagnostics.py",
+          "evidence/arc-a2-results.json"
+        ],
+        "required_artifacts": [
+          "Original before JSON and command/exit/stdout/stderr",
+          "Summary containing expected and observed 10/32/17/15 counts",
+          "Before source manifest"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "H02",
+      "group": "setup_harness",
+      "title": "Run real dependencies in isolated, attributable headless workers",
+      "fixture": {
+        "project": "Fresh copy of current implementation for every new run",
+        "save_root": "Canonical child of a uniquely marked disposable root",
+        "environment": {
+          "SDL_VIDEODRIVER": "dummy",
+          "SDL_AUDIODRIVER": "dummy",
+          "PYTHONHASHSEED": "fixed before child startup"
+        }
+      },
+      "actions": [
+        "Verify canonical containment of all generated save/output paths before writes or cleanup.",
+        "Use real game modules, pygame, tcod, numpy and asset files; record source origins, versions, fixture seed and any case-sensitive font-path adaptation.",
+        "Capture actual imported-file hashes from the worker, not only the parent project."
+      ],
+      "assertions": [
+        "No personal saves or original source bytes change.",
+        "The selected video driver is dummy in real-loop workers.",
+        "No OS keyboard/mouse control, desktop focus, input grab or PC takeover is used.",
+        "No AST-extracted functions, dependency stand-ins or stale-source resumed fixture are presented as integration evidence."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "tools/baseline.py",
+          "main.py",
+          "engine/engine.py::run"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "H03",
+      "group": "setup_harness",
+      "title": "Acceptance runner fails on missing evidence, crash, timeout or required invariant failure",
+      "fixture": {
+        "runner": "B1 acceptance command",
+        "negative_controls": [
+          "zero assertions collected",
+          "missing worker result",
+          "stale run ID or phase",
+          "child crash",
+          "bounded child timeout",
+          "one false required_b1 assertion"
+        ]
+      },
+      "actions": [
+        "Run bounded self-checks against the listed runner failure conditions.",
+        "Enforce child deadlines plus frame/turn/action budgets and bounded cleanup.",
+        "Check case and parameter coverage against this manifest."
+      ],
+      "assertions": [
+        "Every negative control returns nonzero and names the cause.",
+        "Required B1 cases cannot be skipped, blanket-xfailed, converted to warnings or satisfied by empty all(...).",
+        "Baseline characterizations retain their actual functional outcome and exact known-defect record; they do not inflate B1 pass totals.",
+        "Evidence files from an earlier run cannot satisfy a new worker."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "tools/persistence_diagnostics.py::main",
+          "tools/baseline.py::prepare"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "H04",
+      "group": "setup_harness",
+      "title": "Terminal writer checkpoint and independently branched readers",
+      "fixture": {
+        "writers": "One writer per scene/state fixture, stopped immediately after final save",
+        "branches": [
+          "untouched canonical writer snapshot",
+          "fresh-process reader clone",
+          "same-session reader/mutation clone"
+        ]
+      },
+      "actions": [
+        "Record a manifest of every save file immediately after final save and stop the clean writer without further load, traversal, turn advancement or save.",
+        "Clone those bytes for each independent reader branch; record manifest equality before launch.",
+        "For same-session alias checks, use a separate writable clone and mutate only memory after its final save.",
+        "Keep all reader traversal writes confined to that reader branch."
+      ],
+      "assertions": [
+        "The canonical writer manifest remains unchanged throughout all readers.",
+        "Every fresh reader has a different PID and loads the exact writer bytes, without rebuilding the fixture before load.",
+        "No reader silently benefits from an earlier branch overwriting the damaged scene cache.",
+        "Same-session and fresh-process results are separately identifiable."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "tools/persistence_diagnostics.py::worker, scenes branch",
+          "engine/save_manager.py::ChunkCache.store/store_submap"
+        ],
+        "required_artifacts": [
+          "Writer and per-branch input/output SHA-256 manifests",
+          "Phase/PID/action trace including terminal save boundary",
+          "Separate structured results for each reader"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "S01",
+      "group": "scenes",
+      "title": "Surface full-save roundtrip preserves scene identity and selected stored layers",
+      "fixture": {
+        "scene": "(wx, wy, None)",
+        "sentinels": [
+          "grass terrain marker",
+          "modified hollow_revenant HP and position",
+          "floor-item fuel/liquid",
+          "decor and container state",
+          "explored cell and stair link"
+        ],
+        "readers": [
+          "same-session",
+          "fresh-process"
+        ]
+      },
+      "actions": [
+        "Create sentinels through the actual scene/component APIs in a disposable bootstrap.",
+        "Save while surface is active and run both isolated readers."
+      ],
+      "assertions": [
+        "World coordinates and submap=None match the saved scene.",
+        "Selected terrain, actor count/type/HP/position and LocalMap layer values equal the recorded writer values.",
+        "The restored player occurs exactly once and is the active engine player.",
+        "Recomputed visibility is evaluated separately from persisted explored flags."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::SaveManager.save/load",
+          "world/local_map.py::LocalMap"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "S02",
+      "group": "scenes",
+      "title": "Underground full-save never overwrites or loads the paired surface",
+      "fixture": {
+        "scene_pair": "One world address with surface grass+hollow_revenant and linked submap flagstone+grave_thing",
+        "readers": [
+          "same-session",
+          "fresh-process"
+        ]
+      },
+      "actions": [
+        "Save while the linked submap is active.",
+        "Load the submap in each independent reader.",
+        "Inspect the separately persisted surface record before any ascent can rewrite it."
+      ],
+      "assertions": [
+        "Saved and loaded location is the complete (wx, wy, submap_id) address.",
+        "The underground marker, actor identity/count and modified HP are retained.",
+        "Surface bytes/content still describe grass and hollow_revenant, not underground content.",
+        "No surface-generation fallback is used to satisfy an underground load."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::SaveManager.save/load",
+          "engine/engine.py::_ascend_from_submap/_descend_to_submap"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "S03",
+      "group": "scenes",
+      "title": "Distinct visited addresses and empty actor sets remain distinct",
+      "fixture": {
+        "scenes": "Two surface world addresses and at least two valid linked submaps with distinct sentinels; one saved scene has no non-player actors"
+      },
+      "actions": [
+        "Visit/cache the selected scenes, modify their independent sentinels and save from one scene.",
+        "Read each scene through the actual cache/traversal boundary in isolated branches."
+      ],
+      "assertions": [
+        "Coordinates and submap identity do not alias another scene.",
+        "Untouched sibling scene contents remain unchanged.",
+        "The deliberately empty actor list remains empty instead of regenerating or retaining prior actors.",
+        "Each active scene contains one player and its own expected non-player multiset."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::ChunkCache",
+          "engine/engine.py::_transition_chunk/_descend_to_submap/_ascend_from_submap"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "S04",
+      "group": "scenes",
+      "title": "Repeated ascent/descent and subsequent save/load do not duplicate scene occupants",
+      "fixture": {
+        "route": "Loaded underground -> surface -> same submap, repeated three times",
+        "actors": "Distinct controlled non-pursuing actors in both scenes"
+      },
+      "actions": [
+        "Start from a clean writer snapshot reader branch.",
+        "Use actual transition methods for bounded cycles, then save and cold-load that resulting branch."
+      ],
+      "assertions": [
+        "Scene marker and stable definition multiset are correct after every transition.",
+        "Modified actor values retained by the B1 contract survive.",
+        "No actor or player is duplicated, lost or copied into its sibling scene.",
+        "Only intended reader-branch files change; the canonical writer remains immutable."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/engine.py::_descend_to_submap/_ascend_from_submap",
+          "engine/save_manager.py::_deserialize_entities"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "S05",
+      "group": "scenes",
+      "title": "Full load discards mutable hot-map aliases without flushing unsaved mutations",
+      "fixture": {
+        "variants": [
+          "active surface hot entry",
+          "active submap hot entry"
+        ],
+        "mutation": "Change terrain and a nested floor/container value after save without travel or another save"
+      },
+      "actions": [
+        "Save and record scene file hashes.",
+        "Mutate the active map still referenced by hot/submap_hot.",
+        "Full-load in the same process and compare with a cold reader of the same bytes."
+      ],
+      "assertions": [
+        "Same-session state equals persisted writer state and agrees with the cold reader.",
+        "Post-save mutations do not survive through stale map or nested-layer references.",
+        "Full load does not flush the unsaved map into the committed cache first.",
+        "Save-file hashes are unchanged by the load itself."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::ChunkCache.store/load/store_submap/load_submap",
+          "engine/save_manager.py::SaveManager.load"
+        ],
+        "required_artifacts": [
+          "Before/after scene snapshots and disk manifests",
+          "Diagnostic alias observations; no requirement for a particular implementation technique"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "S06",
+      "group": "scenes",
+      "title": "Full load replaces actor collections and cannot reintroduce pre-load actor references",
+      "fixture": {
+        "collections": [
+          "Engine.entities",
+          "Engine._live_pursuers",
+          "Engine._pending_pursuer_arrivals",
+          "ChunkCache.hot/submap_hot serialized actor records"
+        ],
+        "scope": "Reference replacement and scene ownership; broader offscreen pursuit behavior is deferred"
+      },
+      "actions": [
+        "Save known active actors and bounded saved pursuer/arrival records.",
+        "Mutate active HP/position; add uniquely named stale actors/pursuers/arrivals only in memory.",
+        "Full-load, inspect collection membership, then trigger a bounded relevant transition or tick."
+      ],
+      "assertions": [
+        "Loaded actors have the recorded B1 fields and expected collection ownership.",
+        "Pre-load-only actors and pending transfers cannot reappear after load.",
+        "The same actor is not duplicated between active scene and saved pursuer/arrival records.",
+        "No claim is made that every offscreen AI timer or pursuit rule is preserved."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::_deserialize_player/_deserialize_entities/SaveManager.load",
+          "engine/engine.py::_live_pursuers/_pending_pursuer_arrivals"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "R01",
+      "group": "replacement_light",
+      "title": "Explicit empty inventory replaces both bootstrap and changed in-session belongings",
+      "fixture": {
+        "saved": {
+          "inventory": {
+            "capacity": 13.5,
+            "items": []
+          },
+          "equipment": "all slots empty",
+          "light_source": null
+        },
+        "readers": [
+          "fresh bootstrap with six starter items",
+          "in-session with deliberately different items"
+        ]
+      },
+      "actions": [
+        "Save a real empty Inventory component with nondefault capacity.",
+        "Restore in each reader variant."
+      ],
+      "assertions": [
+        "The v2 payload contains an explicit inventory record and empty items array, not truthiness-derived null.",
+        "Restored capacity is 13.5 and no starter/prior item remains.",
+        "Equipment slots are empty and no item-owned light remains active."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "components/inventory.py::__len__",
+          "engine/save_manager.py::_serialize_player/_deserialize_player"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "R02",
+      "group": "replacement_light",
+      "title": "Nonempty inventory with empty slots clears stale equipment and armor contribution",
+      "fixture": {
+        "saved": "Jerky-only inventory; all equipment slots explicitly empty",
+        "prior": "Starter offhand torch and deliberately equipped torso armor"
+      },
+      "actions": [
+        "Save the jerky-only empty-slot state.",
+        "Load over populated prior equipment and from a fresh bootstrap."
+      ],
+      "assertions": [
+        "Only the saved jerky remains in inventory.",
+        "Every slot, including offhand and armor_torso, is empty.",
+        "Prior armor no longer contributes to effective armor, using the existing recomputation rules.",
+        "No equipped reference points to any old inventory object."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::_restore_equipment",
+          "engine/item_system.py::_recompute_effective_av"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "R03",
+      "group": "replacement_light",
+      "title": "Valid gear relinks to exact restored inventory objects",
+      "fixture": {
+        "saved": "Distinct blade, armor and torch items in their supported slots; at least one mutable item field changed"
+      },
+      "actions": [
+        "Save populated inventory/equipment.",
+        "Load in both process modes and inspect object identity against restored inventory rows."
+      ],
+      "assertions": [
+        "Every non-null slot refers to the exact intended reconstructed inventory object.",
+        "No slot is satisfied merely by an equal item_id or an old live object.",
+        "Equipped flags and the existing armor calculation agree with restored slots.",
+        "Saved selected item values survive reconstruction."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::_serialize_player/_deserialize_player/_restore_equipment",
+          "components/equipment.py::Equipment"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "R04",
+      "group": "replacement_light",
+      "title": "Duplicate definition items preserve save-local index zero and one",
+      "fixture": {
+        "items": "Two tallow_torch objects with turns_lit=10 and 90",
+        "variants": [
+          "first object equipped at serialized index 0",
+          "second object equipped at serialized index 1",
+          "inventory reordered before save with the same physical object equipped"
+        ]
+      },
+      "actions": [
+        "Build references from the exact serialized inventory rows, save and cold-load each variant.",
+        "Compare the slot object with the intended restored row and its distinguishing fuel state."
+      ],
+      "assertions": [
+        "Index 0 is valid and never rejected through truthiness.",
+        "Index 1 selects the second torch rather than the first matching definition.",
+        "Reordering before save updates the saved reference correctly.",
+        "No Python id(), global item UUID system or first-matching-ID fallback is the durable reference contract."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::_serialize_player/_restore_equipment"
+        ],
+        "required_artifacts": [
+          "Relevant v2 player payload fragments",
+          "Restored row index, slot identity and fuel assertions for all variants"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "R05",
+      "group": "replacement_light",
+      "title": "Null and inactive saved lights cannot leave a bootstrap ghost light",
+      "fixture": {
+        "variants": [
+          "saved light_source=null and empty offhand",
+          "saved inactive light state"
+        ],
+        "prior": "Active bootstrap or in-session torch with _item_ref outside the restored bag"
+      },
+      "actions": [
+        "Load each saved state over a deliberately active old light.",
+        "Advance one ordinary action in a real runtime fixture."
+      ],
+      "assertions": [
+        "Explicit null clears the light component according to the documented v2 policy.",
+        "Saved inactive light remains inactive.",
+        "No stale item reference stays active or consumes fuel after replacement.",
+        "Load does not relight an extinguished item merely because its definition supports light."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::_deserialize_player/_restore_equipment",
+          "engine/item_system.py::_use_equip_light",
+          "engine/engine.py::_advance_turn"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "R06",
+      "group": "replacement_light",
+      "title": "Restored offhand torch links to its saved instance and consumes fuel on the next turn",
+      "fixture": {
+        "setup": "Light through actual ItemSystem use route; two differentiated torches; selected one in offhand",
+        "variants": [
+          "ordinary remaining fuel",
+          "one remaining fuel turn"
+        ]
+      },
+      "actions": [
+        "Save and load in both process modes.",
+        "Inspect _item_ref and then advance one real game turn.",
+        "For the final-fuel variant, observe the existing burnout route."
+      ],
+      "assertions": [
+        "Active light._item_ref is the selected restored offhand/inventory object.",
+        "Exactly that object gains one turns_lit on one advancing turn; the other torch is unchanged.",
+        "The final-fuel case deactivates the light, clears/removes the correct torch according to existing behavior, and leaves the duplicate untouched.",
+        "This is narrow reference restoration, not a promise to reconstruct all derived systems."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/item_system.py::_use_equip_light",
+          "engine/save_manager.py::_restore_equipment",
+          "engine/engine.py::_advance_turn light block"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "K01",
+      "group": "lurker",
+      "title": "Dormant stone lurker saves its definition and stays dormant after reconstruction",
+      "fixture": {
+        "actor": "Actual factory stone_lurker initialized by the ability at distance greater than 3; tile=rock"
+      },
+      "actions": [
+        "Record stable definition, display tile, HP and dormancy.",
+        "Roundtrip through the real entity serializer and scene save/load.",
+        "Run one subsequent distant ability/AI tick."
+      ],
+      "assertions": [
+        "Payload definition is stone_lurker regardless of rock presentation.",
+        "Exactly one stone_lurker reconstructs with saved HP/position.",
+        "Dormancy and rock presentation are correct immediately and after the next distant tick.",
+        "No unknown-rock factory failure or silent actor drop occurs."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/creature_factory.py::spawn",
+          "engine/creature_abilities.py::_ability_stone_lurker",
+          "engine/save_manager.py::_serialize_entity/_deserialize_entities"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "K02",
+      "group": "lurker",
+      "title": "Awake lurker is not reset to dormant by the next distant tick",
+      "fixture": {
+        "actor": "Awake stone_lurker, _hibernating=False, consumed ambush, AI trigger already set; distant player"
+      },
+      "actions": [
+        "Save/load the actor and inspect immediate state.",
+        "Advance its next actual ability/AI tick with the player distant."
+      ],
+      "assertions": [
+        "Awake state and the relevant one-time AI trigger survive.",
+        "The actor does not become rock or reinitialize hibernation.",
+        "Consumed ambush is not armed again."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/creature_abilities.py::_ability_stone_lurker",
+          "components/ai.py::AmbushAI",
+          "engine/save_manager.py::_deserialize_entities"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "K03",
+      "group": "lurker",
+      "title": "Wake transition and pending-versus-consumed ambush retain their lifetime",
+      "fixture": {
+        "variants": [
+          "saved dormant actor then player approaches within 3",
+          "saved newly awake actor with pending ambush",
+          "saved awake actor whose ambush was consumed"
+        ]
+      },
+      "actions": [
+        "Use bounded actual ability/AISystem ticks around the saved lifecycle boundary.",
+        "Instrument attack invocations observationally and separate the special ambush from normal attacks."
+      ],
+      "assertions": [
+        "The dormant actor wakes at the existing range and changes presentation once.",
+        "A saved pending one-time ambush is consumed once.",
+        "A consumed ambush does not replay after load or a second tick.",
+        "General combat balance and unrelated AI memory fidelity are not new B1 repair gates."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/creature_abilities.py::_ability_stone_lurker",
+          "engine/ai_system.py::AISystem.process ambush block"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "K04",
+      "group": "lurker",
+      "title": "Stable creature identity applies at every existing serialization owner",
+      "fixture": {
+        "owners": [
+          "surface scene cache",
+          "submap scene cache",
+          "saved live-pursuer entry",
+          "saved pending-arrival entry"
+        ],
+        "fixture": "One clearly identified lurker per isolated owner variant"
+      },
+      "actions": [
+        "Serialize/reconstruct each owner variant using its actual existing save path.",
+        "Inspect reconstructed actor definition/count and B1 lifecycle fields."
+      ],
+      "assertions": [
+        "Mutable presentation never becomes the definition ID at any owner.",
+        "Exactly the intended actor is reconstructed without duplication across owner lists.",
+        "This checks shared serialization identity and replacement, not offscreen pursuit mechanics."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::ChunkCache.store/store_submap",
+          "engine/save_manager.py::_serialize_player/_deserialize_player"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "F01",
+      "group": "format",
+      "title": "Development save version 2 is the sole positive load contract",
+      "fixture": {
+        "save": "New synthetic development save written by the B1 implementation"
+      },
+      "actions": [
+        "Write v2 and inspect metadata plus inventory/equipment reference representation.",
+        "Load with the current implementation in both process modes."
+      ],
+      "assertions": [
+        "Writer emits integer save_version=2 and reader accepts exactly that supported version.",
+        "The format documents explicit empty replacement, the full scene address and save-local item references.",
+        "Only one equipment-reference representation is authoritative.",
+        "No migration of v1 or personal saves is attempted."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::SaveManager.save/load",
+          "engine/save_manager.py::_serialize_player/_restore_equipment"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "F02",
+      "group": "format",
+      "title": "Missing or malformed version is rejected before load mutation",
+      "fixture": {
+        "variants": [
+          "slot with player.json but no meta.json",
+          "meta missing save_version",
+          "save_version=null",
+          "save_version=true",
+          "save_version=\"2\"",
+          "save_version=2.5"
+        ],
+        "snapshot": "Hash all fixture files; retain pre-call world/player/map/cache state"
+      },
+      "actions": [
+        "Attempt direct load for every variant.",
+        "Exercise ordinary bootstrap against representative existing-slot variants."
+      ],
+      "assertions": [
+        "Unsupported/malformed version is a clear structured failure before deserialization or cache replacement.",
+        "The direct load leaves prior world/player/map/cache state unchanged apart from a diagnostic message.",
+        "No save file is written, deleted or replaced.",
+        "Bootstrap stops before Engine.run and cannot silently present or autosave a new/partial game."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::SaveManager.load version guard",
+          "main.py::main save-load branch"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "F03",
+      "group": "format",
+      "title": "Synthetic version 1 is rejected without migration or silent new-game fallback",
+      "fixture": {
+        "save": "Synthetic old-format development fixture with save_version=1; never an owner save"
+      },
+      "actions": [
+        "Attempt direct load and ordinary bootstrap.",
+        "Compare pre/post memory sentinels and full fixture file manifest."
+      ],
+      "assertions": [
+        "Failure clearly reports unsupported version 1.",
+        "No deserialization, cache replacement, migration, write or deletion occurs.",
+        "Bootstrap does not enter Engine.run or proceed as if load succeeded."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::SaveManager.load",
+          "main.py::main"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "F04",
+      "group": "format",
+      "title": "Unknown future version cannot pass a lower-bound version check",
+      "fixture": {
+        "versions": [
+          3,
+          999
+        ],
+        "save": "Otherwise plausible synthetic development slot"
+      },
+      "actions": [
+        "Attempt direct load and ordinary bootstrap for each unknown version."
+      ],
+      "assertions": [
+        "All unknown versions are rejected before state mutation.",
+        "Existing files and live state are preserved, except diagnostic logging.",
+        "No >=1 or >=2 permissive branch silently accepts a future schema.",
+        "Bootstrap produces an explicit failure outcome before Engine.run."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::SaveManager.load",
+          "main.py::main"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "F05",
+      "group": "format",
+      "title": "Replacement fields and the narrow new-game exception cannot hide a partial save",
+      "fixture": {
+        "variants": [
+          "explicit empty inventory and equipment",
+          "inventory missing",
+          "inventory=null",
+          "equipment missing",
+          "equipment=null",
+          "individual equipment slot absent"
+        ],
+        "new_game_controls": [
+          "A genuinely absent save slot.",
+          "A deliberate seed-only world.json containing exactly the documented seed field with a valid non-boolean integer value, with neither player.json nor meta.json and no saved gameplay-state payload.",
+          "If the implementation uses a bootstrap fixture marker instead, a narrowly specified and validated marker that identifies deliberate initialization; a generic disposable-session marker alone is insufficient."
+        ],
+        "partial_save_negative_controls": [
+          "A full serialized world.json with both player.json and meta.json missing.",
+          "A full serialized world.json with player.json missing but meta.json present.",
+          "A full serialized world.json with meta.json missing but player.json present."
+        ]
+      },
+      "actions": [
+        "Test valid explicit empty replacement.",
+        "Apply the documented v2 validation/default policy to each malformed or omitted replacement field.",
+        "Run the supported narrow new-game controls through bootstrap and identify the exact payload-shape or explicit-marker rule used.",
+        "For each partial-save negative control, retain all file hashes, run bootstrap, and observe whether Engine.run, fresh-game descent or any save operation is reached."
+      ],
+      "assertions": [
+        "Empty is never mistaken for leave-the-old-state-alone.",
+        "Omission/null either uses an explicit documented empty/default interpretation or fails clearly; the chosen policy is asserted exactly.",
+        "No branch silently keeps starter/prior belongings or stale slot references.",
+        "Only a genuinely absent slot or the documented deliberate seed-only/explicit-bootstrap fixture exception can enter new-game generation.",
+        "A full serialized world.json with missing player.json and/or meta.json is an incomplete existing save, even when save_exists() would return false; it fails before Engine.run and is never silently treated as a new game.",
+        "The narrow fixture-marker alternative cannot override evidence of a partial full save or excuse an arbitrary world.json payload.",
+        "Rejected partial-save fixtures are not written, deleted or overwritten by startup; the failure is explicit and attributable."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::_deserialize_player/_restore_equipment",
+          "main.py::main",
+          "tools/baseline.py::prepare"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "F06",
+      "group": "format",
+      "title": "Invalid save-local item references cannot select a different same-type item",
+      "fixture": {
+        "reference_variants": [
+          -1,
+          true,
+          1.5,
+          "1",
+          "out-of-range index",
+          "index of unresolved/missing-definition row",
+          "optional item_id consistency mismatch"
+        ],
+        "index_alignment_control": "A missing/rejected row precedes a valid referenced row; serializer filtering must not shift the reference"
+      },
+      "actions": [
+        "Construct synthetic v2 payloads and invoke the actual validated restore path.",
+        "Assert the documented error/clear policy for each invalid reference.",
+        "Exercise the saved-row-index mapping with unresolved rows or serializer filtering."
+      ],
+      "assertions": [
+        "Only non-boolean integer indices within the actual serialized-row domain can resolve.",
+        "Unresolved rows never compact into a reference to another item.",
+        "Invalid explicit references never fall back to first matching item_id.",
+        "A rejected reference produces a clear failure or documented empty slot; it never retains a prior item.",
+        "No global identity rewrite is required."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::_serialize_player/_deserialize_player/_restore_equipment"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "F07",
+      "group": "format",
+      "title": "A completed v2 save with an invalid address or missing active scene record fails without regeneration",
+      "fixture": {
+        "variants": [
+          "submap_id belongs to different world coordinates",
+          "unknown submap_id",
+          "required active underground scene record missing from an otherwise completed v2 slot",
+          "required active surface scene record missing from an otherwise completed v2 slot"
+        ],
+        "controls": [
+          "An untouched completed v2 snapshot with its active scene record present loads normally.",
+          "Missing-record variants run in cold readers and with a stale hot/submap_hot entry, so memory cannot hide the absent persisted scene.",
+          "Genuine new-game generation is exercised only through the distinct narrow new-game controls in F05."
+        ]
+      },
+      "actions": [
+        "Clone an otherwise completed disposable v2 writer snapshot and construct each invalid-address or missing-active-record variant in its own branch.",
+        "Attempt direct load and startup load, observing scene-generation calls, selected location, return outcome and whether Engine.run is entered.",
+        "Compare the fixture file manifests before and after the rejected load."
+      ],
+      "assertions": [
+        "The saved world address, submap membership and selected scene are validated together.",
+        "A completed supported v2 save missing its required active scene record fails for surface and underground alike; it never silently regenerates the active scene.",
+        "No variant reports success with a surface map under an underground identity or with a stale hot entry substituting for the missing persisted record.",
+        "A failed startup load stops before Engine.run rather than exposing a partial or regenerated game.",
+        "Rejected loads do not silently write replacement scene records or overwrite the incomplete fixture.",
+        "Initial generation for a genuinely new game remains separate under F05; these cases do not prohibit generation of an unvisited scene during ordinary play.",
+        "This is narrow validation of a completed save and its active scene; general transactional recovery from arbitrary corrupt chunks remains B3."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::SaveManager.load",
+          "world/world_map.py",
+          "main.py::main"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "E01",
+      "group": "real_loop_journey",
+      "title": "Real Engine.run consumes bounded process-local events with correct Unicode, modifiers and release",
+      "fixture": {
+        "runtime": "Actual main.main and original Engine.run under dummy SDL",
+        "route": [
+          "move",
+          "wait",
+          "open and close inventory",
+          "ascend",
+          "descend"
+        ]
+      },
+      "actions": [
+        "Post real pygame KEYDOWN/KEYUP pairs after display initialization and assert event.post succeeds.",
+        "Schedule the next action only after bounded state/frame predicates.",
+        "For stairs supply event.unicode < or >; for modifier branches set and restore pygame.key modifiers because event.mod alone does not update get_mods.",
+        "Capture app surfaces directly and end through a queued QUIT after recording results."
+      ],
+      "assertions": [
+        "Ordinary move/wait produce the expected position and turn deltas.",
+        "Menu navigation has the existing intended turn cost.",
+        "The actual Unicode stair dispatch reaches the correct scene and returns.",
+        "Held-key state is released and no hidden repeat adds actions/turns.",
+        "Original run-loop and tested handlers execute; no OS input or desktop screenshot is needed."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/engine.py::run event dispatch",
+          "engine/engine.py::_handle_key"
+        ],
+        "required_artifacts": [
+          "Action/event/state trace with key, unicode, event.mod and actual modifier state",
+          "Offscreen application-surface PNGs",
+          "Per-action assertions, budgets and exit code"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "E02",
+      "group": "real_loop_journey",
+      "title": "Nondebug F5/F9 input reaches actual full save/load and restores B1 state",
+      "fixture": {
+        "configuration": "Explicit disposable startup with DEBUG_MODE=False; original user configuration unchanged",
+        "fixture": "Independent surface/submap markers plus exact equipped duplicate torch"
+      },
+      "actions": [
+        "Drive actual F5 through the real loop and observe SaveManager.save invocation and output.",
+        "Change bounded in-memory state, drive actual F9 and inspect the resulting state.",
+        "Traverse the paired stairs with actual Unicode events and verify both scenes."
+      ],
+      "assertions": [
+        "Save/load occurs through the key route, not merely by direct method call.",
+        "Loaded scene and exact item/light ownership meet B1 invariants.",
+        "Both distinct scene contents survive the subsequent journey.",
+        "The result identifies the nondebug configuration; it is not presented as default-debug hotkey behavior."
+      ],
+      "classification": "required_b1",
+      "evidence": {
+        "source_references": [
+          "engine/engine.py::_handle_key F5/F9 branches",
+          "engine/save_manager.py::SaveManager.save/load"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "E03",
+      "group": "real_loop_journey",
+      "title": "Default debug F5/F9 bindings are characterized rather than mislabeled as save/load",
+      "fixture": {
+        "configuration": "Unchanged DEBUG_MODE=True baseline and candidate",
+        "events": [
+          "F5",
+          "F9"
+        ]
+      },
+      "actions": [
+        "Send the events through the real loop in isolated sessions.",
+        "Observe DebugOverlay dispatch and whether SaveManager is called."
+      ],
+      "assertions": [
+        "Actual default behavior is recorded: debug interception is distinguished from nondebug save/load.",
+        "The baseline is reproduced or a deliberate, separately explained change is identified.",
+        "A teleport/debug dump is never counted as a successful save/load test.",
+        "No control redesign is required by B1."
+      ],
+      "classification": "required_baseline_characterization",
+      "evidence": {
+        "source_references": [
+          "engine/engine.py::_handle_key debug interception",
+          "engine/debug.py::DebugOverlay.handle_key"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "E04",
+      "group": "real_loop_journey",
+      "title": "Functional journeys finish actions or reproduce a specific preexisting out-of-scope defect",
+      "fixture": {
+        "independent_branches": [
+          "ordinary combat with controlled target",
+          "pickup -> inventory -> equip -> drop",
+          "read and close a text",
+          "craft -> placement -> bounded processing completion",
+          "stair ascent/descent",
+          "ordinary edge movement into neighboring chunk"
+        ],
+        "setup": "Seeded disposable fixture acquisition may position/provision actors/items; tested actions themselves use real input routes"
+      },
+      "actions": [
+        "Run every branch autonomously against baseline and candidate with bounded deterministic setup.",
+        "Assert meaningful completion: damage/death; actual item ownership/slot change; reader open/close; consumed ingredients/placed result/completion; actual new scene.",
+        "If blocked, minimize and reproduce the exact preexisting defect on baseline and candidate, capture the failing action/state and continue independent branches."
+      ],
+      "assertions": [
+        "Opening a modal, pressing an unverified key or seeing no traceback is not route completion.",
+        "Each branch has either functional completion evidence or an exact baseline-matching out-of-scope defect record.",
+        "New candidate regressions and B1-owned scene/reference failures fail acceptance; broad preexisting C/D/E/UI defects are reported without becoming unconditional B1 repairs.",
+        "No branch is handed to the owner for mandatory manual testing, and one known blocker does not blanket-skip other routes."
+      ],
+      "classification": "required_baseline_characterization",
+      "evidence": {
+        "source_references": [
+          "engine/engine.py::run/_handle_key/_transition_chunk",
+          "Relevant actual UI and gameplay handlers reached by the recorded route"
+        ],
+        "required_artifacts": [
+          "One outcome per journey branch with baseline/candidate source hashes",
+          "Complete app-local event and state trace",
+          "Exact defect signature and proposed later arc for each deferred failure; no generic xfail"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "B01",
+      "group": "scope_characterization",
+      "title": "Record broader component reconstruction limits without expanding B1 into all-field persistence",
+      "fixture": {
+        "selected_controls": [
+          "Needs configuration before/after reconstruction, measured separately for bootstrap, direct SaveManager.load and nondebug F9",
+          "a registered component hook or derived owner affected by reconstruction",
+          "one omitted transient timer or RNG owner"
+        ],
+        "scope_owner": "B2",
+        "needs_load_routes": [
+          "Fresh main.main bootstrap: Engine initialization configures the initial Needs, then the direct loader reconstructs it without calling _configure_player_needs afterward.",
+          "Direct SaveManager.load: reconstructs Needs without calling _configure_player_needs afterward.",
+          "Nondebug F9 through the actual input route: calls SaveManager.load and then explicitly calls _configure_player_needs."
+        ]
+      },
+      "actions": [
+        "Choose bounded representative controls from inspected source and record baseline/current values before and after load.",
+        "For Needs, record _configured and a meaningful configured-versus-fallback rate or tick observation independently for all three load routes; observe the real route-specific _configure_player_needs invocation.",
+        "If a selected journey is blocked, reproduce the precise baseline defect and bind it to the later-arc ledger."
+      ],
+      "assertions": [
+        "Findings distinguish saved, reconstructed, reset and currently omitted state.",
+        "Needs results are route-specific: the reviewed baseline nondebug F9 route explicitly reconfigures Needs, while bootstrap/direct SaveManager.load do not; no claim says that all load routes always lose the configuration.",
+        "Functional success or an exact preexisting defect is reported for each selected control and load route.",
+        "No all-components, all-timers or RNG replay guarantee is inferred from B1 identity fixes; general Needs/hook reconstruction remains a B2 characterization, not an unconditional B1 repair.",
+        "A new regression introduced by B1 is not excused as a preexisting B2 issue."
+      ],
+      "classification": "required_baseline_characterization",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::_deserialize_player",
+          "components/needs.py::Needs.configure",
+          "engine/engine.py::_configure_player_needs and _handle_key nondebug F9 branch",
+          "main.py::main startup load branch"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "B02",
+      "group": "scope_characterization",
+      "title": "Separate persisted scene records from campaign-wide checkpoint rollback",
+      "fixture": {
+        "sequence": "Save checkpoint -> later travel that writes scene caches -> reload",
+        "scope_owner": "B3"
+      },
+      "actions": [
+        "Record checkpoint files, then perform bounded travel in a reader branch that causes existing cache writes.",
+        "Record which files change before full reload and compare observed behavior with the unchanged baseline."
+      ],
+      "assertions": [
+        "The report states that travel currently writes scene records immediately.",
+        "Any mixed checkpoint/live-cache behavior is reproduced exactly and assigned to B3 rather than hidden behind a passing active-scene test.",
+        "B1 does not claim whole-campaign rollback, atomic save generations or recovery after arbitrary later traversal.",
+        "The canonical writer fixture is unchanged because this characterization uses its own branch."
+      ],
+      "classification": "required_baseline_characterization",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::ChunkCache.store/store_submap/SaveManager.save",
+          "engine/engine.py travel methods"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    },
+    {
+      "id": "B03",
+      "group": "scope_characterization",
+      "title": "Dirty inactive hot state and offscreen processing remain explicit boundaries",
+      "fixture": {
+        "controls": [
+          "modified inactive hot map not explicitly stored before a full save",
+          "offscreen processing lookup of SaveManager.hot versus SaveManager.cache.hot"
+        ],
+        "scope_owner": "B2/B3 or later simulation arc according to exact defect"
+      },
+      "actions": [
+        "Use separate bounded disposable controls to compare hot state with cold disk state.",
+        "Record whether full save flushes the inactive dirty state and whether the actual offscreen branch reaches the intended cache.",
+        "Reproduce any observed defect against the baseline; keep these outcomes separate from B1 active-scene acceptance."
+      ],
+      "assertions": [
+        "The evidence does not assume that all hot entries were committed merely because SaveManager.save completed.",
+        "The actual cache owner is named; no nonexistent separate live entity cache is invented.",
+        "Known baseline behavior is explicitly reported; broad dirty flushing/offscreen simulation is not an unconditional B1 repair gate.",
+        "B1 full-load invalidation still must not reintroduce unsaved active map or actor references."
+      ],
+      "classification": "required_baseline_characterization",
+      "evidence": {
+        "source_references": [
+          "engine/save_manager.py::ChunkCache.store_hot_only/SaveManager.save",
+          "engine/engine.py::_advance_turn offscreen processing branch"
+        ],
+        "required_artifacts": [
+          "Structured expected/observed assertions with case ID, run ID, phase, PID and exit status",
+          "Exact command, runtime versions and hashes of actually imported source files"
+        ],
+        "result_status": "planned; this matrix is not execution evidence"
+      }
+    }
+  ]
+}

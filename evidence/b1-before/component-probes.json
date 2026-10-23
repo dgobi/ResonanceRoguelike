@@ -1,0 +1,184 @@
+{
+  "evidence_class": "actual-component / explicit-minimal-host; not full Engine bootstrap or input loop",
+  "purpose": "Reproduce diagnostic baseline observations; not B1 acceptance",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "project": "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source\\roguelike",
+  "harness_completed": true,
+  "limitations": [
+    "Minimal host supplies only directly accessed fields, a message sink and a recorded FOV callback.",
+    "No visibility, whole-save, bootstrap, event-loop or gameplay-journey guarantee.",
+    "Only a cleaned private temporary cache is written; no project save slots are read."
+  ],
+  "source_hashes": {
+    "engine/save_manager.py": "10169ccbd369aee5095098d315c9afb6613f898a323a95530b64e065b61d6b56",
+    "engine/creature_factory.py": "1e0f6d8efdf2d66b1df8943fa02647b83d62efe2b2e363aca089c039637f5fec",
+    "engine/creature_abilities.py": "31c0786d200423147b48723febf69be3e700c5ac7458ab6070da284dab8bfd57",
+    "engine/item_factory.py": "d6ac5b0424113595bc6c46bdb69a7983a1c55f53cfa6b8be75ef1a8752b960dc",
+    "engine/item_system.py": "33a61c22684460d200697c473884539e55c88ef28ae7a9e0e8408b5f7f1e7f45",
+    "engine/data_loader.py": "9cac98c6a5fc2ab09d8bfc968aa76e77562b29113f3dbeb50ff51c70d0e802f9",
+    "components/ai.py": "bde48decfa8f9e52f84544e2e3b002719f63a93a0613332dd754f139c61adad6",
+    "components/equipment.py": "a77ba430a60fc8df7b2938cb0bc0fcf4bb9d3df08f1875b24759545dfcc01c26",
+    "components/inventory.py": "d7216045ca601fa31490cf336ac44e3fa94dc23a98d1c8573b03b0837f4b5106",
+    "components/fighter.py": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79",
+    "world/local_map.py": "8432bee3b4ca2b9d0d2c6192e5c769997da656ff445b3e916ff5186bcdf4361a",
+    "entities/actor.py": "34600dc6f36d1f3f315f59ec296be4b4f1871bd3031ae582e8fdeda783702822"
+  },
+  "versions": {
+    "pygame": "2.6.1",
+    "numpy": "2.4.6",
+    "tcod": "19.3.0"
+  },
+  "probe_source_sha256": "bae89c4752ca9c75cf0220b469082fe20b72c53cda6db32b94e7df2660d1d280",
+  "observations": {
+    "cache_alias": {
+      "saved_marker": "grass",
+      "mutated_active_marker": "flagstone",
+      "same_cache_load_marker": "flagstone",
+      "fresh_cache_load_marker": "grass",
+      "hot_alias_same_object": true,
+      "disk_unchanged": true
+    },
+    "dormant_lurker": {
+      "stable_id": "stone_lurker",
+      "tile": "rock",
+      "hibernating": true,
+      "serialized_id": "rock",
+      "restored_count": 0
+    },
+    "awake_lurker": {
+      "before": {
+        "tile": "stone_lurker",
+        "hibernating": false,
+        "ai_triggered": true,
+        "ambush_ready": false
+      },
+      "restored_before_tick": {
+        "tile": "stone_lurker",
+        "hibernating": null,
+        "ai_triggered": false,
+        "ambush_ready": null
+      },
+      "restored_after_distant_ability_tick": {
+        "tile": "rock",
+        "hibernating": true,
+        "ai_triggered": false,
+        "ambush_ready": null
+      }
+    },
+    "player": {
+      "empty_inventory_serialized": null,
+      "ghost_light_and_equipment": {
+        "saved_light_source": null,
+        "saved_offhand": null,
+        "restored_inventory": [
+          "crow_jerky"
+        ],
+        "restored_offhand": "tallow_torch",
+        "light_still_active": true,
+        "light_ref_is_prior_item": true,
+        "light_item_owned": false
+      },
+      "duplicate_definition_items": {
+        "saved_equipped_turns_lit": 90,
+        "restored_inventory_turns_lit": [
+          10,
+          90
+        ],
+        "restored_equipped_turns_lit": 10,
+        "equipped_is_restored_first_item": true
+      }
+    }
+  },
+  "imported_module_origins": {
+    "engine.save_manager": "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source\\roguelike\\engine\\save_manager.py",
+    "engine.creature_factory": "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source\\roguelike\\engine\\creature_factory.py",
+    "engine.creature_abilities": "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source\\roguelike\\engine\\creature_abilities.py",
+    "engine.item_system": "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source\\roguelike\\engine\\item_system.py",
+    "components.inventory": "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source\\roguelike\\components\\inventory.py",
+    "world.local_map": "G:\\GameDev\\RoguelikeBaseline-20261020\\b1-20261022\\baseline-source\\roguelike\\world\\local_map.py"
+  },
+  "baseline_checks": [
+    {
+      "observation": "hot cache retains unsaved marker",
+      "expected_baseline": "flagstone",
+      "actual": "flagstone",
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "cold cache reads saved marker",
+      "expected_baseline": "grass",
+      "actual": "grass",
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "hot map aliases active map",
+      "expected_baseline": true,
+      "actual": true,
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "memory edit does not change disk",
+      "expected_baseline": true,
+      "actual": true,
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "dormant definition becomes presentation",
+      "expected_baseline": "rock",
+      "actual": "rock",
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "dormant actor is dropped",
+      "expected_baseline": 0,
+      "actual": 0,
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "awake state absent after reconstruction",
+      "expected_baseline": null,
+      "actual": null,
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "awake trigger resets",
+      "expected_baseline": false,
+      "actual": false,
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "distant next tick rehibernates",
+      "expected_baseline": true,
+      "actual": true,
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "empty inventory serializes null",
+      "expected_baseline": null,
+      "actual": null,
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "ghost light retains unowned prior item",
+      "expected_baseline": [
+        true,
+        true,
+        false
+      ],
+      "actual": [
+        true,
+        true,
+        false
+      ],
+      "baseline_reproduced": true
+    },
+    {
+      "observation": "duplicate slot selects first matching definition",
+      "expected_baseline": 10,
+      "actual": 10,
+      "baseline_reproduced": true
+    }
+  ],
+  "known_baseline_reproduced": true,
+  "captured_game_stdout": "  Deep tongue loaded: 318 words\nTown buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2\n  Loot pools loaded: 11\nWarning: creature 'rock' not found.\n"
+}

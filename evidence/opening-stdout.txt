@@ -1,0 +1,13 @@
+Disposable CWD: G:\GameDev\RoguelikeBaseline-20261020\project\.baseline\opening\roguelike
+pygame 2.6.1 (SDL 2.28.4, Python 3.11.0)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Deep tongue loaded: 318 words
+Town buildings loaded: civic=7 commercial=7 religious=8 residential=12 ruins=8 storage=7 wilderness=6 | plaza=2
+  Loot pools loaded: 11
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets

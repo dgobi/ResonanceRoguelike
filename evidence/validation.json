@@ -1,0 +1,52 @@
+{
+  "scope": "bounded setup/documentation/source-binding checks, not gameplay pass certification",
+  "tool_syntax_checked": [
+    "tools/baseline.py",
+    "tools/owner_lesson.py",
+    "tools/persistence_diagnostics.py",
+    "tools/render_baseline_screens.py"
+  ],
+  "source_bindings": {
+    "arc-a2-results.json": {
+      "roguelike/main.py": true,
+      "roguelike/engine/engine.py": true,
+      "roguelike/engine/save_manager.py": true,
+      "roguelike/engine/creature_factory.py": true,
+      "roguelike/engine/creature_abilities.py": true,
+      "tools/persistence_diagnostics.py": true,
+      "tools/baseline.py": true
+    },
+    "owner-lesson-results.json": {
+      "tools/owner_lesson.py": true,
+      "roguelike/engine/item_system.py": true,
+      "roguelike/engine/inventory_screen.py": true,
+      "roguelike/components/needs.py": true,
+      "roguelike/engine/item_factory.py": true,
+      "roguelike/data/survival.json": true
+    },
+    "screen-render-record.json": {
+      "tools/render_baseline_screens.py": true,
+      "roguelike/rendering/craft_screen.py": true,
+      "roguelike/engine/text_reader.py": true,
+      "roguelike/engine/look_mode.py": true,
+      "roguelike/rendering/renderer.py": true,
+      "roguelike/engine/display_config.py": true
+    }
+  },
+  "handbook_links_checked": 45,
+  "missing_links": [],
+  "existing_gameplay_content_asset_files_compared": 463,
+  "all_unchanged": true,
+  "historical_documents_preserved": 20,
+  "pip_check": {
+    "exit_code": 0,
+    "output": "No broken requirements found."
+  },
+  "git_diff_check": {
+    "exit_code": 0,
+    "output": "",
+    "comparison": "863bc5f vs working result; CRLF treated as line endings, raw evidence preserved"
+  },
+  "errors": [],
+  "passed": true
+}

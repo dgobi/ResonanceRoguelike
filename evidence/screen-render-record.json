@@ -1,0 +1,16 @@
+{
+  "evidence_class": "offscreen component renders; no OS input, no live event loop",
+  "dimensions": [
+    1280,
+    720
+  ],
+  "seed": 20261020,
+  "source_hashes": {
+    "tools/render_baseline_screens.py": "43019247502250711bf2231927733b5e1c8bf1df0001a49d9e7548cd2ff033d0",
+    "roguelike/rendering/craft_screen.py": "b173e2049782cf0141216f532565bbc9de16f69fa3dcb743d7844c7351201865",
+    "roguelike/engine/text_reader.py": "6a8932e43bb1bd78155ad80c644b55ae219da94c17f3a7d72b6085cde2044969",
+    "roguelike/engine/look_mode.py": "9926b1cc90277297a60291f1b48292cb545bdd17e04c45c838d263ebaf538e9c",
+    "roguelike/rendering/renderer.py": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08",
+    "roguelike/engine/display_config.py": "6e4d1b6741f3f6da2682467bd52c14f3df59a112814ec31889c7a1a0290e94c1"
+  }
+}

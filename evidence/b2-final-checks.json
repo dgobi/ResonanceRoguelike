@@ -1,0 +1,41 @@
+[
+  {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-m",
+      "pip",
+      "check"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeBaseline-20261020\\project",
+    "exit_code": 0,
+    "stdout": "No broken requirements found.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-m",
+      "compileall",
+      "-q",
+      "roguelike",
+      "tools"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeBaseline-20261020\\project",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "-c",
+      "core.whitespace=cr-at-eol",
+      "diff",
+      "--check"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeBaseline-20261020\\project",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

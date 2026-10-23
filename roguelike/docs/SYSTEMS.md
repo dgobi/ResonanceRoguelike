@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
+
 # Engine Systems Reference
 
 Core systems that run the game loop. All live in `roguelike/engine/`.

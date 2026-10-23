@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
+
 # Creature Reference
 
 All creatures are defined in `roguelike/data/entities/creatures/`. Body definitions are in `roguelike/data/bodies/`. Special abilities are implemented in `roguelike/engine/creature_abilities.py`.

@@ -1,0 +1,188 @@
+ M roguelike/assets/sprites/creatures.png
+ M roguelike/assets/sprites/objects.png
+ M roguelike/assets/sprites/terrain.png
+ M roguelike/components/ai.py
+ M roguelike/components/language.py
+ M roguelike/data/biomes/ash_wastes.json
+ M roguelike/data/biomes/capital.json
+ M roguelike/data/biomes/deep_mountain.json
+ M roguelike/data/biomes/drowned_wood.json
+ M roguelike/data/biomes/forest.json
+ M roguelike/data/biomes/heath.json
+ M roguelike/data/biomes/mountain.json
+ M roguelike/data/biomes/plains.json
+ M roguelike/data/biomes/swamp.json
+ M roguelike/data/biomes/town.json
+ M roguelike/data/buildings/civic/bell_tower_a.json
+ M roguelike/data/buildings/civic/waystone_plinth_a.json
+ M roguelike/data/buildings/commercial/market_stall_a.json
+ M roguelike/data/buildings/commercial/shop_a.json
+ M roguelike/data/buildings/commercial/workshop_a.json
+ M roguelike/data/buildings/plaza/plaza_market_a.json
+ M roguelike/data/buildings/plaza/plaza_ossuary_a.json
+ M roguelike/data/buildings/religious/bell_warden_post_a.json
+ M roguelike/data/buildings/religious/folk_saint_alcove_a.json
+ M roguelike/data/buildings/religious/shrine_a.json
+ M roguelike/data/buildings/residential/house_large_a.json
+ M roguelike/data/buildings/residential/house_small_a.json
+ M roguelike/data/buildings/residential/house_small_b.json
+ M roguelike/data/buildings/residential/hovel.json
+ M roguelike/data/buildings/storage/cellar_a.json
+ M roguelike/data/buildings/storage/storehouse_a.json
+ M roguelike/data/buildings/wilderness/hunter_cabin.json
+ M roguelike/data/buildings/wilderness/waymarker_shelter_a.json
+ M roguelike/data/decoratives.json
+ M roguelike/data/deep_tongue.json
+ M roguelike/data/entities/creatures/barrow_wight.json
+ M roguelike/data/entities/creatures/bog_wraith.json
+ M roguelike/data/entities/creatures/briar_lurker.json
+ M roguelike/data/entities/creatures/drowned_revenant.json
+ M roguelike/data/entities/creatures/grave_thing.json
+ M roguelike/data/entities/creatures/heath_stalker.json
+ M roguelike/data/entities/creatures/highland_bandit.json
+ M roguelike/data/entities/creatures/hollow_knight.json
+ M roguelike/data/entities/creatures/hollow_revenant.json
+ M roguelike/data/entities/creatures/plague_crow.json
+ M roguelike/data/entities/creatures/sewer_thing.json
+ M roguelike/data/entities/creatures/stone_lurker.json
+ M roguelike/data/items/consumables/water_flask.json
+ M roguelike/data/items/weapons/binding_knife.json
+ M roguelike/data/items/weapons/crude_blade.json
+ M roguelike/data/items/weapons/dissolution_blade.json
+ M roguelike/data/items/weapons/heavy_blade.json
+ M roguelike/data/items/weapons/revelation_lens.json
+ M roguelike/data/items/weapons/severance_blade.json
+ M roguelike/data/layouts/starting_lab.json
+ M roguelike/data/sprites/sprite_map.json
+ M roguelike/data/survival.json
+ M roguelike/data/terrain.json
+ M roguelike/data/tiles.json
+ M roguelike/docs/DEBUG.md
+ M roguelike/docs/DECORATIVES.md
+ M roguelike/docs/OMNIDOC.md
+ M roguelike/engine/ai_system.py
+ M roguelike/engine/crafting.py
+ M roguelike/engine/data_loader.py
+ M roguelike/engine/debug.py
+ M roguelike/engine/discharge.py
+ M roguelike/engine/display_config.py
+ M roguelike/engine/engine.py
+ M roguelike/engine/health_screen.py
+ M roguelike/engine/inventory_screen.py
+ M roguelike/engine/item_system.py
+ M roguelike/engine/language_system.py
+ M roguelike/engine/look_mode.py
+ M roguelike/engine/palette.py
+ M roguelike/engine/perk_handlers.py
+ M roguelike/engine/resonance_system.py
+ M roguelike/engine/save_manager.py
+ M roguelike/engine/starting_location.py
+ M roguelike/engine/text_reader.py
+ M roguelike/engine/ui.py
+ M roguelike/generation/layout_stamper.py
+ M roguelike/generation/local_gen.py
+ M roguelike/generation/region_gen.py
+ M roguelike/generation/town_gen.py
+ M roguelike/main.py
+ M roguelike/rendering/callouts.py
+ M roguelike/rendering/craft_screen.py
+ M roguelike/rendering/decor.py
+ M roguelike/rendering/lexicon_screen.py
+ M roguelike/rendering/particles.py
+ M roguelike/rendering/perk_screen.py
+ M roguelike/rendering/renderer.py
+ M roguelike/world/local_map.py
+?? "Sprite Reference Generator/colored-transparent_packed.png"
+?? "Sprite Reference Generator/colored-transparent_packed_PRO_SCHEMATIC.png"
+?? "Sprite Reference Generator/tiles.png"
+?? "Sprite Reference Generator/tiles_PRO_SCHEMATIC.png"
+?? layout_painter.html
+?? roguelike/data/buildings/civic/guard_post_a.json
+?? roguelike/data/buildings/civic/meeting_hall_a.json
+?? roguelike/data/buildings/civic/record_hall_a.json
+?? roguelike/data/buildings/commercial/apothecary_a.json
+?? roguelike/data/buildings/commercial/market_stall_c.json
+?? roguelike/data/buildings/commercial/trader_shop_a.json
+?? roguelike/data/buildings/religious/folk_saint_niche_a.json
+?? roguelike/data/buildings/religious/ossuary_chapel_a.json
+?? roguelike/data/buildings/religious/shrine_hall_a.json
+?? roguelike/data/buildings/religious/waystone_shrine_a.json
+?? roguelike/data/buildings/residential/house_abandoned_a.json
+?? roguelike/data/buildings/residential/house_crowded_a.json
+?? roguelike/data/buildings/residential/house_hearth_a.json
+?? roguelike/data/buildings/residential/house_old_stone_a.json
+?? roguelike/data/buildings/residential/house_single_room_a.json
+?? roguelike/data/buildings/residential/house_two_room_a.json
+?? roguelike/data/buildings/ruins/burnt_dwelling_a.json
+?? roguelike/data/buildings/ruins/collapsed_shop_a.json
+?? roguelike/data/buildings/ruins/deep_foundation_a.json
+?? roguelike/data/buildings/ruins/ossuary_ruin_a.json
+?? roguelike/data/buildings/storage/food_store_a.json
+?? roguelike/data/buildings/storage/goods_cellar_a.json
+?? roguelike/data/buildings/storage/tool_shed_a.json
+?? roguelike/data/buildings/wilderness/roadside_shrine_a.json
+?? roguelike/data/buildings/wilderness/shepherds_hut_a.json
+?? roguelike/data/entities/creatures/vine_network.json
+?? roguelike/data/items/consumables/bile_coating.json
+?? roguelike/data/items/consumables/bone_dust_draught.json
+?? roguelike/data/items/consumables/briar_binding_oil.json
+?? roguelike/data/items/consumables/marrow_seal.json
+?? roguelike/data/items/consumables/musk_pellet.json
+?? roguelike/data/items/consumables/resonant_bone_tincture.json
+?? roguelike/data/items/consumables/stalker_unguent.json
+?? roguelike/data/items/consumables/wight_concentrate.json
+?? roguelike/data/items/documents/book.json
+?? roguelike/data/items/documents/inscription.json
+?? roguelike/data/items/documents/letter.json
+?? roguelike/data/items/documents/research_note.json
+?? roguelike/data/items/documents/stone_marker.json
+?? roguelike/data/items/documents/tablet.json
+?? roguelike/data/perks/bone_reader.json
+?? roguelike/data/perks/corruption_channel.json
+?? roguelike/data/perks/deep_harvest.json
+?? roguelike/data/perks/growth_sense.json
+?? roguelike/data/perks/resonance_sink.json
+?? roguelike/data/perks/resonant_wayfarer.json
+?? roguelike/data/perks/road_knowledge.json
+?? roguelike/data/recipes/bile_coating.json
+?? roguelike/data/recipes/bone_dust_draught.json
+?? roguelike/data/recipes/briar_binding_oil.json
+?? roguelike/data/recipes/marrow_seal.json
+?? roguelike/data/recipes/musk_pellet.json
+?? roguelike/data/recipes/resonant_bone_tincture.json
+?? roguelike/data/recipes/stalker_unguent.json
+?? roguelike/data/recipes/wight_concentrate.json
+?? roguelike/data/scenes.json
+?? roguelike/data/texts/text_item_map.json
+?? roguelike/data/texts/world/bells/bell_inscription_a.json
+?? roguelike/data/texts/world/bells/bell_inscription_b.json
+?? roguelike/data/texts/world/bells/bell_inscription_c.json
+?? roguelike/data/texts/world/bells/bell_inscription_d.json
+?? roguelike/data/texts/world/bells/bell_inscription_e.json
+?? roguelike/data/texts/world/bells/bell_inscription_f.json
+?? roguelike/data/texts/world/buildings/text_guard_log.json
+?? roguelike/data/texts/world/buildings/text_market_notice.json
+?? roguelike/data/texts/world/buildings/text_residential_letter.json
+?? roguelike/data/texts/world/buildings/text_scholar_notes.json
+?? roguelike/data/texts/world/buildings/text_shrine_inscription.json
+?? roguelike/data/texts/world/buildings/text_storehouse_manifest.json
+?? roguelike/data/texts/world/waystones/waystone_ash_a.json
+?? roguelike/data/texts/world/waystones/waystone_ash_b.json
+?? roguelike/data/texts/world/waystones/waystone_drowned_a.json
+?? roguelike/data/texts/world/waystones/waystone_drowned_b.json
+?? roguelike/data/texts/world/waystones/waystone_fallback_a.json
+?? roguelike/data/texts/world/waystones/waystone_fallback_b.json
+?? roguelike/data/texts/world/waystones/waystone_forest_a.json
+?? roguelike/data/texts/world/waystones/waystone_forest_b.json
+?? roguelike/data/texts/world/waystones/waystone_heath_a.json
+?? roguelike/data/texts/world/waystones/waystone_heath_b.json
+?? roguelike/data/texts/world/waystones/waystone_mountain_a.json
+?? roguelike/data/texts/world/waystones/waystone_mountain_b.json
+?? roguelike/data/texts/world/waystones/waystone_plains_a.json
+?? roguelike/data/texts/world/waystones/waystone_plains_b.json
+?? roguelike/data/texts/world/waystones/waystone_swamp_a.json
+?? roguelike/data/texts/world/waystones/waystone_swamp_b.json
+?? roguelike/data/texts/world/waystones/waystone_town_a.json
+?? roguelike/data/texts/world/waystones/waystone_town_b.json
+?? roguelike/engine/movesets.py
+?? roguelike/engine/vine_system.py

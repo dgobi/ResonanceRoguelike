@@ -1,3 +1,5 @@
+> **Arc A status:** Historical source retained below. Creative intent remains a design reference; technical claims need the [current implementation and authority map](owner/STATUS.md). This banner does not resolve open design decisions.
+
 # Define the Category in decor.py
 
 The DECOR_TABLE acts as a lookup. If a tile's terrain name exists here, the renderer will intercept it and roll for a variant.

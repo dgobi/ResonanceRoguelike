@@ -1,6 +1,7 @@
 # engine/item_factory.py
 from __future__ import annotations
 import random
+import copy
 from entities.item import Item
 from typing import TYPE_CHECKING
 
@@ -51,17 +52,17 @@ class ItemFactory:
 
         # Light source properties
         item.burn_turns  = defn.get("burn_turns",  None)
-        item.light_data  = defn.get("light",       None)
+        item.light_data  = copy.deepcopy(defn.get("light", None))
 
         # Liquid container properties
         item.liquid        = defn.get("liquid",        None)
         item.liquid_volume = defn.get("liquid_volume", 0.0)
 
         # Tool qualities
-        item.qualities = defn.get("qualities", {})
+        item.qualities = copy.deepcopy(defn.get("qualities", {}))
 
         # Crafting keyword tags
-        item.keywords = defn.get("keywords", [])
+        item.keywords = copy.deepcopy(defn.get("keywords", []))
 
         # Whether this item is consumed when used as a crafting component.
         # Default True (consumable). Set False on tools, weapons, vessels, armour.

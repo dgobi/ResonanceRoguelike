@@ -1,0 +1,130 @@
+[
+  {
+    "worker": "baseline-characterize-scope-read",
+    "case": "B02",
+    "id": "B3-GENERATIONS",
+    "scope": "B3",
+    "symptom": {
+      "saved_marker": "grass",
+      "travel_marker": "dirt",
+      "loaded_marker": "dirt"
+    }
+  },
+  {
+    "worker": "baseline-characterize-scope-read",
+    "case": "B03",
+    "id": "B3-DIRTY-HOT",
+    "scope": "B3",
+    "symptom": {
+      "hot": "mud",
+      "persisted": "grass"
+    }
+  },
+  {
+    "worker": "baseline-characterize-scope-same",
+    "case": "B02",
+    "id": "B3-GENERATIONS",
+    "scope": "B3",
+    "symptom": {
+      "saved_marker": "grass",
+      "travel_marker": "dirt",
+      "loaded_marker": "dirt"
+    }
+  },
+  {
+    "worker": "baseline-characterize-scope-same",
+    "case": "B03",
+    "id": "B3-DIRTY-HOT",
+    "scope": "B3",
+    "symptom": {
+      "hot": "mud",
+      "persisted": "grass"
+    }
+  },
+  {
+    "worker": "candidate-characterize-scope-read",
+    "case": "B02",
+    "id": "B3-GENERATIONS",
+    "scope": "B3",
+    "symptom": {
+      "saved_marker": "grass",
+      "travel_marker": "dirt",
+      "loaded_marker": "dirt"
+    }
+  },
+  {
+    "worker": "candidate-characterize-scope-read",
+    "case": "B03",
+    "id": "B3-DIRTY-HOT",
+    "scope": "B3",
+    "symptom": {
+      "hot": "mud",
+      "persisted": "grass"
+    }
+  },
+  {
+    "worker": "candidate-characterize-scope-same",
+    "case": "B02",
+    "id": "B3-GENERATIONS",
+    "scope": "B3",
+    "symptom": {
+      "saved_marker": "grass",
+      "travel_marker": "dirt",
+      "loaded_marker": "dirt"
+    }
+  },
+  {
+    "worker": "candidate-characterize-scope-same",
+    "case": "B03",
+    "id": "B3-DIRTY-HOT",
+    "scope": "B3",
+    "symptom": {
+      "hot": "mud",
+      "persisted": "grass"
+    }
+  },
+  {
+    "worker": "baseline-journey-transfer-loop",
+    "case": "E04",
+    "id": "C-DROP-EQUIPPED",
+    "scope": "C transfers",
+    "symptom": {
+      "inventory_contains": false,
+      "floor_contains": true,
+      "weapon_still_same": true
+    }
+  },
+  {
+    "worker": "baseline-journey-text-loop",
+    "case": "E04",
+    "id": "UI-TEXT-HEIGHT",
+    "scope": "UI",
+    "symptom": {
+      "text_id": "lab_label_sarcophagus",
+      "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+      "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+    }
+  },
+  {
+    "worker": "candidate-journey-transfer-loop",
+    "case": "E04",
+    "id": "C-DROP-EQUIPPED",
+    "scope": "C transfers",
+    "symptom": {
+      "inventory_contains": false,
+      "floor_contains": true,
+      "weapon_still_same": true
+    }
+  },
+  {
+    "worker": "candidate-journey-text-loop",
+    "case": "E04",
+    "id": "UI-TEXT-HEIGHT",
+    "scope": "UI",
+    "symptom": {
+      "text_id": "lab_label_sarcophagus",
+      "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+      "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+    }
+  }
+]
