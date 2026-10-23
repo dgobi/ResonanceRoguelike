@@ -22,13 +22,17 @@ FAULTS=('stage_created','first_scene','payload:meta.json','payload:player.json',
 
 
 def source_manifest():
-    result = {p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
-            for base in ('roguelike','tools') for p in (ROOT/base).rglob('*')
-            if p.is_file() and (p.suffix in ('.py','.js','.css') or
-                (p.suffix == '.json' and (p.is_relative_to(GAME/'data') or
-                                          p.is_relative_to(GAME/'docs/examples') or
-                                          p.is_relative_to(ROOT/'tools/critical_fix_regressions/fixtures')))))
-            and '__pycache__' not in p.parts and 'saves' not in p.parts}
+    result = {}
+    json_roots = (GAME/'data', GAME/'docs/examples',
+                  ROOT/'tools/critical_fix_regressions/fixtures')
+    for base in ('roguelike', 'tools'):
+        for p in (ROOT/base).rglob('*'):
+            if not p.is_file() or '__pycache__' in p.parts or 'saves' in p.parts:
+                continue
+            included = p.suffix in ('.py', '.js', '.css') or (
+                p.suffix == '.json' and any(p.is_relative_to(root) for root in json_roots))
+            if included:
+                result[p.relative_to(ROOT).as_posix()] = hashlib.sha256(p.read_bytes()).hexdigest()
     painter = ROOT/'layout_painter.html'
     result[painter.relative_to(ROOT).as_posix()] = hashlib.sha256(painter.read_bytes()).hexdigest()
     corrections = ROOT/'evidence/worldgen-g2/data-corrections.json'
