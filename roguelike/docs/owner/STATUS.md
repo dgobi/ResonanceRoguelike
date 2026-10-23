@@ -1,6 +1,15 @@
-# Current status — G1 generation correctness
+# Current status — G2 structure authoring
 
-G1 is implemented on production `main` with deterministic complete scene creation, reciprocal road/town/river mouths, protected stairs, repaired hovel/cabin access and coherent plaza bell metadata. See [WORLDGEN_G1](../../../docs/owner/WORLDGEN_G1.md) for final evidence, provenance and explicit limits. The prior accepted B–D history below remains intact. G1 completion is not a record of later owner acceptance.
+G2 implements shared source validation, actual runtime previews, lossless offline
+editing and controlled registration in existing town pools. It also closes the
+four G1 follow-ups: debug-departure wraith exposure, checker container defaults,
+whole shared mouths and meaningful required-stair access. New generation records
+`wg2`; existing maps and world-origin revisions remain authoritative.
+
+See [WORLDGEN_G2](../../../docs/owner/WORLDGEN_G2.md) for the final delivery record
+and [Structure Authoring](../STRUCTURE_AUTHORING.md) for the tested owner workflow.
+The G1 report and prior accepted B–D history remain historical evidence. This is
+an implementation record, not a claim of subsequent owner acceptance.
 
 <details>
 <summary>Earlier status — retained; superseded only where stated above</summary>

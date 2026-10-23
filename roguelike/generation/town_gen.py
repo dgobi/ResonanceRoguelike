@@ -7,7 +7,7 @@ Architecture (new 3×3, plaza-anchored):
   - Centre chunk holds the plaza (bell tower + waystone plinth).
   - Cardinal chunks hold the inner grid (streets + buildings).
   - Corner chunks hold the outer ring (organic scatter + dirt tracks).
-  - All tunable values read from data/generation/town_config.json.
+  - Active constants and pools below; town_config.json is retained but inactive.
   - Building categories auto-discovered from data/buildings/ subdirs.
 
 Legacy 2×2 code retained below the new code until Phase 5 cleanup.
@@ -66,68 +66,28 @@ class BuildingLoader:
         self.buildings: dict[str, list[BuildingDef]] = {}  # category → [BuildingDef]
         self.plazas:    list[BuildingDef]      = []
 
+    @classmethod
+    def from_definitions(cls, definitions):
+        loader = cls()
+        for category, rows in definitions.items():
+            loader.buildings[category] = [cls.from_definition(row, category) for row in rows]
+        loader.plazas = loader.buildings.get('plaza', [])
+        return loader
+
+    @staticmethod
+    def from_definition(data, category):
+        return BuildingDef(id=data['id'], category=category,
+                           layout=data.get('layers', data.get('layout', [])),
+                           allowed_in=data.get('allowed_in', 'town'),
+                           weight=data.get('weight', 1), legend=data['legend'],
+                           has_submap='submap' in data)
+
     def load(self) -> None:
-        """Scan and load all building JSONs. Call once at startup."""
-        if not self._root.exists():
-            print(f"Warning: buildings root not found: {self._root}")
-            return
-
-        for subdir in sorted(self._root.iterdir()):
-            if not subdir.is_dir():
-                continue
-            category = subdir.name
-            defs: list[BuildingDef] = []
-            for fpath in sorted(subdir.glob("*.json")):
-                bdef = self._load_file(fpath, category)
-                if bdef is None:
-                    continue
-                defs.append(bdef)
-                if category == "plaza":
-                    self.plazas.append(bdef)
-            if defs:
-                self.buildings[category] = defs
-
-        # Print summary
-        counts = " ".join(
-            f"{cat}={len(lst)}"
-            for cat, lst in sorted(self.buildings.items())
-            if cat != "plaza"
-        )
-        plaza_n = len(self.plazas)
-        print(f"Town buildings loaded: {counts} | plaza={plaza_n}")
-
-    def _load_file(self, path: Path, category: str) -> "BuildingDef | None":
-        try:
-            with open(path, encoding="utf-8") as f:
-                data = json.load(f)
-        except Exception as e:
-            print(f"Warning: failed to load building {path}: {e}")
-            return None
-
-        bid = data.get("id")
-        if not bid:
-            print(f"Warning: building {path} has no 'id', skipping.")
-            return None
-
-        # Accept 'layout' or 'layers' as the 2D array field
-        layout = data.get("layout") or data.get("layers") or []
-        if not layout:
-            print(f"Warning: building {bid} has no layout/layers, skipping.")
-            return None
-
-        has_submap = "submap" in data
-        if has_submap:
-            print(f"  [submap stub] {bid} has 'submap' field — noted, not processed.")
-
-        return BuildingDef(
-            id         = bid,
-            category   = category,
-            layout     = layout,
-            allowed_in = data.get("allowed_in", "town"),
-            weight     = float(data.get("weight", 1.0)),
-            legend     = data.get("legend", {}),
-            has_submap = has_submap,
-        )
+        """Standalone compatibility API also uses the complete shared catalog."""
+        from engine.data_loader import DataLoader
+        data = DataLoader(str(self._root.resolve().parent))
+        bound = self.from_definitions(data.buildings)
+        self.buildings, self.plazas = bound.buildings, bound.plazas
 
     def get(self, category: str) -> list[BuildingDef]:
         """Return all BuildingDef entries for a category."""
@@ -161,20 +121,10 @@ class BuildingLoader:
 
 
 # ------------------------------------------------------------------ #
-#  Module-level singleton (populated by data_loader via wire_building_loader)
+#  Caller-owned loaders; no global registration
 # ------------------------------------------------------------------ #
 
-_building_loader: "BuildingLoader | None" = None
 
-
-def wire_building_loader(loader: "BuildingLoader") -> None:
-    """Called by data_loader after BuildingLoader.load() to make it available here."""
-    global _building_loader
-    _building_loader = loader
-
-
-def get_building_loader() -> "BuildingLoader | None":
-    return _building_loader
 
 # ------------------------------------------------------------------ #
 #  Constants
@@ -882,7 +832,7 @@ def generate_town_chunk(
                 if local_map.in_bounds(x, y):
                     _set_terrain(local_map, x, y, "flagstone", terrain_data)
 
-        loader    = get_building_loader()
+        loader    = BuildingLoader.from_definitions(building_data)
         plaza_def = loader.pick_plaza(rng) if loader else None
         plaza_json = os.path.join(wfc_base, "town_plaza.json")
 
@@ -1716,6 +1666,7 @@ def _stamp_building_at(
     oy:           int,
     terrain_data: dict,
     flip_v:       bool = False,
+    data=None,
 ) -> list[dict]:
     """Stamp a building with its top-left corner at (ox, oy).
     flip_v=True reverses the rows so the entrance (bottom gap) faces north.
@@ -1724,6 +1675,17 @@ def _stamp_building_at(
     Returns a list of item spawn specs with world-space coordinates.
     """
     from generation.decor_utils import place_decor
+    from generation.structure_contract import compile_structure
+    from generation.context import GenerationError
+    data = data or getattr(local_map, 'structure_data', None)
+    entry = (data.structure_catalog.by_route['ordinary_building'].get(building.get('id'))
+             if data is not None and isinstance(building,dict) and isinstance(building.get('id'),str) else None)
+    compiled = compile_structure(building, 'ordinary_building', data,
+                                 path=entry.path if entry else '<building stamp>',
+                                 category=entry.category if entry else building.get('category', 'residential') if isinstance(building,dict) else None)
+    if ox < 0 or oy < 0 or ox + compiled.width > local_map.width or oy + compiled.height > local_map.height:
+        raise GenerationError(f'{compiled.path}: transformed building footprint is outside target map')
+    building = compiled.definition
 
     layers = building.get("layers", [])
     bh     = len(layers)

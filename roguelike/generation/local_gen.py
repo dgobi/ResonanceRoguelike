@@ -28,7 +28,7 @@ def generate_submap(
     context = context or GenerationContext(0, submap.seed, (submap.submap_id,))
     if submap.layout_id:
         local_map, entities, entry_x, entry_y = _generate_submap_from_layout(
-            submap, map_width, map_height, terrain_data, context=context
+            submap, map_width, map_height, terrain_data, context=context, data=data
         )
     else:
         local_map, entities, entry_x, entry_y = _generate_submap_bsp(
@@ -148,42 +148,22 @@ def _generate_submap_from_layout(
     map_height:   int,
     terrain_data: dict,
     context=None,
+    data=None,
 ) -> tuple[LocalMap, list, int, int]:
     """
     Stamp a hand-crafted layout JSON as the entire submap.
     Returns (local_map, entities, entry_x, entry_y).
     """
-    import json
-    import pathlib
-
-    layout_path = (
-        pathlib.Path(__file__).parent.parent
-        / "data" / "layouts" / f"{submap.layout_id}.json"
-    )
-    if not layout_path.exists():
-        from generation.context import GenerationError
+    from generation.structure_contract import compile_structure
+    from generation.context import GenerationError
+    if data is None:
+        from engine.data_loader import DataLoader
+        from pathlib import Path
+        data = DataLoader(str(Path(__file__).resolve().parents[1] / 'data'))
+    if submap.layout_id not in data.layouts:
         raise GenerationError(f'{submap.submap_id}: missing authored layout {submap.layout_id!r}')
-
-    with open(layout_path, encoding="utf-8") as f:
-        layout = json.load(f)
-
-    # DEBUG_MODE layout validation
-    from config import DEBUG_MODE
-    if DEBUG_MODE:
-        _lay_w = layout.get("width", 0)
-        _lay_rows = layout.get("layers", [])
-        for _ri, _rr in enumerate(_lay_rows):
-            if len(_rr) != _lay_w:
-                print(f"[LAYOUT ERROR] {layout.get('id','?')} row {_ri} has length {len(_rr)}, expected {_lay_w}")
-        _leg = layout.get("legend", {})
-        _wall_ch = {ch for ch, tid in _leg.items() if tid in ("wall", "old_wall", None) or tid is None}
-        for _st in layout.get("special_tiles", []):
-            _stx, _sty = _st.get("x", -1), _st.get("y", -1)
-            if 0 <= _sty < len(_lay_rows) and 0 <= _stx < len(_lay_rows[_sty]):
-                if _lay_rows[_sty][_stx] in _wall_ch:
-                    print(f"[LAYOUT ERROR] {layout.get('id','?')} special_tile at ({_stx},{_sty}) is on wall char '{_lay_rows[_sty][_stx]}'")
-            else:
-                print(f"[LAYOUT ERROR] {layout.get('id','?')} special_tile at ({_stx},{_sty}) is out of bounds")
+    layout = compile_structure(data.layouts[submap.layout_id], 'authored_submap', data,
+                               path=data.root / 'layouts' / (submap.layout_id + '.json')).definition
 
     # Fill map with walls
     wall = terrain_data.get("wall", terrain_data["floor"])
@@ -197,6 +177,8 @@ def _generate_submap_from_layout(
     legend = layout["legend"]
     lay_h  = len(layers)
     lay_w  = max(len(row) for row in layers)
+    if lay_w > map_width or lay_h > map_height:
+        raise GenerationError(f'{submap.layout_id}: authored layout exceeds target map')
     origin_x = map_width  // 2 - lay_w // 2
     origin_y = map_height // 2 - lay_h // 2
 

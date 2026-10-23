@@ -1,7 +1,7 @@
 {
   "id": "waystone_plinth_a",
   "category": "civic",
-  "width": 5,
+  "width": 7,
   "height": 5,
   "facing": "south",
   "condition": "intact",
@@ -9,7 +9,7 @@
     "waystone_square": 10
   },
   "interior_loot_table": "offering_goods",
-  "description": "The waystone and its immediate surround. The stone itself is the 2\u00d72 worn_stone at centre. Offering area around base.",
+  "description": "The waystone and its immediate surround. The stone itself is the 2×2 worn_stone at centre. Offering area around base.",
   "legend": {
     "#": "grey_stone",
     "w": "worn_stone",
@@ -34,5 +34,5 @@
       "note": "Prayer or offering note at waystone base"
     }
   ],
-  "note": "PLACEHOLDER \u2014 redesign. Centre 2\u00d72 = waystone (worn_stone). Flagstone surround = offering area. No walls \u2014 open to square."
+  "note": "PLACEHOLDER — redesign. Centre 2×2 = waystone (worn_stone). Flagstone surround = offering area. No walls — open to square."
 }

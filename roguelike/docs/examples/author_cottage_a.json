@@ -1,7 +1,7 @@
 {
   "id": "author_cottage_a",
   "category": "residential",
-  "description": "A small stone cottage with a south-facing door, a chair, a candle, food and a supply crate.",
+  "description": "A small stone cottage with a south-facing door, a chair, a candle, food, a readable note and a supply crate.",
   "width": 9,
   "height": 7,
   "allowed_in": "town",
@@ -22,16 +22,106 @@
     "####+####"
   ],
   "decor_layer": [
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, "overturned_chair", null, null, null, "decor_candle", null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null]
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      "overturned_chair",
+      null,
+      null,
+      null,
+      "decor_candle",
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
   ],
   "special_tiles": [
-    {"x": 2, "y": 4, "type": "item", "item_id": "crow_jerky"},
-    {"x": 6, "y": 4, "type": "container", "decor_id": "crate", "loot_pools": ["commoner_kitchen"]}
+    {
+      "x": 2,
+      "y": 4,
+      "type": "item",
+      "item_id": "crow_jerky"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_label_equipment"
+    }
   ]
 }

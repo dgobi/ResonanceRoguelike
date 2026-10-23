@@ -1,0 +1,27 @@
+{
+  "coordinates": "source",
+  "entry": {
+    "x": 4,
+    "y": 7
+  },
+  "targets": [
+    {
+      "name": "food pickup",
+      "kind": "item",
+      "x": 2,
+      "y": 4
+    },
+    {
+      "name": "readable note",
+      "kind": "readable",
+      "x": 4,
+      "y": 2
+    },
+    {
+      "name": "supply crate",
+      "kind": "container",
+      "x": 6,
+      "y": 4
+    }
+  ]
+}

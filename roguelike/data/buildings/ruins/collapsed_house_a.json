@@ -1,7 +1,7 @@
 {
   "id": "collapsed_house_a",
   "category": "ruins",
-  "width": 10,
+  "width": 11,
   "height": 8,
   "facing": "south",
   "condition": "collapsed",
@@ -19,8 +19,8 @@
     " ": null
   },
   "layers": [
-    "##r#r#####",
-    "#.......r#",
+    "##r#r##### ",
+    "#.......r# ",
     "r.........r",
     "#....r....#",
     "r.........#",
@@ -39,5 +39,5 @@
       ]
     }
   ],
-  "note": "PLACEHOLDER — redesign. Rock tiles = rubble/fallen masonry. Partial floor accessible. No door."
+  "note": "PLACEHOLDER â€” redesign. Rock tiles = rubble/fallen masonry. Partial floor accessible. No door."
 }

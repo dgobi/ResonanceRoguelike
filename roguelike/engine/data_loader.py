@@ -12,7 +12,7 @@ class DataLoader:
     """
 
     def __init__(self, data_root: str = "data") -> None:
-        self.root = Path(data_root)
+        self.root = Path(data_root).resolve()
 
         self.tiles:      dict = self._load("tiles.json")
         self.terrain:    dict = self._load("terrain.json")
@@ -22,16 +22,15 @@ class DataLoader:
         self.items:      dict = self._load_dir("items")
         self.loot:       dict = self._load_dir("loot")
         self.recipes:    dict = self._load_dir("recipes")
-        self.structures: dict = self._load_dir("buildings")
+        self.structures: dict = {}
         self.biomes:     dict = self._load_dir("biomes")
-        self.entrances:   dict = self._load_dir("entrances")
+        self.entrances:   dict = {}
         self.texts:       dict = self._load_dir("texts", exclude={"text_item_map.json"})
         self.perks:       dict = self._load_dir("perks")
         self.bodies:      dict = self._load_dir("bodies")
         self.deep_tongue:       dict = self._load_deep_tongue()
-        self.buildings:         dict = self._load_dir_nested("buildings")
+        self.buildings:         dict = {}
         self.town_config:       dict = self._load("generation/town_config.json")
-        self._init_building_loader()
         self.resonance_spawns:  list = self._load_list("resonance_spawns.json")
         self.weather_defs:      dict = self._load("weather.json")
         self.survival:          dict = self._load("survival.json")
@@ -44,6 +43,19 @@ class DataLoader:
         print(f"  Loot pools loaded: {len(self.loot_pools)}")
         self.scenes:     dict = self._load("scenes.json")
         self.text_item_map: dict = self._load("texts/text_item_map.json")
+        from generation.structure_contract import StructureCatalog
+        self.structure_catalog = StructureCatalog(self)
+        self.layouts = {}
+        for entry in self.structure_catalog.entries:
+            identifier = entry.definition['id']
+            if entry.route in ('ordinary_building', 'plaza'):
+                self.structures[identifier] = entry.definition
+                self.buildings.setdefault(entry.category, []).append(entry.definition)
+            elif entry.route == 'interior_entrance':
+                self.entrances[identifier] = entry.definition
+            else:
+                self.layouts[identifier] = entry.definition
+        self._init_building_loader()
         self._validate_deep_tongue_texts()
 
     # ------------------------------------------------------------------ #
@@ -147,16 +159,9 @@ class DataLoader:
         return data if isinstance(data, list) else []
 
     def _init_building_loader(self) -> None:
-        """Initialise and wire the BuildingLoader singleton in town_gen."""
-        try:
-            from generation.town_gen import BuildingLoader, wire_building_loader
-            loader = BuildingLoader(str(self.root / "buildings"))
-            loader.load()
-            wire_building_loader(loader)
-            self.building_loader = loader
-        except Exception as e:
-            print(f"Warning: BuildingLoader init failed: {e}")
-            self.building_loader = None
+        """Caller-owned plaza adapter; never wires process-global state."""
+        from generation.town_gen import BuildingLoader
+        self.building_loader = BuildingLoader.from_definitions(self.buildings)
 
     def _load_deep_tongue(self) -> dict:
         """Load deep_tongue.json and return a dict keyed by the 'id' (or 'deep') field."""

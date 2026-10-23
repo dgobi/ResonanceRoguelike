@@ -1,6 +1,16 @@
-# Next arc — after G1 generation correctness
+# Next arc — after G2 structure authoring
 
-The next bounded generation target is dependable structure authoring and access contracts, followed by a separately scoped lossless authoring workflow. See [WORLDGEN_G1](../../../docs/owner/WORLDGEN_G1.md) and [the proposal](../../../docs/owner/WORLD_GENERATION_AUDIT_AND_PROPOSAL.md). The full settlement planner, painter repair, new schemas and rural POIs remain proposed. This recommendation does not authorize beginning another arc. Continue on production `main`, with named checkpoints and autonomous headless verification.
+The proposed next generation arc is shared settlement/road/plot planning with
+intentional placement and selection configuration, then rural landmarks/POIs.
+G2 supplies trustworthy authored inputs and runtime previews. `town_config.json`
+remains inactive; activating/replacing its category, street, lamp and settlement
+policy belongs with that later contract. New rotations, arbitrary categories,
+physical body/stele behavior, WFC palette redesign and saint-alcove/dock/foundation
+intent remain deferred. See [WORLDGEN_G2](../../../docs/owner/WORLDGEN_G2.md) and
+[the proposal](../../../docs/owner/WORLD_GENERATION_AUDIT_AND_PROPOSAL.md).
+
+This recommendation does not authorize another arc. Continue in production
+`main` with named checkpoints and autonomous headless verification.
 
 <details>
 <summary>Earlier status — retained; superseded only where stated above</summary>

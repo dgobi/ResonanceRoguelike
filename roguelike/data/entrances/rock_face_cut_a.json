@@ -2,7 +2,7 @@
   "id": "rock_face_cut_a",
   "entrance_type": "rock_face_cut",
   "variant": "a",
-  "width": 13,
+  "width": 14,
   "height": 7,
   "legend": {
     "r": "rock",
@@ -20,7 +20,15 @@
     "  ,,,,,,,,,,  ",
     "  ,,,,,,,,,,  "
   ],
-  "connection_point": {"x": 6, "y": 0},
-  "spawn_offset":     {"x": 6, "y": 3},
-  "edges": ["north"]
+  "connection_point": {
+    "x": 6,
+    "y": 0
+  },
+  "spawn_offset": {
+    "x": 6,
+    "y": 3
+  },
+  "edges": [
+    "north"
+  ]
 }

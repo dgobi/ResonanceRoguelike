@@ -14,6 +14,14 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
     context = map_context(local_map)
     plans, actors, deferred = [], [], []
     containers = set(local_map.container_state)
+    from generation.structure_contract import Validator, StructureError
+    validation = Validator(data, '<scene population>', str(context.address))
+    for index, raw in enumerate(specs):
+        if not isinstance(raw, dict) or raw.get('kind', raw.get('type')) != 'creature':
+            source = raw.get('source', f'spawns[{index}]') if isinstance(raw, dict) else f'spawns[{index}]'
+            validation.special(raw, source, local_map.width, local_map.height)
+    if any(d.severity == 'error' for d in validation.diagnostics):
+        raise StructureError(validation.diagnostics)
 
     def item(item_id, x, y, source, text_id=''):
         if text_id and map_text:

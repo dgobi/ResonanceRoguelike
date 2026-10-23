@@ -48,6 +48,7 @@ def generate_region(
         if data is not None:
             from generation.town_gen import generate_town
             local_map = _generate_town_base(map_width, map_height, terrain_data, context=context)
+            local_map.structure_data = data
             local_map, spawn = generate_town(
                 chunk         = chunk,
                 local_map     = local_map,
@@ -439,7 +440,7 @@ def _place_submap_entrance(local_map, submap, terrain_data, data=None):
     from generation.decor_utils import clear_decor
     context = map_context(local_map)
     rng = context.rng('entrance-position', submap.submap_id, submap.seed)
-    layout = _pick_layout(SUBMAP_ENTRANCE.get(submap.submap_type), rng)
+    layout = _pick_layout(SUBMAP_ENTRANCE.get(submap.submap_type), rng, data=data)
     w, h = local_map.width, local_map.height
     protected = set(getattr(local_map, 'protected_cells', set()))
     protected.update(local_map.submap_links)

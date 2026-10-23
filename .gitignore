@@ -24,3 +24,6 @@ roguelike/saves/
 
 # Local game archive
 /FullGame.zip
+
+# Owner structure drafts; install only after runtime validation.
+/authoring/

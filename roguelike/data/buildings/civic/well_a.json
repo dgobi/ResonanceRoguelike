@@ -1,7 +1,7 @@
 {
   "id": "well_a",
   "category": "civic",
-  "width": 5,
+  "width": 7,
   "height": 5,
   "facing": "south",
   "condition": "intact",
@@ -11,7 +11,7 @@
     "market": 3
   },
   "interior_loot_table": null,
-  "description": "A public well. Stone surround, water below. No roof \u2014 open to sky.",
+  "description": "A public well. Stone surround, water below. No roof — open to sky.",
   "legend": {
     "#": "wall",
     "~": "water",
@@ -27,5 +27,5 @@
     "  www  "
   ],
   "special_tiles": [],
-  "note": "PLACEHOLDER \u2014 redesign. Centre = water tile (well mouth). Worn_stone surround. No walls."
+  "note": "PLACEHOLDER — redesign. Centre = water tile (well mouth). Worn_stone surround. No walls."
 }

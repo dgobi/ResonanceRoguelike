@@ -2,7 +2,7 @@
   "id": "barrow_mound_a",
   "entrance_type": "barrow_mound",
   "variant": "a",
-  "width": 13,
+  "width": 15,
   "height": 9,
   "legend": {
     "r": "rock",
@@ -23,7 +23,15 @@
     "    r,,,,,r    ",
     "      ,,,      "
   ],
-  "connection_point": {"x": 6, "y": 0},
-  "spawn_offset":     {"x": 6, "y": 4},
-  "edges": ["north"]
+  "connection_point": {
+    "x": 6,
+    "y": 0
+  },
+  "spawn_offset": {
+    "x": 6,
+    "y": 4
+  },
+  "edges": [
+    "north"
+  ]
 }

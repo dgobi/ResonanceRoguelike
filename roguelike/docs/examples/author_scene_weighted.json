@@ -1,0 +1,49 @@
+{
+  "id": "author_scene_weighted",
+  "category": "residential",
+  "width": 7,
+  "height": 5,
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "+": "door_closed"
+  },
+  "layers": [
+    "#######",
+    "#.....#",
+    "#.....#",
+    "#.....#",
+    "###+###"
+  ],
+  "special_tiles": [
+    {
+      "type": "scene",
+      "x": 2,
+      "y": 2,
+      "scene_id": "interrupted_meal"
+    },
+    {
+      "type": "weighted",
+      "x": 4,
+      "y": 2,
+      "spawn_table": [
+        {
+          "type": "item",
+          "item_id": "flint_shard",
+          "weight": 2
+        },
+        {
+          "type": "container",
+          "loot_pools": [
+            "storage_tools"
+          ],
+          "weight": 1
+        },
+        {
+          "type": "empty",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

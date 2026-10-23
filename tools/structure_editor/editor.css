@@ -1,0 +1,14 @@
+:root { color-scheme: dark; font: 13px/1.5 'Courier New',monospace; background:#0b0b09; color:#e1dbd1 }
+* { box-sizing:border-box } body { margin:0 } header { display:flex; gap:14px; align-items:center; border-bottom:1px solid #514838; padding:12px 18px }
+h1 { font-size:18px; color:#d9ba68; margin:0 auto 0 0 } h2 { font-size:14px; color:#d9ba68; margin:18px 0 8px }
+main { display:flex; align-items:stretch; min-height:calc(100vh - 65px) } .workspace { flex:1; min-width:0; padding:14px } aside { width:335px; flex-shrink:0; padding:8px 16px 22px; background:#15140f; border-left:1px solid #514838 }
+.toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:10px } label { display:inline-flex; gap:7px; align-items:center; color:#cfc8b8 }
+input,select,textarea,button { font:inherit; background:#191813; color:#ece4d5; border:1px solid #665f4e; border-radius:3px; padding:6px }
+button { cursor:pointer } button:hover { border-color:#d9ba68; color:#ffe3a5 } button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline:2px solid #b5cef4; outline-offset:2px }
+button:disabled { opacity:.5; cursor:default } input[type=number] { width:65px } input[type=file] { max-width:220px } textarea { display:block; width:100%; resize:vertical; margin:7px 0; line-height:1.5 }
+aside select { max-width:230px } p { color:#c1baa9; margin:8px 0 } #capability { min-height:38px; font-size:12px } #coordinate { color:#b7d7c4 }
+#grid-wrap { overflow:auto; max-height:64vh; min-height:300px; background:#080806; border:1px solid #514838; padding:8px } canvas { display:block; image-rendering:pixelated; cursor:crosshair }
+#message { padding:10px 0; color:#d3dfc4; font-weight:bold } #message.error { color:#ffaf9f } #hints { color:#d7c38b; white-space:pre-wrap; max-height:110px; overflow:auto }
+details { border-top:1px solid #514838; margin-top:12px; padding-top:8px } summary { cursor:pointer; color:#d9ba68 } pre { overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; color:#d9e1d3 }
+#resize-review { padding:10px; border:1px solid #c49a54; background:#292318; margin:8px 0 } #document-status { color:#cfc8b8; font-size:12px }
+@media(max-width:1000px) { main { display:block } aside { width:auto; border-left:none; border-top:1px solid #514838 } header { flex-wrap:wrap } }

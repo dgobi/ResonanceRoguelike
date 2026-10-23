@@ -2,7 +2,7 @@
   "id": "sunken_ruin_a",
   "entrance_type": "sunken_ruin",
   "variant": "a",
-  "width": 11,
+  "width": 16,
   "height": 11,
   "legend": {
     "W": "old_wall",
@@ -14,19 +14,27 @@
     " ": null
   },
   "layers": [
-    "    WWWWWWW    ",
-    "   WW.....WW   ",
+    "    WWWWWWW     ",
+    "   WW.....WW    ",
     "  WW.......WW   ",
     "  W....>....W   ",
     "  WW.......WW   ",
-    "   W.......W   ",
-    "   WWW,,,WWW   ",
-    "    ,,,,,,,,   ",
-    "     ,,,,,,    ",
-    "     ,,,,,     ",
-    "               "
+    "   W.......W    ",
+    "   WWW,,,WWW    ",
+    "    ,,,,,,,,    ",
+    "     ,,,,,,     ",
+    "     ,,,,,      ",
+    "                "
   ],
-  "connection_point": {"x": 6, "y": 0},
-  "spawn_offset":     {"x": 6, "y": 4},
-  "edges": ["north"]
+  "connection_point": {
+    "x": 6,
+    "y": 0
+  },
+  "spawn_offset": {
+    "x": 6,
+    "y": 4
+  },
+  "edges": [
+    "north"
+  ]
 }

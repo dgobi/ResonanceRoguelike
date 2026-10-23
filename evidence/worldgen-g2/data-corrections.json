@@ -1,0 +1,115 @@
+[
+  {
+    "path": "roguelike/data/buildings/civic/waystone_plinth_a.json",
+    "edits": {
+      "width": {
+        "before": 5,
+        "after": 7
+      }
+    },
+    "intent": "Preserve actual row-derived footprint and stamp; null padding leaves base terrain untouched."
+  },
+  {
+    "path": "roguelike/data/buildings/civic/well_a.json",
+    "edits": {
+      "width": {
+        "before": 5,
+        "after": 7
+      }
+    },
+    "intent": "Preserve actual row-derived footprint and stamp; null padding leaves base terrain untouched."
+  },
+  {
+    "path": "roguelike/data/buildings/ruins/collapsed_house_a.json",
+    "edits": {
+      "width": {
+        "before": 10,
+        "after": 11
+      },
+      "padding": {
+        "row_lengths": [
+          10,
+          10,
+          11,
+          11,
+          11,
+          11,
+          11,
+          11
+        ],
+        "width": 11,
+        "character": " ",
+        "terrain": null
+      }
+    },
+    "intent": "Preserve actual row-derived footprint and stamp; null padding leaves base terrain untouched."
+  },
+  {
+    "path": "roguelike/data/entrances/barrow_mound_a.json",
+    "edits": {
+      "width": {
+        "before": 13,
+        "after": 15
+      }
+    },
+    "intent": "Preserve actual row-derived footprint and stamp; null padding leaves base terrain untouched."
+  },
+  {
+    "path": "roguelike/data/entrances/barrow_mound_b.json",
+    "edits": {
+      "width": {
+        "before": 15,
+        "after": 19
+      }
+    },
+    "intent": "Preserve actual row-derived footprint and stamp; null padding leaves base terrain untouched."
+  },
+  {
+    "path": "roguelike/data/entrances/drowned_threshold_a.json",
+    "edits": {
+      "width": {
+        "before": 11,
+        "after": 13
+      }
+    },
+    "intent": "Preserve actual row-derived footprint and stamp; null padding leaves base terrain untouched."
+  },
+  {
+    "path": "roguelike/data/entrances/rock_face_cut_a.json",
+    "edits": {
+      "width": {
+        "before": 13,
+        "after": 14
+      }
+    },
+    "intent": "Preserve actual row-derived footprint and stamp; null padding leaves base terrain untouched."
+  },
+  {
+    "path": "roguelike/data/entrances/sunken_ruin_a.json",
+    "edits": {
+      "width": {
+        "before": 11,
+        "after": 16
+      },
+      "padding": {
+        "row_lengths": [
+          15,
+          15,
+          16,
+          16,
+          16,
+          15,
+          15,
+          15,
+          15,
+          15,
+          15
+        ],
+        "width": 16,
+        "character": " ",
+        "terrain": null
+      }
+    },
+    "intent": "Preserve actual row-derived footprint and stamp; null padding leaves base terrain untouched."
+  }
+]

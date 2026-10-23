@@ -1,0 +1,198 @@
+"""Disposable authoring previews using production consumers and factories."""
+from __future__ import annotations
+import copy
+import hashlib
+import html
+import json
+from types import SimpleNamespace
+from generation.context import GenerationContext, GENERATION_REVISION, GenerationError, stable_seed
+from generation.structure_contract import compile_structure, ELIGIBILITY
+from generation.access import reachable, enterable
+
+
+def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, path='<draft>', expectations=None):
+    from engine.item_factory import ItemFactory
+    from engine.creature_factory import CreatureFactory
+    from engine.scene_generation import populate, create_submap
+    from generation.town_gen import _stamp_building_at, _stamp_plaza_def, BuildingLoader
+    from generation.layout_stamper import stamp_layout_interior
+    from world.local_map import LocalMap, make_tile
+    from world.world_map import SubMap
+    entry=compile_structure(raw,route,data,path=path,category=category)
+    context=GenerationContext(seed,stable_seed(data.structure_catalog.identity,json.dumps(raw,sort_keys=True)),
+                              ('preview',route,raw['id'],flip_v))
+    m=LocalMap(80,43,generation_context=context)
+    m.tiles[:]=make_tile('grass',True,True)
+    m.structure_data=data
+    ox,oy=40-entry.width//2,21-entry.height//2
+    actors=[]; specs=[]; spawn=(0,0)
+    factory,creatures=ItemFactory(data),CreatureFactory(data)
+    if route=='ordinary_building':
+        specs=_stamp_building_at(m,entry.definition,ox,oy,data.terrain,flip_v=flip_v,data=data)
+        actors=populate(data,factory,creatures,m,specs,map_text=True)
+    elif route=='plaza':
+        _stamp_plaza_def(m,BuildingLoader.from_definition(entry.definition,'plaza'),ox,oy,data.terrain)
+    elif route=='interior_entrance':
+        stair=stamp_layout_interior(m,entry.definition,40,21,data.terrain,rng=context.rng('interior-preview'))
+        if str(m.tiles[stair]['terrain']) != 'stairs_down':
+            raise GenerationError(f'{path}: entrance has no realized stairs_down')
+        m.submap_links[stair]='preview-return'
+    else:
+        bound=copy.copy(data)
+        bound.layouts=dict(data.layouts,**{raw['id']:entry.definition})
+        submap=SubMap('preview-submap','laboratory' if raw['id']=='starting_lab' else 'cave','Author preview',context.scene_seed,layout_id=raw['id'])
+        world=SimpleNamespace(seed=seed)
+        result=create_submap(world,0,0,submap,bound,ItemFactory(bound),CreatureFactory(bound),80,43)
+        m,actors,spawn=result.local_map,result.actors,result.spawn
+    m.generation_revision=GENERATION_REVISION
+    report=snapshot(m,actors,data)
+    report.update(route=route,asset=raw['id'],seed=seed,catalog_identity=data.structure_catalog.identity,
+                  candidate_identity=hashlib.sha256(json.dumps(raw,sort_keys=True).encode()).hexdigest(),
+                  kind='direct production consumer preview',flip_v=flip_v,origin=[ox,oy],spawn=list(spawn),
+                  source_diagnostics=[d.json() for d in entry.diagnostics])
+    report['access']=check_access(m,data,expectations,origin=(ox,oy),height=entry.height,flip_v=flip_v,spawn=spawn)
+    report['passed']=all(row['passed'] for row in report['access']) and not report['occupant_diagnostics']
+    return report,m,actors
+
+
+def snapshot(m,actors,data):
+    from engine.save_components import serialize_item
+    floor=[{'x':x,'y':y,'items':[serialize_item(i) for i in items]} for (x,y),items in sorted(m.floor_objects.items())]
+    containers=[{'x':x,'y':y,'decor_id':state['decor_id'],'state':state['state'],
+                 'items':[serialize_item(i) for i in state['items']]} for (x,y),state in sorted(m.container_state.items())]
+    diagnostics=[]; occupied={}
+    for actor in actors:
+        xy=actor.x,actor.y
+        if not enterable(m,xy,data): diagnostics.append({'code':'BLOCKED_ACTOR','xy':list(xy),'id':actor._creature_id})
+        if xy in occupied: diagnostics.append({'code':'OVERLAPPING_ACTORS','xy':list(xy),'ids':[occupied[xy],actor._creature_id]})
+        occupied[xy]=actor._creature_id
+    for (x,y),items in m.floor_objects.items():
+        if not enterable(m,(x,y),data): diagnostics.append({'code':'BLOCKED_ITEM','xy':[x,y],'count':len(items)})
+    return {'terrain':[[str(m.tiles[x,y]['terrain']) for x in range(m.width)] for y in range(m.height)],
+            'decor':[{'x':x,'y':y,'id':d,'blocking':bool(data.decoratives.get(d,{}).get('blocks_movement'))} for (x,y),d in sorted(m.decor.items())],
+            'items':floor,'containers':containers,'actors':[{'x':a.x,'y':a.y,'id':a._creature_id} for a in actors],
+            'stairs':[{'x':x,'y':y,'terrain':str(m.tiles[x,y]['terrain']),'link':m.submap_links.get((x,y))}
+                      for x in range(m.width) for y in range(m.height) if str(m.tiles[x,y]['terrain']) in ('stairs_up','stairs_down')],
+            'occupant_diagnostics':diagnostics,'generation_revision':GENERATION_REVISION}
+
+
+def check_access(m,data,expectations,*,origin=(0,0),height=0,flip_v=False,spawn=(0,0)):
+    """Sidecar source coordinates may include exterior negative offsets.
+
+    Movement allows diagonals through corners. Physical interaction additionally
+    uses the engine's visibility, one-cell range and sealed-corner rule.
+    """
+    if expectations is None: return []
+    from engine.interaction_cursor import InteractionCursor
+    if not isinstance(expectations,dict) or not isinstance(expectations.get('targets'),list):
+        raise GenerationError('access sidecar: expected entry and targets array')
+    if expectations.get('coordinates','source') not in ('source','map'):
+        raise GenerationError('access sidecar: coordinates must be source or map')
+    def point(row):
+        if not isinstance(row,dict) or type(row.get('x')) is not int or type(row.get('y')) is not int:
+            raise GenerationError('access sidecar: coordinates must be integers')
+        x,y=row['x'],row['y']
+        if expectations.get('coordinates','source')=='map': return x,y
+        return origin[0]+x,origin[1]+(height-1-y if flip_v else y)
+    entry=point(expectations['entry']) if 'entry' in expectations else spawn
+    reached=reachable(m,entry,data)
+    results=[{'target':'entry','xy':list(entry),'passed':entry in reached}]
+    # All visibility is explicitly granted only for this static reach diagnostic;
+    # actual action tests also update FOV and use the real engine handlers.
+    visible=m.visible.copy()
+    try:
+        m.visible[:]=True
+        for n,target in enumerate(expectations['targets']):
+            xy=point(target); kind=target.get('kind'); ok=False; approaches=[]
+            if kind in ('item','readable'):
+                objects=m.floor_objects.get(xy,[])
+                ok=xy in reached and bool(objects) and (kind!='readable' or any(getattr(i,'text_id','') for i in objects))
+            elif kind=='container':
+                for p in sorted(reached):
+                    if max(abs(p[0]-xy[0]),abs(p[1]-xy[1]))>1: continue
+                    proxy=SimpleNamespace(local_map=m,player=SimpleNamespace(x=p[0],y=p[1]))
+                    if InteractionCursor.can_reach(proxy,*xy): approaches.append(list(p))
+                ok=xy in m.container_state and bool(approaches)
+            elif kind in ('stairs_up','stairs_down','arrival'):
+                ok=xy in reached and (kind=='arrival' or str(m.tiles[xy]['terrain'])==kind)
+            else: raise GenerationError(f'access targets[{n}]: unsupported kind {kind!r}')
+            results.append({'target':target.get('name',f'{kind}[{n}]'),'kind':kind,'xy':list(xy),'passed':ok,'approaches':approaches})
+    finally: m.visible[:]=visible
+    return results
+
+
+def registration(raw,data,category,*,seed=20261023,max_seeds=32):
+    """Positive existing-pool fixture; retain every unrelated installed candidate."""
+    from world.world_map import WorldMap,Chunk,RegionType
+    from engine.item_factory import ItemFactory
+    from engine.creature_factory import CreatureFactory
+    from engine.scene_generation import create_surface
+    entry=compile_structure(raw,'ordinary_building',data,category=category)
+    bound=copy.copy(data)
+    bound.buildings={cat:list(rows) for cat,rows in data.buildings.items()}
+    existing=[b for rows in bound.buildings.values() for b in rows if b['id']==raw['id']]
+    if existing and existing[0]!=entry.definition: raise GenerationError('registration: ID already installed with different content')
+    if not existing: bound.buildings.setdefault(category,[]).append(entry.definition)
+    world=WorldMap(1,1); world.seed=seed; world.start_wx=world.start_wy=-1
+    role=ELIGIBILITY[category][0]
+    for offset in range(max_seeds):
+        chunk=Chunk(0,0,RegionType.TOWN,seed+offset,town_id=1,town_role=role)
+        result=create_surface(world,chunk,bound,ItemFactory(bound),CreatureFactory(bound),80,43)
+        matches=[b for b in result.metadata.town_data.buildings if b['id']==raw['id']]
+        if matches:
+            realized=[]
+            for b in matches:
+                objects=[]
+                for spec in b['item_specs']:
+                    xy=spec['x'],spec['y']; kind=spec['kind']
+                    if kind=='container':
+                        state=result.local_map.container_state.get(xy)
+                        ok=state is not None and state['decor_id']==spec.get('decor_id','crate')
+                    elif kind in ('item','scene'):
+                        from collections import Counter
+                        from engine.save_components import serialize_item
+                        objects_here=[serialize_item(i) for i in result.local_map.floor_objects.get(xy,[])]
+                        expected=([bound.text_item_map.get(spec['text_id'],'letter') if spec.get('text_id') else spec['item_id']]
+                                  if kind=='item' else [r['item_id'] for r in bound.scenes[spec['scene_id']]['floor_objects']])
+                        actual=Counter(i['item_id'] for i in objects_here)
+                        ok=all(actual[i]>=n for i,n in Counter(expected).items())
+                    else: ok=kind in ('empty','stele','body')
+                    if not ok: raise GenerationError(f'registration: missing realized {kind} at {xy}')
+                    objects.append({'spec':spec,'realized':ok})
+                realized.append({'x':b['x'],'y':b['y'],'objects':objects})
+            return {'passed':True,'kind':'controlled existing-pool selection; not world frequency','category':category,
+                    'eligible_roles':ELIGIBILITY[category],'role':role,'seed':seed+offset,'world_seed':seed,
+                    'candidate_count':sum(map(len,bound.buildings.values())),'preserved_installed_candidates':sum(map(len,data.buildings.values())),
+                    'placements':realized,'realized_scene':snapshot(result.local_map,result.actors,bound)}
+    raise GenerationError(f'registration: no fitting placement in {max_seeds} bounded seeds; inspect dimensions/category')
+
+
+def render_svg(report):
+    """Diagnostic glyphs, explicitly not a game-renderer screenshot."""
+    rows=report['terrain']; size=12; w=len(rows[0]); h=len(rows)
+    parts=[f'<svg xmlns="http://www.w3.org/2000/svg" width="{w*size}" height="{h*size+60}" viewBox="0 0 {w*size} {h*size+60}">',
+           '<rect width="100%" height="100%" fill="#11151b"/>',
+           '<g font-family="monospace" font-size="10" text-anchor="middle">']
+    for y,row in enumerate(rows):
+        for x,terrain in enumerate(row):
+            solid=terrain in ('wall','rock','old_wall','tree')
+            color='#48535e' if solid else '#263a34'
+            if 'water' in terrain: color='#244c70'
+            if terrain=='door_closed': color='#866546'
+            glyph='>' if terrain=='stairs_down' else '<' if terrain=='stairs_up' else '+' if terrain=='door_closed' else '#' if solid else '·'
+            parts.append(f'<rect x="{x*size}" y="{y*size}" width="12" height="12" fill="{color}"><title>{html.escape(terrain)}</title></rect><text x="{x*size+6}" y="{y*size+10}" fill="#a9b7b4">{glyph.replace("<","&lt;")}</text>')
+    for layer,glyph,color in [('decor','D','#c6a2e7'),('items','!','#f3e39c'),('containers','C','#ffba75'),('actors','A','#ed8996')]:
+        for obj in report[layer]:
+            parts.append(f'<text x="{obj["x"]*size+6}" y="{obj["y"]*size+10}" fill="{color}"><title>{html.escape(json.dumps(obj))}</title>{glyph}</text>')
+    if 'spawn' in report:
+        x,y=report['spawn']
+        parts.append(f'<text x="{x*size+6}" y="{y*size+10}" fill="#ffffff"><title>Generated arrival</title>@</text>')
+    for target in report.get('access',[]):
+        x,y=target['xy']; color='#81dda1' if target['passed'] else '#ff5b57'
+        parts.append(f'<rect x="{x*size}" y="{y*size}" width="12" height="12" fill="none" stroke="{color}" stroke-width="2"><title>{html.escape(json.dumps(target))}</title></rect>')
+    parts.append('</g><g font-family="monospace" font-size="12" fill="#e4ebf3">')
+    parts.append(f'<text x="8" y="{h*size+19}">Diagnostic preview (not game renderer): # solid, + door, &lt;/&gt; stairs, D decor, ! item, C container, A actor.</text>')
+    failures=[r['target'] for r in report.get('access',[]) if not r['passed']]
+    status='Failed targets: '+', '.join(failures) if failures else ('Targets passed (green); @ arrival.' if report.get('access') else 'No access targets supplied; @ arrival.')
+    parts.append(f'<text x="8" y="{h*size+39}">{html.escape(status)} Hover for IDs/contents. Full diagnostics in JSON.</text></g></svg>')
+    return '\n'.join(parts)
