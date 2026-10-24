@@ -35,20 +35,83 @@
   ],
   "special_tiles": [
     {
-      "x": 1, "y": 1,
-      "type": "item", "item_id": "research_note", "text_id": "apothecary_notes_a",
+      "x": 1,
+      "y": 1,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "apothecary_notes_a",
       "note": "Notes on the worn stone work surface"
     },
     {
-      "x": 5, "y": 3,
-      "type": "item", "item_id": "research_note", "text_id": "text_scholar_notes",
+      "x": 5,
+      "y": 3,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "text_scholar_notes",
       "note": "Field notes on desk"
     },
     {
-      "x": 6, "y": 3,
-      "type": "scene", "scene_id": "scholar_desk",
+      "x": 6,
+      "y": 3,
+      "type": "scene",
+      "scene_id": "scholar_desk",
       "note": "Work left unfinished on desk"
     }
   ],
-  "note": "PLACEHOLDER \u2014 redesign. Double door at (5,8)+(6,8). Work surfaces = worn_stone corners."
+  "note": "PLACEHOLDER — redesign. Double door at (5,8)+(6,8). Work surfaces = worn_stone corners.",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 5,
+        "y": 8,
+        "normal": "S",
+        "width": 2,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 4,
+        "y": 5,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "kind": "item",
+        "required": true
+      }
+    ]
+  }
 }

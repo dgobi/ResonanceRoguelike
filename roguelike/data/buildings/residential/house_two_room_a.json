@@ -33,17 +33,156 @@
       "y": 1,
       "type": "container",
       "decor_id": "wooden_shelf",
-      "loot_pools": ["commoner_bedroom"]
+      "loot_pools": [
+        "commoner_bedroom"
+      ]
     }
   ],
   "decor_layer": [
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, "worn_mat", null, null, null, null, null, null, null, null],
-    [null, null, null, "child_toy", null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null],
-    [null, null, "cold_hearth", null, null, "meal_on_table", null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null]
-  ]
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      "worn_mat",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      "child_toy",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      "cold_hearth",
+      null,
+      null,
+      "meal_on_table",
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 5,
+        "y": 7,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 4,
+        "y": 2,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 4,
+        "y": 6,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 8,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  }
 }

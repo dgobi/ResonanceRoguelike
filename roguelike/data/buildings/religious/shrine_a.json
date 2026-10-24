@@ -56,5 +56,58 @@
       "note": "Offering left at the shrine"
     }
   ],
-  "note": "PLACEHOLDER \u2014 redesign. North flagstone rows = offering shelf/altar area. Door at (3,6)."
+  "note": "PLACEHOLDER — redesign. North flagstone rows = offering shelf/altar area. Door at (3,6).",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      180
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 3,
+        "y": 6,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 3,
+        "y": 3,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 4,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 5,
+        "y": 4,
+        "kind": "item",
+        "required": true
+      }
+    ]
+  }
 }

@@ -43,5 +43,62 @@
       ]
     }
   ],
-  "note": "A waymarker shelter. Built around a waystone plinth — whether to protect travellers or to protect the stone is unclear. Single door in the south wall."
+  "note": "A waymarker shelter. Built around a waystone plinth — whether to protect travellers or to protect the stone is unclear. Single door in the south wall.",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "landmark"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "spur",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 2,
+        "y": 4,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      },
+      {
+        "id": "service",
+        "x": 4,
+        "y": 4,
+        "normal": "S",
+        "width": 1,
+        "role": "service",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 3,
+        "y": 2,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 4,
+        "y": 1,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  }
 }

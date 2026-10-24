@@ -1,0 +1,747 @@
+[
+  {
+    "id": "apothecary_a",
+    "path": "roguelike/data/buildings/commercial/apothecary_a.json",
+    "category": "commercial",
+    "dimensions": [
+      11,
+      8
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "grid",
+        "roadside"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        180
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "frontage",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 4,
+          "y": 7,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 6,
+          "y": 6,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "kind": "container",
+          "required": true
+        },
+        {
+          "x": 9,
+          "y": 3,
+          "kind": "container",
+          "required": true
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "kind": "container",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "shop_a",
+    "path": "roguelike/data/buildings/commercial/shop_a.json",
+    "category": "commercial",
+    "dimensions": [
+      10,
+      8
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "grid",
+        "roadside"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        180
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "frontage",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 4,
+          "y": 7,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 6,
+          "y": 5,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "kind": "readable",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "workshop_a",
+    "path": "roguelike/data/buildings/commercial/workshop_a.json",
+    "category": "commercial",
+    "dimensions": [
+      12,
+      9
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "grid",
+        "roadside"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "frontage",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 5,
+          "y": 8,
+          "normal": "S",
+          "width": 2,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 4,
+          "y": 5,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "kind": "readable",
+          "required": true
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "kind": "readable",
+          "required": true
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "kind": "item",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "shrine_a",
+    "path": "roguelike/data/buildings/religious/shrine_a.json",
+    "category": "religious",
+    "dimensions": [
+      8,
+      7
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "grid",
+        "roadside"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        180
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "frontage",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 3,
+          "y": 6,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "kind": "readable",
+          "required": true
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "kind": "readable",
+          "required": true
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "kind": "item",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "house_hearth_a",
+    "path": "roguelike/data/buildings/residential/house_hearth_a.json",
+    "category": "residential",
+    "dimensions": [
+      12,
+      9
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "grid",
+        "roadside"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        180
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "frontage",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 5,
+          "y": 8,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 6,
+          "y": 4,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 2,
+          "kind": "container",
+          "required": true
+        },
+        {
+          "x": 10,
+          "y": 6,
+          "kind": "container",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "house_small_b",
+    "path": "roguelike/data/buildings/residential/house_small_b.json",
+    "category": "residential",
+    "dimensions": [
+      8,
+      7
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "grid",
+        "roadside"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        180
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "frontage",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 3,
+          "y": 6,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 2,
+          "y": 1,
+          "kind": "readable",
+          "required": true
+        },
+        {
+          "x": 5,
+          "y": 1,
+          "kind": "container",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "house_two_room_a",
+    "path": "roguelike/data/buildings/residential/house_two_room_a.json",
+    "category": "residential",
+    "dimensions": [
+      10,
+      8
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "grid",
+        "roadside"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "frontage",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 5,
+          "y": 7,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 4,
+          "y": 2,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 4,
+          "y": 6,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 8,
+          "y": 1,
+          "kind": "container",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "storehouse_a",
+    "path": "roguelike/data/buildings/storage/storehouse_a.json",
+    "category": "storage",
+    "dimensions": [
+      14,
+      7
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "grid",
+        "roadside"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        180
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "frontage",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 5,
+          "y": 6,
+          "normal": "S",
+          "width": 3,
+          "role": "main",
+          "required": true
+        },
+        {
+          "id": "service",
+          "x": 9,
+          "y": 6,
+          "normal": "S",
+          "width": 1,
+          "role": "service",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 6,
+          "y": 4,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "kind": "container",
+          "required": true
+        },
+        {
+          "x": 12,
+          "y": 1,
+          "kind": "container",
+          "required": true
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "kind": "container",
+          "required": true
+        },
+        {
+          "x": 11,
+          "y": 2,
+          "kind": "container",
+          "required": true
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "kind": "readable",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "tool_shed_a",
+    "path": "roguelike/data/buildings/storage/tool_shed_a.json",
+    "category": "storage",
+    "dimensions": [
+      8,
+      6
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "grid",
+        "roadside"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        180
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "frontage",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 3,
+          "y": 5,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "kind": "container",
+          "required": true
+        },
+        {
+          "x": 6,
+          "y": 1,
+          "kind": "container",
+          "required": true
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "kind": "container",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "hunter_cabin",
+    "path": "roguelike/data/buildings/wilderness/hunter_cabin.json",
+    "category": "wilderness",
+    "dimensions": [
+      8,
+      6
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "landmark"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "spur",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 3,
+          "y": 5,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 4,
+          "y": 3,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "kind": "readable",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "shepherds_hut_a",
+    "path": "roguelike/data/buildings/wilderness/shepherds_hut_a.json",
+    "category": "wilderness",
+    "dimensions": [
+      7,
+      6
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "landmark"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "spur",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 3,
+          "y": 5,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 3,
+          "y": 3,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "kind": "container",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  },
+  {
+    "id": "waymarker_shelter_a",
+    "path": "roguelike/data/buildings/wilderness/waymarker_shelter_a.json",
+    "category": "wilderness",
+    "dimensions": [
+      6,
+      5
+    ],
+    "placement": {
+      "version": 1,
+      "contexts": [
+        "landmark"
+      ],
+      "weight": 1.0,
+      "rotations": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "mirror_x": false,
+      "buffer": 1,
+      "approach": 2,
+      "road_relation": "spur",
+      "entrances": [
+        {
+          "id": "main",
+          "x": 2,
+          "y": 4,
+          "normal": "S",
+          "width": 1,
+          "role": "main",
+          "required": true
+        },
+        {
+          "id": "service",
+          "x": 4,
+          "y": 4,
+          "normal": "S",
+          "width": 1,
+          "role": "service",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 3,
+          "y": 2,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 4,
+          "y": 1,
+          "kind": "readable",
+          "required": true
+        },
+        {
+          "x": 1,
+          "y": 1,
+          "kind": "container",
+          "required": true
+        }
+      ]
+    },
+    "content_repairs": []
+  }
+]

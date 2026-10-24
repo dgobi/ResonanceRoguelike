@@ -187,5 +187,79 @@
       "text_id": "text_storehouse_manifest",
       "note": "Supply manifest on bench"
     }
-  ]
+  ],
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      180
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 5,
+        "y": 6,
+        "normal": "S",
+        "width": 3,
+        "role": "main",
+        "required": true
+      },
+      {
+        "id": "service",
+        "x": 9,
+        "y": 6,
+        "normal": "S",
+        "width": 1,
+        "role": "service",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 6,
+        "y": 4,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 12,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 2,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 11,
+        "y": 2,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "kind": "readable",
+        "required": true
+      }
+    ]
+  }
 }

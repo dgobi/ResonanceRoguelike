@@ -10,7 +10,7 @@
     "residential": 1
   },
   "interior_loot_table": "market_goods",
-  "description": "A shop with a counter along the north wall (worn stone strip) and back storage room. Door wide \u2014 customers expected.",
+  "description": "A shop with a counter along the north wall (worn stone strip) and back storage room. Door wide — customers expected.",
   "legend": {
     "#": "wall",
     ".": "floor",
@@ -42,5 +42,52 @@
       "note": "Merchant's ledger or inventory list"
     }
   ],
-  "note": "PLACEHOLDER \u2014 redesign. Counter = north worn_stone strip. Back room = flagstone. Door at (4,7)."
+  "note": "PLACEHOLDER — redesign. Counter = north worn_stone strip. Back room = flagstone. Door at (4,7).",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      180
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 4,
+        "y": 7,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 6,
+        "y": 5,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 3,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "kind": "readable",
+        "required": true
+      }
+    ]
+  }
 }

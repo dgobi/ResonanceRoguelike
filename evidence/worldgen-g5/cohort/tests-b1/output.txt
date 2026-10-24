@@ -1,0 +1,18 @@
+test_every_transform_and_documented_assigned_context (test_generation_g5_cohort.G5Cohort.test_every_transform_and_documented_assigned_context) ... ERROR
+
+======================================================================
+ERROR: test_every_transform_and_documented_assigned_context (test_generation_g5_cohort.G5Cohort.test_every_transform_and_documented_assigned_context)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_generation_g5_cohort.py", line 25, in test_every_transform_and_documented_assigned_context
+    category=next(e.category for e in data.structure_catalog.entries if e.asset_id==aid)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_generation_g5_cohort.py", line 25, in <genexpr>
+    category=next(e.category for e in data.structure_catalog.entries if e.asset_id==aid)
+                                                                        ^^^^^^^^^^
+AttributeError: 'CompiledStructure' object has no attribute 'asset_id'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.096s
+
+FAILED (errors=1)

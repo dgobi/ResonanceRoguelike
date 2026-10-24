@@ -50,5 +50,52 @@
       ]
     }
   ],
-  "note": "PLACEHOLDER — redesign layers to taste. Door at (3,6) faces south street."
+  "note": "PLACEHOLDER — redesign layers to taste. Door at (3,6) faces south street.",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      180
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 3,
+        "y": 6,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 3,
+        "y": 3,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 1,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 5,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  }
 }

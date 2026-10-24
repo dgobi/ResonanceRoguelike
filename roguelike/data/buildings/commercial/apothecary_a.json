@@ -34,31 +34,192 @@
       "y": 1,
       "type": "container",
       "decor_id": "medicine_chest",
-      "loot_pools": ["alchemist_reagents"]
+      "loot_pools": [
+        "alchemist_reagents"
+      ]
     },
     {
       "x": 9,
       "y": 3,
       "type": "container",
       "decor_id": "clay_pot_cluster",
-      "loot_pools": ["alchemist_shop"]
+      "loot_pools": [
+        "alchemist_shop"
+      ]
     },
     {
       "x": 5,
       "y": 5,
       "type": "container",
       "decor_id": "writing_desk",
-      "loot_pools": ["noble_generic"]
+      "loot_pools": [
+        "noble_generic"
+      ]
     }
   ],
   "decor_layer": [
-    [null, null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null, null],
-    [null, null, "dried_herbs", null, null, null, null, "dried_herbs", null, null, null],
-    [null, null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null, null, null, null, null]
-  ]
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      "dried_herbs",
+      null,
+      null,
+      null,
+      null,
+      "dried_herbs",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      180
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 4,
+        "y": 7,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 6,
+        "y": 6,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 3,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  }
 }

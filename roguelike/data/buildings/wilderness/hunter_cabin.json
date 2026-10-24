@@ -5,7 +5,12 @@
   "height": 6,
   "facing": "south",
   "condition": "intact",
-  "tags": ["building", "wilderness", "forest", "habitable"],
+  "tags": [
+    "building",
+    "wilderness",
+    "forest",
+    "habitable"
+  ],
   "weight": 10,
   "rotatable": true,
   "district_weights": {},
@@ -30,10 +35,55 @@
   ],
   "special_tiles": [
     {
-      "x": 1, "y": 3,
-      "type": "item", "item_id": "research_note", "text_id": "herbalist_scrap_a",
+      "x": 1,
+      "y": 3,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "herbalist_scrap_a",
       "note": "Working notes left on the floor"
     }
   ],
-  "note": "b=workbench, c=chest (hunting_supplies), t=table. Furniture system pending."
+  "note": "b=workbench, c=chest (hunting_supplies), t=table. Furniture system pending.",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "landmark"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "spur",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 3,
+        "y": 5,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 4,
+        "y": 3,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 3,
+        "kind": "readable",
+        "required": true
+      }
+    ]
+  }
 }

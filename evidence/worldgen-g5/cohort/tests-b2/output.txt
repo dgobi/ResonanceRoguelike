@@ -1,0 +1,6 @@
+test_every_transform_and_documented_assigned_context (test_generation_g5_cohort.G5Cohort.test_every_transform_and_documented_assigned_context) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 64.335s
+
+OK
