@@ -37,7 +37,7 @@ Keep the failing candidate and evidence. Reducing the candidate is useful if it 
 
 ## Current limits with practical consequences
 
-The current source does not provide general multi-building compound recipes, a generic ranged-combat system from a larger moveset `range`, a general recipe-discovery mechanic from `known: false`, full background simulation, exact replay of all gameplay RNG, personal-save migration or automatic checkpoint pruning. Specific weapon declarations such as free movement on kill and pool lifetime also remain incomplete. See the relevant chapter before treating a data field as an available feature.
+The current source does not provide a generic ranged-combat system from a larger moveset `range`, a general recipe-discovery mechanic from `known: false`, full background simulation, exact replay of all gameplay RNG, personal-save migration or automatic checkpoint pruning. Specific weapon declarations such as free movement on kill and pool lifetime also remain incomplete. See the relevant chapter before treating a data field as an available feature.
 
 This handbook records these limits so you can make edits that the current game can use. It does not silently choose new creative rules or implement the missing systems.
 

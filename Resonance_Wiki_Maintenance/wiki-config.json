@@ -1,10 +1,10 @@
 {
-  "edition": "1.0",
-  "milestone": "G6",
+  "edition": "1.1-integration",
+  "milestone": "G7",
   "date": "2026-10-24",
   "date_label": "24 October 2026",
   "timezone": "America/Edmonton",
-  "commit": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "commit": "77ea292d3b28467578a275e89068e4a689199931",
   "repository": "https://github.com/dgobi/ResonanceRoguelike",
   "chapters": [
     {
@@ -192,6 +192,12 @@
       "file": "chapters/maintenance.md",
       "group": "Reference & upkeep",
       "nav_title": "Update this handbook"
+    },
+    {
+      "id": "compounds",
+      "file": "chapters/compounds.md",
+      "group": "Create & tune content",
+      "nav_title": "Multi-building compounds"
     }
   ],
   "group_order": [
@@ -202,5 +208,14 @@
     "Tools & workflow",
     "Reference & upkeep",
     "Content catalogues"
-  ]
+  ],
+  "source_scope": [
+    "roguelike/",
+    "tools/",
+    "docs/",
+    "README.md",
+    "AGENTS.md",
+    "layout_painter.html"
+  ],
+  "reviewed_evidence": "edition-evidence.json"
 }

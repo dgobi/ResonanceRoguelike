@@ -1,0 +1,206 @@
+{
+  "edition": "1.0",
+  "milestone": "G6",
+  "date": "2026-10-24",
+  "date_label": "24 October 2026",
+  "timezone": "America/Edmonton",
+  "commit": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "repository": "https://github.com/dgobi/ResonanceRoguelike",
+  "chapters": [
+    {
+      "id": "getting-started",
+      "file": "chapters/getting-started.md",
+      "group": "Start here",
+      "nav_title": "Set up & run"
+    },
+    {
+      "id": "first-change",
+      "file": "chapters/first-change.md",
+      "group": "Start here",
+      "nav_title": "Your first edit"
+    },
+    {
+      "id": "controls",
+      "file": "chapters/controls.md",
+      "group": "Start here",
+      "nav_title": "Controls & interaction"
+    },
+    {
+      "id": "content-workflow",
+      "file": "chapters/content-workflow.md",
+      "group": "Create & tune content",
+      "nav_title": "How content loads"
+    },
+    {
+      "id": "items-equipment",
+      "file": "chapters/items-equipment.md",
+      "group": "Create & tune content",
+      "nav_title": "Items & preparations"
+    },
+    {
+      "id": "combat-balance",
+      "file": "chapters/combat-balance.md",
+      "group": "Create & tune content",
+      "nav_title": "Weapons & combat"
+    },
+    {
+      "id": "creatures-ai",
+      "file": "chapters/creatures-ai.md",
+      "group": "Create & tune content",
+      "nav_title": "Creatures & AI"
+    },
+    {
+      "id": "crafting-processing",
+      "file": "chapters/crafting-processing.md",
+      "group": "Create & tune content",
+      "nav_title": "Crafting & processing"
+    },
+    {
+      "id": "texts-loot-scenes",
+      "file": "chapters/texts-loot-scenes.md",
+      "group": "Create & tune content",
+      "nav_title": "Texts, loot & scenes"
+    },
+    {
+      "id": "survival-progression",
+      "file": "chapters/survival-progression.md",
+      "group": "Create & tune content",
+      "nav_title": "Survival & progression"
+    },
+    {
+      "id": "weather-and-atmosphere",
+      "file": "chapters/weather-and-atmosphere.md",
+      "group": "Create & tune content",
+      "nav_title": "Weather & atmosphere"
+    },
+    {
+      "id": "world-names-and-biomes",
+      "file": "chapters/world-names-and-biomes.md",
+      "group": "Create & tune content",
+      "nav_title": "Names, biomes & resources"
+    },
+    {
+      "id": "world-generation",
+      "file": "chapters/world-generation.md",
+      "group": "World & structures",
+      "nav_title": "How the world is built"
+    },
+    {
+      "id": "first-building",
+      "file": "chapters/first-building.md",
+      "group": "World & structures",
+      "nav_title": "Your first building"
+    },
+    {
+      "id": "structure-reference",
+      "file": "chapters/structure-reference.md",
+      "group": "World & structures",
+      "nav_title": "Geometry, contents & access"
+    },
+    {
+      "id": "layout-painter",
+      "file": "chapters/layout-painter.md",
+      "group": "World & structures",
+      "nav_title": "The layout painter"
+    },
+    {
+      "id": "settlement-tuning",
+      "file": "chapters/settlement-tuning.md",
+      "group": "World & structures",
+      "nav_title": "Towns, roads & variety"
+    },
+    {
+      "id": "rural-sites",
+      "file": "chapters/rural-sites.md",
+      "group": "World & structures",
+      "nav_title": "Roadside places"
+    },
+    {
+      "id": "entrances-submaps",
+      "file": "chapters/entrances-submaps.md",
+      "group": "World & structures",
+      "nav_title": "Entrances & underground"
+    },
+    {
+      "id": "wfc-ground",
+      "file": "chapters/wfc-ground.md",
+      "group": "World & structures",
+      "nav_title": "WFC ground palettes"
+    },
+    {
+      "id": "generation-troubleshooting",
+      "file": "chapters/generation-troubleshooting.md",
+      "group": "World & structures",
+      "nav_title": "World-generation diagnosis"
+    },
+    {
+      "id": "sprites-and-atlases",
+      "file": "chapters/sprites-and-atlases.md",
+      "group": "Art & interface",
+      "nav_title": "Sprites & atlases"
+    },
+    {
+      "id": "terrain-decor-and-variation",
+      "file": "chapters/terrain-decor-and-variation.md",
+      "group": "Art & interface",
+      "nav_title": "Terrain, decor & variants"
+    },
+    {
+      "id": "display-ui-and-palette",
+      "file": "chapters/display-ui-and-palette.md",
+      "group": "Art & interface",
+      "nav_title": "Display, UI & palette"
+    },
+    {
+      "id": "code-and-documentation-map",
+      "file": "chapters/code-and-documentation-map.md",
+      "group": "Tools & workflow",
+      "nav_title": "Where to make a change"
+    },
+    {
+      "id": "saves-and-state",
+      "file": "chapters/saves-and-state.md",
+      "group": "Tools & workflow",
+      "nav_title": "Saves & world state"
+    },
+    {
+      "id": "debug-tools",
+      "file": "chapters/debug-tools.md",
+      "group": "Tools & workflow",
+      "nav_title": "Debug tools & commands"
+    },
+    {
+      "id": "verification",
+      "file": "chapters/verification.md",
+      "group": "Tools & workflow",
+      "nav_title": "Verify a change"
+    },
+    {
+      "id": "troubleshooting",
+      "file": "chapters/troubleshooting.md",
+      "group": "Tools & workflow",
+      "nav_title": "Troubleshooting"
+    },
+    {
+      "id": "glossary",
+      "file": "chapters/glossary.md",
+      "group": "Reference & upkeep",
+      "nav_title": "Project glossary"
+    },
+    {
+      "id": "maintenance",
+      "file": "chapters/maintenance.md",
+      "group": "Reference & upkeep",
+      "nav_title": "Update this handbook"
+    }
+  ],
+  "group_order": [
+    "Start here",
+    "Create & tune content",
+    "World & structures",
+    "Art & interface",
+    "Tools & workflow",
+    "Reference & upkeep",
+    "Content catalogues"
+  ]
+}

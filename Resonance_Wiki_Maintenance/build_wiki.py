@@ -2,13 +2,14 @@
 """Build the offline Resonance owner wiki from reviewed chapters and a pinned repo.
 
 Dependency: mistune==3.4.0. Reading the generated HTML requires no dependencies.
-The default build refuses a repository revision different from wiki-config.json.
+Builds verify scoped source inputs against an immutable reviewed revision.
 """
 from __future__ import annotations
 import argparse, ast, base64, hashlib, html, json, mimetypes, re, subprocess, sys
 from collections import defaultdict
 from html.parser import HTMLParser
 from pathlib import Path
+from wiki_inputs import reviewed_inputs, bind_products, check_products
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parent
@@ -57,6 +58,7 @@ class CleanHTML(HTMLParser):
                 if len(parts2)==2:
                     source=unquote(parts2[1].split('#')[0]);fragment=parts.fragment
                     if source in self.linkmap:return '#'+self.linkmap[source]+('--'+fragment if fragment else '')
+                    if self.page['kind']=='guide':return f'{REPOSITORY}/blob/{self.commit}/{source}'+('#'+fragment if fragment else '')
             return url
         if not self.page.get('source'):
             path=unquote(parts.path)
@@ -120,23 +122,23 @@ class CleanHTML(HTMLParser):
         if not self.skip:self.append(esc(data))
     def handle_comment(self,data):pass
 
-def classify(path):
+def classify(path,config):
     path=str(path)
     if path in ('CLAUDE.md','roguelike/CLAUDE.md') or 'WORLD_GENERATION_AUDIT_AND_PROPOSAL' in path or path.endswith('/ESSENCE.md'):
         return 'Design / mixed','design','Creative intent, historical implementation notes or a proposal. This text is retained in full; it is not proof that every described mechanic is implemented.'
     if path=='AGENTS.md':return 'Working convention','source','Repository collaboration rules at the audited revision. Apply them with the current owner instructions.'
-    if path=='README.md':return 'Current entry point','source','Current G6 repository entry point. The wiki provides a consolidated owner workflow.'
-    if path.endswith('WORLDGEN_G6.md'):return 'G6 delivery record','source','Current G6 delivery and verification scope. Recorded delivery tests are distinct from the focused checks run to create this wiki.'
+    if path=='README.md':return 'Current entry point','source','Repository entry point at the reviewed source revision. The wiki provides a consolidated owner workflow.'
+    if path.endswith('WORLDGEN_'+config['milestone']+'.md'):return config['milestone']+' delivery record','source','Reviewed delivery and verification scope. Consult the current edition evidence for newly executed checks.'
     if path.endswith('TUNING_EXISTING_FEATURES.md'):
         return 'Current / caveats','archive','Useful current tuning guide with retained caveats. In particular, the claimed equipped-light crafting heat source does not work through normal offhand light equip in this revision; read the current crafting chapter.'
     if path.endswith('STRUCTURE_AUTHORING.md'):
-        return 'Current + history','archive','This guide contains current G6 sections and a retained legacy G2 middle. Its old no-rotation and rural-POIs-deferred statements do not govern new G6 plans. Use the consolidated structure chapters for current steps.'
-    if '/evidence/' in '/'+path or '_VERIFICATION' in path or re.search(r'WORLDGEN_G[1-5]\.md$',path):
+        return 'Current + history','archive','This guide contains current instructions and retained historical sections. Use the current milestone sections and consolidated wiki chapters for supported workflows.'
+    if '/evidence/' in '/'+path or '_VERIFICATION' in path or re.search(r'WORLDGEN_G[1-9]\.md$',path):
         return 'Historical evidence','archive','A dated delivery/evidence record. Preserve its source identity and scope; do not read old passing counts or unresolved findings as a new test of current changes.'
     if '/owner/' in path:
         note='Earlier state, decisions or workflow with superseding and nested history. Use current wiki instructions for operation. The original wording is preserved for traceability.'
         if path.endswith('B3_STATE.md'):note+=' Its surface-boundary autosave statement was superseded by the later critical-fix pass: travel now preserves the last explicit checkpoint.'
-        if path.endswith('STATUS.md'):note+=' Its top status is G5; the root README and WORLDGEN_G6 describe the newer G6 delivery.'
+        if path.endswith('STATUS.md'):note+=' Its dated status may be superseded by the root README and the current owner delivery record.'
         if path.endswith('NEXT_ARC.md'):note+=' Its top next-arc recommendation is after G2 and is no longer the current implementation frontier.'
         return 'Historical / mixed','archive',note
     return 'Historical / mixed','archive','Original technical/design documentation retained in full. Several older schemas and runtime claims are superseded. Use the current guide layer for supported fields, units and workflows.'
@@ -158,7 +160,7 @@ def data_category(rel):
     return 'terrain-and-sprites' if bits[0] in ('terrain.json','decoratives.json','tiles.json') else 'world-settings'
 
 def collect(repo,config):
-    pages=[];links={};records=[];source_files=tracked(repo)
+    pages=[];links={};records=[];source_files=sorted(reviewed_inputs(repo,config)['files'])
     for item in config['chapters']:
         path=ROOT/item['file'];text=path.read_text(encoding='utf-8')
         text=text.replace('<!-- DEBUG_COMMAND_TABLE -->',debug_table(repo))
@@ -166,7 +168,7 @@ def collect(repo,config):
         pages.append(page)
     docs=[p for p in source_files if p.lower().endswith('.md')]
     for p in docs:
-        text=(repo/p).read_text(encoding='utf-8-sig');status,cls,note=classify(p)
+        text=(repo/p).read_text(encoding='utf-8-sig');status,cls,note=classify(p,config)
         page={'id':'source-'+short_id(p),'title':title_of(text,Path(p).name),'group':'Source library','kind':'source','source':Path(p),'text':text,'status':status,'class':cls,'note':note}
         pages.append(page);links[p]=page['id']
     groups=defaultdict(list)
@@ -200,10 +202,10 @@ def read_audits():
 def source_index(pages,repo,commit):
     sources=[p for p in pages if p['kind']=='source']
     out=['<p>Every tracked Markdown document in the audited repository is included below. The current guides reconcile operational instructions; these original texts preserve design intent, source context and delivery history.</p>',
-    '<div class="callout"><strong>Read the status before following instructions.</strong> A recent file can contain older nested sections. “Current” in an original heading refers to that document’s own historical context, not automatically to G6.</div>',
+    '<div class="callout"><strong>Read the status before following instructions.</strong> A recent file can contain older nested sections. “Current” in an original heading refers to that document’s own historical context, not automatically to the reviewed edition.</div>',
     '<div class="filter-row"><label class="sr-only" for="source-filter">Filter original documents</label><input id="source-filter" type="search" placeholder="Filter by title, path or status…" data-filter="source-entries"><span class="small muted" data-filter-count="source-entries">'+str(len(sources))+' entries</span></div><p class="empty-filter">No matching sources.</p><div id="source-entries">']
     for p in sources:
-        path=str(p['source']);out.append(f'<div class="index-entry" data-filter-text="{esc(p["title"]+" "+path+" "+p["status"])}"><a href="#{p["id"]}">{esc(p["title"])}</a> <span class="tag {p["class"]}">{esc(p["status"])}</span><span class="path-label">{esc(path)}</span><p>{esc(p["note"])}</p></div>')
+        path=p['source'].as_posix();out.append(f'<div class="index-entry" data-filter-text="{esc(p["title"]+" "+path+" "+p["status"])}"><a href="#{p["id"]}">{esc(p["title"])}</a> <span class="tag {p["class"]}">{esc(p["status"])}</span><span class="path-label">{esc(path)}</span><p>{esc(p["note"])}</p></div>')
     out.append('</div>');return ''.join(out)
 
 def catalog_html(page,commit):
@@ -242,55 +244,20 @@ def coverage_html(config,pages,docs,records,repo):
     guides=[p for p in pages if p['kind']=='guide'];words=sum(len(re.findall(r'\b\w+\b',p.get('text',''))) for p in guides)
     shipped=sum(r['path'].startswith('roguelike/data/') for r in records)
     examples=sum(r['path'].startswith('roguelike/docs/examples/') for r in records)
-    text=f'''# Coverage and verification
+    evidence=json.loads((ROOT/config['reviewed_evidence']).read_text(encoding='utf-8'))
+    text=f"""# Coverage and verification
 
-This edition was audited on {config['date_label']} against `{config['commit']}` on `main`. The current guide layer contains **{len(guides)} authored chapters**, approximately **{words:,} words**, plus generated navigation, source coverage and catalogue pages.
+Edition {config['edition']} / {config['milestone']}, reviewed {config['date_label']} against `{config['commit']}`.
 
-## What is included
+The handbook contains {len(guides)} guide chapters ({words:,} words), {len(docs)} authoritative source documents, {shipped} shipped JSON definitions and {examples} repository examples. Wiki chapters are authoring inputs, never duplicated as original game documents. Source and catalogue links use the immutable reviewed source revision.
 
-- All **{len(docs)} tracked repository Markdown documents**, including both documentation trees, the root guides, the perks README and evidence readmes. Original text is preserved with scope annotations.
-- All **{shipped} JSON files under `roguelike/data/`**, organised into catalogues. These are exact snapshot definitions, not claims that every declared field is active.
-- All **{examples} repository JSON authoring examples**, plus the complete new cottage created for this handbook.
-- Current owner workflows for setup, controls, saving, items, combat, creatures, crafting, texts, loot, perks, survival, weather, world generation, structures, POIs, entrances, WFC, sprites, decor and the interface.
-- A source manifest for subsequent revision checks. Code and definition links are pinned to this exact commit.
+## Evidence for this edition
 
-The uploaded `FullGame.zip` was checked for documentation coverage: all 42 Markdown documents in it also exist in the current checkout. Forty were identical after line-ending normalization; two had changed. The B–D review package and generation proposal were used as historical context. Neither supersedes the newer repository implementation. This is not a fresh forensic audit of every file in those older archives.
+"""
+    text+='\n'.join('- '+row for row in evidence['checks'])
+    text+='\n\n## Scope and limits\n\n'+'\n'.join('- '+row for row in evidence['limits'])
+    text+='\n\nThe original Linux edition 1.0 audit remains in `audit/`, with its dated configuration, source manifest and build report under `audit/edition-1.0/`. Historical failures and test counts are not current-edition results. See [Maintenance](#maintenance) for the shared source, authoring and product binding. The reader embeds its content, styles and search data; only deliberately opened external links need internet access.\n'
 
-## Checks actually run for this wiki
-
-| Check | Observed result | Scope |
-|---|---|---|
-| Current disposable launcher with seed 20261023 | Passed; shared-v1 plan, start [73,99], submap sub_73_99_0 | Actual headless initialization, not a complete playthrough. |
-| Current structure catalogue | 64 assets, zero errors; 238 classified warnings | Shared authoring catalogue and supported constraints. |
-| Existing G5 service house | Eight transforms and five selected grid previews passed | Candidate/complete scene checks at the stated seed. |
-| Existing G6 wayhouse | Assigned east-frontage complete scene passed | Controlled site fit and materialization. |
-| Authored starting laboratory | Direct preview passed | Current 60×16 layout route. |
-| New wiki cottage | Eight transforms, three selected grid scenes, two selected roadside scenes passed | Complete example checked against current mixed policies at seed 20261023. |
-| WFC example | 6×6 town_block solve and final adjacency check passed | Bounded solver example; fresh planned G6 towns use a different ground-fill route. |
-| Content examples and consumers | 33 focused checks passed | Actual loaders/factories/crafting/loot/language/perk checks; includes reproduction of documented limits. |
-| Asset loading probe | Six sheets, 263 mappings, 129 tile definitions inspected | Dummy-driver source/loading check; exposed the documented wall_pillar/Urizen geometry mismatch and ignored vine entries. |
-| Generated editor catalogue freshness | **Failed on the untouched clone** | Raw identity differs although compared semantic sections and contract hash match. The cause is not established. |
-| Handbook integrity | Passed; unique identifiers, internal links, search targets, source coverage and embedded JSON verified | Complete data definitions compare by value with the pinned checkout. Insertion fragments and historical abbreviated examples are reported separately. |
-| Handbook browser review | Desktop, 390px and 768px layouts, navigation, search, filters and JSON download checked | Cloud Chrome HTTP preview; no physical Windows-keyboard or native file-URL browser certification. |
-
-The focused runtime environment was Linux, CPython **3.12.14**, Pygame **2.6.1** and tcod **19.3.0**, with the exact declared dependency pins. It is distinct from the repository's recorded Windows / Python 3.11 acceptance environment.
-
-This wiki does not claim a new full production/release gate, universal gameplay correctness, a physical Windows-keyboard check, or owner acceptance of a future feature. Recorded repository delivery evidence remains available with its original scope. The game source was not changed to make documentation probes pass.
-
-## Corrections made in the current guide layer
-
-The current chapters replace misleading operational advice about item field names, per-limb HP, loot schemas, torch crafting heat, perk prerequisite enforcement, creature spawn weights, modern structure selection/rotation, legacy WFC scope, old lab dimensions, debug teleports, travel autosaving, sprite defaults, palette identity and temporary sprite remapping.
-
-Use [Troubleshooting](#troubleshooting) for the practical consequences. An unsupported field is labelled as such; the handbook does not silently implement it or redefine creative intent.
-
-## The original source record
-
-The [Source library](#source-library) is the exhaustive document inventory. Each entry identifies its repository path, status and any major caveat. Its rendered page includes a source SHA-256 and a pinned source link. The [Data catalogues](#catalogues) provide the equivalent source trace for JSON.
-
-All reader content, styles, search data and included figures are embedded in the HTML. Only deliberately clicked external source links need an internet connection. See [Maintenance](#maintenance) for the rebuild and audit procedure.
-
-The companion source package includes the reusable `validate_wiki.py` checker and recorded browser/audit results. It checks the document's integrity independently of the game probes. Structural offline checks confirm that the reader declares no external runtime assets and does not fetch its content from separate files.
-'''
     return text
 
 def render_document(repo,config,pages,linkmap,records,docs,md,report,output):
@@ -317,7 +284,7 @@ def render_document(repo,config,pages,linkmap,records,docs,md,report,output):
             illustration=f'<details><summary>View the verified cottage preview</summary><img src="data:image/svg+xml;base64,{image}" alt="Actual diagnostic map preview of the new cottage from the structure validator"><p class="small muted">Validator output at seed 20261023. This is a diagnostic map, not a game-renderer screenshot.</p></details><p><button class="quiet-button" type="button" data-download="data-wiki-examples-owner-cottage-a-json" data-filename="owner_cottage_a.json">Download the complete cottage JSON</button> <a href="#data-wiki-examples-owner-cottage-a-json" class="small">Inspect the complete example</a></p>'
             first=body.find('<h2');body=body[:first]+illustration+body[first:] if first>=0 else illustration+body
         if kind=='source':
-            source=str(page['source']);meta=f'<span class="tag {page["class"]}">{esc(page["status"])}</span><span>{esc(source)}</span><span>SHA-256 {sha(repo/source)[:12]}…</span>'
+            source=page['source'].as_posix();meta=f'<span class="tag {page["class"]}">{esc(page["status"])}</span><span>{esc(source)}</span><span>SHA-256 {sha(repo/source)[:12]}…</span>'
             sourceurl=f'{REPOSITORY}/blob/{config["commit"]}/{source}'
             body=f'<div class="callout"><strong>Source scope.</strong> {esc(page["note"])} <a href="#source-library">Back to source inventory</a>.</div>'+body
         elif kind=='data':meta='<span class="tag data">Snapshot data</span><span>'+str(len(page['entries']))+' complete files</span>';sourceurl=None
@@ -376,19 +343,18 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repo',required=True,type=Path);parser.add_argument('--output',type=Path,default=ROOT/'Resonance_Owner_Wiki.html');parser.add_argument('--check-drift',action='store_true');parser.add_argument('--write-manifest',action='store_true')
     args=parser.parse_args();repo=args.repo.resolve();config=json.loads((ROOT/'wiki-config.json').read_text(encoding='utf-8'));head=git(repo,'rev-parse','HEAD')
-    files=tracked(repo);fingerprints={p:sha(repo/p) for p in files};baseline_path=ROOT/'source-manifest.json'
-    if args.check_drift:
-        base=json.loads(baseline_path.read_text(encoding='utf-8'));old=base['files'];drift={'audited_commit':base['commit'],'current_commit':head,'changed':[p for p in old if p in fingerprints and old[p]!=fingerprints[p]],'missing':[p for p in old if p not in fingerprints],'added':[p for p in fingerprints if p not in old]}
-        drift['clean']=head==base['commit'] and not any(drift[k] for k in ('changed','missing','added'))
-        print(json.dumps(drift,indent=2));return 0 if drift['clean'] else 2
-    if head!=config['commit']:parser.error('Repository HEAD differs from the reviewed wiki revision. Audit affected chapters, then deliberately update wiki-config.json before building.')
-    if git(repo,'status','--porcelain','--untracked-files=no'):parser.error('Tracked repository changes exist. Build from the reviewed clean revision so the SHA identifies the actual source.')
-    if args.write_manifest or not baseline_path.exists():baseline_path.write_text(json.dumps({'repository':REPOSITORY,'commit':head,'audited':config['date'],'files':fingerprints},indent=2)+'\n',encoding='utf-8')
+    try:
+        source=reviewed_inputs(repo,config)
+        if args.check_drift:
+            binding=check_products(ROOT,repo,config,args.output.resolve())
+            print(json.dumps(dict(clean=True,source_revision=config['commit'],documentation_head=head,products=binding['products']),indent=2));return 0
+    except (ValueError,OSError) as error:parser.error(str(error))
     import mistune
     md=mistune.create_markdown(escape=False,plugins=['table','strikethrough','url','task_lists'])
     pages,linkmap,records,docs=collect(repo,config)
-    report={'commit':head,'repaired_legacy_links':[],'unavailable_legacy_links':[],'embedded_source_images':[],'article_count':0,'data_files':len(records),'source_documents':len(docs)}
+    report={'commit':config['commit'],'documentation_delivery_revision':head,'repaired_legacy_links':[],'unavailable_legacy_links':[],'embedded_source_images':[],'article_count':0,'data_files':len(records),'source_documents':len(docs)}
     render_document(repo,config,pages,linkmap,records,docs,md,report,args.output)
+    bind_products(ROOT,repo,config,source,args.output.resolve())
     return 0
 
 if __name__=='__main__':raise SystemExit(main())

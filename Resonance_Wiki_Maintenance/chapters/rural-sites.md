@@ -1,6 +1,6 @@
 # Add independent places beside country roads
 
-G6 adds a separate pool of rural places along existing country roads. These are independent sites with their own mutable contents, **in addition to the single featured landmark**. Each accepted site currently contains one building and its complete protected access within one storage chunk.
+G6 adds a separate pool of rural places along existing country roads. These are independent sites with their own mutable contents, **in addition to the single featured landmark**. That G6 single-site route remains available explicitly. The installed G7 v2 policy instead selects mixed parents: singles and compounds with independently owned child buildings. Both fit inside one chunk. See [Compounds](#compounds) for the current default.
 
 Use `roguelike/data/generation/poi_profiles.json` for extra-site selection. Registering an asset in the featured-landmark role does not register it here, and registering it here does not change the featured-landmark pool.
 
@@ -41,7 +41,7 @@ The natural `--site` preview retains policy selection and can legitimately repor
 
 ## Install the two linked parts
 
-The layout belongs at `roguelike/data/buildings/wilderness/<id>.json`. Its exact ID must also appear in `poi_profiles.json`:
+The layout belongs at `roguelike/data/buildings/wilderness/<id>.json`. For the explicit v1 example policy its exact ID appears in `assets`. In the installed v2 policy use `choices` with `kind: single`, `asset`, `weight` and `cap`. The historical v1 entry is:
 
 ```json
 {"asset":"g6_wayhouse","weight":1,"cap":2}
@@ -51,7 +51,7 @@ The complete example policy retains the four existing assets and adds this draft
 
 After installation, run `--catalog`, refresh/check the editor catalog, and run `--world-plan`. Changes affect new-world selection. The preview commands themselves do not install anything or open personal campaigns.
 
-## The installed policy's controls
+## The preserved v1 single-site policy controls
 
 | Key | Default | Accepted range | Meaning |
 |---|---:|---|---|

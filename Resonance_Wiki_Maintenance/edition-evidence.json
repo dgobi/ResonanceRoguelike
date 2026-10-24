@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "G7 source baseline and compatibility witness retained under evidence/worldgen-g8/before.",
+    "Integration work in progress; final G8 edition will bind the completed source and release evidence."
+  ],
+  "limits": [
+    "Historical Linux audit remains historical; this intermediate metadata is not a G8 release claim."
+  ]
+}

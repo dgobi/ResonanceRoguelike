@@ -1,0 +1,533 @@
+{
+  "schema_version": 1,
+  "validator_version": "1.0",
+  "checked_at_utc": "2026-10-24T19:24:14.714579+00:00",
+  "html": "G:\\GameDev\\RoguelikeProject\\Resonance_Wiki_Maintenance\\Resonance_Owner_Wiki.html",
+  "html_sha256": "bc8f68444da8f8a1e3379275f6a5172dbb90bfdd90b9423f5ba4d9de8141f56f",
+  "html_bytes": 5155465,
+  "repository": "G:\\GameDev\\RoguelikeProject",
+  "repository_head": "77ea292d3b28467578a275e89068e4a689199931",
+  "expected_count_assertions": {
+    "markdown": null,
+    "game_json": null
+  },
+  "checks": {
+    "html_ids": {
+      "unique": 1511,
+      "duplicate_ids": {}
+    },
+    "internal_hrefs": {
+      "checked": 528,
+      "external_hyperlinks_permitted": 648
+    },
+    "articles": {
+      "guide": 36,
+      "source": 55,
+      "data": 17
+    },
+    "json_scripts": {
+      "checked": 1,
+      "parsed": 1
+    },
+    "json_code_blocks": {
+      "total": 476,
+      "complete_parsed": 441,
+      "insertion_fragments_syntax_checked": 32,
+      "historical_abbreviations_skipped": 3
+    },
+    "source_coverage": {
+      "expected": 55,
+      "observed": 55,
+      "missing": [
+        "docs/owner/CRITICAL_FIXES_VERIFICATION.md",
+        "docs/owner/TUNING_EXISTING_FEATURES.md",
+        "docs/owner/WORLDGEN_G1.md",
+        "docs/owner/WORLDGEN_G2.md",
+        "docs/owner/WORLDGEN_G3.md",
+        "docs/owner/WORLDGEN_G4.md",
+        "docs/owner/WORLDGEN_G5.md",
+        "docs/owner/WORLDGEN_G6.md",
+        "docs/owner/WORLDGEN_G7.md",
+        "docs/owner/WORLD_GENERATION_AUDIT_AND_PROPOSAL.md",
+        "roguelike/CLAUDE.md",
+        "roguelike/data/perks/README.md",
+        "roguelike/docs/ARCHITECTURE.md",
+        "roguelike/docs/COMBAT.md",
+        "roguelike/docs/COMPONENTS.md",
+        "roguelike/docs/CREATURES.md",
+        "roguelike/docs/DATA_REFERENCE.md",
+        "roguelike/docs/DEBUG.md",
+        "roguelike/docs/DECOR AND RANDOM TILES.md",
+        "roguelike/docs/DECORATIVES.md",
+        "roguelike/docs/ESSENCE.md",
+        "roguelike/docs/GENERATION.md",
+        "roguelike/docs/INDEX.md",
+        "roguelike/docs/LAYOUT_AUTHORING.md",
+        "roguelike/docs/OMNIDOC.md",
+        "roguelike/docs/RENDERING.md",
+        "roguelike/docs/SPRITESHEET_GUIDE.md",
+        "roguelike/docs/STRUCTURE_AUTHORING.md",
+        "roguelike/docs/SYSTEMS.md",
+        "roguelike/docs/UI_RULES.md",
+        "roguelike/docs/WFC_AUTHORING.md",
+        "roguelike/docs/owner/B1_DEFERRED.md",
+        "roguelike/docs/owner/B1_FORMAT.md",
+        "roguelike/docs/owner/B1_VERIFICATION.md",
+        "roguelike/docs/owner/B2_DEFERRED.md",
+        "roguelike/docs/owner/B2_STATE.md",
+        "roguelike/docs/owner/B2_VERIFICATION.md",
+        "roguelike/docs/owner/B3_DEFERRED.md",
+        "roguelike/docs/owner/B3_STATE.md",
+        "roguelike/docs/owner/B3_VERIFICATION.md",
+        "roguelike/docs/owner/CONTENT_ROUTES.md",
+        "roguelike/docs/owner/C_STATE.md",
+        "roguelike/docs/owner/C_VERIFICATION.md",
+        "roguelike/docs/owner/DECISIONS.md",
+        "roguelike/docs/owner/D_STATE.md",
+        "roguelike/docs/owner/D_VERIFICATION.md",
+        "roguelike/docs/owner/NEXT_ARC.md",
+        "roguelike/docs/owner/OBSERVATIONS.md",
+        "roguelike/docs/owner/OWNER_LESSON.md",
+        "roguelike/docs/owner/RUNTIME_MAP.md",
+        "roguelike/docs/owner/START_HERE.md",
+        "roguelike/docs/owner/STATUS.md",
+        "roguelike/docs/owner/WORLD_AND_STATE.md"
+      ],
+      "unexpected": [
+        "docs\\owner\\CRITICAL_FIXES_VERIFICATION.md",
+        "docs\\owner\\TUNING_EXISTING_FEATURES.md",
+        "docs\\owner\\WORLDGEN_G1.md",
+        "docs\\owner\\WORLDGEN_G2.md",
+        "docs\\owner\\WORLDGEN_G3.md",
+        "docs\\owner\\WORLDGEN_G4.md",
+        "docs\\owner\\WORLDGEN_G5.md",
+        "docs\\owner\\WORLDGEN_G6.md",
+        "docs\\owner\\WORLDGEN_G7.md",
+        "docs\\owner\\WORLD_GENERATION_AUDIT_AND_PROPOSAL.md",
+        "roguelike\\CLAUDE.md",
+        "roguelike\\data\\perks\\README.md",
+        "roguelike\\docs\\ARCHITECTURE.md",
+        "roguelike\\docs\\COMBAT.md",
+        "roguelike\\docs\\COMPONENTS.md",
+        "roguelike\\docs\\CREATURES.md",
+        "roguelike\\docs\\DATA_REFERENCE.md",
+        "roguelike\\docs\\DEBUG.md",
+        "roguelike\\docs\\DECOR AND RANDOM TILES.md",
+        "roguelike\\docs\\DECORATIVES.md",
+        "roguelike\\docs\\ESSENCE.md",
+        "roguelike\\docs\\GENERATION.md",
+        "roguelike\\docs\\INDEX.md",
+        "roguelike\\docs\\LAYOUT_AUTHORING.md",
+        "roguelike\\docs\\OMNIDOC.md",
+        "roguelike\\docs\\RENDERING.md",
+        "roguelike\\docs\\SPRITESHEET_GUIDE.md",
+        "roguelike\\docs\\STRUCTURE_AUTHORING.md",
+        "roguelike\\docs\\SYSTEMS.md",
+        "roguelike\\docs\\UI_RULES.md",
+        "roguelike\\docs\\WFC_AUTHORING.md",
+        "roguelike\\docs\\owner\\B1_DEFERRED.md",
+        "roguelike\\docs\\owner\\B1_FORMAT.md",
+        "roguelike\\docs\\owner\\B1_VERIFICATION.md",
+        "roguelike\\docs\\owner\\B2_DEFERRED.md",
+        "roguelike\\docs\\owner\\B2_STATE.md",
+        "roguelike\\docs\\owner\\B2_VERIFICATION.md",
+        "roguelike\\docs\\owner\\B3_DEFERRED.md",
+        "roguelike\\docs\\owner\\B3_STATE.md",
+        "roguelike\\docs\\owner\\B3_VERIFICATION.md",
+        "roguelike\\docs\\owner\\CONTENT_ROUTES.md",
+        "roguelike\\docs\\owner\\C_STATE.md",
+        "roguelike\\docs\\owner\\C_VERIFICATION.md",
+        "roguelike\\docs\\owner\\DECISIONS.md",
+        "roguelike\\docs\\owner\\D_STATE.md",
+        "roguelike\\docs\\owner\\D_VERIFICATION.md",
+        "roguelike\\docs\\owner\\NEXT_ARC.md",
+        "roguelike\\docs\\owner\\OBSERVATIONS.md",
+        "roguelike\\docs\\owner\\OWNER_LESSON.md",
+        "roguelike\\docs\\owner\\RUNTIME_MAP.md",
+        "roguelike\\docs\\owner\\START_HERE.md",
+        "roguelike\\docs\\owner\\STATUS.md",
+        "roguelike\\docs\\owner\\WORLD_AND_STATE.md"
+      ]
+    },
+    "source_hashes": {
+      "matched": 2
+    },
+    "game_json_coverage": {
+      "expected": 350,
+      "observed": 350,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_example_coverage": {
+      "expected": 14,
+      "observed": 14,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_data_comparison": {
+      "matched": 364,
+      "wiki_examples_not_in_repo": 1,
+      "catalog_records": 365
+    },
+    "search_coverage": {
+      "expected": 456,
+      "observed": 456,
+      "missing": [],
+      "unexpected": []
+    },
+    "search_index": {
+      "records": 456,
+      "catalog_json_copies_matched": 365
+    },
+    "runtime_assets": {
+      "references_checked": 4,
+      "embedded_references": 4,
+      "fragment_references": 0,
+      "css_blocks_and_style_attributes_checked": 1,
+      "embedded_svgs_inspected": 1,
+      "inline_executable_scripts": 1
+    }
+  },
+  "errors": [
+    {
+      "check": "source_coverage",
+      "message": "Coverage differs from the supplied repository.",
+      "missing": [
+        "docs/owner/CRITICAL_FIXES_VERIFICATION.md",
+        "docs/owner/TUNING_EXISTING_FEATURES.md",
+        "docs/owner/WORLDGEN_G1.md",
+        "docs/owner/WORLDGEN_G2.md",
+        "docs/owner/WORLDGEN_G3.md",
+        "docs/owner/WORLDGEN_G4.md",
+        "docs/owner/WORLDGEN_G5.md",
+        "docs/owner/WORLDGEN_G6.md",
+        "docs/owner/WORLDGEN_G7.md",
+        "docs/owner/WORLD_GENERATION_AUDIT_AND_PROPOSAL.md",
+        "roguelike/CLAUDE.md",
+        "roguelike/data/perks/README.md",
+        "roguelike/docs/ARCHITECTURE.md",
+        "roguelike/docs/COMBAT.md",
+        "roguelike/docs/COMPONENTS.md",
+        "roguelike/docs/CREATURES.md",
+        "roguelike/docs/DATA_REFERENCE.md",
+        "roguelike/docs/DEBUG.md",
+        "roguelike/docs/DECOR AND RANDOM TILES.md",
+        "roguelike/docs/DECORATIVES.md",
+        "roguelike/docs/ESSENCE.md",
+        "roguelike/docs/GENERATION.md",
+        "roguelike/docs/INDEX.md",
+        "roguelike/docs/LAYOUT_AUTHORING.md",
+        "roguelike/docs/OMNIDOC.md",
+        "roguelike/docs/RENDERING.md",
+        "roguelike/docs/SPRITESHEET_GUIDE.md",
+        "roguelike/docs/STRUCTURE_AUTHORING.md",
+        "roguelike/docs/SYSTEMS.md",
+        "roguelike/docs/UI_RULES.md",
+        "roguelike/docs/WFC_AUTHORING.md",
+        "roguelike/docs/owner/B1_DEFERRED.md",
+        "roguelike/docs/owner/B1_FORMAT.md",
+        "roguelike/docs/owner/B1_VERIFICATION.md",
+        "roguelike/docs/owner/B2_DEFERRED.md",
+        "roguelike/docs/owner/B2_STATE.md",
+        "roguelike/docs/owner/B2_VERIFICATION.md",
+        "roguelike/docs/owner/B3_DEFERRED.md",
+        "roguelike/docs/owner/B3_STATE.md",
+        "roguelike/docs/owner/B3_VERIFICATION.md",
+        "roguelike/docs/owner/CONTENT_ROUTES.md",
+        "roguelike/docs/owner/C_STATE.md",
+        "roguelike/docs/owner/C_VERIFICATION.md",
+        "roguelike/docs/owner/DECISIONS.md",
+        "roguelike/docs/owner/D_STATE.md",
+        "roguelike/docs/owner/D_VERIFICATION.md",
+        "roguelike/docs/owner/NEXT_ARC.md",
+        "roguelike/docs/owner/OBSERVATIONS.md",
+        "roguelike/docs/owner/OWNER_LESSON.md",
+        "roguelike/docs/owner/RUNTIME_MAP.md",
+        "roguelike/docs/owner/START_HERE.md",
+        "roguelike/docs/owner/STATUS.md",
+        "roguelike/docs/owner/WORLD_AND_STATE.md"
+      ],
+      "unexpected": [
+        "docs\\owner\\CRITICAL_FIXES_VERIFICATION.md",
+        "docs\\owner\\TUNING_EXISTING_FEATURES.md",
+        "docs\\owner\\WORLDGEN_G1.md",
+        "docs\\owner\\WORLDGEN_G2.md",
+        "docs\\owner\\WORLDGEN_G3.md",
+        "docs\\owner\\WORLDGEN_G4.md",
+        "docs\\owner\\WORLDGEN_G5.md",
+        "docs\\owner\\WORLDGEN_G6.md",
+        "docs\\owner\\WORLDGEN_G7.md",
+        "docs\\owner\\WORLD_GENERATION_AUDIT_AND_PROPOSAL.md",
+        "roguelike\\CLAUDE.md",
+        "roguelike\\data\\perks\\README.md",
+        "roguelike\\docs\\ARCHITECTURE.md",
+        "roguelike\\docs\\COMBAT.md",
+        "roguelike\\docs\\COMPONENTS.md",
+        "roguelike\\docs\\CREATURES.md",
+        "roguelike\\docs\\DATA_REFERENCE.md",
+        "roguelike\\docs\\DEBUG.md",
+        "roguelike\\docs\\DECOR AND RANDOM TILES.md",
+        "roguelike\\docs\\DECORATIVES.md",
+        "roguelike\\docs\\ESSENCE.md",
+        "roguelike\\docs\\GENERATION.md",
+        "roguelike\\docs\\INDEX.md",
+        "roguelike\\docs\\LAYOUT_AUTHORING.md",
+        "roguelike\\docs\\OMNIDOC.md",
+        "roguelike\\docs\\RENDERING.md",
+        "roguelike\\docs\\SPRITESHEET_GUIDE.md",
+        "roguelike\\docs\\STRUCTURE_AUTHORING.md",
+        "roguelike\\docs\\SYSTEMS.md",
+        "roguelike\\docs\\UI_RULES.md",
+        "roguelike\\docs\\WFC_AUTHORING.md",
+        "roguelike\\docs\\owner\\B1_DEFERRED.md",
+        "roguelike\\docs\\owner\\B1_FORMAT.md",
+        "roguelike\\docs\\owner\\B1_VERIFICATION.md",
+        "roguelike\\docs\\owner\\B2_DEFERRED.md",
+        "roguelike\\docs\\owner\\B2_STATE.md",
+        "roguelike\\docs\\owner\\B2_VERIFICATION.md",
+        "roguelike\\docs\\owner\\B3_DEFERRED.md",
+        "roguelike\\docs\\owner\\B3_STATE.md",
+        "roguelike\\docs\\owner\\B3_VERIFICATION.md",
+        "roguelike\\docs\\owner\\CONTENT_ROUTES.md",
+        "roguelike\\docs\\owner\\C_STATE.md",
+        "roguelike\\docs\\owner\\C_VERIFICATION.md",
+        "roguelike\\docs\\owner\\DECISIONS.md",
+        "roguelike\\docs\\owner\\D_STATE.md",
+        "roguelike\\docs\\owner\\D_VERIFICATION.md",
+        "roguelike\\docs\\owner\\NEXT_ARC.md",
+        "roguelike\\docs\\owner\\OBSERVATIONS.md",
+        "roguelike\\docs\\owner\\OWNER_LESSON.md",
+        "roguelike\\docs\\owner\\RUNTIME_MAP.md",
+        "roguelike\\docs\\owner\\START_HERE.md",
+        "roguelike\\docs\\owner\\STATUS.md",
+        "roguelike\\docs\\owner\\WORLD_AND_STATE.md"
+      ]
+    }
+  ],
+  "skips": [
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 123,
+      "page": "first-change"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 655,
+      "page": "items-equipment"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 665,
+      "page": "items-equipment"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 781,
+      "page": "combat-balance"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 1113,
+      "page": "crafting-processing"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 1264,
+      "page": "texts-loot-scenes"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 1329,
+      "page": "texts-loot-scenes"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 1407,
+      "page": "survival-progression"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 2131,
+      "page": "structure-reference"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3178,
+      "page": "sprites-and-atlases"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3187,
+      "page": "sprites-and-atlases"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3497,
+      "page": "terrain-decor-and-variation"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 4926,
+      "page": "source-docs-owner-tuning-existing-features-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 12458,
+      "page": "source-roguelike-docs-decoratives-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 12469,
+      "page": "source-roguelike-docs-decoratives-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 12500,
+      "page": "source-roguelike-docs-decoratives-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13345,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13349,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13353,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13357,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13361,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 16900,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 16931,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 16934,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 16946,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 16985,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 16993,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.",
+      "line": 17004,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17016,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17022,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.",
+      "line": 17031,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17058,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.",
+      "line": 19007,
+      "page": "source-roguelike-docs-wfc-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 19024,
+      "page": "source-roguelike-docs-wfc-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 19161,
+      "page": "source-roguelike-docs-owner-b1-format-md"
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/owner_cottage_a.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    }
+  ],
+  "limitations": [
+    "Static checks do not execute JavaScript, simulate browser layout, verify clipboard/download behavior, or test gameplay.",
+    "External ordinary hyperlinks are permitted and are not fetched or checked for availability.",
+    "Source coverage checks one rendered source article, pinned path, revision and displayed source hash per tracked Markdown file; they do not independently re-render Markdown or compare every rendered word.",
+    "Runtime asset checking covers declared HTML resources, CSS url()/@import, and embedded SVG references. It is not a JavaScript interpreter or a proof against dynamically constructed network requests.",
+    "Unbraced JSON documentation entries are syntax-checked after temporary braces are added. Abbreviated historical examples containing an unquoted ellipsis are reported separately, not treated as machine payloads."
+  ],
+  "status": "fail",
+  "error_count": 1
+}

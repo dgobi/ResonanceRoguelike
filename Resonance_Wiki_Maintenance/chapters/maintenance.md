@@ -1,62 +1,35 @@
-# Keep this handbook accurate
+# Maintain the owner handbook
 
-This is edition **1.0**, audited on **24 October 2026** against `main` at `4d7a7892e1afffb8d872ed4a8fd442984d14e7d5`. It is a fixed, self-contained document. It does not contact GitHub in the background, and a newer repository push does not silently change the instructions you are reading.
+The stable reader is `Resonance_Wiki_Maintenance/Resonance_Owner_Wiki.html`. Open it directly; no server is needed. Editable chapters, examples, theme and reader stay beside the builder. This is a reviewed edition, not automatic synchronization.
 
-## After a feature push
+## Three input scopes
 
-Return to this conversation with the feature/commit you want covered and request a wiki update. The revision in the header tells us the previous baseline. The companion source package preserves the authored chapters, interface, builder and source manifest so the next edition can be rebuilt and reviewed systematically.
+`wiki-config.json` pins a full immutable `commit` and explicit `source_scope`: game, tools, authoritative docs and root guides. Both builder and validator compare those scoped checkout inputs to that revision, including added and missing paths. Text may differ only by CRLF/CR versus LF; binary bytes are exact. The manifest also records raw bytes used. A later commit containing only wiki metadata/products preserves unchanged game-source binding.
 
-A good update must:
+Wiki authoring inputs are hashed separately: chapters, examples, illustrations, configuration, edition evidence, theme, reader, builder, validator and shared input checker. Changed or missing inputs invalidate stale products. HTML, manifests, build/validation reports and audits are excluded from their own inputs. Wiki chapters are not duplicated in the original game-document library.
 
-1. Resolve the current repository HEAD and compare it with the audited source manifest.
-2. Read changed guides and actual loaders/consumers, including changes to tests and examples.
-3. Revise affected how-to pages, field references, source annotations and known limitations.
-4. Recheck the examples and commands affected by the change. A wider gate is appropriate when the change crosses a core ownership/compatibility boundary.
-5. Refresh the embedded document library, content catalogues and source fingerprints from the same revision.
-6. Check internal links, search, keyboard behavior, layout and offline independence.
-7. Record the new SHA, verification scope, edition date and a short owner-facing change log.
+`source-manifest.json` records source revision, exact authoring inputs, output hashes and documentation HEAD at build time. Subsequent product-only delivery commits may differ. Current guide/source links pin the reviewed source; original historical text retains its context.
 
-Updating only the header's date would make the document less trustworthy. The builder therefore refuses a different repository HEAD unless its audited-revision configuration has deliberately been updated after review.
+## Repeatable update sequence
 
-## What the source package contains
+1. Preserve previous editions and review affected source and workflow evidence. Commit intended game and authoritative-guide inputs, preserving unrelated work.
+2. Update affected chapters/examples and `edition-evidence.json`. Distinguish newly executed checks from historical evidence.
+3. Deliberately set reviewed source and edition metadata. Changing a SHA alone is not review.
+4. Build, validate and inspect the real reader. Repeat unchanged build/drift checks. Commit wiki delivery separately.
 
-| Part | Role |
-|---|---|
-| `chapters/` | The new, editable owner-facing Markdown chapters. |
-| `build_wiki.py` | Collects current repository documents/data and renders the single HTML file. |
-| `validate_wiki.py` | Checks HTML identifiers, internal links, search targets, embedded JSON and source coverage. |
-| `theme.css` / `reader.js` | The local reading interface. |
-| `wiki-config.json` | Edition identity, audited SHA, page ordering and labels. |
-| `source-manifest.json` | Paths and SHA-256 fingerprints from this audited checkout. |
-| `audit/` | Focused verification results and limitations for this edition. |
-| `README.txt` | Rebuild and drift-check instructions. |
-| `requirements-docs.txt` | Pins the Markdown renderer used for reproducible builds. |
+```powershell
+$env:PYTHONPATH = "$env:LOCALAPPDATA/ResonanceAuthoring/python"
+& $ResonancePython -X utf8 Resonance_Wiki_Maintenance/build_wiki.py --repo .
+& $ResonancePython -X utf8 Resonance_Wiki_Maintenance/validate_wiki.py --repo . --html Resonance_Wiki_Maintenance/Resonance_Owner_Wiki.html --report evidence/wiki-integrity.json
+& $ResonancePython -X utf8 Resonance_Wiki_Maintenance/build_wiki.py --repo . --check-drift
+```
 
-The source package is for maintaining the handbook. It is not required to read the HTML. The game repository remains the authority for the game, and the original Markdown guides are preserved in the wiki's **Source library** with explicit status banners.
+Install the pinned documentation-only `mistune` dependency from `requirements-docs.txt` outside the game environment. `--write-manifest` remains a compatibility spelling and cannot bypass source verification. Every successful build binds its inputs/products. A build alone does not certify browser behavior or gameplay.
 
-## Check drift before rebuilding
-
-Run the included builder with `--check-drift --repo <repository-root>`. It compares the recorded paths/hashes and reports changed, missing and added files. This is a review aid, not an automated claim that the prose has become current. Asset-only edits can affect authoring instructions; test-only edits can affect verification; a changed source SHA without payload changes still requires the edition metadata to be considered deliberately.
-
-The README gives exact rebuild commands using a separate documentation environment and the pinned Markdown renderer. Reading the completed HTML needs none of those tools.
-
-## Read the evidence labels
-
-| Label | Meaning |
-|---|---|
-| Current guide | Synthesized owner instructions checked against this source snapshot. Specific execution results are stated separately. |
-| Source reference | An original repository document retained for traceability. Its banner explains scope and any important caveat. |
-| Historical / mixed | Retained original wording that can contain superseded technical instructions. Prefer current guide pages for operational steps. |
-| Design / proposal | Intent or proposed work; existence in prose is not implementation. |
-| Snapshot data | Exact JSON from this revision, not an assertion that every declared field has an active consumer. |
-| Executed check | A stated command/probe actually ran in the wiki audit, with its environment and bounded outcome. |
-
-## Documentation method and comparable projects
-
-The organization uses practical tutorials, task guides, reference material and system explanation, following the distinction described by [Diátaxis](https://diataxis.fr/start-here/). The complete definition → registration → appearance workflow draws on [Cataclysm: DDA's beginner mapgen guide](https://docs.cataclysmdda.org/JSON/JSON_Mapping_Guides/Guide_for_beginning_mapgen.html). Testing authored structures within their surrounding generated map follows the useful approach in [Dungeon Crawl Stone Soup's vault introduction](https://github.com/crawl/crawl/blob/master/crawl-ref/docs/develop/levels/introduction.txt).
-
-Those projects inform the documentation method; their schemas and game rules have not been imported into Resonance. The local file design embeds assets and content because browsers can restrict cross-file requests under `file://`; see [MDN's explanation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS/Errors/CORSRequestNotHttp).
+A feature affecting owner workflows must update authoritative guides and wiki chapters/examples, rebuild and validate, and record source/evidence. Record a scoped no-handbook-impact conclusion when appropriate. This is a delivery rule, not a scheduled task.
 
 ## Edition history
 
-**1.0 · 24 October 2026:** Initial unified owner handbook for the G6 source. Added current setup, controls, save behavior, authoring workflows, data catalogues, source coverage, troubleshooting and update protocol. Retained the repository's original documents with scope annotations and resolved material contradictions in the current guide layer.
+**1.0, 24 October 2026:** Original G6 handbook and Linux audit. Dated configuration, manifest, build report and README remain under `audit/edition-1.0/`; original probe outputs remain in `audit/`. Their raw catalogue drift finding and inspection limits remain historical.
+
+**1.1 integration, 24 October 2026:** Shared source/authoring/product contract and G7 compound catch-up. Final G8 metadata will record completed feature/release scope.

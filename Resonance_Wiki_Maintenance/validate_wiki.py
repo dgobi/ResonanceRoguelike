@@ -141,8 +141,12 @@ def location(node):
 def validate(args):
     repo = args.repo.resolve()
     html_path = args.html.resolve()
-    head = git(repo, "rev-parse", "HEAD")
-    tracked = git(repo, "ls-files", "-z").split("\0")
+    from wiki_inputs import check_products
+    root=Path(__file__).resolve().parent
+    config=json.loads((root/'wiki-config.json').read_text(encoding='utf-8'))
+    binding=check_products(root,repo,config,html_path)
+    head=config['commit']
+    tracked=sorted(binding['source']['files'])
     expected_docs = {p for p in tracked if p.lower().endswith(".md") and (repo / p).is_file()}
     expected_data = {p for p in tracked if p.startswith("roguelike/data/") and p.endswith(".json") and (repo / p).is_file()}
     expected_examples = {p for p in tracked if p.startswith("roguelike/docs/examples/") and p.endswith(".json") and (repo / p).is_file()}
@@ -264,6 +268,11 @@ def validate(args):
             fail("document_json", message, **location(node))
     report["checks"]["json_code_blocks"] = {"total": len(json_code_nodes), "complete_parsed": complete_json, "insertion_fragments_syntax_checked": wrapped_fragments, "historical_abbreviations_skipped": ellipses}
 
+    for node in document.nodes:
+        if node.tag=='a' and node.closest('article') is not None and node.closest('article').attrs.get('data-kind')=='guide':
+            pinned=source_link(node.attrs.get('href',''))
+            if pinned and pinned[0]!=head:
+                fail('source_revision','Ordinary guide/source link is not pinned to reviewed source',href=node.attrs['href'])
     observed_docs = []
     source_hashes_checked = 0
     for article in articles.values():
@@ -276,7 +285,7 @@ def validate(args):
         revision, path = source_link(links[0].attrs["href"])
         observed_docs.append(path)
         if revision != head:
-            fail("source_revision", "Source link does not identify repository HEAD.", path=path, revision=revision)
+            fail("source_revision", "Source link does not identify reviewed source revision.", path=path, revision=revision)
         if article.attrs.get("id") != "source-" + short_id(path):
             fail("source_coverage", "Source article ID does not match its source path.", path=path, page=article.attrs.get("id"))
         if path in expected_docs:
@@ -328,7 +337,7 @@ def validate(args):
         links = [n for n in record.descendants("a") if "Pinned source" in n.text()]
         pinned = source_link(links[0].attrs.get("href", "")) if len(links) == 1 else None
         if pinned != (head, path):
-            fail("data_revision", "Data record needs a matching path and HEAD in its pinned link.", path=path, observed=pinned)
+            fail("data_revision", "Data record needs a matching path and reviewed source revision in its pinned link.", path=path, observed=pinned)
     for path, count in Counter(observed_paths).items():
         if count != 1:
             fail("catalog_records", "Data path is represented more than once.", path=path, count=count)

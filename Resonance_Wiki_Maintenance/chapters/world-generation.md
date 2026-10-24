@@ -1,6 +1,6 @@
 # How the current world is built
 
-Fresh worlds at this wiki's revision use **G6**, generation revision `wg6`, shared world-plan format `4`, and the existing `shared-v1` dispatch. The world is finite: **128 × 128 storage chunks**, each with an **80 × 43 local map**. The plan is created before local scenes. Exploring a location realizes its slice of that plan, then preserves what actually happened there.
+Fresh worlds at this wiki's revision use **G7**, generation revision `wg7`, shared world-plan format `5`, and the existing `shared-v1` dispatch. The world is finite: **128 × 128 storage chunks**, each with an **80 × 43 local map**. The plan is created before local scenes. Exploring a location realizes its slice of that plan, then preserves what actually happened there.
 
 This distinction is useful when making content: a **layout** describes an authored place, a **placement profile** says how it can fit, a **selection profile** makes it eligible, a **world plan** chooses an asset and its location, and a **scene** contains the actual terrain, actors and objects the player can change.
 
@@ -20,7 +20,7 @@ All paths in this table are relative to the repository root.
 | The starting laboratory | `roguelike/data/layouts/starting_lab.json` | Use the authored-submap route, including a real arrival and real stair terrain. |
 | A different authored underground level | A layout under `roguelike/data/layouts/` | A `SubMap.layout_id` must point to it; adding a JSON file alone does not schedule a level. |
 | Wilderness resource or decor density | Existing biome/terrain/decor data and their consuming generator | Check the active final-geometry dressing pass; a new field does not create a pass. |
-| Legacy WFC ground fill | `roguelike/data/wfc/` and the relevant call in `town_gen.py` | The fresh G6 planned scene path does not use the legacy town WFC fill. |
+| Legacy WFC ground fill | `roguelike/data/wfc/` and the relevant call in `town_gen.py` | The fresh G7 planned scene path does not use the legacy town WFC fill. |
 
 ## The layers you will encounter
 
@@ -33,11 +33,11 @@ All paths in this table are relative to the repository root.
 
 A road's identity and assigned join matter. A visually nearby road is not interchangeable with the one saved for a building. Whole road bands and owned crossings are shared across boundaries; local chunks do not independently invent the endpoints of these planned roads.
 
-## What a normal G6 world contains
+## What a normal G7 world contains
 
 The default settlement count is an inclusive draw from two through four. Forms alternate between a **grid town** spanning two by two chunks and a **roadside settlement** spanning two chunks along a country road. Each requires residential and commercial content. The grid requires the existing spent-bell civic anchor. Support plots are optional, and unsuccessful optional plots can remain recorded vacant gardens.
 
-There is **one required featured landmark**, chosen from its own alternatives. There are also **two through four desired additional rural sites** under the default POI policy. Every additional site has one authored building, one storage chunk and a protected approach to an existing country road. A permissible shortfall from the desired count must still meet the configured minimum and record its reason.
+There is **one required featured landmark**, chosen from its own alternatives. There are also **two through four desired additional rural sites** under the default POI policy. Counts refer to parents: each single site has one building; each compound has two required children and at most one optional child, contained with shared access in one storage chunk. Default v2 selection requires at least one single and one compound. A permissible shortfall from the desired count must still meet the configured minimum and record its reason.
 
 Plot roles describe selection intent. They do not add merchant behavior, trading interfaces, quests or new AI. Native town member roles still use `native-town-v1`: the standard grid has a civic member and residential members; roadside has market and residential members. A commercial building in a residential member does not silently change the member's population policy.
 
@@ -45,8 +45,8 @@ Plot roles describe selection intent. They do not add merchant behavior, trading
 
 | Label | What it identifies |
 |---|---|
-| `wg6` | Current generation origin/revision; historical visited scenes retain their real earlier revision. |
-| Plan format `4` | The current serialized plan shape, including independent rural sites. |
+| `wg7` | Current generation origin/revision; historical visited scenes retain their real earlier revision. |
+| Plan format `5` | Resolved mixed rural parents, compound children and paths. |
 | `shared-v1` | The shared-plan dispatch mode. |
 | `structure-v1` | The consumed structural dependency projection. |
 | `native-town-v1` | Town native-context semantics. |
@@ -56,7 +56,7 @@ Avoid treating any one of these as “the game version.” A current scene may r
 
 ## Boundaries of the current implementation
 
-The current implementation supports individual buildings and their complete approaches **inside one 80 × 43 storage chunk**. It does not yet provide multi-building compounds, structures spanning chunks, capital redevelopment, a continuous scrolling world viewport, infinite geography or long-campaign save/cache compaction. Ordinary rural population remains the existing policy. Creating a new JSON key for any of these does not activate the feature.
+The current implementation supports individual buildings and their complete approaches **inside one 80 × 43 storage chunk**. It does not yet provide structures spanning chunks, capital redevelopment, a continuous scrolling world viewport, infinite geography or long-campaign save/cache compaction. Ordinary rural population remains the existing policy. Creating a new JSON key for any of these does not activate the feature.
 
 The connected library has sixteen explicitly profiled live buildings: twelve settlement assets including the civic bell, and four rural/landmark alternatives. The larger 64-document structure catalog also contains legacy buildings, plazas, entrances and the laboratory. Catalog presence and modern planned eligibility are separate facts.
 

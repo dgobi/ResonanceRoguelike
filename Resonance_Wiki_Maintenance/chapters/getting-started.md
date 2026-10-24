@@ -1,6 +1,6 @@
 # Set up and run the game
 
-This handbook documents **Resonance Roguelike**, the Python, Pygame and tcod game in `dgobi/ResonanceRoguelike`. Its verified source snapshot is `main` at `4d7a7892e1afffb8d872ed4a8fd442984d14e7d5`, the G6 delivery. It is independent of the Godot Project Volumnia project.
+This handbook documents **Resonance Roguelike**, the Python, Pygame and tcod game in `dgobi/ResonanceRoguelike`. Its verified source snapshot is `main` at `4d7a7892e1afffb8d872ed4a8fd442984d14e7d5`, the reviewed G7 delivery. It is independent of the Godot Project Volumnia project.
 
 ## Find the two roots
 
@@ -50,7 +50,7 @@ The current convenience launcher uses the production source and isolates only th
 & $ResonancePython -X utf8 tools/play_disposable.py --session cottage-first-01 --seed 20261023
 ```
 
-Choose a fresh session name each time. Names allow 1–64 letters, digits, underscores or hyphens. The save root is `.baseline/g3-play-cottage-first-01/`; the `g3-play-` prefix is retained even though the current generator is G6. It refuses to reuse an existing session. It has **no `--resume` flag**.
+Choose a fresh session name each time. Names allow 1–64 letters, digits, underscores or hyphens. The save root is `.baseline/g3-play-cottage-first-01/`; the `g3-play-` prefix is retained even though the current generator is G7. It refuses to reuse an existing session. It has **no `--resume` flag**.
 
 For an automated startup check with no desktop interaction:
 

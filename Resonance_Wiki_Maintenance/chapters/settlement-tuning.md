@@ -1,6 +1,6 @@
 # Tune towns, roads and building variety
 
-Current fresh-world tuning uses **two files with separate jobs**: `roguelike/data/generation/g3_config.json` controls geometry, while `roguelike/data/generation/settlement_profiles.json` controls which assets fill which roles. The historical filename `g3_config.json` remains active at G6. The older `town_config.json` is not the current shared-planner control surface.
+Current fresh-world tuning uses **two files with separate jobs**: `roguelike/data/generation/g3_config.json` controls geometry, while `roguelike/data/generation/settlement_profiles.json` controls which assets fill which roles. The historical filename `g3_config.json` remains active at G7. The older `town_config.json` is not the current shared-planner control surface.
 
 Changes here affect **new plans**. They do not reselect a saved pending building, alter a visited town or add new sites to an older world.
 
@@ -52,7 +52,7 @@ The effective draw weight is:
 
 The engine draws the asset before trying its permitted transforms. A four-rotation asset does not get four times the weight of a one-rotation asset. Failed fitting branches consume no accepted cap.
 
-Required assignments are reserved first using bounded backtracking. The default `required_fit_budget` is 256, with valid range 1–4096. **At G6, one budget unit is one transform fit, or an asset trial with no eligible frontage.** The older G5 report's asset/slot wording is historical. G6 can revisit an earlier asset's alternative transform when a later required role fails. Budget exhaustion reports unresolved feasibility; exhausting all enumerated alternatives is a different outcome.
+Required assignments are reserved first using bounded backtracking. The default `required_fit_budget` is 256, with valid range 1–4096. **Since G6, one budget unit is one transform fit, or an asset trial with no eligible frontage.** The older G5 report's asset/slot wording is historical. G6 can revisit an earlier asset's alternative transform when a later required role fails. Budget exhaustion reports unresolved feasibility; exhausting all enumerated alternatives is a different outcome.
 
 Slots are stably ordered by Manhattan distance from the original civic/arrival slot, then coordinate/normal tie breaks. Remaining slots use the ordered schedule. The installed schedule is:
 
