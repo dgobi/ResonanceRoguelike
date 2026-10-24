@@ -1,4 +1,14 @@
-# Current status — G4 composition reliability
+# Current status — G5 settlement variety
+
+G5 adds twelve certified existing layouts, explicit plot roles, hard repetition
+caps, soft local preferences and alternatives for the existing single landmark.
+It fixes required service-door compatibility and preserves exact G3/G4 plans and
+visited scenes through versioned adapters. New worlds/scenes use `wg5`, format 3.
+Read [WORLDGEN_G5](../../../docs/owner/WORLDGEN_G5.md) and the
+[six authoring recipes](../STRUCTURE_AUTHORING.md). This implementation record
+does not assert a new owner-acceptance event. UI-TEXT-HEIGHT remains deferred.
+
+# Historical status — G4 composition reliability
 
 G4 restores staged native town content, functional waystones/prayers/resources,
 public-road approach sharing, complete weighted transforms and durable plan

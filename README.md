@@ -1,8 +1,8 @@
 # Resonance roguelike — production main
 
-G4 restores native gameplay in planned settlements, fixes public frontage and
-weighted transforms, and validates coherent saved-plan ownership. Read
-[G4 delivery](docs/owner/WORLDGEN_G4.md) and the
+G5 adds twelve certified layouts, explicit settlement roles and repetition
+controls, landmark alternatives and multi-door compatibility. Read
+[G5 delivery](docs/owner/WORLDGEN_G5.md) and the
 [structure authoring guide](roguelike/docs/STRUCTURE_AUTHORING.md).
 
 Work stays in this checkout on `main`, with named checkpoints and local commits;
@@ -14,7 +14,7 @@ Run the focused and full production gates with the established environment:
 ```powershell
 $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
 & $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike
-& $ResonancePython -X utf8 tools/worldgen_g4_diagnostic.py --journey
+& $ResonancePython -X utf8 tools/worldgen_g5_diagnostic.py --journey --evidence evidence/worldgen-g5/diagnostic
 & $ResonancePython -X utf8 tools/verify_d.py
 ```
 

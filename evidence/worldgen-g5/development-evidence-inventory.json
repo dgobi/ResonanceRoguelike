@@ -1,0 +1,642 @@
+{
+  "archive": "development-evidence.zip",
+  "bytes": 3261216,
+  "sha256": "29a3d4274f4469866c7dee1c26d1545fd30743710471327510d10edb42b54eda",
+  "members": [
+    {
+      "path": "entrances/after/output.txt",
+      "bytes": 1780,
+      "sha256": "0ca22169c971c385a911dad8e9d85d2a0a3f6016858e3e86867065e4058bc2e0"
+    },
+    {
+      "path": "entrances/after/run.json",
+      "bytes": 77355,
+      "sha256": "2098cf933d2186a93fe8d7d8d16da5ce2aa2d61a6adf9adb3a4190ea2d0a81e5"
+    },
+    {
+      "path": "entrances/after-result.json",
+      "bytes": 1780,
+      "sha256": "0ca22169c971c385a911dad8e9d85d2a0a3f6016858e3e86867065e4058bc2e0"
+    },
+    {
+      "path": "entrances/before.json",
+      "bytes": 1391,
+      "sha256": "ac13ac73db3a6718286b7edffddeb40318338ed9385c440d9f5b43340583394c"
+    },
+    {
+      "path": "entrances/tests-a1/output.txt",
+      "bytes": 2575,
+      "sha256": "baf8ed6579260798e47d6c30e6b4d8d0e2aff2d9067574d0549bebe7b90cf909"
+    },
+    {
+      "path": "entrances/tests-a1/run.json",
+      "bytes": 77176,
+      "sha256": "6828c6229506e5b1f5de91b014bab649b731b8b557eacd0ccf2a5213e1881fba"
+    },
+    {
+      "path": "entrances/tests-a2/output.txt",
+      "bytes": 581,
+      "sha256": "338c9b004f6a9d50deb70bbc3bed1d8c90559189a23e94aadb933caf3eac3c65"
+    },
+    {
+      "path": "entrances/tests-a2/run.json",
+      "bytes": 77138,
+      "sha256": "0d8ba4795ce19a12ecaf5f9a50c7e833ab17f99a1aef3b94811eb21fb06a73d6"
+    },
+    {
+      "path": "cohort/declared.json",
+      "bytes": 14637,
+      "sha256": "80ca7ff5a0028e90298644e28267e6477aea913995b9a7ff440424e1642d6349"
+    },
+    {
+      "path": "cohort/tests-b1/output.txt",
+      "bytes": 1327,
+      "sha256": "1ea5394bc59fb624b415c4ae670ad0bed8fd517e4b24a0d3ee61b2a9a2a36b5c"
+    },
+    {
+      "path": "cohort/tests-b1/run.json",
+      "bytes": 77278,
+      "sha256": "b52c8af6a15cda7d1b26bdc1ef5c75b730f0068e6965575dbe86ad6b81c9ffae"
+    },
+    {
+      "path": "cohort/tests-b2/cohort-certification.json",
+      "bytes": 98026,
+      "sha256": "4b85f32d3ee168fa3306ea41a74db016869832d07a1fe9265eb070f364080712"
+    },
+    {
+      "path": "cohort/tests-b2/output.txt",
+      "bytes": 254,
+      "sha256": "9d19872ec621d0f34966ab3a9420f7b5e52267b0f748e5a7927734ca0938abe9"
+    },
+    {
+      "path": "cohort/tests-b2/run.json",
+      "bytes": 77277,
+      "sha256": "90bc5bbbd966acd98633d9fb457f971a0cda1c6b5f19079fe2e13e89484ae19a"
+    },
+    {
+      "path": "selection/backtracking-c2/output.txt",
+      "bytes": 285,
+      "sha256": "2452d9b5fc6afcac9d2347009bb9be987a9827bd39d88cce95928748f767c726"
+    },
+    {
+      "path": "selection/backtracking-c2/run.json",
+      "bytes": 78011,
+      "sha256": "746a908ad333d2ba418093db788e6b62370b8ce03c68d39936d244e68e0545c1"
+    },
+    {
+      "path": "selection/plan-c1.json",
+      "bytes": 1766963,
+      "sha256": "a136baec2a4ffa2576af6b3e075c05545791b722cf424499ca1f468cc41e939f"
+    },
+    {
+      "path": "selection/plan-c1.svg",
+      "bytes": 225852,
+      "sha256": "f170e83eb5359f80eb7f75c547b697a8fda1dfb237572a0f169d2c5eb95978df"
+    },
+    {
+      "path": "selection/smoke-c1/output.txt",
+      "bytes": 171,
+      "sha256": "c59de033f88b0f0a2bd2c6b6cda94ba6b5485c8bb1123db31e4db0dfde2e1eb3"
+    },
+    {
+      "path": "selection/smoke-c1/run.json",
+      "bytes": 77695,
+      "sha256": "47288ca093f2c92fe52006ba1b1f854a89f460bab8dc1d16f16c6f77ca4fee57"
+    },
+    {
+      "path": "selection/tests-c1/output.txt",
+      "bytes": 2522,
+      "sha256": "ccddc09887a647b963a861d06b289eb3f95c7020da8742496d28f14571f108c2"
+    },
+    {
+      "path": "selection/tests-c1/run.json",
+      "bytes": 78007,
+      "sha256": "4a21e6ca94de2ab3f38ca8ccbdbc6b6155dc0410a620d6a002d4ba015743fc77"
+    },
+    {
+      "path": "development/authoring-d1/output.txt",
+      "bytes": 240,
+      "sha256": "f17d90c284a7ceb653727db569759d6ec2b561ce55dfdf342d66ea5a8d3a751c"
+    },
+    {
+      "path": "development/authoring-d1/recipes/commands.json",
+      "bytes": 94988,
+      "sha256": "47f487341cabb04f581152039aa0288a84dc862c289e499f7aec084174931947"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_landmark-orientations-0.svg",
+      "bytes": 467483,
+      "sha256": "5768d41137afe2eecfcb0d8a4c1b77eac553113fa68bc06ce2b730f05da22126"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_landmark-orientations-1.svg",
+      "bytes": 468624,
+      "sha256": "732260c0904b1c9d670c5af1ebdd3cbf69051cc3719e604d5aa57c759bfae30b"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_landmark-orientations-2.svg",
+      "bytes": 469821,
+      "sha256": "e4f3d993c12a9529f7c31bef17e0d59bd5ae96b949f021e13b2a09e7cb087ceb"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_landmark-orientations-3.svg",
+      "bytes": 467324,
+      "sha256": "2adc06b8fa73f96b99ed66f5379c3f3a1b4d60ae545a03d056f594f35662d767"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_landmark-orientations.json",
+      "bytes": 313088,
+      "sha256": "4763f4069a4c74db6373a43ea7f96dbaa4c91581cb580080292eb61a7ac13998"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-grid-0.svg",
+      "bytes": 523061,
+      "sha256": "86f0378d3fa8ce0345d33103371bf176447e4d6046c58ca59d193ecd9401fe01"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-grid-1.svg",
+      "bytes": 526871,
+      "sha256": "d118fa35dc6ff5f74be7e9092a3e5494746d88f86370ecb54195c0f51aa3e619"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-grid-2.svg",
+      "bytes": 564651,
+      "sha256": "9c128e550f98df636e8d845cb31cbd2198d279730183c1e4e1f8486990863598"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-grid-3.svg",
+      "bytes": 544298,
+      "sha256": "57dc2e6c668f2d452304bf4384018a6379d3af00134e50fbb941b0d2ffa14fe6"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-grid-4.svg",
+      "bytes": 541415,
+      "sha256": "7786beb748e5a2dcf203ab5c4da7adfbffbe7558a30c51acb8f74f351e35ebcb"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-grid.json",
+      "bytes": 2935923,
+      "sha256": "e5f20ea9b0752304fb10e3a0b436bc4ccba13ebdd8d60dbdef1e465d8057a394"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-grid.svg",
+      "bytes": 225852,
+      "sha256": "f170e83eb5359f80eb7f75c547b697a8fda1dfb237572a0f169d2c5eb95978df"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-orientations-0.svg",
+      "bytes": 473481,
+      "sha256": "070a436c32415ffb2619737bcb5aca16cee235acf0c8686479623283ed2dfc05"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-orientations-1.svg",
+      "bytes": 471350,
+      "sha256": "ec669178209e92296c07706e18011721f7dbcc6bac7347936bf9df47d85c9f4c"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-orientations-2.svg",
+      "bytes": 471148,
+      "sha256": "2abba21bc0461b241f0a4ea3f0fc1195d12fa43f38baebd22936ff2cd4eb6162"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-orientations-3.svg",
+      "bytes": 473587,
+      "sha256": "4206fc7b0e38cae8ee1b0b9c93cdedba747c0c2d62f27a0e1b4620c7e44ce769"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-orientations-4.svg",
+      "bytes": 471419,
+      "sha256": "597369207298a15152af0e98dfee8509a8cf406b7f6a3f3386d03d89f349eaab"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-orientations-5.svg",
+      "bytes": 473802,
+      "sha256": "856412b026c2ff226ecd04616d72633b7b926ced5ade9d88782c5a9a901c40db"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-orientations-6.svg",
+      "bytes": 471275,
+      "sha256": "b35510a23217d3e618220fd4ac3192a8a27f96ebd19ea92db57f2859f2abd5fd"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-orientations-7.svg",
+      "bytes": 473606,
+      "sha256": "8a12a782f63908bcd71c507b9c9d856b196f662d597aac66b7eccacf552a0be0"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-orientations.json",
+      "bytes": 665618,
+      "sha256": "69f78f943c3ec5516bf4e8a3f0d43fcc513dd2d73e340e3aa2969ae87293dd75"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-roadside-0.svg",
+      "bytes": 538662,
+      "sha256": "4cf2e2abfcd1c4fc18f9cd16ad080fb50a6584a3403250f98cae37648d04eada"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-roadside-1.svg",
+      "bytes": 526704,
+      "sha256": "d624a49ed7774213fb47cefffcb7e27ba170a69823d7af99f8f19a81e3ad5a34"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-roadside.json",
+      "bytes": 2203917,
+      "sha256": "3109b5634474a40e941d0acdae5e39d11c06d0c68a629a249b8bbb7046cb5dcd"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_service_house-roadside.svg",
+      "bytes": 225852,
+      "sha256": "f170e83eb5359f80eb7f75c547b697a8fda1dfb237572a0f169d2c5eb95978df"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_workshop-grid-0.svg",
+      "bytes": 517270,
+      "sha256": "5acf5a6640c2f8797c3748c0b8ec0a93edfce017a0819d579f3b90703fe1c0c3"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_workshop-grid.json",
+      "bytes": 1944793,
+      "sha256": "f9740af58fac7774b0925c3267a7cdcc3b06c21ddbee57771216e516b4bc150f"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_workshop-grid.svg",
+      "bytes": 225852,
+      "sha256": "f170e83eb5359f80eb7f75c547b697a8fda1dfb237572a0f169d2c5eb95978df"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_workshop-orientations-0.svg",
+      "bytes": 469782,
+      "sha256": "556e72e9a883a609d4f7f7b986119ea705f6b7acb213f47d4f7dd58752bd4f9a"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_workshop-orientations-1.svg",
+      "bytes": 470949,
+      "sha256": "043f9f3ba5c212f48c29fad5b28288f1ea115e815e20b22b477e54f004e14f1e"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_workshop-orientations-2.svg",
+      "bytes": 470064,
+      "sha256": "e79a2da43b4feb1436ec28713dde2584c1e454d861f8162c7f25a6835408d93e"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_workshop-orientations-3.svg",
+      "bytes": 469908,
+      "sha256": "9ab7a06c191aac769410eabf2a155461b30f1a1037aeedfd18f3a6253d80b128"
+    },
+    {
+      "path": "development/authoring-d1/recipes/g5_workshop-orientations.json",
+      "bytes": 322332,
+      "sha256": "7d602b27108750686f752d9e62e129cad520091b417494dd299a3561357a8d86"
+    },
+    {
+      "path": "development/authoring-d1/run.json",
+      "bytes": 78846,
+      "sha256": "5b5449055ec7df437a3d61c6c5278021b1554c905ddcb527e961991d86ff444e"
+    },
+    {
+      "path": "development/authoring-d2/output.txt",
+      "bytes": 41,
+      "sha256": "1025ef7af85accff775428d3e0566dfbcef5290575c279b414469fe6768c8f8d"
+    },
+    {
+      "path": "development/authoring-d2/recipes/catalog.json",
+      "bytes": 116611,
+      "sha256": "1a0505887ce9e2ee455260a8b042c7165fddfb56f1ec7c0b14e96a220673e89b"
+    },
+    {
+      "path": "development/authoring-d2/recipes/commands.json",
+      "bytes": 101141,
+      "sha256": "374d0de562f2c2d3772155bd4302afed87afd2cf35fe5e156a473dda5bf55a38"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_landmark-landmark-0.svg",
+      "bytes": 490535,
+      "sha256": "7759f2752b05d069a9cff01fe7c175544e95fa5f2711e5a9b59ec3601c908828"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_landmark-landmark.json",
+      "bytes": 1694715,
+      "sha256": "786e5e1cc624fd3342dcc8bb2e907738c127c7c69b6723197243c93e599f5771"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_landmark-landmark.svg",
+      "bytes": 219875,
+      "sha256": "dcb80142bd78a3afdaf7dc9ddad8195bac4b6f571e8fa4b28d489fc62e60cdb3"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_landmark-orientations-0.svg",
+      "bytes": 467483,
+      "sha256": "5768d41137afe2eecfcb0d8a4c1b77eac553113fa68bc06ce2b730f05da22126"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_landmark-orientations-1.svg",
+      "bytes": 468624,
+      "sha256": "732260c0904b1c9d670c5af1ebdd3cbf69051cc3719e604d5aa57c759bfae30b"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_landmark-orientations-2.svg",
+      "bytes": 469821,
+      "sha256": "e4f3d993c12a9529f7c31bef17e0d59bd5ae96b949f021e13b2a09e7cb087ceb"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_landmark-orientations-3.svg",
+      "bytes": 467324,
+      "sha256": "2adc06b8fa73f96b99ed66f5379c3f3a1b4d60ae545a03d056f594f35662d767"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_landmark-orientations.json",
+      "bytes": 313088,
+      "sha256": "075dbe6a028fb0b8d5f1cd977387567dfa49c9fe3a38b4191202ea803992fe93"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-grid-0.svg",
+      "bytes": 523061,
+      "sha256": "86f0378d3fa8ce0345d33103371bf176447e4d6046c58ca59d193ecd9401fe01"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-grid-1.svg",
+      "bytes": 526871,
+      "sha256": "d118fa35dc6ff5f74be7e9092a3e5494746d88f86370ecb54195c0f51aa3e619"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-grid-2.svg",
+      "bytes": 564651,
+      "sha256": "9c128e550f98df636e8d845cb31cbd2198d279730183c1e4e1f8486990863598"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-grid-3.svg",
+      "bytes": 544298,
+      "sha256": "57dc2e6c668f2d452304bf4384018a6379d3af00134e50fbb941b0d2ffa14fe6"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-grid-4.svg",
+      "bytes": 541415,
+      "sha256": "7786beb748e5a2dcf203ab5c4da7adfbffbe7558a30c51acb8f74f351e35ebcb"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-grid.json",
+      "bytes": 2935923,
+      "sha256": "c36a750147b04dfde67be1a6f70157e10377d9ac7914793f4995816e1374b2ec"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-grid.svg",
+      "bytes": 225852,
+      "sha256": "f170e83eb5359f80eb7f75c547b697a8fda1dfb237572a0f169d2c5eb95978df"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-orientations-0.svg",
+      "bytes": 473481,
+      "sha256": "070a436c32415ffb2619737bcb5aca16cee235acf0c8686479623283ed2dfc05"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-orientations-1.svg",
+      "bytes": 471350,
+      "sha256": "ec669178209e92296c07706e18011721f7dbcc6bac7347936bf9df47d85c9f4c"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-orientations-2.svg",
+      "bytes": 471148,
+      "sha256": "2abba21bc0461b241f0a4ea3f0fc1195d12fa43f38baebd22936ff2cd4eb6162"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-orientations-3.svg",
+      "bytes": 473587,
+      "sha256": "4206fc7b0e38cae8ee1b0b9c93cdedba747c0c2d62f27a0e1b4620c7e44ce769"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-orientations-4.svg",
+      "bytes": 471419,
+      "sha256": "597369207298a15152af0e98dfee8509a8cf406b7f6a3f3386d03d89f349eaab"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-orientations-5.svg",
+      "bytes": 473802,
+      "sha256": "856412b026c2ff226ecd04616d72633b7b926ced5ade9d88782c5a9a901c40db"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-orientations-6.svg",
+      "bytes": 471275,
+      "sha256": "b35510a23217d3e618220fd4ac3192a8a27f96ebd19ea92db57f2859f2abd5fd"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-orientations-7.svg",
+      "bytes": 473606,
+      "sha256": "8a12a782f63908bcd71c507b9c9d856b196f662d597aac66b7eccacf552a0be0"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-orientations.json",
+      "bytes": 665618,
+      "sha256": "7f7fc95fb163def88244b3d3ae735875db5fa96ec14a9fc366a723a57822ed7a"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-roadside-0.svg",
+      "bytes": 538662,
+      "sha256": "4cf2e2abfcd1c4fc18f9cd16ad080fb50a6584a3403250f98cae37648d04eada"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-roadside-1.svg",
+      "bytes": 526704,
+      "sha256": "d624a49ed7774213fb47cefffcb7e27ba170a69823d7af99f8f19a81e3ad5a34"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-roadside.json",
+      "bytes": 2203917,
+      "sha256": "a628691315055d713f246f9fe45490e28a5d3e92bc9e9803b4f4b8ae2742a5e7"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_service_house-roadside.svg",
+      "bytes": 225852,
+      "sha256": "f170e83eb5359f80eb7f75c547b697a8fda1dfb237572a0f169d2c5eb95978df"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_workshop-grid-0.svg",
+      "bytes": 517270,
+      "sha256": "5acf5a6640c2f8797c3748c0b8ec0a93edfce017a0819d579f3b90703fe1c0c3"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_workshop-grid.json",
+      "bytes": 1944793,
+      "sha256": "e31680c94f7494a2e9be434dcd55deab5e9e7c707112468ba3edb38f39c07e21"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_workshop-grid.svg",
+      "bytes": 225852,
+      "sha256": "f170e83eb5359f80eb7f75c547b697a8fda1dfb237572a0f169d2c5eb95978df"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_workshop-orientations-0.svg",
+      "bytes": 469782,
+      "sha256": "556e72e9a883a609d4f7f7b986119ea705f6b7acb213f47d4f7dd58752bd4f9a"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_workshop-orientations-1.svg",
+      "bytes": 470949,
+      "sha256": "043f9f3ba5c212f48c29fad5b28288f1ea115e815e20b22b477e54f004e14f1e"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_workshop-orientations-2.svg",
+      "bytes": 470064,
+      "sha256": "e79a2da43b4feb1436ec28713dde2584c1e454d861f8162c7f25a6835408d93e"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_workshop-orientations-3.svg",
+      "bytes": 469908,
+      "sha256": "9ab7a06c191aac769410eabf2a155461b30f1a1037aeedfd18f3a6253d80b128"
+    },
+    {
+      "path": "development/authoring-d2/recipes/g5_workshop-orientations.json",
+      "bytes": 322332,
+      "sha256": "93ca58036aecb76d4255fdb86311ced948f52b7e688480e29e1f912d037c7669"
+    },
+    {
+      "path": "development/authoring-d2/recipes/installed-catalog.json",
+      "bytes": 123635,
+      "sha256": "878cf23930c0c47a37db68d87b6ed3d38411be735fc75aa63a32b0be609918b3"
+    },
+    {
+      "path": "development/authoring-d2/recipes/installed-world.json",
+      "bytes": 1773312,
+      "sha256": "bea18a6d587ad9e3c4988f506224dde2dfdc2c0aa61875a2675c0557eb49f45d"
+    },
+    {
+      "path": "development/authoring-d2/recipes/installed-world.svg",
+      "bytes": 225852,
+      "sha256": "f170e83eb5359f80eb7f75c547b697a8fda1dfb237572a0f169d2c5eb95978df"
+    },
+    {
+      "path": "development/authoring-d2/recipes/tuned-world.json",
+      "bytes": 1765564,
+      "sha256": "53770335ed306b82ff13cd7171831fe1b55d4a99259b7ff5274e95d951a61c9f"
+    },
+    {
+      "path": "development/authoring-d2/recipes/tuned-world.svg",
+      "bytes": 225852,
+      "sha256": "f170e83eb5359f80eb7f75c547b697a8fda1dfb237572a0f169d2c5eb95978df"
+    },
+    {
+      "path": "development/authoring-d2/run.json",
+      "bytes": 78818,
+      "sha256": "25574627c8f53fb072ece50db29045f347915655ede00cb306cd69c7d0ff84e8"
+    },
+    {
+      "path": "development/interactions-d1/g5-apothecary-production.png",
+      "bytes": 10640,
+      "sha256": "6deb6de60078adc9960958bf9f5efd4e4b6eab0f943702a0b94eebec94ecffcb"
+    },
+    {
+      "path": "development/interactions-d1/output.txt",
+      "bytes": 1438,
+      "sha256": "a7acb3628f6344fe45f4d7fb533c8cc8d5eac2c0d71e9588f40498dcc820a37d"
+    },
+    {
+      "path": "development/interactions-d1/run.json",
+      "bytes": 78806,
+      "sha256": "f6a120ef9adf36f2c387efca10f2906cdaa0d12b39d7a0e949f251f9940edb5c"
+    },
+    {
+      "path": "development/interactions-d2/g5-apothecary-production.png",
+      "bytes": 10640,
+      "sha256": "6deb6de60078adc9960958bf9f5efd4e4b6eab0f943702a0b94eebec94ecffcb"
+    },
+    {
+      "path": "development/interactions-d2/g5-interactions.json",
+      "bytes": 494,
+      "sha256": "74c50da810c045e6655ef3dcc4207f2844c87bbf21cbb2ca818e28aa18d87395"
+    },
+    {
+      "path": "development/interactions-d2/g5-waymarker-production.png",
+      "bytes": 14388,
+      "sha256": "ad9d1e319965247cbe7b917e719e9ccf1bb229673f10a50412e6e33b81ab2262"
+    },
+    {
+      "path": "development/interactions-d2/output.txt",
+      "bytes": 612,
+      "sha256": "372aff81cbad0c56ac0094db8df3a160b96ac5ad608ab2de0f9c30f7c3d20a33"
+    },
+    {
+      "path": "development/interactions-d2/run.json",
+      "bytes": 78778,
+      "sha256": "6daa07928613bb705b66ca129fc01cad9cdc82d20042b042dfc0358fa5705d15"
+    },
+    {
+      "path": "development/startup-fixture-r2/output.txt",
+      "bytes": 616,
+      "sha256": "47fe1539b05ddee1ce981dd728f5664c039dd9df2ee348c49d9dd2b854550f44"
+    },
+    {
+      "path": "development/startup-fixture-r2/run.json",
+      "bytes": 78945,
+      "sha256": "f119b58c57d459100150810272ac8a66ec337ddaa3aa03358565a26ec253ad50"
+    },
+    {
+      "path": "final/focused/action_routes_stairs.json",
+      "bytes": 45439,
+      "sha256": "c7a761d009901d7c2207a85fb3e2a372050f0f83551e4d52cfeef69295542ff1"
+    },
+    {
+      "path": "final/focused/cohort-certification.json",
+      "bytes": 99514,
+      "sha256": "183acbcd66012143ba4cd12d2ed44157742985a61694192bbb6ec9896ae0cb23"
+    },
+    {
+      "path": "final/focused/focused-tests.txt",
+      "bytes": 30916,
+      "sha256": "cf973631548109712780816813872c060db10f9faabe4dd9db0d1ccdd6bb3320"
+    },
+    {
+      "path": "final/focused/g4-interactions.json",
+      "bytes": 485,
+      "sha256": "4cd30cc3f7cbe4b8306b2be3e3fa5ea8286ced93546a8c8a89e94cdb154eac9a"
+    },
+    {
+      "path": "final/focused/g4-native-members.json",
+      "bytes": 2117,
+      "sha256": "aeea81b457c6f8296aad8d8c5e3ce328cb12c29a8d25c81e235dae4c5005946f"
+    },
+    {
+      "path": "final/focused/g4-native-production.png",
+      "bytes": 17608,
+      "sha256": "d49cf755ca9b69076adb84ee03baad0d783ea6a7db67a581575f9840658a1a57"
+    },
+    {
+      "path": "final/focused/g5-apothecary-production.png",
+      "bytes": 10640,
+      "sha256": "6deb6de60078adc9960958bf9f5efd4e4b6eab0f943702a0b94eebec94ecffcb"
+    },
+    {
+      "path": "final/focused/g5-interactions.json",
+      "bytes": 494,
+      "sha256": "74c50da810c045e6655ef3dcc4207f2844c87bbf21cbb2ca818e28aa18d87395"
+    },
+    {
+      "path": "final/focused/g5-waymarker-production.png",
+      "bytes": 14389,
+      "sha256": "198368ff9aac51abbac349e13495c305ca22391526acf3ce60ee4785a2852f0c"
+    },
+    {
+      "path": "final/focused/held_stairs.json",
+      "bytes": 793,
+      "sha256": "784ceb7b14f0062aea89d68fc20a7d25116dbeaf2faa60442ebb90c8121249ac"
+    },
+    {
+      "path": "final/focused/run.json",
+      "bytes": 78609,
+      "sha256": "83ed8031b28cd838c9a246ea0eb7d61f0405ce715894b5d119efc17daffc9d59"
+    },
+    {
+      "path": "final/focused/wfc-outskirts.json",
+      "bytes": 803,
+      "sha256": "5c54ddcb2f5fce207e0f9bb68e27e61cd2f020fa479a6be4a6658e6b74bcb83b"
+    },
+    {
+      "path": "final/focused-command/output.txt",
+      "bytes": 31188,
+      "sha256": "727be32f66ba7c63fb8804e928b1ac818f624f5104414986ba999c2f31257bf6"
+    },
+    {
+      "path": "final/focused-command/run.json",
+      "bytes": 78956,
+      "sha256": "f74c1282444578a5c65f89bbb41e1a47bcda67ac02e03b0911377dfbe2535ff6"
+    }
+  ]
+}

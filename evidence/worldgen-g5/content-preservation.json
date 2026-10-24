@@ -1,0 +1,121 @@
+{
+  "cohort_semantics": [
+    {
+      "asset": "apothecary_a",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "shop_a",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "workshop_a",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "shrine_a",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "house_hearth_a",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "house_small_b",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "house_two_room_a",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "storehouse_a",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "tool_shed_a",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "hunter_cabin",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "shepherds_hut_a",
+      "unchanged_except_placement": true
+    },
+    {
+      "asset": "waymarker_shelter_a",
+      "unchanged_except_placement": true
+    }
+  ],
+  "frozen_original_files_unchanged": [
+    "tools/critical_fix_regressions/fixtures/g2_original/manifest.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/civic/bell_tower_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/civic/covered_well_house_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/civic/guard_post_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/civic/meeting_hall_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/civic/record_hall_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/civic/waystone_plinth_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/civic/well_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/commercial/apothecary_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/commercial/market_stall_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/commercial/market_stall_b.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/commercial/market_stall_c.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/commercial/shop_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/commercial/trader_shop_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/commercial/workshop_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/plaza/plaza_market_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/plaza/plaza_ossuary_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/religious/bell_warden_post_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/religious/collapsed_shrine_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/religious/folk_saint_alcove_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/religious/folk_saint_niche_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/religious/ossuary_chapel_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/religious/shrine_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/religious/shrine_hall_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/religious/waystone_shrine_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_abandoned_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_crowded_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_damaged_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_hearth_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_large_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_old_stone_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_single_room_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_small_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_small_b.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/house_two_room_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/hovel.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/residential/tenement_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/ruins/burnt_dwelling_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/ruins/collapsed_house_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/ruins/collapsed_shop_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/ruins/deep_foundation_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/ruins/foundation_outline_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/ruins/ossuary_ruin_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/ruins/ruin_wall_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/ruins/three_wall_remnant_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/storage/cellar_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/storage/food_store_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/storage/goods_cellar_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/storage/root_cellar_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/storage/storehouse_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/storage/tool_shed_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/storage/warehouse_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/wilderness/fishing_dock.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/wilderness/hunter_cabin.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/wilderness/roadside_shrine_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/wilderness/shepherds_fold_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/wilderness/shepherds_hut_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/buildings/wilderness/waymarker_shelter_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/entrances/barrow_mound_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/entrances/barrow_mound_b.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/entrances/drowned_threshold_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/entrances/overgrown_gatehouse_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/entrances/rock_face_cut_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/entrances/sunken_ruin_a.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/data/layouts/starting_lab.json",
+    "tools/critical_fix_regressions/fixtures/g2_original/roguelike/docs/examples/author_cottage_a.json"
+  ],
+  "historical_g4_canonical_identity": "ecb16ea71aa249b2971a8059d78c175723dd11e84b8d982121420cfea1ef74bc"
+}

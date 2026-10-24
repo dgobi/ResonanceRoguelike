@@ -1,1 +1,0 @@
-{"passed": false, "error": "{\n  \"passed\": false,\n  \"error\": \"eligible candidate was not selected/fitted; inspect world-plan rejected candidates or choose another explicit seed\",\n  \"diagnostics\": []\n}\n", "source_stable": true}

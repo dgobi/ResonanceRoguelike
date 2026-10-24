@@ -1,0 +1,282 @@
+{
+  "archive_sha256": "57116734ac83981f95fcb0e2569d2f1e7145d1c8158915170189143132270228",
+  "verified_members": 50,
+  "manifest": {
+    "format": 1,
+    "hash": "sha256",
+    "scope": "All other package members; manifest excludes itself.",
+    "files": [
+      {
+        "path": "BASELINE.json",
+        "bytes": 2225,
+        "sha256": "23b6b52b19fb1efe96dbed2cb2838cf8f2e51c6a6e05542e4736bb19ea736c1f"
+      },
+      {
+        "path": "CODEX_G5_SETTLEMENT_VARIETY.md",
+        "bytes": 45987,
+        "sha256": "4da7a5799964d4035d563764fb24d7b77a01c2496056add54bbca45af9144e8e"
+      },
+      {
+        "path": "G4_REVIEW.md",
+        "bytes": 30395,
+        "sha256": "f433e1be84ee568a0820d07988034284fb83594482c409750caa579ee6a49c3c"
+      },
+      {
+        "path": "README.md",
+        "bytes": 2023,
+        "sha256": "eaa8ea9596649ded134a0db7ab26595164cc9938b6f78231e76256b021bbdcbc"
+      },
+      {
+        "path": "evidence/README.md",
+        "bytes": 6032,
+        "sha256": "a2caa606aea182c65d38e238a14bf087a2b6c08391507626a26ca6b95152623e"
+      },
+      {
+        "path": "evidence/agents/composition/G4_COMPOSITION_REVIEW.md",
+        "bytes": 13785,
+        "sha256": "ed4526951d288fb789a5003f1566888b44fde536163edfccb391a662dd1828a9"
+      },
+      {
+        "path": "evidence/agents/composition/G5_COHORT_STATIC_FEASIBILITY.md",
+        "bytes": 7998,
+        "sha256": "9a71e50c34b4cf5d2912c93c06718f0268b58fffc603a548cc995b7b62c90198"
+      },
+      {
+        "path": "evidence/agents/composition/G5_COHORT_STATIC_INVENTORY.json",
+        "bytes": 32367,
+        "sha256": "dc7d53a6245756f4ddf28a299adad880c445549aeff6a58d37c3acd632e97834"
+      },
+      {
+        "path": "evidence/agents/composition/probe_required_entrances.py",
+        "bytes": 5343,
+        "sha256": "7d984935714ca7efe2da198848291212fff7e32516b5f5ab3198fdc2ce63fc0b"
+      },
+      {
+        "path": "evidence/agents/composition/required_entrances_g3.json",
+        "bytes": 2048,
+        "sha256": "82b630917c9840006be5953e8a75b80af8185eb1db0409991c7dde3311dde577"
+      },
+      {
+        "path": "evidence/agents/composition/required_entrances_g4.json",
+        "bytes": 2018,
+        "sha256": "28dcd13eca2d820d22bd6a7732295af4284ec6c15779d4dd308ab793c795c6f8"
+      },
+      {
+        "path": "evidence/agents/composition/two_entrance_fixture_binding.json",
+        "bytes": 2483,
+        "sha256": "3a5d38b91150b718e3c9cfb59aa6ccf94dca4c265377304778a342b29ad2bb87"
+      },
+      {
+        "path": "evidence/agents/composition/two_entrance_g3_plan.json",
+        "bytes": 665234,
+        "sha256": "e4801d01e56db474f8420255b980db1766192b2d1bc3894c0f47ce9e05bc871a"
+      },
+      {
+        "path": "evidence/agents/composition/two_entrance_house.json",
+        "bytes": 2240,
+        "sha256": "372e843537c7b73ff68967a13ab2968fb4ea33c20ae2aabc0129fb54c3b3044d"
+      },
+      {
+        "path": "evidence/agents/evidence/G4_EVIDENCE_REVIEW.md",
+        "bytes": 15597,
+        "sha256": "18d7646bea2a7f25a037fd13abc9d1606eb819d96afdacaa8ee11e5fe77551b5"
+      },
+      {
+        "path": "evidence/agents/evidence/audit_evidence.py",
+        "bytes": 28940,
+        "sha256": "8863334c8bdc431362402c86f26297293d168cb2172a3c8ca023e164b3d5da6e"
+      },
+      {
+        "path": "evidence/agents/evidence/audit_results.json",
+        "bytes": 225616,
+        "sha256": "3e820bfb0cc45bba3c24fec74f3b6b8dc2dec483b4ea8e51433775f7cfc346f8"
+      },
+      {
+        "path": "evidence/agents/evidence/audit_summary.json",
+        "bytes": 13731,
+        "sha256": "49305ab1a2a11c9c5a7b30fb7808febe56b87e2959510b46a3e02bd73f60e8d9"
+      },
+      {
+        "path": "evidence/agents/persistence/G4_PERSISTENCE_REVIEW.md",
+        "bytes": 16344,
+        "sha256": "4cc10983da6d7121f4da8fbc937848bdf5f7275f5e8425c5ba2bcb4b4dcd3d7b"
+      },
+      {
+        "path": "evidence/agents/persistence/review_summary.json",
+        "bytes": 2059,
+        "sha256": "a87f827acb4149726be2438d2b8eebcb5a745d6b934715d0bb2ef17dbd6a30c3"
+      },
+      {
+        "path": "evidence/asset_inventory.json",
+        "bytes": 37071,
+        "sha256": "10246476c0c45c1c5b052ae70486f792837c817e041f36bc44eb91c59e46d85b"
+      },
+      {
+        "path": "evidence/g3_comparison.json",
+        "bytes": 1367,
+        "sha256": "4ce0c5017d7fdcdd14935a39b520a0a3e9b94389d385a738a99414fa87cd59db"
+      },
+      {
+        "path": "evidence/pinned_source_hashes.json",
+        "bytes": 120918,
+        "sha256": "3314e05c81c6b7ffb39e530956fbfa1d2cd432e1e1ad1fb42e67838e4e999b54"
+      },
+      {
+        "path": "evidence/review_summary.json",
+        "bytes": 14163,
+        "sha256": "0c7a8931375da1ec5d247bec820d30b4a9976c419fe0b52bc565ca773d515f89"
+      },
+      {
+        "path": "evidence/source_verification.json",
+        "bytes": 699,
+        "sha256": "6cf07bdf9fd37733c51677c2a9592dfe0e39592c92f71463fd89ae19653ca416"
+      },
+      {
+        "path": "evidence/verification/diagnostic/grid-before-plan.svg",
+        "bytes": 12907,
+        "sha256": "314266014bdf39939de0a16a00caf6d3901666637f7d917b0489b0597141d9d7"
+      },
+      {
+        "path": "evidence/verification/diagnostic/grid-plan.svg",
+        "bytes": 11165,
+        "sha256": "ba4e3169ef2d557f60e77109773bc636dc45e437d19a54a661abfa20d67777c4"
+      },
+      {
+        "path": "evidence/verification/diagnostic/grid-scene.svg",
+        "bytes": 535793,
+        "sha256": "65f101d2ade385183ec1beca2af85763466287d0eb2c596319e0c573fa9b8e8f"
+      },
+      {
+        "path": "evidence/verification/diagnostic/journey-progress.json",
+        "bytes": 76331,
+        "sha256": "899a6ba7e4af6678f63c2cb113cdedae335212db2bdaaa0a6fd238026ae4b032"
+      },
+      {
+        "path": "evidence/verification/diagnostic/plan-0.json",
+        "bytes": 1140107,
+        "sha256": "58fc6386af4bfe317966699a73870438a042e0943ce67f4623b27d715fb936bc"
+      },
+      {
+        "path": "evidence/verification/diagnostic/plan-0.svg",
+        "bytes": 198019,
+        "sha256": "17d8f7833cb87c8dc85079e66648fba3c99db39d2177efb6089166ddf949cf6c"
+      },
+      {
+        "path": "evidence/verification/diagnostic/plan-20261023.json",
+        "bytes": 1442003,
+        "sha256": "ae038fca4c73cf191562af9010bfd8d24ff95d789d75b06515aba3c8e7062266"
+      },
+      {
+        "path": "evidence/verification/diagnostic/plan-20261023.svg",
+        "bytes": 223276,
+        "sha256": "42253f923fbbc1f12fa2f72a937552545c0579d8cd2113f4891b0e5b7ce12b62"
+      },
+      {
+        "path": "evidence/verification/diagnostic/plan-29417.json",
+        "bytes": 1290135,
+        "sha256": "06707d75bab24af6f4c6eb97381c7262103559039b620aed50f6cf648a9cd7d7"
+      },
+      {
+        "path": "evidence/verification/diagnostic/plan-29417.svg",
+        "bytes": 217153,
+        "sha256": "176f69749e7d1e4c7debe502f04ff86e78ba74dab80dbc66a09944659123fe8c"
+      },
+      {
+        "path": "evidence/verification/diagnostic/review_run.json",
+        "bytes": 619,
+        "sha256": "0af6d130d3e0d742dfd01bf501f68fbfdf706675680a27574f6faf6afe1b7268"
+      },
+      {
+        "path": "evidence/verification/diagnostic/roadside-before-plan.svg",
+        "bytes": 6951,
+        "sha256": "a1dcaf1ec21e12b33f3ebe54d6751e8f1b601d35212618adfd22d8ae8bc3ad41"
+      },
+      {
+        "path": "evidence/verification/diagnostic/roadside-plan.svg",
+        "bytes": 7681,
+        "sha256": "6573acebdf6129e319fb91ec98c5972abaa1256a9dce9b8f45af802c82dc5fbf"
+      },
+      {
+        "path": "evidence/verification/diagnostic/roadside-scene.svg",
+        "bytes": 539147,
+        "sha256": "3ebe197c7fe1dcd2ae2407211784dfeac1dce0947d92930e370475a14eb3527c"
+      },
+      {
+        "path": "evidence/verification/diagnostic/run.json",
+        "bytes": 1277269,
+        "sha256": "2c074ba3c2e7d392891ca4838cfb80dda1ec96b29faf68f22d7b44e733e01073"
+      },
+      {
+        "path": "evidence/verification/diagnostic/runtime-log.txt",
+        "bytes": 2441,
+        "sha256": "bdfa243372bf0a0aff65f9a064d72a5c6d02e4d085470e7b81b6bd221584a12b"
+      },
+      {
+        "path": "evidence/verification/focused/action_routes_stairs.json",
+        "bytes": 46395,
+        "sha256": "5edc48b153acd1f976a0919991e5f2fb94b8fd3d8625961918ba229bf9c77d36"
+      },
+      {
+        "path": "evidence/verification/focused/focused-tests.txt",
+        "bytes": 28301,
+        "sha256": "4073a4bf4fd4eb2e1767447e9588e3121c23f08c3cb0b9964eb1f4ec7738f9db"
+      },
+      {
+        "path": "evidence/verification/focused/g4-interactions.json",
+        "bytes": 456,
+        "sha256": "79f2414aa774412154758eed37e8960d5735dc28e7cc1f132eee5837531405bd"
+      },
+      {
+        "path": "evidence/verification/focused/g4-native-members.json",
+        "bytes": 1983,
+        "sha256": "1fcb51dd0c68b36805b498b8bd10aa789e8a6972b5acf97cae712f8aa143b02a"
+      },
+      {
+        "path": "evidence/verification/focused/g4-native-production.png",
+        "bytes": 17125,
+        "sha256": "85f36f6dfeef592713200c2f2ef1125a9fd51246ce4c0f9808af2d49c524bc6f"
+      },
+      {
+        "path": "evidence/verification/focused/held_stairs.json",
+        "bytes": 759,
+        "sha256": "9f02d145c55f4a6e7b856b963e115b7518cae4572e013bb967da78847ef2ae4c"
+      },
+      {
+        "path": "evidence/verification/focused/review_run.json",
+        "bytes": 688,
+        "sha256": "688c6d1783a0ce7121f813e982b4f2112c5e73a3832a79d43ceba7e6c3ce7813"
+      },
+      {
+        "path": "evidence/verification/focused/run.json",
+        "bytes": 75560,
+        "sha256": "5d0c21e10a1bf59e6f3649b19b45c88912fdfedf39a2aaf4aa134edf6c0338dc"
+      },
+      {
+        "path": "evidence/verification/focused/wfc-outskirts.json",
+        "bytes": 752,
+        "sha256": "5ab774b9097a691645c823aa18e1ac59d32cc9df7139ee680884d280c21439c2"
+      }
+    ]
+  },
+  "start_commit": "a68ffc5e9b07f4a9c2abbe43764ae6271cbb6a61",
+  "start_worktree": "clean",
+  "branch": "main",
+  "before_probe": {
+    "command": [
+      "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe",
+      "-X",
+      "utf8",
+      ".baseline/g5-brief-20261023/evidence/agents/composition/probe_required_entrances.py",
+      "--source",
+      ".",
+      "--output",
+      "evidence/worldgen-g5/entrances/before.json",
+      "--legacy-plan",
+      ".baseline/g5-brief-20261023/evidence/agents/composition/two_entrance_g3_plan.json"
+    ],
+    "cwd": "G:/GameDev/RoguelikeProject",
+    "exit_code": 0,
+    "source_commit": "a68ffc5e9b07f4a9c2abbe43764ae6271cbb6a61",
+    "output_sha256": "ac13ac73db3a6718286b7edffddeb40318338ed9385c440d9f5b43340583394c"
+  }
+}

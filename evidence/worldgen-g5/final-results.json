@@ -1,0 +1,1343 @@
+{
+  "passed": true,
+  "tested_commit": "44844691fbc034a109e82ed88c10f09760c3af62",
+  "source_inputs": 611,
+  "final_commands": [
+    {
+      "path": "authoring-command/run.json",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/verify_g5_authoring.py",
+        "--evidence",
+        "evidence/worldgen-g5/final-r2/authoring"
+      ],
+      "seconds": 18.811729799956083,
+      "exit_code": 0,
+      "base_commit": "44844691fbc034a109e82ed88c10f09760c3af62"
+    },
+    {
+      "path": "browser-command/run.json",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/verify_structure_editor.py",
+        "--evidence",
+        "evidence/worldgen-g5/final-r2/browser"
+      ],
+      "seconds": 21.79907579999417,
+      "exit_code": 0,
+      "base_commit": "44844691fbc034a109e82ed88c10f09760c3af62"
+    },
+    {
+      "path": "diagnostic-command/run.json",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/worldgen_g5_diagnostic.py",
+        "--journey",
+        "--evidence",
+        "evidence/worldgen-g5/final-r2/diagnostic"
+      ],
+      "seconds": 120.61214890005067,
+      "exit_code": 0,
+      "base_commit": "44844691fbc034a109e82ed88c10f09760c3af62"
+    },
+    {
+      "path": "explicit-role-command/run.json",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "roguelike/docs/examples/g5_workshop.json",
+        "--planned",
+        "--category",
+        "commercial",
+        "--role",
+        "commercial",
+        "--context",
+        "grid",
+        "--seed",
+        "20261023",
+        "--output",
+        "evidence/worldgen-g5/final-r2/explicit-role.json"
+      ],
+      "seconds": 2.2593881000066176,
+      "exit_code": 0,
+      "base_commit": "44844691fbc034a109e82ed88c10f09760c3af62"
+    },
+    {
+      "path": "focused-command/run.json",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/critical_fix_regressions/verify_fixes.py",
+        "--game",
+        "roguelike",
+        "--evidence",
+        "evidence/worldgen-g5/final-r2/focused"
+      ],
+      "seconds": 273.2119400000083,
+      "exit_code": 0,
+      "base_commit": "44844691fbc034a109e82ed88c10f09760c3af62"
+    },
+    {
+      "path": "production-command/run.json",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/verify_d.py"
+      ],
+      "seconds": 568.3432613000041,
+      "exit_code": 0,
+      "base_commit": "44844691fbc034a109e82ed88c10f09760c3af62"
+    }
+  ],
+  "focused": {
+    "tests": 175,
+    "seconds": 270.635,
+    "passed": true
+  },
+  "browser": [
+    {
+      "browser": "chromium",
+      "version": "156.0.8078.4",
+      "checks": 30,
+      "codec_documents": 129,
+      "passed": true
+    },
+    {
+      "browser": "firefox",
+      "version": "157.0",
+      "checks": 30,
+      "codec_documents": 129,
+      "passed": true
+    }
+  ],
+  "authoring": {
+    "commands": 22,
+    "recorded_actions": 4,
+    "passed": true
+  },
+  "catalog": {
+    "assets": 64,
+    "errors": 0,
+    "warnings_by_code": {
+      "INACTIVE_FIELD": 229,
+      "TERRAIN_UNUSED": 2,
+      "DEFERRED_SPECIAL": 4,
+      "INACTIVE_POOL_FIELD": 3
+    },
+    "passed": true
+  },
+  "cohort": {
+    "assets": 12,
+    "permitted_transforms": 34,
+    "assigned_contexts": 21
+  },
+  "diagnostic": {
+    "declared_seeds": [
+      0,
+      20261023,
+      29417
+    ],
+    "failures": [],
+    "runs": [
+      {
+        "seed": 0,
+        "plan_identity": "d512e4f8c3a70998d1d152fece00e6f14d8897780d603650f775a5e7981e9b16",
+        "occupied": 72,
+        "vacant": 9,
+        "planning_seconds": 0.8663798000197858,
+        "plan_bytes": 589110,
+        "scenes_at_plan_completion": 0,
+        "town_actors": 42,
+        "timed_scene_scope": "starting surface, every town member, landmark, capital gateway; required crossing checked separately",
+        "timed_scene_seconds_min": 0.03768660000059754,
+        "timed_scene_seconds_max": 0.2989244000054896,
+        "required_crossing": {
+          "chunk": [
+            18,
+            60
+          ],
+          "all_road_cells_reachable": true
+        },
+        "assets": {
+          "apothecary_a": 5,
+          "bell_tower_a": 2,
+          "house_hearth_a": 6,
+          "house_small_a": 10,
+          "house_small_b": 7,
+          "house_two_room_a": 10,
+          "market_stall_a": 8,
+          "shepherds_hut_a": 1,
+          "shop_a": 2,
+          "shrine_a": 5,
+          "storehouse_a": 7,
+          "tool_shed_a": 5,
+          "workshop_a": 4
+        },
+        "composition": [
+          {
+            "settlement": "settlement-0",
+            "form": "grid",
+            "profile": "grid-mixed-v1",
+            "slots": 32,
+            "accepted": 29,
+            "vacancies": 3,
+            "distinct_assets": 11,
+            "most_used_share": 0.1724137931034483,
+            "assets": {
+              "bell_tower_a": 1,
+              "workshop_a": 2,
+              "house_small_a": 5,
+              "house_two_room_a": 5,
+              "market_stall_a": 3,
+              "storehouse_a": 3,
+              "apothecary_a": 3,
+              "tool_shed_a": 3,
+              "house_small_b": 2,
+              "shrine_a": 1,
+              "house_hearth_a": 1
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 16,
+                "accepted": 13,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 8,
+                "accepted": 8,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 7,
+                "accepted": 7,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              },
+              "civic": {
+                "eligible_slots": 1,
+                "accepted": 1,
+                "minimum": 1,
+                "eligible_assets": [
+                  "bell_tower_a"
+                ]
+              }
+            },
+            "cap_exclusions": 6,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          },
+          {
+            "settlement": "settlement-1",
+            "form": "roadside",
+            "profile": "roadside-mixed-v1",
+            "slots": 16,
+            "accepted": 12,
+            "vacancies": 4,
+            "distinct_assets": 8,
+            "most_used_share": 0.16666666666666666,
+            "assets": {
+              "market_stall_a": 1,
+              "house_two_room_a": 2,
+              "shrine_a": 1,
+              "house_small_a": 2,
+              "shop_a": 1,
+              "storehouse_a": 2,
+              "apothecary_a": 1,
+              "house_small_b": 2
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 8,
+                "accepted": 6,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 4,
+                "accepted": 3,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 4,
+                "accepted": 3,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              }
+            },
+            "cap_exclusions": 0,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          },
+          {
+            "settlement": "settlement-2",
+            "form": "grid",
+            "profile": "grid-mixed-v1",
+            "slots": 32,
+            "accepted": 30,
+            "vacancies": 2,
+            "distinct_assets": 12,
+            "most_used_share": 0.16666666666666666,
+            "assets": {
+              "bell_tower_a": 1,
+              "market_stall_a": 4,
+              "house_hearth_a": 5,
+              "house_small_b": 3,
+              "shrine_a": 3,
+              "house_small_a": 3,
+              "shop_a": 1,
+              "storehouse_a": 2,
+              "tool_shed_a": 2,
+              "workshop_a": 2,
+              "house_two_room_a": 3,
+              "apothecary_a": 1
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 16,
+                "accepted": 14,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 8,
+                "accepted": 8,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 7,
+                "accepted": 7,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              },
+              "civic": {
+                "eligible_slots": 1,
+                "accepted": 1,
+                "minimum": 1,
+                "eligible_assets": [
+                  "bell_tower_a"
+                ]
+              }
+            },
+            "cap_exclusions": 8,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          }
+        ]
+      },
+      {
+        "seed": 20261023,
+        "plan_identity": "bced8dccae3b45c5a99cc71dfdad1ba3c0925977d50f6dc1a51b12bb74020c7a",
+        "occupied": 85,
+        "vacant": 12,
+        "planning_seconds": 1.0766848000348546,
+        "plan_bytes": 726297,
+        "scenes_at_plan_completion": 0,
+        "town_actors": 46,
+        "timed_scene_scope": "starting surface, every town member, landmark, capital gateway; required crossing checked separately",
+        "timed_scene_seconds_min": 0.03443729999708012,
+        "timed_scene_seconds_max": 0.28367050003726035,
+        "required_crossing": {
+          "chunk": [
+            50,
+            101
+          ],
+          "all_road_cells_reachable": true
+        },
+        "assets": {
+          "apothecary_a": 7,
+          "bell_tower_a": 2,
+          "house_hearth_a": 13,
+          "house_small_a": 8,
+          "house_small_b": 9,
+          "house_two_room_a": 10,
+          "market_stall_a": 9,
+          "shop_a": 4,
+          "shrine_a": 9,
+          "storehouse_a": 6,
+          "tool_shed_a": 5,
+          "waymarker_shelter_a": 1,
+          "workshop_a": 2
+        },
+        "composition": [
+          {
+            "settlement": "settlement-0",
+            "form": "grid",
+            "profile": "grid-mixed-v1",
+            "slots": 32,
+            "accepted": 30,
+            "vacancies": 2,
+            "distinct_assets": 11,
+            "most_used_share": 0.16666666666666666,
+            "assets": {
+              "bell_tower_a": 1,
+              "apothecary_a": 2,
+              "house_two_room_a": 5,
+              "house_small_a": 1,
+              "market_stall_a": 4,
+              "tool_shed_a": 2,
+              "shop_a": 2,
+              "house_small_b": 3,
+              "shrine_a": 3,
+              "house_hearth_a": 5,
+              "storehouse_a": 2
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 16,
+                "accepted": 14,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 8,
+                "accepted": 8,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 7,
+                "accepted": 7,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              },
+              "civic": {
+                "eligible_slots": 1,
+                "accepted": 1,
+                "minimum": 1,
+                "eligible_assets": [
+                  "bell_tower_a"
+                ]
+              }
+            },
+            "cap_exclusions": 6,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          },
+          {
+            "settlement": "settlement-1",
+            "form": "roadside",
+            "profile": "roadside-mixed-v1",
+            "slots": 16,
+            "accepted": 12,
+            "vacancies": 4,
+            "distinct_assets": 8,
+            "most_used_share": 0.25,
+            "assets": {
+              "shop_a": 1,
+              "house_hearth_a": 1,
+              "shrine_a": 2,
+              "house_small_b": 3,
+              "apothecary_a": 2,
+              "house_two_room_a": 1,
+              "storehouse_a": 1,
+              "house_small_a": 1
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 8,
+                "accepted": 6,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 4,
+                "accepted": 3,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 4,
+                "accepted": 3,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              }
+            },
+            "cap_exclusions": 0,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          },
+          {
+            "settlement": "settlement-2",
+            "form": "grid",
+            "profile": "grid-mixed-v1",
+            "slots": 32,
+            "accepted": 30,
+            "vacancies": 2,
+            "distinct_assets": 11,
+            "most_used_share": 0.16666666666666666,
+            "assets": {
+              "bell_tower_a": 1,
+              "market_stall_a": 5,
+              "house_small_a": 4,
+              "shop_a": 1,
+              "shrine_a": 3,
+              "house_hearth_a": 5,
+              "workshop_a": 2,
+              "house_small_b": 2,
+              "tool_shed_a": 3,
+              "storehouse_a": 1,
+              "house_two_room_a": 3
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 16,
+                "accepted": 14,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 8,
+                "accepted": 8,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 7,
+                "accepted": 7,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              },
+              "civic": {
+                "eligible_slots": 1,
+                "accepted": 1,
+                "minimum": 1,
+                "eligible_assets": [
+                  "bell_tower_a"
+                ]
+              }
+            },
+            "cap_exclusions": 6,
+            "soft_repetition": [
+              {
+                "plot": "settlement-2-plot-51",
+                "reason": "soft weighted repeat; penalty is a preference, hard limits retained"
+              }
+            ],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          },
+          {
+            "settlement": "settlement-3",
+            "form": "roadside",
+            "profile": "roadside-mixed-v1",
+            "slots": 16,
+            "accepted": 12,
+            "vacancies": 4,
+            "distinct_assets": 7,
+            "most_used_share": 0.25,
+            "assets": {
+              "apothecary_a": 3,
+              "house_small_a": 2,
+              "shrine_a": 1,
+              "house_two_room_a": 1,
+              "storehouse_a": 2,
+              "house_small_b": 1,
+              "house_hearth_a": 2
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 8,
+                "accepted": 6,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 4,
+                "accepted": 3,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 4,
+                "accepted": 3,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              }
+            },
+            "cap_exclusions": 0,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          }
+        ]
+      },
+      {
+        "seed": 29417,
+        "plan_identity": "27533992651e7beb88b10d23d7ab6f3884a05612b990619d51cd4ea2be25cdd8",
+        "occupied": 80,
+        "vacant": 17,
+        "planning_seconds": 0.9786922000348568,
+        "plan_bytes": 666557,
+        "scenes_at_plan_completion": 0,
+        "town_actors": 57,
+        "timed_scene_scope": "starting surface, every town member, landmark, capital gateway; required crossing checked separately",
+        "timed_scene_seconds_min": 0.047402800002601,
+        "timed_scene_seconds_max": 0.2728381999768317,
+        "required_crossing": {
+          "chunk": [
+            108,
+            46
+          ],
+          "all_road_cells_reachable": true
+        },
+        "assets": {
+          "apothecary_a": 4,
+          "bell_tower_a": 2,
+          "house_hearth_a": 8,
+          "house_small_a": 6,
+          "house_small_b": 15,
+          "house_two_room_a": 8,
+          "hunter_cabin": 1,
+          "market_stall_a": 9,
+          "shop_a": 4,
+          "shrine_a": 5,
+          "storehouse_a": 6,
+          "tool_shed_a": 8,
+          "workshop_a": 4
+        },
+        "composition": [
+          {
+            "settlement": "settlement-0",
+            "form": "grid",
+            "profile": "grid-mixed-v1",
+            "slots": 32,
+            "accepted": 29,
+            "vacancies": 3,
+            "distinct_assets": 12,
+            "most_used_share": 0.1724137931034483,
+            "assets": {
+              "bell_tower_a": 1,
+              "shop_a": 1,
+              "house_two_room_a": 5,
+              "house_small_b": 4,
+              "market_stall_a": 5,
+              "storehouse_a": 2,
+              "workshop_a": 1,
+              "house_hearth_a": 3,
+              "tool_shed_a": 2,
+              "apothecary_a": 1,
+              "shrine_a": 3,
+              "house_small_a": 1
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 16,
+                "accepted": 13,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 8,
+                "accepted": 8,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 7,
+                "accepted": 7,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              },
+              "civic": {
+                "eligible_slots": 1,
+                "accepted": 1,
+                "minimum": 1,
+                "eligible_assets": [
+                  "bell_tower_a"
+                ]
+              }
+            },
+            "cap_exclusions": 1,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          },
+          {
+            "settlement": "settlement-1",
+            "form": "roadside",
+            "profile": "roadside-mixed-v1",
+            "slots": 16,
+            "accepted": 8,
+            "vacancies": 8,
+            "distinct_assets": 7,
+            "most_used_share": 0.25,
+            "assets": {
+              "market_stall_a": 1,
+              "house_hearth_a": 2,
+              "shrine_a": 1,
+              "house_small_b": 1,
+              "workshop_a": 1,
+              "tool_shed_a": 1,
+              "house_two_room_a": 1
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 8,
+                "accepted": 4,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 4,
+                "accepted": 2,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 4,
+                "accepted": 2,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              }
+            },
+            "cap_exclusions": 0,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          },
+          {
+            "settlement": "settlement-2",
+            "form": "grid",
+            "profile": "grid-mixed-v1",
+            "slots": 32,
+            "accepted": 30,
+            "vacancies": 2,
+            "distinct_assets": 12,
+            "most_used_share": 0.16666666666666666,
+            "assets": {
+              "bell_tower_a": 1,
+              "apothecary_a": 2,
+              "house_two_room_a": 2,
+              "house_small_a": 5,
+              "shop_a": 1,
+              "tool_shed_a": 3,
+              "market_stall_a": 3,
+              "house_small_b": 5,
+              "storehouse_a": 3,
+              "workshop_a": 2,
+              "house_hearth_a": 2,
+              "shrine_a": 1
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 16,
+                "accepted": 14,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 8,
+                "accepted": 8,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 7,
+                "accepted": 7,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              },
+              "civic": {
+                "eligible_slots": 1,
+                "accepted": 1,
+                "minimum": 1,
+                "eligible_assets": [
+                  "bell_tower_a"
+                ]
+              }
+            },
+            "cap_exclusions": 7,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          },
+          {
+            "settlement": "settlement-3",
+            "form": "roadside",
+            "profile": "roadside-mixed-v1",
+            "slots": 16,
+            "accepted": 12,
+            "vacancies": 4,
+            "distinct_assets": 6,
+            "most_used_share": 0.4166666666666667,
+            "assets": {
+              "apothecary_a": 1,
+              "house_small_b": 5,
+              "tool_shed_a": 2,
+              "shop_a": 2,
+              "house_hearth_a": 1,
+              "storehouse_a": 1
+            },
+            "roles": {
+              "residential": {
+                "eligible_slots": 8,
+                "accepted": 6,
+                "minimum": 1,
+                "eligible_assets": [
+                  "house_small_a",
+                  "house_small_b",
+                  "house_two_room_a",
+                  "house_hearth_a"
+                ]
+              },
+              "commercial": {
+                "eligible_slots": 4,
+                "accepted": 3,
+                "minimum": 1,
+                "eligible_assets": [
+                  "market_stall_a",
+                  "shop_a",
+                  "apothecary_a",
+                  "workshop_a"
+                ]
+              },
+              "support": {
+                "eligible_slots": 4,
+                "accepted": 3,
+                "minimum": 0,
+                "eligible_assets": [
+                  "storehouse_a",
+                  "tool_shed_a",
+                  "shrine_a"
+                ]
+              }
+            },
+            "cap_exclusions": 2,
+            "soft_repetition": [],
+            "denominator": "most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies"
+          }
+        ]
+      }
+    ]
+  },
+  "journey": {
+    "seed": 20261023,
+    "fixture": "ordinary production world; native actors retained as stationary obstacles; AI/survival turn updates paused; movement, doors, stairs, interactions, travel and save handlers unchanged",
+    "steps": 27075,
+    "interaction": {
+      "placement": "settlement-0-plot-1-building",
+      "asset": "apothecary_a",
+      "target": [
+        11,
+        31
+      ],
+      "initial_items": 2,
+      "remaining_items": 1
+    },
+    "checkpoint_seconds": 0.9708059999975376,
+    "landmark_access": {
+      "placement": "landmark-plot-96-building",
+      "join": [
+        6040,
+        4106
+      ],
+      "entrance": {
+        "id": "main",
+        "x": 6040,
+        "y": 4103,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      },
+      "target": {
+        "x": 6041,
+        "y": 4101,
+        "kind": "floor",
+        "required": true
+      },
+      "player_local": [
+        41,
+        16
+      ]
+    },
+    "bridge_ids_walked": [
+      "crossing-0",
+      "crossing-1",
+      "crossing-2",
+      "crossing-3",
+      "crossing-4",
+      "crossing-5",
+      "crossing-6",
+      "crossing-7"
+    ],
+    "materialized_scenes_before_f9": 182,
+    "restore_seconds": 0.531106699956581,
+    "f9_restored_coherent_start_checkpoint": true,
+    "worst_transition_seconds": 0.27413889998570085,
+    "checkpoint_bytes": 18953499,
+    "passed": true,
+    "boundary_transitions": 412
+  },
+  "production": {
+    "passed": true,
+    "totals": {
+      "checks": 3675,
+      "passed": 3675,
+      "failed": 0,
+      "workers": 159
+    },
+    "coverage": {
+      "B01": {
+        "checks": 6,
+        "passed": true
+      },
+      "B02": {
+        "checks": 1,
+        "passed": true
+      },
+      "B03": {
+        "checks": 1,
+        "passed": true
+      },
+      "B2-01": {
+        "checks": 42,
+        "passed": true
+      },
+      "B2-02": {
+        "checks": 45,
+        "passed": true
+      },
+      "B2-03": {
+        "checks": 24,
+        "passed": true
+      },
+      "B2-04": {
+        "checks": 233,
+        "passed": true
+      },
+      "B2-05": {
+        "checks": 10,
+        "passed": true
+      },
+      "B2-06": {
+        "checks": 15,
+        "passed": true
+      },
+      "B2-07": {
+        "checks": 209,
+        "passed": true
+      },
+      "B2-08": {
+        "checks": 233,
+        "passed": true
+      },
+      "B2-09": {
+        "checks": 1,
+        "passed": true
+      },
+      "B2-H": {
+        "checks": 1,
+        "passed": true
+      },
+      "B3-01": {
+        "checks": 47,
+        "passed": true
+      },
+      "B3-02": {
+        "checks": 10,
+        "passed": true
+      },
+      "B3-03": {
+        "checks": 26,
+        "passed": true
+      },
+      "B3-04": {
+        "checks": 41,
+        "passed": true
+      },
+      "B3-05": {
+        "checks": 6,
+        "passed": true
+      },
+      "B3-06": {
+        "checks": 17,
+        "passed": true
+      },
+      "B3-07": {
+        "checks": 12,
+        "passed": true
+      },
+      "B3-08": {
+        "checks": 5,
+        "passed": true
+      },
+      "B3-09": {
+        "checks": 41,
+        "passed": true
+      },
+      "B3-H": {
+        "checks": 301,
+        "passed": true
+      },
+      "C-01": {
+        "checks": 52,
+        "passed": true
+      },
+      "C-02": {
+        "checks": 16,
+        "passed": true
+      },
+      "C-03": {
+        "checks": 14,
+        "passed": true
+      },
+      "C-04": {
+        "checks": 6,
+        "passed": true
+      },
+      "C-05": {
+        "checks": 22,
+        "passed": true
+      },
+      "C-06": {
+        "checks": 9,
+        "passed": true
+      },
+      "C-07": {
+        "checks": 11,
+        "passed": true
+      },
+      "C-08": {
+        "checks": 29,
+        "passed": true
+      },
+      "D-01": {
+        "checks": 10,
+        "passed": true
+      },
+      "D-02": {
+        "checks": 10,
+        "passed": true
+      },
+      "D-03": {
+        "checks": 5,
+        "passed": true
+      },
+      "D-04": {
+        "checks": 5,
+        "passed": true
+      },
+      "D-05": {
+        "checks": 7,
+        "passed": true
+      },
+      "D-06": {
+        "checks": 10,
+        "passed": true
+      },
+      "D-07": {
+        "checks": 11,
+        "passed": true
+      },
+      "D-08": {
+        "checks": 7,
+        "passed": true
+      },
+      "D-09": {
+        "checks": 4,
+        "passed": true
+      },
+      "D-10": {
+        "checks": 15,
+        "passed": true
+      },
+      "D-11": {
+        "checks": 15,
+        "passed": true
+      },
+      "E01": {
+        "checks": 772,
+        "passed": true
+      },
+      "E02": {
+        "checks": 10,
+        "passed": true
+      },
+      "E03": {
+        "checks": 4,
+        "passed": true
+      },
+      "E04": {
+        "checks": 25,
+        "passed": true
+      },
+      "F01": {
+        "checks": 4,
+        "passed": true
+      },
+      "F02": {
+        "checks": 78,
+        "passed": true
+      },
+      "F03": {
+        "checks": 13,
+        "passed": true
+      },
+      "F04": {
+        "checks": 26,
+        "passed": true
+      },
+      "F05": {
+        "checks": 252,
+        "passed": true
+      },
+      "F06": {
+        "checks": 132,
+        "passed": true
+      },
+      "F07": {
+        "checks": 78,
+        "passed": true
+      },
+      "H01": {
+        "checks": 2,
+        "passed": true
+      },
+      "H02": {
+        "checks": 342,
+        "passed": true
+      },
+      "H03": {
+        "checks": 17,
+        "passed": true
+      },
+      "H04": {
+        "checks": 2,
+        "passed": true
+      },
+      "K01": {
+        "checks": 63,
+        "passed": true
+      },
+      "K02": {
+        "checks": 14,
+        "passed": true
+      },
+      "K03": {
+        "checks": 24,
+        "passed": true
+      },
+      "K04": {
+        "checks": 4,
+        "passed": true
+      },
+      "R01": {
+        "checks": 7,
+        "passed": true
+      },
+      "R02": {
+        "checks": 7,
+        "passed": true
+      },
+      "R03": {
+        "checks": 7,
+        "passed": true
+      },
+      "R04": {
+        "checks": 21,
+        "passed": true
+      },
+      "R05": {
+        "checks": 19,
+        "passed": true
+      },
+      "R06": {
+        "checks": 43,
+        "passed": true
+      },
+      "S01": {
+        "checks": 8,
+        "passed": true
+      },
+      "S02": {
+        "checks": 8,
+        "passed": true
+      },
+      "S03": {
+        "checks": 18,
+        "passed": true
+      },
+      "S04": {
+        "checks": 44,
+        "passed": true
+      },
+      "S05": {
+        "checks": 6,
+        "passed": true
+      },
+      "S06": {
+        "checks": 8,
+        "passed": true
+      },
+      "original": {
+        "checks": 32,
+        "passed": true
+      }
+    },
+    "runner_negative_controls": 7,
+    "deliberate_crash_workers": 13,
+    "all_workers_valid": true,
+    "deferred": [
+      {
+        "case": "E04",
+        "id": "UI-TEXT-HEIGHT",
+        "scope": "UI",
+        "symptom": {
+          "text_id": "lab_label_sarcophagus",
+          "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+          "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+        }
+      }
+    ]
+  }
+}

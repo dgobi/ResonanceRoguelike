@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5998 4248 164 98" width="960"><rect x="5998" y="4248" width="100%" height="100%" fill="#18252b"/>
+<text x="6000" y="4254" fill="white" font-size="3">grid: plan diagnostic; gold roads, green occupied, red vacant, blue approaches</text>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6040" y="4277" width="81" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6120" y="4277" width="40" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4277" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6119" y="4277" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4257" width="3" height="22" fill="#d4bc72" opacity="1"/>
+<rect x="6003" y="4277" width="154" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6003" y="4320" width="154" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4278" width="3" height="44" fill="#d4bc72" opacity="1"/>
+<rect x="6119" y="4278" width="3" height="44" fill="#d4bc72" opacity="1"/>
+<g><title>settlement-0-plot-0 role=civic: []</title>
+<rect x="6008" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6004" y="4265" width="8" height="10" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6004" y="4267" fill="#07130d" font-size="1.8">civic</text>
+<text x="6004" y="4269" fill="#07130d" font-size="1.4">bell_tower_a</text>
+</g>
+<g><title>settlement-0-plot-1 role=commercial: []</title>
+<rect x="6008" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6002" y="4282" width="11" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6002" y="4284" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6002" y="4286" fill="#07130d" font-size="1.4">apothecary_a</text>
+</g>
+<g><title>settlement-0-plot-2 role=residential: []</title>
+<rect x="6026" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6021" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6021" y="4269" fill="#07130d" font-size="1.8">residential</text>
+<text x="6021" y="4271" fill="#07130d" font-size="1.4">house_two_room_a</text>
+</g>
+<g><title>settlement-0-plot-3 role=residential: []</title>
+<rect x="6026" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6022" y="4282" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6022" y="4284" fill="#07130d" font-size="1.8">residential</text>
+<text x="6022" y="4286" fill="#07130d" font-size="1.4">house_small_a</text>
+</g>
+<g><title>settlement-0-plot-4 role=commercial: [{&#x27;asset&#x27;: &#x27;apothecary_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with road-7&#x27;}, {&#x27;asset&#x27;: &#x27;shop_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with road-7&#x27;}, {&#x27;asset&#x27;: &#x27;workshop_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with road-7&#x27;}]</title>
+<rect x="6044" y="4274" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6043" y="4271" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6044.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6043" y="4273" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6043" y="4275" fill="#07130d" font-size="1.4">market_stall_a</text>
+</g>
+<g><title>settlement-0-plot-5 role=residential: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: True, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}, {&#x27;asset&#x27;: &#x27;house_hearth_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_b&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}, {&#x27;asset&#x27;: &#x27;house_two_room_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}]</title>
+<rect x="6035" y="4281" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-6 role=support: []</title>
+<rect x="6008" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6005" y="4312" width="8" height="6" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6005" y="4314" fill="#07130d" font-size="1.8">support</text>
+<text x="6005" y="4316" fill="#07130d" font-size="1.4">tool_shed_a</text>
+</g>
+<g><title>settlement-0-plot-7 role=residential: []</title>
+<rect x="6008" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6004" y="4325" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6004" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6004" y="4329" fill="#07130d" font-size="1.4">house_two_room_a</text>
+</g>
+<g><title>settlement-0-plot-8 role=commercial: []</title>
+<rect x="6062" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6058" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6058" y="4269" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6058" y="4271" fill="#07130d" font-size="1.4">shop_a</text>
+</g>
+<g><title>settlement-0-plot-9 role=residential: []</title>
+<rect x="6062" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6058" y="4282" width="8" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6058" y="4284" fill="#07130d" font-size="1.8">residential</text>
+<text x="6058" y="4286" fill="#07130d" font-size="1.4">house_small_b</text>
+</g>
+<g><title>settlement-0-plot-10 role=support: []</title>
+<rect x="6026" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6023" y="4311" width="8" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6023" y="4313" fill="#07130d" font-size="1.8">support</text>
+<text x="6023" y="4315" fill="#07130d" font-size="1.4">shrine_a</text>
+</g>
+<g><title>settlement-0-plot-11 role=residential: []</title>
+<rect x="6026" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6022" y="4325" width="8" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6022" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6022" y="4329" fill="#07130d" font-size="1.4">house_small_b</text>
+</g>
+<g><title>settlement-0-plot-12 role=commercial: [{&#x27;asset&#x27;: &#x27;apothecary_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}, {&#x27;asset&#x27;: &#x27;workshop_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}, {&#x27;asset&#x27;: &#x27;shop_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}]</title>
+<rect x="6044" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6043" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6044.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6043" y="4316" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6043" y="4318" fill="#07130d" font-size="1.4">market_stall_a</text>
+</g>
+<g><title>settlement-0-plot-13 role=residential: []</title>
+<rect x="6044" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6040" y="4325" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6044.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6040" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6040" y="4329" fill="#07130d" font-size="1.4">house_two_room_a</text>
+</g>
+<g><title>settlement-0-plot-14 role=support: []</title>
+<rect x="6088" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6085" y="4268" width="8" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6085" y="4270" fill="#07130d" font-size="1.8">support</text>
+<text x="6085" y="4272" fill="#07130d" font-size="1.4">shrine_a</text>
+</g>
+<g><title>settlement-0-plot-15 role=residential: []</title>
+<rect x="6088" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6082" y="4282" width="12" height="9" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6082" y="4284" fill="#07130d" font-size="1.8">residential</text>
+<text x="6082" y="4286" fill="#07130d" font-size="1.4">house_hearth_a</text>
+</g>
+<g><title>settlement-0-plot-16 role=commercial: []</title>
+<rect x="6062" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6058" y="4310" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6058" y="4312" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6058" y="4314" fill="#07130d" font-size="1.4">shop_a</text>
+</g>
+<g><title>settlement-0-plot-17 role=residential: []</title>
+<rect x="6062" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6056" y="4325" width="12" height="9" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6056" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6056" y="4329" fill="#07130d" font-size="1.4">house_hearth_a</text>
+</g>
+<g><title>settlement-0-plot-18 role=support: []</title>
+<rect x="6106" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6103" y="4268" width="8" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6103" y="4270" fill="#07130d" font-size="1.8">support</text>
+<text x="6103" y="4272" fill="#07130d" font-size="1.4">shrine_a</text>
+</g>
+<g><title>settlement-0-plot-19 role=residential: []</title>
+<rect x="6106" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6100" y="4282" width="12" height="9" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6100" y="4284" fill="#07130d" font-size="1.8">residential</text>
+<text x="6100" y="4286" fill="#07130d" font-size="1.4">house_hearth_a</text>
+</g>
+<g><title>settlement-0-plot-20 role=commercial: []</title>
+<rect x="6124" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6120" y="4267" width="11" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6124.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6120" y="4269" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6120" y="4271" fill="#07130d" font-size="1.4">apothecary_a</text>
+</g>
+<g><title>settlement-0-plot-21 role=residential: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: True, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}, {&#x27;asset&#x27;: &#x27;house_hearth_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_b&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}, {&#x27;asset&#x27;: &#x27;house_two_room_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}]</title>
+<rect x="6115" y="4281" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-22 role=support: [{&#x27;asset&#x27;: &#x27;shrine_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;hard per-settlement cap reached&#x27;}]</title>
+<rect x="6088" y="4317" width="3" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6083" y="4311" width="14" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6083" y="4313" fill="#07130d" font-size="1.8">support</text>
+<text x="6083" y="4315" fill="#07130d" font-size="1.4">storehouse_a</text>
+</g>
+<g><title>settlement-0-plot-23 role=residential: []</title>
+<rect x="6088" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6082" y="4325" width="12" height="9" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6082" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6082" y="4329" fill="#07130d" font-size="1.4">house_hearth_a</text>
+</g>
+<g><title>settlement-0-plot-24 role=commercial: []</title>
+<rect x="6142" y="4274" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6141" y="4271" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6141" y="4273" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6141" y="4275" fill="#07130d" font-size="1.4">market_stall_a</text>
+</g>
+<g><title>settlement-0-plot-25 role=residential: []</title>
+<rect x="6142" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6138" y="4282" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6138" y="4284" fill="#07130d" font-size="1.8">residential</text>
+<text x="6138" y="4286" fill="#07130d" font-size="1.4">house_two_room_a</text>
+</g>
+<g><title>settlement-0-plot-26 role=support: [{&#x27;asset&#x27;: &#x27;shrine_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;hard per-settlement cap reached&#x27;}]</title>
+<rect x="6106" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6103" y="4312" width="8" height="6" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6103" y="4314" fill="#07130d" font-size="1.8">support</text>
+<text x="6103" y="4316" fill="#07130d" font-size="1.4">tool_shed_a</text>
+</g>
+<g><title>settlement-0-plot-27 role=residential: []</title>
+<rect x="6106" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6100" y="4325" width="12" height="9" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6100" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6100" y="4329" fill="#07130d" font-size="1.4">house_hearth_a</text>
+</g>
+<g><title>settlement-0-plot-28 role=commercial: [{&#x27;asset&#x27;: &#x27;apothecary_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}, {&#x27;asset&#x27;: &#x27;workshop_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}, {&#x27;asset&#x27;: &#x27;shop_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}]</title>
+<rect x="6124" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6123" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6124.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6123" y="4316" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6123" y="4318" fill="#07130d" font-size="1.4">market_stall_a</text>
+</g>
+<g><title>settlement-0-plot-29 role=residential: [{&#x27;asset&#x27;: &#x27;house_hearth_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;hard per-settlement cap reached&#x27;}]</title>
+<rect x="6124" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6120" y="4325" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6124.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6120" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6120" y="4329" fill="#07130d" font-size="1.4">house_two_room_a</text>
+</g>
+<g><title>settlement-0-plot-30 role=support: [{&#x27;asset&#x27;: &#x27;shrine_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;hard per-settlement cap reached&#x27;}]</title>
+<rect x="6142" y="4317" width="3" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6137" y="4311" width="14" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6137" y="4313" fill="#07130d" font-size="1.8">support</text>
+<text x="6137" y="4315" fill="#07130d" font-size="1.4">storehouse_a</text>
+</g>
+<g><title>settlement-0-plot-31 role=residential: [{&#x27;asset&#x27;: &#x27;house_two_room_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;hard per-settlement cap reached&#x27;}, {&#x27;asset&#x27;: &#x27;house_hearth_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;hard per-settlement cap reached&#x27;}]</title>
+<rect x="6142" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6138" y="4325" width="8" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6138" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6138" y="4329" fill="#07130d" font-size="1.4">house_small_b</text>
+</g>
+</svg>
