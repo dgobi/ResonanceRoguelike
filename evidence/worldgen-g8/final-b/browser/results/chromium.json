@@ -1,0 +1,523 @@
+{
+  "browser": "chromium",
+  "version": "156.0.8078.4",
+  "passed": true,
+  "checks": [
+    {
+      "name": "frozen corpus matches all 65 pinned baseline blob hashes",
+      "passed": true
+    },
+    {
+      "name": "65 frozen originals plus 64 delivered catalog documents round-trip",
+      "passed": true
+    },
+    {
+      "name": "unknown metadata, null/false/zero and ordered arrays preserved",
+      "passed": true
+    },
+    {
+      "name": "duplicates and unrepresentable numbers rejected explicitly",
+      "passed": true
+    },
+    {
+      "name": "oversized document preserved read-only and explicit ragged normalization reversible",
+      "passed": true
+    },
+    {
+      "name": "real file input and download preserve cottage",
+      "passed": true
+    },
+    {
+      "name": "one terrain click changes only selected character",
+      "passed": true
+    },
+    {
+      "name": "full decor ID remains nested array",
+      "passed": true
+    },
+    {
+      "name": "decor erasing writes null only",
+      "passed": true
+    },
+    {
+      "name": "single record edit preserves unrelated data",
+      "passed": true
+    },
+    {
+      "name": "undo restores entire prior document",
+      "passed": true
+    },
+    {
+      "name": "redo restores record and all layers",
+      "passed": true
+    },
+    {
+      "name": "invalid import leaves complete current document intact",
+      "passed": true
+    },
+    {
+      "name": "cancelled file selection leaves document intact",
+      "passed": true
+    },
+    {
+      "name": "building then entrance does not leak category/decor",
+      "passed": true
+    },
+    {
+      "name": "lab starts and specials survive real download",
+      "passed": true
+    },
+    {
+      "name": "resize cancellation preserves width60 lab",
+      "passed": true
+    },
+    {
+      "name": "lab width60 to61 enlarges without truncation",
+      "passed": true
+    },
+    {
+      "name": "destructive crop reports refusal",
+      "passed": true
+    },
+    {
+      "name": "refused crop preserves complete width61 document",
+      "passed": true
+    },
+    {
+      "name": "undo enlargement restores original lab",
+      "passed": true
+    },
+    {
+      "name": "used-legend deletion gives explicit error",
+      "passed": true
+    },
+    {
+      "name": "failed legend edit is atomic",
+      "passed": true
+    },
+    {
+      "name": "deliberate start edit changes one field",
+      "passed": true
+    },
+    {
+      "name": "real placement panel edit/download preserves complete document",
+      "passed": true
+    },
+    {
+      "name": "explicit weighted child coordinates and allowed mirror survive real download",
+      "passed": true
+    },
+    {
+      "name": "G6 real downloaded site keeps separate required doors and populated contents",
+      "passed": true
+    },
+    {
+      "name": "compound context exposed through shared metadata vocabulary",
+      "passed": true
+    },
+    {
+      "name": "actual compound child download preserves contexts, doors, required goals and contents",
+      "passed": true
+    },
+    {
+      "name": "no browser script errors",
+      "passed": true
+    },
+    {
+      "name": "downloaded JSON passes shared runtime preview and actual existing-pool selection",
+      "passed": true
+    },
+    {
+      "name": "downloaded placement metadata passes CLI and production planned placement",
+      "passed": true
+    },
+    {
+      "name": "downloaded explicit weighted coordinates pass all eight rotations/reflections",
+      "passed": true
+    },
+    {
+      "name": "actual downloaded G6 site passes production direct",
+      "passed": true
+    },
+    {
+      "name": "actual downloaded G6 site passes production N",
+      "passed": true
+    },
+    {
+      "name": "actual downloaded G6 site passes production E",
+      "passed": true
+    },
+    {
+      "name": "actual downloaded G6 site passes production S",
+      "passed": true
+    },
+    {
+      "name": "actual downloaded G6 site passes production W",
+      "passed": true
+    },
+    {
+      "name": "actual downloaded child passes compound direct",
+      "passed": true
+    },
+    {
+      "name": "actual downloaded child passes compound S",
+      "passed": true
+    },
+    {
+      "name": "actual downloaded child passes compound E",
+      "passed": true
+    },
+    {
+      "name": "actual downloaded building occupies vertical frontage in both G8 layouts",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-exported-cottage.json",
+    "--route",
+    "ordinary_building",
+    "--category",
+    "residential",
+    "--register",
+    "--output",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-runtime.json"
+  ],
+  "runtime_stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-runtime.json\",\n  \"previews\": 2,\n  \"registration\": true,\n  \"status\": null\n}\n",
+  "runtime_stderr": "",
+  "codec_documents": 129,
+  "planned_command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-frontage.json",
+    "--planned",
+    "--category",
+    "residential",
+    "--context",
+    "grid",
+    "--seed",
+    "20261023",
+    "--output",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-runtime.json"
+  ],
+  "planned_stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-planned-runtime.json\",\n  \"previews\": 2,\n  \"registration\": false,\n  \"status\": null\n}\n",
+  "planned_stderr": "",
+  "command_records": [
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-exported-cottage.json",
+        "--route",
+        "ordinary_building",
+        "--category",
+        "residential",
+        "--register",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-runtime.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-runtime.json\",\n  \"previews\": 2,\n  \"registration\": true,\n  \"status\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-frontage.json",
+        "--planned",
+        "--category",
+        "residential",
+        "--context",
+        "grid",
+        "--seed",
+        "20261023",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-runtime.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-planned-runtime.json\",\n  \"previews\": 2,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-frontage.json",
+        "--route",
+        "ordinary_building",
+        "--category",
+        "residential",
+        "--orientations",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-orientations.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-orientations.json\",\n  \"previews\": 8,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site.json",
+        "--category",
+        "wilderness",
+        "--route",
+        "ordinary_building",
+        "--orientations",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site-direct.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-site-direct.json\",\n  \"previews\": 4,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site.json",
+        "--category",
+        "wilderness",
+        "--assigned-site",
+        "N",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site-N.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-site-N.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site.json",
+        "--category",
+        "wilderness",
+        "--assigned-site",
+        "E",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site-E.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-site-E.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site.json",
+        "--category",
+        "wilderness",
+        "--assigned-site",
+        "S",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site-S.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-site-S.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site.json",
+        "--category",
+        "wilderness",
+        "--assigned-site",
+        "W",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-site-W.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-site-W.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-compound-child.json",
+        "--route",
+        "ordinary_building",
+        "--category",
+        "wilderness",
+        "--orientations",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-compound-direct.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-compound-direct.json\",\n  \"previews\": 4,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "--compound",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-compound-recipe.json",
+        "--child",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-compound-child.json",
+        "--assigned-compound",
+        "S",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-compound-S.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-compound-S.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": \"placed\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "--compound",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-compound-recipe.json",
+        "--child",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-compound-child.json",
+        "--assigned-compound",
+        "E",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-compound-E.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-compound-E.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": \"placed\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-frontage.json",
+        "--planned",
+        "--category",
+        "residential",
+        "--context",
+        "grid",
+        "--layout",
+        "cross-market",
+        "--selection-config",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-g8-selection.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-g8-cross-market.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-g8-cross-market.json\",\n  \"previews\": 8,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": "",
+      "layout": "cross-market",
+      "actual_download": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-frontage.json",
+      "normals": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "materialized_scenes": 8,
+      "control": "residential membership restricted to actual downloaded asset; complete production planner/materializer; no downloaded bytes modified"
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-frontage.json",
+        "--planned",
+        "--category",
+        "residential",
+        "--context",
+        "grid",
+        "--layout",
+        "linked-courts",
+        "--selection-config",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-g8-selection.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-g8-linked-courts.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-g8-linked-courts.json\",\n  \"previews\": 8,\n  \"registration\": false,\n  \"status\": null\n}\n",
+      "stderr": "",
+      "layout": "linked-courts",
+      "actual_download": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-frontage.json",
+      "normals": [
+        "E",
+        "N",
+        "S"
+      ],
+      "materialized_scenes": 8,
+      "control": "residential membership restricted to actual downloaded asset; complete production planner/materializer; no downloaded bytes modified"
+    },
+    {
+      "control": "explicit copy of actual downloaded building restricted to rotation 0; original download unchanged",
+      "assigned_normal": "E",
+      "rejections": [
+        {
+          "asset": "browser_frontage_chromium",
+          "rotation": null,
+          "mirror": null,
+          "reason": "no eligible permitted transform for entrance normal"
+        }
+      ],
+      "required_rotation_excluded": true
+    }
+  ],
+  "download_hashes": {
+    "chromium-exported-cottage.json": "e16f49b0fec8ac25de225ba28ebbc32beca498a835a4f71b6bf7467588bb416a",
+    "chromium-planned-frontage.json": "2e04307596c4b3e1e7b224bc89b09cbb0b05b02a0d30a3987214a0fbfa820f23",
+    "chromium-site.json": "520117aae3345f172c53430b226ae4b6d69ba7012f3827563b940dc0820c8a06",
+    "chromium-compound-child.json": "50fab89f7cef7fcd05c016d35c141dda9df43bf90e8059ce27380fe85740b814"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\catalog\\catalog.json",
+  "previews": 0,
+  "registration": false,
+  "status": null
+}

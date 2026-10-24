@@ -1,0 +1,15 @@
+{
+  "run_id": "old-run",
+  "scenario": "runner-negative",
+  "phase": "stale",
+  "flavor": "selfcheck",
+  "completed": true,
+  "checks": [
+    {
+      "passed": true
+    }
+  ],
+  "imported_sources": {
+    "main": {}
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "run_id": "d-20261024-142803-edfde563",
+  "scenario": "runner-negative",
+  "phase": "old-phase",
+  "flavor": "selfcheck",
+  "completed": true,
+  "checks": [
+    {
+      "passed": true
+    }
+  ],
+  "imported_sources": {
+    "main": {}
+  }
+}

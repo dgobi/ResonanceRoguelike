@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "alternative_limit": 2,
+  "grid": [
+    {
+      "id": "cross-market",
+      "form": "grid",
+      "weight": 2,
+      "streets": [
+        {
+          "id": "east-west-0",
+          "points": [
+            [
+              3,
+              21
+            ],
+            [
+              156,
+              21
+            ]
+          ]
+        },
+        {
+          "id": "east-west-1",
+          "points": [
+            [
+              3,
+              64
+            ],
+            [
+              156,
+              64
+            ]
+          ]
+        },
+        {
+          "id": "north-south-0",
+          "points": [
+            [
+              40,
+              3
+            ],
+            [
+              40,
+              82
+            ]
+          ]
+        },
+        {
+          "id": "north-south-1",
+          "points": [
+            [
+              122,
+              3
+            ],
+            [
+              122,
+              82
+            ]
+          ]
+        }
+      ],
+      "common": {
+        "id": "bell-common",
+        "rect": [
+          43,
+          1,
+          62,
+          20
+        ],
+        "surface": "cobblestone",
+        "furnishing": [
+          [
+            45,
+            19
+          ],
+          [
+            46,
+            19
+          ]
+        ]
+      },
+      "civic_lot": {
+        "bounds": [
+          62,
+          1,
+          79,
+          20
+        ],
+        "join": [
+          70,
+          21
+        ],
+        "normal": "S",
+        "street": "east-west-0"
+      },
+      "frontage_tiles": 18,
+      "minimum_depth": 10,
+      "junction_clearance": 2
+    },
+    {
+      "id": "linked-courts",
+      "form": "grid",
+      "weight": 1,
+      "streets": [
+        {
+          "id": "east-west-0",
+          "points": [
+            [
+              3,
+              21
+            ],
+            [
+              156,
+              21
+            ]
+          ]
+        },
+        {
+          "id": "east-west-1",
+          "points": [
+            [
+              3,
+              64
+            ],
+            [
+              156,
+              64
+            ]
+          ]
+        },
+        {
+          "id": "north-south-0",
+          "points": [
+            [
+              24,
+              3
+            ],
+            [
+              24,
+              82
+            ]
+          ]
+        },
+        {
+          "id": "north-south-1",
+          "points": [
+            [
+              104,
+              3
+            ],
+            [
+              104,
+              82
+            ]
+          ]
+        },
+        {
+          "id": "court-link",
+          "points": [
+            [
+              24,
+              43
+            ],
+            [
+              104,
+              43
+            ]
+          ]
+        }
+      ],
+      "common": {
+        "id": "bell-common",
+        "rect": [
+          43,
+          23,
+          62,
+          42
+        ],
+        "surface": "cobblestone",
+        "furnishing": [
+          [
+            45,
+            23
+          ],
+          [
+            46,
+            23
+          ]
+        ]
+      },
+      "civic_lot": {
+        "bounds": [
+          62,
+          23,
+          79,
+          42
+        ],
+        "join": [
+          70,
+          21
+        ],
+        "normal": "N",
+        "street": "east-west-0"
+      },
+      "frontage_tiles": 18,
+      "minimum_depth": 10,
+      "junction_clearance": 2
+    }
+  ],
+  "roadside": {
+    "id": "country-frontage",
+    "frontage_tiles": 18,
+    "minimum_depth": 10,
+    "junction_clearance": 3
+  }
+}

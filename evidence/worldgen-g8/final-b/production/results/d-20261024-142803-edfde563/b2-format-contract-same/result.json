@@ -1,0 +1,4948 @@
+{
+  "run_id": "d-20261024-142803-edfde563",
+  "scenario": "format",
+  "phase": "same",
+  "flavor": "candidate",
+  "pid": 14876,
+  "cwd": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "argv": [
+    "G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\production\\results\\d-20261024-142803-edfde563\\b2-format-contract-same\\job.json"
+  ],
+  "seed": 20261020,
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "os": "Windows-10-10.0.26200-SP0",
+  "environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYTHONHASHSEED": "20261020",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1",
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1"
+  },
+  "versions": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "checks": [
+    {
+      "case": "B2-07",
+      "property": "development format stays v2",
+      "expected": 2,
+      "observed": 2,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "d506aa4a2e0a4312e6850f4f34adfb35540f9aaf886e1aa981c4f9f0faa1fbe0"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9196,
+          "sha256": "2c0cd98bac5cfd47801f758c780353631b88247f45178ffc1aaad2b011367266"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "d506aa4a2e0a4312e6850f4f34adfb35540f9aaf886e1aa981c4f9f0faa1fbe0"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9196,
+          "sha256": "2c0cd98bac5cfd47801f758c780353631b88247f45178ffc1aaad2b011367266"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "d506aa4a2e0a4312e6850f4f34adfb35540f9aaf886e1aa981c4f9f0faa1fbe0"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9196,
+          "sha256": "2c0cd98bac5cfd47801f758c780353631b88247f45178ffc1aaad2b011367266"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "d506aa4a2e0a4312e6850f4f34adfb35540f9aaf886e1aa981c4f9f0faa1fbe0"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9196,
+          "sha256": "2c0cd98bac5cfd47801f758c780353631b88247f45178ffc1aaad2b011367266"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None bootstrap never enters loop",
+      "expected": [
+        1,
+        []
+      ],
+      "observed": [
+        1,
+        []
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block None bootstrap keeps bytes",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "d506aa4a2e0a4312e6850f4f34adfb35540f9aaf886e1aa981c4f9f0faa1fbe0"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9196,
+          "sha256": "2c0cd98bac5cfd47801f758c780353631b88247f45178ffc1aaad2b011367266"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "d506aa4a2e0a4312e6850f4f34adfb35540f9aaf886e1aa981c4f9f0faa1fbe0"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9196,
+          "sha256": "2c0cd98bac5cfd47801f758c780353631b88247f45178ffc1aaad2b011367266"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "e0ba78e81616f0c449c6ca10ad58450b3ccea9a5da3067cfd715ec9e256ff7ed"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9194,
+          "sha256": "cb5a72d73ffd819c4c7494702f641d8baeec7cd8d52dd86d813f898d20d5f8b2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "e0ba78e81616f0c449c6ca10ad58450b3ccea9a5da3067cfd715ec9e256ff7ed"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9194,
+          "sha256": "cb5a72d73ffd819c4c7494702f641d8baeec7cd8d52dd86d813f898d20d5f8b2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "e0ba78e81616f0c449c6ca10ad58450b3ccea9a5da3067cfd715ec9e256ff7ed"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9194,
+          "sha256": "cb5a72d73ffd819c4c7494702f641d8baeec7cd8d52dd86d813f898d20d5f8b2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "e0ba78e81616f0c449c6ca10ad58450b3ccea9a5da3067cfd715ec9e256ff7ed"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9194,
+          "sha256": "cb5a72d73ffd819c4c7494702f641d8baeec7cd8d52dd86d813f898d20d5f8b2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] bootstrap never enters loop",
+      "expected": [
+        1,
+        []
+      ],
+      "observed": [
+        1,
+        []
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block [] bootstrap keeps bytes",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "e0ba78e81616f0c449c6ca10ad58450b3ccea9a5da3067cfd715ec9e256ff7ed"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9194,
+          "sha256": "cb5a72d73ffd819c4c7494702f641d8baeec7cd8d52dd86d813f898d20d5f8b2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "e0ba78e81616f0c449c6ca10ad58450b3ccea9a5da3067cfd715ec9e256ff7ed"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9194,
+          "sha256": "cb5a72d73ffd819c4c7494702f641d8baeec7cd8d52dd86d813f898d20d5f8b2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "8b40dc2c1a998f880ce785cd92a82431de4efccea16fd759a9902fa9bde704bc"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9216,
+          "sha256": "94d2b516a35b580fac6ad2a8424518164dc8ae50185bd49697259e1c5a961cbd"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "8b40dc2c1a998f880ce785cd92a82431de4efccea16fd759a9902fa9bde704bc"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9216,
+          "sha256": "94d2b516a35b580fac6ad2a8424518164dc8ae50185bd49697259e1c5a961cbd"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "8b40dc2c1a998f880ce785cd92a82431de4efccea16fd759a9902fa9bde704bc"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9216,
+          "sha256": "94d2b516a35b580fac6ad2a8424518164dc8ae50185bd49697259e1c5a961cbd"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "8b40dc2c1a998f880ce785cd92a82431de4efccea16fd759a9902fa9bde704bc"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9216,
+          "sha256": "94d2b516a35b580fac6ad2a8424518164dc8ae50185bd49697259e1c5a961cbd"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} bootstrap never enters loop",
+      "expected": [
+        1,
+        []
+      ],
+      "observed": [
+        1,
+        []
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': 2} bootstrap keeps bytes",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "8b40dc2c1a998f880ce785cd92a82431de4efccea16fd759a9902fa9bde704bc"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9216,
+          "sha256": "94d2b516a35b580fac6ad2a8424518164dc8ae50185bd49697259e1c5a961cbd"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "8b40dc2c1a998f880ce785cd92a82431de4efccea16fd759a9902fa9bde704bc"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9216,
+          "sha256": "94d2b516a35b580fac6ad2a8424518164dc8ae50185bd49697259e1c5a961cbd"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "a86284cdb302697e8f415dceff2d2221e3626afe4c4562ebab67d7aedcbac697"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9219,
+          "sha256": "c26aa089b58fdba2ad6270bb27545217a0fb2b5328566bb1f7c63cfd0a481371"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "a86284cdb302697e8f415dceff2d2221e3626afe4c4562ebab67d7aedcbac697"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9219,
+          "sha256": "c26aa089b58fdba2ad6270bb27545217a0fb2b5328566bb1f7c63cfd0a481371"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "a86284cdb302697e8f415dceff2d2221e3626afe4c4562ebab67d7aedcbac697"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9219,
+          "sha256": "c26aa089b58fdba2ad6270bb27545217a0fb2b5328566bb1f7c63cfd0a481371"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "a86284cdb302697e8f415dceff2d2221e3626afe4c4562ebab67d7aedcbac697"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9219,
+          "sha256": "c26aa089b58fdba2ad6270bb27545217a0fb2b5328566bb1f7c63cfd0a481371"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} bootstrap never enters loop",
+      "expected": [
+        1,
+        []
+      ],
+      "observed": [
+        1,
+        []
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "component block {'version': True} bootstrap keeps bytes",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "a86284cdb302697e8f415dceff2d2221e3626afe4c4562ebab67d7aedcbac697"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9219,
+          "sha256": "c26aa089b58fdba2ad6270bb27545217a0fb2b5328566bb1f7c63cfd0a481371"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "a86284cdb302697e8f415dceff2d2221e3626afe4c4562ebab67d7aedcbac697"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9219,
+          "sha256": "c26aa089b58fdba2ad6270bb27545217a0fb2b5328566bb1f7c63cfd0a481371"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=True hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=True diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=True preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=True does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "52a0a0cd9758d6bd14fec165ac5b9b6045e6748f473f109c1739462bdb2d1d7d"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "fc2e26c958da3816847c708ea7c76532cc30314c061029200362ed109bae2042"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "52a0a0cd9758d6bd14fec165ac5b9b6045e6748f473f109c1739462bdb2d1d7d"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "fc2e26c958da3816847c708ea7c76532cc30314c061029200362ed109bae2042"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=True cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=True diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=True preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=True does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "52a0a0cd9758d6bd14fec165ac5b9b6045e6748f473f109c1739462bdb2d1d7d"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "fc2e26c958da3816847c708ea7c76532cc30314c061029200362ed109bae2042"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "52a0a0cd9758d6bd14fec165ac5b9b6045e6748f473f109c1739462bdb2d1d7d"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "fc2e26c958da3816847c708ea7c76532cc30314c061029200362ed109bae2042"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=-1 hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=-1 diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=-1 preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=-1 does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "3990ef6788cea2a6ea8bd626c6953e0aadc55821f59122efe8a177a834b2a6ae"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "9697b6d867eb1acd600ae1cebe5dc970bfe7c7197aca3501677f5f4707baa1e1"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "3990ef6788cea2a6ea8bd626c6953e0aadc55821f59122efe8a177a834b2a6ae"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "9697b6d867eb1acd600ae1cebe5dc970bfe7c7197aca3501677f5f4707baa1e1"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=-1 cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=-1 diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=-1 preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "true_sight_turns=-1 does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "3990ef6788cea2a6ea8bd626c6953e0aadc55821f59122efe8a177a834b2a6ae"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "9697b6d867eb1acd600ae1cebe5dc970bfe7c7197aca3501677f5f4707baa1e1"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "3990ef6788cea2a6ea8bd626c6953e0aadc55821f59122efe8a177a834b2a6ae"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "9697b6d867eb1acd600ae1cebe5dc970bfe7c7197aca3501677f5f4707baa1e1"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "player_speed_bonus='fast' hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "player_speed_bonus='fast' diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "player_speed_bonus='fast' preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "player_speed_bonus='fast' does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "ebe477e85ce2c271f25e75d24711909943af72e5008099c9ee0cccd4adebb795"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "53b3732ccdc83d423db302db01633da5e27edb2793f1203c340f3fe53d18eabf"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "ebe477e85ce2c271f25e75d24711909943af72e5008099c9ee0cccd4adebb795"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "53b3732ccdc83d423db302db01633da5e27edb2793f1203c340f3fe53d18eabf"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "player_speed_bonus='fast' cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "player_speed_bonus='fast' diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "player_speed_bonus='fast' preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "player_speed_bonus='fast' does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "ebe477e85ce2c271f25e75d24711909943af72e5008099c9ee0cccd4adebb795"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "53b3732ccdc83d423db302db01633da5e27edb2793f1203c340f3fe53d18eabf"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "ebe477e85ce2c271f25e75d24711909943af72e5008099c9ee0cccd4adebb795"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "53b3732ccdc83d423db302db01633da5e27edb2793f1203c340f3fe53d18eabf"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "_last_chunk_entry=[2] hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "_last_chunk_entry=[2] diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "_last_chunk_entry=[2] preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "_last_chunk_entry=[2] does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3b44ab9d84e8f8dfb0dd1ae0440d4e62ffdab4086f95449d02aad91f81c822a"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9700,
+          "sha256": "6d998892f7ccb85518ff276eda454479a7154b674703bdc24dc9b933463e3052"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3b44ab9d84e8f8dfb0dd1ae0440d4e62ffdab4086f95449d02aad91f81c822a"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9700,
+          "sha256": "6d998892f7ccb85518ff276eda454479a7154b674703bdc24dc9b933463e3052"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "_last_chunk_entry=[2] cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "_last_chunk_entry=[2] diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "_last_chunk_entry=[2] preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "_last_chunk_entry=[2] does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3b44ab9d84e8f8dfb0dd1ae0440d4e62ffdab4086f95449d02aad91f81c822a"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9700,
+          "sha256": "6d998892f7ccb85518ff276eda454479a7154b674703bdc24dc9b933463e3052"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3b44ab9d84e8f8dfb0dd1ae0440d4e62ffdab4086f95449d02aad91f81c822a"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9700,
+          "sha256": "6d998892f7ccb85518ff276eda454479a7154b674703bdc24dc9b933463e3052"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "rain_collection_progress=1.5 hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "rain_collection_progress=1.5 diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "rain_collection_progress=1.5 preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "rain_collection_progress=1.5 does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "2deb1cc227d918ebe1a457f31496b74900fd618866c11aa28e84fb110e8c9d17"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "fa5cb99b2598f53b59fc22a1af1cfc09cfd47b58d762bf34d90887586e2e809f"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "2deb1cc227d918ebe1a457f31496b74900fd618866c11aa28e84fb110e8c9d17"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "fa5cb99b2598f53b59fc22a1af1cfc09cfd47b58d762bf34d90887586e2e809f"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "rain_collection_progress=1.5 cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "rain_collection_progress=1.5 diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "rain_collection_progress=1.5 preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "rain_collection_progress=1.5 does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "2deb1cc227d918ebe1a457f31496b74900fd618866c11aa28e84fb110e8c9d17"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "fa5cb99b2598f53b59fc22a1af1cfc09cfd47b58d762bf34d90887586e2e809f"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "2deb1cc227d918ebe1a457f31496b74900fd618866c11aa28e84fb110e8c9d17"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "fa5cb99b2598f53b59fc22a1af1cfc09cfd47b58d762bf34d90887586e2e809f"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new status hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new status diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new status preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new status does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "66938754f9175a650cf4875a528f7baea460e88ad1b31f7dbfcae13863ac34b1"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9687,
+          "sha256": "b73741a56767101c3c89806864de9e46f14f2e3c0e89e451092154853c68e7fa"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "66938754f9175a650cf4875a528f7baea460e88ad1b31f7dbfcae13863ac34b1"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9687,
+          "sha256": "b73741a56767101c3c89806864de9e46f14f2e3c0e89e451092154853c68e7fa"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new status cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new status diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new status preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new status does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "66938754f9175a650cf4875a528f7baea460e88ad1b31f7dbfcae13863ac34b1"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9687,
+          "sha256": "b73741a56767101c3c89806864de9e46f14f2e3c0e89e451092154853c68e7fa"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "66938754f9175a650cf4875a528f7baea460e88ad1b31f7dbfcae13863ac34b1"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9687,
+          "sha256": "b73741a56767101c3c89806864de9e46f14f2e3c0e89e451092154853c68e7fa"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "0043b69a060cde8a6411246e3132153780567b11c4c709a2753cbb1b01950e0e"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "c8b134add30e61b2ccea5faec1cbb8321b45b4d6fa2380923eb6a2dd062a4c1a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "0043b69a060cde8a6411246e3132153780567b11c4c709a2753cbb1b01950e0e"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "c8b134add30e61b2ccea5faec1cbb8321b45b4d6fa2380923eb6a2dd062a4c1a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "0043b69a060cde8a6411246e3132153780567b11c4c709a2753cbb1b01950e0e"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "c8b134add30e61b2ccea5faec1cbb8321b45b4d6fa2380923eb6a2dd062a4c1a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "0043b69a060cde8a6411246e3132153780567b11c4c709a2753cbb1b01950e0e"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "c8b134add30e61b2ccea5faec1cbb8321b45b4d6fa2380923eb6a2dd062a4c1a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version bootstrap never enters loop",
+      "expected": [
+        1,
+        []
+      ],
+      "observed": [
+        1,
+        []
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version bootstrap keeps bytes",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "0043b69a060cde8a6411246e3132153780567b11c4c709a2753cbb1b01950e0e"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "c8b134add30e61b2ccea5faec1cbb8321b45b4d6fa2380923eb6a2dd062a4c1a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "0043b69a060cde8a6411246e3132153780567b11c4c709a2753cbb1b01950e0e"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "c8b134add30e61b2ccea5faec1cbb8321b45b4d6fa2380923eb6a2dd062a4c1a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3846a7f36d887e621d23e36a1c1572af8db49de7527c15a30b82f88e7ef2a95"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "06a39214ec888b9a24133179441714213b0913db8ade5d9c0943502beeebae77"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3846a7f36d887e621d23e36a1c1572af8db49de7527c15a30b82f88e7ef2a95"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "06a39214ec888b9a24133179441714213b0913db8ade5d9c0943502beeebae77"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3846a7f36d887e621d23e36a1c1572af8db49de7527c15a30b82f88e7ef2a95"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "06a39214ec888b9a24133179441714213b0913db8ade5d9c0943502beeebae77"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3846a7f36d887e621d23e36a1c1572af8db49de7527c15a30b82f88e7ef2a95"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "06a39214ec888b9a24133179441714213b0913db8ade5d9c0943502beeebae77"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version bootstrap never enters loop",
+      "expected": [
+        1,
+        []
+      ],
+      "observed": [
+        1,
+        []
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item item_state_version bootstrap keeps bytes",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3846a7f36d887e621d23e36a1c1572af8db49de7527c15a30b82f88e7ef2a95"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "06a39214ec888b9a24133179441714213b0913db8ade5d9c0943502beeebae77"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b3846a7f36d887e621d23e36a1c1572af8db49de7527c15a30b82f88e7ef2a95"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9717,
+          "sha256": "06a39214ec888b9a24133179441714213b0913db8ade5d9c0943502beeebae77"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "9bc72bc4f955d0a44425c19dd9dfeb32663ee28795d0bb0ecb75a0f9d8a8e40d"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9715,
+          "sha256": "bcff9eaa2f2f3d8c550cece581f74688f4ef7aaf9a2a8c2dc5df20b1f9c1f777"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "9bc72bc4f955d0a44425c19dd9dfeb32663ee28795d0bb0ecb75a0f9d8a8e40d"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9715,
+          "sha256": "bcff9eaa2f2f3d8c550cece581f74688f4ef7aaf9a2a8c2dc5df20b1f9c1f777"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "9bc72bc4f955d0a44425c19dd9dfeb32663ee28795d0bb0ecb75a0f9d8a8e40d"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9715,
+          "sha256": "bcff9eaa2f2f3d8c550cece581f74688f4ef7aaf9a2a8c2dc5df20b1f9c1f777"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "9bc72bc4f955d0a44425c19dd9dfeb32663ee28795d0bb0ecb75a0f9d8a8e40d"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9715,
+          "sha256": "bcff9eaa2f2f3d8c550cece581f74688f4ef7aaf9a2a8c2dc5df20b1f9c1f777"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "761ce3e180683a99f9e5d2447608fc1362054a8230ded5506057c36854555ff4"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9718,
+          "sha256": "9d068eede25fc225af808364bce038160b5bbef4c64964e3345e390c61594ff2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "761ce3e180683a99f9e5d2447608fc1362054a8230ded5506057c36854555ff4"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9718,
+          "sha256": "9d068eede25fc225af808364bce038160b5bbef4c64964e3345e390c61594ff2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item count does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "761ce3e180683a99f9e5d2447608fc1362054a8230ded5506057c36854555ff4"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9718,
+          "sha256": "9d068eede25fc225af808364bce038160b5bbef4c64964e3345e390c61594ff2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "761ce3e180683a99f9e5d2447608fc1362054a8230ded5506057c36854555ff4"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9718,
+          "sha256": "9d068eede25fc225af808364bce038160b5bbef4c64964e3345e390c61594ff2"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item weight hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item weight diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item weight preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item weight does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b778646715e786137555808273b6ca9a08122c802c4837a8f4c120a01909b2ec"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "785b566e81e34427a83b908169f99c5faf77ba5fb97698e9ef045b3cb3829d44"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b778646715e786137555808273b6ca9a08122c802c4837a8f4c120a01909b2ec"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "785b566e81e34427a83b908169f99c5faf77ba5fb97698e9ef045b3cb3829d44"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item weight cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item weight diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item weight preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item weight does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b778646715e786137555808273b6ca9a08122c802c4837a8f4c120a01909b2ec"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "785b566e81e34427a83b908169f99c5faf77ba5fb97698e9ef045b3cb3829d44"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "b778646715e786137555808273b6ca9a08122c802c4837a8f4c120a01909b2ec"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9714,
+          "sha256": "785b566e81e34427a83b908169f99c5faf77ba5fb97698e9ef045b3cb3829d44"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item nutrition hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item nutrition diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item nutrition preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item nutrition does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "ea105c3cc69bb3367c9d6bce4eb4c6fef3b8eb3ec821a902a942d9372c949601"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "2435c42ca2af2a4efd7e6ad88068b3e22f11e770400a880651ce776633bc4add"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "ea105c3cc69bb3367c9d6bce4eb4c6fef3b8eb3ec821a902a942d9372c949601"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "2435c42ca2af2a4efd7e6ad88068b3e22f11e770400a880651ce776633bc4add"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item nutrition cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item nutrition diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item nutrition preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item nutrition does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "ea105c3cc69bb3367c9d6bce4eb4c6fef3b8eb3ec821a902a942d9372c949601"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "2435c42ca2af2a4efd7e6ad88068b3e22f11e770400a880651ce776633bc4add"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "ea105c3cc69bb3367c9d6bce4eb4c6fef3b8eb3ec821a902a942d9372c949601"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9716,
+          "sha256": "2435c42ca2af2a4efd7e6ad88068b3e22f11e770400a880651ce776633bc4add"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item keywords hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item keywords diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item keywords preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item keywords does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "f8ab1eec5783808035d6533356b7e2d29cfe57fa543027969b053bc080a0d266"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9495,
+          "sha256": "394cd2c138aec1b40408f7c1f033393060c0dc24c8ffbb5da3c82ee3a585ed51"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "f8ab1eec5783808035d6533356b7e2d29cfe57fa543027969b053bc080a0d266"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9495,
+          "sha256": "394cd2c138aec1b40408f7c1f033393060c0dc24c8ffbb5da3c82ee3a585ed51"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item keywords cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item keywords diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item keywords preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item keywords does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "f8ab1eec5783808035d6533356b7e2d29cfe57fa543027969b053bc080a0d266"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9495,
+          "sha256": "394cd2c138aec1b40408f7c1f033393060c0dc24c8ffbb5da3c82ee3a585ed51"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "f8ab1eec5783808035d6533356b7e2d29cfe57fa543027969b053bc080a0d266"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9495,
+          "sha256": "394cd2c138aec1b40408f7c1f033393060c0dc24c8ffbb5da3c82ee3a585ed51"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item temporary_essence hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item temporary_essence diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item temporary_essence preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item temporary_essence does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "5dbed99fa0aca792180455ea562302c13cc05c28bbd094f6b53deeb4ae22c9b9"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9849,
+          "sha256": "0ee3cb298ec6084d514f6332e5a9a4167008986514e05e7a8712dcf45b0fa4d3"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "5dbed99fa0aca792180455ea562302c13cc05c28bbd094f6b53deeb4ae22c9b9"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9849,
+          "sha256": "0ee3cb298ec6084d514f6332e5a9a4167008986514e05e7a8712dcf45b0fa4d3"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item temporary_essence cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item temporary_essence diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item temporary_essence preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "item temporary_essence does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "5dbed99fa0aca792180455ea562302c13cc05c28bbd094f6b53deeb4ae22c9b9"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9849,
+          "sha256": "0ee3cb298ec6084d514f6332e5a9a4167008986514e05e7a8712dcf45b0fa4d3"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "5dbed99fa0aca792180455ea562302c13cc05c28bbd094f6b53deeb4ae22c9b9"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9849,
+          "sha256": "0ee3cb298ec6084d514f6332e5a9a4167008986514e05e7a8712dcf45b0fa4d3"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new item field hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new item field diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new item field preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new item field does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "7384bac4ab5d6193a971e84d4404ed5a83eb391ac6b97f04590ba6763ac7b8d9"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9690,
+          "sha256": "768f34144bd980ae70f318b14591a5c85905fe9a2de520d8835bce105cff2496"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "7384bac4ab5d6193a971e84d4404ed5a83eb391ac6b97f04590ba6763ac7b8d9"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9690,
+          "sha256": "768f34144bd980ae70f318b14591a5c85905fe9a2de520d8835bce105cff2496"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new item field cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new item field diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new item field preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing new item field does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "7384bac4ab5d6193a971e84d4404ed5a83eb391ac6b97f04590ba6763ac7b8d9"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9690,
+          "sha256": "768f34144bd980ae70f318b14591a5c85905fe9a2de520d8835bce105cff2496"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "7384bac4ab5d6193a971e84d4404ed5a83eb391ac6b97f04590ba6763ac7b8d9"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9690,
+          "sha256": "768f34144bd980ae70f318b14591a5c85905fe9a2de520d8835bce105cff2496"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "4429ce65bc77883df7e8c709d5997ea9521753c9d5599a59adc3e0dbebb8562c"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9540,
+          "sha256": "6380e58ed76dbdfb9f197100c67cf98e6611fc91320f29ebd0ed4a605fea0b39"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "4429ce65bc77883df7e8c709d5997ea9521753c9d5599a59adc3e0dbebb8562c"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9540,
+          "sha256": "6380e58ed76dbdfb9f197100c67cf98e6611fc91320f29ebd0ed4a605fea0b39"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "4429ce65bc77883df7e8c709d5997ea9521753c9d5599a59adc3e0dbebb8562c"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9540,
+          "sha256": "6380e58ed76dbdfb9f197100c67cf98e6611fc91320f29ebd0ed4a605fea0b39"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "4429ce65bc77883df7e8c709d5997ea9521753c9d5599a59adc3e0dbebb8562c"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9540,
+          "sha256": "6380e58ed76dbdfb9f197100c67cf98e6611fc91320f29ebd0ed4a605fea0b39"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light bootstrap never enters loop",
+      "expected": [
+        1,
+        []
+      ],
+      "observed": [
+        1,
+        []
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "active light with absent instance light bootstrap keeps bytes",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "4429ce65bc77883df7e8c709d5997ea9521753c9d5599a59adc3e0dbebb8562c"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9540,
+          "sha256": "6380e58ed76dbdfb9f197100c67cf98e6611fc91320f29ebd0ed4a605fea0b39"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "4429ce65bc77883df7e8c709d5997ea9521753c9d5599a59adc3e0dbebb8562c"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9540,
+          "sha256": "6380e58ed76dbdfb9f197100c67cf98e6611fc91320f29ebd0ed4a605fea0b39"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "perks hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "perks diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "perks preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "perks does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "bd711d1f3ae3e23e74cbe6f689fee4ff16ac588530a27cbbbf90d4a7b9145c54"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9418,
+          "sha256": "7a8e9dcc7adf86494d169067cdf11f37f8fc7add0414c6d93093b9e78cf29944"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "bd711d1f3ae3e23e74cbe6f689fee4ff16ac588530a27cbbbf90d4a7b9145c54"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9418,
+          "sha256": "7a8e9dcc7adf86494d169067cdf11f37f8fc7add0414c6d93093b9e78cf29944"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "perks cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "perks diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "perks preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "perks does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "bd711d1f3ae3e23e74cbe6f689fee4ff16ac588530a27cbbbf90d4a7b9145c54"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9418,
+          "sha256": "7a8e9dcc7adf86494d169067cdf11f37f8fc7add0414c6d93093b9e78cf29944"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "bd711d1f3ae3e23e74cbe6f689fee4ff16ac588530a27cbbbf90d4a7b9145c54"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9418,
+          "sha256": "7a8e9dcc7adf86494d169067cdf11f37f8fc7add0414c6d93093b9e78cf29944"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "needs hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "needs diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "needs preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "needs does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "359e9279cb95eaac828f755e3d628b8cc05e85aa4c24109178e15a2dbbea4983"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9715,
+          "sha256": "cd55e53ad57a925c1110826764d42e66f1917831c12955109a886423cf2a6b92"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "359e9279cb95eaac828f755e3d628b8cc05e85aa4c24109178e15a2dbbea4983"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9715,
+          "sha256": "cd55e53ad57a925c1110826764d42e66f1917831c12955109a886423cf2a6b92"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "needs cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "needs diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "needs preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "needs does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "359e9279cb95eaac828f755e3d628b8cc05e85aa4c24109178e15a2dbbea4983"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9715,
+          "sha256": "cd55e53ad57a925c1110826764d42e66f1917831c12955109a886423cf2a6b92"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "359e9279cb95eaac828f755e3d628b8cc05e85aa4c24109178e15a2dbbea4983"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9715,
+          "sha256": "cd55e53ad57a925c1110826764d42e66f1917831c12955109a886423cf2a6b92"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "fighter hot rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "fighter diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "fighter preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "fighter does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "c2706f850da9845bf2483cf058721e974959f0bfb13b187824e5ef057953c272"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9588,
+          "sha256": "43077c5e7dbb3770443ffb814eb21a9f94690ab12c9093e66c06c714be14436a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "c2706f850da9845bf2483cf058721e974959f0bfb13b187824e5ef057953c272"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9588,
+          "sha256": "43077c5e7dbb3770443ffb814eb21a9f94690ab12c9093e66c06c714be14436a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "fighter cold rejected",
+      "expected": false,
+      "observed": false,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "fighter diagnostic",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "fighter preserves pre-load owners",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "fighter does not write",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "c2706f850da9845bf2483cf058721e974959f0bfb13b187824e5ef057953c272"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9588,
+          "sha256": "43077c5e7dbb3770443ffb814eb21a9f94690ab12c9093e66c06c714be14436a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "c2706f850da9845bf2483cf058721e974959f0bfb13b187824e5ef057953c272"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 9588,
+          "sha256": "43077c5e7dbb3770443ffb814eb21a9f94690ab12c9093e66c06c714be14436a"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "older v2 fields load",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing timer block resets session values",
+      "expected": [
+        0,
+        0.0,
+        0,
+        0.0,
+        0,
+        0,
+        0,
+        0,
+        [
+          0,
+          0
+        ]
+      ],
+      "observed": [
+        0,
+        0.0,
+        0,
+        0.0,
+        0,
+        0,
+        0,
+        0,
+        [
+          0,
+          0
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "missing whisper cooldown resets",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "old v2 still derives configured Needs and hooks",
+      "expected": [
+        true,
+        true
+      ],
+      "observed": [
+        true,
+        true
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "loading old v2 does not migrate files",
+      "expected": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "f9c1eb89ac17cc20def24719b0de0d7abced11be14b103e0d5e7efc202e070e5"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 4054,
+          "sha256": "ee49b050a7c66c052b920ee0eede244816bcc5412143492493b66bfba254dae7"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "observed": {
+        "chunks/0_64.pkl": {
+          "bytes": 503665,
+          "sha256": "2e6e094ee21972023691bf666441c45800bfa53043caa700a898d254f0b338be"
+        },
+        "chunks/sub_0_64_0.pkl": {
+          "bytes": 501048,
+          "sha256": "994a07a1f40315af24276978dd38ebcc71678832a5efafe9464f6b3ecae7df50"
+        },
+        "manifest.json": {
+          "bytes": 803,
+          "sha256": "f9c1eb89ac17cc20def24719b0de0d7abced11be14b103e0d5e7efc202e070e5"
+        },
+        "meta.json": {
+          "bytes": 149,
+          "sha256": "9c4594db94e0d540bb12db156ad78eac1bbf4b2253526b3c2a24f21fada851a5"
+        },
+        "player.json": {
+          "bytes": 4054,
+          "sha256": "ee49b050a7c66c052b920ee0eede244816bcc5412143492493b66bfba254dae7"
+        },
+        "world.json": {
+          "bytes": 17453034,
+          "sha256": "2e6cb9d46488251c1364f68ca4d6abc08262dffd4bf455fa185335401f322275"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "explicit absent components load",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "absent components replace old values",
+      "expected": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "observed": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "stale commands and modal reset",
+      "expected": [
+        null,
+        false,
+        []
+      ],
+      "observed": [
+        null,
+        false,
+        []
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "explicit null/empty item state",
+      "expected": [
+        null,
+        "",
+        null,
+        []
+      ],
+      "observed": [
+        null,
+        "",
+        null,
+        []
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-02",
+      "property": "no stale perk bonuses after absence",
+      "expected": [
+        0,
+        0,
+        0
+      ],
+      "observed": [
+        0,
+        0,
+        0
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-07",
+      "property": "weather absent derives a fresh configured system",
+      "expected": [
+        "clear",
+        true
+      ],
+      "observed": [
+        "clear",
+        true
+      ],
+      "passed": true
+    },
+    {
+      "case": "B2-04",
+      "property": "entire shipped item catalog roundtrip",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B2-04",
+      "property": "all catalog rows retained in order",
+      "expected": [
+        "animal_bone",
+        "animal_sinew",
+        "bile_coating",
+        "binding_knife",
+        "bitter_herb",
+        "bone_dust_draught",
+        "book",
+        "briar_binding_oil",
+        "briar_sap",
+        "clay_lump",
+        "clay_pot",
+        "coldbell_cutting",
+        "coldbell_extract",
+        "component_satchel",
+        "compressed_marrow",
+        "cooked_meat",
+        "corpse",
+        "crow_bile",
+        "crow_flight_membrane",
+        "crow_jerky",
+        "crow_meat",
+        "crude_blade",
+        "crude_viscera",
+        "debug_blade",
+        "dissolution_blade",
+        "dried_aromatic_herb",
+        "dried_bitter_herb",
+        "dried_coldbell",
+        "dried_murk_violet",
+        "dried_pilgrims_woe",
+        "dried_provisions",
+        "dried_resonant_herb",
+        "dried_soporific_herb",
+        "empty_water_skin",
+        "faceted_ward",
+        "fibrous_thorn_mass",
+        "flint_shard",
+        "grave_dust",
+        "heavy_blade",
+        "herbalist_pouch",
+        "hungering_oil",
+        "inner_stone_core",
+        "inscription",
+        "lab_note",
+        "leather_cap",
+        "leather_jack",
+        "leather_satchel",
+        "letter",
+        "marrow_seal",
+        "moist_pebble",
+        "murk_violet_stem",
+        "musk_pellet",
+        "oil_lantern",
+        "perk_vessel",
+        "pilgrims_woe_petals",
+        "prophets_eye_cap",
+        "raw_meat_common",
+        "research_note",
+        "resonant_bone_fragment",
+        "resonant_bone_tincture",
+        "resonant_tincture",
+        "revelation_lens",
+        "revenant_husk",
+        "salt_pouch",
+        "severance_blade",
+        "stalker_meat",
+        "stalker_musk_gland",
+        "stalker_unguent",
+        "stone_carapace_fragment",
+        "stone_marker",
+        "sulphur_cap_fragment",
+        "tablet",
+        "tallow_torch",
+        "water_flask",
+        "water_skin",
+        "wight_concentrate",
+        "wight_essence_residue",
+        "wood_bundle"
+      ],
+      "observed": [
+        "animal_bone",
+        "animal_sinew",
+        "bile_coating",
+        "binding_knife",
+        "bitter_herb",
+        "bone_dust_draught",
+        "book",
+        "briar_binding_oil",
+        "briar_sap",
+        "clay_lump",
+        "clay_pot",
+        "coldbell_cutting",
+        "coldbell_extract",
+        "component_satchel",
+        "compressed_marrow",
+        "cooked_meat",
+        "corpse",
+        "crow_bile",
+        "crow_flight_membrane",
+        "crow_jerky",
+        "crow_meat",
+        "crude_blade",
+        "crude_viscera",
+        "debug_blade",
+        "dissolution_blade",
+        "dried_aromatic_herb",
+        "dried_bitter_herb",
+        "dried_coldbell",
+        "dried_murk_violet",
+        "dried_pilgrims_woe",
+        "dried_provisions",
+        "dried_resonant_herb",
+        "dried_soporific_herb",
+        "empty_water_skin",
+        "faceted_ward",
+        "fibrous_thorn_mass",
+        "flint_shard",
+        "grave_dust",
+        "heavy_blade",
+        "herbalist_pouch",
+        "hungering_oil",
+        "inner_stone_core",
+        "inscription",
+        "lab_note",
+        "leather_cap",
+        "leather_jack",
+        "leather_satchel",
+        "letter",
+        "marrow_seal",
+        "moist_pebble",
+        "murk_violet_stem",
+        "musk_pellet",
+        "oil_lantern",
+        "perk_vessel",
+        "pilgrims_woe_petals",
+        "prophets_eye_cap",
+        "raw_meat_common",
+        "research_note",
+        "resonant_bone_fragment",
+        "resonant_bone_tincture",
+        "resonant_tincture",
+        "revelation_lens",
+        "revenant_husk",
+        "salt_pouch",
+        "severance_blade",
+        "stalker_meat",
+        "stalker_musk_gland",
+        "stalker_unguent",
+        "stone_carapace_fragment",
+        "stone_marker",
+        "sulphur_cap_fragment",
+        "tablet",
+        "tallow_torch",
+        "water_flask",
+        "water_skin",
+        "wight_concentrate",
+        "wight_essence_residue",
+        "wood_bundle"
+      ],
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "actual copied source binding",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    }
+  ],
+  "trace": [],
+  "defects": [],
+  "completed": true,
+  "suite": "b2",
+  "variant": "contract",
+  "imported_sources": {
+    "components.ai": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\ai.py",
+      "relative": "components/ai.py",
+      "sha256": "0f39cb721d197ae0ff318972c20b51bf220026e8de31f1b8caded65a28d99924"
+    },
+    "components.corruption": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\corruption.py",
+      "relative": "components/corruption.py",
+      "sha256": "70010c3875aa7b42b7285ee98aefb4ee50e2e579d07dfd0f9dafefff326517b1"
+    },
+    "components.equipment": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\equipment.py",
+      "relative": "components/equipment.py",
+      "sha256": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7"
+    },
+    "components.fighter": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\fighter.py",
+      "relative": "components/fighter.py",
+      "sha256": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79"
+    },
+    "components.inventory": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\inventory.py",
+      "relative": "components/inventory.py",
+      "sha256": "a764a8ea6a67977967d81697aaa87af9740e7fcd34f04f4176cc3c4038ffa791"
+    },
+    "components.language": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\language.py",
+      "relative": "components/language.py",
+      "sha256": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4"
+    },
+    "components.level": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\level.py",
+      "relative": "components/level.py",
+      "sha256": "001342e1479f20dcdccb0e12f1534172c59c4c20f7f96f2efdaa25263323a652"
+    },
+    "components.light_source": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\light_source.py",
+      "relative": "components/light_source.py",
+      "sha256": "de612dbee3cabda4573e40eabe5e8ee8222e80ac77bb189b5728708dbdeefe7d"
+    },
+    "components.needs": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\needs.py",
+      "relative": "components/needs.py",
+      "sha256": "a5238691b740ee2f5a84adfa4dd26ffa2f277f5a63955a053de4f46ebdef76e4"
+    },
+    "components.perception": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\perception.py",
+      "relative": "components/perception.py",
+      "sha256": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a"
+    },
+    "components.perks": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\perks.py",
+      "relative": "components/perks.py",
+      "sha256": "38325a0cc89f0acf23a16e3fb68b13ea3aaf50e3b58d7ec692b051c5c97f0915"
+    },
+    "config": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\config.py",
+      "relative": "config.py",
+      "sha256": "35bd35b4f142c79c2ec891ac64ba218cc5e3f4b7d421fa836faa1eb7d0a279e8"
+    },
+    "engine.ai_system": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\ai_system.py",
+      "relative": "engine/ai_system.py",
+      "sha256": "0d72a7d750315d4a6f4c14e512c9ec4039fc86d87a40386976723aa2c8d34412"
+    },
+    "engine.checkpoints": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\checkpoints.py",
+      "relative": "engine/checkpoints.py",
+      "sha256": "5961f6e5c5c0561d95fd37056d55eebdfb90fa1ecde9540ef6c1c97ff9bf7c57"
+    },
+    "engine.creature_factory": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\creature_factory.py",
+      "relative": "engine/creature_factory.py",
+      "sha256": "cd3fa4db9716a0d61b1158f2e06037b9ff129d16da703b908de8c657a773a44d"
+    },
+    "engine.data_loader": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\data_loader.py",
+      "relative": "engine/data_loader.py",
+      "sha256": "cbb1ab7f7c05a9b87971086979289ca3c0e2e11c43ce9aad7c678ae5aeb91d86"
+    },
+    "engine.debug": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\debug.py",
+      "relative": "engine/debug.py",
+      "sha256": "421f974675864114703c6436c3afabc9e241fdcf92286152155e7c7ccabafad1"
+    },
+    "engine.display_config": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\display_config.py",
+      "relative": "engine/display_config.py",
+      "sha256": "42e08e5e32aa74c96172e5104a14ff09f43fdbb68251a0f2dfd909192a963ba8"
+    },
+    "engine.effect_lifecycle": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\effect_lifecycle.py",
+      "relative": "engine/effect_lifecycle.py",
+      "sha256": "8486645aff1c325f67c30f38d4e5ff7852b5e249ed3ea06d69a94deb773c7c04"
+    },
+    "engine.engine": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\engine.py",
+      "relative": "engine/engine.py",
+      "sha256": "01619e9d1035767beaabfaa3ba7130e2667efdb243b2bf4db6cca07811eea0b2"
+    },
+    "engine.health_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\health_screen.py",
+      "relative": "engine/health_screen.py",
+      "sha256": "2d94f02896ae0ffa93a0ff8c9c4ae1bce500bcf3cc12fbc3a30f0a9a344b2ffd"
+    },
+    "engine.hooks": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\hooks.py",
+      "relative": "engine/hooks.py",
+      "sha256": "8bf5b46ef62f1331edb772b72b4f5b6ec3c1a8c2b392b9e26cbea584a64f4d2a"
+    },
+    "engine.interaction_cursor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\interaction_cursor.py",
+      "relative": "engine/interaction_cursor.py",
+      "sha256": "07d4e9286d313238d82105154bd4d02398ca014e0629d929fe90d880d9a56019"
+    },
+    "engine.inventory_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\inventory_screen.py",
+      "relative": "engine/inventory_screen.py",
+      "sha256": "6586456cee2a1162e607235d905f3b8955484fa96fb7202129721f3c1bd834fa"
+    },
+    "engine.item_factory": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\item_factory.py",
+      "relative": "engine/item_factory.py",
+      "sha256": "2f4ae5c163b22486228f0d61ea54e1644ffa75f4027ffff130169ac55999cac3"
+    },
+    "engine.item_system": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\item_system.py",
+      "relative": "engine/item_system.py",
+      "sha256": "0119b3a42feb0edf43f1aab81c9aa8fad5232f973ba94495a9c31425267259f1"
+    },
+    "engine.look_mode": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\look_mode.py",
+      "relative": "engine/look_mode.py",
+      "sha256": "2b3d32cdaaaa6304746b9d31e20db0b1d0827f7d11755912f2def25dbfadb04b"
+    },
+    "engine.loot_roller": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\loot_roller.py",
+      "relative": "engine/loot_roller.py",
+      "sha256": "7bb1b1be54d63de5dd84483a15224e5584070772a7d38d75cfafd095bfdbdce1"
+    },
+    "engine.message_log": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\message_log.py",
+      "relative": "engine/message_log.py",
+      "sha256": "c4a3e2049d21665e87aea57b8648624c60929fbab9a55cc751ba6f03af1d9ed3"
+    },
+    "engine.palette": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\palette.py",
+      "relative": "engine/palette.py",
+      "sha256": "646457ba8998f32494169d1833c129fb4c64cab05a94c62eaaec3d696702baab"
+    },
+    "engine.perk_handlers": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\perk_handlers.py",
+      "relative": "engine/perk_handlers.py",
+      "sha256": "f8299dcca9dfdf043fade946957b9e163c97e5b140a1c15cf2e56ec8ec5ae3e8"
+    },
+    "engine.reality_bubble": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\reality_bubble.py",
+      "relative": "engine/reality_bubble.py",
+      "sha256": "d52f1f040ef988b70ae5ec9126ec1a95fa3649bfedf4c11da75d0386374dbded"
+    },
+    "engine.resonance_system": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\resonance_system.py",
+      "relative": "engine/resonance_system.py",
+      "sha256": "3211dcbb1062f5082399fd88f90f69f94e8332f7d9cb5290651267c267493da9"
+    },
+    "engine.save_components": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\save_components.py",
+      "relative": "engine/save_components.py",
+      "sha256": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e"
+    },
+    "engine.save_manager": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\save_manager.py",
+      "relative": "engine/save_manager.py",
+      "sha256": "c7ab1f7b15b957e97f5c76507fac9ef628df07ba2cc127a63650fbeda2ceb7a3"
+    },
+    "engine.scene_generation": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\scene_generation.py",
+      "relative": "engine/scene_generation.py",
+      "sha256": "5b174af57b09c742cf5ca6602893299d4d79d0ce27888ffcc4b216c310a5ca95"
+    },
+    "engine.text_reader": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\text_reader.py",
+      "relative": "engine/text_reader.py",
+      "sha256": "6a8932e43bb1bd78155ad80c644b55ae219da94c17f3a7d72b6085cde2044969"
+    },
+    "engine.ui": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\ui.py",
+      "relative": "engine/ui.py",
+      "sha256": "c041403400a300f54ce76e4e36157c91bae1aa60207821654a6d9125afd93655"
+    },
+    "engine.visual_events": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\visual_events.py",
+      "relative": "engine/visual_events.py",
+      "sha256": "9950362cadb9819e25259457ed7061175e9cff5d2b6a23593ec3989251588d3b"
+    },
+    "engine.weather": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\weather.py",
+      "relative": "engine/weather.py",
+      "sha256": "51d4d49731e7687994db79b82dd6fe9e3f8ff0f4e309144be0e735f080108277"
+    },
+    "engine.world_time": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\world_time.py",
+      "relative": "engine/world_time.py",
+      "sha256": "b4669d0f4cfe4bb037a88b2170d606c29408b758f9f2375fba9ad46d02fbea6c"
+    },
+    "entities.actor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\actor.py",
+      "relative": "entities/actor.py",
+      "sha256": "34600dc6f36d1f3f315f59ec296be4b4f1871bd3031ae582e8fdeda783702822"
+    },
+    "entities.entity": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\entity.py",
+      "relative": "entities/entity.py",
+      "sha256": "652c3124a2af45519a8c57f6aad1e4fe53f68477cdf8411ddb6c337f3f2b5a53"
+    },
+    "entities.item": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\item.py",
+      "relative": "entities/item.py",
+      "sha256": "d85214b852cf00d7b9b7615a388ec959a6ae94189e3a845b36729634a8a28e7b"
+    },
+    "generation.access": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\access.py",
+      "relative": "generation/access.py",
+      "sha256": "9d0aaedac978d18f2b957d5c026942aab85a8138925e68322aece1942109519f"
+    },
+    "generation.compound_integrity": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\compound_integrity.py",
+      "relative": "generation/compound_integrity.py",
+      "sha256": "137faddc8535b93396c1adfba995c800ddc9a38f5a9689b12c2962a3a45a33f7"
+    },
+    "generation.compounds": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\compounds.py",
+      "relative": "generation/compounds.py",
+      "sha256": "06deecdbf48880b4e51710eb4ec186dc2a61ab17dd8bd27fededfa94db4cd7f7"
+    },
+    "generation.context": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\context.py",
+      "relative": "generation/context.py",
+      "sha256": "dfd1a98336fdb76c08e6fb8e1505a0fe80cb5adaa4741ab8a4093147b0ac7e05"
+    },
+    "generation.decor_utils": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\decor_utils.py",
+      "relative": "generation/decor_utils.py",
+      "sha256": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93"
+    },
+    "generation.entrance_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\entrance_gen.py",
+      "relative": "generation/entrance_gen.py",
+      "sha256": "c6aa0c0364ca06498c6b36dd2dbba36c2b1f6abd56301f8d23b5f4f55f63b6ed"
+    },
+    "generation.floor_object_utils": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\floor_object_utils.py",
+      "relative": "generation/floor_object_utils.py",
+      "sha256": "ededc552d7530c146aec85fe569d661980697cce6f3e087039b1bb287b710319"
+    },
+    "generation.layout_stamper": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\layout_stamper.py",
+      "relative": "generation/layout_stamper.py",
+      "sha256": "2d60d9316d935c64ca27f44b0c4be397d39b3d98e65d3bba9dd7f1c0c77efdd8"
+    },
+    "generation.local_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\local_gen.py",
+      "relative": "generation/local_gen.py",
+      "sha256": "303560200988b4d80094b5a5f65eed82670e77ffaf6b303a7f2373834dc1cd69"
+    },
+    "generation.parent_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\parent_selection.py",
+      "relative": "generation/parent_selection.py",
+      "sha256": "92b2dc7885cfb608fabf0d62d7076ec42cefab3097611a59c55cc11140f8a04c"
+    },
+    "generation.placement": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\placement.py",
+      "relative": "generation/placement.py",
+      "sha256": "2fb1d1c815d042041d63e971a08564dda0337aaae51c0d6a49234a2d11e679ee"
+    },
+    "generation.plan_integrity": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\plan_integrity.py",
+      "relative": "generation/plan_integrity.py",
+      "sha256": "111a586ae1c258f99fc45b0527c912da97d7e5338f757371c543cdc45898b000"
+    },
+    "generation.planned_dressing": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\planned_dressing.py",
+      "relative": "generation/planned_dressing.py",
+      "sha256": "a13626438be8b7345141144bc4fa2a694efa62d7319fa9b42c4e9e2c5ce8d956"
+    },
+    "generation.planned_scene": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\planned_scene.py",
+      "relative": "generation/planned_scene.py",
+      "sha256": "646b6ecbc3719cd11c3eacbf89fa23373d6e9d4699d92faf179d1376b2285d89"
+    },
+    "generation.poi_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\poi_selection.py",
+      "relative": "generation/poi_selection.py",
+      "sha256": "23078f0e16a0c5cf58a0feff03278e61c72ff4929741fc387423de97e078cca4"
+    },
+    "generation.ports": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\ports.py",
+      "relative": "generation/ports.py",
+      "sha256": "d0a7ae89bbe2d6674595a0ed932cac7443ea332c9ea3d0df8b53506da39e6f93"
+    },
+    "generation.region_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\region_gen.py",
+      "relative": "generation/region_gen.py",
+      "sha256": "0dfad56aad9aaba010c752f464e76b0b30a9c609875c35cad545adffe1e1a503"
+    },
+    "generation.road_network": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\road_network.py",
+      "relative": "generation/road_network.py",
+      "sha256": "8d2ad06ef8e69156b1b5e6677c3cd7cb0cd0a5c537f045eaea300ea2f59160ec"
+    },
+    "generation.scene_adapters": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\scene_adapters.py",
+      "relative": "generation/scene_adapters.py",
+      "sha256": "2cb2adc69b91dd0f6ba5cb959cddac87444ff2502d34240cda155462c51c5059"
+    },
+    "generation.settlement_context": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\settlement_context.py",
+      "relative": "generation/settlement_context.py",
+      "sha256": "20badd4af5a5f758b50a7145a2eccf40ac6203f046f297226eaaeca5b7d83265"
+    },
+    "generation.settlement_layout": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\settlement_layout.py",
+      "relative": "generation/settlement_layout.py",
+      "sha256": "ba32fe1fad83e6ea62201f1329075034a635a1d00e806a2d6447636e305d558e"
+    },
+    "generation.settlement_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\settlement_selection.py",
+      "relative": "generation/settlement_selection.py",
+      "sha256": "1b59095444abe595cfc26e1a67a632fe27ba03510f9783157d54b570e712ae10"
+    },
+    "generation.spawn_specs": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\spawn_specs.py",
+      "relative": "generation/spawn_specs.py",
+      "sha256": "8dc9d547a4afb022a508069e7e51774bc6091d5ff3fc82a4cf1006bf98b57c43"
+    },
+    "generation.structure_contract": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\structure_contract.py",
+      "relative": "generation/structure_contract.py",
+      "sha256": "b71bdb9c5aaf8bb717bc26b396f0d48a458ecc56be12b631a650b55dd2f4225c"
+    },
+    "generation.structure_preview": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\structure_preview.py",
+      "relative": "generation/structure_preview.py",
+      "sha256": "4f5f09406763350013bdbdb1fcb75d2a5b91f726b4f7113ce1a90050808937bb"
+    },
+    "generation.town_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\town_gen.py",
+      "relative": "generation/town_gen.py",
+      "sha256": "cf9091724825391b18d742e6e459e0640b594eb4ea2490252c130f83d284e424"
+    },
+    "generation.world_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\world_gen.py",
+      "relative": "generation/world_gen.py",
+      "sha256": "68f14887af01a3b1c37a936d6fd38e3e1803f3577c27c4aa04eac74903d6de40"
+    },
+    "generation.world_plan": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\world_plan.py",
+      "relative": "generation/world_plan.py",
+      "sha256": "a3e5f3196d900f1cbc460c0928795f192948d917600159b83e3c30d432ab6950"
+    },
+    "main": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\main.py",
+      "relative": "main.py",
+      "sha256": "78de441e72c44958239b92c81387242d8fdf22d4adcfc03a5732f7cc5a75ae1e"
+    },
+    "rendering.callouts": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\callouts.py",
+      "relative": "rendering/callouts.py",
+      "sha256": "325db657d9c74bea22e5e4200f7860bf2bfc7a816f16e1d53c348eeb5be75c6c"
+    },
+    "rendering.craft_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\craft_screen.py",
+      "relative": "rendering/craft_screen.py",
+      "sha256": "4564ee9cddd9d9754460d3a3bb0b4185e254dd6ce8ced9b7835fc76b9d5fb219"
+    },
+    "rendering.decor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\decor.py",
+      "relative": "rendering/decor.py",
+      "sha256": "406e26318ac3fc0139c83bc2f434100b1158d849a35e792c3ca2c345a8bd9950"
+    },
+    "rendering.glyph_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\glyph_gen.py",
+      "relative": "rendering/glyph_gen.py",
+      "sha256": "b7fde731fbadf2257cd2fa7c8fb3588348cfb929b419f23b8144c98d78037c45"
+    },
+    "rendering.lexicon_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\lexicon_screen.py",
+      "relative": "rendering/lexicon_screen.py",
+      "sha256": "1ebdd83253521a0644ac814152a89eafbb8174f31a9649affc671b622b7323f7"
+    },
+    "rendering.particles": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\particles.py",
+      "relative": "rendering/particles.py",
+      "sha256": "76d7642d530bdf62a0412e1428f43b06aba9b6011327298b0cdcb92eeacf479d"
+    },
+    "rendering.perk_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\perk_screen.py",
+      "relative": "rendering/perk_screen.py",
+      "sha256": "02eeec7bc641f89cf79665f67f85efdd0895f25db54b47b6de4bb54c2b46dffd"
+    },
+    "rendering.renderer": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\renderer.py",
+      "relative": "rendering/renderer.py",
+      "sha256": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08"
+    },
+    "rendering.sprite_registry": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\sprite_registry.py",
+      "relative": "rendering/sprite_registry.py",
+      "sha256": "814c1a6c4c1d56a0744a93feeccc2bf2a851becd98c3d40d09ddf19e4f997323"
+    },
+    "rendering.tile_registry": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\tile_registry.py",
+      "relative": "rendering/tile_registry.py",
+      "sha256": "9a9f07a3619d03401f6367601f00bd685024e1f0dc691a41c4cdfa0555c9162a"
+    },
+    "rendering.ui_registry": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\ui_registry.py",
+      "relative": "rendering/ui_registry.py",
+      "sha256": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058"
+    },
+    "world.local_map": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\local_map.py",
+      "relative": "world/local_map.py",
+      "sha256": "a198d0b2d05ec86621d8d75ad27c12b499545edd8ba9f866e413316f1121460a"
+    },
+    "world.name_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\name_gen.py",
+      "relative": "world/name_gen.py",
+      "sha256": "8e5d788c75b1e0d4183e83bb823298a4008d57ab84fda887cd6bb84648397546"
+    },
+    "world.world_map": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\world_map.py",
+      "relative": "world/world_map.py",
+      "sha256": "400e274bf760444bfcaec9aa617212021e9fc42a0826430f2c2edce501a73ba9"
+    },
+    "world.world_myth": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\world_myth.py",
+      "relative": "world/world_myth.py",
+      "sha256": "bf9ccc805b376deafd9e43f9f0cc092f2b2b6a1d66e967b2d9ea0ca76be9dc80"
+    }
+  },
+  "assertion_count": 213,
+  "passed": true
+}

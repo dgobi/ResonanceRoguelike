@@ -1,0 +1,14 @@
+{
+  "run_id": "d-20261024-142803-edfde563",
+  "suite": "diagnostic",
+  "scenario": "original",
+  "variant": "equipped",
+  "phase": "read",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\production\\results\\d-20261024-142803-edfde563",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\production\\results\\d-20261024-142803-edfde563\\diagnostic-original-equipped-read\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\production\\results\\d-20261024-142803-edfde563\\diagnostic-original-equipped-read\\result.json",
+  "debug": false,
+  "expected": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\production\\results\\d-20261024-142803-edfde563\\diagnostic-original-equipped-write\\result.json"
+}

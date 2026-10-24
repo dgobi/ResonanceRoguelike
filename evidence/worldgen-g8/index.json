@@ -1,0 +1,635 @@
+{
+  "schema": 1,
+  "milestone": "G8",
+  "status": "complete",
+  "original_source": "8e56d36d72537e8b32c3666dd5d19723d1afdf3a",
+  "reviewed_wiki_source": "a708e0c62cbd0d39637ee57ac0502c13c1cad23a",
+  "frozen_input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+  "frozen_input_tag": "checkpoint/worldgen-g8-final-inputs-20261024-b",
+  "verified_delivery_tag": "checkpoint/worldgen-g8-verified-20261024-a",
+  "publication": "Actual delivered commit/tag and remote readback are recorded in the portable archive publication.json and its adjacent delivery receipt, outside self-referential committed content.",
+  "matrix": [
+    {
+      "id": "G8-01",
+      "status": "complete",
+      "source_or_contract": "Production checkout preservation and historical witness",
+      "evidence_description": "`before/start.json`, `before/guard/`, `before/witness/`"
+    },
+    {
+      "id": "G8-02",
+      "status": "complete",
+      "source_or_contract": "`authoring_outputs.py`, self-contained focused runner",
+      "evidence_description": "`before/collision-hardlink/`, `authoring-protection-c/`, `focused-development/`, final focused parent/log"
+    },
+    {
+      "id": "G8-03",
+      "status": "complete",
+      "source_or_contract": "Shared wiki source/authoring/product model",
+      "evidence_description": "`wiki-integration/`, final wiki contract/repeat/drift/integrity receipts"
+    },
+    {
+      "id": "G8-04",
+      "status": "complete",
+      "source_or_contract": "`settlement_layout.py`, two shipped profiles, public ground",
+      "evidence_description": "final focused `g8-cardinal-layouts.json`, final visuals"
+    },
+    {
+      "id": "G8-05",
+      "status": "complete",
+      "source_or_contract": "Actual saved arrival, route-driven blocks",
+      "evidence_description": "final diagnostic country equality, complete plans and diagrams"
+    },
+    {
+      "id": "G8-06",
+      "status": "complete",
+      "source_or_contract": "Cardinal lot fitting, full doorway spans",
+      "evidence_description": "final focused `g8-frontage-fixtures.json`, browser G8 consumers"
+    },
+    {
+      "id": "G8-07",
+      "status": "complete",
+      "source_or_contract": "Actual horizontal roadside segment and explicit exclusions",
+      "evidence_description": "final diagnostic roadside records and authoring previews"
+    },
+    {
+      "id": "G8-08",
+      "status": "complete",
+      "source_or_contract": "Reciprocal lots/blocks/public ownership and exact replay",
+      "evidence_description": "final focused checksum-corruption and frontage fixtures"
+    },
+    {
+      "id": "G8-09",
+      "status": "complete",
+      "source_or_contract": "Atomic alternatives and shared bounded required fitting",
+      "evidence_description": "layout tests, inherited required-fit tests, authoring required-no-fit"
+    },
+    {
+      "id": "G8-10",
+      "status": "complete",
+      "source_or_contract": "Role weights/caps/minima and stable spatial repetition",
+      "evidence_description": "selection tests and final diagnostic composition records"
+    },
+    {
+      "id": "G8-11",
+      "status": "complete",
+      "source_or_contract": "Final populated access, protected common, native semantics",
+      "evidence_description": "native-update lifecycle tests, actual journey, renderer views"
+    },
+    {
+      "id": "G8-12",
+      "status": "complete",
+      "source_or_contract": "Format 6 and explicit historical/current adapters",
+      "evidence_description": "final focused `g8-policy-combinations.json`, historical fixtures"
+    },
+    {
+      "id": "G8-13",
+      "status": "complete",
+      "source_or_contract": "Saved resolution and affected dependency scope",
+      "evidence_description": "final focused `g8-late-rollback.json`"
+    },
+    {
+      "id": "G8-14",
+      "status": "complete",
+      "source_or_contract": "Genuine G7, reverse visits, independent state and rollback",
+      "evidence_description": "final focused `g8-genuine-g7-restore.json`, lifecycle checkpoints"
+    },
+    {
+      "id": "G8-15",
+      "status": "complete",
+      "source_or_contract": "Ordinary matrix, lazy deterministic plans and topology/costs",
+      "evidence_description": "final diagnostic `run.json` and plans"
+    },
+    {
+      "id": "G8-16",
+      "status": "complete",
+      "source_or_contract": "Real journey and explored checkpoint",
+      "evidence_description": "final diagnostic journey and progress receipts"
+    },
+    {
+      "id": "G8-17",
+      "status": "complete",
+      "source_or_contract": "Six new workflows plus inherited workflows; actual downloads",
+      "evidence_description": "final authoring `workflows.json`, both browser receipts"
+    },
+    {
+      "id": "G8-18",
+      "status": "complete",
+      "source_or_contract": "Corrected main chapters and standalone editable handbook",
+      "evidence_description": "final wiki edition/reader/integrity receipts and HTML"
+    },
+    {
+      "id": "G8-19",
+      "status": "complete",
+      "source_or_contract": "Frozen serial gates, archive inventory and remote readback",
+      "evidence_description": "final `release.json`, `index.json`, delivery manifest/readback"
+    }
+  ],
+  "final_gates": [
+    {
+      "name": "guard",
+      "path": "evidence/worldgen-g8/final-b/guard/receipt.json",
+      "sha256": "6d04e7ad0eb9da4307b0195229f9759a86ba3dfd783bbf4e1d1e6897de308742",
+      "bytes": 110525,
+      "seconds": 9.987305899965577,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/guard/inputs.json"
+    },
+    {
+      "name": "focused",
+      "path": "evidence/worldgen-g8/final-b/focused/receipt.json",
+      "sha256": "a7b1f260644142032054618c31328264831f83088f7f89a948b9d240238e21fd",
+      "bytes": 96865,
+      "seconds": 470.2442197999917,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/focused/inputs.json"
+    },
+    {
+      "name": "browser",
+      "path": "evidence/worldgen-g8/final-b/browser/receipt.json",
+      "sha256": "5d52bfe4e72b83e3ce2fa822d034787499f62a369920190d4d68b837d7c09123",
+      "bytes": 116856,
+      "seconds": 57.3470009000157,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/browser/inputs.json"
+    },
+    {
+      "name": "authoring",
+      "path": "evidence/worldgen-g8/final-b/authoring/receipt.json",
+      "sha256": "3768173cb38e9de1c4247d98c40952bf3eeeee50f58a74d5c2c220168d2172d0",
+      "bytes": 128039,
+      "seconds": 91.09478520002449,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/authoring/inputs.json"
+    },
+    {
+      "name": "catalog",
+      "path": "evidence/worldgen-g8/final-b/catalog/receipt.json",
+      "sha256": "b2f355a55aa8fcfe1caa1987ea9a9ead554b05da163e7bcd3590242ca1335e97",
+      "bytes": 91404,
+      "seconds": 0.33358179999049753,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/catalog/inputs.json"
+    },
+    {
+      "name": "catalog-check",
+      "path": "evidence/worldgen-g8/final-b/catalog-check/receipt.json",
+      "sha256": "cf5cb34b99411210a7bfaac970f2d8f5531f8c0fe9f9564ea971df560d1e8718",
+      "bytes": 91173,
+      "seconds": 0.3715698000160046,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/catalog-check/inputs.json"
+    },
+    {
+      "name": "diagnostic",
+      "path": "evidence/worldgen-g8/final-b/diagnostic/receipt.json",
+      "sha256": "5575065c3d3d4d8cf05e8d7cde0dbb97e13c830d88085bc6ebe498d687105bd9",
+      "bytes": 98005,
+      "seconds": 164.32135560002644,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/diagnostic/inputs.json"
+    },
+    {
+      "name": "visuals",
+      "path": "evidence/worldgen-g8/final-b/visuals/receipt.json",
+      "sha256": "91b310115416237244ca2e33994b388937913d834e5f5a7b1a84085b3a65504b",
+      "bytes": 93864,
+      "seconds": 8.776604700018652,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/visuals/inputs.json"
+    },
+    {
+      "name": "wiki",
+      "path": "evidence/worldgen-g8/final-b/wiki/receipt.json",
+      "sha256": "510f37005ff447708f9cf0a544e14e38ee100d85045edf2ed78012db59f12b18",
+      "bytes": 97863,
+      "seconds": 23.64395139995031,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/wiki/inputs.json"
+    },
+    {
+      "name": "production",
+      "path": "evidence/worldgen-g8/final-b/production/receipt.json",
+      "sha256": "f3997ef74d459513c322d8a8657d0125f0f035d4871a565ef3aa9344defdbaa5",
+      "bytes": 687046,
+      "seconds": 437.75106020004023,
+      "exit_code": 0,
+      "timeout": false,
+      "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+      "raw_and_lf_hashes": "evidence/worldgen-g8/final-b/production/inputs.json"
+    }
+  ],
+  "focused": {
+    "tests": 216,
+    "seconds": 466.8,
+    "inherited_pythonpath": null,
+    "unfiltered": true
+  },
+  "production": {
+    "receipt": "evidence/worldgen-g8/final-b/production/results/d-20261024-142803-edfde563/results.json",
+    "totals": {
+      "checks": 3675,
+      "passed": 3675,
+      "failed": 0,
+      "workers": 159
+    },
+    "only": null,
+    "case": null,
+    "negative_controls": 7
+  },
+  "browser": {
+    "runs": [
+      {
+        "browser": "chromium",
+        "exit_code": 0,
+        "command": [
+          "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "G:\\GameDev\\RoguelikeProject\\tools\\verify_structure_editor.py",
+          "--worker",
+          "chromium",
+          "--evidence",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results"
+        ]
+      },
+      {
+        "browser": "firefox",
+        "exit_code": 0,
+        "command": [
+          "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "G:\\GameDev\\RoguelikeProject\\tools\\verify_structure_editor.py",
+          "--worker",
+          "firefox",
+          "--evidence",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results"
+        ]
+      }
+    ],
+    "playwright": "1.64.1",
+    "driver": "1.64.0-beta-1791568591000"
+  },
+  "authoring": {
+    "g8_top_level_workflows": 6,
+    "inherited": "G7 workflows with nested G6/G5; nested counts not added as independent G8 workflows"
+  },
+  "wiki": {
+    "edition": "1.2",
+    "html": {
+      "path": "Resonance_Wiki_Maintenance/Resonance_Owner_Wiki.html",
+      "sha256": "8adfc9a0216ac6ac8c5010cc9a0f1acde597120209eae24545326d24acf57f0c",
+      "bytes": 5282014
+    },
+    "integrity": "evidence/worldgen-g8/final-b/wiki/results/integrity.json",
+    "reader": "evidence/worldgen-g8/final-b/wiki/results/reader/reader.json",
+    "input_binding": "Resonance_Wiki_Maintenance/source-manifest.json"
+  },
+  "journey": {
+    "steps": 38805,
+    "checkpoint": {
+      "scope": "Actually explored journey: G8 town contents/common, compound child mutations, single-site, other settlement, bridge and landmark; actual F5 and cold SaveManager load",
+      "save_seconds": 7.169048099953216,
+      "cold_load_seconds": 3.9073207000037655,
+      "scene_count": 354,
+      "bytes": 195744304,
+      "f9_seconds": 4.195493300037924
+    },
+    "worst_transition_seconds": 0.17755389999365434
+  },
+  "metrics": "evidence/worldgen-g8/metrics-comparison.json",
+  "visual_inspection": "evidence/worldgen-g8/visual-inspection.json",
+  "attempts": [
+    {
+      "path": "evidence/worldgen-g8/authoring-development-a/receipt.json",
+      "passed": false,
+      "exit_code": 1,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 5.764051400008611,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/authoring-development-b/receipt.json",
+      "passed": false,
+      "exit_code": 1,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 10.83234409999568,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/authoring-development-c/receipt.json",
+      "passed": false,
+      "exit_code": 1,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 15.342650800012052,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/authoring-development-d/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 91.17500570003176,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/authoring-protection/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 23.00421990000177,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/authoring-protection-b/receipt.json",
+      "passed": false,
+      "exit_code": 1,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 22.666039200033993,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/authoring-protection-c/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 13.181232700007968,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/before/baseline/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 31.661731600004714,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/before/collision-hardlink/child_report/receipt.json",
+      "passed": null,
+      "exit_code": 0,
+      "source_stable": null,
+      "committed_inputs_reconciled": null,
+      "seconds": null,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/before/collision-hardlink/derived_svg_hardlink/receipt.json",
+      "passed": null,
+      "exit_code": 0,
+      "source_stable": null,
+      "committed_inputs_reconciled": null,
+      "seconds": null,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/before/collision-hardlink/initialization_report/receipt.json",
+      "passed": null,
+      "exit_code": 0,
+      "source_stable": null,
+      "committed_inputs_reconciled": null,
+      "seconds": null,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/before/collision-hardlink/recipe_report/receipt.json",
+      "passed": null,
+      "exit_code": 0,
+      "source_stable": null,
+      "committed_inputs_reconciled": null,
+      "seconds": null,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/before/collisions/child_report/receipt.json",
+      "passed": null,
+      "exit_code": 0,
+      "source_stable": null,
+      "committed_inputs_reconciled": null,
+      "seconds": null,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/before/collisions/initialization_report/receipt.json",
+      "passed": null,
+      "exit_code": 0,
+      "source_stable": null,
+      "committed_inputs_reconciled": null,
+      "seconds": null,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/before/collisions/recipe_report/receipt.json",
+      "passed": null,
+      "exit_code": 0,
+      "source_stable": null,
+      "committed_inputs_reconciled": null,
+      "seconds": null,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/before/guard/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 18.874896299967077,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/browser-development-a/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 58.91847669996787,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/composition-checks-a/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 35.9443859999883,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/diagnostic-development-a/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 242.3844818000216,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/diagnostic-metrics-repair/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 21.07819060003385,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/final-a/authoring/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 95.30167110002367,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/final-a/browser/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 59.176004000008106,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/final-a/catalog/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 0.33483959996374324,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/final-a/catalog-check/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 0.35630919999675825,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/final-a/diagnostic/receipt.json",
+      "passed": false,
+      "exit_code": 1,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 0.19206569995731115,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/final-a/focused/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 381.54980910004815,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/final-a/guard/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 10.035711699980311,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/lifecycle-checks-a/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 27.238945799996145,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/visuals-development-a/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": false,
+      "seconds": 10.71028880000813,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/wiki-development-a/receipt.json",
+      "passed": false,
+      "exit_code": 1,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 17.873308399983216,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/wiki-development-b/receipt.json",
+      "passed": false,
+      "exit_code": 1,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 18.30219610000495,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/wiki-development-c/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 21.586559000017587,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    },
+    {
+      "path": "evidence/worldgen-g8/wiki-development-d/receipt.json",
+      "passed": true,
+      "exit_code": 0,
+      "source_stable": true,
+      "committed_inputs_reconciled": true,
+      "seconds": 21.030597600038163,
+      "classification": "development or historical pre-change receipt; never substituted for final frozen gates"
+    }
+  ],
+  "retained_failures": [
+    "Frozen final-a: diagnostic comparison report had one unmatched parenthesis; corrected and executed all ordinary metric paths before full final-b rerun.",
+    "Original CLI collisions overwrite disposable inputs before protection.",
+    "Authoring development a: valid roadside draft unselected at former demonstration seed; documented seed 0 positive.",
+    "Authoring development b: valid landmark draft unselected; explicit complete demonstration policy now selects the draft.",
+    "Authoring development c: stale editor catalog detected before refresh.",
+    "Wiki development a/b: Firefox native loader could not resolve logical Windows LocalAppData; same resolved-path policy as established editor harness fixes it.",
+    "Early authoring protection iterations retain cross-volume hard-link skip and diagnostic wording failure; final same-volume checks execute successfully."
+  ],
+  "limits": [
+    "Windows symlinks unavailable; historical Linux receipt preserved and local same-file hard-link cases executed.",
+    "Controlled grid schedules demonstrate all cardinal directions; ordinary seed matrix is separate.",
+    "Journey uses stationary actors, paused AI/survival and invincibility; separate lifecycle tests run ordinary native updates.",
+    "Production screenshots use revealed visibility. Headless wiki checks do not constitute an assistive-technology audit or OS clipboard readback.",
+    "Existing broad explored-checkpoint cost is measured; no storage compaction or G9 work."
+  ]
+}

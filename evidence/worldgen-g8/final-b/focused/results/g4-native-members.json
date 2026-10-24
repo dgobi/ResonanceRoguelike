@@ -1,0 +1,134 @@
+[
+  {
+    "form": "grid",
+    "chunk": [
+      75,
+      99
+    ],
+    "role": "civic",
+    "district": "bell_quarter",
+    "actors": 4,
+    "waystones": 1
+  },
+  {
+    "form": "grid",
+    "chunk": [
+      75,
+      100
+    ],
+    "role": "residential",
+    "district": "residential",
+    "actors": 3,
+    "waystones": 0
+  },
+  {
+    "form": "grid",
+    "chunk": [
+      76,
+      99
+    ],
+    "role": "residential",
+    "district": "residential",
+    "actors": 4,
+    "waystones": 0
+  },
+  {
+    "form": "grid",
+    "chunk": [
+      76,
+      100
+    ],
+    "role": "residential",
+    "district": "residential",
+    "actors": 3,
+    "waystones": 0
+  },
+  {
+    "form": "roadside",
+    "chunk": [
+      39,
+      26
+    ],
+    "role": "market",
+    "district": "market_quarter",
+    "actors": 4,
+    "waystones": 0
+  },
+  {
+    "form": "roadside",
+    "chunk": [
+      40,
+      26
+    ],
+    "role": "residential",
+    "district": "residential",
+    "actors": 6,
+    "waystones": 0
+  },
+  {
+    "form": "grid",
+    "chunk": [
+      106,
+      106
+    ],
+    "role": "civic",
+    "district": "bell_quarter",
+    "actors": 4,
+    "waystones": 1
+  },
+  {
+    "form": "grid",
+    "chunk": [
+      106,
+      107
+    ],
+    "role": "residential",
+    "district": "residential",
+    "actors": 4,
+    "waystones": 0
+  },
+  {
+    "form": "grid",
+    "chunk": [
+      107,
+      106
+    ],
+    "role": "residential",
+    "district": "residential",
+    "actors": 5,
+    "waystones": 0
+  },
+  {
+    "form": "grid",
+    "chunk": [
+      107,
+      107
+    ],
+    "role": "residential",
+    "district": "residential",
+    "actors": 5,
+    "waystones": 0
+  },
+  {
+    "form": "roadside",
+    "chunk": [
+      87,
+      33
+    ],
+    "role": "market",
+    "district": "market_quarter",
+    "actors": 4,
+    "waystones": 0
+  },
+  {
+    "form": "roadside",
+    "chunk": [
+      88,
+      33
+    ],
+    "role": "residential",
+    "district": "residential",
+    "actors": 6,
+    "waystones": 0
+  }
+]

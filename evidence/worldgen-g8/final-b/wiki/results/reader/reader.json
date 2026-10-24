@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "html_sha256": "8adfc9a0216ac6ac8c5010cc9a0f1acde597120209eae24545326d24acf57f0c",
+  "runs": [
+    {
+      "browser": "chromium",
+      "version": "156.0.8078.4",
+      "internal_links": 542,
+      "missing": [],
+      "search_results": 36,
+      "copy_button": "Copied",
+      "selected_fallback_characters": 0,
+      "navigation": true,
+      "mobile_menu": true,
+      "script_errors": []
+    },
+    {
+      "browser": "firefox",
+      "version": "157.0",
+      "internal_links": 542,
+      "missing": [],
+      "search_results": 36,
+      "copy_button": "Copied",
+      "selected_fallback_characters": 0,
+      "navigation": true,
+      "mobile_menu": true,
+      "script_errors": []
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\Resonance_Wiki_Maintenance\\verify_reader.py",
+        "--worker",
+        "chromium",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\wiki\\results\\reader"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\Resonance_Wiki_Maintenance\\verify_reader.py",
+        "--worker",
+        "firefox",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\wiki\\results\\reader"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "limits": "Headless local-file Chromium and Firefox, two viewport sizes; automated navigation/search/copy control checks and retained screenshots. No manual assistive-technology audit or OS clipboard readback."
+}

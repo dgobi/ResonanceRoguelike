@@ -13,5 +13,22 @@
     "Repeated house/shop families remain recognizable; controlled schedules intentionally increase residential/commercial emphasis.",
     "Broad garden strips, empty corner land and a large simple paved common remain; the bounded rectangular composer does not optimize every leftover parcel."
   ],
-  "limits": "Full visibility revealed; real production sprite renderer and population. Screenshots establish appearance; access and ownership rely on separate executed checks."
+  "limits": "Full visibility revealed; real production sprite renderer and population. Screenshots establish appearance; access and ownership rely on separate executed checks.",
+  "final_render_equivalence": {
+    "cross-market": {
+      "sha256": "2bcb38c0a062de5af513aad326bd0f01549cb777965f2225242f143f915a4fbc",
+      "identical_to_inspected_development_view": true,
+      "final_path": "evidence/worldgen-g8/final-b/visuals/results/cross-market-complete.png"
+    },
+    "linked-courts": {
+      "sha256": "1476e7e4315ee98c8b818c608f1fd3705220c8c668a473b4b1c6432d31642d53",
+      "identical_to_inspected_development_view": true,
+      "final_path": "evidence/worldgen-g8/final-b/visuals/results/linked-courts-complete.png"
+    },
+    "roadside": {
+      "sha256": "02e4d6261bdbaf23587ed9d12afb86dc8ca412ac41b201bd8f333ee6f09aad62",
+      "identical_to_inspected_development_view": true,
+      "final_path": "evidence/worldgen-g8/final-b/visuals/results/roadside-complete.png"
+    }
+  }
 }

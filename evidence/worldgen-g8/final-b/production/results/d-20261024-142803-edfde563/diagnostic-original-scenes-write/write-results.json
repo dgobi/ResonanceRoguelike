@@ -1,0 +1,113 @@
+{
+  "case": "scenes",
+  "phase": "write",
+  "pid": 15468,
+  "harness_completed": true,
+  "checks": [
+    {
+      "property": "in-session load completes",
+      "expected": true,
+      "observed": true,
+      "property_passed": true
+    },
+    {
+      "property": "loaded underground identity and contents",
+      "expected": [
+        "sub_0_64_0",
+        "flagstone",
+        [
+          "grave_thing"
+        ]
+      ],
+      "observed": [
+        "sub_0_64_0",
+        "flagstone",
+        [
+          "grave_thing"
+        ]
+      ],
+      "property_passed": true
+    },
+    {
+      "property": "surface identity and contents survive underground save/load/ascent",
+      "expected": [
+        null,
+        "grass",
+        [
+          "hollow_revenant"
+        ]
+      ],
+      "observed": [
+        null,
+        "grass",
+        [
+          "hollow_revenant"
+        ]
+      ],
+      "property_passed": true
+    },
+    {
+      "property": "underground identity and contents survive redescent",
+      "expected": [
+        "sub_0_64_0",
+        "flagstone",
+        [
+          "grave_thing"
+        ]
+      ],
+      "observed": [
+        "sub_0_64_0",
+        "flagstone",
+        [
+          "grave_thing"
+        ]
+      ],
+      "property_passed": true
+    }
+  ],
+  "underground_before": {
+    "world": [
+      0,
+      64
+    ],
+    "submap": "sub_0_64_0",
+    "marker": "flagstone",
+    "actors": [
+      "grave_thing"
+    ]
+  },
+  "initiating_entry": "SaveManager.save(engine), diagnostic full save",
+  "underground_after_load": {
+    "world": [
+      0,
+      64
+    ],
+    "submap": "sub_0_64_0",
+    "marker": "flagstone",
+    "actors": [
+      "grave_thing"
+    ]
+  },
+  "surface_after_ascent": {
+    "world": [
+      0,
+      64
+    ],
+    "submap": null,
+    "marker": "grass",
+    "actors": [
+      "hollow_revenant"
+    ]
+  },
+  "underground_after_redescent": {
+    "world": [
+      0,
+      64
+    ],
+    "submap": "sub_0_64_0",
+    "marker": "flagstone",
+    "actors": [
+      "grave_thing"
+    ]
+  }
+}
