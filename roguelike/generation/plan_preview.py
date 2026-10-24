@@ -50,7 +50,8 @@ def planned_preview(data,seed,raw=None,category=None,context='grid',config=None,
 
 def plan_svg(plan):
     scale=.10; width=plan['world_size'][0]*80*scale;height=plan['world_size'][1]*43*scale
-    parts=[f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height+32}" width="1024"><rect width="100%" height="100%" fill="#172026"/>']
+    extra=110 if plan.get('sites') else 32
+    parts=[f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height+extra}" width="1024"><rect width="100%" height="100%" fill="#172026"/>']
     for water in plan['waters']:
         for x,y,x1,y1 in water['rects']: parts.append(f'<rect x="{x*scale}" y="{y*scale}" width="{(x1-x)*scale}" height="{(y1-y)*scale}" fill="#458bab"/>')
     for route in plan['routes']:
@@ -58,7 +59,16 @@ def plan_svg(plan):
         parts.append(f'<polyline points="{points}" fill="none" stroke="#d2bd83" stroke-width="1"><title>{route["id"]}</title></polyline>')
     for s in plan['settlements']:
         x,y,x1,y1=s['bounds']; parts.append(f'<rect x="{x*scale}" y="{y*scale}" width="{(x1-x)*scale}" height="{(y1-y)*scale}" fill="none" stroke="#90d798"/><text x="{x*scale}" y="{y*scale-3}" fill="#90d798" font-size="7">{s["id"]} {s["form"]}</text>')
-    for n in plan['nodes']:
-        x,y=n['xy'];parts.append(f'<circle cx="{x*scale}" cy="{y*scale}" r="2" fill="#e7a59c"><title>{n["id"]}</title></circle>')
-    parts.append(f'<text x="8" y="{height+20}" fill="white" font-size="10">{plan["generation_revision"]} seed {plan["seed"]}: shared plan diagnostic, not a played-game screenshot. Hover routes/nodes for IDs.</text></svg>')
+    sites={s['id']:s for s in plan.get('sites',[])}
+    for index,n in enumerate(plan['nodes'],1):
+        color='#75e5db' if n['id'] in sites else '#e7a59c';radius=3.5 if n['id'] in sites else 2
+        x,y=n['xy'];parts.append(f'<circle cx="{x*scale}" cy="{y*scale}" r="{radius}" fill="{color}"><title>{n["id"]}</title></circle>')
+        if sites:
+            parts.append(f'<text x="{x*scale+4}" y="{y*scale-3}" fill="{color}" font-size="7">{index}</text>')
+            column=(index-1)//7;row=(index-1)%7
+            label=n['id']
+            if label in sites:
+                asset=next(p['asset'] for p in plan['placements'] if p['id']==sites[label]['placement']);label+=' '+asset
+            parts.append(f'<text x="{8+column*480}" y="{height+32+row*10}" fill="{color}" font-size="8">{index}: {html.escape(label)}</text>')
+    parts.append(f'<text x="8" y="{height+16}" fill="white" font-size="10">{plan["generation_revision"]} seed {plan["seed"]}: plan diagram. Gold roads; pink required destinations; teal additional sites.</text></svg>')
     return '\n'.join(parts)

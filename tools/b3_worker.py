@@ -13,7 +13,10 @@ def main():
     game = root / 'roguelike'
     run = Path(job['run_root']).resolve()
     saves = Path(job['save_root']).resolve()
-    assert run.is_relative_to(root / '.baseline') and (run / 'disposable-b3.json').is_file()
+    allowed_roots=(root/'.baseline',root/'evidence/worldgen-g6')
+    assert any(run.is_relative_to(base) and run!=base for base in allowed_roots)
+    marker=read(run/'disposable-b3.json')
+    assert marker=={'kind':'test saves and evidence only','production_source':str(game)}
     assert saves.is_relative_to(run) and not saves.is_relative_to(game)
     assert Path.cwd().resolve() == game.resolve()
     sys.path.insert(0, str(game))
