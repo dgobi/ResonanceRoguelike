@@ -313,6 +313,13 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
 
 
 def validate_plan(plan,width,height):
+    try:
+        return _validate_plan(plan,width,height)
+    except (KeyError,TypeError,IndexError,AttributeError) as error:
+        raise GenerationError(f'malformed saved plan record: {error}') from error
+
+
+def _validate_plan(plan,width,height):
     """Durable structure/reference checks; never demand unmodified saved scene tiles."""
     if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
     if plan['version']==2 and plan.get('dependency_projection')!='structure-v1': raise GenerationError('G4 dependency projection missing or unsupported')
@@ -324,6 +331,8 @@ def validate_plan(plan,width,height):
         ids=[r.get('id') for r in rows if isinstance(r,dict)]
         if len(ids)!=len(rows) or any(not isinstance(i,str) or not i for i in ids) or len(set(ids))!=len(ids): raise GenerationError('invalid/duplicate G3 '+name+' identities')
         registries[name]={r['id']:r for r in rows}
+    from generation.plan_integrity import records
+    records(plan,registries,width,height)
     def rect(r):
         if not isinstance(r,list) or len(r)!=4 or any(type(n) is not int for n in r) or not (0<=r[0]<r[2]<=width*W and 0<=r[1]<r[3]<=height*H): raise GenerationError('G3 rectangle outside integer world bounds')
     def point(p):

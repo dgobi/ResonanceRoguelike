@@ -66,11 +66,11 @@ class G3Lifecycle(unittest.TestCase):
         # A checksum-consistent missing reference on an actual G3 surface is
         # semantic corruption, not permission to bypass the plan contract.
         checkpoint=e.save_manager.checkpoint_path();scene=checkpoint/f'chunks/{e.world_x}_{e.world_y}.pkl'
-        saved=pickle.loads(scene.read_bytes());self.assertEqual(saved.local_map.generation_revision,'wg3')
+        saved=pickle.loads(scene.read_bytes());self.assertEqual(saved.local_map.generation_revision,'wg4')
         del saved.local_map.plan_provenance;scene.write_bytes(pickle.dumps(saved,protocol=pickle.HIGHEST_PROTOCOL))
         manifest_path=checkpoint/'manifest.json';manifest=json.loads(manifest_path.read_text())
         manifest['files'][scene.relative_to(checkpoint).as_posix()]=record(scene.read_bytes());manifest_path.write_text(json.dumps(manifest))
-        with self.assertRaisesRegex(ValueError,'missing required G3 scene references'):e.save_manager._prepare(e,checkpoint)
+        with self.assertRaisesRegex(ValueError,'missing required shared scene references'):e.save_manager._prepare(e,checkpoint)
 
     def test_pending_semantic_change_preserves_load_cached_scene_and_unaffected_placement(self):
         e=self.boot();e.debug=False

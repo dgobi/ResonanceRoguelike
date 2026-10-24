@@ -4,7 +4,7 @@ import copy
 from config import MAP_WIDTH as W, MAP_HEIGHT as H
 from generation.context import GenerationContext,GenerationError
 from generation.world_plan import slice_plan,intersect,cells,expand
-from generation.placement import check_dependencies,transform,entrance_cells
+from generation.placement import check_dependencies,transform,entrance_cells,digest
 
 
 def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,height):
@@ -52,6 +52,11 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
     buildings=[]
     for p in section['placements']:
         raw=transform(definitions[p['id']],p['rotation'],p['mirror']); ox,oy=p['origin'][0]-x0,p['origin'][1]-y0
+        expected_entrances=[dict(e,x=p['origin'][0]+e['x'],y=p['origin'][1]+e['y']) for e in raw['placement']['entrances']]
+        expected_targets=[dict(t,x=p['origin'][0]+t['x'],y=p['origin'][1]+t['y']) for t in raw['placement']['targets']]
+        if (p['entrances']!=expected_entrances or p['targets']!=expected_targets or
+            p['footprint']!=[p['origin'][0],p['origin'][1],p['origin'][0]+raw['width'],p['origin'][1]+raw['height']]):
+            raise GenerationError(f'{p["id"]}: saved placement geometry is incompatible with its supported transformed definition; restore compatible definitions/checkpoint')
         paint(local(p['clearance']),'grass'); paint(local(p['approach'])-road_cells,'dirt_path')
         rows=_stamp_building_at(m,raw,ox,oy,data.terrain,data=data)
         for row in rows: row['record_id']=p['id']+':'+row['record_id']
@@ -100,7 +105,18 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
                        'crossings':[r['id'] for r in section['crossings']],
                        'placements':[p['id'] for p in section['placements']],
                        'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
+                       'plan_identity':digest(world.plan),
                        'dependency_projection':'structure-v1','adapter':'g3-to-g4-v1' if world.plan['version']==1 else 'g4-v1'}
+    # These are actual first-creation inputs, not invented historical G3 hashes.
+    m.native_input_provenance={f'entities:{a._creature_id}':digest(data.entities[a._creature_id]) for a in actors}
+    m.native_input_provenance.update({f'terrain:{tid}':digest(data.terrain[tid]) for tid in ('dead_wood','flint_rock','clay_deposit')})
+    m.native_input_provenance['biome:'+chunk.biome_id]=digest(data.biomes.get(chunk.biome_id,{}))
+    m.native_input_provenance['terrain-catalog']=digest(data.terrain)
+    m.native_input_provenance['decor-catalog']=digest(data.decoratives)
+    m.native_input_provenance.update({f'zones:{zone}':digest(data.zones.get(zone,{})) for zone,_ in (native['zones'] if native else chunk.zones)})
+    if functional:
+        mapped=data.text_item_map.get('waystone_prayer_a','letter')
+        m.native_input_provenance['prayer-item:'+mapped]=digest(data.items[mapped])
     m.native_generation_context=native
     m.generation_revision='wg4'; m.generation_complete=True
     return SceneResult(m,actors,spawn,staged,receipts)

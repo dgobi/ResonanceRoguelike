@@ -364,12 +364,28 @@ class SaveManager:
                 # Existing unversioned owner records remain authoritative. The
                 # required-reference contract belongs to explicitly generated G3
                 # surfaces, not generic LocalMaps used by other state systems.
-                if getattr(m,'generation_revision',None)!='wg3': continue
+                chunk=world.get(wx,wy)
+                if chunk is None: raise SaveFormatError('surface owner has no world Chunk: '+scene.name)
+                map_revision=getattr(m,'generation_revision',None)
+                chunk_revision=getattr(chunk,'generation_revision',None)
+                if map_revision not in ('wg3','wg4') and chunk_revision not in ('wg3','wg4'):
+                    if map_revision not in (None,'legacy-unversioned','wg1','wg2') or chunk_revision not in (None,'legacy-unversioned','wg1','wg2'):
+                        raise SaveFormatError('unsupported surface generation revision: '+scene.name)
+                    continue
+                if map_revision not in ('wg3','wg4') or chunk_revision!=map_revision:
+                    raise SaveFormatError('missing/incoherent generated scene revision: '+scene.name)
                 provenance=getattr(m,'plan_provenance',None)
-                if not isinstance(provenance,dict) or provenance.get('mode')!='shared-v1': raise SaveFormatError('missing required G3 scene references: '+scene.name)
+                if not isinstance(provenance,dict) or provenance.get('mode')!='shared-v1': raise SaveFormatError('missing required shared scene references: '+scene.name)
                 section=slice_plan(world.plan,wx,wy)
                 for key in ('routes','crossings','placements'):
                     if sorted(provenance.get(key,[]))!=sorted(r['id'] for r in section[key]): raise SaveFormatError('corrupt G3 scene '+key+' references: '+scene.name)
+                if map_revision=='wg3' and world.plan['generation_revision']!='wg3':raise SaveFormatError('G3 scene cannot consume a G4 plan')
+                if map_revision=='wg4':
+                    from generation.placement import digest
+                    expected={'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
+                              'plan_identity':digest(world.plan),'dependency_projection':'structure-v1',
+                              'adapter':'g3-to-g4-v1' if world.plan['version']==1 else 'g4-v1'}
+                    if any(provenance.get(k)!=v for k,v in expected.items()):raise SaveFormatError('incoherent G4 plan/adapter provenance: '+scene.name)
         stage = copy.copy(engine)
         stage.player = copy.copy(engine.player)
         for component in ('fighter', 'needs', 'corruption', 'inventory', 'equipment', 'light_source', 'language', 'perks', 'level'):
@@ -570,7 +586,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
     if mode=='shared-v1':
         validate_plan(data.get('plan'),data['width'],data['height'])
         if data['plan']['seed']!=data['seed']: raise SaveFormatError('world/plan seed mismatch')
-    elif data.get('plan') is not None or data.get('generation_revision')=='wg3':
+    elif data.get('plan') is not None or data.get('generation_revision') in ('wg3','wg4'):
         raise SaveFormatError('missing required G3 plan mode or unexpected legacy plan')
     world_map.plan_mode=mode
     world_map.plan=data.get('plan')
@@ -668,6 +684,9 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
                                 for r in data.get("town_chunk_ids", [])}
     world_map.chunk_names    = {(r[0], r[1]): r[2]
                                 for r in data.get("chunk_names", [])}
+    if mode=='shared-v1':
+        from generation.plan_integrity import world_membership
+        world_membership(world_map)
 
     from world.world_myth import WorldMyth
     myth_data = data.get("myth")

@@ -30,7 +30,7 @@ def source_manifest():
             if not p.is_file() or '__pycache__' in p.parts or 'saves' in p.parts:
                 continue
             included = p.suffix in ('.py', '.js', '.css') or (
-                p.suffix == '.json' and any(p.is_relative_to(root) for root in json_roots))
+                (p.suffix == '.json' or p.name.endswith('.json.gz')) and any(p.is_relative_to(root) for root in json_roots))
             if included:
                 result[p.relative_to(ROOT).as_posix()] = hashlib.sha256(p.read_bytes()).hexdigest()
     painter = ROOT/'layout_painter.html'
