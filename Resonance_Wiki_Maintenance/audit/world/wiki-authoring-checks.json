@@ -1,0 +1,74 @@
+{
+  "source_commit": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "runtime": "Linux Python 3.12; exact requirements-baseline package pins in parent-created .wiki-venv; distinct from recorded Windows Python 3.11 environment",
+  "checks": [
+    {
+      "name": "Catalog",
+      "result": "pass",
+      "assets": 64,
+      "warnings": 238,
+      "warning_categories": {
+        "INACTIVE_FIELD": 229,
+        "DEFERRED_SPECIAL": 4,
+        "INACTIVE_POOL_FIELD": 3,
+        "TERRAIN_UNUSED": 2
+      },
+      "report": "catalog.json"
+    },
+    {
+      "name": "Shipped g5_service_house all permitted transforms",
+      "result": "pass",
+      "previews": 8,
+      "report": "service-house-orientations.json"
+    },
+    {
+      "name": "Shipped g5_service_house grid mixed policy seed20261023",
+      "result": "pass",
+      "previews": 5,
+      "report": "service-house-grid.json"
+    },
+    {
+      "name": "Shipped g6_wayhouse assigned east complete scene",
+      "result": "pass",
+      "previews": 1,
+      "report": "wayhouse-assigned-east.json"
+    },
+    {
+      "name": "Shipped starting_lab authored-submap preview",
+      "result": "pass",
+      "previews": 1,
+      "report": "starting-lab.json"
+    },
+    {
+      "name": "New wiki owner_cottage_a all permitted transforms",
+      "result": "pass",
+      "previews": 8,
+      "report": "owner-cottage-orientations.json"
+    },
+    {
+      "name": "New wiki owner_cottage_a grid mixed policy seed20261023",
+      "result": "pass",
+      "previews": 3,
+      "report": "owner-cottage-grid.json"
+    },
+    {
+      "name": "New wiki owner_cottage_a roadside mixed policy seed20261023",
+      "result": "pass",
+      "previews": 2,
+      "report": "owner-cottage-roadside.json"
+    },
+    {
+      "name": "WFC documented 6x6 town_block seed20261023 snippet",
+      "result": "pass",
+      "meaning": "solver returned grid and valid(grid,6,6) True"
+    },
+    {
+      "name": "Editor catalog freshness on untouched clone",
+      "result": "fail",
+      "error": "Editor catalog is stale. Run --refresh-editor-catalog and repeat runtime validation.",
+      "finding": "Version, routes, eligibility, assets, and contract_sha256 match; raw data identity differs. No catalog mutation performed. Exact cause not established."
+    }
+  ],
+  "repository_status": "clean after probes; no source/data/editor files changed",
+  "limits": "Bounded authoring probes only; no rerun of full historical production gate or browser workflow, no natural-frequency claims."
+}

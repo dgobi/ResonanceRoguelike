@@ -1,0 +1,5 @@
+pygame 2.6.1 (SDL 2.28.4, Python 3.12.14)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 11
+{"seed": 20261023, "plan_mode": "shared-v1", "start": [73, 99], "submap": "sub_73_99_0", "save_root": "/workspace/scratch/d3538a22f0dd/ResonanceRoguelike/.baseline/g3-play-wiki-audit-20261024"}

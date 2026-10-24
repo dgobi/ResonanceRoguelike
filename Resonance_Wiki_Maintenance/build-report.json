@@ -1,0 +1,56 @@
+{
+  "commit": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "repaired_legacy_links": [],
+  "unavailable_legacy_links": [],
+  "embedded_source_images": [
+    "docs/owner/images/seed20261020_town0_and_road_seam.png",
+    "evidence/worldgen-g3/grid-plan-detail.png",
+    "evidence/worldgen-g3/roadside-plan-detail.png",
+    "evidence/worldgen-g4/grid-before-plan.png",
+    "evidence/worldgen-g4/grid-plan.png",
+    "evidence/worldgen-g4/roadside-before-plan.png",
+    "evidence/worldgen-g4/roadside-plan.png",
+    "evidence/worldgen-g4/g4-native-production.png"
+  ],
+  "article_count": 115,
+  "data_files": 360,
+  "source_documents": 63,
+  "fragment_fallbacks": [
+    {
+      "target": "source-roguelike-docs-components-md--ai",
+      "fallback": "source-roguelike-docs-components-md"
+    },
+    {
+      "target": "source-roguelike-docs-generation-md--entrance-generation",
+      "fallback": "source-roguelike-docs-generation-md"
+    },
+    {
+      "target": "source-roguelike-docs-components-md--ai",
+      "fallback": "source-roguelike-docs-components-md"
+    },
+    {
+      "target": "source-roguelike-docs-generation-md--entrance-generation",
+      "fallback": "source-roguelike-docs-generation-md"
+    },
+    {
+      "target": "source-roguelike-docs-systems-md--message-log",
+      "fallback": "source-roguelike-docs-systems-md"
+    },
+    {
+      "target": "source-roguelike-docs-components-md--ai",
+      "fallback": "source-roguelike-docs-components-md"
+    },
+    {
+      "target": "source-roguelike-docs-systems-md--message-log",
+      "fallback": "source-roguelike-docs-systems-md"
+    },
+    {
+      "target": "source-roguelike-docs-components-md--ai",
+      "fallback": "source-roguelike-docs-components-md"
+    }
+  ],
+  "guide_chapters": 31,
+  "search_records": 458,
+  "output_bytes": 5254064,
+  "output_sha256": "f8a1174d1ec443c88736301ed4362fdd70783c0addd9679fa47ce1ef54244075"
+}

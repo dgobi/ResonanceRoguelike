@@ -1,0 +1,45 @@
+{
+  "status": "pass",
+  "checked_at_utc": "2026-10-24T18:07:47.570712+00:00",
+  "validator_sha256": "0c966562b522195acf91991f188f7ce9ef8addf1e8f380d7c0f27f0b1f79d064",
+  "unmodified_input_html_sha256": "f8a1174d1ec443c88736301ed4362fdd70783c0addd9679fa47ce1ef54244075",
+  "test_method": "One temporary HTML copy with deliberate independent corruptions; the real HTML and repository were not modified.",
+  "intentional_corruptions": [
+    "Duplicate HTML ID",
+    "Missing internal href target",
+    "Invalid application/json payload",
+    "One missing source article",
+    "One missing game JSON catalog record",
+    "One modified catalog JSON value",
+    "A nonexistent search target",
+    "External script, stylesheet and image declarations"
+  ],
+  "expected_detection_categories": [
+    "embedded_json",
+    "game_json_coverage",
+    "html_ids",
+    "internal_hrefs",
+    "repository_data_comparison",
+    "runtime_assets",
+    "search_data",
+    "search_targets",
+    "source_coverage"
+  ],
+  "observed_detection_categories": [
+    "embedded_json",
+    "game_json_coverage",
+    "html_ids",
+    "internal_hrefs",
+    "repository_data_comparison",
+    "runtime_assets",
+    "search_coverage",
+    "search_data",
+    "search_targets",
+    "source_coverage"
+  ],
+  "expected_exit_code": 1,
+  "observed_exit_code": 1,
+  "intentional_findings": 20,
+  "network_requests_performed": false,
+  "scope_limit": "Exercises detection paths with one combined corrupted fixture; it is not exhaustive parser fuzzing or a browser test."
+}

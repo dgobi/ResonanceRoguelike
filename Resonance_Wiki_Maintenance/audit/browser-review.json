@@ -1,0 +1,58 @@
+{
+  "source_commit": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "date": "2026-10-24",
+  "environment": "Cloud Chrome, managed local HTTP preview; desktop plus 390px and 768px same-origin embedded viewports",
+  "checks": [
+    {
+      "name": "Dark desktop, mobile and tablet reading layout",
+      "result": "pass",
+      "evidence": "Screenshots inspected; readable hierarchy, code/data controls and responsive navigation."
+    },
+    {
+      "name": "Mobile chapter menu",
+      "result": "pass",
+      "evidence": "Open toggles aria-expanded true; choosing Controls and interaction opens its chapter and closes menu."
+    },
+    {
+      "name": "Full-text search across guide/data/source content",
+      "result": "pass",
+      "evidence": "damage_bonus returns relevant results; Snapshot data owner_cottage_a returns the exact complete example."
+    },
+    {
+      "name": "Search link into data record",
+      "result": "pass",
+      "evidence": "Target catalogue is active, target details expands and target content is visible."
+    },
+    {
+      "name": "Catalogue filtering and deep-link recovery",
+      "result": "pass",
+      "evidence": "A nonmatching query hides all 12 examples; global search to owner_cottage_a clears that filter and reveals the requested record."
+    },
+    {
+      "name": "Original source filter and caveat banner",
+      "result": "pass",
+      "evidence": "STRUCTURE_AUTHORING produces one entry; opening it shows its current-plus-history scope banner and chapter contents."
+    },
+    {
+      "name": "Copy code",
+      "result": "pass with scoped evidence",
+      "evidence": "Button visibly changed to Copied after the browser copy operation reported success. A separate tool clipboard was empty, so an external clipboard round-trip is not asserted."
+    },
+    {
+      "name": "Download complete JSON",
+      "result": "pass",
+      "evidence": "Click produced a completed browser download for owner_cottage_a.json."
+    },
+    {
+      "name": "No external runtime asset elements",
+      "result": "pass",
+      "evidence": "Read-only DOM query found no external script, stylesheet or image dependency."
+    }
+  ],
+  "limits": [
+    "No physical Windows keyboard or owner PC browser certification.",
+    "Browser interaction used an HTTP preview. file:// independence is additionally checked structurally: all runtime content/styles/scripts/figures are embedded and no runtime fetch is used.",
+    "Printing, user clipboard policy and every possible browser configuration were not exhaustively tested.",
+    "The game itself was not UI-tested; this record concerns the handbook."
+  ]
+}

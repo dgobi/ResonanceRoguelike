@@ -1,0 +1,78 @@
+{
+  "source_sha": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "review_scope": "Independent static source review of eight core owner-wiki pages, prioritized save/load, keyboard dispatch and debug commands. No repository source edits; no full game acceptance run claimed.",
+  "core_pages": [
+    "controls",
+    "debug-tools",
+    "first-change",
+    "getting-started",
+    "maintenance",
+    "saves-and-state",
+    "troubleshooting",
+    "verification"
+  ],
+  "findings": [
+    {
+      "id": "f10-legacy-route",
+      "severity": "material",
+      "status": "parent corrected; independently re-read corrected pages",
+      "pages": [
+        "controls.md",
+        "debug-tools.md"
+      ],
+      "evidence": [
+        "roguelike/engine/debug.py::_execute_input teleport branch",
+        "roguelike/engine/engine.py::_handle_key_overmap",
+        "roguelike/engine/engine.py::_teleport_to_overmap_cursor"
+      ],
+      "finding": "F10 directly generates a region with terrain-only arguments, replaces active actors with the player and does not call the modern complete scene-entry route.",
+      "recommended_text": "Recommend M or debug F4, move the overmap cursor, then Enter for current debug travel. Group F10 with F5 and unshifted F8 as legacy disposable helpers, not G6 scene ownership acceptance checks."
+    },
+    {
+      "id": "inventory-use-turn",
+      "severity": "material",
+      "status": "parent corrected; independently re-read corrected page",
+      "pages": [
+        "controls.md"
+      ],
+      "evidence": [
+        "roguelike/engine/inventory_screen.py::InventoryScreen.handle_key"
+      ],
+      "finding": "For a non-header use/equip row, engine._advance_turn() is unconditional after item_system.use unless a pending confirmation or throw target is opened. The boolean return means item consumed, not action success.",
+      "recommended_text": "Navigation is free. Ordinary use/equip can spend a turn even when failed, no-op or unconsumed. Opening wight confirmation or pellet targeting is free; their resolution and transfer/placement guards have separate contracts."
+    }
+  ],
+  "verified_claims": [
+    "Engine explicit full save occurs on nondebug F5 in local play; no current debug console save command.",
+    "Current surface/stair travel scene-cache writes do not replace explicit published checkpoint saving; quit does not save.",
+    "Shipped DEBUG_MODE is True; F9 in debug prints state, while nondebug F9 loads.",
+    "F4 reveals overmap and sets OVERMAP mode; overmap Enter calls current teleport route only in debug.",
+    "F3 sets explored cells and is not removal of FOV/light rules.",
+    "Movement arrows/numpad, wait Z/period/KP5, sprint Shift+W, unshifted W drink, Q/R movesets, G harvest/gather/pickup, comma pickup and M surface guard match dispatch.",
+    "Debug dispatch follows death and pending-consume guards and precedes most other screens.",
+    "Checkpoint payload version 2 and outer container version 1 are distinct from world-generation plan revisions.",
+    "Loading considers published references, not arbitrary generation-directory scan; legacy flat supported v2 saves have a read-only compatibility path.",
+    "Disposable launcher names have a bounded alphanumeric/underscore/hyphen contract, refuse existing sessions, patch SAVE_DIR, and run production source.",
+    "Core tool command flags were checked against parser definitions; this is static CLI review, not execution of every command."
+  ],
+  "source_link_check": {
+    "pages": 14,
+    "pinned_links_checked": 97,
+    "missing_targets": [],
+    "method": "Pinned SHA equality plus URL-decoded repository-path existence"
+  },
+  "new_chapters": [
+    "visual/weather-and-atmosphere.md",
+    "visual/world-names-and-biomes.md"
+  ],
+  "asset_probe": "visual/asset-probe.json",
+  "additional_discrepancies_documented": [
+    "Regular weather ticking and graphics stop in submaps, but fog FOV caps, AI modifiers, bone-snow tile entry and cracked-bell weather modifiers lack matching submap guards.",
+    "A JSON weather entry alone does not add a usable state; state-machine and Engine render-dispatch wiring are required.",
+    "Bone snow has no incoming ordinary transition from another weather state.",
+    "Active world-generation wrapper overwrites helper myth locus selection with VUKH.",
+    "Myth god/faction strings are stored and debug-displayed; no automatic narrative interpolation or faction simulation consumer found.",
+    "Biome generator, creature_zones, submap_types/weight, overmap fields, entry/resonance messages and waystone themes/fallback flag have no matching current runtime consumers; actual decisions use code tables and explicit handlers.",
+    "Clay scatter allows adjacent extra deposits beyond four primary placements; its docstring total cap is inaccurate."
+  ]
+}

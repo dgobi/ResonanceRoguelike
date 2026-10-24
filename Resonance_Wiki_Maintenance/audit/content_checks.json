@@ -1,0 +1,173 @@
+{
+  "scope": "Wiki authoring examples and narrow current-code discrepancies; not a full release gate or GUI playthrough",
+  "commit": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "results": [
+    {
+      "name": "Six complete authored definitions parse",
+      "passed": true,
+      "detail": "owner_trail_ration, owner_road_scavenger, owner_cook_trail_ration, owner_road_letter, owner_road_supplies, owner_simple_supplies"
+    },
+    {
+      "name": "Ration default creation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Ration tile exists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Ration restores 0.3 fraction before action turn",
+      "passed": true,
+      "detail": "Item use handler only; no full-engine turn or ownership commit is claimed."
+    },
+    {
+      "name": "Scavenger factory and stable identity",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Scavenger supported AI",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Scavenger tile and fallback body exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "New cooking recipe matches exact intended raw-meat instance",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "New cooking recipe rejects no heat",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "New cooking recipe rejects tier-one heat",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "New cooking references exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "No ingredient consumed during planning",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "One dual-tag bile sac cannot pay for two slots",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Two dual-tag bile sacs can pay for two slots",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Normal lit torch equips offhand",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Confirmed current offhand-burning gap",
+      "passed": true,
+      "detail": "Actual ItemSystem.use followed by CraftScreen ambient builder, not a guessed slot state."
+    },
+    {
+      "name": "Campfire diagonal distance three supplies burning two",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Campfire diagonal distance four does not supply burning",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "New container pool references exist",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 0",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 3",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 4",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 5",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 6",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 7",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 8",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Container pool no replacement seed 9",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "General loot example resolves",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "General text-loot resolver uses lab_note with correct text_id",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Teaching example learns one word",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Current perk purchase-affordability path ignores declared prerequisite/conflict fields",
+      "passed": true,
+      "detail": "Source also inspected: _commit checks ownership/cost only."
+    }
+  ],
+  "passed": true
+}

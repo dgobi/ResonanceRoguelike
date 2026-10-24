@@ -1,0 +1,188 @@
+[
+  {
+    "id": "content-field-names",
+    "source_docs": [
+      "roguelike/docs/DATA_REFERENCE.md"
+    ],
+    "finding": "Historical weapon/equipment examples use damage and equip_slot. Active weapon/equipment routes use damage_dice plus damage_bonus and slot. The dice parser does not support 1d6+2 expressions.",
+    "evidence": [
+      "roguelike/engine/combat.py",
+      "roguelike/engine/item_system.py"
+    ],
+    "classification": "source-confirmed stale documentation",
+    "chapter": "03-combat-balance.md"
+  },
+  {
+    "id": "single-hp-pool",
+    "source_docs": [
+      "roguelike/docs/COMPONENTS.md",
+      "roguelike/docs/COMBAT.md"
+    ],
+    "finding": "Historical limb HP/impairment descriptions do not describe the current single HP pool, effective armour and weighted location multiplier system.",
+    "evidence": [
+      "roguelike/components/fighter.py",
+      "roguelike/engine/combat.py"
+    ],
+    "classification": "source-confirmed stale documentation",
+    "chapter": "03-combat-balance.md"
+  },
+  {
+    "id": "ambient-light-slot",
+    "source_docs": [
+      "docs/owner/TUNING_EXISTING_FEATURES.md"
+    ],
+    "finding": "The current tuning guide suggests equipped light supplies burning. Normal equip_light uses offhand; CraftScreen checks only equipment.slots[light], so a normally lit torch does not provide burning. Campfire_lit within Chebyshev distance 3 provides tier 2.",
+    "evidence": [
+      "roguelike/engine/item_system.py",
+      "roguelike/rendering/craft_screen.py",
+      "wiki-work/content_checks.json"
+    ],
+    "classification": "source-confirmed and runtime-reproduced current gap",
+    "chapter": "05-crafting-processing.md"
+  },
+  {
+    "id": "creature-zone-weight",
+    "source_docs": [
+      "roguelike/docs/DATA_REFERENCE.md",
+      "roguelike/docs/CREATURES.md"
+    ],
+    "finding": "CreatureFactory.spawn_for_zone uses independent chance checks and entry order/max_count; it ignores authored weight. Creature spawn_zones is not a registry. Town district population is separately hardcoded.",
+    "evidence": [
+      "roguelike/engine/creature_factory.py",
+      "roguelike/generation/town_gen.py",
+      "roguelike/generation/planned_scene.py"
+    ],
+    "classification": "source-confirmed authoring boundary",
+    "chapter": "04-creatures-ai.md"
+  },
+  {
+    "id": "perk-gates",
+    "source_docs": [
+      "roguelike/data/perks/README.md"
+    ],
+    "finding": "Perk screen purchase checks ownership and point cost, not requires/conflicts/unlock_conditions. Old effect_type/effect_params are not a generic effect interpreter.",
+    "evidence": [
+      "roguelike/rendering/perk_screen.py",
+      "roguelike/engine/engine.py",
+      "wiki-work/content_checks.json"
+    ],
+    "classification": "source-confirmed; affordability path runtime-reproduced",
+    "chapter": "07-survival-progression.md"
+  },
+  {
+    "id": "bone-reader-yield",
+    "source_docs": [
+      "roguelike/data/perks/bone_reader.json"
+    ],
+    "finding": "Description says maximum yield. Current butcher consumer grants highest qualifying tier with Bone Reader but still rolls min/max quantities.",
+    "evidence": [
+      "roguelike/engine/engine.py"
+    ],
+    "classification": "source-confirmed description overstates behavior",
+    "chapter": "04-creatures-ai.md"
+  },
+  {
+    "id": "loot-schemas",
+    "source_docs": [
+      "roguelike/docs/DATA_REFERENCE.md",
+      "roguelike/docs/SYSTEMS.md"
+    ],
+    "finding": "Container pools use roll_count/items/item_id, with no replacement. General loot tables use rolls/entries/item and can recurse, with replacement. Some active generators read entries directly and ignore rolls.",
+    "evidence": [
+      "roguelike/engine/loot_roller.py",
+      "roguelike/engine/loot_table.py",
+      "roguelike/generation/local_gen.py",
+      "wiki-work/content_checks.json"
+    ],
+    "classification": "source-confirmed and example probes",
+    "chapter": "06-texts-loot-scenes.md"
+  },
+  {
+    "id": "text-format",
+    "source_docs": [
+      "roguelike/docs/DATA_REFERENCE.md"
+    ],
+    "finding": "Current reader reads pages[].text, not pages[].lines. Textual DAMAGED/REDACTED markers are parsed. Renderer checks top-level deep_tongue, while loader debug validation also notices first-page deep_tongue.",
+    "evidence": [
+      "roguelike/engine/text_reader.py",
+      "roguelike/engine/data_loader.py"
+    ],
+    "classification": "source-confirmed stale schema and flag-consumer distinction",
+    "chapter": "06-texts-loot-scenes.md"
+  },
+  {
+    "id": "text-item-mapping",
+    "source_docs": [
+      "docs/owner/TUNING_EXISTING_FEATURES.md"
+    ],
+    "finding": "Text mapping is route-specific. BSP found texts and general LootResolver text creation use lab_note + text_id; mapping letter_a to letter does not globally change all text routes.",
+    "evidence": [
+      "roguelike/generation/local_gen.py",
+      "roguelike/engine/loot_table.py",
+      "roguelike/engine/scene_generation.py",
+      "wiki-work/content_checks.json"
+    ],
+    "classification": "source-confirmed; resolver runtime-reproduced",
+    "chapter": "06-texts-loot-scenes.md"
+  },
+  {
+    "id": "survival-units",
+    "source_docs": [
+      "roguelike/docs/COMPONENTS.md"
+    ],
+    "finding": "Configured survival stages come from point-based remaining thresholds in survival.json, converted to internal 0-to-1 depletion fractions. Old fallback labels are not active configuration. Food <=1 is fractional; >1 is normalized points.",
+    "evidence": [
+      "roguelike/data/survival.json",
+      "roguelike/components/needs.py",
+      "roguelike/engine/item_system.py",
+      "wiki-work/content_checks.json"
+    ],
+    "classification": "source-confirmed and food-unit probe",
+    "chapter": "07-survival-progression.md"
+  },
+  {
+    "id": "language-schema-learning",
+    "source_docs": [
+      "roguelike/docs/DATA_REFERENCE.md",
+      "roguelike/docs/SYSTEMS.md"
+    ],
+    "finding": "Current lexicon has 318 words with id/deep/common/category/tier/learn_sources; merely reading an unknown displayed token does not automatically teach it. teach_words uses first category and one word on first eligible read.",
+    "evidence": [
+      "roguelike/data/deep_tongue.json",
+      "roguelike/engine/language_system.py",
+      "roguelike/engine/item_system.py",
+      "wiki-work/content_checks.json"
+    ],
+    "classification": "source-confirmed and teaching probe",
+    "chapter": "06-texts-loot-scenes.md"
+  },
+  {
+    "id": "moveset-declarations",
+    "source_docs": [
+      "docs/owner/TUNING_EXISTING_FEATURES.md"
+    ],
+    "finding": "Current tuning guide correctly records unsupported free_move_on_kill consumer, unexpired pool_turns and ignored ignore_armour_layers. Keep those limitations explicit, not merely in archived docs.",
+    "evidence": [
+      "roguelike/engine/movesets.py",
+      "roguelike/engine/engine.py"
+    ],
+    "classification": "retained current boundary",
+    "chapter": "03-combat-balance.md"
+  },
+  {
+    "id": "general-json-promises",
+    "source_docs": [
+      "roguelike/docs/DATA_REFERENCE.md",
+      "roguelike/docs/SYSTEMS.md"
+    ],
+    "finding": "Statements that all values are in JSON and nothing reads files directly are too broad. Current town population, weather transitions, experience formulas, effect handlers and several AI/ability rules are Python-controlled.",
+    "evidence": [
+      "roguelike/generation/town_gen.py",
+      "roguelike/engine/weather.py",
+      "roguelike/engine/perk_handlers.py",
+      "roguelike/engine/creature_factory.py"
+    ],
+    "classification": "source-confirmed global documentation correction",
+    "chapter": "01-content-workflow.md"
+  }
+]
