@@ -112,8 +112,33 @@ $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\
 
 - Start: `checkpoint/worldgen-g2-start-20261023` at `05bcc497` (clean main).
 - Corrections: `815dfb5`, `checkpoint/worldgen-g2-corrections-20261023`.
-- Implementation/gate-input commit and final unfiltered gate: recorded after the
-  frozen-source run below. No partial gate is represented as full acceptance.
+- Authoring implementation: `6b42781`, `checkpoint/worldgen-g2-gate-inputs-20261023`.
+- Final gate inputs: `29a3ef68c4514073100fc9dc12ff8a6743d1cc01`,
+  `checkpoint/worldgen-g2-final-gate-inputs-20261023`. This small follow-up fixes
+  the expanded manifest traversal caught at runner startup; no full-gate success
+  is claimed for the earlier input checkpoint.
+- Final delivery: `checkpoint/worldgen-g2-verified-20261023` includes the following
+  evidence and final documentation, with all tested runtime/data/test/editor inputs
+  unchanged from `29a3ef6`. The historical status sections are preserved verbatim.
+
+The final focused run passed **127 tests** in 63.939 seconds. Chromium and Firefox
+each passed **26 checks** and 129 document round-trips. All eight documented
+catalog/preview/compatibility invocations passed; the complete JSON in the guide
+matches the delivered example files.
+
+The **unfiltered** `tools/verify_d.py` run
+`d-20261023-175548-4990817b` passed **159 workers, 3,675/3,675 acceptance checks,
+zero failures**. Its `only` and `case` filters are null. All **569 source identities**
+stayed unchanged through the gate and match the focused/browser inputs. They
+reconcile to the tested Git commit: 357 exact byte matches and 212 LF/CRLF-only
+checkout differences. No runtime/data/test/editor reconciliation edit followed.
+
+[Final results](../../evidence/worldgen-g2/final-results.json) and the
+[evidence index](../../evidence/worldgen-g2/README.md) bind the G2-01–17 matrix to
+the exact runs. The complete production report is losslessly compressed in
+`full-gate-results.json.zip`; detailed runtime views are in `previews.zip`, with
+SHA256 manifests and a directly viewable cottage JSON/SVG. The final chat records
+the push to existing `main` and remote-SHA verification for the verified tag.
 
 See [G1](WORLDGEN_G1.md) for preserved historical evidence and the
 [approved proposal](WORLD_GENERATION_AUDIT_AND_PROPOSAL.md) for the subsequent

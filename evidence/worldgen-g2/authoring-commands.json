@@ -1,0 +1,141 @@
+{
+  "passed": true,
+  "commit": "29a3ef68c4514073100fc9dc12ff8a6743d1cc01",
+  "commands": [
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "--catalog",
+        "--output",
+        "evidence/worldgen-g2/catalog.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g2\\\\catalog.json\",\n  \"previews\": 0,\n  \"registration\": false\n}\n",
+      "stderr": "",
+      "seconds": 0.25
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "--check-editor-catalog"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": null,\n  \"previews\": 0,\n  \"registration\": false\n}\n",
+      "stderr": "",
+      "seconds": 0.3
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "roguelike/docs/examples/author_cottage_a.json",
+        "--route",
+        "ordinary_building",
+        "--category",
+        "residential",
+        "--access",
+        "roguelike/docs/examples/author_cottage_access.json",
+        "--register",
+        "--output",
+        "evidence/worldgen-g2/author-cottage.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g2\\\\author-cottage.json\",\n  \"previews\": 2,\n  \"registration\": true\n}\n",
+      "stderr": "",
+      "seconds": 1.28
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "roguelike/docs/examples/author_scene_weighted.json",
+        "--route",
+        "ordinary_building",
+        "--category",
+        "residential",
+        "--register",
+        "--output",
+        "evidence/worldgen-g2/scene-weighted.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g2\\\\scene-weighted.json\",\n  \"previews\": 2,\n  \"registration\": true\n}\n",
+      "stderr": "",
+      "seconds": 0.61
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "roguelike/data/entrances/barrow_mound_a.json",
+        "--output",
+        "evidence/worldgen-g2/entrance.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g2\\\\entrance.json\",\n  \"previews\": 1,\n  \"registration\": false\n}\n",
+      "stderr": "",
+      "seconds": 0.34
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "roguelike/data/layouts/starting_lab.json",
+        "--output",
+        "evidence/worldgen-g2/lab.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g2\\\\lab.json\",\n  \"previews\": 1,\n  \"registration\": false\n}\n",
+      "stderr": "",
+      "seconds": 0.41
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "roguelike/data/buildings/plaza/plaza_market_a.json",
+        "--output",
+        "evidence/worldgen-g2/plaza.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g2\\\\plaza.json\",\n  \"previews\": 1,\n  \"registration\": false\n}\n",
+      "stderr": "",
+      "seconds": 0.31
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "roguelike/docs/examples/validate_building.py",
+        "--game",
+        "roguelike",
+        "--building",
+        "roguelike/docs/examples/author_cottage_a.json",
+        "--output",
+        "evidence/worldgen-g2/compatibility-cottage.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g2\\\\compatibility-cottage.json\",\n  \"previews\": 2,\n  \"registration\": true\n}\n",
+      "stderr": "",
+      "seconds": 1.05
+    }
+  ],
+  "guide_examples_match": true,
+  "source_stable": true
+}

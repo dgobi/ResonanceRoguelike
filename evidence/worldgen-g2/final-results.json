@@ -1,0 +1,157 @@
+{
+  "passed": true,
+  "baseline_commit": "05bcc4973b09e86afcd099af99b277eab92a2bec",
+  "tested_commit": "29a3ef68c4514073100fc9dc12ff8a6743d1cc01",
+  "delivery_tag": "checkpoint/worldgen-g2-verified-20261023",
+  "focused": {
+    "passed": true,
+    "tests": 127,
+    "source_stable": true,
+    "seconds": 65.26
+  },
+  "browsers": [
+    {
+      "browser": "chromium",
+      "version": "156.0.8078.4",
+      "checks": 26,
+      "codec_documents": 129,
+      "passed": true
+    },
+    {
+      "browser": "firefox",
+      "version": "157.0",
+      "checks": 26,
+      "codec_documents": 129,
+      "passed": true
+    }
+  ],
+  "playwright": "1.64.1",
+  "driver": "1.64.0-beta-1791568591000",
+  "full_gate": {
+    "passed": true,
+    "totals": {
+      "checks": 3675,
+      "passed": 3675,
+      "failed": 0,
+      "workers": 159
+    },
+    "command": [
+      "tools/verify_d.py"
+    ],
+    "only": null,
+    "case": null,
+    "run_id": "d-20261023-175548-4990817b",
+    "source_identities": 569,
+    "source_stable": true,
+    "archive": "full-gate-results.json.zip",
+    "report_sha256": "c0b9277497ed90f16193ab3ed3e2f944d653be50d3c5b198fa734e09467359da"
+  },
+  "catalog": {
+    "passed": true,
+    "assets": 64,
+    "routes": {
+      "ordinary_building": 55,
+      "plaza": 2,
+      "interior_entrance": 6,
+      "authored_submap": 1
+    },
+    "diagnostics_by_code": {
+      "INACTIVE_FIELD": 229,
+      "TERRAIN_UNUSED": 2,
+      "DEFERRED_SPECIAL": 4,
+      "INACTIVE_POOL_FIELD": 3
+    },
+    "errors": 0,
+    "catalog_identity": "4f2d5b8f37561083a4625a545aab8993165a2acbd5bf633fb9e0fb15c51f945c"
+  },
+  "authoring_commands": 8,
+  "guide_examples_match": true,
+  "acceptance": [
+    {
+      "id": "G2-01",
+      "passed": true,
+      "evidence": "`test_generation_g2_corrections`: actual debug departure, cache/effects/checkpoint assertions; retained F9 effect tests."
+    },
+    {
+      "id": "G2-02",
+      "passed": true,
+      "evidence": "Correction tests for original/defaulted cottage; compatibility command and shared `populate`."
+    },
+    {
+      "id": "G2-03",
+      "passed": true,
+      "evidence": "Correction and retained geometry tests: axes, extremes, defaults, rejection, full reciprocal town/wilderness lists, inward access and ford semantics."
+    },
+    {
+      "id": "G2-04",
+      "passed": true,
+      "evidence": "Correction, geometry and structure-access tests: isolated pocket, authored/fallback stairs, final content blockade, real return travel."
+    },
+    {
+      "id": "G2-05",
+      "passed": true,
+      "evidence": "Catalog JSON/summary and contract tests: 64 exact route identities, duplicates/all paths, invalid roots, unrelated list loader preserved."
+    },
+    {
+      "id": "G2-06",
+      "passed": true,
+      "evidence": "Contract tests: grids/dimensions/coordinates/decor, all alternatives, references, text/scene/pool row shapes and container capability."
+    },
+    {
+      "id": "G2-07",
+      "passed": true,
+      "evidence": "Shared consumers/defaults, invalid-candidate publication guard, retained legacy fixtures and explicit wg1 world/scene save/revisit/F9 test."
+    },
+    {
+      "id": "G2-08",
+      "passed": true,
+      "evidence": "Alias/inactive/deferred tests; eight original-versus-corrected production stamp/content equivalence fixtures."
+    },
+    {
+      "id": "G2-09",
+      "passed": true,
+      "evidence": "Both browsers: 65 original blob identities and value-tree round-trips; 64 delivered documents and absence/null/false/zero/unknown sentinels."
+    },
+    {
+      "id": "G2-10",
+      "passed": true,
+      "evidence": "Both browsers: actual single terrain/decor/record edits, erase, invalid/cancelled/sequential imports, compared downloaded JSON."
+    },
+    {
+      "id": "G2-11",
+      "passed": true,
+      "evidence": "Both browsers: lab60\u219261, resize cancel, crop refusal, legend guard, undo/redo, starts; oversized/ragged model checks."
+    },
+    {
+      "id": "G2-12",
+      "passed": true,
+      "evidence": "Two retained temporary data catalogs with matching IDs/different content alternate A/B/A/B/A/B through all four real consumers and town plaza dispatch, with unrelated gameplay RNG."
+    },
+    {
+      "id": "G2-13",
+      "passed": true,
+      "evidence": "Structure-access tests: engine pickup/read, legal blocking-crate transfer and descend/return agree with named access targets; interaction-corner negative control."
+    },
+    {
+      "id": "G2-14",
+      "passed": true,
+      "evidence": "Each browser's downloaded candidate passes unified CLI and positive existing-pool generation with realized item/container contents."
+    },
+    {
+      "id": "G2-15",
+      "passed": true,
+      "evidence": "Isolated headless Chromium/Firefox drive actual local-file controls and downloads; no owner desktop or signed-in profile."
+    },
+    {
+      "id": "G2-16",
+      "passed": true,
+      "evidence": "Complete cottage/scene-weighted examples, route previews, compatibility and catalog commands; guide covers installation, diagnostics and saved-scene limits."
+    },
+    {
+      "id": "G2-17",
+      "passed": true,
+      "evidence": "Final frozen-source focused/browser/full production gate and source reconciliation recorded below."
+    }
+  ],
+  "scope": "Production main only; disposable tests; original baseline fixtures preserved; no personal saves or live example installation; no frequency claim."
+}

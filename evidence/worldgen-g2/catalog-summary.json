@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "assets": 64,
+  "routes": {
+    "ordinary_building": 55,
+    "plaza": 2,
+    "interior_entrance": 6,
+    "authored_submap": 1
+  },
+  "diagnostics_by_code": {
+    "INACTIVE_FIELD": 229,
+    "TERRAIN_UNUSED": 2,
+    "DEFERRED_SPECIAL": 4,
+    "INACTIVE_POOL_FIELD": 3
+  },
+  "errors": 0,
+  "catalog_identity": "4f2d5b8f37561083a4625a545aab8993165a2acbd5bf633fb9e0fb15c51f945c"
+}

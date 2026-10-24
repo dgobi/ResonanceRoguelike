@@ -1,5 +1,7 @@
 {
-  "result": "G:\\GameDev\\RoguelikeProject\\.baseline\\d-20261023-163538-a59b2b99\\results.json",
+  "result": "G:\\GameDev\\RoguelikeProject\\.baseline\\d-20261023-175548-4990817b\\results.json",
   "passed": true,
-  "selected_tests_passed": true
+  "selected_tests_passed": true,
+  "archived_result": "evidence/worldgen-g2/full-gate-results.json.zip",
+  "tested_commit": "29a3ef68c4514073100fc9dc12ff8a6743d1cc01"
 }

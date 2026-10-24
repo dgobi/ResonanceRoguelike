@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "runs": [
+    {
+      "browser": "chromium",
+      "exit_code": 0,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_structure_editor.py",
+        "--worker",
+        "chromium",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g2\\browser"
+      ]
+    },
+    {
+      "browser": "firefox",
+      "exit_code": 0,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_structure_editor.py",
+        "--worker",
+        "firefox",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g2\\browser"
+      ]
+    }
+  ],
+  "source": {
+    "layout_painter.html": "eec0aeb8fac816692615ba1b3b0db75f826fbb6e0c51c85a074f2ce8cf427be7",
+    "roguelike\\generation\\structure_contract.py": "6e6e9cb072f39c54a0a2c37b8fc7d22ea0e511defbbefb90693c270166609f19",
+    "tools\\structure_authoring.py": "a958423c7a3ec3e9b4bbbdf862ad82ea7e3ab5e37e4ea4450e07242f5d5f588e",
+    "tools\\verify_structure_editor.py": "a011316181818353e1b1ed42832c06b3f7696d2f9c096bc452d19a9169dbaa76",
+    "tools\\structure_editor\\catalog.js": "e00782e5924ea334d34c4ad8a1ecd5e0294d5a73519f38cd9258322b55479daf",
+    "tools\\structure_editor\\editor.css": "5e089bf017cc501c510b9e2088913308ac85a8b943de32ab1bca4fae90cf3fec",
+    "tools\\structure_editor\\editor.js": "0f8ff40ccb8d1e363eb96043bc703b14874e2435817696ba2358548c0f2f10d7",
+    "tools\\structure_editor\\model.js": "10f523879c0cd4f4a324cfa4cbeb1cb26dc7e36b499af2a7975cc9d2144b93f4"
+  },
+  "source_stable": true,
+  "seconds": 10.86,
+  "playwright": "1.64.1",
+  "driver": "1.64.0-beta-1791568591000"
+}

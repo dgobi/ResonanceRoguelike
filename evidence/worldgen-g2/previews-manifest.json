@@ -1,0 +1,107 @@
+[
+  {
+    "path": "author-cottage-0.svg",
+    "bytes": 469477,
+    "sha256": "ff6be193433bc76120b4e40226bf87b7996b6ebd5d5afc51e23dad04ff77c759"
+  },
+  {
+    "path": "author-cottage-1.svg",
+    "bytes": 469383,
+    "sha256": "d68eae640052028623cfe9424a05bffd2c858ada022924ca3a874644ea5f1136"
+  },
+  {
+    "path": "author-cottage.json",
+    "bytes": 338800,
+    "sha256": "2ec2ba40c89a23114b031d4a3e5f91040661c0eac1d7443681755316b484214f"
+  },
+  {
+    "path": "compatibility-cottage-0.svg",
+    "bytes": 468357,
+    "sha256": "6e4e484b8a12225fcf4de27b4fea570b9268a14713e5d27e0612fb5189bc2966"
+  },
+  {
+    "path": "compatibility-cottage-1.svg",
+    "bytes": 468263,
+    "sha256": "5a08a2c1187637ceddffdc1970248615e6f335d1dfbb75d6e3562bc40b77c50a"
+  },
+  {
+    "path": "compatibility-cottage.json",
+    "bytes": 336120,
+    "sha256": "e93ed06c1608a92e56aef68bb0fd2a7671831eb280794cac7eafe16b568bdd08"
+  },
+  {
+    "path": "entrance-0.svg",
+    "bytes": 462801,
+    "sha256": "1078f42d4b18df03e894ddb52937112a192a464e97983c29c6bb598d1444c019"
+  },
+  {
+    "path": "entrance.json",
+    "bytes": 72843,
+    "sha256": "75653c4d256a82a224afdb5720e09df92f8bf2acfe1f5df1f9e197e03a475571"
+  },
+  {
+    "path": "lab-0.svg",
+    "bytes": 478171,
+    "sha256": "0f0cdb955b2a319ff3b477b85c4955da99feeea17a4e7b8e3b9e5efaf722a721"
+  },
+  {
+    "path": "lab.json",
+    "bytes": 93388,
+    "sha256": "3e892bab0f4f7c63ae124db71647e5d7285b4e11b451aef6221b3eb6f4299c23"
+  },
+  {
+    "path": "plaza-0.svg",
+    "bytes": 463366,
+    "sha256": "aeafc709a6161f4ed649fbbc0d45afd9393ff6a4173c18727c8042fea5d63fa1"
+  },
+  {
+    "path": "plaza.json",
+    "bytes": 72258,
+    "sha256": "9c26fde6adc18e5db0da6e36aee8cea3597a695de6f7c94cc1a8a9106d7bbb38"
+  },
+  {
+    "path": "scene-weighted-0.svg",
+    "bytes": 466456,
+    "sha256": "c5cdca6c0c13525c1842cdf162a94b673450d000812e4ce7795b85565d59e4c8"
+  },
+  {
+    "path": "scene-weighted-1.svg",
+    "bytes": 466456,
+    "sha256": "9b240841383f93f6f48ec7d484d20df5fcfe8ce4ac0152c06713ef85ed69579c"
+  },
+  {
+    "path": "scene-weighted.json",
+    "bytes": 338602,
+    "sha256": "5605adb6a249b832d00920dbb7857d38d55703932d1d02aac578b4e3faa3d752"
+  },
+  {
+    "path": "browser/chromium-runtime-0.svg",
+    "bytes": 470273,
+    "sha256": "c443906817500d772a38d3b44959f9489478e0b72ac158f60f8e8a72c4c4c134"
+  },
+  {
+    "path": "browser/chromium-runtime-1.svg",
+    "bytes": 470417,
+    "sha256": "3f2f906cd1ff21aa2c9fde6c92cc5e42bcb0c7babdbbb04ab329dc9bfb0d8e5c"
+  },
+  {
+    "path": "browser/chromium-runtime.json",
+    "bytes": 341012,
+    "sha256": "ddb72de0f5f063c6450751e93d2400fcb980d3646b6209539d8dad56f9315dbb"
+  },
+  {
+    "path": "browser/firefox-runtime-0.svg",
+    "bytes": 470273,
+    "sha256": "c443906817500d772a38d3b44959f9489478e0b72ac158f60f8e8a72c4c4c134"
+  },
+  {
+    "path": "browser/firefox-runtime-1.svg",
+    "bytes": 470417,
+    "sha256": "3f2f906cd1ff21aa2c9fde6c92cc5e42bcb0c7babdbbb04ab329dc9bfb0d8e5c"
+  },
+  {
+    "path": "browser/firefox-runtime.json",
+    "bytes": 341009,
+    "sha256": "f10a395cda97b187a62479a1ceb20a4b1562651b00f06342f7b4da34135d4893"
+  }
+]
