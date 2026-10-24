@@ -1245,3 +1245,19 @@ Complete shipped examples: `roguelike/docs/examples/g8_layouts.json`, `g8_select
 Run the complete frozen gates with `tools/verify_g8_release.py --evidence evidence/worldgen-g8/owner-release-01`. See `docs/owner/WORLDGEN_G8.md` and the maintained offline wiki for evidence, costs, compatibility and the G8 stop boundary. Earlier arc sections above are historical where superseded by this section.
 
 G8 inherited landmark demonstration: the complete `g8_landmark_preview_selection.json` restricts the featured role to the draft `g5_landmark` for controlled preview. G8 lot counts change downstream choice IDs; the old seed alone no longer promises selecting that draft. This preview policy is not installed and is not a frequency claim.
+
+### Production installation and recovery
+
+Before installing reviewed G8 drafts, inspect `git status --short` and the diffs of
+the three generation files. Preserve any uncommitted owner edits in dated copies;
+a tag identifies a commit and does not capture uncommitted bytes. Create a named
+checkpoint of the accepted committed source. Deliberately copy each reviewed draft
+to its matching generation filename, then inspect the exact diff, run complete
+previews and catalog checks, and commit the accepted installation separately.
+The disposable workflow above rehearses this without touching production data.
+
+Recover a committed installation with a reviewed `git revert <installation-commit>`
+on `main`, resolving conflicts while preserving later owner edits. For an
+uncommitted installation, restore only the affected files from their preserved
+dated copies after reviewing subsequent edits. Keep personal campaign backups
+separate: source recovery does not rewind saved plans or visited scene mutations.
