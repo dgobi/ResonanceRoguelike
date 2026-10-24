@@ -170,6 +170,13 @@ class GenerationOwnershipTests(unittest.TestCase):
     def test_startup_uses_complete_surface_and_retains_its_actors_below(self):
         import main
         captured = []
+        # This is an ownership fixture, not a seed-specific encounter quota.
+        # G5's new RNG domain can legitimately roll no wilderness encounters.
+        # Keep real factories/placement, but guarantee eligible spawn attempts
+        # in this disposable in-memory catalog so retention has a positive.
+        data=copy.copy(self.data);data.zones=copy.deepcopy(self.data.zones)
+        for zone in data.zones.values():
+            for entry in zone.get('creatures',[]):entry['chance']=1.0
         # Seed-only bootstrap is the existing supported new-game seed fixture.
         slot = self.root / 'slot_0'
         slot.mkdir()
@@ -177,7 +184,7 @@ class GenerationOwnershipTests(unittest.TestCase):
         previous = Path.cwd()
         try:
             os.chdir(GAME_ROOT)
-            with patch.object(Engine, 'run', lambda e: captured.append(e)):
+            with patch.object(main,'DataLoader',return_value=data),patch.object(Engine, 'run', lambda e: captured.append(e)):
                 main.main()
         finally:
             os.chdir(previous)
