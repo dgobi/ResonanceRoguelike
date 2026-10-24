@@ -1,6 +1,6 @@
 # How the current world is built
 
-Fresh worlds at this wiki's revision use **G7**, generation revision `wg7`, shared world-plan format `5`, and the existing `shared-v1` dispatch. The world is finite: **128 × 128 storage chunks**, each with an **80 × 43 local map**. The plan is created before local scenes. Exploring a location realizes its slice of that plan, then preserves what actually happened there.
+Fresh worlds at this wiki's revision use **G8**, generation revision `wg8`, shared world-plan format `6`, and the existing `shared-v1` dispatch. The world is finite: **128 × 128 storage chunks**, each with an **80 × 43 local map**. The plan is created before local scenes. Exploring a location realizes its slice of that plan, then preserves what actually happened there.
 
 This distinction is useful when making content: a **layout** describes an authored place, a **placement profile** says how it can fit, a **selection profile** makes it eligible, a **world plan** chooses an asset and its location, and a **scene** contains the actual terrain, actors and objects the player can change.
 
@@ -13,14 +13,15 @@ All paths in this table are relative to the repository root.
 | A house's floor plan, doors or contents | `roguelike/data/buildings/<existing-category>/<id>.json` | Validate its complete placement contract and every permitted orientation. |
 | Which houses, shops or stores appear in new towns | `roguelike/data/generation/settlement_profiles.json` | Install the asset and explicitly register its ID in the required form and role. |
 | Relative frequency and repetition in towns | Role `weight`, `max_per_settlement`, `repeat_multiplier`, `schedule` in that file | A weight is relative among eligible, fitting choices; it is not a percentage or guaranteed count. |
-| Settlement count, road width, setbacks or plot spacing | `roguelike/data/generation/g3_config.json` | Keep current `version: 2`; the old filename is deliberate. |
+| Settlement count, road width, setbacks or plot spacing | `roguelike/data/generation/g3_config.json` | Keep current `version: 3` and `settlement_layout_version: 1`; the old filename is deliberate. |
+| Grid streets, common and frontage | `roguelike/data/generation/settlement_layouts.json` | See [Settlement layouts](#settlement-layouts). |
 | The single featured landmark's alternatives | `profiles.landmark.roles.landmark` in `settlement_profiles.json` | Use a layout with an explicit connected `landmark` context. |
 | Additional independent rural sites | `roguelike/data/generation/poi_profiles.json` | This is a separate pool from the featured landmark. |
 | Entrance appearance | `roguelike/data/entrances/<id>.json` | Match an existing entrance type and validate its real stairs and access. |
 | The starting laboratory | `roguelike/data/layouts/starting_lab.json` | Use the authored-submap route, including a real arrival and real stair terrain. |
 | A different authored underground level | A layout under `roguelike/data/layouts/` | A `SubMap.layout_id` must point to it; adding a JSON file alone does not schedule a level. |
 | Wilderness resource or decor density | Existing biome/terrain/decor data and their consuming generator | Check the active final-geometry dressing pass; a new field does not create a pass. |
-| Legacy WFC ground fill | `roguelike/data/wfc/` and the relevant call in `town_gen.py` | The fresh G7 planned scene path does not use the legacy town WFC fill. |
+| Legacy WFC ground fill | `roguelike/data/wfc/` and the relevant call in `town_gen.py` | The fresh G8 planned scene path does not use the legacy town WFC fill. |
 
 ## The layers you will encounter
 
@@ -33,7 +34,7 @@ All paths in this table are relative to the repository root.
 
 A road's identity and assigned join matter. A visually nearby road is not interchangeable with the one saved for a building. Whole road bands and owned crossings are shared across boundaries; local chunks do not independently invent the endpoints of these planned roads.
 
-## What a normal G7 world contains
+## What a normal G8 world contains
 
 The default settlement count is an inclusive draw from two through four. Forms alternate between a **grid town** spanning two by two chunks and a **roadside settlement** spanning two chunks along a country road. Each requires residential and commercial content. The grid requires the existing spent-bell civic anchor. Support plots are optional, and unsuccessful optional plots can remain recorded vacant gardens.
 
@@ -45,8 +46,8 @@ Plot roles describe selection intent. They do not add merchant behavior, trading
 
 | Label | What it identifies |
 |---|---|
-| `wg7` | Current generation origin/revision; historical visited scenes retain their real earlier revision. |
-| Plan format `5` | Resolved mixed rural parents, compound children and paths. |
+| `wg8` | Current generation origin/revision; historical visited scenes retain their real earlier revision. |
+| Plan format `6` | Resolved settlement layouts, blocks, public commons, lots, mixed rural parents, compound children and paths. |
 | `shared-v1` | The shared-plan dispatch mode. |
 | `structure-v1` | The consumed structural dependency projection. |
 | `native-town-v1` | Town native-context semantics. |
@@ -58,7 +59,7 @@ Avoid treating any one of these as “the game version.” A current scene may r
 
 The current implementation supports individual buildings and their complete approaches **inside one 80 × 43 storage chunk**. It does not yet provide structures spanning chunks, capital redevelopment, a continuous scrolling world viewport, infinite geography or long-campaign save/cache compaction. Ordinary rural population remains the existing policy. Creating a new JSON key for any of these does not activate the feature.
 
-The connected library has sixteen explicitly profiled live buildings: twelve settlement assets including the civic bell, and four rural/landmark alternatives. The larger 64-document structure catalog also contains legacy buildings, plazas, entrances and the laboratory. Catalog presence and modern planned eligibility are separate facts.
+The installed catalog includes settlement assets, the spent bell, single-site alternatives and compound child candidates. The frozen editor corpus has 65 documents, including legacy buildings, plazas, entrances and the laboratory. Catalog presence and modern planned eligibility are separate facts.
 
 ## Sources and implementation anchors
 

@@ -46,7 +46,7 @@ def reviewed_inputs(repo,config):
 
 
 def authoring_inputs(root,config):
-    names={'wiki-config.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt',config['reviewed_evidence']}
+    names={'wiki-config.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt','verify_reader.py','verify_edition.py',config['reviewed_evidence']}
     names.update(item['file'] for item in config['chapters'])
     for folder in ('chapters','examples','illustrations'):
         names.update(p.relative_to(root).as_posix() for p in (root/folder).rglob('*') if p.is_file())

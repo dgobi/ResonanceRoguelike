@@ -1,0 +1,166 @@
+diff --git a/roguelike/docs/STRUCTURE_AUTHORING.md b/roguelike/docs/STRUCTURE_AUTHORING.md
+index 4bf378a..39842c5 100644
+--- a/roguelike/docs/STRUCTURE_AUTHORING.md
++++ b/roguelike/docs/STRUCTURE_AUTHORING.md
+@@ -1178,3 +1178,66 @@ export a real edited compound child; those exact downloaded bytes are consumed b
+ direct and whole-compound previews. The world remains finite at 128×128 chunks.
+ `UI-TEXT-HEIGHT`, broader town composition, retention/streaming and the continuous
+ viewport remain deferred. G7 stops at these bounded rural compounds.
++
++
++# G8 — settlement composition (current)
++
++G8 provides two installed grid layouts inside the existing 160 × 86 town footprint. **Cross-market** has two cross streets and two avenues around a rectangular circuit, with its bell common north of the first cross street. **Linked-courts** moves the avenues and puts a connecting street between them, dividing that circuit into two courts; its common sits south of the first cross street. Horizontal roadside settlements keep their 160 × 43 footprint and derive frontage from the actual country road.
++
++The planner chooses layout identity on a separate deterministic seed stream. Building weights do not choose the layout. Country routes and bridge authority remain unchanged. Buildings, private buffers and complete approaches still belong to one 80 × 43 member chunk.
++
++## Start with complete files
++
++Run from the repository root with the interpreter selected in the interpreter setup above. These commands create drafts and evidence; they do not install anything:
++
++```powershell
++& $ResonancePython -X utf8 tools/structure_authoring.py --init-settlement authoring/g8 --output evidence/authoring/g8-init.json
++& $ResonancePython -X utf8 tools/structure_authoring.py --settlement-preview all --layout-config authoring/g8/g8_layouts.json --selection-config authoring/g8/g8_selection.json --config authoring/g8/g8_planning.json --seed 20261023 --output evidence/authoring/g8-complete.json
++& $ResonancePython -X utf8 tools/structure_authoring.py --settlement-preview grid --layout cross-market --layout-config authoring/g8/g8_layouts.json --seed 20261023 --output evidence/authoring/g8-cross-market.json
++& $ResonancePython -X utf8 tools/structure_authoring.py --settlement-preview grid --layout linked-courts --layout-config authoring/g8/g8_layouts.json --seed 20261023 --output evidence/authoring/g8-linked-courts.json
++```
++
++Repeated initialization preserves existing files. Reports and derived SVGs must be separate from every draft, initializer target and installed input. Aliases and hard links are checked before publishing outputs. Keep the complete downloaded building when using the layout painter; registration and lot fitting are separate checks.
++
++## Consumed version-one layout schema
++
++`settlement_layouts.json` contains `version: 1`, `alternative_limit`, `grid` and `roadside`. The shipped library has exactly two grid alternatives. The authoring validator permits one through four bounded alternatives, with one through four attempted alternatives. Each grid record has a unique stable `id`, `form: "grid"`, a positive finite `weight` at most 1000, `streets`, `common`, `civic_lot`, and the three frontage dimensions below. Use the initializer as the complete editable example.
++
++| Field | Meaning and bounds |
++|---|---|
++| `streets` | Four through eight uniquely named records, each with exactly two distinct orthogonal `points`, inside local 160 × 86 bounds. Width comes from planning `street_width_tiles`. |
++| `common` | Stable `id`, half-open `rect`, walkable `surface` (`cobblestone`, `dirt_path` or `grass`) and two horizontally adjacent `furnishing` cells for the existing stone and prayer. |
++| `civic_lot` | Half-open `bounds` beside the common, exact street `join`, facing `normal` and assigned `street` ID. Must fit the complete bell buffer and approach. |
++| `frontage_tiles` | Integer 14–32, controls tangent subdivision of eligible block sides. Default 18. |
++| `minimum_depth` | Integer 8–20, rejects shallow private blocks. Default 10. |
++| `junction_clearance` | Integer 1–8, trims segment endpoints and junction frontage. Default grid 2, roadside 3. |
++| `roadside` | Stable `id` and the three frontage dimensions; the country road supplies geometry. No vertical roadside template. |
++
++Coordinates are integer tiles relative to the settlement's upper-left corner. Rectangles exclude their right and bottom edges. A door's normal points toward its assigned street. An east-facing house therefore addresses a vertical street.
++
++## Read the preview
++
++The JSON contains a complete resolved plan and populated snapshots for every member of the requested forms. SVG companions show streets, common, private lots, accepted footprints, complete door spans, explicit vacancies and planned garden blocks. The controlled `--layout` option proves a chosen layout; it does not measure natural frequency.
++
++The saved arrival is the first centerline entry of the actual incoming country route, including route ID, segment, position and direction. The composer subtracts real road bands and public ground before deriving disjoint blocks. Lots identify one block, one exact assigned road segment and a finite frontage interval. Every tile of the doorway span must project into that interval. A nearby parallel road is not interchangeable.
++
++The common is protected accessible ground associated with the spent bell. Only the designated native stone/prayer cells are furnished. Public circulation remains walkable, and native actors cannot spawn on protected cells. Private reservations cannot borrow common space or neighboring lots.
++
++## Edit, inspect and deliberately install
++
++Change one geometry field in the complete draft, then preview both controlled layouts and ordinary seeds. Moving a street can remove lots, break member-local road connectivity, or make a required role impossible. Enlarging a common reduces private land. A narrower civic lot must fail clearly when the bell no longer fits; do not weaken its consumed geometry to hide that failure.
++
++Tune candidates separately in `g8_selection.json`; see the existing selection-profile section above. Required roles are fitted atomically with one shared transform-trial budget across attempted layouts. Budget exhaustion means feasibility was unresolved; enumerated-alternative exhaustion means all attempted candidates failed. Optional failures become explained vacancies. Failed branches consume no accepted caps or reservations.
++
++After reviewing previews, deliberately replace the corresponding files under `roguelike/data/generation/`, inspect the diff, run the catalog check, and generate a fresh disposable world. Installing a building also requires its explicit role membership. Existing worlds keep their saved resolution; editing a recipe does not regenerate pending or visited towns.
++
++## Limits and interpretation
++
++The current composer uses orthogonal rectangular blocks and finite choices. Narrow leftover strips are recorded gardens, not hidden failed buildings. Spatial repetition uses Manhattan distance between accepted frontage joins with stable plot-ID ties. Counts and weights are not occupancy guarantees. Three ordinary seeds and controlled examples establish bounded behavior, not long-run frequencies.
++
++The G8 owner report records populated renderer views, real-handler travel, same-machine G7/G8 costs and centerline graph loops. G7 already had a rectangular street cycle. Wide-road tile cycles are not counted as useful alternate routes. Country-network optimization, organic cities, cross-chunk buildings and continuous rendering remain outside this release.
++
++
++Complete shipped examples: `roguelike/docs/examples/g8_layouts.json`, `g8_selection.json`, `g8_planning.json`. The initializer copies the installed equivalents. The six G8 workflows execute initialization/preservation, complete controlled and roadside previews, a geometry edit, separate selection tuning, required-fit/collision failures, and deliberate disposable installation/catalog checks. Run `tools/verify_g8_authoring.py --evidence evidence/worldgen-g8/owner-authoring-01`; inherited G5–G7 workflows remain nested records. Both browser engines also consume actual downloaded building bytes on vertical frontage in both grid layouts.
++
++Run the complete frozen gates with `tools/verify_g8_release.py --evidence evidence/worldgen-g8/owner-release-01`. See `docs/owner/WORLDGEN_G8.md` and the maintained offline wiki for evidence, costs, compatibility and the G8 stop boundary. Earlier arc sections above are historical where superseded by this section.
+diff --git a/tools/critical_fix_regressions/tests/test_authoring_destinations.py b/tools/critical_fix_regressions/tests/test_authoring_destinations.py
+index e2a0cf6..8bacd3d 100644
+--- a/tools/critical_fix_regressions/tests/test_authoring_destinations.py
++++ b/tools/critical_fix_regressions/tests/test_authoring_destinations.py
+@@ -32,7 +32,7 @@ class AuthoringDestinations(unittest.TestCase):
+         self.assertEqual(before,{p.name:p.read_bytes() for p in self.root.iterdir() if p.is_file()})
+ 
+     def test_explicit_read_inputs_and_initializer_targets(self):
+-        for flag in ('--compound','--child','--poi-config','--selection-config','--config','--access','--editor-catalog','candidate'):
++        for flag in ('--compound','--child','--poi-config','--selection-config','--config','--layout-config','--access','--editor-catalog','candidate'):
+             with self.subTest(flag=flag):
+                 args=[str(self.child)] if flag=='candidate' else [flag,str(self.child)]
+                 if flag=='--editor-catalog':args+=['--check-editor-catalog']
+diff --git a/tools/g3_journey.py b/tools/g3_journey.py
+index b46fb74..b7d4c9f 100644
+--- a/tools/g3_journey.py
++++ b/tools/g3_journey.py
+@@ -88,7 +88,11 @@ def journey(seed,save_root,progress=None):
+         for n in range(4):
+             row=next(r for r in country if r['id']==f'road-{n}');route(row)
+             report['destinations'].append(row['b'])
+-            if row['b']=='settlement-0':
++            if row['b']=='settlement-0' and plan['version']>=6:
++                from g8_journey import town
++                report['g8_town']=town(e,walk,route,position)
++                report['interaction']=report['g8_town']['contents'][0]
++            if row['b']=='settlement-0' and plan['version']<6:
+                 local=[p for p in plan['placements'] if p['origin'][0]//80==e.world_x and p['origin'][1]//43==e.world_y]
+                 p=next(p for p in local if p['asset'] not in ('house_small_a','market_stall_a','bell_tower_a','roadside_shrine_a') and any(t['kind']=='container' for t in p['targets']))
+                 target=next(t for t in p['targets'] if t['kind']=='container');xy=(target['x']%80,target['y']%43)
+@@ -183,16 +187,27 @@ def journey(seed,save_root,progress=None):
+         assert any(r['route']=='road-1' for r in report['crossings'])
+         report['materialized_scenes_before_f9']=sum(c.visited for c in e.world_map.chunks.values())
+         retain()
++        if plan['version']>=6:
++            from g8_journey import explored_checkpoint
++            report['explored_checkpoint']=explored_checkpoint(e)
++            head=e.save_manager.store.token();checkpoint_plan=digest(e.world_map.plan);checkpoint_world=digest(_serialize_world(e.world_map))
++            checkpoint_scene=fingerprint(e.local_map,e.entities[1:]);checkpoint_position=position()
+         t=time.perf_counter();e._handle_key_local(pygame.K_F9)
+         report['restore_seconds']=time.perf_counter()-t
+         assert digest(e.world_map.plan)==checkpoint_plan
+         assert digest(_serialize_world(e.world_map))==checkpoint_world,'F9 world state differs from saved checkpoint'
+         assert position()==checkpoint_position and fingerprint(e.local_map,e.entities[1:])==checkpoint_scene
+         assert e.save_manager.store.token()==head
+-        report['f9_restored_coherent_start_checkpoint']=True
++        report['f9_restored_coherent_start_checkpoint']=plan['version']<6
++        report['f9_restored_explored_checkpoint']=plan['version']>=6
++        if plan['version']>=6:
++            report['explored_checkpoint']['f9_seconds']=report['restore_seconds']
++            for key,expected in report['explored_checkpoint']['surface_fingerprints'].items():
++                import ast
++                assert fingerprint(*e._prepare_destination(*ast.literal_eval(key)))==expected
+         report['worst_transition_seconds']=max(c['seconds'] for c in report['crossings'])
+         report['checkpoint_bytes']=sum(p.stat().st_size for p in e.save_manager.checkpoint_path().rglob('*') if p.is_file())
+-        report['checkpoint_scope']='starting state after lab exit, before journey'
++        report['checkpoint_scope']='explored town and compound journey' if plan['version']>=6 else 'starting state after lab exit, before journey'
+         report['checkpoint_scene_count']=sum(1 for _ in (e.save_manager.checkpoint_path()/'chunks').glob('*.pkl'))
+         report['passed']=True
+         retain()
+diff --git a/tools/verify_b3.py b/tools/verify_b3.py
+index 6933f92..51fc301 100644
+--- a/tools/verify_b3.py
++++ b/tools/verify_b3.py
+@@ -39,6 +39,10 @@ def source_manifest():
+     result[corrections.relative_to(ROOT).as_posix()] = hashlib.sha256(corrections.read_bytes()).hexdigest()
+     guide=GAME/'docs/STRUCTURE_AUTHORING.md'
+     result[guide.relative_to(ROOT).as_posix()]=hashlib.sha256(guide.read_bytes()).hexdigest()
++    # G8 ordinary comparisons consume the immutable same-machine G7 witness.
++    for seed in (0,20261023,29417):
++        baseline=ROOT/f'evidence/worldgen-g8/before/baseline/results/plan-{seed}.json'
++        result[baseline.relative_to(ROOT).as_posix()]=hashlib.sha256(baseline.read_bytes()).hexdigest()
+     return result
+ 
+ 
+diff --git a/tools/verify_structure_editor.py b/tools/verify_structure_editor.py
+index f0eeb6e..4c60464 100644
+--- a/tools/verify_structure_editor.py
++++ b/tools/verify_structure_editor.py
+@@ -205,11 +205,14 @@ def worker(browser_name,evidence):
+         result_compound=subprocess.run(list(map(str,command_compound)),cwd=ROOT,capture_output=True,text=True,timeout=90)
+         compound_commands.append(dict(argv=list(map(str,command_compound)),cwd=str(ROOT),exit_code=result_compound.returncode,expected_exit=0,stdout=result_compound.stdout,stderr=result_compound.stderr))
+         check('actual downloaded child passes compound '+name,result_compound.returncode==0)
++    from g8_browser_consumer import consume
++    g8_commands=consume(planned_export,evidence,browser_name)
++    check('actual downloaded building occupies vertical frontage in both G8 layouts',bool(g8_commands))
+     report={'browser':browser_name,'version':version,'passed':all(c['passed'] for c in checks),'checks':checks,'errors':errors,
+             'command':command,'runtime_stdout':run.stdout,'runtime_stderr':run.stderr,'codec_documents':len(codec),
+             'planned_command':planned_command,'planned_stdout':planned_run.stdout,'planned_stderr':planned_run.stderr,
+             'command_records':[dict(argv=c,cwd=str(ROOT),exit_code=r.returncode,stdout=r.stdout,stderr=r.stderr) for c,r in
+-                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))]+site_commands+compound_commands,
++                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))]+site_commands+compound_commands+g8_commands,
+             'download_hashes':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (exported,planned_export,site_export,compound_export)}}
+     (evidence/(browser_name+'.json')).write_text(json.dumps(report,indent=2)+'\n')
+     print(json.dumps({'browser':browser_name,'passed':report['passed'],'checks':len(checks),'version':version}))

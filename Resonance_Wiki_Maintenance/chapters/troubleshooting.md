@@ -44,3 +44,7 @@ This handbook records these limits so you can make edits that the current game c
 ## Source basis
 
 [Data loader](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/data_loader.py) · [current structure guide](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/docs/STRUCTURE_AUTHORING.md) · [craft ambient sources](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/rendering/craft_screen.py) · [perk screen](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/rendering/perk_screen.py) · [next-arc history](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/docs/owner/NEXT_ARC.md).
+
+## G8 lot and common checks
+
+A complete building buffer and approach must fit its one-member lot. The entire doorway span must project into the assigned straight segment and frontage interval; a nearby parallel road cannot substitute. The protected civic common is public circulation, not overflow private land. Read `rejected` and `composition_work` in a complete settlement preview for cap, transform, capacity and bounded-search outcomes. See [Settlement layouts](#settlement-layouts). A valid candidate can remain unselected; use a declared controlled preview policy when demonstrating one asset, and keep ordinary seed evidence separate.

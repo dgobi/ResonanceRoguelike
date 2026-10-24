@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\wiki-development-a\\results\\example-grid.json",
+  "previews": 4,
+  "registration": false,
+  "status": null
+}

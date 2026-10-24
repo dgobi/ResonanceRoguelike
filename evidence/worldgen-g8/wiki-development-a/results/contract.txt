@@ -1,0 +1,8 @@
+test_repeat_and_later_documentation_delivery_commit (__main__.WikiInputs.test_repeat_and_later_documentation_delivery_commit) ... ok
+test_stale_missing_wiki_and_product (__main__.WikiInputs.test_stale_missing_wiki_and_product) ... ok
+test_unreviewed_changed_missing_and_added_sources_cannot_be_rebuilt (__main__.WikiInputs.test_unreviewed_changed_missing_and_added_sources_cannot_be_rebuilt) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.472s
+
+OK

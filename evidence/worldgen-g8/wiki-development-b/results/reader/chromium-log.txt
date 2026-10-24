@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "html_sha256": "ed6a6efcebfa2956a1e3ec86643bef5a0778118335c353c965dfac1f8a060695",
+  "runs": [
+    {
+      "browser": "chromium",
+      "version": "156.0.8078.4",
+      "internal_links": 542,
+      "missing": [],
+      "search_results": 36,
+      "copy_button": "Copied",
+      "selected_fallback_characters": 0,
+      "navigation": true,
+      "mobile_menu": true,
+      "script_errors": []
+    }
+  ],
+  "limits": "Headless local-file Chromium and Firefox, two viewport sizes; automated navigation/search/copy control checks and retained screenshots. No manual assistive-technology audit or OS clipboard readback."
+}

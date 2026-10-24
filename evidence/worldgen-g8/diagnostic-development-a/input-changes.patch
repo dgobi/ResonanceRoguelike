@@ -1,0 +1,80 @@
+diff --git a/tools/critical_fix_regressions/tests/test_authoring_destinations.py b/tools/critical_fix_regressions/tests/test_authoring_destinations.py
+index e2a0cf6..8bacd3d 100644
+--- a/tools/critical_fix_regressions/tests/test_authoring_destinations.py
++++ b/tools/critical_fix_regressions/tests/test_authoring_destinations.py
+@@ -32,7 +32,7 @@ class AuthoringDestinations(unittest.TestCase):
+         self.assertEqual(before,{p.name:p.read_bytes() for p in self.root.iterdir() if p.is_file()})
+ 
+     def test_explicit_read_inputs_and_initializer_targets(self):
+-        for flag in ('--compound','--child','--poi-config','--selection-config','--config','--access','--editor-catalog','candidate'):
++        for flag in ('--compound','--child','--poi-config','--selection-config','--config','--layout-config','--access','--editor-catalog','candidate'):
+             with self.subTest(flag=flag):
+                 args=[str(self.child)] if flag=='candidate' else [flag,str(self.child)]
+                 if flag=='--editor-catalog':args+=['--check-editor-catalog']
+diff --git a/tools/g3_journey.py b/tools/g3_journey.py
+index b46fb74..b7d4c9f 100644
+--- a/tools/g3_journey.py
++++ b/tools/g3_journey.py
+@@ -88,7 +88,11 @@ def journey(seed,save_root,progress=None):
+         for n in range(4):
+             row=next(r for r in country if r['id']==f'road-{n}');route(row)
+             report['destinations'].append(row['b'])
+-            if row['b']=='settlement-0':
++            if row['b']=='settlement-0' and plan['version']>=6:
++                from g8_journey import town
++                report['g8_town']=town(e,walk,route,position)
++                report['interaction']=report['g8_town']['contents'][0]
++            if row['b']=='settlement-0' and plan['version']<6:
+                 local=[p for p in plan['placements'] if p['origin'][0]//80==e.world_x and p['origin'][1]//43==e.world_y]
+                 p=next(p for p in local if p['asset'] not in ('house_small_a','market_stall_a','bell_tower_a','roadside_shrine_a') and any(t['kind']=='container' for t in p['targets']))
+                 target=next(t for t in p['targets'] if t['kind']=='container');xy=(target['x']%80,target['y']%43)
+@@ -183,16 +187,27 @@ def journey(seed,save_root,progress=None):
+         assert any(r['route']=='road-1' for r in report['crossings'])
+         report['materialized_scenes_before_f9']=sum(c.visited for c in e.world_map.chunks.values())
+         retain()
++        if plan['version']>=6:
++            from g8_journey import explored_checkpoint
++            report['explored_checkpoint']=explored_checkpoint(e)
++            head=e.save_manager.store.token();checkpoint_plan=digest(e.world_map.plan);checkpoint_world=digest(_serialize_world(e.world_map))
++            checkpoint_scene=fingerprint(e.local_map,e.entities[1:]);checkpoint_position=position()
+         t=time.perf_counter();e._handle_key_local(pygame.K_F9)
+         report['restore_seconds']=time.perf_counter()-t
+         assert digest(e.world_map.plan)==checkpoint_plan
+         assert digest(_serialize_world(e.world_map))==checkpoint_world,'F9 world state differs from saved checkpoint'
+         assert position()==checkpoint_position and fingerprint(e.local_map,e.entities[1:])==checkpoint_scene
+         assert e.save_manager.store.token()==head
+-        report['f9_restored_coherent_start_checkpoint']=True
++        report['f9_restored_coherent_start_checkpoint']=plan['version']<6
++        report['f9_restored_explored_checkpoint']=plan['version']>=6
++        if plan['version']>=6:
++            report['explored_checkpoint']['f9_seconds']=report['restore_seconds']
++            for key,expected in report['explored_checkpoint']['surface_fingerprints'].items():
++                import ast
++                assert fingerprint(*e._prepare_destination(*ast.literal_eval(key)))==expected
+         report['worst_transition_seconds']=max(c['seconds'] for c in report['crossings'])
+         report['checkpoint_bytes']=sum(p.stat().st_size for p in e.save_manager.checkpoint_path().rglob('*') if p.is_file())
+-        report['checkpoint_scope']='starting state after lab exit, before journey'
++        report['checkpoint_scope']='explored town and compound journey' if plan['version']>=6 else 'starting state after lab exit, before journey'
+         report['checkpoint_scene_count']=sum(1 for _ in (e.save_manager.checkpoint_path()/'chunks').glob('*.pkl'))
+         report['passed']=True
+         retain()
+diff --git a/tools/verify_structure_editor.py b/tools/verify_structure_editor.py
+index f0eeb6e..4c60464 100644
+--- a/tools/verify_structure_editor.py
++++ b/tools/verify_structure_editor.py
+@@ -205,11 +205,14 @@ def worker(browser_name,evidence):
+         result_compound=subprocess.run(list(map(str,command_compound)),cwd=ROOT,capture_output=True,text=True,timeout=90)
+         compound_commands.append(dict(argv=list(map(str,command_compound)),cwd=str(ROOT),exit_code=result_compound.returncode,expected_exit=0,stdout=result_compound.stdout,stderr=result_compound.stderr))
+         check('actual downloaded child passes compound '+name,result_compound.returncode==0)
++    from g8_browser_consumer import consume
++    g8_commands=consume(planned_export,evidence,browser_name)
++    check('actual downloaded building occupies vertical frontage in both G8 layouts',bool(g8_commands))
+     report={'browser':browser_name,'version':version,'passed':all(c['passed'] for c in checks),'checks':checks,'errors':errors,
+             'command':command,'runtime_stdout':run.stdout,'runtime_stderr':run.stderr,'codec_documents':len(codec),
+             'planned_command':planned_command,'planned_stdout':planned_run.stdout,'planned_stderr':planned_run.stderr,
+             'command_records':[dict(argv=c,cwd=str(ROOT),exit_code=r.returncode,stdout=r.stdout,stderr=r.stderr) for c,r in
+-                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))]+site_commands+compound_commands,
++                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))]+site_commands+compound_commands+g8_commands,
+             'download_hashes':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (exported,planned_export,site_export,compound_export)}}
+     (evidence/(browser_name+'.json')).write_text(json.dumps(report,indent=2)+'\n')
+     print(json.dumps({'browser':browser_name,'passed':report['passed'],'checks':len(checks),'version':version}))

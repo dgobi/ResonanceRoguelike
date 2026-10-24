@@ -1,10 +1,10 @@
 {
-  "edition": "1.1-integration",
-  "milestone": "G7",
+  "edition": "1.2",
+  "milestone": "G8",
   "date": "2026-10-24",
   "date_label": "24 October 2026",
   "timezone": "America/Edmonton",
-  "commit": "77ea292d3b28467578a275e89068e4a689199931",
+  "commit": "6b237f359f5ced951f195f88f0c0d5cadf1f1d86",
   "repository": "https://github.com/dgobi/ResonanceRoguelike",
   "chapters": [
     {
@@ -108,6 +108,12 @@
       "file": "chapters/settlement-tuning.md",
       "group": "World & structures",
       "nav_title": "Towns, roads & variety"
+    },
+    {
+      "id": "settlement-layouts",
+      "file": "chapters/settlement-layouts.md",
+      "group": "World & structures",
+      "nav_title": "Streets, commons & frontage"
     },
     {
       "id": "rural-sites",

@@ -1,0 +1,17 @@
+{
+  "scope": "Model inspection of all three full populated production mosaics, displayed downscaled from retained originals",
+  "views": [
+    "visuals-development-a/results/cross-market-complete.png",
+    "visuals-development-a/results/linked-courts-complete.png",
+    "visuals-development-a/results/roadside-complete.png"
+  ],
+  "observations": [
+    "Cross-market has a large north common beside the bell and a sparse central circuit.",
+    "Linked-courts shifts avenues, uses a middle connecting street and moves the common south; denser small courts are visibly distinct.",
+    "East/west facades are visible on vertical streets; conventional horizontal facades remain readable.",
+    "Roadside buildings face the actual central horizontal country road.",
+    "Repeated house/shop families remain recognizable; controlled schedules intentionally increase residential/commercial emphasis.",
+    "Broad garden strips, empty corner land and a large simple paved common remain; the bounded rectangular composer does not optimize every leftover parcel."
+  ],
+  "limits": "Full visibility revealed; real production sprite renderer and population. Screenshots establish appearance; access and ownership rely on separate executed checks."
+}

@@ -2,7 +2,7 @@
 
 This workflow creates a small cottage, validates its actual contents and access, registers it for new town plans, and gives you an optional disposable world in which to inspect it. **Previewing a draft does not install it. Installing a file does not, by itself, make it eligible for modern town selection.** Both the layout and the selection entry are required.
 
-The complete `owner_cottage_a.json` example below was created for this wiki and checked against the pinned G6 source: all eight permitted transforms passed, followed by production mixed-policy grid and roadside previews. The example remains outside the game's installed catalog.
+The complete `owner_cottage_a.json` example below was created for this wiki and originally checked against G6 and revalidated against this G8 edition: all eight permitted transforms, followed by production grid and roadside previews. The example remains outside the game's installed catalog.
 
 ## 1. Establish the working folder
 
@@ -169,7 +169,7 @@ Open `roguelike/data/generation/settlement_profiles.json`. Add this object to **
 {"asset":"owner_cottage_a","weight":1,"max_per_settlement":4}
 ```
 
-For this cottage, those arrays are `profiles.grid.roles.residential` and `profiles.roadside.roles.residential`. Add it to both if you want both forms to use it. Adding an ID only to the grid profile does not register it for roadside settlements. Do not add a legacy `pools` object to current version-2 `g3_config.json`.
+For this cottage, those arrays are `profiles.grid.roles.residential` and `profiles.roadside.roles.residential`. Add it to both if you want both forms to use it. Adding an ID only to the grid profile does not register it for roadside settlements. Do not add a legacy `pools` object to current version-3 `g3_config.json`.
 
 The filename makes the document discoverable, the internal `id` supplies references, the existing category folder supplies its loader route, `placement.contexts` allows the geometry, and the role entries admit it to selection. Keep them aligned.
 

@@ -2,7 +2,7 @@
 
 Use a check that observes the thing you changed. A parser proves syntax, a factory proves construction, a layout validator proves selected structure constraints, and a generated-world test proves placement in context. None alone certifies balance, visual quality or an entire campaign.
 
-All commands here run from the repository root, using the `$ResonancePython` variable from [Setup](#getting-started). Keep evidence outside `roguelike/` and choose a new output directory for each run. Do not overwrite the repository's frozen G1–G6 evidence.
+All commands here run from the repository root, using the `$ResonancePython` variable from [Setup](#getting-started). Keep evidence outside `roguelike/` and choose a new output directory for each run. Do not overwrite the repository's frozen G1–G8 evidence.
 
 ## Choose a useful check
 
@@ -11,8 +11,8 @@ All commands here run from the repository root, using the `$ResonancePython` var
 | One JSON value or prose field | `python -m json.tool <file>`; inspect its diff | New instance/read in a disposable run; referenced-ID check. |
 | New item or creature | DataLoader + actual factory; debug spawn | Appropriate combat/ownership regressions and a real spawn route. |
 | Structure geometry/access | Candidate validator and preview | All permitted transforms; naturally selected placement and complete scene. |
-| Town roles, weights or caps | Planned previews over chosen seeds | G5/G6 authoring cases; distribution observations, not a single screenshot. |
-| Rural POIs | Assigned-site preview, then natural `--site` | G6 journey including travel/save/load ownership. |
+| Town roles, weights or caps | Planned previews over chosen seeds | G8 plus inherited authoring cases; distribution observations, not a single screenshot. |
+| Rural POIs | Assigned-site preview, then natural `--site` | G8 journey including travel/save/load ownership. |
 | Sprite/tile change | Mapping and bounds check; visual inspection | Actual renderer paths at supported zooms. |
 | Save/state or core mechanics | Focused regression for the invariant | Unfiltered production gate for a feature delivery. |
 
@@ -70,13 +70,13 @@ The first exercises current authoring recipes, including inherited G5 coverage. 
 
 Despite its historical name, `verify_d.py` is the production gate including B1/B2/B3/C/D regressions. Its `--only` and `--case` options produce partial runs; those are useful diagnostics but must not be presented as an unfiltered pass.
 
-The G6 release coordinator runs the selected focused, editor, authoring, catalogue, diagnostic, visuals, production and independent probe gates sequentially against a recorded source identity:
+The G8 release coordinator runs the unfiltered focused, editor, new/inherited authoring, catalogue, ordinary diagnostics/journey, production views, wiki and unfiltered production gates sequentially against a recorded source identity:
 
 ```powershell
-& $ResonancePython -X utf8 tools/verify_g6_release.py --evidence .wiki-evidence/g6-release-02
+& $ResonancePython -X utf8 tools/verify_g8_release.py --evidence evidence/worldgen-g8/owner-release-02
 ```
 
-The root output directory must not already exist. Browser/editor verification has additional tooling requirements; this command is a release gate, not a minimal prerequisite for reading or editing JSON. A full game gate was **not rerun just to publish this wiki**. The wiki's audit runs are listed in [Coverage and audit](#coverage).
+The root output directory must not already exist. Browser/editor verification has additional tooling requirements; this command is a release gate, not a minimal prerequisite for reading or editing JSON. The G8 feature delivery includes the full game gates; a later prose-only handbook edit does not require repeating unrelated game gates. The wiki's audit runs are listed in [Coverage and audit](#coverage).
 
 ## Keep useful evidence
 
@@ -86,7 +86,7 @@ The standing project workflow is autonomous headless processes and app-local eve
 
 ## Source basis
 
-[Focused runner](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/critical_fix_regressions/verify_fixes.py) · [structure CLI](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/structure_authoring.py) · [G6 authoring](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/verify_g6_authoring.py) · [G6 diagnostic](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/worldgen_g6_diagnostic.py) · [release coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/verify_g6_release.py).
+[Focused runner](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/critical_fix_regressions/verify_fixes.py) · [structure CLI](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/structure_authoring.py) · [G6 authoring](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/verify_g6_authoring.py) · [G6 diagnostic](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/worldgen_g6_diagnostic.py) · [release coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/verify_g8_release.py).
 
 ## G7 composition integration
 

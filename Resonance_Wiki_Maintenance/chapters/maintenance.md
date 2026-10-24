@@ -33,3 +33,5 @@ A feature affecting owner workflows must update authoritative guides and wiki ch
 **1.0, 24 October 2026:** Original G6 handbook and Linux audit. Dated configuration, manifest, build report and README remain under `audit/edition-1.0/`; original probe outputs remain in `audit/`. Their raw catalogue drift finding and inspection limits remain historical.
 
 **1.1 integration, 24 October 2026:** Shared source/authoring/product contract and G7 compound catch-up. Final G8 metadata will record completed feature/release scope.
+
+**1.2, G8:** Two bounded settlement layouts, protected civic commons, actual-road frontage, format-6 resolution, current historical adapters, G7 compounds and real browser/download workflows. Main chapters, standalone HTML, three-scope build contract and headless reader verification are maintained together. The G8 owner report and evidence index provide source-bound game gates; historical audits remain unchanged.

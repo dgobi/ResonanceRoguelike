@@ -21,7 +21,7 @@ With the shipped debug configuration, F5 teleports and F9 prints diagnostics. Th
 
 An ordinary launch uses `roguelike/saves/slot_0/`. The current disposable launcher redirects the root to `.baseline/g3-play-<session>/`, still with a `slot_0/` underneath. The old `baseline.py` launcher uses a different copied-game tree. Keep their paths distinct.
 
-The payload save version is **2**; the outer checkpoint container version is **1**. World plan versions and scene generation revisions (`wg3` through `wg7`) are separate compatibility contracts. A matching save version alone does not prove that a new generator can reinterpret an older plan.
+The payload save version is **2**; the outer checkpoint container version is **1**. World plan versions and scene generation revisions (`wg3` through `wg8`) are separate compatibility contracts. A matching save version alone does not prove that a new generator can reinterpret an older plan.
 
 ## What a full save captures
 
@@ -65,4 +65,8 @@ Active/hot map processing and disruption zones can age while those maps remain r
 
 ## Resolved compound ownership
 
-G7 format 5 / `wg7` saves selected parent recipes as resolved child placements and shared paths. Removing or editing a selection/recipe file does not redraw an existing plan. Pending children check their consumed `structure-v1` dependencies; affected pending scenes reject mismatches. Visited complete scenes retain their real creator and mutations. Parent and child counts differ; same-asset children have independent containers. Selecting a v1 single-site policy explicitly retains its single-site count meaning and historical fresh format-4 path.
+G7 format 5 / `wg7` saves selected parent recipes as resolved child placements and shared paths. Removing or editing a selection/recipe file does not redraw an existing plan. Pending children check their consumed `structure-v1` dependencies; affected pending scenes reject mismatches. Visited complete scenes retain their real creator and mutations. Parent and child counts differ; same-asset children have independent containers. A v1 single-site policy retains its single-site count meaning. It uses format 4 only with historical planning settings version 2; current version-3 layout settings keep format 6.
+
+## G8 settlement resolution
+
+Format 6 stores layout identity, actual arrival, exact street bands, blocks, lot/placement associations and public common geometry. Both POI policy versions remain valid with G8. Loading never consults current town recipes to recompose these records. Pending scenes validate their own consumed dependencies; a common surface change affects only slices consuming it. Visited scenes retain actual state. The genuine pre-change G7 witness and checksum-consistent corruption cases are recorded in the G8 owner report.

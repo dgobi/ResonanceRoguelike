@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\wiki-development-b\\results\\example-roadside.json",
+  "previews": 3,
+  "registration": false,
+  "status": null
+}

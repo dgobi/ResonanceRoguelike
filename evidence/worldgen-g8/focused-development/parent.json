@@ -1,0 +1,6 @@
+{
+  "command": "python -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike --evidence evidence/worldgen-g8/focused-development",
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "inherited_pythonpath": null,
+  "commit": "a2dfe0169342d18c279c5a3268e77460f9f19ae5"
+}

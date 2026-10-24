@@ -1,6 +1,6 @@
 # Project glossary
 
-Use these definitions when a guide distinguishes something that looks similar on screen but has a different owner in the game. Dimensions and version labels below describe this wiki's pinned G6 revision.
+Use these definitions when a guide distinguishes something that looks similar on screen but has a different owner in the game. Dimensions and version labels below describe this wiki's pinned G8 revision.
 
 ## Places and coordinates
 
@@ -32,7 +32,7 @@ Use these definitions when a guide distinguishes something that looks similar on
 | **Role** | Selection intent for a plot, such as residential, commercial or support. A commercial role does not create trading behavior. | [Settlement tuning](#settlement-tuning) |
 | **Candidate** | An eligible asset, site or transform being considered. Eligibility is not guaranteed selection or successful fit. | [Generation diagnosis](#generation-troubleshooting) |
 | **Placement** | A chosen asset with a saved transform, position, footprint, buffer, entrances, targets and assigned approach. | [Geometry reference](#structure-reference) |
-| **Site** | A durable additional G6 rural place, currently one building in one chunk attached to a country road. The featured landmark is a separate owner. | [Rural sites](#rural-sites) |
+| **Site** | A durable rural parent, either a single building or a bounded compound with independent children, attached to a country road. The featured landmark is a separate owner. | [Rural sites](#rural-sites) |
 | **Frontage / join / approach** | The selected road-facing entrance, exact assigned road connection and protected access between them. An unrelated nearby road cannot replace that assignment. | [Rural sites](#rural-sites) |
 | **Entrance** | An explicit full doorway span with an outward normal, role and required flag. Separate doors divided by a wall need separate records. | [Structure reference](#structure-reference) |
 | **Target** | A typed position whose intended usability is checked, such as a readable or container. Declaring a target does not spawn that object. | [Structure reference](#structure-reference) |
@@ -43,7 +43,7 @@ Use these definitions when a guide distinguishes something that looks similar on
 | Term | Meaning in Resonance | Continue with |
 |---|---|---|
 | **Shared plan** | World-owned initial decisions for roads, crossings, settlements and selected places. Local scenes realize its slices; loading does not reroll it. | [World generation](#world-generation) |
-| **Plan version / generation revision** | Different labels: current plan format is `4`; current generation revision is `wg6`. Save format and dispatch mode are separate contracts again. | [World generation](#world-generation) |
+| **Plan version / generation revision** | Different labels: current plan format is `6`; current generation revision is `wg8`. Save format and dispatch mode are separate contracts again. | [World generation](#world-generation) |
 | **Provenance** | Recorded origin and creation information, such as actual scene revision, plan identity and adapter. An older visited scene keeps its real history. | [Generation diagnosis](#generation-troubleshooting) |
 | **Dependency fingerprint** | A digest of consumed definitions used to detect incompatible changes before creating a pending placement. It is distinct from a raw file hash and from a saved inventory. | [Generation diagnosis](#generation-troubleshooting) |
 

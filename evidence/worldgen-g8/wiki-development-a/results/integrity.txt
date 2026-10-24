@@ -1,0 +1,74 @@
+{
+  "status": "pass",
+  "errors": 0,
+  "report": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\wiki-development-a\\results\\integrity.json",
+  "checks": {
+    "html_ids": {
+      "unique": 1540,
+      "duplicate_ids": {}
+    },
+    "internal_hrefs": {
+      "checked": 540,
+      "external_hyperlinks_permitted": 655
+    },
+    "articles": {
+      "guide": 37,
+      "source": 56,
+      "data": 17
+    },
+    "json_scripts": {
+      "checked": 1,
+      "parsed": 1
+    },
+    "json_code_blocks": {
+      "total": 481,
+      "complete_parsed": 446,
+      "insertion_fragments_syntax_checked": 32,
+      "historical_abbreviations_skipped": 3
+    },
+    "source_coverage": {
+      "expected": 56,
+      "observed": 56,
+      "missing": [],
+      "unexpected": []
+    },
+    "source_hashes": {
+      "matched": 56
+    },
+    "game_json_coverage": {
+      "expected": 351,
+      "observed": 351,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_example_coverage": {
+      "expected": 18,
+      "observed": 18,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_data_comparison": {
+      "matched": 369,
+      "wiki_examples_not_in_repo": 1,
+      "catalog_records": 370
+    },
+    "search_coverage": {
+      "expected": 463,
+      "observed": 463,
+      "missing": [],
+      "unexpected": []
+    },
+    "search_index": {
+      "records": 463,
+      "catalog_json_copies_matched": 370
+    },
+    "runtime_assets": {
+      "references_checked": 4,
+      "embedded_references": 4,
+      "fragment_references": 0,
+      "css_blocks_and_style_attributes_checked": 1,
+      "embedded_svgs_inspected": 1,
+      "inline_executable_scripts": 1
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "passed": false,
+  "error": "{\"passed\": false, \"source_stable\": true, \"error\": \"{\\\"passed\\\": false, \\\"source_stable\\\": true, \\\"error\\\": \\\"{\\\\\\\"passed\\\\\\\": false, \\\\\\\"error\\\\\\\": \\\\\\\"{\\\\\\\\n  \\\\\\\\\\\\\\\"passed\\\\\\\\\\\\\\\": false,\\\\\\\\n  \\\\\\\\\\\\\\\"error\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"Editor catalog is stale. Run --refresh-editor-catalog and repeat runtime validation.\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\\\\\\"diagnostics\\\\\\\\\\\\\\\": []\\\\\\\\n}\\\\\\\\n\\\\\\\", \\\\\\\"source_stable\\\\\\\": true}\\\\n\\\"}\\n\"}\n",
+  "g8_top_level_workflows": 6,
+  "inherited": "G7 six workflows with its G6/G5 subruns; do not sum nested counts",
+  "records": [
+    {
+      "workflow": "inherited; nested counts are separate",
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_g7_authoring.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\authoring-development-c\\results\\inherited-g7"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 1,
+      "expected_exit": 0,
+      "expected_negative": false,
+      "stdout": "{\"passed\": false, \"source_stable\": true, \"error\": \"{\\\"passed\\\": false, \\\"source_stable\\\": true, \\\"error\\\": \\\"{\\\\\\\"passed\\\\\\\": false, \\\\\\\"error\\\\\\\": \\\\\\\"{\\\\\\\\n  \\\\\\\\\\\\\\\"passed\\\\\\\\\\\\\\\": false,\\\\\\\\n  \\\\\\\\\\\\\\\"error\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\"Editor catalog is stale. Run --refresh-editor-catalog and repeat runtime validation.\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\\\\\\"diagnostics\\\\\\\\\\\\\\\": []\\\\\\\\n}\\\\\\\\n\\\\\\\", \\\\\\\"source_stable\\\\\\\": true}\\\\n\\\"}\\n\"}\n",
+      "stderr": ""
+    }
+  ]
+}

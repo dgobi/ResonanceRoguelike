@@ -17,7 +17,7 @@ Selection-only data and consumed structural dependencies are intentionally separ
 
 ## Historical plans
 
-G3 format-1, G4 format-2 and G5 format-3 plans retain their exact values. They do not gain G6 sites on load. Visited scenes retain their actual older provenance and player modifications. Pending old-plan scenes can use explicit current adapters (`g3-to-g6-v1`, `g4-to-g6-v1`, `g5-to-g6-v1`) without reselecting the plan. New format-4 scenes use `g6-v1`.
+G3 through G7 formats 1 through 5 retain their exact saved values. They do not gain G8 streets or commons on load. Visited scenes retain actual older provenance and mutations. Pending scenes use explicit `g3-to-g8-v1` through `g7-to-g8-v1` adapters without reselecting the plan. New format-6 scenes use `g8-v1`. Current layout and selection recipe removal does not recompose pending saved towns; changed consumed structure or public-surface dependencies can reject only affected slices.
 
 Absent/wg1/wg2 origins keep the legacy/no-plan route. No automatic personal-campaign migration, retrospective population repair or historical seam guarantee is implied. In particular, an already visited G3 starting surface retains its historical contents rather than receiving a new waystone by loading it.
 
@@ -62,7 +62,7 @@ Do not remove required targets merely to turn a failure green. Their purpose is 
 Use the smallest check that answers the remaining question. For a data author, the usual order is JSON/schema validation, every allowed transform, actual planned/assigned placement, and a new disposable world only when a visual or gameplay question remains. The project already supplies autonomous broader gates; routine verification need not require a desktop takeover or manual owner play.
 
 ```powershell
-# Current G6 authoring workflows and actual installed catalog behavior:
+# Historical G6 authoring workflows and actual installed catalog behavior:
 & $ResonancePython -X utf8 tools/verify_g6_authoring.py --evidence evidence/authoring/g6-workflows
 
 # Actual headless browser import/edit/download workflows:

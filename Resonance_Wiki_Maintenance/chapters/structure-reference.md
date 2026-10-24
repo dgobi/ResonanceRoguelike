@@ -117,3 +117,7 @@ Unknown coordinate-bearing metadata cannot be safely guessed. A nontrivial trans
 ## G7 composition integration
 
 The current mixed parent workflow is documented in [Compounds](#compounds). A building export supplies the consumed child structure; a separate recipe supplies two required slots, an optional third slot, common paths, private bounds and permitted parent/child transforms. The existing painter edits the building, not the recipe. Use actual exported bytes in `--child`. Run `tools/verify_g7_authoring.py` for inherited and compound workflows; direct focused discovery now supplies its own absolute tools import path. Keep previous evidence immutable.
+
+## G8 lot and common checks
+
+A complete building buffer and approach must fit its one-member lot. The entire doorway span must project into the assigned straight segment and frontage interval; a nearby parallel road cannot substitute. The protected civic common is public circulation, not overflow private land. Read `rejected` and `composition_work` in a complete settlement preview for cap, transform, capacity and bounded-search outcomes. See [Settlement layouts](#settlement-layouts). A valid candidate can remain unselected; use a declared controlled preview policy when demonstrating one asset, and keep ordinary seed evidence separate.

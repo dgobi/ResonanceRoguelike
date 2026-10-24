@@ -15,7 +15,7 @@ class WikiInputs(unittest.TestCase):
         (self.repo/'guide.md').write_text('Reviewed authoritative guide.\n')
         self.git('add','guide.md');self.commit('review source')
         self.config=dict(commit=self.git('rev-parse','HEAD').strip(),source_scope=['guide.md','inputs/'],chapters=[dict(file='chapters/guide.md')],reviewed_evidence='evidence.json')
-        for name in ('wiki-config.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt','evidence.json','chapters/guide.md'):
+        for name in ('wiki-config.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt','verify_reader.py','verify_edition.py','evidence.json','chapters/guide.md'):
             p=self.root/name;p.parent.mkdir(exist_ok=True);p.write_text('wiki authoring input '+name)
         self.output=self.root/'Resonance_Owner_Wiki.html';self.output.write_text('<html>Reviewed fixture</html>')
         self.bind()

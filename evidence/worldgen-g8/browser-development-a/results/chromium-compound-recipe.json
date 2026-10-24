@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "id": "g7_travellers_court",
+  "size": [
+    18,
+    14
+  ],
+  "rotations": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "gate": {
+    "id": "court_gate",
+    "x": 8,
+    "y": 13,
+    "normal": "S",
+    "width": 2,
+    "path": "court"
+  },
+  "paths": [
+    {
+      "id": "court",
+      "rects": [
+        [
+          1,
+          8,
+          17,
+          14
+        ]
+      ],
+      "joins": []
+    }
+  ],
+  "slots": [
+    {
+      "id": "shrine",
+      "role": "offering",
+      "required": true,
+      "buildable": [
+        0,
+        0,
+        8,
+        8
+      ],
+      "path": "court",
+      "join": [
+        3,
+        8
+      ],
+      "normal": "S",
+      "rotations": [
+        0
+      ],
+      "assets": [
+        {
+          "asset": "roadside_shrine_a",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "id": "shelter",
+      "role": "rest",
+      "required": true,
+      "buildable": [
+        10,
+        0,
+        18,
+        8
+      ],
+      "path": "court",
+      "join": [
+        13,
+        8
+      ],
+      "normal": "S",
+      "rotations": [
+        0
+      ],
+      "assets": [
+        {
+          "asset": "browser_compound_chromium",
+          "weight": 1
+        }
+      ]
+    }
+  ],
+  "fit_budget": 24
+}

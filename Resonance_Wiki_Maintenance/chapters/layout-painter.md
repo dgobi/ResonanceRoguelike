@@ -70,3 +70,7 @@ With a direct-stamp access sidecar, use `coordinates: "source"` by default, an `
 ## G7 composition integration
 
 The current mixed parent workflow is documented in [Compounds](#compounds). A building export supplies the consumed child structure; a separate recipe supplies two required slots, an optional third slot, common paths, private bounds and permitted parent/child transforms. The existing painter edits the building, not the recipe. Use actual exported bytes in `--child`. Run `tools/verify_g7_authoring.py` for inherited and compound workflows; direct focused discovery now supplies its own absolute tools import path. Keep previous evidence immutable.
+
+## Town composition is a separate authoring surface
+
+The painter edits building documents and permitted transforms. G8 streets, common and lots use complete JSON previews in [Settlement layouts](#settlement-layouts). A downloaded building must still fit its lot, full doorway and assigned street. Both browser engines export actual files consumed by the G8 planned path during verification.

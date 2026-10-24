@@ -85,3 +85,7 @@ The repository contains both root `docs/owner/` generation delivery records and 
 For rendering and assets, this wiki has reconciled `SPRITESHEET_GUIDE.md`, `RENDERING.md`, `DECORATIVES.md`, `DECOR AND RANDOM TILES.md`, `UI_RULES.md`, and `ARCHITECTURE.md` with the current implementation. Important corrections include full-colour defaults, 32-pixel displayed sprites, persistent/functional decor, real font sizes, the current palette, the actual panel API, inactive configuration promises, and limitations in fallback/light/effect routes.
 
 For future updates, preserve the old evidence as history, update the actionable recipe, and list unresolved discrepancies explicitly. A dated proposal is useful context; it is not evidence that its feature has shipped.
+
+## G7 and G8 generation map
+
+`generation/compounds.py` and `compound_integrity.py` own bounded rural parents and child/path ownership. `settlement_layout.py` owns G8 local streets, common, blocks and frontage; `settlement_selection.py` fills roles; `settlement_preview.py` renders complete previews. `plan_integrity.py`, `planned_scene.py` and `scene_adapters.py` preserve resolved geometry and lifecycle. See `docs/owner/WORLDGEN_G8.md` for evidence and `roguelike/docs/STRUCTURE_AUTHORING.md` for executable authoring instructions.

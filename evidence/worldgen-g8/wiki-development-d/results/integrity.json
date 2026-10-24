@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "validator_version": "1.0",
+  "checked_at_utc": "2026-10-24T20:01:40.147774+00:00",
+  "html": "G:\\GameDev\\RoguelikeProject\\Resonance_Wiki_Maintenance\\Resonance_Owner_Wiki.html",
+  "html_sha256": "ed6a6efcebfa2956a1e3ec86643bef5a0778118335c353c965dfac1f8a060695",
+  "html_bytes": 5278622,
+  "repository": "G:\\GameDev\\RoguelikeProject",
+  "repository_head": "a4c676cc2284df4ed3b6d2d5c0cff824d4668098",
+  "expected_count_assertions": {
+    "markdown": null,
+    "game_json": null
+  },
+  "checks": {
+    "html_ids": {
+      "unique": 1540,
+      "duplicate_ids": {}
+    },
+    "internal_hrefs": {
+      "checked": 540,
+      "external_hyperlinks_permitted": 655
+    },
+    "articles": {
+      "guide": 37,
+      "source": 56,
+      "data": 17
+    },
+    "json_scripts": {
+      "checked": 1,
+      "parsed": 1
+    },
+    "json_code_blocks": {
+      "total": 481,
+      "complete_parsed": 446,
+      "insertion_fragments_syntax_checked": 32,
+      "historical_abbreviations_skipped": 3
+    },
+    "source_coverage": {
+      "expected": 56,
+      "observed": 56,
+      "missing": [],
+      "unexpected": []
+    },
+    "source_hashes": {
+      "matched": 56
+    },
+    "game_json_coverage": {
+      "expected": 351,
+      "observed": 351,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_example_coverage": {
+      "expected": 18,
+      "observed": 18,
+      "missing": [],
+      "unexpected": []
+    },
+    "repository_data_comparison": {
+      "matched": 369,
+      "wiki_examples_not_in_repo": 1,
+      "catalog_records": 370
+    },
+    "search_coverage": {
+      "expected": 463,
+      "observed": 463,
+      "missing": [],
+      "unexpected": []
+    },
+    "search_index": {
+      "records": 463,
+      "catalog_json_copies_matched": 370
+    },
+    "runtime_assets": {
+      "references_checked": 4,
+      "embedded_references": 4,
+      "fragment_references": 0,
+      "css_blocks_and_style_attributes_checked": 1,
+      "embedded_svgs_inspected": 1,
+      "inline_executable_scripts": 1
+    }
+  },
+  "errors": [],
+  "skips": [
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 123,
+      "page": "first-change"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 655,
+      "page": "items-equipment"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 665,
+      "page": "items-equipment"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 781,
+      "page": "combat-balance"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 1113,
+      "page": "crafting-processing"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 1264,
+      "page": "texts-loot-scenes"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 1329,
+      "page": "texts-loot-scenes"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 1407,
+      "page": "survival-progression"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 2136,
+      "page": "structure-reference"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3249,
+      "page": "sprites-and-atlases"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3258,
+      "page": "sprites-and-atlases"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 3568,
+      "page": "terrain-decor-and-variation"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 5017,
+      "page": "source-docs-owner-tuning-existing-features-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 12823,
+      "page": "source-roguelike-docs-decoratives-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 12834,
+      "page": "source-roguelike-docs-decoratives-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 12865,
+      "page": "source-roguelike-docs-decoratives-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13710,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13714,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13718,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13722,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 13726,
+      "page": "source-roguelike-docs-layout-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17265,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17296,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17299,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17311,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17350,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17358,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.",
+      "line": 17369,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17381,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17387,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.",
+      "line": 17396,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 17423,
+      "page": "source-roguelike-docs-spritesheet-guide-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Preserved historical illustration contains an unquoted ellipsis; it is not complete JSON.",
+      "line": 19439,
+      "page": "source-roguelike-docs-wfc-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 19456,
+      "page": "source-roguelike-docs-wfc-authoring-md"
+    },
+    {
+      "check": "standalone_json_document",
+      "reason": "Documentation insertion fragment; valid after temporary object braces.",
+      "line": 19593,
+      "page": "source-roguelike-docs-owner-b1-format-md"
+    },
+    {
+      "check": "repository_data_comparison",
+      "path": "wiki/examples/owner_cottage_a.json",
+      "reason": "New wiki example is outside the game repository; its catalog JSON and search copy are still checked."
+    }
+  ],
+  "limitations": [
+    "Static checks do not execute JavaScript, simulate browser layout, verify clipboard/download behavior, or test gameplay.",
+    "External ordinary hyperlinks are permitted and are not fetched or checked for availability.",
+    "Source coverage checks one rendered source article, pinned path, revision and displayed source hash per tracked Markdown file; they do not independently re-render Markdown or compare every rendered word.",
+    "Runtime asset checking covers declared HTML resources, CSS url()/@import, and embedded SVG references. It is not a JavaScript interpreter or a proof against dynamically constructed network requests.",
+    "Unbraced JSON documentation entries are syntax-checked after temporary braces are added. Abbreviated historical examples containing an unquoted ellipsis are reported separately, not treated as machine payloads."
+  ],
+  "status": "pass",
+  "error_count": 0
+}

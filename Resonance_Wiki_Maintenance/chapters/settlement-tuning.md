@@ -1,12 +1,12 @@
 # Tune towns, roads and building variety
 
-Current fresh-world tuning uses **two files with separate jobs**: `roguelike/data/generation/g3_config.json` controls geometry, while `roguelike/data/generation/settlement_profiles.json` controls which assets fill which roles. The historical filename `g3_config.json` remains active at G7. The older `town_config.json` is not the current shared-planner control surface.
+Current fresh-world tuning uses **three files with separate jobs**: `roguelike/data/generation/g3_config.json` controls world placement and road widths, `settlement_layouts.json` controls local streets, common and frontage, while `roguelike/data/generation/settlement_profiles.json` controls which assets fill which roles. The historical filename `g3_config.json` remains active at G8. The older `town_config.json` is not the current shared-planner control surface.
 
 Changes here affect **new plans**. They do not reselect a saved pending building, alter a visited town or add new sites to an older world.
 
 ## Geometry controls
 
-The current geometry configuration is complete and uses `version: 2` plus `selection_profile_version: 1`. Do not insert an old `pools` field into it. An explicit version-1 override retains a compatibility path with different meaning; it is not the recommended authoring format.
+The current geometry configuration is complete and uses `version: 3`, `settlement_layout_version: 1` and `selection_profile_version: 1`. Do not insert an old `pools` field into it. An explicit version-1 override retains a compatibility path with different meaning; it is not the recommended authoring format.
 
 | Key | Current value | Allowed values / units | Practical effect |
 |---|---:|---|---|
@@ -16,7 +16,7 @@ The current geometry configuration is complete and uses `version: 2` plus `selec
 | `forms` | `["grid","roadside"]` | Exactly this ordered pair | Alternating forms; not an open-ended list of generators. |
 | `road_width_tiles` | 3 | Integer 1–5 tiles | Full country-road width. |
 | `street_width_tiles` | 3 | Integer 1–5 tiles | Full grid-town street width; independent of country roads. |
-| `plot_spacing_tiles` | 18 | Integer 14–40 tiles | Spacing between candidate slots, not a promised density. |
+| `plot_spacing_tiles` | 18 | Integer 14–40 tiles | Historical slot spacing; G8 uses layout `frontage_tiles`. |
 | `setback_tiles` | 2 | Integer 1–8 tiles | Minimum setback; profile requirements can increase it. |
 | `max_spur_tiles` | 12 | Integer 2–24 tiles | Maximum complete primary approach; also the authority for extra rural sites. |
 | `route_search_nodes` | 16384 | Integer 16–65536 | Bound for each road search. |
@@ -54,7 +54,7 @@ The engine draws the asset before trying its permitted transforms. A four-rotati
 
 Required assignments are reserved first using bounded backtracking. The default `required_fit_budget` is 256, with valid range 1–4096. **Since G6, one budget unit is one transform fit, or an asset trial with no eligible frontage.** The older G5 report's asset/slot wording is historical. G6 can revisit an earlier asset's alternative transform when a later required role fails. Budget exhaustion reports unresolved feasibility; exhausting all enumerated alternatives is a different outcome.
 
-Slots are stably ordered by Manhattan distance from the original civic/arrival slot, then coordinate/normal tie breaks. Remaining slots use the ordered schedule. The installed schedule is:
+G8 required commercial choices prefer the civic join, then actual arrival distance. Ordinary lots are stably ordered by Manhattan distance from the saved country arrival, with stable identity tie breaks. Remaining slots use the ordered schedule. The installed schedule is:
 
 ```json
 ["commercial","residential","support","residential"]
@@ -62,7 +62,7 @@ Slots are stably ordered by Manhattan distance from the original civic/arrival s
 
 This helps place a commercial focus near arrival while mixing residential and support use. It does not change streets, native AI or district definitions.
 
-The default repeat multiplier is `0.2`, valid in `(0,1]`. For settlements, the reference neighbor is the nearest already occupied **slot-order index**, with the earlier slot breaking ties. This is a preference based on stable spatial ordering, not a hard geometric spacing rule. A repeated asset can still win. If only one eligible choice remains, the report records a soft fallback. Optional plots that cannot fit remain explicit vacancies rather than exceeding caps.
+The default repeat multiplier is `0.2`, valid in `(0,1]`. For settlements, the G8 reference neighbor is the nearest accepted **frontage join by Manhattan tile distance**, with the stable plot ID breaking ties. Historical formats preserve slot-index semantics. This is a soft preference, not a hard spacing rule. A repeated asset can still win. If only one eligible choice remains, the report records a soft fallback. Optional plots that cannot fit remain explicit vacancies rather than exceeding caps.
 
 ## Live connected candidates
 

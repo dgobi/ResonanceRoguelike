@@ -1,8 +1,8 @@
 # WFC ground palettes and the legacy town route
 
-Wave Function Collapse (WFC) is present as a bounded tile-adjacency solver and as ground fill in the preserved legacy town generator. **It is not the active ground-composition step for fresh G6 shared-plan towns.** The planned surface path builds base terrain, infrastructure and structures directly, then applies its final dressing rules. Changing a legacy town WFC file may therefore have no visible effect in a fresh planned settlement.
+Wave Function Collapse (WFC) is present as a bounded tile-adjacency solver and as ground fill in the preserved legacy town generator. **It is not the active ground-composition step for fresh G8 shared-plan towns.** The planned surface path builds base terrain, infrastructure and structures directly, then applies its final dressing rules. Changing a legacy town WFC file may therefore have no visible effect in a fresh planned settlement.
 
-This page documents the current solver and call boundary so you can work on an existing palette or identify the code integration needed for a new use. It does not present the older WFC guide's aesthetic descriptions as observed G6 behavior.
+This page documents the current solver and call boundary so you can work on an existing palette or identify the code integration needed for a new use. It does not present the older WFC guide's aesthetic descriptions as observed current behavior.
 
 ## Existing files and the consumer
 
@@ -66,7 +66,7 @@ Small-grid success establishes one bounded solve, not success at the production 
 
 ## Add a new palette to an active use
 
-Creating a JSON file alone does not schedule the solver. Identify the target generation route, its intended rectangle, protected-cell handling, logical-to-terrain mapping and explicit fallback. Add or change that call deliberately. For fresh planned G6 towns, incorporating WFC would be a code change to the planned pipeline, with final road/door/contents access preserved and appropriate tests. It is outside routine palette tuning.
+Creating a JSON file alone does not schedule the solver. Identify the target generation route, its intended rectangle, protected-cell handling, logical-to-terrain mapping and explicit fallback. Add or change that call deliberately. For fresh planned G8 towns, incorporating WFC would be a code change to the planned pipeline, with final road/door/contents access preserved and appropriate tests. It is outside routine palette tuning.
 
 Keep gameplay-critical waystones or stairs under their explicit ownership/placement rules. A low-probability decorative sampler cannot guarantee a required unique interactive destination.
 

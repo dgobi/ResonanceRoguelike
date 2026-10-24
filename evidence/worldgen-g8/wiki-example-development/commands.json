@@ -1,0 +1,59 @@
+[
+  {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tools/structure_authoring.py",
+      "Resonance_Wiki_Maintenance/examples/owner_cottage_a.json",
+      "--category",
+      "residential",
+      "--route",
+      "ordinary_building",
+      "--orientations",
+      "--output",
+      "evidence\\worldgen-g8\\wiki-example-development\\direct.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g8\\\\wiki-example-development\\\\direct.json\",\n  \"previews\": 8,\n  \"registration\": false,\n  \"status\": null\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tools/structure_authoring.py",
+      "Resonance_Wiki_Maintenance/examples/owner_cottage_a.json",
+      "--category",
+      "residential",
+      "--planned",
+      "--context",
+      "grid",
+      "--output",
+      "evidence\\worldgen-g8\\wiki-example-development\\grid.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g8\\\\wiki-example-development\\\\grid.json\",\n  \"previews\": 4,\n  \"registration\": false,\n  \"status\": null\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tools/structure_authoring.py",
+      "Resonance_Wiki_Maintenance/examples/owner_cottage_a.json",
+      "--category",
+      "residential",
+      "--planned",
+      "--context",
+      "roadside",
+      "--output",
+      "evidence\\worldgen-g8\\wiki-example-development\\roadside.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"evidence\\\\worldgen-g8\\\\wiki-example-development\\\\roadside.json\",\n  \"previews\": 3,\n  \"registration\": false,\n  \"status\": null\n}\n",
+    "stderr": ""
+  }
+]

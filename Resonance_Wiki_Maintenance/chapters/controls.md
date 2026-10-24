@@ -54,7 +54,7 @@ The shipped `roguelike/config.py` sets `DEBUG_MODE = True`.
 | F10 | Legacy coordinate teleport prompt using direct region generation | No matching ordinary binding |
 | F11 | Retire/delete the current save slot | No matching ordinary binding |
 
-The current debug travel route recommended for inspection is Enter on the debug overmap cursor. F5, F10 and unshifted F8 still use older direct generation helpers; they are not valid acceptance checks for G6 scene ownership and should be confined to disposable experiments. See [Debug tools](#debug-tools).
+The current debug travel route recommended for inspection is Enter on the debug overmap cursor. F5, F10 and unshifted F8 still use older direct generation helpers; they are not valid acceptance checks for current scene ownership and should be confined to disposable experiments. See [Debug tools](#debug-tools).
 
 ## Source basis
 

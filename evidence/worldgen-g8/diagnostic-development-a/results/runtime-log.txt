@@ -1,0 +1,108 @@
+[gen] waystones placed in chunk (32,79): 1
+Warning: creature 'peasant_npc' not found.
+Warning: creature 'merchant_npc' not found.
+Warning: creature 'guard_npc' not found.
+Warning: creature 'guard_npc' not found.
+Warning: creature 'militia_npc' not found.
+Warning: creature 'peasant_npc' not found.
+Warning: creature 'merchant_npc' not found.
+Warning: creature 'guard_npc' not found.
+Warning: creature 'militia_npc' not found.
+Warning: creature 'shrine_warden_npc' not found.
+Warning: creature 'hollow_penitent' not found.
+Warning: creature 'guard_npc' not found.
+Warning: creature 'militia_npc' not found.
+[gen] waystones placed in chunk (104,61): 1
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 11
+[gen] waystones placed in chunk (72,99): 1
+[gen] waystones placed in chunk (69,99): 1
+[gen] waystones placed in chunk (67,99): 1
+[gen] waystones placed in chunk (64,99): 1
+[gen] waystones placed in chunk (57,101): 1
+[gen] waystones placed in chunk (56,101): 1
+[gen] waystones placed in chunk (53,101): 1
+[gen] waystones placed in chunk (51,101): 1
+[gen] waystones placed in chunk (49,101): 1
+[gen] waystones placed in chunk (48,101): 1
+[gen] waystones placed in chunk (45,101): 1
+[gen] waystones placed in chunk (44,101): 1
+[gen] waystones placed in chunk (34,100): 1
+[gen] waystones placed in chunk (24,99): 1
+[gen] waystones placed in chunk (22,98): 1
+[gen] waystones placed in chunk (20,98): 1
+[gen] waystones placed in chunk (10,86): 1
+[gen] waystones placed in chunk (10,76): 1
+[gen] waystones placed in chunk (10,68): 1
+[gen] waystones placed in chunk (10,66): 1
+[gen] waystones placed in chunk (10,65): 1
+[gen] waystones placed in chunk (8,51): 1
+[gen] waystones placed in chunk (8,48): 1
+[gen] waystones placed in chunk (8,43): 1
+[gen] waystones placed in chunk (9,38): 1
+[gen] waystones placed in chunk (9,37): 1
+[gen] waystones placed in chunk (10,36): 1
+[gen] waystones placed in chunk (11,36): 1
+[gen] waystones placed in chunk (11,35): 1
+[gen] waystones placed in chunk (11,34): 1
+[gen] waystones placed in chunk (11,33): 1
+[gen] waystones placed in chunk (11,31): 1
+[gen] waystones placed in chunk (12,31): 1
+[gen] waystones placed in chunk (14,30): 1
+[gen] waystones placed in chunk (17,28): 1
+[gen] waystones placed in chunk (26,27): 1
+[gen] waystones placed in chunk (28,27): 1
+[gen] waystones placed in chunk (38,26): 1
+[gen] waystones placed in chunk (75,97): 1
+[gen] waystones placed in chunk (75,96): 1
+[gen] waystones placed in chunk (83,102): 1
+[gen] waystones placed in chunk (84,102): 1
+[gen] waystones placed in chunk (89,102): 1
+[gen] waystones placed in chunk (90,102): 1
+[gen] waystones placed in chunk (91,104): 1
+[gen] waystones placed in chunk (93,105): 1
+[gen] waystones placed in chunk (95,105): 1
+[gen] waystones placed in chunk (96,105): 1
+[gen] waystones placed in chunk (103,106): 1
+[gen] waystones placed in chunk (107,104): 1
+[gen] waystones placed in chunk (107,102): 1
+[gen] waystones placed in chunk (107,99): 1
+[gen] waystones placed in chunk (109,98): 1
+[gen] waystones placed in chunk (110,97): 1
+[gen] waystones placed in chunk (112,93): 1
+[gen] waystones placed in chunk (112,91): 1
+[gen] waystones placed in chunk (112,90): 1
+[gen] waystones placed in chunk (112,89): 1
+[gen] waystones placed in chunk (112,88): 1
+[gen] waystones placed in chunk (112,86): 1
+[gen] waystones placed in chunk (113,84): 1
+[gen] waystones placed in chunk (115,76): 1
+[gen] waystones placed in chunk (115,75): 1
+[gen] waystones placed in chunk (116,73): 1
+[gen] waystones placed in chunk (117,73): 1
+[gen] waystones placed in chunk (118,71): 1
+[gen] waystones placed in chunk (118,69): 1
+[gen] waystones placed in chunk (118,64): 1
+[gen] waystones placed in chunk (118,63): 1
+[gen] waystones placed in chunk (118,62): 1
+[gen] waystones placed in chunk (118,59): 1
+[gen] waystones placed in chunk (118,57): 1
+[gen] waystones placed in chunk (118,56): 1
+[gen] waystones placed in chunk (118,55): 1
+[gen] waystones placed in chunk (118,53): 1
+[gen] waystones placed in chunk (117,50): 1
+[gen] waystones placed in chunk (116,44): 1
+[gen] waystones placed in chunk (115,43): 1
+[gen] waystones placed in chunk (115,37): 1
+[gen] waystones placed in chunk (111,33): 1
+[gen] waystones placed in chunk (106,33): 1
+[gen] waystones placed in chunk (105,32): 1
+[gen] waystones placed in chunk (104,32): 1
+[gen] waystones placed in chunk (100,32): 1
+[gen] waystones placed in chunk (98,32): 1
+[gen] waystones placed in chunk (96,33): 1
+[gen] waystones placed in chunk (94,33): 1
+[gen] waystones placed in chunk (91,33): 1
+[gen] waystones placed in chunk (86,33): 1
+[gen] waystones placed in chunk (85,33): 1
+Warning: creature 'vault_guardian' not found.

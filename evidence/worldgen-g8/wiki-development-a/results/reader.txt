@@ -1,0 +1,23 @@
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\Resonance_Wiki_Maintenance\verify_reader.py", line 47, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "G:\GameDev\RoguelikeProject\Resonance_Wiki_Maintenance\verify_reader.py", line 19, in main
+    browser=getattr(pw,name).launch(headless=True);page=browser.new_page(viewport=dict(width=1440,height=1000));errors=[]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dango\AppData\Local\ResonanceAuthoring\python\playwright\sync_api\_generated.py", line 4103, in launch
+    self._sync(
+  File "C:\Users\dango\AppData\Local\ResonanceAuthoring\python\playwright\_impl\_sync_base.py", line 111, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "C:\Users\dango\AppData\Local\ResonanceAuthoring\python\playwright\_impl\_browser_type.py", line 101, in launch
+    await self._channel.send(
+  File "C:\Users\dango\AppData\Local\ResonanceAuthoring\python\playwright\_impl\_connection.py", line 78, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\dango\AppData\Local\ResonanceAuthoring\python\playwright\_impl\_connection.py", line 636, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.Error: BrowserType.launch: spawn UNKNOWN
+Call log:
+  - <launching> C:\Users\dango\AppData\Local\ResonanceAuthoring\browsers\firefox-1555\firefox\firefox.exe -no-remote -headless -profile C:\Users\dango\AppData\Local\Temp\playwright_firefoxdev_profile-AHWDfD -juggler-pipe -silent
+
