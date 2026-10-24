@@ -31,6 +31,7 @@ class DataLoader:
         self.deep_tongue:       dict = self._load_deep_tongue()
         self.buildings:         dict = {}
         self.town_config:       dict = self._load("generation/town_config.json")
+        self.g3_config:         dict = self._load("generation/g3_config.json")
         self.resonance_spawns:  list = self._load_list("resonance_spawns.json")
         self.weather_defs:      dict = self._load("weather.json")
         self.survival:          dict = self._load("survival.json")

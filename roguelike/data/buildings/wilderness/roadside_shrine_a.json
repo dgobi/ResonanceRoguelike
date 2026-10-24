@@ -27,14 +27,87 @@
       "y": 1,
       "type": "container",
       "decor_id": "offering_bowl",
-      "loot_pools": ["shrine_offering"]
+      "loot_pools": [
+        "shrine_offering"
+      ]
     }
   ],
   "decor_layer": [
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, null, null, null, null, null],
-    [null, "offering_coins", null, null, "warning_mark", null],
-    [null, null, null, null, null, null]
-  ]
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      "offering_coins",
+      null,
+      null,
+      "warning_mark",
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "landmark"
+    ],
+    "weight": 1,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": true,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "spur",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 2,
+        "y": 4,
+        "normal": "S",
+        "width": 2,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 2,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  }
 }

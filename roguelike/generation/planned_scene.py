@@ -1,0 +1,114 @@
+"""Production realization of one authoritative world-plan slice."""
+from __future__ import annotations
+import copy
+from config import MAP_WIDTH as W, MAP_HEIGHT as H
+from generation.context import GenerationContext,GenerationError
+from generation.world_plan import slice_plan,intersect,cells,expand
+from generation.placement import check_dependencies,transform,entrance_cells
+
+
+def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,height):
+    from engine.scene_generation import SceneResult,populate,validate_scene
+    from generation.region_gen import generate_region,_place_submap_entrance
+    from generation.town_gen import _stamp_building_at
+    from generation.access import reachable,arrival_anchor
+    from world.world_map import RegionType,TownData
+    from generation.structure_preview import check_access,receipt_owned
+    if (width,height)!=(W,H): raise GenerationError('planned scene dimensions differ from world plan')
+    section=slice_plan(world.plan,chunk.wx,chunk.wy)
+    # Check only pending selected placements. Cached scenes bypass this function.
+    definitions={p['id']:check_dependencies(p,world.plan,data) for p in section['placements']}
+    staged=copy.deepcopy(chunk); base=copy.deepcopy(chunk); base.submaps=[]; base.town_data=None
+    base.edges={e:[] for e in base.edges}; base.town_id=-1; base.town_role=''
+    if base.region_type==RegionType.TOWN: base.region_type=RegionType.PLAINS
+    context=GenerationContext(world.seed,chunk.seed,(chunk.wx,chunk.wy,None),revision='wg3')
+    m,spawn=generate_region(base,width,height,data.terrain,data=data,context=context)
+    x0,y0=chunk.wx*W,chunk.wy*H; rect=[x0,y0,x0+W,y0+H]
+    protected=set(); road_cells=set(); water_cells=set(); specs=[]; receipts=[]
+    def local(rectangle):
+        clipped=intersect(rectangle,rect)
+        return {(x-x0,y-y0) for x,y in cells(clipped)} if clipped else set()
+    def paint(points,terrain):
+        td=data.terrain[terrain]
+        for xy in sorted(points):
+            m.decor.pop(xy,None)
+            m.set_tile(*xy,terrain,td.get('walkable',True),td.get('transparent',True))
+    # Reservation order: biome/dressing, water banks/channel, assigned bridges and
+    # roads, plots/approaches, contents, protected stair entrances, final validation.
+    for water in section['waters']:
+        for r in water['rects']:
+            bank=local(expand(r,2)); core=local(r)
+            paint(bank-water_cells,'river_bank'); paint(core,'river_water')
+            protected.update(bank); water_cells.update(core)
+    deck=set()
+    for crossing in section['crossings']:
+        for r in crossing['deck']: deck.update(local(r))
+    for road in section['routes']:
+        for r in road['rects']: road_cells.update(local(r))
+    if (road_cells&water_cells)-deck: raise GenerationError('road crosses water without an assigned bridge')
+    paint(road_cells-water_cells,'road_0'); paint(deck,'cobblestone'); protected.update(road_cells)
+    buildings=[]
+    for p in section['placements']:
+        raw=transform(definitions[p['id']],p['rotation'],p['mirror']); ox,oy=p['origin'][0]-x0,p['origin'][1]-y0
+        paint(local(p['clearance']),'grass'); paint(local(p['approach']),'dirt_path')
+        rows=_stamp_building_at(m,raw,ox,oy,data.terrain,data=data)
+        for row in rows: row['record_id']=p['id']+':'+row['record_id']
+        specs.extend(rows); protected.update(local(p['clearance'])|local(p['approach']))
+        buildings.append(dict(id=p['asset'],placement_id=p['id'],x=ox,y=oy,item_specs=rows))
+    actors=populate(data,item_factory,creature_factory,m,specs,map_text=True,receipts=receipts)
+    if any(not receipt_owned(r,m) for r in receipts): raise GenerationError('planned content failed initial ownership verification')
+    m.road_cells=road_cells; m.protected_cells=protected
+    spawn=next(iter(sorted(road_cells)),arrival_anchor(m,spawn,data))
+    m.required_access_anchors=[spawn]+sorted(p for p in road_cells if p[0] in (0,W-1) or p[1] in (0,H-1))
+    for submap in staged.submaps: _place_submap_entrance(m,submap,data.terrain,data=data)
+    # All remaining native population uses its existing own stream and avoids solids.
+    if chunk.region_type!=RegionType.TOWN:
+        for i,(zone,_) in enumerate(staged.zones):
+            actors.extend(creature_factory.spawn_for_zone(zone,m,context.rng('native-population',zone,i),max_count=3))
+    if chunk.region_type==RegionType.TOWN:
+        settlement=next(s for s in world.plan['settlements'] if [chunk.wx,chunk.wy] in s['members'])
+        staged.town_data=TownData(chunk.name or settlement['id'],'small',[settlement['form']],'spent',False,(0,0),buildings=[],item_spawns=[])
+        # World plan is the only owner of buildings/civic blueprint; no duplicate rows.
+        civic=settlement['civic']
+        if civic:
+            owner=next((p for p in section['placements'] if p['id']==civic['placement']),None)
+            if owner:
+                bells=[xy for xy in local(owner['footprint']) if str(m.tiles[xy]['terrain'])=='bell_dead']
+                if len(bells)!=1: raise GenerationError('planned spent bell physical state disagrees with civic metadata')
+                staged.town_data.bell_tower_pos=bells[0]
+    validate_scene(m,staged.submaps,data)
+    validate_access(m,section,data,chunk.wx,chunk.wy)
+    m.plan_provenance={'mode':'shared-v1','routes':[r['id'] for r in section['routes']],
+                       'crossings':[r['id'] for r in section['crossings']],
+                       'placements':[p['id'] for p in section['placements']]}
+    m.generation_revision='wg3'; m.generation_complete=True
+    return SceneResult(m,actors,spawn,staged,receipts)
+
+
+def validate_access(m,section,data,wx,wy):
+    from generation.access import reachable,enterable
+    from generation.structure_preview import check_access
+    x0,y0=wx*W,wy*H
+    road=set(m.road_cells)
+    for p in section['placements']:
+        join=p['join'][0]-x0,p['join'][1]-y0
+        assigned=next((r for r in section['routes'] if r['id']==p['road']),None)
+        if assigned is None or not any(r[0]<=p['join'][0]<r[2] and r[1]<=p['join'][1]<r[3] for r in assigned['rects']): raise GenerationError(f'{p["id"]}: assigned frontage missing')
+        reached=reachable(m,join,data)
+        approach={(x-x0,y-y0) for x,y in cells(p['approach'])}
+        if not approach<=reached: raise GenerationError(f'{p["id"]}: final approach is blocked')
+        for entrance in p['entrances']:
+            if entrance['required'] and not {(x-x0,y-y0) for x,y in entrance_cells(entrance)}<=reached: raise GenerationError(f'{p["id"]}: complete entrance span is inaccessible')
+        targets=[]
+        for target in p['targets']:
+            if not target['required']: continue
+            if target['kind']=='floor':
+                if (target['x']-x0,target['y']-y0) not in reached: raise GenerationError(f'{p["id"]}: required interior goal inaccessible')
+            else: targets.append(dict(target,x=target['x']-x0,y=target['y']-y0))
+        access=check_access(m,data,{'coordinates':'map','entry':dict(x=join[0],y=join[1]),'targets':targets})
+        if not all(r['passed'] for r in access): raise GenerationError(f'{p["id"]}: required content access failed: {access}')
+    # Every declared route cell remains usable after content, also without submaps.
+    if any(not enterable(m,p,data) for p in road): raise GenerationError('final content/dressing blocks mandatory road')
+    if road:
+        reached=reachable(m,min(road),data)
+        if not road<=reached: raise GenerationError('mandatory road slice is disconnected after population')

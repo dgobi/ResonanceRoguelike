@@ -56,7 +56,15 @@ SUBMAP_TYPES: dict[str, dict[str, int]] = {
 # ------------------------------------------------------------------ #
 
 def generate_world(world_map: WorldMap, data, rng: random.Random,
-                   name_gen=None) -> WorldMap:
+                   name_gen=None, *, plan_mode='shared-v1', planning_settings=None) -> WorldMap:
+    # The candidate is published only after geography, plans and references pass.
+    candidate=WorldMap(world_map.width,world_map.height); candidate.seed=world_map.seed
+    _generate_world(candidate,data,random.Random(candidate.seed),name_gen,plan_mode,planning_settings)
+    world_map.__dict__.update(candidate.__dict__)
+    return world_map
+
+
+def _generate_world(world_map, data, rng, name_gen, plan_mode, planning_settings):
     """
     Full world generation pipeline.
     Steps run in strict order — each step depends on the previous.
@@ -85,14 +93,22 @@ def generate_world(world_map: WorldMap, data, rng: random.Random,
     _calculate_resonance(world_map)
     _place_capital(world_map, rng)
     _place_starting_location(world_map, rng)
-    _place_towns(world_map, rng)             # Step 9
-    _generate_roads(world_map, rng)          # Step 10
-    _stamp_town_ports(world_map)
+    if plan_mode=='legacy':
+        _place_towns(world_map, rng)
+        _generate_roads(world_map, rng)
+        _stamp_town_ports(world_map)
+        world_map.plan_mode='legacy'
+    elif plan_mode!='shared-v1':
+        raise ValueError('unknown generation plan mode')
     _calculate_difficulty_bands(world_map)   # Step 11
 
     # Post-processing — zones, submaps, names, myth
     _assign_zones(world_map)
     _assign_submaps(world_map, rng)
+    if plan_mode=='shared-v1':
+        from generation.world_plan import build_plan,publish_plan
+        publish_plan(world_map,build_plan(world_map,data,planning_settings))
+        _assign_zones(world_map)
     _assign_names(world_map)
     _generate_world_myth(world_map, rng)
 

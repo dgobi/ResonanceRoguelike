@@ -34,7 +34,8 @@ class GenerationGeometryTests(unittest.TestCase):
             for seed in (20261020, 20261023):
                 world = WorldMap(128, 128)
                 world.seed = seed
-                generate_world(world, cls.data, random.Random(seed))
+                # Retain the historical nine-role/no-plan path as a regression.
+                generate_world(world, cls.data, random.Random(seed), plan_mode='legacy')
                 cls.worlds[seed] = world
             world = cls.worlds[20261020]
             for xy in sorted(world.town_chunks):

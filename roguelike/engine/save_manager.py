@@ -528,6 +528,8 @@ def _serialize_world(world_map: "WorldMap") -> dict:
         "height":         world_map.height,
         "seed":           world_map.seed,
         "generation_revision": getattr(world_map, "generation_revision", "legacy-unversioned"),
+        "plan_mode": getattr(world_map, "plan_mode", "legacy"),
+        "plan": getattr(world_map, "plan", None),
         "vukh_x":         world_map.vukh_x,
         "vukh_y":         world_map.vukh_y,
         "start_wx":       world_map.start_wx,
@@ -545,6 +547,17 @@ def _serialize_world(world_map: "WorldMap") -> dict:
 
 def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
     from world.world_map import Chunk, RegionType, SubMap, ConnectorType
+    from generation.world_plan import validate_plan
+    mode=data.get('plan_mode','legacy')
+    if mode not in ('legacy','shared-v1'):
+        raise SaveFormatError('unsupported world plan mode')
+    if mode=='shared-v1':
+        validate_plan(data.get('plan'),data['width'],data['height'])
+        if data['plan']['seed']!=data['seed']: raise SaveFormatError('world/plan seed mismatch')
+    elif data.get('plan') is not None or (data.get('generation_revision')=='wg3' and 'plan_mode' not in data):
+        raise SaveFormatError('missing required G3 plan mode or unexpected legacy plan')
+    world_map.plan_mode=mode
+    world_map.plan=data.get('plan')
 
     for key, cdata in data["chunks"].items():
         wx, wy = map(int, key.split(","))

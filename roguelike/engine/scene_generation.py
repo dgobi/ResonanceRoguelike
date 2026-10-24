@@ -126,6 +126,9 @@ class SceneResult:
 
 
 def create_surface(world, chunk, data, item_factory, creature_factory, width, height):
+    if getattr(world,'plan_mode','legacy')=='shared-v1':
+        from generation.planned_scene import create_planned_surface
+        return create_planned_surface(world,chunk,data,item_factory,creature_factory,width,height)
     from generation.region_gen import generate_region
     from world.world_map import RegionType
     staged = copy.deepcopy(chunk)

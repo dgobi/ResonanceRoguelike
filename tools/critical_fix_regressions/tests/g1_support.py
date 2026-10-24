@@ -22,5 +22,6 @@ def fingerprint(m, actors, town=None):
         'waystones': layer('waystone_inscriptions'), 'bells': layer('bell_inscriptions'),
         'revision': getattr(m, 'generation_revision', 'legacy-unversioned'),
         'town': asdict(town) if town else None,
+        'plan_provenance': getattr(m, 'plan_provenance', None),
     }
     return hashlib.sha256(json.dumps(rows, sort_keys=True, separators=(',', ':')).encode()).hexdigest()

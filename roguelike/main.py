@@ -50,7 +50,8 @@ def main() -> None:
     rng           = _random.Random(world_seed)
     world_map     = WorldMap(WORLD_WIDTH, WORLD_HEIGHT)
     world_map.seed = world_seed
-    world_map     = generate_world(world_map, data, rng)
+    if startup != "load":
+        world_map = generate_world(world_map, data, rng)
     start_wx      = world_map.start_wx
     start_wy      = world_map.start_wy
     world_map.mark_explored_radius(start_wx, start_wy, radius=1)

@@ -66,5 +66,42 @@
       "note": "Meal left mid-course on table"
     }
   ],
-  "note": "PLACEHOLDER — redesign layers to taste. Door at (4,7) faces south street."
+  "note": "PLACEHOLDER — redesign layers to taste. Door at (4,7) faces south street.",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": true,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 4,
+        "y": 7,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 1,
+        "y": 6,
+        "kind": "readable",
+        "required": true
+      }
+    ]
+  }
 }

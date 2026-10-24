@@ -46,5 +46,48 @@
       "note": "Suspension notice on counter"
     }
   ],
-  "note": "PLACEHOLDER — redesign. South row open (null) = open frontage onto street. Shelf = worn_stone."
+  "note": "PLACEHOLDER — redesign. South row open (null) = open frontage onto street. Shelf = worn_stone.",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": true,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 1,
+        "y": 3,
+        "normal": "S",
+        "width": 4,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 1,
+        "y": 2,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 3,
+        "y": 2,
+        "kind": "readable",
+        "required": true
+      }
+    ]
+  }
 }

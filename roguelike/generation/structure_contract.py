@@ -290,6 +290,11 @@ def compile_structure(raw, route, data=None, *, path='<memory>', category=None):
     else:
         for n,row in enumerate(specials): v.special(row,f'special_tiles[{n}]',w,h)
     if 'weight' in raw: v.numeric(raw['weight'],'weight',True)
+    if 'placement' in raw and valid_rows and isinstance(legend,dict):
+        from generation.placement import validate_profile
+        try: validate_profile(raw,w,h)
+        except (GenerationError,KeyError,TypeError) as error:
+            v.issue('PLACEMENT','placement',str(error),'Use the documented version-one placement profile.')
     for field in CAPABILITIES.get(route,{}).get('inactive',[]):
         if field in raw: v.issue('INACTIVE_FIELD',field,f'Retained; {route} does not consume this field.',
                                  'See the route capability table; editing it does not activate behavior.','warning')
