@@ -1,0 +1,13 @@
+Warning: creature 'peasant_npc' not found.
+Warning: creature 'militia_npc' not found.
+Warning: creature 'pale_surgeon_npc' not found.
+[gen] waystones placed in chunk (71,78): 1
+[gen] waystones placed in chunk (18,60): 1
+Warning: creature 'peasant_npc' not found.
+Warning: creature 'merchant_npc' not found.
+Warning: creature 'shrine_warden_npc' not found.
+Warning: creature 'guard_npc' not found.
+Warning: creature 'militia_npc' not found.
+Warning: creature 'shrine_warden_npc' not found.
+Warning: creature 'guard_npc' not found.
+Warning: creature 'militia_npc' not found.

@@ -1,0 +1,23 @@
+{
+  "reviewed_head": "8e56d36d72537e8b32c3666dd5d19723d1afdf3a",
+  "direct_command": [
+    "tools/critical_fix_regressions/verify_fixes.py",
+    "--game",
+    "roguelike",
+    "--evidence",
+    "g7-review-evidence/focused"
+  ],
+  "parent_pythonpath": null,
+  "discovered": 202,
+  "passed_cases": 200,
+  "errors": 1,
+  "skips": 1,
+  "failed_case": "test_generation_g7_compounds.G7Compounds.test_ordinary_compound_updates_and_both_production_views",
+  "error": "ModuleNotFoundError: No module named 'g7_visuals'",
+  "cause": "The runner child imports game and tests directories; tools is not supplied unless inherited. Release wrapper g7_evidence.py supplies tools explicitly.",
+  "release_environment_pythonpath": "G:\\GameDev\\RoguelikeProject\\roguelike;G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\tests;G:\\GameDev\\RoguelikeProject\\tools",
+  "controlled_followup": "native-views-explicit-path/receipt.json",
+  "followup_changes": "Explicit PYTHONPATH includes tools; source unchanged.",
+  "direct_suite_status": "failed; not relabelled after isolated positive",
+  "skip_reason": "Documented PowerShell workflow requires Windows"
+}

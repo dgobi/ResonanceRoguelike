@@ -1,0 +1,11 @@
+test_aliases_and_all_artifacts_validate_before_mutation (test_authoring_destinations.AuthoringDestinations.test_aliases_and_all_artifacts_validate_before_mutation) ... ok
+test_catalog_refresh_cannot_replace_unrelated_read_input (test_authoring_destinations.AuthoringDestinations.test_catalog_refresh_cannot_replace_unrelated_read_input) ... ok
+test_distinct_outputs_replacement_and_initialization_preservation (test_authoring_destinations.AuthoringDestinations.test_distinct_outputs_replacement_and_initialization_preservation) ... ok
+test_explicit_read_inputs_and_initializer_targets (test_authoring_destinations.AuthoringDestinations.test_explicit_read_inputs_and_initializer_targets) ... ok
+test_installed_hardlink_is_protected (test_authoring_destinations.AuthoringDestinations.test_installed_hardlink_is_protected) ... skipped "cross-volume hard link unavailable: [WinError 17] The system cannot move the file to a different disk drive: 'G:\\\\GameDev\\\\RoguelikeProject\\\\roguelike\\\\data\\\\generation\\\\settlement_profiles.json' -> 'C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\g8-authoring-bvjpb6l5\\\\installed.json'"
+test_ordinary_compound_updates_and_both_production_views (test_generation_g7_compounds.G7Compounds.test_ordinary_compound_updates_and_both_production_views) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 21.469s
+
+OK (skipped=1)

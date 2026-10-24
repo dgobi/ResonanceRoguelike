@@ -1,0 +1,31 @@
+{
+  "case": "child_report",
+  "argv": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+    "--compound",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\child_report\\g7_travellers_court.json",
+    "--child",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\child_report\\g7_wayhouse.json",
+    "--assigned-compound",
+    "S",
+    "--output",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\child_report\\g7_wayhouse.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "exit_code": 0,
+  "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\g7-output-probes-5byk8h_7\\\\child_report\\\\g7_wayhouse.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": \"placed\"\n}\n",
+  "stderr": "",
+  "protected_input": "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\child_report\\g7_wayhouse.json",
+  "before_bytes": 2056,
+  "after_bytes": 1890471,
+  "before_sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6",
+  "after_sha256": "fa445128c437b3a68cccf3eb463d1d332a0f16c347171bac576d50b8c5de0aa1",
+  "input_unchanged": false,
+  "after_prefix": "{\r\n  \"passed\": true,\r\n  \"status\": \"placed\",\r\n  \"kind\": \"assigned compound fixture\",\r\n  \"seed\": 20261023,\r\n  \"plan\": {\r\n    \"version\": 5,\r\n    \"mode\": \"shared-v1",
+  "all_input_changes": [
+    "g7_wayhouse.json"
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "reviewed_head": "8e56d36d72537e8b32c3666dd5d19723d1afdf3a",
+  "reviewed_cli_sha256": "be3befc40747450f4c35eb5d9f6b8591c305434174b970efb0be5f96c8d6e115",
+  "work_directory": "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7",
+  "cases": [
+    {
+      "case": "recipe_report",
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "--compound",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\recipe_report\\g7_travellers_court.json",
+        "--child",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\recipe_report\\g7_wayhouse.json",
+        "--assigned-compound",
+        "S",
+        "--output",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\recipe_report\\g7_travellers_court.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\g7-output-probes-5byk8h_7\\\\recipe_report\\\\g7_travellers_court.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": \"placed\"\n}\n",
+      "stderr": "",
+      "protected_input": "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\recipe_report\\g7_travellers_court.json",
+      "before_bytes": 1339,
+      "after_bytes": 1890471,
+      "before_sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25",
+      "after_sha256": "0b8d898e80952eb27d32e887126fbe389d3a252e231ec188e780c455cd45a24b",
+      "input_unchanged": false,
+      "after_prefix": "{\r\n  \"passed\": true,\r\n  \"status\": \"placed\",\r\n  \"kind\": \"assigned compound fixture\",\r\n  \"seed\": 20261023,\r\n  \"plan\": {\r\n    \"version\": 5,\r\n    \"mode\": \"shared-v1",
+      "all_input_changes": [
+        "g7_travellers_court.json"
+      ]
+    },
+    {
+      "case": "child_report",
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "--compound",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\child_report\\g7_travellers_court.json",
+        "--child",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\child_report\\g7_wayhouse.json",
+        "--assigned-compound",
+        "S",
+        "--output",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\child_report\\g7_wayhouse.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\g7-output-probes-5byk8h_7\\\\child_report\\\\g7_wayhouse.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": \"placed\"\n}\n",
+      "stderr": "",
+      "protected_input": "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\child_report\\g7_wayhouse.json",
+      "before_bytes": 2056,
+      "after_bytes": 1890471,
+      "before_sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6",
+      "after_sha256": "fa445128c437b3a68cccf3eb463d1d332a0f16c347171bac576d50b8c5de0aa1",
+      "input_unchanged": false,
+      "after_prefix": "{\r\n  \"passed\": true,\r\n  \"status\": \"placed\",\r\n  \"kind\": \"assigned compound fixture\",\r\n  \"seed\": 20261023,\r\n  \"plan\": {\r\n    \"version\": 5,\r\n    \"mode\": \"shared-v1",
+      "all_input_changes": [
+        "g7_wayhouse.json"
+      ]
+    },
+    {
+      "case": "initialization_report",
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "--init-compound",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\initialization_report",
+        "--output",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\initialization_report\\g7_wayhouse.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\g7-output-probes-5byk8h_7\\\\initialization_report\\\\g7_wayhouse.json\",\n  \"previews\": 0,\n  \"registration\": false,\n  \"status\": null,\n  \"created\": [],\n  \"preserved\": [\n    \"g7_travellers_court.json\",\n    \"g7_wayhouse.json\",\n    \"g7_poi_example.json\"\n  ],\n  \"directory\": \"C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\g7-output-probes-5byk8h_7\\\\initialization_report\"\n}\n",
+      "stderr": "",
+      "protected_input": "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\initialization_report\\g7_wayhouse.json",
+      "before_bytes": 2056,
+      "after_bytes": 259,
+      "before_sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6",
+      "after_sha256": "b063ad8111d4fd5c4db8dcd303cd743d63ad1d78107589eea2fbaef0345cbc3f",
+      "input_unchanged": false,
+      "after_prefix": "{\r\n  \"passed\": true,\r\n  \"created\": [],\r\n  \"preserved\": [\r\n    \"g7_travellers_court.json\",\r\n    \"g7_wayhouse.json\",\r\n    \"g7_poi_example.json\"\r\n  ],\r\n  \"director",
+      "all_input_changes": [
+        "g7_wayhouse.json"
+      ]
+    },
+    {
+      "case": "derived_svg_hardlink",
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "--compound",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\derived_svg_hardlink\\g7_travellers_court.json",
+        "--child",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\derived_svg_hardlink\\g7_wayhouse.json",
+        "--assigned-compound",
+        "S",
+        "--output",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\derived_svg_hardlink\\review.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\g7-output-probes-5byk8h_7\\\\derived_svg_hardlink\\\\review.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": \"placed\"\n}\n",
+      "stderr": "",
+      "protected_input": "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-5byk8h_7\\derived_svg_hardlink\\g7_travellers_court.json",
+      "before_bytes": 1339,
+      "after_bytes": 227955,
+      "before_sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25",
+      "after_sha256": "3de81501fa80659d1147e8e3c6359fd86ea562f79f75d897e07fff1d7e24f51c",
+      "input_unchanged": false,
+      "after_prefix": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024.0 660.4\" width=\"1024\"><rect width=\"100%\" height=\"100%\" fill=\"#172026\"/>\r\n<rect x=\"108.0\" y=\"293.8\" wid",
+      "all_input_changes": [
+        "g7_travellers_court.json"
+      ]
+    }
+  ],
+  "scope": "Disposable draft files only; no repository source edits or personal save access."
+}

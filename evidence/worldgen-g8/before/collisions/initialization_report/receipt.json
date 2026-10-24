@@ -1,0 +1,27 @@
+{
+  "case": "initialization_report",
+  "argv": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+    "--init-compound",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-8glxhl2q\\initialization_report",
+    "--output",
+    "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-8glxhl2q\\initialization_report\\g7_wayhouse.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "exit_code": 0,
+  "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\g7-output-probes-8glxhl2q\\\\initialization_report\\\\g7_wayhouse.json\",\n  \"previews\": 0,\n  \"registration\": false,\n  \"status\": null,\n  \"created\": [],\n  \"preserved\": [\n    \"g7_travellers_court.json\",\n    \"g7_wayhouse.json\",\n    \"g7_poi_example.json\"\n  ],\n  \"directory\": \"C:\\\\Users\\\\dango\\\\AppData\\\\Local\\\\Temp\\\\g7-output-probes-8glxhl2q\\\\initialization_report\"\n}\n",
+  "stderr": "",
+  "protected_input": "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-output-probes-8glxhl2q\\initialization_report\\g7_wayhouse.json",
+  "before_bytes": 2056,
+  "after_bytes": 259,
+  "before_sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6",
+  "after_sha256": "636f8e50f4e333387ade6d3f4f1ffb72e1349e36b3c65ca952b1e9c594a253ad",
+  "input_unchanged": false,
+  "after_prefix": "{\r\n  \"passed\": true,\r\n  \"created\": [],\r\n  \"preserved\": [\r\n    \"g7_travellers_court.json\",\r\n    \"g7_wayhouse.json\",\r\n    \"g7_poi_example.json\"\r\n  ],\r\n  \"director",
+  "all_input_changes": [
+    "g7_wayhouse.json"
+  ]
+}

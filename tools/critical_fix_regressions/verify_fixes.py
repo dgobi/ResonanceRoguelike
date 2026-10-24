@@ -45,7 +45,7 @@ def main() -> int:
                    SDL_VIDEODRIVER="dummy", SDL_AUDIODRIVER="dummy",
                    PYGAME_HIDE_SUPPORT_PROMPT="1", PYTHONHASHSEED="20261020",
                    PYTHONIOENCODING="utf-8", PYTHONDONTWRITEBYTECODE="1")
-        search = [str(game), str(here / "tests")]
+        search = [str(game), str(here / "tests"), str(here.parent)]
         if env.get("PYTHONPATH"):
             search.append(env["PYTHONPATH"])
         env["PYTHONPATH"] = os.pathsep.join(search)

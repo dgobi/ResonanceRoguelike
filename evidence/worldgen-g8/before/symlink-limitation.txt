@@ -1,0 +1,1 @@
+Original supplied probe ran first three cases; fourth failed before invocation: Windows WinError 1314, symlink creation privilege unavailable. Equivalent existing hard-link identity tested separately. Supplied Linux symlink evidence is historical, not a new Windows execution.

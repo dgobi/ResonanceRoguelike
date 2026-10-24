@@ -1,0 +1,21 @@
+test_aliases_and_all_artifacts_validate_before_mutation (test_authoring_destinations.AuthoringDestinations.test_aliases_and_all_artifacts_validate_before_mutation) ... ok
+test_catalog_refresh_cannot_replace_unrelated_read_input (test_authoring_destinations.AuthoringDestinations.test_catalog_refresh_cannot_replace_unrelated_read_input) ... ok
+test_distinct_outputs_replacement_and_initialization_preservation (test_authoring_destinations.AuthoringDestinations.test_distinct_outputs_replacement_and_initialization_preservation) ... ok
+test_explicit_read_inputs_and_initializer_targets (test_authoring_destinations.AuthoringDestinations.test_explicit_read_inputs_and_initializer_targets) ... ok
+test_installed_hardlink_is_protected (test_authoring_destinations.AuthoringDestinations.test_installed_hardlink_is_protected) ... FAIL
+test_ordinary_compound_updates_and_both_production_views (test_generation_g7_compounds.G7Compounds.test_ordinary_compound_updates_and_both_production_views) ... ok
+
+======================================================================
+FAIL: test_installed_hardlink_is_protected (test_authoring_destinations.AuthoringDestinations.test_installed_hardlink_is_protected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_authoring_destinations.py", line 79, in test_installed_hardlink_is_protected
+    self.assert_rejected(['--catalog','--output',alias])
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_authoring_destinations.py", line 31, in assert_rejected
+    self.assertIn('conflict',result.stderr.lower())
+AssertionError: 'conflict' not found in '{\n  "passed": false,\n  "error": "--output output g:\\\\gamedev\\\\roguelikeproject\\\\.baseline\\\\g8-authoring\\\\g8-authoring-e5p6o9oa\\\\installed.json aliases installed input g:\\\\gamedev\\\\roguelikeproject\\\\roguelike\\\\data\\\\generation\\\\settlement_profiles.json",\n  "diagnostics": []\n}\n'
+
+----------------------------------------------------------------------
+Ran 6 tests in 21.213s
+
+FAILED (failures=1)
