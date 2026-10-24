@@ -180,6 +180,9 @@
       return impact;
     }
   }
-  root.StructureEditor = {strictParse, DocumentModel, dimensions, gridKey};
+  // Advisory vocabulary only: the value model continues to preserve unknown
+  // metadata and ordered arrays. Production Python validates consumers.
+  const placementContexts = ['grid', 'roadside', 'civic', 'landmark', 'compound'];
+  root.StructureEditor = {strictParse, DocumentModel, dimensions, gridKey, placementContexts};
   if (typeof module !== 'undefined') module.exports = root.StructureEditor;
 })(typeof window === 'undefined' ? globalThis : window);

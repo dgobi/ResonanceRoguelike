@@ -45,6 +45,10 @@ def main():
             records.append(dict(action='deliberate install in disposable data catalog',layout=str(catalog/'buildings/wilderness/g6_wayhouse.json'),policy=str(catalog/'generation/poi_profiles.json')))
             cli(['--data-root',catalog,'--catalog'],'installed-catalog');cli(['--data-root',catalog,'--world-plan'],'installed-world')
             default=json.loads((ROOT/'roguelike/data/generation/poi_profiles.json').read_text())
+            # The preserved G6 recipes explicitly exercise v1 single-site policy.
+            if default['version']==2:
+                default['assets']=[{k:v for k,v in r.items() if k!='kind'} for r in default.pop('choices') if r['kind']=='single']
+                default.pop('kind_minimum');default['version']=1
             short=copy.deepcopy(default);short['assets']=[dict(asset='hunter_cabin',weight=1,cap=2)]
             negative=temp/'policy.json';negative.write_text(json.dumps(short));cli(['--world-plan','--poi-config',negative],'cap-shortfall')
             report=json.loads((out/'cap-shortfall.json').read_text());assert report['plan']['site_selection']['accepted']==2 and report['plan']['site_selection']['desired']==3

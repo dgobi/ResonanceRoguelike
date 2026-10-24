@@ -21,7 +21,7 @@ function metadata() {
   const field=$('metadata-field').value, exists=model.doc && Object.hasOwn(model.doc,field);
   $('metadata').value=exists?JSON.stringify(model.doc[field],null,2):'';
   const inactive=catalog?.routes[model.route]?.inactive.includes(field);
-  if(field==='placement'){ $('metadata-status').textContent=(exists?'Present':'Absent')+' · G3 placement profile; active only for explicit planned eligibility. Legacy fields remain inactive.'; return; }
+  if(field==='placement'){ $('metadata-status').textContent=(exists?'Present':'Absent')+' · Placement v1 contexts: '+StructureEditor.placementContexts.join(', ')+'. Compound children need a required usable target; preview the complete recipe in Python.'; return; }
   $('metadata-status').textContent=(exists?'Present':'Absent (no default will be exported)')+(inactive?' · retained but inactive on this route.':' · see route capability and Python check.');
 }
 function special() {

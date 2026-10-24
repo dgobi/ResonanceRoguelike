@@ -162,6 +162,14 @@ def worker(browser_name,evidence):
         check('G6 real downloaded site keeps separate required doors and populated contents',got==site)
         site_export=evidence/(browser_name+'-site.json');site_export.write_bytes(path.read_bytes())
         page.screenshot(path=str(evidence/(browser_name+'-site-editor.png')),full_page=True)
+        child=load(ROOT/'roguelike/docs/examples/g7_wayhouse.json')
+        page.locator('#asset-id').fill('browser_compound_'+browser_name);page.locator('#apply-id').click();child['id']='browser_compound_'+browser_name
+        page.locator('#metadata-field').select_option('placement');child['placement']['weight']=1.75
+        page.locator('#metadata').fill(json.dumps(child['placement']));page.locator('#apply-metadata').click()
+        check('compound context exposed through shared metadata vocabulary','compound' in page.locator('#metadata-status').inner_text())
+        got,path=export('compound-child');check('actual compound child download preserves contexts, doors, required goals and contents',got==child)
+        compound_export=evidence/(browser_name+'-compound-child.json');compound_export.write_bytes(path.read_bytes())
+        page.screenshot(path=str(evidence/(browser_name+'-compound-editor.png')),full_page=True)
         page.screenshot(path=str(evidence/(browser_name+'-lab.png')),full_page=True)
         check('no browser script errors',not errors)
         version=browser.version;context.close();browser.close()
@@ -188,12 +196,21 @@ def worker(browser_name,evidence):
         result_site=subprocess.run(command_site,cwd=ROOT,capture_output=True,text=True,timeout=90)
         site_commands.append(dict(argv=command_site,cwd=str(ROOT),exit_code=result_site.returncode,expected_exit=0,stdout=result_site.stdout,stderr=result_site.stderr))
         check('actual downloaded G6 site passes production '+name,result_site.returncode==0)
+    recipe=json.loads((ROOT/'roguelike/docs/examples/g7_travellers_court.json').read_text())
+    recipe['slots'][1]['assets']=[dict(asset=child['id'],weight=1)]
+    recipe_path=evidence/(browser_name+'-compound-recipe.json');recipe_path.write_text(json.dumps(recipe,indent=2)+'\n')
+    compound_commands=[]
+    for name,options in [('direct',[compound_export,'--route','ordinary_building','--category','wilderness','--orientations'])]+[(normal,['--compound',recipe_path,'--child',compound_export,'--assigned-compound',normal]) for normal in 'SE']:
+        command_compound=[sys.executable,'-X','utf8',ROOT/'tools/structure_authoring.py',*options,'--output',evidence/(browser_name+'-compound-'+name+'.json')]
+        result_compound=subprocess.run(list(map(str,command_compound)),cwd=ROOT,capture_output=True,text=True,timeout=90)
+        compound_commands.append(dict(argv=list(map(str,command_compound)),cwd=str(ROOT),exit_code=result_compound.returncode,expected_exit=0,stdout=result_compound.stdout,stderr=result_compound.stderr))
+        check('actual downloaded child passes compound '+name,result_compound.returncode==0)
     report={'browser':browser_name,'version':version,'passed':all(c['passed'] for c in checks),'checks':checks,'errors':errors,
             'command':command,'runtime_stdout':run.stdout,'runtime_stderr':run.stderr,'codec_documents':len(codec),
             'planned_command':planned_command,'planned_stdout':planned_run.stdout,'planned_stderr':planned_run.stderr,
             'command_records':[dict(argv=c,cwd=str(ROOT),exit_code=r.returncode,stdout=r.stdout,stderr=r.stderr) for c,r in
-                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))]+site_commands,
-            'download_hashes':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (exported,planned_export,site_export)}}
+                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))]+site_commands+compound_commands,
+            'download_hashes':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (exported,planned_export,site_export,compound_export)}}
     (evidence/(browser_name+'.json')).write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({'browser':browser_name,'passed':report['passed'],'checks':len(checks),'version':version}))
 
@@ -220,7 +237,7 @@ def main():
     before=identities();start=time.monotonic();results=[];evidence.mkdir(parents=True,exist_ok=True)
     for browser in ('chromium','firefox'):
         command=[sys.executable,'-X','utf8',str(Path(__file__).resolve()),'--worker',browser,'--evidence',str(evidence)]
-        run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=150)
+        run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=240)
         (evidence/(browser+'-log.txt')).write_text(run.stdout+run.stderr,encoding='utf-8')
         print(run.stdout+run.stderr,end='');results.append({'browser':browser,'exit_code':run.returncode,'command':command})
     passed=all(r['exit_code']==0 for r in results) and before==identities() and runtime_source==source_manifest()

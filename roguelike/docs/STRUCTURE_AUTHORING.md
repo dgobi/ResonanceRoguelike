@@ -794,6 +794,11 @@ remain intentionally ordered. Saved G5 selections are never normalized on load.
 
 ## G6 additional country-road sites
 
+This section preserves the explicit **version-1 single-site workflow**. G7's
+installed default is version 2 and includes compounds; deliberately installing a
+version-1 example is an explicit opt-out from compounds for new worlds. Existing
+saves retain their resolved policy. See the G7 section below for the current default.
+
 New worlds keep one required featured landmark and draw a separate desired count
 of **two through four additional sites**. Every accepted site has one building,
 one rural storage chunk and its own mutable contents. The planner reserves towns,
@@ -952,3 +957,218 @@ The workflow log records positive and expected-negative exit codes separately,
 commands, cwd, environment and output hashes. Existing 65-document round trips and
 the six G5 recipes remain part of verification. `UI-TEXT-HEIGHT` and large-world
 retention/streaming remain deferred; G6 does not implement multi-building compounds.
+
+## G7 compounds: a place with shared access and two or three buildings
+
+A compound is one additional destination with one country-road entrance, one
+reserved envelope and one complete saved chunk scene. Child buildings have stable
+slot identities and separate containers/items. Their doors face a named common
+path inside that envelope. Two required child slots and at most one optional slot
+are supported; an admitted optional child is just as durable as a required child.
+These places remain rural. Parent counts, child counts and container counts are
+different quantities; none creates a merchant, quest or town district.
+
+The installed files are:
+
+- `roguelike/data/generation/compounds/homestead_workyard.json`: 44×16, rotations
+  0/180, hearth house and tool shed, optional storehouse, a three-tile external gate.
+- `roguelike/data/generation/compounds/wayside_shrine_court.json`: 18×14, all four
+  rotations, shrine and shelter, a two-tile gate and common court.
+- `roguelike/data/generation/poi_profiles.json`: version-2 mixed parent policy.
+- Child layouts remain in `roguelike/data/buildings/<category>/<id>.json`.
+
+Every declared recipe rotation has passed production fitting and full population.
+The house, shed and storehouse still permit only 0/180; the homestead cannot turn
+sideways. Context eligibility was extended without changing `structure-v1`
+geometry, content or transform permissions. Recipes themselves are resolved once
+into saved placements/paths and are not dependencies of unseen saved scenes.
+
+### 1. Create complete drafts without replacing your edits
+
+Run from `G:\GameDev\RoguelikeProject` with the established environment:
+
+```powershell
+$ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
+& $ResonancePython -X utf8 tools/structure_authoring.py --init-compound authoring/g7
+```
+
+This creates three complete files, copying only missing files:
+`g7_travellers_court.json`, `g7_wayhouse.json`, and `g7_poi_example.json`.
+Repeating the command preserves every existing file, including deliberate edits.
+The complete originals are in `roguelike/docs/examples/`. Initialization does not
+install anything. Keep the drafts as your editable originals.
+
+Recipe coordinates are local integer tile cells. `size` is the outer width/height;
+rectangles are `[left, top, right, bottom]` with the right/bottom excluded. The
+gate's `normal` points outward from the envelope, and `width` covers its full span.
+The gate names its common `path`. A path has named reciprocal `joins` when there
+are multiple paths; physical diagonal contact alone is insufficient. Its `rects`
+are actual protected walkable ground, not a suggestion to find empty terrain.
+
+Each child slot declares a stable `id`, a purpose in `role`, `required`, a private
+`buildable` rectangle, a `path`, a tile `join` on that path, an outward building
+`normal`, base child `rotations`, and weighted `assets`. Slots are intentionally
+ordered: the two required slots first, then the optional slot. Do not reorder IDs
+to tune weighting. Asset memberships, path memberships and rotation sets are
+unordered and canonicalized. A child must fit its full buffer inside its buildable
+region. Neither a private region nor a sibling buffer may consume circulation.
+
+`fit_budget` is 2..256 actual child transform attempts per parent trial, including
+backtracking. Active recipes are first certified in isolated geometry for every
+declared rotation under that same finite limit. Country-location search then has
+the shared policy budget; one parent transform plus its child attempts consumes
+that budget. The sole external spur-length authority remains `max_spur_tiles` in
+`g3_config.json`; recipes do not override it. There is no mirroring of whole recipes.
+
+### 2. Reuse or paint a real child
+
+Open `layout_painter.html`, import `authoring/g7/g7_wayhouse.json`, edit, and use
+**Export**. Keep the actual downloaded file and use its path as `$Child` below.
+The placement panel displays the `compound` context; it preserves the complete
+object and unknown metadata. The production CLI is the validator.
+
+```powershell
+$Child = 'authoring/g7/g7_wayhouse.json' # replace with the actual browser download
+& $ResonancePython -X utf8 tools/structure_authoring.py $Child --route ordinary_building --category wilderness --orientations --output evidence/g7-owner/child.json
+```
+
+A painted shelf/counter is only decoration. Populate a container through a real
+`special_tiles` container with valid `decor_id` and `loot_pools`, then declare a
+reachable required container target. Keep at least one `required: true` usable
+target in every child/additional-site candidate. Optional targets can coexist.
+An all-optional document remains legal for direct/legacy consumers, but connected
+parent/child admission rejects it before fitting with the asset, context and fix.
+
+The downloaded child's `id` must match the recipe slot membership. If you rename
+it in the painter, edit the recipe's asset membership to that exact ID. Base child
+rotation plus parent rotation must be permitted by the child's own profile; the
+recipe cannot grant new rotations. Required secondary doors and wide main doors
+are checked after all children, contents, dressing and native actors are created.
+
+### 3. Preview the complete place on both road axes
+
+```powershell
+$Recipe = 'authoring/g7/g7_travellers_court.json'
+& $ResonancePython -X utf8 tools/structure_authoring.py --compound $Recipe --child $Child --assigned-compound S --output evidence/g7-owner/court-horizontal.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --compound $Recipe --child $Child --assigned-compound E --output evidence/g7-owner/court-vertical.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --compound $Recipe --child $Child --poi-config authoring/g7/g7_poi_example.json --seed 20261023 --output evidence/g7-owner/natural.json
+```
+
+`--child` may be repeated for multiple actual drafts. `--assigned-compound` is a
+labelled one-parent controlled policy using ordinary protected country candidates,
+the shared production fitter and the complete materializer. N/S gates face
+horizontal roads; E/W face vertical roads. `--compound-rotation 90` optionally
+restricts the assigned preview to one already-permitted orientation (the example's
+90° gate faces W). A preview never installs a recipe/child/policy.
+
+Outputs include the entire resolved plan, child receipts, status, detailed parent
+plans and populated diagnostic SVGs. These SVGs are diagrams; production-renderer
+PNG evidence is separate. Ordinary eligible but unselected drafts return success
+with `status: "valid but unselected"`, zero preview scenes and the actual plan.
+For a reproducible nonselection, copy the policy and set both count bounds and both
+kind minima to zero. A rejected definition/fitting minimum exits 1 with a diagnosis.
+
+### 4. Register and install deliberately
+
+After successful previews, install the complete files explicitly:
+
+```powershell
+Copy-Item -LiteralPath $Child -Destination roguelike/data/buildings/wilderness/g7_wayhouse.json
+Copy-Item -LiteralPath $Recipe -Destination roguelike/data/generation/compounds/g7_travellers_court.json
+Copy-Item -LiteralPath authoring/g7/g7_poi_example.json -Destination roguelike/data/generation/poi_profiles.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --catalog --output evidence/g7-owner/catalog.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --refresh-editor-catalog
+& $ResonancePython -X utf8 tools/structure_authoring.py --check-editor-catalog
+& $ResonancePython -X utf8 tools/structure_authoring.py --world-plan --seed 20261023 --output evidence/g7-owner/installed.json
+```
+
+Match the destination filename to the child's declared ID if renamed. For a
+disposable catalog, use `--data-root <copied-data-directory>` and
+`--editor-catalog <review-directory>/catalog.js` with refresh/check. This verifies
+installation without altering the production editor catalog. Only data is copied;
+game code always imports the production checkout. A new graphical recipe editor
+or separate game checkout is unnecessary.
+
+### 5. Replace children, expand the yard and tune selection
+
+Replace a slot's `assets` entry with another eligible child (for example, a second
+`roadside_shrine_a` in the shelter slot), then repeat direct/assigned previews.
+Children of the same asset still get distinct slot-prefixed mutable content.
+For a third building, start with the homestead template's two required slots and
+then append its complete `stores` slot; its explicit private region and yard join
+are already certified. An optional slot may be omitted with a saved reason if its
+asset cannot fit. Its failed plot/dependency/reservation branch leaves no residue.
+
+The shrine example's court can move/resize from `[1,8,17,14]` to `[2,8,17,14]`
+while retaining both joins and its gate connection. Restrict `rotations` to `[90]`
+and preview with `--assigned-compound W --compound-rotation 90` to certify that
+orientation. More ambitious edits must still satisfy envelope, path, private
+buffer, complete doorway and final populated-access checks.
+
+Version 2 has one `choices` list. A row is either
+`{"kind":"single","asset":"hunter_cabin","weight":1,"cap":2}` or
+`{"kind":"compound","recipe":"wayside_shrine_court","weight":2,"cap":2}`.
+The shipped complete example shows both kinds. Parent choice weight is single
+placement base weight × policy weight, or implicit compound base 1 × policy weight.
+The nearest accepted parent with the same `(kind, ID)` applies `repeat_multiplier`
+(default .2; Manhattan join distance with stable parent-ID ties). More child slots
+or permitted transforms do not multiply the parent's chance. Child membership
+weights independently multiply each child's placement base weight within its slot.
+
+The default desired parent count is one inclusive draw from 2..4, with
+`kind_minimum: {"single":1,"compound":1}`. Kind minima must fit the total minimum
+and available caps. Weights cannot guarantee that mix; unmet kind obligations are
+served first. Parent caps count accepted parents only, not their children; featured
+landmark is excluded. A compound and a single site both consume one parent slot.
+Setting a kind minimum to zero explicitly opts out of its guarantee. Set both
+total bounds and kind minima to zero to opt out of all extra destinations.
+
+Spacing/location controls retain their G6 values (80 join spacing, 24 town extent,
+12 junction clearance, 16 sampling step, 8192 raw samples, 512 candidates).
+`fit_budget` defaults to 1024 combined parent/child attempts, integer 1..4096.
+A desired shortfall is valid only above **all** total/kind minima. Diagnostics
+distinguish hard caps, bounded candidate search and fit-budget exhaustion; budget
+exhaustion is not a proof that no geometric solution exists. Nothing relaxes town
+spacing, water, bridge, anchor, private-space or storage-chunk constraints.
+
+### 6. Diagnose errors and understand saved worlds
+
+| Diagnosis | Correction |
+|---|---|
+| Unknown child/path or duplicate slot/membership | Match installed/draft IDs and keep stable unique slot IDs. |
+| Required usable target missing | Mark at least one reachable target `required: true`; retain other optional targets. |
+| Gate/common path disconnected | Connect the full gate span to its named path; add reciprocal joins for additional paths. Corner contact is insufficient. |
+| Private overlap / buffer consumes path | Separate private regions and keep each full child buffer outside common circulation. |
+| Outside envelope / spans storage chunk | Resize/reposition the authored bounds; every accepted parent stays within one 80×43 chunk. |
+| Forbidden effective transform | Restrict parent/base-child rotations to the asset's actual allowed transforms. |
+| Unfit mandatory child capacity | Enlarge that slot or choose a smaller eligible asset; required children cannot be dropped. |
+| Required-child/global budget exhausted | Inspect bounded failure examples, then change the authored geometry or deliberately raise a finite budget. |
+| Final approach/door/content blocked | Inspect real `special_tiles`, full primary/service spans and interactions after all population. |
+| Valid optional omission | Inspect the saved slot reason; increase its space/budget only if you want it admitted. |
+
+Policy/recipe/weight edits affect new plans. Unseen saved compounds use their exact
+saved envelope, paths, slots, assets and transforms even if today's recipe is
+changed or removed; no re-selection occurs. Changed consumed child structure or
+factory definitions block only affected unseen scenes under unchanged
+`structure-v1`. Unaffected unseen scenes remain usable. Visited scenes retain
+player mutations and actual creator revision; they are never regenerated to
+restore initial access. G3/G4/G5/G6 saves retain their original plan and get explicit
+current adapters only when first creating a pending scene. They gain no compounds.
+
+Run the executed workflow suite and actual download checks with:
+
+```powershell
+& $ResonancePython -X utf8 tools/verify_g7_authoring.py --evidence evidence/g7-owner/workflows
+& $ResonancePython -X utf8 tools/verify_structure_editor.py --evidence evidence/g7-owner/browser
+& $ResonancePython -X utf8 tools/worldgen_g7_diagnostic.py --journey --evidence evidence/g7-owner/diagnostic
+```
+
+The workflow suite executes these CLI forms in disposable roots, preserves sentinel
+edits, installs a disposable data catalog, verifies both catalog commands, and runs
+all errors in the table plus valid nonselection and optional omission. It retains
+exact commands, cwd, environment, expected/actual exits and output hashes. Inherited
+G6 and G5 workflows remain separately nested records. Both headless browser engines
+export a real edited compound child; those exact downloaded bytes are consumed by
+direct and whole-compound previews. The world remains finite at 128×128 chunks.
+`UI-TEXT-HEIGHT`, broader town composition, retention/streaming and the continuous
+viewport remain deferred. G7 stops at these bounded rural compounds.
