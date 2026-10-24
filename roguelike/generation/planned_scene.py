@@ -15,14 +15,16 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
     from world.world_map import RegionType,TownData
     from generation.structure_preview import check_access,receipt_owned
     if (width,height)!=(W,H): raise GenerationError('planned scene dimensions differ from world plan')
+    from generation.settlement_context import effective_context
+    settlement,native=effective_context(world,chunk,data)
     section=slice_plan(world.plan,chunk.wx,chunk.wy)
     # Check only pending selected placements. Cached scenes bypass this function.
     definitions={p['id']:check_dependencies(p,world.plan,data) for p in section['placements']}
     staged=copy.deepcopy(chunk); base=copy.deepcopy(chunk); base.submaps=[]; base.town_data=None
     base.edges={e:[] for e in base.edges}; base.town_id=-1; base.town_role=''
     if base.region_type==RegionType.TOWN: base.region_type=RegionType.PLAINS
-    context=GenerationContext(world.seed,chunk.seed,(chunk.wx,chunk.wy,None),revision='wg3')
-    m,spawn=generate_region(base,width,height,data.terrain,data=data,context=context)
+    context=GenerationContext(world.seed,chunk.seed,(chunk.wx,chunk.wy,None))
+    m,spawn=generate_region(base,width,height,data.terrain,data=data,context=context,base_only=True)
     x0,y0=chunk.wx*W,chunk.wy*H; rect=[x0,y0,x0+W,y0+H]
     protected=set(); road_cells=set(); water_cells=set(); specs=[]; receipts=[]
     def local(rectangle):
@@ -50,7 +52,7 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
     buildings=[]
     for p in section['placements']:
         raw=transform(definitions[p['id']],p['rotation'],p['mirror']); ox,oy=p['origin'][0]-x0,p['origin'][1]-y0
-        paint(local(p['clearance']),'grass'); paint(local(p['approach']),'dirt_path')
+        paint(local(p['clearance']),'grass'); paint(local(p['approach'])-road_cells,'dirt_path')
         rows=_stamp_building_at(m,raw,ox,oy,data.terrain,data=data)
         for row in rows: row['record_id']=p['id']+':'+row['record_id']
         specs.extend(rows); protected.update(local(p['clearance'])|local(p['approach']))
@@ -61,13 +63,25 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
     spawn=next(iter(sorted(road_cells)),arrival_anchor(m,spawn,data))
     m.required_access_anchors=[spawn]+sorted(p for p in road_cells if p[0] in (0,W-1) or p[1] in (0,H-1))
     for submap in staged.submaps: _place_submap_entrance(m,submap,data.terrain,data=data)
-    # All remaining native population uses its existing own stream and avoids solids.
+    from generation.planned_dressing import dress
+    functional,waystone=dress(m,staged,world,data,context,native,spawn)
+    actors.extend(populate(data,item_factory,creature_factory,m,functional,map_text=True,receipts=receipts))
+    def legal_native(x,y):
+        return ((x,y)!=spawn and (x,y) not in m.protected_cells and
+                (x,y) not in m.decor and (x,y) not in m.floor_objects and
+                data.terrain.get(str(m.tiles[x,y]['terrain']),{}).get('creature_passable',True) and
+                not any(a.x==x and a.y==y for a in actors))
+    # Native profiles resolve only while preparing an unseen scene.
     if chunk.region_type!=RegionType.TOWN:
         for i,(zone,_) in enumerate(staged.zones):
-            actors.extend(creature_factory.spawn_for_zone(zone,m,context.rng('native-population',zone,i),max_count=3))
+            actors.extend(creature_factory.spawn_for_zone(zone,m,context.rng('native-population',zone,i),max_count=3,allowed=legal_native))
     if chunk.region_type==RegionType.TOWN:
-        settlement=next(s for s in world.plan['settlements'] if [chunk.wx,chunk.wy] in s['members'])
-        staged.town_data=TownData(chunk.name or settlement['id'],'small',[settlement['form']],'spent',False,(0,0),buildings=[],item_spawns=[])
+        from generation.town_gen import _compute_creature_spawns
+        spawns=_compute_creature_spawns(m,[(native['district'],(0,0,W,H))],'spent',
+                    context.rng('town-population',settlement['id'],native['role']),allowed=legal_native)
+        actors.extend(populate(data,item_factory,creature_factory,m,[dict(s,kind='creature') for s in spawns]))
+        staged.town_data=TownData(chunk.name or native['name'],'small',[native['district']],'spent',False,waystone,
+                                 buildings=[],item_spawns=[],creature_spawns=spawns)
         # World plan is the only owner of buildings/civic blueprint; no duplicate rows.
         civic=settlement['civic']
         if civic:
@@ -78,10 +92,17 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
                 staged.town_data.bell_tower_pos=bells[0]
     validate_scene(m,staged.submaps,data)
     validate_access(m,section,data,chunk.wx,chunk.wy)
+    if waystone:
+        reached=reachable(m,spawn,data)
+        if not any((waystone[0]+dx,waystone[1]+dy) in reached for dx,dy in ((1,0),(-1,0),(0,1),(0,-1))):
+            raise GenerationError('required waystone has no reachable interaction position')
     m.plan_provenance={'mode':'shared-v1','routes':[r['id'] for r in section['routes']],
                        'crossings':[r['id'] for r in section['crossings']],
-                       'placements':[p['id'] for p in section['placements']]}
-    m.generation_revision='wg3'; m.generation_complete=True
+                       'placements':[p['id'] for p in section['placements']],
+                       'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
+                       'dependency_projection':'structure-v1','adapter':'g3-to-g4-v1' if world.plan['version']==1 else 'g4-v1'}
+    m.native_generation_context=native
+    m.generation_revision='wg4'; m.generation_complete=True
     return SceneResult(m,actors,spawn,staged,receipts)
 
 

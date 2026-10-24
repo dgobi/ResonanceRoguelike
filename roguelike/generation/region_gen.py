@@ -29,6 +29,7 @@ def generate_region(
     terrain_data: dict,
     data=None,              # DataLoader — required for full town generation
     context=None,
+    base_only=False,
 ) -> tuple[LocalMap, tuple[int, int]]:
     """
     Dispatch to the correct generator based on chunk region type.
@@ -134,6 +135,9 @@ def generate_region(
         # PLAINS / ASH_WASTES / default open
         _scatter_terrain(local_map, terrain_data, rng, _GRASS, "tall_grass",
                          n_clusters=14, cluster_r=4)
+
+    if base_only:
+        return local_map, spawn
 
     # Carve rivers, roads, paths from edge connectors
     carve_connectors(
@@ -582,6 +586,7 @@ def _place_waystones(
     terrain_data: dict,
     chunk:        Chunk,
     rng:          random.Random,
+    *, allowed=lambda x, y: True, road_edges=None,
 ) -> None:
     """
     Place 1-2 waystone_plinth tiles adjacent to road terrain.
@@ -592,7 +597,7 @@ def _place_waystones(
         return
 
     # Count road-type edge connectors
-    road_edges = [
+    road_edges = road_edges if road_edges is not None else [
         edge for edge, conns in chunk.edges.items()
         if any(c.connector_type == ConnectorType.ROAD for c in conns)
     ]
@@ -614,6 +619,8 @@ def _place_waystones(
             if str(local_map.tiles[x, y]["terrain"]) in _ROAD_TERRAIN:
                 continue  # skip road tiles themselves
             if not local_map.walkable[x, y]:
+                continue
+            if not allowed(x, y):
                 continue
             for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
                 nx, ny = x + dx, y + dy
@@ -669,6 +676,7 @@ def _scatter_dead_wood(
     local_map:    LocalMap,
     terrain_data: dict,
     rng:          random.Random,
+    *, allowed=lambda x, y: True,
 ) -> None:
     """
     For each tree tile, with 8% probability place a dead_wood tile on one
@@ -697,7 +705,7 @@ def _scatter_dead_wood(
                 if not local_map.in_bounds(nx, ny):
                     continue
                 nt = str(local_map.tiles[nx, ny]["terrain"])
-                if local_map.walkable[nx, ny] and nt not in _BLOCKED_SCATTER:
+                if local_map.walkable[nx, ny] and nt not in _BLOCKED_SCATTER and allowed(nx, ny):
                     candidates.append((nx, ny))
             if candidates:
                 px, py = rng.choice(candidates)
@@ -709,6 +717,7 @@ def _scatter_flint(
     terrain_data: dict,
     rng:          random.Random,
     rate:         float,
+    *, allowed=lambda x, y: True,
 ) -> None:
     """
     Scatter flint_rock tiles across walkable, non-blocked ground at the
@@ -724,6 +733,8 @@ def _scatter_flint(
 
     def _try_place(fx: int, fy: int) -> bool:
         if not local_map.in_bounds(fx, fy):
+            return False
+        if not allowed(fx, fy):
             return False
         ft = str(local_map.tiles[fx, fy]["terrain"])
         if not local_map.walkable[fx, fy]:
@@ -756,6 +767,7 @@ def _scatter_clay(
     local_map:    LocalMap,
     terrain_data: dict,
     rng:          random.Random,
+    *, allowed=lambda x, y: True,
 ) -> None:
     """
     Scatter clay_deposit tiles on walkable ground within 2 tiles of river_water.
@@ -777,6 +789,8 @@ def _scatter_clay(
             if not local_map.walkable[x, y]:
                 continue
             if t in _BLOCKED_SCATTER or t in _RIVER_TILES:
+                continue
+            if not allowed(x, y):
                 continue
             # Check for river_water within 2 tiles (Chebyshev)
             near_river = any(
@@ -810,6 +824,8 @@ def _scatter_clay(
                 if not local_map.walkable[nx, ny]:
                     continue
                 if nt in _BLOCKED_SCATTER or nt == "clay_deposit":
+                    continue
+                if not allowed(nx, ny):
                     continue
                 local_map.set_tile(nx, ny, "clay_deposit", cl_walk, cl_trans)
                 break

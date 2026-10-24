@@ -12,7 +12,7 @@ from config import MAP_WIDTH as W, MAP_HEIGHT as H
 from generation.context import GenerationError, stable_seed
 from generation.placement import transform, entrance_cells, NORMALS, dependencies, digest
 
-VERSION=1
+VERSION=2
 MODE='shared-v1'
 
 
@@ -119,7 +119,7 @@ def build_plan(world,data,override=None,metrics=None):
     """Build a candidate without modifying the world. Publication is a separate step."""
     import time
     c=settings(data,override); rng=random.Random(stable_seed('wg3',world.seed,'sites'))
-    plan=dict(version=VERSION,mode=MODE,generation_revision='wg3',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
+    plan=dict(version=VERSION,mode=MODE,generation_revision='wg4',dependency_projection='structure-v1',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
               nodes=[],routes=[],waters=_river_records(world),crossings=[],settlements=[],plots=[],placements=[],reservations=[],dependencies={},diagnostics=[])
     authority=Reservations(); chosen=[]; count=rng.randint(*c['settlement_count']); start=(world.start_wx,world.start_wy)
     reserved={p for p,ch in world.chunks.items() if ch.submaps or ch.is_capital or ch.biome_id=='deep_mountain'}
@@ -241,6 +241,9 @@ def build_plan(world,data,override=None,metrics=None):
         if found: break
     if not found: raise GenerationError('essential landmark has no legal bounded spur/footprint: '+str(plan['diagnostics'][-1]))
     plan['reservations']=authority.rows
+    from generation.settlement_context import semantics
+    for settlement in plan['settlements']:
+        settlement['semantics']=semantics(world,settlement,data,plan)
     validate_plan(plan,world.width,world.height)
     return plan
 
@@ -294,7 +297,8 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
 
 def validate_plan(plan,width,height):
     """Durable structure/reference checks; never demand unmodified saved scene tiles."""
-    if not isinstance(plan,dict) or type(plan.get('version')) is not int or plan.get('version')!=VERSION or plan.get('mode')!=MODE or plan.get('generation_revision')!='wg3': raise GenerationError('missing/corrupt required G3 plan header')
+    if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
+    if plan['version']==2 and plan.get('dependency_projection')!='structure-v1': raise GenerationError('G4 dependency projection missing or unsupported')
     if plan.get('map_size')!=[W,H] or plan.get('world_size')!=[width,height]: raise GenerationError('G3 plan dimensions disagree')
     registries={}
     for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations'):
@@ -388,6 +392,11 @@ def publish_plan(world,plan):
         members=[tuple(p) for p in s['members']]; world.town_groups[i]=members
         for p in members:
             ch=world.get(*p); ch.region_type=RegionType.TOWN; ch.biome_id='town'; ch.town_id=i; ch.town_role='planned'
+            if plan['version']==2:
+                semantic=s['semantics']; member=next(m for m in semantic['members'] if m['chunk']==list(p))
+                ch.name=semantic['name']; ch.town_role=member['role']; ch.zones=copy.deepcopy(member['zones'])
+                ch.difficulty=member['difficulty']; ch.resonance=member['resonance']
+                world.chunk_names[p]=ch.name
             world.town_chunks.add(p); world.town_chunk_ids[p]=i
     for route in plan['routes']:
         for r in route['rects']:

@@ -95,6 +95,7 @@ class CreatureFactory:
         local_map: "LocalMap",
         rng:       random.Random,
         max_count: int = 4,
+        *, allowed=lambda x, y: True,
     ) -> list[Actor]:
         """
         Spawn creatures appropriate for a zone.
@@ -128,6 +129,8 @@ class CreatureFactory:
                 x = rng.randint(1, local_map.width  - 2)
                 y = rng.randint(1, local_map.height - 2)
                 if not local_map.walkable[x, y]:
+                    continue
+                if not allowed(x, y):
                     continue
                 # Check creature_passable terrain restriction
                 _terrain_id = str(local_map.tiles[x, y]["terrain"])

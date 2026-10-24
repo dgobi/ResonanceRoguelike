@@ -1838,6 +1838,7 @@ def _compute_creature_spawns(
     district_rects: list,   # [(district_name, (bx, by, bw, bh)), ...]
     bell_state:     str,
     rng:            random.Random,
+    *, allowed=lambda x, y: True,
 ) -> list[dict]:
     """
     Return list of {creature_id, x, y} for first-visit spawning.
@@ -1874,7 +1875,8 @@ def _compute_creature_spawns(
             ty = rng.randint(dy + 2, max(dy + 3, dy + dh - 3))
             if not local_map.in_bounds(tx, ty):
                 continue
-            if local_map.walkable[tx, ty]:
+            if (local_map.walkable[tx, ty] and allowed(tx, ty)
+                    and not any(s['x']==tx and s['y']==ty for s in spawns)):
                 spawns.append({"creature_id": creature_id, "x": tx, "y": ty})
                 placed += 1
 
