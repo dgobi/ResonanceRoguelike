@@ -153,6 +153,15 @@ def worker(browser_name,evidence):
         check('explicit weighted child coordinates and allowed mirror survive real download',
               got['special_tiles'][0]['spawn_table'][0]['x']==got['special_tiles'][0]['x'] and got['placement']['mirror_x'] is True)
         planned_export=evidence/(browser_name+'-planned-frontage.json');planned_export.write_bytes(path.read_bytes())
+        site=load(ROOT/'roguelike/docs/examples/g6_wayhouse.json')
+        page.locator('#asset-id').fill('browser_site_'+browser_name);page.locator('#apply-id').click();site['id']='browser_site_'+browser_name
+        page.locator('#metadata-field').select_option('placement')
+        site['placement']['buffer']=2
+        page.locator('#metadata').fill(json.dumps(site['placement']));page.locator('#apply-metadata').click()
+        got,path=export('additional-site')
+        check('G6 real downloaded site keeps separate required doors and populated contents',got==site)
+        site_export=evidence/(browser_name+'-site.json');site_export.write_bytes(path.read_bytes())
+        page.screenshot(path=str(evidence/(browser_name+'-site-editor.png')),full_page=True)
         page.screenshot(path=str(evidence/(browser_name+'-lab.png')),full_page=True)
         check('no browser script errors',not errors)
         version=browser.version;context.close();browser.close()
@@ -172,12 +181,19 @@ def worker(browser_name,evidence):
                          '--output',str(evidence/(browser_name+'-orientations.json'))]
     orientation_run=subprocess.run(orientation_command,cwd=ROOT,capture_output=True,text=True,timeout=60)
     check('downloaded explicit weighted coordinates pass all eight rotations/reflections',orientation_run.returncode==0)
+    site_commands=[]
+    for name,options in [('direct',['--route','ordinary_building','--orientations'])]+[(normal,['--assigned-site',normal]) for normal in 'NESW']:
+        command_site=[sys.executable,'-X','utf8',str(ROOT/'tools/structure_authoring.py'),str(site_export),'--category','wilderness',*options,
+                      '--output',str(evidence/(browser_name+'-site-'+name+'.json'))]
+        result_site=subprocess.run(command_site,cwd=ROOT,capture_output=True,text=True,timeout=90)
+        site_commands.append(dict(argv=command_site,cwd=str(ROOT),exit_code=result_site.returncode,expected_exit=0,stdout=result_site.stdout,stderr=result_site.stderr))
+        check('actual downloaded G6 site passes production '+name,result_site.returncode==0)
     report={'browser':browser_name,'version':version,'passed':all(c['passed'] for c in checks),'checks':checks,'errors':errors,
             'command':command,'runtime_stdout':run.stdout,'runtime_stderr':run.stderr,'codec_documents':len(codec),
             'planned_command':planned_command,'planned_stdout':planned_run.stdout,'planned_stderr':planned_run.stderr,
             'command_records':[dict(argv=c,cwd=str(ROOT),exit_code=r.returncode,stdout=r.stdout,stderr=r.stderr) for c,r in
-                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))],
-            'download_hashes':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (exported,planned_export)}}
+                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))]+site_commands,
+            'download_hashes':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (exported,planned_export,site_export)}}
     (evidence/(browser_name+'.json')).write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({'browser':browser_name,'passed':report['passed'],'checks':len(checks),'version':version}))
 

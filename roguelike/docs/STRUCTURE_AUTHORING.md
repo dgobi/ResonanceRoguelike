@@ -1,6 +1,8 @@
 # Make a building or layout for Resonance
 
-Current: **G5, world/scene revision `wg5`, shared plan format 3**.
+Current: **G6, world/scene revision `wg6`, shared plan format 4**.
+For additional country-road sites, use the [G6 workflows](#g6-additional-country-road-sites).
+The six existing G5 recipes below remain supported for towns and the featured landmark.
 Use this connected workflow for ordinary new worlds. The later direct-stamp
 sections describe the supported legacy route, not the current selection policy.
 
@@ -15,9 +17,9 @@ placements; restoring compatible definitions makes them usable again. Loading,
 visited maps and unrelated pending scenes remain supported. Keep referenced
 factory IDs available. There is no automatic personal-campaign migration.
 
-Format-1 G3 and format-2 G4 plans retain their exact values. Existing saved `wg3`
-and `wg4` scenes retain their original provenance. Newly created scenes use
-`g3-to-g5-v1`, `g4-to-g5-v1` or `g5-v1` as appropriate, with the unchanged
+Format-1 G3, format-2 G4 and format-3 G5 plans retain their exact values. Existing saved `wg3`,
+`wg4` and `wg5` scenes retain their original provenance. Newly created scenes use
+`g3-to-g6-v1`, `g4-to-g6-v1`, `g5-to-g6-v1` or `g6-v1` as appropriate, with the unchanged
 `structure-v1` dependency projection. Absent/wg1/wg2 origins keep legacy/no-plan
 dispatch. Travel never writes an F5 checkpoint.
 
@@ -153,9 +155,10 @@ slot, with coordinate/normal tie breaks. Required civic, commercial and resident
 assignments are reserved first. The schedule applies to remaining slot indices,
 giving a commercial focus near arrival and a residential/support mix farther out.
 Minima are one residential and one commercial per settlement, plus one grid bell.
-Support is optional. Required asset/slot trials use bounded backtracking (256 by
-default), so an early flexible building cannot consume the only feasible plot
-for a later required role. Exhaustion rejects the candidate world atomically.
+Support is optional. Required transform-fit trials use bounded backtracking (256 by
+default), revisiting an earlier asset's alternative transforms when a later role fails.
+Exhaustion rejects the candidate world atomically and distinguishes an exhausted
+budget (feasibility unresolved) from exhausting all enumerated alternatives.
 
 ## 5. Control repetition
 
@@ -788,3 +791,164 @@ that feasibility remains unresolved; exhausting all enumerated alternatives is
 a separate failure. Failed branches own no placements, dependencies or caps.
 Asset membership lists are canonicalized for fresh plans; optional role schedules
 remain intentionally ordered. Saved G5 selections are never normalized on load.
+
+## G6 additional country-road sites
+
+New worlds keep one required featured landmark and draw a separate desired count
+of **two through four additional sites**. Every accepted site has one building,
+one rural storage chunk and its own mutable contents. The planner reserves towns,
+special anchors, bridges and the featured landmark first. It samples existing
+straight country roads; it does not build new country routes to chase extra sites.
+Sites stay rural: no merchant, town district, quest or new native AI policy is implied.
+
+### 1. Create and edit a complete site draft
+
+Start in `G:\GameDev\RoguelikeProject`. The complete example is
+`roguelike/docs/examples/g6_wayhouse.json`: a 6×5 shelter, four quarter turns,
+south primary and separate required service door, readable road marker, populated
+coffer using `shrine_offering`, and a reachable floor goal. Its explicit placement
+context is `landmark`, which certifies a rural-capable layout. Membership in the
+additional-site policy is separate from membership in the featured-landmark pool.
+
+```powershell
+$ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
+New-Item -ItemType Directory -Force authoring/g6 | Out-Null
+if (-not (Test-Path -LiteralPath authoring/g6/g6_wayhouse.json)) {
+  Copy-Item -LiteralPath roguelike/docs/examples/g6_wayhouse.json -Destination authoring/g6/g6_wayhouse.json
+}
+if (-not (Test-Path -LiteralPath authoring/g6/poi_profiles.json)) {
+  Copy-Item -LiteralPath roguelike/docs/examples/g6_poi_example.json -Destination authoring/g6/poi_profiles.json
+}
+```
+
+Open `layout_painter.html`, import the draft, edit terrain/content and Placement
+metadata, then use **Export** to download JSON. Keep the original draft and download
+separate until validation succeeds. Repeating the initialization above preserves
+your edits. Unknown metadata and ordered arrays retain the existing codec rules.
+A painted shelf, hearth, `c` or counter is not a usable container. Use a real
+`special_tiles` container with a valid `decor_id` and nonempty loot-pool contents;
+declare its required target as `container`. Doors and goals must be explicit.
+
+### 2. Preview the actual downloaded file and both road axes
+
+Use the download's real path in place of `$Candidate`; do not reconstruct it by hand.
+`--assigned-site` is a disclosed controlled preview with count one, that asset only,
+and a required frontage normal. It still runs the production fitter, protection,
+complete contents, native population and final access checks.
+
+```powershell
+$Candidate = 'authoring/g6/g6_wayhouse.json'
+& $ResonancePython -X utf8 tools/structure_authoring.py $Candidate --route ordinary_building --category wilderness --orientations --output evidence/g6-owner/direct.json
+foreach ($Normal in @('N','E','S','W')) {
+  & $ResonancePython -X utf8 tools/structure_authoring.py $Candidate --assigned-site $Normal --category wilderness --output "evidence/g6-owner/assigned-$Normal.json"
+}
+& $ResonancePython -X utf8 tools/structure_authoring.py $Candidate --site --category wilderness --poi-config authoring/g6/poi_profiles.json --output evidence/g6-owner/selected.json
+```
+
+N/S entrances face horizontal roads; E/W face vertical roads. JSON includes the
+parent route, segment, exact join, side, canonical placement and content receipts.
+The adjacent SVGs distinguish whole-world plan diagrams, detailed attachment
+diagrams and complete-scene diagnostic snapshots. Actual gameplay-renderer PNGs
+are retained separately in G6 verification. A successful direct preview does not
+guarantee ordinary selection. A valid but unselected draft exits with an explicit
+message; inspect a world-plan report to see the accepted cohort and exclusions.
+
+### 3. Register and deliberately install after validation
+
+Active files are `roguelike/data/buildings/wilderness/<id>.json` and
+`roguelike/data/generation/poi_profiles.json`. Each `assets` member contains
+`asset`, positive `weight` and integer `cap`. The complete example policy adds
+`{"asset":"g6_wayhouse","weight":1,"cap":2}` to the four installed assets.
+Previewing drafts does not install them. When satisfied, these commands deliberately
+install the draft and policy; retain your edited drafts as the authoring originals.
+
+```powershell
+Copy-Item -LiteralPath authoring/g6/g6_wayhouse.json -Destination roguelike/data/buildings/wilderness/g6_wayhouse.json
+Copy-Item -LiteralPath authoring/g6/poi_profiles.json -Destination roguelike/data/generation/poi_profiles.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --catalog --output evidence/g6-owner/catalog.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --refresh-editor-catalog
+& $ResonancePython -X utf8 tools/structure_authoring.py --check-editor-catalog
+& $ResonancePython -X utf8 tools/structure_authoring.py --world-plan --output evidence/g6-owner/installed-world.json
+```
+
+The automated authoring verification executes installation in a disposable **data
+catalog**, preserving production assets. A new world editor is unnecessary.
+
+### 4. Tune counts, repetition and space
+
+Edit a draft policy, preview using `--world-plan --poi-config <draft>`, then install
+it. The inclusive desired count is drawn once and saved. Reaching it completes
+selection. Falling short may still publish if the configured minimum was reached;
+the saved `site_selection.shortfall_reason` explains why. Falling below the minimum
+rejects the entire new world. Even extras above the minimum become durable obligations.
+
+| Control | Default and limits | Meaning |
+|---|---|---|
+| `minimum`, `maximum` | 2, 4; integers 0..8, minimum ≤ maximum | Desired count range. Zero minimum is an explicit owner choice. |
+| asset `weight` | 1; finite positive ≤1000 | Multiplied by the layout's placement base weight. More transforms do not add weight. |
+| asset `cap` | 2; integer 1..8 | Hard accepted count across additional sites. Featured landmark excluded. Sum must satisfy minimum, not maximum. |
+| `repeat_multiplier` | 0.2; finite (0,1] | Soft penalty for matching the nearest already accepted site's asset. Manhattan join distance; ties by site ID. |
+| `spacing_tiles` | 80; integer 1..4096 | Minimum Manhattan distance between additional-site joins, in world tiles. |
+| `town_clearance_tiles` | 24; integer 0..256 | Manhattan distance from join to the town's protected outer rectangle. |
+| `junction_clearance_tiles` | 12; integer 1..80 | Manhattan distance from join to perpendicular road intersections/bends. Straight collinear overlap is not a junction. |
+| `locations` | plains, forest, heath | Supported rural biome IDs; no water chunks, towns or special-anchor chunks. |
+| `sample_step_tiles` | 16; integer 8..80 | Fixed world-coordinate sampling lattice along existing roads. |
+| `enumeration_limit` | 8192; integer 1..65536 | Maximum raw road-side sample examinations, then deduplication. |
+| `candidate_limit` | 512; integer 1..4096 | Maximum seeded, canonical candidate joins considered. |
+| `fit_budget` | 1024; integer 1..4096 | Maximum real transform fits, including empty-frontage asset trials. |
+
+The single spur-length authority remains `max_spur_tiles` in
+`roguelike/data/generation/g3_config.json` (default 12). Buffer/entrance geometry
+belongs to each consumed layout. There is no second POI spur-length setting.
+The default 80/24/12 spacing and 16-tile sampling meet the minimum for ordinary
+seeds 0, 20261023 and 29417 without geometry relaxation. The 80-tile join spacing
+roughly equals one horizontal storage chunk; one-site-per-chunk also applies on
+the shorter 43-tile vertical dimension. Local repetition is a preference, not a
+distinct-asset quota. Discarded trials spend no cap and create no map destinations.
+
+To demonstrate an allowed shortfall, use only `hunter_cabin` with cap 2, minimum 2
+and maximum 4. Seed 20261023 requests 3 and accepts 2, reporting hard-cap exhaustion.
+To demonstrate valid nonselection, set both count bounds to zero and run the same
+draft with `--site`; the candidate is eligible but unselected. To test a rejected
+minimum, keep minimum 2 and set `fit_budget` to 1. These are controlled examples,
+not ordinary installed-policy frequency measurements.
+
+### 5. Diagnose a failed attachment
+
+Read `site_selection.rejections` and its bounded `examples`, then the accepted
+plot's rejected-transform messages. `--assigned-site E` cannot admit an asset
+whose permitted entrances only face N/S. Both sides must fit the complete building,
+buffer, full doorway span and access inside one 80×43 storage chunk.
+
+| Message | What to inspect |
+|---|---|
+| parent/join mismatch, join outside actual parent segment | Exact saved country-route ID and segment; a nearby different road cannot satisfy it. |
+| approach is blocked, entrance span inaccessible | Full main/service doorway spans and blocking container/decor placement after all content. |
+| footprint/buffer or approach conflicts | Named water/bank, private reservation or assigned road; do not erase required space. |
+| bridge deck or approach clearance | Choose an ordinary road segment away from the protected crossing. |
+| spans a storage chunk | Move the join or choose a fitting permitted orientation/layout. |
+| no eligible permitted transform | Declare only orientations that have actually passed direct previews. |
+| hard cohort caps exhausted | Raise a deliberate cap/add an eligible asset, or accept the recorded shortfall above minimum. |
+| POI minimum failure | No world was published. Check budget, candidate geometry, eligibility and minimum. |
+
+### 6. Understand what an edit changes
+
+Counts, memberships, weights, caps, spacing and search limits affect **new worlds**.
+Saved pending sites use their saved resolved policy and exact chosen placement.
+Consumed layout or item/container/factory changes can block only an affected pending
+scene, with asset/dependency context. Visited scenes keep player mutations, objects
+and their actual creation revision. Revisit, cold load and F9 do not refill, reselect,
+rebuild a road or run generation again for a visited scene. Historic G3/G4/G5 worlds
+gain no new sites. G6 sites never become fake towns or duplicate Chunk blueprints.
+
+Execute all workflows and both actual browser-download paths with:
+
+```powershell
+& $ResonancePython -X utf8 tools/verify_g6_authoring.py --evidence evidence/g6-owner/workflows
+& $ResonancePython -X utf8 tools/verify_structure_editor.py --evidence evidence/g6-owner/browser
+```
+
+The workflow log records positive and expected-negative exit codes separately,
+commands, cwd, environment and output hashes. Existing 65-document round trips and
+the six G5 recipes remain part of verification. `UI-TEXT-HEIGHT` and large-world
+retention/streaming remain deferred; G6 does not implement multi-building compounds.

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "id": "rural-sites-v1",
+  "minimum": 2,
+  "maximum": 4,
+  "assets": [
+    {
+      "asset": "roadside_shrine_a",
+      "weight": 1,
+      "cap": 2
+    },
+    {
+      "asset": "hunter_cabin",
+      "weight": 1,
+      "cap": 2
+    },
+    {
+      "asset": "shepherds_hut_a",
+      "weight": 1,
+      "cap": 2
+    },
+    {
+      "asset": "waymarker_shelter_a",
+      "weight": 1,
+      "cap": 2
+    },
+    {
+      "asset": "g6_wayhouse",
+      "weight": 1,
+      "cap": 2
+    }
+  ],
+  "repeat_multiplier": 0.2,
+  "spacing_tiles": 80,
+  "town_clearance_tiles": 24,
+  "junction_clearance_tiles": 12,
+  "locations": [
+    "plains",
+    "forest",
+    "heath"
+  ],
+  "sample_step_tiles": 16,
+  "enumeration_limit": 8192,
+  "candidate_limit": 512,
+  "fit_budget": 1024
+}
