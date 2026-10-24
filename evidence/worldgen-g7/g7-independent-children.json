@@ -34,6 +34,6 @@
   "checkpoint_scope": "two explored compound scenes plus actual startup scenes",
   "scene_count": 4,
   "bytes": 19993958,
-  "save_seconds": 0.7452285999897867,
-  "cold_seconds": 0.6961563999648206
+  "save_seconds": 0.8009024999919347,
+  "cold_seconds": 0.6958091999986209
 }

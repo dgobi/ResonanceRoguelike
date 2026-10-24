@@ -1,89 +1,89 @@
 {
-  "tested_input": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+  "tested_input": "31afa301418d075d7a79252c19d04dfb13c4a174",
   "final_gates": [
     {
       "gate": "guard",
       "passed": true,
       "exit_code": 0,
-      "seconds": 18.586035099986475,
+      "seconds": 10.170492400007788,
       "source_stable": true,
-      "input_commit": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+      "input_commit": "31afa301418d075d7a79252c19d04dfb13c4a174",
       "committed_inputs_reconciled": true
     },
     {
       "gate": "focused",
       "passed": true,
       "exit_code": 0,
-      "seconds": 436.6862213999848,
+      "seconds": 336.47979770001257,
       "source_stable": true,
-      "input_commit": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+      "input_commit": "31afa301418d075d7a79252c19d04dfb13c4a174",
       "committed_inputs_reconciled": true
     },
     {
       "gate": "browser",
       "passed": true,
       "exit_code": 0,
-      "seconds": 44.22272570000496,
+      "seconds": 44.8519867999712,
       "source_stable": true,
-      "input_commit": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+      "input_commit": "31afa301418d075d7a79252c19d04dfb13c4a174",
       "committed_inputs_reconciled": true
     },
     {
       "gate": "authoring",
       "passed": true,
       "exit_code": 0,
-      "seconds": 63.71907580003608,
+      "seconds": 63.56761510000797,
       "source_stable": true,
-      "input_commit": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+      "input_commit": "31afa301418d075d7a79252c19d04dfb13c4a174",
       "committed_inputs_reconciled": true
     },
     {
       "gate": "catalog",
       "passed": true,
       "exit_code": 0,
-      "seconds": 0.3330977999721654,
+      "seconds": 0.3189132999978028,
       "source_stable": true,
-      "input_commit": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+      "input_commit": "31afa301418d075d7a79252c19d04dfb13c4a174",
       "committed_inputs_reconciled": true
     },
     {
       "gate": "catalog-check",
       "passed": true,
       "exit_code": 0,
-      "seconds": 0.3097882000147365,
+      "seconds": 0.3347038999781944,
       "source_stable": true,
-      "input_commit": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+      "input_commit": "31afa301418d075d7a79252c19d04dfb13c4a174",
       "committed_inputs_reconciled": true
     },
     {
       "gate": "diagnostic",
       "passed": true,
       "exit_code": 0,
-      "seconds": 134.26819110003999,
+      "seconds": 133.84905919997254,
       "source_stable": true,
-      "input_commit": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+      "input_commit": "31afa301418d075d7a79252c19d04dfb13c4a174",
       "committed_inputs_reconciled": true
     },
     {
       "gate": "visuals",
       "passed": true,
       "exit_code": 0,
-      "seconds": 1.1410168000147678,
+      "seconds": 1.107051299943123,
       "source_stable": true,
-      "input_commit": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+      "input_commit": "31afa301418d075d7a79252c19d04dfb13c4a174",
       "committed_inputs_reconciled": true
     },
     {
       "gate": "production",
       "passed": true,
       "exit_code": 0,
-      "seconds": 427.82627159997355,
+      "seconds": 452.5599743000348,
       "source_stable": true,
-      "input_commit": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+      "input_commit": "31afa301418d075d7a79252c19d04dfb13c4a174",
       "committed_inputs_reconciled": true
     }
   ],
-  "focused_summary": "Ran 202 tests in 433.930s\n\nOK",
+  "focused_summary": "Ran 202 tests in 334.228s\n\nOK",
   "diagnostic": {
     "declared_seeds": [
       0,
@@ -95,7 +95,7 @@
       {
         "seed": 0,
         "plan_identity": "dead2804aa845971bea657f38224a2035c36367afdcf0290d9370c57e7912630",
-        "planning_seconds": 0.7769535999977961,
+        "planning_seconds": 0.7716589999618009,
         "plan_bytes": 600599,
         "settlements": 3,
         "placements": 76,
@@ -108,7 +108,7 @@
               30,
               83
             ],
-            "seconds": 0.15570230002049357,
+            "seconds": 0.1546375000034459,
             "actors": 2,
             "items": 0,
             "native_context": null,
@@ -131,7 +131,7 @@
               32,
               79
             ],
-            "seconds": 0.13075220002792776,
+            "seconds": 0.13237600005231798,
             "actors": 0,
             "items": 0,
             "native_context": null,
@@ -154,7 +154,7 @@
               32,
               83
             ],
-            "seconds": 0.18021130003035069,
+            "seconds": 0.17915099998936057,
             "actors": 2,
             "items": 7,
             "native_context": {
@@ -217,7 +217,7 @@
               32,
               84
             ],
-            "seconds": 0.16332190000684932,
+            "seconds": 0.16283029998885468,
             "actors": 6,
             "items": 10,
             "native_context": {
@@ -280,7 +280,7 @@
               33,
               83
             ],
-            "seconds": 0.16718180000316352,
+            "seconds": 0.16645119996974245,
             "actors": 3,
             "items": 13,
             "native_context": {
@@ -343,7 +343,7 @@
               33,
               84
             ],
-            "seconds": 0.1853914000093937,
+            "seconds": 0.17229800001950935,
             "actors": 5,
             "items": 11,
             "native_context": {
@@ -406,7 +406,7 @@
               33,
               89
             ],
-            "seconds": 0.16089340002508834,
+            "seconds": 0.15965849999338388,
             "actors": 3,
             "items": 1,
             "native_context": null,
@@ -516,7 +516,7 @@
               67,
               68
             ],
-            "seconds": 0.02409110002918169,
+            "seconds": 0.024863199971150607,
             "actors": 1,
             "items": 0,
             "native_context": null,
@@ -541,7 +541,7 @@
               71,
               78
             ],
-            "seconds": 0.14162629999918863,
+            "seconds": 0.1414742000051774,
             "actors": 1,
             "items": 1,
             "native_context": null,
@@ -587,7 +587,7 @@
               83,
               116
             ],
-            "seconds": 0.17710500000976026,
+            "seconds": 0.1772062999662012,
             "actors": 4,
             "items": 10,
             "native_context": {
@@ -650,7 +650,7 @@
               83,
               117
             ],
-            "seconds": 0.17422320001060143,
+            "seconds": 0.17871090001426637,
             "actors": 3,
             "items": 13,
             "native_context": {
@@ -713,7 +713,7 @@
               84,
               116
             ],
-            "seconds": 0.16277439997065812,
+            "seconds": 0.16483550000702962,
             "actors": 5,
             "items": 12,
             "native_context": {
@@ -776,7 +776,7 @@
               84,
               117
             ],
-            "seconds": 0.17214030004106462,
+            "seconds": 0.17475040000863373,
             "actors": 4,
             "items": 10,
             "native_context": {
@@ -839,7 +839,7 @@
               102,
               101
             ],
-            "seconds": 0.17737629998009652,
+            "seconds": 0.17550380004104227,
             "actors": 2,
             "items": 17,
             "native_context": {
@@ -902,7 +902,7 @@
               103,
               101
             ],
-            "seconds": 0.12184020003769547,
+            "seconds": 0.12447929999325424,
             "actors": 5,
             "items": 3,
             "native_context": {
@@ -962,9 +962,9 @@
           }
         ],
         "settlement_planning_seconds": {
-          "settlement-0": 0.04332820000126958,
-          "settlement-1": 0.02146530000027269,
-          "settlement-2": 0.0609173999982886
+          "settlement-0": 0.042367299960460514,
+          "settlement-1": 0.02109370002290234,
+          "settlement-2": 0.06221419997746125
         },
         "physical_network": {
           "cells": 38292,
@@ -982,12 +982,12 @@
           },
           "distance_units": "shortest four-neighbour tile steps on full-width road/deck/access union"
         },
-        "physical_graph_seconds": 0.03499389998614788,
+        "physical_graph_seconds": 0.035811199981253594,
         "sites": {
           "minimum": 2,
           "featured": 1,
-          "enumeration_seconds": 0.023063100001309067,
-          "fit_seconds": 0.004261899972334504,
+          "enumeration_seconds": 0.023437099996954203,
+          "fit_seconds": 0.004509699996560812,
           "desired": 2,
           "accepted": 2,
           "kinds": {
@@ -3147,13 +3147,13 @@
           ],
           "all_road_cells_reachable": true
         },
-        "legacy_macro_seconds": 0.4088985999696888,
-        "legacy_town_scene_seconds": 0.11820339999394491
+        "legacy_macro_seconds": 0.40653380000730976,
+        "legacy_town_scene_seconds": 0.1171430999529548
       },
       {
         "seed": 20261023,
         "plan_identity": "17e968b99d8b65e0a8634f7c46b4a9d8018b3a713d834afba53bdae23411b948",
-        "planning_seconds": 1.0705437999567948,
+        "planning_seconds": 1.0724197000381537,
         "plan_bytes": 738766,
         "settlements": 4,
         "placements": 89,
@@ -3166,7 +3166,7 @@
               29,
               99
             ],
-            "seconds": 0.13579979998758063,
+            "seconds": 0.13127800001529977,
             "actors": 3,
             "items": 1,
             "native_context": null,
@@ -3212,7 +3212,7 @@
               39,
               26
             ],
-            "seconds": 0.18199069995898753,
+            "seconds": 0.17947049997746944,
             "actors": 2,
             "items": 11,
             "native_context": {
@@ -3275,7 +3275,7 @@
               40,
               26
             ],
-            "seconds": 0.12273569998797029,
+            "seconds": 0.12219779996667057,
             "actors": 5,
             "items": 9,
             "native_context": {
@@ -3338,7 +3338,7 @@
               66,
               61
             ],
-            "seconds": 0.02660059998743236,
+            "seconds": 0.02640829997835681,
             "actors": 2,
             "items": 0,
             "native_context": null,
@@ -3363,7 +3363,7 @@
               73,
               99
             ],
-            "seconds": 0.1512485999846831,
+            "seconds": 0.15021240001078695,
             "actors": 1,
             "items": 0,
             "native_context": null,
@@ -3386,7 +3386,7 @@
               74,
               34
             ],
-            "seconds": 0.14652680000290275,
+            "seconds": 0.14478809997672215,
             "actors": 2,
             "items": 1,
             "native_context": null,
@@ -3440,7 +3440,7 @@
               75,
               95
             ],
-            "seconds": 0.13511839997954667,
+            "seconds": 0.13423019996844232,
             "actors": 2,
             "items": 1,
             "native_context": null,
@@ -3463,7 +3463,7 @@
               75,
               99
             ],
-            "seconds": 0.1740910999942571,
+            "seconds": 0.17367320001358166,
             "actors": 4,
             "items": 12,
             "native_context": {
@@ -3526,7 +3526,7 @@
               75,
               100
             ],
-            "seconds": 0.17468619998544455,
+            "seconds": 0.1756902000051923,
             "actors": 4,
             "items": 7,
             "native_context": {
@@ -3589,7 +3589,7 @@
               76,
               99
             ],
-            "seconds": 0.16371059999801219,
+            "seconds": 0.16284329997142777,
             "actors": 5,
             "items": 9,
             "native_context": {
@@ -3652,7 +3652,7 @@
               76,
               100
             ],
-            "seconds": 0.18656269996427,
+            "seconds": 0.18241019995184615,
             "actors": 5,
             "items": 3,
             "native_context": {
@@ -3715,7 +3715,7 @@
               81,
               34
             ],
-            "seconds": 0.13494249997893348,
+            "seconds": 0.13617830001749098,
             "actors": 0,
             "items": 1,
             "native_context": null,
@@ -3761,7 +3761,7 @@
               87,
               33
             ],
-            "seconds": 0.17871639999793842,
+            "seconds": 0.17772809998132288,
             "actors": 2,
             "items": 17,
             "native_context": {
@@ -3824,7 +3824,7 @@
               88,
               33
             ],
-            "seconds": 0.13141930004348978,
+            "seconds": 0.12942949996795505,
             "actors": 6,
             "items": 1,
             "native_context": {
@@ -3887,7 +3887,7 @@
               106,
               106
             ],
-            "seconds": 0.1770945000462234,
+            "seconds": 0.175914500025101,
             "actors": 3,
             "items": 19,
             "native_context": {
@@ -3950,7 +3950,7 @@
               106,
               107
             ],
-            "seconds": 0.17644169996492565,
+            "seconds": 0.18199699994875118,
             "actors": 3,
             "items": 6,
             "native_context": {
@@ -4013,7 +4013,7 @@
               107,
               106
             ],
-            "seconds": 0.170801600033883,
+            "seconds": 0.17685600003460422,
             "actors": 6,
             "items": 14,
             "native_context": {
@@ -4076,7 +4076,7 @@
               107,
               107
             ],
-            "seconds": 0.17753260000608861,
+            "seconds": 0.1800550000043586,
             "actors": 5,
             "items": 9,
             "native_context": {
@@ -4136,10 +4136,10 @@
           }
         ],
         "settlement_planning_seconds": {
-          "settlement-0": 0.04561229998944327,
-          "settlement-1": 0.02378729998599738,
-          "settlement-2": 0.04380019998643547,
-          "settlement-3": 0.02267920004669577
+          "settlement-0": 0.04478840000228956,
+          "settlement-1": 0.023269800003618002,
+          "settlement-2": 0.044072500022593886,
+          "settlement-3": 0.022483999957330525
         },
         "physical_network": {
           "cells": 75859,
@@ -4158,12 +4158,12 @@
           },
           "distance_units": "shortest four-neighbour tile steps on full-width road/deck/access union"
         },
-        "physical_graph_seconds": 0.07518690003780648,
+        "physical_graph_seconds": 0.07422959996620193,
         "sites": {
           "minimum": 2,
           "featured": 1,
-          "enumeration_seconds": 0.05628780002007261,
-          "fit_seconds": 0.005412099999375641,
+          "enumeration_seconds": 0.05574199999682605,
+          "fit_seconds": 0.005599699972663075,
           "desired": 3,
           "accepted": 3,
           "kinds": {
@@ -6309,13 +6309,13 @@
           ],
           "all_road_cells_reachable": true
         },
-        "legacy_macro_seconds": 0.4160515000112355,
-        "legacy_town_scene_seconds": 0.1390902999555692
+        "legacy_macro_seconds": 0.41931040002964437,
+        "legacy_town_scene_seconds": 0.14052760001504794
       },
       {
         "seed": 29417,
         "plan_identity": "7aaf0d01fef7e69aa81801313739148157471664216aa63b1054cde11813f654",
-        "planning_seconds": 0.856472700019367,
+        "planning_seconds": 0.9198463000357151,
         "plan_bytes": 679457,
         "settlements": 4,
         "placements": 84,
@@ -6328,7 +6328,7 @@
               62,
               0
             ],
-            "seconds": 0.17966249998426065,
+            "seconds": 0.18329920002724975,
             "actors": 2,
             "items": 11,
             "native_context": {
@@ -6391,7 +6391,7 @@
               62,
               1
             ],
-            "seconds": 0.18669060000684112,
+            "seconds": 0.18051790003664792,
             "actors": 5,
             "items": 10,
             "native_context": {
@@ -6454,7 +6454,7 @@
               63,
               0
             ],
-            "seconds": 0.16581289999885485,
+            "seconds": 0.16608600004110485,
             "actors": 4,
             "items": 10,
             "native_context": {
@@ -6517,7 +6517,7 @@
               63,
               1
             ],
-            "seconds": 0.1776724000228569,
+            "seconds": 0.18043899995973334,
             "actors": 5,
             "items": 15,
             "native_context": {
@@ -6580,7 +6580,7 @@
               68,
               64
             ],
-            "seconds": 0.031834599969442934,
+            "seconds": 0.033225800027139485,
             "actors": 2,
             "items": 0,
             "native_context": null,
@@ -6605,7 +6605,7 @@
               90,
               65
             ],
-            "seconds": 0.12928569997893646,
+            "seconds": 0.1299523999914527,
             "actors": 4,
             "items": 0,
             "native_context": null,
@@ -6646,7 +6646,7 @@
               99,
               86
             ],
-            "seconds": 0.12013180000940338,
+            "seconds": 0.12089590000687167,
             "actors": 3,
             "items": 6,
             "native_context": {
@@ -6709,7 +6709,7 @@
               100,
               46
             ],
-            "seconds": 0.1316598000121303,
+            "seconds": 0.13264190003974363,
             "actors": 0,
             "items": 1,
             "native_context": null,
@@ -6732,7 +6732,7 @@
               100,
               86
             ],
-            "seconds": 0.12513830000534654,
+            "seconds": 0.1257255999953486,
             "actors": 6,
             "items": 3,
             "native_context": {
@@ -6795,7 +6795,7 @@
               102,
               69
             ],
-            "seconds": 0.14797589997760952,
+            "seconds": 0.15053540002554655,
             "actors": 1,
             "items": 1,
             "native_context": null,
@@ -6849,7 +6849,7 @@
               104,
               46
             ],
-            "seconds": 0.1773049000184983,
+            "seconds": 0.17803900002036244,
             "actors": 4,
             "items": 8,
             "native_context": {
@@ -6912,7 +6912,7 @@
               104,
               47
             ],
-            "seconds": 0.1849060999811627,
+            "seconds": 0.18520770000759512,
             "actors": 6,
             "items": 4,
             "native_context": {
@@ -6975,7 +6975,7 @@
               104,
               61
             ],
-            "seconds": 0.15080300002591684,
+            "seconds": 0.1513767999713309,
             "actors": 0,
             "items": 1,
             "native_context": null,
@@ -7029,7 +7029,7 @@
               105,
               46
             ],
-            "seconds": 0.1634242000291124,
+            "seconds": 0.16045450000092387,
             "actors": 3,
             "items": 7,
             "native_context": {
@@ -7092,7 +7092,7 @@
               105,
               47
             ],
-            "seconds": 0.1468409999506548,
+            "seconds": 0.155661600001622,
             "actors": 4,
             "items": 13,
             "native_context": {
@@ -7155,7 +7155,7 @@
               106,
               46
             ],
-            "seconds": 0.15019449999090284,
+            "seconds": 0.15699899999890476,
             "actors": 3,
             "items": 0,
             "native_context": null,
@@ -7178,7 +7178,7 @@
               107,
               65
             ],
-            "seconds": 0.18076910002855584,
+            "seconds": 0.18019809998804703,
             "actors": 2,
             "items": 9,
             "native_context": {
@@ -7241,7 +7241,7 @@
               108,
               65
             ],
-            "seconds": 0.12264020001748577,
+            "seconds": 0.12178589997347444,
             "actors": 4,
             "items": 3,
             "native_context": {
@@ -7301,10 +7301,10 @@
           }
         ],
         "settlement_planning_seconds": {
-          "settlement-0": 0.043816299992613494,
-          "settlement-1": 0.03480780002428219,
-          "settlement-2": 0.04547819995786995,
-          "settlement-3": 0.02163750003091991
+          "settlement-0": 0.05056969996076077,
+          "settlement-1": 0.0425876000081189,
+          "settlement-2": 0.0536135999718681,
+          "settlement-3": 0.02734600001713261
         },
         "physical_network": {
           "cells": 37321,
@@ -7323,12 +7323,12 @@
           },
           "distance_units": "shortest four-neighbour tile steps on full-width road/deck/access union"
         },
-        "physical_graph_seconds": 0.03785020002396777,
+        "physical_graph_seconds": 0.03921239997725934,
         "sites": {
           "minimum": 2,
           "featured": 1,
-          "enumeration_seconds": 0.02595899999141693,
-          "fit_seconds": 0.005900599993765354,
+          "enumeration_seconds": 0.027837499976158142,
+          "fit_seconds": 0.0060965000302530825,
           "desired": 3,
           "accepted": 3,
           "kinds": {
@@ -9762,8 +9762,8 @@
           ],
           "all_road_cells_reachable": true
         },
-        "legacy_macro_seconds": 0.43603929999517277,
-        "legacy_town_scene_seconds": 0.10384729999350384
+        "legacy_macro_seconds": 0.43567959999199957,
+        "legacy_town_scene_seconds": 0.1102303999941796
       }
     ],
     "failures": [],
@@ -9782,7 +9782,7 @@
             5839,
             4278
           ],
-          "seconds": 0.12672130001010373
+          "seconds": 0.12633709999499843
         },
         {
           "route": "road-0",
@@ -9794,7 +9794,7 @@
             5759,
             4278
           ],
-          "seconds": 0.1443423999589868
+          "seconds": 0.14098199998261407
         },
         {
           "route": "road-0",
@@ -9806,7 +9806,7 @@
             5679,
             4278
           ],
-          "seconds": 0.1319132999633439
+          "seconds": 0.13217239995719865
         },
         {
           "route": "road-0",
@@ -9818,7 +9818,7 @@
             5599,
             4278
           ],
-          "seconds": 0.12984180002240464
+          "seconds": 0.13005770003655925
         },
         {
           "route": "road-0",
@@ -9830,7 +9830,7 @@
             5519,
             4278
           ],
-          "seconds": 0.14585989998886362
+          "seconds": 0.14568239997606725
         },
         {
           "route": "road-0",
@@ -9842,7 +9842,7 @@
             5439,
             4278
           ],
-          "seconds": 0.14729569997871295
+          "seconds": 0.14591409999411553
         },
         {
           "route": "road-0",
@@ -9854,7 +9854,7 @@
             5359,
             4278
           ],
-          "seconds": 0.1689386999933049
+          "seconds": 0.16183759999694303
         },
         {
           "route": "road-0",
@@ -9866,7 +9866,7 @@
             5279,
             4278
           ],
-          "seconds": 0.147594099980779
+          "seconds": 0.13842750003095716
         },
         {
           "route": "road-0",
@@ -9878,7 +9878,7 @@
             5199,
             4278
           ],
-          "seconds": 0.14618739997968078
+          "seconds": 0.14256539999041706
         },
         {
           "route": "road-0",
@@ -9890,7 +9890,7 @@
             5160,
             4300
           ],
-          "seconds": 0.15373330004513264
+          "seconds": 0.15204300003824756
         },
         {
           "route": "road-0",
@@ -9902,7 +9902,7 @@
             5119,
             4321
           ],
-          "seconds": 0.1402523000142537
+          "seconds": 0.13667269999859855
         },
         {
           "route": "road-0",
@@ -9914,7 +9914,7 @@
             5039,
             4321
           ],
-          "seconds": 0.13774199999170378
+          "seconds": 0.1415197000023909
         },
         {
           "route": "road-0",
@@ -9926,7 +9926,7 @@
             4959,
             4321
           ],
-          "seconds": 0.1445911000482738
+          "seconds": 0.14522639999631792
         },
         {
           "route": "road-0",
@@ -9938,7 +9938,7 @@
             4879,
             4321
           ],
-          "seconds": 0.16239760001190007
+          "seconds": 0.1641033999621868
         },
         {
           "route": "road-0",
@@ -9950,7 +9950,7 @@
             4799,
             4321
           ],
-          "seconds": 0.14637329999823123
+          "seconds": 0.15372259996365756
         },
         {
           "route": "road-0",
@@ -9962,7 +9962,7 @@
             4719,
             4321
           ],
-          "seconds": 0.16342759999679402
+          "seconds": 0.16310920001706108
         },
         {
           "route": "road-0",
@@ -9974,7 +9974,7 @@
             4639,
             4321
           ],
-          "seconds": 0.14905589999398217
+          "seconds": 0.1517773999948986
         },
         {
           "route": "road-0",
@@ -9986,7 +9986,7 @@
             4600,
             4343
           ],
-          "seconds": 0.13893529999768361
+          "seconds": 0.13614349998533726
         },
         {
           "route": "road-0",
@@ -9998,7 +9998,7 @@
             4559,
             4364
           ],
-          "seconds": 0.15809490001993254
+          "seconds": 0.1599970999523066
         },
         {
           "route": "road-0",
@@ -10010,7 +10010,7 @@
             4479,
             4364
           ],
-          "seconds": 0.14994829997885972
+          "seconds": 0.1488771000294946
         },
         {
           "route": "road-0",
@@ -10022,7 +10022,7 @@
             4399,
             4364
           ],
-          "seconds": 0.14651109999977052
+          "seconds": 0.1393813999602571
         },
         {
           "route": "road-0",
@@ -10034,7 +10034,7 @@
             4319,
             4364
           ],
-          "seconds": 0.15028309996705502
+          "seconds": 0.15587820002110675
         },
         {
           "route": "road-0",
@@ -10046,7 +10046,7 @@
             4239,
             4364
           ],
-          "seconds": 0.14515910000773147
+          "seconds": 0.14389100001426414
         },
         {
           "route": "road-0",
@@ -10058,7 +10058,7 @@
             4159,
             4364
           ],
-          "seconds": 0.1435226000030525
+          "seconds": 0.141665099945385
         },
         {
           "route": "road-0",
@@ -10070,7 +10070,7 @@
             4079,
             4364
           ],
-          "seconds": 0.1357593000284396
+          "seconds": 0.13749059999827296
         },
         {
           "route": "road-0",
@@ -10082,7 +10082,7 @@
             3999,
             4364
           ],
-          "seconds": 0.13888799998676404
+          "seconds": 0.14143369998782873
         },
         {
           "route": "road-1",
@@ -10094,7 +10094,7 @@
             4000,
             4364
           ],
-          "seconds": 0.007518099970184267
+          "seconds": 0.007089100021403283
         },
         {
           "route": "road-1",
@@ -10106,7 +10106,7 @@
             4080,
             4364
           ],
-          "seconds": 0.007293700007721782
+          "seconds": 0.006949500006157905
         },
         {
           "route": "road-2",
@@ -10118,7 +10118,7 @@
             4160,
             4364
           ],
-          "seconds": 0.0066087000304833055
+          "seconds": 0.006289999990258366
         },
         {
           "route": "road-2",
@@ -10130,7 +10130,7 @@
             4240,
             4364
           ],
-          "seconds": 0.03319689998170361
+          "seconds": 0.032066999992821366
         },
         {
           "route": "road-2",
@@ -10142,7 +10142,7 @@
             4320,
             4364
           ],
-          "seconds": 0.025419400015380234
+          "seconds": 0.023771299980580807
         },
         {
           "route": "road-2",
@@ -10154,7 +10154,7 @@
             4400,
             4364
           ],
-          "seconds": 0.03191409999271855
+          "seconds": 0.032089399988763034
         },
         {
           "route": "road-2",
@@ -10166,7 +10166,7 @@
             4480,
             4364
           ],
-          "seconds": 0.02419899997767061
+          "seconds": 0.023814300016965717
         },
         {
           "route": "road-2",
@@ -10178,7 +10178,7 @@
             4560,
             4364
           ],
-          "seconds": 0.027078300016000867
+          "seconds": 0.02698319999035448
         },
         {
           "route": "road-2",
@@ -10190,7 +10190,7 @@
             4600,
             4342
           ],
-          "seconds": 0.025917999970261008
+          "seconds": 0.022067599988076836
         },
         {
           "route": "road-2",
@@ -10202,7 +10202,7 @@
             4640,
             4321
           ],
-          "seconds": 0.02531299996189773
+          "seconds": 0.023934700002428144
         },
         {
           "route": "road-2",
@@ -10214,7 +10214,7 @@
             4720,
             4321
           ],
-          "seconds": 0.026296199997887015
+          "seconds": 0.02931489999173209
         },
         {
           "route": "road-2",
@@ -10226,7 +10226,7 @@
             4800,
             4321
           ],
-          "seconds": 0.030525799957104027
+          "seconds": 0.026804900029674172
         },
         {
           "route": "road-2",
@@ -10238,7 +10238,7 @@
             4880,
             4321
           ],
-          "seconds": 0.028797199949622154
+          "seconds": 0.029681799991521984
         },
         {
           "route": "road-2",
@@ -10250,7 +10250,7 @@
             4960,
             4321
           ],
-          "seconds": 0.025531299994327128
+          "seconds": 0.025005600007716566
         },
         {
           "route": "road-2",
@@ -10262,7 +10262,7 @@
             5040,
             4321
           ],
-          "seconds": 0.02698580001015216
+          "seconds": 0.029986699984874576
         },
         {
           "route": "road-2",
@@ -10274,7 +10274,7 @@
             5120,
             4321
           ],
-          "seconds": 0.027268399950116873
+          "seconds": 0.03124100004788488
         },
         {
           "route": "road-2",
@@ -10286,7 +10286,7 @@
             5160,
             4299
           ],
-          "seconds": 0.019312899967189878
+          "seconds": 0.019307399983517826
         },
         {
           "route": "road-2",
@@ -10298,7 +10298,7 @@
             5200,
             4278
           ],
-          "seconds": 0.02310539997415617
+          "seconds": 0.023290099983569235
         },
         {
           "route": "road-2",
@@ -10310,7 +10310,7 @@
             5280,
             4278
           ],
-          "seconds": 0.03424419998191297
+          "seconds": 0.033033200015779585
         },
         {
           "route": "road-2",
@@ -10322,7 +10322,7 @@
             5360,
             4278
           ],
-          "seconds": 0.026612200017552823
+          "seconds": 0.029098999977577478
         },
         {
           "route": "road-2",
@@ -10334,7 +10334,7 @@
             5440,
             4278
           ],
-          "seconds": 0.031093300029169768
+          "seconds": 0.03151319996686652
         },
         {
           "route": "road-2",
@@ -10346,7 +10346,7 @@
             5520,
             4278
           ],
-          "seconds": 0.022156599967274815
+          "seconds": 0.02260329999262467
         },
         {
           "route": "road-2",
@@ -10358,7 +10358,7 @@
             5600,
             4278
           ],
-          "seconds": 0.03342809999594465
+          "seconds": 0.033687899995129555
         },
         {
           "route": "road-2",
@@ -10370,7 +10370,7 @@
             5680,
             4278
           ],
-          "seconds": 0.023280100023839623
+          "seconds": 0.02323749999050051
         },
         {
           "route": "road-2",
@@ -10382,7 +10382,7 @@
             5760,
             4278
           ],
-          "seconds": 0.021806699980515987
+          "seconds": 0.02164449996780604
         },
         {
           "route": "road-2",
@@ -10394,7 +10394,7 @@
             5840,
             4278
           ],
-          "seconds": 0.022422300011385232
+          "seconds": 0.023315700003877282
         },
         {
           "route": "road-2",
@@ -10406,7 +10406,7 @@
             5920,
             4278
           ],
-          "seconds": 0.1458511000382714
+          "seconds": 0.1463831000146456
         },
         {
           "route": "road-2",
@@ -10418,7 +10418,7 @@
             6000,
             4278
           ],
-          "seconds": 0.19817449996480718
+          "seconds": 0.19669320003595203
         },
         {
           "route": "road-3",
@@ -10430,7 +10430,7 @@
             5999,
             4278
           ],
-          "seconds": 0.008009999990463257
+          "seconds": 0.007752200006507337
         },
         {
           "route": "road-3",
@@ -10442,7 +10442,7 @@
             5919,
             4278
           ],
-          "seconds": 0.007229299983009696
+          "seconds": 0.007550800044555217
         },
         {
           "route": "road-3",
@@ -10454,7 +10454,7 @@
             5839,
             4278
           ],
-          "seconds": 0.0070510999648831785
+          "seconds": 0.007222599990200251
         },
         {
           "route": "road-3",
@@ -10466,7 +10466,7 @@
             5759,
             4278
           ],
-          "seconds": 0.024316700000781566
+          "seconds": 0.023568899952806532
         },
         {
           "route": "road-3",
@@ -10478,7 +10478,7 @@
             5679,
             4278
           ],
-          "seconds": 0.02548499999102205
+          "seconds": 0.027345600014086813
         },
         {
           "route": "road-3",
@@ -10490,7 +10490,7 @@
             5599,
             4278
           ],
-          "seconds": 0.021888200019020587
+          "seconds": 0.022811600007116795
         },
         {
           "route": "road-3",
@@ -10502,7 +10502,7 @@
             5519,
             4278
           ],
-          "seconds": 0.02638409996870905
+          "seconds": 0.02734129998134449
         },
         {
           "route": "road-3",
@@ -10514,7 +10514,7 @@
             5439,
             4278
           ],
-          "seconds": 0.029865199991036206
+          "seconds": 0.024939400027506053
         },
         {
           "route": "road-3",
@@ -10526,7 +10526,7 @@
             5359,
             4278
           ],
-          "seconds": 0.026626900013070554
+          "seconds": 0.028497899998910725
         },
         {
           "route": "road-3",
@@ -10538,7 +10538,7 @@
             5279,
             4278
           ],
-          "seconds": 0.02351719996659085
+          "seconds": 0.02817300002789125
         },
         {
           "route": "road-3",
@@ -10550,7 +10550,7 @@
             5199,
             4278
           ],
-          "seconds": 0.027191500004846603
+          "seconds": 0.025924500019755214
         },
         {
           "route": "road-3",
@@ -10562,7 +10562,7 @@
             5160,
             4300
           ],
-          "seconds": 0.01800869998987764
+          "seconds": 0.018314399989321828
         },
         {
           "route": "road-3",
@@ -10574,7 +10574,7 @@
             5119,
             4321
           ],
-          "seconds": 0.0240079999784939
+          "seconds": 0.025369900045916438
         },
         {
           "route": "road-3",
@@ -10586,7 +10586,7 @@
             5039,
             4321
           ],
-          "seconds": 0.0242570000118576
+          "seconds": 0.02423300000373274
         },
         {
           "route": "road-3",
@@ -10598,7 +10598,7 @@
             4959,
             4321
           ],
-          "seconds": 0.022633799992036074
+          "seconds": 0.02353519998723641
         },
         {
           "route": "road-3",
@@ -10610,7 +10610,7 @@
             4879,
             4321
           ],
-          "seconds": 0.03421960002742708
+          "seconds": 0.030614000046625733
         },
         {
           "route": "road-3",
@@ -10622,7 +10622,7 @@
             4799,
             4321
           ],
-          "seconds": 0.024220200022682548
+          "seconds": 0.026398399961180985
         },
         {
           "route": "road-3",
@@ -10634,7 +10634,7 @@
             4719,
             4321
           ],
-          "seconds": 0.022591799963265657
+          "seconds": 0.02493250003317371
         },
         {
           "route": "road-3",
@@ -10646,7 +10646,7 @@
             4639,
             4321
           ],
-          "seconds": 0.026382299955002964
+          "seconds": 0.02624529995955527
         },
         {
           "route": "road-3",
@@ -10658,7 +10658,7 @@
             4600,
             4343
           ],
-          "seconds": 0.020762500003911555
+          "seconds": 0.023669400019571185
         },
         {
           "route": "road-3",
@@ -10670,7 +10670,7 @@
             4559,
             4364
           ],
-          "seconds": 0.029424899956211448
+          "seconds": 0.028782300010789186
         },
         {
           "route": "road-3",
@@ -10682,7 +10682,7 @@
             4479,
             4364
           ],
-          "seconds": 0.025778799958061427
+          "seconds": 0.02620359999127686
         },
         {
           "route": "road-3",
@@ -10694,7 +10694,7 @@
             4399,
             4364
           ],
-          "seconds": 0.02334829996107146
+          "seconds": 0.023762600030750036
         },
         {
           "route": "road-3",
@@ -10706,7 +10706,7 @@
             4319,
             4364
           ],
-          "seconds": 0.03658969997195527
+          "seconds": 0.03672760003246367
         },
         {
           "route": "road-3",
@@ -10718,7 +10718,7 @@
             4239,
             4364
           ],
-          "seconds": 0.027573200000915676
+          "seconds": 0.025649200018960983
         },
         {
           "route": "road-3",
@@ -10730,7 +10730,7 @@
             4159,
             4364
           ],
-          "seconds": 0.027102100022602826
+          "seconds": 0.023784700024407357
         },
         {
           "route": "road-3",
@@ -10742,7 +10742,7 @@
             4079,
             4364
           ],
-          "seconds": 0.02572070003952831
+          "seconds": 0.026613000023644418
         },
         {
           "route": "road-3",
@@ -10754,7 +10754,7 @@
             3999,
             4364
           ],
-          "seconds": 0.027516699978150427
+          "seconds": 0.026958699978422374
         },
         {
           "route": "road-3",
@@ -10766,7 +10766,7 @@
             3919,
             4364
           ],
-          "seconds": 0.15083070000400767
+          "seconds": 0.14769640000304207
         },
         {
           "route": "road-3",
@@ -10778,7 +10778,7 @@
             3839,
             4364
           ],
-          "seconds": 0.13808410003548488
+          "seconds": 0.1381983999744989
         },
         {
           "route": "road-3",
@@ -10790,7 +10790,7 @@
             3759,
             4364
           ],
-          "seconds": 0.14170039998134598
+          "seconds": 0.1437766999588348
         },
         {
           "route": "road-3",
@@ -10802,7 +10802,7 @@
             3679,
             4364
           ],
-          "seconds": 0.14499649999197572
+          "seconds": 0.14591169997584075
         },
         {
           "route": "road-3",
@@ -10814,7 +10814,7 @@
             3599,
             4364
           ],
-          "seconds": 0.14367439999477938
+          "seconds": 0.14374169998336583
         },
         {
           "route": "road-3",
@@ -10826,7 +10826,7 @@
             3519,
             4364
           ],
-          "seconds": 0.157824800000526
+          "seconds": 0.13871309999376535
         },
         {
           "route": "road-3",
@@ -10838,7 +10838,7 @@
             3439,
             4364
           ],
-          "seconds": 0.14314420003211126
+          "seconds": 0.1414570999913849
         },
         {
           "route": "road-3",
@@ -10850,7 +10850,7 @@
             3359,
             4364
           ],
-          "seconds": 0.1468678999808617
+          "seconds": 0.1427212000126019
         },
         {
           "route": "road-3",
@@ -10862,7 +10862,7 @@
             3279,
             4364
           ],
-          "seconds": 0.1471896999864839
+          "seconds": 0.1497598999994807
         },
         {
           "route": "road-3",
@@ -10874,7 +10874,7 @@
             3199,
             4364
           ],
-          "seconds": 0.1440432000090368
+          "seconds": 0.1459671999909915
         },
         {
           "route": "road-3",
@@ -10886,7 +10886,7 @@
             3119,
             4364
           ],
-          "seconds": 0.14299989998107776
+          "seconds": 0.13839490001555532
         },
         {
           "route": "road-3",
@@ -10898,7 +10898,7 @@
             3039,
             4364
           ],
-          "seconds": 0.1425603000097908
+          "seconds": 0.14636149996658787
         },
         {
           "route": "road-3",
@@ -10910,7 +10910,7 @@
             2959,
             4364
           ],
-          "seconds": 0.14386089995969087
+          "seconds": 0.14486130001023412
         },
         {
           "route": "road-3",
@@ -10922,7 +10922,7 @@
             2879,
             4364
           ],
-          "seconds": 0.14678040001308545
+          "seconds": 0.14489720005076379
         },
         {
           "route": "road-3",
@@ -10934,7 +10934,7 @@
             2840,
             4342
           ],
-          "seconds": 0.14241269999183714
+          "seconds": 0.1442745000240393
         },
         {
           "route": "road-3",
@@ -10946,7 +10946,7 @@
             2799,
             4321
           ],
-          "seconds": 0.14811890001874417
+          "seconds": 0.14614000002620742
         },
         {
           "route": "road-3",
@@ -10958,7 +10958,7 @@
             2719,
             4321
           ],
-          "seconds": 0.1698603000259027
+          "seconds": 0.17172889999346808
         },
         {
           "route": "road-3",
@@ -10970,7 +10970,7 @@
             2680,
             4299
           ],
-          "seconds": 0.13949850003700703
+          "seconds": 0.14527509995969012
         },
         {
           "route": "road-3",
@@ -10982,7 +10982,7 @@
             2639,
             4278
           ],
-          "seconds": 0.15400989999761805
+          "seconds": 0.16705160000128672
         },
         {
           "route": "road-3",
@@ -10994,7 +10994,7 @@
             2559,
             4278
           ],
-          "seconds": 0.14420159999281168
+          "seconds": 0.1418526999768801
         },
         {
           "route": "road-3",
@@ -11006,7 +11006,7 @@
             2479,
             4278
           ],
-          "seconds": 0.1485407999716699
+          "seconds": 0.14811210002517328
         },
         {
           "route": "road-3",
@@ -11018,7 +11018,7 @@
             2399,
             4278
           ],
-          "seconds": 0.15614460001233965
+          "seconds": 0.15630349999992177
         },
         {
           "route": "road-3",
@@ -11030,7 +11030,7 @@
             2319,
             4278
           ],
-          "seconds": 0.1352840000181459
+          "seconds": 0.1338310000137426
         },
         {
           "route": "road-3",
@@ -11042,7 +11042,7 @@
             2239,
             4278
           ],
-          "seconds": 0.15226499998243526
+          "seconds": 0.1476315999752842
         },
         {
           "route": "road-3",
@@ -11054,7 +11054,7 @@
             2159,
             4278
           ],
-          "seconds": 0.1437457999563776
+          "seconds": 0.14368189999368042
         },
         {
           "route": "road-3",
@@ -11066,7 +11066,7 @@
             2079,
             4278
           ],
-          "seconds": 0.16311550000682473
+          "seconds": 0.16244769998593256
         },
         {
           "route": "road-3",
@@ -11078,7 +11078,7 @@
             1999,
             4278
           ],
-          "seconds": 0.14917910000076517
+          "seconds": 0.15331439999863505
         },
         {
           "route": "road-3",
@@ -11090,7 +11090,7 @@
             1960,
             4256
           ],
-          "seconds": 0.14226270001381636
+          "seconds": 0.14112990000285208
         },
         {
           "route": "road-3",
@@ -11102,7 +11102,7 @@
             1919,
             4235
           ],
-          "seconds": 0.1592660000314936
+          "seconds": 0.15983329998562112
         },
         {
           "route": "road-3",
@@ -11114,7 +11114,7 @@
             1839,
             4235
           ],
-          "seconds": 0.14816899999277666
+          "seconds": 0.14542559999972582
         },
         {
           "route": "road-3",
@@ -11126,7 +11126,7 @@
             1759,
             4235
           ],
-          "seconds": 0.1455532999825664
+          "seconds": 0.14460719999624416
         },
         {
           "route": "road-3",
@@ -11138,7 +11138,7 @@
             1679,
             4235
           ],
-          "seconds": 0.16711840004427359
+          "seconds": 0.16150739998556674
         },
         {
           "route": "road-3",
@@ -11150,7 +11150,7 @@
             1640,
             4213
           ],
-          "seconds": 0.14420229999814183
+          "seconds": 0.1450565999839455
         },
         {
           "route": "road-3",
@@ -11162,7 +11162,7 @@
             1599,
             4192
           ],
-          "seconds": 0.14619469997705892
+          "seconds": 0.14272479998180643
         },
         {
           "route": "road-3",
@@ -11174,7 +11174,7 @@
             1519,
             4192
           ],
-          "seconds": 0.1462770000216551
+          "seconds": 0.14490839996142313
         },
         {
           "route": "road-3",
@@ -11186,7 +11186,7 @@
             1480,
             4170
           ],
-          "seconds": 0.1518991999910213
+          "seconds": 0.15161539998371154
         },
         {
           "route": "road-3",
@@ -11198,7 +11198,7 @@
             1439,
             4149
           ],
-          "seconds": 0.15591090003727004
+          "seconds": 0.14745200000470504
         },
         {
           "route": "road-3",
@@ -11210,7 +11210,7 @@
             1400,
             4127
           ],
-          "seconds": 0.14159650000510737
+          "seconds": 0.14728249999461696
         },
         {
           "route": "road-3",
@@ -11222,7 +11222,7 @@
             1400,
             4084
           ],
-          "seconds": 0.16290950000984594
+          "seconds": 0.16537860000971705
         },
         {
           "route": "road-3",
@@ -11234,7 +11234,7 @@
             1359,
             4063
           ],
-          "seconds": 0.16183090000413358
+          "seconds": 0.15947360004065558
         },
         {
           "route": "road-3",
@@ -11246,7 +11246,7 @@
             1320,
             4041
           ],
-          "seconds": 0.15566029999172315
+          "seconds": 0.1556276999763213
         },
         {
           "route": "road-3",
@@ -11258,7 +11258,7 @@
             1320,
             3998
           ],
-          "seconds": 0.15147559996694326
+          "seconds": 0.15063089999603108
         },
         {
           "route": "road-3",
@@ -11270,7 +11270,7 @@
             1279,
             3977
           ],
-          "seconds": 0.1395885000238195
+          "seconds": 0.1407476000022143
         },
         {
           "route": "road-3",
@@ -11282,7 +11282,7 @@
             1240,
             3955
           ],
-          "seconds": 0.15072340000187978
+          "seconds": 0.15120480000041425
         },
         {
           "route": "road-3",
@@ -11294,7 +11294,7 @@
             1199,
             3934
           ],
-          "seconds": 0.1377144000143744
+          "seconds": 0.13358740002149716
         },
         {
           "route": "road-3",
@@ -11306,7 +11306,7 @@
             1119,
             3934
           ],
-          "seconds": 0.15257849998306483
+          "seconds": 0.14838530000997707
         },
         {
           "route": "road-3",
@@ -11318,7 +11318,7 @@
             1080,
             3912
           ],
-          "seconds": 0.15320449997670949
+          "seconds": 0.14397039997857064
         },
         {
           "route": "road-3",
@@ -11330,7 +11330,7 @@
             1080,
             3869
           ],
-          "seconds": 0.148493500018958
+          "seconds": 0.14479180000489578
         },
         {
           "route": "road-3",
@@ -11342,7 +11342,7 @@
             1039,
             3848
           ],
-          "seconds": 0.14769189996877685
+          "seconds": 0.1432687999913469
         },
         {
           "route": "road-3",
@@ -11354,7 +11354,7 @@
             959,
             3848
           ],
-          "seconds": 0.16158159996848553
+          "seconds": 0.16500710003310814
         },
         {
           "route": "road-3",
@@ -11366,7 +11366,7 @@
             879,
             3848
           ],
-          "seconds": 0.15695010003400967
+          "seconds": 0.15609770000446588
         },
         {
           "route": "road-3",
@@ -11378,7 +11378,7 @@
             840,
             3826
           ],
-          "seconds": 0.148108699999284
+          "seconds": 0.14622190000955015
         },
         {
           "route": "road-3",
@@ -11390,7 +11390,7 @@
             840,
             3783
           ],
-          "seconds": 0.15958199999295175
+          "seconds": 0.16038750001462176
         },
         {
           "route": "road-3",
@@ -11402,7 +11402,7 @@
             840,
             3740
           ],
-          "seconds": 0.16265820001717657
+          "seconds": 0.1648088000365533
         },
         {
           "route": "road-3",
@@ -11414,7 +11414,7 @@
             840,
             3697
           ],
-          "seconds": 0.17025199998170137
+          "seconds": 0.1685488000512123
         },
         {
           "route": "road-3",
@@ -11426,7 +11426,7 @@
             840,
             3654
           ],
-          "seconds": 0.15073080000001937
+          "seconds": 0.15372890001162887
         },
         {
           "route": "road-3",
@@ -11438,7 +11438,7 @@
             840,
             3611
           ],
-          "seconds": 0.14492880000034347
+          "seconds": 0.13941940001677722
         },
         {
           "route": "road-3",
@@ -11450,7 +11450,7 @@
             840,
             3568
           ],
-          "seconds": 0.14621849998366088
+          "seconds": 0.14725930005079135
         },
         {
           "route": "road-3",
@@ -11462,7 +11462,7 @@
             840,
             3525
           ],
-          "seconds": 0.16101839998736978
+          "seconds": 0.15957280003931373
         },
         {
           "route": "road-3",
@@ -11474,7 +11474,7 @@
             840,
             3482
           ],
-          "seconds": 0.1477836999692954
+          "seconds": 0.14435479999519885
         },
         {
           "route": "road-3",
@@ -11486,7 +11486,7 @@
             799,
             3461
           ],
-          "seconds": 0.1381435000221245
+          "seconds": 0.14166999998269603
         },
         {
           "route": "road-3",
@@ -11498,7 +11498,7 @@
             760,
             3439
           ],
-          "seconds": 0.14993489999324083
+          "seconds": 0.15048269997350872
         },
         {
           "route": "road-3",
@@ -11510,7 +11510,7 @@
             760,
             3396
           ],
-          "seconds": 0.15056889998959377
+          "seconds": 0.15077770000789315
         },
         {
           "route": "road-3",
@@ -11522,7 +11522,7 @@
             760,
             3353
           ],
-          "seconds": 0.14774450002005324
+          "seconds": 0.14659339998615906
         },
         {
           "route": "road-3",
@@ -11534,7 +11534,7 @@
             800,
             3332
           ],
-          "seconds": 0.15909149998333305
+          "seconds": 0.15420549997361377
         },
         {
           "route": "road-3",
@@ -11546,7 +11546,7 @@
             840,
             3310
           ],
-          "seconds": 0.13757479999912903
+          "seconds": 0.13831259997095913
         },
         {
           "route": "road-3",
@@ -11558,7 +11558,7 @@
             840,
             3267
           ],
-          "seconds": 0.14388669998152182
+          "seconds": 0.14603119995445013
         },
         {
           "route": "road-3",
@@ -11570,7 +11570,7 @@
             840,
             3224
           ],
-          "seconds": 0.16315960005158558
+          "seconds": 0.16840119997505099
         },
         {
           "route": "road-3",
@@ -11582,7 +11582,7 @@
             840,
             3181
           ],
-          "seconds": 0.16317390004405752
+          "seconds": 0.16667179996147752
         },
         {
           "route": "road-3",
@@ -11594,7 +11594,7 @@
             840,
             3138
           ],
-          "seconds": 0.1466562999994494
+          "seconds": 0.15126640000380576
         },
         {
           "route": "road-3",
@@ -11606,7 +11606,7 @@
             840,
             3095
           ],
-          "seconds": 0.17288450000341982
+          "seconds": 0.18168179999338463
         },
         {
           "route": "road-3",
@@ -11618,7 +11618,7 @@
             840,
             3052
           ],
-          "seconds": 0.1375459000119008
+          "seconds": 0.13838230003602803
         },
         {
           "route": "road-3",
@@ -11630,7 +11630,7 @@
             840,
             3009
           ],
-          "seconds": 0.14585899998201057
+          "seconds": 0.14982819999568164
         },
         {
           "route": "road-3",
@@ -11642,7 +11642,7 @@
             840,
             2966
           ],
-          "seconds": 0.1462953999871388
+          "seconds": 0.14693879999686033
         },
         {
           "route": "road-3",
@@ -11654,7 +11654,7 @@
             840,
             2923
           ],
-          "seconds": 0.15386489999946207
+          "seconds": 0.1502477999893017
         },
         {
           "route": "road-3",
@@ -11666,7 +11666,7 @@
             840,
             2880
           ],
-          "seconds": 0.15629270003410056
+          "seconds": 0.15482429997064173
         },
         {
           "route": "road-3",
@@ -11678,7 +11678,7 @@
             840,
             2837
           ],
-          "seconds": 0.14619100000709295
+          "seconds": 0.1475884999963455
         },
         {
           "route": "road-3",
@@ -11690,7 +11690,7 @@
             840,
             2794
           ],
-          "seconds": 0.14855729998089373
+          "seconds": 0.1468002999899909
         },
         {
           "route": "road-3",
@@ -11702,7 +11702,7 @@
             840,
             2751
           ],
-          "seconds": 0.14261979999719188
+          "seconds": 0.146550000004936
         },
         {
           "route": "road-3",
@@ -11714,7 +11714,7 @@
             840,
             2708
           ],
-          "seconds": 0.13717280002310872
+          "seconds": 0.14092680002795532
         },
         {
           "route": "road-3",
@@ -11726,7 +11726,7 @@
             840,
             2665
           ],
-          "seconds": 0.14233989996137097
+          "seconds": 0.14551509998273104
         },
         {
           "route": "road-3",
@@ -11738,7 +11738,7 @@
             799,
             2644
           ],
-          "seconds": 0.14169800002127886
+          "seconds": 0.14083809999283403
         },
         {
           "route": "road-3",
@@ -11750,7 +11750,7 @@
             760,
             2622
           ],
-          "seconds": 0.13801569998031482
+          "seconds": 0.13916489999974146
         },
         {
           "route": "road-3",
@@ -11762,7 +11762,7 @@
             760,
             2579
           ],
-          "seconds": 0.1491307999822311
+          "seconds": 0.15081299998564646
         },
         {
           "route": "road-3",
@@ -11774,7 +11774,7 @@
             760,
             2536
           ],
-          "seconds": 0.16049669997300953
+          "seconds": 0.1605748999863863
         },
         {
           "route": "road-3",
@@ -11786,7 +11786,7 @@
             760,
             2493
           ],
-          "seconds": 0.15475560002960265
+          "seconds": 0.15690350002842024
         },
         {
           "route": "road-3",
@@ -11798,7 +11798,7 @@
             760,
             2450
           ],
-          "seconds": 0.1428983000223525
+          "seconds": 0.15209550003055483
         },
         {
           "route": "road-3",
@@ -11810,7 +11810,7 @@
             760,
             2407
           ],
-          "seconds": 0.15605950000463054
+          "seconds": 0.1582588999881409
         },
         {
           "route": "road-3",
@@ -11822,7 +11822,7 @@
             760,
             2364
           ],
-          "seconds": 0.14714279997861013
+          "seconds": 0.1516076999832876
         },
         {
           "route": "road-3",
@@ -11834,7 +11834,7 @@
             760,
             2321
           ],
-          "seconds": 0.1479049000190571
+          "seconds": 0.15540899999905378
         },
         {
           "route": "road-3",
@@ -11846,7 +11846,7 @@
             760,
             2278
           ],
-          "seconds": 0.15831400000024587
+          "seconds": 0.16197329998249188
         },
         {
           "route": "road-3",
@@ -11858,7 +11858,7 @@
             719,
             2257
           ],
-          "seconds": 0.14308009995147586
+          "seconds": 0.1439824000117369
         },
         {
           "route": "road-3",
@@ -11870,7 +11870,7 @@
             680,
             2235
           ],
-          "seconds": 0.15434870001627132
+          "seconds": 0.14970310003263876
         },
         {
           "route": "road-3",
@@ -11882,7 +11882,7 @@
             680,
             2192
           ],
-          "seconds": 0.14780109998537228
+          "seconds": 0.14791519998107105
         },
         {
           "route": "road-3",
@@ -11894,7 +11894,7 @@
             680,
             2149
           ],
-          "seconds": 0.16042430000379682
+          "seconds": 0.1608604000066407
         },
         {
           "route": "road-3",
@@ -11906,7 +11906,7 @@
             680,
             2106
           ],
-          "seconds": 0.15067060000728816
+          "seconds": 0.15124909998849034
         },
         {
           "route": "road-3",
@@ -11918,7 +11918,7 @@
             680,
             2063
           ],
-          "seconds": 0.14542670000810176
+          "seconds": 0.1473346000420861
         },
         {
           "route": "road-3",
@@ -11930,7 +11930,7 @@
             680,
             2020
           ],
-          "seconds": 0.14348460000474006
+          "seconds": 0.14803580002626404
         },
         {
           "route": "road-3",
@@ -11942,7 +11942,7 @@
             680,
             1977
           ],
-          "seconds": 0.15721370000392199
+          "seconds": 0.1558023000252433
         },
         {
           "route": "road-3",
@@ -11954,7 +11954,7 @@
             680,
             1934
           ],
-          "seconds": 0.1469787000096403
+          "seconds": 0.14613299997290596
         },
         {
           "route": "road-3",
@@ -11966,7 +11966,7 @@
             680,
             1891
           ],
-          "seconds": 0.1396872999612242
+          "seconds": 0.13944250001804903
         },
         {
           "route": "road-3",
@@ -11978,7 +11978,7 @@
             680,
             1848
           ],
-          "seconds": 0.1470269999699667
+          "seconds": 0.14567080000415444
         },
         {
           "route": "road-3",
@@ -11990,7 +11990,7 @@
             680,
             1805
           ],
-          "seconds": 0.1560452000121586
+          "seconds": 0.1586200000019744
         },
         {
           "route": "road-3",
@@ -12002,7 +12002,7 @@
             680,
             1762
           ],
-          "seconds": 0.1456700999988243
+          "seconds": 0.14638700004434213
         },
         {
           "route": "road-3",
@@ -12014,7 +12014,7 @@
             680,
             1719
           ],
-          "seconds": 0.1527951000025496
+          "seconds": 0.15515299997059628
         },
         {
           "route": "road-3",
@@ -12026,7 +12026,7 @@
             680,
             1676
           ],
-          "seconds": 0.14293510001152754
+          "seconds": 0.1482801999663934
         },
         {
           "route": "road-3",
@@ -12038,7 +12038,7 @@
             720,
             1655
           ],
-          "seconds": 0.14557640004204586
+          "seconds": 0.14647430001059547
         },
         {
           "route": "road-3",
@@ -12050,7 +12050,7 @@
             760,
             1633
           ],
-          "seconds": 0.1638715000008233
+          "seconds": 0.1465085999807343
         },
         {
           "route": "road-3",
@@ -12062,7 +12062,7 @@
             800,
             1612
           ],
-          "seconds": 0.13749460002873093
+          "seconds": 0.13688900001579896
         },
         {
           "route": "road-3",
@@ -12074,7 +12074,7 @@
             840,
             1590
           ],
-          "seconds": 0.15214080002624542
+          "seconds": 0.15511210000840947
         },
         {
           "route": "road-3",
@@ -12086,7 +12086,7 @@
             880,
             1569
           ],
-          "seconds": 0.1324667000444606
+          "seconds": 0.13006719999248162
         },
         {
           "route": "road-3",
@@ -12098,7 +12098,7 @@
             920,
             1547
           ],
-          "seconds": 0.159748199977912
+          "seconds": 0.1597065000096336
         },
         {
           "route": "road-3",
@@ -12110,7 +12110,7 @@
             920,
             1504
           ],
-          "seconds": 0.1425607000128366
+          "seconds": 0.14463190000969917
         },
         {
           "route": "road-3",
@@ -12122,7 +12122,7 @@
             920,
             1461
           ],
-          "seconds": 0.15828830003738403
+          "seconds": 0.1602129999664612
         },
         {
           "route": "road-3",
@@ -12134,7 +12134,7 @@
             920,
             1418
           ],
-          "seconds": 0.1521915000048466
+          "seconds": 0.15537870000116527
         },
         {
           "route": "road-3",
@@ -12146,7 +12146,7 @@
             920,
             1375
           ],
-          "seconds": 0.16002549999393523
+          "seconds": 0.1571428999886848
         },
         {
           "route": "road-3",
@@ -12158,7 +12158,7 @@
             960,
             1354
           ],
-          "seconds": 0.13994239998282865
+          "seconds": 0.1399970999918878
         },
         {
           "route": "road-3",
@@ -12170,7 +12170,7 @@
             1040,
             1354
           ],
-          "seconds": 0.13527329999487847
+          "seconds": 0.13567119999788702
         },
         {
           "route": "road-3",
@@ -12182,7 +12182,7 @@
             1080,
             1332
           ],
-          "seconds": 0.14157640002667904
+          "seconds": 0.14002990000881255
         },
         {
           "route": "road-3",
@@ -12194,7 +12194,7 @@
             1120,
             1311
           ],
-          "seconds": 0.13522940000984818
+          "seconds": 0.13948990002973005
         },
         {
           "route": "road-3",
@@ -12206,7 +12206,7 @@
             1160,
             1289
           ],
-          "seconds": 0.15868439996847883
+          "seconds": 0.17024280002806336
         },
         {
           "route": "road-3",
@@ -12218,7 +12218,7 @@
             1200,
             1268
           ],
-          "seconds": 0.14890770002966747
+          "seconds": 0.15019209997262806
         },
         {
           "route": "road-3",
@@ -12230,7 +12230,7 @@
             1280,
             1268
           ],
-          "seconds": 0.142814599967096
+          "seconds": 0.14509790000738576
         },
         {
           "route": "road-3",
@@ -12242,7 +12242,7 @@
             1360,
             1268
           ],
-          "seconds": 0.1547730999882333
+          "seconds": 0.15052869997452945
         },
         {
           "route": "road-3",
@@ -12254,7 +12254,7 @@
             1400,
             1246
           ],
-          "seconds": 0.15751759998966008
+          "seconds": 0.15414070000406355
         },
         {
           "route": "road-3",
@@ -12266,7 +12266,7 @@
             1400,
             1203
           ],
-          "seconds": 0.15112380002392456
+          "seconds": 0.1496964000398293
         },
         {
           "route": "road-3",
@@ -12278,7 +12278,7 @@
             1440,
             1182
           ],
-          "seconds": 0.16389429999981076
+          "seconds": 0.1603944999515079
         },
         {
           "route": "road-3",
@@ -12290,7 +12290,7 @@
             1520,
             1182
           ],
-          "seconds": 0.14206260000355542
+          "seconds": 0.14330360002350062
         },
         {
           "route": "road-3",
@@ -12302,7 +12302,7 @@
             1600,
             1182
           ],
-          "seconds": 0.15583730000071228
+          "seconds": 0.15754759998526424
         },
         {
           "route": "road-3",
@@ -12314,7 +12314,7 @@
             1680,
             1182
           ],
-          "seconds": 0.17113209998933598
+          "seconds": 0.16699410002911463
         },
         {
           "route": "road-3",
@@ -12326,7 +12326,7 @@
             1760,
             1182
           ],
-          "seconds": 0.1429768999805674
+          "seconds": 0.14155649999156594
         },
         {
           "route": "road-3",
@@ -12338,7 +12338,7 @@
             1840,
             1182
           ],
-          "seconds": 0.14410179998958483
+          "seconds": 0.14584660000400618
         },
         {
           "route": "road-3",
@@ -12350,7 +12350,7 @@
             1920,
             1182
           ],
-          "seconds": 0.15418770001269877
+          "seconds": 0.154089399962686
         },
         {
           "route": "road-3",
@@ -12362,7 +12362,7 @@
             2000,
             1182
           ],
-          "seconds": 0.1446651999722235
+          "seconds": 0.1474343000445515
         },
         {
           "route": "road-3",
@@ -12374,7 +12374,7 @@
             2080,
             1182
           ],
-          "seconds": 0.14401649998035282
+          "seconds": 0.1464076999691315
         },
         {
           "route": "road-3",
@@ -12386,7 +12386,7 @@
             2160,
             1182
           ],
-          "seconds": 0.14193629997316748
+          "seconds": 0.1458122999756597
         },
         {
           "route": "road-3",
@@ -12398,7 +12398,7 @@
             2240,
             1182
           ],
-          "seconds": 0.06114549998892471
+          "seconds": 0.06173430004855618
         },
         {
           "route": "road-3",
@@ -12410,7 +12410,7 @@
             2320,
             1182
           ],
-          "seconds": 0.13492050004424527
+          "seconds": 0.13544280000496656
         },
         {
           "route": "road-3",
@@ -12422,7 +12422,7 @@
             2400,
             1182
           ],
-          "seconds": 0.14678999996976927
+          "seconds": 0.14510209998115897
         },
         {
           "route": "road-3",
@@ -12434,7 +12434,7 @@
             2480,
             1182
           ],
-          "seconds": 0.15776960004586726
+          "seconds": 0.15502780000679195
         },
         {
           "route": "road-3",
@@ -12446,7 +12446,7 @@
             2560,
             1182
           ],
-          "seconds": 0.14264759997604415
+          "seconds": 0.1414148000185378
         },
         {
           "route": "road-3",
@@ -12458,7 +12458,7 @@
             2640,
             1182
           ],
-          "seconds": 0.16238339996198192
+          "seconds": 0.15888039994752035
         },
         {
           "route": "road-3",
@@ -12470,7 +12470,7 @@
             2720,
             1182
           ],
-          "seconds": 0.14113639999413863
+          "seconds": 0.14362009998876601
         },
         {
           "route": "road-3",
@@ -12482,7 +12482,7 @@
             2800,
             1182
           ],
-          "seconds": 0.14687220001360402
+          "seconds": 0.14634599996497855
         },
         {
           "route": "road-3",
@@ -12494,7 +12494,7 @@
             2840,
             1160
           ],
-          "seconds": 0.1367900000186637
+          "seconds": 0.13553679996402934
         },
         {
           "route": "road-3",
@@ -12506,7 +12506,7 @@
             2880,
             1139
           ],
-          "seconds": 0.1462660999968648
+          "seconds": 0.1453425000072457
         },
         {
           "route": "road-3",
@@ -12518,7 +12518,7 @@
             2960,
             1139
           ],
-          "seconds": 0.13927819998934865
+          "seconds": 0.13394059997517616
         },
         {
           "route": "road-3",
@@ -12530,7 +12530,7 @@
             3040,
             1139
           ],
-          "seconds": 0.1450986999552697
+          "seconds": 0.14241189998574555
         },
         {
           "route": "road-3",
@@ -12542,7 +12542,7 @@
             3120,
             1139
           ],
-          "seconds": 0.2082823000382632
+          "seconds": 0.20633640000596642
         },
         {
           "route": "road-3",
@@ -12554,7 +12554,7 @@
             3119,
             1139
           ],
-          "seconds": 0.00884530000621453
+          "seconds": 0.0070103000034578145
         },
         {
           "route": "road-3",
@@ -12566,7 +12566,7 @@
             3039,
             1139
           ],
-          "seconds": 0.0075517999939620495
+          "seconds": 0.0073222999926656485
         },
         {
           "route": "road-3",
@@ -12578,7 +12578,7 @@
             2959,
             1139
           ],
-          "seconds": 0.009484800044447184
+          "seconds": 0.00786140002310276
         },
         {
           "route": "road-3",
@@ -12590,7 +12590,7 @@
             2879,
             1139
           ],
-          "seconds": 0.03136239998275414
+          "seconds": 0.03452109999489039
         },
         {
           "route": "road-3",
@@ -12602,7 +12602,7 @@
             2840,
             1161
           ],
-          "seconds": 0.022131100005935878
+          "seconds": 0.021395199990365654
         },
         {
           "route": "road-3",
@@ -12614,7 +12614,7 @@
             2799,
             1182
           ],
-          "seconds": 0.024443300033453852
+          "seconds": 0.024206200032494962
         },
         {
           "route": "road-3",
@@ -12626,7 +12626,7 @@
             2719,
             1182
           ],
-          "seconds": 0.026089899998623878
+          "seconds": 0.02633250004146248
         },
         {
           "route": "road-3",
@@ -12638,7 +12638,7 @@
             2639,
             1182
           ],
-          "seconds": 0.03262930002529174
+          "seconds": 0.025874999992083758
         },
         {
           "route": "road-3",
@@ -12650,7 +12650,7 @@
             2559,
             1182
           ],
-          "seconds": 0.0347810999955982
+          "seconds": 0.032229899952653795
         },
         {
           "route": "road-3",
@@ -12662,7 +12662,7 @@
             2479,
             1182
           ],
-          "seconds": 0.02589260000968352
+          "seconds": 0.025023799971677363
         },
         {
           "route": "road-3",
@@ -12674,7 +12674,7 @@
             2399,
             1182
           ],
-          "seconds": 0.02497540001058951
+          "seconds": 0.025431999994907528
         },
         {
           "route": "road-3",
@@ -12686,7 +12686,7 @@
             2319,
             1182
           ],
-          "seconds": 0.026041699980851263
+          "seconds": 0.02626159996725619
         },
         {
           "route": "road-3",
@@ -12698,7 +12698,7 @@
             2239,
             1182
           ],
-          "seconds": 0.025792400003410876
+          "seconds": 0.026152600010391325
         },
         {
           "route": "road-3",
@@ -12710,7 +12710,7 @@
             2159,
             1182
           ],
-          "seconds": 0.024832299968693405
+          "seconds": 0.025522900046780705
         },
         {
           "route": "road-3",
@@ -12722,7 +12722,7 @@
             2079,
             1182
           ],
-          "seconds": 0.026604600017890334
+          "seconds": 0.025019099994096905
         },
         {
           "route": "road-3",
@@ -12734,7 +12734,7 @@
             1999,
             1182
           ],
-          "seconds": 0.02804070001002401
+          "seconds": 0.026082800002768636
         },
         {
           "route": "road-3",
@@ -12746,7 +12746,7 @@
             1919,
             1182
           ],
-          "seconds": 0.02582149999216199
+          "seconds": 0.02542170003289357
         },
         {
           "route": "road-3",
@@ -12758,7 +12758,7 @@
             1839,
             1182
           ],
-          "seconds": 0.024254700052551925
+          "seconds": 0.02473539998754859
         },
         {
           "route": "road-3",
@@ -12770,7 +12770,7 @@
             1759,
             1182
           ],
-          "seconds": 0.028047700005117804
+          "seconds": 0.02756850002333522
         },
         {
           "route": "road-3",
@@ -12782,7 +12782,7 @@
             1679,
             1182
           ],
-          "seconds": 0.026645499980077147
+          "seconds": 0.029380599968135357
         },
         {
           "route": "road-3",
@@ -12794,7 +12794,7 @@
             1599,
             1182
           ],
-          "seconds": 0.02700090000871569
+          "seconds": 0.02663769997889176
         },
         {
           "route": "road-3",
@@ -12806,7 +12806,7 @@
             1519,
             1182
           ],
-          "seconds": 0.037557900010142475
+          "seconds": 0.025943199987523258
         },
         {
           "route": "road-3",
@@ -12818,7 +12818,7 @@
             1439,
             1182
           ],
-          "seconds": 0.028910199995152652
+          "seconds": 0.027913699974305928
         },
         {
           "route": "road-3",
@@ -12830,7 +12830,7 @@
             1400,
             1204
           ],
-          "seconds": 0.029572000028565526
+          "seconds": 0.024020499957259744
         },
         {
           "route": "road-3",
@@ -12842,7 +12842,7 @@
             1400,
             1247
           ],
-          "seconds": 0.02371460001450032
+          "seconds": 0.02287729998352006
         },
         {
           "route": "road-3",
@@ -12854,7 +12854,7 @@
             1359,
             1268
           ],
-          "seconds": 0.027680400002282113
+          "seconds": 0.027349499985575676
         },
         {
           "route": "road-3",
@@ -12866,7 +12866,7 @@
             1279,
             1268
           ],
-          "seconds": 0.027296500047668815
+          "seconds": 0.025080899999011308
         },
         {
           "route": "road-3",
@@ -12878,7 +12878,7 @@
             1199,
             1268
           ],
-          "seconds": 0.026336200011428446
+          "seconds": 0.025877000007312745
         },
         {
           "route": "road-3",
@@ -12890,7 +12890,7 @@
             1160,
             1290
           ],
-          "seconds": 0.018860100011806935
+          "seconds": 0.017739000031724572
         },
         {
           "route": "road-3",
@@ -12902,7 +12902,7 @@
             1119,
             1311
           ],
-          "seconds": 0.054969699995126575
+          "seconds": 0.05423110001720488
         },
         {
           "route": "road-3",
@@ -12914,7 +12914,7 @@
             1080,
             1333
           ],
-          "seconds": 0.01972780004143715
+          "seconds": 0.02190409996546805
         },
         {
           "route": "road-3",
@@ -12926,7 +12926,7 @@
             1039,
             1354
           ],
-          "seconds": 0.028326399973593652
+          "seconds": 0.026543800020590425
         },
         {
           "route": "road-3",
@@ -12938,7 +12938,7 @@
             959,
             1354
           ],
-          "seconds": 0.027213800000026822
+          "seconds": 0.025832199957221746
         },
         {
           "route": "road-3",
@@ -12950,7 +12950,7 @@
             920,
             1376
           ],
-          "seconds": 0.027433699986431748
+          "seconds": 0.0290720000048168
         },
         {
           "route": "road-3",
@@ -12962,7 +12962,7 @@
             920,
             1419
           ],
-          "seconds": 0.02773259999230504
+          "seconds": 0.02317979995859787
         },
         {
           "route": "road-3",
@@ -12974,7 +12974,7 @@
             920,
             1462
           ],
-          "seconds": 0.03151389997219667
+          "seconds": 0.03055219998350367
         },
         {
           "route": "road-3",
@@ -12986,7 +12986,7 @@
             920,
             1505
           ],
-          "seconds": 0.04596800002036616
+          "seconds": 0.038048600021284074
         },
         {
           "route": "road-3",
@@ -12998,7 +12998,7 @@
             920,
             1548
           ],
-          "seconds": 0.023974700015969574
+          "seconds": 0.02847779996227473
         },
         {
           "route": "road-3",
@@ -13010,7 +13010,7 @@
             879,
             1569
           ],
-          "seconds": 0.018020100018475205
+          "seconds": 0.021843599970452487
         },
         {
           "route": "road-3",
@@ -13022,7 +13022,7 @@
             840,
             1591
           ],
-          "seconds": 0.026167200005147606
+          "seconds": 0.02716089994646609
         },
         {
           "route": "road-3",
@@ -13034,7 +13034,7 @@
             799,
             1612
           ],
-          "seconds": 0.018784899963065982
+          "seconds": 0.017702599987387657
         },
         {
           "route": "road-3",
@@ -13046,7 +13046,7 @@
             760,
             1634
           ],
-          "seconds": 0.025595400016754866
+          "seconds": 0.025578100001439452
         },
         {
           "route": "road-3",
@@ -13058,7 +13058,7 @@
             719,
             1655
           ],
-          "seconds": 0.02028470003278926
+          "seconds": 0.02196199999889359
         },
         {
           "route": "road-3",
@@ -13070,7 +13070,7 @@
             680,
             1677
           ],
-          "seconds": 0.02598570002010092
+          "seconds": 0.027502399985678494
         },
         {
           "route": "road-3",
@@ -13082,7 +13082,7 @@
             680,
             1720
           ],
-          "seconds": 0.034484900010284036
+          "seconds": 0.03062169998884201
         },
         {
           "route": "road-3",
@@ -13094,7 +13094,7 @@
             680,
             1763
           ],
-          "seconds": 0.037805400032084435
+          "seconds": 0.036984700011089444
         },
         {
           "route": "road-3",
@@ -13106,7 +13106,7 @@
             680,
             1806
           ],
-          "seconds": 0.031089700001757592
+          "seconds": 0.030327899963594973
         },
         {
           "route": "road-3",
@@ -13118,7 +13118,7 @@
             680,
             1849
           ],
-          "seconds": 0.02468929998576641
+          "seconds": 0.027949500014074147
         },
         {
           "route": "road-3",
@@ -13130,7 +13130,7 @@
             680,
             1892
           ],
-          "seconds": 0.026940399955492467
+          "seconds": 0.025923000008333474
         },
         {
           "route": "road-3",
@@ -13142,7 +13142,7 @@
             680,
             1935
           ],
-          "seconds": 0.026432599988766015
+          "seconds": 0.025905400048941374
         },
         {
           "route": "road-3",
@@ -13154,7 +13154,7 @@
             680,
             1978
           ],
-          "seconds": 0.024949100043158978
+          "seconds": 0.026059199997689575
         },
         {
           "route": "road-3",
@@ -13166,7 +13166,7 @@
             680,
             2021
           ],
-          "seconds": 0.026084100012667477
+          "seconds": 0.02617249998729676
         },
         {
           "route": "road-3",
@@ -13178,7 +13178,7 @@
             680,
             2064
           ],
-          "seconds": 0.025758799980394542
+          "seconds": 0.025971399969421327
         },
         {
           "route": "road-3",
@@ -13190,7 +13190,7 @@
             680,
             2107
           ],
-          "seconds": 0.02732390002347529
+          "seconds": 0.03216420003445819
         },
         {
           "route": "road-3",
@@ -13202,7 +13202,7 @@
             680,
             2150
           ],
-          "seconds": 0.029375699989032
+          "seconds": 0.03091680002398789
         },
         {
           "route": "road-3",
@@ -13214,7 +13214,7 @@
             680,
             2193
           ],
-          "seconds": 0.026417899993248284
+          "seconds": 0.026192400022409856
         },
         {
           "route": "road-3",
@@ -13226,7 +13226,7 @@
             680,
             2236
           ],
-          "seconds": 0.029033900005742908
+          "seconds": 0.02840690000448376
         },
         {
           "route": "road-3",
@@ -13238,7 +13238,7 @@
             720,
             2257
           ],
-          "seconds": 0.028046299994457513
+          "seconds": 0.030518400017172098
         },
         {
           "route": "road-3",
@@ -13250,7 +13250,7 @@
             760,
             2279
           ],
-          "seconds": 0.02783330000238493
+          "seconds": 0.027860800037160516
         },
         {
           "route": "road-3",
@@ -13262,7 +13262,7 @@
             760,
             2322
           ],
-          "seconds": 0.028115799999795854
+          "seconds": 0.027645600028336048
         },
         {
           "route": "road-3",
@@ -13274,7 +13274,7 @@
             760,
             2365
           ],
-          "seconds": 0.02698000002419576
+          "seconds": 0.028945499972905964
         },
         {
           "route": "road-3",
@@ -13286,7 +13286,7 @@
             760,
             2408
           ],
-          "seconds": 0.03501029999461025
+          "seconds": 0.035356400010641664
         },
         {
           "route": "road-3",
@@ -13298,7 +13298,7 @@
             760,
             2451
           ],
-          "seconds": 0.02499599999282509
+          "seconds": 0.025766899983864278
         },
         {
           "route": "road-3",
@@ -13310,7 +13310,7 @@
             760,
             2494
           ],
-          "seconds": 0.025110799993854016
+          "seconds": 0.024576099996920675
         },
         {
           "route": "road-3",
@@ -13322,7 +13322,7 @@
             760,
             2537
           ],
-          "seconds": 0.026039899967145175
+          "seconds": 0.027013299986720085
         },
         {
           "route": "road-3",
@@ -13334,7 +13334,7 @@
             760,
             2580
           ],
-          "seconds": 0.025429400033317506
+          "seconds": 0.026054800022393465
         },
         {
           "route": "road-3",
@@ -13346,7 +13346,7 @@
             760,
             2623
           ],
-          "seconds": 0.023192099994048476
+          "seconds": 0.02321809995919466
         },
         {
           "route": "road-3",
@@ -13358,7 +13358,7 @@
             800,
             2644
           ],
-          "seconds": 0.02589109999826178
+          "seconds": 0.026077500020619482
         },
         {
           "route": "road-3",
@@ -13370,7 +13370,7 @@
             840,
             2666
           ],
-          "seconds": 0.024759699997957796
+          "seconds": 0.02329670003382489
         },
         {
           "route": "road-3",
@@ -13382,7 +13382,7 @@
             840,
             2709
           ],
-          "seconds": 0.027610399993136525
+          "seconds": 0.025825000018812716
         },
         {
           "route": "road-3",
@@ -13394,7 +13394,7 @@
             840,
             2752
           ],
-          "seconds": 0.02590129995951429
+          "seconds": 0.026233899989165366
         },
         {
           "route": "road-3",
@@ -13406,7 +13406,7 @@
             840,
             2795
           ],
-          "seconds": 0.03283099998952821
+          "seconds": 0.03244620002806187
         },
         {
           "route": "road-3",
@@ -13418,7 +13418,7 @@
             840,
             2838
           ],
-          "seconds": 0.026974799984600395
+          "seconds": 0.026358300005085766
         },
         {
           "route": "road-3",
@@ -13430,7 +13430,7 @@
             840,
             2881
           ],
-          "seconds": 0.024682499992195517
+          "seconds": 0.024901700031477958
         },
         {
           "route": "road-3",
@@ -13442,7 +13442,7 @@
             840,
             2924
           ],
-          "seconds": 0.02500380005221814
+          "seconds": 0.025275600026361644
         },
         {
           "route": "road-3",
@@ -13454,7 +13454,7 @@
             840,
             2967
           ],
-          "seconds": 0.029344099981244653
+          "seconds": 0.02661840000655502
         },
         {
           "route": "road-3",
@@ -13466,7 +13466,7 @@
             840,
             3010
           ],
-          "seconds": 0.024489200033713132
+          "seconds": 0.023998399963602424
         },
         {
           "route": "road-3",
@@ -13478,7 +13478,7 @@
             840,
             3053
           ],
-          "seconds": 0.02850919996853918
+          "seconds": 0.028852100018411875
         },
         {
           "route": "road-3",
@@ -13490,7 +13490,7 @@
             840,
             3096
           ],
-          "seconds": 0.02814609999768436
+          "seconds": 0.0278554999968037
         },
         {
           "route": "road-3",
@@ -13502,7 +13502,7 @@
             840,
             3139
           ],
-          "seconds": 0.029558399983216077
+          "seconds": 0.028370599960908294
         },
         {
           "route": "road-3",
@@ -13514,7 +13514,7 @@
             840,
             3182
           ],
-          "seconds": 0.028075299982447177
+          "seconds": 0.02560359996277839
         },
         {
           "route": "road-3",
@@ -13526,7 +13526,7 @@
             840,
             3225
           ],
-          "seconds": 0.028806000016629696
+          "seconds": 0.027883600036147982
         },
         {
           "route": "road-3",
@@ -13538,7 +13538,7 @@
             840,
             3268
           ],
-          "seconds": 0.027918299951124936
+          "seconds": 0.026285399973858148
         },
         {
           "route": "road-3",
@@ -13550,7 +13550,7 @@
             840,
             3311
           ],
-          "seconds": 0.02739790000487119
+          "seconds": 0.027471099980175495
         },
         {
           "route": "road-3",
@@ -13562,7 +13562,7 @@
             799,
             3332
           ],
-          "seconds": 0.020172599994111806
+          "seconds": 0.02150549995712936
         },
         {
           "route": "road-3",
@@ -13574,7 +13574,7 @@
             760,
             3354
           ],
-          "seconds": 0.02663159999065101
+          "seconds": 0.025898099993355572
         },
         {
           "route": "road-3",
@@ -13586,7 +13586,7 @@
             760,
             3397
           ],
-          "seconds": 0.026588600012473762
+          "seconds": 0.026560199970845133
         },
         {
           "route": "road-3",
@@ -13598,7 +13598,7 @@
             760,
             3440
           ],
-          "seconds": 0.02581379999173805
+          "seconds": 0.026809999952092767
         },
         {
           "route": "road-3",
@@ -13610,7 +13610,7 @@
             800,
             3461
           ],
-          "seconds": 0.029137000034097582
+          "seconds": 0.028629800013732165
         },
         {
           "route": "road-3",
@@ -13622,7 +13622,7 @@
             840,
             3483
           ],
-          "seconds": 0.0380954000283964
+          "seconds": 0.03726050001569092
         },
         {
           "route": "road-3",
@@ -13634,7 +13634,7 @@
             840,
             3526
           ],
-          "seconds": 0.026202999986708164
+          "seconds": 0.0257205999805592
         },
         {
           "route": "road-3",
@@ -13646,7 +13646,7 @@
             840,
             3569
           ],
-          "seconds": 0.02729290002025664
+          "seconds": 0.026771600008942187
         },
         {
           "route": "road-3",
@@ -13658,7 +13658,7 @@
             840,
             3612
           ],
-          "seconds": 0.02992669999366626
+          "seconds": 0.03092270001070574
         },
         {
           "route": "road-3",
@@ -13670,7 +13670,7 @@
             840,
             3655
           ],
-          "seconds": 0.024258799967356026
+          "seconds": 0.024542400031350553
         },
         {
           "route": "road-3",
@@ -13682,7 +13682,7 @@
             840,
             3698
           ],
-          "seconds": 0.040232200000900775
+          "seconds": 0.03996630001347512
         },
         {
           "route": "road-3",
@@ -13694,7 +13694,7 @@
             840,
             3741
           ],
-          "seconds": 0.023003599955700338
+          "seconds": 0.023895799997262657
         },
         {
           "route": "road-3",
@@ -13706,7 +13706,7 @@
             840,
             3784
           ],
-          "seconds": 0.023820400005206466
+          "seconds": 0.024363100004848093
         },
         {
           "route": "road-3",
@@ -13718,7 +13718,7 @@
             840,
             3827
           ],
-          "seconds": 0.02452639996772632
+          "seconds": 0.02339879999635741
         },
         {
           "route": "road-3",
@@ -13730,7 +13730,7 @@
             880,
             3848
           ],
-          "seconds": 0.01851420005550608
+          "seconds": 0.017419899988453835
         },
         {
           "route": "road-3",
@@ -13742,7 +13742,7 @@
             960,
             3848
           ],
-          "seconds": 0.033747099980246276
+          "seconds": 0.03669919999083504
         },
         {
           "route": "road-3",
@@ -13754,7 +13754,7 @@
             1040,
             3848
           ],
-          "seconds": 0.01837629999499768
+          "seconds": 0.020978600019589067
         },
         {
           "route": "road-3",
@@ -13766,7 +13766,7 @@
             1080,
             3870
           ],
-          "seconds": 0.026918800023850054
+          "seconds": 0.025962700019590557
         },
         {
           "route": "road-3",
@@ -13778,7 +13778,7 @@
             1080,
             3913
           ],
-          "seconds": 0.02583460003370419
+          "seconds": 0.025336099963169545
         },
         {
           "route": "road-3",
@@ -13790,7 +13790,7 @@
             1120,
             3934
           ],
-          "seconds": 0.029955799982417375
+          "seconds": 0.02882169996155426
         },
         {
           "route": "road-3",
@@ -13802,7 +13802,7 @@
             1200,
             3934
           ],
-          "seconds": 0.02514000004157424
+          "seconds": 0.025899100000970066
         },
         {
           "route": "road-3",
@@ -13814,7 +13814,7 @@
             1240,
             3956
           ],
-          "seconds": 0.020489500020630658
+          "seconds": 0.019590599986258894
         },
         {
           "route": "road-3",
@@ -13826,7 +13826,7 @@
             1280,
             3977
           ],
-          "seconds": 0.028034199960529804
+          "seconds": 0.025950900046154857
         },
         {
           "route": "road-3",
@@ -13838,7 +13838,7 @@
             1320,
             3999
           ],
-          "seconds": 0.02738149999640882
+          "seconds": 0.02726619999157265
         },
         {
           "route": "road-3",
@@ -13850,7 +13850,7 @@
             1320,
             4042
           ],
-          "seconds": 0.034449700033292174
+          "seconds": 0.028373600041959435
         },
         {
           "route": "road-3",
@@ -13862,7 +13862,7 @@
             1360,
             4063
           ],
-          "seconds": 0.03375280002364889
+          "seconds": 0.03603740001562983
         },
         {
           "route": "road-3",
@@ -13874,7 +13874,7 @@
             1400,
             4085
           ],
-          "seconds": 0.033192999952007085
+          "seconds": 0.033353300008457154
         },
         {
           "route": "road-3",
@@ -13886,7 +13886,7 @@
             1400,
             4128
           ],
-          "seconds": 0.037288299994543195
+          "seconds": 0.03364589996635914
         },
         {
           "route": "road-3",
@@ -13898,7 +13898,7 @@
             1440,
             4149
           ],
-          "seconds": 0.023137299984227866
+          "seconds": 0.019143299956340343
         },
         {
           "route": "road-3",
@@ -13910,7 +13910,7 @@
             1480,
             4171
           ],
-          "seconds": 0.02507599996170029
+          "seconds": 0.025228300015442073
         },
         {
           "route": "road-3",
@@ -13922,7 +13922,7 @@
             1520,
             4192
           ],
-          "seconds": 0.02014520001830533
+          "seconds": 0.020745099987834692
         },
         {
           "route": "road-3",
@@ -13934,7 +13934,7 @@
             1600,
             4192
           ],
-          "seconds": 0.02608650003094226
+          "seconds": 0.025821899995207787
         },
         {
           "route": "road-3",
@@ -13946,7 +13946,7 @@
             1640,
             4214
           ],
-          "seconds": 0.029921700013801455
+          "seconds": 0.02632229996379465
         },
         {
           "route": "road-3",
@@ -13958,7 +13958,7 @@
             1680,
             4235
           ],
-          "seconds": 0.030130499973893166
+          "seconds": 0.02853110001888126
         },
         {
           "route": "road-3",
@@ -13970,7 +13970,7 @@
             1760,
             4235
           ],
-          "seconds": 0.04084339999826625
+          "seconds": 0.04331709997495636
         },
         {
           "route": "road-3",
@@ -13982,7 +13982,7 @@
             1840,
             4235
           ],
-          "seconds": 0.024897900002542883
+          "seconds": 0.02630430000135675
         },
         {
           "route": "road-3",
@@ -13994,7 +13994,7 @@
             1920,
             4235
           ],
-          "seconds": 0.03898650000337511
+          "seconds": 0.03923160000704229
         },
         {
           "route": "road-3",
@@ -14006,7 +14006,7 @@
             1960,
             4257
           ],
-          "seconds": 0.02088330005062744
+          "seconds": 0.021449899999424815
         },
         {
           "route": "road-3",
@@ -14018,7 +14018,7 @@
             2000,
             4278
           ],
-          "seconds": 0.023565699986647815
+          "seconds": 0.023351099982392043
         },
         {
           "route": "road-3",
@@ -14030,7 +14030,7 @@
             2080,
             4278
           ],
-          "seconds": 0.026042899989988655
+          "seconds": 0.029190300032496452
         },
         {
           "route": "road-3",
@@ -14042,7 +14042,7 @@
             2160,
             4278
           ],
-          "seconds": 0.03204910003114492
+          "seconds": 0.032835999969393015
         },
         {
           "route": "road-3",
@@ -14054,7 +14054,7 @@
             2240,
             4278
           ],
-          "seconds": 0.029582200048025697
+          "seconds": 0.030331200046930462
         },
         {
           "route": "road-3",
@@ -14066,7 +14066,7 @@
             2320,
             4278
           ],
-          "seconds": 0.025657900026999414
+          "seconds": 0.024493100005201995
         },
         {
           "route": "road-3",
@@ -14078,7 +14078,7 @@
             2400,
             4278
           ],
-          "seconds": 0.030806199996732175
+          "seconds": 0.02872820000629872
         },
         {
           "route": "road-3",
@@ -14090,7 +14090,7 @@
             2480,
             4278
           ],
-          "seconds": 0.02673719997983426
+          "seconds": 0.026412900013383478
         },
         {
           "route": "road-3",
@@ -14102,7 +14102,7 @@
             2560,
             4278
           ],
-          "seconds": 0.02794159995391965
+          "seconds": 0.024385299999266863
         },
         {
           "route": "road-3",
@@ -14114,7 +14114,7 @@
             2640,
             4278
           ],
-          "seconds": 0.03350380004849285
+          "seconds": 0.03343280003173277
         },
         {
           "route": "road-3",
@@ -14126,7 +14126,7 @@
             2680,
             4300
           ],
-          "seconds": 0.019040499988477677
+          "seconds": 0.018699000007472932
         },
         {
           "route": "road-3",
@@ -14138,7 +14138,7 @@
             2720,
             4321
           ],
-          "seconds": 0.02659339999081567
+          "seconds": 0.03172819997416809
         },
         {
           "route": "road-3",
@@ -14150,7 +14150,7 @@
             2800,
             4321
           ],
-          "seconds": 0.028012200025841594
+          "seconds": 0.03276249999180436
         },
         {
           "route": "road-3",
@@ -14162,7 +14162,7 @@
             2840,
             4343
           ],
-          "seconds": 0.02083290001610294
+          "seconds": 0.021496899949852377
         },
         {
           "route": "road-3",
@@ -14174,7 +14174,7 @@
             2880,
             4364
           ],
-          "seconds": 0.032566399953793734
+          "seconds": 0.03516869997838512
         },
         {
           "route": "road-3",
@@ -14186,7 +14186,7 @@
             2960,
             4364
           ],
-          "seconds": 0.03126090002479032
+          "seconds": 0.0334828999475576
         },
         {
           "route": "road-3",
@@ -14198,7 +14198,7 @@
             3040,
             4364
           ],
-          "seconds": 0.02432780002709478
+          "seconds": 0.026145199954044074
         },
         {
           "route": "road-3",
@@ -14210,7 +14210,7 @@
             3120,
             4364
           ],
-          "seconds": 0.03110350004862994
+          "seconds": 0.0347557999775745
         },
         {
           "route": "road-3",
@@ -14222,7 +14222,7 @@
             3200,
             4364
           ],
-          "seconds": 0.02320049999980256
+          "seconds": 0.02293489995645359
         },
         {
           "route": "road-3",
@@ -14234,7 +14234,7 @@
             3280,
             4364
           ],
-          "seconds": 0.02247159997932613
+          "seconds": 0.02323160000378266
         },
         {
           "route": "road-3",
@@ -14246,7 +14246,7 @@
             3360,
             4364
           ],
-          "seconds": 0.024048899998888373
+          "seconds": 0.023870699980761856
         },
         {
           "route": "road-3",
@@ -14258,7 +14258,7 @@
             3440,
             4364
           ],
-          "seconds": 0.0291404000017792
+          "seconds": 0.02786909998394549
         },
         {
           "route": "road-3",
@@ -14270,7 +14270,7 @@
             3520,
             4364
           ],
-          "seconds": 0.024777299957349896
+          "seconds": 0.025663499953225255
         },
         {
           "route": "road-3",
@@ -14282,7 +14282,7 @@
             3600,
             4364
           ],
-          "seconds": 0.030117099988274276
+          "seconds": 0.03358749998733401
         },
         {
           "route": "road-3",
@@ -14294,7 +14294,7 @@
             3680,
             4364
           ],
-          "seconds": 0.02585819998057559
+          "seconds": 0.024540799960959703
         },
         {
           "route": "road-3",
@@ -14306,7 +14306,7 @@
             3760,
             4364
           ],
-          "seconds": 0.027609399985522032
+          "seconds": 0.028619699995033443
         },
         {
           "route": "road-3",
@@ -14318,7 +14318,7 @@
             3840,
             4364
           ],
-          "seconds": 0.02544060000218451
+          "seconds": 0.024601400014944375
         },
         {
           "route": "road-3",
@@ -14330,7 +14330,7 @@
             3920,
             4364
           ],
-          "seconds": 0.0329372999840416
+          "seconds": 0.026666899968404323
         },
         {
           "route": "road-3",
@@ -14342,7 +14342,7 @@
             4000,
             4364
           ],
-          "seconds": 0.028905000013764948
+          "seconds": 0.025270799989812076
         },
         {
           "route": "road-3",
@@ -14354,7 +14354,7 @@
             4080,
             4364
           ],
-          "seconds": 0.031228900013957173
+          "seconds": 0.024882400000933558
         },
         {
           "route": "road-3",
@@ -14366,7 +14366,7 @@
             4160,
             4364
           ],
-          "seconds": 0.04238599998643622
+          "seconds": 0.0265592000214383
         },
         {
           "route": "road-3",
@@ -14378,7 +14378,7 @@
             4240,
             4364
           ],
-          "seconds": 0.038732699991669506
+          "seconds": 0.03423290001228452
         },
         {
           "route": "road-3",
@@ -14390,7 +14390,7 @@
             4320,
             4364
           ],
-          "seconds": 0.028077399998437613
+          "seconds": 0.025420199963264167
         },
         {
           "route": "road-3",
@@ -14402,7 +14402,7 @@
             4400,
             4364
           ],
-          "seconds": 0.03639259998453781
+          "seconds": 0.032958799973130226
         },
         {
           "route": "road-3",
@@ -14414,7 +14414,7 @@
             4480,
             4364
           ],
-          "seconds": 0.030570700007956475
+          "seconds": 0.024527000030502677
         },
         {
           "route": "road-3",
@@ -14426,7 +14426,7 @@
             4560,
             4364
           ],
-          "seconds": 0.030471600010059774
+          "seconds": 0.027442699996754527
         },
         {
           "route": "road-3",
@@ -14438,7 +14438,7 @@
             4600,
             4342
           ],
-          "seconds": 0.02438270003767684
+          "seconds": 0.020051300001796335
         },
         {
           "route": "road-3",
@@ -14450,7 +14450,7 @@
             4640,
             4321
           ],
-          "seconds": 0.02648339996812865
+          "seconds": 0.02370580000570044
         },
         {
           "route": "road-3",
@@ -14462,7 +14462,7 @@
             4720,
             4321
           ],
-          "seconds": 0.03406919998815283
+          "seconds": 0.02506440004799515
         },
         {
           "route": "road-3",
@@ -14474,7 +14474,7 @@
             4800,
             4321
           ],
-          "seconds": 0.03554930002428591
+          "seconds": 0.02484810003079474
         },
         {
           "route": "road-3",
@@ -14486,7 +14486,7 @@
             4880,
             4321
           ],
-          "seconds": 0.03563860000576824
+          "seconds": 0.028530200012028217
         },
         {
           "route": "road-3",
@@ -14498,7 +14498,7 @@
             4960,
             4321
           ],
-          "seconds": 0.02960840001469478
+          "seconds": 0.02327869995497167
         },
         {
           "route": "road-3",
@@ -14510,7 +14510,7 @@
             5040,
             4321
           ],
-          "seconds": 0.029175000032410026
+          "seconds": 0.026179599983152002
         },
         {
           "route": "road-3",
@@ -14522,7 +14522,7 @@
             5120,
             4321
           ],
-          "seconds": 0.031182299950160086
+          "seconds": 0.026275899959728122
         },
         {
           "route": "road-3",
@@ -14534,7 +14534,7 @@
             5160,
             4299
           ],
-          "seconds": 0.02683049999177456
+          "seconds": 0.020646699995268136
         },
         {
           "route": "road-3",
@@ -14546,7 +14546,7 @@
             5200,
             4278
           ],
-          "seconds": 0.029490899993106723
+          "seconds": 0.02379129995824769
         },
         {
           "route": "road-3",
@@ -14558,7 +14558,7 @@
             5280,
             4278
           ],
-          "seconds": 0.03397750004660338
+          "seconds": 0.033874800021294504
         },
         {
           "route": "road-3",
@@ -14570,7 +14570,7 @@
             5360,
             4278
           ],
-          "seconds": 0.02622010000050068
+          "seconds": 0.027028599986806512
         },
         {
           "route": "road-3",
@@ -14582,7 +14582,7 @@
             5440,
             4278
           ],
-          "seconds": 0.035852800006978214
+          "seconds": 0.0321375000057742
         },
         {
           "route": "road-3",
@@ -14594,7 +14594,7 @@
             5520,
             4278
           ],
-          "seconds": 0.022269000008236617
+          "seconds": 0.022780600003898144
         },
         {
           "route": "road-3",
@@ -14606,7 +14606,7 @@
             5600,
             4278
           ],
-          "seconds": 0.0399984999676235
+          "seconds": 0.03438649995950982
         },
         {
           "route": "road-3",
@@ -14618,7 +14618,7 @@
             5680,
             4278
           ],
-          "seconds": 0.022540000034496188
+          "seconds": 0.02344640000956133
         },
         {
           "route": "road-3",
@@ -14630,7 +14630,7 @@
             5760,
             4278
           ],
-          "seconds": 0.025562800001353025
+          "seconds": 0.02346539997961372
         },
         {
           "route": "road-3",
@@ -14642,7 +14642,7 @@
             5840,
             4278
           ],
-          "seconds": 0.028928100015036762
+          "seconds": 0.023731899971608073
         },
         {
           "route": "road-3",
@@ -14654,7 +14654,7 @@
             5920,
             4278
           ],
-          "seconds": 0.024833399977069348
+          "seconds": 0.02477379998890683
         },
         {
           "route": "road-3",
@@ -14666,7 +14666,7 @@
             6000,
             4278
           ],
-          "seconds": 0.02408230002038181
+          "seconds": 0.024086899997200817
         },
         {
           "route": "road-7",
@@ -14678,7 +14678,7 @@
             6040,
             4256
           ],
-          "seconds": 0.13913059997139499
+          "seconds": 0.13962249999167398
         },
         {
           "route": "road-7",
@@ -14690,7 +14690,7 @@
             6040,
             4213
           ],
-          "seconds": 0.13692850002553314
+          "seconds": 0.13703380001243204
         },
         {
           "route": "road-7",
@@ -14702,7 +14702,7 @@
             6040,
             4170
           ],
-          "seconds": 0.1395442999782972
+          "seconds": 0.14531980000901967
         },
         {
           "route": "road-7",
@@ -14714,7 +14714,7 @@
             6040,
             4127
           ],
-          "seconds": 0.17358849995071068
+          "seconds": 0.177596400026232
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14726,7 +14726,7 @@
             6041,
             4128
           ],
-          "seconds": 0.006850699952337891
+          "seconds": 0.00784949999069795
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14738,7 +14738,7 @@
             6041,
             4171
           ],
-          "seconds": 0.006538200017530471
+          "seconds": 0.0067417999962344766
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14750,7 +14750,7 @@
             6041,
             4214
           ],
-          "seconds": 0.00705840002046898
+          "seconds": 0.0066494999919086695
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14762,7 +14762,7 @@
             6041,
             4257
           ],
-          "seconds": 0.030338199983816594
+          "seconds": 0.024649999977555126
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14774,7 +14774,7 @@
             6080,
             4277
           ],
-          "seconds": 0.17795450001722202
+          "seconds": 0.17674959998112172
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14786,7 +14786,7 @@
             6160,
             4277
           ],
-          "seconds": 0.13409170001978055
+          "seconds": 0.1322187000187114
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14798,7 +14798,7 @@
             6201,
             4300
           ],
-          "seconds": 0.132119000016246
+          "seconds": 0.13208740000845864
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14810,7 +14810,7 @@
             6201,
             4343
           ],
-          "seconds": 0.14333549997536466
+          "seconds": 0.1401610000175424
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14822,7 +14822,7 @@
             6240,
             4363
           ],
-          "seconds": 0.15222820005146787
+          "seconds": 0.1520481999614276
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14834,7 +14834,7 @@
             6320,
             4363
           ],
-          "seconds": 0.1513793999911286
+          "seconds": 0.15058449999196455
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14846,7 +14846,7 @@
             6400,
             4363
           ],
-          "seconds": 0.14215829997556284
+          "seconds": 0.14059690001886338
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14858,7 +14858,7 @@
             6480,
             4363
           ],
-          "seconds": 0.14578860002802685
+          "seconds": 0.14472129999194294
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14870,7 +14870,7 @@
             6560,
             4363
           ],
-          "seconds": 0.1590874000103213
+          "seconds": 0.15982810000423342
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14882,7 +14882,7 @@
             6640,
             4363
           ],
-          "seconds": 0.13857980002649128
+          "seconds": 0.13932329998351634
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14894,7 +14894,7 @@
             6681,
             4386
           ],
-          "seconds": 0.16909539996413514
+          "seconds": 0.17204609996406361
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14906,7 +14906,7 @@
             6720,
             4406
           ],
-          "seconds": 0.15085800003726035
+          "seconds": 0.14596709999023005
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14918,7 +14918,7 @@
             6800,
             4406
           ],
-          "seconds": 0.14496359997428954
+          "seconds": 0.14462300000013784
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14930,7 +14930,7 @@
             6880,
             4406
           ],
-          "seconds": 0.1437034999835305
+          "seconds": 0.14544360002037138
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14942,7 +14942,7 @@
             6960,
             4406
           ],
-          "seconds": 0.15061860001878813
+          "seconds": 0.14971430000150576
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14954,7 +14954,7 @@
             7040,
             4406
           ],
-          "seconds": 0.1488524999585934
+          "seconds": 0.14830100000835955
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14966,7 +14966,7 @@
             7120,
             4406
           ],
-          "seconds": 0.1441287999623455
+          "seconds": 0.14532589999726042
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14978,7 +14978,7 @@
             7200,
             4406
           ],
-          "seconds": 0.1470856000087224
+          "seconds": 0.1491186000057496
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -14990,7 +14990,7 @@
             7280,
             4406
           ],
-          "seconds": 0.14710249996278435
+          "seconds": 0.1471542000072077
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15002,7 +15002,7 @@
             7321,
             4429
           ],
-          "seconds": 0.1392335999989882
+          "seconds": 0.13795880001271144
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15014,7 +15014,7 @@
             7321,
             4472
           ],
-          "seconds": 0.1396565999602899
+          "seconds": 0.13769160001538694
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15026,7 +15026,7 @@
             7321,
             4515
           ],
-          "seconds": 0.14453209994826466
+          "seconds": 0.14047919999575242
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15038,7 +15038,7 @@
             7360,
             4535
           ],
-          "seconds": 0.1480781999998726
+          "seconds": 0.14895020000403747
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15050,7 +15050,7 @@
             7440,
             4535
           ],
-          "seconds": 0.14678209996782243
+          "seconds": 0.14630520000355318
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15062,7 +15062,7 @@
             7520,
             4535
           ],
-          "seconds": 0.14407949999440461
+          "seconds": 0.14224760001525283
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15074,7 +15074,7 @@
             7600,
             4535
           ],
-          "seconds": 0.15208999998867512
+          "seconds": 0.15481400000862777
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15086,7 +15086,7 @@
             7680,
             4535
           ],
-          "seconds": 0.15490800002589822
+          "seconds": 0.14896399999270216
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15098,7 +15098,7 @@
             7760,
             4535
           ],
-          "seconds": 0.15479419997427613
+          "seconds": 0.14967429998796433
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15110,7 +15110,7 @@
             7840,
             4535
           ],
-          "seconds": 0.14730609999969602
+          "seconds": 0.13876790000358596
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15122,7 +15122,7 @@
             7881,
             4558
           ],
-          "seconds": 0.14552669995464385
+          "seconds": 0.14958490000572056
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15134,7 +15134,7 @@
             7920,
             4578
           ],
-          "seconds": 0.14975550002418458
+          "seconds": 0.14485640003113076
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15146,7 +15146,7 @@
             8000,
             4578
           ],
-          "seconds": 0.14804880000883713
+          "seconds": 0.1499566999846138
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15158,7 +15158,7 @@
             8080,
             4578
           ],
-          "seconds": 0.14657179999630898
+          "seconds": 0.14610070001799613
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15170,7 +15170,7 @@
             8160,
             4578
           ],
-          "seconds": 0.16416700003901497
+          "seconds": 0.16389960004016757
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15182,7 +15182,7 @@
             8240,
             4578
           ],
-          "seconds": 0.14318600000115111
+          "seconds": 0.14172390004387125
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15194,7 +15194,7 @@
             8320,
             4578
           ],
-          "seconds": 0.14384279999649152
+          "seconds": 0.14315369998803362
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15206,7 +15206,7 @@
             8400,
             4578
           ],
-          "seconds": 0.14382900000782683
+          "seconds": 0.14316629996756092
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15218,7 +15218,7 @@
             8480,
             4578
           ],
-          "seconds": 0.19698549999156967
+          "seconds": 0.19769279996398836
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15230,7 +15230,7 @@
             8560,
             4578
           ],
-          "seconds": 0.18464749999111518
+          "seconds": 0.18833989999257028
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15242,7 +15242,7 @@
             8599,
             4557
           ],
-          "seconds": 0.14348699996480718
+          "seconds": 0.1401645999867469
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15254,7 +15254,7 @@
             8599,
             4514
           ],
-          "seconds": 0.15506839996669441
+          "seconds": 0.15206529997522011
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15266,7 +15266,7 @@
             8599,
             4471
           ],
-          "seconds": 0.15674280002713203
+          "seconds": 0.15632060001371428
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15278,7 +15278,7 @@
             8599,
             4428
           ],
-          "seconds": 0.1654327000142075
+          "seconds": 0.1717238999553956
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15290,7 +15290,7 @@
             8599,
             4385
           ],
-          "seconds": 0.16447530000004917
+          "seconds": 0.1579296999843791
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15302,7 +15302,7 @@
             8599,
             4342
           ],
-          "seconds": 0.16632779996143654
+          "seconds": 0.1622188999899663
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15314,7 +15314,7 @@
             8599,
             4299
           ],
-          "seconds": 0.15135619998909533
+          "seconds": 0.15173630003118888
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15326,7 +15326,7 @@
             8599,
             4256
           ],
-          "seconds": 0.15063180000288412
+          "seconds": 0.15290169999934733
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15338,7 +15338,7 @@
             8640,
             4234
           ],
-          "seconds": 0.1369286000262946
+          "seconds": 0.141600200033281
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15350,7 +15350,7 @@
             8720,
             4234
           ],
-          "seconds": 0.14369880000595003
+          "seconds": 0.14351309998892248
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15362,7 +15362,7 @@
             8800,
             4234
           ],
-          "seconds": 0.140904399973806
+          "seconds": 0.14287189999595284
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15374,7 +15374,7 @@
             8839,
             4213
           ],
-          "seconds": 0.14127480000024661
+          "seconds": 0.14266199996927753
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15386,7 +15386,7 @@
             8839,
             4170
           ],
-          "seconds": 0.14583560003666207
+          "seconds": 0.1501070999656804
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15398,7 +15398,7 @@
             8880,
             4148
           ],
-          "seconds": 0.16484300000593066
+          "seconds": 0.1751211999799125
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15410,7 +15410,7 @@
             8960,
             4148
           ],
-          "seconds": 0.17160970001714304
+          "seconds": 0.172619900025893
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15422,7 +15422,7 @@
             8999,
             4127
           ],
-          "seconds": 0.14573679998284206
+          "seconds": 0.1487970000016503
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15434,7 +15434,7 @@
             8999,
             4084
           ],
-          "seconds": 0.15172200003871694
+          "seconds": 0.15400929999304935
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15446,7 +15446,7 @@
             8999,
             4041
           ],
-          "seconds": 0.1598004000261426
+          "seconds": 0.16236110002500936
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15458,7 +15458,7 @@
             8999,
             3998
           ],
-          "seconds": 0.15745980001520365
+          "seconds": 0.1542067999835126
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15470,7 +15470,7 @@
             8999,
             3955
           ],
-          "seconds": 0.1477870999951847
+          "seconds": 0.1483342000283301
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15482,7 +15482,7 @@
             8999,
             3912
           ],
-          "seconds": 0.1359025000128895
+          "seconds": 0.1369134999695234
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15494,7 +15494,7 @@
             8999,
             3869
           ],
-          "seconds": 0.1461733999894932
+          "seconds": 0.1464628999819979
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15506,7 +15506,7 @@
             8999,
             3826
           ],
-          "seconds": 0.15581720002228394
+          "seconds": 0.15512790001230314
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15518,7 +15518,7 @@
             8999,
             3783
           ],
-          "seconds": 0.15736160002416
+          "seconds": 0.1694236000184901
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15530,7 +15530,7 @@
             8999,
             3740
           ],
-          "seconds": 0.14568660000804812
+          "seconds": 0.15577620000112802
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15542,7 +15542,7 @@
             8999,
             3697
           ],
-          "seconds": 0.16059659997699782
+          "seconds": 0.16280520003056154
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15554,7 +15554,7 @@
             9040,
             3675
           ],
-          "seconds": 0.13669020001543686
+          "seconds": 0.13871329999528825
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15566,7 +15566,7 @@
             9079,
             3654
           ],
-          "seconds": 0.15896450000582263
+          "seconds": 0.15906019997783005
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15578,7 +15578,7 @@
             9079,
             3611
           ],
-          "seconds": 0.14435990003403276
+          "seconds": 0.14369349996559322
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15590,7 +15590,7 @@
             9079,
             3568
           ],
-          "seconds": 0.14539869996951893
+          "seconds": 0.14957070001401007
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15602,7 +15602,7 @@
             9120,
             3546
           ],
-          "seconds": 0.13864130002912134
+          "seconds": 0.13845949998358265
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15614,7 +15614,7 @@
             9200,
             3546
           ],
-          "seconds": 0.1484865000238642
+          "seconds": 0.15053500002250075
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15626,7 +15626,7 @@
             9239,
             3525
           ],
-          "seconds": 0.15074939996702597
+          "seconds": 0.15704709995770827
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15638,7 +15638,7 @@
             9239,
             3482
           ],
-          "seconds": 0.14414309995481744
+          "seconds": 0.14407620002748445
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15650,7 +15650,7 @@
             9239,
             3439
           ],
-          "seconds": 0.08080880000488833
+          "seconds": 0.07988869998371229
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15662,7 +15662,7 @@
             9239,
             3396
           ],
-          "seconds": 0.1669856999651529
+          "seconds": 0.16662810003617778
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15674,7 +15674,7 @@
             9239,
             3353
           ],
-          "seconds": 0.14680869999574497
+          "seconds": 0.14699899998959154
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15686,7 +15686,7 @@
             9239,
             3310
           ],
-          "seconds": 0.15991040004882962
+          "seconds": 0.16343759995652363
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15698,7 +15698,7 @@
             9239,
             3267
           ],
-          "seconds": 0.15397340001072735
+          "seconds": 0.1429033000022173
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15710,7 +15710,7 @@
             9280,
             3245
           ],
-          "seconds": 0.15536420000717044
+          "seconds": 0.1619658000417985
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15722,7 +15722,7 @@
             9319,
             3224
           ],
-          "seconds": 0.1513668000116013
+          "seconds": 0.1530638999538496
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15734,7 +15734,7 @@
             9319,
             3181
           ],
-          "seconds": 0.1513600999605842
+          "seconds": 0.14602109999395907
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15746,7 +15746,7 @@
             9360,
             3159
           ],
-          "seconds": 0.15274200000567362
+          "seconds": 0.1545178999658674
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15758,7 +15758,7 @@
             9399,
             3138
           ],
-          "seconds": 0.15904820000287145
+          "seconds": 0.15759369998704642
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15770,7 +15770,7 @@
             9440,
             3116
           ],
-          "seconds": 0.13648740004282445
+          "seconds": 0.13935990002937615
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15782,7 +15782,7 @@
             9479,
             3095
           ],
-          "seconds": 0.15401779999956489
+          "seconds": 0.1579105999553576
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15794,7 +15794,7 @@
             9479,
             3052
           ],
-          "seconds": 0.14907149999635294
+          "seconds": 0.15738609997788444
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15806,7 +15806,7 @@
             9479,
             3009
           ],
-          "seconds": 0.15615560003789142
+          "seconds": 0.15640480001457036
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15818,7 +15818,7 @@
             9479,
             2966
           ],
-          "seconds": 0.1586160000297241
+          "seconds": 0.1561249999795109
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15830,7 +15830,7 @@
             9479,
             2923
           ],
-          "seconds": 0.14958880003541708
+          "seconds": 0.14322029997128993
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15842,7 +15842,7 @@
             9479,
             2880
           ],
-          "seconds": 0.15156760002719238
+          "seconds": 0.14842420001514256
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15854,7 +15854,7 @@
             9479,
             2837
           ],
-          "seconds": 0.15204109996557236
+          "seconds": 0.1505462999921292
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15866,7 +15866,7 @@
             9479,
             2794
           ],
-          "seconds": 0.14742500003194436
+          "seconds": 0.14985849999357015
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15878,7 +15878,7 @@
             9479,
             2751
           ],
-          "seconds": 0.14390050002839416
+          "seconds": 0.1456940999487415
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15890,7 +15890,7 @@
             9479,
             2708
           ],
-          "seconds": 0.14263719995506108
+          "seconds": 0.15429119998589158
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15902,7 +15902,7 @@
             9479,
             2665
           ],
-          "seconds": 0.15508150000823662
+          "seconds": 0.17251810000743717
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15914,7 +15914,7 @@
             9479,
             2622
           ],
-          "seconds": 0.06085830001393333
+          "seconds": 0.06028060003882274
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15926,7 +15926,7 @@
             9479,
             2579
           ],
-          "seconds": 0.14692200004355982
+          "seconds": 0.1515361000201665
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15938,7 +15938,7 @@
             9479,
             2536
           ],
-          "seconds": 0.14442520000739023
+          "seconds": 0.14565969997784123
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15950,7 +15950,7 @@
             9479,
             2493
           ],
-          "seconds": 0.14664039999479428
+          "seconds": 0.1479856999940239
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15962,7 +15962,7 @@
             9479,
             2450
           ],
-          "seconds": 0.15096060000360012
+          "seconds": 0.14678320003440604
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15974,7 +15974,7 @@
             9479,
             2407
           ],
-          "seconds": 0.14577420003479347
+          "seconds": 0.14993109996430576
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15986,7 +15986,7 @@
             9479,
             2364
           ],
-          "seconds": 0.16005720000248402
+          "seconds": 0.1681024999707006
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -15998,7 +15998,7 @@
             9479,
             2321
           ],
-          "seconds": 0.1509150000056252
+          "seconds": 0.15332059998763725
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16010,7 +16010,7 @@
             9439,
             2299
           ],
-          "seconds": 0.15257929998915642
+          "seconds": 0.151389799953904
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16022,7 +16022,7 @@
             9401,
             2278
           ],
-          "seconds": 0.14564019994577393
+          "seconds": 0.14584480004850775
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16034,7 +16034,7 @@
             9401,
             2235
           ],
-          "seconds": 0.1480091999983415
+          "seconds": 0.1431884000194259
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16046,7 +16046,7 @@
             9401,
             2192
           ],
-          "seconds": 0.1440691000316292
+          "seconds": 0.14589690003776923
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16058,7 +16058,7 @@
             9401,
             2149
           ],
-          "seconds": 0.15117389999795705
+          "seconds": 0.1498540000175126
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16070,7 +16070,7 @@
             9401,
             2106
           ],
-          "seconds": 0.14755090000107884
+          "seconds": 0.14750419999472797
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16082,7 +16082,7 @@
             9359,
             2084
           ],
-          "seconds": 0.1401406999793835
+          "seconds": 0.14200450002681464
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16094,7 +16094,7 @@
             9321,
             2063
           ],
-          "seconds": 0.15386510000098497
+          "seconds": 0.15634159999899566
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16106,7 +16106,7 @@
             9321,
             2020
           ],
-          "seconds": 0.14681190002011135
+          "seconds": 0.14469799998914823
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16118,7 +16118,7 @@
             9321,
             1977
           ],
-          "seconds": 0.1566090999986045
+          "seconds": 0.15158170001814142
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16130,7 +16130,7 @@
             9321,
             1934
           ],
-          "seconds": 0.15056310000363737
+          "seconds": 0.15478400001302361
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16142,7 +16142,7 @@
             9279,
             1912
           ],
-          "seconds": 0.1437154000159353
+          "seconds": 0.14578329998767003
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16154,7 +16154,7 @@
             9241,
             1891
           ],
-          "seconds": 0.16151329997228459
+          "seconds": 0.15944239997770637
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16166,7 +16166,7 @@
             9241,
             1848
           ],
-          "seconds": 0.14565319998655468
+          "seconds": 0.1506855000043288
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16178,7 +16178,7 @@
             9241,
             1805
           ],
-          "seconds": 0.14636169996811077
+          "seconds": 0.14551810000557452
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16190,7 +16190,7 @@
             9241,
             1762
           ],
-          "seconds": 0.0680156999733299
+          "seconds": 0.06886769999982789
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16202,7 +16202,7 @@
             9241,
             1719
           ],
-          "seconds": 0.14198810001835227
+          "seconds": 0.14246070000808686
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16214,7 +16214,7 @@
             9241,
             1676
           ],
-          "seconds": 0.14733299997169524
+          "seconds": 0.1507219999912195
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16226,7 +16226,7 @@
             9241,
             1633
           ],
-          "seconds": 0.1428530000266619
+          "seconds": 0.1447578000370413
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16238,7 +16238,7 @@
             9241,
             1590
           ],
-          "seconds": 0.1661856999853626
+          "seconds": 0.1577252999995835
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16250,7 +16250,7 @@
             9241,
             1547
           ],
-          "seconds": 0.1584708000300452
+          "seconds": 0.16294870001729578
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16262,7 +16262,7 @@
             9199,
             1525
           ],
-          "seconds": 0.1475143000134267
+          "seconds": 0.1408233999973163
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16274,7 +16274,7 @@
             9161,
             1504
           ],
-          "seconds": 0.15078309999080375
+          "seconds": 0.14290279999841005
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16286,7 +16286,7 @@
             9119,
             1482
           ],
-          "seconds": 0.14423159998841584
+          "seconds": 0.13851969997631386
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16298,7 +16298,7 @@
             9039,
             1482
           ],
-          "seconds": 0.1471400000154972
+          "seconds": 0.14138980000279844
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16310,7 +16310,7 @@
             9001,
             1461
           ],
-          "seconds": 0.1518202000297606
+          "seconds": 0.14633760001743212
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16322,7 +16322,7 @@
             8959,
             1439
           ],
-          "seconds": 0.14866810000967234
+          "seconds": 0.14984619995811954
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16334,7 +16334,7 @@
             8879,
             1439
           ],
-          "seconds": 0.16705129999900237
+          "seconds": 0.15312650002306327
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16346,7 +16346,7 @@
             8799,
             1439
           ],
-          "seconds": 0.14601950003998354
+          "seconds": 0.13807310000993311
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16358,7 +16358,7 @@
             8719,
             1439
           ],
-          "seconds": 0.1554854999994859
+          "seconds": 0.15748910000547767
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16370,7 +16370,7 @@
             8639,
             1439
           ],
-          "seconds": 0.14681289996951818
+          "seconds": 0.14972250000573695
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16382,7 +16382,7 @@
             8559,
             1439
           ],
-          "seconds": 0.15367099997820333
+          "seconds": 0.15030639996984974
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16394,7 +16394,7 @@
             8521,
             1418
           ],
-          "seconds": 0.14200689998688176
+          "seconds": 0.13908239995362237
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16406,7 +16406,7 @@
             8479,
             1398
           ],
-          "seconds": 0.14781949995085597
+          "seconds": 0.14244720002170652
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16418,7 +16418,7 @@
             8399,
             1398
           ],
-          "seconds": 0.1423643000307493
+          "seconds": 0.14456610003253445
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16430,7 +16430,7 @@
             8319,
             1398
           ],
-          "seconds": 0.17674439999973401
+          "seconds": 0.15329689998179674
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16442,7 +16442,7 @@
             8239,
             1398
           ],
-          "seconds": 0.15225069998996332
+          "seconds": 0.1489041000022553
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16454,7 +16454,7 @@
             8159,
             1398
           ],
-          "seconds": 0.14462350000394508
+          "seconds": 0.14260199997806922
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16466,7 +16466,7 @@
             8079,
             1398
           ],
-          "seconds": 0.15498589997878298
+          "seconds": 0.1574792999890633
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16478,7 +16478,7 @@
             7999,
             1398
           ],
-          "seconds": 0.16115640004863963
+          "seconds": 0.15204010001616552
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16490,7 +16490,7 @@
             7919,
             1398
           ],
-          "seconds": 0.15843869996024296
+          "seconds": 0.14935260004131123
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16502,7 +16502,7 @@
             7839,
             1398
           ],
-          "seconds": 0.15998179995222017
+          "seconds": 0.15520109998760745
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16514,7 +16514,7 @@
             7759,
             1398
           ],
-          "seconds": 0.14781430002767593
+          "seconds": 0.1426655999966897
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16526,7 +16526,7 @@
             7719,
             1419
           ],
-          "seconds": 0.14448740001535043
+          "seconds": 0.14132380002411082
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16538,7 +16538,7 @@
             7679,
             1439
           ],
-          "seconds": 0.15160660003311932
+          "seconds": 0.14628799998899922
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16550,7 +16550,7 @@
             7599,
             1439
           ],
-          "seconds": 0.1473763000103645
+          "seconds": 0.14999700000043958
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16562,7 +16562,7 @@
             7519,
             1439
           ],
-          "seconds": 0.13620810001157224
+          "seconds": 0.13665810000384226
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16574,7 +16574,7 @@
             7439,
             1439
           ],
-          "seconds": 0.13971610000589862
+          "seconds": 0.13759480003500357
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16586,7 +16586,7 @@
             7359,
             1439
           ],
-          "seconds": 0.14783059997716919
+          "seconds": 0.14406209997832775
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16598,7 +16598,7 @@
             7279,
             1439
           ],
-          "seconds": 0.14132100000279024
+          "seconds": 0.13856260001193732
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16610,7 +16610,7 @@
             7199,
             1439
           ],
-          "seconds": 0.14644219999900088
+          "seconds": 0.13783469999907538
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16622,7 +16622,7 @@
             7119,
             1439
           ],
-          "seconds": 0.15794539998751134
+          "seconds": 0.15252910001436248
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16634,7 +16634,7 @@
             7039,
             1439
           ],
-          "seconds": 0.19854820001637563
+          "seconds": 0.19801940000616014
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16646,7 +16646,7 @@
             6959,
             1439
           ],
-          "seconds": 0.14385150000452995
+          "seconds": 0.14283920003799722
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16658,7 +16658,7 @@
             6879,
             1439
           ],
-          "seconds": 0.13977990002604201
+          "seconds": 0.13902199995936826
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16670,7 +16670,7 @@
             6839,
             1462
           ],
-          "seconds": 0.1290824000025168
+          "seconds": 0.1290222000097856
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16682,7 +16682,7 @@
             6799,
             1482
           ],
-          "seconds": 0.1351400000276044
+          "seconds": 0.13547259999904782
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16694,7 +16694,7 @@
             6719,
             1482
           ],
-          "seconds": 0.14256229996681213
+          "seconds": 0.14350579999154434
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16706,7 +16706,7 @@
             6639,
             1482
           ],
-          "seconds": 0.14186459995107725
+          "seconds": 0.14918659999966621
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16718,7 +16718,7 @@
             6559,
             1482
           ],
-          "seconds": 0.1629998999997042
+          "seconds": 0.15919410000788048
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16730,7 +16730,7 @@
             6479,
             1482
           ],
-          "seconds": 0.14297540002735332
+          "seconds": 0.14157109998632222
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16742,7 +16742,7 @@
             6399,
             1482
           ],
-          "seconds": 0.14393349998863414
+          "seconds": 0.14345410000532866
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16754,7 +16754,7 @@
             6319,
             1482
           ],
-          "seconds": 0.1415426000021398
+          "seconds": 0.14271240000380203
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16766,7 +16766,7 @@
             6239,
             1482
           ],
-          "seconds": 0.11113469995325431
+          "seconds": 0.11244769999757409
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16778,7 +16778,7 @@
             6159,
             1482
           ],
-          "seconds": 0.14576359995407984
+          "seconds": 0.14583940000738949
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16790,7 +16790,7 @@
             6079,
             1482
           ],
-          "seconds": 0.13671769999200478
+          "seconds": 0.13892200001282617
         },
         {
           "route": "physical-to-site-74-34-16-21-N",
@@ -16802,7 +16802,7 @@
             5999,
             1482
           ],
-          "seconds": 0.1689532000455074
+          "seconds": 0.1653589000343345
         },
         {
           "route": "physical-to-site-81-34-48-21-N",
@@ -16814,7 +16814,7 @@
             6000,
             1483
           ],
-          "seconds": 0.0122189000248909
+          "seconds": 0.007599400007165968
         },
         {
           "route": "physical-to-site-81-34-48-21-N",
@@ -16826,7 +16826,7 @@
             6080,
             1483
           ],
-          "seconds": 0.011716999986674637
+          "seconds": 0.008260299975518137
         },
         {
           "route": "physical-to-site-81-34-48-21-N",
@@ -16838,7 +16838,7 @@
             6160,
             1483
           ],
-          "seconds": 0.007861800026148558
+          "seconds": 0.007289799978025258
         },
         {
           "route": "physical-to-site-81-34-48-21-N",
@@ -16850,7 +16850,7 @@
             6240,
             1483
           ],
-          "seconds": 0.03392700001131743
+          "seconds": 0.03395370004000142
         },
         {
           "route": "physical-to-site-81-34-48-21-N",
@@ -16862,7 +16862,7 @@
             6320,
             1483
           ],
-          "seconds": 0.02626140002394095
+          "seconds": 0.02501959999790415
         },
         {
           "route": "physical-to-site-81-34-48-21-N",
@@ -16874,7 +16874,7 @@
             6400,
             1483
           ],
-          "seconds": 0.025464900012593716
+          "seconds": 0.022614499961491674
         },
         {
           "route": "physical-to-site-81-34-48-21-N",
@@ -16886,7 +16886,7 @@
             6480,
             1483
           ],
-          "seconds": 0.032252300006803125
+          "seconds": 0.038577199971769005
         }
       ],
       "destinations": [
@@ -16909,7 +16909,7 @@
         "initial_items": 4,
         "remaining_items": 3
       },
-      "checkpoint_seconds": 0.7856999000068754,
+      "checkpoint_seconds": 0.7634702000068501,
       "landmark_access": {
         "placement": "landmark-plot-96-building",
         "join": [
@@ -17132,9 +17132,9 @@
         "crossing-7"
       ],
       "materialized_scenes_before_f9": 352,
-      "restore_seconds": 0.5513143999851309,
+      "restore_seconds": 0.5344414000282995,
       "f9_restored_coherent_start_checkpoint": true,
-      "worst_transition_seconds": 0.2082823000382632,
+      "worst_transition_seconds": 0.20633640000596642,
       "checkpoint_bytes": 18978098,
       "checkpoint_scope": "starting state after lab exit, before journey",
       "checkpoint_scene_count": 2,
@@ -17145,7 +17145,7 @@
       "tools/worldgen_g7_diagnostic.py",
       "--journey",
       "--evidence",
-      "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\diagnostic\\results"
+      "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\diagnostic\\results"
     ],
     "cwd": "G:\\GameDev\\RoguelikeProject",
     "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
@@ -17167,7 +17167,7 @@
           "--worker",
           "chromium",
           "--evidence",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\browser\\results"
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\browser\\results"
         ]
       },
       {
@@ -17181,13 +17181,13 @@
           "--worker",
           "firefox",
           "--evidence",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\browser\\results"
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\browser\\results"
         ]
       }
     ],
     "source_stable": true,
     "runtime_source_stable": true,
-    "seconds": 42.98,
+    "seconds": 43.55,
     "playwright": "1.64.1",
     "driver": "1.64.0-beta-1791568591000"
   },
@@ -17532,10 +17532,10 @@
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--selfcheck-child",
           "zero",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-zero.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"zero\", \"flavor\": \"selfcheck\"}"
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-zero.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"zero\", \"flavor\": \"selfcheck\"}"
         ],
-        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9",
+        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6",
         "exit_code": 0,
         "timeout": false,
         "stdout": "",
@@ -17544,8 +17544,8 @@
           "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--validate-evidence",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-zero.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"zero\", \"flavor\": \"selfcheck\"}",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-zero.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"zero\", \"flavor\": \"selfcheck\"}",
           "0",
           "False"
         ],
@@ -17559,10 +17559,10 @@
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--selfcheck-child",
           "missing",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-missing.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"missing\", \"flavor\": \"selfcheck\"}"
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-missing.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"missing\", \"flavor\": \"selfcheck\"}"
         ],
-        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9",
+        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6",
         "exit_code": 0,
         "timeout": false,
         "stdout": "",
@@ -17571,8 +17571,8 @@
           "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--validate-evidence",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-missing.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"missing\", \"flavor\": \"selfcheck\"}",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-missing.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"missing\", \"flavor\": \"selfcheck\"}",
           "0",
           "False"
         ],
@@ -17586,10 +17586,10 @@
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--selfcheck-child",
           "stale",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-stale.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"stale\", \"flavor\": \"selfcheck\"}"
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-stale.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"stale\", \"flavor\": \"selfcheck\"}"
         ],
-        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9",
+        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6",
         "exit_code": 0,
         "timeout": false,
         "stdout": "",
@@ -17598,8 +17598,8 @@
           "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--validate-evidence",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-stale.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"stale\", \"flavor\": \"selfcheck\"}",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-stale.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"stale\", \"flavor\": \"selfcheck\"}",
           "0",
           "False"
         ],
@@ -17613,10 +17613,10 @@
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--selfcheck-child",
           "phase",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-phase.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"phase\", \"flavor\": \"selfcheck\"}"
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-phase.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"phase\", \"flavor\": \"selfcheck\"}"
         ],
-        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9",
+        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6",
         "exit_code": 0,
         "timeout": false,
         "stdout": "",
@@ -17625,8 +17625,8 @@
           "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--validate-evidence",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-phase.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"phase\", \"flavor\": \"selfcheck\"}",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-phase.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"phase\", \"flavor\": \"selfcheck\"}",
           "0",
           "False"
         ],
@@ -17640,10 +17640,10 @@
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--selfcheck-child",
           "crash",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-crash.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"crash\", \"flavor\": \"selfcheck\"}"
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-crash.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"crash\", \"flavor\": \"selfcheck\"}"
         ],
-        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9",
+        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6",
         "exit_code": 1,
         "timeout": false,
         "stdout": "",
@@ -17652,8 +17652,8 @@
           "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--validate-evidence",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-crash.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"crash\", \"flavor\": \"selfcheck\"}",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-crash.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"crash\", \"flavor\": \"selfcheck\"}",
           "1",
           "False"
         ],
@@ -17667,10 +17667,10 @@
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--selfcheck-child",
           "timeout",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-timeout.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"timeout\", \"flavor\": \"selfcheck\"}"
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-timeout.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"timeout\", \"flavor\": \"selfcheck\"}"
         ],
-        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9",
+        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6",
         "exit_code": null,
         "timeout": true,
         "stdout": "",
@@ -17679,8 +17679,8 @@
           "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--validate-evidence",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-timeout.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"timeout\", \"flavor\": \"selfcheck\"}",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-timeout.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"timeout\", \"flavor\": \"selfcheck\"}",
           "None",
           "True"
         ],
@@ -17694,10 +17694,10 @@
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--selfcheck-child",
           "false",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-false.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"false\", \"flavor\": \"selfcheck\"}"
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-false.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"false\", \"flavor\": \"selfcheck\"}"
         ],
-        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9",
+        "cwd": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6",
         "exit_code": 0,
         "timeout": false,
         "stdout": "",
@@ -17706,8 +17706,8 @@
           "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
           "G:\\GameDev\\RoguelikeProject\\tools\\verify_b1.py",
           "--validate-evidence",
-          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-a\\production\\results\\d-20261024-121528-ec8125a9\\negative-false.json",
-          "{\"run_id\": \"d-20261024-121528-ec8125a9\", \"scenario\": \"runner-negative\", \"phase\": \"false\", \"flavor\": \"selfcheck\"}",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\final-b\\production\\results\\d-20261024-123721-db3894d6\\negative-false.json",
+          "{\"run_id\": \"d-20261024-123721-db3894d6\", \"scenario\": \"runner-negative\", \"phase\": \"false\", \"flavor\": \"selfcheck\"}",
           "0",
           "False"
         ],

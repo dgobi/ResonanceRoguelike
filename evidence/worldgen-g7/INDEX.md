@@ -22,7 +22,7 @@ results. The complete outcome and acceptance matrix are in
 - [Admission focused receipt](admission/focused/receipt.json): 16 tests passed on
   the narrow correction before compound implementation.
 
-The final input revision is `e0be127cf0aaed9596c7a48b0ff5d68617a51c81`.
+The final input revision is `31afa301418d075d7a79252c19d04dfb13c4a174`.
 Every final command records immutable input SHA, complete raw input
 hashes, canonical-LF text hashes, args/cwd/environment, versions, exit/timeout and
 output inventory. Binary files compare exactly. Uniform line-ending transformations
@@ -46,19 +46,25 @@ included. Earlier evidence archives are preserved.
 - [Exact raw tested guide](source-raw/raw-tested/roguelike/docs/STRUCTURE_AUTHORING.md):
   mixed line endings preserved through the evidence-only `.gitattributes` rule.
   The same bytes are also inside each final command directory in the final ZIP.
-- [Final evidence ZIP](final-evidence.zip) and
-  [member inventory](final-evidence-inventory.json): `final-a/release.json`, nine
+- [Final evidence ZIP](final-b-evidence.zip) and
+  [member inventory](final-b-evidence-inventory.json): `final-b/release.json`, nine
   command directories, raw focused logs, both browser results/downloads, all
   authoring commands, three exact plans, full journey, and unfiltered production
   jobs/results/assertions/negative controls. Members have sizes and SHA-256 hashes;
   the archive was CRC-checked and every retained member re-read and hashed.
+- [First complete freeze ZIP](final-evidence.zip) and
+  [member inventory](final-evidence-inventory.json): the preserved `final-a` run,
+  with all nine gates passing on `e0be127cf0aaed9596c7a48b0ff5d68617a51c81`.
+  The [freeze transition](freeze-transition.json) identifies the authoring guide
+  correction that changed one tested input and required a second full run.
+  Its original raw guide bytes remain in this archive and the first-gates commit.
 - [Development evidence ZIP](development-evidence.zip) and
   [member inventory](development-evidence-inventory.json): failed, interrupted and
   successful development attempts, including their input patches/new inputs.
   Development failures are not relabelled as release successes.
 - [Opening disposable omissions](opening-disposable-omissions.json): exact scope
   and names/sizes for runtime files omitted after the authentic G6 source fixture
-  was retained. Both ZIP inventories separately list omitted worker saves.
+  was retained. Each ZIP inventory separately lists omitted worker saves.
 - [Supplied package verification](input-package.json): original archive SHA-256
   and verified supplied member manifest.
 - [Explored-compound checkpoint measurements](g7-independent-children.json),
@@ -69,7 +75,8 @@ included. Earlier evidence archives are preserved.
   distinguished from geometric plan diagrams and browser-editor screenshots.
 
 Expanded command directories move into the ignored review-only
-`.baseline/g7-expanded-final-a/` after verification. Receipt paths describe the
+`.baseline/g7-expanded-final-b/` after verification; the first freeze and development
+directories remain under `.baseline/g7-expanded-final-a/`. Receipt paths describe the
 actual command-time locations; ZIP paths and inventories map their retained bytes.
 Ordinary disposable worker/capture runtime saves are omitted; the deliberately
 retained authentic compatibility checkpoint remains a source fixture. Omitted

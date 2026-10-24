@@ -135,11 +135,20 @@ failures and archives. Tests below name behavior rather than relying on totals.
 ## Verification record
 
 The immutable tested input is
-`e0be127cf0aaed9596c7a48b0ff5d68617a51c81`, tagged
-`checkpoint/worldgen-g7-final-gate-inputs-20261024-a`. **All nine final serial gates
+`31afa301418d075d7a79252c19d04dfb13c4a174`, tagged
+`checkpoint/worldgen-g7-final-gate-inputs-20261024-b`. **All nine final serial gates
 passed on these unchanged inputs.** The delivered commit is resolved by
 `checkpoint/worldgen-g7-verified-20261024-a`; its final publication is independently
 read back from the remote. Development runs remain separate from release results.
+
+The first freeze also passed all nine gates and remains archived separately.
+Review then found stale G6 wording in the authoring guide's opening. Correcting
+that opening, adapter names, context summary and documented timeouts changed one
+of the 680 tested inputs. Because the guide is a tested input, all nine gates were
+repeated on the new immutable revision. The
+[freeze transition](../../evidence/worldgen-g7/freeze-transition.json) records both
+identities and the sole input difference. The results and timings below describe
+the second complete run; totals are not combined across runs.
 
 All 680 tested inputs reconcile to Git: **437 exact raw matches and 243
 line-ending-only matches**. Canonical text comparison replaces CRLF with LF, then
@@ -147,9 +156,9 @@ remaining CR with LF, and changes nothing else. Binary inputs remain exact.
 `STRUCTURE_AUTHORING.md` has mixed endings, so its raw tested bytes are retained in
 every final gate's archive and in `source-raw/`, protected from Git normalization.
 Its raw SHA-256 is
-`c6dc3f3407039471a426ae5c739bd6abd50c5e293d4ef9b41b8ca394caab028e`;
+`8ed5833994db130d7039b02c877328f18a000cddde60467fdc54c02c7a32df0d`;
 its canonical-LF SHA-256 is
-`2ef5e169f5b5c0f75873b8f32f2b26bf29b806f1525eaf7aadf58e89cebed726`.
+`e187400bb2c10c5d981ebd54f040c5a041d6dfe618aa5ad69ea0c1896a8b6e66`.
 This closes the tested-document ambiguity for G7 without claiming recovery of
 the unavailable historical G6 representation.
 
@@ -172,7 +181,7 @@ The final command ran from `G:\GameDev\RoguelikeProject` with the established
 Python 3.11 environment:
 
 ```powershell
-& $ResonancePython -X utf8 tools/verify_g7_release.py --evidence evidence/worldgen-g7/final-a
+& $ResonancePython -X utf8 tools/verify_g7_release.py --evidence evidence/worldgen-g7/final-b
 ```
 
 Its children run serially: guard preflight, normal focused discovery, both browser
@@ -180,8 +189,8 @@ engines, six authoring workflows (including inherited workflows), catalog,
 editor-catalog freshness, ordinary diagnostics plus real journey, diagram rendering,
 and the unfiltered production gate. Each command has its own complete receipt.
 
-The focused run passed **202 tests, zero failures/errors/skips**, in 433.93 seconds
-(436.69 seconds including its wrapper). Chromium 156.0.8078.4 and Firefox 157.0 each
+The focused run passed **202 tests, zero failures/errors/skips**, in 334.23 seconds
+(336.48 seconds including its wrapper). Chromium 156.0.8078.4 and Firefox 157.0 each
 passed 41 checks with Playwright 1.64.1 and its RECORD-verified bundled driver
 `1.64.0-beta-1791568591000`. G7 authoring passed 28 commands,
 including nine expected negatives; inherited G6 records contain 19 commands/five
@@ -193,18 +202,19 @@ runtime admissions.
 
 The unfiltered production gate passed **3,675/3,675 checks, 159/159 valid workers
 and all 74 coverage groups**, with seven runner-negative controls and thirteen
-intentional crash workers handled as expected. Its wrapper took 427.83 seconds.
+intentional crash workers handled as expected. Its wrapper took 452.56 seconds.
 The preflight separately passed three workers/59 checks and rejected the synthetic
 outside-root job before save access. The known `UI-TEXT-HEIGHT` issue remains the
 explicit production UI deferral; it is not a G7 generation failure.
 
-The nine gate wrapper times were: guard 18.59 s, focused 436.69 s, browser 44.22 s,
-authoring 63.72 s, catalog 0.33 s, catalog freshness 0.31 s, diagnostics/journey
-134.27 s, diagram rendering 1.14 s and production 427.83 s. Every receipt reports
+The nine gate wrapper times were: guard 10.17 s, focused 336.48 s, browser 44.85 s,
+authoring 63.57 s, catalog 0.32 s, catalog freshness 0.33 s, diagnostics/journey
+133.85 s, diagram rendering 1.11 s and production 452.56 s. Every receipt reports
 stable source, exit zero, no timeout, and successful committed-input reconciliation.
-Both evidence ZIPs were CRC-checked and every retained member was re-read and
-hashed: 523 development members and 735 final members. Their inventories explicitly
-exclude 67 and 2,163 disposable worker files respectively. Opening capture runtime
+All three evidence ZIPs were CRC-checked and every retained member was re-read and
+hashed: 523 development members, 735 first-freeze members and 735 final members.
+Their inventories explicitly exclude 67, 2,163 and 2,163 disposable worker files
+respectively. Opening capture runtime
 omissions have a separate inventory; the authentic checkpoint fixture is preserved.
 
 ### Ordinary selection and observed costs
@@ -230,12 +240,12 @@ frequency denominators remain in the raw run record.
 
 | Seed | Compact plan bytes | Registry/policy/path bytes | Planning seconds | Parent + child trials | Candidate fitting seconds | Slowest sampled scene seconds |
 |---|---:|---:|---:|---:|---:|---:|
-| 0 | 600,599 | 3,296 | 0.777 | 2 + 3 | 0.0043 | 0.1854 |
-| 20261023 | 738,766 | 4,074 | 1.071 | 4 + 2 | 0.0054 | 0.1866 |
-| 29417 | 679,457 | 5,153 | 0.856 | 4 + 4 | 0.0059 | 0.1867 |
+| 0 | 600,599 | 3,296 | 0.772 | 2 + 3 | 0.0045 | 0.1792 |
+| 20261023 | 738,766 | 4,074 | 1.072 | 4 + 2 | 0.0056 | 0.1824 |
+| 29417 | 679,457 | 5,153 | 0.920 | 4 + 4 | 0.0061 | 0.1852 |
 
 Candidate enumeration took 0.023–0.056 seconds and derived connectivity took
-0.035–0.075 seconds. Fitting time combines parent and child work; admission
+0.036–0.074 seconds. Fitting time combines parent and child work; admission
 certification is included in broader planning/enumeration, not those trial counts.
 Registry/policy/path bytes exclude flat child placement/plot/reservation records.
 The final summary separately sizes those persisted subtrees and compares the
@@ -248,14 +258,14 @@ The final journey dispatched **38,415 actual movement inputs**, retained native
 actors as obstacles, crossed the required bridge, visited both settlements and
 the landmark, then traversed the compound gate/shared path/both children and one
 single site. Both child containers and the single-site container used actual
-interaction handlers. The worst observed transition was 0.2083 seconds. Its
-18,978,098-byte checkpoint took 0.7857 seconds and contained **two starting scenes**, before the journey;
-352 scenes were materialized before coherent F9 restoration, which took 0.5513
+interaction handlers. The worst observed transition was 0.2063 seconds. Its
+18,978,098-byte checkpoint took 0.7635 seconds and contained **two starting scenes**, before the journey;
+352 scenes were materialized before coherent F9 restoration, which took 0.5344
 seconds. This does not claim that all 352 scenes were checkpointed.
 
 The separate explored-compound lifecycle checkpoint contained **four scenes**
 (two startup plus two compound scenes), 19,993,958 bytes, four independent
-same-asset child item transfers, 0.7452-second save and 0.6962-second cold load.
+same-asset child item transfers, 0.8009-second save and 0.6958-second cold load.
 Cold load and F9 both preserved each child's mutation. All timings are observations
 from this serial run, not a cross-platform or cold-cache performance comparison.
 

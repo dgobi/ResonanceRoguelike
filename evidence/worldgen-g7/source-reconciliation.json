@@ -1,5 +1,5 @@
 {
-  "tested_input": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+  "tested_input": "31afa301418d075d7a79252c19d04dfb13c4a174",
   "delivery_reference": "checkpoint/worldgen-g7-verified-20261024-a",
   "canonical_rule": "CRLF to LF, then remaining CR to LF; no other normalization; binary exact",
   "manifest_equal_for_all_final_gates": true,
@@ -8157,12 +8157,12 @@
       "raw_manifest_matches": true
     },
     "roguelike/docs/STRUCTURE_AUTHORING.md": {
-      "bytes": 68676,
-      "raw_sha256": "c6dc3f3407039471a426ae5c739bd6abd50c5e293d4ef9b41b8ca394caab028e",
-      "canonical_lf_sha256": "2ef5e169f5b5c0f75873b8f32f2b26bf29b806f1525eaf7aadf58e89cebed726",
-      "git_blob": "0b4e0eca9ea9e5e1b32dd5433988a3668854b8bf",
-      "committed_raw_sha256": "2ef5e169f5b5c0f75873b8f32f2b26bf29b806f1525eaf7aadf58e89cebed726",
-      "committed_canonical_lf_sha256": "2ef5e169f5b5c0f75873b8f32f2b26bf29b806f1525eaf7aadf58e89cebed726",
+      "bytes": 69064,
+      "raw_sha256": "8ed5833994db130d7039b02c877328f18a000cddde60467fdc54c02c7a32df0d",
+      "canonical_lf_sha256": "e187400bb2c10c5d981ebd54f040c5a041d6dfe618aa5ad69ea0c1896a8b6e66",
+      "git_blob": "4bf378ac5a4e7747a81941c2ef534d9086cddd25",
+      "committed_raw_sha256": "e187400bb2c10c5d981ebd54f040c5a041d6dfe618aa5ad69ea0c1896a8b6e66",
+      "committed_canonical_lf_sha256": "e187400bb2c10c5d981ebd54f040c5a041d6dfe618aa5ad69ea0c1896a8b6e66",
       "relation": "line endings only",
       "uniform_line_endings_reconstructable": false,
       "raw_preserved": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\source-raw\\raw-tested\\roguelike\\docs\\STRUCTURE_AUTHORING.md",

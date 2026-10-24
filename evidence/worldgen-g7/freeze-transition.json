@@ -1,0 +1,15 @@
+{
+  "first_input": "e0be127cf0aaed9596c7a48b0ff5d68617a51c81",
+  "second_input": "31afa301418d075d7a79252c19d04dfb13c4a174",
+  "tested_input_count": 680,
+  "changed_inputs": [
+    {
+      "path": "roguelike/docs/STRUCTURE_AUTHORING.md",
+      "first_raw": "c6dc3f3407039471a426ae5c739bd6abd50c5e293d4ef9b41b8ca394caab028e",
+      "second_raw": "8ed5833994db130d7039b02c877328f18a000cddde60467fdc54c02c7a32df0d",
+      "first_lf": "2ef5e169f5b5c0f75873b8f32f2b26bf29b806f1525eaf7aadf58e89cebed726",
+      "second_lf": "e187400bb2c10c5d981ebd54f040c5a041d6dfe618aa5ad69ea0c1896a8b6e66"
+    }
+  ],
+  "reason": "Correct stale guide opening, current save-adapter names, compound context summary and actual verification timeouts. Full required gates repeated because the owner guide is a tested input."
+}
