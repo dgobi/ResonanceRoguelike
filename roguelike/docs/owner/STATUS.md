@@ -1,4 +1,14 @@
-# Current status — G2 structure authoring
+# Current status — G4 composition reliability
+
+G4 restores staged native town content, functional waystones/prayers/resources,
+public-road approach sharing, complete weighted transforms and durable plan
+preflight. New worlds/scenes record `wg4`; visited G3 worlds remain authoritative.
+Unseen G3 scenes use an explicit adapter. Read
+[WORLDGEN_G4](../../../docs/owner/WORLDGEN_G4.md) and the
+[structure authoring guide](../STRUCTURE_AUTHORING.md). This implementation record
+does not assert a new owner-acceptance event. UI-TEXT-HEIGHT remains deferred.
+
+# Historical status — G2 structure authoring
 
 G2 implements shared source validation, actual runtime previews, lossless offline
 editing and controlled registration in existing town pools. It also closes the

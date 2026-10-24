@@ -659,7 +659,7 @@ window.STRUCTURE_CATALOG = {
     }
   ],
   "diagnostics": [],
-  "contract_sha256": "a3d72f44799b1192f718ed65ae4eb161a4c911c36697f05f4ab5024ec0eff2ec",
+  "contract_sha256": "4e7563c41e80b2b3e895419a0532b10c51c6b3a53b4c563e6c6be9a84b46d908",
   "ids": {
     "terrain": [
       "ancient_floor",

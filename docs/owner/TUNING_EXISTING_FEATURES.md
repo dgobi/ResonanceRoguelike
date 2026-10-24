@@ -119,3 +119,13 @@ git diff -- data/items/weapons/severance_blade.json
 ```
 
 Have Codex check referenced IDs and run the relevant included regression tests for behavioural changes. Record what changed and the check result in the checkpoint message. Keep data tuning small enough to reverse cleanly. New handlers, new state fields, different save semantics, and new mechanics require implementation and appropriate tests beyond editing JSON.
+
+## G4 composition tuning
+
+The active composition settings remain `roguelike/data/generation/g3_config.json`;
+the filename is retained for compatibility. See the complete active-field table,
+profile weighting, public/private access rules and new-world/saved-world behavior
+in [Structure Authoring](../../roguelike/docs/STRUCTURE_AUTHORING.md).
+Country and town-street widths are independent; the assigned band's actual width
+governs each building's fit. Existing `town_config.json`, `rotatable`, `facing` and
+legacy weights remain preserved metadata rather than new planner controls.

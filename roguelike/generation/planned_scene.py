@@ -101,6 +101,12 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
         reached=reachable(m,spawn,data)
         if not any((waystone[0]+dx,waystone[1]+dy) in reached for dx,dy in ((1,0),(-1,0),(0,1),(0,-1))):
             raise GenerationError('required waystone has no reachable interaction position')
+    if functional:
+        goals={'coordinates':'map','entry':dict(x=spawn[0],y=spawn[1]),
+               'targets':[dict(x=s['x'],y=s['y'],kind='readable',required=True) for s in functional]}
+        if not all(r['passed'] for r in check_access(m,data,goals)):
+            raise GenerationError('required civic prayer is not interactable after dressing/population')
+    if any(not receipt_owned(r,m) for r in receipts):raise GenerationError('final restored content ownership failed')
     m.plan_provenance={'mode':'shared-v1','routes':[r['id'] for r in section['routes']],
                        'crossings':[r['id'] for r in section['crossings']],
                        'placements':[p['id'] for p in section['placements']],

@@ -97,6 +97,19 @@ class G4Durability(unittest.TestCase):
         w=self.old_world(); w.plan['settlements'].pop(); orphan=tuple(self.old_world().plan['settlements'][-1]['members'][0])
         with self.assertRaisesRegex(GenerationError,'settlement owner'):self.scene(orphan,w)
 
+    def test_old_geometry_required_interaction_infeasible_is_atomic(self):
+        from world.local_map import LocalMap,make_tile
+        w=self.old_world(); e=make_engine(self.data);e.world_map=w
+        xy=tuple(w.plan['settlements'][0]['members'][0]); before=digest(_serialize_world(w));active=e.local_map
+        # Fixed saved G3 geometry on a deliberately unsuitable current base:
+        # roads/structures still paint normally, but every remaining site is rock.
+        def no_free_base(*args,**kwargs):
+            m=LocalMap(80,43);m.tiles[:]=make_tile('rock',False,False);m.generation_context=kwargs['context']
+            return m,(40,21)
+        with patch('generation.region_gen.generate_region',no_free_base):
+            self.assertIsNone(e._prepare_destination(*xy))
+        self.assertEqual(digest(_serialize_world(w)),before);self.assertIs(e.local_map,active);self.assertIsNone(e.save_manager.cache.load(*xy))
+
     def test_checksum_consistent_newest_corruption_coherent_recovery_and_failure(self):
         e=self.boot(); e.player.fighter.hp=41; self.assertTrue(e.save_manager.save(e)); earlier=e.save_manager.checkpoint_path()
         e.player.fighter.hp=37; self.assertTrue(e.save_manager.save(e)); newest=e.save_manager.checkpoint_path()

@@ -492,7 +492,7 @@ def _serialize_town_data(td) -> dict | None:
         "districts":       td.districts,
         "bell_state":      td.bell_state,
         "is_festival":     td.is_festival,
-        "waystone_pos":    list(td.waystone_pos),
+        "waystone_pos":    list(td.waystone_pos) if td.waystone_pos is not None else None,
         "bell_tower_pos":  list(td.bell_tower_pos) if td.bell_tower_pos else None,
         "buildings":       td.buildings,
         "creature_spawns": td.creature_spawns,

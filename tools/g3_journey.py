@@ -106,6 +106,21 @@ def journey(seed,save_root,progress=None):
         landmark_route=next(r for r in country if r['b']=='landmark');route(landmark_route)
         landmark=next(p for p in plan['placements'] if p['context']=='landmark')
         walk((landmark['join'][0]%80,landmark['join'][1]%43))
+        entrance=next(v for v in landmark['entrances'] if v['required'])
+        walk((entrance['x']%80,entrance['y']%43))
+        target=next(v for v in landmark['targets'] if v['required'])
+        goal=(target['x']%80,target['y']%43)
+        if target['kind']=='floor':walk(goal)
+        else:
+            approaches=[(goal[0]+dx,goal[1]+dy) for dx,dy in ((0,1),(1,0),(-1,0),(0,-1)) if enterable(e.local_map,(goal[0]+dx,goal[1]+dy),e.data)]
+            reached=False
+            for approach in approaches:
+                try:walk(approach)
+                except AssertionError:continue
+                e._update_fov()
+                if InteractionCursor.can_reach(e,*goal):reached=True;break
+            assert reached,'landmark target has no usable interaction position'
+        report['landmark_access']=dict(placement=landmark['id'],join=landmark['join'],entrance=entrance,target=target,player_local=[e.player.x,e.player.y])
         report['destinations'].append('landmark')
         report['bridge_ids_walked']=sorted(bridge_steps)
         assert any(c['road']=='road-1' and c['id'] in bridge_steps for c in plan['crossings'])

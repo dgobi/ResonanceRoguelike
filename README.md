@@ -1,8 +1,8 @@
 # Resonance roguelike — production main
 
-G3 adds connected world composition: shared country roads and bridges, grid and
-roadside settlements, assigned building frontage, durable plans and an autonomous
-start-to-landmark journey. Read [G3 delivery](docs/owner/WORLDGEN_G3.md) and the
+G4 restores native gameplay in planned settlements, fixes public frontage and
+weighted transforms, and validates coherent saved-plan ownership. Read
+[G4 delivery](docs/owner/WORLDGEN_G4.md) and the
 [structure authoring guide](roguelike/docs/STRUCTURE_AUTHORING.md).
 
 Work stays in this checkout on `main`, with named checkpoints and local commits;
@@ -14,7 +14,7 @@ Run the focused and full production gates with the established environment:
 ```powershell
 $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
 & $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike
-& $ResonancePython -X utf8 tools/worldgen_g3_diagnostic.py --journey
+& $ResonancePython -X utf8 tools/worldgen_g4_diagnostic.py --journey
 & $ResonancePython -X utf8 tools/verify_d.py
 ```
 

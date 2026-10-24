@@ -51,5 +51,5 @@ def plan_svg(plan):
         x,y,x1,y1=s['bounds']; parts.append(f'<rect x="{x*scale}" y="{y*scale}" width="{(x1-x)*scale}" height="{(y1-y)*scale}" fill="none" stroke="#90d798"/><text x="{x*scale}" y="{y*scale-3}" fill="#90d798" font-size="7">{s["id"]} {s["form"]}</text>')
     for n in plan['nodes']:
         x,y=n['xy'];parts.append(f'<circle cx="{x*scale}" cy="{y*scale}" r="2" fill="#e7a59c"><title>{n["id"]}</title></circle>')
-    parts.append(f'<text x="8" y="{height+20}" fill="white" font-size="10">G3 seed {plan["seed"]}: shared plan diagnostic, not a played-game screenshot. Hover routes/nodes for IDs.</text></svg>')
+    parts.append(f'<text x="8" y="{height+20}" fill="white" font-size="10">{plan["generation_revision"]} seed {plan["seed"]}: shared plan diagnostic, not a played-game screenshot. Hover routes/nodes for IDs.</text></svg>')
     return '\n'.join(parts)

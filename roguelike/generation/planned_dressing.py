@@ -47,4 +47,11 @@ def dress(m, chunk, world, data, context, native, spawn):
             specs.append(dict(kind='item',item_id='lab_note',text_id='waystone_prayer_a',x=x+1,y=y))
             reserved.add((x+1,y))
     m.protected_cells=reserved
+    counts={tid:sum(str(m.tiles[x,y]['terrain'])==tid for x in range(m.width) for y in range(m.height))
+            for tid in ('dead_wood','flint_rock','clay_deposit')}
+    m.functional_generation={'policy':'planned-dressing-v1','resources':counts,
+        'resource_absence':{tid:('town/capital policy excludes wilderness resources' if chunk.region_type in (RegionType.TOWN,RegionType.CAPITAL)
+                               else 'no legal selected site under biome, proximity and reservation policy') for tid,count in counts.items() if not count},
+        'waystone_policy':'required-start' if start else 'required-civic' if civic else 'optional-physical-road' if chunk.region_type not in (RegionType.TOWN,RegionType.CAPITAL) else 'not-applicable-member',
+        'waystones':sum(v=='waystone_plinth' for v in m.decor.values())}
     return specs,waystone

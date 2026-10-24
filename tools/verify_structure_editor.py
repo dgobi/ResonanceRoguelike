@@ -140,8 +140,14 @@ def worker(browser_name,evidence):
         profile=copy.deepcopy(planned['placement']);profile['buffer']=2
         page.locator('#metadata').fill(json.dumps(profile));page.locator('#apply-metadata').click()
         planned['placement']=profile
+        weighted=dict(type='weighted',x=planned['special_tiles'][0]['x'],y=planned['special_tiles'][0]['y'],
+                      spawn_table=[dict(planned['special_tiles'][0],weight=1)])
+        page.locator('#special').fill(json.dumps(weighted));page.locator('#apply-special').click()
+        planned['special_tiles'][0]=weighted
         got,path=export('planned-frontage')
         check('real placement panel edit/download preserves complete document',got==planned)
+        check('explicit weighted child coordinates and allowed mirror survive real download',
+              got['special_tiles'][0]['spawn_table'][0]['x']==got['special_tiles'][0]['x'] and got['placement']['mirror_x'] is True)
         planned_export=evidence/(browser_name+'-planned-frontage.json');planned_export.write_bytes(path.read_bytes())
         page.screenshot(path=str(evidence/(browser_name+'-lab.png')),full_page=True)
         check('no browser script errors',not errors)
@@ -157,9 +163,17 @@ def worker(browser_name,evidence):
                      '--output',str(evidence/(browser_name+'-planned-runtime.json'))]
     planned_run=subprocess.run(planned_command,cwd=ROOT,capture_output=True,text=True,timeout=90)
     check('downloaded placement metadata passes CLI and production planned placement',planned_run.returncode==0)
+    orientation_command=[sys.executable,'-X','utf8',str(ROOT/'tools/structure_authoring.py'),str(planned_export),
+                         '--route','ordinary_building','--category','residential','--orientations',
+                         '--output',str(evidence/(browser_name+'-orientations.json'))]
+    orientation_run=subprocess.run(orientation_command,cwd=ROOT,capture_output=True,text=True,timeout=60)
+    check('downloaded explicit weighted coordinates pass all eight rotations/reflections',orientation_run.returncode==0)
     report={'browser':browser_name,'version':version,'passed':all(c['passed'] for c in checks),'checks':checks,'errors':errors,
             'command':command,'runtime_stdout':run.stdout,'runtime_stderr':run.stderr,'codec_documents':len(codec),
-            'planned_command':planned_command,'planned_stdout':planned_run.stdout,'planned_stderr':planned_run.stderr}
+            'planned_command':planned_command,'planned_stdout':planned_run.stdout,'planned_stderr':planned_run.stderr,
+            'command_records':[dict(argv=c,cwd=str(ROOT),exit_code=r.returncode,stdout=r.stdout,stderr=r.stderr) for c,r in
+                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))],
+            'download_hashes':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (exported,planned_export)}}
     (evidence/(browser_name+'.json')).write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({'browser':browser_name,'passed':report['passed'],'checks':len(checks),'version':version}))
 

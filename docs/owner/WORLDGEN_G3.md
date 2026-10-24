@@ -1,5 +1,10 @@
 # G3 — Connected world composition
 
+Corrective follow-up: [G4](WORLDGEN_G4.md) reproduces and repairs the native
+population, dressing-order, public-frontage, weighted-transform and saved-plan
+validation gaps found after this delivery. The original measurements below remain
+historical; `frontage_coverage` duplicated occupancy and was not street length.
+
 Implemented directly in production `main`, from clean
 `3466fc6ac3c61a8b60ab46635e381ceeff29ccbf`. The supplied G3 brief was the task
 specification; its references to earlier acceptance were not treated as new

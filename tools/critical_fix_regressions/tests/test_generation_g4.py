@@ -124,6 +124,15 @@ class G4Placement(unittest.TestCase):
                 p['routes'].append(dict(id='wrong',width=1,points=[[0,2],[79,2]],rects=[[0,2,80,3]]))
             r=_plot(p,a,self.data,'fixture','grid',0,0,20,21,'S','wrong' if obstacle=='wrong-road' else 'assigned')
             self.assertIsNone(r['placement'])
+        data=copy.copy(self.data);data.structures=copy.deepcopy(data.structures)
+        raw=data.structures['house_small_a'];raw['layers'][-1]='####..####';raw['placement']['entrances'][0]['width']=2
+        for normal in 'NESW':
+            p,a=self.fixture(vertical=normal in 'EW',data=data)
+            result=_plot(p,a,data,'fixture','grid',0,0,40 if normal in 'EW' else 20,21,normal,'assigned')
+            self.assertIsNotNone(result['placement'],result['rejected'])
+            from generation.placement import entrance_cells
+            self.assertEqual(len(entrance_cells(p['placements'][0]['entrances'][0])),2)
+            self.assertTrue(set(entrance_cells(p['placements'][0]['entrances'][0]))<=cells(p['placements'][0]['approach']))
 
     def test_weighted_coordinates_every_transform_identity_and_immutability(self):
         from generation.structure_contract import compile_structure
@@ -167,7 +176,11 @@ class G4Placement(unittest.TestCase):
             p,a=self.fixture(data=data); a.add('blocker','structure',[26,10,28,17])
             r=_plot(p,a,data,'fixture','grid',0,0,20,21,'S','assigned')
             self.assertEqual(bool(r['placement']),permission,r['rejected'])
-            if permission:self.assertTrue(p['placements'][0]['mirror'])
+            if permission:
+                self.assertTrue(p['placements'][0]['mirror'])
+                from generation.structure_preview import preview
+                report,_,_=preview(transform(raw,0,True),'ordinary_building',data,category='residential')
+                self.assertTrue(report['passed'])
         raw['placement']['mirror_x']=True
         p,a=self.fixture(data=data)
         # Capture the asset draw's weights: two transforms must still carry one weight.

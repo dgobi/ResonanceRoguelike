@@ -1,11 +1,86 @@
 # Make a building or layout for Resonance
 
-Current: **G3 / generation revision `wg3`**, 23 October 2026.
+Current: **G4 / generation revision `wg4`**, 23 October 2026.
 The connected workflow below is active for new worlds. The later direct-stamp
 sections retain the G2 legacy authoring route and its explicitly inactive fields.
 
 
-## Connected frontage and landmark workflow (G3)
+## Connected frontage and landmark workflow (G4)
+
+G4 restores native town actors, coherent settlement names/zones/difficulty,
+starting and civic waystones, civic prayers and river-dependent resources. Shared
+geometry remains authoritative. Its stages are base biome terrain; planned water,
+roads and bridges; structures/contents; protected stairs; reservation-aware wood,
+flint, clay and waystones; native population; complete access validation. A late
+failure publishes no scene or metadata. Town roles map to existing districts:
+grid civic → bell quarter, first non-civic member → market where applicable,
+remaining members → residential; roadside first member → market, second →
+residential. Civic members have one waystone/prayer. Other town members explicitly
+do not. All these roles use the existing district population policies.
+
+An approach has exclusive private cells and shareable public cells. Opposite
+buildings may share **only cells of their assigned public road**. A nearby road,
+overlapping private approach, footprint or buffer does not grant permission.
+The assigned band's actual boundary determines setback, including even widths and
+street widths different from country-road widths. Full entrance spans, buffers and
+approaches still must fit one storage chunk; infeasible plots remain vacant.
+
+Selection draws an asset using its profile weight once, then tries a shuffled
+list of that asset's permitted transforms. Failed assets are removed and another
+weighted asset is tried. Allowing eight transforms therefore improves fit options
+without multiplying the asset's weight eightfold. `mirror_x: false` prohibits
+mirroring; `true` permits it before rotation. No equal-frequency or density promise
+is made. JSON rejection records include asset, rotation, mirror and reason.
+
+Weighted children may omit coordinates, repeat both parent coordinates, or repeat
+only x or only y. Every supplied coordinate must match the parent **before** a
+transform. Matching coordinates move with the parent; absent fields stay absent.
+Every branch is checked, including alternatives that a preview does not select.
+Contradictory explicit coordinates produce `CHOICE_COORDINATE`; unsupported
+coordinate-bearing metadata produces an explanation rather than silent movement.
+
+New worlds use plan format 2, G4 origin, `native-town-v1` semantics and
+`structure-v1` structural dependency projection. Existing format-1 G3 plans keep
+their original geometry, identities, selections, names, zones and difficulty.
+Load/F9/revisit never generate, repack, rename or populate saved maps. **A visited
+G3 starting surface keeps its historical missing waystone.** Unseen G3 scenes use
+the explicit `g3-to-g4-v1` materialization adapter, recording G3 plan origin and G4
+scene revision separately. They receive corrected native/resources/interactions
+where the saved geometry permits them. Incompatible required geometry fails before
+departure; no silent relocation or campaign migration occurs.
+
+G3 structural hashes retain their original semantic projection. Native profiles,
+biomes, resource and presentation definitions used by newly restored behavior are
+current definitions at first scene creation, not historically frozen G3 inputs.
+Actual native/resource input fingerprints are recorded when the scene is created;
+they are provenance, not a second inventory or a load-time content-edit gate.
+Relevant structural edits still permit load and visited-map play, while an affected
+pending placement reports its changed dependency. Unaffected pending scenes work.
+Absent-field/wg1/wg2 worlds retain their legacy/no-plan dispatch and origin even
+when a new scene records `wg4`.
+
+Common failures and next actions:
+
+| Message | Meaning and correction |
+|---|---|
+| footprint/buffer conflict | Real exclusive-space overlap; reduce the authored footprint/buffer or adjust spacing. |
+| approach conflict | Private overlap, unrelated road or water; sharing is limited to the assigned public cells. |
+| storage chunk / buildable plot | The actual street is too wide or the complete building/approach does not fit; inspect its assigned band. |
+| no eligible permitted transform | No allowed orientation faces this road; deliberately change rotations/mirroring if appropriate. |
+| unsupported coordinate metadata | Use a supported coordinate field before rotating; opaque positions cannot be inferred. |
+| CHOICE_COORDINATE | Remove the child coordinate or match its enclosing coordinate exactly. |
+| required content access | Door span or target has no legal route/interaction position; inspect the production preview. |
+| changed dependency | An unseen saved placement requires different structural definitions; restore compatible definitions or use a new world. |
+
+The executable verification walkthrough below creates disposable drafts, edits a
+sentinel, repeats initialization, previews all permitted orientations and mixed
+grid/roadside/landmark pools, and records exact argv/cwd/exit/output hashes. It
+does not install its test drafts in the live catalog:
+
+```powershell
+$ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
+& $ResonancePython -X utf8 tools/verify_g4_authoring.py --evidence evidence/worldgen-g4/authoring
+```
 
 The active planner uses `data/generation/g3_config.json`. It selects assets once,
 then stores routes, crossings, settlements, plots, entrance approaches and semantic
@@ -139,14 +214,14 @@ To see the representative world using production code and a fresh disposable sav
 root, choose a new session name (existing names are refused):
 
 ```powershell
-& $ResonancePython -X utf8 tools/play_disposable.py --seed 20261023 --session g3-first
+& $ResonancePython -X utf8 tools/play_disposable.py --seed 20261023 --session g4-first
 ```
 
 This optional play command opens the game; autonomous verification does not depend
 on it. The headless journey command is:
 
 ```powershell
-& $ResonancePython -X utf8 tools/worldgen_g3_diagnostic.py --journey --evidence evidence/worldgen-g3/diagnostic
+& $ResonancePython -X utf8 tools/worldgen_g4_diagnostic.py --journey --evidence evidence/worldgen-g4/diagnostic
 ```
 
 ## Legacy direct-stamp workflow
