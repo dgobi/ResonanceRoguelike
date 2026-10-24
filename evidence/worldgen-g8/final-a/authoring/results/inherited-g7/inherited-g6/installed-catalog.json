@@ -1,0 +1,2849 @@
+{
+  "passed": true,
+  "version": "g2-1",
+  "identity": "904af151371e6df33ba93904027a425481ad27b5bc850628c7f7efb872778bb8",
+  "routes": {
+    "ordinary_building": {
+      "active": [
+        "layers",
+        "legend",
+        "decor_layer",
+        "special_tiles"
+      ],
+      "selection": "Folder category; row packing uniform among fitting definitions. Corner scatter uses weight.",
+      "transforms": [
+        "normal",
+        "vertical mirror"
+      ],
+      "inactive": [
+        "allowed_in",
+        "facing",
+        "rotatable",
+        "tags",
+        "interior_loot_table",
+        "district_weights",
+        "condition",
+        "submap",
+        "legend_weights",
+        "player_start"
+      ]
+    },
+    "plaza": {
+      "active": [
+        "layers",
+        "layout",
+        "legend",
+        "weight"
+      ],
+      "selection": "Weighted plaza pool in centre C.",
+      "transforms": [
+        "normal"
+      ],
+      "inactive": [
+        "allowed_in",
+        "decor_layer",
+        "special_tiles",
+        "rotatable",
+        "tags",
+        "player_start"
+      ]
+    },
+    "interior_entrance": {
+      "active": [
+        "layers",
+        "legend",
+        "legend_weights",
+        "entrance_type"
+      ],
+      "selection": "Uniform variants of entrance_type for supported surface submaps.",
+      "transforms": [
+        "normal"
+      ],
+      "inactive": [
+        "variant",
+        "connection_point",
+        "spawn_offset",
+        "edges",
+        "decor_layer",
+        "special_tiles",
+        "player_start"
+      ]
+    },
+    "authored_submap": {
+      "active": [
+        "layers",
+        "legend",
+        "special_tiles",
+        "player_start",
+        "exit_direction",
+        "exit_x",
+        "exit_y"
+      ],
+      "selection": "Explicit SubMap.layout_id; no ordinary placement pool.",
+      "transforms": [
+        "normal"
+      ],
+      "inactive": [
+        "type",
+        "stairs_up",
+        "decor_layer",
+        "legend_weights",
+        "inscription",
+        "rotatable",
+        "tags"
+      ]
+    }
+  },
+  "eligibility": {
+    "civic": [
+      "C"
+    ],
+    "religious": [
+      "C"
+    ],
+    "commercial": [
+      "C",
+      "N",
+      "S",
+      "E",
+      "W"
+    ],
+    "residential": [
+      "N",
+      "S",
+      "E",
+      "W",
+      "NW",
+      "NE",
+      "SW",
+      "SE"
+    ],
+    "storage": [
+      "N",
+      "S",
+      "E",
+      "W",
+      "NW",
+      "NE",
+      "SW",
+      "SE"
+    ],
+    "ruins": [
+      "NW",
+      "NE",
+      "SW",
+      "SE"
+    ],
+    "wilderness": [
+      "NW",
+      "NE",
+      "SW",
+      "SE"
+    ],
+    "plaza": [
+      "C"
+    ]
+  },
+  "assets": [
+    {
+      "id": "bell_tower_a",
+      "route": "ordinary_building",
+      "category": "civic",
+      "width": 8,
+      "height": 10,
+      "path": "buildings/civic/bell_tower_a.json"
+    },
+    {
+      "id": "covered_well_house_a",
+      "route": "ordinary_building",
+      "category": "civic",
+      "width": 6,
+      "height": 5,
+      "path": "buildings/civic/covered_well_house_a.json"
+    },
+    {
+      "id": "guard_post_a",
+      "route": "ordinary_building",
+      "category": "civic",
+      "width": 9,
+      "height": 7,
+      "path": "buildings/civic/guard_post_a.json"
+    },
+    {
+      "id": "meeting_hall_a",
+      "route": "ordinary_building",
+      "category": "civic",
+      "width": 14,
+      "height": 10,
+      "path": "buildings/civic/meeting_hall_a.json"
+    },
+    {
+      "id": "record_hall_a",
+      "route": "ordinary_building",
+      "category": "civic",
+      "width": 12,
+      "height": 9,
+      "path": "buildings/civic/record_hall_a.json"
+    },
+    {
+      "id": "waystone_plinth_a",
+      "route": "ordinary_building",
+      "category": "civic",
+      "width": 7,
+      "height": 5,
+      "path": "buildings/civic/waystone_plinth_a.json"
+    },
+    {
+      "id": "well_a",
+      "route": "ordinary_building",
+      "category": "civic",
+      "width": 7,
+      "height": 5,
+      "path": "buildings/civic/well_a.json"
+    },
+    {
+      "id": "apothecary_a",
+      "route": "ordinary_building",
+      "category": "commercial",
+      "width": 11,
+      "height": 8,
+      "path": "buildings/commercial/apothecary_a.json"
+    },
+    {
+      "id": "market_stall_a",
+      "route": "ordinary_building",
+      "category": "commercial",
+      "width": 6,
+      "height": 4,
+      "path": "buildings/commercial/market_stall_a.json"
+    },
+    {
+      "id": "market_stall_b",
+      "route": "ordinary_building",
+      "category": "commercial",
+      "width": 10,
+      "height": 6,
+      "path": "buildings/commercial/market_stall_b.json"
+    },
+    {
+      "id": "market_stall_c",
+      "route": "ordinary_building",
+      "category": "commercial",
+      "width": 8,
+      "height": 6,
+      "path": "buildings/commercial/market_stall_c.json"
+    },
+    {
+      "id": "shop_a",
+      "route": "ordinary_building",
+      "category": "commercial",
+      "width": 10,
+      "height": 8,
+      "path": "buildings/commercial/shop_a.json"
+    },
+    {
+      "id": "trader_shop_a",
+      "route": "ordinary_building",
+      "category": "commercial",
+      "width": 10,
+      "height": 8,
+      "path": "buildings/commercial/trader_shop_a.json"
+    },
+    {
+      "id": "workshop_a",
+      "route": "ordinary_building",
+      "category": "commercial",
+      "width": 12,
+      "height": 9,
+      "path": "buildings/commercial/workshop_a.json"
+    },
+    {
+      "id": "plaza_market_a",
+      "route": "plaza",
+      "category": "plaza",
+      "width": 10,
+      "height": 10,
+      "path": "buildings/plaza/plaza_market_a.json"
+    },
+    {
+      "id": "plaza_ossuary_a",
+      "route": "plaza",
+      "category": "plaza",
+      "width": 10,
+      "height": 10,
+      "path": "buildings/plaza/plaza_ossuary_a.json"
+    },
+    {
+      "id": "bell_warden_post_a",
+      "route": "ordinary_building",
+      "category": "religious",
+      "width": 8,
+      "height": 6,
+      "path": "buildings/religious/bell_warden_post_a.json"
+    },
+    {
+      "id": "collapsed_shrine_a",
+      "route": "ordinary_building",
+      "category": "religious",
+      "width": 10,
+      "height": 8,
+      "path": "buildings/religious/collapsed_shrine_a.json"
+    },
+    {
+      "id": "folk_saint_alcove_a",
+      "route": "ordinary_building",
+      "category": "religious",
+      "width": 3,
+      "height": 4,
+      "path": "buildings/religious/folk_saint_alcove_a.json"
+    },
+    {
+      "id": "folk_saint_niche_a",
+      "route": "ordinary_building",
+      "category": "religious",
+      "width": 6,
+      "height": 5,
+      "path": "buildings/religious/folk_saint_niche_a.json"
+    },
+    {
+      "id": "ossuary_chapel_a",
+      "route": "ordinary_building",
+      "category": "religious",
+      "width": 11,
+      "height": 9,
+      "path": "buildings/religious/ossuary_chapel_a.json"
+    },
+    {
+      "id": "shrine_a",
+      "route": "ordinary_building",
+      "category": "religious",
+      "width": 8,
+      "height": 7,
+      "path": "buildings/religious/shrine_a.json"
+    },
+    {
+      "id": "shrine_hall_a",
+      "route": "ordinary_building",
+      "category": "religious",
+      "width": 13,
+      "height": 9,
+      "path": "buildings/religious/shrine_hall_a.json"
+    },
+    {
+      "id": "waystone_shrine_a",
+      "route": "ordinary_building",
+      "category": "religious",
+      "width": 8,
+      "height": 7,
+      "path": "buildings/religious/waystone_shrine_a.json"
+    },
+    {
+      "id": "house_abandoned_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 9,
+      "height": 7,
+      "path": "buildings/residential/house_abandoned_a.json"
+    },
+    {
+      "id": "house_crowded_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 11,
+      "height": 8,
+      "path": "buildings/residential/house_crowded_a.json"
+    },
+    {
+      "id": "house_damaged_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 10,
+      "height": 8,
+      "path": "buildings/residential/house_damaged_a.json"
+    },
+    {
+      "id": "house_hearth_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 12,
+      "height": 9,
+      "path": "buildings/residential/house_hearth_a.json"
+    },
+    {
+      "id": "house_large_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 14,
+      "height": 10,
+      "path": "buildings/residential/house_large_a.json"
+    },
+    {
+      "id": "house_old_stone_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 10,
+      "height": 9,
+      "path": "buildings/residential/house_old_stone_a.json"
+    },
+    {
+      "id": "house_single_room_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 7,
+      "height": 6,
+      "path": "buildings/residential/house_single_room_a.json"
+    },
+    {
+      "id": "house_small_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 10,
+      "height": 8,
+      "path": "buildings/residential/house_small_a.json"
+    },
+    {
+      "id": "house_small_b",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 8,
+      "height": 7,
+      "path": "buildings/residential/house_small_b.json"
+    },
+    {
+      "id": "house_two_room_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 10,
+      "height": 8,
+      "path": "buildings/residential/house_two_room_a.json"
+    },
+    {
+      "id": "hovel",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 7,
+      "height": 5,
+      "path": "buildings/residential/hovel.json"
+    },
+    {
+      "id": "tenement_a",
+      "route": "ordinary_building",
+      "category": "residential",
+      "width": 16,
+      "height": 8,
+      "path": "buildings/residential/tenement_a.json"
+    },
+    {
+      "id": "burnt_dwelling_a",
+      "route": "ordinary_building",
+      "category": "ruins",
+      "width": 8,
+      "height": 7,
+      "path": "buildings/ruins/burnt_dwelling_a.json"
+    },
+    {
+      "id": "collapsed_house_a",
+      "route": "ordinary_building",
+      "category": "ruins",
+      "width": 11,
+      "height": 8,
+      "path": "buildings/ruins/collapsed_house_a.json"
+    },
+    {
+      "id": "collapsed_shop_a",
+      "route": "ordinary_building",
+      "category": "ruins",
+      "width": 9,
+      "height": 7,
+      "path": "buildings/ruins/collapsed_shop_a.json"
+    },
+    {
+      "id": "deep_foundation_a",
+      "route": "ordinary_building",
+      "category": "ruins",
+      "width": 10,
+      "height": 8,
+      "path": "buildings/ruins/deep_foundation_a.json"
+    },
+    {
+      "id": "foundation_outline_a",
+      "route": "ordinary_building",
+      "category": "ruins",
+      "width": 12,
+      "height": 8,
+      "path": "buildings/ruins/foundation_outline_a.json"
+    },
+    {
+      "id": "ossuary_ruin_a",
+      "route": "ordinary_building",
+      "category": "ruins",
+      "width": 11,
+      "height": 8,
+      "path": "buildings/ruins/ossuary_ruin_a.json"
+    },
+    {
+      "id": "ruin_wall_a",
+      "route": "ordinary_building",
+      "category": "ruins",
+      "width": 8,
+      "height": 3,
+      "path": "buildings/ruins/ruin_wall_a.json"
+    },
+    {
+      "id": "three_wall_remnant_a",
+      "route": "ordinary_building",
+      "category": "ruins",
+      "width": 8,
+      "height": 6,
+      "path": "buildings/ruins/three_wall_remnant_a.json"
+    },
+    {
+      "id": "cellar_a",
+      "route": "ordinary_building",
+      "category": "storage",
+      "width": 7,
+      "height": 6,
+      "path": "buildings/storage/cellar_a.json"
+    },
+    {
+      "id": "food_store_a",
+      "route": "ordinary_building",
+      "category": "storage",
+      "width": 10,
+      "height": 7,
+      "path": "buildings/storage/food_store_a.json"
+    },
+    {
+      "id": "goods_cellar_a",
+      "route": "ordinary_building",
+      "category": "storage",
+      "width": 12,
+      "height": 8,
+      "path": "buildings/storage/goods_cellar_a.json"
+    },
+    {
+      "id": "root_cellar_a",
+      "route": "ordinary_building",
+      "category": "storage",
+      "width": 7,
+      "height": 5,
+      "path": "buildings/storage/root_cellar_a.json"
+    },
+    {
+      "id": "storehouse_a",
+      "route": "ordinary_building",
+      "category": "storage",
+      "width": 14,
+      "height": 7,
+      "path": "buildings/storage/storehouse_a.json"
+    },
+    {
+      "id": "tool_shed_a",
+      "route": "ordinary_building",
+      "category": "storage",
+      "width": 8,
+      "height": 6,
+      "path": "buildings/storage/tool_shed_a.json"
+    },
+    {
+      "id": "warehouse_a",
+      "route": "ordinary_building",
+      "category": "storage",
+      "width": 14,
+      "height": 10,
+      "path": "buildings/storage/warehouse_a.json"
+    },
+    {
+      "id": "fishing_dock",
+      "route": "ordinary_building",
+      "category": "wilderness",
+      "width": 6,
+      "height": 4,
+      "path": "buildings/wilderness/fishing_dock.json"
+    },
+    {
+      "id": "g6_wayhouse",
+      "route": "ordinary_building",
+      "category": "wilderness",
+      "width": 6,
+      "height": 5,
+      "path": "buildings/wilderness/g6_wayhouse.json"
+    },
+    {
+      "id": "hunter_cabin",
+      "route": "ordinary_building",
+      "category": "wilderness",
+      "width": 8,
+      "height": 6,
+      "path": "buildings/wilderness/hunter_cabin.json"
+    },
+    {
+      "id": "roadside_shrine_a",
+      "route": "ordinary_building",
+      "category": "wilderness",
+      "width": 6,
+      "height": 5,
+      "path": "buildings/wilderness/roadside_shrine_a.json"
+    },
+    {
+      "id": "shepherds_fold_a",
+      "route": "ordinary_building",
+      "category": "wilderness",
+      "width": 8,
+      "height": 7,
+      "path": "buildings/wilderness/shepherds_fold_a.json"
+    },
+    {
+      "id": "shepherds_hut_a",
+      "route": "ordinary_building",
+      "category": "wilderness",
+      "width": 7,
+      "height": 6,
+      "path": "buildings/wilderness/shepherds_hut_a.json"
+    },
+    {
+      "id": "waymarker_shelter_a",
+      "route": "ordinary_building",
+      "category": "wilderness",
+      "width": 6,
+      "height": 5,
+      "path": "buildings/wilderness/waymarker_shelter_a.json"
+    },
+    {
+      "id": "barrow_mound_a",
+      "route": "interior_entrance",
+      "category": null,
+      "width": 15,
+      "height": 9,
+      "path": "entrances/barrow_mound_a.json"
+    },
+    {
+      "id": "barrow_mound_b",
+      "route": "interior_entrance",
+      "category": null,
+      "width": 19,
+      "height": 9,
+      "path": "entrances/barrow_mound_b.json"
+    },
+    {
+      "id": "drowned_threshold_a",
+      "route": "interior_entrance",
+      "category": null,
+      "width": 13,
+      "height": 9,
+      "path": "entrances/drowned_threshold_a.json"
+    },
+    {
+      "id": "overgrown_gatehouse_a",
+      "route": "interior_entrance",
+      "category": null,
+      "width": 13,
+      "height": 7,
+      "path": "entrances/overgrown_gatehouse_a.json"
+    },
+    {
+      "id": "rock_face_cut_a",
+      "route": "interior_entrance",
+      "category": null,
+      "width": 14,
+      "height": 7,
+      "path": "entrances/rock_face_cut_a.json"
+    },
+    {
+      "id": "sunken_ruin_a",
+      "route": "interior_entrance",
+      "category": null,
+      "width": 16,
+      "height": 11,
+      "path": "entrances/sunken_ruin_a.json"
+    },
+    {
+      "id": "starting_lab",
+      "route": "authored_submap",
+      "category": null,
+      "width": 60,
+      "height": 16,
+      "path": "layouts/starting_lab.json"
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\bell_tower_a.json",
+      "asset": "bell_tower_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\bell_tower_a.json",
+      "asset": "bell_tower_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\bell_tower_a.json",
+      "asset": "bell_tower_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\bell_tower_a.json",
+      "asset": "bell_tower_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\covered_well_house_a.json",
+      "asset": "covered_well_house_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\covered_well_house_a.json",
+      "asset": "covered_well_house_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\covered_well_house_a.json",
+      "asset": "covered_well_house_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\covered_well_house_a.json",
+      "asset": "covered_well_house_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\guard_post_a.json",
+      "asset": "guard_post_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\guard_post_a.json",
+      "asset": "guard_post_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\guard_post_a.json",
+      "asset": "guard_post_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\meeting_hall_a.json",
+      "asset": "meeting_hall_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\meeting_hall_a.json",
+      "asset": "meeting_hall_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\meeting_hall_a.json",
+      "asset": "meeting_hall_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\record_hall_a.json",
+      "asset": "record_hall_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\record_hall_a.json",
+      "asset": "record_hall_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\record_hall_a.json",
+      "asset": "record_hall_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\waystone_plinth_a.json",
+      "asset": "waystone_plinth_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\waystone_plinth_a.json",
+      "asset": "waystone_plinth_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\waystone_plinth_a.json",
+      "asset": "waystone_plinth_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\waystone_plinth_a.json",
+      "asset": "waystone_plinth_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\well_a.json",
+      "asset": "well_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\well_a.json",
+      "asset": "well_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\well_a.json",
+      "asset": "well_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\civic\\well_a.json",
+      "asset": "well_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\apothecary_a.json",
+      "asset": "apothecary_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\apothecary_a.json",
+      "asset": "apothecary_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\apothecary_a.json",
+      "asset": "apothecary_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_a.json",
+      "asset": "market_stall_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_a.json",
+      "asset": "market_stall_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_a.json",
+      "asset": "market_stall_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_a.json",
+      "asset": "market_stall_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_b.json",
+      "asset": "market_stall_b",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_b.json",
+      "asset": "market_stall_b",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_b.json",
+      "asset": "market_stall_b",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_b.json",
+      "asset": "market_stall_b",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_c.json",
+      "asset": "market_stall_c",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_c.json",
+      "asset": "market_stall_c",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\market_stall_c.json",
+      "asset": "market_stall_c",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\shop_a.json",
+      "asset": "shop_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\shop_a.json",
+      "asset": "shop_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\shop_a.json",
+      "asset": "shop_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\shop_a.json",
+      "asset": "shop_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\trader_shop_a.json",
+      "asset": "trader_shop_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\trader_shop_a.json",
+      "asset": "trader_shop_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\trader_shop_a.json",
+      "asset": "trader_shop_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\workshop_a.json",
+      "asset": "workshop_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\workshop_a.json",
+      "asset": "workshop_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\workshop_a.json",
+      "asset": "workshop_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\commercial\\workshop_a.json",
+      "asset": "workshop_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "TERRAIN_UNUSED",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\plaza\\plaza_market_a.json",
+      "asset": "plaza_market_a",
+      "field": "legend['p']",
+      "message": "Unknown terrain 'town_plaza'; unused legend entry.",
+      "correction": "Select an existing terrain ID."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\plaza\\plaza_market_a.json",
+      "asset": "plaza_market_a",
+      "field": "allowed_in",
+      "message": "Retained; plaza does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "TERRAIN_UNUSED",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\plaza\\plaza_ossuary_a.json",
+      "asset": "plaza_ossuary_a",
+      "field": "legend['p']",
+      "message": "Unknown terrain 'town_plaza'; unused legend entry.",
+      "correction": "Select an existing terrain ID."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\plaza\\plaza_ossuary_a.json",
+      "asset": "plaza_ossuary_a",
+      "field": "allowed_in",
+      "message": "Retained; plaza does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\bell_warden_post_a.json",
+      "asset": "bell_warden_post_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\bell_warden_post_a.json",
+      "asset": "bell_warden_post_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\bell_warden_post_a.json",
+      "asset": "bell_warden_post_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\bell_warden_post_a.json",
+      "asset": "bell_warden_post_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\collapsed_shrine_a.json",
+      "asset": "collapsed_shrine_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\collapsed_shrine_a.json",
+      "asset": "collapsed_shrine_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\collapsed_shrine_a.json",
+      "asset": "collapsed_shrine_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\collapsed_shrine_a.json",
+      "asset": "collapsed_shrine_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "DEFERRED_SPECIAL",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\folk_saint_alcove_a.json",
+      "asset": "folk_saint_alcove_a",
+      "field": "special_tiles[0]",
+      "message": "body physical behavior is deferred; submap stele text metadata is retained.",
+      "correction": "Use supported item/scene records for physical contents."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\folk_saint_alcove_a.json",
+      "asset": "folk_saint_alcove_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\folk_saint_alcove_a.json",
+      "asset": "folk_saint_alcove_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\folk_saint_alcove_a.json",
+      "asset": "folk_saint_alcove_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\folk_saint_alcove_a.json",
+      "asset": "folk_saint_alcove_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\folk_saint_niche_a.json",
+      "asset": "folk_saint_niche_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\folk_saint_niche_a.json",
+      "asset": "folk_saint_niche_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\folk_saint_niche_a.json",
+      "asset": "folk_saint_niche_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\ossuary_chapel_a.json",
+      "asset": "ossuary_chapel_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\ossuary_chapel_a.json",
+      "asset": "ossuary_chapel_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\ossuary_chapel_a.json",
+      "asset": "ossuary_chapel_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\shrine_a.json",
+      "asset": "shrine_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\shrine_a.json",
+      "asset": "shrine_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\shrine_a.json",
+      "asset": "shrine_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\shrine_a.json",
+      "asset": "shrine_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\shrine_hall_a.json",
+      "asset": "shrine_hall_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\shrine_hall_a.json",
+      "asset": "shrine_hall_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\shrine_hall_a.json",
+      "asset": "shrine_hall_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "DEFERRED_SPECIAL",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\waystone_shrine_a.json",
+      "asset": "waystone_shrine_a",
+      "field": "special_tiles[0]",
+      "message": "stele physical behavior is deferred; submap stele text metadata is retained.",
+      "correction": "Use supported item/scene records for physical contents."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\waystone_shrine_a.json",
+      "asset": "waystone_shrine_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\waystone_shrine_a.json",
+      "asset": "waystone_shrine_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\religious\\waystone_shrine_a.json",
+      "asset": "waystone_shrine_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_abandoned_a.json",
+      "asset": "house_abandoned_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_abandoned_a.json",
+      "asset": "house_abandoned_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_abandoned_a.json",
+      "asset": "house_abandoned_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_POOL_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_crowded_a.json",
+      "asset": "house_crowded_a",
+      "field": "special_tiles[1].loot_pools[0] -> loot_pools/commoner_bedroom.items[4].text_pool",
+      "message": "Retained; loot roller does not consume this field.",
+      "correction": "Use a supported item record for explicit text binding."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_crowded_a.json",
+      "asset": "house_crowded_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_crowded_a.json",
+      "asset": "house_crowded_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_crowded_a.json",
+      "asset": "house_crowded_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_damaged_a.json",
+      "asset": "house_damaged_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_damaged_a.json",
+      "asset": "house_damaged_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_damaged_a.json",
+      "asset": "house_damaged_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_damaged_a.json",
+      "asset": "house_damaged_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_POOL_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_hearth_a.json",
+      "asset": "house_hearth_a",
+      "field": "special_tiles[0].loot_pools[0] -> loot_pools/commoner_bedroom.items[4].text_pool",
+      "message": "Retained; loot roller does not consume this field.",
+      "correction": "Use a supported item record for explicit text binding."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_hearth_a.json",
+      "asset": "house_hearth_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_hearth_a.json",
+      "asset": "house_hearth_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_hearth_a.json",
+      "asset": "house_hearth_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_large_a.json",
+      "asset": "house_large_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_large_a.json",
+      "asset": "house_large_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_large_a.json",
+      "asset": "house_large_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_large_a.json",
+      "asset": "house_large_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_old_stone_a.json",
+      "asset": "house_old_stone_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_old_stone_a.json",
+      "asset": "house_old_stone_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_old_stone_a.json",
+      "asset": "house_old_stone_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_single_room_a.json",
+      "asset": "house_single_room_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_single_room_a.json",
+      "asset": "house_single_room_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_single_room_a.json",
+      "asset": "house_single_room_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_small_a.json",
+      "asset": "house_small_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_small_a.json",
+      "asset": "house_small_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_small_a.json",
+      "asset": "house_small_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_small_a.json",
+      "asset": "house_small_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_small_b.json",
+      "asset": "house_small_b",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_small_b.json",
+      "asset": "house_small_b",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_small_b.json",
+      "asset": "house_small_b",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_small_b.json",
+      "asset": "house_small_b",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_POOL_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_two_room_a.json",
+      "asset": "house_two_room_a",
+      "field": "special_tiles[0].loot_pools[0] -> loot_pools/commoner_bedroom.items[4].text_pool",
+      "message": "Retained; loot roller does not consume this field.",
+      "correction": "Use a supported item record for explicit text binding."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_two_room_a.json",
+      "asset": "house_two_room_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_two_room_a.json",
+      "asset": "house_two_room_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\house_two_room_a.json",
+      "asset": "house_two_room_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\hovel.json",
+      "asset": "hovel",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\hovel.json",
+      "asset": "hovel",
+      "field": "rotatable",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\hovel.json",
+      "asset": "hovel",
+      "field": "tags",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\hovel.json",
+      "asset": "hovel",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\hovel.json",
+      "asset": "hovel",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\hovel.json",
+      "asset": "hovel",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\tenement_a.json",
+      "asset": "tenement_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\tenement_a.json",
+      "asset": "tenement_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\tenement_a.json",
+      "asset": "tenement_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\residential\\tenement_a.json",
+      "asset": "tenement_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\burnt_dwelling_a.json",
+      "asset": "burnt_dwelling_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\burnt_dwelling_a.json",
+      "asset": "burnt_dwelling_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\burnt_dwelling_a.json",
+      "asset": "burnt_dwelling_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\collapsed_house_a.json",
+      "asset": "collapsed_house_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\collapsed_house_a.json",
+      "asset": "collapsed_house_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\collapsed_house_a.json",
+      "asset": "collapsed_house_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\collapsed_house_a.json",
+      "asset": "collapsed_house_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\collapsed_shop_a.json",
+      "asset": "collapsed_shop_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\collapsed_shop_a.json",
+      "asset": "collapsed_shop_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\collapsed_shop_a.json",
+      "asset": "collapsed_shop_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\deep_foundation_a.json",
+      "asset": "deep_foundation_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\deep_foundation_a.json",
+      "asset": "deep_foundation_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\deep_foundation_a.json",
+      "asset": "deep_foundation_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\foundation_outline_a.json",
+      "asset": "foundation_outline_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\foundation_outline_a.json",
+      "asset": "foundation_outline_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\foundation_outline_a.json",
+      "asset": "foundation_outline_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\foundation_outline_a.json",
+      "asset": "foundation_outline_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\ossuary_ruin_a.json",
+      "asset": "ossuary_ruin_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\ossuary_ruin_a.json",
+      "asset": "ossuary_ruin_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\ossuary_ruin_a.json",
+      "asset": "ossuary_ruin_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\ruin_wall_a.json",
+      "asset": "ruin_wall_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\ruin_wall_a.json",
+      "asset": "ruin_wall_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\ruin_wall_a.json",
+      "asset": "ruin_wall_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\ruin_wall_a.json",
+      "asset": "ruin_wall_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\three_wall_remnant_a.json",
+      "asset": "three_wall_remnant_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\three_wall_remnant_a.json",
+      "asset": "three_wall_remnant_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\three_wall_remnant_a.json",
+      "asset": "three_wall_remnant_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\ruins\\three_wall_remnant_a.json",
+      "asset": "three_wall_remnant_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\cellar_a.json",
+      "asset": "cellar_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\cellar_a.json",
+      "asset": "cellar_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\cellar_a.json",
+      "asset": "cellar_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\cellar_a.json",
+      "asset": "cellar_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\food_store_a.json",
+      "asset": "food_store_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\food_store_a.json",
+      "asset": "food_store_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\food_store_a.json",
+      "asset": "food_store_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\goods_cellar_a.json",
+      "asset": "goods_cellar_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\goods_cellar_a.json",
+      "asset": "goods_cellar_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\goods_cellar_a.json",
+      "asset": "goods_cellar_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\root_cellar_a.json",
+      "asset": "root_cellar_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\root_cellar_a.json",
+      "asset": "root_cellar_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\root_cellar_a.json",
+      "asset": "root_cellar_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\root_cellar_a.json",
+      "asset": "root_cellar_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\storehouse_a.json",
+      "asset": "storehouse_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\storehouse_a.json",
+      "asset": "storehouse_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\storehouse_a.json",
+      "asset": "storehouse_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\storehouse_a.json",
+      "asset": "storehouse_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\tool_shed_a.json",
+      "asset": "tool_shed_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\tool_shed_a.json",
+      "asset": "tool_shed_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\tool_shed_a.json",
+      "asset": "tool_shed_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\warehouse_a.json",
+      "asset": "warehouse_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\warehouse_a.json",
+      "asset": "warehouse_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\warehouse_a.json",
+      "asset": "warehouse_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\storage\\warehouse_a.json",
+      "asset": "warehouse_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\fishing_dock.json",
+      "asset": "fishing_dock",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\fishing_dock.json",
+      "asset": "fishing_dock",
+      "field": "rotatable",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\fishing_dock.json",
+      "asset": "fishing_dock",
+      "field": "tags",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\fishing_dock.json",
+      "asset": "fishing_dock",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\fishing_dock.json",
+      "asset": "fishing_dock",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\fishing_dock.json",
+      "asset": "fishing_dock",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\g6_wayhouse.json",
+      "asset": "g6_wayhouse",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\g6_wayhouse.json",
+      "asset": "g6_wayhouse",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\g6_wayhouse.json",
+      "asset": "g6_wayhouse",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\g6_wayhouse.json",
+      "asset": "g6_wayhouse",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\hunter_cabin.json",
+      "asset": "hunter_cabin",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\hunter_cabin.json",
+      "asset": "hunter_cabin",
+      "field": "rotatable",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\hunter_cabin.json",
+      "asset": "hunter_cabin",
+      "field": "tags",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\hunter_cabin.json",
+      "asset": "hunter_cabin",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\hunter_cabin.json",
+      "asset": "hunter_cabin",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\hunter_cabin.json",
+      "asset": "hunter_cabin",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\roadside_shrine_a.json",
+      "asset": "roadside_shrine_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\roadside_shrine_a.json",
+      "asset": "roadside_shrine_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\roadside_shrine_a.json",
+      "asset": "roadside_shrine_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\shepherds_fold_a.json",
+      "asset": "shepherds_fold_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\shepherds_fold_a.json",
+      "asset": "shepherds_fold_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\shepherds_fold_a.json",
+      "asset": "shepherds_fold_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\shepherds_fold_a.json",
+      "asset": "shepherds_fold_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\shepherds_hut_a.json",
+      "asset": "shepherds_hut_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\shepherds_hut_a.json",
+      "asset": "shepherds_hut_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\shepherds_hut_a.json",
+      "asset": "shepherds_hut_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\waymarker_shelter_a.json",
+      "asset": "waymarker_shelter_a",
+      "field": "facing",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\waymarker_shelter_a.json",
+      "asset": "waymarker_shelter_a",
+      "field": "interior_loot_table",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\waymarker_shelter_a.json",
+      "asset": "waymarker_shelter_a",
+      "field": "district_weights",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\buildings\\wilderness\\waymarker_shelter_a.json",
+      "asset": "waymarker_shelter_a",
+      "field": "condition",
+      "message": "Retained; ordinary_building does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\barrow_mound_a.json",
+      "asset": "barrow_mound_a",
+      "field": "variant",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\barrow_mound_a.json",
+      "asset": "barrow_mound_a",
+      "field": "connection_point",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\barrow_mound_a.json",
+      "asset": "barrow_mound_a",
+      "field": "spawn_offset",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\barrow_mound_a.json",
+      "asset": "barrow_mound_a",
+      "field": "edges",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\barrow_mound_b.json",
+      "asset": "barrow_mound_b",
+      "field": "variant",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\barrow_mound_b.json",
+      "asset": "barrow_mound_b",
+      "field": "connection_point",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\barrow_mound_b.json",
+      "asset": "barrow_mound_b",
+      "field": "spawn_offset",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\barrow_mound_b.json",
+      "asset": "barrow_mound_b",
+      "field": "edges",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\drowned_threshold_a.json",
+      "asset": "drowned_threshold_a",
+      "field": "variant",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\drowned_threshold_a.json",
+      "asset": "drowned_threshold_a",
+      "field": "connection_point",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\drowned_threshold_a.json",
+      "asset": "drowned_threshold_a",
+      "field": "spawn_offset",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\drowned_threshold_a.json",
+      "asset": "drowned_threshold_a",
+      "field": "edges",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\overgrown_gatehouse_a.json",
+      "asset": "overgrown_gatehouse_a",
+      "field": "variant",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\overgrown_gatehouse_a.json",
+      "asset": "overgrown_gatehouse_a",
+      "field": "connection_point",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\overgrown_gatehouse_a.json",
+      "asset": "overgrown_gatehouse_a",
+      "field": "spawn_offset",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\overgrown_gatehouse_a.json",
+      "asset": "overgrown_gatehouse_a",
+      "field": "edges",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\rock_face_cut_a.json",
+      "asset": "rock_face_cut_a",
+      "field": "variant",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\rock_face_cut_a.json",
+      "asset": "rock_face_cut_a",
+      "field": "connection_point",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\rock_face_cut_a.json",
+      "asset": "rock_face_cut_a",
+      "field": "spawn_offset",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\rock_face_cut_a.json",
+      "asset": "rock_face_cut_a",
+      "field": "edges",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\sunken_ruin_a.json",
+      "asset": "sunken_ruin_a",
+      "field": "variant",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\sunken_ruin_a.json",
+      "asset": "sunken_ruin_a",
+      "field": "connection_point",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\sunken_ruin_a.json",
+      "asset": "sunken_ruin_a",
+      "field": "spawn_offset",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\entrances\\sunken_ruin_a.json",
+      "asset": "sunken_ruin_a",
+      "field": "edges",
+      "message": "Retained; interior_entrance does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "DEFERRED_SPECIAL",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\layouts\\starting_lab.json",
+      "asset": "starting_lab",
+      "field": "special_tiles[0]",
+      "message": "stele physical behavior is deferred; submap stele text metadata is retained.",
+      "correction": "Use supported item/scene records for physical contents."
+    },
+    {
+      "severity": "warning",
+      "code": "DEFERRED_SPECIAL",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\layouts\\starting_lab.json",
+      "asset": "starting_lab",
+      "field": "special_tiles[14]",
+      "message": "body physical behavior is deferred; submap stele text metadata is retained.",
+      "correction": "Use supported item/scene records for physical contents."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\layouts\\starting_lab.json",
+      "asset": "starting_lab",
+      "field": "type",
+      "message": "Retained; authored_submap does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    },
+    {
+      "severity": "warning",
+      "code": "INACTIVE_FIELD",
+      "path": "C:\\Users\\dango\\AppData\\Local\\Temp\\g6-authoring-efgcrffy\\data\\layouts\\starting_lab.json",
+      "asset": "starting_lab",
+      "field": "stairs_up",
+      "message": "Retained; authored_submap does not consume this field.",
+      "correction": "See the route capability table; editing it does not activate behavior."
+    }
+  ]
+}

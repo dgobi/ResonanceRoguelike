@@ -1,0 +1,14 @@
+{
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+    "--game",
+    "G:\\GameDev\\RoguelikeProject\\roguelike",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-a\\focused\\results"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "inherited_pythonpath": null
+}

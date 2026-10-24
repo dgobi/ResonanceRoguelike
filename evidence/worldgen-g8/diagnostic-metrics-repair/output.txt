@@ -1,0 +1,6 @@
+{
+  "failures": [],
+  "journey": null,
+  "passed": true
+}
+{"passed": true, "seeds": 3, "composition": "run.json"}

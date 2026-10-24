@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "source": {
-    "source_revision": "6b237f359f5ced951f195f88f0c0d5cadf1f1d86",
+    "source_revision": "a708e0c62cbd0d39637ee57ac0502c13c1cad23a",
     "scope": [
       "roguelike/",
       "tools/",
@@ -4572,10 +4572,10 @@
         "bytes": 2391
       },
       "tools/worldgen_g8_diagnostic.py": {
-        "raw_sha256": "f3ee8268a68113858787999690f249cefe0ac6be2e68a6f4c9cdae3727e999e4",
-        "canonical_sha256": "a261e8fe661b96cac2fb7b1d73f95515deb529158a01e9bc05e1d748a7d8907a",
-        "git_blob": "21121d7faf104bd86e770d58a388a23d0f762ff3",
-        "bytes": 9797
+        "raw_sha256": "6259242b2cbc000f19b34fd76368c4b97e7c52532378a053329f4b0a9bd189f8",
+        "canonical_sha256": "487a3e811d5d9e53fdb7b48f3fe4eeb00f80be0b6b3135f2fa6519cb03f80508",
+        "git_blob": "50ad709d0c0270fc4b4888cf538693ea44fa11cd",
+        "bytes": 9796
       }
     },
     "canonical_rule": "Text CRLF/CR to LF only; binary exact; raw build bytes recorded separately"
@@ -4758,7 +4758,7 @@
       "bytes": 5070
     },
     "wiki-config.json": {
-      "sha256": "fd5c335272206b427d379ba9add31b089cd1a9e15563494a6054a69afc015625",
+      "sha256": "bd31ece862e76b0e63d8c38f3d2841de0b2c5fce52160a7090eae8bdd2ec15c3",
       "bytes": 6473
     },
     "wiki_inputs.py": {
@@ -4766,10 +4766,10 @@
       "bytes": 4943
     }
   },
-  "documentation_delivery_revision": "6b237f359f5ced951f195f88f0c0d5cadf1f1d86",
+  "documentation_delivery_revision": "a708e0c62cbd0d39637ee57ac0502c13c1cad23a",
   "products": {
     "Resonance_Owner_Wiki.html": {
-      "sha256": "2033f253bfb909f500bcb4a5089d054679b76b6b93505c46dd8b6ab47cfca486",
+      "sha256": "8adfc9a0216ac6ac8c5010cc9a0f1acde597120209eae24545326d24acf57f0c",
       "bytes": 5282014
     }
   },

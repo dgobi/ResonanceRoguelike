@@ -1,6 +1,6 @@
 {
-  "commit": "6b237f359f5ced951f195f88f0c0d5cadf1f1d86",
-  "documentation_delivery_revision": "6b237f359f5ced951f195f88f0c0d5cadf1f1d86",
+  "commit": "a708e0c62cbd0d39637ee57ac0502c13c1cad23a",
+  "documentation_delivery_revision": "a708e0c62cbd0d39637ee57ac0502c13c1cad23a",
   "repaired_legacy_links": [],
   "unavailable_legacy_links": [],
   "embedded_source_images": [
@@ -48,5 +48,5 @@
   "guide_chapters": 33,
   "search_records": 463,
   "output_bytes": 5282014,
-  "output_sha256": "2033f253bfb909f500bcb4a5089d054679b76b6b93505c46dd8b6ab47cfca486"
+  "output_sha256": "8adfc9a0216ac6ac8c5010cc9a0f1acde597120209eae24545326d24acf57f0c"
 }
