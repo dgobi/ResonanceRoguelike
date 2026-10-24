@@ -134,38 +134,49 @@ def journey(seed,save_root,progress=None):
             walk((previous[0]%80,previous[1]%43))
             # Deterministic site registry order. No teleport; paths use the derived
             # full-width physical road union and actual boundary input handlers.
-            for site in plan['sites'][:2]:
-                p=next(p for p in plan['placements'] if p['id']==site['placement'])
-                path=graph.path(previous,p['join'])
+            if plan['version']>=5:
+                selected=[next(s for s in plan['sites'] if s['kind']==kind) for kind in ('compound','single')]
+            else:selected=plan['sites'][:2]
+            for site in selected:
+                join=site['attachment']['join'];path=graph.path(previous,join)
                 route(dict(id='physical-to-'+site['id'],points=corners(path)))
-                assert position()==tuple(p['join'])
-                entry=frontage_entrance(p)
-                walk((entry['x']%80,entry['y']%43))
-                target=min((t for t in p['targets'] if t['required']),key=lambda t:({'container':0,'readable':1,'item':2,'floor':3}.get(t['kind'],4),t['x'],t['y']))
-                goal=(target['x']%80,target['y']%43);interaction=None
-                if target['kind']=='floor':walk(goal)
-                else:
-                    reached=False
-                    for dx,dy in ((0,1),(1,0),(-1,0),(0,-1)):
-                        try:walk((goal[0]+dx,goal[1]+dy))
-                        except AssertionError:continue
-                        e._update_fov()
-                        if InteractionCursor.can_reach(e,*goal):reached=True;break
-                    assert reached,'site target has no usable real interaction position'
-                    before_items=len(e.player.inventory.items)
-                    container=e.local_map.container_state.get(goal);before_container=len(container['items']) if container else None
-                    e.mode=GameMode.INTERACTION_CURSOR;e.interaction_cursor._cursor_x,e.interaction_cursor._cursor_y=goal;e.interaction_cursor.candidates=[goal]
-                    e._handle_key(pygame.K_RETURN)
-                    if container is not None:
-                        assert e.interaction_cursor._selection_prompt is not None,'site container did not open'
-                        if before_container:e._handle_key(pygame.K_RETURN)
-                    e.text_reader.close();e.mode=GameMode.LOCAL;e.interaction_cursor._selection_prompt=None
-                    interaction=dict(kind=target['kind'],inventory_before=before_items,inventory_after=len(e.player.inventory.items),
-                        container_before=before_container,container_after=len(container['items']) if container is not None else None)
-                    assert len(e.player.inventory.items)>before_items or before_container==0,interaction
-                report['additional_sites'].append(dict(id=site['id'],asset=p['asset'],attachment=site['attachment'],
-                    shortest_road_steps=len(path)-1,entry=entry,target=target,player_local=[e.player.x,e.player.y],interaction=interaction))
-                report['destinations'].append(site['id']);previous=p['join'];walk((previous[0]%80,previous[1]%43));retain()
+                assert position()==tuple(join)
+                if site['kind']=='compound':
+                    gate=site['gate'];walk((gate['x']%80,gate['y']%43))
+                    children=[p for p in plan['placements'] if p.get('parent')==site['id']]
+                else:children=[next(p for p in plan['placements'] if p['id']==site['placement'])]
+                used=[]
+                for p in children:
+                    walk((p['join'][0]%80,p['join'][1]%43))
+                    entry=frontage_entrance(p);walk((entry['x']%80,entry['y']%43))
+                    floors=[]
+                    for floor in (t for t in p['targets'] if t['required'] and t['kind']=='floor'):
+                        walk((floor['x']%80,floor['y']%43));floors.append(dict(target=floor,result='reached floor; no content transfer claimed'))
+                    target=min((t for t in p['targets'] if t['required']),key=lambda t:({'container':0,'readable':1,'item':2,'floor':3}.get(t['kind'],4),t['x'],t['y']))
+                    goal=(target['x']%80,target['y']%43);interaction=None
+                    if target['kind']=='floor':walk(goal)
+                    else:
+                        reached=False
+                        for dx,dy in ((0,1),(1,0),(-1,0),(0,-1)):
+                            try:walk((goal[0]+dx,goal[1]+dy))
+                            except AssertionError:continue
+                            e._update_fov()
+                            if InteractionCursor.can_reach(e,*goal):reached=True;break
+                        assert reached,'site target has no usable real interaction position'
+                        before_items=len(e.player.inventory.items)
+                        container=e.local_map.container_state.get(goal);before_container=len(container['items']) if container else None
+                        e.mode=GameMode.INTERACTION_CURSOR;e.interaction_cursor._cursor_x,e.interaction_cursor._cursor_y=goal;e.interaction_cursor.candidates=[goal]
+                        e._handle_key(pygame.K_RETURN)
+                        if container is not None:
+                            assert e.interaction_cursor._selection_prompt is not None,'site container did not open'
+                            if before_container:e._handle_key(pygame.K_RETURN)
+                        e.text_reader.close();e.mode=GameMode.LOCAL;e.interaction_cursor._selection_prompt=None
+                        interaction=dict(kind=target['kind'],inventory_before=before_items,inventory_after=len(e.player.inventory.items),container_before=before_container,container_after=len(container['items']) if container is not None else None)
+                        assert len(e.player.inventory.items)>before_items or before_container==0,interaction
+                    used.append(dict(placement=p['id'],slot=p.get('slot'),asset=p['asset'],entry=entry,join=p['join'],target=target,floors=floors,player_local=[e.player.x,e.player.y],interaction=interaction))
+                    walk((p['join'][0]%80,p['join'][1]%43))
+                report['additional_sites'].append(dict(id=site['id'],kind=site['kind'],recipe=site.get('recipe'),attachment=site['attachment'],gate=site.get('gate'),shortest_road_steps=len(path)-1,children=used))
+                report['destinations'].append(site['id']);previous=join;walk((join[0]%80,join[1]%43));retain()
         report['bridge_ids_walked']=sorted(bridge_steps)
         assert any(c['road']=='road-1' and c['id'] in bridge_steps for c in plan['crossings'])
         # Crossing may be interior; route-1 explicitly traverses the required channel.
