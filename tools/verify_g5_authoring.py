@@ -36,7 +36,7 @@ def main():
                 records.append(dict(action='deliberate draft metadata edit',path=str(draft),sha256=hashlib.sha256(before).hexdigest()))
                 run(command,[draft]);run(command,[draft]);assert draft.read_bytes()==before
                 cli([draft,'--route','ordinary_building','--category',category,'--orientations'],out/(aid+'-orientations.json'))
-                for context in contexts:cli([draft,'--planned','--category',category,'--context',context,'--seed',seed],out/(aid+'-'+context+'.json'))
+                for context in contexts:cli([*(['--selection-config',ROOT/'roguelike/docs/examples/g8_landmark_preview_selection.json'] if context=='landmark' else []),draft,'--planned','--category',category,'--context',context,'--seed',0 if aid=='g5_service_house' and context=='roadside' else seed],out/(aid+'-'+context+'.json'))
                 assert draft.read_bytes()==before
             # A real unsuccessful context, then the same unchanged draft succeeds
             # in its declared context above; no permissive geometry rewrite.

@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "profiles": {
+    "grid": {
+      "id": "grid-mixed-v1",
+      "roles": {
+        "residential": [
+          {
+            "asset": "house_small_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "house_small_b",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "house_two_room_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "house_hearth_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          }
+        ],
+        "commercial": [
+          {
+            "asset": "market_stall_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "shop_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "apothecary_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "workshop_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          }
+        ],
+        "support": [
+          {
+            "asset": "storehouse_a",
+            "weight": 1.0,
+            "max_per_settlement": 3
+          },
+          {
+            "asset": "tool_shed_a",
+            "weight": 1.0,
+            "max_per_settlement": 3
+          },
+          {
+            "asset": "shrine_a",
+            "weight": 1.0,
+            "max_per_settlement": 3
+          }
+        ],
+        "civic": [
+          {
+            "asset": "bell_tower_a",
+            "weight": 1.0,
+            "max_per_settlement": 1
+          }
+        ]
+      },
+      "minimum": {
+        "residential": 1,
+        "commercial": 1,
+        "support": 0,
+        "civic": 1
+      },
+      "schedule": [
+        "commercial",
+        "residential",
+        "support",
+        "residential"
+      ],
+      "repeat_multiplier": 0.2,
+      "required_fit_budget": 256
+    },
+    "roadside": {
+      "id": "roadside-mixed-v1",
+      "roles": {
+        "residential": [
+          {
+            "asset": "house_small_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "house_small_b",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "house_two_room_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "house_hearth_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          }
+        ],
+        "commercial": [
+          {
+            "asset": "market_stall_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "shop_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "apothecary_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          },
+          {
+            "asset": "workshop_a",
+            "weight": 1.0,
+            "max_per_settlement": 5
+          }
+        ],
+        "support": [
+          {
+            "asset": "storehouse_a",
+            "weight": 1.0,
+            "max_per_settlement": 3
+          },
+          {
+            "asset": "tool_shed_a",
+            "weight": 1.0,
+            "max_per_settlement": 3
+          },
+          {
+            "asset": "shrine_a",
+            "weight": 1.0,
+            "max_per_settlement": 3
+          }
+        ]
+      },
+      "minimum": {
+        "residential": 1,
+        "commercial": 1,
+        "support": 0
+      },
+      "schedule": [
+        "commercial",
+        "residential",
+        "support",
+        "residential"
+      ],
+      "repeat_multiplier": 0.2,
+      "required_fit_budget": 256
+    },
+    "landmark": {
+      "id": "landmark-mixed-v1",
+      "roles": {
+        "landmark": [
+          {
+            "asset": "roadside_shrine_a",
+            "weight": 1.0,
+            "max_per_settlement": 1
+          },
+          {
+            "asset": "hunter_cabin",
+            "weight": 1.0,
+            "max_per_settlement": 1
+          },
+          {
+            "asset": "shepherds_hut_a",
+            "weight": 1.0,
+            "max_per_settlement": 1
+          },
+          {
+            "asset": "waymarker_shelter_a",
+            "weight": 1.0,
+            "max_per_settlement": 1
+          }
+        ]
+      },
+      "minimum": {
+        "landmark": 1
+      },
+      "schedule": [
+        "landmark"
+      ],
+      "repeat_multiplier": 0.2,
+      "required_fit_budget": 256
+    }
+  }
+}

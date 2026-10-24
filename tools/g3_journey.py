@@ -88,7 +88,11 @@ def journey(seed,save_root,progress=None):
         for n in range(4):
             row=next(r for r in country if r['id']==f'road-{n}');route(row)
             report['destinations'].append(row['b'])
-            if row['b']=='settlement-0':
+            if row['b']=='settlement-0' and plan['version']>=6:
+                from g8_journey import town
+                report['g8_town']=town(e,walk,route,position)
+                report['interaction']=report['g8_town']['contents'][0]
+            if row['b']=='settlement-0' and plan['version']<6:
                 local=[p for p in plan['placements'] if p['origin'][0]//80==e.world_x and p['origin'][1]//43==e.world_y]
                 p=next(p for p in local if p['asset'] not in ('house_small_a','market_stall_a','bell_tower_a','roadside_shrine_a') and any(t['kind']=='container' for t in p['targets']))
                 target=next(t for t in p['targets'] if t['kind']=='container');xy=(target['x']%80,target['y']%43)
@@ -183,16 +187,27 @@ def journey(seed,save_root,progress=None):
         assert any(r['route']=='road-1' for r in report['crossings'])
         report['materialized_scenes_before_f9']=sum(c.visited for c in e.world_map.chunks.values())
         retain()
+        if plan['version']>=6:
+            from g8_journey import explored_checkpoint
+            report['explored_checkpoint']=explored_checkpoint(e)
+            head=e.save_manager.store.token();checkpoint_plan=digest(e.world_map.plan);checkpoint_world=digest(_serialize_world(e.world_map))
+            checkpoint_scene=fingerprint(e.local_map,e.entities[1:]);checkpoint_position=position()
         t=time.perf_counter();e._handle_key_local(pygame.K_F9)
         report['restore_seconds']=time.perf_counter()-t
         assert digest(e.world_map.plan)==checkpoint_plan
         assert digest(_serialize_world(e.world_map))==checkpoint_world,'F9 world state differs from saved checkpoint'
         assert position()==checkpoint_position and fingerprint(e.local_map,e.entities[1:])==checkpoint_scene
         assert e.save_manager.store.token()==head
-        report['f9_restored_coherent_start_checkpoint']=True
+        report['f9_restored_coherent_start_checkpoint']=plan['version']<6
+        report['f9_restored_explored_checkpoint']=plan['version']>=6
+        if plan['version']>=6:
+            report['explored_checkpoint']['f9_seconds']=report['restore_seconds']
+            for key,expected in report['explored_checkpoint']['surface_fingerprints'].items():
+                import ast
+                assert fingerprint(*e._prepare_destination(*ast.literal_eval(key)))==expected
         report['worst_transition_seconds']=max(c['seconds'] for c in report['crossings'])
         report['checkpoint_bytes']=sum(p.stat().st_size for p in e.save_manager.checkpoint_path().rglob('*') if p.is_file())
-        report['checkpoint_scope']='starting state after lab exit, before journey'
+        report['checkpoint_scope']='explored town and compound journey' if plan['version']>=6 else 'starting state after lab exit, before journey'
         report['checkpoint_scene_count']=sum(1 for _ in (e.save_manager.checkpoint_path()/'chunks').glob('*.pkl'))
         report['passed']=True
         retain()

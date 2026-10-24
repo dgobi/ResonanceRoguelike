@@ -32,7 +32,7 @@ class AuthoringDestinations(unittest.TestCase):
         self.assertEqual(before,{p.name:p.read_bytes() for p in self.root.iterdir() if p.is_file()})
 
     def test_explicit_read_inputs_and_initializer_targets(self):
-        for flag in ('--compound','--child','--poi-config','--selection-config','--config','--access','--editor-catalog','candidate'):
+        for flag in ('--compound','--child','--poi-config','--selection-config','--config','--layout-config','--access','--editor-catalog','candidate'):
             with self.subTest(flag=flag):
                 args=[str(self.child)] if flag=='candidate' else [flag,str(self.child)]
                 if flag=='--editor-catalog':args+=['--check-editor-catalog']

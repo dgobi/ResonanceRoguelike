@@ -53,6 +53,8 @@ source. Do not add pools to the version-2 configuration.
 
 ## 1. Add a house with a service door
 
+G8 note: the roadside demonstration uses seed 0; the former seed 20261023 leaves this valid draft unselected under the new lot distribution. This is a controlled authoring example, separate from the fixed ordinary seed matrix.
+
 The complete [g5_service_house.json](examples/g5_service_house.json) has a south
 main door and a north required service door. Start from it in a draft directory.
 All commands below run from `G:\GameDev\RoguelikeProject`:
@@ -65,7 +67,7 @@ if (-not (Test-Path -LiteralPath authoring/g5_service_house.json)) {
 }
 & $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_service_house.json --route ordinary_building --category residential --orientations --output evidence/authoring/g5-house-orientations.json
 & $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_service_house.json --planned --category residential --role residential --context grid --seed 20261023 --output evidence/authoring/g5-house-grid.json
-& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_service_house.json --planned --category residential --role residential --context roadside --seed 20261023 --output evidence/authoring/g5-house-roadside.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_service_house.json --planned --category residential --role residential --context roadside --seed 0 --output evidence/authoring/g5-house-roadside.json
 ```
 
 Import that draft into `layout_painter.html`. Give copies unique IDs with **Apply
@@ -129,7 +131,7 @@ if (-not (Test-Path -LiteralPath authoring/g5_landmark.json)) {
   Copy-Item roguelike/docs/examples/g5_landmark.json authoring/g5_landmark.json
 }
 & $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_landmark.json --route ordinary_building --category wilderness --orientations --output evidence/authoring/g5-landmark-orientations.json
-& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_landmark.json --planned --category wilderness --role landmark --context landmark --seed 29417 --output evidence/authoring/g5-landmark.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_landmark.json --planned --category wilderness --role landmark --context landmark --selection-config roguelike/docs/examples/g8_landmark_preview_selection.json --seed 29417 --output evidence/authoring/g5-landmark.json
 ```
 
 Register an installed alternative in `profiles.landmark.roles.landmark`. Its
@@ -1178,3 +1180,68 @@ export a real edited compound child; those exact downloaded bytes are consumed b
 direct and whole-compound previews. The world remains finite at 128×128 chunks.
 `UI-TEXT-HEIGHT`, broader town composition, retention/streaming and the continuous
 viewport remain deferred. G7 stops at these bounded rural compounds.
+
+
+# G8 — settlement composition (current)
+
+G8 provides two installed grid layouts inside the existing 160 × 86 town footprint. **Cross-market** has two cross streets and two avenues around a rectangular circuit, with its bell common north of the first cross street. **Linked-courts** moves the avenues and puts a connecting street between them, dividing that circuit into two courts; its common sits south of the first cross street. Horizontal roadside settlements keep their 160 × 43 footprint and derive frontage from the actual country road.
+
+The planner chooses layout identity on a separate deterministic seed stream. Building weights do not choose the layout. Country routes and bridge authority remain unchanged. Buildings, private buffers and complete approaches still belong to one 80 × 43 member chunk.
+
+## Start with complete files
+
+Run from the repository root with the interpreter selected in the interpreter setup above. These commands create drafts and evidence; they do not install anything:
+
+```powershell
+& $ResonancePython -X utf8 tools/structure_authoring.py --init-settlement authoring/g8 --output evidence/authoring/g8-init.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --settlement-preview all --layout-config authoring/g8/g8_layouts.json --selection-config authoring/g8/g8_selection.json --config authoring/g8/g8_planning.json --seed 20261023 --output evidence/authoring/g8-complete.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --settlement-preview grid --layout cross-market --layout-config authoring/g8/g8_layouts.json --seed 20261023 --output evidence/authoring/g8-cross-market.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --settlement-preview grid --layout linked-courts --layout-config authoring/g8/g8_layouts.json --seed 20261023 --output evidence/authoring/g8-linked-courts.json
+```
+
+Repeated initialization preserves existing files. Reports and derived SVGs must be separate from every draft, initializer target and installed input. Aliases and hard links are checked before publishing outputs. Keep the complete downloaded building when using the layout painter; registration and lot fitting are separate checks.
+
+## Consumed version-one layout schema
+
+`settlement_layouts.json` contains `version: 1`, `alternative_limit`, `grid` and `roadside`. The shipped library has exactly two grid alternatives. The authoring validator permits one through four bounded alternatives, with one through four attempted alternatives. Each grid record has a unique stable `id`, `form: "grid"`, a positive finite `weight` at most 1000, `streets`, `common`, `civic_lot`, and the three frontage dimensions below. Use the initializer as the complete editable example.
+
+| Field | Meaning and bounds |
+|---|---|
+| `streets` | Four through eight uniquely named records, each with exactly two distinct orthogonal `points`, inside local 160 × 86 bounds. Width comes from planning `street_width_tiles`. |
+| `common` | Stable `id`, half-open `rect`, walkable `surface` (`cobblestone`, `dirt_path` or `grass`) and two horizontally adjacent `furnishing` cells for the existing stone and prayer. |
+| `civic_lot` | Half-open `bounds` beside the common, exact street `join`, facing `normal` and assigned `street` ID. Must fit the complete bell buffer and approach. |
+| `frontage_tiles` | Integer 14–32, controls tangent subdivision of eligible block sides. Default 18. |
+| `minimum_depth` | Integer 8–20, rejects shallow private blocks. Default 10. |
+| `junction_clearance` | Integer 1–8, trims segment endpoints and junction frontage. Default grid 2, roadside 3. |
+| `roadside` | Stable `id` and the three frontage dimensions; the country road supplies geometry. No vertical roadside template. |
+
+Coordinates are integer tiles relative to the settlement's upper-left corner. Rectangles exclude their right and bottom edges. A door's normal points toward its assigned street. An east-facing house therefore addresses a vertical street.
+
+## Read the preview
+
+The JSON contains a complete resolved plan and populated snapshots for every member of the requested forms. SVG companions show streets, common, private lots, accepted footprints, complete door spans, explicit vacancies and planned garden blocks. The controlled `--layout` option proves a chosen layout; it does not measure natural frequency.
+
+The saved arrival is the first centerline entry of the actual incoming country route, including route ID, segment, position and direction. The composer subtracts real road bands and public ground before deriving disjoint blocks. Lots identify one block, one exact assigned road segment and a finite frontage interval. Every tile of the doorway span must project into that interval. A nearby parallel road is not interchangeable.
+
+The common is protected accessible ground associated with the spent bell. Only the designated native stone/prayer cells are furnished. Public circulation remains walkable, and native actors cannot spawn on protected cells. Private reservations cannot borrow common space or neighboring lots.
+
+## Edit, inspect and deliberately install
+
+Change one geometry field in the complete draft, then preview both controlled layouts and ordinary seeds. Moving a street can remove lots, break member-local road connectivity, or make a required role impossible. Enlarging a common reduces private land. A narrower civic lot must fail clearly when the bell no longer fits; do not weaken its consumed geometry to hide that failure.
+
+Tune candidates separately in `g8_selection.json`; see the existing selection-profile section above. Required roles are fitted atomically with one shared transform-trial budget across attempted layouts. Budget exhaustion means feasibility was unresolved; enumerated-alternative exhaustion means all attempted candidates failed. Optional failures become explained vacancies. Failed branches consume no accepted caps or reservations.
+
+After reviewing previews, deliberately replace the corresponding files under `roguelike/data/generation/`, inspect the diff, run the catalog check, and generate a fresh disposable world. Installing a building also requires its explicit role membership. Existing worlds keep their saved resolution; editing a recipe does not regenerate pending or visited towns.
+
+## Limits and interpretation
+
+The current composer uses orthogonal rectangular blocks and finite choices. Narrow leftover strips are recorded gardens, not hidden failed buildings. Spatial repetition uses Manhattan distance between accepted frontage joins with stable plot-ID ties. Counts and weights are not occupancy guarantees. Three ordinary seeds and controlled examples establish bounded behavior, not long-run frequencies.
+
+The G8 owner report records populated renderer views, real-handler travel, same-machine G7/G8 costs and centerline graph loops. G7 already had a rectangular street cycle. Wide-road tile cycles are not counted as useful alternate routes. Country-network optimization, organic cities, cross-chunk buildings and continuous rendering remain outside this release.
+
+
+Complete shipped examples: `roguelike/docs/examples/g8_layouts.json`, `g8_selection.json`, `g8_planning.json`. The initializer copies the installed equivalents. The six G8 workflows execute initialization/preservation, complete controlled and roadside previews, a geometry edit, separate selection tuning, required-fit/collision failures, and deliberate disposable installation/catalog checks. Run `tools/verify_g8_authoring.py --evidence evidence/worldgen-g8/owner-authoring-01`; inherited G5–G7 workflows remain nested records. Both browser engines also consume actual downloaded building bytes on vertical frontage in both grid layouts.
+
+Run the complete frozen gates with `tools/verify_g8_release.py --evidence evidence/worldgen-g8/owner-release-01`. See `docs/owner/WORLDGEN_G8.md` and the maintained offline wiki for evidence, costs, compatibility and the G8 stop boundary. Earlier arc sections above are historical where superseded by this section.
+
+G8 inherited landmark demonstration: the complete `g8_landmark_preview_selection.json` restricts the featured role to the draft `g5_landmark` for controlled preview. G8 lot counts change downstream choice IDs; the old seed alone no longer promises selecting that draft. This preview policy is not installed and is not a frequency claim.

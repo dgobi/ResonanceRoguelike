@@ -205,11 +205,14 @@ def worker(browser_name,evidence):
         result_compound=subprocess.run(list(map(str,command_compound)),cwd=ROOT,capture_output=True,text=True,timeout=90)
         compound_commands.append(dict(argv=list(map(str,command_compound)),cwd=str(ROOT),exit_code=result_compound.returncode,expected_exit=0,stdout=result_compound.stdout,stderr=result_compound.stderr))
         check('actual downloaded child passes compound '+name,result_compound.returncode==0)
+    from g8_browser_consumer import consume
+    g8_commands=consume(planned_export,evidence,browser_name)
+    check('actual downloaded building occupies vertical frontage in both G8 layouts',bool(g8_commands))
     report={'browser':browser_name,'version':version,'passed':all(c['passed'] for c in checks),'checks':checks,'errors':errors,
             'command':command,'runtime_stdout':run.stdout,'runtime_stderr':run.stderr,'codec_documents':len(codec),
             'planned_command':planned_command,'planned_stdout':planned_run.stdout,'planned_stderr':planned_run.stderr,
             'command_records':[dict(argv=c,cwd=str(ROOT),exit_code=r.returncode,stdout=r.stdout,stderr=r.stderr) for c,r in
-                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))]+site_commands+compound_commands,
+                               ((command,run),(planned_command,planned_run),(orientation_command,orientation_run))]+site_commands+compound_commands+g8_commands,
             'download_hashes':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (exported,planned_export,site_export,compound_export)}}
     (evidence/(browser_name+'.json')).write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({'browser':browser_name,'passed':report['passed'],'checks':len(checks),'version':version}))

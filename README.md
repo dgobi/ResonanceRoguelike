@@ -21,3 +21,12 @@ $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\
 The interpreter path supplies dependencies only; game code runs from this checkout.
 The [G1](docs/owner/WORLDGEN_G1.md), [G2](docs/owner/WORLDGEN_G2.md) and
 [B3](roguelike/docs/owner/B3_STATE.md) records retain their historical scope.
+# G8 owner documentation
+
+The current settlement composer is documented in
+[WORLDGEN_G8.md](docs/owner/WORLDGEN_G8.md). Open the maintained
+[Resonance Owner Wiki](Resonance_Wiki_Maintenance/Resonance_Owner_Wiki.html)
+locally for the complete offline guide, including G7 compounds and G8 streets,
+commons and frontage. Editable source and rebuild instructions live in
+`Resonance_Wiki_Maintenance/`.
+
