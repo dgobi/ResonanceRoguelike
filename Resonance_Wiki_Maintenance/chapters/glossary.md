@@ -43,7 +43,7 @@ Use these definitions when a guide distinguishes something that looks similar on
 | Term | Meaning in Resonance | Continue with |
 |---|---|---|
 | **Shared plan** | World-owned initial decisions for roads, crossings, settlements and selected places. Local scenes realize its slices; loading does not reroll it. | [World generation](#world-generation) |
-| **Plan version / generation revision** | Different labels: current plan format is `6`; current generation revision is `wg8`. Save format and dispatch mode are separate contracts again. | [World generation](#world-generation) |
+| **Plan version / generation revision** | Different labels: current plan format is `7`; current generation revision is `wg9`. Save format and dispatch mode are separate contracts again. | [World generation](#world-generation) |
 | **Provenance** | Recorded origin and creation information, such as actual scene revision, plan identity and adapter. An older visited scene keeps its real history. | [Generation diagnosis](#generation-troubleshooting) |
 | **Dependency fingerprint** | A digest of consumed definitions used to detect incompatible changes before creating a pending placement. It is distinct from a raw file hash and from a saved inventory. | [Generation diagnosis](#generation-troubleshooting) |
 
@@ -61,4 +61,4 @@ Use these definitions when a guide distinguishes something that looks similar on
 
 ## Source anchors
 
-Definitions consolidate the current [world planner](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/world_plan.py), [placement contract](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/placement.py), [current effect ownership](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/docs/owner/WORLD_AND_STATE.md) and [G6 lifecycle contract](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/WORLDGEN_G6.md).
+Definitions consolidate the current [world planner](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/world_plan.py), [placement contract](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/placement.py), [current effect ownership](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/docs/owner/WORLD_AND_STATE.md) and [G6 lifecycle contract](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/docs/owner/WORLDGEN_G6.md).

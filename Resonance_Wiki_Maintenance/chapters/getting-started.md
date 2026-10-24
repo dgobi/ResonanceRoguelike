@@ -50,7 +50,7 @@ The current convenience launcher uses the production source and isolates only th
 & $ResonancePython -X utf8 tools/play_disposable.py --session cottage-first-01 --seed 20261023
 ```
 
-Choose a fresh session name each time. Names allow 1–64 letters, digits, underscores or hyphens. The save root is `.baseline/g3-play-cottage-first-01/`; the `g3-play-` prefix is retained even though the current generator is G8. It refuses to reuse an existing session. It has **no `--resume` flag**.
+Choose a fresh session name each time. Names allow 1–64 letters, digits, underscores or hyphens. The save root is `.baseline/g3-play-cottage-first-01/`; the `g3-play-` prefix is retained even though the current generator is G9. It refuses to reuse an existing session. It has **no `--resume` flag**.
 
 For an automated startup check with no desktop interaction:
 
@@ -99,4 +99,4 @@ Before editing, establish whether the file already contains your own unfinished 
 
 ## Source basis
 
-[README](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/README.md) · [requirements](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/requirements-baseline.txt) · [current launcher](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/play_disposable.py) · [bootstrap](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/main.py) · [collaboration rules](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/AGENTS.md).
+[README](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/README.md) · [requirements](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/requirements-baseline.txt) · [current launcher](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/play_disposable.py) · [bootstrap](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/main.py) · [collaboration rules](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/AGENTS.md).

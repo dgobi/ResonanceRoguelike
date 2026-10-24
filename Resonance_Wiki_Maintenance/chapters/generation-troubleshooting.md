@@ -17,7 +17,7 @@ Selection-only data and consumed structural dependencies are intentionally separ
 
 ## Historical plans
 
-G3 through G7 formats 1 through 5 retain their exact saved values. They do not gain G8 streets or commons on load. Visited scenes retain actual older provenance and mutations. Pending scenes use explicit `g3-to-g8-v1` through `g7-to-g8-v1` adapters without reselecting the plan. New format-6 scenes use `g8-v1`. Current layout and selection recipe removal does not recompose pending saved towns; changed consumed structure or public-surface dependencies can reject only affected slices.
+G3 through G8 formats 1 through 6 retain their exact saved values. Older plans do not gain later streets, commons or optional country connections on load. Visited scenes retain actual older provenance and mutations. Pending scenes use explicit `g3-to-g9-v1` through `g8-to-g9-v1` adapters without reselecting the plan. Current format-7 scenes use `g9-v1`. Current layout and selection recipe removal does not recompose pending saved towns; changed consumed structure or public-surface dependencies can reject only affected slices.
 
 Absent/wg1/wg2 origins keep the legacy/no-plan route. No automatic personal-campaign migration, retrospective population repair or historical seam guarantee is implied. In particular, an already visited G3 starting surface retains its historical contents rather than receiving a new waystone by loading it.
 
@@ -97,10 +97,10 @@ The original documents remain valuable history and design context. A current tut
 
 ## Sources
 
-- [Consumed dependencies and pending-placement errors](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/placement.py)
-- [Scene adapters](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/scene_adapters.py)
-- [Compiler diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/structure_contract.py)
-- [G6 source-bound recorded verification and limits](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/WORLDGEN_G6.md)
+- [Consumed dependencies and pending-placement errors](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/placement.py)
+- [Scene adapters](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/scene_adapters.py)
+- [Compiler diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/structure_contract.py)
+- [G6 source-bound recorded verification and limits](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/docs/owner/WORLDGEN_G6.md)
 
 ## G7 composition integration
 

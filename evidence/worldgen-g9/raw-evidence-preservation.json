@@ -6247,5 +6247,7 @@
       "sha256": "f260e84fd1c87d026cff46348ca1c6f9e9ec03c6d6c188df1c9cf9277495cd14",
       "git_blob": "159c11f84f66706ecfa8f3e68251723435726d51"
     }
-  }
+  },
+  "evidence_snapshot_commit": "67263f03ec02f44857a707cdbba772d1481787a1",
+  "note": "Compare these captured rows to this immutable snapshot commit; later index/review additions are separate metadata. Raw source snapshots and original package bytes remain preserved."
 }

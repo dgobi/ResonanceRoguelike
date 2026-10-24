@@ -93,8 +93,8 @@ The focused suite includes `test_combat_routes.py` and effect/persistence covera
 
 ## Source bindings
 
-- [Combat resolver and essence formula](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/combat.py)
-- [Moveset declaration consumer](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/movesets.py)
-- [Attack callers and post-hit effects](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/engine.py)
-- [Single-pool fighter](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/components/fighter.py)
-- [Working weapon definition](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/data/items/weapons/severance_blade.json)
+- [Combat resolver and essence formula](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/combat.py)
+- [Moveset declaration consumer](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/movesets.py)
+- [Attack callers and post-hit effects](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/engine.py)
+- [Single-pool fighter](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/components/fighter.py)
+- [Working weapon definition](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/items/weapons/severance_blade.json)

@@ -48,7 +48,7 @@ That refresh **writes** `tools/structure_editor/catalog.js`; review and retain i
 ## Focused regression suite
 
 ```powershell
-& $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike --evidence .wiki-evidence/edit-02/focused
+& $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike --timeout 1800 --evidence .wiki-evidence/edit-02/focused
 ```
 
 This is the project's focused regression runner. The result and emitted evidence matter more than a count quoted from an earlier delivery. Avoid reusing a historical passing report as proof for newly modified code.
@@ -86,7 +86,7 @@ The standing project workflow is autonomous headless processes and app-local eve
 
 ## Source basis
 
-[Focused runner](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/critical_fix_regressions/verify_fixes.py) · [structure CLI](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/structure_authoring.py) · [G9 authoring](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/verify_g9_authoring.py) · [G9 diagnostic](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/worldgen_g9_diagnostic.py) · [release coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/verify_g9_release.py).
+[Focused runner](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/critical_fix_regressions/verify_fixes.py) · [structure CLI](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/structure_authoring.py) · [G9 authoring](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/verify_g9_authoring.py) · [G9 diagnostic](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/worldgen_g9_diagnostic.py) · [release coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/verify_g9_release.py).
 
 ## G7 composition integration
 
@@ -94,6 +94,6 @@ The current mixed parent workflow is documented in [Compounds](#compounds). A bu
 
 ## G9 evidence units and frozen inputs
 
-The release sequence is serial: guard, clean-parent unfiltered focused discovery, both browser export consumers, five new network workflows plus separately counted inherited workflows, catalogue, ordinary diagnostics and real journey, populated production views, wiki contract/build/repeat/drift/integrity/reader and unfiltered production gates. `verify_g9_release.py` uses 1800 seconds per outer gate; the diagnostic's inner journey limit is 1500 and focused child is 1200. An input change requires the whole unified sequence again. Documentation-only delivery uses the wiki's separate binding and does not rerun unrelated game gates.
+The release sequence is serial: guard, clean-parent unfiltered focused discovery, both browser export consumers, five new network workflows plus separately counted inherited workflows, catalogue, ordinary diagnostics and real journey, populated production views, wiki contract/build/repeat/drift/integrity/reader and unfiltered production gates. `verify_g9_release.py` uses 2100 seconds for the focused outer gate and 1800 for its child; other outer gates use 1800 seconds and the diagnostic's inner journey limit is 1500. The first full 229-test run passed in 1154 seconds, close to the historical 1200-second cap; the expanded G9 release uses this finite extra allowance without filtering tests. An input change requires the whole unified sequence again. Documentation-only delivery uses the wiki's separate binding and does not rerun unrelated game gates.
 
 The three ordinary seeds are 0, 20261023 and 29417. Keep every primary endpoint, zero-road result, candidate rejection and baseline record. Controlled two-link overlap/marginal tests use declared different admission thresholds and do not replace ordinary acceptance. The real journey walks the accepted connection forward/reverse, the original corridor and a fixed comparable pair, then checkpoints the actual explored world with common and compound state. It reports physical BFS steps separately from movement inputs, scene counts, save bytes and save/cold-load/F9 times. See `docs/owner/WORLDGEN_G9.md` and `evidence/worldgen-g9/index.json` for the current completed receipts and boundaries.

@@ -1,5 +1,5 @@
 {
-  "commit": "e7fbd5ab99288c94e1a589df47ca733a9c17cb0b",
+  "commit": "67263f03ec02f44857a707cdbba772d1481787a1",
   "reviewed_areas": {
     "roguelike/generation/country_network.py": {
       "review": "Strict policy, deterministic bounded proposals, marginal physical admission, protected full bands and saved contract replay.",
@@ -87,9 +87,9 @@
     },
     "tools/verify_g9_release.py": {
       "review": "Serial finite unfiltered gates and unified input freeze.",
-      "bytes": 2623,
-      "raw_sha256": "5b9b6af643a24cfc105babdb410164823f084d1f38a8ac33caec5a4e352f07b1",
-      "canonical_sha256": "b37e54666bd7b404f3fbb15615b1f86ba33268b9b4a7812b7909574921492b58"
+      "bytes": 2759,
+      "raw_sha256": "0197db979f33bafb90590f025055669c0b77aff7cd22b2a83505d74d20a90092",
+      "canonical_sha256": "2fe5e0cb4226d043d0a5d3ac36cf1c4a450ed5028ebe19d5a2adba3bff33902c"
     },
     "Resonance_Wiki_Maintenance/wiki_inputs.py": {
       "review": "Separate reviewed source, full authoring/test scope and product identity with explicit canonical text rule.",
@@ -108,6 +108,30 @@
       "bytes": 2868,
       "raw_sha256": "6bb30fedf17b4c09d54eff60b47d22320826f58b8e39a9fc45ce4dee52ddd02f",
       "canonical_sha256": "6bb30fedf17b4c09d54eff60b47d22320826f58b8e39a9fc45ce4dee52ddd02f"
+    },
+    "tools/critical_fix_regressions/verify_fixes.py": {
+      "review": "Unfiltered discovery unchanged; explicit finite timeout override for measured G9 workload, historical default retained.",
+      "bytes": 4396,
+      "raw_sha256": "95ec544531351695b1608a04e56973fa521a99b9d32f8856b00bd229ef08c0d5",
+      "canonical_sha256": "a3f520675a90493b69b6abae54e4897e851c6d68b7f59426d27d0f74f5bd26ed"
+    },
+    "tools/g8_clean_focused.py": {
+      "review": "Removes parent PYTHONPATH and forwards the recorded finite child timeout.",
+      "bytes": 944,
+      "raw_sha256": "26263f32d4aee5aec38a53634d983c29cac937ea827958dbdf0523f768c82617",
+      "canonical_sha256": "0a166f4ec3e40a160bc38c3ed60c3a29ac755b3cfa25f30a2043ef62cb139d6e"
+    },
+    "tools/structure_editor/catalog.js": {
+      "review": "Generated data identity refreshed; assets/capabilities/contract/IDs unchanged.",
+      "bytes": 24125,
+      "raw_sha256": "c2b6d431ce1162af82c3c7664f394cfc9c3f6e33438f51d473f129d69aa69bf1",
+      "canonical_sha256": "c2b6d431ce1162af82c3c7664f394cfc9c3f6e33438f51d473f129d69aa69bf1"
+    },
+    "evidence/worldgen-g9/.gitattributes": {
+      "review": "Exact raw evidence on every OS; runtime canonical-source policy unchanged.",
+      "bytes": 177,
+      "raw_sha256": "6d556a7667c2a98f39c6e48fdb474a3f17a12806e0265c2055b33e85f2e54210",
+      "canonical_sha256": "6d556a7667c2a98f39c6e48fdb474a3f17a12806e0265c2055b33e85f2e54210"
     }
   },
   "evidence": "Each invariant is exercised by the final focused, authoring, diagnostic or wiki gate; consult index.json and per-gate exact manifests. This review record supplements those execution receipts."

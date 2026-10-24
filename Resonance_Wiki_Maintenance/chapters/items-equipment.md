@@ -147,9 +147,9 @@ After changing a preparation, test a newly used instance. Already active effects
 
 ## Source bindings
 
-- [Item creation defaults](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/item_factory.py)
-- [Item-use and armour consumers](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/item_system.py)
-- [Equipment slots and identity](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/components/equipment.py)
-- [Inventory ownership and weight](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/components/inventory.py)
-- [Crafting ambient source lookup](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/rendering/craft_screen.py)
-- [Food template](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/data/items/consumables/crow_jerky.json)
+- [Item creation defaults](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/item_factory.py)
+- [Item-use and armour consumers](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/item_system.py)
+- [Equipment slots and identity](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/components/equipment.py)
+- [Inventory ownership and weight](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/components/inventory.py)
+- [Crafting ambient source lookup](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/craft_screen.py)
+- [Food template](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/items/consumables/crow_jerky.json)

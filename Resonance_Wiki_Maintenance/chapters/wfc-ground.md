@@ -1,6 +1,6 @@
 # WFC ground palettes and the legacy town route
 
-Wave Function Collapse (WFC) is present as a bounded tile-adjacency solver and as ground fill in the preserved legacy town generator. **It is not the active ground-composition step for fresh G8 shared-plan towns.** The planned surface path builds base terrain, infrastructure and structures directly, then applies its final dressing rules. Changing a legacy town WFC file may therefore have no visible effect in a fresh planned settlement.
+Wave Function Collapse (WFC) is present as a bounded tile-adjacency solver and as ground fill in the preserved legacy town generator. **It is not the active ground-composition step for fresh G9 shared-plan towns.** The planned surface path builds base terrain, infrastructure and structures directly, then applies its final dressing rules. Changing a legacy town WFC file may therefore have no visible effect in a fresh planned settlement.
 
 This page documents the current solver and call boundary so you can work on an existing palette or identify the code integration needed for a new use. It does not present the older WFC guide's aesthetic descriptions as observed current behavior.
 
@@ -66,13 +66,13 @@ Small-grid success establishes one bounded solve, not success at the production 
 
 ## Add a new palette to an active use
 
-Creating a JSON file alone does not schedule the solver. Identify the target generation route, its intended rectangle, protected-cell handling, logical-to-terrain mapping and explicit fallback. Add or change that call deliberately. For fresh planned G8 towns, incorporating WFC would be a code change to the planned pipeline, with final road/door/contents access preserved and appropriate tests. It is outside routine palette tuning.
+Creating a JSON file alone does not schedule the solver. Identify the target generation route, its intended rectangle, protected-cell handling, logical-to-terrain mapping and explicit fallback. Add or change that call deliberately. For fresh planned G9 towns, incorporating WFC would be a code change to the planned pipeline, with final road/door/contents access preserved and appropriate tests. It is outside routine palette tuning.
 
 Keep gameplay-critical waystones or stairs under their explicit ownership/placement rules. A low-probability decorative sampler cannot guarantee a required unique interactive destination.
 
 ## Sources
 
-- [Current solver, attempts and final directional validation](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/wfc.py)
-- [Legacy fill call and fallback protection](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/town_gen.py)
-- [Fresh planned surface route](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/planned_scene.py)
-- [Historical WFC sample and its declared limits](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/WORLDGEN_G1.md)
+- [Current solver, attempts and final directional validation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/wfc.py)
+- [Legacy fill call and fallback protection](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/town_gen.py)
+- [Fresh planned surface route](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/planned_scene.py)
+- [Historical WFC sample and its declared limits](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/docs/owner/WORLDGEN_G1.md)

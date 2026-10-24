@@ -89,11 +89,11 @@ After testing, record what you changed, how you obtained fresh content, which au
 
 ## Source bindings
 
-- [Current data loader](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/data_loader.py)
-- [Current item factory](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/item_factory.py)
-- [Save component reconstruction](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/save_components.py)
-- [Owner tuning guide](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/TUNING_EXISTING_FEATURES.md)
-- [Regression driver](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/critical_fix_regressions/verify_fixes.py)
+- [Current data loader](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/data_loader.py)
+- [Current item factory](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/item_factory.py)
+- [Save component reconstruction](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/save_components.py)
+- [Owner tuning guide](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/docs/owner/TUNING_EXISTING_FEATURES.md)
+- [Regression driver](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/critical_fix_regressions/verify_fixes.py)
 
 ## Network policy authoring
 

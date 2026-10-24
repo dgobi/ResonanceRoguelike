@@ -43,7 +43,7 @@ This handbook records these limits so you can make edits that the current game c
 
 ## Source basis
 
-[Data loader](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/data_loader.py) · [current structure guide](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/docs/STRUCTURE_AUTHORING.md) · [craft ambient sources](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/rendering/craft_screen.py) · [perk screen](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/rendering/perk_screen.py) · [next-arc history](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/docs/owner/NEXT_ARC.md).
+[Data loader](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/data_loader.py) · [current structure guide](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/docs/STRUCTURE_AUTHORING.md) · [craft ambient sources](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/craft_screen.py) · [perk screen](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/perk_screen.py) · [next-arc history](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/docs/owner/NEXT_ARC.md).
 
 ## G8 lot and common checks
 

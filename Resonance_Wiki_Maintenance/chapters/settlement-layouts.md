@@ -2,7 +2,7 @@
 
 G8 provides two installed grid layouts inside the existing 160 × 86 town footprint. **Cross-market** has two cross streets and two avenues around a rectangular circuit, with its bell common north of the first cross street. **Linked-courts** moves the avenues and puts a connecting street between them, dividing that circuit into two courts; its common sits south of the first cross street. Horizontal roadside settlements keep their 160 × 43 footprint and derive frontage from the actual country road.
 
-The planner chooses layout identity on a separate deterministic seed stream. Building weights do not choose the layout. Country routes and bridge authority remain unchanged. Buildings, private buffers and complete approaches still belong to one 80 × 43 member chunk.
+The planner chooses layout identity on a separate deterministic seed stream. Building weights do not choose the layout. Original country routes and bridge authority remain intact; G9 can add optional connections after this complete baseline. Buildings, private buffers and complete approaches still belong to one 80 × 43 member chunk.
 
 ## Start with complete files
 
@@ -55,7 +55,7 @@ Before production installation, inspect the three generation-file diffs and pres
 
 The current composer uses orthogonal rectangular blocks and finite choices. Narrow leftover strips are recorded gardens, not hidden failed buildings. Spatial repetition uses Manhattan distance between accepted frontage joins with stable plot-ID ties. Counts and weights are not occupancy guarantees. Three ordinary seeds and controlled examples establish bounded behavior, not long-run frequencies.
 
-The G8 owner report records populated renderer views, real-handler travel, same-machine G7/G8 costs and centerline graph loops. G7 already had a rectangular street cycle. Wide-road tile cycles are not counted as useful alternate routes. Country-network optimization, organic cities, cross-chunk buildings and continuous rendering remain outside this release.
+The G8 owner report records populated renderer views, real-handler travel, same-machine G7/G8 costs and centerline graph loops. G7 already had a rectangular street cycle. Wide-road tile cycles are not counted as useful alternate routes. G9 now adds bounded country connections over that baseline. Organic cities, cross-chunk buildings and continuous rendering remain outside the current scope.
 
 ## G9 country integration
 

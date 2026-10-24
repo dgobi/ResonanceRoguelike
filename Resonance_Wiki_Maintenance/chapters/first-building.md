@@ -169,7 +169,7 @@ Open `roguelike/data/generation/settlement_profiles.json`. Add this object to **
 {"asset":"owner_cottage_a","weight":1,"max_per_settlement":4}
 ```
 
-For this cottage, those arrays are `profiles.grid.roles.residential` and `profiles.roadside.roles.residential`. Add it to both if you want both forms to use it. Adding an ID only to the grid profile does not register it for roadside settlements. Do not add a legacy `pools` object to current version-3 `g3_config.json`.
+For this cottage, those arrays are `profiles.grid.roles.residential` and `profiles.roadside.roles.residential`. Add it to both if you want both forms to use it. Adding an ID only to the grid profile does not register it for roadside settlements. Do not add a legacy `pools` object to current version-4 `g3_config.json`.
 
 The filename makes the document discoverable, the internal `id` supplies references, the existing category folder supplies its loader route, `placement.contexts` allows the geometry, and the role entries admit it to selection. Keep them aligned.
 
@@ -199,10 +199,10 @@ For a house with a separate service entrance, start from `roguelike/docs/example
 
 ## Sources
 
-- [CLI behavior and output contract](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/structure_authoring.py)
-- [Placement validation and transformations](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/placement.py)
-- [Role registration and selection validation](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/settlement_selection.py)
-- [Complete existing authoring recipes](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/docs/STRUCTURE_AUTHORING.md)
+- [CLI behavior and output contract](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/structure_authoring.py)
+- [Placement validation and transformations](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/placement.py)
+- [Role registration and selection validation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/settlement_selection.py)
+- [Complete existing authoring recipes](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/docs/STRUCTURE_AUTHORING.md)
 
 ## G7 composition integration
 

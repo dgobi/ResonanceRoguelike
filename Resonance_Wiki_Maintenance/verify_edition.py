@@ -20,6 +20,8 @@ def main():
         example=root/'examples/owner_cottage_a.json'
         for name,options in [('direct',['--route','ordinary_building','--orientations']),('grid',['--planned','--context','grid']),('roadside',['--planned','--context','roadside'])]:
             run('example-'+name,[repo/'tools/structure_authoring.py',example,'--category','residential',*options,'--output',out/('example-'+name+'.json')])
+        for name,network in [('wiki',root/'examples/g9_country_network.json'),('guide',repo/'roguelike/docs/examples/g9_country_network.json')]:
+            run('example-network-'+name,[repo/'tools/structure_authoring.py','--network-preview','--network-policy',network,'--seed','20261023','--output',out/('example-network-'+name+'.json')])
         run('build-a',[root/'build_wiki.py','--repo',repo]);first=hashlib.sha256(html.read_bytes()).hexdigest()
         run('drift-a',[root/'build_wiki.py','--repo',repo,'--check-drift'])
         run('build-b',[root/'build_wiki.py','--repo',repo]);second=hashlib.sha256(html.read_bytes()).hexdigest();assert first==second
