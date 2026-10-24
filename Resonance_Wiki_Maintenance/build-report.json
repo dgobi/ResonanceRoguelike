@@ -1,6 +1,6 @@
 {
-  "commit": "a708e0c62cbd0d39637ee57ac0502c13c1cad23a",
-  "documentation_delivery_revision": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+  "commit": "24c3053e9a138d18677c1872688fdd1f09c8a206",
+  "documentation_delivery_revision": "24c3053e9a138d18677c1872688fdd1f09c8a206",
   "repaired_legacy_links": [],
   "unavailable_legacy_links": [],
   "embedded_source_images": [
@@ -8,9 +8,9 @@
     "evidence\\worldgen-g7\\views\\g7-wayside_shrine_court-production.png",
     "docs\\owner\\images\\seed20261020_town0_and_road_seam.png"
   ],
-  "article_count": 110,
-  "data_files": 370,
-  "source_documents": 56,
+  "article_count": 112,
+  "data_files": 373,
+  "source_documents": 58,
   "fragment_fallbacks": [
     {
       "target": "source-roguelike-docs-components-md--ai",
@@ -46,7 +46,7 @@
     }
   ],
   "guide_chapters": 33,
-  "search_records": 463,
-  "output_bytes": 5456429,
-  "output_sha256": "eeea7278cea6db86c7627872681fd35a43451311bdc6ead25289c94873420971"
+  "search_records": 468,
+  "output_bytes": 5545942,
+  "output_sha256": "206e0d4e2e7e2c8e63b8f19eb998761213bed94c65c73bfad4194aa377ae128f"
 }

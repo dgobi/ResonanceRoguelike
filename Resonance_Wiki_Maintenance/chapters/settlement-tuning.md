@@ -1,12 +1,12 @@
 # Tune towns, roads and building variety
 
-Current fresh-world tuning uses **three files with separate jobs**: `roguelike/data/generation/g3_config.json` controls world placement and road widths, `settlement_layouts.json` controls local streets, common and frontage, while `roguelike/data/generation/settlement_profiles.json` controls which assets fill which roles. The historical filename `g3_config.json` remains active at G8. The older `town_config.json` is not the current shared-planner control surface.
+Current fresh-world tuning uses **four files with separate jobs**: `roguelike/data/generation/g3_config.json` controls world placement and road widths, `settlement_layouts.json` controls local streets, common and frontage, `roguelike/data/generation/settlement_profiles.json` controls which assets fill which roles, and `country_network.json` controls optional country connections. The historical filename `g3_config.json` remains active at G9. The older `town_config.json` is not the current shared-planner control surface.
 
 Changes here affect **new plans**. They do not reselect a saved pending building, alter a visited town or add new sites to an older world.
 
 ## Geometry controls
 
-The current geometry configuration is complete and uses `version: 3`, `settlement_layout_version: 1` and `selection_profile_version: 1`. Do not insert an old `pools` field into it. An explicit version-1 override retains a compatibility path with different meaning; it is not the recommended authoring format.
+The current geometry configuration is complete and uses `version: 4`, `country_network_version: 1`, `settlement_layout_version: 1` and `selection_profile_version: 1`. Do not insert an old `pools` field into it. An explicit version-1 override retains a compatibility path with different meaning; it is not the recommended authoring format.
 
 | Key | Current value | Allowed values / units | Practical effect |
 |---|---:|---|---|
@@ -99,7 +99,38 @@ A null cell inside a layout preserves terrain while still belonging to the reser
 
 ## Sources
 
-- [Geometry schema and fitter](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/generation/world_plan.py)
-- [Current installed selection profiles](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/data/generation/settlement_profiles.json)
-- [Selection weighting, caps and required search](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/generation/settlement_selection.py)
-- [G6 correction to required-transform search](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/docs/owner/WORLDGEN_G6.md)
+- [Geometry schema and fitter](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/world_plan.py)
+- [Current installed selection profiles](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/data/generation/settlement_profiles.json)
+- [Selection weighting, caps and required search](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/settlement_selection.py)
+- [G6 correction to required-transform search](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/WORLDGEN_G6.md)
+
+## Preview and tune the country network
+
+The authoritative complete guide is `roguelike/docs/COUNTRY_NETWORK.md`; the downloadable `g9_country_network.json` example contains every required field. The painter continues to edit buildings. Network previews use disposable geometry and do not open campaigns or install policy.
+
+```powershell
+& $ResonancePython -X utf8 tools/structure_authoring.py --network-preview --seed 20261023 --output authoring/network-ordinary.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --init-network authoring/network-draft --output authoring/network-init.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --network-preview --network-policy authoring/network-draft/g9_country_network.json --seed 20261023 --output authoring/network-tuned.json
+```
+
+JSON reports include all fixed primary pairs, exact before/after distances, accepted and rejected candidates, budgets and topology. Adjacent SVG and PNG overlays show gold baseline and green accepted connections, including reused portions. Initializing again preserves existing draft edits. Input paths, initializer targets, generated reports and catalog outputs share preflight and staged collision checks, including hard-link aliases.
+
+| Policy field | Default | Valid range |
+|---|---:|---|
+| `version` | 1 | Exactly integer 1 |
+| `max_shortcuts` | 2 | Integer 0–2 |
+| `max_added_fraction` | 0.25 | Finite 0–0.25 |
+| `min_saved_steps` | 500 | Integer 1–100000 physical steps |
+| `min_relative_improvement` | 0.25 | Finite 0.01–1 |
+| `candidate_pair_limit` | 8 | Integer 1–32 |
+| `search_expansion_limit` | 8192 | Integer 1–16384 |
+| `world_expansion_budget` | 32768 | Integer 1–65536 |
+
+Policies must be complete; unknown fields, missing fields, booleans in numeric fields and non-finite values fail. One shared construction budget counts overlapping accepted connections once. Previously accepted roads change the next connection's marginal benefit.
+
+Try `max_added_fraction: 0.1` in the draft: the same ordinary seed adds no connection. Try `max_shortcuts: 0`: a new format-7/wg9 world records `disabled` and preserves the complete G8 baseline content. This does not turn an existing G8 save into a G9 world. Seed 0 illustrates `no qualifying candidate`; `world_expansion_budget: 1` illustrates bounded exhaustion. Neither result proves that no legal beneficial corridor exists. A malformed policy or broken required baseline is an error, not a zero-road outcome.
+
+For deliberate installation, first copy the complete data directory to a disposable authoring directory, preserve its original network policy bytes, replace only that policy with the reviewed draft, and run the CLI with `--data-root` pointing there. Run `--catalog`, `--refresh-editor-catalog` with a disposable `--editor-catalog` target, and `--check-editor-catalog`. Restore the saved policy bytes and repeat; unrelated-file hashes must stay unchanged. `tools/verify_g9_authoring.py` executes this sequence with sentinels, plus all inherited workflows. Exact commands and production recovery are in `COUNTRY_NETWORK.md`.
+
+Production installation is a separate deliberate edit to `roguelike/data/generation/country_network.json`, followed by previews, review and a named Git checkpoint/commit. For recovery, inspect the diff and recover the intended earlier policy using `git show <reviewed-checkpoint>:roguelike/data/generation/country_network.json` into a draft before replacing the single reviewed file. Preserve unrelated edits; do not reset the checkout. Existing saved worlds keep their resolved connections regardless of today's policy.

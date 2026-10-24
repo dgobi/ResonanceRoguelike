@@ -33,3 +33,7 @@ After previews pass, deliberately install children in existing building categori
 G7 introduced format 5 / `wg7` resolved compounds. Current G8 format 6 preserves that parent/child model and adds settlement resolution. Recipe or policy edits affect new plans. Pending scenes use saved child IDs, transforms and geometry; consumed child changes can reject affected pending scenes while visited and unaffected pending scenes remain usable. Complete chunk scenes own runtime state, including independent containers for identical children.
 
 Explicit version-one POI policies retain single-site count meaning. On the historical G7 fresh-policy path they select format 4 / `wg6`; old plans are never relabeled or recomposed. Current version-3 settlement settings use format 6 / `wg8` independently of this POI choice.
+
+## G9 preserves these owners
+
+Current G9 network augmentation runs after the complete mixed rural baseline is resolved. It preserves parent/child coordinates, assets, dependencies, paths, gate and assigned road attachment. No new full-width road cells may enter the site's owner chunk. Mixed POI v2, legacy single-site v1 and explicit zero additional parents all retain their semantics independently of the network switch. Saved pending sites use resolved records; changing today's network policy cannot move them. Preview assignments finish site insertion before optional augmentation so their preservation contract covers the actual complete preview.

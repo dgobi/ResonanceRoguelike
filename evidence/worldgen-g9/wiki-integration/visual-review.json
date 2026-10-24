@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "scope": "Inspected actual Chromium mobile viewport: edition navigation, heading, text and table stay within the narrow viewport. Desktop/mobile full screenshots and both engine download hashes are retained by reader checks.",
+  "image": "reader/chromium-mobile-viewport.png",
+  "sha256": "fa5acc12d309a5b073518f67d3509a2f1e77d8140c52ce3acb58beef2548754a"
+}

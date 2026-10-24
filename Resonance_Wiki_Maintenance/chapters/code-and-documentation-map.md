@@ -8,7 +8,7 @@ The repository root contains `AGENTS.md`, the root `docs/`, `tools/`, acceptance
 
 Read the current `AGENTS.md` before implementing changes. It specifies work on the production `main` checkout, preservation of owner changes, named checkpoints before substantial work, autonomous headless/app-local verification, and separate authorization for pushing. The wiki itself does not authorize a push or redefine those working rules.
 
-Source: [AGENTS.md](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/AGENTS.md).
+Source: [AGENTS.md](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/AGENTS.md).
 
 ## File map by intended change
 
@@ -44,7 +44,7 @@ All paths in this table are repository-relative.
 | Saves and scene cache | `roguelike/engine/save_manager.py`, `checkpoints.py`, `save_components.py` | Schema compatibility, exact item identity, all dirty scene owners |
 | Debug console or one-off diagnostic | `roguelike/engine/debug.py`, root `tools/` | A disposable save root and the actual intended production route |
 
-Sources: [game bootstrap](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/main.py), [data loader](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/data_loader.py), [Engine](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/engine.py), [repository tree at the audited revision](https://github.com/dgobi/ResonanceRoguelike/tree/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5).
+Sources: [game bootstrap](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/main.py), [data loader](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/data_loader.py), [Engine](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/engine.py), [repository tree at the audited revision](https://github.com/dgobi/ResonanceRoguelike/tree/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5).
 
 ## Follow a feature from data to play
 
@@ -56,7 +56,7 @@ Structure authoring now goes through `StructureCatalog`, which creates the route
 
 There are also specialized direct readers and module caches. The `DataLoader` docstring's assertion that nothing else reads files is too broad. Restart after changing definitions unless the specific tool advertises a supported reload path.
 
-Source: [DataLoader and StructureCatalog hookup](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/data_loader.py).
+Source: [DataLoader and StructureCatalog hookup](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/data_loader.py).
 
 ## Separate simulation from presentation
 
@@ -66,7 +66,7 @@ Keep a content definition immutable during play. Put changing values on the owni
 
 The current save system preserves validated checkpoint generations and serialized scene owners; it is not simply a collection of independently overwritten JSON files. Runtime effects also have explicit timing rules: hot map owners may advance while cold serialized owners freeze. Use the save and effects chapters before adding timers.
 
-Sources: [Engine simulation coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/engine.py), [checkpoint persistence](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/save_manager.py), [effect lifecycle](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/effect_lifecycle.py).
+Sources: [Engine simulation coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/engine.py), [checkpoint persistence](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/save_manager.py), [effect lifecycle](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/effect_lifecycle.py).
 
 ## A practical code-change workflow
 
@@ -89,3 +89,18 @@ For future updates, preserve the old evidence as history, update the actionable 
 ## G7 and G8 generation map
 
 `generation/compounds.py` and `compound_integrity.py` own bounded rural parents and child/path ownership. `settlement_layout.py` owns G8 local streets, common, blocks and frontage; `settlement_selection.py` fills roles; `settlement_preview.py` renders complete previews. `plan_integrity.py`, `planned_scene.py` and `scene_adapters.py` preserve resolved geometry and lifecycle. See `docs/owner/WORLDGEN_G8.md` for evidence and `roguelike/docs/STRUCTURE_AUTHORING.md` for executable authoring instructions.
+
+## G9 country-network sources
+
+| Change or inspect | Authority |
+|---|---|
+| Bounded policy, candidate admission, preserved baseline and saved validation | `roguelike/generation/country_network.py` |
+| Reconciled centerline union, topology and physical pair metrics | `roguelike/generation/network_metrics.py`, `road_network.py` |
+| Owner comparisons and exact overlays | `roguelike/generation/network_preview.py` |
+| Installed defaults and complete draft | `roguelike/data/generation/country_network.json`, `roguelike/docs/examples/g9_country_network.json` |
+| Safe CLI and five workflows | `tools/structure_authoring.py`, `tools/verify_g9_authoring.py` |
+| Ordinary matrix, actual traversal and populated views | `tools/worldgen_g9_diagnostic.py`, `g9_journey.py`, `g9_visuals.py` |
+| Complete release and lifecycle fixtures | `tools/verify_g9_release.py`, `tools/critical_fix_regressions/tests/test_generation_g9_*.py` |
+| Authoritative workflow and delivery evidence | `roguelike/docs/COUNTRY_NETWORK.md`, `docs/owner/WORLDGEN_G9.md`, `evidence/worldgen-g9/index.json` |
+
+Source links in the current edition resolve to its deliberately reviewed immutable commit. Format 7 adds optional connections over the complete G8 baseline; settings version 3 remains the historical G8 route. No graphical road editor or storage-engine redesign is included.

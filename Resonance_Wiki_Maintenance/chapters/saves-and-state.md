@@ -21,7 +21,7 @@ With the shipped debug configuration, F5 teleports and F9 prints diagnostics. Th
 
 An ordinary launch uses `roguelike/saves/slot_0/`. The current disposable launcher redirects the root to `.baseline/g3-play-<session>/`, still with a `slot_0/` underneath. The old `baseline.py` launcher uses a different copied-game tree. Keep their paths distinct.
 
-The payload save version is **2**; the outer checkpoint container version is **1**. World plan versions and scene generation revisions (`wg3` through `wg8`) are separate compatibility contracts. A matching save version alone does not prove that a new generator can reinterpret an older plan.
+The payload save version is **2**; the outer checkpoint container version is **1**. World plan versions and scene generation revisions (`wg3` through `wg9`) are separate compatibility contracts. A matching save version alone does not prove that a new generator can reinterpret an older plan.
 
 ## What a full save captures
 
@@ -61,7 +61,7 @@ Active/hot map processing and disruption zones can age while those maps remain r
 
 ## Source basis
 
-[SaveManager and scene cache](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/save_manager.py) · [checkpoint store](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/checkpoints.py) · [component serialization](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/save_components.py) · [critical-fix record](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/docs/owner/CRITICAL_FIXES_VERIFICATION.md) · [current engine travel](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/engine.py).
+[SaveManager and scene cache](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/save_manager.py) · [checkpoint store](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/checkpoints.py) · [component serialization](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/save_components.py) · [critical-fix record](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/CRITICAL_FIXES_VERIFICATION.md) · [current engine travel](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/engine.py).
 
 ## Resolved compound ownership
 
@@ -70,3 +70,11 @@ G7 format 5 / `wg7` saves selected parent recipes as resolved child placements a
 ## G8 settlement resolution
 
 Format 6 stores layout identity, actual arrival, exact street bands, blocks, lot/placement associations and public common geometry. Both POI policy versions remain valid with G8. Loading never consults current town recipes to recompose these records. Pending scenes validate their own consumed dependencies; a common surface change affects only slices consuming it. Visited scenes retain actual state. The genuine pre-change G7 witness and checksum-consistent corruption cases are recorded in the G8 owner report.
+
+## G9 resolved country contract
+
+Fresh settings-4 worlds save format 7 / origin `wg9`, including the resolved policy, original baseline identities, accepted route IDs and named marginal benefits. Canonical routes, crossings and reservations own the geometry; no second editable road graph is saved. Pending scenes use those saved records even if today's network policy changes or disappears. Consumed structural definitions retain their affected-only checks.
+
+Formats 1–6 use explicit compatible adapters for pending scenes. Already visited scenes retain their true creator revision and player mutations. The genuine G8 witness was captured before implementation, including common/native state, visited/pending town and country chunks and independent compound-child state. New `wg9` scenes may have different random contents from newly created `wg8` scenes; this does not permit changing an older visited scene.
+
+Loads check reciprocal shortcut references, original ownership, exact bands and crossing scope, physical benefit and shared construction accounting before installation. Controlled corruptions and a late scene failure exercise rollback of player, world, RNG, active actors, caches and checkpoint HEAD. This feature does not compact checkpoints or change retention.

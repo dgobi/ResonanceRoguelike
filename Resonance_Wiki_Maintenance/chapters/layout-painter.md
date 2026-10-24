@@ -62,10 +62,10 @@ With a direct-stamp access sidecar, use `coordinates: "source"` by default, an `
 
 ## Sources
 
-- [Editor model and preservation rules](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/structure_editor/model.js)
-- [Editor controls](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/structure_editor/editor.js)
-- [Authoring CLI](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/structure_authoring.py)
-- [Current walkthrough and diagnostic definitions](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/docs/STRUCTURE_AUTHORING.md)
+- [Editor model and preservation rules](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/structure_editor/model.js)
+- [Editor controls](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/structure_editor/editor.js)
+- [Authoring CLI](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/structure_authoring.py)
+- [Current walkthrough and diagnostic definitions](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/docs/STRUCTURE_AUTHORING.md)
 
 ## G7 composition integration
 

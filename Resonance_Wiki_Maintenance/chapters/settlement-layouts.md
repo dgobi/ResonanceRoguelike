@@ -56,3 +56,7 @@ Before production installation, inspect the three generation-file diffs and pres
 The current composer uses orthogonal rectangular blocks and finite choices. Narrow leftover strips are recorded gardens, not hidden failed buildings. Spatial repetition uses Manhattan distance between accepted frontage joins with stable plot-ID ties. Counts and weights are not occupancy guarantees. Three ordinary seeds and controlled examples establish bounded behavior, not long-run frequencies.
 
 The G8 owner report records populated renderer views, real-handler travel, same-machine G7/G8 costs and centerline graph loops. G7 already had a rectangular street cycle. Wide-road tile cycles are not counted as useful alternate routes. Country-network optimization, organic cities, cross-chunk buildings and continuous rendering remain outside this release.
+
+## G9 country integration
+
+Both G8 layout templates, their complete commons, public-surface dependencies, plot selection and cardinal frontage remain the baseline of current format-7 worlds. Optional country roads are considered only after those records are resolved. They cannot create a new entrance into a protected town chunk. Arrival selection uses the explicitly saved arrival road; another route ending at the same town cannot replace it. Settings version 3 remains the historical G8 plan path; settings version 4 adds the separate network contract.

@@ -35,7 +35,7 @@ def main():
             missing=page.evaluate('(ids)=>ids.filter(id=>!document.getElementById(decodeURIComponent(id)))',links)
             assert not missing,missing
             downloads=[]
-            for filename in ('deep_tongue.json','owner_cottage_a.json','g7_travellers_court.json'):
+            for filename in ('deep_tongue.json','owner_cottage_a.json','g7_travellers_court.json','g9_country_network.json'):
                 record=page.locator('.data-record').filter(has=page.locator('button[data-filename="'+filename+'"]')).first
                 record_id=record.get_attribute('id');page.goto(html.as_uri()+'#'+record_id)
                 record.evaluate('(e)=>e.open=true')

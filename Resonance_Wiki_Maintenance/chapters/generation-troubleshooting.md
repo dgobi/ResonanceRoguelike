@@ -97,11 +97,17 @@ The original documents remain valuable history and design context. A current tut
 
 ## Sources
 
-- [Consumed dependencies and pending-placement errors](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/generation/placement.py)
-- [Scene adapters](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/generation/scene_adapters.py)
-- [Compiler diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/generation/structure_contract.py)
-- [G6 source-bound recorded verification and limits](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/docs/owner/WORLDGEN_G6.md)
+- [Consumed dependencies and pending-placement errors](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/placement.py)
+- [Scene adapters](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/scene_adapters.py)
+- [Compiler diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/structure_contract.py)
+- [G6 source-bound recorded verification and limits](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/WORLDGEN_G6.md)
 
 ## G7 composition integration
 
 The current mixed parent workflow is documented in [Compounds](#compounds). A building export supplies the consumed child structure; a separate recipe supplies two required slots, an optional third slot, common paths, private bounds and permitted parent/child transforms. The existing painter edits the building, not the recipe. Use actual exported bytes in `--child`. Run `tools/verify_g7_authoring.py` for inherited and compound workflows; direct focused discovery now supplies its own absolute tools import path. Keep previous evidence immutable.
+
+## A country preview added no road
+
+Read `network.outcome` and the candidate trace. `disabled` means `max_shortcuts: 0`; `zero construction budget` means the shared integer edge allowance is zero. `no qualifying candidate` means the bounded examined proposals failed geometry, construction or marginal-benefit admission. Search-limit and global-budget exhaustion report unresolved search explicitly. `pairs_unexamined` is not evidence of infeasibility. The baseline must still be complete and valid.
+
+Gold/green overlaps in the preview show reuse, not duplicate construction. A crossing ownership row is not a new physical bridge. Cut edges are graph edges whose removal disconnects a component, not river bridge objects. Four-neighbour physical distances are not macro search costs or diagonal-capable player input counts. A larger scene checkpoint after a longer coverage journey is not a network storage regression by itself; compare scopes and counts.

@@ -89,8 +89,12 @@ After testing, record what you changed, how you obtained fresh content, which au
 
 ## Source bindings
 
-- [Current data loader](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/data_loader.py)
-- [Current item factory](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/item_factory.py)
-- [Save component reconstruction](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/engine/save_components.py)
-- [Owner tuning guide](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/docs/owner/TUNING_EXISTING_FEATURES.md)
-- [Regression driver](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/tools/critical_fix_regressions/verify_fixes.py)
+- [Current data loader](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/data_loader.py)
+- [Current item factory](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/item_factory.py)
+- [Save component reconstruction](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/engine/save_components.py)
+- [Owner tuning guide](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/TUNING_EXISTING_FEATURES.md)
+- [Regression driver](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/tools/critical_fix_regressions/verify_fixes.py)
+
+## Network policy authoring
+
+Use the complete separate `country_network.json` policy and the [network workflow](#settlement-tuning). `--network-preview` accepts an optional `--network-policy` draft; `--init-network` preserves existing draft edits. JSON/SVG/PNG outputs use the same protected destinations and staged publication as building previews. These commands do not install policy or mutate a campaign. The building painter remains the export source for building contents, including compound children.

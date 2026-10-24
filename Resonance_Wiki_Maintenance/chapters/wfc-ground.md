@@ -72,7 +72,7 @@ Keep gameplay-critical waystones or stairs under their explicit ownership/placem
 
 ## Sources
 
-- [Current solver, attempts and final directional validation](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/generation/wfc.py)
-- [Legacy fill call and fallback protection](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/generation/town_gen.py)
-- [Fresh planned surface route](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/generation/planned_scene.py)
-- [Historical WFC sample and its declared limits](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/docs/owner/WORLDGEN_G1.md)
+- [Current solver, attempts and final directional validation](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/wfc.py)
+- [Legacy fill call and fallback protection](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/town_gen.py)
+- [Fresh planned surface route](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/planned_scene.py)
+- [Historical WFC sample and its declared limits](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/WORLDGEN_G1.md)

@@ -103,7 +103,11 @@ The bounded rejection examples and counts are in `site_selection`; accepted plot
 
 ## Sources
 
-- [Current POI policy](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/data/generation/poi_profiles.json)
-- [Validation, candidates, selection and durable attachments](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/generation/poi_selection.py)
-- [Complete rural draft](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/roguelike/docs/examples/g6_wayhouse.json)
-- [G6 owner guide](https://github.com/dgobi/ResonanceRoguelike/blob/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5/docs/owner/WORLDGEN_G6.md)
+- [Current POI policy](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/data/generation/poi_profiles.json)
+- [Validation, candidates, selection and durable attachments](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/generation/poi_selection.py)
+- [Complete rural draft](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/roguelike/docs/examples/g6_wayhouse.json)
+- [G6 owner guide](https://github.com/dgobi/ResonanceRoguelike/blob/24c3053e9a138d18677c1872688fdd1f09c8a206/docs/owner/WORLDGEN_G6.md)
+
+## G9 preserves these owners
+
+Current G9 network augmentation runs after the complete mixed rural baseline is resolved. It preserves parent/child coordinates, assets, dependencies, paths, gate and assigned road attachment. No new full-width road cells may enter the site's owner chunk. Mixed POI v2, legacy single-site v1 and explicit zero additional parents all retain their semantics independently of the network switch. Saved pending sites use resolved records; changing today's network policy cannot move them. Preview assignments finish site insertion before optional augmentation so their preservation contract covers the actual complete preview.
