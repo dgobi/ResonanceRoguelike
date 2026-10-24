@@ -82,6 +82,9 @@ class G6Sites(unittest.TestCase):
             self.assertEqual(len({s['chunk'][0]*128+s['chunk'][1] for s in plan['sites']}),2)
             if plan['site_selection']['desired']>2:self.assertEqual(plan['site_selection']['shortfall_reason'],'hard cohort caps exhausted')
         self.assertTrue(any(r['desired']>2 for r in observed))
+        plan=self.world_for(self.data_policy(fit_budget=2)).plan
+        self.assertEqual((plan['site_selection']['desired'],len(plan['sites'])),(3,2))
+        self.assertEqual(plan['site_selection']['shortfall_reason'],'fit budget exhausted')
 
     def test_minimum_failure_publishes_no_world_and_zero_is_explicit(self):
         data=self.data_policy(fit_budget=1);world=WorldMap(128,128);world.seed=20261023;before=copy.deepcopy(vars(world))
@@ -89,6 +92,14 @@ class G6Sites(unittest.TestCase):
         self.assertEqual(vars(world),before)
         zero=self.world_for(self.data_policy(minimum=0,maximum=0))
         self.assertEqual(zero.plan['sites'],[]);self.assertEqual(zero.plan['site_selection']['desired'],0)
+
+    def test_fitter_dependency_failure_has_no_orphan_reservations(self):
+        from generation.world_plan import _plot
+        plan,authority=gameplay.G4Placement.fixture(self);before=copy.deepcopy(authority.rows)
+        with patch('generation.world_plan.dependencies',side_effect=GenerationError('controlled consumed-definition failure')):
+            plot=_plot(plan,authority,self.data,'fixture','grid',0,0,20,21,'S','assigned')
+        self.assertIsNone(plot['placement']);self.assertEqual(plan['placements'],[]);self.assertEqual(plan['dependencies'],{})
+        self.assertEqual(authority.rows,before)
 
     def test_equivalent_memberships_candidates_and_nearest_repeat(self):
         data=self.data_policy();data.poi_profiles['assets'].reverse();data.poi_profiles['locations'].reverse()
@@ -223,3 +234,14 @@ class G6Sites(unittest.TestCase):
         from engine.creature_factory import CreatureFactory
         with self.assertRaisesRegex(GenerationError,'changed dependency structure:'+p['asset']):
             create_surface(pending,pending.get(*xy),e.data,ItemFactory(e.data),CreatureFactory(e.data),80,43)
+
+    def test_rural_sites_have_ordinary_updates_without_town_ownership(self):
+        e=self.boot();e.debug=False;e.player_invincible=True;e.rng=random.Random(20261023)
+        site=e.world_map.plan['sites'][0];self.visit(e,site['chunk']);chunk=e.world_map.get(*site['chunk'])
+        self.assertIsNone(chunk.town_data);self.assertIsNone(e.local_map.native_generation_context)
+        turn=e.world_time.turn
+        for _ in range(8):e._handle_key_local(pygame.K_z)
+        self.assertEqual(e.world_time.turn,turn+8);self.assertEqual(chunk.biome_id,self.world.get(*site['chunk']).biome_id)
+        self.assertTrue(e.save_manager.save(e),e.save_manager.last_error)
+        reader=make_engine(self.data);self.assertTrue(reader.save_manager.load(reader),reader.save_manager.last_error)
+        self.assertEqual(reader.world_map.plan['sites'],e.world_map.plan['sites'])

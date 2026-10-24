@@ -355,9 +355,15 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
             if max(approach[3]-approach[1],approach[2]-approach[0])-1>c['max_spur_tiles']: raise GenerationError('approach exceeds bounded spur length')
             placement=dict(id=pid+'-building',asset=asset,context=context,rotation=rotation,mirror=mirror,origin=[ox,oy],footprint=footprint,clearance=clearance,approach=approach,road=road_id,join=join,entrances=[dict(e,x=ox+e['x'],y=oy+e['y']) for e in raw['placement']['entrances']],targets=[dict(t,x=ox+t['x'],y=oy+t['y']) for t in raw['placement']['targets']],required=required,dependency=asset)
             if role is not None:placement.update(role=role,frontage_entrance=e['id'])
-            authority.add(placement['id'],'structure',clearance)
-            authority.add(placement['id'],'approach',approach,(placement['id'],),public_road=road_id,public_rects=road['rects'])
-            plan['dependencies'].setdefault(asset,dependencies(data.structures[asset],data)); plan['placements'].append(placement); chosen=placement['id']; break
+            # Dependency/factory failure must not leak reservations even for an
+            # ordinary first-fit caller that is not doing outer backtracking.
+            q,a=staged(plan,authority)
+            q['dependencies'].setdefault(asset,dependencies(data.structures[asset],data))
+            a.add(placement['id'],'structure',clearance)
+            a.add(placement['id'],'approach',approach,(placement['id'],),public_road=road_id,public_rects=road['rects'])
+            q['placements'].append(placement)
+            plan['dependencies']=q['dependencies'];plan['placements']=q['placements']
+            authority.rows=a.rows;authority.index=a.index;chosen=placement['id'];break
         except GenerationError as error: rejected.append(dict(asset=asset,rotation=rotation,mirror=mirror,reason=str(error)))
     plot=dict(id=pid,owner=owner,road=road_id,normal=normal,buildable=buildable if ordered else [wx*W,wy*H,(wx+1)*W,(wy+1)*H],setback=c['setback_tiles'],placement=chosen,status='occupied' if chosen else 'vacant-garden',required=required,rejected=rejected)
     if role is not None:
