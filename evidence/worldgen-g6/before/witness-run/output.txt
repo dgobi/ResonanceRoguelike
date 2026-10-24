@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\evidence\worldgen-g6\before\capture_g5.py", line 29, in <module>
+    assert plan == supplied, 'actual G5 plan differs from independently bound plan'
+AssertionError: actual G5 plan differs from independently bound plan

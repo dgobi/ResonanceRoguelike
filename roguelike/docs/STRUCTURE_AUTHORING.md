@@ -163,7 +163,7 @@ The effective draw weight is **placement base weight × role weight × repeat
 multiplier**. The penalty applies if the asset matches the nearest accepted plot
 in stable slot order (ties use the earlier order). Draw the asset once, then try
 its permitted transforms; more orientations do not multiply its weight. Failed
-trials consume no accepted cap. Input order, process hash seeds and gameplay RNG
+trials consume no accepted cap. Unordered asset membership order, process hash seeds and gameplay RNG
 do not change the saved result.
 
 Set `max_per_settlement` in an asset's role entry for a hard limit. It counts
@@ -202,7 +202,7 @@ these controls affect **new planning only**, never saved selection or visited ma
 | `minimum.<role>` | residential/commercial/civic/landmark 1, support 0; integer 0..8 with obligations retained | Required accepted count; total caps must suffice. |
 | `schedule` | commercial,residential,support,residential | Nonempty optional role sequence; civic excluded. |
 | `repeat_multiplier` | 0.2, finite (0,1] | Soft nearest-occupied-slot repeat preference. |
-| `required_fit_budget` | 256, integer 1..4096 asset/slot trials | Required-role backtracking bound. |
+| `required_fit_budget` | 256, integer 1..4096 transform-fit trials | Required-role backtracking bound. |
 | `buildings/...:placement.version` | 1 | Explicit supported structural contract. |
 | `placement.contexts`, `placement.weight` | explicit contexts; base weight finite >0..1000 | New-plan selection only; excluded from structural hashes. |
 | `placement.rotations`, `mirror_x` | explicit quarter turns; boolean mirror before rotation | Consumed geometry; changing affects pending dependency compatibility. |
@@ -228,7 +228,7 @@ context instead. Other reasons remain distinct:
 | footprint/buffer or private approach conflict | Exclusive reserved space overlaps; alter footprint/buffer or slot spacing. Assigned public road cells alone may be shared. |
 | buildable plot / storage chunk | Insufficient width/depth for footprint, buffer or approach; inspect the exact half-open rectangles. |
 | complete required entrance / content inaccessible | Inspect full spans, blocking decor and actual interaction corners; preserve separate doors instead of making them optional. |
-| required role minima infeasible | Read exhausted role and asset/slot trial budget; provide a fitting eligible asset/cap. Do not silently remove the role. |
+| required role minima infeasible | Read exhausted role and transform-fit trial budget; provide a fitting eligible asset/cap. Do not silently remove the role. |
 | changed dependency | Restore compatible consumed definitions for that pending saved placement, or create a fresh disposable world for edited content. |
 
 `--planned` registers a draft only in memory in the selected role, retaining the
@@ -779,3 +779,12 @@ For entrance `legend_weights`, a selected `tile: null` uses the fixed legend
 fallback. A null fixed legend preserves the underlying terrain. These legacy
 semantics are distinct. Direct stamps have no generated player arrival; access
 sidecars choose a validation entry. Only authored submap previews certify arrival.
+
+G6 selection correction: required search revisits each feasible transform of an
+asset before moving to the next weighted asset. One budget unit is one geometric
+transform fit, or one asset trial with no eligible frontage. Transform-profile
+inspection is bounded to eight options per asset. Exhausting the budget reports
+that feasibility remains unresolved; exhausting all enumerated alternatives is
+a separate failure. Failed branches own no placements, dependencies or caps.
+Asset membership lists are canonicalized for fresh plans; optional role schedules
+remain intentionally ordered. Saved G5 selections are never normalized on load.

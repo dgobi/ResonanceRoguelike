@@ -273,17 +273,23 @@ def build_plan(world,data,override=None,metrics=None):
     return plan
 
 
-def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,required=False,*,role=None,slot_order=0,only_assets=None):
-    c=plan['settings']; pid=f'{owner}-plot-{len(plan["plots"])}'; chosen=None; rejected=[]
-    pool=c['pools'][context]; candidates=[]
+def plot_options(plan,data,owner,context,normal,*,role=None,slot_order=0,only_assets=None,weighted_rows=None):
+    """Asset-first alternatives from the production fitter, including empty trials.
+
+    Each option is one geometric fit (or one asset with no permitted frontage).
+    At most eight permitted transform profiles are inspected per asset. This is
+    shared by ordinary first-fit and bounded required backtracking.
+    """
+    pid=f'{owner}-plot-{len(plan["plots"])}'; rejected=[]; candidates=[]
+    pool=plan['settings']['pools'][context]
     role_rows=None
-    if role is not None:
+    if weighted_rows is not None:
+        role_rows=weighted_rows; pool=[r[0] for r in role_rows]
+    elif role is not None:
         from generation.settlement_selection import eligible
         role_rows,excluded=eligible(plan,owner,role,slot_order);rejected.extend(excluded)
-        pool=[r[0] for r in role_rows if only_assets is None or r[0] in only_assets]
-    road=next((r for r in plan['routes'] if r['id']==road_id),None)
-    if road is None: raise GenerationError(f'{pid}: unknown assigned road {road_id}')
-    for asset in sorted(pool):
+        pool=[r[0] for r in role_rows]
+    for asset in sorted(a for a in pool if only_assets is None or a in only_assets):
         raw=data.structures[asset]; p=raw['placement']
         orientations=[]
         for rotation in sorted(set(p['rotations'])):
@@ -292,14 +298,34 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
                 e=next(iter(sorted((e for e in transformed['placement']['entrances'] if e['required'] and e['normal']==normal),key=lambda e:(e['role']!='main',e['id']))),None)
                 if e: orientations.append((asset,rotation,mirror,transformed,e))
         weight=next(r[1] for r in role_rows if r[0]==asset) if role_rows is not None else p['weight']
-        if orientations: candidates.append((asset,weight,orientations))
-        else: rejected.append(dict(asset=asset,rotation=None,mirror=None,reason='no eligible permitted transform for entrance normal'))
+        candidates.append((asset,weight,orientations or [(asset,None,None,None,None)]))
     rng=random.Random(stable_seed('wg3',plan['seed'],pid,'asset'))
     ordered=[]
     while candidates:
         selected=rng.choices(candidates,weights=[r[1] for r in candidates],k=1)[0]; candidates.remove(selected)
         orientations=list(selected[2]); rng.shuffle(orientations); ordered.extend(orientations)
+    return ordered,rejected,role_rows
+
+
+def staged(plan,authority):
+    """Copy only registries the fitter owns; failed branches never publish."""
+    q=dict(plan,plots=list(plan['plots']),placements=list(plan['placements']),dependencies=dict(plan['dependencies']))
+    a=copy.copy(authority);a.rows=list(authority.rows);a.index={k:list(v) for k,v in authority.index.items()}
+    return q,a
+
+
+def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,required=False,*,role=None,slot_order=0,only_assets=None,option=None,weighted_rows=None):
+    c=plan['settings'];pid=f'{owner}-plot-{len(plan["plots"])}';chosen=None
+    if option is None:
+        ordered,rejected,role_rows=plot_options(plan,data,owner,context,normal,role=role,slot_order=slot_order,only_assets=only_assets,weighted_rows=weighted_rows)
+    else:
+        ordered=[option];rejected=[];role_rows=weighted_rows
+    road=next((r for r in plan['routes'] if r['id']==road_id),None)
+    if road is None: raise GenerationError(f'{pid}: unknown assigned road {road_id}')
+    buildable=[wx*W,wy*H,(wx+1)*W,(wy+1)*H]
     for asset,rotation,mirror,raw,e in ordered:
+        if e is None:
+            rejected.append(dict(asset=asset,rotation=None,mirror=None,reason='no eligible permitted transform for entrance normal'));continue
         p=raw['placement']; width,height=raw['width'],raw['height']
         setback=max(c['setback_tiles'],p['approach'])
         nx,ny=NORMALS[normal]
@@ -333,7 +359,7 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
     plot=dict(id=pid,owner=owner,road=road_id,normal=normal,buildable=buildable if ordered else [wx*W,wy*H,(wx+1)*W,(wy+1)*H],setback=c['setback_tiles'],placement=chosen,status='occupied' if chosen else 'vacant-garden',required=required,rejected=rejected)
     if role is not None:
         plot.update(role=role,slot_order=slot_order)
-        if chosen and next(r[2] for r in role_rows if r[0]==placement['asset']):
+        if chosen and role_rows is not None and next(r[2] for r in role_rows if r[0]==placement['asset']):
             plot['repetition']=('soft fallback: only eligible asset remains' if len(role_rows)==1 else
                                 'soft weighted repeat; penalty is a preference, hard limits retained')
     plan['plots'].append(plot)

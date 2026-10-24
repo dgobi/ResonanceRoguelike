@@ -47,6 +47,7 @@ def resolve(data):
     config=copy.deepcopy(validate(data.settlement_profiles,data))
     for profile in config['profiles'].values():
         for rows in profile['roles'].values():
+            rows.sort(key=lambda row:row['asset'])
             for row in rows:row['base_weight']=data.structures[row['asset']]['placement']['weight']
     return validate(config)
 
@@ -73,7 +74,7 @@ def eligible(plan, owner, role, slot_order):
     neighbor=min(plots,key=lambda p:(abs(p['slot_order']-slot_order),p['slot_order'])) if plots else None
     previous=placements[neighbor['placement']]['asset'] if neighbor else None
     rows=[];excluded=[]
-    for rule in profile['roles'][role]:
+    for rule in sorted(profile['roles'][role],key=lambda row:row['asset']):
         aid=rule['asset']
         if counts[aid]>=rule['max_per_settlement']:
             excluded.append(dict(asset=aid,rotation=None,mirror=None,reason='hard per-settlement cap reached'))
@@ -87,43 +88,38 @@ def populate_settlement(plan, authority, data, settlement, slots):
     Slot order follows distance from the original civic/arrival slot. Required
     trials use the same fitter. A failed branch owns no accepted counts/space.
     """
-    from generation.world_plan import _plot
+    from generation.world_plan import _plot,plot_options,staged
     profile=profile_for(plan,settlement['id']);sid=settlement['id']
     required=[role for role in ('civic','commercial','residential','support') for _ in range(profile['minimum'].get(role,0))]
-    attempts=0; failures=[]
-    def trial_state(p,a):
-        q=dict(p,plots=list(p['plots']),placements=list(p['placements']),dependencies=dict(p['dependencies']))
-        b=copy.copy(a);b.rows=list(a.rows);b.index={k:list(v) for k,v in a.index.items()}
-        return q,b
-    def fit(p,a,slot,role,required=False,only=None):
+    attempts=0; failures=[]; exhausted=False
+    def fit(p,a,slot,role,option=None):
         wx,wy,lx,line_y,normal,rid,order=slot
         return _plot(p,a,data,sid,'civic' if role=='civic' else settlement['form'],wx,wy,lx,line_y,normal,rid,
-                     role=role,slot_order=order,only_assets=only)
+                     role=role,slot_order=order,option=option)
     def search(p,a,remaining,index):
-        nonlocal attempts
+        nonlocal attempts,exhausted
         if index==len(required):return p,a,remaining
         role=required[index]
         for slot in remaining:
-            rows,_=eligible(p,sid,role,slot[-1]);rng=random.Random(stable_seed(p['seed'],sid,role,slot[-1],'required'))
-            ordered=[]
-            while rows:
-                row=rng.choices(rows,weights=[r[1] for r in rows])[0];rows.remove(row);ordered.append(row[0])
-            for aid in ordered:
-                if attempts>=profile['required_fit_budget']:return None
-                attempts+=1;q,b=trial_state(p,a);plot=fit(q,b,slot,role,only=[aid])
+            options,_,_=plot_options(p,data,sid,'civic' if role=='civic' else settlement['form'],slot[4],role=role,slot_order=slot[-1])
+            for option in options:
+                if attempts>=profile['required_fit_budget']:exhausted=True;return None
+                attempts+=1;q,b=staged(p,a);plot=fit(q,b,slot,role,option=option)
                 if not plot['placement']:
-                    failures.append(dict(role=role,slot=slot[-1],asset=aid,rejected=plot['rejected']));continue
+                    failures.append(dict(role=role,slot=slot[-1],asset=option[0],rejected=plot['rejected']));failures[:]=failures[-16:];continue
                 plot['required']=True;q['placements'][-1]['required']=True
                 found=search(q,b,[s for s in remaining if s!=slot],index+1)
                 if found:return found
+                if exhausted:return None
         return None
     found=search(plan,authority,slots,0)
     if found is None:
-        raise GenerationError(f'{sid}: required role minima infeasible; exhausted {attempts}/{profile["required_fit_budget"]} fit trials; minima={profile["minimum"]}; last={failures[-3:]}')
+        reason='budget exhausted; feasibility unresolved' if exhausted else 'all enumerated alternatives exhausted; infeasible'
+        raise GenerationError(f'{sid}: required role minima infeasible within bounded search: {reason}; {attempts}/{profile["required_fit_budget"]} transform fit trials; minima={profile["minimum"]}; last={failures[-3:]}')
     chosen,used,remaining=found
     for key in ('plots','placements','dependencies'):plan[key]=chosen[key]
     authority.rows=used.rows;authority.index=used.index
-    plan['diagnostics'].append(dict(kind='required-role-search',owner=sid,attempts=attempts,budget=profile['required_fit_budget'],rejected=failures))
+    plan['diagnostics'].append(dict(kind='required-role-search',owner=sid,attempts=attempts,budget=profile['required_fit_budget'],budget_unit='one transform fit or empty-frontage asset trial',rejected=failures))
     for slot in remaining:
         role=profile['schedule'][slot[-1]%len(profile['schedule'])]
         fit(plan,authority,slot,role)
