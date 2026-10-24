@@ -339,6 +339,7 @@ def _try_stamp_buildings(
     south_align: bool = True,
     flip_v: bool = False,
     _debug_label: str = "",
+    data=None,
 ) -> tuple[list[dict], int]:
     """Pack buildings into a zone and return the placed list.
 
@@ -407,7 +408,7 @@ def _try_stamp_buildings(
                     print(f"[town_gen] {_debug_label} SLOT ox={ox} oy={oy} bw={bw} bh={bh} row_bottom={row_bottom}")
 
                 if _plot_is_clear(local_map, ox, oy, bw, bh):
-                    _item_specs = _stamp_building_at(local_map, bld, ox, oy, terrain_data, flip_v=flip_v)
+                    _item_specs = _stamp_building_at(local_map, bld, ox, oy, terrain_data, flip_v=flip_v, data=data)
                     placed.append({
                         "id": bld.get("id", "unknown"),
                         "x": ox, "y": oy, "w": bw, "h": bh,
@@ -450,7 +451,7 @@ def _try_stamp_buildings(
             ox = rng.randint(zx0 + 1, max(zx0 + 1, zx0 + zw - bw - 1))
             oy = rng.randint(zy0 + 1, max(zy0 + 1, zy0 + zh - bh - 1))
             if _plot_is_clear(local_map, ox, oy, bw, bh):
-                _item_specs = _stamp_building_at(local_map, bld, ox, oy, terrain_data, flip_v=flip_v)
+                _item_specs = _stamp_building_at(local_map, bld, ox, oy, terrain_data, flip_v=flip_v, data=data)
                 placed.append({
                     "id": bld.get("id", "unknown"),
                     "x": ox, "y": oy, "w": bw, "h": bh,
@@ -757,6 +758,7 @@ def generate_town_chunk(
     building_data: dict,
     name_gen,
     rng:           random.Random,
+    data=None,
 ) -> "tuple[LocalMap, tuple[int,int]]":
     """
     Generate one chunk of a 3×3 town.
@@ -913,7 +915,7 @@ def generate_town_chunk(
             _p, _a = _try_stamp_buildings(local_map, terrain_data, building_data, rng,
                                           centre_cats, zone, max_buildings=5,
                                           flip_v=(qi >= 2),   # qi 2/3 are south of EW road
-                                          _debug_label=f"C-quad{qi}")
+                                          _debug_label=f"C-quad{qi}", data=data)
             placed_buildings.extend(_p)
             _total_attempts += _a
 
@@ -938,7 +940,7 @@ def generate_town_chunk(
             for sub_zone in _split_zone_by_streets(zone, street_tiles, "y"):
                 _p, _a = _try_stamp_buildings(local_map, terrain_data, building_data, rng,
                                               cats, sub_zone, max_buildings=8,
-                                              _debug_label=f"{role}-zone{zi}")
+                                              _debug_label=f"{role}-zone{zi}", data=data)
                 placed_buildings.extend(_p)
                 _total_attempts += _a
 
@@ -960,7 +962,7 @@ def generate_town_chunk(
                 _p, _a = _try_stamp_buildings(local_map, terrain_data, building_data, rng,
                                               cats, sub_zone, max_buildings=8,
                                               flip_v=(zi == 1),   # zi 1 is south of EW road
-                                              _debug_label=f"{role}-zone{zi}")
+                                              _debug_label=f"{role}-zone{zi}", data=data)
                 placed_buildings.extend(_p)
                 _total_attempts += _a
 
@@ -1012,7 +1014,7 @@ def generate_town_chunk(
                 _sc_oob += 1
                 continue
             if _plot_is_clear(local_map, ox, oy, bw, bh):
-                _item_specs = _stamp_building_at(local_map, bld, ox, oy, terrain_data)
+                _item_specs = _stamp_building_at(local_map, bld, ox, oy, terrain_data, data=data)
                 bld_info = {
                     "id": bld.get("id", "unknown"),
                     "x": ox, "y": oy, "w": bw, "h": bh,
@@ -1145,6 +1147,7 @@ def generate_town(
     building_data: dict,
     name_gen,
     rng:           random.Random,
+    data=None,
 ) -> tuple["LocalMap", tuple[int, int]]:
     """
     Stamp a town into local_map (grass base already set).
@@ -1155,7 +1158,7 @@ def generate_town(
     # 3×3 multi-chunk mode (new system — 9 roles)
     if chunk.town_role in _NEW_ROLES:
         return generate_town_chunk(chunk, local_map, map_w, map_h,
-                                   terrain_data, building_data, name_gen, rng)
+                                   terrain_data, building_data, name_gen, rng, data=data)
 
     town_x = TOWN_MARGIN
     town_y = TOWN_MARGIN
@@ -1203,7 +1206,7 @@ def generate_town(
         district = block_districts[idx]
         placed_buildings.extend(
             _fill_block_with_buildings(
-                local_map, block, district, building_data, terrain_data, rng
+                local_map, block, district, building_data, terrain_data, rng, data=data
             )
         )
 
@@ -1485,6 +1488,7 @@ def _place_bell_tower(
     terrain_data:  dict,
     bell_state:    str,
     rng:           random.Random,
+    data=None,
 ) -> tuple[int, int] | None:
     from generation.layout_stamper import stamp_layout_interior
     bx, by, bw, bh = block_rect
@@ -1677,7 +1681,6 @@ def _stamp_building_at(
     from generation.decor_utils import place_decor
     from generation.structure_contract import compile_structure
     from generation.context import GenerationError
-    data = data or getattr(local_map, 'structure_data', None)
     entry = (data.structure_catalog.by_route['ordinary_building'].get(building.get('id'))
              if data is not None and isinstance(building,dict) and isinstance(building.get('id'),str) else None)
     compiled = compile_structure(building, 'ordinary_building', data,
@@ -1727,6 +1730,7 @@ def _fill_block_with_buildings(
     building_data: dict,
     terrain_data:  dict,
     rng:           random.Random,
+    data=None,
 ) -> list[dict]:
     """
     Fill both the south and north faces of a block with buildings side by side.
@@ -1763,7 +1767,7 @@ def _fill_block_with_buildings(
             oy   = start_y_fn(bldh)
 
             if _plot_is_clear(local_map, ox, oy, bldw, bldh):
-                _item_specs = _stamp_building_at(local_map, building, ox, oy, terrain_data)
+                _item_specs = _stamp_building_at(local_map, building, ox, oy, terrain_data, data=data)
                 placed.append({
                     "id":         building.get("id", "unknown"),
                     "x":          ox,

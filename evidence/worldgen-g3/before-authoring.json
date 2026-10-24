@@ -1,0 +1,104 @@
+{
+  "source_commit": "3466fc6ac3c61a8b60ab46635e381ceeff29ccbf",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "fixtures": "Synthetic in-memory documents; actual unmodified production consumers; no campaigns opened.",
+  "relocated_item": {
+    "direct_passed": true,
+    "source_anchor": [
+      0,
+      0
+    ],
+    "mapped_anchor": [
+      36,
+      18
+    ],
+    "realized_items": [
+      {
+        "x": 35,
+        "y": 17,
+        "items": [
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      }
+    ],
+    "registration": {
+      "exception": "GenerationError",
+      "message": "registration: missing realized item at (4, 23)"
+    },
+    "raw_unchanged": true
+  },
+  "arrival_target": {
+    "passed": true,
+    "generated_spawn": [
+      40,
+      21
+    ],
+    "origin": [
+      39,
+      20
+    ],
+    "access": [
+      {
+        "target": "entry",
+        "xy": [
+          40,
+          21
+        ],
+        "passed": true
+      },
+      {
+        "target": "expected arrival",
+        "kind": "arrival",
+        "xy": [
+          39,
+          20
+        ],
+        "passed": true,
+        "approaches": []
+      }
+    ]
+  },
+  "weighted_null": {
+    "compiled": true,
+    "passed": true,
+    "base": "grass",
+    "fixed_legend": "floor",
+    "weighted_tile": null,
+    "realized_corner": "floor"
+  }
+}

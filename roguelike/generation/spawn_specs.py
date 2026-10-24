@@ -32,6 +32,10 @@ def resolve_special(spec, rng, source):
     if kind not in SUPPORTED | DEFERRED:
         raise GenerationError(f'{source}: unsupported special type {kind!r}')
     result = dict(chosen, kind=kind, x=spec.get('x', 0), y=spec.get('y', 0), source=source)
+    if kind != 'weighted' and chosen is not spec:
+        result['selected_branch'] = next(i for i, row in enumerate(table) if row is chosen)
+    for key in ('record_id', 'selected_branch'):
+        if key in spec: result[key] = spec[key]
     result.pop('type', None)
     return result
 
@@ -45,5 +49,6 @@ def transformed_specials(specials, context, asset, ox, oy, height, flip_v=False)
         if type(x) is not int or type(y) is not int:
             raise GenerationError(f'{source}: coordinates must be integers')
         row['x'], row['y'] = ox + x, oy + (height - 1 - y if flip_v else y)
+        row['record_id'] = f'{asset}@{ox},{oy},{int(flip_v)}:special[{index}]'
         result.append(row)
     return result

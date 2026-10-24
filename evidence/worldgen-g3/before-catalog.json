@@ -1,0 +1,64 @@
+{
+  "initial": {
+    "actor_count": 3,
+    "catalog_entries": 64,
+    "data_tables": [
+      "ai_config",
+      "biomes",
+      "bodies",
+      "building_loader",
+      "buildings",
+      "decoratives",
+      "deep_tongue",
+      "entities",
+      "entrances",
+      "items",
+      "keywords",
+      "layouts",
+      "loot",
+      "loot_pools",
+      "perks",
+      "processing_messages",
+      "qualities",
+      "recipes",
+      "resonance_spawns",
+      "root",
+      "scenes",
+      "structure_catalog",
+      "structures",
+      "survival",
+      "terrain",
+      "text_item_map",
+      "texts",
+      "tiles",
+      "town_config",
+      "weather_defs",
+      "zones"
+    ],
+    "map_retains_live_data_loader": true
+  },
+  "reload_with_second_catalog": {
+    "embedded_catalog_identity_matches_current": false,
+    "embedded_flint_name": "flint shard",
+    "engine_data_is_second_catalog": true,
+    "engine_flint_name": "Second catalog flint marker",
+    "map_catalog_is_engine_catalog": false,
+    "map_catalog_retains_old_root": true,
+    "map_catalog_root_matches_current": false,
+    "success": true
+  },
+  "revisit": {
+    "embedded_flint_name": "flint shard",
+    "map_catalog_root_matches_current": false
+  },
+  "serialized": {
+    "actual_town_checkpoint_bytes": 884133,
+    "data_loader_pickle_bytes": 358603,
+    "extra_bytes": 357660,
+    "identical_map_and_actors_without_structure_data_bytes": 526473,
+    "loaded_catalog_is_original_object": false,
+    "retains_absolute_root": true,
+    "root_path_class": "WindowsPath"
+  },
+  "source": "3466fc6ac3c61a8b60ab46635e381ceeff29ccbf"
+}

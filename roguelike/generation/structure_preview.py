@@ -23,9 +23,8 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
                               ('preview',route,raw['id'],flip_v))
     m=LocalMap(80,43,generation_context=context)
     m.tiles[:]=make_tile('grass',True,True)
-    m.structure_data=data
     ox,oy=40-entry.width//2,21-entry.height//2
-    actors=[]; specs=[]; spawn=(0,0)
+    actors=[]; specs=[]; spawn=None
     factory,creatures=ItemFactory(data),CreatureFactory(data)
     if route=='ordinary_building':
         specs=_stamp_building_at(m,entry.definition,ox,oy,data.terrain,flip_v=flip_v,data=data)
@@ -48,8 +47,9 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
     report=snapshot(m,actors,data)
     report.update(route=route,asset=raw['id'],seed=seed,catalog_identity=data.structure_catalog.identity,
                   candidate_identity=hashlib.sha256(json.dumps(raw,sort_keys=True).encode()).hexdigest(),
-                  kind='direct production consumer preview',flip_v=flip_v,origin=[ox,oy],spawn=list(spawn),
+                  kind='direct production consumer preview',flip_v=flip_v,origin=[ox,oy],
                   source_diagnostics=[d.json() for d in entry.diagnostics])
+    if spawn is not None: report['spawn']=list(spawn)
     report['access']=check_access(m,data,expectations,origin=(ox,oy),height=entry.height,flip_v=flip_v,spawn=spawn)
     report['passed']=all(row['passed'] for row in report['access']) and not report['occupant_diagnostics']
     return report,m,actors
@@ -76,7 +76,7 @@ def snapshot(m,actors,data):
             'occupant_diagnostics':diagnostics,'generation_revision':GENERATION_REVISION}
 
 
-def check_access(m,data,expectations,*,origin=(0,0),height=0,flip_v=False,spawn=(0,0)):
+def check_access(m,data,expectations,*,origin=(0,0),height=0,flip_v=False,spawn=None):
     """Sidecar source coordinates may include exterior negative offsets.
 
     Movement allows diagonals through corners. Physical interaction additionally
@@ -95,6 +95,8 @@ def check_access(m,data,expectations,*,origin=(0,0),height=0,flip_v=False,spawn=
         if expectations.get('coordinates','source')=='map': return x,y
         return origin[0]+x,origin[1]+(height-1-y if flip_v else y)
     entry=point(expectations['entry']) if 'entry' in expectations else spawn
+    if entry is None:
+        return [{'target':'entry','passed':False,'diagnostic':'Scene context required: this route has no generated arrival; supply an explicit validation entry.'}]
     reached=reachable(m,entry,data)
     results=[{'target':'entry','xy':list(entry),'passed':entry in reached}]
     # All visibility is explicitly granted only for this static reach diagnostic;
@@ -114,11 +116,33 @@ def check_access(m,data,expectations,*,origin=(0,0),height=0,flip_v=False,spawn=
                     if InteractionCursor.can_reach(proxy,*xy): approaches.append(list(p))
                 ok=xy in m.container_state and bool(approaches)
             elif kind in ('stairs_up','stairs_down','arrival'):
-                ok=xy in reached and (kind=='arrival' or str(m.tiles[xy]['terrain'])==kind)
+                ok=xy in reached and (xy==spawn if kind=='arrival' else str(m.tiles[xy]['terrain'])==kind)
             else: raise GenerationError(f'access targets[{n}]: unsupported kind {kind!r}')
             results.append({'target':target.get('name',f'{kind}[{n}]'),'kind':kind,'xy':list(xy),'passed':ok,'approaches':approaches})
     finally: m.visible[:]=visible
     return results
+
+
+def receipt_owned(receipt,m):
+    """Transient identities prove initial ownership, never search for a same-ID substitute."""
+    kind=receipt['kind']
+    if kind in ('empty','body','stele'): return True
+    xy=tuple(receipt['xy']); values=receipt['objects']
+    if kind=='container':
+        state=m.container_state.get(xy)
+        return bool(state is not None and len(values)==1 and state['decor_id']==values[0][0]
+                    and len(state['items'])==len(values[0][1])
+                    and all(a is b for a,b in zip(state['items'],values[0][1])))
+    owned=m.floor_objects.get(xy,[])
+    return bool(values) and all(any(o is value for o in owned) for value in values)
+
+
+def receipt_json(receipt):
+    from engine.save_components import serialize_item
+    result={k:v for k,v in receipt.items() if k!='objects'}
+    result['objects']=([{'decor_id':d,'items':[serialize_item(i) for i in items]} for d,items in receipt['objects']]
+                       if receipt['kind']=='container' else [serialize_item(i) for i in receipt['objects']])
+    return result
 
 
 def registration(raw,data,category,*,seed=20261023,max_seeds=32):
@@ -145,20 +169,10 @@ def registration(raw,data,category,*,seed=20261023,max_seeds=32):
                 objects=[]
                 for spec in b['item_specs']:
                     xy=spec['x'],spec['y']; kind=spec['kind']
-                    if kind=='container':
-                        state=result.local_map.container_state.get(xy)
-                        ok=state is not None and state['decor_id']==spec.get('decor_id','crate')
-                    elif kind in ('item','scene'):
-                        from collections import Counter
-                        from engine.save_components import serialize_item
-                        objects_here=[serialize_item(i) for i in result.local_map.floor_objects.get(xy,[])]
-                        expected=([bound.text_item_map.get(spec['text_id'],'letter') if spec.get('text_id') else spec['item_id']]
-                                  if kind=='item' else [r['item_id'] for r in bound.scenes[spec['scene_id']]['floor_objects']])
-                        actual=Counter(i['item_id'] for i in objects_here)
-                        ok=all(actual[i]>=n for i,n in Counter(expected).items())
-                    else: ok=kind in ('empty','stele','body')
-                    if not ok: raise GenerationError(f'registration: missing realized {kind} at {xy}')
-                    objects.append({'spec':spec,'realized':ok})
+                    receipt=next((r for r in result.receipts if r['record_id']==spec['record_id']),None)
+                    if receipt is None or not receipt_owned(receipt,result.local_map):
+                        raise GenerationError(f'registration: missing realized {kind} for {spec["record_id"]} at {xy}')
+                    objects.append(receipt_json(receipt))
                 realized.append({'x':b['x'],'y':b['y'],'objects':objects})
             return {'passed':True,'kind':'controlled existing-pool selection; not world frequency','category':category,
                     'eligible_roles':ELIGIBILITY[category],'role':role,'seed':seed+offset,'world_seed':seed,
@@ -188,11 +202,12 @@ def render_svg(report):
         x,y=report['spawn']
         parts.append(f'<text x="{x*size+6}" y="{y*size+10}" fill="#ffffff"><title>Generated arrival</title>@</text>')
     for target in report.get('access',[]):
+        if 'xy' not in target: continue
         x,y=target['xy']; color='#81dda1' if target['passed'] else '#ff5b57'
         parts.append(f'<rect x="{x*size}" y="{y*size}" width="12" height="12" fill="none" stroke="{color}" stroke-width="2"><title>{html.escape(json.dumps(target))}</title></rect>')
     parts.append('</g><g font-family="monospace" font-size="12" fill="#e4ebf3">')
     parts.append(f'<text x="8" y="{h*size+19}">Diagnostic preview (not game renderer): # solid, + door, &lt;/&gt; stairs, D decor, ! item, C container, A actor.</text>')
     failures=[r['target'] for r in report.get('access',[]) if not r['passed']]
-    status='Failed targets: '+', '.join(failures) if failures else ('Targets passed (green); @ arrival.' if report.get('access') else 'No access targets supplied; @ arrival.')
+    status='Failed targets: '+', '.join(failures) if failures else ('Targets passed (green); @ only for generated arrival.' if report.get('access') else 'No access targets supplied; @ only for generated arrival.')
     parts.append(f'<text x="8" y="{h*size+39}">{html.escape(status)} Hover for IDs/contents. Full diagnostics in JSON.</text></g></svg>')
     return '\n'.join(parts)

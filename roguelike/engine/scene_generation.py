@@ -1,18 +1,18 @@
 """Complete native scene construction, staged before cache/metadata publication."""
 from __future__ import annotations
 import copy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from generation.context import GenerationContext, GenerationError, GENERATION_REVISION, map_context
 from generation.spawn_specs import resolve_special
 
 
-def populate(data, item_factory, creature_factory, local_map, specs, *, map_text=False):
+def populate(data, item_factory, creature_factory, local_map, specs, *, map_text=False, receipts=None):
     """Validate/materialize all content before mutating the candidate's object layers."""
     from generation.floor_object_utils import place_floor_object, place_container
     from engine.loot_roller import roll_pools
     context = map_context(local_map)
-    plans, actors, deferred = [], [], []
+    plans, actors, deferred, observations = [], [], [], []
     containers = set(local_map.container_state)
     from generation.structure_contract import Validator, StructureError
     validation = Validator(data, '<scene population>', str(context.address))
@@ -42,6 +42,9 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
         else:
             spec = resolve_special(raw, context.rng('weighted-special-adapter', index), source)
         kind, x, y = spec['kind'], spec['x'], spec['y']
+        observation = dict(record_id=spec.get('record_id', f'spawn[{index}]'), source=source,
+                           kind=kind, source_xy=[x,y], selected_branch=spec.get('selected_branch'), objects=[])
+        observations.append(observation)
         if kind in ('body', 'stele'):
             deferred.append(dict(source=source, kind=kind, x=x, y=y))
             continue
@@ -60,6 +63,8 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
                 valid = True
         if not valid:
             raise GenerationError(f'{source}: {kind} anchor ({x},{y}) is out of bounds or not walkable')
+        observation['xy'] = [x,y]
+        first_plan = len(plans)
         if kind == 'item':
             plans.append(('item', x, y, item(spec.get('item_id', ''), x, y, source, spec.get('text_id', ''))))
         elif kind == 'container':
@@ -97,6 +102,7 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             if actor is None:
                 raise GenerationError(f'{source}: creature factory rejected {creature_id!r}')
             actors.append(actor)
+        observation['objects'] = [p[3] for p in plans[first_plan:]]
     # These ownership APIs are reached only after every record and factory succeeds.
     for kind, x, y, value in plans:
         if kind == 'item':
@@ -105,6 +111,8 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             place_container(local_map, x, y, *value)
     if deferred:
         local_map.deferred_generation_records = deferred
+    if receipts is not None:
+        receipts.extend(observations)
     return actors
 
 
@@ -114,6 +122,7 @@ class SceneResult:
     actors: list
     spawn: tuple
     metadata: object
+    receipts: list = field(default_factory=list)
 
 
 def create_surface(world, chunk, data, item_factory, creature_factory, width, height):
@@ -124,11 +133,11 @@ def create_surface(world, chunk, data, item_factory, creature_factory, width, he
     local_map, spawn = generate_region(staged, width, height, data.terrain, data=data, context=context)
     if (chunk.wx, chunk.wy) == (world.start_wx, world.start_wy):
         _starting_waystone(local_map, data, *spawn)
-    actors = []
+    actors, receipts = [], []
     if staged.region_type == RegionType.TOWN and staged.town_data:
         td = staged.town_data
         specs = [dict(s, kind='creature') for s in td.creature_spawns] + td.item_spawns
-        actors = populate(data, item_factory, creature_factory, local_map, specs, map_text=True)
+        actors = populate(data, item_factory, creature_factory, local_map, specs, map_text=True, receipts=receipts)
     else:
         for index, (zone, _) in enumerate(staged.zones):
             actors.extend(creature_factory.spawn_for_zone(zone, local_map,
@@ -136,7 +145,7 @@ def create_surface(world, chunk, data, item_factory, creature_factory, width, he
     validate_scene(local_map, staged.submaps, data)
     local_map.generation_revision = GENERATION_REVISION
     local_map.generation_complete = True
-    return SceneResult(local_map, actors, spawn, staged)
+    return SceneResult(local_map, actors, spawn, staged, receipts)
 
 
 def create_submap(world, wx, wy, submap, data, item_factory, creature_factory, width, height):

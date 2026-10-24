@@ -35,7 +35,9 @@ Set-Location 'G:\GameDev\RoguelikeProject'
 $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
 New-Item -ItemType Directory -Force authoring | Out-Null
 # For a first run without browser edits, copy the complete example as your draft:
-Copy-Item roguelike/docs/examples/author_cottage_a.json authoring/author_cottage_a.json
+if (-not (Test-Path -LiteralPath authoring/author_cottage_a.json)) {
+  Copy-Item roguelike/docs/examples/author_cottage_a.json authoring/author_cottage_a.json
+}
 & $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_cottage_a.json `
   --route ordinary_building --category residential `
   --access roguelike/docs/examples/author_cottage_access.json --register `
@@ -484,3 +486,8 @@ The headless file/download approach follows the official
 [Playwright actions](https://playwright.dev/python/docs/input) and
 [download](https://playwright.dev/python/docs/downloads) APIs. Windows resolves private
 assemblies according to its [assembly search rules](https://learn.microsoft.com/en-us/windows/win32/sbscs/assembly-searching-sequence).
+
+For entrance `legend_weights`, a selected `tile: null` uses the fixed legend
+fallback. A null fixed legend preserves the underlying terrain. These legacy
+semantics are distinct. Direct stamps have no generated player arrival; access
+sidecars choose a validation entry. Only authored submap previews certify arrival.

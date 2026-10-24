@@ -48,7 +48,6 @@ def generate_region(
         if data is not None:
             from generation.town_gen import generate_town
             local_map = _generate_town_base(map_width, map_height, terrain_data, context=context)
-            local_map.structure_data = data
             local_map, spawn = generate_town(
                 chunk         = chunk,
                 local_map     = local_map,
@@ -58,6 +57,7 @@ def generate_region(
                 building_data = data.buildings,
                 name_gen      = None,
                 rng           = context.rng('buildings'),
+                data          = data,
             )
         else:
             local_map, spawn = _generate_town(

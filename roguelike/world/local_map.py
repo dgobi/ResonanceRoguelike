@@ -123,6 +123,13 @@ class LocalMap:
         "tall_grass", "brambles",
     })
 
+    def __getstate__(self):
+        # G2 accidentally retained a caller-owned catalog. It is never scene state.
+        return {k: v for k, v in self.__dict__.items() if k != 'structure_data'}
+
+    def __setstate__(self, state):
+        self.__dict__.update({k: v for k, v in state.items() if k != 'structure_data'})
+
     def set_tile(self, x: int, y: int, terrain: str,
                  walkable: bool, transparent: bool) -> None:
         # Import inside the function to avoid circular imports
