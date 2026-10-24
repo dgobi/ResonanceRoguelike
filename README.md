@@ -1,8 +1,8 @@
 # Resonance roguelike — production main
 
-G5 adds twelve certified layouts, explicit settlement roles and repetition
-controls, landmark alternatives and multi-door compatibility. Read
-[G5 delivery](docs/owner/WORLDGEN_G5.md) and the
+G6 adds independent rural sites attached to existing country roads, durable site
+ownership and complete authoring workflows. Read
+[G6 delivery](docs/owner/WORLDGEN_G6.md), [G5 history](docs/owner/WORLDGEN_G5.md) and the
 [structure authoring guide](roguelike/docs/STRUCTURE_AUTHORING.md).
 
 Work stays in this checkout on `main`, with named checkpoints and local commits;

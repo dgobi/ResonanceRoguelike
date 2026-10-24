@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "G:\GameDev\RoguelikeProject\evidence\worldgen-g6\before\capture_g5.py", line 30, in <module>
-    placement = next(p for p in plan['placements'] if p['asset']=='hunter_cabin')
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-StopIteration
