@@ -41,7 +41,7 @@ class Destinations:
                 stat = path.stat()
                 installed = self.installed.get((stat.st_dev, stat.st_ino))
                 if installed:
-                    raise ValueError(f'{label} output {path} aliases installed input {installed}')
+                    raise ValueError(f'{label} output {path} conflicts with aliased installed input {installed}')
             for source_label, source in self.inputs:
                 if same_path(path, source):
                     raise ValueError(f'{label} output {path} conflicts with {source_label} input {source}')
