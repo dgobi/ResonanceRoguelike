@@ -1,0 +1,32 @@
+{
+  "scope": "Freeze the exact two-door source definition and check its structural dependency projection; no world generation or checkpoint execution.",
+  "source_commit": "a68ffc5e9b07f4a9c2abbe43764ae6271cbb6a61",
+  "historical_plan_origin": "wg3",
+  "historical_plan_format": 1,
+  "historical_plan_identity": "3efaf348da3c7daa3964645ae7355705fcb52e79de92cc4dd708188c1f3c13b1",
+  "historical_plan_file_sha256": "e4801d01e56db474f8420255b980db1766192b2d1bc3894c0f47ce9e05bc871a",
+  "fixture_file": "two_entrance_house.json",
+  "fixture_sha256": "372e843537c7b73ff68967a13ab2968fb4ea33c20ae2aabc0129fb54c3b3044d",
+  "dependencies_match": true,
+  "dependencies": {
+    "structure:house_small_a": "7ef0260963b590d087d287445c087bbce248dbc83b16be84540cd43d33e52573",
+    "terrain:wall": "8e9bdea77a09521d3d12aff8546b04dede9a2ba7127d0297d038cfc7f9c588bb",
+    "terrain:door_closed": "8e9bdea77a09521d3d12aff8546b04dede9a2ba7127d0297d038cfc7f9c588bb",
+    "terrain:floor": "5a7208bb35a85451136b5e0064973306a97c84ed5dff5e8ce4bc3e822277b42e",
+    "terrain:worn_stone": "5a7208bb35a85451136b5e0064973306a97c84ed5dff5e8ce4bc3e822277b42e",
+    "items:letter": "e8ac2ca343b067ec81745cccf882d5a0c32de8beef11e881390b31203052cdf3",
+    "text_binding:world_graffiti_a": "83c7b088f00ae4edc6005bcca3ace6493cb8d1fbb00f91fc9fc3e5c36ca5d15c",
+    "items:inscription": "dfb277bb3920b206f13af4c4f8a10e303ca4942f74d083167229eed287f6998c",
+    "decoratives:sack": "5b0363396b4b60db4834ee19e2a8e1c66b342ac3f5cb95318ea141d776aabe57",
+    "loot_pools:commoner_kitchen": "edb1f19390463e544cb3f6ac651099e3a12d7ea3a817c4784a1a87252a1ee948",
+    "items:dried_provisions": "8aaa3ba56d2e45900903f3efaf18b2f935c04e34661f01fd3ce91c71a77daf79",
+    "items:water_skin": "1c28aa9ae704fe35ae655e1babbdabec72f38a7f126f20f11c36a9727a2e6cab",
+    "items:wood_bundle": "378f2dd5dcccedc9a5421012fb1db1b0f87c41ff3994db435da6608be4f02947",
+    "items:bitter_herb": "cf9ed9702a1d0b35e8f2e1c7651cf378eb2b77287fafbf415a9d8f25a19359e8",
+    "items:clay_lump": "58cd17ccd045b4f09e2e62fba67659ebb7a803f4f88cfef7ab4ab18eca26cb2d",
+    "items:crow_jerky": "6c2484edf29742de4bca79a4539c41598472958ff8854d8ce9e72f574d6438be",
+    "items:empty_water_skin": "54111d88bab16f7511491f01492792bd08f19fba034517da467dc2b054bf171f",
+    "text_binding:text_residential_letter": "4540c1847af8c9e12561652f15394bc7f91f549a92586ff8a6eddcebaf76d1ac",
+    "scenes:interrupted_meal": "7423da48d51de7a0d0a1082487cd8bd5b8bb1fe2425a25e0b15c3ec41bac229b"
+  }
+}

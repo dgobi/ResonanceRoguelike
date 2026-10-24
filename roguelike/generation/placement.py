@@ -17,6 +17,26 @@ def entrance_cells(e):
     return [(e['x']+dx*i,e['y']+dy*i) for i in range(e['width'])]
 
 
+def frontage_entrance(placement, normal=None):
+    """Resolve the one public frontage without changing historical plan records.
+
+    Old plans have no entrance identity. Among fully contained required spans
+    facing the saved plot, prefer main, then lexical ID. Secondary required doors
+    are certified by navigation from this same join, not by this rectangle.
+    """
+    rect = placement['approach']
+    candidates = [e for e in placement['entrances'] if e['required'] and
+                  (normal is None or e['normal'] == normal) and
+                  all(rect[0] <= x < rect[2] and rect[1] <= y < rect[3]
+                      for x, y in entrance_cells(e))]
+    selected = placement.get('frontage_entrance')
+    if selected is not None:
+        candidates = [e for e in candidates if e['id'] == selected]
+    if not candidates:
+        raise GenerationError(f"{placement['id']}: no complete required frontage entrance inside assigned approach")
+    return min(candidates, key=lambda e: (e['role'] != 'main', e['id']))
+
+
 def validate_profile(raw,w,h):
     p=raw.get('placement')
     if p is None: return

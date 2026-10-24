@@ -1,0 +1,54 @@
+{
+  "source": "G:\\GameDev\\RoguelikeProject",
+  "generation_revision": "wg4",
+  "scope": "In-memory valid house profile with main south door and required north service door; ordinary production world and one materialized town scene; no persistent saves.",
+  "compiler_accepted": true,
+  "direct_preview": {
+    "passed": true,
+    "access": [
+      {
+        "target": "entry",
+        "xy": [
+          39,
+          24
+        ],
+        "passed": true
+      },
+      {
+        "target": "floor[0]",
+        "kind": "floor",
+        "xy": [
+          39,
+          17
+        ],
+        "passed": true,
+        "approaches": []
+      },
+      {
+        "target": "readable[1]",
+        "kind": "readable",
+        "xy": [
+          36,
+          23
+        ],
+        "passed": true,
+        "approaches": []
+      }
+    ],
+    "occupants": []
+  },
+  "legacy_plan_validation": {
+    "accepted": false,
+    "plan_version": 1,
+    "plan_origin": "wg3",
+    "exception": "GenerationError",
+    "message": "settlement-0-plot-2-building: complete required entrance outside approach"
+  },
+  "world_generation": {
+    "accepted": false,
+    "exception": "GenerationError",
+    "message": "settlement-0-plot-1-building: complete required entrance outside approach",
+    "published_chunk_count": 0
+  },
+  "source_definition_unchanged": true
+}

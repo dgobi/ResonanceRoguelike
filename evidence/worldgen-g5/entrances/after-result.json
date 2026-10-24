@@ -1,0 +1,86 @@
+{
+  "source": "G:\\GameDev\\RoguelikeProject",
+  "generation_revision": "wg4",
+  "scope": "In-memory valid house profile with main south door and required north service door; ordinary production world and one materialized town scene; no persistent saves.",
+  "compiler_accepted": true,
+  "direct_preview": {
+    "passed": true,
+    "access": [
+      {
+        "target": "entry",
+        "xy": [
+          39,
+          24
+        ],
+        "passed": true
+      },
+      {
+        "target": "floor[0]",
+        "kind": "floor",
+        "xy": [
+          39,
+          17
+        ],
+        "passed": true,
+        "approaches": []
+      },
+      {
+        "target": "readable[1]",
+        "kind": "readable",
+        "xy": [
+          36,
+          23
+        ],
+        "passed": true,
+        "approaches": []
+      }
+    ],
+    "occupants": []
+  },
+  "legacy_plan_validation": {
+    "accepted": true,
+    "plan_version": 1,
+    "plan_origin": "wg3"
+  },
+  "world_generation": {
+    "accepted": true,
+    "plan_version": 2,
+    "placements": 89
+  },
+  "materialization": {
+    "accepted": true,
+    "chunk": [
+      75,
+      99
+    ],
+    "placement": "settlement-0-plot-1-building",
+    "approach": [
+      6008,
+      4278,
+      6009,
+      4283
+    ],
+    "entrances": [
+      {
+        "id": "main",
+        "x": 6008,
+        "y": 4282,
+        "normal": "N",
+        "width": 1,
+        "role": "main",
+        "required": true
+      },
+      {
+        "id": "rear-service",
+        "x": 6008,
+        "y": 4289,
+        "normal": "S",
+        "width": 1,
+        "role": "service",
+        "required": true
+      }
+    ],
+    "actors": 3
+  },
+  "source_definition_unchanged": true
+}

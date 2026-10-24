@@ -1,0 +1,8 @@
+test_authentic_g3_plan_synthetic_envelope_checkpoint_and_f9 (test_generation_g5_entrances.G5Entrances.test_authentic_g3_plan_synthetic_envelope_checkpoint_and_f9) ... ok
+test_door_geometry_all_transforms_and_assigned_scenes (test_generation_g5_entrances.G5Entrances.test_door_geometry_all_transforms_and_assigned_scenes) ... ok
+test_inaccessible_required_service_door_rejects (test_generation_g5_entrances.G5Entrances.test_inaccessible_required_service_door_rejects) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 21.751s
+
+OK

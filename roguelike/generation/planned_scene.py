@@ -4,7 +4,7 @@ import copy
 from config import MAP_WIDTH as W, MAP_HEIGHT as H
 from generation.context import GenerationContext,GenerationError
 from generation.world_plan import slice_plan,intersect,cells,expand
-from generation.placement import check_dependencies,transform,entrance_cells,digest
+from generation.placement import check_dependencies,transform,entrance_cells,digest,frontage_entrance
 
 
 def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,height):
@@ -135,6 +135,7 @@ def validate_access(m,section,data,wx,wy):
     road=set(m.road_cells)
     for p in section['placements']:
         join=p['join'][0]-x0,p['join'][1]-y0
+        frontage_entrance(p)
         assigned=next((r for r in section['routes'] if r['id']==p['road']),None)
         if assigned is None or not any(r[0]<=p['join'][0]<r[2] and r[1]<=p['join'][1]<r[3] for r in assigned['rects']): raise GenerationError(f'{p["id"]}: assigned frontage missing')
         reached=reachable(m,join,data)

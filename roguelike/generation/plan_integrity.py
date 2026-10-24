@@ -1,7 +1,7 @@
 """Durable plan relationships, independent of today's catalog and mutated maps."""
 import math
 from generation.context import GenerationError
-from generation.placement import NORMALS, CONTEXTS, entrance_cells
+from generation.placement import NORMALS, CONTEXTS, entrance_cells, frontage_entrance
 
 
 def records(plan, registries, width, height):
@@ -100,8 +100,8 @@ def records(plan, registries, width, height):
             for xy in entrance_cells(e):
                 require(inside(xy,f),pid,'entrance outside footprint')
                 require({'N':xy[1]==f[1],'S':xy[1]==f[3]-1,'W':xy[0]==f[0],'E':xy[0]==f[2]-1}[e['normal']],pid,'entrance normal does not point outward')
-                if e['required']:require(inside(xy,p['approach']),pid,'complete required entrance outside approach')
         require(any(e['required'] for e in p['entrances']),pid,'missing required entrance')
+        frontage_entrance(p, registries['plots'][placement_plots[pid]]['normal'])
         for t in p['targets']:
             point([t['x'],t['y']],pid)
             require(type(t['required']) is bool and t['kind'] in ('floor','item','readable','container','stairs_up','stairs_down'),pid,'invalid target kind/required')

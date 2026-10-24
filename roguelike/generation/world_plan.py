@@ -267,7 +267,7 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
         for rotation in sorted(set(p['rotations'])):
             for mirror in ((False,True) if p['mirror_x'] else (False,)):
                 transformed=transform(raw,rotation,mirror)
-                e=next((e for e in transformed['placement']['entrances'] if e['required'] and e['normal']==normal),None)
+                e=next(iter(sorted((e for e in transformed['placement']['entrances'] if e['required'] and e['normal']==normal),key=lambda e:(e['role']!='main',e['id']))),None)
                 if e: orientations.append((asset,rotation,mirror,transformed,e))
         if orientations: candidates.append((asset,p['weight'],orientations))
         else: rejected.append(dict(asset=asset,rotation=None,mirror=None,reason='no eligible permitted transform for entrance normal'))
