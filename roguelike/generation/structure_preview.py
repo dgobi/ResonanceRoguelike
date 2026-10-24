@@ -115,6 +115,7 @@ def check_access(m,data,expectations,*,origin=(0,0),height=0,flip_v=False,spawn=
                     proxy=SimpleNamespace(local_map=m,player=SimpleNamespace(x=p[0],y=p[1]))
                     if InteractionCursor.can_reach(proxy,*xy): approaches.append(list(p))
                 ok=xy in m.container_state and bool(approaches)
+            elif kind=='floor': ok=xy in reached
             elif kind in ('stairs_up','stairs_down','arrival'):
                 ok=xy in reached and (xy==spawn if kind=='arrival' else str(m.tiles[xy]['terrain'])==kind)
             else: raise GenerationError(f'access targets[{n}]: unsupported kind {kind!r}')
@@ -205,6 +206,15 @@ def render_svg(report):
         if 'xy' not in target: continue
         x,y=target['xy']; color='#81dda1' if target['passed'] else '#ff5b57'
         parts.append(f'<rect x="{x*size}" y="{y*size}" width="12" height="12" fill="none" stroke="{color}" stroke-width="2"><title>{html.escape(json.dumps(target))}</title></rect>')
+    from generation.placement import entrance_cells,NORMALS
+    cx,cy=report.get('chunk',[0,0]);x0,y0=cx*80,cy*43
+    for p in report.get('placements',[]):
+        for key,color in [('clearance','#80a0c0'),('approach','#71e1d6'),('footprint','#e6bc64')]:
+            x,y,x1,y1=p[key]
+            parts.append(f'<rect x="{(x-x0)*size}" y="{(y-y0)*size}" width="{(x1-x)*size}" height="{(y1-y)*size}" fill="none" stroke="{color}"><title>{html.escape(p["id"]+" "+key+" assigned "+p["road"])}</title></rect>')
+        for e in p['entrances']:
+            for x,y in entrance_cells(e):
+                parts.append(f'<text x="{(x-x0)*size+6}" y="{(y-y0)*size+10}" fill="#ffffff"><title>Entrance {e["id"]}, outward {e["normal"]}</title>{e["normal"]}</text>')
     parts.append('</g><g font-family="monospace" font-size="12" fill="#e4ebf3">')
     parts.append(f'<text x="8" y="{h*size+19}">Diagnostic preview (not game renderer): # solid, + door, &lt;/&gt; stairs, D decor, ! item, C container, A actor.</text>')
     failures=[r['target'] for r in report.get('access',[]) if not r['passed']]

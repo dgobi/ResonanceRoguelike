@@ -1,6 +1,157 @@
 # Make a building or layout for Resonance
 
-Updated for **G2 / generation revision `wg2`**, 23 October 2026. Work in
+Current: **G3 / generation revision `wg3`**, 23 October 2026.
+The connected workflow below is active for new worlds. The later direct-stamp
+sections retain the G2 legacy authoring route and its explicitly inactive fields.
+
+
+## Connected frontage and landmark workflow (G3)
+
+The active planner uses `data/generation/g3_config.json`. It selects assets once,
+then stores routes, crossings, settlements, plots, entrance approaches and semantic
+dependencies with the world checkpoint. Individual buildings **including their
+buffer and approach** must fit one 80 × 43 storage chunk. Streets and settlements
+cross chunk boundaries. Coordinates in assets are source tiles; plan coordinates
+are world tiles (`wx * 80 + lx`, `wy * 43 + ly`). Rectangles exclude their right and
+bottom edge. Full null-painted footprints still reserve space.
+
+1. Import the complete [frontage example](examples/author_frontage_a.json) or
+   [landmark example](examples/author_landmark_a.json). They are working copies of
+   installed house/shrine assets, with new IDs and complete supported contents.
+   Export edits into `authoring/` using the matching filename. Keep drafts outside
+   `roguelike/data/`. Use **Apply ID** when changing the ID in the painter.
+2. Paint terrain/decor and edit supported special records as in the direct workflow.
+   Identify the real doorway; a south entrance lies on the final source row and
+   points outward south. An entrance is distinct from an item target, generated
+   player arrival and submap return link.
+3. Select **placement** in the metadata panel. Apply the complete version-one
+   object. `contexts` explicitly opts into `grid`, `roadside`, `civic` or `landmark`.
+   The rectangular footprint is derived from the complete terrain grid. `buffer`
+   and `approach` are tile counts; `rotations` contains allowed degrees (0/90/180/270),
+   and `mirror_x` explicitly allows horizontal reflection before rotation.
+   Each entrance has a unique ID, integer x/y, cardinal normal N/E/S/W, positive
+   width, main/service role and required boolean. Width runs toward positive x on
+   N/S edges and positive y on E/W edges. Every cell must lie on the outward edge.
+   `targets` contains integer x/y, kind and required boolean; supported kinds are
+   floor, item, readable, container, stairs_up and stairs_down. Required containers
+   must be interactable under the game's stricter corner rule.
+4. Run every permitted orientation through the actual stamper and population code,
+   then preview an actual assigned plot. The planner filters by full footprint,
+   buffer, approach ownership, permitted orientation and assigned road join before
+   accepting a candidate. Unknown coordinate-bearing metadata cannot silently
+   rotate. `road_relation` distinguishes frontage, bounded spur and remote. The
+   shipped mandatory landmark uses a spur; optional remote placement is preserved
+   in the contract but not selected by the required connected pools.
+5. The exact active pools are arrays of structure IDs under `pools.grid`,
+   `pools.roadside`, `pools.civic` and `pools.landmark` in `g3_config.json`. A draft
+   `--planned --context ...` run adds its ID only in memory, retaining all installed
+   pool choices. Weight is a positive selection weight, **not a guaranteed count**.
+   Eligibility alone does not guarantee fit or selection. JSON records every
+   rejected candidate reason and each explicit vacant garden; essential civic and
+   landmark failures fail planning instead of quietly becoming vacancies.
+6. Use both grid and roadside previews for the frontage example. Inspect assigned
+   road IDs, footprint/clearance/approach rectangles, entrance spans/normals,
+   required goals and materialization receipts. A nearby different road cannot
+   satisfy a missing assigned join. The same production planner/materializer
+   powers previews and ordinary new worlds. SVGs are diagnostic drawings, not
+   played-game screenshots. Full realized objects and rejected choices are in JSON.
+7. Install deliberately into the appropriate existing category folder, append the
+   new ID to the intended pool in `g3_config.json`, validate and refresh the editor
+   catalog. Existing inactive `allowed_in`, `facing`, `rotatable`, `district_weights`
+   and legacy `weight` do not grant G3 eligibility or rotation permissions.
+
+From the repository root, these commands are complete and safe to repeat after
+an edited draft exists (initialization cannot replace that draft):
+
+```powershell
+$ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
+New-Item -ItemType Directory -Force authoring | Out-Null
+if (-not (Test-Path -LiteralPath authoring/author_frontage_a.json)) {
+  Copy-Item roguelike/docs/examples/author_frontage_a.json authoring/author_frontage_a.json
+}
+if (-not (Test-Path -LiteralPath authoring/author_landmark_a.json)) {
+  Copy-Item roguelike/docs/examples/author_landmark_a.json authoring/author_landmark_a.json
+}
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_frontage_a.json --route ordinary_building --category residential --orientations --output evidence/authoring/frontage-orientations.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_frontage_a.json --planned --category residential --context grid --seed 20261023 --output evidence/authoring/frontage-grid.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_frontage_a.json --planned --category residential --context roadside --seed 20261023 --output evidence/authoring/frontage-roadside.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_landmark_a.json --route ordinary_building --category wilderness --orientations --output evidence/authoring/landmark-orientations.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_landmark_a.json --planned --category wilderness --context landmark --seed 29417 --output evidence/authoring/landmark-plot.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --world-plan --seed 20261023 --output evidence/authoring/world-plan.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --refresh-editor-catalog
+& $ResonancePython -X utf8 tools/structure_authoring.py --check-editor-catalog
+```
+
+The landmark positive selection uses seed 29417. Seeds 20261023 and 0 kept the
+existing shrine instead; those are valid unselected-candidate outcomes, not world
+failures. This controlled example is not a frequency estimate.
+
+For deliberate installation of an accepted frontage draft:
+
+```powershell
+Copy-Item authoring/author_frontage_a.json roguelike/data/buildings/residential/author_frontage_a.json
+# Append "author_frontage_a" to pools.grid and/or pools.roadside in g3_config.json.
+& $ResonancePython -X utf8 tools/structure_authoring.py --catalog --output evidence/authoring/installed-catalog.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --refresh-editor-catalog
+```
+
+Catalog freshness compares raw checkout bytes, including LF/CRLF. Refresh after
+an intentional edit or checkout conversion; do not suppress a stale result. Saved
+plan compatibility uses separate semantic dependency digests, ignores JSON
+formatting and inactive structure metadata, and does not use catalog hashes as RNG
+seeds. Changes to unrelated unused assets do not move a road or invalidate a plot.
+
+Authoring changes appear in previews immediately and in new worlds. Visited scenes
+and moved/taken contents remain saved and never respawn from their plan. A pending
+placement with changed required generation content fails **before departure** with
+the placement/dependency name: restore matching definitions or start a new world.
+Loading/F9 and unrelated pending placements still work. Runtime IDs used by saves
+must remain available. Live text/presentation follows the current runtime policy;
+there is no historical generator archive or campaign migration.
+
+Absent-field, wg1 and wg2 worlds keep their saved origin revision and authoritative
+scenes. Their unexplored chunks use the explicit legacy/no-plan path. G3 worlds
+require their saved shared plan; missing/corrupt plans follow atomic checkpoint
+recovery rather than regenerating from a seed. Travel does not publish an F5 save.
+
+| Active setting | Units and scope |
+|---|---|
+| settlement_count | Inclusive [minimum, maximum], default 2–4, including roadside settlements. |
+| minimum_separation_chunks | Euclidean anchor distance in coarse chunks, default 12. |
+| near_start_radius_chunks | Inclusive Euclidean radius, default 10; one of the counted sites is reserved near start. |
+| forms | Grid then roadside; additional counted settlements alternate. Both span chunks. |
+| road_width_tiles / street_width_tiles | Full integer world-tile band widths, default 3. |
+| plot_spacing_tiles | Plot center spacing, default 18; geometry still must fit. |
+| setback_tiles | Minimum entrance-to-road clearance, default 2; profile approach can require more. |
+| max_spur_tiles | Maximum connected approach length, default 12. |
+| route_search_nodes | Bounded coarse A* expansion limit per route, default 16,384. |
+| site_search_limit | Maximum ordered candidate sites examined, default 16,384. |
+| pools | Explicit existing asset IDs with matching profile contexts; profile weight selects fitting candidates. |
+
+`town_config.json` remains a preserved inactive legacy file. G3 does not activate
+its nonexistent categories. Roads use terrain costs and exclude the VUKH peak;
+capital gateway and starting laboratory remain reserved anchors. Bridges own their
+water/channel intersection and are traversable by players and creatures. Existing
+no-plan ford behavior remains separate. A required crossing/site that cannot meet
+constraints yields a specific bounded failure before publishing a world.
+
+To see the representative world using production code and a fresh disposable save
+root, choose a new session name (existing names are refused):
+
+```powershell
+& $ResonancePython -X utf8 tools/play_disposable.py --seed 20261023 --session g3-first
+```
+
+This optional play command opens the game; autonomous verification does not depend
+on it. The headless journey command is:
+
+```powershell
+& $ResonancePython -X utf8 tools/worldgen_g3_diagnostic.py --journey --evidence evidence/worldgen-g3/diagnostic
+```
+
+## Legacy direct-stamp workflow
+
+The G2 direct-stamp workflow was introduced on 23 October 2026. Work in
 `G:\GameDev\RoguelikeProject` on `main`; follow `AGENTS.md`. The current workflow
 is local HTML editing, draft export, one Python validation/preview command, then
 an explicit installation into an existing pool. No server or campaign is needed.
@@ -433,7 +584,8 @@ No measured shipped-world overlap failure rate is claimed.
 
 ## Revision and existing saves
 
-New worlds and newly created scenes record **wg2**. Whole mouths now shift as a unit
+Historically, G2 new worlds and scenes recorded **wg2**. G3 new worlds use the
+shared plan described above; the following mouth rules still govern no-plan worlds. Whole mouths now shift as a unit
 into the non-corner interval: for axis length L, first quantize the requested centre
 as `clamp(floor(p*(L-2))+1,1,L-2)`, then clamp its start to `[1,L-1-width]`.
 The resulting centre is `start + width//2`; width is unchanged. Omitted/zero width
@@ -443,7 +595,7 @@ bank margin. Reciprocal masks, inward approaches and ford player/creature semant
 remain tested. Current emitted macro positions avoided the original extreme probes.
 
 Absent-field legacy maps and explicitly wg1 maps remain authoritative. Their
-mutations/provenance survive load, revisit and F9. New exploration can be wg2 while
+mutations/provenance survive load, revisit and F9. New exploration now records wg3 while
 the world's origin remains wg1; no relabeling, backfill or historic seam guarantee
 is implied. JSON changes affect new previews and new locations, not visited maps.
 Loading F9's saved wraith encounter restores exposure; actual debug departure clears

@@ -354,6 +354,18 @@ class SaveManager:
         from world.world_map import WorldMap
         world = WorldMap(world_data['width'], world_data['height'])
         _deserialize_world(world_data, world)
+        if world.plan_mode=='shared-v1':
+            from generation.world_plan import slice_plan
+            import re
+            for scene in sorted((path / 'chunks').glob('*.pkl')):
+                match=re.fullmatch(r'(\d+)_(\d+)\.pkl',scene.name)
+                if not match: continue
+                wx,wy=map(int,match.groups());m=cold_cache._read(scene).local_map
+                provenance=getattr(m,'plan_provenance',None)
+                if not isinstance(provenance,dict) or provenance.get('mode')!='shared-v1': raise SaveFormatError('missing required G3 scene references: '+scene.name)
+                section=slice_plan(world.plan,wx,wy)
+                for key in ('routes','crossings','placements'):
+                    if sorted(provenance.get(key,[]))!=sorted(r['id'] for r in section[key]): raise SaveFormatError('corrupt G3 scene '+key+' references: '+scene.name)
         stage = copy.copy(engine)
         stage.player = copy.copy(engine.player)
         for component in ('fighter', 'needs', 'corruption', 'inventory', 'equipment', 'light_source', 'language', 'perks', 'level'):
@@ -534,14 +546,14 @@ def _serialize_world(world_map: "WorldMap") -> dict:
         "vukh_y":         world_map.vukh_y,
         "start_wx":       world_map.start_wx,
         "start_wy":       world_map.start_wy,
-        "capital_chunks": list(world_map.capital_chunks),
-        "town_chunks":    list(world_map.town_chunks),
-        "road_tiles":     [[k[0], k[1], v] for k, v in world_map.road_tiles.items()],
+        "capital_chunks": sorted(world_map.capital_chunks),
+        "town_chunks":    sorted(world_map.town_chunks),
+        "road_tiles":     [[k[0], k[1], v] for k, v in sorted(world_map.road_tiles.items())],
         "chunks":         chunks,
         "myth":           world_map.myth.to_dict() if world_map.myth else None,
         "town_groups":    {str(k): v for k, v in world_map.town_groups.items()},
-        "town_chunk_ids": [[k[0], k[1], v] for k, v in world_map.town_chunk_ids.items()],
-        "chunk_names":    [[k[0], k[1], v] for k, v in world_map.chunk_names.items()],
+        "town_chunk_ids": [[k[0], k[1], v] for k, v in sorted(world_map.town_chunk_ids.items())],
+        "chunk_names":    [[k[0], k[1], v] for k, v in sorted(world_map.chunk_names.items())],
     }
 
 
@@ -554,7 +566,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
     if mode=='shared-v1':
         validate_plan(data.get('plan'),data['width'],data['height'])
         if data['plan']['seed']!=data['seed']: raise SaveFormatError('world/plan seed mismatch')
-    elif data.get('plan') is not None or (data.get('generation_revision')=='wg3' and 'plan_mode' not in data):
+    elif data.get('plan') is not None or data.get('generation_revision')=='wg3':
         raise SaveFormatError('missing required G3 plan mode or unexpected legacy plan')
     world_map.plan_mode=mode
     world_map.plan=data.get('plan')

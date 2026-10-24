@@ -54,6 +54,7 @@ def settings(data,override=None):
         for asset in ids:
             raw=data.structures.get(asset)
             if not raw or context not in raw.get('placement',{}).get('contexts',[]): raise GenerationError(f'G3 settings: {asset} lacks explicit {context} eligibility')
+            if raw['placement']['road_relation']=='remote': raise GenerationError(f'G3 settings: {asset} is deliberately remote and cannot satisfy a required connected pool')
     return c
 
 
@@ -114,8 +115,9 @@ def _river_records(world):
     return records
 
 
-def build_plan(world,data,override=None):
+def build_plan(world,data,override=None,metrics=None):
     """Build a candidate without modifying the world. Publication is a separate step."""
+    import time
     c=settings(data,override); rng=random.Random(stable_seed('wg3',world.seed,'sites'))
     plan=dict(version=VERSION,mode=MODE,generation_revision='wg3',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
               nodes=[],routes=[],waters=_river_records(world),crossings=[],settlements=[],plots=[],placements=[],reservations=[],dependencies={},diagnostics=[])
@@ -188,6 +190,7 @@ def build_plan(world,data,override=None):
         for water,rects in sorted(water_hits.items()):
             plan['crossings'].append(dict(id=f'crossing-{len(plan["crossings"])}',road=route['id'],water=water,kind='bridge',travel_class='player-and-creature',deck=rects,approaches=[expand(r,2) for r in rects]))
     for i,p in enumerate(chosen):
+        started=time.perf_counter()
         form=c['forms'][i%2]; sid=f'settlement-{i}'; x,y=world_xy(*p,0,0)
         # The roadside settlement consumes a real existing country-road segment.
         incoming=next(r for r in plan['routes'] if r['b']==sid)
@@ -224,6 +227,7 @@ def build_plan(world,data,override=None):
                     placed=_plot(plan,authority,data,sid,context,wx,wy,lx,line_y,normal,rid,required=context=='civic')
                     settlement['plots'].append(placed['id'])
                     if context=='civic' and placed['placement']: settlement['civic']=dict(placement=placed['placement'],bell_state='spent')
+        if metrics is not None: metrics.setdefault('settlements',{})[sid]=time.perf_counter()-started
     # Landmark uses a declared bounded spur to its assigned country route.
     wx,wy=landmark; route=next(r for r in plan['routes'] if r['b']=='landmark')
     found=False
@@ -264,8 +268,12 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
         join=[wx*W+lx,line_y]
         approach=bounds(ec+[(x+nx*(half+setback+1),y+ny*(half+setback+1)) for x,y in ec])
         chunkrect=[wx*W,wy*H,(wx+1)*W,(wy+1)*H]
+        spacing=c['plot_spacing_tiles']//2
+        buildable=([max(chunkrect[0],join[0]-spacing),chunkrect[1]+1,min(chunkrect[2],join[0]+spacing),line_y-half-setback+1] if normal=='S' else
+                   [max(chunkrect[0],join[0]-spacing),line_y+half+setback,min(chunkrect[2],join[0]+spacing),chunkrect[3]-1] if normal=='N' else chunkrect)
         try:
             if intersect(clearance,chunkrect)!=clearance or intersect(approach,chunkrect)!=approach: raise GenerationError('building, buffer or full approach spans a storage chunk')
+            if intersect(footprint,buildable)!=footprint: raise GenerationError('footprint does not fit assigned buildable plot')
             conflicts=authority.conflicts(clearance)
             if conflicts: raise GenerationError(f'footprint/buffer conflicts with {conflicts[0]["owner"]}')
             conflicts=authority.conflicts(approach,tuple(r['id'] for r in plan['routes']))
@@ -278,7 +286,7 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
             authority.add(placement['id'],'approach',approach,(placement['id'],*(r['id'] for r in plan['routes'])))
             plan['dependencies'].setdefault(asset,dependencies(data.structures[asset],data)); plan['placements'].append(placement); chosen=placement['id']; break
         except GenerationError as error: rejected.append(dict(asset=asset,rotation=rotation,reason=str(error)))
-    plot=dict(id=pid,owner=owner,road=road_id,normal=normal,placement=chosen,status='occupied' if chosen else 'vacant-garden',required=required,rejected=rejected)
+    plot=dict(id=pid,owner=owner,road=road_id,normal=normal,buildable=buildable if ordered else [wx*W,wy*H,(wx+1)*W,(wy+1)*H],setback=c['setback_tiles'],placement=chosen,status='occupied' if chosen else 'vacant-garden',required=required,rejected=rejected)
     plan['plots'].append(plot)
     if required and not chosen: raise GenerationError(f'{pid}: essential placement failed: {rejected}')
     return plot
@@ -286,7 +294,7 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
 
 def validate_plan(plan,width,height):
     """Durable structure/reference checks; never demand unmodified saved scene tiles."""
-    if not isinstance(plan,dict) or plan.get('version')!=VERSION or plan.get('mode')!=MODE or plan.get('generation_revision')!='wg3': raise GenerationError('missing/corrupt required G3 plan header')
+    if not isinstance(plan,dict) or type(plan.get('version')) is not int or plan.get('version')!=VERSION or plan.get('mode')!=MODE or plan.get('generation_revision')!='wg3': raise GenerationError('missing/corrupt required G3 plan header')
     if plan.get('map_size')!=[W,H] or plan.get('world_size')!=[width,height]: raise GenerationError('G3 plan dimensions disagree')
     registries={}
     for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations'):
@@ -297,14 +305,26 @@ def validate_plan(plan,width,height):
         registries[name]={r['id']:r for r in rows}
     def rect(r):
         if not isinstance(r,list) or len(r)!=4 or any(type(n) is not int for n in r) or not (0<=r[0]<r[2]<=width*W and 0<=r[1]<r[3]<=height*H): raise GenerationError('G3 rectangle outside integer world bounds')
+    def point(p):
+        if not isinstance(p,list) or len(p)!=2 or any(type(n) is not int for n in p) or not (0<=p[0]<width*W and 0<=p[1]<height*H): raise GenerationError('G3 point outside integer world bounds')
+    if type(plan.get('seed')) is not int: raise GenerationError('G3 seed must be integer')
+    for n in plan['nodes']:
+        point(n['xy'])
+        if n['chunk']!=list(address(*n['xy'])[:2]) or type(n['required']) is not bool: raise GenerationError('G3 node membership/status invalid')
     for route in plan['routes']:
+        if type(route['width']) is not int or not 1<=route['width']<=5 or len(route['points'])<2: raise GenerationError('G3 road width/geometry invalid')
+        for p in route['points']: point(p)
         if route['a'] not in registries['nodes'] or route['b'] not in registries['nodes'] or route['rects']!=bands(route['points'],route['width']): raise GenerationError('G3 route geometry or endpoints disagree')
+        if route['kind']=='country' and (route['points'][0]!=registries['nodes'][route['a']]['xy'] or route['points'][-1]!=registries['nodes'][route['b']]['xy']): raise GenerationError('G3 counted country route does not physically reach assigned endpoint')
         for r in route['rects']: rect(r)
     for water in plan['waters']:
         for r in water['rects']: rect(r)
     for crossing in plan['crossings']:
         if crossing['road'] not in registries['routes'] or crossing['water'] not in registries['waters'] or crossing['kind']!='bridge' or crossing['travel_class']!='player-and-creature': raise GenerationError('G3 crossing references/class invalid')
-        for r in crossing['deck']: rect(r)
+        road=registries['routes'][crossing['road']];water=registries['waters'][crossing['water']]
+        for r in crossing['deck']:
+            rect(r)
+            if not any(intersect(r,b)==r for b in road['rects']) or not any(intersect(r,expand(b,2))==r for b in water['rects']): raise GenerationError('G3 crossing deck does not belong to assigned road/channel')
     for s in plan['settlements']:
         rect(s['bounds'])
         if s['members']!=member_chunks(s['bounds']) or s['incoming'] not in registries['routes'] or any(p not in registries['plots'] for p in s['plots']): raise GenerationError('G3 settlement membership invalid')
@@ -312,10 +332,44 @@ def validate_plan(plan,width,height):
         for key in ('footprint','clearance','approach'): rect(p[key])
         if len(member_chunks(p['clearance']))!=1 or member_chunks(p['clearance'])!=member_chunks(p['approach']): raise GenerationError('G3 placement spans chunks')
         if p['dependency'] not in plan['dependencies'] or p['road'] not in registries['routes']: raise GenerationError('G3 placement reference invalid')
+        point(p['origin']);point(p['join'])
+        if p['origin']!=p['footprint'][:2]: raise GenerationError('G3 placement origin mismatch')
+        road=registries['routes'][p['road']]
+        if not any(r[0]<=p['join'][0]<r[2] and r[1]<=p['join'][1]<r[3] for r in road['rects']): raise GenerationError('G3 placement join misses assigned frontage')
+        for entrance in p['entrances']:
+            for x,y in entrance_cells(entrance):
+                if not (p['footprint'][0]<=x<p['footprint'][2] and p['footprint'][1]<=y<p['footprint'][3]): raise GenerationError('G3 entrance span leaves footprint')
+        for t in p['targets']:
+            point([t['x'],t['y']])
+            if not (p['footprint'][0]<=t['x']<p['footprint'][2] and p['footprint'][1]<=t['y']<p['footprint'][3]): raise GenerationError('G3 target leaves footprint')
+    for plot in plan['plots']:
+        if plot['placement'] is None:
+            if plot['required'] or plot['status']!='vacant-garden': raise GenerationError('G3 required plot silently became vacant')
+        elif plot['placement'] not in registries['placements'] or plot['status']!='occupied': raise GenerationError('G3 plot placement reference invalid')
     owners=set(registries['routes'])|set(registries['waters'])|set(registries['placements'])
     for r in plan['reservations']:
         # River banks may meet the world border; clipped at realization.
         if r['owner'] not in owners or r['purpose'] not in ('water','road','structure','approach'): raise GenerationError('G3 reservation owner/purpose invalid')
+    from collections import Counter
+    expected=[]
+    for water in plan['waters']: expected.extend((water['id'],'water',tuple(expand(r,2))) for r in water['rects'])
+    for road in plan['routes']: expected.extend((road['id'],'road',tuple(r)) for r in road['rects'])
+    for p in plan['placements']: expected.extend([(p['id'],'structure',tuple(p['clearance'])),(p['id'],'approach',tuple(p['approach']))])
+    actual=[(r['owner'],r['purpose'],tuple(r['rect'])) for r in plan['reservations']]
+    if Counter(expected)!=Counter(actual): raise GenerationError('G3 reservation geometry does not match owner')
+    authority=Reservations()
+    for r in plan['reservations']:
+        conflicts=authority.conflicts(r['rect'])
+        if r['purpose']=='water': compatible=[v['owner'] for v in conflicts if v['purpose']=='water']
+        elif r['purpose']=='road':
+            compatible=[v['owner'] for v in conflicts if v['purpose'] in ('water','road')]
+            for water in (v for v in conflicts if v['purpose']=='water'):
+                hit=intersect(r['rect'],water['rect'])
+                if not any(c['road']==r['owner'] and c['water']==water['owner'] and any(intersect(hit,d)==hit for d in c['deck']) for c in plan['crossings']): raise GenerationError('G3 road/channel intersection has no owned crossing')
+        elif r['purpose']=='approach': compatible=[r['owner']]+[v['owner'] for v in conflicts if v['purpose']=='road']
+        else: compatible=[]
+        authority.add(r['owner'],r['purpose'],r['rect'],compatible)
+    if not isinstance(plan.get('dependencies'),dict) or any(not isinstance(rows,dict) or any(not isinstance(v,str) or len(v)!=64 for v in rows.values()) for rows in plan['dependencies'].values()): raise GenerationError('G3 semantic dependency manifest malformed')
     reached={'start'}
     while True:
         old=len(reached)

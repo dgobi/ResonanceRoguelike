@@ -132,6 +132,17 @@ def worker(browser_name,evidence):
         page.locator('#metadata').fill(json.dumps(start));page.locator('#apply-metadata').click()
         expected_lab=copy.deepcopy(lab);expected_lab['player_start']=start
         got,_=export('edited-start');check('deliberate start edit changes one field',got==expected_lab)
+        planned=load(ROOT/'roguelike/data/buildings/residential/house_small_a.json')
+        page.locator('#asset-id').fill('browser_frontage_'+browser_name)
+        page.locator('#apply-id').click()
+        planned['id']='browser_frontage_'+browser_name
+        page.locator('#metadata-field').select_option('placement')
+        profile=copy.deepcopy(planned['placement']);profile['buffer']=2
+        page.locator('#metadata').fill(json.dumps(profile));page.locator('#apply-metadata').click()
+        planned['placement']=profile
+        got,path=export('planned-frontage')
+        check('real placement panel edit/download preserves complete document',got==planned)
+        planned_export=evidence/(browser_name+'-planned-frontage.json');planned_export.write_bytes(path.read_bytes())
         page.screenshot(path=str(evidence/(browser_name+'-lab.png')),full_page=True)
         check('no browser script errors',not errors)
         version=browser.version;context.close();browser.close()
@@ -141,8 +152,14 @@ def worker(browser_name,evidence):
              '--output',str(evidence/(browser_name+'-runtime.json'))]
     run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=60)
     check('downloaded JSON passes shared runtime preview and actual existing-pool selection',run.returncode==0)
+    planned_command=[sys.executable,'-X','utf8',str(ROOT/'tools/structure_authoring.py'),str(planned_export),
+                     '--planned','--category','residential','--context','grid','--seed','20261023',
+                     '--output',str(evidence/(browser_name+'-planned-runtime.json'))]
+    planned_run=subprocess.run(planned_command,cwd=ROOT,capture_output=True,text=True,timeout=90)
+    check('downloaded placement metadata passes CLI and production planned placement',planned_run.returncode==0)
     report={'browser':browser_name,'version':version,'passed':all(c['passed'] for c in checks),'checks':checks,'errors':errors,
-            'command':command,'runtime_stdout':run.stdout,'runtime_stderr':run.stderr,'codec_documents':len(codec)}
+            'command':command,'runtime_stdout':run.stdout,'runtime_stderr':run.stderr,'codec_documents':len(codec),
+            'planned_command':planned_command,'planned_stdout':planned_run.stdout,'planned_stderr':planned_run.stderr}
     (evidence/(browser_name+'.json')).write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({'browser':browser_name,'passed':report['passed'],'checks':len(checks),'version':version}))
 
@@ -164,14 +181,17 @@ def main():
     if args.worker: worker(args.worker,evidence);return 0
     sources=[ROOT/'layout_painter.html',ROOT/'roguelike/generation/structure_contract.py',ROOT/'tools/structure_authoring.py',Path(__file__).resolve(),*sorted((ROOT/'tools/structure_editor').glob('*'))]
     identities=lambda:{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources if p.is_file()}
+    from verify_b3 import source_manifest
+    runtime_source=source_manifest()
     before=identities();start=time.monotonic();results=[];evidence.mkdir(parents=True,exist_ok=True)
     for browser in ('chromium','firefox'):
         command=[sys.executable,'-X','utf8',str(Path(__file__).resolve()),'--worker',browser,'--evidence',str(evidence)]
         run=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=150)
         (evidence/(browser+'-log.txt')).write_text(run.stdout+run.stderr,encoding='utf-8')
         print(run.stdout+run.stderr,end='');results.append({'browser':browser,'exit_code':run.returncode,'command':command})
-    passed=all(r['exit_code']==0 for r in results) and before==identities()
+    passed=all(r['exit_code']==0 for r in results) and before==identities() and runtime_source==source_manifest()
     (evidence/'summary.json').write_text(json.dumps({'passed':passed,'runs':results,'source':before,'source_stable':before==identities(),
+                                                    'runtime_source':runtime_source,'runtime_source_stable':runtime_source==source_manifest(),
                                                     'seconds':round(time.monotonic()-start,2),'playwright':version,'driver':driver_version},indent=2)+'\n')
     return 0 if passed else 1
 

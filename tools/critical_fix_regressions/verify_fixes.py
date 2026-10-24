@@ -23,6 +23,9 @@ def main() -> int:
     parser.add_argument("--evidence", type=Path,
                         help="Optional directory for the test log and loop evidence")
     args = parser.parse_args()
+    sys.path.insert(0,str(here.parent))
+    from verify_b3 import source_manifest
+    source=source_manifest()
     game = args.game.resolve()
     if not (game / "main.py").is_file():
         parser.error("--game must point to the roguelike directory containing main.py")
@@ -59,7 +62,10 @@ def main() -> int:
         output = result.stdout + result.stderr
         print(output, end="")
         (evidence / "focused-tests.txt").write_text(output, encoding="utf-8")
-        return result.returncode
+        stable=source==source_manifest()
+        (evidence/'run.json').write_text(json.dumps(dict(command=command,python=sys.version,dependencies=versions,
+            source=source,source_stable=stable,exit_code=result.returncode,passed=result.returncode==0 and stable),indent=2)+'\n',encoding='utf-8')
+        return result.returncode if stable else 1
 
 
 if __name__ == "__main__":

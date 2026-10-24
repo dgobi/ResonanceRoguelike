@@ -37,6 +37,8 @@ def source_manifest():
     result[painter.relative_to(ROOT).as_posix()] = hashlib.sha256(painter.read_bytes()).hexdigest()
     corrections = ROOT/'evidence/worldgen-g2/data-corrections.json'
     result[corrections.relative_to(ROOT).as_posix()] = hashlib.sha256(corrections.read_bytes()).hexdigest()
+    guide=GAME/'docs/STRUCTURE_AUTHORING.md'
+    result[guide.relative_to(ROOT).as_posix()]=hashlib.sha256(guide.read_bytes()).hexdigest()
     return result
 
 

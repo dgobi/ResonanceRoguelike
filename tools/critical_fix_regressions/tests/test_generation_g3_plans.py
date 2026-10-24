@@ -119,6 +119,43 @@ class G3Plans(unittest.TestCase):
         join=p['join'][0]%80,p['join'][1]%43;s.local_map.decor[join]='crate'
         with self.assertRaisesRegex(GenerationError,'approach'):validate_access(s.local_map,section,self.data,*xy)
 
+    def test_boundary_adjacent_bridge_exact_bands_both_axes_and_unassigned_water(self):
+        from world.world_map import Chunk,RegionType
+        for vertical in (False,True):
+            w=WorldMap(2,2);w.seed=0;w.start_wx=w.start_wy=-1;w.plan_mode='shared-v1'
+            for x in range(2):
+                for y in range(2):w.set(Chunk(x,y,RegionType.PLAINS,0))
+            water=[0,41,80,46] if vertical else [78,0,83,43]
+            road=[39,21,42,65] if vertical else [40,20,121,23]
+            deck=intersect(road,[water[0]-2,water[1]-2,water[2]+2,water[3]+2])
+            w.plan={'waters':[{'id':'channel','rects':[water]}],'routes':[{'id':'road','rects':[road]}],
+                    'crossings':[{'id':'bridge','deck':[deck]}],'placements':[]}
+            pairs=((0,0),(0,1)) if vertical else ((0,0),(1,0))
+            a,b=[self.scene(p,w).local_map for p in pairs]
+            aa=[(x,42) for x in range(39,42)] if vertical else [(79,y) for y in range(20,23)]
+            bb=[(x,0) for x in range(39,42)] if vertical else [(0,y) for y in range(20,23)]
+            self.assertEqual([str(a.tiles[p]['terrain']) for p in aa],['cobblestone']*3)
+            self.assertEqual([str(b.tiles[p]['terrain']) for p in bb],['cobblestone']*3)
+            self.assertTrue(all(a.walkable[p] and b.walkable[q] for p,q in zip(aa,bb)))
+            w.plan['crossings']=[]
+            with self.assertRaisesRegex(GenerationError,'without an assigned bridge'):self.scene((0,0),w)
+
+    def test_migrant_first_complete_scene_and_cached_mutations_do_not_respawn(self):
+        from engine.save_manager import _deserialize_entities
+        xy=(self.world.start_wx,self.world.start_wy)
+        direct=self.scene(xy);e=make_engine(self.data);e.world_map=copy.deepcopy(self.world)
+        migrant=e.creature_factory.spawn('hollow_revenant',12,12);migrant.name='G3 migrant'
+        self.assertTrue(e._transfer_submap_pursuer_to_surface(migrant,*xy,'fixture'))
+        cached=e.save_manager.cache.load(*xy)
+        actors=_deserialize_entities(cached.entities,e);natives=[a for a in actors if a.name!='G3 migrant']
+        self.assertEqual(fingerprint(cached.local_map,natives),fingerprint(direct.local_map,direct.actors))
+        self.assertEqual(sum(a.name=='G3 migrant' for a in actors),1)
+        cached.local_map.floor_objects.clear();cached.local_map.set_tile(2,2,'mud',True,True)
+        expected=fingerprint(cached.local_map,actors)
+        e.save_manager.cache.store(*xy,cached.local_map,actors);e.save_manager.cache.evict_distant(-100,-100)
+        prepared=e._prepare_destination(*xy)
+        self.assertEqual(fingerprint(*prepared),expected)
+
     def test_order_global_draws_and_complete_scene_identity(self):
         keys=[tuple(s['members'][0]) for s in self.world.plan['settlements']]
         first={xy:fingerprint((r:=self.scene(xy)).local_map,r.actors,r.metadata.town_data) for xy in keys}
@@ -159,7 +196,7 @@ class G3Plans(unittest.TestCase):
         self.assertEqual(dependencies(data.structures[asset],data),self.world.plan['dependencies'][asset])
         unused=next(k for k in data.structures if k not in self.world.plan['dependencies']);data.structures[unused]['description']='unrelated'
         check_dependencies(p,self.world.plan,data)
-        data.structures[asset]['placement']['weight']=2
+        data.structures[asset]['legend']['w']='floor'
         with self.assertRaisesRegex(GenerationError,'changed dependency.*restore matching'):check_dependencies(p,self.world.plan,data)
         unaffected=next(q for q in self.world.plan['placements'] if q['asset']!=asset)
         check_dependencies(unaffected,self.world.plan,data)

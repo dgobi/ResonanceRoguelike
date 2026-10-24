@@ -56,15 +56,15 @@ SUBMAP_TYPES: dict[str, dict[str, int]] = {
 # ------------------------------------------------------------------ #
 
 def generate_world(world_map: WorldMap, data, rng: random.Random,
-                   name_gen=None, *, plan_mode='shared-v1', planning_settings=None) -> WorldMap:
+                   name_gen=None, *, plan_mode='shared-v1', planning_settings=None, planning_metrics=None) -> WorldMap:
     # The candidate is published only after geography, plans and references pass.
     candidate=WorldMap(world_map.width,world_map.height); candidate.seed=world_map.seed
-    _generate_world(candidate,data,random.Random(candidate.seed),name_gen,plan_mode,planning_settings)
+    _generate_world(candidate,data,random.Random(candidate.seed),name_gen,plan_mode,planning_settings,planning_metrics)
     world_map.__dict__.update(candidate.__dict__)
     return world_map
 
 
-def _generate_world(world_map, data, rng, name_gen, plan_mode, planning_settings):
+def _generate_world(world_map, data, rng, name_gen, plan_mode, planning_settings, planning_metrics):
     """
     Full world generation pipeline.
     Steps run in strict order — each step depends on the previous.
@@ -98,6 +98,7 @@ def _generate_world(world_map, data, rng, name_gen, plan_mode, planning_settings
         _generate_roads(world_map, rng)
         _stamp_town_ports(world_map)
         world_map.plan_mode='legacy'
+        world_map.generation_revision='legacy-fixture-wg3'
     elif plan_mode!='shared-v1':
         raise ValueError('unknown generation plan mode')
     _calculate_difficulty_bands(world_map)   # Step 11
@@ -107,7 +108,7 @@ def _generate_world(world_map, data, rng, name_gen, plan_mode, planning_settings
     _assign_submaps(world_map, rng)
     if plan_mode=='shared-v1':
         from generation.world_plan import build_plan,publish_plan
-        publish_plan(world_map,build_plan(world_map,data,planning_settings))
+        publish_plan(world_map,build_plan(world_map,data,planning_settings,planning_metrics))
         _assign_zones(world_map)
     _assign_names(world_map)
     _generate_world_myth(world_map, rng)

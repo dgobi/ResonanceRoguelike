@@ -21,7 +21,7 @@ def validate_profile(raw,w,h):
     p=raw.get('placement')
     if p is None: return
     def fail(message): raise GenerationError('placement: '+message)
-    if not isinstance(p,dict) or p.get('version')!=1: fail('version must be 1')
+    if not isinstance(p,dict) or type(p.get('version')) is not int or p.get('version')!=1: fail('version must be 1')
     allowed={'version','contexts','weight','rotations','mirror_x','buffer','approach','entrances','targets','road_relation'}
     if set(p)-allowed: fail('unknown fields: '+', '.join(sorted(set(p)-allowed)))
     if not isinstance(p.get('contexts'),list) or not p['contexts'] or any(c not in CONTEXTS for c in p['contexts']): fail('contexts must name grid, roadside, civic or landmark')
@@ -110,13 +110,29 @@ def dependencies(raw,data):
     """
     result={}
     consumed=('id','layers','legend','decor_layer','special_tiles','placement')
-    result['structure:'+raw['id']]=digest({k:raw[k] for k in consumed if k in raw})
+    definition={k:copy.deepcopy(raw[k]) for k in consumed if k in raw}
+    def consumed_special(s):
+        keys=('type','kind','x','y','item_id','text_id','scene_id','decor_id','loot_pools','weight')
+        row={k:s[k] for k in keys if k in s}
+        if 'spawn_table' in s: row['spawn_table']=[consumed_special(r) for r in s['spawn_table']]
+        return row
+    definition['special_tiles']=[consumed_special(s) for s in raw.get('special_tiles',[])]
+    definition['legend']={ch:raw['legend'][ch] for ch in sorted(set(''.join(raw['layers'])))}
+    # Candidate membership/weights have already been resolved into saved IDs.
+    definition['placement'].pop('weight',None);definition['placement'].pop('contexts',None)
+    result['structure:'+raw['id']]=digest(definition)
     def add(table,key):
         name=table+':'+key
         if name in result: return
         value=getattr(data,table).get(key)
         if value is None: raise GenerationError('missing generation dependency '+name)
-        result[name]=digest(value)
+        if table=='loot_pools':
+            semantic={'roll_count':value.get('roll_count',[1,1]),'items':[{'item_id':r['item_id'],'weight':r.get('weight',1)} for r in value.get('items',[])]}
+        elif table=='scenes': semantic={'floor_objects':[r['item_id'] for r in value.get('floor_objects',[])]}
+        elif table=='terrain': semantic={'walkable':value.get('walkable',True),'transparent':value.get('transparent',True)}
+        elif table=='decoratives': semantic={k:value.get(k,False) for k in ('blocks_movement','blocks_sight','container')}
+        else: semantic=value
+        result[name]=digest(semantic)
         if table=='items' and value.get('body_id'): add('bodies',value['body_id'])
         if table=='scenes':
             for row in value.get('floor_objects',[]): add('items',row['item_id'])
