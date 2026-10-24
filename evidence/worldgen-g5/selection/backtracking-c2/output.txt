@@ -1,0 +1,6 @@
+test_required_backtracking_reserves_the_only_residential_frontage (test_generation_g5_selection.G5Selection.test_required_backtracking_reserves_the_only_residential_frontage) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.146s
+
+OK

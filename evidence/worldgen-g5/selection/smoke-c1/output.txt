@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "evidence\\worldgen-g5\\selection\\plan-c1.json",
+  "previews": 0,
+  "registration": false
+}

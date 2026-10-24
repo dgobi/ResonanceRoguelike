@@ -53,5 +53,6 @@ def dress(m, chunk, world, data, context, native, spawn):
         'resource_absence':{tid:('town/capital policy excludes wilderness resources' if chunk.region_type in (RegionType.TOWN,RegionType.CAPITAL)
                                else 'no legal selected site under biome, proximity and reservation policy') for tid,count in counts.items() if not count},
         'waystone_policy':'required-start' if start else 'required-civic' if civic else 'optional-physical-road' if chunk.region_type not in (RegionType.TOWN,RegionType.CAPITAL) else 'not-applicable-member',
-        'waystones':sum(v=='waystone_plinth' for v in m.decor.values())}
+        'waystones':len({xy for xy,v in m.decor.items() if v=='waystone_plinth'} |
+                       {(x,y) for x in range(m.width) for y in range(m.height) if str(m.tiles[x,y]['terrain'])=='waystone_plinth'})}
     return specs,waystone

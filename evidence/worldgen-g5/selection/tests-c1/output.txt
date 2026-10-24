@@ -1,0 +1,20 @@
+test_caps_weight_precedence_and_soft_fallback (test_generation_g5_selection.G5Selection.test_caps_weight_precedence_and_soft_fallback) ... ok
+test_default_roles_caps_and_single_landmark (test_generation_g5_selection.G5Selection.test_default_roles_caps_and_single_landmark) ... ok
+test_old_g4_plan_and_scene_provenance (test_generation_g5_selection.G5Selection.test_old_g4_plan_and_scene_provenance) ... ok
+test_real_checkpoint_new_fields_and_role_corruption_rejected (test_generation_g5_selection.G5Selection.test_real_checkpoint_new_fields_and_role_corruption_rejected) ... ok
+test_schema_invalid_selection_and_atomic_bounded_infeasibility (test_generation_g5_selection.G5Selection.test_schema_invalid_selection_and_atomic_bounded_infeasibility) ... ok
+test_selection_only_edits_keep_pending (test_generation_g5_selection.G5Selection.test_selection_only_edits_keep_pending) ... ok
+test_authentic_g3_plan_synthetic_envelope_checkpoint_and_f9 (test_generation_g5_entrances.G5Entrances.test_authentic_g3_plan_synthetic_envelope_checkpoint_and_f9) ... ok
+test_door_geometry_all_transforms_and_assigned_scenes (test_generation_g5_entrances.G5Entrances.test_door_geometry_all_transforms_and_assigned_scenes) ... ok
+test_inaccessible_required_service_door_rejects (test_generation_g5_entrances.G5Entrances.test_inaccessible_required_service_door_rejects) ... ok
+test_checksum_consistent_newest_corruption_coherent_recovery_and_failure (test_generation_g4_durability.G4Durability.test_checksum_consistent_newest_corruption_coherent_recovery_and_failure) ... ok
+test_legacy_world_new_scene_and_old_pending_dependency_edit (test_generation_g4_durability.G4Durability.test_legacy_world_new_scene_and_old_pending_dependency_edit) ... ok
+test_malformed_records_and_world_reverse_ownership (test_generation_g4_durability.G4Durability.test_malformed_records_and_world_reverse_ownership) ... ok
+test_old_geometry_required_interaction_infeasible_is_atomic (test_generation_g4_durability.G4Durability.test_old_geometry_required_interaction_infeasible_is_atomic) ... ok
+test_old_visited_state_no_generation_and_adapter_checkpoint (test_generation_g4_durability.G4Durability.test_old_visited_state_no_generation_and_adapter_checkpoint) ... ok
+test_original_g3_unseen_order_geometry_and_historical_metadata (test_generation_g4_durability.G4Durability.test_original_g3_unseen_order_geometry_and_historical_metadata) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 76.872s
+
+OK

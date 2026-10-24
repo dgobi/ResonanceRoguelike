@@ -12,17 +12,26 @@ from generation.structure_preview import snapshot,receipt_json
 from generation.placement import digest
 
 
-def planned_preview(data,seed,raw=None,category=None,context='grid',config=None):
+def planned_preview(data,seed,raw=None,category=None,context='grid',config=None,role=None,selection=None):
     from world.world_map import WorldMap
     from engine.scene_generation import create_surface
     from engine.item_factory import ItemFactory
     from engine.creature_factory import CreatureFactory
     bound=copy.copy(data); effective=copy.deepcopy(config or data.g3_config)
+    bound.settlement_profiles=copy.deepcopy(selection or data.settlement_profiles)
     if raw is not None:
         entry=compile_structure(raw,'ordinary_building',data,category=category)
         if context not in raw.get('placement',{}).get('contexts',[]): raise GenerationError('candidate needs explicit placement eligibility for '+context)
         bound.structures=dict(data.structures,**{raw['id']:entry.definition})
-        if raw['id'] not in effective['pools'][context]: effective['pools'][context].append(raw['id'])
+        if effective['version']==1:
+            if raw['id'] not in effective['pools'][context]: effective['pools'][context].append(raw['id'])
+        else:
+            chosen_role=role or ('civic' if context=='civic' else 'landmark' if context=='landmark' else
+                {'residential':'residential','commercial':'commercial','storage':'support','religious':'support'}.get(category))
+            profile=bound.settlement_profiles['profiles']['grid' if context=='civic' else context]
+            if chosen_role not in profile['roles']:raise GenerationError('candidate requires a supported selection --role')
+            rows=profile['roles'][chosen_role]
+            if not any(r['asset']==raw['id'] for r in rows):rows.append(dict(asset=raw['id'],weight=1.0,max_per_settlement=5))
     world=WorldMap(128,128);world.seed=seed;t=time.perf_counter()
     generate_world(world,bound,random.Random(seed),planning_settings=effective)
     elapsed=time.perf_counter()-t
@@ -36,7 +45,7 @@ def planned_preview(data,seed,raw=None,category=None,context='grid',config=None)
         previews.append(view)
     return {'passed':True,'kind':'production world-plan diagnostic; not played-game screenshot',
             'seed':seed,'plan':world.plan,'plan_identity':digest(world.plan),'planning_seconds':elapsed,
-            'preserved_pools':data.g3_config['pools'],'previews':previews,'materialized_scenes':len(previews)}
+            'preserved_policies':data.settlement_profiles,'previews':previews,'materialized_scenes':len(previews)}
 
 
 def plan_svg(plan):

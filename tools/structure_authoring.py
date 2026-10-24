@@ -26,6 +26,8 @@ def main(argv=None):
     p.add_argument('--world-plan',action='store_true',help='Preview the production shared world plan')
     p.add_argument('--planned',action='store_true',help='Add a draft to its active pool and materialize its selected plots')
     p.add_argument('--context',choices=['grid','roadside','civic','landmark'],default='grid')
+    p.add_argument('--role',choices=['residential','commercial','support','civic','landmark'])
+    p.add_argument('--selection-config',type=Path,help='Complete version-one settlement selection profile override')
     p.add_argument('--config',type=Path,help='Complete G3 planning settings override')
     p.add_argument('--orientations',action='store_true',help='Preview all explicitly permitted G3 rotations/mirrors')
     p.add_argument('--catalog',action='store_true')
@@ -61,7 +63,8 @@ def main(argv=None):
             raw=read_document(args.candidate) if args.candidate else None
             with contextlib.redirect_stdout(log):
                 report=planned_preview(data,args.seed,raw,category=args.category,context=args.context,
-                                       config=read_document(args.config) if args.config else None)
+                                       config=read_document(args.config) if args.config else None,role=args.role,
+                                       selection=read_document(args.selection_config) if args.selection_config else None)
         elif args.candidate:
             source=args.candidate.resolve(); raw=read_document(source)
             installed=next((e for e in data.structure_catalog.entries if Path(e.path)==source),None)

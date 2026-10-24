@@ -44,7 +44,7 @@ def records(plan, registries, width, height):
             require(p is not None and p['context']=='civic' and civic['bell_state']=='spent',sid,'invalid civic placement/state')
             require(any(registries['plots'].get(pid,{}).get('placement')==p['id'] for pid in s['plots']),sid,'civic belongs to another settlement')
         require((s['civic'] is not None)==(s['form']=='grid'),sid,'grid civic obligation or roadside policy invalid')
-        if plan['version']==2:
+        if plan['version']>=2:
             semantic=s.get('semantics'); require(isinstance(semantic,dict),sid,'missing G4 semantics')
             require(semantic['policy']=='native-town-v1' and identifier(semantic['name']),sid,'invalid semantic policy/name')
             require([m['chunk'] for m in semantic['members']]==s['members'],sid,'semantic member ownership mismatch')

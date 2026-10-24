@@ -35,9 +35,12 @@ class G5Cohort(unittest.TestCase):
                         row['orientations'].append(dict(rotation=rotation,mirror=mirror,access=report['access'],receipts=report.get('receipts')))
             for context in raw['placement']['contexts']:
                 with self.subTest(asset=aid,context=context):
-                    config=copy.deepcopy(data.g3_config);config['pools'][context]=[aid]
+                    selection=copy.deepcopy(data.settlement_profiles)
+                    profile=selection['profiles'][context]
+                    role=next(r for r,rows in profile['roles'].items() if any(row['asset']==aid for row in rows))
+                    profile['roles'][role]=[dict(asset=aid,weight=1.0,max_per_settlement=128)]
                     with contextlib.redirect_stdout(io.StringIO()):
-                        report=planned_preview(data,20261023,raw,category=category,context=context,config=config)
+                        report=planned_preview(data,20261023,raw,category=category,context=context,selection=selection)
                     selected=[p for p in report['plan']['placements'] if p['asset']==aid and p['context']==context]
                     self.assertTrue(selected);self.assertTrue(report['previews'])
                     row['assigned'].append(dict(context=context,controlled_pool=True,placements=len(selected),

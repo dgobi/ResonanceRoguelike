@@ -107,12 +107,13 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
         if not all(r['passed'] for r in check_access(m,data,goals)):
             raise GenerationError('required civic prayer is not interactable after dressing/population')
     if any(not receipt_owned(r,m) for r in receipts):raise GenerationError('final restored content ownership failed')
+    from generation.scene_adapters import adapter
     m.plan_provenance={'mode':'shared-v1','routes':[r['id'] for r in section['routes']],
                        'crossings':[r['id'] for r in section['crossings']],
                        'placements':[p['id'] for p in section['placements']],
                        'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
                        'plan_identity':digest(world.plan),
-                       'dependency_projection':'structure-v1','adapter':'g3-to-g4-v1' if world.plan['version']==1 else 'g4-v1'}
+                       'dependency_projection':'structure-v1','adapter':adapter('wg5',world.plan['version'])}
     # These are actual first-creation inputs, not invented historical G3 hashes.
     m.native_input_provenance={f'entities:{a._creature_id}':digest(data.entities[a._creature_id]) for a in actors}
     m.native_input_provenance.update({f'terrain:{tid}':digest(data.terrain[tid]) for tid in ('dead_wood','flint_rock','clay_deposit')})
@@ -124,7 +125,7 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
         mapped=data.text_item_map.get('waystone_prayer_a','letter')
         m.native_input_provenance['prayer-item:'+mapped]=digest(data.items[mapped])
     m.native_generation_context=native
-    m.generation_revision='wg4'; m.generation_complete=True
+    m.generation_revision='wg5'; m.generation_complete=True
     return SceneResult(m,actors,spawn,staged,receipts)
 
 
