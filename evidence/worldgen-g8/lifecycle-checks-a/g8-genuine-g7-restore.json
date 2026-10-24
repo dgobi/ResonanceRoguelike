@@ -1,0 +1,61 @@
+{
+  "creator": "8e56d36d72537e8b32c3666dd5d19723d1afdf3a",
+  "original_plan": "17e968b99d8b65e0a8634f7c46b4a9d8018b3a713d834afba53bdae23411b948",
+  "visited_creator": "wg7",
+  "pending_adapter": "g7-to-g8-v1",
+  "pending": [
+    [
+      75,
+      100
+    ],
+    [
+      81,
+      34
+    ]
+  ],
+  "original_interaction_mutations": [
+    {
+      "chunk": [
+        75,
+        99
+      ],
+      "placement": "settlement-0-plot-1-building",
+      "target": [
+        8,
+        26
+      ],
+      "before": 3,
+      "after": 2,
+      "action": "production interaction handler; fixture positioning; stationary turns"
+    },
+    {
+      "chunk": [
+        74,
+        34
+      ],
+      "placement": "site-74-34-16-21-N-slot-shrine-building",
+      "target": [
+        22,
+        36
+      ],
+      "before": 1,
+      "after": 0,
+      "action": "production interaction handler; fixture positioning; stationary turns"
+    },
+    {
+      "chunk": [
+        74,
+        34
+      ],
+      "placement": "site-74-34-16-21-N-slot-shelter-building",
+      "target": [
+        13,
+        36
+      ],
+      "before": 2,
+      "after": 1,
+      "action": "production interaction handler; fixture positioning; stationary turns"
+    }
+  ],
+  "saved_bytes_unchanged": true
+}

@@ -1,0 +1,13 @@
+test_checksum_consistent_layout_corruptions_reject_before_installation (test_generation_g8_lifecycle.G8Lifecycle.test_checksum_consistent_layout_corruptions_reject_before_installation) ... ok
+test_civic_handlers_native_updates_reverse_members_and_explored_save (test_generation_g8_lifecycle.G8Lifecycle.test_civic_handlers_native_updates_reverse_members_and_explored_save) ... G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5035: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+ok
+test_genuine_g7_visited_mutations_and_pending_town_compound (test_generation_g8_lifecycle.G8Lifecycle.test_genuine_g7_visited_mutations_and_pending_town_compound) ... ok
+test_pending_recipe_removal_dependency_scope_and_late_atomic_failure (test_generation_g8_lifecycle.G8Lifecycle.test_pending_recipe_removal_dependency_scope_and_late_atomic_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 26.372s
+
+OK

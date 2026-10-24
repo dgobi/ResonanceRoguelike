@@ -1,0 +1,31 @@
+{
+  "case": "derived_svg_symlink",
+  "argv": [
+    "/workspace/scratch/1652b4369862/review-env/bin/python",
+    "-X",
+    "utf8",
+    "/workspace/scratch/1652b4369862/resonance-review/tools/structure_authoring.py",
+    "--compound",
+    "/tmp/g7-output-probes-c5uetl9b/derived_svg_symlink/g7_travellers_court.json",
+    "--child",
+    "/tmp/g7-output-probes-c5uetl9b/derived_svg_symlink/g7_wayhouse.json",
+    "--assigned-compound",
+    "S",
+    "--output",
+    "/tmp/g7-output-probes-c5uetl9b/derived_svg_symlink/review.json"
+  ],
+  "cwd": "/workspace/scratch/1652b4369862/resonance-review",
+  "exit_code": 0,
+  "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"/tmp/g7-output-probes-c5uetl9b/derived_svg_symlink/review.json\",\n  \"previews\": 1,\n  \"registration\": false,\n  \"status\": \"placed\"\n}\n",
+  "stderr": "",
+  "protected_input": "/tmp/g7-output-probes-c5uetl9b/derived_svg_symlink/g7_travellers_court.json",
+  "before_bytes": 1248,
+  "after_bytes": 225234,
+  "before_sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec",
+  "after_sha256": "999dce08675d6b4a52180246ff8363b08cdac2dd1c33f2ae88aced2a4ddc1e02",
+  "input_unchanged": false,
+  "after_prefix": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024.0 660.4\" width=\"1024\"><rect width=\"100%\" height=\"100%\" fill=\"#172026\"/>\n<rect x=\"108.0\" y=\"293.8\" widt",
+  "all_input_changes": [
+    "g7_travellers_court.json"
+  ]
+}
