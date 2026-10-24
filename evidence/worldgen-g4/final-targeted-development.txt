@@ -1,0 +1,10 @@
+test_mirror_required_fit_and_asset_first_weight (test_generation_g4.G4Placement.test_mirror_required_fit_and_asset_first_weight) ... ok
+test_private_conflicts_wrong_road_water_and_full_span (test_generation_g4.G4Placement.test_private_conflicts_wrong_road_water_and_full_span) ... ok
+test_public_sharing_both_orders_widths_and_all_normals (test_generation_g4.G4Placement.test_public_sharing_both_orders_widths_and_all_normals) ... ok
+test_weighted_coordinates_every_transform_identity_and_immutability (test_generation_g4.G4Placement.test_weighted_coordinates_every_transform_identity_and_immutability) ... ok
+test_old_geometry_required_interaction_infeasible_is_atomic (test_generation_g4_durability.G4Durability.test_old_geometry_required_interaction_infeasible_is_atomic) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.980s
+
+OK

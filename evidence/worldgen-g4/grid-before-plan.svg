@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5998 4248 164 98" width="960"><rect x="5998" y="4248" width="100%" height="100%" fill="#18252b"/>
+<text x="6000" y="4254" fill="white" font-size="3">grid: plan diagnostic; gold roads, green occupied, red vacant, blue approaches</text>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6040" y="4277" width="81" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6120" y="4277" width="40" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4277" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6119" y="4277" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4257" width="3" height="22" fill="#d4bc72" opacity="1"/>
+<rect x="6003" y="4277" width="154" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6003" y="4320" width="154" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4278" width="3" height="44" fill="#d4bc72" opacity="1"/>
+<rect x="6119" y="4278" width="3" height="44" fill="#d4bc72" opacity="1"/>
+<g><title>settlement-0-plot-0: []</title>
+<rect x="6008" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6005" y="4265" width="8" height="10" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-1: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-0-building&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-0-building&#x27;}]</title>
+<rect x="6000" y="4281" width="17" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-2: []</title>
+<rect x="6026" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6022" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-3: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-2-building&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-2-building&#x27;}]</title>
+<rect x="6017" y="4281" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-4: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with road-7&#x27;}]</title>
+<rect x="6044" y="4274" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6043" y="4271" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6044.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-5: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-4-building&#x27;}]</title>
+<rect x="6035" y="4281" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-6: []</title>
+<rect x="6062" y="4274" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6061" y="4271" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-7: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-6-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-6-building&#x27;}]</title>
+<rect x="6053" y="4281" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-8: []</title>
+<rect x="6008" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6007" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-9: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-8-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-8-building&#x27;}]</title>
+<rect x="6000" y="4324" width="17" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-10: []</title>
+<rect x="6026" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6022" y="4310" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-11: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-10-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-10-building&#x27;}]</title>
+<rect x="6017" y="4324" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-12: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}]</title>
+<rect x="6044" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6043" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6044.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-13: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-12-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-12-building&#x27;}]</title>
+<rect x="6035" y="4324" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-14: []</title>
+<rect x="6062" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6058" y="4310" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-15: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-14-building&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-14-building&#x27;}]</title>
+<rect x="6053" y="4324" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-16: []</title>
+<rect x="6088" y="4274" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6087" y="4271" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-17: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-16-building&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-16-building&#x27;}]</title>
+<rect x="6080" y="4281" width="17" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-18: []</title>
+<rect x="6106" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6102" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-19: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-18-building&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-18-building&#x27;}]</title>
+<rect x="6097" y="4281" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-20: []</title>
+<rect x="6124" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6120" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6124.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-21: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-20-building&#x27;}]</title>
+<rect x="6115" y="4281" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-22: []</title>
+<rect x="6142" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6138" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-23: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-22-building&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-22-building&#x27;}]</title>
+<rect x="6133" y="4281" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-24: []</title>
+<rect x="6088" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6084" y="4310" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-25: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-24-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-24-building&#x27;}]</title>
+<rect x="6080" y="4324" width="17" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-26: []</title>
+<rect x="6106" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6105" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-27: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-26-building&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-26-building&#x27;}]</title>
+<rect x="6097" y="4324" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-28: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}]</title>
+<rect x="6124" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6123" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6124.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-29: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-28-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-28-building&#x27;}]</title>
+<rect x="6115" y="4324" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-plot-30: []</title>
+<rect x="6142" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6138" y="4310" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-31: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-30-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-0-plot-30-building&#x27;}]</title>
+<rect x="6133" y="4324" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+</svg>

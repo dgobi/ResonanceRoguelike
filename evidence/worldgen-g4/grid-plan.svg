@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5998 4248 164 98" width="960"><rect x="5998" y="4248" width="100%" height="100%" fill="#18252b"/>
+<text x="6000" y="4254" fill="white" font-size="3">grid: plan diagnostic; gold roads, green occupied, red vacant, blue approaches</text>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6040" y="4277" width="81" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6120" y="4277" width="40" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4277" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6119" y="4277" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4257" width="3" height="22" fill="#d4bc72" opacity="1"/>
+<rect x="6003" y="4277" width="154" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6003" y="4320" width="154" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4278" width="3" height="44" fill="#d4bc72" opacity="1"/>
+<rect x="6119" y="4278" width="3" height="44" fill="#d4bc72" opacity="1"/>
+<g><title>settlement-0-plot-0: []</title>
+<rect x="6008" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6004" y="4265" width="8" height="10" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-1: []</title>
+<rect x="6008" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6004" y="4282" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-2: []</title>
+<rect x="6026" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6022" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-3: []</title>
+<rect x="6026" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6022" y="4282" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-4: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with road-7&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: True, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with road-7&#x27;}]</title>
+<rect x="6044" y="4274" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6043" y="4271" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6044.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-5: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: True, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}]</title>
+<rect x="6044" y="4278" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6043" y="4282" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6044.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-6: []</title>
+<rect x="6062" y="4274" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6061" y="4271" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-7: []</title>
+<rect x="6062" y="4278" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6061" y="4282" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-8: []</title>
+<rect x="6008" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6007" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-9: []</title>
+<rect x="6008" y="4321" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6007" y="4325" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6008.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-10: []</title>
+<rect x="6026" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6022" y="4310" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-11: []</title>
+<rect x="6026" y="4321" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6025" y="4325" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6026.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-12: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: True, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-0&#x27;}]</title>
+<rect x="6044" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6043" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6044.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-13: []</title>
+<rect x="6044" y="4321" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6043" y="4325" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6044.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-14: []</title>
+<rect x="6062" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6057" y="4310" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-15: []</title>
+<rect x="6062" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6057" y="4325" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6062.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-16: []</title>
+<rect x="6088" y="4274" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6087" y="4271" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-17: []</title>
+<rect x="6088" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6083" y="4282" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-18: []</title>
+<rect x="6106" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6101" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-19: []</title>
+<rect x="6106" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6102" y="4282" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-20: []</title>
+<rect x="6124" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6120" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6124.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-21: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;mirror&#x27;: True, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}]</title>
+<rect x="6124" y="4278" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6123" y="4282" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6124.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-22: []</title>
+<rect x="6142" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6137" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-23: []</title>
+<rect x="6142" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6137" y="4282" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4278.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-24: []</title>
+<rect x="6088" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6083" y="4310" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-25: []</title>
+<rect x="6088" y="4321" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6087" y="4325" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6088.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-26: []</title>
+<rect x="6106" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6105" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-27: []</title>
+<rect x="6106" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6102" y="4325" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6106.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-28: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: True, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;mirror&#x27;: False, &#x27;reason&#x27;: &#x27;footprint/buffer conflicts with settlement-0-street-vertical-1&#x27;}]</title>
+<rect x="6124" y="4317" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6123" y="4314" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6124.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-29: []</title>
+<rect x="6124" y="4321" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6123" y="4325" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6124.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-30: []</title>
+<rect x="6142" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6137" y="4310" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-0-plot-31: []</title>
+<rect x="6142" y="4321" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6141" y="4325" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="6142.5" cy="4321.5" r=".8" fill="white"/>
+</g>
+</svg>

@@ -1,0 +1,22 @@
+test_every_member_semantics_native_policy_and_determinism (test_generation_g4.G4Gameplay.test_every_member_semantics_native_policy_and_determinism) ... ok
+test_final_geometry_start_clay_and_late_failure (test_generation_g4.G4Gameplay.test_final_geometry_start_clay_and_late_failure) ... ok
+test_mirror_required_fit_and_asset_first_weight (test_generation_g4.G4Placement.test_mirror_required_fit_and_asset_first_weight) ... ok
+test_private_conflicts_wrong_road_water_and_full_span (test_generation_g4.G4Placement.test_private_conflicts_wrong_road_water_and_full_span) ... ok
+test_public_sharing_both_orders_widths_and_all_normals (test_generation_g4.G4Placement.test_public_sharing_both_orders_widths_and_all_normals) ... ok
+test_weighted_coordinates_every_transform_identity_and_immutability (test_generation_g4.G4Placement.test_weighted_coordinates_every_transform_identity_and_immutability) ... ok
+test_checksum_consistent_newest_corruption_coherent_recovery_and_failure (test_generation_g4_durability.G4Durability.test_checksum_consistent_newest_corruption_coherent_recovery_and_failure) ... ok
+test_legacy_world_new_scene_and_old_pending_dependency_edit (test_generation_g4_durability.G4Durability.test_legacy_world_new_scene_and_old_pending_dependency_edit) ... ok
+test_malformed_records_and_world_reverse_ownership (test_generation_g4_durability.G4Durability.test_malformed_records_and_world_reverse_ownership) ... ok
+test_old_visited_state_no_generation_and_adapter_checkpoint (test_generation_g4_durability.G4Durability.test_old_visited_state_no_generation_and_adapter_checkpoint) ... ok
+test_original_g3_unseen_order_geometry_and_historical_metadata (test_generation_g4_durability.G4Durability.test_original_g3_unseen_order_geometry_and_historical_metadata) ... ok
+test_ordinary_native_turns_travel_cold_restore_f9_and_late_atomicity (test_generation_g4_interactions.G4Interactions.test_ordinary_native_turns_travel_cold_restore_f9_and_late_atomicity) ... G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5035: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+ok
+test_waystone_prayer_clay_real_interactions_and_restore (test_generation_g4_interactions.G4Interactions.test_waystone_prayer_clay_real_interactions_and_restore) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 41.256s
+
+OK

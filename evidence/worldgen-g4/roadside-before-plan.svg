@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="3118 1109 164 55" width="960"><rect x="3118" y="1109" width="100%" height="100%" fill="#18252b"/>
+<text x="3120" y="1115" fill="white" font-size="3">roadside: plan diagnostic; gold roads, green occupied, red vacant, blue approaches</text>
+<rect x="3120" y="1138" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="3160" y="1138" width="81" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="3160" y="1138" width="81" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="3120" y="1138" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="3239" y="1138" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="3159" y="1138" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<g><title>settlement-1-plot-32: []</title>
+<rect x="3128" y="1135" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="3124" y="1128" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="3128.5" cy="1139.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-1-plot-33: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-32-building&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-32-building&#x27;}]</title>
+<rect x="3120" y="1142" width="17" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-1-plot-34: []</title>
+<rect x="3146" y="1135" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="3142" y="1128" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="3146.5" cy="1139.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-1-plot-35: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-34-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-34-building&#x27;}]</title>
+<rect x="3137" y="1142" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-1-plot-36: []</title>
+<rect x="3164" y="1135" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="3160" y="1128" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="3164.5" cy="1139.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-1-plot-37: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-36-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-36-building&#x27;}]</title>
+<rect x="3155" y="1142" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-1-plot-38: []</title>
+<rect x="3182" y="1135" width="4" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="3181" y="1132" width="6" height="4" fill="#68bd92" opacity="1"/>
+<circle cx="3182.5" cy="1139.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-1-plot-39: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-38-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-38-building&#x27;}]</title>
+<rect x="3173" y="1142" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-1-plot-40: []</title>
+<rect x="3208" y="1135" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="3204" y="1128" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="3208.5" cy="1139.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-1-plot-41: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-40-building&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-40-building&#x27;}]</title>
+<rect x="3200" y="1142" width="17" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-1-plot-42: []</title>
+<rect x="3226" y="1135" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="3222" y="1128" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="3226.5" cy="1139.5" r=".8" fill="white"/>
+</g>
+<g><title>settlement-1-plot-43: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-42-building&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;approach conflicts with settlement-1-plot-42-building&#x27;}]</title>
+<rect x="3217" y="1142" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-1-plot-44: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;reason&#x27;: &#x27;assigned road has no frontage at join; a different nearby road is insufficient&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;reason&#x27;: &#x27;assigned road has no frontage at join; a different nearby road is insufficient&#x27;}]</title>
+<rect x="3235" y="1119" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-1-plot-45: [{&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;assigned road has no frontage at join; a different nearby road is insufficient&#x27;}, {&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;assigned road has no frontage at join; a different nearby road is insufficient&#x27;}]</title>
+<rect x="3235" y="1142" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-1-plot-46: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;reason&#x27;: &#x27;assigned road has no frontage at join; a different nearby road is insufficient&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 0, &#x27;reason&#x27;: &#x27;assigned road has no frontage at join; a different nearby road is insufficient&#x27;}]</title>
+<rect x="3253" y="1119" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-1-plot-47: [{&#x27;asset&#x27;: &#x27;house_small_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;assigned road has no frontage at join; a different nearby road is insufficient&#x27;}, {&#x27;asset&#x27;: &#x27;market_stall_a&#x27;, &#x27;rotation&#x27;: 180, &#x27;reason&#x27;: &#x27;assigned road has no frontage at join; a different nearby road is insufficient&#x27;}]</title>
+<rect x="3253" y="1142" width="18" height="18" fill="#d37b78" opacity="0.18"/>
+</g>
+</svg>

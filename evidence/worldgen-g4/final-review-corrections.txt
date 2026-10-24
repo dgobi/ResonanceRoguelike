@@ -1,0 +1,7 @@
+test_physical_road_waystone_policy_and_reserved_resource_cells (test_generation_g4.G4Gameplay.test_physical_road_waystone_policy_and_reserved_resource_cells) ... ok
+test_malformed_records_and_world_reverse_ownership (test_generation_g4_durability.G4Durability.test_malformed_records_and_world_reverse_ownership) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 10.961s
+
+OK

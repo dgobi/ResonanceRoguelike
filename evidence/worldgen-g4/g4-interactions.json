@@ -1,0 +1,29 @@
+{
+  "start": [
+    73,
+    99
+  ],
+  "waystone": [
+    40,
+    19
+  ],
+  "inscription": "waystone_forest_a",
+  "town": [
+    75,
+    99
+  ],
+  "prayer_taken": true,
+  "clay": [
+    17,
+    26
+  ],
+  "river": [
+    50,
+    101
+  ],
+  "gather_attempts": 1,
+  "item": "clay_lump",
+  "depleted_terrain": "clay_deposit_depleted",
+  "restore": true,
+  "controls": "fixture positioning; normal interaction cursor; native AI/survival enabled; player invincible"
+}

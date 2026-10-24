@@ -1,0 +1,797 @@
+{
+  "declared_seeds": [
+    0,
+    20261023,
+    29417
+  ],
+  "runs": [
+    {
+      "seed": 0,
+      "plan_identity": "02f8f1b046f46fb889a709a1b2fafd8ca5520ce736cca0a377cba70298ad2d0e",
+      "planning_seconds": 1.128732500015758,
+      "plan_bytes": 558570,
+      "settlements": 3,
+      "placements": 77,
+      "vacancies": 4,
+      "crossings": 6,
+      "scenes_at_plan_completion": 0,
+      "settlement_planning_seconds": {
+        "settlement-0": 0.0734577999683097,
+        "settlement-1": 0.03057290002470836,
+        "settlement-2": 0.06496920000063255
+      },
+      "asset_repetition": {
+        "bell_tower_a": 2,
+        "market_stall_a": 39,
+        "house_small_a": 35,
+        "roadside_shrine_a": 1
+      },
+      "plot_occupancy": 0.9506172839506173,
+      "metric_definitions": {
+        "plot_occupancy": "occupied/all proposed plots including required landmark; historical frontage_coverage was the same number and is deprecated",
+        "per_edge_detour_ratio": "polyline length / endpoint Manhattan distance; not shortest travel on the physical network"
+      },
+      "per_edge_detour_ratio": {
+        "road-0": 1.0,
+        "road-1": 1.0,
+        "road-2": 1.0,
+        "road-3": 1.0404769375588327,
+        "road-4": 1.073903002309469,
+        "road-5": 1.1913875598086126,
+        "road-6": 1.0
+      },
+      "capital_gateway": {
+        "chunk": [
+          67,
+          68
+        ],
+        "arrival": [
+          39,
+          21
+        ],
+        "reachable_cells": 3440,
+        "all_road_cells_reachable": true
+      },
+      "legacy_macro_seconds": 0.7978290999890305,
+      "legacy_town_scene_seconds": 0.25108820002060384,
+      "slots": [
+        {
+          "form": "grid",
+          "normal": "N",
+          "status": "occupied",
+          "count": 32
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "E",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "E",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "status": "occupied",
+          "count": 32
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "W",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "W",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "status": "occupied",
+          "count": 6
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 2
+        },
+        {
+          "form": "roadside",
+          "normal": "E",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "E",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "status": "occupied",
+          "count": 6
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 2
+        },
+        {
+          "form": "roadside",
+          "normal": "W",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "W",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "N",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "E",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "E",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "S",
+          "status": "occupied",
+          "count": 1
+        },
+        {
+          "form": "landmark",
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "W",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "W",
+          "status": "vacant-garden",
+          "count": 0
+        }
+      ],
+      "reasons": [
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with road-3",
+          "count": 4
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with settlement-0-street-vertical-1",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with settlement-2-street-vertical-0",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with settlement-2-street-vertical-1",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "reason": "footprint/buffer conflicts with road-4",
+          "count": 2
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "reason": "assigned road has no frontage at join; a different nearby road is insufficient",
+          "count": 8
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "reason": "assigned road has no frontage at join; a different nearby road is insufficient",
+          "count": 8
+        }
+      ],
+      "scene_count": 13,
+      "scene_seconds_range": [
+        0.060713000013493,
+        0.4737980999634601
+      ],
+      "settlement_members": 10,
+      "native_actors": 36
+    },
+    {
+      "seed": 20261023,
+      "plan_identity": "ecb16ea71aa249b2971a8059d78c175723dd11e84b8d982121420cfea1ef74bc",
+      "planning_seconds": 1.514568600046914,
+      "plan_bytes": 691916,
+      "settlements": 4,
+      "placements": 89,
+      "vacancies": 8,
+      "crossings": 8,
+      "scenes_at_plan_completion": 0,
+      "settlement_planning_seconds": {
+        "settlement-0": 0.07908290001796558,
+        "settlement-1": 0.042418900004122406,
+        "settlement-2": 0.07977200002642348,
+        "settlement-3": 0.04056779999518767
+      },
+      "asset_repetition": {
+        "bell_tower_a": 2,
+        "house_small_a": 43,
+        "market_stall_a": 43,
+        "roadside_shrine_a": 1
+      },
+      "plot_occupancy": 0.9175257731958762,
+      "metric_definitions": {
+        "plot_occupancy": "occupied/all proposed plots including required landmark; historical frontage_coverage was the same number and is deprecated",
+        "per_edge_detour_ratio": "polyline length / endpoint Manhattan distance; not shortest travel on the physical network"
+      },
+      "per_edge_detour_ratio": {
+        "road-0": 1.0,
+        "road-1": 1.0,
+        "road-2": 1.0,
+        "road-3": 1.8792158165808275,
+        "road-4": 1.6195454545454546,
+        "road-5": 1.4305644988194892,
+        "road-6": 1.0554785020804438,
+        "road-7": 1.0
+      },
+      "capital_gateway": {
+        "chunk": [
+          66,
+          61
+        ],
+        "arrival": [
+          40,
+          20
+        ],
+        "reachable_cells": 3440,
+        "all_road_cells_reachable": true
+      },
+      "legacy_macro_seconds": 0.7744485000148416,
+      "legacy_town_scene_seconds": 0.3987459000200033,
+      "slots": [
+        {
+          "form": "grid",
+          "normal": "N",
+          "status": "occupied",
+          "count": 32
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "E",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "E",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "status": "occupied",
+          "count": 32
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "W",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "W",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "status": "occupied",
+          "count": 12
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 4
+        },
+        {
+          "form": "roadside",
+          "normal": "E",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "E",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "status": "occupied",
+          "count": 12
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 4
+        },
+        {
+          "form": "roadside",
+          "normal": "W",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "W",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "N",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "E",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "E",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "S",
+          "status": "occupied",
+          "count": 1
+        },
+        {
+          "form": "landmark",
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "W",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "W",
+          "status": "vacant-garden",
+          "count": 0
+        }
+      ],
+      "reasons": [
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with settlement-0-street-vertical-0",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with settlement-0-street-vertical-1",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with settlement-2-street-vertical-0",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with settlement-2-street-vertical-1",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "reason": "footprint/buffer conflicts with road-7",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "reason": "footprint/buffer conflicts with settlement-0-street-vertical-0",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "reason": "footprint/buffer conflicts with settlement-0-street-vertical-1",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "reason": "footprint/buffer conflicts with settlement-2-street-vertical-1",
+          "count": 2
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "reason": "approach conflicts with road-5",
+          "count": 8
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "reason": "assigned road has no frontage at join; a different nearby road is insufficient",
+          "count": 8
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "reason": "approach conflicts with road-5",
+          "count": 8
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "reason": "assigned road has no frontage at join; a different nearby road is insufficient",
+          "count": 8
+        }
+      ],
+      "scene_count": 15,
+      "scene_seconds_range": [
+        0.05884969996986911,
+        0.5514968000352383
+      ],
+      "settlement_members": 12,
+      "native_actors": 48
+    },
+    {
+      "seed": 29417,
+      "plan_identity": "fcd76f8b7724196a96051e434eeb8b763ed1caffe2ed29d3af3fa3ffb47a238a",
+      "planning_seconds": 1.4093339000246488,
+      "plan_bytes": 628333,
+      "settlements": 4,
+      "placements": 85,
+      "vacancies": 12,
+      "crossings": 13,
+      "scenes_at_plan_completion": 0,
+      "settlement_planning_seconds": {
+        "settlement-0": 0.07786620000842959,
+        "settlement-1": 0.0442126999842003,
+        "settlement-2": 0.08297370001673698,
+        "settlement-3": 0.039063200005330145
+      },
+      "asset_repetition": {
+        "bell_tower_a": 2,
+        "house_small_a": 27,
+        "market_stall_a": 55,
+        "roadside_shrine_a": 1
+      },
+      "plot_occupancy": 0.8762886597938144,
+      "metric_definitions": {
+        "plot_occupancy": "occupied/all proposed plots including required landmark; historical frontage_coverage was the same number and is deprecated",
+        "per_edge_detour_ratio": "polyline length / endpoint Manhattan distance; not shortest travel on the physical network"
+      },
+      "per_edge_detour_ratio": {
+        "road-0": 1.0,
+        "road-1": 1.0,
+        "road-2": 1.0,
+        "road-3": 1.0754716981132075,
+        "road-4": 1.157104235506158,
+        "road-5": 1.038467552775606,
+        "road-6": 1.0505848877647803,
+        "road-7": 1.0
+      },
+      "capital_gateway": {
+        "chunk": [
+          68,
+          64
+        ],
+        "arrival": [
+          39,
+          21
+        ],
+        "reachable_cells": 3440,
+        "all_road_cells_reachable": true
+      },
+      "legacy_macro_seconds": 0.7124545000260696,
+      "legacy_town_scene_seconds": 0.35520450002513826,
+      "slots": [
+        {
+          "form": "grid",
+          "normal": "N",
+          "status": "occupied",
+          "count": 32
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "E",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "E",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "status": "occupied",
+          "count": 32
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "W",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "grid",
+          "normal": "W",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "status": "occupied",
+          "count": 10
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 6
+        },
+        {
+          "form": "roadside",
+          "normal": "E",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "E",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "status": "occupied",
+          "count": 10
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 6
+        },
+        {
+          "form": "roadside",
+          "normal": "W",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "roadside",
+          "normal": "W",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "N",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "E",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "E",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "S",
+          "status": "occupied",
+          "count": 1
+        },
+        {
+          "form": "landmark",
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "W",
+          "status": "occupied",
+          "count": 0
+        },
+        {
+          "form": "landmark",
+          "normal": "W",
+          "status": "vacant-garden",
+          "count": 0
+        }
+      ],
+      "reasons": [
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with road-3",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with road-4",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "N",
+          "reason": "footprint/buffer conflicts with settlement-2-street-vertical-0",
+          "count": 2
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "reason": "footprint/buffer conflicts with road-4",
+          "count": 4
+        },
+        {
+          "form": "grid",
+          "normal": "S",
+          "reason": "footprint/buffer conflicts with settlement-0-street-vertical-0",
+          "count": 2
+        },
+        {
+          "form": "roadside",
+          "normal": "N",
+          "reason": "assigned road has no frontage at join; a different nearby road is insufficient",
+          "count": 24
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "reason": "assigned road has no frontage at join; a different nearby road is insufficient",
+          "count": 22
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "reason": "footprint/buffer conflicts with road-3",
+          "count": 2
+        },
+        {
+          "form": "roadside",
+          "normal": "S",
+          "reason": "footprint/buffer conflicts with road-4",
+          "count": 2
+        }
+      ],
+      "scene_count": 15,
+      "scene_seconds_range": [
+        0.08217880001757294,
+        0.4354149000137113
+      ],
+      "settlement_members": 12,
+      "native_actors": 48
+    }
+  ],
+  "failures": []
+}

@@ -1,0 +1,16 @@
+test_fresh_process_hash_seeds_complete_plan_and_content (test_generation_g3_lifecycle.G3Lifecycle.test_fresh_process_hash_seeds_complete_plan_and_content) ... ok
+test_pending_semantic_change_preserves_load_cached_scene_and_unaffected_placement (test_generation_g3_lifecycle.G3Lifecycle.test_pending_semantic_change_preserves_load_cached_scene_and_unaffected_placement) ... ok
+test_reference_validation_distinguishes_generated_and_unversioned_owner_maps (test_generation_g3_lifecycle.G3Lifecycle.test_reference_validation_distinguishes_generated_and_unversioned_owner_maps) ... ok
+test_startup_and_f9_restore_never_generate_plan_or_population (test_generation_g3_lifecycle.G3Lifecycle.test_startup_and_f9_restore_never_generate_plan_or_population) ... ok
+test_checksum_consistent_newest_corruption_coherent_recovery_and_failure (test_generation_g4_durability.G4Durability.test_checksum_consistent_newest_corruption_coherent_recovery_and_failure) ... ok
+test_legacy_world_new_scene_and_old_pending_dependency_edit (test_generation_g4_durability.G4Durability.test_legacy_world_new_scene_and_old_pending_dependency_edit) ... ok
+test_malformed_records_and_world_reverse_ownership (test_generation_g4_durability.G4Durability.test_malformed_records_and_world_reverse_ownership) ... ok
+test_old_visited_state_no_generation_and_adapter_checkpoint (test_generation_g4_durability.G4Durability.test_old_visited_state_no_generation_and_adapter_checkpoint) ... ok
+test_original_g3_unseen_order_geometry_and_historical_metadata (test_generation_g4_durability.G4Durability.test_original_g3_unseen_order_geometry_and_historical_metadata) ... ok
+test_every_member_semantics_native_policy_and_determinism (test_generation_g4.G4Gameplay.test_every_member_semantics_native_policy_and_determinism) ... ok
+test_final_geometry_start_clay_and_late_failure (test_generation_g4.G4Gameplay.test_final_geometry_start_clay_and_late_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 45.737s
+
+OK

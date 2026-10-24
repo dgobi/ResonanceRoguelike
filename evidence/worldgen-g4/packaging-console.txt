@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "input": "2fe0372327b1c3343c40fe92ce0d475d00555939",
+  "focused": {
+    "tests": 163,
+    "seconds": 223.622,
+    "passed": true
+  },
+  "production": {
+    "checks": 3675,
+    "passed": 3675,
+    "failed": 0,
+    "workers": 159
+  },
+  "source_inputs": 592,
+  "git_exact": 372,
+  "newline_only": 220,
+  "imports": 12125
+}

@@ -1,0 +1,442 @@
+{
+  "source_commit": "b77298119cc714cba08543eb9c7eaf8309a90402",
+  "scope": "Unmodified production _plot and Reservations on one synthetic street; existing house asset; no saves.",
+  "opposite_frontages": {
+    "south_first": {
+      "id": "fixture-plot-0",
+      "owner": "fixture",
+      "road": "shared-public-road",
+      "normal": "S",
+      "buildable": [
+        11,
+        1,
+        29,
+        19
+      ],
+      "setback": 2,
+      "placement": "fixture-plot-0-building",
+      "status": "occupied",
+      "required": false,
+      "rejected": []
+    },
+    "north_after_south": {
+      "id": "fixture-plot-1",
+      "owner": "fixture",
+      "road": "shared-public-road",
+      "normal": "N",
+      "buildable": [
+        11,
+        24,
+        29,
+        42
+      ],
+      "setback": 2,
+      "placement": null,
+      "status": "vacant-garden",
+      "required": false,
+      "rejected": [
+        {
+          "asset": "house_small_a",
+          "rotation": 180,
+          "reason": "approach conflicts with fixture-plot-0-building"
+        }
+      ]
+    },
+    "north_alone": {
+      "id": "fixture-plot-0",
+      "owner": "fixture",
+      "road": "shared-public-road",
+      "normal": "N",
+      "buildable": [
+        11,
+        24,
+        29,
+        42
+      ],
+      "setback": 2,
+      "placement": "fixture-plot-0-building",
+      "status": "occupied",
+      "required": false,
+      "rejected": []
+    },
+    "south_geometry": {
+      "footprint": [
+        16,
+        10,
+        26,
+        18
+      ],
+      "clearance": [
+        15,
+        9,
+        27,
+        19
+      ],
+      "approach": [
+        20,
+        17,
+        21,
+        22
+      ],
+      "join": [
+        20,
+        21
+      ],
+      "rotation": 0
+    },
+    "north_geometry": {
+      "footprint": [
+        15,
+        25,
+        25,
+        33
+      ],
+      "clearance": [
+        14,
+        24,
+        26,
+        34
+      ],
+      "approach": [
+        20,
+        21,
+        21,
+        26
+      ],
+      "join": [
+        20,
+        21
+      ],
+      "rotation": 180
+    },
+    "clearances_overlap": false,
+    "shared_approach_cells": [
+      [
+        20,
+        21
+      ]
+    ],
+    "shared_cells_all_in_assigned_public_road": true
+  },
+  "assigned_street_width": [
+    {
+      "actual_assigned_street_width": 5,
+      "configured_country_road_width": 1,
+      "plot": {
+        "id": "fixture-plot-0",
+        "owner": "fixture",
+        "road": "shared-public-road",
+        "normal": "S",
+        "buildable": [
+          11,
+          1,
+          29,
+          20
+        ],
+        "setback": 2,
+        "placement": null,
+        "status": "vacant-garden",
+        "required": false,
+        "rejected": [
+          {
+            "asset": "house_small_a",
+            "rotation": 0,
+            "reason": "footprint/buffer conflicts with shared-public-road"
+          }
+        ]
+      },
+      "placements": []
+    },
+    {
+      "actual_assigned_street_width": 5,
+      "configured_country_road_width": 5,
+      "plot": {
+        "id": "fixture-plot-0",
+        "owner": "fixture",
+        "road": "shared-public-road",
+        "normal": "S",
+        "buildable": [
+          11,
+          1,
+          29,
+          18
+        ],
+        "setback": 2,
+        "placement": "fixture-plot-0-building",
+        "status": "occupied",
+        "required": false,
+        "rejected": []
+      },
+      "placements": [
+        {
+          "id": "fixture-plot-0-building",
+          "asset": "house_small_a",
+          "context": "grid",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            16,
+            9
+          ],
+          "footprint": [
+            16,
+            9,
+            26,
+            17
+          ],
+          "clearance": [
+            15,
+            8,
+            27,
+            18
+          ],
+          "approach": [
+            20,
+            16,
+            21,
+            22
+          ],
+          "road": "shared-public-road",
+          "join": [
+            20,
+            21
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 20,
+              "y": 16,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 17,
+              "y": 15,
+              "kind": "readable",
+              "required": true
+            }
+          ],
+          "required": false,
+          "dependency": "house_small_a"
+        }
+      ]
+    }
+  ],
+  "ordinary_plans": [
+    {
+      "seed": 0,
+      "plot_counts": [
+        {
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 40
+        },
+        {
+          "normal": "S",
+          "status": "occupied",
+          "count": 38
+        },
+        {
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 2
+        }
+      ],
+      "north_rejections": {
+        "approach conflicts with settlement-0-plot-0-building": 2,
+        "approach conflicts with settlement-0-plot-10-building": 2,
+        "approach conflicts with settlement-0-plot-12-building": 1,
+        "approach conflicts with settlement-0-plot-14-building": 2,
+        "approach conflicts with settlement-0-plot-16-building": 2,
+        "approach conflicts with settlement-0-plot-18-building": 2,
+        "approach conflicts with settlement-0-plot-2-building": 2,
+        "approach conflicts with settlement-0-plot-20-building": 1,
+        "approach conflicts with settlement-0-plot-22-building": 2,
+        "approach conflicts with settlement-0-plot-24-building": 2,
+        "approach conflicts with settlement-0-plot-26-building": 2,
+        "approach conflicts with settlement-0-plot-28-building": 2,
+        "approach conflicts with settlement-0-plot-30-building": 2,
+        "approach conflicts with settlement-0-plot-4-building": 1,
+        "approach conflicts with settlement-0-plot-6-building": 2,
+        "approach conflicts with settlement-0-plot-8-building": 2,
+        "approach conflicts with settlement-1-plot-32-building": 2,
+        "approach conflicts with settlement-1-plot-34-building": 2,
+        "approach conflicts with settlement-1-plot-36-building": 2,
+        "approach conflicts with settlement-1-plot-38-building": 2,
+        "approach conflicts with settlement-1-plot-40-building": 2,
+        "approach conflicts with settlement-1-plot-42-building": 2,
+        "approach conflicts with settlement-2-plot-48-building": 2,
+        "approach conflicts with settlement-2-plot-50-building": 2,
+        "approach conflicts with settlement-2-plot-52-building": 1,
+        "approach conflicts with settlement-2-plot-54-building": 2,
+        "approach conflicts with settlement-2-plot-56-building": 2,
+        "approach conflicts with settlement-2-plot-58-building": 2,
+        "approach conflicts with settlement-2-plot-60-building": 2,
+        "approach conflicts with settlement-2-plot-62-building": 2,
+        "approach conflicts with settlement-2-plot-64-building": 2,
+        "approach conflicts with settlement-2-plot-66-building": 2,
+        "approach conflicts with settlement-2-plot-68-building": 1,
+        "approach conflicts with settlement-2-plot-70-building": 2,
+        "approach conflicts with settlement-2-plot-72-building": 2,
+        "approach conflicts with settlement-2-plot-74-building": 2,
+        "approach conflicts with settlement-2-plot-76-building": 2,
+        "approach conflicts with settlement-2-plot-78-building": 2,
+        "assigned road has no frontage at join; a different nearby road is insufficient": 4,
+        "footprint/buffer conflicts with road-3": 2,
+        "footprint/buffer conflicts with settlement-0-street-vertical-1": 1,
+        "footprint/buffer conflicts with settlement-2-street-vertical-0": 1,
+        "footprint/buffer conflicts with settlement-2-street-vertical-1": 1
+      },
+      "has_south_facing_occupied": true,
+      "has_north_facing_occupied": false
+    },
+    {
+      "seed": 20261023,
+      "plot_counts": [
+        {
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 48
+        },
+        {
+          "normal": "S",
+          "status": "occupied",
+          "count": 44
+        },
+        {
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 4
+        }
+      ],
+      "north_rejections": {
+        "approach conflicts with settlement-0-plot-0-building": 2,
+        "approach conflicts with settlement-0-plot-10-building": 2,
+        "approach conflicts with settlement-0-plot-12-building": 2,
+        "approach conflicts with settlement-0-plot-14-building": 2,
+        "approach conflicts with settlement-0-plot-16-building": 2,
+        "approach conflicts with settlement-0-plot-18-building": 2,
+        "approach conflicts with settlement-0-plot-2-building": 2,
+        "approach conflicts with settlement-0-plot-20-building": 1,
+        "approach conflicts with settlement-0-plot-22-building": 2,
+        "approach conflicts with settlement-0-plot-24-building": 2,
+        "approach conflicts with settlement-0-plot-26-building": 2,
+        "approach conflicts with settlement-0-plot-28-building": 2,
+        "approach conflicts with settlement-0-plot-30-building": 2,
+        "approach conflicts with settlement-0-plot-4-building": 1,
+        "approach conflicts with settlement-0-plot-6-building": 2,
+        "approach conflicts with settlement-0-plot-8-building": 2,
+        "approach conflicts with settlement-1-plot-32-building": 2,
+        "approach conflicts with settlement-1-plot-34-building": 2,
+        "approach conflicts with settlement-1-plot-36-building": 2,
+        "approach conflicts with settlement-1-plot-38-building": 2,
+        "approach conflicts with settlement-1-plot-40-building": 2,
+        "approach conflicts with settlement-1-plot-42-building": 2,
+        "approach conflicts with settlement-2-plot-48-building": 2,
+        "approach conflicts with settlement-2-plot-50-building": 2,
+        "approach conflicts with settlement-2-plot-52-building": 1,
+        "approach conflicts with settlement-2-plot-54-building": 2,
+        "approach conflicts with settlement-2-plot-56-building": 2,
+        "approach conflicts with settlement-2-plot-58-building": 2,
+        "approach conflicts with settlement-2-plot-60-building": 2,
+        "approach conflicts with settlement-2-plot-62-building": 2,
+        "approach conflicts with settlement-2-plot-64-building": 2,
+        "approach conflicts with settlement-2-plot-66-building": 2,
+        "approach conflicts with settlement-2-plot-68-building": 1,
+        "approach conflicts with settlement-2-plot-70-building": 2,
+        "approach conflicts with settlement-2-plot-72-building": 2,
+        "approach conflicts with settlement-2-plot-74-building": 2,
+        "approach conflicts with settlement-2-plot-76-building": 2,
+        "approach conflicts with settlement-2-plot-78-building": 2,
+        "approach conflicts with settlement-3-plot-80-building": 2,
+        "approach conflicts with settlement-3-plot-82-building": 2,
+        "approach conflicts with settlement-3-plot-84-building": 2,
+        "approach conflicts with settlement-3-plot-86-building": 2,
+        "approach conflicts with settlement-3-plot-88-building": 2,
+        "approach conflicts with settlement-3-plot-90-building": 2,
+        "assigned road has no frontage at join; a different nearby road is insufficient": 8,
+        "footprint/buffer conflicts with settlement-0-street-vertical-0": 1,
+        "footprint/buffer conflicts with settlement-0-street-vertical-1": 1,
+        "footprint/buffer conflicts with settlement-2-street-vertical-0": 1,
+        "footprint/buffer conflicts with settlement-2-street-vertical-1": 1
+      },
+      "has_south_facing_occupied": true,
+      "has_north_facing_occupied": false
+    },
+    {
+      "seed": 29417,
+      "plot_counts": [
+        {
+          "normal": "N",
+          "status": "vacant-garden",
+          "count": 48
+        },
+        {
+          "normal": "S",
+          "status": "occupied",
+          "count": 42
+        },
+        {
+          "normal": "S",
+          "status": "vacant-garden",
+          "count": 6
+        }
+      ],
+      "north_rejections": {
+        "approach conflicts with settlement-0-plot-0-building": 2,
+        "approach conflicts with settlement-0-plot-10-building": 2,
+        "approach conflicts with settlement-0-plot-12-building": 2,
+        "approach conflicts with settlement-0-plot-14-building": 2,
+        "approach conflicts with settlement-0-plot-16-building": 2,
+        "approach conflicts with settlement-0-plot-18-building": 2,
+        "approach conflicts with settlement-0-plot-2-building": 2,
+        "approach conflicts with settlement-0-plot-20-building": 1,
+        "approach conflicts with settlement-0-plot-22-building": 2,
+        "approach conflicts with settlement-0-plot-24-building": 2,
+        "approach conflicts with settlement-0-plot-26-building": 2,
+        "approach conflicts with settlement-0-plot-28-building": 1,
+        "approach conflicts with settlement-0-plot-30-building": 2,
+        "approach conflicts with settlement-0-plot-4-building": 1,
+        "approach conflicts with settlement-0-plot-6-building": 2,
+        "approach conflicts with settlement-0-plot-8-building": 2,
+        "approach conflicts with settlement-1-plot-36-building": 2,
+        "approach conflicts with settlement-1-plot-38-building": 2,
+        "approach conflicts with settlement-1-plot-40-building": 2,
+        "approach conflicts with settlement-1-plot-42-building": 2,
+        "approach conflicts with settlement-2-plot-48-building": 2,
+        "approach conflicts with settlement-2-plot-50-building": 2,
+        "approach conflicts with settlement-2-plot-52-building": 1,
+        "approach conflicts with settlement-2-plot-54-building": 2,
+        "approach conflicts with settlement-2-plot-56-building": 2,
+        "approach conflicts with settlement-2-plot-58-building": 2,
+        "approach conflicts with settlement-2-plot-60-building": 2,
+        "approach conflicts with settlement-2-plot-62-building": 2,
+        "approach conflicts with settlement-2-plot-64-building": 2,
+        "approach conflicts with settlement-2-plot-66-building": 2,
+        "approach conflicts with settlement-2-plot-68-building": 1,
+        "approach conflicts with settlement-2-plot-70-building": 2,
+        "approach conflicts with settlement-2-plot-72-building": 2,
+        "approach conflicts with settlement-2-plot-74-building": 2,
+        "approach conflicts with settlement-2-plot-76-building": 2,
+        "approach conflicts with settlement-2-plot-78-building": 2,
+        "approach conflicts with settlement-3-plot-80-building": 2,
+        "approach conflicts with settlement-3-plot-82-building": 2,
+        "approach conflicts with settlement-3-plot-84-building": 2,
+        "approach conflicts with settlement-3-plot-86-building": 2,
+        "approach conflicts with settlement-3-plot-88-building": 2,
+        "approach conflicts with settlement-3-plot-90-building": 2,
+        "assigned road has no frontage at join; a different nearby road is insufficient": 12,
+        "footprint/buffer conflicts with road-3": 2,
+        "footprint/buffer conflicts with road-4": 1,
+        "footprint/buffer conflicts with settlement-0-street-vertical-0": 1,
+        "footprint/buffer conflicts with settlement-2-street-vertical-0": 1
+      },
+      "has_south_facing_occupied": true,
+      "has_north_facing_occupied": false
+    }
+  ]
+}

@@ -102,6 +102,100 @@ $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\
 & $ResonancePython -X utf8 tools/verify_d.py
 ```
 
+## Measured ordinary-world results
+
+The three declared seeds completed without discarded outcomes. Planning still
+materializes zero local scenes. Occupied/vacant counts include the landmark;
+native counts cover every town member, excluding the landmark.
+
+| Seed | G3 occupied/vacant | G4 occupied/vacant | G4 town members / actors | G3 → G4 plan bytes | G4 planning seconds |
+|---|---:|---:|---:|---:|---:|
+| 0 | 39 / 42 | 77 / 4 | 10 / 36 | 527,981 → 558,570 | 1.129 |
+| 20261023 | 45 / 52 | 89 / 8 | 12 / 48 | 657,128 → 691,916 | 1.515 |
+| 29417 | 43 / 54 | 85 / 12 | 12 / 48 | 592,452 → 628,333 | 1.409 |
+
+Across these seeds, north-facing town occupancy changed from **0/136 to 124/136**;
+south-facing occupancy remains **124/136**. Required entrance/target access and
+the physical capital gateway passed for all three seeds. The full conditional
+tables retain zeros, eligible transformations, attempted transformations and
+rejection reasons; they are available in the evidence archive.
+
+Plans are about 5–6% larger while occupied plots nearly double. The changed plan
+includes more accepted placements, semantic metadata and different rejection
+records. G3's historical
+planning range was 0.599–0.706 seconds. Planning now accepts more buildings and
+performs stricter validation; native actors are created later during scene
+materialization. G4's final diagnostic ran alongside other gates, so these elapsed
+times do not isolate the cost of each change. They are observations on the reused
+production environment, not a controlled speed regression benchmark.
+
+The extended journey walked **27,001 steps** across **412 exact boundaries**, reached the landmark entrance and
+required target, and preserved coherent F9 rollback. Its worst observed transition
+was **0.498 seconds**, F5 **1.330 seconds**, F9 **0.926 seconds**, and checkpoint
+size **18,898,413 bytes**. Historical G3 values were 26,989 steps, 0.207/1.025/0.410
+seconds and 18,818,411 bytes. Journey controls and test-load differences limit
+timing comparisons; the saved starting checkpoint is not a measure of all explored
+scenes. Full scene/transition records remain available for review.
+
+The sampled local scenes took 0.061–0.474, 0.059–0.551 and 0.082–0.435 seconds
+respectively. These samples include every town member plus the starting surface,
+required crossing and landmark. The capital gateway is checked separately.
+
+## Checkpoint chain
+
+All checkpoints are unique, named tags on the existing `main` history. No
+owner work was present at the clean baseline, and no history was rewritten.
+
+| Checkpoint suffix (`checkpoint/worldgen-g4-…-20261023`) | Commit | Result |
+|---|---|---|
+| `start` | `b772981` | Clean reviewed baseline; three before probes retained. |
+| `gameplay` | `488ea54` | Settlement semantics and staged gameplay restoration. |
+| `placement` | `7776d2e` | Public-road compatibility, assigned widths and transforms. |
+| `durability` | `7d83b7b` | Durable ownership and explicit old-plan adaptation. |
+| `final-gate-inputs` | `d46e108` | First frozen run; focused timeout and generic fixture mismatch retained. |
+| `final-gate-inputs-r2` | `2fe0372` | Corrected fixture declaration and complete final input freeze. |
+| `verified` | Resolve tag | Final documentation/evidence delivery; remote commit recorded in the delivery response. |
+
+The complete final input commit is
+`2fe0372327b1c3343c40fe92ce0d475d00555939`. The first gate's production failure was
+confined to a synthetic generic-map fixture retaining a generated Chunk claim;
+the production downgrade validator was preserved. The focused timeout prompted
+a bounded 300-second runner limit and partial-output retention. Failed attempts
+are kept separately, with the corrective commit and full subsequent reruns.
+
+## Final verification
+
+All final gates passed on `2fe0372`:
+
+| Gate | Observed result |
+|---|---|
+| Complete focused discovery | 163 tests, 223.622 seconds, no skips/failures. |
+| Chromium 156.0.8078.4 | 30 checks; 65 frozen originals plus 64 final live documents round-trip. |
+| Firefox 157.0 | 30 checks; the same 129-document codec corpus and real file/download actions. |
+| Executed authoring workflow | 12 recorded commands; both edited sentinel drafts survive repeated initialization. |
+| Catalog and editor freshness | 64 assets; zero errors, 238 retained legacy warnings; editor catalog current. |
+| Diagnostic and extended journey | All three declared seeds, all members, physical gateways and lifecycle assertions pass. |
+| Unfiltered production gate | 3,675/3,675 checks across 159 workers; seven runner negative controls retained. |
+
+The focused suite ran alone after the first attempt timed out; the other final
+gates ran concurrently. The expanded focused suite and stronger durability checks
+have a higher test cost than G3's 148-test suite. Browser codec coverage is distinct
+from its bounded control/edit/download checks.
+
+Every final report reconciles to **592 identical execution inputs** and all
+**12,125 recorded worker-module imports**. Of those inputs, 372 match the input
+commit byte for byte; 220 differ only by LF/CRLF conversion. No executable, data,
+test, editor or documented fixture input changed after verification. The final
+delivery changes only this owner report and scoped evidence.
+
+The [evidence guide](../../evidence/worldgen-g4/README.md),
+[structured results](../../evidence/worldgen-g4/final-results.json) and
+[source reconciliation](../../evidence/worldgen-g4/source-reconciliation.json)
+provide exact commands, versions, outcomes and hashes. Complete final output is
+retained in a verified 127-member archive (4,066,099 bytes); development and first
+gate output is retained separately in a verified 250-member archive (7,423,354
+bytes). Every archive member was read back and checked against its inventory.
+
 ## Acceptance mapping
 
 All new tests are included in ordinary focused discovery. Test names below refer

@@ -1,0 +1,26 @@
+{
+  "kind": "headless rendering of diagnostic SVG, not game screenshot",
+  "browser": "Chromium",
+  "rows": [
+    {
+      "svg": "grid-before-plan.svg",
+      "source_sha256": "85a725731e79c892070f8591490ef74f609145cf45d17349a71c1b520387e1b9",
+      "png": "grid-before-plan.png"
+    },
+    {
+      "svg": "grid-plan.svg",
+      "source_sha256": "e024071286dbf308d453e7bd1f0a6bcae58e5e44172ee1ce2f108c82f8237a80",
+      "png": "grid-plan.png"
+    },
+    {
+      "svg": "roadside-before-plan.svg",
+      "source_sha256": "51fea0cab931c46e043c8ca4f2a35ace3f4e72a19b482a5c4e3d37cf8353adf1",
+      "png": "roadside-before-plan.png"
+    },
+    {
+      "svg": "roadside-plan.svg",
+      "source_sha256": "067cdf65a78018f2b3778bc3443496ba981afbb82bfa7dabaad9a6ad16ecef27",
+      "png": "roadside-plan.png"
+    }
+  ]
+}

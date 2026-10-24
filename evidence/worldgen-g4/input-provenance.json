@@ -1,0 +1,303 @@
+{
+  "input_zip": "C:\\Users\\dango\\Downloads\\Resonance_G4_Codex_Brief.zip",
+  "zip_sha256": "aa58009aa120e4b1c47b0b246fa11c969d66e8f6071da2198f20496fa99368e2",
+  "manifest_checks": [
+    {
+      "path": "BASELINE.json",
+      "bytes": 1989,
+      "sha256": "a400117d3c59fcc8a6cc0e5a41a1dd81dc88a569130acf0734be8c11136d1bcf",
+      "passed": true
+    },
+    {
+      "path": "CODEX_G4_COMPOSITION_RELIABILITY.md",
+      "bytes": 44561,
+      "sha256": "bc57a85d60941cdd4555cbc978ad36f57f45fb6a47a38a6ececa806755d39605",
+      "passed": true
+    },
+    {
+      "path": "G3_REVIEW.md",
+      "bytes": 30660,
+      "sha256": "f958f83df1fd95af981b5852e80109b33175f0e18bb2a4d78e1fbcf70910c298",
+      "passed": true
+    },
+    {
+      "path": "README.md",
+      "bytes": 2894,
+      "sha256": "26479f242628814a6195fed36949435dc3ef2a537b394548a8f0a488be2a96f2",
+      "passed": true
+    },
+    {
+      "path": "evidence/README.md",
+      "bytes": 7127,
+      "sha256": "271a81831de6780c4a98cc7b0b583b57bddf755717a7429b06dabac81e5609d1",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/composition/G3_COMPOSITION_REVIEW.md",
+      "bytes": 18658,
+      "sha256": "cae682018fc98795685163d07a485976f142ccc44bb324ca28da7598b310c8e3",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/composition/probe_composition_edges.json",
+      "bytes": 8816,
+      "sha256": "e9c5c8e51fdbe9e6aa460ead09ff7faa70c31214d42ae3531b6e4cc500404d41",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/composition/probe_composition_edges.py",
+      "bytes": 4620,
+      "sha256": "5fcdbbfcc612c793562ce3125f87a7e1f1192d15f1740796389f4874f296f53c",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/evidence/audit_evidence.py",
+      "bytes": 19651,
+      "sha256": "4c1a8fbbb3ef033d4d7eaec0360ed7f7187f3e370b5087c2b085f16e4901d020",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/evidence/audit_results.json",
+      "bytes": 381397,
+      "sha256": "6b1b592f10307b6382670d0bcca3f1e8d73e36a361e7f71a916c7e2c0c3a9dfd",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/evidence/audit_summary.json",
+      "bytes": 11813,
+      "sha256": "17d960b3cc1f63833588fb01adf81a2ae84b4787a337cc46098110110849aac9",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/evidence/review.md",
+      "bytes": 12636,
+      "sha256": "46aac2aff151a1167515bfe2018f4ec5f1ccb5a5a90be6d9e02b0110534fdd7f",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/persistence/G3_PERSISTENCE_REVIEW.md",
+      "bytes": 14005,
+      "sha256": "23560bdbeaa95509adecdb99e4eef4a2e5675fa110df879fcf80abbc980c8006",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/persistence/probe_saved_plan_integrity.py",
+      "bytes": 6225,
+      "sha256": "528975c065edf7eed75712179acf2335cc8741a806a6c6c4b8cb90b3c51455e8",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/persistence/saved_plan_integrity_observed.json",
+      "bytes": 1294,
+      "sha256": "70159859535bd3e7d313ec9929eb3bbfaa51c8437b1ac7db6656cbb9d606d854",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/placement/opposite_frontage_observed.json",
+      "bytes": 15660,
+      "sha256": "901775bcf9e44ead9a039a49d3fccceb10a4a6f37306fb90ddd36717a93b25c2",
+      "passed": true
+    },
+    {
+      "path": "evidence/agents/placement/probe_opposite_frontage.py",
+      "bytes": 5770,
+      "sha256": "e6f58ddf1e9dee11ca4364b79c8b6b161905577bef640f86de60004475faf4a9",
+      "passed": true
+    },
+    {
+      "path": "evidence/pinned_source_hashes.json",
+      "bytes": 113505,
+      "sha256": "96828e339dbcc24eb4d3873259165345c9b455907ca91b1c8830f257370a80b3",
+      "passed": true
+    },
+    {
+      "path": "evidence/review_summary.json",
+      "bytes": 16626,
+      "sha256": "865f0e1085217aa810b0881500deba81e15b30a440c63cd439f9157424b4fb08",
+      "passed": true
+    },
+    {
+      "path": "evidence/source_verification.json",
+      "bytes": 695,
+      "sha256": "63b98333fb5de599b4b2c36815a150d46c9c98aa57110a238cea24040668400a",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/grid-scene.svg",
+      "bytes": 502321,
+      "sha256": "c1647e6a4bfd89a8f96efd6aadd49d86c031afdbe36b4ad4f58a80b62d0378f0",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/journey-progress.json",
+      "bytes": 75883,
+      "sha256": "6c2728b263a8d52b070205bec41d4920cdac7bcd4817275c5dc3e60ecdea79a5",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/plan-0.json",
+      "bytes": 1079737,
+      "sha256": "2b7fbb08c88cfc4de20d0d1e4d277934a0acb09f8e7c50bb0da99e6639031336",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/plan-0.svg",
+      "bytes": 199017,
+      "sha256": "e591c7aac2c4e87619fcde843d6a8f7ddc613d0fff75a6cbc3528735f8cec060",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/plan-20261023.json",
+      "bytes": 1373889,
+      "sha256": "36572e70ce8dfd741058838f7cff622225f2cfd80fae8d6e440a7a97277ca44b",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/plan-20261023.svg",
+      "bytes": 224151,
+      "sha256": "d4cb110bfc5c994db8082b57f5bce0c5cb3e185027e8d530839a40683512a710",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/plan-29417.json",
+      "bytes": 1219253,
+      "sha256": "b5b01a23e09a9eae19bf892c25559bfb085dd165aba9483eb294f135cb11d2bd",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/plan-29417.svg",
+      "bytes": 215828,
+      "sha256": "64e34f7c3f06a63ca3d648fb26f6592e2fd42ad556d7f33aeb5416776151f195",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/review_run.json",
+      "bytes": 440,
+      "sha256": "235fe147efaa13e3a70fbcdc31b480a80406ba12ff7f71889a9cbbf3e7d62d04",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/roadside-scene.svg",
+      "bytes": 512462,
+      "sha256": "9a9dee75ce8cbc45cbd8034ab7e7b2dba56cb21fae2850684bf643b4686708ec",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/run.json",
+      "bytes": 170305,
+      "sha256": "303f69984bded4c03f068c29b6a459f36e0d802f9360fb50450de31a69a04fb2",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/diagnostic/runtime-log.txt",
+      "bytes": 56,
+      "sha256": "b572d58959e7652de561722aef814b7ef4fd279a22a57960efcfabc767c33140",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/focused/action_routes_stairs.json",
+      "bytes": 45470,
+      "sha256": "f5d7fec061473f699278d36fc2eda8837124384aebe127a53edbbe5b1f63b9c8",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/focused/focused-tests.txt",
+      "bytes": 25747,
+      "sha256": "d76d811ab29faaade1d98847db96006597447c2e579a9b5490efa61dd78039c4",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/focused/held_stairs.json",
+      "bytes": 759,
+      "sha256": "34564c8c8b93f8949bbd8812a26eea78f094dbe1ba9d970b56d6daf61126c39f",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/focused/review_run.json",
+      "bytes": 607,
+      "sha256": "703ac2b34fd852b74f27dc57550877fe476f241b454cd05aa39d53c896f16283",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/focused/run.json",
+      "bytes": 74342,
+      "sha256": "b20d74a2491a4686e61c8d5612c8900f08e8dbf59961d045255b5ba6e592b996",
+      "passed": true
+    },
+    {
+      "path": "evidence/verification/focused/wfc-outskirts.json",
+      "bytes": 752,
+      "sha256": "5ab774b9097a691645c823aa18e1ac59d32cc9df7139ee680884d280c21439c2",
+      "passed": true
+    }
+  ],
+  "starting_branch": "main",
+  "starting_commit": "b77298119cc714cba08543eb9c7eaf8309a90402",
+  "starting_worktree": "clean",
+  "remote_main_at_start": "b77298119cc714cba08543eb9c7eaf8309a90402",
+  "start_tag": "checkpoint/worldgen-g4-start-20261023",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "dependencies": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "probes": [
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-g4-brief-20261023\\evidence\\agents\\composition\\probe_composition_edges.py",
+        "--source",
+        ".",
+        "--output",
+        "evidence/worldgen-g4/before/composition.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "source_sha256": "5fcdbbfcc612c793562ce3125f87a7e1f1192d15f1740796389f4874f296f53c",
+      "output_sha256": "45ea4fc7460b80be2a1d991164c3ee15c5ac354f0069859b9b8edc2703f9b775",
+      "classification": "original failure-observation probe, not final positive regression"
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-g4-brief-20261023\\evidence\\agents\\placement\\probe_opposite_frontage.py",
+        "--source",
+        ".",
+        "--output",
+        "evidence/worldgen-g4/before/frontage.json",
+        "--diagnostic",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-g4-brief-20261023\\evidence\\verification\\diagnostic"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "source_sha256": "e6f58ddf1e9dee11ca4364b79c8b6b161905577bef640f86de60004475faf4a9",
+      "output_sha256": "8e09c3ef11114e881748c68fd6167d13ab1c3e8359058cbedde1eee1e34a1421",
+      "classification": "original failure-observation probe, not final positive regression"
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-g4-brief-20261023\\evidence\\agents\\persistence\\probe_saved_plan_integrity.py",
+        "--source",
+        ".",
+        "--output",
+        "evidence/worldgen-g4/before/persistence.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "exit_code": 0,
+      "source_sha256": "528975c065edf7eed75712179acf2335cc8741a806a6c6c4b8cb90b3c51455e8",
+      "output_sha256": "0d223418c163e5bc0a327f060ec2b32dc2c2906afb0cb12b7da98cda0506025b",
+      "classification": "original failure-observation probe, not final positive regression"
+    }
+  ],
+  "scope": "No personal campaigns or source copies. Attached brief supplies requested implementation scope; prior acceptance claims are historical."
+}

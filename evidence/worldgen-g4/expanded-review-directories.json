@@ -1,0 +1,18 @@
+{
+  "directories": [
+    "focused-final",
+    "browser-final",
+    "diagnostic-final",
+    "authoring-final",
+    "first-frozen-gate",
+    "focused-development",
+    "browser-development",
+    "diagnostic-development",
+    "authoring-development"
+  ],
+  "large_files": [
+    "full-gate-results.json"
+  ],
+  "ignored_review_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\g4-review-20261023",
+  "moved_after_archive_verification": true
+}

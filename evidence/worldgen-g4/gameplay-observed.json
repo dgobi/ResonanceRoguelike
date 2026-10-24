@@ -1,0 +1,675 @@
+{
+  "source_commit": "b77298119cc714cba08543eb9c7eaf8309a90402",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "scope": "One ordinary seed, selected production scenes, one synthetic weighted-definition fixture. No campaign or source mutation.",
+  "town_population": {
+    "planned_town_scenes": [
+      {
+        "chunk": [
+          39,
+          26
+        ],
+        "actors": 4,
+        "creature_ids": [
+          "grave_thing",
+          "grave_thing",
+          "grave_thing",
+          "highland_bandit"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 4
+      },
+      {
+        "chunk": [
+          40,
+          26
+        ],
+        "actors": 3,
+        "creature_ids": [
+          "plague_crow",
+          "hollow_revenant",
+          "plague_crow"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 3
+      },
+      {
+        "chunk": [
+          75,
+          99
+        ],
+        "actors": 3,
+        "creature_ids": [
+          "hollow_revenant",
+          "barrow_wight",
+          "hollow_revenant"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 3
+      },
+      {
+        "chunk": [
+          75,
+          100
+        ],
+        "actors": 6,
+        "creature_ids": [
+          "grave_thing",
+          "hollow_revenant",
+          "plague_crow",
+          "grave_thing",
+          "grave_thing",
+          "hollow_revenant"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 6
+      },
+      {
+        "chunk": [
+          76,
+          99
+        ],
+        "actors": 5,
+        "creature_ids": [
+          "hollow_revenant",
+          "grave_thing",
+          "grave_thing",
+          "grave_thing",
+          "grave_thing"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 5
+      },
+      {
+        "chunk": [
+          76,
+          100
+        ],
+        "actors": 5,
+        "creature_ids": [
+          "grave_thing",
+          "plague_crow",
+          "plague_crow",
+          "plague_crow",
+          "hollow_revenant"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 5
+      },
+      {
+        "chunk": [
+          87,
+          33
+        ],
+        "actors": 3,
+        "creature_ids": [
+          "highland_bandit",
+          "grave_thing",
+          "plague_crow"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 3
+      },
+      {
+        "chunk": [
+          88,
+          33
+        ],
+        "actors": 3,
+        "creature_ids": [
+          "grave_thing",
+          "grave_thing",
+          "grave_thing"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 3
+      },
+      {
+        "chunk": [
+          106,
+          106
+        ],
+        "actors": 3,
+        "creature_ids": [
+          "barrow_wight",
+          "barrow_wight",
+          "hollow_revenant"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 3
+      },
+      {
+        "chunk": [
+          106,
+          107
+        ],
+        "actors": 4,
+        "creature_ids": [
+          "grave_thing",
+          "grave_thing",
+          "grave_thing",
+          "grave_thing"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 4
+      },
+      {
+        "chunk": [
+          107,
+          106
+        ],
+        "actors": 4,
+        "creature_ids": [
+          "grave_thing",
+          "plague_crow",
+          "plague_crow",
+          "grave_thing"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 4
+      },
+      {
+        "chunk": [
+          107,
+          107
+        ],
+        "actors": 5,
+        "creature_ids": [
+          "grave_thing",
+          "plague_crow",
+          "plague_crow",
+          "plague_crow",
+          "grave_thing"
+        ],
+        "stored_zones": [
+          [
+            "hearth",
+            0.45
+          ],
+          [
+            "market",
+            0.2
+          ],
+          [
+            "sanctum",
+            0.15
+          ],
+          [
+            "gate_ward",
+            0.1
+          ],
+          [
+            "pale_quarter",
+            0.05
+          ],
+          [
+            "undercroft",
+            0.05
+          ]
+        ],
+        "zones_match_town": true,
+        "metadata_creature_spawns": 5
+      }
+    ],
+    "planned_native_total": 48,
+    "legacy_controls": [
+      {
+        "role": "C",
+        "chunk": [
+          20,
+          70
+        ],
+        "actors": 3,
+        "creature_ids": [
+          "hollow_revenant",
+          "barrow_wight",
+          "barrow_wight"
+        ]
+      },
+      {
+        "role": "N",
+        "chunk": [
+          20,
+          69
+        ],
+        "actors": 3,
+        "creature_ids": [
+          "grave_thing",
+          "grave_thing",
+          "grave_thing"
+        ]
+      },
+      {
+        "role": "NW",
+        "chunk": [
+          19,
+          69
+        ],
+        "actors": 6,
+        "creature_ids": [
+          "plague_crow",
+          "hollow_revenant",
+          "hollow_revenant",
+          "grave_thing",
+          "plague_crow",
+          "plague_crow"
+        ]
+      }
+    ]
+  },
+  "starting_waystone": {
+    "shared-v1": {
+      "chunk": [
+        73,
+        99
+      ],
+      "spawn": [
+        0,
+        20
+      ],
+      "waystones": 1,
+      "stairs": 1,
+      "actors": 2
+    },
+    "legacy": {
+      "chunk": [
+        73,
+        99
+      ],
+      "spawn": [
+        40,
+        21
+      ],
+      "waystones": 1,
+      "stairs": 1,
+      "actors": 2
+    }
+  },
+  "river_dressing": {
+    "shared-v1": {
+      "chunk": [
+        50,
+        101
+      ],
+      "river_water": 690,
+      "river_bank": 228,
+      "clay_deposit": 5,
+      "waystones": 0
+    },
+    "legacy": {
+      "chunk": [
+        50,
+        101
+      ],
+      "river_water": 692,
+      "river_bank": 225,
+      "clay_deposit": 5,
+      "waystones": 0
+    }
+  },
+  "weighted_transform": {
+    "input_compiles": true,
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "outer_coordinate": [
+          1,
+          6
+        ],
+        "choice_coordinate": [
+          1,
+          6
+        ],
+        "passed": true
+      },
+      {
+        "rotation": 90,
+        "mirror": false,
+        "outer_coordinate": [
+          1,
+          1
+        ],
+        "choice_coordinate": [
+          1,
+          6
+        ],
+        "passed": false,
+        "error_type": "StructureError",
+        "error": "<draft> [g3_weighted_coordinate_probe] special_tiles[0].spawn_table[0]: CHOICE_COORDINATE: Weighted alternative cannot override enclosing coordinates. Fix: Remove alternative x/y or use the exact enclosing integer coordinates."
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "outer_coordinate": [
+          8,
+          1
+        ],
+        "choice_coordinate": [
+          1,
+          6
+        ],
+        "passed": false,
+        "error_type": "StructureError",
+        "error": "<draft> [g3_weighted_coordinate_probe] special_tiles[0].spawn_table[0]: CHOICE_COORDINATE: Weighted alternative cannot override enclosing coordinates. Fix: Remove alternative x/y or use the exact enclosing integer coordinates."
+      },
+      {
+        "rotation": 270,
+        "mirror": false,
+        "outer_coordinate": [
+          6,
+          8
+        ],
+        "choice_coordinate": [
+          1,
+          6
+        ],
+        "passed": false,
+        "error_type": "StructureError",
+        "error": "<draft> [g3_weighted_coordinate_probe] special_tiles[0].spawn_table[0]: CHOICE_COORDINATE: Weighted alternative cannot override enclosing coordinates. Fix: Remove alternative x/y or use the exact enclosing integer coordinates."
+      },
+      {
+        "rotation": 0,
+        "mirror": true,
+        "outer_coordinate": [
+          8,
+          6
+        ],
+        "choice_coordinate": [
+          1,
+          6
+        ],
+        "passed": false,
+        "error_type": "StructureError",
+        "error": "<draft> [g3_weighted_coordinate_probe] special_tiles[0].spawn_table[0]: CHOICE_COORDINATE: Weighted alternative cannot override enclosing coordinates. Fix: Remove alternative x/y or use the exact enclosing integer coordinates."
+      }
+    ],
+    "source_unchanged": true
+  }
+}

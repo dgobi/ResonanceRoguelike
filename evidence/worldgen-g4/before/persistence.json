@@ -1,0 +1,54 @@
+{
+  "source_commit": "b77298119cc714cba08543eb9c7eaf8309a90402",
+  "scope": "Disposable real startup/checkpoint; checksum-consistent semantic corruptions; no source or personal saves modified.",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "removed_settlement": {
+    "removed_id": "settlement-3",
+    "destination": [
+      87,
+      33
+    ],
+    "orphan_plot_count": 16,
+    "world_chunk_region": "town",
+    "validation": {
+      "accepted": true,
+      "return_type": "bool"
+    },
+    "prepare": {
+      "accepted": true,
+      "return_type": "tuple"
+    },
+    "load": {
+      "succeeded": true,
+      "last_error": null,
+      "removed_record_absent_after_install": true
+    },
+    "new_entry": {
+      "accepted": false,
+      "exception": "StopIteration",
+      "message": ""
+    },
+    "active_scene_unchanged": true,
+    "plan_unchanged_during_failed_entry": true
+  },
+  "unsupported_rotation": {
+    "rotation": 45,
+    "validation": {
+      "accepted": true,
+      "return_type": "bool"
+    }
+  },
+  "missing_scene_markers": {
+    "surface": [
+      73,
+      99
+    ],
+    "world_chunk_revision": "wg3",
+    "map_revision_removed": "wg3",
+    "provenance_removed": true,
+    "prepare": {
+      "accepted": true,
+      "return_type": "tuple"
+    }
+  }
+}

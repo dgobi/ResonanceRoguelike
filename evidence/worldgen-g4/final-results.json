@@ -1,0 +1,365 @@
+{
+  "tested_input_commit": "2fe0372327b1c3343c40fe92ce0d475d00555939",
+  "focused": {
+    "tests": 163,
+    "seconds": 223.622,
+    "passed": true
+  },
+  "browsers": [
+    {
+      "browser": "chromium",
+      "version": "156.0.8078.4",
+      "passed": true,
+      "checks": [
+        {
+          "name": "frozen corpus matches all 65 pinned baseline blob hashes",
+          "passed": true
+        },
+        {
+          "name": "65 frozen originals plus 64 delivered catalog documents round-trip",
+          "passed": true
+        },
+        {
+          "name": "unknown metadata, null/false/zero and ordered arrays preserved",
+          "passed": true
+        },
+        {
+          "name": "duplicates and unrepresentable numbers rejected explicitly",
+          "passed": true
+        },
+        {
+          "name": "oversized document preserved read-only and explicit ragged normalization reversible",
+          "passed": true
+        },
+        {
+          "name": "real file input and download preserve cottage",
+          "passed": true
+        },
+        {
+          "name": "one terrain click changes only selected character",
+          "passed": true
+        },
+        {
+          "name": "full decor ID remains nested array",
+          "passed": true
+        },
+        {
+          "name": "decor erasing writes null only",
+          "passed": true
+        },
+        {
+          "name": "single record edit preserves unrelated data",
+          "passed": true
+        },
+        {
+          "name": "undo restores entire prior document",
+          "passed": true
+        },
+        {
+          "name": "redo restores record and all layers",
+          "passed": true
+        },
+        {
+          "name": "invalid import leaves complete current document intact",
+          "passed": true
+        },
+        {
+          "name": "cancelled file selection leaves document intact",
+          "passed": true
+        },
+        {
+          "name": "building then entrance does not leak category/decor",
+          "passed": true
+        },
+        {
+          "name": "lab starts and specials survive real download",
+          "passed": true
+        },
+        {
+          "name": "resize cancellation preserves width60 lab",
+          "passed": true
+        },
+        {
+          "name": "lab width60 to61 enlarges without truncation",
+          "passed": true
+        },
+        {
+          "name": "destructive crop reports refusal",
+          "passed": true
+        },
+        {
+          "name": "refused crop preserves complete width61 document",
+          "passed": true
+        },
+        {
+          "name": "undo enlargement restores original lab",
+          "passed": true
+        },
+        {
+          "name": "used-legend deletion gives explicit error",
+          "passed": true
+        },
+        {
+          "name": "failed legend edit is atomic",
+          "passed": true
+        },
+        {
+          "name": "deliberate start edit changes one field",
+          "passed": true
+        },
+        {
+          "name": "real placement panel edit/download preserves complete document",
+          "passed": true
+        },
+        {
+          "name": "explicit weighted child coordinates and allowed mirror survive real download",
+          "passed": true
+        },
+        {
+          "name": "no browser script errors",
+          "passed": true
+        },
+        {
+          "name": "downloaded JSON passes shared runtime preview and actual existing-pool selection",
+          "passed": true
+        },
+        {
+          "name": "downloaded placement metadata passes CLI and production planned placement",
+          "passed": true
+        },
+        {
+          "name": "downloaded explicit weighted coordinates pass all eight rotations/reflections",
+          "passed": true
+        }
+      ],
+      "codec_documents": 129
+    },
+    {
+      "browser": "firefox",
+      "version": "157.0",
+      "passed": true,
+      "checks": [
+        {
+          "name": "frozen corpus matches all 65 pinned baseline blob hashes",
+          "passed": true
+        },
+        {
+          "name": "65 frozen originals plus 64 delivered catalog documents round-trip",
+          "passed": true
+        },
+        {
+          "name": "unknown metadata, null/false/zero and ordered arrays preserved",
+          "passed": true
+        },
+        {
+          "name": "duplicates and unrepresentable numbers rejected explicitly",
+          "passed": true
+        },
+        {
+          "name": "oversized document preserved read-only and explicit ragged normalization reversible",
+          "passed": true
+        },
+        {
+          "name": "real file input and download preserve cottage",
+          "passed": true
+        },
+        {
+          "name": "one terrain click changes only selected character",
+          "passed": true
+        },
+        {
+          "name": "full decor ID remains nested array",
+          "passed": true
+        },
+        {
+          "name": "decor erasing writes null only",
+          "passed": true
+        },
+        {
+          "name": "single record edit preserves unrelated data",
+          "passed": true
+        },
+        {
+          "name": "undo restores entire prior document",
+          "passed": true
+        },
+        {
+          "name": "redo restores record and all layers",
+          "passed": true
+        },
+        {
+          "name": "invalid import leaves complete current document intact",
+          "passed": true
+        },
+        {
+          "name": "cancelled file selection leaves document intact",
+          "passed": true
+        },
+        {
+          "name": "building then entrance does not leak category/decor",
+          "passed": true
+        },
+        {
+          "name": "lab starts and specials survive real download",
+          "passed": true
+        },
+        {
+          "name": "resize cancellation preserves width60 lab",
+          "passed": true
+        },
+        {
+          "name": "lab width60 to61 enlarges without truncation",
+          "passed": true
+        },
+        {
+          "name": "destructive crop reports refusal",
+          "passed": true
+        },
+        {
+          "name": "refused crop preserves complete width61 document",
+          "passed": true
+        },
+        {
+          "name": "undo enlargement restores original lab",
+          "passed": true
+        },
+        {
+          "name": "used-legend deletion gives explicit error",
+          "passed": true
+        },
+        {
+          "name": "failed legend edit is atomic",
+          "passed": true
+        },
+        {
+          "name": "deliberate start edit changes one field",
+          "passed": true
+        },
+        {
+          "name": "real placement panel edit/download preserves complete document",
+          "passed": true
+        },
+        {
+          "name": "explicit weighted child coordinates and allowed mirror survive real download",
+          "passed": true
+        },
+        {
+          "name": "no browser script errors",
+          "passed": true
+        },
+        {
+          "name": "downloaded JSON passes shared runtime preview and actual existing-pool selection",
+          "passed": true
+        },
+        {
+          "name": "downloaded placement metadata passes CLI and production planned placement",
+          "passed": true
+        },
+        {
+          "name": "downloaded explicit weighted coordinates pass all eight rotations/reflections",
+          "passed": true
+        }
+      ],
+      "codec_documents": 129
+    }
+  ],
+  "production": {
+    "checks": 3675,
+    "passed": 3675,
+    "failed": 0,
+    "workers": 159
+  },
+  "runner_negative_controls": 7,
+  "source_inputs": 592,
+  "authoring_commands": 12,
+  "sentinel_drafts": 2,
+  "catalog": {
+    "assets": 64,
+    "warnings": 238,
+    "errors": 0
+  },
+  "diagnostic": {
+    "seeds": [
+      0,
+      20261023,
+      29417
+    ],
+    "failed_outcomes": [],
+    "passed": true
+  },
+  "journey": {
+    "seed": 20261023,
+    "fixture": "ordinary production world; native actors retained as stationary obstacles; AI/survival turn updates paused; movement, doors, stairs, interactions, travel and save handlers unchanged",
+    "steps": 27001,
+    "destinations": [
+      "start-surface-exit",
+      "crossing-near",
+      "crossing-far",
+      "settlement-0",
+      "settlement-1",
+      "landmark"
+    ],
+    "interaction": {
+      "placement": "settlement-0-plot-4-building",
+      "target": [
+        47,
+        16
+      ],
+      "initial_items": 5,
+      "remaining_items": 4
+    },
+    "checkpoint_seconds": 1.3296522999880835,
+    "landmark_access": {
+      "placement": "landmark-plot-96-building",
+      "join": [
+        6040,
+        4106
+      ],
+      "entrance": {
+        "id": "main",
+        "x": 6040,
+        "y": 4103,
+        "normal": "S",
+        "width": 2,
+        "role": "main",
+        "required": true
+      },
+      "target": {
+        "x": 6040,
+        "y": 4100,
+        "kind": "container",
+        "required": true
+      },
+      "player_local": [
+        40,
+        16
+      ]
+    },
+    "bridge_ids_walked": [
+      "crossing-0",
+      "crossing-1",
+      "crossing-2",
+      "crossing-3",
+      "crossing-4",
+      "crossing-5",
+      "crossing-6",
+      "crossing-7"
+    ],
+    "materialized_scenes_before_f9": 182,
+    "restore_seconds": 0.9257962999981828,
+    "f9_restored_coherent_start_checkpoint": true,
+    "worst_transition_seconds": 0.49797480000415817,
+    "checkpoint_bytes": 18898413,
+    "passed": true,
+    "exact_boundary_transitions": 412
+  },
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "dependencies": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "passed": true,
+  "timing_context": "Focused suite alone; other final gates launched concurrently. Timings are observations under test load, not controlled hardware benchmarks.",
+  "archive_policy": "No saves, environments, browsers or source archives; complete generated reports and downloaded JSON only."
+}
