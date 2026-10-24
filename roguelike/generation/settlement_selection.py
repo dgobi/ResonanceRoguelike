@@ -65,13 +65,15 @@ def profile_for(plan, owner):
     return plan['selection']['profiles'][context]
 
 
-def eligible(plan, owner, role, slot_order):
+def eligible(plan, owner, role, slot_order, *, location=None):
     """Only accepted occupants consume caps. Neighbor is stable spatial order."""
     profile=profile_for(plan,owner)
     plots=[p for p in plan['plots'] if p['owner']==owner and p['placement']]
     placements={p['id']:p for p in plan['placements']}
     counts=Counter(placements[p['placement']]['asset'] for p in plots)
-    neighbor=min(plots,key=lambda p:(abs(p['slot_order']-slot_order),p['slot_order'])) if plots else None
+    if location is not None:
+        neighbor=min(plots,key=lambda p:(abs(p['join'][0]-location[0])+abs(p['join'][1]-location[1]),p['id'])) if plots else None
+    else:neighbor=min(plots,key=lambda p:(abs(p['slot_order']-slot_order),p['slot_order'])) if plots else None
     previous=placements[neighbor['placement']]['asset'] if neighbor else None
     rows=[];excluded=[]
     for rule in sorted(profile['roles'][role],key=lambda row:row['asset']):
@@ -82,7 +84,7 @@ def eligible(plan, owner, role, slot_order):
     return rows,excluded
 
 
-def populate_settlement(plan, authority, data, settlement, slots):
+def populate_settlement(plan, authority, data, settlement, slots, *, work=None):
     """Reserve minima first with bounded backtracking; then fill optional slots.
 
     Slot order follows distance from the original civic/arrival slot. Required
@@ -92,7 +94,15 @@ def populate_settlement(plan, authority, data, settlement, slots):
     profile=profile_for(plan,settlement['id']);sid=settlement['id']
     required=[role for role in ('civic','commercial','residential','support') for _ in range(profile['minimum'].get(role,0))]
     attempts=0; failures=[]; exhausted=False
+    composed=plan.get("version")==6
+    work=work if work is not None else dict(attempts=0,budget=profile["required_fit_budget"])
     def fit(p,a,slot,role,option=None):
+        if composed:
+            join=slot['join'];wx,wy=join[0]//80,join[1]//43
+            # Join and full private region must share the storage chunk.
+            wx,wy=slot['bounds'][0]//80,slot['bounds'][1]//43
+            return _plot(p,a,data,sid,'civic' if role=='civic' else settlement['form'],wx,wy,join[0]-wx*80,join[1],slot['frontage']['normal'],slot['frontage']['road'],
+                         role=role,slot_order=slot['order'],option=option,identity=slot['id'],explicit_bounds=slot['bounds'],lot=slot)
         wx,wy,lx,line_y,normal,rid,order=slot
         return _plot(p,a,data,sid,'civic' if role=='civic' else settlement['form'],wx,wy,lx,line_y,normal,rid,
                      role=role,slot_order=order,option=option)
@@ -100,13 +110,19 @@ def populate_settlement(plan, authority, data, settlement, slots):
         nonlocal attempts,exhausted
         if index==len(required):return p,a,remaining
         role=required[index]
-        for slot in remaining:
-            options,_,_=plot_options(p,data,sid,'civic' if role=='civic' else settlement['form'],slot[4],role=role,slot_order=slot[-1])
+        candidates=[s for s in remaining if not composed or s['civic']==(role=='civic')]
+        if composed and role=='commercial' and settlement['form']=='grid':
+            anchor=next(s['join'] for s in slots if s['civic'])
+            candidates.sort(key=lambda s:(abs(s['join'][0]-anchor[0])+abs(s['join'][1]-anchor[1]),s['order'],s['id']))
+        for slot in candidates:
+            if composed:
+                options,_,_=plot_options(p,data,sid,'civic' if role=='civic' else settlement['form'],slot['frontage']['normal'],role=role,slot_order=slot['order'],identity=slot['id'],location=slot['join'])
+            else:options,_,_=plot_options(p,data,sid,'civic' if role=='civic' else settlement['form'],slot[4],role=role,slot_order=slot[-1])
             for option in options:
-                if attempts>=profile['required_fit_budget']:exhausted=True;return None
-                attempts+=1;q,b=staged(p,a);plot=fit(q,b,slot,role,option=option)
+                if work['attempts']>=work['budget']:exhausted=True;return None
+                attempts+=1;work['attempts']+=1;q,b=staged(p,a);plot=fit(q,b,slot,role,option=option)
                 if not plot['placement']:
-                    failures.append(dict(role=role,slot=slot[-1],asset=option[0],rejected=plot['rejected']));failures[:]=failures[-16:];continue
+                    failures.append(dict(role=role,slot=slot['id'] if composed else slot[-1],asset=option[0],rejected=plot['rejected']));failures[:]=failures[-16:];continue
                 plot['required']=True;q['placements'][-1]['required']=True
                 found=search(q,b,[s for s in remaining if s!=slot],index+1)
                 if found:return found
@@ -121,7 +137,7 @@ def populate_settlement(plan, authority, data, settlement, slots):
     authority.rows=used.rows;authority.index=used.index
     plan['diagnostics'].append(dict(kind='required-role-search',owner=sid,attempts=attempts,budget=profile['required_fit_budget'],budget_unit='one transform fit or empty-frontage asset trial',rejected=failures))
     for slot in remaining:
-        role=profile['schedule'][slot[-1]%len(profile['schedule'])]
+        role=profile['schedule'][(slot['order'] if composed else slot[-1])%len(profile['schedule'])]
         fit(plan,authority,slot,role)
     settlement['plots']=[p['id'] for p in plan['plots'] if p['owner']==sid]
     civic=next((p for p in plan['plots'] if p['owner']==sid and p['role']=='civic'),None)

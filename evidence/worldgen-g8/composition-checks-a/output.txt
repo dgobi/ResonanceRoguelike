@@ -1,0 +1,10 @@
+test_each_layout_cardinal_frontage_and_reorder_reverse_visit_determinism (test_generation_g8_layout.G8Layout.test_each_layout_cardinal_frontage_and_reorder_reverse_visit_determinism) ... ok
+test_full_door_spans_all_normals_widths_private_and_public_negatives (test_generation_g8_layout.G8Layout.test_full_door_spans_all_normals_widths_private_and_public_negatives) ... ok
+test_independent_layout_and_parent_policy_versions (test_generation_g8_layout.G8Layout.test_independent_layout_and_parent_policy_versions) ... ok
+test_invalid_geometry_and_atomic_required_capacity_failure (test_generation_g8_layout.G8Layout.test_invalid_geometry_and_atomic_required_capacity_failure) ... ok
+test_ordinary_matrix_unchanged_country_and_full_population (test_generation_g8_layout.G8Layout.test_ordinary_matrix_unchanged_country_and_full_population) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 35.018s
+
+OK

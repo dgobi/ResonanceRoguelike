@@ -13,7 +13,7 @@ def main():
     game = root / 'roguelike'
     run = Path(job['run_root']).resolve()
     saves = Path(job['save_root']).resolve()
-    allowed_roots=(root/'.baseline',root/'evidence/worldgen-g6',root/'evidence/worldgen-g7')
+    allowed_roots=(root/'.baseline',root/'evidence/worldgen-g6',root/'evidence/worldgen-g7',root/'evidence/worldgen-g8')
     assert any(run.is_relative_to(base) and run!=base for base in allowed_roots)
     marker=read(run/'disposable-b3.json')
     assert marker=={'kind':'test saves and evidence only','production_source':str(game)}

@@ -41,8 +41,8 @@ class G4Durability(unittest.TestCase):
         first={xy:fingerprint((r:=self.scene(xy,w)).local_map,r.actors,r.metadata.town_data) for xy in keys}
         second={xy:fingerprint((r:=self.scene(xy,w)).local_map,r.actors,r.metadata.town_data) for xy in reversed(keys)}
         self.assertEqual(first,second); self.assertEqual(digest(w.plan),geometry); self.assertEqual(digest(_serialize_world(w)),before)
-        r=self.scene(keys[0],w); self.assertEqual(r.local_map.generation_revision,'wg7')
-        self.assertEqual(r.local_map.plan_provenance['adapter'],'g3-to-g7-v1'); self.assertEqual(r.local_map.plan_provenance['plan_revision'],'wg3')
+        r=self.scene(keys[0],w); self.assertEqual(r.local_map.generation_revision,'wg8')
+        self.assertEqual(r.local_map.plan_provenance['adapter'],'g3-to-g8-v1'); self.assertEqual(r.local_map.plan_provenance['plan_revision'],'wg3')
         self.assertGreater(len(r.actors),0)
         # A real cold world reconstruction preserves old values rather than deriving new policy.
         cold=WorldMap(128,128);_deserialize_world(_serialize_world(w),cold)
@@ -149,7 +149,7 @@ class G4Durability(unittest.TestCase):
         generate_world(w,self.data,random.Random(0),plan_mode='legacy'); w.generation_revision='wg2'
         e.world_map=w
         # Separate legacy/no-plan positive uses its real no-plan generated scene.
-        xy=(w.start_wx,w.start_wy);r=self.scene(xy,w);w.get(*xy).generation_revision='wg7'
+        xy=(w.start_wx,w.start_wy);r=self.scene(xy,w);w.get(*xy).generation_revision='wg8'
         e.save_manager.cache.store(*xy,r.local_map,r.actors)
         self.assertFalse(hasattr(r.local_map,'plan_provenance'));self.assertTrue(e.save_manager.save(e));self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
         old=self.old_world();before=digest(old.plan);data=copy.copy(self.data);data.structures=copy.deepcopy(data.structures)

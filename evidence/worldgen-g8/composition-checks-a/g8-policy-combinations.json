@@ -1,0 +1,32 @@
+[
+  {
+    "legacy_layout": false,
+    "poi": "mixed",
+    "version": 6,
+    "origin": "wg8"
+  },
+  {
+    "legacy_layout": false,
+    "poi": "single",
+    "version": 6,
+    "origin": "wg8"
+  },
+  {
+    "legacy_layout": false,
+    "poi": "zero",
+    "version": 6,
+    "origin": "wg8"
+  },
+  {
+    "legacy_layout": true,
+    "poi": "mixed",
+    "version": 5,
+    "origin": "wg7"
+  },
+  {
+    "legacy_layout": true,
+    "poi": "single",
+    "version": 4,
+    "origin": "wg6"
+  }
+]

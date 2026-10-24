@@ -36,6 +36,11 @@ def dress(m, chunk, world, data, context, native, spawn):
                 if civic and (not allowed(x+1,y) or (x+1,y) not in reached): continue
                 candidates.append((abs(x-m.width//2)+abs(y-m.height//2),x,y))
         # A start without a road still needs its reachable interaction.
+        if civic and getattr(m,'civic_furnishing',[]):
+            stone,prayer=m.civic_furnishing
+            if (prayer!=(stone[0]+1,stone[1]) or any(p not in reached or p in m.decor or p in m.floor_objects or p in m.container_state for p in (stone,prayer))):
+                raise GenerationError('saved civic furnishing has no clear reachable native site')
+            candidates=[(0,*stone)]
         if start and not candidates:
             candidates=[(abs(x-spawn[0])+abs(y-spawn[1]),x,y) for x,y in sorted(reached)
                         if 0<x<m.width-1 and 0<y<m.height-1 and allowed(x,y)]

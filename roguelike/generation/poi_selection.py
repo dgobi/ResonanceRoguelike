@@ -191,7 +191,7 @@ def populate(plan,authority,world,data,metrics=None,*,candidate_rows=None):
 
 def validate_resolved(plan,registries):
     """Saved self-contained policy and bidirectional ownership, no live selector."""
-    if plan['version']>=5:
+    if plan['poi_policy']['version']==2:
         from generation.parent_selection import validate_resolved
         return validate_resolved(plan,registries)
     from generation.world_plan import address,bands,bounds,intersect

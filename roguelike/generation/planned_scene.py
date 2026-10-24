@@ -20,6 +20,10 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
     section=slice_plan(world.plan,chunk.wx,chunk.wy)
     # Check only pending selected placements. Cached scenes bypass this function.
     definitions={p['id']:check_dependencies(p,world.plan,data) for p in section['placements']}
+    for public in section.get('public_spaces',[]):
+        surface=data.terrain.get(public['surface'])
+        if surface is None or digest({k:surface.get(k,True) for k in ('walkable','transparent')})!=public['surface_dependency']:
+            raise GenerationError(public['id']+': changed dependency terrain:'+public['surface'])
     staged=copy.deepcopy(chunk); base=copy.deepcopy(chunk); base.submaps=[]; base.town_data=None
     base.edges={e:[] for e in base.edges}; base.town_id=-1; base.town_role=''
     if base.region_type==RegionType.TOWN: base.region_type=RegionType.PLAINS
@@ -49,6 +53,12 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
         for r in road['rects']: road_cells.update(local(r))
     if (road_cells&water_cells)-deck: raise GenerationError('road crosses water without an assigned bridge')
     paint(road_cells-water_cells,'road_0'); paint(deck,'cobblestone'); protected.update(road_cells)
+    m.civic_furnishing=[]
+    for public in section.get('public_spaces',[]):
+        common=set().union(*(local(r) for r in public['rects']))
+        paint(common,public['surface']);protected.update(common)
+        if all(rect[0]<=a<rect[2] and rect[1]<=b<rect[3] for a,b in public['furnishing']):
+            m.civic_furnishing=[(a-x0,b-y0) for a,b in public['furnishing']]
     for site in section.get('sites',[]):
         common=local(site['approach'])
         for path in section['paths']:
@@ -119,9 +129,10 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
                        'placements':[p['id'] for p in section['placements']],
                        'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
                        'plan_identity':digest(world.plan),
-                       'dependency_projection':'structure-v1','adapter':adapter('wg7',world.plan['version'])}
+                       'dependency_projection':'structure-v1','adapter':adapter('wg8',world.plan['version'])}
     if world.plan['version']>=5:
         m.plan_provenance.update(paths=[p['id'] for p in section['paths']],compounds=[s['id'] for s in section['sites']])
+    if world.plan['version']==6:m.plan_provenance['public_spaces']=[c['id'] for c in section['public_spaces']]
     # These are actual first-creation inputs, not invented historical G3 hashes.
     m.native_input_provenance={f'entities:{a._creature_id}':digest(data.entities[a._creature_id]) for a in actors}
     m.native_input_provenance.update({f'terrain:{tid}':digest(data.terrain[tid]) for tid in ('dead_wood','flint_rock','clay_deposit')})
@@ -133,7 +144,7 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
         mapped=data.text_item_map.get('waystone_prayer_a','letter')
         m.native_input_provenance['prayer-item:'+mapped]=digest(data.items[mapped])
     m.native_generation_context=native
-    m.generation_revision='wg7'; m.generation_complete=True
+    m.generation_revision='wg8'; m.generation_complete=True
     return SceneResult(m,actors,spawn,staged,receipts)
 
 
@@ -142,6 +153,10 @@ def validate_access(m,section,data,wx,wy):
     from generation.structure_preview import check_access
     x0,y0=wx*W,wy*H
     road=set(m.road_cells)
+    for public in section.get('public_spaces',[]):
+        clear={(x-x0,y-y0) for r in public['rects'] for x,y in cells(r)}-{(a-x0,b-y0) for a,b in public['furnishing']}
+        reached=reachable(m,min(road),data) if road else set()
+        if not clear<=reached or any(not enterable(m,xy,data) for xy in clear):raise GenerationError(public['id']+': public common circulation blocked after contents/dressing/population')
     for site in section.get('sites',[]):
         reached=reachable(m,(site['attachment']['join'][0]-x0,site['attachment']['join'][1]-y0),data)
         needed=cells(site['approach'])

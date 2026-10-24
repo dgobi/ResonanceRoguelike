@@ -32,6 +32,10 @@ def main(argv=None):
     p.add_argument('--assigned-compound',choices=list('NESW'),help='Controlled one-compound preview with this gate normal')
     p.add_argument('--compound-rotation',type=int,choices=[0,90,180,270],help='One permitted parent transform for assigned preview')
     p.add_argument('--init-compound',type=Path,help='Create complete recipe, child and v2 policy drafts; never overwrite existing files')
+    p.add_argument('--layout-config',type=Path,help='Complete version-one settlement layout settings, previewed without installation')
+    p.add_argument('--layout',help='Controlled choice of one grid layout ID; ordinary selection when omitted')
+    p.add_argument('--settlement-preview',choices=['grid','roadside','all'],help='Materialize every member of selected settlements')
+    p.add_argument('--init-settlement',type=Path,help='Copy complete layout, role-selection and planning drafts; preserve existing files')
     p.add_argument('--poi-config',type=Path,help='Complete version-one or version-two parent policy override')
     p.add_argument('--context',choices=['grid','roadside','civic','landmark'],default='grid')
     p.add_argument('--role',choices=['residential','commercial','support','civic','landmark'])
@@ -55,12 +59,16 @@ def main(argv=None):
     log=io.StringIO()
     try:
         from authoring_outputs import Destinations
-        inputs=[(name,getattr(args,name)) for name in ('candidate','compound','poi_config','selection_config','config','access')]
+        if args.init_compound and args.init_settlement:raise ValueError('choose one initializer per invocation')
+        inputs=[(name,getattr(args,name)) for name in ('candidate','compound','poi_config','selection_config','config','access','layout_config')]
         inputs.extend(('--child',path) for path in args.child)
         catalog_path=args.editor_catalog or ROOT/'tools/structure_editor/catalog.js'
         if args.check_editor_catalog and not args.refresh_editor_catalog:inputs.append(('--editor-catalog',catalog_path))
         initializers=[(args.init_compound/name,game/'docs/examples'/name) for name in
                       ('g7_travellers_court.json','g7_wayhouse.json','g7_poi_example.json')] if args.init_compound else []
+        if args.init_settlement:
+            initializers=[(args.init_settlement/target,(args.data_root or game/'data')/'generation'/source) for target,source in
+                          [('g8_layouts.json','settlement_layouts.json'),('g8_selection.json','settlement_profiles.json'),('g8_planning.json','g3_config.json')]]
         inputs.extend(('initializer source',source) for _,source in initializers)
         boundary=Destinations(inputs,[game,args.data_root or game/'data'])
         known=[('initializer',target,'initializer') for target,_ in initializers]
@@ -68,11 +76,18 @@ def main(argv=None):
         if args.output:
             if args.output.suffix.lower()!='.json':raise ValueError('--output must be a .json report')
             known.append(('--output',args.output,'diagnostic'))
-            if args.compound or args.world_plan or args.planned or args.site or args.assigned_site:
+            if args.compound or args.world_plan or args.planned or args.site or args.assigned_site or args.settlement_preview or args.layout:
                 known.append(('plan diagram',args.output.with_suffix('.svg'),'diagnostic'))
         boundary.validate(known)
         artifacts=[]
         with contextlib.redirect_stdout(log): data=DataLoader(str(args.data_root or game/'data'))
+        if args.layout_config or args.layout:
+            from generation.settlement_layout import validate
+            data.settlement_layouts=validate(read_document(args.layout_config) if args.layout_config else data.settlement_layouts,data)
+            if args.layout:
+                choices=[row for row in data.settlement_layouts['grid'] if row['id']==args.layout]
+                if not choices:raise GenerationError('unknown layout '+args.layout)
+                data.settlement_layouts['grid']=choices
         if args.poi_config:data.poi_profiles=read_document(args.poi_config)
         manifest=data.structure_catalog.manifest()
         if args.refresh_editor_catalog or args.check_editor_catalog:
@@ -88,15 +103,20 @@ def main(argv=None):
                 artifacts.append(('editor catalog',destination,'catalog',content.encode('utf-8')))
             elif not destination.exists() or destination.read_text(encoding='utf-8')!=content:
                 raise GenerationError('Editor catalog is stale. Run --refresh-editor-catalog and repeat runtime validation.')
-        if args.init_compound:
-            folder=args.init_compound.resolve()
-            if folder.is_relative_to(game):raise GenerationError('--init-compound must use a draft directory outside the installed game')
+        if args.init_compound or args.init_settlement:
+            folder=(args.init_compound or args.init_settlement).resolve()
             created=[];preserved=[]
             for target,source in initializers:
                 if target.exists():preserved.append(target.name)
                 else:created.append(target.name)
                 artifacts.append(('initializer',target,'initializer',source.read_bytes()))
             report=dict(passed=True,created=created,preserved=preserved,directory=str(folder))
+        elif args.settlement_preview or (args.layout and not args.planned):
+            from generation.settlement_preview import preview as settlement_preview
+            with contextlib.redirect_stdout(log):
+                report=settlement_preview(data,args.seed,layout=args.layout,form=args.settlement_preview or 'grid',
+                                          selection=read_document(args.selection_config) if args.selection_config else None,
+                                          config=read_document(args.config) if args.config else None)
         elif args.compound:
             from generation.compound_preview import preview as compound_preview
             with contextlib.redirect_stdout(log):
@@ -150,6 +170,11 @@ def main(argv=None):
             if 'plan' in report:
                 from generation.plan_preview import plan_svg
                 artifacts.append(('plan diagram',output.with_suffix('.svg'),'diagnostic',plan_svg(report['plan']).encode('utf-8')))
+                if report.get('settlement_ids'):
+                    from generation.settlement_preview import diagram
+                    for settlement in report['plan']['settlements']:
+                        if settlement['id'] in report['settlement_ids']:
+                            artifacts.append(('settlement diagram',output.with_name(output.stem+'-'+settlement['id']+'-plan.svg'),'diagnostic',diagram(report['plan'],settlement).encode('utf-8')))
                 if args.site or args.assigned_site:
                     from worldgen_g6_diagnostic import site_svg
                     for site in report['plan']['sites']:
@@ -159,7 +184,7 @@ def main(argv=None):
                           'diagnostics':len(manifest['diagnostics']),'output':str(args.output) if args.output else None,
                           'previews':len(report.get('previews',[])),
                           'registration':bool(report.get('registration')),'status':report.get('status'),
-                          **({k:report[k] for k in ('created','preserved','directory')} if args.init_compound else {})},indent=2))
+                          **({k:report[k] for k in ('created','preserved','directory')} if args.init_compound or args.init_settlement else {})},indent=2))
         if not args.output and args.catalog: print(json.dumps(manifest,indent=2))
         return 0 if report['passed'] else 1
     except (GenerationError,ValueError) as error:

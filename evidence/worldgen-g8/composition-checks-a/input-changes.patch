@@ -1,0 +1,642 @@
+diff --git a/roguelike/data/generation/g3_config.json b/roguelike/data/generation/g3_config.json
+index 77d6f6e..d2c59c4 100644
+--- a/roguelike/data/generation/g3_config.json
++++ b/roguelike/data/generation/g3_config.json
+@@ -1,5 +1,5 @@
+ {
+-  "version": 2,
++  "version": 3,
+   "settlement_count": [
+     2,
+     4
+@@ -17,5 +17,6 @@
+   "max_spur_tiles": 12,
+   "route_search_nodes": 16384,
+   "site_search_limit": 16384,
+-  "selection_profile_version": 1
++  "selection_profile_version": 1,
++  "settlement_layout_version": 1
+ }
+diff --git a/roguelike/engine/data_loader.py b/roguelike/engine/data_loader.py
+index 9f3752a..7d01c7b 100644
+--- a/roguelike/engine/data_loader.py
++++ b/roguelike/engine/data_loader.py
+@@ -32,6 +32,7 @@ class DataLoader:
+         self.buildings:         dict = {}
+         self.town_config:       dict = self._load("generation/town_config.json")
+         self.g3_config:         dict = self._load("generation/g3_config.json")
++        self.settlement_layouts: dict = self._load("generation/settlement_layouts.json")
+         self.settlement_profiles: dict = self._load("generation/settlement_profiles.json")
+         self.poi_profiles: dict = self._load("generation/poi_profiles.json")
+         self.compounds: dict = self._load_dir("generation/compounds")
+diff --git a/roguelike/engine/save_manager.py b/roguelike/engine/save_manager.py
+index 8fc7628..1103ba3 100644
+--- a/roguelike/engine/save_manager.py
++++ b/roguelike/engine/save_manager.py
+@@ -368,11 +368,11 @@ class SaveManager:
+                 if chunk is None: raise SaveFormatError('surface owner has no world Chunk: '+scene.name)
+                 map_revision=getattr(m,'generation_revision',None)
+                 chunk_revision=getattr(chunk,'generation_revision',None)
+-                if map_revision not in ('wg3','wg4','wg5','wg6','wg7') and chunk_revision not in ('wg3','wg4','wg5','wg6','wg7'):
++                if map_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8') and chunk_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8'):
+                     if map_revision not in (None,'legacy-unversioned','wg1','wg2') or chunk_revision not in (None,'legacy-unversioned','wg1','wg2'):
+                         raise SaveFormatError('unsupported surface generation revision: '+scene.name)
+                     continue
+-                if map_revision not in ('wg3','wg4','wg5','wg6','wg7') or chunk_revision!=map_revision:
++                if map_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8') or chunk_revision!=map_revision:
+                     raise SaveFormatError('missing/incoherent generated scene revision: '+scene.name)
+                 provenance=getattr(m,'plan_provenance',None)
+                 if not isinstance(provenance,dict) or provenance.get('mode')!='shared-v1': raise SaveFormatError('missing required shared scene references: '+scene.name)
+@@ -382,8 +382,10 @@ class SaveManager:
+                 if world.plan['version']>=5:
+                     for key,registry in (('paths','paths'),('compounds','sites')):
+                         if sorted(provenance.get(key,[]))!=sorted(r['id'] for r in section[registry]):raise SaveFormatError('corrupt G7 scene '+key+' references: '+scene.name)
++                if world.plan['version']==6 and sorted(provenance.get('public_spaces',[]))!=sorted(c['id'] for c in section['public_spaces']):
++                    raise SaveFormatError('corrupt G8 public-space scene references: '+scene.name)
+                 if map_revision=='wg3' and world.plan['generation_revision']!='wg3':raise SaveFormatError('G3 scene cannot consume a G4 plan')
+-                if map_revision in ('wg4','wg5','wg6','wg7'):
++                if map_revision in ('wg4','wg5','wg6','wg7','wg8'):
+                     from generation.placement import digest
+                     from generation.scene_adapters import adapter
+                     expected={'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
+@@ -590,7 +592,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
+     if mode=='shared-v1':
+         validate_plan(data.get('plan'),data['width'],data['height'])
+         if data['plan']['seed']!=data['seed']: raise SaveFormatError('world/plan seed mismatch')
+-    elif data.get('plan') is not None or data.get('generation_revision') in ('wg3','wg4','wg5','wg6','wg7'):
++    elif data.get('plan') is not None or data.get('generation_revision') in ('wg3','wg4','wg5','wg6','wg7','wg8'):
+         raise SaveFormatError('missing required G3 plan mode or unexpected legacy plan')
+     world_map.plan_mode=mode
+     world_map.plan=data.get('plan')
+diff --git a/roguelike/generation/context.py b/roguelike/generation/context.py
+index 5f36206..739899e 100644
+--- a/roguelike/generation/context.py
++++ b/roguelike/generation/context.py
+@@ -5,7 +5,7 @@ import hashlib
+ import json
+ import random
+ 
+-GENERATION_REVISION = 'wg7'
++GENERATION_REVISION = 'wg8'
+ LEGACY_REVISION = 'legacy-unversioned'
+ 
+ 
+diff --git a/roguelike/generation/planned_dressing.py b/roguelike/generation/planned_dressing.py
+index 1df82a3..2407377 100644
+--- a/roguelike/generation/planned_dressing.py
++++ b/roguelike/generation/planned_dressing.py
+@@ -36,6 +36,11 @@ def dress(m, chunk, world, data, context, native, spawn):
+                 if civic and (not allowed(x+1,y) or (x+1,y) not in reached): continue
+                 candidates.append((abs(x-m.width//2)+abs(y-m.height//2),x,y))
+         # A start without a road still needs its reachable interaction.
++        if civic and getattr(m,'civic_furnishing',[]):
++            stone,prayer=m.civic_furnishing
++            if (prayer!=(stone[0]+1,stone[1]) or any(p not in reached or p in m.decor or p in m.floor_objects or p in m.container_state for p in (stone,prayer))):
++                raise GenerationError('saved civic furnishing has no clear reachable native site')
++            candidates=[(0,*stone)]
+         if start and not candidates:
+             candidates=[(abs(x-spawn[0])+abs(y-spawn[1]),x,y) for x,y in sorted(reached)
+                         if 0<x<m.width-1 and 0<y<m.height-1 and allowed(x,y)]
+diff --git a/roguelike/generation/planned_scene.py b/roguelike/generation/planned_scene.py
+index cc47d0e..644142f 100644
+--- a/roguelike/generation/planned_scene.py
++++ b/roguelike/generation/planned_scene.py
+@@ -20,6 +20,10 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
+     section=slice_plan(world.plan,chunk.wx,chunk.wy)
+     # Check only pending selected placements. Cached scenes bypass this function.
+     definitions={p['id']:check_dependencies(p,world.plan,data) for p in section['placements']}
++    for public in section.get('public_spaces',[]):
++        surface=data.terrain.get(public['surface'])
++        if surface is None or digest({k:surface.get(k,True) for k in ('walkable','transparent')})!=public['surface_dependency']:
++            raise GenerationError(public['id']+': changed dependency terrain:'+public['surface'])
+     staged=copy.deepcopy(chunk); base=copy.deepcopy(chunk); base.submaps=[]; base.town_data=None
+     base.edges={e:[] for e in base.edges}; base.town_id=-1; base.town_role=''
+     if base.region_type==RegionType.TOWN: base.region_type=RegionType.PLAINS
+@@ -49,6 +53,12 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
+         for r in road['rects']: road_cells.update(local(r))
+     if (road_cells&water_cells)-deck: raise GenerationError('road crosses water without an assigned bridge')
+     paint(road_cells-water_cells,'road_0'); paint(deck,'cobblestone'); protected.update(road_cells)
++    m.civic_furnishing=[]
++    for public in section.get('public_spaces',[]):
++        common=set().union(*(local(r) for r in public['rects']))
++        paint(common,public['surface']);protected.update(common)
++        if all(rect[0]<=a<rect[2] and rect[1]<=b<rect[3] for a,b in public['furnishing']):
++            m.civic_furnishing=[(a-x0,b-y0) for a,b in public['furnishing']]
+     for site in section.get('sites',[]):
+         common=local(site['approach'])
+         for path in section['paths']:
+@@ -119,9 +129,10 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
+                        'placements':[p['id'] for p in section['placements']],
+                        'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
+                        'plan_identity':digest(world.plan),
+-                       'dependency_projection':'structure-v1','adapter':adapter('wg7',world.plan['version'])}
++                       'dependency_projection':'structure-v1','adapter':adapter('wg8',world.plan['version'])}
+     if world.plan['version']>=5:
+         m.plan_provenance.update(paths=[p['id'] for p in section['paths']],compounds=[s['id'] for s in section['sites']])
++    if world.plan['version']==6:m.plan_provenance['public_spaces']=[c['id'] for c in section['public_spaces']]
+     # These are actual first-creation inputs, not invented historical G3 hashes.
+     m.native_input_provenance={f'entities:{a._creature_id}':digest(data.entities[a._creature_id]) for a in actors}
+     m.native_input_provenance.update({f'terrain:{tid}':digest(data.terrain[tid]) for tid in ('dead_wood','flint_rock','clay_deposit')})
+@@ -133,7 +144,7 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
+         mapped=data.text_item_map.get('waystone_prayer_a','letter')
+         m.native_input_provenance['prayer-item:'+mapped]=digest(data.items[mapped])
+     m.native_generation_context=native
+-    m.generation_revision='wg7'; m.generation_complete=True
++    m.generation_revision='wg8'; m.generation_complete=True
+     return SceneResult(m,actors,spawn,staged,receipts)
+ 
+ 
+@@ -142,6 +153,10 @@ def validate_access(m,section,data,wx,wy):
+     from generation.structure_preview import check_access
+     x0,y0=wx*W,wy*H
+     road=set(m.road_cells)
++    for public in section.get('public_spaces',[]):
++        clear={(x-x0,y-y0) for r in public['rects'] for x,y in cells(r)}-{(a-x0,b-y0) for a,b in public['furnishing']}
++        reached=reachable(m,min(road),data) if road else set()
++        if not clear<=reached or any(not enterable(m,xy,data) for xy in clear):raise GenerationError(public['id']+': public common circulation blocked after contents/dressing/population')
+     for site in section.get('sites',[]):
+         reached=reachable(m,(site['attachment']['join'][0]-x0,site['attachment']['join'][1]-y0),data)
+         needed=cells(site['approach'])
+diff --git a/roguelike/generation/poi_selection.py b/roguelike/generation/poi_selection.py
+index 41d82cd..a0b3573 100644
+--- a/roguelike/generation/poi_selection.py
++++ b/roguelike/generation/poi_selection.py
+@@ -191,7 +191,7 @@ def populate(plan,authority,world,data,metrics=None,*,candidate_rows=None):
+ 
+ def validate_resolved(plan,registries):
+     """Saved self-contained policy and bidirectional ownership, no live selector."""
+-    if plan['version']>=5:
++    if plan['poi_policy']['version']==2:
+         from generation.parent_selection import validate_resolved
+         return validate_resolved(plan,registries)
+     from generation.world_plan import address,bands,bounds,intersect
+diff --git a/roguelike/generation/scene_adapters.py b/roguelike/generation/scene_adapters.py
+index 6bbe753..9ee0bec 100644
+--- a/roguelike/generation/scene_adapters.py
++++ b/roguelike/generation/scene_adapters.py
+@@ -6,6 +6,8 @@ ADAPTERS={('wg4',1):'g3-to-g4-v1',('wg4',2):'g4-v1',
+           ('wg6',1):'g3-to-g6-v1',('wg6',2):'g4-to-g6-v1',('wg6',3):'g5-to-g6-v1',('wg6',4):'g6-v1',
+           ('wg7',1):'g3-to-g7-v1',('wg7',2):'g4-to-g7-v1',('wg7',3):'g5-to-g7-v1',('wg7',4):'g6-to-g7-v1',('wg7',5):'g7-v1'}
+ 
++ADAPTERS.update({('wg8',version):('g8-v1' if version==6 else f'g{version+2}-to-g8-v1') for version in range(1,7)})
++
+ 
+ def adapter(scene_revision, plan_version):
+     try:return ADAPTERS[scene_revision,plan_version]
+diff --git a/roguelike/generation/settlement_selection.py b/roguelike/generation/settlement_selection.py
+index b8555de..34c79ac 100644
+--- a/roguelike/generation/settlement_selection.py
++++ b/roguelike/generation/settlement_selection.py
+@@ -65,13 +65,15 @@ def profile_for(plan, owner):
+     return plan['selection']['profiles'][context]
+ 
+ 
+-def eligible(plan, owner, role, slot_order):
++def eligible(plan, owner, role, slot_order, *, location=None):
+     """Only accepted occupants consume caps. Neighbor is stable spatial order."""
+     profile=profile_for(plan,owner)
+     plots=[p for p in plan['plots'] if p['owner']==owner and p['placement']]
+     placements={p['id']:p for p in plan['placements']}
+     counts=Counter(placements[p['placement']]['asset'] for p in plots)
+-    neighbor=min(plots,key=lambda p:(abs(p['slot_order']-slot_order),p['slot_order'])) if plots else None
++    if location is not None:
++        neighbor=min(plots,key=lambda p:(abs(p['join'][0]-location[0])+abs(p['join'][1]-location[1]),p['id'])) if plots else None
++    else:neighbor=min(plots,key=lambda p:(abs(p['slot_order']-slot_order),p['slot_order'])) if plots else None
+     previous=placements[neighbor['placement']]['asset'] if neighbor else None
+     rows=[];excluded=[]
+     for rule in sorted(profile['roles'][role],key=lambda row:row['asset']):
+@@ -82,7 +84,7 @@ def eligible(plan, owner, role, slot_order):
+     return rows,excluded
+ 
+ 
+-def populate_settlement(plan, authority, data, settlement, slots):
++def populate_settlement(plan, authority, data, settlement, slots, *, work=None):
+     """Reserve minima first with bounded backtracking; then fill optional slots.
+ 
+     Slot order follows distance from the original civic/arrival slot. Required
+@@ -92,7 +94,15 @@ def populate_settlement(plan, authority, data, settlement, slots):
+     profile=profile_for(plan,settlement['id']);sid=settlement['id']
+     required=[role for role in ('civic','commercial','residential','support') for _ in range(profile['minimum'].get(role,0))]
+     attempts=0; failures=[]; exhausted=False
++    composed=plan.get("version")==6
++    work=work if work is not None else dict(attempts=0,budget=profile["required_fit_budget"])
+     def fit(p,a,slot,role,option=None):
++        if composed:
++            join=slot['join'];wx,wy=join[0]//80,join[1]//43
++            # Join and full private region must share the storage chunk.
++            wx,wy=slot['bounds'][0]//80,slot['bounds'][1]//43
++            return _plot(p,a,data,sid,'civic' if role=='civic' else settlement['form'],wx,wy,join[0]-wx*80,join[1],slot['frontage']['normal'],slot['frontage']['road'],
++                         role=role,slot_order=slot['order'],option=option,identity=slot['id'],explicit_bounds=slot['bounds'],lot=slot)
+         wx,wy,lx,line_y,normal,rid,order=slot
+         return _plot(p,a,data,sid,'civic' if role=='civic' else settlement['form'],wx,wy,lx,line_y,normal,rid,
+                      role=role,slot_order=order,option=option)
+@@ -100,13 +110,19 @@ def populate_settlement(plan, authority, data, settlement, slots):
+         nonlocal attempts,exhausted
+         if index==len(required):return p,a,remaining
+         role=required[index]
+-        for slot in remaining:
+-            options,_,_=plot_options(p,data,sid,'civic' if role=='civic' else settlement['form'],slot[4],role=role,slot_order=slot[-1])
++        candidates=[s for s in remaining if not composed or s['civic']==(role=='civic')]
++        if composed and role=='commercial' and settlement['form']=='grid':
++            anchor=next(s['join'] for s in slots if s['civic'])
++            candidates.sort(key=lambda s:(abs(s['join'][0]-anchor[0])+abs(s['join'][1]-anchor[1]),s['order'],s['id']))
++        for slot in candidates:
++            if composed:
++                options,_,_=plot_options(p,data,sid,'civic' if role=='civic' else settlement['form'],slot['frontage']['normal'],role=role,slot_order=slot['order'],identity=slot['id'],location=slot['join'])
++            else:options,_,_=plot_options(p,data,sid,'civic' if role=='civic' else settlement['form'],slot[4],role=role,slot_order=slot[-1])
+             for option in options:
+-                if attempts>=profile['required_fit_budget']:exhausted=True;return None
+-                attempts+=1;q,b=staged(p,a);plot=fit(q,b,slot,role,option=option)
++                if work['attempts']>=work['budget']:exhausted=True;return None
++                attempts+=1;work['attempts']+=1;q,b=staged(p,a);plot=fit(q,b,slot,role,option=option)
+                 if not plot['placement']:
+-                    failures.append(dict(role=role,slot=slot[-1],asset=option[0],rejected=plot['rejected']));failures[:]=failures[-16:];continue
++                    failures.append(dict(role=role,slot=slot['id'] if composed else slot[-1],asset=option[0],rejected=plot['rejected']));failures[:]=failures[-16:];continue
+                 plot['required']=True;q['placements'][-1]['required']=True
+                 found=search(q,b,[s for s in remaining if s!=slot],index+1)
+                 if found:return found
+@@ -121,7 +137,7 @@ def populate_settlement(plan, authority, data, settlement, slots):
+     authority.rows=used.rows;authority.index=used.index
+     plan['diagnostics'].append(dict(kind='required-role-search',owner=sid,attempts=attempts,budget=profile['required_fit_budget'],budget_unit='one transform fit or empty-frontage asset trial',rejected=failures))
+     for slot in remaining:
+-        role=profile['schedule'][slot[-1]%len(profile['schedule'])]
++        role=profile['schedule'][(slot['order'] if composed else slot[-1])%len(profile['schedule'])]
+         fit(plan,authority,slot,role)
+     settlement['plots']=[p['id'] for p in plan['plots'] if p['owner']==sid]
+     civic=next((p for p in plan['plots'] if p['owner']==sid and p['role']=='civic'),None)
+diff --git a/roguelike/generation/world_plan.py b/roguelike/generation/world_plan.py
+index dce6d3c..7987cd1 100644
+--- a/roguelike/generation/world_plan.py
++++ b/roguelike/generation/world_plan.py
+@@ -12,7 +12,7 @@ from config import MAP_WIDTH as W, MAP_HEIGHT as H
+ from generation.context import GenerationError, stable_seed
+ from generation.placement import transform, entrance_cells, NORMALS, dependencies, digest
+ 
+-VERSION=5
++VERSION=6
+ MODE='shared-v1'
+ 
+ 
+@@ -41,10 +41,12 @@ def bands(points,width):
+ def settings(data,override=None):
+     c=copy.deepcopy(override if override is not None else data.g3_config)
+     expected={'version','settlement_count','minimum_separation_chunks','near_start_radius_chunks','forms','road_width_tiles','street_width_tiles','plot_spacing_tiles','setback_tiles','max_spur_tiles','route_search_nodes','site_search_limit','pools'}
+-    modern=isinstance(c,dict) and c.get('version')==2
++    modern=isinstance(c,dict) and c.get('version') in (2,3)
+     if modern: expected=(expected-{'pools'})|{'selection_profile_version'}
+-    if not isinstance(c,dict) or set(c)!=expected or type(c['version']) is not int or c['version'] not in (1,2): raise GenerationError('planning settings: expected complete version-one pools or version-two selection configuration')
++    if modern and c['version']==3:expected=expected|{'settlement_layout_version'}
++    if not isinstance(c,dict) or set(c)!=expected or type(c['version']) is not int or c['version'] not in (1,2,3): raise GenerationError('planning settings: expected complete version-one pools or version-two selection configuration')
+     if modern:
++        if c['version']==3 and (type(c['settlement_layout_version']) is not int or c['settlement_layout_version']!=1):raise GenerationError('unsupported settlement layout version')
+         if type(c['selection_profile_version']) is not int or c['selection_profile_version']!=1:raise GenerationError('unsupported selection profile version')
+         from generation.settlement_selection import resolve,pools
+         c['_selection']=resolve(data);c['pools']=pools(c['_selection'])
+@@ -146,9 +148,11 @@ def build_plan(world,data,override=None,metrics=None):
+     c=settings(data,override); rng=random.Random(stable_seed('wg3',world.seed,'sites'))
+     selection=c.pop('_selection',None)
+     modern=selection and data.poi_profiles.get('version')==2
+-    plan=dict(version=VERSION if modern else 4 if selection else 2,mode=MODE,generation_revision='wg7' if modern else 'wg6' if selection else 'wg4',dependency_projection='structure-v1',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
++    composed=c['version']==3
++    plan=dict(version=6 if composed else 5 if modern else 4 if selection else 2,mode=MODE,generation_revision='wg8' if composed else 'wg7' if modern else 'wg6' if selection else 'wg4',dependency_projection='structure-v1',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
+               nodes=[],routes=[],waters=_river_records(world),crossings=[],settlements=[],plots=[],placements=[],reservations=[],dependencies={},diagnostics=[])
+     if selection:plan['selection']=selection
++    if composed:plan.update(blocks=[],public_spaces=[],paths=[],layout_contract=1)
+     authority=Reservations(); chosen=[]; count=rng.randint(*c['settlement_count']); start=(world.start_wx,world.start_wy)
+     reserved={p for p,ch in world.chunks.items() if ch.submaps or ch.is_capital or ch.biome_id=='deep_mountain'}
+     def suitable(p):
+@@ -231,7 +235,7 @@ def build_plan(world,data,override=None,metrics=None):
+             x=min(u[0],v[0])//W*W; y=u[1]//H*H
+             incoming=next(r for r in plan['routes'] if any(aa==u and bb==v for aa,bb in zip(r['points'],r['points'][1:])))
+             rect=[x,y,x+2*W,y+H]; street_ids=[incoming['id']]
+-        else:
++        elif not composed:
+             rect=[x,y,x+2*W,y+2*H]; street_ids=[]
+             for axis in ('horizontal','vertical'):
+                 for n in range(2):
+@@ -243,6 +247,12 @@ def build_plan(world,data,override=None,metrics=None):
+                         if any(v['purpose']=='water' for v in conflicts): raise GenerationError(f'{sid}: street crosses unassigned water')
+                         authority.add(rid,'road',r,[v['owner'] for v in conflicts])
+                     plan['routes'].append(route)
++        if composed:
++            from generation.settlement_layout import compose
++            rect=[x,y,x+2*W,y+(2*H if form=='grid' else H)]
++            compose(plan,authority,data,sid,form,rect,incoming,metrics)
++            if metrics is not None:metrics.setdefault('settlements',{})[sid]=time.perf_counter()-started
++            continue
+         settlement=dict(id=sid,form=form,bounds=rect,members=member_chunks(rect),incoming=incoming['id'],streets=street_ids,plots=[],civic=None)
+         plan['settlements'].append(settlement)
+         slots=[]
+@@ -288,21 +298,21 @@ def build_plan(world,data,override=None,metrics=None):
+     return plan
+ 
+ 
+-def plot_options(plan,data,owner,context,normal,*,role=None,slot_order=0,only_assets=None,weighted_rows=None):
++def plot_options(plan,data,owner,context,normal,*,role=None,slot_order=0,only_assets=None,weighted_rows=None,identity=None,location=None):
+     """Asset-first alternatives from the production fitter, including empty trials.
+ 
+     Each option is one geometric fit (or one asset with no permitted frontage).
+     At most eight permitted transform profiles are inspected per asset. This is
+     shared by ordinary first-fit and bounded required backtracking.
+     """
+-    pid=f'{owner}-plot-{len(plan["plots"])}'; rejected=[]; candidates=[]
++    pid=identity or f'{owner}-plot-{len(plan["plots"])}'; rejected=[]; candidates=[]
+     pool=plan['settings']['pools'].get(context,[])
+     role_rows=None
+     if weighted_rows is not None:
+         role_rows=weighted_rows; pool=[r[0] for r in role_rows]
+     elif role is not None:
+         from generation.settlement_selection import eligible
+-        role_rows,excluded=eligible(plan,owner,role,slot_order);rejected.extend(excluded)
++        role_rows,excluded=eligible(plan,owner,role,slot_order,location=location);rejected.extend(excluded)
+         pool=[r[0] for r in role_rows]
+     for asset in sorted(a for a in pool if only_assets is None or a in only_assets):
+         raw=data.structures[asset]; p=raw['placement']
+@@ -329,10 +339,10 @@ def staged(plan,authority):
+     return q,a
+ 
+ 
+-def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,required=False,*,role=None,slot_order=0,only_assets=None,option=None,weighted_rows=None,explicit_bounds=None,internal_access=None,identity=None):
++def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,required=False,*,role=None,slot_order=0,only_assets=None,option=None,weighted_rows=None,explicit_bounds=None,internal_access=None,identity=None,lot=None):
+     c=plan['settings'];pid=identity or f'{owner}-plot-{len(plan["plots"])}';chosen=None
+     if option is None:
+-        ordered,rejected,role_rows=plot_options(plan,data,owner,context,normal,role=role,slot_order=slot_order,only_assets=only_assets,weighted_rows=weighted_rows)
++        ordered,rejected,role_rows=plot_options(plan,data,owner,context,normal,role=role,slot_order=slot_order,only_assets=only_assets,weighted_rows=weighted_rows,identity=identity,location=lot['join'] if lot else None)
+     else:
+         ordered=[option];rejected=[];role_rows=weighted_rows
+     road=next((r for r in plan.get('paths',[]) if internal_access and r['id']==internal_access['path'] and r['owner']==owner),None) if internal_access else next((r for r in plan['routes'] if r['id']==road_id),None)
+@@ -362,12 +372,17 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
+         try:
+             if intersect(clearance,chunkrect)!=clearance or intersect(approach,chunkrect)!=approach: raise GenerationError('building, buffer or full approach spans a storage chunk')
+             if intersect(footprint,buildable)!=footprint: raise GenerationError('footprint does not fit assigned buildable plot')
+-            if internal_access and intersect(clearance,buildable)!=clearance:raise GenerationError('private buffer does not fit compound child buildable region')
++            if (internal_access or lot) and intersect(clearance,buildable)!=clearance:raise GenerationError('private buffer does not fit assigned private buildable region')
+             conflicts=authority.conflicts(clearance,container=container,member=pid+'-building')
+             if conflicts: raise GenerationError(f'footprint/buffer conflicts with {conflicts[0]["owner"]}')
+             conflicts=authority.conflicts(approach,public_road=public_id,public_rects=road['rects'],container=container,member=pid+'-building')
+             if conflicts: raise GenerationError(f'approach conflicts with {conflicts[0]["owner"]}')
+             if not any(r[0]<=join[0]<r[2] and r[1]<=join[1]<r[3] for r in road['rects']): raise GenerationError('assigned road has no frontage at join; a different nearby road is insufficient')
++            if lot:
++                f=lot['frontage'];axis=0 if normal in ('N','S') else 1
++                segment=bands(road['points'][f['segment']:f['segment']+2],road['width'])[0]
++                projected=[(x+nx*(half+setback+1),y+ny*(half+setback+1)) for x,y in ec]
++                if any(not (segment[0]<=a<segment[2] and segment[1]<=b<segment[3] and f['span'][0]<=(a,b)[axis]<f['span'][1]) for a,b in projected):raise GenerationError('full doorway span misses assigned frontage segment/span')
+             if max(approach[3]-approach[1],approach[2]-approach[0])-1>c['max_spur_tiles']: raise GenerationError('approach exceeds bounded spur length')
+             placement=dict(id=pid+'-building',asset=asset,context=context,rotation=rotation,mirror=mirror,origin=[ox,oy],footprint=footprint,clearance=clearance,approach=approach,road=road_id,join=join,entrances=[dict(e,x=ox+e['x'],y=oy+e['y']) for e in raw['placement']['entrances']],targets=[dict(t,x=ox+t['x'],y=oy+t['y']) for t in raw['placement']['targets']],required=required,dependency=asset)
+             if role is not None:placement.update(role=role,frontage_entrance=e['id'])
+@@ -382,12 +397,13 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
+             plan['dependencies']=q['dependencies'];plan['placements']=q['placements']
+             authority.rows=a.rows;authority.index=a.index;chosen=placement['id'];break
+         except GenerationError as error: rejected.append(dict(asset=asset,rotation=rotation,mirror=mirror,reason=str(error)))
+-    plot=dict(id=pid,owner=owner,road=road_id,normal=normal,buildable=buildable if ordered else [wx*W,wy*H,(wx+1)*W,(wy+1)*H],setback=c['setback_tiles'],placement=chosen,status='occupied' if chosen else 'vacant-garden',required=required,rejected=rejected)
++    plot=dict(id=pid,owner=owner,road=road_id,normal=normal,buildable=list(explicit_bounds) if explicit_bounds is not None else buildable if ordered else [wx*W,wy*H,(wx+1)*W,(wy+1)*H],setback=c['setback_tiles'],placement=chosen,status='occupied' if chosen else 'vacant-garden',required=required,rejected=rejected)
+     if role is not None:
+         plot.update(role=role,slot_order=slot_order)
+         if chosen and role_rows is not None and next(r[2] for r in role_rows if r[0]==placement['asset']):
+             plot['repetition']=('soft fallback: only eligible asset remains' if len(role_rows)==1 else
+                                 'soft weighted repeat; penalty is a preference, hard limits retained')
++    if lot:plot.update(block=lot['block'],frontage=copy.deepcopy(lot['frontage']),join=list(lot['join']),civic_lot=lot['civic'])
+     if internal_access:plot['access']=dict(internal_access)
+     plan['plots'].append(plot)
+     if required and not chosen: raise GenerationError(f'{pid}: essential placement failed: {rejected}')
+@@ -403,11 +419,11 @@ def validate_plan(plan,width,height):
+ 
+ def _validate_plan(plan,width,height):
+     """Durable structure/reference checks; never demand unmodified saved scene tiles."""
+-    if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4'),(3,'wg5'),(4,'wg6'),(5,'wg7')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
++    if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4'),(3,'wg5'),(4,'wg6'),(5,'wg7'),(6,'wg8')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
+     if plan['version']>=2 and plan.get('dependency_projection')!='structure-v1': raise GenerationError('dependency projection missing or unsupported')
+     if plan.get('map_size')!=[W,H] or plan.get('world_size')!=[width,height]: raise GenerationError('G3 plan dimensions disagree')
+     registries={}
+-    for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations')+(('sites',) if plan['version']>=4 else ())+(('paths',) if plan['version']>=5 else ()):
++    for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations')+(('sites',) if plan['version']>=4 else ())+(('paths',) if plan['version']>=5 else ())+(('blocks','public_spaces') if plan['version']==6 else ()):
+         rows=plan.get(name)
+         if not isinstance(rows,list): raise GenerationError('missing G3 registry '+name)
+         ids=[r.get('id') for r in rows if isinstance(r,dict)]
+@@ -415,6 +431,9 @@ def _validate_plan(plan,width,height):
+         registries[name]={r['id']:r for r in rows}
+     from generation.plan_integrity import records
+     records(plan,registries,width,height)
++    if plan['version']==6:
++        from generation.settlement_layout import validate_resolved
++        validate_resolved(plan,registries)
+     if plan['version']>=3:
+         from generation.settlement_selection import validate_resolved
+         validate_resolved(plan)
+@@ -462,10 +481,10 @@ def _validate_plan(plan,width,height):
+         if plot['placement'] is None:
+             if plot['required'] or plot['status']!='vacant-garden': raise GenerationError('G3 required plot silently became vacant')
+         elif plot['placement'] not in registries['placements'] or plot['status']!='occupied': raise GenerationError('G3 plot placement reference invalid')
+-    owners=set(registries['routes'])|set(registries['waters'])|set(registries['placements'])|set(registries.get('sites',{}))|set(registries.get('paths',{}))
++    owners=set(registries['routes'])|set(registries['waters'])|set(registries['placements'])|set(registries.get('sites',{}))|set(registries.get('paths',{}))|set(registries.get('public_spaces',{}))
+     for r in plan['reservations']:
+         # River banks may meet the world border; clipped at realization.
+-        if r['owner'] not in owners or r['purpose'] not in (('water','road','structure','approach','envelope','path') if plan['version']>=5 else ('water','road','structure','approach')): raise GenerationError('G3 reservation owner/purpose invalid')
++        if r['owner'] not in owners or r['purpose'] not in (('water','road','structure','approach','envelope','path','common') if plan['version']==6 else ('water','road','structure','approach','envelope','path') if plan['version']>=5 else ('water','road','structure','approach')): raise GenerationError('G3 reservation owner/purpose invalid')
+     from collections import Counter
+     expected=[]
+     for water in plan['waters']: expected.extend((water['id'],'water',tuple(expand(r,2))) for r in water['rects'])
+@@ -474,6 +493,7 @@ def _validate_plan(plan,width,height):
+     for s in plan.get('sites',[]):
+         if s['kind']=='compound':expected.extend([(s['id'],'envelope',tuple(s['envelope'])),(s['id'],'approach',tuple(s['approach']))])
+     for path in plan.get('paths',[]):expected.extend((path['id'],'path',tuple(r)) for r in path['rects'])
++    for common in plan.get('public_spaces',[]):expected.extend((common['id'],'common',tuple(r)) for r in common['rects'])
+     actual=[(r['owner'],r['purpose'],tuple(r['rect'])) for r in plan['reservations']]
+     if Counter(expected)!=Counter(actual): raise GenerationError('G3 reservation geometry does not match owner')
+     authority=Reservations()
+@@ -554,4 +574,6 @@ def slice_plan(plan,wx,wy):
+     if plan['version']>=5:
+         result['sites']=[s for s in plan['sites'] if s['kind']=='compound' and s['chunk']==[wx,wy]]
+         result['paths']=[p for p in plan['paths'] if p['owner'] in {s['id'] for s in result['sites']}]
++    if plan['version']==6:
++        result['public_spaces']=[dict(c,rects=[hit for r in c['rects'] if (hit:=intersect(r,rect))]) for c in plan['public_spaces'] if any(intersect(r,rect) for r in c['rects'])]
+     return result
+diff --git a/tools/critical_fix_regressions/tests/test_generation_g3_lifecycle.py b/tools/critical_fix_regressions/tests/test_generation_g3_lifecycle.py
+index d03733c..13c3575 100644
+--- a/tools/critical_fix_regressions/tests/test_generation_g3_lifecycle.py
++++ b/tools/critical_fix_regressions/tests/test_generation_g3_lifecycle.py
+@@ -66,7 +66,7 @@ class G3Lifecycle(unittest.TestCase):
+         # A checksum-consistent missing reference on an actual G3 surface is
+         # semantic corruption, not permission to bypass the plan contract.
+         checkpoint=e.save_manager.checkpoint_path();scene=checkpoint/f'chunks/{e.world_x}_{e.world_y}.pkl'
+-        saved=pickle.loads(scene.read_bytes());self.assertEqual(saved.local_map.generation_revision,'wg7')
++        saved=pickle.loads(scene.read_bytes());self.assertEqual(saved.local_map.generation_revision,'wg8')
+         del saved.local_map.plan_provenance;scene.write_bytes(pickle.dumps(saved,protocol=pickle.HIGHEST_PROTOCOL))
+         manifest_path=checkpoint/'manifest.json';manifest=json.loads(manifest_path.read_text())
+         manifest['files'][scene.relative_to(checkpoint).as_posix()]=record(scene.read_bytes());manifest_path.write_text(json.dumps(manifest))
+diff --git a/tools/critical_fix_regressions/tests/test_generation_g4_durability.py b/tools/critical_fix_regressions/tests/test_generation_g4_durability.py
+index 3c05c2e..1bf088c 100644
+--- a/tools/critical_fix_regressions/tests/test_generation_g4_durability.py
++++ b/tools/critical_fix_regressions/tests/test_generation_g4_durability.py
+@@ -41,8 +41,8 @@ class G4Durability(unittest.TestCase):
+         first={xy:fingerprint((r:=self.scene(xy,w)).local_map,r.actors,r.metadata.town_data) for xy in keys}
+         second={xy:fingerprint((r:=self.scene(xy,w)).local_map,r.actors,r.metadata.town_data) for xy in reversed(keys)}
+         self.assertEqual(first,second); self.assertEqual(digest(w.plan),geometry); self.assertEqual(digest(_serialize_world(w)),before)
+-        r=self.scene(keys[0],w); self.assertEqual(r.local_map.generation_revision,'wg7')
+-        self.assertEqual(r.local_map.plan_provenance['adapter'],'g3-to-g7-v1'); self.assertEqual(r.local_map.plan_provenance['plan_revision'],'wg3')
++        r=self.scene(keys[0],w); self.assertEqual(r.local_map.generation_revision,'wg8')
++        self.assertEqual(r.local_map.plan_provenance['adapter'],'g3-to-g8-v1'); self.assertEqual(r.local_map.plan_provenance['plan_revision'],'wg3')
+         self.assertGreater(len(r.actors),0)
+         # A real cold world reconstruction preserves old values rather than deriving new policy.
+         cold=WorldMap(128,128);_deserialize_world(_serialize_world(w),cold)
+@@ -149,7 +149,7 @@ class G4Durability(unittest.TestCase):
+         generate_world(w,self.data,random.Random(0),plan_mode='legacy'); w.generation_revision='wg2'
+         e.world_map=w
+         # Separate legacy/no-plan positive uses its real no-plan generated scene.
+-        xy=(w.start_wx,w.start_wy);r=self.scene(xy,w);w.get(*xy).generation_revision='wg7'
++        xy=(w.start_wx,w.start_wy);r=self.scene(xy,w);w.get(*xy).generation_revision='wg8'
+         e.save_manager.cache.store(*xy,r.local_map,r.actors)
+         self.assertFalse(hasattr(r.local_map,'plan_provenance'));self.assertTrue(e.save_manager.save(e));self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
+         old=self.old_world();before=digest(old.plan);data=copy.copy(self.data);data.structures=copy.deepcopy(data.structures)
+diff --git a/tools/critical_fix_regressions/tests/test_generation_g5_selection.py b/tools/critical_fix_regressions/tests/test_generation_g5_selection.py
+index 70deddc..c3011c3 100644
+--- a/tools/critical_fix_regressions/tests/test_generation_g5_selection.py
++++ b/tools/critical_fix_regressions/tests/test_generation_g5_selection.py
+@@ -27,7 +27,7 @@ class G5Selection(unittest.TestCase):
+     boot=lifecycle.G3Lifecycle.boot
+ 
+     def test_default_roles_caps_and_single_landmark(self):
+-        plan=self.world.plan;self.assertEqual(plan['version'],5)
++        plan=self.world.plan;self.assertEqual(plan['version'],6)
+         for s in plan['settlements']:
+             plots=[p for p in plan['plots'] if p['owner']==s['id']]
+             ids={p['placement'] for p in plots};placements=[p for p in plan['placements'] if p['id'] in ids]
+@@ -149,7 +149,7 @@ class G5Selection(unittest.TestCase):
+             **{k:[r['id'] for r in section[k]] for k in ('routes','crossings','placements')})
+         m.set_tile(2,2,'mud',True,True);e.save_manager.cache.store(*start,m,[])
+         created=e._prepare_destination(*keys[0]);self.assertIsNotNone(created)
+-        self.assertEqual(created[0].plan_provenance['adapter'],'g4-to-g7-v1')
++        self.assertEqual(created[0].plan_provenance['adapter'],'g4-to-g8-v1')
+         saved=fingerprint(*created);self.assertTrue(e.save_manager.save(e),e.save_manager.last_error)
+         with patch('generation.world_plan.build_plan',side_effect=AssertionError('replanned')),patch('engine.scene_generation.populate',side_effect=AssertionError('repopulated')):
+             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
+diff --git a/tools/critical_fix_regressions/tests/test_generation_g6_sites.py b/tools/critical_fix_regressions/tests/test_generation_g6_sites.py
+index ef5dd60..1cc061b 100644
+--- a/tools/critical_fix_regressions/tests/test_generation_g6_sites.py
++++ b/tools/critical_fix_regressions/tests/test_generation_g6_sites.py
+@@ -182,7 +182,7 @@ class G6Sites(unittest.TestCase):
+             self.assertEqual(fingerprint(*visited),binding['visited_fingerprint'])
+             self.assertEqual(visited[0].generation_revision,'wg5');self.assertEqual(visited[0].plan_provenance['adapter'],'g5-v1')
+             pending=e._prepare_destination(*binding['pending']);self.assertIsNotNone(pending)
+-            self.assertEqual(pending[0].plan_provenance['adapter'],'g5-to-g7-v1')
++            self.assertEqual(pending[0].plan_provenance['adapter'],'g5-to-g8-v1')
+             self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
+             self.assertTrue(e.save_manager.save(e),e.save_manager.last_error)
+             e.debug=False;e._handle_key_local(pygame.K_F9);self.assertIsNone(e.save_manager.last_error)
+diff --git a/tools/critical_fix_regressions/tests/test_generation_g7_compounds.py b/tools/critical_fix_regressions/tests/test_generation_g7_compounds.py
+index 71bbef2..a49527f 100644
+--- a/tools/critical_fix_regressions/tests/test_generation_g7_compounds.py
++++ b/tools/critical_fix_regressions/tests/test_generation_g7_compounds.py
+@@ -211,11 +211,11 @@ class G7Compounds(unittest.TestCase):
+             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error);self.assertEqual(digest(e.world_map.plan),binding['plan_identity']);self.assertEqual(e.world_map.plan['version'],4)
+             visited=e._prepare_destination(*binding['visited']);self.assertEqual(fingerprint(*visited),binding['visited_fingerprint']);self.assertEqual(visited[0].generation_revision,'wg6')
+             self.assertEqual(visited[0].plan_provenance,binding['visited_provenance'])
+-            pending=e._prepare_destination(*binding['pending']);self.assertIsNotNone(pending);self.assertEqual(pending[0].plan_provenance['adapter'],'g6-to-g7-v1')
+-            self.assertEqual(pending[0].generation_revision,'wg7');self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
++            pending=e._prepare_destination(*binding['pending']);self.assertIsNotNone(pending);self.assertEqual(pending[0].plan_provenance['adapter'],'g6-to-g8-v1')
++            self.assertEqual(pending[0].generation_revision,'wg8');self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
+             self.assertTrue(e.save_manager.save(e),e.save_manager.last_error);e.debug=False;e._handle_key_local(pygame.K_F9)
+             self.assertEqual(fingerprint(*e._prepare_destination(*binding['visited'])),binding['visited_fingerprint'])
+-        self.evidence('g7-authentic-g6-restore.json',dict(plan_identity=binding['plan_identity'],visited_revision='wg6',pending_adapter='g6-to-g7-v1',mutation_preserved=True,plan_unchanged=True))
++        self.evidence('g7-authentic-g6-restore.json',dict(plan_identity=binding['plan_identity'],visited_revision='wg6',pending_adapter='g6-to-g8-v1',mutation_preserved=True,plan_unchanged=True))
+ 
+     def test_same_asset_children_and_same_recipe_parents_real_transfers_cold_and_f9(self):
+         data=self.controlled(same=True);e=self.boot_data(data);e.debug=False;e.player_invincible=True;e.player.inventory.capacity=100
+diff --git a/tools/structure_authoring.py b/tools/structure_authoring.py
+index 60d4c62..08c5fa5 100644
+--- a/tools/structure_authoring.py
++++ b/tools/structure_authoring.py
+@@ -32,6 +32,10 @@ def main(argv=None):
+     p.add_argument('--assigned-compound',choices=list('NESW'),help='Controlled one-compound preview with this gate normal')
+     p.add_argument('--compound-rotation',type=int,choices=[0,90,180,270],help='One permitted parent transform for assigned preview')
+     p.add_argument('--init-compound',type=Path,help='Create complete recipe, child and v2 policy drafts; never overwrite existing files')
++    p.add_argument('--layout-config',type=Path,help='Complete version-one settlement layout settings, previewed without installation')
++    p.add_argument('--layout',help='Controlled choice of one grid layout ID; ordinary selection when omitted')
++    p.add_argument('--settlement-preview',choices=['grid','roadside','all'],help='Materialize every member of selected settlements')
++    p.add_argument('--init-settlement',type=Path,help='Copy complete layout, role-selection and planning drafts; preserve existing files')
+     p.add_argument('--poi-config',type=Path,help='Complete version-one or version-two parent policy override')
+     p.add_argument('--context',choices=['grid','roadside','civic','landmark'],default='grid')
+     p.add_argument('--role',choices=['residential','commercial','support','civic','landmark'])
+@@ -55,12 +59,16 @@ def main(argv=None):
+     log=io.StringIO()
+     try:
+         from authoring_outputs import Destinations
+-        inputs=[(name,getattr(args,name)) for name in ('candidate','compound','poi_config','selection_config','config','access')]
++        if args.init_compound and args.init_settlement:raise ValueError('choose one initializer per invocation')
++        inputs=[(name,getattr(args,name)) for name in ('candidate','compound','poi_config','selection_config','config','access','layout_config')]
+         inputs.extend(('--child',path) for path in args.child)
+         catalog_path=args.editor_catalog or ROOT/'tools/structure_editor/catalog.js'
+         if args.check_editor_catalog and not args.refresh_editor_catalog:inputs.append(('--editor-catalog',catalog_path))
+         initializers=[(args.init_compound/name,game/'docs/examples'/name) for name in
+                       ('g7_travellers_court.json','g7_wayhouse.json','g7_poi_example.json')] if args.init_compound else []
++        if args.init_settlement:
++            initializers=[(args.init_settlement/target,(args.data_root or game/'data')/'generation'/source) for target,source in
++                          [('g8_layouts.json','settlement_layouts.json'),('g8_selection.json','settlement_profiles.json'),('g8_planning.json','g3_config.json')]]
+         inputs.extend(('initializer source',source) for _,source in initializers)
+         boundary=Destinations(inputs,[game,args.data_root or game/'data'])
+         known=[('initializer',target,'initializer') for target,_ in initializers]
+@@ -68,11 +76,18 @@ def main(argv=None):
+         if args.output:
+             if args.output.suffix.lower()!='.json':raise ValueError('--output must be a .json report')
+             known.append(('--output',args.output,'diagnostic'))
+-            if args.compound or args.world_plan or args.planned or args.site or args.assigned_site:
++            if args.compound or args.world_plan or args.planned or args.site or args.assigned_site or args.settlement_preview or args.layout:
+                 known.append(('plan diagram',args.output.with_suffix('.svg'),'diagnostic'))
+         boundary.validate(known)
+         artifacts=[]
+         with contextlib.redirect_stdout(log): data=DataLoader(str(args.data_root or game/'data'))
++        if args.layout_config or args.layout:
++            from generation.settlement_layout import validate
++            data.settlement_layouts=validate(read_document(args.layout_config) if args.layout_config else data.settlement_layouts,data)
++            if args.layout:
++                choices=[row for row in data.settlement_layouts['grid'] if row['id']==args.layout]
++                if not choices:raise GenerationError('unknown layout '+args.layout)
++                data.settlement_layouts['grid']=choices
+         if args.poi_config:data.poi_profiles=read_document(args.poi_config)
+         manifest=data.structure_catalog.manifest()
+         if args.refresh_editor_catalog or args.check_editor_catalog:
+@@ -88,15 +103,20 @@ def main(argv=None):
+                 artifacts.append(('editor catalog',destination,'catalog',content.encode('utf-8')))
+             elif not destination.exists() or destination.read_text(encoding='utf-8')!=content:
+                 raise GenerationError('Editor catalog is stale. Run --refresh-editor-catalog and repeat runtime validation.')
+-        if args.init_compound:
+-            folder=args.init_compound.resolve()
+-            if folder.is_relative_to(game):raise GenerationError('--init-compound must use a draft directory outside the installed game')
++        if args.init_compound or args.init_settlement:
++            folder=(args.init_compound or args.init_settlement).resolve()
+             created=[];preserved=[]
+             for target,source in initializers:
+                 if target.exists():preserved.append(target.name)
+                 else:created.append(target.name)
+                 artifacts.append(('initializer',target,'initializer',source.read_bytes()))
+             report=dict(passed=True,created=created,preserved=preserved,directory=str(folder))
++        elif args.settlement_preview or (args.layout and not args.planned):
++            from generation.settlement_preview import preview as settlement_preview
++            with contextlib.redirect_stdout(log):
++                report=settlement_preview(data,args.seed,layout=args.layout,form=args.settlement_preview or 'grid',
++                                          selection=read_document(args.selection_config) if args.selection_config else None,
++                                          config=read_document(args.config) if args.config else None)
+         elif args.compound:
+             from generation.compound_preview import preview as compound_preview
+             with contextlib.redirect_stdout(log):
+@@ -150,6 +170,11 @@ def main(argv=None):
+             if 'plan' in report:
+                 from generation.plan_preview import plan_svg
+                 artifacts.append(('plan diagram',output.with_suffix('.svg'),'diagnostic',plan_svg(report['plan']).encode('utf-8')))
++                if report.get('settlement_ids'):
++                    from generation.settlement_preview import diagram
++                    for settlement in report['plan']['settlements']:
++                        if settlement['id'] in report['settlement_ids']:
++                            artifacts.append(('settlement diagram',output.with_name(output.stem+'-'+settlement['id']+'-plan.svg'),'diagnostic',diagram(report['plan'],settlement).encode('utf-8')))
+                 if args.site or args.assigned_site:
+                     from worldgen_g6_diagnostic import site_svg
+                     for site in report['plan']['sites']:
+@@ -159,7 +184,7 @@ def main(argv=None):
+                           'diagnostics':len(manifest['diagnostics']),'output':str(args.output) if args.output else None,
+                           'previews':len(report.get('previews',[])),
+                           'registration':bool(report.get('registration')),'status':report.get('status'),
+-                          **({k:report[k] for k in ('created','preserved','directory')} if args.init_compound else {})},indent=2))
++                          **({k:report[k] for k in ('created','preserved','directory')} if args.init_compound or args.init_settlement else {})},indent=2))
+         if not args.output and args.catalog: print(json.dumps(manifest,indent=2))
+         return 0 if report['passed'] else 1
+     except (GenerationError,ValueError) as error:

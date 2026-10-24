@@ -12,7 +12,7 @@ from config import MAP_WIDTH as W, MAP_HEIGHT as H
 from generation.context import GenerationError, stable_seed
 from generation.placement import transform, entrance_cells, NORMALS, dependencies, digest
 
-VERSION=5
+VERSION=6
 MODE='shared-v1'
 
 
@@ -41,10 +41,12 @@ def bands(points,width):
 def settings(data,override=None):
     c=copy.deepcopy(override if override is not None else data.g3_config)
     expected={'version','settlement_count','minimum_separation_chunks','near_start_radius_chunks','forms','road_width_tiles','street_width_tiles','plot_spacing_tiles','setback_tiles','max_spur_tiles','route_search_nodes','site_search_limit','pools'}
-    modern=isinstance(c,dict) and c.get('version')==2
+    modern=isinstance(c,dict) and c.get('version') in (2,3)
     if modern: expected=(expected-{'pools'})|{'selection_profile_version'}
-    if not isinstance(c,dict) or set(c)!=expected or type(c['version']) is not int or c['version'] not in (1,2): raise GenerationError('planning settings: expected complete version-one pools or version-two selection configuration')
+    if modern and c['version']==3:expected=expected|{'settlement_layout_version'}
+    if not isinstance(c,dict) or set(c)!=expected or type(c['version']) is not int or c['version'] not in (1,2,3): raise GenerationError('planning settings: expected complete version-one pools or version-two selection configuration')
     if modern:
+        if c['version']==3 and (type(c['settlement_layout_version']) is not int or c['settlement_layout_version']!=1):raise GenerationError('unsupported settlement layout version')
         if type(c['selection_profile_version']) is not int or c['selection_profile_version']!=1:raise GenerationError('unsupported selection profile version')
         from generation.settlement_selection import resolve,pools
         c['_selection']=resolve(data);c['pools']=pools(c['_selection'])
@@ -146,9 +148,11 @@ def build_plan(world,data,override=None,metrics=None):
     c=settings(data,override); rng=random.Random(stable_seed('wg3',world.seed,'sites'))
     selection=c.pop('_selection',None)
     modern=selection and data.poi_profiles.get('version')==2
-    plan=dict(version=VERSION if modern else 4 if selection else 2,mode=MODE,generation_revision='wg7' if modern else 'wg6' if selection else 'wg4',dependency_projection='structure-v1',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
+    composed=c['version']==3
+    plan=dict(version=6 if composed else 5 if modern else 4 if selection else 2,mode=MODE,generation_revision='wg8' if composed else 'wg7' if modern else 'wg6' if selection else 'wg4',dependency_projection='structure-v1',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
               nodes=[],routes=[],waters=_river_records(world),crossings=[],settlements=[],plots=[],placements=[],reservations=[],dependencies={},diagnostics=[])
     if selection:plan['selection']=selection
+    if composed:plan.update(blocks=[],public_spaces=[],paths=[],layout_contract=1)
     authority=Reservations(); chosen=[]; count=rng.randint(*c['settlement_count']); start=(world.start_wx,world.start_wy)
     reserved={p for p,ch in world.chunks.items() if ch.submaps or ch.is_capital or ch.biome_id=='deep_mountain'}
     def suitable(p):
@@ -231,7 +235,7 @@ def build_plan(world,data,override=None,metrics=None):
             x=min(u[0],v[0])//W*W; y=u[1]//H*H
             incoming=next(r for r in plan['routes'] if any(aa==u and bb==v for aa,bb in zip(r['points'],r['points'][1:])))
             rect=[x,y,x+2*W,y+H]; street_ids=[incoming['id']]
-        else:
+        elif not composed:
             rect=[x,y,x+2*W,y+2*H]; street_ids=[]
             for axis in ('horizontal','vertical'):
                 for n in range(2):
@@ -243,6 +247,12 @@ def build_plan(world,data,override=None,metrics=None):
                         if any(v['purpose']=='water' for v in conflicts): raise GenerationError(f'{sid}: street crosses unassigned water')
                         authority.add(rid,'road',r,[v['owner'] for v in conflicts])
                     plan['routes'].append(route)
+        if composed:
+            from generation.settlement_layout import compose
+            rect=[x,y,x+2*W,y+(2*H if form=='grid' else H)]
+            compose(plan,authority,data,sid,form,rect,incoming,metrics)
+            if metrics is not None:metrics.setdefault('settlements',{})[sid]=time.perf_counter()-started
+            continue
         settlement=dict(id=sid,form=form,bounds=rect,members=member_chunks(rect),incoming=incoming['id'],streets=street_ids,plots=[],civic=None)
         plan['settlements'].append(settlement)
         slots=[]
@@ -288,21 +298,21 @@ def build_plan(world,data,override=None,metrics=None):
     return plan
 
 
-def plot_options(plan,data,owner,context,normal,*,role=None,slot_order=0,only_assets=None,weighted_rows=None):
+def plot_options(plan,data,owner,context,normal,*,role=None,slot_order=0,only_assets=None,weighted_rows=None,identity=None,location=None):
     """Asset-first alternatives from the production fitter, including empty trials.
 
     Each option is one geometric fit (or one asset with no permitted frontage).
     At most eight permitted transform profiles are inspected per asset. This is
     shared by ordinary first-fit and bounded required backtracking.
     """
-    pid=f'{owner}-plot-{len(plan["plots"])}'; rejected=[]; candidates=[]
+    pid=identity or f'{owner}-plot-{len(plan["plots"])}'; rejected=[]; candidates=[]
     pool=plan['settings']['pools'].get(context,[])
     role_rows=None
     if weighted_rows is not None:
         role_rows=weighted_rows; pool=[r[0] for r in role_rows]
     elif role is not None:
         from generation.settlement_selection import eligible
-        role_rows,excluded=eligible(plan,owner,role,slot_order);rejected.extend(excluded)
+        role_rows,excluded=eligible(plan,owner,role,slot_order,location=location);rejected.extend(excluded)
         pool=[r[0] for r in role_rows]
     for asset in sorted(a for a in pool if only_assets is None or a in only_assets):
         raw=data.structures[asset]; p=raw['placement']
@@ -329,10 +339,10 @@ def staged(plan,authority):
     return q,a
 
 
-def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,required=False,*,role=None,slot_order=0,only_assets=None,option=None,weighted_rows=None,explicit_bounds=None,internal_access=None,identity=None):
+def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,required=False,*,role=None,slot_order=0,only_assets=None,option=None,weighted_rows=None,explicit_bounds=None,internal_access=None,identity=None,lot=None):
     c=plan['settings'];pid=identity or f'{owner}-plot-{len(plan["plots"])}';chosen=None
     if option is None:
-        ordered,rejected,role_rows=plot_options(plan,data,owner,context,normal,role=role,slot_order=slot_order,only_assets=only_assets,weighted_rows=weighted_rows)
+        ordered,rejected,role_rows=plot_options(plan,data,owner,context,normal,role=role,slot_order=slot_order,only_assets=only_assets,weighted_rows=weighted_rows,identity=identity,location=lot['join'] if lot else None)
     else:
         ordered=[option];rejected=[];role_rows=weighted_rows
     road=next((r for r in plan.get('paths',[]) if internal_access and r['id']==internal_access['path'] and r['owner']==owner),None) if internal_access else next((r for r in plan['routes'] if r['id']==road_id),None)
@@ -340,7 +350,9 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
     container=owner if internal_access else None
     public_id=road['id']
     buildable=[wx*W,wy*H,(wx+1)*W,(wy+1)*H]
+    trials=0
     for asset,rotation,mirror,raw,e in ordered:
+        trials+=1
         if e is None:
             rejected.append(dict(asset=asset,rotation=None,mirror=None,reason='no eligible permitted transform for entrance normal'));continue
         p=raw['placement']; width,height=raw['width'],raw['height']
@@ -362,12 +374,17 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
         try:
             if intersect(clearance,chunkrect)!=clearance or intersect(approach,chunkrect)!=approach: raise GenerationError('building, buffer or full approach spans a storage chunk')
             if intersect(footprint,buildable)!=footprint: raise GenerationError('footprint does not fit assigned buildable plot')
-            if internal_access and intersect(clearance,buildable)!=clearance:raise GenerationError('private buffer does not fit compound child buildable region')
+            if (internal_access or lot) and intersect(clearance,buildable)!=clearance:raise GenerationError('private buffer does not fit assigned private buildable region')
             conflicts=authority.conflicts(clearance,container=container,member=pid+'-building')
             if conflicts: raise GenerationError(f'footprint/buffer conflicts with {conflicts[0]["owner"]}')
             conflicts=authority.conflicts(approach,public_road=public_id,public_rects=road['rects'],container=container,member=pid+'-building')
             if conflicts: raise GenerationError(f'approach conflicts with {conflicts[0]["owner"]}')
             if not any(r[0]<=join[0]<r[2] and r[1]<=join[1]<r[3] for r in road['rects']): raise GenerationError('assigned road has no frontage at join; a different nearby road is insufficient')
+            if lot:
+                f=lot['frontage'];axis=0 if normal in ('N','S') else 1
+                segment=bands(road['points'][f['segment']:f['segment']+2],road['width'])[0]
+                projected=[(x+nx*(half+setback+1),y+ny*(half+setback+1)) for x,y in ec]
+                if any(not (segment[0]<=a<segment[2] and segment[1]<=b<segment[3] and f['span'][0]<=(a,b)[axis]<f['span'][1]) for a,b in projected):raise GenerationError('full doorway span misses assigned frontage segment/span')
             if max(approach[3]-approach[1],approach[2]-approach[0])-1>c['max_spur_tiles']: raise GenerationError('approach exceeds bounded spur length')
             placement=dict(id=pid+'-building',asset=asset,context=context,rotation=rotation,mirror=mirror,origin=[ox,oy],footprint=footprint,clearance=clearance,approach=approach,road=road_id,join=join,entrances=[dict(e,x=ox+e['x'],y=oy+e['y']) for e in raw['placement']['entrances']],targets=[dict(t,x=ox+t['x'],y=oy+t['y']) for t in raw['placement']['targets']],required=required,dependency=asset)
             if role is not None:placement.update(role=role,frontage_entrance=e['id'])
@@ -382,12 +399,13 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
             plan['dependencies']=q['dependencies'];plan['placements']=q['placements']
             authority.rows=a.rows;authority.index=a.index;chosen=placement['id'];break
         except GenerationError as error: rejected.append(dict(asset=asset,rotation=rotation,mirror=mirror,reason=str(error)))
-    plot=dict(id=pid,owner=owner,road=road_id,normal=normal,buildable=buildable if ordered else [wx*W,wy*H,(wx+1)*W,(wy+1)*H],setback=c['setback_tiles'],placement=chosen,status='occupied' if chosen else 'vacant-garden',required=required,rejected=rejected)
+    plot=dict(id=pid,owner=owner,road=road_id,normal=normal,buildable=list(explicit_bounds) if explicit_bounds is not None else buildable if ordered else [wx*W,wy*H,(wx+1)*W,(wy+1)*H],setback=c['setback_tiles'],placement=chosen,status='occupied' if chosen else 'vacant-garden',required=required,rejected=rejected)
     if role is not None:
         plot.update(role=role,slot_order=slot_order)
         if chosen and role_rows is not None and next(r[2] for r in role_rows if r[0]==placement['asset']):
             plot['repetition']=('soft fallback: only eligible asset remains' if len(role_rows)==1 else
                                 'soft weighted repeat; penalty is a preference, hard limits retained')
+    if lot:plot.update(block=lot['block'],frontage=copy.deepcopy(lot['frontage']),join=list(lot['join']),civic_lot=lot['civic'],fit_trials=trials)
     if internal_access:plot['access']=dict(internal_access)
     plan['plots'].append(plot)
     if required and not chosen: raise GenerationError(f'{pid}: essential placement failed: {rejected}')
@@ -403,11 +421,11 @@ def validate_plan(plan,width,height):
 
 def _validate_plan(plan,width,height):
     """Durable structure/reference checks; never demand unmodified saved scene tiles."""
-    if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4'),(3,'wg5'),(4,'wg6'),(5,'wg7')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
+    if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4'),(3,'wg5'),(4,'wg6'),(5,'wg7'),(6,'wg8')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
     if plan['version']>=2 and plan.get('dependency_projection')!='structure-v1': raise GenerationError('dependency projection missing or unsupported')
     if plan.get('map_size')!=[W,H] or plan.get('world_size')!=[width,height]: raise GenerationError('G3 plan dimensions disagree')
     registries={}
-    for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations')+(('sites',) if plan['version']>=4 else ())+(('paths',) if plan['version']>=5 else ()):
+    for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations')+(('sites',) if plan['version']>=4 else ())+(('paths',) if plan['version']>=5 else ())+(('blocks','public_spaces') if plan['version']==6 else ()):
         rows=plan.get(name)
         if not isinstance(rows,list): raise GenerationError('missing G3 registry '+name)
         ids=[r.get('id') for r in rows if isinstance(r,dict)]
@@ -415,6 +433,9 @@ def _validate_plan(plan,width,height):
         registries[name]={r['id']:r for r in rows}
     from generation.plan_integrity import records
     records(plan,registries,width,height)
+    if plan['version']==6:
+        from generation.settlement_layout import validate_resolved
+        validate_resolved(plan,registries)
     if plan['version']>=3:
         from generation.settlement_selection import validate_resolved
         validate_resolved(plan)
@@ -462,10 +483,10 @@ def _validate_plan(plan,width,height):
         if plot['placement'] is None:
             if plot['required'] or plot['status']!='vacant-garden': raise GenerationError('G3 required plot silently became vacant')
         elif plot['placement'] not in registries['placements'] or plot['status']!='occupied': raise GenerationError('G3 plot placement reference invalid')
-    owners=set(registries['routes'])|set(registries['waters'])|set(registries['placements'])|set(registries.get('sites',{}))|set(registries.get('paths',{}))
+    owners=set(registries['routes'])|set(registries['waters'])|set(registries['placements'])|set(registries.get('sites',{}))|set(registries.get('paths',{}))|set(registries.get('public_spaces',{}))
     for r in plan['reservations']:
         # River banks may meet the world border; clipped at realization.
-        if r['owner'] not in owners or r['purpose'] not in (('water','road','structure','approach','envelope','path') if plan['version']>=5 else ('water','road','structure','approach')): raise GenerationError('G3 reservation owner/purpose invalid')
+        if r['owner'] not in owners or r['purpose'] not in (('water','road','structure','approach','envelope','path','common') if plan['version']==6 else ('water','road','structure','approach','envelope','path') if plan['version']>=5 else ('water','road','structure','approach')): raise GenerationError('G3 reservation owner/purpose invalid')
     from collections import Counter
     expected=[]
     for water in plan['waters']: expected.extend((water['id'],'water',tuple(expand(r,2))) for r in water['rects'])
@@ -474,10 +495,12 @@ def _validate_plan(plan,width,height):
     for s in plan.get('sites',[]):
         if s['kind']=='compound':expected.extend([(s['id'],'envelope',tuple(s['envelope'])),(s['id'],'approach',tuple(s['approach']))])
     for path in plan.get('paths',[]):expected.extend((path['id'],'path',tuple(r)) for r in path['rects'])
+    for common in plan.get('public_spaces',[]):expected.extend((common['id'],'common',tuple(r)) for r in common['rects'])
     actual=[(r['owner'],r['purpose'],tuple(r['rect'])) for r in plan['reservations']]
     if Counter(expected)!=Counter(actual): raise GenerationError('G3 reservation geometry does not match owner')
     authority=Reservations()
     for r in plan['reservations']:
+        if r['purpose']=='common' and set(r)!={'id','owner','purpose','rect'}:raise GenerationError('public common reservation has unsupported permissions')
         if plan['version']>=5 and (r['purpose'] in ('envelope','path') or 'container' in r):
             from generation.compound_integrity import replay_reservation
             replay_reservation(r,authority,registries)
@@ -554,4 +577,6 @@ def slice_plan(plan,wx,wy):
     if plan['version']>=5:
         result['sites']=[s for s in plan['sites'] if s['kind']=='compound' and s['chunk']==[wx,wy]]
         result['paths']=[p for p in plan['paths'] if p['owner'] in {s['id'] for s in result['sites']}]
+    if plan['version']==6:
+        result['public_spaces']=[dict(c,rects=[hit for r in c['rects'] if (hit:=intersect(r,rect))]) for c in plan['public_spaces'] if any(intersect(r,rect) for r in c['rects'])]
     return result

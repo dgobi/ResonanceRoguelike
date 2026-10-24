@@ -182,7 +182,7 @@ class G6Sites(unittest.TestCase):
             self.assertEqual(fingerprint(*visited),binding['visited_fingerprint'])
             self.assertEqual(visited[0].generation_revision,'wg5');self.assertEqual(visited[0].plan_provenance['adapter'],'g5-v1')
             pending=e._prepare_destination(*binding['pending']);self.assertIsNotNone(pending)
-            self.assertEqual(pending[0].plan_provenance['adapter'],'g5-to-g7-v1')
+            self.assertEqual(pending[0].plan_provenance['adapter'],'g5-to-g8-v1')
             self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
             self.assertTrue(e.save_manager.save(e),e.save_manager.last_error)
             e.debug=False;e._handle_key_local(pygame.K_F9);self.assertIsNone(e.save_manager.last_error)

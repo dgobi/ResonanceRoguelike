@@ -12,3 +12,10 @@ processes and app-local game events; do not control the desktop or delegate rout
 verification to the owner. Disposable test save roots and review artifacts are
 allowed; they are not development checkouts. Commit completed implementations when
 requested, and commit any implementation the owner accepts.
+
+Features that change owner workflows must update the affected authoritative guides
+and `Resonance_Wiki_Maintenance` chapters/examples, rebuild and validate
+`Resonance_Wiki_Maintenance/Resonance_Owner_Wiki.html`, and record reviewed source
+and evidence. For changes with no handbook impact, record that scoped conclusion.
+Follow the wiki's separate source/authoring/product binding; documentation-only
+delivery commits do not require rerunning unrelated game gates.

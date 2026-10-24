@@ -211,11 +211,11 @@ class G7Compounds(unittest.TestCase):
             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error);self.assertEqual(digest(e.world_map.plan),binding['plan_identity']);self.assertEqual(e.world_map.plan['version'],4)
             visited=e._prepare_destination(*binding['visited']);self.assertEqual(fingerprint(*visited),binding['visited_fingerprint']);self.assertEqual(visited[0].generation_revision,'wg6')
             self.assertEqual(visited[0].plan_provenance,binding['visited_provenance'])
-            pending=e._prepare_destination(*binding['pending']);self.assertIsNotNone(pending);self.assertEqual(pending[0].plan_provenance['adapter'],'g6-to-g7-v1')
-            self.assertEqual(pending[0].generation_revision,'wg7');self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
+            pending=e._prepare_destination(*binding['pending']);self.assertIsNotNone(pending);self.assertEqual(pending[0].plan_provenance['adapter'],'g6-to-g8-v1')
+            self.assertEqual(pending[0].generation_revision,'wg8');self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
             self.assertTrue(e.save_manager.save(e),e.save_manager.last_error);e.debug=False;e._handle_key_local(pygame.K_F9)
             self.assertEqual(fingerprint(*e._prepare_destination(*binding['visited'])),binding['visited_fingerprint'])
-        self.evidence('g7-authentic-g6-restore.json',dict(plan_identity=binding['plan_identity'],visited_revision='wg6',pending_adapter='g6-to-g7-v1',mutation_preserved=True,plan_unchanged=True))
+        self.evidence('g7-authentic-g6-restore.json',dict(plan_identity=binding['plan_identity'],visited_revision='wg6',pending_adapter='g6-to-g8-v1',mutation_preserved=True,plan_unchanged=True))
 
     def test_same_asset_children_and_same_recipe_parents_real_transfers_cold_and_f9(self):
         data=self.controlled(same=True);e=self.boot_data(data);e.debug=False;e.player_invincible=True;e.player.inventory.capacity=100

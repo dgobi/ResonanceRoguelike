@@ -27,7 +27,7 @@ class G5Selection(unittest.TestCase):
     boot=lifecycle.G3Lifecycle.boot
 
     def test_default_roles_caps_and_single_landmark(self):
-        plan=self.world.plan;self.assertEqual(plan['version'],5)
+        plan=self.world.plan;self.assertEqual(plan['version'],6)
         for s in plan['settlements']:
             plots=[p for p in plan['plots'] if p['owner']==s['id']]
             ids={p['placement'] for p in plots};placements=[p for p in plan['placements'] if p['id'] in ids]
@@ -149,7 +149,7 @@ class G5Selection(unittest.TestCase):
             **{k:[r['id'] for r in section[k]] for k in ('routes','crossings','placements')})
         m.set_tile(2,2,'mud',True,True);e.save_manager.cache.store(*start,m,[])
         created=e._prepare_destination(*keys[0]);self.assertIsNotNone(created)
-        self.assertEqual(created[0].plan_provenance['adapter'],'g4-to-g7-v1')
+        self.assertEqual(created[0].plan_provenance['adapter'],'g4-to-g8-v1')
         saved=fingerprint(*created);self.assertTrue(e.save_manager.save(e),e.save_manager.last_error)
         with patch('generation.world_plan.build_plan',side_effect=AssertionError('replanned')),patch('engine.scene_generation.populate',side_effect=AssertionError('repopulated')):
             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
