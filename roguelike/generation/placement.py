@@ -9,7 +9,7 @@ import json
 from generation.context import GenerationError
 
 NORMALS={'N':(0,-1),'E':(1,0),'S':(0,1),'W':(-1,0)}
-CONTEXTS={'grid','roadside','landmark','civic'}
+CONTEXTS={'grid','roadside','landmark','civic','compound'}
 
 
 def entrance_cells(e):
@@ -44,7 +44,7 @@ def validate_profile(raw,w,h):
     if not isinstance(p,dict) or type(p.get('version')) is not int or p.get('version')!=1: fail('version must be 1')
     allowed={'version','contexts','weight','rotations','mirror_x','buffer','approach','entrances','targets','road_relation'}
     if set(p)-allowed: fail('unknown fields: '+', '.join(sorted(set(p)-allowed)))
-    if not isinstance(p.get('contexts'),list) or not p['contexts'] or any(c not in CONTEXTS for c in p['contexts']): fail('contexts must name grid, roadside, civic or landmark')
+    if not isinstance(p.get('contexts'),list) or not p['contexts'] or any(c not in CONTEXTS for c in p['contexts']): fail('contexts must name grid, roadside, civic, landmark or compound')
     if type(p.get('weight')) not in (int,float) or not 0<p['weight']<=1000: fail('weight must be positive and at most 1000')
     if not isinstance(p.get('rotations'),list) or not p['rotations'] or any(type(r) is not int or r not in (0,90,180,270) for r in p['rotations']): fail('rotations must contain explicit quarter turns')
     if type(p.get('mirror_x')) is not bool: fail('mirror_x must be boolean')

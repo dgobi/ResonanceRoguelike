@@ -27,7 +27,11 @@ def main(argv=None):
     p.add_argument('--planned',action='store_true',help='Add a draft to its active pool and materialize its selected plots')
     p.add_argument('--site',action='store_true',help='Add a draft to the additional-site pool and preview naturally selected sites')
     p.add_argument('--assigned-site',choices=list('NESW'),help='Controlled one-site candidate preview with this primary frontage normal')
-    p.add_argument('--poi-config',type=Path,help='Complete version-one additional-site policy override')
+    p.add_argument('--compound',type=Path,help='Complete draft compound recipe; previews without installing')
+    p.add_argument('--child',type=Path,action='append',default=[],help='Actual child draft/export to use with --compound; repeatable')
+    p.add_argument('--assigned-compound',choices=list('NESW'),help='Controlled one-compound preview with this gate normal')
+    p.add_argument('--compound-rotation',type=int,choices=[0,90,180,270],help='One permitted parent transform for assigned preview')
+    p.add_argument('--poi-config',type=Path,help='Complete version-one or version-two parent policy override')
     p.add_argument('--context',choices=['grid','roadside','civic','landmark'],default='grid')
     p.add_argument('--role',choices=['residential','commercial','support','civic','landmark'])
     p.add_argument('--selection-config',type=Path,help='Complete version-one settlement selection profile override')
@@ -62,7 +66,11 @@ def main(argv=None):
                 destination.parent.mkdir(parents=True,exist_ok=True); destination.write_text(content,encoding='utf-8')
             elif not destination.exists() or destination.read_text(encoding='utf-8')!=content:
                 raise GenerationError('Editor catalog is stale. Run --refresh-editor-catalog and repeat runtime validation.')
-        if args.site or args.assigned_site:
+        if args.compound:
+            from generation.compound_preview import preview as compound_preview
+            with contextlib.redirect_stdout(log):
+                report=compound_preview(data,args.seed,read_document(args.compound),children=[read_document(c) for c in args.child],normal=args.assigned_compound,rotation=args.compound_rotation)
+        elif args.site or args.assigned_site:
             from generation.poi_preview import site_preview
             raw=read_document(args.candidate) if args.candidate else None
             with contextlib.redirect_stdout(log):

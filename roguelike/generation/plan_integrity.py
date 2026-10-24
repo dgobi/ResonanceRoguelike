@@ -25,6 +25,15 @@ def records(plan, registries, width, height):
     for water in plan['waters']:
         require(integer(water['width']) and water['width']>0 and water['travel_class']=='water',water['id'],'invalid water width/class')
         require(bool(water['rects']),water['id'],'empty water geometry')
+    for path in plan.get('paths',[]):
+        for r in path['rects']:rectangle(r,path['id'])
+    for site in plan.get('sites',[]):
+        if site['kind']=='compound':
+            point(site['origin'],site['id'])
+            point([site['gate']['x'],site['gate']['y']],site['id'])
+            for key in ('envelope','approach'):rectangle(site[key],site['id'])
+            for slot in site['slots']:
+                rectangle(slot['buildable'],site['id']);point(slot['join'],site['id'])
     for crossing in plan['crossings']:
         require(bool(crossing['deck']) and len(crossing['approaches'])==len(crossing['deck']),crossing['id'],'missing crossing deck/approaches')
         for r in crossing['approaches']:rectangle(r,crossing['id'],clipped=True)
@@ -64,10 +73,13 @@ def records(plan, registries, width, height):
     for plot in plan['plots']:
         pid=plot['id']; owner=plot['owner']; rectangle(plot['buildable'],pid)
         require(type(plot['required']) is bool and plot['normal'] in NORMALS and integer(plot['setback']) and plot['setback']>=0,pid,'invalid plot normal/required/setback')
-        require(plot['road'] in registries['routes'],pid,'unknown plot road')
+        internal=plot.get('access',{}).get('kind')=='internal'
+        require(internal and plan['version']>=5 and plot['road'] is None or plot['road'] in registries['routes'],pid,'unknown plot road')
         site=registries.get('sites',{}).get(owner)
         require(owner=='landmark' or owner in registries['settlements'] or site is not None,pid,'orphaned plot owner')
-        if site is not None:require(site['plot']==pid and site['placement']==plot['placement'] and pid not in listed_plots,pid,'site reverse ownership mismatch')
+        if site is not None:
+            if site['kind']=='compound':require(any(s['plot']==pid and s['placement']==plot['placement'] for s in site['slots']) and pid not in listed_plots,pid,'compound reverse ownership mismatch')
+            else:require(site['plot']==pid and site['placement']==plot['placement'] and pid not in listed_plots,pid,'site reverse ownership mismatch')
         elif owner!='landmark':require(listed_plots.get(pid)==owner,pid,'plot/settlement reverse ownership mismatch')
         else:require('landmark' in registries['nodes'] and pid not in listed_plots,pid,'invalid landmark owner')
         if plot['placement'] is not None:
@@ -78,7 +90,7 @@ def records(plan, registries, width, height):
             require(placement['road']==plot['road'] and placement['required']==plot['required'],pid,'placement/plot contract mismatch')
             chunk=(placement['origin'][0]//80,placement['origin'][1]//43)
             if site is not None:
-                require(placement['context']=='landmark' and list(chunk)==site['chunk'],pid,'site membership mismatch')
+                require(placement['context']==('compound' if site['kind']=='compound' else 'landmark') and list(chunk)==site['chunk'],pid,'site membership mismatch')
             elif owner=='landmark':
                 require(placement['context']=='landmark' and list(chunk)==registries['nodes']['landmark']['chunk'],pid,'landmark membership mismatch')
             else:
@@ -88,6 +100,8 @@ def records(plan, registries, width, height):
     require(set(placement_plots)==set(registries['placements']),'placements','orphaned placement without exactly one plot')
     for p in plan['placements']:
         pid=p['id']; require(integer(p['rotation']) and p['rotation'] in (0,90,180,270),pid,'unsupported rotation')
+        if 'access' in p:require(plan['version']>=5 and p['access'].get('kind')=='internal' and p['context']=='compound',pid,'unsupported typed access')
+        if p['context']=='compound':require(plan['version']>=5 and 'access' in p,pid,'compound child lacks internal access')
         require(type(p['mirror']) is bool and type(p['required']) is bool,pid,'mirror/required must be boolean')
         require(p['context'] in CONTEXTS and identifier(p['asset']) and p['dependency']==p['asset'],pid,'invalid context/asset/dependency')
         for key in ('origin','join'):point(p[key],pid)
@@ -112,6 +126,7 @@ def records(plan, registries, width, height):
     for r in plan['reservations']:
         rectangle(r['rect'],r['id'],clipped=r['purpose']=='water')
         if 'public_road' in r:
+            if plan['version']>=5 and 'container' in r:continue # exact permissions replayed after reciprocal ownership
             require(r['purpose']=='approach' and r['public_road']==registries['placements'][r['owner']]['road'],r['id'],'public approach assigned to wrong road')
 
 

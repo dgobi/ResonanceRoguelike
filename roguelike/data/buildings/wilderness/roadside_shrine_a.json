@@ -77,7 +77,8 @@
   "placement": {
     "version": 1,
     "contexts": [
-      "landmark"
+      "landmark",
+      "compound"
     ],
     "weight": 1,
     "rotations": [

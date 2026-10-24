@@ -68,7 +68,9 @@ def plan_svg(plan):
             column=(index-1)//7;row=(index-1)%7
             label=n['id']
             if label in sites:
-                asset=next(p['asset'] for p in plan['placements'] if p['id']==sites[label]['placement']);label+=' '+asset
+                site=sites[label]
+                asset=site['recipe'] if site['kind']=='compound' else next(p['asset'] for p in plan['placements'] if p['id']==site['placement'])
+                label+=' '+asset
             parts.append(f'<text x="{8+column*480}" y="{height+32+row*10}" fill="{color}" font-size="8">{index}: {html.escape(label)}</text>')
     parts.append(f'<text x="8" y="{height+16}" fill="white" font-size="10">{plan["generation_revision"]} seed {plan["seed"]}: plan diagram. Gold roads; pink required destinations; teal additional sites.</text></svg>')
     return '\n'.join(parts)

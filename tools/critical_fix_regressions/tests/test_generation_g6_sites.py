@@ -16,7 +16,7 @@ import test_generation_g4_interactions as interactions
 from test_effect_persistence import make_engine
 from generation.context import GenerationError
 from generation.placement import digest,transform
-from generation.poi_selection import resolve,eligible,candidates,populate,junctions
+from generation.poi_selection import resolve,eligible,candidates,populate,junctions,single_policy
 from generation.road_network import PhysicalRoads
 from generation.world_plan import validate_plan,bands,address,Reservations,member_chunks
 from generation.world_gen import generate_world
@@ -53,10 +53,18 @@ class G6Network(unittest.TestCase):
 
 
 class G6Sites(unittest.TestCase):
-    setUpClass=classmethod(gameplay.G4Gameplay.setUpClass.__func__)
+    @classmethod
+    def setUpClass(cls):
+        from test_effect_persistence import load_data
+        cls.data=load_data();cls.data.poi_profiles=single_policy(cls.data.poi_profiles)
+        cls.world=WorldMap(128,128);cls.world.seed=20261023;generate_world(cls.world,cls.data,random.Random(0))
     setUp=gameplay.G4Gameplay.setUp
     scene=gameplay.G4Gameplay.scene
-    boot=lifecycle.G3Lifecycle.boot
+    def boot(self):
+        import main
+        # This suite explicitly retains G6 single-site policy semantics. Current
+        # materialization still runs, including historical adapter assertions.
+        with patch.object(main,'DataLoader',return_value=self.data):return lifecycle.G3Lifecycle.boot(self)
     visit=interactions.G4Interactions.visit
     interact=interactions.G4Interactions.interact
     render=interactions.G4Interactions.render
@@ -174,7 +182,7 @@ class G6Sites(unittest.TestCase):
             self.assertEqual(fingerprint(*visited),binding['visited_fingerprint'])
             self.assertEqual(visited[0].generation_revision,'wg5');self.assertEqual(visited[0].plan_provenance['adapter'],'g5-v1')
             pending=e._prepare_destination(*binding['pending']);self.assertIsNotNone(pending)
-            self.assertEqual(pending[0].plan_provenance['adapter'],'g5-to-g6-v1')
+            self.assertEqual(pending[0].plan_provenance['adapter'],'g5-to-g7-v1')
             self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
             self.assertTrue(e.save_manager.save(e),e.save_manager.last_error)
             e.debug=False;e._handle_key_local(pygame.K_F9);self.assertIsNone(e.save_manager.last_error)
@@ -183,7 +191,7 @@ class G6Sites(unittest.TestCase):
     def test_same_asset_independence_reverse_visits_real_transfers_cold_and_f9(self):
         data=self.data_policy(minimum=2,maximum=2,assets=[dict(asset='roadside_shrine_a',weight=1,cap=2)])
         import main
-        with patch.object(main,'DataLoader',return_value=data):e=self.boot()
+        with patch.object(main,'DataLoader',return_value=data):e=lifecycle.G3Lifecycle.boot(self)
         e.debug=False;e.player_invincible=True;e.player.inventory.capacity=100
         sites=e.world_map.plan['sites'];self.assertEqual(len(sites),2)
         first={tuple(s['chunk']):fingerprint((r:=self.scene(s['chunk'],e.world_map)).local_map,r.actors) for s in sites}

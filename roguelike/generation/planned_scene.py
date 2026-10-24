@@ -49,6 +49,12 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
         for r in road['rects']: road_cells.update(local(r))
     if (road_cells&water_cells)-deck: raise GenerationError('road crosses water without an assigned bridge')
     paint(road_cells-water_cells,'road_0'); paint(deck,'cobblestone'); protected.update(road_cells)
+    for site in section.get('sites',[]):
+        common=local(site['approach'])
+        for path in section['paths']:
+            if path['owner']==site['id']:
+                for r in path['rects']:common.update(local(r))
+        paint(common-road_cells,'dirt_path');protected.update(common)
     buildings=[]
     for p in section['placements']:
         raw=transform(definitions[p['id']],p['rotation'],p['mirror']); ox,oy=p['origin'][0]-x0,p['origin'][1]-y0
@@ -113,7 +119,9 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
                        'placements':[p['id'] for p in section['placements']],
                        'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
                        'plan_identity':digest(world.plan),
-                       'dependency_projection':'structure-v1','adapter':adapter('wg6',world.plan['version'])}
+                       'dependency_projection':'structure-v1','adapter':adapter('wg7',world.plan['version'])}
+    if world.plan['version']>=5:
+        m.plan_provenance.update(paths=[p['id'] for p in section['paths']],compounds=[s['id'] for s in section['sites']])
     # These are actual first-creation inputs, not invented historical G3 hashes.
     m.native_input_provenance={f'entities:{a._creature_id}':digest(data.entities[a._creature_id]) for a in actors}
     m.native_input_provenance.update({f'terrain:{tid}':digest(data.terrain[tid]) for tid in ('dead_wood','flint_rock','clay_deposit')})
@@ -125,7 +133,7 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
         mapped=data.text_item_map.get('waystone_prayer_a','letter')
         m.native_input_provenance['prayer-item:'+mapped]=digest(data.items[mapped])
     m.native_generation_context=native
-    m.generation_revision='wg6'; m.generation_complete=True
+    m.generation_revision='wg7'; m.generation_complete=True
     return SceneResult(m,actors,spawn,staged,receipts)
 
 
@@ -134,10 +142,18 @@ def validate_access(m,section,data,wx,wy):
     from generation.structure_preview import check_access
     x0,y0=wx*W,wy*H
     road=set(m.road_cells)
+    for site in section.get('sites',[]):
+        reached=reachable(m,(site['attachment']['join'][0]-x0,site['attachment']['join'][1]-y0),data)
+        needed=cells(site['approach'])
+        for path in section['paths']:
+            if path['owner']==site['id']:
+                for r in path['rects']:needed|=cells(r)
+        if not {(x-x0,y-y0) for x,y in needed}<=reached:raise GenerationError(site['id']+': final gate/common path is blocked')
     for p in section['placements']:
         join=p['join'][0]-x0,p['join'][1]-y0
         frontage_entrance(p)
-        assigned=next((r for r in section['routes'] if r['id']==p['road']),None)
+        internal=p.get('access',{}).get('kind')=='internal'
+        assigned=next((r for r in section.get('paths',[]) if r['id']==p['access']['path'] and r['owner']==p['access']['parent']),None) if internal else next((r for r in section['routes'] if r['id']==p['road']),None)
         if assigned is None or not any(r[0]<=p['join'][0]<r[2] and r[1]<=p['join'][1]<r[3] for r in assigned['rects']): raise GenerationError(f'{p["id"]}: assigned frontage missing')
         reached=reachable(m,join,data)
         approach={(x-x0,y-y0) for x,y in cells(p['approach'])}

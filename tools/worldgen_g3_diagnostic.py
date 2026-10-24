@@ -29,7 +29,7 @@ def main():
     from verify_b3 import source_manifest
     out=args.evidence.resolve();out.mkdir(parents=True,exist_ok=True);source=source_manifest()
     report={'declared_seeds':[0,20261023,29417],'sample_size':3,'source':source,'runs':[],'failures':[],'journey':None,
-            'command':[sys.executable,*sys.argv],'cwd':str(Path.cwd()),'python':sys.version,'revision':'wg6'}
+            'command':[sys.executable,*sys.argv],'cwd':str(Path.cwd()),'python':sys.version,'revision':'wg7'}
     data=load_data();log=io.StringIO()
     for seed in report['declared_seeds']:
         try:
@@ -50,12 +50,21 @@ def main():
                 row['physical_network']['distance_units']='shortest four-neighbour tile steps on full-width road/deck/access union'
                 row['sites']=dict(minimum=plan['poi_policy']['minimum'],featured=1,**metrics['sites'],records=[])
                 for site in plan['sites']:
+                    if site['kind']=='compound':
+                        children=[p for p in plan['placements'] if p.get('parent')==site['id']]
+                        row['sites']['records'].append(dict(**site,children=children,paths_resolved=[p for p in plan['paths'] if p['owner']==site['id']]))
+                        continue
                     placement=next(p for p in plan['placements'] if p['id']==site['placement'])
                     row['sites']['records'].append(dict(**site,asset=placement['asset'],rotation=placement['rotation'],mirror=placement['mirror'],
                         access_length=max(placement['approach'][2]-placement['approach'][0],placement['approach'][3]-placement['approach'][1])-1,
                         nearest_other_join=min((distance(placement['join'],s['attachment']['join']) for s in plan['sites'] if s!=site),default=None),
                         town_extent_distance=min(extent_distance(placement['join'],s['bounds']) for s in plan['settlements'])))
-                row['sites']['asset_counts']={r['asset']:sum(p['asset']==r['asset'] and p.get('role')=='site' for p in plan['placements']) for r in plan['poi_policy']['assets']}
+                row['sites']['single_asset_counts']=dict(Counter(p['asset'] for p in plan['placements'] if p.get('role')=='site'))
+                row['sites']['child_asset_counts']=dict(Counter(p['asset'] for p in plan['placements'] if p.get('parent')))
+                row['sites']['recipe_counts']=dict(Counter(s['recipe'] for s in plan['sites'] if s['kind']=='compound'))
+                row['sites']['accepted_children']=sum(s['placement'] is not None for p in plan['sites'] if p['kind']=='compound' for s in p['slots'])
+                row['sites']['omitted_slots']=[dict(parent=p['id'],slot=s['id'],reason=s['omission']) for p in plan['sites'] if p['kind']=='compound' for s in p['slots'] if s['placement'] is None]
+                row['sites']['metadata_bytes']=len(json.dumps({k:plan[k] for k in ('sites','poi_policy','site_selection')+ (('paths',) if plan['version']>=5 else ())},separators=(',',':')).encode())
             row['asset_repetition']=dict(Counter(p['asset'] for p in plan['placements']))
             row['plot_occupancy']=len(plan['placements'])/len(plan['plots'])
             row['metric_definitions']={'plot_occupancy':'occupied/all proposed plots including required landmark; historical frontage_coverage was the same number and is deprecated',
@@ -89,8 +98,8 @@ def main():
                                       'functional_passes':result.local_map.functional_generation})
                 for site in (s for s in plan.get('sites',[]) if tuple(s['chunk'])==xy):
                     from worldgen_g6_diagnostic import site_svg
-                    placement=next(p for p in plan['placements'] if p['id']==site['placement'])
-                    row['scenes'][-1]['site_goals']=placement['targets'];row['scenes'][-1]['site_id']=site['id']
+                    children=[p for p in plan['placements'] if p.get('parent')==site['id']] if site['kind']=='compound' else [next(p for p in plan['placements'] if p['id']==site['placement'])]
+                    row['scenes'][-1]['site_goals']={p['id']:p['targets'] for p in children};row['scenes'][-1]['site_id']=site['id']
                     view=snapshot(result.local_map,result.actors,data);view['access']=[]
                     (out/f'{seed}-{site["id"]}-scene.svg').write_text(render_svg(view),encoding='utf-8')
                     (out/f'{seed}-{site["id"]}-plan.svg').write_text(site_svg(plan,site),encoding='utf-8')

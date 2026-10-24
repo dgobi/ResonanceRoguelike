@@ -4,7 +4,7 @@ import random
 import time
 from generation.context import GenerationError
 from generation.placement import digest
-from generation.poi_selection import candidates,populate,resolve
+from generation.poi_selection import candidates,populate,resolve,single_policy
 from generation.world_plan import Reservations,member_chunks,validate_plan,publish_plan
 
 
@@ -17,11 +17,13 @@ def site_preview(data,seed,raw=None,category='wilderness',policy=None,normal=Non
     from engine.creature_factory import CreatureFactory
     from world.world_map import WorldMap
     bound=copy.copy(data);bound.poi_profiles=copy.deepcopy(policy or data.poi_profiles)
+    if normal is not None:bound.poi_profiles=single_policy(bound.poi_profiles)
     if raw is not None:
         entry=compile_structure(raw,'ordinary_building',data,category=category)
         bound.structures=dict(data.structures,**{raw['id']:entry.definition})
-        if not any(r['asset']==raw['id'] for r in bound.poi_profiles['assets']):
-            bound.poi_profiles['assets'].append(dict(asset=raw['id'],weight=1,cap=2))
+        field='choices' if bound.poi_profiles['version']==2 else 'assets'
+        if not any(r.get('asset')==raw['id'] for r in bound.poi_profiles[field]):
+            bound.poi_profiles[field].append(dict(asset=raw['id'],weight=1,cap=2,**({'kind':'single'} if field=='choices' else {})))
     if normal is not None:
         if raw is None or normal not in 'NESW':raise GenerationError('assigned site preview requires a draft and frontage normal')
         bound.poi_profiles.update(minimum=1,maximum=1,assets=[dict(asset=raw['id'],weight=1,cap=2)])
@@ -37,7 +39,7 @@ def site_preview(data,seed,raw=None,category='wilderness',policy=None,normal=Non
         rows,_=candidates(plan,resolve(bound))
         populate(plan,authority,world,bound,candidate_rows=[r for r in rows if r['normal']==normal])
         plan['reservations']=authority.rows;validate_plan(plan,128,128);publish_plan(world,plan)
-    selected=[s for s in world.plan['sites'] if raw is None or next(p for p in world.plan['placements'] if p['id']==s['placement'])['asset']==raw['id']]
+    selected=[s for s in world.plan['sites'] if s['kind']!='compound' and (raw is None or next(p for p in world.plan['placements'] if p['id']==s['placement'])['asset']==raw['id'])]
     if raw is not None and not selected:raise GenerationError('eligible site candidate was not selected/fitted; eligibility is not a selection guarantee; inspect --world-plan with --poi-config')
     previews=[]
     for site in selected:

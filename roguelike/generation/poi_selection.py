@@ -13,6 +13,15 @@ FIELDS={'version','id','minimum','maximum','assets','repeat_multiplier','spacing
         'enumeration_limit','candidate_limit','fit_budget'}
 
 
+def single_policy(policy):
+    """Explicit G6/assigned-single fixture, never a saved-plan migration."""
+    result=copy.deepcopy(policy)
+    if result['version']==2:
+        rows=result.pop('choices');result.pop('kind_minimum');result['version']=1
+        result['assets']=[{k:v for k,v in r.items() if k!='kind'} for r in rows if r['kind']=='single']
+    return result
+
+
 def require_usable_goal(raw,consumer):
     """Connected parent/child selection needs a goal; generic layouts need not."""
     if not any(t.get('required') is True for t in raw.get('placement',{}).get('targets',[])):
@@ -20,6 +29,9 @@ def require_usable_goal(raw,consumer):
 
 
 def validate(policy,data=None):
+    if isinstance(policy,dict) and policy.get('version')==2:
+        from generation.parent_selection import validate
+        return validate(policy,data)
     def require(ok,message):
         if not ok:raise GenerationError('POI policy: '+message)
     def positive(x):return type(x) in (int,float) and math.isfinite(x) and 0<x<=1000
@@ -52,6 +64,9 @@ def validate(policy,data=None):
 
 
 def resolve(data):
+    if data.poi_profiles.get('version')==2:
+        from generation.parent_selection import resolve
+        return resolve(data)
     policy=copy.deepcopy(validate(data.poi_profiles,data))
     policy['assets'].sort(key=lambda r:r['asset']);policy['locations'].sort()
     for r in policy['assets']:r['base_weight']=data.structures[r['asset']]['placement']['weight']
@@ -114,6 +129,9 @@ def eligible(plan,join):
 
 
 def populate(plan,authority,world,data,metrics=None,*,candidate_rows=None):
+    if data.poi_profiles.get('version')==2:
+        from generation.parent_selection import populate
+        return populate(plan,authority,world,data,metrics,candidate_rows=candidate_rows)
     from generation.world_plan import _plot,plot_options,staged,address,intersect
     started=time.perf_counter();policy=resolve(data);plan['poi_policy']=policy;plan['sites']=[]
     desired=random.Random(stable_seed('wg6',plan['seed'],'poi-count')).randint(policy['minimum'],policy['maximum'])
@@ -173,6 +191,9 @@ def populate(plan,authority,world,data,metrics=None,*,candidate_rows=None):
 
 def validate_resolved(plan,registries):
     """Saved self-contained policy and bidirectional ownership, no live selector."""
+    if plan['version']>=5:
+        from generation.parent_selection import validate_resolved
+        return validate_resolved(plan,registries)
     from generation.world_plan import address,bands,bounds,intersect
     from generation.placement import entrance_cells
     def require(ok,message):

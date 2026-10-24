@@ -180,7 +180,8 @@
     "version": 1,
     "contexts": [
       "grid",
-      "roadside"
+      "roadside",
+      "compound"
     ],
     "weight": 1.0,
     "rotations": [

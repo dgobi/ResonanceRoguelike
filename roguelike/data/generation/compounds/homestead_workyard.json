@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "id": "homestead_workyard",
+  "size": [44, 16],
+  "rotations": [0, 180],
+  "gate": {"id": "yard_gate", "x": 21, "y": 15, "normal": "S", "width": 3, "path": "yard"},
+  "paths": [{"id": "yard", "rects": [[1, 12, 43, 16]], "joins": []}],
+  "slots": [
+    {"id": "home", "role": "dwelling", "required": true, "buildable": [1, 0, 15, 12], "path": "yard", "join": [7, 12], "normal": "S", "rotations": [0], "assets": [{"asset": "house_hearth_a", "weight": 1}]},
+    {"id": "workshop", "role": "tools", "required": true, "buildable": [16, 0, 26, 12], "path": "yard", "join": [20, 12], "normal": "S", "rotations": [0], "assets": [{"asset": "tool_shed_a", "weight": 1}]},
+    {"id": "stores", "role": "supplies", "required": false, "buildable": [27, 0, 44, 12], "path": "yard", "join": [33, 12], "normal": "S", "rotations": [0], "assets": [{"asset": "storehouse_a", "weight": 1}]}
+  ],
+  "fit_budget": 24
+}

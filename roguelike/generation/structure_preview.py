@@ -211,7 +211,8 @@ def render_svg(report):
     for p in report.get('placements',[]):
         for key,color in [('clearance','#80a0c0'),('approach','#71e1d6'),('footprint','#e6bc64')]:
             x,y,x1,y1=p[key]
-            parts.append(f'<rect x="{(x-x0)*size}" y="{(y-y0)*size}" width="{(x1-x)*size}" height="{(y1-y)*size}" fill="none" stroke="{color}"><title>{html.escape(p["id"]+" "+key+" assigned "+p["road"])}</title></rect>')
+            assigned=p['access']['path'] if p.get('access',{}).get('kind')=='internal' else p['road']
+            parts.append(f'<rect x="{(x-x0)*size}" y="{(y-y0)*size}" width="{(x1-x)*size}" height="{(y1-y)*size}" fill="none" stroke="{color}"><title>{html.escape(p["id"]+" "+key+" assigned "+assigned)}</title></rect>')
         for e in p['entrances']:
             for x,y in entrance_cells(e):
                 parts.append(f'<text x="{(x-x0)*size+6}" y="{(y-y0)*size+10}" fill="#ffffff"><title>Entrance {e["id"]}, outward {e["normal"]}</title>{e["normal"]}</text>')

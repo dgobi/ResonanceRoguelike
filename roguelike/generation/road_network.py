@@ -19,6 +19,8 @@ class PhysicalRoads:
         rectangles.extend(r for crossing in plan.get('crossings',[]) for r in crossing['deck'])
         if include_access:
             rectangles.extend(p['approach'] for p in plan.get('placements',[]))
+            rectangles.extend(r for path in plan.get('paths',[]) for r in path['rects'])
+            rectangles.extend(s['approach'] for s in plan.get('sites',[]) if s['kind']=='compound')
         # Exact rectangle deduplication also bounds retracing work.
         for x,y,x1,y1 in sorted(set(map(tuple,rectangles))):
             if (x1-x)*(y1-y)>MAX_CELLS:
@@ -62,10 +64,12 @@ class PhysicalRoads:
             if n['required'] and not self.connected(start,n['xy']):
                 raise GenerationError(f'{n["id"]}: required destination is outside connected physical road system')
         for site in plan.get('sites',[]):
-            p=next(p for p in plan['placements'] if p['id']==site['placement'])
-            x,y,x1,y1=p['approach']
-            if any(not self.connected(start,(a,b)) for a in range(x,x1) for b in range(y,y1)):
-                raise GenerationError(f'{site["id"]}: parent {p["road"]} has disconnected complete access')
+            selected=([p for p in plan['placements'] if p.get('parent')==site['id']] if site['kind']=='compound' else [next(p for p in plan['placements'] if p['id']==site['placement'])])
+            rectangles=[p['approach'] for p in selected]
+            if site['kind']=='compound':rectangles+=[site['approach']]+[r for path in plan['paths'] if path['owner']==site['id'] for r in path['rects']]
+            for x,y,x1,y1 in rectangles:
+                if any(not self.connected(start,(a,b)) for a in range(x,x1) for b in range(y,y1)):
+                    raise GenerationError(f'{site["id"]}: parent {site["attachment"]["road"]} has disconnected complete access')
         return dict(cells=len(self.cells),components=len(self.component_sizes),component_sizes=self.component_sizes,
                     connected_sites=len(plan.get('sites',[])),adjacency='shared cells or four-neighbour unit tile steps')
 

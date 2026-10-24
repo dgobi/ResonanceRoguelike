@@ -1,13 +1,16 @@
 {
-  "version": 1,
-  "id": "rural-sites-v1",
+  "version": 2,
+  "id": "rural-places-v2",
   "minimum": 2,
   "maximum": 4,
-  "assets": [
-    {"asset": "roadside_shrine_a", "weight": 1, "cap": 2},
-    {"asset": "hunter_cabin", "weight": 1, "cap": 2},
-    {"asset": "shepherds_hut_a", "weight": 1, "cap": 2},
-    {"asset": "waymarker_shelter_a", "weight": 1, "cap": 2}
+  "kind_minimum": {"single": 1, "compound": 1},
+  "choices": [
+    {"kind": "single", "asset": "roadside_shrine_a", "weight": 1, "cap": 2},
+    {"kind": "single", "asset": "hunter_cabin", "weight": 1, "cap": 2},
+    {"kind": "single", "asset": "shepherds_hut_a", "weight": 1, "cap": 2},
+    {"kind": "single", "asset": "waymarker_shelter_a", "weight": 1, "cap": 2},
+    {"kind": "compound", "recipe": "homestead_workyard", "weight": 2, "cap": 2},
+    {"kind": "compound", "recipe": "wayside_shrine_court", "weight": 2, "cap": 2}
   ],
   "repeat_multiplier": 0.2,
   "spacing_tiles": 80,

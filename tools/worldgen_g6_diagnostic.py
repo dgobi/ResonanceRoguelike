@@ -3,6 +3,9 @@ from html import escape
 
 
 def site_svg(plan,site):
+    if site['kind']=='compound':
+        from worldgen_g7_diagnostic import compound_svg
+        return compound_svg(plan,site)
     from generation.world_plan import intersect
     p=next(p for p in plan['placements'] if p['id']==site['placement'])
     x,y=site['chunk'][0]*80,site['chunk'][1]*43;rect=[x,y,x+80,y+43]

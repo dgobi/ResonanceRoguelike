@@ -34,6 +34,7 @@ class DataLoader:
         self.g3_config:         dict = self._load("generation/g3_config.json")
         self.settlement_profiles: dict = self._load("generation/settlement_profiles.json")
         self.poi_profiles: dict = self._load("generation/poi_profiles.json")
+        self.compounds: dict = self._load_dir("generation/compounds")
         self.resonance_spawns:  list = self._load_list("resonance_spawns.json")
         self.weather_defs:      dict = self._load("weather.json")
         self.survival:          dict = self._load("survival.json")
