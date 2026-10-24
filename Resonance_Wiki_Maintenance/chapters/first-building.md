@@ -199,10 +199,10 @@ For a house with a separate service entrance, start from `roguelike/docs/example
 
 ## Sources
 
-- [CLI behavior and output contract](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/structure_authoring.py)
-- [Placement validation and transformations](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/placement.py)
-- [Role registration and selection validation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/settlement_selection.py)
-- [Complete existing authoring recipes](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/docs/STRUCTURE_AUTHORING.md)
+- [CLI behavior and output contract](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/structure_authoring.py)
+- [Placement validation and transformations](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/placement.py)
+- [Role registration and selection validation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/settlement_selection.py)
+- [Complete existing authoring recipes](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/STRUCTURE_AUTHORING.md)
 
 ## G7 composition integration
 

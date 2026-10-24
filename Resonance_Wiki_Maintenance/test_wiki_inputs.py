@@ -33,6 +33,22 @@ class WikiInputs(unittest.TestCase):
         self.check();self.assertNotEqual(self.git('rev-parse','HEAD').strip(),self.config['commit'])
         self.bind();self.check()
 
+    def test_exact_product_survives_checkout_filters_and_policy_is_bound(self):
+        attributes=self.root/'.gitattributes'
+        self.output.write_bytes(b'<html>Reviewed fixture\n</html>\n')
+        attributes.write_bytes(b'Resonance_Owner_Wiki.html -text\n')
+        self.bind();self.git('add','wiki');self.commit('deliver exact product and checkout policy')
+        for setting in ('false','true','input'):
+            raw=subprocess.check_output(['git','-C',str(self.repo),'-c','core.autocrlf='+setting,
+                                         'cat-file','--filters','HEAD:wiki/Resonance_Owner_Wiki.html'])
+            self.assertEqual(raw,self.output.read_bytes());self.check()
+        original=attributes.read_bytes()
+        attributes.write_bytes(original.replace(b'\n',b'\r\n'));self.check()
+        attributes.write_bytes(b'Resonance_Owner_Wiki.html text\n')
+        with self.assertRaisesRegex(ValueError,'wiki authoring'):self.check()
+        attributes.write_bytes(original);self.check();attributes.unlink()
+        with self.assertRaisesRegex(ValueError,'wiki authoring'):self.check()
+
     def test_unreviewed_changed_missing_and_added_sources_cannot_be_rebuilt(self):
         source=self.repo/'guide.md';original=source.read_bytes()
         for action in ('changed','missing','added'):

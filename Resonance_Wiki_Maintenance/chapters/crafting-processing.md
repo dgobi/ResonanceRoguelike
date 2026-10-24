@@ -125,9 +125,9 @@ The focused suite contains specific crafting, action-route and effect-persistenc
 
 ## Source bindings
 
-- [Matching and exact-instance commit](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/crafting.py)
-- [Craft screen, ambient sources and result routing](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/craft_screen.py)
-- [Placement and processing completion](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/engine.py)
-- [Cooking template](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/recipes/cook_meat.json)
-- [Single-item template](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/recipes/dry_bitter_herb.json)
-- [Current B2 state reconstruction record](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/docs/owner/B2_STATE.md)
+- [Matching and exact-instance commit](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/crafting.py)
+- [Craft screen, ambient sources and result routing](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/craft_screen.py)
+- [Placement and processing completion](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py)
+- [Cooking template](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/recipes/cook_meat.json)
+- [Single-item template](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/recipes/dry_bitter_herb.json)
+- [Current B2 state reconstruction record](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/owner/B2_STATE.md)

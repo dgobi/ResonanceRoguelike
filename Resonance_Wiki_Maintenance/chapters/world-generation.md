@@ -64,10 +64,10 @@ The installed catalog includes settlement assets, the spent bell, single-site al
 
 ## Sources and implementation anchors
 
-- [World planner and current settings validation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/world_plan.py)
-- [Complete planned scene creation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/planned_scene.py)
-- [G6 delivered scope and boundaries](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/docs/owner/WORLDGEN_G6.md)
-- [Current geometry settings](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/generation/g3_config.json)
+- [World planner and current settings validation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/world_plan.py)
+- [Complete planned scene creation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/planned_scene.py)
+- [G6 delivered scope and boundaries](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/WORLDGEN_G6.md)
+- [Current geometry settings](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/generation/g3_config.json)
 
 ## Optional country connections
 
@@ -75,7 +75,7 @@ G9 first completes and validates the whole G8 backbone, settlements and rural co
 
 Construction counts new unique **unit centerline edges**, with one shared cap of 25% of the complete baseline country union. Reused edges cost no new construction. Travel counts shortest **four-neighbour steps on full-width road, deck and access cells** between fixed primary destinations: start, every settlement, capital gateway and landmark. A macro step spans 80 horizontal or 43 vertical tiles. Search score, physical distance and actual movement-input counts are different units.
 
-Default admission requires at least 500 saved steps and 25% improvement for a named primary pair, recomputed after each accepted connection. Candidate search is finite and deterministic; it is not a global optimum. Ordinary seed 20261023 improves settlement-1 to capital-gateway from 23,625 to 8,063 physical steps with 5,265 new centerline edges out of 24,631 (21.37%). Ordinary seeds 0 and 29417 add none. These three samples are not a frequency forecast.
+Default admission requires at least 500 saved steps and 25% improvement for a named primary pair, recomputed after each accepted connection. Candidate search is finite and deterministic; it is not a global optimum. Ordinary seed 20261023 improves settlement-1 to capital-gateway from 23,625 to 8,063 physical steps with 5,265 new centerline edges out of 24,631 (21.38%). Ordinary seeds 0 and 29417 add none. These three samples are not a frequency forecast.
 
 New road bands cannot enter town, building, compound, capital or submap owner chunks, including new endpoint entrances. Full widths and corners are checked. Existing bridge decks can be reused under explicit crossing ownership; **no new physical river bridge** is constructed. Every touched local road slice must remain connected. Original paths still provide genuine alternative country corridors.
 

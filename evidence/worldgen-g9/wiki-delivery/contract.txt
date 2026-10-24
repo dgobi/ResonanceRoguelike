@@ -1,0 +1,11 @@
+test_binary_exact_bom_trailing_newline_and_complete_helper_membership (__main__.WikiInputs.test_binary_exact_bom_trailing_newline_and_complete_helper_membership) ... ok
+test_exact_product_survives_checkout_filters_and_policy_is_bound (__main__.WikiInputs.test_exact_product_survives_checkout_filters_and_policy_is_bound) ... ok
+test_newline_equivalence_preserves_capture_for_source_and_authoring (__main__.WikiInputs.test_newline_equivalence_preserves_capture_for_source_and_authoring) ... ok
+test_repeat_and_later_documentation_delivery_commit (__main__.WikiInputs.test_repeat_and_later_documentation_delivery_commit) ... ok
+test_stale_missing_wiki_and_product (__main__.WikiInputs.test_stale_missing_wiki_and_product) ... ok
+test_unreviewed_changed_missing_and_added_sources_cannot_be_rebuilt (__main__.WikiInputs.test_unreviewed_changed_missing_and_added_sources_cannot_be_rebuilt) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 8.291s
+
+OK

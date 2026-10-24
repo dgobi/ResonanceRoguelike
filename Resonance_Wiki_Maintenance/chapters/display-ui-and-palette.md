@@ -23,7 +23,7 @@ The game opens in a resizable 1280 × 720 Pygame window. Its default world art i
 
 There are font discovery, font-switching, and display serialization methods in `DisplayConfig`, but the current Engine has no exposed general options menu using them, and the save route does not persist these display preferences. Do not follow old prose promising an in-game font menu or persistent zoom setting. `FONT_TYPE` is retained metadata; the glyph lookup currently uses the TCOD character map rather than dispatching to a distinct CP437 implementation.
 
-Sources: [config](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/config.py), [display configuration](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/display_config.py), [window and input implementation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/engine.py).
+Sources: [config](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/config.py), [display configuration](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/display_config.py), [window and input implementation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py).
 
 ## Make map art larger or smaller
 
@@ -60,7 +60,7 @@ The actual sizes are in `DisplayConfig.init()`:
 
 Use `font.get_linesize()` or measured text dimensions in code rather than assuming the point/size argument equals the rendered line height. The retained `UI-TEXT-HEIGHT` issue remains outside the completed combat/generation arcs; these instructions do not imply that every existing screen is robust to arbitrary font increases.
 
-Source: [font initialization and helper methods](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/display_config.py), [documented deferred UI boundary](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/docs/owner/D_STATE.md).
+Source: [font initialization and helper methods](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/display_config.py), [documented deferred UI boundary](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/owner/D_STATE.md).
 
 ## Colour ownership
 
@@ -84,7 +84,7 @@ ASCII rendering uses the tile registry's dark colour fields. Sprite rendering ha
 
 Treat these as current implementation limits when adjusting darkness or introducing coloured light. A new `light_color` field alone is not proof of a visibly coloured pool in the default world renderer.
 
-Source: [palette](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/palette.py), [map, decorative, and sprite draw paths](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/renderer.py).
+Source: [palette](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/palette.py), [map, decorative, and sprite draw paths](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/renderer.py).
 
 ## Add or change a panel frame
 
@@ -114,7 +114,7 @@ engine.ui_registry.draw_panel(
 
 At `border_scale=2`, the source's 15-pixel corner region becomes 30 screen pixels. Use the current implementation and the actual screen's layout instead of copying the old UI guide's 12-pixel-border assumption. `pygame.Rect.inflate(-18, -18)` removes 18 pixels from the total width/height—9 on each side—not 18 per side. When you need an inset of `pad` on all sides, use `inflate(-2 * pad, -2 * pad)` or construct the interior explicitly.
 
-Source: [panel loader and drawing implementation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/ui_registry.py), [inventory's current layout](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/inventory_screen.py).
+Source: [panel loader and drawing implementation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/ui_registry.py), [inventory's current layout](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/inventory_screen.py).
 
 ## Principles to preserve when changing UI code
 
@@ -124,4 +124,4 @@ Use separate draw calls for equipment badges and item names, and measure/truncat
 
 For verification, use app-local or headless component rendering where available, then inspect the resulting images. A dummy-driver render checks drawing and layout only; it does not prove the live OS event loop or every resize path. `tools/render_baseline_screens.py` is a historical component-render utility that creates a copied baseline game through `baseline.prepare`; it should not be presented as the current preferred main-checkout workflow without adapting its harness.
 
-Sources: [historical UI rules](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/docs/UI_RULES.md), [historical component-render utility](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/tools/render_baseline_screens.py), [repository working rules](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/AGENTS.md).
+Sources: [historical UI rules](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/UI_RULES.md), [historical component-render utility](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/tools/render_baseline_screens.py), [repository working rules](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/AGENTS.md).

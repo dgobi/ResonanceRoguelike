@@ -12,7 +12,7 @@ Choose a terrain definition when a cell's ground or structural behavior changes.
 
 Rendering draws terrain, then decorative overlays, then processing/floor objects, then entities. Decorative sprites use transparency so terrain can remain visible beneath them. `LocalMap` and its decorative dictionary are carried by the scene cache/checkpoint system. The old guide's claim that decorative overlays disappear on every chunk unload is obsolete.
 
-Sources: [LocalMap](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/world/local_map.py), [renderer layer composition](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/renderer.py), [scene cache and checkpoint serialization](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/save_manager.py).
+Sources: [LocalMap](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/world/local_map.py), [renderer layer composition](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/renderer.py), [scene cache and checkpoint serialization](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/save_manager.py).
 
 ## Add a simple floor terrain
 
@@ -76,7 +76,7 @@ This recipe introduces a new terrain ID while initially reusing known-good art. 
 
 Read the actual existing definition and consumer together before copying specialized fields. `terrain.json` contains retained entries that now have an active decorative counterpart, including campfires and some plants; the presence of an entry does not prove that generation still places it as terrain.
 
-Sources: [terrain definitions](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/terrain.json), [Engine harvesting, interaction, movement, FOV, and light consumers](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/engine.py), [AI terrain path costs](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/components/ai.py).
+Sources: [terrain definitions](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/terrain.json), [Engine harvesting, interaction, movement, FOV, and light consumers](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py), [AI terrain path costs](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/components/ai.py).
 
 ## Add a decorative overlay
 
@@ -124,7 +124,7 @@ The placement helper checks bounds; it does not validate the ID, create containe
 | `light_emit` | Can extend FOV from a visible decorative source. Unlike terrain, there is no matching general decorative coloured-light accumulation loop in `_update_light_map`. |
 | `visual_fx` | Flame/smoke particle selection and limited brightness behavior. |
 
-Sources: [decorative definitions](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/decoratives.json), [placement helper](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/decor_utils.py), [debug placement](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/debug.py).
+Sources: [decorative definitions](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/decoratives.json), [placement helper](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/decor_utils.py), [debug placement](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/debug.py).
 
 ## Variation: appearance versus generated terrain
 
@@ -136,7 +136,7 @@ There are two different mechanisms in `roguelike/rendering/decor.py`.
 
 Plant variants have additional handling: IDs in `PLANT_DECOR_IDS` can become decorative overlays over grass when selected from an allowed ground token and there is no existing decorative. Directly passing a plant ID to `set_tile()` is not equivalent to placing a plant overlay, because the original token is checked against `_PLANT_VALID_TERRAIN`. Use the established generation route or `place_decor()` when deliberately placing one.
 
-Source: [visual and functional variation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/decor.py), [terrain setting](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/world/local_map.py).
+Source: [visual and functional variation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/decor.py), [terrain setting](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/world/local_map.py).
 
 ## Connected tiles and autotiling
 
@@ -144,7 +144,7 @@ The renderer selects suffixes from a four-neighbor mask: north = 1, east = 2, so
 
 Register the needed suffixes in `sprite_map.json` and keep a valid base sprite as fallback. Adding an arbitrary `autotile` JSON property will do nothing. Inspect the connection predicates before extending a naming family, because related terrain types and map edges affect connectivity. Water treats out-of-bounds differently from the wall-style default; roads treat it as connecting.
 
-Source: [autotile selection and connection predicates](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/renderer.py).
+Source: [autotile selection and connection predicates](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/renderer.py).
 
 ## Particles, brightness effects, and light are separate
 

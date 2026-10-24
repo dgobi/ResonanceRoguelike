@@ -110,9 +110,9 @@ Unknown coordinate-bearing metadata cannot be safely guessed. A nontrivial trans
 
 ## Sources
 
-- [Shared structure compiler and route capabilities](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/structure_contract.py)
-- [Placement validator, frontage and transforms](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/placement.py)
-- [Final complete-scene access checks](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/planned_scene.py)
+- [Shared structure compiler and route capabilities](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/structure_contract.py)
+- [Placement validator, frontage and transforms](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/placement.py)
+- [Final complete-scene access checks](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/planned_scene.py)
 
 ## G7 composition integration
 

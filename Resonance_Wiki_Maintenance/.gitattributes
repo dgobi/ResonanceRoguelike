@@ -1,0 +1,3 @@
+# The compiled product has an exact byte identity in source-manifest.json.
+# Preserve its generated UTF-8/LF bytes under every checkout newline setting.
+Resonance_Owner_Wiki.html -text

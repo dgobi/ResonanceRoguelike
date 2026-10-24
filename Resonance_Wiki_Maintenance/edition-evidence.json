@@ -1,9 +1,9 @@
 {
   "checks": [
     "G9 source is pinned separately from wiki authoring and products. docs/owner/WORLDGEN_G9.md and evidence/worldgen-g9/index.json map the sixteen delivery requirements to retained receipts.",
-    "Portable wiki contract tests distinguish raw capture, canonical text freshness and exact UTF-8 download payloads. Five contract tests include LF/CRLF/mixed positives, substantive/binary/helper/path/HTML negatives, repeat build and later documentation-only delivery.",
+    "Portable wiki contract tests distinguish raw capture, canonical text freshness and exact UTF-8 download payloads. Six contract tests include LF/CRLF/mixed positives, substantive/binary/helper/path/HTML negatives, repeat build and later documentation-only delivery. The compiled HTML Git attribute preserves exact product bytes across checkout newline settings and is itself bound.",
     "Three unchanged ordinary seeds preserve complete pre-edit G8 plans. Seed 20261023 improves the fixed settlement-1/capital pair from 23625 to 8063 physical steps within the shared construction budget; the other two seeds add none. Controlled fixtures separately exercise two-link overlap and marginal benefit.",
-    "The final sequence records unfiltered clean-parent focused discovery, both browser export consumers, five network workflows and separately counted G5-G8 workflows, catalogs, actual bidirectional/original-corridor journey, populated views and unfiltered production checks. Consult the final receipts rather than historical test counts.",
+    "Frozen G9 inputs 919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78 passed all ten serial release gates: 229 focused tests, 42 checks per editor browser, five G9 workflows with separately recorded G5-G8 coverage, catalogs, the complete bidirectional/original-corridor journey, populated views, wiki checks and 3675 unfiltered production checks across 159 workers. Final documentation delivery retains the same unified game inputs.",
     "The edition gate executes complete cottage examples and both complete network-policy examples through the actual CLI, synthetic source/input/product negatives, repeated identical builds, drift/integrity checks and actual download byte verification in Chromium and Firefox, including the complete G9 network example."
   ],
   "limits": [
@@ -11,6 +11,7 @@
     "Production mosaics reveal full visibility; the journey pauses AI/survival, retains stationary actors and makes the player invincible. Separate tests execute native updates.",
     "Headless reader checks cover navigation, search, copy control/fallback, internal links and two viewport sizes; no manual assistive-technology audit or OS clipboard readback.",
     "Historical edition 1.0/Linux audit findings remain dated records. Windows symlink creation was unavailable; hard-link aliases were exercised locally.",
-    "The country graph is a diagnostic projection, not a saved second authority or a terrain-respecting global optimum. No new physical bridges, storage compaction or road-destruction gameplay is included."
+    "The country graph is a diagnostic projection, not a saved second authority or a terrain-respecting global optimum. No new physical bridges, storage compaction or road-destruction gameplay is included.",
+    "The inherited production E04 / UI-TEXT-HEIGHT long-label rendering deferral remains outside the G9 country-network scope. Planning costs increase; the owner report distinguishes instrumented profiles, serial wall timings, warm return travel and different explored-checkpoint scopes."
   ]
 }

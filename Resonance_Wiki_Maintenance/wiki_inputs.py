@@ -10,7 +10,7 @@ CANONICAL_RULE='Text CRLF/CR to LF only; preserve BOM and trailing newline; bina
 
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
-def canonical(path,raw):return raw.replace(b'\r\n',b'\n').replace(b'\r',b'\n') if Path(path).suffix.lower() in TEXT else raw
+def canonical(path,raw):return raw.replace(b'\r\n',b'\n').replace(b'\r',b'\n') if Path(path).suffix.lower() in TEXT or Path(path).name=='.gitattributes' else raw
 def identity(path,raw):
     value=canonical(path,raw)
     return dict(raw_sha256=sha(raw),bytes=len(raw),canonical_sha256=sha(value),canonical_bytes=len(value))
@@ -57,6 +57,8 @@ def authoring_inputs(root,config):
     # Bind all current/future project-owned verification helpers, including tests.
     # Products and historical audits are deliberately not inputs to themselves.
     names.update(p.name for p in root.iterdir() if p.is_file() and p.suffix in ('.py','.js','.css'))
+    # Checkout policy is an authoring input; its removal/change invalidates the binding.
+    if (root/'.gitattributes').is_file():names.add('.gitattributes')
     names.update(item['file'] for item in config['chapters'])
     for folder in ('chapters','examples','illustrations'):
         names.update(p.relative_to(root).as_posix() for p in (root/folder).rglob('*') if p.is_file())

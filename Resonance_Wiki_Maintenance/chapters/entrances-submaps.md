@@ -80,8 +80,8 @@ Do not use “delete all saves” as an authoring step. A uniquely named disposa
 
 ## Sources
 
-- [Submap type to entrance mapping and protected placement](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/region_gen.py)
-- [Authored submap consumer](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/local_gen.py)
-- [Starting laboratory source](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/layouts/starting_lab.json)
-- [World creation and `layout_id` assignment](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/world_gen.py)
-- [Separate edge-stamping API](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/layout_stamper.py)
+- [Submap type to entrance mapping and protected placement](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/region_gen.py)
+- [Authored submap consumer](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/local_gen.py)
+- [Starting laboratory source](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/layouts/starting_lab.json)
+- [World creation and `layout_id` assignment](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/world_gen.py)
+- [Separate edge-stamping API](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/layout_stamper.py)

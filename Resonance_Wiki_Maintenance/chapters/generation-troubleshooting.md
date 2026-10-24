@@ -97,10 +97,10 @@ The original documents remain valuable history and design context. A current tut
 
 ## Sources
 
-- [Consumed dependencies and pending-placement errors](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/placement.py)
-- [Scene adapters](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/scene_adapters.py)
-- [Compiler diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/structure_contract.py)
-- [G6 source-bound recorded verification and limits](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/docs/owner/WORLDGEN_G6.md)
+- [Consumed dependencies and pending-placement errors](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/placement.py)
+- [Scene adapters](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/scene_adapters.py)
+- [Compiler diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/structure_contract.py)
+- [G6 source-bound recorded verification and limits](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/WORLDGEN_G6.md)
 
 ## G7 composition integration
 

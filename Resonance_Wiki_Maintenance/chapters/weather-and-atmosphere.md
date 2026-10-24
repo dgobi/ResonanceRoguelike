@@ -12,7 +12,7 @@ Weather has three owners: `data/weather.json` supplies visual parameters and nam
 
 `fog_wisps` is a rendering helper entry used while fog is active; it is **not** a valid state for `set_weather`. The complete valid states additionally include `clear` and `overcast`.
 
-Sources: [debug weather commands](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/debug.py), [WeatherSystem](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/weather.py).
+Sources: [debug weather commands](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/debug.py), [WeatherSystem](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/weather.py).
 
 ## Tune the visual JSON
 
@@ -36,7 +36,7 @@ For example, light rain currently uses spacing `60`, vertical speed `380`, horiz
 
 Fog's gradient and the storm vignette have additional code-controlled behavior in `rendering/particles.py` and `rendering/renderer.py`. `weather.json` does not expose every aspect of their shape, pulse or clear area.
 
-Sources: [weather definitions](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/weather.json), [precipitation/storm renderer](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/renderer.py), [fog and particle implementation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/particles.py).
+Sources: [weather definitions](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/weather.json), [precipitation/storm renderer](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/renderer.py), [fog and particle implementation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/particles.py).
 
 ## Tune duration and frequency
 
@@ -61,7 +61,7 @@ The natural transition graph can reach forgetting fog from ordinary fog and dead
 
 Labels, status colours and transition messages live in `_DISPLAY` and `_TRANSITION_MESSAGES`, also in Python. Keep a new state's transition targets, duration entry and display handling consistent.
 
-Source: [state machine and discharge pushes](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/weather.py).
+Source: [state machine and discharge pushes](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/weather.py).
 
 ## Mechanical values and their scope
 
@@ -79,7 +79,7 @@ The cracked-bell check runs on the resonance system's 40-turn wind counter and s
 
 **Underground behavior is only partly gated.** The regular weather countdown and weather graphics stop in submaps. The current FOV cap, AI modifiers, bone-snow tile-entry effect and cracked-bell weather modifiers do not have the same submap guard in their consumers. A surface weather state can therefore continue affecting those systems underground. Treat this as a current implementation limitation when balancing or verifying weather, rather than relying on the source comment saying there is no weather underground.
 
-Sources: [Engine weather rendering, sight and rain collection](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/engine.py), [weather tick, bone snow and bell checks](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/resonance_system.py), [AI weather consumers](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/components/ai.py).
+Sources: [Engine weather rendering, sight and rain collection](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py), [weather tick, bone snow and bell checks](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/resonance_system.py), [AI weather consumers](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/components/ai.py).
 
 ## Add a new state deliberately
 
@@ -87,4 +87,4 @@ Add its state-machine entries, duration, label/message and reachable transition;
 
 Save/load records the current state, intensity and countdown, and injects the current JSON mechanics after loading. Definition edits can therefore affect mechanics after restart while a saved countdown remains unchanged. Verify new-state behavior on the surface, in a submap, through a transition, and across an explicit save/load in a disposable campaign.
 
-Source: [weather restoration](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/save_manager.py).
+Source: [weather restoration](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/save_manager.py).

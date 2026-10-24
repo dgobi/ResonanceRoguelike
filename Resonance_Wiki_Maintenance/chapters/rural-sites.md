@@ -103,10 +103,10 @@ The bounded rejection examples and counts are in `site_selection`; accepted plot
 
 ## Sources
 
-- [Current POI policy](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/generation/poi_profiles.json)
-- [Validation, candidates, selection and durable attachments](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/poi_selection.py)
-- [Complete rural draft](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/docs/examples/g6_wayhouse.json)
-- [G6 owner guide](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/docs/owner/WORLDGEN_G6.md)
+- [Current POI policy](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/generation/poi_profiles.json)
+- [Validation, candidates, selection and durable attachments](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/poi_selection.py)
+- [Complete rural draft](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/docs/examples/g6_wayhouse.json)
+- [G6 owner guide](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/WORLDGEN_G6.md)
 
 ## G9 preserves these owners
 

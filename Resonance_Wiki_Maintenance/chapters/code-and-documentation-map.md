@@ -8,7 +8,7 @@ The repository root contains `AGENTS.md`, the root `docs/`, `tools/`, acceptance
 
 Read the current `AGENTS.md` before implementing changes. It specifies work on the production `main` checkout, preservation of owner changes, named checkpoints before substantial work, autonomous headless/app-local verification, and separate authorization for pushing. The wiki itself does not authorize a push or redefine those working rules.
 
-Source: [AGENTS.md](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/AGENTS.md).
+Source: [AGENTS.md](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/AGENTS.md).
 
 ## File map by intended change
 
@@ -44,7 +44,7 @@ All paths in this table are repository-relative.
 | Saves and scene cache | `roguelike/engine/save_manager.py`, `checkpoints.py`, `save_components.py` | Schema compatibility, exact item identity, all dirty scene owners |
 | Debug console or one-off diagnostic | `roguelike/engine/debug.py`, root `tools/` | A disposable save root and the actual intended production route |
 
-Sources: [game bootstrap](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/main.py), [data loader](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/data_loader.py), [Engine](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/engine.py), [repository tree at the audited revision](https://github.com/dgobi/ResonanceRoguelike/tree/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5).
+Sources: [game bootstrap](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/main.py), [data loader](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/data_loader.py), [Engine](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py), [repository tree at the audited revision](https://github.com/dgobi/ResonanceRoguelike/tree/4d7a7892e1afffb8d872ed4a8fd442984d14e7d5).
 
 ## Follow a feature from data to play
 
@@ -56,7 +56,7 @@ Structure authoring now goes through `StructureCatalog`, which creates the route
 
 There are also specialized direct readers and module caches. The `DataLoader` docstring's assertion that nothing else reads files is too broad. Restart after changing definitions unless the specific tool advertises a supported reload path.
 
-Source: [DataLoader and StructureCatalog hookup](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/data_loader.py).
+Source: [DataLoader and StructureCatalog hookup](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/data_loader.py).
 
 ## Separate simulation from presentation
 
@@ -66,7 +66,7 @@ Keep a content definition immutable during play. Put changing values on the owni
 
 The current save system preserves validated checkpoint generations and serialized scene owners; it is not simply a collection of independently overwritten JSON files. Runtime effects also have explicit timing rules: hot map owners may advance while cold serialized owners freeze. Use the save and effects chapters before adding timers.
 
-Sources: [Engine simulation coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/engine.py), [checkpoint persistence](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/save_manager.py), [effect lifecycle](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/effect_lifecycle.py).
+Sources: [Engine simulation coordinator](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py), [checkpoint persistence](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/save_manager.py), [effect lifecycle](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/effect_lifecycle.py).
 
 ## A practical code-change workflow
 

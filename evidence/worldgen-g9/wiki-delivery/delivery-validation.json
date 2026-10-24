@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "unified_inputs_unchanged": true,
+  "all_matrix_local_references_exist": true,
+  "wiki_tests": 6,
+  "reader_engines": [
+    "chromium",
+    "firefox"
+  ],
+  "source_revision": "f76aac1976a1c9b68adb00ed859398bbd60d6ee2",
+  "html_sha256": "14add9715e8a37c1644a141e27b25490b7df587edb21bfaa5cdd7a1b6a222259",
+  "raw_mixed_snapshots": 1,
+  "publication_and_archive": "Externally attested after the final commit; see archive publication.json and adjacent ZIP receipt."
+}

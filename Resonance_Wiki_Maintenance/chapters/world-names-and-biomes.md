@@ -29,7 +29,7 @@ for seed in range(8):
 
 `assign_chunk_name()` derives a separate RNG from the supplied chunk seed, so naming does not consume the terrain generator's RNG stream. Shared settlement names derive from the world seed and settlement ID through `settlement_context.semantics()`. Editing list contents or order can change names generated for the same seed; record the source revision alongside the seed.
 
-Sources: [name fragments](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/names.json), [name generation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/world/name_gen.py), [shared settlement naming](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/settlement_context.py).
+Sources: [name fragments](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/names.json), [name generation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/world/name_gen.py), [shared settlement naming](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/settlement_context.py).
 
 ## Change the world's mythological framing
 
@@ -41,7 +41,7 @@ The overmap displays the age, myth shape and sundering epithet; with `DEBUG_MODE
 
 Names and the selected myth are serialized. Existing saved worlds retain their generated strings after a source-list edit. Use a new disposable world to review the full result; renaming tables does not rename an established campaign.
 
-Sources: [myth choices](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/world/world_myth.py), [active naming and VUKH-locus policy](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/world_gen.py), [overmap presentation](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/rendering/renderer.py), [world serialization](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/save_manager.py).
+Sources: [myth choices](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/world/world_myth.py), [active naming and VUKH-locus policy](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/world_gen.py), [overmap presentation](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/rendering/renderer.py), [world serialization](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/save_manager.py).
 
 ## Which biome fields are active?
 
@@ -66,7 +66,7 @@ Ordinary biome assignment first filters by both ranges, then scores closeness to
 
 An unfamiliar biome ID becomes `RegionType.UNKNOWN`; the local region dispatcher then uses its default open-ground branch and the overmap asks for `overmap_unknown`. Adding a JSON file alone does not create a complete new environment. A genuinely new biome needs the enum/dispatch, zone/submap policies, name style where desired, art registration and the relevant world-plan compatibility review.
 
-Sources: [forest example](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/biomes/forest.json), [biome matching and code-owned tables](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/world_gen.py), [RegionType](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/world/world_map.py), [local region dispatch](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/region_gen.py), [waystone interaction](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/engine/engine.py).
+Sources: [forest example](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/biomes/forest.json), [biome matching and code-owned tables](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/world_gen.py), [RegionType](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/world/world_map.py), [local region dispatch](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/region_gen.py), [waystone interaction](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/engine/engine.py).
 
 ## Resource ecology and gathering availability
 
@@ -82,4 +82,4 @@ The finished map records `functional_generation` resource counts and absence rea
 
 For a tuning pass, keep a small fixed set of world seeds, compare newly generated scenes in the intended biomes, inspect the recorded resource counts and absence reasons, then try actual gathering in a disposable scene. Preserve the planned-dressing restrictions when adding a resource; unrestricted scatter after structures can damage access or overwrite authored content.
 
-Sources: [reservation-aware dressing and diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/planned_dressing.py), [resource-scatter implementations](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/region_gen.py), [terrain and gathering definitions](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/terrain.json).
+Sources: [reservation-aware dressing and diagnostics](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/planned_dressing.py), [resource-scatter implementations](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/region_gen.py), [terrain and gathering definitions](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/terrain.json).

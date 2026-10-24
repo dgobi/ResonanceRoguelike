@@ -99,10 +99,10 @@ A null cell inside a layout preserves terrain while still belonging to the reser
 
 ## Sources
 
-- [Geometry schema and fitter](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/world_plan.py)
-- [Current installed selection profiles](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/data/generation/settlement_profiles.json)
-- [Selection weighting, caps and required search](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/roguelike/generation/settlement_selection.py)
-- [G6 correction to required-transform search](https://github.com/dgobi/ResonanceRoguelike/blob/67263f03ec02f44857a707cdbba772d1481787a1/docs/owner/WORLDGEN_G6.md)
+- [Geometry schema and fitter](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/world_plan.py)
+- [Current installed selection profiles](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/data/generation/settlement_profiles.json)
+- [Selection weighting, caps and required search](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/roguelike/generation/settlement_selection.py)
+- [G6 correction to required-transform search](https://github.com/dgobi/ResonanceRoguelike/blob/f76aac1976a1c9b68adb00ed859398bbd60d6ee2/docs/owner/WORLDGEN_G6.md)
 
 ## Preview and tune the country network
 
