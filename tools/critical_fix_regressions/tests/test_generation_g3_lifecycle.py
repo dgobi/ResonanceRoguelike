@@ -54,6 +54,24 @@ class G3Lifecycle(unittest.TestCase):
         self.assertEqual(digest(_serialize_world(reader.world_map)),expected)
         self.assertEqual(fingerprint(reader.local_map,reader.entities[1:]),scene)
 
+    def test_reference_validation_distinguishes_generated_and_unversioned_owner_maps(self):
+        from world.local_map import LocalMap
+        from engine.checkpoints import record
+        import pickle
+        e=self.boot();xy=(e.world_x+1,e.world_y)
+        synthetic=LocalMap(80,43);synthetic.set_tile(3,3,'mud',True,True)
+        e.save_manager.cache.store(*xy,synthetic,[])
+        self.assertTrue(e.save_manager.save(e));self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
+        self.assertEqual(str(e.save_manager.cache.load(*xy).local_map.tiles[3,3]['terrain']),'mud')
+        # A checksum-consistent missing reference on an actual G3 surface is
+        # semantic corruption, not permission to bypass the plan contract.
+        checkpoint=e.save_manager.checkpoint_path();scene=checkpoint/f'chunks/{e.world_x}_{e.world_y}.pkl'
+        saved=pickle.loads(scene.read_bytes());self.assertEqual(saved.local_map.generation_revision,'wg3')
+        del saved.local_map.plan_provenance;scene.write_bytes(pickle.dumps(saved,protocol=pickle.HIGHEST_PROTOCOL))
+        manifest_path=checkpoint/'manifest.json';manifest=json.loads(manifest_path.read_text())
+        manifest['files'][scene.relative_to(checkpoint).as_posix()]=record(scene.read_bytes());manifest_path.write_text(json.dumps(manifest))
+        with self.assertRaisesRegex(ValueError,'missing required G3 scene references'):e.save_manager._prepare(e,checkpoint)
+
     def test_pending_semantic_change_preserves_load_cached_scene_and_unaffected_placement(self):
         e=self.boot();e.debug=False
         houses=[p for p in e.world_map.plan['placements'] if p['asset']=='house_small_a']

@@ -361,6 +361,10 @@ class SaveManager:
                 match=re.fullmatch(r'(\d+)_(\d+)\.pkl',scene.name)
                 if not match: continue
                 wx,wy=map(int,match.groups());m=cold_cache._read(scene).local_map
+                # Existing unversioned owner records remain authoritative. The
+                # required-reference contract belongs to explicitly generated G3
+                # surfaces, not generic LocalMaps used by other state systems.
+                if getattr(m,'generation_revision',None)!='wg3': continue
                 provenance=getattr(m,'plan_provenance',None)
                 if not isinstance(provenance,dict) or provenance.get('mode')!='shared-v1': raise SaveFormatError('missing required G3 scene references: '+scene.name)
                 section=slice_plan(world.plan,wx,wy)
