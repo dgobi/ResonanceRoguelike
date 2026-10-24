@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\wiki-correction\\edition\\example-direct.json",
+  "previews": 8,
+  "registration": false,
+  "status": null
+}

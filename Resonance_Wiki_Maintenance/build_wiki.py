@@ -186,7 +186,8 @@ def collect(repo,config):
             raw=file.read_text(encoding='utf-8-sig');obj=json.loads(raw)
             rid='data-'+short_id(rel);links[rel]=rid
             label=obj.get('id',file.stem) if isinstance(obj,dict) else file.stem
-            entries.append({'id':rid,'path':rel,'title':str(label),'raw':raw,'bytes':file.stat().st_size,'sha256':sha(file),'new':is_new})
+            payload=raw.encode('utf-8')
+            entries.append({'id':rid,'path':rel,'title':str(label),'raw':raw,'bytes':len(payload),'sha256':hashlib.sha256(payload).hexdigest(),'source_bytes':file.stat().st_size,'source_sha256':sha(file),'new':is_new})
         page={'id':pid,'title':title,'group':'Content catalogues','kind':'data','source':None,'entries':entries,'text':''}
         pages.append(page);records+=entries
     for p in pages:links[p['id']]=p['id']
@@ -214,7 +215,7 @@ def catalog_html(page,commit):
     f'<div class="filter-row"><label class="sr-only" for="{pid}-filter">Filter {esc(page["title"])}</label><input id="{pid}-filter" type="search" data-filter="{pid}-entries" placeholder="Filter by ID, filename or path…"><button data-expand="{pid}-entries" type="button">Expand entries</button><span class="small muted" data-filter-count="{pid}-entries">{len(entries)} entries</span></div><p class="empty-filter">No matching entries.</p><div id="{pid}-entries">']
     for r in entries:
         src=f'<a href="{REPOSITORY}/blob/{commit}/{esc(r["path"])}">Pinned source ↗</a>' if not r['new'] else '<span class="tag">New, checked wiki example</span>'
-        out.append(f'<details class="data-record" id="{r["id"]}" data-filter-text="{esc(r["title"]+" "+r["path"])}"><summary><strong>{esc(r["title"])}</strong> <span class="path-label">{esc(Path(r["path"]).name)}</span></summary><p class="path-label">{esc(r["path"])}</p><div class="data-head">{src}<button type="button" class="quiet-button" data-download="{r["id"]}" data-filename="{esc(Path(r["path"]).name)}">Download JSON</button><span class="small muted">{r["bytes"]:,} bytes · SHA-256 {r["sha256"][:12]}…</span></div><pre data-language="json"><code class="language-json">{esc(r["raw"])}</code></pre></details>')
+        out.append(f'<details class="data-record" id="{r["id"]}" data-payload-bytes="{r["bytes"]}" data-payload-sha256="{r["sha256"]}" data-source-bytes="{r["source_bytes"]}" data-source-sha256="{r["source_sha256"]}" data-filter-text="{esc(r["title"]+" "+r["path"])}"><summary><strong>{esc(r["title"])}</strong> <span class="path-label">{esc(Path(r["path"]).name)}</span></summary><p class="path-label">{esc(r["path"])}</p><div class="data-head">{src}<button type="button" class="quiet-button" data-download="{r["id"]}" data-filename="{esc(Path(r["path"]).name)}">Download JSON</button><span class="small muted">Download UTF-8: {r["bytes"]:,} bytes · SHA-256 {r["sha256"]}<br>LF newlines, no BOM; trailing newline presence preserved.<br>Raw source at capture: {r["source_bytes"]:,} bytes · SHA-256 {r["source_sha256"]}</span></div><pre data-language="json"><code class="language-json">{esc(r["raw"])}</code></pre></details>')
     out.append('</div>');return ''.join(out)
 
 def catalogue_index(pages):
@@ -284,7 +285,7 @@ def render_document(repo,config,pages,linkmap,records,docs,md,report,output):
             illustration=f'<details><summary>View the historical G6 cottage preview</summary><img src="data:image/svg+xml;base64,{image}" alt="Actual diagnostic map preview of the new cottage from the structure validator"><p class="small muted">Historical G6 validator output at seed 20261023. This is a diagnostic map, not a game-renderer screenshot.</p></details><p><button class="quiet-button" type="button" data-download="data-wiki-examples-owner-cottage-a-json" data-filename="owner_cottage_a.json">Download the complete cottage JSON</button> <a href="#data-wiki-examples-owner-cottage-a-json" class="small">Inspect the complete example</a></p>'
             first=body.find('<h2');body=body[:first]+illustration+body[first:] if first>=0 else illustration+body
         if kind=='source':
-            source=page['source'].as_posix();meta=f'<span class="tag {page["class"]}">{esc(page["status"])}</span><span>{esc(source)}</span><span>SHA-256 {sha(repo/source)[:12]}…</span>'
+            source=page['source'].as_posix();meta=f'<span class="tag {page["class"]}">{esc(page["status"])}</span><span>{esc(source)}</span><span>Raw source at capture · SHA-256 {sha(repo/source)[:12]}…</span>'
             sourceurl=f'{REPOSITORY}/blob/{config["commit"]}/{source}'
             body=f'<div class="callout"><strong>Source scope.</strong> {esc(page["note"])} <a href="#source-library">Back to source inventory</a>.</div>'+body
         elif kind=='data':meta='<span class="tag data">Snapshot data</span><span>'+str(len(page['entries']))+' complete files</span>';sourceurl=None

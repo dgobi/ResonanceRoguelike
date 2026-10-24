@@ -1,0 +1,25 @@
+{
+  "head": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+  "command": [
+    "/workspace/scratch/1652b4369862/review-env/bin/python",
+    "-X",
+    "utf8",
+    "tools/critical_fix_regressions/verify_fixes.py",
+    "--game",
+    "/workspace/scratch/1652b4369862/resonance-review/roguelike",
+    "--evidence",
+    "/workspace/scratch/1652b4369862/g8-review-evidence/focused/results"
+  ],
+  "cwd": "/workspace/scratch/1652b4369862/resonance-review",
+  "parent_pythonpath": null,
+  "child_pythonpath": null,
+  "timeout_seconds": 1260,
+  "explicit_environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1",
+    "PYTHONHASHSEED": "20261020",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONIOENCODING": "utf-8"
+  }
+}

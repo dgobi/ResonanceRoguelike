@@ -34,6 +34,16 @@ def main():
             links=page.locator('a[href^="#"]').evaluate_all('(xs)=>xs.map(x=>x.getAttribute("href").slice(1)).filter(Boolean)')
             missing=page.evaluate('(ids)=>ids.filter(id=>!document.getElementById(decodeURIComponent(id)))',links)
             assert not missing,missing
+            downloads=[]
+            for filename in ('deep_tongue.json','owner_cottage_a.json','g7_travellers_court.json'):
+                record=page.locator('.data-record').filter(has=page.locator('button[data-filename="'+filename+'"]')).first
+                record_id=record.get_attribute('id');page.goto(html.as_uri()+'#'+record_id)
+                record.evaluate('(e)=>e.open=true')
+                expected=dict(bytes=int(record.get_attribute('data-payload-bytes')),sha256=record.get_attribute('data-payload-sha256'))
+                with page.expect_download() as event:record.locator('button[data-download]').click()
+                download=event.value;target=a.evidence/(name+'-'+filename);download.save_as(str(target));raw=target.read_bytes()
+                observed=dict(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest());assert observed==expected,(filename,expected,observed)
+                downloads.append(dict(file=filename,advertised=expected,downloaded=observed,passed=True))
             page.locator('.nav-link[href="#settlement-layouts"]').click()
             page.locator('#settlement-layouts.active').wait_for()
             copy=page.locator('#settlement-layouts .code-copy').first;copy.click()
@@ -53,7 +63,7 @@ def main():
             page.screenshot(path=str(a.evidence/(name+'-mobile-viewport.png')),animations='disabled')
             assert page.evaluate('document.documentElement.scrollWidth<=innerWidth'), 'mobile document overflows viewport'
             assert not errors,errors
-            rows.append(dict(browser=name,version=browser.version,internal_links=len(links),missing=missing,search_results=count,copy_button=copy_result,selected_fallback_characters=selection,navigation=True,mobile_menu=True,script_errors=errors))
+            rows.append(dict(browser=name,version=browser.version,internal_links=len(links),missing=missing,search_results=count,copy_button=copy_result,selected_fallback_characters=selection,navigation=True,mobile_menu=True,script_errors=errors,downloads=downloads))
             browser.close()
     result=dict(passed=True,html_sha256=hashlib.sha256(html.read_bytes()).hexdigest(),runs=rows,limits='Headless local-file Chromium and Firefox, two viewport sizes; automated navigation/search/copy control checks and retained screenshots. No manual assistive-technology audit or OS clipboard readback.')
     (a.evidence/('reader-'+a.worker+'.json')).write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8');print(json.dumps(result,indent=2))

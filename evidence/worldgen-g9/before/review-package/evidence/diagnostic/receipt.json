@@ -1,0 +1,40 @@
+{
+  "check": "diagnostic-journey",
+  "head": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+  "command": [
+    "/workspace/scratch/1652b4369862/review-env/bin/python",
+    "-X",
+    "utf8",
+    "tools/worldgen_g8_diagnostic.py",
+    "--journey",
+    "--evidence",
+    "/workspace/scratch/1652b4369862/g8-review-evidence/diagnostic/results"
+  ],
+  "cwd": "/workspace/scratch/1652b4369862/resonance-review",
+  "explicit_environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1",
+    "PYTHONHASHSEED": "20261020",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONIOENCODING": "utf-8"
+  },
+  "parent_pythonpath": null,
+  "child_pythonpath": null,
+  "interpreter": "/workspace/scratch/1652b4369862/review-env/bin/python",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "dependencies": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.3.5"
+  },
+  "seconds": 180.83775472800335,
+  "timeout": false,
+  "timeout_seconds": 900,
+  "exit_code": 0,
+  "tracked_file_count": 3843,
+  "changed_tracked_paths": [],
+  "source_stable": true,
+  "git_status_after": "",
+  "passed": true
+}

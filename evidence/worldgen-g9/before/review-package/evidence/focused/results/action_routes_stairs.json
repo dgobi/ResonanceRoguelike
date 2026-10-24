@@ -1,0 +1,1620 @@
+{
+  "run_id": "archive-action-route-stairs",
+  "scenario": "journey",
+  "phase": "loop",
+  "flavor": "candidate",
+  "pid": 8,
+  "cwd": "/workspace/scratch/1652b4369862/resonance-review/roguelike",
+  "argv": [
+    "python -m unittest",
+    "discover",
+    "-s",
+    "/workspace/scratch/1652b4369862/resonance-review/tools/critical_fix_regressions/tests",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "seed": 20261020,
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "os": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYTHONHASHSEED": "20261020",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": null,
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1"
+  },
+  "versions": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.3.5"
+  },
+  "checks": [
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 3,
+      "observed": 3,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "QUIT accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "original loop completed bounded driver",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "actual copied source binding",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    }
+  ],
+  "trace": [
+    {
+      "frame": 0,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 105,
+        "unicode": "i",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 1,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 44,
+        "unicode": "<",
+        "mod": 3,
+        "actual_mods": 3
+      }
+    },
+    {
+      "frame": 2,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 105,
+        "unicode": "i",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 3,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 99,
+        "unicode": "c",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 4,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 44,
+        "unicode": "<",
+        "mod": 3,
+        "actual_mods": 3
+      }
+    },
+    {
+      "frame": 5,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 27,
+        "unicode": "escape",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 6,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 44,
+        "unicode": "<",
+        "mod": 3,
+        "actual_mods": 3
+      }
+    },
+    {
+      "frame": 7,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": true,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 27,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 8,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 44,
+        "unicode": "<",
+        "mod": 3,
+        "actual_mods": 3
+      }
+    },
+    {
+      "frame": 9,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 110,
+        "unicode": "n",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 10,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 120,
+        "unicode": "x",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 11,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "look",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 44,
+        "unicode": "<",
+        "mod": 3,
+        "actual_mods": 3
+      }
+    },
+    {
+      "frame": 12,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "look",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 27,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 13,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 44,
+        "unicode": "<",
+        "mod": 3,
+        "actual_mods": 3
+      }
+    },
+    {
+      "frame": 14,
+      "position": [
+        27,
+        8
+      ],
+      "scene": [
+        0,
+        64,
+        null
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 46,
+        "unicode": ">",
+        "mod": 3,
+        "actual_mods": 3
+      }
+    },
+    {
+      "frame": 15,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 44,
+        "unicode": "<",
+        "mod": 3,
+        "actual_mods": 3
+      }
+    },
+    {
+      "frame": 16,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        0,
+        64,
+        "sub_0_64_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      }
+    }
+  ],
+  "defects": [],
+  "completed": true,
+  "frames": 17,
+  "actions": 16,
+  "counters": {
+    "save": 0,
+    "load": 0,
+    "configure": 1,
+    "teleport": 0,
+    "dump": 0
+  },
+  "elapsed_seconds": 1.81570660700163,
+  "evidence_class": "Original Engine.run, real event.post/get, original handlers and renderer",
+  "imported_sources": {
+    "components.ai": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/ai.py",
+      "relative": "components/ai.py",
+      "sha256": "dde36279ba84913fcc9629cf3cd7ad243c22870d849f973edf6c2c59ea8ef495"
+    },
+    "components.corruption": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/corruption.py",
+      "relative": "components/corruption.py",
+      "sha256": "2de08a1b4ee5654688cf6b23a32ba32c7032c0753987f421c1c8128282ddd247"
+    },
+    "components.equipment": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/equipment.py",
+      "relative": "components/equipment.py",
+      "sha256": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7"
+    },
+    "components.fighter": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/fighter.py",
+      "relative": "components/fighter.py",
+      "sha256": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79"
+    },
+    "components.inventory": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/inventory.py",
+      "relative": "components/inventory.py",
+      "sha256": "94ac22f84f02cef76a1826c13f6b873b6a8259da2fed1f286fa8a9ea7492ea35"
+    },
+    "components.language": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/language.py",
+      "relative": "components/language.py",
+      "sha256": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4"
+    },
+    "components.level": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/level.py",
+      "relative": "components/level.py",
+      "sha256": "001342e1479f20dcdccb0e12f1534172c59c4c20f7f96f2efdaa25263323a652"
+    },
+    "components.light_source": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/light_source.py",
+      "relative": "components/light_source.py",
+      "sha256": "07c27a8715808106d5d343723627029933d28e7e4a51c44818f025a084ce9c3f"
+    },
+    "components.needs": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/needs.py",
+      "relative": "components/needs.py",
+      "sha256": "a5238691b740ee2f5a84adfa4dd26ffa2f277f5a63955a053de4f46ebdef76e4"
+    },
+    "components.perception": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/perception.py",
+      "relative": "components/perception.py",
+      "sha256": "9c5659774b55aa58e6c424e2e5783eaab304b8400da7a1f09c85b84100189af3"
+    },
+    "components.perks": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/components/perks.py",
+      "relative": "components/perks.py",
+      "sha256": "b83ff2bdfa5dba6155f878e31789a7175ed6f1dbb7e90f1bb3a273dbe880750a"
+    },
+    "config": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/config.py",
+      "relative": "config.py",
+      "sha256": "dfa385cd8f89165ce323d2fd92c46992752d1de14612a51a1965fd507635d0ab"
+    },
+    "engine.ai_system": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/ai_system.py",
+      "relative": "engine/ai_system.py",
+      "sha256": "114ff37a2e5330f2df7d48ed43ea0462fb9657362f575b039e12444a8319b866"
+    },
+    "engine.checkpoints": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/checkpoints.py",
+      "relative": "engine/checkpoints.py",
+      "sha256": "5961f6e5c5c0561d95fd37056d55eebdfb90fa1ecde9540ef6c1c97ff9bf7c57"
+    },
+    "engine.combat": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/combat.py",
+      "relative": "engine/combat.py",
+      "sha256": "567a84340d7186d136d6b66ebe003bdc0d22c46313b603324d8eaacb47cc652a"
+    },
+    "engine.crafting": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/crafting.py",
+      "relative": "engine/crafting.py",
+      "sha256": "22f61f3d37b2b1316bcb09c541d36551faa816d510d5cbb2b7d459d7d778e031"
+    },
+    "engine.creature_factory": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/creature_factory.py",
+      "relative": "engine/creature_factory.py",
+      "sha256": "2f671a6e27844f102ecd3b49796f827cfc49e7dd8918adb6d912cfc5f8f05c7e"
+    },
+    "engine.data_loader": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/data_loader.py",
+      "relative": "engine/data_loader.py",
+      "sha256": "2ea5b4d8009ce5fbfd548785fbad58a8e3a0a2b2dc2e1e5ede00242ee6f68a41"
+    },
+    "engine.debug": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/debug.py",
+      "relative": "engine/debug.py",
+      "sha256": "bd094c0ea3376889d1f9b39b06a508f23b6164f4edad0b9fb69d314d268f68d4"
+    },
+    "engine.display_config": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/display_config.py",
+      "relative": "engine/display_config.py",
+      "sha256": "07441d2685fe8e792862c4f25c81e9cf90bc6c23a0eb4cf1b9ac0d118c30f260"
+    },
+    "engine.effect_lifecycle": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/effect_lifecycle.py",
+      "relative": "engine/effect_lifecycle.py",
+      "sha256": "ff3f792fe4f739489bba398745cee733754024d763ec2afc5729f4108ad09b1b"
+    },
+    "engine.engine": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/engine.py",
+      "relative": "engine/engine.py",
+      "sha256": "01619e9d1035767beaabfaa3ba7130e2667efdb243b2bf4db6cca07811eea0b2"
+    },
+    "engine.health_screen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/health_screen.py",
+      "relative": "engine/health_screen.py",
+      "sha256": "2d94f02896ae0ffa93a0ff8c9c4ae1bce500bcf3cc12fbc3a30f0a9a344b2ffd"
+    },
+    "engine.hooks": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/hooks.py",
+      "relative": "engine/hooks.py",
+      "sha256": "4728233a18e77cd60512dd939abf5b41dcb46b9e1cf08f6cae6f80f3af78ccc1"
+    },
+    "engine.interaction_cursor": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/interaction_cursor.py",
+      "relative": "engine/interaction_cursor.py",
+      "sha256": "979b87b64cb959acf1def3674b4873184abd83f03c33f790109bf23fd260b2e1"
+    },
+    "engine.inventory_screen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/inventory_screen.py",
+      "relative": "engine/inventory_screen.py",
+      "sha256": "124a616d0f0ac7ab2cca93196a6a93b497986763ae54dc6a40ac353de36518d4"
+    },
+    "engine.item_factory": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/item_factory.py",
+      "relative": "engine/item_factory.py",
+      "sha256": "2f4ae5c163b22486228f0d61ea54e1644ffa75f4027ffff130169ac55999cac3"
+    },
+    "engine.item_system": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/item_system.py",
+      "relative": "engine/item_system.py",
+      "sha256": "0119b3a42feb0edf43f1aab81c9aa8fad5232f973ba94495a9c31425267259f1"
+    },
+    "engine.item_transfers": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/item_transfers.py",
+      "relative": "engine/item_transfers.py",
+      "sha256": "361d63ce94ccc6d8bff03718139a1a46ffbeab8ca6405df1023442a97adc82da"
+    },
+    "engine.language_system": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/language_system.py",
+      "relative": "engine/language_system.py",
+      "sha256": "7ce0d3dc55d81a4443c35701b53cbf206b6d00b8e087b03cd35efffb89c2e185"
+    },
+    "engine.look_mode": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/look_mode.py",
+      "relative": "engine/look_mode.py",
+      "sha256": "9f4b30cb708a4600ab0a6df53390a628cf620fc042b49e06ec1dd76e96ca28d6"
+    },
+    "engine.loot_roller": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/loot_roller.py",
+      "relative": "engine/loot_roller.py",
+      "sha256": "7bb1b1be54d63de5dd84483a15224e5584070772a7d38d75cfafd095bfdbdce1"
+    },
+    "engine.message_log": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/message_log.py",
+      "relative": "engine/message_log.py",
+      "sha256": "f7f06ea47dd670f41bde412c35ec2d5e1424336b80aad1b0a64a45e486a78631"
+    },
+    "engine.palette": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/palette.py",
+      "relative": "engine/palette.py",
+      "sha256": "646457ba8998f32494169d1833c129fb4c64cab05a94c62eaaec3d696702baab"
+    },
+    "engine.perk_handlers": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/perk_handlers.py",
+      "relative": "engine/perk_handlers.py",
+      "sha256": "f8299dcca9dfdf043fade946957b9e163c97e5b140a1c15cf2e56ec8ec5ae3e8"
+    },
+    "engine.reality_bubble": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/reality_bubble.py",
+      "relative": "engine/reality_bubble.py",
+      "sha256": "d52f1f040ef988b70ae5ec9126ec1a95fa3649bfedf4c11da75d0386374dbded"
+    },
+    "engine.resonance_system": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/resonance_system.py",
+      "relative": "engine/resonance_system.py",
+      "sha256": "ceb7018360bdb66ff2dbd0b9ab5c213d8f7e5899739f0a841f532e4fa03628a7"
+    },
+    "engine.save_components": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/save_components.py",
+      "relative": "engine/save_components.py",
+      "sha256": "b2df939decdb283814a4c4ba94ec9c6d5339a0d05f78fad909e859d6f3475228"
+    },
+    "engine.save_manager": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/save_manager.py",
+      "relative": "engine/save_manager.py",
+      "sha256": "4f662d07277d0d8bbd3d0984189d49cc705af60ac8dd1056ebfc3f8fc3c340bd"
+    },
+    "engine.scene_generation": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/scene_generation.py",
+      "relative": "engine/scene_generation.py",
+      "sha256": "9fed1d3adb4cd72ad7cac373d5333e8e68c05fb01030daf6b1b2055df5061b2c"
+    },
+    "engine.text_reader": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/text_reader.py",
+      "relative": "engine/text_reader.py",
+      "sha256": "9c10d5a7724f89ba88c665439a43ea392702b294a71b02f2c64f58cdb16d66c3"
+    },
+    "engine.ui": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/ui.py",
+      "relative": "engine/ui.py",
+      "sha256": "83bdb37b0fdc4f53d5139540234ad3d6b568ea3047375437134890aee5856e55"
+    },
+    "engine.visual_events": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/visual_events.py",
+      "relative": "engine/visual_events.py",
+      "sha256": "5878ce48b3d5cbf0a9ed6aac79c22b63764d2c2647b2281ca1c707bee7539581"
+    },
+    "engine.weather": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/weather.py",
+      "relative": "engine/weather.py",
+      "sha256": "314ca5367de4f09b9a2b535c9df8bcf680bd9ae1c45ba653f11f423197e1fa75"
+    },
+    "engine.world_time": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/engine/world_time.py",
+      "relative": "engine/world_time.py",
+      "sha256": "381423eef6c446faf634b3879615ab58df2ea9d7f154a612858aad04febf8a8f"
+    },
+    "entities.actor": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/entities/actor.py",
+      "relative": "entities/actor.py",
+      "sha256": "092262ff836e6626da9bec96a549a857ddccaa9bf3408a8cc3bb9af165e0ccbd"
+    },
+    "entities.entity": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/entities/entity.py",
+      "relative": "entities/entity.py",
+      "sha256": "1858a59b1b21f63b00241a1760e2eabdb74f26901941151cd408ea21af457f74"
+    },
+    "entities.item": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/entities/item.py",
+      "relative": "entities/item.py",
+      "sha256": "3c4b93055439e6641f8a797aebb94dac8a8409c145f4c6d488450c44611776b9"
+    },
+    "generation.access": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/access.py",
+      "relative": "generation/access.py",
+      "sha256": "9d0aaedac978d18f2b957d5c026942aab85a8138925e68322aece1942109519f"
+    },
+    "generation.compound_integrity": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/compound_integrity.py",
+      "relative": "generation/compound_integrity.py",
+      "sha256": "137faddc8535b93396c1adfba995c800ddc9a38f5a9689b12c2962a3a45a33f7"
+    },
+    "generation.compound_preview": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/compound_preview.py",
+      "relative": "generation/compound_preview.py",
+      "sha256": "664803f5212ca4f12a2fd26ad563633d369f3c839ceb4bee0c7daddbe82105f7"
+    },
+    "generation.compounds": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/compounds.py",
+      "relative": "generation/compounds.py",
+      "sha256": "06deecdbf48880b4e51710eb4ec186dc2a61ab17dd8bd27fededfa94db4cd7f7"
+    },
+    "generation.context": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/context.py",
+      "relative": "generation/context.py",
+      "sha256": "dfd1a98336fdb76c08e6fb8e1505a0fe80cb5adaa4741ab8a4093147b0ac7e05"
+    },
+    "generation.decor_utils": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/decor_utils.py",
+      "relative": "generation/decor_utils.py",
+      "sha256": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93"
+    },
+    "generation.entrance_gen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/entrance_gen.py",
+      "relative": "generation/entrance_gen.py",
+      "sha256": "f349386b735cce925c4a39cfede4e66e4280496d05ab72c92d73b789369fe052"
+    },
+    "generation.feature_carving": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/feature_carving.py",
+      "relative": "generation/feature_carving.py",
+      "sha256": "ba66e57d369ed924e129a1f7bc2634e19fb4a1f4d83107ae9afb241a0ab319b7"
+    },
+    "generation.floor_object_utils": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/floor_object_utils.py",
+      "relative": "generation/floor_object_utils.py",
+      "sha256": "ededc552d7530c146aec85fe569d661980697cce6f3e087039b1bb287b710319"
+    },
+    "generation.layout_stamper": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/layout_stamper.py",
+      "relative": "generation/layout_stamper.py",
+      "sha256": "cf39d95de4dfa9f3f090f9e761dc7f5ec183fb173d9b829389f0793e9789fe44"
+    },
+    "generation.local_gen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/local_gen.py",
+      "relative": "generation/local_gen.py",
+      "sha256": "c30da824e3e2691b46845b3bdd54f306bc8f821e66202eab420a6e7795090244"
+    },
+    "generation.parent_selection": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/parent_selection.py",
+      "relative": "generation/parent_selection.py",
+      "sha256": "92b2dc7885cfb608fabf0d62d7076ec42cefab3097611a59c55cc11140f8a04c"
+    },
+    "generation.placement": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/placement.py",
+      "relative": "generation/placement.py",
+      "sha256": "2fb1d1c815d042041d63e971a08564dda0337aaae51c0d6a49234a2d11e679ee"
+    },
+    "generation.plan_integrity": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/plan_integrity.py",
+      "relative": "generation/plan_integrity.py",
+      "sha256": "111a586ae1c258f99fc45b0527c912da97d7e5338f757371c543cdc45898b000"
+    },
+    "generation.plan_preview": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/plan_preview.py",
+      "relative": "generation/plan_preview.py",
+      "sha256": "c91d0875048f4fb80390763f3abefde8d016d16dc7f8bbda878a833ff647124c"
+    },
+    "generation.planned_dressing": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/planned_dressing.py",
+      "relative": "generation/planned_dressing.py",
+      "sha256": "a13626438be8b7345141144bc4fa2a694efa62d7319fa9b42c4e9e2c5ce8d956"
+    },
+    "generation.planned_scene": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/planned_scene.py",
+      "relative": "generation/planned_scene.py",
+      "sha256": "646b6ecbc3719cd11c3eacbf89fa23373d6e9d4699d92faf179d1376b2285d89"
+    },
+    "generation.poi_preview": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/poi_preview.py",
+      "relative": "generation/poi_preview.py",
+      "sha256": "0f63a6a17adbcf7076e5debe8ad3a6eb8edcd0cef9bbaf75c75705c35c7ca599"
+    },
+    "generation.poi_selection": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/poi_selection.py",
+      "relative": "generation/poi_selection.py",
+      "sha256": "e67c51deeee7ca57d81c968985898dfd39935812305ad73d6ca8abf7b5ca3bf3"
+    },
+    "generation.ports": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/ports.py",
+      "relative": "generation/ports.py",
+      "sha256": "d0a7ae89bbe2d6674595a0ed932cac7443ea332c9ea3d0df8b53506da39e6f93"
+    },
+    "generation.region_gen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/region_gen.py",
+      "relative": "generation/region_gen.py",
+      "sha256": "3528aaf2c508a619f49421f7cadf8ee60378baec54f3c741c94b8eaaaa5136fb"
+    },
+    "generation.road_network": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/road_network.py",
+      "relative": "generation/road_network.py",
+      "sha256": "8d2ad06ef8e69156b1b5e6677c3cd7cb0cd0a5c537f045eaea300ea2f59160ec"
+    },
+    "generation.scene_adapters": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/scene_adapters.py",
+      "relative": "generation/scene_adapters.py",
+      "sha256": "6cec41206102db4d11167ce6d781525ddcf193a252ea28ddb25b89b6e976d1e1"
+    },
+    "generation.settlement_context": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/settlement_context.py",
+      "relative": "generation/settlement_context.py",
+      "sha256": "20badd4af5a5f758b50a7145a2eccf40ac6203f046f297226eaaeca5b7d83265"
+    },
+    "generation.settlement_layout": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/settlement_layout.py",
+      "relative": "generation/settlement_layout.py",
+      "sha256": "ba32fe1fad83e6ea62201f1329075034a635a1d00e806a2d6447636e305d558e"
+    },
+    "generation.settlement_selection": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/settlement_selection.py",
+      "relative": "generation/settlement_selection.py",
+      "sha256": "0cec6ff154ae91a9d8242467ed2e3797cd08101939fa851ebc3a87ef7b379c22"
+    },
+    "generation.spawn_specs": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/spawn_specs.py",
+      "relative": "generation/spawn_specs.py",
+      "sha256": "8dc9d547a4afb022a508069e7e51774bc6091d5ff3fc82a4cf1006bf98b57c43"
+    },
+    "generation.structure_contract": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/structure_contract.py",
+      "relative": "generation/structure_contract.py",
+      "sha256": "b71bdb9c5aaf8bb717bc26b396f0d48a458ecc56be12b631a650b55dd2f4225c"
+    },
+    "generation.structure_preview": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/structure_preview.py",
+      "relative": "generation/structure_preview.py",
+      "sha256": "cc780eb124d45fc7094343bfc292fe51323dbbd5afddb3bf7d88dad2def05dfb"
+    },
+    "generation.town_gen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/town_gen.py",
+      "relative": "generation/town_gen.py",
+      "sha256": "42a75674fe98d8a3e7f2d87ef8c1bd1f60b555ea52788aa57801b13391f8f5da"
+    },
+    "generation.wfc": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/wfc.py",
+      "relative": "generation/wfc.py",
+      "sha256": "3e0b51d77bbb8b48b4d4f18b6db4dbf6e7a0deccd0c3ebfcb7b3b2ec62c8229d"
+    },
+    "generation.world_gen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/world_gen.py",
+      "relative": "generation/world_gen.py",
+      "sha256": "34638ae991d83c8895eb6a1e6dd9e90038c34816e3fcd6b09361140e9f95b081"
+    },
+    "generation.world_plan": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/generation/world_plan.py",
+      "relative": "generation/world_plan.py",
+      "sha256": "74566d3b954fae074bafa3210147070589d190a368580e8736dc887939a4cae3"
+    },
+    "main": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/main.py",
+      "relative": "main.py",
+      "sha256": "0b40b031b0baf0d83d9bad9ee6a90c71a959c089422fa9155f7d8f2effa9d96a"
+    },
+    "rendering.callouts": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/callouts.py",
+      "relative": "rendering/callouts.py",
+      "sha256": "325db657d9c74bea22e5e4200f7860bf2bfc7a816f16e1d53c348eeb5be75c6c"
+    },
+    "rendering.craft_screen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/craft_screen.py",
+      "relative": "rendering/craft_screen.py",
+      "sha256": "4564ee9cddd9d9754460d3a3bb0b4185e254dd6ce8ced9b7835fc76b9d5fb219"
+    },
+    "rendering.decor": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/decor.py",
+      "relative": "rendering/decor.py",
+      "sha256": "ce901e104d1caf6ded8a4649eff9a50797040a5cb5234d6cd495b200a50d7614"
+    },
+    "rendering.glyph_gen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/glyph_gen.py",
+      "relative": "rendering/glyph_gen.py",
+      "sha256": "b7fde731fbadf2257cd2fa7c8fb3588348cfb929b419f23b8144c98d78037c45"
+    },
+    "rendering.lexicon_screen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/lexicon_screen.py",
+      "relative": "rendering/lexicon_screen.py",
+      "sha256": "1ebdd83253521a0644ac814152a89eafbb8174f31a9649affc671b622b7323f7"
+    },
+    "rendering.particles": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/particles.py",
+      "relative": "rendering/particles.py",
+      "sha256": "7c2d654434a4cf285758c03880d0274e3c745bd49922f500f182531e14028b87"
+    },
+    "rendering.perk_screen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/perk_screen.py",
+      "relative": "rendering/perk_screen.py",
+      "sha256": "e82e40f2b2645df7d3341d07ec48b9f15fbb6a83c38dfb9000618d6cba9a9e45"
+    },
+    "rendering.renderer": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/renderer.py",
+      "relative": "rendering/renderer.py",
+      "sha256": "e718b44430670d60ddd6db7ec245520bfe5f7fb7cfb56712a5504055b6e786c6"
+    },
+    "rendering.sprite_registry": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/sprite_registry.py",
+      "relative": "rendering/sprite_registry.py",
+      "sha256": "2bf9a3602f6d154db2122c785c77c091926b6d640888ce8c9cfe5d003f6b555e"
+    },
+    "rendering.tile_registry": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/tile_registry.py",
+      "relative": "rendering/tile_registry.py",
+      "sha256": "105b543687831d796d0c4ca9f292c27c9cb63445cf3a5e5c45b176bd39b5b555"
+    },
+    "rendering.ui_registry": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/rendering/ui_registry.py",
+      "relative": "rendering/ui_registry.py",
+      "sha256": "e0272edd0c11a393b9ef03f3b8055d1770ef32428d4b7b1e6d66c62afb8b5f2a"
+    },
+    "world.local_map": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/world/local_map.py",
+      "relative": "world/local_map.py",
+      "sha256": "d78c1048fac2ddb6b111455d7e5f7e5c9148319c6c3b47889d063a44c43faecb"
+    },
+    "world.name_gen": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/world/name_gen.py",
+      "relative": "world/name_gen.py",
+      "sha256": "8e5d788c75b1e0d4183e83bb823298a4008d57ab84fda887cd6bb84648397546"
+    },
+    "world.world_map": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/world/world_map.py",
+      "relative": "world/world_map.py",
+      "sha256": "0c42db1e70bedf319c8f0388f27af4cba5c18d3408918886dd10b5be41a5751c"
+    },
+    "world.world_myth": {
+      "path": "/workspace/scratch/1652b4369862/resonance-review/roguelike/world/world_myth.py",
+      "relative": "world/world_myth.py",
+      "sha256": "bf9ccc805b376deafd9e43f9f0cc092f2b2b6a1d66e967b2d9ea0ca76be9dc80"
+    }
+  },
+  "verification_scope": "Archive-source stair-route regression; no Git branch or production gate asserted"
+}

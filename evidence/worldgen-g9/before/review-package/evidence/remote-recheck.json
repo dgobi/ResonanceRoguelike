@@ -1,0 +1,11 @@
+{
+  "checked_at_utc": "2026-10-24T20:59:43.379025+00:00",
+  "repository": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "command": "git ls-remote origin refs/heads/main refs/tags/checkpoint/worldgen-g8-verified-20261024-a refs/tags/checkpoint/worldgen-g8-verified-20261024-a^{} refs/tags/checkpoint/worldgen-g8-final-inputs-20261024-b refs/tags/checkpoint/worldgen-g8-final-inputs-20261024-b^{}",
+  "refs": {
+    "refs/heads/main": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+    "refs/tags/checkpoint/worldgen-g8-verified-20261024-a": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+    "refs/tags/checkpoint/worldgen-g8-final-inputs-20261024-b": "14c98afc38c659c9195b11c6b396fb82544ff03b"
+  },
+  "observed_exit_code": 0
+}

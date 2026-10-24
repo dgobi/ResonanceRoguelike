@@ -1,0 +1,12 @@
+[
+  {
+    "path": "roguelike/data/deep_tongue.json",
+    "displayed_bytes": 102885,
+    "displayed_sha256_prefix": "d231ff061a39",
+    "download_utf8_bytes": 98460,
+    "download_utf8_sha256": "fc5d2d52d4e60dffa5353d3103f0e43d2f5e3ecd99cce0cc4aa8a830fe8ca6cf",
+    "same_json_value_as_current_source": true,
+    "reader_download_logic": "new Blob([code.textContent], {type: application/json;charset=utf-8})",
+    "limitation": "DOM text reconstructed with delivered validator parser, not a new browser download."
+  }
+]

@@ -1,0 +1,1 @@
+{"python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]", "interpreter": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe", "dependencies": {"mistune": "3.4.0", "playwright": "1.55.0", "pygame": "2.6.1", "tcod": "19.3.0", "numpy": "2.4.6"}}

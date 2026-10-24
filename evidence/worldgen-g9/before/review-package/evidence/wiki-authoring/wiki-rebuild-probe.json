@@ -1,0 +1,115 @@
+{
+  "read_only_game_checkout": "/workspace/scratch/1652b4369862/resonance-review",
+  "isolated_maintenance_copy": "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/maintenance-copy",
+  "initial_html_sha256": "8adfc9a0216ac6ac8c5010cc9a0f1acde597120209eae24545326d24acf57f0c",
+  "first": {
+    "Resonance_Owner_Wiki.html": "6af89da7cf6d353f42a20f5f2a472ee8bcd4491aa4b5eca7d2b2e04addcaa566",
+    "source-manifest.json": "86b9a342992260663ad991cdd734e8bdea9a442594714901bf0b5d2bd4a011e2",
+    "build-report.json": "e5068a8102de1dabbe613a4f1072c18a127b22f1a7e824ad40b7f71b3f0c4c7a"
+  },
+  "second": {
+    "Resonance_Owner_Wiki.html": "6af89da7cf6d353f42a20f5f2a472ee8bcd4491aa4b5eca7d2b2e04addcaa566",
+    "source-manifest.json": "86b9a342992260663ad991cdd734e8bdea9a442594714901bf0b5d2bd4a011e2",
+    "build-report.json": "e5068a8102de1dabbe613a4f1072c18a127b22f1a7e824ad40b7f71b3f0c4c7a"
+  },
+  "repeat_identical": true,
+  "commands": [
+    {
+      "name": "delivered-drift",
+      "command": [
+        "/workspace/scratch/1652b4369862/review-env/bin/python",
+        "-X",
+        "utf8",
+        "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/maintenance-copy/build_wiki.py",
+        "--repo",
+        "/workspace/scratch/1652b4369862/resonance-review",
+        "--check-drift"
+      ],
+      "exit_code": 2,
+      "seconds": 0.409590062998177,
+      "stdout": "delivered-drift.stdout.txt",
+      "stderr": "delivered-drift.stderr.txt"
+    },
+    {
+      "name": "build-a",
+      "command": [
+        "/workspace/scratch/1652b4369862/review-env/bin/python",
+        "-X",
+        "utf8",
+        "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/maintenance-copy/build_wiki.py",
+        "--repo",
+        "/workspace/scratch/1652b4369862/resonance-review"
+      ],
+      "exit_code": 0,
+      "seconds": 1.5412641750008333,
+      "stdout": "build-a.stdout.txt",
+      "stderr": "build-a.stderr.txt"
+    },
+    {
+      "name": "drift-a",
+      "command": [
+        "/workspace/scratch/1652b4369862/review-env/bin/python",
+        "-X",
+        "utf8",
+        "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/maintenance-copy/build_wiki.py",
+        "--repo",
+        "/workspace/scratch/1652b4369862/resonance-review",
+        "--check-drift"
+      ],
+      "exit_code": 0,
+      "seconds": 0.42329797400088864,
+      "stdout": "drift-a.stdout.txt",
+      "stderr": "drift-a.stderr.txt"
+    },
+    {
+      "name": "validate-a",
+      "command": [
+        "/workspace/scratch/1652b4369862/review-env/bin/python",
+        "-X",
+        "utf8",
+        "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/maintenance-copy/validate_wiki.py",
+        "--repo",
+        "/workspace/scratch/1652b4369862/resonance-review",
+        "--html",
+        "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/maintenance-copy/Resonance_Owner_Wiki.html",
+        "--report",
+        "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/integrity-a.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6423642959998688,
+      "stdout": "validate-a.stdout.txt",
+      "stderr": "validate-a.stderr.txt"
+    },
+    {
+      "name": "build-b",
+      "command": [
+        "/workspace/scratch/1652b4369862/review-env/bin/python",
+        "-X",
+        "utf8",
+        "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/maintenance-copy/build_wiki.py",
+        "--repo",
+        "/workspace/scratch/1652b4369862/resonance-review"
+      ],
+      "exit_code": 0,
+      "seconds": 1.4256936250021681,
+      "stdout": "build-b.stdout.txt",
+      "stderr": "build-b.stderr.txt"
+    },
+    {
+      "name": "drift-b",
+      "command": [
+        "/workspace/scratch/1652b4369862/review-env/bin/python",
+        "-X",
+        "utf8",
+        "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/maintenance-copy/build_wiki.py",
+        "--repo",
+        "/workspace/scratch/1652b4369862/resonance-review",
+        "--check-drift"
+      ],
+      "exit_code": 0,
+      "seconds": 0.37742961299954914,
+      "stdout": "drift-b.stdout.txt",
+      "stderr": "drift-b.stderr.txt"
+    }
+  ]
+}

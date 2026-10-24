@@ -1,0 +1,876 @@
+{
+  "old_lines": 48301,
+  "new_lines": 48301,
+  "differences": [
+    {
+      "line": 21870,
+      "first_diff_column": 661,
+      "old_excerpt": "ata-filename=\"deep_tongue.json\">Download JSON</button><span class=\"small muted\">102,885 bytes \u00b7 SHA-256 fc5d2d52d4e6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"deep_tongue.json\">Download JSON</button><span class=\"small muted\">98,460 bytes \u00b7 SHA-256 fc5d2d52d4e6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 26295,
+      "first_diff_column": 743,
+      "old_excerpt": "me=\"deep_tongue_phonemes.json\">Download JSON</button><span class=\"small muted\">36,949 bytes \u00b7 SHA-256 983ec2822fb9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "me=\"deep_tongue_phonemes.json\">Download JSON</button><span class=\"small muted\">34,432 bytes \u00b7 SHA-256 983ec2822fb9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29008,
+      "first_diff_column": 644,
+      "old_excerpt": "data-filename=\"qualities.json\">Download JSON</button><span class=\"small muted\">969 bytes \u00b7 SHA-256 6a044c6c8035\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"qualities.json\">Download JSON</button><span class=\"small muted\">958 bytes \u00b7 SHA-256 6a044c6c8035\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29244,
+      "first_diff_column": 2027,
+      "old_excerpt": "a-filename=\"ash_wastes.json\">Download JSON</button><span class=\"small muted\">1,087 bytes \u00b7 SHA-256 6aa8168b3669\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"ash_wastes.json\">Download JSON</button><span class=\"small muted\">1,046 bytes \u00b7 SHA-256 6aa8168b3669\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29285,
+      "first_diff_column": 662,
+      "old_excerpt": "\" data-filename=\"capital.json\">Download JSON</button><span class=\"small muted\">958 bytes \u00b7 SHA-256 b7f62f81379d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "\" data-filename=\"capital.json\">Download JSON</button><span class=\"small muted\">922 bytes \u00b7 SHA-256 b7f62f81379d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29321,
+      "first_diff_column": 715,
+      "old_excerpt": "a-filename=\"deep_mountain.json\">Download JSON</button><span class=\"small muted\">1,011 bytes \u00b7 SHA-256 65c8b3f9835d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"deep_mountain.json\">Download JSON</button><span class=\"small muted\">975 bytes \u00b7 SHA-256 65c8b3f9835d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29357,
+      "first_diff_column": 709,
+      "old_excerpt": "filename=\"drowned_wood.json\">Download JSON</button><span class=\"small muted\">1,052 bytes \u00b7 SHA-256 6333fbcdcea7\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "filename=\"drowned_wood.json\">Download JSON</button><span class=\"small muted\">1,011 bytes \u00b7 SHA-256 6333fbcdcea7\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29398,
+      "first_diff_column": 653,
+      "old_excerpt": "n\" data-filename=\"forest.json\">Download JSON</button><span class=\"small muted\">964 bytes \u00b7 SHA-256 2da2968d0b9d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "n\" data-filename=\"forest.json\">Download JSON</button><span class=\"small muted\">923 bytes \u00b7 SHA-256 2da2968d0b9d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29439,
+      "first_diff_column": 644,
+      "old_excerpt": "on\" data-filename=\"heath.json\">Download JSON</button><span class=\"small muted\">971 bytes \u00b7 SHA-256 e088822f7969\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "on\" data-filename=\"heath.json\">Download JSON</button><span class=\"small muted\">931 bytes \u00b7 SHA-256 e088822f7969\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29479,
+      "first_diff_column": 673,
+      "old_excerpt": "ata-filename=\"mountain.json\">Download JSON</button><span class=\"small muted\">1,047 bytes \u00b7 SHA-256 9ab3b1c2d36e\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"mountain.json\">Download JSON</button><span class=\"small muted\">1,005 bytes \u00b7 SHA-256 9ab3b1c2d36e\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29521,
+      "first_diff_column": 652,
+      "old_excerpt": "on\" data-filename=\"plains.json\">Download JSON</button><span class=\"small muted\">1,001 bytes \u00b7 SHA-256 f4e06722e5f1\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "on\" data-filename=\"plains.json\">Download JSON</button><span class=\"small muted\">960 bytes \u00b7 SHA-256 f4e06722e5f1\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29562,
+      "first_diff_column": 643,
+      "old_excerpt": "son\" data-filename=\"swamp.json\">Download JSON</button><span class=\"small muted\">1,032 bytes \u00b7 SHA-256 83cf34518ca7\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "son\" data-filename=\"swamp.json\">Download JSON</button><span class=\"small muted\">991 bytes \u00b7 SHA-256 83cf34518ca7\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29603,
+      "first_diff_column": 634,
+      "old_excerpt": "json\" data-filename=\"town.json\">Download JSON</button><span class=\"small muted\">917 bytes \u00b7 SHA-256 80bb53971456\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "json\" data-filename=\"town.json\">Download JSON</button><span class=\"small muted\">881 bytes \u00b7 SHA-256 80bb53971456\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29639,
+      "first_diff_column": 2121,
+      "old_excerpt": "ta-filename=\"bell_tower_a.json\">Download JSON</button><span class=\"small muted\">2,021 bytes \u00b7 SHA-256 1373f84b0604\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"bell_tower_a.json\">Download JSON</button><span class=\"small muted\">1,930 bytes \u00b7 SHA-256 1373f84b0604\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29912,
+      "first_diff_column": 797,
+      "old_excerpt": "ename=\"waystone_plinth_a.json\">Download JSON</button><span class=\"small muted\">967 bytes \u00b7 SHA-256 aaba1c2069b6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ename=\"waystone_plinth_a.json\">Download JSON</button><span class=\"small muted\">929 bytes \u00b7 SHA-256 aaba1c2069b6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29950,
+      "first_diff_column": 697,
+      "old_excerpt": "n\" data-filename=\"well_a.json\">Download JSON</button><span class=\"small muted\">692 bytes \u00b7 SHA-256 85b4f4e3cb1c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "n\" data-filename=\"well_a.json\">Download JSON</button><span class=\"small muted\">661 bytes \u00b7 SHA-256 85b4f4e3cb1c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 29981,
+      "first_diff_column": 777,
+      "old_excerpt": "-filename=\"apothecary_a.json\">Download JSON</button><span class=\"small muted\">3,541 bytes \u00b7 SHA-256 4f05388c2d9a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"apothecary_a.json\">Download JSON</button><span class=\"small muted\">3,316 bytes \u00b7 SHA-256 4f05388c2d9a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 30206,
+      "first_diff_column": 795,
+      "old_excerpt": "ilename=\"market_stall_a.json\">Download JSON</button><span class=\"small muted\">1,869 bytes \u00b7 SHA-256 1716eea46052\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ilename=\"market_stall_a.json\">Download JSON</button><span class=\"small muted\">1,776 bytes \u00b7 SHA-256 1716eea46052\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 30385,
+      "first_diff_column": 724,
+      "old_excerpt": "\" data-filename=\"shop_a.json\">Download JSON</button><span class=\"small muted\">1,903 bytes \u00b7 SHA-256 8b8ab8ada846\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "\" data-filename=\"shop_a.json\">Download JSON</button><span class=\"small muted\">1,810 bytes \u00b7 SHA-256 8b8ab8ada846\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 30533,
+      "first_diff_column": 760,
+      "old_excerpt": "ta-filename=\"workshop_a.json\">Download JSON</button><span class=\"small muted\">2,396 bytes \u00b7 SHA-256 6d7dc360e10c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"workshop_a.json\">Download JSON</button><span class=\"small muted\">2,279 bytes \u00b7 SHA-256 6d7dc360e10c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 30709,
+      "first_diff_column": 826,
+      "old_excerpt": "ame=\"bell_warden_post_a.json\">Download JSON</button><span class=\"small muted\">2,185 bytes \u00b7 SHA-256 9d1070dd6b00\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ame=\"bell_warden_post_a.json\">Download JSON</button><span class=\"small muted\">2,061 bytes \u00b7 SHA-256 9d1070dd6b00\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 30833,
+      "first_diff_column": 825,
+      "old_excerpt": "ename=\"collapsed_shrine_a.json\">Download JSON</button><span class=\"small muted\">2,057 bytes \u00b7 SHA-256 f2405d0a5da9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ename=\"collapsed_shrine_a.json\">Download JSON</button><span class=\"small muted\">1,919 bytes \u00b7 SHA-256 f2405d0a5da9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 30971,
+      "first_diff_column": 837,
+      "old_excerpt": "e=\"folk_saint_alcove_a.json\">Download JSON</button><span class=\"small muted\">1,095 bytes \u00b7 SHA-256 6164a27ddcb3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "e=\"folk_saint_alcove_a.json\">Download JSON</button><span class=\"small muted\">1,050 bytes \u00b7 SHA-256 6164a27ddcb3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 31116,
+      "first_diff_column": 737,
+      "old_excerpt": "data-filename=\"shrine_a.json\">Download JSON</button><span class=\"small muted\">2,300 bytes \u00b7 SHA-256 bf3e3e7ea5b3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"shrine_a.json\">Download JSON</button><span class=\"small muted\">2,187 bytes \u00b7 SHA-256 bf3e3e7ea5b3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 31448,
+      "first_diff_column": 811,
+      "old_excerpt": "ename=\"house_damaged_a.json\">Download JSON</button><span class=\"small muted\">1,059 bytes \u00b7 SHA-256 df6ec2e5cd53\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ename=\"house_damaged_a.json\">Download JSON</button><span class=\"small muted\">1,013 bytes \u00b7 SHA-256 df6ec2e5cd53\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 31494,
+      "first_diff_column": 801,
+      "old_excerpt": "ilename=\"house_hearth_a.json\">Download JSON</button><span class=\"small muted\">3,454 bytes \u00b7 SHA-256 6800708b60b5\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ilename=\"house_hearth_a.json\">Download JSON</button><span class=\"small muted\">3,227 bytes \u00b7 SHA-256 6800708b60b5\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 31721,
+      "first_diff_column": 791,
+      "old_excerpt": "filename=\"house_large_a.json\">Download JSON</button><span class=\"small muted\">1,313 bytes \u00b7 SHA-256 ade399d3cc8a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "filename=\"house_large_a.json\">Download JSON</button><span class=\"small muted\">1,257 bytes \u00b7 SHA-256 ade399d3cc8a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 31873,
+      "first_diff_column": 792,
+      "old_excerpt": "filename=\"house_small_a.json\">Download JSON</button><span class=\"small muted\">2,173 bytes \u00b7 SHA-256 bff2702f0275\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "filename=\"house_small_a.json\">Download JSON</button><span class=\"small muted\">2,066 bytes \u00b7 SHA-256 bff2702f0275\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 31980,
+      "first_diff_column": 789,
+      "old_excerpt": "a-filename=\"house_small_b.json\">Download JSON</button><span class=\"small muted\">2,009 bytes \u00b7 SHA-256 2f1dcc4a923e\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"house_small_b.json\">Download JSON</button><span class=\"small muted\">1,908 bytes \u00b7 SHA-256 2f1dcc4a923e\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 32081,
+      "first_diff_column": 818,
+      "old_excerpt": "ename=\"house_two_room_a.json\">Download JSON</button><span class=\"small muted\">2,877 bytes \u00b7 SHA-256 568a31d4f299\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ename=\"house_two_room_a.json\">Download JSON</button><span class=\"small muted\">2,689 bytes \u00b7 SHA-256 568a31d4f299\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 32306,
+      "first_diff_column": 765,
+      "old_excerpt": "a-filename=\"tenement_a.json\">Download JSON</button><span class=\"small muted\">1,074 bytes \u00b7 SHA-256 6b4069025b2d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"tenement_a.json\">Download JSON</button><span class=\"small muted\">1,029 bytes \u00b7 SHA-256 6b4069025b2d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 32397,
+      "first_diff_column": 797,
+      "old_excerpt": "ename=\"collapsed_house_a.json\">Download JSON</button><span class=\"small muted\">970 bytes \u00b7 SHA-256 671d45924962\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ename=\"collapsed_house_a.json\">Download JSON</button><span class=\"small muted\">927 bytes \u00b7 SHA-256 671d45924962\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 32613,
+      "first_diff_column": 742,
+      "old_excerpt": "ata-filename=\"ruin_wall_a.json\">Download JSON</button><span class=\"small muted\">611 bytes \u00b7 SHA-256 e41755f1f4d8\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"ruin_wall_a.json\">Download JSON</button><span class=\"small muted\">586 bytes \u00b7 SHA-256 e41755f1f4d8\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 32638,
+      "first_diff_column": 824,
+      "old_excerpt": "me=\"three_wall_remnant_a.json\">Download JSON</button><span class=\"small muted\">840 bytes \u00b7 SHA-256 4cf455d98c71\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "me=\"three_wall_remnant_a.json\">Download JSON</button><span class=\"small muted\">801 bytes \u00b7 SHA-256 4cf455d98c71\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 32677,
+      "first_diff_column": 727,
+      "old_excerpt": "data-filename=\"cellar_a.json\">Download JSON</button><span class=\"small muted\">1,150 bytes \u00b7 SHA-256 4efb0c6add7d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"cellar_a.json\">Download JSON</button><span class=\"small muted\">1,099 bytes \u00b7 SHA-256 4efb0c6add7d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 32872,
+      "first_diff_column": 771,
+      "old_excerpt": "-filename=\"root_cellar_a.json\">Download JSON</button><span class=\"small muted\">742 bytes \u00b7 SHA-256 9d44c4b8eaae\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"root_cellar_a.json\">Download JSON</button><span class=\"small muted\">705 bytes \u00b7 SHA-256 9d44c4b8eaae\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 32909,
+      "first_diff_column": 763,
+      "old_excerpt": "-filename=\"storehouse_a.json\">Download JSON</button><span class=\"small muted\">4,349 bytes \u00b7 SHA-256 4a20cc406810\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"storehouse_a.json\">Download JSON</button><span class=\"small muted\">4,083 bytes \u00b7 SHA-256 4a20cc406810\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 33175,
+      "first_diff_column": 753,
+      "old_excerpt": "a-filename=\"tool_shed_a.json\">Download JSON</button><span class=\"small muted\">2,779 bytes \u00b7 SHA-256 0bcbd2a87d03\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"tool_shed_a.json\">Download JSON</button><span class=\"small muted\">2,605 bytes \u00b7 SHA-256 0bcbd2a87d03\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 33349,
+      "first_diff_column": 753,
+      "old_excerpt": "a-filename=\"warehouse_a.json\">Download JSON</button><span class=\"small muted\">1,328 bytes \u00b7 SHA-256 2818ec225140\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"warehouse_a.json\">Download JSON</button><span class=\"small muted\">1,270 bytes \u00b7 SHA-256 2818ec225140\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 33437,
+      "first_diff_column": 777,
+      "old_excerpt": "-filename=\"hunter_cabin.json\">Download JSON</button><span class=\"small muted\">1,788 bytes \u00b7 SHA-256 1f608e741b40\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"hunter_cabin.json\">Download JSON</button><span class=\"small muted\">1,699 bytes \u00b7 SHA-256 1f608e741b40\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 33526,
+      "first_diff_column": 822,
+      "old_excerpt": "name=\"roadside_shrine_a.json\">Download JSON</button><span class=\"small muted\">1,843 bytes \u00b7 SHA-256 271748e349e6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "name=\"roadside_shrine_a.json\">Download JSON</button><span class=\"small muted\">1,729 bytes \u00b7 SHA-256 271748e349e6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 33640,
+      "first_diff_column": 811,
+      "old_excerpt": "ilename=\"shepherds_fold_a.json\">Download JSON</button><span class=\"small muted\">836 bytes \u00b7 SHA-256 0c0766f9ac70\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ilename=\"shepherds_fold_a.json\">Download JSON</button><span class=\"small muted\">798 bytes \u00b7 SHA-256 0c0766f9ac70\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 33678,
+      "first_diff_column": 803,
+      "old_excerpt": "filename=\"shepherds_hut_a.json\">Download JSON</button><span class=\"small muted\">2,084 bytes \u00b7 SHA-256 880b87ee9a44\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "filename=\"shepherds_hut_a.json\">Download JSON</button><span class=\"small muted\">1,951 bytes \u00b7 SHA-256 880b87ee9a44\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 33811,
+      "first_diff_column": 838,
+      "old_excerpt": "name=\"waymarker_shelter_a.json\">Download JSON</button><span class=\"small muted\">2,064 bytes \u00b7 SHA-256 6d206f99e819\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "name=\"waymarker_shelter_a.json\">Download JSON</button><span class=\"small muted\">1,959 bytes \u00b7 SHA-256 6d206f99e819\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 33916,
+      "first_diff_column": 2196,
+      "old_excerpt": "ta-filename=\"decoratives.json\">Download JSON</button><span class=\"small muted\">16,101 bytes \u00b7 SHA-256 6551cb2fe585\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">[",
+      "new_excerpt": "ta-filename=\"decoratives.json\">Download JSON</button><span class=\"small muted\">15,512 bytes \u00b7 SHA-256 6551cb2fe585\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">["
+    },
+    {
+      "line": 34505,
+      "first_diff_column": 693,
+      "old_excerpt": "ata-filename=\"sprite_map.json\">Download JSON</button><span class=\"small muted\">24,640 bytes \u00b7 SHA-256 337aa9bba9b8\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"sprite_map.json\">Download JSON</button><span class=\"small muted\">23,289 bytes \u00b7 SHA-256 337aa9bba9b8\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 35856,
+      "first_diff_column": 628,
+      "old_excerpt": "data-filename=\"terrain.json\">Download JSON</button><span class=\"small muted\">21,929 bytes \u00b7 SHA-256 afd0209a7023\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"terrain.json\">Download JSON</button><span class=\"small muted\">21,152 bytes \u00b7 SHA-256 afd0209a7023\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 36633,
+      "first_diff_column": 608,
+      "old_excerpt": "on\" data-filename=\"tiles.json\">Download JSON</button><span class=\"small muted\">47,696 bytes \u00b7 SHA-256 78bf6e85666c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "on\" data-filename=\"tiles.json\">Download JSON</button><span class=\"small muted\">44,488 bytes \u00b7 SHA-256 78bf6e85666c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 39841,
+      "first_diff_column": 2170,
+      "old_excerpt": "-filename=\"barrow_wight.json\">Download JSON</button><span class=\"small muted\">2,713 bytes \u00b7 SHA-256 cf54c9c524c4\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"barrow_wight.json\">Download JSON</button><span class=\"small muted\">2,576 bytes \u00b7 SHA-256 cf54c9c524c4\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 39978,
+      "first_diff_column": 750,
+      "old_excerpt": "a-filename=\"bog_wraith.json\">Download JSON</button><span class=\"small muted\">1,259 bytes \u00b7 SHA-256 7ac45d7c48b9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"bog_wraith.json\">Download JSON</button><span class=\"small muted\">1,201 bytes \u00b7 SHA-256 7ac45d7c48b9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 40036,
+      "first_diff_column": 765,
+      "old_excerpt": "ta-filename=\"briar_lurker.json\">Download JSON</button><span class=\"small muted\">2,008 bytes \u00b7 SHA-256 b0bb4ee17142\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"briar_lurker.json\">Download JSON</button><span class=\"small muted\">1,913 bytes \u00b7 SHA-256 b0bb4ee17142\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 40131,
+      "first_diff_column": 803,
+      "old_excerpt": "ename=\"drowned_revenant.json\">Download JSON</button><span class=\"small muted\">2,200 bytes \u00b7 SHA-256 879d152c1040\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ename=\"drowned_revenant.json\">Download JSON</button><span class=\"small muted\">2,099 bytes \u00b7 SHA-256 879d152c1040\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 40232,
+      "first_diff_column": 758,
+      "old_excerpt": "a-filename=\"grave_thing.json\">Download JSON</button><span class=\"small muted\">2,536 bytes \u00b7 SHA-256 55aa15cab1ef\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"grave_thing.json\">Download JSON</button><span class=\"small muted\">2,409 bytes \u00b7 SHA-256 55aa15cab1ef\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 40359,
+      "first_diff_column": 776,
+      "old_excerpt": "filename=\"heath_stalker.json\">Download JSON</button><span class=\"small muted\">3,282 bytes \u00b7 SHA-256 e2b2968fb6d2\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "filename=\"heath_stalker.json\">Download JSON</button><span class=\"small muted\">3,124 bytes \u00b7 SHA-256 e2b2968fb6d2\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 40517,
+      "first_diff_column": 794,
+      "old_excerpt": "lename=\"highland_bandit.json\">Download JSON</button><span class=\"small muted\">2,802 bytes \u00b7 SHA-256 02c720968589\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "lename=\"highland_bandit.json\">Download JSON</button><span class=\"small muted\">2,671 bytes \u00b7 SHA-256 02c720968589\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 40648,
+      "first_diff_column": 776,
+      "old_excerpt": "filename=\"hollow_knight.json\">Download JSON</button><span class=\"small muted\">1,932 bytes \u00b7 SHA-256 efa8d3b80950\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "filename=\"hollow_knight.json\">Download JSON</button><span class=\"small muted\">1,834 bytes \u00b7 SHA-256 efa8d3b80950\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 40746,
+      "first_diff_column": 795,
+      "old_excerpt": "ename=\"hollow_revenant.json\">Download JSON</button><span class=\"small muted\">2,099 bytes \u00b7 SHA-256 641158cfd121\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ename=\"hollow_revenant.json\">Download JSON</button><span class=\"small muted\">2,002 bytes \u00b7 SHA-256 641158cfd121\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 40843,
+      "first_diff_column": 756,
+      "old_excerpt": "ata-filename=\"plague_crow.json\">Download JSON</button><span class=\"small muted\">3,080 bytes \u00b7 SHA-256 a749bd3e1c80\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"plague_crow.json\">Download JSON</button><span class=\"small muted\">2,930 bytes \u00b7 SHA-256 a749bd3e1c80\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 40993,
+      "first_diff_column": 756,
+      "old_excerpt": "ata-filename=\"sewer_thing.json\">Download JSON</button><span class=\"small muted\">1,013 bytes \u00b7 SHA-256 4ef12b825940\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"sewer_thing.json\">Download JSON</button><span class=\"small muted\">966 bytes \u00b7 SHA-256 4ef12b825940\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41040,
+      "first_diff_column": 767,
+      "old_excerpt": "-filename=\"stone_lurker.json\">Download JSON</button><span class=\"small muted\">2,744 bytes \u00b7 SHA-256 5c633bd59a35\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"stone_lurker.json\">Download JSON</button><span class=\"small muted\">2,607 bytes \u00b7 SHA-256 5c633bd59a35\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41191,
+      "first_diff_column": 661,
+      "old_excerpt": "on\" data-filename=\"player.json\">Download JSON</button><span class=\"small muted\">92 bytes \u00b7 SHA-256 539fad8f7406\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "on\" data-filename=\"player.json\">Download JSON</button><span class=\"small muted\">87 bytes \u00b7 SHA-256 539fad8f7406\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41196,
+      "first_diff_column": 2107,
+      "old_excerpt": "filename=\"barrow_mound_a.json\">Download JSON</button><span class=\"small muted\">638 bytes \u00b7 SHA-256 4b5f43276ebc\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "filename=\"barrow_mound_a.json\">Download JSON</button><span class=\"small muted\">601 bytes \u00b7 SHA-256 4b5f43276ebc\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41233,
+      "first_diff_column": 739,
+      "old_excerpt": "filename=\"barrow_mound_b.json\">Download JSON</button><span class=\"small muted\">692 bytes \u00b7 SHA-256 294c72ebaace\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "filename=\"barrow_mound_b.json\">Download JSON</button><span class=\"small muted\">654 bytes \u00b7 SHA-256 294c72ebaace\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41271,
+      "first_diff_column": 783,
+      "old_excerpt": "name=\"drowned_threshold_a.json\">Download JSON</button><span class=\"small muted\">629 bytes \u00b7 SHA-256 e3eed247615a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "name=\"drowned_threshold_a.json\">Download JSON</button><span class=\"small muted\">592 bytes \u00b7 SHA-256 e3eed247615a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41308,
+      "first_diff_column": 802,
+      "old_excerpt": "e=\"overgrown_gatehouse_a.json\">Download JSON</button><span class=\"small muted\">529 bytes \u00b7 SHA-256 67464ecd82f9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "e=\"overgrown_gatehouse_a.json\">Download JSON</button><span class=\"small muted\">503 bytes \u00b7 SHA-256 67464ecd82f9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41334,
+      "first_diff_column": 748,
+      "old_excerpt": "ilename=\"rock_face_cut_a.json\">Download JSON</button><span class=\"small muted\">561 bytes \u00b7 SHA-256 ddd7e5b21e53\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ilename=\"rock_face_cut_a.json\">Download JSON</button><span class=\"small muted\">527 bytes \u00b7 SHA-256 ddd7e5b21e53\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41368,
+      "first_diff_column": 729,
+      "old_excerpt": "a-filename=\"sunken_ruin_a.json\">Download JSON</button><span class=\"small muted\">718 bytes \u00b7 SHA-256 47040d5b7413\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"sunken_ruin_a.json\">Download JSON</button><span class=\"small muted\">678 bytes \u00b7 SHA-256 47040d5b7413\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41435,
+      "first_diff_column": 699,
+      "old_excerpt": "data-filename=\"g3_config.json\">Download JSON</button><span class=\"small muted\">452 bytes \u00b7 SHA-256 13dbeb982225\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"g3_config.json\">Download JSON</button><span class=\"small muted\">430 bytes \u00b7 SHA-256 13dbeb982225\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41481,
+      "first_diff_column": 781,
+      "old_excerpt": "ame=\"settlement_layouts.json\">Download JSON</button><span class=\"small muted\">3,812 bytes \u00b7 SHA-256 a72f8d2fd871\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ame=\"settlement_layouts.json\">Download JSON</button><span class=\"small muted\">3,595 bytes \u00b7 SHA-256 a72f8d2fd871\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41698,
+      "first_diff_column": 790,
+      "old_excerpt": "me=\"settlement_profiles.json\">Download JSON</button><span class=\"small muted\">4,874 bytes \u00b7 SHA-256 7530de6211fe\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "me=\"settlement_profiles.json\">Download JSON</button><span class=\"small muted\">4,668 bytes \u00b7 SHA-256 7530de6211fe\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 41988,
+      "first_diff_column": 737,
+      "old_excerpt": "ta-filename=\"animal_bone.json\">Download JSON</button><span class=\"small muted\">364 bytes \u00b7 SHA-256 650ed0c97e6f\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"animal_bone.json\">Download JSON</button><span class=\"small muted\">349 bytes \u00b7 SHA-256 650ed0c97e6f\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42003,
+      "first_diff_column": 745,
+      "old_excerpt": "ta-filename=\"animal_sinew.json\">Download JSON</button><span class=\"small muted\">409 bytes \u00b7 SHA-256 6a78ff979469\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"animal_sinew.json\">Download JSON</button><span class=\"small muted\">390 bytes \u00b7 SHA-256 6a78ff979469\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42022,
+      "first_diff_column": 719,
+      "old_excerpt": "data-filename=\"briar_sap.json\">Download JSON</button><span class=\"small muted\">454 bytes \u00b7 SHA-256 8e8010087002\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"briar_sap.json\">Download JSON</button><span class=\"small muted\">435 bytes \u00b7 SHA-256 8e8010087002\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42041,
+      "first_diff_column": 790,
+      "old_excerpt": "lename=\"compressed_marrow.json\">Download JSON</button><span class=\"small muted\">521 bytes \u00b7 SHA-256 2d3eacc1e1b2\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "lename=\"compressed_marrow.json\">Download JSON</button><span class=\"small muted\">498 bytes \u00b7 SHA-256 2d3eacc1e1b2\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42064,
+      "first_diff_column": 719,
+      "old_excerpt": "data-filename=\"crow_bile.json\">Download JSON</button><span class=\"small muted\">545 bytes \u00b7 SHA-256 f1daafa78a93\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"crow_bile.json\">Download JSON</button><span class=\"small muted\">518 bytes \u00b7 SHA-256 f1daafa78a93\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42091,
+      "first_diff_column": 818,
+      "old_excerpt": "me=\"crow_flight_membrane.json\">Download JSON</button><span class=\"small muted\">442 bytes \u00b7 SHA-256 01bee07fa015\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "me=\"crow_flight_membrane.json\">Download JSON</button><span class=\"small muted\">427 bytes \u00b7 SHA-256 01bee07fa015\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42106,
+      "first_diff_column": 719,
+      "old_excerpt": "data-filename=\"crow_meat.json\">Download JSON</button><span class=\"small muted\">421 bytes \u00b7 SHA-256 80144998395f\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"crow_meat.json\">Download JSON</button><span class=\"small muted\">402 bytes \u00b7 SHA-256 80144998395f\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42125,
+      "first_diff_column": 755,
+      "old_excerpt": "-filename=\"crude_viscera.json\">Download JSON</button><span class=\"small muted\">443 bytes \u00b7 SHA-256 e6bda60dd695\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"crude_viscera.json\">Download JSON</button><span class=\"small muted\">424 bytes \u00b7 SHA-256 e6bda60dd695\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42144,
+      "first_diff_column": 800,
+      "old_excerpt": "name=\"fibrous_thorn_mass.json\">Download JSON</button><span class=\"small muted\">471 bytes \u00b7 SHA-256 b7568559f4f6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "name=\"fibrous_thorn_mass.json\">Download JSON</button><span class=\"small muted\">452 bytes \u00b7 SHA-256 b7568559f4f6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42163,
+      "first_diff_column": 728,
+      "old_excerpt": "ata-filename=\"grave_dust.json\">Download JSON</button><span class=\"small muted\">446 bytes \u00b7 SHA-256 4cd07ab643e2\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"grave_dust.json\">Download JSON</button><span class=\"small muted\">427 bytes \u00b7 SHA-256 4cd07ab643e2\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42182,
+      "first_diff_column": 782,
+      "old_excerpt": "lename=\"inner_stone_core.json\">Download JSON</button><span class=\"small muted\">474 bytes \u00b7 SHA-256 2271a37d2851\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "lename=\"inner_stone_core.json\">Download JSON</button><span class=\"small muted\">455 bytes \u00b7 SHA-256 2271a37d2851\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42201,
+      "first_diff_column": 773,
+      "old_excerpt": "ilename=\"raw_meat_common.json\">Download JSON</button><span class=\"small muted\">396 bytes \u00b7 SHA-256 27a9a63f3892\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ilename=\"raw_meat_common.json\">Download JSON</button><span class=\"small muted\">377 bytes \u00b7 SHA-256 27a9a63f3892\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42220,
+      "first_diff_column": 836,
+      "old_excerpt": "=\"resonant_bone_fragment.json\">Download JSON</button><span class=\"small muted\">459 bytes \u00b7 SHA-256 2a5b2d5db1fb\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "=\"resonant_bone_fragment.json\">Download JSON</button><span class=\"small muted\">440 bytes \u00b7 SHA-256 2a5b2d5db1fb\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42239,
+      "first_diff_column": 755,
+      "old_excerpt": "-filename=\"revenant_husk.json\">Download JSON</button><span class=\"small muted\">482 bytes \u00b7 SHA-256 c976d406810c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"revenant_husk.json\">Download JSON</button><span class=\"small muted\">463 bytes \u00b7 SHA-256 c976d406810c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42258,
+      "first_diff_column": 746,
+      "old_excerpt": "a-filename=\"stalker_meat.json\">Download JSON</button><span class=\"small muted\">427 bytes \u00b7 SHA-256 5aa6533f2bf1\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"stalker_meat.json\">Download JSON</button><span class=\"small muted\">408 bytes \u00b7 SHA-256 5aa6533f2bf1\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42277,
+      "first_diff_column": 800,
+      "old_excerpt": "name=\"stalker_musk_gland.json\">Download JSON</button><span class=\"small muted\">464 bytes \u00b7 SHA-256 dd1bd5d25b09\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "name=\"stalker_musk_gland.json\">Download JSON</button><span class=\"small muted\">445 bytes \u00b7 SHA-256 dd1bd5d25b09\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42296,
+      "first_diff_column": 844,
+      "old_excerpt": "=\"stone_carapace_fragment.json\">Download JSON</button><span class=\"small muted\">412 bytes \u00b7 SHA-256 476080d279ad\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "=\"stone_carapace_fragment.json\">Download JSON</button><span class=\"small muted\">397 bytes \u00b7 SHA-256 476080d279ad\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42311,
+      "first_diff_column": 827,
+      "old_excerpt": "e=\"wight_essence_residue.json\">Download JSON</button><span class=\"small muted\">455 bytes \u00b7 SHA-256 90f782946acb\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "e=\"wight_essence_residue.json\">Download JSON</button><span class=\"small muted\">440 bytes \u00b7 SHA-256 90f782946acb\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42354,
+      "first_diff_column": 747,
+      "old_excerpt": "ta-filename=\"flint_shard.json\">Download JSON</button><span class=\"small muted\">284 bytes \u00b7 SHA-256 3b7b7d53bdf1\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"flint_shard.json\">Download JSON</button><span class=\"small muted\">270 bytes \u00b7 SHA-256 3b7b7d53bdf1\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42368,
+      "first_diff_column": 746,
+      "old_excerpt": "ata-filename=\"wood_bundle.json\">Download JSON</button><span class=\"small muted\">314 bytes \u00b7 SHA-256 c29734313df3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"wood_bundle.json\">Download JSON</button><span class=\"small muted\">297 bytes \u00b7 SHA-256 c29734313df3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42403,
+      "first_diff_column": 751,
+      "old_excerpt": "ata-filename=\"bitter_herb.json\">Download JSON</button><span class=\"small muted\">607 bytes \u00b7 SHA-256 8d030c166e91\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"bitter_herb.json\">Download JSON</button><span class=\"small muted\">585 bytes \u00b7 SHA-256 8d030c166e91\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42459,
+      "first_diff_column": 797,
+      "old_excerpt": "lename=\"coldbell_cutting.json\">Download JSON</button><span class=\"small muted\">766 bytes \u00b7 SHA-256 ef4b1d1d749f\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "lename=\"coldbell_cutting.json\">Download JSON</button><span class=\"small muted\">735 bytes \u00b7 SHA-256 ef4b1d1d749f\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42524,
+      "first_diff_column": 743,
+      "old_excerpt": "ata-filename=\"crow_jerky.json\">Download JSON</button><span class=\"small muted\">531 bytes \u00b7 SHA-256 85147275a848\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"crow_jerky.json\">Download JSON</button><span class=\"small muted\">513 bytes \u00b7 SHA-256 85147275a848\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42617,
+      "first_diff_column": 796,
+      "old_excerpt": "ilename=\"dried_provisions.json\">Download JSON</button><span class=\"small muted\">504 bytes \u00b7 SHA-256 c05507795540\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ilename=\"dried_provisions.json\">Download JSON</button><span class=\"small muted\">484 bytes \u00b7 SHA-256 c05507795540\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42727,
+      "first_diff_column": 797,
+      "old_excerpt": "lename=\"murk_violet_stem.json\">Download JSON</button><span class=\"small muted\">751 bytes \u00b7 SHA-256 9f0436e87b0a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "lename=\"murk_violet_stem.json\">Download JSON</button><span class=\"small muted\">720 bytes \u00b7 SHA-256 9f0436e87b0a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42775,
+      "first_diff_column": 751,
+      "old_excerpt": "ata-filename=\"perk_vessel.json\">Download JSON</button><span class=\"small muted\">411 bytes \u00b7 SHA-256 db8a254c7300\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"perk_vessel.json\">Download JSON</button><span class=\"small muted\">393 bytes \u00b7 SHA-256 db8a254c7300\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42793,
+      "first_diff_column": 824,
+      "old_excerpt": "ame=\"pilgrims_woe_petals.json\">Download JSON</button><span class=\"small muted\">661 bytes \u00b7 SHA-256 7cc24382d795\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ame=\"pilgrims_woe_petals.json\">Download JSON</button><span class=\"small muted\">634 bytes \u00b7 SHA-256 7cc24382d795\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42820,
+      "first_diff_column": 797,
+      "old_excerpt": "lename=\"prophets_eye_cap.json\">Download JSON</button><span class=\"small muted\">683 bytes \u00b7 SHA-256 49b695210c27\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "lename=\"prophets_eye_cap.json\">Download JSON</button><span class=\"small muted\">656 bytes \u00b7 SHA-256 49b695210c27\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42881,
+      "first_diff_column": 743,
+      "old_excerpt": "ata-filename=\"salt_pouch.json\">Download JSON</button><span class=\"small muted\">468 bytes \u00b7 SHA-256 81838beaab2b\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"salt_pouch.json\">Download JSON</button><span class=\"small muted\">458 bytes \u00b7 SHA-256 81838beaab2b\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42908,
+      "first_diff_column": 833,
+      "old_excerpt": "me=\"sulphur_cap_fragment.json\">Download JSON</button><span class=\"small muted\">737 bytes \u00b7 SHA-256 0017f3136dc6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "me=\"sulphur_cap_fragment.json\">Download JSON</button><span class=\"small muted\">706 bytes \u00b7 SHA-256 0017f3136dc6\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42939,
+      "first_diff_column": 752,
+      "old_excerpt": "ta-filename=\"water_flask.json\">Download JSON</button><span class=\"small muted\">660 bytes \u00b7 SHA-256 03e0daa95ba4\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"water_flask.json\">Download JSON</button><span class=\"small muted\">639 bytes \u00b7 SHA-256 03e0daa95ba4\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 42960,
+      "first_diff_column": 743,
+      "old_excerpt": "ata-filename=\"water_skin.json\">Download JSON</button><span class=\"small muted\">463 bytes \u00b7 SHA-256 ee6ecdd89c76\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"water_skin.json\">Download JSON</button><span class=\"small muted\">448 bytes \u00b7 SHA-256 ee6ecdd89c76\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 43137,
+      "first_diff_column": 722,
+      "old_excerpt": "ta-filename=\"oil_lantern.json\">Download JSON</button><span class=\"small muted\">866 bytes \u00b7 SHA-256 06ee71ad9d40\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"oil_lantern.json\">Download JSON</button><span class=\"small muted\">831 bytes \u00b7 SHA-256 06ee71ad9d40\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 43172,
+      "first_diff_column": 731,
+      "old_excerpt": "a-filename=\"tallow_torch.json\">Download JSON</button><span class=\"small muted\">860 bytes \u00b7 SHA-256 7335f0c13076\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"tallow_torch.json\">Download JSON</button><span class=\"small muted\">821 bytes \u00b7 SHA-256 7335f0c13076\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 43256,
+      "first_diff_column": 734,
+      "old_excerpt": "-filename=\"crude_blade.json\">Download JSON</button><span class=\"small muted\">1,265 bytes \u00b7 SHA-256 5e984863b3f3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"crude_blade.json\">Download JSON</button><span class=\"small muted\">1,213 bytes \u00b7 SHA-256 5e984863b3f3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 43418,
+      "first_diff_column": 769,
+      "old_excerpt": "lename=\"revelation_lens.json\">Download JSON</button><span class=\"small muted\">1,308 bytes \u00b7 SHA-256 e51d3fb0b4e4\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "lename=\"revelation_lens.json\">Download JSON</button><span class=\"small muted\">1,252 bytes \u00b7 SHA-256 e51d3fb0b4e4\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 43474,
+      "first_diff_column": 769,
+      "old_excerpt": "lename=\"severance_blade.json\">Download JSON</button><span class=\"small muted\">1,418 bytes \u00b7 SHA-256 fc7b4ae2b922\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "lename=\"severance_blade.json\">Download JSON</button><span class=\"small muted\">1,358 bytes \u00b7 SHA-256 fc7b4ae2b922\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 43737,
+      "first_diff_column": 732,
+      "old_excerpt": "lename=\"hunting_supplies.json\">Download JSON</button><span class=\"small muted\">361 bytes \u00b7 SHA-256 65a5525d5a3a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "lename=\"hunting_supplies.json\">Download JSON</button><span class=\"small muted\">350 bytes \u00b7 SHA-256 65a5525d5a3a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 43748,
+      "first_diff_column": 714,
+      "old_excerpt": "-filename=\"poor_household.json\">Download JSON</button><span class=\"small muted\">306 bytes \u00b7 SHA-256 5a8ee013d205\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"poor_household.json\">Download JSON</button><span class=\"small muted\">296 bytes \u00b7 SHA-256 5a8ee013d205\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 43758,
+      "first_diff_column": 698,
+      "old_excerpt": "ta-filename=\"tools_crude.json\">Download JSON</button><span class=\"small muted\">361 bytes \u00b7 SHA-256 65a5525d5a3a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"tools_crude.json\">Download JSON</button><span class=\"small muted\">350 bytes \u00b7 SHA-256 65a5525d5a3a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45715,
+      "first_diff_column": 2013,
+      "old_excerpt": "n\" data-filename=\"barrow.json\">Download JSON</button><span class=\"small muted\">775 bytes \u00b7 SHA-256 06570a46ea10\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "n\" data-filename=\"barrow.json\">Download JSON</button><span class=\"small muted\">756 bytes \u00b7 SHA-256 06570a46ea10\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45734,
+      "first_diff_column": 695,
+      "old_excerpt": "\" data-filename=\"dungeon.json\">Download JSON</button><span class=\"small muted\">783 bytes \u00b7 SHA-256 bb45d866a9c5\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "\" data-filename=\"dungeon.json\">Download JSON</button><span class=\"small muted\">764 bytes \u00b7 SHA-256 bb45d866a9c5\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45753,
+      "first_diff_column": 679,
+      "old_excerpt": "on\" data-filename=\"vault.json\">Download JSON</button><span class=\"small muted\">728 bytes \u00b7 SHA-256 966a3e256b31\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "on\" data-filename=\"vault.json\">Download JSON</button><span class=\"small muted\">709 bytes \u00b7 SHA-256 966a3e256b31\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45772,
+      "first_diff_column": 742,
+      "old_excerpt": "a-filename=\"warped_place.json\">Download JSON</button><span class=\"small muted\">778 bytes \u00b7 SHA-256 f31c02af15c2\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"warped_place.json\">Download JSON</button><span class=\"small muted\">759 bytes \u00b7 SHA-256 f31c02af15c2\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45791,
+      "first_diff_column": 748,
+      "old_excerpt": "ta-filename=\"dead_ground.json\">Download JSON</button><span class=\"small muted\">773 bytes \u00b7 SHA-256 9546f1306d22\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"dead_ground.json\">Download JSON</button><span class=\"small muted\">753 bytes \u00b7 SHA-256 9546f1306d22\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45811,
+      "first_diff_column": 730,
+      "old_excerpt": "data-filename=\"gate_ward.json\">Download JSON</button><span class=\"small muted\">833 bytes \u00b7 SHA-256 1b222ca3c3d7\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"gate_ward.json\">Download JSON</button><span class=\"small muted\">812 bytes \u00b7 SHA-256 1b222ca3c3d7\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45832,
+      "first_diff_column": 702,
+      "old_excerpt": "on\" data-filename=\"hearth.json\">Download JSON</button><span class=\"small muted\">705 bytes \u00b7 SHA-256 cea7f995344d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "on\" data-filename=\"hearth.json\">Download JSON</button><span class=\"small muted\">686 bytes \u00b7 SHA-256 cea7f995344d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45851,
+      "first_diff_column": 730,
+      "old_excerpt": "data-filename=\"high_seat.json\">Download JSON</button><span class=\"small muted\">792 bytes \u00b7 SHA-256 35a5ace9a920\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"high_seat.json\">Download JSON</button><span class=\"small muted\">772 bytes \u00b7 SHA-256 35a5ace9a920\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45871,
+      "first_diff_column": 703,
+      "old_excerpt": "n\" data-filename=\"market.json\">Download JSON</button><span class=\"small muted\">757 bytes \u00b7 SHA-256 ac1352a18153\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "n\" data-filename=\"market.json\">Download JSON</button><span class=\"small muted\">737 bytes \u00b7 SHA-256 ac1352a18153\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45891,
+      "first_diff_column": 757,
+      "old_excerpt": "a-filename=\"pale_quarter.json\">Download JSON</button><span class=\"small muted\">854 bytes \u00b7 SHA-256 dec41ebecf7a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"pale_quarter.json\">Download JSON</button><span class=\"small muted\">833 bytes \u00b7 SHA-256 dec41ebecf7a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45912,
+      "first_diff_column": 712,
+      "old_excerpt": "\" data-filename=\"sanctum.json\">Download JSON</button><span class=\"small muted\">754 bytes \u00b7 SHA-256 6a9cc6216900\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "\" data-filename=\"sanctum.json\">Download JSON</button><span class=\"small muted\">734 bytes \u00b7 SHA-256 6a9cc6216900\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45932,
+      "first_diff_column": 739,
+      "old_excerpt": "ata-filename=\"undercroft.json\">Download JSON</button><span class=\"small muted\">793 bytes \u00b7 SHA-256 80fad4b7719f\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"undercroft.json\">Download JSON</button><span class=\"small muted\">773 bytes \u00b7 SHA-256 80fad4b7719f\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45952,
+      "first_diff_column": 730,
+      "old_excerpt": "data-filename=\"briarwood.json\">Download JSON</button><span class=\"small muted\">944 bytes \u00b7 SHA-256 d8f6ed0a2e1b\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "data-filename=\"briarwood.json\">Download JSON</button><span class=\"small muted\">919 bytes \u00b7 SHA-256 d8f6ed0a2e1b\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 45977,
+      "first_diff_column": 721,
+      "old_excerpt": " data-filename=\"deepwood.json\">Download JSON</button><span class=\"small muted\">850 bytes \u00b7 SHA-256 b5217052d338\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": " data-filename=\"deepwood.json\">Download JSON</button><span class=\"small muted\">826 bytes \u00b7 SHA-256 b5217052d338\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46001,
+      "first_diff_column": 694,
+      "old_excerpt": "on\" data-filename=\"heath.json\">Download JSON</button><span class=\"small muted\">885 bytes \u00b7 SHA-256 cd6078022436\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "on\" data-filename=\"heath.json\">Download JSON</button><span class=\"small muted\">861 bytes \u00b7 SHA-256 cd6078022436\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46025,
+      "first_diff_column": 729,
+      "old_excerpt": " data-filename=\"highstone.json\">Download JSON</button><span class=\"small muted\">906 bytes \u00b7 SHA-256 ad3ecd3451b9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": " data-filename=\"highstone.json\">Download JSON</button><span class=\"small muted\">882 bytes \u00b7 SHA-256 ad3ecd3451b9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46049,
+      "first_diff_column": 684,
+      "old_excerpt": "json\" data-filename=\"mere.json\">Download JSON</button><span class=\"small muted\">800 bytes \u00b7 SHA-256 7880e9ff5f5b\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "json\" data-filename=\"mere.json\">Download JSON</button><span class=\"small muted\">777 bytes \u00b7 SHA-256 7880e9ff5f5b\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46072,
+      "first_diff_column": 2170,
+      "old_excerpt": "ename=\"author_cottage_a.json\">Download JSON</button><span class=\"small muted\">1,908 bytes \u00b7 SHA-256 a1572c4961b4\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ename=\"author_cottage_a.json\">Download JSON</button><span class=\"small muted\">1,781 bytes \u00b7 SHA-256 a1572c4961b4\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46199,
+      "first_diff_column": 796,
+      "old_excerpt": "me=\"author_cottage_access.json\">Download JSON</button><span class=\"small muted\">402 bytes \u00b7 SHA-256 cd5a403e5e8e\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "me=\"author_cottage_access.json\">Download JSON</button><span class=\"small muted\">375 bytes \u00b7 SHA-256 cd5a403e5e8e\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46226,
+      "first_diff_column": 762,
+      "old_excerpt": "name=\"author_frontage_a.json\">Download JSON</button><span class=\"small muted\">2,177 bytes \u00b7 SHA-256 6af312b0cdb1\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "name=\"author_frontage_a.json\">Download JSON</button><span class=\"small muted\">2,070 bytes \u00b7 SHA-256 6af312b0cdb1\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46333,
+      "first_diff_column": 762,
+      "old_excerpt": "name=\"author_landmark_a.json\">Download JSON</button><span class=\"small muted\">1,824 bytes \u00b7 SHA-256 1d46b3bb6ac8\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "name=\"author_landmark_a.json\">Download JSON</button><span class=\"small muted\">1,711 bytes \u00b7 SHA-256 1d46b3bb6ac8\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46446,
+      "first_diff_column": 797,
+      "old_excerpt": "e=\"author_scene_weighted.json\">Download JSON</button><span class=\"small muted\">852 bytes \u00b7 SHA-256 ad3a1ae597c9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "e=\"author_scene_weighted.json\">Download JSON</button><span class=\"small muted\">803 bytes \u00b7 SHA-256 ad3a1ae597c9\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46495,
+      "first_diff_column": 706,
+      "old_excerpt": "ata-filename=\"g5_landmark.json\">Download JSON</button><span class=\"small muted\">2,037 bytes \u00b7 SHA-256 877e0fa64c29\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"g5_landmark.json\">Download JSON</button><span class=\"small muted\">1,933 bytes \u00b7 SHA-256 877e0fa64c29\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46599,
+      "first_diff_column": 789,
+      "old_excerpt": "e=\"g5_selection_example.json\">Download JSON</button><span class=\"small muted\">4,872 bytes \u00b7 SHA-256 5805be14a02d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "e=\"g5_selection_example.json\">Download JSON</button><span class=\"small muted\">4,666 bytes \u00b7 SHA-256 5805be14a02d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46805,
+      "first_diff_column": 753,
+      "old_excerpt": "ename=\"g5_service_house.json\">Download JSON</button><span class=\"small muted\">2,359 bytes \u00b7 SHA-256 75d86811d68b\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ename=\"g5_service_house.json\">Download JSON</button><span class=\"small muted\">2,243 bytes \u00b7 SHA-256 75d86811d68b\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 46921,
+      "first_diff_column": 708,
+      "old_excerpt": "a-filename=\"g5_workshop.json\">Download JSON</button><span class=\"small muted\">2,664 bytes \u00b7 SHA-256 82ef239f151c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "a-filename=\"g5_workshop.json\">Download JSON</button><span class=\"small muted\">2,532 bytes \u00b7 SHA-256 82ef239f151c\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 47053,
+      "first_diff_column": 733,
+      "old_excerpt": "-filename=\"g6_poi_example.json\">Download JSON</button><span class=\"small muted\">826 bytes \u00b7 SHA-256 0673a5ad18e3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"g6_poi_example.json\">Download JSON</button><span class=\"small muted\">780 bytes \u00b7 SHA-256 0673a5ad18e3\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 47099,
+      "first_diff_column": 706,
+      "old_excerpt": "ata-filename=\"g6_wayhouse.json\">Download JSON</button><span class=\"small muted\">2,015 bytes \u00b7 SHA-256 622263d41a4a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"g6_wayhouse.json\">Download JSON</button><span class=\"small muted\">1,911 bytes \u00b7 SHA-256 622263d41a4a\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 47203,
+      "first_diff_column": 737,
+      "old_excerpt": "ilename=\"g7_poi_example.json\">Download JSON</button><span class=\"small muted\">1,264 bytes \u00b7 SHA-256 ea3aef1cb6aa\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ilename=\"g7_poi_example.json\">Download JSON</button><span class=\"small muted\">1,197 bytes \u00b7 SHA-256 ea3aef1cb6aa\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 47270,
+      "first_diff_column": 780,
+      "old_excerpt": "me=\"g7_travellers_court.json\">Download JSON</button><span class=\"small muted\">1,339 bytes \u00b7 SHA-256 e0d97245a46d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "me=\"g7_travellers_court.json\">Download JSON</button><span class=\"small muted\">1,248 bytes \u00b7 SHA-256 e0d97245a46d\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 47361,
+      "first_diff_column": 706,
+      "old_excerpt": "ata-filename=\"g7_wayhouse.json\">Download JSON</button><span class=\"small muted\">2,056 bytes \u00b7 SHA-256 cc04c3db5f70\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ata-filename=\"g7_wayhouse.json\">Download JSON</button><span class=\"small muted\">1,951 bytes \u00b7 SHA-256 cc04c3db5f70\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 47466,
+      "first_diff_column": 870,
+      "old_excerpt": "dmark_preview_selection.json\">Download JSON</button><span class=\"small muted\">4,466 bytes \u00b7 SHA-256 0fc3178f062e\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "dmark_preview_selection.json\">Download JSON</button><span class=\"small muted\">4,275 bytes \u00b7 SHA-256 0fc3178f062e\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 47657,
+      "first_diff_column": 699,
+      "old_excerpt": "ta-filename=\"g8_layouts.json\">Download JSON</button><span class=\"small muted\">3,812 bytes \u00b7 SHA-256 a72f8d2fd871\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"g8_layouts.json\">Download JSON</button><span class=\"small muted\">3,595 bytes \u00b7 SHA-256 a72f8d2fd871\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 47874,
+      "first_diff_column": 707,
+      "old_excerpt": "ta-filename=\"g8_planning.json\">Download JSON</button><span class=\"small muted\">452 bytes \u00b7 SHA-256 13dbeb982225\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "ta-filename=\"g8_planning.json\">Download JSON</button><span class=\"small muted\">430 bytes \u00b7 SHA-256 13dbeb982225\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    },
+    {
+      "line": 47896,
+      "first_diff_column": 717,
+      "old_excerpt": "-filename=\"g8_selection.json\">Download JSON</button><span class=\"small muted\">4,874 bytes \u00b7 SHA-256 7530de6211fe\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{",
+      "new_excerpt": "-filename=\"g8_selection.json\">Download JSON</button><span class=\"small muted\">4,668 bytes \u00b7 SHA-256 7530de6211fe\u2026</span></div><pre data-language=\"json\"><code class=\"language-json\">{"
+    }
+  ]
+}

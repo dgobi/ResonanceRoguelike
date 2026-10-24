@@ -1,0 +1,367 @@
+{
+  "schema": 1,
+  "scope": "Independent read-only verification of retained records; not a fresh execution of Windows gates.",
+  "head": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+  "frozen_input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+  "working_tree_status": "",
+  "report": {
+    "attachment_exact": true,
+    "sha256": "03ec0df4de4d64b07bc4f217f16d085a0c96790b85bd056b29ae925fc344e459",
+    "bytes": 13185
+  },
+  "source_counts": {
+    "count": 704,
+    "raw_relations": {
+      "uniform-newline-reconstruction": 263,
+      "exact": 441
+    },
+    "reported_relations": {
+      "line endings only": 263,
+      "exact": 441
+    },
+    "files_with_issues": 0
+  },
+  "retained_zips": [
+    {
+      "path": "evidence/worldgen-g8/before/witness/authentic-g7-checkpoint.zip",
+      "sha256": "d33a2a8bffbacbe9625f76c2369c613467ed83c31204b0290baeaeba646ab2c7",
+      "bytes": 1569006,
+      "members": 8,
+      "bad_crc": null,
+      "duplicate_members": 0
+    },
+    {
+      "path": "evidence/worldgen-g8/composition-checks-a/new-inputs/tools/critical_fix_regressions/fixtures/g8/authentic-g7-checkpoint.zip",
+      "sha256": "d33a2a8bffbacbe9625f76c2369c613467ed83c31204b0290baeaeba646ab2c7",
+      "bytes": 1569006,
+      "members": 8,
+      "bad_crc": null,
+      "duplicate_members": 0
+    },
+    {
+      "path": "evidence/worldgen-g8/lifecycle-checks-a/new-inputs/tools/critical_fix_regressions/fixtures/g8/authentic-g7-checkpoint.zip",
+      "sha256": "d33a2a8bffbacbe9625f76c2369c613467ed83c31204b0290baeaeba646ab2c7",
+      "bytes": 1569006,
+      "members": 8,
+      "bad_crc": null,
+      "duplicate_members": 0
+    }
+  ],
+  "omitted_outputs_scope": {
+    "count": 2163,
+    "all_in_disposable_saves": true
+  },
+  "authentic_g7_fixture": {
+    "sha256": "d33a2a8bffbacbe9625f76c2369c613467ed83c31204b0290baeaeba646ab2c7",
+    "creator_commit": "8e56d36d72537e8b32c3666dd5d19723d1afdf3a",
+    "source_stable": true,
+    "member_count": 8,
+    "plan_identity": "17e968b99d8b65e0a8634f7c46b4a9d8018b3a713d834afba53bdae23411b948",
+    "plan_version": 5,
+    "plan_revision": "wg7",
+    "visited": [
+      75,
+      99
+    ],
+    "pending": [
+      75,
+      100
+    ],
+    "compound": [
+      74,
+      34
+    ],
+    "rural_pending": [
+      81,
+      34
+    ],
+    "issues": []
+  },
+  "first_final": {
+    "passed": false,
+    "results": [
+      {
+        "gate": "guard",
+        "exit_code": 0
+      },
+      {
+        "gate": "focused",
+        "exit_code": 0
+      },
+      {
+        "gate": "browser",
+        "exit_code": 0
+      },
+      {
+        "gate": "authoring",
+        "exit_code": 0
+      },
+      {
+        "gate": "catalog",
+        "exit_code": 0
+      },
+      {
+        "gate": "catalog-check",
+        "exit_code": 0
+      },
+      {
+        "gate": "diagnostic",
+        "exit_code": 1
+      }
+    ]
+  },
+  "portable_review_archive": "Not present in repository or supplied attachments; no claim of independent portable-delivery CRC/member/publication audit."
+}
+gate summary [
+  {
+    "name": "guard",
+    "receipt": "evidence/worldgen-g8/final-b/guard/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 9.987305899965577,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "uniform-newline-reconstruction": 13,
+      "not-retained": 67
+    }
+  },
+  {
+    "name": "focused",
+    "receipt": "evidence/worldgen-g8/final-b/focused/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 470.2442197999917,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "uniform-newline-reconstruction": 31,
+      "exact": 7
+    }
+  },
+  {
+    "name": "browser",
+    "receipt": "evidence/worldgen-g8/final-b/browser/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 57.3470009000157,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "uniform-newline-reconstruction": 11,
+      "exact": 150
+    }
+  },
+  {
+    "name": "authoring",
+    "receipt": "evidence/worldgen-g8/final-b/authoring/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 91.09478520002449,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "uniform-newline-reconstruction": 12,
+      "exact": 205
+    }
+  },
+  {
+    "name": "catalog",
+    "receipt": "evidence/worldgen-g8/final-b/catalog/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 0.33358179999049753,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "exact": 1,
+      "uniform-newline-reconstruction": 2
+    }
+  },
+  {
+    "name": "catalog-check",
+    "receipt": "evidence/worldgen-g8/final-b/catalog-check/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 0.3715698000160046,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "uniform-newline-reconstruction": 2
+    }
+  },
+  {
+    "name": "diagnostic",
+    "receipt": "evidence/worldgen-g8/final-b/diagnostic/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 164.32135560002644,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "uniform-newline-reconstruction": 44
+    }
+  },
+  {
+    "name": "visuals",
+    "receipt": "evidence/worldgen-g8/final-b/visuals/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 8.776604700018652,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "uniform-newline-reconstruction": 5,
+      "exact": 14
+    }
+  },
+  {
+    "name": "wiki",
+    "receipt": "evidence/worldgen-g8/final-b/wiki/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 23.64395139995031,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "uniform-newline-reconstruction": 18,
+      "exact": 27
+    }
+  },
+  {
+    "name": "production",
+    "receipt": "evidence/worldgen-g8/final-b/production/receipt.json",
+    "receipt_relation": "uniform-newline-reconstruction",
+    "input_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "end_commit": "14c98afc38c659c9195b11c6b396fb82544ff03b",
+    "passed": true,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 437.75106020004023,
+    "source_stable": true,
+    "committed_inputs_reconciled": true,
+    "identical_input_manifest": true,
+    "identical_source_manifest": true,
+    "output_counts": {
+      "uniform-newline-reconstruction": 340,
+      "not-retained": 2096,
+      "exact": 40
+    }
+  }
+]
+production {'checks': 3675, 'passed': 3675, 'failed': 0, 'workers': 159} coverage_count 74 negative_controls 7
+browser {
+  "chromium": {
+    "browser": "chromium",
+    "version": "156.0.8078.4",
+    "passed": true,
+    "errors": [],
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+      "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-exported-cottage.json",
+      "--route",
+      "ordinary_building",
+      "--category",
+      "residential",
+      "--register",
+      "--output",
+      "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-runtime.json"
+    ],
+    "runtime_stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-runtime.json\",\n  \"previews\": 2,\n  \"registration\": true,\n  \"status\": null\n}\n",
+    "runtime_stderr": "",
+    "codec_documents": 129,
+    "planned_command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+      "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-frontage.json",
+      "--planned",
+      "--category",
+      "residential",
+      "--context",
+      "grid",
+      "--seed",
+      "20261023",
+      "--output",
+      "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-planned-runtime.json"
+    ],
+    "planned_stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-planned-runtime.json\",\n  \"previews\": 2,\n  \"registration\": false,\n  \"status\": null\n}\n",
+    "planned_stderr": "",
+    "command_records": [
+      {
+        "argv": [
+          "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+          "-X",
+          "utf8",
+          "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-exported-cottage.json",
+          "--route",
+          "ordinary_building",
+          "--category",
+          "residential",
+          "--register",
+          "--output",
+          "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g8\\final-b\\browser\\results\\chromium-runtime.json"
+        ],
+        "cwd": "G:\\GameDev\\RoguelikeProject",
+        "exit_code": 0,
+        "stdout": "{\n  \"passed\": true,\n  \"assets\": 64,\n  \"diagnostics\": 238,\n  \"output\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g8\\\\final-b\\\\browser\\\\results\\\\chromium-runtime.json\",\n  \"previews\": 2,\n  \"registration\": true,\n  \"status\": null\n}\n",
+        "stde

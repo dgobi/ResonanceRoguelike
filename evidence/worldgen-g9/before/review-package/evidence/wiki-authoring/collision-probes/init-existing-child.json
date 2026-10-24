@@ -1,0 +1,31 @@
+{
+  "name": "init-existing-child",
+  "command": [
+    "/workspace/scratch/1652b4369862/review-env/bin/python",
+    "-X",
+    "utf8",
+    "/workspace/scratch/1652b4369862/resonance-review/tools/structure_authoring.py",
+    "--init-compound",
+    "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/collision-probes/init-existing-child",
+    "--output",
+    "/workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/collision-probes/init-existing-child/g7_wayhouse.json"
+  ],
+  "exit_code": 1,
+  "seconds": 0.0632478949992219,
+  "input_hashes_before": {
+    "g7_poi_example.json": "ea3aef1cb6aa45e634a0993e00bd0b326f08b755ea309a2e437d186d62b7fedf",
+    "g7_travellers_court.json": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec",
+    "g7_wayhouse.json": "cc04c3db5f7053d1e495c92a6ae3f6e60366d8153438a8b6e8dc45df32d9d891"
+  },
+  "hashes_after": {
+    "g7_poi_example.json": "ea3aef1cb6aa45e634a0993e00bd0b326f08b755ea309a2e437d186d62b7fedf",
+    "g7_travellers_court.json": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec",
+    "g7_wayhouse.json": "cc04c3db5f7053d1e495c92a6ae3f6e60366d8153438a8b6e8dc45df32d9d891"
+  },
+  "input_bytes_preserved": true,
+  "stdout": "",
+  "stderr": "{\n  \"passed\": false,\n  \"error\": \"--output output /workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/collision-probes/init-existing-child/g7_wayhouse.json conflicts with initializer initializer target /workspace/scratch/1652b4369862/g8-review-evidence/wiki-authoring/collision-probes/init-existing-child/g7_wayhouse.json\",\n  \"diagnostics\": []\n}\n",
+  "expected_rejection": true,
+  "unexpected_writes": [],
+  "passed": true
+}

@@ -1,0 +1,105 @@
+{
+  "id": "g7_wayhouse",
+  "category": "wilderness",
+  "width": 6,
+  "height": 5,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "wilderness": 4,
+    "religious": 1
+  },
+  "interior_loot_table": null,
+  "legend": {
+    "#": "wall",
+    ".": "worn_stone",
+    "s": "waystone_plinth",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "######",
+    "#....#",
+    "#.s..#",
+    "#....#",
+    "##+#+#"
+  ],
+  "special_tiles": [
+    {
+      "x": 4,
+      "y": 1,
+      "type": "item",
+      "item_id": "stone_marker",
+      "text_id": "road_marker_a",
+      "note": "Worn stone slab with carved distances, propped against the wall"
+    },
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "coffer",
+      "loot_pools": [
+        "shrine_offering"
+      ]
+    }
+  ],
+  "note": "A waymarker shelter. Built around a waystone plinth — whether to protect travellers or to protect the stone is unclear. Single door in the south wall.",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "landmark",
+      "compound"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "spur",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 2,
+        "y": 4,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      },
+      {
+        "id": "service",
+        "x": 4,
+        "y": 4,
+        "normal": "S",
+        "width": 1,
+        "role": "service",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 3,
+        "y": 2,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 4,
+        "y": 1,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  }
+}

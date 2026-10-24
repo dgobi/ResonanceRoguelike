@@ -1,0 +1,186 @@
+{
+  "head": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+  "plan_identity": "ac9d07bdfaab123e30a782211b8edc0966a85257a2f004e41821670b135f4a07",
+  "scenes": [
+    {
+      "chunk": [
+        75,
+        99
+      ],
+      "fingerprint": "239f5f6c90af22d5a3487ae5ee672fbf0734eb3f1b1f56f0cfd49e5d9e8f92fc",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [
+          "road-2",
+          "road-3",
+          "road-4",
+          "road-7",
+          "settlement-0-street-east-west-0",
+          "settlement-0-street-north-south-0"
+        ],
+        "crossings": [],
+        "placements": [
+          "settlement-0-cross-market-lot-civic-building",
+          "settlement-0-cross-market-lot-1-1-S-0-building",
+          "settlement-0-cross-market-lot-1-23-N-0-building",
+          "settlement-0-cross-market-lot-42-23-W-0-building"
+        ],
+        "plan_revision": "wg8",
+        "plan_version": 6,
+        "plan_identity": "ac9d07bdfaab123e30a782211b8edc0966a85257a2f004e41821670b135f4a07",
+        "dependency_projection": "structure-v1",
+        "adapter": "g8-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": [
+          "settlement-0-common-bell-common"
+        ]
+      },
+      "creator": "wg8"
+    },
+    {
+      "chunk": [
+        74,
+        34
+      ],
+      "fingerprint": "883ea19f2fe68bc0070544f60233f38c9d78ac2d59bb0ce6058f5a8b5f933dec",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [
+          "road-6"
+        ],
+        "crossings": [],
+        "placements": [
+          "site-74-34-16-21-N-slot-shrine-building",
+          "site-74-34-16-21-N-slot-shelter-building"
+        ],
+        "plan_revision": "wg8",
+        "plan_version": 6,
+        "plan_identity": "ac9d07bdfaab123e30a782211b8edc0966a85257a2f004e41821670b135f4a07",
+        "dependency_projection": "structure-v1",
+        "adapter": "g8-v1",
+        "paths": [
+          "site-74-34-16-21-N-path-court"
+        ],
+        "compounds": [
+          "site-74-34-16-21-N"
+        ],
+        "public_spaces": []
+      },
+      "creator": "wg8"
+    },
+    {
+      "chunk": [
+        8,
+        38
+      ],
+      "fingerprint": "d997dfeba75b8fb7b880ad4c7fd566da950385075b2a307c71d03cd27d4a43f3",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [
+          "road-3"
+        ],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg8",
+        "plan_version": 6,
+        "plan_identity": "ac9d07bdfaab123e30a782211b8edc0966a85257a2f004e41821670b135f4a07",
+        "dependency_projection": "structure-v1",
+        "adapter": "g8-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      },
+      "creator": "wg8"
+    }
+  ],
+  "pending": [
+    76,
+    100
+  ],
+  "country_pending": [
+    118,
+    72
+  ],
+  "common": {
+    "id": "settlement-0-common-bell-common",
+    "owner": "settlement-0",
+    "purpose": "civic-common",
+    "rects": [
+      [
+        6043,
+        4258,
+        6062,
+        4277
+      ]
+    ],
+    "surface": "cobblestone",
+    "surface_dependency": "5a7208bb35a85451136b5e0064973306a97c84ed5dff5e8ce4bc3e822277b42e",
+    "furnishing": [
+      [
+        6045,
+        4276
+      ],
+      [
+        6046,
+        4276
+      ]
+    ],
+    "civic": "settlement-0-cross-market-lot-civic-building"
+  },
+  "mutations": {
+    "waystone": [
+      45,
+      19
+    ],
+    "prayer_taken": true,
+    "first_compound_container_emptied": [
+      22,
+      36
+    ],
+    "second_container_preserved": [
+      13,
+      36
+    ],
+    "terrain": "mud at 2,2"
+  },
+  "controls": "Fixture teleports and interaction positioning; eight ordinary native updates then paused AI/survival; invincible player; production interaction/F5 handlers; direct terrain and first child container mutations explicitly labeled.",
+  "files": {
+    "manifest.json": {
+      "bytes": 1197,
+      "sha256": "215c4012233f9c7009f9f956adb215d9a2cb7bf884e7337f80bba68069a45ec0"
+    },
+    "meta.json": {
+      "bytes": 149,
+      "sha256": "c39db6930b9da5ecf101c56fb5310c923cdea2fc7713d43f1963d4700615374a"
+    },
+    "player.json": {
+      "bytes": 9914,
+      "sha256": "f23511e738c3ba2d0106a0ff0008585d9e63191b34da2ec155cec07051e8edb6"
+    },
+    "world.json": {
+      "bytes": 17898600,
+      "sha256": "515f07caab2b326567a4459ee4b32a304854973f09e0181f6110e59333a212b5"
+    },
+    "chunks/73_99.pkl": {
+      "bytes": 502396,
+      "sha256": "83ec61dd459c9f1f624528d1cd5fa8438a19ec59b51276d5dff6f1be36d9b73a"
+    },
+    "chunks/74_34.pkl": {
+      "bytes": 504469,
+      "sha256": "c90ca849906040ed919cebe882c45c36757145a4218c49c52acaa08d8d46d349"
+    },
+    "chunks/75_99.pkl": {
+      "bytes": 518151,
+      "sha256": "56ab9427cd1b1a08d441ad21ccb96f8cef36177d26c31919503b1d2393f24a1e"
+    },
+    "chunks/8_38.pkl": {
+      "bytes": 500862,
+      "sha256": "7a7c7cc188454ba2531fd63b8721833690d130e5ae75000fd9e02f565c3d4f28"
+    },
+    "chunks/sub_73_99_0.pkl": {
+      "bytes": 501946,
+      "sha256": "d93138f113696962314dfee7418b8180630ba4b7c983e8d10d151f295f340f05"
+    }
+  }
+}

@@ -1,0 +1,1605 @@
+{
+  "plans": [
+    {
+      "seed": 0,
+      "country_routes": 7,
+      "country_vertices": 11901,
+      "country_unique_edge_tiles": 11900,
+      "country_summed_route_tiles": 17257,
+      "country_retraced_edge_tiles": 5357,
+      "country_edges_used_by_multiple_routes": 5357,
+      "country_components": 1,
+      "country_cycle_rank": 0,
+      "country_cut_edge_tiles": 11900,
+      "country_cut_edge_fraction": 1.0,
+      "raw_crossing_records": 6,
+      "terminal_nodes": [
+        {
+          "id": "start",
+          "chunk": [
+            30,
+            83
+          ],
+          "xy": [
+            2440,
+            3590
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-0",
+          "chunk": [
+            32,
+            83
+          ],
+          "xy": [
+            2600,
+            3590
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-1",
+          "chunk": [
+            102,
+            101
+          ],
+          "xy": [
+            8200,
+            4364
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-2",
+          "chunk": [
+            83,
+            116
+          ],
+          "xy": [
+            6680,
+            5009
+          ],
+          "required": true
+        },
+        {
+          "id": "capital-gateway",
+          "chunk": [
+            67,
+            68
+          ],
+          "xy": [
+            5400,
+            2945
+          ],
+          "required": true
+        },
+        {
+          "id": "landmark",
+          "chunk": [
+            32,
+            79
+          ],
+          "xy": [
+            2600,
+            3418
+          ],
+          "required": true
+        }
+      ],
+      "terminal_pairs": [
+        {
+          "a": "start",
+          "b": "settlement-0",
+          "a_xy": [
+            2440,
+            3590
+          ],
+          "b_xy": [
+            2600,
+            3590
+          ],
+          "manhattan_tiles": 160,
+          "country_centerline_tiles": 160,
+          "all_roads_centerline_tiles": 160,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 160
+        },
+        {
+          "a": "start",
+          "b": "settlement-1",
+          "a_xy": [
+            2440,
+            3590
+          ],
+          "b_xy": [
+            8200,
+            4364
+          ],
+          "manhattan_tiles": 6534,
+          "country_centerline_tiles": 6792,
+          "all_roads_centerline_tiles": 6792,
+          "country_manhattan_stretch": 1.039485766758494,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6790
+        },
+        {
+          "a": "start",
+          "b": "settlement-2",
+          "a_xy": [
+            2440,
+            3590
+          ],
+          "b_xy": [
+            6680,
+            5009
+          ],
+          "manhattan_tiles": 5659,
+          "country_centerline_tiles": 6299,
+          "all_roads_centerline_tiles": 6299,
+          "country_manhattan_stretch": 1.113094186251988,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6297
+        },
+        {
+          "a": "start",
+          "b": "capital-gateway",
+          "a_xy": [
+            2440,
+            3590
+          ],
+          "b_xy": [
+            5400,
+            2945
+          ],
+          "manhattan_tiles": 3605,
+          "country_centerline_tiles": 6371,
+          "all_roads_centerline_tiles": 6371,
+          "country_manhattan_stretch": 1.767267683772538,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6367
+        },
+        {
+          "a": "start",
+          "b": "landmark",
+          "a_xy": [
+            2440,
+            3590
+          ],
+          "b_xy": [
+            2600,
+            3418
+          ],
+          "manhattan_tiles": 332,
+          "country_centerline_tiles": 332,
+          "all_roads_centerline_tiles": 332,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 332
+        },
+        {
+          "a": "settlement-0",
+          "b": "settlement-1",
+          "a_xy": [
+            2600,
+            3590
+          ],
+          "b_xy": [
+            8200,
+            4364
+          ],
+          "manhattan_tiles": 6374,
+          "country_centerline_tiles": 6632,
+          "all_roads_centerline_tiles": 6632,
+          "country_manhattan_stretch": 1.0404769375588327,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6630
+        },
+        {
+          "a": "settlement-0",
+          "b": "settlement-2",
+          "a_xy": [
+            2600,
+            3590
+          ],
+          "b_xy": [
+            6680,
+            5009
+          ],
+          "manhattan_tiles": 5499,
+          "country_centerline_tiles": 6139,
+          "all_roads_centerline_tiles": 6139,
+          "country_manhattan_stretch": 1.1163847972358611,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6137
+        },
+        {
+          "a": "settlement-0",
+          "b": "capital-gateway",
+          "a_xy": [
+            2600,
+            3590
+          ],
+          "b_xy": [
+            5400,
+            2945
+          ],
+          "manhattan_tiles": 3445,
+          "country_centerline_tiles": 6211,
+          "all_roads_centerline_tiles": 6211,
+          "country_manhattan_stretch": 1.8029027576197387,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6207
+        },
+        {
+          "a": "settlement-0",
+          "b": "landmark",
+          "a_xy": [
+            2600,
+            3590
+          ],
+          "b_xy": [
+            2600,
+            3418
+          ],
+          "manhattan_tiles": 172,
+          "country_centerline_tiles": 172,
+          "all_roads_centerline_tiles": 172,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 172
+        },
+        {
+          "a": "settlement-1",
+          "b": "settlement-2",
+          "a_xy": [
+            8200,
+            4364
+          ],
+          "b_xy": [
+            6680,
+            5009
+          ],
+          "manhattan_tiles": 2165,
+          "country_centerline_tiles": 2165,
+          "all_roads_centerline_tiles": 2165,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 2165
+        },
+        {
+          "a": "settlement-1",
+          "b": "capital-gateway",
+          "a_xy": [
+            8200,
+            4364
+          ],
+          "b_xy": [
+            5400,
+            2945
+          ],
+          "manhattan_tiles": 4219,
+          "country_centerline_tiles": 4477,
+          "all_roads_centerline_tiles": 4477,
+          "country_manhattan_stretch": 1.0611519317373785,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 4475
+        },
+        {
+          "a": "settlement-1",
+          "b": "landmark",
+          "a_xy": [
+            8200,
+            4364
+          ],
+          "b_xy": [
+            2600,
+            3418
+          ],
+          "manhattan_tiles": 6546,
+          "country_centerline_tiles": 6804,
+          "all_roads_centerline_tiles": 6804,
+          "country_manhattan_stretch": 1.0394133822181484,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6802
+        },
+        {
+          "a": "settlement-2",
+          "b": "capital-gateway",
+          "a_xy": [
+            6680,
+            5009
+          ],
+          "b_xy": [
+            5400,
+            2945
+          ],
+          "manhattan_tiles": 3344,
+          "country_centerline_tiles": 3984,
+          "all_roads_centerline_tiles": 3984,
+          "country_manhattan_stretch": 1.1913875598086126,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 3982
+        },
+        {
+          "a": "settlement-2",
+          "b": "landmark",
+          "a_xy": [
+            6680,
+            5009
+          ],
+          "b_xy": [
+            2600,
+            3418
+          ],
+          "manhattan_tiles": 5671,
+          "country_centerline_tiles": 6311,
+          "all_roads_centerline_tiles": 6311,
+          "country_manhattan_stretch": 1.112854875683301,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6309
+        },
+        {
+          "a": "capital-gateway",
+          "b": "landmark",
+          "a_xy": [
+            5400,
+            2945
+          ],
+          "b_xy": [
+            2600,
+            3418
+          ],
+          "manhattan_tiles": 3273,
+          "country_centerline_tiles": 6383,
+          "all_roads_centerline_tiles": 6383,
+          "country_manhattan_stretch": 1.9501985945615643,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6379
+        }
+      ],
+      "pair_count": 15,
+      "median_pair_manhattan_stretch": 1.0611519317373785,
+      "max_pair": {
+        "a": "capital-gateway",
+        "b": "landmark",
+        "a_xy": [
+          5400,
+          2945
+        ],
+        "b_xy": [
+          2600,
+          3418
+        ],
+        "manhattan_tiles": 3273,
+        "country_centerline_tiles": 6383,
+        "all_roads_centerline_tiles": 6383,
+        "country_manhattan_stretch": 1.9501985945615643,
+        "street_shortcut_savings_tiles": 0,
+        "physical_steps": 6379
+      },
+      "routes": [
+        {
+          "id": "road-0",
+          "a": "start",
+          "b": "crossing-near",
+          "length_tiles": 1992,
+          "manhattan_tiles": 1992,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 1063
+        },
+        {
+          "id": "road-1",
+          "a": "crossing-near",
+          "b": "crossing-far",
+          "length_tiles": 86,
+          "manhattan_tiles": 86,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 0
+        },
+        {
+          "id": "road-2",
+          "a": "crossing-far",
+          "b": "settlement-0",
+          "length_tiles": 2066,
+          "manhattan_tiles": 2066,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 148
+        },
+        {
+          "id": "road-3",
+          "a": "settlement-0",
+          "b": "settlement-1",
+          "length_tiles": 6632,
+          "manhattan_tiles": 6374,
+          "route_manhattan_stretch": 1.0404769375588327,
+          "search_nodes": 5635
+        },
+        {
+          "id": "road-4",
+          "a": "settlement-1",
+          "b": "settlement-2",
+          "length_tiles": 2325,
+          "manhattan_tiles": 2165,
+          "route_manhattan_stretch": 1.073903002309469,
+          "search_nodes": 43
+        },
+        {
+          "id": "road-5",
+          "a": "settlement-2",
+          "b": "capital-gateway",
+          "length_tiles": 3984,
+          "manhattan_tiles": 3344,
+          "route_manhattan_stretch": 1.1913875598086126,
+          "search_nodes": 5650
+        },
+        {
+          "id": "road-6",
+          "a": "settlement-0",
+          "b": "landmark",
+          "length_tiles": 172,
+          "manhattan_tiles": 172,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 20
+        }
+      ],
+      "fresh_plan_sha256": "4002542d77ae850c76c3b2eef8d4396f963e4debcc715620077b58bb6eb91cac",
+      "retained_final_b_plan_equal": true
+    },
+    {
+      "seed": 20261023,
+      "country_routes": 8,
+      "country_vertices": 24627,
+      "country_unique_edge_tiles": 24631,
+      "country_summed_route_tiles": 39616,
+      "country_retraced_edge_tiles": 14985,
+      "country_edges_used_by_multiple_routes": 10733,
+      "country_components": 1,
+      "country_cycle_rank": 5,
+      "country_cut_edge_tiles": 23155,
+      "country_cut_edge_fraction": 0.9400755145954285,
+      "raw_crossing_records": 8,
+      "terminal_nodes": [
+        {
+          "id": "start",
+          "chunk": [
+            73,
+            99
+          ],
+          "xy": [
+            5880,
+            4278
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-0",
+          "chunk": [
+            75,
+            99
+          ],
+          "xy": [
+            6040,
+            4278
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-1",
+          "chunk": [
+            39,
+            26
+          ],
+          "xy": [
+            3160,
+            1139
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-2",
+          "chunk": [
+            106,
+            106
+          ],
+          "xy": [
+            8520,
+            4579
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-3",
+          "chunk": [
+            87,
+            33
+          ],
+          "xy": [
+            7000,
+            1440
+          ],
+          "required": true
+        },
+        {
+          "id": "capital-gateway",
+          "chunk": [
+            66,
+            61
+          ],
+          "xy": [
+            5320,
+            2644
+          ],
+          "required": true
+        },
+        {
+          "id": "landmark",
+          "chunk": [
+            75,
+            95
+          ],
+          "xy": [
+            6040,
+            4106
+          ],
+          "required": true
+        }
+      ],
+      "terminal_pairs": [
+        {
+          "a": "start",
+          "b": "settlement-0",
+          "a_xy": [
+            5880,
+            4278
+          ],
+          "b_xy": [
+            6040,
+            4278
+          ],
+          "manhattan_tiles": 160,
+          "country_centerline_tiles": 160,
+          "all_roads_centerline_tiles": 160,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 160
+        },
+        {
+          "a": "start",
+          "b": "settlement-1",
+          "a_xy": [
+            5880,
+            4278
+          ],
+          "b_xy": [
+            3160,
+            1139
+          ],
+          "manhattan_tiles": 5859,
+          "country_centerline_tiles": 11151,
+          "all_roads_centerline_tiles": 11151,
+          "country_manhattan_stretch": 1.903225806451613,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 11143
+        },
+        {
+          "a": "start",
+          "b": "settlement-2",
+          "a_xy": [
+            5880,
+            4278
+          ],
+          "b_xy": [
+            8520,
+            4579
+          ],
+          "manhattan_tiles": 2941,
+          "country_centerline_tiles": 2941,
+          "all_roads_centerline_tiles": 2941,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 2941
+        },
+        {
+          "a": "start",
+          "b": "settlement-3",
+          "a_xy": [
+            5880,
+            4278
+          ],
+          "b_xy": [
+            7000,
+            1440
+          ],
+          "manhattan_tiles": 3958,
+          "country_centerline_tiles": 9606,
+          "all_roads_centerline_tiles": 9606,
+          "country_manhattan_stretch": 2.4269833249115713,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 9600
+        },
+        {
+          "a": "start",
+          "b": "capital-gateway",
+          "a_xy": [
+            5880,
+            4278
+          ],
+          "b_xy": [
+            5320,
+            2644
+          ],
+          "manhattan_tiles": 2194,
+          "country_centerline_tiles": 12490,
+          "all_roads_centerline_tiles": 12490,
+          "country_manhattan_stretch": 5.692798541476755,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 12484
+        },
+        {
+          "a": "start",
+          "b": "landmark",
+          "a_xy": [
+            5880,
+            4278
+          ],
+          "b_xy": [
+            6040,
+            4106
+          ],
+          "manhattan_tiles": 332,
+          "country_centerline_tiles": 332,
+          "all_roads_centerline_tiles": 332,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 332
+        },
+        {
+          "a": "settlement-0",
+          "b": "settlement-1",
+          "a_xy": [
+            6040,
+            4278
+          ],
+          "b_xy": [
+            3160,
+            1139
+          ],
+          "manhattan_tiles": 6019,
+          "country_centerline_tiles": 11311,
+          "all_roads_centerline_tiles": 11311,
+          "country_manhattan_stretch": 1.8792158165808275,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 11303
+        },
+        {
+          "a": "settlement-0",
+          "b": "settlement-2",
+          "a_xy": [
+            6040,
+            4278
+          ],
+          "b_xy": [
+            8520,
+            4579
+          ],
+          "manhattan_tiles": 2781,
+          "country_centerline_tiles": 2781,
+          "all_roads_centerline_tiles": 2781,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 2781
+        },
+        {
+          "a": "settlement-0",
+          "b": "settlement-3",
+          "a_xy": [
+            6040,
+            4278
+          ],
+          "b_xy": [
+            7000,
+            1440
+          ],
+          "manhattan_tiles": 3798,
+          "country_centerline_tiles": 9446,
+          "all_roads_centerline_tiles": 9446,
+          "country_manhattan_stretch": 2.4870984728804633,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 9440
+        },
+        {
+          "a": "settlement-0",
+          "b": "capital-gateway",
+          "a_xy": [
+            6040,
+            4278
+          ],
+          "b_xy": [
+            5320,
+            2644
+          ],
+          "manhattan_tiles": 2354,
+          "country_centerline_tiles": 12330,
+          "all_roads_centerline_tiles": 12330,
+          "country_manhattan_stretch": 5.237892948173322,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 12324
+        },
+        {
+          "a": "settlement-0",
+          "b": "landmark",
+          "a_xy": [
+            6040,
+            4278
+          ],
+          "b_xy": [
+            6040,
+            4106
+          ],
+          "manhattan_tiles": 172,
+          "country_centerline_tiles": 172,
+          "all_roads_centerline_tiles": 172,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 172
+        },
+        {
+          "a": "settlement-1",
+          "b": "settlement-2",
+          "a_xy": [
+            3160,
+            1139
+          ],
+          "b_xy": [
+            8520,
+            4579
+          ],
+          "manhattan_tiles": 8800,
+          "country_centerline_tiles": 14092,
+          "all_roads_centerline_tiles": 14092,
+          "country_manhattan_stretch": 1.6013636363636363,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 14082
+        },
+        {
+          "a": "settlement-1",
+          "b": "settlement-3",
+          "a_xy": [
+            3160,
+            1139
+          ],
+          "b_xy": [
+            7000,
+            1440
+          ],
+          "manhattan_tiles": 4141,
+          "country_centerline_tiles": 20757,
+          "all_roads_centerline_tiles": 20757,
+          "country_manhattan_stretch": 5.012557353296305,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 20741
+        },
+        {
+          "a": "settlement-1",
+          "b": "capital-gateway",
+          "a_xy": [
+            3160,
+            1139
+          ],
+          "b_xy": [
+            5320,
+            2644
+          ],
+          "manhattan_tiles": 3665,
+          "country_centerline_tiles": 23641,
+          "all_roads_centerline_tiles": 23641,
+          "country_manhattan_stretch": 6.450477489768076,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 23625
+        },
+        {
+          "a": "settlement-1",
+          "b": "landmark",
+          "a_xy": [
+            3160,
+            1139
+          ],
+          "b_xy": [
+            6040,
+            4106
+          ],
+          "manhattan_tiles": 5847,
+          "country_centerline_tiles": 11483,
+          "all_roads_centerline_tiles": 11483,
+          "country_manhattan_stretch": 1.9639131178382077,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 11475
+        },
+        {
+          "a": "settlement-2",
+          "b": "settlement-3",
+          "a_xy": [
+            8520,
+            4579
+          ],
+          "b_xy": [
+            7000,
+            1440
+          ],
+          "manhattan_tiles": 4659,
+          "country_centerline_tiles": 6665,
+          "all_roads_centerline_tiles": 6665,
+          "country_manhattan_stretch": 1.4305644988194892,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6661
+        },
+        {
+          "a": "settlement-2",
+          "b": "capital-gateway",
+          "a_xy": [
+            8520,
+            4579
+          ],
+          "b_xy": [
+            5320,
+            2644
+          ],
+          "manhattan_tiles": 5135,
+          "country_centerline_tiles": 9549,
+          "all_roads_centerline_tiles": 9549,
+          "country_manhattan_stretch": 1.859591041869523,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 9545
+        },
+        {
+          "a": "settlement-2",
+          "b": "landmark",
+          "a_xy": [
+            8520,
+            4579
+          ],
+          "b_xy": [
+            6040,
+            4106
+          ],
+          "manhattan_tiles": 2953,
+          "country_centerline_tiles": 2953,
+          "all_roads_centerline_tiles": 2953,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 2953
+        },
+        {
+          "a": "settlement-3",
+          "b": "capital-gateway",
+          "a_xy": [
+            7000,
+            1440
+          ],
+          "b_xy": [
+            5320,
+            2644
+          ],
+          "manhattan_tiles": 2884,
+          "country_centerline_tiles": 2884,
+          "all_roads_centerline_tiles": 2884,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 2884
+        },
+        {
+          "a": "settlement-3",
+          "b": "landmark",
+          "a_xy": [
+            7000,
+            1440
+          ],
+          "b_xy": [
+            6040,
+            4106
+          ],
+          "manhattan_tiles": 3626,
+          "country_centerline_tiles": 9618,
+          "all_roads_centerline_tiles": 9618,
+          "country_manhattan_stretch": 2.6525096525096523,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 9612
+        },
+        {
+          "a": "capital-gateway",
+          "b": "landmark",
+          "a_xy": [
+            5320,
+            2644
+          ],
+          "b_xy": [
+            6040,
+            4106
+          ],
+          "manhattan_tiles": 2182,
+          "country_centerline_tiles": 12502,
+          "all_roads_centerline_tiles": 12502,
+          "country_manhattan_stretch": 5.729605866177819,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 12496
+        }
+      ],
+      "pair_count": 21,
+      "median_pair_manhattan_stretch": 1.8792158165808275,
+      "max_pair": {
+        "a": "settlement-1",
+        "b": "capital-gateway",
+        "a_xy": [
+          3160,
+          1139
+        ],
+        "b_xy": [
+          5320,
+          2644
+        ],
+        "manhattan_tiles": 3665,
+        "country_centerline_tiles": 23641,
+        "all_roads_centerline_tiles": 23641,
+        "country_manhattan_stretch": 6.450477489768076,
+        "street_shortcut_savings_tiles": 0,
+        "physical_steps": 23625
+      },
+      "routes": [
+        {
+          "id": "road-0",
+          "a": "start",
+          "b": "crossing-near",
+          "length_tiles": 2006,
+          "manhattan_tiles": 2006,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 502
+        },
+        {
+          "id": "road-1",
+          "a": "crossing-near",
+          "b": "crossing-far",
+          "length_tiles": 160,
+          "manhattan_tiles": 160,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 0
+        },
+        {
+          "id": "road-2",
+          "a": "crossing-far",
+          "b": "settlement-0",
+          "length_tiles": 2006,
+          "manhattan_tiles": 2006,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 81
+        },
+        {
+          "id": "road-3",
+          "a": "settlement-0",
+          "b": "settlement-1",
+          "length_tiles": 11311,
+          "manhattan_tiles": 6019,
+          "route_manhattan_stretch": 1.8792158165808275,
+          "search_nodes": 10687
+        },
+        {
+          "id": "road-4",
+          "a": "settlement-1",
+          "b": "settlement-2",
+          "length_tiles": 14252,
+          "manhattan_tiles": 8800,
+          "route_manhattan_stretch": 1.6195454545454546,
+          "search_nodes": 4919
+        },
+        {
+          "id": "road-5",
+          "a": "settlement-2",
+          "b": "settlement-3",
+          "length_tiles": 6665,
+          "manhattan_tiles": 4659,
+          "route_manhattan_stretch": 1.4305644988194892,
+          "search_nodes": 5950
+        },
+        {
+          "id": "road-6",
+          "a": "settlement-3",
+          "b": "capital-gateway",
+          "length_tiles": 3044,
+          "manhattan_tiles": 2884,
+          "route_manhattan_stretch": 1.0554785020804438,
+          "search_nodes": 51
+        },
+        {
+          "id": "road-7",
+          "a": "settlement-0",
+          "b": "landmark",
+          "length_tiles": 172,
+          "manhattan_tiles": 172,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 25
+        }
+      ],
+      "fresh_plan_sha256": "42ba7033085728e99ea00ed6135b561e9a7e58cd8317bdc2e75a3ad1e21d110c",
+      "retained_final_b_plan_equal": true
+    },
+    {
+      "seed": 29417,
+      "country_routes": 8,
+      "country_vertices": 11832,
+      "country_unique_edge_tiles": 11833,
+      "country_summed_route_tiles": 20908,
+      "country_retraced_edge_tiles": 9075,
+      "country_edges_used_by_multiple_routes": 8018,
+      "country_components": 1,
+      "country_cycle_rank": 2,
+      "country_cut_edge_tiles": 11341,
+      "country_cut_edge_fraction": 0.958421363982084,
+      "raw_crossing_records": 13,
+      "terminal_nodes": [
+        {
+          "id": "start",
+          "chunk": [
+            106,
+            46
+          ],
+          "xy": [
+            8520,
+            1999
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-0",
+          "chunk": [
+            104,
+            46
+          ],
+          "xy": [
+            8360,
+            1999
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-1",
+          "chunk": [
+            99,
+            86
+          ],
+          "xy": [
+            7960,
+            3719
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-2",
+          "chunk": [
+            62,
+            0
+          ],
+          "xy": [
+            5000,
+            21
+          ],
+          "required": true
+        },
+        {
+          "id": "settlement-3",
+          "chunk": [
+            107,
+            65
+          ],
+          "xy": [
+            8600,
+            2816
+          ],
+          "required": true
+        },
+        {
+          "id": "capital-gateway",
+          "chunk": [
+            68,
+            64
+          ],
+          "xy": [
+            5480,
+            2773
+          ],
+          "required": true
+        },
+        {
+          "id": "landmark",
+          "chunk": [
+            100,
+            46
+          ],
+          "xy": [
+            8040,
+            1999
+          ],
+          "required": true
+        }
+      ],
+      "terminal_pairs": [
+        {
+          "a": "start",
+          "b": "settlement-0",
+          "a_xy": [
+            8520,
+            1999
+          ],
+          "b_xy": [
+            8360,
+            1999
+          ],
+          "manhattan_tiles": 160,
+          "country_centerline_tiles": 160,
+          "all_roads_centerline_tiles": 160,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 160
+        },
+        {
+          "a": "start",
+          "b": "settlement-1",
+          "a_xy": [
+            8520,
+            1999
+          ],
+          "b_xy": [
+            7960,
+            3719
+          ],
+          "manhattan_tiles": 2280,
+          "country_centerline_tiles": 2280,
+          "all_roads_centerline_tiles": 2280,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 2280
+        },
+        {
+          "a": "start",
+          "b": "settlement-2",
+          "a_xy": [
+            8520,
+            1999
+          ],
+          "b_xy": [
+            5000,
+            21
+          ],
+          "manhattan_tiles": 5498,
+          "country_centerline_tiles": 5584,
+          "all_roads_centerline_tiles": 5584,
+          "country_manhattan_stretch": 1.0156420516551474,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 5580
+        },
+        {
+          "a": "start",
+          "b": "settlement-3",
+          "a_xy": [
+            8520,
+            1999
+          ],
+          "b_xy": [
+            8600,
+            2816
+          ],
+          "manhattan_tiles": 897,
+          "country_centerline_tiles": 1217,
+          "all_roads_centerline_tiles": 1217,
+          "country_manhattan_stretch": 1.3567447045707914,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 1215
+        },
+        {
+          "a": "start",
+          "b": "capital-gateway",
+          "a_xy": [
+            8520,
+            1999
+          ],
+          "b_xy": [
+            5480,
+            2773
+          ],
+          "manhattan_tiles": 3814,
+          "country_centerline_tiles": 3900,
+          "all_roads_centerline_tiles": 3900,
+          "country_manhattan_stretch": 1.0225485055060304,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 3898
+        },
+        {
+          "a": "start",
+          "b": "landmark",
+          "a_xy": [
+            8520,
+            1999
+          ],
+          "b_xy": [
+            8040,
+            1999
+          ],
+          "manhattan_tiles": 480,
+          "country_centerline_tiles": 480,
+          "all_roads_centerline_tiles": 480,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 480
+        },
+        {
+          "a": "settlement-0",
+          "b": "settlement-1",
+          "a_xy": [
+            8360,
+            1999
+          ],
+          "b_xy": [
+            7960,
+            3719
+          ],
+          "manhattan_tiles": 2120,
+          "country_centerline_tiles": 2280,
+          "all_roads_centerline_tiles": 2280,
+          "country_manhattan_stretch": 1.0754716981132075,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 2278
+        },
+        {
+          "a": "settlement-0",
+          "b": "settlement-2",
+          "a_xy": [
+            8360,
+            1999
+          ],
+          "b_xy": [
+            5000,
+            21
+          ],
+          "manhattan_tiles": 5338,
+          "country_centerline_tiles": 5424,
+          "all_roads_centerline_tiles": 5424,
+          "country_manhattan_stretch": 1.01611090295991,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 5420
+        },
+        {
+          "a": "settlement-0",
+          "b": "settlement-3",
+          "a_xy": [
+            8360,
+            1999
+          ],
+          "b_xy": [
+            8600,
+            2816
+          ],
+          "manhattan_tiles": 1057,
+          "country_centerline_tiles": 1217,
+          "all_roads_centerline_tiles": 1217,
+          "country_manhattan_stretch": 1.151371807000946,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 1213
+        },
+        {
+          "a": "settlement-0",
+          "b": "capital-gateway",
+          "a_xy": [
+            8360,
+            1999
+          ],
+          "b_xy": [
+            5480,
+            2773
+          ],
+          "manhattan_tiles": 3654,
+          "country_centerline_tiles": 3900,
+          "all_roads_centerline_tiles": 3900,
+          "country_manhattan_stretch": 1.0673234811165846,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 3896
+        },
+        {
+          "a": "settlement-0",
+          "b": "landmark",
+          "a_xy": [
+            8360,
+            1999
+          ],
+          "b_xy": [
+            8040,
+            1999
+          ],
+          "manhattan_tiles": 320,
+          "country_centerline_tiles": 320,
+          "all_roads_centerline_tiles": 320,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 320
+        },
+        {
+          "a": "settlement-1",
+          "b": "settlement-2",
+          "a_xy": [
+            7960,
+            3719
+          ],
+          "b_xy": [
+            5000,
+            21
+          ],
+          "manhattan_tiles": 6658,
+          "country_centerline_tiles": 7704,
+          "all_roads_centerline_tiles": 7704,
+          "country_manhattan_stretch": 1.157104235506158,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 7698
+        },
+        {
+          "a": "settlement-1",
+          "b": "settlement-3",
+          "a_xy": [
+            7960,
+            3719
+          ],
+          "b_xy": [
+            8600,
+            2816
+          ],
+          "manhattan_tiles": 1543,
+          "country_centerline_tiles": 1543,
+          "all_roads_centerline_tiles": 1543,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 1543
+        },
+        {
+          "a": "settlement-1",
+          "b": "capital-gateway",
+          "a_xy": [
+            7960,
+            3719
+          ],
+          "b_xy": [
+            5480,
+            2773
+          ],
+          "manhattan_tiles": 3426,
+          "country_centerline_tiles": 4226,
+          "all_roads_centerline_tiles": 4226,
+          "country_manhattan_stretch": 1.2335084646818446,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 4224
+        },
+        {
+          "a": "settlement-1",
+          "b": "landmark",
+          "a_xy": [
+            7960,
+            3719
+          ],
+          "b_xy": [
+            8040,
+            1999
+          ],
+          "manhattan_tiles": 1800,
+          "country_centerline_tiles": 2600,
+          "all_roads_centerline_tiles": 2600,
+          "country_manhattan_stretch": 1.4444444444444444,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 2598
+        },
+        {
+          "a": "settlement-2",
+          "b": "settlement-3",
+          "a_xy": [
+            5000,
+            21
+          ],
+          "b_xy": [
+            8600,
+            2816
+          ],
+          "manhattan_tiles": 6395,
+          "country_centerline_tiles": 6641,
+          "all_roads_centerline_tiles": 6641,
+          "country_manhattan_stretch": 1.038467552775606,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 6633
+        },
+        {
+          "a": "settlement-2",
+          "b": "capital-gateway",
+          "a_xy": [
+            5000,
+            21
+          ],
+          "b_xy": [
+            5480,
+            2773
+          ],
+          "manhattan_tiles": 3232,
+          "country_centerline_tiles": 9324,
+          "all_roads_centerline_tiles": 9324,
+          "country_manhattan_stretch": 2.88490099009901,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 9316
+        },
+        {
+          "a": "settlement-2",
+          "b": "landmark",
+          "a_xy": [
+            5000,
+            21
+          ],
+          "b_xy": [
+            8040,
+            1999
+          ],
+          "manhattan_tiles": 5018,
+          "country_centerline_tiles": 5744,
+          "all_roads_centerline_tiles": 5744,
+          "country_manhattan_stretch": 1.1446791550418494,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 5738
+        },
+        {
+          "a": "settlement-3",
+          "b": "capital-gateway",
+          "a_xy": [
+            8600,
+            2816
+          ],
+          "b_xy": [
+            5480,
+            2773
+          ],
+          "manhattan_tiles": 3163,
+          "country_centerline_tiles": 3163,
+          "all_roads_centerline_tiles": 3163,
+          "country_manhattan_stretch": 1.0,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 3163
+        },
+        {
+          "a": "settlement-3",
+          "b": "landmark",
+          "a_xy": [
+            8600,
+            2816
+          ],
+          "b_xy": [
+            8040,
+            1999
+          ],
+          "manhattan_tiles": 1377,
+          "country_centerline_tiles": 1537,
+          "all_roads_centerline_tiles": 1537,
+          "country_manhattan_stretch": 1.1161946259985476,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 1533
+        },
+        {
+          "a": "capital-gateway",
+          "b": "landmark",
+          "a_xy": [
+            5480,
+            2773
+          ],
+          "b_xy": [
+            8040,
+            1999
+          ],
+          "manhattan_tiles": 3334,
+          "country_centerline_tiles": 4220,
+          "all_roads_centerline_tiles": 4220,
+          "country_manhattan_stretch": 1.2657468506298741,
+          "street_shortcut_savings_tiles": 0,
+          "physical_steps": 4216
+        }
+      ],
+      "pair_count": 21,
+      "median_pair_manhattan_stretch": 1.0673234811165846,
+      "max_pair": {
+        "a": "settlement-2",
+        "b": "capital-gateway",
+        "a_xy": [
+          5000,
+          21
+        ],
+        "b_xy": [
+          5480,
+          2773
+        ],
+        "manhattan_tiles": 3232,
+        "country_centerline_tiles": 9324,
+        "all_roads_centerline_tiles": 9324,
+        "country_manhattan_stretch": 2.88490099009901,
+        "street_shortcut_savings_tiles": 0,
+        "physical_steps": 9316
+      },
+      "routes": [
+        {
+          "id": "road-0",
+          "a": "start",
+          "b": "crossing-near",
+          "length_tiles": 80,
+          "manhattan_tiles": 80,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 5
+        },
+        {
+          "id": "road-1",
+          "a": "crossing-near",
+          "b": "crossing-far",
+          "length_tiles": 160,
+          "manhattan_tiles": 160,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 0
+        },
+        {
+          "id": "road-2",
+          "a": "crossing-far",
+          "b": "settlement-0",
+          "length_tiles": 400,
+          "manhattan_tiles": 400,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 6
+        },
+        {
+          "id": "road-3",
+          "a": "settlement-0",
+          "b": "settlement-1",
+          "length_tiles": 2280,
+          "manhattan_tiles": 2120,
+          "route_manhattan_stretch": 1.0754716981132075,
+          "search_nodes": 1618
+        },
+        {
+          "id": "road-4",
+          "a": "settlement-1",
+          "b": "settlement-2",
+          "length_tiles": 7704,
+          "manhattan_tiles": 6658,
+          "route_manhattan_stretch": 1.157104235506158,
+          "search_nodes": 636
+        },
+        {
+          "id": "road-5",
+          "a": "settlement-2",
+          "b": "settlement-3",
+          "length_tiles": 6641,
+          "manhattan_tiles": 6395,
+          "route_manhattan_stretch": 1.038467552775606,
+          "search_nodes": 888
+        },
+        {
+          "id": "road-6",
+          "a": "settlement-3",
+          "b": "capital-gateway",
+          "length_tiles": 3323,
+          "manhattan_tiles": 3163,
+          "route_manhattan_stretch": 1.0505848877647803,
+          "search_nodes": 43
+        },
+        {
+          "id": "road-7",
+          "a": "settlement-0",
+          "b": "landmark",
+          "length_tiles": 320,
+          "manhattan_tiles": 320,
+          "route_manhattan_stretch": 1.0,
+          "search_nodes": 21
+        }
+      ],
+      "fresh_plan_sha256": "2f8ce2208ef40e310e7543838149778c13ab078dba4a72002b1f3a4634055410",
+      "retained_final_b_plan_equal": true
+    }
+  ],
+  "source": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+  "timing_scope": "G8 diagnostic/journey executed unchanged in production checkout. Lightweight documentation tests/build/browser checks overlapped part of this pre-edit capture; exact timing comparisons require serial final measurement. Geometry and state identities were checked unchanged."
+}

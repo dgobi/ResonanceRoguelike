@@ -1,0 +1,204 @@
+{
+  "scope": "Delivered authoring inputs against recorded bytes, reconstructing uniform line endings only",
+  "counts": {
+    "exact": 22,
+    "uniform_CRLF": 23,
+    "mixed_LF_CRLF": 1
+  },
+  "rows": [
+    {
+      "path": "README.txt",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "build_wiki.py",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/code-and-documentation-map.md",
+      "relation": "mixed_LF_CRLF",
+      "reconstruction": "Keep lines1\u201387 as LF; use CRLF for lines88\u201391 only.",
+      "reconstructed_sha256": "f88e5d6668c14117a24dee5bc0f087d5fe61ac2593cf79b66a95f340ecd2eae5",
+      "reconstructed_bytes": 11830
+    },
+    {
+      "path": "chapters/combat-balance.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/compounds.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/content-workflow.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/controls.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/crafting-processing.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/creatures-ai.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/debug-tools.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/display-ui-and-palette.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/entrances-submaps.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/first-building.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/first-change.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/generation-troubleshooting.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/getting-started.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/glossary.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/items-equipment.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/layout-painter.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/maintenance.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/rural-sites.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/saves-and-state.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/settlement-layouts.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/settlement-tuning.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/sprites-and-atlases.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/structure-reference.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/survival-progression.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/terrain-decor-and-variation.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/texts-loot-scenes.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/troubleshooting.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/verification.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/weather-and-atmosphere.md",
+      "relation": "exact"
+    },
+    {
+      "path": "chapters/wfc-ground.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/world-generation.md",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "chapters/world-names-and-biomes.md",
+      "relation": "exact"
+    },
+    {
+      "path": "edition-evidence.json",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "examples/owner_cottage_a.json",
+      "relation": "exact"
+    },
+    {
+      "path": "illustrations/owner-cottage.svg",
+      "relation": "exact"
+    },
+    {
+      "path": "reader.js",
+      "relation": "exact"
+    },
+    {
+      "path": "requirements-docs.txt",
+      "relation": "exact"
+    },
+    {
+      "path": "theme.css",
+      "relation": "exact"
+    },
+    {
+      "path": "validate_wiki.py",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "verify_edition.py",
+      "relation": "exact"
+    },
+    {
+      "path": "verify_reader.py",
+      "relation": "exact"
+    },
+    {
+      "path": "wiki-config.json",
+      "relation": "uniform_CRLF"
+    },
+    {
+      "path": "wiki_inputs.py",
+      "relation": "uniform_CRLF"
+    }
+  ],
+  "unified_input_wiki_paths": 0,
+  "test_wiki_inputs_py_bound": false,
+  "notes": [
+    "All listed wiki authoring source content is equal after newline-only reconstruction.",
+    "The delivered validator still rejects these newline representations; see separate wiki authoring review.",
+    "test_wiki_inputs.py is not bound by the runtime unified manifest or the separate wiki authoring manifest."
+  ]
+}

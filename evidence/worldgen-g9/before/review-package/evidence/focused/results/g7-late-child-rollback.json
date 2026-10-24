@@ -1,0 +1,10 @@
+{
+  "stamped_children": [
+    "roadside_shrine_a",
+    "waymarker_shelter_a"
+  ],
+  "state_unchanged": true,
+  "recovered": true,
+  "resolved_plan_identity": "ac9d07bdfaab123e30a782211b8edc0966a85257a2f004e41821670b135f4a07",
+  "recipe_and_policy_absent_pending_succeeded": true
+}

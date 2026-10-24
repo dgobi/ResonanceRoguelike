@@ -1,0 +1,1785 @@
+{
+  "schema": 1,
+  "reviewed_head": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+  "purpose": "G8 review and proposed G9 execution handoff; no implementation changes",
+  "manifest_scope": "All retained payloads except MANIFEST.json itself; archive verified separately to avoid self-reference",
+  "retained_count": 156,
+  "retained_bytes": 15908812,
+  "files": [
+    {
+      "path": "CODEX_G9_COUNTRY_NETWORK.md",
+      "bytes": 38162,
+      "sha256": "2fb903716fab84611af1044aae7f560782ece41d97c212c042d2e1d5cfc28edc",
+      "crc32": "c2f43012"
+    },
+    {
+      "path": "G8_REVIEW.md",
+      "bytes": 25680,
+      "sha256": "3db9d35738ba6b2a0aac4c7458551d0a4c54ba9cf650f53cc0d5e4300ea0645b",
+      "crc32": "afc0875d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4866,
+      "sha256": "e4dc9be7621a2662239af5ec2fe8311740f1f9540c20b07b16e079e80853e4b7",
+      "crc32": "637bb047"
+    },
+    {
+      "path": "evidence/diagnostic/output.txt",
+      "bytes": 168065,
+      "sha256": "263594444028ab5617e38d0bee2a75b8eb1969f2ccd635ea814615eea94cd9d4",
+      "crc32": "ff634d70"
+    },
+    {
+      "path": "evidence/diagnostic/receipt.json",
+      "bytes": 1160,
+      "sha256": "3eb13356b83c021c26cb6b8a652ed2d837d03fa0cfd19b04923b449638440a92",
+      "crc32": "8e9e8207"
+    },
+    {
+      "path": "evidence/diagnostic/results/0-settlement-0-layout.svg",
+      "bytes": 13647,
+      "sha256": "b76a0abb19c224f747c680b6938607bcaeb68893e638f26d38705dd568b60785",
+      "crc32": "332f9353"
+    },
+    {
+      "path": "evidence/diagnostic/results/0-settlement-1-layout.svg",
+      "bytes": 5434,
+      "sha256": "63908a281aeada24e8b791014d206aa9258e95ba926165404bd66fd16157a358",
+      "crc32": "629bbc59"
+    },
+    {
+      "path": "evidence/diagnostic/results/0-settlement-2-layout.svg",
+      "bytes": 12899,
+      "sha256": "a63017172c21be1f3c5b3992368fda1abad861a2c4613eeea1fad3c1162b71c2",
+      "crc32": "9893fee0"
+    },
+    {
+      "path": "evidence/diagnostic/results/0-site-33-89-48-21-N-plan.svg",
+      "bytes": 5262,
+      "sha256": "c3c37c77676f0d65138fac6fdb62e129604ce97887bdcd57a061f5a033eeb8c8",
+      "crc32": "37b377bd"
+    },
+    {
+      "path": "evidence/diagnostic/results/0-site-33-89-48-21-N-scene.svg",
+      "bytes": 509161,
+      "sha256": "77bae52a7e9a151a5c564651ba4a4d8f11633bd951ceee26b9f6fa53f52cbcea",
+      "crc32": "4a7219ec"
+    },
+    {
+      "path": "evidence/diagnostic/results/0-site-71-78-40-38-W-plan.svg",
+      "bytes": 1396,
+      "sha256": "528ab8853c2cde774bea4e1fbcf63a80350193339780a3784639f1b6939b4d54",
+      "crc32": "b648c35c"
+    },
+    {
+      "path": "evidence/diagnostic/results/0-site-71-78-40-38-W-scene.svg",
+      "bytes": 486017,
+      "sha256": "00946132cfd87692dc0defc76cd064536c405f0a38d66a2b7ae7f74359240641",
+      "crc32": "5f8c1c6e"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-settlement-0-layout.svg",
+      "bytes": 10060,
+      "sha256": "0b56883d06bb3d148160bd2fb03ec915c3eef51a65cffd4f691657996a8d8498",
+      "crc32": "6cf56b0f"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-settlement-1-layout.svg",
+      "bytes": 5239,
+      "sha256": "fa900730b9d3e9dd51ada8061e8083623ed3efd8c9963d3ac0d8847f6558dfad",
+      "crc32": "4ef6416f"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-settlement-2-layout.svg",
+      "bytes": 10447,
+      "sha256": "7ad3e2d3a1d4cf497fa23be27195e296b0714f5232b6c04ba36ae404c60b80d8",
+      "crc32": "2d11d663"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-settlement-3-layout.svg",
+      "bytes": 5337,
+      "sha256": "2e7f74bbb3229c3d09ad87fe91c21c06aeff154a005cfda9fcdb669d64d73e82",
+      "crc32": "67cba3fc"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-site-29-99-64-21-N-plan.svg",
+      "bytes": 1620,
+      "sha256": "2f1ac3fd1fd4d482262820899234757770cc0d75a90bf940fb6f48d48f17255f",
+      "crc32": "daf0cd8f"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-site-29-99-64-21-N-scene.svg",
+      "bytes": 479517,
+      "sha256": "4644c8f19ef034b92008054d2c43077a4ec8322cfd5e1b0ffabcdea82cfbc29d",
+      "crc32": "b8f00b16"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-site-74-34-16-21-N-plan.svg",
+      "bytes": 3381,
+      "sha256": "2951d8b7b62c1874a33aceec165102c380f3c0cf0f886cd7df53b5e49a8daeb3",
+      "crc32": "f2857042"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-site-74-34-16-21-N-scene.svg",
+      "bytes": 483689,
+      "sha256": "1a69d1cdf45bcf177ee36bf712581761b29ea7580701896fb8aa8c2ec0c890c0",
+      "crc32": "0d176092"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-site-81-34-48-21-N-plan.svg",
+      "bytes": 1395,
+      "sha256": "3a006a91c281ec05f31b4a9a5416a37d8660345f795ab2ac69376befcdd1b53f",
+      "crc32": "03e1cdd8"
+    },
+    {
+      "path": "evidence/diagnostic/results/20261023-site-81-34-48-21-N-scene.svg",
+      "bytes": 481783,
+      "sha256": "76988d4dd6331672df5b7e75c424b79e0ae5f955f930fcfa1fa1928547a2871d",
+      "crc32": "2124c090"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-settlement-0-layout.svg",
+      "bytes": 13390,
+      "sha256": "20d0852bc5e3b9141d91bf143938f9e176ba8539b1b211171a8896f9522be7d0",
+      "crc32": "77c5fd6a"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-settlement-1-layout.svg",
+      "bytes": 4105,
+      "sha256": "243381a2cbf824086b80af6f5da3ae1124ae50d92d99a5a2e9c7ea46d02a34d6",
+      "crc32": "369421b7"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-settlement-2-layout.svg",
+      "bytes": 12805,
+      "sha256": "e29ad3125c509080c48f11556f9d5f96313c53d132f233282e777be27f9e0aaf",
+      "crc32": "62bf5021"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-settlement-3-layout.svg",
+      "bytes": 5143,
+      "sha256": "37d90cca150bf0961b902f13145096f8b6c68bdf70eb40ba2e45a02a802ef933",
+      "crc32": "1be503ae"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-site-102-69-64-21-S-plan.svg",
+      "bytes": 3722,
+      "sha256": "83c3906a16f189b486f23c00fb4682cee03da72d40e34d798ec5748dead58572",
+      "crc32": "48b6466b"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-site-102-69-64-21-S-scene.svg",
+      "bytes": 486298,
+      "sha256": "503fb5d40a08bdc8d815276e78c5aa0148f5174c494c6dcc8a65ebbf18763fb9",
+      "crc32": "24fff0cb"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-site-104-61-40-17-W-plan.svg",
+      "bytes": 4060,
+      "sha256": "1d029926b2a204a9b5adf295e9d82b51c34ee372c2c08360947b17fdd562a92c",
+      "crc32": "64426f63"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-site-104-61-40-17-W-scene.svg",
+      "bytes": 488261,
+      "sha256": "86cf5696f7598cb541b2e1cd7e63370fe2f61f86b4b445dc8a247db0f729cd7d",
+      "crc32": "bb21ad23"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-site-90-65-64-21-S-plan.svg",
+      "bytes": 1244,
+      "sha256": "93357f4892f0078dc9b2b65516499f193f61e37b6736874f7f8adae8b1f91cef",
+      "crc32": "8cdb1efb"
+    },
+    {
+      "path": "evidence/diagnostic/results/29417-site-90-65-64-21-S-scene.svg",
+      "bytes": 479532,
+      "sha256": "986479e99aa9fed64285ec960950ad4e2ce01807529fca9f84fe407f1fa496de",
+      "crc32": "27c63a18"
+    },
+    {
+      "path": "evidence/diagnostic/results/grid-before-plan.svg",
+      "bytes": 16140,
+      "sha256": "9ca8bc6fed5ffbaaa88b847c81618d10d906f15d5f8ff4bf2bd33ff4dd9c1d64",
+      "crc32": "87c8293c"
+    },
+    {
+      "path": "evidence/diagnostic/results/grid-plan.svg",
+      "bytes": 10045,
+      "sha256": "c93277ce02ffe84f92dea5c7b6b9f6be95a48667b4f39bcdb72824bb263d269e",
+      "crc32": "6878d825"
+    },
+    {
+      "path": "evidence/diagnostic/results/grid-scene.svg",
+      "bytes": 507058,
+      "sha256": "c653c3780ecebc0ccd76eedbc985bd29c57470069cb57f661e9b318e5a70779a",
+      "crc32": "4c2576ac"
+    },
+    {
+      "path": "evidence/diagnostic/results/journey-progress.json",
+      "bytes": 151872,
+      "sha256": "66f3db498e8bcd3649470a2b8b13dec9db1428467d5ba682005efd40c3930fda",
+      "crc32": "e494b593"
+    },
+    {
+      "path": "evidence/diagnostic/results/plan-0.json",
+      "bytes": 1196198,
+      "sha256": "b2ba583a52aa956ece7d141b4024d6f06351dfeb72b179b58f49073af56c7d5e",
+      "crc32": "6b35e943"
+    },
+    {
+      "path": "evidence/diagnostic/results/plan-0.svg",
+      "bytes": 199787,
+      "sha256": "49a0f4fc3aee88f76cc07a25af87973f61546c1e7916d5e6e7cb184f9407b5cf",
+      "crc32": "2b6e2822"
+    },
+    {
+      "path": "evidence/diagnostic/results/plan-20261023.json",
+      "bytes": 1457319,
+      "sha256": "9296652b62e6db3387cf5f6337306af5d66688f8e3d162cf1f0ba43d0b3d2763",
+      "crc32": "0383cf72"
+    },
+    {
+      "path": "evidence/diagnostic/results/plan-20261023.svg",
+      "bytes": 224539,
+      "sha256": "31fb827946331c36928b94e7b13496bb7fd50f56749addfe239e3cc5be9832d2",
+      "crc32": "aea637de"
+    },
+    {
+      "path": "evidence/diagnostic/results/plan-29417.json",
+      "bytes": 1330450,
+      "sha256": "24cb649582e5db52659b0e131d854eae6091548bfaac7882b5e743ebc3d8fad8",
+      "crc32": "7f9f7fd8"
+    },
+    {
+      "path": "evidence/diagnostic/results/plan-29417.svg",
+      "bytes": 218784,
+      "sha256": "d7e748925c2e4087b054e84c19c36a1c1df8165a088a0b07de6dfc6392d37012",
+      "crc32": "2d040042"
+    },
+    {
+      "path": "evidence/diagnostic/results/roadside-before-plan.svg",
+      "bytes": 9610,
+      "sha256": "0f2d8ba1e2c8b74b4f58b5b5f9a0b229ec244b08fd2b311b0faf8565ab6f85f3",
+      "crc32": "84f0a66a"
+    },
+    {
+      "path": "evidence/diagnostic/results/roadside-plan.svg",
+      "bytes": 4248,
+      "sha256": "225507934b69a24e529fc55652ec45b5bc374df1a8b340a17cc2c0aa557e0e67",
+      "crc32": "bd2bffdf"
+    },
+    {
+      "path": "evidence/diagnostic/results/roadside-scene.svg",
+      "bytes": 496125,
+      "sha256": "5aefe6a2670575fc364c73bb42715e476c7cb8f4c4265983ef33c65b310babfe",
+      "crc32": "61b2eb23"
+    },
+    {
+      "path": "evidence/diagnostic/results/run.json",
+      "bytes": 825947,
+      "sha256": "7059a10d539aac6caaa409af0c3371e0117c809550cda05ca1aa84f1ab6b7355",
+      "crc32": "916e41b7"
+    },
+    {
+      "path": "evidence/diagnostic/results/runtime-log.txt",
+      "bytes": 4673,
+      "sha256": "9db60d7e07b5bc2897126c54afdf476bd9833b96d5d9f0ece5ba8557240db8d8",
+      "crc32": "bd80d407"
+    },
+    {
+      "path": "evidence/diagnostic/source-before.json",
+      "bytes": 558230,
+      "sha256": "46154ecd293cffb36d3b14a2b4c3c36dbc93df26209dfda90f15ccd3336e0e72",
+      "crc32": "19513fb8"
+    },
+    {
+      "path": "evidence/diagnostic/started.json",
+      "bytes": 692,
+      "sha256": "1df850255c61ea50c0c2f29487444333b14c0e295ffc7aee7838e63e91ebef0e",
+      "crc32": "604471b1"
+    },
+    {
+      "path": "evidence/evidence-audit/FINDINGS.md",
+      "bytes": 8679,
+      "sha256": "1ec22194358aecf2f31a433320b2ed910abd42e56f7ecc648b4cbe737293c393",
+      "crc32": "0e21443c"
+    },
+    {
+      "path": "evidence/evidence-audit/audit-summary.txt",
+      "bytes": 12316,
+      "sha256": "62b5feafa42e090b478492ead2085d7e9586f6349cc0d1ad6226554c0595d94d",
+      "crc32": "d0e06aa3"
+    },
+    {
+      "path": "evidence/evidence-audit/audit.json",
+      "bytes": 842537,
+      "sha256": "63d94821bde6e9ef61d1abd0be255266771a192c8964db521247502800bce24b",
+      "crc32": "cd6266ba"
+    },
+    {
+      "path": "evidence/evidence-audit/audit_g8_evidence.py",
+      "bytes": 7085,
+      "sha256": "ac769c7bb75776dd0f6b4f149749fd4ea554193885d9197c9cc0384187a01639",
+      "crc32": "4c8c4810"
+    },
+    {
+      "path": "evidence/evidence-audit/reconstructed-code-and-documentation-map.md",
+      "bytes": 11830,
+      "sha256": "f88e5d6668c14117a24dee5bc0f087d5fe61ac2593cf79b66a95f340ecd2eae5",
+      "crc32": "ad0f6c5c"
+    },
+    {
+      "path": "evidence/evidence-audit/wiki-byte-audit.json",
+      "bytes": 4774,
+      "sha256": "042133602697ed7674b382de31446a12e800441ccb048c2654ff7d07a0637daa",
+      "crc32": "29ac552d"
+    },
+    {
+      "path": "evidence/focused/output.txt",
+      "bytes": 37591,
+      "sha256": "99673c9a21ec4fe9133a868e5700f25602c963fc700178b779fa91bf533ad195",
+      "crc32": "039ab344"
+    },
+    {
+      "path": "evidence/focused/receipt.json",
+      "bytes": 1224,
+      "sha256": "1d5edba5a827c67e8765a7066ab60ea3ecaae74e68c9efe084fbde965bb26620",
+      "crc32": "e85e1a0a"
+    },
+    {
+      "path": "evidence/focused/results/action_routes_stairs.json",
+      "bytes": 47548,
+      "sha256": "1e7f6a2b8a4b5e92ea0f5b197eb7195b7bdfe625dba670531942bd9d404f41ec",
+      "crc32": "05c64cd8"
+    },
+    {
+      "path": "evidence/focused/results/cohort-certification.json",
+      "bytes": 104101,
+      "sha256": "111b5256fa4b505cf2969927d59c31e9a105ed9e3a6f39b2df174cbe997f5e85",
+      "crc32": "29acdadb"
+    },
+    {
+      "path": "evidence/focused/results/focused-tests.txt",
+      "bytes": 37322,
+      "sha256": "341784dfd1c337bf296b36262f74c2c557c993c0de31b5959950ada1e4dae043",
+      "crc32": "f6934fec"
+    },
+    {
+      "path": "evidence/focused/results/g4-interactions.json",
+      "bytes": 456,
+      "sha256": "097349eec197f384f71c9f6dd075212d8e4d131687e5e380cf9e510177da92b9",
+      "crc32": "4dae311f"
+    },
+    {
+      "path": "evidence/focused/results/g4-native-members.json",
+      "bytes": 1983,
+      "sha256": "8c84b4db7561642e285b12671be3365402f669fbf69e973224990c1fa8d2705d",
+      "crc32": "4b169667"
+    },
+    {
+      "path": "evidence/focused/results/g4-native-production.png",
+      "bytes": 19076,
+      "sha256": "9775c1a6344b9042cbadf67313955c296328d510e29a79778218a08c13006ec3",
+      "crc32": "0856a95c"
+    },
+    {
+      "path": "evidence/focused/results/g5-apothecary-production.png",
+      "bytes": 11847,
+      "sha256": "ad2bae2f7f3110e4abfaf384594c0f6f26a55f2b9fd814a2c77a3bef3591e278",
+      "crc32": "bc361a93"
+    },
+    {
+      "path": "evidence/focused/results/g5-interactions.json",
+      "bytes": 475,
+      "sha256": "385150d26d659e04d49d869583fb8bd87631dd8ea6008c67ab432b1a9cbd0971",
+      "crc32": "2c070431"
+    },
+    {
+      "path": "evidence/focused/results/g5-waymarker-production.png",
+      "bytes": 13471,
+      "sha256": "c34eb20f318b5c869f5c89cdd6fd88e999c136ce1113c5cc3844f807aa69eb8b",
+      "crc32": "204f68cb"
+    },
+    {
+      "path": "evidence/focused/results/g6-cohort.json",
+      "bytes": 13070,
+      "sha256": "b89749c5849a0d80bed36ed543d5c8e6f76046f9b6cfa67b5c82746f54bd8cbf",
+      "crc32": "71d2c1d8"
+    },
+    {
+      "path": "evidence/focused/results/g6-independent-owners.json",
+      "bytes": 625,
+      "sha256": "42325ee5516bbbfcdbdb5be7bdf36df1c9393e5dc627bc9d9a6f3d79f5f6576c",
+      "crc32": "fda9a5c8"
+    },
+    {
+      "path": "evidence/focused/results/g6-site-0-production.png",
+      "bytes": 13599,
+      "sha256": "a6136d50379c23a3a55f5dd604b5bc8a67b34f5a1500a4b5f0faced339a18cae",
+      "crc32": "d0292422"
+    },
+    {
+      "path": "evidence/focused/results/g6-site-1-production.png",
+      "bytes": 14612,
+      "sha256": "3ade1dfa7a9124952ff4d575e2bcd54d662d56c1a6d337350ae70006080f6855",
+      "crc32": "af338fb3"
+    },
+    {
+      "path": "evidence/focused/results/g7-atomic-fit.json",
+      "bytes": 589,
+      "sha256": "627af9fc5a969f6efb5b22730ec456a06ba2aab7b61b3c7441e0613dfd36b594",
+      "crc32": "a051719f"
+    },
+    {
+      "path": "evidence/focused/results/g7-authentic-g6-restore.json",
+      "bytes": 211,
+      "sha256": "8cc1c52eabbf475f1ff07cafe43afddafcef0e0f69f433a6a90818e194a2eaf4",
+      "crc32": "13b9710f"
+    },
+    {
+      "path": "evidence/focused/results/g7-hash-seeds.json",
+      "bytes": 286,
+      "sha256": "e461bbf3a4ffd8d9dbb0b0e10f34227d71280309f11b31e16be8ec178db65a6b",
+      "crc32": "5fe9dd35"
+    },
+    {
+      "path": "evidence/focused/results/g7-homestead_workyard-production.png",
+      "bytes": 69868,
+      "sha256": "e1b107798143d91745c45a7358ad3c57645de7d6565efe519052eacf605a4116",
+      "crc32": "441fe66b"
+    },
+    {
+      "path": "evidence/focused/results/g7-independent-children.json",
+      "bytes": 1279,
+      "sha256": "5cbff4152757498a1ff4c8b17cee9c5d503c0ec0c839eff27b81d60dddfbaf86",
+      "crc32": "943fd1ef"
+    },
+    {
+      "path": "evidence/focused/results/g7-invalid-recipes.json",
+      "bytes": 1623,
+      "sha256": "6e2708564701b492f564398d3a5b6c1cfe268a720082f07fd66fda174a405b8d",
+      "crc32": "1dc19a7a"
+    },
+    {
+      "path": "evidence/focused/results/g7-late-child-rollback.json",
+      "bytes": 281,
+      "sha256": "582e05bc48946e150f67d19ae2ebe067942dd10b114ab5566b914c7a513097d7",
+      "crc32": "3e623751"
+    },
+    {
+      "path": "evidence/focused/results/g7-native-views.json",
+      "bytes": 617,
+      "sha256": "2e468009bbb227ce41edffe2143e4464d107b4875be14741cf34321cf6dd2eda",
+      "crc32": "493ae995"
+    },
+    {
+      "path": "evidence/focused/results/g7-real-preparation-negatives.json",
+      "bytes": 1592,
+      "sha256": "442ae8c6f0e716db3c4dce0e42533293ccc9bf98a129918468318b217e54db73",
+      "crc32": "8e53e5ca"
+    },
+    {
+      "path": "evidence/focused/results/g7-recipe-transforms.json",
+      "bytes": 151482,
+      "sha256": "ff3d155cb854b6bcbadfd2863d305ec8d2fac59f3e26881be8a52707355e8a3b",
+      "crc32": "3b625f2c"
+    },
+    {
+      "path": "evidence/focused/results/g7-wayside_shrine_court-production.png",
+      "bytes": 72175,
+      "sha256": "f37353a255b71215ddc53a1ab9daf8a9ccfdec773fd1203f7714445173d0ada1",
+      "crc32": "b6902f6a"
+    },
+    {
+      "path": "evidence/focused/results/g8-cardinal-layouts.json",
+      "bytes": 510,
+      "sha256": "7254830cddd6cbe5663eb5fda860afbc294bc69bbe47c26c6053822a5962ce86",
+      "crc32": "ec613418"
+    },
+    {
+      "path": "evidence/focused/results/g8-checksum-corruptions.json",
+      "bytes": 1248,
+      "sha256": "8aa77cac9f47e4990b3cf51b27e2a05c84ab385559f41ca5b3d532c9857de7f7",
+      "crc32": "6bc5fe2f"
+    },
+    {
+      "path": "evidence/focused/results/g8-explored-checkpoint.json",
+      "bytes": 1075,
+      "sha256": "91099ff14f306d3a5039de6ef4a64a6951bf313bfd0dd79ab21e7395e3bbb3db",
+      "crc32": "b0ef9094"
+    },
+    {
+      "path": "evidence/focused/results/g8-frontage-fixtures.json",
+      "bytes": 3403,
+      "sha256": "b878b4ea405035e088b0bd36dfd25c0364ea0b68de70b87a3fc00e908fd46bf3",
+      "crc32": "d1d64e0e"
+    },
+    {
+      "path": "evidence/focused/results/g8-genuine-g7-restore.json",
+      "bytes": 1256,
+      "sha256": "05d96d1006a49ec8b8f234320e16daffc4174cbbf2bfab7a4094fd5bfb298351",
+      "crc32": "f4e20b41"
+    },
+    {
+      "path": "evidence/focused/results/g8-late-rollback.json",
+      "bytes": 326,
+      "sha256": "d7ce15e58ca5aca75e10b338759d11a2f5a6122aaab0091215f260aada004e0f",
+      "crc32": "776c2156"
+    },
+    {
+      "path": "evidence/focused/results/g8-ordinary.json",
+      "bytes": 5322,
+      "sha256": "4d5e76358a6ff5e5c75147c683cd6c6133878ef8fc799e8455e01b1454c90809",
+      "crc32": "280c2db9"
+    },
+    {
+      "path": "evidence/focused/results/g8-policy-combinations.json",
+      "bytes": 477,
+      "sha256": "cd7cb8cef3b9321da6a553689655e3676a98bf0326e300c6b4f9d0791c4dd06c",
+      "crc32": "f7e7e54f"
+    },
+    {
+      "path": "evidence/focused/results/held_stairs.json",
+      "bytes": 759,
+      "sha256": "396a68fdf09bffe05f0a552c9292fd89d0ec4f4f98ae83ba6c62e7637e8edde8",
+      "crc32": "83e32503"
+    },
+    {
+      "path": "evidence/focused/results/run.json",
+      "bytes": 89046,
+      "sha256": "baa398e9979944b31cf95be6b5a7453fb849c2eead48292aa5c33852d9c6dee4",
+      "crc32": "4fdd7006"
+    },
+    {
+      "path": "evidence/focused/results/wfc-outskirts.json",
+      "bytes": 752,
+      "sha256": "5ab774b9097a691645c823aa18e1ac59d32cc9df7139ee680884d280c21439c2",
+      "crc32": "7451d8ba"
+    },
+    {
+      "path": "evidence/focused/source-before.json",
+      "bytes": 558230,
+      "sha256": "46154ecd293cffb36d3b14a2b4c3c36dbc93df26209dfda90f15ccd3336e0e72",
+      "crc32": "19513fb8"
+    },
+    {
+      "path": "evidence/focused/started.json",
+      "bytes": 768,
+      "sha256": "f1707dfc250a17237f32f51bf60dce95f8625110d2685fa31f3adaba9614239a",
+      "crc32": "77761f31"
+    },
+    {
+      "path": "evidence/network/FINDINGS.md",
+      "bytes": 14076,
+      "sha256": "667f0ae2e4f622c01a4f39150c8d0ced38880071fbdbd1110fc485d7d8e8a4aa",
+      "crc32": "2b16297d"
+    },
+    {
+      "path": "evidence/network/augmentation-replay.json",
+      "bytes": 4625,
+      "sha256": "086b8d4a9edca0886399624aa1adb4277d51d7723f08224829c923f03962c054",
+      "crc32": "97ef401f"
+    },
+    {
+      "path": "evidence/network/check_macro_corridors.py",
+      "bytes": 7001,
+      "sha256": "feb6bc81a9f277071e05e214bde9108ac740314598416a13c607a57f94edfec5",
+      "crc32": "2a171199"
+    },
+    {
+      "path": "evidence/network/country-network-metrics.json",
+      "bytes": 40171,
+      "sha256": "b8480b1fd3be2a835ba1f0bdea278e8eaa8bae8206907133e7c0da575cddd6be",
+      "crc32": "84e499c3"
+    },
+    {
+      "path": "evidence/network/macro-corridor-witnesses.json",
+      "bytes": 40127,
+      "sha256": "3776c46fbffd59350396f4561da0e68c1c5951bae0048ab7d987490438dc5372",
+      "crc32": "39c90c59"
+    },
+    {
+      "path": "evidence/network/measure_country_network.py",
+      "bytes": 7367,
+      "sha256": "bd34ba243ba15ac5a0b7ec4ea20eb3cda14bd65b32505082d992c3e159df315d",
+      "crc32": "f5f7d61c"
+    },
+    {
+      "path": "evidence/network/probe_augmentation_replay.py",
+      "bytes": 5172,
+      "sha256": "8da0e816f302b4196f314263a3faa98b0d7a4dc1270793b38434fded7c9d9972",
+      "crc32": "485651ce"
+    },
+    {
+      "path": "evidence/network/render_network_witness.py",
+      "bytes": 5565,
+      "sha256": "e60933effe2b551105d2f9d81ef2dc103b5e0699088b7dc2fa195960bea073d0",
+      "crc32": "5b25823d"
+    },
+    {
+      "path": "evidence/network/seed-20261023-network-witness.png",
+      "bytes": 233928,
+      "sha256": "df1d50daafa035cebce92230f29d1ae9ad5aa1ac779a20b380b6cf06d35ba338",
+      "crc32": "d922eb9d"
+    },
+    {
+      "path": "evidence/network/seed-20261023-network-witness.svg",
+      "bytes": 596000,
+      "sha256": "95892293bb54557b3e5ee66b04219a10fb0254113beb30c9abcc4cc166c6e78c",
+      "crc32": "b5b9dc1d"
+    },
+    {
+      "path": "evidence/remote-recheck.json",
+      "bytes": 727,
+      "sha256": "584d17bb1cb98dc5df1b5d05bac463a90f4f475813049f7efc24446d27f9a0b5",
+      "crc32": "4bf54b39"
+    },
+    {
+      "path": "evidence/retained-metrics-summary.json",
+      "bytes": 8331,
+      "sha256": "90116c88e8cc4324944b6103e90dbc74319778fa71bfe98734cd0a002ce36bb0",
+      "crc32": "48f41bf5"
+    },
+    {
+      "path": "evidence/review-summary.json",
+      "bytes": 44813,
+      "sha256": "85f5b5c0fd7882140a873f29891aac0c486f8773b666b54d3edd119ccade24c5",
+      "crc32": "d284af92"
+    },
+    {
+      "path": "evidence/run_review_command.py",
+      "bytes": 3566,
+      "sha256": "5679c3de7fc435959ddd915cd66eea1ef0d0a67ecc8a50a65d3c91144c5c3ff5",
+      "crc32": "3c54a7cf"
+    },
+    {
+      "path": "evidence/source-preservation.json",
+      "bytes": 163,
+      "sha256": "e80a3abb7d692454a8191dc82c2c7ce681e4d05eb1e351f12f6abfa2a2469f32",
+      "crc32": "37104730"
+    },
+    {
+      "path": "evidence/wiki-authoring/FINDINGS.md",
+      "bytes": 10280,
+      "sha256": "000524504f75534ed05cb5faf92aa885943c56782bee738ed6032ba35f3f244f",
+      "crc32": "00349ae0"
+    },
+    {
+      "path": "evidence/wiki-authoring/build-a.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000"
+    },
+    {
+      "path": "evidence/wiki-authoring/build-a.stdout.txt",
+      "bytes": 374,
+      "sha256": "1f731d3fcd71737bee0e54ee140ad88945f78e1441b5f5651410720b32e1fd0b",
+      "crc32": "13210ba0"
+    },
+    {
+      "path": "evidence/wiki-authoring/build-b.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000"
+    },
+    {
+      "path": "evidence/wiki-authoring/build-b.stdout.txt",
+      "bytes": 374,
+      "sha256": "1f731d3fcd71737bee0e54ee140ad88945f78e1441b5f5651410720b32e1fd0b",
+      "crc32": "13210ba0"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/distinct-output/g7_poi_example.json",
+      "bytes": 1197,
+      "sha256": "ea3aef1cb6aa45e634a0993e00bd0b326f08b755ea309a2e437d186d62b7fedf",
+      "crc32": "ba430124"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/distinct-output/g7_travellers_court.json",
+      "bytes": 1248,
+      "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec",
+      "crc32": "9ac6eec8"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/distinct-output/g7_wayhouse.json",
+      "bytes": 1951,
+      "sha256": "cc04c3db5f7053d1e495c92a6ae3f6e60366d8153438a8b6e8dc45df32d9d891",
+      "crc32": "e9f5e909"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/distinct-output.json",
+      "bytes": 2034,
+      "sha256": "788284bbdbe4ff9ea1c6191e38fd9e453aff3a65eb123be3277e21fe92e5478c",
+      "crc32": "dda776f4"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/dynamic-scene-symlink-child-and-refresh/g7_poi_example.json",
+      "bytes": 1197,
+      "sha256": "ea3aef1cb6aa45e634a0993e00bd0b326f08b755ea309a2e437d186d62b7fedf",
+      "crc32": "ba430124"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/dynamic-scene-symlink-child-and-refresh/g7_travellers_court.json",
+      "bytes": 1248,
+      "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec",
+      "crc32": "9ac6eec8"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/dynamic-scene-symlink-child-and-refresh/g7_wayhouse.json",
+      "bytes": 1951,
+      "sha256": "cc04c3db5f7053d1e495c92a6ae3f6e60366d8153438a8b6e8dc45df32d9d891",
+      "crc32": "e9f5e909"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/dynamic-scene-symlink-child-and-refresh.json",
+      "bytes": 2361,
+      "sha256": "188d34e16ad7390915f15d3f13a2787ff2cc93fecf57dd6d67254c5ca5c5d191",
+      "crc32": "df791a4e"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/init-existing-child/g7_poi_example.json",
+      "bytes": 1197,
+      "sha256": "ea3aef1cb6aa45e634a0993e00bd0b326f08b755ea309a2e437d186d62b7fedf",
+      "crc32": "ba430124"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/init-existing-child/g7_travellers_court.json",
+      "bytes": 1248,
+      "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec",
+      "crc32": "9ac6eec8"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/init-existing-child/g7_wayhouse.json",
+      "bytes": 1951,
+      "sha256": "cc04c3db5f7053d1e495c92a6ae3f6e60366d8153438a8b6e8dc45df32d9d891",
+      "crc32": "e9f5e909"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/init-existing-child.json",
+      "bytes": 1691,
+      "sha256": "188f315bc49537add3c6e78232505a1f60dadaa848356f1f9e5fab7e749d7e09",
+      "crc32": "7d7b9399"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/matrix.json",
+      "bytes": 10762,
+      "sha256": "b09351933b707b6484f70719770dced89a08f0786bfc156d28a624d102107205",
+      "crc32": "c67ec8dc"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/plan-symlink-recipe/g7_poi_example.json",
+      "bytes": 1197,
+      "sha256": "ea3aef1cb6aa45e634a0993e00bd0b326f08b755ea309a2e437d186d62b7fedf",
+      "crc32": "ba430124"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/plan-symlink-recipe/g7_travellers_court.json",
+      "bytes": 1248,
+      "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec",
+      "crc32": "9ac6eec8"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/plan-symlink-recipe/g7_wayhouse.json",
+      "bytes": 1951,
+      "sha256": "cc04c3db5f7053d1e495c92a6ae3f6e60366d8153438a8b6e8dc45df32d9d891",
+      "crc32": "e9f5e909"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/plan-symlink-recipe.json",
+      "bytes": 2048,
+      "sha256": "7944165188bbffeef2567e6b8823af799f5b1565b84c71ab4537b7e00e80cd21",
+      "crc32": "fa3a0a01"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/report-recipe/g7_poi_example.json",
+      "bytes": 1197,
+      "sha256": "ea3aef1cb6aa45e634a0993e00bd0b326f08b755ea309a2e437d186d62b7fedf",
+      "crc32": "ba430124"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/report-recipe/g7_travellers_court.json",
+      "bytes": 1248,
+      "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec",
+      "crc32": "9ac6eec8"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/report-recipe/g7_wayhouse.json",
+      "bytes": 1951,
+      "sha256": "cc04c3db5f7053d1e495c92a6ae3f6e60366d8153438a8b6e8dc45df32d9d891",
+      "crc32": "e9f5e909"
+    },
+    {
+      "path": "evidence/wiki-authoring/collision-probes/report-recipe.json",
+      "bytes": 1861,
+      "sha256": "fa6187189250501525169ce0d7cf425c6e7b56cf818c4a4193bc3e74177e5a77",
+      "crc32": "19c08600"
+    },
+    {
+      "path": "evidence/wiki-authoring/delivered-drift.stderr.txt",
+      "bytes": 188,
+      "sha256": "91ef19e86d797e17434e632abb29ace49a22af0f20a873d3abe9eb1793cb0ca5",
+      "crc32": "3fc1ad18"
+    },
+    {
+      "path": "evidence/wiki-authoring/delivered-drift.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000"
+    },
+    {
+      "path": "evidence/wiki-authoring/download-metadata.json",
+      "bytes": 519,
+      "sha256": "fede2b7e1f77c014a62dbf788602c07670a6f027285d166307e3eba6eeda9ca7",
+      "crc32": "f57e03f2"
+    },
+    {
+      "path": "evidence/wiki-authoring/drift-a.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000"
+    },
+    {
+      "path": "evidence/wiki-authoring/drift-a.stdout.txt",
+      "bytes": 322,
+      "sha256": "a93b7449ff539e3e0d4b703345ae52c6e602cf661fb0753911b422dde210f2f0",
+      "crc32": "09dcced3"
+    },
+    {
+      "path": "evidence/wiki-authoring/drift-b.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000"
+    },
+    {
+      "path": "evidence/wiki-authoring/drift-b.stdout.txt",
+      "bytes": 322,
+      "sha256": "a93b7449ff539e3e0d4b703345ae52c6e602cf661fb0753911b422dde210f2f0",
+      "crc32": "09dcced3"
+    },
+    {
+      "path": "evidence/wiki-authoring/html-after-hash-adjustment-differences.json",
+      "bytes": 74429,
+      "sha256": "78f292bcda3c668c80060c9a9cc0705126267e0bd552d538552310c70370d69e",
+      "crc32": "99865860"
+    },
+    {
+      "path": "evidence/wiki-authoring/integrity-a.json",
+      "bytes": 10908,
+      "sha256": "fa7c0a4ac65fdde87ad507628c1ca5ef0fcd83344a8acd3fcd70842102514568",
+      "crc32": "96504f97"
+    },
+    {
+      "path": "evidence/wiki-authoring/portable-drift.json",
+      "bytes": 225315,
+      "sha256": "4f29fd9d0fc3d9c2039a569c0dad85b5c13ba6a4c0bb2cffff16c2bf5b980514",
+      "crc32": "e322a222"
+    },
+    {
+      "path": "evidence/wiki-authoring/probe_output_safety.py",
+      "bytes": 2736,
+      "sha256": "e6061808464af996f333e3f076d7ddc57e1a667e9842359a7e6b1a3b948c978f",
+      "crc32": "cdd247d4"
+    },
+    {
+      "path": "evidence/wiki-authoring/probe_wiki_portability.py",
+      "bytes": 2143,
+      "sha256": "33876571e371f496d45bddfb8b653f7f653e01532b702d3b8f1cc9dbd3a26dc7",
+      "crc32": "8f199473"
+    },
+    {
+      "path": "evidence/wiki-authoring/validate-a.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "crc32": "00000000"
+    },
+    {
+      "path": "evidence/wiki-authoring/validate-a.stdout.txt",
+      "bytes": 1670,
+      "sha256": "f217473593e16430dae9662004e1cd5b18915388b4cff3a31c6e7c1403e53083",
+      "crc32": "c25610ad"
+    },
+    {
+      "path": "evidence/wiki-authoring/wiki-contract-tests.json",
+      "bytes": 792,
+      "sha256": "b9682a9c2c4ca7980d71054543c061928fee3f606f9b77af87943764095bbad8",
+      "crc32": "cbeaf684"
+    },
+    {
+      "path": "evidence/wiki-authoring/wiki-portability-conclusion.json",
+      "bytes": 543,
+      "sha256": "57821f678db9daea3f0ca1e9c00faba53443766275a3726ec0a24b8452d65309",
+      "crc32": "1663de3f"
+    },
+    {
+      "path": "evidence/wiki-authoring/wiki-rebuild-probe.json",
+      "bytes": 4201,
+      "sha256": "0ef4d46889ec9277ba57b00b9f85582696d81ae16a10c98b21c6d1e1d5b27d79",
+      "crc32": "d34fd6f7"
+    },
+    {
+      "path": "seed-20261023-network-witness.png",
+      "bytes": 233928,
+      "sha256": "df1d50daafa035cebce92230f29d1ae9ad5aa1ac779a20b380b6cf06d35ba338",
+      "crc32": "d922eb9d"
+    },
+    {
+      "path": "seed-20261023-network-witness.svg",
+      "bytes": 596000,
+      "sha256": "95892293bb54557b3e5ee66b04219a10fb0254113beb30c9abcc4cc166c6e78c",
+      "crc32": "b5b9dc1d"
+    },
+    {
+      "path": "sources/CODEX_G8_SETTLEMENT_COMPOSITION.md",
+      "bytes": 44324,
+      "sha256": "24b45275d071578f4ecccff09bdf8170e2443d74f11e5e34dc32c07179bfcd3b",
+      "crc32": "d6aa2b2c"
+    },
+    {
+      "path": "sources/WORLDGEN_G8.md",
+      "bytes": 13185,
+      "sha256": "03ec0df4de4d64b07bc4f217f16d085a0c96790b85bd056b29ae925fc344e459",
+      "crc32": "2e022986"
+    }
+  ],
+  "excluded_review_intermediates": [
+    {
+      "path": "network/__pycache__/measure_country_network.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 11725
+    },
+    {
+      "path": "wiki-authoring/collision-probes/distinct-output/report-0.svg",
+      "reason": "large successful preview payload; command/outcome/input-preservation receipt retained",
+      "bytes": 489335
+    },
+    {
+      "path": "wiki-authoring/collision-probes/distinct-output/report.json",
+      "reason": "large successful preview payload; command/outcome/input-preservation receipt retained",
+      "bytes": 1729785
+    },
+    {
+      "path": "wiki-authoring/collision-probes/distinct-output/report.svg",
+      "reason": "large successful preview payload; command/outcome/input-preservation receipt retained",
+      "bytes": 223986
+    },
+    {
+      "path": "wiki-authoring/collision-probes/dynamic-scene-symlink-child-and-refresh/report-0.svg",
+      "reason": "disposable symlink fixture; behavior and target hashes retained in receipts",
+      "bytes": 1951
+    },
+    {
+      "path": "wiki-authoring/collision-probes/plan-symlink-recipe/report.svg",
+      "reason": "disposable symlink fixture; behavior and target hashes retained in receipts",
+      "bytes": 1248
+    },
+    {
+      "path": "wiki-authoring/docs-deps/bin/mistune",
+      "reason": "disposable dependency/build copy",
+      "bytes": 250
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__init__.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 3439
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__main__.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 3375
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/__init__.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 4070
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/__main__.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 4815
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/block_parser.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 25868
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/core.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 15749
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/helpers.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 9273
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/inline_parser.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 19411
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/list_parser.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 14791
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/markdown.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 5623
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/toc.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 7241
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/__pycache__/util.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 4926
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/_inline/__init__.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 52
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/_inline/__pycache__/__init__.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 220
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/_inline/__pycache__/delimiters.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 4082
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/_inline/__pycache__/emphasis.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 19299
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/_inline/__pycache__/links.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 7285
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/_inline/delimiters.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2591
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/_inline/emphasis.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 14986
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/_inline/links.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 5164
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/block_parser.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 20598
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/core.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 9150
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/__init__.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 867
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/__pycache__/__init__.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 1357
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/__pycache__/_base.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 8342
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/__pycache__/_fenced.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 7402
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/__pycache__/_rst.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 4000
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/__pycache__/admonition.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 3386
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/__pycache__/image.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 8104
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/__pycache__/include.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 5481
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/__pycache__/toc.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 5799
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/_base.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4556
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/_fenced.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4826
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/_rst.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2203
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/admonition.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2261
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/image.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 5640
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/include.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 3816
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/directives/toc.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4071
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/helpers.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7551
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/inline_parser.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 15014
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/list_parser.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 11676
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/markdown.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4135
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__init__.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1570
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/__init__.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 2204
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/abbr.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 6581
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/def_list.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 8188
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/footnotes.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 8035
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/formatting.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 7982
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/math.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 4359
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/ruby.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 4465
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/speedup.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 643
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/spoiler.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 4648
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/table.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 11111
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/task_lists.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 3188
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/__pycache__/url.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 1708
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/abbr.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4348
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/def_list.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 5781
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/footnotes.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 5447
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/formatting.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 5343
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/math.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2872
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/ruby.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 3471
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/speedup.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 402
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/spoiler.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 3128
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/table.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7568
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/task_lists.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2086
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/plugins/url.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1018
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/py.typed",
+      "reason": "disposable dependency/build copy",
+      "bytes": 181
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/__init__.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 0
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/__pycache__/__init__.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 162
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/__pycache__/_list.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 3478
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/__pycache__/html.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 11652
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/__pycache__/markdown.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 19164
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/__pycache__/rst.cpython-312.pyc",
+      "reason": "reproducible interpreter cache",
+      "bytes": 10253
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/_list.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2485
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/html.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7165
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/markdown.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 12595
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/renderers/rst.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 6090
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/toc.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4924
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune/util.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2662
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune-3.4.0.dist-info/INSTALLER",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune-3.4.0.dist-info/METADATA",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2117
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune-3.4.0.dist-info/RECORD",
+      "reason": "disposable dependency/build copy",
+      "bytes": 6129
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune-3.4.0.dist-info/REQUESTED",
+      "reason": "disposable dependency/build copy",
+      "bytes": 0
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune-3.4.0.dist-info/WHEEL",
+      "reason": "disposable dependency/build copy",
+      "bytes": 91
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune-3.4.0.dist-info/entry_points.txt",
+      "reason": "disposable dependency/build copy",
+      "bytes": 49
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune-3.4.0.dist-info/licenses/LICENSE",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1475
+    },
+    {
+      "path": "wiki-authoring/docs-deps/mistune-3.4.0.dist-info/top_level.txt",
+      "reason": "disposable dependency/build copy",
+      "bytes": 8
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/README.txt",
+      "reason": "disposable dependency/build copy",
+      "bytes": 631
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/Resonance_Owner_Wiki.html",
+      "reason": "disposable dependency/build copy",
+      "bytes": 5282005
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/README.txt",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1647
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/asset-probe.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 3656
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/browser-review.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2631
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/content_checks.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4301
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/content_discrepancies.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7676
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/core-review.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4818
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/edition-1.0/README.txt",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7689
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/edition-1.0/build-report.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1893
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/edition-1.0/source-manifest.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 132768
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/edition-1.0/wiki-config.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 5724
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/html-integrity-negative-checks.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1526
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/html-integrity.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 10864
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/startup-smoke.txt",
+      "reason": "disposable dependency/build copy",
+      "bytes": 364
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/world/catalog.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 117642
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/world/owner-cottage-grid.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2362324
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/world/owner-cottage-orientations.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 605499
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/world/owner-cottage-roadside.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2173630
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/world/service-house-grid.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2807960
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/world/service-house-orientations.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 634782
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/world/starting-lab.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 89405
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/world/wayhouse-assigned-east.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1772824
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/audit/world/wiki-authoring-checks.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2511
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/build-report.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1773
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/build_wiki.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 36536
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/code-and-documentation-map.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 11826
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/combat-balance.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 8382
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/compounds.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4323
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/content-workflow.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 8880
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/controls.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 5720
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/crafting-processing.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 9006
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/creatures-ai.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 9113
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/debug-tools.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4332
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/display-ui-and-palette.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 11211
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/entrances-submaps.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7787
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/first-building.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 10907
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/first-change.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4186
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/generation-troubleshooting.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 11137
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/getting-started.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 6167
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/glossary.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 8108
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/items-equipment.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 10269
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/layout-painter.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 8720
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/maintenance.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 3833
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/rural-sites.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 9837
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/saves-and-state.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7991
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/settlement-layouts.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7680
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/settlement-tuning.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 9083
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/sprites-and-atlases.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 10843
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/structure-reference.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 11459
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/survival-progression.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 11162
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/terrain-decor-and-variation.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 14838
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/texts-loot-scenes.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 10565
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/troubleshooting.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7013
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/verification.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7415
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/weather-and-atmosphere.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 9168
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/wfc-ground.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 6136
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/world-generation.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 7969
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/chapters/world-names-and-biomes.md",
+      "reason": "disposable dependency/build copy",
+      "bytes": 10545
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/edition-evidence.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1611
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/examples/owner_cottage_a.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 1690
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/illustrations/owner-cottage.svg",
+      "reason": "disposable dependency/build copy",
+      "bytes": 467097
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/reader.js",
+      "reason": "disposable dependency/build copy",
+      "bytes": 12379
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/requirements-docs.txt",
+      "reason": "disposable dependency/build copy",
+      "bytes": 15
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/source-manifest.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 266917
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/test_wiki_inputs.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 3501
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/theme.css",
+      "reason": "disposable dependency/build copy",
+      "bytes": 18434
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/validate_wiki.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 25060
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/verify_edition.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 2523
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/verify_reader.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 5070
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/wiki-config.json",
+      "reason": "disposable dependency/build copy",
+      "bytes": 6246
+    },
+    {
+      "path": "wiki-authoring/maintenance-copy/wiki_inputs.py",
+      "reason": "disposable dependency/build copy",
+      "bytes": 4867
+    }
+  ],
+  "other_omissions": [
+    "personal campaigns",
+    "review dependency environment",
+    "duplicate source checkout",
+    "temporary test save roots removed by their test commands",
+    "unavailable original G8 delivery ZIP"
+  ]
+}

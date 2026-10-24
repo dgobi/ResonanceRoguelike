@@ -1,0 +1,100 @@
+{
+  "id": "owner_cottage_a",
+  "category": "residential",
+  "description": "A compact owner-authored cottage with food, a readable note and a supply crate.",
+  "width": 9,
+  "height": 7,
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "+": "door_closed"
+  },
+  "layers": [
+    "#########",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "#.......#",
+    "####+####"
+  ],
+  "special_tiles": [
+    {
+      "x": 2,
+      "y": 4,
+      "type": "item",
+      "item_id": "crow_jerky"
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "lab_label_equipment"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
+    }
+  ],
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": true,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 4,
+        "y": 6,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 4,
+        "y": 4,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 4,
+        "kind": "item",
+        "required": true
+      },
+      {
+        "x": 4,
+        "y": 2,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 6,
+        "y": 4,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  }
+}

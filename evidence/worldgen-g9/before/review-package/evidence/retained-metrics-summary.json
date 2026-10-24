@@ -1,0 +1,405 @@
+{
+  "sample_size": 3,
+  "passed": true,
+  "source_stable": true,
+  "failures": [],
+  "runs": [
+    {
+      "seed": 0,
+      "planning_seconds": 0.9760020999819972,
+      "plan_bytes": 598641,
+      "settlements": 3,
+      "placements": 56,
+      "vacancies": 4,
+      "crossings": 6,
+      "scenes_at_plan_completion": 0,
+      "scene_samples": 15,
+      "slowest_scene_seconds": 0.23745819996111095,
+      "physical_components": 1,
+      "parents": 2,
+      "kinds": {
+        "single": 1,
+        "compound": 1
+      }
+    },
+    {
+      "seed": 20261023,
+      "planning_seconds": 1.1398234000080265,
+      "plan_bytes": 709155,
+      "settlements": 4,
+      "placements": 51,
+      "vacancies": 6,
+      "crossings": 8,
+      "scenes_at_plan_completion": 0,
+      "scene_samples": 18,
+      "slowest_scene_seconds": 0.15153800003463402,
+      "physical_components": 1,
+      "parents": 3,
+      "kinds": {
+        "single": 2,
+        "compound": 1
+      }
+    },
+    {
+      "seed": 29417,
+      "planning_seconds": 0.912417599989567,
+      "plan_bytes": 659676,
+      "settlements": 4,
+      "placements": 58,
+      "vacancies": 4,
+      "crossings": 13,
+      "scenes_at_plan_completion": 0,
+      "scene_samples": 18,
+      "slowest_scene_seconds": 0.16078119998564944,
+      "physical_components": 1,
+      "parents": 3,
+      "kinds": {
+        "single": 1,
+        "compound": 2
+      }
+    }
+  ],
+  "towns": [
+    {
+      "id": "settlement-0",
+      "form": "grid",
+      "normals": {
+        "N": 10,
+        "S": 9,
+        "W": 2,
+        "E": 1
+      },
+      "assigned_axes": {
+        "horizontal": 19,
+        "vertical": 3
+      },
+      "lots": 24,
+      "accepted": 22,
+      "common_tiles": 361,
+      "blocks": 28,
+      "fit_trials": 32,
+      "seed": 0,
+      "layout": "linked-courts",
+      "vacant": 2,
+      "cycle_rank_g7": 1,
+      "cycle_rank_g8": 4,
+      "role_travel_steps": {
+        "civic": 74,
+        "commercial": 55,
+        "residential": 17
+      }
+    },
+    {
+      "id": "settlement-1",
+      "form": "roadside",
+      "normals": {
+        "S": 4,
+        "N": 4
+      },
+      "assigned_axes": {
+        "horizontal": 8
+      },
+      "lots": 8,
+      "accepted": 8,
+      "common_tiles": 0,
+      "blocks": 5,
+      "fit_trials": 8,
+      "seed": 0,
+      "layout": "country-frontage",
+      "vacant": 0,
+      "cycle_rank_g7": 0,
+      "cycle_rank_g8": 0,
+      "role_travel_steps": {
+        "commercial": 56,
+        "residential": 56
+      }
+    },
+    {
+      "id": "settlement-2",
+      "form": "grid",
+      "normals": {
+        "N": 10,
+        "S": 9,
+        "W": 1,
+        "E": 1
+      },
+      "assigned_axes": {
+        "horizontal": 19,
+        "vertical": 2
+      },
+      "lots": 23,
+      "accepted": 21,
+      "common_tiles": 361,
+      "blocks": 26,
+      "fit_trials": 30,
+      "seed": 0,
+      "layout": "linked-courts",
+      "vacant": 2,
+      "cycle_rank_g7": 1,
+      "cycle_rank_g8": 2,
+      "role_travel_steps": {
+        "civic": 55,
+        "commercial": 46,
+        "residential": 30
+      }
+    },
+    {
+      "id": "settlement-0",
+      "form": "grid",
+      "normals": {
+        "S": 7,
+        "N": 7,
+        "W": 1
+      },
+      "assigned_axes": {
+        "horizontal": 14,
+        "vertical": 1
+      },
+      "lots": 18,
+      "accepted": 15,
+      "common_tiles": 361,
+      "blocks": 22,
+      "fit_trials": 25,
+      "seed": 20261023,
+      "layout": "cross-market",
+      "vacant": 3,
+      "cycle_rank_g7": 1,
+      "cycle_rank_g8": 1,
+      "role_travel_steps": {
+        "civic": 74,
+        "commercial": 62,
+        "residential": 25
+      }
+    },
+    {
+      "id": "settlement-1",
+      "form": "roadside",
+      "normals": {
+        "S": 4,
+        "N": 4
+      },
+      "assigned_axes": {
+        "horizontal": 8
+      },
+      "lots": 8,
+      "accepted": 8,
+      "common_tiles": 0,
+      "blocks": 5,
+      "fit_trials": 8,
+      "seed": 20261023,
+      "layout": "country-frontage",
+      "vacant": 0,
+      "cycle_rank_g7": 0,
+      "cycle_rank_g8": 0,
+      "role_travel_steps": {
+        "commercial": 56,
+        "residential": 56
+      }
+    },
+    {
+      "id": "settlement-2",
+      "form": "grid",
+      "normals": {
+        "S": 7,
+        "N": 7,
+        "W": 1
+      },
+      "assigned_axes": {
+        "horizontal": 14,
+        "vertical": 1
+      },
+      "lots": 18,
+      "accepted": 15,
+      "common_tiles": 361,
+      "blocks": 23,
+      "fit_trials": 26,
+      "seed": 20261023,
+      "layout": "cross-market",
+      "vacant": 3,
+      "cycle_rank_g7": 1,
+      "cycle_rank_g8": 1,
+      "role_travel_steps": {
+        "civic": 74,
+        "commercial": 62,
+        "residential": 25
+      }
+    },
+    {
+      "id": "settlement-3",
+      "form": "roadside",
+      "normals": {
+        "S": 4,
+        "N": 4
+      },
+      "assigned_axes": {
+        "horizontal": 8
+      },
+      "lots": 8,
+      "accepted": 8,
+      "common_tiles": 0,
+      "blocks": 4,
+      "fit_trials": 8,
+      "seed": 20261023,
+      "layout": "country-frontage",
+      "vacant": 0,
+      "cycle_rank_g7": 0,
+      "cycle_rank_g8": 0,
+      "role_travel_steps": {
+        "commercial": 55,
+        "residential": 55
+      }
+    },
+    {
+      "id": "settlement-0",
+      "form": "grid",
+      "normals": {
+        "S": 7,
+        "N": 7,
+        "E": 2,
+        "W": 2
+      },
+      "assigned_axes": {
+        "horizontal": 14,
+        "vertical": 4
+      },
+      "lots": 18,
+      "accepted": 18,
+      "common_tiles": 361,
+      "blocks": 21,
+      "fit_trials": 20,
+      "seed": 29417,
+      "layout": "cross-market",
+      "vacant": 0,
+      "cycle_rank_g7": 1,
+      "cycle_rank_g8": 1,
+      "role_travel_steps": {
+        "civic": 93,
+        "commercial": 55,
+        "residential": 24
+      }
+    },
+    {
+      "id": "settlement-1",
+      "form": "roadside",
+      "normals": {
+        "N": 3,
+        "S": 3
+      },
+      "assigned_axes": {
+        "horizontal": 6
+      },
+      "lots": 7,
+      "accepted": 6,
+      "common_tiles": 0,
+      "blocks": 7,
+      "fit_trials": 9,
+      "seed": 29417,
+      "layout": "country-frontage",
+      "vacant": 1,
+      "cycle_rank_g7": 0,
+      "cycle_rank_g8": 0,
+      "role_travel_steps": {
+        "commercial": 37,
+        "residential": 31
+      }
+    },
+    {
+      "id": "settlement-2",
+      "form": "grid",
+      "normals": {
+        "N": 11,
+        "S": 8,
+        "W": 1
+      },
+      "assigned_axes": {
+        "horizontal": 19,
+        "vertical": 1
+      },
+      "lots": 23,
+      "accepted": 20,
+      "common_tiles": 361,
+      "blocks": 26,
+      "fit_trials": 31,
+      "seed": 29417,
+      "layout": "linked-courts",
+      "vacant": 3,
+      "cycle_rank_g7": 1,
+      "cycle_rank_g8": 3,
+      "role_travel_steps": {
+        "civic": 130,
+        "commercial": 63,
+        "residential": 20
+      }
+    },
+    {
+      "id": "settlement-3",
+      "form": "roadside",
+      "normals": {
+        "S": 4,
+        "N": 4
+      },
+      "assigned_axes": {
+        "horizontal": 8
+      },
+      "lots": 8,
+      "accepted": 8,
+      "common_tiles": 0,
+      "blocks": 5,
+      "fit_trials": 9,
+      "seed": 29417,
+      "layout": "country-frontage",
+      "vacant": 0,
+      "cycle_rank_g7": 0,
+      "cycle_rank_g8": 0,
+      "role_travel_steps": {
+        "commercial": 56,
+        "residential": 56
+      }
+    }
+  ],
+  "journey_keys": [
+    "seed",
+    "fixture",
+    "steps",
+    "crossings",
+    "destinations",
+    "interaction",
+    "checkpoint_seconds",
+    "g8_town",
+    "landmark_access",
+    "additional_sites",
+    "bridge_ids_walked",
+    "materialized_scenes_before_f9",
+    "explored_checkpoint",
+    "restore_seconds",
+    "f9_restored_coherent_start_checkpoint",
+    "f9_restored_explored_checkpoint",
+    "worst_transition_seconds",
+    "checkpoint_bytes",
+    "checkpoint_scope",
+    "checkpoint_scene_count",
+    "passed"
+  ],
+  "journey": {
+    "seed": 20261023,
+    "steps": 38805,
+    "passed": true,
+    "worst_transition_seconds": 0.17755389999365434,
+    "boundary_transitions": 595
+  },
+  "totals": {
+    "lots": 163,
+    "accepted": 149,
+    "vacant": 14,
+    "normals": {
+      "N": 71,
+      "S": 66,
+      "W": 8,
+      "E": 4
+    },
+    "grid_layouts": {
+      "linked-courts": 3,
+      "cross-market": 3
+    }
+  }
+}

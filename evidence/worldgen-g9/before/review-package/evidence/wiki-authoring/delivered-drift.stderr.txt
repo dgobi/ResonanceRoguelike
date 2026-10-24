@@ -1,0 +1,3 @@
+usage: build_wiki.py [-h] --repo REPO [--output OUTPUT] [--check-drift]
+                     [--write-manifest]
+build_wiki.py: error: stale source build binding; review source and rebuild

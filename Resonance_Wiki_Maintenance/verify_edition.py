@@ -15,6 +15,7 @@ def main():
         command=[sys.executable,'-X','utf8',*map(str,args)];r=subprocess.run(command,cwd=repo,env=env,capture_output=True,text=True,encoding='utf-8',timeout=180)
         (out/(name+'.txt')).write_text(r.stdout+r.stderr,encoding='utf-8');rows.append(dict(name=name,argv=command,exit_code=r.returncode,timeout_seconds=180));assert r.returncode==0,r.stdout+r.stderr
     try:
+        run('dependencies',['-c','import sys,importlib.metadata,json; print(json.dumps(dict(python=sys.version,interpreter=sys.executable,dependencies={n:importlib.metadata.version(n) for n in ("mistune","playwright","pygame","tcod","numpy")})))'])
         run('contract',[root/'test_wiki_inputs.py','-v'])
         example=root/'examples/owner_cottage_a.json'
         for name,options in [('direct',['--route','ordinary_building','--orientations']),('grid',['--planned','--context','grid']),('roadside',['--planned','--context','roadside'])]:

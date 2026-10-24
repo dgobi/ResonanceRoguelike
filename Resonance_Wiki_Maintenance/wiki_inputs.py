@@ -6,10 +6,17 @@ from pathlib import Path
 import subprocess
 
 TEXT={'.py','.js','.css','.json','.md','.html','.txt','.hex'}
+CANONICAL_RULE='Text CRLF/CR to LF only; preserve BOM and trailing newline; binary exact; raw capture retained separately'
 
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def canonical(path,raw):return raw.replace(b'\r\n',b'\n').replace(b'\r',b'\n') if Path(path).suffix.lower() in TEXT else raw
+def identity(path,raw):
+    value=canonical(path,raw)
+    return dict(raw_sha256=sha(raw),bytes=len(raw),canonical_sha256=sha(value),canonical_bytes=len(value))
+
+def freshness(files):
+    return {p:{k:v for k,v in row.items() if k in ('canonical_sha256','canonical_bytes','git_blob')} for p,row in files.items()}
 def git(repo,*args):return subprocess.check_output(['git','-C',str(repo),*args])
 def included(path,scope):return any(path==p or p.endswith('/') and path.startswith(p) for p in scope)
 
@@ -40,13 +47,16 @@ def reviewed_inputs(repo,config):
     for path in sorted(set(entries)&present):
         raw=(repo/path).read_bytes();committed=blobs[entries[path]]
         if canonical(path,raw)!=canonical(path,committed):changed.append(path)
-        files[path]=dict(raw_sha256=sha(raw),canonical_sha256=sha(canonical(path,raw)),git_blob=entries[path],bytes=len(raw))
+        files[path]=dict(identity(path,raw),git_blob=entries[path])
     if changed or added or missing:raise ValueError('unreviewed source mismatch: '+json.dumps(dict(changed=changed,added=added,missing=missing)))
-    return dict(source_revision=revision,scope=scope,files=files,canonical_rule='Text CRLF/CR to LF only; binary exact; raw build bytes recorded separately')
+    return dict(source_revision=revision,scope=scope,files=files,canonical_rule=CANONICAL_RULE)
 
 
 def authoring_inputs(root,config):
-    names={'wiki-config.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt','verify_reader.py','verify_edition.py',config['reviewed_evidence']}
+    names={'wiki-config.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt','verify_reader.py','verify_edition.py','test_wiki_inputs.py',config['reviewed_evidence']}
+    # Bind all current/future project-owned verification helpers, including tests.
+    # Products and historical audits are deliberately not inputs to themselves.
+    names.update(p.name for p in root.iterdir() if p.is_file() and p.suffix in ('.py','.js','.css'))
     names.update(item['file'] for item in config['chapters'])
     for folder in ('chapters','examples','illustrations'):
         names.update(p.relative_to(root).as_posix() for p in (root/folder).rglob('*') if p.is_file())
@@ -54,12 +64,12 @@ def authoring_inputs(root,config):
     for name in sorted(names):
         p=(root/name).resolve()
         if not p.is_relative_to(root.resolve()) or not p.is_file():raise ValueError('missing wiki authoring input '+name)
-        raw=p.read_bytes();result[name]=dict(sha256=sha(raw),bytes=len(raw))
+        raw=p.read_bytes();result[name]=identity(name,raw)
     return result
 
 
 def bind_products(root,repo,config,source,output):
-    binding=dict(schema=2,source=source,wiki=authoring_inputs(root,config),documentation_delivery_revision=git(repo,'rev-parse','HEAD').decode().strip(),
+    binding=dict(schema=3,source=source,wiki=authoring_inputs(root,config),canonical_rule=CANONICAL_RULE,documentation_delivery_revision=git(repo,'rev-parse','HEAD').decode().strip(),
                  products={output.name:dict(sha256=sha(output.read_bytes()),bytes=output.stat().st_size)},
                  delivery_note='HEAD at build; subsequent metadata/product-only delivery commits may differ without changing reviewed source or wiki inputs.')
     (root/'source-manifest.json').write_text(json.dumps(binding,indent=2)+'\n',encoding='utf-8')
@@ -69,8 +79,11 @@ def bind_products(root,repo,config,source,output):
 def check_products(root,repo,config,output):
     source=reviewed_inputs(repo,config)
     binding=json.loads((root/'source-manifest.json').read_text(encoding='utf-8'))
-    if binding.get('schema')!=2 or binding['source']!=source:raise ValueError('stale source build binding; review source and rebuild')
-    if binding['wiki']!=authoring_inputs(root,config):raise ValueError('stale or missing wiki authoring input; rebuild reviewed edition')
+    saved=binding.get('source',{})
+    if (binding.get('schema')!=3 or binding.get('canonical_rule')!=CANONICAL_RULE or
+        any(saved.get(k)!=source[k] for k in ('source_revision','scope','canonical_rule')) or
+        freshness(saved.get('files',{}))!=freshness(source['files'])):raise ValueError('stale source build binding; review source and rebuild')
+    if freshness(binding['wiki'])!=freshness(authoring_inputs(root,config)):raise ValueError('stale or missing wiki authoring input; rebuild reviewed edition')
     expected=binding['products'].get(output.name)
     if not output.is_file() or expected!=dict(sha256=sha(output.read_bytes()),bytes=output.stat().st_size):raise ValueError('missing or stale HTML product')
     return binding

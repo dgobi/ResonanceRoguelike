@@ -1,0 +1,15 @@
+{
+  "mixed_newline_authoring_file": "chapters/code-and-documentation-map.md",
+  "matching_CRLF_line_ranges": [
+    [
+      88,
+      91
+    ]
+  ],
+  "expected_sha256": "f88e5d6668c14117a24dee5bc0f087d5fe61ac2593cf79b66a95f340ecd2eae5",
+  "rebuilt_repeat_identical": true,
+  "old_html_sha256": "8adfc9a0216ac6ac8c5010cc9a0f1acde597120209eae24545326d24acf57f0c",
+  "rebuilt_html_sha256": "6af89da7cf6d353f42a20f5f2a472ee8bcd4491aa4b5eca7d2b2e04addcaa566",
+  "only_displayed_raw_source_hashes_change": false,
+  "source_hash_substitutions": 176
+}

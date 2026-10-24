@@ -15,7 +15,7 @@ class WikiInputs(unittest.TestCase):
         (self.repo/'guide.md').write_text('Reviewed authoritative guide.\n')
         self.git('add','guide.md');self.commit('review source')
         self.config=dict(commit=self.git('rev-parse','HEAD').strip(),source_scope=['guide.md','inputs/'],chapters=[dict(file='chapters/guide.md')],reviewed_evidence='evidence.json')
-        for name in ('wiki-config.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt','verify_reader.py','verify_edition.py','evidence.json','chapters/guide.md'):
+        for name in ('wiki-config.json','wiki_inputs.py','build_wiki.py','validate_wiki.py','theme.css','reader.js','requirements-docs.txt','README.txt','verify_reader.py','verify_edition.py','test_wiki_inputs.py','evidence.json','chapters/guide.md'):
             p=self.root/name;p.parent.mkdir(exist_ok=True);p.write_text('wiki authoring input '+name)
         self.output=self.root/'Resonance_Owner_Wiki.html';self.output.write_text('<html>Reviewed fixture</html>')
         self.bind()
@@ -56,6 +56,36 @@ class WikiInputs(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'stale HTML'):self.check()
         self.output.unlink()
         with self.assertRaisesRegex(ValueError,'HTML'):self.check()
+
+    def test_newline_equivalence_preserves_capture_for_source_and_authoring(self):
+        source=self.repo/'guide.md';wiki=self.root/'chapters/guide.md'
+        source.write_bytes(b'alpha\nbeta\ngamma\n');self.git('add','guide.md');self.commit('review newline fixture')
+        self.config['commit']=self.git('rev-parse','HEAD').strip();wiki.write_bytes(source.read_bytes())
+        captured=self.bind()
+        for raw in (b'alpha\nbeta\ngamma\n',b'alpha\r\nbeta\r\ngamma\r\n',b'alpha\r\nbeta\ngamma\r'):
+            source.write_bytes(raw);wiki.write_bytes(raw)
+            self.assertEqual(self.check(),captured)
+            self.assertEqual(source.read_bytes(),raw);self.assertEqual(wiki.read_bytes(),raw)
+
+    def test_binary_exact_bom_trailing_newline_and_complete_helper_membership(self):
+        folder=self.repo/'inputs';folder.mkdir();binary=folder/'image.bin';binary.write_bytes(b'\x00a\r\nb')
+        self.git('add','inputs');self.commit('review binary');self.config['commit']=self.git('rev-parse','HEAD').strip();self.bind()
+        binary.write_bytes(b'\x00a\nb')
+        with self.assertRaisesRegex(ValueError,'unreviewed source'):self.check()
+        binary.write_bytes(b'\x00a\r\nb');self.check()
+        source=self.repo/'guide.md';original=source.read_bytes()
+        for value in (b'\xef\xbb\xbf'+original,original.rstrip(b'\r\n')):
+            source.write_bytes(value)
+            with self.assertRaisesRegex(ValueError,'unreviewed source'):self.check()
+        source.write_bytes(original)
+        helper=self.root/'test_wiki_inputs.py';original=helper.read_bytes();helper.write_bytes(original+b'changed')
+        with self.assertRaisesRegex(ValueError,'wiki authoring'):self.check()
+        helper.write_bytes(original);self.check();helper.unlink()
+        with self.assertRaisesRegex(ValueError,'missing wiki'):self.check()
+        helper.write_bytes(original);self.check()
+        extra=self.root/'new_verification_helper.py';extra.write_text('new helper')
+        with self.assertRaisesRegex(ValueError,'wiki authoring'):self.check()
+        extra.unlink();self.check()
 
 
 if __name__=='__main__':unittest.main()

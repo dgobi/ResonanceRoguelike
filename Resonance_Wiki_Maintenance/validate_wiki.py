@@ -291,7 +291,7 @@ def validate(args):
         if path in expected_docs:
             headers = list(article.descendants("header"))
             match = re.search(r"SHA-256 ([0-9a-f]{12})", headers[0].text() if headers else "")
-            if match is None or match.group(1) != digest(repo / path)[:12]:
+            if match is None or match.group(1) != binding['source']['files'][path]['raw_sha256'][:12]:
                 fail("source_hashes", "Displayed source hash differs from current repository file.", path=path)
             else:
                 source_hashes_checked += 1
@@ -312,6 +312,16 @@ def validate(args):
             fail("catalog_records", "Record needs one full path and one JSON block.", target=record.attrs.get("id"))
             continue
         path = path_nodes[0].text().strip()
+        payload=codes[0].text().encode('utf-8')
+        if (record.attrs.get('data-payload-bytes')!=str(len(payload)) or
+            record.attrs.get('data-payload-sha256')!=hashlib.sha256(payload).hexdigest()):
+            fail('download_identity','Advertised download bytes/hash differ from exact embedded UTF-8 payload.',path=path)
+        captured=(binding['wiki'].get(path.removeprefix('wiki/')) if path.startswith('wiki/') else binding['source']['files'].get(path))
+        if not captured or record.attrs.get('data-source-bytes')!=str(captured['bytes']) or record.attrs.get('data-source-sha256')!=captured['raw_sha256']:
+            fail('source_capture_identity','Advertised raw source differs from recorded capture.',path=path)
+        source_file=root/path.removeprefix('wiki/') if path.startswith('wiki/') else repo/path
+        if source_file.is_file() and payload!=source_file.read_text(encoding='utf-8-sig').encode('utf-8'):
+            fail('download_identity','Payload is not the declared LF/no-BOM source representation.',path=path)
         observed_paths.append(path)
         value = code_values.get(id(codes[0]))
         records[record.attrs.get("id")] = {"path": path, "value": value, "node": record}

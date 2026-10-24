@@ -1,0 +1,13 @@
+{
+  "canonical_source_accepted": true,
+  "drift_error": "stale source build binding; review source and rebuild",
+  "source_scope": [
+    "guide.md",
+    "inputs/"
+  ],
+  "raw_bytes": 102885,
+  "download_bytes": 98460,
+  "raw_sha256": "d231ff061a39fe21578c8ddac7c27cab0be0a181f940114c31d35c5874537c59",
+  "download_sha256": "fc5d2d52d4e60dffa5353d3103f0e43d2f5e3ecd99cce0cc4aa8a830fe8ca6cf",
+  "missing_contract_input": "test_wiki_inputs.py"
+}

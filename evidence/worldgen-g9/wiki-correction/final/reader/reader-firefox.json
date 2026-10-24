@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "html_sha256": "eeea7278cea6db86c7627872681fd35a43451311bdc6ead25289c94873420971",
+  "runs": [
+    {
+      "browser": "firefox",
+      "version": "157.0",
+      "internal_links": 542,
+      "missing": [],
+      "search_results": 36,
+      "copy_button": "Copied",
+      "selected_fallback_characters": 0,
+      "navigation": true,
+      "mobile_menu": true,
+      "script_errors": [],
+      "downloads": [
+        {
+          "file": "deep_tongue.json",
+          "advertised": {
+            "bytes": 98460,
+            "sha256": "fc5d2d52d4e60dffa5353d3103f0e43d2f5e3ecd99cce0cc4aa8a830fe8ca6cf"
+          },
+          "downloaded": {
+            "bytes": 98460,
+            "sha256": "fc5d2d52d4e60dffa5353d3103f0e43d2f5e3ecd99cce0cc4aa8a830fe8ca6cf"
+          },
+          "passed": true
+        },
+        {
+          "file": "owner_cottage_a.json",
+          "advertised": {
+            "bytes": 1690,
+            "sha256": "48b8a6af726ad9c8ca5477ac04f3f4b549e9eff8aa301b41e4424c6a6d474053"
+          },
+          "downloaded": {
+            "bytes": 1690,
+            "sha256": "48b8a6af726ad9c8ca5477ac04f3f4b549e9eff8aa301b41e4424c6a6d474053"
+          },
+          "passed": true
+        },
+        {
+          "file": "g7_travellers_court.json",
+          "advertised": {
+            "bytes": 1248,
+            "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec"
+          },
+          "downloaded": {
+            "bytes": 1248,
+            "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec"
+          },
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "limits": "Headless local-file Chromium and Firefox, two viewport sizes; automated navigation/search/copy control checks and retained screenshots. No manual assistive-technology audit or OS clipboard readback."
+}
