@@ -94,18 +94,22 @@ def main():
             payload=archive.read(row['path']);assert len(payload)==row['bytes'] and sha(payload)==row['sha256']
     write(OUT/'input-package.json',dict(path=str(supplied),bytes=supplied.stat().st_size,sha256=sha(supplied.read_bytes()),verified_manifest=manifest))
     expanded=ROOT/'.baseline'/('g7-expanded-'+args.final);expanded.mkdir(parents=True,exist_ok=False)
-    package('development-evidence',[OUT/'development'],expanded)
-    package('final-evidence',[final],expanded)
+    if (OUT/'development').exists():
+        development_name='development-evidence' if not (OUT/'development-evidence.zip').exists() else args.final+'-development-evidence'
+        package(development_name,[OUT/'development'],expanded)
+    final_name='final-evidence' if not (OUT/'final-evidence.zip').exists() else args.final+'-evidence'
+    package(final_name,[final],expanded)
     # Opening provenance and authentic fixture stay in place. Only disposable
     # untracked campaign payloads move into the explicitly named review root.
     excluded=[]
     for folder in (OUT/'before/capture/saves',OUT/'before/synthetic-outside-allowed'):
+        if not folder.exists():continue
         assert folder.resolve().is_relative_to(OUT.resolve()) and folder.resolve()!=OUT.resolve()
         for path in sorted(folder.rglob('*')):
             if path.is_file():excluded.append(dict(path=path.relative_to(OUT).as_posix(),bytes=path.stat().st_size,reason='disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture'))
         target=expanded/folder.relative_to(OUT);assert target.resolve().is_relative_to((ROOT/'.baseline').resolve()) and not target.exists()
         target.parent.mkdir(parents=True,exist_ok=True);shutil.move(str(folder),str(target))
-    write(OUT/'opening-disposable-omissions.json',dict(scope='Only disposable runtime files; original capture receipt and authentic source fixture remain retained',files=excluded))
+    if excluded:write(OUT/'opening-disposable-omissions.json',dict(scope='Only disposable runtime files; original capture receipt and authentic source fixture remain retained',files=excluded))
     assert source_manifest()==current
     print(json.dumps(dict(passed=True,expanded=str(expanded),input_commit=release['input_commit'])))
 

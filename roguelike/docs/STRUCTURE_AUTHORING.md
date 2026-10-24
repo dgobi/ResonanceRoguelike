@@ -1,9 +1,11 @@
 # Make a building or layout for Resonance
 
-Current: **G6, world/scene revision `wg6`, shared plan format 4**.
-For additional country-road sites, use the [G6 workflows](#g6-additional-country-road-sites).
-The six existing G5 recipes below remain supported for towns and the featured landmark.
-Use this connected workflow for ordinary new worlds. The later direct-stamp
+Current: **G7, world/scene revision `wg7`, shared plan format 5**.
+For the installed mixed single/compound policy, start with the
+[G7 workflows](#g7-compounds-a-place-with-shared-access-and-two-or-three-buildings).
+The six G5 recipes remain supported for towns and the featured landmark. The
+[G6 workflows](#g6-additional-country-road-sites) retain the explicit version-1
+single-site policy. The later direct-stamp
 sections describe the supported legacy route, not the current selection policy.
 
 ## Saved worlds first
@@ -17,9 +19,10 @@ placements; restoring compatible definitions makes them usable again. Loading,
 visited maps and unrelated pending scenes remain supported. Keep referenced
 factory IDs available. There is no automatic personal-campaign migration.
 
-Format-1 G3, format-2 G4 and format-3 G5 plans retain their exact values. Existing saved `wg3`,
-`wg4` and `wg5` scenes retain their original provenance. Newly created scenes use
-`g3-to-g6-v1`, `g4-to-g6-v1`, `g5-to-g6-v1` or `g6-v1` as appropriate, with the unchanged
+Format-1 G3, format-2 G4, format-3 G5 and format-4 G6 plans retain their exact values.
+Existing saved `wg3`, `wg4`, `wg5` and `wg6` scenes retain their original provenance.
+Newly created scenes use `g3-to-g7-v1`, `g4-to-g7-v1`, `g5-to-g7-v1`,
+`g6-to-g7-v1` or `g7-v1` as appropriate, with the unchanged
 `structure-v1` dependency projection. Absent/wg1/wg2 origins keep legacy/no-plan
 dispatch. Travel never writes an F5 checkpoint.
 
@@ -31,7 +34,10 @@ and goals. A role entry in `data/generation/settlement_profiles.json` makes it a
 selection candidate. The production fitter must still find room for the entire
 building, buffer and primary approach within one 80×43 storage chunk.
 
-Contexts (`grid`, `roadside`, `civic`, `landmark`) describe placement geometry.
+Contexts (`grid`, `roadside`, `civic`, `landmark`, `compound`) describe placement geometry.
+Compound slots use recipe memberships in `data/generation/compounds/`; the mixed
+parent policy is `data/generation/poi_profiles.json`. A compound child must have a
+required usable target and is certified through its complete parent preview.
 Plot roles (`residential`, `commercial`, `support`, `civic`, `landmark`) select
 eligible assets before fitting. A commercial plot does not create a merchant,
 shop UI or quest. Native member roles still use `native-town-v1`: the standard
@@ -744,9 +750,9 @@ it before source serialization, without consuming a turn or advancing checkpoint
 
 ```powershell
 & $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py `
-  --game roguelike --evidence evidence/worldgen-g2/focused
+  --game roguelike --evidence evidence/worldgen-g7/focused
 & $ResonancePython -X utf8 tools/verify_structure_editor.py `
-  --evidence evidence/worldgen-g2/browser
+  --evidence evidence/worldgen-g7/browser
 & $ResonancePython -X utf8 tools/verify_d.py
 ```
 
@@ -754,8 +760,8 @@ The browser test uses pinned **Playwright 1.64.1**, Chromium and Firefox with is
 headless profiles. It drives real file input, editing, download, resize cancellation,
 undo/redo and the width60 lab. Downloaded JSON then crosses the same Python command
 and current random pool. The 65 original plus 64 delivered round-trips are supplementary
-model checks. Browser tests have 150-second per-browser bounds; the focused Python
-suite retains its 180-second bound. The unfiltered full D gate includes B1/B2/B3/C.
+model checks. Browser tests have 240-second per-browser bounds; the expanded focused
+Python suite has a 1200-second bound. The unfiltered full D gate includes B1/B2/B3/C.
 
 If the development browser tooling is missing, install it outside the game environment:
 
