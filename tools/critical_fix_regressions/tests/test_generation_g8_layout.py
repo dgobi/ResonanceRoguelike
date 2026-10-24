@@ -42,7 +42,7 @@ class G8Layout(unittest.TestCase):
         for seed in (0,20261023,29417):
             w=self.world_for(seed=seed);plan=w.plan
             old=json.loads((ROOT/f'evidence/worldgen-g8/before/baseline/results/plan-{seed}.json').read_text())
-            self.assertEqual([r for r in plan['routes'] if r['kind']=='country'],[r for r in old['routes'] if r['kind']=='country'])
+            self.assertEqual([r for r in plan['routes'] if r['kind']=='country' and not r.get('network_role')],[r for r in old['routes'] if r['kind']=='country'])
             self.assertFalse(any(c.visited for c in w.chunks.values()))
             for s in plan['settlements']:
                 normals=Counter(p['normal'] for p in plan['plots'] if p['owner']==s['id'] and p['placement'])
@@ -104,10 +104,10 @@ class G8Layout(unittest.TestCase):
         observed=[]
         for legacy_layout,policy in ((False,'mixed'),(False,'single'),(False,'zero'),(True,'mixed'),(True,'single')):
             d=self.data_copy()
-            if legacy_layout:d.g3_config['version']=2;d.g3_config.pop('settlement_layout_version')
+            if legacy_layout:d.g3_config['version']=2;d.g3_config.pop('settlement_layout_version');d.g3_config.pop('country_network_version')
             if policy=='single':d.poi_profiles=single_policy(d.poi_profiles)
             if policy=='zero':d.poi_profiles.update(minimum=0,maximum=0,kind_minimum=dict(single=0,compound=0))
-            w=self.world_for(d);expected=5 if legacy_layout and policy=='mixed' else 4 if legacy_layout else 6
+            w=self.world_for(d);expected=5 if legacy_layout and policy=='mixed' else 4 if legacy_layout else 7
             self.assertEqual(w.plan['version'],expected);validate_plan(w.plan,128,128)
             if policy=='zero':self.assertEqual(w.plan['sites'],[])
             if not legacy_layout:self.assertTrue(w.plan['public_spaces'])

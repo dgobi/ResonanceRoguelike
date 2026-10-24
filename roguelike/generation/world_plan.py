@@ -12,7 +12,7 @@ from config import MAP_WIDTH as W, MAP_HEIGHT as H
 from generation.context import GenerationError, stable_seed
 from generation.placement import transform, entrance_cells, NORMALS, dependencies, digest
 
-VERSION=6
+VERSION=7
 MODE='shared-v1'
 
 
@@ -41,12 +41,14 @@ def bands(points,width):
 def settings(data,override=None):
     c=copy.deepcopy(override if override is not None else data.g3_config)
     expected={'version','settlement_count','minimum_separation_chunks','near_start_radius_chunks','forms','road_width_tiles','street_width_tiles','plot_spacing_tiles','setback_tiles','max_spur_tiles','route_search_nodes','site_search_limit','pools'}
-    modern=isinstance(c,dict) and c.get('version') in (2,3)
+    modern=isinstance(c,dict) and c.get('version') in (2,3,4)
     if modern: expected=(expected-{'pools'})|{'selection_profile_version'}
-    if modern and c['version']==3:expected=expected|{'settlement_layout_version'}
-    if not isinstance(c,dict) or set(c)!=expected or type(c['version']) is not int or c['version'] not in (1,2,3): raise GenerationError('planning settings: expected complete version-one pools or version-two selection configuration')
+    if modern and c['version'] in (3,4):expected=expected|{'settlement_layout_version'}
+    if modern and c['version']==4:expected=expected|{'country_network_version'}
+    if not isinstance(c,dict) or set(c)!=expected or type(c['version']) is not int or c['version'] not in (1,2,3,4): raise GenerationError('planning settings: expected complete supported version 1/2/3/4 configuration')
     if modern:
-        if c['version']==3 and (type(c['settlement_layout_version']) is not int or c['settlement_layout_version']!=1):raise GenerationError('unsupported settlement layout version')
+        if c['version'] in (3,4) and (type(c['settlement_layout_version']) is not int or c['settlement_layout_version']!=1):raise GenerationError('unsupported settlement layout version')
+        if c['version']==4 and (type(c['country_network_version']) is not int or c['country_network_version']!=1):raise GenerationError('unsupported country network version')
         if type(c['selection_profile_version']) is not int or c['selection_profile_version']!=1:raise GenerationError('unsupported selection profile version')
         from generation.settlement_selection import resolve,pools
         c['_selection']=resolve(data);c['pools']=pools(c['_selection'])
@@ -147,6 +149,13 @@ def build_plan(world,data,override=None,metrics=None):
     import time
     c=settings(data,override); rng=random.Random(stable_seed('wg3',world.seed,'sites'))
     selection=c.pop('_selection',None)
+    network=c['version']==4
+    if network:
+        from generation.country_network import policy
+        policy(data.country_network)
+        # Composition retains the exact G8 contract and random streams. Only
+        # after its full validation does augmentation create format 7 metadata.
+        c['version']=3;c.pop('country_network_version')
     modern=selection and data.poi_profiles.get('version')==2
     composed=c['version']==3
     plan=dict(version=6 if composed else 5 if modern else 4 if selection else 2,mode=MODE,generation_revision='wg8' if composed else 'wg7' if modern else 'wg6' if selection else 'wg4',dependency_projection='structure-v1',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
@@ -295,6 +304,9 @@ def build_plan(world,data,override=None,metrics=None):
     for settlement in plan['settlements']:
         settlement['semantics']=semantics(world,settlement,data,plan)
     validate_plan(plan,world.width,world.height)
+    if network:
+        from generation.country_network import augment
+        plan=augment(world,plan,data,metrics)
     return plan
 
 
@@ -421,11 +433,11 @@ def validate_plan(plan,width,height):
 
 def _validate_plan(plan,width,height):
     """Durable structure/reference checks; never demand unmodified saved scene tiles."""
-    if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4'),(3,'wg5'),(4,'wg6'),(5,'wg7'),(6,'wg8')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
+    if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4'),(3,'wg5'),(4,'wg6'),(5,'wg7'),(6,'wg8'),(7,'wg9')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
     if plan['version']>=2 and plan.get('dependency_projection')!='structure-v1': raise GenerationError('dependency projection missing or unsupported')
     if plan.get('map_size')!=[W,H] or plan.get('world_size')!=[width,height]: raise GenerationError('G3 plan dimensions disagree')
     registries={}
-    for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations')+(('sites',) if plan['version']>=4 else ())+(('paths',) if plan['version']>=5 else ())+(('blocks','public_spaces') if plan['version']==6 else ()):
+    for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations')+(('sites',) if plan['version']>=4 else ())+(('paths',) if plan['version']>=5 else ())+(('blocks','public_spaces') if plan['version'] in (6,7) else ()):
         rows=plan.get(name)
         if not isinstance(rows,list): raise GenerationError('missing G3 registry '+name)
         ids=[r.get('id') for r in rows if isinstance(r,dict)]
@@ -433,7 +445,7 @@ def _validate_plan(plan,width,height):
         registries[name]={r['id']:r for r in rows}
     from generation.plan_integrity import records
     records(plan,registries,width,height)
-    if plan['version']==6:
+    if plan['version'] in (6,7):
         from generation.settlement_layout import validate_resolved
         validate_resolved(plan,registries)
     if plan['version']>=3:
@@ -486,7 +498,7 @@ def _validate_plan(plan,width,height):
     owners=set(registries['routes'])|set(registries['waters'])|set(registries['placements'])|set(registries.get('sites',{}))|set(registries.get('paths',{}))|set(registries.get('public_spaces',{}))
     for r in plan['reservations']:
         # River banks may meet the world border; clipped at realization.
-        if r['owner'] not in owners or r['purpose'] not in (('water','road','structure','approach','envelope','path','common') if plan['version']==6 else ('water','road','structure','approach','envelope','path') if plan['version']>=5 else ('water','road','structure','approach')): raise GenerationError('G3 reservation owner/purpose invalid')
+        if r['owner'] not in owners or r['purpose'] not in (('water','road','structure','approach','envelope','path','common') if plan['version'] in (6,7) else ('water','road','structure','approach','envelope','path') if plan['version']>=5 else ('water','road','structure','approach')): raise GenerationError('G3 reservation owner/purpose invalid')
     from collections import Counter
     expected=[]
     for water in plan['waters']: expected.extend((water['id'],'water',tuple(expand(r,2))) for r in water['rects'])
@@ -531,12 +543,20 @@ def _validate_plan(plan,width,height):
         from generation.road_network import PhysicalRoads
         validate_resolved(plan,registries)
         PhysicalRoads(plan).validate_destinations(plan)
+    if plan['version']==7:
+        from generation.country_network import validate_resolved
+        validate_resolved(plan)
     return True
 
 
 def publish_plan(world,plan):
     from world.world_map import RegionType,ConnectorType
     validate_plan(plan,world.width,world.height)
+    if plan['version']==7:
+        from generation.country_network import baseline,check_geometry,ROLE
+        original=baseline(plan)
+        for route in plan['routes']:
+            if route.get('network_role')==ROLE:check_geometry(original,plan,route,world)
     world.plan_mode=MODE; world.plan=plan
     world.generation_revision=plan['generation_revision']
     for i,s in enumerate(plan['settlements']):
@@ -577,6 +597,6 @@ def slice_plan(plan,wx,wy):
     if plan['version']>=5:
         result['sites']=[s for s in plan['sites'] if s['kind']=='compound' and s['chunk']==[wx,wy]]
         result['paths']=[p for p in plan['paths'] if p['owner'] in {s['id'] for s in result['sites']}]
-    if plan['version']==6:
+    if plan['version'] in (6,7):
         result['public_spaces']=[dict(c,rects=[hit for r in c['rects'] if (hit:=intersect(r,rect))]) for c in plan['public_spaces'] if any(intersect(r,rect) for r in c['rects'])]
     return result

@@ -16,7 +16,8 @@ def edge_key(wx, wy, edge):
 
 def river_spec(world_seed, wx, wy, edge):
     key = edge_key(wx, wy, edge)
-    rng = random.Random(stable_seed(GENERATION_REVISION, world_seed, 'river-edge', key))
+    # Geography is the preserved G8 baseline, independent of scene revisions.
+    rng = random.Random(stable_seed('wg8', world_seed, 'river-edge', key))
     return round(rng.uniform(0.3, 0.7), 2), rng.choice((9, 11, 13)), f'river-edge-{key}'
 
 

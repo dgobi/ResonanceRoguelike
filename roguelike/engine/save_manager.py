@@ -368,11 +368,11 @@ class SaveManager:
                 if chunk is None: raise SaveFormatError('surface owner has no world Chunk: '+scene.name)
                 map_revision=getattr(m,'generation_revision',None)
                 chunk_revision=getattr(chunk,'generation_revision',None)
-                if map_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8') and chunk_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8'):
+                if map_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8','wg9') and chunk_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8','wg9'):
                     if map_revision not in (None,'legacy-unversioned','wg1','wg2') or chunk_revision not in (None,'legacy-unversioned','wg1','wg2'):
                         raise SaveFormatError('unsupported surface generation revision: '+scene.name)
                     continue
-                if map_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8') or chunk_revision!=map_revision:
+                if map_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8','wg9') or chunk_revision!=map_revision:
                     raise SaveFormatError('missing/incoherent generated scene revision: '+scene.name)
                 provenance=getattr(m,'plan_provenance',None)
                 if not isinstance(provenance,dict) or provenance.get('mode')!='shared-v1': raise SaveFormatError('missing required shared scene references: '+scene.name)
@@ -382,10 +382,10 @@ class SaveManager:
                 if world.plan['version']>=5:
                     for key,registry in (('paths','paths'),('compounds','sites')):
                         if sorted(provenance.get(key,[]))!=sorted(r['id'] for r in section[registry]):raise SaveFormatError('corrupt G7 scene '+key+' references: '+scene.name)
-                if world.plan['version']==6 and sorted(provenance.get('public_spaces',[]))!=sorted(c['id'] for c in section['public_spaces']):
+                if world.plan['version'] in (6,7) and sorted(provenance.get('public_spaces',[]))!=sorted(c['id'] for c in section['public_spaces']):
                     raise SaveFormatError('corrupt G8 public-space scene references: '+scene.name)
                 if map_revision=='wg3' and world.plan['generation_revision']!='wg3':raise SaveFormatError('G3 scene cannot consume a G4 plan')
-                if map_revision in ('wg4','wg5','wg6','wg7','wg8'):
+                if map_revision in ('wg4','wg5','wg6','wg7','wg8','wg9'):
                     from generation.placement import digest
                     from generation.scene_adapters import adapter
                     expected={'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
@@ -592,7 +592,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
     if mode=='shared-v1':
         validate_plan(data.get('plan'),data['width'],data['height'])
         if data['plan']['seed']!=data['seed']: raise SaveFormatError('world/plan seed mismatch')
-    elif data.get('plan') is not None or data.get('generation_revision') in ('wg3','wg4','wg5','wg6','wg7','wg8'):
+    elif data.get('plan') is not None or data.get('generation_revision') in ('wg3','wg4','wg5','wg6','wg7','wg8','wg9'):
         raise SaveFormatError('missing required G3 plan mode or unexpected legacy plan')
     world_map.plan_mode=mode
     world_map.plan=data.get('plan')

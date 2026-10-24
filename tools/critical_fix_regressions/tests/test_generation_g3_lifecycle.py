@@ -66,7 +66,7 @@ class G3Lifecycle(unittest.TestCase):
         # A checksum-consistent missing reference on an actual G3 surface is
         # semantic corruption, not permission to bypass the plan contract.
         checkpoint=e.save_manager.checkpoint_path();scene=checkpoint/f'chunks/{e.world_x}_{e.world_y}.pkl'
-        saved=pickle.loads(scene.read_bytes());self.assertEqual(saved.local_map.generation_revision,'wg8')
+        saved=pickle.loads(scene.read_bytes());self.assertEqual(saved.local_map.generation_revision,'wg9')
         del saved.local_map.plan_provenance;scene.write_bytes(pickle.dumps(saved,protocol=pickle.HIGHEST_PROTOCOL))
         manifest_path=checkpoint/'manifest.json';manifest=json.loads(manifest_path.read_text())
         manifest['files'][scene.relative_to(checkpoint).as_posix()]=record(scene.read_bytes());manifest_path.write_text(json.dumps(manifest))

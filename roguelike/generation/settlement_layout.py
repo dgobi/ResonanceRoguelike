@@ -219,7 +219,7 @@ def validate_resolved(plan,registries):
     from generation.world_plan import intersect,cells,member_chunks,bands
     from generation.compounds import connected_cells
     from generation.placement import frontage_entrance
-    require(plan.get('layout_contract')==1 and plan['settings']['version']==3 and plan['settings']['settlement_layout_version']==1,'missing format-6 layout contract')
+    require(plan.get('layout_contract')==1 and (plan['version'],plan['settings']['version']) in ((6,3),(7,4)) and plan['settings']['settlement_layout_version']==1,'missing supported G8 layout contract')
     blocks=registries['blocks'];commons=registries['public_spaces'];plots=registries['plots'];placed=registries['placements'];routes=registries['routes']
     def rectangle(r):return isinstance(r,list) and len(r)==4 and all(type(n) is int for n in r) and 0<=r[0]<r[2]<=plan['world_size'][0]*80 and 0<=r[1]<r[3]<=plan['world_size'][1]*43
     all_blocks=[];all_common=[]
@@ -228,7 +228,8 @@ def validate_resolved(plan,registries):
         require(set(layout)=={'id','version','signature','frontage_tiles','minimum_depth','junction_clearance'} and layout['version']==1 and isinstance(layout['id'],str) and layout['id'] and len(layout['signature'])==64,sid+': invalid resolved layout')
         dimensions(layout)
         require(s['bounds'][2]-s['bounds'][0]==160 and s['bounds'][3]-s['bounds'][1]==(86 if s['form']=='grid' else 43),sid+': fixed settlement footprint changed')
-        incoming=next(r for r in plan['routes'] if r['b']==sid and r['kind']=='country')
+        incoming=routes[s['arrival']['road']]
+        require(incoming['b']==sid and incoming['kind']=='country',sid+': arrival road must retain its original destination')
         require(s['arrival']==primary_arrival(incoming,s['bounds']),sid+': arrival is not the actual canonical incoming entry')
         local_connectivity([r for r in plan['routes'] if any(intersect(b,s['bounds']) for b in r['rects'])],s['bounds'])
         require(len(s['blocks'])==len(set(s['blocks'])) and len(s['commons'])==int(s['form']=='grid'),sid+': duplicate blocks or missing common')

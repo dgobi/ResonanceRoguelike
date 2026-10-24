@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "settlement_count": [
     2,
     4
@@ -18,5 +18,6 @@
   "route_search_nodes": 16384,
   "site_search_limit": 16384,
   "selection_profile_version": 1,
-  "settlement_layout_version": 1
+  "settlement_layout_version": 1,
+  "country_network_version": 1
 }

@@ -23,7 +23,7 @@ def preview(data,seed,*,layouts=None,layout=None,selection=None,config=None,form
     bound.settlement_profiles=copy.deepcopy(selection or data.settlement_profiles)
     world=WorldMap(128,128);world.seed=seed;metrics={};started=time.perf_counter()
     generate_world(world,bound,random.Random(seed),planning_settings=config,planning_metrics=metrics)
-    if world.plan['version']!=6:raise GenerationError('settlement preview requires planning settings version 3 / layout version 1')
+    if world.plan['version'] not in (6,7):raise GenerationError('settlement preview requires planning settings version 3 or 4 / layout version 1')
     elapsed=time.perf_counter()-started;previews=[];ids=[]
     for s in world.plan['settlements']:
         if form not in ('all',s['form']):continue

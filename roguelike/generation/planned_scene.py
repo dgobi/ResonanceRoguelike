@@ -129,10 +129,10 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
                        'placements':[p['id'] for p in section['placements']],
                        'plan_revision':world.plan['generation_revision'],'plan_version':world.plan['version'],
                        'plan_identity':digest(world.plan),
-                       'dependency_projection':'structure-v1','adapter':adapter('wg8',world.plan['version'])}
+                       'dependency_projection':'structure-v1','adapter':adapter('wg9',world.plan['version'])}
     if world.plan['version']>=5:
         m.plan_provenance.update(paths=[p['id'] for p in section['paths']],compounds=[s['id'] for s in section['sites']])
-    if world.plan['version']==6:m.plan_provenance['public_spaces']=[c['id'] for c in section['public_spaces']]
+    if world.plan['version'] in (6,7):m.plan_provenance['public_spaces']=[c['id'] for c in section['public_spaces']]
     # These are actual first-creation inputs, not invented historical G3 hashes.
     m.native_input_provenance={f'entities:{a._creature_id}':digest(data.entities[a._creature_id]) for a in actors}
     m.native_input_provenance.update({f'terrain:{tid}':digest(data.terrain[tid]) for tid in ('dead_wood','flint_rock','clay_deposit')})
@@ -144,7 +144,7 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
         mapped=data.text_item_map.get('waystone_prayer_a','letter')
         m.native_input_provenance['prayer-item:'+mapped]=digest(data.items[mapped])
     m.native_generation_context=native
-    m.generation_revision='wg8'; m.generation_complete=True
+    m.generation_revision='wg9'; m.generation_complete=True
     return SceneResult(m,actors,spawn,staged,receipts)
 
 

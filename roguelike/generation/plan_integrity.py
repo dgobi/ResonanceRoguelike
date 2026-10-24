@@ -134,6 +134,9 @@ def world_membership(world):
     """Check saved metadata, never recompute it or consult mutable definitions."""
     from world.world_map import RegionType
     plan=world.plan
+    if plan['version']==7:
+        from generation.country_network import validate_world
+        validate_world(world)
     if world.generation_revision!=plan['generation_revision']: raise GenerationError('world origin disagrees with saved plan origin')
     expected={tuple(xy):i for i,s in enumerate(plan['settlements']) for xy in s['members']}
     if (any(len(xy)!=2 or any(type(n) is not int for n in xy) for xy in world.town_chunks) or

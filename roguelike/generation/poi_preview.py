@@ -30,7 +30,9 @@ def site_preview(data,seed,raw=None,category='wilderness',policy=None,normal=Non
     desired_policy=copy.deepcopy(bound.poi_profiles);resolve(bound)
     if normal is not None:bound.poi_profiles.update(minimum=0,maximum=0)
     world=WorldMap(128,128);world.seed=seed;started=time.perf_counter()
-    generate_world(world,bound,random.Random(seed))
+    config=copy.deepcopy(bound.g3_config);delayed_network=normal is not None and config['version']==4
+    if delayed_network:config['version']=3;config.pop('country_network_version')
+    generate_world(world,bound,random.Random(seed),planning_settings=config)
     if normal is not None:
         bound.poi_profiles=desired_policy;plan=copy.deepcopy(world.plan);authority=Reservations()
         authority.rows=copy.deepcopy(plan['reservations'])
@@ -38,7 +40,11 @@ def site_preview(data,seed,raw=None,category='wilderness',policy=None,normal=Non
             for key in member_chunks(r['rect']):authority.index.setdefault(tuple(key),[]).append(i)
         rows,_=candidates(plan,resolve(bound))
         populate(plan,authority,world,bound,candidate_rows=[r for r in rows if r['normal']==normal])
-        plan['reservations']=authority.rows;validate_plan(plan,128,128);publish_plan(world,plan)
+        plan['reservations']=authority.rows;validate_plan(plan,128,128)
+        if delayed_network:
+            from generation.country_network import augment
+            plan=augment(world,plan,bound)
+        publish_plan(world,plan)
     selected=[s for s in world.plan['sites'] if s['kind']!='compound' and (raw is None or next(p for p in world.plan['placements'] if p['id']==s['placement'])['asset']==raw['id'])]
     if raw is not None and not selected:raise GenerationError('eligible site candidate was not selected/fitted; eligibility is not a selection guarantee; inspect --world-plan with --poi-config')
     previews=[]

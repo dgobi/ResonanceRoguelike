@@ -1,0 +1,13 @@
+{
+  "run_id": "d-20261024-152851-10b3142d",
+  "suite": "b1",
+  "scenario": "scenes",
+  "variant": "surface",
+  "phase": "write",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\before\\guard-admitted\\allowed\\d-20261024-152851-10b3142d",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\before\\guard-admitted\\allowed\\d-20261024-152851-10b3142d\\b1-scenes-surface-write\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\before\\guard-admitted\\allowed\\d-20261024-152851-10b3142d\\b1-scenes-surface-write\\result.json",
+  "debug": false
+}

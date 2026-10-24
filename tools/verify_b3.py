@@ -43,6 +43,10 @@ def source_manifest():
     for seed in (0,20261023,29417):
         baseline=ROOT/f'evidence/worldgen-g8/before/baseline/results/plan-{seed}.json'
         result[baseline.relative_to(ROOT).as_posix()]=hashlib.sha256(baseline.read_bytes()).hexdigest()
+        baseline=ROOT/f'evidence/worldgen-g9/before/baseline/results/plan-{seed}.json'
+        result[baseline.relative_to(ROOT).as_posix()]=hashlib.sha256(baseline.read_bytes()).hexdigest()
+    for name in ('evidence/worldgen-g8/before/baseline/results/run.json','evidence/worldgen-g9/before/baseline/results/run.json','evidence/worldgen-g9/before/network-baseline.json'):
+        result[name]=hashlib.sha256((ROOT/name).read_bytes()).hexdigest()
     return result
 
 

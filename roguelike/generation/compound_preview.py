@@ -31,13 +31,20 @@ def preview(data,seed,recipe,*,children=(),policy=None,normal=None,rotation=None
         bound.poi_profiles.update(minimum=1,maximum=1,kind_minimum=dict(single=0,compound=1),choices=[dict(kind='compound',recipe=recipe['id'],weight=1,cap=2)])
     resolve(bound);desired=copy.deepcopy(bound.poi_profiles)
     if normal:bound.poi_profiles.update(minimum=0,maximum=0,kind_minimum=dict(single=0,compound=0))
-    world=WorldMap(128,128);world.seed=seed;started=time.perf_counter();generate_world(world,bound,random.Random(seed))
+    config=copy.deepcopy(bound.g3_config)
+    delayed_network=normal and config['version']==4
+    if delayed_network:config['version']=3;config.pop('country_network_version')
+    world=WorldMap(128,128);world.seed=seed;started=time.perf_counter();generate_world(world,bound,random.Random(seed),planning_settings=config)
     if normal:
         bound.poi_profiles=desired;plan=copy.deepcopy(world.plan);authority=Reservations();authority.rows=copy.deepcopy(plan['reservations'])
         for i,r in enumerate(authority.rows):
             for xy in member_chunks(r['rect']):authority.index.setdefault(tuple(xy),[]).append(i)
         rows,_=candidates(plan,resolve(bound));populate(plan,authority,world,bound,candidate_rows=[r for r in rows if r['normal']==normal])
-        plan['reservations']=authority.rows;validate_plan(plan,128,128);publish_plan(world,plan)
+        plan['reservations']=authority.rows;validate_plan(plan,128,128)
+        if delayed_network:
+            from generation.country_network import augment
+            plan=augment(world,plan,bound)
+        publish_plan(world,plan)
     selected=[s for s in world.plan['sites'] if s['kind']=='compound' and s['recipe']==recipe['id']];previews=[]
     for site in selected:
         xy=site['chunk'];result=create_surface(world,world.get(*xy),bound,ItemFactory(bound),CreatureFactory(bound),80,43)

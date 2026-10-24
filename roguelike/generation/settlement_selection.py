@@ -94,7 +94,7 @@ def populate_settlement(plan, authority, data, settlement, slots, *, work=None):
     profile=profile_for(plan,settlement['id']);sid=settlement['id']
     required=[role for role in ('civic','commercial','residential','support') for _ in range(profile['minimum'].get(role,0))]
     attempts=0; failures=[]; exhausted=False
-    composed=plan.get("version")==6
+    composed=plan.get("version") in (6,7)
     work=work if work is not None else dict(attempts=0,budget=profile["required_fit_budget"])
     def fit(p,a,slot,role,option=None):
         if composed:
