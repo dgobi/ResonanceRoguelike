@@ -1,0 +1,111 @@
+b1-scenes-surface-write PASS 
+b1-scenes-surface-read FAIL SystemExit(1)
+b1-scenes-surface-same FAIL AssertionError('{"case": "S05", "property": "same-process full load", "expected": true, "observed": false, "passed": false}')
+b1-scenes-submap-write PASS 
+b1-scenes-submap-read FAIL SystemExit(1)
+b1-scenes-submap-same FAIL AssertionError('{"case": "S05", "property": "same-process full load", "expected": true, "observed": false, "passed": false}')
+b1-gear-empty-write PASS 
+b1-gear-empty-read PASS 
+b1-gear-empty-same PASS 
+b1-gear-jerky-write PASS 
+b1-gear-jerky-read PASS 
+b1-gear-jerky-same PASS 
+b1-gear-gear-write PASS 
+b1-gear-gear-read PASS 
+b1-gear-gear-same PASS 
+b1-gear-first-write PASS 
+b1-gear-first-read PASS 
+b1-gear-first-same PASS 
+b1-gear-second-write PASS 
+b1-gear-second-read PASS 
+b1-gear-second-same PASS 
+b1-gear-reordered-write PASS 
+b1-gear-reordered-read PASS 
+b1-gear-reordered-same PASS 
+b1-gear-inactive-write PASS 
+b1-gear-inactive-read PASS 
+b1-gear-inactive-same PASS 
+b1-gear-burnout-write PASS 
+b1-gear-burnout-read PASS 
+b1-gear-burnout-same PASS 
+b1-lurker-dormant-write PASS 
+b1-lurker-dormant-read PASS 
+b1-lurker-dormant-same PASS 
+b1-lurker-awake-write PASS 
+b1-lurker-awake-read PASS 
+b1-lurker-awake-same PASS 
+b1-lurker-pending-write PASS 
+b1-lurker-pending-read PASS 
+b1-lurker-pending-same PASS 
+b1-lurker-owners-write PASS 
+b1-lurker-owners-read PASS 
+b1-lurker-owners-same PASS 
+b2-components-filled-write PASS 
+b2-components-filled-read PASS 
+b2-components-filled-same PASS 
+b2-components-empty-write PASS 
+b2-components-empty-read PASS 
+b2-components-empty-same PASS 
+b2-items-distinct-write PASS 
+b2-items-distinct-read PASS 
+b2-items-distinct-same PASS 
+b2-actors-modified-write PASS 
+b2-actors-modified-read PASS 
+b2-actors-modified-same PASS 
+b1-format-versions-same PASS 
+b1-format-fields-same PASS 
+b1-format-scenes-same PASS 
+b1-format-bootstrap-same PASS 
+b2-processing-owners-same FAIL AssertionError('{"case": "B2-05", "property": "processing full load", "expected": true, "observed": false, "passed": false}')
+b2-format-contract-same PASS 
+b1-journey-movement-loop PASS 
+b1-journey-transfer-loop PASS 
+b1-journey-combat-loop PASS 
+b1-journey-text-loop PASS 
+b1-journey-processing-loop PASS 
+b1-journey-stairs-loop PASS 
+b1-journey-boundary-loop PASS 
+b1-journey-debug-loop PASS 
+b1-journey-needs_f9-loop PASS 
+b1-journey-nondebug-write PASS 
+b1-journey-nondebug-read PASS 
+b2-journey-effects-write PASS 
+b2-journey-effects-read PASS 
+b2-journey-needs-write PASS 
+b2-journey-needs-read PASS 
+b2-journey-rain-write PASS 
+b2-journey-rain-read PASS 
+b2-journey-processing-write PASS 
+b2-journey-processing-read PASS 
+diagnostic-original-scenes-write PASS 
+diagnostic-original-scenes-read PASS 
+diagnostic-original-empty-write PASS 
+diagnostic-original-empty-read PASS 
+diagnostic-original-empty_slots-write PASS 
+diagnostic-original-empty_slots-read PASS 
+diagnostic-original-equipped-write PASS 
+diagnostic-original-equipped-read PASS 
+diagnostic-original-lurker-write PASS 
+diagnostic-original-lurker-read PASS 
+b3-coherence-owners-write PASS 
+b3-coherence-owners-read FAIL SystemExit(1)
+b3-coherence-owners-same FAIL AssertionError('{"case": "B3-01", "property": "same-process rollback", "expected": true, "observed": false, "passed": false}')
+b3-fault-canonical-write PASS 
+b3-fault-stage_created-crash FAIL SystemExit(1)
+b3-fault-first_scene-crash FAIL SystemExit(1)
+b3-fault-payload_meta.json-crash FAIL SystemExit(1)
+b3-fault-payload_player.json-crash FAIL SystemExit(1)
+b3-fault-payload_world.json-crash FAIL SystemExit(1)
+b3-fault-manifest_written-crash FAIL SystemExit(1)
+b3-fault-generation_ready-crash FAIL SystemExit(1)
+b3-fault-backup_written-crash FAIL SystemExit(1)
+b3-fault-head_written-crash FAIL SystemExit(1)
+b3-fault-published-crash FAIL SystemExit(1)
+b3-initial-fault-stage_created-crash PASS 
+b3-initial-fault-stage_created-read PASS 
+b3-initial-fault-head_written-crash PASS 
+b3-initial-fault-head_written-read PASS 
+b3-initial-fault-published-crash PASS 
+b3-initial-fault-published-read FAIL SystemExit(1)
+b3-recovery-pointer-same FAIL AssertionError('{"case": "B3-04", "property": "recover or explicit rollback succeeds", "expected": true, "observed": false, "passed": false}')
+b3-recovery-active-same FAIL AssertionError('{"case": "B3-04", "property": "recover or explicit rollback succeeds", "expected": true, "observed": false, "passed": false}')

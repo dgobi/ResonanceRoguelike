@@ -1,0 +1,20 @@
+test_boundary_adjacent_bridge_exact_bands_both_axes_and_unassigned_water (test_generation_g3_plans.G3Plans.test_boundary_adjacent_bridge_exact_bands_both_axes_and_unassigned_water) ... ok
+test_complete_asymmetric_transform_under_all_permissions (test_generation_g3_plans.G3Plans.test_complete_asymmetric_transform_under_all_permissions) ... ok
+test_full_width_reciprocal_roads_and_rivers_both_axes (test_generation_g3_plans.G3Plans.test_full_width_reciprocal_roads_and_rivers_both_axes) ... ok
+test_late_population_failure_no_world_plan_cache_or_owner_publication (test_generation_g3_plans.G3Plans.test_late_population_failure_no_world_plan_cache_or_owner_publication) ... ok
+test_migrant_first_complete_scene_and_cached_mutations_do_not_respawn (test_generation_g3_plans.G3Plans.test_migrant_first_complete_scene_and_cached_mutations_do_not_respawn) ... ok
+test_order_global_draws_and_complete_scene_identity (test_generation_g3_plans.G3Plans.test_order_global_draws_and_complete_scene_identity) ... ok
+test_plan_failure_is_atomic_and_bounded (test_generation_g3_plans.G3Plans.test_plan_failure_is_atomic_and_bounded) ... ok
+test_reservations_conflicts_and_exact_assigned_frontage (test_generation_g3_plans.G3Plans.test_reservations_conflicts_and_exact_assigned_frontage) ... ok
+test_saved_plan_validation_and_legacy_modes (test_generation_g3_plans.G3Plans.test_saved_plan_validation_and_legacy_modes) ... ok
+test_schema_references_profiles_settings_and_all_alternatives (test_generation_g3_plans.G3Plans.test_schema_references_profiles_settings_and_all_alternatives) ... ok
+test_semantic_dependency_scoping (test_generation_g3_plans.G3Plans.test_semantic_dependency_scoping) ... ok
+test_world_graph_constraints_and_lazy_shared_forms (test_generation_g3_plans.G3Plans.test_world_graph_constraints_and_lazy_shared_forms) ... ok
+test_fresh_process_hash_seeds_complete_plan_and_content (test_generation_g3_lifecycle.G3Lifecycle.test_fresh_process_hash_seeds_complete_plan_and_content) ... ok
+test_pending_semantic_change_preserves_load_cached_scene_and_unaffected_placement (test_generation_g3_lifecycle.G3Lifecycle.test_pending_semantic_change_preserves_load_cached_scene_and_unaffected_placement) ... ok
+test_startup_and_f9_restore_never_generate_plan_or_population (test_generation_g3_lifecycle.G3Lifecycle.test_startup_and_f9_restore_never_generate_plan_or_population) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 17.811s
+
+OK

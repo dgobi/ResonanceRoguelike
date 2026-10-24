@@ -1,0 +1,11 @@
+{
+  "failures": [
+    {
+      "journey": 20261023,
+      "error": "",
+      "traceback": "Traceback (most recent call last):\n  File \"G:\\GameDev\\RoguelikeProject\\tools\\worldgen_g3_diagnostic.py\", line 62, in main\n    with tempfile.TemporaryDirectory(prefix='g3-journey-') as temp,contextlib.redirect_stdout(log):report['journey']=journey(20261023,temp)\n                                                                                                                     ^^^^^^^^^^^^^^^^^^^^^^\n  File \"G:\\GameDev\\RoguelikeProject\\tools\\g3_journey.py\", line 104, in journey\n    walk((landmark['join'][0]%80,landmark['join'][1]%43))\nAssertionError\n"
+    }
+  ],
+  "journey": null,
+  "passed": false
+}

@@ -1,0 +1,488 @@
+{
+  "declared_seeds": [
+    0,
+    20261023,
+    29417
+  ],
+  "sample_size": 3,
+  "runs": [
+    {
+      "seed": 0,
+      "plan_identity": "940dd68e6f7190df20a9c2b0dbc2079cc2069710b846083de3d15b07acc7db16",
+      "planning_seconds": 0.5987753000226803,
+      "plan_bytes": 527981,
+      "settlements": 3,
+      "placements": 39,
+      "vacancies": 42,
+      "crossings": 6,
+      "scenes_at_plan_completion": 0,
+      "scenes": [
+        {
+          "chunk": [
+            30,
+            83
+          ],
+          "seconds": 0.1585198999964632,
+          "actors": 1,
+          "items": 0
+        },
+        {
+          "chunk": [
+            32,
+            79
+          ],
+          "seconds": 0.13142399996286258,
+          "actors": 0,
+          "items": 0
+        },
+        {
+          "chunk": [
+            32,
+            83
+          ],
+          "seconds": 0.16645099996821955,
+          "actors": 0,
+          "items": 8
+        },
+        {
+          "chunk": [
+            32,
+            84
+          ],
+          "seconds": 0.17204119998496026,
+          "actors": 0,
+          "items": 10
+        },
+        {
+          "chunk": [
+            33,
+            83
+          ],
+          "seconds": 0.1651757000363432,
+          "actors": 0,
+          "items": 10
+        },
+        {
+          "chunk": [
+            33,
+            84
+          ],
+          "seconds": 0.16795400000410154,
+          "actors": 0,
+          "items": 10
+        },
+        {
+          "chunk": [
+            83,
+            116
+          ],
+          "seconds": 0.16455729998415336,
+          "actors": 0,
+          "items": 11
+        },
+        {
+          "chunk": [
+            83,
+            117
+          ],
+          "seconds": 0.16716219997033477,
+          "actors": 0,
+          "items": 4
+        },
+        {
+          "chunk": [
+            84,
+            116
+          ],
+          "seconds": 0.1681834000046365,
+          "actors": 0,
+          "items": 10
+        },
+        {
+          "chunk": [
+            84,
+            117
+          ],
+          "seconds": 0.16768539999611676,
+          "actors": 0,
+          "items": 10
+        },
+        {
+          "chunk": [
+            102,
+            101
+          ],
+          "seconds": 0.16964640002697706,
+          "actors": 0,
+          "items": 7
+        },
+        {
+          "chunk": [
+            103,
+            101
+          ],
+          "seconds": 0.1417183000012301,
+          "actors": 0,
+          "items": 8
+        }
+      ],
+      "settlement_planning_seconds": {
+        "settlement-0": 0.021472299995366484,
+        "settlement-1": 0.010226799990050495,
+        "settlement-2": 0.023093099996913224
+      },
+      "asset_repetition": {
+        "bell_tower_a": 2,
+        "house_small_a": 16,
+        "market_stall_a": 20,
+        "roadside_shrine_a": 1
+      },
+      "plot_occupancy": 0.48148148148148145,
+      "frontage_coverage": 0.48148148148148145,
+      "detours": {
+        "road-0": 1.0,
+        "road-1": 1.0,
+        "road-2": 1.0,
+        "road-3": 1.0404769375588327,
+        "road-4": 1.073903002309469,
+        "road-5": 1.1913875598086126,
+        "road-6": 1.0
+      },
+      "legacy_macro_seconds": 0.44589979999000207,
+      "legacy_town_scene_seconds": 0.11249699996551499
+    },
+    {
+      "seed": 20261023,
+      "plan_identity": "99bf62968896bbb70d559f1aaea0a3245ccc3bbc6e061f96eee3a4e69621d971",
+      "planning_seconds": 0.705757400020957,
+      "plan_bytes": 657128,
+      "settlements": 4,
+      "placements": 45,
+      "vacancies": 52,
+      "crossings": 8,
+      "scenes_at_plan_completion": 0,
+      "scenes": [
+        {
+          "chunk": [
+            39,
+            26
+          ],
+          "seconds": 0.1691259000217542,
+          "actors": 0,
+          "items": 13
+        },
+        {
+          "chunk": [
+            40,
+            26
+          ],
+          "seconds": 0.13875580002786592,
+          "actors": 0,
+          "items": 8
+        },
+        {
+          "chunk": [
+            73,
+            99
+          ],
+          "seconds": 0.13148919999366626,
+          "actors": 2,
+          "items": 0
+        },
+        {
+          "chunk": [
+            75,
+            95
+          ],
+          "seconds": 0.12906030000885949,
+          "actors": 0,
+          "items": 0
+        },
+        {
+          "chunk": [
+            75,
+            99
+          ],
+          "seconds": 0.2084111000294797,
+          "actors": 0,
+          "items": 8
+        },
+        {
+          "chunk": [
+            75,
+            100
+          ],
+          "seconds": 0.16937109996797517,
+          "actors": 0,
+          "items": 10
+        },
+        {
+          "chunk": [
+            76,
+            99
+          ],
+          "seconds": 0.16995589999714866,
+          "actors": 0,
+          "items": 13
+        },
+        {
+          "chunk": [
+            76,
+            100
+          ],
+          "seconds": 0.1639337000087835,
+          "actors": 0,
+          "items": 10
+        },
+        {
+          "chunk": [
+            87,
+            33
+          ],
+          "seconds": 0.1658737999969162,
+          "actors": 0,
+          "items": 10
+        },
+        {
+          "chunk": [
+            88,
+            33
+          ],
+          "seconds": 0.13841499999398366,
+          "actors": 0,
+          "items": 8
+        },
+        {
+          "chunk": [
+            106,
+            106
+          ],
+          "seconds": 0.1676943000056781,
+          "actors": 0,
+          "items": 11
+        },
+        {
+          "chunk": [
+            106,
+            107
+          ],
+          "seconds": 0.16838909999933094,
+          "actors": 0,
+          "items": 4
+        },
+        {
+          "chunk": [
+            107,
+            106
+          ],
+          "seconds": 0.16713190003065392,
+          "actors": 0,
+          "items": 7
+        },
+        {
+          "chunk": [
+            107,
+            107
+          ],
+          "seconds": 0.16873600002145395,
+          "actors": 0,
+          "items": 10
+        }
+      ],
+      "settlement_planning_seconds": {
+        "settlement-0": 0.019842600042466074,
+        "settlement-1": 0.010225700039882213,
+        "settlement-2": 0.01999699999578297,
+        "settlement-3": 0.009716900007333606
+      },
+      "asset_repetition": {
+        "bell_tower_a": 2,
+        "house_small_a": 22,
+        "market_stall_a": 20,
+        "roadside_shrine_a": 1
+      },
+      "plot_occupancy": 0.4639175257731959,
+      "frontage_coverage": 0.4639175257731959,
+      "detours": {
+        "road-0": 1.0,
+        "road-1": 1.0,
+        "road-2": 1.0,
+        "road-3": 1.8792158165808275,
+        "road-4": 1.6195454545454546,
+        "road-5": 1.4305644988194892,
+        "road-6": 1.0554785020804438,
+        "road-7": 1.0
+      },
+      "legacy_macro_seconds": 0.4044538000016473,
+      "legacy_town_scene_seconds": 0.12456820002989843
+    },
+    {
+      "seed": 29417,
+      "plan_identity": "291b43e92ea45ae059866f95c47012dda8db0c172d2d38f4d06f9cfa6bf0201f",
+      "planning_seconds": 0.6787656999658793,
+      "plan_bytes": 592452,
+      "settlements": 4,
+      "placements": 43,
+      "vacancies": 54,
+      "crossings": 13,
+      "scenes_at_plan_completion": 0,
+      "scenes": [
+        {
+          "chunk": [
+            62,
+            0
+          ],
+          "seconds": 0.17645669996272773,
+          "actors": 0,
+          "items": 8
+        },
+        {
+          "chunk": [
+            62,
+            1
+          ],
+          "seconds": 0.2128241999889724,
+          "actors": 0,
+          "items": 7
+        },
+        {
+          "chunk": [
+            63,
+            0
+          ],
+          "seconds": 0.25783759995829314,
+          "actors": 0,
+          "items": 4
+        },
+        {
+          "chunk": [
+            63,
+            1
+          ],
+          "seconds": 0.3130856999778189,
+          "actors": 0,
+          "items": 7
+        },
+        {
+          "chunk": [
+            99,
+            86
+          ],
+          "seconds": 0.31518450001021847,
+          "actors": 0,
+          "items": 5
+        },
+        {
+          "chunk": [
+            100,
+            46
+          ],
+          "seconds": 0.24445060000289232,
+          "actors": 1,
+          "items": 0
+        },
+        {
+          "chunk": [
+            100,
+            86
+          ],
+          "seconds": 0.1751397000043653,
+          "actors": 0,
+          "items": 2
+        },
+        {
+          "chunk": [
+            104,
+            46
+          ],
+          "seconds": 0.2128305999794975,
+          "actors": 0,
+          "items": 8
+        },
+        {
+          "chunk": [
+            104,
+            47
+          ],
+          "seconds": 0.18536559998756275,
+          "actors": 0,
+          "items": 7
+        },
+        {
+          "chunk": [
+            105,
+            46
+          ],
+          "seconds": 0.18444779998390004,
+          "actors": 0,
+          "items": 16
+        },
+        {
+          "chunk": [
+            105,
+            47
+          ],
+          "seconds": 0.28435720002744347,
+          "actors": 0,
+          "items": 10
+        },
+        {
+          "chunk": [
+            106,
+            46
+          ],
+          "seconds": 0.18749209999805316,
+          "actors": 2,
+          "items": 0
+        },
+        {
+          "chunk": [
+            107,
+            65
+          ],
+          "seconds": 0.2158441999927163,
+          "actors": 0,
+          "items": 7
+        },
+        {
+          "chunk": [
+            108,
+            65
+          ],
+          "seconds": 0.18932330003008246,
+          "actors": 0,
+          "items": 2
+        }
+      ],
+      "settlement_planning_seconds": {
+        "settlement-0": 0.020073699997738004,
+        "settlement-1": 0.009552899980917573,
+        "settlement-2": 0.019544800044968724,
+        "settlement-3": 0.009770700009539723
+      },
+      "asset_repetition": {
+        "bell_tower_a": 2,
+        "house_small_a": 13,
+        "market_stall_a": 27,
+        "roadside_shrine_a": 1
+      },
+      "plot_occupancy": 0.44329896907216493,
+      "frontage_coverage": 0.44329896907216493,
+      "detours": {
+        "road-0": 1.0,
+        "road-1": 1.0,
+        "road-2": 1.0,
+        "road-3": 1.0754716981132075,
+        "road-4": 1.157104235506158,
+        "road-5": 1.038467552775606,
+        "road-6": 1.0505848877647803,
+        "road-7": 1.0
+      },
+      "legacy_macro_seconds": 0.5980703000095673,
+      "legacy_town_scene_seconds": 0.18635670002549887
+    }
+  ],
+  "failures": [],
+  "source_stable": true,
+  "passed": true
+}

@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "evidence\\authoring\\frontage-orientations.json",
+  "previews": 8,
+  "registration": false
+}
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "evidence\\authoring\\frontage-grid.json",
+  "previews": 6,
+  "registration": false
+}
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "evidence\\authoring\\frontage-roadside.json",
+  "previews": 4,
+  "registration": false
+}
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "evidence\\authoring\\landmark-orientations.json",
+  "previews": 8,
+  "registration": false
+}
+{
+  "passed": false,
+  "error": "eligible candidate was not selected/fitted; inspect world-plan rejected candidates or choose another explicit seed",
+  "diagnostics": []
+}
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "evidence\\authoring\\world-plan.json",
+  "previews": 0,
+  "registration": false
+}
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": null,
+  "previews": 0,
+  "registration": false
+}
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": null,
+  "previews": 0,
+  "registration": false
+}

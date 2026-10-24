@@ -1,0 +1,129 @@
+{
+  "brief_sha256": "7a79ca0f1ff824488146ae2006c94c2f955c0cca510286146519e579561a53cb",
+  "brief_manifest": [
+    {
+      "path": "CODEX_G3_CONNECTED_WORLD_COMPOSITION.md",
+      "passed": true
+    },
+    {
+      "path": "G2_REVIEW.md",
+      "passed": true
+    },
+    {
+      "path": "README.md",
+      "passed": true
+    },
+    {
+      "path": "SOURCE_BASELINE.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/README.md",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/authoring/FINDINGS_AND_G3_CONTRACT.md",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/authoring/probe_authoring_edges.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/authoring/probe_authoring_edges.py",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/evidence/audit_evidence.py",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/evidence/audit_results.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/evidence/review.md",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/state_geometry/G2_STATE_GEOMETRY_REVIEW.md",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/state_geometry/G3_OWNERSHIP_INTEGRATION.md",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/state_geometry/README.md",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/state_geometry/catalog_persistence_observed.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/state_geometry/catalog_persistence_probe.py",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/README.md",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/authoring/author-cottage.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/authoring/catalog.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/authoring/catalog_line_endings.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/authoring/catalog_summary.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/authoring/commands.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/focused/action_routes_stairs.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/focused/focused-tests.txt",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/focused/held_stairs.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/focused/run.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/focused/wfc-outskirts.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/remote_recheck.json",
+      "passed": true
+    },
+    {
+      "path": "review_evidence/verification/source_integrity.json",
+      "passed": true
+    }
+  ],
+  "baseline": "3466fc6ac3c61a8b60ab46635e381ceeff29ccbf",
+  "initial_worktree": "clean main",
+  "runtime_input_commit": "cbc9c66386f2a36c3ab8971f8d6ab4d0fc089e2d",
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "personal_saves_accessed": false,
+  "new_checkouts_or_branches": false,
+  "desktop_control": false,
+  "dependencies_changed": false
+}

@@ -1,0 +1,328 @@
+{
+  "run_id": "d-20261023-190815-1f8acba1",
+  "only": null,
+  "case": null,
+  "command": [
+    "tools/verify_d.py"
+  ],
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "branch": "main",
+  "base_commit": "cbc9c66386f2a36c3ab8971f8d6ab4d0fc089e2d",
+  "totals": {
+    "checks": 3675,
+    "passed": 3675,
+    "failed": 0,
+    "workers": 159
+  },
+  "coverage": {
+    "B01": {
+      "checks": 6,
+      "passed": true
+    },
+    "B02": {
+      "checks": 1,
+      "passed": true
+    },
+    "B03": {
+      "checks": 1,
+      "passed": true
+    },
+    "B2-01": {
+      "checks": 42,
+      "passed": true
+    },
+    "B2-02": {
+      "checks": 45,
+      "passed": true
+    },
+    "B2-03": {
+      "checks": 24,
+      "passed": true
+    },
+    "B2-04": {
+      "checks": 233,
+      "passed": true
+    },
+    "B2-05": {
+      "checks": 10,
+      "passed": true
+    },
+    "B2-06": {
+      "checks": 15,
+      "passed": true
+    },
+    "B2-07": {
+      "checks": 209,
+      "passed": true
+    },
+    "B2-08": {
+      "checks": 233,
+      "passed": true
+    },
+    "B2-09": {
+      "checks": 1,
+      "passed": true
+    },
+    "B2-H": {
+      "checks": 1,
+      "passed": true
+    },
+    "B3-01": {
+      "checks": 47,
+      "passed": true
+    },
+    "B3-02": {
+      "checks": 10,
+      "passed": true
+    },
+    "B3-03": {
+      "checks": 26,
+      "passed": true
+    },
+    "B3-04": {
+      "checks": 41,
+      "passed": true
+    },
+    "B3-05": {
+      "checks": 6,
+      "passed": true
+    },
+    "B3-06": {
+      "checks": 17,
+      "passed": true
+    },
+    "B3-07": {
+      "checks": 12,
+      "passed": true
+    },
+    "B3-08": {
+      "checks": 5,
+      "passed": true
+    },
+    "B3-09": {
+      "checks": 41,
+      "passed": true
+    },
+    "B3-H": {
+      "checks": 301,
+      "passed": true
+    },
+    "C-01": {
+      "checks": 52,
+      "passed": true
+    },
+    "C-02": {
+      "checks": 16,
+      "passed": true
+    },
+    "C-03": {
+      "checks": 14,
+      "passed": true
+    },
+    "C-04": {
+      "checks": 6,
+      "passed": true
+    },
+    "C-05": {
+      "checks": 22,
+      "passed": true
+    },
+    "C-06": {
+      "checks": 9,
+      "passed": true
+    },
+    "C-07": {
+      "checks": 11,
+      "passed": true
+    },
+    "C-08": {
+      "checks": 29,
+      "passed": true
+    },
+    "D-01": {
+      "checks": 10,
+      "passed": true
+    },
+    "D-02": {
+      "checks": 10,
+      "passed": true
+    },
+    "D-03": {
+      "checks": 5,
+      "passed": true
+    },
+    "D-04": {
+      "checks": 5,
+      "passed": true
+    },
+    "D-05": {
+      "checks": 7,
+      "passed": true
+    },
+    "D-06": {
+      "checks": 10,
+      "passed": true
+    },
+    "D-07": {
+      "checks": 11,
+      "passed": true
+    },
+    "D-08": {
+      "checks": 7,
+      "passed": true
+    },
+    "D-09": {
+      "checks": 4,
+      "passed": true
+    },
+    "D-10": {
+      "checks": 15,
+      "passed": true
+    },
+    "D-11": {
+      "checks": 15,
+      "passed": true
+    },
+    "E01": {
+      "checks": 772,
+      "passed": true
+    },
+    "E02": {
+      "checks": 10,
+      "passed": true
+    },
+    "E03": {
+      "checks": 4,
+      "passed": true
+    },
+    "E04": {
+      "checks": 25,
+      "passed": true
+    },
+    "F01": {
+      "checks": 4,
+      "passed": true
+    },
+    "F02": {
+      "checks": 78,
+      "passed": true
+    },
+    "F03": {
+      "checks": 13,
+      "passed": true
+    },
+    "F04": {
+      "checks": 26,
+      "passed": true
+    },
+    "F05": {
+      "checks": 252,
+      "passed": true
+    },
+    "F06": {
+      "checks": 132,
+      "passed": true
+    },
+    "F07": {
+      "checks": 78,
+      "passed": true
+    },
+    "H01": {
+      "checks": 2,
+      "passed": true
+    },
+    "H02": {
+      "checks": 342,
+      "passed": true
+    },
+    "H03": {
+      "checks": 17,
+      "passed": true
+    },
+    "H04": {
+      "checks": 2,
+      "passed": true
+    },
+    "K01": {
+      "checks": 63,
+      "passed": true
+    },
+    "K02": {
+      "checks": 14,
+      "passed": true
+    },
+    "K03": {
+      "checks": 24,
+      "passed": true
+    },
+    "K04": {
+      "checks": 4,
+      "passed": true
+    },
+    "R01": {
+      "checks": 7,
+      "passed": true
+    },
+    "R02": {
+      "checks": 7,
+      "passed": true
+    },
+    "R03": {
+      "checks": 7,
+      "passed": true
+    },
+    "R04": {
+      "checks": 21,
+      "passed": true
+    },
+    "R05": {
+      "checks": 19,
+      "passed": true
+    },
+    "R06": {
+      "checks": 43,
+      "passed": true
+    },
+    "S01": {
+      "checks": 8,
+      "passed": true
+    },
+    "S02": {
+      "checks": 8,
+      "passed": true
+    },
+    "S03": {
+      "checks": 18,
+      "passed": true
+    },
+    "S04": {
+      "checks": 44,
+      "passed": true
+    },
+    "S05": {
+      "checks": 6,
+      "passed": true
+    },
+    "S06": {
+      "checks": 8,
+      "passed": true
+    },
+    "original": {
+      "checks": 32,
+      "passed": true
+    }
+  },
+  "selected_tests_passed": true,
+  "passed": true,
+  "runner_negative_modes": [
+    "zero",
+    "missing",
+    "stale",
+    "phase",
+    "crash",
+    "timeout",
+    "false"
+  ],
+  "all_negative_controls_rejected": true,
+  "complete_results": "final-complete-evidence.zip: full-gate/results.json"
+}

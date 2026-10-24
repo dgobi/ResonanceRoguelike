@@ -1,0 +1,18 @@
+{
+  "drafts": [
+    {
+      "path": "authoring\\author_frontage_a.json",
+      "before_sha256": "d0dfd07df6e00546c11346238342cd64d997b2733e62245c770bd44034c5a67a",
+      "after_sha256": "d0dfd07df6e00546c11346238342cd64d997b2733e62245c770bd44034c5a67a",
+      "preserved": true
+    },
+    {
+      "path": "authoring\\author_landmark_a.json",
+      "before_sha256": "041f0ec68c3d66fa857f9fc4f895b22977f58d982e83a2b344e60e77cc46729c",
+      "after_sha256": "041f0ec68c3d66fa857f9fc4f895b22977f58d982e83a2b344e60e77cc46729c",
+      "preserved": true
+    }
+  ],
+  "all_eight_documented_commands_passed": true,
+  "initializer_runs": 2
+}

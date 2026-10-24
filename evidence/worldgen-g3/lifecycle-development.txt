@@ -1,0 +1,21 @@
+test_fresh_process_hash_seeds_complete_plan_and_content (test_generation_g3_lifecycle.G3Lifecycle.test_fresh_process_hash_seeds_complete_plan_and_content) ... ok
+test_pending_semantic_change_preserves_load_cached_scene_and_unaffected_placement (test_generation_g3_lifecycle.G3Lifecycle.test_pending_semantic_change_preserves_load_cached_scene_and_unaffected_placement) ... ok
+test_startup_and_f9_restore_never_generate_plan_or_population (test_generation_g3_lifecycle.G3Lifecycle.test_startup_and_f9_restore_never_generate_plan_or_population) ... FAIL
+
+======================================================================
+FAIL: test_startup_and_f9_restore_never_generate_plan_or_population (test_generation_g3_lifecycle.G3Lifecycle.test_startup_and_f9_restore_never_generate_plan_or_population)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_generation_g3_lifecycle.py", line 54, in test_startup_and_f9_restore_never_generate_plan_or_population
+    self.assertEqual(digest(_serialize_world(reader.world_map)),expected)
+AssertionError: '7d4e807eae80cef4dcf1d2d26574b09a2ba56ef5c373d9130c3cd98a5d700e32' != 'dd695ebb84ce6c3265e89ae7a1d2667c55e3da9d6c7b2b029accda81b07927bc'
+- 7d4e807eae80cef4dcf1d2d26574b09a2ba56ef5c373d9130c3cd98a5d700e32
++ dd695ebb84ce6c3265e89ae7a1d2667c55e3da9d6c7b2b029accda81b07927bc
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 8.826s
+
+FAILED (failures=1)
+pygame 2.6.1 (SDL 2.28.4, Python 3.11.0)
+Hello from the pygame community. https://www.pygame.org/contribute.html

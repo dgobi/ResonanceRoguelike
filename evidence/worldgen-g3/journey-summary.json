@@ -1,0 +1,41 @@
+{
+  "seed": 20261023,
+  "fixture": "ordinary production world; native actors retained as stationary obstacles; AI/survival turn updates paused; movement, doors, stairs, interactions, travel and save handlers unchanged",
+  "steps": 26989,
+  "destinations": [
+    "start-surface-exit",
+    "crossing-near",
+    "crossing-far",
+    "settlement-0",
+    "settlement-1",
+    "landmark"
+  ],
+  "interaction": {
+    "placement": "settlement-0-plot-4-building",
+    "target": [
+      44,
+      16
+    ],
+    "initial_items": 4,
+    "remaining_items": 3
+  },
+  "checkpoint_seconds": 1.0254759999806993,
+  "bridge_ids_walked": [
+    "crossing-0",
+    "crossing-1",
+    "crossing-2",
+    "crossing-3",
+    "crossing-4",
+    "crossing-5",
+    "crossing-6",
+    "crossing-7"
+  ],
+  "materialized_scenes_before_f9": 182,
+  "restore_seconds": 0.4095414000330493,
+  "f9_restored_coherent_start_checkpoint": true,
+  "worst_transition_seconds": 0.20671440003206953,
+  "checkpoint_bytes": 18818411,
+  "passed": true,
+  "exact_boundary_crossings": 412,
+  "complete_crossings": "final-complete-evidence.zip: diagnostic-final/run.json"
+}

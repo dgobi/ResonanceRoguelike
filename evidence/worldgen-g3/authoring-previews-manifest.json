@@ -1,0 +1,193 @@
+{
+  "archive": "authoring-previews.zip",
+  "bytes": 1180578,
+  "sha256": "34e28f1feaeec913dee6a4d1c7d9dcb40f5e51826330cd77306ce41e9d2fc186",
+  "members": [
+    {
+      "path": "frontage-grid-0.svg",
+      "bytes": 506507,
+      "sha256": "704e71babb6e7fd8ee38cf9e768570c1a5aa24d28843b0b0043f8f9045d5e33b"
+    },
+    {
+      "path": "frontage-grid-1.svg",
+      "bytes": 514153,
+      "sha256": "1ba97badb2f957ff94b0a38236d4bd18263483687b7c320b89b543d3d87d9679"
+    },
+    {
+      "path": "frontage-grid-2.svg",
+      "bytes": 518736,
+      "sha256": "fd0224e36e8db45e83e32ceebef205cad1a1fcf337cf0a10721adef6d6733313"
+    },
+    {
+      "path": "frontage-grid-3.svg",
+      "bytes": 510820,
+      "sha256": "016749a853fb36424c9c477b83eef7b55d0505c8690f238a6bb9a601662213fc"
+    },
+    {
+      "path": "frontage-grid-4.svg",
+      "bytes": 511681,
+      "sha256": "140c21ce8a79bf6ea4607c8b86c471f1a3ec69d0c43d89192c4a308d6ea1e1ad"
+    },
+    {
+      "path": "frontage-grid-5.svg",
+      "bytes": 511455,
+      "sha256": "a64d56770424a1d19f8b6c4fa41d3859c7082b40080dca0d38941f8527328fcc"
+    },
+    {
+      "path": "frontage-grid.json",
+      "bytes": 2599076,
+      "sha256": "84fe6f2d32cb50705cafa5b6e6d4535da837a6a65fa6aecbe16d31532561ea69"
+    },
+    {
+      "path": "frontage-grid.svg",
+      "bytes": 226851,
+      "sha256": "e77be995fbd0bb856e8797fb5708dfb9db57e2be205b820872030fe5ba9b9103"
+    },
+    {
+      "path": "frontage-orientations-0.svg",
+      "bytes": 473271,
+      "sha256": "68043fb4648b8689c1445adc143fb0ce3fc520c0d22aa0822213941a8c5a5fc4"
+    },
+    {
+      "path": "frontage-orientations-1.svg",
+      "bytes": 472925,
+      "sha256": "585344c4239210d1b6773d38319cdfc15a9658ac351d8ad409de1c13920fc71f"
+    },
+    {
+      "path": "frontage-orientations-2.svg",
+      "bytes": 473052,
+      "sha256": "eb1b2b9d2e4fd35aca53a2ff8fb4e6cb9c0f244fc1e3d6b878c6638fc7404929"
+    },
+    {
+      "path": "frontage-orientations-3.svg",
+      "bytes": 470704,
+      "sha256": "dfe204407103a29d2ca00590ffab3d89e4b554907ea4958e55df607b6fdf0f05"
+    },
+    {
+      "path": "frontage-orientations-4.svg",
+      "bytes": 471845,
+      "sha256": "e5f186fc2f96b06b42d597c468407967f4ed7364c595330604ffddd1954cde68"
+    },
+    {
+      "path": "frontage-orientations-5.svg",
+      "bytes": 471680,
+      "sha256": "4c1ef9655a6a547bbda3f403c6d0ebecb54160a80f028f91342b7a8fcfd4b82f"
+    },
+    {
+      "path": "frontage-orientations-6.svg",
+      "bytes": 473056,
+      "sha256": "f0324b895f78b5bdfa832c78a805d43a8471b1d3afa88f694f07644205ea59e8"
+    },
+    {
+      "path": "frontage-orientations-7.svg",
+      "bytes": 473146,
+      "sha256": "392b95a19c1e8f1d22b5bbe64bf7188156061747986b955c0ed3b6858d4ac48c"
+    },
+    {
+      "path": "frontage-orientations.json",
+      "bytes": 666616,
+      "sha256": "760fa5e484ed713c20c29727aaaccfca5a3fc2140f63e628b8e9c6d225176519"
+    },
+    {
+      "path": "frontage-roadside-0.svg",
+      "bytes": 520920,
+      "sha256": "804d92bd943d264cfdb96d504779e04744bee631d568fa3585ef903f31d8ff5c"
+    },
+    {
+      "path": "frontage-roadside-1.svg",
+      "bytes": 500089,
+      "sha256": "b94333b1cd12e1db968b449867153ddf1f0500ea0f91a214e748271abf69f3fa"
+    },
+    {
+      "path": "frontage-roadside-2.svg",
+      "bytes": 518895,
+      "sha256": "fccc3953c2e884140a69a53e8dc994f59b0e2abd7a252e037d0e4bb51777512f"
+    },
+    {
+      "path": "frontage-roadside-3.svg",
+      "bytes": 503683,
+      "sha256": "d374a0eb5d099c70bffc08f46ecc6e74eb9ea8f974ba949794acd9a21236de67"
+    },
+    {
+      "path": "frontage-roadside.json",
+      "bytes": 2246480,
+      "sha256": "d65f2945b513a94a084ab270afb156bfe7eb2fe3220dba52ff1599d05de9364b"
+    },
+    {
+      "path": "frontage-roadside.svg",
+      "bytes": 226851,
+      "sha256": "e77be995fbd0bb856e8797fb5708dfb9db57e2be205b820872030fe5ba9b9103"
+    },
+    {
+      "path": "landmark-orientations-0.svg",
+      "bytes": 467902,
+      "sha256": "9081212d8c4edb3279645211e227960ce516aec97be9edf8e82cdb620911e5fc"
+    },
+    {
+      "path": "landmark-orientations-1.svg",
+      "bytes": 467752,
+      "sha256": "fbb743891b3cbadb7be3c68a56f18c06d4bb6f753b5cfeb5bd4802fed9995c23"
+    },
+    {
+      "path": "landmark-orientations-2.svg",
+      "bytes": 467752,
+      "sha256": "beff9d2f12ea92eba94ff32cdb81b783fd0627b85294146b71dc7965436c97cf"
+    },
+    {
+      "path": "landmark-orientations-3.svg",
+      "bytes": 467752,
+      "sha256": "c8f333329f00d643781c5418efec24bf2cfd229b9440b94a381e7ef661b1ed2a"
+    },
+    {
+      "path": "landmark-orientations-4.svg",
+      "bytes": 465414,
+      "sha256": "36696c477673a5d02ea5371921d81a55e9b8d344b50e290b5095d09db4dd6aac"
+    },
+    {
+      "path": "landmark-orientations-5.svg",
+      "bytes": 465414,
+      "sha256": "ad2dca2899633b4917ba157ab289245ee8c499a9c912f9471e063486d34e6876"
+    },
+    {
+      "path": "landmark-orientations-6.svg",
+      "bytes": 465414,
+      "sha256": "9b435ddbccbf2ab8e3a07e7a12150068d19d494612f8c4f959152789d6fea96c"
+    },
+    {
+      "path": "landmark-orientations-7.svg",
+      "bytes": 467902,
+      "sha256": "c19e849d500f3baf9970124c8ee66fbec8e98105327b78fdf4021516d7e95d7a"
+    },
+    {
+      "path": "landmark-orientations.json",
+      "bytes": 613945,
+      "sha256": "ed25e1b71622151f0c8f03d70fd6c9b383ef255afb303e8dbd6469ec3a0fecda"
+    },
+    {
+      "path": "landmark-plot-0.svg",
+      "bytes": 486980,
+      "sha256": "151b6e2166d0aae6b2151f80a92138d1f3a3c1c60bf30bed95cddba016c2ce0b"
+    },
+    {
+      "path": "landmark-plot.json",
+      "bytes": 1534601,
+      "sha256": "216ab1e32efa6945a88b2eede241d41e4617a2bf14248bafe385885a4b0eb92d"
+    },
+    {
+      "path": "landmark-plot.svg",
+      "bytes": 218516,
+      "sha256": "f8f098c9b93c2bc309dc77d94cb4823c19df6e68b60c0a0015c97b25aade5564"
+    },
+    {
+      "path": "world-plan.json",
+      "bytes": 1625530,
+      "sha256": "c81b7e6670ce4e455e2298444c712e3e4abd252a6a2507169b517f5e3cbb6b56"
+    },
+    {
+      "path": "world-plan.svg",
+      "bytes": 226851,
+      "sha256": "e77be995fbd0bb856e8797fb5708dfb9db57e2be205b820872030fe5ba9b9103"
+    }
+  ],
+  "verified_readback": true
+}

@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="556" viewBox="6000 4257 160 93"><rect x="6000" y="4257" width="160" height="93" fill="#142326"/>
+<rect x="6000" y="4277" width="41" height="3" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>road-2</title></rect>
+<rect x="6000" y="4277" width="41" height="3" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>road-3</title></rect>
+<rect x="6000" y="4277" width="41" height="3" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>road-4</title></rect>
+<rect x="6040" y="4277" width="81" height="3" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>road-4</title></rect>
+<rect x="6120" y="4277" width="40" height="3" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>road-4</title></rect>
+<rect x="6039" y="4277" width="3" height="3" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>road-4</title></rect>
+<rect x="6119" y="4277" width="3" height="3" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>road-4</title></rect>
+<rect x="6039" y="4257" width="3" height="22" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>road-7</title></rect>
+<rect x="6003" y="4277" width="154" height="3" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>settlement-0-street-horizontal-0</title></rect>
+<rect x="6003" y="4320" width="154" height="3" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>settlement-0-street-horizontal-1</title></rect>
+<rect x="6039" y="4278" width="3" height="44" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>settlement-0-street-vertical-0</title></rect>
+<rect x="6119" y="4278" width="3" height="44" fill="#b8a179" stroke="#b8a179" stroke-width=".15"><title>settlement-0-street-vertical-1</title></rect>
+<rect x="6000" y="4258" width="17" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-0 occupied</title></rect>
+<rect x="6000" y="4281" width="17" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-1 vacant-garden</title></rect>
+<rect x="6017" y="4258" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-2 occupied</title></rect>
+<rect x="6017" y="4281" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-3 vacant-garden</title></rect>
+<rect x="6035" y="4258" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-4 occupied</title></rect>
+<rect x="6035" y="4281" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-5 vacant-garden</title></rect>
+<rect x="6053" y="4258" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-6 occupied</title></rect>
+<rect x="6053" y="4281" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-7 vacant-garden</title></rect>
+<rect x="6000" y="4301" width="17" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-8 occupied</title></rect>
+<rect x="6000" y="4324" width="17" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-9 vacant-garden</title></rect>
+<rect x="6017" y="4301" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-10 occupied</title></rect>
+<rect x="6017" y="4324" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-11 vacant-garden</title></rect>
+<rect x="6035" y="4301" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-12 occupied</title></rect>
+<rect x="6035" y="4324" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-13 vacant-garden</title></rect>
+<rect x="6053" y="4301" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-14 occupied</title></rect>
+<rect x="6053" y="4324" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-15 vacant-garden</title></rect>
+<rect x="6080" y="4258" width="17" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-16 occupied</title></rect>
+<rect x="6080" y="4281" width="17" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-17 vacant-garden</title></rect>
+<rect x="6097" y="4258" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-18 occupied</title></rect>
+<rect x="6097" y="4281" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-19 vacant-garden</title></rect>
+<rect x="6115" y="4258" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-20 occupied</title></rect>
+<rect x="6115" y="4281" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-21 vacant-garden</title></rect>
+<rect x="6133" y="4258" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-22 occupied</title></rect>
+<rect x="6133" y="4281" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-23 vacant-garden</title></rect>
+<rect x="6080" y="4301" width="17" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-24 occupied</title></rect>
+<rect x="6080" y="4324" width="17" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-25 vacant-garden</title></rect>
+<rect x="6097" y="4301" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-26 occupied</title></rect>
+<rect x="6097" y="4324" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-27 vacant-garden</title></rect>
+<rect x="6115" y="4301" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-28 occupied</title></rect>
+<rect x="6115" y="4324" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-29 vacant-garden</title></rect>
+<rect x="6133" y="4301" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-30 occupied</title></rect>
+<rect x="6133" y="4324" width="18" height="18" fill="none" stroke="#3c6460" stroke-width=".15"><title>settlement-0-plot-31 vacant-garden</title></rect>
+<rect x="6004" y="4264" width="10" height="12" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-0-building clearance</title></rect>
+<rect x="6008" y="4274" width="1" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-0 assigned approach</title></rect>
+<rect x="6005" y="4265" width="8" height="10" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>bell_tower_a</title></rect>
+<text x="6008" y="4275" font-size="2" fill="#313a3c">S</text>
+<rect x="6021" y="4266" width="12" height="10" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-2-building clearance</title></rect>
+<rect x="6026" y="4274" width="1" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-0 assigned approach</title></rect>
+<rect x="6022" y="4267" width="10" height="8" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>house_small_a</title></rect>
+<text x="6026" y="4275" font-size="2" fill="#313a3c">S</text>
+<rect x="6042" y="4270" width="8" height="6" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-4-building clearance</title></rect>
+<rect x="6044" y="4274" width="4" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-0 assigned approach</title></rect>
+<rect x="6043" y="4271" width="6" height="4" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>market_stall_a</title></rect>
+<text x="6044" y="4275" font-size="2" fill="#313a3c">S</text>
+<rect x="6060" y="4270" width="8" height="6" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-6-building clearance</title></rect>
+<rect x="6062" y="4274" width="4" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-0 assigned approach</title></rect>
+<rect x="6061" y="4271" width="6" height="4" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>market_stall_a</title></rect>
+<text x="6062" y="4275" font-size="2" fill="#313a3c">S</text>
+<rect x="6006" y="4313" width="8" height="6" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-8-building clearance</title></rect>
+<rect x="6008" y="4317" width="4" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-1 assigned approach</title></rect>
+<rect x="6007" y="4314" width="6" height="4" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>market_stall_a</title></rect>
+<text x="6008" y="4318" font-size="2" fill="#313a3c">S</text>
+<rect x="6021" y="4309" width="12" height="10" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-10-building clearance</title></rect>
+<rect x="6026" y="4317" width="1" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-1 assigned approach</title></rect>
+<rect x="6022" y="4310" width="10" height="8" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>house_small_a</title></rect>
+<text x="6026" y="4318" font-size="2" fill="#313a3c">S</text>
+<rect x="6042" y="4313" width="8" height="6" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-12-building clearance</title></rect>
+<rect x="6044" y="4317" width="4" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-1 assigned approach</title></rect>
+<rect x="6043" y="4314" width="6" height="4" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>market_stall_a</title></rect>
+<text x="6044" y="4318" font-size="2" fill="#313a3c">S</text>
+<rect x="6057" y="4309" width="12" height="10" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-14-building clearance</title></rect>
+<rect x="6062" y="4317" width="1" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-1 assigned approach</title></rect>
+<rect x="6058" y="4310" width="10" height="8" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>house_small_a</title></rect>
+<text x="6062" y="4318" font-size="2" fill="#313a3c">S</text>
+<rect x="6086" y="4270" width="8" height="6" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-16-building clearance</title></rect>
+<rect x="6088" y="4274" width="4" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-0 assigned approach</title></rect>
+<rect x="6087" y="4271" width="6" height="4" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>market_stall_a</title></rect>
+<text x="6088" y="4275" font-size="2" fill="#313a3c">S</text>
+<rect x="6101" y="4266" width="12" height="10" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-18-building clearance</title></rect>
+<rect x="6106" y="4274" width="1" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-0 assigned approach</title></rect>
+<rect x="6102" y="4267" width="10" height="8" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>house_small_a</title></rect>
+<text x="6106" y="4275" font-size="2" fill="#313a3c">S</text>
+<rect x="6119" y="4266" width="12" height="10" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-20-building clearance</title></rect>
+<rect x="6124" y="4274" width="1" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-0 assigned approach</title></rect>
+<rect x="6120" y="4267" width="10" height="8" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>house_small_a</title></rect>
+<text x="6124" y="4275" font-size="2" fill="#313a3c">S</text>
+<rect x="6137" y="4266" width="12" height="10" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-22-building clearance</title></rect>
+<rect x="6142" y="4274" width="1" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-0 assigned approach</title></rect>
+<rect x="6138" y="4267" width="10" height="8" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>house_small_a</title></rect>
+<text x="6142" y="4275" font-size="2" fill="#313a3c">S</text>
+<rect x="6083" y="4309" width="12" height="10" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-24-building clearance</title></rect>
+<rect x="6088" y="4317" width="1" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-1 assigned approach</title></rect>
+<rect x="6084" y="4310" width="10" height="8" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>house_small_a</title></rect>
+<text x="6088" y="4318" font-size="2" fill="#313a3c">S</text>
+<rect x="6104" y="4313" width="8" height="6" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-26-building clearance</title></rect>
+<rect x="6106" y="4317" width="4" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-1 assigned approach</title></rect>
+<rect x="6105" y="4314" width="6" height="4" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>market_stall_a</title></rect>
+<text x="6106" y="4318" font-size="2" fill="#313a3c">S</text>
+<rect x="6122" y="4313" width="8" height="6" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-28-building clearance</title></rect>
+<rect x="6124" y="4317" width="4" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-1 assigned approach</title></rect>
+<rect x="6123" y="4314" width="6" height="4" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>market_stall_a</title></rect>
+<text x="6124" y="4318" font-size="2" fill="#313a3c">S</text>
+<rect x="6137" y="4309" width="12" height="10" fill="none" stroke="#789e99" stroke-width=".15"><title>settlement-0-plot-30-building clearance</title></rect>
+<rect x="6142" y="4317" width="1" height="5" fill="#42a19b" stroke="#6ad4c4" stroke-width=".15"><title>settlement-0-street-horizontal-1 assigned approach</title></rect>
+<rect x="6138" y="4310" width="10" height="8" fill="#d7d2b7" stroke="#e8dfc1" stroke-width=".15"><title>house_small_a</title></rect>
+<text x="6142" y="4318" font-size="2" fill="#313a3c">S</text>
+<rect x="6000" y="4257" width="80" height="43" fill="none" stroke="#50758e" stroke-width=".15"><title>chunk 75,99</title></rect>
+<rect x="6000" y="4300" width="80" height="43" fill="none" stroke="#50758e" stroke-width=".15"><title>chunk 75,100</title></rect>
+<rect x="6080" y="4257" width="80" height="43" fill="none" stroke="#50758e" stroke-width=".15"><title>chunk 76,99</title></rect>
+<rect x="6080" y="4300" width="80" height="43" fill="none" stroke="#50758e" stroke-width=".15"><title>chunk 76,100</title></rect>
+<text x="6001" y="4347" font-family="monospace" font-size="2.5" fill="white">settlement-0 grid: tan roads, pale footprints, cyan approaches, blue chunk borders. Plan diagnostic.</text></svg>

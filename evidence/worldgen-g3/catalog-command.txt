@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "evidence\\worldgen-g3\\catalog.json",
+  "previews": 0,
+  "registration": false
+}
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": null,
+  "previews": 0,
+  "registration": false
+}

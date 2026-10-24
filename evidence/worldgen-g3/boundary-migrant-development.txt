@@ -1,0 +1,7 @@
+test_boundary_adjacent_bridge_exact_bands_both_axes_and_unassigned_water (test_generation_g3_plans.G3Plans.test_boundary_adjacent_bridge_exact_bands_both_axes_and_unassigned_water) ... ok
+test_migrant_first_complete_scene_and_cached_mutations_do_not_respawn (test_generation_g3_plans.G3Plans.test_migrant_first_complete_scene_and_cached_mutations_do_not_respawn) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 2.082s
+
+OK
