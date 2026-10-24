@@ -29,7 +29,7 @@ def main():
     from verify_b3 import source_manifest
     out=args.evidence.resolve();out.mkdir(parents=True,exist_ok=True);source=source_manifest()
     report={'declared_seeds':[0,20261023,29417],'sample_size':3,'source':source,'runs':[],'failures':[],'journey':None,
-            'command':[sys.executable,*sys.argv],'cwd':str(Path.cwd()),'python':sys.version,'revision':'wg5'}
+            'command':[sys.executable,*sys.argv],'cwd':str(Path.cwd()),'python':sys.version,'revision':'wg6'}
     data=load_data();log=io.StringIO()
     for seed in report['declared_seeds']:
         try:
@@ -40,6 +40,22 @@ def main():
             report['runs'].append(row)
             from collections import Counter
             row['settlement_planning_seconds']=metrics['settlements']
+            if plan['version']>=4:
+                from generation.road_network import PhysicalRoads
+                from generation.poi_selection import distance,extent_distance
+                t=time.perf_counter();network=PhysicalRoads(plan)
+                row['physical_network']=network.validate_destinations(plan);row['physical_graph_seconds']=time.perf_counter()-t
+                origin=next(n['xy'] for n in plan['nodes'] if n['id']=='start')
+                row['physical_network']['shortest_start_distances']={n['id']:len(network.path(origin,n['xy']))-1 for n in plan['nodes'] if n['id'] in ('landmark','capital-gateway') or n['id'].startswith('site-')}
+                row['physical_network']['distance_units']='shortest four-neighbour tile steps on full-width road/deck/access union'
+                row['sites']=dict(minimum=plan['poi_policy']['minimum'],featured=1,**metrics['sites'],records=[])
+                for site in plan['sites']:
+                    placement=next(p for p in plan['placements'] if p['id']==site['placement'])
+                    row['sites']['records'].append(dict(**site,asset=placement['asset'],rotation=placement['rotation'],mirror=placement['mirror'],
+                        access_length=max(placement['approach'][2]-placement['approach'][0],placement['approach'][3]-placement['approach'][1])-1,
+                        nearest_other_join=min((distance(placement['join'],s['attachment']['join']) for s in plan['sites'] if s!=site),default=None),
+                        town_extent_distance=min(extent_distance(placement['join'],s['bounds']) for s in plan['settlements'])))
+                row['sites']['asset_counts']={r['asset']:sum(p['asset']==r['asset'] and p.get('role')=='site' for p in plan['placements']) for r in plan['poi_policy']['assets']}
             row['asset_repetition']=dict(Counter(p['asset'] for p in plan['placements']))
             row['plot_occupancy']=len(plan['placements'])/len(plan['plots'])
             row['metric_definitions']={'plot_occupancy':'occupied/all proposed plots including required landmark; historical frontage_coverage was the same number and is deprecated',
@@ -64,12 +80,20 @@ def main():
                         denominator='most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies'))
             row['timed_scene_scope']='starting surface, every town member, landmark, capital gateway; required crossing checked separately'
             keys={(world.start_wx,world.start_wy)}|{tuple(xy) for s in plan['settlements'] for xy in s['members']}|{tuple(n['chunk']) for n in plan['nodes'] if n['id'] in ('landmark','capital-gateway')}
+            keys.update(tuple(s['chunk']) for s in plan.get('sites',[]))
             for xy in sorted(keys):
                 t=time.perf_counter()
                 with contextlib.redirect_stdout(log):result=create_surface(world,world.get(*xy),data,ItemFactory(data),CreatureFactory(data),80,43)
                 row['scenes'].append({'chunk':xy,'seconds':time.perf_counter()-t,'actors':len(result.actors),'items':sum(map(len,result.local_map.floor_objects.values())),
                                       'native_context':getattr(result.local_map,'native_generation_context',None),
                                       'functional_passes':result.local_map.functional_generation})
+                for site in (s for s in plan.get('sites',[]) if tuple(s['chunk'])==xy):
+                    from worldgen_g6_diagnostic import site_svg
+                    placement=next(p for p in plan['placements'] if p['id']==site['placement'])
+                    row['scenes'][-1]['site_goals']=placement['targets'];row['scenes'][-1]['site_id']=site['id']
+                    view=snapshot(result.local_map,result.actors,data);view['access']=[]
+                    (out/f'{seed}-{site["id"]}-scene.svg').write_text(render_svg(view),encoding='utf-8')
+                    (out/f'{seed}-{site["id"]}-plan.svg').write_text(site_svg(plan,site),encoding='utf-8')
                 if xy==tuple(next(n for n in plan['nodes'] if n['id']=='capital-gateway')['chunk']):
                     from generation.access import reachable
                     reached=reachable(result.local_map,result.spawn,data)

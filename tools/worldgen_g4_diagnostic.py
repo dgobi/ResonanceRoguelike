@@ -6,6 +6,7 @@ from html import escape
 def conditional_counts(plan,data):
     from generation.placement import transform
     owners={s['id']:s['form'] for s in plan['settlements']};owners['landmark']='landmark'
+    owners.update({s['id']:'rural' for s in plan.get('sites',[])})
     placements={p['id']:p for p in plan['placements']}; slots=Counter();outcomes=Counter();reasons=Counter()
     for plot in plan['plots']:
         form=owners[plot['owner']];normal=plot['normal'];slots[form,normal,plot['status']]+=1
@@ -22,12 +23,11 @@ def conditional_counts(plan,data):
                 count=sum(any(e['required'] and e['normal']==normal for e in transform(raw,r,m)['placement']['entrances'])
                           for r in profile['rotations'] for m in ((False,True) if profile['mirror_x'] else (False,)))
                 eligible.append(dict(context=context,asset=asset,normal=normal,eligible_transforms_per_slot=count))
-    return {'denominator':'slots: all proposed slots. candidate rows: attempted eligible transforms, terminating at first success; zeros retained, not a frequency estimate.',
+    return {'denominator':'slots: proposed published plots. candidate rows: observed transforms in those plots; zero rows omitted. Additional discarded candidate reasons are in site_selection. Not a frequency estimate.',
             'eligibility':eligible,
             'slots':[dict(form=f,normal=n,status=s,count=slots[f,n,s]) for f in ('grid','roadside','landmark') for n in 'NESW' for s in ('occupied','vacant-garden')],
-            'candidate_trials':[dict(form=f,normal=n,asset=a,rotation=r,mirror=m,status=s,count=outcomes[f,n,a,r,m,s])
-                                for f in ('grid','roadside','landmark') for n in 'NESW' for a in sorted(set(p['asset'] for p in plan['placements'])|{r['asset'] for p in plan['plots'] for r in p['rejected']})
-                                for r in (0,90,180,270,None) for m in (False,True,None) for s in ('accepted','rejected')],
+            'candidate_trials':[dict(form=k[0],normal=k[1],asset=k[2],rotation=k[3],mirror=k[4],status=k[5],count=v)
+                                for k,v in sorted(outcomes.items(),key=lambda r:str(r[0]))],
             'reasons':[dict(form=k[0],normal=k[1],reason=k[2],count=v) for k,v in sorted(reasons.items())]}
 
 

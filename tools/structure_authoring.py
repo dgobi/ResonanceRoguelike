@@ -25,6 +25,9 @@ def main(argv=None):
     p.add_argument('--register',action='store_true')
     p.add_argument('--world-plan',action='store_true',help='Preview the production shared world plan')
     p.add_argument('--planned',action='store_true',help='Add a draft to its active pool and materialize its selected plots')
+    p.add_argument('--site',action='store_true',help='Add a draft to the additional-site pool and preview naturally selected sites')
+    p.add_argument('--assigned-site',choices=list('NESW'),help='Controlled one-site candidate preview with this primary frontage normal')
+    p.add_argument('--poi-config',type=Path,help='Complete version-one additional-site policy override')
     p.add_argument('--context',choices=['grid','roadside','civic','landmark'],default='grid')
     p.add_argument('--role',choices=['residential','commercial','support','civic','landmark'])
     p.add_argument('--selection-config',type=Path,help='Complete version-one settlement selection profile override')
@@ -46,6 +49,7 @@ def main(argv=None):
     log=io.StringIO()
     try:
         with contextlib.redirect_stdout(log): data=DataLoader(str(args.data_root or game/'data'))
+        if args.poi_config:data.poi_profiles=read_document(args.poi_config)
         manifest=data.structure_catalog.manifest()
         if args.refresh_editor_catalog or args.check_editor_catalog:
             catalog={**manifest,'diagnostics':[],
@@ -58,7 +62,12 @@ def main(argv=None):
                 destination.parent.mkdir(parents=True,exist_ok=True); destination.write_text(content,encoding='utf-8')
             elif not destination.exists() or destination.read_text(encoding='utf-8')!=content:
                 raise GenerationError('Editor catalog is stale. Run --refresh-editor-catalog and repeat runtime validation.')
-        if args.world_plan or args.planned:
+        if args.site or args.assigned_site:
+            from generation.poi_preview import site_preview
+            raw=read_document(args.candidate) if args.candidate else None
+            with contextlib.redirect_stdout(log):
+                report=site_preview(data,args.seed,raw,category=args.category or 'wilderness',normal=args.assigned_site)
+        elif args.world_plan or args.planned:
             from generation.plan_preview import planned_preview
             raw=read_document(args.candidate) if args.candidate else None
             with contextlib.redirect_stdout(log):
@@ -107,6 +116,10 @@ def main(argv=None):
             if 'plan' in report:
                 from generation.plan_preview import plan_svg
                 output.with_suffix('.svg').write_text(plan_svg(report['plan']),encoding='utf-8')
+                if args.site or args.assigned_site:
+                    from worldgen_g6_diagnostic import site_svg
+                    for site in report['plan']['sites']:
+                        output.with_name(output.stem+'-'+site['id']+'-plan.svg').write_text(site_svg(report['plan'],site),encoding='utf-8')
         print(json.dumps({'passed':report['passed'],'assets':len(manifest['assets']),
                           'diagnostics':len(manifest['diagnostics']),'output':str(args.output) if args.output else None,
                           'previews':len(report.get('previews',[])),

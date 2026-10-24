@@ -12,7 +12,7 @@ from config import MAP_WIDTH as W, MAP_HEIGHT as H
 from generation.context import GenerationError, stable_seed
 from generation.placement import transform, entrance_cells, NORMALS, dependencies, digest
 
-VERSION=3
+VERSION=4
 MODE='shared-v1'
 
 
@@ -134,7 +134,7 @@ def build_plan(world,data,override=None,metrics=None):
     import time
     c=settings(data,override); rng=random.Random(stable_seed('wg3',world.seed,'sites'))
     selection=c.pop('_selection',None)
-    plan=dict(version=VERSION if selection else 2,mode=MODE,generation_revision='wg5' if selection else 'wg4',dependency_projection='structure-v1',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
+    plan=dict(version=VERSION if selection else 2,mode=MODE,generation_revision='wg6' if selection else 'wg4',dependency_projection='structure-v1',seed=world.seed,map_size=[W,H],world_size=[world.width,world.height],settings=c,
               nodes=[],routes=[],waters=_river_records(world),crossings=[],settlements=[],plots=[],placements=[],reservations=[],dependencies={},diagnostics=[])
     if selection:plan['selection']=selection
     authority=Reservations(); chosen=[]; count=rng.randint(*c['settlement_count']); start=(world.start_wx,world.start_wy)
@@ -265,6 +265,9 @@ def build_plan(world,data,override=None,metrics=None):
             plan['plots'].pop()
         if found: break
     if not found: raise GenerationError('essential landmark has no legal bounded spur/footprint: '+str(plan['diagnostics'][-1]))
+    if selection:
+        from generation.poi_selection import populate
+        populate(plan,authority,world,data,metrics)
     plan['reservations']=authority.rows
     from generation.settlement_context import semantics
     for settlement in plan['settlements']:
@@ -376,11 +379,11 @@ def validate_plan(plan,width,height):
 
 def _validate_plan(plan,width,height):
     """Durable structure/reference checks; never demand unmodified saved scene tiles."""
-    if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4'),(3,'wg5')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
+    if not isinstance(plan,dict) or type(plan.get('version')) is not int or (plan.get('version'),plan.get('generation_revision')) not in ((1,'wg3'),(2,'wg4'),(3,'wg5'),(4,'wg6')) or plan.get('mode')!=MODE: raise GenerationError('missing/corrupt required shared plan header')
     if plan['version']>=2 and plan.get('dependency_projection')!='structure-v1': raise GenerationError('dependency projection missing or unsupported')
     if plan.get('map_size')!=[W,H] or plan.get('world_size')!=[width,height]: raise GenerationError('G3 plan dimensions disagree')
     registries={}
-    for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations'):
+    for name in ('nodes','routes','waters','crossings','settlements','plots','placements','reservations')+(('sites',) if plan['version']>=4 else ()):
         rows=plan.get(name)
         if not isinstance(rows,list): raise GenerationError('missing G3 registry '+name)
         ids=[r.get('id') for r in rows if isinstance(r,dict)]
@@ -388,7 +391,7 @@ def _validate_plan(plan,width,height):
         registries[name]={r['id']:r for r in rows}
     from generation.plan_integrity import records
     records(plan,registries,width,height)
-    if plan['version']==3:
+    if plan['version']>=3:
         from generation.settlement_selection import validate_resolved
         validate_resolved(plan)
     def rect(r):
@@ -467,7 +470,12 @@ def _validate_plan(plan,width,height):
         for r in plan['routes']:
             if r['a'] in reached or r['b'] in reached: reached.update((r['a'],r['b']))
         if len(reached)==old: break
-    if any(n['required'] and n['id'] not in reached for n in plan['nodes']): raise GenerationError('G3 mandatory graph disconnected')
+    if any(n['required'] and n['id'] not in reached and n['id'] not in registries.get('sites',{}) for n in plan['nodes']): raise GenerationError('G3 mandatory graph disconnected')
+    if plan['version']>=4:
+        from generation.poi_selection import validate_resolved
+        from generation.road_network import PhysicalRoads
+        validate_resolved(plan,registries)
+        PhysicalRoads(plan).validate_destinations(plan)
     return True
 
 

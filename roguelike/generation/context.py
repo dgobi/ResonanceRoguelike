@@ -5,7 +5,7 @@ import hashlib
 import json
 import random
 
-GENERATION_REVISION = 'wg5'
+GENERATION_REVISION = 'wg6'
 LEGACY_REVISION = 'legacy-unversioned'
 
 

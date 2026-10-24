@@ -65,8 +65,10 @@ def records(plan, registries, width, height):
         pid=plot['id']; owner=plot['owner']; rectangle(plot['buildable'],pid)
         require(type(plot['required']) is bool and plot['normal'] in NORMALS and integer(plot['setback']) and plot['setback']>=0,pid,'invalid plot normal/required/setback')
         require(plot['road'] in registries['routes'],pid,'unknown plot road')
-        require(owner=='landmark' or owner in registries['settlements'],pid,'orphaned plot owner')
-        if owner!='landmark':require(listed_plots.get(pid)==owner,pid,'plot/settlement reverse ownership mismatch')
+        site=registries.get('sites',{}).get(owner)
+        require(owner=='landmark' or owner in registries['settlements'] or site is not None,pid,'orphaned plot owner')
+        if site is not None:require(site['plot']==pid and site['placement']==plot['placement'] and pid not in listed_plots,pid,'site reverse ownership mismatch')
+        elif owner!='landmark':require(listed_plots.get(pid)==owner,pid,'plot/settlement reverse ownership mismatch')
         else:require('landmark' in registries['nodes'] and pid not in listed_plots,pid,'invalid landmark owner')
         if plot['placement'] is not None:
             placement=registries['placements'].get(plot['placement'])
@@ -75,12 +77,14 @@ def records(plan, registries, width, height):
             placement_plots[placement['id']]=pid
             require(placement['road']==plot['road'] and placement['required']==plot['required'],pid,'placement/plot contract mismatch')
             chunk=(placement['origin'][0]//80,placement['origin'][1]//43)
-            if owner=='landmark':
+            if site is not None:
+                require(placement['context']=='landmark' and list(chunk)==site['chunk'],pid,'site membership mismatch')
+            elif owner=='landmark':
                 require(placement['context']=='landmark' and list(chunk)==registries['nodes']['landmark']['chunk'],pid,'landmark membership mismatch')
             else:
                 require(owners.get(chunk)==owner,pid,'placement outside owning settlement')
                 require(placement['context'] in (registries['settlements'][owner]['form'],'civic'),pid,'placement context disagrees with settlement')
-    require(set(listed_plots)=={p['id'] for p in plan['plots'] if p['owner']!='landmark'},'settlements','unknown or omitted owned plots')
+    require(set(listed_plots)=={p['id'] for p in plan['plots'] if p['owner'] in registries['settlements']},'settlements','unknown or omitted owned plots')
     require(set(placement_plots)==set(registries['placements']),'placements','orphaned placement without exactly one plot')
     for p in plan['placements']:
         pid=p['id']; require(integer(p['rotation']) and p['rotation'] in (0,90,180,270),pid,'unsupported rotation')
@@ -125,6 +129,11 @@ def world_membership(world):
         raise GenerationError('saved town registries disagree with settlement membership')
     actual={xy for xy,c in world.chunks.items() if c.region_type==RegionType.TOWN or c.town_id!=-1 or c.town_role}
     if actual!=set(expected): raise GenerationError('orphaned or omitted planned town Chunk')
+    if plan['version']>=4:
+        for site in plan['sites']:
+            c=world.get(*site['chunk'])
+            if c is None or c.region_type==RegionType.TOWN or c.town_data or c.submaps or c.is_capital or c.is_locus or c.is_river or c.biome_id not in plan['poi_policy']['locations']:
+                raise GenerationError(site['id']+': saved rural Chunk ownership/eligibility disagrees')
     for xy,i in expected.items():
         c=world.get(*xy); s=plan['settlements'][i]
         if c is None or c.region_type!=RegionType.TOWN or c.biome_id!='town' or type(c.town_id) is not int or c.town_id!=i:
