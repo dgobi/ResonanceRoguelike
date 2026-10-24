@@ -1,0 +1,28 @@
+{
+  "source_commit": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "scope": "Valid-shape authoring fixture with all target.required flags false; no installed data or campaign changes.",
+  "source_modified": false,
+  "personal_saves_used": false,
+  "asset": "roadside_shrine_a",
+  "fixture_targets": [
+    {
+      "x": 2,
+      "y": 1,
+      "kind": "container",
+      "required": false
+    }
+  ],
+  "compile_accepted": true,
+  "direct_preview_passed": true,
+  "assigned": {
+    "accepted": false,
+    "exception": "StopIteration",
+    "message": ""
+  },
+  "new_world": {
+    "accepted": false,
+    "exception": "StopIteration",
+    "message": "",
+    "world_unchanged": true
+  }
+}

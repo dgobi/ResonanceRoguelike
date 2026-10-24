@@ -1,0 +1,29 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 11
+{
+  "source_commit": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "plan_identity": "84096dede56eea096edd3a05ed116b09200874b212c1e4e99847d7acb67e9de3",
+  "visited": [
+    81,
+    34
+  ],
+  "pending": [
+    74,
+    34
+  ],
+  "mutation": {
+    "kind": "direct fixture mutation; not a player interaction",
+    "tile": [
+      2,
+      2,
+      "mud"
+    ],
+    "container": [
+      50,
+      29
+    ],
+    "before": 2,
+    "after": 1,
+    "taken": "pilgrims_woe_petals"
+  }
+}

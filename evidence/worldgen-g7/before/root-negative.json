@@ -1,0 +1,24 @@
+{
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g7\\before\\synthetic-outside-allowed\\job.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py\", line 86, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py\", line 17, in main\n    assert any(run.is_relative_to(base) and run!=base for base in allowed_roots)\nAssertionError\n",
+  "saves_before": {
+    "sentinel.txt": {
+      "bytes": 24,
+      "sha256": "ffd152fe4a98b7a0660820b17de135e9b43d003e25a43866b1345bdfa32b3aee"
+    }
+  },
+  "saves_after": {
+    "sentinel.txt": {
+      "bytes": 24,
+      "sha256": "ffd152fe4a98b7a0660820b17de135e9b43d003e25a43866b1345bdfa32b3aee"
+    }
+  },
+  "passed": true
+}

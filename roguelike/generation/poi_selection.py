@@ -13,6 +13,12 @@ FIELDS={'version','id','minimum','maximum','assets','repeat_multiplier','spacing
         'enumeration_limit','candidate_limit','fit_budget'}
 
 
+def require_usable_goal(raw,consumer):
+    """Connected parent/child selection needs a goal; generic layouts need not."""
+    if not any(t.get('required') is True for t in raw.get('placement',{}).get('targets',[])):
+        raise GenerationError(f'{raw.get("id", "unknown asset")}: {consumer} requires at least one required usable target; set required: true on a reachable placement.targets entry (optional targets may remain)')
+
+
 def validate(policy,data=None):
     def require(ok,message):
         if not ok:raise GenerationError('POI policy: '+message)
@@ -40,6 +46,7 @@ def validate(policy,data=None):
         if data is not None:
             raw=data.structures.get(aid);p=raw.get('placement',{}) if raw else {}
             require('landmark' in p.get('contexts',[]) and p.get('road_relation') in ('frontage','spur'),aid+': needs explicit connected landmark context')
+            require_usable_goal(raw,'additional rural-site candidate')
     require(sum(r['cap'] for r in policy['assets'])>=policy['minimum'],'eligible cap total cannot satisfy minimum')
     return policy
 

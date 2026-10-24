@@ -1,0 +1,10 @@
+{
+  "commit": "4d7a7892e1afffb8d872ed4a8fd442984d14e7d5",
+  "source_sha256": "8f962442ca2001e08eac882292702a2536acc7ec3a5e5d0d7403328fa97e8b37",
+  "source": "C:/Users/dango/Downloads/Resonance_G7_Codex_Brief.zip",
+  "branch": "main",
+  "remote": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "checkpoint": "checkpoint/worldgen-g7-start-20261024-a",
+  "status_before": "clean",
+  "capture_note": "Capture command exited 0 and produced an authentic G6 save. Generic receipt marked source_stable false because it discovered the new output fixtures; existing implementation inputs were unchanged. Original receipt retained."
+}
