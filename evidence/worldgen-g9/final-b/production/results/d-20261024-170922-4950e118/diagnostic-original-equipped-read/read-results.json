@@ -1,0 +1,55 @@
+{
+  "case": "equipped",
+  "phase": "read",
+  "pid": 14556,
+  "harness_completed": true,
+  "checks": [
+    {
+      "property": "saved inventory replaces starter or prior inventory",
+      "expected": [
+        "crude_blade",
+        "tallow_torch"
+      ],
+      "observed": [
+        "crude_blade",
+        "tallow_torch"
+      ],
+      "property_passed": true
+    },
+    {
+      "property": "equipped instances belong to restored inventory",
+      "expected": true,
+      "observed": true,
+      "property_passed": true
+    },
+    {
+      "property": "weapon relinks to restored blade",
+      "expected": "crude_blade",
+      "observed": "crude_blade",
+      "property_passed": true
+    }
+  ],
+  "after_load": {
+    "inventory": [
+      "crude_blade",
+      "tallow_torch"
+    ],
+    "slots": {
+      "weapon": "crude_blade",
+      "offhand": "tallow_torch",
+      "armor_head": null,
+      "armor_torso": null,
+      "armor_arms": null,
+      "armor_legs": null,
+      "belt_1": null,
+      "belt_2": null,
+      "belt_3": null,
+      "light": null,
+      "talisman_1": null,
+      "talisman_2": null,
+      "talisman_3": null,
+      "satchel": null
+    },
+    "all_equipped_owned": true
+  }
+}

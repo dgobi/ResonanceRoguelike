@@ -1,0 +1,14 @@
+{
+  "run_id": "d-20261024-170922-4950e118",
+  "suite": "b2",
+  "scenario": "journey",
+  "variant": "rain",
+  "phase": "read",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118\\b2-journey-rain-read\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118\\b2-journey-rain-read\\result.json",
+  "debug": false,
+  "expected": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118\\b2-journey-rain-write\\result.json"
+}

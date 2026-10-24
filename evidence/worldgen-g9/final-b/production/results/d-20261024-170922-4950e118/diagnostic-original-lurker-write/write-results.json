@@ -1,0 +1,91 @@
+{
+  "case": "lurker",
+  "phase": "write",
+  "pid": 30800,
+  "harness_completed": true,
+  "checks": [
+    {
+      "property": "hibernating creature serializes stable definition identity",
+      "expected": "stone_lurker",
+      "observed": "stone_lurker",
+      "property_passed": true
+    },
+    {
+      "property": "hibernating creature reconstructs with stable identity",
+      "expected": [
+        "stone_lurker"
+      ],
+      "observed": [
+        "stone_lurker"
+      ],
+      "property_passed": true
+    }
+  ],
+  "before": {
+    "stable_id": "stone_lurker",
+    "tile": "rock",
+    "hibernating": true
+  },
+  "serialized": {
+    "type": "actor",
+    "id": "stone_lurker",
+    "x": 60,
+    "y": 30,
+    "tile": "rock",
+    "name": "Stone Lurker",
+    "is_alive": true,
+    "blocks_movement": true,
+    "fighter": {
+      "hp": 28,
+      "max_hp": 28,
+      "power": 6,
+      "defense": 3,
+      "body_id": "body_human",
+      "effective_av": 6
+    },
+    "component_state": {
+      "version": 1,
+      "actor": {
+        "chilled_turns": 0,
+        "_sickness_turns": 0,
+        "_last_known_px": null,
+        "_last_known_py": null,
+        "_arrival_cooldown": 0,
+        "_just_arrived": false,
+        "_pending_stair_use": null,
+        "_ability_suppressed_turns": 0,
+        "_disrupted_turns": 0,
+        "_wraith_exposure_turns": 0,
+        "_surface_exit_x": null,
+        "_surface_exit_y": null,
+        "_surface_exit_wx": null,
+        "_surface_exit_wy": null
+      },
+      "ai": {
+        "target_x": null,
+        "target_y": null,
+        "memory_turns": 0,
+        "alert_memory": 10
+      }
+    },
+    "ai_type": "AmbushAI",
+    "ai_state": "waiting",
+    "home_x": 60,
+    "home_y": 30,
+    "pursuit_turns_without_contact": 0,
+    "move_accumulator": 0.0,
+    "faction": "predator",
+    "hostile_to": [
+      "player"
+    ],
+    "sight_radius": 5,
+    "hearing_radius": 4,
+    "sees_in_dark": true,
+    "wander_radius": 4,
+    "lurker": {
+      "hibernating": true,
+      "ambush_ready": false,
+      "ai_triggered": false
+    }
+  }
+}

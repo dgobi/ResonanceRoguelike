@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "catalogue correction and full second frozen sequence pending",
+  "status": "implementation and frozen verification complete; external publication/archive attestations identify delivery",
   "base_commit": "b94a0b0db3685f7484632701f0486f3b0b79101e",
   "source_of_authorization": "Explicit user request to execute attached brief in full; brief section 2 includes publication to existing main.",
   "owner_report": "docs/owner/WORLDGEN_G9.md",
@@ -8,7 +8,7 @@
     {
       "id": "G9-01",
       "result": "Preservation, guarded execution, genuine G8 witness and baseline",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "before/start.json",
         "before/witness/g8-witness.json",
@@ -19,15 +19,18 @@
     {
       "id": "G9-02",
       "result": "Portable wiki and accurate downloads",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
-        "wiki-correction/final-b/edition.json"
+        "wiki-correction/final/edition.json",
+        "wiki-product-checkout/before.json",
+        "wiki-product-checkout/after.json",
+        "wiki-delivery/edition.json"
       ]
     },
     {
       "id": "G9-03",
       "result": "Strict bounded policy and explicit optional outcomes",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/focused/results/g9-optional-outcomes.json",
         "final-b/authoring/results/workflows.json"
@@ -36,7 +39,7 @@
     {
       "id": "G9-04",
       "result": "Complete baseline preservation",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/diagnostic/results/run.json"
       ]
@@ -44,7 +47,7 @@
     {
       "id": "G9-05",
       "result": "Topology and fixed endpoint units",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/diagnostic/results/run.json",
         "final-b/focused/receipt.json"
@@ -53,7 +56,7 @@
     {
       "id": "G9-06",
       "result": "Determinism, marginal benefit and shared budgets",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/focused/results/g9-two-link-marginal-budget.json",
         "final-b/diagnostic/results/run.json"
@@ -62,7 +65,7 @@
     {
       "id": "G9-07",
       "result": "Required ordinary improvement and alternate corridor",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/diagnostic/results/run.json"
       ]
@@ -70,7 +73,7 @@
     {
       "id": "G9-08",
       "result": "Ownership, deck replay and touched scenes",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/focused/results/g9-real-deck-replay.json",
         "final-b/diagnostic/results/run.json",
@@ -80,7 +83,7 @@
     {
       "id": "G9-09",
       "result": "Current dispatch and inherited behavior",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/focused/results/g9-policy-combinations.json",
         "final-b/focused/receipt.json"
@@ -89,7 +92,7 @@
     {
       "id": "G9-10",
       "result": "Saved policy independence and genuine historical provenance",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/focused/results/g9-genuine-g8-restore.json",
         "final-b/focused/results/g9-late-rollback.json"
@@ -98,7 +101,7 @@
     {
       "id": "G9-11",
       "result": "Corruption and atomic rollback",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/focused/results/g9-checksum-corruptions.json",
         "final-b/focused/results/g9-late-rollback.json"
@@ -107,15 +110,17 @@
     {
       "id": "G9-12",
       "result": "Ordinary matrix, lazy planning and costs",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
-        "final-b/diagnostic/results/run.json"
+        "final-b/diagnostic/results/run.json",
+        "release-summary.json",
+        "cost-investigation/summary.json"
       ]
     },
     {
       "id": "G9-13",
       "result": "Real shortcut/original journeys and explored checkpoint",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/diagnostic/results/run.json"
       ]
@@ -123,7 +128,7 @@
     {
       "id": "G9-14",
       "result": "Safe new/inherited owner and editor workflows",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/authoring/results/workflows.json",
         "final-b/browser/receipt.json"
@@ -132,18 +137,25 @@
     {
       "id": "G9-15",
       "result": "Maintained edition and real reader downloads",
-      "status": "pending final frozen release",
+      "status": "passed",
       "evidence": [
         "final-b/wiki/results/edition.json",
-        "../../Resonance_Wiki_Maintenance/source-manifest.json"
+        "../../Resonance_Wiki_Maintenance/source-manifest.json",
+        "wiki-delivery/edition.json"
       ]
     },
     {
       "id": "G9-16",
       "result": "Frozen release, archive and publication",
-      "status": "pending final frozen release",
+      "status": "frozen gates passed; external publication and archive attestations required",
       "evidence": [
-        "final-b/release.json"
+        "final-b/release.json",
+        "omitted-disposable-saves.json",
+        "release-summary.json"
+      ],
+      "external_evidence": [
+        "publication.json at portable archive root",
+        "adjacent ZIP receipt identifying full archive and delivery commit"
       ]
     }
   ],
@@ -162,5 +174,12 @@
       "result": "Stopped at inherited stale-catalogue check after guard, 229 focused tests and both browsers passed",
       "repair": "catalog-repair/cause.json"
     }
-  ]
+  ],
+  "frozen_input_commit": "919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78",
+  "final_release": "final-b/release.json",
+  "release_summary": "release-summary.json",
+  "final_wiki_gate": "wiki-delivery/edition.json",
+  "omitted_saves": "omitted-disposable-saves.json",
+  "visual_review": "visual-review.json",
+  "external_delivery_contract": "Require publication.json passed=true with remote main and all checkpoint readbacks matching delivery_commit, plus adjacent ZIP receipt passed=true, inventory and CRC verified. These attestations complete G9-16 without a self-referential committed SHA."
 }

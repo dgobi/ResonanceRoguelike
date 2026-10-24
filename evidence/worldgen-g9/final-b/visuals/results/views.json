@@ -1,0 +1,108 @@
+{
+  "passed": true,
+  "views": [
+    {
+      "kind": "new-junction",
+      "chunk": [
+        38,
+        26
+      ],
+      "file": "0-new-junction-38-26.png",
+      "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+      "fingerprint": "8a6127c4ddd91b6f9c8e110fdeb169a9b5e87e10f92a69e9a9a194090989e8c8",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [
+          "road-3",
+          "road-4",
+          "network-shortcut-0"
+        ],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      },
+      "production_renderer": true,
+      "visibility": "explicit complete populated scene reveal",
+      "crossing_scope": null
+    },
+    {
+      "kind": "new-junction",
+      "chunk": [
+        85,
+        33
+      ],
+      "file": "1-new-junction-85-33.png",
+      "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+      "fingerprint": "b15bdb2237ceccad2f796878a5071415840a560d8915fca326fd1a58863c6484",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [
+          "road-6",
+          "network-shortcut-0"
+        ],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      },
+      "production_renderer": true,
+      "visibility": "explicit complete populated scene reveal",
+      "crossing_scope": null
+    },
+    {
+      "kind": "retained-crossing-approach",
+      "chunk": [
+        50,
+        101
+      ],
+      "file": "2-retained-crossing-approach-50-101.png",
+      "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+      "fingerprint": "9e58c72ba45d4f732ba6804175705547592d1ff41dcfe01236a29cabb772298a",
+      "provenance": {
+        "mode": "shared-v1",
+        "routes": [
+          "road-0",
+          "road-1",
+          "road-3",
+          "road-4"
+        ],
+        "crossings": [
+          "crossing-0",
+          "crossing-1",
+          "crossing-2",
+          "crossing-3",
+          "crossing-4",
+          "crossing-5",
+          "crossing-6",
+          "crossing-7"
+        ],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      },
+      "production_renderer": true,
+      "visibility": "explicit complete populated scene reveal",
+      "crossing_scope": "Existing required bridge; the ordinary accepted shortcut adds no crossing ownership rows"
+    }
+  ],
+  "inherited_towns": "towns/views.json"
+}

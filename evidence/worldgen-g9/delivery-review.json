@@ -1,0 +1,25 @@
+{
+  "frozen_input_commit": "919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78",
+  "unified_inputs_unchanged": true,
+  "input_count": 726,
+  "reviewed_final_source": "Same raw unified runtime/test/authoring input hashes as all ten frozen gates. Subsequent changes are owner report, evidence index/analysis/inventory, wiki authoring and its checkout-byte contract.",
+  "wiki_checkout_review": [
+    ".gitattributes",
+    "wiki_inputs.py",
+    "test_wiki_inputs.py",
+    "chapters/maintenance.md"
+  ],
+  "known_deferred": [
+    {
+      "case": "E04",
+      "id": "UI-TEXT-HEIGHT",
+      "scope": "UI",
+      "symptom": {
+        "text_id": "lab_label_sarcophagus",
+        "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+        "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+      }
+    }
+  ],
+  "scope": "No additional game feature or storage-engine changes; this records final documentation and evidence review."
+}

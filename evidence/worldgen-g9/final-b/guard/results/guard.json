@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "allowed": {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+      "--only",
+      "b1",
+      "--case",
+      "scenes/surface",
+      "--evidence",
+      "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\guard\\results\\allowed"
+    ],
+    "exit_code": 0,
+    "stdout": "b1-scenes-surface-write PASS \nb1-scenes-surface-read PASS \nb1-scenes-surface-same PASS \n{\"result\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g9\\\\final-b\\\\guard\\\\results\\\\allowed\\\\d-20261024-164130-d0e7c707\\\\results.json\", \"passed\": false, \"selected_tests_passed\": true, \"totals\": {\"checks\": 59, \"passed\": 59, \"failed\": 0, \"workers\": 3}}\n",
+    "stderr": "",
+    "workers": {
+      "checks": 59,
+      "passed": 59,
+      "failed": 0,
+      "workers": 3
+    }
+  },
+  "rejected": {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py",
+      "C:\\Users\\dango\\AppData\\Local\\Temp\\g7-synthetic-outside-guard-fzy5qqph\\job.json"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeProject\\roguelike",
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py\", line 86, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py\", line 17, in main\n    assert any(run.is_relative_to(base) and run!=base for base in allowed_roots)\nAssertionError\n",
+    "save_inventory_before": {
+      "sentinel.txt": {
+        "bytes": 30,
+        "sha256": "a4088bf6a8cdc75fbc74ec1ba1e45790b9be03bc14a0c7e6cb58a552343b1dcf"
+      }
+    },
+    "save_inventory_after": {
+      "sentinel.txt": {
+        "bytes": 30,
+        "sha256": "a4088bf6a8cdc75fbc74ec1ba1e45790b9be03bc14a0c7e6cb58a552343b1dcf"
+      }
+    },
+    "guard_before_game_save_access": true
+  }
+}

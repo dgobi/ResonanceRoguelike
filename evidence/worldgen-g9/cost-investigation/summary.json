@@ -1,0 +1,222 @@
+{
+  "profiles": [
+    {
+      "seed": 0,
+      "input_commit": "919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78",
+      "receipt": "seed-0/receipt.json",
+      "total_profiled_seconds": 9.79806219999997,
+      "functions": [
+        {
+          "file": "generation/network_metrics.py",
+          "line": 40,
+          "function": "distances",
+          "calls": 5,
+          "self_seconds": 2.2877929000000004,
+          "cumulative_seconds": 2.5473034
+        },
+        {
+          "file": "generation/network_metrics.py",
+          "line": 66,
+          "function": "topology",
+          "calls": 2,
+          "self_seconds": 0.1917677,
+          "cumulative_seconds": 0.27761430000000004
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 63,
+          "function": "search",
+          "calls": 8,
+          "self_seconds": 0.058133000000000004,
+          "cumulative_seconds": 0.12026690000000001
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 89,
+          "function": "check_geometry",
+          "calls": 2,
+          "self_seconds": 0.0659113,
+          "cumulative_seconds": 0.2088095
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 140,
+          "function": "augment",
+          "calls": 1,
+          "self_seconds": 0.0614651,
+          "cumulative_seconds": 3.5683321
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 206,
+          "function": "validate_resolved",
+          "calls": 2,
+          "self_seconds": 0.0001327,
+          "cumulative_seconds": 0.0575779
+        },
+        {
+          "file": "generation/world_gen.py",
+          "line": 58,
+          "function": "generate_world",
+          "calls": 1,
+          "self_seconds": 1e-05,
+          "cumulative_seconds": 6.825946500000001
+        },
+        {
+          "file": "generation/world_plan.py",
+          "line": 427,
+          "function": "validate_plan",
+          "calls": 5,
+          "self_seconds": 0.0046569,
+          "cumulative_seconds": 2.5014974000000003
+        }
+      ]
+    },
+    {
+      "seed": 20261023,
+      "input_commit": "919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78",
+      "receipt": "seed-20261023/receipt.json",
+      "total_profiled_seconds": 19.054828199999967,
+      "functions": [
+        {
+          "file": "generation/network_metrics.py",
+          "line": 40,
+          "function": "distances",
+          "calls": 9,
+          "self_seconds": 5.3188246,
+          "cumulative_seconds": 5.9355529
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 63,
+          "function": "search",
+          "calls": 8,
+          "self_seconds": 0.2131567,
+          "cumulative_seconds": 0.406127
+        },
+        {
+          "file": "generation/network_metrics.py",
+          "line": 66,
+          "function": "topology",
+          "calls": 2,
+          "self_seconds": 0.4572896,
+          "cumulative_seconds": 0.7192319
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 206,
+          "function": "validate_resolved",
+          "calls": 2,
+          "self_seconds": 0.09589950000000001,
+          "cumulative_seconds": 1.5154419000000001
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 89,
+          "function": "check_geometry",
+          "calls": 5,
+          "self_seconds": 0.34164880000000003,
+          "cumulative_seconds": 0.9491850000000001
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 140,
+          "function": "augment",
+          "calls": 1,
+          "self_seconds": 0.26181180000000004,
+          "cumulative_seconds": 8.0662426
+        },
+        {
+          "file": "generation/world_gen.py",
+          "line": 58,
+          "function": "generate_world",
+          "calls": 1,
+          "self_seconds": 1.16e-05,
+          "cumulative_seconds": 13.8795225
+        },
+        {
+          "file": "generation/world_plan.py",
+          "line": 427,
+          "function": "validate_plan",
+          "calls": 5,
+          "self_seconds": 0.005216,
+          "cumulative_seconds": 6.414666700000001
+        }
+      ]
+    },
+    {
+      "seed": 29417,
+      "input_commit": "919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78",
+      "receipt": "seed-29417/receipt.json",
+      "total_profiled_seconds": 12.268238999999964,
+      "functions": [
+        {
+          "file": "generation/network_metrics.py",
+          "line": 40,
+          "function": "distances",
+          "calls": 7,
+          "self_seconds": 3.1770199000000003,
+          "cumulative_seconds": 3.5604419000000003
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 140,
+          "function": "augment",
+          "calls": 1,
+          "self_seconds": 0.0572657,
+          "cumulative_seconds": 6.0057594000000005
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 63,
+          "function": "search",
+          "calls": 8,
+          "self_seconds": 0.0520933,
+          "cumulative_seconds": 0.1147475
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 206,
+          "function": "validate_resolved",
+          "calls": 2,
+          "self_seconds": 0.00014910000000000002,
+          "cumulative_seconds": 0.0636434
+        },
+        {
+          "file": "generation/country_network.py",
+          "line": 89,
+          "function": "check_geometry",
+          "calls": 4,
+          "self_seconds": 0.11834810000000001,
+          "cumulative_seconds": 0.3555046
+        },
+        {
+          "file": "generation/network_metrics.py",
+          "line": 66,
+          "function": "topology",
+          "calls": 2,
+          "self_seconds": 0.1710518,
+          "cumulative_seconds": 0.2555639
+        },
+        {
+          "file": "generation/world_gen.py",
+          "line": 58,
+          "function": "generate_world",
+          "calls": 1,
+          "self_seconds": 1.2400000000000002e-05,
+          "cumulative_seconds": 9.443756200000001
+        },
+        {
+          "file": "generation/world_plan.py",
+          "line": 427,
+          "function": "validate_plan",
+          "calls": 7,
+          "self_seconds": 0.0043733,
+          "cumulative_seconds": 3.7940184
+        }
+      ]
+    }
+  ],
+  "scope": "Three serial existing network-preview CLI invocations under Python cProfile after the complete release. Instrumentation adds overhead. Inclusive/cumulative function times overlap and must not be summed. CLI includes planning, validation, graph reporting and image export; use final-b diagnostic for unprofiled planning wall time.",
+  "finding": "Physical distance evaluation and normal plan validation dominate the instrumented CLI; bounded macro search is a smaller share. This investigates the material planning increase without changing frozen runtime inputs."
+}

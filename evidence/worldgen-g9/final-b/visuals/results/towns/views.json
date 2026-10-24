@@ -1,0 +1,782 @@
+{
+  "passed": true,
+  "views": [
+    {
+      "layout": "cross-market",
+      "seed": 20261023,
+      "plan_identity": "b8d41e1f2837eb206a000f87f5a10c75d8ffd7180b7b5129f517c6ee6aa87d01",
+      "members": [
+        [
+          75,
+          99
+        ],
+        [
+          75,
+          100
+        ],
+        [
+          76,
+          99
+        ],
+        [
+          76,
+          100
+        ]
+      ],
+      "normals": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "production_renderer": true,
+      "visibility": "controlled reveal of entire populated scene",
+      "selection_control": "grid optional schedule residential/commercial, installed assets; roadside ordinary policy",
+      "plan": {
+        "id": "settlement-0",
+        "form": "grid",
+        "bounds": [
+          6000,
+          4257,
+          6160,
+          4343
+        ],
+        "members": [
+          [
+            75,
+            99
+          ],
+          [
+            75,
+            100
+          ],
+          [
+            76,
+            99
+          ],
+          [
+            76,
+            100
+          ]
+        ],
+        "incoming": "road-2",
+        "streets": [
+          "settlement-0-street-east-west-0",
+          "settlement-0-street-east-west-1",
+          "settlement-0-street-north-south-0",
+          "settlement-0-street-north-south-1"
+        ],
+        "plots": [
+          "settlement-0-cross-market-lot-civic",
+          "settlement-0-cross-market-lot-81-3-S-0",
+          "settlement-0-cross-market-lot-1-1-S-0",
+          "settlement-0-cross-market-lot-1-23-N-0",
+          "settlement-0-cross-market-lot-42-23-W-0",
+          "settlement-0-cross-market-lot-1-44-S-0",
+          "settlement-0-cross-market-lot-1-66-N-0",
+          "settlement-0-cross-market-lot-42-44-W-0",
+          "settlement-0-cross-market-lot-42-66-N-0",
+          "settlement-0-cross-market-lot-81-3-S-1",
+          "settlement-0-cross-market-lot-81-23-E-0",
+          "settlement-0-cross-market-lot-81-66-N-0",
+          "settlement-0-cross-market-lot-122-23-N-0",
+          "settlement-0-cross-market-lot-122-3-S-0",
+          "settlement-0-cross-market-lot-81-44-E-0",
+          "settlement-0-cross-market-lot-81-66-N-1",
+          "settlement-0-cross-market-lot-122-44-S-0",
+          "settlement-0-cross-market-lot-122-66-N-0"
+        ],
+        "civic": {
+          "placement": "settlement-0-cross-market-lot-civic-building",
+          "bell_state": "spent",
+          "common": "settlement-0-common-bell-common"
+        },
+        "layout": {
+          "id": "cross-market",
+          "version": 1,
+          "signature": "6632e9eb9b337a33bf6cdd42ca22547e39ea1e48e653b31a376d0bc65c39f1ba",
+          "frontage_tiles": 18,
+          "minimum_depth": 10,
+          "junction_clearance": 2
+        },
+        "arrival": {
+          "road": "road-2",
+          "segment": 25,
+          "position": [
+            6000,
+            4278
+          ],
+          "direction": "E"
+        },
+        "blocks": [
+          "settlement-0-block-civic",
+          "settlement-0-block-1-1",
+          "settlement-0-block-1-23",
+          "settlement-0-block-1-44",
+          "settlement-0-block-1-63",
+          "settlement-0-block-1-66",
+          "settlement-0-block-1-83",
+          "settlement-0-block-42-1",
+          "settlement-0-block-42-23",
+          "settlement-0-block-42-44",
+          "settlement-0-block-42-66",
+          "settlement-0-block-81-1",
+          "settlement-0-block-81-3",
+          "settlement-0-block-81-23",
+          "settlement-0-block-81-44",
+          "settlement-0-block-81-66",
+          "settlement-0-block-81-83",
+          "settlement-0-block-122-3",
+          "settlement-0-block-122-23",
+          "settlement-0-block-122-44",
+          "settlement-0-block-122-66",
+          "settlement-0-block-157-63"
+        ],
+        "commons": [
+          "settlement-0-common-bell-common"
+        ],
+        "selection_profile": "grid-mixed-v1",
+        "composition_work": {
+          "required_trials": 3,
+          "optional_trials": 17,
+          "candidate_lots": 18,
+          "budget": 256,
+          "alternatives": 1,
+          "rejected": []
+        },
+        "semantics": {
+          "policy": "native-town-v1",
+          "name": "Irncaster",
+          "members": [
+            {
+              "chunk": [
+                75,
+                99
+              ],
+              "role": "civic",
+              "district": "bell_quarter",
+              "waystone": true,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.28313437565261185,
+              "resonance": 0.3581283556288908
+            },
+            {
+              "chunk": [
+                75,
+                100
+              ],
+              "role": "residential",
+              "district": "residential",
+              "waystone": false,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.2767130440916904,
+              "resonance": 0.35443465378212013
+            },
+            {
+              "chunk": [
+                76,
+                99
+              ],
+              "role": "residential",
+              "district": "residential",
+              "waystone": false,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.28102804620040267,
+              "resonance": 0.35692136224428456
+            },
+            {
+              "chunk": [
+                76,
+                100
+              ],
+              "role": "residential",
+              "district": "residential",
+              "waystone": false,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.27468287807698777,
+              "resonance": 0.3532580389765763
+            }
+          ]
+        }
+      }
+    },
+    {
+      "layout": "linked-courts",
+      "seed": 20261023,
+      "plan_identity": "6f6dba1a234762b0554ae83b9755109f58af5a53feb8c9bf12f364acc5d80ba5",
+      "members": [
+        [
+          75,
+          99
+        ],
+        [
+          75,
+          100
+        ],
+        [
+          76,
+          99
+        ],
+        [
+          76,
+          100
+        ]
+      ],
+      "normals": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "production_renderer": true,
+      "visibility": "controlled reveal of entire populated scene",
+      "selection_control": "grid optional schedule residential/commercial, installed assets; roadside ordinary policy",
+      "plan": {
+        "id": "settlement-0",
+        "form": "grid",
+        "bounds": [
+          6000,
+          4257,
+          6160,
+          4343
+        ],
+        "members": [
+          [
+            75,
+            99
+          ],
+          [
+            75,
+            100
+          ],
+          [
+            76,
+            99
+          ],
+          [
+            76,
+            100
+          ]
+        ],
+        "incoming": "road-2",
+        "streets": [
+          "settlement-0-street-court-link",
+          "settlement-0-street-east-west-0",
+          "settlement-0-street-east-west-1",
+          "settlement-0-street-north-south-0",
+          "settlement-0-street-north-south-1"
+        ],
+        "plots": [
+          "settlement-0-linked-courts-lot-civic",
+          "settlement-0-linked-courts-lot-42-1-S-1",
+          "settlement-0-linked-courts-lot-1-23-N-0",
+          "settlement-0-linked-courts-lot-1-3-S-0",
+          "settlement-0-linked-courts-lot-42-1-S-0",
+          "settlement-0-linked-courts-lot-1-44-S-0",
+          "settlement-0-linked-courts-lot-1-66-N-0",
+          "settlement-0-linked-courts-lot-26-23-S-0",
+          "settlement-0-linked-courts-lot-26-45-N-0",
+          "settlement-0-linked-courts-lot-26-66-N-0",
+          "settlement-0-linked-courts-lot-26-45-N-1",
+          "settlement-0-linked-courts-lot-81-3-S-0",
+          "settlement-0-linked-courts-lot-26-66-N-1",
+          "settlement-0-linked-courts-lot-106-23-W-0",
+          "settlement-0-linked-courts-lot-81-23-E-0",
+          "settlement-0-linked-courts-lot-106-3-S-0",
+          "settlement-0-linked-courts-lot-81-66-N-0",
+          "settlement-0-linked-courts-lot-81-45-E-0",
+          "settlement-0-linked-courts-lot-106-3-S-1",
+          "settlement-0-linked-courts-lot-106-44-S-0",
+          "settlement-0-linked-courts-lot-106-66-N-0",
+          "settlement-0-linked-courts-lot-106-44-S-1",
+          "settlement-0-linked-courts-lot-106-66-N-1"
+        ],
+        "civic": {
+          "placement": "settlement-0-linked-courts-lot-civic-building",
+          "bell_state": "spent",
+          "common": "settlement-0-common-bell-common"
+        },
+        "layout": {
+          "id": "linked-courts",
+          "version": 1,
+          "signature": "59e1eb052308dd7920288763a4f25c10b7d470a2670d45649ae92a3cb4361ad9",
+          "frontage_tiles": 18,
+          "minimum_depth": 10,
+          "junction_clearance": 2
+        },
+        "arrival": {
+          "road": "road-2",
+          "segment": 25,
+          "position": [
+            6000,
+            4278
+          ],
+          "direction": "E"
+        },
+        "blocks": [
+          "settlement-0-block-civic",
+          "settlement-0-block-1-1",
+          "settlement-0-block-1-3",
+          "settlement-0-block-1-23",
+          "settlement-0-block-1-44",
+          "settlement-0-block-1-63",
+          "settlement-0-block-1-66",
+          "settlement-0-block-1-83",
+          "settlement-0-block-26-3",
+          "settlement-0-block-26-23",
+          "settlement-0-block-26-45",
+          "settlement-0-block-26-66",
+          "settlement-0-block-42-1",
+          "settlement-0-block-81-1",
+          "settlement-0-block-81-3",
+          "settlement-0-block-81-23",
+          "settlement-0-block-81-45",
+          "settlement-0-block-81-66",
+          "settlement-0-block-81-83",
+          "settlement-0-block-106-3",
+          "settlement-0-block-106-23",
+          "settlement-0-block-106-44",
+          "settlement-0-block-106-66",
+          "settlement-0-block-157-63"
+        ],
+        "commons": [
+          "settlement-0-common-bell-common"
+        ],
+        "selection_profile": "grid-mixed-v1",
+        "composition_work": {
+          "required_trials": 3,
+          "optional_trials": 26,
+          "candidate_lots": 23,
+          "budget": 256,
+          "alternatives": 1,
+          "rejected": []
+        },
+        "semantics": {
+          "policy": "native-town-v1",
+          "name": "Irncaster",
+          "members": [
+            {
+              "chunk": [
+                75,
+                99
+              ],
+              "role": "civic",
+              "district": "bell_quarter",
+              "waystone": true,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.28313437565261185,
+              "resonance": 0.3581283556288908
+            },
+            {
+              "chunk": [
+                75,
+                100
+              ],
+              "role": "residential",
+              "district": "residential",
+              "waystone": false,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.2767130440916904,
+              "resonance": 0.35443465378212013
+            },
+            {
+              "chunk": [
+                76,
+                99
+              ],
+              "role": "residential",
+              "district": "residential",
+              "waystone": false,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.28102804620040267,
+              "resonance": 0.35692136224428456
+            },
+            {
+              "chunk": [
+                76,
+                100
+              ],
+              "role": "residential",
+              "district": "residential",
+              "waystone": false,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.27468287807698777,
+              "resonance": 0.3532580389765763
+            }
+          ]
+        }
+      }
+    },
+    {
+      "layout": "roadside",
+      "seed": 20261023,
+      "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+      "members": [
+        [
+          39,
+          26
+        ],
+        [
+          40,
+          26
+        ]
+      ],
+      "normals": [
+        "N",
+        "S"
+      ],
+      "production_renderer": true,
+      "visibility": "controlled reveal of entire populated scene",
+      "selection_control": "grid optional schedule residential/commercial, installed assets; roadside ordinary policy",
+      "plan": {
+        "id": "settlement-1",
+        "form": "roadside",
+        "bounds": [
+          3120,
+          1118,
+          3280,
+          1161
+        ],
+        "members": [
+          [
+            39,
+            26
+          ],
+          [
+            40,
+            26
+          ]
+        ],
+        "incoming": "road-4",
+        "streets": [
+          "road-4"
+        ],
+        "plots": [
+          "settlement-1-country-frontage-lot-1-1-S-0",
+          "settlement-1-country-frontage-lot-1-23-N-0",
+          "settlement-1-country-frontage-lot-1-1-S-1",
+          "settlement-1-country-frontage-lot-1-23-N-1",
+          "settlement-1-country-frontage-lot-81-1-S-0",
+          "settlement-1-country-frontage-lot-81-23-N-0",
+          "settlement-1-country-frontage-lot-81-1-S-1",
+          "settlement-1-country-frontage-lot-81-23-N-1"
+        ],
+        "civic": null,
+        "layout": {
+          "id": "country-frontage",
+          "version": 1,
+          "signature": "a472453de50e9e6f12e6336c4bbecd81730aeed96893cac454f62f5057e2890c",
+          "frontage_tiles": 18,
+          "minimum_depth": 10,
+          "junction_clearance": 3
+        },
+        "arrival": {
+          "road": "road-3",
+          "segment": 176,
+          "position": [
+            3120,
+            1139
+          ],
+          "direction": "E"
+        },
+        "blocks": [
+          "settlement-1-block-1-1",
+          "settlement-1-block-1-23",
+          "settlement-1-block-81-1",
+          "settlement-1-block-81-23",
+          "settlement-1-block-122-20"
+        ],
+        "commons": [],
+        "selection_profile": "roadside-mixed-v1",
+        "composition_work": {
+          "required_trials": 2,
+          "optional_trials": 6,
+          "candidate_lots": 8,
+          "budget": 256,
+          "alternatives": 1,
+          "rejected": []
+        },
+        "semantics": {
+          "policy": "native-town-v1",
+          "name": "Ormfield",
+          "members": [
+            {
+              "chunk": [
+                39,
+                26
+              ],
+              "role": "market",
+              "district": "market_quarter",
+              "waystone": false,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.22674608127637016,
+              "resonance": 0.32410507148042544
+            },
+            {
+              "chunk": [
+                40,
+                26
+              ],
+              "role": "residential",
+              "district": "residential",
+              "waystone": false,
+              "zones": [
+                [
+                  "hearth",
+                  0.45
+                ],
+                [
+                  "market",
+                  0.2
+                ],
+                [
+                  "sanctum",
+                  0.15
+                ],
+                [
+                  "gate_ward",
+                  0.1
+                ],
+                [
+                  "pale_quarter",
+                  0.05
+                ],
+                [
+                  "undercroft",
+                  0.05
+                ]
+              ],
+              "difficulty": 0.23003986310102997,
+              "resonance": 0.3262004061336017
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

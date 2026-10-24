@@ -1,0 +1,17 @@
+{
+  "reason": "Two early guard-test disposable save sentinels were tracked before the task-local exclusion. Remove their index entries only; keep local bytes and preserve hash evidence. They are not historical compatibility fixtures or personal campaigns.",
+  "files": [
+    {
+      "path": "evidence/worldgen-g9/before/guard-original/allowed/d-20261024-152630-36183e0e/b1-scenes-surface-same/saves/slot_0/world.json",
+      "bytes": 24,
+      "sha256": "04719b689e72eab01f807fd2dd74748c842208f6cc130ad04fdba842ca8a89ca",
+      "git_blob": "804df3b1c80ec0ec586ee82c9099c4dc6187d08d"
+    },
+    {
+      "path": "evidence/worldgen-g9/before/guard-original/allowed/d-20261024-152630-36183e0e/b1-scenes-surface-write/saves/slot_0/world.json",
+      "bytes": 24,
+      "sha256": "04719b689e72eab01f807fd2dd74748c842208f6cc130ad04fdba842ca8a89ca",
+      "git_blob": "804df3b1c80ec0ec586ee82c9099c4dc6187d08d"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "stamped": [
+    "bell_tower_a",
+    "house_two_room_a",
+    "tool_shed_a",
+    "house_small_a"
+  ],
+  "common_pass_then_late_obstruction": true,
+  "world_player_rng_active_cache_head_unchanged": true,
+  "recovered": true,
+  "removed_layout_and_selection_usable": true,
+  "public_surface_dependency_affected_only": true
+}

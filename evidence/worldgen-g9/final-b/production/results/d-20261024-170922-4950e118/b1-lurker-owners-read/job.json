@@ -1,0 +1,14 @@
+{
+  "run_id": "d-20261024-170922-4950e118",
+  "suite": "b1",
+  "scenario": "lurker",
+  "variant": "owners",
+  "phase": "read",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118\\b1-lurker-owners-read\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118\\b1-lurker-owners-read\\result.json",
+  "debug": false,
+  "expected": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118\\b1-lurker-owners-write\\result.json"
+}

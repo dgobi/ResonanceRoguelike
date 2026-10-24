@@ -4,7 +4,7 @@ G9 preserves the complete G8 world and adds up to two optional country connectio
 The ordinary required pair, settlement-1 to capital-gateway on seed 20261023,
 improves from **23,625 to 8,063 four-neighbour physical steps (65.87%)**.
 The accepted settlement-1/settlement-3 connection adds **5,265 / 24,631 unique
-country-centerline edges (21.37%)**, below the shared 25% cap. No physical bridge
+country-centerline edges (21.38%)**, below the shared 25% cap. No physical bridge
 cells are added. Seeds 0 and 29417 honestly add no qualifying connection.
 
 ## Delivery and source
@@ -19,7 +19,9 @@ inventory and exact extracted instructions remain under `evidence/worldgen-g9/be
 Implementation checkpoints separate wiki correction, planning, lifecycle and owner
 workflows. The final input commit and final gate status are recorded in
 `evidence/worldgen-g9/index.json`; release completion is not inferred from earlier
-partial development runs. This report is being completed alongside release validation.
+partial development runs. All ten gates passed against frozen commit `919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78`
+and `checkpoint/worldgen-g9-final-inputs-20261024-b`. The final documentation
+and evidence delivery preserves those exact unified inputs.
 
 ## Runtime and owner contract
 
@@ -126,9 +128,10 @@ revision, BOM and trailing newline. Raw hashes/sizes remain provenance; binary i
 Downloads separately advertise their actual UTF-8/LF/no-BOM payload hashes/sizes.
 Both Chromium and Firefox download and hash actual files, including the G9 draft.
 
-Five wiki contract tests cover equivalent newlines, substantive/binary changes,
+Six wiki contract tests cover equivalent newlines, substantive/binary changes,
 changed/missing/added helper inputs, stale HTML, repeat builds and later docs-only
-commits. All root verification helpers, contract tests, chapters, examples and
+commits, plus exact Git checkout product bytes and changed/missing checkout-policy
+negatives. All root verification helpers, contract tests, chapters, examples and
 consumed source are bound. Dependency/browser versions are execution evidence,
 not inventories of installations. No silent repinning or disabled comparisons.
 
@@ -159,9 +162,10 @@ development runs; original attempts remain under their named directories.
 Paths beginning `before/`, `final-b/` or `wiki-correction/` are inside
 `evidence/worldgen-g9/`. The portable archive excludes personal campaigns,
 dependencies, browser profiles, disposable worker saves and a redundant checkout.
-Intentional historical compatibility ZIP fixtures are retained. Exact omission
-inventory and publication readback accompany the final archive outside any
-self-referential committed metadata.
+Intentional historical compatibility ZIP fixtures are retained. The exact omission
+inventory is `omitted-disposable-saves.json`. The ZIP contains external
+`publication.json` main/tag readback, and its adjacent receipt identifies the
+whole archive; neither requires a self-referential committed delivery SHA.
 
 ## First frozen attempt and catalogue correction
 
@@ -179,3 +183,125 @@ cap. The G9 release now explicitly requests a finite 1800-second focused child a
 at 1500. Historical focused defaults remain 1200. No tests or admission criteria are
 removed. Because unified inputs changed, `final-b/` restarts every release gate from
 the guard. This is a full rerun, not reuse of the earlier passing receipts.
+
+
+## Final verification and delivery evidence
+
+`release-summary.json` condenses the raw receipts; `final-b/release.json` binds the
+complete ten-gate sequence to the immutable input commit above. Every gate exited
+zero, retained stable source and reconciled committed inputs, with no timeout.
+The focused parent had no inherited `PYTHONPATH`; discovery ran all **229 tests**.
+Both editor engines passed **42 checks each**, including actual exported-file
+consumers. Authoring counts are kept separate: **5 G9**, **6 G8**, **6 G7** top-level
+workflows at their respective levels, with inherited G6/G5 command records retained.
+The unfiltered production gate passed **3,675 checks across 159 workers**.
+Its existing `E04 / UI-TEXT-HEIGHT` long-label rendering deferral remains explicitly
+recorded; it is outside this country-network arc and is not represented as fixed.
+
+| Frozen gate | Seconds |
+|---|---:|
+| guard | 12.77 |
+| focused | 816.53 |
+| browser | 99.79 |
+| authoring | 195.16 |
+| catalog | 0.33 |
+| catalog-check | 0.33 |
+| diagnostic | 462.80 |
+| visuals | 31.39 |
+| wiki | 46.69 |
+| production | 742.98 |
+
+The final production views were inspected for connected junctions, misleading
+near-contacts, parallel strips and bridge continuity. `visual-review.json` records
+exact hashes and scope: two ordinary junctions, the retained required bridge,
+controlled G8 towns/common and the network overlay. These are revealed production
+views; the actual journey supplies traversal evidence.
+
+## Measured costs on this machine
+
+Planning below runs the preserved G8 settings and G9 serially on each unchanged
+ordinary seed. Network augmentation is part of G9 planning, while diagnostic graph
+analysis is additional reporting work. Values are seconds, not frame-rate targets.
+
+| Seed | G8 planning | G9 planning | Network augmentation | Diagnostic graph |
+|---|---:|---:|---:|---:|
+| 0 | 1.080 | 2.789 | 1.465 | 0.700 |
+| 20261023 | 1.732 | 5.953 | 3.552 | 1.654 |
+| 29417 | 1.305 | 4.197 | 2.580 | 0.685 |
+
+The planning increase is material. Three supplementary serial invocations of the
+existing preview CLI under `cProfile` investigate it in `cost-investigation/`.
+For seed 20261023 the instrumented CLI spends 0.406 seconds cumulatively in its
+eight network searches, 5.936 seconds in physical-distance evaluation, and 6.415
+seconds in normal plan validation. These inclusive times overlap and include
+preview/report work; profiler overhead makes them unsuitable as replacement wall
+timings. The evidence points to exact graph evaluation and validation as larger
+costs than macro search. The earlier water-rectangle index optimization preserves
+exact comparisons; no further runtime optimization or cache/storage work is hidden
+in this documentation delivery.
+
+| Seed | Compact baseline plan bytes | Compact G9 plan bytes | Resolved network subtree bytes |
+|---|---:|---:|---:|
+| 0 | 598,641 | 601,725 | 3,045 |
+| 20261023 | 709,155 | 736,954 | 3,163 |
+| 29417 | 659,676 | 662,752 | 3,037 |
+
+Every plan subtree's compact JSON size is in the diagnostic. Scene timings cover
+15, 18 and 18 required ordinary scenes, plus all 86 shortcut-touched scenes for
+20261023; these scopes can overlap and are not a sum of unique campaign scenes.
+All planning completions have zero materialized scenes. Each ordinary world examines
+8 candidate pairs, leaving 7, 13 and 13 unexamined respectively; no-road results
+mean no qualifying candidate within the declared finite selection/search policy.
+
+| Journey scope | Movement inputs | Checkpoint scenes | Checkpoint bytes | F5 seconds | Cold load seconds | F9 seconds | Worst boundary seconds |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Pre-edit G8 coverage | 38,805 | 354 | 195,744,304 | 11.717 | 6.316 | 6.946 | 0.458 |
+| Expanded G9 coverage | 107,749 | 470 | 254,086,073 | 12.633 | 9.683 | 9.810 | 0.474 |
+
+The complete G9 journey walks more routes and retains more scenes. Its larger
+checkpoint is a coverage cost, not a storage improvement. The earlier G8 timing
+has the disclosed lightweight documentation-check overlap; G9 final gates are
+serial. Cold load and F9 validate the actually explored checkpoint and its saved
+surface fingerprints, common state and independent compound contents.
+
+The comparable fixed pair is walked with the same real handlers over the preserved
+original geometry and the augmented union in G9-created scenes:
+
+| Itinerary | Physical steps / movement inputs | Boundary inputs | New scenes on this leg | Seconds |
+|---|---:|---:|---:|---:|
+| Original outbound | 23,625 / 23,625 | 382 | 47 | 79.023 |
+| Augmented return | 8,063 / 8,063 | 130 | 0 | 18.069 |
+
+The return uses already visited scenes, so elapsed-time ratios are not a cold-route
+speedup claim. Independently, the complete accepted route is walked forward and
+backward with 5,505 movement inputs and 85 boundary inputs each; the surviving
+original accepted-pair corridor uses 20,741 inputs and 333 boundaries.
+
+## Portable product and final archive contract
+
+A read-only Git filter check found that `core.autocrlf=true` could transform the
+compiled HTML despite its exact product hash. `wiki-product-checkout/before.json`
+preserves that failure. The scoped wiki `.gitattributes` now preserves the generated
+HTML bytes under `false`, `true` and `input`; its policy is a bound authoring input,
+and the sixth contract test rejects a missing or changed policy. This leaves stale
+HTML detection byte-exact. Source/chapter newline equivalence remains unchanged.
+The final full documentation gate is retained under `wiki-delivery/`; its reviewed
+source commit is in `wiki-config.json`, separate from frozen game inputs and products.
+
+`omitted-disposable-saves.json` inventories 2,299 retained disposable files totaling
+4,113,359,306 bytes under the task evidence root. Two early guard sentinels were
+removed from Git tracking while preserving local bytes and their hashes in
+`omission-correction.json`. Cleaned temporary sessions are described separately;
+file absence is never treated as test success. Personal campaigns and dependency
+or browser-profile directories were not inspected or bundled. Genuine historical
+save fixtures remain intentionally included.
+
+The portable ZIP includes this report, the sixteen-row machine-readable index,
+raw evidence and original brief, baseline/augmented plans, views, the editable wiki
+and standalone HTML, historical fixtures, and a binary source patch against the
+reviewed G8 commit. It excludes a redundant full checkout. `MANIFEST.json` records
+each other member's size, SHA-256 and CRC32. The adjacent external ZIP receipt
+checks the whole archive; `publication.json` supplies remote main/tag readback.
+Completion of publication/archive delivery is established by those external
+attestations matching the delivered commit, rather than a self-referential hash in
+this committed report. The verified tag is `checkpoint/worldgen-g9-verified-20261024-a`.

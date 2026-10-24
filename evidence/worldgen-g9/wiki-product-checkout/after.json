@@ -1,0 +1,18 @@
+{
+  "method": "Real committed HTML read through Git checkout filters with the new scoped attribute; no checkout created.",
+  "filters": [
+    {
+      "core_autocrlf": "false",
+      "exact_committed_bytes": true
+    },
+    {
+      "core_autocrlf": "true",
+      "exact_committed_bytes": true
+    },
+    {
+      "core_autocrlf": "input",
+      "exact_committed_bytes": true
+    }
+  ],
+  "passed": true
+}

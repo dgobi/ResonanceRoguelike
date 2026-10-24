@@ -1,0 +1,13 @@
+{
+  "run_id": "d-20261024-170922-4950e118",
+  "suite": "c",
+  "scenario": "contract",
+  "variant": "containers",
+  "phase": "same",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118\\c-contract-containers-same\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results\\d-20261024-170922-4950e118\\c-contract-containers-same\\result.json",
+  "debug": false
+}

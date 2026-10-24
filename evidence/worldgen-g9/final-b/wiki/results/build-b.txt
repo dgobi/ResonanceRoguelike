@@ -1,0 +1,11 @@
+{
+  "commit": "67263f03ec02f44857a707cdbba772d1481787a1",
+  "documentation_delivery_revision": "919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78",
+  "article_count": 112,
+  "data_files": 373,
+  "source_documents": 58,
+  "guide_chapters": 33,
+  "search_records": 468,
+  "output_bytes": 5550114,
+  "output_sha256": "2bfdc3482a21fb5088250a2bba4c4ac339c0ab6ae0e5e38e05c27a218fec2950"
+}

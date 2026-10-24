@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "assets": 64,
+  "diagnostics": 238,
+  "output": "evidence\\worldgen-g9\\cost-investigation\\seed-20261023\\preview.json",
+  "previews": 0,
+  "registration": false,
+  "status": "augmented"
+}

@@ -1,0 +1,57 @@
+{
+  "scope": "Assistant visual inspection of final ordinary junctions, retained bridge, linked-courts mosaic, network overlay and desktop/mobile reader. Cross-market and roadside final mosaics are byte-identical to the inspected finishing-development versions.",
+  "findings": [
+    "Both new junctions are continuous T joins with no unnecessary parallel strips or misleading separated contacts.",
+    "Existing bridge approaches and deck remain continuous; ordinary shortcut adds no bridge or crossing ownership rows.",
+    "Town/common mosaic retains connected orthogonal streets and populated buildings; mosaic headers are presentation separators, not terrain gaps.",
+    "Network overlay distinguishes gold baseline, green connection and blue waterways; endpoint labels remain readable.",
+    "Desktop and mobile reader layouts remain legible with navigation and copy controls."
+  ],
+  "files": [
+    {
+      "path": "final-b/visuals/results/0-new-junction-38-26.png",
+      "bytes": 79550,
+      "sha256": "2820118b4fec968211ef35799dcc505b3bf99fec36e558de9a464d611bedd984"
+    },
+    {
+      "path": "final-b/visuals/results/1-new-junction-85-33.png",
+      "bytes": 99625,
+      "sha256": "fa338ee3ed3e25df5bc12b96937e2945dcd66555de6a2f58d1119e8978d82c8e"
+    },
+    {
+      "path": "final-b/visuals/results/2-retained-crossing-approach-50-101.png",
+      "bytes": 90211,
+      "sha256": "5b939351f72dfd8734a604cae3847d57c648236b4a1cf31785697422b93a39b0"
+    },
+    {
+      "path": "final-b/visuals/results/towns/linked-courts-complete.png",
+      "bytes": 287844,
+      "sha256": "c35116e2870323e670525c490656d3e18a62b0fd8bc52fe405685909a6454481"
+    },
+    {
+      "path": "final-b/visuals/results/towns/cross-market-complete.png",
+      "bytes": 290487,
+      "sha256": "968a41719676a704a509378f8c196499d46d56c13609e615132c94c37d84e2a9"
+    },
+    {
+      "path": "final-b/visuals/results/towns/roadside-complete.png",
+      "bytes": 131468,
+      "sha256": "83c1ccb008f6bb4d21b47c00209176f72d1b5c8fd97e684cdf675ef67314eae2"
+    },
+    {
+      "path": "final-b/diagnostic/results/network-20261023.png",
+      "bytes": 24170,
+      "sha256": "186f4036f6cb4e1b6a3c591238e44ed049e8b1c381f895d7cc865f13da6522eb"
+    },
+    {
+      "path": "final-b/wiki/results/reader/chromium-layout.png",
+      "bytes": 426985,
+      "sha256": "6e5d61a596b74c2e54928bd92e26c54dcbbfa19de40a0de4a3e81c19a44d4e77"
+    },
+    {
+      "path": "final-b/wiki/results/reader/firefox-mobile-viewport.png",
+      "bytes": 44523,
+      "sha256": "99fbd90f132c8f8055c0dcc620fae2644bcb04d80dca05c53aa9415a35dea177"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "passed": true,
+  "html_sha256": "2bfdc3482a21fb5088250a2bba4c4ac339c0ab6ae0e5e38e05c27a218fec2950",
+  "runs": [
+    {
+      "browser": "chromium",
+      "version": "156.0.8078.4",
+      "internal_links": 551,
+      "missing": [],
+      "search_results": 39,
+      "copy_button": "Copied",
+      "selected_fallback_characters": 0,
+      "navigation": true,
+      "mobile_menu": true,
+      "script_errors": [],
+      "downloads": [
+        {
+          "file": "deep_tongue.json",
+          "advertised": {
+            "bytes": 98460,
+            "sha256": "fc5d2d52d4e60dffa5353d3103f0e43d2f5e3ecd99cce0cc4aa8a830fe8ca6cf"
+          },
+          "downloaded": {
+            "bytes": 98460,
+            "sha256": "fc5d2d52d4e60dffa5353d3103f0e43d2f5e3ecd99cce0cc4aa8a830fe8ca6cf"
+          },
+          "passed": true
+        },
+        {
+          "file": "owner_cottage_a.json",
+          "advertised": {
+            "bytes": 1690,
+            "sha256": "48b8a6af726ad9c8ca5477ac04f3f4b549e9eff8aa301b41e4424c6a6d474053"
+          },
+          "downloaded": {
+            "bytes": 1690,
+            "sha256": "48b8a6af726ad9c8ca5477ac04f3f4b549e9eff8aa301b41e4424c6a6d474053"
+          },
+          "passed": true
+        },
+        {
+          "file": "g7_travellers_court.json",
+          "advertised": {
+            "bytes": 1248,
+            "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec"
+          },
+          "downloaded": {
+            "bytes": 1248,
+            "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec"
+          },
+          "passed": true
+        },
+        {
+          "file": "g9_country_network.json",
+          "advertised": {
+            "bytes": 231,
+            "sha256": "38070bb8f2a224154d54642258112f3fe4fe7a4a3e991da6246e77ce2396b86e"
+          },
+          "downloaded": {
+            "bytes": 231,
+            "sha256": "38070bb8f2a224154d54642258112f3fe4fe7a4a3e991da6246e77ce2396b86e"
+          },
+          "passed": true
+        }
+      ]
+    },
+    {
+      "browser": "firefox",
+      "version": "157.0",
+      "internal_links": 551,
+      "missing": [],
+      "search_results": 39,
+      "copy_button": "Copied",
+      "selected_fallback_characters": 0,
+      "navigation": true,
+      "mobile_menu": true,
+      "script_errors": [],
+      "downloads": [
+        {
+          "file": "deep_tongue.json",
+          "advertised": {
+            "bytes": 98460,
+            "sha256": "fc5d2d52d4e60dffa5353d3103f0e43d2f5e3ecd99cce0cc4aa8a830fe8ca6cf"
+          },
+          "downloaded": {
+            "bytes": 98460,
+            "sha256": "fc5d2d52d4e60dffa5353d3103f0e43d2f5e3ecd99cce0cc4aa8a830fe8ca6cf"
+          },
+          "passed": true
+        },
+        {
+          "file": "owner_cottage_a.json",
+          "advertised": {
+            "bytes": 1690,
+            "sha256": "48b8a6af726ad9c8ca5477ac04f3f4b549e9eff8aa301b41e4424c6a6d474053"
+          },
+          "downloaded": {
+            "bytes": 1690,
+            "sha256": "48b8a6af726ad9c8ca5477ac04f3f4b549e9eff8aa301b41e4424c6a6d474053"
+          },
+          "passed": true
+        },
+        {
+          "file": "g7_travellers_court.json",
+          "advertised": {
+            "bytes": 1248,
+            "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec"
+          },
+          "downloaded": {
+            "bytes": 1248,
+            "sha256": "e0d97245a46d9fd1d903ca7f1e1505b7f5da2817b2a8e0340d60b9e4e9d63bec"
+          },
+          "passed": true
+        },
+        {
+          "file": "g9_country_network.json",
+          "advertised": {
+            "bytes": 231,
+            "sha256": "38070bb8f2a224154d54642258112f3fe4fe7a4a3e991da6246e77ce2396b86e"
+          },
+          "downloaded": {
+            "bytes": 231,
+            "sha256": "38070bb8f2a224154d54642258112f3fe4fe7a4a3e991da6246e77ce2396b86e"
+          },
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\Resonance_Wiki_Maintenance\\verify_reader.py",
+        "--worker",
+        "chromium",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\wiki\\results\\reader"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\Resonance_Wiki_Maintenance\\verify_reader.py",
+        "--worker",
+        "firefox",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\wiki\\results\\reader"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "limits": "Headless local-file Chromium and Firefox, two viewport sizes; automated navigation/search/copy control checks and retained screenshots. No manual assistive-technology audit or OS clipboard readback."
+}

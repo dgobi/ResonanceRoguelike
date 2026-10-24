@@ -1,0 +1,29 @@
+{
+  "head": "919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78",
+  "path": "Resonance_Wiki_Maintenance/Resonance_Owner_Wiki.html",
+  "committed": {
+    "bytes": 5550114,
+    "sha256": "2bfdc3482a21fb5088250a2bba4c4ac339c0ab6ae0e5e38e05c27a218fec2950"
+  },
+  "filters": [
+    {
+      "core_autocrlf": "false",
+      "bytes": 5550114,
+      "sha256": "2bfdc3482a21fb5088250a2bba4c4ac339c0ab6ae0e5e38e05c27a218fec2950",
+      "exact_committed_bytes": true
+    },
+    {
+      "core_autocrlf": "true",
+      "bytes": 5599013,
+      "sha256": "d8d7885b4fc8ee4e4c013e92bcba740fe0c21351f0f0699347013b1106dd46dd",
+      "exact_committed_bytes": false
+    },
+    {
+      "core_autocrlf": "input",
+      "bytes": 5550114,
+      "sha256": "2bfdc3482a21fb5088250a2bba4c4ac339c0ab6ae0e5e38e05c27a218fec2950",
+      "exact_committed_bytes": true
+    }
+  ],
+  "method": "Read-only git cat-file --filters at the real committed product; no checkout created or changed."
+}

@@ -1,0 +1,640 @@
+{
+  "schema": 1,
+  "input_commit": "919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78",
+  "passed": true,
+  "unified_inputs": 726,
+  "gates": [
+    {
+      "gate": "guard",
+      "seconds": 12.773733400041237,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/verify_g7_guard.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\guard\\results"
+      ],
+      "receipt": "final-b/guard/receipt.json",
+      "sha256": "6ab5ed50345c682c679f38d8533ac90dffd2d064405cfd1dad090bd30477bcc2",
+      "passed": true
+    },
+    {
+      "gate": "focused",
+      "seconds": 816.5282255999628,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/g8_clean_focused.py",
+        "--timeout",
+        "1800",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\focused\\results"
+      ],
+      "receipt": "final-b/focused/receipt.json",
+      "sha256": "ef4a675be35a4addb8c38cb51010e3c14aa96473bfedf5259563474f1392a0c9",
+      "passed": true
+    },
+    {
+      "gate": "browser",
+      "seconds": 99.79013729997678,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/verify_structure_editor.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\browser\\results"
+      ],
+      "receipt": "final-b/browser/receipt.json",
+      "sha256": "f28a836e803808ef7f151f0aaff55c26d361dc2d541ca2c9dab22bd39ec1e521",
+      "passed": true
+    },
+    {
+      "gate": "authoring",
+      "seconds": 195.16172709997045,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/verify_g9_authoring.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\authoring\\results"
+      ],
+      "receipt": "final-b/authoring/receipt.json",
+      "sha256": "062b78f58cb77be5851bda4d11e09c1382850977ee0bb354c1718c79a8f72a88",
+      "passed": true
+    },
+    {
+      "gate": "catalog",
+      "seconds": 0.33335999998962507,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "--catalog",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\catalog\\catalog.json"
+      ],
+      "receipt": "final-b/catalog/receipt.json",
+      "sha256": "f41c34eee5771e0488baf68c204ef8db5dcd486d4c32784004fe083407080983",
+      "passed": true
+    },
+    {
+      "gate": "catalog-check",
+      "seconds": 0.33301010000286624,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/structure_authoring.py",
+        "--check-editor-catalog"
+      ],
+      "receipt": "final-b/catalog-check/receipt.json",
+      "sha256": "d0660cc492c0db15d1a34c22c4bf091c777a42f756a4663798e13bf230cbb25c",
+      "passed": true
+    },
+    {
+      "gate": "diagnostic",
+      "seconds": 462.8000058000325,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/worldgen_g9_diagnostic.py",
+        "--journey",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\diagnostic\\results"
+      ],
+      "receipt": "final-b/diagnostic/receipt.json",
+      "sha256": "61e793c25f21978e0631d039374ac2f9db89ba56b0acf23045efcdd5fd19579d",
+      "passed": true
+    },
+    {
+      "gate": "visuals",
+      "seconds": 31.390975399990566,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/g9_visuals.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\visuals\\results"
+      ],
+      "receipt": "final-b/visuals/receipt.json",
+      "sha256": "8fcc445abd34ba85960a1d911a2dc7f4f4acfd4be2937a0d83a3c69ba3a97cc8",
+      "passed": true
+    },
+    {
+      "gate": "wiki",
+      "seconds": 46.68929050001316,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "Resonance_Wiki_Maintenance/verify_edition.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\wiki\\results"
+      ],
+      "receipt": "final-b/wiki/receipt.json",
+      "sha256": "c1b0df8cc4c5aec7bd4e65d932cab64c8bdd22780ada72c789c047a6589a447c",
+      "passed": true
+    },
+    {
+      "gate": "production",
+      "seconds": 742.9761135000153,
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "tools/verify_d.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g9\\final-b\\production\\results"
+      ],
+      "receipt": "final-b/production/receipt.json",
+      "sha256": "2f0b9e6b1c4178374a8f6c12a5a4b3c46e20e43781b4c207e8c172147a9c18f2",
+      "passed": true
+    }
+  ],
+  "focused": {
+    "tests": 229,
+    "child_seconds": 813.781,
+    "clean_parent": true
+  },
+  "browsers": [
+    {
+      "browser": "chromium",
+      "version": "156.0.8078.4",
+      "passed": true,
+      "checks": 42
+    },
+    {
+      "browser": "firefox",
+      "version": "157.0",
+      "passed": true,
+      "checks": 42
+    }
+  ],
+  "authoring": {
+    "g9": 5,
+    "g8": 6,
+    "g7": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "inherited_g6": "final-b/authoring/results/inherited-g8/inherited-g7/inherited-g6/commands.json",
+    "inherited_g5": "final-b/authoring/results/inherited-g8/inherited-g7/inherited-g6/g5-recipes/commands.json",
+    "scope": "Nested levels counted separately; command records are not additional top-level G9 workflows."
+  },
+  "production": {
+    "path": "final-b/production/results/d-20261024-170922-4950e118/results.json",
+    "totals": {
+      "checks": 3675,
+      "passed": 3675,
+      "failed": 0,
+      "workers": 159
+    },
+    "deferred": [
+      {
+        "case": "E04",
+        "id": "UI-TEXT-HEIGHT",
+        "scope": "UI",
+        "symptom": {
+          "text_id": "lab_label_sarcophagus",
+          "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+          "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+        }
+      }
+    ]
+  },
+  "ordinary": [
+    {
+      "seed": 0,
+      "costs": {
+        "serial_baseline_planning_seconds": 1.0797419000300579,
+        "serial_g9_planning_seconds": 2.788742300006561,
+        "diagnostic_graph_seconds": 0.6996571000199765,
+        "preedit_g8_planning_seconds": 1.2935613000299782,
+        "preedit_g8_scene_seconds": [
+          0.2625862000277266,
+          0.2377942000166513,
+          0.29316510003991425,
+          0.2825353000080213,
+          0.21636389999184757,
+          0.27118999999947846,
+          0.3010848000412807,
+          0.04079639998963103,
+          0.2380356000503525,
+          0.3106121000018902,
+          0.28876730002230033,
+          0.26672150002559647,
+          0.371342700032983,
+          0.26478949998272583,
+          0.2678905999637209
+        ],
+        "subtree_bytes": {
+          "version": 1,
+          "mode": 11,
+          "generation_revision": 5,
+          "dependency_projection": 14,
+          "seed": 1,
+          "map_size": 7,
+          "world_size": 9,
+          "settings": 843,
+          "nodes": 719,
+          "routes": 19248,
+          "waters": 146062,
+          "crossings": 2869,
+          "settlements": 9287,
+          "plots": 31395,
+          "placements": 38949,
+          "reservations": 312269,
+          "dependencies": 19953,
+          "diagnostics": 478,
+          "selection": 2848,
+          "blocks": 9448,
+          "public_spaces": 657,
+          "paths": 125,
+          "layout_contract": 1,
+          "poi_policy": 837,
+          "sites": 2008,
+          "site_selection": 275,
+          "network": 3045
+        },
+        "scope": "Three ordinary seeds. Serial current G8-settings/G9 planning uses identical preserved geography/content. Pre-edit G8 journey/scene timings retain their own raw source and concurrent lightweight docs-check disclosure. New wg9 scene randomness is allowed; no storage-engine change."
+      },
+      "network_seconds": 1.4651867999928072,
+      "baseline_compact_bytes": 598641,
+      "g9_compact_bytes": 601725,
+      "network_compact_bytes": 3045,
+      "primary_pairs": 15,
+      "pairs_examined": 8,
+      "pairs_unexamined": 7,
+      "expansions": 7538,
+      "outcome": "no qualifying candidate",
+      "added_links": 0,
+      "touched_scenes": 0,
+      "touched_scene_seconds": 0,
+      "required_scene_count": 15
+    },
+    {
+      "seed": 20261023,
+      "costs": {
+        "serial_baseline_planning_seconds": 1.7318509999895468,
+        "serial_g9_planning_seconds": 5.952924599987455,
+        "diagnostic_graph_seconds": 1.654196299961768,
+        "preedit_g8_planning_seconds": 2.0544152000220492,
+        "preedit_g8_scene_seconds": [
+          0.2152893000165932,
+          0.21240010001929477,
+          0.2163833999657072,
+          0.044914300029631704,
+          0.24998079997021705,
+          0.2258315000217408,
+          0.29374799999641255,
+          0.3230242999852635,
+          0.24617790000047535,
+          0.2771807999815792,
+          0.2162118999985978,
+          0.2566361000062898,
+          0.2186323000350967,
+          0.2031124999630265,
+          0.23684489994775504,
+          0.17427700001280755,
+          0.19964649999747053,
+          0.224583100003656
+        ],
+        "subtree_bytes": {
+          "version": 1,
+          "mode": 11,
+          "generation_revision": 5,
+          "dependency_projection": 14,
+          "seed": 8,
+          "map_size": 7,
+          "world_size": 9,
+          "settings": 843,
+          "nodes": 868,
+          "routes": 42126,
+          "waters": 160296,
+          "crossings": 3601,
+          "settlements": 10156,
+          "plots": 29327,
+          "placements": 34869,
+          "reservations": 413893,
+          "dependencies": 20516,
+          "diagnostics": 637,
+          "selection": 2848,
+          "blocks": 8718,
+          "public_spaces": 655,
+          "paths": 127,
+          "layout_contract": 1,
+          "poi_policy": 837,
+          "sites": 1998,
+          "site_selection": 1059,
+          "network": 3163
+        },
+        "scope": "Three ordinary seeds. Serial current G8-settings/G9 planning uses identical preserved geography/content. Pre-edit G8 journey/scene timings retain their own raw source and concurrent lightweight docs-check disclosure. New wg9 scene randomness is allowed; no storage-engine change."
+      },
+      "network_seconds": 3.5517419000389054,
+      "baseline_compact_bytes": 709155,
+      "g9_compact_bytes": 736954,
+      "network_compact_bytes": 3163,
+      "primary_pairs": 21,
+      "pairs_examined": 8,
+      "pairs_unexamined": 13,
+      "expansions": 26128,
+      "outcome": "augmented",
+      "added_links": 1,
+      "touched_scenes": 86,
+      "touched_scene_seconds": 20.664758099941537,
+      "required_scene_count": 18
+    },
+    {
+      "seed": 29417,
+      "costs": {
+        "serial_baseline_planning_seconds": 1.3045376999652945,
+        "serial_g9_planning_seconds": 4.19695169996703,
+        "diagnostic_graph_seconds": 0.6854026999790221,
+        "preedit_g8_planning_seconds": 1.5554107999778353,
+        "preedit_g8_scene_seconds": [
+          0.254067900008522,
+          0.2527544000186026,
+          0.2829279000288807,
+          0.2697668999899179,
+          0.08897919999435544,
+          0.3624405000009574,
+          0.279525299964007,
+          0.3068249999778345,
+          0.216466500016395,
+          0.24977629998466,
+          0.2573086000047624,
+          0.24598480004351586,
+          0.27536790003068745,
+          0.1914820999954827,
+          0.24132319999625906,
+          0.2816721000126563,
+          0.21995110000716522,
+          0.23152299999492243
+        ],
+        "subtree_bytes": {
+          "version": 1,
+          "mode": 11,
+          "generation_revision": 5,
+          "dependency_projection": 14,
+          "seed": 5,
+          "map_size": 7,
+          "world_size": 9,
+          "settings": 843,
+          "nodes": 871,
+          "routes": 22365,
+          "waters": 159676,
+          "crossings": 6019,
+          "settlements": 10489,
+          "plots": 31636,
+          "placements": 38868,
+          "reservations": 348112,
+          "dependencies": 21793,
+          "diagnostics": 637,
+          "selection": 2848,
+          "blocks": 9394,
+          "public_spaces": 648,
+          "paths": 257,
+          "layout_contract": 1,
+          "poi_policy": 837,
+          "sites": 3001,
+          "site_selection": 1007,
+          "network": 3037
+        },
+        "scope": "Three ordinary seeds. Serial current G8-settings/G9 planning uses identical preserved geography/content. Pre-edit G8 journey/scene timings retain their own raw source and concurrent lightweight docs-check disclosure. New wg9 scene randomness is allowed; no storage-engine change."
+      },
+      "network_seconds": 2.5803159000352025,
+      "baseline_compact_bytes": 659676,
+      "g9_compact_bytes": 662752,
+      "network_compact_bytes": 3037,
+      "primary_pairs": 21,
+      "pairs_examined": 8,
+      "pairs_unexamined": 13,
+      "expansions": 6623,
+      "outcome": "no qualifying candidate",
+      "added_links": 0,
+      "touched_scenes": 0,
+      "touched_scene_seconds": 0,
+      "required_scene_count": 18
+    }
+  ],
+  "journey": {
+    "steps": 107749,
+    "g9_country": {
+      "passed": true,
+      "runs": [
+        {
+          "label": "to-shortcut-start",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 0.003715600003488362,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 0,
+          "movement_inputs": 0,
+          "boundary_inputs": 0
+        },
+        {
+          "label": "accepted-forward",
+          "route": "network-shortcut-0",
+          "movement_inputs": 5505,
+          "boundary_inputs": 85,
+          "actual_complete_route": true
+        },
+        {
+          "label": "accepted-reverse",
+          "route": "network-shortcut-0",
+          "movement_inputs": 5505,
+          "boundary_inputs": 85,
+          "actual_complete_route": true
+        },
+        {
+          "label": "surviving-original-country-corridor",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            7000,
+            1440
+          ],
+          "seconds": 77.79292550001992,
+          "newly_visited_scenes": 155,
+          "physical_four_neighbour_steps": 20741,
+          "movement_inputs": 20741,
+          "boundary_inputs": 333
+        },
+        {
+          "label": "to-comparable-start",
+          "start": [
+            7000,
+            1440
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 13.05821529997047,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 5501,
+          "movement_inputs": 5501,
+          "boundary_inputs": 85
+        },
+        {
+          "label": "fixed-pair-original",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            5320,
+            2644
+          ],
+          "seconds": 79.02299710002262,
+          "newly_visited_scenes": 47,
+          "physical_four_neighbour_steps": 23625,
+          "movement_inputs": 23625,
+          "boundary_inputs": 382
+        },
+        {
+          "label": "fixed-pair-augmented-reverse",
+          "start": [
+            5320,
+            2644
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 18.068743099982385,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 8063,
+          "movement_inputs": 8063,
+          "boundary_inputs": 130
+        },
+        {
+          "label": "resume-inherited-journey",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 0.020402800000738353,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 0,
+          "movement_inputs": 0,
+          "boundary_inputs": 0
+        }
+      ],
+      "fixed_pair": {
+        "before": {
+          "label": "fixed-pair-original",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            5320,
+            2644
+          ],
+          "seconds": 79.02299710002262,
+          "newly_visited_scenes": 47,
+          "physical_four_neighbour_steps": 23625,
+          "movement_inputs": 23625,
+          "boundary_inputs": 382
+        },
+        "after": {
+          "label": "fixed-pair-augmented-reverse",
+          "start": [
+            5320,
+            2644
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 18.068743099982385,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 8063,
+          "movement_inputs": 8063,
+          "boundary_inputs": 130
+        }
+      },
+      "controls": "No positioning or teleports. Inherited real movement/door/boundary handlers; invincible player, stationary native actors, paused AI/survival. Local handler routes may use diagonals; physical BFS counts remain four-neighbour. Baseline itinerary uses exactly preserved G8 road geometry in G9-created scenes. Both directions and the surviving original corridor are actually walked; this is separate from pre-edit G8 journey timing."
+    },
+    "restore_seconds": 9.810150900040753,
+    "f9_restored_explored_checkpoint": true,
+    "worst_transition_seconds": 0.4738086000434123,
+    "checkpoint_bytes": 254086073,
+    "checkpoint_scene_count": 470
+  },
+  "explored_checkpoint": {
+    "scope": "Actually explored journey: G8 town contents/common, compound child mutations, single-site, other settlement, bridge and landmark; actual F5 and cold SaveManager load",
+    "save_seconds": 12.633439099998213,
+    "cold_load_seconds": 9.683131299971137,
+    "scene_count": 470,
+    "bytes": 254086073,
+    "inventory_ids": [
+      "tallow_torch",
+      "crow_jerky",
+      "water_flask",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble",
+      "pilgrims_woe_petals",
+      "murk_violet_stem",
+      "inscription",
+      "resonant_bone_fragment",
+      "coldbell_cutting",
+      "coldbell_cutting"
+    ],
+    "f9_seconds": 9.810150900040753
+  },
+  "preedit_g8_journey": {
+    "steps": 38805,
+    "restore_seconds": 6.945778199995402,
+    "worst_transition_seconds": 0.45835919998353347,
+    "checkpoint_bytes": 195744304,
+    "checkpoint_scene_count": 354
+  },
+  "preedit_g8_checkpoint": {
+    "scope": "Actually explored journey: G8 town contents/common, compound child mutations, single-site, other settlement, bridge and landmark; actual F5 and cold SaveManager load",
+    "save_seconds": 11.716517799999565,
+    "cold_load_seconds": 6.316465500043705,
+    "scene_count": 354,
+    "bytes": 195744304,
+    "inventory_ids": [
+      "tallow_torch",
+      "crow_jerky",
+      "water_flask",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble",
+      "dried_aromatic_herb",
+      "murk_violet_stem",
+      "inscription",
+      "coldbell_cutting",
+      "moist_pebble",
+      "resonant_bone_fragment"
+    ],
+    "f9_seconds": 6.945778199995402
+  }
+}

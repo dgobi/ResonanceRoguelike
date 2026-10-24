@@ -1,0 +1,4898 @@
+[
+  {
+    "asset": "house_small_b",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              25
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              38,
+              19
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              41,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                40,
+                19
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                41,
+                20
+              ],
+              [
+                42,
+                19
+              ],
+              [
+                42,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              39,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              17
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              41,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              38,
+              23
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                37,
+                22
+              ],
+              [
+                37,
+                23
+              ],
+              [
+                38,
+                22
+              ],
+              [
+                39,
+                22
+              ],
+              [
+                39,
+                23
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              40,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "grid",
+        "controlled_pool": true,
+        "placements": 14,
+        "complete_scenes": 9,
+        "example": {
+          "id": "settlement-0-cross-market-lot-1-1-S-0-building",
+          "asset": "house_small_b",
+          "context": "grid",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6018,
+            4268
+          ],
+          "footprint": [
+            6018,
+            4268,
+            6026,
+            4275
+          ],
+          "clearance": [
+            6017,
+            4267,
+            6027,
+            4276
+          ],
+          "approach": [
+            6021,
+            4274,
+            6022,
+            4279
+          ],
+          "road": "settlement-0-street-east-west-0",
+          "join": [
+            6021,
+            4278
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6021,
+              "y": 4274,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6021,
+              "y": 4271,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6020,
+              "y": 4269,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 6023,
+              "y": 4269,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "house_small_b",
+          "role": "residential",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "roadside",
+        "controlled_pool": true,
+        "placements": 8,
+        "complete_scenes": 8,
+        "example": {
+          "id": "settlement-1-country-frontage-lot-1-23-N-0-building",
+          "asset": "house_small_b",
+          "context": "roadside",
+          "rotation": 180,
+          "mirror": false,
+          "origin": [
+            3168,
+            1143
+          ],
+          "footprint": [
+            3168,
+            1143,
+            3176,
+            1150
+          ],
+          "clearance": [
+            3167,
+            1142,
+            3177,
+            1151
+          ],
+          "approach": [
+            3172,
+            1139,
+            3173,
+            1144
+          ],
+          "road": "road-4",
+          "join": [
+            3172,
+            1139
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 3172,
+              "y": 1143,
+              "normal": "N",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 3172,
+              "y": 1146,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3173,
+              "y": 1148,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 3170,
+              "y": 1148,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "house_small_b",
+          "role": "residential",
+          "frontage_entrance": "main"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "house_two_room_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              25
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              19
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[1]",
+            "kind": "floor",
+            "xy": [
+              39,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              43,
+              18
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                42,
+                18
+              ],
+              [
+                42,
+                19
+              ],
+              [
+                43,
+                18
+              ],
+              [
+                43,
+                19
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              40,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 90,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              35,
+              21
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              41,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[1]",
+            "kind": "floor",
+            "xy": [
+              37,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              42,
+              24
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                41,
+                23
+              ],
+              [
+                41,
+                24
+              ],
+              [
+                42,
+                23
+              ],
+              [
+                42,
+                24
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              36,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              16
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[1]",
+            "kind": "floor",
+            "xy": [
+              40,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              36,
+              23
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                36,
+                22
+              ],
+              [
+                36,
+                23
+              ],
+              [
+                37,
+                22
+              ],
+              [
+                37,
+                23
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              39,
+              17
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 270,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              44,
+              20
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              38,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[1]",
+            "kind": "floor",
+            "xy": [
+              42,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              37,
+              17
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                37,
+                17
+              ],
+              [
+                37,
+                18
+              ],
+              [
+                38,
+                17
+              ],
+              [
+                38,
+                18
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              43,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "grid",
+        "controlled_pool": true,
+        "placements": 16,
+        "complete_scenes": 11,
+        "example": {
+          "id": "settlement-0-cross-market-lot-1-1-S-0-building",
+          "asset": "house_two_room_a",
+          "context": "grid",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6016,
+            4267
+          ],
+          "footprint": [
+            6016,
+            4267,
+            6026,
+            4275
+          ],
+          "clearance": [
+            6015,
+            4266,
+            6027,
+            4276
+          ],
+          "approach": [
+            6021,
+            4274,
+            6022,
+            4279
+          ],
+          "road": "settlement-0-street-east-west-0",
+          "join": [
+            6021,
+            4278
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6021,
+              "y": 4274,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6020,
+              "y": 4269,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6020,
+              "y": 4273,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6024,
+              "y": 4268,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "house_two_room_a",
+          "role": "residential",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "roadside",
+        "controlled_pool": true,
+        "placements": 8,
+        "complete_scenes": 8,
+        "example": {
+          "id": "settlement-1-country-frontage-lot-1-23-N-0-building",
+          "asset": "house_two_room_a",
+          "context": "roadside",
+          "rotation": 180,
+          "mirror": false,
+          "origin": [
+            3168,
+            1143
+          ],
+          "footprint": [
+            3168,
+            1143,
+            3178,
+            1151
+          ],
+          "clearance": [
+            3167,
+            1142,
+            3179,
+            1152
+          ],
+          "approach": [
+            3172,
+            1139,
+            3173,
+            1144
+          ],
+          "road": "road-4",
+          "join": [
+            3172,
+            1139
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 3172,
+              "y": 1143,
+              "normal": "N",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 3173,
+              "y": 1148,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3173,
+              "y": 1144,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3169,
+              "y": 1149,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "house_two_room_a",
+          "role": "residential",
+          "frontage_entrance": "main"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "house_hearth_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              26
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              35,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                35,
+                18
+              ],
+              [
+                35,
+                19
+              ],
+              [
+                35,
+                20
+              ],
+              [
+                36,
+                18
+              ],
+              [
+                36,
+                19
+              ],
+              [
+                36,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              44,
+              23
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                43,
+                22
+              ],
+              [
+                43,
+                23
+              ],
+              [
+                43,
+                24
+              ],
+              [
+                44,
+                22
+              ],
+              [
+                44,
+                23
+              ],
+              [
+                44,
+                24
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              39,
+              25
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              16
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              44,
+              23
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                43,
+                22
+              ],
+              [
+                43,
+                23
+              ],
+              [
+                43,
+                24
+              ],
+              [
+                44,
+                22
+              ],
+              [
+                44,
+                23
+              ],
+              [
+                44,
+                24
+              ]
+            ]
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              35,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                35,
+                18
+              ],
+              [
+                35,
+                19
+              ],
+              [
+                35,
+                20
+              ],
+              [
+                36,
+                18
+              ],
+              [
+                36,
+                19
+              ],
+              [
+                36,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              40,
+              17
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "grid",
+        "controlled_pool": true,
+        "placements": 14,
+        "complete_scenes": 8,
+        "example": {
+          "id": "settlement-0-cross-market-lot-1-1-S-0-building",
+          "asset": "house_hearth_a",
+          "context": "grid",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6016,
+            4266
+          ],
+          "footprint": [
+            6016,
+            4266,
+            6028,
+            4275
+          ],
+          "clearance": [
+            6015,
+            4265,
+            6029,
+            4276
+          ],
+          "approach": [
+            6021,
+            4274,
+            6022,
+            4279
+          ],
+          "road": "settlement-0-street-east-west-0",
+          "join": [
+            6021,
+            4278
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6021,
+              "y": 4274,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6022,
+              "y": 4270,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6017,
+              "y": 4268,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 6026,
+              "y": 4272,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "house_hearth_a",
+          "role": "residential",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "roadside",
+        "controlled_pool": true,
+        "placements": 8,
+        "complete_scenes": 7,
+        "example": {
+          "id": "settlement-1-country-frontage-lot-1-23-N-0-building",
+          "asset": "house_hearth_a",
+          "context": "roadside",
+          "rotation": 180,
+          "mirror": false,
+          "origin": [
+            3166,
+            1143
+          ],
+          "footprint": [
+            3166,
+            1143,
+            3178,
+            1152
+          ],
+          "clearance": [
+            3165,
+            1142,
+            3179,
+            1153
+          ],
+          "approach": [
+            3172,
+            1139,
+            3173,
+            1144
+          ],
+          "road": "road-4",
+          "join": [
+            3172,
+            1139
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 3172,
+              "y": 1143,
+              "normal": "N",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 3171,
+              "y": 1147,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3176,
+              "y": 1149,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 3167,
+              "y": 1145,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "house_hearth_a",
+          "role": "residential",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "compound",
+        "controlled_pool": true,
+        "placements": 1,
+        "complete_scenes": 1,
+        "example": {
+          "id": "site-90-102-32-21-S-slot-home-building",
+          "asset": "house_hearth_a",
+          "context": "compound",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            7213,
+            4389
+          ],
+          "footprint": [
+            7213,
+            4389,
+            7225,
+            4398
+          ],
+          "clearance": [
+            7212,
+            4388,
+            7226,
+            4399
+          ],
+          "approach": [
+            7218,
+            4397,
+            7219,
+            4401
+          ],
+          "road": null,
+          "join": [
+            7218,
+            4400
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 7218,
+              "y": 4397,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 7219,
+              "y": 4393,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 7214,
+              "y": 4391,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 7223,
+              "y": 4395,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "house_hearth_a",
+          "role": "dwelling",
+          "frontage_entrance": "main",
+          "access": {
+            "kind": "internal",
+            "parent": "site-90-102-32-21-S",
+            "path": "site-90-102-32-21-S-path-yard"
+          },
+          "parent": "site-90-102-32-21-S",
+          "slot": "home"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "shop_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              25
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              41,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[1]",
+            "kind": "floor",
+            "xy": [
+              37,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[2]",
+            "kind": "readable",
+            "xy": [
+              36,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              39,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              16
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              38,
+              19
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[1]",
+            "kind": "floor",
+            "xy": [
+              42,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[2]",
+            "kind": "readable",
+            "xy": [
+              43,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              40,
+              17
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "grid",
+        "controlled_pool": true,
+        "placements": 10,
+        "complete_scenes": 7,
+        "example": {
+          "id": "settlement-0-cross-market-lot-81-3-S-0-building",
+          "asset": "shop_a",
+          "context": "grid",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6086,
+            4267
+          ],
+          "footprint": [
+            6086,
+            4267,
+            6096,
+            4275
+          ],
+          "clearance": [
+            6085,
+            4266,
+            6097,
+            4276
+          ],
+          "approach": [
+            6090,
+            4274,
+            6091,
+            4279
+          ],
+          "road": "settlement-0-street-east-west-0",
+          "join": [
+            6090,
+            4278
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6090,
+              "y": 4274,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6092,
+              "y": 4272,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6088,
+              "y": 4270,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6087,
+              "y": 4268,
+              "kind": "readable",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "shop_a",
+          "role": "commercial",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "roadside",
+        "controlled_pool": true,
+        "placements": 4,
+        "complete_scenes": 5,
+        "example": {
+          "id": "settlement-1-country-frontage-lot-1-1-S-0-building",
+          "asset": "shop_a",
+          "context": "roadside",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            3168,
+            1128
+          ],
+          "footprint": [
+            3168,
+            1128,
+            3178,
+            1136
+          ],
+          "clearance": [
+            3167,
+            1127,
+            3179,
+            1137
+          ],
+          "approach": [
+            3172,
+            1135,
+            3173,
+            1140
+          ],
+          "road": "road-4",
+          "join": [
+            3172,
+            1139
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 3172,
+              "y": 1135,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 3174,
+              "y": 1133,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3170,
+              "y": 1131,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3169,
+              "y": 1129,
+              "kind": "readable",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "shop_a",
+          "role": "commercial",
+          "frontage_entrance": "main"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "apothecary_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              25
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              41,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[1]",
+            "kind": "floor",
+            "xy": [
+              37,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              36,
+              18
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                36,
+                19
+              ],
+              [
+                37,
+                18
+              ],
+              [
+                37,
+                19
+              ]
+            ]
+          },
+          {
+            "target": "container[3]",
+            "kind": "container",
+            "xy": [
+              44,
+              20
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                43,
+                19
+              ],
+              [
+                43,
+                20
+              ],
+              [
+                43,
+                21
+              ],
+              [
+                44,
+                19
+              ],
+              [
+                44,
+                20
+              ],
+              [
+                44,
+                21
+              ]
+            ]
+          },
+          {
+            "target": "container[4]",
+            "kind": "container",
+            "xy": [
+              40,
+              22
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                40,
+                23
+              ],
+              [
+                41,
+                22
+              ],
+              [
+                41,
+                23
+              ]
+            ]
+          },
+          {
+            "target": "floor[5]",
+            "kind": "floor",
+            "xy": [
+              39,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              41,
+              16
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[1]",
+            "kind": "floor",
+            "xy": [
+              43,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              44,
+              23
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                43,
+                22
+              ],
+              [
+                43,
+                23
+              ],
+              [
+                44,
+                22
+              ]
+            ]
+          },
+          {
+            "target": "container[3]",
+            "kind": "container",
+            "xy": [
+              36,
+              21
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                36,
+                20
+              ],
+              [
+                36,
+                21
+              ],
+              [
+                36,
+                22
+              ],
+              [
+                37,
+                20
+              ],
+              [
+                37,
+                21
+              ],
+              [
+                37,
+                22
+              ]
+            ]
+          },
+          {
+            "target": "container[4]",
+            "kind": "container",
+            "xy": [
+              40,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                39,
+                18
+              ],
+              [
+                39,
+                19
+              ],
+              [
+                40,
+                18
+              ]
+            ]
+          },
+          {
+            "target": "floor[5]",
+            "kind": "floor",
+            "xy": [
+              41,
+              17
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "grid",
+        "controlled_pool": true,
+        "placements": 10,
+        "complete_scenes": 6,
+        "example": {
+          "id": "settlement-0-cross-market-lot-81-3-S-0-building",
+          "asset": "apothecary_a",
+          "context": "grid",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6086,
+            4267
+          ],
+          "footprint": [
+            6086,
+            4267,
+            6097,
+            4275
+          ],
+          "clearance": [
+            6085,
+            4266,
+            6098,
+            4276
+          ],
+          "approach": [
+            6090,
+            4274,
+            6091,
+            4279
+          ],
+          "road": "settlement-0-street-east-west-0",
+          "join": [
+            6090,
+            4278
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6090,
+              "y": 4274,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6092,
+              "y": 4273,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6088,
+              "y": 4270,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6087,
+              "y": 4268,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 6095,
+              "y": 4270,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 6091,
+              "y": 4272,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "apothecary_a",
+          "role": "commercial",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "roadside",
+        "controlled_pool": true,
+        "placements": 4,
+        "complete_scenes": 9,
+        "example": {
+          "id": "settlement-1-country-frontage-lot-1-1-S-0-building",
+          "asset": "apothecary_a",
+          "context": "roadside",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            3168,
+            1128
+          ],
+          "footprint": [
+            3168,
+            1128,
+            3179,
+            1136
+          ],
+          "clearance": [
+            3167,
+            1127,
+            3180,
+            1137
+          ],
+          "approach": [
+            3172,
+            1135,
+            3173,
+            1140
+          ],
+          "road": "road-4",
+          "join": [
+            3172,
+            1139
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 3172,
+              "y": 1135,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 3174,
+              "y": 1134,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3170,
+              "y": 1131,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3169,
+              "y": 1129,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 3177,
+              "y": 1131,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 3173,
+              "y": 1133,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "apothecary_a",
+          "role": "commercial",
+          "frontage_entrance": "main"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "workshop_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              26
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              38,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              35,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[2]",
+            "kind": "readable",
+            "xy": [
+              39,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "item[3]",
+            "kind": "item",
+            "xy": [
+              40,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              39,
+              25
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[5]",
+            "kind": "floor",
+            "xy": [
+              40,
+              25
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 90,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              35,
+              20
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              19
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              43,
+              16
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[2]",
+            "kind": "readable",
+            "xy": [
+              41,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "item[3]",
+            "kind": "item",
+            "xy": [
+              41,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              36,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[5]",
+            "kind": "floor",
+            "xy": [
+              36,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              16
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              41,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              44,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[2]",
+            "kind": "readable",
+            "xy": [
+              40,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "item[3]",
+            "kind": "item",
+            "xy": [
+              39,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              39,
+              17
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[5]",
+            "kind": "floor",
+            "xy": [
+              40,
+              17
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 270,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              45,
+              20
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              41,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              37,
+              25
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[2]",
+            "kind": "readable",
+            "xy": [
+              39,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "item[3]",
+            "kind": "item",
+            "xy": [
+              39,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              44,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[5]",
+            "kind": "floor",
+            "xy": [
+              44,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "grid",
+        "controlled_pool": true,
+        "placements": 10,
+        "complete_scenes": 8,
+        "example": {
+          "id": "settlement-0-cross-market-lot-81-3-S-0-building",
+          "asset": "workshop_a",
+          "context": "grid",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6085,
+            4266
+          ],
+          "footprint": [
+            6085,
+            4266,
+            6097,
+            4275
+          ],
+          "clearance": [
+            6084,
+            4265,
+            6098,
+            4276
+          ],
+          "approach": [
+            6090,
+            4274,
+            6092,
+            4279
+          ],
+          "road": "settlement-0-street-east-west-0",
+          "join": [
+            6090,
+            4278
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6090,
+              "y": 4274,
+              "normal": "S",
+              "width": 2,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6089,
+              "y": 4271,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6086,
+              "y": 4267,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 6090,
+              "y": 4269,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 6091,
+              "y": 4269,
+              "kind": "item",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "workshop_a",
+          "role": "commercial",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "roadside",
+        "controlled_pool": true,
+        "placements": 4,
+        "complete_scenes": 6,
+        "example": {
+          "id": "settlement-1-country-frontage-lot-1-1-S-0-building",
+          "asset": "workshop_a",
+          "context": "roadside",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            3167,
+            1127
+          ],
+          "footprint": [
+            3167,
+            1127,
+            3179,
+            1136
+          ],
+          "clearance": [
+            3166,
+            1126,
+            3180,
+            1137
+          ],
+          "approach": [
+            3172,
+            1135,
+            3174,
+            1140
+          ],
+          "road": "road-4",
+          "join": [
+            3172,
+            1139
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 3172,
+              "y": 1135,
+              "normal": "S",
+              "width": 2,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 3171,
+              "y": 1132,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3168,
+              "y": 1128,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 3172,
+              "y": 1130,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 3173,
+              "y": 1130,
+              "kind": "item",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "workshop_a",
+          "role": "commercial",
+          "frontage_entrance": "main"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "storehouse_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              38,
+              25
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              34,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                34,
+                20
+              ],
+              [
+                35,
+                19
+              ]
+            ]
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              45,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                44,
+                19
+              ],
+              [
+                45,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "container[3]",
+            "kind": "container",
+            "xy": [
+              35,
+              20
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                34,
+                20
+              ],
+              [
+                34,
+                21
+              ],
+              [
+                35,
+                19
+              ],
+              [
+                35,
+                21
+              ],
+              [
+                36,
+                19
+              ],
+              [
+                36,
+                20
+              ],
+              [
+                36,
+                21
+              ]
+            ]
+          },
+          {
+            "target": "container[4]",
+            "kind": "container",
+            "xy": [
+              44,
+              20
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                43,
+                19
+              ],
+              [
+                43,
+                20
+              ],
+              [
+                43,
+                21
+              ],
+              [
+                44,
+                19
+              ],
+              [
+                44,
+                21
+              ],
+              [
+                45,
+                20
+              ],
+              [
+                45,
+                21
+              ]
+            ]
+          },
+          {
+            "target": "readable[5]",
+            "kind": "readable",
+            "xy": [
+              39,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[6]",
+            "kind": "floor",
+            "xy": [
+              38,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[7]",
+            "kind": "floor",
+            "xy": [
+              39,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[8]",
+            "kind": "floor",
+            "xy": [
+              40,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[9]",
+            "kind": "floor",
+            "xy": [
+              42,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              17
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              45,
+              23
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                44,
+                23
+              ],
+              [
+                45,
+                22
+              ]
+            ]
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              34,
+              23
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                34,
+                22
+              ],
+              [
+                35,
+                23
+              ]
+            ]
+          },
+          {
+            "target": "container[3]",
+            "kind": "container",
+            "xy": [
+              44,
+              22
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                43,
+                21
+              ],
+              [
+                43,
+                22
+              ],
+              [
+                43,
+                23
+              ],
+              [
+                44,
+                21
+              ],
+              [
+                44,
+                23
+              ],
+              [
+                45,
+                21
+              ],
+              [
+                45,
+                22
+              ]
+            ]
+          },
+          {
+            "target": "container[4]",
+            "kind": "container",
+            "xy": [
+              35,
+              22
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                34,
+                21
+              ],
+              [
+                34,
+                22
+              ],
+              [
+                35,
+                21
+              ],
+              [
+                35,
+                23
+              ],
+              [
+                36,
+                21
+              ],
+              [
+                36,
+                22
+              ],
+              [
+                36,
+                23
+              ]
+            ]
+          },
+          {
+            "target": "readable[5]",
+            "kind": "readable",
+            "xy": [
+              40,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[6]",
+            "kind": "floor",
+            "xy": [
+              39,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[7]",
+            "kind": "floor",
+            "xy": [
+              40,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[8]",
+            "kind": "floor",
+            "xy": [
+              41,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[9]",
+            "kind": "floor",
+            "xy": [
+              37,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "grid",
+        "controlled_pool": true,
+        "placements": 2,
+        "complete_scenes": 3,
+        "example": {
+          "id": "settlement-0-cross-market-lot-1-23-N-0-building",
+          "asset": "storehouse_a",
+          "context": "grid",
+          "rotation": 180,
+          "mirror": false,
+          "origin": [
+            6015,
+            4282
+          ],
+          "footprint": [
+            6015,
+            4282,
+            6029,
+            4289
+          ],
+          "clearance": [
+            6014,
+            4281,
+            6030,
+            4290
+          ],
+          "approach": [
+            6021,
+            4278,
+            6024,
+            4283
+          ],
+          "road": "settlement-0-street-east-west-0",
+          "join": [
+            6021,
+            4278
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6021,
+              "y": 4282,
+              "normal": "N",
+              "width": 3,
+              "role": "main",
+              "required": true
+            },
+            {
+              "id": "service",
+              "x": 6019,
+              "y": 4282,
+              "normal": "N",
+              "width": 1,
+              "role": "service",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6022,
+              "y": 4284,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6027,
+              "y": 4287,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 6016,
+              "y": 4287,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 6026,
+              "y": 4286,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 6017,
+              "y": 4286,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 6022,
+              "y": 4285,
+              "kind": "readable",
+              "required": true
+            }
+          ],
+          "required": false,
+          "dependency": "storehouse_a",
+          "role": "support",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "roadside",
+        "controlled_pool": true,
+        "placements": 1,
+        "complete_scenes": 2,
+        "example": {
+          "id": "settlement-1-country-frontage-lot-81-1-S-1-building",
+          "asset": "storehouse_a",
+          "context": "roadside",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            3223,
+            1129
+          ],
+          "footprint": [
+            3223,
+            1129,
+            3237,
+            1136
+          ],
+          "clearance": [
+            3222,
+            1128,
+            3238,
+            1137
+          ],
+          "approach": [
+            3228,
+            1135,
+            3231,
+            1140
+          ],
+          "road": "road-4",
+          "join": [
+            3228,
+            1139
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 3228,
+              "y": 1135,
+              "normal": "S",
+              "width": 3,
+              "role": "main",
+              "required": true
+            },
+            {
+              "id": "service",
+              "x": 3232,
+              "y": 1135,
+              "normal": "S",
+              "width": 1,
+              "role": "service",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 3229,
+              "y": 1133,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3224,
+              "y": 1130,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 3235,
+              "y": 1130,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 3225,
+              "y": 1131,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 3234,
+              "y": 1131,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 3229,
+              "y": 1132,
+              "kind": "readable",
+              "required": true
+            }
+          ],
+          "required": false,
+          "dependency": "storehouse_a",
+          "role": "support",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "compound",
+        "controlled_pool": true,
+        "placements": 1,
+        "complete_scenes": 1,
+        "example": {
+          "id": "site-90-102-32-21-S-slot-stores-building",
+          "asset": "storehouse_a",
+          "context": "compound",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            7239,
+            4391
+          ],
+          "footprint": [
+            7239,
+            4391,
+            7253,
+            4398
+          ],
+          "clearance": [
+            7238,
+            4390,
+            7254,
+            4399
+          ],
+          "approach": [
+            7244,
+            4397,
+            7247,
+            4401
+          ],
+          "road": null,
+          "join": [
+            7244,
+            4400
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 7244,
+              "y": 4397,
+              "normal": "S",
+              "width": 3,
+              "role": "main",
+              "required": true
+            },
+            {
+              "id": "service",
+              "x": 7248,
+              "y": 4397,
+              "normal": "S",
+              "width": 1,
+              "role": "service",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 7245,
+              "y": 4395,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 7240,
+              "y": 4392,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 7251,
+              "y": 4392,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 7241,
+              "y": 4393,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 7250,
+              "y": 4393,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 7245,
+              "y": 4394,
+              "kind": "readable",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "storehouse_a",
+          "role": "supplies",
+          "frontage_entrance": "main",
+          "access": {
+            "kind": "internal",
+            "parent": "site-90-102-32-21-S",
+            "path": "site-90-102-32-21-S-path-yard"
+          },
+          "parent": "site-90-102-32-21-S",
+          "slot": "stores"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "tool_shed_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              24
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              37,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                37,
+                20
+              ],
+              [
+                38,
+                19
+              ],
+              [
+                38,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              42,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                41,
+                19
+              ],
+              [
+                41,
+                20
+              ],
+              [
+                42,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "container[3]",
+            "kind": "container",
+            "xy": [
+              42,
+              21
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                41,
+                20
+              ],
+              [
+                41,
+                21
+              ],
+              [
+                41,
+                22
+              ],
+              [
+                42,
+                20
+              ],
+              [
+                42,
+                22
+              ]
+            ]
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              39,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              17
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              42,
+              22
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                41,
+                21
+              ],
+              [
+                41,
+                22
+              ],
+              [
+                42,
+                21
+              ]
+            ]
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              37,
+              22
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                37,
+                21
+              ],
+              [
+                38,
+                21
+              ],
+              [
+                38,
+                22
+              ]
+            ]
+          },
+          {
+            "target": "container[3]",
+            "kind": "container",
+            "xy": [
+              37,
+              20
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                37,
+                19
+              ],
+              [
+                37,
+                21
+              ],
+              [
+                38,
+                19
+              ],
+              [
+                38,
+                20
+              ],
+              [
+                38,
+                21
+              ]
+            ]
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              40,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "grid",
+        "controlled_pool": true,
+        "placements": 2,
+        "complete_scenes": 4,
+        "example": {
+          "id": "settlement-0-cross-market-lot-1-23-N-0-building",
+          "asset": "tool_shed_a",
+          "context": "grid",
+          "rotation": 180,
+          "mirror": false,
+          "origin": [
+            6017,
+            4282
+          ],
+          "footprint": [
+            6017,
+            4282,
+            6025,
+            4288
+          ],
+          "clearance": [
+            6016,
+            4281,
+            6026,
+            4289
+          ],
+          "approach": [
+            6021,
+            4278,
+            6022,
+            4283
+          ],
+          "road": "settlement-0-street-east-west-0",
+          "join": [
+            6021,
+            4278
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6021,
+              "y": 4282,
+              "normal": "N",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6021,
+              "y": 4284,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6023,
+              "y": 4286,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 6018,
+              "y": 4286,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 6018,
+              "y": 4284,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": false,
+          "dependency": "tool_shed_a",
+          "role": "support",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "roadside",
+        "controlled_pool": true,
+        "placements": 4,
+        "complete_scenes": 5,
+        "example": {
+          "id": "settlement-1-country-frontage-lot-1-1-S-1-building",
+          "asset": "tool_shed_a",
+          "context": "roadside",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            3187,
+            1130
+          ],
+          "footprint": [
+            3187,
+            1130,
+            3195,
+            1136
+          ],
+          "clearance": [
+            3186,
+            1129,
+            3196,
+            1137
+          ],
+          "approach": [
+            3190,
+            1135,
+            3191,
+            1140
+          ],
+          "road": "road-4",
+          "join": [
+            3190,
+            1139
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 3190,
+              "y": 1135,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 3190,
+              "y": 1133,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3188,
+              "y": 1131,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 3193,
+              "y": 1131,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 3193,
+              "y": 1133,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": false,
+          "dependency": "tool_shed_a",
+          "role": "support",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "compound",
+        "controlled_pool": true,
+        "placements": 1,
+        "complete_scenes": 1,
+        "example": {
+          "id": "site-90-102-32-21-S-slot-workshop-building",
+          "asset": "tool_shed_a",
+          "context": "compound",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            7228,
+            4392
+          ],
+          "footprint": [
+            7228,
+            4392,
+            7236,
+            4398
+          ],
+          "clearance": [
+            7227,
+            4391,
+            7237,
+            4399
+          ],
+          "approach": [
+            7231,
+            4397,
+            7232,
+            4401
+          ],
+          "road": null,
+          "join": [
+            7231,
+            4400
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 7231,
+              "y": 4397,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 7231,
+              "y": 4395,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 7229,
+              "y": 4393,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 7234,
+              "y": 4393,
+              "kind": "container",
+              "required": true
+            },
+            {
+              "x": 7234,
+              "y": 4395,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "tool_shed_a",
+          "role": "tools",
+          "frontage_entrance": "main",
+          "access": {
+            "kind": "internal",
+            "parent": "site-90-102-32-21-S",
+            "path": "site-90-102-32-21-S-path-yard"
+          },
+          "parent": "site-90-102-32-21-S",
+          "slot": "workshop"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "shrine_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              25
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              37,
+              19
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[2]",
+            "kind": "readable",
+            "xy": [
+              38,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "item[3]",
+            "kind": "item",
+            "xy": [
+              41,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              39,
+              24
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              17
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              42,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[2]",
+            "kind": "readable",
+            "xy": [
+              41,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "item[3]",
+            "kind": "item",
+            "xy": [
+              38,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              40,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "grid",
+        "controlled_pool": true,
+        "placements": 2,
+        "complete_scenes": 3,
+        "example": {
+          "id": "settlement-0-cross-market-lot-1-23-N-0-building",
+          "asset": "shrine_a",
+          "context": "grid",
+          "rotation": 180,
+          "mirror": false,
+          "origin": [
+            6017,
+            4282
+          ],
+          "footprint": [
+            6017,
+            4282,
+            6025,
+            4289
+          ],
+          "clearance": [
+            6016,
+            4281,
+            6026,
+            4290
+          ],
+          "approach": [
+            6021,
+            4278,
+            6022,
+            4283
+          ],
+          "road": "settlement-0-street-east-west-0",
+          "join": [
+            6021,
+            4278
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6021,
+              "y": 4282,
+              "normal": "N",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6021,
+              "y": 4285,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6023,
+              "y": 4287,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 6022,
+              "y": 4284,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 6019,
+              "y": 4284,
+              "kind": "item",
+              "required": true
+            }
+          ],
+          "required": false,
+          "dependency": "shrine_a",
+          "role": "support",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "roadside",
+        "controlled_pool": true,
+        "placements": 4,
+        "complete_scenes": 4,
+        "example": {
+          "id": "settlement-1-country-frontage-lot-1-1-S-1-building",
+          "asset": "shrine_a",
+          "context": "roadside",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            3187,
+            1129
+          ],
+          "footprint": [
+            3187,
+            1129,
+            3195,
+            1136
+          ],
+          "clearance": [
+            3186,
+            1128,
+            3196,
+            1137
+          ],
+          "approach": [
+            3190,
+            1135,
+            3191,
+            1140
+          ],
+          "road": "road-4",
+          "join": [
+            3190,
+            1139
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 3190,
+              "y": 1135,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 3190,
+              "y": 1132,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 3188,
+              "y": 1130,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 3189,
+              "y": 1133,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 3192,
+              "y": 1133,
+              "kind": "item",
+              "required": true
+            }
+          ],
+          "required": false,
+          "dependency": "shrine_a",
+          "role": "support",
+          "frontage_entrance": "main"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "hunter_cabin",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              24
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              37,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[2]",
+            "kind": "floor",
+            "xy": [
+              39,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 90,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              36,
+              20
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              39,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[2]",
+            "kind": "floor",
+            "xy": [
+              37,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              17
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              42,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[2]",
+            "kind": "floor",
+            "xy": [
+              40,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 270,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              43,
+              21
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              40,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[2]",
+            "kind": "floor",
+            "xy": [
+              42,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "landmark",
+        "controlled_pool": true,
+        "placements": 1,
+        "complete_scenes": 1,
+        "example": {
+          "id": "landmark-plot-52-building",
+          "asset": "hunter_cabin",
+          "context": "landmark",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6037,
+            4098
+          ],
+          "footprint": [
+            6037,
+            4098,
+            6045,
+            4104
+          ],
+          "clearance": [
+            6036,
+            4097,
+            6046,
+            4105
+          ],
+          "approach": [
+            6040,
+            4103,
+            6041,
+            4107
+          ],
+          "road": "road-7",
+          "join": [
+            6040,
+            4106
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6040,
+              "y": 4103,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6041,
+              "y": 4101,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6038,
+              "y": 4101,
+              "kind": "readable",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "hunter_cabin",
+          "role": "landmark",
+          "frontage_entrance": "main"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "shepherds_hut_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              24
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              38,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                38,
+                20
+              ],
+              [
+                39,
+                19
+              ],
+              [
+                39,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "floor[2]",
+            "kind": "floor",
+            "xy": [
+              40,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 90,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              36,
+              21
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              41,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                40,
+                19
+              ],
+              [
+                40,
+                20
+              ],
+              [
+                41,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "floor[2]",
+            "kind": "floor",
+            "xy": [
+              37,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              17
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              42,
+              22
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                41,
+                21
+              ],
+              [
+                41,
+                22
+              ],
+              [
+                42,
+                21
+              ]
+            ]
+          },
+          {
+            "target": "floor[2]",
+            "kind": "floor",
+            "xy": [
+              40,
+              18
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 270,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              43,
+              21
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[1]",
+            "kind": "container",
+            "xy": [
+              38,
+              23
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                38,
+                22
+              ],
+              [
+                39,
+                22
+              ],
+              [
+                39,
+                23
+              ]
+            ]
+          },
+          {
+            "target": "floor[2]",
+            "kind": "floor",
+            "xy": [
+              42,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "landmark",
+        "controlled_pool": true,
+        "placements": 1,
+        "complete_scenes": 1,
+        "example": {
+          "id": "landmark-plot-52-building",
+          "asset": "shepherds_hut_a",
+          "context": "landmark",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6037,
+            4098
+          ],
+          "footprint": [
+            6037,
+            4098,
+            6044,
+            4104
+          ],
+          "clearance": [
+            6036,
+            4097,
+            6045,
+            4105
+          ],
+          "approach": [
+            6040,
+            4103,
+            6041,
+            4107
+          ],
+          "road": "road-7",
+          "join": [
+            6040,
+            4106
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6040,
+              "y": 4103,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6040,
+              "y": 4101,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6038,
+              "y": 4099,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "shepherds_hut_a",
+          "role": "landmark",
+          "frontage_entrance": "main"
+        }
+      }
+    ]
+  },
+  {
+    "asset": "waymarker_shelter_a",
+    "orientations": [
+      {
+        "rotation": 0,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              39,
+              24
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              41,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              38,
+              20
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                38,
+                21
+              ],
+              [
+                39,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              39,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              41,
+              23
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 90,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              37,
+              20
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              41,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              41,
+              19
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                40,
+                19
+              ],
+              [
+                41,
+                20
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              38,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              38,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 180,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              40,
+              18
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              39,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              38,
+              22
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              41,
+              22
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                40,
+                22
+              ],
+              [
+                41,
+                21
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              40,
+              19
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              38,
+              19
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      },
+      {
+        "rotation": 270,
+        "mirror": false,
+        "access": [
+          {
+            "target": "entry",
+            "xy": [
+              43,
+              21
+            ],
+            "passed": true
+          },
+          {
+            "target": "floor[0]",
+            "kind": "floor",
+            "xy": [
+              40,
+              20
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "readable[1]",
+            "kind": "readable",
+            "xy": [
+              39,
+              19
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "container[2]",
+            "kind": "container",
+            "xy": [
+              39,
+              22
+            ],
+            "passed": true,
+            "approaches": [
+              [
+                39,
+                21
+              ],
+              [
+                40,
+                22
+              ]
+            ]
+          },
+          {
+            "target": "floor[3]",
+            "kind": "floor",
+            "xy": [
+              42,
+              21
+            ],
+            "passed": true,
+            "approaches": []
+          },
+          {
+            "target": "floor[4]",
+            "kind": "floor",
+            "xy": [
+              42,
+              19
+            ],
+            "passed": true,
+            "approaches": []
+          }
+        ],
+        "receipts": null
+      }
+    ],
+    "assigned": [
+      {
+        "context": "landmark",
+        "controlled_pool": true,
+        "placements": 3,
+        "complete_scenes": 4,
+        "example": {
+          "id": "landmark-plot-52-building",
+          "asset": "waymarker_shelter_a",
+          "context": "landmark",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6038,
+            4099
+          ],
+          "footprint": [
+            6038,
+            4099,
+            6044,
+            4104
+          ],
+          "clearance": [
+            6037,
+            4098,
+            6045,
+            4105
+          ],
+          "approach": [
+            6040,
+            4103,
+            6041,
+            4107
+          ],
+          "road": "road-7",
+          "join": [
+            6040,
+            4106
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6040,
+              "y": 4103,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            },
+            {
+              "id": "service",
+              "x": 6042,
+              "y": 4103,
+              "normal": "S",
+              "width": 1,
+              "role": "service",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6041,
+              "y": 4101,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6042,
+              "y": 4100,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 6039,
+              "y": 4100,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "waymarker_shelter_a",
+          "role": "landmark",
+          "frontage_entrance": "main"
+        }
+      },
+      {
+        "context": "compound",
+        "controlled_pool": true,
+        "placements": 1,
+        "complete_scenes": 1,
+        "example": {
+          "id": "site-86-33-16-21-S-slot-shelter-building",
+          "asset": "waymarker_shelter_a",
+          "context": "compound",
+          "rotation": 0,
+          "mirror": false,
+          "origin": [
+            6899,
+            1424
+          ],
+          "footprint": [
+            6899,
+            1424,
+            6905,
+            1429
+          ],
+          "clearance": [
+            6898,
+            1423,
+            6906,
+            1430
+          ],
+          "approach": [
+            6901,
+            1428,
+            6902,
+            1432
+          ],
+          "road": null,
+          "join": [
+            6901,
+            1431
+          ],
+          "entrances": [
+            {
+              "id": "main",
+              "x": 6901,
+              "y": 1428,
+              "normal": "S",
+              "width": 1,
+              "role": "main",
+              "required": true
+            },
+            {
+              "id": "service",
+              "x": 6903,
+              "y": 1428,
+              "normal": "S",
+              "width": 1,
+              "role": "service",
+              "required": true
+            }
+          ],
+          "targets": [
+            {
+              "x": 6902,
+              "y": 1426,
+              "kind": "floor",
+              "required": true
+            },
+            {
+              "x": 6903,
+              "y": 1425,
+              "kind": "readable",
+              "required": true
+            },
+            {
+              "x": 6900,
+              "y": 1425,
+              "kind": "container",
+              "required": true
+            }
+          ],
+          "required": true,
+          "dependency": "waymarker_shelter_a",
+          "role": "rest",
+          "frontage_entrance": "main",
+          "access": {
+            "kind": "internal",
+            "parent": "site-86-33-16-21-S",
+            "path": "site-86-33-16-21-S-path-court"
+          },
+          "parent": "site-86-33-16-21-S",
+          "slot": "shelter"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,52 @@
+{
+  "case": "empty_slots",
+  "phase": "read",
+  "pid": 20044,
+  "harness_completed": true,
+  "checks": [
+    {
+      "property": "saved inventory replaces starter or prior inventory",
+      "expected": [
+        "crow_jerky"
+      ],
+      "observed": [
+        "crow_jerky"
+      ],
+      "property_passed": true
+    },
+    {
+      "property": "equipped instances belong to restored inventory",
+      "expected": true,
+      "observed": true,
+      "property_passed": true
+    },
+    {
+      "property": "saved empty slots replace prior equipment",
+      "expected": true,
+      "observed": true,
+      "property_passed": true
+    }
+  ],
+  "after_load": {
+    "inventory": [
+      "crow_jerky"
+    ],
+    "slots": {
+      "weapon": null,
+      "offhand": null,
+      "armor_head": null,
+      "armor_torso": null,
+      "armor_arms": null,
+      "armor_legs": null,
+      "belt_1": null,
+      "belt_2": null,
+      "belt_3": null,
+      "light": null,
+      "talisman_1": null,
+      "talisman_2": null,
+      "talisman_3": null,
+      "satchel": null
+    },
+    "all_equipped_owned": true
+  }
+}

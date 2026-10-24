@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5998 4248 164 98" width="960"><rect x="5998" y="4248" width="100%" height="100%" fill="#18252b"/>
+<text x="6000" y="4254" fill="white" font-size="3">grid: plan diagnostic; gold roads, green occupied, red vacant, blue approaches</text>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6000" y="4277" width="41" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6040" y="4277" width="81" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6120" y="4277" width="40" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4277" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6119" y="4277" width="3" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4257" width="3" height="22" fill="#d4bc72" opacity="1"/>
+<rect x="6003" y="4277" width="154" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6003" y="4320" width="154" height="3" fill="#d4bc72" opacity="1"/>
+<rect x="6039" y="4260" width="3" height="80" fill="#d4bc72" opacity="1"/>
+<rect x="6119" y="4260" width="3" height="80" fill="#d4bc72" opacity="1"/>
+<g><title>settlement-0-cross-market-lot-civic role=civic: []</title>
+<rect x="6070" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6067" y="4265" width="8" height="10" fill="#68bd92" opacity="1"/>
+<circle cx="6070.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6067" y="4267" fill="#07130d" font-size="1.8">civic</text>
+<text x="6067" y="4269" fill="#07130d" font-size="1.4">bell_tower_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-81-3-S-0 role=commercial: []</title>
+<rect x="6090" y="4274" width="2" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6085" y="4266" width="12" height="9" fill="#68bd92" opacity="1"/>
+<circle cx="6090.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6085" y="4268" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6085" y="4270" fill="#07130d" font-size="1.4">workshop_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-1-1-S-0 role=residential: []</title>
+<rect x="6021" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6016" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6021.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6016" y="4269" fill="#07130d" font-size="1.8">residential</text>
+<text x="6016" y="4271" fill="#07130d" font-size="1.4">house_two_room_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-1-23-N-0 role=support: []</title>
+<rect x="6021" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6017" y="4282" width="8" height="6" fill="#68bd92" opacity="1"/>
+<circle cx="6021.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6017" y="4284" fill="#07130d" font-size="1.8">support</text>
+<text x="6017" y="4286" fill="#07130d" font-size="1.4">tool_shed_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-42-23-W-0 role=residential: [{&#x27;asset&#x27;: &#x27;house_small_b&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}]</title>
+<rect x="6040" y="4290" width="5" height="1" fill="#81c8ea" opacity="0.6"/>
+<rect x="6044" y="4285" width="8" height="10" fill="#68bd92" opacity="1"/>
+<circle cx="6040.5" cy="4290.5" r=".8" fill="white"/>
+<text x="6044" y="4287" fill="#07130d" font-size="1.8">residential</text>
+<text x="6044" y="4289" fill="#07130d" font-size="1.4">house_small_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-1-44-S-0 role=commercial: []</title>
+<rect x="6021" y="4317" width="2" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6016" y="4309" width="12" height="9" fill="#68bd92" opacity="1"/>
+<circle cx="6021.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6016" y="4311" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6016" y="4313" fill="#07130d" font-size="1.4">workshop_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-1-66-N-0 role=residential: []</title>
+<rect x="6021" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6015" y="4325" width="12" height="9" fill="#68bd92" opacity="1"/>
+<circle cx="6021.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6015" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6015" y="4329" fill="#07130d" font-size="1.4">house_hearth_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-42-44-W-0 role=support: [{&#x27;asset&#x27;: &#x27;shrine_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}, {&#x27;asset&#x27;: &#x27;tool_shed_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}, {&#x27;asset&#x27;: &#x27;storehouse_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}]</title>
+<rect x="6042" y="4301" width="37" height="17" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-cross-market-lot-42-66-N-0 role=commercial: []</title>
+<rect x="6061" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6055" y="4325" width="11" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6061.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6055" y="4327" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6055" y="4329" fill="#07130d" font-size="1.4">apothecary_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-81-3-S-1 role=residential: []</title>
+<rect x="6108" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6105" y="4268" width="8" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6108.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6105" y="4270" fill="#07130d" font-size="1.8">residential</text>
+<text x="6105" y="4272" fill="#07130d" font-size="1.4">house_small_b</text>
+</g>
+<g><title>settlement-0-cross-market-lot-81-23-E-0 role=support: [{&#x27;asset&#x27;: &#x27;shrine_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}, {&#x27;asset&#x27;: &#x27;storehouse_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}, {&#x27;asset&#x27;: &#x27;tool_shed_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}]</title>
+<rect x="6081" y="4282" width="38" height="17" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-cross-market-lot-81-66-N-0 role=residential: []</title>
+<rect x="6090" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6086" y="4325" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6090.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6086" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6086" y="4329" fill="#07130d" font-size="1.4">house_two_room_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-122-23-N-0 role=commercial: []</title>
+<rect x="6139" y="4278" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6133" y="4282" width="11" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6139.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6133" y="4284" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6133" y="4286" fill="#07130d" font-size="1.4">apothecary_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-122-3-S-0 role=residential: []</title>
+<rect x="6139" y="4274" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6134" y="4267" width="10" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6139.5" cy="4278.5" r=".8" fill="white"/>
+<text x="6134" y="4269" fill="#07130d" font-size="1.8">residential</text>
+<text x="6134" y="4271" fill="#07130d" font-size="1.4">house_small_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-81-44-E-0 role=support: [{&#x27;asset&#x27;: &#x27;storehouse_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}, {&#x27;asset&#x27;: &#x27;tool_shed_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}, {&#x27;asset&#x27;: &#x27;shrine_a&#x27;, &#x27;rotation&#x27;: None, &#x27;mirror&#x27;: None, &#x27;reason&#x27;: &#x27;no eligible permitted transform for entrance normal&#x27;}]</title>
+<rect x="6081" y="4301" width="38" height="17" fill="#d37b78" opacity="0.18"/>
+</g>
+<g><title>settlement-0-cross-market-lot-81-66-N-1 role=residential: []</title>
+<rect x="6108" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6104" y="4325" width="8" height="7" fill="#68bd92" opacity="1"/>
+<circle cx="6108.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6104" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6104" y="4329" fill="#07130d" font-size="1.4">house_small_b</text>
+</g>
+<g><title>settlement-0-cross-market-lot-122-44-S-0 role=commercial: []</title>
+<rect x="6139" y="4317" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6135" y="4310" width="11" height="8" fill="#68bd92" opacity="1"/>
+<circle cx="6139.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6135" y="4312" fill="#07130d" font-size="1.8">commercial</text>
+<text x="6135" y="4314" fill="#07130d" font-size="1.4">apothecary_a</text>
+</g>
+<g><title>settlement-0-cross-market-lot-122-66-N-0 role=residential: []</title>
+<rect x="6139" y="4321" width="1" height="5" fill="#81c8ea" opacity="0.6"/>
+<rect x="6133" y="4325" width="12" height="9" fill="#68bd92" opacity="1"/>
+<circle cx="6139.5" cy="4321.5" r=".8" fill="white"/>
+<text x="6133" y="4327" fill="#07130d" font-size="1.8">residential</text>
+<text x="6133" y="4329" fill="#07130d" font-size="1.4">house_hearth_a</text>
+</g>
+</svg>
