@@ -1,0 +1,2960 @@
+{
+  "archive": "development-evidence.zip",
+  "bytes": 12260853,
+  "sha256": "99d029c886d091d7d7ac2d8cce77179fa929d76762cf2aadaa442373db9538e3",
+  "members": [
+    {
+      "path": "development/authoring/input-changes.patch",
+      "bytes": 29943,
+      "sha256": "53da4a1036aeb5878bb17d7cd83071f1f060f3ed241d7857a2f1dbe45c98b5e6"
+    },
+    {
+      "path": "development/authoring/inputs.json",
+      "bytes": 454936,
+      "sha256": "4590c98bac2d0429271996d5d38a51ab6f65f00408d31eac2a63b254705d7dce"
+    },
+    {
+      "path": "development/authoring/new-inputs/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/authoring/new-inputs/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/authoring/new-inputs/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/authoring/new-inputs/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/authoring/new-inputs/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/authoring/new-inputs/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/authoring/new-inputs/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/authoring/output.txt",
+      "bytes": 41,
+      "sha256": "1025ef7af85accff775428d3e0566dfbcef5290575c279b414469fe6768c8f8d"
+    },
+    {
+      "path": "development/authoring/raw-tested/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/authoring/raw-tested/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/authoring/raw-tested/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/authoring/raw-tested/roguelike/docs/STRUCTURE_AUTHORING.md",
+      "bytes": 68676,
+      "sha256": "c6dc3f3407039471a426ae5c739bd6abd50c5e293d4ef9b41b8ca394caab028e"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/structure_authoring.py",
+      "bytes": 12016,
+      "sha256": "be3befc40747450f4c35eb5d9f6b8591c305434174b970efb0be5f96c8d6e115"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/structure_editor/catalog.js",
+      "bytes": 25158,
+      "sha256": "5ab2be64242c2fcd71d87938f729dc1307fabc00ab7ca16232da02248926655d"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/structure_editor/editor.js",
+      "bytes": 11973,
+      "sha256": "35f14902cdae14efcf0c0daf817c8adb62efa77e214b11480e4881bb7b3b1052"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/structure_editor/model.js",
+      "bytes": 11374,
+      "sha256": "a955cdf8132c1d257b6758e16d313cf733f4f4e2856a8c515688e614fba53a48"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/verify_g6_authoring.py",
+      "bytes": 5700,
+      "sha256": "be35ce195e2820210a9e1fa6a039bd860c27a156445704357d66db3e49a4294d"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/authoring/raw-tested/tools/verify_structure_editor.py",
+      "bytes": 21023,
+      "sha256": "dd0b3dc0daf87ad406a4baac4963def90555957b209f01a65d4edfd3c86e2f1b"
+    },
+    {
+      "path": "development/authoring/receipt.json",
+      "bytes": 112808,
+      "sha256": "71b53173d17c0116312d19a5325c49e0d41a9aa01c8c8b124398c24a4a7f80f7"
+    },
+    {
+      "path": "development/authoring/results/check-disposable-editor.json",
+      "bytes": 123578,
+      "sha256": "4557030709c766e939b8e07e41fb26a3d2b38696d2c9e89c655dfe30ba80f856"
+    },
+    {
+      "path": "development/authoring/results/child-direct-0.svg",
+      "bytes": 467230,
+      "sha256": "0f5a82aba2a49d9f92d3659c5ae9e7bb524365679e137767f3c6eab95aa04891"
+    },
+    {
+      "path": "development/authoring/results/child-direct-1.svg",
+      "bytes": 467483,
+      "sha256": "fdba25456dc85534c33e5ede40b183d96ab9d043eb72d2842e8127a522510b42"
+    },
+    {
+      "path": "development/authoring/results/child-direct-2.svg",
+      "bytes": 468680,
+      "sha256": "520dc9866d73460d68a7b41fa1b58d13ac9212cd593c86d8fa38f1310f8d2705"
+    },
+    {
+      "path": "development/authoring/results/child-direct-3.svg",
+      "bytes": 468680,
+      "sha256": "6233d43cf5e7809b5956e2285c08f1e763663a54772b8f9b656b5720b9228da3"
+    },
+    {
+      "path": "development/authoring/results/child-direct.json",
+      "bytes": 311650,
+      "sha256": "f324d68c4c696b144cceac3774af64a15498ee04c06c285699940b6f3284c2ac"
+    },
+    {
+      "path": "development/authoring/results/commands.json",
+      "bytes": 132602,
+      "sha256": "df9f3151fd0e337d56ecef6076659afd51b4c5875ffb22a61bddbb7ab052ae18"
+    },
+    {
+      "path": "development/authoring/results/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/authoring/results/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/authoring/results/g7_wayhouse.json",
+      "bytes": 2132,
+      "sha256": "eb2cf2f30dd1c4ae6491b07d55652712f8938cf863d3a5697068e62502d37c3f"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-E-0.svg",
+      "bytes": 487742,
+      "sha256": "7f51d60a9202e224dc661fd7edb3bb5592a4ffea0635905543a93a380393b6ae"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-E-site-117-49-40-5-E-plan.svg",
+      "bytes": 1403,
+      "sha256": "be6cc1bce9d843147a9ab2bcbb6ff8f03b7e898e4f6b5f9f45e8ab5ba58fbd00"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-E.json",
+      "bytes": 1873327,
+      "sha256": "7bfae695b1f4f8378a7a5d50b7a857a9f7b3d6ec765627a069cb105a08ab6aaa"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-E.svg",
+      "bytes": 227973,
+      "sha256": "09f3750e6b8d98f5851f87a68a5c926b1902d5dcb69f7cad38e925c617c36138"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-N-0.svg",
+      "bytes": 489061,
+      "sha256": "33069d0934a9ccdef620cf94f8d7eb827b80586ce9baa12cb65d6f8339836a29"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-N-site-81-34-48-21-N-plan.svg",
+      "bytes": 1402,
+      "sha256": "505556198924ea60a600ea07b6c1dc330cf5a7e7be1e38d2f3860dc10574f3cc"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-N.json",
+      "bytes": 1872197,
+      "sha256": "25d00bb1889da72a61c923ed90f6d20087f74d0efdb92b59b6edc2959dd3885c"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-N.svg",
+      "bytes": 227971,
+      "sha256": "6f6362829d459e4d97dc904007567910552f83df6c3367c914bb641746ba0ea1"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-S-0.svg",
+      "bytes": 487377,
+      "sha256": "7d16861b250b6b9802d4936dfee601422270b583818d6e91c77fb632e108ad84"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-S-site-86-33-16-21-S-plan.svg",
+      "bytes": 1402,
+      "sha256": "9a50b628621ad77f1e0b09a38fce205cb9b6e9594311f7ac8a3a049b8faca8e3"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-S.json",
+      "bytes": 1867523,
+      "sha256": "41f845514fc88133efff10045ebbb71cd5825d74c70420318bd99c9e264541ed"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-S.svg",
+      "bytes": 227947,
+      "sha256": "e212126011b2b87505944e9acc56f72d17b5ab9794827c9d84b3074ba8a69581"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-W-0.svg",
+      "bytes": 489856,
+      "sha256": "dca6183cc0564b1146cc51364363b489455f6dcb7ec45006570acb2efe46c5ef"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-W-site-118-65-40-21-W-plan.svg",
+      "bytes": 1404,
+      "sha256": "b884ae1a7becaacac43ce7db7024f0aba54a0e4584dd20dddf23fce86875c00b"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-W.json",
+      "bytes": 1873289,
+      "sha256": "24ada98c9bd75ee3d1c55583c509de95901d4099dbf69eb1add98f55897506ab"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/assigned-W.svg",
+      "bytes": 227949,
+      "sha256": "8b6a06844d52f6437a31bc56499b1cb7f9c08b259760bbfe817b69528847f9c4"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/cap-shortfall.json",
+      "bytes": 1779000,
+      "sha256": "1274eb350f1822f894584f312e47ebacef77231b7f9d09f99229e78ff3864c77"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/cap-shortfall.svg",
+      "bytes": 228232,
+      "sha256": "ea15c5955811104490d15154f03a5ac5056788ab26760675806aa3a15a48ab14"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/commands.json",
+      "bytes": 113237,
+      "sha256": "72d8f2999ffb448c42ae510e6df06e6bbed61069cd0657d75b107318e209ae05"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/direct-0.svg",
+      "bytes": 469821,
+      "sha256": "a437f389fea991088a834aef49717b4eb0fb51af250c21150334549a4be28fbf"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/direct-1.svg",
+      "bytes": 467483,
+      "sha256": "fdba25456dc85534c33e5ede40b183d96ab9d043eb72d2842e8127a522510b42"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/direct-2.svg",
+      "bytes": 469971,
+      "sha256": "5c717d38b9b809905bace6debf1212cf445c65fc42f5fb4432f31bda4b2154ce"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/direct-3.svg",
+      "bytes": 469915,
+      "sha256": "6eed4a3217e1a546990f6c6413754fd89706874db0c67bba1a7a648e88a1e4d5"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/direct.json",
+      "bytes": 317669,
+      "sha256": "8648515c7115fc0ecb155d8e836e0bf2eb579a7e02b82e920f1425db4967d377"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/editor-catalog.json",
+      "bytes": 116611,
+      "sha256": "288d5cb9166adb30e670d88bb3b2a4517df8ea9bb17af0bdde2edb40e5a96548"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/catalog.json",
+      "bytes": 116611,
+      "sha256": "288d5cb9166adb30e670d88bb3b2a4517df8ea9bb17af0bdde2edb40e5a96548"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/commands.json",
+      "bytes": 110438,
+      "sha256": "285649b962e5da1d619012d6d103c1946c83afdce2b7fdd282897a9bc114a0d1"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_landmark-landmark-0.svg",
+      "bytes": 495104,
+      "sha256": "f758c3f1316f49c1bc2b04d38d2c0b15ad56030b124d1fc9cd3dc389833ac960"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_landmark-landmark.json",
+      "bytes": 1721865,
+      "sha256": "aff2bf0a66d4aed1b1b5d8c290e75b6bc7ca1fc06482a81479e18594d85dc57b"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_landmark-landmark.svg",
+      "bytes": 221641,
+      "sha256": "d34415c2ad63699cedf009b15ab7e1f09c9e20b4ee81db51c01af0ddd8a8810a"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_landmark-orientations-0.svg",
+      "bytes": 467483,
+      "sha256": "5768d41137afe2eecfcb0d8a4c1b77eac553113fa68bc06ce2b730f05da22126"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_landmark-orientations-1.svg",
+      "bytes": 468680,
+      "sha256": "9f1284b131ca4e30e7bb6aabe234b27952294666822792fd78291924bf39401d"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_landmark-orientations-2.svg",
+      "bytes": 467174,
+      "sha256": "8162a24fd13152e7ca57c606e6835a8efa3f0b324f4f9647607c605de3ac8290"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_landmark-orientations-3.svg",
+      "bytes": 469915,
+      "sha256": "cc34b25156e6ee51c6e0b2a81825809ae525d320445ff0af8e4fc689b24211c5"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_landmark-orientations.json",
+      "bytes": 313088,
+      "sha256": "d813b874c7d8a137ede7a23397191b5e0181017c49aa873964ec1e69eb7d92ca"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-grid-0.svg",
+      "bytes": 524613,
+      "sha256": "8bd088531d0c033002c02eec6cf305bb4cb0e38b6be0704a416b3270f6b7c1f8"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-grid-1.svg",
+      "bytes": 537252,
+      "sha256": "6dde81f76700ec0ea1e4e28f69fcc601935d59ef6fc3ccef153cf846a60f5248"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-grid-2.svg",
+      "bytes": 563785,
+      "sha256": "75d2d1e1de603729879897c79a115cf8d799fc00f1c1ab6c846b539a7866f401"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-grid-3.svg",
+      "bytes": 539483,
+      "sha256": "af6ec058228a4cddfab78f118c87a12ab623fe71cfe57d0b7786f1f3b44d75c2"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-grid-4.svg",
+      "bytes": 541039,
+      "sha256": "7bc00e3cc32237afd1fceb09846eac40583a0ab6f8f2af8c2e4c7901a884f601"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-grid.json",
+      "bytes": 2983988,
+      "sha256": "a6c60b40b9fc37a28152fbc2b1cb854d761a956ed250681e6342450d8d3d3749"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-grid.svg",
+      "bytes": 228514,
+      "sha256": "1e3e06358d9105c46a6c746bdc911cc96043edfc34646a68ad7e4661bc232af0"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-orientations-0.svg",
+      "bytes": 472378,
+      "sha256": "132d12c49be3a13015379269ee960f7feaf21f2ee4f5049de6884be2f7e05138"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-orientations-1.svg",
+      "bytes": 471294,
+      "sha256": "a5b9719ce54ad0f354d94104631bef391e01384b051e007e3c758e9cdb43c430"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-orientations-2.svg",
+      "bytes": 473602,
+      "sha256": "62074a7578a7a10d52ce9b51f9e16534cf67de1a207f5a04380ef5446fdd664b"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-orientations-3.svg",
+      "bytes": 472361,
+      "sha256": "2604c8c48a883bad53305a29517401d036818e9b25b33ced7041c581e9f0dc1e"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-orientations-4.svg",
+      "bytes": 471348,
+      "sha256": "3da2c0353084fe2f21127889852eb695acb43c41f381fcac8c1233c9fb9cd99b"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-orientations-5.svg",
+      "bytes": 473600,
+      "sha256": "0d466c4e0c8532f5534dd0f68a449dc02c356323528c563dce83a5b4edb39243"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-orientations-6.svg",
+      "bytes": 472361,
+      "sha256": "e00530b33980ad1c7e1fb3c1e1d88f9b7660dfa2efd33578faf8d5b6c60725a4"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-orientations-7.svg",
+      "bytes": 473585,
+      "sha256": "707dd8c1fb8e9ee3f2dbbc190c70436daac700c09df31c58c98f3b679851dca2"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-orientations.json",
+      "bytes": 666662,
+      "sha256": "92172ecdf2538b3cbb580252c39d9f6b8289ef08d0585d3d1afea0e3d33756c0"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-roadside-0.svg",
+      "bytes": 526385,
+      "sha256": "fc77c8068aa9ae4b02e476436c45a347a84bf3cb1d323d860ad9be72882f2f4b"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-roadside.json",
+      "bytes": 1998966,
+      "sha256": "1e7e0b0b1ff26b0deef63d504b2e5fb3a516fd4de0fc2b170a3c186e2eea1ec1"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_service_house-roadside.svg",
+      "bytes": 228514,
+      "sha256": "1e3e06358d9105c46a6c746bdc911cc96043edfc34646a68ad7e4661bc232af0"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_workshop-grid-0.svg",
+      "bytes": 516395,
+      "sha256": "98d9f1c3aae5703a04d4111b71c5b4d62fd95b8abf4ef7432a14e51eb9c1b9ed"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_workshop-grid-1.svg",
+      "bytes": 522044,
+      "sha256": "8c6f3f170bfedb03b609ac9c6fcbce690c78df6536b8ebfbe6a251d1d70cb807"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_workshop-grid.json",
+      "bytes": 2154531,
+      "sha256": "571727861017e74bfb2df0066c3e06f3d5c6d8ed43174649fc05f95f7d5d9057"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_workshop-grid.svg",
+      "bytes": 228514,
+      "sha256": "1e3e06358d9105c46a6c746bdc911cc96043edfc34646a68ad7e4661bc232af0"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_workshop-orientations-0.svg",
+      "bytes": 470064,
+      "sha256": "7a4f7865025239c473e628fd6d22a36024c153518d9107257235ba50413a812f"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_workshop-orientations-1.svg",
+      "bytes": 472408,
+      "sha256": "180221a572286d3b0ab90b5f141184ed63e888703c84afd13984c2ba2ce9bbc7"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_workshop-orientations-2.svg",
+      "bytes": 472408,
+      "sha256": "f662704dd12c57e7676c3b6b57c970b102cade968fe2887fae2183de30eb9feb"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_workshop-orientations-3.svg",
+      "bytes": 471211,
+      "sha256": "334206e5993141e38b8f4cd96818ebe156f1c6a567a49105d4f806d51b1aa1ab"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/g5_workshop-orientations.json",
+      "bytes": 329275,
+      "sha256": "d1c176254ede6d2e969f61f537f3fc646277b572cae2c699e76837f39fecbaf3"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/installed-catalog.json",
+      "bytes": 123635,
+      "sha256": "cf7b7ccf786ab364fae11488ca8987f2a4f05cd8124c15c6d80a771e496efdd1"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/installed-world.json",
+      "bytes": 1798918,
+      "sha256": "304da6c396fad5d8b3ce56debcb3513be0b743b4b6d9f5728b561f118529b0bd"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/installed-world.svg",
+      "bytes": 228514,
+      "sha256": "1e3e06358d9105c46a6c746bdc911cc96043edfc34646a68ad7e4661bc232af0"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/tuned-world.json",
+      "bytes": 1793043,
+      "sha256": "c7b5dcc7e056f94f4941dc09bd6b8ac7b03d453a61484e73366ebd0ebc110938"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/g5-recipes/tuned-world.svg",
+      "bytes": 228514,
+      "sha256": "1e3e06358d9105c46a6c746bdc911cc96043edfc34646a68ad7e4661bc232af0"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/installed-catalog.json",
+      "bytes": 123578,
+      "sha256": "4aac36ff13d87901f73535585c658212076f016c0790a5664285665504e7532d"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/installed-world.json",
+      "bytes": 1786316,
+      "sha256": "ed0d45f95c06cc0c7144308e704f552d01588d7cdd6db1f731ee05f624802bf6"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/installed-world.svg",
+      "bytes": 228499,
+      "sha256": "bea1f7bc4ef6e8798bb105efcf9a976fd145bd7862607e4ffd12c858f6c2b560"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/selected-0.svg",
+      "bytes": 484010,
+      "sha256": "a4cfa04047b435713cbe13e8e78081effb3387fd703b98bf05a866e99a891544"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/selected-site-29-99-64-21-N-plan.svg",
+      "bytes": 1630,
+      "sha256": "6b86ebd2c1ab07447c058fe97233fbdc70c4942aa7871c7ef16e35559e4ac694"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/selected-site-74-34-16-21-N-plan.svg",
+      "bytes": 1184,
+      "sha256": "35fafaaec2b7e89b33d1c2cf8b2e7141ba817ba2c6703c4ae856ef960adae982"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/selected-site-81-34-48-21-N-plan.svg",
+      "bytes": 1256,
+      "sha256": "5c46781cc1e3d4970b9b865edbeede93ca70bd61e5bbb75a7c229459a09a18c3"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/selected.json",
+      "bytes": 1874839,
+      "sha256": "6c830e32071d16e217226164965c8f49283ff845c9a13611f2652547f5dcea37"
+    },
+    {
+      "path": "development/authoring/results/inherited-g6/selected.svg",
+      "bytes": 228499,
+      "sha256": "bea1f7bc4ef6e8798bb105efcf9a976fd145bd7862607e4ffd12c858f6c2b560"
+    },
+    {
+      "path": "development/authoring/results/init-repeat-0.json",
+      "bytes": 240,
+      "sha256": "ad813c34e4d847ce34d8513a78da26dd01a9c7a2c706932d4bbdf5e807f4a579"
+    },
+    {
+      "path": "development/authoring/results/init-repeat-1.json",
+      "bytes": 240,
+      "sha256": "ad813c34e4d847ce34d8513a78da26dd01a9c7a2c706932d4bbdf5e807f4a579"
+    },
+    {
+      "path": "development/authoring/results/init.json",
+      "bytes": 240,
+      "sha256": "8f57f69124a3ae19173e9a345dc0b6778cccaf198e2d3cea9bc891b299d0e38e"
+    },
+    {
+      "path": "development/authoring/results/installed-catalog.json",
+      "bytes": 123578,
+      "sha256": "4557030709c766e939b8e07e41fb26a3d2b38696d2c9e89c655dfe30ba80f856"
+    },
+    {
+      "path": "development/authoring/results/installed-world.json",
+      "bytes": 1795983,
+      "sha256": "3afb401dd643094e279a5fdaabcbb8b485a431454c9ae8d1b2551e16e4f98619"
+    },
+    {
+      "path": "development/authoring/results/installed-world.svg",
+      "bytes": 228509,
+      "sha256": "19ea76360678629e4aa3be611d187b9a0109e4d0f2e5d56bffaae00ffbbc1ee4"
+    },
+    {
+      "path": "development/authoring/results/ordinary-draft-0.svg",
+      "bytes": 486059,
+      "sha256": "58e7da1371c4c31d473ddaf5e78fc30e65b8be8a82e5528524068ef14db439af"
+    },
+    {
+      "path": "development/authoring/results/ordinary-draft.json",
+      "bytes": 1894715,
+      "sha256": "54d08d35b25a15452adf2055e9b23831c15d4c1cffe57895a5c7b15b1c9d78c4"
+    },
+    {
+      "path": "development/authoring/results/ordinary-draft.svg",
+      "bytes": 228509,
+      "sha256": "19ea76360678629e4aa3be611d187b9a0109e4d0f2e5d56bffaae00ffbbc1ee4"
+    },
+    {
+      "path": "development/authoring/results/path-and-orientation-0.svg",
+      "bytes": 492339,
+      "sha256": "c0e6049f96e25926e3de5102c571d07dea1abd3fe2d05cddbf265f04279164b0"
+    },
+    {
+      "path": "development/authoring/results/path-and-orientation.json",
+      "bytes": 1891333,
+      "sha256": "3dc5002bf4e953e251199f91a81b5e8b74db8ddf187f8ff674c8d1cd1f0feddc"
+    },
+    {
+      "path": "development/authoring/results/path-and-orientation.svg",
+      "bytes": 227957,
+      "sha256": "da93a14e4665375fc3564366bd844ac386a07e055c7733a97b1390d5a48fc3af"
+    },
+    {
+      "path": "development/authoring/results/refresh-disposable-editor.json",
+      "bytes": 123578,
+      "sha256": "4557030709c766e939b8e07e41fb26a3d2b38696d2c9e89c655dfe30ba80f856"
+    },
+    {
+      "path": "development/authoring/results/replaced-child-0.svg",
+      "bytes": 491156,
+      "sha256": "2b89db7315cba2a7e5bed0c3411beeec4e41c9ce76a7cbf80397e114e4e36642"
+    },
+    {
+      "path": "development/authoring/results/replaced-child.json",
+      "bytes": 1885642,
+      "sha256": "377aad85edd72f2a10d17fbf508bb75896e30a66ba7e89071de0205162ebec0b"
+    },
+    {
+      "path": "development/authoring/results/replaced-child.svg",
+      "bytes": 227955,
+      "sha256": "3de81501fa80659d1147e8e3c6359fd86ea562f79f75d897e07fff1d7e24f51c"
+    },
+    {
+      "path": "development/authoring/results/third-building-yard-0.svg",
+      "bytes": 521015,
+      "sha256": "5e35fb4982f4b81f5f479b9ccbe1badfacc530e48226ee52a96ab5da7344fa3c"
+    },
+    {
+      "path": "development/authoring/results/third-building-yard.json",
+      "bytes": 1973571,
+      "sha256": "74dbeb1393b1c5c93871feb3e49cc6ee7bee519f9e36347833525b5ae64a783a"
+    },
+    {
+      "path": "development/authoring/results/third-building-yard.svg",
+      "bytes": 227982,
+      "sha256": "5ada3b0268a38f44852f998fa439c037792c1a4d00bfa530418b2a112f21e396"
+    },
+    {
+      "path": "development/authoring/results/tuned-parent-policy-0.svg",
+      "bytes": 486059,
+      "sha256": "58e7da1371c4c31d473ddaf5e78fc30e65b8be8a82e5528524068ef14db439af"
+    },
+    {
+      "path": "development/authoring/results/tuned-parent-policy.json",
+      "bytes": 1899153,
+      "sha256": "9ea485fe5ec3cdd8f8c1d38877048bbe3c8acf7bd4284ccd3273f5b4292fbe1a"
+    },
+    {
+      "path": "development/authoring/results/tuned-parent-policy.svg",
+      "bytes": 228768,
+      "sha256": "1ec8c0aa02a81601589dc99364357cb92f6aedc8ef690ecc1e8545bd52e8db15"
+    },
+    {
+      "path": "development/authoring/results/two-building-yard-0.svg",
+      "bytes": 501700,
+      "sha256": "466b42a76a02abaa536f2e9fd99c933f5dc2c47e1d6d7de3c573943da4386eb9"
+    },
+    {
+      "path": "development/authoring/results/two-building-yard.json",
+      "bytes": 1919397,
+      "sha256": "2acdfb06d74ab0df578f6cd21d9d41ce93624d01fc4cd4ed8e3270a2c6e86dc9"
+    },
+    {
+      "path": "development/authoring/results/two-building-yard.svg",
+      "bytes": 227982,
+      "sha256": "5ada3b0268a38f44852f998fa439c037792c1a4d00bfa530418b2a112f21e396"
+    },
+    {
+      "path": "development/authoring/results/valid-optional-omission-0.svg",
+      "bytes": 501700,
+      "sha256": "466b42a76a02abaa536f2e9fd99c933f5dc2c47e1d6d7de3c573943da4386eb9"
+    },
+    {
+      "path": "development/authoring/results/valid-optional-omission.json",
+      "bytes": 1920964,
+      "sha256": "00167f6c8c307e7cd345fa33834d95f1c63dca65eec931fb1dec93440ea1746a"
+    },
+    {
+      "path": "development/authoring/results/valid-optional-omission.svg",
+      "bytes": 227982,
+      "sha256": "5ada3b0268a38f44852f998fa439c037792c1a4d00bfa530418b2a112f21e396"
+    },
+    {
+      "path": "development/authoring/results/valid-unselected.json",
+      "bytes": 1767058,
+      "sha256": "facea0509ef11b86536e712c2eb27d55e4dd9bec6a36baf60b1ece35f0fdc6b1"
+    },
+    {
+      "path": "development/authoring/results/valid-unselected.svg",
+      "bytes": 226379,
+      "sha256": "3d7420f62dff82cb913ba942f8e942ad91385fe4b281f6dbb3930057fe4e7527"
+    },
+    {
+      "path": "development/authoring/results/whole-E-0.svg",
+      "bytes": 498844,
+      "sha256": "8cc4bb3e1ceddbab3ab7af20cd5f02f1c5efabf8ca75ef8cfe13b68122084f0e"
+    },
+    {
+      "path": "development/authoring/results/whole-E.json",
+      "bytes": 1902504,
+      "sha256": "cf3591882449619aeb55f39ac713ac5cec9da0f2a91e9b020db52abaab05309c"
+    },
+    {
+      "path": "development/authoring/results/whole-E.svg",
+      "bytes": 227957,
+      "sha256": "c4dedca7423873a39445fe4d3422d7cdbefb4d8b3d2da07ed057ef7458e723c2"
+    },
+    {
+      "path": "development/authoring/results/whole-S-0.svg",
+      "bytes": 492066,
+      "sha256": "41a1d2f04cdc20a700710cb4973a6ad3a7457402f1d27f1b23a96646524820ff"
+    },
+    {
+      "path": "development/authoring/results/whole-S.json",
+      "bytes": 1890471,
+      "sha256": "240ad546fbb2749c6296616248558073fbd07236bfe951901eb430aea3990ea7"
+    },
+    {
+      "path": "development/authoring/results/whole-S.svg",
+      "bytes": 227955,
+      "sha256": "3de81501fa80659d1147e8e3c6359fd86ea562f79f75d897e07fff1d7e24f51c"
+    },
+    {
+      "path": "development/browser/input-changes.patch",
+      "bytes": 29943,
+      "sha256": "53da4a1036aeb5878bb17d7cd83071f1f060f3ed241d7857a2f1dbe45c98b5e6"
+    },
+    {
+      "path": "development/browser/inputs.json",
+      "bytes": 454908,
+      "sha256": "40654bfc4ebb693af497b7a262875609af9589067e0b4fb22b4cea461661be78"
+    },
+    {
+      "path": "development/browser/new-inputs/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/browser/new-inputs/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/browser/new-inputs/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/browser/new-inputs/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/browser/new-inputs/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/browser/new-inputs/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/browser/new-inputs/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/browser/output.txt",
+      "bytes": 156,
+      "sha256": "b00c2e02be2b3f44fba55880f6fb4babfde494dcc9aba8a70766470bd7141d2f"
+    },
+    {
+      "path": "development/browser/raw-tested/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/browser/raw-tested/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/browser/raw-tested/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/browser/raw-tested/roguelike/docs/STRUCTURE_AUTHORING.md",
+      "bytes": 68676,
+      "sha256": "c6dc3f3407039471a426ae5c739bd6abd50c5e293d4ef9b41b8ca394caab028e"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/structure_authoring.py",
+      "bytes": 12016,
+      "sha256": "be3befc40747450f4c35eb5d9f6b8591c305434174b970efb0be5f96c8d6e115"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/structure_editor/catalog.js",
+      "bytes": 25158,
+      "sha256": "5ab2be64242c2fcd71d87938f729dc1307fabc00ab7ca16232da02248926655d"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/structure_editor/editor.js",
+      "bytes": 11973,
+      "sha256": "35f14902cdae14efcf0c0daf817c8adb62efa77e214b11480e4881bb7b3b1052"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/structure_editor/model.js",
+      "bytes": 11374,
+      "sha256": "a955cdf8132c1d257b6758e16d313cf733f4f4e2856a8c515688e614fba53a48"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/verify_g6_authoring.py",
+      "bytes": 5700,
+      "sha256": "be35ce195e2820210a9e1fa6a039bd860c27a156445704357d66db3e49a4294d"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/browser/raw-tested/tools/verify_structure_editor.py",
+      "bytes": 21023,
+      "sha256": "dd0b3dc0daf87ad406a4baac4963def90555957b209f01a65d4edfd3c86e2f1b"
+    },
+    {
+      "path": "development/browser/receipt.json",
+      "bytes": 111670,
+      "sha256": "9453ffa493bb60162ac050b0b2f2fb5048d1a96ff014e635b5eb2719b9933f1a"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-child.json",
+      "bytes": 1966,
+      "sha256": "50fab89f7cef7fcd05c016d35c141dda9df43bf90e8059ce27380fe85740b814"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-direct-0.svg",
+      "bytes": 468774,
+      "sha256": "f0d962adc3d2800d78c59d27b5647aa32d41ccdce1a2f55b2f48874a5addad13"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-direct-1.svg",
+      "bytes": 469971,
+      "sha256": "596d7f054689e5ba872a295259c0b66a7d3d6549af4b35fd231b1884468499bc"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-direct-2.svg",
+      "bytes": 468680,
+      "sha256": "520dc9866d73460d68a7b41fa1b58d13ac9212cd593c86d8fa38f1310f8d2705"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-direct-3.svg",
+      "bytes": 467483,
+      "sha256": "3220992c63db1173d9e172467ce13e2dd03998cfe9317f27aca74f86bb5f165b"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-direct.json",
+      "bytes": 315897,
+      "sha256": "8fe205dfcd7ad1fc673b0bf7a944ef9c98b2feea61916f9ecd53b3229a06c307"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-E-0.svg",
+      "bytes": 498844,
+      "sha256": "8cc4bb3e1ceddbab3ab7af20cd5f02f1c5efabf8ca75ef8cfe13b68122084f0e"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-E.json",
+      "bytes": 1902672,
+      "sha256": "17dc3a23652f2ec649f161a817949019ee41c12db9d5a77825c16babfccd57df"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-E.svg",
+      "bytes": 227957,
+      "sha256": "c4dedca7423873a39445fe4d3422d7cdbefb4d8b3d2da07ed057ef7458e723c2"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-editor.png",
+      "bytes": 146020,
+      "sha256": "107bff800da17d471f3540554672740d486740a1e94022841d7cc28f96af2d7e"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-recipe.json",
+      "bytes": 1353,
+      "sha256": "8c43cf638753127f1cdcc0efda0e1ed55461a446391201e856969b69eae39552"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-S-0.svg",
+      "bytes": 492066,
+      "sha256": "41a1d2f04cdc20a700710cb4973a6ad3a7457402f1d27f1b23a96646524820ff"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-S.json",
+      "bytes": 1890638,
+      "sha256": "c379fc1169c0fff36efd5da875eb254d57f25f218fbb81d4c3cda032db7048f9"
+    },
+    {
+      "path": "development/browser/results/chromium-compound-S.svg",
+      "bytes": 227955,
+      "sha256": "3de81501fa80659d1147e8e3c6359fd86ea562f79f75d897e07fff1d7e24f51c"
+    },
+    {
+      "path": "development/browser/results/chromium-exported-cottage.json",
+      "bytes": 1822,
+      "sha256": "e16f49b0fec8ac25de225ba28ebbc32beca498a835a4f71b6bf7467588bb416a"
+    },
+    {
+      "path": "development/browser/results/chromium-lab.png",
+      "bytes": 146020,
+      "sha256": "107bff800da17d471f3540554672740d486740a1e94022841d7cc28f96af2d7e"
+    },
+    {
+      "path": "development/browser/results/chromium-log.txt",
+      "bytes": 82,
+      "sha256": "3bb8f3c3e8a6f197b2382912be28a039fe233d9bfe86617d3722a59a42036340"
+    },
+    {
+      "path": "development/browser/results/chromium-orientations-0.svg",
+      "bytes": 472501,
+      "sha256": "6a8ebe562c984de909f193a3ed2a6e3662125cb51ee66bb33b873189b892a3ae"
+    },
+    {
+      "path": "development/browser/results/chromium-orientations-1.svg",
+      "bytes": 472555,
+      "sha256": "ceef182cc4a19421b9376d3e43c0fd6b29d04518fd52f5aae073c8e580ab91ca"
+    },
+    {
+      "path": "development/browser/results/chromium-orientations-2.svg",
+      "bytes": 473587,
+      "sha256": "3b4e08bdcfcd34795bf895166a6991f78bb2d7ab5e2e9d82fa62f0b8903a08a8"
+    },
+    {
+      "path": "development/browser/results/chromium-orientations-3.svg",
+      "bytes": 471154,
+      "sha256": "95a8d32d71984322e51de86b046d4e87166ac930d732f56d47e6d3d703fe1691"
+    },
+    {
+      "path": "development/browser/results/chromium-orientations-4.svg",
+      "bytes": 472357,
+      "sha256": "69ad38d6191d0e69dea65de5162badd87a06da991a9bc5229ff266aa4a5b5c23"
+    },
+    {
+      "path": "development/browser/results/chromium-orientations-5.svg",
+      "bytes": 471513,
+      "sha256": "adc9a53a316c23849d5ef2d4465f1781f3cba4388b7aaa05e773ef0b2b20a1c6"
+    },
+    {
+      "path": "development/browser/results/chromium-orientations-6.svg",
+      "bytes": 473481,
+      "sha256": "d74903c8622aed83e8504a0513d0d66aac014fc85cce268a43556f4f83afb2b4"
+    },
+    {
+      "path": "development/browser/results/chromium-orientations-7.svg",
+      "bytes": 471298,
+      "sha256": "171b31973cebc9b97a6c59750206937d94732df998c98b5be4b82ee03eddb24d"
+    },
+    {
+      "path": "development/browser/results/chromium-orientations.json",
+      "bytes": 665164,
+      "sha256": "f52ef2c61a36baaa53e8d0af481a1b6a520d2944f622c2cf78907306332213fd"
+    },
+    {
+      "path": "development/browser/results/chromium-planned-frontage.json",
+      "bytes": 2408,
+      "sha256": "2e04307596c4b3e1e7b224bc89b09cbb0b05b02a0d30a3987214a0fbfa820f23"
+    },
+    {
+      "path": "development/browser/results/chromium-planned-runtime-0.svg",
+      "bytes": 525470,
+      "sha256": "2d2be27126dfdef8169b46b1c96b6e009d77bb005d787ae7feedf4128fade25b"
+    },
+    {
+      "path": "development/browser/results/chromium-planned-runtime-1.svg",
+      "bytes": 537628,
+      "sha256": "8cc56040fc71bc095a2dd0fb3b2bba9b93d78387e05a11c9e1a52e605df4b744"
+    },
+    {
+      "path": "development/browser/results/chromium-planned-runtime-2.svg",
+      "bytes": 563568,
+      "sha256": "92d4649a6fd71adf78659bbed5d6020804241040eed074b6f118839a33c8c967"
+    },
+    {
+      "path": "development/browser/results/chromium-planned-runtime-3.svg",
+      "bytes": 540016,
+      "sha256": "86acb080cf72e575d4b03b822be41c20aff8fb4aacd190e97c6e4d64e28bc739"
+    },
+    {
+      "path": "development/browser/results/chromium-planned-runtime-4.svg",
+      "bytes": 539245,
+      "sha256": "c7e91d3d9d705ccc382c055dbe5f48217ad9a9d2e19a71b39df679450544a980"
+    },
+    {
+      "path": "development/browser/results/chromium-planned-runtime.json",
+      "bytes": 2987046,
+      "sha256": "12639fe48e4ee3840bf2848a38c61e9600ca98d6c51346f46a3a8532acbf8865"
+    },
+    {
+      "path": "development/browser/results/chromium-planned-runtime.svg",
+      "bytes": 228514,
+      "sha256": "1e3e06358d9105c46a6c746bdc911cc96043edfc34646a68ad7e4661bc232af0"
+    },
+    {
+      "path": "development/browser/results/chromium-runtime-0.svg",
+      "bytes": 470381,
+      "sha256": "cb5321a0fbd8b89def16479c4cab4c4f45d378b5e6141cdc69c838d40c74aa72"
+    },
+    {
+      "path": "development/browser/results/chromium-runtime-1.svg",
+      "bytes": 470360,
+      "sha256": "819420efe51d9dea351dacc7241a93ae53962d18c802917f3d78623dc1b84414"
+    },
+    {
+      "path": "development/browser/results/chromium-runtime.json",
+      "bytes": 357671,
+      "sha256": "8ad0b6a472e0d49ba4b5575684952d113bda24b82f81126d83f6912b6aefee18"
+    },
+    {
+      "path": "development/browser/results/chromium-site-direct-0.svg",
+      "bytes": 469971,
+      "sha256": "83a95e3ff0cdb4ff2868dba0651b4dbdd7c9d2b4b82623a051950b63adfab2e6"
+    },
+    {
+      "path": "development/browser/results/chromium-site-direct-1.svg",
+      "bytes": 467483,
+      "sha256": "fdba25456dc85534c33e5ede40b183d96ab9d043eb72d2842e8127a522510b42"
+    },
+    {
+      "path": "development/browser/results/chromium-site-direct-2.svg",
+      "bytes": 469915,
+      "sha256": "e71188ea1df8a3fa967f0970e7019dc5307f0ee7621dd2a6a9c97528b95c7879"
+    },
+    {
+      "path": "development/browser/results/chromium-site-direct-3.svg",
+      "bytes": 468774,
+      "sha256": "e017a84721e6187b6ffdc98ce608d570b6f4950fe6dac0a8c899f9e0735d8916"
+    },
+    {
+      "path": "development/browser/results/chromium-site-direct.json",
+      "bytes": 317144,
+      "sha256": "57aa0e6f327ca9b3c7967ea264e11088f68f6a7faa913399ebe3f175b2fdc5a7"
+    },
+    {
+      "path": "development/browser/results/chromium-site-E-0.svg",
+      "bytes": 487701,
+      "sha256": "b200202e581fa58e4e8f390d44f13f11755ba3c1d636845e9e8cd7338faabe33"
+    },
+    {
+      "path": "development/browser/results/chromium-site-E-site-117-49-40-5-E-plan.svg",
+      "bytes": 1414,
+      "sha256": "7a5961e9b77350e5b048855b8b857ba6ac57aa4878ce6d3a8f08e57e1af2020b"
+    },
+    {
+      "path": "development/browser/results/chromium-site-E.json",
+      "bytes": 1873389,
+      "sha256": "cb4ee29ce8e6cb7833ed8ac8f052f8365d20a4b7f36b5d6585adce6644ccff14"
+    },
+    {
+      "path": "development/browser/results/chromium-site-E.svg",
+      "bytes": 227983,
+      "sha256": "72ed706f08240dc1a78637ae4eab634cedf1f026442fb10418a9cf93b92ab819"
+    },
+    {
+      "path": "development/browser/results/chromium-site-editor.png",
+      "bytes": 146147,
+      "sha256": "a0828c00ced1db01105edfcdbdb3379424783c547ca6782133ed16f822ff1c66"
+    },
+    {
+      "path": "development/browser/results/chromium-site-N-0.svg",
+      "bytes": 488653,
+      "sha256": "0438bc153bf8f1c8d09154bf8d02608e81e5c5db70c59a43873aa55af88420c6"
+    },
+    {
+      "path": "development/browser/results/chromium-site-N-site-81-34-48-21-N-plan.svg",
+      "bytes": 1413,
+      "sha256": "bf5730e24e98811dcf57991a5cde63b4650bb4a259301ed80e3e222b99b20dc8"
+    },
+    {
+      "path": "development/browser/results/chromium-site-N.json",
+      "bytes": 1871988,
+      "sha256": "2ef4cb3ca9eff5c8eff032d8eddeb7d09f7af0a26a8459dd8f4ddcc6443e5522"
+    },
+    {
+      "path": "development/browser/results/chromium-site-N.svg",
+      "bytes": 227981,
+      "sha256": "5ae88462c1d7a80e0de6936d7d097c1e8ed03543c2b44c5d35093b624a888146"
+    },
+    {
+      "path": "development/browser/results/chromium-site-S-0.svg",
+      "bytes": 487022,
+      "sha256": "356d4b7a71908196dfcc8f03dbbee74a2fb49806078b2de077653c6b42736ae1"
+    },
+    {
+      "path": "development/browser/results/chromium-site-S-site-86-33-16-21-S-plan.svg",
+      "bytes": 1413,
+      "sha256": "9da0d60d9454babd0314fa244b3ec35b477c76836c4ca699020da2999f4917c8"
+    },
+    {
+      "path": "development/browser/results/chromium-site-S.json",
+      "bytes": 1867362,
+      "sha256": "ab74d04657081d07eadf0ba5809e99d82e0d648983a3e04f1754faf59f91468e"
+    },
+    {
+      "path": "development/browser/results/chromium-site-S.svg",
+      "bytes": 227957,
+      "sha256": "f3d9c867b05b59a16bf4931ff56111c1055d42cce58126dae7de8ab3bdb99506"
+    },
+    {
+      "path": "development/browser/results/chromium-site-W-0.svg",
+      "bytes": 489327,
+      "sha256": "158f5fcd3d2fe67557eef2b4dd92a08dba14b1d6fd3508c44feab090ac3593e5"
+    },
+    {
+      "path": "development/browser/results/chromium-site-W-site-118-65-40-21-W-plan.svg",
+      "bytes": 1415,
+      "sha256": "bdbe3b560782f5a049de3ff1571d7d6ad8c70b859845071feb5c50b07dbd6666"
+    },
+    {
+      "path": "development/browser/results/chromium-site-W.json",
+      "bytes": 1873003,
+      "sha256": "b29f8993f57ef69741dbacecb154e06a06285835c8fcfcc44e47bebe881428c3"
+    },
+    {
+      "path": "development/browser/results/chromium-site-W.svg",
+      "bytes": 227959,
+      "sha256": "2b2d9904b3beb1f65a189656984fe05dc233e0e25261a44feb8b49016af38f08"
+    },
+    {
+      "path": "development/browser/results/chromium-site.json",
+      "bytes": 1919,
+      "sha256": "520117aae3345f172c53430b226ae4b6d69ba7012f3827563b940dc0820c8a06"
+    },
+    {
+      "path": "development/browser/results/chromium.json",
+      "bytes": 18296,
+      "sha256": "869b5f656b2178aee98752637ee039fe2e12355b9dd4f05f42028e2d04c92645"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-child.json",
+      "bytes": 1965,
+      "sha256": "47bc564295ce1a5910db3026687089a9af67de3b7a5a97caa128888dcfd42d5a"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-direct-0.svg",
+      "bytes": 467324,
+      "sha256": "b9f081475f6d15675fa16bb88f8e21f26497d9667403e2314ab5017b8c2daf06"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-direct-1.svg",
+      "bytes": 467230,
+      "sha256": "2d1e602723b507cda0e249e6aeb96eb0d15bdb61a3aa53fcbfa1f910eda11c48"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-direct-2.svg",
+      "bytes": 467483,
+      "sha256": "b90fe20bc4959aa3084b0daa3972ad543bdede6b01d4d34f7c86b5fe4090553d"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-direct-3.svg",
+      "bytes": 468624,
+      "sha256": "cba17a2fd40baacb1117153645d7932420c63712a6a1d88776dcb042a223e465"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-direct.json",
+      "bytes": 310671,
+      "sha256": "836f01d9707e0c01b0aaf89a723ab8c394b367c268c1fdd1eea21b633ee15ab5"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-E-0.svg",
+      "bytes": 498844,
+      "sha256": "8cc4bb3e1ceddbab3ab7af20cd5f02f1c5efabf8ca75ef8cfe13b68122084f0e"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-E.json",
+      "bytes": 1902658,
+      "sha256": "eafe8cb8c76a34af593e09ca5036eba7052bfdd0ca1e65369d7c898a40402f10"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-E.svg",
+      "bytes": 227957,
+      "sha256": "c4dedca7423873a39445fe4d3422d7cdbefb4d8b3d2da07ed057ef7458e723c2"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-editor.png",
+      "bytes": 127889,
+      "sha256": "c36a6780d9998c39829ed191c1d132548879da1fc1113bc1756363386060a875"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-recipe.json",
+      "bytes": 1352,
+      "sha256": "26062cf05f7f89197b34c7b1d8881350c0b87d3bae4a5d3224fe44e3d6fed179"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-S-0.svg",
+      "bytes": 492066,
+      "sha256": "41a1d2f04cdc20a700710cb4973a6ad3a7457402f1d27f1b23a96646524820ff"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-S.json",
+      "bytes": 1890627,
+      "sha256": "ca810d4b7136d608efe7204db969f48b2c395c0c8b5b25d6287040d7aa250ff2"
+    },
+    {
+      "path": "development/browser/results/firefox-compound-S.svg",
+      "bytes": 227955,
+      "sha256": "3de81501fa80659d1147e8e3c6359fd86ea562f79f75d897e07fff1d7e24f51c"
+    },
+    {
+      "path": "development/browser/results/firefox-exported-cottage.json",
+      "bytes": 1822,
+      "sha256": "e16f49b0fec8ac25de225ba28ebbc32beca498a835a4f71b6bf7467588bb416a"
+    },
+    {
+      "path": "development/browser/results/firefox-lab.png",
+      "bytes": 127889,
+      "sha256": "c36a6780d9998c39829ed191c1d132548879da1fc1113bc1756363386060a875"
+    },
+    {
+      "path": "development/browser/results/firefox-log.txt",
+      "bytes": 74,
+      "sha256": "42a54b530e90c99982191563d4daeee94ebd3805f031a85b294d9b095b78fbf8"
+    },
+    {
+      "path": "development/browser/results/firefox-orientations-0.svg",
+      "bytes": 472230,
+      "sha256": "e9b36278b3a75d0f0a0c193ff00b010541f835885cd717914dee26aa9dd0fae2"
+    },
+    {
+      "path": "development/browser/results/firefox-orientations-1.svg",
+      "bytes": 472593,
+      "sha256": "7d3e14c58aeea0be3a3949f999a23a9d694fda9eebe8f6667aa901de0eb2afe7"
+    },
+    {
+      "path": "development/browser/results/firefox-orientations-2.svg",
+      "bytes": 472430,
+      "sha256": "5f8aff57bc616d15334116f05431be2cadeca1210e83971d95265ad84c76c04f"
+    },
+    {
+      "path": "development/browser/results/firefox-orientations-3.svg",
+      "bytes": 473802,
+      "sha256": "2924b62dc70d7d2119708ee2a779c0a4b200b30a70cfb90dabc22ab53e9dccdc"
+    },
+    {
+      "path": "development/browser/results/firefox-orientations-4.svg",
+      "bytes": 471419,
+      "sha256": "cfdd5af524588024c2bc3c26a33d46c381c2d841bbb53a1db741edae06a94163"
+    },
+    {
+      "path": "development/browser/results/firefox-orientations-5.svg",
+      "bytes": 472576,
+      "sha256": "d78ea5a4b61979474236ad77060ec340a126111bb15b24c6c4c36eb5984891bd"
+    },
+    {
+      "path": "development/browser/results/firefox-orientations-6.svg",
+      "bytes": 471298,
+      "sha256": "2c6900e30fc4b211bb47220038c0f5bed0eb36ec7e48fe25beb8349f46c8d3e1"
+    },
+    {
+      "path": "development/browser/results/firefox-orientations-7.svg",
+      "bytes": 473602,
+      "sha256": "fed320239b9688574969f8c26bbe23fc5f7184d91c386fdab160846c5ed6e2f9"
+    },
+    {
+      "path": "development/browser/results/firefox-orientations.json",
+      "bytes": 666821,
+      "sha256": "5e989968c4d614ee0a10d7e2e47de6c097881b156d7b6d986c27f4040689ed8a"
+    },
+    {
+      "path": "development/browser/results/firefox-planned-frontage.json",
+      "bytes": 2407,
+      "sha256": "f1e5f47016353de8a4c0581bb244274ac75590b31e1ead68049a1fec7692a421"
+    },
+    {
+      "path": "development/browser/results/firefox-planned-runtime-0.svg",
+      "bytes": 525470,
+      "sha256": "2d2be27126dfdef8169b46b1c96b6e009d77bb005d787ae7feedf4128fade25b"
+    },
+    {
+      "path": "development/browser/results/firefox-planned-runtime-1.svg",
+      "bytes": 537628,
+      "sha256": "8cc56040fc71bc095a2dd0fb3b2bba9b93d78387e05a11c9e1a52e605df4b744"
+    },
+    {
+      "path": "development/browser/results/firefox-planned-runtime-2.svg",
+      "bytes": 563568,
+      "sha256": "92d4649a6fd71adf78659bbed5d6020804241040eed074b6f118839a33c8c967"
+    },
+    {
+      "path": "development/browser/results/firefox-planned-runtime-3.svg",
+      "bytes": 540016,
+      "sha256": "86acb080cf72e575d4b03b822be41c20aff8fb4aacd190e97c6e4d64e28bc739"
+    },
+    {
+      "path": "development/browser/results/firefox-planned-runtime-4.svg",
+      "bytes": 539245,
+      "sha256": "c7e91d3d9d705ccc382c055dbe5f48217ad9a9d2e19a71b39df679450544a980"
+    },
+    {
+      "path": "development/browser/results/firefox-planned-runtime.json",
+      "bytes": 2986924,
+      "sha256": "70c0d9f62d664ba1162006285f1ee80c28d62ad7c0e6b29396687bbc31935443"
+    },
+    {
+      "path": "development/browser/results/firefox-planned-runtime.svg",
+      "bytes": 228514,
+      "sha256": "1e3e06358d9105c46a6c746bdc911cc96043edfc34646a68ad7e4661bc232af0"
+    },
+    {
+      "path": "development/browser/results/firefox-runtime-0.svg",
+      "bytes": 470381,
+      "sha256": "cb5321a0fbd8b89def16479c4cab4c4f45d378b5e6141cdc69c838d40c74aa72"
+    },
+    {
+      "path": "development/browser/results/firefox-runtime-1.svg",
+      "bytes": 470360,
+      "sha256": "819420efe51d9dea351dacc7241a93ae53962d18c802917f3d78623dc1b84414"
+    },
+    {
+      "path": "development/browser/results/firefox-runtime.json",
+      "bytes": 357668,
+      "sha256": "ab8df5bc5e1f83d3075f803e771f644df2b46e3167205c31bfbbbb29283297ec"
+    },
+    {
+      "path": "development/browser/results/firefox-site-direct-0.svg",
+      "bytes": 468774,
+      "sha256": "f0d962adc3d2800d78c59d27b5647aa32d41ccdce1a2f55b2f48874a5addad13"
+    },
+    {
+      "path": "development/browser/results/firefox-site-direct-1.svg",
+      "bytes": 467230,
+      "sha256": "2d1e602723b507cda0e249e6aeb96eb0d15bdb61a3aa53fcbfa1f910eda11c48"
+    },
+    {
+      "path": "development/browser/results/firefox-site-direct-2.svg",
+      "bytes": 469971,
+      "sha256": "5c717d38b9b809905bace6debf1212cf445c65fc42f5fb4432f31bda4b2154ce"
+    },
+    {
+      "path": "development/browser/results/firefox-site-direct-3.svg",
+      "bytes": 468465,
+      "sha256": "4a6d33ede08bf37b9f20c3a32ecaffed8d99209463b9281db4ba85ebc0ca984a"
+    },
+    {
+      "path": "development/browser/results/firefox-site-direct.json",
+      "bytes": 315060,
+      "sha256": "d8c36926cb92e3afb58d45f16fcf59f1fcd2696a7d9403ab8218b6cce6eca800"
+    },
+    {
+      "path": "development/browser/results/firefox-site-E-0.svg",
+      "bytes": 487701,
+      "sha256": "b200202e581fa58e4e8f390d44f13f11755ba3c1d636845e9e8cd7338faabe33"
+    },
+    {
+      "path": "development/browser/results/firefox-site-E-site-117-49-40-5-E-plan.svg",
+      "bytes": 1413,
+      "sha256": "0c0580f577295caa0e42fbe30aacc004bad2e35a96db20a5431eca10ef2c63ea"
+    },
+    {
+      "path": "development/browser/results/firefox-site-E.json",
+      "bytes": 1873377,
+      "sha256": "f04cf66867bb99b785eeba69e54a4926bb3d7222cf58a99df78cb4a5df7e291e"
+    },
+    {
+      "path": "development/browser/results/firefox-site-E.svg",
+      "bytes": 227982,
+      "sha256": "4c43b55b9a74ebbcd5e5a65038a31298e660677234b051038a04c3c348e7ca7d"
+    },
+    {
+      "path": "development/browser/results/firefox-site-editor.png",
+      "bytes": 128084,
+      "sha256": "fd95af8267113205cee3db1fe4c90b88cd97e947a32ac81ec686897120e99260"
+    },
+    {
+      "path": "development/browser/results/firefox-site-N-0.svg",
+      "bytes": 488653,
+      "sha256": "0438bc153bf8f1c8d09154bf8d02608e81e5c5db70c59a43873aa55af88420c6"
+    },
+    {
+      "path": "development/browser/results/firefox-site-N-site-81-34-48-21-N-plan.svg",
+      "bytes": 1412,
+      "sha256": "c1337d98185ead7b6d898068b97bb41906850ff79ccfbed18a1fda410667683e"
+    },
+    {
+      "path": "development/browser/results/firefox-site-N.json",
+      "bytes": 1871974,
+      "sha256": "26caa5236312edd77875ea2be938139653a603ed04575b13c17774bab7e3e7e2"
+    },
+    {
+      "path": "development/browser/results/firefox-site-N.svg",
+      "bytes": 227980,
+      "sha256": "408112493e0640ddb099850122fd691bbc5a53966b9e6906ac737fcc7caa66cd"
+    },
+    {
+      "path": "development/browser/results/firefox-site-S-0.svg",
+      "bytes": 487022,
+      "sha256": "356d4b7a71908196dfcc8f03dbbee74a2fb49806078b2de077653c6b42736ae1"
+    },
+    {
+      "path": "development/browser/results/firefox-site-S-site-86-33-16-21-S-plan.svg",
+      "bytes": 1412,
+      "sha256": "d5552ff21b52d5ccc22c0692faeb7de7c647d72ccb946bc0293879a53dc17d54"
+    },
+    {
+      "path": "development/browser/results/firefox-site-S.json",
+      "bytes": 1867351,
+      "sha256": "4317485e315373d0c61e26f194a89e111536256eb61318034b213ab13172ade3"
+    },
+    {
+      "path": "development/browser/results/firefox-site-S.svg",
+      "bytes": 227956,
+      "sha256": "1436d16f646fb8faa8820bd2041233f65780ec1f88cedb3428a92e376c89a0b7"
+    },
+    {
+      "path": "development/browser/results/firefox-site-W-0.svg",
+      "bytes": 489327,
+      "sha256": "158f5fcd3d2fe67557eef2b4dd92a08dba14b1d6fd3508c44feab090ac3593e5"
+    },
+    {
+      "path": "development/browser/results/firefox-site-W-site-118-65-40-21-W-plan.svg",
+      "bytes": 1414,
+      "sha256": "10b98ef4452c26716b4b01cf0e1153bb05c39988de0596dca73a5939490b4d63"
+    },
+    {
+      "path": "development/browser/results/firefox-site-W.json",
+      "bytes": 1872991,
+      "sha256": "38275a4196c8a48a27fdbd75bdee234b763a9c586540ee3ae6ab929cbf5c9ae6"
+    },
+    {
+      "path": "development/browser/results/firefox-site-W.svg",
+      "bytes": 227958,
+      "sha256": "7942463e24d9afddc1a3562e3e34752fb0e6e2928d06594c3616f4bc10a2a330"
+    },
+    {
+      "path": "development/browser/results/firefox-site.json",
+      "bytes": 1918,
+      "sha256": "651ddffa72f9f92b5a597ad9ef2c373147d14429ec41d80982fa12d09e20b960"
+    },
+    {
+      "path": "development/browser/results/firefox.json",
+      "bytes": 18243,
+      "sha256": "e2b67adfe9ffd392190ab79d6874d38747068170da6bd453b0d0261f1c29dba3"
+    },
+    {
+      "path": "development/browser/results/summary.json",
+      "bytes": 88276,
+      "sha256": "2bd1b8815ee480fa753839e90e438cba17c3bee1ceba64e27670b67ff69cca53"
+    },
+    {
+      "path": "development/compound-tests-1/output.txt",
+      "bytes": 910,
+      "sha256": "cf93ef006a306e226b6b1da5593455a1a86ce302bf475bbdd92dab6997a973ae"
+    },
+    {
+      "path": "development/compound-tests-1/receipt.json",
+      "bytes": 87016,
+      "sha256": "b5f83bc56c7d7dd5d4058bdc67830301be7db8463c60a42091383364a066face"
+    },
+    {
+      "path": "development/compound-tests-2/g7-atomic-fit.json",
+      "bytes": 617,
+      "sha256": "d35f58b93f6b3d8b29268638499a2b60579fd4ee4a2670cb3dcdbc4c45fe478e"
+    },
+    {
+      "path": "development/compound-tests-2/g7-authentic-g6-restore.json",
+      "bytes": 218,
+      "sha256": "55758f6d08eaf276add939d653b5bfd4e0056ac421ad17e017d2ef2c879f0de7"
+    },
+    {
+      "path": "development/compound-tests-2/g7-hash-seeds.json",
+      "bytes": 298,
+      "sha256": "ffa3215d4dce243bb26e88f4277276a6719dbb6f23b227a90d0837460c7b01e8"
+    },
+    {
+      "path": "development/compound-tests-2/g7-homestead_workyard-production.png",
+      "bytes": 13475,
+      "sha256": "7d3c0f88eed9b957e8bc292e13f46b775ecd2c1264308cc75af3ce84f90776a5"
+    },
+    {
+      "path": "development/compound-tests-2/g7-independent-children.json",
+      "bytes": 1318,
+      "sha256": "ba9490d26a8f368ab58da1f78ce100993631e0f42318de3b0abe830de374103d"
+    },
+    {
+      "path": "development/compound-tests-2/g7-late-child-rollback.json",
+      "bytes": 291,
+      "sha256": "9303822bf61e934ef622ae3e6edcd4cbdd9c21764b3e2b5883dd115e0824748e"
+    },
+    {
+      "path": "development/compound-tests-2/g7-native-views.json",
+      "bytes": 501,
+      "sha256": "dac3b61ed3cb19a95e8d8724199d89f696b5bccd255457d7e22aefffb43b407d"
+    },
+    {
+      "path": "development/compound-tests-2/g7-real-preparation-negatives.json",
+      "bytes": 1650,
+      "sha256": "1cdc51e60cd6c7c555643aca6c5c0ce0eb9420f561879b2cfb5abe51597fc73d"
+    },
+    {
+      "path": "development/compound-tests-2/g7-recipe-transforms.json",
+      "bytes": 163498,
+      "sha256": "dacd981c0f2dafbbd122ae3f76d205f1b7ea469b1275122df5ba96ea19461e0f"
+    },
+    {
+      "path": "development/compound-tests-2/g7-wayside_shrine_court-production.png",
+      "bytes": 14276,
+      "sha256": "f7b9dd690eff339b010c49a963dabf63c10cae0ec7c14859a3b93eba4dbabdb5"
+    },
+    {
+      "path": "development/compound-tests-2/output.txt",
+      "bytes": 4267,
+      "sha256": "402569dbac04f11bad137f8d5198f944305253887bd88c88aeb2c306faaef166"
+    },
+    {
+      "path": "development/compound-tests-2/receipt.json",
+      "bytes": 88529,
+      "sha256": "0fa9458fdf26a8e39597f36c5f61f431199a38f105e8d45223100960852d4718"
+    },
+    {
+      "path": "development/corrections/g7-homestead_workyard-production.png",
+      "bytes": 70479,
+      "sha256": "adb0a9525c0446ec517d85a09a99354e4accf9e554d18866f8b6751f2b7605df"
+    },
+    {
+      "path": "development/corrections/g7-invalid-recipes.json",
+      "bytes": 1520,
+      "sha256": "2b8881b13f0372bd7718b5a2dc3fa59e636f365cb4e829bf3b9ded9469c8017c"
+    },
+    {
+      "path": "development/corrections/g7-native-views.json",
+      "bytes": 631,
+      "sha256": "6bcfcebe1cd30c79ba15836b32a826eaee7f5cc32261bf6f33fbe7568273ca0f"
+    },
+    {
+      "path": "development/corrections/g7-wayside_shrine_court-production.png",
+      "bytes": 72154,
+      "sha256": "191fd6bf3488117252d99f486ca91ae5d45b957f2e69eec4a671a247c797f61b"
+    },
+    {
+      "path": "development/corrections/output.txt",
+      "bytes": 426,
+      "sha256": "5a41e97a11ad5e826cfd3c7f78cb8ce8452e7ecdfebe77ad098db88981923b84"
+    },
+    {
+      "path": "development/corrections/receipt.json",
+      "bytes": 87849,
+      "sha256": "07590f359835e53552f8c6f25583a2cab53ed605e92cb0bb5bd9e9e564004fb9"
+    },
+    {
+      "path": "development/first-plan.json",
+      "bytes": 1792836,
+      "sha256": "c69cec48ca25e0cd074ccc13e9a76f16a568fae640cbe7286ed76e93f2b2e1bc"
+    },
+    {
+      "path": "development/focused-all/input-changes.patch",
+      "bytes": 29943,
+      "sha256": "53da4a1036aeb5878bb17d7cd83071f1f060f3ed241d7857a2f1dbe45c98b5e6"
+    },
+    {
+      "path": "development/focused-all/inputs.json",
+      "bytes": 454964,
+      "sha256": "389ab86bcd08c90252d632cd250eb33f076bc599230c3b029e9f60b656d0d7a3"
+    },
+    {
+      "path": "development/focused-all/new-inputs/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/focused-all/new-inputs/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/focused-all/new-inputs/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/focused-all/new-inputs/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/focused-all/new-inputs/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/focused-all/new-inputs/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/focused-all/new-inputs/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/focused-all/output.txt",
+      "bytes": 334,
+      "sha256": "29c6a61260bb620d71c7fda8efb002323ef1b4e02b3384e22b8aa040fcfe2471"
+    },
+    {
+      "path": "development/focused-all/raw-tested/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/focused-all/raw-tested/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/focused-all/raw-tested/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/focused-all/raw-tested/roguelike/docs/STRUCTURE_AUTHORING.md",
+      "bytes": 68676,
+      "sha256": "c6dc3f3407039471a426ae5c739bd6abd50c5e293d4ef9b41b8ca394caab028e"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/structure_authoring.py",
+      "bytes": 12016,
+      "sha256": "be3befc40747450f4c35eb5d9f6b8591c305434174b970efb0be5f96c8d6e115"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/structure_editor/catalog.js",
+      "bytes": 25158,
+      "sha256": "5ab2be64242c2fcd71d87938f729dc1307fabc00ab7ca16232da02248926655d"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/structure_editor/editor.js",
+      "bytes": 11973,
+      "sha256": "35f14902cdae14efcf0c0daf817c8adb62efa77e214b11480e4881bb7b3b1052"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/structure_editor/model.js",
+      "bytes": 11374,
+      "sha256": "a955cdf8132c1d257b6758e16d313cf733f4f4e2856a8c515688e614fba53a48"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/verify_g6_authoring.py",
+      "bytes": 5700,
+      "sha256": "be35ce195e2820210a9e1fa6a039bd860c27a156445704357d66db3e49a4294d"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/focused-all/raw-tested/tools/verify_structure_editor.py",
+      "bytes": 21023,
+      "sha256": "dd0b3dc0daf87ad406a4baac4963def90555957b209f01a65d4edfd3c86e2f1b"
+    },
+    {
+      "path": "development/focused-all/receipt.json",
+      "bytes": 94536,
+      "sha256": "d52785c65de030ed07ccedcecf59bebf535618bc635ec0094623ec40ad9f7a73"
+    },
+    {
+      "path": "development/focused-all/results/action_routes_stairs.json",
+      "bytes": 47313,
+      "sha256": "ff5d3777a1268d17ad9f3ad589032b0713e14662be3bd1e7b9cda72e807cf7dc"
+    },
+    {
+      "path": "development/focused-all/results/cohort-certification.json",
+      "bytes": 99513,
+      "sha256": "8311395aa4536fb16cda167bb9a7c56d8026b450d5ac01811396488967e16c78"
+    },
+    {
+      "path": "development/focused-all/results/focused-tests.txt",
+      "bytes": 25399,
+      "sha256": "42c2ee97b516d313ae75d8a7110a34d5df5f407e79bbd2afbfeec980f117e325"
+    },
+    {
+      "path": "development/focused-all/results/g4-interactions.json",
+      "bytes": 485,
+      "sha256": "bea1a1dbff514d2f97877183273882b21e909abee8fdca464a73b159bad76367"
+    },
+    {
+      "path": "development/focused-all/results/g4-native-members.json",
+      "bytes": 2117,
+      "sha256": "7ee91820c0a9f23a7830182ba0f66ff14670e8f08da48f285ee19d5933731c98"
+    },
+    {
+      "path": "development/focused-all/results/g4-native-production.png",
+      "bytes": 18670,
+      "sha256": "604bfaa591ca7dded9f6a0d4fb3ca4d17a8174da58f6a56281c41a9beccd4a9e"
+    },
+    {
+      "path": "development/focused-all/results/g5-apothecary-production.png",
+      "bytes": 12081,
+      "sha256": "74d526ff94f1f88702bf052d79740a346788065fbbe44a5b4094a61a304362a1"
+    },
+    {
+      "path": "development/focused-all/results/g5-interactions.json",
+      "bytes": 494,
+      "sha256": "a21981b86c5bc067516f82668b1b9a9bddf80ec49bcfece74e083128918c5976"
+    },
+    {
+      "path": "development/focused-all/results/g5-waymarker-production.png",
+      "bytes": 15733,
+      "sha256": "74ee5c5d1d49f8060434c5931f78e019c50f51f7b934420b549de4b3f4fa58fd"
+    },
+    {
+      "path": "development/focused-all/results/g6-cohort.json",
+      "bytes": 13720,
+      "sha256": "f3def65ede0702f3a10757c9061db063ebd6027b904ad50b535cd78bf1a4edb0"
+    },
+    {
+      "path": "development/focused-all/results/g6-independent-owners.json",
+      "bytes": 653,
+      "sha256": "3ecb747f2d45635c0540f1a2e0d779660a0f0e372465390ebae3490ac6d8c7fb"
+    },
+    {
+      "path": "development/focused-all/results/g6-site-0-production.png",
+      "bytes": 13383,
+      "sha256": "aeb984776654d65963955f8cdea6bd509d393f531fa2e74ea220a656bf22ea3a"
+    },
+    {
+      "path": "development/focused-all/results/g6-site-1-production.png",
+      "bytes": 14782,
+      "sha256": "246235448873d75ea4504776b91acdbd9806f9b4520eaca894226a00668a5286"
+    },
+    {
+      "path": "development/focused-all/results/g7-recipe-transforms.json",
+      "bytes": 163498,
+      "sha256": "dacd981c0f2dafbbd122ae3f76d205f1b7ea469b1275122df5ba96ea19461e0f"
+    },
+    {
+      "path": "development/focused-all/results/held_stairs.json",
+      "bytes": 793,
+      "sha256": "f03805273b63daec45118f1b50d3ed6e37a81fd55712008ade5bd0a5127f112e"
+    },
+    {
+      "path": "development/focused-all/results/run.json",
+      "bytes": 86878,
+      "sha256": "2285ebe49548b133d1acfa5ec6fb8fa0821d28bfd2e23e30eaf5dd815b6e02f0"
+    },
+    {
+      "path": "development/guard/input-changes.patch",
+      "bytes": 29943,
+      "sha256": "53da4a1036aeb5878bb17d7cd83071f1f060f3ed241d7857a2f1dbe45c98b5e6"
+    },
+    {
+      "path": "development/guard/inputs.json",
+      "bytes": 454880,
+      "sha256": "06e00fee5d7be22f700622bb65641cced50dfe1ee10e8d9a12f42ee4b600084a"
+    },
+    {
+      "path": "development/guard/new-inputs/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/guard/new-inputs/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/guard/new-inputs/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/guard/new-inputs/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/guard/new-inputs/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/guard/new-inputs/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/guard/new-inputs/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/guard/output.txt",
+      "bytes": 18,
+      "sha256": "fc6253ed2c1213056148e016c3c175bb683ed890060179694273ea44e86c18e2"
+    },
+    {
+      "path": "development/guard/raw-tested/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/guard/raw-tested/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/guard/raw-tested/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/guard/raw-tested/roguelike/docs/STRUCTURE_AUTHORING.md",
+      "bytes": 68676,
+      "sha256": "c6dc3f3407039471a426ae5c739bd6abd50c5e293d4ef9b41b8ca394caab028e"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/structure_authoring.py",
+      "bytes": 12016,
+      "sha256": "be3befc40747450f4c35eb5d9f6b8591c305434174b970efb0be5f96c8d6e115"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/structure_editor/catalog.js",
+      "bytes": 25158,
+      "sha256": "5ab2be64242c2fcd71d87938f729dc1307fabc00ab7ca16232da02248926655d"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/structure_editor/editor.js",
+      "bytes": 11973,
+      "sha256": "35f14902cdae14efcf0c0daf817c8adb62efa77e214b11480e4881bb7b3b1052"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/structure_editor/model.js",
+      "bytes": 11374,
+      "sha256": "a955cdf8132c1d257b6758e16d313cf733f4f4e2856a8c515688e614fba53a48"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/verify_g6_authoring.py",
+      "bytes": 5700,
+      "sha256": "be35ce195e2820210a9e1fa6a039bd860c27a156445704357d66db3e49a4294d"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/guard/raw-tested/tools/verify_structure_editor.py",
+      "bytes": 21023,
+      "sha256": "dd0b3dc0daf87ad406a4baac4963def90555957b209f01a65d4edfd3c86e2f1b"
+    },
+    {
+      "path": "development/guard/receipt.json",
+      "bytes": 111261,
+      "sha256": "712d35c1f611e381c8af626470c42520a7c3a651809e9f40d494f35c10d32682"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/job.json",
+      "bytes": 887,
+      "sha256": "8d91710eaa3b593f63d6a6291019f510c7e9eb7697bb25d8bec3e6ef4bc76ba3"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/result.json",
+      "bytes": 45488,
+      "sha256": "817edb06ca282c2ff22f05b83164c864ffb08bfe26840378e18841ca9b4e7acc"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/job.json",
+      "bytes": 712,
+      "sha256": "b0119467d97572edd95f5dede185608b1a032c060c82f976bac61e73b0fe6b96"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/result.json",
+      "bytes": 63611,
+      "sha256": "e0adeb97ba8a822e4d202d241fd1ef4b21741f8067a660e936a235ea6067b4a5"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/job.json",
+      "bytes": 715,
+      "sha256": "34f81cc93213dafacf800cbb83301f30fa549cd1b0672fb783006aab08eb8087"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/result.json",
+      "bytes": 31387,
+      "sha256": "1c98720e70b900a4193135d6312a91d5c8f49a2bd06ea934a08c1947c031af2d"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/disposable-b3.json",
+      "bytes": 114,
+      "sha256": "f1a28228a7112f759e30383716ab22fc775dc06b02108eec05160a2caeda598c"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/progress.json",
+      "bytes": 39,
+      "sha256": "994984d22cc966aa40976c916850632f5c8089a077d12e3a55531b1baa74a650"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/results.json",
+      "bytes": 452544,
+      "sha256": "cd7be8a0bb8e589fe2148fdfac49b402d521c6fb9486e11b331c7d811fdbdadb"
+    },
+    {
+      "path": "development/guard/results/allowed/latest.json",
+      "bytes": 206,
+      "sha256": "dcf2503e644d8a2268df81fd95f5041f995217aa39a2b62923e4c2d970408548"
+    },
+    {
+      "path": "development/guard/results/guard.json",
+      "bytes": 2170,
+      "sha256": "782b00cc72280928a6d520fe8e60133a56e34103ffafce50e366dc22d005ed66"
+    },
+    {
+      "path": "development/homestead-preview/output.txt",
+      "bytes": 620,
+      "sha256": "5d963c222b1ecd32c7b3c0cc14e70805239da5047b356e31a1cf0fa7bf483468"
+    },
+    {
+      "path": "development/homestead-preview/receipt.json",
+      "bytes": 87311,
+      "sha256": "c24bbf2be5fa9d4c6fad113af396c49ccea97ef0b7d4f6103db0b38433569004"
+    },
+    {
+      "path": "development/homestead-preview-2/output.txt",
+      "bytes": 193,
+      "sha256": "fbaa0beba3f16051a6cda38ebe4995f5f2909170fe7aaa0f9493a4faf117f499"
+    },
+    {
+      "path": "development/homestead-preview-2/receipt.json",
+      "bytes": 87728,
+      "sha256": "79f4a5d4aece06b0adbef6ffa64e1336f6a98a24edfeffa55248a90a8fc7d586"
+    },
+    {
+      "path": "development/homestead-preview-2/result-0.svg",
+      "bytes": 521015,
+      "sha256": "5e35fb4982f4b81f5f479b9ccbe1badfacc530e48226ee52a96ab5da7344fa3c"
+    },
+    {
+      "path": "development/homestead-preview-2/result.json",
+      "bytes": 1973571,
+      "sha256": "9f7f274c2fcd9676421f8443816531a7bc91b15ce87300363c4e73602e6c6825"
+    },
+    {
+      "path": "development/homestead-preview-2/result.svg",
+      "bytes": 227982,
+      "sha256": "5ada3b0268a38f44852f998fa439c037792c1a4d00bfa530418b2a112f21e396"
+    },
+    {
+      "path": "development/homestead-S.json",
+      "bytes": 1973571,
+      "sha256": "837bf2c3021b10905cbbfc047fc56dc8c0c5524d23fcff09a8a6ee936894e1a6"
+    },
+    {
+      "path": "development/journey/input-changes.patch",
+      "bytes": 29943,
+      "sha256": "53da4a1036aeb5878bb17d7cd83071f1f060f3ed241d7857a2f1dbe45c98b5e6"
+    },
+    {
+      "path": "development/journey/inputs.json",
+      "bytes": 454908,
+      "sha256": "ff731fa62144ae2999a3f2772f61ab7dda38ddfca4c54db380d0fe3ed6eb10cd"
+    },
+    {
+      "path": "development/journey/new-inputs/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/journey/new-inputs/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/journey/new-inputs/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/journey/new-inputs/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/journey/new-inputs/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/journey/new-inputs/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/journey/new-inputs/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/journey/output.txt",
+      "bytes": 140264,
+      "sha256": "bbe2ab538bc4b50b55d9c78dc8886f2752ccbd5cae4688d61ab494f03a009e7c"
+    },
+    {
+      "path": "development/journey/raw-tested/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/journey/raw-tested/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/journey/raw-tested/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/journey/raw-tested/roguelike/docs/STRUCTURE_AUTHORING.md",
+      "bytes": 68676,
+      "sha256": "c6dc3f3407039471a426ae5c739bd6abd50c5e293d4ef9b41b8ca394caab028e"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/structure_authoring.py",
+      "bytes": 12016,
+      "sha256": "be3befc40747450f4c35eb5d9f6b8591c305434174b970efb0be5f96c8d6e115"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/structure_editor/catalog.js",
+      "bytes": 25158,
+      "sha256": "5ab2be64242c2fcd71d87938f729dc1307fabc00ab7ca16232da02248926655d"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/structure_editor/editor.js",
+      "bytes": 11973,
+      "sha256": "35f14902cdae14efcf0c0daf817c8adb62efa77e214b11480e4881bb7b3b1052"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/structure_editor/model.js",
+      "bytes": 11374,
+      "sha256": "a955cdf8132c1d257b6758e16d313cf733f4f4e2856a8c515688e614fba53a48"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/verify_g6_authoring.py",
+      "bytes": 5700,
+      "sha256": "be35ce195e2820210a9e1fa6a039bd860c27a156445704357d66db3e49a4294d"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/journey/raw-tested/tools/verify_structure_editor.py",
+      "bytes": 21023,
+      "sha256": "dd0b3dc0daf87ad406a4baac4963def90555957b209f01a65d4edfd3c86e2f1b"
+    },
+    {
+      "path": "development/journey/receipt.json",
+      "bytes": 96946,
+      "sha256": "031505d30123448f0e75c97696687cfe4fcd349ed188f99a6ab85decf8832523"
+    },
+    {
+      "path": "development/journey/results/0-site-33-89-48-21-N-plan.svg",
+      "bytes": 5308,
+      "sha256": "63089354c11c5f30a154a32b09d2ccbffb9e2bc7bd79faba70eab2cd1a0cf8fb"
+    },
+    {
+      "path": "development/journey/results/0-site-33-89-48-21-N-scene.svg",
+      "bytes": 517776,
+      "sha256": "224ab0f9bdbee856198633a25e21312e46984365efe99d42922dfb0dd476bbd5"
+    },
+    {
+      "path": "development/journey/results/0-site-71-78-40-38-W-plan.svg",
+      "bytes": 1411,
+      "sha256": "a98f02ecb946e7d9b699cac1bbcb800b9405829d631fef65cb597e95ab3ffc5f"
+    },
+    {
+      "path": "development/journey/results/0-site-71-78-40-38-W-scene.svg",
+      "bytes": 489046,
+      "sha256": "01bf85372180613621424978f89c2ddb7bacce8edc583f2ec27f08c3c92c2fa1"
+    },
+    {
+      "path": "development/journey/results/20261023-site-29-99-64-21-N-plan.svg",
+      "bytes": 1638,
+      "sha256": "87a5d2391a09794b7d167e8e612d1da272b3662f733eea57c0aaf227bb8dc0d9"
+    },
+    {
+      "path": "development/journey/results/20261023-site-29-99-64-21-N-scene.svg",
+      "bytes": 483359,
+      "sha256": "ff2329c6b2343e93240d23c55039606ae5f8fb721f82e92b9273037ca4070835"
+    },
+    {
+      "path": "development/journey/results/20261023-site-74-34-16-21-N-plan.svg",
+      "bytes": 3410,
+      "sha256": "85e1ef205422fb2262eff55428db79a41c233fb3e488d26e747dd2ddfca47551"
+    },
+    {
+      "path": "development/journey/results/20261023-site-74-34-16-21-N-scene.svg",
+      "bytes": 484596,
+      "sha256": "70c217fd047fd1f5697982bf8fb095ac75f40650307922e5e803c07c3a4b7c3b"
+    },
+    {
+      "path": "development/journey/results/20261023-site-81-34-48-21-N-plan.svg",
+      "bytes": 1410,
+      "sha256": "d385c59f121a6a19405cc2ef1ea628f85f7b199b7267e232704f5bf3e484cc4b"
+    },
+    {
+      "path": "development/journey/results/20261023-site-81-34-48-21-N-scene.svg",
+      "bytes": 488410,
+      "sha256": "e7101be139937b33c18ee69f9a40d32ad68e7091bd6b5fd1defc0da7772addfa"
+    },
+    {
+      "path": "development/journey/results/29417-site-102-69-64-21-S-plan.svg",
+      "bytes": 3754,
+      "sha256": "99d6eddaf4c60b15cf0b204f10a9bd99ec4df19b47d6e4aa1cd381d4fbb5d487"
+    },
+    {
+      "path": "development/journey/results/29417-site-102-69-64-21-S-scene.svg",
+      "bytes": 485275,
+      "sha256": "86a9808f308c112f5a0d43bee29b00a44a5f3b31eda5b550f21882f54ef187c1"
+    },
+    {
+      "path": "development/journey/results/29417-site-104-61-40-17-W-plan.svg",
+      "bytes": 4095,
+      "sha256": "728087e144de03c31f5255e0d85b30e88509698fc75bd0cb56ccd8b79eaa46ce"
+    },
+    {
+      "path": "development/journey/results/29417-site-104-61-40-17-W-scene.svg",
+      "bytes": 490588,
+      "sha256": "edc350781164b4d73fa92136f25717d5be898f116118a2d4402c13382017fe84"
+    },
+    {
+      "path": "development/journey/results/29417-site-90-65-64-21-S-plan.svg",
+      "bytes": 1257,
+      "sha256": "25424c1b531dae01198695d4d8e44a0416f9768b9a8767685fb33710205aeb82"
+    },
+    {
+      "path": "development/journey/results/29417-site-90-65-64-21-S-scene.svg",
+      "bytes": 484686,
+      "sha256": "37ba14edc6b241ef0cf06cefd361e677af7ad4c646fc1b71c7163fa4dc81df3f"
+    },
+    {
+      "path": "development/journey/results/grid-before-plan.svg",
+      "bytes": 16378,
+      "sha256": "cc8770bda5e55f3a30b7020bcb558a1481bf05c76e2bcee79a9935642f62e597"
+    },
+    {
+      "path": "development/journey/results/grid-plan.svg",
+      "bytes": 18636,
+      "sha256": "39a4896e2f7c19b3f7f0424ff954d714f6c0877973cf0121807a8b04ed326e85"
+    },
+    {
+      "path": "development/journey/results/grid-scene.svg",
+      "bytes": 516171,
+      "sha256": "fe5e48ba7d3c385755d7cc76efa860959c3fd4a5abeeccb6dabf68e4436e55a8"
+    },
+    {
+      "path": "development/journey/results/journey-progress.json",
+      "bytes": 125138,
+      "sha256": "c70e0550314ec243f70f2b0bd725c1c631d3072b67825b3348eaf20c253a4d36"
+    },
+    {
+      "path": "development/journey/results/plan-0.json",
+      "bytes": 1275523,
+      "sha256": "b36e6f48cc11cec9d0e9ca32577febcbdd996af6fa18a8bffef3d4838d125fab"
+    },
+    {
+      "path": "development/journey/results/plan-0.svg",
+      "bytes": 202454,
+      "sha256": "fdbd93f4253b9c66c8990859a02b8bea70391f5839b7c4da4e8d4d2bbfde1fcd"
+    },
+    {
+      "path": "development/journey/results/plan-20261023.json",
+      "bytes": 1607047,
+      "sha256": "d726ee03c8199a60ca1ffe774e7d7a16a8258e8913ad310c494e219fc3cac82d"
+    },
+    {
+      "path": "development/journey/results/plan-20261023.svg",
+      "bytes": 228514,
+      "sha256": "1e3e06358d9105c46a6c746bdc911cc96043edfc34646a68ad7e4661bc232af0"
+    },
+    {
+      "path": "development/journey/results/plan-29417.json",
+      "bytes": 1449773,
+      "sha256": "c1a5235ae8f8ff7cb002c0f94d42a969f13482a6a4232b6aa0c76cefbe7eacbb"
+    },
+    {
+      "path": "development/journey/results/plan-29417.svg",
+      "bytes": 221641,
+      "sha256": "d34415c2ad63699cedf009b15ab7e1f09c9e20b4ee81db51c01af0ddd8a8810a"
+    },
+    {
+      "path": "development/journey/results/roadside-before-plan.svg",
+      "bytes": 9714,
+      "sha256": "486a142098a42a078a50864fc84509328ebeee3b1f6bf8fdaea2d57fcc74e3db"
+    },
+    {
+      "path": "development/journey/results/roadside-plan.svg",
+      "bytes": 10227,
+      "sha256": "b5e77cd1eaaf784c4fcdd0a3e9892b6b11b48d813745258b5b6ce8340e2766ae"
+    },
+    {
+      "path": "development/journey/results/roadside-scene.svg",
+      "bytes": 547742,
+      "sha256": "f807b379fbe6eb5271ebcd5b182ccfbcbe7590d5e59f2323c97156ac311ba02d"
+    },
+    {
+      "path": "development/journey/results/run.json",
+      "bytes": 503207,
+      "sha256": "b603a6c8688290ce67e371d7588daff016a1837dcac63815a17906506f0f30d3"
+    },
+    {
+      "path": "development/journey/results/runtime-log.txt",
+      "bytes": 4424,
+      "sha256": "c19a0ba94cc3d84a9ec27bcfac18525a0f385fa5f73a44568b045f1aefdfe6f4"
+    },
+    {
+      "path": "development/ordinary-1/output.txt",
+      "bytes": 63,
+      "sha256": "009de20b957113be6e92b5c554bf7936d3d39fcab98cb918c5c1056a674f3fa6"
+    },
+    {
+      "path": "development/ordinary-1/receipt.json",
+      "bytes": 91818,
+      "sha256": "e5326c149f7e77ea5248dc4e98d5869bfa95964a78878bc9023e9cda0409cadf"
+    },
+    {
+      "path": "development/ordinary-1/results/0-site-33-89-48-21-N-plan.svg",
+      "bytes": 5308,
+      "sha256": "63089354c11c5f30a154a32b09d2ccbffb9e2bc7bd79faba70eab2cd1a0cf8fb"
+    },
+    {
+      "path": "development/ordinary-1/results/0-site-33-89-48-21-N-scene.svg",
+      "bytes": 517776,
+      "sha256": "224ab0f9bdbee856198633a25e21312e46984365efe99d42922dfb0dd476bbd5"
+    },
+    {
+      "path": "development/ordinary-1/results/0-site-71-78-40-38-W-plan.svg",
+      "bytes": 1411,
+      "sha256": "a98f02ecb946e7d9b699cac1bbcb800b9405829d631fef65cb597e95ab3ffc5f"
+    },
+    {
+      "path": "development/ordinary-1/results/0-site-71-78-40-38-W-scene.svg",
+      "bytes": 489046,
+      "sha256": "01bf85372180613621424978f89c2ddb7bacce8edc583f2ec27f08c3c92c2fa1"
+    },
+    {
+      "path": "development/ordinary-1/results/20261023-site-29-99-64-21-N-plan.svg",
+      "bytes": 1638,
+      "sha256": "87a5d2391a09794b7d167e8e612d1da272b3662f733eea57c0aaf227bb8dc0d9"
+    },
+    {
+      "path": "development/ordinary-1/results/20261023-site-29-99-64-21-N-scene.svg",
+      "bytes": 483359,
+      "sha256": "ff2329c6b2343e93240d23c55039606ae5f8fb721f82e92b9273037ca4070835"
+    },
+    {
+      "path": "development/ordinary-1/results/20261023-site-74-34-16-21-N-plan.svg",
+      "bytes": 3410,
+      "sha256": "85e1ef205422fb2262eff55428db79a41c233fb3e488d26e747dd2ddfca47551"
+    },
+    {
+      "path": "development/ordinary-1/results/20261023-site-74-34-16-21-N-scene.svg",
+      "bytes": 484596,
+      "sha256": "70c217fd047fd1f5697982bf8fb095ac75f40650307922e5e803c07c3a4b7c3b"
+    },
+    {
+      "path": "development/ordinary-1/results/20261023-site-81-34-48-21-N-plan.svg",
+      "bytes": 1410,
+      "sha256": "d385c59f121a6a19405cc2ef1ea628f85f7b199b7267e232704f5bf3e484cc4b"
+    },
+    {
+      "path": "development/ordinary-1/results/20261023-site-81-34-48-21-N-scene.svg",
+      "bytes": 488410,
+      "sha256": "e7101be139937b33c18ee69f9a40d32ad68e7091bd6b5fd1defc0da7772addfa"
+    },
+    {
+      "path": "development/ordinary-1/results/29417-site-102-69-64-21-S-plan.svg",
+      "bytes": 3754,
+      "sha256": "99d6eddaf4c60b15cf0b204f10a9bd99ec4df19b47d6e4aa1cd381d4fbb5d487"
+    },
+    {
+      "path": "development/ordinary-1/results/29417-site-102-69-64-21-S-scene.svg",
+      "bytes": 485275,
+      "sha256": "86a9808f308c112f5a0d43bee29b00a44a5f3b31eda5b550f21882f54ef187c1"
+    },
+    {
+      "path": "development/ordinary-1/results/29417-site-104-61-40-17-W-plan.svg",
+      "bytes": 4095,
+      "sha256": "728087e144de03c31f5255e0d85b30e88509698fc75bd0cb56ccd8b79eaa46ce"
+    },
+    {
+      "path": "development/ordinary-1/results/29417-site-104-61-40-17-W-scene.svg",
+      "bytes": 490588,
+      "sha256": "edc350781164b4d73fa92136f25717d5be898f116118a2d4402c13382017fe84"
+    },
+    {
+      "path": "development/ordinary-1/results/29417-site-90-65-64-21-S-plan.svg",
+      "bytes": 1257,
+      "sha256": "25424c1b531dae01198695d4d8e44a0416f9768b9a8767685fb33710205aeb82"
+    },
+    {
+      "path": "development/ordinary-1/results/29417-site-90-65-64-21-S-scene.svg",
+      "bytes": 484686,
+      "sha256": "37ba14edc6b241ef0cf06cefd361e677af7ad4c646fc1b71c7163fa4dc81df3f"
+    },
+    {
+      "path": "development/ordinary-1/results/grid-before-plan.svg",
+      "bytes": 16378,
+      "sha256": "cc8770bda5e55f3a30b7020bcb558a1481bf05c76e2bcee79a9935642f62e597"
+    },
+    {
+      "path": "development/ordinary-1/results/grid-plan.svg",
+      "bytes": 18636,
+      "sha256": "39a4896e2f7c19b3f7f0424ff954d714f6c0877973cf0121807a8b04ed326e85"
+    },
+    {
+      "path": "development/ordinary-1/results/grid-scene.svg",
+      "bytes": 516171,
+      "sha256": "fe5e48ba7d3c385755d7cc76efa860959c3fd4a5abeeccb6dabf68e4436e55a8"
+    },
+    {
+      "path": "development/ordinary-1/results/plan-0.json",
+      "bytes": 1275523,
+      "sha256": "b36e6f48cc11cec9d0e9ca32577febcbdd996af6fa18a8bffef3d4838d125fab"
+    },
+    {
+      "path": "development/ordinary-1/results/plan-0.svg",
+      "bytes": 202454,
+      "sha256": "fdbd93f4253b9c66c8990859a02b8bea70391f5839b7c4da4e8d4d2bbfde1fcd"
+    },
+    {
+      "path": "development/ordinary-1/results/plan-20261023.json",
+      "bytes": 1607047,
+      "sha256": "d726ee03c8199a60ca1ffe774e7d7a16a8258e8913ad310c494e219fc3cac82d"
+    },
+    {
+      "path": "development/ordinary-1/results/plan-20261023.svg",
+      "bytes": 228514,
+      "sha256": "1e3e06358d9105c46a6c746bdc911cc96043edfc34646a68ad7e4661bc232af0"
+    },
+    {
+      "path": "development/ordinary-1/results/plan-29417.json",
+      "bytes": 1449773,
+      "sha256": "c1a5235ae8f8ff7cb002c0f94d42a969f13482a6a4232b6aa0c76cefbe7eacbb"
+    },
+    {
+      "path": "development/ordinary-1/results/plan-29417.svg",
+      "bytes": 221641,
+      "sha256": "d34415c2ad63699cedf009b15ab7e1f09c9e20b4ee81db51c01af0ddd8a8810a"
+    },
+    {
+      "path": "development/ordinary-1/results/roadside-before-plan.svg",
+      "bytes": 9714,
+      "sha256": "486a142098a42a078a50864fc84509328ebeee3b1f6bf8fdaea2d57fcc74e3db"
+    },
+    {
+      "path": "development/ordinary-1/results/roadside-plan.svg",
+      "bytes": 10227,
+      "sha256": "b5e77cd1eaaf784c4fcdd0a3e9892b6b11b48d813745258b5b6ce8340e2766ae"
+    },
+    {
+      "path": "development/ordinary-1/results/roadside-scene.svg",
+      "bytes": 547742,
+      "sha256": "f807b379fbe6eb5271ebcd5b182ccfbcbe7590d5e59f2323c97156ac311ba02d"
+    },
+    {
+      "path": "development/ordinary-1/results/run.json",
+      "bytes": 362229,
+      "sha256": "bbb238e7138f57624abbfc82423b96bbb607ad961733e3fa3a06a57e144cf8e5"
+    },
+    {
+      "path": "development/ordinary-1/results/runtime-log.txt",
+      "bytes": 586,
+      "sha256": "240f96d66e5c1056ccdb1fb02f7f0c74b5988d13f07f3f288b3c83930e051760"
+    },
+    {
+      "path": "development/review-corrections/cohort-certification.json",
+      "bytes": 108655,
+      "sha256": "152c9bfaba296acf33cdf849fb91ef2e624bd52f4fc65a1a2dd02e723f64a915"
+    },
+    {
+      "path": "development/review-corrections/g7-hash-seeds.json",
+      "bytes": 298,
+      "sha256": "ffa3215d4dce243bb26e88f4277276a6719dbb6f23b227a90d0837460c7b01e8"
+    },
+    {
+      "path": "development/review-corrections/g7-invalid-recipes.json",
+      "bytes": 1673,
+      "sha256": "fad64ab8928b7a9b8031646082d4f7602e0ddc5197a9c93a95240494620dea19"
+    },
+    {
+      "path": "development/review-corrections/input-changes.patch",
+      "bytes": 39514,
+      "sha256": "d0b758de590135a63cef6ef6f4d8dfebc4a1bcfa14a83e872edd91b48d5c6791"
+    },
+    {
+      "path": "development/review-corrections/inputs.json",
+      "bytes": 455842,
+      "sha256": "3c8180e52d761ccda5db8f1e52d8d34ad35a875de5a3ff42bbba03873368a165"
+    },
+    {
+      "path": "development/review-corrections/new-inputs/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/review-corrections/new-inputs/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/review-corrections/new-inputs/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/review-corrections/new-inputs/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/review-corrections/new-inputs/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/review-corrections/new-inputs/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/review-corrections/new-inputs/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/review-corrections/output.txt",
+      "bytes": 602,
+      "sha256": "f9ff649b5d16595af54e6c45ae81324495b7b20751a5270ecdfff6ea0130be0d"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/roguelike/docs/examples/g7_poi_example.json",
+      "bytes": 1264,
+      "sha256": "d5fc7ee72ad023643c182d592702e47b1caf8af866a25f641c0ab48ca0bd1855"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/roguelike/docs/examples/g7_travellers_court.json",
+      "bytes": 1339,
+      "sha256": "8634fc1efb5276c51cd5e47363181675330930db2e04b17420c88a9939370f25"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/roguelike/docs/examples/g7_wayhouse.json",
+      "bytes": 2056,
+      "sha256": "d872979007f689601779d378b9b64fdb334678f004cbc5ff1613d41fcf8197e6"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/roguelike/docs/STRUCTURE_AUTHORING.md",
+      "bytes": 68676,
+      "sha256": "c6dc3f3407039471a426ae5c739bd6abd50c5e293d4ef9b41b8ca394caab028e"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/roguelike/generation/compounds.py",
+      "bytes": 17161,
+      "sha256": "06deecdbf48880b4e51710eb4ec186dc2a61ab17dd8bd27fededfa94db4cd7f7"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/roguelike/generation/parent_selection.py",
+      "bytes": 24320,
+      "sha256": "92b2dc7885cfb608fabf0d62d7076ec42cefab3097611a59c55cc11140f8a04c"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/critical_fix_regressions/tests/test_generation_g5_cohort.py",
+      "bytes": 4268,
+      "sha256": "0ea6c4f1a3b6b9dc9ee4b0e38b9cf6cb7fbde51b06f82e1ca3eae6434e2b26f0"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/critical_fix_regressions/tests/test_generation_g7_compounds.py",
+      "bytes": 24786,
+      "sha256": "a62135adea37f07c55cf0e0afa8fcd24281d0f02ec8881317a2fb71816c49b63"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/critical_fix_regressions/verify_fixes.py",
+      "bytes": 4108,
+      "sha256": "a7d9557792ff3640f5916992ba9657c839d73ea7561da314cb37955f7d4767b0"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/g7_evidence.py",
+      "bytes": 5756,
+      "sha256": "f4c9eea72ee2c42175342aad77074948b661f0b9f9b18f0b88ce3c5590e41794"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/structure_authoring.py",
+      "bytes": 12016,
+      "sha256": "be3befc40747450f4c35eb5d9f6b8591c305434174b970efb0be5f96c8d6e115"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/structure_editor/catalog.js",
+      "bytes": 25158,
+      "sha256": "5ab2be64242c2fcd71d87938f729dc1307fabc00ab7ca16232da02248926655d"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/structure_editor/editor.js",
+      "bytes": 11973,
+      "sha256": "35f14902cdae14efcf0c0daf817c8adb62efa77e214b11480e4881bb7b3b1052"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/structure_editor/model.js",
+      "bytes": 11374,
+      "sha256": "a955cdf8132c1d257b6758e16d313cf733f4f4e2856a8c515688e614fba53a48"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/verify_g6_authoring.py",
+      "bytes": 5700,
+      "sha256": "be35ce195e2820210a9e1fa6a039bd860c27a156445704357d66db3e49a4294d"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/verify_g7_authoring.py",
+      "bytes": 8761,
+      "sha256": "7a6f3d32f8ac8306f5e55863458c93ff5be85824d8394b94129e624de1cbbb4e"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/verify_g7_guard.py",
+      "bytes": 2533,
+      "sha256": "2e2cb09656565cb6218f1c9e08d74d1950db7fa3c1215bf9f097f60bacd36ced"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/verify_g7_release.py",
+      "bytes": 2455,
+      "sha256": "ebcf4ec0529d9d2d1d8803eebcc4e345007da2e25df9664e26dbb933e70106b0"
+    },
+    {
+      "path": "development/review-corrections/raw-tested/tools/verify_structure_editor.py",
+      "bytes": 21023,
+      "sha256": "dd0b3dc0daf87ad406a4baac4963def90555957b209f01a65d4edfd3c86e2f1b"
+    },
+    {
+      "path": "development/review-corrections/receipt.json",
+      "bytes": 93406,
+      "sha256": "7446aed286a645b4ca185b007e9ce8fc2d6bec62ba480598f8dd693e2626afab"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/.slot_0.lock",
+      "bytes": 1,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/.sessions/8771269696324a8f95577f357fd0d69f/chunks/0_64.pkl",
+      "bytes": 503359,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/.sessions/8771269696324a8f95577f357fd0d69f/chunks/sub_0_64_0.pkl",
+      "bytes": 503231,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/.sessions/e4ce265ee13e4270956189dc5f6b87b4/chunks/0_64.pkl",
+      "bytes": 503343,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/.sessions/e4ce265ee13e4270956189dc5f6b87b4/chunks/1_64.pkl",
+      "bytes": 501007,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/.sessions/e4ce265ee13e4270956189dc5f6b87b4/chunks/b1_1_64.pkl",
+      "bytes": 498442,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/.sessions/e4ce265ee13e4270956189dc5f6b87b4/chunks/sub_0_64_0.pkl",
+      "bytes": 503205,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/BACKUP.json",
+      "bytes": 101,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/chunks/0_64.pkl",
+      "bytes": 503343,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/chunks/1_64.pkl",
+      "bytes": 501007,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/chunks/b1_1_64.pkl",
+      "bytes": 498442,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/chunks/sub_0_64_0.pkl",
+      "bytes": 503205,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/manifest.json",
+      "bytes": 1058,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/meta.json",
+      "bytes": 149,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/player.json",
+      "bytes": 8846,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/world.json",
+      "bytes": 17474973,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-58210bebaba5412eb1ba49a9de67056e/chunks/0_64.pkl",
+      "bytes": 503359,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-58210bebaba5412eb1ba49a9de67056e/chunks/1_64.pkl",
+      "bytes": 501007,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-58210bebaba5412eb1ba49a9de67056e/chunks/b1_1_64.pkl",
+      "bytes": 498488,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-58210bebaba5412eb1ba49a9de67056e/chunks/sub_0_64_0.pkl",
+      "bytes": 503231,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-58210bebaba5412eb1ba49a9de67056e/manifest.json",
+      "bytes": 1058,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-58210bebaba5412eb1ba49a9de67056e/meta.json",
+      "bytes": 149,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-58210bebaba5412eb1ba49a9de67056e/player.json",
+      "bytes": 8854,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/generations/g-58210bebaba5412eb1ba49a9de67056e/world.json",
+      "bytes": 17474973,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/HEAD.json",
+      "bytes": 133,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-read/saves/slot_0/world.json",
+      "bytes": 24,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/.slot_0.lock",
+      "bytes": 1,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/.sessions/b56a941cebe945b4857a7bd911740a85/chunks/0_64.pkl",
+      "bytes": 503359,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/.sessions/b56a941cebe945b4857a7bd911740a85/chunks/sub_0_64_0.pkl",
+      "bytes": 503231,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/.sessions/ef956bd6a3fc4ed092d6dc5059252804/chunks/0_64.pkl",
+      "bytes": 503343,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/.sessions/ef956bd6a3fc4ed092d6dc5059252804/chunks/1_64.pkl",
+      "bytes": 501007,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/.sessions/ef956bd6a3fc4ed092d6dc5059252804/chunks/b1_1_64.pkl",
+      "bytes": 498442,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/.sessions/ef956bd6a3fc4ed092d6dc5059252804/chunks/sub_0_64_0.pkl",
+      "bytes": 503205,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/BACKUP.json",
+      "bytes": 101,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-383563daf648407d996c74479a6643e3/chunks/0_64.pkl",
+      "bytes": 503343,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-383563daf648407d996c74479a6643e3/chunks/1_64.pkl",
+      "bytes": 501007,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-383563daf648407d996c74479a6643e3/chunks/b1_1_64.pkl",
+      "bytes": 498442,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-383563daf648407d996c74479a6643e3/chunks/sub_0_64_0.pkl",
+      "bytes": 503205,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-383563daf648407d996c74479a6643e3/manifest.json",
+      "bytes": 1058,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-383563daf648407d996c74479a6643e3/meta.json",
+      "bytes": 149,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-383563daf648407d996c74479a6643e3/player.json",
+      "bytes": 8846,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-383563daf648407d996c74479a6643e3/world.json",
+      "bytes": 17474973,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-3fa99de0b6524fd7a844a1d0ebc9a636/chunks/0_64.pkl",
+      "bytes": 503359,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-3fa99de0b6524fd7a844a1d0ebc9a636/chunks/1_64.pkl",
+      "bytes": 501007,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-3fa99de0b6524fd7a844a1d0ebc9a636/chunks/b1_1_64.pkl",
+      "bytes": 498488,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-3fa99de0b6524fd7a844a1d0ebc9a636/chunks/sub_0_64_0.pkl",
+      "bytes": 503231,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-3fa99de0b6524fd7a844a1d0ebc9a636/manifest.json",
+      "bytes": 1058,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-3fa99de0b6524fd7a844a1d0ebc9a636/meta.json",
+      "bytes": 149,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-3fa99de0b6524fd7a844a1d0ebc9a636/player.json",
+      "bytes": 8854,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/generations/g-3fa99de0b6524fd7a844a1d0ebc9a636/world.json",
+      "bytes": 17474973,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/HEAD.json",
+      "bytes": 133,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-same/saves/slot_0/world.json",
+      "bytes": 24,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/.slot_0.lock",
+      "bytes": 1,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/.sessions/e4ce265ee13e4270956189dc5f6b87b4/chunks/0_64.pkl",
+      "bytes": 503343,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/.sessions/e4ce265ee13e4270956189dc5f6b87b4/chunks/1_64.pkl",
+      "bytes": 501007,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/.sessions/e4ce265ee13e4270956189dc5f6b87b4/chunks/b1_1_64.pkl",
+      "bytes": 498442,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/.sessions/e4ce265ee13e4270956189dc5f6b87b4/chunks/sub_0_64_0.pkl",
+      "bytes": 503205,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/chunks/0_64.pkl",
+      "bytes": 503343,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/chunks/1_64.pkl",
+      "bytes": 501007,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/chunks/b1_1_64.pkl",
+      "bytes": 498442,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/chunks/sub_0_64_0.pkl",
+      "bytes": 503205,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/manifest.json",
+      "bytes": 1058,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/meta.json",
+      "bytes": 149,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/player.json",
+      "bytes": 8846,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/generations/g-4037143f6f8d4f828d0c4f550a2336e0/world.json",
+      "bytes": 17474973,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/HEAD.json",
+      "bytes": 101,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    },
+    {
+      "path": "development/guard/results/allowed/d-20261024-115323-b7d9a926/b1-scenes-surface-write/saves/slot_0/world.json",
+      "bytes": 24,
+      "reason": "disposable worker save payload; not retained or byte-verified in archive"
+    }
+  ],
+  "verified": true
+}

@@ -22,9 +22,8 @@ results. The complete outcome and acceptance matrix are in
 - [Admission focused receipt](admission/focused/receipt.json): 16 tests passed on
   the narrow correction before compound implementation.
 
-Development and final archive inventories, final receipts, ordinary measurements,
-views, real interactions and publication reconciliation are appended after release
-verification. Every final command records immutable input SHA, complete raw input
+The final input revision is `e0be127cf0aaed9596c7a48b0ff5d68617a51c81`.
+Every final command records immutable input SHA, complete raw input
 hashes, canonical-LF text hashes, args/cwd/environment, versions, exit/timeout and
 output inventory. Binary files compare exactly. Uniform line-ending transformations
 are reconstructable from Git; otherwise raw tested text is preserved. G6's missing
@@ -37,3 +36,47 @@ Fixture positioning is disclosed separately from the real country-road journey.
 Disposable save payload omissions, if any, are explicitly inventoried. Personal
 campaigns, dependencies, browser profiles and whole production source ZIPs are not
 included. Earlier evidence archives are preserved.
+
+## Release and retained archives
+
+- [Final results](final-results.json): gate outcomes, ordinary seed records,
+  journey, browser versions, production coverage and separate metadata costs.
+- [Source reconciliation](source-reconciliation.json): 680 inputs, raw and
+  canonical-LF hashes, committed-blob identity and preservation status.
+- [Exact raw tested guide](source-raw/raw-tested/roguelike/docs/STRUCTURE_AUTHORING.md):
+  mixed line endings preserved through the evidence-only `.gitattributes` rule.
+  The same bytes are also inside each final command directory in the final ZIP.
+- [Final evidence ZIP](final-evidence.zip) and
+  [member inventory](final-evidence-inventory.json): `final-a/release.json`, nine
+  command directories, raw focused logs, both browser results/downloads, all
+  authoring commands, three exact plans, full journey, and unfiltered production
+  jobs/results/assertions/negative controls. Members have sizes and SHA-256 hashes;
+  the archive was CRC-checked and every retained member re-read and hashed.
+- [Development evidence ZIP](development-evidence.zip) and
+  [member inventory](development-evidence-inventory.json): failed, interrupted and
+  successful development attempts, including their input patches/new inputs.
+  Development failures are not relabelled as release successes.
+- [Opening disposable omissions](opening-disposable-omissions.json): exact scope
+  and names/sizes for runtime files omitted after the authentic G6 source fixture
+  was retained. Both ZIP inventories separately list omitted worker saves.
+- [Supplied package verification](input-package.json): original archive SHA-256
+  and verified supplied member manifest.
+- [Explored-compound checkpoint measurements](g7-independent-children.json),
+  [authentic G6 restore](g7-authentic-g6-restore.json),
+  [late-child rollback](g7-late-child-rollback.json), and
+  [native-view controls](g7-native-views.json).
+- [Production views and rendered diagrams](views/): production PNGs are clearly
+  distinguished from geometric plan diagrams and browser-editor screenshots.
+
+Expanded command directories move into the ignored review-only
+`.baseline/g7-expanded-final-a/` after verification. Receipt paths describe the
+actual command-time locations; ZIP paths and inventories map their retained bytes.
+Ordinary disposable worker/capture runtime saves are omitted; the deliberately
+retained authentic compatibility checkpoint remains a source fixture. Omitted
+payload bytes cannot be reconstructed from their metadata alone.
+
+The public delivery reference is
+[`checkpoint/worldgen-g7-verified-20261024-a`](https://github.com/dgobi/ResonanceRoguelike/tree/checkpoint/worldgen-g7-verified-20261024-a).
+Remote `main` and the peeled tag are compared after publication; the local readback
+receipt is retained under `.baseline/g7-publication.json` and linked in the final
+delivery message. This avoids embedding a commit's own future hash inside itself.

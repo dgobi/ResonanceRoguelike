@@ -1,0 +1,85 @@
+{
+  "scope": "Only disposable runtime files; original capture receipt and authentic source fixture remain retained",
+  "files": [
+    {
+      "path": "before/capture/saves/.slot_0.lock",
+      "bytes": 1,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/.sessions/162ca1616bbf46cdb6b770d419a8e6b3/chunks/73_99.pkl",
+      "bytes": 503159,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/.sessions/162ca1616bbf46cdb6b770d419a8e6b3/chunks/81_34.pkl",
+      "bytes": 502570,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/.sessions/162ca1616bbf46cdb6b770d419a8e6b3/chunks/sub_73_99_0.pkl",
+      "bytes": 501506,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/generations/g-c426a34924834b2fa86f128de20db6aa/chunks/73_99.pkl",
+      "bytes": 503159,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/generations/g-c426a34924834b2fa86f128de20db6aa/chunks/81_34.pkl",
+      "bytes": 502570,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/generations/g-c426a34924834b2fa86f128de20db6aa/chunks/sub_73_99_0.pkl",
+      "bytes": 501506,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/generations/g-c426a34924834b2fa86f128de20db6aa/manifest.json",
+      "bytes": 921,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/generations/g-c426a34924834b2fa86f128de20db6aa/meta.json",
+      "bytes": 150,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/generations/g-c426a34924834b2fa86f128de20db6aa/player.json",
+      "bytes": 10131,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/generations/g-c426a34924834b2fa86f128de20db6aa/world.json",
+      "bytes": 17953483,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/HEAD.json",
+      "bytes": 101,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/capture/saves/slot_0/world.json",
+      "bytes": 18,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/synthetic-outside-allowed/disposable-b3.json",
+      "bytes": 105,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/synthetic-outside-allowed/job.json",
+      "bytes": 328,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    },
+    {
+      "path": "before/synthetic-outside-allowed/saves/sentinel.txt",
+      "bytes": 24,
+      "reason": "disposable opening capture/guard runtime file; authentic checkpoint retained separately in source fixture"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+# Raw tested text is evidence: preserve its exact mixed line endings in Git.
+source-raw/** -text -diff -merge
