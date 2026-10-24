@@ -34,6 +34,17 @@ class G5Cohort(unittest.TestCase):
                         self.assertTrue(report['passed'],report['access'])
                         row['orientations'].append(dict(rotation=rotation,mirror=mirror,access=report['access'],receipts=report.get('receipts')))
             for context in raw['placement']['contexts']:
+                if context=='compound':
+                    # G7 admits this context only within a complete parent.
+                    # Exercise the actual authored parent that consumes the asset.
+                    from generation.compound_preview import preview as compound_preview
+                    recipe=next(r for r in data.compounds.values() if any(a['asset']==aid for s in r['slots'] for a in s['assets']))
+                    with contextlib.redirect_stdout(io.StringIO()):
+                        report=compound_preview(data,20261023,recipe,normal='S')
+                    selected=[p for p in report['plan']['placements'] if p['asset']==aid and p['context']=='compound']
+                    self.assertTrue(selected);self.assertTrue(report['previews'])
+                    row['assigned'].append(dict(context=context,controlled_pool=True,placements=len(selected),complete_scenes=len(report['previews']),example=selected[0]))
+                    continue
                 with self.subTest(asset=aid,context=context):
                     selection=copy.deepcopy(data.settlement_profiles)
                     profile=selection['profiles'][context]

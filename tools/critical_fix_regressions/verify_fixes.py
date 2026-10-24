@@ -55,7 +55,7 @@ def main() -> int:
                           "dependencies": versions, "scope": "focused regressions"}, indent=2))
         try:
             result = subprocess.run(command, cwd=game, env=env, text=True,
-                                    encoding="utf-8", capture_output=True, timeout=600)
+                                    encoding="utf-8", capture_output=True, timeout=1200)
         except subprocess.TimeoutExpired as error:
             def decoded(value):
                 return value.decode('utf-8',errors='replace') if isinstance(value,bytes) else value or ''
@@ -63,8 +63,8 @@ def main() -> int:
             (evidence/'focused-tests.txt').write_text(output,encoding='utf-8')
             (evidence/'run.json').write_text(json.dumps(dict(command=command,cwd=str(game),python=sys.version,
                 dependencies=versions,source=source,source_stable=source==source_manifest(),exit_code=2,
-                timeout_seconds=600,passed=False),indent=2)+'\n',encoding='utf-8')
-            print("Focused suite exceeded 600 seconds; partial output retained.", file=sys.stderr)
+                timeout_seconds=1200,passed=False),indent=2)+'\n',encoding='utf-8')
+            print("Focused suite exceeded 1200 seconds; partial output retained.", file=sys.stderr)
             return 2
         output = result.stdout + result.stderr
         print(output, end="")

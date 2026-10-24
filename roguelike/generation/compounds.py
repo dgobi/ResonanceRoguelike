@@ -63,6 +63,8 @@ def validate_recipe(raw,data):
     check(all(point(list(p)) and {'S':p[1]==h-1,'N':p[1]==0,'E':p[0]==w-1,'W':p[0]==0}[gate['normal']] for p in gc),'full gate span must face outward at envelope edge')
     all_paths=set().union(*path_cells.values());pts=all_paths|set(gc)
     check(connected_cells(pts,gc[0])==pts,'gate or required circulation disconnected')
+    named=path_cells[gate['path']]|set(gc)
+    check(connected_cells(named,gc[0])==named,'gate does not touch its named path')
     declared={gate['path']};queue=[gate['path']]
     for name_path in queue:
         for other in next(p['joins'] for p in paths if p['id']==name_path):
@@ -155,11 +157,12 @@ def fit(plan,authority,data,recipe,candidate,sid,rotation,remaining):
         while weighted:
             rule=rng.choices(weighted,weights=[r['weight']*data.structures[r['asset']]['placement']['weight'] for r in weighted],k=1)[0];weighted.remove(rule)
             raw=data.structures[rule['asset']];turns=[(r+rotation)%360 for r in s['rotations'] if (r+rotation)%360 in raw['placement']['rotations']];rng.shuffle(turns)
+            admitted_before=len(options)
             for turn in turns:
                 transformed=transform(raw,turn,False)
                 entrances=sorted((e for e in transformed['placement']['entrances'] if e['required'] and e['normal']==s['normal']),key=lambda e:(e['role']!='main',e['id']))
                 if entrances:options.append((rule['asset'],turn,False,transformed,entrances[0]))
-            if not turns:options.append((rule['asset'],None,None,None,None))
+            if len(options)==admitted_before:options.append((rule['asset'],None,None,None,None))
         slot=dict(id=s['id'],role=s['role'],required=s['required'],buildable=translated(s['buildable']),path=path,normal=s['normal'],
                   assets=copy.deepcopy(s['assets']),effective_rotations=sorted({(r+rotation)%360 for r in s['rotations']}),placement=None,plot=None,omission=None)
         for option in options:

@@ -210,6 +210,8 @@ def validate_resolved(plan,registries):
             for pid in queue:
                 if pid not in declared:declared.add(pid);queue.extend(j for j in paths[pid]['joins'] if j not in declared)
             check(declared==set(site['paths']) and connected_cells(common|set(gc),gc[0])==common|set(gc),sid+': disconnected common circulation/gate')
+            named=set().union(*(cells(r) for r in paths[gate['path']]['rects']))|set(gc)
+            check(connected_cells(named,gc[0])==named,sid+': gate does not touch its named path')
             slots=site['slots'];check(isinstance(slots,list) and 2<=len(slots)<=3 and sum(s['required'] for s in slots)==2 and len({s['id'] for s in slots})==len(slots),sid+': missing/duplicate required slots')
             for index,s in enumerate(slots):
                 check(set(s)=={'id','role','required','buildable','path','normal','assets','effective_rotations','placement','plot','omission','join','goals'},sid+': invalid slot fields')

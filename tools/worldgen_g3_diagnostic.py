@@ -87,7 +87,7 @@ def main():
                         cap_exclusions=sum('cap reached' in r['reason'] for p in plots for r in p['rejected']),
                         soft_repetition=[dict(plot=p['id'],reason=p['repetition']) for p in plots if 'repetition' in p],
                         denominator='most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies'))
-            row['timed_scene_scope']='starting surface, every town member, landmark, capital gateway; required crossing checked separately'
+            row['timed_scene_scope']='starting surface, every town member, landmark, capital gateway and every additional parent; required crossing checked separately'
             keys={(world.start_wx,world.start_wy)}|{tuple(xy) for s in plan['settlements'] for xy in s['members']}|{tuple(n['chunk']) for n in plan['nodes'] if n['id'] in ('landmark','capital-gateway')}
             keys.update(tuple(s['chunk']) for s in plan.get('sites',[]))
             for xy in sorted(keys):

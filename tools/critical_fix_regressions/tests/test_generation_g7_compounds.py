@@ -92,7 +92,11 @@ class G7Compounds(unittest.TestCase):
         self.evidence('g7-recipe-transforms.json',observations)
 
     def test_recipe_validation_negative_authored_definitions(self):
+        def wrong_named_path(r):
+            path=r['paths'][0];path.update(rects=[[1,8,17,10]],joins=['gate-lane'])
+            r['paths'].append(dict(id='gate-lane',rects=[[1,10,17,14]],joins=[path['id']]))
         changes=[('unknown child',lambda r:r['slots'][0]['assets'][0].update(asset='absent')),
+            ('gate names a connected but nonadjacent path',wrong_named_path),
             ('weight',lambda r:r['slots'][0]['assets'][0].update(weight=float('nan'))),
             ('duplicate slot',lambda r:r['slots'][1].update(id=r['slots'][0]['id'])),
             ('missing path',lambda r:r['slots'][0].update(path='foreign')),
@@ -155,12 +159,15 @@ class G7Compounds(unittest.TestCase):
         self.evidence('g7-atomic-fit.json',dict(failed_work=work,unchanged=True))
 
     def test_canonical_memberships_process_hash_seeds_and_irrelevant_history(self):
-        data=self.data_copy();data.poi_profiles['choices'].reverse();data.poi_profiles['locations'].reverse()
+        data=self.data_copy()
+        data.compounds['wayside_shrine_court']['slots'][0]['assets'].append(dict(asset='waymarker_shelter_a',weight=.8))
+        expected=digest(self.world_for(data).plan)
+        data.poi_profiles['choices'].reverse();data.poi_profiles['locations'].reverse()
         for r in data.compounds.values():
             r['paths'].reverse();r['rotations'].reverse()
             for s in r['slots']:s['assets'].reverse();s['rotations'].reverse()
         random.seed(817);[random.random() for _ in range(200)]
-        self.assertEqual(digest(self.world_for(data).plan),digest(self.world.plan))
+        self.assertEqual(digest(self.world_for(data).plan),expected)
         script='import contextlib,io,random; from engine.data_loader import DataLoader; from generation.world_gen import generate_world; from generation.placement import digest; from world.world_map import WorldMap\nwith contextlib.redirect_stdout(io.StringIO()):\n d=DataLoader("roguelike/data"); w=WorldMap(128,128); w.seed=20261023; generate_world(w,d,random.Random(222))\nprint(digest(w.plan))'
         outputs=[]
         for seed in ('0','1','999'):
