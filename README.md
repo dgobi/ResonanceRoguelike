@@ -1,8 +1,8 @@
 # Resonance roguelike — production main
 
-G6 adds independent rural sites attached to existing country roads, durable site
-ownership and complete authoring workflows. Read
-[G6 delivery](docs/owner/WORLDGEN_G6.md), [G5 history](docs/owner/WORLDGEN_G5.md) and the
+G7 adds small multi-building compounds with shared access, mixed rural destinations,
+durable child ownership and complete authoring workflows. Read
+[G7 delivery](docs/owner/WORLDGEN_G7.md), [G6 history](docs/owner/WORLDGEN_G6.md) and the
 [structure authoring guide](roguelike/docs/STRUCTURE_AUTHORING.md).
 
 Work stays in this checkout on `main`, with named checkpoints and local commits;
@@ -14,7 +14,7 @@ Run the focused and full production gates with the established environment:
 ```powershell
 $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
 & $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike
-& $ResonancePython -X utf8 tools/worldgen_g5_diagnostic.py --journey --evidence evidence/worldgen-g5/diagnostic
+& $ResonancePython -X utf8 tools/worldgen_g7_diagnostic.py --journey --evidence evidence/worldgen-g7/diagnostic
 & $ResonancePython -X utf8 tools/verify_d.py
 ```
 
