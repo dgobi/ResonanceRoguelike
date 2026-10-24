@@ -59,8 +59,8 @@ def worker(browser_name,evidence):
             const m=new StructureEditor.DocumentModel();m.importText(text);
             return [path,JSON.parse(m.exportText())];
         })''',docs+delivered)
-        check('65 frozen originals plus 64 delivered catalog documents round-trip',
-              all(row[1]==json.loads(source[1]) for row,source in zip(codec,docs+delivered)) and len(codec)==129)
+        check(f'65 frozen originals plus {len(delivered)} delivered catalog documents round-trip',
+              all(row[1]==json.loads(source[1]) for row,source in zip(codec,docs+delivered)) and len(docs)==65 and len(codec)==len(docs)+len(delivered))
         sentinels={'id':'sentinel','layers':['.'],'legend':{'.':'floor'},'unknown':{'list':[None,False,0,{'nested':[3,2,1]}]},'weight':0,'decor_layer':None}
         result=page.evaluate('''doc=>{const m=new StructureEditor.DocumentModel();m.importText(JSON.stringify(doc));return JSON.parse(m.exportText());}''',sentinels)
         check('unknown metadata, null/false/zero and ordered arrays preserved',result==sentinels and 'player_start' not in result)
@@ -136,8 +136,12 @@ def worker(browser_name,evidence):
         page.locator('#asset-id').fill('browser_frontage_'+browser_name)
         page.locator('#apply-id').click()
         planned['id']='browser_frontage_'+browser_name
+        page.locator('#layer').select_option('terrain');page.locator('#terrain-brush').select_option('.')
+        page.locator('#grid').click(position={'x':150,'y':150})
+        planned['layers'][7]=planned['layers'][7][:7]+'.'+planned['layers'][7][8:]
         page.locator('#metadata-field').select_option('placement')
         profile=copy.deepcopy(planned['placement']);profile['buffer']=2
+        profile['entrances'].append(dict(id='separate-service',x=7,y=7,normal='S',width=1,role='service',required=True))
         page.locator('#metadata').fill(json.dumps(profile));page.locator('#apply-metadata').click()
         planned['placement']=profile
         weighted=dict(type='weighted',x=planned['special_tiles'][0]['x'],y=planned['special_tiles'][0]['y'],

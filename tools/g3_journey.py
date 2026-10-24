@@ -90,18 +90,23 @@ def journey(seed,save_root,progress=None):
             report['destinations'].append(row['b'])
             if row['b']=='settlement-0':
                 local=[p for p in plan['placements'] if p['origin'][0]//80==e.world_x and p['origin'][1]//43==e.world_y]
-                p=next(p for p in local if any(t['kind']=='container' for t in p['targets']))
+                p=next(p for p in local if p['asset'] not in ('house_small_a','market_stall_a','bell_tower_a','roadside_shrine_a') and any(t['kind']=='container' for t in p['targets']))
                 target=next(t for t in p['targets'] if t['kind']=='container');xy=(target['x']%80,target['y']%43)
                 approaches=[(xy[0]+dx,xy[1]+dy) for dx in (-1,0,1) for dy in (-1,0,1) if enterable(e.local_map,(xy[0]+dx,xy[1]+dy),e.data)]
-                walk(approaches[0]);e._update_fov()
-                assert InteractionCursor.can_reach(e,*xy)
+                usable=False
+                for approach in approaches:
+                    try:walk(approach)
+                    except AssertionError:continue
+                    e._update_fov()
+                    if InteractionCursor.can_reach(e,*xy):usable=True;break
+                assert usable,'new cohort container has no usable interaction position'
                 e.mode=GameMode.INTERACTION_CURSOR;e.interaction_cursor._cursor_x,e.interaction_cursor._cursor_y=xy;e.interaction_cursor.candidates=[xy]
                 e._handle_key(pygame.K_RETURN)
                 if e.interaction_cursor._selection_prompt is None:raise AssertionError('authored container interaction did not open')
                 state=e.local_map.container_state[xy];contents=len(state['items'])
                 if contents:e._handle_key(pygame.K_RETURN)
                 e.mode=GameMode.LOCAL;e.interaction_cursor._selection_prompt=None
-                report['interaction']=dict(placement=p['id'],target=xy,initial_items=contents,remaining_items=len(state['items']))
+                report['interaction']=dict(placement=p['id'],asset=p['asset'],target=xy,initial_items=contents,remaining_items=len(state['items']))
         route(next(r for r in country if r['id']=='road-3'),reverse=True)
         landmark_route=next(r for r in country if r['b']=='landmark');route(landmark_route)
         landmark=next(p for p in plan['placements'] if p['context']=='landmark')

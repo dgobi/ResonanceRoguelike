@@ -30,6 +30,8 @@ def main():
     with (args.output/'output.txt').open('w', encoding='utf-8') as out:
         result = subprocess.run(command, cwd=root, env=env, stdout=out, stderr=subprocess.STDOUT)
     record = dict(command=command, cwd=str(root), python=sys.version, executable=sys.executable,
+                  base_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),
+                  branch=subprocess.check_output(['git','branch','--show-current'],cwd=root,text=True).strip(),
                   dependencies={n:importlib.metadata.version(n) for n in ('pygame','tcod','numpy')},
                   source=source, source_stable=source==source_manifest(), exit_code=result.returncode,
                   elapsed_seconds=time.perf_counter()-started, concurrency='one suite; worker concurrency recorded by suite',

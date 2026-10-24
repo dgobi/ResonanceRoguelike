@@ -75,12 +75,13 @@ def main(argv=None):
             reports=[]
             with contextlib.redirect_stdout(log):
                 if args.orientations:
-                    from generation.placement import transform,NORMALS
+                    from generation.placement import transform,NORMALS,entrance_cells
                     if 'placement' not in raw:raise GenerationError('--orientations requires an explicit placement profile')
                     for rotation in raw['placement']['rotations']:
                         for mirror in ([False,True] if raw['placement']['mirror_x'] else [False]):
                             oriented=transform(raw,rotation,mirror);profile=oriented['placement'];entry=next(e for e in profile['entrances'] if e['required']);dx,dy=NORMALS[entry['normal']]
-                            goals={'entry':{'x':entry['x']+dx,'y':entry['y']+dy},'targets':profile['targets']}
+                            goals={'entry':{'x':entry['x']+dx,'y':entry['y']+dy},'targets':profile['targets']+
+                                   [dict(x=x,y=y,kind='floor',required=True) for e in profile['entrances'] if e['required'] for x,y in entrance_cells(e)]}
                             result,_,_=preview(oriented,route,data,category=category,seed=args.seed,path=str(source),expectations=goals)
                             result.update(rotation=rotation,mirror=mirror);reports.append(result)
                 else:

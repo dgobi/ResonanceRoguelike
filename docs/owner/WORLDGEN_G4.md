@@ -1,5 +1,11 @@
 # G4 — Composition reliability and gameplay restoration
 
+G5 review correction (historical results preserved): the timed scene set below
+included the capital gateway rather than the required crossing. Crossing
+coverage came from separate checks/journey. The standard grid has a civic member
+and residential non-civic members. Current selection and authoring controls are
+documented in [G5](WORLDGEN_G5.md).
+
 Implemented in the existing production checkout on `main`, starting clean at
 `b77298119cc714cba08543eb9c7eaf8309a90402`. The attached brief supplied the task
 requirements; its references to earlier acceptance are not new acceptance events.

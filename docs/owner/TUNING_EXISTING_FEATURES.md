@@ -1,3 +1,5 @@
+Current settlement controls: see [G5](WORLDGEN_G5.md) and the [working authoring recipes](../../roguelike/docs/STRUCTURE_AUTHORING.md). G5 role membership, multipliers, hard caps and repetition preferences live in `roguelike/data/generation/settlement_profiles.json`; they affect new plans only.
+
 # Tuning Resonance’s existing features
 
 This guide covers changes the current game already knows how to use. Paths below start inside the `roguelike` directory, alongside `main.py`. Examples are small replacements within existing JSON objects; keep the surrounding fields.

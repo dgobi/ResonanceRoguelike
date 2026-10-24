@@ -29,7 +29,7 @@ def main():
     from verify_b3 import source_manifest
     out=args.evidence.resolve();out.mkdir(parents=True,exist_ok=True);source=source_manifest()
     report={'declared_seeds':[0,20261023,29417],'sample_size':3,'source':source,'runs':[],'failures':[],'journey':None,
-            'command':[sys.executable,*sys.argv],'cwd':str(Path.cwd()),'python':sys.version,'revision':'wg4'}
+            'command':[sys.executable,*sys.argv],'cwd':str(Path.cwd()),'python':sys.version,'revision':'wg5'}
     data=load_data();log=io.StringIO()
     for seed in report['declared_seeds']:
         try:
@@ -47,6 +47,22 @@ def main():
             row['per_edge_detour_ratio']={r['id']:sum(abs(b[0]-a[0])+abs(b[1]-a[1]) for a,b in zip(r['points'],r['points'][1:]))/max(1,abs(r['points'][-1][0]-r['points'][0][0])+abs(r['points'][-1][1]-r['points'][0][1])) for r in plan['routes'] if r['kind']=='country'}
             from worldgen_g4_diagnostic import conditional_counts,detail_svg
             row['conditional_counts']=conditional_counts(plan,data)
+            if 'selection' in plan:
+                row['composition']=[]
+                byid={p['id']:p for p in plan['placements']}
+                for s in plan['settlements']:
+                    plots=[p for p in plan['plots'] if p['owner']==s['id']]
+                    chosen=[byid[p['placement']] for p in plots if p['placement']]
+                    counts=Counter(p['asset'] for p in chosen);profile=plan['selection']['profiles'][s['form']]
+                    row['composition'].append(dict(settlement=s['id'],form=s['form'],profile=s['selection_profile'],
+                        slots=len(plots),accepted=len(chosen),vacancies=len(plots)-len(chosen),distinct_assets=len(counts),
+                        most_used_share=max(counts.values())/len(chosen),assets=dict(counts),
+                        roles={role:dict(eligible_slots=sum(p['role']==role for p in plots),accepted=sum(p['role']==role for p in chosen),
+                            minimum=profile['minimum'][role],eligible_assets=[r['asset'] for r in rows]) for role,rows in profile['roles'].items()},
+                        cap_exclusions=sum('cap reached' in r['reason'] for p in plots for r in p['rejected']),
+                        soft_repetition=[dict(plot=p['id'],reason=p['repetition']) for p in plots if 'repetition' in p],
+                        denominator='most_used_share = maximum accepted asset count / accepted placements in this settlement; slots include vacancies'))
+            row['timed_scene_scope']='starting surface, every town member, landmark, capital gateway; required crossing checked separately'
             keys={(world.start_wx,world.start_wy)}|{tuple(xy) for s in plan['settlements'] for xy in s['members']}|{tuple(n['chunk']) for n in plan['nodes'] if n['id'] in ('landmark','capital-gateway')}
             for xy in sorted(keys):
                 t=time.perf_counter()
@@ -67,13 +83,18 @@ def main():
                     (out/'roadside-scene.svg').write_text(render_svg(view),encoding='utf-8')
             if seed==20261023:
                 import gzip
-                old=json.loads(gzip.decompress((ROOT/'tools/critical_fix_regressions/fixtures/g3_plan_20261023.json.gz').read_bytes()))
+                old=json.loads(gzip.decompress((ROOT/'tools/critical_fix_regressions/fixtures/g5/g4_plan_20261023.json.gz').read_bytes()))
                 for form in ('grid','roadside'):
                     settlement=next(s for s in plan['settlements'] if s['form']==form)
                     (out/(form+'-plan.svg')).write_text(detail_svg(plan,settlement),encoding='utf-8')
                     (out/(form+'-before-plan.svg')).write_text(detail_svg(old,next(s for s in old['settlements'] if s['form']==form)),encoding='utf-8')
             (out/f'plan-{seed}.json').write_text(json.dumps(plan,indent=2)+'\n',encoding='utf-8')
             (out/f'plan-{seed}.svg').write_text(plan_svg(plan),encoding='utf-8')
+            crossing=next(r for r in plan['routes'] if r['id']=='road-1')['points'][1];xy=(crossing[0]//80,crossing[1]//43)
+            with contextlib.redirect_stdout(log):result=create_surface(world,world.get(*xy),data,ItemFactory(data),CreatureFactory(data),80,43)
+            from generation.access import reachable
+            row['required_crossing']={'chunk':xy,'all_road_cells_reachable':result.local_map.road_cells<=reachable(result.local_map,result.spawn,data)}
+            assert row['required_crossing']['all_road_cells_reachable']
             baseline=WorldMap(128,128);baseline.seed=seed;t=time.perf_counter()
             with contextlib.redirect_stdout(log):generate_world(baseline,data,random.Random(seed),plan_mode='legacy')
             row['legacy_macro_seconds']=time.perf_counter()-t

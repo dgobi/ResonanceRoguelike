@@ -43,10 +43,12 @@ def detail_svg(plan,settlement):
             if (hit:=intersect(r,rect)):box(hit,'#d4bc72')
     for plot in plan['plots']:
         if plot['owner']!=settlement['id']:continue
-        parts.append('<g><title>'+escape(plot['id']+': '+str(plot['rejected']))+'</title>')
+        parts.append('<g><title>'+escape(plot['id']+' role='+plot.get('role','historical')+': '+str(plot['rejected']))+'</title>')
         if plot['placement']:
             p=next(p for p in plan['placements'] if p['id']==plot['placement']);box(p['approach'],'#81c8ea',.6);box(p['footprint'],'#68bd92')
             parts.append(f'<circle cx="{p["join"][0]+.5}" cy="{p["join"][1]+.5}" r=".8" fill="white"/>')
+            parts.append(f'<text x="{p["footprint"][0]}" y="{p["footprint"][1]+2}" fill="#07130d" font-size="1.8">{escape(p.get("role",""))}</text>')
+            parts.append(f'<text x="{p["footprint"][0]}" y="{p["footprint"][1]+4}" fill="#07130d" font-size="1.4">{escape(p["asset"])}</text>')
         else:box(plot['buildable'],'#d37b78',.18)
         parts.append('</g>')
     return '\n'.join(parts+['</svg>'])

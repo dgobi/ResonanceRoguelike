@@ -1,228 +1,289 @@
 # Make a building or layout for Resonance
 
-Current: **G4 / generation revision `wg4`**, 23 October 2026.
-The connected workflow below is active for new worlds. The later direct-stamp
-sections retain the G2 legacy authoring route and its explicitly inactive fields.
+Current: **G5, world/scene revision `wg5`, shared plan format 3**.
+Use this connected workflow for ordinary new worlds. The later direct-stamp
+sections describe the supported legacy route, not the current selection policy.
 
+## Saved worlds first
 
-## Connected frontage and landmark workflow (G4)
+Role membership, frequency, caps and repetition settings affect **new plans**.
+Visited maps retain actors, changes and taken contents. Pending old placements
+keep their saved asset, transform, geometry and identity. No selection runs on
+load, F9, scene arrival or revisit. Changing a consumed layout, item, container,
+terrain rule or other structural dependency blocks only affected pending
+placements; restoring compatible definitions makes them usable again. Loading,
+visited maps and unrelated pending scenes remain supported. Keep referenced
+factory IDs available. There is no automatic personal-campaign migration.
 
-G4 restores native town actors, coherent settlement names/zones/difficulty,
-starting and civic waystones, civic prayers and river-dependent resources. Shared
-geometry remains authoritative. Its stages are base biome terrain; planned water,
-roads and bridges; structures/contents; protected stairs; reservation-aware wood,
-flint, clay and waystones; native population; complete access validation. A late
-failure publishes no scene or metadata. Town roles map to existing districts:
-grid civic → bell quarter, first non-civic member → market where applicable,
-remaining members → residential; roadside first member → market, second →
-residential. Civic members have one waystone/prayer. Other town members explicitly
-do not. All these roles use the existing district population policies.
+Format-1 G3 and format-2 G4 plans retain their exact values. Existing saved `wg3`
+and `wg4` scenes retain their original provenance. Newly created scenes use
+`g3-to-g5-v1`, `g4-to-g5-v1` or `g5-v1` as appropriate, with the unchanged
+`structure-v1` dependency projection. Absent/wg1/wg2 origins keep legacy/no-plan
+dispatch. Travel never writes an F5 checkpoint.
 
-An approach has exclusive private cells and shareable public cells. Opposite
-buildings may share **only cells of their assigned public road**. A nearby road,
-overlapping private approach, footprint or buffer does not grant permission.
-The assigned band's actual boundary determines setback, including even widths and
-street widths different from country-road widths. Full entrance spans, buffers and
-approaches still must fit one storage chunk; infeasible plots remain vacant.
+## What makes a building eligible
 
-Selection draws an asset using its profile weight once, then tries a shuffled
-list of that asset's permitted transforms. Failed assets are removed and another
-weighted asset is tried. Allowing eight transforms therefore improves fit options
-without multiplying the asset's weight eightfold. `mirror_x: false` prohibits
-mirroring; `true` permits it before rotation. No equal-frequency or density promise
-is made. JSON rejection records include asset, rotation, mirror and reason.
+A drawn rectangular layout supplies terrain and supported contents. Its explicit
+`placement` profile opts into contexts and defines transforms, buffer, entrances
+and goals. A role entry in `data/generation/settlement_profiles.json` makes it a
+selection candidate. The production fitter must still find room for the entire
+building, buffer and primary approach within one 80×43 storage chunk.
 
-Weighted children may omit coordinates, repeat both parent coordinates, or repeat
-only x or only y. Every supplied coordinate must match the parent **before** a
-transform. Matching coordinates move with the parent; absent fields stay absent.
-Every branch is checked, including alternatives that a preview does not select.
-Contradictory explicit coordinates produce `CHOICE_COORDINATE`; unsupported
-coordinate-bearing metadata produces an explanation rather than silent movement.
+Contexts (`grid`, `roadside`, `civic`, `landmark`) describe placement geometry.
+Plot roles (`residential`, `commercial`, `support`, `civic`, `landmark`) select
+eligible assets before fitting. A commercial plot does not create a merchant,
+shop UI or quest. Native member roles still use `native-town-v1`: the standard
+grid is civic plus residential members; roadside is market plus residential.
+The grid's civic anchor remains `bell_tower_a` with a physical spent bell.
 
-New worlds use plan format 2, G4 origin, `native-town-v1` semantics and
-`structure-v1` structural dependency projection. Existing format-1 G3 plans keep
-their original geometry, identities, selections, names, zones and difficulty.
-Load/F9/revisit never generate, repack, rename or populate saved maps. **A visited
-G3 starting surface keeps its historical missing waystone.** Unseen G3 scenes use
-the explicit `g3-to-g4-v1` materialization adapter, recording G3 plan origin and G4
-scene revision separately. They receive corrected native/resources/interactions
-where the saved geometry permits them. Incompatible required geometry fails before
-departure; no silent relocation or campaign migration occurs.
+New geometry settings use version 2 in the existing `g3_config.json` filename.
+The separate selection file is the authoritative role membership source.
+Version-1 explicit geometry overrides retain their historical flat-pool meaning
+and produce format-2 plans; they are an explicit compatibility path. Saved
+format-3 `settings.pools` is a derived diagnostic projection, not another editable
+source. Do not add pools to the version-2 configuration.
 
-G3 structural hashes retain their original semantic projection. Native profiles,
-biomes, resource and presentation definitions used by newly restored behavior are
-current definitions at first scene creation, not historically frozen G3 inputs.
-Actual native/resource input fingerprints are recorded when the scene is created;
-they are provenance, not a second inventory or a load-time content-edit gate.
-Relevant structural edits still permit load and visited-map play, while an affected
-pending placement reports its changed dependency. Unaffected pending scenes work.
-Absent-field/wg1/wg2 worlds retain their legacy/no-plan dispatch and origin even
-when a new scene records `wg4`.
+## 1. Add a house with a service door
 
-Common failures and next actions:
-
-| Message | Meaning and correction |
-|---|---|
-| footprint/buffer conflict | Real exclusive-space overlap; reduce the authored footprint/buffer or adjust spacing. |
-| approach conflict | Private overlap, unrelated road or water; sharing is limited to the assigned public cells. |
-| storage chunk / buildable plot | The actual street is too wide or the complete building/approach does not fit; inspect its assigned band. |
-| no eligible permitted transform | No allowed orientation faces this road; deliberately change rotations/mirroring if appropriate. |
-| unsupported coordinate metadata | Use a supported coordinate field before rotating; opaque positions cannot be inferred. |
-| CHOICE_COORDINATE | Remove the child coordinate or match its enclosing coordinate exactly. |
-| required content access | Door span or target has no legal route/interaction position; inspect the production preview. |
-| changed dependency | An unseen saved placement requires different structural definitions; restore compatible definitions or use a new world. |
-
-The executable verification walkthrough below creates disposable drafts, edits a
-sentinel, repeats initialization, previews all permitted orientations and mixed
-grid/roadside/landmark pools, and records exact argv/cwd/exit/output hashes. It
-does not install its test drafts in the live catalog:
-
-```powershell
-$ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
-& $ResonancePython -X utf8 tools/verify_g4_authoring.py --evidence evidence/worldgen-g4/authoring
-```
-
-The active planner uses `data/generation/g3_config.json`. It selects assets once,
-then stores routes, crossings, settlements, plots, entrance approaches and semantic
-dependencies with the world checkpoint. Individual buildings **including their
-buffer and approach** must fit one 80 × 43 storage chunk. Streets and settlements
-cross chunk boundaries. Coordinates in assets are source tiles; plan coordinates
-are world tiles (`wx * 80 + lx`, `wy * 43 + ly`). Rectangles exclude their right and
-bottom edge. Full null-painted footprints still reserve space.
-
-1. Import the complete [frontage example](examples/author_frontage_a.json) or
-   [landmark example](examples/author_landmark_a.json). They are working copies of
-   installed house/shrine assets, with new IDs and complete supported contents.
-   Export edits into `authoring/` using the matching filename. Keep drafts outside
-   `roguelike/data/`. Use **Apply ID** when changing the ID in the painter.
-2. Paint terrain/decor and edit supported special records as in the direct workflow.
-   Identify the real doorway; a south entrance lies on the final source row and
-   points outward south. An entrance is distinct from an item target, generated
-   player arrival and submap return link.
-3. Select **placement** in the metadata panel. Apply the complete version-one
-   object. `contexts` explicitly opts into `grid`, `roadside`, `civic` or `landmark`.
-   The rectangular footprint is derived from the complete terrain grid. `buffer`
-   and `approach` are tile counts; `rotations` contains allowed degrees (0/90/180/270),
-   and `mirror_x` explicitly allows horizontal reflection before rotation.
-   Each entrance has a unique ID, integer x/y, cardinal normal N/E/S/W, positive
-   width, main/service role and required boolean. Width runs toward positive x on
-   N/S edges and positive y on E/W edges. Every cell must lie on the outward edge.
-   `targets` contains integer x/y, kind and required boolean; supported kinds are
-   floor, item, readable, container, stairs_up and stairs_down. Required containers
-   must be interactable under the game's stricter corner rule.
-4. Run every permitted orientation through the actual stamper and population code,
-   then preview an actual assigned plot. The planner filters by full footprint,
-   buffer, approach ownership, permitted orientation and assigned road join before
-   accepting a candidate. Unknown coordinate-bearing metadata cannot silently
-   rotate. `road_relation` distinguishes frontage, bounded spur and remote. The
-   shipped mandatory landmark uses a spur; optional remote placement is preserved
-   in the contract but not selected by the required connected pools.
-5. The exact active pools are arrays of structure IDs under `pools.grid`,
-   `pools.roadside`, `pools.civic` and `pools.landmark` in `g3_config.json`. A draft
-   `--planned --context ...` run adds its ID only in memory, retaining all installed
-   pool choices. Weight is a positive selection weight, **not a guaranteed count**.
-   Eligibility alone does not guarantee fit or selection. JSON records every
-   rejected candidate reason and each explicit vacant garden; essential civic and
-   landmark failures fail planning instead of quietly becoming vacancies.
-6. Use both grid and roadside previews for the frontage example. Inspect assigned
-   road IDs, footprint/clearance/approach rectangles, entrance spans/normals,
-   required goals and materialization receipts. A nearby different road cannot
-   satisfy a missing assigned join. The same production planner/materializer
-   powers previews and ordinary new worlds. SVGs are diagnostic drawings, not
-   played-game screenshots. Full realized objects and rejected choices are in JSON.
-7. Install deliberately into the appropriate existing category folder, append the
-   new ID to the intended pool in `g3_config.json`, validate and refresh the editor
-   catalog. Existing inactive `allowed_in`, `facing`, `rotatable`, `district_weights`
-   and legacy `weight` do not grant G3 eligibility or rotation permissions.
-
-From the repository root, these commands are complete and safe to repeat after
-an edited draft exists (initialization cannot replace that draft):
+The complete [g5_service_house.json](examples/g5_service_house.json) has a south
+main door and a north required service door. Start from it in a draft directory.
+All commands below run from `G:\GameDev\RoguelikeProject`:
 
 ```powershell
 $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
 New-Item -ItemType Directory -Force authoring | Out-Null
-if (-not (Test-Path -LiteralPath authoring/author_frontage_a.json)) {
-  Copy-Item roguelike/docs/examples/author_frontage_a.json authoring/author_frontage_a.json
+if (-not (Test-Path -LiteralPath authoring/g5_service_house.json)) {
+  Copy-Item roguelike/docs/examples/g5_service_house.json authoring/g5_service_house.json
 }
-if (-not (Test-Path -LiteralPath authoring/author_landmark_a.json)) {
-  Copy-Item roguelike/docs/examples/author_landmark_a.json authoring/author_landmark_a.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_service_house.json --route ordinary_building --category residential --orientations --output evidence/authoring/g5-house-orientations.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_service_house.json --planned --category residential --role residential --context grid --seed 20261023 --output evidence/authoring/g5-house-grid.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_service_house.json --planned --category residential --role residential --context roadside --seed 20261023 --output evidence/authoring/g5-house-roadside.json
+```
+
+Import that draft into `layout_painter.html`. Give copies unique IDs with **Apply
+ID**; paint a complete rectangle and declare each full doorway span separately
+in the **placement** metadata panel. `width` runs toward positive x on N/S edges
+and positive y on E/W edges. Never span a wall between doors. Main/service is an
+entrance role, independent of the plot role. The fitter prefers the eligible main
+door, then lexical entrance ID, and records `frontage_entrance`. Old plans derive
+that choice from their saved normal and approach without rewriting any data.
+
+Only that selected span must occupy the primary approach. Every required door
+must still be reachable from the same assigned road join, including through the
+interior. An independent exterior service route is not promised. Required goals
+use `floor`, `item`, `readable`, `container`, `stairs_up` or `stairs_down`; choose
+actual interaction positions for blocking objects. `--orientations` checks all
+declared door cells and goals in every permitted transform. Unsupported opaque
+coordinate metadata fails rather than silently rotating incorrectly.
+
+## 2. Add commercial or support content
+
+The complete [g5_workshop.json](examples/g5_workshop.json) retains the workshop's
+two-cell entrance, readables and `scholar_desk` scene, and adds a real tool crate.
+Its supported records include:
+
+```json
+{"x":8,"y":5,"type":"container","decor_id":"crate","loot_pools":["storage_tools"]}
+```
+
+The matching required target is `{"x":8,"y":5,"kind":"container","required":true}`.
+The full example also contains readable `item` records with real `text_id`s and
+a `scene` record, so it can be tested without reconstructing snippets.
+
+```powershell
+if (-not (Test-Path -LiteralPath authoring/g5_workshop.json)) {
+  Copy-Item roguelike/docs/examples/g5_workshop.json authoring/g5_workshop.json
 }
-& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_frontage_a.json --route ordinary_building --category residential --orientations --output evidence/authoring/frontage-orientations.json
-& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_frontage_a.json --planned --category residential --context grid --seed 20261023 --output evidence/authoring/frontage-grid.json
-& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_frontage_a.json --planned --category residential --context roadside --seed 20261023 --output evidence/authoring/frontage-roadside.json
-& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_landmark_a.json --route ordinary_building --category wilderness --orientations --output evidence/authoring/landmark-orientations.json
-& $ResonancePython -X utf8 tools/structure_authoring.py authoring/author_landmark_a.json --planned --category wilderness --context landmark --seed 29417 --output evidence/authoring/landmark-plot.json
-& $ResonancePython -X utf8 tools/structure_authoring.py --world-plan --seed 20261023 --output evidence/authoring/world-plan.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_workshop.json --route ordinary_building --category commercial --orientations --output evidence/authoring/g5-workshop-orientations.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_workshop.json --planned --category commercial --role commercial --context grid --seed 20261023 --output evidence/authoring/g5-workshop-grid.json
+```
+
+Containers require reachable interaction positions under the engine's range and
+corner rule. Painted furniture is not automatically a populated container.
+House hearths are obstacles; the shepherd's explicit hearth-container special is
+populated. The hunter cabin's furniture glyphs remain floor and its only authored
+content is a readable. Legacy hunting loot metadata supplies no stock here.
+Shop and apothecary entries currently use legal diagonal movement around an
+inward wall. Their actual routes are certified; no new trading/crafting service
+is implied by counters or tools.
+
+## 3. Offer another landmark
+
+[g5_landmark.json](examples/g5_landmark.json) copies the certified waymarker
+shelter to a unique draft ID. It has two separated required doors, a readable,
+a coffer and a blocking waystone declared in the terrain legend. The production
+stamper converts that legend ID into decor on its base tile. Its floor goal is beside the waystone,
+not on it. The real interaction handler recognizes the realized decor representation.
+The static handoff described it as terrain; runtime evidence corrects that claim.
+
+```powershell
+if (-not (Test-Path -LiteralPath authoring/g5_landmark.json)) {
+  Copy-Item roguelike/docs/examples/g5_landmark.json authoring/g5_landmark.json
+}
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_landmark.json --route ordinary_building --category wilderness --orientations --output evidence/authoring/g5-landmark-orientations.json
+& $ResonancePython -X utf8 tools/structure_authoring.py authoring/g5_landmark.json --planned --category wilderness --role landmark --context landmark --seed 29417 --output evidence/authoring/g5-landmark.json
+```
+
+Register an installed alternative in `profiles.landmark.roles.landmark`. Its
+profile must explicitly permit `landmark` and a connected `spur`. The assigned
+road join, bounded approach, all required doors and usable goal must pass. There
+is still exactly **one geographical landmark**. Three sample worlds cannot
+establish the natural frequency of every alternative.
+
+## 4. Tune settlement character
+
+Use [g5_selection_example.json](examples/g5_selection_example.json), a complete
+working configuration. It doubles the grid apothecary role multiplier, reduces
+the original house cap to four, and changes the local repeat multiplier to 0.1.
+Preview this policy without installing it:
+
+```powershell
+& $ResonancePython -X utf8 tools/structure_authoring.py --world-plan --selection-config roguelike/docs/examples/g5_selection_example.json --output evidence/authoring/g5-tuned-world.json
+```
+
+In `profiles.grid.roles.commercial`, the apothecary entry becomes:
+
+```json
+{"asset":"apothecary_a","weight":2,"max_per_settlement":5}
+```
+
+The installed `schedule` is `["commercial","residential","support","residential"]`.
+Slots are stably ordered by Manhattan distance from the original civic/arrival
+slot, with coordinate/normal tie breaks. Required civic, commercial and residential
+assignments are reserved first. The schedule applies to remaining slot indices,
+giving a commercial focus near arrival and a residential/support mix farther out.
+Minima are one residential and one commercial per settlement, plus one grid bell.
+Support is optional. Required asset/slot trials use bounded backtracking (256 by
+default), so an early flexible building cannot consume the only feasible plot
+for a later required role. Exhaustion rejects the candidate world atomically.
+
+## 5. Control repetition
+
+The effective draw weight is **placement base weight × role weight × repeat
+multiplier**. The penalty applies if the asset matches the nearest accepted plot
+in stable slot order (ties use the earlier order). Draw the asset once, then try
+its permitted transforms; more orientations do not multiply its weight. Failed
+trials consume no accepted cap. Input order, process hash seeds and gameplay RNG
+do not change the saved result.
+
+Set `max_per_settlement` in an asset's role entry for a hard limit. It counts
+accepted instances across all members of that one settlement. The landmark has
+its own one-site scope. Duplicate asset membership across roles within one
+profile is rejected. `repeat_multiplier` is soft: the repeated asset remains
+eligible at lower weight. A single remaining eligible choice records an explicit
+soft fallback; other repeats are labeled weighted repeats. Hard caps are never
+exceeded. Optional plots become explicit vacant gardens if nothing fits. Required
+minima either fit within the budget or fail with the role, budget and last reasons.
+
+## Active controls
+
+All paths below are under `roguelike/data`. Except structural edits noted below,
+these controls affect **new planning only**, never saved selection or visited maps.
+
+| File/key | Units, default and valid range | Effect |
+|---|---|---|
+| `generation/g3_config.json:version` | 2; explicit legacy override 1 | Geometry/selection schema dispatch. |
+| `selection_profile_version` | 1 | Requires the separate profile schema. |
+| `settlement_count` | inclusive [2,4], integer endpoints 2..8 | Number of existing-form settlements. |
+| `minimum_separation_chunks` | 12, 3..128 chunks | Euclidean settlement-anchor separation. |
+| `near_start_radius_chunks` | 10, 2..128 chunks | One counted site near the start. |
+| `forms` | exactly [grid,roadside] | Alternating existing forms. |
+| `road_width_tiles`, `street_width_tiles` | 3, integer 1..5 tiles | Actual full assigned road bands. |
+| `plot_spacing_tiles` | 18, integer 14..40 tiles | Slot spacing, not an occupancy promise. |
+| `setback_tiles` | 2, integer 1..8 tiles | Minimum setback; profile approach may increase it. |
+| `max_spur_tiles` | 12, integer 2..24 tiles | Maximum complete primary approach length. |
+| `route_search_nodes` | 16384, integer 16..65536 | Per-route search bound. |
+| `site_search_limit` | 16384, integer 1..16384 | Candidate site bound. |
+| `generation/settlement_profiles.json:version` | 1 | Selection schema; profiles stored once per plan. |
+| `profiles.<form>.id` | nonempty string; `<form>-mixed-v1` | Persisted profile identity. |
+| `roles.<role>[].asset` | unique installed ID with explicit context | Candidate membership. |
+| `roles.<role>[].weight` | 1, finite >0..1000 | Multiplier on base placement weight. |
+| `roles.<role>[].max_per_settlement` | 5 ordinary, 3 support, 1 civic/landmark; integer 1..128 | Hard accepted-instance cap. |
+| `minimum.<role>` | residential/commercial/civic/landmark 1, support 0; integer 0..8 with obligations retained | Required accepted count; total caps must suffice. |
+| `schedule` | commercial,residential,support,residential | Nonempty optional role sequence; civic excluded. |
+| `repeat_multiplier` | 0.2, finite (0,1] | Soft nearest-occupied-slot repeat preference. |
+| `required_fit_budget` | 256, integer 1..4096 asset/slot trials | Required-role backtracking bound. |
+| `buildings/...:placement.version` | 1 | Explicit supported structural contract. |
+| `placement.contexts`, `placement.weight` | explicit contexts; base weight finite >0..1000 | New-plan selection only; excluded from structural hashes. |
+| `placement.rotations`, `mirror_x` | explicit quarter turns; boolean mirror before rotation | Consumed geometry; changing affects pending dependency compatibility. |
+| `placement.buffer`, `approach` | integer 0..8 tiles | Reserved geometry; affects pending compatibility. |
+| `placement.road_relation` | frontage/spur/remote | Remote cannot satisfy connected pools. |
+| `placement.entrances`, `targets` | source coordinates, outward spans, typed goals | Required access; affects pending compatibility. |
+
+Legacy `allowed_in`, `rotatable`, `facing`, `district_weights`, top-level `weight`
+and `town_config.json` do not acquire new shared-plan meanings. Native population,
+presentation and text retain their established policies.
+
+## 6. Diagnose and install deliberately
+
+Run a known context mismatch to see a real error: the landmark example with
+`--planned --context grid --category wilderness` fails. Use its declared landmark
+context instead. Other reasons remain distinct:
+
+| Diagnostic | Actual cause and repair |
+|---|---|
+| missing explicit context / candidate eligibility | Add a deliberate supported context or choose the correct one. |
+| role membership / hard cap | Register the intended role, correct its ID, or deliberately change its cap; geometry edits cannot fix this exclusion. |
+| no eligible permitted transform | No declared orientation faces that assigned road; permit a meaningful orientation. |
+| footprint/buffer or private approach conflict | Exclusive reserved space overlaps; alter footprint/buffer or slot spacing. Assigned public road cells alone may be shared. |
+| buildable plot / storage chunk | Insufficient width/depth for footprint, buffer or approach; inspect the exact half-open rectangles. |
+| complete required entrance / content inaccessible | Inspect full spans, blocking decor and actual interaction corners; preserve separate doors instead of making them optional. |
+| required role minima infeasible | Read exhausted role and asset/slot trial budget; provide a fitting eligible asset/cap. Do not silently remove the role. |
+| changed dependency | Restore compatible consumed definitions for that pending saved placement, or create a fresh disposable world for edited content. |
+
+`--planned` registers a draft only in memory in the selected role, retaining the
+installed mixed policy. It can honestly report “not selected/fitted” for the
+chosen seed. Controlled cohort tests are labeled separately from natural samples.
+Inspect the JSON plan's plots, rejections, roles, frontage IDs and receipts; SVG
+diagrams show the assigned roads, joins, approaches and vacancies. Production
+renderer PNGs are labeled separately in the G5 evidence.
+
+To install a reviewed draft, copy it to a **new** filename in the existing category
+folder only if that filename is absent, then add its exact ID to the intended
+role array. For example `profiles.grid.roles.residential` can include:
+
+```json
+{"asset":"g5_service_house","weight":1,"max_per_settlement":4}
+```
+
+```powershell
+if (-not (Test-Path -LiteralPath roguelike/data/buildings/residential/g5_service_house.json)) {
+  Copy-Item authoring/g5_service_house.json roguelike/data/buildings/residential/g5_service_house.json
+}
+# After the deliberate role-table edit:
+& $ResonancePython -X utf8 tools/structure_authoring.py --catalog --output evidence/authoring/catalog.json
 & $ResonancePython -X utf8 tools/structure_authoring.py --refresh-editor-catalog
 & $ResonancePython -X utf8 tools/structure_authoring.py --check-editor-catalog
 ```
 
-The landmark positive selection uses seed 29417. Seeds 20261023 and 0 kept the
-existing shrine instead; those are valid unselected-candidate outcomes, not world
-failures. This controlled example is not a frequency estimate.
+Catalog freshness uses current raw checkout bytes, separately from semantic save
+compatibility. Reload the painter after refreshing. The live corpus remains 64
+documents; the frozen 65 original codec documents remain untouched. Both browser
+tests import/edit/download real JSON with separated entrances and a weighted
+special, then feed those downloaded bytes through the Python compiler and mixed
+planned preview. This does not claim every control was tested on every asset.
 
-For deliberate installation of an accepted frontage draft:
-
-```powershell
-Copy-Item authoring/author_frontage_a.json roguelike/data/buildings/residential/author_frontage_a.json
-# Append "author_frontage_a" to pools.grid and/or pools.roadside in g3_config.json.
-& $ResonancePython -X utf8 tools/structure_authoring.py --catalog --output evidence/authoring/installed-catalog.json
-& $ResonancePython -X utf8 tools/structure_authoring.py --refresh-editor-catalog
-```
-
-Catalog freshness compares raw checkout bytes, including LF/CRLF. Refresh after
-an intentional edit or checkout conversion; do not suppress a stale result. Saved
-plan compatibility uses separate semantic dependency digests, ignores JSON
-formatting and inactive structure metadata, and does not use catalog hashes as RNG
-seeds. Changes to unrelated unused assets do not move a road or invalidate a plot.
-
-Authoring changes appear in previews immediately and in new worlds. Visited scenes
-and moved/taken contents remain saved and never respawn from their plan. A pending
-placement with changed required generation content fails **before departure** with
-the placement/dependency name: restore matching definitions or start a new world.
-Loading/F9 and unrelated pending placements still work. Runtime IDs used by saves
-must remain available. Live text/presentation follows the current runtime policy;
-there is no historical generator archive or campaign migration.
-
-Absent-field, wg1 and wg2 worlds keep their saved origin revision and authoritative
-scenes. Their unexplored chunks use the explicit legacy/no-plan path. G3 worlds
-require their saved shared plan; missing/corrupt plans follow atomic checkpoint
-recovery rather than regenerating from a seed. Travel does not publish an F5 save.
-
-| Active setting | Units and scope |
-|---|---|
-| settlement_count | Inclusive [minimum, maximum], default 2–4, including roadside settlements. |
-| minimum_separation_chunks | Euclidean anchor distance in coarse chunks, default 12. |
-| near_start_radius_chunks | Inclusive Euclidean radius, default 10; one of the counted sites is reserved near start. |
-| forms | Grid then roadside; additional counted settlements alternate. Both span chunks. |
-| road_width_tiles / street_width_tiles | Full integer world-tile band widths, default 3. |
-| plot_spacing_tiles | Plot center spacing, default 18; geometry still must fit. |
-| setback_tiles | Minimum entrance-to-road clearance, default 2; profile approach can require more. |
-| max_spur_tiles | Maximum connected approach length, default 12. |
-| route_search_nodes | Bounded coarse A* expansion limit per route, default 16,384. |
-| site_search_limit | Maximum ordered candidate sites examined, default 16,384. |
-| pools | Explicit existing asset IDs with matching profile contexts; profile weight selects fitting candidates. |
-
-`town_config.json` remains a preserved inactive legacy file. G3 does not activate
-its nonexistent categories. Roads use terrain costs and exclude the VUKH peak;
-capital gateway and starting laboratory remain reserved anchors. Bridges own their
-water/channel intersection and are traversable by players and creatures. Existing
-no-plan ford behavior remains separate. A required crossing/site that cannot meet
-constraints yields a specific bounded failure before publishing a world.
-
-To see the representative world using production code and a fresh disposable save
-root, choose a new session name (existing names are refused):
+Autonomous recipe and acceptance commands:
 
 ```powershell
-& $ResonancePython -X utf8 tools/play_disposable.py --seed 20261023 --session g4-first
+& $ResonancePython -X utf8 tools/verify_g5_authoring.py --evidence evidence/worldgen-g5/authoring
+& $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike --evidence evidence/worldgen-g5/focused
+& $ResonancePython -X utf8 tools/verify_structure_editor.py --evidence evidence/worldgen-g5/browser
+& $ResonancePython -X utf8 tools/worldgen_g5_diagnostic.py --journey --evidence evidence/worldgen-g5/diagnostic
+& $ResonancePython -X utf8 tools/verify_d.py
 ```
 
-This optional play command opens the game; autonomous verification does not depend
-on it. The headless journey command is:
+The expanded focused gate has a 600-second bound and runs alone; browser workers
+retain 150-second bounds. The recipe verifier uses disposable drafts and a
+disposable data catalog for installation, retains exact commands/hashes and checks
+that repeated initialization preserves edit sentinels. Optional play uses
+`tools/play_disposable.py --seed 20261023 --session g5-first` with a fresh session
+name; routine verification does not depend on owner play or a desktop takeover.
 
-```powershell
-& $ResonancePython -X utf8 tools/worldgen_g4_diagnostic.py --journey --evidence evidence/worldgen-g4/diagnostic
-```
+G4 correction: its timed scene sample included the capital gateway, not the
+required crossing. G5 labels that timed set accurately and records crossing
+coverage separately. The standard grid's non-civic native members are residential.
+
 
 ## Legacy direct-stamp workflow
 
