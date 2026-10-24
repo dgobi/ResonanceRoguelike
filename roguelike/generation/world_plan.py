@@ -60,13 +60,21 @@ def settings(data,override=None):
 
 class Reservations:
     def __init__(self): self.rows=[]; self.index={}
-    def conflicts(self,rect,compatible=()):
+    def conflicts(self,rect,compatible=(),*,public_road=None,public_rects=()):
         ids={i for key in member_chunks(rect) for i in self.index.get(tuple(key),[])}
-        return [self.rows[i] for i in sorted(ids) if self.rows[i]['owner'] not in compatible and intersect(rect,self.rows[i]['rect'])]
-    def add(self,owner,purpose,rect,compatible=()):
-        conflicts=self.conflicts(rect,compatible)
+        result=[]
+        for i in sorted(ids):
+            row=self.rows[i]; hit=intersect(rect,row['rect'])
+            if row['owner'] in compatible or not hit: continue
+            share=(row['purpose']=='road' or (row['purpose']=='approach' and row.get('public_road')==public_road))
+            if public_road and share and all(any(r[0]<=x<r[2] and r[1]<=y<r[3] for r in public_rects) for x,y in cells(hit)): continue
+            result.append(row)
+        return result
+    def add(self,owner,purpose,rect,compatible=(),*,public_road=None,public_rects=()):
+        conflicts=self.conflicts(rect,compatible,public_road=public_road,public_rects=public_rects)
         if conflicts: raise GenerationError(f'{owner}: {purpose} conflicts with {conflicts[0]["owner"]} ({conflicts[0]["purpose"]})')
         row=dict(id=f'reservation-{len(self.rows)}',owner=owner,purpose=purpose,rect=rect)
+        if public_road: row['public_road']=public_road
         i=len(self.rows); self.rows.append(row)
         for key in member_chunks(rect): self.index.setdefault(tuple(key),[]).append(i)
         return row
@@ -251,20 +259,30 @@ def build_plan(world,data,override=None,metrics=None):
 def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,required=False):
     c=plan['settings']; pid=f'{owner}-plot-{len(plan["plots"])}'; chosen=None; rejected=[]
     pool=c['pools'][context]; candidates=[]
+    road=next((r for r in plan['routes'] if r['id']==road_id),None)
+    if road is None: raise GenerationError(f'{pid}: unknown assigned road {road_id}')
     for asset in sorted(pool):
         raw=data.structures[asset]; p=raw['placement']
+        orientations=[]
         for rotation in sorted(set(p['rotations'])):
-            transformed=transform(raw,rotation)
-            e=next((e for e in transformed['placement']['entrances'] if e['required'] and e['normal']==normal),None)
-            if e: candidates.append((asset,rotation,transformed,e,p['weight']))
+            for mirror in ((False,True) if p['mirror_x'] else (False,)):
+                transformed=transform(raw,rotation,mirror)
+                e=next((e for e in transformed['placement']['entrances'] if e['required'] and e['normal']==normal),None)
+                if e: orientations.append((asset,rotation,mirror,transformed,e))
+        if orientations: candidates.append((asset,p['weight'],orientations))
+        else: rejected.append(dict(asset=asset,rotation=None,mirror=None,reason='no eligible permitted transform for entrance normal'))
     rng=random.Random(stable_seed('wg3',plan['seed'],pid,'asset'))
     ordered=[]
     while candidates:
-        selected=rng.choices(candidates,weights=[r[4] for r in candidates],k=1)[0]; ordered.append(selected); candidates.remove(selected)
-    for asset,rotation,raw,e,weight in ordered:
-        p=raw['placement']; width,height=raw['width'],raw['height']; half=c['road_width_tiles']//2
+        selected=rng.choices(candidates,weights=[r[1] for r in candidates],k=1)[0]; candidates.remove(selected)
+        orientations=list(selected[2]); rng.shuffle(orientations); ordered.extend(orientations)
+    for asset,rotation,mirror,raw,e in ordered:
+        p=raw['placement']; width,height=raw['width'],raw['height']
         setback=max(c['setback_tiles'],p['approach'])
         nx,ny=NORMALS[normal]
+        # Measure the assigned band's actual boundary toward this building.
+        half=0
+        while half<=c['max_spur_tiles'] and any(r[0]<=wx*W+lx-nx*(half+1)<r[2] and r[1]<=line_y-ny*(half+1)<r[3] for r in road['rects']): half+=1
         ox=wx*W+lx-nx*(half+setback+1)-e['x']; oy=line_y-ny*(half+setback+1)-e['y']
         footprint=[ox,oy,ox+width,oy+height]; clearance=expand(footprint,p['buffer'])
         ec=[(ox+x,oy+y) for x,y in entrance_cells(e)]
@@ -279,16 +297,15 @@ def _plot(plan,authority,data,owner,context,wx,wy,lx,line_y,normal,road_id,requi
             if intersect(footprint,buildable)!=footprint: raise GenerationError('footprint does not fit assigned buildable plot')
             conflicts=authority.conflicts(clearance)
             if conflicts: raise GenerationError(f'footprint/buffer conflicts with {conflicts[0]["owner"]}')
-            conflicts=authority.conflicts(approach,tuple(r['id'] for r in plan['routes']))
+            conflicts=authority.conflicts(approach,public_road=road_id,public_rects=road['rects'])
             if conflicts: raise GenerationError(f'approach conflicts with {conflicts[0]["owner"]}')
-            road=next(r for r in plan['routes'] if r['id']==road_id)
             if not any(r[0]<=join[0]<r[2] and r[1]<=join[1]<r[3] for r in road['rects']): raise GenerationError('assigned road has no frontage at join; a different nearby road is insufficient')
             if max(approach[3]-approach[1],approach[2]-approach[0])-1>c['max_spur_tiles']: raise GenerationError('approach exceeds bounded spur length')
-            placement=dict(id=pid+'-building',asset=asset,context=context,rotation=rotation,mirror=False,origin=[ox,oy],footprint=footprint,clearance=clearance,approach=approach,road=road_id,join=join,entrances=[dict(e,x=ox+e['x'],y=oy+e['y']) for e in raw['placement']['entrances']],targets=[dict(t,x=ox+t['x'],y=oy+t['y']) for t in raw['placement']['targets']],required=required,dependency=asset)
+            placement=dict(id=pid+'-building',asset=asset,context=context,rotation=rotation,mirror=mirror,origin=[ox,oy],footprint=footprint,clearance=clearance,approach=approach,road=road_id,join=join,entrances=[dict(e,x=ox+e['x'],y=oy+e['y']) for e in raw['placement']['entrances']],targets=[dict(t,x=ox+t['x'],y=oy+t['y']) for t in raw['placement']['targets']],required=required,dependency=asset)
             authority.add(placement['id'],'structure',clearance)
-            authority.add(placement['id'],'approach',approach,(placement['id'],*(r['id'] for r in plan['routes'])))
+            authority.add(placement['id'],'approach',approach,(placement['id'],),public_road=road_id,public_rects=road['rects'])
             plan['dependencies'].setdefault(asset,dependencies(data.structures[asset],data)); plan['placements'].append(placement); chosen=placement['id']; break
-        except GenerationError as error: rejected.append(dict(asset=asset,rotation=rotation,reason=str(error)))
+        except GenerationError as error: rejected.append(dict(asset=asset,rotation=rotation,mirror=mirror,reason=str(error)))
     plot=dict(id=pid,owner=owner,road=road_id,normal=normal,buildable=buildable if ordered else [wx*W,wy*H,(wx+1)*W,(wy+1)*H],setback=c['setback_tiles'],placement=chosen,status='occupied' if chosen else 'vacant-garden',required=required,rejected=rejected)
     plan['plots'].append(plot)
     if required and not chosen: raise GenerationError(f'{pid}: essential placement failed: {rejected}')
@@ -370,7 +387,10 @@ def validate_plan(plan,width,height):
             for water in (v for v in conflicts if v['purpose']=='water'):
                 hit=intersect(r['rect'],water['rect'])
                 if not any(c['road']==r['owner'] and c['water']==water['owner'] and any(intersect(hit,d)==hit for d in c['deck']) for c in plan['crossings']): raise GenerationError('G3 road/channel intersection has no owned crossing')
-        elif r['purpose']=='approach': compatible=[r['owner']]+[v['owner'] for v in conflicts if v['purpose']=='road']
+        elif r['purpose']=='approach':
+            owner=registries['placements'][r['owner']]; road=registries['routes'][owner['road']]
+            authority.add(r['owner'],r['purpose'],r['rect'],(r['owner'],),public_road=road['id'],public_rects=road['rects'])
+            continue
         else: compatible=[]
         authority.add(r['owner'],r['purpose'],r['rect'],compatible)
     if not isinstance(plan.get('dependencies'),dict) or any(not isinstance(rows,dict) or any(not isinstance(v,str) or len(v)!=64 for v in rows.values()) for rows in plan['dependencies'].values()): raise GenerationError('G3 semantic dependency manifest malformed')

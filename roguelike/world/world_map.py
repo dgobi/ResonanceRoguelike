@@ -15,7 +15,7 @@ class TownData:
     districts:       list[str]                 # district names present
     bell_state:      str                       # "intact","cracked","spent","missing","destroyed"
     is_festival:     bool
-    waystone_pos:    tuple[int, int]
+    waystone_pos:    tuple[int, int] | None
     bell_tower_pos:  tuple[int, int] | None = None
     buildings:       list[dict] = field(default_factory=list)
     creature_spawns: list[dict] = field(default_factory=list)  # [{creature_id, x, y}, ...]

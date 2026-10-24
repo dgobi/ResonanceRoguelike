@@ -618,7 +618,7 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
                 districts       = td_raw.get("districts", []),
                 bell_state      = td_raw.get("bell_state", "spent"),
                 is_festival     = td_raw.get("is_festival", False),
-                waystone_pos    = tuple(td_raw.get("waystone_pos", [0, 0])),
+                waystone_pos    = tuple(td_raw['waystone_pos']) if td_raw.get('waystone_pos') is not None else None,
                 bell_tower_pos  = tuple(td_raw["bell_tower_pos"]) if td_raw.get("bell_tower_pos") else None,
                 buildings       = td_raw.get("buildings", []),
                 creature_spawns = td_raw.get("creature_spawns", []),

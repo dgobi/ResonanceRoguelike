@@ -56,7 +56,7 @@ def transform(raw,rotation=0,mirror=False):
     """Transform the whole consumed document; originals and unknown scalars survive."""
     w,h=len(raw['layers'][0]),len(raw['layers']); validate_profile(raw,w,h)
     p=raw.get('placement')
-    if p is None or rotation not in p['rotations'] or (mirror and not p['mirror_x']):
+    if type(rotation) is not int or type(mirror) is not bool or p is None or rotation not in p['rotations'] or (mirror and not p['mirror_x']):
         raise GenerationError(f'{raw.get("id")}: transform is not permitted by placement profile')
     known={'layers','decor_layer','special_tiles','player_start','connection_point','spawn_offset','placement','exit_x','exit_y','exit_direction','width','height','legend','legend_weights'}
     def coordinate_metadata(value):
@@ -84,7 +84,17 @@ def transform(raw,rotation=0,mirror=False):
     if 'decor_layer' in raw: result['decor_layer']=grid(raw['decor_layer'])
     for field in ('player_start','connection_point','spawn_offset'):
         if field in result: result[field]['x'],result[field]['y']=xy(raw[field]['x'],raw[field]['y'])
-    for row in result.get('special_tiles',[]): row['x'],row['y']=xy(row['x'],row['y'])
+    for row in result.get('special_tiles',[]):
+        x,y=row['x'],row['y']; tx,ty=xy(x,y)
+        # Each supplied child coordinate inherits independently. Validate the
+        # source before moving it; never hide a contradictory unselected branch.
+        for child in row.get('spawn_table',[]):
+            for key,old,new in (('x',x,tx),('y',y,ty)):
+                if key in child:
+                    if type(child[key]) is not int or child[key]!=old:
+                        raise GenerationError(f'{raw.get("id")}: CHOICE_COORDINATE: weighted child {key} must match its enclosing anchor')
+                    child[key]=new
+        row['x'],row['y']=tx,ty
     if 'exit_x' in raw and 'exit_y' in raw: result['exit_x'],result['exit_y']=xy(raw['exit_x'],raw['exit_y'])
     if 'exit_direction' in raw:
         full={'north':'N','south':'S','east':'E','west':'W'}

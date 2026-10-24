@@ -128,7 +128,7 @@ class G3Plans(unittest.TestCase):
             water=[0,41,80,46] if vertical else [78,0,83,43]
             road=[39,21,42,65] if vertical else [40,20,121,23]
             deck=intersect(road,[water[0]-2,water[1]-2,water[2]+2,water[3]+2])
-            w.plan={'waters':[{'id':'channel','rects':[water]}],'routes':[{'id':'road','rects':[road]}],
+            w.plan={'version':1,'generation_revision':'wg3','waters':[{'id':'channel','rects':[water]}],'routes':[{'id':'road','rects':[road]}],
                     'crossings':[{'id':'bridge','deck':[deck]}],'placements':[]}
             pairs=((0,0),(0,1)) if vertical else ((0,0),(1,0))
             a,b=[self.scene(p,w).local_map for p in pairs]
