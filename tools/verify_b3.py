@@ -39,6 +39,8 @@ def source_manifest():
     result[corrections.relative_to(ROOT).as_posix()] = hashlib.sha256(corrections.read_bytes()).hexdigest()
     guide=GAME/'docs/STRUCTURE_AUTHORING.md'
     result[guide.relative_to(ROOT).as_posix()]=hashlib.sha256(guide.read_bytes()).hexdigest()
+    guide=GAME/'docs/COUNTRY_NETWORK.md'
+    result[guide.relative_to(ROOT).as_posix()]=hashlib.sha256(guide.read_bytes()).hexdigest()
     # G8 ordinary comparisons consume the immutable same-machine G7 witness.
     for seed in (0,20261023,29417):
         baseline=ROOT/f'evidence/worldgen-g8/before/baseline/results/plan-{seed}.json'

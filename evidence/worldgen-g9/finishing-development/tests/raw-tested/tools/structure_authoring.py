@@ -1,0 +1,209 @@
+"""One offline command for structure catalog checks, validation and runtime previews."""
+from __future__ import annotations
+import argparse
+import contextlib
+import hashlib
+import io
+import json
+import os
+from pathlib import Path
+import sys
+
+ROOT=Path(__file__).resolve().parents[1]
+
+
+def main(argv=None):
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('candidate',type=Path,nargs='?')
+    p.add_argument('--game',type=Path,default=ROOT/'roguelike')
+    p.add_argument('--data-root',type=Path)
+    p.add_argument('--route',choices=['ordinary_building','plaza','interior_entrance','authored_submap'])
+    p.add_argument('--category')
+    p.add_argument('--seed',type=int,default=20261023)
+    p.add_argument('--output',type=Path)
+    p.add_argument('--access',type=Path)
+    p.add_argument('--register',action='store_true')
+    p.add_argument('--world-plan',action='store_true',help='Preview the production shared world plan')
+    p.add_argument('--planned',action='store_true',help='Add a draft to its active pool and materialize its selected plots')
+    p.add_argument('--site',action='store_true',help='Add a draft to the additional-site pool and preview naturally selected sites')
+    p.add_argument('--assigned-site',choices=list('NESW'),help='Controlled one-site candidate preview with this primary frontage normal')
+    p.add_argument('--compound',type=Path,help='Complete draft compound recipe; previews without installing')
+    p.add_argument('--child',type=Path,action='append',default=[],help='Actual child draft/export to use with --compound; repeatable')
+    p.add_argument('--assigned-compound',choices=list('NESW'),help='Controlled one-compound preview with this gate normal')
+    p.add_argument('--compound-rotation',type=int,choices=[0,90,180,270],help='One permitted parent transform for assigned preview')
+    p.add_argument('--init-compound',type=Path,help='Create complete recipe, child and v2 policy drafts; never overwrite existing files')
+    p.add_argument('--layout-config',type=Path,help='Complete version-one settlement layout settings, previewed without installation')
+    p.add_argument('--layout',help='Controlled choice of one grid layout ID; ordinary selection when omitted')
+    p.add_argument('--settlement-preview',choices=['grid','roadside','all'],help='Materialize every member of selected settlements')
+    p.add_argument('--init-settlement',type=Path,help='Copy complete layout, role-selection and planning drafts; preserve existing files')
+    p.add_argument('--network-preview',action='store_true',help='Inspect/preview the bounded country policy; JSON plus exact SVG/PNG overlays, no scenes or installation')
+    p.add_argument('--network-policy',type=Path,help='Complete version-one country network policy draft')
+    p.add_argument('--init-network',type=Path,help='Copy a complete g9_country_network.json draft without overwriting edits')
+    p.add_argument('--poi-config',type=Path,help='Complete version-one or version-two parent policy override')
+    p.add_argument('--context',choices=['grid','roadside','civic','landmark'],default='grid')
+    p.add_argument('--role',choices=['residential','commercial','support','civic','landmark'])
+    p.add_argument('--selection-config',type=Path,help='Complete version-one settlement selection profile override')
+    p.add_argument('--config',type=Path,help='Complete G3 planning settings override')
+    p.add_argument('--orientations',action='store_true',help='Preview all explicitly permitted G3 rotations/mirrors')
+    p.add_argument('--catalog',action='store_true')
+    p.add_argument('--refresh-editor-catalog',action='store_true')
+    p.add_argument('--check-editor-catalog',action='store_true')
+    p.add_argument('--editor-catalog',type=Path,help='Explicit catalog.js destination/check path for a disposable data-catalog workflow')
+    args=p.parse_args(argv)
+    game=args.game.resolve(); sys.path.insert(0,str(game)); sys.dont_write_bytecode=True
+    os.environ.setdefault('SDL_VIDEODRIVER','dummy'); os.environ.setdefault('SDL_AUDIODRIVER','dummy')
+    os.environ.setdefault('PYGAME_HIDE_SUPPORT_PROMPT','1')
+    import config
+    config.DEBUG_MODE=False
+    from engine.data_loader import DataLoader
+    from generation.context import GenerationError
+    from generation.structure_contract import read_document,StructureError
+    from generation.structure_preview import preview,registration,render_svg
+    log=io.StringIO()
+    try:
+        from authoring_outputs import Destinations
+        if sum(bool(v) for v in (args.init_compound,args.init_settlement,args.init_network))>1:raise ValueError('choose one initializer per invocation')
+        if args.network_policy and not args.network_preview:raise ValueError('--network-policy requires --network-preview')
+        inputs=[(name,getattr(args,name)) for name in ('candidate','compound','poi_config','selection_config','config','access','layout_config','network_policy')]
+        inputs.extend(('--child',path) for path in args.child)
+        catalog_path=args.editor_catalog or ROOT/'tools/structure_editor/catalog.js'
+        if args.check_editor_catalog and not args.refresh_editor_catalog:inputs.append(('--editor-catalog',catalog_path))
+        initializers=[(args.init_compound/name,game/'docs/examples'/name) for name in
+                      ('g7_travellers_court.json','g7_wayhouse.json','g7_poi_example.json')] if args.init_compound else []
+        if args.init_settlement:
+            initializers=[(args.init_settlement/target,(args.data_root or game/'data')/'generation'/source) for target,source in
+                          [('g8_layouts.json','settlement_layouts.json'),('g8_selection.json','settlement_profiles.json'),('g8_planning.json','g3_config.json')]]
+        if args.init_network:initializers=[(args.init_network/'g9_country_network.json',(args.data_root or game/'data')/'generation/country_network.json')]
+        inputs.extend(('initializer source',source) for _,source in initializers)
+        boundary=Destinations(inputs,[game,args.data_root or game/'data'])
+        known=[('initializer',target,'initializer') for target,_ in initializers]
+        if args.refresh_editor_catalog:known.append(('--editor-catalog',catalog_path,'catalog'))
+        if args.output:
+            if args.output.suffix.lower()!='.json':raise ValueError('--output must be a .json report')
+            known.append(('--output',args.output,'diagnostic'))
+            if args.compound or args.world_plan or args.planned or args.site or args.assigned_site or args.settlement_preview or args.layout or args.network_preview:
+                known.append(('plan diagram',args.output.with_suffix('.svg'),'diagnostic'))
+            if args.network_preview:known.append(('network PNG',args.output.with_suffix('.png'),'diagnostic'))
+        boundary.validate(known)
+        artifacts=[]
+        with contextlib.redirect_stdout(log): data=DataLoader(str(args.data_root or game/'data'))
+        if args.layout_config or args.layout:
+            from generation.settlement_layout import validate
+            data.settlement_layouts=validate(read_document(args.layout_config) if args.layout_config else data.settlement_layouts,data)
+            if args.layout:
+                choices=[row for row in data.settlement_layouts['grid'] if row['id']==args.layout]
+                if not choices:raise GenerationError('unknown layout '+args.layout)
+                data.settlement_layouts['grid']=choices
+        if args.poi_config:data.poi_profiles=read_document(args.poi_config)
+        manifest=data.structure_catalog.manifest()
+        if args.refresh_editor_catalog or args.check_editor_catalog:
+            catalog={**manifest,'diagnostics':[],
+                     'contract_sha256':hashlib.sha256((game/'generation/structure_contract.py').read_bytes()+(game/'generation/placement.py').read_bytes()).hexdigest(),
+                     'ids':{key:sorted(getattr(data,key)) for key in ('terrain','decoratives','items','texts','loot_pools','scenes')},
+                     'container_ids':sorted(k for k,v in data.decoratives.items() if v.get('container') is True)}
+            content='// Generated by tools/structure_authoring.py --refresh-editor-catalog\nwindow.STRUCTURE_CATALOG = '+json.dumps(catalog,indent=2,ensure_ascii=False)+';\n'
+            destination=args.editor_catalog.resolve() if args.editor_catalog else ROOT/'tools/structure_editor/catalog.js'
+            if args.editor_catalog and (destination.suffix!='.js' or destination.is_relative_to(game) or destination.is_relative_to(data.root)):
+                raise GenerationError('--editor-catalog must be a .js review artifact outside game and data roots')
+            if args.refresh_editor_catalog:
+                artifacts.append(('editor catalog',destination,'catalog',content.encode('utf-8')))
+            elif not destination.exists() or destination.read_text(encoding='utf-8')!=content:
+                raise GenerationError('Editor catalog is stale. Run --refresh-editor-catalog and repeat runtime validation.')
+        if args.init_compound or args.init_settlement or args.init_network:
+            folder=(args.init_compound or args.init_settlement or args.init_network).resolve()
+            created=[];preserved=[]
+            for target,source in initializers:
+                if target.exists():preserved.append(target.name)
+                else:created.append(target.name)
+                artifacts.append(('initializer',target,'initializer',source.read_bytes()))
+            report=dict(passed=True,created=created,preserved=preserved,directory=str(folder))
+        elif args.network_preview:
+            from generation.network_preview import preview as network_preview
+            with contextlib.redirect_stdout(log):report=network_preview(data,args.seed,read_document(args.network_policy) if args.network_policy else None,read_document(args.config) if args.config else None)
+        elif args.settlement_preview or (args.layout and not args.planned):
+            from generation.settlement_preview import preview as settlement_preview
+            with contextlib.redirect_stdout(log):
+                report=settlement_preview(data,args.seed,layout=args.layout,form=args.settlement_preview or 'grid',
+                                          selection=read_document(args.selection_config) if args.selection_config else None,
+                                          config=read_document(args.config) if args.config else None)
+        elif args.compound:
+            from generation.compound_preview import preview as compound_preview
+            with contextlib.redirect_stdout(log):
+                report=compound_preview(data,args.seed,read_document(args.compound),children=[read_document(c) for c in args.child],normal=args.assigned_compound,rotation=args.compound_rotation)
+        elif args.site or args.assigned_site:
+            from generation.poi_preview import site_preview
+            raw=read_document(args.candidate) if args.candidate else None
+            with contextlib.redirect_stdout(log):
+                report=site_preview(data,args.seed,raw,category=args.category or 'wilderness',normal=args.assigned_site)
+        elif args.world_plan or args.planned:
+            from generation.plan_preview import planned_preview
+            raw=read_document(args.candidate) if args.candidate else None
+            with contextlib.redirect_stdout(log):
+                report=planned_preview(data,args.seed,raw,category=args.category,context=args.context,
+                                       config=read_document(args.config) if args.config else None,role=args.role,
+                                       selection=read_document(args.selection_config) if args.selection_config else None)
+        elif args.candidate:
+            source=args.candidate.resolve(); raw=read_document(source)
+            installed=next((e for e in data.structure_catalog.entries if Path(e.path)==source),None)
+            route=args.route or (installed.route if installed else None)
+            category=args.category or (installed.category if installed else None)
+            if route is None: p.error('An external draft needs --route and ordinary buildings need --category.')
+            expectations=read_document(args.access) if args.access else None
+            reports=[]
+            with contextlib.redirect_stdout(log):
+                if args.orientations:
+                    from generation.placement import transform,NORMALS,entrance_cells
+                    if 'placement' not in raw:raise GenerationError('--orientations requires an explicit placement profile')
+                    for rotation in raw['placement']['rotations']:
+                        for mirror in ([False,True] if raw['placement']['mirror_x'] else [False]):
+                            oriented=transform(raw,rotation,mirror);profile=oriented['placement'];entry=next(e for e in profile['entrances'] if e['required']);dx,dy=NORMALS[entry['normal']]
+                            goals={'entry':{'x':entry['x']+dx,'y':entry['y']+dy},'targets':profile['targets']+
+                                   [dict(x=x,y=y,kind='floor',required=True) for e in profile['entrances'] if e['required'] for x,y in entrance_cells(e)]}
+                            result,_,_=preview(oriented,route,data,category=category,seed=args.seed,path=str(source),expectations=goals)
+                            result.update(rotation=rotation,mirror=mirror);reports.append(result)
+                else:
+                    for flip in ([False,True] if route=='ordinary_building' else [False]):
+                        result,_,_=preview(raw,route,data,category=category,seed=args.seed,flip_v=flip,path=str(source),expectations=expectations)
+                        reports.append(result)
+                selected=registration(raw,data,category,seed=args.seed) if args.register and route=='ordinary_building' else None
+            if args.register and route!='ordinary_building': p.error('--register verifies the existing ordinary-building pool only.')
+            report={'passed':all(r['passed'] for r in reports),'source':str(source),'previews':reports,'registration':selected,
+                    'limitations':'Static access only if a sidecar is supplied. Controlled selection is not a world-frequency estimate. No campaigns opened.'}
+        else:
+            report={'passed':True,**manifest}
+        if args.output:
+            output=args.output.resolve()
+            artifacts.append(('report',output,'diagnostic',(json.dumps(report,indent=2,ensure_ascii=False)+'\n').encode('utf-8')))
+            for n,r in enumerate(report.get('previews',[])):
+                artifacts.append(('scene diagram',output.with_name(output.stem+f'-{n}.svg'),'diagnostic',render_svg(r).encode('utf-8')))
+            if 'plan' in report:
+                from generation.plan_preview import plan_svg
+                if args.network_preview:
+                    from generation.network_preview import overlay_svg,overlay_png
+                    artifacts.append(('plan diagram',output.with_suffix('.svg'),'diagnostic',overlay_svg(report['plan']).encode('utf-8')))
+                    artifacts.append(('network PNG',output.with_suffix('.png'),'diagnostic',overlay_png(report['plan'])))
+                else:artifacts.append(('plan diagram',output.with_suffix('.svg'),'diagnostic',plan_svg(report['plan']).encode('utf-8')))
+                if report.get('settlement_ids'):
+                    from generation.settlement_preview import diagram
+                    for settlement in report['plan']['settlements']:
+                        if settlement['id'] in report['settlement_ids']:
+                            artifacts.append(('settlement diagram',output.with_name(output.stem+'-'+settlement['id']+'-plan.svg'),'diagnostic',diagram(report['plan'],settlement).encode('utf-8')))
+                if args.site or args.assigned_site:
+                    from worldgen_g6_diagnostic import site_svg
+                    for site in report['plan']['sites']:
+                        artifacts.append(('site diagram',output.with_name(output.stem+'-'+site['id']+'-plan.svg'),'diagnostic',site_svg(report['plan'],site).encode('utf-8')))
+        boundary.publish(artifacts)
+        print(json.dumps({'passed':report['passed'],'assets':len(manifest['assets']),
+                          'diagnostics':len(manifest['diagnostics']),'output':str(args.output) if args.output else None,
+                          'previews':len(report.get('previews',[])),
+                          'registration':bool(report.get('registration')),'status':report.get('status'),
+                          **({k:report[k] for k in ('created','preserved','directory')} if args.init_compound or args.init_settlement or args.init_network else {})},indent=2))
+        if not args.output and args.catalog: print(json.dumps(manifest,indent=2))
+        return 0 if report['passed'] else 1
+    except (GenerationError,ValueError) as error:
+        report={'passed':False,'error':str(error),'diagnostics':[d.json() for d in getattr(error,'diagnostics',[])]}
+        print(json.dumps(report,indent=2),file=sys.stderr)
+        return 1
+
+
+if __name__=='__main__': raise SystemExit(main())

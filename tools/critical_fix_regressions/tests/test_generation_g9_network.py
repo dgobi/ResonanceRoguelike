@@ -110,7 +110,12 @@ class G9Network(unittest.TestCase):
             for (x,y),points in slices.items():
                 if (x+1,y) in slices:self.assertEqual({b for a,b in points if a==79},{b for a,b in slices[x+1,y] if a==0})
                 if (x,y+1) in slices:self.assertEqual({a for a,b in points if b==42},{a for a,b in slices[x,y+1] if b==0})
-            rows.append(dict(seed=seed,network=p['network'],before=before,after=after,scenes=prints,metrics=m['network']))
+            if slices:
+                reverse_world=self.world(seed)
+                for xy in reversed(sorted(slices)):
+                    scene=create_surface(reverse_world,reverse_world.get(*xy),self.data,ItemFactory(self.data),CreatureFactory(self.data),80,43)
+                    self.assertEqual(fingerprint(scene.local_map,scene.actors),prints[str(xy)])
+            rows.append(dict(seed=seed,network=p['network'],before=before,after=after,scenes=prints,reverse_first_visits_equal=True,metrics=m['network']))
         self.evidence('g9-ordinary-touched.json',rows)
 
     def test_disabled_zero_budget_and_exhaustion_keep_complete_baseline(self):
@@ -134,3 +139,37 @@ class G9Network(unittest.TestCase):
             if selected=='zero':self.assertEqual(w.plan['sites'],[])
             rows.append(dict(poi=selected,version=w.plan['version'],origin=w.plan['generation_revision']))
         self.evidence('g9-policy-combinations.json',rows)
+
+    def test_two_connections_union_marginal_benefit_and_exact_shared_budget(self):
+        # Declared controlled fixture: ordinary seed 3 with reduced admission
+        # thresholds. This does not replace the three shipped-policy samples.
+        d=copy.copy(self.data);d.country_network=dict(DEFAULT,min_saved_steps=1,min_relative_improvement=.01)
+        w=self.world(3,d);p=w.plan;n=p['network'];self.assertEqual(len(n['accepted']),2)
+        old=baseline(p);roads=[r for r in p['routes'] if r.get('network_role')];base=centerline_edges(r for r in old['routes'] if r['kind']=='country')
+        first,second=[centerline_edges([r]) for r in roads];overlap=(first&second)-base;self.assertTrue(overlap)
+        self.assertEqual(n['added_unique_steps'],len((first|second)-base));self.assertLess(n['added_unique_steps'],len(first-base)+len(second-base))
+        partial=stage(old,old,roads[0],w);nodes=[r for r in terminals(p) if r['id'] in (roads[1]['a'],roads[1]['b'])];key=n['accepted'][1]['pair']
+        original_distance=distances(physical_cells(old),nodes)[key];marginal=distances(physical_cells(partial),nodes)[key]
+        self.assertLess(marginal,original_distance);self.assertEqual(n['accepted'][1]['before_steps'],marginal)
+        exact=copy.deepcopy(p);total=n['added_unique_steps'];denominator=n['baseline_unique_steps']
+        exact['network']['policy']['max_added_fraction']=(total+.25)/denominator;exact['network']['construction_limit_steps']=total;validate_plan(exact,128,128)
+        exact['network']['policy']['max_added_fraction']=(total-.25)/denominator;exact['network']['construction_limit_steps']=total-1
+        with self.assertRaisesRegex(GenerationError,'over-budget'):validate_plan(exact,128,128)
+        bad=copy.deepcopy(p);bad['network']['accepted'][1]['before_steps']=original_distance
+        with self.assertRaisesRegex(GenerationError,'forged physical benefit'):validate_plan(bad,128,128)
+        self.evidence('g9-two-link-marginal-budget.json',dict(controlled_seed=3,policy=d.country_network,accepted=n['accepted'],overlapping_new_steps=len(overlap),total_union_steps=total,original_second_pair_distance=original_distance,marginal_second_pair_distance=marginal,exact_budget_pass=True,one_step_below_rejected=True,double_credited_benefit_rejected=True))
+
+    def test_real_existing_bridge_reuse_replays_normal_reservations(self):
+        old=baseline(self.world().plan)
+        # Geometry-only controlled duplicate: no construction or utility claim.
+        # Admission separately rejects duplicates, but this exercises a genuine
+        # existing deck through the same stage and normal validator as proposals.
+        r=copy.deepcopy(next(r for r in old['routes'] if r['id']=='road-1'))
+        r.update(id='controlled-deck-reuse',required=False)
+        staged=stage(old,old,r);validate_plan(staged,128,128)
+        added=[c for c in staged['crossings'] if c['road']==r['id']]
+        self.assertTrue(added)
+        original_decks=road_cells([dict(rects=c['deck']) for c in old['crossings']])
+        self.assertFalse(road_cells([dict(rects=c['deck']) for c in added])-original_decks)
+        self.assertEqual([v for v in staged['reservations'] if v['owner']!=r['id']],old['reservations'])
+        self.evidence('g9-real-deck-replay.json',dict(passed=True,controlled_geometry_only=True,new_physical_bridge_cells=0,new_crossing_ownership_rows=len(added),normal_validate_plan_passed=True,original_reservations_preserved=True))

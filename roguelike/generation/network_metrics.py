@@ -33,8 +33,8 @@ def road_cells(routes):
 
 
 def physical_cells(plan):
-    from generation.road_network import PhysicalRoads
-    return PhysicalRoads(plan).cells
+    from generation.road_network import project_cells
+    return project_cells(plan)
 
 
 def distances(cells,nodes):

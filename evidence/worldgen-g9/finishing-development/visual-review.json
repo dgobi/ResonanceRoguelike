@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "review": "Model visual inspection of actual rendered artifacts. T junctions join the complete horizontal roads without parallel strips, non-junction contacts or disconnected local corridors. Retained crossing shows an uninterrupted deck. Town mosaics retain two axes, frontage and commons under declared complete visibility. Network labels are separated after the start/settlement-0 overlap correction.",
+  "files": {
+    "visuals/results/0-new-junction-38-26.png": "2820118b4fec968211ef35799dcc505b3bf99fec36e558de9a464d611bedd984",
+    "visuals/results/1-new-junction-85-33.png": "cfb38dce58b2efddff477ee316714c4fc2afac33e58a944c014cb5efa4bda352",
+    "visuals/results/2-retained-crossing-approach-50-101.png": "5b939351f72dfd8734a604cae3847d57c648236b4a1cf31785697422b93a39b0",
+    "visuals/results/towns/cross-market-complete.png": "968a41719676a704a509378f8c196499d46d56c13609e615132c94c37d84e2a9",
+    "visuals/results/towns/linked-courts-complete.png": "ba0ab65db895939439af234a44852a741157dd28de0a8ea950157c06fbcd606a",
+    "visuals/results/towns/roadside-complete.png": "83c1ccb008f6bb4d21b47c00209176f72d1b5c8fd97e684cdf675ef67314eae2",
+    "geometry/results/network-20261023.png": "186f4036f6cb4e1b6a3c591238e44ed049e8b1c381f895d7cc865f13da6522eb"
+  },
+  "scope": "New ordinary junctions/crossing; inherited controlled town examples. Gameplay and boundary proofs are separate receipts."
+}

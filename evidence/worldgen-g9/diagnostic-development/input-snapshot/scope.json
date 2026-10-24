@@ -1,0 +1,4 @@
+{
+  "base_commit": "919ad589df19568121d4a22b55bcc41ccf0d687e",
+  "scope": "Development geometry-a and journey-a. Snapshot after start; no runtime/test/authoring input changed during these diagnostic runs. Wiki/owner prose edits were independent. Final frozen release supersedes these attempts."
+}

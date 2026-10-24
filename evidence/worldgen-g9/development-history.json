@@ -1,0 +1,40 @@
+{
+  "scope": "Development chronology; final frozen receipts are the release authority.",
+  "attempts": [
+    {
+      "path": "network-development/tests-a",
+      "status": "failed early development assertion",
+      "detail": "Complete baseline comparison used Python tuples against decoded JSON lists. Comparison was corrected to the serialized JSON contract. The directory retains partial emitted evidence; terminal traceback was not saved as a separate file, so this is a retrospective description rather than a raw receipt."
+    },
+    {
+      "path": "network-development/tests-b",
+      "status": "passed targeted network development tests",
+      "detail": "Includes all ordinary accepted touched scenes; superseded by final unfiltered discovery."
+    },
+    {
+      "path": "network-development/spatial-index.json",
+      "status": "passed plan-identity-preserving performance probe",
+      "detail": "Exact water-rectangle comparisons indexed by chunk; development timing is observational, including disclosed concurrent development activity."
+    },
+    {
+      "path": "authoring-development/workflows-a",
+      "status": "passed five new workflows only",
+      "detail": "--skip-inherited was explicitly used; not a release pass."
+    },
+    {
+      "path": "diagnostic-development/geometry-a",
+      "status": "passed three ordinary seeds without journey"
+    },
+    {
+      "path": "diagnostic-development/journey-a",
+      "status": "passed complete real-handler journey and explored cold/F9",
+      "detail": "107749 movement inputs; 470 checkpoint scenes; source stable. Input-snapshot reconstructs the uncommitted development changes. Subsequent verification refinements are retested by the frozen release."
+    },
+    {
+      "path": "finishing-development/tests",
+      "status": "targeted integration tests; consult receipt",
+      "detail": "Includes reverse visits, genuine-deck normal reservation replay and sixteen checksum-consistent corruptions. Uncommitted inputs intentionally cannot count as frozen release inputs."
+    }
+  ],
+  "unretained_console_note": "Early console experiments are described only where known; no reconstructed description is presented as an exact original log."
+}

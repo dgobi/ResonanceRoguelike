@@ -111,6 +111,9 @@ def journey(seed,save_root,progress=None):
                 if contents:e._handle_key(pygame.K_RETURN)
                 e.mode=GameMode.LOCAL;e.interaction_cursor._selection_prompt=None
                 report['interaction']=dict(placement=p['id'],asset=p['asset'],target=xy,initial_items=contents,remaining_items=len(state['items']))
+        if plan['version']==7 and plan['network']['accepted']:
+            from g9_journey import country as country_journey
+            report['g9_country']=country_journey(e,route,position,report)
         route(next(r for r in country if r['id']=='road-3'),reverse=True)
         landmark_route=next(r for r in country if r['b']=='landmark');route(landmark_route)
         landmark=next(p for p in plan['placements'] if p['context']=='landmark')

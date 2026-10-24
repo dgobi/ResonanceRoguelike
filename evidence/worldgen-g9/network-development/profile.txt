@@ -1,0 +1,32 @@
+         37560751 function calls (37332891 primitive calls) in 18.951 seconds
+
+   Ordered by: cumulative time
+   List reduced from 841 to 24 due to restriction <24>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   18.974   18.974 world_gen.py:58(generate_world)
+        1    0.015    0.015   18.974   18.974 world_gen.py:67(_generate_world)
+        1    0.018    0.018   13.871   13.871 world_plan.py:147(build_plan)
+        1    0.239    0.239   12.420   12.420 country_network.py:132(augment)
+        5    0.006    0.001    8.835    1.767 world_plan.py:427(validate_plan)
+        5    0.125    0.025    8.829    1.766 world_plan.py:434(_validate_plan)
+        5    1.334    0.267    6.172    1.234 country_network.py:89(check_geometry)
+  3801734    3.301    0.000    5.346    0.000 world_plan.py:21(intersect)
+        4    0.017    0.004    4.997    1.249 country_network.py:123(stage)
+        1    0.010    0.010    4.344    4.344 world_plan.py:552(publish_plan)
+        2    0.078    0.039    4.276    2.138 country_network.py:198(validate_resolved)
+       12    2.378    0.198    3.355    0.280 road_network.py:16(__init__)
+        7    2.983    0.426    3.330    0.476 network_metrics.py:40(distances)
+        7    0.020    0.003    1.949    0.278 network_metrics.py:35(physical_cells)
+        6    0.176    0.029    1.059    0.177 poi_selection.py:89(junctions)
+        5    0.016    0.003    1.052    0.210 settlement_layout.py:217(validate_resolved)
+  7712336    1.046    0.000    1.051    0.000 {built-in method builtins.min}
+  7750655    1.034    0.000    1.035    0.000 {built-in method builtins.max}
+        5    0.000    0.000    0.977    0.195 poi_selection.py:192(validate_resolved)
+        5    0.002    0.000    0.977    0.195 parent_selection.py:151(validate_resolved)
+37620/37242    0.067    0.000    0.788    0.000 {built-in method builtins.any}
+  2398121    0.766    0.000    0.766    0.000 world_plan.py:24(expand)
+   604727    0.610    0.000    0.652    0.000 {built-in method builtins.sorted}
+    49716    0.162    0.000    0.614    0.000 world_plan.py:73(conflicts)
+
+

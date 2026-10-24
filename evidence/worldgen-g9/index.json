@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "status": "integration verification; final frozen gates pending",
+  "base_commit": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+  "source_of_authorization": "Explicit user request to execute attached brief in full; brief section 2 includes publication to existing main.",
+  "owner_report": "docs/owner/WORLDGEN_G9.md",
+  "matrix": [
+    {
+      "id": "G9-01",
+      "result": "Preservation, guarded execution, genuine G8 witness and baseline",
+      "status": "pending final frozen release",
+      "evidence": [
+        "before/start.json",
+        "before/witness/g8-witness.json",
+        "before/baseline/receipt.json",
+        "before/network-baseline.json"
+      ]
+    },
+    {
+      "id": "G9-02",
+      "result": "Portable wiki and accurate downloads",
+      "status": "pending final frozen release",
+      "evidence": [
+        "wiki-correction/final/edition.json"
+      ]
+    },
+    {
+      "id": "G9-03",
+      "result": "Strict bounded policy and explicit optional outcomes",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/focused/results/g9-optional-outcomes.json",
+        "final/authoring/results/workflows.json"
+      ]
+    },
+    {
+      "id": "G9-04",
+      "result": "Complete baseline preservation",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/diagnostic/results/run.json"
+      ]
+    },
+    {
+      "id": "G9-05",
+      "result": "Topology and fixed endpoint units",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/diagnostic/results/run.json",
+        "final/focused/receipt.json"
+      ]
+    },
+    {
+      "id": "G9-06",
+      "result": "Determinism, marginal benefit and shared budgets",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/focused/results/g9-two-link-marginal-budget.json",
+        "final/diagnostic/results/run.json"
+      ]
+    },
+    {
+      "id": "G9-07",
+      "result": "Required ordinary improvement and alternate corridor",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/diagnostic/results/run.json"
+      ]
+    },
+    {
+      "id": "G9-08",
+      "result": "Ownership, deck replay and touched scenes",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/focused/results/g9-real-deck-replay.json",
+        "final/diagnostic/results/run.json",
+        "final/visuals/results/views.json"
+      ]
+    },
+    {
+      "id": "G9-09",
+      "result": "Current dispatch and inherited behavior",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/focused/results/g9-policy-combinations.json",
+        "final/focused/receipt.json"
+      ]
+    },
+    {
+      "id": "G9-10",
+      "result": "Saved policy independence and genuine historical provenance",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/focused/results/g9-genuine-g8-restore.json",
+        "final/focused/results/g9-late-rollback.json"
+      ]
+    },
+    {
+      "id": "G9-11",
+      "result": "Corruption and atomic rollback",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/focused/results/g9-checksum-corruptions.json",
+        "final/focused/results/g9-late-rollback.json"
+      ]
+    },
+    {
+      "id": "G9-12",
+      "result": "Ordinary matrix, lazy planning and costs",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/diagnostic/results/run.json"
+      ]
+    },
+    {
+      "id": "G9-13",
+      "result": "Real shortcut/original journeys and explored checkpoint",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/diagnostic/results/run.json"
+      ]
+    },
+    {
+      "id": "G9-14",
+      "result": "Safe new/inherited owner and editor workflows",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/authoring/results/workflows.json",
+        "final/browser/receipt.json"
+      ]
+    },
+    {
+      "id": "G9-15",
+      "result": "Maintained edition and real reader downloads",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/wiki/results/edition.json",
+        "../../Resonance_Wiki_Maintenance/source-manifest.json"
+      ]
+    },
+    {
+      "id": "G9-16",
+      "result": "Frozen release, archive and publication",
+      "status": "pending final frozen release",
+      "evidence": [
+        "final/release.json"
+      ]
+    }
+  ],
+  "controls": {
+    "production_checkout": "G:/GameDev/RoguelikeProject",
+    "branch": "main",
+    "new_development_checkouts": false,
+    "personal_campaigns_used": false,
+    "desktop_control": false,
+    "subagents": false
+  }
+}

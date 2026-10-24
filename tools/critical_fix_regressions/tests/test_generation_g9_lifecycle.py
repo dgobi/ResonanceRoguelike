@@ -88,7 +88,8 @@ class G9Lifecycle(unittest.TestCase):
                  ('forged baseline budget',lambda p:p['network'].update(baseline_unique_steps=999999)),('forged benefit',lambda p:p['network']['accepted'][0].update(after_steps=1)),
                  ('foreign role',lambda p:shortcut(p).update(network_role='foreign')),('new water geometry',lambda p:shortcut(p)['rects'].append(p['waters'][0]['rects'][0])),
                  ('protected common road',lambda p:shortcut(p)['rects'].append(p['public_spaces'][0]['rects'][0])),('incompatible origin',lambda p:p.update(generation_revision='wg8')),
-                 ('unknown future version',lambda p:p.update(version=8)),('bad policy boolean',lambda p:p['network']['policy'].update(max_shortcuts=True))]
+                 ('unknown future version',lambda p:p.update(version=8)),('bad policy boolean',lambda p:p['network']['policy'].update(max_shortcuts=True)),
+                 ('boolean contract version',lambda p:p['network'].update(version=True)),('forged proposal work',lambda p:shortcut(p).update(search_nodes=0))]
         results=[];active=e.local_map;world=e.world_map
         for label,change in changes:
             saved=json.loads(original);change(saved['plan']);raw=json.dumps(saved).encode();(checkpoint/'world.json').write_bytes(raw);manifest['files']['world.json']=record(raw);(checkpoint/'manifest.json').write_text(json.dumps(manifest));before=self.state(e)

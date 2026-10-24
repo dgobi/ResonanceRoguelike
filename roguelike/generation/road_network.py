@@ -12,22 +12,24 @@ MAX_CELLS = 2_000_000
 STEPS = ((0,-1),(-1,0),(1,0),(0,1))
 
 
+def project_cells(plan,include_access=True):
+    """Exact sparse cells without eagerly labelling components for BFS callers."""
+    cells=set();rectangles=[r for route in plan['routes'] for r in route['rects']]
+    rectangles.extend(r for crossing in plan.get('crossings',[]) for r in crossing['deck'])
+    if include_access:
+        rectangles.extend(p['approach'] for p in plan.get('placements',[]))
+        rectangles.extend(r for path in plan.get('paths',[]) for r in path['rects'])
+        rectangles.extend(s['approach'] for s in plan.get('sites',[]) if s['kind']=='compound')
+    for x,y,x1,y1 in sorted(set(map(tuple,rectangles))):
+        if (x1-x)*(y1-y)>MAX_CELLS:raise GenerationError('physical road projection exceeds sparse cell budget')
+        cells.update((a,b) for a in range(x,x1) for b in range(y,y1))
+        if len(cells)>MAX_CELLS:raise GenerationError('physical road projection exceeds sparse cell budget')
+    return cells
+
+
 class PhysicalRoads:
     def __init__(self, plan, include_access=True):
-        self.cells=set()
-        rectangles=[r for route in plan['routes'] for r in route['rects']]
-        rectangles.extend(r for crossing in plan.get('crossings',[]) for r in crossing['deck'])
-        if include_access:
-            rectangles.extend(p['approach'] for p in plan.get('placements',[]))
-            rectangles.extend(r for path in plan.get('paths',[]) for r in path['rects'])
-            rectangles.extend(s['approach'] for s in plan.get('sites',[]) if s['kind']=='compound')
-        # Exact rectangle deduplication also bounds retracing work.
-        for x,y,x1,y1 in sorted(set(map(tuple,rectangles))):
-            if (x1-x)*(y1-y)>MAX_CELLS:
-                raise GenerationError('physical road projection exceeds sparse cell budget')
-            self.cells.update((a,b) for a in range(x,x1) for b in range(y,y1))
-            if len(self.cells)>MAX_CELLS:
-                raise GenerationError('physical road projection exceeds sparse cell budget')
+        self.cells=project_cells(plan,include_access)
         self.labels={};sizes=[]
         for start in sorted(self.cells):
             if start in self.labels:continue

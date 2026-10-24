@@ -87,7 +87,7 @@ def touched(route):
 
 
 def check_geometry(original,current,route,world=None):
-    from generation.world_plan import cells,expand,intersect
+    from generation.world_plan import cells,expand,intersect,member_chunks
     from generation.compounds import connected_cells
     new=road_cells([route])-road_cells(original['routes']);protected=protected_owners(original)
     if world is not None:protected|={xy for xy,ch in world.chunks.items() if ch.submaps or ch.is_capital}
@@ -97,15 +97,23 @@ def check_geometry(original,current,route,world=None):
     candidate=road_cells([route]);decks={w['id']:set() for w in original['waters']}
     for c in original['crossings']:
         for rect in c['deck']:decks[c['water']]|=cells(rect)
+    # Narrow the exact full-band comparisons by storage chunk. This is an index
+    # of the same expanded rectangles, not a coarser collision permission.
+    water_index={};water_rows=[];water_hits={}
+    for water in original['waters']:
+        for rect in water['rects']:
+            expanded=expand(rect,2);index=len(water_rows);water_rows.append((water['id'],expanded))
+            for xy in member_chunks(expanded):water_index.setdefault(tuple(xy),set()).add(index)
+    for r in route['rects']:
+        indices=set().union(*(water_index.get(tuple(xy),set()) for xy in member_chunks(r)))
+        for index in sorted(indices):
+            water,rect=water_rows[index];hit=intersect(r,rect)
+            if hit:
+                require(cells(hit)<=decks[water],'new road/water overlap outside an existing owned bridge deck')
+                water_hits.setdefault(water,[]).append(hit)
     crossings=[]
     for water in original['waters']:
-        hits=[]
-        for r in route['rects']:
-            for wr in water['rects']:
-                hit=intersect(r,expand(wr,2))
-                if hit:
-                    require(cells(hit)<=decks[water['id']],'new road/water overlap outside an existing owned bridge deck')
-                    hits.append(hit)
+        hits=water_hits.get(water['id'],[])
         if hits:
             hits=[list(r) for r in sorted(set(map(tuple,hits)))]
             crossings.append(dict(id=route['id']+'-'+water['id'],road=route['id'],water=water['id'],kind='bridge',travel_class='player-and-creature',deck=hits,approaches=[expand(r,2) for r in hits]))
@@ -197,7 +205,7 @@ def augment(world,original,data,metrics=None):
 
 def validate_resolved(plan):
     """No current policy/recipes, replanning, scenes or duplicate durable graphs."""
-    n=plan.get('network');require(isinstance(n,dict) and n.get('version')==1,'missing resolved version 1 contract')
+    n=plan.get('network');require(isinstance(n,dict) and type(n.get('version')) is int and n['version']==1,'missing resolved version 1 contract')
     require(set(n)=={'version','policy','baseline','original_route_ids','baseline_unique_steps','construction_limit_steps','added_unique_steps','accepted','primary_ids','primary_pair_count','pairs_examined','pairs_unexamined','expansions','outcome'},'unknown/missing network contract fields')
     p=policy(n['policy']);require(plan['settings']['version']==4 and plan['settings']['country_network_version']==1,'settings/network version mismatch')
     original=baseline(plan);require(identities(original)==n['baseline'],'original baseline record removed or changed')
@@ -206,17 +214,22 @@ def validate_resolved(plan):
     for k in ('baseline_unique_steps','construction_limit_steps','added_unique_steps','pairs_examined','pairs_unexamined','expansions'):
         require(type(n[k]) is int and n[k]>=0,'invalid integer accounting '+k)
     require(n['pairs_examined']<=p['candidate_pair_limit'] and n['expansions']<=p['world_expansion_budget'] and n['pairs_examined']+n['pairs_unexamined']==n['primary_pair_count'],'search budget accounting')
+    require(n['pairs_examined']<=n['expansions']<=n['pairs_examined']*p['search_expansion_limit'],'inconsistent bounded search work')
     require(isinstance(n['accepted'],list) and len(n['accepted'])<=p['max_shortcuts'],'shortcut count exceeds policy')
     require(n['outcome'] in ('disabled','zero construction budget','no qualifying candidate','augmented','global expansion budget exhausted','bounded search exhausted without qualifying candidate'),'unknown outcome')
     require((n['outcome']=='disabled')==(p['max_shortcuts']==0),'disabled policy/outcome mismatch')
     base_edges=centerline_edges(r for r in original['routes'] if r['kind']=='country');limit=math.floor(len(base_edges)*p['max_added_fraction'])
     require(n['baseline_unique_steps']==len(base_edges) and n['construction_limit_steps']==limit,'forged baseline construction accounting')
+    require((n['outcome']=='zero construction budget')==(not limit and p['max_shortcuts']>0),'zero construction outcome mismatch')
+    if not p['max_shortcuts'] or not limit:require(n['expansions']==0 and n['pairs_examined']==0,'work recorded while augmentation disabled')
+    if n['outcome']=='global expansion budget exhausted':require(n['expansions']==p['world_expansion_budget'],'global exhaustion accounting differs')
     current=original;seen=set();total=0
     for i,accepted in enumerate(n['accepted']):
-        require(set(accepted)=={'route','pair','a','b','before_steps','after_steps','added_unique_steps'},'unknown/missing accepted connection fields')
+        require(isinstance(accepted,dict) and set(accepted)=={'route','pair','a','b','before_steps','after_steps','added_unique_steps'},'unknown/missing accepted connection fields')
         rid=accepted['route'];require(rid==f'network-shortcut-{i}' and rid not in seen,'invalid/duplicate shortcut identity');seen.add(rid)
         route=next((r for r in plan['routes'] if r['id']==rid),None)
         require(route and route.get('network_role')==ROLE and route['kind']=='country' and route['required'] is False and route['width']==original['settings']['road_width_tiles'],'missing/foreign shortcut role or geometry')
+        require(type(route.get('search_nodes')) is int and 1<=route['search_nodes']<=min(p['search_expansion_limit'],n['expansions']),'invalid saved proposal search work')
         require(accepted['a']==route['a'] and accepted['b']==route['b'] and accepted['a']!=accepted['b'] and {accepted['a'],accepted['b']}<=set(n['primary_ids']) and accepted['pair']==pair_id(route['a'],route['b']),'shortcut endpoints disagree')
         next_plan=stage(original,current,route)
         require([c for c in plan['crossings'] if c['road']==rid]==[c for c in next_plan['crossings'] if c['road']==rid],'crossing reuse scope differs')

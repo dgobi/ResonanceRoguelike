@@ -1182,7 +1182,7 @@ direct and whole-compound previews. The world remains finite at 128×128 chunks.
 viewport remain deferred. G7 stops at these bounded rural compounds.
 
 
-# G8 — settlement composition (current)
+# G8 — preserved settlement composition
 
 G8 provides two installed grid layouts inside the existing 160 × 86 town footprint. **Cross-market** has two cross streets and two avenues around a rectangular circuit, with its bell common north of the first cross street. **Linked-courts** moves the avenues and puts a connecting street between them, dividing that circuit into two courts; its common sits south of the first cross street. Horizontal roadside settlements keep their 160 × 43 footprint and derive frontage from the actual country road.
 
@@ -1261,3 +1261,26 @@ on `main`, resolving conflicts while preserving later owner edits. For an
 uncommitted installation, restore only the affected files from their preserved
 dated copies after reviewing subsequent edits. Keep personal campaign backups
 separate: source recovery does not rewind saved plans or visited scene mutations.
+
+# G9 — current country-network authoring
+
+Current fresh worlds use settings 4 / plan 7 / wg9. The complete G8 settlement,
+common, selected-building and rural-owner baseline is preserved before up to two
+optional country connections. The separate complete policy, exact units/ranges,
+five workflows, installation/recovery and compatibility rules are authoritative in
+[COUNTRY_NETWORK.md](COUNTRY_NETWORK.md). Use its complete draft rather than a
+partial JSON fragment. Existing settings-3 examples explicitly exercise G8 semantics.
+
+```powershell
+& $ResonancePython -X utf8 tools/structure_authoring.py --network-preview --seed 20261023 --output authoring/network-ordinary.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --init-network authoring/network-draft --output authoring/network-init.json
+& $ResonancePython -X utf8 tools/structure_authoring.py --network-preview --network-policy authoring/network-draft/g9_country_network.json --seed 20261023 --output authoring/network-tuned.json
+& $ResonancePython -X utf8 tools/verify_g9_authoring.py --evidence evidence/worldgen-g9/owner-authoring-02
+```
+
+The JSON report, exact-coordinate SVG and PNG are staged through the existing
+protected-destination rules. Initialization preserves edits; previews create no
+scenes, open no campaigns and do not install a policy. Zero shortcuts remains a
+new G9 world with a disabled resolved result. Saved G8/G9 worlds keep their actual
+resolved roads and visited state. The building painter and G5–G8 workflows remain
+supported and separately exercised by the complete G9 release coordinator.

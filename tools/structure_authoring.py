@@ -36,6 +36,9 @@ def main(argv=None):
     p.add_argument('--layout',help='Controlled choice of one grid layout ID; ordinary selection when omitted')
     p.add_argument('--settlement-preview',choices=['grid','roadside','all'],help='Materialize every member of selected settlements')
     p.add_argument('--init-settlement',type=Path,help='Copy complete layout, role-selection and planning drafts; preserve existing files')
+    p.add_argument('--network-preview',action='store_true',help='Inspect/preview the bounded country policy; JSON plus exact SVG/PNG overlays, no scenes or installation')
+    p.add_argument('--network-policy',type=Path,help='Complete version-one country network policy draft')
+    p.add_argument('--init-network',type=Path,help='Copy a complete g9_country_network.json draft without overwriting edits')
     p.add_argument('--poi-config',type=Path,help='Complete version-one or version-two parent policy override')
     p.add_argument('--context',choices=['grid','roadside','civic','landmark'],default='grid')
     p.add_argument('--role',choices=['residential','commercial','support','civic','landmark'])
@@ -59,8 +62,9 @@ def main(argv=None):
     log=io.StringIO()
     try:
         from authoring_outputs import Destinations
-        if args.init_compound and args.init_settlement:raise ValueError('choose one initializer per invocation')
-        inputs=[(name,getattr(args,name)) for name in ('candidate','compound','poi_config','selection_config','config','access','layout_config')]
+        if sum(bool(v) for v in (args.init_compound,args.init_settlement,args.init_network))>1:raise ValueError('choose one initializer per invocation')
+        if args.network_policy and not args.network_preview:raise ValueError('--network-policy requires --network-preview')
+        inputs=[(name,getattr(args,name)) for name in ('candidate','compound','poi_config','selection_config','config','access','layout_config','network_policy')]
         inputs.extend(('--child',path) for path in args.child)
         catalog_path=args.editor_catalog or ROOT/'tools/structure_editor/catalog.js'
         if args.check_editor_catalog and not args.refresh_editor_catalog:inputs.append(('--editor-catalog',catalog_path))
@@ -69,6 +73,7 @@ def main(argv=None):
         if args.init_settlement:
             initializers=[(args.init_settlement/target,(args.data_root or game/'data')/'generation'/source) for target,source in
                           [('g8_layouts.json','settlement_layouts.json'),('g8_selection.json','settlement_profiles.json'),('g8_planning.json','g3_config.json')]]
+        if args.init_network:initializers=[(args.init_network/'g9_country_network.json',(args.data_root or game/'data')/'generation/country_network.json')]
         inputs.extend(('initializer source',source) for _,source in initializers)
         boundary=Destinations(inputs,[game,args.data_root or game/'data'])
         known=[('initializer',target,'initializer') for target,_ in initializers]
@@ -76,8 +81,9 @@ def main(argv=None):
         if args.output:
             if args.output.suffix.lower()!='.json':raise ValueError('--output must be a .json report')
             known.append(('--output',args.output,'diagnostic'))
-            if args.compound or args.world_plan or args.planned or args.site or args.assigned_site or args.settlement_preview or args.layout:
+            if args.compound or args.world_plan or args.planned or args.site or args.assigned_site or args.settlement_preview or args.layout or args.network_preview:
                 known.append(('plan diagram',args.output.with_suffix('.svg'),'diagnostic'))
+            if args.network_preview:known.append(('network PNG',args.output.with_suffix('.png'),'diagnostic'))
         boundary.validate(known)
         artifacts=[]
         with contextlib.redirect_stdout(log): data=DataLoader(str(args.data_root or game/'data'))
@@ -103,14 +109,17 @@ def main(argv=None):
                 artifacts.append(('editor catalog',destination,'catalog',content.encode('utf-8')))
             elif not destination.exists() or destination.read_text(encoding='utf-8')!=content:
                 raise GenerationError('Editor catalog is stale. Run --refresh-editor-catalog and repeat runtime validation.')
-        if args.init_compound or args.init_settlement:
-            folder=(args.init_compound or args.init_settlement).resolve()
+        if args.init_compound or args.init_settlement or args.init_network:
+            folder=(args.init_compound or args.init_settlement or args.init_network).resolve()
             created=[];preserved=[]
             for target,source in initializers:
                 if target.exists():preserved.append(target.name)
                 else:created.append(target.name)
                 artifacts.append(('initializer',target,'initializer',source.read_bytes()))
             report=dict(passed=True,created=created,preserved=preserved,directory=str(folder))
+        elif args.network_preview:
+            from generation.network_preview import preview as network_preview
+            with contextlib.redirect_stdout(log):report=network_preview(data,args.seed,read_document(args.network_policy) if args.network_policy else None,read_document(args.config) if args.config else None)
         elif args.settlement_preview or (args.layout and not args.planned):
             from generation.settlement_preview import preview as settlement_preview
             with contextlib.redirect_stdout(log):
@@ -169,7 +178,11 @@ def main(argv=None):
                 artifacts.append(('scene diagram',output.with_name(output.stem+f'-{n}.svg'),'diagnostic',render_svg(r).encode('utf-8')))
             if 'plan' in report:
                 from generation.plan_preview import plan_svg
-                artifacts.append(('plan diagram',output.with_suffix('.svg'),'diagnostic',plan_svg(report['plan']).encode('utf-8')))
+                if args.network_preview:
+                    from generation.network_preview import overlay_svg,overlay_png
+                    artifacts.append(('plan diagram',output.with_suffix('.svg'),'diagnostic',overlay_svg(report['plan']).encode('utf-8')))
+                    artifacts.append(('network PNG',output.with_suffix('.png'),'diagnostic',overlay_png(report['plan'])))
+                else:artifacts.append(('plan diagram',output.with_suffix('.svg'),'diagnostic',plan_svg(report['plan']).encode('utf-8')))
                 if report.get('settlement_ids'):
                     from generation.settlement_preview import diagram
                     for settlement in report['plan']['settlements']:
@@ -184,7 +197,7 @@ def main(argv=None):
                           'diagnostics':len(manifest['diagnostics']),'output':str(args.output) if args.output else None,
                           'previews':len(report.get('previews',[])),
                           'registration':bool(report.get('registration')),'status':report.get('status'),
-                          **({k:report[k] for k in ('created','preserved','directory')} if args.init_compound or args.init_settlement else {})},indent=2))
+                          **({k:report[k] for k in ('created','preserved','directory')} if args.init_compound or args.init_settlement or args.init_network else {})},indent=2))
         if not args.output and args.catalog: print(json.dumps(manifest,indent=2))
         return 0 if report['passed'] else 1
     except (GenerationError,ValueError) as error:
