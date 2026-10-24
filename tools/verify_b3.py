@@ -29,7 +29,7 @@ def source_manifest():
         for p in (ROOT/base).rglob('*'):
             if not p.is_file() or '__pycache__' in p.parts or 'saves' in p.parts:
                 continue
-            included = p.suffix in ('.py', '.js', '.css') or (
+            included = p.suffix in ('.py', '.js', '.css', '.png', '.ttf', '.hex') or (
                 (p.suffix in ('.json','.zip') or p.name.endswith('.json.gz')) and any(p.is_relative_to(root) for root in json_roots))
             if included:
                 result[p.relative_to(ROOT).as_posix()] = hashlib.sha256(p.read_bytes()).hexdigest()
@@ -47,10 +47,13 @@ def main(include_c=False, include_d=False):
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--only',choices=['b3','b1','b2','diagnostic'] + (['c'] if include_c else []) + (['d'] if include_d else []))
     ap.add_argument('--case',help='Optional single scenario/variant; partial runs never certify completion')
+    ap.add_argument('--evidence',type=Path,help='Isolated output root; does not filter production cases')
     args=ap.parse_args()
     stamp=datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
     prefix='d' if include_d else ('c' if include_c else 'b3')
-    run=ROOT/'.baseline'/(prefix+'-'+stamp+'-'+uuid.uuid4().hex[:8]);run.mkdir(parents=True)
+    output_root=args.evidence.resolve() if args.evidence else ROOT/'.baseline'
+    if output_root.is_relative_to(GAME):ap.error('--evidence must be outside the game source/save tree')
+    run=output_root/(prefix+'-'+stamp+'-'+uuid.uuid4().hex[:8]);run.mkdir(parents=True)
     dump(run/'disposable-b3.json',{'kind':'test saves and evidence only','production_source':str(GAME)})
     report=dict(run_id=run.name,source=source_manifest(),workers=[],checks=[],only=args.only,case=args.case,
                 source_policy='All workers import production main in place; only disposable save data is cloned.',
@@ -257,7 +260,7 @@ def main(include_c=False, include_d=False):
     report['selected_tests_passed']=selected
     report['passed']=selected and not args.only and not args.case
     dump(run/'results.json',report)
-    dump(ROOT/('evidence/'+prefix+'-latest.json'),dict(result=str(run/'results.json'),passed=report['passed'],selected_tests_passed=selected))
+    dump((output_root/'latest.json') if args.evidence else ROOT/('evidence/'+prefix+'-latest.json'),dict(result=str(run/'results.json'),passed=report['passed'],selected_tests_passed=selected))
     print(json.dumps(dict(result=str(run/'results.json'),passed=report['passed'],selected_tests_passed=selected,totals=report['totals'])),flush=True)
     return 0 if selected else 1
 
