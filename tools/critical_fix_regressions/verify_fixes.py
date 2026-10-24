@@ -55,15 +55,22 @@ def main() -> int:
                           "dependencies": versions, "scope": "focused regressions"}, indent=2))
         try:
             result = subprocess.run(command, cwd=game, env=env, text=True,
-                                    encoding="utf-8", capture_output=True, timeout=180)
+                                    encoding="utf-8", capture_output=True, timeout=300)
         except subprocess.TimeoutExpired as error:
-            print("Focused suite exceeded 180 seconds.", file=sys.stderr)
+            def decoded(value):
+                return value.decode('utf-8',errors='replace') if isinstance(value,bytes) else value or ''
+            output=decoded(error.stdout)+decoded(error.stderr)
+            (evidence/'focused-tests.txt').write_text(output,encoding='utf-8')
+            (evidence/'run.json').write_text(json.dumps(dict(command=command,cwd=str(game),python=sys.version,
+                dependencies=versions,source=source,source_stable=source==source_manifest(),exit_code=2,
+                timeout_seconds=300,passed=False),indent=2)+'\n',encoding='utf-8')
+            print("Focused suite exceeded 300 seconds; partial output retained.", file=sys.stderr)
             return 2
         output = result.stdout + result.stderr
         print(output, end="")
         (evidence / "focused-tests.txt").write_text(output, encoding="utf-8")
         stable=source==source_manifest()
-        (evidence/'run.json').write_text(json.dumps(dict(command=command,python=sys.version,dependencies=versions,
+        (evidence/'run.json').write_text(json.dumps(dict(command=command,cwd=str(game),python=sys.version,dependencies=versions,
             source=source,source_stable=stable,exit_code=result.returncode,passed=result.returncode==0 and stable),indent=2)+'\n',encoding='utf-8')
         return result.returncode if stable else 1
 

@@ -50,6 +50,10 @@ def records(plan, registries, width, height):
             require([m['chunk'] for m in semantic['members']]==s['members'],sid,'semantic member ownership mismatch')
             for member in semantic['members']:
                 require(member['role'] in ('civic','market','residential') and member['district'] in ('bell_quarter','market_quarter','residential'),sid,'unsupported member role/district')
+                require(member['district']=={'civic':'bell_quarter','market':'market_quarter','residential':'residential'}[member['role']],sid,'role/district disagreement')
+                civic_placement=registries['placements'][s['civic']['placement']] if s['civic'] else None
+                civic_member=bool(civic_placement and member['chunk']==[civic_placement['origin'][0]//80,civic_placement['origin'][1]//43])
+                require((member['role']=='civic')==civic_member,sid,'civic member disagrees with civic placement ownership')
                 require(type(member['waystone']) is bool and member['waystone']==(member['role']=='civic'),sid,'invalid functional member policy')
                 for key in ('difficulty','resonance'):
                     value=member[key];require(type(value) in (int,float) and math.isfinite(value) and 0<=value<=1,sid,'invalid '+key)
@@ -113,6 +117,9 @@ def world_membership(world):
     plan=world.plan
     if world.generation_revision!=plan['generation_revision']: raise GenerationError('world origin disagrees with saved plan origin')
     expected={tuple(xy):i for i,s in enumerate(plan['settlements']) for xy in s['members']}
+    if (any(len(xy)!=2 or any(type(n) is not int for n in xy) for xy in world.town_chunks) or
+        any(type(i) is not int for i in world.town_chunk_ids.values())):
+        raise GenerationError('town registry coordinates/IDs must be integers, not booleans')
     groups={i:[tuple(xy) for xy in s['members']] for i,s in enumerate(plan['settlements'])}
     if world.town_chunks!=set(expected) or world.town_chunk_ids!=expected or world.town_groups!=groups:
         raise GenerationError('saved town registries disagree with settlement membership')
@@ -126,7 +133,7 @@ def world_membership(world):
             if c.town_role!='planned':raise GenerationError(f'{xy}: unsupported G3 member role')
         else:
             policy=next(m for m in s['semantics']['members'] if m['chunk']==list(xy))
-            if (c.name!=s['semantics']['name'] or c.town_role!=policy['role'] or
+            if (c.name!=s['semantics']['name'] or world.chunk_names.get(xy)!=c.name or c.town_role!=policy['role'] or
                 [list(z) for z in c.zones]!=[list(z) for z in policy['zones']] or
                 c.difficulty!=policy['difficulty'] or c.resonance!=policy['resonance']):
                 raise GenerationError(f'{xy}: Chunk semantics disagree with saved policy')

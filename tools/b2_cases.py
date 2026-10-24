@@ -217,6 +217,10 @@ def processing(e, ev):
         m.processing_layer[(5, 5)] = record()
     cache = e.save_manager.cache
     cache.hot[(e.world_x, e.world_y)] = CachedChunk(surface, [])
+    # This fixture deliberately replaces the generated surface with a generic
+    # processing owner. Remove its old generated-surface claim as well. Keeping
+    # the claim while removing map markers is semantic corruption tested by G4.
+    e.world_map.get(e.world_x,e.world_y).generation_revision=None
     cache.submap_hot[e.current_submap_id] = CachedChunk(current, [])
     cache.submap_hot["fixture-inactive"] = CachedChunk(underground, [])
     cache.hot[(e.world_x+1, e.world_y)] = CachedChunk(underground, [])  # deliberate alias control

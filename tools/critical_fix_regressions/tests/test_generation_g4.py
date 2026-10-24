@@ -79,6 +79,23 @@ class G4Gameplay(unittest.TestCase):
             with self.assertRaisesRegex(GenerationError,'late restored'): self.scene(start)
         self.assertEqual(vars(ch),old); self.assertEqual(digest(self.world.plan),before)
 
+    def test_physical_road_waystone_policy_and_reserved_resource_cells(self):
+        from world.world_map import Chunk,RegionType
+        from generation.context import GenerationContext
+        original=GenerationContext.rng
+        for crossing,seed,expected in ((True,0,2),(False,1,1),(False,0,0)):
+            w=WorldMap(2,2);w.seed=seed;w.start_wx=w.start_wy=-1;w.plan_mode='shared-v1'
+            w.set(Chunk(0,0,RegionType.PLAINS,seed,biome_id='plains'))
+            rectangles=[[0,20,80,23]]+([[39,0,42,43]] if crossing else [])
+            w.plan=dict(version=1,generation_revision='wg3',routes=[dict(id='road',rects=rectangles),dict(id='coincident',rects=rectangles)],waters=[],crossings=[],placements=[],settlements=[],dependencies={})
+            def rng(context,purpose,*keys):return random.Random(seed) if purpose=='road-waystones' else original(context,purpose,*keys)
+            with patch.object(GenerationContext,'rng',rng):r=self.scene((0,0),w)
+            m=r.local_map;stones=[xy for xy,v in m.decor.items() if v=='waystone_plinth']
+            self.assertEqual(len(stones),expected)
+            self.assertFalse(set(stones)&m.road_cells)
+            self.assertTrue(all(str(m.tiles[xy]['terrain'])=='road_0' for xy in m.road_cells))
+            self.assertEqual(m.functional_generation['waystones'],expected)
+
 
 class G4Placement(unittest.TestCase):
     @classmethod

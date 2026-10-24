@@ -84,6 +84,7 @@ class G4Durability(unittest.TestCase):
             ('duplicate member',lambda p:p['settlements'][1]['members'].append(p['settlements'][0]['members'][0])),
             ('omitted reverse plot',lambda p:p['settlements'][0]['plots'].pop()),
             ('missing new semantics',lambda p:p['settlements'][0].pop('semantics')),
+            ('civic role ownership',lambda p:p['settlements'][0]['semantics']['members'][0].update(role='residential',district='residential',waystone=False)),
             ('new projection',lambda p:p.pop('dependency_projection')),
             ('reservation',lambda p:p['reservations'][-1]['rect'].__setitem__(0,True)),
             ('entrance',lambda p:p['placements'][0]['entrances'][0].update(width=False))]
