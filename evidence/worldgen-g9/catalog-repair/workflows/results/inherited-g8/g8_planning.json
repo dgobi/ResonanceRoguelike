@@ -1,0 +1,23 @@
+{
+  "version": 4,
+  "settlement_count": [
+    2,
+    4
+  ],
+  "minimum_separation_chunks": 12,
+  "near_start_radius_chunks": 10,
+  "forms": [
+    "grid",
+    "roadside"
+  ],
+  "road_width_tiles": 3,
+  "street_width_tiles": 3,
+  "plot_spacing_tiles": 18,
+  "setback_tiles": 2,
+  "max_spur_tiles": 12,
+  "route_search_nodes": 16384,
+  "site_search_limit": 16384,
+  "selection_profile_version": 1,
+  "settlement_layout_version": 1,
+  "country_network_version": 1
+}

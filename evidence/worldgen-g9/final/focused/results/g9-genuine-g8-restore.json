@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "creator": "b94a0b0db3685f7484632701f0486f3b0b79101e",
+  "plan": "ac9d07bdfaab123e30a782211b8edc0966a85257a2f004e41821670b135f4a07",
+  "visited_creator": "wg8",
+  "pending_adapter": "g8-to-g9-v1",
+  "mutations": {
+    "waystone": [
+      45,
+      19
+    ],
+    "prayer_taken": true,
+    "first_compound_container_emptied": [
+      22,
+      36
+    ],
+    "second_container_preserved": [
+      13,
+      36
+    ],
+    "terrain": "mud at 2,2"
+  },
+  "pending": [
+    {
+      "chunk": [
+        76,
+        100
+      ],
+      "fingerprint": "78f97026520c6f05fc9da27b37ee1d91587eeadff4bb9b39809d7f38a637bb40"
+    },
+    {
+      "chunk": [
+        118,
+        72
+      ],
+      "fingerprint": "9e29c346ce2da823ad3dc49f1793a025fb479ba8229ff5099c0e61c02d1ac932"
+    }
+  ],
+  "cold_and_f9": true
+}

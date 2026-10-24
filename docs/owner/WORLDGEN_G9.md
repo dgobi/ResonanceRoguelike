@@ -142,7 +142,7 @@ development runs; original attempts remain under their named directories.
 | G9-01 | `before/start.json`, package inventory, guard admission/outside rejection, genuine witness, complete pre-edit three-seed baseline and independent network measures. |
 | G9-02 | `wiki-correction/final/` contract/reader receipts; repaired raw/canonical/payload identities and complete helper binding. |
 | G9-03 | Installed/default draft policy, strict policy and disabled/zero/exhaustion fixtures; five owner workflows. |
-| G9-04 | `final/diagnostic/results/run.json` complete baseline identities and full baseline-plan files against original G8 plans. |
+| G9-04 | `final-b/diagnostic/results/run.json` complete baseline identities and full baseline-plan files against original G8 plans. |
 | G9-05 | Final all-pair distances and reconciled topology; small anisotropic/union/ring/diagonal fixtures. |
 | G9-06 | Deterministic finite candidate traces, two-link marginal/overlap/shared-budget fixture and exact budget negatives. |
 | G9-07 | Ordinary 23625→8063 fixed-pair evidence, independent 5265-step removed-run / 20837-step surviving corridor. |
@@ -152,13 +152,30 @@ development runs; original attempts remain under their named directories.
 | G9-11 | Sixteen checksum-consistent corruptions, late post-validation failure with full-state/disk snapshot and recovery. |
 | G9-12 | Three ordinary worlds, no-road results, lazy/deterministic checks, serial cost/subtree/scene/storage measures. |
 | G9-13 | Final real forward/reverse/original/fixed-pair itinerary plus explored F5/cold-load/F9 checkpoint. |
-| G9-14 | `final/authoring/`, both real browser-export consumers, safe output/initializer/catalog collision negatives. |
+| G9-14 | `final-b/authoring/`, both real browser-export consumers, safe output/initializer/catalog collision negatives. |
 | G9-15 | Main chapters/examples and edition-1.3 HTML, separate source/authoring/product manifest and both-engine actual downloads. |
 | G9-16 | Frozen final receipts, machine-readable index, ZIP member SHA256/size/CRC inventory, scoped commits/tags and external publication readback. |
 
-Paths beginning `before/`, `final/` or `wiki-correction/` are inside
+Paths beginning `before/`, `final-b/` or `wiki-correction/` are inside
 `evidence/worldgen-g9/`. The portable archive excludes personal campaigns,
 dependencies, browser profiles, disposable worker saves and a redundant checkout.
 Intentional historical compatibility ZIP fixtures are retained. Exact omission
 inventory and publication readback accompany the final archive outside any
 self-referential committed metadata.
+
+## First frozen attempt and catalogue correction
+
+At `e7fbd5ab99288c94e1a589df47ca733a9c17cb0b`, the guard, all 229 focused tests
+and both browser consumers (42 checks each) passed. The inherited G5 authoring
+catalogue check then rejected a stale derived catalogue. `StructureCatalog.identity`
+hashes every data JSON: the new policy and current settings changed it. Regeneration
+changed only that identity; assets, capabilities, contract hash and ID lists were
+unchanged. `evidence/worldgen-g9/final/` preserves this stopped attempt and
+`catalog-repair/` records the exact difference and refresh/check commands.
+
+The focused child completed in 1153.769 seconds, close to its historical 1200-second
+cap. The G9 release now explicitly requests a finite 1800-second focused child and
+2100-second outer allowance; other outer gates stay at 1800 and the diagnostic child
+at 1500. Historical focused defaults remain 1200. No tests or admission criteria are
+removed. Because unified inputs changed, `final-b/` restarts every release gate from
+the guard. This is a full rerun, not reuse of the earlier passing receipts.

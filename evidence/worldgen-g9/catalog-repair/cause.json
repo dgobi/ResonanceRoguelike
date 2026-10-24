@@ -1,0 +1,9 @@
+{
+  "cause": "StructureCatalog.identity hashes every data JSON path and raw bytes. Adding country_network.json and changing g3_config.json correctly changed this identity. The derived catalog had not been refreshed.",
+  "difference": "Only /identity changed; 64 assets, capabilities, IDs and contract hash unchanged.",
+  "repair": "Regenerated via production --refresh-editor-catalog; subsequent --check-editor-catalog passed.",
+  "first_frozen_attempt": "e7fbd5ab99288c94e1a589df47ca733a9c17cb0b; final/ retains guard, 229-test focused and both-browser passes, then inherited authoring failure.",
+  "timeout_adjustment": "The full 229-test pass took 1153.769 seconds against the legacy 1200-second child cap. G9 release explicitly requests a finite 1800-second child / 2100-second outer allowance. Default historical focused invocation remains 1200. No tests or criteria removed.",
+  "full_rerun": "Required because catalog and test-runner inputs changed; final-b will restart at guard.",
+  "evidence_preservation": "G9 evidence has scoped ** -text Git attributes. Thirty previously committed raw development snapshots differed only through Git line-ending normalization; current original capture bytes are retained and restaged exactly. Runtime source normalization rules are unchanged."
+}

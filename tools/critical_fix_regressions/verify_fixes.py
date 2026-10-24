@@ -22,7 +22,9 @@ def main() -> int:
                         default=here.parents[1] / "roguelike")
     parser.add_argument("--evidence", type=Path,
                         help="Optional directory for the test log and loop evidence")
+    parser.add_argument("--timeout", type=int, default=1200, help="Finite child timeout in seconds; G9 release uses 1800 for the expanded full suite")
     args = parser.parse_args()
+    if not 60 <= args.timeout <= 3600: parser.error("--timeout must be 60..3600 seconds")
     sys.path.insert(0,str(here.parent))
     from verify_b3 import source_manifest
     source=source_manifest()
@@ -55,7 +57,7 @@ def main() -> int:
                           "dependencies": versions, "scope": "focused regressions"}, indent=2))
         try:
             result = subprocess.run(command, cwd=game, env=env, text=True,
-                                    encoding="utf-8", capture_output=True, timeout=1200)
+                                    encoding="utf-8", capture_output=True, timeout=args.timeout)
         except subprocess.TimeoutExpired as error:
             def decoded(value):
                 return value.decode('utf-8',errors='replace') if isinstance(value,bytes) else value or ''
@@ -63,8 +65,8 @@ def main() -> int:
             (evidence/'focused-tests.txt').write_text(output,encoding='utf-8')
             (evidence/'run.json').write_text(json.dumps(dict(command=command,cwd=str(game),python=sys.version,
                 dependencies=versions,source=source,source_stable=source==source_manifest(),exit_code=2,
-                timeout_seconds=1200,passed=False),indent=2)+'\n',encoding='utf-8')
-            print("Focused suite exceeded 1200 seconds; partial output retained.", file=sys.stderr)
+                timeout_seconds=args.timeout,passed=False),indent=2)+'\n',encoding='utf-8')
+            print(f"Focused suite exceeded {args.timeout} seconds; partial output retained.", file=sys.stderr)
             return 2
         output = result.stdout + result.stderr
         print(output, end="")

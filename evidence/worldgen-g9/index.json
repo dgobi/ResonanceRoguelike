@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "integration verification; final frozen gates pending",
+  "status": "catalogue correction and full second frozen sequence pending",
   "base_commit": "b94a0b0db3685f7484632701f0486f3b0b79101e",
   "source_of_authorization": "Explicit user request to execute attached brief in full; brief section 2 includes publication to existing main.",
   "owner_report": "docs/owner/WORLDGEN_G9.md",
@@ -21,7 +21,7 @@
       "result": "Portable wiki and accurate downloads",
       "status": "pending final frozen release",
       "evidence": [
-        "wiki-correction/final/edition.json"
+        "wiki-correction/final-b/edition.json"
       ]
     },
     {
@@ -29,8 +29,8 @@
       "result": "Strict bounded policy and explicit optional outcomes",
       "status": "pending final frozen release",
       "evidence": [
-        "final/focused/results/g9-optional-outcomes.json",
-        "final/authoring/results/workflows.json"
+        "final-b/focused/results/g9-optional-outcomes.json",
+        "final-b/authoring/results/workflows.json"
       ]
     },
     {
@@ -38,7 +38,7 @@
       "result": "Complete baseline preservation",
       "status": "pending final frozen release",
       "evidence": [
-        "final/diagnostic/results/run.json"
+        "final-b/diagnostic/results/run.json"
       ]
     },
     {
@@ -46,8 +46,8 @@
       "result": "Topology and fixed endpoint units",
       "status": "pending final frozen release",
       "evidence": [
-        "final/diagnostic/results/run.json",
-        "final/focused/receipt.json"
+        "final-b/diagnostic/results/run.json",
+        "final-b/focused/receipt.json"
       ]
     },
     {
@@ -55,8 +55,8 @@
       "result": "Determinism, marginal benefit and shared budgets",
       "status": "pending final frozen release",
       "evidence": [
-        "final/focused/results/g9-two-link-marginal-budget.json",
-        "final/diagnostic/results/run.json"
+        "final-b/focused/results/g9-two-link-marginal-budget.json",
+        "final-b/diagnostic/results/run.json"
       ]
     },
     {
@@ -64,7 +64,7 @@
       "result": "Required ordinary improvement and alternate corridor",
       "status": "pending final frozen release",
       "evidence": [
-        "final/diagnostic/results/run.json"
+        "final-b/diagnostic/results/run.json"
       ]
     },
     {
@@ -72,9 +72,9 @@
       "result": "Ownership, deck replay and touched scenes",
       "status": "pending final frozen release",
       "evidence": [
-        "final/focused/results/g9-real-deck-replay.json",
-        "final/diagnostic/results/run.json",
-        "final/visuals/results/views.json"
+        "final-b/focused/results/g9-real-deck-replay.json",
+        "final-b/diagnostic/results/run.json",
+        "final-b/visuals/results/views.json"
       ]
     },
     {
@@ -82,8 +82,8 @@
       "result": "Current dispatch and inherited behavior",
       "status": "pending final frozen release",
       "evidence": [
-        "final/focused/results/g9-policy-combinations.json",
-        "final/focused/receipt.json"
+        "final-b/focused/results/g9-policy-combinations.json",
+        "final-b/focused/receipt.json"
       ]
     },
     {
@@ -91,8 +91,8 @@
       "result": "Saved policy independence and genuine historical provenance",
       "status": "pending final frozen release",
       "evidence": [
-        "final/focused/results/g9-genuine-g8-restore.json",
-        "final/focused/results/g9-late-rollback.json"
+        "final-b/focused/results/g9-genuine-g8-restore.json",
+        "final-b/focused/results/g9-late-rollback.json"
       ]
     },
     {
@@ -100,8 +100,8 @@
       "result": "Corruption and atomic rollback",
       "status": "pending final frozen release",
       "evidence": [
-        "final/focused/results/g9-checksum-corruptions.json",
-        "final/focused/results/g9-late-rollback.json"
+        "final-b/focused/results/g9-checksum-corruptions.json",
+        "final-b/focused/results/g9-late-rollback.json"
       ]
     },
     {
@@ -109,7 +109,7 @@
       "result": "Ordinary matrix, lazy planning and costs",
       "status": "pending final frozen release",
       "evidence": [
-        "final/diagnostic/results/run.json"
+        "final-b/diagnostic/results/run.json"
       ]
     },
     {
@@ -117,7 +117,7 @@
       "result": "Real shortcut/original journeys and explored checkpoint",
       "status": "pending final frozen release",
       "evidence": [
-        "final/diagnostic/results/run.json"
+        "final-b/diagnostic/results/run.json"
       ]
     },
     {
@@ -125,8 +125,8 @@
       "result": "Safe new/inherited owner and editor workflows",
       "status": "pending final frozen release",
       "evidence": [
-        "final/authoring/results/workflows.json",
-        "final/browser/receipt.json"
+        "final-b/authoring/results/workflows.json",
+        "final-b/browser/receipt.json"
       ]
     },
     {
@@ -134,7 +134,7 @@
       "result": "Maintained edition and real reader downloads",
       "status": "pending final frozen release",
       "evidence": [
-        "final/wiki/results/edition.json",
+        "final-b/wiki/results/edition.json",
         "../../Resonance_Wiki_Maintenance/source-manifest.json"
       ]
     },
@@ -143,7 +143,7 @@
       "result": "Frozen release, archive and publication",
       "status": "pending final frozen release",
       "evidence": [
-        "final/release.json"
+        "final-b/release.json"
       ]
     }
   ],
@@ -154,5 +154,13 @@
     "personal_campaigns_used": false,
     "desktop_control": false,
     "subagents": false
-  }
+  },
+  "previous_attempts": [
+    {
+      "path": "final/release.json",
+      "input_commit": "e7fbd5ab99288c94e1a589df47ca733a9c17cb0b",
+      "result": "Stopped at inherited stale-catalogue check after guard, 229 focused tests and both browsers passed",
+      "repair": "catalog-repair/cause.json"
+    }
+  ]
 }

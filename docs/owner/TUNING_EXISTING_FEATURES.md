@@ -1,4 +1,4 @@
-Current settlement controls: see [G5](WORLDGEN_G5.md) and the [working authoring recipes](../../roguelike/docs/STRUCTURE_AUTHORING.md). G5 role membership, multipliers, hard caps and repetition preferences live in `roguelike/data/generation/settlement_profiles.json`; they affect new plans only.
+Current generation controls: see [G9](WORLDGEN_G9.md), the [country-network guide](../../roguelike/docs/COUNTRY_NETWORK.md), and the [working authoring recipes](../../roguelike/docs/STRUCTURE_AUTHORING.md). Settings 4 / plan 7 preserve the complete G8 settlement and rural baseline before optional connections. Country policy lives in `roguelike/data/generation/country_network.json`; town membership, multipliers, caps and repetition remain in `settlement_profiles.json`. Policy edits affect new plans, while saved worlds retain their resolved records.
 
 # Tuning Resonance’s existing features
 

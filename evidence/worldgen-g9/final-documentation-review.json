@@ -1,0 +1,39 @@
+{
+  "scope": "Read-only findings from first frozen sequence, applied during catalogue correction before second freeze. Complete wiki verification is repeated.",
+  "findings": [
+    {
+      "file": "Resonance_Wiki_Maintenance/chapters/glossary.md",
+      "change": "Update current format/revision from 6/wg8 to 7/wg9."
+    },
+    {
+      "file": "Resonance_Wiki_Maintenance/chapters/generation-troubleshooting.md",
+      "change": "Describe historical formats 1-6 pending adapters to current wg9 and g9-v1 for format 7."
+    },
+    {
+      "file": "Resonance_Wiki_Maintenance/chapters/compounds.md",
+      "change": "Remove stale current-G8 and current-settings-3 wording; preserve historical G7/G8 semantics."
+    },
+    {
+      "file": "Resonance_Wiki_Maintenance/chapters/saves-and-state.md",
+      "change": "Current layout settings are 4/format 7; keep explicit settings 3 historical format 6."
+    },
+    {
+      "file": "Resonance_Wiki_Maintenance/chapters/settlement-layouts.md",
+      "change": "Clarify original country roads remain intact, with current optional G9 connections; remove obsolete country-network stop boundary."
+    },
+    {
+      "file": "Resonance_Wiki_Maintenance/chapters/wfc-ground.md",
+      "change": "Current fresh planned towns are G9; preserved WFC distinction unchanged."
+    },
+    {
+      "file": "docs/owner/TUNING_EXISTING_FEATURES.md",
+      "change": "Point the current entry paragraph at G9 country policy and preserved town controls; keep historical tuning sections."
+    },
+    {
+      "file": "docs/owner/WORLDGEN_G9.md",
+      "change": "Replace pending integration status with actual final receipts, costs, counts and source identities."
+    }
+  ],
+  "no_runtime_test_or_cli_input_change": true,
+  "applied_before_second_freeze": true
+}

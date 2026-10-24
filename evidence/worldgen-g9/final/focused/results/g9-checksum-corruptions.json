@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "missing shortcut reference",
+      "error": "country network: original baseline record removed or changed"
+    },
+    {
+      "case": "foreign shortcut",
+      "error": "country network: original baseline record removed or changed"
+    },
+    {
+      "case": "altered endpoint",
+      "error": "G3 counted country route does not physically reach assigned endpoint"
+    },
+    {
+      "case": "disconnected join",
+      "error": "G3 route geometry or endpoints disagree"
+    },
+    {
+      "case": "baseline road removed",
+      "error": "G3 crossing references/class invalid"
+    },
+    {
+      "case": "forged construction",
+      "error": "country network: total construction accounting differs"
+    },
+    {
+      "case": "forged baseline budget",
+      "error": "country network: forged baseline construction accounting"
+    },
+    {
+      "case": "forged benefit",
+      "error": "country network: forged physical benefit"
+    },
+    {
+      "case": "foreign role",
+      "error": "country network: missing/foreign shortcut role or geometry"
+    },
+    {
+      "case": "new water geometry",
+      "error": "G3 route geometry or endpoints disagree"
+    },
+    {
+      "case": "protected common road",
+      "error": "G3 route geometry or endpoints disagree"
+    },
+    {
+      "case": "incompatible origin",
+      "error": "missing/corrupt required shared plan header"
+    },
+    {
+      "case": "unknown future version",
+      "error": "missing/corrupt required shared plan header"
+    },
+    {
+      "case": "bad policy boolean",
+      "error": "country network: max_shortcuts must be integer 0..2, not boolean"
+    },
+    {
+      "case": "boolean contract version",
+      "error": "country network: missing resolved version 1 contract"
+    },
+    {
+      "case": "forged proposal work",
+      "error": "country network: invalid saved proposal search work"
+    }
+  ],
+  "recovered": true
+}

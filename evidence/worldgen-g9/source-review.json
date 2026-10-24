@@ -1,0 +1,114 @@
+{
+  "commit": "e7fbd5ab99288c94e1a589df47ca733a9c17cb0b",
+  "reviewed_areas": {
+    "roguelike/generation/country_network.py": {
+      "review": "Strict policy, deterministic bounded proposals, marginal physical admission, protected full bands and saved contract replay.",
+      "bytes": 20297,
+      "raw_sha256": "b8d6ceff95184caae9b116eabb2c5e668d8b6f9d43e50c12c3220a345ac4ae84",
+      "canonical_sha256": "2f2330f65c4dbdcc0174a14ccd036d23dbb8d6a164fe40e08301769695be2962"
+    },
+    "roguelike/generation/network_metrics.py": {
+      "review": "Exact cardinal edge union, sparse physical BFS, iterative cut-edge and ring/parallel-run topology.",
+      "bytes": 4569,
+      "raw_sha256": "5b9cd31a680be379854d5d518d62ab7320b9df62f07138696a2fc28d3f7183e2",
+      "canonical_sha256": "5b9cd31a680be379854d5d518d62ab7320b9df62f07138696a2fc28d3f7183e2"
+    },
+    "roguelike/generation/road_network.py": {
+      "review": "Shared exact projection used by gameplay evidence and admission; no extra saved graph.",
+      "bytes": 4438,
+      "raw_sha256": "ae757cdfb5b41bc02a481e2928464851ab48d8b385cb62c4c5bbeb2a13ebaeeb",
+      "canonical_sha256": "ae757cdfb5b41bc02a481e2928464851ab48d8b385cb62c4c5bbeb2a13ebaeeb"
+    },
+    "roguelike/generation/world_plan.py": {
+      "review": "Complete settings-3 baseline before settings-4 augmentation; explicit format 1-7 validation and normal reservations.",
+      "bytes": 44651,
+      "raw_sha256": "b77cdfe145c2ba1eb13cbf97677e72de37663f7ed2f95c2530354ff7799f587b",
+      "canonical_sha256": "62dc20886b14e814ec53ac811a05d193c9cf2672ab47784d329483a0fee1191a"
+    },
+    "roguelike/generation/plan_integrity.py": {
+      "review": "World membership and saved geography checks before installation.",
+      "bytes": 13787,
+      "raw_sha256": "9189392a8ed1c1433f5a59a4ccae7bd37b844e84108a470c7e6c44492dcef8ca",
+      "canonical_sha256": "9189392a8ed1c1433f5a59a4ccae7bd37b844e84108a470c7e6c44492dcef8ca"
+    },
+    "roguelike/generation/settlement_layout.py": {
+      "review": "Saved arrival-road reference preserved independently of added country route endpoints.",
+      "bytes": 24016,
+      "raw_sha256": "ee277c46b401e98b0e0184314097841471b6ab895e1884272ca4293e8fbb1686",
+      "canonical_sha256": "ee277c46b401e98b0e0184314097841471b6ab895e1884272ca4293e8fbb1686"
+    },
+    "roguelike/generation/planned_scene.py": {
+      "review": "Format 6/7 public-space dispatch, final populated access and scene provenance.",
+      "bytes": 13640,
+      "raw_sha256": "8389f996675b76d9dc0a8d996debff8247cc368440540b6dcdad784c2cc9b0bf",
+      "canonical_sha256": "8389f996675b76d9dc0a8d996debff8247cc368440540b6dcdad784c2cc9b0bf"
+    },
+    "roguelike/generation/scene_adapters.py": {
+      "review": "Explicit current wg9 adapters for historical plan formats, actual visited creators unchanged.",
+      "bytes": 948,
+      "raw_sha256": "c62d9dfb362e111531f75020750b9e7e938d2fe8e5b467a87b1307afc1ccde5b",
+      "canonical_sha256": "dd7fa2fa0ff8fd76c7ac21745b57d53e06d3c5109d6f763284f904c038adf0f1"
+    },
+    "roguelike/generation/ports.py": {
+      "review": "Preserved wg8 river decision stream despite current scene revision.",
+      "bytes": 4127,
+      "raw_sha256": "1866817869a7f259ed1b02c0559caeb501037539a44272924b9e88d7d062afb0",
+      "canonical_sha256": "1866817869a7f259ed1b02c0559caeb501037539a44272924b9e88d7d062afb0"
+    },
+    "roguelike/engine/save_manager.py": {
+      "review": "Version/origin preflight, public ownership checks and complete-scene state installation.",
+      "bytes": 58977,
+      "raw_sha256": "ad86b16ae1eba82ef21c1c98a52429d3560e6dc016bea5055d4abe93cfc04973",
+      "canonical_sha256": "1a63d051e5de47a4f429088faf6901d40235e11f2239eb7c62ece5570bf18594"
+    },
+    "roguelike/generation/network_preview.py": {
+      "review": "Fixed endpoint comparisons, exact overlays and clear units.",
+      "bytes": 7013,
+      "raw_sha256": "655cc0b39be415b837982269aa265d43fd9113b104c0b43c305993cde9dd8ea3",
+      "canonical_sha256": "6db15a39fb4f2b1d2b331621573474bc32b5adb77ffa981a9ddb2e461117906f"
+    },
+    "roguelike/generation/compound_preview.py": {
+      "review": "Finish assigned owner insertion before preserving baseline network contract.",
+      "bytes": 4080,
+      "raw_sha256": "7f96375d256a4f39f1b7a8d86c09eedfc14cd8444e2253efd469030e3ad115ac",
+      "canonical_sha256": "7f96375d256a4f39f1b7a8d86c09eedfc14cd8444e2253efd469030e3ad115ac"
+    },
+    "roguelike/generation/poi_preview.py": {
+      "review": "Same complete-baseline ordering for assigned single-site previews.",
+      "bytes": 4158,
+      "raw_sha256": "3b64beac1820071753d742cdaab8bb6b6def37a41429928cc8910bb89d485c56",
+      "canonical_sha256": "3b64beac1820071753d742cdaab8bb6b6def37a41429928cc8910bb89d485c56"
+    },
+    "tools/structure_authoring.py": {
+      "review": "Network policy input, initializer, JSON/SVG/PNG and catalog collision participation.",
+      "bytes": 17229,
+      "raw_sha256": "f1644955fb237c3363844cf32b15de43829af6eeabcefcf1f6ea981720289a87",
+      "canonical_sha256": "f1644955fb237c3363844cf32b15de43829af6eeabcefcf1f6ea981720289a87"
+    },
+    "tools/verify_g9_release.py": {
+      "review": "Serial finite unfiltered gates and unified input freeze.",
+      "bytes": 2623,
+      "raw_sha256": "5b9b6af643a24cfc105babdb410164823f084d1f38a8ac33caec5a4e352f07b1",
+      "canonical_sha256": "b37e54666bd7b404f3fbb15615b1f86ba33268b9b4a7812b7909574921492b58"
+    },
+    "Resonance_Wiki_Maintenance/wiki_inputs.py": {
+      "review": "Separate reviewed source, full authoring/test scope and product identity with explicit canonical text rule.",
+      "bytes": 5815,
+      "raw_sha256": "d0aab7a5aad0fc011a5aaabcb963b62883041864f8147a53df54e10ae27df390",
+      "canonical_sha256": "7b427e8db269b688b5953443f065fe3348d76810247139bc94daf4aa8ac6bbc7"
+    },
+    "Resonance_Wiki_Maintenance/verify_reader.py": {
+      "review": "Both engines hash actual downloaded payload bytes, including network policy example.",
+      "bytes": 6192,
+      "raw_sha256": "b4fad078d30308a3c5e124ee4cafee5a666b449935723584b4e55005a49bf414",
+      "canonical_sha256": "b4c520168f6e63e10aa94baf2963ab293341963cbf5322f83b7765d70eeae563"
+    },
+    "tools/authoring_outputs.py": {
+      "review": "Existing protected destinations and staged artifacts reused by new CLI options.",
+      "bytes": 2868,
+      "raw_sha256": "6bb30fedf17b4c09d54eff60b47d22320826f58b8e39a9fc45ce4dee52ddd02f",
+      "canonical_sha256": "6bb30fedf17b4c09d54eff60b47d22320826f58b8e39a9fc45ce4dee52ddd02f"
+    }
+  },
+  "evidence": "Each invariant is exercised by the final focused, authoring, diagnostic or wiki gate; consult index.json and per-gate exact manifests. This review record supplements those execution receipts."
+}

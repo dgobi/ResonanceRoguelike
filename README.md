@@ -13,7 +13,7 @@ Run the focused and full production gates with the established environment:
 
 ```powershell
 $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
-& $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike
+& $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike --timeout 1800
 & $ResonancePython -X utf8 tools/worldgen_g9_diagnostic.py --journey --evidence evidence/worldgen-g9/owner-diagnostic-02
 & $ResonancePython -X utf8 tools/verify_d.py
 ```
