@@ -90,6 +90,9 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
     m.road_cells=road_cells; m.protected_cells=protected
     spawn=next(iter(sorted(road_cells)),arrival_anchor(m,spawn,data))
     m.required_access_anchors=[spawn]+sorted(p for p in road_cells if p[0] in (0,W-1) or p[1] in (0,H-1))
+    if policy is not None and policy.get('access_revision') == 1 and eligible(chunk):
+        from generation.exterior_access import bind_exterior
+        spawn=bind_exterior(m,world,chunk,policy,data,spawn,section)
     for submap in staged.submaps: _place_submap_entrance(m,submap,data.terrain,data=data)
     from generation.planned_dressing import dress
     functional,waystone=dress(m,staged,world,data,context,native,spawn)

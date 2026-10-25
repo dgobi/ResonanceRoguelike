@@ -85,17 +85,25 @@ def _dependencies(profiles, data):
     return refs
 
 
-def make_policy(raw, data):
+def make_policy(raw, data, *, access_revision=1):
     profiles = validate_profiles(raw, data)
     p = dict(version=1, algorithm=ALGORITHM, seed_domain=DOMAIN, profiles=profiles,
              dependencies=_dependencies(profiles, data))
+    if type(access_revision) is not int or access_revision not in (0, 1):
+        raise GenerationError('surface policy: unsupported access revision')
+    if access_revision:
+        p.update(version=2, access_revision=access_revision)
     return dict(p, identity=digest(p))
 
 
 def validate_policy(policy, data=None):
-    _keys(policy, ('version','algorithm','seed_domain','profiles','dependencies','identity'), 'surface policy')
-    if type(policy['version']) is not int or policy['version'] != 1 or policy['algorithm'] != ALGORITHM or policy['seed_domain'] != DOMAIN:
+    version = policy.get('version') if isinstance(policy, dict) else None
+    keys = ('version','algorithm','seed_domain','profiles','dependencies','identity')
+    _keys(policy, keys + (('access_revision',) if version == 2 else ()), 'surface policy')
+    if type(version) is not int or version not in (1, 2) or policy['algorithm'] != ALGORITHM or policy['seed_domain'] != DOMAIN:
         raise GenerationError('surface policy: unsupported algorithm, version or seed domain')
+    if version == 2 and (type(policy['access_revision']) is not int or policy['access_revision'] != 1):
+        raise GenerationError('surface policy: unsupported access revision')
     if policy['identity'] != digest({k:v for k,v in policy.items() if k != 'identity'}):
         raise GenerationError('surface policy: forged identity')
     if data is not None:
@@ -121,9 +129,12 @@ def provenance(world, chunk):
     p = world_policy(world)
     if p is None:
         return None
-    return dict(version=1, policy_identity=p['identity'], algorithm=ALGORITHM,
+    result = dict(version=1, policy_identity=p['identity'], algorithm=ALGORITHM,
                 seed_domain=DOMAIN, owner='wilderness' if eligible(chunk) else 'urban-g9',
                 biome=chunk.biome_id)
+    if p['version'] == 2:
+        result['access_revision'] = p['access_revision']
+    return result
 
 
 def eligible(chunk):

@@ -52,8 +52,21 @@ def required_anchors(local_map, data=None):
 
 def validate_required_access(local_map, targets, data=None):
     anchors = required_anchors(local_map, data)
+    contract = getattr(local_map, 'wilderness_access', None)
+    provenance = getattr(local_map, 'surface_provenance', {}) or {}
+    corrected = provenance.get('access_revision') == 1 and provenance.get('owner') == 'wilderness'
+    if corrected:
+        if not contract or contract.get('revision') != 1:
+            raise GenerationError('wilderness access revision 1: missing exterior obligation')
+        edge, arrival = tuple(contract['edge']), tuple(contract['arrival'])
+        if edge not in anchors or arrival not in anchors or not (
+                edge[0] in (0,local_map.width-1) or edge[1] in (0,local_map.height-1)):
+            raise GenerationError(f'wilderness {contract["chunk"]} access revision 1: lost arrival/exterior obligation')
     reached = reachable(local_map, anchors[0], data)
     for xy in [*anchors, *targets]:
         if tuple(xy) not in reached:
+            if corrected:
+                raise GenerationError(f'wilderness {contract["chunk"]} access revision 1: required target {tuple(xy)} '
+                                      f'disconnected from arrival {anchors[0]} / reciprocal exterior {contract["edge"]}')
             raise GenerationError(f'surface: required target {tuple(xy)} is unreachable from arrival {anchors[0]}')
     return reached

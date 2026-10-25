@@ -193,7 +193,8 @@ def validate_scene(local_map, submaps, data):
                 and _enterable(local_map, (xy[0] + dx, xy[1] + dy), data)
                 for dx in (-1, 0, 1) for dy in (-1, 0, 1) if dx or dy):
             raise GenerationError(f'{submap.submap_id}: blocked stair or approach at {xy}')
-    if submaps:
+    provenance = getattr(local_map, 'surface_provenance', {}) or {}
+    if submaps or (provenance.get('access_revision') == 1 and provenance.get('owner') == 'wilderness'):
         validate_required_access(local_map, [(s.surface_x, s.surface_y) for s in submaps], data)
 
 

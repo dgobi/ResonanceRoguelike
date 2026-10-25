@@ -3,6 +3,9 @@
 G10 gives the eight existing wilderness biomes coherent tree stands, clearings,
 wet patches and rock masses, with an explicit saved surface policy. Read the
 [terrain tuning and preview guide](roguelike/docs/WILDERNESS_TERRAIN.md).
+G11 preserves reciprocal exterior access through wilderness entrance placement
+and final composition for new campaigns. Existing G9/G10 campaigns retain their
+historical generation routes. See [G11 delivery](docs/owner/WORLDGEN_G11.md).
 G9's bounded country-road shortcuts preserve the complete G8 settlement and rural
 baseline. Read [G9 delivery](docs/owner/WORLDGEN_G9.md), the
 [country-network guide](roguelike/docs/COUNTRY_NETWORK.md) and the

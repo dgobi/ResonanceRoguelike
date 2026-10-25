@@ -1,4 +1,4 @@
-# Wilderness terrain — G10
+# Wilderness terrain — G10 fields, G11 access
 
 New campaigns use coherent tree stands, clearings, vegetation patches, wet ground
 and rock masses sampled in absolute world-tile coordinates. The eight existing
@@ -22,13 +22,26 @@ PNG is explicitly **revealed comparison evidence**, not a normal-FOV play view.
 The report identifies every chunk, the frozen policy and unchanged G9 plan,
 terrain and resource counts, reachable resource opportunities, native actors,
 required access, repair events and generation timings. It generates only the
-requested 1–3 by 1–3 scenes, plus a one-chunk metadata halo. Planning creates no
-local scenes. A preview never visits a campaign or installs the draft.
+requested 1–3 by 1–3 scenes. Each natural-field sample reads a one-chunk metadata
+halo; G11's reciprocal edge strips can read one further metadata ring, without
+materializing any neighbor scene. Planning creates no local scenes. A preview
+never visits a campaign or installs the draft.
 
 Wilderness arrival anchors use the largest natural component that touches a
 scene boundary. This keeps a small decorative gap inside a dense stand from
 becoming the default anchor for an entrance. The selection changes no terrain;
 roads and authored approaches retain their later authoritative passes.
+
+New campaigns now save surface policy version 2 with `access_revision: 1`.
+After authoritative water, roads and ownership are applied, wilderness arrivals
+retain a passable edge facing an in-world neighbor with a matching passable
+reciprocal cell. Narrow field strips and saved plan slices establish this without
+generating neighbor scenes. Eligible reciprocal edges are reserved from dressing;
+the arrival can reselect existing ground after overlays. Entrance footprints that
+sever the relationship are rejected within the existing 300-candidate search.
+The bare-stair fallback and completed populated scene must satisfy the same
+arrival, road, previous-link and exterior obligations. Decorative pockets need not
+connect. No natural terrain is carved, and movement rules remain unchanged.
 
 Omit `--profile` to preview installed defaults. `--image` selects a separate PNG
 target. Outputs cannot replace game files or the draft; file aliases, symbolic
@@ -84,8 +97,14 @@ saved policy and its terrain/decor dependency identities. Editing or removing
 the installed tuning file does not change their pending terrain. A missing or
 malformed installed file prevents creating a new campaign and reports an error.
 
-Historical worlds explicitly stay on the G9 surface route, including pending
-scenes. A new campaign's required policy cannot be removed to obtain that fallback.
+G9 worlds explicitly keep their historical surface route. Existing G10 worlds
+keep surface policy version 1 and their historical pending entrance decisions,
+including the known isolated-entrance defect in seed 20261023 at (44,8).
+The G11 correction applies to new version-2 campaigns; it does not upgrade old
+campaigns or repair visited scenes. Raw wilderness fields, tuning profiles, the
+field seed domain, G9 world plans and `GENERATION_REVISION = wg9` are unchanged.
+A new campaign's required policy/access revision cannot be removed to obtain an
+older fallback; saved scene provenance must match it.
 Changed or missing required terrain/decor definitions are rejected; restore
 compatible definitions and retry. Existing visited scenes and mutations retain
 their checkpoint ownership. F5 saves the explored state and F9 restores it through

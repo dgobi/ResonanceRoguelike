@@ -479,6 +479,7 @@ def _place_submap_entrance(local_map, submap, terrain_data, data=None):
 
     candidates = [(x, y) for x in range(1, w - 1) for y in range(1, h - 1)]
     rng.shuffle(candidates)
+    access_rejections = 0
     if layout is not None:
         rows = layout['layers']
         lw, lh = max(map(len, rows)), len(rows)
@@ -493,6 +494,7 @@ def _place_submap_entrance(local_map, submap, terrain_data, data=None):
             stair = stamp_layout_interior(staged, layout, cx, cy, terrain_data,
                       rng=context.rng('entrance-layout', submap.submap_id, cx, cy))
             if str(staged.tiles[stair]['terrain']) != 'stairs_down' or not access(staged, stair, footprint):
+                access_rejections += 1
                 continue
             staged.submap_links[stair] = submap.submap_id
             staged.protected_cells = protected | footprint
@@ -502,6 +504,10 @@ def _place_submap_entrance(local_map, submap, terrain_data, data=None):
             local_map.submap_links[stair] = submap.submap_id
             local_map.protected_cells = staged.protected_cells
             submap.surface_x, submap.surface_y = stair
+            if getattr(local_map, 'wilderness_access', None):
+                local_map.generation_diagnostics = getattr(local_map, 'generation_diagnostics', []) + [
+                    dict(kind='entrance', submap=submap.submap_id, status='authored-footprint',
+                         access_revision=1, access_rejections=access_rejections, stair=list(stair))]
             return
     # Explicit small fallback: a bare stair on existing accessible ground, with
     # a usable neighbouring tile. Never use a generic centre or overwrite content.
@@ -520,6 +526,8 @@ def _place_submap_entrance(local_map, submap, terrain_data, data=None):
                  reason='no valid authored footprint' if layout else 'no authored layout',
                  revision=context.revision)]
         submap.surface_x, submap.surface_y = xy
+        if getattr(local_map, 'wilderness_access', None):
+            local_map.generation_diagnostics[-1].update(access_revision=1,access_rejections=access_rejections,stair=list(xy))
         return
     raise GenerationError(f'{submap.submap_id}: no valid entrance footprint or accessible fallback')
 
