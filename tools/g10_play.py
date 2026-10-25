@@ -4,6 +4,7 @@ Only boot intercepts Engine.run; all travel, doors and interactions use handlers
 Save roots must be supplied by a caller's SAVE_DIR patch.
 """
 from collections import deque
+import heapq
 import os
 from pathlib import Path
 from unittest.mock import patch
@@ -45,10 +46,28 @@ def status(e):
                         for a in e.entities if a is not e.player])
 
 
-def path(e, goals):
+def path(e, goals, *, prefer_firm=False):
     from generation.access import enterable
     start = (e.player.x, e.player.y)
     occupied = {(a.x, a.y) for a in e.entities if a is not e.player and a.blocks_movement}
+    if prefer_firm:
+        parents={start:None};costs={start:0.};todo=[(0.,start)];goals=set(goals)
+        while todo:
+            cost,p=heapq.heappop(todo)
+            if cost!=costs[p]:continue
+            if p in goals:
+                result=[p]
+                while parents[result[-1]] is not None:result.append(parents[result[-1]])
+                return result[::-1]
+            for dx,dy in KEYS:
+                q=p[0]+dx,p[1]+dy
+                if q in occupied or not e.local_map.in_bounds(*q) or not enterable(e.local_map,q,e.data):continue
+                td=e.data.terrain.get(str(e.local_map.tiles[q]['terrain']),{})
+                threat=sum(max(0,7-abs(q[0]-a)-abs(q[1]-b))*2 for a,b in occupied)
+                next_cost=cost+td.get('move_cost',1)+threat
+                if next_cost<costs.get(q,float('inf')):
+                    costs[q]=next_cost;parents[q]=p;heapq.heappush(todo,(next_cost,q))
+        raise AssertionError('No firm-ground route to goals')
     parents = {start: None}
     todo = deque([start])
     goals = set(goals)
@@ -67,12 +86,12 @@ def path(e, goals):
     raise AssertionError('No real-input path to goals')
 
 
-def walk(e, goals, report, limit=500):
+def walk(e, goals, report, limit=500, *, prefer_firm=False):
     goals = set(goals)
     for _ in range(limit):
         if (e.player.x, e.player.y) in goals:
             return
-        route = path(e, goals)
+        route = path(e, goals,prefer_firm=prefer_firm)
         assert len(route) > 1
         a, b = route[:2]
         terrain = str(e.local_map.tiles[b]['terrain'])
@@ -81,7 +100,10 @@ def walk(e, goals, report, limit=500):
         report.append(dict(key=pygame.key.name(KEYS[b[0] - a[0], b[1] - a[1]]),
                            terrain=terrain, start=before['position'], end=[e.player.x, e.player.y],
                            chunk=[e.world_x, e.world_y], turn=e.world_time.turn,
-                           hp=e.player.fighter.hp, thirst=e.player.needs.thirst))
+                           hp=e.player.fighter.hp, thirst=e.player.needs.thirst,
+                           visible_natives=[dict(name=n.name,x=n.x,y=n.y,
+                                ai=getattr(getattr(getattr(n,'ai',None),'state',None),'name',None))
+                                for n in e.entities if n is not e.player and e.local_map.in_bounds(n.x,n.y) and e.local_map.visible[n.x,n.y]]))
         assert e.player.fighter.hp > 0, 'Expedition died'
     raise AssertionError('Real-input route exceeded finite movement budget')
 
@@ -102,14 +124,21 @@ def interact(e, xy, report):
     assert InteractionCursor.can_reach(e, *xy)
     e._handle_key(pygame.K_e)
     assert e.mode == GameMode.INTERACTION_CURSOR
-    e.interaction_cursor._cursor_x, e.interaction_cursor._cursor_y = xy
-    e.interaction_cursor.candidates = [xy]
+    assert xy in e.interaction_cursor.candidates
+    # Move the real cursor with the same directional keys a player uses.
+    while e.interaction_cursor._cursor_x != xy[0]:
+        e._handle_key(pygame.K_RIGHT if e.interaction_cursor._cursor_x < xy[0] else pygame.K_LEFT)
+    while e.interaction_cursor._cursor_y != xy[1]:
+        e._handle_key(pygame.K_DOWN if e.interaction_cursor._cursor_y < xy[1] else pygame.K_UP)
     e._handle_key(pygame.K_RETURN)
+    if e.text_reader.open:
+        e._handle_key(pygame.K_ESCAPE)
 
 
 def render(e, path, label, *, revealed=False):
     from rendering.sprite_registry import SpriteRegistry
     from rendering.renderer import Renderer
+    path = Path(path).resolve()
     old = Path.cwd()
     try:
         os.chdir(ROOT / 'roguelike')
