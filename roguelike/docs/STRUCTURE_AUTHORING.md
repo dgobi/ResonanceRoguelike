@@ -360,7 +360,7 @@ an explicit installation into an existing pool. No server or campaign is needed.
    and exported-text area are portable fallbacks. No direct-disk browser API is required.
 6. Run these commands from the repository root. The data stays installed as-is;
    `--register` adds the candidate only to a caller-owned in-memory pool and keeps
-   all 57 installed building candidates. No demonstration building is installed by G2.
+   all 58 installed building candidates. No demonstration building is installed by G2.
 
 ```powershell
 Set-Location 'G:\GameDev\RoguelikeProject'
