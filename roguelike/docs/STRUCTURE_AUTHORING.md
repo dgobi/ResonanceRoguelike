@@ -662,7 +662,7 @@ tables and weighted body/stele/creature kinds are invalid.
 
 The live catalog has 56 ordinary buildings, two plazas, six entrances and one
 60×16 authored lab. It retains the original 12 residential definitions. There are
-11 loot pools. One object per file is required. Duplicate building/plaza IDs are
+14 loot pools. One object per file is required. Duplicate building/plaza IDs are
 rejected together, with all source paths; entrances and submaps have their own
 namespaces. Generic item/entity list loaders are unaffected.
 
