@@ -29,10 +29,13 @@ def _project_edge(world, chunk, policy, data, points, section=None):
         tid = str(natural[x-left,y-top]) if natural is not None else None
         # Same water/road overlay order as planned_scene; owned sites are
         # conservatively excluded rather than predicting their interiors.
+        water_core = False
         for water in section['waters']:
             for r in water['rects']:
-                if inside(p, expand(r,2)): tid = 'river_bank'
-                if inside(p, r): tid = 'river_water'
+                if inside(p, expand(r,2)) and not water_core: tid = 'river_bank'
+                if inside(p, r):
+                    tid = 'river_water'
+                    water_core = True
         if any(inside(p,r) for road in section['routes'] for r in road['rects']):
             if tid != 'river_water': tid = 'road_0'
         if any(inside(p,r) for crossing in section['crossings'] for r in crossing['deck']):

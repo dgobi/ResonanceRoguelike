@@ -155,3 +155,18 @@ class G11Access(unittest.TestCase):
             self.assertEqual(json.loads(json.dumps(current)),original)
             rows.append(dict(seed=seed,plan_identity=digest(w.plan),coarse_exact=True))
         self.evidence('g11-macro.json',dict(passed=True,rows=rows))
+
+    def test_reciprocal_projection_preserves_water_core_under_later_bank(self):
+        from generation.exterior_access import _project_edge
+        ch=self.world.get(0,64);y=64*43+20
+        section=dict(waters=[dict(rects=[[0,y,2,y+1],[2,y,4,y+1]])],
+                     routes=[],crossings=[],placements=[])
+        # Shipped river water is walkable. Use a controlled blocking definition
+        # to distinguish core/bank projection under the same overlay geometry.
+        data=copy.copy(self.data);data.terrain=copy.deepcopy(self.data.terrain)
+        data.terrain['river_water']['walkable']=False
+        with patch('generation.exterior_access.sample',return_value=dict(terrain=np.full((1,1),'grass'))):
+            points=_project_edge(self.world,ch,self.world.surface_policy,data,[(0,20)],section)
+        self.assertEqual(points,set(),'Later bank must not replace an existing authoritative water core')
+        self.evidence('g11-water-projection.json',dict(passed=True,overlapping_later_bank_cannot_admit_water=True,
+            controls='Synthetic overlapping water rectangles and blocking river definition; shipped river water remains walkable.'))
