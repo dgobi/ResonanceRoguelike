@@ -1,0 +1,4 @@
+G10 terrain-lifecycle
+G10 diagnostic
+G10 expedition
+{"passed": true, "evidence": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\final-a\\g10"}

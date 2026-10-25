@@ -1,0 +1,39 @@
+{
+  "controls": "two identical-recipe parents, two same-asset children per complete scene; fixture positioning, stationary turns; real transfer/save/cold-load/F9",
+  "mutations": [
+    {
+      "parent": "site-74-34-16-21-N",
+      "child": "site-74-34-16-21-N-slot-shrine-building",
+      "before": 2,
+      "after": 1,
+      "interaction": "real one-item transfer with fixture positioning"
+    },
+    {
+      "parent": "site-74-34-16-21-N",
+      "child": "site-74-34-16-21-N-slot-shelter-building",
+      "before": 3,
+      "after": 2,
+      "interaction": "real one-item transfer with fixture positioning"
+    },
+    {
+      "parent": "site-81-34-48-21-N",
+      "child": "site-81-34-48-21-N-slot-shrine-building",
+      "before": 3,
+      "after": 2,
+      "interaction": "real one-item transfer with fixture positioning"
+    },
+    {
+      "parent": "site-81-34-48-21-N",
+      "child": "site-81-34-48-21-N-slot-shelter-building",
+      "before": 2,
+      "after": 1,
+      "interaction": "real one-item transfer with fixture positioning"
+    }
+  ],
+  "reverse_visits": true,
+  "checkpoint_scope": "two explored compound scenes plus actual startup scenes",
+  "scene_count": 4,
+  "bytes": 20046947,
+  "save_seconds": 0.7945514000020921,
+  "cold_seconds": 0.6960671000415459
+}

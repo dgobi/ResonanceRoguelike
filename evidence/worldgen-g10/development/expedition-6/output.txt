@@ -1,0 +1,141 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 11
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+[harvest] tile=(38,19) terrain=tall_grass harvestable=False decor=waystone_plinth decor_harvestable=False
+[harvest] tile=(51,23) terrain=grass harvestable=False decor=shroom_sulphur_cap decor_harvestable=True
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+[LP-STORED] 0 live pursuers: []
+[CHUNK] S player=(55,42) dest=(55,43) -> entry=(55,0) world (73,99)->(73,100)
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+[LP-CHECK] Hollow Knight state=HUNTING dist=5 can_cross=True acd=0 -> EXTRACTED
+[LIVE-EXTRACT] Hollow Knight from (73,100) lk=(79,12)
+[LP-STORED] 1 live pursuers: ['Hollow Knight']
+[CHUNK] E player=(79,17) dest=(80,17) -> entry=(0,17) world (73,100)->(74,100)
+[LP-TICK] Hollow Knight at (77,12) in chunk(73,100) virtual_player=(-999,-999) state=HUNTING lkx=79
+[LP-POST] Hollow Knight now at (77,12) state=HUNTING lkx=79
+[LP-CROSS-CHECK] Hollow Knight pos=(77,12) lkx=79 lky=12 cox=0 coy=0 MAP_W=80 MAP_H=43
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+[LP-TICK] Hollow Knight at (77,12) in chunk(73,100) virtual_player=(-999,-999) state=HUNTING lkx=79
+[LP-POST] Hollow Knight now at (78,12) state=HUNTING lkx=79
+[LP-CROSS-CHECK] Hollow Knight pos=(78,12) lkx=79 lky=12 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (78,12) in chunk(73,100) virtual_player=(-999,-999) state=HUNTING lkx=79
+[LP-POST] Hollow Knight now at (78,12) state=HUNTING lkx=79
+[LP-CROSS-CHECK] Hollow Knight pos=(78,12) lkx=79 lky=12 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (78,12) in chunk(73,100) virtual_player=(-999,-999) state=HUNTING lkx=79
+[LP-POST] Hollow Knight now at (79,12) state=HUNTING lkx=79
+[LP-CROSS-CHECK] Hollow Knight pos=(79,12) lkx=79 lky=12 cox=1 coy=0 MAP_W=80 MAP_H=43
+[LP-CROSSING] Hollow Knight crossed to (74,100) player_chunk=(74,100) entry=(0,12)
+[LIVE-CROSS] Hollow Knight (73,100) -> player chunk (74,100) entry (0,12)
+[LIVE-PENDING] Hollow Knight delay=6 entry=(0,17)
+[LIVE-ARRIVE-DEFERRED] Hollow Knight at (1,17) player=(0,9)
+[LP-CHECK] Hollow Knight state=HUNTING dist=13 can_cross=True acd=0 -> EXTRACTED
+[LIVE-EXTRACT] Hollow Knight from (74,100) lk=(1,0)
+[LP-STORED] 1 live pursuers: ['Hollow Knight']
+[CHUNK] N player=(0,0) dest=(0,-1) -> entry=(0,42) world (74,100)->(74,99)
+[LP-TICK] Hollow Knight at (1,13) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,12) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,12) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+[LP-TICK] Hollow Knight at (1,12) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,12) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,12) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-STORED] 1 live pursuers: ['Hollow Knight']
+[CHUNK] W player=(0,42) dest=(-1,42) -> entry=(79,42) world (74,99)->(73,99)
+[LP-TICK] Hollow Knight at (1,12) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,11) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,11) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+[LP-TICK] Hollow Knight at (1,11) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,11) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,11) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,11) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,10) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,10) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,10) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,10) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,10) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,10) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,9) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,9) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,9) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,9) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,9) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,9) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,8) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,8) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,8) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,8) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,8) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,8) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,7) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,7) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,7) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,7) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,7) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,7) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,6) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,6) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,6) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,6) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,6) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,6) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,5) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,5) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,5) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,5) state=HUNTING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,5) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LP-TICK] Hollow Knight at (1,5) in chunk(74,100) virtual_player=(-999,-999) state=HUNTING lkx=1
+[LP-POST] Hollow Knight now at (1,4) state=WANDERING lkx=1
+[LP-CROSS-CHECK] Hollow Knight pos=(1,4) lkx=1 lky=0 cox=0 coy=0 MAP_W=80 MAP_H=43
+[LIVE-TIMEOUT] Hollow Knight abandoned pursuit
+[harvest] tile=(38,19) terrain=tall_grass harvestable=False decor=waystone_plinth decor_harvestable=False
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets

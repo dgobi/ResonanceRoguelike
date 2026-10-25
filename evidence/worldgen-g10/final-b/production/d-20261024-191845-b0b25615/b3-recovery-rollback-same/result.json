@@ -1,0 +1,746 @@
+{
+  "run_id": "d-20261024-191845-b0b25615",
+  "scenario": "recovery",
+  "phase": "same",
+  "flavor": "candidate",
+  "pid": 31432,
+  "cwd": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "argv": [
+    "G:\\GameDev\\RoguelikeProject\\tools\\b3_worker.py",
+    "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\b3-recovery-rollback-same\\job.json"
+  ],
+  "seed": 20261020,
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "os": "Windows-10-10.0.26200-SP0",
+  "environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYTHONHASHSEED": "20261020",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1",
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1"
+  },
+  "versions": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "checks": [
+    {
+      "case": "B3-01",
+      "property": "save",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B3-01",
+      "property": "save",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B3-04",
+      "property": "recover or explicit rollback succeeds",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B3-04",
+      "property": "recovered complete older state",
+      "expected": {
+        "marker": "grass",
+        "hp": 41,
+        "turn": 7,
+        "world_name": "old checkpoint",
+        "timer": 17,
+        "inactive": "grass"
+      },
+      "observed": {
+        "marker": "grass",
+        "hp": 41,
+        "turn": 7,
+        "world_name": "old checkpoint",
+        "timer": 17,
+        "inactive": "grass"
+      },
+      "passed": true
+    },
+    {
+      "case": "B3-04",
+      "property": "recovery is visible",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B3-04",
+      "property": "recovery/rejection is read-only",
+      "expected": {
+        ".sessions/4fc9de7eaee84e48b0f4864365ad6777/chunks/0_64.pkl": {
+          "bytes": 504094,
+          "sha256": "70f65b2300ece3d8e92d891917a0a311141a6aded51c54ecaf42aa8e0f44b656"
+        },
+        ".sessions/4fc9de7eaee84e48b0f4864365ad6777/chunks/1_64.pkl": {
+          "bytes": 496222,
+          "sha256": "3309d0d45e453a2d1aa88b419d931289bbff9f52cccf24696825db6b551bc312"
+        },
+        ".sessions/4fc9de7eaee84e48b0f4864365ad6777/chunks/sub_0_64_0.pkl": {
+          "bytes": 500694,
+          "sha256": "6b450927edea71a9da18f60a16b16d0b16508a5f717c1b0a717e25bca668d435"
+        },
+        "BACKUP.json": {
+          "bytes": 101,
+          "sha256": "7f5b420343f5cf753a52788c9b1bbd1df5df64ae22d5fee3b7d18d971de5b41d"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/chunks/0_64.pkl": {
+          "bytes": 504094,
+          "sha256": "70f65b2300ece3d8e92d891917a0a311141a6aded51c54ecaf42aa8e0f44b656"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/chunks/1_64.pkl": {
+          "bytes": 496222,
+          "sha256": "6d8de52c132ea8b9478b5c7ad9ce84e04c4a5bb5ffbbec11d64b9695d06550ff"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/chunks/sub_0_64_0.pkl": {
+          "bytes": 500694,
+          "sha256": "3ba663d644a90314f760dbf7e7f89e749c3a1bd8683cd1c723ec192c051c73ed"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/manifest.json": {
+          "bytes": 917,
+          "sha256": "dc8dac48dcdfda7e014d9b41cdf99e79fb74fe5c63fbb95149cb496a5cdb841c"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/meta.json": {
+          "bytes": 147,
+          "sha256": "439eed4ee9bcd9bf1545f753c64337cef02ae174dbe2f9fa44480f261f3093a7"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/player.json": {
+          "bytes": 8853,
+          "sha256": "9ddfca847aa7c158220d0a580a2ba2dcd106242da60c4258fb8b4c02923b7a59"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/world.json": {
+          "bytes": 17460924,
+          "sha256": "860f6d9f688bda4617722f178a6869b0ca9ba1fc7da4d981de3a2148202da7a0"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/chunks/0_64.pkl": {
+          "bytes": 504094,
+          "sha256": "70f65b2300ece3d8e92d891917a0a311141a6aded51c54ecaf42aa8e0f44b656"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/chunks/1_64.pkl": {
+          "bytes": 496222,
+          "sha256": "9f729d585e6e0f56689887128a05d49aca3bf5e441b6e621b5481643a23e702e"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/chunks/sub_0_64_0.pkl": {
+          "bytes": 500694,
+          "sha256": "cd1254a752efb099e345eb68f3c94be019bf1f5cf4cfb4ad21b6e6bb52b449ef"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/manifest.json": {
+          "bytes": 917,
+          "sha256": "a0f92bd18952143879bc97774062174b9b51269afa98fcfac4f334c38a0c91f9"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/meta.json": {
+          "bytes": 148,
+          "sha256": "d06312d6f011ea21ae8ae66717b168969e87534bd99a7c815d6bcb19b2c81bc5"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/player.json": {
+          "bytes": 8854,
+          "sha256": "a43321d353bf8a850acb608c79dc182fd5265d18a01a5368b9df8ab7d1617e02"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/world.json": {
+          "bytes": 17460924,
+          "sha256": "78653cd8c59a93c52282279178386c5a2738f9a88e9aedc1620e34c6b46dbe87"
+        },
+        "HEAD.json": {
+          "bytes": 133,
+          "sha256": "9c699abe23397d8dc8735fbad0b8be44bbb758ed3df37e4e4c149a993a143fa4"
+        },
+        "world.json": {
+          "bytes": 24,
+          "sha256": "04719b689e72eab01f807fd2dd74748c842208f6cc130ad04fdba842ca8a89ca"
+        }
+      },
+      "observed": {
+        ".sessions/4fc9de7eaee84e48b0f4864365ad6777/chunks/0_64.pkl": {
+          "bytes": 504094,
+          "sha256": "70f65b2300ece3d8e92d891917a0a311141a6aded51c54ecaf42aa8e0f44b656"
+        },
+        ".sessions/4fc9de7eaee84e48b0f4864365ad6777/chunks/1_64.pkl": {
+          "bytes": 496222,
+          "sha256": "3309d0d45e453a2d1aa88b419d931289bbff9f52cccf24696825db6b551bc312"
+        },
+        ".sessions/4fc9de7eaee84e48b0f4864365ad6777/chunks/sub_0_64_0.pkl": {
+          "bytes": 500694,
+          "sha256": "6b450927edea71a9da18f60a16b16d0b16508a5f717c1b0a717e25bca668d435"
+        },
+        "BACKUP.json": {
+          "bytes": 101,
+          "sha256": "7f5b420343f5cf753a52788c9b1bbd1df5df64ae22d5fee3b7d18d971de5b41d"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/chunks/0_64.pkl": {
+          "bytes": 504094,
+          "sha256": "70f65b2300ece3d8e92d891917a0a311141a6aded51c54ecaf42aa8e0f44b656"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/chunks/1_64.pkl": {
+          "bytes": 496222,
+          "sha256": "6d8de52c132ea8b9478b5c7ad9ce84e04c4a5bb5ffbbec11d64b9695d06550ff"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/chunks/sub_0_64_0.pkl": {
+          "bytes": 500694,
+          "sha256": "3ba663d644a90314f760dbf7e7f89e749c3a1bd8683cd1c723ec192c051c73ed"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/manifest.json": {
+          "bytes": 917,
+          "sha256": "dc8dac48dcdfda7e014d9b41cdf99e79fb74fe5c63fbb95149cb496a5cdb841c"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/meta.json": {
+          "bytes": 147,
+          "sha256": "439eed4ee9bcd9bf1545f753c64337cef02ae174dbe2f9fa44480f261f3093a7"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/player.json": {
+          "bytes": 8853,
+          "sha256": "9ddfca847aa7c158220d0a580a2ba2dcd106242da60c4258fb8b4c02923b7a59"
+        },
+        "generations/g-064865fa85ec4baf8ff438bc992a8fa3/world.json": {
+          "bytes": 17460924,
+          "sha256": "860f6d9f688bda4617722f178a6869b0ca9ba1fc7da4d981de3a2148202da7a0"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/chunks/0_64.pkl": {
+          "bytes": 504094,
+          "sha256": "70f65b2300ece3d8e92d891917a0a311141a6aded51c54ecaf42aa8e0f44b656"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/chunks/1_64.pkl": {
+          "bytes": 496222,
+          "sha256": "9f729d585e6e0f56689887128a05d49aca3bf5e441b6e621b5481643a23e702e"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/chunks/sub_0_64_0.pkl": {
+          "bytes": 500694,
+          "sha256": "cd1254a752efb099e345eb68f3c94be019bf1f5cf4cfb4ad21b6e6bb52b449ef"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/manifest.json": {
+          "bytes": 917,
+          "sha256": "a0f92bd18952143879bc97774062174b9b51269afa98fcfac4f334c38a0c91f9"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/meta.json": {
+          "bytes": 148,
+          "sha256": "d06312d6f011ea21ae8ae66717b168969e87534bd99a7c815d6bcb19b2c81bc5"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/player.json": {
+          "bytes": 8854,
+          "sha256": "a43321d353bf8a850acb608c79dc182fd5265d18a01a5368b9df8ab7d1617e02"
+        },
+        "generations/g-d29b659d07624e5b9feded1ef6c8d8bb/world.json": {
+          "bytes": 17460924,
+          "sha256": "78653cd8c59a93c52282279178386c5a2738f9a88e9aedc1620e34c6b46dbe87"
+        },
+        "HEAD.json": {
+          "bytes": 133,
+          "sha256": "9c699abe23397d8dc8735fbad0b8be44bbb758ed3df37e4e4c149a993a143fa4"
+        },
+        "world.json": {
+          "bytes": 24,
+          "sha256": "04719b689e72eab01f807fd2dd74748c842208f6cc130ad04fdba842ca8a89ca"
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "B3-01",
+      "property": "save after recovery",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "B3-04",
+      "property": "new branch derives from recovered checkpoint",
+      "expected": "g-064865fa85ec4baf8ff438bc992a8fa3",
+      "observed": "g-064865fa85ec4baf8ff438bc992a8fa3",
+      "passed": true
+    },
+    {
+      "case": "B3-04",
+      "property": "fresh startup seed available",
+      "expected": [
+        "load",
+        20261020
+      ],
+      "observed": [
+        "load",
+        20261020
+      ],
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "actual copied source binding",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    }
+  ],
+  "trace": [],
+  "defects": [],
+  "completed": true,
+  "suite": "b3",
+  "variant": "rollback",
+  "imported_sources": {
+    "components.ai": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\ai.py",
+      "relative": "components/ai.py",
+      "sha256": "0f39cb721d197ae0ff318972c20b51bf220026e8de31f1b8caded65a28d99924"
+    },
+    "components.corruption": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\corruption.py",
+      "relative": "components/corruption.py",
+      "sha256": "70010c3875aa7b42b7285ee98aefb4ee50e2e579d07dfd0f9dafefff326517b1"
+    },
+    "components.equipment": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\equipment.py",
+      "relative": "components/equipment.py",
+      "sha256": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7"
+    },
+    "components.fighter": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\fighter.py",
+      "relative": "components/fighter.py",
+      "sha256": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79"
+    },
+    "components.inventory": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\inventory.py",
+      "relative": "components/inventory.py",
+      "sha256": "a764a8ea6a67977967d81697aaa87af9740e7fcd34f04f4176cc3c4038ffa791"
+    },
+    "components.language": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\language.py",
+      "relative": "components/language.py",
+      "sha256": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4"
+    },
+    "components.level": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\level.py",
+      "relative": "components/level.py",
+      "sha256": "001342e1479f20dcdccb0e12f1534172c59c4c20f7f96f2efdaa25263323a652"
+    },
+    "components.light_source": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\light_source.py",
+      "relative": "components/light_source.py",
+      "sha256": "de612dbee3cabda4573e40eabe5e8ee8222e80ac77bb189b5728708dbdeefe7d"
+    },
+    "components.needs": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\needs.py",
+      "relative": "components/needs.py",
+      "sha256": "a5238691b740ee2f5a84adfa4dd26ffa2f277f5a63955a053de4f46ebdef76e4"
+    },
+    "components.perception": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\perception.py",
+      "relative": "components/perception.py",
+      "sha256": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a"
+    },
+    "components.perks": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\perks.py",
+      "relative": "components/perks.py",
+      "sha256": "38325a0cc89f0acf23a16e3fb68b13ea3aaf50e3b58d7ec692b051c5c97f0915"
+    },
+    "config": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\config.py",
+      "relative": "config.py",
+      "sha256": "35bd35b4f142c79c2ec891ac64ba218cc5e3f4b7d421fa836faa1eb7d0a279e8"
+    },
+    "engine.ai_system": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\ai_system.py",
+      "relative": "engine/ai_system.py",
+      "sha256": "0d72a7d750315d4a6f4c14e512c9ec4039fc86d87a40386976723aa2c8d34412"
+    },
+    "engine.checkpoints": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\checkpoints.py",
+      "relative": "engine/checkpoints.py",
+      "sha256": "5961f6e5c5c0561d95fd37056d55eebdfb90fa1ecde9540ef6c1c97ff9bf7c57"
+    },
+    "engine.creature_factory": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\creature_factory.py",
+      "relative": "engine/creature_factory.py",
+      "sha256": "cd3fa4db9716a0d61b1158f2e06037b9ff129d16da703b908de8c657a773a44d"
+    },
+    "engine.data_loader": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\data_loader.py",
+      "relative": "engine/data_loader.py",
+      "sha256": "6240d97b546ea813dbc5fc4d2772738bf6cb553f647079ab48ab9a1e0ab3b6ff"
+    },
+    "engine.debug": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\debug.py",
+      "relative": "engine/debug.py",
+      "sha256": "421f974675864114703c6436c3afabc9e241fdcf92286152155e7c7ccabafad1"
+    },
+    "engine.display_config": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\display_config.py",
+      "relative": "engine/display_config.py",
+      "sha256": "42e08e5e32aa74c96172e5104a14ff09f43fdbb68251a0f2dfd909192a963ba8"
+    },
+    "engine.effect_lifecycle": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\effect_lifecycle.py",
+      "relative": "engine/effect_lifecycle.py",
+      "sha256": "8486645aff1c325f67c30f38d4e5ff7852b5e249ed3ea06d69a94deb773c7c04"
+    },
+    "engine.engine": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\engine.py",
+      "relative": "engine/engine.py",
+      "sha256": "01619e9d1035767beaabfaa3ba7130e2667efdb243b2bf4db6cca07811eea0b2"
+    },
+    "engine.health_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\health_screen.py",
+      "relative": "engine/health_screen.py",
+      "sha256": "2d94f02896ae0ffa93a0ff8c9c4ae1bce500bcf3cc12fbc3a30f0a9a344b2ffd"
+    },
+    "engine.hooks": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\hooks.py",
+      "relative": "engine/hooks.py",
+      "sha256": "8bf5b46ef62f1331edb772b72b4f5b6ec3c1a8c2b392b9e26cbea584a64f4d2a"
+    },
+    "engine.interaction_cursor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\interaction_cursor.py",
+      "relative": "engine/interaction_cursor.py",
+      "sha256": "07d4e9286d313238d82105154bd4d02398ca014e0629d929fe90d880d9a56019"
+    },
+    "engine.inventory_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\inventory_screen.py",
+      "relative": "engine/inventory_screen.py",
+      "sha256": "6586456cee2a1162e607235d905f3b8955484fa96fb7202129721f3c1bd834fa"
+    },
+    "engine.item_factory": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\item_factory.py",
+      "relative": "engine/item_factory.py",
+      "sha256": "2f4ae5c163b22486228f0d61ea54e1644ffa75f4027ffff130169ac55999cac3"
+    },
+    "engine.item_system": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\item_system.py",
+      "relative": "engine/item_system.py",
+      "sha256": "0119b3a42feb0edf43f1aab81c9aa8fad5232f973ba94495a9c31425267259f1"
+    },
+    "engine.look_mode": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\look_mode.py",
+      "relative": "engine/look_mode.py",
+      "sha256": "2b3d32cdaaaa6304746b9d31e20db0b1d0827f7d11755912f2def25dbfadb04b"
+    },
+    "engine.loot_roller": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\loot_roller.py",
+      "relative": "engine/loot_roller.py",
+      "sha256": "7bb1b1be54d63de5dd84483a15224e5584070772a7d38d75cfafd095bfdbdce1"
+    },
+    "engine.message_log": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\message_log.py",
+      "relative": "engine/message_log.py",
+      "sha256": "c4a3e2049d21665e87aea57b8648624c60929fbab9a55cc751ba6f03af1d9ed3"
+    },
+    "engine.palette": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\palette.py",
+      "relative": "engine/palette.py",
+      "sha256": "646457ba8998f32494169d1833c129fb4c64cab05a94c62eaaec3d696702baab"
+    },
+    "engine.perk_handlers": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\perk_handlers.py",
+      "relative": "engine/perk_handlers.py",
+      "sha256": "f8299dcca9dfdf043fade946957b9e163c97e5b140a1c15cf2e56ec8ec5ae3e8"
+    },
+    "engine.reality_bubble": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\reality_bubble.py",
+      "relative": "engine/reality_bubble.py",
+      "sha256": "d52f1f040ef988b70ae5ec9126ec1a95fa3649bfedf4c11da75d0386374dbded"
+    },
+    "engine.resonance_system": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\resonance_system.py",
+      "relative": "engine/resonance_system.py",
+      "sha256": "3211dcbb1062f5082399fd88f90f69f94e8332f7d9cb5290651267c267493da9"
+    },
+    "engine.save_components": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\save_components.py",
+      "relative": "engine/save_components.py",
+      "sha256": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e"
+    },
+    "engine.save_manager": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\save_manager.py",
+      "relative": "engine/save_manager.py",
+      "sha256": "653140956ad63676f392c3d826e7b16831dac4298c593533779572b30c7129e9"
+    },
+    "engine.scene_generation": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\scene_generation.py",
+      "relative": "engine/scene_generation.py",
+      "sha256": "5b174af57b09c742cf5ca6602893299d4d79d0ce27888ffcc4b216c310a5ca95"
+    },
+    "engine.text_reader": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\text_reader.py",
+      "relative": "engine/text_reader.py",
+      "sha256": "6a8932e43bb1bd78155ad80c644b55ae219da94c17f3a7d72b6085cde2044969"
+    },
+    "engine.ui": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\ui.py",
+      "relative": "engine/ui.py",
+      "sha256": "c041403400a300f54ce76e4e36157c91bae1aa60207821654a6d9125afd93655"
+    },
+    "engine.visual_events": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\visual_events.py",
+      "relative": "engine/visual_events.py",
+      "sha256": "9950362cadb9819e25259457ed7061175e9cff5d2b6a23593ec3989251588d3b"
+    },
+    "engine.weather": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\weather.py",
+      "relative": "engine/weather.py",
+      "sha256": "51d4d49731e7687994db79b82dd6fe9e3f8ff0f4e309144be0e735f080108277"
+    },
+    "engine.world_time": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\world_time.py",
+      "relative": "engine/world_time.py",
+      "sha256": "b4669d0f4cfe4bb037a88b2170d606c29408b758f9f2375fba9ad46d02fbea6c"
+    },
+    "entities.actor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\actor.py",
+      "relative": "entities/actor.py",
+      "sha256": "34600dc6f36d1f3f315f59ec296be4b4f1871bd3031ae582e8fdeda783702822"
+    },
+    "entities.entity": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\entity.py",
+      "relative": "entities/entity.py",
+      "sha256": "652c3124a2af45519a8c57f6aad1e4fe53f68477cdf8411ddb6c337f3f2b5a53"
+    },
+    "entities.item": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\item.py",
+      "relative": "entities/item.py",
+      "sha256": "d85214b852cf00d7b9b7615a388ec959a6ae94189e3a845b36729634a8a28e7b"
+    },
+    "generation.access": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\access.py",
+      "relative": "generation/access.py",
+      "sha256": "9d0aaedac978d18f2b957d5c026942aab85a8138925e68322aece1942109519f"
+    },
+    "generation.compound_integrity": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\compound_integrity.py",
+      "relative": "generation/compound_integrity.py",
+      "sha256": "137faddc8535b93396c1adfba995c800ddc9a38f5a9689b12c2962a3a45a33f7"
+    },
+    "generation.compounds": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\compounds.py",
+      "relative": "generation/compounds.py",
+      "sha256": "06deecdbf48880b4e51710eb4ec186dc2a61ab17dd8bd27fededfa94db4cd7f7"
+    },
+    "generation.context": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\context.py",
+      "relative": "generation/context.py",
+      "sha256": "48a06073d60c2883dcad3b3ad3bcd5512ab4b4c89ded3912ad48bd7a83ff0baa"
+    },
+    "generation.country_network": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\country_network.py",
+      "relative": "generation/country_network.py",
+      "sha256": "b8d6ceff95184caae9b116eabb2c5e668d8b6f9d43e50c12c3220a345ac4ae84"
+    },
+    "generation.decor_utils": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\decor_utils.py",
+      "relative": "generation/decor_utils.py",
+      "sha256": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93"
+    },
+    "generation.entrance_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\entrance_gen.py",
+      "relative": "generation/entrance_gen.py",
+      "sha256": "c6aa0c0364ca06498c6b36dd2dbba36c2b1f6abd56301f8d23b5f4f55f63b6ed"
+    },
+    "generation.floor_object_utils": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\floor_object_utils.py",
+      "relative": "generation/floor_object_utils.py",
+      "sha256": "ededc552d7530c146aec85fe569d661980697cce6f3e087039b1bb287b710319"
+    },
+    "generation.layout_stamper": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\layout_stamper.py",
+      "relative": "generation/layout_stamper.py",
+      "sha256": "2d60d9316d935c64ca27f44b0c4be397d39b3d98e65d3bba9dd7f1c0c77efdd8"
+    },
+    "generation.local_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\local_gen.py",
+      "relative": "generation/local_gen.py",
+      "sha256": "303560200988b4d80094b5a5f65eed82670e77ffaf6b303a7f2373834dc1cd69"
+    },
+    "generation.network_metrics": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\network_metrics.py",
+      "relative": "generation/network_metrics.py",
+      "sha256": "5b9cd31a680be379854d5d518d62ab7320b9df62f07138696a2fc28d3f7183e2"
+    },
+    "generation.parent_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\parent_selection.py",
+      "relative": "generation/parent_selection.py",
+      "sha256": "92b2dc7885cfb608fabf0d62d7076ec42cefab3097611a59c55cc11140f8a04c"
+    },
+    "generation.placement": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\placement.py",
+      "relative": "generation/placement.py",
+      "sha256": "2fb1d1c815d042041d63e971a08564dda0337aaae51c0d6a49234a2d11e679ee"
+    },
+    "generation.plan_integrity": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\plan_integrity.py",
+      "relative": "generation/plan_integrity.py",
+      "sha256": "9189392a8ed1c1433f5a59a4ccae7bd37b844e84108a470c7e6c44492dcef8ca"
+    },
+    "generation.planned_dressing": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\planned_dressing.py",
+      "relative": "generation/planned_dressing.py",
+      "sha256": "2360c2fec2983349dafbebd61e281e1ac5204fc9e48f2119ad015097f434387e"
+    },
+    "generation.planned_scene": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\planned_scene.py",
+      "relative": "generation/planned_scene.py",
+      "sha256": "a84899a7925b44538fce8e7da738fb22e40369c6926353aed926bef5ca2cf6e0"
+    },
+    "generation.poi_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\poi_selection.py",
+      "relative": "generation/poi_selection.py",
+      "sha256": "23078f0e16a0c5cf58a0feff03278e61c72ff4929741fc387423de97e078cca4"
+    },
+    "generation.ports": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\ports.py",
+      "relative": "generation/ports.py",
+      "sha256": "1866817869a7f259ed1b02c0559caeb501037539a44272924b9e88d7d062afb0"
+    },
+    "generation.region_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\region_gen.py",
+      "relative": "generation/region_gen.py",
+      "sha256": "0dfad56aad9aaba010c752f464e76b0b30a9c609875c35cad545adffe1e1a503"
+    },
+    "generation.road_network": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\road_network.py",
+      "relative": "generation/road_network.py",
+      "sha256": "ae757cdfb5b41bc02a481e2928464851ab48d8b385cb62c4c5bbeb2a13ebaeeb"
+    },
+    "generation.scene_adapters": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\scene_adapters.py",
+      "relative": "generation/scene_adapters.py",
+      "sha256": "c62d9dfb362e111531f75020750b9e7e938d2fe8e5b467a87b1307afc1ccde5b"
+    },
+    "generation.settlement_context": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\settlement_context.py",
+      "relative": "generation/settlement_context.py",
+      "sha256": "20badd4af5a5f758b50a7145a2eccf40ac6203f046f297226eaaeca5b7d83265"
+    },
+    "generation.settlement_layout": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\settlement_layout.py",
+      "relative": "generation/settlement_layout.py",
+      "sha256": "ee277c46b401e98b0e0184314097841471b6ab895e1884272ca4293e8fbb1686"
+    },
+    "generation.settlement_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\settlement_selection.py",
+      "relative": "generation/settlement_selection.py",
+      "sha256": "bdae834868a2dd39ae44cdcea4dff0b45142f9434157e39844f39aa35511ac6a"
+    },
+    "generation.spawn_specs": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\spawn_specs.py",
+      "relative": "generation/spawn_specs.py",
+      "sha256": "8dc9d547a4afb022a508069e7e51774bc6091d5ff3fc82a4cf1006bf98b57c43"
+    },
+    "generation.structure_contract": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\structure_contract.py",
+      "relative": "generation/structure_contract.py",
+      "sha256": "b71bdb9c5aaf8bb717bc26b396f0d48a458ecc56be12b631a650b55dd2f4225c"
+    },
+    "generation.structure_preview": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\structure_preview.py",
+      "relative": "generation/structure_preview.py",
+      "sha256": "4f5f09406763350013bdbdb1fcb75d2a5b91f726b4f7113ce1a90050808937bb"
+    },
+    "generation.town_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\town_gen.py",
+      "relative": "generation/town_gen.py",
+      "sha256": "cf9091724825391b18d742e6e459e0640b594eb4ea2490252c130f83d284e424"
+    },
+    "generation.wilderness": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\wilderness.py",
+      "relative": "generation/wilderness.py",
+      "sha256": "0cfd46ae6e3cd8bb39ecf69817b4246d1f18052aa646e593f02c14ffe8acf070"
+    },
+    "generation.world_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\world_gen.py",
+      "relative": "generation/world_gen.py",
+      "sha256": "724d3e5e230b803dd8acf51239ba1cef7a2102a103a3ac2045ea15eeb851331d"
+    },
+    "generation.world_plan": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\world_plan.py",
+      "relative": "generation/world_plan.py",
+      "sha256": "b77cdfe145c2ba1eb13cbf97677e72de37663f7ed2f95c2530354ff7799f587b"
+    },
+    "main": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\main.py",
+      "relative": "main.py",
+      "sha256": "78de441e72c44958239b92c81387242d8fdf22d4adcfc03a5732f7cc5a75ae1e"
+    },
+    "rendering.callouts": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\callouts.py",
+      "relative": "rendering/callouts.py",
+      "sha256": "325db657d9c74bea22e5e4200f7860bf2bfc7a816f16e1d53c348eeb5be75c6c"
+    },
+    "rendering.craft_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\craft_screen.py",
+      "relative": "rendering/craft_screen.py",
+      "sha256": "4564ee9cddd9d9754460d3a3bb0b4185e254dd6ce8ced9b7835fc76b9d5fb219"
+    },
+    "rendering.decor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\decor.py",
+      "relative": "rendering/decor.py",
+      "sha256": "406e26318ac3fc0139c83bc2f434100b1158d849a35e792c3ca2c345a8bd9950"
+    },
+    "rendering.glyph_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\glyph_gen.py",
+      "relative": "rendering/glyph_gen.py",
+      "sha256": "b7fde731fbadf2257cd2fa7c8fb3588348cfb929b419f23b8144c98d78037c45"
+    },
+    "rendering.lexicon_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\lexicon_screen.py",
+      "relative": "rendering/lexicon_screen.py",
+      "sha256": "1ebdd83253521a0644ac814152a89eafbb8174f31a9649affc671b622b7323f7"
+    },
+    "rendering.particles": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\particles.py",
+      "relative": "rendering/particles.py",
+      "sha256": "76d7642d530bdf62a0412e1428f43b06aba9b6011327298b0cdcb92eeacf479d"
+    },
+    "rendering.perk_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\perk_screen.py",
+      "relative": "rendering/perk_screen.py",
+      "sha256": "02eeec7bc641f89cf79665f67f85efdd0895f25db54b47b6de4bb54c2b46dffd"
+    },
+    "rendering.renderer": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\renderer.py",
+      "relative": "rendering/renderer.py",
+      "sha256": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08"
+    },
+    "rendering.sprite_registry": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\sprite_registry.py",
+      "relative": "rendering/sprite_registry.py",
+      "sha256": "814c1a6c4c1d56a0744a93feeccc2bf2a851becd98c3d40d09ddf19e4f997323"
+    },
+    "rendering.tile_registry": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\tile_registry.py",
+      "relative": "rendering/tile_registry.py",
+      "sha256": "9a9f07a3619d03401f6367601f00bd685024e1f0dc691a41c4cdfa0555c9162a"
+    },
+    "rendering.ui_registry": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\ui_registry.py",
+      "relative": "rendering/ui_registry.py",
+      "sha256": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058"
+    },
+    "world.local_map": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\local_map.py",
+      "relative": "world/local_map.py",
+      "sha256": "a198d0b2d05ec86621d8d75ad27c12b499545edd8ba9f866e413316f1121460a"
+    },
+    "world.name_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\name_gen.py",
+      "relative": "world/name_gen.py",
+      "sha256": "8e5d788c75b1e0d4183e83bb823298a4008d57ab84fda887cd6bb84648397546"
+    },
+    "world.world_map": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\world_map.py",
+      "relative": "world/world_map.py",
+      "sha256": "400e274bf760444bfcaec9aa617212021e9fc42a0826430f2c2edce501a73ba9"
+    },
+    "world.world_myth": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\world_myth.py",
+      "relative": "world/world_myth.py",
+      "sha256": "bf9ccc805b376deafd9e43f9f0cc092f2b2b6a1d66e967b2d9ea0ca76be9dc80"
+    }
+  },
+  "assertion_count": 10,
+  "passed": true
+}

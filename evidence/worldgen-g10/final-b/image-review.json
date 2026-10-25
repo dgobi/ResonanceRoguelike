@@ -1,0 +1,281 @@
+{
+  "passed": true,
+  "frozen_input_commit": "9de7b8ee759dcade97bb992c83d7fb8b26a61eac",
+  "method": "Visual inspection of actual production PNGs, full-size selected scenes and multi-chunk/contact views. This is a bounded aesthetic judgment, not a checksum/connectivity-derived art pass.",
+  "visibility": "Before/after comparisons explicitly reveal the full scene. The separate ordinary expedition captures retain normal FOV and exploration state.",
+  "limitations": "Saved coarse biome edges and original rectangular river geometry remain visible in places; this arc does not redesign macro geography. Decorative pockets need not all connect. One scripted live outing is not a claim of whole-world fun or survival balance.",
+  "scenes": [
+    {
+      "biome": "forest",
+      "chunk": [
+        73,
+        100
+      ],
+      "review": "The scattered G9 trees become a substantial stand with exterior clearings. The retained isolated-arrival finding led to selecting a real boundary component; the dense core and its decorative pockets remain intact.",
+      "before": {
+        "path": "evidence/worldgen-g10/before/forest-73-100.png",
+        "bytes": 93438,
+        "sha256": "a1bd6deed8ef42d0a6facf362f8ddf70683f0cd7718d5d09c850533ccfa41152"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/forest-73-100-after.png",
+        "bytes": 112348,
+        "sha256": "ffad684f838f049b031abb0772d8ea6d421fdef211648f36fe207a3ef77aad02"
+      }
+    },
+    {
+      "biome": "plains",
+      "chunk": [
+        73,
+        98
+      ],
+      "review": "Open grass dominates. Tall grass forms larger irregular patches and trees gather at a margin, leaving readable open travel ground.",
+      "before": {
+        "path": "evidence/worldgen-g10/before/plains-73-98.png",
+        "bytes": 75065,
+        "sha256": "ce8456d6d7206588885a77a0323ed28b8d24ba70627093beec1f872348353b6a"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/plains-73-98-after.png",
+        "bytes": 59533,
+        "sha256": "814e2ad3231e471419f0a0497a2e837c251c6d0bb954a1f065c6c8b89d139185"
+      }
+    },
+    {
+      "biome": "heath",
+      "chunk": [
+        74,
+        101
+      ],
+      "review": "Open ground remains dominant with gravel patches and a sparse rock group. Neighboring living cover appears at the deliberate biome transition.",
+      "before": {
+        "path": "evidence/worldgen-g10/before/heath-74-101.png",
+        "bytes": 61763,
+        "sha256": "60f855bbc79f932658d9513f59ec479d0fe03db4bae66197c00db18722ad1fa4"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/heath-74-101-after.png",
+        "bytes": 58313,
+        "sha256": "397cdbd77358c3ed819e8f971d05efc9eafb7953ea9051cfac916ad81444740a"
+      }
+    },
+    {
+      "biome": "swamp",
+      "chunk": [
+        71,
+        121
+      ],
+      "review": "Small scattered puddles become broad coherent pools separated by firm ground. The water is the existing walkable, chilling and drinkable shallow-water terrain.",
+      "before": {
+        "path": "evidence/worldgen-g10/before/swamp-71-121.png",
+        "bytes": 112060,
+        "sha256": "0f70f814c8b2e694f178681157e05748b04900ef08610bf0a1e0295f210ad9ae"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/swamp-71-121-after.png",
+        "bytes": 77128,
+        "sha256": "966aac94eaa90b281bd78cbc872e2cd83da6610a35634800dc4c72d9a7a97425"
+      }
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        79,
+        106
+      ],
+      "review": "Tree stands and large wet patches coexist; the visible open ground between them provides a different route choice from plain forest.",
+      "before": {
+        "path": "evidence/worldgen-g10/before/drowned_wood-79-106.png",
+        "bytes": 118713,
+        "sha256": "af4c8c5671a743e4af1ba75172c862d90de25b06fd25ddee922c8b9eebfa74f6"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/drowned_wood-79-106-after.png",
+        "bytes": 112458,
+        "sha256": "93f540dd8900b93debb37d0827995000e2056c594ee644271cbdc17f14f8f520"
+      }
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        72,
+        103
+      ],
+      "review": "Gravel dominates the scene, with the existing ash sprite in patches and rock outcrops. Living cover is restricted to the deliberately blended edge. The interior plant/tree prohibition is checked behaviorally.",
+      "before": {
+        "path": "evidence/worldgen-g10/before/ash_wastes-72-103.png",
+        "bytes": 63216,
+        "sha256": "c0253b9fd3223693267e73937ade3e01a9117f7251272672fc177cb3c85a9822"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/ash_wastes-72-103-after.png",
+        "bytes": 56633,
+        "sha256": "333fcbebe400a84a7c31024d7c16ab7062746d52b165fd44939b474043c1961c"
+      }
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        73,
+        93
+      ],
+      "review": "Independent per-tile rocks become joined rock masses around broken walkable ground. The existing assets and metadata are preserved.",
+      "before": {
+        "path": "evidence/worldgen-g10/before/mountain-73-93.png",
+        "bytes": 121122,
+        "sha256": "b351e6d25c58f01b2bdc565e885b03b62a9b36ddb42c7385530a6b90faa4668c"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/mountain-73-93-after.png",
+        "bytes": 93167,
+        "sha256": "496789b372e8428f0cd5c2b52ef1e6fe9a47fbb3ed9a1fa9dacf136bf996328b"
+      }
+    },
+    {
+      "biome": "deep_mountain",
+      "chunk": [
+        65,
+        65
+      ],
+      "review": "Larger rock masses and mineral gaps replace checkerboard rock/gravel. No peak or dungeon content is added; VUKH retains its coarse ownership.",
+      "before": {
+        "path": "evidence/worldgen-g10/before/deep_mountain-65-65.png",
+        "bytes": 119724,
+        "sha256": "df39fb7699a764ecab223cdcae0103969cb09198e177696254b4382eb54ae6f8"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/deep_mountain-65-65-after.png",
+        "bytes": 78940,
+        "sha256": "b4524661d66579303852597e88bf1f3b84702d6d8a83c5e19b7b5be56800225f"
+      }
+    }
+  ],
+  "areas": [
+    {
+      "name": "forest-open",
+      "origin": [
+        73,
+        99
+      ],
+      "before": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/forest-open-before.png",
+        "bytes": 295605,
+        "sha256": "1681180626ccd37fbacf92a9e1bf4b9d54d694685c6a3cefe63cb2a3a1cc90cd"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/forest-open-after.png",
+        "bytes": 281911,
+        "sha256": "84cd49ca4b44dd75eb6a3b82a262661c54484ac9ac4571e4497d7a501715fe81"
+      },
+      "review": "Inspected as a spatial 2x2 production view. Natural masses/patches cross storage boundaries; original roads, authored entrance and coarse river geometry retain their visible authority where present."
+    },
+    {
+      "name": "wet-dry",
+      "origin": [
+        78,
+        105
+      ],
+      "before": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/wet-dry-before.png",
+        "bytes": 295716,
+        "sha256": "ac0b3921ee461e6965dff6dde38112e4412b3dd8c26ab60845b46002dc2c189f"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/wet-dry-after.png",
+        "bytes": 306348,
+        "sha256": "d70868dc7f1cfd51bcc809ee4f482fd473de6be2ace9578819b0735ef9603ff5"
+      },
+      "review": "Inspected as a spatial 2x2 production view. Natural masses/patches cross storage boundaries; original roads, authored entrance and coarse river geometry retain their visible authority where present."
+    },
+    {
+      "name": "ash-edge",
+      "origin": [
+        72,
+        102
+      ],
+      "before": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/ash-edge-before.png",
+        "bytes": 244777,
+        "sha256": "45ba8c2c0ebe0e56b2d87a0169fca5ea9e1439bcd506e33be3bdd835ee86e16b"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/ash-edge-after.png",
+        "bytes": 200233,
+        "sha256": "76a0332643a9f367abe39c4fc3a4e9dfc8e89ab52a3c8e1761ee133fce9a4d0d"
+      },
+      "review": "Inspected as a spatial 2x2 production view. Natural masses/patches cross storage boundaries; original roads, authored entrance and coarse river geometry retain their visible authority where present."
+    },
+    {
+      "name": "rocky",
+      "origin": [
+        63,
+        63
+      ],
+      "before": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/rocky-before.png",
+        "bytes": 334318,
+        "sha256": "5894dace61540671f690abbb1dbfc0b9fa4f617e58676113bf0302be49c6c62e"
+      },
+      "after": {
+        "path": "evidence/worldgen-g10/final-b/g10/diagnostic/rocky-after.png",
+        "bytes": 247236,
+        "sha256": "829c7528ece654c9a575d04c2b2e6a88cd9762750762afc4aedafb687aac7092"
+      },
+      "review": "Inspected as a spatial 2x2 production view. Natural masses/patches cross storage boundaries; original roads, authored entrance and coarse river geometry retain their visible authority where present."
+    }
+  ],
+  "ordinary_normal_fov": [
+    {
+      "path": "evidence/worldgen-g10/final-b/g10/expedition/01-lab-normal-fov.png",
+      "bytes": 21381,
+      "sha256": "3deabb975287cfbf285b2ef8c170de11e14472214afb1b828ef8897b2ff91343"
+    },
+    {
+      "path": "evidence/worldgen-g10/final-b/g10/expedition/02-surface-normal-fov.png",
+      "bytes": 47839,
+      "sha256": "1959816884e20ab20ebadea19a7529336dc5bffff47432fabbf3e42462c4bdf3"
+    },
+    {
+      "path": "evidence/worldgen-g10/final-b/g10/expedition/03-harvest-normal-fov.png",
+      "bytes": 62589,
+      "sha256": "04bc0faa20bf2583abb604006db8926a1a9e6f1b567d2d475ae5beeee35e0899"
+    },
+    {
+      "path": "evidence/worldgen-g10/final-b/g10/expedition/04-return-normal-fov.png",
+      "bytes": 67497,
+      "sha256": "26799e18b65c953920f5653695570b750ef2a2f54516f11bebbe3ff767d66e1f"
+    },
+    {
+      "path": "evidence/worldgen-g10/final-b/g10/expedition/boundary-1-normal-fov.png",
+      "bytes": 26284,
+      "sha256": "8438064181bd3d005f3d625621fe58a5f777feb86f8d7451316207063d29c0a3"
+    },
+    {
+      "path": "evidence/worldgen-g10/final-b/g10/expedition/boundary-2-normal-fov.png",
+      "bytes": 35674,
+      "sha256": "48f715a03db22d20f2ad244fe1b999fbeba0e910f29064c56b7b81d62eb3a4d9"
+    },
+    {
+      "path": "evidence/worldgen-g10/final-b/g10/expedition/boundary-3-normal-fov.png",
+      "bytes": 61308,
+      "sha256": "e7e9eaa7ea774c51552bdc6610ba6cd8525b69a9faab6498c756b14bee1fa13a"
+    },
+    {
+      "path": "evidence/worldgen-g10/final-b/g10/expedition/boundary-4-normal-fov.png",
+      "bytes": 69349,
+      "sha256": "f2486dcc16268dea96fc864b6c030639b5a4dbb426b570e38ca0965a3a866340"
+    }
+  ],
+  "contact_sheets": [
+    {
+      "path": "evidence/worldgen-g10/final-b/all-biomes-comparison.png",
+      "bytes": 3460022,
+      "sha256": "3b757de7968aacc0155fa2bceeef0532ee8a9bbe49a579e0e7bd40b4477769b0"
+    },
+    {
+      "path": "evidence/worldgen-g10/final-b/multi-chunk-comparison.png",
+      "bytes": 1699347,
+      "sha256": "04790fc47722278222cc71b95657a0e61a83c0d9a72fafc60f4b0dbe1e8276d4"
+    }
+  ]
+}

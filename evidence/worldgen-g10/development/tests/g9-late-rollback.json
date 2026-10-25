@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "prepared_road_cells": [
+    300
+  ],
+  "world_player_rng_active_actors_cache_files_head_unchanged": true,
+  "recovered": true,
+  "saved_policy_independent": true,
+  "scene": "2d755da1f48080c495093c8db25f13eafbaeaed5d6f92136d81e61f6ba759fe6"
+}

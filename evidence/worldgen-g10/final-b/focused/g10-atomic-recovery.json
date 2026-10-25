@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "late": [
+    {
+      "roads": 0,
+      "decor": 125,
+      "terrain": {
+        "version": 1,
+        "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+        "algorithm": "wilderness-fields-v1",
+        "seed_domain": "resonance-wilderness-1",
+        "owner": "wilderness",
+        "biome": "forest"
+      }
+    }
+  ],
+  "world_player_rng_cache_files_head_unchanged": true,
+  "missing_required_terrain": true,
+  "recovered": true
+}

@@ -1,0 +1,6125 @@
+{
+  "passed": true,
+  "seed": 20261023,
+  "chunk": [
+    73,
+    99
+  ],
+  "size": [
+    2,
+    1
+  ],
+  "profile": "C:\\Users\\dango\\AppData\\Local\\Temp\\resonance-g10-install-rehearsal-k8e0efa4\\draft.json",
+  "policy_identity": "ac84217f9e064c4072351f4ec08eebff024f4c5e3c6f0efd359a19aefc45c41c",
+  "policy": {
+    "version": 1,
+    "algorithm": "wilderness-fields-v1",
+    "seed_domain": "resonance-wilderness-1",
+    "profiles": {
+      "version": 1,
+      "profiles": {
+        "forest": {
+          "palette": {
+            "ground": "varied_grass",
+            "patch": "tall_grass",
+            "obstacle": "tree"
+          },
+          "scale": 28,
+          "cover": 0.46,
+          "patch_amount": 0.28,
+          "wet_amount": 0.12,
+          "transition": 10
+        },
+        "plains": {
+          "palette": {
+            "ground": "varied_grass",
+            "patch": "tall_grass",
+            "obstacle": "tree"
+          },
+          "scale": 38,
+          "cover": 0.14,
+          "patch_amount": 0.35,
+          "wet_amount": 0.06,
+          "transition": 10
+        },
+        "heath": {
+          "palette": {
+            "ground": "varied_grass",
+            "patch": "gravel",
+            "obstacle": "rock"
+          },
+          "scale": 26,
+          "cover": 0.18,
+          "patch_amount": 0.32,
+          "wet_amount": 0.04,
+          "transition": 8
+        },
+        "swamp": {
+          "palette": {
+            "ground": "packed_earth",
+            "patch": "mud",
+            "obstacle": "tree"
+          },
+          "scale": 24,
+          "cover": 0.27,
+          "patch_amount": 0.53,
+          "wet_amount": 0.44,
+          "transition": 10
+        },
+        "drowned_wood": {
+          "palette": {
+            "ground": "varied_grass",
+            "patch": "mud",
+            "obstacle": "tree"
+          },
+          "scale": 27,
+          "cover": 0.49,
+          "patch_amount": 0.55,
+          "wet_amount": 0.46,
+          "transition": 10
+        },
+        "ash_wastes": {
+          "palette": {
+            "ground": "gravel",
+            "patch": "ash",
+            "obstacle": "rock"
+          },
+          "scale": 34,
+          "cover": 0.23,
+          "patch_amount": 0.34,
+          "wet_amount": 0,
+          "transition": 3
+        },
+        "mountain": {
+          "palette": {
+            "ground": "gravel",
+            "patch": "packed_earth",
+            "obstacle": "rock"
+          },
+          "scale": 25,
+          "cover": 0.49,
+          "patch_amount": 0.28,
+          "wet_amount": 0.03,
+          "transition": 6
+        },
+        "deep_mountain": {
+          "palette": {
+            "ground": "gravel",
+            "patch": "ash",
+            "obstacle": "rock"
+          },
+          "scale": 36,
+          "cover": 0.59,
+          "patch_amount": 0.18,
+          "wet_amount": 0,
+          "transition": 4
+        }
+      }
+    },
+    "dependencies": {
+      "terrain:ash": "ba5995c6f73bcf804c73fd947d23d926519ab079fd49f88dcf160e536251bc88",
+      "terrain:grass": "cd2d52ca0cb4a2cfb20fb6249f0a51a1afe1f3b2c6d2ecf9e8472f35ab06ff91",
+      "terrain:gravel": "76a517959abb07dee4134ec4d9584f916cb0c0920b432380403997ea8c18a8b4",
+      "terrain:mud": "4c5ac6b2fdd2b5f89821e7200ecce4b6a6ee56d8ccb109b748208e0fa3719b5b",
+      "terrain:packed_earth": "193415206f404fbcf3c7dab34d941226dc655e1b8862cd526cec366d3049fcdb",
+      "terrain:rock": "e49470bfabff11f35e46ce0c1b2479cd89dc471d5913502781934a87cc7d8d65",
+      "terrain:shallow_water": "070d48639338dcb16f5d79234f0a66c2496382d59e6c8a786ab8b019d761e2e5",
+      "terrain:tall_grass": "ac8ffb813b7ba4b0871203dfe52b89d7ee9264d99d854d78bfea58dac2737f79",
+      "terrain:tree": "618d07ce31dd8cafbcb8cd1982bc9928c0c912e9248ab1be9a0c311b1c91c0f0",
+      "terrain:varied_grass": "c1517f4750abde7e954e215f49d26e4ef994e3ea25f91a59b9013972e440d0e2",
+      "decor:flower_pilgrims_woe": "aa5c3a7edce3f6a323c0c710a089274e8b41fdbe33b9303ec32e66b67f6070a4",
+      "decor:flower_murk_violet": "e40b7b70f824fb57dcbf96c57f04b3175e54dd9c38f462784a09428b81efa3c4",
+      "decor:shroom_sulphur_cap": "4fcb2ed0539ae1082b1bb00f2bacab7e006c44cf6d45107553dec08fb6e414a8",
+      "decor:shroom_prophets_eye": "f9b08c8f8a82c6cba3ad698b44c7afe78f385b9e6ff5653c5fbce9a5e6d6b207"
+    },
+    "identity": "ac84217f9e064c4072351f4ec08eebff024f4c5e3c6f0efd359a19aefc45c41c"
+  },
+  "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+  "scenes_at_planning_completion": 0,
+  "materialized_scenes": 2,
+  "visited_scenes": 0,
+  "planning_seconds": 6.524680000031367,
+  "scenes": [
+    {
+      "chunk": [
+        73,
+        99
+      ],
+      "biome": "forest",
+      "seconds": 0.39017369999783114,
+      "terrain": {
+        "tree": 1579,
+        "grass": 1043,
+        "road_0": 240,
+        "tall_grass": 163,
+        "dead_wood": 92,
+        "old_wall": 29,
+        "floor": 34,
+        "shallow_water": 234,
+        "gravel": 22,
+        "stairs_down": 1,
+        "flint_rock": 3
+      },
+      "decor": {
+        "flower_murk_violet": 9,
+        "flower_pilgrims_woe": 13,
+        "shroom_sulphur_cap": 8,
+        "shroom_prophets_eye": 8,
+        "waystone_plinth": 1
+      },
+      "actors": 2,
+      "native_ids": [
+        "bog_wraith",
+        "briar_lurker"
+      ],
+      "static_reachable_cells": 1534,
+      "road_cells": 240,
+      "protected_cells": 417,
+      "surface_provenance": {
+        "version": 1,
+        "policy_identity": "ac84217f9e064c4072351f4ec08eebff024f4c5e3c6f0efd359a19aefc45c41c",
+        "algorithm": "wilderness-fields-v1",
+        "seed_domain": "resonance-wilderness-1",
+        "owner": "wilderness",
+        "biome": "forest"
+      },
+      "wilderness": {
+        "policy_identity": "ac84217f9e064c4072351f4ec08eebff024f4c5e3c6f0efd359a19aefc45c41c",
+        "halo_chunks": 1,
+        "metadata_reads": 9,
+        "base_decision_identity": "0705167a4136e8f8d22374b31b24fc4527ed49add9ebcb7eb381a90adcecf944",
+        "repairs": [],
+        "field_seconds": 0.007315299997571856,
+        "base_seconds": 0.07090089999837801
+      },
+      "resources": [
+        {
+          "x": 1,
+          "y": 13,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 1,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 17,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 3,
+          "y": 24,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 4,
+          "y": 18,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 5,
+          "y": 14,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 5,
+          "y": 16,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 5,
+          "y": 38,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 6,
+          "y": 10,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 6,
+          "y": 13,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 6,
+          "y": 19,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 6,
+          "y": 24,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 6,
+          "y": 41,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 7,
+          "y": 27,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 8,
+          "y": 32,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 10,
+          "y": 25,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 10,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 10,
+          "y": 35,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 11,
+          "y": 4,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 11,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 11,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 11,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 11,
+          "y": 34,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 12,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 12,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 12,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 12,
+          "y": 28,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 13,
+          "y": 26,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 13,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 13,
+          "y": 34,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 13,
+          "y": 36,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 13,
+          "y": 37,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 13,
+          "y": 39,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 13,
+          "y": 40,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 14,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 14,
+          "y": 32,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 15,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 15,
+          "y": 28,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 15,
+          "y": 35,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 16,
+          "y": 30,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 16,
+          "y": 39,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 17,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 17,
+          "y": 34,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 18,
+          "y": 35,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 19,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 19,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 19,
+          "y": 38,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 19,
+          "y": 40,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 20,
+          "y": 6,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 20,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 20,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 20,
+          "y": 31,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 21,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 21,
+          "y": 28,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 21,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 22,
+          "y": 33,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 22,
+          "y": 40,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 23,
+          "y": 17,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 23,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 23,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 24,
+          "y": 41,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 25,
+          "y": 5,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 25,
+          "y": 12,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 25,
+          "y": 14,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 25,
+          "y": 24,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 25,
+          "y": 31,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 26,
+          "y": 9,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 26,
+          "y": 15,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 26,
+          "y": 17,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 26,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 26,
+          "y": 31,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 27,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 27,
+          "y": 40,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 28,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 30,
+          "y": 6,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 30,
+          "y": 12,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 31,
+          "y": 14,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 32,
+          "y": 8,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 32,
+          "y": 19,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 32,
+          "y": 40,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 33,
+          "y": 4,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 33,
+          "y": 36,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 34,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 34,
+          "y": 25,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 34,
+          "y": 30,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 34,
+          "y": 38,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 35,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 35,
+          "y": 13,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 35,
+          "y": 18,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 36,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 36,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 36,
+          "y": 26,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 36,
+          "y": 31,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 36,
+          "y": 35,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 37,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 37,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 37,
+          "y": 28,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 37,
+          "y": 38,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 38,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 38,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 38,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 39,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 39,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 39,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 39,
+          "y": 7,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 40,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 40,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 40,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 40,
+          "y": 9,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 40,
+          "y": 25,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 41,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 41,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 41,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 41,
+          "y": 17,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 41,
+          "y": 32,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 41,
+          "y": 39,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 42,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 42,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 42,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 42,
+          "y": 29,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 43,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 43,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 43,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 43,
+          "y": 9,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 43,
+          "y": 15,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 43,
+          "y": 28,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 43,
+          "y": 31,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 43,
+          "y": 35,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 44,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 44,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 44,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 45,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 45,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 45,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 45,
+          "y": 7,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 45,
+          "y": 12,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 45,
+          "y": 24,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 45,
+          "y": 34,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 46,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 46,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 46,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 46,
+          "y": 40,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 47,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 47,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 47,
+          "y": 4,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 48,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 48,
+          "y": 3,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 48,
+          "y": 9,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 49,
+          "y": 2,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 49,
+          "y": 8,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 49,
+          "y": 15,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 49,
+          "y": 26,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 51,
+          "y": 6,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 51,
+          "y": 8,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 51,
+          "y": 18,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 51,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 51,
+          "y": 29,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 52,
+          "y": 7,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 52,
+          "y": 16,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 53,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": false,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 37,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 26,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 55,
+          "y": 29,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 55,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 35,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 27,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 58,
+          "y": 35,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 41,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 60,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 34,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 35,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 41,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 10,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 19,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 37,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 5,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 12,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 11,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 73,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 38,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 11,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 74,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 18,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 36,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 76,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 30,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 13,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 33,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 78,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 79,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 79,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 79,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 79,
+          "y": 29,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        }
+      ],
+      "reachable_resource_opportunities": 255,
+      "complete_terrain_identity": "ca1e7504417b88d1bc77552eed32d87ba38818327d5259770ad4884e011ba90e"
+    },
+    {
+      "chunk": [
+        74,
+        99
+      ],
+      "biome": "plains",
+      "seconds": 0.27443799999309704,
+      "terrain": {
+        "tall_grass": 1464,
+        "grass": 1400,
+        "road_0": 240,
+        "shallow_water": 132,
+        "tree": 184,
+        "dead_wood": 13,
+        "flint_rock": 7
+      },
+      "decor": {
+        "flower_pilgrims_woe": 13,
+        "shroom_prophets_eye": 24,
+        "flower_murk_violet": 20,
+        "shroom_sulphur_cap": 11
+      },
+      "actors": 1,
+      "native_ids": [
+        "hollow_knight"
+      ],
+      "static_reachable_cells": 3216,
+      "road_cells": 240,
+      "protected_cells": 240,
+      "surface_provenance": {
+        "version": 1,
+        "policy_identity": "ac84217f9e064c4072351f4ec08eebff024f4c5e3c6f0efd359a19aefc45c41c",
+        "algorithm": "wilderness-fields-v1",
+        "seed_domain": "resonance-wilderness-1",
+        "owner": "wilderness",
+        "biome": "plains"
+      },
+      "wilderness": {
+        "policy_identity": "ac84217f9e064c4072351f4ec08eebff024f4c5e3c6f0efd359a19aefc45c41c",
+        "halo_chunks": 1,
+        "metadata_reads": 9,
+        "base_decision_identity": "1dcb4e0e087f3e13e73e80611b750e139f4f02484651fa40c0bc0bdeb48fc32c",
+        "repairs": [],
+        "field_seconds": 0.007166400027927011,
+        "base_seconds": 0.07184829999459907
+      },
+      "resources": [
+        {
+          "x": 0,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 9,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 36,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 4,
+          "y": 38,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 5,
+          "y": 18,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 5,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 5,
+          "y": 36,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 8,
+          "y": 2,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 8,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 8,
+          "y": 34,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 9,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 9,
+          "y": 34,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 10,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 10,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 11,
+          "y": 10,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 11,
+          "y": 13,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 11,
+          "y": 40,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 13,
+          "y": 3,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 15,
+          "y": 4,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 20,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 20,
+          "y": 38,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 21,
+          "y": 0,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 23,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 23,
+          "y": 5,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 24,
+          "y": 33,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 24,
+          "y": 34,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 25,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 25,
+          "y": 7,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 26,
+          "y": 2,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 26,
+          "y": 7,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 29,
+          "y": 5,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 30,
+          "y": 3,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 33,
+          "y": 1,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 40,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 44,
+          "y": 3,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 47,
+          "y": 7,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 50,
+          "y": 7,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 51,
+          "y": 7,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 51,
+          "y": 8,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 52,
+          "y": 7,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 52,
+          "y": 8,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 52,
+          "y": 9,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 52,
+          "y": 10,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 52,
+          "y": 11,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 52,
+          "y": 12,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 52,
+          "y": 13,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 52,
+          "y": 14,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 5,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 6,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 7,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 8,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 9,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 10,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 11,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 12,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 13,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 14,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 15,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 16,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 17,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 5,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 6,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 7,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 8,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 9,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 10,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 11,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 12,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 13,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 14,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 15,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 16,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 17,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 38,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 39,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 40,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 41,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 42,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 5,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 6,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 7,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 8,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 9,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 10,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 11,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 12,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 13,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 14,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 15,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 16,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 17,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 37,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 38,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 39,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 40,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 41,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 42,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 5,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 6,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 7,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 8,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 9,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 10,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 11,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 12,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 13,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 14,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 15,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 16,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 17,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 37,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 38,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 39,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 40,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 41,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 42,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 5,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 6,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 7,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 8,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 9,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 10,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 11,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 12,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 13,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 14,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 15,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 16,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 17,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 27,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 39,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 40,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 41,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 42,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 3,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 4,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 5,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 6,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 7,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 8,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 9,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 8,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 60,
+          "y": 34,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 26,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 34,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 25,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 40,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 12,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 31,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 12,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 18,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 19,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 27,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 26,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 38,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 18,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 2,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 13,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 2,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 73,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 42,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 6,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 16,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 24,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 32,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 79,
+          "y": 2,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 79,
+          "y": 6,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        }
+      ],
+      "reachable_resource_opportunities": 215,
+      "complete_terrain_identity": "d741c59567b6048e933f88a7f6ed472f2a8e74b3236e1a71a1d629d09952efb9"
+    }
+  ],
+  "image": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-2\\draft-preview.png",
+  "visibility": "REVEALED production comparison; not normal-FOV play evidence",
+  "access_scope": "Complete populated scene validation; reachable static access and resource opportunities. Actors are counted, not treated as permanently impassable."
+}

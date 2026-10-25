@@ -1,0 +1,170 @@
+{
+  "country_routes_exactly_equal": true,
+  "scenes_at_plan_completion": 0,
+  "rows": [
+    {
+      "seed": 0,
+      "settlement": "settlement-0",
+      "layout": "linked-courts",
+      "normals": {
+        "N": 10,
+        "S": 9,
+        "W": 2,
+        "E": 1
+      },
+      "scenes": {
+        "[32, 83]": "cc68b6c0e7391c8e8943e8e130e42397e347f8ca66a7bc2a50a79f3ce369d791",
+        "[32, 84]": "b1f5716940cbed4e15630056f49bf57f7cef4aa1dcabc94e1f915cd037d73bc5",
+        "[33, 83]": "6d95ff2572b85d046848a8785674efcf3d119526d520a90d95663dd14508ef80",
+        "[33, 84]": "76c4161cfb27e8e280fa93a5478256486d9b1b189d97325e66c26414e978ca8c"
+      }
+    },
+    {
+      "seed": 0,
+      "settlement": "settlement-1",
+      "layout": "country-frontage",
+      "normals": {
+        "S": 4,
+        "N": 4
+      },
+      "scenes": {
+        "[102, 101]": "0ae354537d3e68f92f3e92409b5e1d7aa5d78948b0348fcdee4616dd33766e68",
+        "[103, 101]": "e4361022ce32aa25691b71619d242a8f0c10340f085132506c3b7de66f35db0a"
+      }
+    },
+    {
+      "seed": 0,
+      "settlement": "settlement-2",
+      "layout": "linked-courts",
+      "normals": {
+        "N": 10,
+        "S": 9,
+        "W": 1,
+        "E": 1
+      },
+      "scenes": {
+        "[83, 116]": "7af42b4bccf6d31980752838982dce773540121b9c9a930a385c8da27f21276b",
+        "[83, 117]": "31b00afd1bebf303c6391b9b176621d7dce14ab2a7ff6df0928031d47aec5f73",
+        "[84, 116]": "83bff69f4d323cf22d8b5690f2a9cf200bd52e48a7a35831827068641e4d9289",
+        "[84, 117]": "ca144ed825e96154ac8991d02cfcf71c5225cbd63cec4907684059496a1c58dd"
+      }
+    },
+    {
+      "seed": 20261023,
+      "settlement": "settlement-0",
+      "layout": "cross-market",
+      "normals": {
+        "S": 7,
+        "N": 7,
+        "W": 1
+      },
+      "scenes": {
+        "[75, 99]": "c16c2366f60e69af3ea7040b2b4d30ae19770aa0a1ad03f3d89ce8f332c599fb",
+        "[75, 100]": "dbc6f83ac422e0477e3b41617a9a6fd8fb337509eee56e7a837ce476ba792fcc",
+        "[76, 99]": "c6d768e93e5e2cceb26cf5a1a3c36d4dae5245ee07f069d2069dc7f1e10a5112",
+        "[76, 100]": "51ce9a7c24e876e5bbf85f6e240acd3a63edf47819ff599a13050e224bcb49fc"
+      }
+    },
+    {
+      "seed": 20261023,
+      "settlement": "settlement-1",
+      "layout": "country-frontage",
+      "normals": {
+        "S": 4,
+        "N": 4
+      },
+      "scenes": {
+        "[39, 26]": "453743826c9c1a71498fe72968688c5a05785baed8600bd6b0ddc6f943686b0e",
+        "[40, 26]": "538a13041722a3da7b5dec3b2331292c4057afa11c81dd977bf0adeef35313d2"
+      }
+    },
+    {
+      "seed": 20261023,
+      "settlement": "settlement-2",
+      "layout": "cross-market",
+      "normals": {
+        "S": 7,
+        "N": 7,
+        "W": 1
+      },
+      "scenes": {
+        "[106, 106]": "ac30a63b14fa7749b5922062b7ef73818e6c859aeff891791710c47fb2b0a020",
+        "[106, 107]": "1aa41819c999930fda9978de588b32bbf05d0d3022a51280b21aabb0cb24782b",
+        "[107, 106]": "19badfa5ede6ce1e9f46f2b8adce8ef9c768361a0d51aa47c9a9edbe4bb0d5dc",
+        "[107, 107]": "1efcd8378f96755259b5b21b24b45e18692f8603c4a1c05a3ba1598893acfd67"
+      }
+    },
+    {
+      "seed": 20261023,
+      "settlement": "settlement-3",
+      "layout": "country-frontage",
+      "normals": {
+        "S": 4,
+        "N": 4
+      },
+      "scenes": {
+        "[87, 33]": "cd009469b18b170e13602789d78fe4370ad6aaa049e087061f0297ba289bc7c3",
+        "[88, 33]": "47ce4b01b841ba3d3340e809cecf1dc2367edb3d27d7eadb04ad308e2ce6c1f9"
+      }
+    },
+    {
+      "seed": 29417,
+      "settlement": "settlement-0",
+      "layout": "cross-market",
+      "normals": {
+        "S": 7,
+        "N": 7,
+        "E": 2,
+        "W": 2
+      },
+      "scenes": {
+        "[104, 46]": "ca88c92e2e572c5b0faf187758ea219ff2a42fc1cd529f3a5a2762e33b78a0e5",
+        "[104, 47]": "14b2acc64bd9e4cb7e0adb318ef74fc99e5c4536909fb35644f57474338774dc",
+        "[105, 46]": "b00ac6ec33bed5dccfa2d919bf1498386ed68732afc5116d78a2660d292bf949",
+        "[105, 47]": "6cf032bd3ed6b168aff4151dc3b779453d53c92e004bc193673c3a6522f6aa24"
+      }
+    },
+    {
+      "seed": 29417,
+      "settlement": "settlement-1",
+      "layout": "country-frontage",
+      "normals": {
+        "N": 3,
+        "S": 3
+      },
+      "scenes": {
+        "[99, 86]": "63144635bcdf5e5fa7ff144a58c92783727293a33a678fd377a8a8a33667cd01",
+        "[100, 86]": "faf0317c76e593346076bb6bfccbc7cfe097ce557aba1ba47045fdc68ecee6af"
+      }
+    },
+    {
+      "seed": 29417,
+      "settlement": "settlement-2",
+      "layout": "linked-courts",
+      "normals": {
+        "N": 11,
+        "S": 8,
+        "W": 1
+      },
+      "scenes": {
+        "[62, 0]": "f7dfd6bc7b6cda0cc233cdc394dd9ecce4c2faa3cdc3ee2329dfc5de93f88fed",
+        "[62, 1]": "240aea746132b3f78d93e8af7c3d6289dbff7d555492c6ee220f4bcaaa32f03a",
+        "[63, 0]": "bec9406b2f94c059f61e833fb6be80ed2dc0b7e1f15b0b7a4c65b863a23ba3fc",
+        "[63, 1]": "1a61279658d36d0099e724102480f78411d9ca46c2855e9565308a679b3d1e95"
+      }
+    },
+    {
+      "seed": 29417,
+      "settlement": "settlement-3",
+      "layout": "country-frontage",
+      "normals": {
+        "S": 4,
+        "N": 4
+      },
+      "scenes": {
+        "[107, 65]": "9e754d8d52b16c090542245f9552ddbb321e4a202b2a4d78729d305e661bd2d7",
+        "[108, 65]": "602e8dfc29a25701c7245673a38fb7b3469ee4cd24858f44430e2243416da5bb"
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "missing-policy",
+      "error": "surface policy: expected fields ['algorithm', 'dependencies', 'identity', 'profiles', 'seed_domain', 'version']; unknown [], missing ['algorithm', 'dependencies', 'identity', 'profiles', 'seed_domain', 'version']"
+    },
+    {
+      "case": "deleted-schema",
+      "error": "historical surface schema cannot carry a new surface policy"
+    },
+    {
+      "case": "future-schema",
+      "error": "unsupported surface schema"
+    },
+    {
+      "case": "unknown-algorithm",
+      "error": "surface policy: unsupported algorithm, version or seed domain"
+    },
+    {
+      "case": "forged-identity",
+      "error": "surface policy: forged identity"
+    },
+    {
+      "case": "checksum-consistent-invalid-range",
+      "error": "wilderness forest.cover: expected finite number 0..0.68"
+    }
+  ],
+  "scene_missing_provenance_rejected": true,
+  "recovered": true
+}

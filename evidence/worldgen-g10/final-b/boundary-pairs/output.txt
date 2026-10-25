@@ -1,0 +1,16 @@
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,21) dest=(80,21) -> entry=(0,21) world (73,99)->(74,99)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,21) dest=(80,21) -> entry=(0,21) world (73,99)->(74,99)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,21) dest=(80,21) -> entry=(0,21) world (73,99)->(74,99)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] E player=(79,21) dest=(80,21) -> entry=(0,21) world (73,99)->(74,99)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] S player=(46,42) dest=(46,43) -> entry=(46,0) world (73,99)->(73,100)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] S player=(46,42) dest=(46,43) -> entry=(46,0) world (73,99)->(73,100)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] S player=(46,42) dest=(46,43) -> entry=(46,0) world (73,99)->(73,100)
+[LP-STORED] 0 live pursuers: []
+[CHUNK] S player=(46,42) dest=(46,43) -> entry=(46,0) world (73,99)->(73,100)

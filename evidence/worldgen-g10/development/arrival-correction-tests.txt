@@ -1,0 +1,10 @@
+test_barren_interior_and_complete_populated_owner_masks (test_generation_g10_terrain.G10Terrain.test_barren_interior_and_complete_populated_owner_masks) ... ok
+test_fresh_hash_seeds_match_same_absolute_samples (test_generation_g10_terrain.G10Terrain.test_fresh_hash_seeds_match_same_absolute_samples) ... ok
+test_independent_completed_creation_orders_do_not_reseed_native_domains (test_generation_g10_terrain.G10Terrain.test_independent_completed_creation_orders_do_not_reseed_native_domains) ... ok
+test_strict_profiles_and_atomic_new_world_creation (test_generation_g10_terrain.G10Terrain.test_strict_profiles_and_atomic_new_world_creation) ... ok
+test_world_coordinate_crop_equality_horizontal_vertical_corner_and_orders (test_generation_g10_terrain.G10Terrain.test_world_coordinate_crop_equality_horizontal_vertical_corner_and_orders) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 15.430s
+
+OK

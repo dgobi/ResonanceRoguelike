@@ -1,0 +1,14 @@
+{
+  "run_id": "d-20261024-191845-b0b25615",
+  "suite": "b3",
+  "scenario": "fault",
+  "variant": "payload:world.json",
+  "phase": "crash",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\b3-fault-payload_world.json-crash\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\b3-fault-payload_world.json-crash\\result.json",
+  "debug": false,
+  "expected": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\b3-fault-canonical-write\\result.json"
+}

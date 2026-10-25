@@ -1,0 +1,156 @@
+{
+  "passed": true,
+  "draft_installed_identical": true,
+  "backup_recovery": true,
+  "output_collisions_rejected": 4,
+  "symlink": {
+    "exercised": false,
+    "reason": "[WinError 1314] A required privilege is not held by the client: 'G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g10\\\\development\\\\diagnostic-3\\\\resonance-g10-install-rehearsal-kqcc8jnd\\\\data' -> 'G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g10\\\\development\\\\diagnostic-3\\\\resonance-g10-install-rehearsal-kqcc8jnd\\\\linked-data'"
+  },
+  "commands": [
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\wilderness_preview.py",
+        "--chunk",
+        "73",
+        "99",
+        "--size",
+        "2",
+        "1",
+        "--profile",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\draft.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\draft-preview.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"passed\": true, \"report\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g10\\\\development\\\\diagnostic-3\\\\draft-preview.json\", \"image\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g10\\\\development\\\\diagnostic-3\\\\draft-preview.png\", \"policy\": \"ac84217f9e064c4072351f4ec08eebff024f4c5e3c6f0efd359a19aefc45c41c\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\wilderness_preview.py",
+        "--chunk",
+        "73",
+        "99",
+        "--size",
+        "2",
+        "1",
+        "--data-root",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\data",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\installed-preview.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"passed\": true, \"report\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g10\\\\development\\\\diagnostic-3\\\\installed-preview.json\", \"image\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g10\\\\development\\\\diagnostic-3\\\\installed-preview.png\", \"policy\": \"ac84217f9e064c4072351f4ec08eebff024f4c5e3c6f0efd359a19aefc45c41c\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\wilderness_preview.py",
+        "--chunk",
+        "73",
+        "99",
+        "--size",
+        "2",
+        "1",
+        "--data-root",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\data",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\recovered-preview.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"passed\": true, \"report\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g10\\\\development\\\\diagnostic-3\\\\recovered-preview.json\", \"image\": \"G:\\\\GameDev\\\\RoguelikeProject\\\\evidence\\\\worldgen-g10\\\\development\\\\diagnostic-3\\\\recovered-preview.png\", \"policy\": \"72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\wilderness_preview.py",
+        "--chunk",
+        "73",
+        "99",
+        "--size",
+        "2",
+        "1",
+        "--profile",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\draft.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\draft.json"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "report output G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\draft.json conflicts with draft profile input G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\draft.json\n"
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\wilderness_preview.py",
+        "--chunk",
+        "73",
+        "99",
+        "--size",
+        "2",
+        "1",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\roguelike\\data\\generation\\wilderness_profiles.json"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "report output G:\\GameDev\\RoguelikeProject\\roguelike\\data\\generation\\wilderness_profiles.json conflicts with installed game/data input G:\\GameDev\\RoguelikeProject\\roguelike\\data\\generation\\wilderness_profiles.json\n"
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\wilderness_preview.py",
+        "--chunk",
+        "73",
+        "99",
+        "--size",
+        "2",
+        "1",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\collision.json",
+        "--image",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\collision.png"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "image output G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\collision.png conflicts with report diagnostic target G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\collision.json\n"
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\wilderness_preview.py",
+        "--chunk",
+        "73",
+        "99",
+        "--size",
+        "2",
+        "1",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\installed-alias.json"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "report output G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\development\\diagnostic-3\\resonance-g10-install-rehearsal-kqcc8jnd\\installed-alias.json conflicts with aliased installed input G:\\GameDev\\RoguelikeProject\\roguelike\\data\\generation\\wilderness_profiles.json\n"
+    }
+  ],
+  "controls": "Intentional install/recovery performed only in a disposable data catalog. No runtime/code checkout copied and no installed owner input changed."
+}

@@ -1,0 +1,13 @@
+{
+  "run_id": "d-20261024-191621-0bc10ceb",
+  "suite": "diagnostic",
+  "scenario": "original",
+  "variant": "empty",
+  "phase": "write",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\final-b\\production\\d-20261024-191621-0bc10ceb",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\final-b\\production\\d-20261024-191621-0bc10ceb\\diagnostic-original-empty-write\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\final-b\\production\\d-20261024-191621-0bc10ceb\\diagnostic-original-empty-write\\result.json",
+  "debug": false
+}

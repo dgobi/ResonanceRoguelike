@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "status": "superseded during focused-suite execution",
+  "source": "dad79a8d2eb19b36571b6ee913dbbcf27a85efb4",
+  "completed": ["catalog", "nine G10 tests", "G10 diagnostic", "ordinary expedition"],
+  "reason": "Final scene audit found the unowned forest (73,100) default arrival in a small isolated gap: its report had only one reachable resource opportunity. No failed production gate was concealed. The full focused process was deliberately stopped before source edits; the production gate had not started.",
+  "correction": "Select the largest existing natural boundary component as the new-policy default arrival anchor, without changing any terrain cell. Add a regression for that actual forest and rerun the final gates on new frozen inputs.",
+  "authoritative_final_evidence": "../final-b/release.json"
+}

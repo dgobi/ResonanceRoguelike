@@ -1,0 +1,18 @@
+test_barren_interior_and_complete_populated_owner_masks (test_generation_g10_terrain.G10Terrain.test_barren_interior_and_complete_populated_owner_masks) ... ok
+test_fresh_hash_seeds_match_same_absolute_samples (test_generation_g10_terrain.G10Terrain.test_fresh_hash_seeds_match_same_absolute_samples) ... ok
+test_independent_completed_creation_orders_do_not_reseed_native_domains (test_generation_g10_terrain.G10Terrain.test_independent_completed_creation_orders_do_not_reseed_native_domains) ... ok
+test_strict_profiles_and_atomic_new_world_creation (test_generation_g10_terrain.G10Terrain.test_strict_profiles_and_atomic_new_world_creation) ... ok
+test_world_coordinate_crop_equality_horizontal_vertical_corner_and_orders (test_generation_g10_terrain.G10Terrain.test_world_coordinate_crop_equality_horizontal_vertical_corner_and_orders) ... ok
+test_checksum_consistent_missing_malformed_and_forged_policy_reject_atomically (test_generation_g10_lifecycle.G10Lifecycle.test_checksum_consistent_missing_malformed_and_forged_policy_reject_atomically) ... ok
+test_genuine_g9_visited_mutation_and_exact_pending_results (test_generation_g10_lifecycle.G10Lifecycle.test_genuine_g9_visited_mutation_and_exact_pending_results) ... G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5035: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+ok
+test_missing_required_terrain_and_post_population_failure_rollback_recovery (test_generation_g10_lifecycle.G10Lifecycle.test_missing_required_terrain_and_post_population_failure_rollback_recovery) ... ok
+test_saved_policy_ignores_installed_edits_removal_and_restores_pending (test_generation_g10_lifecycle.G10Lifecycle.test_saved_policy_ignores_installed_edits_removal_and_restores_pending) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 99.434s
+
+OK

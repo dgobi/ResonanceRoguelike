@@ -1,0 +1,13 @@
+{
+  "run_id": "d-20261024-191845-b0b25615",
+  "suite": "b2",
+  "scenario": "format",
+  "variant": "contract",
+  "phase": "same",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\b2-format-contract-same\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\b2-format-contract-same\\result.json",
+  "debug": false
+}

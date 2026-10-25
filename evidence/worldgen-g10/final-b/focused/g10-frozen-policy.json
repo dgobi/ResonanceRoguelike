@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+  "pending": [
+    74,
+    100
+  ],
+  "fingerprint": "dec0b227ccd9ca0c852976a6dd6af81c4f9e1233a9500524859c93f274a62359",
+  "installed_removed_malformed_changed": true
+}

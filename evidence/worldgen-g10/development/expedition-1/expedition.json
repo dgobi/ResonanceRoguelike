@@ -1,0 +1,60 @@
+{
+  "passed": false,
+  "selection": "Known seed 20261023. Script selects real paths from full state, avoids occupied cells, prefers low movement costs and distance from threats. This is not unaided discovery or an exploration AI.",
+  "controls": "Normal fresh-start route, normal inventory/FOV, native AI and survival active, invincibility off. No teleports, actor removal, injected items, or health/thirst restoration during the outing. Gameplay RNG is the unchanged ordinary seed.",
+  "inputs": [],
+  "events": [],
+  "boundaries": [],
+  "start": {
+    "chunk": [
+      73,
+      99
+    ],
+    "submap": "sub_73_99_0",
+    "position": [
+      15,
+      20
+    ],
+    "turn": 480,
+    "hp": 60,
+    "hunger": 0.0,
+    "thirst": 0.0,
+    "inventory": [
+      "tallow_torch",
+      "crow_jerky",
+      "water_flask",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble"
+    ],
+    "actors": []
+  },
+  "error": "error(\"Couldn't open evidence\\\\worldgen-g10\\\\development\\\\expedition-1\\\\01-lab-normal-fov.png\")",
+  "failure_state": {
+    "chunk": [
+      73,
+      99
+    ],
+    "submap": "sub_73_99_0",
+    "position": [
+      15,
+      20
+    ],
+    "turn": 480,
+    "hp": 60,
+    "hunger": 0.0,
+    "thirst": 0.0,
+    "inventory": [
+      "tallow_torch",
+      "crow_jerky",
+      "water_flask",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble"
+    ],
+    "actors": []
+  },
+  "log": [
+    "You light the Tallow Torch."
+  ]
+}

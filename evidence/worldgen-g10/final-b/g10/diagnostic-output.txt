@@ -1,0 +1,1 @@
+{"passed": true, "evidence": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\final-b\\g10\\diagnostic"}

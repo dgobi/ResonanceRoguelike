@@ -1,0 +1,14 @@
+{
+  "run_id": "d-20261024-191845-b0b25615",
+  "suite": "diagnostic",
+  "scenario": "original",
+  "variant": "empty",
+  "phase": "read",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\diagnostic-original-empty-read\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\diagnostic-original-empty-read\\result.json",
+  "debug": false,
+  "expected": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\diagnostic-original-empty-write\\result.json"
+}

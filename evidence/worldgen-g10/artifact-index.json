@@ -1,0 +1,199 @@
+{
+  "passed": true,
+  "frozen_inputs": "9de7b8ee759dcade97bb992c83d7fb8b26a61eac",
+  "source_files": 741,
+  "source_relations": {
+    "exact": 464,
+    "line endings only": 277
+  },
+  "source_rule": "Raw tested SHA-256 and Git blob identities are both retained. Text canonicalization is only CRLF-to-LF then remaining CR-to-LF. Every differing tested file is uniformly reconstructable from its frozen Git blob.",
+  "runtime": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "interpreter": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "libraries": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    }
+  },
+  "production": {
+    "result": "evidence/worldgen-g10/final-b/production/d-20261024-191845-b0b25615/results.json",
+    "totals": {
+      "checks": 3675,
+      "passed": 3675,
+      "failed": 0,
+      "workers": 159
+    },
+    "deferred": [
+      {
+        "case": "E04",
+        "id": "UI-TEXT-HEIGHT",
+        "scope": "UI",
+        "symptom": {
+          "text_id": "lab_label_sarcophagus",
+          "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+          "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+        }
+      }
+    ]
+  },
+  "omitted_disposable_files": 2206,
+  "omitted_logical_bytes": 3815775167,
+  "criteria": [
+    {
+      "criterion": 1,
+      "label": "Coherent distinct wilderness and barren Ash Wastes",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/diagnostic/run.json",
+          "bytes": 860257,
+          "sha256": "573f165ce2ef9e03dc32ab8d1a846363eaa3abc2eb4c79ae0d5c8665f312e5cb"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/diagnostic/areas.json",
+          "bytes": 1409211,
+          "sha256": "8ad76fbabf7b1d58bcb3f6dfd8388f23899175cd6c78bb2ed9906443a8150871"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/image-review.json",
+          "bytes": 11674,
+          "sha256": "41158692f73f2f85880c730eaefccb6a801564cb984d8863e49df449d52399e8"
+        }
+      ]
+    },
+    {
+      "criterion": 2,
+      "label": "World-coordinate fields, seams, corners, bounded halo",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/terrain-lifecycle-output.txt",
+          "bytes": 2063,
+          "sha256": "46bb1fc76e2d796e9dac0d7b245f85ab8e81d08d283482603d2d259163a570af"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/diagnostic/areas.json",
+          "bytes": 1409211,
+          "sha256": "8ad76fbabf7b1d58bcb3f6dfd8388f23899175cd6c78bb2ed9906443a8150871"
+        }
+      ]
+    },
+    {
+      "criterion": 3,
+      "label": "Complete G9 plans, geography, ownership and access preserved",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/diagnostic/run.json",
+          "bytes": 860257,
+          "sha256": "573f165ce2ef9e03dc32ab8d1a846363eaa3abc2eb4c79ae0d5c8665f312e5cb"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/focused/run.json",
+          "bytes": 93933,
+          "sha256": "fa92768b19a296fa308c1e2c848dbf7d3261b521d73f28349fba7bc7db16c1b0"
+        }
+      ]
+    },
+    {
+      "criterion": 4,
+      "label": "Actual resource use and ordinary live excursion",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/expedition/expedition.json",
+          "bytes": 111378,
+          "sha256": "a8010e3d03f633f025398ef5133b4ceb88ea2ae7830d4b02647f05b76c9025a6"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/expedition/explored-checkpoint.zip",
+          "bytes": 1573431,
+          "sha256": "953446a932235086e70c8b560a0d40ebe226b2918d7b53b70a77e913dc81f964"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/cold-expedition.json",
+          "bytes": 96158,
+          "sha256": "ddb632fb0eaf1f4734348e0839e75a42b4d56dc9f3d7be890dc3bfe111a1d453"
+        }
+      ]
+    },
+    {
+      "criterion": 5,
+      "label": "Authentic G9 visited/pending state and atomic failure/recovery",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/tests/g10-genuine-g9.json",
+          "bytes": 2780,
+          "sha256": "75fd70792b0e778c2299f1f68820c787f0b65402c1e24b9acd80abfbc75bda03"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/tests/g10-policy-negatives.json",
+          "bytes": 1107,
+          "sha256": "87d0095302cf6374347719600c983f893c2275e1cb1f7ba2a7204fe9e896ab61"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/tests/g10-atomic-recovery.json",
+          "bytes": 515,
+          "sha256": "9559ea4ea12b3ce3ffd52e0123c338ea0f4a16bf3835ddf7d533acf411e102fc"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/tests/g10-frozen-policy.json",
+          "bytes": 281,
+          "sha256": "b08f7f578f621b4f880daf4dc2272671abdc5dbbaee157f10d203cd43ad33873"
+        }
+      ]
+    },
+    {
+      "criterion": 6,
+      "label": "Safe preview, installation, recovery, costs and final gates",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "evidence/worldgen-g10/final-b/g10/diagnostic/workflow.json",
+          "bytes": 8948,
+          "sha256": "16fb58669b546119fed9d40a4741fc76ffcd2e805bf429439fa24d0d45e5bb3b"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/boundary-costs.json",
+          "bytes": 102165,
+          "sha256": "13044724d811be62d126ae5b8b81096607ece459c3ab7db3f5c58c87fd893ddc"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/release.json",
+          "bytes": 96181,
+          "sha256": "834357e351baa46be35b3e2cc19cb26a295f5bfab79903d2f2139ddb4b77bc49"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/production/d-20261024-191845-b0b25615/results.json",
+          "bytes": 7497168,
+          "sha256": "98d19618ca48640f596a0aa42613b2c302f0069ef342129238868303d6346b1b"
+        }
+      ]
+    },
+    {
+      "criterion": 7,
+      "label": "Source and evidence binding, commissioned wiki policy",
+      "passed": true,
+      "evidence": [
+        {
+          "path": "AGENTS.md",
+          "bytes": 1266,
+          "sha256": "d9e084c1b2305077ee5c8ed39d25005d3758158587645b4eabbac9d23dc0602c"
+        },
+        {
+          "path": "roguelike/docs/WILDERNESS_TERRAIN.md",
+          "bytes": 6411,
+          "sha256": "c4654d63dbf8b18ddf09cb17c80022839bd1e03ee62f83e02b77c6caa096dcb9"
+        },
+        {
+          "path": "evidence/worldgen-g10/final-b/inputs.json",
+          "bytes": 494678,
+          "sha256": "679f4e1ed2ae70144281d736a3f45b17d49489dae7432e642d7cdc93bc0c3f11"
+        }
+      ]
+    }
+  ],
+  "publication": "Verified main/tag readback belongs to publication.json in the portable delivery and its adjacent external archive receipt; neither uses a self-referential committed hash."
+}

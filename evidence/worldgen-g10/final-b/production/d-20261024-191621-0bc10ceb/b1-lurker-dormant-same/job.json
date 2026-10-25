@@ -1,0 +1,13 @@
+{
+  "run_id": "d-20261024-191621-0bc10ceb",
+  "suite": "b1",
+  "scenario": "lurker",
+  "variant": "dormant",
+  "phase": "same",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\final-b\\production\\d-20261024-191621-0bc10ceb",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\final-b\\production\\d-20261024-191621-0bc10ceb\\b1-lurker-dormant-same\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g10\\final-b\\production\\d-20261024-191621-0bc10ceb\\b1-lurker-dormant-same\\result.json",
+  "debug": false
+}

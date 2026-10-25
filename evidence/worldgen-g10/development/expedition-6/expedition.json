@@ -1,0 +1,4386 @@
+{
+  "passed": true,
+  "selection": "Known seed 20261023. Script selects real paths from full state, avoids occupied cells, prefers low movement costs and distance from threats. This is not unaided discovery or an exploration AI.",
+  "controls": "Normal fresh-start route, normal inventory/FOV, native AI and survival active, invincibility off. No teleports, actor removal, injected items, or health/thirst restoration during the outing. Gameplay RNG is the unchanged ordinary seed.",
+  "inputs": [
+    {
+      "key": "right",
+      "terrain": "floor",
+      "start": [
+        14,
+        12
+      ],
+      "end": [
+        15,
+        12
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 483,
+      "hp": 60,
+      "thirst": 0.00375
+    },
+    {
+      "key": "down",
+      "terrain": "floor",
+      "start": [
+        15,
+        12
+      ],
+      "end": [
+        15,
+        13
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 484,
+      "hp": 60,
+      "thirst": 0.005
+    },
+    {
+      "key": "down",
+      "terrain": "floor",
+      "start": [
+        15,
+        13
+      ],
+      "end": [
+        15,
+        14
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 485,
+      "hp": 60,
+      "thirst": 0.00625
+    },
+    {
+      "key": "down",
+      "terrain": "gravel",
+      "start": [
+        15,
+        14
+      ],
+      "end": [
+        15,
+        15
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 486,
+      "hp": 60,
+      "thirst": 0.007500000000000001
+    },
+    {
+      "key": "down",
+      "terrain": "gravel",
+      "start": [
+        15,
+        15
+      ],
+      "end": [
+        15,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 487,
+      "hp": 60,
+      "thirst": 0.00875
+    },
+    {
+      "key": "right",
+      "terrain": "gravel",
+      "start": [
+        15,
+        16
+      ],
+      "end": [
+        16,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 488,
+      "hp": 60,
+      "thirst": 0.01
+    },
+    {
+      "key": "right",
+      "terrain": "gravel",
+      "start": [
+        16,
+        16
+      ],
+      "end": [
+        17,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 489,
+      "hp": 60,
+      "thirst": 0.01125
+    },
+    {
+      "key": "right",
+      "terrain": "gravel",
+      "start": [
+        17,
+        16
+      ],
+      "end": [
+        18,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 490,
+      "hp": 60,
+      "thirst": 0.012499999999999999
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        18,
+        16
+      ],
+      "end": [
+        19,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 493,
+      "hp": 60,
+      "thirst": 0.016249999999999997
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        19,
+        16
+      ],
+      "end": [
+        20,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 495,
+      "hp": 60,
+      "thirst": 0.01875
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        20,
+        16
+      ],
+      "end": [
+        21,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 498,
+      "hp": 60,
+      "thirst": 0.022500000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        21,
+        16
+      ],
+      "end": [
+        22,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 500,
+      "hp": 60,
+      "thirst": 0.025000000000000005
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        22,
+        16
+      ],
+      "end": [
+        23,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 503,
+      "hp": 60,
+      "thirst": 0.028750000000000008
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        23,
+        16
+      ],
+      "end": [
+        24,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 505,
+      "hp": 60,
+      "thirst": 0.03125000000000001
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        24,
+        16
+      ],
+      "end": [
+        25,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 508,
+      "hp": 60,
+      "thirst": 0.03500000000000001
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        25,
+        16
+      ],
+      "end": [
+        26,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 510,
+      "hp": 60,
+      "thirst": 0.03750000000000001
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        26,
+        16
+      ],
+      "end": [
+        27,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 513,
+      "hp": 60,
+      "thirst": 0.041250000000000016
+    },
+    {
+      "key": "right",
+      "terrain": "tall_grass",
+      "start": [
+        27,
+        16
+      ],
+      "end": [
+        28,
+        16
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 515,
+      "hp": 60,
+      "thirst": 0.04375000000000002
+    },
+    {
+      "key": "down",
+      "terrain": "tall_grass",
+      "start": [
+        28,
+        16
+      ],
+      "end": [
+        28,
+        17
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 518,
+      "hp": 60,
+      "thirst": 0.04750000000000002
+    },
+    {
+      "key": "down",
+      "terrain": "tall_grass",
+      "start": [
+        28,
+        17
+      ],
+      "end": [
+        28,
+        18
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 520,
+      "hp": 60,
+      "thirst": 0.050000000000000024
+    },
+    {
+      "key": "down",
+      "terrain": "tall_grass",
+      "start": [
+        28,
+        18
+      ],
+      "end": [
+        28,
+        19
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 523,
+      "hp": 60,
+      "thirst": 0.05375000000000003
+    },
+    {
+      "key": "down",
+      "terrain": "road_0",
+      "start": [
+        28,
+        19
+      ],
+      "end": [
+        28,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 524,
+      "hp": 60,
+      "thirst": 0.05500000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        28,
+        20
+      ],
+      "end": [
+        29,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 525,
+      "hp": 60,
+      "thirst": 0.05625000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        29,
+        20
+      ],
+      "end": [
+        30,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 526,
+      "hp": 60,
+      "thirst": 0.05750000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        30,
+        20
+      ],
+      "end": [
+        31,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 527,
+      "hp": 60,
+      "thirst": 0.05875000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        31,
+        20
+      ],
+      "end": [
+        32,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 528,
+      "hp": 60,
+      "thirst": 0.06000000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        32,
+        20
+      ],
+      "end": [
+        33,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 529,
+      "hp": 60,
+      "thirst": 0.061250000000000034
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        33,
+        20
+      ],
+      "end": [
+        34,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 530,
+      "hp": 60,
+      "thirst": 0.06250000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        34,
+        20
+      ],
+      "end": [
+        35,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 531,
+      "hp": 60,
+      "thirst": 0.06375000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        35,
+        20
+      ],
+      "end": [
+        36,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 532,
+      "hp": 60,
+      "thirst": 0.06500000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        36,
+        20
+      ],
+      "end": [
+        37,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 533,
+      "hp": 60,
+      "thirst": 0.06625000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        37,
+        20
+      ],
+      "end": [
+        38,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 534,
+      "hp": 60,
+      "thirst": 0.06750000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        38,
+        20
+      ],
+      "end": [
+        39,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 536,
+      "hp": 60,
+      "thirst": 0.07000000000000003
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        39,
+        20
+      ],
+      "end": [
+        40,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 537,
+      "hp": 60,
+      "thirst": 0.07125000000000004
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        40,
+        20
+      ],
+      "end": [
+        41,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 538,
+      "hp": 60,
+      "thirst": 0.07250000000000004
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        41,
+        20
+      ],
+      "end": [
+        42,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 539,
+      "hp": 60,
+      "thirst": 0.07375000000000004
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        42,
+        20
+      ],
+      "end": [
+        43,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 540,
+      "hp": 60,
+      "thirst": 0.07500000000000004
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        43,
+        20
+      ],
+      "end": [
+        44,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 541,
+      "hp": 60,
+      "thirst": 0.07625000000000004
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        44,
+        20
+      ],
+      "end": [
+        45,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 542,
+      "hp": 60,
+      "thirst": 0.07750000000000004
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        45,
+        20
+      ],
+      "end": [
+        46,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 543,
+      "hp": 60,
+      "thirst": 0.07875000000000004
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        46,
+        20
+      ],
+      "end": [
+        47,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 544,
+      "hp": 60,
+      "thirst": 0.08000000000000004
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        47,
+        20
+      ],
+      "end": [
+        48,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 545,
+      "hp": 60,
+      "thirst": 0.08125000000000004
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        48,
+        20
+      ],
+      "end": [
+        49,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 546,
+      "hp": 60,
+      "thirst": 0.08250000000000005
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        49,
+        20
+      ],
+      "end": [
+        50,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 547,
+      "hp": 60,
+      "thirst": 0.08375000000000005
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        50,
+        20
+      ],
+      "end": [
+        51,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 548,
+      "hp": 60,
+      "thirst": 0.08500000000000005
+    },
+    {
+      "key": "down",
+      "terrain": "road_0",
+      "start": [
+        51,
+        20
+      ],
+      "end": [
+        51,
+        21
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 549,
+      "hp": 60,
+      "thirst": 0.08625000000000005
+    },
+    {
+      "key": "down",
+      "terrain": "road_0",
+      "start": [
+        51,
+        21
+      ],
+      "end": [
+        51,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 550,
+      "hp": 60,
+      "thirst": 0.08750000000000005
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        51,
+        22
+      ],
+      "end": [
+        52,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 552,
+      "hp": 60,
+      "thirst": 0.09000000000000005
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        52,
+        22
+      ],
+      "end": [
+        53,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 553,
+      "hp": 60,
+      "thirst": 0.09125000000000005
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        53,
+        22
+      ],
+      "end": [
+        54,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 554,
+      "hp": 60,
+      "thirst": 0.09250000000000005
+    },
+    {
+      "key": "right",
+      "terrain": "road_0",
+      "start": [
+        54,
+        22
+      ],
+      "end": [
+        55,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 555,
+      "hp": 60,
+      "thirst": 0.09375000000000006
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        22
+      ],
+      "end": [
+        55,
+        23
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 556,
+      "hp": 60,
+      "thirst": 0.09500000000000006
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        23
+      ],
+      "end": [
+        55,
+        24
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 557,
+      "hp": 60,
+      "thirst": 0.09625000000000006
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        24
+      ],
+      "end": [
+        55,
+        25
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 558,
+      "hp": 60,
+      "thirst": 0.09750000000000006
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        25
+      ],
+      "end": [
+        55,
+        26
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 559,
+      "hp": 60,
+      "thirst": 0.09875000000000006
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        26
+      ],
+      "end": [
+        55,
+        27
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 560,
+      "hp": 60,
+      "thirst": 0.10000000000000006
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        27
+      ],
+      "end": [
+        55,
+        28
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 561,
+      "hp": 60,
+      "thirst": 0.10125000000000006
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        28
+      ],
+      "end": [
+        55,
+        29
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 562,
+      "hp": 60,
+      "thirst": 0.10250000000000006
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        29
+      ],
+      "end": [
+        55,
+        30
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 563,
+      "hp": 60,
+      "thirst": 0.10375000000000006
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        30
+      ],
+      "end": [
+        55,
+        31
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 564,
+      "hp": 60,
+      "thirst": 0.10500000000000007
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        31
+      ],
+      "end": [
+        55,
+        32
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 565,
+      "hp": 60,
+      "thirst": 0.10625000000000007
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        32
+      ],
+      "end": [
+        55,
+        33
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 566,
+      "hp": 60,
+      "thirst": 0.10750000000000007
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        33
+      ],
+      "end": [
+        55,
+        34
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 567,
+      "hp": 60,
+      "thirst": 0.10875000000000007
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        34
+      ],
+      "end": [
+        55,
+        35
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 568,
+      "hp": 60,
+      "thirst": 0.11000000000000007
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        35
+      ],
+      "end": [
+        55,
+        36
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 569,
+      "hp": 60,
+      "thirst": 0.11125000000000007
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        36
+      ],
+      "end": [
+        55,
+        37
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 570,
+      "hp": 60,
+      "thirst": 0.11250000000000007
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        37
+      ],
+      "end": [
+        55,
+        38
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 571,
+      "hp": 60,
+      "thirst": 0.11375000000000007
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        38
+      ],
+      "end": [
+        55,
+        39
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 572,
+      "hp": 60,
+      "thirst": 0.11500000000000007
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        39
+      ],
+      "end": [
+        55,
+        40
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 573,
+      "hp": 60,
+      "thirst": 0.11625000000000008
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        40
+      ],
+      "end": [
+        55,
+        41
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 574,
+      "hp": 60,
+      "thirst": 0.11750000000000008
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        41
+      ],
+      "end": [
+        55,
+        42
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 575,
+      "hp": 60,
+      "thirst": 0.11875000000000008
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        0
+      ],
+      "end": [
+        55,
+        1
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 577,
+      "hp": 60,
+      "thirst": 0.12125000000000008
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        1
+      ],
+      "end": [
+        55,
+        2
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 578,
+      "hp": 60,
+      "thirst": 0.12250000000000008
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        2
+      ],
+      "end": [
+        55,
+        3
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 579,
+      "hp": 60,
+      "thirst": 0.12375000000000008
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        55,
+        3
+      ],
+      "end": [
+        55,
+        4
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 580,
+      "hp": 60,
+      "thirst": 0.12500000000000008
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        55,
+        4
+      ],
+      "end": [
+        56,
+        4
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 581,
+      "hp": 60,
+      "thirst": 0.12625000000000008
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        56,
+        4
+      ],
+      "end": [
+        57,
+        4
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 582,
+      "hp": 60,
+      "thirst": 0.12750000000000009
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        57,
+        4
+      ],
+      "end": [
+        58,
+        4
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 583,
+      "hp": 60,
+      "thirst": 0.1287500000000001
+    },
+    {
+      "key": "right",
+      "terrain": "dead_wood",
+      "start": [
+        58,
+        4
+      ],
+      "end": [
+        59,
+        4
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 584,
+      "hp": 60,
+      "thirst": 0.1300000000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        59,
+        4
+      ],
+      "end": [
+        59,
+        5
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 585,
+      "hp": 60,
+      "thirst": 0.1312500000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        59,
+        5
+      ],
+      "end": [
+        60,
+        5
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 586,
+      "hp": 60,
+      "thirst": 0.1325000000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        60,
+        5
+      ],
+      "end": [
+        60,
+        6
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 587,
+      "hp": 60,
+      "thirst": 0.1337500000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        60,
+        6
+      ],
+      "end": [
+        61,
+        6
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 588,
+      "hp": 60,
+      "thirst": 0.1350000000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        61,
+        6
+      ],
+      "end": [
+        61,
+        7
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 589,
+      "hp": 60,
+      "thirst": 0.1362500000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        61,
+        7
+      ],
+      "end": [
+        61,
+        8
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 590,
+      "hp": 60,
+      "thirst": 0.1375000000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        61,
+        8
+      ],
+      "end": [
+        61,
+        9
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 591,
+      "hp": 60,
+      "thirst": 0.1387500000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        61,
+        9
+      ],
+      "end": [
+        62,
+        9
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 592,
+      "hp": 60,
+      "thirst": 0.1400000000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        62,
+        9
+      ],
+      "end": [
+        62,
+        10
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 593,
+      "hp": 60,
+      "thirst": 0.1412500000000001
+    },
+    {
+      "key": "down",
+      "terrain": "dead_wood",
+      "start": [
+        62,
+        10
+      ],
+      "end": [
+        62,
+        11
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 594,
+      "hp": 60,
+      "thirst": 0.1425000000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        62,
+        11
+      ],
+      "end": [
+        62,
+        12
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 595,
+      "hp": 60,
+      "thirst": 0.1437500000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        62,
+        12
+      ],
+      "end": [
+        62,
+        13
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 596,
+      "hp": 60,
+      "thirst": 0.1450000000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        62,
+        13
+      ],
+      "end": [
+        62,
+        14
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 597,
+      "hp": 60,
+      "thirst": 0.1462500000000001
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        62,
+        14
+      ],
+      "end": [
+        62,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 598,
+      "hp": 60,
+      "thirst": 0.1475000000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        62,
+        15
+      ],
+      "end": [
+        63,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 599,
+      "hp": 60,
+      "thirst": 0.1487500000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        63,
+        15
+      ],
+      "end": [
+        64,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 600,
+      "hp": 60,
+      "thirst": 0.1500000000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        64,
+        15
+      ],
+      "end": [
+        65,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 601,
+      "hp": 60,
+      "thirst": 0.1512500000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        65,
+        15
+      ],
+      "end": [
+        66,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 602,
+      "hp": 60,
+      "thirst": 0.1525000000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        66,
+        15
+      ],
+      "end": [
+        67,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 603,
+      "hp": 60,
+      "thirst": 0.1537500000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        67,
+        15
+      ],
+      "end": [
+        68,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 604,
+      "hp": 60,
+      "thirst": 0.1550000000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        68,
+        15
+      ],
+      "end": [
+        69,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 605,
+      "hp": 60,
+      "thirst": 0.1562500000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        69,
+        15
+      ],
+      "end": [
+        70,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 606,
+      "hp": 60,
+      "thirst": 0.1575000000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        70,
+        15
+      ],
+      "end": [
+        71,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 607,
+      "hp": 60,
+      "thirst": 0.1587500000000001
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        71,
+        15
+      ],
+      "end": [
+        72,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 608,
+      "hp": 60,
+      "thirst": 0.16000000000000011
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        72,
+        15
+      ],
+      "end": [
+        73,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 609,
+      "hp": 60,
+      "thirst": 0.16125000000000012
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        73,
+        15
+      ],
+      "end": [
+        74,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 610,
+      "hp": 60,
+      "thirst": 0.16250000000000012
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        74,
+        15
+      ],
+      "end": [
+        75,
+        15
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 611,
+      "hp": 60,
+      "thirst": 0.16375000000000012
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        75,
+        15
+      ],
+      "end": [
+        75,
+        16
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 612,
+      "hp": 60,
+      "thirst": 0.16500000000000012
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        75,
+        16
+      ],
+      "end": [
+        76,
+        16
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 613,
+      "hp": 60,
+      "thirst": 0.16625000000000012
+    },
+    {
+      "key": "down",
+      "terrain": "grass",
+      "start": [
+        76,
+        16
+      ],
+      "end": [
+        76,
+        17
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 614,
+      "hp": 60,
+      "thirst": 0.16750000000000012
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        76,
+        17
+      ],
+      "end": [
+        77,
+        17
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 615,
+      "hp": 60,
+      "thirst": 0.16875000000000012
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        77,
+        17
+      ],
+      "end": [
+        78,
+        17
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 616,
+      "hp": 60,
+      "thirst": 0.17000000000000012
+    },
+    {
+      "key": "right",
+      "terrain": "grass",
+      "start": [
+        78,
+        17
+      ],
+      "end": [
+        79,
+        17
+      ],
+      "chunk": [
+        73,
+        100
+      ],
+      "turn": 617,
+      "hp": 60,
+      "thirst": 0.17125000000000012
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        17
+      ],
+      "end": [
+        0,
+        16
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 619,
+      "hp": 60,
+      "thirst": 0.17375000000000013
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        16
+      ],
+      "end": [
+        0,
+        15
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 620,
+      "hp": 60,
+      "thirst": 0.17500000000000013
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        15
+      ],
+      "end": [
+        0,
+        14
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 621,
+      "hp": 60,
+      "thirst": 0.17625000000000013
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        14
+      ],
+      "end": [
+        0,
+        13
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 622,
+      "hp": 60,
+      "thirst": 0.17750000000000013
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        13
+      ],
+      "end": [
+        0,
+        12
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 623,
+      "hp": 60,
+      "thirst": 0.17875000000000013
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        12
+      ],
+      "end": [
+        0,
+        11
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 624,
+      "hp": 60,
+      "thirst": 0.18000000000000013
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        11
+      ],
+      "end": [
+        0,
+        10
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 625,
+      "hp": 60,
+      "thirst": 0.18125000000000013
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        10
+      ],
+      "end": [
+        0,
+        9
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 626,
+      "hp": 60,
+      "thirst": 0.18250000000000013
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        9
+      ],
+      "end": [
+        0,
+        8
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 627,
+      "hp": 60,
+      "thirst": 0.18375000000000014
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        8
+      ],
+      "end": [
+        0,
+        7
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 628,
+      "hp": 60,
+      "thirst": 0.18500000000000014
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        7
+      ],
+      "end": [
+        0,
+        6
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 629,
+      "hp": 60,
+      "thirst": 0.18625000000000014
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        6
+      ],
+      "end": [
+        0,
+        5
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 630,
+      "hp": 60,
+      "thirst": 0.18750000000000014
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        5
+      ],
+      "end": [
+        0,
+        4
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 631,
+      "hp": 60,
+      "thirst": 0.18875000000000014
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        4
+      ],
+      "end": [
+        0,
+        3
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 632,
+      "hp": 60,
+      "thirst": 0.19000000000000014
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        3
+      ],
+      "end": [
+        0,
+        2
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 633,
+      "hp": 60,
+      "thirst": 0.19125000000000014
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        2
+      ],
+      "end": [
+        0,
+        1
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 634,
+      "hp": 60,
+      "thirst": 0.19250000000000014
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        0,
+        1
+      ],
+      "end": [
+        0,
+        0
+      ],
+      "chunk": [
+        74,
+        100
+      ],
+      "turn": 635,
+      "hp": 60,
+      "thirst": 0.19375000000000014
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        42
+      ],
+      "end": [
+        79,
+        41
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 639,
+      "hp": 60,
+      "thirst": 0.003875
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        41
+      ],
+      "end": [
+        79,
+        40
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 640,
+      "hp": 60,
+      "thirst": 0.005125
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        40
+      ],
+      "end": [
+        79,
+        39
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 641,
+      "hp": 60,
+      "thirst": 0.0063750000000000005
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        39
+      ],
+      "end": [
+        79,
+        38
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 642,
+      "hp": 60,
+      "thirst": 0.007625000000000001
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        38
+      ],
+      "end": [
+        79,
+        37
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 643,
+      "hp": 60,
+      "thirst": 0.008875000000000001
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        37
+      ],
+      "end": [
+        79,
+        36
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 644,
+      "hp": 60,
+      "thirst": 0.010125
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        36
+      ],
+      "end": [
+        79,
+        35
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 645,
+      "hp": 60,
+      "thirst": 0.011375
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        35
+      ],
+      "end": [
+        79,
+        34
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 646,
+      "hp": 60,
+      "thirst": 0.012624999999999999
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        34
+      ],
+      "end": [
+        79,
+        33
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 647,
+      "hp": 60,
+      "thirst": 0.013874999999999998
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        33
+      ],
+      "end": [
+        79,
+        32
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 648,
+      "hp": 60,
+      "thirst": 0.015124999999999998
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        32
+      ],
+      "end": [
+        79,
+        31
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 649,
+      "hp": 60,
+      "thirst": 0.016374999999999997
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        31
+      ],
+      "end": [
+        79,
+        30
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 650,
+      "hp": 60,
+      "thirst": 0.017625
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        30
+      ],
+      "end": [
+        79,
+        29
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 651,
+      "hp": 60,
+      "thirst": 0.018875
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        29
+      ],
+      "end": [
+        79,
+        28
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 652,
+      "hp": 60,
+      "thirst": 0.020125
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        28
+      ],
+      "end": [
+        79,
+        27
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 653,
+      "hp": 60,
+      "thirst": 0.021375
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        27
+      ],
+      "end": [
+        79,
+        26
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 654,
+      "hp": 60,
+      "thirst": 0.022625000000000003
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        26
+      ],
+      "end": [
+        79,
+        25
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 655,
+      "hp": 60,
+      "thirst": 0.023875000000000004
+    },
+    {
+      "key": "up",
+      "terrain": "grass",
+      "start": [
+        79,
+        25
+      ],
+      "end": [
+        79,
+        24
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 656,
+      "hp": 60,
+      "thirst": 0.025125000000000005
+    },
+    {
+      "key": "up",
+      "terrain": "tall_grass",
+      "start": [
+        79,
+        24
+      ],
+      "end": [
+        79,
+        23
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 658,
+      "hp": 60,
+      "thirst": 0.027625000000000007
+    },
+    {
+      "key": "up",
+      "terrain": "road_0",
+      "start": [
+        79,
+        23
+      ],
+      "end": [
+        79,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 659,
+      "hp": 60,
+      "thirst": 0.02887500000000001
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        79,
+        22
+      ],
+      "end": [
+        78,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 660,
+      "hp": 60,
+      "thirst": 0.03012500000000001
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        78,
+        22
+      ],
+      "end": [
+        77,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 661,
+      "hp": 60,
+      "thirst": 0.03137500000000001
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        77,
+        22
+      ],
+      "end": [
+        76,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 662,
+      "hp": 60,
+      "thirst": 0.03262500000000001
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        76,
+        22
+      ],
+      "end": [
+        75,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 663,
+      "hp": 60,
+      "thirst": 0.03387500000000001
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        75,
+        22
+      ],
+      "end": [
+        74,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 664,
+      "hp": 60,
+      "thirst": 0.03512500000000001
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        74,
+        22
+      ],
+      "end": [
+        73,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 665,
+      "hp": 60,
+      "thirst": 0.03637500000000001
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        73,
+        22
+      ],
+      "end": [
+        72,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 666,
+      "hp": 60,
+      "thirst": 0.03762500000000001
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        72,
+        22
+      ],
+      "end": [
+        71,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 667,
+      "hp": 60,
+      "thirst": 0.038875000000000014
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        71,
+        22
+      ],
+      "end": [
+        70,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 668,
+      "hp": 60,
+      "thirst": 0.040125000000000015
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        70,
+        22
+      ],
+      "end": [
+        69,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 669,
+      "hp": 60,
+      "thirst": 0.041375000000000016
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        69,
+        22
+      ],
+      "end": [
+        68,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 670,
+      "hp": 60,
+      "thirst": 0.04262500000000002
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        68,
+        22
+      ],
+      "end": [
+        67,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 671,
+      "hp": 60,
+      "thirst": 0.04387500000000002
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        67,
+        22
+      ],
+      "end": [
+        66,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 672,
+      "hp": 60,
+      "thirst": 0.04512500000000002
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        66,
+        22
+      ],
+      "end": [
+        65,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 673,
+      "hp": 60,
+      "thirst": 0.04637500000000002
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        65,
+        22
+      ],
+      "end": [
+        64,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 674,
+      "hp": 60,
+      "thirst": 0.04762500000000002
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        64,
+        22
+      ],
+      "end": [
+        63,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 675,
+      "hp": 60,
+      "thirst": 0.04887500000000002
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        63,
+        22
+      ],
+      "end": [
+        62,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 676,
+      "hp": 60,
+      "thirst": 0.050125000000000024
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        62,
+        22
+      ],
+      "end": [
+        61,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 677,
+      "hp": 60,
+      "thirst": 0.051375000000000025
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        61,
+        22
+      ],
+      "end": [
+        60,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 678,
+      "hp": 60,
+      "thirst": 0.052625000000000026
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        60,
+        22
+      ],
+      "end": [
+        59,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 679,
+      "hp": 60,
+      "thirst": 0.05387500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        59,
+        22
+      ],
+      "end": [
+        58,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 680,
+      "hp": 60,
+      "thirst": 0.05512500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        58,
+        22
+      ],
+      "end": [
+        57,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 681,
+      "hp": 60,
+      "thirst": 0.05637500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        57,
+        22
+      ],
+      "end": [
+        56,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 682,
+      "hp": 60,
+      "thirst": 0.05762500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        56,
+        22
+      ],
+      "end": [
+        55,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 683,
+      "hp": 60,
+      "thirst": 0.05887500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        55,
+        22
+      ],
+      "end": [
+        54,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 684,
+      "hp": 60,
+      "thirst": 0.06012500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        54,
+        22
+      ],
+      "end": [
+        53,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 685,
+      "hp": 60,
+      "thirst": 0.061375000000000034
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        53,
+        22
+      ],
+      "end": [
+        52,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 686,
+      "hp": 60,
+      "thirst": 0.06262500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        52,
+        22
+      ],
+      "end": [
+        51,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 687,
+      "hp": 60,
+      "thirst": 0.06387500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        51,
+        22
+      ],
+      "end": [
+        50,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 688,
+      "hp": 60,
+      "thirst": 0.06512500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        50,
+        22
+      ],
+      "end": [
+        49,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 689,
+      "hp": 60,
+      "thirst": 0.06637500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        49,
+        22
+      ],
+      "end": [
+        48,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 690,
+      "hp": 60,
+      "thirst": 0.06762500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        48,
+        22
+      ],
+      "end": [
+        47,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 691,
+      "hp": 60,
+      "thirst": 0.06887500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        47,
+        22
+      ],
+      "end": [
+        46,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 692,
+      "hp": 60,
+      "thirst": 0.07012500000000003
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        46,
+        22
+      ],
+      "end": [
+        45,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 693,
+      "hp": 60,
+      "thirst": 0.07137500000000004
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        45,
+        22
+      ],
+      "end": [
+        44,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 694,
+      "hp": 60,
+      "thirst": 0.07262500000000004
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        44,
+        22
+      ],
+      "end": [
+        43,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 695,
+      "hp": 60,
+      "thirst": 0.07387500000000004
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        43,
+        22
+      ],
+      "end": [
+        42,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 696,
+      "hp": 60,
+      "thirst": 0.07512500000000004
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        42,
+        22
+      ],
+      "end": [
+        41,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 697,
+      "hp": 60,
+      "thirst": 0.07637500000000004
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        41,
+        22
+      ],
+      "end": [
+        40,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 698,
+      "hp": 60,
+      "thirst": 0.07762500000000004
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        40,
+        22
+      ],
+      "end": [
+        39,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 699,
+      "hp": 60,
+      "thirst": 0.07887500000000004
+    },
+    {
+      "key": "left",
+      "terrain": "road_0",
+      "start": [
+        39,
+        22
+      ],
+      "end": [
+        38,
+        22
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 700,
+      "hp": 60,
+      "thirst": 0.08012500000000004
+    },
+    {
+      "key": "up",
+      "terrain": "road_0",
+      "start": [
+        38,
+        22
+      ],
+      "end": [
+        38,
+        21
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 701,
+      "hp": 60,
+      "thirst": 0.08137500000000004
+    },
+    {
+      "key": "up",
+      "terrain": "road_0",
+      "start": [
+        38,
+        21
+      ],
+      "end": [
+        38,
+        20
+      ],
+      "chunk": [
+        73,
+        99
+      ],
+      "turn": 702,
+      "hp": 60,
+      "thirst": 0.08262500000000005
+    }
+  ],
+  "events": [
+    {
+      "action": "equip normal starting blade and jacket",
+      "state": {
+        "chunk": [
+          73,
+          99
+        ],
+        "submap": "sub_73_99_0",
+        "position": [
+          15,
+          20
+        ],
+        "turn": 482,
+        "hp": 60,
+        "hunger": 0.002,
+        "thirst": 0.0025,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": []
+      }
+    },
+    {
+      "action": "starting waystone",
+      "chunk": [
+        73,
+        99
+      ],
+      "xy": [
+        38,
+        19
+      ]
+    },
+    {
+      "action": "harvest through interaction cursor",
+      "chunk": [
+        73,
+        99
+      ],
+      "xy": [
+        51,
+        23
+      ],
+      "decor": "shroom_sulphur_cap",
+      "inventory": [
+        "tallow_torch",
+        "crow_jerky",
+        "water_flask",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble",
+        "sulphur_cap_fragment"
+      ]
+    },
+    {
+      "action": "natural boundary crossing",
+      "state": {
+        "chunk": [
+          73,
+          100
+        ],
+        "submap": null,
+        "position": [
+          55,
+          0
+        ],
+        "turn": 576,
+        "hp": 60,
+        "hunger": 0.09600000000000007,
+        "thirst": 0.12000000000000008,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment"
+        ],
+        "actors": [
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 73,
+            "y": 6,
+            "hp": 30
+          },
+          {
+            "id": "briar_lurker",
+            "name": "Briar Lurker",
+            "x": 77,
+            "y": 2,
+            "hp": 12
+          },
+          {
+            "id": "bog_wraith",
+            "name": "Bog Wraith",
+            "x": 11,
+            "y": 41,
+            "hp": 20
+          },
+          {
+            "id": "drowned_revenant",
+            "name": "Drowned Revenant",
+            "x": 3,
+            "y": 7,
+            "hp": 14
+          }
+        ]
+      }
+    },
+    {
+      "action": "natural boundary crossing",
+      "state": {
+        "chunk": [
+          74,
+          100
+        ],
+        "submap": null,
+        "position": [
+          0,
+          17
+        ],
+        "turn": 618,
+        "hp": 60,
+        "hunger": 0.1380000000000001,
+        "thirst": 0.17250000000000013,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment"
+        ],
+        "actors": [
+          {
+            "id": "drowned_revenant",
+            "name": "Drowned Revenant",
+            "x": 8,
+            "y": 35,
+            "hp": 14
+          }
+        ]
+      }
+    },
+    {
+      "action": "natural boundary crossing",
+      "state": {
+        "chunk": [
+          74,
+          99
+        ],
+        "submap": null,
+        "position": [
+          0,
+          42
+        ],
+        "turn": 636,
+        "hp": 60,
+        "hunger": 0.1560000000000001,
+        "thirst": 0.19512500000000013,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment"
+        ],
+        "actors": [
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 71,
+            "y": 26,
+            "hp": 30
+          }
+        ]
+      }
+    },
+    {
+      "action": "drink starting flask through inventory handler",
+      "before_thirst": 0.19512500000000013,
+      "after_thirst": 0.0013750000000000001
+    },
+    {
+      "action": "natural boundary crossing",
+      "state": {
+        "chunk": [
+          73,
+          99
+        ],
+        "submap": null,
+        "position": [
+          79,
+          42
+        ],
+        "turn": 638,
+        "hp": 60,
+        "hunger": 0.1580000000000001,
+        "thirst": 0.002625,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "bog_wraith",
+            "name": "Bog Wraith",
+            "x": 16,
+            "y": 34,
+            "hp": 20
+          },
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 68,
+            "y": 31,
+            "hp": 30
+          },
+          {
+            "id": "briar_lurker",
+            "name": "Briar Lurker",
+            "x": 74,
+            "y": 31,
+            "hp": 12
+          }
+        ]
+      }
+    }
+  ],
+  "boundaries": [
+    {
+      "direction": [
+        0,
+        1
+      ],
+      "start": {
+        "chunk": [
+          73,
+          99
+        ],
+        "submap": null,
+        "position": [
+          55,
+          42
+        ],
+        "turn": 575,
+        "hp": 60,
+        "hunger": 0.09500000000000007,
+        "thirst": 0.11875000000000008,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment"
+        ],
+        "actors": [
+          {
+            "id": "bog_wraith",
+            "name": "Bog Wraith",
+            "x": 16,
+            "y": 34,
+            "hp": 20
+          },
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 67,
+            "y": 31,
+            "hp": 30
+          },
+          {
+            "id": "briar_lurker",
+            "name": "Briar Lurker",
+            "x": 74,
+            "y": 31,
+            "hp": 12
+          }
+        ]
+      },
+      "end": {
+        "chunk": [
+          73,
+          100
+        ],
+        "submap": null,
+        "position": [
+          55,
+          0
+        ],
+        "turn": 576,
+        "hp": 60,
+        "hunger": 0.09600000000000007,
+        "thirst": 0.12000000000000008,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment"
+        ],
+        "actors": [
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 73,
+            "y": 6,
+            "hp": 30
+          },
+          {
+            "id": "briar_lurker",
+            "name": "Briar Lurker",
+            "x": 77,
+            "y": 2,
+            "hp": 12
+          },
+          {
+            "id": "bog_wraith",
+            "name": "Bog Wraith",
+            "x": 11,
+            "y": 41,
+            "hp": 20
+          },
+          {
+            "id": "drowned_revenant",
+            "name": "Drowned Revenant",
+            "x": 3,
+            "y": 7,
+            "hp": 14
+          }
+        ]
+      },
+      "seconds": 0.22145169996656477,
+      "off_road_departure": true
+    },
+    {
+      "direction": [
+        1,
+        0
+      ],
+      "start": {
+        "chunk": [
+          73,
+          100
+        ],
+        "submap": null,
+        "position": [
+          79,
+          17
+        ],
+        "turn": 617,
+        "hp": 60,
+        "hunger": 0.1370000000000001,
+        "thirst": 0.17125000000000012,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment"
+        ],
+        "actors": [
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 77,
+            "y": 12,
+            "hp": 30
+          },
+          {
+            "id": "briar_lurker",
+            "name": "Briar Lurker",
+            "x": 77,
+            "y": 2,
+            "hp": 12
+          },
+          {
+            "id": "bog_wraith",
+            "name": "Bog Wraith",
+            "x": 11,
+            "y": 41,
+            "hp": 20
+          },
+          {
+            "id": "drowned_revenant",
+            "name": "Drowned Revenant",
+            "x": 2,
+            "y": 4,
+            "hp": 14
+          }
+        ]
+      },
+      "end": {
+        "chunk": [
+          74,
+          100
+        ],
+        "submap": null,
+        "position": [
+          0,
+          17
+        ],
+        "turn": 618,
+        "hp": 60,
+        "hunger": 0.1380000000000001,
+        "thirst": 0.17250000000000013,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment"
+        ],
+        "actors": [
+          {
+            "id": "drowned_revenant",
+            "name": "Drowned Revenant",
+            "x": 8,
+            "y": 35,
+            "hp": 14
+          }
+        ]
+      },
+      "seconds": 0.379193699976895,
+      "off_road_departure": true
+    },
+    {
+      "direction": [
+        0,
+        -1
+      ],
+      "start": {
+        "chunk": [
+          74,
+          100
+        ],
+        "submap": null,
+        "position": [
+          0,
+          0
+        ],
+        "turn": 635,
+        "hp": 60,
+        "hunger": 0.1550000000000001,
+        "thirst": 0.19375000000000014,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment"
+        ],
+        "actors": [
+          {
+            "id": "drowned_revenant",
+            "name": "Drowned Revenant",
+            "x": 8,
+            "y": 36,
+            "hp": 14
+          },
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 1,
+            "y": 13,
+            "hp": 30
+          }
+        ]
+      },
+      "end": {
+        "chunk": [
+          74,
+          99
+        ],
+        "submap": null,
+        "position": [
+          0,
+          42
+        ],
+        "turn": 636,
+        "hp": 60,
+        "hunger": 0.1560000000000001,
+        "thirst": 0.19512500000000013,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment"
+        ],
+        "actors": [
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 71,
+            "y": 26,
+            "hp": 30
+          }
+        ]
+      },
+      "seconds": 0.32693290000315756,
+      "off_road_departure": true
+    },
+    {
+      "direction": [
+        -1,
+        0
+      ],
+      "start": {
+        "chunk": [
+          74,
+          99
+        ],
+        "submap": null,
+        "position": [
+          0,
+          42
+        ],
+        "turn": 637,
+        "hp": 60,
+        "hunger": 0.1570000000000001,
+        "thirst": 0.0013750000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 70,
+            "y": 26,
+            "hp": 30
+          }
+        ]
+      },
+      "end": {
+        "chunk": [
+          73,
+          99
+        ],
+        "submap": null,
+        "position": [
+          79,
+          42
+        ],
+        "turn": 638,
+        "hp": 60,
+        "hunger": 0.1580000000000001,
+        "thirst": 0.002625,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "sulphur_cap_fragment",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "bog_wraith",
+            "name": "Bog Wraith",
+            "x": 16,
+            "y": 34,
+            "hp": 20
+          },
+          {
+            "id": "hollow_knight",
+            "name": "Hollow Knight",
+            "x": 68,
+            "y": 31,
+            "hp": 30
+          },
+          {
+            "id": "briar_lurker",
+            "name": "Briar Lurker",
+            "x": 74,
+            "y": 31,
+            "hp": 12
+          }
+        ]
+      },
+      "seconds": 0.02540840004803613,
+      "off_road_departure": true
+    }
+  ],
+  "start": {
+    "chunk": [
+      73,
+      99
+    ],
+    "submap": "sub_73_99_0",
+    "position": [
+      15,
+      20
+    ],
+    "turn": 480,
+    "hp": 60,
+    "hunger": 0.0,
+    "thirst": 0.0,
+    "inventory": [
+      "tallow_torch",
+      "crow_jerky",
+      "water_flask",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble"
+    ],
+    "actors": []
+  },
+  "final": {
+    "chunk": [
+      73,
+      99
+    ],
+    "submap": null,
+    "position": [
+      38,
+      20
+    ],
+    "turn": 702,
+    "hp": 60,
+    "hunger": 0.22200000000000017,
+    "thirst": 0.08262500000000005,
+    "inventory": [
+      "tallow_torch",
+      "crow_jerky",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble",
+      "sulphur_cap_fragment",
+      "empty_water_skin"
+    ],
+    "actors": [
+      {
+        "id": "bog_wraith",
+        "name": "Bog Wraith",
+        "x": 16,
+        "y": 34,
+        "hp": 20
+      },
+      {
+        "id": "hollow_knight",
+        "name": "Hollow Knight",
+        "x": 65,
+        "y": 21,
+        "hp": 30
+      },
+      {
+        "id": "briar_lurker",
+        "name": "Briar Lurker",
+        "x": 74,
+        "y": 31,
+        "hp": 12
+      }
+    ]
+  },
+  "visited": {
+    "(73, 99)": "cad6a0710a8952ce5c38949e66bc0cbd6715cf317e4a6b6e0e033a979ac1e8f2",
+    "(73, 100)": "280865851238741d4c25391399453abb30d28750c36a6d014b232ad31dd0ad29",
+    "(74, 99)": "8e51fdc5757be7636ac7cdc6937f7b43c36e0575949e0f0386bdf6bb1bb25952",
+    "(74, 100)": "10dd4475d7ec18c6a9c1205c57bede6ebb9982c8c668e63576d261e77236a6e5"
+  },
+  "pending": {
+    "chunk": [
+      75,
+      101
+    ],
+    "fingerprint": "bdb76b666b192bbdf1c9e0c1d2b42d5baa05ec84be3c6c29f00a718496cc182a"
+  },
+  "restore": {
+    "F5": true,
+    "cold_load": true,
+    "F9": true,
+    "player_and_supplies": true,
+    "actors_terrain_and_mutations": true,
+    "post_outing_wait_rewound_only_for_explicit_F9_test": true
+  },
+  "turns": 222,
+  "movement_inputs": 192,
+  "checkpoint_sha256": "186046f1fa91b6ca4b436219e57974a063e5350c4269a6083518953326491fcd",
+  "log": [
+    "You light the Tallow Torch.",
+    "Thou takest up a crude blade.",
+    "Thou takest up a leather jack.",
+    "You emerge into the waking forest.",
+    "Something stirs in the bone. A word surfaces \u2014 [kkiivsh]: the husk.",
+    "Press [L] to open the Lexicon.",
+    "You take a cutting of the fleshy orange cap exudes a pungent aroma.",
+    "You move into Salthaven Forest.",
+    "You move into Uathth Forest.",
+    "You move into Kalaan Plain.",
+    "The liquid steadies something.",
+    "You move into the waking forest.",
+    "Progress preserved.",
+    "The world reassembles itself around you."
+  ]
+}

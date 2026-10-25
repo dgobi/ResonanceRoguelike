@@ -1,0 +1,13 @@
+{
+  "run_id": "d-20261024-191845-b0b25615",
+  "suite": "b3",
+  "scenario": "journey",
+  "variant": "debug-delete",
+  "phase": "loop",
+  "flavor": "candidate",
+  "run_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615",
+  "game": "G:\\GameDev\\RoguelikeProject\\roguelike",
+  "save_root": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\b3-journey-debug-delete-loop\\saves",
+  "result": "G:\\GameDev\\RoguelikeProject\\.baseline\\g10-final-b-production\\d-20261024-191845-b0b25615\\b3-journey-debug-delete-loop\\result.json",
+  "debug": true
+}

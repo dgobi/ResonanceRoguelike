@@ -1,0 +1,4284 @@
+{
+  "passed": true,
+  "seed": 20261023,
+  "chunk": [
+    72,
+    102
+  ],
+  "size": [
+    2,
+    2
+  ],
+  "profile": "installed defaults",
+  "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+  "policy": {
+    "version": 1,
+    "algorithm": "wilderness-fields-v1",
+    "seed_domain": "resonance-wilderness-1",
+    "profiles": {
+      "version": 1,
+      "profiles": {
+        "forest": {
+          "palette": {
+            "ground": "varied_grass",
+            "patch": "tall_grass",
+            "obstacle": "tree"
+          },
+          "scale": 30,
+          "cover": 0.46,
+          "patch_amount": 0.28,
+          "wet_amount": 0.12,
+          "transition": 10
+        },
+        "plains": {
+          "palette": {
+            "ground": "varied_grass",
+            "patch": "tall_grass",
+            "obstacle": "tree"
+          },
+          "scale": 38,
+          "cover": 0.14,
+          "patch_amount": 0.35,
+          "wet_amount": 0.06,
+          "transition": 10
+        },
+        "heath": {
+          "palette": {
+            "ground": "varied_grass",
+            "patch": "gravel",
+            "obstacle": "rock"
+          },
+          "scale": 26,
+          "cover": 0.18,
+          "patch_amount": 0.32,
+          "wet_amount": 0.04,
+          "transition": 8
+        },
+        "swamp": {
+          "palette": {
+            "ground": "packed_earth",
+            "patch": "mud",
+            "obstacle": "tree"
+          },
+          "scale": 24,
+          "cover": 0.27,
+          "patch_amount": 0.53,
+          "wet_amount": 0.44,
+          "transition": 10
+        },
+        "drowned_wood": {
+          "palette": {
+            "ground": "varied_grass",
+            "patch": "mud",
+            "obstacle": "tree"
+          },
+          "scale": 27,
+          "cover": 0.49,
+          "patch_amount": 0.55,
+          "wet_amount": 0.46,
+          "transition": 10
+        },
+        "ash_wastes": {
+          "palette": {
+            "ground": "gravel",
+            "patch": "ash",
+            "obstacle": "rock"
+          },
+          "scale": 34,
+          "cover": 0.23,
+          "patch_amount": 0.34,
+          "wet_amount": 0,
+          "transition": 3
+        },
+        "mountain": {
+          "palette": {
+            "ground": "gravel",
+            "patch": "packed_earth",
+            "obstacle": "rock"
+          },
+          "scale": 25,
+          "cover": 0.49,
+          "patch_amount": 0.28,
+          "wet_amount": 0.03,
+          "transition": 6
+        },
+        "deep_mountain": {
+          "palette": {
+            "ground": "gravel",
+            "patch": "ash",
+            "obstacle": "rock"
+          },
+          "scale": 36,
+          "cover": 0.59,
+          "patch_amount": 0.18,
+          "wet_amount": 0,
+          "transition": 4
+        }
+      }
+    },
+    "dependencies": {
+      "terrain:ash": "ba5995c6f73bcf804c73fd947d23d926519ab079fd49f88dcf160e536251bc88",
+      "terrain:grass": "cd2d52ca0cb4a2cfb20fb6249f0a51a1afe1f3b2c6d2ecf9e8472f35ab06ff91",
+      "terrain:gravel": "76a517959abb07dee4134ec4d9584f916cb0c0920b432380403997ea8c18a8b4",
+      "terrain:mud": "4c5ac6b2fdd2b5f89821e7200ecce4b6a6ee56d8ccb109b748208e0fa3719b5b",
+      "terrain:packed_earth": "193415206f404fbcf3c7dab34d941226dc655e1b8862cd526cec366d3049fcdb",
+      "terrain:rock": "e49470bfabff11f35e46ce0c1b2479cd89dc471d5913502781934a87cc7d8d65",
+      "terrain:shallow_water": "070d48639338dcb16f5d79234f0a66c2496382d59e6c8a786ab8b019d761e2e5",
+      "terrain:tall_grass": "ac8ffb813b7ba4b0871203dfe52b89d7ee9264d99d854d78bfea58dac2737f79",
+      "terrain:tree": "618d07ce31dd8cafbcb8cd1982bc9928c0c912e9248ab1be9a0c311b1c91c0f0",
+      "terrain:varied_grass": "c1517f4750abde7e954e215f49d26e4ef994e3ea25f91a59b9013972e440d0e2",
+      "decor:flower_pilgrims_woe": "aa5c3a7edce3f6a323c0c710a089274e8b41fdbe33b9303ec32e66b67f6070a4",
+      "decor:flower_murk_violet": "e40b7b70f824fb57dcbf96c57f04b3175e54dd9c38f462784a09428b81efa3c4",
+      "decor:shroom_sulphur_cap": "4fcb2ed0539ae1082b1bb00f2bacab7e006c44cf6d45107553dec08fb6e414a8",
+      "decor:shroom_prophets_eye": "f9b08c8f8a82c6cba3ad698b44c7afe78f385b9e6ff5653c5fbce9a5e6d6b207"
+    },
+    "identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e"
+  },
+  "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+  "scenes_at_planning_completion": 0,
+  "materialized_scenes": 4,
+  "visited_scenes": 0,
+  "planning_seconds": 6.687327899970114,
+  "scenes": [
+    {
+      "chunk": [
+        72,
+        102
+      ],
+      "biome": "plains",
+      "seconds": 0.3876709999749437,
+      "terrain": {
+        "grass": 2020,
+        "shallow_water": 60,
+        "tree": 1,
+        "flint_rock": 16,
+        "rock": 40,
+        "gravel": 55,
+        "tall_grass": 1247,
+        "ash": 1
+      },
+      "decor": {
+        "shroom_sulphur_cap": 27,
+        "flower_pilgrims_woe": 21,
+        "shroom_prophets_eye": 25,
+        "flower_murk_violet": 15
+      },
+      "actors": 4,
+      "native_ids": [
+        "barrow_wight",
+        "heath_stalker",
+        "bog_wraith",
+        "hollow_knight"
+      ],
+      "static_reachable_cells": 3398,
+      "road_cells": 0,
+      "protected_cells": 0,
+      "surface_provenance": {
+        "version": 1,
+        "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+        "algorithm": "wilderness-fields-v1",
+        "seed_domain": "resonance-wilderness-1",
+        "owner": "wilderness",
+        "biome": "plains"
+      },
+      "wilderness": {
+        "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+        "halo_chunks": 1,
+        "metadata_reads": 9,
+        "base_decision_identity": "d88c9ba2b97a82740eee3b75a9f4c3909556facbd4cc14dc9753945833337025",
+        "repairs": [],
+        "field_seconds": 0.010133300034794956,
+        "base_seconds": 0.08582150004804134
+      },
+      "resources": [
+        {
+          "x": 0,
+          "y": 14,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 15,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 16,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 17,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 20,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 21,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 22,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 0,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 10,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 14,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 15,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 16,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 17,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 20,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 21,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 22,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 28,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 13,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 15,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 16,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 17,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 20,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 21,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 22,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 16,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 17,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 20,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 21,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 3,
+          "y": 22,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 3,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 25,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 3,
+          "y": 26,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 27,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 35,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 18,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 19,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 20,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 21,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 22,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 23,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 24,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 4,
+          "y": 25,
+          "terrain": "shallow_water",
+          "decor": null,
+          "reachable": true,
+          "drinkable": true,
+          "harvestable": false,
+          "gatherable": false
+        },
+        {
+          "x": 5,
+          "y": 21,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 5,
+          "y": 22,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 6,
+          "y": 32,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 7,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 8,
+          "y": 42,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 9,
+          "y": 12,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 9,
+          "y": 38,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 9,
+          "y": 39,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 10,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 10,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 10,
+          "y": 28,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 10,
+          "y": 37,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 10,
+          "y": 40,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 11,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 12,
+          "y": 26,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 12,
+          "y": 38,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 13,
+          "y": 24,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 13,
+          "y": 26,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 15,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 15,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 16,
+          "y": 9,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 16,
+          "y": 40,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 17,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 17,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 17,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 18,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 18,
+          "y": 42,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 20,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 20,
+          "y": 21,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 20,
+          "y": 38,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 20,
+          "y": 40,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 21,
+          "y": 10,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 21,
+          "y": 22,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 22,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 22,
+          "y": 21,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 22,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 23,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 23,
+          "y": 19,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 23,
+          "y": 31,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 23,
+          "y": 33,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 23,
+          "y": 42,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 24,
+          "y": 34,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 25,
+          "y": 2,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 25,
+          "y": 5,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 25,
+          "y": 20,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 25,
+          "y": 21,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 26,
+          "y": 4,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 26,
+          "y": 30,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 26,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 27,
+          "y": 17,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 27,
+          "y": 19,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 27,
+          "y": 22,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 28,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 28,
+          "y": 29,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 29,
+          "y": 22,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 29,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 30,
+          "y": 20,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 30,
+          "y": 41,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 31,
+          "y": 34,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 32,
+          "y": 28,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 34,
+          "y": 31,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 36,
+          "y": 26,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 36,
+          "y": 32,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 38,
+          "y": 3,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 38,
+          "y": 31,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 38,
+          "y": 37,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 40,
+          "y": 37,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 40,
+          "y": 40,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 42,
+          "y": 34,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 44,
+          "y": 32,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 46,
+          "y": 31,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 46,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 50,
+          "y": 1,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 53,
+          "y": 12,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 29,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 57,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 4,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 27,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 70,
+          "y": 5,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 12,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 71,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 6,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 12,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 9,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 12,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 74,
+          "y": 28,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 77,
+          "y": 2,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 79,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        }
+      ],
+      "reachable_resource_opportunities": 164,
+      "complete_terrain_identity": "11876216bd64ae4865111e7d1f7e2221c986d1b488555205d539d6e321d90783"
+    },
+    {
+      "chunk": [
+        73,
+        102
+      ],
+      "biome": "plains",
+      "seconds": 0.23263150005368516,
+      "terrain": {
+        "grass": 512,
+        "tall_grass": 2689,
+        "gravel": 143,
+        "flint_rock": 22,
+        "dead_wood": 4,
+        "tree": 38,
+        "rock": 32
+      },
+      "decor": {
+        "flower_pilgrims_woe": 5,
+        "shroom_prophets_eye": 8,
+        "flower_murk_violet": 8,
+        "shroom_sulphur_cap": 8
+      },
+      "actors": 1,
+      "native_ids": [
+        "bog_wraith"
+      ],
+      "static_reachable_cells": 3369,
+      "road_cells": 0,
+      "protected_cells": 0,
+      "surface_provenance": {
+        "version": 1,
+        "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+        "algorithm": "wilderness-fields-v1",
+        "seed_domain": "resonance-wilderness-1",
+        "owner": "wilderness",
+        "biome": "plains"
+      },
+      "wilderness": {
+        "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+        "halo_chunks": 1,
+        "metadata_reads": 9,
+        "base_decision_identity": "f2fe69b64a4cdb5e8c5408c312e6acfcf7374ba0bdc56e5e25f722c5f8e8d73c",
+        "repairs": [],
+        "field_seconds": 0.007987200049683452,
+        "base_seconds": 0.04214570001931861
+      },
+      "resources": [
+        {
+          "x": 0,
+          "y": 5,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 27,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 2,
+          "y": 27,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 4,
+          "y": 23,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 10,
+          "y": 9,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 10,
+          "y": 37,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 13,
+          "y": 31,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 14,
+          "y": 41,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 15,
+          "y": 4,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 15,
+          "y": 41,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 16,
+          "y": 2,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 16,
+          "y": 10,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 16,
+          "y": 32,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 20,
+          "y": 3,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 20,
+          "y": 32,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 26,
+          "y": 2,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 27,
+          "y": 2,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 28,
+          "y": 5,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 30,
+          "y": 3,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 30,
+          "y": 5,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 38,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 38,
+          "y": 9,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 39,
+          "y": 36,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 41,
+          "y": 10,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 42,
+          "y": 6,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 42,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 44,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 44,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 46,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 47,
+          "y": 6,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 47,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 48,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 48,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 48,
+          "y": 39,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 49,
+          "y": 6,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 49,
+          "y": 10,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 50,
+          "y": 4,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 51,
+          "y": 33,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 52,
+          "y": 2,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 4,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 0,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 67,
+          "y": 19,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 67,
+          "y": 20,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 74,
+          "y": 21,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 75,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 4,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 22,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 25,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 78,
+          "y": 32,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 78,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 42,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        }
+      ],
+      "reachable_resource_opportunities": 55,
+      "complete_terrain_identity": "555bb998d69ed1d9882e10d8b5d97f5d2c59aa062c9a1e2aaa0d23d9589ac783"
+    },
+    {
+      "chunk": [
+        72,
+        103
+      ],
+      "biome": "ash_wastes",
+      "seconds": 0.22570850001648068,
+      "terrain": {
+        "grass": 89,
+        "gravel": 2785,
+        "tall_grass": 130,
+        "ash": 303,
+        "flint_rock": 32,
+        "tree": 38,
+        "dead_wood": 2,
+        "rock": 61
+      },
+      "decor": {
+        "flower_pilgrims_woe": 3,
+        "shroom_sulphur_cap": 1
+      },
+      "actors": 4,
+      "native_ids": [
+        "hollow_revenant",
+        "plague_crow",
+        "barrow_wight",
+        "heath_stalker"
+      ],
+      "static_reachable_cells": 3335,
+      "road_cells": 0,
+      "protected_cells": 0,
+      "surface_provenance": {
+        "version": 1,
+        "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+        "algorithm": "wilderness-fields-v1",
+        "seed_domain": "resonance-wilderness-1",
+        "owner": "wilderness",
+        "biome": "ash_wastes"
+      },
+      "wilderness": {
+        "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+        "halo_chunks": 1,
+        "metadata_reads": 9,
+        "base_decision_identity": "30cfa93e9a64f52e08d5bd1412b7d6804ebfe95a064cf970e4ffb83cae30b627",
+        "repairs": [],
+        "field_seconds": 0.009587000007741153,
+        "base_seconds": 0.033078900014515966
+      },
+      "resources": [
+        {
+          "x": 0,
+          "y": 20,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 6,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 1,
+          "y": 19,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 2,
+          "y": 19,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 2,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 13,
+          "y": 11,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 17,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 22,
+          "y": 2,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 22,
+          "y": 3,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 23,
+          "y": 8,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 24,
+          "y": 17,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 25,
+          "y": 14,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 26,
+          "y": 36,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 27,
+          "y": 1,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 29,
+          "y": 39,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 34,
+          "y": 24,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 35,
+          "y": 10,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 35,
+          "y": 11,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 35,
+          "y": 34,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 36,
+          "y": 34,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 37,
+          "y": 28,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 40,
+          "y": 15,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 40,
+          "y": 30,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 41,
+          "y": 15,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 41,
+          "y": 19,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 41,
+          "y": 36,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 42,
+          "y": 42,
+          "terrain": "dead_wood",
+          "decor": null,
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 45,
+          "y": 41,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 48,
+          "y": 0,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 20,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 53,
+          "y": 21,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 59,
+          "y": 15,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 62,
+          "y": 35,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 64,
+          "y": 20,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 68,
+          "y": 40,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 70,
+          "y": 41,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 74,
+          "y": 23,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        }
+      ],
+      "reachable_resource_opportunities": 37,
+      "complete_terrain_identity": "a7e2c895594c4953a8716441d039f5a67257b963059f24a40695d6a49d0a79cb"
+    },
+    {
+      "chunk": [
+        73,
+        103
+      ],
+      "biome": "heath",
+      "seconds": 0.29220530000748113,
+      "terrain": {
+        "tall_grass": 85,
+        "grass": 2534,
+        "gravel": 770,
+        "rock": 11,
+        "flint_rock": 26,
+        "tree": 14
+      },
+      "decor": {
+        "flower_pilgrims_woe": 28,
+        "shroom_prophets_eye": 27,
+        "shroom_sulphur_cap": 27,
+        "flower_murk_violet": 28
+      },
+      "actors": 0,
+      "native_ids": [],
+      "static_reachable_cells": 3414,
+      "road_cells": 0,
+      "protected_cells": 0,
+      "surface_provenance": {
+        "version": 1,
+        "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+        "algorithm": "wilderness-fields-v1",
+        "seed_domain": "resonance-wilderness-1",
+        "owner": "wilderness",
+        "biome": "heath"
+      },
+      "wilderness": {
+        "policy_identity": "72e75e64a0bcbb835f82bf32869ede9141ab9f054e00fd65c54984ec384db71e",
+        "halo_chunks": 1,
+        "metadata_reads": 9,
+        "base_decision_identity": "b8d5f85cedf606c792ce10f7a9214e963f32c2453e0374eda1ff4993bdf05706",
+        "repairs": [],
+        "field_seconds": 0.009388800011947751,
+        "base_seconds": 0.09429560002172366
+      },
+      "resources": [
+        {
+          "x": 1,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 20,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 1,
+          "y": 40,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 2,
+          "y": 37,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 2,
+          "y": 38,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 2,
+          "y": 41,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 3,
+          "y": 9,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 5,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 5,
+          "y": 41,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 7,
+          "y": 16,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 8,
+          "y": 16,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 9,
+          "y": 9,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 9,
+          "y": 36,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 10,
+          "y": 7,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 12,
+          "y": 4,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 12,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 12,
+          "y": 18,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 12,
+          "y": 21,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 12,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 13,
+          "y": 26,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 15,
+          "y": 0,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 16,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 16,
+          "y": 24,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 16,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 16,
+          "y": 37,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 16,
+          "y": 40,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 17,
+          "y": 38,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 18,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 18,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 18,
+          "y": 21,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 19,
+          "y": 32,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 21,
+          "y": 21,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 21,
+          "y": 26,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 22,
+          "y": 35,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 23,
+          "y": 18,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 23,
+          "y": 22,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 24,
+          "y": 12,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 24,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 25,
+          "y": 20,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 26,
+          "y": 4,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 26,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 27,
+          "y": 29,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 27,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 28,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 28,
+          "y": 21,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 29,
+          "y": 34,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 30,
+          "y": 25,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 30,
+          "y": 26,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 30,
+          "y": 28,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 31,
+          "y": 26,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 31,
+          "y": 40,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 32,
+          "y": 4,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 32,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 32,
+          "y": 29,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 32,
+          "y": 35,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 32,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 33,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 33,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 33,
+          "y": 24,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 34,
+          "y": 9,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 34,
+          "y": 10,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 34,
+          "y": 25,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 34,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 35,
+          "y": 6,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 35,
+          "y": 14,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 35,
+          "y": 19,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 35,
+          "y": 26,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 35,
+          "y": 30,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 37,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 38,
+          "y": 13,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 38,
+          "y": 41,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 38,
+          "y": 42,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 40,
+          "y": 9,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 41,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 43,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 44,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 46,
+          "y": 18,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 48,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 48,
+          "y": 32,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 52,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 1,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 53,
+          "y": 7,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 54,
+          "y": 2,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 54,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 54,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 55,
+          "y": 26,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 55,
+          "y": 33,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 56,
+          "y": 23,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 56,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 57,
+          "y": 25,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 25,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 31,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 58,
+          "y": 35,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 6,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 59,
+          "y": 10,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 59,
+          "y": 11,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 60,
+          "y": 4,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 8,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 60,
+          "y": 29,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 61,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 62,
+          "y": 32,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 16,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 18,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 35,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 63,
+          "y": 39,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 24,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 64,
+          "y": 28,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 5,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 65,
+          "y": 29,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 66,
+          "y": 31,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 67,
+          "y": 2,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 67,
+          "y": 31,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 67,
+          "y": 33,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 67,
+          "y": 35,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 68,
+          "y": 15,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 5,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 69,
+          "y": 33,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 70,
+          "y": 21,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 72,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 73,
+          "y": 3,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 73,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 20,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 74,
+          "y": 36,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 75,
+          "y": 3,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 17,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 76,
+          "y": 20,
+          "terrain": "flint_rock",
+          "decor": null,
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": false,
+          "gatherable": true
+        },
+        {
+          "x": 77,
+          "y": 29,
+          "terrain": "grass",
+          "decor": "shroom_prophets_eye",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 77,
+          "y": 30,
+          "terrain": "grass",
+          "decor": "flower_murk_violet",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 78,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "shroom_sulphur_cap",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 79,
+          "y": 11,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": true,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        },
+        {
+          "x": 79,
+          "y": 41,
+          "terrain": "grass",
+          "decor": "flower_pilgrims_woe",
+          "reachable": false,
+          "drinkable": false,
+          "harvestable": true,
+          "gatherable": false
+        }
+      ],
+      "reachable_resource_opportunities": 135,
+      "complete_terrain_identity": "2db813c21f47a5140a6d4c78b51bb2bc3a0561963a234a2f5772617736524ae9"
+    }
+  ],
+  "image": "evidence\\worldgen-g10\\development\\ash-edge.png",
+  "visibility": "REVEALED production comparison; not normal-FOV play evidence",
+  "access_scope": "Complete populated scene validation; reachable static access and resource opportunities. Actors are counted, not treated as permanently impassable."
+}
