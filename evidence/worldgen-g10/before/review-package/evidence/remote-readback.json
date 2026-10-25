@@ -1,0 +1,17 @@
+{
+  "observed_utc": "2026-10-25T00:13:09.214211+00:00",
+  "command": [
+    "git",
+    "ls-remote",
+    "origin",
+    "refs/heads/main",
+    "refs/tags/checkpoint/worldgen-g9-verified-20261024-a",
+    "refs/tags/checkpoint/worldgen-g9-final-inputs-20261024-b"
+  ],
+  "refs": {
+    "refs/heads/main": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+    "refs/tags/checkpoint/worldgen-g9-verified-20261024-a": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+    "refs/tags/checkpoint/worldgen-g9-final-inputs-20261024-b": "919e8b40ab5ebca6cf5df6ae3afaf6baa4b67d78"
+  },
+  "source": "Successful remote readback during this review; timestamp is this receipt creation, immediately after readback."
+}

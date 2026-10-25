@@ -1,0 +1,25 @@
+{
+  "head": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+  "command": [
+    "/workspace/scratch/1652b4369862/review-env/bin/python",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "-v",
+    "test_generation_g9_network",
+    "test_generation_g9_lifecycle"
+  ],
+  "cwd": "/workspace/scratch/1652b4369862/resonance-review",
+  "parent_pythonpath_removed": false,
+  "child_pythonpath": "/workspace/scratch/1652b4369862/resonance-review/roguelike:/workspace/scratch/1652b4369862/resonance-review/tools/critical_fix_regressions/tests:/workspace/scratch/1652b4369862/resonance-review/tools",
+  "timeout_seconds": 1200,
+  "explicit_environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1",
+    "PYTHONHASHSEED": "20261020",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONIOENCODING": "utf-8"
+  }
+}

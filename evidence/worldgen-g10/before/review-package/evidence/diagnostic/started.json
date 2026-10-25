@@ -1,0 +1,24 @@
+{
+  "head": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+  "command": [
+    "/workspace/scratch/1652b4369862/review-env/bin/python",
+    "-X",
+    "utf8",
+    "tools/worldgen_g9_diagnostic.py",
+    "--journey",
+    "--evidence",
+    "/workspace/scratch/1652b4369862/g9-review-evidence/diagnostic/results"
+  ],
+  "cwd": "/workspace/scratch/1652b4369862/resonance-review",
+  "parent_pythonpath_removed": false,
+  "child_pythonpath": null,
+  "timeout_seconds": 1800,
+  "explicit_environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1",
+    "PYTHONHASHSEED": "20261020",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONIOENCODING": "utf-8"
+  }
+}

@@ -1,0 +1,469 @@
+{
+  "source": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+  "receipts": {
+    "g9-tests": {
+      "head": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+      "command": [
+        "/workspace/scratch/1652b4369862/review-env/bin/python",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "-v",
+        "test_generation_g9_network",
+        "test_generation_g9_lifecycle"
+      ],
+      "cwd": "/workspace/scratch/1652b4369862/resonance-review",
+      "parent_pythonpath_removed": false,
+      "child_pythonpath": "/workspace/scratch/1652b4369862/resonance-review/roguelike:/workspace/scratch/1652b4369862/resonance-review/tools/critical_fix_regressions/tests:/workspace/scratch/1652b4369862/resonance-review/tools",
+      "timeout_seconds": 1200,
+      "explicit_environment": {
+        "SDL_VIDEODRIVER": "dummy",
+        "SDL_AUDIODRIVER": "dummy",
+        "PYGAME_HIDE_SUPPORT_PROMPT": "1",
+        "PYTHONHASHSEED": "20261020",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONIOENCODING": "utf-8"
+      },
+      "check": "g9-tests",
+      "interpreter": "/workspace/scratch/1652b4369862/review-env/bin/python",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "dependencies": {
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "numpy": "2.3.5"
+      },
+      "seconds": 136.79045234300065,
+      "timeout": false,
+      "exit_code": 0,
+      "tracked_file_count": 6302,
+      "changed_tracked_paths": [],
+      "source_stable": true,
+      "git_status_after": "",
+      "passed": true
+    },
+    "diagnostic": {
+      "head": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+      "command": [
+        "/workspace/scratch/1652b4369862/review-env/bin/python",
+        "-X",
+        "utf8",
+        "tools/worldgen_g9_diagnostic.py",
+        "--journey",
+        "--evidence",
+        "/workspace/scratch/1652b4369862/g9-review-evidence/diagnostic/results"
+      ],
+      "cwd": "/workspace/scratch/1652b4369862/resonance-review",
+      "parent_pythonpath_removed": false,
+      "child_pythonpath": null,
+      "timeout_seconds": 1800,
+      "explicit_environment": {
+        "SDL_VIDEODRIVER": "dummy",
+        "SDL_AUDIODRIVER": "dummy",
+        "PYGAME_HIDE_SUPPORT_PROMPT": "1",
+        "PYTHONHASHSEED": "20261020",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONIOENCODING": "utf-8"
+      },
+      "check": "diagnostic-journey",
+      "interpreter": "/workspace/scratch/1652b4369862/review-env/bin/python",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "dependencies": {
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "numpy": "2.3.5"
+      },
+      "seconds": 374.9951416210024,
+      "timeout": false,
+      "exit_code": 0,
+      "tracked_file_count": 6302,
+      "changed_tracked_paths": [],
+      "source_stable": true,
+      "git_status_after": "",
+      "passed": true
+    }
+  },
+  "passed": true,
+  "failures": [],
+  "plans": [
+    {
+      "seed": 0,
+      "plan_identity": "b6979943363f5901247aa69966243480e072c0974168a9c2d117296e2e0e6afe",
+      "plan_sha256": "41db426f48fbdf2a175000fd703f50af1c82d7a3fcc089aa5a1d5889dd45f44b",
+      "retained_raw_sha256": "e6901f8b855e8830da4a033c1aa7f64804b5d8edf0758e381f91ce66e7fd90f0",
+      "raw_plan_equal": false,
+      "newline_normalized_plan_equal": true,
+      "complete_plan_equal": true,
+      "complete_baseline_preserved": true,
+      "scenes_at_plan_completion": 0,
+      "boundary_continuity": true,
+      "touched_scene_count": 0,
+      "touched_fingerprints_equal": true,
+      "costs": {
+        "serial_baseline_planning_seconds": 1.0804707860006602,
+        "serial_g9_planning_seconds": 2.677650227000413,
+        "diagnostic_graph_seconds": 0.8067707740010519,
+        "preedit_g8_planning_seconds": 1.2935613000299782,
+        "preedit_g8_scene_seconds": [
+          0.2625862000277266,
+          0.2377942000166513,
+          0.29316510003991425,
+          0.2825353000080213,
+          0.21636389999184757,
+          0.27118999999947846,
+          0.3010848000412807,
+          0.04079639998963103,
+          0.2380356000503525,
+          0.3106121000018902,
+          0.28876730002230033,
+          0.26672150002559647,
+          0.371342700032983,
+          0.26478949998272583,
+          0.2678905999637209
+        ],
+        "subtree_bytes": {
+          "version": 1,
+          "mode": 11,
+          "generation_revision": 5,
+          "dependency_projection": 14,
+          "seed": 1,
+          "map_size": 7,
+          "world_size": 9,
+          "settings": 843,
+          "nodes": 719,
+          "routes": 19248,
+          "waters": 146062,
+          "crossings": 2869,
+          "settlements": 9287,
+          "plots": 31395,
+          "placements": 38949,
+          "reservations": 312269,
+          "dependencies": 19953,
+          "diagnostics": 478,
+          "selection": 2848,
+          "blocks": 9448,
+          "public_spaces": 657,
+          "paths": 125,
+          "layout_contract": 1,
+          "poi_policy": 837,
+          "sites": 2008,
+          "site_selection": 275,
+          "network": 3045
+        },
+        "scope": "Three ordinary seeds. Serial current G8-settings/G9 planning uses identical preserved geography/content. Pre-edit G8 journey/scene timings retain their own raw source and concurrent lightweight docs-check disclosure. New wg9 scene randomness is allowed; no storage-engine change."
+      }
+    },
+    {
+      "seed": 20261023,
+      "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+      "plan_sha256": "d9a4dfeb1d5c24f02ea4d096a8eafc35e5b803c8295490e177194918eebfe8f5",
+      "retained_raw_sha256": "0cac25bbb9a3848f05ee768849d3a93e91df2c372b12272a55e5501428192e9d",
+      "raw_plan_equal": false,
+      "newline_normalized_plan_equal": true,
+      "complete_plan_equal": true,
+      "complete_baseline_preserved": true,
+      "scenes_at_plan_completion": 0,
+      "boundary_continuity": true,
+      "touched_scene_count": 86,
+      "touched_fingerprints_equal": true,
+      "costs": {
+        "serial_baseline_planning_seconds": 1.8369395250010712,
+        "serial_g9_planning_seconds": 6.151232112999423,
+        "diagnostic_graph_seconds": 2.087649152999802,
+        "preedit_g8_planning_seconds": 2.0544152000220492,
+        "preedit_g8_scene_seconds": [
+          0.2152893000165932,
+          0.21240010001929477,
+          0.2163833999657072,
+          0.044914300029631704,
+          0.24998079997021705,
+          0.2258315000217408,
+          0.29374799999641255,
+          0.3230242999852635,
+          0.24617790000047535,
+          0.2771807999815792,
+          0.2162118999985978,
+          0.2566361000062898,
+          0.2186323000350967,
+          0.2031124999630265,
+          0.23684489994775504,
+          0.17427700001280755,
+          0.19964649999747053,
+          0.224583100003656
+        ],
+        "subtree_bytes": {
+          "version": 1,
+          "mode": 11,
+          "generation_revision": 5,
+          "dependency_projection": 14,
+          "seed": 8,
+          "map_size": 7,
+          "world_size": 9,
+          "settings": 843,
+          "nodes": 868,
+          "routes": 42126,
+          "waters": 160296,
+          "crossings": 3601,
+          "settlements": 10156,
+          "plots": 29327,
+          "placements": 34869,
+          "reservations": 413893,
+          "dependencies": 20516,
+          "diagnostics": 637,
+          "selection": 2848,
+          "blocks": 8718,
+          "public_spaces": 655,
+          "paths": 127,
+          "layout_contract": 1,
+          "poi_policy": 837,
+          "sites": 1998,
+          "site_selection": 1059,
+          "network": 3163
+        },
+        "scope": "Three ordinary seeds. Serial current G8-settings/G9 planning uses identical preserved geography/content. Pre-edit G8 journey/scene timings retain their own raw source and concurrent lightweight docs-check disclosure. New wg9 scene randomness is allowed; no storage-engine change."
+      }
+    },
+    {
+      "seed": 29417,
+      "plan_identity": "dfdf2f9b9609323c77f6cb25812294b564b49c7e90ae83691d2cf34e348208f0",
+      "plan_sha256": "6fa0018d07c2865f98489a578d63668c87f9cff485f26f8135d3c11a4cb94ee5",
+      "retained_raw_sha256": "0c095aeeb883dc8f7ba773e8f60df7ac45ffaff80afceb3371c4c3565b051dec",
+      "raw_plan_equal": false,
+      "newline_normalized_plan_equal": true,
+      "complete_plan_equal": true,
+      "complete_baseline_preserved": true,
+      "scenes_at_plan_completion": 0,
+      "boundary_continuity": true,
+      "touched_scene_count": 0,
+      "touched_fingerprints_equal": true,
+      "costs": {
+        "serial_baseline_planning_seconds": 1.2382407440018142,
+        "serial_g9_planning_seconds": 4.102280718998372,
+        "diagnostic_graph_seconds": 0.8809604990019579,
+        "preedit_g8_planning_seconds": 1.5554107999778353,
+        "preedit_g8_scene_seconds": [
+          0.254067900008522,
+          0.2527544000186026,
+          0.2829279000288807,
+          0.2697668999899179,
+          0.08897919999435544,
+          0.3624405000009574,
+          0.279525299964007,
+          0.3068249999778345,
+          0.216466500016395,
+          0.24977629998466,
+          0.2573086000047624,
+          0.24598480004351586,
+          0.27536790003068745,
+          0.1914820999954827,
+          0.24132319999625906,
+          0.2816721000126563,
+          0.21995110000716522,
+          0.23152299999492243
+        ],
+        "subtree_bytes": {
+          "version": 1,
+          "mode": 11,
+          "generation_revision": 5,
+          "dependency_projection": 14,
+          "seed": 5,
+          "map_size": 7,
+          "world_size": 9,
+          "settings": 843,
+          "nodes": 871,
+          "routes": 22365,
+          "waters": 159676,
+          "crossings": 6019,
+          "settlements": 10489,
+          "plots": 31636,
+          "placements": 38868,
+          "reservations": 348112,
+          "dependencies": 21793,
+          "diagnostics": 637,
+          "selection": 2848,
+          "blocks": 9394,
+          "public_spaces": 648,
+          "paths": 257,
+          "layout_contract": 1,
+          "poi_policy": 837,
+          "sites": 3001,
+          "site_selection": 1007,
+          "network": 3037
+        },
+        "scope": "Three ordinary seeds. Serial current G8-settings/G9 planning uses identical preserved geography/content. Pre-edit G8 journey/scene timings retain their own raw source and concurrent lightweight docs-check disclosure. New wg9 scene randomness is allowed; no storage-engine change."
+      }
+    }
+  ],
+  "journey": {
+    "passed": true,
+    "steps": 107749,
+    "boundary_transitions": 1695,
+    "destination_count": 8,
+    "materialized_surface_scenes_before_f9": 469,
+    "checkpoint_scene_count": 470,
+    "checkpoint_bytes": 254085875,
+    "save_seconds": 1.8799597600009292,
+    "cold_load_seconds": 5.892942693000805,
+    "f9_seconds": 5.871419199000229,
+    "worst_boundary_seconds": 0.2318500490000588,
+    "f9_restored_explored_checkpoint": true,
+    "explored_surface_fingerprints_equal": true,
+    "native_controls": "ordinary production world; native actors retained as stationary obstacles; AI/survival turn updates paused; movement, doors, stairs, interactions, travel and save handlers unchanged",
+    "country": {
+      "passed": true,
+      "runs": [
+        {
+          "label": "to-shortcut-start",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 0.0029410540009848773,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 0,
+          "movement_inputs": 0,
+          "boundary_inputs": 0
+        },
+        {
+          "label": "accepted-forward",
+          "route": "network-shortcut-0",
+          "movement_inputs": 5505,
+          "boundary_inputs": 85,
+          "actual_complete_route": true
+        },
+        {
+          "label": "accepted-reverse",
+          "route": "network-shortcut-0",
+          "movement_inputs": 5505,
+          "boundary_inputs": 85,
+          "actual_complete_route": true
+        },
+        {
+          "label": "surviving-original-country-corridor",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            7000,
+            1440
+          ],
+          "seconds": 67.0972717830009,
+          "newly_visited_scenes": 155,
+          "physical_four_neighbour_steps": 20741,
+          "movement_inputs": 20741,
+          "boundary_inputs": 333
+        },
+        {
+          "label": "to-comparable-start",
+          "start": [
+            7000,
+            1440
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 9.76927341299961,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 5501,
+          "movement_inputs": 5501,
+          "boundary_inputs": 85
+        },
+        {
+          "label": "fixed-pair-original",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            5320,
+            2644
+          ],
+          "seconds": 54.831644018999214,
+          "newly_visited_scenes": 47,
+          "physical_four_neighbour_steps": 23625,
+          "movement_inputs": 23625,
+          "boundary_inputs": 382
+        },
+        {
+          "label": "fixed-pair-augmented-reverse",
+          "start": [
+            5320,
+            2644
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 13.563052475001314,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 8063,
+          "movement_inputs": 8063,
+          "boundary_inputs": 130
+        },
+        {
+          "label": "resume-inherited-journey",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 0.009721385999000631,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 0,
+          "movement_inputs": 0,
+          "boundary_inputs": 0
+        }
+      ],
+      "fixed_pair": {
+        "before": {
+          "label": "fixed-pair-original",
+          "start": [
+            3160,
+            1139
+          ],
+          "end": [
+            5320,
+            2644
+          ],
+          "seconds": 54.831644018999214,
+          "newly_visited_scenes": 47,
+          "physical_four_neighbour_steps": 23625,
+          "movement_inputs": 23625,
+          "boundary_inputs": 382
+        },
+        "after": {
+          "label": "fixed-pair-augmented-reverse",
+          "start": [
+            5320,
+            2644
+          ],
+          "end": [
+            3160,
+            1139
+          ],
+          "seconds": 13.563052475001314,
+          "newly_visited_scenes": 0,
+          "physical_four_neighbour_steps": 8063,
+          "movement_inputs": 8063,
+          "boundary_inputs": 130
+        }
+      },
+      "controls": "No positioning or teleports. Inherited real movement/door/boundary handlers; invincible player, stationary native actors, paused AI/survival. Local handler routes may use diagonals; physical BFS counts remain four-neighbour. Baseline itinerary uses exactly preserved G8 road geometry in G9-created scenes. Both directions and the surviving original corridor are actually walked; this is separate from pre-edit G8 journey timing."
+    }
+  },
+  "source_preservation": {
+    "tracked_file_count": 6302,
+    "source_stable": true,
+    "changed_tracked_paths": [],
+    "git_status": ""
+  }
+}

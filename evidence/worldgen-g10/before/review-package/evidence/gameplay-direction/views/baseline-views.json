@@ -1,0 +1,230 @@
+{
+  "source": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+  "seed": 20261023,
+  "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+  "start": [
+    73,
+    99
+  ],
+  "selection": "Nearest to starting chunk by cardinal chunk distance, then coordinate, with requested ordinary biome; no submap, river, country/local route, placement, compound, public-space ownership.",
+  "views": [
+    {
+      "biome": "forest",
+      "chunk": [
+        73,
+        100
+      ],
+      "scene_seed": 237156,
+      "ordinary_unmodified_biome": true,
+      "production_renderer": true,
+      "complete_native_scene": true,
+      "visibility": "controlled full-scene reveal; not normal FOV",
+      "image": "forest-73-100.png",
+      "sha256": "10373c0aa58d2d29fb54a081c1332095d00396d2e60bae833d466f4bb62ea8a4",
+      "terrain": {
+        "tree": 707,
+        "grass": 2516,
+        "dead_wood": 55,
+        "shallow_water": 25,
+        "tall_grass": 133,
+        "flint_rock": 4
+      },
+      "decor": {
+        "flower_pilgrims_woe": 25,
+        "flower_murk_violet": 22,
+        "shroom_sulphur_cap": 29,
+        "shroom_prophets_eye": 21
+      },
+      "actors": 4,
+      "fingerprint": "f85c9c5aab7edc2a8021e4446650362541cc21b4530bed90aa395f7e2a5bb7d7",
+      "plan_provenance": {
+        "mode": "shared-v1",
+        "routes": [],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      },
+      "functional_generation": {
+        "policy": "planned-dressing-v1",
+        "resources": {
+          "dead_wood": 55,
+          "flint_rock": 4,
+          "clay_deposit": 0
+        },
+        "resource_absence": {
+          "clay_deposit": "no legal selected site under biome, proximity and reservation policy"
+        },
+        "waystone_policy": "optional-physical-road",
+        "waystones": 0
+      }
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        79,
+        106
+      ],
+      "scene_seed": 262219,
+      "ordinary_unmodified_biome": true,
+      "production_renderer": true,
+      "complete_native_scene": true,
+      "visibility": "controlled full-scene reveal; not normal FOV",
+      "image": "drowned_wood-79-106.png",
+      "sha256": "3f9039241bbdd64076ef86c5d4e0282f12aa691d4c8fda98b29489b0601cca4f",
+      "terrain": {
+        "tree": 676,
+        "mud": 2490,
+        "shallow_water": 267,
+        "dead_wood": 7
+      },
+      "decor": {},
+      "actors": 4,
+      "fingerprint": "fd7c60677650b0d4ee3a848e32750e031bd2c1982c76540b53fb0caff3b80f97",
+      "plan_provenance": {
+        "mode": "shared-v1",
+        "routes": [],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      },
+      "functional_generation": {
+        "policy": "planned-dressing-v1",
+        "resources": {
+          "dead_wood": 7,
+          "flint_rock": 0,
+          "clay_deposit": 0
+        },
+        "resource_absence": {
+          "flint_rock": "no legal selected site under biome, proximity and reservation policy",
+          "clay_deposit": "no legal selected site under biome, proximity and reservation policy"
+        },
+        "waystone_policy": "optional-physical-road",
+        "waystones": 0
+      }
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        72,
+        103
+      ],
+      "scene_seed": 696951,
+      "ordinary_unmodified_biome": true,
+      "production_renderer": true,
+      "complete_native_scene": true,
+      "visibility": "controlled full-scene reveal; not normal FOV",
+      "image": "ash_wastes-72-103.png",
+      "sha256": "f2bc7bf487adc4dca0a3cdd98da3101e1adb349db6cd1dca00e45eedbd2f6ea0",
+      "terrain": {
+        "grass": 3096,
+        "tall_grass": 272,
+        "flint_rock": 33,
+        "tree": 36,
+        "dead_wood": 3
+      },
+      "decor": {
+        "flower_pilgrims_woe": 30,
+        "shroom_prophets_eye": 37,
+        "flower_murk_violet": 29,
+        "shroom_sulphur_cap": 29
+      },
+      "actors": 4,
+      "fingerprint": "991a8573b060d596f12e5a42e7e95603667669262084cd7030736a56f3a27c28",
+      "plan_provenance": {
+        "mode": "shared-v1",
+        "routes": [],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      },
+      "functional_generation": {
+        "policy": "planned-dressing-v1",
+        "resources": {
+          "dead_wood": 3,
+          "flint_rock": 33,
+          "clay_deposit": 0
+        },
+        "resource_absence": {
+          "clay_deposit": "no legal selected site under biome, proximity and reservation policy"
+        },
+        "waystone_policy": "optional-physical-road",
+        "waystones": 0
+      }
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        73,
+        93
+      ],
+      "scene_seed": 658244,
+      "ordinary_unmodified_biome": true,
+      "production_renderer": true,
+      "complete_native_scene": true,
+      "visibility": "controlled full-scene reveal; not normal FOV",
+      "image": "mountain-73-93.png",
+      "sha256": "a8160541dc5521718392aac3ee838f0618c937aac67437c496f36859a290996f",
+      "terrain": {
+        "gravel": 1899,
+        "rock": 1502,
+        "flint_rock": 39
+      },
+      "decor": {},
+      "actors": 3,
+      "fingerprint": "39609582cd60bfcf916c763d3ef2e3418a7c1b9fe70612c94738863bb3286aaf",
+      "plan_provenance": {
+        "mode": "shared-v1",
+        "routes": [],
+        "crossings": [],
+        "placements": [],
+        "plan_revision": "wg9",
+        "plan_version": 7,
+        "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+        "dependency_projection": "structure-v1",
+        "adapter": "g9-v1",
+        "paths": [],
+        "compounds": [],
+        "public_spaces": []
+      },
+      "functional_generation": {
+        "policy": "planned-dressing-v1",
+        "resources": {
+          "dead_wood": 0,
+          "flint_rock": 39,
+          "clay_deposit": 0
+        },
+        "resource_absence": {
+          "dead_wood": "no legal selected site under biome, proximity and reservation policy",
+          "clay_deposit": "no legal selected site under biome, proximity and reservation policy"
+        },
+        "waystone_policy": "optional-physical-road",
+        "waystones": 0
+      }
+    }
+  ],
+  "contact_sheet": {
+    "path": "g9-wilderness-baseline.png",
+    "sha256": "80b600e22d8a439f94af711143ac7a333042f7a3f50870713e8f84a00bb77486"
+  }
+}

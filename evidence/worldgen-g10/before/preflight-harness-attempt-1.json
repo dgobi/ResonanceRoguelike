@@ -1,0 +1,54 @@
+{
+  "start": {
+    "chunk": [
+      73,
+      99
+    ],
+    "submap": "sub_73_99_0",
+    "position": [
+      15,
+      20
+    ],
+    "turn": 480,
+    "hp": 60,
+    "hunger": 0.0,
+    "thirst": 0.0,
+    "inventory": [
+      "tallow_torch",
+      "crow_jerky",
+      "water_flask",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble"
+    ],
+    "actors": []
+  },
+  "inputs": [],
+  "passed": false,
+  "final": {
+    "chunk": [
+      73,
+      99
+    ],
+    "submap": "sub_73_99_0",
+    "position": [
+      15,
+      20
+    ],
+    "turn": 480,
+    "hp": 60,
+    "hunger": 0.0,
+    "thirst": 0.0,
+    "inventory": [
+      "tallow_torch",
+      "crow_jerky",
+      "water_flask",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble"
+    ],
+    "actors": []
+  },
+  "error": "AssertionError('Normal ascent failed')",
+  "controls": "Normal start, native AI, survival and FOV; invincibility off; known-seed BFS script avoids occupied cells; no injected supplies or positioning."
+}

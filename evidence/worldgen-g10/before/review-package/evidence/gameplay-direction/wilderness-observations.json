@@ -1,0 +1,449 @@
+{
+  "source": "f9fe901417b360bc1fda84835e0a793eaac2f6df",
+  "command": [
+    "/workspace/scratch/1652b4369862/g9-review-evidence/gameplay-direction/probe_wilderness.py",
+    "--repo",
+    "/workspace/scratch/1652b4369862/resonance-review",
+    "--out",
+    "/workspace/scratch/1652b4369862/g9-review-evidence/gameplay-direction/wilderness-observations.json"
+  ],
+  "metadata_worlds": [
+    {
+      "seed": 0,
+      "biomes": {
+        "heath": 2214,
+        "swamp": 945,
+        "plains": 4763,
+        "ash_wastes": 2233,
+        "drowned_wood": 1291,
+        "forest": 3301,
+        "mountain": 1559,
+        "town": 10,
+        "capital": 64,
+        "deep_mountain": 4
+      },
+      "all_cardinal_neighbor_pairs": 32512,
+      "different_biome_pairs": 22263,
+      "wilderness_cardinal_neighbor_pairs": 32310,
+      "different_wilderness_biome_pairs": 22155,
+      "scenes_materialized": 0,
+      "scope": "Adjacency of macro biome labels, not a direct measure of visual seam severity or gameplay quality."
+    },
+    {
+      "seed": 20261023,
+      "biomes": {
+        "swamp": 982,
+        "plains": 4669,
+        "ash_wastes": 2277,
+        "drowned_wood": 1268,
+        "heath": 2157,
+        "forest": 3390,
+        "mountain": 1594,
+        "town": 12,
+        "capital": 31,
+        "deep_mountain": 4
+      },
+      "all_cardinal_neighbor_pairs": 32512,
+      "different_biome_pairs": 22205,
+      "wilderness_cardinal_neighbor_pairs": 32383,
+      "different_wilderness_biome_pairs": 22119,
+      "scenes_materialized": 0,
+      "scope": "Adjacency of macro biome labels, not a direct measure of visual seam severity or gameplay quality."
+    },
+    {
+      "seed": 29417,
+      "biomes": {
+        "plains": 4617,
+        "ash_wastes": 2234,
+        "swamp": 978,
+        "heath": 2155,
+        "drowned_wood": 1387,
+        "forest": 3369,
+        "mountain": 1597,
+        "capital": 31,
+        "town": 12,
+        "deep_mountain": 4
+      },
+      "all_cardinal_neighbor_pairs": 32512,
+      "different_biome_pairs": 22296,
+      "wilderness_cardinal_neighbor_pairs": 32382,
+      "different_wilderness_biome_pairs": 22206,
+      "scenes_materialized": 0,
+      "scope": "Adjacency of macro biome labels, not a direct measure of visual seam severity or gameplay quality."
+    }
+  ],
+  "base_scenes": [
+    {
+      "biome": "plains",
+      "scene_seed": 0,
+      "terrain": {
+        "grass": 2946,
+        "tree": 211,
+        "tall_grass": 283
+      },
+      "decor": {
+        "shroom_sulphur_cap": 28,
+        "flower_murk_violet": 29,
+        "flower_pilgrims_woe": 35,
+        "shroom_prophets_eye": 28
+      },
+      "walkable": 3229,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "plains",
+      "scene_seed": 20261023,
+      "terrain": {
+        "grass": 2959,
+        "tree": 193,
+        "tall_grass": 288
+      },
+      "decor": {
+        "shroom_prophets_eye": 35,
+        "flower_murk_violet": 30,
+        "flower_pilgrims_woe": 29,
+        "shroom_sulphur_cap": 26
+      },
+      "walkable": 3247,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "plains",
+      "scene_seed": 29417,
+      "terrain": {
+        "grass": 2976,
+        "tree": 190,
+        "tall_grass": 274
+      },
+      "decor": {
+        "flower_murk_violet": 31,
+        "shroom_prophets_eye": 31,
+        "flower_pilgrims_woe": 27,
+        "shroom_sulphur_cap": 33
+      },
+      "walkable": 3250,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "forest",
+      "scene_seed": 0,
+      "terrain": {
+        "grass": 2630,
+        "tree": 641,
+        "shallow_water": 24,
+        "tall_grass": 145
+      },
+      "decor": {
+        "flower_murk_violet": 25,
+        "shroom_sulphur_cap": 30,
+        "flower_pilgrims_woe": 26,
+        "shroom_prophets_eye": 23
+      },
+      "walkable": 2799,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "forest",
+      "scene_seed": 20261023,
+      "terrain": {
+        "tree": 583,
+        "grass": 2667,
+        "tall_grass": 154,
+        "shallow_water": 36
+      },
+      "decor": {
+        "shroom_prophets_eye": 34,
+        "flower_murk_violet": 26,
+        "flower_pilgrims_woe": 29,
+        "shroom_sulphur_cap": 29
+      },
+      "walkable": 2857,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "forest",
+      "scene_seed": 29417,
+      "terrain": {
+        "grass": 2632,
+        "tree": 644,
+        "tall_grass": 124,
+        "shallow_water": 40
+      },
+      "decor": {
+        "shroom_sulphur_cap": 32,
+        "flower_pilgrims_woe": 22,
+        "shroom_prophets_eye": 24,
+        "flower_murk_violet": 25
+      },
+      "walkable": 2796,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "heath",
+      "scene_seed": 0,
+      "terrain": {
+        "grass": 3266,
+        "tree": 112,
+        "tall_grass": 62
+      },
+      "decor": {
+        "flower_pilgrims_woe": 35,
+        "shroom_sulphur_cap": 32,
+        "flower_murk_violet": 32,
+        "shroom_prophets_eye": 29
+      },
+      "walkable": 3328,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "heath",
+      "scene_seed": 20261023,
+      "terrain": {
+        "grass": 3280,
+        "tree": 92,
+        "tall_grass": 68
+      },
+      "decor": {
+        "shroom_prophets_eye": 41,
+        "flower_murk_violet": 34,
+        "flower_pilgrims_woe": 36,
+        "shroom_sulphur_cap": 33
+      },
+      "walkable": 3348,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "heath",
+      "scene_seed": 29417,
+      "terrain": {
+        "grass": 3269,
+        "tree": 107,
+        "tall_grass": 64
+      },
+      "decor": {
+        "flower_murk_violet": 31,
+        "shroom_prophets_eye": 36,
+        "flower_pilgrims_woe": 31,
+        "shroom_sulphur_cap": 35
+      },
+      "walkable": 3333,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "swamp",
+      "scene_seed": 0,
+      "terrain": {
+        "mud": 2658,
+        "tree": 425,
+        "shallow_water": 308,
+        "tall_grass": 49
+      },
+      "decor": {},
+      "walkable": 3015,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "swamp",
+      "scene_seed": 20261023,
+      "terrain": {
+        "mud": 2672,
+        "tree": 396,
+        "shallow_water": 317,
+        "tall_grass": 55
+      },
+      "decor": {},
+      "walkable": 3044,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "swamp",
+      "scene_seed": 29417,
+      "terrain": {
+        "mud": 2665,
+        "tree": 399,
+        "shallow_water": 322,
+        "tall_grass": 54
+      },
+      "decor": {},
+      "walkable": 3041,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "drowned_wood",
+      "scene_seed": 0,
+      "terrain": {
+        "mud": 2526,
+        "tree": 671,
+        "shallow_water": 243
+      },
+      "decor": {},
+      "walkable": 2769,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "drowned_wood",
+      "scene_seed": 20261023,
+      "terrain": {
+        "tree": 655,
+        "mud": 2522,
+        "shallow_water": 263
+      },
+      "decor": {},
+      "walkable": 2785,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "drowned_wood",
+      "scene_seed": 29417,
+      "terrain": {
+        "mud": 2500,
+        "tree": 696,
+        "shallow_water": 244
+      },
+      "decor": {},
+      "walkable": 2744,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "ash_wastes",
+      "scene_seed": 0,
+      "terrain": {
+        "grass": 3104,
+        "tree": 40,
+        "tall_grass": 296
+      },
+      "decor": {
+        "flower_pilgrims_woe": 35,
+        "shroom_sulphur_cap": 34,
+        "flower_murk_violet": 32,
+        "shroom_prophets_eye": 32
+      },
+      "walkable": 3400,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "ash_wastes",
+      "scene_seed": 20261023,
+      "terrain": {
+        "grass": 3129,
+        "tall_grass": 287,
+        "tree": 24
+      },
+      "decor": {
+        "shroom_prophets_eye": 35,
+        "flower_murk_violet": 31,
+        "flower_pilgrims_woe": 32,
+        "shroom_sulphur_cap": 32
+      },
+      "walkable": 3416,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "ash_wastes",
+      "scene_seed": 29417,
+      "terrain": {
+        "grass": 3128,
+        "tree": 36,
+        "tall_grass": 276
+      },
+      "decor": {
+        "flower_murk_violet": 30,
+        "shroom_prophets_eye": 35,
+        "flower_pilgrims_woe": 31,
+        "shroom_sulphur_cap": 31
+      },
+      "walkable": 3404,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "mountain",
+      "scene_seed": 0,
+      "terrain": {
+        "rock": 1472,
+        "gravel": 1968
+      },
+      "decor": {},
+      "walkable": 1968,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "mountain",
+      "scene_seed": 20261023,
+      "terrain": {
+        "rock": 1412,
+        "gravel": 2028
+      },
+      "decor": {},
+      "walkable": 2028,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "mountain",
+      "scene_seed": 29417,
+      "terrain": {
+        "gravel": 1970,
+        "rock": 1470
+      },
+      "decor": {},
+      "walkable": 1970,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "deep_mountain",
+      "scene_seed": 0,
+      "terrain": {
+        "rock": 1472,
+        "gravel": 1968
+      },
+      "decor": {},
+      "walkable": 1968,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "deep_mountain",
+      "scene_seed": 20261023,
+      "terrain": {
+        "rock": 1412,
+        "gravel": 2028
+      },
+      "decor": {},
+      "walkable": 2028,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    },
+    {
+      "biome": "deep_mountain",
+      "scene_seed": 29417,
+      "terrain": {
+        "gravel": 1970,
+        "rock": 1470
+      },
+      "decor": {},
+      "walkable": 1970,
+      "tiles": 3440,
+      "scope": "Controlled base-only terrain before planned infrastructure, structures, entrances, functional dressing or population."
+    }
+  ]
+}

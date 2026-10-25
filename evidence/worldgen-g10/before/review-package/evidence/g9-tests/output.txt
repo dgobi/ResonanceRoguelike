@@ -1,0 +1,52 @@
+test_disabled_zero_budget_and_exhaustion_keep_complete_baseline (test_generation_g9_network.G9Network.test_disabled_zero_budget_and_exhaustion_keep_complete_baseline) ... ok
+test_new_contract_parent_policies_and_explicit_legacy_settings (test_generation_g9_network.G9Network.test_new_contract_parent_policies_and_explicit_legacy_settings) ... ok
+test_ordinary_preservation_benefit_and_every_touched_scene (test_generation_g9_network.G9Network.test_ordinary_preservation_benefit_and_every_touched_scene) ... ok
+test_real_existing_bridge_reuse_replays_normal_reservations (test_generation_g9_network.G9Network.test_real_existing_bridge_reuse_replays_normal_reservations) ... ok
+test_two_connections_union_marginal_benefit_and_exact_shared_budget (test_generation_g9_network.G9Network.test_two_connections_union_marginal_benefit_and_exact_shared_budget) ... ok
+test_anisotropic_search_reuse_has_real_cost_and_finite_exhaustion (test_generation_g9_network.NetworkGeometry.test_anisotropic_search_reuse_has_real_cost_and_finite_exhaustion) ... ok
+test_existing_deck_reuse_no_new_water_and_reservation_order (test_generation_g9_network.NetworkGeometry.test_existing_deck_reuse_no_new_water_and_reservation_order) ... ok
+test_full_width_corner_and_private_ownership_and_local_disconnect (test_generation_g9_network.NetworkGeometry.test_full_width_corner_and_private_ownership_and_local_disconnect) ... ok
+test_strict_policy (test_generation_g9_network.NetworkGeometry.test_strict_policy) ... ok
+test_union_intersection_rings_and_parallel_contracted_runs (test_generation_g9_network.NetworkGeometry.test_union_intersection_rings_and_parallel_contracted_runs) ... ok
+test_checksum_consistent_network_corruptions_fail_before_install (test_generation_g9_lifecycle.G9Lifecycle.test_checksum_consistent_network_corruptions_fail_before_install) ... ok
+test_genuine_g8_visited_pending_common_country_and_compound (test_generation_g9_lifecycle.G9Lifecycle.test_genuine_g8_visited_pending_common_country_and_compound) ... ok
+test_saved_network_pending_policy_independence_and_late_rollback (test_generation_g9_lifecycle.G9Lifecycle.test_saved_network_pending_policy_independence_and_late_rollback) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 136.224s
+
+OK
+[gen] waystones placed in chunk (41,25): 1
+[gen] waystones placed in chunk (42,25): 1
+[gen] waystones placed in chunk (46,24): 1
+[gen] waystones placed in chunk (47,24): 1
+[gen] waystones placed in chunk (52,23): 1
+[gen] waystones placed in chunk (53,22): 1
+[gen] waystones placed in chunk (54,17): 1
+[gen] waystones placed in chunk (57,16): 1
+[gen] waystones placed in chunk (59,16): 1
+[gen] waystones placed in chunk (65,14): 1
+[gen] waystones placed in chunk (74,12): 1
+[gen] waystones placed in chunk (74,18): 1
+[gen] waystones placed in chunk (74,20): 1
+[gen] waystones placed in chunk (74,30): 1
+[gen] waystones placed in chunk (74,31): 1
+[gen] waystones placed in chunk (76,33): 1
+[gen] waystones placed in chunk (78,33): 1
+[gen] waystones placed in chunk (78,33): 1
+[gen] waystones placed in chunk (76,33): 1
+[gen] waystones placed in chunk (74,31): 1
+[gen] waystones placed in chunk (74,30): 1
+[gen] waystones placed in chunk (74,20): 1
+[gen] waystones placed in chunk (74,18): 1
+[gen] waystones placed in chunk (74,12): 1
+[gen] waystones placed in chunk (65,14): 1
+[gen] waystones placed in chunk (59,16): 1
+[gen] waystones placed in chunk (57,16): 1
+[gen] waystones placed in chunk (54,17): 1
+[gen] waystones placed in chunk (53,22): 1
+[gen] waystones placed in chunk (52,23): 1
+[gen] waystones placed in chunk (47,24): 1
+[gen] waystones placed in chunk (46,24): 1
+[gen] waystones placed in chunk (42,25): 1
+[gen] waystones placed in chunk (41,25): 1
