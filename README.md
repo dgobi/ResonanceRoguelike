@@ -1,6 +1,9 @@
 # Resonance roguelike — production main
 
-G9 adds bounded country-road shortcuts over the complete G8 settlement and rural
+G10 gives the eight existing wilderness biomes coherent tree stands, clearings,
+wet patches and rock masses, with an explicit saved surface policy. Read the
+[terrain tuning and preview guide](roguelike/docs/WILDERNESS_TERRAIN.md).
+G9's bounded country-road shortcuts preserve the complete G8 settlement and rural
 baseline. Read [G9 delivery](docs/owner/WORLDGEN_G9.md), the
 [country-network guide](roguelike/docs/COUNTRY_NETWORK.md) and the
 [structure authoring guide](roguelike/docs/STRUCTURE_AUTHORING.md).
@@ -28,5 +31,6 @@ The current settlement composer is documented in
 [Resonance Owner Wiki](Resonance_Wiki_Maintenance/Resonance_Owner_Wiki.html)
 locally for the complete offline guide, including G7 compounds, G8 streets,
 commons and frontage, and G9 network preview/tuning and save contracts. Editable source and rebuild instructions live in
-`Resonance_Wiki_Maintenance/`.
+`Resonance_Wiki_Maintenance/`. Wiki upkeep is commissioned separately through
+targeted owner briefs; G10 leaves that edition intact.
 

@@ -33,6 +33,7 @@ class DataLoader:
         self.town_config:       dict = self._load("generation/town_config.json")
         self.g3_config:         dict = self._load("generation/g3_config.json")
         self.country_network:   dict = self._load("generation/country_network.json")
+        self.wilderness_profiles: dict = self._load("generation/wilderness_profiles.json")
         self.settlement_layouts: dict = self._load("generation/settlement_layouts.json")
         self.settlement_profiles: dict = self._load("generation/settlement_profiles.json")
         self.poi_profiles: dict = self._load("generation/poi_profiles.json")

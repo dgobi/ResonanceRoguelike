@@ -28,7 +28,14 @@ def create_planned_surface(world,chunk,data,item_factory,creature_factory,width,
     base.edges={e:[] for e in base.edges}; base.town_id=-1; base.town_role=''
     if base.region_type==RegionType.TOWN: base.region_type=RegionType.PLAINS
     context=GenerationContext(world.seed,chunk.seed,(chunk.wx,chunk.wy,None))
-    m,spawn=generate_region(base,width,height,data.terrain,data=data,context=context,base_only=True)
+    from generation.wilderness import world_policy, eligible, materialize, provenance
+    policy = world_policy(world, data)
+    if policy is not None and eligible(chunk):
+        m,spawn=materialize(world,chunk,data,context,width,height)
+    else:
+        m,spawn=generate_region(base,width,height,data.terrain,data=data,context=context,base_only=True)
+        if policy is not None:
+            m.surface_provenance=provenance(world,chunk)
     x0,y0=chunk.wx*W,chunk.wy*H; rect=[x0,y0,x0+W,y0+H]
     protected=set(); road_cells=set(); water_cells=set(); specs=[]; receipts=[]
     def local(rectangle):

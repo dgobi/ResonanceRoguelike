@@ -354,6 +354,8 @@ class SaveManager:
         from world.world_map import WorldMap
         world = WorldMap(world_data['width'], world_data['height'])
         _deserialize_world(world_data, world)
+        from generation.wilderness import world_policy, provenance as surface_provenance
+        world_policy(world, engine.data)
         if world.plan_mode=='shared-v1':
             from generation.world_plan import slice_plan
             import re
@@ -374,6 +376,8 @@ class SaveManager:
                     continue
                 if map_revision not in ('wg3','wg4','wg5','wg6','wg7','wg8','wg9') or chunk_revision!=map_revision:
                     raise SaveFormatError('missing/incoherent generated scene revision: '+scene.name)
+                if getattr(m, 'surface_provenance', None) != surface_provenance(world, chunk):
+                    raise SaveFormatError('incoherent surface policy provenance: '+scene.name)
                 provenance=getattr(m,'plan_provenance',None)
                 if not isinstance(provenance,dict) or provenance.get('mode')!='shared-v1': raise SaveFormatError('missing required shared scene references: '+scene.name)
                 section=slice_plan(world.plan,wx,wy)
@@ -568,6 +572,8 @@ def _serialize_world(world_map: "WorldMap") -> dict:
         "generation_revision": getattr(world_map, "generation_revision", "legacy-unversioned"),
         "plan_mode": getattr(world_map, "plan_mode", "legacy"),
         "plan": getattr(world_map, "plan", None),
+        "surface_schema": getattr(world_map, "surface_schema", 0),
+        "surface_policy": getattr(world_map, "surface_policy", None),
         "vukh_x":         world_map.vukh_x,
         "vukh_y":         world_map.vukh_y,
         "start_wx":       world_map.start_wx,
@@ -596,6 +602,10 @@ def _deserialize_world(data: dict, world_map: "WorldMap") -> None:
         raise SaveFormatError('missing required G3 plan mode or unexpected legacy plan')
     world_map.plan_mode=mode
     world_map.plan=data.get('plan')
+    world_map.surface_schema=data.get('surface_schema',0)
+    world_map.surface_policy=data.get('surface_policy')
+    from generation.wilderness import world_policy
+    world_policy(world_map)
 
     for key, cdata in data["chunks"].items():
         wx, wy = map(int, key.split(","))

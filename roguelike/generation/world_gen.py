@@ -59,6 +59,10 @@ def generate_world(world_map: WorldMap, data, rng: random.Random,
                    name_gen=None, *, plan_mode='shared-v1', planning_settings=None, planning_metrics=None) -> WorldMap:
     # The candidate is published only after geography, plans and references pass.
     candidate=WorldMap(world_map.width,world_map.height); candidate.seed=world_map.seed
+    if plan_mode == 'shared-v1':
+        from generation.wilderness import make_policy, SCHEMA
+        candidate.surface_schema = SCHEMA
+        candidate.surface_policy = make_policy(data.wilderness_profiles, data)
     _generate_world(candidate,data,random.Random(candidate.seed),name_gen,plan_mode,planning_settings,planning_metrics)
     world_map.__dict__.update(candidate.__dict__)
     return world_map

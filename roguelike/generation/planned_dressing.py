@@ -13,6 +13,14 @@ def dress(m, chunk, world, data, context, native, spawn):
     def allowed(x,y):
         return ((x,y) not in reserved and (x,y) not in m.decor and
                 (x,y) not in m.floor_objects and (x,y) not in m.container_state and m.walkable[x,y])
+    def waystone_ground(x,y):
+        # New terrain can expose dead wood beneath an otherwise valid stone.
+        # E prioritizes harvesting/gathering, so keep required interaction ground
+        # unambiguous. Genuine G9 pending scenes retain their original eligibility.
+        if not allowed(x,y):return False
+        if getattr(world,'surface_schema',0)==0:return True
+        td=data.terrain.get(str(m.tiles[x,y]['terrain']),{})
+        return not any(td.get(k) for k in ('harvestable','gatherable','interactable'))
     start=(chunk.wx,chunk.wy)==(world.start_wx,world.start_wy)
     civic=bool(native and native['waystone'])
     specs=[]; waystone=None
@@ -25,13 +33,13 @@ def dress(m, chunk, world, data, context, native, spawn):
         sides={side for x,y in m.road_cells for side,hit in
                (('W',x==0),('E',x==m.width-1),('N',y==0),('S',y==m.height-1)) if hit}
         if not start:
-            _place_waystones(m,data.terrain,chunk,context.rng('road-waystones'),allowed=allowed,road_edges=sorted(sides))
+            _place_waystones(m,data.terrain,chunk,context.rng('road-waystones'),allowed=waystone_ground,road_edges=sorted(sides))
     if start or civic:
         reached=reachable(m,spawn,data)
         candidates=[]
         for x in range(1,m.width-1):
             for y in range(1,m.height-1):
-                if not allowed(x,y) or (x,y) not in reached: continue
+                if not waystone_ground(x,y) or (x,y) not in reached: continue
                 if not any((x+dx,y+dy) in m.road_cells for dx,dy in ((1,0),(-1,0),(0,1),(0,-1))): continue
                 if civic and (not allowed(x+1,y) or (x+1,y) not in reached): continue
                 candidates.append((abs(x-m.width//2)+abs(y-m.height//2),x,y))
@@ -43,7 +51,7 @@ def dress(m, chunk, world, data, context, native, spawn):
             candidates=[(0,*stone)]
         if start and not candidates:
             candidates=[(abs(x-spawn[0])+abs(y-spawn[1]),x,y) for x,y in sorted(reached)
-                        if 0<x<m.width-1 and 0<y<m.height-1 and allowed(x,y)]
+                        if 0<x<m.width-1 and 0<y<m.height-1 and waystone_ground(x,y)]
         if not candidates:
             raise GenerationError('required starting/town waystone has no legal reachable site in saved geometry')
         _,x,y=min(candidates); waystone=(x,y)

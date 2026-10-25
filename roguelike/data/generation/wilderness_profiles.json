@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "profiles": {
+    "forest": {"palette": {"ground": "varied_grass", "patch": "tall_grass", "obstacle": "tree"}, "scale": 30, "cover": 0.46, "patch_amount": 0.28, "wet_amount": 0.12, "transition": 10},
+    "plains": {"palette": {"ground": "varied_grass", "patch": "tall_grass", "obstacle": "tree"}, "scale": 38, "cover": 0.14, "patch_amount": 0.35, "wet_amount": 0.06, "transition": 10},
+    "heath": {"palette": {"ground": "varied_grass", "patch": "gravel", "obstacle": "rock"}, "scale": 26, "cover": 0.18, "patch_amount": 0.32, "wet_amount": 0.04, "transition": 8},
+    "swamp": {"palette": {"ground": "packed_earth", "patch": "mud", "obstacle": "tree"}, "scale": 24, "cover": 0.27, "patch_amount": 0.53, "wet_amount": 0.44, "transition": 10},
+    "drowned_wood": {"palette": {"ground": "varied_grass", "patch": "mud", "obstacle": "tree"}, "scale": 27, "cover": 0.49, "patch_amount": 0.55, "wet_amount": 0.46, "transition": 10},
+    "ash_wastes": {"palette": {"ground": "gravel", "patch": "ash", "obstacle": "rock"}, "scale": 34, "cover": 0.23, "patch_amount": 0.34, "wet_amount": 0, "transition": 3},
+    "mountain": {"palette": {"ground": "gravel", "patch": "packed_earth", "obstacle": "rock"}, "scale": 25, "cover": 0.49, "patch_amount": 0.28, "wet_amount": 0.03, "transition": 6},
+    "deep_mountain": {"palette": {"ground": "gravel", "patch": "ash", "obstacle": "rock"}, "scale": 36, "cover": 0.59, "patch_amount": 0.18, "wet_amount": 0, "transition": 4}
+  }
+}
