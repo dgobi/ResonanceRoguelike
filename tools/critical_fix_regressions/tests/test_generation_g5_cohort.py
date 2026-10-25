@@ -47,9 +47,9 @@ class G5Cohort(unittest.TestCase):
                     row['assigned'].append(dict(context=context,controlled_pool=True,placements=len(selected),complete_scenes=len(report['previews']),example=selected[0]))
                     continue
                 with self.subTest(asset=aid,context=context):
-                    # Certify the recorded old shed assignment without inferring
+                    # Certify the recorded old shed/apothecary assignments without inferring
                     # its membership from the intentionally replaced live pool.
-                    selection=historical_profiles() if aid=='tool_shed_a' else copy.deepcopy(data.settlement_profiles)
+                    selection=historical_profiles() if aid in ('tool_shed_a','apothecary_a') else copy.deepcopy(data.settlement_profiles)
                     profile=selection['profiles'][context]
                     role=next(r for r,rows in profile['roles'].items() if any(row['asset']==aid for row in rows))
                     profile['roles'][role]=[dict(asset=aid,weight=1.0,max_per_settlement=128)]

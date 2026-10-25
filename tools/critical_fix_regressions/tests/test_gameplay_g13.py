@@ -65,6 +65,10 @@ class G13Shed(unittest.TestCase):
                 if row['asset']=='tool_shed_a':
                     self.assertEqual(row, dict(asset='tool_shed_a',weight=1.0,max_per_settlement=3))
                     row['asset']='tool_shed_b'
+            for row in expected['profiles'][form]['roles']['commercial']:
+                if row['asset']=='apothecary_a':
+                    self.assertEqual(row, dict(asset='apothecary_a',weight=1.0,max_per_settlement=5))
+                    row['asset']='apothecary_b'
         self.assertEqual(data.settlement_profiles, expected)
         w = WorldMap(128,128); w.seed=20261023
         with contextlib.redirect_stdout(io.StringIO()):

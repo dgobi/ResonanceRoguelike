@@ -1,0 +1,22 @@
+test_capacity_rejection_search_again_exact_transfer_consumption_and_disk_revisit (test_gameplay_g15.FiniteTreatment.test_capacity_rejection_search_again_exact_transfer_consumption_and_disk_revisit) ... ok
+test_full_stale_missing_and_dead_rejections_and_free_close_preserve_all_state (test_gameplay_g15.FiniteTreatment.test_full_stale_missing_and_dead_rejections_and_free_close_preserve_all_state) ... ok
+test_genuine_g14_checkpoint_pending_apothecary_and_depleted_visited_scene_match_preedit (test_gameplay_g15.FiniteTreatment.test_genuine_g14_checkpoint_pending_apothecary_and_depleted_visited_scene_match_preedit) ... ok
+test_injured_and_near_full_exact_dose_effect_boundary_and_one_ordinary_turn (test_gameplay_g15.FiniteTreatment.test_injured_and_near_full_exact_dose_effect_boundary_and_one_ordinary_turn) ... ok
+test_native_current_selection_small_three_seed_recheck_and_production_materialization (test_gameplay_g15.FiniteTreatment.test_native_current_selection_small_three_seed_recheck_and_production_materialization) ... ok
+test_reading_equipment_and_inventory_debt_semantics_remain_paid (test_gameplay_g15.FiniteTreatment.test_reading_equipment_and_inventory_debt_semantics_remain_paid) ... ok
+test_versioned_chest_preserves_old_layout_and_pools_and_both_real_access_paths (test_gameplay_g15.FiniteTreatment.test_versioned_chest_preserves_old_layout_and_pools_and_both_real_access_paths) ... ok
+test_current_selection_and_production_materialization (test_gameplay_g13.G13Shed.test_current_selection_and_production_materialization) ... ok
+test_versioned_content_and_every_permitted_orientation (test_gameplay_g13.G13Shed.test_versioned_content_and_every_permitted_orientation) ... ok
+test_new_container_and_authored_waystone_travel_cold_restore_f9 (test_generation_g5_interactions.G5Interactions.test_new_container_and_authored_waystone_travel_cold_restore_f9) ... G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5037: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 25.251s
+
+OK
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=medicine_chest decor_harvestable=False
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=medicine_chest decor_harvestable=False
+[harvest] tile=(13,12) terrain=grass harvestable=False decor=medicine_chest decor_harvestable=False

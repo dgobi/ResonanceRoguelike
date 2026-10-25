@@ -1,5 +1,15 @@
 # Start here — production main, B3
 
+G15 recovery: use `E` beside a medicine chest in a newly selected apothecary,
+select Herbal Dressing and press Enter to take it. Open `I`, select the dose,
+and press Enter (or `E` / keypad Enter) to recover up to 12 HP, clamped to current
+maximum. Successful use consumes that exact dose and costs one ordinary inventory
+action; AI, effects and survival then proceed normally. Full health, a stale dose,
+or a missing/dead fighter rejects use without consumption or time. Closing with
+`I` or Esc is free. This is one physical 0.1 kg dose per new apothecary, with no
+replenishment; old saved apothecaries retain their old contents and selections.
+See [G15 delivery](../../../docs/owner/GAMEPLAY_G15.md).
+
 Accepted Arc A, B1 and B2 are integrated on production `main`. B3 adds coherent
 checkpoint generations, dirty-cache capture, recovery/rollback and slot-scoped
 deletion. Read [B3_STATE](B3_STATE.md), [B3_VERIFICATION](B3_VERIFICATION.md), and

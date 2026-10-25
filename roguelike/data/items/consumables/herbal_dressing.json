@@ -1,0 +1,11 @@
+{
+  "id": "herbal_dressing",
+  "name": "Herbal Dressing",
+  "description": "A prepared herbal dressing bound in clean linen. Restores up to 12 HP when injured; consumed after one use.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": false,
+  "on_use": "heal_minor",
+  "heal_amount": 12
+}

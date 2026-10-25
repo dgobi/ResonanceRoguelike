@@ -21,6 +21,8 @@ class ItemSystem:
         """
         inv = getattr(engine.player, "inventory", None)
         if inv is None or not inv.contains(item):
+            if item.on_use == "heal_minor":
+                engine.log.add("That treatment is no longer in your pack.", WORN_STONE)
             return False  # stale modal selection cannot apply effects or equip
         from entities.item import repair_selected_equipment_use
         repair_selected_equipment_use(item)
@@ -141,23 +143,20 @@ class ItemSystem:
 
     def _use_heal_minor(self, item: "Item", engine: "Engine") -> bool:
         fighter = getattr(engine.player, "fighter", None)
-        if not fighter:
+        if not fighter or fighter.is_dead or fighter.hp <= 0:
+            engine.log.add("Only the living can use this treatment.", WORN_STONE)
+            return False
+        if fighter.hp >= fighter.max_hp:
+            engine.log.add("Your wounds are already closed. The treatment remains unused.", LIFE_GREEN)
             return False
 
         amount = item.heal_amount or 3
         actual = fighter.heal(amount)
 
-        if actual == 0:
-            engine.log.add(
-                f"You take the {item.name}. Your wounds are already closed.",
-                LIFE_GREEN,
-            )
-        else:
-            engine.log.add(
-                f"You take the {item.name}. "
-                f"You recover {actual} HP.",
-                LIFE_GREEN,
-            )
+        engine.log.add(
+            f"You take the {item.name}. You recover {actual} HP.",
+            LIFE_GREEN,
+        )
         return True   # consumed
 
     def _use_equip_light(

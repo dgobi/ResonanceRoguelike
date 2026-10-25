@@ -38,7 +38,7 @@
             "max_per_settlement": 5
           },
           {
-            "asset": "apothecary_a",
+            "asset": "apothecary_b",
             "weight": 1.0,
             "max_per_settlement": 5
           },
@@ -125,7 +125,7 @@
             "max_per_settlement": 5
           },
           {
-            "asset": "apothecary_a",
+            "asset": "apothecary_b",
             "weight": 1.0,
             "max_per_settlement": 5
           },

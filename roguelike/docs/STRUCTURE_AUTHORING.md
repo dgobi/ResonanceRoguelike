@@ -10,6 +10,15 @@ sections describe the supported legacy route, not the current selection policy.
 
 ## Saved worlds first
 
+G15 demonstrates a versioned stock change: `apothecary_b` copies the original
+apothecary geometry, access and other containers. Its medicine chest adds a
+separate guaranteed `apothecary_b_treatment` pool alongside `alchemist_reagents`.
+Each pool rolls independently, so the one dressing does not replace reagents.
+Only the two grid/roadside commercial memberships change (weight 1.0, cap 5).
+`apothecary_a`, shared pools and old saved selections remain available unchanged;
+visited containers are never backfilled. Use a new asset/dedicated pool for this
+kind of new-plan reward change rather than changing an old dependency in place.
+
 Role membership, frequency, caps and repetition settings affect **new plans**.
 Visited maps retain actors, changes and taken contents. Pending old placements
 keep their saved asset, transform, geometry and identity. No selection runs on

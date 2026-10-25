@@ -299,6 +299,10 @@ class InventoryScreen:
                     self._clamp_scroll()
                 else:
                     consumed = engine.item_system.use(row_item, engine)
+                    # heal_minor rejects without an action. Other handlers can
+                    # return False after a paid action (e.g. reading/equipping).
+                    if row_item.on_use == "heal_minor" and not consumed:
+                        return True
                     if engine._pending_consume or engine._pending_throw:
                         return True  # Opening a confirmation/target command costs no turn.
                     if consumed:

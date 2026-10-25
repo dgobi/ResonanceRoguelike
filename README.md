@@ -1,5 +1,11 @@
 # Resonance roguelike — production main
 
+G15 adds one finite Herbal Dressing to each newly selected apothecary's medicine
+chest. Search with `E`, take the dose, then select it in `I` and press Enter:
+an injured living player recovers up to 12 HP for one inventory action. Full
+health and stale selections leave it unused for free. See
+[G15 delivery](docs/owner/GAMEPLAY_G15.md). Existing campaigns retain old stock.
+
 G14 lets an explicitly emptied crate become one recoverable floor wood bundle,
 feeding the existing paid campfire route. Use `E`, target the crate, then `X`;
 confirm with Enter or cancel with Esc. See [G14 delivery](docs/owner/GAMEPLAY_G14.md)
@@ -34,6 +40,7 @@ $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\
 & $ResonancePython -X utf8 tools/verify_d.py
 & $ResonancePython -X utf8 tools/verify_g12.py --evidence evidence/gameplay-g12/owner-verification
 & $ResonancePython -X utf8 tools/verify_g14.py --evidence evidence/gameplay-g14/owner-verification
+& $ResonancePython -X utf8 tools/verify_g15.py --evidence evidence/gameplay-g15/owner-verification
 ```
 
 The interpreter path supplies dependencies only; game code runs from this checkout.

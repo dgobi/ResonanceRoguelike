@@ -213,6 +213,7 @@ Subdirectories: `weapons/`, `armor/`, `consumables/`, `tools/`. One JSON per ite
 | `stackable` | bool | Can stack in inventory |
 | `slot` | string | Runtime equipment slot name (omit if not equippable) |
 | `on_use` | string | Function name in `item_system.py` |
+| `heal_amount` | integer | HP requested by `on_use: "heal_minor"`, clamped by the current fighter maximum; positive authored amounts |
 | `damage_dice`, `damage_bonus` | string, number | Supported separate weapon fields, e.g. `"1d4"` and `2`; do not embed `+2` in the dice string |
 | `weight_reductions` | object | Satchel reductions by inventory display category, or `all`; derived at read/admission time |
 | `consumed_on_use` | bool | False excludes reusable items from automatic material selection; recipe roles determine actual craft consumption |
@@ -223,6 +224,20 @@ New equippable definitions use `on_use: "equip_toggle"`. The four selected G12
 shipped IDs have a narrow missing/null-handler fallback at ordinary use, preserving
 historical satchel definition hashes and untouched visited item records. This is
 not a general fallback for newly authored equipment.
+
+G15's `consumables/herbal_dressing.json` is a non-stackable, 0.1 kg single dose
+with `on_use: "heal_minor"`, `heal_amount: 12` and the existing `generic_item`
+tile. Its description states the up-to-12-HP, single-use effect. No ingredients,
+qualities or additional effects are required. Full health, dead/missing fighter
+and stale ownership reject this handler without an action or consumption.
+
+Fresh grid/roadside commercial selection substitutes `apothecary_b` for
+`apothecary_a` at weight 1.0/cap 5. The new variant preserves the original
+11×8 layout and appends `apothecary_b_treatment` to the medicine chest's existing
+`alchemist_reagents` pool list. The dedicated pool rolls `[1,1]` and contains only
+the dressing at positive weight; it does not compete with reagent rolls. Other
+containers, shared pools and `apothecary_a` remain unchanged. Saved selections and
+visited contents are never upgraded or regenerated to add the treatment.
 
 ---
 

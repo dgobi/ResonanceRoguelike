@@ -358,6 +358,29 @@ Full inventory UI opened with `I`.
 | `Enter` / keypad `Enter` | Use item / equip |
 | `Esc` | Close |
 
+### Finite treatment (G15)
+
+Herbal Dressing uses `heal_minor` with data-driven `heal_amount: 12`. In `I`,
+select the dose and press Enter, keypad Enter or E. A living injured fighter
+recovers the actual missing HP up to that amount; feedback states the actual
+restoration. The exact selected instance is consumed once, then the ordinary
+inventory action advances AI/effects/survival. Existing inventory movement-debt
+semantics and the broader HP-display policy remain unchanged. The item detail
+description states its up-to-12-HP, single-use effect.
+
+Full health, missing/dead fighter or stale ownership rejects treatment without
+healing, consumption or time. Closing inventory is free. The narrow
+`heal_minor` rejection handling does not reinterpret other handlers' `False`
+returns: reading and equipment still take their established action.
+
+Newly selected `apothecary_b` medicine chests retain the existing reagent rolls
+and independently add one dose through `apothecary_b_treatment`. Search with E,
+then select the dose in the normal container prompt. Capacity rejection leaves
+that same item in the chest. Search, travel and load do not restock it. Existing
+saved apothecary selections/visited contents retain their original owners and
+dependencies. No starter gift, food/water, exposure change, XP or empty vessel is
+attached to treatment.
+
 ### Equipment and carrying (G12)
 
 Use the Revelation Lens and each existing satchel with the ordinary inventory

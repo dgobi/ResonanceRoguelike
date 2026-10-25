@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "source": {
+    "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+    "roguelike/engine/inventory_screen.py": "9897a5077b0650687fa15db5b0712679bb9aa37f96a852d36855fcd8c59b2232",
+    "roguelike/data/items/consumables/herbal_dressing.json": "b98aaacf395fd0c7d7bfbc573de350d98f3777254dd7d804ca729fd54bd0a016",
+    "roguelike/data/buildings/commercial/apothecary_b.json": "027c114d322d15db781a553b8af50da61ba10660d0bacbf132a1f0bed25acbaa",
+    "roguelike/data/loot_pools/apothecary_b_treatment.json": "07a478a03895c7fba3df529fc5cf6690e159c22e00f70419a7975a0d9f32ed59",
+    "roguelike/data/generation/settlement_profiles.json": "1d666d891dddd75675dbbbd22a96adc896057b6266622c4701222a41025dc71e",
+    "tools/g15_journey.py": "d0f49c34a863cf4539b10ca2a85e5ef9a9a911d19c7ba6caa2d02ec8c8ebc06a",
+    "tools/g15_historical.py": "59850677c413a6f2db5df3ce43119cfe559a864bc596297a9e5a12f1a99590e1",
+    "tools/critical_fix_regressions/tests/test_gameplay_g15.py": "959fe3f21a31b6025bfa49913fd2af1463adf0373e4d568df90ee0427eb24ce2"
+  },
+  "checks": [
+    {
+      "log": "development-tests-b.txt",
+      "tests": 10,
+      "seconds": 25.251,
+      "passed": true
+    },
+    {
+      "log": "development-cohort.txt",
+      "tests": 1,
+      "seconds": 176.222,
+      "passed": true
+    },
+    {
+      "log": "development-catalog.txt",
+      "tests": 2,
+      "seconds": 1.41,
+      "passed": true
+    }
+  ],
+  "demonstration": {
+    "passed": true,
+    "effect": {
+      "before_hp": 36,
+      "requested": 12,
+      "actual": 12,
+      "after_hp": 48,
+      "turn": 490
+    },
+    "after_turn_hp": 48,
+    "use_turns": 1,
+    "acquired_cold_process": true,
+    "consumed_cold_process": true,
+    "unsaved_movement_before_both_f9": true,
+    "normal_fov_images_visually_checked": true
+  },
+  "development_findings": [
+    "Initial fixture used nonexistent document ID and did not reopen a dismissed capacity-rejection prompt; corrected tests, no runtime change.",
+    "Inherited apothecary entrance requires ordinary eight-way movement; extended the established path/key table with shipped diagonal keypad controls. Original geometry unchanged."
+  ],
+  "controls": "Development preflight only, prior to frozen final gates. Full event artifacts retained in ignored .baseline/g15-development; final demonstration will be retained with final receipts. No personal saves or desktop interaction."
+}

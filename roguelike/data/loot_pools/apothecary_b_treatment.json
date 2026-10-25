@@ -1,0 +1,8 @@
+{
+  "id": "apothecary_b_treatment",
+  "description": "One prepared treatment kept in the apothecary's medicine chest.",
+  "roll_count": [1, 1],
+  "items": [
+    {"item_id": "herbal_dressing", "weight": 1}
+  ]
+}

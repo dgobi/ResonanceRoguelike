@@ -12,6 +12,7 @@ from test_effect_persistence import make_engine
 from engine.engine import GameMode
 from generation.world_plan import address
 from g1_support import fingerprint
+from historical_selection import historical_data
 
 
 class G5Interactions(unittest.TestCase):
@@ -23,7 +24,10 @@ class G5Interactions(unittest.TestCase):
     render=interactions.G4Interactions.render
 
     def test_new_container_and_authored_waystone_travel_cold_restore_f9(self):
-        e=self.boot();e.debug=False;e.player_invincible=True;e.player.inventory.capacity=100
+        # This certifies the original asset against genuine historical selection.
+        with patch('main.DataLoader',return_value=historical_data(self.data)):
+            e=self.boot()
+        e.debug=False;e.player_invincible=True;e.player.inventory.capacity=100
         plan=e.world_map.plan
         p=next(p for p in plan['placements'] if p['asset']=='apothecary_a');town=address(*p['origin'])[:2]
         self.visit(e,town);target=next(t for t in p['targets'] if t['kind']=='container');xy=(target['x']%80,target['y']%43)
