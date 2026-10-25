@@ -37,7 +37,7 @@ def main():
         committed=stream.read(int(size));assert stream.read(1)==b'\n'
         raw=(ROOT/path).read_bytes();mode='exact'
         if raw!=committed:
-            assert Path(path).suffix in ('.py','.js','.css','.json','.md','.hex'),path
+            assert Path(path).suffix in ('.py','.js','.css','.json','.md','.hex','.html'),path
             assert raw.replace(b'\r\n',b'\n')==committed.replace(b'\r\n',b'\n'),path
             mode='CRLF-only'
         bindings[path]=dict(blob=blob,committed_sha256=hashlib.sha256(committed).hexdigest(),match=mode)
