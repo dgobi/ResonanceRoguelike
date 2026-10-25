@@ -1,0 +1,53 @@
+{
+  "status": "Development and superseded release diagnostics only; final-d certifies final inputs",
+  "material_failures": [
+    {
+      "artifact": "preflight/initial-tests.txt",
+      "result": "7 tests: 6 pass, one newly written test fails",
+      "cause": "Expected lexical chunk ordering, but production plan order is settlement order.",
+      "resolution": "Compare the same complete cohort in sorted chunk order; retain exact placement/geometry checks."
+    },
+    {
+      "artifact": "preflight/receipt-assumption.txt",
+      "result": "2 tests: one pass, one newly written test fails",
+      "cause": "New test assumed population receipts owned live Item lists. Actual materialized container state owns the native items.",
+      "resolution": "Assert the three exact placement-target container owners and singleton bag contents directly."
+    },
+    {
+      "result": "First preflight journey passed functional checks, but visual review failed furnishing visibility.",
+      "cause": "Selected existing tool_rack, iron_chest, meal_on_table and overturned_chair have no current sprite/tile fallback.",
+      "resolution": "Data-only replacement in the new variant with visible existing crates, barrel, table terrain and candle. Original shed/decor/rendering definitions untouched; final content journey passes."
+    }
+  ],
+  "final_content_test_log": "preflight/corrected-content-tests.txt",
+  "release_attempts": [
+    {
+      "evidence": "final-a",
+      "status": "Interrupted during focused discovery; no completed gate or passing release claimed",
+      "frozen_head": "083fc22",
+      "reason": "One remaining affected authoring-guide count needed 11 -> 14 local loot pools. The guide is source-bound; stopped this attempt and froze corrected inputs before restarting both required gates. Partial disposable outputs preserved under ignored .baseline/g13-interrupted-final-a."
+    },
+    {
+      "evidence": "final-b",
+      "status": "Full unfiltered focused suite: 259 tests, 258 pass and one catalogue-count assertion failure; source stable. D/journey release stages not run.",
+      "frozen_head": "ff8110f4e6c66a37941d22399ddd97501975ab83",
+      "retained": "superseded-final-b",
+      "reason": "Cottage authoring access registration preserves 58 installed building candidates after the one asset addition; its literal expectation was still 57. Corrected only this count and the matching current guide statement, retaining all access/actions assertions."
+    },
+    {
+      "evidence": "final-c",
+      "status": "Interrupted during focused discovery; no completed gate or passing release claimed",
+      "frozen_head": "4c9945e1228ea908a444c1b608ce43f00d6ab6fd",
+      "reason": "Final content audit caught pool descriptions still naming the superseded rack/chest/sack furnishings. Corrected descriptions to the actual crates/barrel and aligned journey labels. Independent required gates now run concurrently with separate save/evidence roots; no assertions or cases removed.",
+      "partial_outputs": "Ignored .baseline/g13-interrupted-final-c"
+    },
+    {
+      "evidence": "final-d",
+      "status": "Only this directory may certify the final inputs",
+      "frozen_head": "cd058c9610fe8db4d4ed1034cefdd71eeb8abfe3"
+    }
+  ],
+  "catalogue_correction": "preflight/catalogue-correction.txt: cottage access/action check and both G13 content checks pass (3 tests).",
+  "final_data_correction": "preflight/final-data-correction.txt: both G13 content checks and cottage access check pass (3 tests).",
+  "last_journey_preflight": "Full local original-loop journey and historical/cold restoration pass with the final authored descriptions; detailed disposable outputs in ignored .baseline/g13-final-preflight-d."
+}

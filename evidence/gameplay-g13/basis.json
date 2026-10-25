@@ -1,0 +1,28 @@
+{
+  "archive_sha256": "e85b040dae2200a76da9a2bbb15f3538c05dffc7123aa19b68108c576ce921be",
+  "manifest_members_verified": 49,
+  "reviewed_head": "3c7b51333aa4f9d1052b52caff2f19abed0f2b79",
+  "initial_status": "clean",
+  "branch": "main",
+  "origin": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "remote_main_at_start": "3c7b51333aa4f9d1052b52caff2f19abed0f2b79",
+  "starting_checkpoint": "checkpoint/gameplay-g13-start-20261025-a",
+  "frozen_inputs": "cd058c9610fe8db4d4ed1034cefdd71eeb8abfe3",
+  "commission": "Owner requested full end-to-end execution of the supplied G13 brief package. Its specific G13 implementation/publication commission is executed; companion G10/G12 proposals and historical briefs remain context.",
+  "preflight": {
+    "affected_historical_checks": "All five pass (catalogue, G11, two G9, G5). Initial seven-test run had one new-test ordering mistake; no historical assertion failed.",
+    "new_content_tests": "Both pass after correcting the new test to compare the unordered cohort and actual live container owners.",
+    "journey": "Final content preflight passes with the existing real-event driver, genuine G12 restore, F5, separate-process cold load and F9. Final gates separately certify frozen inputs."
+  },
+  "final_frozen_inputs": "cd058c9610fe8db4d4ed1034cefdd71eeb8abfe3",
+  "initial_input_checkpoint": "checkpoint/gameplay-g13-inputs-20261025-a",
+  "final_input_checkpoint": "checkpoint/gameplay-g13-inputs-20261025-d",
+  "initial_frozen_inputs": "083fc225e3f4bfdb7a02a6cf94c59f647c6b9474",
+  "historical_profile_authenticity": {
+    "original_g5_commit": "9dab6fb03e84499bc102b7795e0e1468dbf7562f",
+    "reviewed_g12_commit": "3c7b51333aa4f9d1052b52caff2f19abed0f2b79",
+    "git_blob": "009717932a6a1b315527da84a9b71a38aaa1e844",
+    "unchanged_between_g5_and_g12": true
+  },
+  "previous_final_frozen_inputs": "4c9945e1228ea908a444c1b608ce43f00d6ab6fd"
+}

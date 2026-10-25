@@ -1,0 +1,10 @@
+test_cottage_access_matches_actual_note_and_container_actions_both_mirrors (test_structure_access.StructureAccessTests.test_cottage_access_matches_actual_note_and_container_actions_both_mirrors) ... ok
+test_current_selection_and_production_materialization (test_gameplay_g13.G13Shed.test_current_selection_and_production_materialization) ... ok
+test_versioned_content_and_every_permitted_orientation (test_gameplay_g13.G13Shed.test_versioned_content_and_every_permitted_orientation) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 5.607s
+
+OK
+pygame 2.6.1 (SDL 2.28.4, Python 3.11.0)
+Hello from the pygame community. https://www.pygame.org/contribute.html

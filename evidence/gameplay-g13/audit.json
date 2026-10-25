@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "frozen_inputs": "cd058c9610fe8db4d4ed1034cefdd71eeb8abfe3",
+  "focused_tests": 259,
+  "production": {
+    "checks": 3676,
+    "passed": 3676,
+    "failed": 0,
+    "workers": 159
+  },
+  "source_inputs": 768,
+  "imported_source_entries": 14129,
+  "runner_negative_controls_reject": 7,
+  "crash_worker_preambles_excluded": true,
+  "historical_pending_fingerprint": "c16c2366f60e69af3ea7040b2b4d30ae19770aa0a1ad03f3d89ce8f332c599fb",
+  "historical_plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+  "historical_closures": 51,
+  "cold_process": 19792,
+  "same_inventory_carrying": {
+    "same_inventory": true,
+    "raw_kg": 6.999999999999999,
+    "before_effective_kg": 6.999999999999999,
+    "equipped_effective_kg": 6.3,
+    "bag_physical_kg": 0.8,
+    "reduction": 0.1,
+    "acquired": [
+      "tallow_torch",
+      "dried_provisions",
+      "leather_satchel"
+    ]
+  },
+  "source_unchanged": true,
+  "old_golden_artifacts_unchanged": true,
+  "authored_data_diff": [
+    "A\troguelike/data/buildings/storage/tool_shed_b.json",
+    "M\troguelike/data/generation/settlement_profiles.json",
+    "A\troguelike/data/loot_pools/tool_shed_b_provisions.json",
+    "A\troguelike/data/loot_pools/tool_shed_b_satchel.json",
+    "A\troguelike/data/loot_pools/tool_shed_b_tools.json"
+  ]
+}

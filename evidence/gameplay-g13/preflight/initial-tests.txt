@@ -1,0 +1,61 @@
+test_current_selection_and_production_materialization (test_gameplay_g13.G13Shed.test_current_selection_and_production_materialization) ... FAIL
+test_versioned_content_and_every_permitted_orientation (test_gameplay_g13.G13Shed.test_versioned_content_and_every_permitted_orientation) ... ok
+test_complete_inventory_and_immutable_defaults (test_structure_contract.StructureContractTests.test_complete_inventory_and_immutable_defaults) ... ok
+test_three_complete_macro_plans_and_coarse_owners_unchanged (test_generation_g11_access.G11Access.test_three_complete_macro_plans_and_coarse_owners_unchanged) ... ok
+test_ordinary_preservation_benefit_and_every_touched_scene (test_generation_g9_network.G9Network.test_ordinary_preservation_benefit_and_every_touched_scene) ... ok
+test_disabled_zero_budget_and_exhaustion_keep_complete_baseline (test_generation_g9_network.G9Network.test_disabled_zero_budget_and_exhaustion_keep_complete_baseline) ... ok
+test_every_transform_and_documented_assigned_context (test_generation_g5_cohort.G5Cohort.test_every_transform_and_documented_assigned_context) ... ok
+
+======================================================================
+FAIL: test_current_selection_and_production_materialization (test_gameplay_g13.G13Shed.test_current_selection_and_production_materialization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_gameplay_g13.py", line 68, in test_current_selection_and_production_materialization
+    self.assertEqual([(p['origin'][0]//80,p['origin'][1]//43) for p in selected], [(39,26),(75,99),(88,33)])
+AssertionError: Lists differ: [(75, 99), (39, 26), (88, 33)] != [(39, 26), (75, 99), (88, 33)]
+
+First differing element 0:
+(75, 99)
+(39, 26)
+
+- [(75, 99), (39, 26), (88, 33)]
++ [(39, 26), (75, 99), (88, 33)]
+
+----------------------------------------------------------------------
+Ran 7 tests in 293.918s
+
+FAILED (failures=1)
+[gen] waystones placed in chunk (41,25): 1
+[gen] waystones placed in chunk (42,25): 1
+[gen] waystones placed in chunk (46,24): 1
+[gen] waystones placed in chunk (47,24): 1
+[gen] waystones placed in chunk (52,23): 1
+[gen] waystones placed in chunk (53,22): 1
+[gen] waystones placed in chunk (54,17): 1
+[gen] waystones placed in chunk (57,16): 1
+[gen] waystones placed in chunk (59,16): 1
+[gen] waystones placed in chunk (65,14): 1
+[gen] waystones placed in chunk (74,12): 1
+[gen] waystones placed in chunk (74,18): 1
+[gen] waystones placed in chunk (74,20): 1
+[gen] waystones placed in chunk (74,30): 1
+[gen] waystones placed in chunk (74,31): 1
+[gen] waystones placed in chunk (76,33): 1
+[gen] waystones placed in chunk (78,33): 1
+[gen] waystones placed in chunk (78,33): 1
+[gen] waystones placed in chunk (76,33): 1
+[gen] waystones placed in chunk (74,31): 1
+[gen] waystones placed in chunk (74,30): 1
+[gen] waystones placed in chunk (74,20): 1
+[gen] waystones placed in chunk (74,18): 1
+[gen] waystones placed in chunk (74,12): 1
+[gen] waystones placed in chunk (65,14): 1
+[gen] waystones placed in chunk (59,16): 1
+[gen] waystones placed in chunk (57,16): 1
+[gen] waystones placed in chunk (54,17): 1
+[gen] waystones placed in chunk (53,22): 1
+[gen] waystones placed in chunk (52,23): 1
+[gen] waystones placed in chunk (47,24): 1
+[gen] waystones placed in chunk (46,24): 1
+[gen] waystones placed in chunk (42,25): 1
+[gen] waystones placed in chunk (41,25): 1

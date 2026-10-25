@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "scope": "Final-d production-rendered original-loop views inspected directly; no revealed visibility, image edits or custom mockups.",
+  "seed": 20261023,
+  "chunk": [
+    75,
+    99
+  ],
+  "images": [
+    {
+      "path": "evidence/gameplay-g13/final-d/journey/shed/g13-revisited-empty-crate.png",
+      "sha256": "c6d756b76dc0313b746c483722906e07c02fdd6578a2a927e5e35e649d120bea",
+      "observation": "Normal FOV shows two crates, barrel, actual table, candle and wood bundle; native log confirms the bag crate is empty after revisit."
+    },
+    {
+      "path": "evidence/gameplay-g13/final-d/journey/shed/g13-acquired-satchel-inventory.png",
+      "sha256": "190eaf391375e62f88e6d1532c6f764da4def091d23a165330e1dbb636d3e5d2",
+      "observation": "Native inventory shows the acquired Leather Satchel equipped, 6.3/20.0 kg total and reduced item weights; physical 0.8 kg is retained in the measured state."
+    },
+    {
+      "path": "evidence/gameplay-g13/final-d/journey/shed/g13-search-satchel-crate.png",
+      "sha256": "1a31c1bdd113f87f2cdb713b3fbbdc50a9ece19ebc68afc4f46e8cbe9814b4c1",
+      "observation": "Native container prompt offers the generated Leather Satchel at 0.8 kg; no reward insertion or synthetic UI."
+    }
+  ]
+}

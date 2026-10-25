@@ -1,0 +1,15 @@
+test_current_selection_and_production_materialization (test_gameplay_g13.G13Shed.test_current_selection_and_production_materialization) ... FAIL
+test_versioned_content_and_every_permitted_orientation (test_gameplay_g13.G13Shed.test_versioned_content_and_every_permitted_orientation) ... ok
+
+======================================================================
+FAIL: test_current_selection_and_production_materialization (test_gameplay_g13.G13Shed.test_current_selection_and_production_materialization)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "G:\GameDev\RoguelikeProject\tools\critical_fix_regressions\tests\test_gameplay_g13.py", line 77, in test_current_selection_and_production_materialization
+    self.assertEqual(len(bag_records),1)
+AssertionError: 0 != 1
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.590s
+
+FAILED (failures=1)

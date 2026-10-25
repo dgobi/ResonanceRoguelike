@@ -1,0 +1,7 @@
+test_current_selection_and_production_materialization (test_gameplay_g13.G13Shed.test_current_selection_and_production_materialization) ... ok
+test_versioned_content_and_every_permitted_orientation (test_gameplay_g13.G13Shed.test_versioned_content_and_every_permitted_orientation) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 5.260s
+
+OK

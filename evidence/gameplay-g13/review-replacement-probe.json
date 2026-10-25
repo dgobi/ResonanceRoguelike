@@ -1,0 +1,65 @@
+{
+  "scope": "Read-only feasibility probe; illustrative in-memory clone and pool, no repository edits or delivered content",
+  "source_head": "3c7b51333aa4f9d1052b52caff2f19abed0f2b79",
+  "historical_source": "evidence/gameplay-g12/final-b/journey/lab/lab-checkpoint.zip",
+  "historical_selected_placements_dependency_checks": 51,
+  "historical_pending_chunk": [
+    75,
+    99
+  ],
+  "historical_pending_fingerprint": "c16c2366f60e69af3ea7040b2b4d30ae19770aa0a1ad03f3d89ce8f332c599fb",
+  "historical_pending_equal": true,
+  "historical_plan_equal": true,
+  "fresh_seed": 20261023,
+  "fresh_start": [
+    73,
+    99
+  ],
+  "fresh_plan_format": 7,
+  "fresh_scene_revision": "wg9",
+  "selected_instances": [
+    {
+      "chunk": [
+        39,
+        26
+      ],
+      "distance_from_start_chunks": 107,
+      "placement_ids": [
+        "settlement-1-country-frontage-lot-1-1-S-1-building"
+      ],
+      "satchel_container_count": 1,
+      "actors": 3,
+      "complete_scene_validation_passed": true
+    },
+    {
+      "chunk": [
+        75,
+        99
+      ],
+      "distance_from_start_chunks": 2,
+      "placement_ids": [
+        "settlement-0-cross-market-lot-1-23-N-0-building"
+      ],
+      "satchel_container_count": 1,
+      "actors": 4,
+      "complete_scene_validation_passed": true
+    },
+    {
+      "chunk": [
+        88,
+        33
+      ],
+      "distance_from_start_chunks": 81,
+      "placement_ids": [
+        "settlement-3-country-frontage-lot-81-1-S-0-building"
+      ],
+      "satchel_container_count": 1,
+      "actors": 4,
+      "complete_scene_validation_passed": true
+    }
+  ],
+  "fresh_saved_selection_changes": true,
+  "replacement_strategy": "Only grid/roadside tool_shed_a support entries replaced with tool_shed_b; weight/cap/geometry exact; original a retained",
+  "previous_selected_support_occurrences": 3,
+  "selected_support_cohort_geometry_equal": true
+}
