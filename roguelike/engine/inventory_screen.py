@@ -791,7 +791,7 @@ class InventoryScreen:
                              x, y, _SLATE_MID, self.VALUE_C)
                 y += lh
 
-        # Weight
-        wt = item_def.get("weight", getattr(item, "weight", 0))
+        # Carrying contribution: same live instance and satchel rule as the list.
+        wt = _effective_weight(item, _item_category(item, engine), _get_satchel_reductions(engine))
         _render_stat(surf, self._font_small, "Weight", f"{wt:.1f} kg",
                      x, y, _SLATE_MID, self.VALUE_C)

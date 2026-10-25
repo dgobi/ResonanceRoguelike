@@ -4,7 +4,11 @@ from entities.entity import Entity
 
 
 def repair_selected_equipment_use(item) -> None:
-    """Only the four shipped G12 equipment definitions lacked their handler."""
+    """Resolve the four shipped missing handlers when their owner uses them.
+
+    Definition hashes and untouched visited instances remain historical until
+    that ordinary action; non-null custom handlers are never replaced.
+    """
     if (getattr(item, "item_id", "") in {
             "revelation_lens", "leather_satchel", "herbalist_pouch", "component_satchel"}
             and getattr(item, "on_use", None) is None):
@@ -17,11 +21,6 @@ class Item(Entity):
     Lives either on the floor (in engine.entities) or
     in an actor's inventory.
     """
-
-    def __setstate__(self, state):
-        # Visited scene owners are pickled Item instances, not factory rows.
-        self.__dict__.update(state)
-        repair_selected_equipment_use(self)
 
     def __init__(
         self,

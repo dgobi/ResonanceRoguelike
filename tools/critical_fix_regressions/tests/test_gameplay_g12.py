@@ -80,6 +80,8 @@ class ExpeditionRewardsTests(unittest.TestCase):
         e = self.e
         for iid in SELECTED:
             item = self.add(iid)
+            if iid == 'revelation_lens':
+                del item.on_use  # Missing historical attribute, as well as null rows.
             slot = self.data.items[iid]['slot']
             before = e.world_time.turn
             use(e, item)
@@ -124,7 +126,7 @@ class ExpeditionRewardsTests(unittest.TestCase):
         e = self.e; inv = e.player.inventory
         wood = self.add('wood_bundle', 5)
         food = self.add('crow_jerky', 4)
-        tool = self.add('crude_blade', 3)
+        tool = self.add('tallow_torch', 3)
         bags = [self.add(i) for i in SELECTED[1:]]
         raw = [i.weight for i in inv.items]
         for bag in bags:
@@ -134,7 +136,23 @@ class ExpeditionRewardsTests(unittest.TestCase):
             self.assertAlmostEqual(expected, inv.current_weight)
             self.assertAlmostEqual(expected, sum(_effective_weight(i,_item_category(i,e),_get_satchel_reductions(e)) for i in inv.items))
             self.assertAlmostEqual(expected/inv.capacity, inv.encumbrance)
+            self.assertAlmostEqual({'leather_satchel':12.42,'herbalist_pouch':12.6,'component_satchel':11.45}[bag.item_id],expected)
         self.assertEqual(raw, [i.weight for i in inv.items])
+
+    def test_inventory_detail_uses_the_same_actual_effective_weight(self):
+        from engine.inventory_screen import _render_stat
+        e=self.e
+        bag=self.add('component_satchel');use(e,bag)
+        wood=self.add('wood_bundle',5)
+        self.reader(dict(id='font-setup',pages=[dict(text='')]))
+        e.text_reader.close()
+        screen=e.inventory_screen;screen.init(e.display)
+        screen._flat=[(wood,False,'')];screen.selected=0
+        with patch('engine.inventory_screen._render_stat',wraps=_render_stat) as spy:
+            screen._draw_detail_panel(pygame.Surface((500,700)),e,0,0,500,700,18)
+        values=[call.args[3] for call in spy.call_args_list if call.args[2]=='Weight']
+        self.assertEqual(['3.2 kg'],values)
+        self.assertEqual(5,wood.weight)
 
     def test_floor_container_exchange_and_overweight_bag_removal_are_nonlossy(self):
         e = self.e; inv = e.player.inventory
@@ -226,19 +244,21 @@ class ExpeditionRewardsTests(unittest.TestCase):
         e,w = load_witness(Path(self.tmp.name)/'witness')
         for row,item in zip(w['items'][:5],e.player.inventory.items[:5]):
             expected = dict(row['state'])
-            if expected['on_use'] is None:
-                expected['on_use'] = 'equip_toggle'
             self.assertEqual(expected,serialize_item(item))
         self.assertEqual('read',e.player.inventory.items[4].on_use)
-        for owner,items in ((e.local_map,e.local_map.floor_objects[(13,12)]),
+        owners=((e.local_map,e.local_map.floor_objects[(13,12)]),
                             (e.local_map,e.local_map.container_state[(14,12)]['items']),
-                            (e.save_manager.cache.load(1,0).local_map,e.save_manager.cache.load(1,0).local_map.floor_objects[(11,12)])):
-            self.assertEqual('equip_toggle',items[0].on_use)
+                            (e.save_manager.cache.load(1,0).local_map,e.save_manager.cache.load(1,0).local_map.floor_objects[(11,12)]))
+        for row,(owner,items) in zip(w['items'][5:],owners):
+            expected=dict(row['state'])
+            self.assertEqual(expected,serialize_item(items[0]))
+            self.assertEqual(1,sum(i is items[0] for entry in (owner.floor_objects.values() if 'floor:' in row['owner'] else [c['items'] for c in owner.container_state.values()]) for i in entry))
         initial = witness_state(e)
         e.debug = None
         for item in e.player.inventory.items[:4]:
             use(e,item)
             self.assertTrue(item.equipped)
+            self.assertEqual('equip_toggle',item.on_use)
         floor = e.local_map.floor_objects[(13,12)][0]
         self.assertTrue(take_floor(e,floor)); use(e,floor)
         stored = e.local_map.container_state[(14,12)]['items'][0]

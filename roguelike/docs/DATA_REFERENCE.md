@@ -135,13 +135,16 @@ Subdirectories: `weapons/`, `armor/`, `consumables/`, `tools/`. One JSON per ite
 {
   "id": "severance_blade",
   "name": "Severance Blade",
-  "tile": "blade",
-  "weight": 1.2,
-  "equip_slot": "weapon",
-  "damage": "1d6+1",
-  "essence": "severance",
-  "essence_strength": 0.8,
-  "qualities": ["keen", "heavy"]
+  "tile": "generic_item",
+  "category": "weapon",
+  "weight": 1.8,
+  "slot": "weapon",
+  "damage_dice": "1d6",
+  "damage_bonus": 1,
+  "essence": "Severance",
+  "essence_strength": 0.6,
+  "on_use": "equip_toggle",
+  "consumed_on_use": false
 }
 ```
 
@@ -149,13 +152,16 @@ Subdirectories: `weapons/`, `armor/`, `consumables/`, `tools/`. One JSON per ite
 
 ```json
 {
-  "id": "iron_helm",
-  "name": "Iron Helm",
-  "tile": "helmet",
-  "weight": 1.5,
-  "equip_slot": "armor_head",
+  "id": "leather_jack",
+  "name": "a leather jack",
+  "tile": "generic_item",
+  "category": "armor",
+  "weight": 3.0,
+  "slot": "armor_torso",
+  "on_use": "equip_toggle",
+  "consumed_on_use": false,
   "armor_layers": [
-    { "location": "head", "name": "iron plate", "av": 4, "material": "metal" }
+    {"name": "leather jack", "coverage": 1.0, "armor_value": 2, "material": "leather"}
   ]
 }
 ```
@@ -178,15 +184,17 @@ Subdirectories: `weapons/`, `armor/`, `consumables/`, `tools/`. One JSON per ite
 
 ```json
 {
-  "id": "torch",
-  "name": "Torch",
-  "tile": "torch_unlit",
+  "id": "tallow_torch",
+  "name": "Tallow Torch",
+  "tile": "generic_item",
+  "category": "tool",
   "weight": 0.3,
-  "equip_slot": "light",
-  "turns_lit": 300,
-  "light_data": {
-    "radius": 6,
-    "color": [226, 181, 112],
+  "burn_turns": 600,
+  "provides_burning": true,
+  "consumed_on_use": false,
+  "light": {
+    "radius": 8,
+    "color": [255, 180, 60],
     "falloff": 1.8,
     "flicker": true
   },
@@ -208,8 +216,13 @@ Subdirectories: `weapons/`, `armor/`, `consumables/`, `tools/`. One JSON per ite
 | `damage_dice`, `damage_bonus` | string, number | Supported separate weapon fields, e.g. `"1d4"` and `2`; do not embed `+2` in the dice string |
 | `weight_reductions` | object | Satchel reductions by inventory display category, or `all`; derived at read/admission time |
 | `consumed_on_use` | bool | False excludes reusable items from automatic material selection; recipe roles determine actual craft consumption |
-| `qualities` | list | Quality descriptor IDs from `qualities.json` |
+| `qualities` | object | Tool quality values copied onto the item instance |
 | `description` | string | Flavor text shown in inventory |
+
+New equippable definitions use `on_use: "equip_toggle"`. The four selected G12
+shipped IDs have a narrow missing/null-handler fallback at ordinary use, preserving
+historical satchel definition hashes and untouched visited item records. This is
+not a general fallback for newly authored equipment.
 
 ---
 
@@ -342,10 +355,8 @@ Found documents the player can read. Subdirectories: `lab/`, `world/`. 40+ texts
   "title": "Research Note",
   "pages": [
     {
-      "lines": [
-        { "text": "The binding held for three days.", "damaged": false },
-        { "text": "On the fourth — ", "damaged": true }
-      ]
+      "text": "The binding held for three days.\n\nOn the fourth — [DAMAGED] [REDACTED]",
+      "trailing": false
     }
   ]
 }
@@ -353,9 +364,15 @@ Found documents the player can read. Subdirectories: `lab/`, `world/`. 40+ texts
 
 | Field | Type | Description |
 |---|---|---|
-| `damaged` | bool | If true, text renders as corrupted glyphs unless Deep Tongue words are known |
+| `pages[].text` | string | Authored page text; `\n` preserves explicit breaks and paragraphs |
+| `[DAMAGED]` / `[REDACTED]` | text markers | Damaged span or redacted block; keep authored span order stable for saved recovery keys |
+| `pages[].trailing` | bool | Appends the existing authored end-of-text indicator |
+| `teach_words` | object | Existing learning configuration, applied once per text ID on reading |
+| `render_mode: "alphabet"` | string | Existing phoneme alphabet view; all rows remain scrollable |
 
-Deep Tongue words in text are automatically detected by the text reader and rendered in `font_deep` (italic night_purple).
+Known Deep Tongue words show the existing translation font; unknown words show
+phoneme glyphs. Visual wrapping/scrolling does not change authored page/span IDs,
+learn more words or perform recovery. See [reader controls](SYSTEMS.md#text-reader--text_readerpy).
 
 ---
 

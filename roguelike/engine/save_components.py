@@ -144,8 +144,6 @@ def restore_item(item, row):
             if key == "temporary_essence" and value is None:
                 value = []
             setattr(item, key, copy.deepcopy(value))
-    from entities.item import repair_selected_equipment_use
-    repair_selected_equipment_use(item)
 
 
 def serialize_runtime(engine):

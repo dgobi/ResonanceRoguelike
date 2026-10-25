@@ -5,7 +5,6 @@
   "slot": "weapon",
   "damage_dice": "1d4",
   "damage_bonus": 2,
-  "on_use": "equip_toggle",
   "essence": "Revelation",
   "essence_strength": 0.7,
   "weight": 0.9,

@@ -3,7 +3,6 @@
   "name": "Component Satchel",
   "category": "equipment",
   "slot": "satchel",
-  "on_use": "equip_toggle",
   "tile": "component_satchel",
   "weight": 0.6,
   "description": "Heavy canvas with reinforced base. Built for bulk materials.",

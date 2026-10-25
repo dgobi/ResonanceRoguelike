@@ -378,8 +378,10 @@ fit the resulting effective limit; rejected items remain with their source and
 feedback gives the effective load. Reequip a carried bag or drop possessions to
 recover. Bags do not contain another inventory owner.
 
-Old carried and visited selected equipment with a missing/null use handler is
-repaired narrowly. Non-null custom handlers and unrelated mutable fields remain.
+Old and new selected equipment with a missing/null use handler resolves to the
+established equip route at ordinary use. Untouched definitions and visited
+instances retain their generation dependency/fingerprint identity. Explicit
+non-null custom handlers and unrelated mutable fields remain intact.
 
 ### Crafting roles and heat (G12)
 
