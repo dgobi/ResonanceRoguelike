@@ -79,8 +79,8 @@ def shed(e, key, capture, choose, ev, out):
     assert not e.player_invincible
     assert (e.player.x,e.player.y) not in {(a.x,a.y) for a in natives}
     positions=[(t['x']-75*80,t['y']-99*43) for t in p['targets'] if t['kind']=='container']
-    rack,chest,sack=positions
-    bag=next(i for i in e.local_map.container_state[chest]['items'] if i.item_id=='leather_satchel')
+    tool_crate,bag_crate,provision_barrel=positions
+    bag=next(i for i in e.local_map.container_state[bag_crate]['items'] if i.item_id=='leather_satchel')
     assert sum(i.item_id=='leather_satchel' for xy in positions for i in e.local_map.container_state[xy]['items'])==1
     initial=contents(e,positions)
     ev.record.update(controls='Seed 20261023, ordinary production-selected/materialized tool_shed_b at (75,99). Sole initial staging at its actual public road join; this is a local demonstration, not a normal-start expedition. Starting possessions/HP/needs retained; full-state cardinal route and UI row selection disclosed. Driver fixes gameplay RNG seed 20261020. Native AI, survival, action costs and normal FOV remain active. No reward insertion, threat removal, invincibility or later resets.',
@@ -95,7 +95,7 @@ def shed(e, key, capture, choose, ev, out):
 
     # Browse every real storage source through the normal interaction prompt.
     acquired=[]
-    for name,xy in (('tool-crate',rack),('provision-barrel',sack),('satchel-crate',chest)):
+    for name,xy in (('tool-crate',tool_crate),('provision-barrel',provision_barrel),('satchel-crate',bag_crate)):
         yield from approach(xy)
         before=e.world_time.turn
         yield from interact(e,xy,key)
@@ -103,7 +103,7 @@ def shed(e, key, capture, choose, ev, out):
         assert prompt and prompt['source']=='container'
         assert e.world_time.turn==before
         capture('g13-search-'+name)
-        item=bag if xy==chest else prompt['items'][0]
+        item=bag if xy==bag_crate else prompt['items'][0]
         yield from select_prompt(e,item.item_id,key)
         assert e.player.inventory.contains(item)
         assert all(i is not item for i in e.local_map.container_state[xy]['items'])
@@ -132,15 +132,15 @@ def shed(e, key, capture, choose, ev, out):
     public=(p['join'][0]-75*80,p['join'][1]-99*43)
     yield from walk_to(e,[public],key)
     depleted=contents(e,positions)
-    assert e.local_map.container_state[chest]['items']==[]
-    # Re-enter and search the now empty chest; no second reward can be taken.
-    yield from approach(chest)
-    yield from interact(e,chest,key)
+    assert e.local_map.container_state[bag_crate]['items']==[]
+    # Re-enter and search the now empty bag crate; no second reward can be taken.
+    yield from approach(bag_crate)
+    yield from interact(e,bag_crate,key)
     assert e.interaction_cursor._selection_prompt is None
     assert contents(e,positions)==depleted
     assert sum(i.item_id=='leather_satchel' for i in e.player.inventory.items)==1
     yield key(pygame.K_ESCAPE)
-    capture('g13-revisited-empty-chest')
+    capture('g13-revisited-empty-crate')
     yield from walk_to(e,[public],key)
     assert e.player.fighter.hp>0
     capture('g13-exit-normal-fov')

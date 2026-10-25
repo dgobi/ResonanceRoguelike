@@ -1,5 +1,6 @@
 """Finite G13 delivery: existing unfiltered gates and the bounded real-event journey."""
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import importlib.metadata
 import io
@@ -46,13 +47,14 @@ def main():
     env=dict(os.environ,SDL_VIDEODRIVER='dummy',SDL_AUDIODRIVER='dummy',PYGAME_HIDE_SUPPORT_PROMPT='1',PYTHONHASHSEED='20261020')
     report=dict(passed=False,head=head,source=frozen,git_binding=bindings,checks=[],
         environment=dict(python=sys.version,executable=sys.executable,dependencies={k:importlib.metadata.version(k) for k in ('pygame','tcod','numpy')}),
-        controls='Established production interpreter; full focused discovery and unfiltered D gate. Existing event driver, normal FOV/AI/survival, one disclosed initial public-approach staging, disposable saves. No wiki gate.')
+        controls='Established production interpreter; full focused discovery and unfiltered D gate run concurrently in independent processes with separate evidence/disposable save roots. Journey follows both gates. Existing event driver, normal FOV/AI/survival, one disclosed initial public-approach staging. No wiki gate.')
     production=ROOT/'.baseline'/('g13-production-'+out.name)
     commands=[('focused',[sys.executable,'-X','utf8',str(ROOT/'tools/critical_fix_regressions/verify_fixes.py'),
-        '--game',str(ROOT/'roguelike'),'--timeout','1800','--evidence',str(out/'focused')],1900),
+        '--game',str(ROOT/'roguelike'),'--timeout','3600','--evidence',str(out/'focused')],3700),
         ('production',[sys.executable,'-X','utf8',str(ROOT/'tools/verify_d.py'),'--evidence',str(production)],3600),
         ('shed-journey',[sys.executable,'-X','utf8',str(ROOT/'tools/g13_journey.py'),'--evidence',str(out/'journey')],360)]
-    for name,command,timeout in commands:
+    def execute(entry):
+        name,command,timeout=entry
         print('G13 '+name,flush=True);start=time.perf_counter()
         try:
             with (out/(name+'-output.txt')).open('w',encoding='utf-8') as log:
@@ -61,12 +63,28 @@ def main():
         except subprocess.TimeoutExpired:
             row=dict(name=name,command=command,passed=False,error='finite timeout')
         row.update(seconds=time.perf_counter()-start,timeout=timeout)
-        if name=='production' and (production/'latest.json').exists():
+        return row
+
+    # The established gates import read-only production inputs and own distinct
+    # save/evidence roots. Keep the local journey after both complete.
+    gate_started=time.perf_counter()
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        futures=[executor.submit(execute,entry) for entry in commands[:2]]
+        rows=[future.result() for future in futures]
+    for row in rows:
+        if row['name']=='production' and (production/'latest.json').exists():
             latest=json.loads((production/'latest.json').read_text());destination=out/'production';destination.mkdir(exist_ok=True)
             shutil.copy2(Path(latest['result']),destination/'results.json')
             shutil.copy2(production/'latest.json',destination/'origin.json')
             row['receipt']='production/results.json';row['passed'] &= bool(latest['passed'])
+    report['checks']=rows
+    report['source_stable']=inputs()==frozen
+    (out/'release.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+    if not all(row['passed'] for row in rows) or not report['source_stable']:return 1
+    for name,command,timeout in commands[2:]:
+        row=execute((name,command,timeout))
         report['checks'].append(row);report['source_stable']=inputs()==frozen
+        report['gate_wall_seconds']=time.perf_counter()-gate_started
         report['passed']=len(report['checks'])==len(commands) and all(c['passed'] for c in report['checks']) and report['source_stable']
         (out/'release.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
         if not row['passed'] or not report['source_stable']:return 1
