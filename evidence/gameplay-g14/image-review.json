@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "method": "Direct visual inspection of all five final production-rendered images using local image viewing; normal FOV. Small confirmation uses the same production render method on a 480x320 surface.",
+  "images": [
+    {
+      "path": "evidence/gameplay-g14/final-a/journey/shed/g14-empty-crate-offer.png",
+      "sha256": "f28097b2c680ff9a0cc5cefdcbe329fcd186433e729cface5ace2471a1444eb1",
+      "finding": "Explicit X dismantle offer; Enter/search remains available on the selected empty crate."
+    },
+    {
+      "path": "evidence/gameplay-g14/final-a/journey/shed/g14-dismantle-confirmation.png",
+      "sha256": "cb441474360b2957a80e0239811e40f620cce0a4bb00e19561f27cfd3ff75fbd",
+      "finding": "Consequence, one floor wood, retained equipped cutting tool, one world turn and Enter/Esc are readable and inside the bordered panel."
+    },
+    {
+      "path": "evidence/gameplay-g14/final-a/journey/shed/g14-one-floor-wood-crate-removed.png",
+      "sha256": "8b3f5719750bdf19524dd5061af4cd04b6c9e3813b27cf237913a468dc0ef8f8",
+      "finding": "Crate is visibly replaced by one floor wood; surrounding barrel, tool crate, candle, table and terrain remain."
+    },
+    {
+      "path": "evidence/gameplay-g14/final-a/journey/shed/g14-paid-working-fire-normal-fov.png",
+      "sha256": "82887033b6aa19d890e1dd4c6313b36097609a5633be955cc16280165667007a",
+      "finding": "Visible lit fire after separate placement and ignition; log shows two wood pickups and the paid unlit step."
+    },
+    {
+      "path": "evidence/gameplay-g14/final-a/journey/shed/g14-confirmation-480x320.png",
+      "sha256": "e08aac3e4948162e2f095117c940a253beb2a84953dc9d11cb5a06ff68d25b8c",
+      "finding": "Complete centered confirmation fits the constrained 480x320 surface without clipping or overlap."
+    }
+  ]
+}

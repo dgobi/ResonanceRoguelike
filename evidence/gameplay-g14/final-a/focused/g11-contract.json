@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "missing-access",
+      "error": "surface policy: expected fields ['access_revision', 'algorithm', 'dependencies', 'identity', 'profiles', 'seed_domain', 'version']; unknown [], missing ['access_revision']"
+    },
+    {
+      "case": "boolean-access",
+      "error": "surface policy: unsupported access revision"
+    },
+    {
+      "case": "future-access",
+      "error": "surface policy: unsupported access revision"
+    },
+    {
+      "case": "downgrade-access",
+      "error": "incoherent surface policy provenance: 73_99.pkl"
+    }
+  ],
+  "scene_provenance_rejected": true,
+  "recovered": true,
+  "installed_tuning_independent": true,
+  "pending": [
+    44,
+    8
+  ],
+  "contract": {
+    "revision": 1,
+    "chunk": [
+      44,
+      8
+    ],
+    "arrival": [
+      24,
+      10
+    ],
+    "edge": [
+      14,
+      0
+    ],
+    "neighbor": [
+      44,
+      7
+    ],
+    "reciprocal": [
+      14,
+      42
+    ]
+  },
+  "fingerprint": "d5f749322f5b0f4bac580180b458a493c8cc9c0f69a8f8b02fac639f3deee85e"
+}

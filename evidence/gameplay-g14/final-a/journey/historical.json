@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "pid": 9872,
+  "checkpoint": "evidence\\gameplay-g13\\final-d\\journey\\shed\\shed-checkpoint.zip",
+  "sha256": "644048e17d58c68f6f771067aaca7eb4d1ea99f4f0d9dcdcc7963a521d7f5026",
+  "restored_exactly": true,
+  "state": {
+    "player": "b045e2b902ee9f225d15ac7a771b7ff2d75a09d47ec5399e4b0d3d1649d31852",
+    "world": "4754e18e42554a37d77edcbcc8e274b14fe5e1d0c6ad44ed577650e6ecbc01bc",
+    "scene": "c95b633e5be3b0d5000c21f241473ae95de90b19a32d521e21d1ddc7084e261f",
+    "processing": [],
+    "zones": [],
+    "load": 6.3,
+    "knowledge": {},
+    "words": [],
+    "read": [],
+    "recovered": {}
+  },
+  "empty_crate": [
+    18,
+    29
+  ],
+  "crate_still_present": true,
+  "dependency_checks": 51,
+  "plan_identity": "0bbfb1c23c184f2272927a4fbda14ba3b955cb19ab391e4aefab5dc7ef9ccbbf",
+  "controls": "Genuine committed pre-edit G13 visited shed loaded in a separate process/disposable save root. No actions or reinterpretation; original empty crate, floor contents, plan and dependencies preserved."
+}
