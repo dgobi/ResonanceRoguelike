@@ -1,0 +1,261 @@
+{
+  "passed": true,
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+  "dependencies": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "focused": {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "test_gameplay_g14",
+      "test_gameplay_g12",
+      "-v"
+    ],
+    "cwd": "roguelike",
+    "tests": 19,
+    "passed": true,
+    "log": "preflight-focused.txt"
+  },
+  "journey": {
+    "command": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tools/g14_journey.py",
+      "--evidence",
+      "evidence/gameplay-g14/preflight-a"
+    ],
+    "passed": true,
+    "historical": {
+      "passed": true,
+      "pid": 8788,
+      "checkpoint": "evidence\\gameplay-g13\\final-d\\journey\\shed\\shed-checkpoint.zip",
+      "sha256": "644048e17d58c68f6f771067aaca7eb4d1ea99f4f0d9dcdcc7963a521d7f5026",
+      "restored_exactly": true,
+      "state": {
+        "player": "b045e2b902ee9f225d15ac7a771b7ff2d75a09d47ec5399e4b0d3d1649d31852",
+        "world": "4754e18e42554a37d77edcbcc8e274b14fe5e1d0c6ad44ed577650e6ecbc01bc",
+        "scene": "c95b633e5be3b0d5000c21f241473ae95de90b19a32d521e21d1ddc7084e261f",
+        "processing": [],
+        "zones": [],
+        "load": 6.3,
+        "knowledge": {},
+        "words": [],
+        "read": [],
+        "recovered": {}
+      },
+      "empty_crate": [
+        18,
+        29
+      ],
+      "crate_still_present": true,
+      "dependency_checks": 51,
+      "plan_identity": "0bbfb1c23c184f2272927a4fbda14ba3b955cb19ab391e4aefab5dc7ef9ccbbf",
+      "controls": "Genuine committed pre-edit G13 visited shed loaded in a separate process/disposable save root. No actions or reinterpretation; original empty crate, floor contents, plan and dependencies preserved."
+    },
+    "conversion": {
+      "position": [
+        18,
+        29
+      ],
+      "turn_before": 492,
+      "turn_after": 493,
+      "output": {
+        "item_id": "wood_bundle",
+        "item_state_version": 1,
+        "name": "bundle of wood",
+        "tile": "generic_item",
+        "weight": 1.0,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0.0,
+        "qualities": {},
+        "description": "A bundle of wood recovered from an empty crate. Dry enough to burn.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "fuel",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      "source_removed": true,
+      "output_on_floor": true,
+      "tool_retained": true
+    },
+    "campfire": {
+      "position": [
+        19,
+        27
+      ],
+      "two_exact_wood_instances_spent": true,
+      "tool_and_torch_retained": true,
+      "bag_retained": true,
+      "placement_turns": 1,
+      "ignition_turns": 1,
+      "lit": true,
+      "status": {
+        "chunk": [
+          75,
+          99
+        ],
+        "submap": null,
+        "position": [
+          19,
+          28
+        ],
+        "turn": 498,
+        "hp": 60,
+        "hunger": 0.01800000000000001,
+        "thirst": 0.022500000000000003,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "leather_satchel"
+        ],
+        "actors": [
+          {
+            "id": "barrow_wight",
+            "name": "Barrow Wight",
+            "x": 12,
+            "y": 38,
+            "hp": 20
+          },
+          {
+            "id": "barrow_wight",
+            "name": "Barrow Wight",
+            "x": 71,
+            "y": 27,
+            "hp": 20
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 71,
+            "y": 36,
+            "hp": 14
+          },
+          {
+            "id": "barrow_wight",
+            "name": "Barrow Wight",
+            "x": 68,
+            "y": 35,
+            "hp": 20
+          }
+        ]
+      },
+      "unsaved_state": {
+        "player": "15f3e99f97232df0cafb65ce0b81777cb5d363154595a680a87f8816e9958000",
+        "world": "4754e18e42554a37d77edcbcc8e274b14fe5e1d0c6ad44ed577650e6ecbc01bc",
+        "scene": "e1a976b56e45e72779dca86d5ce914aebe6e30c6157738da5a8abb9b153925c2",
+        "processing": [],
+        "zones": [],
+        "load": 6.3999999999999995,
+        "knowledge": {},
+        "words": [],
+        "read": [],
+        "recovered": {}
+      }
+    },
+    "persistence": {
+      "f5": true,
+      "cold_process_pid": 16196,
+      "parent_pid": 22272,
+      "f9": true,
+      "checkpoint_state": {
+        "player": "d06ab33622e298be9985594847c5f9e55010ce7719be6fa65afa1547783046f9",
+        "world": "4754e18e42554a37d77edcbcc8e274b14fe5e1d0c6ad44ed577650e6ecbc01bc",
+        "scene": "4718f431f12f13d40db6b6b0d1c9325f92af501ebdf016d542ecb8c9afd52661",
+        "processing": [],
+        "zones": [],
+        "load": 6.3999999999999995,
+        "knowledge": {},
+        "words": [],
+        "read": [],
+        "recovered": {}
+      },
+      "later_unsaved_fire": {
+        "player": "15f3e99f97232df0cafb65ce0b81777cb5d363154595a680a87f8816e9958000",
+        "world": "4754e18e42554a37d77edcbcc8e274b14fe5e1d0c6ad44ed577650e6ecbc01bc",
+        "scene": "e1a976b56e45e72779dca86d5ce914aebe6e30c6157738da5a8abb9b153925c2",
+        "processing": [],
+        "zones": [],
+        "load": 6.3999999999999995,
+        "knowledge": {},
+        "words": [],
+        "read": [],
+        "recovered": {}
+      },
+      "restored_checkpoint_exact": true
+    },
+    "raw_sha256": "c6f48c73c08b2ff9593d6990801c7fcf949aa748cffacf3eecba3c617acaaabe",
+    "raw_retained_local": ".codex-review/g14-preflight-a/journey.json"
+  },
+  "visual_review": {
+    "passed": true,
+    "production_resolution": [
+      1280,
+      720
+    ],
+    "confirmation_small": [
+      480,
+      320
+    ],
+    "views": [
+      "empty crate offer",
+      "confirmation",
+      "one physical floor wood and missing crate",
+      "paid separately lit fire"
+    ],
+    "findings": "Readable action/cost/consequence/cancel; no clipping or overlap. Normal FOV. Final gate rerenders the same views."
+  },
+  "material_failures": [
+    {
+      "attempt": "initial focused fixture",
+      "failures": 48,
+      "errors": 1,
+      "cause": "New tests assumed turn zero and preinitialized visibility; production fixture starts at turn 480 and needs FOV refresh. An identity assertion also required preserving Item references.",
+      "repair": "Compare relative to actual starting turn, update FOV after fixture placement, snapshot unchanged live owners without cloning item identity."
+    },
+    {
+      "attempt": "focused preflight-a",
+      "passed_tests": 7,
+      "failures": 1,
+      "cause": "Cache revisit test requested the still-active scene, which correctly returns its active object.",
+      "repair": "Leave its address after cache eviction before destination preparation; assert cold map and identical fingerprint."
+    }
+  ],
+  "controls": "Headless production Python; temporary saves only. Focused failure injection is confined to unit fixtures. Journey keeps native FOV/AI/survival/costs and disclosed public-approach staging; original evidence untouched."
+}

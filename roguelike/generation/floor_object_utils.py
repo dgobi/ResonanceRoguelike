@@ -51,6 +51,39 @@ def clear_floor_objects(local_map: "LocalMap", lx: int, ly: int) -> None:
 #  Container API
 # ------------------------------------------------------------------ #
 
+def empty_crate_owner(local_map: "LocalMap", lx: int, ly: int):
+    """Only matching, genuinely empty live crates support dismantling."""
+    entry = local_map.container_state.get((lx, ly))
+    if (local_map.decor.get((lx, ly)) == "crate"
+            and isinstance(entry, dict) and entry.get("decor_id") == "crate"
+            and entry.get("state") in ("closed", "open", "looted")
+            and isinstance(entry.get("items"), list) and not entry["items"]):
+        return entry
+    return None
+
+
+def dismantle_empty_crate(local_map: "LocalMap", lx: int, ly: int,
+                          owner: dict, wood: "Item") -> bool:
+    """Place one output before removing its exact empty source; roll back failure."""
+    from entities.item import Item
+    from generation.decor_utils import clear_decor
+    if (not isinstance(owner, dict) or empty_crate_owner(local_map, lx, ly) is not owner
+            or not isinstance(wood, Item) or wood.item_id != "wood_bundle"
+            or any(i is wood for rows in local_map.floor_objects.values() for i in rows)):
+        return False
+    try:
+        placed = place_floor_object(local_map, lx, ly, wood)
+    except Exception:
+        placed = False
+    if not placed:
+        # Also handle a placement failure after a partial write.
+        remove_floor_object(local_map, lx, ly, wood)
+        return False
+    clear_decor(local_map, lx, ly)
+    del local_map.container_state[(lx, ly)]
+    return True
+
+
 def place_container(
     local_map: "LocalMap",
     lx: int,

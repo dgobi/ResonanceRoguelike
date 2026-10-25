@@ -120,6 +120,7 @@ The actual directory is `roguelike/assets/Fonts/`, while `config.py` and `engine
 | Wait | `Z`, `.`, numpad `5`; one turn. Space is not in the current wait-key set. |
 | Inventory | `I`; arrows select; Enter/E uses; `D` drops; I/Esc closes. Opening/navigation are free. Using a selected item advances one turn even if its handler fails. |
 | Pickup / gather | `G` tries harvest, gather, then pickup; `,` pickup. `E` opens adjacent interaction selection. Old Shift+G instructions are stale. |
+| Empty crate | In `E` selection, target a visible adjacent empty crate and press `X`. Confirm with Enter or cancel with Esc. Requires an owned cutting tool equipped in weapon/offhand; one turn removes the crate and leaves one wood bundle on its floor cell. Enter alone still searches. |
 | Look | `X` or `;`; arrows inspect; X/Enter details; Esc closes. Physical interactions through look have known reach/time inconsistencies. |
 | Craft / status / perks / lexicon | `C`, `H`, `K`, `L`. Thus H/K/L are **not dependable vi movement keys** despite entries in MOVE_KEYS. |
 | Stairs | `<` ascend, `>` descend while standing on the corresponding stair. The run loop uses shifted punctuation's Unicode before modal dispatch; these paths currently do not call `_advance_turn`. |

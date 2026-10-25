@@ -383,6 +383,29 @@ established equip route at ordinary use. Untouched definitions and visited
 instances retain their generation dependency/fingerprint identity. Explicit
 non-null custom handlers and unrelated mutable fields remain intact.
 
+### Empty-crate wood (G14)
+
+`E` opens adjacent interaction selection. Target an empty crate: `Enter` keeps
+its ordinary search behavior; `X` opens an explicit dismantling confirmation.
+`Enter` confirms, `Esc` cancels. Only decor ID `crate` with its matching live
+container owner and an actually empty item list qualifies. Decorative-only
+crates, other furniture and nonempty containers cannot be dismantled, including
+contents hidden behind a stale looted flag.
+
+An owned cutting tool of tier 1 or higher must be equipped in weapon/offhand.
+Confirmation rechecks that capability, the exact scene/container owner and
+unchanged source state, visible adjacent reach and diagonal corners. Success
+retains the tool, removes both crate owners and leaves one existing wood bundle
+on the same floor cell, preserving terrain and unrelated objects. This costs
+one ordinary action through the existing clock/debt path. Cancellation, stale
+prompts and output failures cost nothing and produce nothing. A full pack
+still permits dismantling; later pickup uses normal capacity/ownership checks.
+
+This is one runtime rule, with no content-definition, recipe, generation-plan
+or save-schema changes. Visited crates remain until explicitly dismantled;
+removed crates and floor output use the existing mutable-scene persistence.
+The shed's existing floor wood plus the recovered bundle pay for Field Campfire.
+
 ### Crafting roles and heat (G12)
 
 `C` retains the existing recipe list and ingredient-choice interface. Materials

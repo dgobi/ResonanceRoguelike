@@ -45,6 +45,7 @@ class InteractionCursor:
         self._font_normal: pygame.font.Font | None = None
         # Multi-item selection prompt state
         self._selection_prompt: dict | None = None  # {items, selected, lx, ly}
+        self._dismantle_prompt: dict | None = None
 
     def init(self, display: "DisplayConfig") -> None:
         self._font_small = display.font_ui_small
@@ -65,6 +66,7 @@ class InteractionCursor:
         If no candidates, starts on the player's own tile.
         """
         self._selection_prompt = None
+        self._dismantle_prompt = None
         self.candidates = list(candidates)
         self.player_x   = player_x
         self.player_y   = player_y
@@ -143,9 +145,17 @@ class InteractionCursor:
         """
         from engine.engine import MOVE_KEYS, GameMode
 
+        if self._dismantle_prompt is not None:
+            self._handle_dismantle_key(key, engine)
+            return
+
         # Multi-item selection prompt intercepts all input
         if self._selection_prompt is not None:
             self._handle_selection_key(key, engine)
+            return
+
+        if key == pygame.K_x:
+            self._offer_dismantle(engine)
             return
 
         if key in MOVE_KEYS:
@@ -172,6 +182,66 @@ class InteractionCursor:
         if key == pygame.K_ESCAPE:
             engine.mode = GameMode.LOCAL
             return
+
+    @staticmethod
+    def _has_cutting_tool(engine: "Engine") -> bool:
+        """Equipment refers into inventory; a stale slot or flag is insufficient."""
+        inv = getattr(engine.player, "inventory", None)
+        equip = getattr(engine.player, "equipment", None)
+        if inv is None or equip is None:
+            return False
+        return any(item is not None and inv.contains(item) and item.equipped
+                   and any(isinstance(kw, dict) and kw.get("tag") == "cutting"
+                           and kw.get("tier", 0) >= 1 for kw in item.keywords)
+                   for item in (equip.slots.get("weapon"), equip.slots.get("offhand")))
+
+    def _offer_dismantle(self, engine: "Engine") -> None:
+        from generation.floor_object_utils import empty_crate_owner
+        x, y = self._cursor_x, self._cursor_y
+        if not self.can_reach(engine, x, y):
+            engine.log.add("You cannot reach that.", MSG_DEFAULT)
+            return
+        owner = empty_crate_owner(engine.local_map, x, y)
+        if owner is None:
+            engine.log.add("Only an empty crate can be dismantled.", MSG_DEFAULT)
+            return
+        if not self._has_cutting_tool(engine):
+            engine.log.add("Equip an owned cutting tool (tier 1 or higher).", MSG_DEFAULT)
+            return
+        self._dismantle_prompt = dict(
+            scene=engine.local_map, address=(engine.world_x, engine.world_y, engine.current_submap_id),
+            owner=owner, source_state=dict(owner, items=list(owner["items"])), x=x, y=y)
+
+    def _handle_dismantle_key(self, key: int, engine: "Engine") -> None:
+        if key == pygame.K_ESCAPE:
+            self._dismantle_prompt = None
+            return
+        if key not in (pygame.K_RETURN, pygame.K_KP_ENTER):
+            return
+        from generation.floor_object_utils import empty_crate_owner, dismantle_empty_crate
+        prompt = self._dismantle_prompt
+        self._dismantle_prompt = None
+        x, y, owner = prompt["x"], prompt["y"], prompt["owner"]
+        if (engine.local_map is not prompt["scene"]
+                or (engine.world_x, engine.world_y, engine.current_submap_id) != prompt["address"]
+                or empty_crate_owner(engine.local_map, x, y) is not owner
+                or owner != prompt["source_state"]
+                or not self.can_reach(engine, x, y)):
+            engine.log.add("That empty crate is no longer within reach.", MSG_DEFAULT)
+            return
+        if not self._has_cutting_tool(engine):
+            engine.log.add("Equip an owned cutting tool (tier 1 or higher).", MSG_DEFAULT)
+            return
+        try:
+            wood = engine.item_factory.create("wood_bundle", x=x, y=y)
+        except Exception:
+            wood = None
+        if wood is None or not dismantle_empty_crate(engine.local_map, x, y, owner, wood):
+            engine.log.add("The crate could not be dismantled.", MSG_DEFAULT)
+            return
+        wood.description = "A bundle of wood recovered from an empty crate. Dry enough to burn."
+        engine.log.add("You dismantle the empty crate. One wood bundle lies on the floor.", MSG_DEFAULT)
+        self._finish_action(engine)
 
     def _interact(self, engine: "Engine", *, interactable_only: bool = False) -> None:
         """Run a reachable action; look-mode dispatch shares this action clock."""
@@ -369,6 +439,10 @@ class InteractionCursor:
             self._render_selection_prompt(screen, engine, cam_x, cam_y, viewport)
             return
 
+        if self._dismantle_prompt is not None:
+            self._render_dismantle_prompt(screen, engine, viewport)
+            return
+
         cx, cy = self._cursor_x, self._cursor_y
         reachable = self.can_reach(engine, cx, cy)
         on_candidate = reachable and (cx, cy) in self.candidates
@@ -376,7 +450,34 @@ class InteractionCursor:
             terrain_id    = engine._resolve_terrain_id(cx, cy)
             terrain_entry = engine.data.terrain.get(terrain_id, {})
             on_candidate  = bool(terrain_entry.get("interactable"))
-        self._render_hint(screen, viewport, on_candidate)
+        from generation.floor_object_utils import empty_crate_owner
+        dismantle = reachable and empty_crate_owner(engine.local_map, cx, cy) is not None
+        self._render_hint(screen, viewport, on_candidate, dismantle=dismantle)
+
+    def _render_dismantle_prompt(self, screen, engine, viewport) -> None:
+        fn = self._font_small
+        if fn is None:
+            return
+        lines = ("Dismantle this empty crate?", "Remove crate; leave one wood bundle on floor.",
+                 "Requires equipped cutting tool (retained).", "Cost: one world turn.")
+        hint = "[ ENTER ] dismantle   [ ESC ] cancel"
+        pad, row = 18, fn.get_linesize() + 4
+        hint_height = fn.get_linesize() + 8
+        width = max(fn.size(s)[0] for s in (*lines, hint)) + 2 * pad
+        height = len(lines) * row + hint_height + 2 * pad + 4
+        panel = pygame.Surface((width, height), pygame.SRCALPHA)
+        engine.ui_registry.draw_panel(panel, panel.get_rect(), "weathered_temple",
+            tint_color=UI_BORDER, fill_color=DEEP_NOTHING, fill_alpha=250)
+        content = panel.get_rect().inflate(-2 * pad, -2 * pad)
+        hint_top = content.bottom - hint_height
+        for n, line in enumerate(lines):
+            panel.blit(fn.render(line, True, RESONANCE_GOLD if n == 0 else WORN_STONE),
+                       (content.left, content.top + n * row))
+        pygame.draw.line(panel, UI_BORDER, (content.left, hint_top), (content.right, hint_top))
+        label = fn.render(hint, True, UI_TEXT_DIM)
+        panel.blit(label, (content.centerx - label.get_width() // 2,
+                          hint_top + (hint_height - label.get_height()) // 2))
+        screen.blit(panel, (viewport.centerx - width // 2, viewport.centery - height // 2))
 
     def _render_selection_prompt(
         self,
@@ -478,10 +579,15 @@ class InteractionCursor:
         screen:       pygame.Surface,
         viewport:     pygame.Rect,
         on_candidate: bool,
+        *, dismantle: bool = False,
     ) -> None:
         if not self._font_small:
             return
         hint = "[ ENTER ] interact     [ ESC ] cancel" if on_candidate else "[ ESC ] cancel"
+        if dismantle:
+            extra = self._font_small.render("[ X ] dismantle empty crate", True, UI_TEXT_MID)
+            screen.blit(extra, (viewport.centerx - extra.get_width() // 2,
+                                viewport.bottom - 2 * extra.get_height() - 18))
         text_surf = self._font_small.render(hint, True, UI_TEXT_MID)
         x = viewport.left + (viewport.width - text_surf.get_width()) // 2
         y = viewport.bottom - text_surf.get_height() - 10

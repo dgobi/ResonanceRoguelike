@@ -1,5 +1,10 @@
 # Resonance roguelike — production main
 
+G14 lets an explicitly emptied crate become one recoverable floor wood bundle,
+feeding the existing paid campfire route. Use `E`, target the crate, then `X`;
+confirm with Enter or cancel with Esc. See [G14 delivery](docs/owner/GAMEPLAY_G14.md)
+and [interaction controls](roguelike/docs/owner/START_HERE.md).
+
 G12 repairs the Revelation Lens, satchel carrying, real preparation costs and
 complete found-text access. See [G12 delivery](docs/owner/GAMEPLAY_G12.md),
 [equipment, carrying, heat and reader controls](roguelike/docs/SYSTEMS.md), and
@@ -28,6 +33,7 @@ $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\
 & $ResonancePython -X utf8 tools/worldgen_g9_diagnostic.py --journey --evidence evidence/worldgen-g9/owner-diagnostic-02
 & $ResonancePython -X utf8 tools/verify_d.py
 & $ResonancePython -X utf8 tools/verify_g12.py --evidence evidence/gameplay-g12/owner-verification
+& $ResonancePython -X utf8 tools/verify_g14.py --evidence evidence/gameplay-g14/owner-verification
 ```
 
 The interpreter path supplies dependencies only; game code runs from this checkout.
