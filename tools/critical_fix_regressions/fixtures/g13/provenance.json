@@ -1,0 +1,6 @@
+{
+  "commit": "3c7b51333aa4f9d1052b52caff2f19abed0f2b79",
+  "path": "roguelike/data/generation/settlement_profiles.json",
+  "sha256": "7530de6211fefa6dc716b1629c32e6d4adbd1b217427881d74dd92df7b5d5453",
+  "purpose": "Exact pre-G13 selection input for immutable G9/G11 comparisons and historical G5 tool_shed_a support assignment. Current selection is validated separately."
+}

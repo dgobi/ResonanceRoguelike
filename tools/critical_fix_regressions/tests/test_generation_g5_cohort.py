@@ -10,6 +10,7 @@ from test_effect_persistence import load_data
 from generation.placement import transform, entrance_cells, NORMALS
 from generation.structure_preview import preview
 from generation.plan_preview import planned_preview
+from historical_selection import historical_profiles
 
 COHORT=('house_small_b','house_two_room_a','house_hearth_a','shop_a','apothecary_a',
         'workshop_a','storehouse_a','tool_shed_a','shrine_a','hunter_cabin',
@@ -46,7 +47,9 @@ class G5Cohort(unittest.TestCase):
                     row['assigned'].append(dict(context=context,controlled_pool=True,placements=len(selected),complete_scenes=len(report['previews']),example=selected[0]))
                     continue
                 with self.subTest(asset=aid,context=context):
-                    selection=copy.deepcopy(data.settlement_profiles)
+                    # Certify the recorded old shed assignment without inferring
+                    # its membership from the intentionally replaced live pool.
+                    selection=historical_profiles() if aid=='tool_shed_a' else copy.deepcopy(data.settlement_profiles)
                     profile=selection['profiles'][context]
                     role=next(r for r,rows in profile['roles'].items() if any(row['asset']==aid for row in rows))
                     profile['roles'][role]=[dict(asset=aid,weight=1.0,max_per_settlement=128)]

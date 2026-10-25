@@ -15,6 +15,7 @@ from generation.world_plan import bands,validate_plan
 from generation.world_gen import generate_world
 from generation.placement import digest
 from world.world_map import WorldMap
+from historical_selection import historical_data
 
 ROOT=Path(__file__).resolve().parents[3]
 
@@ -92,9 +93,10 @@ class G9Network(unittest.TestCase):
         from engine.item_factory import ItemFactory
         from engine.creature_factory import CreatureFactory
         from g1_support import fingerprint
+        data=historical_data(self.data)
         rows=[]
         for seed in (0,20261023,29417):
-            m={};w=self.world(seed,metrics=m);p=w.plan;b=baseline(p)
+            m={};w=self.world(seed,data=data,metrics=m);p=w.plan;b=baseline(p)
             self.assertEqual(json.loads(json.dumps(b)),json.loads((ROOT/f'evidence/worldgen-g9/before/baseline/results/plan-{seed}.json').read_text()))
             self.assertFalse(any(ch.visited for ch in w.chunks.values()))
             before=distances(physical_cells(b),terminals(b));after=distances(physical_cells(p),terminals(p))
@@ -111,7 +113,7 @@ class G9Network(unittest.TestCase):
                 if (x+1,y) in slices:self.assertEqual({b for a,b in points if a==79},{b for a,b in slices[x+1,y] if a==0})
                 if (x,y+1) in slices:self.assertEqual({a for a,b in points if b==42},{a for a,b in slices[x,y+1] if b==0})
             if slices:
-                reverse_world=self.world(seed)
+                reverse_world=self.world(seed,data=data)
                 for xy in reversed(sorted(slices)):
                     scene=create_surface(reverse_world,reverse_world.get(*xy),self.data,ItemFactory(self.data),CreatureFactory(self.data),80,43)
                     self.assertEqual(fingerprint(scene.local_map,scene.actors),prints[str(xy)])
@@ -121,7 +123,7 @@ class G9Network(unittest.TestCase):
     def test_disabled_zero_budget_and_exhaustion_keep_complete_baseline(self):
         rows=[]
         for overrides,outcome in [({'max_shortcuts':0},'disabled'),({'max_added_fraction':0},'zero construction budget'),({'world_expansion_budget':1},'global expansion budget exhausted'),({'search_expansion_limit':1},'bounded search exhausted without qualifying candidate')]:
-            d=copy.copy(self.data);d.country_network=dict(DEFAULT,**overrides);w=self.world(data=d)
+            d=historical_data(self.data);d.country_network=dict(DEFAULT,**overrides);w=self.world(data=d)
             self.assertEqual(w.plan['network']['outcome'],outcome);self.assertEqual(w.plan['network']['accepted'],[])
             self.assertEqual(json.loads(json.dumps(baseline(w.plan))),json.loads((ROOT/'evidence/worldgen-g9/before/baseline/results/plan-20261023.json').read_text()))
             rows.append(dict(policy=overrides,result=w.plan['network']))

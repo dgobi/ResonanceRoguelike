@@ -1,0 +1,18 @@
+{
+  "id": "tool_shed_b_provisions",
+  "description": "Food and drinking water tied up for the next day of work.",
+  "roll_count": [
+    2,
+    2
+  ],
+  "items": [
+    {
+      "item_id": "dried_provisions",
+      "weight": 3
+    },
+    {
+      "item_id": "water_skin",
+      "weight": 2
+    }
+  ]
+}

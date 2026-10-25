@@ -1,0 +1,22 @@
+{
+  "id": "tool_shed_b_tools",
+  "description": "A few working implements and lighting supplies left on the tool rack.",
+  "roll_count": [
+    2,
+    3
+  ],
+  "items": [
+    {
+      "item_id": "crude_blade",
+      "weight": 2
+    },
+    {
+      "item_id": "tallow_torch",
+      "weight": 3
+    },
+    {
+      "item_id": "wood_bundle",
+      "weight": 3
+    }
+  ]
+}

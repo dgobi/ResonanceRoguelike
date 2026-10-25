@@ -117,6 +117,40 @@ Shop and apothecary entries currently use legal diagonal movement around an
 inward wall. Their actual routes are certified; no new trading/crafting service
 is implied by counters or tools.
 
+### A stocked, versioned example (G13)
+
+`data/buildings/storage/tool_shed_b.json` preserves the old shed's 8×6 envelope,
+entrance, rotations, buffer and frontage approach. Its two crates and provision
+barrel use real `special_tiles` container records at the three required container
+targets. A table is actual `table` terrain, the candle is `decor_candle` in
+`decor_layer`, and the wood beside the table is a real floor item. Use existing
+visible assets: some other decor IDs have descriptions and interaction support
+but no current sprite or tile fallback. Painted letters mapped to floor do not
+make furniture.
+
+The three `tool_shed_b_*` loot pools are local to this version. The bag crate
+uses a singleton pool with `roll_count: [1,1]` and one `leather_satchel` entry;
+the tool and provision pools contain no bags. The existing 0.8 kg satchel gives
+its ordinary 10% effective carrying reduction when equipped.
+
+Only the grid and roadside support memberships select `tool_shed_b`, retaining
+weight 1.0 and cap 3. `tool_shed_a`, its shared dependencies and compound recipe
+memberships remain intact. Saved selections and visited contents keep their
+existing version. For a content change, copy to a new ID and use new local pools;
+do not edit the old version or a shared pool to replenish saved worlds.
+
+Validate this installed version with the orientation check and a fresh world;
+an assigned preview alone does not establish ordinary selection:
+
+```powershell
+& $ResonancePython -X utf8 tools/structure_authoring.py roguelike/data/buildings/storage/tool_shed_b.json --route ordinary_building --category storage --orientations --output evidence/authoring/g13-shed-orientations.json
+```
+
+At seed 20261023 the installed fresh support cohort includes chunk `(75,99)`;
+this is a reproducible example, not an all-seed nearby-start guarantee. The
+bounded real-input acquisition and persistence record is in
+[`docs/owner/GAMEPLAY_G13.md`](../../docs/owner/GAMEPLAY_G13.md).
+
 ## 3. Offer another landmark
 
 [g5_landmark.json](examples/g5_landmark.json) copies the certified waymarker
@@ -626,7 +660,7 @@ tables and weighted body/stele/creature kinds are invalid.
 
 ## Routes and current eligibility
 
-The live catalog has 55 ordinary buildings, two plazas, six entrances and one
+The live catalog has 56 ordinary buildings, two plazas, six entrances and one
 60×16 authored lab. It retains the original 12 residential definitions. There are
 11 loot pools. One object per file is required. Duplicate building/plaza IDs are
 rejected together, with all source paths; entrances and submaps have their own

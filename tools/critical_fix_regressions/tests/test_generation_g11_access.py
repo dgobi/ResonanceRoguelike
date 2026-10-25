@@ -22,6 +22,7 @@ from generation.placement import digest
 from generation.wilderness import make_policy, sample
 from world.world_map import WorldMap
 from g1_support import fingerprint
+from historical_selection import historical_data
 
 ROOT = Path(__file__).resolve().parents[3]
 BEFORE = ROOT/'evidence/worldgen-g10/before'
@@ -146,10 +147,11 @@ class G11Access(unittest.TestCase):
 
     def test_three_complete_macro_plans_and_coarse_owners_unchanged(self):
         from generation.world_gen import generate_world
+        data=historical_data(self.data)
         rows=[]
         for seed in (0,20261023,29417):
             w=WorldMap(128,128);w.seed=seed
-            with contextlib.redirect_stdout(io.StringIO()):generate_world(w,self.data,random.Random(seed))
+            with contextlib.redirect_stdout(io.StringIO()):generate_world(w,data,random.Random(seed))
             current=_serialize_world(w);current.pop('surface_schema');current.pop('surface_policy')
             original=json.loads(gzip.decompress((BEFORE/f'world-{seed}.json.gz').read_bytes()))
             self.assertEqual(json.loads(json.dumps(current)),original)

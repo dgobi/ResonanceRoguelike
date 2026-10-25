@@ -1,0 +1,180 @@
+{
+  "id": "tool_shed_b",
+  "category": "storage",
+  "width": 8,
+  "height": 6,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "storage": 4,
+    "residential": 2,
+    "market": 1
+  },
+  "description": "A tool shed. Tools are packed in one crate, a travelling bag in another. A barrel keeps provisions dry. A stub of candle remains beside a table where wood was being sorted.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null,
+    "T": "table"
+  },
+  "layers": [
+    "########",
+    "#..T...#",
+    "#......#",
+    "#......#",
+    "#.....w#",
+    "###.####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "tool_shed_b_tools"
+      ]
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "tool_shed_b_satchel"
+      ]
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "type": "container",
+      "decor_id": "barrel",
+      "loot_pools": [
+        "tool_shed_b_provisions"
+      ]
+    },
+    {
+      "x": 4,
+      "y": 2,
+      "type": "item",
+      "item_id": "wood_bundle"
+    }
+  ],
+  "decor_layer": [
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      "decor_candle",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      180
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 3,
+        "y": 5,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 3,
+        "y": 3,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 6,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  }
+}

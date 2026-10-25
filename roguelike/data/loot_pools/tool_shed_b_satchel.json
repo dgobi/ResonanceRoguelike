@@ -1,0 +1,14 @@
+{
+  "id": "tool_shed_b_satchel",
+  "description": "A travelling bag put away in the shed chest.",
+  "roll_count": [
+    1,
+    1
+  ],
+  "items": [
+    {
+      "item_id": "leather_satchel",
+      "weight": 1
+    }
+  ]
+}
