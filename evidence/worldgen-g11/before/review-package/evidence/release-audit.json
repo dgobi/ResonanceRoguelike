@@ -1,0 +1,72 @@
+{
+  "kind": "independent read-only evidence audit; no game tests rerun by this agent",
+  "head": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+  "frozen_inputs": "9de7b8ee759dcade97bb992c83d7fb8b26a61eac",
+  "source_count": 741,
+  "source_reconciliation": {
+    "uniform_CRLF": 277,
+    "exact": 464
+  },
+  "source_mismatches": [],
+  "frozen_input_paths_changed_since_freeze": [],
+  "criterion_evidence_pointer_count": 21,
+  "criterion_evidence_pointer_reconciliation": {
+    "uniform_CRLF": 18,
+    "exact": 3
+  },
+  "criterion_pointer_mismatches": [],
+  "production_recomputed": {
+    "checks": 3675,
+    "passed": 3675,
+    "failed": 0,
+    "workers": 159,
+    "worker_result_mismatches": [],
+    "unfiltered": true
+  },
+  "focused_log_test_labels": 238,
+  "focused_final_summary": "Ran 238 tests in 1368.188s; OK",
+  "deferred": [
+    {
+      "case": "E04",
+      "id": "UI-TEXT-HEIGHT",
+      "scope": "UI",
+      "symptom": {
+        "text_id": "lab_label_sarcophagus",
+        "drawn_normal_spans": "Herein lies , in the keeping of the unlistening stone, against the day of the great sounding. Let no hand loose the seals before that hour is past. Let no bell be rung in the presence of this vessel. If",
+        "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."
+      }
+    }
+  ],
+  "scope_limits": [
+    "No fresh game test or production gate executed by this agent.",
+    "Retained final-a was superseded before production gate; final-b is authoritative.",
+    "The ordinary outing uses full-state route selection; its controls do not prove unaided discovery or overall fun.",
+    "No external portable ZIP publication receipt was supplied; root independently checks live main/tag."
+  ],
+  "subsequent_runtime_finding": {
+    "status": "The retained evidence remains internally valid, but a separate independent runtime probe discovered an untested final-scene access failure. This source review confirms the validator gap.",
+    "witness": "seed 20261023, Drowned Wood chunk (44,8), Arnevel Vault submap_44_8_0",
+    "proof_artifact": "/workspace/scratch/b4d5eaf0a32e/independent_review/runtime/entrance-isolation.json",
+    "observed_by_runtime_agent": {
+      "before_stamp_component_cells": 152,
+      "before_stamp_boundary_cells": 29,
+      "after_stamp_component_cells": 79,
+      "after_stamp_boundary_cells": 0,
+      "stair": [
+        14,
+        5
+      ],
+      "stair_reachable_from_any_boundary": false,
+      "supported_G9_route_stair_reachable_from_boundary": true
+    },
+    "independently_source_checked_cause": [
+      "generation/wilderness.py selects the natural boundary component before final scene overlays.",
+      "generation/planned_scene.py:91-93 records only spawn plus road-edge cells as mandatory anchors; roadless scenes retain only spawn.",
+      "generation/region_gen.py:476-478 accepts a footprint if spawn, stair and existing links are mutually reachable, without preserving a natural exterior witness.",
+      "engine/scene_generation.py:184-197 validates the same supplied anchor relation.",
+      "generation/planned_scene.py:158-200 checks roads, sites, placements and commons; roadless unowned wilderness has no final boundary connectivity condition."
+    ],
+    "test_gap": "test_generation_g10_terrain.py:93-96 checks boundary reachability only for forest (73,100).",
+    "implication": "The completion report must be qualified: successful bounded samples do not establish all required wilderness entrances remain exterior-accessible. A bounded reliability repair should take priority over new content."
+  }
+}

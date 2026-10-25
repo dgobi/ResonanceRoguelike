@@ -1,0 +1,153 @@
+{
+  "seed": 20261023,
+  "chunk": [
+    44,
+    8
+  ],
+  "controls": "Disposable ordinary boot; explicit fixture overmap teleport to adjacent scene and positioning for the selected boundary step, then real movement. Separate explicit fixture positioning onto inaccessible cave stair tests real descent/ascent only. Native actors retained, AI/survival enabled, invincibility off. This is not an ordinary-play route to the cave.",
+  "observations": [],
+  "boundary_entry": {
+    "before": {
+      "chunk": [
+        43,
+        8
+      ],
+      "submap": null,
+      "position": [
+        79,
+        1
+      ],
+      "turn": 480,
+      "hp": 60,
+      "hunger": 0.0,
+      "thirst": 0.0,
+      "inventory": [
+        "tallow_torch",
+        "crow_jerky",
+        "water_flask",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble"
+      ],
+      "actors": [
+        {
+          "id": "barrow_wight",
+          "name": "Barrow Wight",
+          "x": 1,
+          "y": 2,
+          "hp": 20
+        }
+      ]
+    },
+    "after": {
+      "chunk": [
+        44,
+        8
+      ],
+      "submap": null,
+      "position": [
+        0,
+        1
+      ],
+      "turn": 481,
+      "hp": 60,
+      "hunger": 0.001,
+      "thirst": 0.0011250000000000001,
+      "inventory": [
+        "tallow_torch",
+        "crow_jerky",
+        "water_flask",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble"
+      ],
+      "actors": [
+        {
+          "id": "plague_crow",
+          "name": "Plague Crow",
+          "x": 3,
+          "y": 18,
+          "hp": 8
+        }
+      ]
+    },
+    "stair": [
+      14,
+      5
+    ],
+    "stair_reachable": false,
+    "reachable_cells": 87,
+    "has_boundary": true
+  },
+  "descended": {
+    "chunk": [
+      44,
+      8
+    ],
+    "submap": "submap_44_8_0",
+    "position": [
+      8,
+      4
+    ],
+    "turn": 481,
+    "hp": 60,
+    "hunger": 0.001,
+    "thirst": 0.0011250000000000001,
+    "inventory": [
+      "tallow_torch",
+      "crow_jerky",
+      "water_flask",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble"
+    ],
+    "actors": []
+  },
+  "ascent_fixture_positioning": false,
+  "ascended": {
+    "status": {
+      "chunk": [
+        44,
+        8
+      ],
+      "submap": null,
+      "position": [
+        14,
+        5
+      ],
+      "turn": 481,
+      "hp": 60,
+      "hunger": 0.001,
+      "thirst": 0.0011250000000000001,
+      "inventory": [
+        "tallow_torch",
+        "crow_jerky",
+        "water_flask",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble"
+      ],
+      "actors": [
+        {
+          "id": "plague_crow",
+          "name": "Plague Crow",
+          "x": 3,
+          "y": 18,
+          "hp": 8
+        }
+      ]
+    },
+    "component_cells": 79,
+    "has_boundary": false
+  },
+  "f5_f9": {
+    "scene_same": true,
+    "position": [
+      14,
+      5
+    ],
+    "component_cells": 79,
+    "has_boundary": false,
+    "error": null
+  }
+}

@@ -1,0 +1,3 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 11
+[harvest] tile=(38,19) terrain=tall_grass harvestable=False decor=waystone_plinth decor_harvestable=False

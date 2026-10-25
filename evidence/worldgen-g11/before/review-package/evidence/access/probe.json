@@ -1,0 +1,912 @@
+{
+  "head": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+  "conditions": "Current new policy over genuine G9 seed-20261023 coarse metadata; deterministic Random(1025) sample of up to four chunks per biome/submap stratum; direct complete production scene creation, no player traversal claim.",
+  "samples": [
+    {
+      "biome": "forest",
+      "chunk": [
+        42,
+        100
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3371,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "forest",
+      "chunk": [
+        22,
+        59
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1871,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "forest",
+      "chunk": [
+        20,
+        65
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1770,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "forest",
+      "chunk": [
+        42,
+        41
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 2868,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "forest",
+      "chunk": [
+        62,
+        31
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3296,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "forest",
+      "chunk": [
+        46,
+        92
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 1613,
+      "actors": 0,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "forest",
+      "chunk": [
+        48,
+        63
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 2914,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "forest",
+      "chunk": [
+        69,
+        102
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 857,
+      "actors": 5,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "plains",
+      "chunk": [
+        78,
+        31
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3315,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "plains",
+      "chunk": [
+        116,
+        4
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3437,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "plains",
+      "chunk": [
+        88,
+        58
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3423,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "plains",
+      "chunk": [
+        30,
+        42
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3321,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "plains",
+      "chunk": [
+        71,
+        12
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 2969,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "plains",
+      "chunk": [
+        22,
+        3
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3170,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "plains",
+      "chunk": [
+        28,
+        76
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3364,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "plains",
+      "chunk": [
+        82,
+        0
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3391,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "heath",
+      "chunk": [
+        85,
+        106
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3417,
+      "actors": 0,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "heath",
+      "chunk": [
+        97,
+        112
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3440,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "heath",
+      "chunk": [
+        26,
+        46
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3059,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "heath",
+      "chunk": [
+        124,
+        84
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3358,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "heath",
+      "chunk": [
+        124,
+        113
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3211,
+      "actors": 0,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "heath",
+      "chunk": [
+        69,
+        11
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3396,
+      "actors": 0,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "heath",
+      "chunk": [
+        25,
+        96
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 1571,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "heath",
+      "chunk": [
+        23,
+        34
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3304,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "swamp",
+      "chunk": [
+        100,
+        1
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3423,
+      "actors": 0,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "swamp",
+      "chunk": [
+        0,
+        39
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 2874,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "swamp",
+      "chunk": [
+        112,
+        116
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 2906,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "swamp",
+      "chunk": [
+        15,
+        101
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3232,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "swamp",
+      "chunk": [
+        122,
+        37
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3141,
+      "actors": 3,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "swamp",
+      "chunk": [
+        1,
+        24
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3004,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "swamp",
+      "chunk": [
+        1,
+        117
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3399,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "swamp",
+      "chunk": [
+        16,
+        120
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3276,
+      "actors": 3,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        29,
+        117
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 2164,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        84,
+        125
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 2522,
+      "actors": 4,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        107,
+        76
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1762,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        87,
+        14
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1644,
+      "actors": 3,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        44,
+        8
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 79,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": false
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        127,
+        74
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 2930,
+      "actors": 3,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        71,
+        2
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 2140,
+      "actors": 3,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "drowned_wood",
+      "chunk": [
+        4,
+        94
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 754,
+      "actors": 4,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        29,
+        104
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3395,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        108,
+        75
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 3337,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        5,
+        82
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 2600,
+      "actors": 3,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        108,
+        4
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 2578,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        76,
+        116
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 2671,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        1,
+        6
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3212,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        35,
+        93
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 1742,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "ash_wastes",
+      "chunk": [
+        77,
+        10
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 3329,
+      "actors": 3,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        64,
+        63
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1795,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        63,
+        74
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1499,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        84,
+        51
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1082,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        60,
+        73
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 2994,
+      "actors": 0,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        87,
+        51
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 1727,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        54,
+        89
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 289,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        87,
+        49
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 1094,
+      "actors": 3,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "mountain",
+      "chunk": [
+        54,
+        65
+      ],
+      "submaps": 1,
+      "passed": true,
+      "reachable": 1512,
+      "actors": 3,
+      "roads": 0,
+      "stairs": 1,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "deep_mountain",
+      "chunk": [
+        65,
+        64
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1346,
+      "actors": 2,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "deep_mountain",
+      "chunk": [
+        65,
+        65
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 2307,
+      "actors": 0,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "deep_mountain",
+      "chunk": [
+        64,
+        64
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1594,
+      "actors": 1,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    },
+    {
+      "biome": "deep_mountain",
+      "chunk": [
+        64,
+        65
+      ],
+      "submaps": 0,
+      "passed": true,
+      "reachable": 1207,
+      "actors": 0,
+      "roads": 0,
+      "stairs": 0,
+      "all_stairs_reachable": true,
+      "boundary_reached": true
+    }
+  ],
+  "malformed_installed_json": {
+    "accepted": false,
+    "error": "JSONDecodeError('Expecting property name enclosed in double quotes: line 1 column 2 (char 1)')",
+    "type": "JSONDecodeError",
+    "meaning": "Startup data loading fails before a saved policy can be restored."
+  }
+}

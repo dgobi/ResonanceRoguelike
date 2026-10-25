@@ -1,0 +1,177 @@
+{
+  "reviewed_head": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+  "frozen_g10_inputs": "9de7b8ee759dcade97bb992c83d7fb8b26a61eac",
+  "remote_readback": {
+    "remote": "https://github.com/dgobi/ResonanceRoguelike.git",
+    "refs/heads/main": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+    "refs/tags/checkpoint/worldgen-g10-verified-20261024-a": "3d80455dd0cd5f0f27929eb6a3206281800d2377",
+    "refs/tags/checkpoint/worldgen-g10-verified-20261024-a^{}": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+    "method": "git ls-remote, independently observed in this review"
+  },
+  "review_environment": {
+    "platform": "Linux",
+    "python": "3.12.14",
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.3.5"
+  },
+  "g10_targeted_tests": {
+    "command": [
+      "/workspace/scratch/b4d5eaf0a32e/review_venv/bin/python",
+      "-m",
+      "unittest",
+      "test_generation_g10_terrain",
+      "test_generation_g10_lifecycle",
+      "-v"
+    ],
+    "returncode": 0,
+    "seconds": 80.82405420499708,
+    "head": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+    "scope": "Nine shipped G10 terrain and lifecycle tests; full focused and production suites not rerun in review."
+  },
+  "ordinary_replay": {
+    "passed": true,
+    "turns": 232,
+    "movement_inputs": 202,
+    "final": {
+      "chunk": [
+        73,
+        99
+      ],
+      "submap": null,
+      "position": [
+        38,
+        20
+      ],
+      "turn": 712,
+      "hp": 60,
+      "hunger": 0.23200000000000018,
+      "thirst": 0.10512500000000007,
+      "inventory": [
+        "tallow_torch",
+        "crow_jerky",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble",
+        "sulphur_cap_fragment",
+        "empty_water_skin"
+      ],
+      "actors": [
+        {
+          "id": "bog_wraith",
+          "name": "Bog Wraith",
+          "x": 16,
+          "y": 34,
+          "hp": 20
+        },
+        {
+          "id": "briar_lurker",
+          "name": "Briar Lurker",
+          "x": 74,
+          "y": 31,
+          "hp": 12
+        }
+      ]
+    },
+    "restore": {
+      "F5": true,
+      "cold_load": true,
+      "F9": true,
+      "player_and_supplies": true,
+      "actors_terrain_and_mutations": true,
+      "post_outing_wait_rewound_only_for_explicit_F9_test": true
+    },
+    "pending": {
+      "chunk": [
+        75,
+        101
+      ],
+      "fingerprint": "bdb76b666b192bbdf1c9e0c1d2b42d5baa05ec84be3c6c29f00a718496cc182a"
+    },
+    "visible_threats": [
+      "Bog Wraith",
+      "Briar Lurker",
+      "Drowned Revenant",
+      "Hollow Knight"
+    ]
+  },
+  "additional_sample": {
+    "seed": 20261023,
+    "scenes": 60,
+    "selection": "Random(1025); up to four sorted coordinates per biome/submap-presence stratum",
+    "materialization_successes": 60,
+    "isolated_anchor_sample": [
+      44,
+      8
+    ],
+    "not_a_prevalence_estimate": true
+  },
+  "access_witness": {
+    "chunk": [
+      44,
+      8
+    ],
+    "seed": 20261023,
+    "submap": "submap_44_8_0",
+    "name": "Arnevel Vault",
+    "before_anchor_component": 152,
+    "before_boundary_cells": 29,
+    "final_anchor_component": 79,
+    "final_boundary_cells": 0,
+    "stair_reachable_from_any_edge": false,
+    "real_boundary_entered": [
+      0,
+      1
+    ],
+    "real_boundary_component": 87,
+    "controlled_return_component": 79
+  },
+  "review_checkout_tracked_status": "",
+  "limits": [
+    "Full 238-test focused suite and 3675-check production gate audited from retained records, not independently rerun.",
+    "No universal incidence, fun, unaided discovery or cross-platform replay claim.",
+    "Current supported G9 route comparison is not execution of historical G9 checkout.",
+    "Access stair-return proof uses disclosed fixture positioning; ordinary walking cannot enter the isolated cave.",
+    "Original external G10 delivery ZIP not supplied or archive-audited."
+  ],
+  "source_paths": [
+    {
+      "path": "roguelike/generation/wilderness.py",
+      "sha256": "0cfd46ae6e3cd8bb39ecf69817b4246d1f18052aa646e593f02c14ffe8acf070"
+    },
+    {
+      "path": "roguelike/generation/planned_scene.py",
+      "sha256": "a84899a7925b44538fce8e7da738fb22e40369c6926353aed926bef5ca2cf6e0"
+    },
+    {
+      "path": "roguelike/generation/region_gen.py",
+      "sha256": "3528aaf2c508a619f49421f7cadf8ee60378baec54f3c741c94b8eaaaa5136fb"
+    },
+    {
+      "path": "roguelike/generation/access.py",
+      "sha256": "9d0aaedac978d18f2b957d5c026942aab85a8138925e68322aece1942109519f"
+    },
+    {
+      "path": "roguelike/engine/scene_generation.py",
+      "sha256": "9fed1d3adb4cd72ad7cac373d5333e8e68c05fb01030daf6b1b2055df5061b2c"
+    },
+    {
+      "path": "roguelike/engine/save_manager.py",
+      "sha256": "0532dcbcd87e7562e4376341e6a202c69a251a1e8711111e7806306987eaf64a"
+    },
+    {
+      "path": "roguelike/engine/engine.py",
+      "sha256": "01619e9d1035767beaabfaa3ba7130e2667efdb243b2bf4db6cca07811eea0b2"
+    },
+    {
+      "path": "tools/g10_expedition.py",
+      "sha256": "3d2125ee3a7820a1a02a51c1e1e7328dc0908f0baa23e1d7df690eda9c19be82"
+    },
+    {
+      "path": "tools/g10_play.py",
+      "sha256": "0bae19731499e1bed9c2cb34e7cf0c899257cdf1e23b0d848bffab55ab081238"
+    }
+  ]
+}

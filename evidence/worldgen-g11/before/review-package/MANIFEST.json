@@ -1,0 +1,187 @@
+{
+  "project": "Resonance Roguelike",
+  "reviewed_head": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+  "note": "Members other than this manifest; excludes disposable saves and redundant source archives.",
+  "files": [
+    {
+      "path": "CODEX_G11_WILDERNESS_ENTRANCE_ACCESS.md",
+      "bytes": 15862,
+      "sha256": "98cd09241a1c1f2f6482ba27f18c06d108953f2713c26da766a1c64af2a5c0af"
+    },
+    {
+      "path": "G10_REVIEW.md",
+      "bytes": 19421,
+      "sha256": "7593acae3f22550fe56b881c4522b645acacaf3caab7709a8566b403e8ccb6f9"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3213,
+      "sha256": "3683fe4b24910b504608b10ed9397a8f5a38909fbdf84c53757405ddf955a7c6"
+    },
+    {
+      "path": "evidence/access/README.md",
+      "bytes": 6067,
+      "sha256": "536b4bde2f857afe70f6a127abc4b66c8ffac220e29aba30057b89fe06e43219"
+    },
+    {
+      "path": "evidence/access/after-entrance.png",
+      "bytes": 134235,
+      "sha256": "ff18df973ad544bd0155451bba953bf3e25be5fbf1651041801d5e8cbb0f0883"
+    },
+    {
+      "path": "evidence/access/before-entrance.png",
+      "bytes": 133703,
+      "sha256": "f059e7311c41b3adb5f2a19813ee4da6ec61059645781971b9e2f7bd56cb316a"
+    },
+    {
+      "path": "evidence/access/boundary-entry-normal-fov.png",
+      "bytes": 25146,
+      "sha256": "613be1d4d144935d1b9384cce4b45038b3af3c051a05d772f3120dce302c6730"
+    },
+    {
+      "path": "evidence/access/cave-return-normal-fov.png",
+      "bytes": 29486,
+      "sha256": "f30876b5226ad4b3ee48bdfac3271e74787e74f98530abc25624f56bbaa258c7"
+    },
+    {
+      "path": "evidence/access/entrance-handlers.json",
+      "bytes": 2969,
+      "sha256": "f5f1b8b6a1bc0599704d61f66fdfbfe95f2e5bdb3c88af0f0fe62962250c3fa1"
+    },
+    {
+      "path": "evidence/access/entrance-isolation.json",
+      "bytes": 12821,
+      "sha256": "844bf23b17543f07e47308272b1815603d28bc3d8f9e8506b712fc0b090f6bcb"
+    },
+    {
+      "path": "evidence/access/final.png",
+      "bytes": 134114,
+      "sha256": "54a97e608bbf068b6fad70eec94bb75870bda7e93bfeae1fb0e72cc5beae0e25"
+    },
+    {
+      "path": "evidence/access/probe.json",
+      "bytes": 17330,
+      "sha256": "247fe9553767993a752c29607ff70b83a0baa4ec2e0a381e4095cb61e07cc1e2"
+    },
+    {
+      "path": "evidence/access/reproduce_g10_entrance.py",
+      "bytes": 12696,
+      "sha256": "221dd6ce92b8be4955f1fc154fde609129c2c584fd7ea62e450f6545788db7de"
+    },
+    {
+      "path": "evidence/expedition/01-lab-normal-fov.png",
+      "bytes": 21381,
+      "sha256": "3deabb975287cfbf285b2ef8c170de11e14472214afb1b828ef8897b2ff91343"
+    },
+    {
+      "path": "evidence/expedition/02-surface-normal-fov.png",
+      "bytes": 47839,
+      "sha256": "1959816884e20ab20ebadea19a7529336dc5bffff47432fabbf3e42462c4bdf3"
+    },
+    {
+      "path": "evidence/expedition/03-harvest-normal-fov.png",
+      "bytes": 62587,
+      "sha256": "7afae4059191fe07ed91c03ccbdbd86ca9469b948266ad03ef3f22f3ffbc2e7d"
+    },
+    {
+      "path": "evidence/expedition/04-return-normal-fov.png",
+      "bytes": 67443,
+      "sha256": "352ff0808a24c2f76bf443a3ce40ed4d37a5eeceda2085b4daaffe80c598d1c1"
+    },
+    {
+      "path": "evidence/expedition/boundary-1-normal-fov.png",
+      "bytes": 32831,
+      "sha256": "390ae6ba7ff07b7d5200de31354f97d8cc00c38bb6be4cfad849cd9fe468a206"
+    },
+    {
+      "path": "evidence/expedition/boundary-2-normal-fov.png",
+      "bytes": 35464,
+      "sha256": "8a5395d80321643e3acdc67d24eec612dc01db9dd465df93743545aac1ff0ab0"
+    },
+    {
+      "path": "evidence/expedition/boundary-3-normal-fov.png",
+      "bytes": 61308,
+      "sha256": "e7e9eaa7ea774c51552bdc6610ba6cd8525b69a9faab6498c756b14bee1fa13a"
+    },
+    {
+      "path": "evidence/expedition/boundary-4-normal-fov.png",
+      "bytes": 70118,
+      "sha256": "999252839397f542f79b51d10482f06956bccd5c2847d4673a3c28227096cfe0"
+    },
+    {
+      "path": "evidence/expedition/expedition.json",
+      "bytes": 111969,
+      "sha256": "ea6af5ce6dd26c691f229974693c1e1c82f249284ca87aaf6c4af84eb2cf55c8"
+    },
+    {
+      "path": "evidence/expedition/explored-checkpoint.zip",
+      "bytes": 1573412,
+      "sha256": "72d3dab70070db03a5267dd501e1a0fe4c5d6ea43a7b8a4d0ba501a403281d6b"
+    },
+    {
+      "path": "evidence/expedition/output.txt",
+      "bytes": 15162,
+      "sha256": "0a79b1f6067ca789da28d57c4cb890e49e8989c198653624aadd3b5f74f84df6"
+    },
+    {
+      "path": "evidence/g10-tests/g10-atomic-recovery.json",
+      "bytes": 495,
+      "sha256": "f7ee7c7b841ac7bcad8e56ce1fca9918dae3ee9641996513d706fb2b88a39e57"
+    },
+    {
+      "path": "evidence/g10-tests/g10-frozen-policy.json",
+      "bytes": 271,
+      "sha256": "e29975f0aa4c4dedf7e0fccd427b96e71726fa5aac03251e59d5ca670abed324"
+    },
+    {
+      "path": "evidence/g10-tests/g10-genuine-g9.json",
+      "bytes": 2677,
+      "sha256": "67e440d10d7301986c61122f11e5873055d9dcd92956609ee4e5cb4efce9caf5"
+    },
+    {
+      "path": "evidence/g10-tests/g10-policy-negatives.json",
+      "bytes": 1072,
+      "sha256": "a826774792074b7c87aef3be89323003bab26c664a16aadbdfb06d177451798d"
+    },
+    {
+      "path": "evidence/g10-tests/output.txt",
+      "bytes": 2065,
+      "sha256": "bf61f1c5bfbb07f640b664bca353891b4cfc766368f1a3d2f9a24314feb13638"
+    },
+    {
+      "path": "evidence/g10-tests/receipt.json",
+      "bytes": 535,
+      "sha256": "00e218473204df6f88c4f1b62341a7b2c56c253c0381241b69622c560c6f35ba"
+    },
+    {
+      "path": "evidence/release-audit.json",
+      "bytes": 3614,
+      "sha256": "27a6a062293ca630df3daeb0ccf5e0982a8bdc6eb44050d6809346e0e71446e1"
+    },
+    {
+      "path": "evidence/review-summary.json",
+      "bytes": 5309,
+      "sha256": "61b8e3cda696df8fc497e24effd7c731950566a368ee9956ddc059349e5cc4d7"
+    },
+    {
+      "path": "references/CODEX_G10_WILDERNESS_CHARACTER.md",
+      "bytes": 24683,
+      "sha256": "252b2739eb11dfa9da078331c126f94a6f41a3a7f72a0b3f0da9efec7efb8684"
+    },
+    {
+      "path": "references/RESONANCE_DECISIONS_AND_STATE.md",
+      "bytes": 18117,
+      "sha256": "413d3012c6479ebf75cb9aa14c925d8c5a52cd06b7d44f9521e6b390ecbe7212"
+    },
+    {
+      "path": "references/RESONANCE_PROJECT_COMPASS.md",
+      "bytes": 12941,
+      "sha256": "66c2e37870591317aee376bd3a5529cc1537ac0edd429b7c47378aae2cb42c91"
+    },
+    {
+      "path": "references/RESONANCE_WORKFLOW.md",
+      "bytes": 14361,
+      "sha256": "3cc36f2de9e198b19e3e50ff2db3104e583e93e92c4bad2661a8e38c1d6b7aef"
+    }
+  ]
+}
