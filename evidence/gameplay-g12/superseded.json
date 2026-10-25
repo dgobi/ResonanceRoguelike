@@ -1,0 +1,19 @@
+{
+  "status": "completed failed attempt, superseded; never a certification",
+  "head": "308e25a5f61fd24ac2ffb3c6bdb689bc71f3c4a0",
+  "focused": {
+    "executed": 256,
+    "failures": 7,
+    "errors": 3
+  },
+  "production_started": false,
+  "cause": "Adding equip handlers to satchel definitions invalidated saved generation dependencies and macro baselines. Eager Item unpickle repair changed untouched historical scene fingerprints.",
+  "correction_head": "08c1cf9f84b15340563ee969a0a369890d8dd24e",
+  "correction": "Resolve selected missing handlers at ordinary use; preserve original satchel definitions and untouched scene rows. Also correct the remaining raw-weight inventory detail pane. No historical fixture, generation source, strict macro assertion or golden file was changed.",
+  "targeted_followup": {
+    "executed": 10,
+    "passed": 10,
+    "log": "correction-output.txt"
+  },
+  "final_certification": "final-b/release.json only, if passed"
+}

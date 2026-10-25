@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "seed": 0,
+      "plan_identity": "b6979943363f5901247aa69966243480e072c0974168a9c2d117296e2e0e6afe",
+      "coarse_exact": true
+    },
+    {
+      "seed": 20261023,
+      "plan_identity": "a2846cdf4d89f99660cc43222862183f436a34242f27a0c07bd43871fe1a001c",
+      "coarse_exact": true
+    },
+    {
+      "seed": 29417,
+      "plan_identity": "dfdf2f9b9609323c77f6cb25812294b564b49c7e90ae83691d2cf34e348208f0",
+      "coarse_exact": true
+    }
+  ]
+}

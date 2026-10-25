@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "source_commit": "08c1cf9f84b15340563ee969a0a369890d8dd24e",
+  "controls": "Visual inspection of actual production PNGs. No screenshot inference of general balance, unaided discovery or save correctness; receipts bind those controlled properties separately.",
+  "images": [
+    {
+      "path": "evidence/gameplay-g12/final-b/journey/lab/g12-complete-lab-warning.png",
+      "sha256": "2e78496a414cfe8c11f8d75e290d7d48170a69f20fbc5c394ffbd5ce2cb0f4a9",
+      "size": [
+        1280,
+        720
+      ],
+      "observation": "Complete normal-size label and warning; authored redaction retained; fixed navigation footer."
+    },
+    {
+      "path": "evidence/gameplay-g12/final-b/journey/lab/g12-warning-480x320.png",
+      "sha256": "df4f4eb0bb1a239eae2c307e798082f1e02245908e0b8f39e4a9e5322ade8c8b",
+      "size": [
+        480,
+        320
+      ],
+      "observation": "End of bounded 480x320 scroll: full warning tail and navigation controls visible. Earlier rows are bound by the all-rows journey check."
+    },
+    {
+      "path": "evidence/gameplay-g12/final-b/journey/visual-diagnostics/inventory/g12-effective-inventory.png",
+      "sha256": "c5fd90eba9be07fda03f833a614aa84f913c0c9352912b0d457445f958530ef4",
+      "size": [
+        1280,
+        720
+      ],
+      "observation": "Actual crafted-pellet checkpoint, native inventory events: raw 1 kg wood displays effective 0.7 kg in both row and detail (0.65 kg before rounding); zero world turns."
+    },
+    {
+      "path": "evidence/gameplay-g12/final-b/journey/integration/g12-paid-preparation-normal-fov.png",
+      "sha256": "fc61324922b0ea6e6a1fad565add478f0b450a632d9dc9fa480f41c61d4f8437",
+      "size": [
+        1280,
+        720
+      ],
+      "observation": "Native source-yield log, paid unlit placement then ignition and real gland processing; normal FOV."
+    },
+    {
+      "path": "evidence/gameplay-g12/final-b/journey/prepared/g12-retreat-prepared.png",
+      "sha256": "f794796afe6e88af0e787093db3b904e01ae70f243214569d14e2f255657d5a9",
+      "size": [
+        1280,
+        720
+      ],
+      "observation": "Controlled paired retreat with disruption; normal FOV and native survival/AI."
+    },
+    {
+      "path": "evidence/gameplay-g12/final-b/journey/control/g12-retreat-control.png",
+      "sha256": "c7ad312fe7f6a43e64e1c5fe486b9f99e7bbbe925bdc84a880464e09a5b8cec3",
+      "size": [
+        1280,
+        720
+      ],
+      "observation": "Same starting checkpoint and phase budget, no pellet used; normal FOV and native received damage."
+    },
+    {
+      "path": "evidence/gameplay-g12/final-b/journey/lab/g12-lens-reveal-true-strike.png",
+      "sha256": "3957049d50d2c4471be87965ea3f4f434ff5bde637eaeeaf44dc9890d8723e78",
+      "size": [
+        1280,
+        720
+      ],
+      "observation": "Acquired Lens, actual knowledge/combat feedback and native damage; ordinary lab FOV."
+    }
+  ]
+}

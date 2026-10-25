@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "head": "08c1cf9f84b15340563ee969a0a369890d8dd24e",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "G:\\GameDev\\RoguelikeProject\\.codex-review\\g12_carrying_view.py"
+  ],
+  "probe_source": "\"\"\"One-off native inventory visual check of the actual crafted-pellet save.\"\"\"\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nROOT=Path(__file__).resolve().parents[1]\nsys.path[:0]=[str(ROOT/'roguelike'),str(ROOT/'tools'),str(ROOT/'tools/critical_fix_regressions/tests')]\nos.environ.update(SDL_VIDEODRIVER='dummy',SDL_AUDIODRIVER='dummy',PYGAME_HIDE_SUPPORT_PROMPT='1')\nimport config\nconfig.DEBUG_MODE=False\nimport pygame\nfrom g12_journey import run_stage\n\n\ndef actions(e,key,capture,choose,ev,out):\n    start=e.world_time.turn\n    wood=e.player.inventory.get_by_id('wood_bundle')\n    yield key(pygame.K_i,'i')\n    yield from choose(e,wood)\n    assert e.player.inventory.reductions_for()['Components']==.35\n    capture('g12-effective-inventory')\n    ev.record.update(controls='Separate visual diagnostic of the actual completed preparation checkpoint. Original Engine.run and native inventory events; no item grants, equipment assignment, movement, actor/needs pause or world turns.',\n        raw_item_weight=wood.weight,effective_item_weight=wood.weight*.65,\n        raw_load=sum(i.weight for i in e.player.inventory.items),effective_load=e.player.inventory.current_weight)\n    yield key(pygame.K_i,'i')\n    assert e.world_time.turn==start\n    ev.record['world_turns_spent']=0\n\n\ndef main():\n    base=ROOT/'evidence/gameplay-g12/final-b/journey'\n    out=base/'visual-diagnostics';out.mkdir()\n    result=run_stage(out,'inventory',actions,base/'integration/retreat-base.zip')\n    source=json.loads((ROOT/'evidence/gameplay-g12/final-b/release.json').read_text())['source']\n    assert all(source['roguelike/'+r['relative']]==r['sha256'] for r in result['imported_sources'].values())\n    record=dict(passed=True,head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),\n        command=[sys.executable,'-X','utf8',str(Path(__file__).resolve())],\n        probe_source=Path(__file__).read_text(encoding='utf-8'),probe_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),\n        imported_sources_match_final_inputs=True,raw_item=result['raw_item_weight'],effective_item=result['effective_item_weight'],\n        world_turns_spent=0,result='final-b/journey/visual-diagnostics/inventory/result.json')\n    (ROOT/'evidence/gameplay-g12/inventory-view.json').write_text(json.dumps(record,indent=2)+'\\n',encoding='utf-8')\n    print(json.dumps(dict(passed=True,raw_item=record['raw_item'],effective_item=record['effective_item'])))\n\n\nif __name__=='__main__':main()\n",
+  "probe_sha256": "1eb1776c5709017cff2720ef7807c11b851104b9c538a59abc1dee7bb36bf800",
+  "imported_sources_match_final_inputs": true,
+  "raw_item": 1.0,
+  "effective_item": 0.65,
+  "world_turns_spent": 0,
+  "result": "final-b/journey/visual-diagnostics/inventory/result.json"
+}

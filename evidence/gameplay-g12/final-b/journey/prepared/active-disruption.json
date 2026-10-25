@@ -1,0 +1,21 @@
+{
+  "player": "0e1ec2c0e9161cb7fa41c098893beab7ecf8d7bdce77901ff64dc472dd4a318d",
+  "world": "aa579dd7b4b861f544283935913d3669d53f0901fa1bd56a2e9648a97aeff45d",
+  "scene": "3c31b0ab6ed08bca0bdcbc37a48c9794f6ba272db28eeb172c649747995aabb2",
+  "processing": [],
+  "zones": [
+    {
+      "x": 11,
+      "y": 12,
+      "radius": 3,
+      "turns_remaining": 5
+    }
+  ],
+  "load": 17.74,
+  "knowledge": {},
+  "words": [],
+  "read": [],
+  "recovered": {
+    "('g12-compatibility-fixture', 0, 1)": "remembered preparation"
+  }
+}

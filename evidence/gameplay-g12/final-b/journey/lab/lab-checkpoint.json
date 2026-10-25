@@ -1,0 +1,23 @@
+{
+  "player": "955c35218406385bd7b12c0db6544deb1ad08f458d0adca3e9267bb260339ff7",
+  "world": "65e9107356dd9a443f5c9fa1828c9cdc898a69c8f10f9baab36f7c3377ccda41",
+  "scene": "2f15ebeb9b0948b9b21a430cf1240a1e08704cd8c062d74df2ebe90a161d17a2",
+  "processing": [],
+  "zones": [],
+  "load": 6.55,
+  "knowledge": {
+    "hollow_knight": {
+      "revealed_weaknesses": [
+        "Severance"
+      ],
+      "revealed_strengths": []
+    }
+  },
+  "words": [
+    "nkiimm"
+  ],
+  "read": [
+    "lab_label_sarcophagus"
+  ],
+  "recovered": {}
+}

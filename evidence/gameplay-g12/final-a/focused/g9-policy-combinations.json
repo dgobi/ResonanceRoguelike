@@ -1,0 +1,22 @@
+[
+  {
+    "poi": "mixed",
+    "version": 7,
+    "origin": "wg9"
+  },
+  {
+    "poi": "single",
+    "version": 7,
+    "origin": "wg9"
+  },
+  {
+    "poi": "zero",
+    "version": 7,
+    "origin": "wg9"
+  },
+  {
+    "poi": "historical-g8",
+    "version": 6,
+    "origin": "wg8"
+  }
+]

@@ -1,0 +1,650 @@
+[
+  {
+    "asset": "roadside_shrine_a",
+    "rotation": 0,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "rotation": 0,
+    "mirror": true,
+    "kind": "direct"
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "rotation": 90,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "rotation": 90,
+    "mirror": true,
+    "kind": "direct"
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "rotation": 180,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "rotation": 180,
+    "mirror": true,
+    "kind": "direct"
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "rotation": 270,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "rotation": 270,
+    "mirror": true,
+    "kind": "direct"
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "normal": "N",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-81-34-48-21-N",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        81,
+        34
+      ],
+      "node": "site-81-34-48-21-N",
+      "plot": "site-81-34-48-21-N-plot-53",
+      "placement": "site-81-34-48-21-N-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          6528,
+          1483
+        ],
+        "normal": "N",
+        "road": "road-6",
+        "segment": 8,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "south",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "normal": "E",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-8-39-40-3-E",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        8,
+        39
+      ],
+      "node": "site-8-39-40-3-E",
+      "plot": "site-8-39-40-3-E-plot-53",
+      "placement": "site-8-39-40-3-E-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          680,
+          1680
+        ],
+        "normal": "E",
+        "road": "road-3",
+        "segment": 133,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "west",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "normal": "S",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-86-33-16-21-S",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        86,
+        33
+      ],
+      "node": "site-86-33-16-21-S",
+      "plot": "site-86-33-16-21-S-plot-53",
+      "placement": "site-86-33-16-21-S-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          6896,
+          1440
+        ],
+        "normal": "S",
+        "road": "road-6",
+        "segment": 3,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "north",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "roadside_shrine_a",
+    "normal": "W",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-118-65-40-21-W",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        118,
+        65
+      ],
+      "node": "site-118-65-40-21-W",
+      "plot": "site-118-65-40-21-W-plot-53",
+      "placement": "site-118-65-40-21-W-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          9480,
+          2816
+        ],
+        "normal": "W",
+        "road": "road-5",
+        "segment": 52,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "east",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "hunter_cabin",
+    "rotation": 0,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "hunter_cabin",
+    "rotation": 90,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "hunter_cabin",
+    "rotation": 180,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "hunter_cabin",
+    "rotation": 270,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "hunter_cabin",
+    "normal": "N",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-81-34-48-21-N",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        81,
+        34
+      ],
+      "node": "site-81-34-48-21-N",
+      "plot": "site-81-34-48-21-N-plot-53",
+      "placement": "site-81-34-48-21-N-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          6528,
+          1483
+        ],
+        "normal": "N",
+        "road": "road-6",
+        "segment": 8,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "south",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "hunter_cabin",
+    "normal": "E",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-117-49-40-5-E",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        117,
+        49
+      ],
+      "node": "site-117-49-40-5-E",
+      "plot": "site-117-49-40-5-E-plot-53",
+      "placement": "site-117-49-40-5-E-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          9400,
+          2112
+        ],
+        "normal": "E",
+        "road": "road-5",
+        "segment": 70,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "west",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "hunter_cabin",
+    "normal": "S",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-86-33-16-21-S",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        86,
+        33
+      ],
+      "node": "site-86-33-16-21-S",
+      "plot": "site-86-33-16-21-S-plot-53",
+      "placement": "site-86-33-16-21-S-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          6896,
+          1440
+        ],
+        "normal": "S",
+        "road": "road-6",
+        "segment": 3,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "north",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "hunter_cabin",
+    "normal": "W",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-118-65-40-21-W",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        118,
+        65
+      ],
+      "node": "site-118-65-40-21-W",
+      "plot": "site-118-65-40-21-W-plot-53",
+      "placement": "site-118-65-40-21-W-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          9480,
+          2816
+        ],
+        "normal": "W",
+        "road": "road-5",
+        "segment": 52,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "east",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "shepherds_hut_a",
+    "rotation": 0,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "shepherds_hut_a",
+    "rotation": 90,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "shepherds_hut_a",
+    "rotation": 180,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "shepherds_hut_a",
+    "rotation": 270,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "shepherds_hut_a",
+    "normal": "N",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-81-34-48-21-N",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        81,
+        34
+      ],
+      "node": "site-81-34-48-21-N",
+      "plot": "site-81-34-48-21-N-plot-53",
+      "placement": "site-81-34-48-21-N-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          6528,
+          1483
+        ],
+        "normal": "N",
+        "road": "road-6",
+        "segment": 8,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "south",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "shepherds_hut_a",
+    "normal": "E",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-117-49-40-5-E",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        117,
+        49
+      ],
+      "node": "site-117-49-40-5-E",
+      "plot": "site-117-49-40-5-E-plot-53",
+      "placement": "site-117-49-40-5-E-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          9400,
+          2112
+        ],
+        "normal": "E",
+        "road": "road-5",
+        "segment": 70,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "west",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "shepherds_hut_a",
+    "normal": "S",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-86-33-16-21-S",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        86,
+        33
+      ],
+      "node": "site-86-33-16-21-S",
+      "plot": "site-86-33-16-21-S-plot-53",
+      "placement": "site-86-33-16-21-S-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          6896,
+          1440
+        ],
+        "normal": "S",
+        "road": "road-6",
+        "segment": 3,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "north",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "shepherds_hut_a",
+    "normal": "W",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-118-65-40-21-W",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        118,
+        65
+      ],
+      "node": "site-118-65-40-21-W",
+      "plot": "site-118-65-40-21-W-plot-53",
+      "placement": "site-118-65-40-21-W-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          9480,
+          2816
+        ],
+        "normal": "W",
+        "road": "road-5",
+        "segment": 52,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "east",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "waymarker_shelter_a",
+    "rotation": 0,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "waymarker_shelter_a",
+    "rotation": 90,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "waymarker_shelter_a",
+    "rotation": 180,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "waymarker_shelter_a",
+    "rotation": 270,
+    "mirror": false,
+    "kind": "direct"
+  },
+  {
+    "asset": "waymarker_shelter_a",
+    "normal": "N",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-81-34-48-21-N",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        81,
+        34
+      ],
+      "node": "site-81-34-48-21-N",
+      "plot": "site-81-34-48-21-N-plot-53",
+      "placement": "site-81-34-48-21-N-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          6528,
+          1483
+        ],
+        "normal": "N",
+        "road": "road-6",
+        "segment": 8,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "south",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "waymarker_shelter_a",
+    "normal": "E",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-117-49-40-5-E",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        117,
+        49
+      ],
+      "node": "site-117-49-40-5-E",
+      "plot": "site-117-49-40-5-E-plot-53",
+      "placement": "site-117-49-40-5-E-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          9400,
+          2112
+        ],
+        "normal": "E",
+        "road": "road-5",
+        "segment": 70,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "west",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "waymarker_shelter_a",
+    "normal": "S",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-86-33-16-21-S",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        86,
+        33
+      ],
+      "node": "site-86-33-16-21-S",
+      "plot": "site-86-33-16-21-S-plot-53",
+      "placement": "site-86-33-16-21-S-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          6896,
+          1440
+        ],
+        "normal": "S",
+        "road": "road-6",
+        "segment": 3,
+        "tangent": [
+          1,
+          0
+        ],
+        "side": "north",
+        "frontage": "main"
+      }
+    }
+  },
+  {
+    "asset": "waymarker_shelter_a",
+    "normal": "W",
+    "kind": "complete assigned site",
+    "site": {
+      "id": "site-118-65-40-21-W",
+      "kind": "rural",
+      "profile": "rural-places-v2",
+      "chunk": [
+        118,
+        65
+      ],
+      "node": "site-118-65-40-21-W",
+      "plot": "site-118-65-40-21-W-plot-53",
+      "placement": "site-118-65-40-21-W-plot-53-building",
+      "goal": 0,
+      "attachment": {
+        "join": [
+          9480,
+          2816
+        ],
+        "normal": "W",
+        "road": "road-5",
+        "segment": 52,
+        "tangent": [
+          0,
+          1
+        ],
+        "side": "east",
+        "frontage": "main"
+      }
+    }
+  }
+]

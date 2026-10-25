@@ -1,0 +1,53 @@
+test_three_complete_macro_plans_and_coarse_owners_unchanged (test_generation_g11_access.G11Access.test_three_complete_macro_plans_and_coarse_owners_unchanged) ... ok
+test_original_g3_unseen_order_geometry_and_historical_metadata (test_generation_g4_durability.G4Durability.test_original_g3_unseen_order_geometry_and_historical_metadata) ... ok
+test_old_visited_state_no_generation_and_adapter_checkpoint (test_generation_g4_durability.G4Durability.test_old_visited_state_no_generation_and_adapter_checkpoint) ... ok
+test_authentic_g3_plan_synthetic_envelope_checkpoint_and_f9 (test_generation_g5_entrances.G5Entrances.test_authentic_g3_plan_synthetic_envelope_checkpoint_and_f9) ... ok
+test_old_g4_plan_and_scene_provenance (test_generation_g5_selection.G5Selection.test_old_g4_plan_and_scene_provenance) ... ok
+test_authentic_g5_checkpoint_and_pending_adapter_without_replanning (test_generation_g6_sites.G6Sites.test_authentic_g5_checkpoint_and_pending_adapter_without_replanning) ... ok
+test_genuine_g7_visited_mutations_and_pending_town_compound (test_generation_g8_lifecycle.G8Lifecycle.test_genuine_g7_visited_mutations_and_pending_town_compound) ... G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5037: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+ok
+test_genuine_g8_visited_pending_common_country_and_compound (test_generation_g9_lifecycle.G9Lifecycle.test_genuine_g8_visited_pending_common_country_and_compound) ... ok
+test_disabled_zero_budget_and_exhaustion_keep_complete_baseline (test_generation_g9_network.G9Network.test_disabled_zero_budget_and_exhaustion_keep_complete_baseline) ... ok
+test_ordinary_preservation_benefit_and_every_touched_scene (test_generation_g9_network.G9Network.test_ordinary_preservation_benefit_and_every_touched_scene) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 210.932s
+
+OK
+[gen] waystones placed in chunk (41,25): 1
+[gen] waystones placed in chunk (42,25): 1
+[gen] waystones placed in chunk (46,24): 1
+[gen] waystones placed in chunk (47,24): 1
+[gen] waystones placed in chunk (52,23): 1
+[gen] waystones placed in chunk (53,22): 1
+[gen] waystones placed in chunk (54,17): 1
+[gen] waystones placed in chunk (57,16): 1
+[gen] waystones placed in chunk (59,16): 1
+[gen] waystones placed in chunk (65,14): 1
+[gen] waystones placed in chunk (74,12): 1
+[gen] waystones placed in chunk (74,18): 1
+[gen] waystones placed in chunk (74,20): 1
+[gen] waystones placed in chunk (74,30): 1
+[gen] waystones placed in chunk (74,31): 1
+[gen] waystones placed in chunk (76,33): 1
+[gen] waystones placed in chunk (78,33): 1
+[gen] waystones placed in chunk (78,33): 1
+[gen] waystones placed in chunk (76,33): 1
+[gen] waystones placed in chunk (74,31): 1
+[gen] waystones placed in chunk (74,30): 1
+[gen] waystones placed in chunk (74,20): 1
+[gen] waystones placed in chunk (74,18): 1
+[gen] waystones placed in chunk (74,12): 1
+[gen] waystones placed in chunk (65,14): 1
+[gen] waystones placed in chunk (59,16): 1
+[gen] waystones placed in chunk (57,16): 1
+[gen] waystones placed in chunk (54,17): 1
+[gen] waystones placed in chunk (53,22): 1
+[gen] waystones placed in chunk (52,23): 1
+[gen] waystones placed in chunk (47,24): 1
+[gen] waystones placed in chunk (46,24): 1
+[gen] waystones placed in chunk (42,25): 1
+[gen] waystones placed in chunk (41,25): 1

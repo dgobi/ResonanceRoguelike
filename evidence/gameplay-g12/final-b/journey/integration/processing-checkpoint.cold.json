@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "pid": 14648,
+  "checkpoint_sha256": "b5cde833762ce46626e0739d98f36a9902c9546454841000d30e3d79e7ac9cc1",
+  "state": {
+    "player": "4de835dff720c1e56d14dd848a74e4c4fd273c6112f89200bc582264a7dfbbd7",
+    "world": "aa579dd7b4b861f544283935913d3669d53f0901fa1bd56a2e9648a97aeff45d",
+    "scene": "66a8b31be447e5eb4ebb12db9142bb0c78f616dcc102c3b058cc7b3e5ee889b4",
+    "processing": [
+      [
+        [
+          12,
+          12
+        ],
+        {
+          "item_id": "musk_pellet",
+          "turns_remaining": 9,
+          "decor_id": "drying_herb",
+          "source": "drying",
+          "completion_message": "The pellet has dried. The smell is contained. For now.",
+          "on_fire": false
+        }
+      ]
+    ],
+    "zones": [],
+    "load": 17.74,
+    "knowledge": {},
+    "words": [],
+    "read": [],
+    "recovered": {
+      "('g12-compatibility-fixture', 0, 1)": "remembered preparation"
+    }
+  }
+}

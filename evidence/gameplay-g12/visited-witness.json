@@ -1,0 +1,144 @@
+{
+  "passed": true,
+  "head": "08c1cf9f84b15340563ee969a0a369890d8dd24e",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g12\\audit_visited_witness.py"
+  ],
+  "script_sha256": "0b66bbac146195292d6025a920b62c83a78ade0149c14dd5ae61f7744b3c8a10",
+  "controls": "Genuine pre-edit checkpoint; disposable extraction. Full serialize_item fields compared against the original witness, allowing only the commissioned null-handler correction. Native floor/container transfer and inventory use; native F9 restores source ownership. Inactive visited owner inspected without regeneration. No balance claim.",
+  "visited_items": [
+    {
+      "owner": "floor:0,0:13,12",
+      "state": {
+        "item_id": "revelation_lens",
+        "item_state_version": 1,
+        "name": "Revelation Lens",
+        "tile": "generic_item",
+        "weight": 0.713,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0.0,
+        "qualities": {},
+        "description": "Visited floor witness",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "resonant",
+            "tier": 2
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    },
+    {
+      "owner": "container:0,0:14,12",
+      "state": {
+        "item_id": "component_satchel",
+        "item_state_version": 1,
+        "name": "Component Satchel",
+        "tile": "component_satchel",
+        "weight": 0.819,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0.0,
+        "qualities": {},
+        "description": "Visited container witness",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    },
+    {
+      "owner": "floor:1,0:11,12",
+      "state": {
+        "item_id": "herbalist_pouch",
+        "item_state_version": 1,
+        "name": "Herbalist's Pouch",
+        "tile": "herbalist_pouch",
+        "weight": 0.4,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0.0,
+        "qualities": {},
+        "description": "Inactive visited scene witness",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "aromatic",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    }
+  ],
+  "full_mutable_fields_match": true,
+  "normal_acquire_and_equip": true,
+  "f9_restores_exact_source_owners": true,
+  "custom_nonnull_handler_preserved": true,
+  "inactive_visited_scene_preserved": true
+}

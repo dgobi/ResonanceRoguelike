@@ -1,0 +1,2195 @@
+{
+  "passed": true,
+  "baseline": "069ca40dac7bdbf5a7a40b205a1358c8da919e21",
+  "implementation_head": "08c1cf9f84b15340563ee969a0a369890d8dd24e",
+  "capture_commit": "ff43119c832f23683c7ca6a472a4094715f374d0",
+  "capture_runtime_paths_reconciled": 529,
+  "capture_runtime_binding": {
+    "roguelike/aap-64.hex": {
+      "blob": "0e4a8998b00703c468d197abeeb4d6c16917c089",
+      "match": "CRLF-only"
+    },
+    "roguelike/assets/Fonts/FoulisGreek.ttf": {
+      "blob": "4527dbd97795162c5c99a7fe1225f038b6ae5246",
+      "match": "exact"
+    },
+    "roguelike/assets/Fonts/IMFellEnglish-Italic.ttf": {
+      "blob": "57a73380c55bbc770e1ea76bc291d271978f5481",
+      "match": "exact"
+    },
+    "roguelike/assets/Fonts/IMFellEnglish-Regular.ttf": {
+      "blob": "c8481a1660a9480cdf54667fb690b11c10824456",
+      "match": "exact"
+    },
+    "roguelike/assets/Fonts/Junicode-Bold.ttf": {
+      "blob": "4bf0bfaefcbf1a5ad26847ec582223fa901eb30e",
+      "match": "exact"
+    },
+    "roguelike/assets/Fonts/Junicode-BoldItalic.ttf": {
+      "blob": "43a378c8e54fe3d20e9acb7995ad17856702a25a",
+      "match": "exact"
+    },
+    "roguelike/assets/Fonts/Junicode-Italic.ttf": {
+      "blob": "99e984cddf03263353fa752ae978cbe84b8ec728",
+      "match": "exact"
+    },
+    "roguelike/assets/Fonts/Junicode.ttf": {
+      "blob": "a61b964cc14f54b159b4edb1f0cc74832437691b",
+      "match": "exact"
+    },
+    "roguelike/assets/Fonts/dejavu10x10_gs_tc.png": {
+      "blob": "41b8943f441210c58cceaab7dd424e1772ca0041",
+      "match": "exact"
+    },
+    "roguelike/assets/Fonts/dejavu16x16_gs_tc.png": {
+      "blob": "152151998d8fd297ed32bb1d0ed892270046e1e7",
+      "match": "exact"
+    },
+    "roguelike/assets/sprites/HexanyCreatures.png": {
+      "blob": "1ecc554814d409ec7345933fdaa5a2b347f4ee9d",
+      "match": "exact"
+    },
+    "roguelike/assets/sprites/PixelAsciiSpritesheet.png": {
+      "blob": "fe30163188cadc1ab9d29ad19f5afab655d605f8",
+      "match": "exact"
+    },
+    "roguelike/assets/sprites/creatures.png": {
+      "blob": "f0bcf0a4cdc6870700ceaf5e8aa0d0c272692b6c",
+      "match": "exact"
+    },
+    "roguelike/assets/sprites/lofi_1bit_char.png": {
+      "blob": "292200ff209882398cb1ffece035ec4c199eb8bd",
+      "match": "exact"
+    },
+    "roguelike/assets/sprites/lofi_1bit_obj.png": {
+      "blob": "75408d65b0abf982f5ce0838930aadcc9a854042",
+      "match": "exact"
+    },
+    "roguelike/assets/sprites/objects.png": {
+      "blob": "35d4d0103e71f3d527828a3248a98342fd4cf607",
+      "match": "exact"
+    },
+    "roguelike/assets/sprites/terrain.png": {
+      "blob": "b3091dc578e0e6058b8ac8f6f0baeb86705abd03",
+      "match": "exact"
+    },
+    "roguelike/assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png": {
+      "blob": "89bc0c0267f705f2e34a5e585c3174fed0bfaa27",
+      "match": "exact"
+    },
+    "roguelike/assets/sprites/walls.png": {
+      "blob": "f1b21fc3605b2c47ea6fcd0e60c04a0bc0faddfe",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/assembly.png": {
+      "blob": "d0b4684212f4198e48f8adc70b56f76f667d0843",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/bone_breakers.png": {
+      "blob": "e53b8da0b084b989d34f116c8b3c1dbc8057410d",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/northern_wastes.png": {
+      "blob": "0210614f06081961020cce8eb85ddc6323c780a1",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/polis_sanctuary.png": {
+      "blob": "505fc4795c3c0ab5c6e0592c60da4a0df360ae37",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/simple.png": {
+      "blob": "364fe1266cb0844c2f4b0c40abb67ca6c396644d",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/simple2.png": {
+      "blob": "cc3ba1214b177bb6885534bc72e51bcb96a9ffdf",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/spacing_guild.png": {
+      "blob": "62ddf2d52fc6461e32cc5b7a32f9f6eb06d2cf69",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/spikecore.png": {
+      "blob": "e40ca4faa1b8609ebe172fb77bcbf2d1b07f01f0",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/star_fleet.png": {
+      "blob": "f88885c229255e32e8953b71a0f7937133cd1035",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/thorny_growth.png": {
+      "blob": "b604a0b61069db075e7e498663465c269ae774d4",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/weathered_temple.png": {
+      "blob": "a1b156c88ca325d5ba3cf852845436a8ef1f7ec2",
+      "match": "exact"
+    },
+    "roguelike/assets/ui/ziggurat.png": {
+      "blob": "1f5d73d62c82cf37831f71dc66dfa16a9bc32714",
+      "match": "exact"
+    },
+    "roguelike/components/__init__.py": {
+      "blob": "768d9b308e5261d41b3813ad4bf18c1c8dd0b871",
+      "match": "CRLF-only"
+    },
+    "roguelike/components/ai.py": {
+      "blob": "4ea27ec7bf6025d7200963f79ecd6eb4b8d9e9c4",
+      "match": "CRLF-only"
+    },
+    "roguelike/components/corruption.py": {
+      "blob": "d34741ec9b7fedf7d54998af3084e7c99af8c759",
+      "match": "CRLF-only"
+    },
+    "roguelike/components/equipment.py": {
+      "blob": "7466050b7d4c151e5a159e021c441403d842d3bf",
+      "match": "exact"
+    },
+    "roguelike/components/fighter.py": {
+      "blob": "89f7522088474881d75114781a36faa292a18440",
+      "match": "exact"
+    },
+    "roguelike/components/inventory.py": {
+      "blob": "0331d22420d664d783bbb8b620f6dce31e613fff",
+      "match": "CRLF-only"
+    },
+    "roguelike/components/language.py": {
+      "blob": "b0c6e315c5301c3676937b9ae3ea250cfd9dbeab",
+      "match": "exact"
+    },
+    "roguelike/components/level.py": {
+      "blob": "9a22e48edd468e6d10c7c1e555dadd12a455e04a",
+      "match": "exact"
+    },
+    "roguelike/components/light_source.py": {
+      "blob": "57eeb5d0c1d0899cd98f60c950d525474db83bc1",
+      "match": "CRLF-only"
+    },
+    "roguelike/components/needs.py": {
+      "blob": "e58c19994e02089a79b591f54e6b8cc9c8e87dae",
+      "match": "exact"
+    },
+    "roguelike/components/perception.py": {
+      "blob": "cad8cb7e768b68299bda85b0bb109204afa9c558",
+      "match": "CRLF-only"
+    },
+    "roguelike/components/perks.py": {
+      "blob": "def75ae90cf9bef1e55110b38385c58a39f7d529",
+      "match": "CRLF-only"
+    },
+    "roguelike/config.py": {
+      "blob": "7436e24ae2b630339d01651b6177a11f085d83ce",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/ai_config.json": {
+      "blob": "bbceca79749fbe8a73187af6985c9ed66641c448",
+      "match": "exact"
+    },
+    "roguelike/data/biomes/ash_wastes.json": {
+      "blob": "0f3b123c35e5fe126f76e44589f8c10992d4424d",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/biomes/capital.json": {
+      "blob": "9e0b6b6914fdf2b5a8e478a66d95aaaf889d1dc5",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/biomes/deep_mountain.json": {
+      "blob": "d5ca46840cd5e0cd53e376541246cd4620ac83ba",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/biomes/drowned_wood.json": {
+      "blob": "560adbc2fed56a4b88a4854cee7774b31f715126",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/biomes/forest.json": {
+      "blob": "7dca3d6166a4bf56aa2df7dc0f6012d82fd2ce7a",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/biomes/heath.json": {
+      "blob": "d996e8833aa56098b3ff2454710f5fc113e93d1b",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/biomes/mountain.json": {
+      "blob": "0125ca74b820913a2783e231cfa1f61ddc35a085",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/biomes/plains.json": {
+      "blob": "867a32381d69293da3d4ec39df8826ca2cc530c3",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/biomes/swamp.json": {
+      "blob": "4b0a79d67c9b7cb983b6318bce6fcf77f4dce634",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/biomes/town.json": {
+      "blob": "6575e21ffdbcf84a60672fa3933b1069828056e3",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/bodies/body_player.json": {
+      "blob": "4bb24250d50cf3386dda0eb8573c7ba30845c65a",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/civic/bell_tower_a.json": {
+      "blob": "331e065a1f9d7415ed178f71c38bc99d2647528d",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/civic/covered_well_house_a.json": {
+      "blob": "b0c94bb451a1325a728d5323bd71ddaf8017895c",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/civic/guard_post_a.json": {
+      "blob": "304e12500fedbca1cee69879b7a290d2c070dc92",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/civic/meeting_hall_a.json": {
+      "blob": "24d8763c092522fa904de4ead70051346056dc50",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/civic/record_hall_a.json": {
+      "blob": "09d0aa4faddc9f7e6881f66c8bd465af05b48f16",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/civic/waystone_plinth_a.json": {
+      "blob": "37f9a93c08002de7505e3795abb6f3069ddf8209",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/civic/well_a.json": {
+      "blob": "ef759e8e932ab338e55bba7c676ca097f1744ed0",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/commercial/apothecary_a.json": {
+      "blob": "600e9a834f6847c95afc68655ddd8141730eb69f",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/commercial/market_stall_a.json": {
+      "blob": "5feb2a3ed031a62550c5cd705df17269695d7e9e",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/commercial/market_stall_b.json": {
+      "blob": "d93a547c9ec5ccc8f1cec4f20369df4c3f969b2f",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/commercial/market_stall_c.json": {
+      "blob": "f3a52eca480462b9dfc21a4606baf5d51f60955a",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/commercial/shop_a.json": {
+      "blob": "c8243c6b20a57ccc0c8d3b620ea05f97506830dd",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/commercial/trader_shop_a.json": {
+      "blob": "85d6af2807d8a6d1e4707aa05be55948eb77370d",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/commercial/workshop_a.json": {
+      "blob": "529de001e48f21e6043309fc19ff6e4684911cc1",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/plaza/plaza_market_a.json": {
+      "blob": "b07bd6f8170613b336b62713abedd5dbcac56983",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/plaza/plaza_ossuary_a.json": {
+      "blob": "66da44e1ee70e4b37a52187d7e72f92e7edd5303",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/religious/bell_warden_post_a.json": {
+      "blob": "3ffadd861b2a41a5fb4740983a7c45ecf34ff141",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/religious/collapsed_shrine_a.json": {
+      "blob": "954d5e3337eb910c5ade5e46fc52336c5d741537",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/religious/folk_saint_alcove_a.json": {
+      "blob": "00e2e748504ad9a3ed861df3250b6d17e1e68a0e",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/religious/folk_saint_niche_a.json": {
+      "blob": "1fbfdaae040e8191847b184242b79aff4eb525a0",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/religious/ossuary_chapel_a.json": {
+      "blob": "a76d38862a06bff5374145f784bd4e07b83f2497",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/religious/shrine_a.json": {
+      "blob": "27b8f835d42ab6a728f569e87e2aa6bec76787c2",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/religious/shrine_hall_a.json": {
+      "blob": "442248ae38f2cc4c1804920c68b222081e95df99",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/religious/waystone_shrine_a.json": {
+      "blob": "47eefeadfcbb5c1ac096d79a939be3eddbd3932d",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/residential/house_abandoned_a.json": {
+      "blob": "b9c25b8672bafdbfc1e1317fb79cc9fbcb341323",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/residential/house_crowded_a.json": {
+      "blob": "9140af93a74bcc3989308d2f8a72d7d4b5fe0a2f",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/residential/house_damaged_a.json": {
+      "blob": "4bffbc2a902899298f805365f4caaa836ca945d0",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/residential/house_hearth_a.json": {
+      "blob": "029919907e008045d58e9509223e22ed5b12d3ef",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/residential/house_large_a.json": {
+      "blob": "a23da71b59b92ab3c89e0c740243f2b308090611",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/residential/house_old_stone_a.json": {
+      "blob": "2170b75172df674675009b25086805e9ac80a585",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/residential/house_single_room_a.json": {
+      "blob": "7ddeb9f2221906165ac6808489095ad98f843b87",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/residential/house_small_a.json": {
+      "blob": "6b411a19313ae24b3ed386bd8e96ff84f497a4c4",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/residential/house_small_b.json": {
+      "blob": "0c5baddfaa83bd7a654e2d96c5a38f5694f21b73",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/residential/house_two_room_a.json": {
+      "blob": "9a950ff5f2dfe143acf84913712a7a3a51f299af",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/residential/hovel.json": {
+      "blob": "17a08544701fa464be7b1e3c179dd5e298c0fec0",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/residential/tenement_a.json": {
+      "blob": "b119c61a5637dd7c9f83b7b66119b5c0ec9d7a9e",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/ruins/burnt_dwelling_a.json": {
+      "blob": "396345c1a563a7ee101900445ac6822c82482674",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/ruins/collapsed_house_a.json": {
+      "blob": "77cbf7b706cafd059736d78ecd52d7cad771d2a6",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/ruins/collapsed_shop_a.json": {
+      "blob": "18358cda2c42e94f0fe549138889e477f7ed0887",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/ruins/deep_foundation_a.json": {
+      "blob": "0d53f31e33f5057663f4e7b632a309893663f676",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/ruins/foundation_outline_a.json": {
+      "blob": "e908e7efa02865a35abdcd66fe822101d5dc2482",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/ruins/ossuary_ruin_a.json": {
+      "blob": "ceeaac26b19f6993418e3167df3f6af605848102",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/ruins/ruin_wall_a.json": {
+      "blob": "d65107cab2ca23c6656215921b2ffa31fa9cd990",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/ruins/three_wall_remnant_a.json": {
+      "blob": "a60dd8f12a4886e98a39105c548a82fc56b39c31",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/storage/cellar_a.json": {
+      "blob": "85a6465e4b6440efa982f339e229807a1857d488",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/storage/food_store_a.json": {
+      "blob": "67f0ce74c2c2801c964b24ba54bb643b7ab36744",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/storage/goods_cellar_a.json": {
+      "blob": "d72019185f1d66243fada4d56bd0e08e6a209bdd",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/storage/root_cellar_a.json": {
+      "blob": "d33de0e2d439beaada20f5cc16c82d775b1ab83f",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/storage/storehouse_a.json": {
+      "blob": "05725afde9dd7450b9fb4dba70a7edea25117e5c",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/storage/tool_shed_a.json": {
+      "blob": "f5be44c72421ecce46fe5073c9808994be2f8829",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/storage/warehouse_a.json": {
+      "blob": "67207572739fb46238948004d8a09a673cd639b6",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/wilderness/fishing_dock.json": {
+      "blob": "a73255f71729a42d053563da2e93e2fa0252e308",
+      "match": "exact"
+    },
+    "roguelike/data/buildings/wilderness/hunter_cabin.json": {
+      "blob": "127b730fefdaec9d31a5bdc59784c483421e3643",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/wilderness/roadside_shrine_a.json": {
+      "blob": "9a5ffe0c19f7247a0b0772d7e5e1ba0a49c05cfe",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/wilderness/shepherds_fold_a.json": {
+      "blob": "9cbc3db5cf77b57553fde86c39d831b314d37663",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/wilderness/shepherds_hut_a.json": {
+      "blob": "c561cddef67ae2a7164dfa9ec0ac532a162bb3f9",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/buildings/wilderness/waymarker_shelter_a.json": {
+      "blob": "867b1e6628e98a0612b9bdc6114962418f63c589",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/decoratives.json": {
+      "blob": "407d25ee291faa0f5d74c7ad605c814c8c6d8673",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/deep_tongue.json": {
+      "blob": "1e341121989df3fb243a94a6ea9d1e003c5e999b",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/deep_tongue_phonemes.json": {
+      "blob": "dc8c85f385e512d1ed60a214b07dbd415793082e",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/barrow_wight.json": {
+      "blob": "2427317bfef7d935e0d3da8a27ff3c4dd4aa3bca",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/bog_wraith.json": {
+      "blob": "1d67d64f601bc8df5628f13551977c739d1ba3a6",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/briar_lurker.json": {
+      "blob": "dae664d0840f46ba6e27e91e51495a32485f9f65",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/drowned_revenant.json": {
+      "blob": "0fef812916f6ac7e54411b573822ea63d3052d16",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/grave_thing.json": {
+      "blob": "63870bd8406c76e1b0b6897aad4734b9a4abbf4d",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/heath_stalker.json": {
+      "blob": "9bb8263a262623641588648c439b2fda59973b83",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/highland_bandit.json": {
+      "blob": "dd40586a3520a66b713173bec0da951d77c1470b",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/hollow_knight.json": {
+      "blob": "cb3616d8da826ed8b1bc3a78df5c755dcf87a5b6",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/hollow_revenant.json": {
+      "blob": "3b5e59e20bedff36115c9b1716d3a139ba4585d4",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/plague_crow.json": {
+      "blob": "88c6500f00d6f97d43d1c3dd5721d1e75057897d",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/sewer_thing.json": {
+      "blob": "2b77faac41221b4b70a1d599764c90fe5bc1a3df",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/stone_lurker.json": {
+      "blob": "2b15c6c2aed75bfccf4cf79c09e1657770d734c1",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entities/creatures/vine_network.json": {
+      "blob": "10edba3a347f80db9aa88830352c2593c84c4925",
+      "match": "exact"
+    },
+    "roguelike/data/entities/player.json": {
+      "blob": "46e0cf8c5207cb6cf046c80feeaba6566ee571fb",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entrances/barrow_mound_a.json": {
+      "blob": "de6a362f820d03d535251028874240d272b4d9de",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entrances/barrow_mound_b.json": {
+      "blob": "95a7adc00ee14725586b068001b83fb4643bfcbf",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entrances/drowned_threshold_a.json": {
+      "blob": "fcaa18fb911ad6204f1a22bd8fc7f8b955a9432a",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entrances/overgrown_gatehouse_a.json": {
+      "blob": "19924f48011b4e9a22ac23cdf7b70f363c62d859",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entrances/rock_face_cut_a.json": {
+      "blob": "35cad9c513d791fd86949caaf19e26e1ab008055",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/entrances/sunken_ruin_a.json": {
+      "blob": "f70684d732e58e780d5e4feba129e39e2c85f1bd",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/generation/compounds/homestead_workyard.json": {
+      "blob": "7158c7a4827ce5ba27c68dcf506f064f5ce47b7d",
+      "match": "exact"
+    },
+    "roguelike/data/generation/compounds/wayside_shrine_court.json": {
+      "blob": "5741f1a1a66a74b4a79de26e467a1c913324daa6",
+      "match": "exact"
+    },
+    "roguelike/data/generation/country_network.json": {
+      "blob": "77966cf737908fb916b08ccf49d4e99d160330b1",
+      "match": "exact"
+    },
+    "roguelike/data/generation/g3_config.json": {
+      "blob": "25c75bdb61fe84bf0006d0d68ddd7ff1fdfc30db",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/generation/poi_profiles.json": {
+      "blob": "12cf2c00f273c3953eb8a2faa5599ea31e579c9e",
+      "match": "exact"
+    },
+    "roguelike/data/generation/settlement_layouts.json": {
+      "blob": "3d799c5fca30ffc9c6da82677e747ef7441c7d61",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/generation/settlement_profiles.json": {
+      "blob": "009717932a6a1b315527da84a9b71a38aaa1e844",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/generation/town_config.json": {
+      "blob": "06cdb2b0471f26f47ce2bb5aef5bcd0376efdfe0",
+      "match": "exact"
+    },
+    "roguelike/data/generation/wilderness_profiles.json": {
+      "blob": "ba61bba4a8c718af4bd01e520e136c5fc0d599f0",
+      "match": "exact"
+    },
+    "roguelike/data/items/armor/leather_cap.json": {
+      "blob": "d2b6a2d5f86abdb4ab609f8a8f26ef7b261f3bce",
+      "match": "exact"
+    },
+    "roguelike/data/items/armor/leather_jack.json": {
+      "blob": "0b0103d8fe49cc6a5f639bc4facc45115e3fc657",
+      "match": "exact"
+    },
+    "roguelike/data/items/butchery/animal_bone.json": {
+      "blob": "de25118fdcdb0cbdfead4932f2b8a9df1871c39e",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/animal_sinew.json": {
+      "blob": "289c49743eeee56e8bac8c827d840beea78b25e2",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/briar_sap.json": {
+      "blob": "66dd82c6897cfa1ceee86684af562faa3b8598dc",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/compressed_marrow.json": {
+      "blob": "8b268c50c0f8b8b55688c8dddd84fa3279476af4",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/crow_bile.json": {
+      "blob": "aa4517827fbfce8933e8adaf92dc413a815d0e5a",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/crow_flight_membrane.json": {
+      "blob": "c4b8203b94a069e0629d0ebc0ba90cbbf8c845f8",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/crow_meat.json": {
+      "blob": "7ef16c9fb97e7b6a1a954228f76e061f6ab6a29a",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/crude_viscera.json": {
+      "blob": "9fab8fa542ccab3e8d48875a12117f9f664155f5",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/fibrous_thorn_mass.json": {
+      "blob": "4d7e53c7664ca6fa79afebc86e1c6e18454cac98",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/grave_dust.json": {
+      "blob": "f808040f8a48cbe21e5b81ec60efcd195a65182e",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/inner_stone_core.json": {
+      "blob": "5e26638b2a29e29a8f1191c302549e0dcf7942d0",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/raw_meat_common.json": {
+      "blob": "753205bcd8f9cef3d006ad0abe85909e394159ca",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/resonant_bone_fragment.json": {
+      "blob": "5bd199a768fb29bea8a6fb24584016b1253ab9f5",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/revenant_husk.json": {
+      "blob": "5c7340c9b642e7f7ae1071b3bda6044eb0f5fb5f",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/stalker_meat.json": {
+      "blob": "890312c3a10a6198d1aaf48a6dbd5650e554e72d",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/stalker_musk_gland.json": {
+      "blob": "4dc3657cdab593576925c0a4e344f5ef2bd2cc95",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/stone_carapace_fragment.json": {
+      "blob": "182851904ae0b998ad75d321c1535d75e2ff9178",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/butchery/wight_essence_residue.json": {
+      "blob": "8f2dc7c960d95adda6d46ccea12699568e81d3f7",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/components/clay_lump.json": {
+      "blob": "2cf105e1bd469fcfea5643d042071ae3b4b2ac19",
+      "match": "exact"
+    },
+    "roguelike/data/items/components/clay_pot.json": {
+      "blob": "fdf4090b58e8d56261eabd67a04a9694967e1966",
+      "match": "exact"
+    },
+    "roguelike/data/items/components/flint_shard.json": {
+      "blob": "55a2a7d243b90317833f58a7419464b6dfe21bfd",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/components/wood_bundle.json": {
+      "blob": "ea4ce4fa31c75366411b5c6268da57e9497ca16b",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/bile_coating.json": {
+      "blob": "7b474916e1d353b2866290e02068bbcbe5777ecf",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/bitter_herb.json": {
+      "blob": "b31d98b4d549d6a49049e20ce62eac511c0d4df5",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/bone_dust_draught.json": {
+      "blob": "f071329a2367feb4ca7ad01a62d13e6b0ef6d03e",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/briar_binding_oil.json": {
+      "blob": "dbe33fca54348e43a6d687688327cef55739bbd6",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/coldbell_cutting.json": {
+      "blob": "8613b95b5743334e7194ece8fddd2763e1b202aa",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/coldbell_extract.json": {
+      "blob": "adb2a58f702bce650669d7655f899a4d737d703c",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/cooked_meat.json": {
+      "blob": "6d9a371e2722659a9c7d0a4655e31ec17d9da433",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/crow_jerky.json": {
+      "blob": "a88dcad2dd818afb7c1dfa253f2bc712e838f887",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/dried_aromatic_herb.json": {
+      "blob": "f06916b26c9f34b7507d319b647b29b7fbb7fb5c",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/dried_bitter_herb.json": {
+      "blob": "61d4f75694a749282ea838c82e727aebfbf56e6c",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/dried_coldbell.json": {
+      "blob": "93f5aaf7acbc634916cd241c126a2708ffd6f037",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/dried_murk_violet.json": {
+      "blob": "d73f4902a3a80f5d21902610c8b05478a77f2c58",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/dried_pilgrims_woe.json": {
+      "blob": "af75417e9c52243de3670b1357e5dacc18ba6d6f",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/dried_provisions.json": {
+      "blob": "fdeff49839144c7e886699cf51ebfc876cc81f01",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/dried_resonant_herb.json": {
+      "blob": "265eba00a396e411ca110b4fd69bbfcf6d0eb877",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/dried_soporific_herb.json": {
+      "blob": "4f43cc920f76de24441b1e8ccf94999b96c05aa0",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/empty_water_skin.json": {
+      "blob": "c4c0521ab0645dfbce2d0f8de542172c3406e5e6",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/hungering_oil.json": {
+      "blob": "7df4dad8b5239abe4c49c335b0cc1645c3cc8cc9",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/lab_note.json": {
+      "blob": "4246135b1045fd5f88885a393dbc4672cdf56e46",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/marrow_seal.json": {
+      "blob": "20537ae7c58a2459071d377cec4e2f843ed834f2",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/murk_violet_stem.json": {
+      "blob": "153ef55a1baa89f57baa4b2f60d816baef202348",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/musk_pellet.json": {
+      "blob": "6257f1086c59e89f5b74cb3dc4b94bb49531347c",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/perk_vessel.json": {
+      "blob": "a12ea8a13afa9f998bab055019e1fbb84e1fed6d",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/pilgrims_woe_petals.json": {
+      "blob": "b320eff639f58ec368057e8dc9a2926060e4c155",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/prophets_eye_cap.json": {
+      "blob": "b73a132a3afb8e13d181fd1d20cbe4bef1b06bcb",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/resonant_bone_tincture.json": {
+      "blob": "3c2644a58cea202c6bf83420ab28384b793f3d73",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/resonant_tincture.json": {
+      "blob": "0f8806c326c6481368bbd638533d326789e448df",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/salt_pouch.json": {
+      "blob": "a4c6fd3b60c7873d724f1d53c17996b062b13fac",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/stalker_unguent.json": {
+      "blob": "4f29ccab517b5f206558ed45a83e65d6b6807d46",
+      "match": "exact"
+    },
+    "roguelike/data/items/consumables/sulphur_cap_fragment.json": {
+      "blob": "a2e964b8efdb487012792384910bd93971e27c78",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/water_flask.json": {
+      "blob": "797d0122a500c67b9cad996fa4c43374d93b1e56",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/water_skin.json": {
+      "blob": "a3a67ee9e698d875147539cda164e3dea9e5cd81",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/consumables/wight_concentrate.json": {
+      "blob": "6b80d1169bf0465e31ba229ee02f4350e367115c",
+      "match": "exact"
+    },
+    "roguelike/data/items/documents/book.json": {
+      "blob": "2ff99c71eee951d40e1ffbb61306613189a1a0d6",
+      "match": "exact"
+    },
+    "roguelike/data/items/documents/inscription.json": {
+      "blob": "198ab15eceeb9f825537227b7cadb2a568955e88",
+      "match": "exact"
+    },
+    "roguelike/data/items/documents/letter.json": {
+      "blob": "cdf1bfe33eab7898fccdff46b7f6f756d835a384",
+      "match": "exact"
+    },
+    "roguelike/data/items/documents/research_note.json": {
+      "blob": "573df86b164dca96b3cd3b024f87e54921ded8ac",
+      "match": "exact"
+    },
+    "roguelike/data/items/documents/stone_marker.json": {
+      "blob": "7d37ab27c0cd6c327f62172e4cb29b7f44334db0",
+      "match": "exact"
+    },
+    "roguelike/data/items/documents/tablet.json": {
+      "blob": "d936028a42b74bb363b524a30a31961b9bb14367",
+      "match": "exact"
+    },
+    "roguelike/data/items/equipment/satchel/component_satchel.json": {
+      "blob": "bc43b5000bf5f92d958d44b8491e852011815312",
+      "match": "exact"
+    },
+    "roguelike/data/items/equipment/satchel/herbalist_pouch.json": {
+      "blob": "42ef1fda821498b12578baacc6566b32d1d86e0f",
+      "match": "exact"
+    },
+    "roguelike/data/items/equipment/satchel/leather_satchel.json": {
+      "blob": "401e718d0c7b5dd85101a5f5fc563957a119d4b5",
+      "match": "exact"
+    },
+    "roguelike/data/items/shields/faceted_ward.json": {
+      "blob": "886f05137672e26df8c8db57c666a423e8114386",
+      "match": "exact"
+    },
+    "roguelike/data/items/special/corpse_placeholder.json": {
+      "blob": "562b1d35f9c8a485d990cd79f2525d49d0e423eb",
+      "match": "exact"
+    },
+    "roguelike/data/items/talismans/moist_pebble.json": {
+      "blob": "692821af850c8f51726dd5c60c586890bf74d04d",
+      "match": "exact"
+    },
+    "roguelike/data/items/tools/oil_lantern.json": {
+      "blob": "5ecb45d1c023421a802ee935246c3b6b5b041ffe",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/tools/tallow_torch.json": {
+      "blob": "ba6ac76116041e9e24f3656514ae72999bc27ad4",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/weapons/binding_knife.json": {
+      "blob": "fcbdba7364d28a9b078061117d6d87e69f7cec52",
+      "match": "exact"
+    },
+    "roguelike/data/items/weapons/crude_blade.json": {
+      "blob": "3bac59744646b2ef2ef3fb476f56e9dbd1503c63",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/weapons/debug_blade.json": {
+      "blob": "d6cb581ca8744decd8beef213559081a053e387b",
+      "match": "exact"
+    },
+    "roguelike/data/items/weapons/dissolution_blade.json": {
+      "blob": "5a3a363b54f13662f32039ded0312e0f3850dbb6",
+      "match": "exact"
+    },
+    "roguelike/data/items/weapons/heavy_blade.json": {
+      "blob": "ff3d29d1815b569ecdd244d49b44a01b62a72559",
+      "match": "exact"
+    },
+    "roguelike/data/items/weapons/revelation_lens.json": {
+      "blob": "d2c7e71baf13d32e1430719f1a2c54808956f84a",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/items/weapons/severance_blade.json": {
+      "blob": "4175b57563b6ef6f108092a573cfbf591182dde3",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/keywords.json": {
+      "blob": "d7d52d2dd4744236aba2e21fb3cb4bb1d28b4ea4",
+      "match": "exact"
+    },
+    "roguelike/data/layouts/starting_lab.json": {
+      "blob": "821c8825a0116a4026a5d97320d7f7db411d4789",
+      "match": "exact"
+    },
+    "roguelike/data/loot/dungeon_shields.json": {
+      "blob": "aae297d7b130f973c0ba07a24b93a371f82237db",
+      "match": "exact"
+    },
+    "roguelike/data/loot/dungeon_weapons.json": {
+      "blob": "11ccbee75bdb821e1cf42689516c1576a58aeabd",
+      "match": "exact"
+    },
+    "roguelike/data/loot/hunting_supplies.json": {
+      "blob": "45f4eb743c27dffcc44f849983ab052f5dd2ae1a",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/loot/poor_household.json": {
+      "blob": "b7fa237ac34221bf19f5e59d3979c789f3e88971",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/loot/tools_crude.json": {
+      "blob": "45f4eb743c27dffcc44f849983ab052f5dd2ae1a",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/loot/world_texts_common.json": {
+      "blob": "07a385e946414df4a86c5c0c53133a210464cc04",
+      "match": "exact"
+    },
+    "roguelike/data/loot/world_texts_official.json": {
+      "blob": "4c7a2b0124f3f8f624f4a23d314c80267719b43a",
+      "match": "exact"
+    },
+    "roguelike/data/loot/world_texts_scholarly.json": {
+      "blob": "f9ad4d9b2248770e3e83db6f88558a04013408d3",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/alchemist_reagents.json": {
+      "blob": "789f59dbb14d6c5c89670c0103b447e55c6c1793",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/alchemist_shop.json": {
+      "blob": "8fabfc5340c70da71e4b66b6309e616c8abcf215",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/commoner_bedroom.json": {
+      "blob": "ad13286f799b0aa33cc879b0202af30eecb513d9",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/commoner_kitchen.json": {
+      "blob": "eb237e971196ce1e63e52ecdcc85d3da32c918c9",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/noble_generic.json": {
+      "blob": "d0f3f965342fa5e2b9a5a9b2900225f2c9e5ab2a",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/ruins_scatter.json": {
+      "blob": "2188a6bd49a083299b24848b5d45004018b33218",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/shrine_equipment.json": {
+      "blob": "4523d365e501f536bfc837f2419c850759ae4e78",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/shrine_offering.json": {
+      "blob": "ae505512a64d53d7262327adc0337f789a242345",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/storage_general.json": {
+      "blob": "f67d716d6cb5ec4d018c53384a929f5849a469b1",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/storage_tools.json": {
+      "blob": "bc11539ec6d6a0d8ceb413dbda761903e781aff9",
+      "match": "exact"
+    },
+    "roguelike/data/loot_pools/wilderness_cache.json": {
+      "blob": "b7337386153af2b2db7c890a4b1505a90da5f9b6",
+      "match": "exact"
+    },
+    "roguelike/data/names.json": {
+      "blob": "e3cac0ab2d3c3470ad83dffd50154d8bcdeb40ca",
+      "match": "exact"
+    },
+    "roguelike/data/perks/attuned.json": {
+      "blob": "187f42947dbde2a797063465e82ba3072179edf0",
+      "match": "exact"
+    },
+    "roguelike/data/perks/bone_reader.json": {
+      "blob": "6590f75e11ebaf16fe54fb12e1a870819418d483",
+      "match": "exact"
+    },
+    "roguelike/data/perks/bound_name/second_tongue.json": {
+      "blob": "982290683142c1b9dcd8b68687442044782c9bc6",
+      "match": "exact"
+    },
+    "roguelike/data/perks/carrion_eye.json": {
+      "blob": "b230889098acbfcbf90e30ecc9bc7c23653b8def",
+      "match": "exact"
+    },
+    "roguelike/data/perks/corruption_channel.json": {
+      "blob": "c070497f2ab663201867820fa3e7285fbee502ed",
+      "match": "exact"
+    },
+    "roguelike/data/perks/deep_harvest.json": {
+      "blob": "b66215e9d22710bfcc18751845b36d72f1554eb0",
+      "match": "exact"
+    },
+    "roguelike/data/perks/growth_sense.json": {
+      "blob": "ed90717fe8c7c2a58797bbe62011887cb56d768c",
+      "match": "exact"
+    },
+    "roguelike/data/perks/hardened_step.json": {
+      "blob": "c9cd2b91263c82745c1e0b500e13306ba7ea042a",
+      "match": "exact"
+    },
+    "roguelike/data/perks/hollow_road/ear_pressed_to_stone.json": {
+      "blob": "81b39d732b1f413694a3b57750781d13614f4fcc",
+      "match": "exact"
+    },
+    "roguelike/data/perks/lithic_seep.json": {
+      "blob": "bc61b33f0168f884344b2adceedb24ef822a1d8e",
+      "match": "exact"
+    },
+    "roguelike/data/perks/marrow_drink.json": {
+      "blob": "7653936714a795947301ebab1b10bd66f8e0538b",
+      "match": "exact"
+    },
+    "roguelike/data/perks/resonance_sink.json": {
+      "blob": "e081ec63e8224f3fc640051f0b0e5e1fa880620f",
+      "match": "exact"
+    },
+    "roguelike/data/perks/resonant_wayfarer.json": {
+      "blob": "1c321e0ec71e9bff59b51750fbf2819a446fd215",
+      "match": "exact"
+    },
+    "roguelike/data/perks/road_knowledge.json": {
+      "blob": "f33c099553c0935931ba434e252df92fb2af7bb2",
+      "match": "exact"
+    },
+    "roguelike/data/perks/the_indifference.json": {
+      "blob": "7a8b21d810b80d62bf5e7a94201a26bcef533e61",
+      "match": "exact"
+    },
+    "roguelike/data/perks/witnessing/the_opened_page.json": {
+      "blob": "af9e6337bac83a0c6930c84db131331040c197f1",
+      "match": "exact"
+    },
+    "roguelike/data/processing_messages.json": {
+      "blob": "3468dd03f52f9336232d460061d1f5c83ee214fe",
+      "match": "exact"
+    },
+    "roguelike/data/qualities.json": {
+      "blob": "7b9e7044c090cf3a2df4cfd50a8c797a9d459383",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/recipes/bile_coating.json": {
+      "blob": "a021f5a0ec844bb723949639a26061f15ba3ad95",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/bone_dust_draught.json": {
+      "blob": "2c64c3cfa5df5bf38f5200488ccddd340be8c433",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/briar_binding_oil.json": {
+      "blob": "2346200a13ffa85fac713b8993f9b5dff2f1ba28",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/campfire.json": {
+      "blob": "1f136095107fef31f076dc0aba5c6a31f4cc5d76",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/clay_pot.json": {
+      "blob": "0e2ada1d332e5aebf8d71e5a44cd9e4f386449ab",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/coldbell_extract_deprecated.json": {
+      "blob": "c11b7a6c18c3f7d1ca237204eca3ceca190afd38",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/cook_meat.json": {
+      "blob": "588d3800cce17db30e66a0b6a2d2b1d2e45470ab",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/dry_bitter_herb.json": {
+      "blob": "f3a49f6e89872c290e78475a512140eaea64b71c",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/dry_coldbell.json": {
+      "blob": "0af8d5c7d874939671f7f336bb79c1684e98f533",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/dry_murk_violet.json": {
+      "blob": "74e5ab3e5e56e15e78283487c68b06e732cc48f9",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/dry_pilgrims_woe.json": {
+      "blob": "0eba8a44a9dcc2869cbd5f9c9725a3719d834b3d",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/hungering_oil.json": {
+      "blob": "72626acee5c0ef1cf2a509490701eb84de03af7e",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/marrow_seal.json": {
+      "blob": "d6e5dc81ecb9a4e16fff07dc6e343ecba506febf",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/musk_pellet.json": {
+      "blob": "bea44b94bdf74d845ab1536598149a18573f7232",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/resonant_bone_tincture.json": {
+      "blob": "cd4de4d56d92834b2dbff7adc42a3fff8f85c698",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/resonant_tincture.json": {
+      "blob": "8a24524691293aedb7a1cf1c12458860045a0d50",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/stalker_unguent.json": {
+      "blob": "e8168849a4d0bbed0df46654fe61186b2ac883fe",
+      "match": "exact"
+    },
+    "roguelike/data/recipes/wight_concentrate.json": {
+      "blob": "b9de06fbd26a64238556da30f92c7d1ba18d951f",
+      "match": "exact"
+    },
+    "roguelike/data/resonance_spawns.json": {
+      "blob": "f1a1f0ff6c16f88cd9014213c4e2cee862b9cd92",
+      "match": "exact"
+    },
+    "roguelike/data/scenes.json": {
+      "blob": "728932a371803d5819460da27e7f98c41299d774",
+      "match": "exact"
+    },
+    "roguelike/data/sprites/sprite_map.json": {
+      "blob": "33ad2b051db187ec2607d94c85d365a7b922cf40",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/survival.json": {
+      "blob": "6b2ed0918aee5de5f1b72637cbd804528fee59b7",
+      "match": "exact"
+    },
+    "roguelike/data/terrain.json": {
+      "blob": "b0293a2e28fadba38645a30fa838f0b81b151ec9",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/texts/lab/deep_tongue_alphabet.json": {
+      "blob": "e41078201086333aaf18fa3d26390ec059e11ad7",
+      "match": "exact"
+    },
+    "roguelike/data/texts/lab/lab_inscription_entry.json": {
+      "blob": "01bf60f741a8c928e2b5ff003adedb5ad7abe140",
+      "match": "exact"
+    },
+    "roguelike/data/texts/lab/lab_label_equipment.json": {
+      "blob": "608f47ef1113e95ff2f83c8731f2ef5ad240e729",
+      "match": "exact"
+    },
+    "roguelike/data/texts/lab/lab_label_sarcophagus.json": {
+      "blob": "e2327909d0c13bf0ed37481da021cf8b4bf562f5",
+      "match": "exact"
+    },
+    "roguelike/data/texts/lab/lab_note_final.json": {
+      "blob": "50f4506213d527feb8b7ba507dafac806c8abc1d",
+      "match": "exact"
+    },
+    "roguelike/data/texts/lab/lab_note_primary_a.json": {
+      "blob": "2e4ec42e6de48313c6fc1d456d1821454db02242",
+      "match": "exact"
+    },
+    "roguelike/data/texts/lab/lab_note_primary_b.json": {
+      "blob": "e92e55dd23297e86bc146465f312fa949bff9072",
+      "match": "exact"
+    },
+    "roguelike/data/texts/lab/lab_note_secondary_a.json": {
+      "blob": "0f806c9bd244f7c652107a22aa4ff79b1e856580",
+      "match": "exact"
+    },
+    "roguelike/data/texts/lab/lab_note_secondary_b.json": {
+      "blob": "dabf0b4dce5306a8d3d0aa353480a384e8a66c8e",
+      "match": "exact"
+    },
+    "roguelike/data/texts/lab/lab_stele_inscription.json": {
+      "blob": "d1d22193220483ee009403765564cffae1137421",
+      "match": "exact"
+    },
+    "roguelike/data/texts/text_item_map.json": {
+      "blob": "7e46bac5a3201bd8903f9b7a62f240b02170da1c",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/bells/bell_inscription_a.json": {
+      "blob": "3ff39eaad92cf50b535dc03f97431ee05093756a",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/bells/bell_inscription_b.json": {
+      "blob": "4780b741c7153f2413b8a2412d4b174c9bdf283d",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/bells/bell_inscription_c.json": {
+      "blob": "9a19f26b34b7e9d46594d8e1450069286ed7eb8d",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/bells/bell_inscription_d.json": {
+      "blob": "c157a0a321cf7454f63212c5e275ca88ef7c2ff6",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/bells/bell_inscription_e.json": {
+      "blob": "3fe31b2b9e9e1470c948358b74c95d8b0335ecaf",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/bells/bell_inscription_f.json": {
+      "blob": "bd933fde34f517ee968257ee3f918ac9f0d6c3d0",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/broken_ones/broken_ones_a.json": {
+      "blob": "688929df71dff8a55959975dfa2f4126296579ea",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/broken_ones/broken_ones_b.json": {
+      "blob": "75829498967e457607ccd199dd2ce2f51a1299b4",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/broken_ones/broken_ones_c.json": {
+      "blob": "20d4b7a2d13c095dca27a5e23926b0dc2830211c",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/buildings/text_guard_log.json": {
+      "blob": "b5e2a70d541a635ff740e3d0d22192ccc29494b6",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/buildings/text_market_notice.json": {
+      "blob": "f84035e22aadf387e32660ce0215823f1c8ebfd5",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/buildings/text_residential_letter.json": {
+      "blob": "49940a0502e8c34c481ad1f25d6314f3f255404f",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/buildings/text_scholar_notes.json": {
+      "blob": "4fa101a0709b41657eab51ffbf010299967eab97",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/buildings/text_shrine_inscription.json": {
+      "blob": "0b4b0dfd3609688b404c745ac7ddc8bb1bbfd7f9",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/buildings/text_storehouse_manifest.json": {
+      "blob": "6028cf2723b34137dc45811dceffe633cc20c120",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/graffiti/cellar_scratching_a.json": {
+      "blob": "62ebc3ea0f85feaa32fd5783fb4978f0272e2e84",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/graffiti/graffiti_a.json": {
+      "blob": "2b1b431fed5131fe7073fa14d2f87b83dae21e4a",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/graffiti/graffiti_b.json": {
+      "blob": "c8c355f042b99799d385271c287bdce75248c123",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/graffiti/graffiti_c.json": {
+      "blob": "54306caed9407017bbea3c10a4c1685f38b1b313",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/graffiti/graffiti_d.json": {
+      "blob": "ca6c6bab0b48b40440a050f90b22c9b7a73e47c9",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/graffiti/graffiti_e.json": {
+      "blob": "d83fcea67db30ec43a553f43a73cf45f797345a1",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/graffiti/graffiti_f.json": {
+      "blob": "b00d7a11a59c1f68827114163f4710f83efb9fd8",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/graffiti/graffiti_g.json": {
+      "blob": "4b0a0c745e2f76d147e4002420e6c7487eac5772",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/graffiti/graffiti_h.json": {
+      "blob": "c7952fd457aca7508532888da2771416e1f13775",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/inscriptions/road_marker_a.json": {
+      "blob": "db2aa09d7bdabc7c36b95bd944e9687377d2ddbd",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/inscriptions/stone_inscription_deep_a.json": {
+      "blob": "6761088526b1465cec7942c7be900c271a718488",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/inscriptions/stone_inscription_deep_b.json": {
+      "blob": "680f1606b57cae6b8be6bb6a1530586f60538588",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/inscriptions/stone_inscription_deep_c.json": {
+      "blob": "862d507cd84ac60864d4659ea8788c7ea683ba57",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/inscriptions/stone_inscription_old_a.json": {
+      "blob": "008cb3a2ae82299bece3b1bf44ef18e0052310cd",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/inscriptions/stone_inscription_old_b.json": {
+      "blob": "4a5593749948e1397d0d9075561703f253aa8462",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/inscriptions/stone_inscription_old_c.json": {
+      "blob": "144a43ad7728a03c7300c135733b391fd3e3de5e",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/inscriptions/waystone_prayer_a.json": {
+      "blob": "3002df71a86f6d6ef7af8d4585e4463f35aa5512",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/labels/label_a.json": {
+      "blob": "b0177126b85ce60440958e80de62a2721b4c6169",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/labels/label_b.json": {
+      "blob": "88b53d107d9b9147ad7515234d833a4e6915654b",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/labels/label_c.json": {
+      "blob": "d3900bc68bd07220f71bb7525e7c7715a02c141f",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/labels/label_d.json": {
+      "blob": "65c308bc4c6bd1fba402f3396675c1ae032c37e9",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/labels/label_e.json": {
+      "blob": "8e60b44982354cd60aec919103a386df3d6150f5",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/letters/letter_a.json": {
+      "blob": "fd6d91714816db89b60be641e45f33253169dbff",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/letters/letter_b.json": {
+      "blob": "536092f5d8da3d978c9548d16264689d416bf0e5",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/letters/letter_c.json": {
+      "blob": "fc11ac5663d872b4db11158aaa1497bdd94d8b13",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/letters/letter_d.json": {
+      "blob": "dd5192fae9489dfc88a1ea1684969c64f61fc00b",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/letters/letter_e.json": {
+      "blob": "13ceac0b131ea79313c1fe945833936c43012365",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/logs/bellwarden_log_a.json": {
+      "blob": "6b3a64a8c69051d5c90e6dc486830dc258ddc26b",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/notes/apothecary_notes_a.json": {
+      "blob": "ec1eef13019a4c1986b6d729c44b7508086f43ea",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/notes/herbalist_scrap_a.json": {
+      "blob": "89b17a6ff78636f46b9118171c8509aa9fce1dde",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/official/door_notice_a.json": {
+      "blob": "0cc2141ef8b56daf806002702c7b279c6af64793",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/official/official_a.json": {
+      "blob": "a5ea0066b11b2ff52ad9a4b2d4443129b2b114ab",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/official/official_b.json": {
+      "blob": "e34857775de226d2180a32173c14ba4ffff86391",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/official/official_c.json": {
+      "blob": "ad47e1c3062512d69aa4db7e136cd41f6e397225",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/official/official_d.json": {
+      "blob": "d7e35185c0b984fc203b4eb084fd20f61a1019cf",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/official/official_e.json": {
+      "blob": "c190bb0625f8941ed8cd096479479130f3ad8800",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/records/family_record_a.json": {
+      "blob": "79034c54701836169eab748655db41a4179ef110",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/sermons/sermon_a.json": {
+      "blob": "f7b4f713a5d2b4fd65cac9295c3b28930c25ad3e",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/sermons/sermon_b.json": {
+      "blob": "8facf399865e5e9a45d47bb71e26ba40483a5998",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/sermons/sermon_c.json": {
+      "blob": "c912a8d7fb5db5f64909f0e673e2a389c9032e53",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/sermons/sermon_d.json": {
+      "blob": "3584562195ad6881b66cf74e4c73f8ed06e35a60",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/sermons/sermon_e.json": {
+      "blob": "fd05a4e761abff7fe27a076491bcbb7f838023b1",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/sermons/sermon_f.json": {
+      "blob": "6e099679d784066638dd4be6951e7e680bd2548a",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/sermons/sermon_g.json": {
+      "blob": "820fc2ad15115a581254ea2fc5b61263ae6e0afc",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/sermons/sermon_h.json": {
+      "blob": "1aba20b379a0a959b58a608df92db12fb0478a7c",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_ash_a.json": {
+      "blob": "09fba70b79c8e0ade6d331bfa50a6b98fb7c7e20",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_ash_b.json": {
+      "blob": "4598a6254114fbeacd0c8bc7464c4af239f085f5",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_drowned_a.json": {
+      "blob": "e0039fb4d246e19c70eb4c0c0767bdeddd9eac0d",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_drowned_b.json": {
+      "blob": "ec870def0703f3d07e07aa1f03c3d2969e7188c3",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_fallback_a.json": {
+      "blob": "f2c1f7030f0043fc905cd588ab4e267760d8d97b",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_fallback_b.json": {
+      "blob": "74cd4052e38f9b964a8117519a519ef93872e143",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_forest_a.json": {
+      "blob": "c754521c2ef28160ee2d378009fe02eda21ee65c",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_forest_b.json": {
+      "blob": "59208e9fe482ee246c94746c5dfb13138f7b7249",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_heath_a.json": {
+      "blob": "4534a13be3c6eb284e5b2ad90579047a512d8d3f",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_heath_b.json": {
+      "blob": "8931643ccab95a00a8050299f0dc9ea17b777226",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_mountain_a.json": {
+      "blob": "88d6d69a18a1be4ab058c01cfb5c8a9189b1382e",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_mountain_b.json": {
+      "blob": "e26d95b2b74b8d0d0c4e2b4f9c5bfd8baa4ea6a7",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_plains_a.json": {
+      "blob": "998a8e31fe67b7a63a30d5c756806691697ec6b9",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_plains_b.json": {
+      "blob": "86bb406dbe57305e9230dfb1bc80846778d0f26e",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_swamp_a.json": {
+      "blob": "e7925b3272502b0678264999314fa82828c4acef",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_swamp_b.json": {
+      "blob": "1931627bf26fb2030da85755c9a70cb04f80765c",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_town_a.json": {
+      "blob": "f9e0e2c1ff210216b50dab9450c71a7cc42ea64f",
+      "match": "exact"
+    },
+    "roguelike/data/texts/world/waystones/waystone_town_b.json": {
+      "blob": "1423d8c983baa1a8ee08a04d7ad686abf7913741",
+      "match": "exact"
+    },
+    "roguelike/data/tiles.json": {
+      "blob": "c7211875665004bb3095f26425a3ca3155c56e86",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/weather.json": {
+      "blob": "cf1115b91f5f898029e0c283da71df5558f4e20a",
+      "match": "exact"
+    },
+    "roguelike/data/wfc/town_block.json": {
+      "blob": "5f64f212f1e1fbcf123f19a51d95fc27871b2a64",
+      "match": "exact"
+    },
+    "roguelike/data/wfc/town_outskirts.json": {
+      "blob": "107152b909b18c83ccb3c3b7c09350af0ef6c36c",
+      "match": "exact"
+    },
+    "roguelike/data/wfc/town_plaza.json": {
+      "blob": "0825d9dc34cc427058e095b36bc879d789070dbe",
+      "match": "exact"
+    },
+    "roguelike/data/zones/dungeon/barrow.json": {
+      "blob": "cdd27df667c4685665aee3c6dcbbbc9940eebca4",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/dungeon/dungeon.json": {
+      "blob": "af88459a0fec50d3306ee56e370de3fb2ccca41a",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/dungeon/vault.json": {
+      "blob": "952a8c66e1b09ca9814f1b676d4cb35b5001d528",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/dungeon/warped_place.json": {
+      "blob": "260f12d35c38ccbbfb195839cd4280e9bbbe4f23",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/settlement/dead_ground.json": {
+      "blob": "fcb0d77b8c1cd555b033647044dc024dfdf7d1cb",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/settlement/gate_ward.json": {
+      "blob": "1dfd099a09c162a83b885e54d108c025039e4b95",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/settlement/hearth.json": {
+      "blob": "61cfdb04b58a105983ae11fb908fc33a2506ddd8",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/settlement/high_seat.json": {
+      "blob": "f62d1c5a75e47ed8a376181cb71521b5e71ec077",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/settlement/market.json": {
+      "blob": "52bd153c0c8d1993426534cab2f3ff63586a7645",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/settlement/pale_quarter.json": {
+      "blob": "b229e7ceba58412aaf85fa0440d1ffad55a4c9cf",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/settlement/sanctum.json": {
+      "blob": "19e18282424b4bed7c7d9cf53927932f11802009",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/settlement/undercroft.json": {
+      "blob": "8ab817f90a5fad40702c9e32e60b3e14d2e799a6",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/wilderness/briarwood.json": {
+      "blob": "4ec5d6472ed442a214c4e59f26e53b293e298bb3",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/wilderness/deepwood.json": {
+      "blob": "f4067956b0139339a6a24c34b6d528e7a58ef47e",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/wilderness/heath.json": {
+      "blob": "f8688b6abdece711aef3fd610f726e5bad36f6e0",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/wilderness/highstone.json": {
+      "blob": "b51e319fccfafd54320c51343007896365fdc51d",
+      "match": "CRLF-only"
+    },
+    "roguelike/data/zones/wilderness/mere.json": {
+      "blob": "e56c82f6823250b03eba96a9e896cf2bf2bacb5b",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/COUNTRY_NETWORK.md": {
+      "blob": "4da69dea8e984095474a1df7ec23e50d5a04c568",
+      "match": "exact"
+    },
+    "roguelike/docs/STRUCTURE_AUTHORING.md": {
+      "blob": "6bbccedda78c26f7be932fc3ac4a41b942b43af1",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/author_cottage_a.json": {
+      "blob": "662d232846871da8fd227a630e33581c43f1cccc",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/author_cottage_access.json": {
+      "blob": "0b3e117c35390eb9ea7c162e742dc8f9f2c7299e",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/author_frontage_a.json": {
+      "blob": "e89db54c63315137bb1a09e2a3f2b509b5757563",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/author_landmark_a.json": {
+      "blob": "446281212db0313c254530bbb7589ad5a09026b2",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/author_scene_weighted.json": {
+      "blob": "526da31a52c1543113f8b7c730cb02f9cdd37da5",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g10_wilderness_profiles.json": {
+      "blob": "ba61bba4a8c718af4bd01e520e136c5fc0d599f0",
+      "match": "exact"
+    },
+    "roguelike/docs/examples/g5_landmark.json": {
+      "blob": "f911afd9fb3770ee9a5e18ad352083e6f97d01b4",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g5_selection_example.json": {
+      "blob": "9842c1aa11f122dfcc1afcdfc2b7fda7326b0309",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g5_service_house.json": {
+      "blob": "9d1ef8f0f058cfdb3170541c8a7cb4e454dfcac6",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g5_workshop.json": {
+      "blob": "eb72f5660067392f57e9f67d7ea9c7ad05323cb1",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g6_poi_example.json": {
+      "blob": "ff3ee5795d02498e0544bf0ce66d79f48811dffa",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g6_wayhouse.json": {
+      "blob": "54b0ba74f641e43739c8c91defb0fd8b2addfd0b",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g7_poi_example.json": {
+      "blob": "129221bce02d8dfe99c36e8da181fd9f13ebd40b",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g7_travellers_court.json": {
+      "blob": "76d620930604e6c0dce1540c3c0b52bf89239068",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g7_wayhouse.json": {
+      "blob": "104647e931f631be1cebf7158b614056f97c9f8c",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g8_landmark_preview_selection.json": {
+      "blob": "b8445555fd3c2cccfa80e67b2c88f5f746e50cf4",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g8_layouts.json": {
+      "blob": "3d799c5fca30ffc9c6da82677e747ef7441c7d61",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g8_planning.json": {
+      "blob": "d2c59c43753b1e1fd8c88e198af09779924097a3",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g8_selection.json": {
+      "blob": "009717932a6a1b315527da84a9b71a38aaa1e844",
+      "match": "CRLF-only"
+    },
+    "roguelike/docs/examples/g9_country_network.json": {
+      "blob": "77966cf737908fb916b08ccf49d4e99d160330b1",
+      "match": "exact"
+    },
+    "roguelike/docs/examples/validate_building.py": {
+      "blob": "0501791cba6e9a8409997cd76bbb5079dd7cf67b",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/__init__.py": {
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "match": "exact"
+    },
+    "roguelike/engine/ai_system.py": {
+      "blob": "0b66f013bb8e9cf9bc4658f6dbd2b1efe33349cb",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/checkpoints.py": {
+      "blob": "378e12f85f5e67fea2922dfc198ed72aed72d0f7",
+      "match": "exact"
+    },
+    "roguelike/engine/combat.py": {
+      "blob": "8f5b2f457971fbfb1f1d8a69cc8b83b9f0bf5b7f",
+      "match": "exact"
+    },
+    "roguelike/engine/crafting.py": {
+      "blob": "5b7efcabb7271dd0ab81a2f9ddd876868196e9de",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/creature_abilities.py": {
+      "blob": "d7c9ce67871ec495ccf730c6dc606e36855cbe13",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/creature_factory.py": {
+      "blob": "6d8a580d96a87877d608366430887363546646d0",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/data_loader.py": {
+      "blob": "5dfbfaf39aaaca1de8abb95aff168e9ad82efe8b",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/debug.py": {
+      "blob": "a8ff2223509ce58c74d568db0889fad079234392",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/designer.py": {
+      "blob": "48cc13760ccfa74ecde66a6278a78a01ecdf5563",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/discharge.py": {
+      "blob": "41919ab03fdd6b105833d7c1f7cf1d0c1f541edc",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/display_config.py": {
+      "blob": "d1d08997b0bae7b9da018174c7d39e03164b963a",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/effect_lifecycle.py": {
+      "blob": "bbb5f2ffd180cdf6e862e4d16486152dbf020fac",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/engine.py": {
+      "blob": "d07aef8a995dbbeb0b2a4c4c7ccf23933b13c104",
+      "match": "exact"
+    },
+    "roguelike/engine/health_screen.py": {
+      "blob": "1c4eafb09d15b501aa7473633d060d5a38fcccd2",
+      "match": "exact"
+    },
+    "roguelike/engine/hooks.py": {
+      "blob": "44159f7d120e8de83196fa4f35aa6b596d0a31b2",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/interaction_cursor.py": {
+      "blob": "c50f9d66bb09eaeea80828fa3094ce8aabb01413",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/inventory_screen.py": {
+      "blob": "9bd728c24f62b044bcb21b1816ff16d1131feb41",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/item_factory.py": {
+      "blob": "8ba64675c25089aa5ba3a4ab77608aa09ab7c44f",
+      "match": "exact"
+    },
+    "roguelike/engine/item_system.py": {
+      "blob": "1d1f90d0196ea867ebfcd8c32029a7ac5cb409fc",
+      "match": "exact"
+    },
+    "roguelike/engine/item_transfers.py": {
+      "blob": "57ffb761ea0244d9e4ee97cca851338d2ba51061",
+      "match": "exact"
+    },
+    "roguelike/engine/language_system.py": {
+      "blob": "dff230b2844aa61f29bf043b83004935abcafbfd",
+      "match": "exact"
+    },
+    "roguelike/engine/look_mode.py": {
+      "blob": "da7de37f6e33c8875fa55bcfc09a8d05ae2bbe4e",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/loot_roller.py": {
+      "blob": "92292849d2fac639732410964e83eba0144133a0",
+      "match": "exact"
+    },
+    "roguelike/engine/loot_table.py": {
+      "blob": "90ffba37d8a0d93edd4ca8d22dbb0e89ae9abbdf",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/message_log.py": {
+      "blob": "e626e15060647f74cf52b165260761c1a1e26eab",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/movesets.py": {
+      "blob": "40c9477d8d438597c163304257bb806c111e2abd",
+      "match": "exact"
+    },
+    "roguelike/engine/palette.py": {
+      "blob": "ecb02837be50b5f969ebc32af0b54faaaecd08a2",
+      "match": "exact"
+    },
+    "roguelike/engine/perk_handlers.py": {
+      "blob": "e9b85acfe1ce563a832715f179d295d377e7f6aa",
+      "match": "exact"
+    },
+    "roguelike/engine/reality_bubble.py": {
+      "blob": "a147de005e14e6ce1d5cb1b066963c8b9a0347b7",
+      "match": "exact"
+    },
+    "roguelike/engine/resonance_system.py": {
+      "blob": "88af67fbb087886fd42b19f902d5f9fb5a4dd909",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/save_components.py": {
+      "blob": "da478ffb7579a73a4cb34d46272d5ea5a4d33d2f",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/save_manager.py": {
+      "blob": "c64c6833126e7c1b1384fd5ba3c152a070e6ed0b",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/scene_generation.py": {
+      "blob": "c1174975e0a4bcdd46813bc4364ef9d0fc103c10",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/starting_location.py": {
+      "blob": "0b8b444ac63e45dfe92139fb71e89f3fc9dd303d",
+      "match": "exact"
+    },
+    "roguelike/engine/structure_placer.py": {
+      "blob": "dcc131b7adda4e3b5f6bb2a75bdd4af63cd369c6",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/text_reader.py": {
+      "blob": "7b57ea1547f267a5ebc6b25d9f74bc3ccea13a14",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/turn_queue.py": {
+      "blob": "9e9e27e1fd3e0070934a7c99b346315656b915c7",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/ui.py": {
+      "blob": "0301bd30c1fcdc1e2c6c9a3ae80ee85d3c779f93",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/vine_system.py": {
+      "blob": "b0b21c90296e8b2f72cf061b84ae2925e35cecdd",
+      "match": "exact"
+    },
+    "roguelike/engine/visual_events.py": {
+      "blob": "fea3231924f1d65a392d4668cdfca3b0436026d5",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/weather.py": {
+      "blob": "c26ef77df6600f124e508e99d96e5ffd17b22553",
+      "match": "CRLF-only"
+    },
+    "roguelike/engine/world_time.py": {
+      "blob": "a306019b323fa557aa8aa2b6fa0a237925a476bb",
+      "match": "CRLF-only"
+    },
+    "roguelike/entities/__init__.py": {
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "match": "exact"
+    },
+    "roguelike/entities/actor.py": {
+      "blob": "af82c491ea87cb3a6eafed6b8301c22a13e0c68f",
+      "match": "CRLF-only"
+    },
+    "roguelike/entities/entity.py": {
+      "blob": "8810316f71288039ded47f49b179db6ddf956fff",
+      "match": "CRLF-only"
+    },
+    "roguelike/entities/item.py": {
+      "blob": "ab19baa09eeb50944fffbf5d90912a0fe07d15a7",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/__init__.py": {
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "match": "exact"
+    },
+    "roguelike/generation/access.py": {
+      "blob": "633a6f16abe29dd5887b14411c8ab29d6e407c6f",
+      "match": "exact"
+    },
+    "roguelike/generation/compound_integrity.py": {
+      "blob": "e6bfd310b24d7e12645312aa7cb87c8a36d68212",
+      "match": "exact"
+    },
+    "roguelike/generation/compound_preview.py": {
+      "blob": "8bd41c338cd7e7f389361906a12b8b36a10cd2fc",
+      "match": "exact"
+    },
+    "roguelike/generation/compounds.py": {
+      "blob": "4135a678f12eb95311ced16e2a581d177bfba99d",
+      "match": "exact"
+    },
+    "roguelike/generation/context.py": {
+      "blob": "3112fcdb740626ec117bddd12602ce8358e49042",
+      "match": "exact"
+    },
+    "roguelike/generation/country_network.py": {
+      "blob": "1dcf4ce0acfcd30f65113f4588992011cbcd4f77",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/decor_utils.py": {
+      "blob": "ef34b518df7b70446dbea83c0c3c172e094696e8",
+      "match": "exact"
+    },
+    "roguelike/generation/entrance_gen.py": {
+      "blob": "e3651d2c79b519b0d161e4c86d52c1dcb87cbc97",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/exterior_access.py": {
+      "blob": "80304d8caebc58009b4733252d07955fa44dc38a",
+      "match": "exact"
+    },
+    "roguelike/generation/feature_carving.py": {
+      "blob": "ac80365398b61ae4d7d19b70cd2f68128afa4f17",
+      "match": "exact"
+    },
+    "roguelike/generation/floor_object_utils.py": {
+      "blob": "db34aa8d7800c3eeb9d9a0320cc54d41440d2f04",
+      "match": "exact"
+    },
+    "roguelike/generation/layout_stamper.py": {
+      "blob": "488947f808995f26444de30d8027a2b38b67750b",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/local_gen.py": {
+      "blob": "2f4249838ee9c8e24a0aca665d77accf04f0e65a",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/network_metrics.py": {
+      "blob": "38c1ad8b4956399f8d2ed6db4bcbc413ee504d35",
+      "match": "exact"
+    },
+    "roguelike/generation/network_preview.py": {
+      "blob": "6059a607708c4d9ab5a521e35ee43346b6426576",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/parent_selection.py": {
+      "blob": "0cd0ee975bd755dd60a3f324fc3b92dc1e5c4d98",
+      "match": "exact"
+    },
+    "roguelike/generation/placement.py": {
+      "blob": "6d544420b633beba42bee0d722033a4d9cdd988a",
+      "match": "exact"
+    },
+    "roguelike/generation/plan_integrity.py": {
+      "blob": "53fb2958721481b8f1a94fc8f5784bb1b43b1ee4",
+      "match": "exact"
+    },
+    "roguelike/generation/plan_preview.py": {
+      "blob": "d2d67a7527ab9d627834ed1aabfefb7b3f9bb5f9",
+      "match": "exact"
+    },
+    "roguelike/generation/planned_dressing.py": {
+      "blob": "2e2ac1eca312908526729c0cfd323f539915a39a",
+      "match": "exact"
+    },
+    "roguelike/generation/planned_scene.py": {
+      "blob": "ca777ddbd6e781dd748af60a9318e14ab2506948",
+      "match": "exact"
+    },
+    "roguelike/generation/poi_preview.py": {
+      "blob": "2068586eed413bd429d5f4601a7d440b27f97c3b",
+      "match": "exact"
+    },
+    "roguelike/generation/poi_selection.py": {
+      "blob": "a0b3573c1d191fa795577ffa41f653ac59512569",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/ports.py": {
+      "blob": "fa59af3136bd04591159683c5e55ec38fa02fd09",
+      "match": "exact"
+    },
+    "roguelike/generation/region_gen.py": {
+      "blob": "28e0cf68f735e7ae4634d7ca03743969fb5427e5",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/road_network.py": {
+      "blob": "ac941bf37d3a8252c18eea1334b86bdca019f84b",
+      "match": "exact"
+    },
+    "roguelike/generation/scene_adapters.py": {
+      "blob": "f0069710a24c2a62347329d5b9184160ecb23ea4",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/settlement_context.py": {
+      "blob": "3c3743e8a0be0d01b0733fc486b8341b857d772f",
+      "match": "exact"
+    },
+    "roguelike/generation/settlement_layout.py": {
+      "blob": "255cca6ecb3b5015294fea5aa9522c037883f8c2",
+      "match": "exact"
+    },
+    "roguelike/generation/settlement_preview.py": {
+      "blob": "081b4dc3e42dd3ea1c7be12c7ceb6d34f8351770",
+      "match": "exact"
+    },
+    "roguelike/generation/settlement_selection.py": {
+      "blob": "728f1bd713a8ec3b52f4840df705591e504c649e",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/spawn_specs.py": {
+      "blob": "fd340e365d78b6db5556f7c5e55420e4dabfe34c",
+      "match": "exact"
+    },
+    "roguelike/generation/structure_contract.py": {
+      "blob": "1921466844739489f9b080253d3336a0d67ad5aa",
+      "match": "exact"
+    },
+    "roguelike/generation/structure_preview.py": {
+      "blob": "0d1f23634b0f693bf3f1285eff370e958fdf3948",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/town_gen.py": {
+      "blob": "cecb167c7c037cea022125783d26329700e7036d",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/wfc.py": {
+      "blob": "9de93b90f6ee03ccddc0c5b173813f056dd82dbf",
+      "match": "exact"
+    },
+    "roguelike/generation/wilderness.py": {
+      "blob": "ea0df6fb4d5053162595b90a2e2058be55a0b8ac",
+      "match": "exact"
+    },
+    "roguelike/generation/world_gen.py": {
+      "blob": "330d923201f42560f22690a908c9621edcb6ae84",
+      "match": "CRLF-only"
+    },
+    "roguelike/generation/world_plan.py": {
+      "blob": "730091dea2097f5d8aeed5aa910622e7ec45db4d",
+      "match": "CRLF-only"
+    },
+    "roguelike/main.py": {
+      "blob": "d1013b09b2b1009b92dbd3d32d499312be6ec535",
+      "match": "CRLF-only"
+    },
+    "roguelike/rendering/__init__.py": {
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "match": "exact"
+    },
+    "roguelike/rendering/biome_icons.py": {
+      "blob": "45488723d14445e1acadaeef770be94cbc54567d",
+      "match": "CRLF-only"
+    },
+    "roguelike/rendering/callouts.py": {
+      "blob": "08a75041c430053b6742628402f8f2b3c32491f9",
+      "match": "exact"
+    },
+    "roguelike/rendering/coords.py": {
+      "blob": "dca7196e4f2eb77d65aa62e7bcaaef9dc582da35",
+      "match": "exact"
+    },
+    "roguelike/rendering/craft_screen.py": {
+      "blob": "3c132100092721d2cbfdb4551b068c00c2dedc3d",
+      "match": "exact"
+    },
+    "roguelike/rendering/decor.py": {
+      "blob": "39bc53b2a1a990f1be89cce6bd5e51a9b9092f4a",
+      "match": "CRLF-only"
+    },
+    "roguelike/rendering/glyph_gen.py": {
+      "blob": "6b477e29c467025a230f09738db9fd6f9b944d03",
+      "match": "exact"
+    },
+    "roguelike/rendering/lexicon_screen.py": {
+      "blob": "ab2116e17c06dcd1b90ab8847c55f21fe92f2877",
+      "match": "exact"
+    },
+    "roguelike/rendering/particles.py": {
+      "blob": "5ef976101b4f9db130b097690f752759da53cdef",
+      "match": "CRLF-only"
+    },
+    "roguelike/rendering/perk_screen.py": {
+      "blob": "c62ea952b66b6e63caeb35d1c7058e7e475973ab",
+      "match": "CRLF-only"
+    },
+    "roguelike/rendering/renderer.py": {
+      "blob": "f07d8820ee43fbb5b6ac782a6cea2da1b91620f0",
+      "match": "CRLF-only"
+    },
+    "roguelike/rendering/sprite_registry.py": {
+      "blob": "d43ec2603142f29461d320483305168bbc564049",
+      "match": "CRLF-only"
+    },
+    "roguelike/rendering/tile_registry.py": {
+      "blob": "d1f3371566101d838a3a8d9521129a79576be039",
+      "match": "CRLF-only"
+    },
+    "roguelike/rendering/ui_registry.py": {
+      "blob": "a16367b35358204605f9e1fb4104191862363875",
+      "match": "CRLF-only"
+    },
+    "roguelike/tools/extract_phonemes.py": {
+      "blob": "e03d483a1eb895106a938db9a39b8e02d556bcf5",
+      "match": "exact"
+    },
+    "roguelike/world/__init__.py": {
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "match": "exact"
+    },
+    "roguelike/world/local_map.py": {
+      "blob": "2a45fa7e6f0c12fea67532e8cd54dcc865f15346",
+      "match": "CRLF-only"
+    },
+    "roguelike/world/name_gen.py": {
+      "blob": "75880dd20794aae64f5604352786697e9f7eb5f8",
+      "match": "exact"
+    },
+    "roguelike/world/region.py": {
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "match": "exact"
+    },
+    "roguelike/world/world_map.py": {
+      "blob": "2d3dfa5da485c9f8557c3b532c215cd2f386c952",
+      "match": "CRLF-only"
+    },
+    "roguelike/world/world_myth.py": {
+      "blob": "ae51b5eb9466d70a62eaa6c8a35eb7d6f6fa5e02",
+      "match": "exact"
+    }
+  },
+  "capture_was_committed_before_runtime_changes": true,
+  "protected_paths": [
+    "AGENTS.md",
+    "Resonance_Wiki_Maintenance",
+    "roguelike/generation",
+    "roguelike/data/layouts",
+    "roguelike/data/buildings",
+    "roguelike/data/loot",
+    "roguelike/data/loot_pools",
+    "roguelike/engine/save_components.py"
+  ],
+  "changes_in_protected_paths": [],
+  "historical_receipts_changed": [],
+  "data_field_deltas": {
+    "roguelike/data/items/consumables/musk_pellet.json": [
+      "description"
+    ],
+    "roguelike/data/items/weapons/revelation_lens.json": [
+      "damage_bonus",
+      "damage_dice"
+    ],
+    "roguelike/data/recipes/bile_coating.json": [
+      "requires_ambient",
+      "tools"
+    ],
+    "roguelike/data/recipes/bone_dust_draught.json": [
+      "requires_ambient",
+      "tools"
+    ],
+    "roguelike/data/recipes/briar_binding_oil.json": [
+      "requires_ambient",
+      "tools"
+    ],
+    "roguelike/data/recipes/campfire.json": [
+      "components",
+      "result_message",
+      "tools"
+    ],
+    "roguelike/data/recipes/coldbell_extract_deprecated.json": [
+      "requires_ambient",
+      "tools"
+    ],
+    "roguelike/data/recipes/hungering_oil.json": [
+      "requires_ambient",
+      "tools"
+    ],
+    "roguelike/data/recipes/musk_pellet.json": [
+      "description"
+    ],
+    "roguelike/data/recipes/resonant_bone_tincture.json": [
+      "requires_ambient",
+      "tools"
+    ],
+    "roguelike/data/recipes/resonant_tincture.json": [
+      "requires_ambient",
+      "tools"
+    ],
+    "roguelike/data/recipes/stalker_unguent.json": [
+      "requires_ambient",
+      "tools"
+    ],
+    "roguelike/data/recipes/wight_concentrate.json": [
+      "requires_ambient",
+      "tools"
+    ]
+  },
+  "saved_item_schema_unchanged": true,
+  "satchel_definitions_byte_identical": true,
+  "generation_and_saved_item_schema_unchanged": true,
+  "correction": "Missing/null equipment handlers resolve only at ordinary use. No eager unpickle/load migration and no satchel definition-hash change. All ten previously failing historical/macro checks pass unchanged in the targeted correction run."
+}

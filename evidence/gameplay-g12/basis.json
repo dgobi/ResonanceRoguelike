@@ -1,0 +1,13 @@
+{
+  "archive_sha256": "5e87103f859af1687dcfcc6937c2a4ba824b7f8c821bb53608288c8341e40176",
+  "manifest_members_verified": 55,
+  "reviewed_head": "069ca40dac7bdbf5a7a40b205a1358c8da919e21",
+  "initial_status": "clean",
+  "branch": "main",
+  "origin": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "remote_main_at_start": "069ca40dac7bdbf5a7a40b205a1358c8da919e21",
+  "starting_checkpoint": "checkpoint/gameplay-g12-start-20261025-a",
+  "commission": "Owner requested review and full end-to-end execution of CODEX_G12_EXPEDITION_REWARDS.md. Companion analysis/reference proposals remain context; only the bounded G12 commission is implemented. Publication is explicitly included by the invoked brief.",
+  "genuine_pre_edit_capture_commit": "ff43119",
+  "preflight": "46 focused changed-contract tests pass; event journey preflight passes, including native source/preparation and paired retreat. Final gates will certify frozen inputs separately."
+}
