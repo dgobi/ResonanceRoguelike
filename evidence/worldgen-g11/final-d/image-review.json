@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "images": [
+    {
+      "path": "evidence/worldgen-g11/final-d/journey/01-approach-normal-fov.png",
+      "sha256": "d26b11b960aa2832ffcb0cd9facddec60c95efd504595f5316d767e7cd7d1690",
+      "visibility": "normal live FOV plus normal passive memory"
+    },
+    {
+      "path": "evidence/worldgen-g11/final-d/journey/02-entrance-normal-fov.png",
+      "sha256": "9ad090d7cc8aea610366ce71b11f29d4ba3bcb0bdf19bc25f897a0fe523e327f",
+      "visibility": "normal live FOV plus normal passive memory"
+    },
+    {
+      "path": "evidence/worldgen-g11/final-d/journey/03-return-normal-fov.png",
+      "sha256": "2d6d2e97d77cc988473a09846377cba891db6697556433181fa6ee9f5d8fbe71",
+      "visibility": "normal live FOV plus normal passive memory"
+    },
+    {
+      "path": "evidence/worldgen-g11/final-d/journey/04-exit-normal-fov.png",
+      "sha256": "7b9842deb3d66283ff9b4d6dbc614440825b5cb8ed442cfa4d77066f797b91bc",
+      "visibility": "normal live FOV plus normal passive memory"
+    },
+    {
+      "path": "evidence/worldgen-g11/final-d/journey/entrance-revealed.png",
+      "sha256": "6f4438fc4f551ced65cd7fc45de2b1eb182e3e95b182bbecd0ac8e479e4f833f",
+      "visibility": "revealed comparison"
+    }
+  ],
+  "judgment": "Production views show the relocated authored cave entrance within retained dense wet woodland; normal-FOV entry/return and the reciprocal neighbor exit are visible. The revealed comparison is separately labeled. Neighbor setup computes ordinary center FOV before positioning at its edge, so daylight passive memory is retained there. Access is established by handler receipts, not inferred solely from images."
+}

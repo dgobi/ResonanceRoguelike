@@ -1,0 +1,2284 @@
+{
+  "passed": true,
+  "seed": 20261023,
+  "inputs": [
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          14,
+          0
+        ],
+        "turn": 483,
+        "hp": 60,
+        "hunger": 0.003,
+        "thirst": 0.0038750000000000004,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 3,
+            "y": 18,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          15,
+          1
+        ],
+        "turn": 485,
+        "hp": 60,
+        "hunger": 0.005,
+        "thirst": 0.006125000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 3,
+            "y": 18,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          15,
+          1
+        ],
+        "turn": 485,
+        "hp": 60,
+        "hunger": 0.005,
+        "thirst": 0.006125000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 3,
+            "y": 18,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          16,
+          2
+        ],
+        "turn": 487,
+        "hp": 60,
+        "hunger": 0.007,
+        "thirst": 0.008375,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 19,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          16,
+          2
+        ],
+        "turn": 487,
+        "hp": 60,
+        "hunger": 0.007,
+        "thirst": 0.008375,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 19,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          17,
+          3
+        ],
+        "turn": 489,
+        "hp": 60,
+        "hunger": 0.009000000000000001,
+        "thirst": 0.010625000000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 19,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          17,
+          3
+        ],
+        "turn": 489,
+        "hp": 60,
+        "hunger": 0.009000000000000001,
+        "thirst": 0.010625000000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 19,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          18,
+          4
+        ],
+        "turn": 491,
+        "hp": 60,
+        "hunger": 0.011000000000000003,
+        "thirst": 0.012875000000000004,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 21,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          18,
+          4
+        ],
+        "turn": 491,
+        "hp": 60,
+        "hunger": 0.011000000000000003,
+        "thirst": 0.012875000000000004,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 21,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          19,
+          5
+        ],
+        "turn": 493,
+        "hp": 60,
+        "hunger": 0.013000000000000005,
+        "thirst": 0.015125000000000006,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 21,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          19,
+          5
+        ],
+        "turn": 493,
+        "hp": 60,
+        "hunger": 0.013000000000000005,
+        "thirst": 0.015125000000000006,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 21,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          20,
+          6
+        ],
+        "turn": 495,
+        "hp": 60,
+        "hunger": 0.015000000000000006,
+        "thirst": 0.01737500000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          20,
+          6
+        ],
+        "turn": 495,
+        "hp": 60,
+        "hunger": 0.015000000000000006,
+        "thirst": 0.01737500000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          21,
+          7
+        ],
+        "turn": 497,
+        "hp": 60,
+        "hunger": 0.017000000000000008,
+        "thirst": 0.01962500000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 22,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          21,
+          7
+        ],
+        "turn": 497,
+        "hp": 60,
+        "hunger": 0.017000000000000008,
+        "thirst": 0.01962500000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 22,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          22,
+          8
+        ],
+        "turn": 499,
+        "hp": 60,
+        "hunger": 0.01900000000000001,
+        "thirst": 0.021875000000000012,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          22,
+          8
+        ],
+        "turn": 499,
+        "hp": 60,
+        "hunger": 0.01900000000000001,
+        "thirst": 0.021875000000000012,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          23,
+          9
+        ],
+        "turn": 501,
+        "hp": 60,
+        "hunger": 0.02100000000000001,
+        "thirst": 0.024125000000000014,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 117,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          23,
+          9
+        ],
+        "turn": 501,
+        "hp": 60,
+        "hunger": 0.02100000000000001,
+        "thirst": 0.024125000000000014,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          24,
+          8
+        ],
+        "turn": 502,
+        "hp": 60,
+        "hunger": 0.022000000000000013,
+        "thirst": 0.025250000000000015,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 117,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          24,
+          8
+        ],
+        "turn": 502,
+        "hp": 60,
+        "hunger": 0.022000000000000013,
+        "thirst": 0.025250000000000015,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          25,
+          7
+        ],
+        "turn": 503,
+        "hp": 60,
+        "hunger": 0.023000000000000013,
+        "thirst": 0.026375000000000016,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 24,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 117,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          25,
+          7
+        ],
+        "turn": 503,
+        "hp": 60,
+        "hunger": 0.023000000000000013,
+        "thirst": 0.026375000000000016,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 24,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          26,
+          6
+        ],
+        "turn": 504,
+        "hp": 60,
+        "hunger": 0.024000000000000014,
+        "thirst": 0.027500000000000017,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 24,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 117,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          26,
+          6
+        ],
+        "turn": 504,
+        "hp": 60,
+        "hunger": 0.024000000000000014,
+        "thirst": 0.027500000000000017,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 24,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          27,
+          5
+        ],
+        "turn": 505,
+        "hp": 60,
+        "hunger": 0.025000000000000015,
+        "thirst": 0.02862500000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 117,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          27,
+          5
+        ],
+        "turn": 505,
+        "hp": 60,
+        "hunger": 0.025000000000000015,
+        "thirst": 0.02862500000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 23,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          28,
+          4
+        ],
+        "turn": 507,
+        "hp": 60,
+        "hunger": 0.027000000000000017,
+        "thirst": 0.03087500000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 25,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 110,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          28,
+          4
+        ],
+        "turn": 507,
+        "hp": 60,
+        "hunger": 0.027000000000000017,
+        "thirst": 0.03087500000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 25,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          29,
+          5
+        ],
+        "turn": 508,
+        "hp": 60,
+        "hunger": 0.028000000000000018,
+        "thirst": 0.03200000000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 26,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          29,
+          5
+        ],
+        "turn": 509,
+        "hp": 60,
+        "hunger": 0.02900000000000002,
+        "thirst": 0.0011250000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 26,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          28,
+          4
+        ],
+        "turn": 510,
+        "hp": 60,
+        "hunger": 0.03000000000000002,
+        "thirst": 0.0022500000000000003,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 98,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          28,
+          4
+        ],
+        "turn": 510,
+        "hp": 60,
+        "hunger": 0.03000000000000002,
+        "thirst": 0.0022500000000000003,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          27,
+          5
+        ],
+        "turn": 511,
+        "hp": 60,
+        "hunger": 0.03100000000000002,
+        "thirst": 0.0033750000000000004,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 98,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          27,
+          5
+        ],
+        "turn": 511,
+        "hp": 60,
+        "hunger": 0.03100000000000002,
+        "thirst": 0.0033750000000000004,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          26,
+          6
+        ],
+        "turn": 512,
+        "hp": 60,
+        "hunger": 0.03200000000000002,
+        "thirst": 0.0045000000000000005,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 98,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          26,
+          6
+        ],
+        "turn": 512,
+        "hp": 60,
+        "hunger": 0.03200000000000002,
+        "thirst": 0.0045000000000000005,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          25,
+          7
+        ],
+        "turn": 513,
+        "hp": 60,
+        "hunger": 0.03300000000000002,
+        "thirst": 0.005625000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 98,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          25,
+          7
+        ],
+        "turn": 513,
+        "hp": 60,
+        "hunger": 0.03300000000000002,
+        "thirst": 0.005625000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          24,
+          8
+        ],
+        "turn": 514,
+        "hp": 60,
+        "hunger": 0.03400000000000002,
+        "thirst": 0.006750000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 26,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 98,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          24,
+          8
+        ],
+        "turn": 514,
+        "hp": 60,
+        "hunger": 0.03400000000000002,
+        "thirst": 0.006750000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 26,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          23,
+          9
+        ],
+        "turn": 516,
+        "hp": 60,
+        "hunger": 0.036000000000000025,
+        "thirst": 0.009000000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          23,
+          9
+        ],
+        "turn": 516,
+        "hp": 60,
+        "hunger": 0.036000000000000025,
+        "thirst": 0.009000000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          22,
+          8
+        ],
+        "turn": 518,
+        "hp": 60,
+        "hunger": 0.03800000000000003,
+        "thirst": 0.011250000000000003,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          22,
+          8
+        ],
+        "turn": 518,
+        "hp": 60,
+        "hunger": 0.03800000000000003,
+        "thirst": 0.011250000000000003,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          21,
+          7
+        ],
+        "turn": 520,
+        "hp": 60,
+        "hunger": 0.04000000000000003,
+        "thirst": 0.013500000000000005,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          21,
+          7
+        ],
+        "turn": 520,
+        "hp": 60,
+        "hunger": 0.04000000000000003,
+        "thirst": 0.013500000000000005,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          20,
+          6
+        ],
+        "turn": 522,
+        "hp": 60,
+        "hunger": 0.04200000000000003,
+        "thirst": 0.015750000000000007,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 7,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          20,
+          6
+        ],
+        "turn": 522,
+        "hp": 60,
+        "hunger": 0.04200000000000003,
+        "thirst": 0.015750000000000007,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 7,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          19,
+          5
+        ],
+        "turn": 524,
+        "hp": 60,
+        "hunger": 0.04400000000000003,
+        "thirst": 0.01800000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          19,
+          5
+        ],
+        "turn": 524,
+        "hp": 60,
+        "hunger": 0.04400000000000003,
+        "thirst": 0.01800000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          18,
+          4
+        ],
+        "turn": 526,
+        "hp": 60,
+        "hunger": 0.046000000000000034,
+        "thirst": 0.02025000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          18,
+          4
+        ],
+        "turn": 526,
+        "hp": 60,
+        "hunger": 0.046000000000000034,
+        "thirst": 0.02025000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          17,
+          3
+        ],
+        "turn": 528,
+        "hp": 60,
+        "hunger": 0.048000000000000036,
+        "thirst": 0.022500000000000013,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          17,
+          3
+        ],
+        "turn": 528,
+        "hp": 60,
+        "hunger": 0.048000000000000036,
+        "thirst": 0.022500000000000013,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          16,
+          2
+        ],
+        "turn": 530,
+        "hp": 60,
+        "hunger": 0.05000000000000004,
+        "thirst": 0.024750000000000015,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 7,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          16,
+          2
+        ],
+        "turn": 530,
+        "hp": 60,
+        "hunger": 0.05000000000000004,
+        "thirst": 0.024750000000000015,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 7,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          15,
+          1
+        ],
+        "turn": 533,
+        "hp": 60,
+        "hunger": 0.05300000000000004,
+        "thirst": 0.028125000000000018,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "key": 121,
+      "before": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          15,
+          1
+        ],
+        "turn": 533,
+        "hp": 60,
+        "hunger": 0.05300000000000004,
+        "thirst": 0.028125000000000018,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 28,
+            "hp": 8
+          }
+        ]
+      },
+      "after": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          14,
+          0
+        ],
+        "turn": 535,
+        "hp": 60,
+        "hunger": 0.05500000000000004,
+        "thirst": 0.03037500000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 6,
+            "y": 27,
+            "hp": 8
+          }
+        ]
+      }
+    }
+  ],
+  "events": [
+    {
+      "action": "real boundary entry",
+      "state": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          14,
+          0
+        ],
+        "turn": 483,
+        "hp": 60,
+        "hunger": 0.003,
+        "thirst": 0.0038750000000000004,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 3,
+            "y": 18,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "action": "descend",
+      "state": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": "submap_44_8_0",
+        "position": [
+          8,
+          4
+        ],
+        "turn": 508,
+        "hp": 60,
+        "hunger": 0.028000000000000018,
+        "thirst": 0.03200000000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": []
+      }
+    },
+    {
+      "action": "ascend to owned return",
+      "state": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          29,
+          5
+        ],
+        "turn": 508,
+        "hp": 60,
+        "hunger": 0.028000000000000018,
+        "thirst": 0.03200000000000002,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 4,
+            "y": 26,
+            "hp": 8
+          }
+        ]
+      }
+    },
+    {
+      "action": "consume starting flask",
+      "state": {
+        "chunk": [
+          44,
+          8
+        ],
+        "submap": null,
+        "position": [
+          29,
+          5
+        ],
+        "turn": 509,
+        "hp": 60,
+        "hunger": 0.02900000000000002,
+        "thirst": 0.0011250000000000001,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "empty_water_skin"
+        ],
+        "actors": [
+          {
+            "id": "plague_crow",
+            "name": "Plague Crow",
+            "x": 5,
+            "y": 26,
+            "hp": 8
+          }
+        ]
+      }
+    }
+  ],
+  "controls": "One initial disclosed fixture position in normal neighbor (44,7). From first boundary input: real eight-way movement, doors, stairs and inventory only. Native actors, AI, survival, normal FOV, no invincibility or supplied items. Full-state path selection avoids moving actors; not a normal-start expedition or unaided discovery.",
+  "contract": {
+    "revision": 1,
+    "chunk": [
+      44,
+      8
+    ],
+    "arrival": [
+      24,
+      10
+    ],
+    "edge": [
+      14,
+      0
+    ],
+    "neighbor": [
+      44,
+      7
+    ],
+    "reciprocal": [
+      14,
+      42
+    ]
+  },
+  "start": {
+    "chunk": [
+      44,
+      7
+    ],
+    "submap": null,
+    "position": [
+      14,
+      42
+    ],
+    "turn": 482,
+    "hp": 60,
+    "hunger": 0.002,
+    "thirst": 0.0027500000000000003,
+    "inventory": [
+      "tallow_torch",
+      "crow_jerky",
+      "water_flask",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble"
+    ],
+    "actors": []
+  },
+  "final": {
+    "chunk": [
+      44,
+      7
+    ],
+    "submap": null,
+    "position": [
+      14,
+      42
+    ],
+    "turn": 536,
+    "hp": 60,
+    "hunger": 0.05600000000000004,
+    "thirst": 0.03175000000000002,
+    "inventory": [
+      "tallow_torch",
+      "crow_jerky",
+      "crude_blade",
+      "leather_jack",
+      "moist_pebble",
+      "empty_water_skin"
+    ],
+    "actors": []
+  },
+  "restore": {
+    "F5": true,
+    "cold_engine": true,
+    "F9": true,
+    "expected": {
+      "player": "cb1b62c33da8f87e13dc24997ac4dcea33522314dd113564a1446a1e74ae52fe",
+      "world": "4b9b0ac48417523a16fd7cf3734cef5ac8c72325fea194d7a1b8985a9220dad4",
+      "scenes": [
+        {
+          "address": [
+            44,
+            7,
+            null
+          ],
+          "fingerprint": "fcbe97ec317103c171df35b9602b2f0c562e0d29055e7b1b4f183a0fcc16705e"
+        },
+        {
+          "address": [
+            44,
+            8,
+            null
+          ],
+          "fingerprint": "a4e7bbffbcadfc5481bad15d8f303b85d63a394aa21939591b7fa89bd5f8f19c"
+        },
+        {
+          "address": [
+            44,
+            8,
+            "submap_44_8_0"
+          ],
+          "fingerprint": "ede5aaf24e026e363eb482be3e64824dd5107bad57115f8a3c2df4f93d829342"
+        }
+      ]
+    },
+    "pending": {
+      "chunk": [
+        45,
+        8
+      ],
+      "fingerprint": "a16c720821bc482f99d38d1653ef6b88720c37851fbd681a99b8e18863b7eb17"
+    },
+    "post_outing_wait_only_for_F9": true,
+    "fresh_process": true
+  },
+  "turns": 54,
+  "movement_inputs": 30,
+  "log": [
+    "You light the Tallow Torch.",
+    "Arrived at Briarvale Plain.",
+    "Thou takest up a crude blade.",
+    "Thou takest up a leather jack.",
+    "You move into Chalkvale.",
+    "A faint weight in the air. Nothing more.",
+    "The cold seeps in.",
+    "You descend into Arnevel Vault.",
+    "You emerge into Chalkvale.",
+    "The liquid steadies something.",
+    "You move into Briarvale Plain.",
+    "The air here sits still. Old quiet.",
+    "Progress preserved.",
+    "The world reassembles itself around you."
+  ]
+}

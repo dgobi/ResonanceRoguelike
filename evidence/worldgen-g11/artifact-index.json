@@ -1,0 +1,168 @@
+{
+  "frozen_inputs": "970107db947d341bec315cdb5a31ce19a34a75bd",
+  "status": "verified",
+  "references": {
+    "brief": "evidence/worldgen-g11/before/review-package/CODEX_G11_WILDERNESS_ENTRANCE_ACCESS.md",
+    "baseline_reproduction": "evidence/worldgen-g11/before/reproduction/entrance-isolation.json",
+    "baseline_handlers": "evidence/worldgen-g11/before/reproduction/entrance-handlers.json",
+    "genuine_g10_binding": "tools/critical_fix_regressions/fixtures/g11/g10-witness.json",
+    "genuine_g10_checkpoint": "tools/critical_fix_regressions/fixtures/g11/authentic-g10-checkpoint.zip",
+    "final_release": "evidence/worldgen-g11/final-d/release.json",
+    "expanded_focused": "evidence/worldgen-g11/final-d/focused/run.json",
+    "exact_regression": "evidence/worldgen-g11/final-d/focused/g11-exact.json",
+    "late_cut_and_multilink_fallback": "evidence/worldgen-g11/final-d/focused/g11-late-cut-fallback.json",
+    "representative_scenes": "evidence/worldgen-g11/final-d/focused/g11-sample.json",
+    "unchanged_plans": "evidence/worldgen-g11/final-d/focused/g11-macro.json",
+    "g10_preservation": "evidence/worldgen-g11/final-d/focused/g11-genuine-g10.json",
+    "g9_preservation": "evidence/worldgen-g11/final-d/focused/g10-genuine-g9.json",
+    "save_contract": "evidence/worldgen-g11/final-d/focused/g11-contract.json",
+    "atomicity": "evidence/worldgen-g11/final-d/focused/g11-atomic.json",
+    "production_gate": "evidence/worldgen-g11/final-d/production/results.json",
+    "access_journey": "evidence/worldgen-g11/final-d/journey/journey.json",
+    "fresh_process_load": "evidence/worldgen-g11/final-d/journey/cold.json",
+    "actual_access_checkpoint": "evidence/worldgen-g11/final-d/journey/journey-checkpoint.zip",
+    "ordinary_excursion": "evidence/worldgen-g11/final-d/ordinary/expedition.json",
+    "water_projection": "evidence/worldgen-g11/final-d/focused/g11-water-projection.json",
+    "image_review": "evidence/worldgen-g11/final-d/image-review.json"
+  },
+  "preservation": {
+    "wiki_tree": "552d1fedf61ec39ffc9250a8e2b9fe0b72b16f1f",
+    "baseline_wiki_tree": "552d1fedf61ec39ffc9250a8e2b9fe0b72b16f1f",
+    "installed_data_tree": "756ed863e9eea3b3356012a4081a6c05840e9798",
+    "baseline_installed_data_tree": "756ed863e9eea3b3356012a4081a6c05840e9798",
+    "agreed_working_rules_unchanged": true
+  },
+  "results": {
+    "focused_tests": 246,
+    "production": {
+      "checks": 3675,
+      "passed": 3675,
+      "failed": 0,
+      "workers": 159
+    },
+    "access_journey": {
+      "turns": 54,
+      "movement_inputs": 30,
+      "hp": 60,
+      "fresh_process": true
+    },
+    "ordinary_excursion": {
+      "turns": 216,
+      "movement_inputs": 186,
+      "hp": 60
+    },
+    "retained_deferral": "E04 / UI-TEXT-HEIGHT"
+  },
+  "artifacts": {
+    "brief": {
+      "path": "evidence/worldgen-g11/before/review-package/CODEX_G11_WILDERNESS_ENTRANCE_ACCESS.md",
+      "bytes": 15862,
+      "sha256": "98cd09241a1c1f2f6482ba27f18c06d108953f2713c26da766a1c64af2a5c0af"
+    },
+    "baseline_reproduction": {
+      "path": "evidence/worldgen-g11/before/reproduction/entrance-isolation.json",
+      "bytes": 13965,
+      "sha256": "cbaed64b61c4b388fc4b87ad06ff3d8b3c97e1088e9d5f99e1ebb81a0ce18649"
+    },
+    "baseline_handlers": {
+      "path": "evidence/worldgen-g11/before/reproduction/entrance-handlers.json",
+      "bytes": 3049,
+      "sha256": "2985e1c1fab92f440db6f54c097412872be03a146b1dd977160cf71ce7f29cb3"
+    },
+    "genuine_g10_binding": {
+      "path": "tools/critical_fix_regressions/fixtures/g11/g10-witness.json",
+      "bytes": 6291,
+      "sha256": "073dbed2604ede8a64eead81d5672ce8fa386f14545db5397d2acabb0cda5bb7"
+    },
+    "genuine_g10_checkpoint": {
+      "path": "tools/critical_fix_regressions/fixtures/g11/authentic-g10-checkpoint.zip",
+      "bytes": 1549597,
+      "sha256": "0a74ab9f19b3fd25144524b531f14f412ecb02bf284adcd42366d9bf86276e9b"
+    },
+    "final_release": {
+      "path": "evidence/worldgen-g11/final-d/release.json",
+      "bytes": 282881,
+      "sha256": "16d1f282e27062aed1b41905284d90b4e368ccaef3186786f77fc9b1a0a513de"
+    },
+    "expanded_focused": {
+      "path": "evidence/worldgen-g11/final-d/focused/run.json",
+      "bytes": 94923,
+      "sha256": "57069ba6874db5dfb6153140034aa37eb79adf5d08d494a7097b608ffe2ac051"
+    },
+    "exact_regression": {
+      "path": "evidence/worldgen-g11/final-d/focused/g11-exact.json",
+      "bytes": 861,
+      "sha256": "ef7615f8a3b96b16005d4e1b2ccbb9a0ce6800273b55cff1d4d25d189875e82d"
+    },
+    "late_cut_and_multilink_fallback": {
+      "path": "evidence/worldgen-g11/final-d/focused/g11-late-cut-fallback.json",
+      "bytes": 789,
+      "sha256": "f5b3a6790a7580c3304cc6fdddefe0260f3a7271e3d64f27a675d76915594464"
+    },
+    "representative_scenes": {
+      "path": "evidence/worldgen-g11/final-d/focused/g11-sample.json",
+      "bytes": 34500,
+      "sha256": "c87f82df5ef078d35ffd244730abcd225e796a8bc1503e671112d39d3b0e3c6a"
+    },
+    "unchanged_plans": {
+      "path": "evidence/worldgen-g11/final-d/focused/g11-macro.json",
+      "bytes": 512,
+      "sha256": "447172274c52b593bfde2dd90e560cc1c346b51b60f48ee7a4d30fdf509c2694"
+    },
+    "g10_preservation": {
+      "path": "evidence/worldgen-g11/final-d/focused/g11-genuine-g10.json",
+      "bytes": 1046,
+      "sha256": "d99498e56c76c2a834c2d0938cadc302716894733cb77c83b83185e25da856fd"
+    },
+    "g9_preservation": {
+      "path": "evidence/worldgen-g11/final-d/focused/g10-genuine-g9.json",
+      "bytes": 2780,
+      "sha256": "75fd70792b0e778c2299f1f68820c787f0b65402c1e24b9acd80abfbc75bda03"
+    },
+    "save_contract": {
+      "path": "evidence/worldgen-g11/final-d/focused/g11-contract.json",
+      "bytes": 1114,
+      "sha256": "a519905ad213a0b3423e8a138ca92da25707d8c610d8a812f0dfcea0006e9e9e"
+    },
+    "atomicity": {
+      "path": "evidence/worldgen-g11/final-d/focused/g11-atomic.json",
+      "bytes": 592,
+      "sha256": "43a67442ee7a474c9c02081db4a94229f8bab4497ec460100c3ed69e65134153"
+    },
+    "production_gate": {
+      "path": "evidence/worldgen-g11/final-d/production/results.json",
+      "bytes": 7531703,
+      "sha256": "886ccaf9aead693d639b44b5e73d7617469a2d052f5ac5f96e0ffa13f20fb249"
+    },
+    "access_journey": {
+      "path": "evidence/worldgen-g11/final-d/journey/journey.json",
+      "bytes": 48138,
+      "sha256": "fd9adbf5b7e9ad15b362e917e735f322dd06d8e4ab16c9060052dfe1260460fb"
+    },
+    "fresh_process_load": {
+      "path": "evidence/worldgen-g11/final-d/journey/cold.json",
+      "bytes": 171,
+      "sha256": "27d8fcc02d35f2034055ff7e8fdeff359ff84af6454727be2d55547b36cd6f38"
+    },
+    "actual_access_checkpoint": {
+      "path": "evidence/worldgen-g11/final-d/journey/journey-checkpoint.zip",
+      "bytes": 1571882,
+      "sha256": "84fea54ed0bf2db98408959f2c4b6af308c44cb82dc946a64b3b043bb57651db"
+    },
+    "ordinary_excursion": {
+      "path": "evidence/worldgen-g11/final-d/ordinary/expedition.json",
+      "bytes": 113813,
+      "sha256": "454c7cf3fd25aa9ce5125a023d5b60b6cca03cf462de3abb5ff3b83e0e37554b"
+    },
+    "water_projection": {
+      "path": "evidence/worldgen-g11/final-d/focused/g11-water-projection.json",
+      "bytes": 204,
+      "sha256": "3a2c527ac0621c2f0f14cf77fde1f3bd9e7b5e09da73ca6c4a4837b815a2339c"
+    },
+    "image_review": {
+      "path": "evidence/worldgen-g11/final-d/image-review.json",
+      "bytes": 1683,
+      "sha256": "5758b3064d44e8ac8bda2db44f74104afa8eae735d2891c094516d71c35bea49"
+    }
+  }
+}

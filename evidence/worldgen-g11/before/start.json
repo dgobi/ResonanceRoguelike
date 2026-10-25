@@ -1,0 +1,40 @@
+{
+  "reviewed_head": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+  "initial_head": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+  "initial_branch": "main",
+  "initial_status": "clean",
+  "remote": "https://github.com/dgobi/ResonanceRoguelike.git",
+  "initial_remote_main": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+  "checkpoint": "checkpoint/worldgen-g11-start-20261024-a",
+  "package": {
+    "path": "C:\\Users\\dango\\Downloads\\Resonance_G11_Review_Package.zip",
+    "bytes": 2303559,
+    "sha256": "630981053aa945fe26bc48b6f0303094ab57be24598ef02c0191482785786280",
+    "all_manifest_members_verified": true
+  },
+  "preedit_reproduction": {
+    "command": [
+      "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe",
+      "-X",
+      "utf8",
+      "evidence/worldgen-g11/before/review-package/evidence/access/reproduce_g10_entrance.py",
+      "--repo",
+      "G:/GameDev/RoguelikeProject",
+      "--out",
+      "C:/Users/dango/AppData/Local/Temp/resonance-g11-before-20261024-a"
+    ],
+    "exit_code": 0,
+    "defect_observed": true
+  },
+  "compatibility_capture": {
+    "command": [
+      "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe",
+      "-X",
+      "utf8",
+      "tools/capture_g11_baseline.py"
+    ],
+    "exit_code": 0,
+    "creator": "7e48d4059a8c68bb98bb5c7f6d2fa49aa0a01a9b",
+    "fixture": "tools/critical_fix_regressions/fixtures/g11/g10-witness.json"
+  }
+}

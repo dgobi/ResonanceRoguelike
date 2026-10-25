@@ -1,0 +1,5 @@
+G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5035: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+{"passed": true, "evidence": "G:\\GameDev\\RoguelikeProject\\evidence\\worldgen-g11\\final-d\\ordinary"}

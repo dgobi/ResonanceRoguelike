@@ -1,0 +1,8 @@
+{
+  "passed": false,
+  "status": "interrupted before full focused suite completion",
+  "frozen_inputs": "709a645c4779bbc1c2a101452da8fe3a5fcd888f",
+  "reason": "Source review corrected reciprocal water-core/bank projection precedence and added a discriminating fixture. Shipped river water is walkable, so the fixture uses a controlled blocking definition to distinguish the overlay order. The final-d run restarts all required gates on corrected inputs.",
+  "production_gate_started": false,
+  "final_evidence": "../final-d/release.json"
+}
