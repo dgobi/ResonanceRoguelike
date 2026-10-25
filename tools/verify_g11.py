@@ -26,13 +26,23 @@ def main():
     out=a.evidence.resolve();out.mkdir(parents=True,exist_ok=True)
     if (out/'release.json').exists():p.error('Use a fresh evidence directory; do not overwrite a release')
     frozen=inputs();head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
-    # Bind every raw input to its committed clean-filtered blob as well as SHA256.
+    # Bind exact bytes, accepting only the checkout's existing CRLF conversion.
     paths=sorted(frozen)
-    actual=subprocess.check_output(['git','hash-object','--stdin-paths'],input='\n'.join(paths)+'\n',cwd=ROOT,text=True).splitlines()
-    committed={line.split('\t',1)[1]:line.split()[1] for line in subprocess.check_output(['git','ls-tree','-r',head],cwd=ROOT,text=True).splitlines()}
-    assert all(committed.get(path)==blob for path,blob in zip(paths,actual)),'Freeze all runtime/test inputs in a commit first'
+    import io
+    stream=io.BytesIO(subprocess.check_output(['git','cat-file','--batch'],
+        input=''.join(f'{head}:{path}\n' for path in paths).encode(),cwd=ROOT))
+    bindings={}
+    for path in paths:
+        blob,kind,size=stream.readline().decode().strip().split();assert kind=='blob'
+        committed=stream.read(int(size));assert stream.read(1)==b'\n'
+        raw=(ROOT/path).read_bytes();mode='exact'
+        if raw!=committed:
+            assert Path(path).suffix in ('.py','.js','.css','.json','.md','.hex'),path
+            assert raw.replace(b'\r\n',b'\n')==committed.replace(b'\r\n',b'\n'),path
+            mode='CRLF-only'
+        bindings[path]=dict(blob=blob,committed_sha256=hashlib.sha256(committed).hexdigest(),match=mode)
     production=ROOT/'.baseline'/('g11-production-'+out.name)
-    report=dict(passed=False,head=head,source=frozen,git_blobs=dict(zip(paths,actual)),checks=[],
+    report=dict(passed=False,head=head,source=frozen,git_binding=bindings,checks=[],
         environment=dict(python=sys.version,executable=sys.executable,dependencies={k:importlib.metadata.version(k) for k in ('pygame','tcod','numpy')}),
         controls='Unfiltered focused and production gates; app-local journeys; disposable saves only; no wiki gate.')
     commands=[('focused',[sys.executable,'-X','utf8',str(ROOT/'tools/critical_fix_regressions/verify_fixes.py'),

@@ -88,7 +88,7 @@ class G11Lifecycle(unittest.TestCase):
         self.assertEqual(self.state(e),before)
         scene.write_bytes(original_scene);manifest['files'][name]=record(original_scene)
         (checkpoint/'manifest.json').write_text(json.dumps(manifest))
-        for installed in ({},dict(version=999),dict(version=1,profiles={})): 
+        for installed in ({},dict(version=999),dict(version=1,profiles={})):
             data=copy.copy(e.data);data.wilderness_profiles=installed
             reader=make_engine(data);self.assertTrue(reader.save_manager.load(reader),reader.save_manager.last_error)
             self.assertEqual(reader.world_map.surface_policy,p)
