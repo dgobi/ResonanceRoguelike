@@ -73,7 +73,7 @@ class G10Terrain(unittest.TestCase):
             self.assertEqual(vars(w),before);self.assertEqual(rng.getstate(),state)
 
     def test_barren_interior_and_complete_populated_owner_masks(self):
-        from generation.access import enterable
+        from generation.access import enterable, reachable
         from generation.world_plan import address
         from rendering.decor import PLANT_DECOR_IDS
         w=self.world;items=ItemFactory(self.data);creatures=CreatureFactory(self.data)
@@ -90,6 +90,10 @@ class G10Terrain(unittest.TestCase):
                     interior={(x,y) for x in range(12,68) for y in range(12,31)}
                     self.assertTrue(all(str(m.tiles[xy]['terrain']) not in ('tree','grass','tall_grass') for xy in interior))
                     self.assertFalse({xy for xy,v in m.decor.items() if v in PLANT_DECOR_IDS}&interior)
+                if xy==(73,100):
+                    reached=reachable(m,r.spawn,self.data)
+                    self.assertTrue(any(x in (0,79) or y in (0,42) for x,y in reached),
+                                    'natural arrival must not select an isolated gap inside the tree mass')
                 if w.get(*xy).biome_id=='town':
                     old=copy.copy(w);old.surface_schema=0;old.surface_policy=None
                     prior=create_surface(old,old.get(*xy),self.data,items,creatures,80,43)

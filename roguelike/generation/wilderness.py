@@ -229,7 +229,8 @@ def sample(world, policy, x0, y0, width=W, height=H):
 
 def materialize(world, chunk, data, context, width=W, height=H):
     from world.local_map import LocalMap
-    from generation.access import arrival_anchor
+    from generation.access import enterable
+    from collections import deque
     import time
     policy = world_policy(world, data)
     if policy is None or not eligible(chunk):
@@ -242,9 +243,31 @@ def materialize(world, chunk, data, context, width=W, height=H):
         for y in range(height):
             tid = str(natural['terrain'][x,y]); td = data.terrain[tid]
             m.set_tile(x,y,tid,td['walkable'],td['transparent'])
-    spawn = arrival_anchor(m,(width//2,height//2),data)
+    # A natural field must not manufacture a centre clearing. Choose an actual
+    # exterior component instead: a lone gap among trees is not a useful arrival
+    # or a valid anchor for a pending wilderness entrance.
+    seen=set();components=[]
+    for x in range(width):
+        for y in range(height):
+            if (x,y) in seen or not enterable(m,(x,y),data):continue
+            component={(x,y)};seen.add((x,y));todo=deque([(x,y)])
+            while todo:
+                a,b=todo.popleft()
+                for dx in (-1,0,1):
+                    for dy in (-1,0,1):
+                        q=a+dx,b+dy
+                        if q not in seen and enterable(m,q,data):
+                            seen.add(q);component.add(q);todo.append(q)
+            components.append(component)
+    outside=[c for c in components if any(x in (0,width-1) or y in (0,height-1) for x,y in c)]
+    if not outside:
+        raise GenerationError('wilderness: no natural boundary arrival component')
+    def anchor(c):return min(c,key=lambda p:(max(abs(p[0]-width//2),abs(p[1]-height//2)),p))
+    component=min(outside,key=lambda c:(-len(c),anchor(c)))
+    spawn=anchor(component)
     m.surface_provenance = provenance(world,chunk)
     m.wilderness_generation = dict(policy_identity=policy['identity'],halo_chunks=1,
         metadata_reads=natural['metadata_reads'],base_decision_identity=digest(natural['terrain'].tolist()),
-        repairs=[],field_seconds=sampled-start,base_seconds=time.perf_counter()-start)
+        repairs=[],arrival_policy='largest-natural-boundary-component-v1',arrival_component_cells=len(component),
+        field_seconds=sampled-start,base_seconds=time.perf_counter()-start)
     return m, spawn

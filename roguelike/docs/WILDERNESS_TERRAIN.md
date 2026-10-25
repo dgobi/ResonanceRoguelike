@@ -25,6 +25,11 @@ required access, repair events and generation timings. It generates only the
 requested 1–3 by 1–3 scenes, plus a one-chunk metadata halo. Planning creates no
 local scenes. A preview never visits a campaign or installs the draft.
 
+Wilderness arrival anchors use the largest natural component that touches a
+scene boundary. This keeps a small decorative gap inside a dense stand from
+becoming the default anchor for an entrance. The selection changes no terrain;
+roads and authored approaches retain their later authoritative passes.
+
 Omit `--profile` to preview installed defaults. `--image` selects a separate PNG
 target. Outputs cannot replace game files or the draft; file aliases, symbolic
 links and report/image collisions share the authoring destination protection.
