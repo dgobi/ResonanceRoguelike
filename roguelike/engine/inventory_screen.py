@@ -100,34 +100,18 @@ _CAT_MAP: dict[str, str] = {
 
 def _get_satchel_reductions(engine: "Engine") -> dict:
     """Return weight_reductions dict from equipped satchel, or empty dict."""
-    equip = getattr(engine.player, "equipment", None)
-    if not equip:
-        return {}
-    satchel = equip.equipped_in("satchel")
-    if not satchel:
-        return {}
-    item_def = engine.data.items.get(getattr(satchel, "item_id", ""), {})
-    return item_def.get("weight_reductions", {})
+    return engine.player.inventory.reductions_for()
 
 
 def _effective_weight(item: "Item", category: str, reductions: dict) -> float:
     """Apply satchel weight reductions to an item's weight at read time."""
-    base = getattr(item, "weight", 0.0)
-    red = reductions.get(category, reductions.get("all", 0.0))
-    if red > 0:
-        return base * (1.0 - red)
-    return base
+    from components.inventory import effective_weight
+    return effective_weight(item, category, reductions)
 
 
 def _item_category(item: "Item", engine: "Engine") -> str:
-    item_id  = getattr(item, "item_id", "") or ""
-    item_def = engine.data.items.get(item_id, {}) if item_id else {}
-    raw = item_def.get("category", "")
-    if getattr(item, "on_use", "") == "read" or raw in ("document", "text"):
-        return "Miscellaneous"
-    if item_def.get("slot") == "light":
-        return "Light Sources"
-    return _CAT_MAP.get(raw, "Miscellaneous")
+    from components.inventory import item_category
+    return item_category(item, engine.data.items)
 
 
 def _group_items(items: list, engine: "Engine") -> dict[str, list]:

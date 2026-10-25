@@ -5,13 +5,29 @@
   "description": "Render caustic fluids and viscous oil together in a clay vessel over heat. The reduction takes time and smells of pain.",
   "known": true,
   "components": [
-    {"tag": "viscous", "min_tier": 1, "quantity": 1},
-    {"tag": "caustic", "min_tier": 1, "quantity": 1}
+    {
+      "tag": "viscous",
+      "min_tier": 1,
+      "quantity": 1
+    },
+    {
+      "tag": "caustic",
+      "min_tier": 1,
+      "quantity": 1
+    }
   ],
   "requires_ambient": [
-    {"tag": "burning", "min_tier": 2},
-    {"tag": "vessel", "min_tier": 1}
+    {
+      "tag": "burning",
+      "min_tier": 2
+    }
   ],
   "result_item": "hungering_oil",
-  "apply_turns": 10
+  "apply_turns": 10,
+  "tools": [
+    {
+      "tag": "vessel",
+      "min_tier": 1
+    }
+  ]
 }

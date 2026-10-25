@@ -6,16 +6,25 @@
   "known": true,
   "requires_single_item": {
     "tags": [
-      {"tag": "resonant", "min_tier": 2}
+      {
+        "tag": "resonant",
+        "min_tier": 2
+      }
     ],
     "max_quantity": 1
   },
   "components": [
-    {"tag": "solvent", "min_tier": 1, "quantity": 1}
+    {
+      "tag": "solvent",
+      "min_tier": 1,
+      "quantity": 1
+    }
   ],
   "requires_ambient": [
-    {"tag": "burning", "min_tier": 1},
-    {"tag": "heatproof", "min_tier": 1}
+    {
+      "tag": "burning",
+      "min_tier": 1
+    }
   ],
   "result_item": "resonant_tincture",
   "result_message": "The water takes on a grey quality.",
@@ -23,5 +32,11 @@
   "processing_turns": 40,
   "processing_source": "steeping",
   "processing_decor": "drying_herb",
-  "placement_message": "Where will you set it to steep?"
+  "placement_message": "Where will you set it to steep?",
+  "tools": [
+    {
+      "tag": "heatproof",
+      "min_tier": 1
+    }
+  ]
 }

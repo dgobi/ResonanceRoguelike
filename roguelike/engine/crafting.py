@@ -1,12 +1,13 @@
 # engine/crafting.py
 """
-Pure crafting logic — no engine state imports.
+Exact-instance crafting allocation and commitment.
 
 can_craft(recipe, inv, keyword_data, ambient_sources)  — test whether keyword requirements are met
 attempt_craft(recipe, inv, keyword_data, ambient_sources) — consume ingredients, lowest-tier first
 
 ambient_sources: list of {"tag": str, "tier": int} dicts representing environmental
 conditions (lit torch, campfire, etc.) that satisfy requirements but are never consumed.
+Components and single-item conjunctions are spent materials; tools are kept.
 """
 from __future__ import annotations
 from typing import TYPE_CHECKING
@@ -52,15 +53,28 @@ class CraftPlan(list):
     def __init__(self, chosen_items=None):
         super().__init__()
         self.choices = dict(chosen_items or {})
+        self.materials = []
+
+
+def conditions_for(recipe):
+    """Passive work still belongs at a stationary fire, even with a lit torch."""
+    conditions = list(recipe.get("requires_ambient", []))
+    if recipe.get("passive_processing"):
+        conditions.append(dict(tag="stationary_fire", min_tier=1))
+    return conditions
+
+
+def material_candidate(item, preferred=None):
+    # Reusable valuables require an explicit ingredient choice before spending.
+    return getattr(item, "consumed_on_use", True) or getattr(item, "item_id", None) == preferred
 
 
 def _match_ingredients(slots, unavailable=()):
-    """Maximum physical matching, keeping every mandatory slot if possible.
+    """Maximum exact-instance matching across material and tool slots.
 
     An augmenting path can move an earlier ingredient to another valid slot.
     That avoids the greedy failure where a multi-tag item steals the only match
-    for a later requirement. Ambient-backed slots are attempted after mandatory
-    ones, so environmental shortfall never displaces a required physical item.
+    for a later requirement. Environmental conditions never fill physical slots.
     """
     owners = {}
 
@@ -75,7 +89,7 @@ def _match_ingredients(slots, unavailable=()):
                 return True
         return False
 
-    for slot_index in sorted(range(len(slots)), key=lambda n: slots[n]["ambient"]):
+    for slot_index in range(len(slots)):
         assign(slot_index, set())
     return {slot_index: item_index for item_index, slot_index in owners.items()}
 
@@ -83,8 +97,8 @@ def _match_ingredients(slots, unavailable=()):
 def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_items=None):
     """Find a complete exact-instance allocation without mutating owners.
 
-    Each instance fills one slot, including reusable tools. Prefer physical items
-    before ambient shortfall, then lower tiers in recipe order. A preference is
+    Each instance fills one physical slot, including reusable tools. Prefer
+    lower tiers in recipe order. An explicit material preference is
     accepted only if the rest of the recipe remains satisfiable; inventory order
     therefore cannot hide a valid allocation. Explicit component choices require
     at least one instance of the chosen definition for that component.
@@ -93,13 +107,13 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
     if len({id(i) for i in items}) != len(items):
         return [], [{"tag": "duplicate instance", "min_tier": 1, "have": 0, "need": 1}]
     selected, missing = CraftPlan(chosen_items), []
-    for req in recipe.get("requires_ambient", []):
+    for req in conditions_for(recipe):
         if not _ambient_satisfies(ambient_sources, req["tag"], req.get("min_tier", 1)):
             missing.append(dict(tag=req["tag"], min_tier=req.get("min_tier", 1), have=0, need=1, ambient=True))
 
     groups, slots = [], []
 
-    def add_requirement(tags, quantity, details, *, ambient=False, component=None):
+    def add_requirement(tags, quantity, details, *, role="material", component=None):
         has_choice = component is not None and component in selected.choices
         preferred = selected.choices.get(component)
 
@@ -111,7 +125,8 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
             # only breaks ties between otherwise equivalent live instances.
             return (has_choice and item_id != preferred, sum(tiers), tiers, item_id, id(item))
 
-        matches = sorted((n for n, item in enumerate(items) if _item_has_all_tags(item, tags)),
+        matches = sorted((n for n, item in enumerate(items) if _item_has_all_tags(item, tags)
+                          and (role == "tool" or material_candidate(item, preferred))),
                          key=preference)
         group = len(groups)
         groups.append(dict(details, need=quantity))
@@ -122,8 +137,7 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
             requires_choice = has_choice and unit == 0
             candidates = ([n for n in matches if items[n].item_id == preferred]
                           if requires_choice else matches)
-            slots.append(dict(group=group, candidates=candidates,
-                              ambient=ambient and not requires_choice))
+            slots.append(dict(group=group, candidates=candidates, role=role))
 
     rsi = recipe.get("requires_single_item")
     if rsi:
@@ -134,13 +148,17 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
     for ci, comp in enumerate(recipe.get("components", [])):
         tag, tier, quantity = comp["tag"], comp.get("min_tier", 1), comp.get("quantity", 1)
         add_requirement([dict(tag=tag, min_tier=tier)], quantity, dict(tag=tag, min_tier=tier),
-                        ambient=_ambient_satisfies(ambient_sources, tag, tier), component=ci)
+                        component=ci)
+    for tool in recipe.get("tools", []):
+        tag, tier = tool["tag"], tool.get("min_tier", 1)
+        add_requirement([dict(tag=tag, min_tier=tier)], tool.get("quantity", 1),
+                        dict(tag=tag, min_tier=tier, role="tool"), role="tool")
 
     matching = _match_ingredients(slots)
-    if any(n not in matching and not slot["ambient"] for n, slot in enumerate(slots)):
+    if len(matching) != len(slots):
         # Keep the established missing-requirement shape for the crafting UI.
         for group, details in enumerate(groups):
-            have = sum(n in matching or slot["ambient"] for n, slot in enumerate(slots)
+            have = sum(n in matching for n, slot in enumerate(slots)
                        if slot["group"] == group)
             if have < details["need"]:
                 missing.append(dict(details, have=have))
@@ -152,19 +170,19 @@ def plan_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_item
     # use matching, not exponential backtracking through inventory permutations.
     physical_left, used = len(matching), set()
     for n, slot in enumerate(slots):
-        options = list(slot["candidates"]) + ([None] if slot["ambient"] else [])
+        options = slot["candidates"]
         suffix = slots[n + 1:]
         for candidate in options:
             if candidate in used:
                 continue
-            reserved = used if candidate is None else used | {candidate}
+            reserved = used | {candidate}
             remainder = _match_ingredients(suffix, reserved)
-            if (len(remainder) == physical_left - (candidate is not None)
-                    and all(k in remainder or rest["ambient"] for k, rest in enumerate(suffix))):
-                if candidate is not None:
-                    selected.append(items[candidate])
-                    used.add(candidate)
-                    physical_left -= 1
+            if len(remainder) == physical_left - 1:
+                selected.append(items[candidate])
+                if slot["role"] == "material":
+                    selected.materials.append(items[candidate])
+                used.add(candidate)
+                physical_left -= 1
                 break
         else:
             raise RuntimeError("Craft allocation lost a previously validated matching")
@@ -193,8 +211,7 @@ def commit_craft(engine, recipe, selected, ambient_sources=None, outputs=()):
                                  chosen_items=getattr(selected, 'choices', None))
     if missing:
         return False
-    consumed = [i for i in checked if getattr(i, "consumed_on_use", True)]
-    return exchange(engine, consumed, outputs)
+    return exchange(engine, checked.materials, outputs)
 
 
 def attempt_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_items=None):
@@ -205,12 +222,8 @@ def attempt_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_i
     selected, missing = plan_craft(recipe, inv, keyword_data, ambient_sources, chosen_items)
     if missing:
         return False
-    for item in selected:
-        if getattr(item, "consumed_on_use", True):
-            # This API has no actor with which to detach equipment safely.
-            if item.equipped:
-                return False
-    for item in selected:
-        if getattr(item, "consumed_on_use", True):
-            inv.remove(item)
+    if any(item.equipped for item in selected.materials):
+        return False  # This API has no actor with which to detach safely.
+    for item in selected.materials:
+        inv.remove(item)
     return True

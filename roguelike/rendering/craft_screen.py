@@ -151,8 +151,12 @@ class CraftScreen:
 
         equip = getattr(engine.player, "equipment", None)
         if equip:
-            light_item = equip.slots.get("light")
-            if light_item is not None:
+            light_item = equip.slots.get("offhand")
+            light = getattr(engine.player, "light_source", None)
+            if (light_item is not None and light and light.active
+                    and getattr(light, "_item_ref", None) is light_item
+                    and engine.player.inventory.contains(light_item)
+                    and (not light_item.burn_turns or light_item.turns_lit < light_item.burn_turns)):
                 item_def = engine.data.items.get(getattr(light_item, "item_id", ""), {})
                 pb = item_def.get("provides_burning", False)
                 if pb:
@@ -162,23 +166,11 @@ class CraftScreen:
         decor = getattr(getattr(engine, "local_map", None), "decor", {})
         px, py = engine.player.x, engine.player.y
         for (dx, dy), did in decor.items():
-            if did == "campfire_lit" and max(abs(dx - px), abs(dy - py)) <= 3:
+            radius = engine.data.decoratives.get(did, {}).get("warmth_radius", 3)
+            if did == "campfire_lit" and max(abs(dx - px), abs(dy - py)) <= radius:
                 sources.append({"tag": "burning", "tier": 2})
+                sources.append({"tag": "stationary_fire", "tier": 1})
                 break
-
-        inv = getattr(engine.player, "inventory", None)
-        seen_tags: set[tuple[str, int]] = set()
-        for item in (inv.items if inv else []):
-            # Only reusable tools (consumed_on_use=false) provide ambient keywords
-            if getattr(item, "consumed_on_use", True):
-                continue
-            for kw in getattr(item, "keywords", []):
-                tag  = kw.get("tag", "")
-                tier = kw.get("tier", 0)
-                key  = (tag, tier)
-                if tag and key not in seen_tags:
-                    sources.append({"tag": tag, "tier": tier})
-                    seen_tags.add(key)
 
         return sources
 
@@ -273,9 +265,10 @@ class CraftScreen:
 
         ambient = self._build_ambient_sources(engine)
         kw_data = getattr(engine.data, "keywords", {})
-        craftable, _ = can_craft(recipe, inv, kw_data, ambient)
+        _, missing = plan_craft(recipe, inv, kw_data, ambient, chosen_items)
+        craftable = not missing
         if not craftable:
-            engine.log.add("The materials are not here.", MSG_DEFAULT)
+            engine.log.add("Materials, tools or conditions are missing. Passive work needs a stationary fire.", MSG_DEFAULT)
             self.open = False
             return
 
@@ -335,7 +328,7 @@ class CraftScreen:
                 # Build option list
                 options = []
                 for iid, items in by_id.items():
-                    name = getattr(items[0], "name", iid)
+                    name = getattr(items[0], "name", iid) + " (spent)"
                     # Find the relevant keyword display
                     kw_display = ""
                     kw_color   = UI_TEXT_MID
@@ -614,7 +607,8 @@ class CraftScreen:
                     dy += lh
 
                 # requires_ambient
-                for req in sel_recipe.get("requires_ambient", []):
+                from engine.crafting import conditions_for
+                for req in conditions_for(sel_recipe):
                     if dy >= max_dy:
                         _detail_overflow = True
                         break
@@ -622,7 +616,7 @@ class CraftScreen:
                     min_tier  = req.get("min_tier", 1)
                     satisfied = _ambient_satisfies_screen(ambient, tag, min_tier)
                     kw_def    = kw_data.get(tag, {})
-                    disp_name = kw_def.get("display", tag)
+                    disp_name = "stationary fire" if tag == "stationary_fire" else kw_def.get("display", tag)
                     _kw_color_alias = kw_def.get("color", "")
                     _kw_col = self.TEXT
                     if _kw_color_alias:
@@ -640,14 +634,17 @@ class CraftScreen:
                     dy += lh
 
                 # Standard components
-                for comp in sel_recipe.get("components", []):
+                for comp in sel_recipe.get("components", []) + [dict(t, role="tool") for t in sel_recipe.get("tools", [])]:
                     if dy >= max_dy:
                         _detail_overflow = True
                         break
                     tag       = comp["tag"]
                     min_tier  = comp.get("min_tier", 1)
                     quantity  = comp.get("quantity", 1)
-                    have      = _count_qualifying(inv, tag, min_tier)
+                    from engine.crafting import material_candidate, _item_has_tag
+                    tool = comp.get("role") == "tool"
+                    have = sum(_item_has_tag(i, tag, min_tier) and (tool or material_candidate(i))
+                               for i in (inv.items if inv else []))
                     kw_def    = kw_data.get(tag, {})
                     disp_name = kw_def.get("display", tag)
                     _kw_color_alias = kw_def.get("color", "")
@@ -656,7 +653,7 @@ class CraftScreen:
                         import engine.palette as _pal
                         _kw_col = getattr(_pal, _kw_color_alias, self.TEXT)
                     panel.blit(self._font_small.render(
-                        f"  [{disp_name} >= {min_tier}] x {quantity}", True, _kw_col), (_dx, dy))
+                        f"  {'Tool (kept)' if tool else 'Material (spent)'}: [{disp_name} >= {min_tier}] x {quantity}", True, _kw_col), (_dx, dy))
                     dy += lh
                     have_col  = UI_TEXT_BRIGHT if have >= quantity else MSG_DANGER
                     panel.blit(self._font_small.render(

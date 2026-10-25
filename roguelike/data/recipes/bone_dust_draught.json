@@ -5,17 +5,33 @@
   "description": "Steep grave dust until the resonance leaches out. What remains quiets the blood.",
   "known": true,
   "components": [
-    {"tag": "resonant", "min_tier": 1, "quantity": 1},
-    {"tag": "bony", "min_tier": 1, "quantity": 1}
+    {
+      "tag": "resonant",
+      "min_tier": 1,
+      "quantity": 1
+    },
+    {
+      "tag": "bony",
+      "min_tier": 1,
+      "quantity": 1
+    }
   ],
   "requires_ambient": [
-    {"tag": "burning", "min_tier": 1},
-    {"tag": "vessel", "min_tier": 1}
+    {
+      "tag": "burning",
+      "min_tier": 1
+    }
   ],
   "result_item": "bone_dust_draught",
   "passive_processing": true,
   "processing_turns": 25,
   "processing_source": "steeping",
   "processing_decor": "drying_herb",
-  "completion_message": "The dust has settled. The draught is ready."
+  "completion_message": "The dust has settled. The draught is ready.",
+  "tools": [
+    {
+      "tag": "vessel",
+      "min_tier": 1
+    }
+  ]
 }

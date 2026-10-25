@@ -152,23 +152,23 @@ def run_journey(ev, custom_actions=None):
             yield key(pygame.K_i, "i")
             yield from choose_inventory(e, item)
             turn = e.world_time.turn
-            rendered_spans = []
-            original_span = e.text_reader._render_normal_span
-            def observe_span(screen, text, *args, **kwargs):
-                rendered_spans.append(text)
-                return original_span(screen, text, *args, **kwargs)
-            e.text_reader._render_normal_span = observe_span
             yield key(pygame.K_RETURN, "\r")
             ev.check("E04", "actual reader opens bound text", [True, "lab_label_sarcophagus"], [e.text_reader.open, e.text_reader._text_id])
             ev.check("E04", "reader contains definition body", e.data.texts[item.text_id]["pages"], e.text_reader._def["pages"])
             ev.check("E04", "read use advances one turn", turn+1, e.world_time.turn)
             capture("lab-document")
             ev.record["reader"] = {"text_id": item.text_id, "pages": e.text_reader._def["pages"], "surface_clip": list(pygame.display.get_surface().get_clip())}
-            drawn = " ".join(" ".join(rendered_spans).split())
-            ev.check("E04", "baseline text cutoff at If", True, drawn.endswith("If") and "do not ring the bells." not in drawn)
-            ev.defect("E04", "UI-TEXT-HEIGHT", "UI", {"text_id": item.text_id, "drawn_normal_spans": drawn,
-                       "missing_tail": "thou readest this in ignorance of these matters, know only: do not ring the bells."})
-            e.text_reader._render_normal_span = original_span
+            reader = e.text_reader
+            seen = set(reader._visible_rows)
+            for _ in range(100):
+                if reader._scroll == reader._max_scroll:
+                    break
+                yield key(pygame.K_PAGEDOWN)
+                seen.update(reader._visible_rows)
+            drawn = "".join(f["text"] for row in reader._layout_rows for f in row)
+            ev.check("E04", "complete warning accessible through bounded reader navigation", True,
+                     "do not ring the bells." in drawn and seen == set(range(len(reader._layout_rows))))
+            ev.check("E04", "reader navigation spends no further turns", turn+1, e.world_time.turn)
             yield key(pygame.K_ESCAPE)
             ev.check("E04", "reader closes", False, e.text_reader.open)
         elif variant == "processing":

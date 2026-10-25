@@ -6,12 +6,24 @@
   "description": "Steep dried coldbell in a clay vessel over heat. The resonance draws out into the water.",
   "known": true,
   "components": [
-    {"tag": "resonant", "min_tier": 2, "quantity": 1}
+    {
+      "tag": "resonant",
+      "min_tier": 2,
+      "quantity": 1
+    }
   ],
   "requires_ambient": [
-    {"tag": "burning", "min_tier": 1},
-    {"tag": "vessel", "min_tier": 1}
+    {
+      "tag": "burning",
+      "min_tier": 1
+    }
   ],
   "result_item": "coldbell_extract",
-  "apply_turns": 8
+  "apply_turns": 8,
+  "tools": [
+    {
+      "tag": "vessel",
+      "min_tier": 1
+    }
+  ]
 }

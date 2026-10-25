@@ -22,6 +22,8 @@ class ItemSystem:
         inv = getattr(engine.player, "inventory", None)
         if inv is None or not inv.contains(item):
             return False  # stale modal selection cannot apply effects or equip
+        from entities.item import repair_selected_equipment_use
+        repair_selected_equipment_use(item)
         effect = item.on_use
         if not effect:
             engine.log.add(

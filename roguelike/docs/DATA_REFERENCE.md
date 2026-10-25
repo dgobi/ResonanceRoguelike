@@ -203,12 +203,44 @@ Subdirectories: `weapons/`, `armor/`, `consumables/`, `tools/`. One JSON per ite
 | `tile` | string | Key into `tiles.json` |
 | `weight` | float | Weight in kg |
 | `stackable` | bool | Can stack in inventory |
-| `equip_slot` | string | Equipment slot name (omit if not equippable) |
+| `slot` | string | Runtime equipment slot name (omit if not equippable) |
 | `on_use` | string | Function name in `item_system.py` |
+| `damage_dice`, `damage_bonus` | string, number | Supported separate weapon fields, e.g. `"1d4"` and `2`; do not embed `+2` in the dice string |
+| `weight_reductions` | object | Satchel reductions by inventory display category, or `all`; derived at read/admission time |
+| `consumed_on_use` | bool | False excludes reusable items from automatic material selection; recipe roles determine actual craft consumption |
 | `qualities` | list | Quality descriptor IDs from `qualities.json` |
 | `description` | string | Flavor text shown in inventory |
 
 ---
+
+## Recipes (`data/recipes/`)
+
+The existing catalogue distinguishes physical materials, physical reusable tools
+and environmental conditions. For example, Field Campfire uses:
+
+```json
+{
+  "components": [{"tag": "fuel", "min_tier": 1, "quantity": 2}],
+  "tools": [{"tag": "cutting", "min_tier": 1}],
+  "result_tile": "campfire_unlit",
+  "places_in_world": true
+}
+```
+
+Each material quantity requires a distinct owned instance and is spent exactly
+once at successful commitment. `requires_single_item` retains its multi-tag
+conjunction and quantity form; it also selects spent material. `tools` require
+distinct physical instances within the allocation and are kept. Ambient tags
+cannot replace either role. An explicitly selected reusable material is spent;
+ordinary automatic allocation protects reusable items.
+
+`requires_ambient` contains conditions such as `burning`; vessels and heatproof
+implements belong in `tools`. Passive recipes implicitly also require
+`stationary_fire`. The craft UI and final validation share that condition.
+The existing `processing_source` selects drying/steeping placement beside a fire
+or cooking placement on it. `processing_turns` includes the placement action's
+first processing phase. Result capacity is checked with the resulting satchel
+state; cancellation and validation failures never reserve or refund copies.
 
 ## Bodies  (`data/bodies/`)
 

@@ -72,15 +72,15 @@ class CraftingAllocationTests(unittest.TestCase):
 
     def test_authored_hungering_oil_all_inventory_orders(self):
         recipe = self.recipe("hungering_oil")
-        bile, viscera, irrelevant = (self.item(i) for i in
-                                    ("crow_bile", "crude_viscera", "wood_bundle"))
-        ambient = [{"tag": "burning", "tier": 2}, {"tag": "vessel", "tier": 1}]
-        for order in itertools.permutations((bile, viscera, irrelevant)):
+        bile, viscera, irrelevant, pot = (self.item(i) for i in
+                                    ("crow_bile", "crude_viscera", "wood_bundle", "clay_pot"))
+        ambient = [{"tag": "burning", "tier": 2}]
+        for order in itertools.permutations((bile, viscera, irrelevant, pot)):
             with self.subTest(order=[i.item_id for i in order]):
                 inv = self.inventory(*order)
                 selected, missing = plan_craft(recipe, inv, ambient_sources=ambient)
                 self.assertEqual([], missing)
-                self.assertEqual([viscera, bile], selected)
+                self.assertEqual([viscera, bile, pot], selected)
                 self.assertTrue(can_craft(recipe, inv, ambient_sources=ambient)[0])
                 self.assertEqual(list(order), inv.items)
 
@@ -97,16 +97,17 @@ class CraftingAllocationTests(unittest.TestCase):
         recipe = self.recipe("hungering_oil")
         bile, viscera, sulphur = (self.item(i) for i in
                                   ("crow_bile", "crude_viscera", "sulphur_cap_fragment"))
-        ambient = [{"tag": "burning", "tier": 2}, {"tag": "vessel", "tier": 1}]
-        selected, missing = plan_craft(recipe, self.inventory(bile, viscera),
+        ambient = [{"tag": "burning", "tier": 2}]
+        pot = self.item("clay_pot")
+        selected, missing = plan_craft(recipe, self.inventory(bile, viscera, pot),
                                       ambient_sources=ambient, chosen_items={0: "crow_bile"})
         self.assertTrue(missing)  # The requested bile cannot also supply caustic.
-        selected, missing = plan_craft(recipe, self.inventory(sulphur, viscera, bile),
+        selected, missing = plan_craft(recipe, self.inventory(sulphur, viscera, bile, pot),
                                       ambient_sources=ambient, chosen_items={0: "crow_bile"})
         self.assertEqual([], missing)
-        self.assertEqual([bile, sulphur], selected)
+        self.assertEqual([bile, sulphur, pot], selected)
         self.assertEqual({0: "crow_bile"}, selected.choices)
-        self.assertTrue(plan_craft(recipe, self.inventory(viscera, sulphur),
+        self.assertTrue(plan_craft(recipe, self.inventory(viscera, sulphur, pot),
                                    ambient_sources=ambient, chosen_items={0: "crow_bile"})[1])
 
     def test_prefers_lowest_usable_tiers_without_inventory_order_ties(self):
@@ -137,7 +138,7 @@ class CraftingAllocationTests(unittest.TestCase):
 
     def test_ambient_shortfall_does_not_steal_a_mandatory_material(self):
         dual = self.tagged("dual", "heat", "fuel")
-        recipe = {"components": [{"tag": "heat"}, {"tag": "fuel"}]}
+        recipe = {"requires_ambient": [{"tag": "heat"}], "components": [{"tag": "fuel"}]}
         selected, missing = plan_craft(recipe, self.inventory(dual),
                                       ambient_sources=[{"tag": "heat", "tier": 1}])
         self.assertEqual([], missing)
@@ -199,7 +200,7 @@ class CraftingAllocationTests(unittest.TestCase):
         inv = self.inventory(extra, blade, fuel)
         engine = self.engine(inv)
         engine.player.equipment.equip(blade, "weapon")
-        recipe = {"components": [{"tag": "fuel"}, {"tag": "cutting"}]}
+        recipe = {"components": [{"tag": "fuel"}], "tools": [{"tag": "cutting"}]}
         selected, missing = plan_craft(recipe, self.inventory(fuel, blade), chosen_items={0: fuel.item_id})
         self.assertEqual([], missing)
         self.assertTrue(commit_craft(engine, recipe, selected))
@@ -226,7 +227,7 @@ class CraftingAllocationTests(unittest.TestCase):
         # All three-item/three-requirement tag graphs and ambient masks. The
         # oracle enumerates assignments, not the implementation's matching logic.
         recipe = {"components": [{"tag": str(n)} for n in range(3)]}
-        assignments = list(itertools.product((0, 1, 2, None), repeat=3))
+        assignments = list(itertools.product((0, 1, 2), repeat=3))
         for graph in range(1 << 9):
             items = [self.tagged(str(i), *(str(tag) for tag in range(3)
                                            if graph & (1 << (i * 3 + tag)))) for i in range(3)]

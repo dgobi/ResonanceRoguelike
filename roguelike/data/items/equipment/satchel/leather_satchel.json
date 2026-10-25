@@ -3,6 +3,7 @@
   "name": "Leather Satchel",
   "category": "equipment",
   "slot": "satchel",
+  "on_use": "equip_toggle",
   "tile": "leather_satchel",
   "weight": 0.8,
   "description": "Worn leather, stitched at the seams. Carries more than it looks.",

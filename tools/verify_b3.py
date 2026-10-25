@@ -242,11 +242,10 @@ def main(include_c=False, include_d=False):
             required += [('d','journey',v,'loop') for v in ('confirmation','throw','movement','combat')]
         actual=[tuple(w['job'][k] for k in ('suite','scenario','variant','phase')) for w in report['workers']]
         check('H03','all independently enumerated required workers executed',sorted(required),sorted(actual))
-        # C now has a positive drop oracle. Retain the separate UI observation.
-        prior=read(ROOT/'evidence/b2-deferred-results.json')
-        wanted={d['id']:d['symptom'] for d in prior if d['id'] == 'UI-TEXT-HEIGHT'}
+        # C drop and G12 complete-text access now have positive journey oracles.
+        wanted={}  # The last current deferral, UI-TEXT-HEIGHT, is repaired in G12.
         current={d['id']:d['symptom'] for w in report['workers'] for d in w['result'].get('defects',[])}
-        check('H03','unchanged out-of-scope defect signatures',wanted,current)
+        check('H03','no current deferred defect signatures remain',wanted,current)
         check('B02','checkpoint generation defect repaired',True,all(w['valid'] for w in report['workers'] if w['job']['scenario']=='coherence'))
         check('B03','dirty hot-owner defect repaired',True,all(w['valid'] for w in report['workers'] if w['job']['scenario']=='coherence'))
         check('B2-09','complete B1 parameter regression set',57,sum(w['job']['suite']=='b1' and w['valid'] for w in report['workers']))

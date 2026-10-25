@@ -39,7 +39,7 @@ def exchange(engine, consumed, outputs=()):
             or any(i is None or inv.contains(i) for i in outputs)):
         return False
     remaining = [i for i in inv.items if not any(i is old for old in consumed)]
-    weight = sum(i.weight for i in remaining + outputs)
+    weight = inv.weight_for(remaining + outputs)
     # Removal alone must remain possible even when already overburdened.
     if outputs and weight > inv.capacity:
         return False

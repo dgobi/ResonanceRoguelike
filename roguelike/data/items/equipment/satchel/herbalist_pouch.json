@@ -3,6 +3,7 @@
   "name": "Herbalist's Pouch",
   "category": "equipment",
   "slot": "satchel",
+  "on_use": "equip_toggle",
   "tile": "herbalist_pouch",
   "weight": 0.4,
   "description": "Waxed cloth, many pockets. Smells of dried things.",

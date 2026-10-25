@@ -156,7 +156,7 @@ heal_minor(item: Item, engine: Engine) -> None
     # Calls fighter.heal(item.heal_amount).
 
 equip_light(item: Item, engine: Engine) -> None
-    # Activates item's light_source component; adds to light slot.
+    # Activates the carried item's light source in offhand.
 ```
 
 ### Armor Helpers
@@ -290,18 +290,28 @@ Full-screen overlay for reading found documents (`data/texts/`).
 
 ### Features
 
-- **Multi-page:** arrow keys / PgUp/PgDn to scroll
-- **Damaged glyphs:** random glyph substitution for damaged spans; recovers as player learns Deep Tongue words
-- **Deep Tongue:** words from the lexicon render in italic `night_purple` font
-- **Learning:** reading a Deep Tongue word the player hasn't seen triggers `language.learn()`
+- **Authored pages:** Left/Right changes pages and resets visual scroll.
+- **Overflow:** Up/Down scrolls a line; PgUp/PgDn scrolls a viewport; Home/End
+  reaches the beginning/end. The fixed footer shows controls and progress.
+- **Wrapping:** actual font and glyph widths determine visual rows. Paragraphs,
+  explicit breaks, long tokens, mixed spans, inscriptions and the alphabet remain
+  accessible on constrained displays, including 480 by 320.
+- **Identity:** recovery keys remain `(text_id, authored_page, authored_span)`.
+  Wrapping and scrolling never change them. Known words show their translation;
+  unknown Deep Tongue words show their existing phoneme glyphs.
+- **Learning and time:** ordinary inventory reading costs its existing opening
+  turn. A text's `teach_words` action happens once per text ID. Rendering and
+  navigation spend no turns and do not teach, recover, reroll or pulse.
+- **Close:** Esc, Enter or keypad Enter. When opened from inventory, the
+  underlying inventory remains available after closing the reader.
 
 ### Opening
 
 ```python
-engine.open_text_reader(text_id: str) -> None
+engine.text_reader.open_text(text_def: dict) -> None
 ```
 
-Called by `item_system.read()`.
+Called by `ItemSystem._use_read()` and existing world interactions.
 
 ---
 
@@ -345,5 +355,57 @@ Full inventory UI opened with `I`.
 |---|---|
 | `E` | Equip / unequip |
 | `D` | Drop to ground |
-| `Enter` / `U` | Use item |
+| `Enter` / keypad `Enter` | Use item / equip |
 | `Esc` | Close |
+
+### Equipment and carrying (G12)
+
+Use the Revelation Lens and each existing satchel with the ordinary inventory
+equip command; use again to remove it. The Lens occupies `weapon`; Q Reveals an
+existing creature weakness/resistance on contact, and R uses its existing True
+Strike and six-turn cooldown. Its damage uses `1d4` plus `damage_bonus: 2`.
+
+`Inventory.current_weight` is the derived carrying load. Item weights stay raw
+and unchanged. The equipped satchel applies its definition's reductions once:
+leather 10% across categories; herbalist 30% to Consumables/Preparations;
+component 35% to Components and 20% to Tools. UI categories and all acquisition,
+take-all, exchange/output and encumbrance checks share that calculation.
+An exchange projects the equipment remaining after its exact consumed items.
+
+Removing, dropping or switching a bag may leave the player overweight. Those
+actions and supported loads preserve every possession. Further acquisition must
+fit the resulting effective limit; rejected items remain with their source and
+feedback gives the effective load. Reequip a carried bag or drop possessions to
+recover. Bags do not contain another inventory owner.
+
+Old carried and visited selected equipment with a missing/null use handler is
+repaired narrowly. Non-null custom handlers and unrelated mutable fields remain.
+
+### Crafting roles and heat (G12)
+
+`C` retains the existing recipe list and ingredient-choice interface. Materials
+in `components` or `requires_single_item` are exact physical instances, spent
+only on successful commitment. `tools` are physical capabilities kept after
+the work. `requires_ambient` describes environmental conditions, never a supply
+of consumed material. A reusable item's keywords do not supply free fuel.
+Reusable valuables are excluded from automatic material selection; an explicit
+material choice marked **spent** incurs the actual cost and detaches equipment
+and light safely. Cancelled, stale, invalid-placement and rejected-output work
+preserves ingredients.
+
+Field Campfire spends two `wood_bundle` instances and keeps a cutting tool.
+Placement creates an unlit fire and costs its ordinary action; the existing
+interaction ignites it with another action. A live, equipped offhand flame can
+satisfy portable burning requirements. Carried, extinguished, expired or
+displaced lights cannot. Passive processing additionally requires a nearby
+stationary lit campfire and a valid placement: drying beside it, cooking on it.
+A torch alone is not a drying/steeping station.
+
+The existing musk route uses the Heath Stalker's tier-2 butchery yield (the gland
+is a possible yield), dries one real gland beside stationary fire for the
+authored ten turns, then leaves the pellet on the floor for pickup. Placement's
+first phase counts toward those ten. Its normal targeting/throw path spends
+one pellet on a legal confirmation, creates the existing radius-three
+disruption for six AI phases, and then normal behavior resumes. Cancellation
+keeps the pellet. Disruption is not a guaranteed flee or smell-specific rule.
+Existing active/hot aging and cold-map freezing remain in effect.

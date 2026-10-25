@@ -3,12 +3,25 @@ from __future__ import annotations
 from entities.entity import Entity
 
 
+def repair_selected_equipment_use(item) -> None:
+    """Only the four shipped G12 equipment definitions lacked their handler."""
+    if (getattr(item, "item_id", "") in {
+            "revelation_lens", "leather_satchel", "herbalist_pouch", "component_satchel"}
+            and getattr(item, "on_use", None) is None):
+        item.on_use = "equip_toggle"
+
+
 class Item(Entity):
     """
     An entity that can be picked up, carried, and used.
     Lives either on the floor (in engine.entities) or
     in an actor's inventory.
     """
+
+    def __setstate__(self, state):
+        # Visited scene owners are pickled Item instances, not factory rows.
+        self.__dict__.update(state)
+        repair_selected_equipment_use(self)
 
     def __init__(
         self,
@@ -53,6 +66,6 @@ class Item(Entity):
         # Temporary essence coating — list of {essence, strength, hits_remaining}
         # Applied via apply_to_weapon handler. Each hit consumes one charge.
         self.temporary_essence: list         = []
-        # If False, item is not removed from inventory when used as a crafting component.
-        # Set on tools, vessels, weapons, armour — anything that survives the process.
+        # Reusable items are excluded from automatic material selection. Recipe
+        # tools are kept; explicitly selected materials are always spent.
         self.consumed_on_use:   bool         = True

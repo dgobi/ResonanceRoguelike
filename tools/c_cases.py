@@ -158,7 +158,7 @@ def run_case(e, ev):
         ev.check('C-05','equipped ingredient planned',[],missing)
         ev.check('C-05','consume equipped ingredient',True,commit_craft(e,{'components':[{'tag':'cutting'}]},selected))
         check_owner(ev,e,blade,None,case='C-05')
-        ambient_recipe={'requires_single_item':[{'tag':'fuel'}],'components':[{'tag':'heat','quantity':2}]}
+        ambient_recipe={'requires_single_item':[{'tag':'fuel'}],'requires_ambient':[{'tag':'heat'}]}
         inv.add(fuel)
         plan,missing=plan_craft(ambient_recipe,inv,ambient_sources=[{'tag':'heat','tier':1}])
         ev.check('C-05','single-item and ambient plan',True,not missing and plan==[fuel])

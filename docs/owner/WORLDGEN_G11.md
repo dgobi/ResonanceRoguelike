@@ -75,7 +75,7 @@ The separate existing G10 normal-start excursion is replayed with its original
 controls: laboratory ascent, waystone interaction, off-road harvesting, four
 boundaries, starting-water consumption and return under native gameplay systems.
 This is a bounded ordinary-play demonstration, not a whole-world survival claim.
-The final ordinary replay takes 190 movement inputs and 220 turns, ends at 60/60
+The final ordinary replay takes 186 movement inputs and 216 turns, ends at 60/60
 health, and retains its harvested sulphur-cap fragment and empty water skin.
 
 A genuine pre-edit G10 checkpoint retains a real waystone mutation plus exact

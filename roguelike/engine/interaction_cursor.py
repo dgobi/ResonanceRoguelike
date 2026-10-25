@@ -269,6 +269,8 @@ class InteractionCursor:
                                 and any(owned is it for owned in engine._items_at(lx, ly))):
                             if take_floor(engine, it):
                                 _taken_names.append(getattr(it, "name", "") or "something")
+                            elif inv.weight_for(inv.items + [it]) > inv.capacity:
+                                engine.log.add(inv.capacity_feedback(it), EARTH_BROWN)
                     acted = bool(_taken_names)
                     if _taken_names:
                         _parts = [f"the {n}" for n in _taken_names]
@@ -301,7 +303,10 @@ class InteractionCursor:
                 _dname = getattr(item, "name", "") or "something"
                 engine.log.add(f"Thou takest the {_dname}.", WORN_STONE)
                 return True
-            engine.log.add("Thou canst not carry more.", EARTH_BROWN)
+            if inv.weight_for(inv.items + [item]) > inv.capacity:
+                engine.log.add(inv.capacity_feedback(item), EARTH_BROWN)
+            else:
+                engine.log.add("That item is no longer here.", EARTH_BROWN)
             return False
         elif sel == len(items):
             # "Take all"
@@ -309,6 +314,8 @@ class InteractionCursor:
             for it in items:
                 if take_container(engine, lx, ly, it):
                     _taken_names.append(getattr(it, "name", "") or "something")
+                elif inv.weight_for(inv.items + [it]) > inv.capacity:
+                    engine.log.add(inv.capacity_feedback(it), EARTH_BROWN)
             if _taken_names:
                 _parts = [f"the {n}" for n in _taken_names]
                 if len(_parts) == 1:

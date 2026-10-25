@@ -250,6 +250,8 @@ class Engine:
         self.world_x   = world_x
         self.world_y   = world_y
         self.data      = data
+        if player.inventory is not None:
+            player.inventory.bind_carrying(player.equipment, data.items)
         self.display   = display
         self.mode      = GameMode.LOCAL
         self.overmap_cam_x    = world_x
@@ -5907,6 +5909,9 @@ class Engine:
             _iname = getattr(item, "name", "") or "something"
             self.log.add(f"Thou takest the {_iname}.", WORN_STONE)
             return True
+        if inv.weight_for(inv.items + [item]) > inv.capacity:
+            self.log.add(inv.capacity_feedback(item), OLD_GOLD)
+            return False
         self.log.add("Thou canst not take that now.", OLD_GOLD)
         return False
 

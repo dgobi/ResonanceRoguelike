@@ -5,13 +5,29 @@
   "description": "Render crow bile into a blade coating. The acid does not forgive.",
   "known": true,
   "components": [
-    {"tag": "caustic", "min_tier": 1, "quantity": 1},
-    {"tag": "viscous", "min_tier": 1, "quantity": 1}
+    {
+      "tag": "caustic",
+      "min_tier": 1,
+      "quantity": 1
+    },
+    {
+      "tag": "viscous",
+      "min_tier": 1,
+      "quantity": 1
+    }
   ],
   "requires_ambient": [
-    {"tag": "burning", "min_tier": 1},
-    {"tag": "vessel", "min_tier": 1}
+    {
+      "tag": "burning",
+      "min_tier": 1
+    }
   ],
   "result_item": "bile_coating",
-  "passive_processing": false
+  "passive_processing": false,
+  "tools": [
+    {
+      "tag": "vessel",
+      "min_tier": 1
+    }
+  ]
 }

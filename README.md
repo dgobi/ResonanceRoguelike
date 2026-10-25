@@ -1,5 +1,10 @@
 # Resonance roguelike — production main
 
+G12 repairs the Revelation Lens, satchel carrying, real preparation costs and
+complete found-text access. See [G12 delivery](docs/owner/GAMEPLAY_G12.md),
+[equipment, carrying, heat and reader controls](roguelike/docs/SYSTEMS.md), and
+[recipe/item authoring fields](roguelike/docs/DATA_REFERENCE.md).
+
 G10 gives the eight existing wilderness biomes coherent tree stands, clearings,
 wet patches and rock masses, with an explicit saved surface policy. Read the
 [terrain tuning and preview guide](roguelike/docs/WILDERNESS_TERRAIN.md).
@@ -22,6 +27,7 @@ $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\
 & $ResonancePython -X utf8 tools/critical_fix_regressions/verify_fixes.py --game roguelike --timeout 1800
 & $ResonancePython -X utf8 tools/worldgen_g9_diagnostic.py --journey --evidence evidence/worldgen-g9/owner-diagnostic-02
 & $ResonancePython -X utf8 tools/verify_d.py
+& $ResonancePython -X utf8 tools/verify_g12.py --evidence evidence/gameplay-g12/owner-verification
 ```
 
 The interpreter path supplies dependencies only; game code runs from this checkout.

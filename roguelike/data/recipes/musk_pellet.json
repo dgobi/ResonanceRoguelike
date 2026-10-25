@@ -2,7 +2,7 @@
   "id": "musk_pellet",
   "name": "musk pellet",
   "category": "wildcrafting",
-  "description": "Dry the musk gland until it hardens. The smell will scatter anything with a nose.",
+  "description": "Dry the musk gland beside a stationary fire. The thrown pellet briefly disrupts nearby creatures, buying time to move.",
   "known": true,
   "requires_single_item": [
     {"tag": "viscous", "min_tier": 1},

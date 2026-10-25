@@ -64,8 +64,8 @@ class ItemFactory:
         # Crafting keyword tags
         item.keywords = copy.deepcopy(defn.get("keywords", []))
 
-        # Whether this item is consumed when used as a crafting component.
-        # Default True (consumable). Set False on tools, weapons, vessels, armour.
+        # Reusability controls automatic material eligibility, not recipe cost.
+        # Materials are spent and tools kept according to their recipe role.
         item.consumed_on_use = defn.get("consumed_on_use", True)
 
         return item

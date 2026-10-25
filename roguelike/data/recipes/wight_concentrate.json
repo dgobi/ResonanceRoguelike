@@ -5,16 +5,27 @@
   "description": "Distil wight residue to potency. What you see after will not be comforting.",
   "known": true,
   "requires_single_item": [
-    {"tag": "resonant", "min_tier": 3}
+    {
+      "tag": "resonant",
+      "min_tier": 3
+    }
   ],
   "requires_ambient": [
-    {"tag": "burning", "min_tier": 2},
-    {"tag": "vessel", "min_tier": 1}
+    {
+      "tag": "burning",
+      "min_tier": 2
+    }
   ],
   "result_item": "wight_concentrate",
   "passive_processing": true,
   "processing_turns": 40,
   "processing_source": "steeping",
   "processing_decor": "drying_herb",
-  "completion_message": "The concentrate is complete. It pulses faintly."
+  "completion_message": "The concentrate is complete. It pulses faintly.",
+  "tools": [
+    {
+      "tag": "vessel",
+      "min_tier": 1
+    }
+  ]
 }

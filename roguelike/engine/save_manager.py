@@ -1017,6 +1017,7 @@ def _deserialize_player(data: dict, engine: "Engine") -> None:
 
     # Restore equipped items after inventory is fully reconstructed
     _restore_equipment(p, data.get("equipment", {}), engine.data)
+    p.inventory.bind_carrying(p.equipment, engine.data.items)
 
 
 def _restore_equipment(player, saved_equipment: dict, data) -> None:
