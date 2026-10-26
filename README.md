@@ -1,5 +1,11 @@
 # Resonance roguelike — production main
 
+G16 adds a furnished preparation workshop with one finite musk gland and wood
+bundle in its crate. Emptying and dismantling the crate supplies the second wood
+for a Field Campfire. Light the placed fire, dry the gland for ten phases and
+bring the resulting pellet home. Existing worlds retain their old workshops.
+See [G16 delivery](docs/owner/GAMEPLAY_G16.md).
+
 G15 adds one finite Herbal Dressing to each newly selected apothecary's medicine
 chest. Search with `E`, take the dose, then select it in `I` and press Enter:
 an injured living player recovers up to 12 HP for one inventory action. Full
@@ -41,6 +47,7 @@ $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\
 & $ResonancePython -X utf8 tools/verify_g12.py --evidence evidence/gameplay-g12/owner-verification
 & $ResonancePython -X utf8 tools/verify_g14.py --evidence evidence/gameplay-g14/owner-verification
 & $ResonancePython -X utf8 tools/verify_g15.py --evidence evidence/gameplay-g15/owner-verification
+& $ResonancePython -X utf8 tools/verify_g16.py --evidence evidence/gameplay-g16/owner-verification
 ```
 
 The interpreter path supplies dependencies only; game code runs from this checkout.

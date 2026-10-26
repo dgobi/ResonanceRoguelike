@@ -1,0 +1,1763 @@
+{
+  "passed": true,
+  "demonstration": {
+    "start": {
+      "chunk": [
+        73,
+        99
+      ],
+      "submap": "sub_73_99_0",
+      "position": [
+        15,
+        20
+      ],
+      "turn": 480,
+      "hp": 60,
+      "hunger": 0.0,
+      "thirst": 0.0,
+      "inventory": [
+        "tallow_torch",
+        "crow_jerky",
+        "water_flask",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble"
+      ],
+      "actors": [],
+      "possessions": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 0,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "crow_jerky",
+          "item_state_version": 1,
+          "name": "Crow Jerky",
+          "tile": "food_item",
+          "weight": 0.2,
+          "stackable": true,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.35,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 2
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "water_flask",
+          "item_state_version": 1,
+          "name": "Water Flask",
+          "tile": "water_flask",
+          "weight": 0.5,
+          "stackable": false,
+          "count": 1,
+          "on_use": "drink",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": 0.5,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": "water",
+          "liquid_volume": 0.5,
+          "qualities": {},
+          "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "drinkable",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "crude_blade",
+          "item_state_version": 1,
+          "name": "a crude blade",
+          "tile": "generic_item",
+          "weight": 1.5,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_toggle",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Iron, poorly kept. It will serve.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "cutting",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "leather_jack",
+          "item_state_version": 1,
+          "name": "a leather jack",
+          "tile": "generic_item",
+          "weight": 3.0,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_toggle",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "moist_pebble",
+          "item_state_version": 1,
+          "name": "moist pebble",
+          "tile": "pebble",
+          "weight": 0.1,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_toggle",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "resonant",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ]
+    },
+    "acquisition": {
+      "chunk": [
+        75,
+        100
+      ],
+      "submap": null,
+      "position": [
+        17,
+        11
+      ],
+      "turn": 721,
+      "hp": 60,
+      "hunger": 0.2410000000000002,
+      "thirst": 0.311249999999998,
+      "inventory": [
+        "tallow_torch",
+        "crow_jerky",
+        "water_flask",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble",
+        "letter",
+        "stalker_musk_gland",
+        "wood_bundle"
+      ],
+      "actors": [
+        {
+          "id": "grave_thing",
+          "name": "Grave Thing",
+          "x": 12,
+          "y": 29,
+          "hp": 18
+        },
+        {
+          "id": "grave_thing",
+          "name": "Grave Thing",
+          "x": 4,
+          "y": 38,
+          "hp": 18
+        },
+        {
+          "id": "grave_thing",
+          "name": "Grave Thing",
+          "x": 32,
+          "y": 39,
+          "hp": 18
+        },
+        {
+          "id": "hollow_revenant",
+          "name": "Hollow Revenant",
+          "x": 34,
+          "y": 8,
+          "hp": 14
+        },
+        {
+          "id": "grave_thing",
+          "name": "Grave Thing",
+          "x": 17,
+          "y": 7,
+          "hp": 18
+        }
+      ],
+      "possessions": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 241,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "crow_jerky",
+          "item_state_version": 1,
+          "name": "Crow Jerky",
+          "tile": "food_item",
+          "weight": 0.2,
+          "stackable": true,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.35,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 2
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "water_flask",
+          "item_state_version": 1,
+          "name": "Water Flask",
+          "tile": "water_flask",
+          "weight": 0.5,
+          "stackable": false,
+          "count": 1,
+          "on_use": "drink",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": 0.5,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": "water",
+          "liquid_volume": 0.5,
+          "qualities": {},
+          "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "drinkable",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "crude_blade",
+          "item_state_version": 1,
+          "name": "a crude blade",
+          "tile": "generic_item",
+          "weight": 1.5,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_toggle",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Iron, poorly kept. It will serve.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "cutting",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "leather_jack",
+          "item_state_version": 1,
+          "name": "a leather jack",
+          "tile": "generic_item",
+          "weight": 3.0,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_toggle",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "moist_pebble",
+          "item_state_version": 1,
+          "name": "moist pebble",
+          "tile": "pebble",
+          "weight": 0.1,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_toggle",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "resonant",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "letter",
+          "item_state_version": 1,
+          "name": "a letter",
+          "tile": "document",
+          "weight": 0.02,
+          "stackable": false,
+          "count": 1,
+          "on_use": "read",
+          "text_id": "workshop_musk_notes_b",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Folded paper. Someone meant to send this.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "stalker_musk_gland",
+          "item_state_version": 1,
+          "name": "Musk Gland",
+          "tile": "generic_item",
+          "weight": 0.1,
+          "stackable": true,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A pale sac near the base of the spine. The secretion it produced was territorial in function. Rendered carefully, it might serve a different purpose.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "viscous",
+              "tier": 1
+            },
+            {
+              "tag": "purgative",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "wood_bundle",
+          "item_state_version": 1,
+          "name": "bundle of wood",
+          "tile": "generic_item",
+          "weight": 1.0,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A loose bundle of dry branches. Snapped from dead fall.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "fuel",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ]
+    },
+    "preparation": {
+      "fire": [
+        24,
+        15
+      ],
+      "spot": [
+        24,
+        16
+      ],
+      "phase_start": 732,
+      "placement_turn": 733,
+      "exact_native_gland_spent": true,
+      "two_physical_wood_spent": true,
+      "tool_retained": true,
+      "source_dismantled": true,
+      "state": {
+        "chunk": [
+          75,
+          100
+        ],
+        "submap": null,
+        "position": [
+          24,
+          16
+        ],
+        "turn": 733,
+        "hp": 60,
+        "hunger": 0.25300000000000017,
+        "thirst": 0.32624999999999765,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "letter"
+        ],
+        "actors": [
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 12,
+            "y": 30,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 5,
+            "y": 40,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 33,
+            "y": 38,
+            "hp": 18
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 36,
+            "y": 9,
+            "hp": 14
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 16,
+            "y": 7,
+            "hp": 18
+          }
+        ],
+        "possessions": [
+          {
+            "item_id": "tallow_torch",
+            "item_state_version": 1,
+            "name": "Tallow Torch",
+            "tile": "tallow_torch",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_light",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": 600,
+            "turns_lit": 253,
+            "light_data": {
+              "radius": 8,
+              "color": [
+                255,
+                180,
+                60
+              ],
+              "falloff": 1.8,
+              "flicker": true
+            },
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "water_flask",
+            "item_state_version": 1,
+            "name": "Water Flask",
+            "tile": "water_flask",
+            "weight": 0.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "drink",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": "water",
+            "liquid_volume": 0.5,
+            "qualities": {},
+            "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crude_blade",
+            "item_state_version": 1,
+            "name": "a crude blade",
+            "tile": "generic_item",
+            "weight": 1.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Iron, poorly kept. It will serve.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "leather_jack",
+            "item_state_version": 1,
+            "name": "a leather jack",
+            "tile": "generic_item",
+            "weight": 3.0,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "moist_pebble",
+            "item_state_version": 1,
+            "name": "moist pebble",
+            "tile": "pebble",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "letter",
+            "item_state_version": 1,
+            "name": "a letter",
+            "tile": "document",
+            "weight": 0.02,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "workshop_musk_notes_b",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Folded paper. Someone meant to send this.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      }
+    },
+    "prepared": {
+      "state": {
+        "chunk": [
+          75,
+          100
+        ],
+        "submap": null,
+        "position": [
+          23,
+          16
+        ],
+        "turn": 744,
+        "hp": 60,
+        "hunger": 0.2640000000000002,
+        "thirst": 0.33999999999999736,
+        "inventory": [
+          "tallow_torch",
+          "crow_jerky",
+          "water_flask",
+          "crude_blade",
+          "leather_jack",
+          "moist_pebble",
+          "letter",
+          "musk_pellet"
+        ],
+        "actors": [
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 14,
+            "y": 29,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 2,
+            "y": 38,
+            "hp": 18
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 33,
+            "y": 38,
+            "hp": 18
+          },
+          {
+            "id": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "x": 37,
+            "y": 9,
+            "hp": 14
+          },
+          {
+            "id": "grave_thing",
+            "name": "Grave Thing",
+            "x": 15,
+            "y": 6,
+            "hp": 18
+          }
+        ],
+        "possessions": [
+          {
+            "item_id": "tallow_torch",
+            "item_state_version": 1,
+            "name": "Tallow Torch",
+            "tile": "tallow_torch",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_light",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": 600,
+            "turns_lit": 264,
+            "light_data": {
+              "radius": 8,
+              "color": [
+                255,
+                180,
+                60
+              ],
+              "falloff": 1.8,
+              "flicker": true
+            },
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "water_flask",
+            "item_state_version": 1,
+            "name": "Water Flask",
+            "tile": "water_flask",
+            "weight": 0.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "drink",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": "water",
+            "liquid_volume": 0.5,
+            "qualities": {},
+            "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crude_blade",
+            "item_state_version": 1,
+            "name": "a crude blade",
+            "tile": "generic_item",
+            "weight": 1.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Iron, poorly kept. It will serve.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "leather_jack",
+            "item_state_version": 1,
+            "name": "a leather jack",
+            "tile": "generic_item",
+            "weight": 3.0,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "moist_pebble",
+            "item_state_version": 1,
+            "name": "moist pebble",
+            "tile": "pebble",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "letter",
+            "item_state_version": 1,
+            "name": "a letter",
+            "tile": "document",
+            "weight": 0.02,
+            "stackable": false,
+            "count": 1,
+            "on_use": "read",
+            "text_id": "workshop_musk_notes_b",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Folded paper. Someone meant to send this.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "musk_pellet",
+            "item_state_version": 1,
+            "name": "musk pellet",
+            "tile": "generic_item",
+            "weight": 0.05,
+            "stackable": true,
+            "count": 1,
+            "on_use": "throw_musk_pellet",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A dried pellet of stalker musk. Throw to disrupt nearby creatures for six turns. The smell is contained until it breaks.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "purgative",
+                "tier": 2
+              },
+              {
+                "tag": "volatile",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      "processing_phases": 10,
+      "placement_included": true,
+      "exactly_one_owned_pellet": true,
+      "source_dismantled": true
+    },
+    "finish": {
+      "chunk": [
+        73,
+        99
+      ],
+      "submap": "sub_73_99_0",
+      "position": [
+        15,
+        20
+      ],
+      "turn": 956,
+      "hp": 60,
+      "hunger": 0.1260000000000004,
+      "thirst": 0.24374999999999997,
+      "inventory": [
+        "tallow_torch",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble",
+        "letter",
+        "musk_pellet",
+        "empty_water_skin"
+      ],
+      "actors": [],
+      "possessions": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 476,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "crude_blade",
+          "item_state_version": 1,
+          "name": "a crude blade",
+          "tile": "generic_item",
+          "weight": 1.5,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_toggle",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Iron, poorly kept. It will serve.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "cutting",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "leather_jack",
+          "item_state_version": 1,
+          "name": "a leather jack",
+          "tile": "generic_item",
+          "weight": 3.0,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_toggle",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "moist_pebble",
+          "item_state_version": 1,
+          "name": "moist pebble",
+          "tile": "pebble",
+          "weight": 0.1,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_toggle",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "resonant",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "letter",
+          "item_state_version": 1,
+          "name": "a letter",
+          "tile": "document",
+          "weight": 0.02,
+          "stackable": false,
+          "count": 1,
+          "on_use": "read",
+          "text_id": "workshop_musk_notes_b",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "Folded paper. Someone meant to send this.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "musk_pellet",
+          "item_state_version": 1,
+          "name": "musk pellet",
+          "tile": "generic_item",
+          "weight": 0.05,
+          "stackable": true,
+          "count": 1,
+          "on_use": "throw_musk_pellet",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A dried pellet of stalker musk. Throw to disrupt nearby creatures for six turns. The smell is contained until it breaks.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "purgative",
+              "tier": 2
+            },
+            {
+              "tag": "volatile",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "empty_water_skin",
+          "item_state_version": 1,
+          "name": "empty water skin",
+          "tile": "generic_item",
+          "weight": 0.2,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0.0,
+          "qualities": {},
+          "description": "A leather skin, empty. The seams are still sound. Could be refilled from clean water.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ]
+    },
+    "original_loop": true,
+    "normal_fov_views_visually_checked": 4,
+    "in_progress_cold_process": true,
+    "returned_cold_process": true,
+    "f9_unsaved_wait": true,
+    "source_disk_revisit": {
+      "crate_absent": true,
+      "no_reward_on_floor": true,
+      "method": "cache eviction and disk revisit; generation forbidden"
+    }
+  },
+  "checks": [
+    {
+      "log": "narrow-a.txt",
+      "tests": 4,
+      "seconds": 11.782,
+      "passed": true
+    },
+    {
+      "log": "narrow-b.txt",
+      "tests_run": 7,
+      "passing": 6,
+      "loader_errors": 1,
+      "passed": false,
+      "reason": "incorrect existing G13 class name in development command; corrected command retained in development-dependencies.txt"
+    },
+    {
+      "log": "narrow-c.txt",
+      "tests": 4,
+      "seconds": 33.077,
+      "passed": true,
+      "coverage": "all four rotations, real grid/roadside selection, native material ownership and processing, genuine G15 historical comparison"
+    },
+    {
+      "log": "development-dependencies.txt",
+      "tests": 2,
+      "seconds": 255.828,
+      "passed": true,
+      "coverage": "G13 live membership and complete historical G5 assigned-context/rotation cohort"
+    }
+  ],
+  "development_findings": [
+    "First event run assumed a container prompt remains open after taking one item. Reopen it normally for the second item; no runtime change.",
+    "Existing original-loop driver now accepts optional bounded frame/time/turn limits; all original defaults retained. G16 uses 2500 frames, 600 seconds and 1200 turns per process."
+  ],
+  "controls": "Development preflight only. Full event artifacts retained in ignored .baseline/g16-development; final demonstration retained with final gates. No personal saves, desktop control or development checkout copies.",
+  "source": {
+    "roguelike/data/buildings/commercial/workshop_b.json": "d7d8d1169be1a766342a8ee36db6d3898f0481d72a7c9efb7d64ac3c2eb6ba1b",
+    "roguelike/data/loot_pools/workshop_b_musk.json": "e0527c1aad32729b5e8c6df3e5150609da04a456cafed887327825cc6d11eb3d",
+    "roguelike/data/loot_pools/workshop_b_fuel.json": "22f4e9467b927c4d2fe34aad574b0e1cdf4b5538fb837cdb8ea1f035d3eb038b",
+    "roguelike/data/texts/world/notes/workshop_musk_notes_b.json": "ed5813095d8fa579ce66b17955b8ebf3568669b4d7c920f1c4e35aebc7579aba",
+    "roguelike/data/generation/settlement_profiles.json": "09ed1b6f54db84eff05ce3a29cdbb7d9f87cb3b1eb4dc511674b56ab310aba00",
+    "tools/g16_journey.py": "a34a4ab42296ba8295699db9aadd3dfcdd62078e392e7709c167fa1b152b57e3",
+    "tools/g16_historical.py": "0eb8c27bcbfd86e41e85bd542283627fab33f92125a22c1d0d3112bf543452a1",
+    "tools/verify_g16.py": "7daf384fbfcf6fcec4af34196a912b7ceb2aa5cd4c7c9f7e80f26794b6113a21",
+    "tools/critical_fix_regressions/tests/test_gameplay_g16.py": "f9f3513618225ad8d20d05620227db7ae68e4198dab01e76cd3f7d6b3a088f02",
+    "tools/b1_journey.py": "d790bb8618885bbcfc772fa76d22fe2621eba00c8e0ca0432a892e5e74c0a381",
+    "tools/g12_journey.py": "883d834884fc25bea891ab400949e9b2fd7a5c661f24dec8685a0844be4b3787"
+  }
+}

@@ -1,5 +1,19 @@
 # Start here — production main, B3
 
+G16 preparation: use `E` beside a newly selected workshop's crate and Enter to
+search/take its one musk gland and one wood bundle (search again for the other).
+Read its preparation note by taking it, selecting it in `I` and pressing Enter.
+With the starter crude blade equipped, target the emptied crate in `E`, press
+`X` and confirm Enter; take the second wood from the floor. In `C`, choose Field
+Campfire and confirm a clear adjacent placement, then `E` the unlit fire to
+ignite it with a burning offhand torch. In `C`, choose musk pellet and confirm a
+clear drying spot near the fire. Placement counts as the first of ten processing
+phases. Wait with `Z`, then `E`/pickup the finished pellet. Using it in `I` opens
+throw targeting; Esc cancels, legal Enter spends it for brief nearby disruption.
+Tables and hanging cloth are scenery. Old workshops receive no new stock.
+See [G16 delivery](../../../docs/owner/GAMEPLAY_G16.md).
+
+
 G15 recovery: use `E` beside a medicine chest in a newly selected apothecary,
 select Herbal Dressing and press Enter to take it. Open `I`, select the dose,
 and press Enter (or `E` / keypad Enter) to recover up to 12 HP, clamped to current

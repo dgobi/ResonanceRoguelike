@@ -43,7 +43,7 @@
             "max_per_settlement": 5
           },
           {
-            "asset": "workshop_a",
+            "asset": "workshop_b",
             "weight": 1.0,
             "max_per_settlement": 5
           }
@@ -130,7 +130,7 @@
             "max_per_settlement": 5
           },
           {
-            "asset": "workshop_a",
+            "asset": "workshop_b",
             "weight": 1.0,
             "max_per_settlement": 5
           }

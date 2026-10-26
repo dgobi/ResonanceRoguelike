@@ -1,0 +1,115 @@
+{
+  "passed": true,
+  "pid": 30624,
+  "head": "d26c6776b20c89c67a9b626bbc82059f50c770e7",
+  "observed": {
+    "archive": "evidence/gameplay-g15/final-a/journey/acquisition/acquired-unused.zip",
+    "sha256": "503309d073b96139a84fc0769ad9eb89fe53b1f1b4c89230d0af318eb20037de",
+    "restored_snapshot": {
+      "player": "68fee64ee4a26b5f7f08352b000545321ccec2251d402fba07859bdbb9c62fdb",
+      "world": "13ac14c5f2f9107159de781758e5258bece683d2b1ec06a321d8a5b2feefdada",
+      "scene": "cddd9a3972046e22ac05644c7825abf23f690c7bd7e59c1d5aba92b7a226fc12",
+      "processing": [],
+      "zones": [],
+      "load": 5.699999999999999,
+      "knowledge": {},
+      "words": [],
+      "read": [],
+      "recovered": {}
+    },
+    "plan_identity": "876a8e8bb0a405bdd393b99e28f9474ef70fe720b9562da187489c93e3fd59b7",
+    "dependency_checks": 51,
+    "selected_old_workshops": 4,
+    "pending_placement": {
+      "id": "settlement-0-cross-market-lot-81-3-S-0-building",
+      "asset": "workshop_a",
+      "context": "grid",
+      "rotation": 0,
+      "mirror": false,
+      "origin": [
+        6085,
+        4266
+      ],
+      "footprint": [
+        6085,
+        4266,
+        6097,
+        4275
+      ],
+      "clearance": [
+        6084,
+        4265,
+        6098,
+        4276
+      ],
+      "approach": [
+        6090,
+        4274,
+        6092,
+        4279
+      ],
+      "road": "settlement-0-street-east-west-0",
+      "join": [
+        6090,
+        4278
+      ],
+      "entrances": [
+        {
+          "id": "main",
+          "x": 6090,
+          "y": 4274,
+          "normal": "S",
+          "width": 2,
+          "role": "main",
+          "required": true
+        }
+      ],
+      "targets": [
+        {
+          "x": 6089,
+          "y": 4271,
+          "kind": "floor",
+          "required": true
+        },
+        {
+          "x": 6086,
+          "y": 4267,
+          "kind": "readable",
+          "required": true
+        },
+        {
+          "x": 6090,
+          "y": 4269,
+          "kind": "readable",
+          "required": true
+        },
+        {
+          "x": 6091,
+          "y": 4269,
+          "kind": "item",
+          "required": true
+        }
+      ],
+      "required": true,
+      "dependency": "workshop_a",
+      "role": "commercial",
+      "frontage_entrance": "main"
+    },
+    "pending_fingerprint": "fb05f85043d70f20f68b14b608381e88b3d8f272acae7b5ba843594e459c269d",
+    "materialized_snapshot": {
+      "player": "68fee64ee4a26b5f7f08352b000545321ccec2251d402fba07859bdbb9c62fdb",
+      "world": "7c8d1c850667d48753365ce75866b23c906d34e88fe573beb26a3e05acacc30a",
+      "scene": "cddd9a3972046e22ac05644c7825abf23f690c7bd7e59c1d5aba92b7a226fc12",
+      "processing": [],
+      "zones": [],
+      "load": 5.699999999999999,
+      "knowledge": {},
+      "words": [],
+      "read": [],
+      "recovered": {}
+    },
+    "no_workshop_backfill": true,
+    "visited_scene_and_player_preserved": true
+  },
+  "comparison": "exact genuine pre-edit receipt"
+}

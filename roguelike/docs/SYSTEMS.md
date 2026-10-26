@@ -429,6 +429,17 @@ or save-schema changes. Visited crates remain until explicitly dismantled;
 removed crates and floor output use the existing mutable-scene persistence.
 The shed's existing floor wood plus the recovered bundle pay for Field Campfire.
 
+### Workshop preparation (G16)
+
+New `workshop_b` crates contain exactly one gland and one wood bundle. Search
+and take each through `E`. The emptied crate can supply another wood through
+the G14 `X` confirmation, with an equipped cutting tool retained. Read the local
+note through inventory use. This is another finite source for the established
+G12 material/fire/drying chain below; tables and cloth have no workstation or
+heat capability. The starter crude blade and lit torch suffice while their
+normal ownership and burning conditions hold. No finished pellet is stocked,
+no source replenishes, and old saved workshop selections remain unchanged.
+
 ### Crafting roles and heat (G12)
 
 `C` retains the existing recipe list and ingredient-choice interface. Materials

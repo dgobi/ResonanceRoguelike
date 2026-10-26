@@ -1,0 +1,272 @@
+{
+  "id": "workshop_b",
+  "category": "commercial",
+  "width": 12,
+  "height": 9,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 3,
+    "residential": 1
+  },
+  "description": "A preparation workshop. Tables interrupt the worn stone floor; a cloth hangs beside work left unfinished. One supply crate remains. The southern aisle opens onto a clear working space.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "############",
+    "#wTT....TTw#",
+    "#..........#",
+    "#..TT......#",
+    "#w........w#",
+    "#..T...TT..#",
+    "#..........#",
+    "#..........#",
+    "#####..#####"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 1,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "workshop_musk_notes_b",
+      "note": "A stained preparation note beside the work tables"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "type": "item",
+      "item_id": "research_note",
+      "text_id": "text_scholar_notes",
+      "note": "Field notes on desk"
+    },
+    {
+      "x": 6,
+      "y": 3,
+      "type": "scene",
+      "scene_id": "scholar_desk",
+      "note": "Work left unfinished on desk"
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": [
+        "workshop_b_musk",
+        "workshop_b_fuel"
+      ]
+    }
+  ],
+  "note": "Double southern entrance and clear central aisle. Tables are scenery; build and light a field fire on clear floor before drying.",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1.0,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 5,
+        "y": 8,
+        "normal": "S",
+        "width": 2,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 4,
+        "y": 5,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 1,
+        "y": 1,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "kind": "readable",
+        "required": true
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "kind": "item",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 2,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 8,
+        "y": 6,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "kind": "floor",
+        "required": true
+      }
+    ]
+  },
+  "decor_layer": [
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "decor_hanging_cloth",
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ]
+}

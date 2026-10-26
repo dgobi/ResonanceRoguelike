@@ -1,0 +1,21 @@
+test_all_rotations_real_content_and_clear_working_floor (test_gameplay_g16.WorkshopPreparation.test_all_rotations_real_content_and_clear_working_floor) ... ok
+test_exact_native_gland_transfer_processing_and_depletion_survive_disk_revisit (test_gameplay_g16.WorkshopPreparation.test_exact_native_gland_transfer_processing_and_depletion_survive_disk_revisit) ... G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5037: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+ok
+test_genuine_g15_visited_and_pending_old_workshop_match_preedit (test_gameplay_g16.WorkshopPreparation.test_genuine_g15_visited_and_pending_old_workshop_match_preedit) ... ok
+test_live_roles_preserve_membership_order_and_native_primary_selection (test_gameplay_g16.WorkshopPreparation.test_live_roles_preserve_membership_order_and_native_primary_selection) ... ok
+StockedShedTests (unittest.loader._FailedTest.StockedShedTests) ... ERROR
+test_complete_inventory_and_immutable_defaults (test_structure_contract.StructureContractTests.test_complete_inventory_and_immutable_defaults) ... ok
+test_cottage_access_matches_actual_note_and_container_actions_both_mirrors (test_structure_access.StructureAccessTests.test_cottage_access_matches_actual_note_and_container_actions_both_mirrors) ... ok
+
+======================================================================
+ERROR: StockedShedTests (unittest.loader._FailedTest.StockedShedTests)
+----------------------------------------------------------------------
+AttributeError: module 'test_gameplay_g13' has no attribute 'StockedShedTests'
+
+----------------------------------------------------------------------
+Ran 7 tests in 14.166s
+
+FAILED (errors=1)

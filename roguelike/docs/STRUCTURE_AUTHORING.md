@@ -1,5 +1,19 @@
 # Make a building or layout for Resonance
 
+G16's `commercial/workshop_b.json` is a complete versioned furnishing example:
+12×9 envelope, double southern entrance, all four rotations, table terrain,
+hanging-cloth decor, supported item/text/scene specials and one real crate.
+The crate uses independent `workshop_b_musk` and `workshop_b_fuel` pools, each
+`roll_count: [1,1]` with one positive-weight item. This guarantees both goods;
+they never compete in one weighted draw. `interior_loot_table` is not used.
+Clear southern floor supports the existing paid fire/drying route; scenery
+supplies neither a functional workbench nor heat. Required targets and the full
+door span pass populated access in every rotation. Only grid/roadside commercial
+membership changes from `workshop_a` to `workshop_b`, preserving order, weight
+1.0 and cap 5. Keep the old definition and its dependencies for saved plans;
+never retrofit stock into old pending/visited workshops. The new readable note
+is local to this variant and changes no recipe-known or unlock flags.
+
 Current: **G7, world/scene revision `wg7`, shared plan format 5**.
 For the installed mixed single/compound policy, start with the
 [G7 workflows](#g7-compounds-a-place-with-shared-access-and-two-or-three-buildings).

@@ -7,7 +7,7 @@ from b1_cases import setup_gear
 from b1_characterize import needs_state
 
 
-def run_journey(ev, custom_actions=None):
+def run_journey(ev, custom_actions=None, *, max_frames=200, max_seconds=90, max_turns=80):
     import pygame
     from engine.engine import Engine
     from engine.save_manager import SaveManager
@@ -288,7 +288,7 @@ def run_journey(ev, custom_actions=None):
     def events(*args, **kwargs):
         nonlocal frame, sent, done
         e = current["engine"]
-        if frame > 200 or time.monotonic()-started > 90 or e.world_time.turn-current["turn_start"] > 80:
+        if frame > max_frames or time.monotonic()-started > max_seconds or e.world_time.turn-current["turn_start"] > max_turns:
             raise AssertionError("Journey frame/time/turn budget exceeded")
         ev.check("H02", "original loop dummy SDL", "dummy", pygame.display.get_driver())
         ev.check("E01", "paired release prevents repeats", None, e._held_key)

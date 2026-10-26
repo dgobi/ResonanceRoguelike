@@ -1,0 +1,13 @@
+{
+  "id": "workshop_b_musk",
+  "roll_count": [
+    1,
+    1
+  ],
+  "items": [
+    {
+      "item_id": "stalker_musk_gland",
+      "weight": 1
+    }
+  ]
+}

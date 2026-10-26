@@ -66,7 +66,7 @@ def verify_cold(archive):
     assert result.returncode==0,result.stdout+result.stderr
 
 
-def run_stage(out,name,actions,checkpoint=None):
+def run_stage(out,name,actions,checkpoint=None,**loop_limits):
     from b1_support import Evidence
     from b1_journey import run_journey
     stage=out/name;stage.mkdir()
@@ -80,7 +80,7 @@ def run_stage(out,name,actions,checkpoint=None):
             (slot/'world.json').write_text('{"seed":20261023}')
         try:
             os.chdir(ROOT/'roguelike')
-            run_journey(ev,lambda e,key,capture,choose:actions(e,key,capture,choose,ev,stage))
+            run_journey(ev,lambda e,key,capture,choose:actions(e,key,capture,choose,ev,stage),**loop_limits)
             ev.bind_sources(ROOT/'roguelike')
             ev.record['passed']=True
         finally:
