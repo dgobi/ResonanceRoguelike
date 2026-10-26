@@ -1,0 +1,14 @@
+{
+  "id": "alchemist_reagents_w3a",
+  "description": "Rare reagents found in an alchemist's back room.",
+  "roll_count": [2, 4],
+  "items": [
+    {"item_id": "crow_bile", "weight": 57},
+    {"item_id": "sulphur_cap_fragment", "weight": 45},
+    {"item_id": "prophets_eye_cap", "weight": 35},
+    {"item_id": "murk_violet_stem", "weight": 40},
+    {"item_id": "resonant_bone_fragment", "weight": 30},
+    {"item_id": "wight_essence_residue", "weight": 20}
+  ],
+  "w3a_metadata": {"nested":[[1,null],["keep",true]]}
+}
