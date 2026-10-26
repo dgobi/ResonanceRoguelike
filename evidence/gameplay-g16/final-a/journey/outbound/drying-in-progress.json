@@ -1,0 +1,27 @@
+{
+  "player": "2d2f310d57decb3644dd8936a6851a53878ef1efce31001145c5ff0655706802",
+  "world": "bbb710f096d689e3d53f8a1d571f19b89657e1f68c0aae922afe19350958694d",
+  "scene": "6e9b4552c87185a74030f595400bb24cafc8840889ed19fdf64cb885b34be8e1",
+  "processing": [
+    [
+      [
+        24,
+        16
+      ],
+      {
+        "item_id": "musk_pellet",
+        "turns_remaining": 9,
+        "decor_id": "drying_herb",
+        "source": "drying",
+        "completion_message": "The pellet has dried. The smell is contained. For now.",
+        "on_fire": false
+      }
+    ]
+  ],
+  "zones": [],
+  "load": 5.619999999999999,
+  "knowledge": {},
+  "words": [],
+  "read": [],
+  "recovered": {}
+}
