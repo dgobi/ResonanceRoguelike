@@ -1,0 +1,710 @@
+{
+  "scope": "W0 only",
+  "recorded_utc": "2026-10-26T05:23:33.436368+00:00",
+  "implementation_commit": "d26b63b7205ed2eb2b11ac7f6f37c99ca9fcfb60",
+  "baseline_head": "7745f72ea5446af22d3f340c30043d3752ef0f54",
+  "commands": [
+    {
+      "command": "npm.cmd run bundle -- --ci",
+      "result": "release executable and NSIS built; includes tsc --noEmit and Vite"
+    },
+    {
+      "command": "npm.cmd test",
+      "result": "2/2 TS tests pass"
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "result": "5/5 Rust tests pass"
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "result": "pass"
+    },
+    {
+      "command": "$ResonancePython -B worker/test_bridge.py",
+      "result": "9/9 pass in development Python"
+    },
+    {
+      "command": "worker/runtime/python.exe -B worker/test_bridge.py",
+      "result": "8 pass, one -S dependency control skipped because embedded _pth explicitly lists packages; actual empty-runtime desktop control passes"
+    },
+    {
+      "command": "node scripts/desktop-test.mjs",
+      "result": "9 desktop modes pass; modes recorded below"
+    },
+    {
+      "command": "$ResonancePython -B scripts/render-reference.py",
+      "result": "production renderer sample with identical terrain grid"
+    },
+    {
+      "command": "$ResonancePython -B scripts/measure-worker.py",
+      "result": "3 actual bundled-worker samples"
+    },
+    {
+      "command": "$ResonancePython -B scripts/check-preservation.py",
+      "result": "zero source/save/metadata changes"
+    },
+    {
+      "command": "npm.cmd audit --omit=dev --json",
+      "result": "zero reported production dependency vulnerabilities"
+    }
+  ],
+  "worker": {
+    "contract": "g2-2",
+    "health": "ready",
+    "preview": "generation.structure_preview.preview → engine.scene_generation.create_submap → generation.local_gen.generate_submap",
+    "protocol": 1,
+    "route": "authored_submap",
+    "runtime": {
+      "compatible": true,
+      "dependencies": {
+        "cffi": "2.1.1",
+        "numpy": "2.4.6",
+        "pycparser": "3.11",
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "typing_extensions": "4.16.0"
+      },
+      "executable": "\\\\?\\G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\python\\python.exe",
+      "numeric_threads": 1,
+      "python": "3.11.0"
+    },
+    "source": {
+      "branch": "main",
+      "catalog_sha256": "5bd33d875fd924bf552cf0879f0ee6b66e821a03afa59508d5e86fb00352f8db",
+      "commit": "d26b63b7205ed2eb2b11ac7f6f37c99ca9fcfb60",
+      "game_dirty": false,
+      "game_source_sha256": "79debddbf4860b264d8f7cb3df1fff6adf78c82021377ee07503ab384fda38d3",
+      "root": "G:\\GameDev\\RoguelikeProject"
+    },
+    "unavailable": [
+      "editing/saving",
+      "ordinary-building UI",
+      "native world selection",
+      "game renderer/FOV",
+      "combat simulation"
+    ],
+    "validator": "generation.structure_contract.compile_structure",
+    "worker_sha256": "8efeec202f3e89e0b0c36c2df7e513facddbbf2d0e8bb3483bd2d2e4080c527f",
+    "worker_version": "0.1.0"
+  },
+  "preview": {
+    "asset": "starting_lab",
+    "seed": 20261023,
+    "scene_seed": "53693250991751460784647974755340343741",
+    "scene_address": [
+      0,
+      0,
+      "preview-submap"
+    ],
+    "origin": [
+      10,
+      13
+    ],
+    "spawn": [
+      15,
+      20
+    ],
+    "width": 80,
+    "height": 43,
+    "generation_ms": 147.8,
+    "host_ms": 733,
+    "terrain_sha256": "c73cf0a453fd175538020adeaa6e588e609ba90852bd723479c5cd2771bd6b3d",
+    "candidate_sha256": "0bde7868f7545835c34efe5ee6bc463dc9619d58d826f099a97cffc6ed95f380",
+    "samples": [
+      [
+        15,
+        20,
+        "stairs_up"
+      ],
+      [
+        67,
+        16,
+        "door_open"
+      ],
+      [
+        79,
+        42,
+        "wall"
+      ]
+    ],
+    "containers": [
+      {
+        "decor_id": "crate",
+        "items": [
+          {
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "burn_turns": null,
+            "consumed_on_use": false,
+            "count": 1,
+            "decay_timer": null,
+            "description": "Iron, poorly kept. It will serve.",
+            "drink_message": null,
+            "eat_message": null,
+            "harvest_from": null,
+            "heal_amount": null,
+            "hydration": null,
+            "item_id": "crude_blade",
+            "item_state_version": 1,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "name": "a crude blade",
+            "nutrition": null,
+            "on_use": "equip_toggle",
+            "qualities": {},
+            "source_creature": null,
+            "stackable": false,
+            "temporary_essence": [],
+            "text_id": "",
+            "tile": "generic_item",
+            "turns_lit": 0,
+            "weight": 1.5
+          }
+        ],
+        "state": "closed",
+        "x": 26,
+        "y": 17
+      }
+    ],
+    "object_cells": 14,
+    "passed": true
+  },
+  "desktop": {
+    "release": {
+      "started_utc": "2026-10-26T05:20:55.953Z",
+      "passed": true,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": [],
+      "launch_to_shell_ms": 461,
+      "webview_url": "http://tauri.localhost/",
+      "open_to_preview_ms": 3937,
+      "native_window": {
+        "Id": 17204,
+        "MainWindowHandle": 6095540,
+        "MainWindowTitle": "Resonance Workbench",
+        "WorkingSet64": 29040640,
+        "PrivateMemorySize64": 6328320
+      },
+      "frame_intervals_ms": {
+        "median": 16.69999999999891,
+        "p95": 17,
+        "max": 17.200000000000728,
+        "count": 119
+      },
+      "process_memory": [
+        {
+          "Id": 2256,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 20369408,
+          "PrivateMemorySize64": 7700480
+        },
+        {
+          "Id": 4696,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 128286720,
+          "PrivateMemorySize64": 74854400
+        },
+        {
+          "Id": 6024,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 133693440,
+          "PrivateMemorySize64": 239280128
+        },
+        {
+          "Id": 13756,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 11661312,
+          "PrivateMemorySize64": 2699264
+        },
+        {
+          "Id": 17608,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 126586880,
+          "PrivateMemorySize64": 36536320
+        },
+        {
+          "Id": 25740,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 39137280,
+          "PrivateMemorySize64": 11812864
+        },
+        {
+          "Id": 17204,
+          "ProcessName": "resonance-workbench",
+          "WorkingSet64": 29040640,
+          "PrivateMemorySize64": 6328320
+        }
+      ],
+      "animation_frames_during_first_300ms_of_work": 19,
+      "worker_runtime": {
+        "compatible": true,
+        "dependencies": {
+          "cffi": "2.1.1",
+          "numpy": "2.4.6",
+          "pycparser": "3.11",
+          "pygame": "2.6.1",
+          "tcod": "19.3.0",
+          "typing_extensions": "4.16.0"
+        },
+        "executable": "\\\\?\\G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\python\\python.exe",
+        "numeric_threads": 1,
+        "python": "3.11.0"
+      },
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "5bd33d875fd924bf552cf0879f0ee6b66e821a03afa59508d5e86fb00352f8db",
+        "commit": "d26b63b7205ed2eb2b11ac7f6f37c99ca9fcfb60",
+        "game_dirty": false,
+        "game_source_sha256": "79debddbf4860b264d8f7cb3df1fff6adf78c82021377ee07503ab384fda38d3",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      }
+    },
+    "portable-clean": {
+      "started_utc": "2026-10-26T05:21:10.327Z",
+      "passed": true,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": [],
+      "launch_to_shell_ms": 465,
+      "webview_url": "http://tauri.localhost/",
+      "open_to_preview_ms": 1919,
+      "native_window": {
+        "Id": 26692,
+        "MainWindowHandle": 1900632,
+        "MainWindowTitle": "Resonance Workbench",
+        "WorkingSet64": 29401088,
+        "PrivateMemorySize64": 6959104
+      },
+      "frame_intervals_ms": {
+        "median": 16.69999999999891,
+        "p95": 17,
+        "max": 17.199999999999818,
+        "count": 119
+      },
+      "process_memory": [
+        {
+          "Id": 5372,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 20365312,
+          "PrivateMemorySize64": 7692288
+        },
+        {
+          "Id": 7292,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 44331008,
+          "PrivateMemorySize64": 12333056
+        },
+        {
+          "Id": 16964,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 128233472,
+          "PrivateMemorySize64": 228978688
+        },
+        {
+          "Id": 18756,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 11644928,
+          "PrivateMemorySize64": 2674688
+        },
+        {
+          "Id": 29684,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 128413696,
+          "PrivateMemorySize64": 36962304
+        },
+        {
+          "Id": 30220,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 128225280,
+          "PrivateMemorySize64": 75382784
+        },
+        {
+          "Id": 26692,
+          "ProcessName": "resonance-workbench",
+          "WorkingSet64": 29401088,
+          "PrivateMemorySize64": 6959104
+        }
+      ],
+      "animation_frames_during_first_300ms_of_work": 19,
+      "worker_runtime": {
+        "compatible": true,
+        "dependencies": {
+          "cffi": "2.1.1",
+          "numpy": "2.4.6",
+          "pycparser": "3.11",
+          "pygame": "2.6.1",
+          "tcod": "19.3.0",
+          "typing_extensions": "4.16.0"
+        },
+        "executable": "\\\\?\\G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\windows-portable\\python\\python.exe",
+        "numeric_threads": 1,
+        "python": "3.11.0"
+      },
+      "source": {
+        "branch": null,
+        "catalog_sha256": "5bd33d875fd924bf552cf0879f0ee6b66e821a03afa59508d5e86fb00352f8db",
+        "commit": null,
+        "game_dirty": null,
+        "game_source_sha256": "79debddbf4860b264d8f7cb3df1fff6adf78c82021377ee07503ab384fda38d3",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      }
+    },
+    "development": {
+      "started_utc": "2026-10-26T05:21:21.804Z",
+      "passed": true,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": [],
+      "launch_to_shell_ms": 494,
+      "webview_url": "http://127.0.0.1:1420/",
+      "open_to_preview_ms": 2415,
+      "native_window": {
+        "Id": 16260,
+        "MainWindowHandle": 1442132,
+        "MainWindowTitle": "Resonance Workbench",
+        "WorkingSet64": 33435648,
+        "PrivateMemorySize64": 7016448
+      },
+      "frame_intervals_ms": {
+        "median": 16.600000000000364,
+        "p95": 17.099999999998545,
+        "max": 17.200000000000728,
+        "count": 119
+      },
+      "process_memory": [
+        {
+          "Id": 8912,
+          "ProcessName": "conhost",
+          "WorkingSet64": 8445952,
+          "PrivateMemorySize64": 1490944
+        },
+        {
+          "Id": 1824,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 43151360,
+          "PrivateMemorySize64": 13176832
+        },
+        {
+          "Id": 9104,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 20357120,
+          "PrivateMemorySize64": 7704576
+        },
+        {
+          "Id": 9980,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 137990144,
+          "PrivateMemorySize64": 238141440
+        },
+        {
+          "Id": 14284,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 11661312,
+          "PrivateMemorySize64": 2686976
+        },
+        {
+          "Id": 24012,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 128098304,
+          "PrivateMemorySize64": 37543936
+        },
+        {
+          "Id": 30148,
+          "ProcessName": "msedgewebview2",
+          "WorkingSet64": 140451840,
+          "PrivateMemorySize64": 85995520
+        },
+        {
+          "Id": 16260,
+          "ProcessName": "resonance-workbench",
+          "WorkingSet64": 33435648,
+          "PrivateMemorySize64": 7016448
+        }
+      ],
+      "animation_frames_during_first_300ms_of_work": 19,
+      "worker_runtime": {
+        "compatible": true,
+        "dependencies": {
+          "cffi": "2.1.1",
+          "numpy": "2.4.6",
+          "pycparser": "3.11",
+          "pygame": "2.6.1",
+          "tcod": "19.3.0",
+          "typing_extensions": "4.16.0"
+        },
+        "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "numeric_threads": 1,
+        "python": "3.11.0"
+      },
+      "source": {
+        "branch": "main",
+        "catalog_sha256": "5bd33d875fd924bf552cf0879f0ee6b66e821a03afa59508d5e86fb00352f8db",
+        "commit": "d26b63b7205ed2eb2b11ac7f6f37c99ca9fcfb60",
+        "game_dirty": false,
+        "game_source_sha256": "79debddbf4860b264d8f7cb3df1fff6adf78c82021377ee07503ab384fda38d3",
+        "root": "G:\\GameDev\\RoguelikeProject"
+      }
+    },
+    "missing-worker": {
+      "started_utc": "2026-10-26T05:21:34.602Z",
+      "passed": true,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "WORKER_MISSING visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": [],
+      "launch_to_shell_ms": 330,
+      "webview_url": "http://tauri.localhost/"
+    },
+    "missing-dependency": {
+      "started_utc": "2026-10-26T05:21:35.565Z",
+      "passed": true,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "MISSING_DEPENDENCY visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": [],
+      "launch_to_shell_ms": 377,
+      "webview_url": "http://tauri.localhost/"
+    },
+    "protocol-mismatch": {
+      "started_utc": "2026-10-26T05:21:36.906Z",
+      "passed": true,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "PROTOCOL_MISMATCH visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": [],
+      "launch_to_shell_ms": 364,
+      "webview_url": "http://tauri.localhost/"
+    },
+    "malformed-worker": {
+      "started_utc": "2026-10-26T05:21:38.061Z",
+      "passed": true,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "MALFORMED_WORKER_OUTPUT visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": [],
+      "launch_to_shell_ms": 349,
+      "webview_url": "http://tauri.localhost/"
+    },
+    "worker-exit": {
+      "started_utc": "2026-10-26T05:21:39.110Z",
+      "passed": true,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "WORKER_EXIT visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": [],
+      "launch_to_shell_ms": 340,
+      "webview_url": "http://tauri.localhost/"
+    },
+    "slow-worker": {
+      "started_utc": "2026-10-26T05:21:40.134Z",
+      "passed": true,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "cancel reaps a live long-running worker",
+        "project replacement reaps active worker",
+        "native window close reaps active worker",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": [],
+      "launch_to_shell_ms": 336,
+      "webview_url": "http://tauri.localhost/"
+    }
+  },
+  "worker_performance": [
+    {
+      "wall_ms": 743.24,
+      "worker_ms": 636.64,
+      "generation_ms": 141.3,
+      "peak_working_set_bytes": 54898688,
+      "sampled_peak_private_bytes": 42102784,
+      "terrain_sha256": "c73cf0a453fd175538020adeaa6e588e609ba90852bd723479c5cd2771bd6b3d"
+    },
+    {
+      "wall_ms": 694.52,
+      "worker_ms": 596.49,
+      "generation_ms": 141.66,
+      "peak_working_set_bytes": 55037952,
+      "sampled_peak_private_bytes": 41615360,
+      "terrain_sha256": "c73cf0a453fd175538020adeaa6e588e609ba90852bd723479c5cd2771bd6b3d"
+    },
+    {
+      "wall_ms": 694.2,
+      "worker_ms": 600.67,
+      "generation_ms": 143.89,
+      "peak_working_set_bytes": 54591488,
+      "sampled_peak_private_bytes": 41119744,
+      "terrain_sha256": "c73cf0a453fd175538020adeaa6e588e609ba90852bd723479c5cd2771bd6b3d"
+    }
+  ],
+  "packages": {
+    "executable": {
+      "path": "src-tauri/target/release/resonance-workbench.exe",
+      "bytes": 9138176,
+      "sha256": "6dd5988773c6e1971f6c4d015774a607f58798ea2272c14a45bf46ad20d20ea6"
+    },
+    "installer": {
+      "path": "src-tauri/target/release/bundle/nsis/Resonance Workbench_0.1.0_x64-setup.exe",
+      "bytes": 27364957,
+      "sha256": "e3ba7d562db3df0b9f04e26f024b2f3c7d732dfc94366aeb89d8c8776811540a"
+    },
+    "python_directory_bytes": 90947960,
+    "portable_directory_bytes": 100102009
+  },
+  "preservation": {
+    "passed": true,
+    "baseline_head": "7745f72ea5446af22d3f340c30043d3752ef0f54",
+    "source_files_checked": 7972,
+    "save_files_checked": 7,
+    "unchanged_bytes_and_measured_metadata": true,
+    "metadata": [
+      "size",
+      "mtime_ns",
+      "ctime_ns (source only)"
+    ],
+    "save_file_set_unchanged": true,
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "preflight_manifest_sha256": "19101fc94222e5bbbf36c38c1f262215fb1994f6b33b38ff1d65239d6c337d1e",
+    "changes_count": 0
+  },
+  "production_renderer_reference": {
+    "passed": true,
+    "renderer": "rendering.renderer.Renderer.render",
+    "mode": "Sprites, revealed, full uniform light; no player or FOV simulation",
+    "terrain_sha256": "c73cf0a453fd175538020adeaa6e588e609ba90852bd723479c5cd2771bd6b3d",
+    "size": [
+      2560,
+      1376
+    ],
+    "render_ms": 46.21,
+    "comparison": "Identical production terrain grid to the worker; same centered room, stairs (15,20), open door (67,16). Different glyph/color presentation is intentional."
+  },
+  "implementation_file_sha256": {
+    "workbench/.gitattributes": "3e217718c66d676df7a8705eeca129b6c8f5cac6308d8a60e23033fb047194a4",
+    "workbench/.gitignore": "a3f903ad882a6255a0aa170f5f4fbd651fdab5cd2c00e3ea9aff77073b286ea4",
+    "workbench/README.md": "4ed66bebf05857df8418a079b93bc01d5364aa03a22f849e061caf357703fb14",
+    "workbench/index.html": "4cba492bd4a1134429f39d3d39247b2b9d3b6b0acf70e8bf2d76fef968969cf8",
+    "workbench/package-lock.json": "b327acf31b925c2cc621754454bba774114a9b4675554a6fffc3ce5f66b92c45",
+    "workbench/package.json": "68b781b2f8eab3b12d954586595f00700bc4bfd6efe723aa77a0049820f1755e",
+    "workbench/rust-toolchain.toml": "7d21c66a15f41bad66b82ed06a289f5dc8a6e3751951d2696bbf20ce296f2b0f",
+    "workbench/scripts/check-preservation.py": "f1bd125864b2ff7665ab35f313d0cf49522689c459df704e07266905f4136c18",
+    "workbench/scripts/desktop-test.mjs": "9a86eb161c1f5ada7a3f4a7685de13948b5128bb1836d6374517c9660437d82f",
+    "workbench/scripts/fault-worker.rs": "85220cf808f2177e48d4144b293bfa41eed1d40dd3b5a8779852dbe786ceb7d5",
+    "workbench/scripts/measure-worker.py": "95811cd882047621fe8e08c1cd9614ca9d3703d09437c25059bb0b0e1634461a",
+    "workbench/scripts/prepare-runtime.ps1": "3ef3f855dbdb70fd5e3a824f85bff01aa48ea51cc58e5d3e014383d612dc9fc2",
+    "workbench/scripts/render-reference.py": "f9674fdd1d86f43e628dc08b1676ee6cbbbaa143f4cbee6cea80e4f7fe558e94",
+    "workbench/src-tauri/Cargo.lock": "6b665aa7b083df7d35cbd6f22fcafb6f770aa8cd39b026941cbd87ad5d161bf2",
+    "workbench/src-tauri/Cargo.toml": "52d77696481165216f7abb2e782b466316916a2a6287ae2a7f26cff5a6f5614f",
+    "workbench/src-tauri/build.rs": "487059eaf8a947b80f20a9aacac038a5047b2ad69d2401b827376c67d6fe847f",
+    "workbench/src-tauri/capabilities/main.json": "54fc18fe69f89ddaa6edfd4e2693643e1b15c38f26be4f2028a74b2cfa549c40",
+    "workbench/src-tauri/icons/icon.ico": "0eceb9ffd93a3742e66eb6b04dd04eee377f1fa644b2d8cc76bfefd71ffe3c65",
+    "workbench/src-tauri/src/main.rs": "0cf395dce114811c8a59e2215b540b6321c0477822ac253d297376468e824393",
+    "workbench/src-tauri/tauri.bundle.conf.json": "66ed20e3e95362e60f9ffb8c74a7cc6e187847dcfb414d4a54285788bcc668bf",
+    "workbench/src-tauri/tauri.conf.json": "4cae0bf40647cb25df2cdab8699331d9192f6cab13156df605dbe19b0e85d42c",
+    "workbench/src/App.tsx": "cb98c1818c96cb0fdedcd0d3a3cea380178d1e52d34e5652904ed0fcd7468163",
+    "workbench/src/MapView.tsx": "574f6c6f1083db971a87ebe237c667ba97955a45ae0a29d90106bd57ee883e06",
+    "workbench/src/coordinates.test.ts": "cca1370217e13ed8b5161b79c73e719917dd6808cb7e33cc751a1a30c3671126",
+    "workbench/src/coordinates.ts": "5364c900e61e650499fbdc08a05d64bc3646cd5988be975f79df218edfb57825",
+    "workbench/src/main.tsx": "6c2ca5004122cdf590685261371a807fcaaaac7e5f00f82cb74967d49817a79f",
+    "workbench/src/protocol.ts": "6b8d55124757cabb4fb341decb388a29578f71f937e94aa304774fc0df420e1e",
+    "workbench/src/styles.css": "4a692e9743c7c67bd63ffa84c2e5a88502bd3aef114785815edfad01ced0dc44",
+    "workbench/tsconfig.json": "be3f4ef47e2ce5b8dc6b93266e289eaa6f030c9b9ec9a487a5be654176de7af3",
+    "workbench/vite.config.ts": "483bb1c0aca39d71d0404008272329d1a69e4b5bb5fd0970515423cd862943df",
+    "workbench/worker/bridge.py": "8efeec202f3e89e0b0c36c2df7e513facddbbf2d0e8bb3483bd2d2e4080c527f",
+    "workbench/worker/requirements.lock": "17cd05554346febe141934ef7757e42d71f91880d2303051196fda0d50d278a7",
+    "workbench/worker/test_bridge.py": "96c59b7ec3dc2129a7002ab08fd375628f54e84b534f9c05e9692794f403a07c"
+  },
+  "screenshots": {
+    "production-revealed.png": {
+      "bytes": 33457,
+      "sha256": "852a3f38708304271b0688f4d2e4ab9dd8a83d957762d2658775eda5481c5a8a"
+    },
+    "w0-invalid-fixture.png": {
+      "bytes": 263359,
+      "sha256": "715ab8ad0b47ceccafc0e7c70b879e1204ecccb1a162b4b35546ed46210301fe"
+    },
+    "w0-ready.png": {
+      "bytes": 252716,
+      "sha256": "7b0244e4a9ff4fd32430c6a1afe538431d50833373a6b7c3742d6107c7968cad"
+    }
+  },
+  "limits": [
+    "Windows x64 verified; other OS unverified",
+    "WebView2 preinstalled; no clean-machine WebView2 install test",
+    "NSIS built; executable/resources launched directly, no owner-registry installer run",
+    "CDP test instrumentation; frame samples are not universal FPS guarantees",
+    "Python audit guard is not an OS sandbox for hostile source",
+    "No gameplay release suite: no game-side changes"
+  ]
+}
