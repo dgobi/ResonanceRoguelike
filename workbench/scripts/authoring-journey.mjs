@@ -222,6 +222,14 @@ export async function authoringJourney(page, root, output, receipt, pid) {
     "unique variant applied and reopened; selection profiles byte-identical",
   );
   // Test publication security at the actual host command boundary.
+  assert.equal(
+    (
+      await invoke("worker_request", {
+        request: { op: "preview_draft", asset, draft: "{}" },
+      })
+    ).error.code,
+    "UNSUPPORTED_OPERATION",
+  );
   for (const bad of [
     "../x.json",
     "roguelike/saves/campaign.json",
@@ -255,6 +263,35 @@ export async function authoringJourney(page, root, output, receipt, pid) {
     })
   ).result;
   assert.ok(validation.valid);
+  const oldReview = validation.review_token;
+  const rejectedSeed = await invoke("validate_document", {
+    token: doc.document_token,
+    draft,
+    variantId: null,
+    seed: 2147483648,
+  });
+  assert.equal(rejectedSeed.error.code, "MALFORMED_REQUEST");
+  assert.equal(
+    (
+      await invoke("apply_document", {
+        token: doc.document_token,
+        reviewToken: oldReview,
+        confirmed: true,
+      })
+    ).error.code,
+    "REVIEW_REQUIRED",
+  );
+  validation = (
+    await invoke("validate_document", {
+      token: doc.document_token,
+      draft,
+      variantId: null,
+    })
+  ).result;
+  assert.ok(validation.valid);
+  receipt.checks.push(
+    "failed replacement validation revokes the earlier host review capability",
+  );
   const terrainFile = resolve(root, "roguelike/data/terrain.json"),
     terrainBytes = await readFile(terrainFile);
   const brokenTerrain = JSON.parse(terrainBytes);

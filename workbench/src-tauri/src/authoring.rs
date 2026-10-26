@@ -28,6 +28,7 @@ struct Review {
     draft: String,
     destination: String,
     variant: bool,
+    seed: u32,
 }
 fn hash(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
@@ -145,6 +146,12 @@ fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure>
             .ok_or_else(|| io_error("No project open."))?,
         doc.clone(),
     ))
+}
+fn revoke_review(host: &Host, token: &str) {
+    let mut state = host.inner.lock().unwrap();
+    if let Some(doc) = state.document.as_mut().filter(|d| d.token == token) {
+        doc.review = None;
+    }
 }
 fn envelope(result: Value) -> Value {
     json!({"protocol":PROTOCOL,"id":uuid::Uuid::new_v4().to_string(),"ok":true,"result":result,"host_elapsed_ms":0})
@@ -264,6 +271,7 @@ pub async fn validate_document(
     token: String,
     draft: String,
     variant_id: Option<String>,
+    seed: Option<u32>,
 ) -> Result<Value, Failure> {
     if host.inner.lock().unwrap().applying {
         return Err(failure(
@@ -273,6 +281,14 @@ pub async fn validate_document(
         ));
     }
     let (root, doc) = session_doc(&host, &token)?;
+    // A failed/cancelled replacement validation must not leave an older review
+    // capability usable, even when failure happens before a worker response.
+    revoke_review(&host, &token);
+    let seed = seed.unwrap_or(20261023);
+    let source_path = checked_target(&root, &doc.relative, false)?;
+    if read_source(&source_path)? != doc.original {
+        return Err(conflict());
+    }
     let (dest, variant) = destination(&doc, &draft, variant_id.as_deref())?;
     checked_target(&root, &dest, variant)?;
     let epoch = host.epoch.load(Ordering::SeqCst);
@@ -282,13 +298,17 @@ pub async fn validate_document(
             app,
             host.clone(),
             Request {
-                op: "validate_draft".into(),
+                op: "preview_draft".into(),
                 asset: Some(dest.clone()),
                 draft: Some(draft.clone()),
+                seed: Some(seed),
                 ..Default::default()
             },
             epoch,
         )?;
+        if read_source(&source_path)? != doc.original {
+            return Err(conflict());
+        }
         let mut state = host.inner.lock().unwrap();
         let current = state
             .document
@@ -306,6 +326,7 @@ pub async fn validate_document(
                 draft,
                 destination: dest,
                 variant,
+                seed,
             });
             response["result"]["review_token"] = json!(review_token);
         }
@@ -618,9 +639,9 @@ pub async fn apply_document(
             let source_lock = pin_source(&target)?;
             let stamp = input_stamp(&root)?;
             if read_source(&target)? != doc.original { return Err(conflict()); }
-            let response = run_worker(app, host.clone(), Request {op:"validate_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),..Default::default()}, epoch)?;
+            let response = run_worker(app, host.clone(), Request {op:"preview_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),seed:Some(review.seed),..Default::default()}, epoch)?;
             if response["ok"] != true || response["result"]["valid"] != true || response["result"]["draft_sha256"] != hash(review.draft.as_bytes())
-                || response["result"]["route"] != "ordinary_building" || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != "0.2.0" {
+                || response["result"]["route"] != "ordinary_building" || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != "0.3.0" || response["result"]["preview"]["passed"] != true {
                 let details = if response["ok"] == true {
                     response["result"]["diagnostics"].as_array().into_iter().flatten().take(3)
                         .map(|d| format!("{} {}: {}",d["code"],d["field"],d["message"])).collect::<Vec<_>>().join("; ")
@@ -681,6 +702,7 @@ mod tests {
             draft: "{\"id\":\"sample\",\"unknown\":[[1,2]],\"description\":\"edited\"}".into(),
             destination: relative.into(),
             variant: false,
+            seed: 20261023,
         };
         (root, doc, review)
     }
@@ -706,6 +728,21 @@ mod tests {
         assert!(destination(&doc, "{\"id\":\"other\"}", None).is_err());
         assert!(destination(&doc, "{\"id\":\"other\"}", Some("../other")).is_err());
         assert!(session_doc(&Host::default(), "forged").is_err());
+    }
+    #[test]
+    fn replacement_validation_revokes_the_previous_review() {
+        let (root, mut doc, review) = fixture();
+        doc.review = Some(review);
+        let host = Host::default();
+        {
+            let mut state = host.inner.lock().unwrap();
+            state.root = Some(root.path().to_path_buf());
+            state.document = Some(doc);
+        }
+        revoke_review(&host, "forged");
+        assert!(session_doc(&host, "trusted").unwrap().1.review.is_some());
+        revoke_review(&host, "trusted");
+        assert!(session_doc(&host, "trusted").unwrap().1.review.is_none());
     }
     #[test]
     #[cfg(windows)]

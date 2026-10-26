@@ -876,3 +876,146 @@ pre {
 .context code {
   overflow-wrap: anywhere;
 }
+
+.workspace.authoring-workspace {
+  grid-template-columns: 270px minmax(490px, 1fr) 400px;
+}
+.layout-host {
+  flex: 1;
+  min-height: 0;
+}
+.layout-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 760px;
+  height: 100%;
+}
+.layout-editor .pane-heading {
+  margin-bottom: 0;
+}
+.layout-editor .tabs {
+  margin: 0;
+}
+.layout-editor .notice {
+  margin: 0;
+  padding: 9px 12px;
+}
+.layout-surface {
+  flex: 1;
+  min-height: 320px;
+}
+.layout-map {
+  min-height: 320px;
+}
+.layout-toolbar,
+.tool-buttons,
+.layer-visibility,
+.building-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.layout-toolbar button {
+  padding: 7px 9px;
+  font-size: 11px;
+}
+.tool-buttons .active {
+  border-color: #ceb57c;
+  background: #4b4435;
+}
+.layout-toolbar label {
+  min-width: 145px;
+}
+.layer-visibility label,
+.check-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.layer-visibility input,
+.check-label input {
+  width: auto;
+  margin: 0;
+}
+.layer-visibility span {
+  margin-left: auto;
+  font:
+    12px Consolas,
+    monospace;
+  color: #d8c49a;
+}
+.layout-details {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(210px, 1fr);
+  gap: 20px;
+  max-height: 340px;
+  overflow: auto;
+  border-top: 1px solid #354248;
+  padding-top: 12px;
+}
+.cell-details h3 {
+  margin: 2px 0 9px;
+}
+.cell-details p {
+  font-size: 12px;
+}
+.container-fields {
+  border: 1px solid #3d4b4d;
+  padding: 12px;
+  margin: 10px 0;
+}
+.container-fields legend {
+  color: #cbb780;
+  font-size: 12px;
+}
+.coordinate-fields,
+.pool-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.coordinate-fields label {
+  flex: 1;
+}
+.container-fields select {
+  margin: 5px 0 8px;
+}
+.container-fields .check-label {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+.container-fields button {
+  font-size: 11px;
+  padding: 7px;
+}
+.building-controls {
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+.building-controls label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.building-controls input {
+  width: 115px;
+  margin: 0;
+  padding: 6px;
+}
+.building-controls button {
+  font-size: 11px;
+  padding: 6px 10px;
+}
+@media (max-width: 1400px) {
+  .workspace.authoring-workspace {
+    grid-template-columns: 220px minmax(420px, 1fr) 340px;
+  }
+  .layout-details {
+    grid-template-columns: 1fr;
+  }
+  .layout-editor .pane-heading h2 {
+    font-size: 20px;
+  }
+}

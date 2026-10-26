@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import platform
 import random
+import re
 import shutil
 import subprocess
 import sys
@@ -23,8 +24,8 @@ sys.dont_write_bytecode = True
 # This small preview needs no parallel BLAS. Bound native thread-pool overhead
 # before importing NumPy/tcod; the game's algorithms and data stay unchanged.
 os.environ.update(OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1", MKL_NUM_THREADS="1")
-PROTOCOL = 2
-WORKER_VERSION = "0.2.0"
+PROTOCOL = 3
+WORKER_VERSION = "0.3.0"
 ROUTE = "authored_submap"
 EDIT_ROUTE = "ordinary_building"
 DEPENDENCIES = {"pygame": "2.6.1", "tcod": "19.3.0", "numpy": "2.4.6",
@@ -189,14 +190,20 @@ def draft_validation(request, root, scratch, identity):
     shutil.copytree(root / "roguelike/data", copied)
     selected = copied / path.relative_to(root / "roguelike/data")
     selected.write_bytes(draft.encode("utf-8"))
-    diagnostics = []; syntax = False; valid = False
+    diagnostics = []; syntax = False; valid = False; generated = None
+    contract_valid = False
     try:
         raw = read_document(selected)
         syntax = True
         data = DataLoader(str(copied))
         compiled = compile_structure(raw, EDIT_ROUTE, data, path=str(selected), category=path.parent.name)
-        diagnostics = [d.json() for d in compiled.diagnostics]; valid = True
+        diagnostics = [d.json() for d in compiled.diagnostics]; valid = contract_valid = True
+        if request["op"] == "preview_draft":
+            generated, problems = building_preview(raw, data, request.get("seed", 20261023), request["asset"], path.parent.name, identity)
+            diagnostics.extend(problems)
+            valid = generated["passed"] and not any(d["severity"] == "error" for d in diagnostics)
     except StructureError as error:
+        valid = False
         diagnostics = [d.json() for d in error.diagnostics]
         cause = error.__cause__
         if isinstance(cause, json.JSONDecodeError):
@@ -206,12 +213,74 @@ def draft_validation(request, root, scratch, identity):
     after = source_identity(root)
     if any(after[key] != identity[key] for key in ("game_source_sha256", "catalog_sha256")):
         fail("SOURCE_CHANGED", "Game source or dependency data changed during draft validation.", "Validate again.")
-    return {"valid": valid, "syntax_valid": syntax, "contract_valid": valid, "references_valid": valid,
-            "placement_verified": False, "population_verified": False, "diagnostics": diagnostics,
+    if generated:
+        generated["draft_sha256"] = hashlib.sha256(draft.encode("utf-8")).hexdigest()
+    return {"valid": valid, "syntax_valid": syntax, "contract_valid": contract_valid, "references_valid": contract_valid,
+            "placement_verified": bool(generated and generated["passed"]), "population_verified": bool(generated and generated["passed"]), "diagnostics": diagnostics,
             "draft_sha256": hashlib.sha256(draft.encode("utf-8")).hexdigest(), "route": EDIT_ROUTE,
             "contract": "g2-2", "worker_version": WORKER_VERSION,
             "worker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "source": identity,
-            "path": request["asset"], "limitations": "Structure and dependency checks only; no reachability, selection, placement or population proof."}
+            "path": request["asset"], "preview": generated,
+            "limitations": ("Centered direct building stamp and initial population; static access from the declared main entrance to required targets and direct containers when available. No natural selection, rotated placement, player FOV or balance proof."
+                            if generated else "Structure and dependency checks only; no reachability, selection, placement or population proof.")}
+
+
+def building_preview(raw, data, seed, path, category, identity):
+    """Read-only adapter around existing game stamping, population and access APIs."""
+    from generation.structure_preview import preview
+    from generation.placement import NORMALS
+    from generation.context import GenerationError
+    if type(seed) is not int or not 0 <= seed <= 2147483647:
+        fail("MALFORMED_REQUEST", "Invalid preview seed.", "Use an integer from 0 to 2147483647.")
+    profile = raw.get("placement", {})
+    entrances = sorted((e for e in profile.get("entrances", []) if e["required"]), key=lambda e: (e["role"] != "main", e["id"]))
+    targets = [dict(t, name=f"placement.targets[{i}]") for i, t in enumerate(profile.get("targets", [])) if t["required"]]
+    # Observe all directly editable containers, even when an old asset has no
+    # placement target for one. Reach/interaction semantics remain game-owned.
+    targets += [dict(x=s["x"], y=s["y"], kind="container", name=f"special_tiles[{i}]") for i, s in enumerate(raw.get("special_tiles", [])) if s.get("type", s.get("kind")) == "container"]
+    expectations = None
+    if entrances:
+        e = entrances[0]; dx, dy = NORMALS[e["normal"]]
+        expectations = {"entry": {"x": e["x"] + dx, "y": e["y"] + dy}, "targets": targets}
+    random.seed(seed)
+    import numpy as np
+    np.random.seed(seed)
+    start = time.perf_counter()
+    def problem(code, field, message, xy=None, layer="specials"):
+        return dict(severity="error", code=code, path=path, asset=raw["id"], field=field,
+                    message=message, correction="Inspect the source cell/record and rerun the production preview.", source_xy=xy, layer=layer)
+    try:
+        report, local_map, _ = preview(raw, EDIT_ROUTE, data, seed=seed, path=path, category=category, expectations=expectations)
+    except GenerationError as error:
+        match = re.search(r" special\[(\d+)\]", str(error))
+        index = int(match[1]) if match else None
+        record = raw.get("special_tiles", [])[index] if index is not None and index < len(raw.get("special_tiles", [])) else None
+        return {"passed": False, "valid": False}, [problem("PRODUCTION_PLACEMENT", f"special_tiles[{index}]" if record else "special_tiles", str(error), [record["x"], record["y"]] if record else None)]
+    problems = []
+    ox, oy = report["origin"]
+    for row in report["access"]:
+        if not row["passed"]:
+            xy = [row["xy"][0]-ox,row["xy"][1]-oy] if "xy" in row else None
+            problems.append(problem("ACCESS", row["target"], f"Production access check failed: {row['target']}", xy, "specials" if row.get("kind") == "container" else "terrain"))
+    for row in report["occupant_diagnostics"]:
+        problems.append(problem(row["code"], "special_tiles", json.dumps(row), [row["xy"][0]-ox,row["xy"][1]-oy]))
+    for d in report["source_diagnostics"]:
+        if d["code"] == "DEFERRED_SPECIAL":
+            problems.append(problem("UNSUPPORTED_PREVIEW_SPECIAL",d["field"],d["message"]))
+    rows=report["terrain"]
+    assert len(rows)==43 and all(len(r)==80 for r in rows)
+    for y,row in enumerate(rows):
+        for x,t in enumerate(row): assert t==str(local_map.tiles[x,y]["terrain"])
+    result={**report, "valid": True, "passed": report["passed"] and not problems, "width":80, "height":43,
+            "legend":{t:{"walkable":bool(data.terrain[t].get("walkable",True)),"transparent":bool(data.terrain[t].get("transparent",True))} for t in sorted({t for row in rows for t in row})},
+            "source":identity,"seed":seed,"scene_seed":str(local_map.generation_context.scene_seed),"scene_address":list(local_map.generation_context.address),
+            "candidate_sha256":report["candidate_identity"],"terrain_sha256":hashlib.sha256(json.dumps(rows,separators=(",",":")).encode()).hexdigest(),
+            "elapsed_ms":round((time.perf_counter()-start)*1000,2),
+            "context":f"Unsaved ordinary_building; centered at {ox},{oy}; no rotation. generation.town_gen._stamp_building_at → engine.scene_generation.populate. Seed {seed}. " + ("Static game access checks from declared main entrance." if expectations else "No declared required entrance: access unverified."),
+            "rendering":"Revealed production terrain and factory-created initial objects; no campaign or natural selection.",
+            "access_verified": bool(expectations) and all(r["passed"] for r in report["access"]),
+            "draft_sha256":None}
+    return result, problems
 
 
 def run(request, root, scratch):
@@ -228,7 +297,7 @@ def run(request, root, scratch):
     if CONTRACT_VERSION != "g2-2":
         fail("CONTRACT_MISMATCH", f"Unsupported structure contract {CONTRACT_VERSION}.", "Update the Workbench adapter after reviewing this game's contract.")
     op = request["op"]
-    if op == "validate_draft":
+    if op in ("validate_draft", "preview_draft"):
         return draft_validation(request, root, scratch, identity)
     catalog_error = None
     try:
@@ -291,7 +360,10 @@ def run(request, root, scratch):
                 "valid": valid, "diagnostics": diagnostics,
                 "raw": source.decode("utf-8") if not invalid else json.dumps(raw, indent=2), "invalid_fixture": invalid,
                 "sha256": hashlib.sha256(source).hexdigest(), "mtime_ns": str(before.st_mtime_ns),
-                "source_unchanged": True, "source": identity}
+                "source_unchanged": True, "source": identity,
+                "catalog": ({"terrain": {k: {"walkable":bool(v.get("walkable",True)),"transparent":bool(v.get("transparent",True))} for k,v in data.terrain.items()},
+                             "decor": {k:{"name":str(v.get("name",k)),"container":v.get("container") is True,"blocks_movement":bool(v.get("blocks_movement",False))} for k,v in data.decoratives.items()},
+                             "loot_pools":sorted(data.loot_pools)} if data and route == EDIT_ROUTE else None)}
     if not valid:
         return {"valid": False, "diagnostics": diagnostics}
     seed = request.get("seed", 20261023)
@@ -339,7 +411,7 @@ def main():
             fail("MALFORMED_REQUEST", "Expected a correlation ID.", "Supply a short string id.")
         if type(request.get("protocol")) is not int or request["protocol"] != PROTOCOL:
             fail("PROTOCOL_MISMATCH", f"Worker requires protocol {PROTOCOL}.", "Use matching Workbench frontend, host and worker versions.")
-        if request.get("op") not in ("identify", "describe", "inspect", "preview", "validate_draft") or set(request) - {"id", "protocol", "op", "asset", "seed", "invalid_fixture", "draft"}:
+        if request.get("op") not in ("identify", "describe", "inspect", "preview", "validate_draft", "preview_draft") or set(request) - {"id", "protocol", "op", "asset", "seed", "invalid_fixture", "draft"}:
             fail("MALFORMED_REQUEST", "Unsupported operation or fields.", "Only identify, describe, inspect and preview are available.")
         if len(sys.argv) != 3 or sys.argv[1] != "--root":
             fail("INVALID_PROJECT", "Expected one --root argument.", "Launch through the Workbench host.")

@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { LayoutEditor } from "./LayoutEditor";
+import {
+  CanvasHistory,
+  diagnosticCell,
+  layoutModel,
+  type Cell,
+  type Layer,
+} from "./layout";
 import {
   call,
   asFailure,
   type Diagnostic,
   type Inspection,
   type Failure,
+  type Preview,
 } from "./protocol";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
 
@@ -17,6 +27,7 @@ type Verdict = {
   path: string;
   worker_version: string;
   contract: string;
+  preview?: Preview;
 };
 type Disk = {
   changed: boolean;
@@ -31,6 +42,10 @@ export function Authoring({
   onError,
   busy,
   setBusy,
+  canvasHost,
+  diskPreview,
+  seed,
+  onCancel,
 }: {
   document: Inspection;
   onDirty: (dirty: boolean) => void;
@@ -38,6 +53,10 @@ export function Authoring({
   onError: (e: Failure | null) => void;
   busy: string;
   setBusy: (s: string) => void;
+  canvasHost: HTMLDivElement | null;
+  diskPreview: Preview | null;
+  seed: number;
+  onCancel: () => void;
 }) {
   const [draft, setDraft] = useState(document.raw),
     [editing, setEditing] = useState(false);
@@ -48,6 +67,10 @@ export function Authoring({
   const [disk, setDisk] = useState<Disk | null>(null),
     [confirm, setConfirm] = useState(false);
   const [localError, setLocalError] = useState("");
+  const [focus, setFocus] = useState<{ cell: Cell; layer: Layer } | null>(null);
+  const history = useRef(new CanvasHistory()),
+    gesture = useRef<string | null>(null);
+  const [, updateHistory] = useState(0);
   const version = useRef(0),
     latest = useRef(draft),
     mounted = useRef(true);
@@ -92,13 +115,48 @@ export function Authoring({
       clearInterval(timer);
     };
   }, [document.document_token, busy, onError]);
-  function change(text: string) {
+  function change(text: string, visual = false) {
+    if (!visual) {
+      history.current.clear();
+      gesture.current = null;
+    }
     latest.current = text;
     version.current++;
     setDraft(text);
     setVerdict(null);
     setConfirm(false);
     setLocalError("");
+  }
+  function visualEdit(edit: (text: string) => string, label: string) {
+    if (!editing || disk?.changed || busy.includes("applying")) return;
+    try {
+      const before = latest.current,
+        after = edit(before);
+      if (before === after) return;
+      if (gesture.current === null)
+        history.current.record(before, after, label);
+      change(after, true);
+    } catch (e) {
+      setLocalError(String(e));
+    }
+  }
+  function canvasGesture(active: boolean) {
+    if (active) gesture.current = latest.current;
+    else if (gesture.current !== null) {
+      history.current.record(gesture.current, latest.current, "Brush / fill");
+      gesture.current = null;
+      updateHistory((v) => v + 1);
+    }
+  }
+  function historyStep(redo: boolean) {
+    if (!editing || disk?.changed || busy.includes("applying")) return;
+    canvasGesture(false);
+    change(
+      redo
+        ? history.current.redo(latest.current)
+        : history.current.undo(latest.current),
+      true,
+    );
   }
   function property(
     key: "id" | "description" | "weight",
@@ -110,7 +168,7 @@ export function Authoring({
       setLocalError(String(e));
     }
   }
-  async function validate() {
+  async function validate(showDiff = true) {
     const v = ++version.current,
       text = latest.current;
     setBusy("Validating unsaved draft…");
@@ -121,13 +179,15 @@ export function Authoring({
         token: document.document_token,
         draft: text,
         variantId: variant ? variantId : null,
+        seed,
       });
       if (
         mounted.current &&
         currentVerdict(v, version.current, text, latest.current)
       ) {
         setVerdict(r.result);
-        setTab(r.result.valid ? "diff" : "problems");
+        if (!r.result.valid || showDiff)
+          setTab(r.result.valid ? "diff" : "problems");
       }
     } catch (e) {
       if (mounted.current && v === version.current) onError(asFailure(e));
@@ -176,6 +236,42 @@ export function Authoring({
                 : "";
   return (
     <section className="authoring" data-testid="authoring">
+      {canvasHost &&
+        createPortal(
+          <LayoutEditor
+            draft={draft}
+            catalog={document.catalog}
+            disabled={
+              !editing
+                ? "Begin edit to paint."
+                : disk?.changed
+                  ? "Disk changed: reload or reconcile in Source before painting."
+                  : busy.includes("applying")
+                    ? "Publication in progress."
+                    : ""
+            }
+            diagnostics={
+              verdict?.diagnostics || (!dirty ? document.diagnostics : [])
+            }
+            preview={
+              verdict?.valid && verdict.preview?.passed ? verdict.preview : null
+            }
+            previewHash={verdict?.draft_sha256}
+            diskPreview={diskPreview}
+            previewBusy={!!busy}
+            onPreview={() => void validate(false)}
+            onCancel={onCancel}
+            onEdit={visualEdit}
+            onGesture={canvasGesture}
+            onUndo={() => historyStep(false)}
+            onRedo={() => historyStep(true)}
+            canUndo={!!history.current.undoStack.length}
+            canRedo={!!history.current.redoStack.length}
+            onError={(e) => setLocalError(String(e))}
+            focus={focus}
+          />,
+          canvasHost,
+        )}
       <h2>{document.id}</h2>
       <code className="filepath">{document.path}</code>
       <p
@@ -360,12 +456,21 @@ export function Authoring({
               </p>
               <p>{d.message}</p>
               <small>{d.correction}</small>
+              {diagnosticCell(d, layoutModel(draft).model) && (
+                <button
+                  onClick={() =>
+                    setFocus(diagnosticCell(d, layoutModel(draft).model))
+                  }
+                >
+                  Locate cell / record
+                </button>
+              )}
             </article>
           ))}
           <p className="muted">
             {dirty && !verdict
               ? "Displayed source diagnostics are from the opened file. Validate the draft for a current verdict."
-              : "Warnings remain warnings. This check does not prove placement, reachability or population."}
+              : "Draft validation includes a centered production stamp and initial population. Access checks use the declared main entrance when present."}
           </p>
         </div>
       )}
@@ -401,6 +506,12 @@ export function Authoring({
             {verdict.worker_version} · {verdict.contract}
           </small>
           <p>{verdict.limitations}</p>
+          <details>
+            <summary>Draft verification receipt</summary>
+            <pre className="raw" data-testid="draft-receipt">
+              {JSON.stringify(verdict, null, 2)}
+            </pre>
+          </details>
         </div>
       )}
       {editing && (
@@ -412,7 +523,7 @@ export function Authoring({
                 ? "Change the draft first"
                 : "Checks the exact unsaved bytes with the game"
             }
-            onClick={validate}
+            onClick={() => void validate()}
           >
             Validate draft
           </button>
@@ -451,8 +562,9 @@ export function Authoring({
                 : "This changes the meaning of an existing ID. Saved pending worlds may depend on its old content. Prefer a new variant for changed identity or meaning."}
             </p>
             <p>
-              Current draft: valid contract and references. Placement and
-              population are unverified.
+              Current draft: valid contract, references and centered production
+              preview. Host rechecks these exact bytes before publishing.
+              Natural selection and other transforms remain unverified.
             </p>
             <pre className="diff">
               {sourceDiff(document.raw, draft, document.path, target)}

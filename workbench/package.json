@@ -1,7 +1,7 @@
 {
   "name": "resonance-workbench",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "engines": {
     "node": ">=24.0.0 <25"
@@ -16,6 +16,7 @@
     "bundle": "tauri build --config src-tauri/tauri.bundle.conf.json --bundles nsis",
     "test:desktop": "node scripts/desktop-test.mjs",
     "test:authoring": "node scripts/run-authoring.mjs",
+    "test:visual": "node scripts/run-visual.mjs",
     "tauri": "tauri"
   },
   "dependencies": {

@@ -42,6 +42,14 @@ if (faultModes.includes(mode)) {
   env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
   env.WORKBENCH_FAULT = mode;
 }
+if (mode.startsWith("draft-worker-")) {
+  env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
+  env.WORKBENCH_FAULT = mode;
+  env.WORKBENCH_REAL_PYTHON = resolve(
+    workbench,
+    "src-tauri/target/release/python/python.exe",
+  );
+}
 let child, browser, page;
 const receipt = {
   executable,
@@ -143,6 +151,59 @@ try {
         "fresh native process reopens original valid source after interruption",
       );
     }
+  } else if (mode.startsWith("draft-worker-")) {
+    const asset = "roguelike/data/buildings/commercial/apothecary_a.json";
+    const before = await readFile(resolve(root, asset));
+    await page
+      .locator('[data-testid="map"][data-ready="true"]')
+      .waitFor({ timeout: 30000 });
+    await page.getByLabel("Search ID, name or path").fill(asset);
+    await page.locator(`[data-asset="${asset}"]`).click();
+    await page.waitForFunction(() => !document.querySelector(".busy-overlay"));
+    await page.getByRole("button", { name: "Begin edit", exact: true }).click();
+    await page
+      .getByLabel("Description", { exact: true })
+      .fill("Unsaved draft for worker failure control");
+    const start = performance.now();
+    await page
+      .getByRole("button", { name: "Preview draft", exact: true })
+      .click();
+    if (mode === "draft-worker-cancel") {
+      await page
+        .getByRole("button", { name: "Cancel authoring request", exact: true })
+        .click();
+      await page.waitForFunction(
+        () => !document.querySelector(".busy-overlay"),
+      );
+    } else {
+      const code =
+        mode === "draft-worker-exit" ? "WORKER_EXIT" : "WORKER_TIMEOUT";
+      await page
+        .locator("footer")
+        .getByText(new RegExp(code))
+        .waitFor({ timeout: 110000 });
+      receipt.checks.push(
+        code + " visible during an actual unsaved canvas session",
+      );
+    }
+    receipt.draft_fault_elapsed_ms = Math.round(performance.now() - start);
+    assert.equal(await page.getByTestId("draft-verdict").count(), 0);
+    assert.equal(
+      await page
+        .getByRole("button", { name: "Review & apply", exact: true })
+        .isDisabled(),
+      true,
+    );
+    assert.deepEqual(await readFile(resolve(root, asset)), before);
+    receipt.checks.push(
+      "failed/cancelled draft worker grants no review or publication; original bytes unchanged",
+    );
+    await page.screenshot({
+      path: resolve(output, "draft-worker-failure.png"),
+    });
+    await page
+      .getByRole("button", { name: "Discard / Revert", exact: true })
+      .click();
   } else if (mode === "slow-worker") {
     await page.getByRole("button", { name: "Cancel", exact: true }).waitFor();
     await new Promise((r) => setTimeout(r, 300));
@@ -411,6 +472,10 @@ try {
     if (mode === "authoring") {
       const { authoringJourney } = await import("./authoring-journey.mjs");
       await authoringJourney(page, root, output, receipt, child.pid);
+    }
+    if (mode === "visual") {
+      const { visualJourney } = await import("./visual-journey.mjs");
+      await visualJourney(page, root, output, receipt, context);
     }
     await page.setViewportSize({ width: 1100, height: 740 });
     await page.screenshot({ path: resolve(output, "minimum-window.png") });

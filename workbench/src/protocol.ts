@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
+import type { Catalog, Cell, Layer } from "./layout";
 export type Failure = { code: string; message: string; remedy: string };
 export type Source = {
   root: string;
@@ -46,6 +47,8 @@ export type Diagnostic = {
   correction: string;
   line?: number;
   column?: number;
+  source_xy?: Cell;
+  layer?: Layer;
 };
 export type Inspection = Asset & {
   route: string;
@@ -60,6 +63,7 @@ export type Inspection = Asset & {
   source_unchanged: boolean;
   source: Source;
   document_token?: string;
+  catalog?: Catalog;
 };
 export type Feature = {
   x: number;
@@ -95,6 +99,8 @@ export type Preview = {
   context: string;
   rendering: string;
   occupant_diagnostics: unknown[];
+  draft_sha256?: string;
+  access?: unknown[];
 };
 type Envelope<T> = {
   protocol: number;
@@ -109,7 +115,7 @@ export async function call<T>(
   args?: Record<string, unknown>,
 ): Promise<{ result: T; elapsed: number }> {
   const envelope = await invoke<Envelope<T>>(command, args);
-  if (envelope.protocol !== 2 || typeof envelope.id !== "string")
+  if (envelope.protocol !== 3 || typeof envelope.id !== "string")
     throw {
       code: "PROTOCOL_MISMATCH",
       message: "Unexpected host/worker protocol.",

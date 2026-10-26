@@ -58,6 +58,7 @@ export default function App() {
     [search, setSearch] = useState(""),
     [category, setCategory] = useState("");
   const [pending, setPending] = useState<null | (() => void)>(null);
+  const [canvasHost, setCanvasHost] = useState<HTMLDivElement | null>(null);
   const dirtyRef = useRef(false);
   dirtyRef.current = dirty;
   useEffect(() => {
@@ -291,7 +292,7 @@ export default function App() {
           </div>
         </div>
         <div className="top-meta">
-          <span className="chip">W1 · SAFE AUTHORING</span>
+          <span className="chip">W2 · VISUAL AUTHORING</span>
           <span className="read-only">
             ◈ {dirty ? "Unsaved draft" : "Read-only by default"}
           </span>
@@ -445,154 +446,189 @@ export default function App() {
             <span className="eyebrow">THIS WORKSPACE</span>
             <p>Discover → draft → validate → review → apply</p>
             <small>
-              W1 edits ordinary buildings only. Plazas, layouts and other JSON
+              W2 edits ordinary buildings only. Plazas, layouts and other JSON
               families have no editing controls. Campaigns are never opened.
             </small>
           </section>
         </aside>
         <section className="preview-pane">
-          <div className="pane-heading">
-            <div>
-              <div className="eyebrow">03 / PRODUCTION PREVIEW</div>
-              <h2>
-                {inspection
-                  ? inspection.id.replaceAll("_", " ")
-                  : "Local map study"}
-              </h2>
-            </div>
-            <div className="generation-controls">
-              <label>
-                Seed
-                <input
-                  aria-label="Generation seed"
-                  value={seed}
-                  onChange={(e) => setSeed(e.target.value)}
-                  inputMode="numeric"
-                  disabled={!!busy}
-                />
-              </label>
-              <button onClick={() => refresh()} disabled={!selected || !!busy}>
-                ↻ Generate / refresh
-              </button>
-            </div>
-          </div>
-          <div className="canvas-area">
-            {preview ? (
-              <MapView
-                preview={preview}
-                onCell={setCell}
-                onError={(e) =>
-                  setError({
-                    code: "VIEWPORT_FAILED",
-                    message: String(e),
-                    remedy:
-                      "Check WebView2 graphics support, then reopen the app.",
-                  })
-                }
-              />
-            ) : (
-              <div className="canvas-empty">
-                <div className="empty-symbol">⌖</div>
-                <h3>
-                  {busy
-                    ? "Reading the living source"
-                    : identity
-                      ? "Ready for a production preview"
-                      : "Your world, under the lens"}
-                </h3>
-                <p>
-                  {busy ||
-                    "Connect a Resonance repository to see a generated local map, its terrain IDs and authored objects."}
-                </p>
-                <span>
-                  80 columns · 43 rows · authoritative Python generation
-                </span>
-              </div>
-            )}
-            {busy && (
-              <div className="busy-overlay" role="status">
-                <span className="spinner" />
-                {busy}
-                <button onClick={() => cancel()}>Cancel</button>
-              </div>
-            )}
-          </div>
           {inspection?.document_token && (
-            <p className="render-note">
-              Preview is from the on-disk source. Unsaved drafts are not
-              rendered; their validation appears in the editor.
-            </p>
-          )}
-          {receipt !== null && (
-            <details className="context" data-testid="apply-receipt">
-              <summary>Applied file · transaction receipt</summary>
-              <pre>{JSON.stringify(receipt, null, 2)}</pre>
-            </details>
-          )}
-          <div className="legend">
-            <span>
-              <i style={{ background: "#424c47" }} />
-              Ground
-            </span>
-            <span>
-              <i style={{ background: "#687274" }} />
-              Walls
-            </span>
-            <span>
-              <i style={{ background: "#c79855" }} />
-              Doors
-            </span>
-            <span>
-              <i style={{ background: "#e9d39a" }} />
-              Items
-            </span>
-            <span>
-              <i style={{ background: "#e0ac6e" }} />
-              Containers
-            </span>
-            <span>
-              <i style={{ background: "#c1b2d9" }} />
-              Decor
-            </span>
-            <span>
-              <i style={{ background: "#def4e3" }} />
-              Arrival
-            </span>
-          </div>
-          <div className="provenance">
-            <div>
-              <span className="eyebrow">GENERATION RECEIPT</span>
-              <p>
-                {preview
-                  ? `${preview.elapsed_ms.toFixed(1)} ms generation · ${preview.host_ms} ms worker request · seed ${preview.seed}`
-                  : "No scene generated yet"}
-              </p>
-              <small>
-                {preview
-                  ? `Scene seed ${preview.scene_seed} · ${preview.generation_revision} · terrain ${short(preview.terrain_sha256)}`
-                  : "Generation runs in a cancellable local process."}
-              </small>
-            </div>
-            <span className="pill">
-              {preview ? "Production data" : "Awaiting source"}
-            </span>
-          </div>
-          <p className="render-note">
-            Production-data-backed Workbench rendering. Revealed terrain and
-            initial objects; no player FOV or game-renderer fidelity claim.
-          </p>
-          {preview && (
-            <details className="context">
-              <summary>Controlled generation context</summary>
-              <p>{preview.context}</p>
-              <code>{JSON.stringify(preview.scene_address)}</code>
-              {!preview.passed && (
-                <pre>
-                  {JSON.stringify(preview.occupant_diagnostics, null, 2)}
-                </pre>
+            <>
+              <div className="building-controls">
+                <label>
+                  Preview seed
+                  <input
+                    aria-label="Draft preview seed"
+                    value={seed}
+                    onChange={(e) => setSeed(e.target.value)}
+                    disabled={!!busy}
+                  />
+                </label>
+                <button onClick={() => refresh()} disabled={!!busy}>
+                  ↻ Generate / refresh
+                </button>
+              </div>
+              <div ref={setCanvasHost} className="layout-host" />
+              {receipt !== null && (
+                <details className="context" data-testid="apply-receipt">
+                  <summary>Applied file · transaction receipt</summary>
+                  <pre className="raw">{JSON.stringify(receipt, null, 2)}</pre>
+                </details>
               )}
-            </details>
+            </>
           )}
+          <div
+            className="saved-preview-pane"
+            style={{
+              display: inspection?.document_token ? "none" : "contents",
+            }}
+          >
+            <div className="pane-heading">
+              <div>
+                <div className="eyebrow">03 / PRODUCTION PREVIEW</div>
+                <h2>
+                  {inspection
+                    ? inspection.id.replaceAll("_", " ")
+                    : "Local map study"}
+                </h2>
+              </div>
+              <div className="generation-controls">
+                <label>
+                  Seed
+                  <input
+                    aria-label="Generation seed"
+                    value={seed}
+                    onChange={(e) => setSeed(e.target.value)}
+                    inputMode="numeric"
+                    disabled={!!busy}
+                  />
+                </label>
+                <button
+                  onClick={() => refresh()}
+                  disabled={!selected || !!busy}
+                >
+                  ↻ Generate / refresh
+                </button>
+              </div>
+            </div>
+            <div className="canvas-area">
+              {preview && !inspection?.document_token ? (
+                <MapView
+                  preview={preview}
+                  onCell={setCell}
+                  onError={(e) =>
+                    setError({
+                      code: "VIEWPORT_FAILED",
+                      message: String(e),
+                      remedy:
+                        "Check WebView2 graphics support, then reopen the app.",
+                    })
+                  }
+                />
+              ) : (
+                <div className="canvas-empty">
+                  <div className="empty-symbol">⌖</div>
+                  <h3>
+                    {busy
+                      ? "Reading the living source"
+                      : identity
+                        ? "Ready for a production preview"
+                        : "Your world, under the lens"}
+                  </h3>
+                  <p>
+                    {busy ||
+                      "Connect a Resonance repository to see a generated local map, its terrain IDs and authored objects."}
+                  </p>
+                  <span>
+                    80 columns · 43 rows · authoritative Python generation
+                  </span>
+                </div>
+              )}
+              {busy && (
+                <div className="busy-overlay" role="status">
+                  <span className="spinner" />
+                  {busy}
+                  <button onClick={() => cancel()}>Cancel</button>
+                </div>
+              )}
+            </div>
+            {inspection?.document_token && (
+              <p className="render-note">
+                Preview is from the on-disk source. Unsaved drafts are not
+                rendered; their validation appears in the editor.
+              </p>
+            )}
+            {receipt !== null && !inspection?.document_token && (
+              <details className="context" data-testid="apply-receipt">
+                <summary>Applied file · transaction receipt</summary>
+                <pre>{JSON.stringify(receipt, null, 2)}</pre>
+              </details>
+            )}
+            <div className="legend">
+              <span>
+                <i style={{ background: "#424c47" }} />
+                Ground
+              </span>
+              <span>
+                <i style={{ background: "#687274" }} />
+                Walls
+              </span>
+              <span>
+                <i style={{ background: "#c79855" }} />
+                Doors
+              </span>
+              <span>
+                <i style={{ background: "#e9d39a" }} />
+                Items
+              </span>
+              <span>
+                <i style={{ background: "#e0ac6e" }} />
+                Containers
+              </span>
+              <span>
+                <i style={{ background: "#c1b2d9" }} />
+                Decor
+              </span>
+              <span>
+                <i style={{ background: "#def4e3" }} />
+                Arrival
+              </span>
+            </div>
+            <div className="provenance">
+              <div>
+                <span className="eyebrow">GENERATION RECEIPT</span>
+                <p>
+                  {preview
+                    ? `${preview.elapsed_ms.toFixed(1)} ms generation · ${preview.host_ms} ms worker request · seed ${preview.seed}`
+                    : "No scene generated yet"}
+                </p>
+                <small>
+                  {preview
+                    ? `Scene seed ${preview.scene_seed} · ${preview.generation_revision} · terrain ${short(preview.terrain_sha256)}`
+                    : "Generation runs in a cancellable local process."}
+                </small>
+              </div>
+              <span className="pill">
+                {preview ? "Production data" : "Awaiting source"}
+              </span>
+            </div>
+            <p className="render-note">
+              Production-data-backed Workbench rendering. Revealed terrain and
+              initial objects; no player FOV or game-renderer fidelity claim.
+            </p>
+            {preview && (
+              <details className="context">
+                <summary>Controlled generation context</summary>
+                <p>{preview.context}</p>
+                <code>{JSON.stringify(preview.scene_address)}</code>
+                {!preview.passed && (
+                  <pre>
+                    {JSON.stringify(preview.occupant_diagnostics, null, 2)}
+                  </pre>
+                )}
+              </details>
+            )}
+          </div>
         </section>
         <aside className="inspector">
           <div className="eyebrow">04 / INSPECTOR</div>
@@ -621,6 +657,10 @@ export default function App() {
               onError={setError}
               busy={busy}
               setBusy={setBusy}
+              canvasHost={canvasHost}
+              diskPreview={preview}
+              seed={Number(seed)}
+              onCancel={() => void cancel()}
             />
           ) : inspection ? (
             tab === "source" ? (
@@ -771,7 +811,7 @@ export default function App() {
           </strong>
           {error && <p>{error.remedy}</p>}
         </div>
-        <span className="runtime-tag">LOCAL / OFFLINE · W1</span>
+        <span className="runtime-tag">LOCAL / OFFLINE · W2</span>
       </footer>
     </main>
   );

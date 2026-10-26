@@ -15,7 +15,7 @@ use std::{
 use tauri::{Emitter, Manager};
 mod authoring;
 
-const PROTOCOL: u64 = 2;
+const PROTOCOL: u64 = 3;
 const MAX_OUTPUT: u64 = 16 * 1024 * 1024;
 
 #[derive(Debug, Clone, Serialize)]
@@ -189,6 +189,7 @@ fn validate_request(request: &Request) -> Result<(), Failure> {
         "inspect",
         "preview",
         "validate_draft",
+        "preview_draft",
     ]
     .contains(&request.op.as_str())
     {
@@ -198,7 +199,7 @@ fn validate_request(request: &Request) -> Result<(), Failure> {
             "Use the supported controls.",
         ));
     }
-    if ["inspect", "preview", "validate_draft"].contains(&request.op.as_str()) {
+    if ["inspect", "preview", "validate_draft", "preview_draft"].contains(&request.op.as_str()) {
         let asset = request.asset.as_deref().unwrap_or("");
         let parts: Vec<_> = asset.split('/').collect();
         let layout = parts.len() == 4
@@ -216,7 +217,8 @@ fn validate_request(request: &Request) -> Result<(), Failure> {
         .draft
         .as_ref()
         .is_some_and(|s| s.len() > authoring::MAX_DRAFT)
-        || (request.op == "validate_draft") != request.draft.is_some()
+        || (["validate_draft", "preview_draft"].contains(&request.op.as_str()))
+            != request.draft.is_some()
     {
         return Err(failure(
             "MALFORMED_REQUEST",
@@ -500,7 +502,9 @@ async fn worker_request(
     host: tauri::State<'_, Host>,
     request: Request,
 ) -> Result<Value, Failure> {
-    if host.inner.lock().unwrap().applying || request.op == "validate_draft" {
+    if host.inner.lock().unwrap().applying
+        || ["validate_draft", "preview_draft"].contains(&request.op.as_str())
+    {
         return Err(failure(
             "UNSUPPORTED_OPERATION",
             "Use the document authoring boundary.",
@@ -599,7 +603,7 @@ mod tests {
     }
     #[test]
     fn strict_envelopes() {
-        assert!(parse_response(br#"{"protocol":2,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
+        assert!(parse_response(br#"{"protocol":3,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
         for bytes in [
             br#"log line\n{}"#.as_slice(),
             br#"{"protocol":1,"id":"x","ok":true,"result":{}}"#,
