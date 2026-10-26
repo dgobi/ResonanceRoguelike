@@ -1,0 +1,34 @@
+{
+  "id": "bile_coating_w3c",
+  "name": "bile coating",
+  "category": "alchemy",
+  "description": "Render crow bile into a blade coating. The acid does not forgive.",
+  "known": true,
+  "components": [
+    {
+      "tag": "caustic",
+      "min_tier": 1,
+      "quantity": 2
+    },
+    {
+      "tag": "viscous",
+      "min_tier": 1,
+      "quantity": 1
+    }
+  ],
+  "requires_ambient": [
+    {
+      "tag": "burning",
+      "min_tier": 1
+    }
+  ],
+  "result_item": "bile_coating",
+  "passive_processing": false,
+  "tools": [
+    {
+      "tag": "vessel",
+      "min_tier": 1
+    }
+  ],
+ "w3c_metadata":{"nested":[[null,true],["Retain authored wording",7]]}
+}
