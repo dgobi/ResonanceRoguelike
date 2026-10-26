@@ -67,7 +67,7 @@ def checked_root(value):
 def source_identity(root):
     def git(*args):
         try:
-            return subprocess.check_output(["git", "-C", str(root), *args], stderr=subprocess.DEVNULL,
+            return subprocess.check_output(["git", "--no-optional-locks", "-c", "core.fsmonitor=false", "-C", str(root), *args], cwd=root, stderr=subprocess.DEVNULL,
                                            timeout=5, creationflags=0x08000000 if os.name == "nt" else 0).decode().strip()
         except (OSError, subprocess.SubprocessError):
             return None

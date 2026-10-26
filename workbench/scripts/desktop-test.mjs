@@ -1,7 +1,7 @@
 // App-local DOM/CDP automation of an actual WebView2/Tauri window. No desktop input.
 import { chromium } from "playwright-core";
 import { spawn, execFileSync } from "node:child_process";
-import { mkdir, readFile, writeFile, stat } from "node:fs/promises";
+import { mkdir, readFile, writeFile, stat, readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
@@ -15,9 +15,13 @@ const executable = resolve(
 const mode = process.env.WORKBENCH_TEST_MODE || "release";
 const output = resolve(workbench, ".artifacts", `desktop-${mode}`);
 await mkdir(output, { recursive: true });
+const workerTemp = resolve(output, `worker-temp-${Date.now()}`);
+await mkdir(workerTemp);
 const port = 9333;
 const env = {
   ...process.env,
+  TMP: workerTemp,
+  TEMP: workerTemp,
   WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS: `--remote-debugging-port=${port} --remote-debugging-address=127.0.0.1`,
   WEBVIEW2_USER_DATA_FOLDER: resolve(output, "webview-profile"),
 };
@@ -431,6 +435,11 @@ try {
     } else receipt.checks.push("native window close reaps active worker");
   }
   await browser?.close().catch(() => {});
+  receipt.temporary_roots_remaining = (await readdir(workerTemp)).filter(name => name.startsWith('resonance-w0-'));
+  if (receipt.temporary_roots_remaining.length) {
+    receipt.passed = false;
+    process.exitCode = 1;
+  } else receipt.checks.push('no temporary worker roots remain after native close');
   receipt.total_ms = Math.round(performance.now() - began);
   await writeFile(
     resolve(output, "receipt.json"),

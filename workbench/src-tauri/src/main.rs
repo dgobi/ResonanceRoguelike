@@ -44,19 +44,37 @@ struct Host {
     ids: Arc<AtomicU64>,
 }
 impl Host {
-    fn cancel(&self, clear: bool) {
+    fn cancel(&self, clear: bool) -> Result<(), Failure> {
         let mut state = self.inner.lock().unwrap();
         self.epoch.fetch_add(1, Ordering::SeqCst);
         if let Some(mut child) = state.child.take() {
             let _ = child.kill();
             let _ = child.wait();
         }
-        state.scratch.take();
         state.busy = false;
         if clear {
             state.root = None;
         }
+        cleanup_scratch(&mut state)
     }
+}
+
+fn cleanup_scratch(state: &mut Session) -> Result<(), Failure> {
+    if let Some(directory) = state.scratch.take() {
+        // This exact absolute path was created by tempfile, never supplied by
+        // the frontend. Windows may retain short-lived process/scanner locks.
+        let owned_path = directory.path().to_path_buf();
+        if directory.close().is_err() {
+            for _ in 0..40 {
+                std::thread::sleep(Duration::from_millis(25));
+                if !owned_path.exists() || std::fs::remove_dir_all(&owned_path).is_ok() {
+                    return Ok(());
+                }
+            }
+            return Err(failure("TEMP_CLEANUP_FAILED", format!("Unable to remove temporary preview directory {}", owned_path.display()), "A file is still locked. Close the locking process and remove this temporary preview directory."));
+        }
+    }
+    Ok(())
 }
 
 fn canonical_root(path: &Path) -> Result<PathBuf, Failure> {
@@ -337,8 +355,10 @@ fn run_worker(
             let _ = child.kill();
             let _ = child.wait();
             state.child = None;
-            state.scratch.take();
             state.busy = false;
+            if let Err(error) = cleanup_scratch(&mut state) {
+                break Err(error);
+            }
             break Err(failure(
                 "WORKER_TIMEOUT",
                 "The worker exceeded 90 seconds.",
@@ -348,16 +368,17 @@ fn run_worker(
         match child.try_wait() {
             Ok(Some(status)) => {
                 state.child = None;
-                state.scratch.take();
                 state.busy = false;
-                break Ok(status);
+                break cleanup_scratch(&mut state).map(|()| status);
             }
             Err(e) => {
                 let _ = child.kill();
                 let _ = child.wait();
                 state.child = None;
-                state.scratch.take();
                 state.busy = false;
+                if let Err(error) = cleanup_scratch(&mut state) {
+                    break Err(error);
+                }
                 break Err(failure("WORKER_EXIT", e, "Reopen the repository."));
             }
             Ok(None) => {}
@@ -404,7 +425,7 @@ async fn open_project(
     host: tauri::State<'_, Host>,
     path: String,
 ) -> Result<Value, Failure> {
-    host.cancel(true);
+    host.cancel(true)?;
     let root = canonical_root(Path::new(&path))?;
     host.inner.lock().unwrap().root = Some(root);
     let epoch = host.epoch.load(Ordering::SeqCst);
@@ -438,12 +459,12 @@ async fn worker_request(
         .map_err(|e| failure("HOST_FAILED", e, "Restart Workbench."))?
 }
 #[tauri::command]
-fn cancel_worker(host: tauri::State<'_, Host>) {
-    host.cancel(false);
+fn cancel_worker(host: tauri::State<'_, Host>) -> Result<(), Failure> {
+    host.cancel(false)
 }
 #[tauri::command]
-fn close_project(host: tauri::State<'_, Host>) {
-    host.cancel(true);
+fn close_project(host: tauri::State<'_, Host>) -> Result<(), Failure> {
+    host.cancel(true)
 }
 
 fn main() {
@@ -461,7 +482,9 @@ fn main() {
                 event,
                 tauri::WindowEvent::CloseRequested { .. } | tauri::WindowEvent::Destroyed
             ) {
-                window.state::<Host>().cancel(true);
+                if let Err(error) = window.state::<Host>().cancel(true) {
+                    eprintln!("{}: {}", error.code, error.message);
+                }
             }
         })
         .run(tauri::generate_context!())
@@ -519,7 +542,7 @@ mod tests {
     #[test]
     fn cancellation_reaps_child() {
         let host = Host::default();
-        // The real worker never spawns children; use a single Python sleeper.
+        // Exercise cancellation with a single live Python sleeper.
         let python = std::env::var("RESONANCE_PYTHON").unwrap_or("python".into());
         let mut command = Command::new(python);
         command.args(["-c", "import time; time.sleep(30)"]);
@@ -529,8 +552,33 @@ mod tests {
             command.creation_flags(0x08000000);
         }
         host.inner.lock().unwrap().child = Some(command.spawn().unwrap());
-        host.cancel(true);
+        host.cancel(true).unwrap();
         assert!(host.inner.lock().unwrap().child.is_none());
         assert_eq!(host.epoch.load(Ordering::SeqCst), 1);
+    }
+    #[test]
+    #[cfg(windows)]
+    fn cleanup_retries_a_transient_windows_file_lock() {
+        use std::os::windows::fs::OpenOptionsExt;
+        let directory = tempfile::tempdir().unwrap();
+        let path = directory.path().to_path_buf();
+        let lock = std::fs::OpenOptions::new()
+            .create(true)
+            .write(true)
+            .truncate(true)
+            .share_mode(0)
+            .open(path.join("locked-fixture"))
+            .unwrap();
+        let release = std::thread::spawn(move || {
+            std::thread::sleep(Duration::from_millis(100));
+            drop(lock);
+        });
+        let mut state = Session {
+            scratch: Some(directory),
+            ..Default::default()
+        };
+        cleanup_scratch(&mut state).unwrap();
+        release.join().unwrap();
+        assert!(!path.exists());
     }
 }

@@ -192,7 +192,13 @@ export default function App() {
   }
   async function cancel(close = false) {
     ++epoch.current;
-    await invoke(close ? "close_project" : "cancel_worker");
+    try {
+      await invoke(close ? "close_project" : "cancel_worker");
+    } catch (e) {
+      setError(asFailure(e));
+      setBusy("");
+      return;
+    }
     setBusy("");
     if (close) clear();
     setStatus(
