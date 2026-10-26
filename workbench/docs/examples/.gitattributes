@@ -3,3 +3,6 @@ apothecary_w2_furnished.json -text whitespace=blank-at-eol,blank-at-eof,space-be
 # Exact native W3A publication bytes; artifacts remain outside live content.
 alchemist_reagents_w3a.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 apothecary_w3a_loot.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Exact native W3B publication bytes; artifacts remain outside live content.
+wood_bundle_w3b.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+workshop_b_fuel_w3b.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

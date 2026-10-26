@@ -1,0 +1,878 @@
+{
+  "milestone": "W3B",
+  "date": "2026-10-26",
+  "timezone": "America/Edmonton",
+  "packaged_at_utc": "2026-10-26T22:26:03.785150+00:00",
+  "baseline_head": "4af2f9d552e9be44558f74b099749f3e78b1a919",
+  "checkpoint": "checkpoint/workbench-w3b-start-20261026-a",
+  "implementation_commit": "9939e44e405b5b42deca7b94d4ce5f902d1dc4e7",
+  "implementation_remote_readback": "9939e44e405b5b42deca7b94d4ce5f902d1dc4e7",
+  "verified_checkpoint": "checkpoint/workbench-w3b-verified-20261026-a",
+  "publication": "Normal push to existing origin/main. Following evidence-only commit tip is recorded in the owner handoff.",
+  "app_version": "0.5.0",
+  "protocol": 5,
+  "game_contract": "g2-2",
+  "item_contract": "component-1",
+  "tests": {
+    "typescript": 21,
+    "rust": 15,
+    "python_process": 25,
+    "python_process_seconds": 148.234,
+    "targeted_game_contract_access_crafting": 26,
+    "targeted_game_seconds": 4.298,
+    "web_build": true,
+    "clippy_warnings_denied": true,
+    "windows_executable": true,
+    "nsis_built": true,
+    "installer_installed": false
+  },
+  "preflight": {
+    "typescript": 18,
+    "rust": 13,
+    "python_process": 21,
+    "python_process_seconds": 111.16,
+    "native_w0_w3a": {
+      "mode": "pools",
+      "started_utc": "2026-10-26T21:51:06.207Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "native container link opens actual pool; open/return/reopen is byte-exact and retains the unsaved structure draft",
+        "native pool span edit, undo/redo, invalid raw freeze, item source, stale verdict rejection, exact new-pool diff/apply/reopen, retained building draft, explicit new-building link and real population all passed",
+        "native pool and building optimistic conflicts preserve external bytes; protected and unsupported paths rejected",
+        "pool apply revalidates changed item dependencies; failed replacement validation revokes an older pool review",
+        "fresh project reopen resolves the complete saved structure → container → new pool → item chain",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 722,
+      "open_to_preview_ms": 5409,
+      "frame_intervals_ms": {
+        "median": 5.599999999998545,
+        "p95": 5.600000000000364,
+        "max": 5.700000000000728,
+        "count": 119
+      },
+      "animation_frames_during_first_300ms_of_work": 55,
+      "pool_open_ms": 784,
+      "table_edit_ms": 11.22320000000036,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 59571
+    }
+  },
+  "environment": {
+    "platform": "Windows-10-10.0.26200-SP0 x64",
+    "node": "24.15.0",
+    "npm": "11.12.1",
+    "rust_cargo": "1.95.0/MSVC",
+    "tauri_rust": "2.12.5",
+    "webview2": "155",
+    "worker_runtime": {
+      "compatible": true,
+      "dependencies": {
+        "cffi": "2.1.1",
+        "numpy": "2.4.6",
+        "pycparser": "3.11",
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "typing_extensions": "4.16.0"
+      },
+      "executable": "\\\\?\\G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\python\\python.exe",
+      "numeric_threads": 1,
+      "python": "3.11.0"
+    },
+    "javascript_packages": {
+      "@tauri-apps/api": "2.12.4",
+      "diff": "8.0.4",
+      "jsonc-parser": "3.3.1",
+      "pixi.js": "8.22.0",
+      "react": "19.3.1",
+      "react-dom": "19.3.1",
+      "@tauri-apps/cli": "2.12.4",
+      "@types/node": "24.10.1",
+      "@types/react": "19.3.0",
+      "@types/react-dom": "19.3.0",
+      "@vitejs/plugin-react": "5.1.4",
+      "playwright-core": "1.56.1",
+      "typescript": "5.9.3",
+      "vite": "7.3.7",
+      "vitest": "4.1.12"
+    }
+  },
+  "native_items": {
+    "mode": "items",
+    "started_utc": "2026-10-26T22:20:58.823Z",
+    "checks": [
+      "actual Tauri WebView2 window",
+      "WebView network offline",
+      "repository handshake, live asset validation and Pixi rendering",
+      "production arrival click maps to (15,20), stairs_up",
+      "real DIMENSION diagnostic for disposable fixture",
+      "byte-exact view, close and reopen journey",
+      "host traversal rejection",
+      "cancel and retry without app hang",
+      "three advanced item sources open byte-exact read-only; actual dispatch found; declarative tincture effects explicitly unconsumed",
+      "closing/reopening the project during item lookup cannot restore a late item document",
+      "native container → pool → item; three retained drafts and separate histories; exact-span weight/tier edits; invalid raw freeze and late verdict suppression; item and pool variant diff/confirm/save/reopen; actual factory and seeded population observed",
+      "native host rejects stale item review, external source conflict, concurrent destination creation, advanced-item publication, protected paths and internal junction traversal",
+      "fresh project reopen resolves new pool/item and actual instance; original files and selection profile unchanged; plain rendered chrome at full/minimum window",
+      "invalid project visible",
+      "no temporary worker roots remain after native close"
+    ],
+    "console_errors": [],
+    "external_requests": [],
+    "launch_to_shell_ms": 722,
+    "open_to_preview_ms": 4409,
+    "frame_intervals_ms": {
+      "median": 5.599999999998545,
+      "p95": 5.699999999998909,
+      "max": 5.700000000000728,
+      "count": 119
+    },
+    "animation_frames_during_first_300ms_of_work": 55,
+    "item_open_ms": 705,
+    "item_edit_ms": 5.71469999999681,
+    "passed": true,
+    "temporary_roots_remaining": [],
+    "total_ms": 56231
+  },
+  "item_chain": {
+    "source": "roguelike/data/buildings/commercial/workshop_b.json",
+    "container_index": 3,
+    "original_pool": "roguelike/data/loot_pools/workshop_b_fuel.json",
+    "item": "roguelike/data/items/components/wood_bundle_w3b.json",
+    "pool": "roguelike/data/loot_pools/workshop_b_fuel_w3b.json",
+    "factory": {
+      "comparisons": [
+        {
+          "declared": "bundle of wood",
+          "equal": true,
+          "field": "name",
+          "instance": "bundle of wood"
+        },
+        {
+          "declared": "A loose bundle of dry branches. Snapped from dead fall.",
+          "equal": true,
+          "field": "description",
+          "instance": "A loose bundle of dry branches. Snapped from dead fall."
+        },
+        {
+          "declared": 1.75,
+          "equal": true,
+          "field": "weight",
+          "instance": 1.75
+        },
+        {
+          "declared": [
+            {
+              "tag": "fuel",
+              "tier": 2
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "equal": true,
+          "field": "keywords",
+          "instance": [
+            {
+              "tag": "fuel",
+              "tier": 2
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ]
+        }
+      ],
+      "consumer": "engine.data_loader.DataLoader -> engine.item_factory.ItemFactory.create -> entities.item.Item",
+      "definition_sha256": "d2062846132d34bf754d45167b20f45c59f2cb87ce30e46ad3c51a24ea56b2d1",
+      "instance": {
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "burn_turns": null,
+        "consumed_on_use": true,
+        "count": 1,
+        "decay_timer": null,
+        "description": "A loose bundle of dry branches. Snapped from dead fall.",
+        "drink_message": null,
+        "eat_message": null,
+        "harvest_from": null,
+        "heal_amount": null,
+        "hydration": null,
+        "keywords": [
+          {
+            "tag": "fuel",
+            "tier": 2
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          }
+        ],
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "name": "bundle of wood",
+        "nutrition": null,
+        "on_use": null,
+        "qualities": {},
+        "source_creature": null,
+        "stackable": false,
+        "temporary_essence": [],
+        "text_id": "",
+        "tile": "generic_item",
+        "turns_lit": 0,
+        "weight": 1.75
+      },
+      "item_id": "wood_bundle_w3b",
+      "loaded_catalog_sha256": "c39749fe5f422e950547b7a54ea9e598f5bd962b435d8ccd3b3ee19908627c13",
+      "observed_at_utc": "2026-10-26T22:21:36.124041+00:00",
+      "path": "roguelike/data/items/components/wood_bundle_w3b.json",
+      "pointer": "",
+      "scope": "Observed unowned factory instance. No inventory/use/turn, acquisition, world selection or save migration was executed.",
+      "source": {
+        "branch": null,
+        "catalog_sha256": "c39749fe5f422e950547b7a54ea9e598f5bd962b435d8ccd3b3ee19908627c13",
+        "commit": null,
+        "game_dirty": null,
+        "game_source_sha256": "2b1871228f051b8a0e0b8e51d31e479308b2f1d0858e2fecfda0c140d337d929",
+        "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w3b\\data-fixture-1793053258238"
+      }
+    }
+  },
+  "observed_population": {
+    "seed": 20261023,
+    "scene_seed": "6637439373377807600445427017063809115",
+    "source": {
+      "branch": null,
+      "catalog_sha256": "c39749fe5f422e950547b7a54ea9e598f5bd962b435d8ccd3b3ee19908627c13",
+      "commit": null,
+      "game_dirty": null,
+      "game_source_sha256": "2b1871228f051b8a0e0b8e51d31e479308b2f1d0858e2fecfda0c140d337d929",
+      "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w3b\\data-fixture-1793053258238"
+    },
+    "container": {
+      "decor_id": "crate",
+      "items": [
+        {
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "burn_turns": null,
+          "consumed_on_use": true,
+          "count": 1,
+          "decay_timer": null,
+          "description": "A pale sac near the base of the spine. The secretion it produced was territorial in function. Rendered carefully, it might serve a different purpose.",
+          "drink_message": null,
+          "eat_message": null,
+          "harvest_from": null,
+          "heal_amount": null,
+          "hydration": null,
+          "item_id": "stalker_musk_gland",
+          "item_state_version": 1,
+          "keywords": [
+            {
+              "tag": "viscous",
+              "tier": 1
+            },
+            {
+              "tag": "purgative",
+              "tier": 1
+            }
+          ],
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "name": "Musk Gland",
+          "nutrition": null,
+          "on_use": null,
+          "qualities": {},
+          "source_creature": null,
+          "stackable": true,
+          "temporary_essence": [],
+          "text_id": "",
+          "tile": "generic_item",
+          "turns_lit": 0,
+          "weight": 0.1
+        },
+        {
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "burn_turns": null,
+          "consumed_on_use": true,
+          "count": 1,
+          "decay_timer": null,
+          "description": "A loose bundle of dry branches. Snapped from dead fall.",
+          "drink_message": null,
+          "eat_message": null,
+          "harvest_from": null,
+          "heal_amount": null,
+          "hydration": null,
+          "item_id": "wood_bundle_w3b",
+          "item_state_version": 1,
+          "keywords": [
+            {
+              "tag": "fuel",
+              "tier": 2
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "name": "bundle of wood",
+          "nutrition": null,
+          "on_use": null,
+          "qualities": {},
+          "source_creature": null,
+          "stackable": false,
+          "temporary_essence": [],
+          "text_id": "",
+          "tile": "generic_item",
+          "turns_lit": 0,
+          "weight": 1.75
+        }
+      ],
+      "state": "closed",
+      "x": 36,
+      "y": 19
+    },
+    "scope": "Unsaved deliberate structure fixture; actual population, no world selection claim"
+  },
+  "variants": [
+    {
+      "path": "roguelike/data/items/components/wood_bundle_w3b.json",
+      "sha256": "d2062846132d34bf754d45167b20f45c59f2cb87ce30e46ad3c51a24ea56b2d1"
+    },
+    {
+      "path": "roguelike/data/loot_pools/workshop_b_fuel_w3b.json",
+      "sha256": "2c274e51526360dc317b913d109f0679de9552920555151dd9600ceba0a640f1"
+    }
+  ],
+  "native_regressions": {
+    "pools": {
+      "mode": "pools",
+      "started_utc": "2026-10-26T22:21:56.197Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "native container link opens actual pool; open/return/reopen is byte-exact and retains the unsaved structure draft",
+        "native pool span edit, undo/redo, invalid raw freeze, item source, stale verdict rejection, exact new-pool diff/apply/reopen, retained building draft, explicit new-building link and real population all passed",
+        "native pool and building optimistic conflicts preserve external bytes; protected and unsupported paths rejected",
+        "pool apply revalidates changed item dependencies; failed replacement validation revokes an older pool review",
+        "fresh project reopen resolves the complete saved structure → container → new pool → item chain",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 581,
+      "open_to_preview_ms": 4410,
+      "frame_intervals_ms": {
+        "median": 5.599999999998545,
+        "p95": 5.600000000000364,
+        "max": 5.700000000000728,
+        "count": 119
+      },
+      "animation_frames_during_first_300ms_of_work": 55,
+      "pool_open_ms": 674,
+      "table_edit_ms": 8.01090000000113,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 51297
+    },
+    "visual": {
+      "mode": "visual",
+      "started_utc": "2026-10-26T22:09:59.075Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "clean canvas/raw/unsaved production preview leaves original bytes and mtime unchanged",
+        "native continuous terrain stroke, decor rectangle fill and container move/ref edits share raw draft; each undo/redo is exact; linked target follows explicitly",
+        "native pointer mapping at both edges after zoom/pan and WebView scale 1.5; raw edit clears canvas history",
+        "native exact draft preview proves terrain/decor/factory container and wood_bundle; diff-confirm-variant-reopen passes current worker; original and selection profiles unchanged",
+        "stale native validation ignored; invalid raw source freezes painting; actual ACCESS diagnostic locates source cell; concurrent file edit blocks publication",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 540,
+      "open_to_preview_ms": 3903,
+      "frame_intervals_ms": {
+        "median": 5.599999999998545,
+        "p95": 5.700000000000728,
+        "max": 5.700000000000728,
+        "count": 119
+      },
+      "animation_frames_during_first_300ms_of_work": 56,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 38826
+    },
+    "authoring": {
+      "mode": "authoring",
+      "started_utc": "2026-10-26T22:10:38.837Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "search by exact path and two shipped definitions: byte/mtime no-op",
+        "refresh and actual native close protect the unsaved draft",
+        "real asynchronous validation response suppressed after a newer edit",
+        "malformed JSON and real unknown terrain reject publication despite retained map",
+        "typed scalar edit: diff, fresh host validation, confirm, Windows replace, exact unrelated text, metadata, reopen, real revalidation",
+        "unique variant applied and reopened; selection profiles byte-identical",
+        "failed replacement validation revokes the earlier host review capability",
+        "dependency changed after review: exact draft revalidated at apply and refused; source survives",
+        "real host rejects stale publication and exposes intact external version",
+        "traversal, saves/code, forged identities/reviews, unsafe variant and junction redirect denied at native host boundary",
+        "visible conflict, discard/reload and no unnoticed staging/backup files",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 569,
+      "open_to_preview_ms": 3891,
+      "frame_intervals_ms": {
+        "median": 5.599999999998545,
+        "p95": 5.700000000000728,
+        "max": 5.799999999999272,
+        "count": 119
+      },
+      "animation_frames_during_first_300ms_of_work": 55,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 55754
+    },
+    "interrupted-draft": {
+      "mode": "interrupted-draft",
+      "started_utc": "2026-10-26T22:11:34.917Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "hard process interruption with an unsaved draft leaves original source intact",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 657,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 6043
+    },
+    "restart-draft": {
+      "mode": "restart-draft",
+      "started_utc": "2026-10-26T22:11:41.239Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "fresh native process reopens original valid source after interruption",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 594,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 5798
+    }
+  },
+  "native_faults": {
+    "item-worker-exit": {
+      "mode": "item-worker-exit",
+      "started_utc": "2026-10-26T22:22:47.835Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "WORKER_EXIT visible during an actual unsaved canvas session",
+        "failed/cancelled draft worker grants no review or publication; original bytes unchanged",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 519,
+      "draft_fault_elapsed_ms": 128,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 6081,
+      "target_source": "roguelike/data/items/components/wood_bundle.json",
+      "label_note": "Legacy raw check text says canvas; the itemFault branch opens and edits this item source."
+    },
+    "item-worker-cancel": {
+      "mode": "item-worker-cancel",
+      "started_utc": "2026-10-26T22:22:54.227Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "failed/cancelled draft worker grants no review or publication; original bytes unchanged",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 556,
+      "draft_fault_elapsed_ms": 54,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 6137,
+      "target_source": "roguelike/data/items/components/wood_bundle.json",
+      "label_note": "Legacy raw check text says canvas; the itemFault branch opens and edits this item source."
+    },
+    "item-worker-timeout": {
+      "mode": "item-worker-timeout",
+      "started_utc": "2026-10-26T22:12:27.339Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "WORKER_TIMEOUT visible during an actual unsaved canvas session",
+        "failed/cancelled draft worker grants no review or publication; original bytes unchanged",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 589,
+      "draft_fault_elapsed_ms": 90098,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 96301,
+      "target_source": "roguelike/data/items/components/wood_bundle.json",
+      "label_note": "Legacy raw check text says canvas; the itemFault branch opens and edits this item source."
+    },
+    "protocol-mismatch": {
+      "mode": "protocol-mismatch",
+      "started_utc": "2026-10-26T22:14:03.899Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "PROTOCOL_MISMATCH visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 446,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 857
+    },
+    "malformed-worker": {
+      "mode": "malformed-worker",
+      "started_utc": "2026-10-26T22:14:05.042Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "MALFORMED_WORKER_OUTPUT visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "console_errors": [],
+      "external_requests": [],
+      "launch_to_shell_ms": 482,
+      "passed": true,
+      "temporary_roots_remaining": [],
+      "total_ms": 890
+    }
+  },
+  "final_native_scope": "Final packaged build ran items, pools and item worker exit/cancel. Earlier same-backend builds ran W1/W2, timeout and protocol faults; only later frontend reopen/hash protection and factory provenance presentation changed.",
+  "tested_source_bytes": [
+    {
+      "path": "roguelike/engine/item_authoring.py",
+      "bytes": 9947,
+      "sha256": "5c879712de95ccb25bc441ea8cd435aa39fceeda6fd1016c33f274e06efa9b45"
+    },
+    {
+      "path": "workbench/README.md",
+      "bytes": 27505,
+      "sha256": "c6facb2fffe37d87671ee1f1e21765971788d568446ce6ff962c5c8f5b9a801b"
+    },
+    {
+      "path": "workbench/package-lock.json",
+      "bytes": 88689,
+      "sha256": "5cc9ba4a50d3b7ba0434f595318dee4b57d777761743997d466f4e59fa4e2eb7"
+    },
+    {
+      "path": "workbench/package.json",
+      "bytes": 1252,
+      "sha256": "858b2ba14d85fa723079f5e831a10b91de8db2c37ddc014fd32b97755687922d"
+    },
+    {
+      "path": "workbench/scripts/desktop-test.mjs",
+      "bytes": 22011,
+      "sha256": "c231e802856496eee520c8b687cd756826a2281b79c9360f9e75d88586c67a2d"
+    },
+    {
+      "path": "workbench/scripts/item-journey.mjs",
+      "bytes": 13983,
+      "sha256": "aa1c45a2378f3de70991c0904b37ce4cabfa2775064839f2709b8698808fdf00"
+    },
+    {
+      "path": "workbench/scripts/measure-worker.py",
+      "bytes": 2464,
+      "sha256": "4a0e00da5b6abce96cdefd944b6a5d2334e83a66de5bcf231f8043ce7a461afd"
+    },
+    {
+      "path": "workbench/scripts/run-items.mjs",
+      "bytes": 776,
+      "sha256": "c8768f6b1988d0918889acd3508fc3b6ed6fea57a5a8c52db7e55534ac8a5739"
+    },
+    {
+      "path": "workbench/src-tauri/Cargo.lock",
+      "bytes": 108309,
+      "sha256": "186cca91bcec81c8201292f5449247818837f416168b2a1a1d453e88ed6b6030"
+    },
+    {
+      "path": "workbench/src-tauri/Cargo.toml",
+      "bytes": 637,
+      "sha256": "ddb18b2d7e6346f9ceaf8dd1e8806dfa95218636c37a5909e683aaa54a2937db"
+    },
+    {
+      "path": "workbench/src-tauri/src/authoring.rs",
+      "bytes": 40831,
+      "sha256": "d44685df62f2a8a9503528258e4c77b4fdb2929c29e9bb617b5a1d0fddfac327"
+    },
+    {
+      "path": "workbench/src-tauri/src/main.rs",
+      "bytes": 22207,
+      "sha256": "71fdb66780f02f394ec134bb3c298d8186484c5b5c56929b17f817f7f8591d0e"
+    },
+    {
+      "path": "workbench/src-tauri/tauri.conf.json",
+      "bytes": 1102,
+      "sha256": "7ec9b43454bd929978c4495f81a2c8614d355268ea0da33024ae60de895764a4"
+    },
+    {
+      "path": "workbench/src/App.tsx",
+      "bytes": 37951,
+      "sha256": "b28a9f4e913a914586f860f730a37a555236f119809f4beea98936613a0f00be"
+    },
+    {
+      "path": "workbench/src/Authoring.tsx",
+      "bytes": 23537,
+      "sha256": "cdd831a96b9d32bea668374b116c1e1d15052eb668b4f417cab011dd63758de6"
+    },
+    {
+      "path": "workbench/src/ItemEditor.tsx",
+      "bytes": 9259,
+      "sha256": "3de35ee043640168e3b2c1ffbfd04a3100c9e92c1e64251cc8fd104893cfb7eb"
+    },
+    {
+      "path": "workbench/src/PoolEditor.tsx",
+      "bytes": 8089,
+      "sha256": "81082e801983f8ee91ae325303a9504069197d8929fb559e38b039ba2bfcdf25"
+    },
+    {
+      "path": "workbench/src/item.test.ts",
+      "bytes": 2200,
+      "sha256": "ca67a75f8fb49dcf1f638dd7463a6b64cae9977c22808ee29cdc009b692534d8"
+    },
+    {
+      "path": "workbench/src/item.ts",
+      "bytes": 2089,
+      "sha256": "31d6272bb047aac5318631b73d5268a1ade7763c7ca7ced1d9e690d8da7d47a5"
+    },
+    {
+      "path": "workbench/src/protocol.ts",
+      "bytes": 5883,
+      "sha256": "108e518ac01839c716450ad52f4c6315d37027cc7a879156612f3e018f8e604c"
+    },
+    {
+      "path": "workbench/src/styles.css",
+      "bytes": 18799,
+      "sha256": "d9bc8d19eb4431323acf1c15681f523deea92f05f06c87a7fdc14c866dd9e1a9"
+    },
+    {
+      "path": "workbench/worker/bridge.py",
+      "bytes": 46751,
+      "sha256": "c5e51f4b568b4487689fd44e9936e5beb8aff1f254d483dde4ef1d29ca1705b8"
+    },
+    {
+      "path": "workbench/worker/test_authoring.py",
+      "bytes": 5383,
+      "sha256": "3361d78c5ee1ee82066d8b3201532d3b966a6d6a1dda308476d398690361d6f3"
+    },
+    {
+      "path": "workbench/worker/test_bridge.py",
+      "bytes": 6663,
+      "sha256": "7582d6f20ba0347f891303a49cfa0654cfba9444eeaf09f74a4307a2ecfb839c"
+    },
+    {
+      "path": "workbench/worker/test_items.py",
+      "bytes": 7156,
+      "sha256": "03e1b39a31fa7b72e90599f1a32a5152d85937fd06e6eef325dc1163222f393e"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "bytes": 9574912,
+      "sha256": "deb0d3924c33583d05ff47d7448b761e2c7a35809a4c27629088b7f967c10fac"
+    },
+    {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.5.0_x64-setup.exe",
+      "bytes": 27486205,
+      "sha256": "2f620c05945b82e695b5bcb96f075c760e39b6c61bde3425d2749488def8165c"
+    }
+  ],
+  "retained_artifacts": [
+    {
+      "path": "workbench/docs/examples/wood_bundle_w3b.json",
+      "bytes": 393,
+      "sha256": "d2062846132d34bf754d45167b20f45c59f2cb87ce30e46ad3c51a24ea56b2d1"
+    },
+    {
+      "path": "workbench/docs/examples/workshop_b_fuel_w3b.json",
+      "bytes": 167,
+      "sha256": "2c274e51526360dc317b913d109f0679de9552920555151dd9600ceba0a640f1"
+    },
+    {
+      "path": "workbench/docs/images/w3b/item-properties.png",
+      "bytes": 623949,
+      "sha256": "ca38fa618ad00d4ec91bf235b30c92216f5afc0a400fe384ed19858786adbdbf"
+    },
+    {
+      "path": "workbench/docs/images/w3b/item-factory.png",
+      "bytes": 751663,
+      "sha256": "652ccfcf119e33da90437744046e5d506edbd599cc1d43fba9ed30fc692473bc"
+    },
+    {
+      "path": "workbench/docs/images/w3b/minimum-window.png",
+      "bytes": 189082,
+      "sha256": "62f6367eee626933e657b0a36ceabcf7d6e4cbd9637bfbca0ca322d031af3377"
+    }
+  ],
+  "ignored_local_logs": [
+    {
+      "path": "workbench/.artifacts/w3b-build.log",
+      "bytes": 2073,
+      "sha256": "3961c1f09616329e143db3a9abcd7bb13856a4a4d04a4df5fe746f9f2786a505"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-game-contracts.log",
+      "bytes": 4596,
+      "sha256": "ae95c88c763df763122b3f3c613593a0f791fa5e2d4ee5c7dac0ff6b364685c9"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-item-worker-cancel.log",
+      "bytes": 848,
+      "sha256": "19ebef37d6788128e02b8573a52f108a9a4469c3dedf18207c6ac317d79ccb10"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-item-worker-exit.log",
+      "bytes": 915,
+      "sha256": "d783ec58705e50186afd7b8a1d8a7c911e56d5ca79dc5b62d3a5423343c52045"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-item-worker-timeout.log",
+      "bytes": 924,
+      "sha256": "6d43cd719fd21c0c4f5325476309ece8a7c87d4f9f4ab0d26f2d319a6a104fa5"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-items-python.log",
+      "bytes": 700,
+      "sha256": "19e4b69b1c821ac419f42f596b3338dc26e72cacf01f27698ba9aa586470379d"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-malformed-worker.log",
+      "bytes": 771,
+      "sha256": "5f4bb605b2e5b0706e9d75e9c72aba2f011adfac9c3421a2d2865e61f080e514"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-native-authoring.log",
+      "bytes": 9019,
+      "sha256": "507493c62c248bb03cdc93386b9627e2bbd5a9851b746fb79bfeee72a4730e88"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-native-items.log",
+      "bytes": 14303,
+      "sha256": "fe70c5538d2f71075189202177031bbfe940ff9fc91393c91d61114635b9add2"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-native-pools.log",
+      "bytes": 11198,
+      "sha256": "989948e37819d27791fee07c5a5752774e66e23f5f5be755274bfb48268a9fa4"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-native-visual.log",
+      "bytes": 12950,
+      "sha256": "b71ef717a958ce890a8299406a590dc522ed971bee7769417fd50278caae2987"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-preflight-native.log",
+      "bytes": 11188,
+      "sha256": "1ac7cfc45802ae5adf5273fbb6aebd03979b14a75c3a0bf85b3c77280bf76df6"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-preflight-python.log",
+      "bytes": 3000,
+      "sha256": "cb88e1eea56648ef7236a04c438808eb98ad3d4c6a13eda972ad186933c70082"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-protocol-mismatch.log",
+      "bytes": 765,
+      "sha256": "00410cc292301578efc6906891d5654a8d8c9273ee575fcab21899882b6203b7"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-regression-python.log",
+      "bytes": 3596,
+      "sha256": "012ab24d3f85962a05c74c0c5fb866755b2dd441c44f343d7d652a2df2c909df"
+    },
+    {
+      "path": "workbench/.artifacts/w3b-typescript.log",
+      "bytes": 284,
+      "sha256": "81ffbfd5f5cb34f9427cc3c3e06ab8eb73834830f93f01f71339b5c84b6d10f6"
+    }
+  ],
+  "preservation": {
+    "passed": true,
+    "baseline_head": "7745f72ea5446af22d3f340c30043d3752ef0f54",
+    "source_files_checked": 7972,
+    "save_files_checked": 7,
+    "unchanged_bytes_and_measured_metadata": true,
+    "metadata": [
+      "size",
+      "mtime_ns",
+      "ctime_ns (source only)"
+    ],
+    "save_file_set_unchanged": true,
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "preflight_manifest_sha256": "19101fc94222e5bbbf36c38c1f262215fb1994f6b33b38ff1d65239d6c337d1e",
+    "changes_count": 0
+  },
+  "limits": [
+    "Actual unowned factory instance and seeded disposable population; no ordinary use or natural acquisition proof.",
+    "Only four current inert component definitions are writable; advanced/ambiguous items are read-only.",
+    "One reviewed file per transaction; a valid item may remain unreferenced after failed pool publication.",
+    "Installer built, not installed; signing, updating, clean-machine provisioning and non-Windows targets unverified.",
+    "No gameplay contract, shipped definition, selection profile, personal save or wiki file changed."
+  ]
+}

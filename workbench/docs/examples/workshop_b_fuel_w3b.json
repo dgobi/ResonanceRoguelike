@@ -1,0 +1,13 @@
+{
+  "id": "workshop_b_fuel_w3b",
+  "roll_count": [
+    1,
+    1
+  ],
+  "items": [
+    {
+      "item_id": "wood_bundle_w3b",
+      "weight": 2
+    }
+  ]
+}
