@@ -15,7 +15,7 @@ use std::{
 use tauri::{Emitter, Manager};
 mod authoring;
 
-const PROTOCOL: u64 = 5;
+const PROTOCOL: u64 = 6;
 const MAX_OUTPUT: u64 = 16 * 1024 * 1024;
 
 #[derive(Debug, Clone, Serialize)]
@@ -41,6 +41,7 @@ struct Session {
     document: Option<authoring::Document>,
     pool_document: Option<authoring::Document>,
     item_document: Option<authoring::Document>,
+    recipe_document: Option<authoring::Document>,
     applying: bool,
 }
 #[derive(Default, Clone)]
@@ -71,6 +72,7 @@ impl Host {
             state.document = None;
             state.pool_document = None;
             state.item_document = None;
+            state.recipe_document = None;
         }
         cleanup_scratch(&mut state)
     }
@@ -209,7 +211,7 @@ fn validate_request(request: &Request) -> Result<(), Failure> {
         let layout = parts.len() == 4
             && parts[..3] == ["roguelike", "data", "layouts"]
             && authoring::valid_filename(parts[3]);
-        if !layout && !authoring::is_pool(asset) && !authoring::is_item(asset) && authoring::relative_building(asset).is_err() {
+        if !layout && !authoring::is_pool(asset) && !authoring::is_item(asset) && !authoring::is_recipe(asset) && authoring::relative_building(asset).is_err() {
             return Err(failure(
                 "PATH_ESCAPE",
                 "Asset is outside the W0 layout route.",
@@ -456,7 +458,7 @@ fn run_worker(
                 .as_array()
                 .into_iter()
                 .flatten()
-                .filter(|a| a["editable"] == true || a["route"] == "item_definition")
+                .filter(|a| a["editable"] == true || a["route"] == "item_definition" || a["route"] == "recipe_definition")
                 .filter_map(|a| a["path"].as_str().map(str::to_owned))
                 .collect();
         }
@@ -607,7 +609,7 @@ mod tests {
     }
     #[test]
     fn strict_envelopes() {
-        assert!(parse_response(br#"{"protocol":5,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
+        assert!(parse_response(br#"{"protocol":6,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
         for bytes in [
             br#"log line\n{}"#.as_slice(),
             br#"{"protocol":1,"id":"x","ok":true,"result":{}}"#,

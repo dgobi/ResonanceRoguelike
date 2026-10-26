@@ -5,6 +5,7 @@ import type { ItemContext, ItemTrail } from "./protocol";
 export function ItemEditor(p: {
   draft: string; path: string; context?: ItemContext; selectedId?: string; dirty: boolean; validated: boolean;
   disabled: string; busy: boolean; onCancel: () => void; onReturn?: () => void; trail?: ItemTrail | null;
+  onRecipe?: (id: string, path: string) => void;
   onPool?: (id: string) => void; onSource: () => void;
   onEdit: (edit: (text: string) => string, label: string) => void;
   onUndo: () => void; onRedo: () => void; canUndo: boolean; canRedo: boolean;
@@ -30,7 +31,7 @@ export function ItemEditor(p: {
       <code>{p.trail.path} → items[{p.trail.index}].item_id = {p.trail.itemId}</code>
       <small>Declared reference when opened. Pool and structure drafts retained; item publication changes no references.</small>
     </nav>}
-    <div className="tabs">{["Properties", "References", "Use binding", "Factory result"].map(v => <button key={v} className={view === v ? "active" : ""} onClick={() => setView(v)}>{v}</button>)}<button onClick={sourceJump}>Show source</button></div>
+    <div className="tabs">{["Properties", "References", "Recipes", "Use binding", "Factory result"].map(v => <button key={v} className={view === v ? "active" : ""} onClick={() => setView(v)}>{v}</button>)}<button onClick={sourceJump}>Show source</button></div>
     {reason && <p className="notice warning" data-testid="item-disabled">{reason}</p>}
     {!evidenceCurrent && <p className="notice">References, use binding and factory evidence below belong to the opened source. Validate the exact draft to refresh them.</p>}
     {view === "Properties" && <>
@@ -57,6 +58,8 @@ export function ItemEditor(p: {
       {!record?.pools.length && <p>No saved pool references. This item may be unreferenced.</p>}
       <table className="pool-table"><tbody>{record?.pools.map(r => <tr key={r.path+r.pointer+r.index}><td><button disabled={!r.unique || !!r.pointer || p.busy} onClick={() => p.onPool?.(r.id)}>{r.id}</button><code>{r.path}{r.pointer}</code></td><td>{r.field}</td></tr>)}</tbody></table>
       <h3>Dependencies</h3><table className="pool-table"><thead><tr><th>Evidence</th><th>Reference</th><th>Source / field</th></tr></thead><tbody>{record?.dependencies.map((r,i) => <tr key={i}><td>{r.kind}{r.resolved !== undefined && <small>{r.resolved ? "Reference ID validated" : "Unresolved reference"}</small>}</td><td>{String(r.id)}</td><td>{r.field}<small>{r.paths?.join(", ")}</small><small>{r.note}</small></td></tr>)}</tbody></table></>}
+    {view === "Recipes" && <><p>Opened item/source snapshot. Exact declared output references and potential ingredient predicates are distinct from availability or successful crafting.</p>
+      {[true,false].map(produces=><section key={String(produces)}><h3>{produces ? "Produces this item" : "Potential ingredient matches"}</h3><table className="pool-table"><thead><tr><th>Recipe / source</th><th>Evidence</th><th>Execution class</th></tr></thead><tbody>{record?.recipes?.filter(r=>produces ? r.produces : r.fields.length>0).map(r=><tr key={r.path+r.pointer}><td><button data-recipe-link={r.path} data-recipe-relation={produces ? "output" : "ingredient"} disabled={p.busy} onClick={()=>p.onRecipe?.(r.id,r.path)}>{r.id}</button><code>{r.path}{r.pointer}</code></td><td>{produces ? "Declared result_item reference" : "Potential tag match"}<small>{produces ? "Exact item ID" : r.fields.join(", ")}</small></td><td>{r.execution_class}</td></tr>)}</tbody></table></section>)}<p>Tag/tier predicates only. Quantities, reusable-material choices, knowledge, access and ambient conditions are unverified.</p></>}
     {view === "Use binding" && <><h3>{record?.use.status || "Unavailable"}</h3><dl><dt>Declared on_use</dt><dd>{JSON.stringify(record?.use.declared ?? null)}</dd><dt>Actual consumer</dt><dd>{record?.use.consumer}</dd><dt>Handler</dt><dd>{record?.use.handler || "None"}{record?.use.line ? ` · source line ${record.use.line}` : ""}</dd></dl><p>{record?.use.scope}</p>{record?.use.notes.map(n => <p className="notice" key={n}>{n}</p>)}<p>Ordinary interactive use was not executed.</p></>}
     {view === "Factory result" && <>{record?.factory && evidenceCurrent ? <><h3>Observed factory instance</h3><p>{record.factory.consumer}</p><p>{record.factory.scope}</p><code>{record.factory.path} · exact source {record.factory.definition_sha256.slice(0,12)}<br />Game {record.factory.source.game_source_sha256.slice(0,12)} · catalogue {record.factory.source.catalog_sha256?.slice(0,12)}</code>
       <small>Observed {record.factory.observed_at_utc} · loaded catalogue {record.factory.loaded_catalog_sha256.slice(0,12)}</small>

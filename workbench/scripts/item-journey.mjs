@@ -50,6 +50,8 @@ export async function itemJourney(page, root, output, receipt) {
   const raw=await source(), closing=raw.lastIndexOf("}");
   await editor().locator("textarea.source-editor").fill(raw.slice(0,closing).trimEnd()+',\n "w3b_metadata": {"nested":[[null,true],["Retain authored wording",7]]}\n'+raw.slice(closing));
   const enriched=await source();
+  // Returning from a linked document now preserves the selected item tab.
+  await page.getByTestId("item-editor").getByRole("button",{name:"Properties",exact:true}).click();
   const editStart=performance.now(); await page.getByLabel("Item weight (kg)").fill("1.75"); receipt.item_edit_ms=performance.now()-editStart;
   const changed=await source(); assert.equal(changed,enriched.replace('"weight": 1.0','"weight": 1.75'));
   await b("Undo item").click(); assert.equal(await source(),enriched); await b("Redo item").click(); assert.equal(await source(),changed);

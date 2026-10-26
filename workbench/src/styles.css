@@ -989,6 +989,12 @@ pre {
 .item-inspector .raw { max-height: 320px; overflow: auto; }
 .row-diagnostic { color: #e9b38c; }
 .item-editor { padding: 18px; min-width: 0; }
+.recipe-table-scroll { overflow: auto; max-width: 100%; max-height: 480px; }
+.recipe-editor .pool-table select { min-width: 130px; max-width: 200px; }
+.recipe-editor .pool-table input { min-width: 64px; width: 76px; }
+.recipe-editor .pool-table td:last-child { min-width: 180px; }
+.recipe-editor > section { margin-top: 24px; }
+.building-controls { flex-wrap: wrap; }
 .item-editor .raw { max-height: 430px; overflow: auto; }
 .item-editor code { overflow-wrap: anywhere; display: block; }
 .item-properties { border: 1px solid #3d4b4d; padding: 18px; }

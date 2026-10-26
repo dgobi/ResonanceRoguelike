@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { LayoutEditor } from "./LayoutEditor";
 import { PoolEditor } from "./PoolEditor";
+import { RecipeEditor } from "./RecipeEditor";
 import { ItemEditor } from "./ItemEditor";
 import {
   CanvasHistory,
@@ -20,6 +21,7 @@ import {
   type SourceTrail,
   type ItemTrail,
   type ItemContext,
+  type RecipeContext,
 } from "./protocol";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
 
@@ -34,9 +36,11 @@ type Verdict = {
   contract: string;
   preview?: Preview;
   item_context?: ItemContext;
+  recipe_context?: RecipeContext;
 };
 type Disk = {
   changed: boolean;
+  dependencies_changed?: boolean;
   raw: string;
   sha256: string;
   recovery_files: string[];
@@ -57,7 +61,7 @@ export function Authoring({
   trail,
   onReturn,
   dependencyVersion = 0,
-  onItem, itemTrail, selectedItemId, onItemPool, poolEntryFocus,
+  onItem, itemTrail, selectedItemId, onItemPool, poolEntryFocus, onRecipe, onRecipeItem, selectedRecipeId,
 }: {
   document: Inspection;
   onDirty: (dirty: boolean) => void;
@@ -79,10 +83,14 @@ export function Authoring({
   selectedItemId?: string;
   onItemPool?: (id: string) => void;
   poolEntryFocus?: number;
+  onRecipe?: (id: string, path: string) => void;
+  onRecipeItem?: (id: string, path?: string) => void;
+  selectedRecipeId?: string;
 }) {
   const pool = document.route === "contextual_loot_pool";
   const item = document.route === "item_definition";
-  const writable = !item || document.editable;
+  const recipe = document.route === "recipe_definition";
+  const writable = !(item || recipe) || document.editable;
   const [draft, setDraft] = useState(document.raw),
     [editing, setEditing] = useState(false);
   const [tab, setTab] = useState("properties"),
@@ -92,6 +100,7 @@ export function Authoring({
   const [disk, setDisk] = useState<Disk | null>(null),
     [confirm, setConfirm] = useState(false);
   const [localError, setLocalError] = useState("");
+  const [evidenceVersion, setEvidenceVersion] = useState(dependencyVersion);
   const [focus, setFocus] = useState<{ cell: Cell; layer: Layer } | null>(null);
   const history = useRef(new CanvasHistory()),
     gesture = useRef<string | null>(null);
@@ -134,7 +143,10 @@ export function Authoring({
         const d = await call<Disk>("document_disk", {
           token: document.document_token,
         });
-        if (!stopped) setDisk(d.result);
+        if (!stopped) {
+          setDisk(d.result);
+          if (recipe && (d.result.dependencies_changed || d.result.changed)) { version.current++; setVerdict(null); setConfirm(false); }
+        }
       } catch (e) {
         if (!stopped) onError(asFailure(e));
       }
@@ -217,6 +229,7 @@ export function Authoring({
         currentVerdict(v, version.current, text, latest.current)
       ) {
         setVerdict(r.result);
+        if (recipe) { setEvidenceVersion(dependencyVersion); setDisk(d=>d ? {...d, dependencies_changed:false} : d); }
         if (!r.result.valid || showDiff)
           setTab(r.result.valid ? "diff" : "problems");
       }
@@ -253,6 +266,8 @@ export function Authoring({
   }
   const reason = !editing
     ? "Begin editing to create a draft."
+    : recipe && !variant
+      ? "Create a unique new variant before publication."
     : !dirty
       ? "No unsaved source changes."
       : parsed.diagnostics.length
@@ -278,13 +293,20 @@ export function Authoring({
         onItem={(id, index) => onItem?.(id, {poolId: String(values.id || document.id), path: target, index, itemId: id, structure: trail})}
         focusEntry={poolEntryFocus}
       />, canvasHost)}
-      {active && item && canvasHost && createPortal(<ItemEditor
+      {item && canvasHost && createPortal(<div hidden={!active}><ItemEditor
         draft={draft} path={target} context={verdict?.item_context || document.item_context} selectedId={selectedItemId}
         dirty={dirty} validated={!!verdict?.valid} disabled={!writable ? "Read-only item family or ambiguous source." : !editing ? "Begin edit to change this component." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
-        busy={!!busy} onCancel={onCancel} trail={itemTrail} onReturn={onReturn} onPool={onItemPool} onSource={() => setTab("source")}
+        busy={!!busy} onCancel={onCancel} trail={itemTrail} onReturn={onReturn} onPool={onItemPool} onRecipe={onRecipe} onSource={() => setTab("source")}
         onEdit={visualEdit} onUndo={() => historyStep(false)} onRedo={() => historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
-      />, canvasHost)}
-      {active && !pool && !item && canvasHost &&
+      /></div>, canvasHost)}
+      {recipe && canvasHost && createPortal(<div hidden={!active}><RecipeEditor
+        draft={draft} path={target} context={verdict?.recipe_context || document.recipe_context} selectedId={selectedRecipeId}
+        dirty={dirty} validated={!!verdict?.valid} evidenceStale={!!disk?.changed || !!disk?.dependencies_changed || evidenceVersion !== dependencyVersion}
+        disabled={!writable ? "Read-only recipe family or ambiguous source." : !editing ? "Begin edit to change this recipe." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
+        busy={!!busy} onCancel={onCancel} onReturn={onReturn} onItem={(id,path)=>onRecipeItem?.(id,path)} onSource={()=>setTab("source")}
+        onProbe={()=>void validate(false)} onEdit={visualEdit} onUndo={()=>historyStep(false)} onRedo={()=>historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
+      /></div>, canvasHost)}
+      {active && !pool && !item && !recipe && canvasHost &&
         createPortal(
           <LayoutEditor
             draft={draft}
@@ -340,7 +362,7 @@ export function Authoring({
               : "Read-only · source unchanged"}
       </p>
       <p className="muted small">
-        {item ? "item_definition" : pool ? "contextual_loot_pool" : `ordinary_building · ${document.width} × ${document.height} · ${document.special_count} specials`} · file {document.sha256.slice(0, 12)}
+        {recipe ? "recipe_definition" : item ? "item_definition" : pool ? "contextual_loot_pool" : `ordinary_building · ${document.width} × ${document.height} · ${document.special_count} specials`} · file {document.sha256.slice(0, 12)}
       </p>
       {!!disk?.recovery_files.length && (
         <p className="notice warning">
@@ -395,7 +417,7 @@ export function Authoring({
             }}
           />
           <small>
-            {item ? "Saved beside the source. Choose the new item ID explicitly in a new pool variant; no pool is reassigned."
+            {recipe ? "New recipe files are auto-loaded in new sessions. Review the known/deprecated consequences before confirming." : item ? "Saved beside the source. Choose the new item ID explicitly in a new pool variant; no pool is reassigned."
               : pool ? "Saved beside the source. No container is reassigned. Return to a structure variant to link it deliberately."
               : "Saved beside the source. Current procedural selection profiles are unchanged. Legacy flat-pool contexts may discover added files."}
           </small>
@@ -414,7 +436,7 @@ export function Authoring({
       </div>
       {tab === "properties" && (
         <div className="typed-fields">
-          {!item && <label>
+          {!item && !recipe && <label>
             Description
             <textarea
               aria-label="Description"
@@ -428,7 +450,7 @@ export function Authoring({
               onChange={(e) => property("description", e.target.value)}
             />
           </label>}
-          {!pool && !item && <label>
+          {!pool && !item && !recipe && <label>
             Legacy corner-scatter weight
             <input
               aria-label="Legacy corner-scatter weight"
@@ -450,7 +472,7 @@ export function Authoring({
             />
           </label>}
           <p className="muted small">
-            {item ? "Component controls share this source draft, history and validation. Advanced definitions are read-only. Use References, Use binding and Factory result to distinguish declarations from observed instances."
+            {recipe ? "Recipe controls share this exact source draft, history and validation. Publication creates a new recipe ID/file only. Eligibility and observed output have separate receipts." : item ? "Component controls share this source draft, history and validation. Advanced definitions are read-only. Use References, Use binding and Factory result to distinguish declarations from observed instances."
               : pool ? "Description is retained metadata. Edit item IDs, weights and roll bounds in the table. Unknown fields remain in Source."
               : <>Description is retained metadata. Weight is a supported nonnegative
             scalar; current planned selection uses separate profiles. Geometry,
@@ -470,11 +492,11 @@ export function Authoring({
       )}
       {tab === "source" && (
         <>
-          <label htmlFor={item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}>
+          <label htmlFor={recipe ? "recipe-draft-json" : item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}>
             {editing ? "Draft JSON" : "Source JSON"}
           </label>
           <textarea
-            id={item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}
+            id={recipe ? "recipe-draft-json" : item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}
             className="source-editor"
             spellCheck={false}
             value={draft}
@@ -511,7 +533,7 @@ export function Authoring({
               </p>
               <p>{d.message}</p>
               <small>{d.correction}</small>
-              {!pool && !item && diagnosticCell(d, layoutModel(draft).model) && (
+              {!pool && !item && !recipe && diagnosticCell(d, layoutModel(draft).model) && (
                 <button
                   onClick={() =>
                     setFocus(diagnosticCell(d, layoutModel(draft).model))
@@ -525,7 +547,7 @@ export function Authoring({
           <p className="muted">
             {dirty && !verdict
               ? "Displayed source diagnostics are from the opened file. Validate the draft for a current verdict."
-              : item ? "Item checks use the current loader, component capability, instance schema and actual factory. No interactive use is executed."
+              : recipe ? "Recipe checks use the current loader and narrow game-owned contract. Tests use isolated production allocation and ownership exchange." : item ? "Item checks use the current loader, component capability, instance schema and actual factory. No interactive use is executed."
               : pool ? "Pool validation uses the current loader and container-pool validator. No population is sampled here."
               : "Draft validation includes a centered production stamp and initial population. Access checks use the declared main entrance when present."}
           </p>
@@ -593,7 +615,7 @@ export function Authoring({
               setConfirm(true);
             }}
           >
-            Review & apply
+            {recipe ? "Apply variant" : "Review & apply"}
           </button>
         </div>
       )}
@@ -614,14 +636,14 @@ export function Authoring({
             <h2>Apply this one content file?</h2>
             <code>{target}</code>
             <p>
-              {item && variant ? "Creates one new item. Existing pools and held instances are unchanged. Deliberately reference it from a new pool variant."
+              {recipe ? "This creates an active recipe variant. New sessions recursively load it; known defaults to true and enables CraftScreen execution when requirements are met. known:false displays an unknown recipe and blocks execution. No learning route or personal-save compatibility is promised." : item && variant ? "Creates one new item. Existing pools and held instances are unchanged. Deliberately reference it from a new pool variant."
                 : pool && variant ? "Creates one new pool. No structure or world is changed; the pool may remain unused until explicitly referenced."
                 : variant
                 ? "This creates a new definition. It does not add entries to current town or roadside selection profiles. Older flat-pool contexts can discover new definitions."
                 : "This changes the meaning of an existing ID. Saved pending worlds may depend on its old content. Prefer a new variant for changed identity or meaning."}
             </p>
             <p>
-              {item ? "Exact item bytes passed source identity, component rules and real factory construction. The host repeats those checks before publishing."
+              {recipe ? "Exact recipe bytes and output references passed the narrow game-owned contract. The host checks dependencies and revalidates before publication. Fixture evidence does not establish ordinary player crafting." : item ? "Exact item bytes passed source identity, component rules and real factory construction. The host repeats those checks before publishing."
                 : pool ? "Current pool draft passed loader identity, item references and consumer constraints. The host rechecks the exact reviewed bytes and current dependencies before publishing."
                 : <>Current draft: valid contract, references and centered production
               preview. Host rechecks these exact bytes before publishing.

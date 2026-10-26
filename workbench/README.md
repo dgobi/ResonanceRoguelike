@@ -1,8 +1,72 @@
-# Resonance Workbench · W3B
+# Resonance Workbench · W3C
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
-safely editing ordinary buildings, contextual loot pools and inert component items. The game remains the
+safely editing ordinary buildings, contextual loot pools, inert component items and one immediate recipe family. The game remains the
 validation authority. No campaign, running game or Internet service is required.
+
+## Author an immediate recipe variant
+
+1. Open an item and choose **Recipes**. **Produces this item** lists exact declared
+   `result_item` references; **Potential ingredient matches** uses current game
+   tag/tier predicates. Each row retains recipe ID and source path. Neither table
+   proves knowledge, quantities, access to ingredients or ambient conditions.
+   The content browser also searches recipe ID/name/category/path/output ID, with
+   route and support filters. Select a source explicitly when IDs collide.
+2. Open `bile_coating`, currently the one shipped writable recipe in this family.
+   **Requirements** retains component order, repeated rows, reusable tools and
+   ambient conditions. Defaults are minimum tier 1 and physical quantity 1.
+   **Output** resolves the declared item and links to its item inspector. Return
+   to an item or use the document buttons to retain structure/pool/item/recipe
+   drafts and their independent histories.
+3. **Begin edit** exposes name, authored description, category, known flag,
+   ordered components/tools, ambient requirements and output item. Item tags come
+   from the loaded keyword catalogue. Ambient tags come from the actual
+   `CraftScreen._build_ambient_sources` collector exercised on disposable loaded
+   decor/light definitions: `burning` is not an item-keyword catalogue entry.
+   Controls support add/remove/reorder and exact scalar-span edits; unknown data,
+   nested records and unedited whitespace remain intact. Invalid raw JSON freezes
+   typed controls while retaining the raw draft. Raw/ID changes clear typed undo.
+4. **Save as new variant**, choose a unique ID, **Validate draft**, inspect the
+   exact **Diff**, then **Apply variant → Confirm apply one file**. Only a new
+   file beside the source is published; recipe originals cannot be overwritten.
+   The host checks source bytes, discovered entitlement, canonical safe paths,
+   current dependencies and the exact reviewed draft, repeats game validation,
+   atomically publishes without clobbering and verifies the reopened hash.
+   External dependency changes revoke current evidence and require revalidation.
+5. Read the visibility confirmation: recipe files in the active directory are
+   recursively loaded in new sessions. `known` defaults to true; false shows an
+   unknown recipe and blocks the crafting UI's attempt. Truthy `_deprecated`
+   hides a recipe from that UI. A published recipe is active content, not an inert
+   draft. This does not add a learning route or promise personal-save compatibility.
+6. **Test requirements → Validate and test exact recipe** also works on the
+   unchanged reopened recipe. The same exact-byte validation runs three presets:
+   candidate inventory plus ambient, no physical inputs, and no ambient sources.
+   A preset is not guaranteed eligible: inspect the actual production verdict.
+   Inputs are synthetic physical instances created from current item definitions;
+   ambient records are synthetic and separate. The receipt records instance IDs,
+   tags, source identity, selected material/tool instances, missing amounts,
+   factory output and before/after inventory. The real `plan_craft`, `ItemFactory`
+   and `commit_craft`/`exchange` execute on a disposable inventory with an explicit
+   capacity. Ordinary player controls, knowledge gate, acquisition, equipment use,
+   world placement, turns and saves are not executed. A `known:false` fixture can
+   satisfy material rules while the real crafting UI still refuses that recipe.
+
+The game-owned `immediate-components-1` capability requires one non-deprecated
+immediate `result_item` object with a nonempty `components` array. Optional tools
+and ambient arrays are supported. Passive work, world/tile placement, conjunctions,
+legacy processing fields and array-of-recipe sources remain source-navigable and
+read-only. The other current immediate recipes contain excluded conjunction or
+legacy fields; their execution class alone is not writing entitlement. Changing
+an ID/category or raw flags cannot promote an unsupported source token.
+
+Authoring bounds: nonnegative exact-integer tiers through `2^53−1`, quantities
+1–32, at most 64 rows per array and 64 physical slots in total. These are explicit
+Workbench bounds, not new gameplay rules. Ambient quantities are ignored by the
+consumer and receive a warning. Categories use current catalogue strings; the
+game groups unrecognized categories under its existing other-category heading.
+No recipe loader, allocation, visibility, campaign or learning policy was changed.
+Native samples are published only in ignored disposable content. The example in
+`docs/examples/` is not installed into the active game catalogue.
 
 ## Author a component item and trace its use
 
@@ -131,7 +195,7 @@ structure preview establishes observed population. Samples do not establish
 frequencies, effect behavior or natural world selection. Item/reference lists
 are catalogue snapshots; reopen after external dependency edits.
 
-The host retains one building, pool and item capability. Saving any revokes
+The host retains one building, pool, item and recipe capability. Saving any revokes
 all reviews; the frontend clears verdicts while retaining the other drafts.
 Every apply remains one reviewed byte string and one confined target, with fresh
 validation, conflicts and rollback. No general filesystem permission, new write
@@ -317,6 +381,7 @@ npm.cmd run test:authoring           # disposable data + native apply/reopen/res
 npm.cmd run test:visual              # native canvas + exact draft preview + variant/reopen
 npm.cmd run test:pools               # native container → pool → item and two variants
 npm.cmd run test:items               # native new item → new pool → real factory/population
+npm.cmd run test:recipes             # native item → recipe → variant → production requirements/output
 & $env:RESONANCE_PYTHON -B worker/test_authoring.py
 & $env:RESONANCE_PYTHON -B worker/test_visual.py
 & $env:RESONANCE_PYTHON -B worker/test_pools.py
@@ -350,8 +415,8 @@ CPython runtime without the game dependency wheels.
 
 ## Contract and limits
 
-The protocol is **5**, worker/app **0.5.0**, game structure contract **g2-2**,
-and the narrow read-only item adapter contract is **component-1**.
+The protocol is **6**, worker/app **0.6.0**, game structure contract **g2-2**,
+the narrow read-only item adapter contract is **component-1**, and the recipe contract is **immediate-components-1**.
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
 opaque document token; validation grants a one-draft review token. Apply takes
@@ -395,7 +460,7 @@ and raw source inspection remain available when the loader reports structural
 errors. Files over 1 MiB and unsafe destination names are outside W1 authoring.
 Other-family visual editing, special creation/deletion, new legend definitions,
 transform tools, other loot families, selection-profile changes, persistent edit history
-and automatic campaign migration remain outside W3B. Deferred physical specials
+and automatic campaign migration remain outside W3C. Deferred physical specials
 are visible and preserved, but block a successful draft preview with an explicit
 unsupported diagnostic. Other live special types are inspect-only on the canvas.
 
@@ -408,5 +473,5 @@ Refresh after external source/dependency changes. The palette represents the
 catalog at open time; every validation and apply rereads current dependencies.
 A generic schema registry and further W milestones remain separate work.
 
-See [W3B delivery and evidence](docs/W3B_DELIVERY.md), [W3A delivery and evidence](docs/W3A_DELIVERY.md), [W2 delivery and evidence](docs/W2_DELIVERY.md), [W1 delivery](docs/W1_DELIVERY.md)
+See [W3C delivery and evidence](docs/W3C_DELIVERY.md), [W3B delivery and evidence](docs/W3B_DELIVERY.md), [W3A delivery and evidence](docs/W3A_DELIVERY.md), [W2 delivery and evidence](docs/W2_DELIVERY.md), [W1 delivery](docs/W1_DELIVERY.md)
 and the unchanged historical [W0 delivery](docs/W0_DELIVERY.md).

@@ -68,12 +68,26 @@ export default function App() {
   const [poolDocument, setPoolDocument] = useState<Inspection | null>(null);
   const [poolActive, setPoolActive] = useState(false), [poolDirty, setPoolDirty] = useState(false);
   const [itemDocument, setItemDocument] = useState<Inspection | null>(null), [itemActive, setItemActive] = useState(false), [itemDirty, setItemDirty] = useState(false);
+  const [recipeDocument, setRecipeDocument] = useState<Inspection | null>(null), [recipeActive, setRecipeActive] = useState(false), [recipeDirty, setRecipeDirty] = useState(false);
+  const [selectedRecipeId, setSelectedRecipeId] = useState("");
+  const itemReturnFocus = useRef<string | null>(null);
+  const recipeReturnRelation = useRef("ingredient");
+  useEffect(() => {
+    if (recipeActive || !itemActive || !itemReturnFocus.current) return;
+    const path = itemReturnFocus.current;
+    const frame = requestAnimationFrame(() => {
+      document.querySelector<HTMLButtonElement>(`[data-recipe-link="${path}"][data-recipe-relation="${recipeReturnRelation.current}"]`)?.focus();
+      itemReturnFocus.current = null;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [recipeActive, itemActive]);
+  const [support, setSupport] = useState("");
   const [itemTrail, setItemTrail] = useState<ItemTrail | null>(null), [selectedItemId, setSelectedItemId] = useState("");
   const [trail, setTrail] = useState<SourceTrail | null>(null), [dependencyVersion, setDependencyVersion] = useState(0);
   const [pending, setPending] = useState<null | (() => void)>(null);
   const [canvasHost, setCanvasHost] = useState<HTMLDivElement | null>(null);
   const dirtyRef = useRef(false);
-  dirtyRef.current = dirty || poolDirty || itemDirty;
+  dirtyRef.current = dirty || poolDirty || itemDirty || recipeDirty;
   useEffect(() => {
     const unlisten = listen("authoring-close-requested", () => {
       const close = () => {
@@ -98,6 +112,7 @@ export default function App() {
     setDirty(false);
     setPoolDocument(null); setPoolActive(false); setPoolDirty(false); setTrail(null);
     setItemDocument(null); setItemActive(false); setItemDirty(false); setItemTrail(null); setSelectedItemId("");
+    setRecipeDocument(null); setRecipeActive(false); setRecipeDirty(false); setSelectedRecipeId("");
     setIdentity(null);
     setAssets([]);
     setSelected("");
@@ -109,7 +124,7 @@ export default function App() {
   }
   async function loadAsset(asset: string, token: number, generate = true) {
     setPoolActive(false);
-    setItemActive(false);
+    setItemActive(false); setRecipeActive(false);
     setSelected(asset);
     setFixture(null);
     setInspection(null);
@@ -272,14 +287,14 @@ export default function App() {
   async function openPool(id: string, context: SourceTrail | null = null, discard = false, reload = false) {
     const matches = assets.filter(a => a.route === "contextual_loot_pool" && a.id === id), asset = matches[0];
     if (matches.length !== 1) { setError({code: "POOL_SOURCE", message: `Pool ${id} resolves to ${matches.length} supported files.`, remedy: "Correct duplicate/missing IDs or refresh the project catalogue."}); return; }
-    if (!reload && poolDocument?.path === asset.path) { setTrail(context); setPoolActive(true); setItemActive(false); return; }
+    if (!reload && poolDocument?.path === asset.path) { setTrail(context); setPoolActive(true); setItemActive(false); setRecipeActive(false); return; }
     if (poolDirty && !discard) { setPending(() => () => void openPool(id, context, true, reload)); return; }
     setBusy("Opening contextual pool…"); setError(null);
     const token = ++epoch.current;
     try {
       const r = await call<Inspection>("open_document", {asset: asset.path});
       if (token !== epoch.current) return;
-      setPoolDocument(r.result); setPoolDirty(false); setPoolActive(true); setItemActive(false); setTrail(context);
+      setPoolDocument(r.result); setPoolDirty(false); setPoolActive(true); setItemActive(false); setRecipeActive(false); setTrail(context);
       setStatus(`Opened ${asset.path}.`);
     } catch (e) { if (token === epoch.current) setError(asFailure(e)); } finally { if (token === epoch.current) setBusy(""); }
   }
@@ -287,16 +302,45 @@ export default function App() {
     const matches = assets.filter(a => a.route === "item_definition" && a.id === id && (!assetPath || a.path === assetPath));
     const asset = matches[0];
     if (!matches.length || (matches.length !== 1 && !assetPath)) { setError({code:"ITEM_SOURCE", message:`Item ${id} has ${matches.length} catalogue sources: ${matches.map(a => a.path).join(", ")}`, remedy:"Select a specific source file for read-only collision inspection, or refresh after repairing IDs."}); return; }
-    if (!reload && itemDocument?.path === asset.path) { setItemTrail(context); setSelectedItemId(id); setItemActive(true); return; }
+    if (!reload && itemDocument?.path === asset.path) { setItemTrail(context); setSelectedItemId(id); setItemActive(true); setRecipeActive(false); return; }
     if (itemDirty && !discard) { setPending(() => () => void openItem(id, context, assetPath, true, reload)); return; }
     const token = ++epoch.current;
     setBusy("Opening item definition…"); setError(null);
     try {
       const r = await call<Inspection>("open_document", {asset: asset.path});
       if (token !== epoch.current) return;
-      setItemDocument(r.result); setItemDirty(false); setItemActive(true); setSelectedItemId(id); setItemTrail(context);
+      setItemDocument(r.result); setItemDirty(false); setItemActive(true); setRecipeActive(false); setSelectedItemId(id); setItemTrail(context);
       setStatus(`Opened ${asset.path}. Factory evidence is separate from use behavior.`);
     } catch(e) { if(token === epoch.current) setError(asFailure(e)); } finally { if(token === epoch.current) setBusy(""); }
+  }
+  async function openRecipe(id: string, assetPath?: string, discard = false, reload = false) {
+    const matches = assets.filter(a=>a.route === "recipe_definition" && a.id === id && (!assetPath || a.path === assetPath)), asset=matches[0];
+    if (!matches.length || matches.length !== 1 && !assetPath) { setError({code:"RECIPE_SOURCE",message:`Recipe ${id} has ${matches.length} sources.`,remedy:"Select a specific source file to inspect ambiguity."}); return; }
+    if (!reload && recipeDocument?.path === asset.path) { setSelectedRecipeId(id); setRecipeActive(true); return; }
+    if (recipeDirty && !discard) { setPending(()=>()=>void openRecipe(id,assetPath,true,reload)); return; }
+    const token=++epoch.current; setBusy("Opening recipe…"); setError(null);
+    try {
+      const r=await call<Inspection>("open_document",{asset:asset.path});
+      if(token !== epoch.current) return;
+      setRecipeDocument(r.result); setRecipeDirty(false); setSelectedRecipeId(id); setRecipeActive(true);
+      setStatus(`Opened ${asset.path}. Requirements and observed fixture results are separate evidence.`);
+    } catch(e) { if(token === epoch.current) setError(asFailure(e)); } finally { if(token === epoch.current) setBusy(""); }
+  }
+  function returnToItem() {
+    itemReturnFocus.current = recipeDocument?.path || null;
+    setRecipeActive(false); setItemActive(true);
+  }
+  async function recipeApplied(asset: string, result: unknown) {
+    const token=++epoch.current; setRecipeDirty(false); setReceipt(result); setDependencyVersion(v=>v+1);
+    const catalog=await request<{assets:Asset[]}>("describe"); if(token !== epoch.current) return;
+    setAssets(catalog.result.assets);
+    const r=await call<Inspection>("open_document",{asset}); if(token !== epoch.current) return;
+    verifyReopened(r.result,result); setRecipeDocument(r.result); setSelectedRecipeId(r.result.id);
+    if(itemDocument) {
+      const refreshed=await request<Inspection>("inspect",{asset:itemDocument.path}); if(token !== epoch.current) return;
+      setItemDocument(d=>d?.path===refreshed.result.path && d.sha256===refreshed.result.sha256 ? {...d,item_context:refreshed.result.item_context} : d);
+    }
+    setStatus(`Recipe variant saved and reopened: ${asset}. New sessions discover this file.`);
   }
   async function itemApplied(asset: string, result: unknown) {
     const token = ++epoch.current;
@@ -347,8 +391,8 @@ export default function App() {
   }
   const visibleAssets = assets.filter(
     (a) =>
-      (!category || a.category === category || a.route === category) &&
-      `${a.id} ${a.name || ""} ${a.path}`
+      (!category || a.category === category || a.route === category) && (!support || (support === "supported" ? a.editable : !a.editable)) &&
+      `${a.id} ${a.name || ""} ${a.category || ""} ${a.path} ${a.result_item || ""} ${a.execution_class || ""} ${a.editable ? "supported" : "read-only"}`
         .toLowerCase()
         .includes(search.toLowerCase()),
   );
@@ -375,16 +419,16 @@ export default function App() {
           </div>
         </div>
         <div className="top-meta">
-          <span className="chip">W3B · BUILDINGS, POOLS & ITEMS</span>
+          <span className="chip">W3C · RECIPES</span>
           <span className="read-only">
-            ◈ {dirty || poolDirty || itemDirty ? "Unsaved draft" : "Read-only by default"}
+            ◈ {dirty || poolDirty || itemDirty || recipeDirty ? "Unsaved draft" : "Read-only by default"}
           </span>
         </div>
       </header>
       <div
         className={
           "workspace " +
-          (inspection?.document_token || poolActive || itemActive ? "authoring-workspace" : "")
+          (inspection?.document_token || poolActive || itemActive || recipeActive ? "authoring-workspace" : "")
         }
       >
         <aside className="sidebar">
@@ -463,7 +507,7 @@ export default function App() {
               Content definitions <span className="count">{assets.length}</span>
             </h2>
             <p className="muted">
-              Buildings, contextual pools and item definitions
+              Buildings, pools, items and recipes
             </p>
             <label>
               Search ID, name or path
@@ -481,7 +525,7 @@ export default function App() {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">All supported content</option>
-                {[...new Set(assets.map((a) => a.category || a.route))]
+                {[...new Set(["recipe_definition", "item_definition", ...assets.map((a) => a.category || a.route)])]
                   .sort()
                   .map((c) => (
                     <option key={c} value={c}>
@@ -490,21 +534,22 @@ export default function App() {
                   ))}
               </select>
             </label>
+            <label>Support<select aria-label="Support status" value={support} onChange={e=>setSupport(e.target.value)}><option value="">All</option><option value="supported">Supported for writing</option><option value="read-only">Read-only</option></select></label>
             <div className="asset-list">
               {visibleAssets.map((a) => (
                 <button
                   key={a.path + (a.pointer || "")}
-                  className={"asset " + (a.path === (itemActive ? itemDocument?.path : poolActive ? poolDocument?.path : selected) ? "selected" : "")}
+                  className={"asset " + (a.path === (recipeActive ? recipeDocument?.path : itemActive ? itemDocument?.path : poolActive ? poolDocument?.path : selected) ? "selected" : "")}
                   disabled={!!busy || a.route === "plaza"}
                   title={`${a.path} · ${a.provenance} · ${a.validation}${a.editable ? "" : " · read-only"}`}
                   data-asset={a.path}
-                  onClick={() => a.route === "item_definition" ? void openItem(a.id, null, a.path) : a.route === "contextual_loot_pool" ? void openPool(a.id) : void refresh(a.path)}
+                  onClick={() => a.route === "recipe_definition" ? void openRecipe(a.id,a.path) : a.route === "item_definition" ? void openItem(a.id, null, a.path) : a.route === "contextual_loot_pool" ? void openPool(a.id) : void refresh(a.path)}
                 >
                   <span className="asset-icon">▦</span>
                   <span>
                     <strong>{a.id}</strong>
                     <small>
-                      {a.route === "item_definition" ? `${a.name} · ${a.category}` : a.route === "contextual_loot_pool" ? "Contextual loot pool" : `${a.width} × ${a.height} · ${a.category || a.route}`}
+                      {a.route === "recipe_definition" ? `${a.name} · ${a.execution_class}` : a.route === "item_definition" ? `${a.name} · ${a.category}` : a.route === "contextual_loot_pool" ? "Contextual loot pool" : `${a.width} × ${a.height} · ${a.category || a.route}`}
                       <br />
                       {a.path}{a.pointer || ""}
                       <br />
@@ -529,18 +574,20 @@ export default function App() {
             <span className="eyebrow">THIS WORKSPACE</span>
             <p>Draft → validate → review → apply</p>
             <small>
-              One structure, pool and item draft stay open independently. Only ordinary components are writable items. Campaigns are never opened.
+              Structure, pool, item and recipe drafts stay open independently. Campaigns are never opened.
             </small>
           </section>
         </aside>
         <section className="preview-pane">
-          {(inspection?.document_token || poolActive || itemActive) && (
+          {(inspection?.document_token || poolActive || itemActive || recipeActive) && (
             <>
               <div className="building-controls">
-                {poolDocument && <button disabled={!!busy} onClick={() => {setPoolActive(itemActive || !poolActive); setItemActive(false);}}>{poolActive && !itemActive ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
-                {itemDocument && <button disabled={!!busy} onClick={() => setItemActive(!itemActive)}>{itemActive ? "Hide item" : `Show item ${selectedItemId}`}</button>}
-                {itemActive && itemDocument && <button disabled={!!busy} onClick={() => void openItem(selectedItemId, itemTrail, itemDocument.path, false, true)}>Reload item</button>}
-                {!itemActive && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
+                {poolDocument && <button disabled={!!busy} onClick={() => {setPoolActive(recipeActive || itemActive || !poolActive); setItemActive(false); setRecipeActive(false);}}>{poolActive && !itemActive ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
+                {itemDocument && <button disabled={!!busy} onClick={() => {setItemActive(recipeActive || !itemActive); setRecipeActive(false);}}>{itemActive && !recipeActive ? "Hide item" : `Show item ${selectedItemId}`}</button>}
+                {recipeDocument && <button disabled={!!busy} onClick={()=>setRecipeActive(!recipeActive)}>{recipeActive ? "Hide recipe" : `Show recipe ${selectedRecipeId}`}</button>}
+                {recipeActive && recipeDocument && <button disabled={!!busy} onClick={()=>void openRecipe(selectedRecipeId,recipeDocument.path,false,true)}>Reload recipe</button>}
+                {!recipeActive && itemActive && itemDocument && <button disabled={!!busy} onClick={() => void openItem(selectedItemId, itemTrail, itemDocument.path, false, true)}>Reload item</button>}
+                {!recipeActive && !itemActive && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
                 <label>
                   Preview seed
                   <input
@@ -550,7 +597,7 @@ export default function App() {
                     disabled={!!busy}
                   />
                 </label>
-                <button onClick={() => refresh()} disabled={!!busy || poolActive || itemActive}>
+                <button onClick={() => refresh()} disabled={!!busy || poolActive || itemActive || recipeActive}>
                   ↻ Generate / refresh
                 </button>
               </div>
@@ -566,7 +613,7 @@ export default function App() {
           <div
             className="saved-preview-pane"
             style={{
-              display: inspection?.document_token || poolActive || itemActive ? "none" : "contents",
+              display: inspection?.document_token || poolActive || itemActive || recipeActive ? "none" : "contents",
             }}
           >
             <div className="pane-heading">
@@ -718,7 +765,7 @@ export default function App() {
         </section>
         <aside className="inspector">
           <div className="eyebrow">04 / INSPECTOR</div>
-          {!inspection?.document_token && !poolActive && !itemActive && (
+          {!inspection?.document_token && !poolActive && !itemActive && !recipeActive && (
             <div className="tabs">
               <button
                 className={tab === "properties" ? "active" : ""}
@@ -734,20 +781,25 @@ export default function App() {
               </button>
             </div>
           )}
-          {itemDocument && <div hidden={!itemActive}><Authoring key={itemDocument.document_token}
+          {recipeDocument && <div hidden={!recipeActive}><Authoring key={recipeDocument.document_token}
+            document={recipeDocument} onDirty={setRecipeDirty} onApplied={recipeApplied} onError={setError}
+            busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            active={recipeActive} onCancel={()=>void cancel()} selectedRecipeId={selectedRecipeId}
+            onReturn={itemDocument ? returnToItem : undefined} onRecipeItem={(id,path)=>void openItem(id,null,path)} dependencyVersion={dependencyVersion} /></div>}
+          {itemDocument && <div hidden={!itemActive || recipeActive}><Authoring key={itemDocument.document_token}
             document={itemDocument} onDirty={setItemDirty} onApplied={itemApplied} onError={setError}
             busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={itemActive} onCancel={() => void cancel()} itemTrail={itemTrail} selectedItemId={selectedItemId}
+            active={itemActive && !recipeActive} onRecipe={(id,path)=>{recipeReturnRelation.current = document.activeElement?.getAttribute("data-recipe-relation") || "ingredient"; void openRecipe(id,path);}} onCancel={() => void cancel()} itemTrail={itemTrail} selectedItemId={selectedItemId}
             onReturn={poolDocument ? () => {setItemActive(false); setPoolActive(true);} : undefined}
             onItemPool={id => void openPool(id, trail)} dependencyVersion={dependencyVersion} /></div>}
-          {poolDocument && <div hidden={!poolActive || itemActive}><Authoring key={poolDocument.document_token}
+          {poolDocument && <div hidden={!poolActive || itemActive || recipeActive}><Authoring key={poolDocument.document_token}
             document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
             busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={poolActive && !itemActive} onCancel={() => void cancel()} trail={trail}
+            active={poolActive && !itemActive && !recipeActive} onCancel={() => void cancel()} trail={trail}
             onItem={(id, context) => void openItem(id, context)}
             poolEntryFocus={itemTrail?.path === poolDocument.path || itemTrail?.poolId === poolDocument.id ? itemTrail.index : undefined}
             onReturn={() => setPoolActive(false)} dependencyVersion={dependencyVersion} /></div>}
-          <div hidden={poolActive || itemActive}>{inspection?.document_token ? (
+          <div hidden={poolActive || itemActive || recipeActive}>{inspection?.document_token ? (
             <Authoring
               key={inspection.document_token}
               document={inspection}
@@ -760,7 +812,7 @@ export default function App() {
               diskPreview={preview}
               seed={Number(seed)}
               onCancel={() => void cancel()}
-              active={!poolActive && !itemActive}
+              active={!poolActive && !itemActive && !recipeActive}
               onPool={(id, context) => void openPool(id, context)}
               dependencyVersion={dependencyVersion}
             />
@@ -911,7 +963,7 @@ export default function App() {
           </strong>
           {error && <p>{error.remedy}</p>}
         </div>
-        <span className="runtime-tag">LOCAL / OFFLINE · W3B</span>
+        <span className="runtime-tag">LOCAL / OFFLINE · W3C</span>
       </footer>
     </main>
   );
