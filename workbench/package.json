@@ -1,7 +1,7 @@
 {
   "name": "resonance-workbench",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "engines": {
     "node": ">=24.0.0 <25"
@@ -17,6 +17,7 @@
     "test:desktop": "node scripts/desktop-test.mjs",
     "test:authoring": "node scripts/run-authoring.mjs",
     "test:visual": "node scripts/run-visual.mjs",
+    "test:pools": "node scripts/run-pools.mjs",
     "tauri": "tauri"
   },
   "dependencies": {

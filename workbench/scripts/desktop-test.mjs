@@ -42,9 +42,9 @@ if (faultModes.includes(mode)) {
   env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
   env.WORKBENCH_FAULT = mode;
 }
-if (mode.startsWith("draft-worker-")) {
+if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-")) {
   env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
-  env.WORKBENCH_FAULT = mode;
+  env.WORKBENCH_FAULT = mode.replace("pool-worker-", "draft-worker-");
   env.WORKBENCH_REAL_PYTHON = resolve(
     workbench,
     "src-tauri/target/release/python/python.exe",
@@ -114,6 +114,11 @@ try {
     receipt.checks.push("WebView network offline");
   }
   await page.setViewportSize({ width: 2560, height: 1440 });
+  if (mode === "pools") {
+    const text = await page.locator("body").innerText();
+    assert(!text.includes("A place to understand the world")); assert(!text.includes("Your world, under the lens"));
+    await page.screenshot({path: resolve(output, "startup.png")});
+  }
   await page.getByLabel("Repository directory").fill(root);
   const startOpen = performance.now();
   await page
@@ -151,8 +156,9 @@ try {
         "fresh native process reopens original valid source after interruption",
       );
     }
-  } else if (mode.startsWith("draft-worker-")) {
-    const asset = "roguelike/data/buildings/commercial/apothecary_a.json";
+  } else if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-")) {
+    const poolFault = mode.startsWith("pool-worker-");
+    const asset = poolFault ? "roguelike/data/loot_pools/alchemist_reagents.json" : "roguelike/data/buildings/commercial/apothecary_a.json";
     const before = await readFile(resolve(root, asset));
     await page
       .locator('[data-testid="map"][data-ready="true"]')
@@ -166,9 +172,9 @@ try {
       .fill("Unsaved draft for worker failure control");
     const start = performance.now();
     await page
-      .getByRole("button", { name: "Preview draft", exact: true })
+      .getByRole("button", { name: poolFault ? "Validate draft" : "Preview draft", exact: true })
       .click();
-    if (mode === "draft-worker-cancel") {
+    if (mode.endsWith("worker-cancel")) {
       await page
         .getByRole("button", { name: "Cancel authoring request", exact: true })
         .click();
@@ -177,7 +183,7 @@ try {
       );
     } else {
       const code =
-        mode === "draft-worker-exit" ? "WORKER_EXIT" : "WORKER_TIMEOUT";
+        mode.endsWith("worker-exit") ? "WORKER_EXIT" : "WORKER_TIMEOUT";
       await page
         .locator("footer")
         .getByText(new RegExp(code))
@@ -476,6 +482,10 @@ try {
     if (mode === "visual") {
       const { visualJourney } = await import("./visual-journey.mjs");
       await visualJourney(page, root, output, receipt, context);
+    }
+    if (mode === "pools") {
+      const { poolJourney } = await import("./pool-journey.mjs");
+      await poolJourney(page, root, output, receipt);
     }
     await page.setViewportSize({ width: 1100, height: 740 });
     await page.screenshot({ path: resolve(output, "minimum-window.png") });

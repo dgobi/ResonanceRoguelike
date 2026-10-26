@@ -14,6 +14,7 @@ import {
   type Preview,
   type Failure,
   type Diagnostic,
+  type SourceTrail,
 } from "./protocol";
 
 function Diagnostics({ rows }: { rows: Diagnostic[] }) {
@@ -57,10 +58,13 @@ export default function App() {
   const [dirty, setDirty] = useState(false),
     [search, setSearch] = useState(""),
     [category, setCategory] = useState("");
+  const [poolDocument, setPoolDocument] = useState<Inspection | null>(null);
+  const [poolActive, setPoolActive] = useState(false), [poolDirty, setPoolDirty] = useState(false);
+  const [trail, setTrail] = useState<SourceTrail | null>(null), [dependencyVersion, setDependencyVersion] = useState(0);
   const [pending, setPending] = useState<null | (() => void)>(null);
   const [canvasHost, setCanvasHost] = useState<HTMLDivElement | null>(null);
   const dirtyRef = useRef(false);
-  dirtyRef.current = dirty;
+  dirtyRef.current = dirty || poolDirty;
   useEffect(() => {
     const unlisten = listen("authoring-close-requested", () => {
       const close = () => {
@@ -83,6 +87,7 @@ export default function App() {
   const epoch = useRef(0);
   function clear() {
     setDirty(false);
+    setPoolDocument(null); setPoolActive(false); setPoolDirty(false); setTrail(null);
     setIdentity(null);
     setAssets([]);
     setSelected("");
@@ -93,6 +98,7 @@ export default function App() {
     setError(null);
   }
   async function loadAsset(asset: string, token: number, generate = true) {
+    setPoolActive(false);
     setSelected(asset);
     setFixture(null);
     setInspection(null);
@@ -252,8 +258,31 @@ export default function App() {
     );
   }
   const [receipt, setReceipt] = useState<unknown>(null);
+  async function openPool(id: string, context: SourceTrail | null = null, discard = false, reload = false) {
+    const matches = assets.filter(a => a.route === "contextual_loot_pool" && a.id === id), asset = matches[0];
+    if (matches.length !== 1) { setError({code: "POOL_SOURCE", message: `Pool ${id} resolves to ${matches.length} supported files.`, remedy: "Correct duplicate/missing IDs or refresh the project catalogue."}); return; }
+    if (!reload && poolDocument?.path === asset.path) { setTrail(context); setPoolActive(true); return; }
+    if (poolDirty && !discard) { setPending(() => () => void openPool(id, context, true, reload)); return; }
+    setBusy("Opening contextual pool…"); setError(null);
+    try {
+      const r = await call<Inspection>("open_document", {asset: asset.path});
+      setPoolDocument(r.result); setPoolDirty(false); setPoolActive(true); setTrail(context);
+      setStatus(`Opened ${asset.path}.`);
+    } catch (e) { setError(asFailure(e)); } finally { setBusy(""); }
+  }
+  async function poolApplied(asset: string, result: unknown) {
+    setPoolDirty(false); setReceipt(result);
+    const catalog = await request<{ assets: Asset[] }>("describe");
+    setAssets(catalog.result.assets);
+    setInspection(d => d?.catalog ? {...d, catalog: {...d.catalog, loot_pools: catalog.result.assets.filter(a => a.route === "contextual_loot_pool").map(a => a.id).sort()}} : d);
+    setDependencyVersion(v => v + 1);
+    const r = await call<Inspection>("open_document", {asset});
+    setPoolDocument(r.result);
+    setStatus(`Pool saved and reopened: ${asset}. No container references changed.`);
+  }
   async function applied(asset: string, result: unknown) {
     setDirty(false);
+    setDependencyVersion(v => v + 1);
     setReceipt(result);
     const catalog = await request<{ assets: Asset[] }>("describe");
     setAssets(catalog.result.assets);
@@ -288,20 +317,20 @@ export default function App() {
             <h1>
               Resonance <em>Workbench</em>
             </h1>
-            <p>A place to understand the world.</p>
+            <p>Content editor</p>
           </div>
         </div>
         <div className="top-meta">
-          <span className="chip">W2 · VISUAL AUTHORING</span>
+          <span className="chip">W3A · BUILDINGS & LOOT POOLS</span>
           <span className="read-only">
-            ◈ {dirty ? "Unsaved draft" : "Read-only by default"}
+            ◈ {dirty || poolDirty ? "Unsaved draft" : "Read-only by default"}
           </span>
         </div>
       </header>
       <div
         className={
           "workspace " +
-          (inspection?.document_token ? "authoring-workspace" : "")
+          (inspection?.document_token || poolActive ? "authoring-workspace" : "")
         }
       >
         <aside className="sidebar">
@@ -380,7 +409,7 @@ export default function App() {
               Content definitions <span className="count">{assets.length}</span>
             </h2>
             <p className="muted">
-              Edit <code>ordinary_building</code> · other families read-only
+              Edit ordinary buildings and contextual loot pools
             </p>
             <label>
               Search ID, name or path
@@ -411,21 +440,21 @@ export default function App() {
               {visibleAssets.map((a) => (
                 <button
                   key={a.path}
-                  className={"asset " + (a.path === selected ? "selected" : "")}
+                  className={"asset " + (a.path === (poolActive ? poolDocument?.path : selected) ? "selected" : "")}
                   disabled={!!busy || a.route === "plaza"}
                   title={`${a.path} · ${a.provenance} · ${a.validation}${a.editable ? "" : " · read-only"}`}
                   data-asset={a.path}
-                  onClick={() => refresh(a.path)}
+                  onClick={() => a.route === "contextual_loot_pool" ? void openPool(a.id) : void refresh(a.path)}
                 >
                   <span className="asset-icon">▦</span>
                   <span>
-                    <strong>{a.id.replaceAll("_", " ")}</strong>
+                    <strong>{a.id}</strong>
                     <small>
-                      {a.width} × {a.height} · {a.category || a.route}
+                      {a.route === "contextual_loot_pool" ? "Contextual loot pool" : `${a.width} × ${a.height} · ${a.category || a.route}`}
                       <br />
                       {a.path}
                       <br />
-                      {a.path === inspection?.path
+                      {a.path === poolDocument?.path ? poolDocument.valid ? "Source valid" : "Source invalid" : a.path === inspection?.path
                         ? inspection.valid
                           ? "Source valid"
                           : "Source invalid"
@@ -444,17 +473,18 @@ export default function App() {
           </section>
           <section className="scope">
             <span className="eyebrow">THIS WORKSPACE</span>
-            <p>Discover → draft → validate → review → apply</p>
+            <p>Draft → validate → review → apply</p>
             <small>
-              W2 edits ordinary buildings only. Plazas, layouts and other JSON
-              families have no editing controls. Campaigns are never opened.
+              One building and one pool draft can stay open. Items are read-only. Campaigns are never opened.
             </small>
           </section>
         </aside>
         <section className="preview-pane">
-          {inspection?.document_token && (
+          {(inspection?.document_token || poolActive) && (
             <>
               <div className="building-controls">
+                {poolDocument && <button disabled={!!busy} onClick={() => setPoolActive(!poolActive)}>{poolActive ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
+                {poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
                 <label>
                   Preview seed
                   <input
@@ -464,7 +494,7 @@ export default function App() {
                     disabled={!!busy}
                   />
                 </label>
-                <button onClick={() => refresh()} disabled={!!busy}>
+                <button onClick={() => refresh()} disabled={!!busy || poolActive}>
                   ↻ Generate / refresh
                 </button>
               </div>
@@ -480,7 +510,7 @@ export default function App() {
           <div
             className="saved-preview-pane"
             style={{
-              display: inspection?.document_token ? "none" : "contents",
+              display: inspection?.document_token || poolActive ? "none" : "contents",
             }}
           >
             <div className="pane-heading">
@@ -489,7 +519,7 @@ export default function App() {
                 <h2>
                   {inspection
                     ? inspection.id.replaceAll("_", " ")
-                    : "Local map study"}
+                    : "Generation preview"}
                 </h2>
               </div>
               <div className="generation-controls">
@@ -530,10 +560,10 @@ export default function App() {
                   <div className="empty-symbol">⌖</div>
                   <h3>
                     {busy
-                      ? "Reading the living source"
+                      ? "Loading source"
                       : identity
                         ? "Ready for a production preview"
-                        : "Your world, under the lens"}
+                        : "Generation preview"}
                   </h3>
                   <p>
                     {busy ||
@@ -632,7 +662,7 @@ export default function App() {
         </section>
         <aside className="inspector">
           <div className="eyebrow">04 / INSPECTOR</div>
-          {!inspection?.document_token && (
+          {!inspection?.document_token && !poolActive && (
             <div className="tabs">
               <button
                 className={tab === "properties" ? "active" : ""}
@@ -648,7 +678,12 @@ export default function App() {
               </button>
             </div>
           )}
-          {inspection?.document_token ? (
+          {poolDocument && <div hidden={!poolActive}><Authoring key={poolDocument.document_token}
+            document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
+            busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            active={poolActive} onCancel={() => void cancel()} trail={trail}
+            onReturn={() => setPoolActive(false)} dependencyVersion={dependencyVersion} /></div>}
+          <div hidden={poolActive}>{inspection?.document_token ? (
             <Authoring
               key={inspection.document_token}
               document={inspection}
@@ -661,6 +696,9 @@ export default function App() {
               diskPreview={preview}
               seed={Number(seed)}
               onCancel={() => void cancel()}
+              active={!poolActive}
+              onPool={(id, context) => void openPool(id, context)}
+              dependencyVersion={dependencyVersion}
             />
           ) : inspection ? (
             tab === "source" ? (
@@ -711,7 +749,7 @@ export default function App() {
                 <div className="tile-inspection">
                   <div className="eyebrow">TILE UNDER CURSOR</div>
                   <h3 data-testid="cell">
-                    {cell ? `(${cell[0]}, ${cell[1]})` : "Explore the map"}
+                    {cell ? `(${cell[0]}, ${cell[1]})` : "Select a cell"}
                   </h3>
                   <code data-testid="tile-id">
                     {tile || "Hover or click a cell"}
@@ -766,7 +804,7 @@ export default function App() {
               Select a supported layout to inspect its source and production
               validation results.
             </p>
-          )}
+          )}</div>
         </aside>
       </div>
       {pending && (
@@ -776,7 +814,7 @@ export default function App() {
             role="dialog"
             aria-label="Unsaved draft"
           >
-            <h2>Keep your unsaved draft?</h2>
+            <h2>Discard unsaved changes?</h2>
             <p>
               Continuing will discard the in-memory edits. The source file has
               not changed.
@@ -789,8 +827,6 @@ export default function App() {
                 onClick={() => {
                   const action = pending;
                   setPending(null);
-                  setDirty(false);
-                  dirtyRef.current = false;
                   action();
                 }}
               >
@@ -811,7 +847,7 @@ export default function App() {
           </strong>
           {error && <p>{error.remedy}</p>}
         </div>
-        <span className="runtime-tag">LOCAL / OFFLINE · W2</span>
+        <span className="runtime-tag">LOCAL / OFFLINE · W3A</span>
       </footer>
     </main>
   );

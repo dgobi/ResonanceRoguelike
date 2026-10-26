@@ -1,4 +1,4 @@
-//! One discovered ordinary-building document, one reviewed byte string, one target.
+//! A building and a contextual pool may stay open; each publication is one file.
 //! Renderer paths and validation verdicts never authorize publication.
 use super::*;
 use sha2::{Digest, Sha256};
@@ -64,6 +64,13 @@ pub fn relative_building(s: &str) -> Result<PathBuf, Failure> {
     }
     Ok(PathBuf::from(s))
 }
+pub fn is_pool(s: &str) -> bool {
+    let p: Vec<_> = s.split('/').collect();
+    p.len() == 4 && p[..3] == ["roguelike", "data", "loot_pools"] && valid_filename(p[3])
+}
+fn relative_content(s: &str) -> Result<PathBuf, Failure> {
+    if is_pool(s) { Ok(PathBuf::from(s)) } else { relative_building(s) }
+}
 fn no_link(path: &Path) -> Result<(), Failure> {
     let meta = fs::symlink_metadata(path).map_err(io_error)?;
     #[cfg(windows)]
@@ -83,7 +90,7 @@ fn no_link(path: &Path) -> Result<(), Failure> {
     Ok(())
 }
 fn checked_target(root: &Path, relative: &str, new: bool) -> Result<PathBuf, Failure> {
-    let rel = relative_building(relative)?;
+    let rel = relative_content(relative)?;
     let mut path = root.to_path_buf();
     no_link(&path)?;
     for part in rel.components() {
@@ -131,7 +138,9 @@ fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure>
     let doc = state
         .document
         .as_ref()
-        .filter(|d| d.token == token)
+        .into_iter()
+        .chain(state.pool_document.as_ref())
+        .find(|d| d.token == token)
         .ok_or_else(|| {
             failure(
                 "UNKNOWN_DOCUMENT",
@@ -149,9 +158,12 @@ fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure>
 }
 fn revoke_review(host: &Host, token: &str) {
     let mut state = host.inner.lock().unwrap();
-    if let Some(doc) = state.document.as_mut().filter(|d| d.token == token) {
+    if let Some(doc) = current_document(&mut state, token) {
         doc.review = None;
     }
+}
+fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
+    state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).find(|d| d.token == token)
 }
 fn envelope(result: Value) -> Value {
     json!({"protocol":PROTOCOL,"id":uuid::Uuid::new_v4().to_string(),"ok":true,"result":result,"host_elapsed_ms":0})
@@ -213,7 +225,8 @@ pub async fn open_document(
         if host.epoch.load(Ordering::SeqCst) != epoch {
             return Err(io_error("Project changed."));
         }
-        state.document = Some(Document {
+        let slot = if is_pool(&asset) { &mut state.pool_document } else { &mut state.document };
+        *slot = Some(Document {
             token: token.clone(),
             relative: asset,
             original,
@@ -310,10 +323,7 @@ pub async fn validate_document(
             return Err(conflict());
         }
         let mut state = host.inner.lock().unwrap();
-        let current = state
-            .document
-            .as_mut()
-            .filter(|d| d.token == token)
+        let current = current_document(&mut state, &token)
             .ok_or_else(|| io_error("Document changed."))?;
         current.review = None;
         if response["ok"] == true
@@ -641,7 +651,9 @@ pub async fn apply_document(
             if read_source(&target)? != doc.original { return Err(conflict()); }
             let response = run_worker(app, host.clone(), Request {op:"preview_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),seed:Some(review.seed),..Default::default()}, epoch)?;
             if response["ok"] != true || response["result"]["valid"] != true || response["result"]["draft_sha256"] != hash(review.draft.as_bytes())
-                || response["result"]["route"] != "ordinary_building" || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != "0.3.0" || response["result"]["preview"]["passed"] != true {
+                || response["result"]["route"] != if is_pool(&doc.relative) { "contextual_loot_pool" } else { "ordinary_building" }
+                || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != "0.4.0"
+                || (!is_pool(&doc.relative) && response["result"]["preview"]["passed"] != true) {
                 let details = if response["ok"] == true {
                     response["result"]["diagnostics"].as_array().into_iter().flatten().take(3)
                         .map(|d| format!("{} {}: {}",d["code"],d["field"],d["message"])).collect::<Vec<_>>().join("; ")
@@ -655,6 +667,7 @@ pub async fn apply_document(
         let mut state = host.inner.lock().unwrap();
         state.applying = false;
         if let Some(current) = &mut state.document { current.review = None; }
+        if let Some(current) = &mut state.pool_document { current.review = None; }
         result.map(envelope)
     }).await.map_err(io_error)?
 }
@@ -743,6 +756,58 @@ mod tests {
         assert!(session_doc(&host, "trusted").unwrap().1.review.is_some());
         revoke_review(&host, "trusted");
         assert!(session_doc(&host, "trusted").unwrap().1.review.is_none());
+    }
+    #[test]
+    fn pool_and_building_tokens_are_independent_and_paths_stay_confined() {
+        let (root, doc, review) = fixture();
+        let mut pool = doc.clone();
+        pool.token = "pool".into();
+        pool.relative = "roguelike/data/loot_pools/sample.json".into();
+        pool.review = Some(review);
+        let host = Host::default();
+        {
+            let mut state = host.inner.lock().unwrap();
+            state.root = Some(root.path().to_path_buf());
+            state.document = Some(doc);
+            state.pool_document = Some(pool.clone());
+        }
+        assert!(session_doc(&host, "trusted").is_ok());
+        assert_eq!(session_doc(&host, "pool").unwrap().1.relative, pool.relative);
+        revoke_review(&host, "trusted");
+        assert!(session_doc(&host, "pool").unwrap().1.review.is_some());
+        for p in ["roguelike/data/loot_pools/nested/a.json", "roguelike/data/loot_pools/../a.json",
+                  "roguelike/data/loot_pools/con.json", "roguelike/data/loot_pools/a.json:ads",
+                  "roguelike/data/loot/a.json", "roguelike/saves/a.json", ".git/a.json", "workbench/docs/a.json"] {
+            assert!(relative_content(p).is_err(), "{p}");
+        }
+        assert!(relative_content(&pool.relative).is_ok());
+        host.cancel(true).unwrap();
+        assert!(session_doc(&host, "pool").is_err());
+        assert!(session_doc(&host, "trusted").is_err());
+    }
+    #[test]
+    #[cfg(windows)]
+    fn pool_publication_conflicts_rollback_and_unique_variant() {
+        for fault in [Fault::AfterStage, Fault::AfterReplace, Fault::ConcurrentReplace] {
+            let (root, mut doc, mut review) = fixture();
+            doc.relative = "roguelike/data/loot_pools/sample.json".into();
+            review.destination = doc.relative.clone();
+            let path = root.path().join(&doc.relative);
+            fs::create_dir_all(path.parent().unwrap()).unwrap();
+            fs::write(&path, &doc.original).unwrap();
+            assert!(publish(root.path(), &doc, &review, fault).is_err());
+            if fault != Fault::ConcurrentReplace { assert_eq!(fs::read(&path).unwrap(), doc.original); }
+            fs::write(&path, b"external pool bytes").unwrap();
+            assert_eq!(publish(root.path(), &doc, &review, Fault::None).unwrap_err().code, "EXTERNAL_MODIFICATION_CONFLICT");
+            fs::write(&path, &doc.original).unwrap();
+            review.destination = "roguelike/data/loot_pools/sample_new.json".into();
+            review.draft = "{\"id\":\"sample_new\",\"items\":[]}".into();
+            review.variant = true;
+            publish(root.path(), &doc, &review, Fault::None).unwrap();
+            assert_eq!(fs::read(&path).unwrap(), doc.original);
+            assert_eq!(fs::read(root.path().join(&review.destination)).unwrap(), review.draft.as_bytes());
+            assert_eq!(publish(root.path(), &doc, &review, Fault::None).unwrap_err().code, "VARIANT_EXISTS");
+        }
     }
     #[test]
     #[cfg(windows)]

@@ -51,6 +51,7 @@ export type Diagnostic = {
   layer?: Layer;
 };
 export type Inspection = Asset & {
+  pool_context?: PoolContext;
   route: string;
   description: string;
   special_count: number;
@@ -64,6 +65,12 @@ export type Inspection = Asset & {
   source: Source;
   document_token?: string;
   catalog?: Catalog;
+};
+export type SourceTrail = { id: string; path: string; sourcePath: string; sourceHash: string; index: number; x: number; y: number; decor: string; poolId: string };
+export type PoolContext = {
+  items: Record<string, {id: string; name: string; resolved: boolean; sources: {path: string; pointer: string; definition: Record<string, unknown>}[]}>;
+  references: {id: string; path: string; field: string; x: number; y: number; decor_id: string}[];
+  consumer: string; validator: string; rules: string;
 };
 export type Feature = {
   x: number;
@@ -115,7 +122,7 @@ export async function call<T>(
   args?: Record<string, unknown>,
 ): Promise<{ result: T; elapsed: number }> {
   const envelope = await invoke<Envelope<T>>(command, args);
-  if (envelope.protocol !== 3 || typeof envelope.id !== "string")
+  if (envelope.protocol !== 4 || typeof envelope.id !== "string")
     throw {
       code: "PROTOCOL_MISMATCH",
       message: "Unexpected host/worker protocol.",

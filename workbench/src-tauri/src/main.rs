@@ -15,7 +15,7 @@ use std::{
 use tauri::{Emitter, Manager};
 mod authoring;
 
-const PROTOCOL: u64 = 3;
+const PROTOCOL: u64 = 4;
 const MAX_OUTPUT: u64 = 16 * 1024 * 1024;
 
 #[derive(Debug, Clone, Serialize)]
@@ -39,6 +39,7 @@ struct Session {
     busy: bool,
     discovered: std::collections::HashSet<String>,
     document: Option<authoring::Document>,
+    pool_document: Option<authoring::Document>,
     applying: bool,
 }
 #[derive(Default, Clone)]
@@ -67,6 +68,7 @@ impl Host {
             state.root = None;
             state.discovered.clear();
             state.document = None;
+            state.pool_document = None;
         }
         cleanup_scratch(&mut state)
     }
@@ -205,7 +207,7 @@ fn validate_request(request: &Request) -> Result<(), Failure> {
         let layout = parts.len() == 4
             && parts[..3] == ["roguelike", "data", "layouts"]
             && authoring::valid_filename(parts[3]);
-        if !layout && authoring::relative_building(asset).is_err() {
+        if !layout && !authoring::is_pool(asset) && authoring::relative_building(asset).is_err() {
             return Err(failure(
                 "PATH_ESCAPE",
                 "Asset is outside the W0 layout route.",
@@ -545,7 +547,7 @@ fn main() {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                 let host = window.state::<Host>();
                 let state = host.inner.lock().unwrap();
-                if state.applying || state.document.is_some() {
+                if state.applying || state.document.is_some() || state.pool_document.is_some() {
                     api.prevent_close();
                     let _ = window.emit("authoring-close-requested", ());
                     return;
@@ -603,7 +605,7 @@ mod tests {
     }
     #[test]
     fn strict_envelopes() {
-        assert!(parse_response(br#"{"protocol":3,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
+        assert!(parse_response(br#"{"protocol":4,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
         for bytes in [
             br#"log line\n{}"#.as_slice(),
             br#"{"protocol":1,"id":"x","ok":true,"result":{}}"#,

@@ -1,8 +1,75 @@
-# Resonance Workbench · W2
+# Resonance Workbench · W3A
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
-safely drawing and editing one ordinary-building definition at a time. The game remains the
+safely editing an ordinary building and a contextual loot pool. The game remains the
 validation authority. No campaign, running game or Internet service is required.
+
+## Author a container's loot pool
+
+1. Open an ordinary building, select a direct container on the canvas or in
+   **Placed record**, then use **Open pool `<id>`**. This opens the reference
+   actually declared in the draft. Apply pending container-field edits first.
+   The building's unsaved draft stays in memory. Pools can also be searched by
+   ID, description or path in the content browser.
+2. **Begin edit** enables the table. Item selectors use the current game item
+   catalogue. **Inspect `<item_id>`** shows the actual file path, array pointer
+   when applicable, name and complete declared fields, read-only. The source
+   trail records the originating structure/container and its declared pool ID.
+   It does not claim that a newly saved pool has been assigned to that container.
+3. Edit **Item ID**, **Weight**, or inclusive minimum/maximum **Roll count**.
+   **Add entry** and **Remove** preserve remaining entry order. Table and Source
+   share one text-preserving draft. Invalid JSON freezes table mutation.
+   **Undo table / Redo table** apply to table edits; raw/property/variant-ID edits
+   clear that history and retain their own text undo.
+4. Choose **Save as new variant**, enter a unique ID, **Validate draft**, inspect
+   **Diff**, then **Review & apply → Confirm apply one file**. The host repeats
+   validation with current dependencies and compares source bytes before
+   publishing and reopening. The original pool stays unchanged. A pool with no
+   direct-container references is potentially unused.
+5. **Return to structure** restores the retained draft. Create a separate new
+   building variant, explicitly choose the saved pool in **Loot pool 1**, and
+   **Apply container edit**. **Preview draft** runs the exact building through
+   the actual stamper, `scene_generation.populate`, loot roller and item factory.
+   The receipt records seed, source hashes and created contents. Review, apply
+   and reopen the building variant separately.
+6. These are two single-file transactions. If building publication fails, the
+   pool remains valid and may be unused. Correct the building or return to the
+   pool. No selection profile, existing structure or campaign is reassigned.
+   **Reload pool** reopens external changes after the usual discard prompt.
+
+Only immediate `roguelike/data/loot_pools/<safe-id>.json` single-object definitions
+are writable in this family (17 at the W3A baseline; 79 loaded item IDs).
+`data/loot/` is a different legacy family. Nested/array-of-pools files,
+item/recipe editing and a general relationship graph are outside W3A.
+
+| Supported field | Current authoritative behavior |
+| --- | --- |
+| `id` | Unique nonempty string; variants require safe filename characters. Existing IDs cannot be renamed in place. |
+| `description` | Retained metadata; authored prose is preserved. |
+| `items` | Ordered array, default `[]`; empty means no loot. Rows require a resolvable `item_id`. Repeated item IDs remain separate entries. |
+| `items[n].weight` | Finite nonnegative relative weight, default `1`; nonempty rows require positive finite total weight. No drop percentages. |
+| `roll_count` | One or two ascending nonnegative integers, maximum `2^53−1`, default `[1,1]`. One value means a fixed count. The table writes two bounds when edited. |
+
+The existing game `Validator.pool` owns the rules. The worker additionally checks
+that `DataLoader` loaded the exact definition and that pool/item source IDs are
+unambiguous. The production pool loader does not accept a UTF-8 BOM: inspection
+preserves it, but publication fails rather than silently dropping it. Unknown
+fields remain intact with inactive-field diagnostics. Quantity, conditions and
+text binding are not consumed by this roller.
+
+`roll_pool` draws without replacement **by entry**, caps count to entry count,
+and stops when remaining total weight is zero. Multiple pool references roll
+independently. Displayed defaults are not written on open. Source links are
+declared references; draft verdicts establish consumer acceptance; only the
+structure preview establishes observed population. Samples do not establish
+frequencies, effect behavior or natural world selection. Item/reference lists
+are catalogue snapshots; reopen after external dependency edits.
+
+The host retains one building and one pool capability. Saving either revokes
+reviews for both; the frontend clears verdicts while retaining the other draft.
+Every apply remains one reviewed byte string and one confined target, with fresh
+validation, conflicts and rollback. No general filesystem permission, new write
+endpoint or multi-file transaction was added.
 
 ## Author one building
 
@@ -182,8 +249,10 @@ cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings
 npm.cmd run test:desktop             # built RELEASE executable; real WebView2
 npm.cmd run test:authoring           # disposable data + native apply/reopen/restart journey
 npm.cmd run test:visual              # native canvas + exact draft preview + variant/reopen
+npm.cmd run test:pools               # native container → pool → item and two variants
 & $env:RESONANCE_PYTHON -B worker/test_authoring.py
 & $env:RESONANCE_PYTHON -B worker/test_visual.py
+& $env:RESONANCE_PYTHON -B worker/test_pools.py
 ```
 
 `scripts/desktop-test.mjs` opens a test-owned native window and sends app-local
@@ -213,7 +282,7 @@ CPython runtime without the game dependency wheels.
 
 ## Contract and limits
 
-The protocol is **3**, worker/app **0.3.0**, game structure contract **g2-2**.
+The protocol is **4**, worker/app **0.4.0**, game structure contract **g2-2**.
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
 opaque document token; validation grants a one-draft review token. Apply takes
@@ -221,7 +290,7 @@ that token and explicit confirmation, never an arbitrary destination or trusted
 frontend verdict. W2's validation token is issued only after the exact draft's
 production preview passes; apply repeats that check with the reviewed seed and
 fresh dependencies. Starting replacement validation revokes an older review even
-if the new worker fails or is cancelled. Variants stay in the discovered source's existing category.
+if the new worker fails or is cancelled. Variants stay beside the discovered source, in its existing building category or the immediate loot_pools directory.
 There are no frontend filesystem/shell permissions, arbitrary Python evaluation
 or Git mutations. The only frontend capabilities are local close-event listening.
 
@@ -255,8 +324,8 @@ catalog definition can block applying a draft until it is repaired. Discovery
 and raw source inspection remain available when the loader reports structural
 errors. Files over 1 MiB and unsafe destination names are outside W1 authoring.
 Other-family visual editing, special creation/deletion, new legend definitions,
-transform tools, loot editing, selection-profile changes, persistent edit history
-and automatic campaign migration remain outside W2. Deferred physical specials
+transform tools, other loot families, selection-profile changes, persistent edit history
+and automatic campaign migration remain outside W3A. Deferred physical specials
 are visible and preserved, but block a successful draft preview with an explicit
 unsupported diagnostic. Other live special types are inspect-only on the canvas.
 
@@ -269,5 +338,5 @@ Refresh after external source/dependency changes. The palette represents the
 catalog at open time; every validation and apply rereads current dependencies.
 A generic schema registry and further W milestones remain separate work.
 
-See [W2 delivery and evidence](docs/W2_DELIVERY.md), [W1 delivery](docs/W1_DELIVERY.md)
+See [W3A delivery and evidence](docs/W3A_DELIVERY.md), [W2 delivery and evidence](docs/W2_DELIVERY.md), [W1 delivery](docs/W1_DELIVERY.md)
 and the unchanged historical [W0 delivery](docs/W0_DELIVERY.md).

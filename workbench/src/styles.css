@@ -970,6 +970,25 @@ pre {
   color: #cbb780;
   font-size: 12px;
 }
+.pool-editor { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.pool-editor h2 { margin: 0; }
+.source-trail, .source-links { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.source-trail { padding: 12px; border: 1px solid #3d4b4d; }
+.source-trail code, .item-inspector code { overflow-wrap: anywhere; font-size: 12px; }
+.pool-table-wrap { overflow: auto; max-height: 480px; }
+.pool-table { border-collapse: collapse; width: 100%; text-align: left; font-size: 12px; }
+.pool-table th, .pool-table td { padding: 10px 8px; border-bottom: 1px solid #354248; vertical-align: top; }
+.pool-table th { position: sticky; top: 0; background: #202b2d; color: #d8c49a; }
+.pool-table select { min-width: 220px; margin: 0; }
+.pool-table input { min-width: 80px; width: 90px; margin: 0; }
+.pool-table small { display: block; margin-top: 6px; }
+.pool-table button { padding: 7px 10px; font-size: 12px; }
+.roll-fields { display: flex; gap: 20px; border: 1px solid #3d4b4d; padding: 12px; }
+.roll-fields input { max-width: 140px; }
+.item-inspector { padding: 14px; border: 1px solid #56645b; background: #182021; }
+.item-inspector .raw { max-height: 320px; overflow: auto; }
+.row-diagnostic { color: #e9b38c; }
+.source-links small { font-size: 11px; }
 .coordinate-fields,
 .pool-row {
   display: flex;

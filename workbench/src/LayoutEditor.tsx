@@ -33,6 +33,7 @@ type Props = {
   canRedo: boolean;
   onError: (e: unknown) => void;
   focus: { cell: Cell; layer: Layer } | null;
+  onPool?: (id: string, index: number, record: Special) => void;
 };
 export function LayoutEditor(p: Props) {
   const parsed = useMemo(() => layoutModel(p.draft), [p.draft]),
@@ -135,7 +136,7 @@ export function LayoutEditor(p: Props) {
       <div className="pane-heading">
         <div>
           <div className="eyebrow">03 / VISUAL AUTHORING</div>
-          <h2>Build a furnished place</h2>
+          <h2>Structure editor</h2>
         </div>
         <div className="tool-buttons">
           {p.previewBusy && (
@@ -413,6 +414,11 @@ export function LayoutEditor(p: Props) {
                   <code>
                     special_tiles[{specialIndex}] · {s.type ?? s.kind}
                   </code>
+                  {containerEditable(s) && <div className="source-links">
+                    {(s.loot_pools || []).map((id, i) => <button key={i} disabled={p.previewBusy}
+                      onClick={() => p.onPool?.(id, specialIndex, s)}>Open pool {id}</button>)}
+                    <small>Declared draft references. Apply container edit before opening a changed selection.</small>
+                  </div>}
                   {containerEditable(s) ? (
                     <ContainerFields
                       key={`${specialIndex}:${JSON.stringify(s)}`}

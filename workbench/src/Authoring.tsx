@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { LayoutEditor } from "./LayoutEditor";
+import { PoolEditor } from "./PoolEditor";
 import {
   CanvasHistory,
   diagnosticCell,
@@ -15,6 +16,7 @@ import {
   type Inspection,
   type Failure,
   type Preview,
+  type SourceTrail,
 } from "./protocol";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
 
@@ -46,6 +48,11 @@ export function Authoring({
   diskPreview,
   seed,
   onCancel,
+  active = true,
+  onPool,
+  trail,
+  onReturn,
+  dependencyVersion = 0,
 }: {
   document: Inspection;
   onDirty: (dirty: boolean) => void;
@@ -57,7 +64,13 @@ export function Authoring({
   diskPreview: Preview | null;
   seed: number;
   onCancel: () => void;
+  active?: boolean;
+  onPool?: (id: string, trail: SourceTrail) => void;
+  trail?: SourceTrail | null;
+  onReturn?: () => void;
+  dependencyVersion?: number;
 }) {
+  const pool = document.route === "contextual_loot_pool";
   const [draft, setDraft] = useState(document.raw),
     [editing, setEditing] = useState(false);
   const [tab, setTab] = useState("properties"),
@@ -85,6 +98,11 @@ export function Authoring({
   const target = variant
     ? `${document.path.slice(0, document.path.lastIndexOf("/"))}/${variantId}.json`
     : document.path;
+  useEffect(() => {
+    version.current++;
+    setVerdict(null);
+    setConfirm(false);
+  }, [dependencyVersion]);
   useEffect(() => {
     onDirty(dirty);
   }, [dirty, onDirty]);
@@ -236,7 +254,15 @@ export function Authoring({
                 : "";
   return (
     <section className="authoring" data-testid="authoring">
-      {canvasHost &&
+      {active && canvasHost && pool && createPortal(<PoolEditor
+        draft={draft} path={target} context={document.pool_context}
+        disabled={!editing ? "Begin edit to change this pool." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
+        diagnostics={verdict?.diagnostics || (!dirty ? document.diagnostics : [])}
+        onEdit={visualEdit} onUndo={() => historyStep(false)} onRedo={() => historyStep(true)}
+        canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
+        trail={trail} onReturn={onReturn} busy={!!busy} onCancel={onCancel}
+      />, canvasHost)}
+      {active && !pool && canvasHost &&
         createPortal(
           <LayoutEditor
             draft={draft}
@@ -269,6 +295,11 @@ export function Authoring({
             canRedo={!!history.current.redoStack.length}
             onError={(e) => setLocalError(String(e))}
             focus={focus}
+            onPool={(id, index, record) => onPool?.(id, {
+              id: String(values.id || document.id), path: target, index, x: record.x, y: record.y,
+              sourcePath: document.path, sourceHash: document.sha256,
+              decor: record.decor_id || "crate", poolId: id,
+            })}
           />,
           canvasHost,
         )}
@@ -287,8 +318,7 @@ export function Authoring({
               : "Read-only · source unchanged"}
       </p>
       <p className="muted small">
-        ordinary_building · {document.width} × {document.height} ·{" "}
-        {document.special_count} specials · file {document.sha256.slice(0, 12)}
+        {pool ? "contextual_loot_pool" : `ordinary_building · ${document.width} × ${document.height} · ${document.special_count} specials`} · file {document.sha256.slice(0, 12)}
       </p>
       {!!disk?.recovery_files.length && (
         <p className="notice warning">
@@ -343,8 +373,8 @@ export function Authoring({
             }}
           />
           <small>
-            Saved beside the source. Current procedural selection profiles are
-            unchanged. Legacy flat-pool contexts may discover added files.
+            {pool ? "Saved beside the source. No container is reassigned. Return to a structure variant to link it deliberately."
+              : "Saved beside the source. Current procedural selection profiles are unchanged. Legacy flat-pool contexts may discover added files."}
           </small>
         </label>
       )}
@@ -375,7 +405,7 @@ export function Authoring({
               onChange={(e) => property("description", e.target.value)}
             />
           </label>
-          <label>
+          {!pool && <label>
             Legacy corner-scatter weight
             <input
               aria-label="Legacy corner-scatter weight"
@@ -395,11 +425,12 @@ export function Authoring({
                   property("weight", Number(e.target.value));
               }}
             />
-          </label>
+          </label>}
           <p className="muted small">
-            Description is retained metadata. Weight is a supported nonnegative
+            {pool ? "Description is retained metadata. Edit item IDs, weights and roll bounds in the table. Unknown fields remain in Source."
+              : <>Description is retained metadata. Weight is a supported nonnegative
             scalar; current planned selection uses separate profiles. Geometry,
-            specials and all other fields remain available in Source.
+            specials and all other fields remain available in Source.</>}
           </p>
           <div className={"validation " + (document.valid ? "pass" : "fail")}>
             <strong>
@@ -415,11 +446,11 @@ export function Authoring({
       )}
       {tab === "source" && (
         <>
-          <label htmlFor="draft-json">
+          <label htmlFor={pool ? "pool-draft-json" : "draft-json"}>
             {editing ? "Draft JSON" : "Source JSON"}
           </label>
           <textarea
-            id="draft-json"
+            id={pool ? "pool-draft-json" : "draft-json"}
             className="source-editor"
             spellCheck={false}
             value={draft}
@@ -456,7 +487,7 @@ export function Authoring({
               </p>
               <p>{d.message}</p>
               <small>{d.correction}</small>
-              {diagnosticCell(d, layoutModel(draft).model) && (
+              {!pool && diagnosticCell(d, layoutModel(draft).model) && (
                 <button
                   onClick={() =>
                     setFocus(diagnosticCell(d, layoutModel(draft).model))
@@ -470,6 +501,7 @@ export function Authoring({
           <p className="muted">
             {dirty && !verdict
               ? "Displayed source diagnostics are from the opened file. Validate the draft for a current verdict."
+              : pool ? "Pool validation uses the current loader and container-pool validator. No population is sampled here."
               : "Draft validation includes a centered production stamp and initial population. Access checks use the declared main entrance when present."}
           </p>
         </div>
@@ -557,14 +589,16 @@ export function Authoring({
             <h2>Apply this one content file?</h2>
             <code>{target}</code>
             <p>
-              {variant
+              {pool && variant ? "Creates one new pool. No structure or world is changed; the pool may remain unused until explicitly referenced."
+                : variant
                 ? "This creates a new definition. It does not add entries to current town or roadside selection profiles. Older flat-pool contexts can discover new definitions."
                 : "This changes the meaning of an existing ID. Saved pending worlds may depend on its old content. Prefer a new variant for changed identity or meaning."}
             </p>
             <p>
-              Current draft: valid contract, references and centered production
+              {pool ? "Current pool draft passed loader identity, item references and consumer constraints. The host rechecks the exact reviewed bytes and current dependencies before publishing."
+                : <>Current draft: valid contract, references and centered production
               preview. Host rechecks these exact bytes before publishing.
-              Natural selection and other transforms remain unverified.
+              Natural selection and other transforms remain unverified.</>}
             </p>
             <pre className="diff">
               {sourceDiff(document.raw, draft, document.path, target)}

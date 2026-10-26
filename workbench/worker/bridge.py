@@ -24,10 +24,11 @@ sys.dont_write_bytecode = True
 # This small preview needs no parallel BLAS. Bound native thread-pool overhead
 # before importing NumPy/tcod; the game's algorithms and data stay unchanged.
 os.environ.update(OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1", MKL_NUM_THREADS="1")
-PROTOCOL = 3
-WORKER_VERSION = "0.3.0"
+PROTOCOL = 4
+WORKER_VERSION = "0.4.0"
 ROUTE = "authored_submap"
 EDIT_ROUTE = "ordinary_building"
+POOL_ROUTE = "contextual_loot_pool"
 DEPENDENCIES = {"pygame": "2.6.1", "tcod": "19.3.0", "numpy": "2.4.6",
                 "cffi": "2.1.1", "pycparser": "3.11", "typing_extensions": "4.16.0"}
 MAX_REQUEST = 4 * 1024 * 1024
@@ -141,8 +142,9 @@ def asset_path(root, value, *, new=False):
     layout = len(relative.parts) == 4 and relative.parts[:3] == ("roguelike", "data", "layouts")
     building = (len(relative.parts) == 5 and relative.parts[:3] == ("roguelike", "data", "buildings")
                 and relative.parts[3] in ELIGIBILITY.keys() - {"plaza"})
-    if relative.is_absolute() or not (layout or building) or relative.suffix != ".json":
-        fail("UNSUPPORTED_ASSET", value, "W1 edits ordinary buildings only; authored layouts remain read-only.")
+    pool = len(relative.parts) == 4 and relative.parts[:3] == ("roguelike", "data", "loot_pools")
+    if relative.is_absolute() or not (layout or building or pool) or relative.suffix != ".json":
+        fail("UNSUPPORTED_ASSET", value, "Select an ordinary building, contextual pool or read-only authored layout.")
     path = (root / relative).resolve(strict=not new)
     if not path.is_relative_to(root / "roguelike/data"):
         fail("PATH_ESCAPE", value, "Choose an asset inside the selected repository.")
@@ -155,10 +157,12 @@ def discover(root):
     rows = []
     candidates = list((root / "roguelike/data/layouts").glob("*.json"))
     candidates += list((root / "roguelike/data/buildings").glob("*/*.json"))
+    candidates += list((root / "roguelike/data/loot_pools").glob("*.json"))
     for p in sorted(candidates):
         category = p.parent.name if p.parent.parent.name == "buildings" else None
-        editable = category in ELIGIBILITY.keys() - {"plaza"}
-        route = EDIT_ROUTE if editable else "plaza" if category == "plaza" else ROUTE
+        pool = p.parent.name == "loot_pools"
+        editable = pool or category in ELIGIBILITY.keys() - {"plaza"}
+        route = POOL_ROUTE if pool else EDIT_ROUTE if editable else "plaza" if category == "plaza" else ROUTE
         try:
             raw = read_document(p)
             if not isinstance(raw, dict): raw = {}
@@ -175,10 +179,121 @@ def discover(root):
     return rows
 
 
+def definition_sources(data_root, family):
+    """Mirror _load_dir's object/array file convention, without choosing a duplicate winner."""
+    sources = {}
+    for path in sorted((data_root / family).rglob("*.json")):
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        for index, row in enumerate(raw if isinstance(raw, list) else [raw]):
+            if isinstance(row, dict) and isinstance(row.get("id"), str):
+                sources.setdefault(row["id"], []).append({"path": "roguelike/data/" + path.relative_to(data_root).as_posix(),
+                    "pointer": f"/{index}" if isinstance(raw, list) else "", "definition": row})
+    return sources
+
+
+def pool_diagnostics(raw, data, path, data_root):
+    """Use the game's existing container-pool validator, adding source identity checks.
+
+    DataLoader silently skips malformed files and overwrites duplicate IDs. Those
+    behaviors cannot safely authorize editing a particular source file.
+    """
+    from generation.structure_contract import Validator
+    from types import SimpleNamespace
+    identifier = raw.get("id") if isinstance(raw, dict) else None
+    validator = Validator(SimpleNamespace(items=data.items, loot_pools={identifier: raw}) if isinstance(identifier, str) else data,
+                          path, str(identifier or "<pool>"), EDIT_ROUTE)
+    if not isinstance(identifier, str) or not identifier:
+        validator.issue("POOL_ID", "id", "Pool requires a nonempty string id.", "Set a unique pool ID.")
+        return [d.json() for d in validator.diagnostics]
+    validator.pool(identifier, "pool")
+    sources = definition_sources(data_root, "loot_pools")
+    locations = sources.get(identifier, [])
+    if len(locations) != 1 or locations[0]["path"] != path or locations[0]["pointer"]:
+        validator.issue("DUPLICATE_ID", "id", f"Pool {identifier!r} does not resolve uniquely to {path}: " +
+                        ", ".join(s["path"] + s["pointer"] for s in locations), "Use a unique ID in one object file.")
+    if data.loot_pools.get(identifier) != raw:
+        validator.issue("LOADER_IDENTITY", "id", f"DataLoader did not load the exact definition {identifier!r} from {path}.",
+                        "Use plain UTF-8 JSON accepted by DataLoader; resolve duplicate IDs or skipped files.")
+    item_sources = definition_sources(data_root, "items")
+    rows = raw.get("items", [])
+    for i, row in enumerate(rows if isinstance(rows, list) else []):
+        item_id = row.get("item_id") if isinstance(row, dict) else None
+        if isinstance(item_id, str) and item_id in data.items:
+            records = item_sources.get(item_id, [])
+            if len(records) != 1 or records[0]["definition"] != data.items[item_id]:
+                validator.issue("ITEM_SOURCE", f"items[{i}].item_id", f"Item {item_id!r} has ambiguous source definitions.", "Resolve the duplicate item ID outside Workbench.")
+    for key in raw.keys() - {"id", "description", "items", "roll_count"}:
+        validator.issue("INACTIVE_POOL_FIELD", key, f"{key!r} is preserved; loot_roller does not consume it.", "No runtime effect is claimed.", "warning")
+    return [d.json() for d in validator.diagnostics]
+
+
+def pool_context(root, data, identifier):
+    items = {}
+    for item_id, records in definition_sources(root / "roguelike/data", "items").items():
+        if item_id not in data.items:
+            continue
+        unique = len(records) == 1 and records[0]["definition"] == data.items[item_id]
+        items[item_id] = {"id": item_id, "name": str(data.items[item_id].get("name", item_id)),
+                          "sources": records, "resolved": unique}
+    refs = []
+    for entry in data.structure_catalog.entries:
+        if entry.route != EDIT_ROUTE:
+            continue
+        for index, record in enumerate(entry.definition.get("special_tiles", [])):
+            if record.get("type", record.get("kind")) == "container" and identifier in record.get("loot_pools", []):
+                refs.append({"id": entry.definition["id"], "path": "roguelike/data/buildings/" + entry.category + "/" + Path(entry.path).name,
+                             "field": f"special_tiles[{index}].loot_pools", "x": record["x"], "y": record["y"],
+                             "decor_id": record.get("decor_id", "crate")})
+    return {"items": dict(sorted(items.items())), "references": sorted(refs, key=lambda r: (r["path"], r["field"])),
+            "consumer": "roguelike/engine/loot_roller.py:roll_pool → ItemFactory.create; engine/scene_generation.py:populate",
+            "validator": "roguelike/generation/structure_contract.py:Validator.pool",
+            "rules": "Weighted draws without replacement by entry; repeated item IDs remain separate entries. Roll count defaults to [1,1], is capped to entry count, and stops when remaining total weight is zero. Missing weight defaults to 1. Each referenced pool rolls independently. No quantity/condition fields are consumed."}
+
+
+def pool_validation(request, root, scratch, identity):
+    from engine.data_loader import DataLoader
+    from generation.structure_contract import read_document, StructureError
+    path = asset_path(root, request["asset"], new=True)
+    draft = request.get("draft")
+    if not isinstance(draft, str) or len(draft.encode("utf-8")) > 1024 * 1024:
+        fail("MALFORMED_REQUEST", "Expected UTF-8 draft up to 1 MiB.", "Use a bounded pool definition.")
+    copied = scratch / "data"
+    shutil.copytree(root / "roguelike/data", copied)
+    selected = copied / path.relative_to(root / "roguelike/data")
+    selected.write_bytes(draft.encode("utf-8"))
+    diagnostics = []; syntax = False
+    try:
+        raw = read_document(selected)
+        syntax = True
+        data = DataLoader(str(copied))
+        diagnostics = pool_diagnostics(raw, data, request["asset"], copied)
+    except StructureError as error:
+        diagnostics = [d.json() for d in error.diagnostics]
+        if isinstance(error.__cause__, json.JSONDecodeError):
+            for d in diagnostics: d.update(line=error.__cause__.lineno, column=error.__cause__.colno)
+    for d in diagnostics:
+        d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
+    after = source_identity(root)
+    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+        fail("SOURCE_CHANGED", "Dependencies changed during pool validation.", "Validate again.")
+    valid = syntax and not any(d["severity"] == "error" for d in diagnostics)
+    return {"valid": valid, "syntax_valid": syntax, "contract_valid": valid, "references_valid": valid,
+            "placement_verified": False, "population_verified": False, "diagnostics": diagnostics,
+            "draft_sha256": hashlib.sha256(draft.encode("utf-8")).hexdigest(), "route": POOL_ROUTE,
+            "contract": "g2-2", "worker_version": WORKER_VERSION, "source": identity, "path": request["asset"],
+            "worker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "preview": None,
+            "limitations": "Exact pool accepted by DataLoader and Validator.pool. No contents sampled here. Link a building variant and run Preview draft for actual container population. Saving a pool does not assign any container or select any structure."}
+
+
 def draft_validation(request, root, scratch, identity):
     from engine.data_loader import DataLoader
     from generation.structure_contract import read_document, compile_structure, StructureError
     path = asset_path(root, request.get("asset"), new=True)
+    if path.parent.name == "loot_pools":
+        return pool_validation(request, root, scratch, identity)
     if path.parent.parent.name != "buildings":
         fail("UNSUPPORTED_ASSET", "Drafts require ordinary_building.", "Use a supported building.")
     draft = request.get("draft")
@@ -198,7 +313,19 @@ def draft_validation(request, root, scratch, identity):
         data = DataLoader(str(copied))
         compiled = compile_structure(raw, EDIT_ROUTE, data, path=str(selected), category=path.parent.name)
         diagnostics = [d.json() for d in compiled.diagnostics]; valid = contract_valid = True
-        if request["op"] == "preview_draft":
+        # A declared pool link must identify a real definition, not an incidental
+        # last-write-wins loader result from two files with the same ID.
+        pool_sources = definition_sources(copied, "loot_pools")
+        for i, record in enumerate(raw.get("special_tiles", [])):
+            if record.get("type", record.get("kind")) != "container":
+                continue
+            for n, identifier in enumerate(record.get("loot_pools", [])):
+                if len(pool_sources.get(identifier, [])) != 1:
+                    diagnostics.append(dict(severity="error", code="POOL_SOURCE", path=request["asset"], asset=raw["id"],
+                        field=f"special_tiles[{i}].loot_pools[{n}]", message=f"Pool {identifier!r} has no unique loaded source definition.",
+                        correction="Resolve duplicate or skipped pool definitions before linking.", source_xy=[record["x"],record["y"]], layer="specials"))
+                    valid = contract_valid = False
+        if request["op"] == "preview_draft" and valid:
             generated, problems = building_preview(raw, data, request.get("seed", 20261023), request["asset"], path.parent.name, identity)
             diagnostics.extend(problems)
             valid = generated["passed"] and not any(d["severity"] == "error" for d in diagnostics)
@@ -312,12 +439,12 @@ def run(request, root, scratch):
                 "route": ROUTE, "validator": "generation.structure_contract.compile_structure",
                 "preview": "generation.structure_preview.preview → engine.scene_generation.create_submap → generation.local_gen.generate_submap",
                 "edit_route": EDIT_ROUTE,
-                "unavailable": ["layout editing/saving", "other JSON families", "native world selection", "game renderer/FOV", "combat simulation"],
+                "unavailable": ["layout editing/saving", "item/recipe editing", "native world selection", "game renderer/FOV", "combat simulation"],
                 "health": "catalog needs repair" if catalog_error else "ready",
                 "diagnostics": [d.json() for d in catalog_error.diagnostics] if catalog_error else []}
     if op == "describe":
         return {"route": ROUTE, "capabilities": CAPABILITIES[ROUTE],
-                "assets": discover(root), "unsupported": ["plaza (read-only)", "entrances", "items", "loot", "recipes", "creatures", "generation profiles"]}
+                "assets": discover(root), "unsupported": ["plaza (read-only)", "entrances", "item editing", "legacy loot tables", "recipes", "creatures", "generation profiles"]}
     path = asset_path(root, request.get("asset"))
     before = path.stat()
     source = path.read_bytes()
@@ -328,6 +455,18 @@ def run(request, root, scratch):
         raw = read_document(path)
     except StructureError as error:
         raw = {}; raw_error = error
+    if path.parent.name == "loot_pools":
+        if op != "inspect" or request.get("invalid_fixture"):
+            fail("UNSUPPORTED_OPERATION", "Pool inspection does not generate a map.", "Preview a building to observe its actual containers.")
+        diagnostics = ([d.json() for d in (raw_error or catalog_error).diagnostics] if raw_error or catalog_error
+                       else pool_diagnostics(raw, data, request["asset"], root / "roguelike/data"))
+        if path.read_bytes() != source:
+            fail("SOURCE_CHANGED", "Pool changed during inspection.", "Reopen the pool.")
+        return {"id": raw.get("id", path.stem), "path": request["asset"], "route": POOL_ROUTE,
+                "description": str(raw.get("description", "")), "valid": not any(d["severity"] == "error" for d in diagnostics),
+                "diagnostics": diagnostics, "raw": source.decode("utf-8"), "sha256": hashlib.sha256(source).hexdigest(),
+                "mtime_ns": str(before.st_mtime_ns), "source_unchanged": True, "source": identity,
+                "pool_context": pool_context(root, data, raw.get("id")) if data else None}
     invalid = request.get("invalid_fixture", False)
     if type(invalid) is not bool or (invalid and op != "inspect"):
         fail("MALFORMED_REQUEST", "Invalid fixture flag.", "Use inspect with a boolean invalid_fixture.")

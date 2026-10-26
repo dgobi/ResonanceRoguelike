@@ -24,7 +24,7 @@ def data_fixture(destination):
 class AuthoringTests(unittest.TestCase):
     def test_discovery_matches_all_supported_candidates_and_reads_two_deep_sources(self):
         result = invoke("describe")["result"]
-        actual = [a["path"] for a in result["assets"] if a["editable"]]
+        actual = [a["path"] for a in result["assets"] if a["editable"] and a["route"] == "ordinary_building"]
         expected = sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / "roguelike/data/buildings").glob("*/*.json") if p.parent.name != "plaza")
         self.assertEqual(actual, expected)
         for asset in (ASSET, "roguelike/data/buildings/commercial/apothecary_b.json"):
@@ -34,7 +34,7 @@ class AuthoringTests(unittest.TestCase):
             self.assertEqual(inspected["raw"].encode("utf-8"), before)
             self.assertEqual(path.read_bytes(), before)
             self.assertEqual((path.stat().st_mtime_ns,path.stat().st_ctime_ns),(stat.st_mtime_ns,stat.st_ctime_ns))
-        self.assertTrue(all(not a["editable"] for a in result["assets"] if a["route"] != "ordinary_building"))
+        self.assertTrue(all(not a["editable"] for a in result["assets"] if a["route"] not in ("ordinary_building", "contextual_loot_pool")))
 
     def test_exact_draft_bytes_real_contract_and_route_rejections(self):
         raw = json.loads((ROOT / ASSET).read_text(encoding="utf-8"))
