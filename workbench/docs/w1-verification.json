@@ -1,0 +1,331 @@
+{
+  "milestone": "W1",
+  "implementation_commit": "84cd66ecf3152029b4bd11a8b9c259cce1b605fa",
+  "branch": "main",
+  "baseline_head": "36cf60e35245e1e1487bb7f1b3937b64b20271a6",
+  "baseline_origin_main_equal": true,
+  "checkpoint": "checkpoint/workbench-w1-start-20261026-a",
+  "editable_family": "ordinary_building",
+  "shipped_editable_candidates": 58,
+  "environment": {
+    "os": "Windows x64 10.0.26200",
+    "webview2": "155.0.4283.62",
+    "node": "24.15.0",
+    "npm": "11.12.1",
+    "rust": "1.95.0/MSVC",
+    "python": "3.11.0"
+  },
+  "checks": {
+    "typescript_typecheck_and_vite_build": "pass",
+    "typescript_tests": {
+      "passed": 7,
+      "failed": 0
+    },
+    "rust_tests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "rust_clippy_deny_warnings": "pass",
+    "python_w0_process_tests": {
+      "passed": 9,
+      "failed": 0
+    },
+    "python_w1_process_tests": {
+      "passed": 3,
+      "failed": 0
+    },
+    "npm_full_and_production_audit_vulnerabilities": 0,
+    "windows_nsis_build": "pass",
+    "installer_installation": "not performed",
+    "non_windows": "unverified"
+  },
+  "w0_preflight_native_rerun": {
+    "mode": "release",
+    "started_utc": "2026-10-26T17:25:57.618Z",
+    "checks": [
+      "actual Tauri WebView2 window",
+      "WebView network offline",
+      "repository handshake, live asset validation and Pixi rendering",
+      "production arrival click maps to (15,20), stairs_up",
+      "real DIMENSION diagnostic for disposable fixture",
+      "byte-exact view, close and reopen journey",
+      "host traversal rejection",
+      "cancel and retry without app hang",
+      "invalid project visible",
+      "no temporary worker roots remain after native close"
+    ],
+    "passed": true,
+    "launch_to_shell_ms": 708,
+    "open_to_preview_ms": 5980
+  },
+  "native_final": [
+    {
+      "mode": "authoring",
+      "started_utc": "2026-10-26T18:04:10.904Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "search by exact path and two shipped definitions: byte/mtime no-op",
+        "refresh and actual native close protect the unsaved draft",
+        "real asynchronous validation response suppressed after a newer edit",
+        "malformed JSON and real unknown terrain reject publication despite retained map",
+        "typed scalar edit: diff, fresh host validation, confirm, Windows replace, exact unrelated text, metadata, reopen, real revalidation",
+        "unique variant applied and reopened; selection profiles byte-identical",
+        "dependency changed after review: exact draft revalidated at apply and refused; source survives",
+        "real host rejects stale publication and exposes intact external version",
+        "traversal, saves/code, forged identities/reviews, unsafe variant and junction redirect denied at native host boundary",
+        "visible conflict, discard/reload and no unnoticed staging/backup files",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "passed": true,
+      "webview_url": "http://tauri.localhost/",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "launch_to_shell_ms": 943,
+      "open_to_preview_ms": 9721,
+      "frame_intervals_ms": {
+        "median": 33.29999999999927,
+        "p95": 33.400000000001455,
+        "max": 33.5,
+        "count": 119
+      },
+      "animation_frames_during_first_300ms_of_work": 10,
+      "temporary_roots_remaining": [],
+      "total_ms": 98216,
+      "worker": {
+        "protocol": 2,
+        "worker_version": "0.2.0",
+        "worker_sha256": "73965d49fbc21c295f9a119d166b41a6c2dc5c3699708e11d7f3c73525365c7f",
+        "contract": "g2-2",
+        "runtime": {
+          "compatible": true,
+          "dependencies": {
+            "cffi": "2.1.1",
+            "numpy": "2.4.6",
+            "pycparser": "3.11",
+            "pygame": "2.6.1",
+            "tcod": "19.3.0",
+            "typing_extensions": "4.16.0"
+          },
+          "numeric_threads": 1,
+          "python": "3.11.0"
+        }
+      },
+      "fixture_game_source_sha256": "79debddbf4860b264d8f7cb3df1fff6adf78c82021377ee07503ab384fda38d3",
+      "fixture_catalog_sha256": "5bd33d875fd924bf552cf0879f0ee6b66e821a03afa59508d5e86fb00352f8db",
+      "preview": {
+        "asset": "starting_lab",
+        "seed": 20261023,
+        "scene_seed": "53693250991751460784647974755340343741",
+        "scene_address": [
+          0,
+          0,
+          "preview-submap"
+        ],
+        "origin": [
+          10,
+          13
+        ],
+        "spawn": [
+          15,
+          20
+        ],
+        "width": 80,
+        "height": 43,
+        "generation_ms": 306.64,
+        "host_ms": 1431,
+        "terrain_sha256": "c73cf0a453fd175538020adeaa6e588e609ba90852bd723479c5cd2771bd6b3d",
+        "candidate_sha256": "0bde7868f7545835c34efe5ee6bc463dc9619d58d826f099a97cffc6ed95f380",
+        "samples": [
+          [
+            15,
+            20,
+            "stairs_up"
+          ],
+          [
+            67,
+            16,
+            "door_open"
+          ],
+          [
+            79,
+            42,
+            "wall"
+          ]
+        ],
+        "passed": true
+      }
+    },
+    {
+      "mode": "interrupted-draft",
+      "started_utc": "2026-10-26T18:05:49.574Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "hard process interruption with an unsaved draft leaves original source intact",
+        "no temporary worker roots remain after native close"
+      ],
+      "passed": true,
+      "webview_url": "http://tauri.localhost/",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "launch_to_shell_ms": 600,
+      "temporary_roots_remaining": [],
+      "total_ms": 11072
+    },
+    {
+      "mode": "restart-draft",
+      "started_utc": "2026-10-26T18:06:01.161Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "fresh native process reopens original valid source after interruption",
+        "no temporary worker roots remain after native close"
+      ],
+      "passed": true,
+      "webview_url": "http://tauri.localhost/",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "launch_to_shell_ms": 682,
+      "temporary_roots_remaining": [],
+      "total_ms": 10122
+    },
+    {
+      "mode": "missing-worker",
+      "started_utc": "2026-10-26T18:06:12.628Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "WORKER_MISSING visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "passed": true,
+      "webview_url": "http://tauri.localhost/",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "launch_to_shell_ms": 701,
+      "temporary_roots_remaining": [],
+      "total_ms": 1548
+    },
+    {
+      "mode": "protocol-mismatch",
+      "started_utc": "2026-10-26T18:06:15.370Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "PROTOCOL_MISMATCH visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "passed": true,
+      "webview_url": "http://tauri.localhost/",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "launch_to_shell_ms": 736,
+      "temporary_roots_remaining": [],
+      "total_ms": 1880
+    },
+    {
+      "mode": "malformed-worker",
+      "started_utc": "2026-10-26T18:06:18.417Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "MALFORMED_WORKER_OUTPUT visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "passed": true,
+      "webview_url": "http://tauri.localhost/",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "launch_to_shell_ms": 682,
+      "temporary_roots_remaining": [],
+      "total_ms": 1542
+    },
+    {
+      "mode": "worker-exit",
+      "started_utc": "2026-10-26T18:06:21.006Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "WORKER_EXIT visible and actionable",
+        "no temporary worker roots remain after native close"
+      ],
+      "passed": true,
+      "webview_url": "http://tauri.localhost/",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "launch_to_shell_ms": 701,
+      "temporary_roots_remaining": [],
+      "total_ms": 1595
+    },
+    {
+      "mode": "slow-worker",
+      "started_utc": "2026-10-26T18:06:23.691Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "cancel reaps a live long-running worker",
+        "project replacement reaps active worker",
+        "native window close reaps active worker",
+        "no temporary worker roots remain after native close"
+      ],
+      "passed": true,
+      "webview_url": "http://tauri.localhost/",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+      "launch_to_shell_ms": 706,
+      "temporary_roots_remaining": [],
+      "total_ms": 5980,
+      "worker_after_window_close": "reaped"
+    }
+  ],
+  "preservation": {
+    "passed": true,
+    "preexisting_files_checked": 7979,
+    "changed_count": 0,
+    "saves_file_count": 7,
+    "save_file_set_unchanged": true,
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "metadata": [
+      "sha256",
+      "size",
+      "mtime_ns"
+    ]
+  },
+  "artifacts": {
+    "executable": {
+      "path": "src-tauri/target/release/resonance-workbench.exe",
+      "bytes": 9561088,
+      "sha256": "dca4652141e725a78c5ea95948dcca5cd9942211532ea00da97d64ef2a8d18a5"
+    },
+    "nsis_installer": {
+      "path": "src-tauri/target/release/bundle/nsis/Resonance Workbench_0.2.0_x64-setup.exe",
+      "bytes": 27459087,
+      "sha256": "9e87da9a4efda8781557e28dd5b49e0d0243e97315c65ea676e375f3babbdaeb"
+    },
+    "python_runtime_bytes": 90947960
+  },
+  "worker_source_and_packaged_sha256": "73965d49fbc21c295f9a119d166b41a6c2dc5c3699708e11d7f3c73525365c7f",
+  "implementation_git_blobs": {
+    "workbench/README.md": "88d5209729d1b30f838ac3b88b1b62a2957bc717",
+    "workbench/package-lock.json": "7d5a0fbfd9be4f66fc2797db509df92bb3405d0a",
+    "workbench/package.json": "e7d0332783eff40c485eebcddb26411841b2948c",
+    "workbench/scripts/authoring-journey.mjs": "2fc3d647a29c8016c38ac2149721c42204636c91",
+    "workbench/scripts/desktop-test.mjs": "1c83d13bb28a100c01b1b0762b140d9acf6d2c24",
+    "workbench/scripts/run-authoring.mjs": "e2323af9ac5b6a196e68a1e2a8ea1512071a3ea8",
+    "workbench/src-tauri/Cargo.lock": "58ff280d6a5541a6a092e152987bc81426fb3611",
+    "workbench/src-tauri/Cargo.toml": "d2a15afce140bbe6b8ee3ed6190fc270779d6bb4",
+    "workbench/src-tauri/capabilities/main.json": "af13e239a633ace233f627b6b8c9650b85db1f13",
+    "workbench/src-tauri/src/authoring.rs": "58cdc6663d39ac1662f8d5068b96bb09d35f0225",
+    "workbench/src-tauri/src/main.rs": "b1e401e19baf9aebe04ce428bb24e1e573da7eb3",
+    "workbench/src-tauri/tauri.conf.json": "3c932d0baa03f05599db7b0e8683b95d8f8fce58",
+    "workbench/src/App.tsx": "c42977ebca5740e55f10e7beda3d3af46b1d1295",
+    "workbench/src/Authoring.tsx": "1c2ab9605c5c0d7e3a9f791e4114f09e84c80d25",
+    "workbench/src/draft.test.ts": "5f362d9fa00a84b86ee560fd6122b38cdadfbf41",
+    "workbench/src/draft.ts": "d9d14232c96784aa759942f9cc787542ebfdf367",
+    "workbench/src/protocol.ts": "4d78774ca417d45355efdddabe83f1869da0875d",
+    "workbench/src/styles.css": "98cd0d92eab7ed51c5824f93cd8c54b9181b1e4d",
+    "workbench/worker/bridge.py": "57d78019d75381225712bc357f3d70536f886ce3",
+    "workbench/worker/test_authoring.py": "a745619d5f65b1b0d853e67994debf0fc61b8e4d",
+    "workbench/worker/test_bridge.py": "bb4d0e9828aef4f55126f41cb39ff5592f6fbe62"
+  }
+}

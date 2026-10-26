@@ -178,7 +178,7 @@ backup and the idle disk check lists `.w1-*` remnants. Inspect those files befor
 manual recovery; Workbench never silently restores an ambiguous crash remnant.
 Variants use no-clobber persistence. Exact published bytes are checked. This is
 not a guarantee against arbitrary power loss, faulty storage or every Windows
-filesystem. Publication is Windows-only; other platforms remain unverified.
+filesystem. Existing-file replacement is Windows-only; other platforms remain unverified.
 
 The worker writes only disposable scratch data, denies personal-save reads,
 imports rules from the selected checkout and suppresses bytecode. Cancellation,
