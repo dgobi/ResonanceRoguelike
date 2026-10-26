@@ -988,6 +988,15 @@ pre {
 .item-inspector { padding: 14px; border: 1px solid #56645b; background: #182021; }
 .item-inspector .raw { max-height: 320px; overflow: auto; }
 .row-diagnostic { color: #e9b38c; }
+.item-editor { padding: 18px; min-width: 0; }
+.item-editor .raw { max-height: 430px; overflow: auto; }
+.item-editor code { overflow-wrap: anywhere; display: block; }
+.item-properties { border: 1px solid #3d4b4d; padding: 18px; }
+.item-properties > label { display: block; margin-bottom: 16px; }
+.item-properties > label > input:not([type=checkbox]) { max-width: 460px; }
+.item-properties textarea { min-height: 90px; }
+.item-properties input[type=checkbox] { width: auto; margin-right: 8px; }
+.item-properties small { display: block; margin-top: 6px; }
 .source-links small { font-size: 11px; }
 .coordinate-fields,
 .pool-row {

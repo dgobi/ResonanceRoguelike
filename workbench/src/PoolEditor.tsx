@@ -7,10 +7,18 @@ export function PoolEditor(p: {
   onEdit: (edit: (text: string) => string, label: string) => void;
   onUndo: () => void; onRedo: () => void; canUndo: boolean; canRedo: boolean;
   trail?: SourceTrail | null; onReturn?: () => void; busy: boolean; onCancel: () => void;
+  onItem?: (id: string, index: number) => void;
+  focusEntry?: number;
 }) {
   const parsed = useMemo(() => poolModel(p.draft), [p.draft]);
   const [selected, setSelected] = useState<string | null>(null);
   const itemRef = useRef<HTMLElement | null>(null);
+  const editorRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    if (p.focusEntry === undefined) return;
+    const row = editorRef.current?.querySelector<HTMLElement>(`[data-pool-entry="${p.focusEntry}"]`);
+    row?.scrollIntoView({block:"nearest"}); row?.focus({preventScroll:true});
+  }, [p.focusEntry]);
   useEffect(() => {
     if (selected) { itemRef.current?.scrollIntoView({block: "nearest"}); itemRef.current?.focus({preventScroll: true}); }
   }, [selected]);
@@ -21,7 +29,7 @@ export function PoolEditor(p: {
   const rolls = parsed.model?.roll_count ?? [1, 1];
   const rollsSupported = Array.isArray(rolls) && rolls.length >= 1 && rolls.length <= 2;
   const edit = (path: (string | number)[], value: unknown) => p.onEdit(s => poolValue(s, path, value), "Edit pool field");
-  return <section className="pool-editor" data-testid="pool-editor">
+  return <section ref={editorRef} className="pool-editor" data-testid="pool-editor">
     <div className="pane-heading"><h2>Contextual loot pool</h2><div className="edit-actions">
       {p.onReturn && <button onClick={p.onReturn} disabled={p.busy}>Return to structure</button>}
       {p.busy && <button onClick={p.onCancel} disabled={p.disabled === "Publication in progress."}>Cancel authoring request</button>}
@@ -51,7 +59,7 @@ export function PoolEditor(p: {
     <div className="pool-table-wrap"><table className="pool-table"><thead><tr><th>Entry</th><th>Item ID / name</th><th>Weight</th><th>Reference</th><th>Action</th></tr></thead>
       <tbody>{rows.map((r, i) => {
         const id = typeof r.item_id === "string" ? r.item_id : "";
-        return <tr key={i}><td>{i + 1}</td><td><select aria-label={`Item ID ${i + 1}`} value={id} disabled={!!disabled}
+        return <tr key={i} data-pool-entry={i} tabIndex={-1}><td>{i + 1}</td><td><select aria-label={`Item ID ${i + 1}`} value={id} disabled={!!disabled}
           onChange={e => edit(["items", i, "item_id"], e.target.value)}>
           {!items[id] && <option value={id}>{id || "Missing item ID"} · unresolved</option>}
           {Object.values(items).map(a => <option key={a.id} value={a.id} disabled={!a.resolved}>{a.id} · {a.name}</option>)}
@@ -59,6 +67,7 @@ export function PoolEditor(p: {
           value={typeof r.weight === "number" ? r.weight : r.weight === undefined ? 1 : ""}
           onChange={e => { if (e.target.value !== "") edit(["items", i, "weight"], Number(e.target.value)); }} /></td>
         <td><button disabled={!items[id]} onClick={() => setSelected(id)}>Inspect {id || "item"}</button>
+          <button disabled={p.busy || !items[id]?.resolved} onClick={() => p.onItem?.(id, i)}>Open item {id || "source"}</button>
           <small>{items[id]?.resolved ? "Declared ID resolves" : "Unresolved / ambiguous"}</small>
           {p.diagnostics.filter(d => d.field.includes(`items[${i}]`)).map((d, n) => <small className="row-diagnostic" key={n}>{d.code}: {d.message}</small>)}
         </td><td><button aria-label={`Remove entry ${i + 1}`} disabled={!!disabled} onClick={() => p.onEdit(s => poolEntry(s, i), "Remove pool entry")}>Remove</button></td></tr>;

@@ -42,9 +42,9 @@ if (faultModes.includes(mode)) {
   env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
   env.WORKBENCH_FAULT = mode;
 }
-if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-")) {
+if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-")) {
   env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
-  env.WORKBENCH_FAULT = mode.replace("pool-worker-", "draft-worker-");
+  env.WORKBENCH_FAULT = mode.replace("pool-worker-", "draft-worker-").replace("item-worker-", "draft-worker-");
   env.WORKBENCH_REAL_PYTHON = resolve(
     workbench,
     "src-tauri/target/release/python/python.exe",
@@ -156,9 +156,10 @@ try {
         "fresh native process reopens original valid source after interruption",
       );
     }
-  } else if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-")) {
+  } else if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-")) {
     const poolFault = mode.startsWith("pool-worker-");
-    const asset = poolFault ? "roguelike/data/loot_pools/alchemist_reagents.json" : "roguelike/data/buildings/commercial/apothecary_a.json";
+    const itemFault = mode.startsWith("item-worker-");
+    const asset = itemFault ? "roguelike/data/items/components/wood_bundle.json" : poolFault ? "roguelike/data/loot_pools/alchemist_reagents.json" : "roguelike/data/buildings/commercial/apothecary_a.json";
     const before = await readFile(resolve(root, asset));
     await page
       .locator('[data-testid="map"][data-ready="true"]')
@@ -168,11 +169,11 @@ try {
     await page.waitForFunction(() => !document.querySelector(".busy-overlay"));
     await page.getByRole("button", { name: "Begin edit", exact: true }).click();
     await page
-      .getByLabel("Description", { exact: true })
+      .getByLabel(itemFault ? "Item description" : "Description", { exact: true })
       .fill("Unsaved draft for worker failure control");
     const start = performance.now();
     await page
-      .getByRole("button", { name: poolFault ? "Validate draft" : "Preview draft", exact: true })
+      .getByRole("button", { name: poolFault || itemFault ? "Validate draft" : "Preview draft", exact: true })
       .click();
     if (mode.endsWith("worker-cancel")) {
       await page
@@ -486,6 +487,10 @@ try {
     if (mode === "pools") {
       const { poolJourney } = await import("./pool-journey.mjs");
       await poolJourney(page, root, output, receipt);
+    }
+    if (mode === "items") {
+      const {itemJourney} = await import("./item-journey.mjs");
+      await itemJourney(page, root, output, receipt);
     }
     await page.setViewportSize({ width: 1100, height: 740 });
     await page.screenshot({ path: resolve(output, "minimum-window.png") });

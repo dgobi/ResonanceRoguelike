@@ -21,6 +21,7 @@ pub struct Document {
     original: Vec<u8>,
     id: Option<String>,
     review: Option<Review>,
+    writable: bool,
 }
 #[derive(Clone)]
 struct Review {
@@ -68,8 +69,13 @@ pub fn is_pool(s: &str) -> bool {
     let p: Vec<_> = s.split('/').collect();
     p.len() == 4 && p[..3] == ["roguelike", "data", "loot_pools"] && valid_filename(p[3])
 }
+pub fn is_item(s: &str) -> bool {
+    let p: Vec<_> = s.split('/').collect();
+    p.len() >= 4 && p[..3] == ["roguelike", "data", "items"]
+        && p[3..p.len()-1].iter().all(|s| valid_id(s)) && valid_filename(p[p.len()-1])
+}
 fn relative_content(s: &str) -> Result<PathBuf, Failure> {
-    if is_pool(s) { Ok(PathBuf::from(s)) } else { relative_building(s) }
+    if is_pool(s) || is_item(s) { Ok(PathBuf::from(s)) } else { relative_building(s) }
 }
 fn no_link(path: &Path) -> Result<(), Failure> {
     let meta = fs::symlink_metadata(path).map_err(io_error)?;
@@ -120,6 +126,13 @@ fn checked_target(root: &Path, relative: &str, new: bool) -> Result<PathBuf, Fai
             "Choose a unique new ID; existing files are never overwritten by Save as variant.",
         ));
     }
+    if new {
+        let name = path.file_name().unwrap().to_string_lossy().to_lowercase();
+        if fs::read_dir(path.parent().unwrap()).map_err(io_error)?.filter_map(Result::ok)
+            .any(|e| e.file_name().to_string_lossy().to_lowercase() == name) {
+            return Err(failure("VARIANT_EXISTS", "Case-insensitive destination collision.", "Choose a unique new filename."));
+        }
+    }
     if !new && !path.is_file() {
         return Err(io_error("Source is unavailable."));
     }
@@ -140,6 +153,7 @@ fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure>
         .as_ref()
         .into_iter()
         .chain(state.pool_document.as_ref())
+        .chain(state.item_document.as_ref())
         .find(|d| d.token == token)
         .ok_or_else(|| {
             failure(
@@ -163,7 +177,7 @@ fn revoke_review(host: &Host, token: &str) {
     }
 }
 fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
-    state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).find(|d| d.token == token)
+    state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).chain(state.item_document.as_mut()).find(|d| d.token == token)
 }
 fn envelope(result: Value) -> Value {
     json!({"protocol":PROTOCOL,"id":uuid::Uuid::new_v4().to_string(),"ok":true,"result":result,"host_elapsed_ms":0})
@@ -225,13 +239,15 @@ pub async fn open_document(
         if host.epoch.load(Ordering::SeqCst) != epoch {
             return Err(io_error("Project changed."));
         }
-        let slot = if is_pool(&asset) { &mut state.pool_document } else { &mut state.document };
+        let writable = !is_item(&asset) || (asset.starts_with("roguelike/data/items/components/") && response["result"]["editable"] == true);
+        let slot = if is_pool(&asset) { &mut state.pool_document } else if is_item(&asset) { &mut state.item_document } else { &mut state.document };
         *slot = Some(Document {
             token: token.clone(),
             relative: asset,
             original,
             id,
             review: None,
+            writable,
         });
         response["result"]["document_token"] = json!(token);
         Ok(response)
@@ -245,6 +261,9 @@ fn destination(
     draft: &str,
     variant_id: Option<&str>,
 ) -> Result<(String, bool), Failure> {
+    if !doc.writable {
+        return Err(failure("READ_ONLY_ITEM", "This source is outside the supported ordinary component capability.", "Inspect advanced or ambiguous items read-only."));
+    }
     if draft.len() > MAX_DRAFT {
         return Err(io_error("Draft exceeds 1 MiB."));
     }
@@ -651,9 +670,10 @@ pub async fn apply_document(
             if read_source(&target)? != doc.original { return Err(conflict()); }
             let response = run_worker(app, host.clone(), Request {op:"preview_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),seed:Some(review.seed),..Default::default()}, epoch)?;
             if response["ok"] != true || response["result"]["valid"] != true || response["result"]["draft_sha256"] != hash(review.draft.as_bytes())
-                || response["result"]["route"] != if is_pool(&doc.relative) { "contextual_loot_pool" } else { "ordinary_building" }
-                || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != "0.4.0"
-                || (!is_pool(&doc.relative) && response["result"]["preview"]["passed"] != true) {
+                || response["result"]["route"] != if is_pool(&doc.relative) { "contextual_loot_pool" } else if is_item(&doc.relative) { "item_definition" } else { "ordinary_building" }
+                || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != "0.5.0"
+                || (is_item(&doc.relative) && (response["result"]["factory_verified"] != true || response["result"]["item_contract"] != "component-1"))
+                || (!is_pool(&doc.relative) && !is_item(&doc.relative) && response["result"]["preview"]["passed"] != true) {
                 let details = if response["ok"] == true {
                     response["result"]["diagnostics"].as_array().into_iter().flatten().take(3)
                         .map(|d| format!("{} {}: {}",d["code"],d["field"],d["message"])).collect::<Vec<_>>().join("; ")
@@ -668,6 +688,7 @@ pub async fn apply_document(
         state.applying = false;
         if let Some(current) = &mut state.document { current.review = None; }
         if let Some(current) = &mut state.pool_document { current.review = None; }
+        if let Some(current) = &mut state.item_document { current.review = None; }
         result.map(envelope)
     }).await.map_err(io_error)?
 }
@@ -709,6 +730,7 @@ mod tests {
             original,
             id: Some("sample".into()),
             review: None,
+            writable: true,
         };
         let review = Review {
             token: "reviewed".into(),
@@ -741,6 +763,56 @@ mod tests {
         assert!(destination(&doc, "{\"id\":\"other\"}", None).is_err());
         assert!(destination(&doc, "{\"id\":\"other\"}", Some("../other")).is_err());
         assert!(session_doc(&Host::default(), "forged").is_err());
+    }
+    #[test]
+    fn item_capability_paths_and_three_document_reviews() {
+        let (root, mut item, review) = fixture();
+        item.relative = "roguelike/data/items/components/nested/wood.json".into();
+        item.token = "item".into();
+        let path = root.path().join(&item.relative);
+        fs::create_dir_all(path.parent().unwrap()).unwrap(); fs::write(&path, &item.original).unwrap();
+        assert!(is_item(&item.relative));
+        for p in ["roguelike/data/items/../saves/x.json", "roguelike/data/items/components/con.json",
+                  "roguelike/data/items/components/x.json:ads", "roguelike/data/items/components/.git/x.json",
+                  "roguelike/data/items/components/x.JSON", "roguelike/data/items/components/a/../../x.json"] {
+            assert!(!is_item(p), "{p}");
+        }
+        item.writable = false;
+        assert_eq!(destination(&item, "{}", None).unwrap_err().code, "READ_ONLY_ITEM");
+        item.writable = true; item.review = Some(review.clone());
+        let host = Host::default();
+        {
+            let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().to_path_buf());
+            let mut structure = item.clone(); structure.token = "building".into();
+            let mut pool = item.clone(); pool.token = "pool".into();
+            state.document = Some(structure); state.pool_document = Some(pool); state.item_document = Some(item);
+        }
+        revoke_review(&host, "item");
+        assert!(session_doc(&host, "item").unwrap().1.review.is_none());
+        assert!(session_doc(&host, "pool").unwrap().1.review.is_some());
+        assert!(session_doc(&host, "building").unwrap().1.review.is_some());
+        host.cancel(true).unwrap(); assert!(session_doc(&host, "item").is_err());
+    }
+    #[test]
+    fn item_transaction_noclobber_conflict_and_rollback() {
+        let (root, mut doc, mut review) = fixture();
+        doc.relative = "roguelike/data/items/components/sample.json".into();
+        review.destination = doc.relative.clone();
+        let path = root.path().join(&doc.relative);
+        fs::create_dir_all(path.parent().unwrap()).unwrap(); fs::write(&path, &doc.original).unwrap();
+        for fault in [Fault::BeforeStage, Fault::AfterStage, Fault::BeforeReplace, Fault::AfterReplace] {
+            assert!(publish(root.path(), &doc, &review, fault).is_err());
+            assert_eq!(fs::read(&path).unwrap(), doc.original);
+        }
+        fs::write(&path, b"external change").unwrap();
+        assert_eq!(publish(root.path(), &doc, &review, Fault::None).unwrap_err().code, "EXTERNAL_MODIFICATION_CONFLICT");
+        fs::write(&path, &doc.original).unwrap();
+        review.variant = true; review.destination = "roguelike/data/items/components/new_item.json".into();
+        publish(root.path(), &doc, &review, Fault::None).unwrap();
+        assert_eq!(fs::read(&path).unwrap(), doc.original);
+        assert!(publish(root.path(), &doc, &review, Fault::None).is_err());
+        review.destination = "roguelike/data/items/components/NEW_ITEM.json".into();
+        assert_eq!(checked_target(root.path(), &review.destination, true).unwrap_err().code, "VARIANT_EXISTS");
     }
     #[test]
     fn replacement_validation_revokes_the_previous_review() {

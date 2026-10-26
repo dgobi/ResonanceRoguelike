@@ -1,8 +1,74 @@
-# Resonance Workbench · W3A
+# Resonance Workbench · W3B
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
-safely editing an ordinary building and a contextual loot pool. The game remains the
+safely editing ordinary buildings, contextual loot pools and inert component items. The game remains the
 validation authority. No campaign, running game or Internet service is required.
+
+## Author a component item and trace its use
+
+1. Search the recursive item catalogue by ID, name or path, or follow **Open item
+   `<id>`** from a pool entry. Category filters use the declared game category.
+   One structure, pool and item draft can remain open independently. **Return to
+   pool** restores the original entry and its draft; **Show structure** restores
+   the structure. Changing the item name never changes its machine ID.
+2. **Begin edit** is available only for a unique, single-object ordinary inert
+   component under `roguelike/data/items/components/` (including safe nested
+   folders). The current four are `wood_bundle`, `flint_shard`, `clay_lump` and
+   `clay_pot`. Typed fields are `name`, `description`, `weight`, `stackable` and
+   `keywords`. Name/description are literal authored text. Weight is finite and
+   nonnegative, in kg per instance. `stackable` groups same-ID inventory display
+   rows; it does not merge ownership or multiply an instance's weight. There is
+   no editable stack-size field.
+3. Keywords use current `data/keywords.json` tag IDs. Tier is a nonnegative integer
+   from the game's persisted-instance rules, limited to `2^53−1` for exact editor
+   transport. Factory defaults are not serialized on open. Source, typed edits,
+   undo/redo, validation and diff use one exact text draft. **Undo item** operates
+   on item property/keyword operations; a raw or variant-ID change clears that
+   history. Invalid raw JSON remains intact and disables typed controls.
+4. Choose **Save as new variant**, enter a unique ID, review the derived path
+   beside the source, **Validate draft**, inspect **Diff**, then **Review & apply
+   → Confirm apply one file**. The host reruns the exact staged bytes through
+   `DataLoader`, the game-owned `engine.item_authoring` component capability,
+   `save_components` field validators, reference checks and `ItemFactory.create`.
+   Publication rechecks source/dependency identity, uses the existing single-file
+   atomic transaction and reopens the persisted bytes. Duplicate IDs (including
+   case collisions), skipped definitions and unsafe paths cannot authorize writes.
+5. Return to the retained pool draft. Deliberately select the new item ID, choose
+   a **new pool variant** ID, validate/diff/confirm and reopen it. Neither item
+   publication nor pool publication rewrites existing references. These are two
+   independent transactions; a successful item may remain unreferenced if the
+   later pool operation fails.
+6. **References** lists saved contextual-pool references and declared tile, text
+   and keyword IDs. Recipe rows are **potential tag matches**, using the actual
+   crafting predicates; they do not establish quantities, recipe knowledge,
+   materials, ambient conditions or successful crafting. **Use binding** follows
+   the actual `ItemSystem.use` dynamic handler lookup. `Handler found` establishes
+   code support only; inventory ownership, lazy equipment repair, handler
+   prerequisites and normal turn conditions are not executed.
+7. **Factory result** is separate observed evidence: an unowned real instance,
+   declared/property comparison, exact definition hash, input and loaded-catalogue
+   hashes, game source identity and UTC observation time. An edited draft hides
+   old factory results until revalidated. Advanced item inspection can instantiate
+   a valid definition without claiming its use/equipment/effects work. A linked
+   structure's **Preview draft** can additionally observe actual seeded container
+   population. That fixture does not certify world selection or acquisition.
+
+Weapons, lights, satchels, effect-bearing consumables, array-of-item files and
+unknown/legacy categories remain readable as source, with no publication control.
+Category, appearance, use handlers, qualities, effects and movesets have no typed
+editor. Unknown metadata and nested content are preserved. The game loader remains
+permissive/last-wins; Workbench reports both collision paths instead of choosing a
+winner. Refresh/reload after external dependency changes; apply always revalidates.
+
+Source-verified limits: `on_use_effects` is not consumed by `ItemFactory` or
+`ItemSystem` (including the shipped tincture's `drink` path). `consumed_on_use`
+governs automatic crafting-material eligibility, not every use-handler return.
+`gather_from` and a hypothetical `stack_size` have no current item consumer;
+neither is promoted to a control. Weapon/equipment definitions can be read by
+later systems even when fields are absent from the basic factory instance.
+Tile references use the actual `TileRegistry` ID list; graphical sprite rendering
+is not exercised by item validation. The adapter is read-only and is not imported
+by the gameplay path. It neither changes item creation semantics nor opens saves.
 
 ## Author a container's loot pool
 
@@ -40,7 +106,7 @@ validation authority. No campaign, running game or Internet service is required.
 Only immediate `roguelike/data/loot_pools/<safe-id>.json` single-object definitions
 are writable in this family (17 at the W3A baseline; 79 loaded item IDs).
 `data/loot/` is a different legacy family. Nested/array-of-pools files,
-item/recipe editing and a general relationship graph are outside W3A.
+advanced item/recipe editing and a general relationship graph remain unsupported.
 
 | Supported field | Current authoritative behavior |
 | --- | --- |
@@ -65,8 +131,8 @@ structure preview establishes observed population. Samples do not establish
 frequencies, effect behavior or natural world selection. Item/reference lists
 are catalogue snapshots; reopen after external dependency edits.
 
-The host retains one building and one pool capability. Saving either revokes
-reviews for both; the frontend clears verdicts while retaining the other draft.
+The host retains one building, pool and item capability. Saving any revokes
+all reviews; the frontend clears verdicts while retaining the other drafts.
 Every apply remains one reviewed byte string and one confined target, with fresh
 validation, conflicts and rollback. No general filesystem permission, new write
 endpoint or multi-file transaction was added.
@@ -250,9 +316,11 @@ npm.cmd run test:desktop             # built RELEASE executable; real WebView2
 npm.cmd run test:authoring           # disposable data + native apply/reopen/restart journey
 npm.cmd run test:visual              # native canvas + exact draft preview + variant/reopen
 npm.cmd run test:pools               # native container → pool → item and two variants
+npm.cmd run test:items               # native new item → new pool → real factory/population
 & $env:RESONANCE_PYTHON -B worker/test_authoring.py
 & $env:RESONANCE_PYTHON -B worker/test_visual.py
 & $env:RESONANCE_PYTHON -B worker/test_pools.py
+& $env:RESONANCE_PYTHON -B worker/test_items.py
 ```
 
 `scripts/desktop-test.mjs` opens a test-owned native window and sends app-local
@@ -282,7 +350,8 @@ CPython runtime without the game dependency wheels.
 
 ## Contract and limits
 
-The protocol is **4**, worker/app **0.4.0**, game structure contract **g2-2**.
+The protocol is **5**, worker/app **0.5.0**, game structure contract **g2-2**,
+and the narrow read-only item adapter contract is **component-1**.
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
 opaque document token; validation grants a one-draft review token. Apply takes
@@ -290,7 +359,8 @@ that token and explicit confirmation, never an arbitrary destination or trusted
 frontend verdict. W2's validation token is issued only after the exact draft's
 production preview passes; apply repeats that check with the reviewed seed and
 fresh dependencies. Starting replacement validation revokes an older review even
-if the new worker fails or is cancelled. Variants stay beside the discovered source, in its existing building category or the immediate loot_pools directory.
+if the new worker fails or is cancelled. Variants stay beside the discovered source,
+in its building category, immediate loot_pools directory or supported component folder.
 There are no frontend filesystem/shell permissions, arbitrary Python evaluation
 or Git mutations. The only frontend capabilities are local close-event listening.
 
@@ -325,7 +395,7 @@ and raw source inspection remain available when the loader reports structural
 errors. Files over 1 MiB and unsafe destination names are outside W1 authoring.
 Other-family visual editing, special creation/deletion, new legend definitions,
 transform tools, other loot families, selection-profile changes, persistent edit history
-and automatic campaign migration remain outside W3A. Deferred physical specials
+and automatic campaign migration remain outside W3B. Deferred physical specials
 are visible and preserved, but block a successful draft preview with an explicit
 unsupported diagnostic. Other live special types are inspect-only on the canvas.
 
@@ -338,5 +408,5 @@ Refresh after external source/dependency changes. The palette represents the
 catalog at open time; every validation and apply rereads current dependencies.
 A generic schema registry and further W milestones remain separate work.
 
-See [W3A delivery and evidence](docs/W3A_DELIVERY.md), [W2 delivery and evidence](docs/W2_DELIVERY.md), [W1 delivery](docs/W1_DELIVERY.md)
+See [W3B delivery and evidence](docs/W3B_DELIVERY.md), [W3A delivery and evidence](docs/W3A_DELIVERY.md), [W2 delivery and evidence](docs/W2_DELIVERY.md), [W1 delivery](docs/W1_DELIVERY.md)
 and the unchanged historical [W0 delivery](docs/W0_DELIVERY.md).

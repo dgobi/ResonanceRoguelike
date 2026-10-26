@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { LayoutEditor } from "./LayoutEditor";
 import { PoolEditor } from "./PoolEditor";
+import { ItemEditor } from "./ItemEditor";
 import {
   CanvasHistory,
   diagnosticCell,
@@ -17,6 +18,8 @@ import {
   type Failure,
   type Preview,
   type SourceTrail,
+  type ItemTrail,
+  type ItemContext,
 } from "./protocol";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
 
@@ -30,6 +33,7 @@ type Verdict = {
   worker_version: string;
   contract: string;
   preview?: Preview;
+  item_context?: ItemContext;
 };
 type Disk = {
   changed: boolean;
@@ -53,6 +57,7 @@ export function Authoring({
   trail,
   onReturn,
   dependencyVersion = 0,
+  onItem, itemTrail, selectedItemId, onItemPool, poolEntryFocus,
 }: {
   document: Inspection;
   onDirty: (dirty: boolean) => void;
@@ -69,8 +74,15 @@ export function Authoring({
   trail?: SourceTrail | null;
   onReturn?: () => void;
   dependencyVersion?: number;
+  onItem?: (id: string, trail: ItemTrail) => void;
+  itemTrail?: ItemTrail | null;
+  selectedItemId?: string;
+  onItemPool?: (id: string) => void;
+  poolEntryFocus?: number;
 }) {
   const pool = document.route === "contextual_loot_pool";
+  const item = document.route === "item_definition";
+  const writable = !item || document.editable;
   const [draft, setDraft] = useState(document.raw),
     [editing, setEditing] = useState(false);
   const [tab, setTab] = useState("properties"),
@@ -103,6 +115,7 @@ export function Authoring({
     setVerdict(null);
     setConfirm(false);
   }, [dependencyVersion]);
+  useEffect(() => { version.current++; setConfirm(false); }, [active]);
   useEffect(() => {
     onDirty(dirty);
   }, [dirty, onDirty]);
@@ -233,6 +246,7 @@ export function Authoring({
     } catch (e) {
       onError(asFailure(e));
       setVerdict(null);
+      onDirty(latest.current !== document.raw);
     } finally {
       setBusy("");
     }
@@ -261,8 +275,16 @@ export function Authoring({
         onEdit={visualEdit} onUndo={() => historyStep(false)} onRedo={() => historyStep(true)}
         canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
         trail={trail} onReturn={onReturn} busy={!!busy} onCancel={onCancel}
+        onItem={(id, index) => onItem?.(id, {poolId: String(values.id || document.id), path: target, index, itemId: id, structure: trail})}
+        focusEntry={poolEntryFocus}
       />, canvasHost)}
-      {active && !pool && canvasHost &&
+      {active && item && canvasHost && createPortal(<ItemEditor
+        draft={draft} path={target} context={verdict?.item_context || document.item_context} selectedId={selectedItemId}
+        dirty={dirty} validated={!!verdict?.valid} disabled={!writable ? "Read-only item family or ambiguous source." : !editing ? "Begin edit to change this component." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
+        busy={!!busy} onCancel={onCancel} trail={itemTrail} onReturn={onReturn} onPool={onItemPool} onSource={() => setTab("source")}
+        onEdit={visualEdit} onUndo={() => historyStep(false)} onRedo={() => historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
+      />, canvasHost)}
+      {active && !pool && !item && canvasHost &&
         createPortal(
           <LayoutEditor
             draft={draft}
@@ -318,7 +340,7 @@ export function Authoring({
               : "Read-only · source unchanged"}
       </p>
       <p className="muted small">
-        {pool ? "contextual_loot_pool" : `ordinary_building · ${document.width} × ${document.height} · ${document.special_count} specials`} · file {document.sha256.slice(0, 12)}
+        {item ? "item_definition" : pool ? "contextual_loot_pool" : `ordinary_building · ${document.width} × ${document.height} · ${document.special_count} specials`} · file {document.sha256.slice(0, 12)}
       </p>
       {!!disk?.recovery_files.length && (
         <p className="notice warning">
@@ -329,7 +351,7 @@ export function Authoring({
       {!editing ? (
         <button
           className="primary full"
-          disabled={!!busy}
+          disabled={!!busy || !writable}
           onClick={() => setEditing(true)}
         >
           Begin edit
@@ -373,7 +395,8 @@ export function Authoring({
             }}
           />
           <small>
-            {pool ? "Saved beside the source. No container is reassigned. Return to a structure variant to link it deliberately."
+            {item ? "Saved beside the source. Choose the new item ID explicitly in a new pool variant; no pool is reassigned."
+              : pool ? "Saved beside the source. No container is reassigned. Return to a structure variant to link it deliberately."
               : "Saved beside the source. Current procedural selection profiles are unchanged. Legacy flat-pool contexts may discover added files."}
           </small>
         </label>
@@ -391,7 +414,7 @@ export function Authoring({
       </div>
       {tab === "properties" && (
         <div className="typed-fields">
-          <label>
+          {!item && <label>
             Description
             <textarea
               aria-label="Description"
@@ -404,8 +427,8 @@ export function Authoring({
               }
               onChange={(e) => property("description", e.target.value)}
             />
-          </label>
-          {!pool && <label>
+          </label>}
+          {!pool && !item && <label>
             Legacy corner-scatter weight
             <input
               aria-label="Legacy corner-scatter weight"
@@ -427,7 +450,8 @@ export function Authoring({
             />
           </label>}
           <p className="muted small">
-            {pool ? "Description is retained metadata. Edit item IDs, weights and roll bounds in the table. Unknown fields remain in Source."
+            {item ? "Component controls share this source draft, history and validation. Advanced definitions are read-only. Use References, Use binding and Factory result to distinguish declarations from observed instances."
+              : pool ? "Description is retained metadata. Edit item IDs, weights and roll bounds in the table. Unknown fields remain in Source."
               : <>Description is retained metadata. Weight is a supported nonnegative
             scalar; current planned selection uses separate profiles. Geometry,
             specials and all other fields remain available in Source.</>}
@@ -435,7 +459,7 @@ export function Authoring({
           <div className={"validation " + (document.valid ? "pass" : "fail")}>
             <strong>
               {document.valid
-                ? "✓ Production validator passed"
+                ? item ? "✓ Source references and factory passed" : "✓ Production validator passed"
                 : "× Source validation failed"}
             </strong>
             <small>
@@ -446,11 +470,11 @@ export function Authoring({
       )}
       {tab === "source" && (
         <>
-          <label htmlFor={pool ? "pool-draft-json" : "draft-json"}>
+          <label htmlFor={item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}>
             {editing ? "Draft JSON" : "Source JSON"}
           </label>
           <textarea
-            id={pool ? "pool-draft-json" : "draft-json"}
+            id={item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}
             className="source-editor"
             spellCheck={false}
             value={draft}
@@ -487,7 +511,7 @@ export function Authoring({
               </p>
               <p>{d.message}</p>
               <small>{d.correction}</small>
-              {!pool && diagnosticCell(d, layoutModel(draft).model) && (
+              {!pool && !item && diagnosticCell(d, layoutModel(draft).model) && (
                 <button
                   onClick={() =>
                     setFocus(diagnosticCell(d, layoutModel(draft).model))
@@ -501,6 +525,7 @@ export function Authoring({
           <p className="muted">
             {dirty && !verdict
               ? "Displayed source diagnostics are from the opened file. Validate the draft for a current verdict."
+              : item ? "Item checks use the current loader, component capability, instance schema and actual factory. No interactive use is executed."
               : pool ? "Pool validation uses the current loader and container-pool validator. No population is sampled here."
               : "Draft validation includes a centered production stamp and initial population. Access checks use the declared main entrance when present."}
           </p>
@@ -589,13 +614,15 @@ export function Authoring({
             <h2>Apply this one content file?</h2>
             <code>{target}</code>
             <p>
-              {pool && variant ? "Creates one new pool. No structure or world is changed; the pool may remain unused until explicitly referenced."
+              {item && variant ? "Creates one new item. Existing pools and held instances are unchanged. Deliberately reference it from a new pool variant."
+                : pool && variant ? "Creates one new pool. No structure or world is changed; the pool may remain unused until explicitly referenced."
                 : variant
                 ? "This creates a new definition. It does not add entries to current town or roadside selection profiles. Older flat-pool contexts can discover new definitions."
                 : "This changes the meaning of an existing ID. Saved pending worlds may depend on its old content. Prefer a new variant for changed identity or meaning."}
             </p>
             <p>
-              {pool ? "Current pool draft passed loader identity, item references and consumer constraints. The host rechecks the exact reviewed bytes and current dependencies before publishing."
+              {item ? "Exact item bytes passed source identity, component rules and real factory construction. The host repeats those checks before publishing."
+                : pool ? "Current pool draft passed loader identity, item references and consumer constraints. The host rechecks the exact reviewed bytes and current dependencies before publishing."
                 : <>Current draft: valid contract, references and centered production
               preview. Host rechecks these exact bytes before publishing.
               Natural selection and other transforms remain unverified.</>}

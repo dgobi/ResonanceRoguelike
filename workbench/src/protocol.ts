@@ -36,6 +36,8 @@ export type Asset = {
   editable: boolean;
   provenance: string;
   validation: string;
+  pointer?: string;
+  source_paths?: string[];
 };
 export type Diagnostic = {
   severity: string;
@@ -52,6 +54,7 @@ export type Diagnostic = {
 };
 export type Inspection = Asset & {
   pool_context?: PoolContext;
+  item_context?: ItemContext;
   route: string;
   description: string;
   special_count: number;
@@ -67,6 +70,17 @@ export type Inspection = Asset & {
   catalog?: Catalog;
 };
 export type SourceTrail = { id: string; path: string; sourcePath: string; sourceHash: string; index: number; x: number; y: number; decor: string; poolId: string };
+export type ItemTrail = { poolId: string; path: string; index: number; itemId: string; structure?: SourceTrail | null };
+export type FactoryResult = {item_id: string; instance: Record<string, unknown>; comparisons: {field: string; declared: unknown; instance: unknown; equal: boolean}[]; consumer: string; scope: string; definition_sha256: string; source: Source; path: string; observed_at_utc: string; loaded_catalog_sha256: string};
+export type ItemRecord = {
+  id: string; pointer: string; definition: Record<string, unknown>; diagnostics: Diagnostic[];
+  capability: {contract: string; editable: boolean; fields: string[]; reason: string; weight_unit: string; tier_min: number; tier_max: number; tier_note: string; stack_note: string};
+  use: {declared: unknown; status: string; consumer: string; handler: string | null; line: number | null; scope: string; notes: string[]};
+  pools: {id: string; path: string; pointer: string; index: number; field: string; unique: boolean}[];
+  dependencies: {kind: string; field: string; id: string; resolved?: boolean; paths?: string[]; note?: string}[];
+  factory: FactoryResult | null;
+};
+export type ItemContext = {records: ItemRecord[]; keywords: Record<string, {display?: string; description?: string}>; snapshot: string};
 export type PoolContext = {
   items: Record<string, {id: string; name: string; resolved: boolean; sources: {path: string; pointer: string; definition: Record<string, unknown>}[]}>;
   references: {id: string; path: string; field: string; x: number; y: number; decor_id: string}[];
@@ -122,7 +136,7 @@ export async function call<T>(
   args?: Record<string, unknown>,
 ): Promise<{ result: T; elapsed: number }> {
   const envelope = await invoke<Envelope<T>>(command, args);
-  if (envelope.protocol !== 4 || typeof envelope.id !== "string")
+  if (envelope.protocol !== 5 || typeof envelope.id !== "string")
     throw {
       code: "PROTOCOL_MISMATCH",
       message: "Unexpected host/worker protocol.",
