@@ -7,7 +7,7 @@ from generation.context import GenerationContext, GenerationError, GENERATION_RE
 from generation.spawn_specs import resolve_special
 
 
-def populate(data, item_factory, creature_factory, local_map, specs, *, map_text=False, receipts=None):
+def populate(data, item_factory, creature_factory, local_map, specs, *, map_text=False, receipts=None, authored_arrival=None):
     """Validate/materialize all content before mutating the candidate's object layers."""
     from generation.floor_object_utils import place_floor_object, place_container
     from engine.loot_roller import roll_pools
@@ -15,13 +15,39 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
     plans, actors, deferred, observations = [], [], [], []
     containers = set(local_map.container_state)
     from generation.structure_contract import Validator, StructureError
-    validation = Validator(data, '<scene population>', str(context.address))
+    route = 'authored_submap' if authored_arrival is not None else None
+    validation = Validator(data, '<scene population>', str(context.address), route)
     for index, raw in enumerate(specs):
-        if not isinstance(raw, dict) or raw.get('kind', raw.get('type')) != 'creature':
+        if route or not isinstance(raw, dict) or raw.get('kind', raw.get('type')) != 'creature':
             source = raw.get('source', f'spawns[{index}]') if isinstance(raw, dict) else f'spawns[{index}]'
             validation.special(raw, source, local_map.width, local_map.height)
     if any(d.severity == 'error' for d in validation.diagnostics):
         raise StructureError(validation.diagnostics)
+
+    resolved = []
+    for index, raw in enumerate(specs):
+        source = raw.get('source', f'scene {context.address} spawn[{index}]')
+        spec = (dict(raw) if not route and raw.get('kind', raw.get('type')) == 'creature'
+                else resolve_special(raw, context.rng('weighted-special-adapter', index), source, route=route))
+        resolved.append((source, spec))
+    if route:
+        blocked = {xy for xy, decor in local_map.decor.items()
+                   if data.decoratives.get(decor, {}).get('blocks_movement', False)}
+        blocked.update((s['x'], s['y']) for _, s in resolved if s['kind'] == 'container'
+                       and data.decoratives[s.get('decor_id', 'crate')].get('blocks_movement', False))
+        occupied = set()
+        for source, spec in resolved:
+            if spec['kind'] != 'creature':
+                continue
+            xy = spec['x'], spec['y']
+            terrain = str(local_map.tiles[xy]['terrain'])
+            if (not local_map.walkable[xy] or xy in blocked or
+                    (not data.terrain.get(terrain, {}).get('creature_passable', True)
+                     and not data.entities[spec['creature_id']].get('can_swim', False))):
+                raise GenerationError(f'{source}: creature at {xy} is blocked by terrain/decor or creature_passable restriction')
+            if xy in occupied or xy == tuple(authored_arrival) or terrain in ('stairs_up', 'stairs_down'):
+                raise GenerationError(f'{source}: creature at {xy} overlaps an actor, player arrival or physical stair')
+            occupied.add(xy)
 
     def item(item_id, x, y, source, text_id=''):
         if text_id and map_text:
@@ -35,15 +61,10 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             value.text_id = text_id
         return value
 
-    for index, raw in enumerate(specs):
-        source = raw.get('source', f'scene {context.address} spawn[{index}]')
-        if raw.get('kind', raw.get('type')) == 'creature':
-            spec = dict(raw)
-        else:
-            spec = resolve_special(raw, context.rng('weighted-special-adapter', index), source)
+    for index, (source, spec) in enumerate(resolved):
         kind, x, y = spec['kind'], spec['x'], spec['y']
         observation = dict(record_id=spec.get('record_id', f'spawn[{index}]'), source=source,
-                           kind=kind, source_xy=[x,y], selected_branch=spec.get('selected_branch'), objects=[])
+                           kind=kind, source_xy=spec.get('source_xy', [x,y]), selected_branch=spec.get('selected_branch'), objects=[])
         observations.append(observation)
         if kind in ('body', 'stele'):
             deferred.append(dict(source=source, kind=kind, x=x, y=y))
@@ -102,6 +123,9 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             if actor is None:
                 raise GenerationError(f'{source}: creature factory rejected {creature_id!r}')
             actors.append(actor)
+            observation['actors'] = [actor]
+            from generation.placement import digest
+            observation['creature_definition'] = dict(id=creature_id, sha256=digest(data.entities[creature_id]))
         observation['objects'] = [p[3] for p in plans[first_plan:]]
     # These ownership APIs are reached only after every record and factory succeeds.
     for kind, x, y, value in plans:
@@ -156,11 +180,21 @@ def create_submap(world, wx, wy, submap, data, item_factory, creature_factory, w
     staged = copy.deepcopy(submap)
     context = GenerationContext(world.seed, submap.seed, (wx, wy, submap.submap_id))
     local_map, specs = generate_submap(staged, width, height, data.terrain, data=data, context=context)
-    actors = populate(data, item_factory, creature_factory, local_map, specs)
+    arrival = staged.entry_x, staged.entry_y
+    if submap.layout_id and any(s['kind'] == 'creature' for s in specs):
+        # Entry can be a closed door. Share the engine's actual arrival selector
+        # (which does not access self), rather than reserving only player_start.
+        from engine.engine import Engine
+        arrival = Engine._find_walkable_near(None, local_map, *arrival)
+    receipts = []
+    actors = populate(data, item_factory, creature_factory, local_map, specs, receipts=receipts,
+                      authored_arrival=arrival if submap.layout_id else None)
     if not local_map.in_bounds(staged.entry_x, staged.entry_y) or not _enterable(local_map, (staged.entry_x, staged.entry_y), data):
         raise GenerationError(f'{submap.submap_id}: invalid arrival')
     from collections import deque
-    reached, pending = {(staged.entry_x, staged.entry_y)}, deque([(staged.entry_x, staged.entry_y)])
+    if actors and not _enterable(local_map, arrival, data):
+        raise GenerationError(f'{submap.submap_id}: invalid actual player arrival {arrival}')
+    reached, pending = {arrival}, deque([arrival])
     while pending:
         x, y = pending.popleft()
         for dx in (-1, 0, 1):
@@ -173,7 +207,7 @@ def create_submap(world, wx, wy, submap, data, item_factory, creature_factory, w
         raise GenerationError(f'{submap.submap_id}: no usable return stair from arrival')
     local_map.generation_revision = GENERATION_REVISION
     local_map.generation_complete = True
-    return SceneResult(local_map, actors, (staged.entry_x, staged.entry_y), staged)
+    return SceneResult(local_map, actors, arrival, staged, receipts)
 
 
 def _enterable(local_map, xy, data):

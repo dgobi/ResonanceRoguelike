@@ -1,0 +1,21 @@
+{
+  "id": "g17_authored_creature_room",
+  "width": 11,
+  "height": 7,
+  "layers": [
+    "###########",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#.........#",
+    "#.<.......#",
+    "###########"
+  ],
+  "legend": {"#": "wall", ".": "floor", "<": "stairs_up"},
+  "player_start": {"x": 2, "y": 5},
+  "special_tiles": [
+    {"type": "creature", "x": 7, "y": 2, "creature_id": "hollow_revenant"},
+    {"type": "item", "x": 7, "y": 2, "item_id": "wood_bundle"},
+    {"type": "container", "x": 8, "y": 4, "decor_id": "crate", "loot_pools": ["storage_tools"]}
+  ]
+}

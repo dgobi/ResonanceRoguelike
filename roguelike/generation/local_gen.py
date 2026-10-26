@@ -234,7 +234,8 @@ def _generate_submap_from_layout(
 
     from generation.spawn_specs import transformed_specials
     entities = transformed_specials(layout.get('special_tiles', []), context,
-                                    layout.get('id', submap.layout_id), origin_x, origin_y, lay_h)
+                                    layout.get('id', submap.layout_id), origin_x, origin_y, lay_h,
+                                    route='authored_submap')
     for spec in entities:
         if spec['kind'] == 'stele':
             local_map.stele_text_ids[(spec['x'], spec['y'])] = spec.get('text_id', '')

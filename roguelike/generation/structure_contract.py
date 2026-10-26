@@ -12,7 +12,7 @@ import math
 from pathlib import Path
 from generation.context import GenerationError
 
-CONTRACT_VERSION = 'g2-1'
+CONTRACT_VERSION = 'g2-2'
 ROUTES = ('ordinary_building', 'plaza', 'interior_entrance', 'authored_submap')
 ELIGIBILITY = {
     'civic': ['C'], 'religious': ['C'], 'commercial': ['C','N','S','E','W'],
@@ -32,6 +32,7 @@ CAPABILITIES = {
         'transforms': ['normal'], 'inactive': ['variant','connection_point','spawn_offset','edges','decor_layer','special_tiles','player_start']},
     'authored_submap': {'active': ['layers','legend','special_tiles','player_start','exit_direction','exit_x','exit_y'],
         'selection': 'Explicit SubMap.layout_id; no ordinary placement pool.',
+        'creatures': 'Direct top-level creature_id only; one non-player factory actor; initial occupancy validated before publication.',
         'transforms': ['normal'], 'inactive': ['type','stairs_up','decor_layer','legend_weights','inscription','rotatable','tags']},
 }
 
@@ -88,8 +89,9 @@ class CompiledStructure:
 
 
 class Validator:
-    def __init__(self, data, path, asset):
+    def __init__(self, data, path, asset, route=None):
         self.data, self.path, self.asset = data, str(path), asset
+        self.route = route
         self.diagnostics = []
 
     def issue(self, code, field, message, correction, severity='error'):
@@ -172,6 +174,19 @@ class Validator:
             rows=row.get('spawn_table')
             if self.weights(rows,field+'.spawn_table'):
                 for n,choice in enumerate(rows): self.special(choice,f'{field}.spawn_table[{n}]',width,height,row)
+        elif kind == 'creature':
+            if self.route != 'authored_submap' or parent is not None:
+                self.issue('CREATURE_ROUTE',field,'Creatures require a direct authored_submap special.',
+                           'Use one top-level creature in an authored underground layout; weighted and surface routes are unsupported.')
+            identifier = row.get('creature_id')
+            if self.reference(identifier,'entities',field+'.creature_id'):
+                if identifier == 'player' or (self.data is not None and
+                        (not isinstance(self.data.entities[identifier], dict) or not self.data.entities[identifier])):
+                    self.issue('CREATURE_DEFINITION',field+'.creature_id','Expected a supported non-player creature definition.',
+                               'Choose an existing creature, such as hollow_revenant, from this data root.')
+            for key in set(row)-{'type','kind','x','y','creature_id','record_id','source','source_xy'}:
+                self.issue('CREATURE_FIELD',field+'.'+key,'Unsupported creature field.',
+                           'Use x, y and creature_id only; one record creates one factory actor.')
         elif kind == 'item':
             self.reference(row.get('item_id'),'items',field+'.item_id')
             if 'text_id' in row:
@@ -210,7 +225,7 @@ class Validator:
 
 
 def compile_structure(raw, route, data=None, *, path='<memory>', category=None):
-    v=Validator(data,path,raw.get('id','') if isinstance(raw,dict) else '')
+    v=Validator(data,path,raw.get('id','') if isinstance(raw,dict) else '',route)
     if route not in ROUTES: v.issue('ROUTE','',f'Unknown route {route!r}.','Select an explicit supported route.')
     if not isinstance(raw,dict):
         v.issue('ROOT','','Structure root must be one JSON object.','Split lists into individual object files.')

@@ -1,5 +1,11 @@
 # Resonance roguelike — production main
 
+G17 supports one direct existing creature per authored underground special,
+with initial occupancy checks and atomic scene construction. The editable room
+and production preview remain documentation examples, outside native selection.
+See [G17 delivery](docs/owner/GAMEPLAY_G17.md) and the
+[authoring contract](roguelike/docs/STRUCTURE_AUTHORING.md#g17-one-creature-in-an-authored-underground-room).
+
 G16 adds a furnished preparation workshop with one finite musk gland and wood
 bundle in its crate. Emptying and dismantling the crate supplies the second wood
 for a Field Campfire. Light the placed fire, dry the gland for ten phases and
@@ -48,6 +54,7 @@ $ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\
 & $ResonancePython -X utf8 tools/verify_g14.py --evidence evidence/gameplay-g14/owner-verification
 & $ResonancePython -X utf8 tools/verify_g15.py --evidence evidence/gameplay-g15/owner-verification
 & $ResonancePython -X utf8 tools/verify_g16.py --evidence evidence/gameplay-g16/owner-verification
+& $ResonancePython -X utf8 tools/verify_g17.py --evidence evidence/gameplay-g17/owner-verification
 ```
 
 The interpreter path supplies dependencies only; game code runs from this checkout.

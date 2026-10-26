@@ -1,5 +1,61 @@
 # Make a building or layout for Resonance
 
+## G17: one creature in an authored underground room
+
+The complete editable [room](examples/g17_authored_creature_room.json) and
+[access sidecar](examples/g17_authored_creature_room.access.json) demonstrate
+the `authored_submap` route. A direct top-level special creates exactly one real
+`CreatureFactory` actor:
+
+```json
+{"type":"creature","x":7,"y":2,"creature_id":"hollow_revenant"}
+```
+
+Coordinates are integers in the source grid (booleans are invalid).
+`creature_id` must name an existing non-player definition in the selected data
+root. `player`, unknown IDs, missing coordinates, contradictory `type`/`kind`,
+weighted creatures and unsupported fields such as count, groups or overrides
+fail validation. Creatures in ordinary buildings, plazas and entrance layouts
+remain unsupported, including specials those routes otherwise leave inactive.
+An authored room is centered and translated into the 80×43 scene; it is never
+rotated or mirrored. A requested vertical-mirror preview fails explicitly.
+
+Before any batch objects are committed, initial actor cells must be walkable,
+free of blocking decor/containers (including later records), distinct from
+other authored actors, the actual player arrival and every physical up/down
+stair. Terrain with `creature_passable:false` also requires `can_swim:true` on
+the creature; swimming never permits walls or blocking decor. Floor items can
+share an actor cell, as the example's wood bundle does. A corridor guard is
+legal: the whole route to the exit is not reserved from enemies. These are
+construction rules; movement, combat and internal native populations keep
+their existing policies. A failed record/factory leaves the candidate's object
+layers and live scene publication untouched.
+
+From the repository root, using the established interpreter:
+
+```powershell
+$ResonancePython = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
+& $ResonancePython -X utf8 tools/structure_authoring.py roguelike/docs/examples/g17_authored_creature_room.json --route authored_submap --access roguelike/docs/examples/g17_authored_creature_room.access.json --output .baseline/g17-room-preview.json
+```
+
+The existing CLI compiles the candidate and uses the production layout transform,
+scene builder and factory. `population_receipts` retain source asset/path,
+record identity, original `source_xy`, final `xy`, serialized actual actors and
+their count, plus the consumed creature definition's semantic SHA-256. The
+report supplies world/scene seeds, scene address and candidate/catalog identity.
+Actor receipts use actor serialization, separately from item/container objects.
+The revealed diagram and static access checks inspect geometry and initial
+occupancy. They do not imply safe passage past a hostile actor or establish
+encounter balance.
+
+The example is documentation, outside `data/layouts/`; it adds no native
+destination or catalogue membership. To use an authored layout in play, explicit
+`SubMap.layout_id` binding is still required. Blank saved IDs keep BSP generation,
+regardless of `submap_type`. G17 changes the authoring manifest to `g2-2` and
+refreshes its editor catalogue without changing `structure-v1` placement hashes,
+world/scene revisions, save schema or old source definitions. Existing authored
+layouts without creatures, including the starting laboratory, retain their route.
+
 G16's `commercial/workshop_b.json` is a complete versioned furnishing example:
 12×9 envelope, double southern entrance, all four rotations, table terrain,
 hanging-cloth decor, supported item/text/scene specials and one real crate.

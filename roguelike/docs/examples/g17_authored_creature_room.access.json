@@ -1,0 +1,9 @@
+{
+  "coordinates": "source",
+  "entry": {"x": 2, "y": 5},
+  "targets": [
+    {"x": 2, "y": 5, "kind": "stairs_up", "required": true},
+    {"x": 7, "y": 2, "kind": "item", "required": true},
+    {"x": 8, "y": 4, "kind": "container", "required": true}
+  ]
+}

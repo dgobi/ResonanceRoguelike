@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "scope": "Development preflight before final input freeze; final gates rerun the example and three-process encounter.",
+  "checks": [
+    {
+      "command": "production Python -m unittest -v test_gameplay_g17",
+      "result": "8 passed",
+      "test_seconds": 3.037,
+      "log": "preflight-tests.txt"
+    },
+    {
+      "command": "production Python -m unittest -v test_gameplay_g17 test_structure_contract test_generation_ownership",
+      "result": "29 passed",
+      "test_seconds": 13.998,
+      "log": "preflight-related-tests.txt"
+    },
+    {
+      "command": "production Python tools/g17_journey.py --evidence .baseline/g17-encounter-preflight-e",
+      "result": "passed three original-loop processes; wounded actor, ordinary defeat, cache/disk revisit",
+      "final_source_claim": false
+    }
+  ],
+  "development_corrections": [
+    "Generic synthetic surface lacked required scene/plan provenance; use the real generated surface, disclosed 3x3 link edits and omitted native occupants.",
+    "Driver incorrectly expected blocks_movement=False immediately on the defeated actor, then incorrectly expected a retained actor after ordinary turn cleanup. Assertions now follow real cleanup and floor remains. No death/save runtime change.",
+    "Source review found that closed-door player_start can select a different actual arrival; reserve the existing engine selector result and cover it before freeze."
+  ],
+  "visual_review": "Inspected normal-FOV arrival and ordinary defeated/remains views from preflight-e; coherent 1280x720 production rendering.",
+  "source": {
+    "roguelike/engine/scene_generation.py": "535bd94b46af998a4236f7aba4e5dde3ccb233300738900cb0c7480c3173732d",
+    "tools/critical_fix_regressions/tests/test_gameplay_g17.py": "9a4e9d9d0761b53784bd006038e2d6774aacf4be2bd9955f0b20fc20406e9629"
+  }
+}

@@ -19,12 +19,14 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
     from world.local_map import LocalMap, make_tile
     from world.world_map import SubMap
     entry=compile_structure(raw,route,data,path=path,category=category)
+    if route == 'authored_submap' and flip_v:
+        raise GenerationError(f'{path}: authored_submap supports centering/translation only; vertical mirroring is unsupported')
     context=GenerationContext(seed,stable_seed(data.structure_catalog.identity,json.dumps(raw,sort_keys=True)),
                               ('preview',route,raw['id'],flip_v))
     m=LocalMap(80,43,generation_context=context)
     m.tiles[:]=make_tile('grass',True,True)
     ox,oy=40-entry.width//2,21-entry.height//2
-    actors=[]; specs=[]; spawn=None
+    actors=[]; specs=[]; spawn=None; receipts=[]
     factory,creatures=ItemFactory(data),CreatureFactory(data)
     if route=='ordinary_building':
         specs=_stamp_building_at(m,entry.definition,ox,oy,data.terrain,flip_v=flip_v,data=data)
@@ -43,12 +45,26 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
         world=SimpleNamespace(seed=seed)
         result=create_submap(world,0,0,submap,bound,ItemFactory(bound),CreatureFactory(bound),80,43)
         m,actors,spawn=result.local_map,result.actors,result.spawn
+        from engine.save_manager import _serialize_entity
+        from engine.save_components import serialize_item
+        for receipt in result.receipts:
+            row = dict(receipt, source_asset=raw['id'], source_path=str(path))
+            row['objects'] = ([dict(decor_id=d, items=[serialize_item(i) for i in items])
+                               for d, items in receipt['objects']] if receipt['kind'] == 'container'
+                              else [serialize_item(i) for i in receipt['objects']])
+            row['actors'] = [_serialize_entity(a) for a in receipt.get('actors', [])]
+            row['actual_count'] = len(row['actors'])
+            receipts.append(row)
     m.generation_revision=GENERATION_REVISION
     report=snapshot(m,actors,data)
     report.update(route=route,asset=raw['id'],seed=seed,catalog_identity=data.structure_catalog.identity,
                   candidate_identity=hashlib.sha256(json.dumps(raw,sort_keys=True).encode()).hexdigest(),
                   kind='direct production consumer preview',flip_v=flip_v,origin=[ox,oy],
                   source_diagnostics=[d.json() for d in entry.diagnostics])
+    if route == 'authored_submap':
+        report.update(population_receipts=receipts, scene_seed=m.generation_context.scene_seed,
+                      scene_address=list(m.generation_context.address),
+                      inspection='Revealed static authoring geometry and initial occupancy; hostile actors remain hostile. No encounter balance claim.')
     if spawn is not None: report['spawn']=list(spawn)
     report['access']=check_access(m,data,expectations,origin=(ox,oy),height=entry.height,flip_v=flip_v,spawn=spawn)
     report['passed']=all(row['passed'] for row in report['access']) and not report['occupant_diagnostics']

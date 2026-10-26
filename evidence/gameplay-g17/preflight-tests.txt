@@ -1,0 +1,13 @@
+test_creature_specific_water_admission_does_not_override_wall_or_decor (test_gameplay_g17.AuthoredCreatures.test_creature_specific_water_admission_does_not_override_wall_or_decor) ... ok
+test_direct_factory_actor_translation_preview_and_mixed_ownership (test_gameplay_g17.AuthoredCreatures.test_direct_factory_actor_translation_preview_and_mixed_ownership) ... ok
+test_genuine_g16_pending_bsp_and_visited_state (test_gameplay_g17.AuthoredCreatures.test_genuine_g16_pending_bsp_and_visited_state) ... ok
+test_initial_obstructions_arrival_stairs_duplicates_and_batch_order (test_gameplay_g17.AuthoredCreatures.test_initial_obstructions_arrival_stairs_duplicates_and_batch_order) ... ok
+test_late_failure_preserves_existing_object_identity_and_receipts (test_gameplay_g17.AuthoredCreatures.test_late_failure_preserves_existing_object_identity_and_receipts) ... ok
+test_real_entry_rejects_late_factory_failure_without_publishing_or_departing (test_gameplay_g17.AuthoredCreatures.test_real_entry_rejects_late_factory_failure_without_publishing_or_departing) ... ok
+test_schema_diagnostics_ids_coordinates_conflicts_routes_and_fields (test_gameplay_g17.AuthoredCreatures.test_schema_diagnostics_ids_coordinates_conflicts_routes_and_fields) ... ok
+test_starting_lab_and_internal_population_keep_existing_contract (test_gameplay_g17.AuthoredCreatures.test_starting_lab_and_internal_population_keep_existing_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 3.037s
+
+OK
