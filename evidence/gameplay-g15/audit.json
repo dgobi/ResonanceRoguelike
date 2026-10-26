@@ -1,0 +1,133 @@
+{
+  "passed": true,
+  "baseline": "6b101d43389dba775b78cf4415c0ef638026f73c",
+  "frozen_inputs": "65607721fe9caa4eaa7affdd5568a32eda6bdb7e",
+  "source_inputs": 782,
+  "focused_tests": 274,
+  "production": {
+    "checks": 3676,
+    "passed": 3676,
+    "failed": 0,
+    "workers": 159
+  },
+  "imported_source_entries": 12890,
+  "source_unchanged": true,
+  "runner_negative_controls_reject": 7,
+  "preservation": {
+    "passed": true,
+    "baseline": "6b101d43389dba775b78cf4415c0ef638026f73c",
+    "protected_paths_unchanged": [
+      "evidence/gameplay-g14",
+      "evidence/gameplay-g13",
+      "tools/critical_fix_regressions/fixtures",
+      "Resonance_Wiki_Maintenance",
+      "roguelike/components",
+      "roguelike/generation",
+      "roguelike/data/recipes",
+      "roguelike/data/loot_pools/alchemist_reagents.json",
+      "roguelike/data/loot_pools/alchemist_shop.json",
+      "roguelike/data/decoratives.json",
+      "roguelike/data/buildings/commercial/apothecary_a.json",
+      "roguelike/data/buildings/storage/tool_shed_b.json",
+      "roguelike/engine/save_manager.py",
+      "roguelike/engine/save_components.py"
+    ],
+    "data_diff": [
+      "roguelike/data/buildings/commercial/apothecary_b.json",
+      "roguelike/data/generation/settlement_profiles.json",
+      "roguelike/data/items/consumables/herbal_dressing.json",
+      "roguelike/data/loot_pools/apothecary_b_treatment.json"
+    ],
+    "engine_diff": [
+      "roguelike/engine/inventory_screen.py",
+      "roguelike/engine/item_system.py"
+    ]
+  },
+  "historical_archive_sha256": "e4987c58eee50e43c7717b29b48c39a87c4ac43acdd86d6d8598676fd8cb53f6",
+  "historical_dependency_checks": 51,
+  "effect_boundary": {
+    "before_hp": 36,
+    "requested": 12,
+    "actual": 12,
+    "after_hp": 48,
+    "turn": 490
+  },
+  "hp_after_normal_turn": 48,
+  "cold_processes": {
+    "acquisition": 13412,
+    "use": 16788,
+    "consumed": 24752
+  },
+  "both_f9_restore_saved_snapshot_after_unsaved_movement": true,
+  "archive_crc_checks": true,
+  "measured_checks": [
+    {
+      "name": "focused",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+        "--game",
+        "G:\\GameDev\\RoguelikeProject\\roguelike",
+        "--timeout",
+        "3600",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g15\\final-a\\focused"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 1128.0364429000183,
+      "timeout": 3700
+    },
+    {
+      "name": "production",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\g15-production-final-a"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 517.6021963999956,
+      "timeout": 3600,
+      "receipt": "production/results.json"
+    },
+    {
+      "name": "historical",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g15_historical.py",
+        "--baseline",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g15\\pre-edit-historical.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g15\\final-a\\historical.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 2.9357711999909952,
+      "timeout": 90
+    },
+    {
+      "name": "treatment-journey",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g15_journey.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g15\\final-a\\journey"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 25.844861900026444,
+      "timeout": 360
+    }
+  ],
+  "gate_wall_seconds": 1157.4856704999693
+}

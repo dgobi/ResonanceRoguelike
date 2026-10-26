@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "pid": 24752,
+  "checkpoint_sha256": "44d397f9acf9f55cc2d2fb0459c1c50d6e68de2f4c599c58b23c3296d4e41b35",
+  "state": {
+    "player": "78934c0889fddef6456b1579ff58328362471af22721a112e913ea188740ecbb",
+    "world": "13ac14c5f2f9107159de781758e5258bece683d2b1ec06a321d8a5b2feefdada",
+    "scene": "d5099230e5e4e1325f39f398d30d5fa84c8c2c222892a47e24f82826cf9078c1",
+    "processing": [],
+    "zones": [],
+    "load": 5.6,
+    "knowledge": {},
+    "words": [],
+    "read": [],
+    "recovered": {}
+  }
+}
