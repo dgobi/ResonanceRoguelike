@@ -24,7 +24,18 @@ export type Identity = {
   preview: string;
   unavailable: string[];
 };
-export type Asset = { id: string; path: string; width: number; height: number };
+export type Asset = {
+  id: string;
+  path: string;
+  width: number;
+  height: number;
+  name?: string;
+  category?: string;
+  route: string;
+  editable: boolean;
+  provenance: string;
+  validation: string;
+};
 export type Diagnostic = {
   severity: string;
   code: string;
@@ -33,6 +44,8 @@ export type Diagnostic = {
   field: string;
   message: string;
   correction: string;
+  line?: number;
+  column?: number;
 };
 export type Inspection = Asset & {
   route: string;
@@ -46,6 +59,7 @@ export type Inspection = Asset & {
   mtime_ns: string;
   source_unchanged: boolean;
   source: Source;
+  document_token?: string;
 };
 export type Feature = {
   x: number;
@@ -95,7 +109,7 @@ export async function call<T>(
   args?: Record<string, unknown>,
 ): Promise<{ result: T; elapsed: number }> {
   const envelope = await invoke<Envelope<T>>(command, args);
-  if (envelope.protocol !== 1 || typeof envelope.id !== "string")
+  if (envelope.protocol !== 2 || typeof envelope.id !== "string")
     throw {
       code: "PROTOCOL_MISMATCH",
       message: "Unexpected host/worker protocol.",

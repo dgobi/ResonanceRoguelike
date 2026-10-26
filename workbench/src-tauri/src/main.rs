@@ -12,9 +12,10 @@ use std::{
     },
     time::{Duration, Instant},
 };
-use tauri::Manager;
+use tauri::{Emitter, Manager};
+mod authoring;
 
-const PROTOCOL: u64 = 1;
+const PROTOCOL: u64 = 2;
 const MAX_OUTPUT: u64 = 16 * 1024 * 1024;
 
 #[derive(Debug, Clone, Serialize)]
@@ -36,6 +37,9 @@ struct Session {
     child: Option<Child>,
     scratch: Option<tempfile::TempDir>,
     busy: bool,
+    discovered: std::collections::HashSet<String>,
+    document: Option<authoring::Document>,
+    applying: bool,
 }
 #[derive(Default, Clone)]
 struct Host {
@@ -46,6 +50,13 @@ struct Host {
 impl Host {
     fn cancel(&self, clear: bool) -> Result<(), Failure> {
         let mut state = self.inner.lock().unwrap();
+        if state.applying {
+            return Err(failure(
+                "BUSY",
+                "A validated file transaction is in progress.",
+                "Wait for its result before closing or cancelling.",
+            ));
+        }
         self.epoch.fetch_add(1, Ordering::SeqCst);
         if let Some(mut child) = state.child.take() {
             let _ = child.kill();
@@ -54,6 +65,8 @@ impl Host {
         state.busy = false;
         if clear {
             state.root = None;
+            state.discovered.clear();
+            state.document = None;
         }
         cleanup_scratch(&mut state)
     }
@@ -160,37 +173,56 @@ fn runtime(app: &tauri::AppHandle, root: &Path) -> Result<(PathBuf, PathBuf), Fa
     Ok((python, script))
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Default)]
 #[serde(deny_unknown_fields)]
 struct Request {
     op: String,
     asset: Option<String>,
     seed: Option<u32>,
     invalid_fixture: Option<bool>,
+    draft: Option<String>,
 }
 fn validate_request(request: &Request) -> Result<(), Failure> {
-    if !["identify", "describe", "inspect", "preview"].contains(&request.op.as_str()) {
+    if ![
+        "identify",
+        "describe",
+        "inspect",
+        "preview",
+        "validate_draft",
+    ]
+    .contains(&request.op.as_str())
+    {
         return Err(failure(
             "UNSUPPORTED_OPERATION",
             "Only W0 requests are allowed.",
             "Use the supported controls.",
         ));
     }
-    if ["inspect", "preview"].contains(&request.op.as_str()) {
+    if ["inspect", "preview", "validate_draft"].contains(&request.op.as_str()) {
         let asset = request.asset.as_deref().unwrap_or("");
         let parts: Vec<_> = asset.split('/').collect();
-        if parts.len() != 4
-            || parts[..3] != ["roguelike", "data", "layouts"]
-            || !parts[3].ends_with(".json")
-            || asset.contains(['\\', ':'])
-            || parts.contains(&"..")
-        {
+        let layout = parts.len() == 4
+            && parts[..3] == ["roguelike", "data", "layouts"]
+            && authoring::valid_filename(parts[3]);
+        if !layout && authoring::relative_building(asset).is_err() {
             return Err(failure(
                 "PATH_ESCAPE",
                 "Asset is outside the W0 layout route.",
                 "Select a shipped layout from the list.",
             ));
         }
+    }
+    if request
+        .draft
+        .as_ref()
+        .is_some_and(|s| s.len() > authoring::MAX_DRAFT)
+        || (request.op == "validate_draft") != request.draft.is_some()
+    {
+        return Err(failure(
+            "MALFORMED_REQUEST",
+            "Draft operation or size is invalid.",
+            "Use the bounded authoring controls.",
+        ));
     }
     if request.seed.is_some_and(|s| s > i32::MAX as u32)
         || (request.invalid_fixture == Some(true) && request.op != "inspect")
@@ -308,6 +340,9 @@ fn run_worker(
     if let Some(value) = request.invalid_fixture {
         input["invalid_fixture"] = json!(value);
     }
+    if let Some(value) = request.draft {
+        input["draft"] = json!(value);
+    }
     let sent = writeln!(child.stdin.take().unwrap(), "{}", input);
     if let Err(error) = sent {
         let _ = child.kill();
@@ -408,6 +443,18 @@ fn run_worker(
     }
     let mut response = parse_response(&bytes, &id)?;
     response["host_elapsed_ms"] = json!(start.elapsed().as_millis() as u64);
+    if input["op"] == "describe" && response["ok"] == true {
+        let mut state = host.inner.lock().unwrap();
+        if host.epoch.load(Ordering::SeqCst) == expected_epoch {
+            state.discovered = response["result"]["assets"]
+                .as_array()
+                .into_iter()
+                .flatten()
+                .filter(|a| a["editable"] == true)
+                .filter_map(|a| a["path"].as_str().map(str::to_owned))
+                .collect();
+        }
+    }
     Ok(response)
 }
 
@@ -439,6 +486,7 @@ async fn open_project(
                 asset: None,
                 seed: None,
                 invalid_fixture: None,
+                draft: None,
             },
             epoch,
         )
@@ -452,6 +500,13 @@ async fn worker_request(
     host: tauri::State<'_, Host>,
     request: Request,
 ) -> Result<Value, Failure> {
+    if host.inner.lock().unwrap().applying || request.op == "validate_draft" {
+        return Err(failure(
+            "UNSUPPORTED_OPERATION",
+            "Use the document authoring boundary.",
+            "Open a discovered building.",
+        ));
+    }
     let epoch = host.epoch.load(Ordering::SeqCst);
     let host = host.inner().clone();
     tauri::async_runtime::spawn_blocking(move || run_worker(app, host, request, epoch))
@@ -475,9 +530,23 @@ fn main() {
             open_project,
             worker_request,
             cancel_worker,
-            close_project
+            close_project,
+            authoring::open_document,
+            authoring::validate_document,
+            authoring::apply_document,
+            authoring::document_disk,
+            authoring::finish_close
         ])
         .on_window_event(|window, event| {
+            if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                let host = window.state::<Host>();
+                let state = host.inner.lock().unwrap();
+                if state.applying || state.document.is_some() {
+                    api.prevent_close();
+                    let _ = window.emit("authoring-close-requested", ());
+                    return;
+                }
+            }
             if matches!(
                 event,
                 tauri::WindowEvent::CloseRequested { .. } | tauri::WindowEvent::Destroyed
@@ -514,7 +583,8 @@ mod tests {
                 op: "inspect".into(),
                 asset: Some(asset.into()),
                 seed: None,
-                invalid_fixture: None
+                invalid_fixture: None,
+                draft: None
             })
             .is_err());
         }
@@ -522,16 +592,17 @@ mod tests {
             op: "exec".into(),
             asset: None,
             seed: None,
-            invalid_fixture: None
+            invalid_fixture: None,
+            draft: None
         })
         .is_err());
     }
     #[test]
     fn strict_envelopes() {
-        assert!(parse_response(br#"{"protocol":1,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
+        assert!(parse_response(br#"{"protocol":2,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
         for bytes in [
             br#"log line\n{}"#.as_slice(),
-            br#"{"protocol":2,"id":"x","ok":true,"result":{}}"#,
+            br#"{"protocol":1,"id":"x","ok":true,"result":{}}"#,
             br#"{"protocol":1,"id":"y","ok":true,"result":{}}"#,
             br#"{"protocol":1,"id":"x","ok":true}"#,
             br#"{} {}"#,

@@ -3,5 +3,5 @@
   "identifier": "main",
   "description": "Local window only. No frontend filesystem, shell, HTTP, or dialog plugin permissions.",
   "windows": ["main"],
-  "permissions": []
+  "permissions": ["core:event:allow-listen", "core:event:allow-unlisten"]
 }

@@ -7,7 +7,7 @@ import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 
 const workbench = fileURLToPath(new URL("..", import.meta.url));
-const root = resolve(workbench, "..");
+const root = process.env.WORKBENCH_TEST_ROOT || resolve(workbench, "..");
 const executable = resolve(
   process.env.WORKBENCH_EXE ||
     resolve(workbench, "src-tauri/target/release/resonance-workbench.exe"),
@@ -26,7 +26,8 @@ const env = {
   WEBVIEW2_USER_DATA_FOLDER: resolve(output, "webview-profile"),
 };
 if (mode !== "development") delete env.RESONANCE_PYTHON;
-if (mode === "portable-clean") env.PATH = `${process.env.SystemRoot}\\System32;${process.env.SystemRoot}`;
+if (mode === "portable-clean")
+  env.PATH = `${process.env.SystemRoot}\\System32;${process.env.SystemRoot}`;
 if (mode === "missing-worker")
   env.RESONANCE_PYTHON = resolve(output, "does-not-exist.exe");
 if (mode === "missing-dependency")
@@ -110,7 +111,39 @@ try {
   await page
     .getByRole("button", { name: "Open directory", exact: true })
     .click();
-  if (mode === "slow-worker") {
+  if (mode === "interrupted-draft" || mode === "restart-draft") {
+    const asset = "roguelike/data/buildings/commercial/workshop_b.json";
+    const source = await readFile(resolve(root, asset));
+    await page
+      .locator('[data-testid="map"][data-ready="true"]')
+      .waitFor({ timeout: 30000 });
+    await page.getByLabel("Search ID, name or path").fill(asset);
+    await page.locator(`[data-asset="${asset}"]`).click();
+    await page.waitForFunction(() => !document.querySelector(".busy-overlay"));
+    const opened = await page
+      .getByLabel("Description", { exact: true })
+      .inputValue();
+    assert.equal(opened, JSON.parse(source).description);
+    if (mode === "interrupted-draft") {
+      await page
+        .getByRole("button", { name: "Begin edit", exact: true })
+        .click();
+      await page
+        .getByLabel("Description", { exact: true })
+        .fill("Unsaved draft before process interruption");
+      child.kill();
+      await new Promise((r) => child.once("exit", r));
+      assert.deepEqual(await readFile(resolve(root, asset)), source);
+      receipt.checks.push(
+        "hard process interruption with an unsaved draft leaves original source intact",
+      );
+    } else {
+      assert.notEqual(opened, "Unsaved draft before process interruption");
+      receipt.checks.push(
+        "fresh native process reopens original valid source after interruption",
+      );
+    }
+  } else if (mode === "slow-worker") {
     await page.getByRole("button", { name: "Cancel", exact: true }).waitFor();
     await new Promise((r) => setTimeout(r, 300));
     const workers = () =>
@@ -327,14 +360,12 @@ try {
         const now = await new Promise(requestAnimationFrame);
         times.push(now - last);
         last = now;
-        document
-          .querySelector("canvas")
-          .dispatchEvent(
-            new KeyboardEvent("keydown", {
-              key: n % 2 ? "ArrowLeft" : "ArrowRight",
-              bubbles: true,
-            }),
-          );
+        document.querySelector("canvas").dispatchEvent(
+          new KeyboardEvent("keydown", {
+            key: n % 2 ? "ArrowLeft" : "ArrowRight",
+            bubbles: true,
+          }),
+        );
       }
       times.shift();
       times.sort((a, b) => a - b);
@@ -377,6 +408,10 @@ try {
       .locator('[data-testid="map"][data-ready="true"]')
       .waitFor({ timeout: 30000 });
     receipt.checks.push("cancel and retry without app hang");
+    if (mode === "authoring") {
+      const { authoringJourney } = await import("./authoring-journey.mjs");
+      await authoringJourney(page, root, output, receipt, child.pid);
+    }
     await page.setViewportSize({ width: 1100, height: 740 });
     await page.screenshot({ path: resolve(output, "minimum-window.png") });
     await page
@@ -435,11 +470,14 @@ try {
     } else receipt.checks.push("native window close reaps active worker");
   }
   await browser?.close().catch(() => {});
-  receipt.temporary_roots_remaining = (await readdir(workerTemp)).filter(name => name.startsWith('resonance-w0-'));
+  receipt.temporary_roots_remaining = (await readdir(workerTemp)).filter(
+    (name) => name.startsWith("resonance-w0-"),
+  );
   if (receipt.temporary_roots_remaining.length) {
     receipt.passed = false;
     process.exitCode = 1;
-  } else receipt.checks.push('no temporary worker roots remain after native close');
+  } else
+    receipt.checks.push("no temporary worker roots remain after native close");
   receipt.total_ms = Math.round(performance.now() - began);
   await writeFile(
     resolve(output, "receipt.json"),

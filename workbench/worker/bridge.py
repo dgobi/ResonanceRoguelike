@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import platform
 import random
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -22,12 +23,13 @@ sys.dont_write_bytecode = True
 # This small preview needs no parallel BLAS. Bound native thread-pool overhead
 # before importing NumPy/tcod; the game's algorithms and data stay unchanged.
 os.environ.update(OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1", MKL_NUM_THREADS="1")
-PROTOCOL = 1
-WORKER_VERSION = "0.1.0"
+PROTOCOL = 2
+WORKER_VERSION = "0.2.0"
 ROUTE = "authored_submap"
+EDIT_ROUTE = "ordinary_building"
 DEPENDENCIES = {"pygame": "2.6.1", "tcod": "19.3.0", "numpy": "2.4.6",
                 "cffi": "2.1.1", "pycparser": "3.11", "typing_extensions": "4.16.0"}
-MAX_REQUEST = 65536
+MAX_REQUEST = 4 * 1024 * 1024
 
 
 class BridgeError(Exception):
@@ -52,14 +54,14 @@ def checked_root(value):
     for folder in (root / "roguelike").iterdir():
         if folder.name in ("saves", "__pycache__"):
             continue
-        if not folder.resolve().is_relative_to(root):
+        if not folder.resolve().is_relative_to(root) or folder.resolve().is_relative_to(root / "roguelike/saves"):
             fail("PATH_ESCAPE", str(folder), "Use a checkout without external source/data links.")
         if folder.is_dir():
             for base, dirs, files in os.walk(folder, followlinks=False):
                 dirs[:] = [d for d in dirs if d != "__pycache__"]
                 for name in dirs + files:
                     p = Path(base) / name
-                    if not p.resolve().is_relative_to(root):
+                    if not p.resolve().is_relative_to(root) or p.resolve().is_relative_to(root / "roguelike/saves"):
                         fail("PATH_ESCAPE", str(p), "Remove the external source/data link.")
     return root
 
@@ -75,10 +77,17 @@ def source_identity(root):
     digest = hashlib.sha256()
     for p in files:
         digest.update(p.relative_to(root).as_posix().encode()); digest.update(p.read_bytes())
-    status = git("status", "--porcelain", "--", "roguelike", "requirements-baseline.txt")
-    return {"root": str(root), "commit": git("rev-parse", "HEAD"), "branch": git("branch", "--show-current"),
+    top = git("rev-parse", "--show-toplevel")
+    owned_git = top is not None and Path(top).resolve() == root
+    status = git("status", "--porcelain", "--", "roguelike", "requirements-baseline.txt") if owned_git else None
+    data_root = root / "roguelike/data"
+    catalog = hashlib.sha256(json.dumps([
+        (p.relative_to(data_root).as_posix(), hashlib.sha256(p.read_bytes()).hexdigest())
+        for p in sorted(data_root.rglob("*.json"))], separators=(",", ":")).encode()).hexdigest()
+    return {"root": str(root), "commit": git("rev-parse", "HEAD") if owned_git else None,
+            "branch": git("branch", "--show-current") if owned_git else None,
             "game_dirty": None if status is None else bool(status),
-            "game_source_sha256": digest.hexdigest()}
+            "game_source_sha256": digest.hexdigest(), "catalog_sha256": catalog}
 
 
 def runtime_check():
@@ -123,16 +132,86 @@ def install_guard(root, scratch):
     sys.addaudithook(audit)
 
 
-def asset_path(root, value):
+def asset_path(root, value, *, new=False):
     if not isinstance(value, str) or "\\" in value or ":" in value or ".." in value.split("/"):
         fail("PATH_ESCAPE", "Invalid asset path.", "Choose a shipped authored layout from the list.")
     relative = Path(value)
-    if relative.is_absolute() or len(relative.parts) != 4 or relative.parts[:3] != ("roguelike", "data", "layouts") or relative.suffix != ".json":
-        fail("UNSUPPORTED_ASSET", value, "W0 supports immediate roguelike/data/layouts/*.json only.")
-    path = (root / relative).resolve(strict=True)
-    if not path.is_relative_to(root / "roguelike/data/layouts"):
+    from generation.structure_contract import ELIGIBILITY
+    layout = len(relative.parts) == 4 and relative.parts[:3] == ("roguelike", "data", "layouts")
+    building = (len(relative.parts) == 5 and relative.parts[:3] == ("roguelike", "data", "buildings")
+                and relative.parts[3] in ELIGIBILITY.keys() - {"plaza"})
+    if relative.is_absolute() or not (layout or building) or relative.suffix != ".json":
+        fail("UNSUPPORTED_ASSET", value, "W1 edits ordinary buildings only; authored layouts remain read-only.")
+    path = (root / relative).resolve(strict=not new)
+    if not path.is_relative_to(root / "roguelike/data"):
         fail("PATH_ESCAPE", value, "Choose an asset inside the selected repository.")
     return path
+
+
+def discover(root):
+    """Same immediate-folder convention as StructureCatalog, including invalid candidates."""
+    from generation.structure_contract import ELIGIBILITY, read_document, StructureError
+    rows = []
+    candidates = list((root / "roguelike/data/layouts").glob("*.json"))
+    candidates += list((root / "roguelike/data/buildings").glob("*/*.json"))
+    for p in sorted(candidates):
+        category = p.parent.name if p.parent.parent.name == "buildings" else None
+        editable = category in ELIGIBILITY.keys() - {"plaza"}
+        route = EDIT_ROUTE if editable else "plaza" if category == "plaza" else ROUTE
+        try:
+            raw = read_document(p)
+            if not isinstance(raw, dict): raw = {}
+            diagnostics = []
+        except StructureError as error:
+            raw = {}; diagnostics = [d.json() for d in error.diagnostics]
+        rows.append({"path": p.relative_to(root).as_posix(), "id": raw.get("id") if isinstance(raw.get("id"), str) else p.stem,
+                     "name": str(raw.get("name", raw.get("description", ""))), "category": category,
+                     "route": route, "editable": editable,
+                     "width": raw.get("width") if type(raw.get("width")) is int else None,
+                     "height": raw.get("height") if type(raw.get("height")) is int else None,
+                     "provenance": "Selected checkout / content file", "validation": "invalid" if diagnostics else "not yet checked",
+                     "diagnostics": diagnostics})
+    return rows
+
+
+def draft_validation(request, root, scratch, identity):
+    from engine.data_loader import DataLoader
+    from generation.structure_contract import read_document, compile_structure, StructureError
+    path = asset_path(root, request.get("asset"), new=True)
+    if path.parent.parent.name != "buildings":
+        fail("UNSUPPORTED_ASSET", "Drafts require ordinary_building.", "Use a supported building.")
+    draft = request.get("draft")
+    if not isinstance(draft, str) or len(draft.encode("utf-8")) > 1024 * 1024:
+        fail("MALFORMED_REQUEST", "Expected UTF-8 draft up to 1 MiB.", "Use a bounded building definition.")
+    # A disposable data equivalent invokes the real loader including global ID
+    # uniqueness and current dependencies. Never replace the live definition.
+    copied = scratch / "data"
+    shutil.copytree(root / "roguelike/data", copied)
+    selected = copied / path.relative_to(root / "roguelike/data")
+    selected.write_bytes(draft.encode("utf-8"))
+    diagnostics = []; syntax = False; valid = False
+    try:
+        raw = read_document(selected)
+        syntax = True
+        data = DataLoader(str(copied))
+        compiled = compile_structure(raw, EDIT_ROUTE, data, path=str(selected), category=path.parent.name)
+        diagnostics = [d.json() for d in compiled.diagnostics]; valid = True
+    except StructureError as error:
+        diagnostics = [d.json() for d in error.diagnostics]
+        cause = error.__cause__
+        if isinstance(cause, json.JSONDecodeError):
+            for d in diagnostics: d.update(line=cause.lineno, column=cause.colno)
+    for d in diagnostics:
+        d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
+    after = source_identity(root)
+    if any(after[key] != identity[key] for key in ("game_source_sha256", "catalog_sha256")):
+        fail("SOURCE_CHANGED", "Game source or dependency data changed during draft validation.", "Validate again.")
+    return {"valid": valid, "syntax_valid": syntax, "contract_valid": valid, "references_valid": valid,
+            "placement_verified": False, "population_verified": False, "diagnostics": diagnostics,
+            "draft_sha256": hashlib.sha256(draft.encode("utf-8")).hexdigest(), "route": EDIT_ROUTE,
+            "contract": "g2-2", "worker_version": WORKER_VERSION,
+            "worker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "source": identity,
+            "path": request["asset"], "limitations": "Structure and dependency checks only; no reachability, selection, placement or population proof."}
 
 
 def run(request, root, scratch):
@@ -148,24 +227,38 @@ def run(request, root, scratch):
     from generation.structure_preview import preview
     if CONTRACT_VERSION != "g2-2":
         fail("CONTRACT_MISMATCH", f"Unsupported structure contract {CONTRACT_VERSION}.", "Update the Workbench adapter after reviewing this game's contract.")
-    data = DataLoader(str(root / "roguelike/data"))
-    identity["catalog_sha256"] = data.structure_catalog.identity
     op = request["op"]
+    if op == "validate_draft":
+        return draft_validation(request, root, scratch, identity)
+    catalog_error = None
+    try:
+        data = DataLoader(str(root / "roguelike/data"))
+        identity["catalog_sha256"] = data.structure_catalog.identity
+    except StructureError as error:
+        data = None; catalog_error = error
+        identity["catalog_sha256"] = None
     if op == "identify":
         return {"worker_version": WORKER_VERSION, "worker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 "protocol": PROTOCOL, "source": identity, "runtime": runtime, "contract": CONTRACT_VERSION,
                 "route": ROUTE, "validator": "generation.structure_contract.compile_structure",
                 "preview": "generation.structure_preview.preview → engine.scene_generation.create_submap → generation.local_gen.generate_submap",
-                "unavailable": ["editing/saving", "ordinary-building UI", "native world selection", "game renderer/FOV", "combat simulation"],
-                "health": "ready"}
+                "edit_route": EDIT_ROUTE,
+                "unavailable": ["layout editing/saving", "other JSON families", "native world selection", "game renderer/FOV", "combat simulation"],
+                "health": "catalog needs repair" if catalog_error else "ready",
+                "diagnostics": [d.json() for d in catalog_error.diagnostics] if catalog_error else []}
     if op == "describe":
         return {"route": ROUTE, "capabilities": CAPABILITIES[ROUTE],
-                "assets": [{"path": Path(e.path).relative_to(root).as_posix(), "id": e.raw["id"], "width": e.width, "height": e.height}
-                           for e in data.structure_catalog.entries if e.route == ROUTE]}
+                "assets": discover(root), "unsupported": ["plaza (read-only)", "entrances", "items", "loot", "recipes", "creatures", "generation profiles"]}
     path = asset_path(root, request.get("asset"))
     before = path.stat()
     source = path.read_bytes()
-    raw = read_document(path)
+    route = EDIT_ROUTE if path.parent.parent.name == "buildings" else ROUTE
+    category = path.parent.name if route == EDIT_ROUTE else None
+    raw_error = None
+    try:
+        raw = read_document(path)
+    except StructureError as error:
+        raw = {}; raw_error = error
     invalid = request.get("invalid_fixture", False)
     if type(invalid) is not bool or (invalid and op != "inspect"):
         fail("MALFORMED_REQUEST", "Invalid fixture flag.", "Use inspect with a boolean invalid_fixture.")
@@ -177,7 +270,9 @@ def run(request, root, scratch):
         selected.write_text(json.dumps(raw), encoding="utf-8")
         raw = read_document(selected)
     try:
-        compiled = compile_structure(raw, ROUTE, data, path=str(selected))
+        if raw_error: raise raw_error
+        if catalog_error: raise catalog_error
+        compiled = compile_structure(raw, route, data, path=str(selected), category=category)
         diagnostics = [d.json() for d in compiled.diagnostics]
         valid = True
     except StructureError as error:
@@ -187,10 +282,14 @@ def run(request, root, scratch):
     if path.read_bytes() != source or (before.st_mtime_ns, before.st_size) != (after.st_mtime_ns, after.st_size):
         fail("SOURCE_CHANGED", "Source changed during inspection.", "Finish external edits, then reopen the project.")
     if op == "inspect":
-        return {"id": raw.get("id"), "path": path.relative_to(root).as_posix(), "route": ROUTE,
-                "width": len(raw["layers"][0]), "height": len(raw["layers"]), "description": raw.get("description", ""),
-                "special_count": len(raw.get("special_tiles", [])), "valid": valid, "diagnostics": diagnostics,
-                "raw": source.decode("utf-8-sig") if not invalid else json.dumps(raw, indent=2), "invalid_fixture": invalid,
+        raw = raw if isinstance(raw, dict) else {}
+        return {"id": raw.get("id") if isinstance(raw.get("id"), str) else path.stem,
+                "path": path.relative_to(root).as_posix(), "route": route, "category": category,
+                "width": raw.get("width") if type(raw.get("width")) is int else None,
+                "height": raw.get("height") if type(raw.get("height")) is int else None, "description": str(raw.get("description", "")),
+                "special_count": len(raw.get("special_tiles", [])) if isinstance(raw.get("special_tiles", []), list) else 0,
+                "valid": valid, "diagnostics": diagnostics,
+                "raw": source.decode("utf-8") if not invalid else json.dumps(raw, indent=2), "invalid_fixture": invalid,
                 "sha256": hashlib.sha256(source).hexdigest(), "mtime_ns": str(before.st_mtime_ns),
                 "source_unchanged": True, "source": identity}
     if not valid:
@@ -204,7 +303,7 @@ def run(request, root, scratch):
     import numpy as np
     np.random.seed(seed)
     start = time.perf_counter()
-    report, local_map, _ = preview(raw, ROUTE, data, seed=seed, path=str(path))
+    report, local_map, _ = preview(raw, route, data, seed=seed, path=str(path), category=category)
     rows = report["terrain"]
     assert local_map.width == 80 and local_map.height == 43 and len(rows) == 43 and all(len(r) == 80 for r in rows)
     for y, row in enumerate(rows):
@@ -216,11 +315,12 @@ def run(request, root, scratch):
             "decor": report["decor"], "items": report["items"], "containers": report["containers"], "actors": report["actors"],
             "spawn": report.get("spawn"), "origin": report["origin"], "passed": report["passed"],
             "occupant_diagnostics": report["occupant_diagnostics"], "generation_revision": report["generation_revision"],
-            "seed": seed, "scene_seed": str(report.get("scene_seed")), "scene_address": report.get("scene_address"),
+            "seed": seed, "scene_seed": str(report.get("scene_seed", local_map.generation_context.scene_seed)),
+            "scene_address": report.get("scene_address", list(local_map.generation_context.address)),
             "candidate_sha256": report["candidate_identity"], "source": identity, "asset": raw["id"],
             "elapsed_ms": round((time.perf_counter() - start) * 1000, 2),
             "terrain_sha256": hashlib.sha256(json.dumps(rows, separators=(",", ":")).encode()).hexdigest(),
-            "context": "Controlled authored submap; world seed supplied; address (0,0,preview-submap); centered, no rotation; global Python/NumPy RNG also seeded; no campaign opened.",
+            "context": f"Controlled {route}; centered, no rotation; global Python/NumPy RNG seeded; no campaign opened. Direct consumer population only; no natural selection or access proof.",
             "rendering": "Production-data-backed Workbench rendering; revealed terrain and initial objects, not Pygame/tcod or player FOV."}
 
 
@@ -230,7 +330,7 @@ def main():
     try:
         line = sys.stdin.buffer.readline(MAX_REQUEST + 1)
         if len(line) > MAX_REQUEST:
-            fail("MALFORMED_REQUEST", "Request exceeds 64 KiB.", "Use a W0 request.")
+            fail("MALFORMED_REQUEST", "Request exceeds 4 MiB.", "Use a bounded request.")
         request = json.loads(line)
         if not isinstance(request, dict):
             fail("MALFORMED_REQUEST", "Expected an object.", "Use the versioned W0 protocol.")
@@ -239,7 +339,7 @@ def main():
             fail("MALFORMED_REQUEST", "Expected a correlation ID.", "Supply a short string id.")
         if type(request.get("protocol")) is not int or request["protocol"] != PROTOCOL:
             fail("PROTOCOL_MISMATCH", f"Worker requires protocol {PROTOCOL}.", "Use matching Workbench frontend, host and worker versions.")
-        if request.get("op") not in ("identify", "describe", "inspect", "preview") or set(request) - {"id", "protocol", "op", "asset", "seed", "invalid_fixture"}:
+        if request.get("op") not in ("identify", "describe", "inspect", "preview", "validate_draft") or set(request) - {"id", "protocol", "op", "asset", "seed", "invalid_fixture", "draft"}:
             fail("MALFORMED_REQUEST", "Unsupported operation or fields.", "Only identify, describe, inspect and preview are available.")
         if len(sys.argv) != 3 or sys.argv[1] != "--root":
             fail("INVALID_PROJECT", "Expected one --root argument.", "Launch through the Workbench host.")

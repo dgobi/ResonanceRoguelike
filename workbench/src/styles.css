@@ -8,6 +8,119 @@
   --muted: #97a5a7;
   --brass: #cfb885;
 }
+select,
+textarea {
+  font: inherit;
+  color: #dce0dc;
+  background: #11191d;
+  border: 1px solid #3a464b;
+  border-radius: 4px;
+  padding: 9px;
+  width: 100%;
+}
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #e4c78b;
+  outline-offset: 2px;
+}
+.workspace.authoring-workspace {
+  grid-template-columns: 310px minmax(360px, 1fr) minmax(490px, 42%);
+}
+.asset-list {
+  max-height: 46vh;
+  overflow: auto;
+  margin-top: 12px;
+}
+.asset small {
+  overflow-wrap: anywhere;
+}
+.authoring .filepath {
+  margin-bottom: 12px;
+}
+.author-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+.author-tabs button {
+  flex: 1;
+}
+.notice {
+  padding: 10px;
+  background: #202d30;
+  border-left: 3px solid #7c9d91;
+  overflow-wrap: anywhere;
+}
+.notice.warning {
+  border-color: #d3a45d;
+  color: #f0c993;
+}
+.typed-fields textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.source-editor {
+  min-height: 420px;
+  height: 45vh;
+  resize: vertical;
+  white-space: pre;
+  overflow: auto;
+  tab-size: 2;
+  font:
+    13px/1.6 Consolas,
+    monospace;
+}
+.edit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.edit-actions button {
+  flex: 1;
+}
+.problem-list {
+  max-height: 48vh;
+  overflow: auto;
+}
+.diff {
+  white-space: pre;
+  overflow: auto;
+  background: #10181b;
+  padding: 16px;
+  max-height: 48vh;
+  color: #d7d6b5;
+  font:
+    13px/1.6 Consolas,
+    monospace;
+}
+.modal-shade {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: #000b;
+  padding: 30px;
+}
+.confirmation {
+  width: min(100%, 1000px);
+  max-height: 90vh;
+  overflow: auto;
+  padding: 28px;
+  background: #1b252a;
+  border: 1px solid #c8ae78;
+  border-radius: 8px;
+  box-shadow: 0 20px 80px #000;
+}
+.confirmation code {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 1400px) {
+  .workspace.authoring-workspace {
+    grid-template-columns: 250px minmax(280px, 1fr) 440px;
+  }
+}
 * {
   box-sizing: border-box;
 }

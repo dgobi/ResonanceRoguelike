@@ -16,14 +16,14 @@ PYTHON = os.environ.get("RESONANCE_PYTHON", sys.executable)
 
 
 def invoke(op="identify", root=ROOT, python=PYTHON, raw=None, extra_flags=(), **kwargs):
-    request = {"protocol": 1, "id": "test-correlation", "op": op, **kwargs}
+    request = {"protocol": 2, "id": "test-correlation", "op": op, **kwargs}
     completed = subprocess.run([python, "-I", "-B", *extra_flags, str(BRIDGE), "--root", str(root)],
                                input=raw if raw is not None else json.dumps(request), text=True,
                                capture_output=True, timeout=20, creationflags=0x08000000 if os.name == "nt" else 0)
     if completed.returncode:
         raise AssertionError(completed.stderr)
     response = json.loads(completed.stdout)
-    assert response["protocol"] == 1
+    assert response["protocol"] == 2
     if raw is None:
         assert response["id"] == request["id"]
     return response
@@ -37,7 +37,7 @@ class BridgeTests(unittest.TestCase):
         self.assertEqual(r["contract"], "g2-2")
         self.assertEqual(r["runtime"]["dependencies"]["tcod"], "19.3.0")
         self.assertEqual(len(r["source"]["game_source_sha256"]), 64)
-        self.assertIn("editing/saving", r["unavailable"])
+        self.assertIn("layout editing/saving", r["unavailable"])
 
     def test_catalog_and_shipped_validation(self):
         r = invoke("describe")["result"]
@@ -85,8 +85,8 @@ class BridgeTests(unittest.TestCase):
 
     def test_malformed_protocol_and_unsupported_requests(self):
         cases = [("not json", "MALFORMED_REQUEST"), ("[]", "MALFORMED_REQUEST"),
-                 ('{"id":"x","protocol":2,"op":"identify"}', "PROTOCOL_MISMATCH"),
-                 ('{"id":"x","protocol":1,"op":"execute","code":"bad"}', "MALFORMED_REQUEST"),
+                 ('{"id":"x","protocol":1,"op":"identify"}', "PROTOCOL_MISMATCH"),
+                 ('{"id":"x","protocol":2,"op":"execute","code":"bad"}', "MALFORMED_REQUEST"),
                  ('{"id":"x","protocol":true,"op":"identify"}', "PROTOCOL_MISMATCH")]
         for raw, code in cases:
             with self.subTest(raw=raw):

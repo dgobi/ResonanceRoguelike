@@ -1,9 +1,54 @@
-# Resonance Workbench · W0
+# Resonance Workbench · W1
 
-An independent, local Tauri 2 desktop application for reading the current
-Resonance source. Open a repository, inspect a shipped authored layout, run its
-production validator and explore a generated 80 × 43 map. No playable game,
-campaign, editor save operation or network service is started.
+An independent, local Tauri 2 desktop application for inspecting Resonance and
+safely editing one ordinary-building definition at a time. The game remains the
+validation authority. No campaign, running game or Internet service is required.
+
+## Author one building
+
+1. Open the current checkout. It starts read-only and retains W0's actual
+   `starting_lab` 80 × 43 production preview.
+2. Search by ID, description/name or relative path, optionally filter by folder.
+   All immediate `data/buildings/<category>/*.json` ordinary buildings appear
+   deterministically (58 at the W1 source baseline). Plazas are listed as
+   unsupported/read-only; authored layouts retain W0 read-only inspection.
+3. Select a building such as `commercial/workshop_b.json`. Source, properties,
+   diagnostics, file hash, source revision and worker compatibility are visible.
+   **Begin edit** opts into an in-memory draft. Description and legacy scatter
+   weight use text-span edits; **Source** exposes the complete strict JSON.
+4. **Validate draft** runs the real `read_document`, `DataLoader` and
+   `compile_structure` against a disposable equivalent of current data. Problems
+   distinguish syntax errors (line/column where available), structure/reference
+   errors and warnings. The displayed map remains explicitly from disk.
+5. Inspect **Diff**, then **Review & apply**. The confirmation repeats the exact
+   diff and warns about existing world references. The host revalidates the exact
+   stored bytes with fresh dependencies before publishing one file. The receipt
+   records target, before/after hashes and existing/variant outcome. The index,
+   editor and preview reopen from disk.
+6. Prefer **Save as new variant** for identity or meaning changes. Enter a unique
+   ID using letters, digits, `_` or `-`; this updates the draft's ID and derives
+   `<same category>/<id>.json`. Existing IDs cannot be renamed in place. Current
+   town/roadside selection profiles are **not** modified or populated by saving.
+   Legacy flat-pool generation can discover added files; creating a variant does
+   not establish that current planned generation will select it.
+
+Opening, switching tabs and closing clean source never serializes it. Property
+edits retain unrelated spans, BOM and line endings; raw edits retain the source's
+CRLF convention. Unknown fields, nested arrays, specials, decor and text bindings
+remain in the one shared draft. Discard/Revert returns to the opened bytes;
+Generate/refresh reloads disk. Switching files/projects, refresh and native close
+protect unsaved drafts with an explicit discard prompt. Drafts are memory-only;
+forced process termination loses unsaved edits, while source stays intact.
+
+A three-second idle check reports external changes and exposes the disk version
+without replacing the draft. Apply always compares bytes again, independently of
+that check. There is no forced save or automatic merge. Keep the draft for manual
+reconciliation, or discard/reload the external version.
+
+Validation establishes the supported structure contract and its declared
+references. It does **not** prove reachability, natural selection or population
+of an unsaved draft. The separate direct-consumer preview displays real initial
+population from disk, not general gameplay balance or access certification.
 
 ## Launch
 
@@ -15,7 +60,7 @@ it. This machine was verified with WebView2 155.0.4283.62.
 
 Choose **Choose repository**, or enter the directory and use **Open directory**.
 Select this repository's root (the `roguelike/` subdirectory is also accepted).
-The supported layout list currently contains `starting_lab`, a 60 × 16 source
+The read-only authored layout list contains `starting_lab`, a 60 × 16 source
 definition. It produces a full 80 × 43 authored scene through the game compiler,
 scene builder, generator and population factories.
 
@@ -24,7 +69,7 @@ the buttons to zoom, and press Home to fit. Arrow keys pan the focused canvas.
 **Generate / refresh** reloads source and uses the entered seed.
 **Test invalid disposable fixture** runs the same validator on a temporary copy
 with a deliberately incorrect width. **Cancel** terminates the active worker.
-Source JSON is a read-only text view; closing/reopening never rewrites it.
+Authored-layout Source JSON remains read-only; ordinary buildings expose the W1 workflow above.
 
 ## Development and builds
 
@@ -79,6 +124,8 @@ cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings
 & $env:RESONANCE_PYTHON -B worker/test_bridge.py
 & $env:RESONANCE_PYTHON -B scripts/render-reference.py
 npm.cmd run test:desktop             # built RELEASE executable; real WebView2
+npm.cmd run test:authoring           # disposable data + native apply/reopen/restart journey
+& $env:RESONANCE_PYTHON -B worker/test_authoring.py
 ```
 
 `scripts/desktop-test.mjs` opens a test-owned native window and sends app-local
@@ -105,29 +152,52 @@ CPython runtime without the game dependency wheels.
 
 ## Contract and limits
 
-The host exposes five narrow local commands: choose/open/close project, one
-worker request and cancel. There are no frontend filesystem or shell plugin
-permissions. A request is one versioned JSON line (`protocol: 1`, string `id`,
-`op`), with one response and process exit. Operations: `identify`, `describe`,
-`inspect` (optional fixed invalid fixture), `preview` (asset and seed). No raw
-code, arbitrary files or executable arguments are accepted. Output is bounded;
-errors include a code/message/remedy; game logs use stderr. Generation times out
-after 90 seconds and can be cancelled earlier. Project replacement/window close
-reap the child and remove its parent-owned temporary directory.
+The protocol is **2**, worker/app **0.2.0**, game structure contract **g2-2**.
+W0 identify/describe/inspect/preview requests remain read-only. Draft validation
+is available only through the host's document boundary. Discovery grants an
+opaque document token; validation grants a one-draft review token. Apply takes
+that token and explicit confirmation, never an arbitrary destination or trusted
+frontend verdict. Variants stay in the discovered source's existing category.
+There are no frontend filesystem/shell permissions, arbitrary Python evaluation
+or Git mutations. The only frontend capabilities are local close-event listening.
 
-The worker checks `g2-2`, Python/dependency compatibility, root/link containment
-and the exact `roguelike/data/layouts/*.json` route. It imports authoritative
-game implementations. A write audit guard permits only temporary outputs and
-rejects personal-save reads; bytecode writes are suppressed. **Open trusted game
-checkouts:** Python audit hooks are protection from incidental writes, not an OS
-sandbox for deliberately hostile repository code or native libraries.
+The Rust host validates allowed path components, canonical containment and
+reparse-point rejection again at publication. Windows directory handles prevent
+parent moves; dependency read handles deny concurrent writes/renames during the
+final validation. A separate source read lock covers validation, then releases
+for replacement. The host compares current bytes immediately before publishing
+and the actual displaced backup bytes afterward, restoring an intervening
+external version on conflict. Input hashes/file membership are also rechecked.
+
+An existing-file apply writes and flushes a sibling `.w1-stage-*.tmp`, closes its
+write handle, then uses Windows `ReplaceFileW` with a uniquely named sibling
+backup. Windows preserves supported original metadata, including creation time
+and ACLs. A verified failure restores the backup; ordinary failures clean the
+staging files. If recovery/cleanup is blocked, the error identifies the retained
+backup and the idle disk check lists `.w1-*` remnants. Inspect those files before
+manual recovery; Workbench never silently restores an ambiguous crash remnant.
+Variants use no-clobber persistence. Exact published bytes are checked. This is
+not a guarantee against arbitrary power loss, faulty storage or every Windows
+filesystem. Publication is Windows-only; other platforms remain unverified.
+
+The worker writes only disposable scratch data, denies personal-save reads,
+imports rules from the selected checkout and suppresses bytecode. Cancellation,
+project replacement and close reap active workers and clean their temporary
+roots. **Open trusted game checkouts:** Python audit hooks prevent incidental
+writes; they are not an OS sandbox against hostile Python/native libraries.
+
+The canonical loader validates the complete structure catalog. A broken unrelated
+catalog definition can block applying a draft until it is repaired. Discovery
+and raw source inspection remain available when the loader reports structural
+errors. Files over 1 MiB and unsafe destination names are outside W1 authoring.
+No grid painting, other-family editing, profile changes, persistent edit history
+or automatic campaign migration is included.
 
 The semantic Pixi rendering shows actual terrain, initial objects and arrival;
 colors/markers differ from the Pygame renderer. Inspection is revealed, without
 player FOV, simulation, balance analysis or a natural-world selection claim.
 The seed, exact large scene seed (string), catalog/source hashes and context
 identify a repeatable controlled preview; this is not global gameplay replay.
-Refresh after external source changes. Editing, saves, broad content discovery,
-conflict handling and a generic capability registry remain outside W0.
+Refresh after external source changes. A generic schema registry and W2 visual painting remain outside this delivery.
 
-See [W0 delivery and evidence](docs/W0_DELIVERY.md).
+See [W1 delivery and evidence](docs/W1_DELIVERY.md) and the unchanged historical [W0 delivery](docs/W0_DELIVERY.md).

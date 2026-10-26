@@ -1,5 +1,7 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { listen } from "@tauri-apps/api/event";
+import { Authoring } from "./Authoring";
 import { MapView } from "./MapView";
 import {
   asFailure,
@@ -52,8 +54,34 @@ export default function App() {
     [cell, setCell] = useState<[number, number] | null>(null),
     [seed, setSeed] = useState("20261023"),
     [tab, setTab] = useState<"properties" | "source">("properties");
+  const [dirty, setDirty] = useState(false),
+    [search, setSearch] = useState(""),
+    [category, setCategory] = useState("");
+  const [pending, setPending] = useState<null | (() => void)>(null);
+  const dirtyRef = useRef(false);
+  dirtyRef.current = dirty;
+  useEffect(() => {
+    const unlisten = listen("authoring-close-requested", () => {
+      const close = () => {
+        void invoke("finish_close").catch((e) => setError(asFailure(e)));
+      };
+      if (dirtyRef.current) setPending(() => close);
+      else close();
+    });
+    return () => {
+      void unlisten.then((f) => f());
+    };
+  }, []);
+  function protect(action: () => void) {
+    if (dirtyRef.current) {
+      setPending(() => action);
+      return true;
+    }
+    return false;
+  }
   const epoch = useRef(0);
   function clear() {
+    setDirty(false);
     setIdentity(null);
     setAssets([]);
     setSelected("");
@@ -70,7 +98,12 @@ export default function App() {
     setPreview(null);
     setCell(null);
     setBusy("Validating source…");
-    const inspected = await request<Inspection>("inspect", { asset });
+    const editable =
+      asset.startsWith("roguelike/data/buildings/") &&
+      !asset.includes("/plaza/");
+    const inspected = editable
+      ? await call<Inspection>("open_document", { asset })
+      : await request<Inspection>("inspect", { asset });
     if (token !== epoch.current) return;
     setInspection(inspected.result);
     if (!inspected.result.valid) {
@@ -118,7 +151,8 @@ export default function App() {
       );
     }
   }
-  async function open(value: string) {
+  async function open(value: string, discard = false) {
+    if (!discard && protect(() => void open(value, true))) return;
     const token = ++epoch.current;
     clear();
     setPath(value);
@@ -134,7 +168,13 @@ export default function App() {
       if (token !== epoch.current) return;
       setAssets(catalog.result.assets);
       if (catalog.result.assets.length)
-        await loadAsset(catalog.result.assets[0].path, token);
+        await loadAsset(
+          (
+            catalog.result.assets.find((a) => a.id === "starting_lab") ||
+            catalog.result.assets[0]
+          ).path,
+          token,
+        );
       else
         setStatus(
           "Compatible project, but no supported authored layouts were found.",
@@ -156,7 +196,9 @@ export default function App() {
       setError(asFailure(e));
     }
   }
-  async function refresh(asset = selected) {
+  async function refresh(asset = selected, discard = false) {
+    if (!discard && protect(() => void refresh(asset, true))) return;
+    setDirty(false);
     const token = ++epoch.current;
     setError(null);
     try {
@@ -190,7 +232,8 @@ export default function App() {
       if (token === epoch.current) setBusy("");
     }
   }
-  async function cancel(close = false) {
+  async function cancel(close = false, discard = false) {
+    if (close && !discard && protect(() => void cancel(true, true))) return;
     ++epoch.current;
     try {
       await invoke(close ? "close_project" : "cancel_worker");
@@ -207,6 +250,24 @@ export default function App() {
         : "Cancelled. Temporary preview work discarded; run again to retry.",
     );
   }
+  const [receipt, setReceipt] = useState<unknown>(null);
+  async function applied(asset: string, result: unknown) {
+    setDirty(false);
+    setReceipt(result);
+    const catalog = await request<{ assets: Asset[] }>("describe");
+    setAssets(catalog.result.assets);
+    await refresh(asset, true);
+    setStatus(
+      `Applied and reopened ${asset}. Current selection profiles unchanged.`,
+    );
+  }
+  const visibleAssets = assets.filter(
+    (a) =>
+      (!category || a.category === category || a.route === category) &&
+      `${a.id} ${a.name || ""} ${a.path}`
+        .toLowerCase()
+        .includes(search.toLowerCase()),
+  );
   const tile = cell && preview ? preview.terrain[cell[1]][cell[0]] : null;
   const objects =
     cell && preview
@@ -230,11 +291,18 @@ export default function App() {
           </div>
         </div>
         <div className="top-meta">
-          <span className="chip">W0 · DESKTOP PROOF</span>
-          <span className="read-only">◈ Read-only</span>
+          <span className="chip">W1 · SAFE AUTHORING</span>
+          <span className="read-only">
+            ◈ {dirty ? "Unsaved draft" : "Read-only by default"}
+          </span>
         </div>
       </header>
-      <div className="workspace">
+      <div
+        className={
+          "workspace " +
+          (inspection?.document_token ? "authoring-workspace" : "")
+        }
+      >
         <aside className="sidebar">
           <section>
             <div className="eyebrow">01 / PROJECT</div>
@@ -277,7 +345,9 @@ export default function App() {
                   <dd>
                     {identity.source.game_dirty === null
                       ? "Git unavailable"
-                      : identity.source.game_dirty ? "Uncommitted changes" : "Clean"}
+                      : identity.source.game_dirty
+                        ? "Uncommitted changes"
+                        : "Clean"}
                   </dd>
                   <dt>Contract</dt>
                   <dd>{identity.contract}</dd>
@@ -306,27 +376,65 @@ export default function App() {
           <section className="content-section">
             <div className="eyebrow">02 / CONTENT</div>
             <h2>
-              Authored layouts <span className="count">{assets.length}</span>
+              Content definitions <span className="count">{assets.length}</span>
             </h2>
             <p className="muted">
-              Production <code>authored_submap</code> route
+              Edit <code>ordinary_building</code> · other families read-only
             </p>
-            {assets.map((a) => (
-              <button
-                key={a.path}
-                className={"asset " + (a.path === selected ? "selected" : "")}
-                disabled={!!busy}
-                onClick={() => refresh(a.path)}
+            <label>
+              Search ID, name or path
+              <input
+                aria-label="Search ID, name or path"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </label>
+            <label>
+              Category / route
+              <select
+                aria-label="Category / route"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               >
-                <span className="asset-icon">▦</span>
-                <span>
-                  <strong>{a.id.replaceAll("_", " ")}</strong>
-                  <small>
-                    {a.width} × {a.height} · JSON layout
-                  </small>
-                </span>
-              </button>
-            ))}
+                <option value="">All supported content</option>
+                {[...new Set(assets.map((a) => a.category || a.route))]
+                  .sort()
+                  .map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+              </select>
+            </label>
+            <div className="asset-list">
+              {visibleAssets.map((a) => (
+                <button
+                  key={a.path}
+                  className={"asset " + (a.path === selected ? "selected" : "")}
+                  disabled={!!busy || a.route === "plaza"}
+                  title={`${a.path} · ${a.provenance} · ${a.validation}${a.editable ? "" : " · read-only"}`}
+                  data-asset={a.path}
+                  onClick={() => refresh(a.path)}
+                >
+                  <span className="asset-icon">▦</span>
+                  <span>
+                    <strong>{a.id.replaceAll("_", " ")}</strong>
+                    <small>
+                      {a.width} × {a.height} · {a.category || a.route}
+                      <br />
+                      {a.path}
+                      <br />
+                      {a.path === inspection?.path
+                        ? inspection.valid
+                          ? "Source valid"
+                          : "Source invalid"
+                        : a.validation}{" "}
+                      · {a.editable ? "editable" : "read-only"}
+                    </small>
+                  </span>
+                </button>
+              ))}
+            </div>
             {!assets.length && (
               <p className="empty-small">
                 Supported definitions appear here after a successful connection.
@@ -335,10 +443,10 @@ export default function App() {
           </section>
           <section className="scope">
             <span className="eyebrow">THIS WORKSPACE</span>
-            <p>Inspect → validate → generate</p>
+            <p>Discover → draft → validate → review → apply</p>
             <small>
-              Shipped authored layouts only. Changes to content and campaigns
-              are outside W0.
+              W1 edits ordinary buildings only. Plazas, layouts and other JSON
+              families have no editing controls. Campaigns are never opened.
             </small>
           </section>
         </aside>
@@ -409,6 +517,18 @@ export default function App() {
               </div>
             )}
           </div>
+          {inspection?.document_token && (
+            <p className="render-note">
+              Preview is from the on-disk source. Unsaved drafts are not
+              rendered; their validation appears in the editor.
+            </p>
+          )}
+          {receipt !== null && (
+            <details className="context" data-testid="apply-receipt">
+              <summary>Applied file · transaction receipt</summary>
+              <pre>{JSON.stringify(receipt, null, 2)}</pre>
+            </details>
+          )}
           <div className="legend">
             <span>
               <i style={{ background: "#424c47" }} />
@@ -476,21 +596,33 @@ export default function App() {
         </section>
         <aside className="inspector">
           <div className="eyebrow">04 / INSPECTOR</div>
-          <div className="tabs">
-            <button
-              className={tab === "properties" ? "active" : ""}
-              onClick={() => setTab("properties")}
-            >
-              Properties
-            </button>
-            <button
-              className={tab === "source" ? "active" : ""}
-              onClick={() => setTab("source")}
-            >
-              Source JSON
-            </button>
-          </div>
-          {inspection ? (
+          {!inspection?.document_token && (
+            <div className="tabs">
+              <button
+                className={tab === "properties" ? "active" : ""}
+                onClick={() => setTab("properties")}
+              >
+                Properties
+              </button>
+              <button
+                className={tab === "source" ? "active" : ""}
+                onClick={() => setTab("source")}
+              >
+                Source JSON
+              </button>
+            </div>
+          )}
+          {inspection?.document_token ? (
+            <Authoring
+              key={inspection.document_token}
+              document={inspection}
+              onDirty={setDirty}
+              onApplied={applied}
+              onError={setError}
+              busy={busy}
+              setBusy={setBusy}
+            />
+          ) : inspection ? (
             tab === "source" ? (
               <pre className="raw">{inspection.raw}</pre>
             ) : (
@@ -597,6 +729,37 @@ export default function App() {
           )}
         </aside>
       </div>
+      {pending && (
+        <div className="modal-shade">
+          <section
+            className="confirmation"
+            role="dialog"
+            aria-label="Unsaved draft"
+          >
+            <h2>Keep your unsaved draft?</h2>
+            <p>
+              Continuing will discard the in-memory edits. The source file has
+              not changed.
+            </p>
+            <div className="edit-actions">
+              <button className="primary" onClick={() => setPending(null)}>
+                Keep editing
+              </button>
+              <button
+                onClick={() => {
+                  const action = pending;
+                  setPending(null);
+                  setDirty(false);
+                  dirtyRef.current = false;
+                  action();
+                }}
+              >
+                Discard and continue
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
       <footer
         className={"runtime " + (error ? "runtime-error" : "")}
         aria-live="polite"
@@ -608,7 +771,7 @@ export default function App() {
           </strong>
           {error && <p>{error.remedy}</p>}
         </div>
-        <span className="runtime-tag">LOCAL / OFFLINE · W0</span>
+        <span className="runtime-tag">LOCAL / OFFLINE · W1</span>
       </footer>
     </main>
   );

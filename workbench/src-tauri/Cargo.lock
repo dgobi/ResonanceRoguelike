@@ -2529,15 +2529,18 @@ dependencies = [
 
 [[package]]
 name = "resonance-workbench"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "dunce",
  "rfd",
  "serde",
  "serde_json",
+ "sha2",
  "tauri",
  "tauri-build",
  "tempfile",
+ "uuid",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
