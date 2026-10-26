@@ -1,0 +1,235 @@
+{
+  "id": "apothecary_w2_furnished",
+  "category": "commercial",
+  "width": 11,
+  "height": 8,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "market": 3,
+    "residential": 2,
+    "tangle": 3
+  },
+  "description": "An apothecary. Herbs hang from every rafter. Clay pots line the shelves. The medicine chest stands open, half its contents gone.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "+": "door_closed",
+    " ": null
+  },
+  "layers": [
+    "###########",
+    "#wwwwwwwww#",
+    "#.........#",
+    "#.www.....#",
+    "#...####..#",
+    "#...#..w..#",
+    "#...#.....#",
+    "####.######"
+  ],
+  "special_tiles": [
+    {
+      "x": 2,
+      "y": 1,
+      "type": "container",
+      "decor_id": "crate",
+      "loot_pools": ["workshop_b_fuel"]
+    },
+    {
+      "x": 9,
+      "y": 3,
+      "type": "container",
+      "decor_id": "clay_pot_cluster",
+      "loot_pools": [
+        "alchemist_shop"
+      ]
+    },
+    {
+      "x": 5,
+      "y": 5,
+      "type": "container",
+      "decor_id": "writing_desk",
+      "loot_pools": [
+        "noble_generic"
+      ]
+    }
+  ],
+  "decor_layer": [
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      "dried_herbs",
+      "dried_herbs",
+      "dried_herbs",
+      null,
+      null,
+      "dried_herbs",
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1,
+    "rotations": [
+      0,
+      180
+    ],
+    "mirror_x": false,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 4,
+        "y": 7,
+        "normal": "S",
+        "width": 1,
+        "role": "main",
+        "required": true
+      }
+    ],
+    "targets": [
+      {
+        "x": 6,
+        "y": 6,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 3,
+        "kind": "floor",
+        "required": true
+      },
+      {
+        "x": 2,
+        "y": 1,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "kind": "container",
+        "required": true
+      },
+      {
+        "x": 5,
+        "y": 5,
+        "kind": "container",
+        "required": true
+      }
+    ]
+  },
+  "unknown_metadata": {
+    "nested": [
+      [
+        null,
+        "keep"
+      ],
+      [
+        true,
+        3
+      ]
+    ]
+  }
+}

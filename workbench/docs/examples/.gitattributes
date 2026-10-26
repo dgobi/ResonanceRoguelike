@@ -1,0 +1,2 @@
+# Retain the exact UTF-8/CRLF bytes written and reopened by the native W2 journey.
+apothecary_w2_furnished.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
