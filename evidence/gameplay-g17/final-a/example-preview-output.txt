@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "assets": 67,
+  "diagnostics": 247,
+  "output": "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g17\\final-a\\example-preview.json",
+  "previews": 1,
+  "registration": false,
+  "status": null
+}

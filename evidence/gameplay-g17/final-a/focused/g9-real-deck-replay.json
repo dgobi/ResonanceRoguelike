@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "controlled_geometry_only": true,
+  "new_physical_bridge_cells": 0,
+  "new_crossing_ownership_rows": 2,
+  "normal_validate_plan_passed": true,
+  "original_reservations_preserved": true
+}

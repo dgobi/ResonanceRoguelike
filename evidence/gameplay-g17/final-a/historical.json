@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "pid": 30384,
+  "head": "796b8fe02f73fab1e79572ba690c15e4db2d691f",
+  "observed": {
+    "archive": "evidence/gameplay-g16/final-a/journey/cold-return/homeward/returned-pellet.zip",
+    "sha256": "0867c43c7b39adf64ef13e26dadaccefa82730046021e62c7d1213682685287d",
+    "restored_snapshot": {
+      "player": "fdddb0295f42aac53ae8ac3b300e2257abf267de413569c9fb07a598f790685c",
+      "world": "bbb710f096d689e3d53f8a1d571f19b89657e1f68c0aae922afe19350958694d",
+      "scene": "bc251ad08bafda9987443bdbf3b16579ea77f4533529fb09c9997b8c39b439f2",
+      "processing": [],
+      "zones": [],
+      "load": 5.169999999999999,
+      "knowledge": {},
+      "words": [],
+      "read": [],
+      "recovered": {}
+    },
+    "plan_identity": "8901a5e26e0dd7cb230bc2ffd895405555fe438e7098887d211e2ec258424c4a",
+    "dependency_checks": 51,
+    "pending_metadata": {
+      "submap_id": "submap_73_97_0",
+      "submap_type": "barrow",
+      "name": "Ussm Vault",
+      "seed": 107361,
+      "layout_id": "",
+      "generated": false,
+      "entry_x": 0,
+      "entry_y": 0,
+      "surface_x": 0,
+      "surface_y": 0,
+      "depth": 1
+    },
+    "pending_fingerprint": "476c12d5707c5a0d7bcc1ecf238abb616dd3b0c1166416ee084f3a266917709f",
+    "visited_workshop_fingerprint": "ad527a20115ba8cd4e3553002bbdaf7d5bbedf1aa1d570512b18b50800d65ed7",
+    "materialized_snapshot": {
+      "player": "fdddb0295f42aac53ae8ac3b300e2257abf267de413569c9fb07a598f790685c",
+      "world": "4d7585ca92f46db10244f283e9157d364dbd19a135516b22616806aa0710c828",
+      "scene": "bc251ad08bafda9987443bdbf3b16579ea77f4533529fb09c9997b8c39b439f2",
+      "processing": [],
+      "zones": [],
+      "load": 5.169999999999999,
+      "knowledge": {},
+      "words": [],
+      "read": [],
+      "recovered": {}
+    },
+    "blank_layout_retains_bsp": true,
+    "visited_scene_and_player_preserved": true
+  },
+  "comparison": "exact genuine pre-edit receipt"
+}

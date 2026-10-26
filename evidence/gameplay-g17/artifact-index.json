@@ -1,0 +1,385 @@
+{
+  "status": "verified",
+  "frozen_inputs": "796b8fe02f73fab1e79572ba690c15e4db2d691f",
+  "focused_tests": 286,
+  "production": {
+    "checks": 3676,
+    "passed": 3676,
+    "failed": 0,
+    "workers": 159
+  },
+  "artifacts": {
+    "docs/owner/GAMEPLAY_G17.md": {
+      "bytes": 9222,
+      "sha256": "b99bad39e7527ab45aa433c0ceee64372375218e3a9adbd0fa792e4aea8cbe89"
+    },
+    "evidence/gameplay-g17/audit.json": {
+      "bytes": 5435,
+      "sha256": "69e570f7bd8f845852e497e4ab1e55dd6194499deec1bd2dfb0b331540806ff3"
+    },
+    "evidence/gameplay-g17/commission.md": {
+      "bytes": 17857,
+      "sha256": "9aea6a3fd1bd84bc320206d62e270ebbdc813ea8838c9925c9d66848d53ea136"
+    },
+    "evidence/gameplay-g17/final-a/authored-encounter-output.txt": {
+      "bytes": 430,
+      "sha256": "219fa2e39f2623781792a5839525e7599295abd4cdb32f46930c92eb5411a782"
+    },
+    "evidence/gameplay-g17/final-a/editor-catalog-output.txt": {
+      "bytes": 146,
+      "sha256": "f39e49ea11be0c32e962196afdf5267ad8c351dc7d3b2e4a0514c71c6e916744"
+    },
+    "evidence/gameplay-g17/final-a/example-preview-0.svg": {
+      "bytes": 457729,
+      "sha256": "c5707f956268b53e92e4896436a6bfb9297633172166fa61014b218945b6950d"
+    },
+    "evidence/gameplay-g17/final-a/example-preview-output.txt": {
+      "bytes": 228,
+      "sha256": "73f61a53a7856434ebc8dc22a3cbf77bdc4a83542edd3671554d668ea9c6f3db"
+    },
+    "evidence/gameplay-g17/final-a/example-preview.json": {
+      "bytes": 78602,
+      "sha256": "85e3a55c6e6e4029fb1e88fbdc475de24cc40ffea510dfb6dae86a887cc98c35"
+    },
+    "evidence/gameplay-g17/final-a/focused/action_routes_stairs.json": {
+      "bytes": 48663,
+      "sha256": "b7de2b12ab1974ec109e01d6fef6dff726a6c301623c293743c16bb1975bbdee"
+    },
+    "evidence/gameplay-g17/final-a/focused/cohort-certification.json": {
+      "bytes": 108999,
+      "sha256": "8725e9b6242324b90c185bd7184612a99317718987923bcaf095b2ba2158bfdf"
+    },
+    "evidence/gameplay-g17/final-a/focused/focused-tests.txt": {
+      "bytes": 51453,
+      "sha256": "0a314d06a747035bf11b1f4b6d3be81627b995d54f442d57104c0e8c3d471d27"
+    },
+    "evidence/gameplay-g17/final-a/focused/g10-atomic-recovery.json": {
+      "bytes": 546,
+      "sha256": "4791f79818bfc4135b95946843e5573e516df3a531e1e61d52468831dd8808ff"
+    },
+    "evidence/gameplay-g17/final-a/focused/g10-frozen-policy.json": {
+      "bytes": 281,
+      "sha256": "37b2f08044cf0b31b2cec85be7a8649295df7c7ec8c48b00278c59822f1845e7"
+    },
+    "evidence/gameplay-g17/final-a/focused/g10-genuine-g9.json": {
+      "bytes": 2780,
+      "sha256": "75fd70792b0e778c2299f1f68820c787f0b65402c1e24b9acd80abfbc75bda03"
+    },
+    "evidence/gameplay-g17/final-a/focused/g10-policy-negatives.json": {
+      "bytes": 1107,
+      "sha256": "87d0095302cf6374347719600c983f893c2275e1cb1f7ba2a7204fe9e896ab61"
+    },
+    "evidence/gameplay-g17/final-a/focused/g11-atomic.json": {
+      "bytes": 592,
+      "sha256": "43a67442ee7a474c9c02081db4a94229f8bab4497ec460100c3ed69e65134153"
+    },
+    "evidence/gameplay-g17/final-a/focused/g11-contract.json": {
+      "bytes": 1114,
+      "sha256": "b498f099b32c6f7608819731a009e59a6cb2ccd5dd6f9688572fb3f9fd815387"
+    },
+    "evidence/gameplay-g17/final-a/focused/g11-exact.json": {
+      "bytes": 860,
+      "sha256": "92a623951cb299e58266f0d44374b4c2208a94fc36d6f0429791e97fe4bea44f"
+    },
+    "evidence/gameplay-g17/final-a/focused/g11-genuine-g10.json": {
+      "bytes": 1046,
+      "sha256": "d99498e56c76c2a834c2d0938cadc302716894733cb77c83b83185e25da856fd"
+    },
+    "evidence/gameplay-g17/final-a/focused/g11-late-cut-fallback.json": {
+      "bytes": 789,
+      "sha256": "f5b3a6790a7580c3304cc6fdddefe0260f3a7271e3d64f27a675d76915594464"
+    },
+    "evidence/gameplay-g17/final-a/focused/g11-macro.json": {
+      "bytes": 512,
+      "sha256": "447172274c52b593bfde2dd90e560cc1c346b51b60f48ee7a4d30fdf509c2694"
+    },
+    "evidence/gameplay-g17/final-a/focused/g11-sample.json": {
+      "bytes": 34497,
+      "sha256": "5e68a5b595c54b7d74b75e83dfafd2982b6861d52a49b766ed355c92c01042b8"
+    },
+    "evidence/gameplay-g17/final-a/focused/g11-water-projection.json": {
+      "bytes": 204,
+      "sha256": "3a2c527ac0621c2f0f14cf77fde1f3bd9e7b5e09da73ca6c4a4837b815a2339c"
+    },
+    "evidence/gameplay-g17/final-a/focused/g4-interactions.json": {
+      "bytes": 485,
+      "sha256": "f32d783fd8f440dff3aa396deb006a0142a8f785b60645063e47e9a0edcb9a55"
+    },
+    "evidence/gameplay-g17/final-a/focused/g4-native-members.json": {
+      "bytes": 2117,
+      "sha256": "b64b26c0f2dc0a3d043a753533a1306a111317fc18b3e8c1d2923fec82dda344"
+    },
+    "evidence/gameplay-g17/final-a/focused/g4-native-production.png": {
+      "bytes": 18890,
+      "sha256": "fe6ac76e9df2b49634fedc97643237cf14c5aa32ff782e4111aa3fd7c41a32f0"
+    },
+    "evidence/gameplay-g17/final-a/focused/g5-apothecary-production.png": {
+      "bytes": 11527,
+      "sha256": "622237f3a924ec7492cdd888eee9addf84e8a7cae68b3424eae7e1d0ddf6d4c6"
+    },
+    "evidence/gameplay-g17/final-a/focused/g5-interactions.json": {
+      "bytes": 494,
+      "sha256": "f5041078ddbf83bbe3f0a89c1e71678c0cbad6448ff14998585982135e7ed0b2"
+    },
+    "evidence/gameplay-g17/final-a/focused/g5-waymarker-production.png": {
+      "bytes": 11362,
+      "sha256": "280514fa8689229cbe25ceb968593e8d99e5a4e44a1228feb2e4a83d1257be90"
+    },
+    "evidence/gameplay-g17/final-a/focused/g6-cohort.json": {
+      "bytes": 13720,
+      "sha256": "7661b6370966274b5163192424449f8be138f2664ad1f137c6694296f6967850"
+    },
+    "evidence/gameplay-g17/final-a/focused/g6-independent-owners.json": {
+      "bytes": 653,
+      "sha256": "e7685f282adb2c321f09032d48eb402aa7591df902d56e94ae5a6dcf6f95e25d"
+    },
+    "evidence/gameplay-g17/final-a/focused/g6-site-0-production.png": {
+      "bytes": 15115,
+      "sha256": "6db3fe48f645c8b317de461d44910e48e1a5946d2f15230c7a7456d8a4f24f99"
+    },
+    "evidence/gameplay-g17/final-a/focused/g6-site-1-production.png": {
+      "bytes": 11711,
+      "sha256": "9bc670ff567961c808661927d17866d0d3d5a9c67a167d3be74b885bceeb256b"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-atomic-fit.json": {
+      "bytes": 617,
+      "sha256": "d35f58b93f6b3d8b29268638499a2b60579fd4ee4a2670cb3dcdbc4c45fe478e"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-authentic-g6-restore.json": {
+      "bytes": 218,
+      "sha256": "a262c1981b8f35a6675cb792e6baead2d322d907bf89c5f672b14e2d9ab02235"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-hash-seeds.json": {
+      "bytes": 298,
+      "sha256": "e4d385242c6ed8fff13ebfb5b82b085c8a7aea1947ae5dd1c154caf298707f57"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-homestead_workyard-production.png": {
+      "bytes": 63537,
+      "sha256": "5307a8e90493d4a09bdadbde4de8ce8e5332e410af574cc69ed946d8253d0869"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-independent-children.json": {
+      "bytes": 1319,
+      "sha256": "fcefaca8376f1919ea79d38e11b0e158e765ae071e5004a771f6ebcfcf72142a"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-invalid-recipes.json": {
+      "bytes": 1673,
+      "sha256": "fad64ab8928b7a9b8031646082d4f7602e0ddc5197a9c93a95240494620dea19"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-late-child-rollback.json": {
+      "bytes": 291,
+      "sha256": "c19b6991737987d7a4de8764ce94f35742a038765dd3eacf16ebdca5f9d89e5d"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-native-views.json": {
+      "bytes": 631,
+      "sha256": "6bcfcebe1cd30c79ba15836b32a826eaee7f5cc32261bf6f33fbe7568273ca0f"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-real-preparation-negatives.json": {
+      "bytes": 1650,
+      "sha256": "1cdc51e60cd6c7c555643aca6c5c0ce0eb9420f561879b2cfb5abe51597fc73d"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-recipe-transforms.json": {
+      "bytes": 162968,
+      "sha256": "26bd61e1a9c4a3fa0eefb24e662de72dde6f04613cba419bdd1f92fcd4e8bfb7"
+    },
+    "evidence/gameplay-g17/final-a/focused/g7-wayside_shrine_court-production.png": {
+      "bytes": 62169,
+      "sha256": "eb4481fd86137e1f18b998652bee0a16bccca445d27471e3d2cb3d472ca5be69"
+    },
+    "evidence/gameplay-g17/final-a/focused/g8-cardinal-layouts.json": {
+      "bytes": 542,
+      "sha256": "1b58e9622d002562a9ea8e466955261e57436213175a2266ffd25728efa0b116"
+    },
+    "evidence/gameplay-g17/final-a/focused/g8-checksum-corruptions.json": {
+      "bytes": 1290,
+      "sha256": "b9914c5b7a8054026e3c1a9f80fa58ccf2de78abca8dd525a9ac3e6b261bcde8"
+    },
+    "evidence/gameplay-g17/final-a/focused/g8-explored-checkpoint.json": {
+      "bytes": 1115,
+      "sha256": "77b64d9887584af87e6cc0600202eea202f48d7160c3fb8ff7a1f9d4b07f0670"
+    },
+    "evidence/gameplay-g17/final-a/focused/g8-frontage-fixtures.json": {
+      "bytes": 3585,
+      "sha256": "31fbdad55b966d101a8c1193a84a73140479b39951715930a3977a4dfaa01989"
+    },
+    "evidence/gameplay-g17/final-a/focused/g8-genuine-g7-restore.json": {
+      "bytes": 1317,
+      "sha256": "8dde8aa62d2b68cf9d2797ebfd587eabbe0d8f15bf84cd0ba8ddbcee7d25746d"
+    },
+    "evidence/gameplay-g17/final-a/focused/g8-late-rollback.json": {
+      "bytes": 339,
+      "sha256": "2bac6f2676b991c42e4c8b44bbf2d09a4fde50eadef693634913f3be357b9266"
+    },
+    "evidence/gameplay-g17/final-a/focused/g8-ordinary.json": {
+      "bytes": 5492,
+      "sha256": "52d664b74c9eb8b91f2c5c666e6c94a6f654ae142a6b4ddf6cadf87c97fecc31"
+    },
+    "evidence/gameplay-g17/final-a/focused/g8-policy-combinations.json": {
+      "bytes": 509,
+      "sha256": "6a975d2a914bec76c6d23b1c6c2c19624ad992aea8a42ebb80d3903648c60061"
+    },
+    "evidence/gameplay-g17/final-a/focused/g9-checksum-corruptions.json": {
+      "bytes": 2020,
+      "sha256": "b8933c9718ab65a1853dfaed501cb842ddb964d0a4cdb508b31e247ab5781252"
+    },
+    "evidence/gameplay-g17/final-a/focused/g9-genuine-g8-restore.json": {
+      "bytes": 854,
+      "sha256": "d58950eb74a5bef26970bc2a01020328ca7fb437e9f6ec2ebaef174feb33cca3"
+    },
+    "evidence/gameplay-g17/final-a/focused/g9-late-rollback.json": {
+      "bytes": 276,
+      "sha256": "e1d626e73fa0f999e4062133b7e4cc68875f3155520e596c7b41ea9fd403e1be"
+    },
+    "evidence/gameplay-g17/final-a/focused/g9-optional-outcomes.json": {
+      "bytes": 15429,
+      "sha256": "bf76ed6d4a088918cb2785f3f9eac53a16c518793c52fc50eb2330e500f7afec"
+    },
+    "evidence/gameplay-g17/final-a/focused/g9-ordinary-touched.json": {
+      "bytes": 54855,
+      "sha256": "193e403a15565e2b50a660baab51b0df5e284745f3f51a45d992437c9672e580"
+    },
+    "evidence/gameplay-g17/final-a/focused/g9-policy-combinations.json": {
+      "bytes": 301,
+      "sha256": "66cbb0065128f8e81838030128e28ce3c624139932ad9be7e4daccfa5658f3d3"
+    },
+    "evidence/gameplay-g17/final-a/focused/g9-real-deck-replay.json": {
+      "bytes": 217,
+      "sha256": "cc74fed308372b09178667827f927bae47917d39644d368b45fa484a0b5a19da"
+    },
+    "evidence/gameplay-g17/final-a/focused/g9-two-link-marginal-budget.json": {
+      "bytes": 1081,
+      "sha256": "823c52204b468668589fda3a01d01695aceb828fc1270cbf09acb32e8deea627"
+    },
+    "evidence/gameplay-g17/final-a/focused/held_stairs.json": {
+      "bytes": 793,
+      "sha256": "1191c9b161df3f9bec21e4754d30d2bfe59ec908045cacaeba5db98411788267"
+    },
+    "evidence/gameplay-g17/final-a/focused/run.json": {
+      "bytes": 99693,
+      "sha256": "e08674010db4441fb509e4928b36a4930b96e341991ab5180088b18c6938c1d3"
+    },
+    "evidence/gameplay-g17/final-a/focused/wfc-outskirts.json": {
+      "bytes": 803,
+      "sha256": "5c54ddcb2f5fce207e0f9bb68e27e61cd2f020fa479a6be4a6658e6b74bcb83b"
+    },
+    "evidence/gameplay-g17/final-a/focused-output.txt": {
+      "bytes": 51725,
+      "sha256": "380b88342566dad76e92a253b80f4dd84927e9d82e6ba0ae6606056b7b60d58a"
+    },
+    "evidence/gameplay-g17/final-a/historical-output.txt": {
+      "bytes": 111,
+      "sha256": "35ed75de33e8a1039d0145297cb5989e0362b3e930f400383bd1acc156154770"
+    },
+    "evidence/gameplay-g17/final-a/historical.json": {
+      "bytes": 1985,
+      "sha256": "775557476f646bf8342cadcf29bdab9a9a273b2facbe55a9783a55c7b21ce6e6"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/cold/output.txt": {
+      "bytes": 483,
+      "sha256": "010d29ecf55e2fdb232ff69453814ddb9047d4483ff0f2eeabcefd8fafccefb4"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/cold/revisit/g17-cold-disk-revisit-no-respawn.png": {
+      "bytes": 43744,
+      "sha256": "b3e30f35905847f99de0008e7b1c18422f1d619fa79492ae05074e9c92ae57e8"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/cold/revisit/result.json": {
+      "bytes": 32829,
+      "sha256": "825c9e847730802ebbafb7291382f5b2b6a8d17c56035e76a14f1275bc831779"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/cold-output.txt": {
+      "bytes": 325,
+      "sha256": "113bf23889b1ed3495f65dfadc08de2d4609bc2d8370da2f91f440985ca975bc"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/combat/defeated-actor.json": {
+      "bytes": 370,
+      "sha256": "850e9504883f5db4894147a12154feb43be68278f7605ef41fe7e2ed95498053"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/combat/defeated-actor.zip": {
+      "bytes": 1554998,
+      "sha256": "72d02db89c420671cf23231b2bad111ad4207e6217d12f16c5c50c982eb651b1"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/combat/g17-defeated-with-normal-remains.png": {
+      "bytes": 75393,
+      "sha256": "2f4a504d5767a50b56248761e6a226e42ec0c734c400c81b2c3c11deab449170"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/combat/result.json": {
+      "bytes": 54386,
+      "sha256": "baa435acbdd143eb3fca3b46594a92331a7022e39b51248cc82e0158e1d21b82"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/journey.json": {
+      "bytes": 93919,
+      "sha256": "ec150f0b4d78540e53b33f103dd2a6ac7fada34db41f3f2358a9da312c979182"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold/output.txt": {
+      "bytes": 483,
+      "sha256": "010d29ecf55e2fdb232ff69453814ddb9047d4483ff0f2eeabcefd8fafccefb4"
+    },
+    "evidence/gameplay-g17/final-a/journey/cold-output.txt": {
+      "bytes": 436,
+      "sha256": "df98cccf36a7ec735d304cf5e06185fbced945d8afa7d300f9cb18ab92484e4c"
+    },
+    "evidence/gameplay-g17/final-a/journey/journey.json": {
+      "bytes": 122456,
+      "sha256": "427a7785030634fc86e2b037672b888bf4183d017307095c4604cf2e7830e7a7"
+    },
+    "evidence/gameplay-g17/final-a/journey/living/g17-authored-arrival-normal-fov.png": {
+      "bytes": 41456,
+      "sha256": "13408fa1b7364d3b49c63fc5b68d08a63e455be8fe7f988041bc2f6d674e8bc8"
+    },
+    "evidence/gameplay-g17/final-a/journey/living/g17-wounded-live-actor-normal-fov.png": {
+      "bytes": 55609,
+      "sha256": "b788847ed37e0300a8dfa88eaa30a50320edd21eea13aa98d7607063eef0967f"
+    },
+    "evidence/gameplay-g17/final-a/journey/living/living-actor.json": {
+      "bytes": 370,
+      "sha256": "e08232a6b67d5fb179f9374bbc218cd7c1787dcba628fa2893dd89a609b0b84a"
+    },
+    "evidence/gameplay-g17/final-a/journey/living/living-actor.zip": {
+      "bytes": 1555366,
+      "sha256": "1f8e5cb3a044ee2288fc1d148331fdfe4ea9db4d0c983fa9fea182ca0030af13"
+    },
+    "evidence/gameplay-g17/final-a/journey/living/result.json": {
+      "bytes": 59043,
+      "sha256": "c9e359f6d42bf092af58376cda59be92d7cc9f65971ccad3d05aa9686f852d7b"
+    },
+    "evidence/gameplay-g17/final-a/journey/output.txt": {
+      "bytes": 483,
+      "sha256": "010d29ecf55e2fdb232ff69453814ddb9047d4483ff0f2eeabcefd8fafccefb4"
+    },
+    "evidence/gameplay-g17/final-a/production/origin.json": {
+      "bytes": 179,
+      "sha256": "ff03d4c0e71a7ebb8fbb5eb2c982a96a5e832b9f5ec89f13da5b5d8d02c75cb6"
+    },
+    "evidence/gameplay-g17/final-a/production/results.json": {
+      "bytes": 7544641,
+      "sha256": "d4f3cdcaee4fbf97a5668b3ad8e918e20070cff818c6d2367670f11996065632"
+    },
+    "evidence/gameplay-g17/final-a/production-output.txt": {
+      "bytes": 5393,
+      "sha256": "84e295f99150d71049ce8abcde31712320c984ee889f41b44ca8eefe2f97ce94"
+    },
+    "evidence/gameplay-g17/final-a/release.json": {
+      "bytes": 300514,
+      "sha256": "45f96bdaafbe6002fed61b86aa18ca4b5808e8f43b61211871695507a8228901"
+    },
+    "evidence/gameplay-g17/pre-edit-historical.json": {
+      "bytes": 1988,
+      "sha256": "e8ed03c7edbf245852b091b075846d0f452f7c8f8dee1559f2ba69c23f0ab748"
+    },
+    "evidence/gameplay-g17/preflight-related-tests.txt": {
+      "bytes": 5729,
+      "sha256": "8089998915c14d4254bfa263a12f3199fd181a127075b1f0ab3a1cca0966671f"
+    },
+    "evidence/gameplay-g17/preflight-tests.txt": {
+      "bytes": 1527,
+      "sha256": "211a725906acf6f1f005b391b5f7dd3e41022868b416a897ace0fff01736e499"
+    },
+    "evidence/gameplay-g17/preflight.json": {
+      "bytes": 1885,
+      "sha256": "eff7b939e39e14c678bbd1c0ccab763062306168b9a1a52192b4797bec644b8b"
+    },
+    "evidence/gameplay-g17/review-handoff.md": {
+      "bytes": 20740,
+      "sha256": "bbaf59e718367669f103cbc0a1525855217624d4bf87641abac372cbe6ecbba1"
+    }
+  }
+}

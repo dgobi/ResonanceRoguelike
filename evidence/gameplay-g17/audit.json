@@ -1,0 +1,170 @@
+{
+  "passed": true,
+  "baseline": "5ae5d1356bd5f37e442694c664354f79096c8e38",
+  "frozen_inputs": "796b8fe02f73fab1e79572ba690c15e4db2d691f",
+  "source_inputs": 793,
+  "focused_tests": 286,
+  "focused_test_seconds": 1638.542,
+  "production": {
+    "checks": 3676,
+    "passed": 3676,
+    "failed": 0,
+    "workers": 159
+  },
+  "ordinary_workers": 146,
+  "intentional_crash_workers": 13,
+  "imported_source_entries": 12890,
+  "source_unchanged": true,
+  "runner_negative_controls_reject": 7,
+  "preservation": {
+    "protected_paths_unchanged": [
+      "roguelike/data",
+      "roguelike/main.py",
+      "roguelike/world",
+      "roguelike/entities",
+      "roguelike/components",
+      "roguelike/engine/creature_factory.py",
+      "roguelike/engine/engine.py",
+      "roguelike/engine/save_manager.py",
+      "roguelike/generation/world_gen.py",
+      "Resonance_Wiki_Maintenance",
+      "tools/critical_fix_regressions/fixtures",
+      "evidence/gameplay-g13",
+      "evidence/gameplay-g14",
+      "evidence/gameplay-g15",
+      "evidence/gameplay-g16"
+    ],
+    "historical_archive_sha256": "0867c43c7b39adf64ef13e26dadaccefa82730046021e62c7d1213682685287d",
+    "dependency_checks": 51,
+    "pending_bsp_fingerprint": "476c12d5707c5a0d7bcc1ecf238abb616dd3b0c1166416ee084f3a266917709f"
+  },
+  "controlled_encounter": {
+    "cold_pids": [
+      20240,
+      2700,
+      14408
+    ],
+    "living_actor_hp": 10,
+    "ordinary_combat": {
+      "turns": 8,
+      "player_hp_before": 59,
+      "player_hp_after": 56,
+      "normal_remains": true,
+      "remains_xy": [
+        41,
+        20
+      ]
+    },
+    "no_respawn_on_cache_and_disk": true,
+    "unrelated_authored_ownership_preserved": true,
+    "archives": [
+      "evidence/gameplay-g17/final-a/journey/cold/combat/defeated-actor.zip",
+      "evidence/gameplay-g17/final-a/journey/living/living-actor.zip"
+    ],
+    "normal_fov_views_visually_checked": 3
+  },
+  "measured_checks": [
+    {
+      "name": "focused",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+        "--game",
+        "G:\\GameDev\\RoguelikeProject\\roguelike",
+        "--timeout",
+        "3600",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g17\\final-a\\focused"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 1643.5804583000136,
+      "timeout": 3700
+    },
+    {
+      "name": "production",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\g17-production-final-a"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 682.4432801000075,
+      "timeout": 3600,
+      "receipt": "production/results.json"
+    },
+    {
+      "name": "example-preview",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "G:\\GameDev\\RoguelikeProject\\roguelike\\docs\\examples\\g17_authored_creature_room.json",
+        "--route",
+        "authored_submap",
+        "--access",
+        "G:\\GameDev\\RoguelikeProject\\roguelike\\docs\\examples\\g17_authored_creature_room.access.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g17\\final-a\\example-preview.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.5227148999692872,
+      "timeout": 90
+    },
+    {
+      "name": "editor-catalog",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\structure_authoring.py",
+        "--check-editor-catalog"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.2386801999527961,
+      "timeout": 90
+    },
+    {
+      "name": "historical",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g17_historical.py",
+        "--baseline",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g17\\pre-edit-historical.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g17\\final-a\\historical.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 2.135173099988606,
+      "timeout": 90
+    },
+    {
+      "name": "authored-encounter",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g17_journey.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g17\\final-a\\journey"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 15.919942400010768,
+      "timeout": 1300
+    }
+  ],
+  "gate_wall_seconds": 1663.5007711999933
+}

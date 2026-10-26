@@ -1,0 +1,35 @@
+{
+  "verification_scope": "Archive-source held-key regression; original Engine.run and wall clock",
+  "hold_seconds": 0.34,
+  "frames": 64,
+  "trace": [
+    {
+      "phase": "ascent",
+      "turn_before": 480,
+      "turn_after": 480,
+      "submap_id": null,
+      "held_key": null
+    },
+    {
+      "phase": "descent",
+      "turn_before": 480,
+      "turn_after": 480,
+      "submap_id": "sub_0_64_0",
+      "held_key": null
+    },
+    {
+      "phase": "invalid descent on stairs up",
+      "turn_before": 480,
+      "turn_after": 480,
+      "submap_id": "sub_0_64_0",
+      "held_key": null
+    },
+    {
+      "phase": "ordinary wait",
+      "turn_before": 480,
+      "turn_after": 483,
+      "submap_id": "sub_0_64_0",
+      "held_key": null
+    }
+  ]
+}

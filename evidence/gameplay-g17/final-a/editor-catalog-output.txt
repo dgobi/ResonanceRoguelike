@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "assets": 67,
+  "diagnostics": 247,
+  "output": null,
+  "previews": 0,
+  "registration": false,
+  "status": null
+}

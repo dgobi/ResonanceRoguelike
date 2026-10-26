@@ -1,0 +1,58 @@
+[
+  {
+    "case": "foreign child",
+    "error": "site-81-34-48-21-N-slot-shrine: compound reverse ownership mismatch"
+  },
+  {
+    "case": "missing slot",
+    "error": "site-81-34-48-21-N-slot-shrine: compound reverse ownership mismatch"
+  },
+  {
+    "case": "duplicate parent",
+    "error": "invalid/duplicate G3 sites identities"
+  },
+  {
+    "case": "foreign path",
+    "error": "POI parent: site-81-34-48-21-N: child region/path outside parent or private circulation overlap"
+  },
+  {
+    "case": "foreign path owner",
+    "error": "compound path ownership mismatch"
+  },
+  {
+    "case": "missing path",
+    "error": "malformed saved plan record: 'site-81-34-48-21-N-path-court'"
+  },
+  {
+    "case": "wrong gate",
+    "error": "compound envelope has foreign or missing containment permission"
+  },
+  {
+    "case": "envelope escape",
+    "error": "G3 reservation geometry does not match owner"
+  },
+  {
+    "case": "required flags",
+    "error": "POI parent: site-81-34-48-21-N: missing/duplicate required slots"
+  },
+  {
+    "case": "invalid goals",
+    "error": "POI parent: site-81-34-48-21-N: required child goal references mismatch"
+  },
+  {
+    "case": "bad effective transform",
+    "error": "POI parent: site-81-34-48-21-N: invalid effective transforms"
+  },
+  {
+    "case": "wrong parent road",
+    "error": "compound external access permission mismatch"
+  },
+  {
+    "case": "foreign containment",
+    "error": "compound envelope has foreign or missing containment permission"
+  },
+  {
+    "case": "count tamper",
+    "error": "POI parent: accepted parent count mismatch"
+  }
+]
