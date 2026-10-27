@@ -84,6 +84,8 @@ pub struct Document {
     revision: u64,
     attempt: u64,
     inspection: Value,
+    accepted: Option<recovery::Record>,
+    edit_sequence: u64,
 }
 #[derive(Clone)]
 struct Review {
@@ -111,6 +113,12 @@ fn handoff_owner(state: &mut Session, id: &str, asset: &str, expected: Option<&s
     let revision = if h.replacement.is_some() { 0 } else { h.revision };
     if doc.revision != revision { return Err(failure("NEWER_DRAFT", "Published candidate no longer covers this document.", "Keep or copy the newer draft before deliberate reconciliation.")); }
     Ok((token.clone(), h.replacement.is_some()))
+}
+fn recovery_owner(state:&mut Session,token:&str,handoff:Option<&str>)->Result<String,Failure>{
+    if current_document(state,token).is_some(){return Ok(token.into());}
+    let id=handoff.ok_or_else(unknown_document)?;
+    let h=state.handoffs.get(id).cloned().filter(|h|h.source==token).ok_or_else(unknown_document)?;
+    handoff_owner(state,id,&h.path,Some(&h.sha256)).map(|(token,_)|token)
 }
 pub(crate) fn hash(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
@@ -176,7 +184,7 @@ fn dependency_bound(s: &str) -> bool { content_root(s).is_some() || is_creature(
 fn relative_content(s: &str) -> Result<PathBuf, Failure> {
     if is_pool(s) || content_root(s).is_some() || is_creature(s) || is_layout(s) || s == G17_EXAMPLE { Ok(PathBuf::from(s)) } else { relative_building(s) }
 }
-fn no_link(path: &Path) -> Result<(), Failure> {
+pub(super) fn no_link(path: &Path) -> Result<(), Failure> {
     let meta = fs::symlink_metadata(path).map_err(io_error)?;
     #[cfg(windows)]
     let linked = {
@@ -297,6 +305,153 @@ fn advance_document(host: &Host, token: &str) -> Result<(), Failure> {
     revoke(doc);
     Ok(())
 }
+fn accept_edit(host:&Host, token:&str, sequence:u64, draft:String, variant:bool, variant_id:String)->Result<u64,Failure> {
+    let mut state=host.inner.lock().unwrap();
+    if state.applying || state.closing{return Err(busy_failure());}
+    if draft.len()>MAX_DRAFT || variant_id.len()>128{return Err(recovery::error("Draft or variant ID exceeds the recovery bound."));}
+    let root=state.root.clone().ok_or_else(unknown_document)?;
+    let doc=current_document(&mut state,token).ok_or_else(unknown_document)?;
+    let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Only eligible registered item, recipe and text documents have durable drafts."))?;
+    if sequence<=doc.edit_sequence || sequence>9_007_199_254_740_990{return Err(recovery::error("Obsolete or invalid edit acknowledgement refused."));}
+    let mut record=doc.accepted.clone().unwrap_or_else(||recovery::Record {
+        version:recovery::VERSION,id:uuid::Uuid::new_v4().to_string(),project:root,source:doc.relative.clone(),
+        family:family.id.clone(),contract:family.contract.clone(),descriptor_sha256:family.digest.clone(),
+        source_sha256:hash(&doc.original),baseline:String::from_utf8(doc.original.clone()).unwrap(),draft:String::new(),
+        variant:false,variant_id:String::new(),target:doc.relative.clone(),generation:0,captured_ms:0,published:None,
+    });
+    record.generation+=1;record.captured_ms=recovery::now();record.draft=draft;record.variant=variant;
+    record.target=recovery::intent_target(&doc.relative,variant,&variant_id);record.variant_id=variant_id;
+    record.validate()?;let generation=record.generation;
+    doc.accepted=Some(record);doc.edit_sequence=sequence;doc.revision+=1;revoke(doc);Ok(generation)
+}
+pub(super) fn flush_registered(app:&tauri::AppHandle,host:&Host)->Result<(),Failure>{
+    let mut state=host.inner.lock().unwrap();if state.applying{return Err(busy_failure());}
+    for doc in state.content_documents.values(){if let Some(record)=&doc.accepted{recovery::with_store(app,host,|store|store.write(record))?;}}
+    state.closing=true;
+    Ok(())
+}
+#[tauri::command]
+pub fn edit_document(host:tauri::State<'_,Host>,token:String,sequence:u64,draft:String,variant:bool,variant_id:String)->Result<u64,Failure>{
+    accept_edit(&host,&token,sequence,draft,variant,variant_id)
+}
+#[tauri::command]
+pub fn checkpoint_document(app:tauri::AppHandle,host:tauri::State<'_,Host>,token:String,handoff_id:Option<String>)->Result<Value,Failure>{
+    let mut state=host.inner.lock().unwrap();
+    let token=recovery_owner(&mut state,&token,handoff_id.as_deref())?;
+    let doc=current_document(&mut state,&token).ok_or_else(unknown_document)?;
+    let Some(record)=&doc.accepted else{return Ok(json!({"generation":0,"token":token}));};
+    let started=Instant::now();recovery::with_store(&app,&host,|store|store.write(record))?;
+    Ok(json!({"generation":record.generation,"key":record.key(),"token":token,"elapsed_ms":started.elapsed().as_secs_f64()*1000.0}))
+}
+#[tauri::command]
+pub fn discard_document_draft(app:tauri::AppHandle,host:tauri::State<'_,Host>,token:String,handoff_id:Option<String>)->Result<String,Failure>{
+    let mut state=host.inner.lock().unwrap();if state.applying{return Err(busy_failure());}
+    let token=recovery_owner(&mut state,&token,handoff_id.as_deref())?;
+    let doc=current_document(&mut state,&token).ok_or_else(unknown_document)?;
+    if let Some(record)=&doc.accepted {recovery::with_store(&app,&host,|store|store.retire(&record.key(),record.generation))?;}
+    doc.accepted=None;doc.revision+=1;revoke(doc);Ok(token)
+}
+fn recovery_status(record:&recovery::Record)->(String,Option<String>){
+    let result=(||{
+        let root=canonical_root(&record.project)?;
+        if recovery::project_key(&root)!=recovery::project_key(&record.project){return Err(recovery::error("Project identity changed."));}
+        let bytes=read_source(&checked_target(&root,&record.source,false)?)?;
+        Ok(String::from_utf8(bytes).unwrap())
+    })();
+    match result {
+        Ok(raw) if hash(raw.as_bytes())==record.source_sha256 =>("Source unchanged; fresh compatibility inspection required".into(),Some(raw)),
+        Ok(raw)=>("Source changed; retained draft and current disk text available for comparison".into(),Some(raw)),
+        Err(e)=>(format!("Source/project unavailable: {}",e.message),None),
+    }
+}
+#[tauri::command]
+pub fn list_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>)->Result<Value,Failure>{
+    // No worker or compatibility handshake. This is a trusted-storage inventory.
+    let (records,notices)=recovery::with_store(&app,&host,|store|store.list())?;
+    let records:Vec<_>=records.into_iter().map(|r|{
+        let (status,_)=recovery_status(&r);
+        json!({"key":r.key(),"project":r.project,"source":r.source,"family":r.family,"generation":r.generation,"captured_ms":r.captured_ms,"status":status,"published":r.published})
+    }).collect();Ok(json!({"records":records,"notices":notices}))
+}
+#[tauri::command]
+pub fn inspect_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,key:String)->Result<Value,Failure>{
+    let record=recovery::with_store(&app,&host,|store|store.read(&key))?;
+    let (status,disk)=recovery_status(&record);Ok(json!({"record":record,"status":status,"disk":disk}))
+}
+#[tauri::command]
+pub fn discard_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,key:String,generation:u64)->Result<(),Failure>{
+    let state=host.inner.lock().unwrap();
+    if state.content_documents.values().any(|d|d.accepted.as_ref().is_some_and(|r|r.key()==key)) {
+        return Err(recovery::error("This record belongs to an open document. Resolve its draft through that document's close choices."));
+    }
+    recovery::with_store(&app,&host,|store|{
+        if store.read(&key)?.generation!=generation{return Err(recovery::error("Recovery generation changed. Refresh the list."));}
+        store.retire(&key,generation)
+    })
+}
+#[tauri::command]
+pub fn restore_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,token:String,key:String)->Result<Value,Failure>{
+    let mut state=host.inner.lock().unwrap();if state.applying || !state.ready{return Err(busy_failure());}
+    let root=state.root.clone().ok_or_else(unknown_document)?;
+    let doc=current_document(&mut state,&token).ok_or_else(unknown_document)?;
+    let mut record=recovery::with_store(&app,&host,|store|store.read(&key))?;
+    check_restore(&root,doc,&record)?;
+    // An interrupted write may precede persistence of its completion fact. An
+    // identical existing target is historical evidence, never write permission.
+    if record.published.is_none() && record.target!=record.source {
+        if let Ok(bytes)=checked_target(&root,&record.target,false).and_then(|p|read_source(&p)) {
+            if hash(&bytes)==hash(record.draft.as_bytes()) {
+                record.generation+=1;record.captured_ms=recovery::now();
+                record.published=Some(recovery::Published {path:record.target.clone(),after_sha256:hash(&bytes),generation:record.generation});
+            }
+        }
+    }
+    recovery::with_store(&app,&host,|store|{store.claim(&key)?;store.write(&record)})?;
+    doc.accepted=Some(record.clone());doc.edit_sequence=0;doc.revision+=1;revoke(doc);
+    Ok(json!({"key":key,"generation":record.generation,"draft":record.draft,"variant":record.variant,"variant_id":record.variant_id,"published":record.published}))
+}
+fn check_restore(root:&Path,doc:&Document,record:&recovery::Record)->Result<(),Failure>{
+    if doc.revision!=0 || doc.accepted.is_some(){return Err(recovery::error("An open draft already owns this file. Focus it and resolve that draft explicitly."));}
+    let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Current source/contract is not editable. Recovery remains inspectable and copyable."))?;
+    if recovery::project_key(root)!=recovery::project_key(&record.project) || file_key(&doc.relative)!=file_key(&record.source)
+        || family.id!=record.family || hash(&doc.original)!=record.source_sha256
+        || read_source(&checked_target(root,&doc.relative,false)?)?!=doc.original {
+        return Err(recovery::error("Source or project changed. Keep and compare both versions; no baseline was adopted."));
+    }
+    Ok(())
+}
+#[tauri::command]
+pub fn reconcile_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,token:String,key:String,generation:u64)->Result<(),Failure>{
+    let mut state=host.inner.lock().unwrap();if state.applying || !state.ready{return Err(busy_failure());}
+    let root=state.root.clone().ok_or_else(unknown_document)?;
+    let doc=current_document(&mut state,&token).ok_or_else(unknown_document)?;
+    let record=recovery::with_store(&app,&host,|store|store.read(&key))?;
+    let (path,expected)=record.published.as_ref().map(|p|(p.path.as_str(),p.after_sha256.clone())).unwrap_or((&record.target,hash(record.draft.as_bytes())));
+    if recovery::project_key(&root)!=recovery::project_key(&record.project) || file_key(&doc.relative)!=file_key(path)
+        || doc.revision!=0 || doc.accepted.is_some() || record.generation!=generation
+        || hash(&doc.original)!=expected || hash(record.draft.as_bytes())!=expected || record.target!=path
+        || record.published.as_ref().is_some_and(|p|p.generation!=record.generation)
+        || read_source(&checked_target(&root,path,false)?)?!=doc.original {
+        return Err(recovery::error("Saved target does not cover this exact recovery generation. Newer or conflicting work remains available to inspect/copy."));
+    }
+    recovery::with_store(&app,&host,|store|store.retire(&key,generation))?;revoke(doc);Ok(())
+}
+#[tauri::command]
+pub fn acknowledge_reopen(app:tauri::AppHandle,host:tauri::State<'_,Host>,handoff_id:String)->Result<(),Failure>{
+    let mut state=host.inner.lock().unwrap();
+    let h=state.handoffs.get(&handoff_id).cloned().ok_or_else(unknown_document)?;
+    let (token,done)=handoff_owner(&mut state,&handoff_id,&h.path,Some(&h.sha256))?;
+    if !done{return Err(recovery::error("Host reopen is not complete."));}
+    let root=state.root.clone().ok_or_else(unknown_document)?;
+    if hash(&read_source(&checked_target(&root,&h.path,false)?)?)!=h.sha256{return Err(conflict());}
+    let doc=current_document(&mut state,&token).ok_or_else(unknown_document)?;
+    if let Some(r)=&doc.accepted {
+        if r.published.as_ref().is_none_or(|p|p.generation!=r.generation) || hash(r.draft.as_bytes())!=h.sha256{return Err(recovery::error("Newer unsaved generation retained."));}
+        recovery::with_store(&app,&host,|store|store.retire(&r.key(),r.generation))?;
+        doc.accepted=None;
+    }
+    Ok(())
+}
 fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
     state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).chain(state.content_documents.values_mut()).chain(state.creature_document.as_mut()).find(|d| d.token == token)
 }
@@ -333,17 +488,22 @@ fn owner_collision(state: &Session, asset: &str, replacing: Option<&str>) -> Res
     }
     Ok(())
 }
-fn remove_document(host: &Host, token: &str) -> Result<(), Failure> {
+fn remove_document_with(host: &Host, token: &str, checkpoint:impl FnOnce(&Document)->Result<(),Failure>) -> Result<(), Failure> {
     let mut state = host.inner.lock().unwrap();
     if state.applying { return Err(busy_failure()); }
     let key = state.content_documents.iter().find(|(_, d)| d.token == token).map(|(k, _)| k.clone()).ok_or_else(unknown_document)?;
-    state.content_documents.remove(&key);
+    checkpoint(&state.content_documents[&key])?;
+    let removed=state.content_documents.remove(&key).unwrap();
+    if let Some(record)=removed.accepted {if let Some(store)=host.recovery.lock().unwrap().as_mut(){store.release(&record.key());}}
     // Do not kill a worker or release resources belonging to another document.
     Ok(())
 }
+#[cfg(test)]
+fn remove_document(host:&Host,token:&str)->Result<(),Failure>{remove_document_with(host,token,|_|Ok(()))}
 #[tauri::command]
-pub fn close_document(host: tauri::State<'_, Host>, token: String) -> Result<(), Failure> {
-    remove_document(&host, &token)
+pub fn close_document(app:tauri::AppHandle,host: tauri::State<'_, Host>, token: String, handoff_id:Option<String>) -> Result<(), Failure> {
+    let token=recovery_owner(&mut host.inner.lock().unwrap(),&token,handoff_id.as_deref())?;
+    remove_document_with(&host,&token,|doc|{if let Some(record)=&doc.accepted{recovery::with_store(&app,&host,|store|store.write(record))?;}Ok(())})
 }
 
 fn begin_validation(host: &Host, token: &str) -> Result<(Operation, PathBuf, Document), Failure> {
@@ -437,6 +597,7 @@ pub async fn open_document(
             return Ok(envelope(previous.unwrap().inspection));
         }
         let evidence_inputs = if dependency_bound(&asset) { Some(input_stamp(&root)?) } else { None };
+        let recovery_app=app.clone();
         let mut response = run_worker(
             app,
             &operation,
@@ -488,9 +649,14 @@ pub async fn open_document(
             revision: 0,
             attempt: 0,
             inspection: response["result"].clone(),
+            accepted: previous.as_ref().and_then(|p| if handoff_id.is_some() {p.accepted.clone()} else {None}),
+            edit_sequence: 0,
         };
         if registered {
-            if let Some(previous) = previous { state.content_documents.retain(|_, d| d.token != previous.token); }
+            if let Some(previous) = previous {
+                if handoff_id.is_none() {if let Some(record)=previous.accepted {recovery::with_store(&recovery_app,&host,|store|{store.write(&record)?;store.release(&record.key());Ok(())})?;}}
+                state.content_documents.retain(|_, d| d.token != previous.token);
+            }
             state.content_documents.insert(file_key(&document.relative), document);
             if let Some(id)=handoff_id { state.handoffs.get_mut(&id).ok_or_else(unknown_document)?.replacement=Some(token); }
         }
@@ -938,7 +1104,9 @@ pub async fn apply_document(
     let (operation, root, doc, review) = admit_apply(&host, &token, &review_token, confirmed, || {})?;
     let host = host.inner().clone();
     tauri::async_runtime::spawn_blocking(move || {
+        let recovery_app=app.clone();
         let mut result = (|| {
+            if let Some(record)=&doc.accepted {recovery::with_store(&recovery_app,&host,|store|store.write(record))?;}
             let target = checked_target(&root, &doc.relative, false)?;
             let _pins = pin_inputs(&root, &target)?;
             let source_lock = pin_source(&target)?;
@@ -974,6 +1142,13 @@ pub async fn apply_document(
                 state.handoffs.insert(id.clone(),Handoff {source:doc.token.clone(),revision:doc.revision,
                     path:review.destination.clone(),sha256:hash(review.draft.as_bytes()),replacement:None});
                 receipt["handoff_id"]=json!(id);
+                if let Some(current)=current_document(&mut state,&doc.token) {
+                    if let Some(record)=&mut current.accepted {
+                        record.generation+=1;record.captured_ms=recovery::now();
+                        record.published=Some(recovery::Published{path:review.destination.clone(),after_sha256:hash(review.draft.as_bytes()),generation:record.generation});
+                        if let Err(e)=recovery::with_store(&recovery_app,&host,|store|store.write(record)) {receipt["recovery_error"]=json!(e);}
+                    }
+                }
             }
         }
         drop(state);
@@ -1047,6 +1222,7 @@ pub fn document_disk(host: tauri::State<'_, Host>, token: String) -> Result<Valu
 }
 #[tauri::command]
 pub fn finish_close(window: tauri::Window, host: tauri::State<'_, Host>) -> Result<(), Failure> {
+    flush_registered(window.app_handle(),&host)?;
     host.cancel(true)?;
     window.destroy().map_err(io_error)
 }
@@ -1069,6 +1245,39 @@ mod tests {
             state.discovered.extend(documents.iter().map(|d|d.relative.clone()));
         }
         (root,host,documents)
+    }
+    #[test]
+    fn recovery_fresh_source_authority_rejects_changed_missing_unsupported_and_other_project(){
+        let (root,host,doc,_)=lifecycle_fixture(false);
+        accept_edit(&host,&doc.token,1,"invalid retained λ".into(),true,"new_variant".into()).unwrap();
+        let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();
+        let mut fresh=doc.clone();fresh.token="fresh-after-restart".into();fresh.review=None;
+        assert!(check_restore(root.path(),&fresh,&record).is_ok());
+        fresh.family.as_mut().unwrap().contract="new-supported-contract".into();
+        assert!(check_restore(root.path(),&fresh,&record).is_ok()); // Fresh support, old evidence discarded.
+        fresh.writable=false;assert!(check_restore(root.path(),&fresh,&record).is_err());fresh.writable=true;
+        fresh.family=None;assert!(check_restore(root.path(),&fresh,&record).is_err());fresh.family=doc.family.clone();
+        let other=tempfile::tempdir().unwrap();assert!(check_restore(other.path(),&fresh,&record).is_err());
+        fresh.revision=1;assert!(check_restore(root.path(),&fresh,&record).is_err());fresh.revision=0;
+        fs::write(root.path().join(&doc.relative),b"changed source {").unwrap();assert!(check_restore(root.path(),&fresh,&record).is_err());
+        fs::remove_file(root.path().join(&doc.relative)).unwrap();assert!(check_restore(root.path(),&fresh,&record).is_err());
+        assert_eq!(record.draft,"invalid retained λ");assert!(fresh.review.is_none());
+    }
+    #[test]
+    fn accepted_recovery_state_rejects_busy_old_sequences_and_retains_exact_intent(){
+        let (_root,host,doc,_)=lifecycle_fixture(false);
+        let text="\u{feff}{\r\n\"metadata\": \"λ\\n\",\r\n\"invalid\": [";
+        assert_eq!(accept_edit(&host,&doc.token,2,text.into(),true,"unfinished_".into()).unwrap(),1);
+        let accepted=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();
+        assert_eq!(accepted.draft,text);assert!(accepted.variant);assert_eq!(accepted.variant_id,"unfinished_");assert!(accepted.published.is_none());
+        assert!(accept_edit(&host,&doc.token,1,"older".into(),false,"".into()).is_err());
+        host.inner.lock().unwrap().applying=true;
+        assert_eq!(accept_edit(&host,&doc.token,3,"BUSY optimistic sentinel".into(),false,"".into()).unwrap_err().code,"BUSY");
+        host.inner.lock().unwrap().applying=false;
+        assert_eq!(session_doc(&host,&doc.token).unwrap().1.accepted.unwrap(),accepted);
+        let dir=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(dir.path().into()).unwrap();store.write(&accepted).unwrap();
+        let serialized=fs::read_to_string(dir.path().join(format!("{}.json",accepted.key()))).unwrap();
+        for forbidden in ["document_token","review_token","writable","inspection","BUSY optimistic sentinel"]{assert!(!serialized.contains(forbidden));}
     }
     #[test]
     fn completed_handoff_rejects_newer_drafts_and_reacquires_only_its_successor() {
@@ -1396,6 +1605,8 @@ mod tests {
             revision: 0,
             attempt: 0,
             inspection: Value::Null,
+            accepted: None,
+            edit_sequence: 0,
         };
         let review = Review {
             token: "reviewed".into(),

@@ -29,6 +29,7 @@ import { type RequestLease } from "./requests";
 import type { Disk, DiskSubscription } from "./workspace";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
 import { requireCovered, type Candidate } from "./reopen";
+import { Checkpoints, type RegisterRecovery, type RecoveryStatus } from "./recovery";
 
 type Verdict = {
   valid: boolean;
@@ -63,6 +64,7 @@ export function Authoring({
   dependencyVersion = 0,
   onItem, poolEntryFocus, contentNavigation, selectedCreatureId,
   subscribeDisk,
+  registerRecovery,
 }: {
   document: Inspection;
   onDirty: (dirty: boolean) => void;
@@ -85,6 +87,7 @@ export function Authoring({
   contentNavigation?: ContentNavigation;
   selectedCreatureId?: string;
   subscribeDisk: DiskSubscription;
+  registerRecovery?: RegisterRecovery;
 }) {
   const pool = document.route === "contextual_loot_pool";
   const content = document.family;
@@ -101,22 +104,29 @@ export function Authoring({
     void next.catch(() => {}); // Callers retain the rejection; no obsolete global error handler.
     return next;
   }
-  const acknowledged = useRef(document.raw);
+  const recovered=document.recovery;
+  const [restored,setRestored]=useState(!!recovered);
+  const initial:Candidate={text:recovered?.draft ?? document.raw,variant:recovered?.variant ?? false,variantId:recovered?.variant_id ?? ""};
+  const acknowledged = useRef(initial);
   const editVersion = useRef(0);
   const applying = useRef(false);
   const [pendingEdit, setPendingEdit] = useState(false);
-  const [draft, setDraft] = useState(document.raw),
-    [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(initial.text),
+    [editing, setEditing] = useState(!!recovered);
   const [tab, setTab] = useState("properties"),
     [verdict, setVerdict] = useState<Verdict | null>(null);
-  const [variant, setVariant] = useState(false),
-    [variantId, setVariantId] = useState("");
+  const [variant, setVariant] = useState(initial.variant),
+    [variantId, setVariantId] = useState(initial.variantId);
   const [disk, setDisk] = useState<Disk | null>(null),
     [confirm, setConfirm] = useState(false);
   const [localError, setLocalError] = useState("");
-  const [saved, setSaved] = useState<({path:string; after_sha256:string; handoff_id?:string} & {candidate:Candidate}) | null>(null);
+  const [saved, setSaved] = useState<({path:string; after_sha256:string; handoff_id?:string} & {candidate:Candidate}) | null>(recovered?.published ? {...recovered.published,candidate:initial} : null);
+  const savedRef=useRef(saved);savedRef.current=saved;
+  const closingOwner=useRef(document.document_token!);
   const intent = useRef({variant,variantId});
-  intent.current = {variant,variantId};
+  const [recoveryStatus,setRecoveryStatus]=useState<RecoveryStatus|null>(recovered ? {state:"saved",generation:recovered.generation} : null);
+  const checkpoints=useRef<Checkpoints|null>(null);
+  if(!checkpoints.current && content)checkpoints.current=new Checkpoints(()=>invoke("checkpoint_document",{token:document.document_token}),setRecoveryStatus);
   const [evidenceVersion, setEvidenceVersion] = useState(dependencyVersion);
   const [previewEvidence,setPreviewEvidence]=useState<{frame:FamilyPreview;text:string;version:number;dependencies:number;stale:boolean}|null>(null);
   const [focus, setFocus] = useState<{ cell: Cell; layer: Layer } | null>(null);
@@ -126,7 +136,7 @@ export function Authoring({
   const version = useRef(0),
     latest = useRef(draft),
     mounted = useRef(true);
-  const dirty = draft !== document.raw;
+  const dirty = draft !== document.raw || variant || !!variantId || !!saved || restored;
   const parsed = syntax(draft);
   const sourceId = content ? `${view?.sourceId}-${document.document_token}` : creature ? "creature-draft-json" : pool ? "pool-draft-json" : "draft-json";
   let values: Record<string, unknown> = {};
@@ -155,8 +165,27 @@ export function Authoring({
     return () => {
       mounted.current = false;
       version.current++;
+      checkpoints.current?.stop();
     };
   }, []);
+  async function flushRecovery(){
+    await revocation.current.catch(()=>{});
+    // Force a host snapshot too: completed-publication facts can advance the
+    // checkpoint independently of frontend edit callbacks.
+    await checkpoints.current?.flush();
+    const result=await invoke<{generation:number;token:string}>("checkpoint_document",{token:document.document_token,handoffId:savedRef.current?.handoff_id});
+    closingOwner.current=result.token;
+    setRecoveryStatus({state:"saved",generation:result.generation});
+  }
+  async function discardRecovery(){
+    await revocation.current.catch(()=>{});
+    checkpoints.current?.stop();
+    try{closingOwner.current=await invoke<string>("discard_document_draft",{token:document.document_token,handoffId:savedRef.current?.handoff_id});}
+    catch(e){setRecoveryStatus({state:"error",generation:0,message:asFailure(e).message});throw e;}
+    finally{checkpoints.current=content ? new Checkpoints(()=>invoke("checkpoint_document",{token:document.document_token}),setRecoveryStatus) : null;}
+    setRecoveryStatus(null);
+  }
+  useEffect(()=>registerRecovery?.(document.document_token!,{flush:flushRecovery,discard:discardRecovery,handoff:()=>savedRef.current?.handoff_id,owner:()=>closingOwner.current}),[document.document_token,registerRecovery]);
   useEffect(() => subscribeDisk(document.document_token!, () => {
     const revision = version.current;
     return row => {
@@ -169,17 +198,23 @@ export function Authoring({
       }
     };
   }), [document.document_token, subscribeDisk]);
-  function change(text: string, visual = false) {
+  function change(text: string, visual = false, nextIntent=intent.current) {
     if (applying.current || busy.includes("applying") || busy.includes("repository")) return;
     // WebView textarea events may repeat the same normalized CRLF value on
     // focus changes. A no-op must not start another acknowledgement/render loop.
-    if (text === latest.current) return;
+    if (text === latest.current && nextIntent.variant===intent.current.variant && nextIntent.variantId===intent.current.variantId) return;
     if (!visual) {
       history.current.clear();
       gesture.current = null;
     }
     const edit = ++editVersion.current;
-    const admitted = revoke();
+    onDirty(true);
+    const candidate={text,...nextIntent};
+    const admitted = content ? revocation.current.catch(()=>{}).then(()=>invoke<number>("edit_document",{
+      token:document.document_token,sequence:edit,draft:text,variant:nextIntent.variant,variantId:nextIntent.variantId,
+    })) : revoke();
+    revocation.current=admitted;void admitted.catch(()=>{});
+    intent.current=nextIntent;setVariant(nextIntent.variant);setVariantId(nextIntent.variantId);
     setPendingEdit(true);
     latest.current = text;
     version.current++;
@@ -188,14 +223,16 @@ export function Authoring({
     setVerdict(null);
     setConfirm(false);
     setLocalError("");
-    void admitted.then(() => {
-      acknowledged.current = text;
+    void admitted.then(generation => {
+      acknowledged.current = candidate;
+      if(content)checkpoints.current?.accepted(generation as number);
       if (mounted.current && editVersion.current === edit) setPendingEdit(false);
     }, error => {
       if (mounted.current && editVersion.current === edit) {
         onError(asFailure(error));
-        latest.current = acknowledged.current;
-        setDraft(acknowledged.current);
+        latest.current = acknowledged.current.text;
+        intent.current={variant:acknowledged.current.variant,variantId:acknowledged.current.variantId};
+        setDraft(acknowledged.current.text);setVariant(acknowledged.current.variant);setVariantId(acknowledged.current.variantId);
         setPendingEdit(false);
         history.current.clear();
         setLocalError("Edit was not accepted. Publication is in progress.");
@@ -288,6 +325,7 @@ export function Authoring({
     const request = beginRequest("Revalidating and applying one file…");
     onError(null);
     try {
+      if(content)await flushRecovery();
       const r = await call<{
         path: string;
         before_sha256: string;
@@ -318,6 +356,7 @@ export function Authoring({
     const request = beginRequest("Reopening saved file…");
     onError(null);
     try {
+      if(!saved.handoff_id && recovered)throw new Error("This receipt is historical. Keep this draft for recovery and use Recover drafts → Reconcile saved file. No write will be repeated.");
       const covered=()=>requireCovered(saved.candidate,{text:latest.current,...intent.current});
       covered();
       await revocation.current;
@@ -346,6 +385,10 @@ export function Authoring({
                 : "";
   return (
     <section className="authoring" data-testid="authoring" data-edit-pending={pendingEdit}>
+      {content && <p className="notice" data-testid="recovery-status">
+        {recoveryStatus?.state==="pending" ? "Recovery pending · checkpoints within 500 ms of accepted edits" : recoveryStatus?.state==="error" ? `Unable to save recovery: ${recoveryStatus.message}` : recoveryStatus?.state==="saved" ? `Recovery checkpoint saved · generation ${recoveryStatus.generation}` : "Recovery available for accepted item, recipe and text edits"}
+        {recoveryStatus?.state==="error" && <button onClick={()=>void flushRecovery().catch(e=>onError(asFailure(e)))}>Retry recovery save</button>}
+      </p>}
       {saved && <div className="notice warning" data-testid="saved-reopen-failed">
         <strong>File saved; reopen failed or incomplete.</strong>
         <p>{saved.path}. This draft and the save receipt are retained.</p>
@@ -458,23 +501,19 @@ export function Authoring({
       ) : (
         <div className="edit-actions">
           <button
-            disabled={!!busy}
-            onClick={() => {
-              change(document.raw);
-              setEditing(false);
-              setVariant(false);
-              setVariantId("");
-            }}
+            disabled={!!busy || !!saved}
+            onClick={() => void (async()=>{
+              if(content)await discardRecovery();else await revoke();
+              latest.current=document.raw;intent.current={variant:false,variantId:""};acknowledged.current={text:document.raw,...intent.current};
+              setDraft(document.raw);setEditing(false);setVariant(false);setVariantId("");setSaved(null);setRestored(false);setVerdict(null);history.current.clear();
+            })().catch(e=>onError(asFailure(e)))}
           >
             Discard / Revert
           </button>
           <button
             disabled={!!busy}
             onClick={() => {
-              revoke();
-              setVariant(!variant);
-              setVerdict(null);
-              version.current++;
+              change(latest.current,false,{...intent.current,variant:!intent.current.variant});
             }}
           >
             {" "}
@@ -490,8 +529,8 @@ export function Authoring({
             value={variantId}
             disabled={!!busy}
             onChange={(e) => {
-              setVariantId(e.target.value);
-              property("id", e.target.value);
+              let text=latest.current;try{text=scalarEdit(text,"id",e.target.value);}catch{/* Keep invalid text exact while retaining target intent. */}
+              change(text,false,{...intent.current,variantId:e.target.value});
             }}
           />
           <small>

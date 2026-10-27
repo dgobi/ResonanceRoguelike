@@ -1,4 +1,4 @@
-# Resonance Workbench · W5C
+# Resonance Workbench · W5D
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, inert component items,
@@ -22,7 +22,9 @@ variant inputs, structured Undo/Redo, selected view/page and scroll position.
 Raw edits and variant-ID edits still clear that document's structured history.
 
 **Close document** and **Reload document** affect the selected file only. A dirty
-file is named in the **Keep editing / Discard and continue** prompt. Reload reads
+registered file is named in the **Keep editing / Keep for Recovery and Close /
+Discard and continue** prompt. Keeping waits for its latest accepted checkpoint;
+a failed checkpoint keeps the document open. Reload reads
 disk deliberately; Close removes the open instance. A later open gets a new token.
 Project switch and application close list all dirty files, including legacy
 structure, pool and creature drafts. Cancellation preserves them.
@@ -36,17 +38,72 @@ reopens into its tab; a new variant replaces its originating tab with verified
 target bytes. Unrelated drafts and targets stay intact. If the target already has
 another open owner, resolve that conflict by deliberately closing it. If writing
 succeeds but reopen fails, **File saved; reopen failed or incomplete** retains the
-draft and save receipt; **Retry verified reopen** only retries the read. It never
-automatically republishes or claims rollback.
+draft and save receipt; **Retry verified reopen** only retries the read. If raw,
+structured or target edits were accepted after publication, retry refuses to
+replace them. Keep them for recovery or copy Source before deliberate discard.
+A lost response after host replacement can be retried through the completed
+write identity without reusing an obsolete document token or repeating apply.
 
 References, validation and previews use saved dependencies, not other unsaved
 drafts. One bounded workspace sweep checks file changes and shares a conservative
-code/data/Fonts/UI stamp; final publication checks remain independent. Drafts and
-workspace tabs are memory-only. Transaction backups do not recover unsaved drafts.
+code/data/Fonts/UI stamp; final publication checks remain independent. Clean tabs
+and workspace layout are memory-only. Registered drafts have auxiliary recovery
+copies; transaction backups remain separate.
 `node scripts/run-workspace.mjs` exercises the packaged six-document workflow in
 disposable data without controlling the owner's desktop.
 See [W5C delivery and verification](docs/W5C_DELIVERY.md) for the scoped checks
-and remaining limits.
+and the historical workspace verification. See [W5D delivery](docs/W5D_DELIVERY.md)
+for recovery and reopen evidence.
+
+## Recover unfinished item, recipe and text drafts
+
+Accepted exact-source edits and variant intent checkpoint within **500 ms** of the
+first pending accepted edit, plus local write time. Continuous typing does not
+reset that timer. **Recovery pending**, **Recovery checkpoint saved** and
+**Unable to save recovery** describe the auxiliary copy, not content publication.
+Unacknowledged keystrokes and accepted edits still inside that window can be lost
+on abrupt exit. A failed write preserves the previous complete checkpoint and
+the in-memory draft; use **Retry recovery save** or copy Source before discard.
+
+**Recover drafts** is always reachable beside project controls, including when
+the worker fails or a stored project is unavailable. Select a record to inspect
+or copy exact draft text, compare its original baseline with current disk, keep it
+for later, or explicitly discard only that copy. Records identify project, source
+file, family, capture time and generation. Other projects stay separate. A record
+currently owned by another application instance cannot be restored or discarded.
+
+Open the correct project normally, then **Recover selected draft**. Workbench
+freshly discovers the source, checks its current eligibility and compares its
+original bytes. Changed, missing or unsupported sources retain inspect/copy
+access; they are not silently merged or attached to another file with the same ID.
+An already-open owner is focused and preserved; close it deliberately to make
+another recovery choice. Invalid JSON, Unicode, BOM, escaping, metadata and the
+accepted line endings remain exact. Source typing follows the original file's
+CRLF convention. Restarted drafts have empty Undo/Redo history and no restored
+review, semantic acceptance or fresh preview. Validate and review again.
+
+**Reconcile saved file** reads an expected target after normal discovery and
+retires the recovery copy only if those bytes cover its exact generation and
+intent. It never writes or republishes. A newer unsaved draft or different target
+remains available for comparison/copy. If a crash happened between a completed
+write and recording its fact, an identical intended target can be deliberately
+reconciled; a different/ambiguous target remains a conflict. Keeping or discarding
+a draft never reverses a completed content write.
+
+Recovery uses Tauri's per-user application-local data directory under
+`draft-recovery-v1`, partitioned by canonical project identity, outside the game
+catalogue and personal saves. Each complete bounded version-1 envelope is flushed
+to a temporary file and atomically replaced. Record locks isolate active writers
+across instances. Storage is auxiliary and not a guarantee against every storage
+device/power-loss failure. Diagnostic `RESONANCE_WORKBENCH_RECOVERY_DIR`, or the
+existing isolated config directory's `draft-recovery` child, keeps automated
+checks away from real records. `project.json` remains a project preference only.
+
+Legacy structure, pool and creature drafts remain memory-only. Resolve those
+drafts first before keeping registered drafts during project/application close.
+There is no session restoration, unsaved dependency overlay or automatic merge.
+Run `node scripts/run-recovery.mjs` for the disposable packaged restart and
+abrupt-exit journey, and Rust/frontend tests for checkpoint and handoff faults.
 
 ## Author an ordinary found text
 
@@ -134,7 +191,7 @@ the chosen scalar spans; other records and metadata retain their values/order.
 Raw or variant-ID edits clear graphical history. Invalid JSON freezes graphical
 mutation and clears current evidence. Edits/seed changes revoke old host review
 tokens, including in-flight results; source/dependency changes require revalidation.
-Clean open/preview/close writes no source bytes. Drafts remain memory-only. Other
+Clean open/preview/close writes no source bytes. These legacy layout drafts remain memory-only. Other
 editor families retain their independent parked drafts; replacing the structure
 document follows the existing discard/reload policy.
 
@@ -463,8 +520,9 @@ CRLF convention. Unknown fields, nested arrays, specials, decor and text binding
 remain in the one shared draft. Discard/Revert returns to the opened bytes;
 Generate/refresh reloads disk. Replacing a legacy file, reloading, switching projects and native close
 protect affected unsaved drafts with an explicit discard prompt. Registered file tabs
-retain their independent drafts when switching. Drafts are memory-only;
-forced process termination loses unsaved edits, while source stays intact.
+retain their independent drafts when switching and checkpoint accepted edits for
+recovery. Legacy drafts are memory-only; forced termination loses their unsaved
+edits. Registered edits inside the checkpoint window are not yet durable.
 
 A three-second idle check reports external changes and exposes the disk version
 without replacing the draft. Apply always compares bytes again, independently of

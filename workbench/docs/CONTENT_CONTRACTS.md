@@ -113,6 +113,16 @@ behavior. Invalid syntax keeps exact Source available and freezes unsafe control
 
 ## Authority and freshness
 
+Registered item, recipe and text documents also use the host's versioned recovery
+envelope. It stores exact accepted source/target intent, original baseline and
+historical family/contract identity, never a live token, review, descriptor-granted
+permission, preview or verdict. Restoring requires current discovery, original
+source comparison and fresh host eligibility. Supported descriptor changes are
+inspected again; validation is always fresh. Recovery never creates dependency
+overlays or changes variant-only recipe/text policy. Completed publication facts
+remain separate from newer drafts and permit only verified read reconciliation.
+See the [recovery workflow](../README.md#recover-unfinished-item-recipe-and-text-drafts).
+
 Compatibility is the supported vocabulary, not a hardcoded item-contract version
 in the desktop. Freshness binds the original discovered source, descriptor hash,
 contract string, exact candidate and source/dependency identities. Compatible

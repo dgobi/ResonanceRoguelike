@@ -63,6 +63,7 @@ export type Diagnostic = {
   layer?: Layer;
 };
 export type Inspection = Asset & {
+  recovery?: import("./recovery").RecoveredDraft;
   pool_context?: PoolContext;
   family?: ContentFamily;
   creature_context?: CreatureContext;

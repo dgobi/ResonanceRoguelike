@@ -77,6 +77,15 @@ Publication replaces only its originating tab after verified reopen; a saved-fil
 reopen failure retains the draft and receipt with a deliberate retry action.
 References and previews still use saved dependencies, not other parked drafts.
 
+Accepted item, recipe and text drafts also checkpoint to per-user recovery storage
+after a bounded 500 ms delay plus local write time. **Keep for Recovery and Close**
+waits for the latest checkpoint. **Recover drafts** retains invalid text and target
+intent across restart, but requires fresh source eligibility, validation and review;
+Undo/Redo history is not restored. Changed/missing sources remain available for
+comparison and copying. A newer post-publication draft is never replaced by retry;
+completed publication is reconciled separately without another write. See the
+[Workbench recovery workflow](../../workbench/README.md#recover-unfinished-item-recipe-and-text-drafts).
+
 Text-reference mapping entries match the text ID key in `text_item_map.json`.
 The value identifies a carrier item and does not establish another text reference.
 In the production reader, oversized headings join the existing scrollable content

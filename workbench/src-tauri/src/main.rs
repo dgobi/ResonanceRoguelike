@@ -15,6 +15,7 @@ use std::{
 use tauri::{Emitter, Manager};
 mod authoring;
 mod startup;
+mod recovery;
 
 const PROTOCOL: u64 = 8;
 const MAX_OUTPUT: u64 = 16 * 1024 * 1024;
@@ -47,6 +48,7 @@ struct Session {
     handoffs: std::collections::HashMap<String, authoring::Handoff>,
     creature_document: Option<authoring::Document>,
     applying: bool,
+    closing: bool,
     pending_project: Option<(u64, ProjectConnection)>,
 }
 struct ProjectConnection {
@@ -67,6 +69,7 @@ struct Host {
     inner: Arc<Mutex<Session>>,
     epoch: Arc<AtomicU64>,
     ids: Arc<AtomicU64>,
+    recovery: Arc<Mutex<Option<recovery::Store>>>,
 }
 impl Host {
     fn cancel(&self, clear: bool) -> Result<u64, Failure> {
@@ -79,6 +82,7 @@ impl Host {
             ));
         }
         let epoch = self.epoch.fetch_add(1, Ordering::SeqCst) + 1;
+        state.closing=false;
         if let Some(mut child) = state.child.take() {
             let _ = child.kill();
             let _ = child.wait();
@@ -87,6 +91,7 @@ impl Host {
         restore_project(&mut state, None);
         authoring::revoke_all(&mut state);
         if clear {
+            if let Some(store)=self.recovery.lock().unwrap().as_mut(){store.release_all();}
             state.root = None;
             state.ready = false;
             state.discovered.clear();
@@ -539,6 +544,7 @@ async fn open_project(
 ) -> Result<Value, Failure> {
     // Retain open drafts until the new project has passed its handshake and
     // preferences were saved. Cancellation or refusal restores the old root.
+    authoring::flush_registered(&app,&host)?;
     let epoch = host.cancel(false)?;
     let (selection, config) = startup::resolve_project(&app, path.as_deref().map(Path::new))?;
     let operation = {
@@ -579,6 +585,7 @@ async fn open_project(
             state.content_documents.clear(); state.creature_document = None;
             state.handoffs.clear();
             response["result"]["project_selection"] = serde_json::to_value(selection).unwrap();
+            if let Some(store)=host.recovery.lock().unwrap().as_mut(){store.release_all();}
         }
         Ok(response)
     })
@@ -609,7 +616,8 @@ fn cancel_worker(host: tauri::State<'_, Host>) -> Result<(), Failure> {
     host.cancel(false).map(|_| ())
 }
 #[tauri::command]
-fn close_project(host: tauri::State<'_, Host>) -> Result<(), Failure> {
+fn close_project(app:tauri::AppHandle,host: tauri::State<'_, Host>) -> Result<(), Failure> {
+    authoring::flush_registered(&app,&host)?;
     host.cancel(true).map(|_| ())
 }
 
@@ -625,6 +633,15 @@ fn main() {
             authoring::open_document,
             authoring::validate_document,
             authoring::invalidate_document,
+            authoring::edit_document,
+            authoring::checkpoint_document,
+            authoring::discard_document_draft,
+            authoring::list_recovery,
+            authoring::inspect_recovery,
+            authoring::discard_recovery,
+            authoring::restore_recovery,
+            authoring::reconcile_recovery,
+            authoring::acknowledge_reopen,
             authoring::apply_document,
             authoring::document_disk,
             authoring::workspace_disk,

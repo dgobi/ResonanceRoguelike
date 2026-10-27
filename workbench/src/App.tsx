@@ -1,7 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { Authoring } from "./Authoring";
+import {RecoveryPanel,type RecoveryRow} from "./RecoveryPanel";
+import type {RecoveryControl,RecoveredDraft} from "./recovery";
+import {reconcileRead} from "./reopen";
 import { WorkspaceMonitor, installDocument, type Documents, type OpenDocument, type Sweep } from "./workspace";
 import { MapView } from "./MapView";
 import { requestLease } from "./requests";
@@ -73,6 +76,13 @@ export default function App() {
   const [poolActive, setPoolActive] = useState(false), [poolDirty, setPoolDirty] = useState(false);
   const [contentDocuments, renderDocuments] = useState<Documents>({});
   const contentRef = useRef(contentDocuments);
+  const recoveryControls=useRef(new Map<string,RecoveryControl>());
+  const registerRecovery=useCallback((token:string,control:RecoveryControl)=>{
+    recoveryControls.current.set(token,control);return ()=>{if(recoveryControls.current.get(token)===control)recoveryControls.current.delete(token);};
+  },[]);
+  const [recoveryOpen,setRecoveryOpen]=useState(false);
+  const [recoveryVersion,setRecoveryVersion]=useState(0);
+  const [resolvingDrafts,setResolvingDrafts]=useState(false);
   function setContentDocuments(update: Documents | ((current:Documents)=>Documents)) {
     const next = typeof update === "function" ? update(contentRef.current) : update;
     contentRef.current = next; renderDocuments(next);
@@ -131,6 +141,34 @@ export default function App() {
       return true;
     }
     return false;
+  }
+  function pendingOwners(){return Object.entries(contentRef.current).filter(([,entry])=>pendingFiles.includes(entry.document.path));}
+  const canKeepRecovery=!!pendingFiles.length && pendingFiles.every(path=>Object.values(contentDocuments).some(e=>e.document.path===path));
+  async function resolvePending(keep:boolean){
+    setResolvingDrafts(true);
+    try{
+      for(const [token] of pendingOwners()){
+        const control=recoveryControls.current.get(token);if(!control)throw new Error("Draft is still opening; keep editing and try again.");
+        if(keep)await control.flush();else await control.discard();
+      }
+      const action=pending;setPending(null);action?.();setRecoveryVersion(v=>v+1);
+    }catch(e){setError(asFailure(e));}finally{setResolvingDrafts(false);}
+  }
+  async function recoverDraft(row:RecoveryRow,target?:string,expected?:string){
+    const asset=target || row.source;
+    const existing=Object.entries(contentRef.current).find(([,e])=>e.document.path===asset);
+    if(existing){activateContent(existing[0]);setRecoveryOpen(false);throw new Error("This file already has an open owner. Its draft was focused and preserved. Close it deliberately before recovering this copy.");}
+    if(!identity || identity.source.root.toLowerCase().replaceAll("\\","/")!==row.project.toLowerCase().replaceAll("\\","/"))throw new Error("Open this recovery record's project normally before editing. The stored text remains available here.");
+    setBusy("Recovering stored draft…");let opened:Inspection|undefined;
+    try{
+      const catalog=await request<{assets:Asset[]}>("describe");setAssets(catalog.result.assets);
+      opened=(await call<Inspection>("open_document",{asset,expectedSha256:expected})).result;
+      if(target)await invoke("reconcile_recovery",{token:opened.document_token,key:row.key,generation:row.generation});
+      else opened={...opened,recovery:await invoke<RecoveredDraft>("restore_recovery",{token:opened.document_token,key:row.key})};
+      setContentDocuments(d=>{const next=installDocument(d,opened!,opened!.id);if(!target)next[opened!.document_token!].dirty=true;return next;});
+      activateContent(opened.document_token!);setRecoveryOpen(false);setRecoveryVersion(v=>v+1);
+      setStatus(target ? "Saved bytes reconciled without another write." : "Exact draft recovered. Validate again; previous reviews and previews grant no authority.");
+    }catch(e){if(opened)await invoke("close_document",{token:opened.document_token}).catch(()=>{});throw e;}finally{setBusy("");}
   }
   const epoch = useRef(0);
   const monitor = useRef(new WorkspaceMonitor());
@@ -244,6 +282,7 @@ export default function App() {
       if (token !== epoch.current) return;
       clear();
       setIdentity(info.result);
+      setRecoveryVersion(v=>v+1);
       setPath(info.result.source.root);
       setBusy("Discovering supported layouts…");
       const catalog = await request<{ assets: Asset[] }>("describe");
@@ -368,7 +407,7 @@ export default function App() {
     const token=++epoch.current;setBusy("Opening content source…");setError(null);
     const task=(async()=>{
       try {
-        const r=await call<Inspection>("open_document",{asset:asset.path,replaceToken:reload ? existingToken : null});if(token!==epoch.current)return;
+        const r=await call<Inspection>("open_document",{asset:asset.path,replaceToken:reload && existingToken ? recoveryControls.current.get(existingToken)?.owner() || existingToken : null});if(token!==epoch.current)return;
         setContentDocuments(d=>installDocument(d,r.result,id,reload ? existingToken : undefined));activate(r.result.document_token!);
         setStatus(`Opened ${asset.path}. References and previews use saved dependencies.`);
       } catch(e) {if(token===epoch.current)setError(asFailure(e));} finally {if(token===epoch.current)setBusy("");}
@@ -383,7 +422,7 @@ export default function App() {
     const entry=contentRef.current[token]; if(!entry)return;
     if(entry.dirty && !discard) {setPendingFiles([entry.document.path]);setPending(()=>()=>void closeContent(token,true));return;}
     try {
-      await invoke("close_document",{token});
+      await invoke("close_document",{token:recoveryControls.current.get(token)?.owner() || token,handoffId:recoveryControls.current.get(token)?.handoff()});
       setContentDocuments(d=>{const next={...d};delete next[token];return next;});
       setActiveContent(active=>active===token ? Object.keys(contentRef.current).at(-1) || "" : active);
     } catch(e) {setError(asFailure(e));}
@@ -435,12 +474,12 @@ export default function App() {
     if(!originating)throw new Error("File saved; originating document is no longer open.");
     const catalog=await request<{assets:Asset[]}>("describe"); if(token!==epoch.current)return;
     setAssets(catalog.result.assets);
-    covered();
-    const reopened=await call<Inspection>("open_document",{asset,replaceToken:owner,expectedSha256:(result as {after_sha256:string}).after_sha256,handoffId:(result as {handoff_id?:string}).handoff_id}); if(token!==epoch.current)return;
-    verifyReopened(reopened.result,result);
-    covered();
-    setContentDocuments(d=>installDocument(d,reopened.result,reopened.result.id,owner));
-    setActiveContent(active=>active===owner ? reopened.result.document_token! : active);
+    const handoffId=(result as {handoff_id?:string}).handoff_id;
+    const guard=()=>{if(token!==epoch.current || !contentRef.current[owner])throw new Error("Origin changed during reopening; recovery retained.");covered();};
+    const reopened=await reconcileRead(guard,
+      ()=>call<Inspection>("open_document",{asset,replaceToken:owner,expectedSha256:(result as {after_sha256:string}).after_sha256,handoffId}),
+      async reopened=>{verifyReopened(reopened.result,result);if(handoffId)await invoke("acknowledge_reopen",{handoffId});},
+      reopened=>{setContentDocuments(d=>installDocument(d,reopened.result,reopened.result.id,owner));setActiveContent(active=>active===owner ? reopened.result.document_token! : active);});
     if(poolDocument) {
       const refreshed=await request<Inspection>("inspect",{asset:poolDocument.path});if(token!==epoch.current)return;
       setPoolDocument(d=>d?.path===refreshed.result.path && d.sha256===refreshed.result.sha256 ? {...d,pool_context:refreshed.result.pool_context}:d);
@@ -549,6 +588,7 @@ export default function App() {
                 Open directory
               </button>
             </form>
+            <button className="full" onClick={()=>setRecoveryOpen(true)}>Recover drafts</button>
             {identity && (
               <div className="project-details">
                 <div className="health" data-testid="startup-ready">● Integration ready · {identity.host_runtime.mode} · protocol {identity.protocol}</div>
@@ -895,7 +935,7 @@ export default function App() {
             active={creatureActive} onCancel={()=>void cancel()} selectedCreatureId={selectedCreatureId} dependencyVersion={dependencyVersion} /></div>}
           {Object.entries(contentDocuments).map(([token,entry])=><div key={token} data-document-inspector={entry.document.path} hidden={activeContent!==token || creatureActive}><Authoring
             document={entry.document} onDirty={dirty=>setContentDocuments(d=>d[token] && d[token].dirty!==dirty ? {...d,[token]:{...d[token],dirty}}:d)}
-            onApplied={(path,result,covered)=>contentApplied(token,path,result,covered)} onError={setError}
+            onApplied={(path,result,covered)=>contentApplied(token,path,result,covered)} onError={setError} registerRecovery={registerRecovery}
             subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={activeContent===token && !creatureActive} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
             contentNavigation={{selectedId:entry.selectedId,trail:entry.trail,
@@ -1041,29 +1081,24 @@ export default function App() {
             role="dialog"
             aria-label="Unsaved draft"
           >
-            <h2>Discard unsaved changes?</h2>
+            <h2>Resolve unsaved drafts</h2>
             <ul>{pendingFiles.map(path=><li key={path}><code>{path}</code></li>)}</ul>
             <p>
-              Continuing will discard the in-memory edits. The source file has
-              not changed.
+              Keep registered drafts in recovery, or deliberately discard their copies. Published files are unchanged by these choices.
             </p>
             <div className="edit-actions">
-              <button className="primary" onClick={() => setPending(null)}>
+              <button className="primary" disabled={resolvingDrafts} onClick={() => setPending(null)}>
                 Keep editing
               </button>
-              <button
-                onClick={() => {
-                  const action = pending;
-                  setPending(null);
-                  action();
-                }}
-              >
+              {canKeepRecovery ? <button disabled={resolvingDrafts} onClick={()=>void resolvePending(true)}>Keep for Recovery and Close</button> : <p>Legacy structure, pool and creature drafts are memory-only. Resolve those drafts first to keep registered drafts for recovery.</p>}
+              <button disabled={resolvingDrafts} onClick={()=>void resolvePending(false)}>
                 Discard and continue
               </button>
             </div>
           </section>
         </div>
       )}
+      <RecoveryPanel open={recoveryOpen} onClose={()=>setRecoveryOpen(false)} onRestore={recoverDraft} onError={setError} refreshVersion={recoveryVersion}/>
       <footer
         className={"runtime " + (error ? "runtime-error" : "")}
         aria-live="polite"
