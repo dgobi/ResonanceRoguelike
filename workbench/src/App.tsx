@@ -318,15 +318,15 @@ export default function App() {
       setStatus(`Opened ${asset.path}.`);
     } catch (e) { if (token === epoch.current) setError(asFailure(e)); } finally { if (token === epoch.current) setBusy(""); }
   }
-  async function openContent(family:string,id:string,assetPath?:string,discard=false,reload=false) {
+  async function openContent(family:string,id:string,assetPath?:string,discard=false,reload=false,trailContext:ItemTrail|null=null) {
     const matches=assets.filter(a=>a.family_id === family && a.id === id && (!assetPath || a.path === assetPath)), asset=matches[0];
     if (!matches.length || matches.length !== 1 && !assetPath) { setError({code:"CONTENT_SOURCE",message:`${id} has ${matches.length} catalogue sources.`,remedy:"Select a specific source file to inspect ambiguity."}); return; }
     const existing=contentDocuments[family];
-    const activate=()=>{setActiveContent(family);setCreatureActive(false);};
+    const activate=()=>{setActiveContent(family);setCreatureActive(false);if(family==="item")setItemTrail(trailContext);};
     if (!reload && existing?.document.path === asset.path) {
       setContentDocuments(d=>({...d,[family]:{...d[family],selectedId:id}})); activate(); return;
     }
-    if(existing?.dirty && !discard) {setPending(()=>()=>void openContent(family,id,assetPath,true,reload));return;}
+    if(existing?.dirty && !discard) {setPending(()=>()=>void openContent(family,id,assetPath,true,reload,trailContext));return;}
     const token=++epoch.current;setBusy("Opening content source…");setError(null);
     try {
       const r=await call<Inspection>("open_document",{asset:asset.path});if(token!==epoch.current)return;
@@ -335,7 +335,7 @@ export default function App() {
     } catch(e) {if(token===epoch.current)setError(asFailure(e));} finally {if(token===epoch.current)setBusy("");}
   }
   function openItem(id:string,context:ItemTrail|null=null,assetPath?:string,discard=false,reload=false) {
-    setItemTrail(context);return openContent("item",id,assetPath,discard,reload);
+    return openContent("item",id,assetPath,discard,reload,context);
   }
   async function openCreature(id: string, assetPath: string, discard = false, reload = false) {
     const asset = assets.find(a=>a.route === "creature_definition" && a.id === id && a.path === assetPath);
@@ -610,7 +610,7 @@ export default function App() {
                 {Object.entries(contentDocuments).map(([family,entry])=><button key={family} disabled={!!busy} onClick={()=>{setCreatureActive(false);setActiveContent(activeContent===family && !creatureActive ? "":family);}}>{activeContent===family && !creatureActive ? `Hide ${contentViews[family as ContentFamily["id"]]?.label || family}` : `Show ${family} ${entry.selectedId}`}</button>)}
                 {creatureDocument && <button disabled={!!busy} onClick={()=>setCreatureActive(!creatureActive)}>{creatureActive ? "Hide creature" : `Show creature ${selectedCreatureId}`}</button>}
                 {creatureActive && creatureDocument && <button disabled={!!busy} onClick={()=>void openCreature(selectedCreatureId,creatureDocument.path,false,true)}>Reload creature</button>}
-                {!creatureActive && activeContent && contentDocuments[activeContent] && <button disabled={!!busy} onClick={()=>void openContent(activeContent,contentDocuments[activeContent].selectedId,contentDocuments[activeContent].document.path,false,true)}>Reload {activeContent}</button>}
+                {!creatureActive && activeContent && contentDocuments[activeContent] && <button disabled={!!busy} onClick={()=>void openContent(activeContent,contentDocuments[activeContent].selectedId,contentDocuments[activeContent].document.path,false,true,itemTrail)}>Reload {activeContent}</button>}
                 {!creatureActive && !recipeActive && !itemActive && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
                 <label>
                   Preview seed
@@ -815,8 +815,8 @@ export default function App() {
             busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={activeContent===family && !creatureActive} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
             contentNavigation={{selectedId:entry.selectedId,trail:itemTrail,
-              onReturn:family==="recipe" ? itemDocument ? returnToItem:undefined : itemTrail ? ()=>{setItemActive(false);setPoolActive(true);}:undefined,
-              onPool:id=>void openPool(id),onOpen:(target,id,path)=>{recipeReturnRelation.current=document.activeElement?.getAttribute("data-recipe-relation") || "ingredient";void openContent(target,id,path);}}} /></div>)}
+              onReturn:family==="recipe" ? itemDocument ? returnToItem:undefined : poolDocument ? ()=>{setItemActive(false);setPoolActive(true);setCreatureActive(false);}:undefined,
+              onPool:id=>void openPool(id,trail),onOpen:(target,id,path)=>{recipeReturnRelation.current=document.activeElement?.getAttribute("data-recipe-relation") || "ingredient";void openContent(target,id,path);}}} /></div>)}
           {poolDocument && <div hidden={!poolActive || itemActive || recipeActive || creatureActive}><Authoring key={poolDocument.document_token}
             document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
             busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
