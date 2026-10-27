@@ -118,11 +118,11 @@ export async function workspaceJourney(page,root,output,receipt) {
   await b("Close document").click();assert.match(await page.getByRole("dialog").innerText(),/clay_pot.json/);await b("Keep editing").click();assert.equal(await source(),drafts.get(paths[1]));
   await b("Reload document").click();await b("Keep editing").click();assert.equal(await source(),drafts.get(paths[1]));
   await b("Close project").click();for(const path of [...paths,legacy])assert((await page.getByRole("dialog").innerText()).includes(path));await b("Keep editing").click();
-  await tab(paths[5]);await b("Reload document").click();await b("Discard and continue").click();await idle();
+  await tab(paths[5]);await b("Reload document").click();await b("Discard and continue").click();await page.getByRole("dialog",{name:"Unsaved draft"}).waitFor({state:"hidden"});await idle();
   assert.equal((await source()).replace(/\r\n/g,"\n"),originals.get(paths[5]).toString().replace(/\r\n/g,"\n"));
   const reloaded=await ipc("open_document",{asset:paths[5]});assert.notEqual(reloaded.result.document_token,tokens.get(paths[5]));
   assert.equal((await ipc("invalidate_document",{token:tokens.get(paths[5])})).error.code,"FILE_TRANSACTION_FAILED");
-  await tab(paths[0]);await b("Close document").click();await b("Discard and continue").click();await idle();
+  await tab(paths[0]);await b("Close document").click();await b("Discard and continue").click();await page.locator(`[data-document-tab="${paths[0]}"]`).waitFor({state:"detached"});await idle();
   assert.equal(await page.locator("[data-document-tab]").count(),5);
   await open(paths[0]);const reopened=await ipc("open_document",{asset:paths[0]});assert.notEqual(reopened.result.document_token,tokens.get(paths[0]));
   assert((await ipc("validate_document",{token:tokens.get(paths[0]),draft:drafts.get(paths[0]),variantId:ids.get(paths[0])})).error);
@@ -173,13 +173,13 @@ export async function workspaceJourney(page,root,output,receipt) {
   // Closing the actual origin yields an explicit unavailable-origin message.
   await validate();const details=visible('[data-testid="recipe-editor"]').locator("details").filter({has:page.getByRole("button",{name:"clay_pot",exact:true,includeHidden:true})}).first();
   if(!await details.evaluate(e=>e.open))await details.locator("summary").click();await details.getByRole("button",{name:"clay_pot",exact:true}).click();
-  await tab(paths[3]);await b("Close document").click();await b("Discard and continue").click();await tab(paths[1]);
+  await tab(paths[3]);await b("Close document").click();await b("Discard and continue").click();await page.locator(`[data-document-tab="${paths[3]}"]`).waitFor({state:"detached"});await tab(paths[1]);
   await b("Return to recipe w5c_recipe_source").click();assert.match(await page.locator("footer").innerText(),/ORIGIN_UNAVAILABLE/);assert.equal(await source(),drafts.get(paths[1]));
   for(const [path,bytes] of originals)assert.deepEqual(await readFile(resolve(root,path)),bytes,path);
   receipt.checks.push("six independent file owners; exact invalid source; variant targets and undo/redo retained; aliases/repeated opens reuse tokens; shared-item references return to both recipe origins",
     "targeted close/reload keep/discard and obsolete-token rejection; destination owner collision; one reviewed/saved/reopened variant with deliberate recovery after reopen failure",
     "individual external conflict and conservative freshness preserve drafts; legacy structure source remains byte-exact; unavailable closed reference origin is explicit");
   // Leave no dirty confirmation for the harness's final project-close smoke.
-  await b("Close project").click();await b("Discard and continue").click();await idle();
+  await b("Close project").click();await b("Discard and continue").click();await page.getByTestId("startup-ready").waitFor({state:"detached"});await idle();
   await b("Open directory").click();await idle();
 }

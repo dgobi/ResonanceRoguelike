@@ -167,6 +167,7 @@ export default function App() {
       else opened={...opened,recovery:await invoke<RecoveredDraft>("restore_recovery",{token:opened.document_token,key:row.key})};
       setContentDocuments(d=>{const next=installDocument(d,opened!,opened!.id);if(!target)next[opened!.document_token!].dirty=true;return next;});
       activateContent(opened.document_token!);setRecoveryOpen(false);setRecoveryVersion(v=>v+1);
+      setError(null);
       setStatus(target ? "Saved bytes reconciled without another write." : "Exact draft recovered. Validate again; previous reviews and previews grant no authority.");
     }catch(e){if(opened)await invoke("close_document",{token:opened.document_token}).catch(()=>{});throw e;}finally{setBusy("");}
   }
