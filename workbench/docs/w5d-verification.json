@@ -1,0 +1,510 @@
+{
+  "milestone": "W5D",
+  "passed": true,
+  "observed_utc": "2026-10-27T23:33:17Z",
+  "revisions": {
+    "baseline": "4936bfbe2ee2f5d3081553cdf772087caf4eca32",
+    "repair": "21f3abdcc004d8cf88b292f3914ecc7ed58a140d",
+    "implementation": "f45bc32b8222c6aa73cc1136114e9c43b4e3078d",
+    "runtime_inputs": "a29227c7999476c4f5a8bce571b56cd28c511f52",
+    "final_test_inputs": "b7e3a63ebb5b5547519372dc38737f34a83102bb",
+    "evidence_ref": "checkpoint/workbench-w5d-verified-20261027-a",
+    "evidence_note": "The annotated verified checkpoint names the exact evidence commit and final remote-main readback. A committed receipt cannot embed its own commit hash. Final b7e3a63 adds only the cross-process native assertion; packaged runtime inputs are unchanged.",
+    "initial_remote": "4936bfbe2ee2f5d3081553cdf772087caf4eca32",
+    "branch": "main",
+    "push_authorization": "Explicitly commissioned by the invoked W5D brief."
+  },
+  "prerequisites": {
+    "revision": "4936bfbe2ee2f5d3081553cdf772087caf4eca32",
+    "checked": 53,
+    "files": [
+      "roguelike/components/language.py",
+      "roguelike/docs/LAYOUT_AUTHORING.md",
+      "roguelike/docs/TEXT_AUTHORING.md",
+      "roguelike/engine/content_authoring.py",
+      "roguelike/engine/data_loader.py",
+      "roguelike/engine/display_config.py",
+      "roguelike/engine/item_factory.py",
+      "roguelike/engine/item_system.py",
+      "roguelike/engine/scene_generation.py",
+      "roguelike/engine/text_authoring.py",
+      "roguelike/engine/text_reader.py",
+      "roguelike/generation/structure_contract.py",
+      "roguelike/generation/structure_preview.py",
+      "roguelike/rendering/ui_registry.py",
+      "tools/critical_fix_regressions/tests/test_gameplay_g12.py",
+      "workbench/README.md",
+      "workbench/docs/CONTENT_CONTRACTS.md",
+      "workbench/package-lock.json",
+      "workbench/scripts/contract-journey.mjs",
+      "workbench/scripts/creature-journey.mjs",
+      "workbench/scripts/desktop-test.mjs",
+      "workbench/scripts/item-journey.mjs",
+      "workbench/scripts/pool-journey.mjs",
+      "workbench/scripts/recipe-journey.mjs",
+      "workbench/scripts/run-texts.mjs",
+      "workbench/scripts/run-workspace.mjs",
+      "workbench/scripts/submap-journey.mjs",
+      "workbench/scripts/text-journey.mjs",
+      "workbench/scripts/text-physical-use.py",
+      "workbench/scripts/workspace-journey.mjs",
+      "workbench/src-tauri/Cargo.lock",
+      "workbench/src-tauri/src/authoring.rs",
+      "workbench/src-tauri/src/main.rs",
+      "workbench/src/App.tsx",
+      "workbench/src/Authoring.tsx",
+      "workbench/src/ContentEditor.tsx",
+      "workbench/src/ContractControls.tsx",
+      "workbench/src/ItemEditor.tsx",
+      "workbench/src/RecipeEditor.tsx",
+      "workbench/src/TextEditor.tsx",
+      "workbench/src/content.ts",
+      "workbench/src/familyData.ts",
+      "workbench/src/orderedRecords.test.tsx",
+      "workbench/src/orderedRecords.ts",
+      "workbench/src/protocol.ts",
+      "workbench/src/recipe.ts",
+      "workbench/src/requests.ts",
+      "workbench/src/styles.css",
+      "workbench/src/workspace.test.ts",
+      "workbench/src/workspace.ts",
+      "workbench/worker/bridge.py",
+      "workbench/worker/test_authoring.py",
+      "workbench/worker/test_texts.py"
+    ]
+  },
+  "environment": {
+    "os": "Windows",
+    "node": "24.15.0",
+    "cargo": "1.95.0",
+    "bundled_python": "3.11.0"
+  },
+  "commands": [
+    {
+      "command": "npm.cmd ls --depth=0",
+      "result": "installed direct versions match package-lock; no dependency changes",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "npm.cmd test",
+      "result": "52 passed / 14 files",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "result": "passed",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "result": "49 passed, including all eight W4D cases and actual interrupted child/Windows locked replacement",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "result": "passed",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -B -m unittest discover -s worker -v",
+      "result": "47 passed, one expected dependency-absence skip; 48 collected",
+      "seconds": 753.446,
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -X utf8 -B -m unittest test_bridge.BridgeTests.test_dependency_absence_structured -v",
+      "cwd": "workbench/worker",
+      "result": "1 passed using the existing interpreter only",
+      "exit_code": 0
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "result": "release executable, pinned resources and NSIS installer built",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/run-recovery.mjs",
+      "result": "passed; true native cold restarts, abrupt exit, live owner vs competing child writer, copy/compare access without worker, exact publication reconciliation",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "$env:W5D_REOPEN_REGRESSION='lost'; node scripts/run-workspace.mjs",
+      "result": "passed; six mounted documents, legacy preservation, actual lost successful host reopen response and retry without write",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "$env:WORKBENCH_STARTUP_SMOKE='1'; npm.cmd run test:startup",
+      "result": "four isolated launcher/startup/project-change/restart scenarios passed",
+      "cwd": "workbench",
+      "exit_code": 0
+    }
+  ],
+  "package": {
+    "executable": "fd388e13c6acaffacdd45f7c10e344766df8058b9e629562c9ec48aaba2b0687",
+    "bridge": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+    "source_bridge": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+    "runtime": {
+      "files": 1809,
+      "sha256": "bcec0cde456247d70707d642296f0b1c6fc451a4ebb7efd732d7cba0468235ca"
+    },
+    "frontend": {
+      "files": 11,
+      "sha256": "f7667c54bc472d5b20d63dee3719adfa3817527dc6a59bad0ac9a31519a938ed"
+    },
+    "installer": "0bb589656150f45bdd8d367329533e1fe010e291114ce505937d901c7d2d3179"
+  },
+  "source": {
+    "revision": "b7e3a63ebb5b5547519372dc38737f34a83102bb",
+    "observed_utc": "2026-10-27T23:31:35Z",
+    "worktree_sha256": {
+      "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+      "roguelike/docs/LAYOUT_AUTHORING.md": "6db7fd3aed5ddc10ccb3e24f02b82366ec9ec42da42ccb08294baa9e25186575",
+      "roguelike/docs/TEXT_AUTHORING.md": "3d2854eb902ebeaa928c67dd349b6c63618574f7f7d7509f1aa14f80128612fc",
+      "roguelike/engine/content_authoring.py": "0c646940d233bbf64c903e09b04ed1a6cdff36489cf0a181d886f73d68307d87",
+      "roguelike/engine/data_loader.py": "6240d97b546ea813dbc5fc4d2772738bf6cb553f647079ab48ab9a1e0ab3b6ff",
+      "roguelike/engine/display_config.py": "42e08e5e32aa74c96172e5104a14ff09f43fdbb68251a0f2dfd909192a963ba8",
+      "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "roguelike/engine/scene_generation.py": "535bd94b46af998a4236f7aba4e5dde3ccb233300738900cb0c7480c3173732d",
+      "roguelike/engine/text_authoring.py": "cb0979e31c8d87c92b27eab6c887dc8736d6dc8152265eb98c011262429bc679",
+      "roguelike/engine/text_reader.py": "aabcc37565e870408c0488ea264b9791a7918e6f448661a1600d484bb93da2a6",
+      "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+      "roguelike/generation/structure_preview.py": "904772970f57876707d59cda55c54b0317d42b338996f03cf1be0bdc59326f5b",
+      "roguelike/rendering/ui_registry.py": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058",
+      "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+      "workbench/README.md": "b5881202f8db0c3f30cb3370572dd98ca19173ffeb0b7d96c0b2274a38b605b8",
+      "workbench/docs/CONTENT_CONTRACTS.md": "f6ef1cd74e7b4ef0255f0b5a99af4f20730f48569e63a4a5bc946fa136df96c3",
+      "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+      "workbench/scripts/contract-journey.mjs": "c66f846cf6054ca3577592b147e17e3ef0b48b92d4d60ae5e6a70a74d0c6cb2b",
+      "workbench/scripts/creature-journey.mjs": "7889a50f23299e435bcd8fb46251ab0dd796cffc5b7e51b862825db7a57d9126",
+      "workbench/scripts/desktop-test.mjs": "7af955a8e4adc6624f7473ffbd78ab8ba0bc5ecd2c0a9c0b157ac319a946038e",
+      "workbench/scripts/item-journey.mjs": "7c4cd6687ab65bf60083b6201935c1a5c294f8864161dccabf1d12aa0de01bed",
+      "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+      "workbench/scripts/recipe-journey.mjs": "7775a0bdc0d3e73ef86fd324040d2048d4ea309d96c5f74ae18d8bf31a4b0818",
+      "workbench/scripts/run-recovery.mjs": "410ea25712dbdf521e4e87526fb98e2e4c465bfcb82282037578044b55ff4c66",
+      "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+      "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+      "workbench/scripts/startup-test.mjs": "ac3838ea8f92abc1cb6a9af8d2dcb14eb721199d15d37bd11bb456639fdecc8b",
+      "workbench/scripts/submap-journey.mjs": "cb3f4ca658fced223b8377cfe241b969efcc09cdd34aebe062c736814132751a",
+      "workbench/scripts/text-journey.mjs": "7e6762e0985f7af49e5f74f59e577688b0c6f35fc2ec32a0b283eba512ae9690",
+      "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+      "workbench/scripts/workspace-journey.mjs": "c51137c55da6cfd9325f144495b25d128cbd8d172620fe07eb3b05ba275b766c",
+      "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+      "workbench/src-tauri/src/authoring.rs": "b20630ac328a9a4ef72528cba92b2aadd081ef08860312786f0368cedf6bf5e7",
+      "workbench/src-tauri/src/main.rs": "092f49253f1593c26930997d28704f34bb15211276b1ca8f7966d47a6119aadf",
+      "workbench/src-tauri/src/recovery.rs": "9baedd6622e0aa011ac3d3755517341faf82f63d4985e55c39ca901e28b79302",
+      "workbench/src/App.tsx": "2fdb44ca4010cb33de7fefa418e45501720403f5c2492a8b31922498ae648335",
+      "workbench/src/Authoring.tsx": "46d3617d6e22d3151bcc36163a60996e12838feb81a14262f8fce0e16dddc606",
+      "workbench/src/ContentEditor.tsx": "2226df3dc0869fa5fa4c4657bf0c7f79794392099257e63b3ae98a0a969087a3",
+      "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+      "workbench/src/ItemEditor.tsx": "f0044fc331d89ae0a471e4545c704e5903cfe8733b033190059b1d73d1176cb0",
+      "workbench/src/RecipeEditor.tsx": "c62697dec01736e67015c935b790392e530b2aee48c9ea9db3a42237c942bd07",
+      "workbench/src/RecoveryPanel.tsx": "1ba0989a904996dc2226e79acddb424d7950d0da5af7a1dbe4d261d5a741f6a9",
+      "workbench/src/TextEditor.tsx": "65c73bd9a6497ad90c05ff59a599c2b77f986a58f77f861124a10b4e06e3022d",
+      "workbench/src/content.ts": "0325d536b2cf77663e06553a9c5bed3764f23208f23ff0aca13515382d6bd549",
+      "workbench/src/familyData.ts": "e953dd44c81d17adf447ceefe8bffcfe693ac1cbb6d288eb0dba81ad7e518e9d",
+      "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+      "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+      "workbench/src/protocol.ts": "5cb8fecf853d732cbbfa9bc340d4953f60d368ee485b59b5a551ffcc962c4c8d",
+      "workbench/src/recipe.ts": "6ac4d85fdc783751f7c65376837af20ddf311b57b6916110e3398b8b4b253d03",
+      "workbench/src/recovery.test.ts": "8e42eda3aef374e8e44a8f079211de93b689b5abe8ee41c2e4144b4958e4dedf",
+      "workbench/src/recovery.ts": "cdcd2dae4ae7d83534c20b2b8b9e9ceb06094c05811f7adb83219a68c7b07b09",
+      "workbench/src/reopen.test.ts": "1b433d0ad03c397593f488b4e328d86391b3ae1b0371c9ec02a04bed8b717b85",
+      "workbench/src/reopen.ts": "c09f8296097cb19a29f81b9cd72aba6be23fc428b7cb52a1b1c190eaca9fb0b1",
+      "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+      "workbench/src/styles.css": "901a5192a5ecc0185e6f2282c95b756ebe9111c441f14686098f7986e93f7390",
+      "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+      "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+      "workbench/worker/bridge.py": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+      "workbench/worker/test_authoring.py": "63b31599c487800b65eaf02983fe6e946adf878ea6cd2dc48d86739785d57b39",
+      "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec"
+    },
+    "git_sha256": {
+      "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+      "roguelike/docs/LAYOUT_AUTHORING.md": "c7122770d8c75b0a0d80630f7d52722452b01940b3eea7f22a550d2e4a68d07d",
+      "roguelike/docs/TEXT_AUTHORING.md": "14fc09b1c1a3af411686139f6f38df7dbebaad0f79305c1fcd604bbc87b78b86",
+      "roguelike/engine/content_authoring.py": "0c646940d233bbf64c903e09b04ed1a6cdff36489cf0a181d886f73d68307d87",
+      "roguelike/engine/data_loader.py": "07625ac2db63a5717c9db166a67cd4a615a2a2a58e5185da4c4686c713cc56cd",
+      "roguelike/engine/display_config.py": "07441d2685fe8e792862c4f25c81e9cf90bc6c23a0eb4cf1b9ac0d118c30f260",
+      "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "roguelike/engine/scene_generation.py": "cb4672d5d7309e28108bc63a79c2dc648f1237711d36e69c9fc0d42cbb17dc65",
+      "roguelike/engine/text_authoring.py": "cb0979e31c8d87c92b27eab6c887dc8736d6dc8152265eb98c011262429bc679",
+      "roguelike/engine/text_reader.py": "a9f8064d2b0f1a65e0e4964033c27ea1894df07a2191c0d87b139e87ae0be600",
+      "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+      "roguelike/generation/structure_preview.py": "14ce8d2541b4394b3d4f12c0ff2190b0edc15de43569afc4377bea578a5bf0b3",
+      "roguelike/rendering/ui_registry.py": "e0272edd0c11a393b9ef03f3b8055d1770ef32428d4b7b1e6d66c62afb8b5f2a",
+      "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+      "workbench/README.md": "19408f616d4bbc2db7232f6f4a7e1fcbfe682ed71a61ec2b4f6b8f1eb500329e",
+      "workbench/docs/CONTENT_CONTRACTS.md": "f6ef1cd74e7b4ef0255f0b5a99af4f20730f48569e63a4a5bc946fa136df96c3",
+      "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+      "workbench/scripts/contract-journey.mjs": "afe76ecf0def13b2c9871cfeeb732c92ac9c934644fd93542da6ead29f5cdd43",
+      "workbench/scripts/creature-journey.mjs": "ce03afbf22e8c7af1c68103247d8907899bfa641c305342aad2408a99ada53c5",
+      "workbench/scripts/desktop-test.mjs": "967280853e21a56119a7c7675aa309f446e1272dbf0e65da0ce92a813d8e4d8a",
+      "workbench/scripts/item-journey.mjs": "0c3397a52b14e760279f560e928343f61693b424c6bed2c44888c4590e50f14d",
+      "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+      "workbench/scripts/recipe-journey.mjs": "55d5c07ec19396fb5b1d5b750155febaaa8775db8aa9c159e640d49b61845daa",
+      "workbench/scripts/run-recovery.mjs": "410ea25712dbdf521e4e87526fb98e2e4c465bfcb82282037578044b55ff4c66",
+      "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+      "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+      "workbench/scripts/startup-test.mjs": "ac3838ea8f92abc1cb6a9af8d2dcb14eb721199d15d37bd11bb456639fdecc8b",
+      "workbench/scripts/submap-journey.mjs": "7d45f7915e4dbe58028e48e16a75c33cd6093ae857b5d50128b3bf6780018bc4",
+      "workbench/scripts/text-journey.mjs": "5413d131cc528a26c682a102f0b1477cc89b3ffb4177b501ed9f1d2a3decfe66",
+      "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+      "workbench/scripts/workspace-journey.mjs": "f44f5dc1de2946cf747ed3b380f201447f494a4441d64898697f29ea6be7c5c6",
+      "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+      "workbench/src-tauri/src/authoring.rs": "e1ee120fb999ca69a7eabbf9ad3716fe0129fa829a3bd1acd99ad2fe545e58c3",
+      "workbench/src-tauri/src/main.rs": "4bbc740a3b1fb150c657de2f2a9af0cdf6a142e5e5bf22409e5e4c0175e8f0aa",
+      "workbench/src-tauri/src/recovery.rs": "9baedd6622e0aa011ac3d3755517341faf82f63d4985e55c39ca901e28b79302",
+      "workbench/src/App.tsx": "772173ea868ed5b19ee6c7aa801ee58bda128b7f28c1855b1f60f3bbadf9c79a",
+      "workbench/src/Authoring.tsx": "46d3617d6e22d3151bcc36163a60996e12838feb81a14262f8fce0e16dddc606",
+      "workbench/src/ContentEditor.tsx": "5ab25bba6042671359c132759ec0d3884847d5d574434c0c765da33ca5f57399",
+      "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+      "workbench/src/ItemEditor.tsx": "52f91783f9859ef15cf39593cc24fd986acf969799964fd6de6fe34ec979fe89",
+      "workbench/src/RecipeEditor.tsx": "3fd00a6c662814a255d2626616109d27dc07951589024efebb337ce8fa38d11d",
+      "workbench/src/RecoveryPanel.tsx": "1ba0989a904996dc2226e79acddb424d7950d0da5af7a1dbe4d261d5a741f6a9",
+      "workbench/src/TextEditor.tsx": "65c73bd9a6497ad90c05ff59a599c2b77f986a58f77f861124a10b4e06e3022d",
+      "workbench/src/content.ts": "0325d536b2cf77663e06553a9c5bed3764f23208f23ff0aca13515382d6bd549",
+      "workbench/src/familyData.ts": "e953dd44c81d17adf447ceefe8bffcfe693ac1cbb6d288eb0dba81ad7e518e9d",
+      "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+      "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+      "workbench/src/protocol.ts": "5cb8fecf853d732cbbfa9bc340d4953f60d368ee485b59b5a551ffcc962c4c8d",
+      "workbench/src/recipe.ts": "51ca1cff61de9dee56e43f61ed2b25a1036d220011162abbf9e93773202c6098",
+      "workbench/src/recovery.test.ts": "8e42eda3aef374e8e44a8f079211de93b689b5abe8ee41c2e4144b4958e4dedf",
+      "workbench/src/recovery.ts": "cdcd2dae4ae7d83534c20b2b8b9e9ceb06094c05811f7adb83219a68c7b07b09",
+      "workbench/src/reopen.test.ts": "1b433d0ad03c397593f488b4e328d86391b3ae1b0371c9ec02a04bed8b717b85",
+      "workbench/src/reopen.ts": "c09f8296097cb19a29f81b9cd72aba6be23fc428b7cb52a1b1c190eaca9fb0b1",
+      "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+      "workbench/src/styles.css": "a1c280b69773798da957a2f4f7b17258df390e5ddb88f23a2ddb4067c0bf598e",
+      "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+      "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+      "workbench/worker/bridge.py": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+      "workbench/worker/test_authoring.py": "472272dc20a01c76849c282a973e62422aab993222e697b16fd8b901d77ea0b6",
+      "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec"
+    }
+  },
+  "writer_functions_unchanged_from_w5c": {
+    "publish": "cd2c96558423075af3fae686a5204fcce1933881f9a0839f3f17265b045364df",
+    "pin_inputs": "bf6e0df953c06424ad32e8fe16451fdb819e694676deb230d7ef325c9c5d706b",
+    "pin_source": "f0a24ecbc92893b87f72885b93039f5fea1e4a9bce8755f1df9c0df35a18daf9",
+    "input_stamp": "2d74c9b09c66d0a47a0c4268ce46aca17c0d3e37ad5e9aca10f65431c311d4fe",
+    "destination": "edabbdaeeff21bda48a943b98f2fd5c2738f1b12a6c97caac23122ec92a7f7d0",
+    "validate_document": "86e8bef99fb2fcf25e3bc1db85b0d493ade2e58ee195626db760248b6e25a9a2",
+    "admit_apply": "a07ab80e50340e7198b815ec239ff8987ed9be3dead4e98f8c6973f5e46cef3a"
+  },
+  "native": {
+    "checks": [
+      "failed recovery checkpoint keeps previous complete copy and in-memory draft; failed close flush retains owner; explicit retry succeeds",
+      "a separate native process using the real recovery writer cannot overwrite the running application's locked record",
+      "only host-accepted edits become recovery truth; rejected optimistic raw edit rolls back",
+      "two same-family text drafts and one item survive a cold native process restart with independent exact text and intent; legacy drafts cannot be silently kept",
+      "real publication then failed reopen preserves accepted raw and structured newer edits on retry",
+      "successful host replacement with lost response refuses obsolete-owner raw and structured edits; completed fact retained",
+      "cold restart reconciliation reads exact published bytes, retires only covered item generation, and refuses to retire newer text work",
+      "separate abrupt-exit segment retains completed checkpoint; failed worker handshake leaves inspection, comparison and deliberate selected discard available"
+    ],
+    "cold_process_count": 5,
+    "draft_restart_assertions": [
+      {
+        "source": "roguelike/data/items/components/wood_bundle.json",
+        "generation": 4,
+        "captured_sha256": "f5e7033507ca144a742ec6bca19df1512c0b1e3b0808712c80a01b4513d919ba",
+        "restored_sha256": "f5e7033507ca144a742ec6bca19df1512c0b1e3b0808712c80a01b4513d919ba",
+        "variant_id": "w5d_draft_2",
+        "verification": "Native restart reads and compares exact record text and intent before restoring; no React remount substitution."
+      },
+      {
+        "source": "roguelike/data/texts/lab/lab_note_primary_b.json",
+        "generation": 4,
+        "captured_sha256": "1aee70b2829ac410eb4344d5c9116b5fea2e134cd045b80570c0706ce50288cb",
+        "restored_sha256": "1aee70b2829ac410eb4344d5c9116b5fea2e134cd045b80570c0706ce50288cb",
+        "variant_id": "w5d_draft_1",
+        "verification": "Native restart reads and compares exact record text and intent before restoring; no React remount substitution."
+      },
+      {
+        "source": "roguelike/data/texts/lab/lab_note_primary_a.json",
+        "generation": 3,
+        "captured_sha256": "37cf712f4e840560e5373f353f8075560cdf551825ba6ce13c9dd450dfdd8446",
+        "restored_sha256": "37cf712f4e840560e5373f353f8075560cdf551825ba6ce13c9dd450dfdd8446",
+        "variant_id": "w5d_draft_0",
+        "verification": "Native restart reads and compares exact record text and intent before restoring; no React remount substitution."
+      }
+    ],
+    "publication": {
+      "path": "roguelike/data/items/components/w5d_draft_2.json",
+      "reviewed": "f5e7033507ca144a742ec6bca19df1512c0b1e3b0808712c80a01b4513d919ba",
+      "saved": "f5e7033507ca144a742ec6bca19df1512c0b1e3b0808712c80a01b4513d919ba",
+      "reopened": "f5e7033507ca144a742ec6bca19df1512c0b1e3b0808712c80a01b4513d919ba",
+      "reconciled_without_apply": true
+    },
+    "abrupt_exit": {
+      "generation": 4,
+      "sha256": "7e43faa08f26df2c7493c7bf5fc564b0f3004dbf1fd924e9a2c2c543cd6f59d6",
+      "restored_sha256": "7e43faa08f26df2c7493c7bf5fc564b0f3004dbf1fd924e9a2c2c543cd6f59d6"
+    },
+    "errors": [],
+    "storage_isolation": "Unique disposable project/settings/recovery/WebView roots per run; process locks refuse the separate native child writer. No real recovery store used."
+  },
+  "workspace": {
+    "checks": [
+      "actual Tauri WebView2 window",
+      "WebView network offline",
+      "repository handshake, live asset validation and Pixi rendering",
+      "production arrival click maps to (15,20), stairs_up",
+      "real DIMENSION diagnostic for disposable fixture",
+      "byte-exact view, close and reopen journey",
+      "host traversal rejection",
+      "cancel and retry without app hang",
+      "a held real freshness response disables conflicting UI actions until release without queueing work",
+      "six independent file owners; exact invalid source; variant targets and undo/redo retained; aliases/repeated opens reuse tokens; shared-item references return to both recipe origins",
+      "targeted close/reload keep/discard and obsolete-token rejection; destination owner collision; one reviewed/saved/reopened variant with deliberate recovery after reopen failure",
+      "individual external conflict and conservative freshness preserve drafts; legacy structure source remains byte-exact; unavailable closed reference origin is explicit",
+      "invalid project visible",
+      "no temporary worker roots remain after native close"
+    ],
+    "variant": {
+      "path": "roguelike/data/texts/lab/w5c_parked_4.json",
+      "reviewed_sha256": "68a52c4b10cd5c93fb99ae7a1a451fadd7dd214d2a153c32145d38ff0245365b",
+      "saved_sha256": "68a52c4b10cd5c93fb99ae7a1a451fadd7dd214d2a153c32145d38ff0245365b",
+      "reopened_sha256": "68a52c4b10cd5c93fb99ae7a1a451fadd7dd214d2a153c32145d38ff0245365b",
+      "reopen_failure": "one-shot transport injection after real publication",
+      "recovery": "verified reopen only"
+    },
+    "monitoring": {
+      "one": {
+        "wall_ms": 6813,
+        "sweeps": [
+          {
+            "wall_ms": 123.70000004768372,
+            "elapsed_ms": 118.3292,
+            "dependency_scans": 1,
+            "documents": 1
+          },
+          {
+            "wall_ms": 148.89999997615814,
+            "elapsed_ms": 146.1879,
+            "dependency_scans": 1,
+            "documents": 1
+          }
+        ],
+        "max_inflight": 1
+      },
+      "six": {
+        "wall_ms": 6803.299999952316,
+        "sweeps": [
+          {
+            "wall_ms": 178.40000009536743,
+            "elapsed_ms": 172.9908,
+            "dependency_scans": 1,
+            "documents": 6
+          },
+          {
+            "wall_ms": 148.70000004768372,
+            "elapsed_ms": 145.1555,
+            "dependency_scans": 1,
+            "documents": 6
+          }
+        ],
+        "max_inflight": 1
+      }
+    },
+    "console_errors": [],
+    "external_requests": []
+  },
+  "startup": [
+    {
+      "name": "fresh-owner-launch",
+      "passed": true,
+      "ms": 24510
+    },
+    {
+      "name": "owner-restart",
+      "passed": true,
+      "ms": 13704
+    },
+    {
+      "name": "change-project",
+      "passed": true,
+      "ms": 31970
+    },
+    {
+      "name": "changed-project-restart",
+      "passed": true,
+      "ms": 12805
+    }
+  ],
+  "checkpoint_cost": {
+    "debounce_ms": 500,
+    "host_calls": 15,
+    "host_ms": {
+      "min": 0.2748,
+      "median": 0.4536,
+      "max": 3.5669
+    },
+    "accepted_to_checkpoint_ms": {
+      "min": 504.8000000715256,
+      "median": 507.1999999284744,
+      "max": 908.1999999284744
+    },
+    "note": "Actual native observations; host calls include explicit flushes; measured delays include the injected failure/retry segment. The 500 ms timer is not reset by typing; local scheduling and write time add to it. Native/startup/workspace gates overlapped; not an unloaded-machine latency claim."
+  },
+  "preservation": {
+    "outside_scope_files": 8145,
+    "byte_and_mtime_changes": [],
+    "personal_save_files": 7,
+    "personal_save_membership_unchanged": true,
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "launcher_sha256": "c5f71560f424e9cc718376bfae30970c4c3188a94f25e173dc6674b33bd66d6c",
+    "owner_settings_sha256": "4c8efc27e9b2f11ee6868ca994a76579b7ecb93a84b0f1afbfd4ce72e1101620",
+    "owner_settings_match_w5c": true,
+    "baseline_capture_note": "Captured after the first scoped repair edit; only outside-scope paths are used for preservation comparisons."
+  },
+  "reused_evidence": [
+    "W5C production reader/long-heading and W5B physical-letter evidence; reader/resources/gameplay unchanged. No new campaign, placement, font matrix or clean-machine installation claim."
+  ],
+  "baseline_regressions": {
+    "newer_text": "Real write + pre-reopen transport fault + accepted newer Source text: baseline retry removed the sentinel. Final native journey preserves raw and structured newer work.",
+    "lost_response": "Response dropped after real host replacement: baseline retry left pending state (assertion 1 != 0). Obsolete-token cause source-confirmed; final workspace retries the established owner successfully.",
+    "package_limit": "Baseline failing runs used the pre-existing W5C package; its executable was not independently rehashed in those two baseline runs."
+  },
+  "development_corrections": [
+    "Native harness corrected the item action label and treats IPC response loss caused by successful native close as expected.",
+    "Workspace close assertions now await actual owner removal after asynchronous recovery discard; earlier pre-final timing assertions failed.",
+    "Successful recovery clears an older global error."
+  ],
+  "artifact_sha256": {
+    "workbench/.artifacts/w5d/frontend-final.log": "79c971eee51e1a63f77b8656a8b8df5d651f5d61813a042ce4478ad50e0db648",
+    "workbench/.artifacts/w5d/typecheck-final.log": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b",
+    "workbench/.artifacts/w5d/rust-final.log": "fa6ce728834e22caeea4e853588d0a6fe96ff1b718f1f7dceb2028f62b6abc46",
+    "workbench/.artifacts/w5d/clippy-final.log": "96fb3606d9257eca03490a9f7f3920e5da972ec673d28a7bd0021dbffd133e09",
+    "workbench/.artifacts/w5d/worker.log": "e4d36ebe5035ffbf3e31cabb18dcea4e20a69b76c475136071d099295755574d",
+    "workbench/.artifacts/w5d/dependency-control.log": "6521dd274fbd8e578f86984bdcef767e85f1da6bc5feac66c1754aa9c461f8c8",
+    "workbench/.artifacts/w5d/bundle-final.log": "d537341afcf279ab1da647085c203a20ca488a9ec95795e098f7a07266b6089b",
+    "workbench/.artifacts/w5d/native-final.log": "a0cbe39934035594e372e6d848e1d5788bbbe4b7368a19a543322c64c4429072",
+    "workbench/.artifacts/w5d/workspace-final.log": "78478798d878058d22d6381be028b959875d4d897e7361677cd2042f1b7083c6",
+    "workbench/.artifacts/w5d/startup-final.log": "648a9b32e80b4dc9fafc1c602d8e7cf7779bf77b0a38a8d0453d7f96d5783a59",
+    "workbench/.artifacts/w5d/reopen-newer-before.log": "383785d6e864e360bb1773a43ac19ecaaff429ec585aebcbda8e4cfbd756f365",
+    "workbench/.artifacts/w5d/reopen-lost-before.log": "a0555e81300c933edaccac678f23296825b8baf21df44ee7a4a6b32ac41f3970",
+    "workbench/.artifacts/w5d/native-1793143570038/receipt.json": "df63a57cfb4da263c0fdea2fcfbb99c6549287f7a4e766bb9da271930683c4d5",
+    "workbench/.artifacts/w5d/native-1793143570038/recovered-drafts.png": "cccefd56df6d18783062e8131825e2462527cc73ff385a66839df98a77665c8e",
+    "workbench/.artifacts/w5d/native-1793143570038/worker-unavailable-recovery.png": "6d8e9f83371911bebaefecadaa65b0747c0e391794e482ed86876ec24b47becd",
+    "workbench/.artifacts/desktop-workspace/receipt.json": "1830b9a284b90e9a1b122f8ae325abbcdcdbbe0c98d786f26020620f0dfcc0a9",
+    "workbench/.artifacts/w4b/startup-1793143405111/receipt.json": "aa3b75d10a4389331b17f00b347aab256e05b1862c2a31563426dbeb7e8b3cce"
+  },
+  "limits": [
+    "Recovery covers registered item/recipe/text only; legacy drafts remain memory-only.",
+    "Unacknowledged edits and accepted edits before the completed checkpoint are not durable.",
+    "No full history/session restoration, unsaved overlays, merge editor, font implementation, wiki or reference-pack changes.",
+    "Native artifacts are ignored local files; committed hashes identify them, not remote visual review."
+  ],
+  "next_brief": "W5E \u2014 Game typography profiles, after W5D review; requirement retained, implementation excluded."
+}
