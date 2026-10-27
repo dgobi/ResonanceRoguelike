@@ -3,6 +3,10 @@ import hashlib
 import json
 import tempfile
 import unittest
+import copy
+import os
+import sys
+from types import SimpleNamespace
 from test_bridge import ROOT, invoke
 from test_authoring import data_fixture
 
@@ -11,6 +15,50 @@ RECIPE = "roguelike/data/recipes/bile_coating.json"
 
 
 class ContentContractTests(unittest.TestCase):
+    def test_consumed_on_use_descriptor_actual_factory_allocation_and_exchange(self):
+        sys.path.insert(0, str(ROOT/"roguelike"))
+        os.environ.update(SDL_VIDEODRIVER="dummy",SDL_AUDIODRIVER="dummy",PYGAME_HIDE_SUPPORT_PROMPT="1")
+        import config
+        config.DEBUG_MODE=False
+        from components.inventory import Inventory
+        from components.equipment import Equipment
+        from engine.item_factory import ItemFactory
+        from engine.crafting import material_candidate, plan_craft, commit_craft
+        original=(ROOT/ITEM).read_bytes(); base=json.loads(original)
+        keywords=json.loads((ROOT/"roguelike/data/keywords.json").read_bytes())
+        requirement={"tag":"fuel","min_tier":1,"quantity":1}
+        for value in ("absent",True,False):
+            raw=copy.deepcopy(base)
+            if value != "absent": raw["consumed_on_use"]=value
+            effective=value is not False
+            response=invoke("preview_draft",asset=ITEM,source_asset=ITEM,draft=json.dumps(raw))["result"]
+            self.assertTrue(response["valid"],response["diagnostics"])
+            field=response["family"]["descriptor"]["schema"]["properties"]["consumed_on_use"]
+            self.assertEqual(field["type"],"boolean");self.assertIs(field["default"],True)
+            self.assertEqual(field["title"],"Eligible for automatic ingredient selection")
+            self.assertIs(response["family"]["context"]["records"][0]["factory"]["instance"]["consumed_on_use"],effective)
+            data=SimpleNamespace(items={"wood_bundle":raw},keywords=keywords)
+            factory=ItemFactory(data)
+            for role,explicit in (("components",False),("components",True),("tools",False)):
+                inv=Inventory(capacity=1000); item=factory.create("wood_bundle");self.assertTrue(inv.add(item))
+                self.assertIs(item.consumed_on_use,effective)
+                self.assertEqual(bool(material_candidate(item)),effective)
+                self.assertTrue(material_candidate(item,"wood_bundle"))
+                recipe={role:[requirement],"result_item":"wood_bundle"}
+                selected,missing=plan_craft(recipe,inv,keywords,[],{0:"wood_bundle"} if explicit else None)
+                eligible=effective or explicit or role=="tools"
+                self.assertEqual(not missing,eligible,(value,role,explicit,missing))
+                if not eligible:
+                    self.assertTrue(inv.contains(item));continue
+                self.assertEqual(list(selected),[item])
+                self.assertEqual(selected.materials,[item] if role=="components" else [])
+                output=factory.create("wood_bundle")
+                engine=SimpleNamespace(player=SimpleNamespace(inventory=inv,equipment=Equipment(),light_source=None),data=data)
+                self.assertTrue(commit_craft(engine,recipe,selected,[],[output]))
+                self.assertEqual(inv.contains(item),role=="tools")
+                self.assertTrue(inv.contains(output))
+        self.assertEqual((ROOT/ITEM).read_bytes(),original)
+
     def test_both_routes_report_common_identity_shape_and_semantic_evidence(self):
         for family, path in (("item", ITEM), ("recipe", RECIPE)):
             opened = invoke("inspect", asset=path)["result"]

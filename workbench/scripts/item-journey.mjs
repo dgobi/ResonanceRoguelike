@@ -113,7 +113,10 @@ export async function itemJourney(page, root, output, receipt) {
   const collisionId="w3b_concurrent", collisionPath=item.replace("wood_bundle",collisionId), collisionDraft=JSON.stringify({...savedRaw,id:collisionId});
   checked=await ipc("validate_document",{token:doc.document_token,draft:collisionDraft,variantId:collisionId}); assert(checked.result.valid);
   await writeFile(resolve(root,collisionPath),'{}');
-  assert.equal((await ipc("apply_document",{token:doc.document_token,reviewToken:checked.result.review_token,confirmed:true})).error?.code,"VARIANT_EXISTS");
+  // Registered items bind catalogue freshness too: the new destination changes
+  // dependencies, so admission refuses before the unchanged no-clobber writer.
+  const collision=await ipc("apply_document",{token:doc.document_token,reviewToken:checked.result.review_token,confirmed:true});
+  assert.equal(collision.error?.code,"SOURCE_CHANGED");receipt.concurrent_destination_refusal=collision.error.code;
   assert.equal(await readFile(resolve(root,collisionPath),"utf8"),'{}'); await unlink(resolve(root,collisionPath));
   for(const asset of ["roguelike/saves/x.json",".git/x.json","roguelike/engine/item_factory.py","workbench/docs/x.json","roguelike/data/items/components/../x.json","roguelike/data/items/components/x.json:ads"]){const r=await ipc("open_document",{asset});assert(r.error || r.ok===false);}
   const advanced=await ipc("open_document",{asset:"roguelike/data/items/tools/tallow_torch.json"});

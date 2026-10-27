@@ -48,6 +48,14 @@ consumer's effective default. No central field list or boolean renderer changes.
 The semantic adapter must already accept the field and prove its consumer
 behavior. A new runtime mechanic still requires game implementation and tests.
 
+W5A's extension is `consumed_on_use`, labelled **Eligible for automatic ingredient
+selection**. The factory defaults it to true. False excludes the instance from
+automatic material allocation; an explicit matching material choice can still
+select it. Recipe roles determine material consumption and retained tools. This
+field does not govern ordinary item-use disposal. The extension adds only local
+item descriptor metadata plus tests/guidance; the compiled application, packaged
+bridge and bundled Python remain fixed during the native extension proof.
+
 Defaults are displayed only when the key is absent. Opening or viewing does not
 insert keys. Explicit false, null and invalid raw values remain distinct; the
 actual game validator rejects unsupported values. `readOnly` is descriptive,
@@ -85,3 +93,10 @@ References: [JSON Schema annotations](https://json-schema.org/understanding-json
 and [Microsoft jsonc-parser](https://github.com/microsoft/node-jsonc-parser).
 These explain defaults and text edit facilities; the repository's semantic and
 source-fidelity tests establish the supported behavior here.
+
+The repeatable native proof is `node scripts/run-contracts.mjs` from `workbench/`.
+It uses the supported release executable, isolated settings/data, the committed
+pre-extension game module and the current production module. It runs the existing
+recipe journey, replaces only that disposable project's item authoring module,
+then checks descriptor freshness, the new control, publication/reopen and fixed
+application/resource bytes. It never rewrites the production data catalogue.

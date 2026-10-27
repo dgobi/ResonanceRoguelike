@@ -219,11 +219,17 @@ Native samples are published only in ignored disposable content. The example in
 2. **Begin edit** is available only for a unique, single-object ordinary inert
    component under `roguelike/data/items/components/` (including safe nested
    folders). The current four are `wood_bundle`, `flint_shard`, `clay_lump` and
-   `clay_pot`. Typed fields are `name`, `description`, `weight`, `stackable` and
-   `keywords`. Name/description are literal authored text. Weight is finite and
+   `clay_pot`. Typed fields are `name`, `description`, `weight`, `stackable`,
+   `consumed_on_use` and `keywords`. Name/description are literal authored text. Weight is finite and
    nonnegative, in kg per instance. `stackable` groups same-ID inventory display
    rows; it does not merge ownership or multiply an instance's weight. There is
    no editable stack-size field.
+   **Eligible for automatic ingredient selection** (`consumed_on_use`) is enabled
+   by default when absent; opening never inserts the key. Disable it to require an
+   explicit material choice before crafting can spend this item. Recipe roles
+   determine whether selected instances are consumed or retained; this does not
+   change ordinary item-use disposal. Explicit null or other invalid types remain
+   recoverable in Source and cannot be published.
 3. Keywords use current `data/keywords.json` tag IDs. Tier is a nonnegative integer
    from the game's persisted-instance rules, limited to `2^53−1` for exact editor
    transport. Factory defaults are not serialized on open. Source, typed edits,
@@ -253,7 +259,9 @@ Native samples are published only in ignored disposable content. The example in
 7. **Factory result** is separate observed evidence: an unowned real instance,
    declared/property comparison, exact definition hash, input and loaded-catalogue
    hashes, game source identity and UTC observation time. An edited draft hides
-   old factory results until revalidated. Advanced item inspection can instantiate
+   old factory results until revalidated. **Validate and construct exact item**
+   refreshes this evidence through the shared validator, including for a clean
+   eligible item after saved dependencies change. Advanced item inspection can instantiate
    a valid definition without claiming its use/equipment/effects work. A linked
    structure's **Preview draft** can additionally observe actual seeded container
    population. That fixture does not certify world selection or acquisition.

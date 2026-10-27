@@ -23,6 +23,8 @@ SCHEMA = {
         "weight": {"type": "number", "title": "Item weight (kg)", "minimum": 0, "default": 0.1},
         "stackable": {"type": "boolean", "title": "Group in inventory", "default": False,
                       "description": "Groups same-ID instances in inventory display. Instances and carried weights remain separate."},
+        "consumed_on_use": {"type": "boolean", "title": "Eligible for automatic ingredient selection", "default": True,
+                            "description": "Enabled by default when absent. Disable to require an explicit material choice before crafting can spend this item. Recipe roles determine whether selected instances are consumed or retained; this does not change ordinary item-use disposal."},
         "keywords": {"type": "array", "title": "Keywords", "x-control": "ordered-table", "items": {
             "type": "object", "required": ["tag", "tier"], "properties": {
                 "tag": {"type": "string", "title": "Keyword", "x-reference": "keywords"},

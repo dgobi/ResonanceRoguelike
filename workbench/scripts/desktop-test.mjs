@@ -525,6 +525,10 @@ try {
     if (mode === "recipes") {
       const {recipeJourney} = await import("./recipe-journey.mjs");
       await recipeJourney(page, root, output, receipt);
+      if (process.env.WORKBENCH_CONTRACT_PROOF === "1") {
+        const {contractJourney} = await import("./contract-journey.mjs");
+        await contractJourney(page,root,output,receipt);
+      }
     }
     if (mode === "items") {
       const {itemJourney} = await import("./item-journey.mjs");
