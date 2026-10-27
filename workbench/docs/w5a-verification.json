@@ -1,0 +1,502 @@
+{
+  "milestone": "W5A",
+  "observed_utc": "2026-10-27T18:16:46.661286+00:00",
+  "passed": true,
+  "revisions": {
+    "baseline": "3d4c0cfdde151fa562bbf1dc2e1e9e5cc35b9a97",
+    "branch": "main",
+    "migration": "b43dd4fef1ce8a5e7663b15088c244a6c73d2588",
+    "migration_corrections": [
+      "91abc3f11daf794ac62990ae3e4eb7d4c253c9be",
+      "ef9a7b1a0ec506e8bee0e2477cdb98f91f90983b",
+      "b85e12514dc2f173cac0fcd2e65de6b3b58fbafa"
+    ],
+    "implementation": "c4997595b6e3e074a0b3998f902878d9fa085f76",
+    "evidence": "separate following docs commit; see Git history/handoff",
+    "remote_main_readback": "3d4c0cfdde151fa562bbf1dc2e1e9e5cc35b9a97",
+    "pushed": false,
+    "push_authorized": false,
+    "checkpoints": [
+      "checkpoint/workbench-w5a-start-20261027-a",
+      "checkpoint/workbench-w5a-verified-20261027-a"
+    ]
+  },
+  "responsibilities": {
+    "game": "explicit item/recipe registry, bounded descriptor, references, original source eligibility and real semantic adapters",
+    "worker": "common family envelope and exact-candidate dispatch, independent original entitlement check",
+    "frontend": "family document collection, one shared Authoring lifecycle, registered specialized evidence and generic localized controls",
+    "host": "family lookup and verified policy beneath W4D admission/completion, independent filesystem confinement"
+  },
+  "extension_locality": {
+    "before": "b85e12514dc2f173cac0fcd2e65de6b3b58fbafa",
+    "after": "c4997595b6e3e074a0b3998f902878d9fa085f76",
+    "changed_paths": [
+      "roguelike/engine/item_authoring.py",
+      "workbench/README.md",
+      "workbench/docs/CONTENT_CONTRACTS.md",
+      "workbench/scripts/contract-journey.mjs",
+      "workbench/scripts/desktop-test.mjs",
+      "workbench/scripts/item-journey.mjs",
+      "workbench/scripts/run-contracts.mjs",
+      "workbench/worker/test_content_contracts.py"
+    ],
+    "runtime_changes": [
+      "roguelike/engine/item_authoring.py"
+    ],
+    "added_runtime_lines": 2,
+    "shared_runtime_changes": [],
+    "native_fixed_bytes": true,
+    "fixed_package_sha256": {
+      "executable": "23fa0a62b9903e50cfc2211d17fcae363dc16b456ec991d36bc539f7882d0eb5",
+      "bridge": "ba8e1edbe0493a7cbcfb64b38181174d4eba45eb8908d12c4da6c628591381d7",
+      "runtime": {
+        "files": 1809,
+        "sha256": "bcec0cde456247d70707d642296f0b1c6fc451a4ebb7efd732d7cba0468235ca"
+      },
+      "frontend": {
+        "files": 11,
+        "sha256": "7c21f319a19e4a05f874dccb347ff73a28f227c1a2bb0ceb826a35e08d123b9f"
+      },
+      "installer": "57d9bc5dac46a443f149b317264f2da457c6a90baf11790766c98feeac205cc6"
+    },
+    "tree_hash_method": "SHA-256 of JSON.stringify(sorted [relative/path, file SHA-256] entries), from scripts/run-contracts.mjs",
+    "proof_receipt_sha256": "4922903d14d6bd2f38de62e93708a691a65e6b3f79b00223309b1e69ca7d382d"
+  },
+  "writer": {
+    "baseline": "3d4c0cfdde151fa562bbf1dc2e1e9e5cc35b9a97",
+    "range": "fn pin_inputs( through immediately before #[tauri::command] pub async fn apply_document",
+    "normalization": "CRLF to LF",
+    "unchanged": true,
+    "sha256": "fe785dc98ccadebb26c6426303068f35e7e36d9cc8a170c2950d07841b96c1bf"
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "result": "36 passed across 10 files"
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "result": "33 passed; all eight w4d_* regressions"
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "result": "passed"
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -B -m unittest discover -s worker -p 'test_*.py' -v",
+      "result": "43 collected; 42 passed; one embedded-runtime skip",
+      "seconds": 662.051
+    },
+    {
+      "command": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe -X utf8 -B -m unittest test_bridge.BridgeTests.test_dependency_absence_structured -v",
+      "cwd": "workbench/worker",
+      "result": "separately passed skipped case; existing interpreter only",
+      "seconds": 0.753
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "result": "release executable and NSIS 0.9.0 package created"
+    },
+    {
+      "command": "node scripts/run-contracts.mjs",
+      "result": "passed",
+      "milliseconds": 183964
+    },
+    {
+      "command": "npm.cmd run test:items",
+      "result": "passed",
+      "milliseconds": 129386
+    },
+    {
+      "command": "npm.cmd run test:submaps",
+      "result": "passed",
+      "milliseconds": 133398
+    },
+    {
+      "command": "WORKBENCH_STARTUP_SMOKE=1 npm.cmd run test:startup",
+      "result": "four supported launch/restart checks passed"
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -B .artifacts/w5a/verify-preservation.py; git diff --check",
+      "result": "passed"
+    }
+  ],
+  "runtime": {
+    "workbench": "0.9.0",
+    "worker": "0.9.0",
+    "protocol": 8,
+    "node": "24.15.0",
+    "npm": "11.12.1",
+    "rust": "1.95.0 (59807616e 2026-04-14)",
+    "python": "3.11.0",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    }
+  },
+  "native": {
+    "recipes": {
+      "started_utc": "2026-10-27T18:03:58.552Z",
+      "passed": true,
+      "total_ms": 183964,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "current passive, world, deprecated and conjunction recipes inspect read-only; no unsupported controls; closing during recipe lookup suppresses late document",
+        "native W3B item → related recipe; four independent drafts; exact scalar/reorder/undo/raw freeze; late validation rejected; exact new-ID diff/visibility confirmation/publication/hash reopen; actual production allocation, output and exchange; three presets; retained item/pool/structure drafts",
+        "native host denies original-source edits, stale reviews, valid-but-changed item dependencies, concurrent destination, unsupported source capability forgery, traversal/ADS/protected paths and internal junction; no transaction residue",
+        "fresh project reopens exact saved recipe, reruns production probe, follows output item back to producer recipe; minimum-window layout and utilitarian rendered copy verified",
+        "W5A: unchanged packaged app loaded real before/after game descriptor; old evidence revoked with exact draft retained; absent default caused no write; generic boolean localized edit and invalid null recovery; deliberate item variant publication matched reviewed/reopened bytes and actual factory; direct stale-source review rejected",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "variant": {
+        "path": "roguelike/data/recipes/bile_coating_w3c.json",
+        "sha256": "8f468ac8d874bfdc76c503f1f03e54bcc1af5a49ef0e44edd511173ec0bd3de5"
+      },
+      "extension": {
+        "module": "roguelike/engine/item_authoring.py",
+        "before_module_sha256": "d8aa420ace168812f90567df09aae5a253facb596d1d0760d3e52e027be4361a",
+        "after_module_sha256": "d2556de713762ad356e34a3a7cd255f81f3532e66246435d509218d9b3f44771",
+        "before_descriptor": "fb42aa0e23bd6aeaeed92344353fa1b8a6ccfde1ab080e44d966bbb45f47f771",
+        "after_descriptor": "d7debfe9c92dc9b1bd25eb61cb1fe05840e63ef52f3189ce903c2f2487c23a9e",
+        "before_game_source": "af20d426952749dc7afdea1f42d48fd7a317199564f3412b797e6a6d1e89d42d",
+        "after_game_source": "6ea5dc44858bd7749951e39ffe42e51ea2f5adbd0293cabaf89791797fd82d83",
+        "contract": "component-1",
+        "stale_review_code": "SOURCE_CHANGED",
+        "invalid_null_draft_sha256": "b9d6d19a1c259e5c1e9a9a10c114c6dbbe3060eba0f9866feb2e0b3def49a207",
+        "publication": {
+          "path": "roguelike/data/items/components/wood_bundle_w5a.json",
+          "reviewed_sha256": "b867a6666f37054ac7ba814e95544590fc76254e5558aacd68b438dac41c9d95",
+          "saved_sha256": "b867a6666f37054ac7ba814e95544590fc76254e5558aacd68b438dac41c9d95",
+          "reopened_sha256": "b867a6666f37054ac7ba814e95544590fc76254e5558aacd68b438dac41c9d95"
+        },
+        "observed_consumed_on_use": false
+      },
+      "receipt": ".artifacts/desktop-recipes/receipt.json",
+      "receipt_sha256": "185a6a5ea58395fa4e68b80cb4786c9b376577e59a0eda52c4146ae36c79c7ee",
+      "console_errors": 0,
+      "external_requests": 0,
+      "temporary_roots_remaining": 0,
+      "production_probe": {
+        "consumer": "engine.crafting.plan_craft -> engine.item_factory.ItemFactory.create -> engine.crafting.commit_craft -> engine.item_transfers.exchange",
+        "recipe_id": "bile_coating_w3c",
+        "source_sha256": "8f468ac8d874bfdc76c503f1f03e54bcc1af5a49ef0e44edd511173ec0bd3de5",
+        "loaded_catalog_sha256": "e134459d4af42835ce86120fb261427d03fb69de3baa821e78087d410da54f90",
+        "cases": [
+          {
+            "preset": "eligible",
+            "eligible": true,
+            "committed": true,
+            "materials": [
+              "input-2",
+              "input-1",
+              "input-3"
+            ],
+            "retained_tools": [
+              "input-4"
+            ],
+            "before": [
+              "input-1",
+              "input-2",
+              "input-3",
+              "input-4"
+            ],
+            "after": [
+              "input-4",
+              "output-1"
+            ],
+            "missing": []
+          },
+          {
+            "preset": "missing_items",
+            "eligible": false,
+            "committed": null,
+            "materials": [],
+            "retained_tools": [],
+            "before": [],
+            "after": [],
+            "missing": [
+              {
+                "have": 0,
+                "min_tier": 1,
+                "need": 2,
+                "tag": "caustic"
+              },
+              {
+                "have": 0,
+                "min_tier": 1,
+                "need": 1,
+                "tag": "viscous"
+              },
+              {
+                "have": 0,
+                "min_tier": 1,
+                "need": 1,
+                "role": "tool",
+                "tag": "vessel"
+              }
+            ]
+          },
+          {
+            "preset": "missing_ambient",
+            "eligible": false,
+            "committed": null,
+            "materials": [
+              "input-2",
+              "input-1",
+              "input-3"
+            ],
+            "retained_tools": [],
+            "before": [
+              "input-1",
+              "input-2",
+              "input-3",
+              "input-4"
+            ],
+            "after": [
+              "input-1",
+              "input-2",
+              "input-3",
+              "input-4"
+            ],
+            "missing": [
+              {
+                "ambient": true,
+                "have": 0,
+                "min_tier": 1,
+                "need": 1,
+                "tag": "burning"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "items": {
+      "started_utc": "2026-10-27T18:09:35.389Z",
+      "passed": true,
+      "total_ms": 129386,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "three advanced item sources open byte-exact read-only; actual dispatch found; declarative tincture effects explicitly unconsumed",
+        "closing/reopening the project during item lookup cannot restore a late item document",
+        "native container → pool → item; three retained drafts and separate histories; exact-span weight/tier edits; invalid raw freeze and late verdict suppression; item and pool variant diff/confirm/save/reopen; actual factory and seeded population observed",
+        "native host rejects stale item review, external source conflict, concurrent destination creation, advanced-item publication, protected paths and internal junction traversal",
+        "fresh project reopen resolves new pool/item and actual instance; original files and selection profile unchanged; plain rendered chrome at full/minimum window",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "variants": [
+        {
+          "path": "roguelike/data/items/components/wood_bundle_w3b.json",
+          "sha256": "d2062846132d34bf754d45167b20f45c59f2cb87ce30e46ad3c51a24ea56b2d1"
+        },
+        {
+          "path": "roguelike/data/loot_pools/workshop_b_fuel_w3b.json",
+          "sha256": "2c274e51526360dc317b913d109f0679de9552920555151dd9600ceba0a640f1"
+        }
+      ],
+      "concurrent_destination_refusal": "SOURCE_CHANGED",
+      "receipt": ".artifacts/desktop-items/receipt.json",
+      "receipt_sha256": "b7a038960adb8e082b5de0cf1744d23239dddaafd9b2b15d49c8c720edeb1f0e",
+      "console_errors": 0,
+      "external_requests": 0,
+      "temporary_roots_remaining": 0,
+      "observed_factory": {
+        "item_id": "wood_bundle_w3b",
+        "definition_sha256": "d2062846132d34bf754d45167b20f45c59f2cb87ce30e46ad3c51a24ea56b2d1",
+        "weight": 1.75
+      }
+    },
+    "submaps": {
+      "started_utc": "2026-10-27T18:11:46.222Z",
+      "passed": true,
+      "total_ms": 133398,
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "W4D real completed validation held at renderer; accepted cancel revoked host token, exact draft retained, old completion could not restore verdict or clear newer preview; fresh production result accepted",
+        "W4D parked item draft survived submap edits, cancellation, fresh preview and publication byte-for-byte; source item unchanged",
+        "read-only example → exact shared marker draft; add/move/delete, undo/redo, raw freeze, stale job rejection, source/scene coordinates, real Actor, minimum-window diagnostics, sidecar invalidation, new-file publish and byte-exact reopen",
+        "native trusted writer rejects stale/forged/revoked reviews, external source and creature changes, destination races, starting_lab promotion, traversal/ADS/docs writes and layout junction; originals unchanged",
+        "project close/reopen reproduces exact saved variant and production actor with no sidecar output or campaign selection",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ],
+      "variant": {
+        "path": "roguelike/data/layouts/w4c_guard_room.json",
+        "sha256": "7be26e6ff9c4a0f0eaddde6e62664ece450297e2238fc97981f6048b16d93b4b"
+      },
+      "receipt": ".artifacts/desktop-submaps/receipt.json",
+      "receipt_sha256": "a59b5ee894120669f66a10bc253c64c9c084b361bb0421d75bbfc781789a40c9",
+      "console_errors": 0,
+      "external_requests": 0,
+      "temporary_roots_remaining": 0
+    }
+  },
+  "startup": {
+    "receipt": ".artifacts/w4b/startup-1793124840421/receipt.json",
+    "receipt_sha256": "1a6fb3b5853fe963fd4c3bf6835eef04f88a180819297fd00cb24b17dbf1b1a9",
+    "runs": [
+      {
+        "name": "fresh-owner-launch",
+        "passed": true,
+        "total_ms": 14758,
+        "entry_point": "G:\\GameDev\\RoguelikeProject\\workbench\\Launch Workbench.vbs",
+        "override_present": false,
+        "runtime_mode": "bundled",
+        "console_errors": 0,
+        "external_requests": 0,
+        "temporary_roots_remaining": 0
+      },
+      {
+        "name": "owner-restart",
+        "passed": true,
+        "total_ms": 7282,
+        "entry_point": "G:\\GameDev\\RoguelikeProject\\workbench\\Launch Workbench.vbs",
+        "override_present": false,
+        "runtime_mode": "bundled",
+        "console_errors": 0,
+        "external_requests": 0,
+        "temporary_roots_remaining": 0
+      },
+      {
+        "name": "change-project",
+        "passed": true,
+        "total_ms": 16154,
+        "entry_point": "G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\resonance-workbench.exe",
+        "override_present": false,
+        "runtime_mode": "bundled",
+        "console_errors": 0,
+        "external_requests": 0,
+        "temporary_roots_remaining": 0
+      },
+      {
+        "name": "changed-project-restart",
+        "passed": true,
+        "total_ms": 6492,
+        "entry_point": "G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\resonance-workbench.exe",
+        "override_present": false,
+        "runtime_mode": "bundled",
+        "console_errors": 0,
+        "external_requests": 0,
+        "temporary_roots_remaining": 0
+      }
+    ]
+  },
+  "preservation": {
+    "passed": true,
+    "inherited_manifest_baseline": "7745f72ea5446af22d3f340c30043d3752ef0f54",
+    "manifest_entries": 7979,
+    "unchanged_entries_checked": 7977,
+    "save_count": 7,
+    "save_file_set_unchanged": true,
+    "permitted_authoring_sources": [
+      "roguelike/engine/item_authoring.py",
+      "roguelike/engine/recipe_authoring.py"
+    ],
+    "other_changes": 0,
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "owner_settings_sha256": "4c8efc27e9b2f11ee6868ca994a76579b7ecb93a84b0f1afbfd4ce72e1101620",
+    "owner_settings_matches_w4d": true,
+    "manifest_sha256": "19101fc94222e5bbbf36c38c1f262215fb1994f6b33b38ff1d65239d6c337d1e"
+  },
+  "owner_settings_and_shortcut": {
+    "matches_w4d": true,
+    "sha256": "4c8efc27e9b2f11ee6868ca994a76579b7ecb93a84b0f1afbfd4ce72e1101620",
+    "shortcuts": [
+      {
+        "arguments": "\"G:\\GameDev\\RoguelikeProject\\workbench\\Launch Workbench.vbs\"",
+        "target": "C:\\Windows\\System32\\wscript.exe"
+      }
+    ]
+  },
+  "final_worktree_source_sha256": {
+    "roguelike/engine/content_authoring.py": "ec73c57d56dde8d2799ff991ec5c118c3c3a73a45e373d8b1a80bee01a77e406",
+    "roguelike/engine/item_authoring.py": "d2556de713762ad356e34a3a7cd255f81f3532e66246435d509218d9b3f44771",
+    "roguelike/engine/recipe_authoring.py": "a772eb0ac60f63a9fdd2caa04417ab1ebf31208ab4a63d61e1b2bd3c18b89706",
+    "workbench/README.md": "6f22b0a5e97f843c99bd1e6d47e1149e7c069f9dc6c262699ed50d77d9babf76",
+    "workbench/docs/CONTENT_CONTRACTS.md": "9a0cf7fca3860b30b606dcc67cd206e1792091a48673e028444f454bbd7c553d",
+    "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+    "workbench/package.json": "546cf157b09320db63bdc7a900f263d3ef10d5feb9401d3b09a1807b306da76c",
+    "workbench/scripts/contract-journey.mjs": "692db264d711330fbcad16e4b6b0bda5c1cfe1f3a45981247a35feb1ef1b1772",
+    "workbench/scripts/desktop-test.mjs": "7e8dac840bf31cbab5fd7294fdb6adac9aae7c65e199489d3e97d598815bc9db",
+    "workbench/scripts/item-journey.mjs": "84886a8e001ee44394f0d050be25ac86470db0d5808b369d3f176d16c675e172",
+    "workbench/scripts/run-contracts.mjs": "5a11be5641dd148c02d8f25f07d7d055d955b810d812cb159f2560458afc21e3",
+    "workbench/scripts/startup-test.mjs": "ac3838ea8f92abc1cb6a9af8d2dcb14eb721199d15d37bd11bb456639fdecc8b",
+    "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+    "workbench/src-tauri/Cargo.toml": "9c0519b6f135d26c2673d643f74d5bea40f8587fffa425ed5660a8b7f9b94df7",
+    "workbench/src-tauri/src/authoring.rs": "66abbbdd3e8958041f9e78ef977595bf57e281766da45b957857f0bf1689a304",
+    "workbench/src-tauri/src/main.rs": "dbe0ed680829c846043784c1fff72d10745f6eb3990b4c3a590994bd78db8a46",
+    "workbench/src-tauri/tauri.conf.json": "5ae1d6ded1b17e3b91477c799e1cdc698f8f6d6dc56323c1fe8eba70abd84639",
+    "workbench/src/App.tsx": "7bd32a4d407285c7c61efcd73bcff8a2f2666343378b7112ccffb004c48e6b5d",
+    "workbench/src/Authoring.tsx": "65f870ab10a10c50791fe7925498b37ff8e708fd44d8009add177f943bc38d7a",
+    "workbench/src/ContentEditor.tsx": "55ad42bc58597ca24358b2344d857c6fa99c3eeb782160f5c25d095a2799d8c6",
+    "workbench/src/ContractControls.tsx": "fd52ba6fab6f7761727d9a401bd0211831576120be0e9baefc0e268682db27cf",
+    "workbench/src/ItemEditor.tsx": "9dc38afc7ca7a5da49c28ae7b3c5926ec49ade7fae51f52c9f4360bc2281d7ca",
+    "workbench/src/RecipeEditor.tsx": "be22162ce54d717bf4626d14b57389e2d2c1af030fb2c3b847aa397450da64f6",
+    "workbench/src/content.test.tsx": "e66237fb9b316fd48f43a7987c342de022baafbaf3da172089637042fcbc3d8e",
+    "workbench/src/content.ts": "e59bb0f359b12fa8976d9214abcad4a092f70059803a13688735a91532963f9c",
+    "workbench/src/familyData.ts": "64f8053f6f9826e608b864eaedf4b2bb6b9c2444108cf9b14940e7d01645991a",
+    "workbench/src/item.ts": "78c79498e8aaa4c005018daf919013964704430d2ae2466bfc6ee9aac463bd75",
+    "workbench/src/protocol.ts": "31ebe2ccd5c1ad3fa75ae84a2eccb2757256163de28be2a5ae4507ddd9256314",
+    "workbench/src/recipe.ts": "23289f6a56127aa33f0bf3d6f05b4e9cceb94763b9f5c47d5bc4903dc209b016",
+    "workbench/worker/bridge.py": "ba8e1edbe0493a7cbcfb64b38181174d4eba45eb8908d12c4da6c628591381d7",
+    "workbench/worker/test_bridge.py": "cf92ee646ad80398e07cc62d062e52aaae9ce5875c5ceaec6ea0bcbc518f027b",
+    "workbench/worker/test_content_contracts.py": "71a91b11897fb6f6f59df2cf40cf233baf73be5680ec1c9999119f84c5eb927f",
+    "workbench/worker/test_items.py": "ded2558eb7332f686aaa9b4035300035d3759f4fbadc25e26a58c3e43376da49",
+    "workbench/worker/test_recipes.py": "f5ba4179b88c0e2d56281d92b65ea1e863d588328daab80f38bb661fc73e15b7"
+  },
+  "logs_sha256": {
+    ".artifacts/w5a/frontend.log": "cc77bef45b1c71607e34c8ec4e556b69cd55dc78b05abad0d6a51eb0d4280695",
+    ".artifacts/w5a/typecheck.log": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b",
+    ".artifacts/w5a/rust.log": "af7a35d8e3c788405291be080b68b382508d6b945f66552096976c847e9f6ce4",
+    ".artifacts/w5a/clippy.log": "9a7c6d37b95fc0d70e4330a7778d45695b9cb83b945f152983ff8f6477513f1c",
+    ".artifacts/w5a/worker.log": "ef63074cf3e7b89ed5e7c75cba2aeb12231c58dac9cbb38bd79d66aee8bcb38a",
+    ".artifacts/w5a/dependency.log": "2b30a76b6bdb4f896f2c75e6510f9fc5d1dea8bf4b4cfa5026b21a252882da94",
+    ".artifacts/w5a/bundle.log": "ff52cdc507c4985ca169412187803eecd87ad6ac0c09021598df442f6b8ff283",
+    ".artifacts/w5a/native-contracts.log": "4236ca1ad8767880fd72a9b3f2f7972bc167b1cdfcd100f8709e25e49058235a",
+    ".artifacts/w5a/native-items.log": "647da9b00bba8beb6d967a3728172b0a081a2425097bcd111743df2322ab3e74",
+    ".artifacts/w5a/native-submaps.log": "b11ced701179669086e602e977f4a7ef36fc2d22654995270ee77382328a68f2",
+    ".artifacts/w5a/startup.log": "23c72fa5debeecc59250e44b5b9974be8bbc592fbe9f8c096fa21610c178690f"
+  },
+  "limits": [
+    "Baseline frontend 32/typecheck and four item/four recipe checks were newly observed; other W4D results were previously reported. All listed final gates are newly observed W5A runs.",
+    "Schema/reference checks are distinct from actual ItemFactory, material_candidate, plan_craft, commit_craft and recipe probe/exchange assertions.",
+    "All eight W4D deterministic tests use active helpers with migrated and legacy coverage; prepared worker completions are injected there. Native delayed-response tests exercise app-local event delivery.",
+    "The initial unittest invocation and early locked installer attempt failed before successful final commands; intermediate recipe note/navigation/context/evidence issues were corrected. The item native collision assertion was updated from VARIANT_EXISTS to the now-earlier SOURCE_CHANGED refusal, preserving its untouched-destination byte check, then rerun.",
+    "Final frontend checks, package and selected native journeys follow the last UI correction. Rust and Python sources did not change after their passing suites.",
+    "The sole embedded-runtime skip was separately run successfully using an existing development interpreter; no development checkout was created.",
+    "Preservation compares an explicitly inherited older manifest, excluding the two commissioned existing game authoring modules. No personal campaign was used as a fixture.",
+    "Package creation is not clean-machine installation, signing, full-game or ordinary-play certification. Historical full-game/unrelated native campaigns and wiki work were not commissioned.",
+    "Durations are per run; overlapping runs are not summed as wall time. Source hashes are exact current worktree bytes, not normalized Git blob IDs."
+  ]
+}
