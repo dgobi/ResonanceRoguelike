@@ -362,6 +362,18 @@ export default function App() {
     itemReturnFocus.current = recipeDocument?.path || null;
     setRecipeActive(false); setItemActive(true); setCreatureActive(false);
   }
+  async function refreshContentContexts(token:number) {
+    for (const [family,entry] of Object.entries(contentDocuments)) {
+      const refreshed=await request<Inspection>("inspect",{asset:entry.document.path});
+      if(token!==epoch.current)return;
+      const next=refreshed.result;
+      setContentDocuments(current=>{
+        const live=current[family];
+        if(live?.document.document_token!==entry.document.document_token || live.document.path!==next.path || live.document.sha256!==next.sha256 || live.document.family?.descriptor_sha256!==next.family?.descriptor_sha256)return current;
+        return {...current,[family]:{...live,document:{...live.document,family:next.family}}};
+      });
+    }
+  }
   async function contentApplied(family:string,asset:string,result:unknown) {
     const token=epoch.current; setReceipt(result); setDependencyVersion(v=>v+1);
     const catalog=await request<{assets:Asset[]}>("describe"); if(token!==epoch.current)return;
@@ -373,6 +385,7 @@ export default function App() {
       const refreshed=await request<Inspection>("inspect",{asset:poolDocument.path});if(token!==epoch.current)return;
       setPoolDocument(d=>d?.path===refreshed.result.path && d.sha256===refreshed.result.sha256 ? {...d,pool_context:refreshed.result.pool_context}:d);
     }
+    await refreshContentContexts(token);if(token!==epoch.current)return;
     setStatus(`Saved and byte-checked reopen: ${asset}. ${reopened.result.family?.descriptor.publication_note || ""}`);
   }
   async function poolApplied(asset: string, result: unknown) {
@@ -387,6 +400,7 @@ export default function App() {
     if (token !== epoch.current) return;
     verifyReopened(r.result, result);
     setPoolDocument(r.result);
+    await refreshContentContexts(token);if(token!==epoch.current)return;
     setStatus(`Pool saved and reopened: ${asset}. No container references changed.`);
   }
   async function applied(asset: string, result: unknown) {
