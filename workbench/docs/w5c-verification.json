@@ -1,0 +1,462 @@
+{
+  "milestone": "W5C",
+  "observed_utc": "2026-10-27T22:23:08Z",
+  "passed": true,
+  "revisions": {
+    "baseline": "4bc0aece1871881db0412af5f256aa58571d8aca",
+    "branch": "main",
+    "repairs": [
+      "3a5cec23a6b022f849ca3d8efa67a1b75cd525f6",
+      "ad4f6ce7cb822b46f6d4c8383c1399391ac9a3d3",
+      "04d9424daec5cd4e0c7ede661eb25bb29c660e9b"
+    ],
+    "implementation": "fa066d974c93a9e36f02ef82828fc7da4dba5fcf",
+    "checkpoints": [
+      "checkpoint/workbench-w5c-reader-verified-20261027-a",
+      "checkpoint/workbench-w5c-repairs-20261027-a",
+      "checkpoint/workbench-w5c-repairs-final-20261027-a",
+      "checkpoint/workbench-w5c-start-20261027-a",
+      "checkpoint/workbench-w5c-verified-20261027-a"
+    ],
+    "evidence_ref": "checkpoint/workbench-w5c-verified-20261027-a",
+    "evidence_note": "The annotated verified checkpoint records its exact evidence commit and final remote-main readback after pushing. A commit cannot contain its own hash.",
+    "remote_initial_readback": "4bc0aece1871881db0412af5f256aa58571d8aca",
+    "remote_prepublication_readback": "4bc0aece1871881db0412af5f256aa58571d8aca",
+    "push_authorization": "Owner explicitly requested all completed work be committed and pushed."
+  },
+  "prerequisites": {
+    "w5a": {
+      "revision": "0f716fbc7ccfc92ac2c4dd412726a82ede66290e",
+      "matched": 34,
+      "unreconciled": []
+    },
+    "w5b": {
+      "revision": "4bc0aece1871881db0412af5f256aa58571d8aca",
+      "matched": 38,
+      "unreconciled": []
+    }
+  },
+  "environment": {
+    "os": "Windows",
+    "node": "24.15.0",
+    "cargo": "1.95.0",
+    "bundled_python": "3.11.0",
+    "missing_dependency_control_python": "3.11.0 (existing development interpreter)"
+  },
+  "ownership": "Canonical project session + host-established file key; opaque token per open instance. Registered item/recipe/text migrated; legacy slots included in shared operations.",
+  "writer_unchanged": {
+    "pin_inputs": {
+      "unchanged_from": "4bc0aece1871881db0412af5f256aa58571d8aca",
+      "normalized_sha256": "bf6e0df953c06424ad32e8fe16451fdb819e694676deb230d7ef325c9c5d706b"
+    },
+    "input_stamp": {
+      "unchanged_from": "4bc0aece1871881db0412af5f256aa58571d8aca",
+      "normalized_sha256": "b88d4382d301a5d72961c873d2dfca2ce4d42d172caac94f0bd4c665b9ec6109"
+    },
+    "publish": {
+      "unchanged_from": "4bc0aece1871881db0412af5f256aa58571d8aca",
+      "normalized_sha256": "cd2c96558423075af3fae686a5204fcce1933881f9a0839f3f17265b045364df"
+    }
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "result": "46 passed / 12 files",
+      "wall_seconds": 0.294
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "result": "39 passed, including all eight W4D cases and five workspace cases",
+      "test_seconds": 0.3
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "result": "passed"
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -B -m unittest discover -s worker -v",
+      "result": "48 collected; 47 passed, one expected missing-dependency skip",
+      "wall_seconds": 761.098,
+      "scope": "Complete suite preceded the final footer-width and malformed-map followups; affected final reader/text/reference checks below cover those changes."
+    },
+    {
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -X utf8 -B -m unittest test_bridge.BridgeTests.test_dependency_absence_structured -v (cwd workbench/worker; existing interpreter only)",
+      "result": "1 passed; expected missing dependencies",
+      "wall_seconds": 0.869
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -B -m unittest discover -s worker -p test_texts.py -v",
+      "result": "5 passed after final reader layout",
+      "wall_seconds": 74.252
+    },
+    {
+      "command": "runtime/python.exe -X utf8 -B -m unittest test_texts.TextTests.test_text_references_match_keys_not_same_spelling_carrier_items -v (cwd workbench/worker)",
+      "result": "1 passed after final malformed-map compatibility correction",
+      "wall_seconds": 0.019
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -B .artifacts/w5c/reader-artifacts.py (cwd workbench; SDL_VIDEODRIVER=dummy, SDL_AUDIODRIVER=dummy)",
+      "result": "3 passed; title lengths 20/400/512/1024/2048 at 960x640 and 480x320",
+      "wall_seconds": 11.808,
+      "reproduce_without_local_capture_wrapper": "Set PYTHONPATH=../roguelike;../tools/critical_fix_regressions/tests and both SDL dummy drivers, then run worker/runtime/python.exe -X utf8 -B -m unittest -v test_gameplay_g12.ExpeditionRewardsTests.test_actual_warning_later_page_paragraphs_mixed_span_identity_and_no_turns test_gameplay_g12.ExpeditionRewardsTests.test_long_tokens_glyph_translations_and_complete_alphabet_are_bounded test_gameplay_g12.ExpeditionRewardsTests.test_long_titles_render_full_heading_and_body_inside_frame_above_footer from workbench."
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "result": "release executable, pinned runtime/resources and NSIS installer built"
+    },
+    {
+      "command": "WORKBENCH_STARTUP_SMOKE=1 npm.cmd run test:startup",
+      "result": "4 passed",
+      "runs": [
+        {
+          "name": "fresh-owner-launch",
+          "passed": true,
+          "ms": 12421
+        },
+        {
+          "name": "owner-restart",
+          "passed": true,
+          "ms": 7008
+        },
+        {
+          "name": "change-project",
+          "passed": true,
+          "ms": 15233
+        },
+        {
+          "name": "changed-project-restart",
+          "passed": true,
+          "ms": 6409
+        }
+      ]
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "result": "passed",
+      "wall_seconds": 76.394
+    },
+    {
+      "command": "npm.cmd run test:submaps",
+      "result": "passed",
+      "wall_seconds": 77.928
+    },
+    {
+      "command": "npm.cmd run test:items",
+      "result": "passed",
+      "wall_seconds": 67.235
+    },
+    {
+      "command": "npm.cmd run test:recipes",
+      "result": "passed",
+      "wall_seconds": 70.083
+    },
+    {
+      "command": "npm.cmd run test:pools",
+      "result": "passed",
+      "wall_seconds": 57.766
+    },
+    {
+      "command": "npm.cmd run test:creatures",
+      "result": "passed",
+      "wall_seconds": 74.28
+    }
+  ],
+  "package": {
+    "executable": "d21f1dd3caddc41992f7c3a3e3a87eb6446a95a14723b25c2a3c4ab854a49a76",
+    "bridge": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+    "source_bridge": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+    "runtime": {
+      "files": 1809,
+      "sha256": "bcec0cde456247d70707d642296f0b1c6fc451a4ebb7efd732d7cba0468235ca"
+    },
+    "frontend": {
+      "files": 11,
+      "sha256": "3f925483361e6d3001fcade8e421700e54f3a6a3a29081cf45ac14338fac9b46"
+    },
+    "installer": "055248d9bb38bb803cbbba32ae58caa41b37a4c7bb8833f03770b8e420d1afc1"
+  },
+  "native": {
+    "workspace_checks": [
+      "actual Tauri WebView2 window",
+      "WebView network offline",
+      "repository handshake, live asset validation and Pixi rendering",
+      "production arrival click maps to (15,20), stairs_up",
+      "real DIMENSION diagnostic for disposable fixture",
+      "byte-exact view, close and reopen journey",
+      "host traversal rejection",
+      "cancel and retry without app hang",
+      "a held real freshness response disables conflicting UI actions until release without queueing work",
+      "six independent file owners; exact invalid source; variant targets and undo/redo retained; aliases/repeated opens reuse tokens; shared-item references return to both recipe origins",
+      "targeted close/reload keep/discard and obsolete-token rejection; destination owner collision; one reviewed/saved/reopened variant with deliberate recovery after reopen failure",
+      "individual external conflict and conservative freshness preserve drafts; legacy structure source remains byte-exact; unavailable closed reference origin is explicit",
+      "invalid project visible",
+      "no temporary worker roots remain after native close"
+    ],
+    "view_state": {
+      "page": 1,
+      "reader_scroll": 1008,
+      "reader_max_scroll": 1008,
+      "pane_scroll": 148,
+      "preserved": true
+    },
+    "busy_retries": 0,
+    "variant": {
+      "path": "roguelike/data/texts/lab/w5c_parked_4.json",
+      "reviewed_sha256": "68a52c4b10cd5c93fb99ae7a1a451fadd7dd214d2a153c32145d38ff0245365b",
+      "saved_sha256": "68a52c4b10cd5c93fb99ae7a1a451fadd7dd214d2a153c32145d38ff0245365b",
+      "reopened_sha256": "68a52c4b10cd5c93fb99ae7a1a451fadd7dd214d2a153c32145d38ff0245365b",
+      "reopen_failure": "one-shot transport injection after real publication",
+      "recovery": "verified reopen only"
+    },
+    "monitoring": {
+      "one": {
+        "wall_ms": 6810.900000095367,
+        "sweeps": [
+          {
+            "wall_ms": 40,
+            "elapsed_ms": 34.039,
+            "dependency_scans": 1,
+            "documents": 1
+          },
+          {
+            "wall_ms": 43.299999952316284,
+            "elapsed_ms": 34.774699999999996,
+            "dependency_scans": 1,
+            "documents": 1
+          }
+        ],
+        "max_inflight": 1
+      },
+      "six": {
+        "wall_ms": 6806.199999928474,
+        "sweeps": [
+          {
+            "wall_ms": 39.799999952316284,
+            "elapsed_ms": 35.166799999999995,
+            "dependency_scans": 1,
+            "documents": 6
+          },
+          {
+            "wall_ms": 37.799999952316284,
+            "elapsed_ms": 34.9821,
+            "dependency_scans": 1,
+            "documents": 6
+          }
+        ],
+        "max_inflight": 1
+      }
+    },
+    "console_errors": [],
+    "external_requests": []
+  },
+  "reader": {
+    "title_lengths": [
+      20,
+      400,
+      512,
+      1024,
+      2048
+    ],
+    "sizes": [
+      [
+        960,
+        640
+      ],
+      [
+        480,
+        320
+      ]
+    ],
+    "observed": "Actual ItemFactory -> ItemSystem._use_read -> TextReader.render with shipped fonts/UI and real engine reader keys. Full heading/body reachability, effective clip/complete rows, body pixels, footer separation, original item retention and unchanged time/RNG/knowledge/hunger asserted.",
+    "reused": "W5B physical construction/binding/pickup proof; unchanged consumer source identities retained. This task reran reader render/input, not the entire placement journey."
+  },
+  "preservation": {
+    "passed": true,
+    "baseline": "4bc0aece1871881db0412af5f256aa58571d8aca",
+    "unchanged_files_checked": 8126,
+    "save_files": 7,
+    "save_set_unchanged": true,
+    "unexpected_changes": [],
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "owner_settings_sha256": "4c8efc27e9b2f11ee6868ca994a76579b7ecb93a84b0f1afbfd4ce72e1101620",
+    "launcher_sha256": "c5f71560f424e9cc718376bfae30970c4c3188a94f25e173dc6674b33bd66d6c"
+  },
+  "timing": {
+    "source_freeze_epoch": 1793139288.9157743,
+    "source_freeze_utc": "2026-10-27T22:14:48Z",
+    "baseline_to_source_freeze_seconds": 2712.634241580963,
+    "baseline_started_utc": "2026-10-27T21:29:36Z",
+    "note": "Final source/test edit time; elapsed implementation interval includes overlapping gates. Gate durations are reported separately, not summed.",
+    "evidence_observed_utc": "2026-10-27T22:23:08Z",
+    "post_source_freeze_seconds": 499.456
+  },
+  "final_worktree_source_sha256": {
+    "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+    "roguelike/docs/LAYOUT_AUTHORING.md": "6db7fd3aed5ddc10ccb3e24f02b82366ec9ec42da42ccb08294baa9e25186575",
+    "roguelike/docs/TEXT_AUTHORING.md": "012d89ba136a5a4ea3407b251ffdf35a8298c904da648baf8c086e792a5da45c",
+    "roguelike/engine/content_authoring.py": "0c646940d233bbf64c903e09b04ed1a6cdff36489cf0a181d886f73d68307d87",
+    "roguelike/engine/data_loader.py": "6240d97b546ea813dbc5fc4d2772738bf6cb553f647079ab48ab9a1e0ab3b6ff",
+    "roguelike/engine/display_config.py": "42e08e5e32aa74c96172e5104a14ff09f43fdbb68251a0f2dfd909192a963ba8",
+    "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+    "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+    "roguelike/engine/scene_generation.py": "535bd94b46af998a4236f7aba4e5dde3ccb233300738900cb0c7480c3173732d",
+    "roguelike/engine/text_authoring.py": "cb0979e31c8d87c92b27eab6c887dc8736d6dc8152265eb98c011262429bc679",
+    "roguelike/engine/text_reader.py": "aabcc37565e870408c0488ea264b9791a7918e6f448661a1600d484bb93da2a6",
+    "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+    "roguelike/generation/structure_preview.py": "904772970f57876707d59cda55c54b0317d42b338996f03cf1be0bdc59326f5b",
+    "roguelike/rendering/ui_registry.py": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058",
+    "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+    "workbench/README.md": "c21bdf582f24b264d4199323b4af038ddc64ceddd0ae056190945e1c70b1e965",
+    "workbench/docs/CONTENT_CONTRACTS.md": "6719558657a7dbc157d4ad1c4e7a42aa620a3b6141af39012d8690492aedd674",
+    "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+    "workbench/scripts/contract-journey.mjs": "c66f846cf6054ca3577592b147e17e3ef0b48b92d4d60ae5e6a70a74d0c6cb2b",
+    "workbench/scripts/creature-journey.mjs": "7889a50f23299e435bcd8fb46251ab0dd796cffc5b7e51b862825db7a57d9126",
+    "workbench/scripts/desktop-test.mjs": "7af955a8e4adc6624f7473ffbd78ab8ba0bc5ecd2c0a9c0b157ac319a946038e",
+    "workbench/scripts/item-journey.mjs": "7c4cd6687ab65bf60083b6201935c1a5c294f8864161dccabf1d12aa0de01bed",
+    "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+    "workbench/scripts/recipe-journey.mjs": "7775a0bdc0d3e73ef86fd324040d2048d4ea309d96c5f74ae18d8bf31a4b0818",
+    "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+    "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+    "workbench/scripts/submap-journey.mjs": "cb3f4ca658fced223b8377cfe241b969efcc09cdd34aebe062c736814132751a",
+    "workbench/scripts/text-journey.mjs": "7e6762e0985f7af49e5f74f59e577688b0c6f35fc2ec32a0b283eba512ae9690",
+    "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+    "workbench/scripts/workspace-journey.mjs": "d702069318ff25ae6ae9d2836aa576eafcb900478732fe5c21cd588da5e311e6",
+    "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+    "workbench/src-tauri/src/authoring.rs": "23557f13aceb5893da659b549d888909405f5ccdb6fd87f227d4bbe99f6f1c8b",
+    "workbench/src-tauri/src/main.rs": "64645ea736d92d045e55a318e41ecb278f67c599536049e1cb15821864ae4b3a",
+    "workbench/src/App.tsx": "2e7827a8a8f2a20ffb11b751cae075b26cc012df60ba73020db774d46f663212",
+    "workbench/src/Authoring.tsx": "fef0101c5961e9b35bdee95361a83c53dffb716ab410ab5ab9937483f2f63167",
+    "workbench/src/ContentEditor.tsx": "2226df3dc0869fa5fa4c4657bf0c7f79794392099257e63b3ae98a0a969087a3",
+    "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+    "workbench/src/ItemEditor.tsx": "f0044fc331d89ae0a471e4545c704e5903cfe8733b033190059b1d73d1176cb0",
+    "workbench/src/RecipeEditor.tsx": "c62697dec01736e67015c935b790392e530b2aee48c9ea9db3a42237c942bd07",
+    "workbench/src/TextEditor.tsx": "65c73bd9a6497ad90c05ff59a599c2b77f986a58f77f861124a10b4e06e3022d",
+    "workbench/src/content.ts": "0325d536b2cf77663e06553a9c5bed3764f23208f23ff0aca13515382d6bd549",
+    "workbench/src/familyData.ts": "e953dd44c81d17adf447ceefe8bffcfe693ac1cbb6d288eb0dba81ad7e518e9d",
+    "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+    "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+    "workbench/src/protocol.ts": "4c80edf3e81c92dd1fd11723ae0e5b7468c75cd057b5ab1b93f4550db7c29be2",
+    "workbench/src/recipe.ts": "6ac4d85fdc783751f7c65376837af20ddf311b57b6916110e3398b8b4b253d03",
+    "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+    "workbench/src/styles.css": "9b77a348027d2eae145cb6e571cd455b771d507743ca8da87a7368ddbfa2a57d",
+    "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+    "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+    "workbench/worker/bridge.py": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+    "workbench/worker/test_authoring.py": "63b31599c487800b65eaf02983fe6e946adf878ea6cd2dc48d86739785d57b39",
+    "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec"
+  },
+  "git_source_sha256": {
+    "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+    "roguelike/docs/LAYOUT_AUTHORING.md": "c7122770d8c75b0a0d80630f7d52722452b01940b3eea7f22a550d2e4a68d07d",
+    "roguelike/docs/TEXT_AUTHORING.md": "db33d7e02cb9089c03befdc47cf4fb53ea0c0020c41fcfd960bde9fb76725450",
+    "roguelike/engine/content_authoring.py": "0c646940d233bbf64c903e09b04ed1a6cdff36489cf0a181d886f73d68307d87",
+    "roguelike/engine/data_loader.py": "07625ac2db63a5717c9db166a67cd4a615a2a2a58e5185da4c4686c713cc56cd",
+    "roguelike/engine/display_config.py": "07441d2685fe8e792862c4f25c81e9cf90bc6c23a0eb4cf1b9ac0d118c30f260",
+    "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+    "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+    "roguelike/engine/scene_generation.py": "cb4672d5d7309e28108bc63a79c2dc648f1237711d36e69c9fc0d42cbb17dc65",
+    "roguelike/engine/text_authoring.py": "cb0979e31c8d87c92b27eab6c887dc8736d6dc8152265eb98c011262429bc679",
+    "roguelike/engine/text_reader.py": "a9f8064d2b0f1a65e0e4964033c27ea1894df07a2191c0d87b139e87ae0be600",
+    "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+    "roguelike/generation/structure_preview.py": "14ce8d2541b4394b3d4f12c0ff2190b0edc15de43569afc4377bea578a5bf0b3",
+    "roguelike/rendering/ui_registry.py": "e0272edd0c11a393b9ef03f3b8055d1770ef32428d4b7b1e6d66c62afb8b5f2a",
+    "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+    "workbench/README.md": "a55077818388d1e2d59a277900aa35b06c25924bceaee76ba750eea1ce3f764d",
+    "workbench/docs/CONTENT_CONTRACTS.md": "6719558657a7dbc157d4ad1c4e7a42aa620a3b6141af39012d8690492aedd674",
+    "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+    "workbench/scripts/contract-journey.mjs": "afe76ecf0def13b2c9871cfeeb732c92ac9c934644fd93542da6ead29f5cdd43",
+    "workbench/scripts/creature-journey.mjs": "ce03afbf22e8c7af1c68103247d8907899bfa641c305342aad2408a99ada53c5",
+    "workbench/scripts/desktop-test.mjs": "967280853e21a56119a7c7675aa309f446e1272dbf0e65da0ce92a813d8e4d8a",
+    "workbench/scripts/item-journey.mjs": "0c3397a52b14e760279f560e928343f61693b424c6bed2c44888c4590e50f14d",
+    "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+    "workbench/scripts/recipe-journey.mjs": "55d5c07ec19396fb5b1d5b750155febaaa8775db8aa9c159e640d49b61845daa",
+    "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+    "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+    "workbench/scripts/submap-journey.mjs": "7d45f7915e4dbe58028e48e16a75c33cd6093ae857b5d50128b3bf6780018bc4",
+    "workbench/scripts/text-journey.mjs": "5413d131cc528a26c682a102f0b1477cc89b3ffb4177b501ed9f1d2a3decfe66",
+    "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+    "workbench/scripts/workspace-journey.mjs": "a90c12b05daa53f2c7690ad9bcbf9561f1e2ea13544cb4af63d8f3a4af85f8d9",
+    "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+    "workbench/src-tauri/src/authoring.rs": "539f0eac98aa617a7f809c2bed1d3ea20c44811ce7b817a067c6b44708c2b3c5",
+    "workbench/src-tauri/src/main.rs": "c0b7ef80206fca3210349946dddfb3ba0a0d8ba545a4da0577430980f23be3c5",
+    "workbench/src/App.tsx": "84665f59f0e535f5a2f33b0386739c4bd5c7df8c64d5b0e50676706e302773bb",
+    "workbench/src/Authoring.tsx": "fef0101c5961e9b35bdee95361a83c53dffb716ab410ab5ab9937483f2f63167",
+    "workbench/src/ContentEditor.tsx": "5ab25bba6042671359c132759ec0d3884847d5d574434c0c765da33ca5f57399",
+    "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+    "workbench/src/ItemEditor.tsx": "52f91783f9859ef15cf39593cc24fd986acf969799964fd6de6fe34ec979fe89",
+    "workbench/src/RecipeEditor.tsx": "3fd00a6c662814a255d2626616109d27dc07951589024efebb337ce8fa38d11d",
+    "workbench/src/TextEditor.tsx": "65c73bd9a6497ad90c05ff59a599c2b77f986a58f77f861124a10b4e06e3022d",
+    "workbench/src/content.ts": "0325d536b2cf77663e06553a9c5bed3764f23208f23ff0aca13515382d6bd549",
+    "workbench/src/familyData.ts": "e953dd44c81d17adf447ceefe8bffcfe693ac1cbb6d288eb0dba81ad7e518e9d",
+    "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+    "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+    "workbench/src/protocol.ts": "4c80edf3e81c92dd1fd11723ae0e5b7468c75cd057b5ab1b93f4550db7c29be2",
+    "workbench/src/recipe.ts": "51ca1cff61de9dee56e43f61ed2b25a1036d220011162abbf9e93773202c6098",
+    "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+    "workbench/src/styles.css": "b410cf2d335f31a95519d43244586c8a5102ed60948053ec5aec41dc1cb0b180",
+    "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+    "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+    "workbench/worker/bridge.py": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+    "workbench/worker/test_authoring.py": "472272dc20a01c76849c282a973e62422aab993222e697b16fd8b901d77ea0b6",
+    "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec"
+  },
+  "artifact_sha256": {
+    "workbench/.artifacts/w5c/bundle.log": "62553e3b34e5178d351554f152f18aab3e8b421364cd0226a29019780643574b",
+    "workbench/.artifacts/w5c/clippy.log": "699cdeffbfe7d11c0bac1363ff7c5f9127ad1a91b1047dd125ff912e06b2c2e8",
+    "workbench/.artifacts/w5c/dependency.log": "1d1a714ed2f1792df177f1657394fbe63005452b973cf30b073545f07230a5d1",
+    "workbench/.artifacts/w5c/frontend.log": "77424371f720ab0b316810faa12899707817d3582b12cae0d461f1c596e7cb0e",
+    "workbench/.artifacts/w5c/native-creatures.log": "0ade238f29ae8794f46459335e6394a40da1bf03923429ae0114e22ddc8ef004",
+    "workbench/.artifacts/w5c/native-items.log": "0f5a5f71b0e6fba006a6f352300374467268a93726f8bcc40af15391e79c9712",
+    "workbench/.artifacts/w5c/native-pools.log": "d2d30ed7a7e8bbcb96994dbd1c086e022d3192547b703617a2038355711c3df8",
+    "workbench/.artifacts/w5c/native-recipes-busy.log": "245d703190ea19e81a99557ba6a9216f560d96b143c19b3b174d32366af562cc",
+    "workbench/.artifacts/w5c/native-recipes.log": "c628af1ec02670b0ac8f490896acb37da476f6ca37bfc12ff05e212616e26fbd",
+    "workbench/.artifacts/w5c/native-submaps.log": "976caa7ea43c2e9585801999c19dfa78004d92e16a5bb49deb6825d614c6702c",
+    "workbench/.artifacts/w5c/native-workspace-busy.log": "c01b6dbc322fc2f8deee1e1b45c745a9934e5ca5d8b4388f6f78506138891423",
+    "workbench/.artifacts/w5c/native-workspace-preview-selector.log": "633d14741d30210ed4b7f55957073eff3f9547c565499f68efae117547d757b6",
+    "workbench/.artifacts/w5c/native-workspace.log": "4098bd368fed0149ce338f90e99d17d1afcfc6f60ec5f12e617e4e0c74658ea1",
+    "workbench/.artifacts/w5c/reader-repair.log": "c6f9a042eee16a43831df659c0c80a75fec094a61e66cb2a09b03be6d35448bf",
+    "workbench/.artifacts/w5c/reader.log": "e72bc63519cf247c9820f927be0a0557f358423570208f15d6b78b18d454eea9",
+    "workbench/.artifacts/w5c/reference-repair.log": "8b9a84c16b5a3bd6afa3171e1ddb75f49ff39855d54aa9172444d61893ce622a",
+    "workbench/.artifacts/w5c/rust.log": "e169d376156c63f3c245806fafccb95b0e9a871a0ccbe73fbf65961b57787013",
+    "workbench/.artifacts/w5c/startup.log": "53c4a68fea83a43a7b89641f9c51e3299fba7e3c9a9af4f6faefb5b4ff7fa612",
+    "workbench/.artifacts/w5c/texts-final.log": "1977f8c7fe18ae34842f4c906aae2aa7d2c16336799a06b31d5f74196dd79851",
+    "workbench/.artifacts/w5c/typecheck.log": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b",
+    "workbench/.artifacts/w5c/worker.log": "b8f790b084fd47bcade44c86317e569bb842fdb2cb3e20ca2316850552566e0d",
+    "workbench/.artifacts/desktop-workspace/receipt.json": "05cfa7395ba14b953ee062fc55a9e1e7994797e9bbf3b6bdd2c977f56c2f79dc",
+    "workbench/.artifacts/desktop-submaps/receipt.json": "1c5785218926beed11aa195ce91b7c904d3405911653ec122ec3bb6b1f35e2b7",
+    "workbench/.artifacts/desktop-items/receipt.json": "ac8be7473172499315de513aecd9bd4a7221e991c58e5ce9c6d9e196cd300fb6",
+    "workbench/.artifacts/desktop-recipes/receipt.json": "1203011acec5f1996dd219dcd685ec7366a476fffd333643fad484fad5dcd8b6",
+    "workbench/.artifacts/desktop-pools/receipt.json": "f68bf42ebed9433d5031b2494c120d1203a3cb2e8dbd8f2e3fc57961e742795c",
+    "workbench/.artifacts/desktop-creatures/receipt.json": "7e609667db30e5df464070b68c959bb90e8b8466a52b111bc206fe95552da260",
+    "workbench/.artifacts/w5c/reader/480x320-end.png": "ef57f60785fa8a56488509c7ac05d94ac12cdc8984df947cb7ae32798c3d7fde",
+    "workbench/.artifacts/w5c/reader/480x320-top.png": "582cc77eee864f763214216dc8271630a485548f81cd580912f84e7d4142967a",
+    "workbench/.artifacts/w5c/reader/960x640-end.png": "69a58007df04261bc7a18c1e8b70736257c277bf9c5064ec3073496492798eab",
+    "workbench/.artifacts/w5c/reader/960x640-top.png": "44eef37cb5193f2a256f4d4d3e31f4e9e5e2d2973585599b08a5329e09c929f0",
+    "workbench/.artifacts/desktop-workspace/six-documents.png": "5dbea9518cb6660655614e56a84bf0849e0d701ed5fd9255656bf336ed6a0ae6",
+    "workbench/.artifacts/desktop-workspace/six-documents-minimum.png": "1103455c8dd2f08967d09232664205f8e743645ebd77732d5925583595f6e44f"
+  },
+  "visual_review": [
+    "actual 512-character heading/body frames at 960x640 and 480x320",
+    "six-document workspace at 2560x1440 and 1100x740"
+  ],
+  "development_corrections": [
+    "Rendered footer hint initially clipped horizontally; panel sizing corrected and reader checks rerun.",
+    "Malformed mapping list was initially treated as keys; .keys() retains previous malformed-map rejection.",
+    "Native harness updated for immutable Tauri invoke, mounted hidden editors and closed-details selectors.",
+    "Preview scroll capture moved from layout cleanup to scroll events after the added native state assertion exposed clamping.",
+    "Background sweeps won validation reservations during development. The final UI disables conflicting actions during the sweep, verified with a held real response. The native helper retries only explicit BUSY and records any retries.",
+    "Recovered reopen initially left the old global error visible; final package clears it and the journey asserts that."
+  ],
+  "limits": [
+    "Memory-only drafts; no crash/restart recovery.",
+    "Saved dependencies only; no unsaved overlay or Save All.",
+    "Existing structured histories remain per document; raw/variant-ID edits clear that document history.",
+    "One worker/operation; transient BUSY is a truthful refusal, not queued work.",
+    "No clean-machine installer run, full campaign, natural selection or balance claim. No wiki or reference-pack changes.",
+    "Native logs/images remain ignored local artifacts; committed hashes and reproducible tests are not a claim that a remote reviewer inspected those pixels."
+  ]
+}
