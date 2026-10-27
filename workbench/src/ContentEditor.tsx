@@ -5,7 +5,7 @@ import type { FamilyPreview } from "./familyData";
 import { familyProblem, type ContentFamily } from "./content";
 import type { ItemTrail } from "./protocol";
 
-export type ContentNavigation = {selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void;
+export type ContentNavigation = {selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void; returnLabel?: string;
   onPool?: (id:string)=>void; onOpen: (family:string,id:string,path?:string)=>void};
 export type ContentProps = {family: ContentFamily; navigation: ContentNavigation; draft:string; path:string; dirty:boolean; validated:boolean;
   disabled:string; busy:boolean; evidenceStale:boolean; onCancel:()=>void; onSource:()=>void; onProbe:()=>void;

@@ -78,6 +78,7 @@ export type Inspection = Asset & {
   source_unchanged: boolean;
   source: Source;
   document_token?: string;
+  file_identity?: string;
   catalog?: Catalog;
 };
 export type SourceTrail = { id: string; path: string; sourcePath: string; sourceHash: string; index: number; x: number; y: number; decor: string; poolId: string };

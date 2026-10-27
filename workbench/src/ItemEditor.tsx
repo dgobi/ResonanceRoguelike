@@ -6,7 +6,7 @@ import type { ItemContext, ItemTrail } from "./protocol";
 
 export function ItemEditor(p: {
   family: ContentFamily; evidenceStale: boolean; draft: string; path: string; context?: ItemContext; selectedId?: string; dirty: boolean; validated: boolean;
-  disabled: string; busy: boolean; onCancel: () => void; onReturn?: () => void; trail?: ItemTrail | null;
+  disabled: string; busy: boolean; onCancel: () => void; onReturn?: () => void; returnLabel?: string; trail?: ItemTrail | null;
   onRecipe?: (id: string, path: string) => void;
   onPool?: (id: string) => void; onSource: () => void; onProbe: () => void;
   onEdit: (edit: (text: string) => string, label: string) => void;
@@ -25,7 +25,7 @@ export function ItemEditor(p: {
   const sourceJump = () => p.onSource();
   return <section className="item-editor" data-testid="item-editor">
     <div className="pane-heading"><div><h2>Item definition</h2><code>{String(values.id || record?.id || "Invalid source")} · {p.path}</code></div>
-      <div className="edit-actions">{p.onReturn && <button onClick={p.onReturn} disabled={p.busy}>Return to pool</button>}
+      <div className="edit-actions">{p.onReturn && <button onClick={p.onReturn} disabled={p.busy}>{p.returnLabel || "Return to pool"}</button>}
       {p.busy && <button onClick={p.onCancel} disabled={p.disabled === "Publication in progress."}>Cancel authoring request</button>}</div></div>
     {p.trail && <nav className="source-trail" aria-label="Item source trail">
       {p.trail.structure && <code>{p.trail.structure.sourcePath} → special_tiles[{p.trail.structure.index}] ({p.trail.structure.x}, {p.trail.structure.y})</code>}

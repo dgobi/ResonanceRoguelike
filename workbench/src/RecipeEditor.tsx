@@ -6,7 +6,7 @@ import type { RecipeContext } from "./protocol";
 
 export function RecipeEditor(p: {
   family: ContentFamily; draft: string; path: string; context?: RecipeContext; selectedId?: string; dirty: boolean; validated: boolean;
-  disabled: string; busy: boolean; evidenceStale: boolean; onCancel: () => void; onReturn?: () => void;
+  disabled: string; busy: boolean; evidenceStale: boolean; onCancel: () => void; onReturn?: () => void; returnLabel?: string;
   onItem: (id: string, path?: string) => void; onSource: () => void; onProbe: () => void;
   onEdit: (edit: (text: string) => string, label: string) => void;
   onUndo: () => void; onRedo: () => void; canUndo: boolean; canRedo: boolean;
@@ -28,7 +28,7 @@ export function RecipeEditor(p: {
   const groups = Object.entries(p.family.descriptor.schema.properties || {}).filter(([,s])=>s["x-control"] === "ordered-table");
   return <section className="item-editor recipe-editor" data-testid="recipe-editor">
     <div className="pane-heading"><div><h2>Recipe</h2><code>{String(values.id || record?.id || "Invalid source")} · {p.path}</code></div>
-      <div className="edit-actions">{p.onReturn && <button onClick={p.onReturn} disabled={p.busy}>Return to item</button>}
+      <div className="edit-actions">{p.onReturn && <button onClick={p.onReturn} disabled={p.busy}>{p.returnLabel || "Return to item"}</button>}
         {p.busy && <button onClick={p.onCancel} disabled={p.disabled === "Publication in progress."}>Cancel authoring request</button>}</div></div>
     <p>{cap?.execution_class || "Unknown"} · {cap?.editable ? "Supported family" : "Not supported for writing"}</p>
     <div className="tabs">{p.family.descriptor.views.map(key=>({"recipe-requirements":"Requirements",output:"Output","production-receipt":"Test requirements"})[key]).filter((v):v is string=>!!v).map(v => <button key={v} className={view === v ? "active" : ""} onClick={() => setView(v)}>{v}</button>)}<button onClick={p.onSource}>Show source</button></div>

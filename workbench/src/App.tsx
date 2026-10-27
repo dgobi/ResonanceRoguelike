@@ -1,9 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { Authoring } from "./Authoring";
-import { contentViews } from "./ContentEditor";
-import type { ContentFamily } from "./content";
+import { WorkspaceMonitor, installDocument, type Documents, type OpenDocument, type Sweep } from "./workspace";
 import { MapView } from "./MapView";
 import { requestLease } from "./requests";
 import {
@@ -57,7 +56,7 @@ export default function App() {
   const [inspection, setInspection] = useState<Inspection | null>(null),
     [fixture, setFixture] = useState<Inspection | null>(null),
     [preview, setPreview] = useState<Preview | null>(null);
-  const [busy, setBusy] = useState(""),
+  const [requestBusy, setBusy] = useState(""),
     [error, setError] = useState<Failure | null>(null),
     [status, setStatus] = useState(
       "Opening the configured Resonance project…",
@@ -65,37 +64,51 @@ export default function App() {
     [cell, setCell] = useState<[number, number] | null>(null),
     [seed, setSeed] = useState("20261023"),
     [tab, setTab] = useState<"properties" | "source">("properties");
+  const [checkingDisk, setCheckingDisk] = useState(false);
+  const busy = requestBusy || (checkingDisk ? "Checking saved files…" : "");
   const [dirty, setDirty] = useState(false),
     [search, setSearch] = useState(""),
     [category, setCategory] = useState("");
   const [poolDocument, setPoolDocument] = useState<Inspection | null>(null);
   const [poolActive, setPoolActive] = useState(false), [poolDirty, setPoolDirty] = useState(false);
-  const [contentDocuments, setContentDocuments] = useState<Record<string,{document:Inspection; dirty:boolean; selectedId:string}>>({});
+  const [contentDocuments, renderDocuments] = useState<Documents>({});
+  const contentRef = useRef(contentDocuments);
+  function setContentDocuments(update: Documents | ((current:Documents)=>Documents)) {
+    const next = typeof update === "function" ? update(contentRef.current) : update;
+    contentRef.current = next; renderDocuments(next);
+  }
   const [activeContent, setActiveContent] = useState("");
-  const itemDocument = contentDocuments.item?.document, recipeDocument = contentDocuments.recipe?.document;
-  const itemActive = activeContent === "item", recipeActive = activeContent === "recipe";
   const contentDirty = Object.values(contentDocuments).some(d=>d.dirty);
-  const setItemActive = (active:boolean) => setActiveContent(current=>active ? "item" : current === "item" ? "" : current);
-  const setRecipeActive = (active:boolean) => setActiveContent(current=>active ? "recipe" : current === "recipe" ? "" : current);
   const [creatureDocument, setCreatureDocument] = useState<Inspection | null>(null), [creatureActive, setCreatureActive] = useState(false), [creatureDirty, setCreatureDirty] = useState(false);
   const [selectedCreatureId, setSelectedCreatureId] = useState("");
-  const itemReturnFocus = useRef<string | null>(null);
-  const recipeReturnRelation = useRef("ingredient");
-  useEffect(() => {
-    if (recipeActive || !itemActive || !itemReturnFocus.current) return;
-    const path = itemReturnFocus.current;
-    const frame = requestAnimationFrame(() => {
-      document.querySelector<HTMLButtonElement>(`[data-recipe-link="${path}"][data-recipe-relation="${recipeReturnRelation.current}"]`)?.focus();
-      itemReturnFocus.current = null;
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [recipeActive, itemActive]);
+  const scrollPositions = useRef(new Map<string, number[]>());
+  useLayoutEffect(() => {
+    const key = creatureActive ? "legacy-creature" : activeContent || (poolActive ? "legacy-pool" : "legacy-structure");
+    const surfaces = [...document.querySelectorAll<HTMLElement>(".preview-pane, .inspector")];
+    const position = scrollPositions.current.get(key) || [0, 0];
+    surfaces.forEach((s,i)=>s.scrollTop=position[i]);
+    // Capture while this document is visible. Layout cleanup runs after React
+    // hides its panels, when the browser may already have clamped scrollTop.
+    const remember = () => scrollPositions.current.set(key, surfaces.map(s=>s.scrollTop));
+    surfaces.forEach(s=>s.addEventListener("scroll", remember));
+    const selectedTab = document.querySelector<HTMLElement>(".document-tabs [aria-current]");
+    if (selectedTab?.parentElement) {
+      const strip=selectedTab.parentElement, item=selectedTab.getBoundingClientRect(), bounds=strip.getBoundingClientRect();
+      if(item.left<bounds.left)strip.scrollLeft+=item.left-bounds.left;
+      else if(item.right>bounds.right)strip.scrollLeft+=item.right-bounds.right;
+    }
+    return () => { surfaces.forEach(s=>s.removeEventListener("scroll", remember)); };
+  }, [activeContent, creatureActive, poolActive]);
   const [support, setSupport] = useState("");
   const [catalogPage, setCatalogPage] = useState(0);
   useEffect(()=>setCatalogPage(0),[search,category,support,assets]);
   const [itemTrail, setItemTrail] = useState<ItemTrail | null>(null);
   const [trail, setTrail] = useState<SourceTrail | null>(null), [dependencyVersion, setDependencyVersion] = useState(0);
   const [pending, setPending] = useState<null | (() => void)>(null);
+  const [pendingFiles, setPendingFiles] = useState<string[]>([]);
+  const dirtyFiles = useRef<string[]>([]);
+  dirtyFiles.current = [dirty ? inspection?.path : null, poolDirty ? poolDocument?.path : null, creatureDirty ? creatureDocument?.path : null,
+    ...Object.values(contentDocuments).filter(d=>d.dirty).map(d=>d.document.path)].filter((p):p is string=>!!p);
   const [canvasHost, setCanvasHost] = useState<HTMLDivElement | null>(null);
   const dirtyRef = useRef(false);
   dirtyRef.current = dirty || poolDirty || contentDirty || creatureDirty;
@@ -104,7 +117,7 @@ export default function App() {
       const close = () => {
         void invoke("finish_close").catch((e) => setError(asFailure(e)));
       };
-      if (dirtyRef.current) setPending(() => close);
+      if (dirtyRef.current) { setPendingFiles(dirtyFiles.current); setPending(() => close); }
       else close();
     });
     return () => {
@@ -113,12 +126,26 @@ export default function App() {
   }, []);
   function protect(action: () => void) {
     if (dirtyRef.current) {
+      setPendingFiles(dirtyFiles.current);
       setPending(() => action);
       return true;
     }
     return false;
   }
   const epoch = useRef(0);
+  const monitor = useRef(new WorkspaceMonitor());
+  const monitorReady = useRef(false);
+  monitorReady.current = !!identity && !busy;
+  useEffect(() => {
+    const check = () => void monitor.current.check(async()=> {
+      setCheckingDisk(true);
+      try { return (await call<Sweep>("workspace_disk")).result; }
+      finally { setCheckingDisk(false); }
+    }, ()=>monitorReady.current)
+      .catch(e=>{ const error=asFailure(e); if (!["BUSY","CANCELLED"].includes(error.code)) setError(error); });
+    const timer = setInterval(check, 3000);
+    return () => { clearInterval(timer); monitor.current.reset(); };
+  }, []);
   const [cancelVersion, setCancelVersion] = useState(0);
   function beginRequest(label: string) {
     const lease = requestLease(epoch, () => setBusy(""));
@@ -126,6 +153,7 @@ export default function App() {
     return lease;
   }
   function clear() {
+    monitor.current.reset();
     setDirty(false);
     setPoolDocument(null); setPoolActive(false); setPoolDirty(false); setTrail(null);
     setContentDocuments({}); setActiveContent(""); setItemTrail(null);
@@ -145,7 +173,6 @@ export default function App() {
     setActiveContent("");
     setSelected(asset);
     setFixture(null);
-    setInspection(null);
     setPreview(null);
     setCell(null);
     setBusy("Validating source…");
@@ -157,6 +184,7 @@ export default function App() {
       : await request<Inspection>("inspect", { asset });
     if (token !== epoch.current) return;
     setInspection(inspected.result);
+    setDirty(false);
     if (!inspected.result.valid) {
       setStatus("Production validation failed. Review the diagnostics.");
       return;
@@ -206,6 +234,8 @@ export default function App() {
   async function open(value?: string, discard = false) {
     if (busy.includes("applying")) return;
     if (!discard && protect(() => void open(value, true))) return;
+    monitor.current.reset();
+    setCancelVersion(v=>v+1);
     const token = ++epoch.current;
     setBusy("Checking repository and runtime…");
     setStatus("Opening repository…");
@@ -249,8 +279,7 @@ export default function App() {
     }
   }
   async function refresh(asset = selected, discard = false) {
-    if (!discard && protect(() => void refresh(asset, true))) return;
-    setDirty(false);
+    if (!discard && dirty) {setPendingFiles([inspection!.path]);setPending(()=>()=>void refresh(asset,true));return;}
     const token = ++epoch.current;
     setError(null);
     try {
@@ -293,6 +322,7 @@ export default function App() {
       return;
     }
     ++epoch.current;
+    monitor.current.reset();
     setCancelVersion(v => v + 1);
     setError(null);
     setBusy("");
@@ -308,7 +338,7 @@ export default function App() {
     const matches = assets.filter(a => a.route === "contextual_loot_pool" && a.id === id), asset = matches[0];
     if (matches.length !== 1) { setError({code: "POOL_SOURCE", message: `Pool ${id} resolves to ${matches.length} supported files.`, remedy: "Correct duplicate/missing IDs or refresh the project catalogue."}); return; }
     if (!reload && poolDocument?.path === asset.path) { setTrail(context); setPoolActive(true); setCreatureActive(false); setActiveContent(""); return; }
-    if (poolDirty && !discard) { setPending(() => () => void openPool(id, context, true, reload)); return; }
+    if (poolDirty && !discard) { setPendingFiles([poolDocument!.path]); setPending(() => () => void openPool(id, context, true, reload)); return; }
     setBusy("Opening contextual pool…"); setError(null);
     const token = ++epoch.current;
     try {
@@ -318,30 +348,51 @@ export default function App() {
       setStatus(`Opened ${asset.path}.`);
     } catch (e) { if (token === epoch.current) setError(asFailure(e)); } finally { if (token === epoch.current) setBusy(""); }
   }
-  async function openContent(family:string,id:string,assetPath?:string,discard=false,reload=false,trailContext:ItemTrail|null=null) {
+  const opening = useRef(new Map<string, Promise<void>>());
+  function activateContent(token:string) { setActiveContent(token); setCreatureActive(false); setPoolActive(false); }
+  async function openContent(family:string,id:string,assetPath?:string,discard=false,reload=false,trailContext:ItemTrail|null=null,origin?:OpenDocument["origin"]) {
     const matches=assets.filter(a=>a.family_id === family && a.id === id && (!assetPath || a.path === assetPath)), asset=matches[0];
     if (!matches.length || matches.length !== 1 && !assetPath) { setError({code:"CONTENT_SOURCE",message:`${id} has ${matches.length} catalogue sources.`,remedy:"Select a specific source file to inspect ambiguity."}); return; }
-    const existing=contentDocuments[family];
-    const activate=()=>{setActiveContent(family);setCreatureActive(false);if(family==="item")setItemTrail(trailContext);};
-    if (!reload && existing?.document.path === asset.path) {
-      setContentDocuments(d=>({...d,[family]:{...d[family],selectedId:id}})); activate(); return;
+    const existing=Object.values(contentRef.current).find(d=>d.document.path===asset.path);
+    const existingToken=existing?.document.document_token;
+    const activate=(key:string)=>{
+      setContentDocuments(d=>d[key] ? {...d,[key]:{...d[key],selectedId:id,...(origin ? {origin,trail:trailContext} : trailContext ? {trail:trailContext} : {})}} : d);
+      activateContent(key); if(trailContext)setItemTrail(trailContext);
+    };
+    if (!reload && existingToken) {
+      activate(existingToken); return;
     }
-    if(existing?.dirty && !discard) {setPending(()=>()=>void openContent(family,id,assetPath,true,reload,trailContext));return;}
+    if(existing?.dirty && !discard) {setPendingFiles([existing.document.path]);setPending(()=>()=>void openContent(family,id,assetPath,true,reload,trailContext,origin));return;}
+    const key=asset.path;
+    if(opening.current.has(key)) return opening.current.get(key);
     const token=++epoch.current;setBusy("Opening content source…");setError(null);
-    try {
-      const r=await call<Inspection>("open_document",{asset:asset.path});if(token!==epoch.current)return;
-      setContentDocuments(d=>({...d,[family]:{document:r.result,dirty:false,selectedId:id}}));activate();
-      setStatus(`Opened ${asset.path}. Semantic evidence uses the registered game contract.`);
-    } catch(e) {if(token===epoch.current)setError(asFailure(e));} finally {if(token===epoch.current)setBusy("");}
+    const task=(async()=>{
+      try {
+        const r=await call<Inspection>("open_document",{asset:asset.path,replaceToken:reload ? existingToken : null});if(token!==epoch.current)return;
+        setContentDocuments(d=>installDocument(d,r.result,id,reload ? existingToken : undefined));activate(r.result.document_token!);
+        setStatus(`Opened ${asset.path}. References and previews use saved dependencies.`);
+      } catch(e) {if(token===epoch.current)setError(asFailure(e));} finally {if(token===epoch.current)setBusy("");}
+    })();
+    opening.current.set(key,task);
+    try {await task;} finally {if(opening.current.get(key)===task)opening.current.delete(key);}
   }
   function openItem(id:string,context:ItemTrail|null=null,assetPath?:string,discard=false,reload=false) {
-    return openContent("item",id,assetPath,discard,reload,context);
+    return openContent("item",id,assetPath,discard,reload,context,context && poolDocument ? {token:poolDocument.document_token!,label:`pool ${poolDocument.id}`,focus:document.activeElement as HTMLElement}:undefined);
+  }
+  async function closeContent(token:string, discard=false) {
+    const entry=contentRef.current[token]; if(!entry)return;
+    if(entry.dirty && !discard) {setPendingFiles([entry.document.path]);setPending(()=>()=>void closeContent(token,true));return;}
+    try {
+      await invoke("close_document",{token});
+      setContentDocuments(d=>{const next={...d};delete next[token];return next;});
+      setActiveContent(active=>active===token ? Object.keys(contentRef.current).at(-1) || "" : active);
+    } catch(e) {setError(asFailure(e));}
   }
   async function openCreature(id: string, assetPath: string, discard = false, reload = false) {
     const asset = assets.find(a=>a.route === "creature_definition" && a.id === id && a.path === assetPath);
     if (!asset) return;
     if (!reload && creatureDocument?.path === asset.path) { setSelectedCreatureId(id); setCreatureActive(true); return; }
-    if (creatureDirty && !discard) { setPending(()=>()=>void openCreature(id,assetPath,true,reload)); return; }
+    if (creatureDirty && !discard) { setPendingFiles([creatureDocument!.path]);setPending(()=>()=>void openCreature(id,assetPath,true,reload)); return; }
     const token=++epoch.current; setBusy("Opening creature definition…"); setError(null);
     try {
       const r=await call<Inspection>("open_document",{asset:asset.path});
@@ -358,29 +409,35 @@ export default function App() {
     verifyReopened(r.result,result); setCreatureDocument(r.result); setSelectedCreatureId(r.result.id);
     setStatus(`Creature variant saved and reopened: ${asset}. No room, saved actor or worldgen reference changed.`);
   }
-  function returnToItem() {
-    itemReturnFocus.current = recipeDocument?.path || null;
-    setRecipeActive(false); setItemActive(true); setCreatureActive(false);
+  function returnToOrigin(entry:OpenDocument) {
+    const origin=entry.origin; if(!origin)return;
+    if(contentRef.current[origin.token]) activateContent(origin.token);
+    else if(poolDocument?.document_token===origin.token) {setActiveContent("");setPoolActive(true);setCreatureActive(false);}
+    else {setError({code:"ORIGIN_UNAVAILABLE",message:`The originating ${origin.label} was closed or replaced.`,remedy:"Open its file deliberately from the catalogue; no other document was selected."});return;}
+    requestAnimationFrame(()=>{if(origin.focus?.isConnected)origin.focus.focus({preventScroll:true});});
   }
   async function refreshContentContexts(token:number) {
-    for (const [family,entry] of Object.entries(contentDocuments)) {
+    for (const [key,entry] of Object.entries(contentRef.current)) {
       const refreshed=await request<Inspection>("inspect",{asset:entry.document.path});
       if(token!==epoch.current)return;
       const next=refreshed.result;
       setContentDocuments(current=>{
-        const live=current[family];
+        const live=current[key];
         if(live?.document.document_token!==entry.document.document_token || live.document.path!==next.path || live.document.sha256!==next.sha256 || live.document.family?.descriptor_sha256!==next.family?.descriptor_sha256)return current;
-        return {...current,[family]:{...live,document:{...live.document,family:next.family}}};
+        return {...current,[key]:{...live,document:{...live.document,family:next.family}}};
       });
     }
   }
-  async function contentApplied(family:string,asset:string,result:unknown) {
+  async function contentApplied(owner:string,asset:string,result:unknown) {
     const token=epoch.current; setReceipt(result); setDependencyVersion(v=>v+1);
+    const originating=contentRef.current[owner];
+    if(!originating)throw new Error("File saved; originating document is no longer open.");
     const catalog=await request<{assets:Asset[]}>("describe"); if(token!==epoch.current)return;
     setAssets(catalog.result.assets);
-    const reopened=await call<Inspection>("open_document",{asset}); if(token!==epoch.current)return;
+    const reopened=await call<Inspection>("open_document",{asset,replaceToken:owner,expectedSha256:(result as {after_sha256:string}).after_sha256}); if(token!==epoch.current)return;
     verifyReopened(reopened.result,result);
-    setContentDocuments(d=>({...d,[family]:{document:reopened.result,dirty:false,selectedId:reopened.result.id}}));
+    setContentDocuments(d=>installDocument(d,reopened.result,reopened.result.id,owner));
+    setActiveContent(active=>active===owner ? reopened.result.document_token! : active);
     if(poolDocument) {
       const refreshed=await request<Inspection>("inspect",{asset:poolDocument.path});if(token!==epoch.current)return;
       setPoolDocument(d=>d?.path===refreshed.result.path && d.sha256===refreshed.result.sha256 ? {...d,pool_context:refreshed.result.pool_context}:d);
@@ -543,7 +600,7 @@ export default function App() {
               Content definitions <span className="count">{assets.length}</span>
             </h2>
             <p className="muted">
-              Buildings, pools, items, recipes and creatures
+              Buildings, pools, items, recipes, texts and creatures
             </p>
             <button className="full" onClick={()=>{setCategory("creatures");setSearch("");}}>Creatures</button>
             <label>
@@ -612,7 +669,7 @@ export default function App() {
             <span className="eyebrow">THIS WORKSPACE</span>
             <p>Draft → validate → review → apply</p>
             <small>
-              Structure, pool, item, recipe and creature drafts stay open independently. Campaigns are never opened.
+              Multiple item, recipe and text drafts stay open alongside structure, pool and creature drafts. Campaigns are never opened.
             </small>
           </section>
         </aside>
@@ -621,10 +678,20 @@ export default function App() {
             <>
               <div className="building-controls">
                 {poolDocument && <button disabled={!!busy} onClick={() => {setCreatureActive(false);setPoolActive(creatureActive || !!activeContent || !poolActive); setActiveContent("");}}>{poolActive && !activeContent && !creatureActive ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
-                {Object.entries(contentDocuments).map(([family,entry])=><button key={family} disabled={!!busy} onClick={()=>{setCreatureActive(false);setActiveContent(activeContent===family && !creatureActive ? "":family);}}>{activeContent===family && !creatureActive ? `Hide ${contentViews[family as ContentFamily["id"]]?.label || family}` : `Show ${family} ${entry.selectedId}`}</button>)}
+                <nav className="document-tabs" aria-label="Open content documents">
+                  {Object.entries(contentDocuments).map(([token,entry])=><button key={token} data-document-tab={entry.document.path}
+                    title={entry.document.path} aria-current={activeContent===token && !creatureActive ? "page" : undefined}
+                    onClick={()=>activateContent(token)}>
+                    <strong>{entry.dirty ? "● " : ""}{entry.selectedId || entry.document.path}</strong><small>{entry.document.path}</small>
+                  </button>)}
+                </nav>
+                {!!activeContent && <button disabled={busy.includes("applying")} onClick={()=>setActiveContent("")}>Show structure</button>}
                 {creatureDocument && <button disabled={!!busy} onClick={()=>setCreatureActive(!creatureActive)}>{creatureActive ? "Hide creature" : `Show creature ${selectedCreatureId}`}</button>}
                 {creatureActive && creatureDocument && <button disabled={!!busy} onClick={()=>void openCreature(selectedCreatureId,creatureDocument.path,false,true)}>Reload creature</button>}
-                {!creatureActive && activeContent && contentDocuments[activeContent] && <button disabled={!!busy} onClick={()=>void openContent(activeContent,contentDocuments[activeContent].selectedId,contentDocuments[activeContent].document.path,false,true,itemTrail)}>Reload {activeContent}</button>}
+                {!creatureActive && activeContent && contentDocuments[activeContent] && <>
+                  <button disabled={!!busy} onClick={()=>{const entry=contentRef.current[activeContent];void openContent(entry.document.family!.id,entry.selectedId,entry.document.path,false,true,entry.trail,entry.origin);}}>Reload document</button>
+                  <button disabled={busy.includes("applying")} onClick={()=>void closeContent(activeContent)}>Close document</button>
+                </>}
                 {!creatureActive && !activeContent && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
                 <label>
                   Preview seed
@@ -821,19 +888,19 @@ export default function App() {
           )}
           {creatureDocument && <div hidden={!creatureActive}><Authoring key={creatureDocument.document_token}
             document={creatureDocument} onDirty={setCreatureDirty} onApplied={creatureApplied} onError={setError}
-            busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={creatureActive} onCancel={()=>void cancel()} selectedCreatureId={selectedCreatureId} dependencyVersion={dependencyVersion} /></div>}
-          {Object.entries(contentDocuments).map(([family,entry])=><div key={entry.document.document_token} hidden={activeContent!==family || creatureActive}><Authoring
-            document={entry.document} onDirty={dirty=>setContentDocuments(d=>d[family]?.document.document_token===entry.document.document_token && d[family].dirty!==dirty ? {...d,[family]:{...d[family],dirty}}:d)}
-            onApplied={(path,result)=>contentApplied(family,path,result)} onError={setError}
-            busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={activeContent===family && !creatureActive} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
-            contentNavigation={{selectedId:entry.selectedId,trail:itemTrail,
-              onReturn:family==="recipe" ? itemDocument ? returnToItem:undefined : poolDocument ? ()=>{setItemActive(false);setPoolActive(true);setCreatureActive(false);}:undefined,
-              onPool:id=>void openPool(id,trail),onOpen:(target,id,path)=>{recipeReturnRelation.current=document.activeElement?.getAttribute("data-recipe-relation") || "ingredient";void openContent(target,id,path);}}} /></div>)}
+          {Object.entries(contentDocuments).map(([token,entry])=><div key={token} data-document-inspector={entry.document.path} hidden={activeContent!==token || creatureActive}><Authoring
+            document={entry.document} onDirty={dirty=>setContentDocuments(d=>d[token] && d[token].dirty!==dirty ? {...d,[token]:{...d[token],dirty}}:d)}
+            onApplied={(path,result)=>contentApplied(token,path,result)} onError={setError}
+            subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            active={activeContent===token && !creatureActive} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
+            contentNavigation={{selectedId:entry.selectedId,trail:entry.trail,
+              onReturn:entry.origin ? ()=>returnToOrigin(entry):undefined,returnLabel:entry.origin ? `Return to ${entry.origin.label}`:undefined,
+              onPool:id=>void openPool(id,trail),onOpen:(target,id,path)=>void openContent(target,id,path,false,false,null,{token,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}
           {poolDocument && <div hidden={!poolActive || !!activeContent || creatureActive}><Authoring key={poolDocument.document_token}
             document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
-            busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={poolActive && !activeContent && !creatureActive} onCancel={() => void cancel()} trail={trail}
             onItem={(id, context) => void openItem(id, context)}
             poolEntryFocus={itemTrail?.path === poolDocument.path || itemTrail?.poolId === poolDocument.id ? itemTrail.index : undefined}
@@ -842,6 +909,7 @@ export default function App() {
             <Authoring
               key={inspection.document_token}
               document={inspection}
+              subscribeDisk={monitor.current.subscribe}
               onDirty={setDirty}
               onApplied={applied}
               onError={setError}
@@ -971,6 +1039,7 @@ export default function App() {
             aria-label="Unsaved draft"
           >
             <h2>Discard unsaved changes?</h2>
+            <ul>{pendingFiles.map(path=><li key={path}><code>{path}</code></li>)}</ul>
             <p>
               Continuing will discard the in-memory edits. The source file has
               not changed.

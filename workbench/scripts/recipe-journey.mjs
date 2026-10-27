@@ -18,22 +18,22 @@ export async function recipeJourney(page, root, output, receipt) {
   const ipc=(command,args)=>page.evaluate(async({command,args})=>{try{return await window.__TAURI_INTERNALS__.invoke(command,args);}catch(error){return {error};}},{command,args});
   for(const [id,kind] of [["cook_meat","Passive processing"],["campfire","World placement"],["coldbell_extract_deprecated","Deprecated / legacy"],["musk_pellet","Passive processing"]]) {
     const path=`roguelike/data/recipes/${id}.json`, before=await readFile(resolve(root,path)); await open(path);
-    assert.equal(await eb("Begin edit").isDisabled(),true);assert((await page.getByTestId("recipe-editor").innerText()).includes(kind));
+    assert.equal(await eb("Begin edit").isDisabled(),true);assert((await page.getByTestId("recipe-editor").filter({visible:true}).innerText()).includes(kind));
     assert.equal((await source()).replace(/\r\n/g,"\n"),before.toString().replace(/\r\n/g,"\n"));
     assert.equal(await page.getByLabel("Recipe name").count(),0);
   }
   await page.getByLabel("Search ID, name or path").fill(recipe); await page.locator(`[data-asset="${recipe}"]`).click(); await b("Close project").click();await idle();
-  assert.equal(await page.getByTestId("recipe-editor").count(),0);await b("Open directory").click();await idle();
-  assert.equal(await page.getByTestId("recipe-editor").count(),0);
+  assert.equal(await page.getByTestId("recipe-editor").filter({visible:true}).count(),0);await b("Open directory").click();await idle();
+  assert.equal(await page.getByTestId("recipe-editor").filter({visible:true}).count(),0);
   receipt.checks.push("current passive, world, deprecated and conjunction recipes inspect read-only; no unsupported controls; closing during recipe lookup suppresses late document");
   await open(building);await eb("Begin edit").click();await source();await editor().locator("textarea.source-editor").fill((await source())+" ");const parkedBuilding=await source();
   await page.getByLabel("Active layer").selectOption("specials");await page.getByLabel("Placed record",{exact:true}).selectOption("3");
   await b("Open pool workshop_b_fuel").click();await idle();await eb("Begin edit").click();await page.getByLabel("Weight 1",{exact:true}).fill("2");const parkedPool=await source();
   await open(item);await eb("Begin edit").click();await page.getByLabel("Item weight (kg)").fill("0.7");const parkedItem=await source();
-  await b("Recipes").click();assert((await page.getByTestId("item-editor").innerText()).includes("Potential ingredient matches"));
+  await b("Recipes").click();assert((await page.getByTestId("item-editor").filter({visible:true}).innerText()).includes("Potential ingredient matches"));
   const started=performance.now(); await page.locator(`[data-recipe-link="${recipe}"]`).click();await idle();receipt.recipe_open_ms=Math.round(performance.now()-started);
   assert.equal((await source()).replace(/\r\n/g,"\n"),originals.get(recipe).toString().replace(/\r\n/g,"\n"));
-  await b("Return to item").click();
+  await b(/^Return to item /).click();
   await page.waitForFunction(path=>document.activeElement?.getAttribute("data-recipe-link")===path,recipe);assert.equal(await source(),parkedItem);
   await page.locator(`[data-recipe-link="${recipe}"]`).click();await idle();await eb("Begin edit").click();
   const raw=await source(), closing=raw.lastIndexOf("}");
@@ -63,7 +63,7 @@ export async function recipeJourney(page, root, output, receipt) {
   probe=JSON.parse(await page.getByTestId("recipe-probe-receipt").textContent());assert.equal(probe.source_sha256,createHash("sha256").update(saved).digest("hex"));assert.equal(probe.recipe_id,variantId);assert.equal(probe.cases[0].committed,true);
   receipt.recipe_probe=probe;receipt.variant={path:target,sha256:probe.source_sha256};await writeFile(resolve(output,"recipe-variant.json"),saved);
   await shot("recipe-reopened");
-  await b("Return to item").click();assert.equal(await source(),parkedItem);await eb("Discard / Revert").click();
+  await b(/^Return to item /).click();assert.equal(await source(),parkedItem);await eb("Discard / Revert").click();
   await b("Show pool workshop_b_fuel").click();assert.equal(await source(),parkedPool);await eb("Discard / Revert").click();await b("Return to structure").click();assert.equal(await source(),parkedBuilding);await eb("Discard / Revert").click();
   receipt.checks.push("native W3B item → related recipe; four independent drafts; exact scalar/reorder/undo/raw freeze; late validation rejected; exact new-ID diff/visibility confirmation/publication/hash reopen; actual production allocation, output and exchange; three presets; retained item/pool/structure drafts");
 
@@ -94,7 +94,7 @@ export async function recipeJourney(page, root, output, receipt) {
   for(const [path,bytes] of originals) assert.deepEqual(await readFile(resolve(root,path)),bytes,path);
   await b("Close project").click();await idle();await b("Open directory").click();await idle();await open(target);
   await b("Test requirements").click();await b("Validate and test exact recipe").click();await idle();assert.equal(JSON.parse(await page.getByTestId("recipe-probe-receipt").textContent()).source_sha256,receipt.variant.sha256);
-  await b("Output").click();await b("Open output item bile_coating").click();await idle();await b("Recipes").click();assert((await page.getByTestId("item-editor").innerText()).includes(variantId));
+  await b("Output").click();await b("Open output item bile_coating").click();await idle();await b("Recipes").click();assert((await page.getByTestId("item-editor").filter({visible:true}).innerText()).includes(variantId));
   await page.locator(`[data-recipe-link="${target}"][data-recipe-relation="output"]`).click();await idle();
   await b("Requirements").click();await eb("Begin edit").click();
   await page.setViewportSize({width:1100,height:740});await shot("recipe-minimum-window");

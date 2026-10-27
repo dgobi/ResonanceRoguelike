@@ -66,3 +66,20 @@ consumer evidence only. Fresh validation, exact-source review and deliberate
 single-file publication remain required. The W5B physical-letter test separately
 uses production scene construction, normal pickup, inventory use and reader keys
 in a controlled fixture; it does not certify natural world selection or balance.
+
+## Multiple drafts and reader headings
+
+Workbench document tabs can retain several ordinary texts alongside item and
+recipe drafts. Tabs display source paths and dirty state. Close/Reload targets
+only that document, with an explicit discard choice for edited source. Source,
+page selection, variant inputs and structured history survive tab switches.
+Publication replaces only its originating tab after verified reopen; a saved-file
+reopen failure retains the draft and receipt with a deliberate retry action.
+References and previews still use saved dependencies, not other parked drafts.
+
+Text-reference mapping entries match the text ID key in `text_item_map.json`.
+The value identifies a carrier item and does not establish another text reference.
+In the production reader, oversized headings join the existing scrollable content
+so the full heading and body remain accessible with arrows, Page Up/Down and
+Home/End. Short headings stay fixed when enough body space remains. The footer
+stays separate; no prose is truncated or rewritten.

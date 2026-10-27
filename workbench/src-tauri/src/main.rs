@@ -43,9 +43,23 @@ struct Session {
     discovered_families: std::collections::HashMap<String, String>,
     document: Option<authoring::Document>,
     pool_document: Option<authoring::Document>,
-    family_documents: std::collections::HashMap<String, authoring::Document>,
+    content_documents: std::collections::HashMap<String, authoring::Document>,
     creature_document: Option<authoring::Document>,
     applying: bool,
+    pending_project: Option<(u64, ProjectConnection)>,
+}
+struct ProjectConnection {
+    root: Option<PathBuf>,
+    ready: bool,
+    discovered: std::collections::HashSet<String>,
+    families: std::collections::HashMap<String, String>,
+}
+fn restore_project(state: &mut Session, owner: Option<u64>) {
+    if state.pending_project.as_ref().is_some_and(|(id, _)| owner.is_none_or(|owner| owner == *id)) {
+        let (_, previous) = state.pending_project.take().unwrap();
+        state.root = previous.root; state.ready = previous.ready;
+        state.discovered = previous.discovered; state.discovered_families = previous.families;
+    }
 }
 #[derive(Default, Clone)]
 struct Host {
@@ -69,6 +83,7 @@ impl Host {
             let _ = child.wait();
         }
         state.busy = None;
+        restore_project(&mut state, None);
         authoring::revoke_all(&mut state);
         if clear {
             state.root = None;
@@ -77,7 +92,7 @@ impl Host {
             state.discovered_families.clear();
             state.document = None;
             state.pool_document = None;
-            state.family_documents.clear();
+            state.content_documents.clear();
             state.creature_document = None;
         }
         cleanup_scratch(&mut state)?;
@@ -118,6 +133,7 @@ impl Drop for Operation {
     fn drop(&mut self) {
         let mut state = self.host.inner.lock().unwrap();
         if state.busy == Some(self.id) {
+            restore_project(&mut state, Some(self.id));
             // Handled errors and unwinding release only this request's resources.
             if let Some(mut child) = state.child.take() { let _ = child.kill(); let _ = child.wait(); }
             let _ = cleanup_scratch(&mut state);
@@ -519,13 +535,19 @@ async fn open_project(
     host: tauri::State<'_, Host>,
     path: Option<String>,
 ) -> Result<Value, Failure> {
-    let epoch = host.cancel(true)?;
+    // Retain open drafts until the new project has passed its handshake and
+    // preferences were saved. Cancellation or refusal restores the old root.
+    let epoch = host.cancel(false)?;
     let (selection, config) = startup::resolve_project(&app, path.as_deref().map(Path::new))?;
     let operation = {
         let mut state = host.inner.lock().unwrap();
         if host.epoch.load(Ordering::SeqCst) != epoch { return Err(failure("CANCELLED", "Project selection changed.", "Open the current project.")); }
         let operation = Operation::reserve(&host, &mut state, false)?;
+        let previous = ProjectConnection {root:state.root.take(),ready:state.ready,
+            discovered:std::mem::take(&mut state.discovered),families:std::mem::take(&mut state.discovered_families)};
+        state.pending_project = Some((operation.id, previous));
         state.root = Some(selection.root.clone());
+        state.ready = false;
         operation
     };
     let host = host.inner().clone();
@@ -544,12 +566,15 @@ async fn open_project(
             },
         )?;
         if response["ok"] == true {
-            let state = host.inner.lock().unwrap();
+            let mut state = host.inner.lock().unwrap();
             operation.check(&state)?;
             if !state.ready {
                 return Err(failure("CANCELLED", "Project changed before saving preferences.", "Open the current project."));
             }
             startup::save(&config, &selection.root)?;
+            state.pending_project = None;
+            state.document = None; state.pool_document = None;
+            state.content_documents.clear(); state.creature_document = None;
             response["result"]["project_selection"] = serde_json::to_value(selection).unwrap();
         }
         Ok(response)
@@ -599,13 +624,15 @@ fn main() {
             authoring::invalidate_document,
             authoring::apply_document,
             authoring::document_disk,
+            authoring::workspace_disk,
+            authoring::close_document,
             authoring::finish_close
         ])
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                 let host = window.state::<Host>();
                 let state = host.inner.lock().unwrap();
-                if state.applying || state.document.is_some() || state.pool_document.is_some() || !state.family_documents.is_empty() || state.creature_document.is_some() {
+                if state.applying || state.document.is_some() || state.pool_document.is_some() || !state.content_documents.is_empty() || state.creature_document.is_some() {
                     api.prevent_close();
                     let _ = window.emit("authoring-close-requested", ());
                     return;

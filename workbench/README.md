@@ -1,4 +1,4 @@
-# Resonance Workbench · W5B
+# Resonance Workbench · W5C
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, inert component items,
@@ -11,6 +11,42 @@ contract and the same exact-source document lifecycle. See
 [content contracts](docs/CONTENT_CONTRACTS.md) for the extension seam, supported
 control vocabulary, default handling and publication boundaries. Other editor
 families retain their existing supported operations.
+
+## Work with several content files
+
+Open any number of registered item, immediate-recipe and ordinary-text files from
+the catalogue. The document strip shows each ID, file path and a dot for unsaved
+source. Opening the same file again, including through a reference, selects its
+existing draft. Switching documents preserves exact source (even invalid JSON),
+variant inputs, structured Undo/Redo, selected view/page and scroll position.
+Raw edits and variant-ID edits still clear that document's structured history.
+
+**Close document** and **Reload document** affect the selected file only. A dirty
+file is named in the **Keep editing / Discard and continue** prompt. Reload reads
+disk deliberately; Close removes the open instance. A later open gets a new token.
+Project switch and application close list all dirty files, including legacy
+structure, pool and creature drafts. Cancellation preserves them.
+
+Following either of two recipes to an item retains that recipe as the return
+destination and restores the initiating relation's focus. A closed or reloaded
+origin is reported unavailable. Duplicate IDs do not merge file owners.
+
+Publication remains one reviewed file at a time. A successful in-place save
+reopens into its tab; a new variant replaces its originating tab with verified
+target bytes. Unrelated drafts and targets stay intact. If the target already has
+another open owner, resolve that conflict by deliberately closing it. If writing
+succeeds but reopen fails, **File saved; reopen failed or incomplete** retains the
+draft and save receipt; **Retry verified reopen** only retries the read. It never
+automatically republishes or claims rollback.
+
+References, validation and previews use saved dependencies, not other unsaved
+drafts. One bounded workspace sweep checks file changes and shares a conservative
+code/data/Fonts/UI stamp; final publication checks remain independent. Drafts and
+workspace tabs are memory-only. Transaction backups do not recover unsaved drafts.
+`node scripts/run-workspace.mjs` exercises the packaged six-document workflow in
+disposable data without controlling the owner's desktop.
+See [W5C delivery and verification](docs/W5C_DELIVERY.md) for the scoped checks
+and remaining limits.
 
 ## Author an ordinary found text
 
@@ -245,7 +281,7 @@ Native samples are published only in ignored disposable content. The example in
 
 1. Search the recursive item catalogue by ID, name or path, or follow **Open item
    `<id>`** from a pool entry. Category filters use the declared game category.
-   One structure, pool and item draft can remain open independently. **Return to
+   A structure and pool plus multiple item drafts can remain open independently. **Return to
    pool** restores the original entry and its draft; **Show structure** restores
    the structure. Changing the item name never changes its machine ID.
 2. **Begin edit** is available only for a unique, single-object ordinary inert
@@ -376,7 +412,7 @@ structure preview establishes observed population. Samples do not establish
 frequencies, effect behavior or natural world selection. Item/reference lists
 are catalogue snapshots; reopen after external dependency edits.
 
-The host retains one building, pool, item, recipe and creature capability. Saving any revokes
+The host retains individual registered item/recipe/text owners and legacy building, pool and creature slots. Saving any revokes
 all reviews; the frontend clears verdicts while retaining the other drafts.
 Every apply remains one reviewed byte string and one confined target, with fresh
 validation, conflicts and rollback. No general filesystem permission, new write
@@ -425,8 +461,9 @@ Opening, switching tabs and closing clean source never serializes it. Property
 edits retain unrelated spans, BOM and line endings; raw edits retain the source's
 CRLF convention. Unknown fields, nested arrays, specials, decor and text bindings
 remain in the one shared draft. Discard/Revert returns to the opened bytes;
-Generate/refresh reloads disk. Switching files/projects, refresh and native close
-protect unsaved drafts with an explicit discard prompt. Drafts are memory-only;
+Generate/refresh reloads disk. Replacing a legacy file, reloading, switching projects and native close
+protect affected unsaved drafts with an explicit discard prompt. Registered file tabs
+retain their independent drafts when switching. Drafts are memory-only;
 forced process termination loses unsaved edits, while source stays intact.
 
 A three-second idle check reports external changes and exposes the disk version
@@ -619,7 +656,8 @@ npm.cmd run test:visual              # native canvas + exact draft preview + var
 npm.cmd run test:pools               # native container → pool → item and two variants
 npm.cmd run test:items               # native new item → new pool → real factory/population
 npm.cmd run test:recipes             # native item → recipe → variant → production requirements/output
-npm.cmd run test:creatures           # native creature → variant → real factory; five parked drafts
+npm.cmd run test:creatures           # native creature → variant → real factory
+node scripts/run-workspace.mjs       # six registered owners, legacy draft, targeted lifecycle
 & $env:RESONANCE_PYTHON -B worker/test_authoring.py
 & $env:RESONANCE_PYTHON -B worker/test_visual.py
 & $env:RESONANCE_PYTHON -B worker/test_pools.py

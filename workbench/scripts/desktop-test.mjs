@@ -534,6 +534,10 @@ try {
       const {textJourney} = await import("./text-journey.mjs");
       await textJourney(page,root,output,receipt);
     }
+    if (mode === "workspace") {
+      const {workspaceJourney} = await import("./workspace-journey.mjs");
+      await workspaceJourney(page,root,output,receipt);
+    }
     if (mode === "items") {
       const {itemJourney} = await import("./item-journey.mjs");
       await itemJourney(page, root, output, receipt);

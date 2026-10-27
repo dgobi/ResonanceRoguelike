@@ -20,7 +20,7 @@ export async function textJourney(page,root,output,receipt) {
   await open(item);await eb("Begin edit").click();await page.getByLabel("Item description",{exact:true}).fill("Parked item during found-text authoring");const parkedItem=await source();
   await open(recipe);await eb("Begin edit").click();await page.getByLabel("Recipe description",{exact:true}).fill("Parked recipe during found-text authoring");const parkedRecipe=await source();
   await open("roguelike/data/texts/world/buildings/text_residential_letter.json");assert(await eb("Begin edit").isDisabled());
-  assert.match(await page.getByTestId("text-editor").innerText(),/teach_words|deep_tongue|render_mode/);
+  assert.match(await page.getByTestId("text-editor").filter({visible:true}).innerText(),/teach_words|deep_tongue|render_mode/);
   await open(asset);assert.equal((await source()).replace(/\r\n/g,"\n"),originals.get(asset).toString().replace(/\r\n/g,"\n"));
   assert.equal(await page.getByLabel("Text ends here 1").isChecked(),false);
   assert.equal((await source()).replace(/\r\n/g,"\n"),originals.get(asset).toString().replace(/\r\n/g,"\n"));
@@ -75,7 +75,7 @@ export async function textJourney(page,root,output,receipt) {
   assert.equal(hash,verdict.draft_sha256);assert.equal(saved.toString().replace(/\r\n/g,"\n"),staged.replace(/\r\n/g,"\n"));
   assert.equal((await source()).replace(/\r\n/g,"\n"),saved.toString().replace(/\r\n/g,"\n"));
   assert.deepEqual(JSON.parse(saved).pages.map(p=>p.text),[long,first,"Last authored page."]);
-  assert.match(await page.getByTestId("text-editor").innerText(),/Same-ID revisions are deferred/);
+  assert.match(await page.getByTestId("text-editor").filter({visible:true}).innerText(),/Same-ID revisions are deferred/);
   await page.screenshot({path:resolve(output,"text-reopened.png")});
   receipt.variant={path:target,reviewed_sha256:verdict.draft_sha256,saved_sha256:hash,reopened_sha256:hash};receipt.reader=evidence;
   await open(item);assert.equal(await source(),parkedItem);await eb("Discard / Revert").click();

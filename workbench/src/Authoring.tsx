@@ -26,6 +26,7 @@ import {
   type CreatureContext,
 } from "./protocol";
 import { type RequestLease } from "./requests";
+import type { Disk, DiskSubscription } from "./workspace";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
 
 type Verdict = {
@@ -41,13 +42,6 @@ type Verdict = {
   family?: ContentFamily;
   family_preview?: FamilyPreview | null;
   creature_context?: CreatureContext;
-};
-type Disk = {
-  changed: boolean;
-  dependencies_changed?: boolean;
-  raw: string;
-  sha256: string;
-  recovery_files: string[];
 };
 export function Authoring({
   document,
@@ -67,6 +61,7 @@ export function Authoring({
   onReturn,
   dependencyVersion = 0,
   onItem, poolEntryFocus, contentNavigation, selectedCreatureId,
+  subscribeDisk,
 }: {
   document: Inspection;
   onDirty: (dirty: boolean) => void;
@@ -88,6 +83,7 @@ export function Authoring({
   poolEntryFocus?: number;
   contentNavigation?: ContentNavigation;
   selectedCreatureId?: string;
+  subscribeDisk: DiskSubscription;
 }) {
   const pool = document.route === "contextual_loot_pool";
   const content = document.family;
@@ -117,6 +113,7 @@ export function Authoring({
   const [disk, setDisk] = useState<Disk | null>(null),
     [confirm, setConfirm] = useState(false);
   const [localError, setLocalError] = useState("");
+  const [saved, setSaved] = useState<{path:string; after_sha256:string} | null>(null);
   const [evidenceVersion, setEvidenceVersion] = useState(dependencyVersion);
   const [previewEvidence,setPreviewEvidence]=useState<{frame:FamilyPreview;text:string;version:number;dependencies:number;stale:boolean}|null>(null);
   const [focus, setFocus] = useState<{ cell: Cell; layer: Layer } | null>(null);
@@ -128,6 +125,7 @@ export function Authoring({
     mounted = useRef(true);
   const dirty = draft !== document.raw;
   const parsed = syntax(draft);
+  const sourceId = content ? `${view?.sourceId}-${document.document_token}` : creature ? "creature-draft-json" : pool ? "pool-draft-json" : "draft-json";
   let values: Record<string, unknown> = {};
   try {
     values = JSON.parse(draft.replace(/^\uFEFF/, "")) || {};
@@ -144,7 +142,7 @@ export function Authoring({
     setConfirm(false);
       if (submap) revoke();
   }, [dependencyVersion, seed]);
-  useEffect(() => { version.current++; setConfirm(false); }, [active]);
+  useEffect(() => { setConfirm(false); }, [active]);
   useEffect(() => { version.current++; setVerdict(null); setConfirm(false); setPreviewEvidence(p=>p ? {...p,stale:true} : p); }, [cancelVersion]);
   useEffect(() => {
     onDirty(dirty);
@@ -156,31 +154,20 @@ export function Authoring({
       version.current++;
     };
   }, []);
-  useEffect(() => {
-    let stopped = false;
-    const check = async () => {
-      if (busy) return;
-      try {
-        const d = await call<Disk>("document_disk", {
-          token: document.document_token,
-        });
-        if (!stopped) {
-          setDisk(d.result);
-          if ((content || creature || submap) && (d.result.dependencies_changed || d.result.changed)) { version.current++; setVerdict(null); setConfirm(false); setPreviewEvidence(p=>p ? {...p,stale:true} : p); }
-        }
-      } catch (e) {
-        if (!stopped) onError(asFailure(e));
+  useEffect(() => subscribeDisk(document.document_token!, () => {
+    const revision = version.current;
+    return row => {
+      if (!mounted.current || revision !== version.current) return;
+      if (row.disk) setDisk(row.disk);
+      if (row.error || row.disk?.dependencies_changed || row.disk?.changed) {
+        version.current++; setVerdict(null); setConfirm(false);
+        setPreviewEvidence(p=>p ? {...p,stale:true} : p);
+        if (row.error) setLocalError(row.error.message);
       }
     };
-    void check();
-    const timer = setInterval(() => void check(), 3000);
-    return () => {
-      stopped = true;
-      clearInterval(timer);
-    };
-  }, [document.document_token, busy, onError]);
+  }), [document.document_token, subscribeDisk]);
   function change(text: string, visual = false) {
-    if (applying.current || busy.includes("applying")) return;
+    if (applying.current || busy.includes("applying") || busy.includes("repository")) return;
     // WebView textarea events may repeat the same normalized CRLF value on
     // focus changes. A no-op must not start another acknowledgement/render loop.
     if (text === latest.current) return;
@@ -308,7 +295,8 @@ export function Authoring({
         confirmed: true,
       });
       if (!request.current()) return;
-      onDirty(false);
+      setSaved(r.result);
+      setVerdict(null);
       await onApplied(r.result.path, r.result);
     } catch (e) {
       if (request.current()) {
@@ -321,7 +309,15 @@ export function Authoring({
       request.finish();
     }
   }
-  const reason = pendingEdit ? "Waiting for edit acknowledgement." : !editing
+  async function recoverReopen() {
+    if (!saved) return;
+    const request = beginRequest("Reopening saved file…");
+    onError(null);
+    try { await onApplied(saved.path, saved); }
+    catch (e) { if (request.current()) onError(asFailure(e)); }
+    finally { request.finish(); }
+  }
+  const reason = saved ? "File saved. Retry verified reopen before publishing again." : pendingEdit ? "Waiting for edit acknowledgement." : !editing
     ? "Begin editing to create a draft."
     : (variantOnly || creature || submap) && !variant
       ? "Create a unique new variant before publication."
@@ -340,6 +336,12 @@ export function Authoring({
                 : "";
   return (
     <section className="authoring" data-testid="authoring" data-edit-pending={pendingEdit}>
+      {saved && <div className="notice warning" data-testid="saved-reopen-failed">
+        <strong>File saved; reopen failed or incomplete.</strong>
+        <p>{saved.path}. This draft and the save receipt are retained.</p>
+        <pre className="raw">{JSON.stringify(saved, null, 2)}</pre>
+        <button disabled={!!busy} onClick={()=>void recoverReopen()}>Retry verified reopen</button>
+      </div>}
       {active && canvasHost && pool && createPortal(<PoolEditor
         draft={draft} path={target} context={document.pool_context}
         disabled={!editing ? "Begin edit to change this pool." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
@@ -558,15 +560,15 @@ export function Authoring({
       )}
       {tab === "source" && (
         <>
-          <label htmlFor={creature ? "creature-draft-json" : content ? view?.sourceId : pool ? "pool-draft-json" : "draft-json"}>
+          <label htmlFor={sourceId}>
             {editing ? "Draft JSON" : "Source JSON"}
           </label>
           <textarea
-            id={creature ? "creature-draft-json" : content ? view?.sourceId : pool ? "pool-draft-json" : "draft-json"}
+            id={sourceId}
             className="source-editor"
             spellCheck={false}
             value={draft}
-            readOnly={!editing || busy.includes("applying")}
+            readOnly={!editing || busy.includes("applying") || busy.includes("repository")}
             onChange={(e) => {
               // textarea normalizes line breaks. Preserve the opened document's CRLF
               // convention for consciously edited raw text; property edits use spans.

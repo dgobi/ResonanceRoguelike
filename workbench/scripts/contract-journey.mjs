@@ -33,7 +33,7 @@ export async function contractJourney(page,root,output,receipt) {
   },null,{timeout:10000});
   assert.equal(await source(),retained);
   assert(await eb("Review & apply").isDisabled());
-  await eb("Discard / Revert").click();await b("Reload item").click();await idle();
+  await eb("Discard / Revert").click();await b("Reload document").click();await idle();
   assert.equal(await page.getByLabel(label,{exact:true}).isChecked(),true);
   assert.equal(JSON.parse(await source()).consumed_on_use,undefined);
   await b("Factory result").click();await b("Properties").first().click();
@@ -53,7 +53,7 @@ export async function contractJourney(page,root,output,receipt) {
   await eb("Validate draft").click();await idle();
   const checked=JSON.parse(await editor().getByTestId("draft-receipt").textContent());assert(checked.valid);assert(checked.review_token);
   assert.equal(checked.family.context.records[0].factory.instance.consumed_on_use,false);
-  await page.getByTestId("item-editor").screenshot({path:resolve(output,"w5a-boolean-control.png")});
+  await page.getByTestId("item-editor").filter({visible:true}).screenshot({path:resolve(output,"w5a-boolean-control.png")});
   await eb("Review & apply").click();await b("Confirm apply one file").click();await idle();
   const saved=await readFile(resolve(root,checked.path));assert.equal(sha(saved),checked.draft_sha256);
   assert.equal(JSON.parse(await source()).consumed_on_use,false);

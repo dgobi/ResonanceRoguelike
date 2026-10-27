@@ -10,10 +10,30 @@ imports, executable expressions, plugin loading or alternate content formats.
 The worker dispatches discovery, inspect and exact-draft validation through the
 registry. A common `family` envelope contains family/contract identity, descriptor
 SHA-256, compatibility diagnostics, reference choices and typed family evidence.
-The host stores one document per registered family in a collection. React mounts
-one shared `Authoring` lifecycle for each document token; specialized views use
-its source/history/validate/review/apply commands. One-open-document-per-family,
-parked drafts, source trails and return navigation remain the interaction model.
+The host stores registered documents by discovered file identity within the
+canonical project root. Windows case and slash aliases resolve to the same owner;
+definition IDs and record pointers are metadata, not ownership keys. Each open
+instance has an opaque token. React keeps one `Authoring` lifecycle mounted per
+token, including hidden specialist views, so switching tabs retains exact source,
+history, variant inputs and view state. Legacy structure/pool/creature slots
+remain included in shared lookup, invalidation and project close.
+
+`open_document` reuses an existing file owner. Explicit reload or verified reopen
+passes `replaceToken`; publication reopen also passes `expectedSha256`. The host
+checks the originating revision/attempt and target bytes before replacing the
+token. Failure preserves the original instance. A target owned by another open
+document is refused. `close_document` removes only its registered token; late
+results cannot install into a closed or replacement instance. Reserved publication
+still refuses close/cancellation with BUSY. Reference return state names an actual
+origin token and retains its relation focus; closed/replaced origins are explicit.
+
+One `workspace_disk` sweep covers live registered and legacy documents. It reserves
+the existing operation slot, hashes conservative dependencies once, and reads
+individual files. It never overlaps or queues another sweep. Host installation
+checks epoch/token/revision/attempt; renderer delivery checks the captured local
+version and subscription lifetime. Per-document timers are removed. Final apply
+still independently pins and rechecks exact source/dependency bytes. Monitoring
+does not narrow dependencies, cache stamps across sweeps, or create review authority.
 
 ## Descriptor vocabulary
 
@@ -67,7 +87,7 @@ Host filesystem admission uses a fixed `CONTENT_ROOTS` table independent of
 descriptors. A family registration still needs an explicitly permitted host root;
 renderer metadata cannot add one. Reserved basenames are rejected at every depth.
 The text registration allows variants under `roguelike/data/texts/` and excludes
-`text_item_map.json`. Generic workspace visibility uses the active family key.
+`text_item_map.json`. Generic workspace visibility uses the active document token.
 
 For example, a supported optional boolean can be added to a family's
 `SCHEMA["properties"]` with `type: "boolean"`, its factual title/help and the

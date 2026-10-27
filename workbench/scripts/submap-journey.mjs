@@ -28,7 +28,7 @@ export async function submapJourney(page,root,output,receipt,context) {
   // Park an independent editor draft through cancellation and publication.
   const item="roguelike/data/items/components/clay_pot.json", itemOriginal=await readFile(resolve(root,item));
   await open(item);await eb("Begin edit").click();await page.getByLabel("Item weight (kg)").fill("0.7");
-  const parkedItem=await source();await b("Hide item").click();
+  const parkedItem=await source();await b("Show structure").click();
   await eb("Begin edit").click();await canvas();
   assert(await b("Pencil · B").isDisabled());assert(await b("Fill · R").isDisabled());
   assert(!(await page.getByLabel("Placement creature").innerText()).includes("player"));
@@ -104,8 +104,8 @@ export async function submapJourney(page,root,output,receipt,context) {
   const saved=await readFile(resolve(root,destination));assert.equal(saved.toString(),finalDraft);assert.equal(await source(),finalDraft);
   await b("Preview draft").click();await idle();evidence=JSON.parse(await page.getByTestId("placement-receipt").textContent());assert.equal(evidence.source_sha256,createHash("sha256").update(saved).digest("hex"));
   receipt.placement=evidence;receipt.variant={path:destination,sha256:evidence.source_sha256};
-  await b("Show item clay_pot").click();assert.equal(await source(),parkedItem);
-  await eb("Discard / Revert").click();await b("Hide item").click();
+  await page.locator('[data-document-tab$="/clay_pot.json"]').click();assert.equal(await source(),parkedItem);
+  await eb("Discard / Revert").click();await b("Show structure").click();
   assert.deepEqual(await readFile(resolve(root,item)),itemOriginal);
   receipt.checks.push("W4D parked item draft survived submap edits, cancellation, fresh preview and publication byte-for-byte; source item unchanged");
   await canvas();await page.getByLabel("Placed record",{exact:true}).selectOption("0");await shot("submap-source");

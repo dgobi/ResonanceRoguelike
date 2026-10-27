@@ -61,8 +61,8 @@ export async function creatureJourney(page,root,output,receipt) {
   assert.deepEqual(JSON.parse(saved).w4a_metadata,JSON.parse(original).w4a_metadata);
   receipt.creature_factory=factory;receipt.variant={path:target,sha256:factory.source_sha256};await writeFile(resolve(output,"creature-variant.json"),saved);await shot("creature-reopened");
   await b("Direct layout references").click();assert((await panel().innerText()).includes("No direct authored-submap references"));
-  await b("Show recipe bile_coating").click();assert.equal(await source(),parkedRecipe);await eb("Discard / Revert").click();
-  await b("Show item clay_pot").click();assert.equal(await source(),parkedItem);await eb("Discard / Revert").click();
+  await page.locator('[data-document-tab$="/bile_coating.json"]').click();assert.equal(await source(),parkedRecipe);await eb("Discard / Revert").click();
+  await page.locator('[data-document-tab$="/clay_pot.json"]').click();assert.equal(await source(),parkedItem);await eb("Discard / Revert").click();
   await b("Show pool workshop_b_fuel").click();assert.equal(await source(),parkedPool);await eb("Discard / Revert").click();await b("Return to structure").click();assert.equal(await source(),parkedBuilding);await eb("Discard / Revert").click();
   receipt.checks.push("five independent drafts; actual reference source without replacing structure draft; two-span effective HP/name edits and unknown metadata; undo/redo/raw freeze; invalid complex edits denied; stale async and changed-dependency evidence revoked; reviewed no-clobber variant and exact reopened real factory values");
   let opened=await ipc("open_document",{asset:target}), doc=opened.result;

@@ -889,6 +889,17 @@ pre {
   flex: 1;
   min-height: 0;
 }
+.document-tabs {
+  display: flex;
+  gap: 5px;
+  flex: 1 0 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.document-tabs button { flex: 0 0 200px; text-align: left; }
+.document-tabs small { display: block; font-size: 10px; overflow-wrap: anywhere; color: var(--muted, #a6aba4); }
+.document-tabs [aria-current="page"] { border-color: #d1ad69; background: #30372f; }
 .layout-editor {
   display: flex;
   flex-direction: column;

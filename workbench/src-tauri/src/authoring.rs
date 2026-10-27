@@ -83,6 +83,7 @@ pub struct Document {
     evidence_inputs: Option<String>,
     revision: u64,
     attempt: u64,
+    inspection: Value,
 }
 #[derive(Clone)]
 struct Review {
@@ -227,6 +228,7 @@ fn read_source(path: &Path) -> Result<Vec<u8>, Failure> {
     std::str::from_utf8(&bytes).map_err(io_error)?;
     Ok(bytes)
 }
+#[cfg(test)]
 fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure> {
     let state = host.inner.lock().unwrap();
     let doc = state
@@ -234,7 +236,7 @@ fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure>
         .as_ref()
         .into_iter()
         .chain(state.pool_document.as_ref())
-        .chain(state.family_documents.values()).chain(state.creature_document.as_ref())
+        .chain(state.content_documents.values()).chain(state.creature_document.as_ref())
         .find(|d| d.token == token)
         .ok_or_else(|| {
             failure(
@@ -256,7 +258,7 @@ fn revoke(doc: &mut Document) {
     doc.review = None;
 }
 pub(super) fn revoke_all(state: &mut Session) {
-    for doc in state.document.iter_mut().chain(state.pool_document.iter_mut()).chain(state.family_documents.values_mut()).chain(state.creature_document.iter_mut()) { revoke(doc); }
+    for doc in state.document.iter_mut().chain(state.pool_document.iter_mut()).chain(state.content_documents.values_mut()).chain(state.creature_document.iter_mut()) { revoke(doc); }
 }
 #[cfg(test)]
 fn revoke_review(host: &Host, token: &str) {
@@ -278,10 +280,52 @@ fn advance_document(host: &Host, token: &str) -> Result<(), Failure> {
     Ok(())
 }
 fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
-    state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).chain(state.family_documents.values_mut()).chain(state.creature_document.as_mut()).find(|d| d.token == token)
+    state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).chain(state.content_documents.values_mut()).chain(state.creature_document.as_mut()).find(|d| d.token == token)
 }
 fn envelope(result: Value) -> Value {
     json!({"protocol":PROTOCOL,"id":uuid::Uuid::new_v4().to_string(),"ok":true,"result":result,"host_elapsed_ms":0})
+}
+
+// File ownership is scoped by Session's canonical project root. Discovery
+// supplies spelling; Windows aliases share one key. IDs/pointers are metadata.
+fn file_key(relative: &str) -> String {
+    if cfg!(windows) { relative.replace('\\', "/").to_lowercase() }
+    else { relative.to_owned() }
+}
+fn discovered_path(state: &Session, asset: &str) -> Result<String, Failure> {
+    let key = file_key(asset);
+    state.discovered.iter().find(|p| file_key(p) == key).cloned()
+        .ok_or_else(|| failure("UNKNOWN_SOURCE", "Source was not returned by trusted discovery.", "Refresh the asset index and select a supported file."))
+}
+fn replacement_snapshot(state: &mut Session, token: Option<&str>) -> Result<Option<Document>, Failure> {
+    token.map(|t| current_document(state, t).cloned().ok_or_else(unknown_document)).transpose()
+}
+fn check_replacement(state: &mut Session, previous: Option<&Document>) -> Result<(), Failure> {
+    if let Some(previous) = previous {
+        let current = current_document(state, &previous.token).ok_or_else(unknown_document)?;
+        if current.revision != previous.revision || current.attempt != previous.attempt {
+            return Err(failure("DRAFT_CHANGED", "Document changed while reopening.", "Keep the draft and deliberately reload again."));
+        }
+    }
+    Ok(())
+}
+fn owner_collision(state: &Session, asset: &str, replacing: Option<&str>) -> Result<(), Failure> {
+    if state.content_documents.get(&file_key(asset)).is_some_and(|d| Some(d.token.as_str()) != replacing) {
+        return Err(failure("DOCUMENT_OPEN", "The destination already has an open document.", "Keep its draft, or deliberately close that document before retrying."));
+    }
+    Ok(())
+}
+fn remove_document(host: &Host, token: &str) -> Result<(), Failure> {
+    let mut state = host.inner.lock().unwrap();
+    if state.applying { return Err(busy_failure()); }
+    let key = state.content_documents.iter().find(|(_, d)| d.token == token).map(|(k, _)| k.clone()).ok_or_else(unknown_document)?;
+    state.content_documents.remove(&key);
+    // Do not kill a worker or release resources belonging to another document.
+    Ok(())
+}
+#[tauri::command]
+pub fn close_document(host: tauri::State<'_, Host>, token: String) -> Result<(), Failure> {
+    remove_document(&host, &token)
 }
 
 fn begin_validation(host: &Host, token: &str) -> Result<(Operation, PathBuf, Document), Failure> {
@@ -324,6 +368,7 @@ fn admit_apply(host: &Host, token: &str, review_token: &str, confirmed: bool, be
     if !confirmed { return Err(failure("CONFIRMATION_REQUIRED", "Apply must be deliberate.", "Read the diff and confirm this single-file change.")); }
     doc.review = None;
     let doc = doc.clone();
+    owner_collision(&state, &review.destination, Some(&doc.token))?;
     let operation = Operation::reserve(host, &mut state, true)?;
     Ok((operation, root, doc, review))
 }
@@ -333,31 +378,36 @@ pub async fn open_document(
     app: tauri::AppHandle,
     host: tauri::State<'_, Host>,
     asset: String,
+    replace_token: Option<String>,
+    expected_sha256: Option<String>,
 ) -> Result<Value, Failure> {
     let operation = Operation::begin(&host)?;
     let host = host.inner().clone();
     tauri::async_runtime::spawn_blocking(move || {
-        let (root, discovered_family) = {
+        let (root, asset, discovered_family, previous) = {
             let mut state = host.inner.lock().unwrap();
             operation.check(&state)?;
-            if !state.discovered.contains(&asset) {
-                return Err(failure(
-                    "UNKNOWN_SOURCE",
-                    "Source was not returned by trusted discovery.",
-                    "Refresh the asset index and select a supported building.",
-                ));
-            }
+            let asset = discovered_path(&state, &asset)?;
             let family = state.discovered_families.get(&asset).cloned();
-            if let Some(key) = &family {
-                if let Some(previous) = state.family_documents.get_mut(key) { revoke(previous); }
+            let previous = replacement_snapshot(&mut state, replace_token.as_deref())?;
+            if family.is_some() {
+                if replace_token.is_none() {
+                    if let Some(existing) = state.content_documents.get(&file_key(&asset)) {
+                        return Ok(envelope(existing.inspection.clone()));
+                    }
+                }
+                owner_collision(&state, &asset, replace_token.as_deref())?;
             }
             (state
                 .root
                 .clone()
-                .ok_or_else(|| io_error("No project open."))?, family)
+                .ok_or_else(|| io_error("No project open."))?, asset, family, previous)
         };
         let path = checked_target(&root, &asset, false)?;
         let original = read_source(&path)?;
+        if expected_sha256.as_ref().is_some_and(|expected| *expected != hash(&original)) {
+            return Err(conflict());
+        }
         let evidence_inputs = if dependency_bound(&asset) { Some(input_stamp(&root)?) } else { None };
         let mut response = run_worker(
             app,
@@ -387,14 +437,17 @@ pub async fn open_document(
         .and_then(|v| v["id"].as_str().map(str::to_owned));
         let mut state = host.inner.lock().unwrap();
         operation.check(&state)?;
+        check_replacement(&mut state, previous.as_ref())?;
         let family = FamilyPolicy::from_result(&response["result"], &asset)
             .filter(|f| discovered_family.as_ref() == Some(&f.id));
         let writable = if content_root(&asset).is_some() {
             family.as_ref().is_some_and(|f| asset.starts_with(&f.root)) && response["result"]["editable"] == true
         } else if is_submap(&asset) { response["result"]["editable"] == true && response["result"]["layout_contract"] == "direct-creatures-1" }
         else if is_creature(&asset) { asset.starts_with("roguelike/data/entities/creatures/") && response["result"]["editable"] == true } else { true };
-        let family_key = discovered_family.clone().unwrap_or_default();
         let registered = discovered_family.is_some();
+        if registered { owner_collision(&state, &asset, replace_token.as_deref())?; }
+        response["result"]["document_token"] = json!(token);
+        response["result"]["file_identity"] = json!(file_key(&asset));
         let document = Document {
             family,
             token: token.clone(),
@@ -406,13 +459,16 @@ pub async fn open_document(
             evidence_inputs,
             revision: 0,
             attempt: 0,
+            inspection: response["result"].clone(),
         };
-        if registered { state.family_documents.insert(family_key, document); }
+        if registered {
+            if let Some(previous) = previous { state.content_documents.retain(|_, d| d.token != previous.token); }
+            state.content_documents.insert(file_key(&document.relative), document);
+        }
         else {
             let slot = if is_pool(&document.relative) { &mut state.pool_document } else if is_creature(&document.relative) { &mut state.creature_document } else { &mut state.document };
             *slot = Some(document);
         }
-        response["result"]["document_token"] = json!(token);
         Ok(response)
     })
     .await
@@ -888,29 +944,69 @@ pub async fn apply_document(
     }).await.map_err(io_error)?
 }
 
-#[tauri::command]
-pub fn document_disk(host: tauri::State<'_, Host>, token: String) -> Result<Value, Failure> {
-    let (root, doc) = session_doc(&host, &token)?;
-    let path = checked_target(&root, &doc.relative, false)?;
+fn disk_result(root: &Path, doc: &Document, stamp: Option<&str>) -> Result<Value, Failure> {
+    let path = checked_target(root, &doc.relative, false)?;
     let bytes = read_source(&path)?;
-    let dependencies_changed = if let Some(stamp) = &doc.evidence_inputs { input_stamp(&root)? != *stamp } else { false };
-    if dependencies_changed || bytes != doc.original {
-        let mut state = host.inner.lock().unwrap();
-        if !state.applying {
-            if let Some(current) = current_document(&mut state, &token) {
-                if current.revision == doc.revision && current.attempt == doc.attempt { revoke(current); }
-            }
-        }
-    }
+    let dependencies_changed = doc.evidence_inputs.as_deref().is_some_and(|old| Some(old) != stamp);
     let pending: Vec<_> = fs::read_dir(path.parent().unwrap())
         .map_err(io_error)?
         .filter_map(Result::ok)
         .filter(|e| e.file_name().to_string_lossy().starts_with(".w1-"))
         .map(|e| e.file_name().to_string_lossy().into_owned())
         .collect();
-    Ok(envelope(
+    Ok(
         json!({"changed":bytes != doc.original,"dependencies_changed":dependencies_changed,"raw":String::from_utf8(bytes.clone()).map_err(io_error)?,"sha256":hash(&bytes),"recovery_files":pending}),
-    ))
+    )
+}
+fn install_disk(operation: &Operation, doc: &Document, result: &Result<Value, Failure>) -> Result<bool, Failure> {
+    let mut state = operation.host.inner.lock().unwrap();
+    operation.check(&state)?;
+    let Some(current) = current_document(&mut state, &doc.token) else { return Ok(false); };
+    if current.revision != doc.revision || current.attempt != doc.attempt { return Ok(false); }
+    if result.as_ref().map_or(true, |r| r["changed"] == true || r["dependencies_changed"] == true) { revoke(current); }
+    Ok(true)
+}
+fn sweep_disk(operation: &Operation, token: Option<&str>, stamp_fn: impl FnOnce(&Path) -> Result<String, Failure>) -> Result<Value, Failure> {
+    let started = Instant::now();
+    let (root, documents) = {
+        let state = operation.host.inner.lock().unwrap();
+        operation.check(&state)?;
+        let docs: Vec<_> = state.document.iter().chain(state.pool_document.iter()).chain(state.content_documents.values()).chain(state.creature_document.iter())
+            .filter(|d| token.is_none_or(|t| t == d.token)).cloned().collect();
+        if token.is_some() && docs.is_empty() { return Err(unknown_document()); }
+        (state.root.clone().ok_or_else(|| io_error("No project open."))?, docs)
+    };
+    let scans = usize::from(documents.iter().any(|d| d.evidence_inputs.is_some()));
+    let stamp = if scans > 0 { Some(stamp_fn(&root)) } else { None };
+    let mut results = Vec::new();
+    for doc in documents {
+        let result = match &stamp {
+            Some(Err(error)) => Err(error.clone()),
+            Some(Ok(stamp)) => disk_result(&root, &doc, Some(stamp)),
+            None => disk_result(&root, &doc, None),
+        };
+        if install_disk(operation, &doc, &result)? {
+            results.push(match result {
+                Ok(disk) => json!({"token":doc.token,"revision":doc.revision,"attempt":doc.attempt,"disk":disk}),
+                Err(error) => json!({"token":doc.token,"revision":doc.revision,"attempt":doc.attempt,"error":error}),
+            });
+        }
+    }
+    Ok(json!({"documents":results,"dependency_scans":scans,"elapsed_ms":started.elapsed().as_secs_f64()*1000.0,"project_epoch":operation.epoch}))
+}
+#[tauri::command]
+pub async fn workspace_disk(host: tauri::State<'_, Host>) -> Result<Value, Failure> {
+    let operation = Operation::begin(&host)?;
+    tauri::async_runtime::spawn_blocking(move || sweep_disk(&operation, None, input_stamp).map(envelope)).await.map_err(io_error)?
+}
+#[tauri::command]
+pub fn document_disk(host: tauri::State<'_, Host>, token: String) -> Result<Value, Failure> {
+    let operation = Operation::begin(&host)?;
+    let result = sweep_disk(&operation, Some(&token), input_stamp)?;
+    let row = &result["documents"][0];
+    if row.get("error").is_some() { return Err(io_error(row["error"]["message"].as_str().unwrap_or("Disk check failed."))); }
+    if row.get("disk").is_none() { return Err(unknown_document()); }
+    Ok(envelope(row["disk"].clone()))
 }
 #[tauri::command]
 pub fn finish_close(window: tauri::Window, host: tauri::State<'_, Host>) -> Result<(), Failure> {
@@ -921,6 +1017,111 @@ pub fn finish_close(window: tauri::Window, host: tauri::State<'_, Host>) -> Resu
 #[cfg(test)]
 mod tests {
     use super::*;
+    fn workspace_fixture() -> (tempfile::TempDir, Host, Vec<Document>) {
+        let (root, host, first, _) = lifecycle_fixture(false);
+        let mut documents = vec![first.clone()];
+        {
+            let mut state = host.inner.lock().unwrap();
+            for (token, relative) in [("item2","roguelike/data/items/components/second.json"),
+                ("recipe1","roguelike/data/recipes/first.json"),("recipe2","roguelike/data/recipes/second.json"),
+                ("text1","roguelike/data/texts/first.json"),("text2","roguelike/data/texts/second.json")] {
+                let mut doc = first.clone();doc.token=token.into();doc.relative=relative.into();
+                let path=root.path().join(relative);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(path,&doc.original).unwrap();
+                state.content_documents.insert(file_key(relative),doc.clone());documents.push(doc);
+            }
+            state.discovered.extend(documents.iter().map(|d|d.relative.clone()));
+        }
+        (root,host,documents)
+    }
+    #[test]
+    fn workspace_six_file_owners_aliases_and_cross_document_authority() {
+        let (_root,host,docs)=workspace_fixture();
+        let mut state=host.inner.lock().unwrap();
+        assert_eq!(state.content_documents.len(),6);
+        for doc in &docs {
+            assert_eq!(state.content_documents[&file_key(&doc.relative)].token,doc.token);
+            assert_eq!(discovered_path(&state,&doc.relative).unwrap(),doc.relative);
+            if cfg!(windows) {assert_eq!(discovered_path(&state,&doc.relative.to_uppercase().replace('/',"\\")).unwrap(),doc.relative);}
+        }
+        assert_eq!(owner_collision(&state,&docs[1].relative,Some(&docs[0].token)).unwrap_err().code,"DOCUMENT_OPEN");
+        assert!(owner_collision(&state,&docs[1].relative,Some(&docs[1].token)).is_ok());
+        current_document(&mut state,&docs[1].token).unwrap().review.as_mut().unwrap().token="other-review".into();drop(state);
+        assert_eq!(admit_apply(&host,&docs[0].token,"other-review",true,||{}).err().unwrap().code,"REVIEW_REQUIRED");
+        let (op,_,snapshot)=begin_validation(&host,&docs[0].token).unwrap();
+        advance_document(&host,&docs[1].token).unwrap();
+        install_validation(&op,&snapshot,None,None).unwrap();
+        assert_eq!(session_doc(&host,&docs[1].token).unwrap().1.revision,1);
+    }
+    #[test]
+    fn workspace_close_reopen_rejects_old_results_without_touching_other_owners() {
+        let (_root,host,docs)=workspace_fixture();
+        let (op,_,snapshot)=begin_validation(&host,&docs[0].token).unwrap();
+        remove_document(&host,&docs[0].token).unwrap();
+        assert!(install_validation(&op,&snapshot,None,None).is_err());
+        assert!(!install_disk(&op,&snapshot,&Ok(json!({"changed":true}))).unwrap());
+        assert_eq!(host.inner.lock().unwrap().busy,Some(op.id));
+        let mut reopened=snapshot.clone();reopened.token="new-instance".into();
+        host.inner.lock().unwrap().content_documents.insert(file_key(&reopened.relative),reopened.clone());
+        assert!(check_replacement(&mut host.inner.lock().unwrap(),Some(&snapshot)).is_err());
+        assert!(begin_validation(&host,&docs[1].token).is_err());drop(op);
+        assert!(session_doc(&host,&snapshot.token).is_err());
+        assert!(session_doc(&host,&reopened.token).is_ok());
+        for doc in &docs[1..] {assert_eq!(session_doc(&host,&doc.token).unwrap().1.original,doc.original);}
+    }
+    #[test]
+    fn workspace_sweep_shares_stamp_refuses_overlap_and_includes_legacy() {
+        let (root,host,docs)=workspace_fixture();
+        let stamp=input_stamp(root.path()).unwrap();
+        {let mut state=host.inner.lock().unwrap();
+            for doc in state.content_documents.values_mut(){doc.evidence_inputs=Some(stamp.clone());}
+            let mut legacy=docs[0].clone();legacy.token="legacy".into();state.document=Some(legacy);
+        }
+        let op=Operation::begin(&host).unwrap();let mut scans=0;
+        let result=sweep_disk(&op,None,|r|{scans+=1;assert_eq!(Operation::begin(&host).err().unwrap().code,"BUSY");input_stamp(r)}).unwrap();
+        assert_eq!(scans,1);assert_eq!(result["dependency_scans"],1);assert_eq!(result["documents"].as_array().unwrap().len(),7);
+        drop(op);
+        fs::write(root.path().join(&docs[1].relative),b"external edit").unwrap();
+        let op=Operation::begin(&host).unwrap();
+        let result=sweep_disk(&op,None,input_stamp).unwrap();
+        let rows=result["documents"].as_array().unwrap();
+        assert_eq!(rows.iter().filter(|r|r["disk"]["changed"]==true).count(),1);
+        assert_eq!(rows.iter().find(|r|r["disk"]["changed"]==true).unwrap()["token"],docs[1].token);
+        drop(op);
+        let (validation,_,current)=begin_validation(&host,&docs[0].token).unwrap();
+        install_validation(&validation,&current,None,docs[0].review.clone()).unwrap();drop(validation);
+        let (reserved,_,_,_)=admit_apply(&host,&docs[0].token,"reviewed",true,||{}).unwrap();
+        assert_eq!(remove_document(&host,&docs[1].token).unwrap_err().code,"BUSY");
+        assert_eq!(Operation::begin(&host).err().unwrap().code,"BUSY");
+        drop(reserved);
+    }
+    #[test]
+    fn workspace_old_sweep_cannot_revoke_newer_validation_or_replaced_instance() {
+        let (_root,host,docs)=workspace_fixture();
+        let op=Operation::begin(&host).unwrap();let snapshot=docs[0].clone();
+        advance_document(&host,&snapshot.token).unwrap();
+        assert!(!install_disk(&op,&snapshot,&Ok(json!({"dependencies_changed":true}))).unwrap());
+        let state=host.inner.lock().unwrap();let current=&state.content_documents[&file_key(&snapshot.relative)];
+        assert_eq!(current.attempt,snapshot.attempt+1);drop(state);
+        host.cancel(false).unwrap();
+        assert_eq!(install_disk(&op,&snapshot,&Ok(json!({"changed":true}))).unwrap_err().code,"CANCELLED");
+    }
+    #[test]
+    fn workspace_failed_or_cancelled_project_change_restores_connection_and_owners() {
+        for cancelled in [false,true] {
+            let (root,host,docs)=workspace_fixture();let other=tempfile::tempdir().unwrap();
+            let operation=Operation::begin(&host).unwrap();
+            {let mut state=host.inner.lock().unwrap();
+                let previous=ProjectConnection{root:state.root.take(),ready:state.ready,
+                    discovered:std::mem::take(&mut state.discovered),families:std::mem::take(&mut state.discovered_families)};
+                state.pending_project=Some((operation.id,previous));state.root=Some(other.path().into());state.ready=false;
+            }
+            if cancelled {host.cancel(false).unwrap();}
+            drop(operation);
+            let state=host.inner.lock().unwrap();assert_eq!(state.root.as_deref(),Some(root.path()));assert!(state.ready);assert!(state.pending_project.is_none());
+            assert_eq!(state.content_documents.len(),6);drop(state);
+            for doc in docs {assert_eq!(session_doc(&host,&doc.token).unwrap().1.original,doc.original);}
+        }
+    }
     fn family_result(doc: &Document, id: &str, operations: Value) -> Value {
         json!({"route":format!("{id}_definition"),"source_asset":doc.relative,"source_sha256":hash(&doc.original),"semantic_verified":true,
             "family":{"id":id,"contract":"compatible-domain-contract","compatible":true,"descriptor_sha256":"a".repeat(64),
@@ -954,8 +1155,8 @@ mod tests {
         let (root,host,item,review)=lifecycle_fixture(false);
         let mut text=item.clone();text.token="text-token".into();text.relative="roguelike/data/texts/lab/source.json".into();
         text.family=FamilyPolicy::from_result(&family_result(&text,"text",json!(["variant"])),&text.relative);
-        let mut recipe=item.clone();recipe.token="recipe-token".into();
-        {let mut state=host.inner.lock().unwrap();state.family_documents.insert("text".into(),text.clone());state.family_documents.insert("recipe".into(),recipe.clone());}
+        let mut recipe=item.clone();recipe.token="recipe-token".into();recipe.relative="roguelike/data/recipes/sample.json".into();
+        {let mut state=host.inner.lock().unwrap();state.content_documents.insert(file_key(&text.relative),text.clone());state.content_documents.insert(file_key(&recipe.relative),recipe.clone());}
         let (operation,_,snapshot)=begin_validation(&host,&text.token).unwrap();
         host.cancel(false).unwrap();
         assert!(install_validation(&operation,&snapshot,None,Some(review)).is_err());
@@ -970,7 +1171,7 @@ mod tests {
     fn registered_replacement_cannot_address_new_document_with_old_token() {
         let (root,host,mut doc,review)=lifecycle_fixture(false);
         doc.token="replacement".into();
-        {host.inner.lock().unwrap().family_documents.insert("item".into(),doc.clone());}
+        {host.inner.lock().unwrap().content_documents.insert(file_key(&doc.relative),doc.clone());}
         assert!(begin_validation(&host,"trusted").is_err());
         assert!(admit_apply(&host,"trusted",&review.token,true,||{}).is_err());
         assert!(session_doc(&host,"replacement").is_ok());
@@ -1019,7 +1220,7 @@ mod tests {
         if !submap { doc.family = FamilyPolicy::from_result(&family_result(&doc,"item",json!(["edit","variant"])),&doc.relative); }
         let host = Host::default();
         { let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().into()); state.ready = true;
-          if submap { state.document = Some(doc.clone()); } else { state.family_documents.insert("item".into(), doc.clone()); } }
+          if submap { state.document = Some(doc.clone()); } else { state.content_documents.insert(file_key(&doc.relative), doc.clone()); } }
         (root, host, doc, review)
     }
     #[test]
@@ -1138,6 +1339,7 @@ mod tests {
             evidence_inputs: None,
             revision: 0,
             attempt: 0,
+            inspection: Value::Null,
         };
         let review = Review {
             token: "reviewed".into(),
@@ -1209,7 +1411,7 @@ mod tests {
         }
         assert!(session_doc(&host, &doc.token).is_ok());
         { let mut state = host.inner.lock().unwrap(); for key in ["item", "recipe"] {
-            let mut d = doc.clone(); d.token = key.into(); state.family_documents.insert(key.into(), d);
+            let mut d = doc.clone(); d.token = key.into(); d.relative = format!("roguelike/data/{key}s/sample.json"); state.content_documents.insert(file_key(&d.relative), d);
         }}
         for token in ["structure", "pool", "item", "recipe"] { assert!(session_doc(&host, token).is_ok()); }
         assert_eq!(publish(root.path(), &doc, &review, Fault::None).unwrap_err().code, "CREATURE_VARIANT_REQUIRED");
@@ -1264,8 +1466,8 @@ mod tests {
             let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().to_path_buf());
             let mut a=recipe.clone(); a.token="building".into(); state.document=Some(a);
             let mut a=recipe.clone(); a.token="pool".into(); state.pool_document=Some(a);
-            let mut a=recipe.clone(); a.token="item".into(); state.family_documents.insert("item".into(),a);
-            state.family_documents.insert("recipe".into(),recipe.clone());
+            let mut a=recipe.clone(); a.token="item".into(); a.relative="roguelike/data/items/components/sample.json".into(); state.content_documents.insert(file_key(&a.relative),a);
+            state.content_documents.insert(file_key(&recipe.relative),recipe.clone());
         }
         revoke_review(&host,"recipe");
         assert!(session_doc(&host,"recipe").unwrap().1.review.is_none());
@@ -1304,7 +1506,7 @@ mod tests {
             let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().to_path_buf());
             let mut structure = item.clone(); structure.token = "building".into();
             let mut pool = item.clone(); pool.token = "pool".into();
-            state.document = Some(structure); state.pool_document = Some(pool); state.family_documents.insert("item".into(), item);
+            state.document = Some(structure); state.pool_document = Some(pool); state.content_documents.insert(file_key(&item.relative), item);
         }
         revoke_review(&host, "item");
         assert!(session_doc(&host, "item").unwrap().1.review.is_none());
