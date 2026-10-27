@@ -1,9 +1,11 @@
+import { ContractFields, ScalarControl } from "./ContractControls";
+import { rowDefaults, type ContentFamily } from "./content";
 import { useMemo, useState } from "react";
 import { recipeModel, recipeRow, recipeValue } from "./recipe";
 import type { RecipeContext } from "./protocol";
 
 export function RecipeEditor(p: {
-  draft: string; path: string; context?: RecipeContext; selectedId?: string; dirty: boolean; validated: boolean;
+  family: ContentFamily; draft: string; path: string; context?: RecipeContext; selectedId?: string; dirty: boolean; validated: boolean;
   disabled: string; busy: boolean; evidenceStale: boolean; onCancel: () => void; onReturn?: () => void;
   onItem: (id: string, path?: string) => void; onSource: () => void; onProbe: () => void;
   onEdit: (edit: (text: string) => string, label: string) => void;
@@ -23,47 +25,43 @@ export function RecipeEditor(p: {
   const sample = evidence?.cases.find(c => c.preset === preset);
   const edit = (path: (string | number)[], value: unknown) => p.onEdit(s => recipeValue(s,path,value), "Edit recipe field");
   const links = (role: string, index: number) => record?.candidates.find(r => r.role === role && r.index === index)?.matches || [];
-  const groups = [["components","Required items"],["tools","Tools · retained"],["requires_ambient","Ambient conditions"]];
+  const groups = Object.entries(p.family.descriptor.schema.properties || {}).filter(([,s])=>s["x-control"] === "ordered-table");
   return <section className="item-editor recipe-editor" data-testid="recipe-editor">
     <div className="pane-heading"><div><h2>Recipe</h2><code>{String(values.id || record?.id || "Invalid source")} · {p.path}</code></div>
       <div className="edit-actions">{p.onReturn && <button onClick={p.onReturn} disabled={p.busy}>Return to item</button>}
         {p.busy && <button onClick={p.onCancel} disabled={p.disabled === "Publication in progress."}>Cancel authoring request</button>}</div></div>
     <p>{cap?.execution_class || "Unknown"} · {cap?.editable ? "Supported family" : "Not supported for writing"}</p>
-    <div className="tabs">{["Requirements","Output","Test requirements"].map(v => <button key={v} className={view === v ? "active" : ""} onClick={() => setView(v)}>{v}</button>)}<button onClick={p.onSource}>Show source</button></div>
+    <div className="tabs">{p.family.descriptor.views.map(key=>({"recipe-requirements":"Requirements",output:"Output","production-receipt":"Test requirements"})[key]).filter((v):v is string=>!!v).map(v => <button key={v} className={view === v ? "active" : ""} onClick={() => setView(v)}>{v}</button>)}<button onClick={p.onSource}>Show source</button></div>
     {reason && <p className="notice warning" data-testid="recipe-disabled">{reason}</p>}
     <p className="notice">{p.context?.visibility}</p>
     {!evidenceCurrent && <p className="notice warning">Source or dependencies changed. Validate to refresh catalogue matches and requirement evidence; drafts are retained.</p>}
     {view === "Requirements" && <>
       {cap?.editable && <><div className="edit-actions"><button disabled={!!reason || !p.canUndo} onClick={p.onUndo}>Undo recipe</button><button disabled={!!reason || !p.canRedo} onClick={p.onRedo}>Redo recipe</button><small>Raw and variant-ID edits clear recipe history.</small></div>
       <fieldset disabled={!!reason} className="item-properties"><legend>Immediate recipe properties</legend>
-        <label>Name<input aria-label="Recipe name" value={typeof values.name === "string" ? values.name : ""} onChange={e=>edit(["name"],e.target.value)} /></label>
-        <label>Description<textarea aria-label="Recipe description" value={typeof values.description === "string" ? values.description : ""} onChange={e=>edit(["description"],e.target.value)} /></label>
-        <label>Category<select aria-label="Recipe category" value={typeof values.category === "string" ? values.category : ""} onChange={e=>edit(["category"],e.target.value)}><option value="">Uncategorized</option>{p.context?.categories.map(c=><option key={c}>{c}</option>)}</select></label>
-        <label><input aria-label="Recipe known" type="checkbox" checked={values.known !== false} onChange={e=>edit(["known"],e.target.checked)} /> Known at startup (default: true)<small>False displays an unknown recipe and blocks CraftScreen execution; no learning route is established.</small></label>
+        <ContractFields family={p.family} values={values} onChange={edit} />
       </fieldset></>}
       {!cap?.editable && <p className="asset-description">{String(values.description || "")}</p>}
-      {groups.map(([field,title]) => {
-        const registry = field === "requires_ambient" ? p.context?.ambient_tags : p.context?.keywords;
+      {groups.map(([field,schema]) => {
+        const title = schema.title || field;
+        const options = p.family.references[schema.items?.properties?.tag["x-reference"] || ""] || [];
         const rows = values[field] === undefined ? [] : values[field];
         const validRows = Array.isArray(rows) && rows.every(r=>r && typeof r === "object" && !Array.isArray(r));
         return <section key={field}><h3>{title}</h3>
           <p className="muted small">{field === "requires_ambient" ? "Conditions, not automatically consumed item inputs. Any matching ambient source satisfies a row; quantity is not consumed." : field === "tools" ? "Distinct physical instances fill tool slots and remain in inventory. Defaults: minimum tier 1, quantity 1." : "Ordered physical requirements. Each instance fills one slot. Repeated requirements stay separate. Defaults: minimum tier 1, quantity 1."}</p>
           {validRows ? <div className="recipe-table-scroll"><table className="pool-table"><thead><tr><th>Row</th><th>Tag</th><th>Minimum tier</th>{field !== "requires_ambient" && <th>Quantity</th>}<th>{cap?.editable ? "Edit / potential tag matches" : "Potential tag matches"}</th></tr></thead><tbody>
-            {rows.map((row,i)=><tr key={i}><td>{i+1}</td><td>{cap?.editable ? <select disabled={!!reason} aria-label={`${field} tag ${i+1}`} value={typeof row.tag === "string" ? row.tag : ""} onChange={e=>edit([field,i,"tag"],e.target.value)}>
-              {!registry?.[String(row.tag)] && <option value={String(row.tag || "")}>Unknown tag</option>}{Object.keys(registry || {}).sort().map(k=><option key={k}>{k}</option>)}</select> : String(row.tag)}</td>
-              <td>{cap?.editable ? <input disabled={!!reason} aria-label={`${field} tier ${i+1}`} type="number" min={cap.tier_min} max={cap.tier_max} step="1" value={typeof row.min_tier === "number" ? row.min_tier : row.min_tier === undefined ? 1 : ""} onChange={e=>{if(e.target.value !== "") edit([field,i,"min_tier"],Number(e.target.value));}} /> : String(row.min_tier ?? 1)}</td>
-              {field !== "requires_ambient" && <td>{cap?.editable ? <input disabled={!!reason} aria-label={`${field} quantity ${i+1}`} type="number" min="1" max={cap.quantity_max} step="1" value={typeof row.quantity === "number" ? row.quantity : row.quantity === undefined ? 1 : ""} onChange={e=>{if(e.target.value !== "") edit([field,i,"quantity"],Number(e.target.value));}} /> : String(row.quantity ?? 1)}</td>}
+            {rows.map((row,i)=><tr key={i}><td>{i+1}</td>
+              {Object.entries(schema.items?.properties || {}).map(([key,cell])=><td key={key}>{cap?.editable ? <ScalarControl schema={cell} value={row[key]} references={p.family.references} disabled={!!reason} label={`${field} ${key === "min_tier" ? "tier" : key} ${i+1}`} onChange={value=>edit([field,i,key],value)} /> : String(row[key] ?? cell.default ?? "Absent")}</td>)}
               <td>{cap?.editable && <div className="edit-actions">{(["up","down","remove"] as const).map(action=><button key={action} disabled={!!reason || action === "up" && i === 0 || action === "down" && i === rows.length-1} aria-label={`${action} ${field} ${i+1}`} onClick={()=>p.onEdit(s=>recipeRow(s,field,action,i),`${action} requirement`)}>{action === "up" ? "↑" : action === "down" ? "↓" : "Remove"}</button>)}</div>}
               {field !== "requires_ambient" && (evidenceCurrent ? <details><summary>Potential tag matches ({links(field,i).length})</summary>{links(field,i).map(m=><div key={m.path+m.pointer}><button disabled={p.busy} onClick={()=>p.onItem(m.id,m.path)}>{m.id}</button><small>{m.path}{m.pointer}{!m.automatic_material && field === "components" ? " · explicit material choice required" : ""}</small></div>)}<small>Tag/tier only; quantities, knowledge, access and ambient conditions are unverified here.</small></details> : <small>Validate to refresh matches.</small>)}</td></tr>)}
           </tbody></table></div> : <p className="notice warning">Repair {field} in Source; expected an array of requirement records.</p>}
-          {cap?.editable && <div className="edit-actions"><label>Add {title.toLowerCase()}<select disabled={!!reason} aria-label={`New ${field} tag`} value={tags[field] || ""} onChange={e=>setTags({...tags,[field]:e.target.value})}><option value="">Choose tag ID</option>{Object.keys(registry || {}).sort().map(k=><option key={k}>{k}</option>)}</select></label><button disabled={!!reason || !validRows || !tags[field]} onClick={()=>p.onEdit(s=>recipeRow(s,field,"add",-1,tags[field]),"Add requirement")}>Add {field} row</button></div>}
+          {cap?.editable && <div className="edit-actions"><label>Add {title.toLowerCase()}<select disabled={!!reason} aria-label={`New ${field} tag`} value={tags[field] || ""} onChange={e=>setTags({...tags,[field]:e.target.value})}><option value="">Choose tag ID</option>{options.map(r=><option key={r.id} value={r.id}>{r.label}</option>)}</select></label><button disabled={!!reason || !validRows || !tags[field]} onClick={()=>p.onEdit(s=>recipeRow(s,field,"add",-1,tags[field],rowDefaults(schema,tags[field])),"Add requirement")}>Add {field} row</button></div>}
         </section>;
       })}
       {values.requires_single_item !== undefined && <><h3>Single-item conjunction · read-only</h3><pre className="raw">{JSON.stringify(values.requires_single_item,null,2)}</pre><p>All tags must hold on each physical item. List form uses one item; object form uses max_quantity (default 1).</p>{links("requires_single_item",0).map(m=><button key={m.path+m.pointer} disabled={p.busy} onClick={()=>p.onItem(m.id,m.path)}>{m.id}</button>)}</>}
     </>}
     {view === "Output" && <>
       <h3>Declared output</h3><code>{values.result_item !== undefined ? `result_item = ${JSON.stringify(values.result_item)}` : `result_tile = ${JSON.stringify(values.result_tile)}`}</code>
-      {cap?.editable && <label>Output item<select disabled={!!reason} aria-label="Recipe output item" value={String(values.result_item || "")} onChange={e=>edit(["result_item"],e.target.value)}>{!p.context?.items.some(i=>i.id===values.result_item) && <option value={String(values.result_item || "")}>Unresolved item</option>}{p.context?.items.map(i=><option key={i.id} value={i.id}>{i.id} · {i.name}</option>)}</select></label>}
+      {cap?.editable && <fieldset disabled={!!reason}><ContractFields family={p.family} values={values} view="Output" onChange={edit} /></fieldset>}
       <p>{evidenceCurrent && record?.output.resolved ? "Catalogue-resolved item reference" : "Reference not currently resolved"}</p>
       {evidenceCurrent && record?.output.sources.map(s=><div key={s.path+s.pointer}><button disabled={p.busy} onClick={()=>p.onItem(record.output.id!,s.path)}>Open output item {record.output.id}</button><code>{s.path}{s.pointer}</code></div>)}
       <p>Only the separate test receipt records an observed factory output or inventory exchange.</p>

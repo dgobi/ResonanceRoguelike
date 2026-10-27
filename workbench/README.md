@@ -1,10 +1,16 @@
-# Resonance Workbench · W4C
+# Resonance Workbench · W5A
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, inert component items,
 one immediate recipe family, ordinary revenant variants and direct creature
 placement in authored underground layouts. The game remains the
 validation authority. No campaign, running game or Internet service is required.
+
+Item and immediate-recipe controls now use the selected game's registered content
+contract and the same exact-source document lifecycle. See
+[content contracts](docs/CONTENT_CONTRACTS.md) for the extension seam, supported
+control vocabulary, default handling and publication boundaries. Other editor
+families retain their existing supported operations.
 
 ## Place a creature in an authored underground room
 
@@ -481,7 +487,7 @@ W4C creature-only drafts; ordinary buildings retain the W1/W2 workflow above.
 This workstation is preconfigured for `G:\GameDev\RoguelikeProject`. Open
 **Launch Workbench.vbs** in this folder (or the corrected desktop shortcut).
 The application selects the checkout, verifies the bundled Python/bridge and
-protocol 7 capabilities, opens the content browser and generates the initial
+protocol 8 capabilities, opens the content browser and generates the initial
 production preview. No source chooser, Python installation or environment
 variable is needed. Installed NSIS distributions use their installed application
 shortcut; installed-shortcut and clean-machine WebView2 provisioning are untested.
@@ -609,7 +615,7 @@ CPython runtime without the game dependency wheels.
 
 ## Contract and limits
 
-The protocol is **7**, worker/app **0.8.0**, game structure contract **g2-2**,
+The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-2**,
 item contract **component-1**, recipe contract **immediate-components-1**, and
 creature contract **revenant-hp-1**, with Workbench layout capability
 **direct-creatures-1** (existing G17 rules, no game schema change).

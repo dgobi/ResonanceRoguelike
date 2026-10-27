@@ -68,7 +68,7 @@ async function run(name,options={},action=async()=>{}) {
       assert(!(await page.locator('footer').innerText()).includes('WORKER_MISSING'));
       entry.ready_ms=Math.round(performance.now()-start);entry.visible_status=await page.getByTestId('startup-ready').innerText();
       const identify=await ipc(page,'worker_request',{request:{op:'identify'}});assert(identify.ok,JSON.stringify(identify));entry.identity=identify.result;
-      assert.equal(identify.result.protocol,7);assert.equal(identify.result.runtime.imports_verified,true);
+      assert.equal(identify.result.protocol,8);assert.equal(identify.result.runtime.imports_verified,true);
       assert.equal(identify.result.host_runtime.mode,options.mode || 'bundled');
       assert.equal(JSON.parse(await readFile(resolve(config,'project.json'),'utf8')).project_root,expected);
       await action(page,entry,config);

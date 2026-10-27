@@ -25,8 +25,8 @@ sys.dont_write_bytecode = True
 # This small preview needs no parallel BLAS. Bound native thread-pool overhead
 # before importing NumPy/tcod; the game's algorithms and data stay unchanged.
 os.environ.update(OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1", MKL_NUM_THREADS="1")
-PROTOCOL = 7
-WORKER_VERSION = "0.8.0"
+PROTOCOL = 8
+WORKER_VERSION = "0.9.0"
 ROUTE = "authored_submap"
 EDIT_ROUTE = "ordinary_building"
 POOL_ROUTE = "contextual_loot_pool"
@@ -192,46 +192,8 @@ def discover(root, data=None):
                      "height": raw.get("height") if type(raw.get("height")) is int else None,
                      "provenance": "Selected checkout / content file", "validation": "invalid" if diagnostics else "not yet checked",
                      "diagnostics": diagnostics})
-    from engine.item_authoring import capability
-    sources = definition_sources(root / "roguelike/data", "items")
-    for p in sorted((root / "roguelike/data/items").rglob("*.json")):
-        relative = p.relative_to(root).as_posix()
-        try:
-            raw = read_document(p)
-            records = list(enumerate(raw)) if isinstance(raw, list) else [(None, raw)]
-        except StructureError:
-            records = [(None, {})]
-        for index, raw in records:
-            raw = raw if isinstance(raw, dict) else {}
-            pointer = "" if index is None else f"/{index}"
-            identifier = raw.get("id", p.stem)
-            locations = [s for key, ss in sources.items() if isinstance(identifier, str) and key.casefold() == identifier.casefold() for s in ss]
-            unique = len(locations) == 1
-            cap = capability(raw, relative, pointer)
-            rows.append(dict(path=relative, pointer=pointer, id=str(identifier), name=str(raw.get("name", "")),
-                category=str(raw.get("category", "unknown")), route=ITEM_ROUTE, editable=cap["editable"] and unique,
-                provenance="Selected checkout / recursive item definition", validation="ambiguous / invalid source" if not unique else "not yet checked",
-                source_paths=[s["path"] + s["pointer"] for s in locations]))
-    from engine.recipe_authoring import capability as recipe_capability
-    recipes = definition_sources(root / "roguelike/data", "recipes")
-    for p in sorted((root / "roguelike/data/recipes").rglob("*.json")):
-        relative = p.relative_to(root).as_posix()
-        try:
-            raw = read_document(p)
-            records = list(enumerate(raw)) if isinstance(raw, list) else [(None, raw)]
-        except StructureError:
-            records = [(None, {})]
-        for index, raw in records:
-            raw = raw if isinstance(raw, dict) else {}
-            pointer = "" if index is None else f"/{index}"
-            identifier = str(raw.get("id", p.stem))
-            locations = [s for key, ss in recipes.items() if key.casefold() == identifier.casefold() for s in ss]
-            cap = recipe_capability(raw, relative, pointer)
-            rows.append(dict(path=relative, pointer=pointer, id=identifier, name=str(raw.get("name", "")),
-                category=str(raw.get("category", "")), result_item=raw.get("result_item"), route=RECIPE_ROUTE,
-                editable=cap["editable"] and len(locations) == 1, execution_class=cap["execution_class"],
-                provenance="Selected checkout / recursive recipe definition", validation="ambiguous / invalid source" if len(locations) != 1 else "not yet checked",
-                source_paths=[s["path"] + s["pointer"] for s in locations]))
+    from engine.content_authoring import families
+    for family in families(): rows.extend(family.discover(root))
     from engine.creature_authoring import capability as creature_capability, source_matches
     entities = definition_sources(root / "roguelike/data", "entities")
     for p in sorted((root / "roguelike/data/entities").rglob("*.json")):
@@ -430,18 +392,8 @@ def layout_validation(request, root, scratch, identity):
 
 
 def definition_sources(data_root, family):
-    """Mirror _load_dir's object/array file convention, without choosing a duplicate winner."""
-    sources = {}
-    for path in sorted((data_root / family).rglob("*.json")):
-        try:
-            raw = json.loads(path.read_text(encoding="utf-8"))
-        except (ValueError, OSError):
-            continue
-        for index, row in enumerate(raw if isinstance(raw, list) else [raw]):
-            if isinstance(row, dict) and isinstance(row.get("id"), str):
-                sources.setdefault(row["id"], []).append({"path": "roguelike/data/" + path.relative_to(data_root).as_posix(),
-                    "pointer": f"/{index}" if isinstance(raw, list) else "", "definition": row})
-    return sources
+    from engine.content_authoring import definition_sources as sources
+    return sources(data_root, family)
 
 
 def pool_diagnostics(raw, data, path, data_root):
@@ -538,153 +490,6 @@ def pool_validation(request, root, scratch, identity):
             "limitations": "Exact pool accepted by DataLoader and Validator.pool. No contents sampled here. Link a building variant and run Preview draft for actual container population. Saving a pool does not assign any container or select any structure."}
 
 
-def item_context(raw, data, path, data_root, identity, digest):
-    from engine.item_authoring import capability, use_binding, validate_definition, factory_preview, references
-    sources = definition_sources(data_root, "items")
-    recipes = definition_sources(data_root, "recipes")
-    pools = definition_sources(data_root, "loot_pools")
-    records = []
-    for index, definition in enumerate(raw if isinstance(raw, list) else [raw]):
-        if not isinstance(definition, dict): continue
-        pointer = f"/{index}" if isinstance(raw, list) else ""
-        diagnostics = validate_definition(definition, data, path, sources)
-        cap = capability(definition, path, pointer)
-        ambiguous = any(d["code"] in ("DUPLICATE_ID", "LOADER_IDENTITY") for d in diagnostics)
-        cap["editable"] = cap["editable"] and not ambiguous
-        if ambiguous: cap["reason"] = "Read-only: ambiguous or unloaded source identity. See Validation for every path."
-        observed = None
-        if not any(d["severity"] == "error" for d in diagnostics):
-            try:
-                observed = {**factory_preview(definition, data), "definition_sha256": digest,
-                            "source": identity, "path": path, "pointer": pointer,
-                            "observed_at_utc": datetime.now(timezone.utc).isoformat(),
-                            "loaded_catalog_sha256": data.structure_catalog.identity}
-            except (ValueError, TypeError, KeyError) as error:
-                diagnostics.append(dict(severity="error", code="ITEM_FACTORY", path=path, asset=str(definition.get("id", "")),
-                                        field="", message=str(error), correction="Correct invalid factory fields before publication."))
-        refs = []
-        for pool_id, locations in sorted(pools.items()):
-            for location in locations:
-                entries = location["definition"].get("items", [])
-                for i, entry in enumerate(entries if isinstance(entries, list) else []):
-                    if isinstance(entry, dict) and entry.get("item_id") == definition.get("id"):
-                        refs.append(dict(id=pool_id, path=location["path"], pointer=location["pointer"], index=i,
-                                         field=f"items[{i}].item_id", unique=len(locations) == 1))
-        from engine.recipe_authoring import item_relations
-        records.append(dict(id=definition.get("id", ""), pointer=pointer, definition=definition, capability=cap,
-                            diagnostics=diagnostics, use=use_binding(definition), pools=refs,
-                            recipes=item_relations(definition.get("id"), data, recipes) if not ambiguous else [],
-                            dependencies=references(definition, data, recipes) if not ambiguous else [], factory=observed))
-    return {"records": records, "keywords": data.keywords,
-            "snapshot": "Opened source snapshot; edits require validation for refreshed references, binding and factory evidence."}
-
-
-def item_validation(request, root, scratch, identity):
-    from engine.data_loader import DataLoader
-    from engine.item_authoring import validate_definition, CONTRACT
-    from generation.structure_contract import read_document, StructureError
-    path = asset_path(root, request["asset"], new=True)
-    draft = request.get("draft")
-    if not isinstance(draft, str) or len(draft.encode("utf-8")) > 1024 * 1024:
-        fail("MALFORMED_REQUEST", "Expected item draft up to 1 MiB.", "Use a supported component definition.")
-    copied = scratch / "data"
-    shutil.copytree(root / "roguelike/data", copied)
-    selected = copied / path.relative_to(root / "roguelike/data")
-    selected.write_bytes(draft.encode("utf-8"))
-    digest = hashlib.sha256(draft.encode("utf-8")).hexdigest()
-    diagnostics = []; context = None; syntax = False
-    try:
-        raw = read_document(selected); syntax = True
-        data = DataLoader(str(copied))
-        diagnostics = validate_definition(raw, data, request["asset"], definition_sources(copied, "items"), writable=True)
-        if not any(d["severity"] == "error" for d in diagnostics):
-            context = item_context(raw, data, request["asset"], copied, identity, digest)
-            diagnostics.extend(context["records"][0]["diagnostics"])
-    except StructureError as error:
-        diagnostics = [d.json() for d in error.diagnostics]
-        if isinstance(error.__cause__, json.JSONDecodeError):
-            for d in diagnostics: d.update(line=error.__cause__.lineno, column=error.__cause__.colno)
-    for d in diagnostics:
-        d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
-    after = source_identity(root)
-    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
-        fail("SOURCE_CHANGED", "Dependencies changed during item validation.", "Validate again.")
-    observed = context["records"][0]["factory"] if context else None
-    valid = syntax and observed is not None and not any(d["severity"] == "error" for d in diagnostics)
-    return dict(valid=valid, syntax_valid=syntax, contract_valid=valid, references_valid=valid,
-                diagnostics=diagnostics, draft_sha256=digest, route=ITEM_ROUTE, contract="g2-2", item_contract=CONTRACT,
-                worker_version=WORKER_VERSION, worker_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                path=request["asset"], source=identity, item_context=context, factory=observed,
-                factory_verified=bool(observed), population_verified=False, preview=None,
-                limitations="Exact staged bytes loaded and an unowned item instantiated by the actual factory. No use action, pool sampling, world selection or saved instance changed.")
-
-
-def recipe_context(raw, data, path, data_root, identity, digest, *, observe=False):
-    from engine.recipe_authoring import capability, validate_definition, candidates, probe, ambient_catalog, VISIBILITY
-    sources = definition_sources(data_root, "recipes")
-    items = definition_sources(data_root, "items")
-    records = []
-    for index, definition in enumerate(raw if isinstance(raw, list) else [raw]):
-        if not isinstance(definition, dict): continue
-        pointer = f"/{index}" if isinstance(raw, list) else ""
-        cap = capability(definition, path, pointer)
-        diagnostics = validate_definition(definition, data, path, sources, items)
-        if any(d["code"] in ("RECIPE_ID", "DUPLICATE_RECIPE", "LOADER_IDENTITY") for d in diagnostics):
-            cap["editable"] = False; cap["reason"] = "Not supported: ambiguous or unloaded source. Inspect the diagnostic paths."
-        output_id = definition.get("result_item")
-        output_sources = items.get(output_id, []) if isinstance(output_id, str) else []
-        observed = None
-        if observe and cap["editable"] and not any(d["severity"] == "error" for d in diagnostics):
-            observed = probe(definition, data, items, path, digest, identity)
-            observed["observed_at_utc"] = datetime.now(timezone.utc).isoformat()
-            observed["loaded_catalog_sha256"] = data.structure_catalog.identity
-        records.append(dict(id=definition.get("id", ""), pointer=pointer, definition=definition, capability=cap,
-                            diagnostics=diagnostics, candidates=candidates(definition, data, items), probe=observed,
-                            output=dict(id=output_id, resolved=isinstance(output_id, str) and output_id in data.items and len(output_sources) == 1,
-                                        sources=[dict(path=s["path"], pointer=s["pointer"]) for s in output_sources])))
-    return dict(records=records, keywords=data.keywords, ambient_tags=ambient_catalog(data), visibility=VISIBILITY,
-                categories=sorted({r.get("category") for r in data.recipes.values() if isinstance(r.get("category"), str)}),
-                items=[dict(id=key, name=str(data.items.get(key, {}).get("name", key))) for key, ss in sorted(items.items())
-                       if key in data.items and len([s for k, rows in items.items() if k.casefold() == key.casefold() for s in rows]) == 1])
-
-
-def recipe_validation(request, root, scratch, identity):
-    from engine.data_loader import DataLoader
-    from engine.recipe_authoring import validate_definition, CONTRACT
-    from generation.structure_contract import read_document, StructureError
-    path = asset_path(root, request["asset"], new=True)
-    draft = request.get("draft")
-    if not isinstance(draft, str) or len(draft.encode("utf-8")) > 1024 * 1024:
-        fail("MALFORMED_REQUEST", "Expected recipe draft up to 1 MiB.", "Use the bounded recipe controls.")
-    copied = scratch / "data"
-    shutil.copytree(root / "roguelike/data", copied)
-    selected = copied / path.relative_to(root / "roguelike/data")
-    selected.write_bytes(draft.encode("utf-8"))
-    digest = hashlib.sha256(draft.encode("utf-8")).hexdigest()
-    diagnostics = []; context = None; syntax = False
-    try:
-        raw = read_document(selected); syntax = True
-        data = DataLoader(str(copied))
-        diagnostics = validate_definition(raw, data, request["asset"], definition_sources(copied, "recipes"), definition_sources(copied, "items"), writable=True)
-        if not any(d["severity"] == "error" for d in diagnostics):
-            context = recipe_context(raw, data, request["asset"], copied, identity, digest, observe=True)
-    except StructureError as error:
-        diagnostics = [d.json() for d in error.diagnostics]
-        if isinstance(error.__cause__, json.JSONDecodeError):
-            for d in diagnostics: d.update(line=error.__cause__.lineno, column=error.__cause__.colno)
-    for d in diagnostics:
-        d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
-    after = source_identity(root)
-    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
-        fail("SOURCE_CHANGED", "Dependencies changed during recipe validation.", "Validate again.")
-    valid = syntax and context is not None and not any(d["severity"] == "error" for d in diagnostics)
-    return dict(valid=valid, syntax_valid=syntax, contract_valid=valid, references_valid=valid, diagnostics=diagnostics,
-                draft_sha256=digest, path=request["asset"], source=identity, route=RECIPE_ROUTE, contract="g2-2", recipe_contract=CONTRACT,
-                worker_version=WORKER_VERSION, worker_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                recipe_context=context, preview=None, population_verified=False,
-                limitations="Recipe contract and output factory checked. Probe cases separately report actual eligibility and isolated production exchange; validation is not a claim of ordinary player crafting or acquisition.")
-
-
 def creature_indexes(data_root):
     return {family: definition_sources(data_root, family) for family in ("entities", "items", "bodies", "zones")}
 
@@ -768,6 +573,64 @@ def creature_validation(request, root, scratch, identity):
                 creature_context=context, factory_verified=bool(observed), preview=None, population_verified=False, limitations=SCOPE)
 
 
+def capability_diagnostics(envelope, path):
+    return [dict(severity="error", code="UNSUPPORTED_CAPABILITY", path=path, asset="", field="contract",
+                 message=message, correction="Use a compatible game-owned descriptor; inspect exact Source.") for message in envelope["problems"]]
+
+
+def family_validation(family, request, root, scratch, identity):
+    from engine.data_loader import DataLoader
+    from engine.content_authoring import family_for
+    from generation.structure_contract import read_document, StructureError
+    path = asset_path(root, request["asset"], new=True)
+    draft = request.get("draft")
+    if not isinstance(draft, str) or len(draft.encode("utf-8")) > 1024 * 1024:
+        fail("MALFORMED_REQUEST", "Expected UTF-8 draft up to 1 MiB.", "Use a bounded definition.")
+    source_asset = request.get("source_asset") or request["asset"]
+    source_family = family_for(source_asset)
+    if not source_family or source_family.id != family.id:
+        fail("SOURCE_ENTITLEMENT", "Candidate and original must belong to the same registered family.", "Open the original discovered source.")
+    original = asset_path(root, source_asset)
+    digest = hashlib.sha256(draft.encode("utf-8")).hexdigest()
+    diagnostics = []; context = None; syntax = False
+    envelope = family.envelope(None)
+    diagnostics += capability_diagnostics(envelope, source_asset)
+    copied = scratch / "data"
+    try:
+        original_raw = read_document(original)
+        original_data = DataLoader(str(root / "roguelike/data"))
+        original_context = family.context(original_raw, original_data, source_asset, root / "roguelike/data", identity, hashlib.sha256(original.read_bytes()).hexdigest())
+        if not family.eligible(original_context):
+            diagnostics.append(dict(severity="error", code="SOURCE_ENTITLEMENT", path=source_asset, asset="", field="",
+                message="Original discovered source is read-only; changing candidate shape cannot upgrade it.", correction="Choose a supported unambiguous original source."))
+        shutil.copytree(root / "roguelike/data", copied)
+        selected = copied / path.relative_to(root / "roguelike/data")
+        selected.write_bytes(draft.encode("utf-8"))
+        raw = read_document(selected); syntax = True
+        data = DataLoader(str(copied))
+        diagnostics += family.validate(raw, data, request["asset"], copied)
+        if not any(d["severity"] == "error" for d in diagnostics):
+            context = family.context(raw, data, request["asset"], copied, identity, digest, observe=True)
+            diagnostics += [d for record in context["records"] for d in record["diagnostics"]]
+    except StructureError as error:
+        diagnostics += [d.json() for d in error.diagnostics]
+        if isinstance(error.__cause__, json.JSONDecodeError):
+            for d in diagnostics: d.update(line=error.__cause__.lineno, column=error.__cause__.colno)
+    for d in diagnostics: d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
+    after = source_identity(root)
+    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+        fail("SOURCE_CHANGED", "Dependencies changed during validation.", "Reopen and validate again.")
+    evidence = family.module.authoring_evidence(context)
+    valid = syntax and evidence["semantic_verified"] and not any(d["severity"] == "error" for d in diagnostics)
+    return dict(valid=valid, syntax_valid=syntax, contract_valid=valid, references_valid=valid,
+                diagnostics=diagnostics, draft_sha256=digest, route=family.route, contract="g2-2",
+                family=family.envelope(context), source_asset=source_asset,
+                source_sha256=hashlib.sha256(original.read_bytes()).hexdigest(),
+                worker_version=WORKER_VERSION, worker_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                path=request["asset"], source=identity, population_verified=False, preview=None,
+                limitations=family.module.LIMITATIONS, **evidence)
+
+
 def draft_validation(request, root, scratch, identity):
     from engine.data_loader import DataLoader
     from generation.structure_contract import read_document, compile_structure, StructureError
@@ -778,10 +641,10 @@ def draft_validation(request, root, scratch, identity):
         return layout_validation(request, root, scratch, identity)
     if path.is_relative_to(root / "roguelike/data/entities"):
         return creature_validation(request, root, scratch, identity)
-    if path.is_relative_to(root / "roguelike/data/recipes"):
-        return recipe_validation(request, root, scratch, identity)
-    if path.is_relative_to(root / "roguelike/data/items"):
-        return item_validation(request, root, scratch, identity)
+    from engine.content_authoring import family_for
+    family = family_for(request["asset"])
+    if family:
+        return family_validation(family, request, root, scratch, identity)
     if path.parent.name == "loot_pools":
         return pool_validation(request, root, scratch, identity)
     if path.parent.parent.name != "buildings":
@@ -910,15 +773,14 @@ def run(request, root, scratch):
     config.DEBUG_MODE = False
     from engine.data_loader import DataLoader
     from generation.structure_contract import CONTRACT_VERSION, CAPABILITIES, compile_structure, read_document, StructureError
-    from engine.recipe_authoring import CONTRACT as RECIPE_CONTRACT
+    from engine.content_authoring import families, family_for
     from engine.creature_authoring import CONTRACT as CREATURE_CONTRACT
     if CREATURE_CONTRACT != "revenant-hp-1":
         fail("CONTRACT_MISMATCH", "Unsupported creature authoring contract.", "Use matching game and Workbench sources.")
-    if RECIPE_CONTRACT != "immediate-components-1":
-        fail("CONTRACT_MISMATCH", "Unsupported recipe authoring contract.", "Use matching game and Workbench sources.")
     from generation.structure_preview import preview
+    registered = families()
     imported_sources = {}
-    for name in ("config", "engine.data_loader", "generation.structure_contract", "generation.structure_preview", "engine.recipe_authoring", "engine.creature_authoring"):
+    for name in ("config", "engine.data_loader", "generation.structure_contract", "generation.structure_preview", "engine.content_authoring", "engine.item_authoring", "engine.recipe_authoring", "engine.creature_authoring"):
         module_path = Path(sys.modules[name].__file__).resolve()
         if not module_path.is_relative_to(root / "roguelike"):
             fail("SOURCE_IMPORT_MISMATCH", f"{name} was imported outside the selected project.", "Use the selected current checkout with the pinned isolated interpreter.")
@@ -942,7 +804,7 @@ def run(request, root, scratch):
                 "route": ROUTE, "validator": "generation.structure_contract.compile_structure",
                 "preview": "generation.structure_preview.preview → engine.scene_generation.create_submap → generation.local_gen.generate_submap",
                 "edit_route": EDIT_ROUTE,
-                "recipe_contract": RECIPE_CONTRACT,
+                "families": [f.envelope(None) for f in registered],
                 "creature_contract": CREATURE_CONTRACT,
                 "layout_contract": LAYOUT_CONTRACT,
                 "unavailable": ["authored-submap terrain/decor editing", "advanced item/recipe editing", "native world selection", "game renderer/FOV", "combat simulation"],
@@ -976,36 +838,24 @@ def run(request, root, scratch):
                     editable=bool(context and len(context["records"]) == 1 and context["records"][0]["capability"]["editable"]),
                     diagnostics=diagnostics, raw=source.decode("utf-8"), sha256=hashlib.sha256(source).hexdigest(),
                     mtime_ns=str(before.st_mtime_ns), source_unchanged=True, source=identity, creature_context=context)
-    if path.is_relative_to(root / "roguelike/data/recipes"):
+    family = family_for(request["asset"])
+    if family:
         if op != "inspect" or request.get("invalid_fixture"):
-            fail("UNSUPPORTED_OPERATION", "Recipes use requirements inspection.", "Open a recipe and validate to run the disposable probe.")
-        context = recipe_context(raw, data, request["asset"], root / "roguelike/data", identity, hashlib.sha256(source).hexdigest()) if data and not raw_error else None
+            fail("UNSUPPORTED_OPERATION", "Registered content uses exact-source validation.", "Open the source and validate its draft.")
+        context = family.context(raw, data, request["asset"], root / "roguelike/data", identity, hashlib.sha256(source).hexdigest()) if data and not raw_error else None
         diagnostics = ([d.json() for d in (raw_error or catalog_error).diagnostics] if raw_error or catalog_error else
                        [d for r in context["records"] for d in r["diagnostics"]])
+        envelope = family.envelope(context)
+        diagnostics += capability_diagnostics(envelope, request["asset"])
         after = source_identity(root)
         if path.read_bytes() != source or any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
-            fail("SOURCE_CHANGED", "Recipe or dependency changed during inspection.", "Reopen the recipe.")
+            fail("SOURCE_CHANGED", "Source or dependency changed during inspection.", "Reopen the document.")
         single = raw if isinstance(raw, dict) else {}
-        return dict(id=single.get("id", path.stem), path=request["asset"], route=RECIPE_ROUTE,
+        return dict(id=single.get("id", path.stem), path=request["asset"], route=family.route,
                     description=str(single.get("description", "")), valid=not any(d["severity"] == "error" for d in diagnostics),
-                    editable=bool(context and len(context["records"]) == 1 and context["records"][0]["capability"]["editable"]),
+                    editable=family.eligible(context) and envelope["compatible"], family=envelope,
                     diagnostics=diagnostics, raw=source.decode("utf-8"), sha256=hashlib.sha256(source).hexdigest(),
-                    mtime_ns=str(before.st_mtime_ns), source_unchanged=True, source=identity, recipe_context=context)
-    if path.is_relative_to(root / "roguelike/data/items"):
-        if op != "inspect" or request.get("invalid_fixture"):
-            fail("UNSUPPORTED_OPERATION", "Items use definition-to-instance inspection.", "Open an item from the catalogue.")
-        context = item_context(raw, data, request["asset"], root / "roguelike/data", identity, hashlib.sha256(source).hexdigest()) if data and not raw_error else None
-        diagnostics = ([d.json() for d in (raw_error or catalog_error).diagnostics] if raw_error or catalog_error else
-                       [d for r in context["records"] for d in r["diagnostics"]])
-        after = source_identity(root)
-        if path.read_bytes() != source or any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
-            fail("SOURCE_CHANGED", "Item or dependency changed during inspection.", "Reopen the item.")
-        single = raw if isinstance(raw, dict) else {}
-        return dict(id=single.get("id", path.stem), path=request["asset"], route=ITEM_ROUTE,
-                    description=str(single.get("description", "")), valid=not any(d["severity"] == "error" for d in diagnostics),
-                    editable=bool(context and len(context["records"]) == 1 and context["records"][0]["capability"]["editable"]),
-                    diagnostics=diagnostics, raw=source.decode("utf-8"), sha256=hashlib.sha256(source).hexdigest(),
-                    mtime_ns=str(before.st_mtime_ns), source_unchanged=True, source=identity, item_context=context)
+                    mtime_ns=str(before.st_mtime_ns), source_unchanged=True, source=identity)
     if path.parent.name == "loot_pools":
         if op != "inspect" or request.get("invalid_fixture"):
             fail("UNSUPPORTED_OPERATION", "Pool inspection does not generate a map.", "Preview a building to observe its actual containers.")

@@ -1,9 +1,11 @@
+import { ContractFields, ScalarControl } from "./ContractControls";
+import { rowDefaults, type ContentFamily } from "./content";
 import { useMemo, useState } from "react";
 import { itemModel, itemValue, keywordEntry } from "./item";
 import type { ItemContext, ItemTrail } from "./protocol";
 
 export function ItemEditor(p: {
-  draft: string; path: string; context?: ItemContext; selectedId?: string; dirty: boolean; validated: boolean;
+  family: ContentFamily; evidenceStale: boolean; draft: string; path: string; context?: ItemContext; selectedId?: string; dirty: boolean; validated: boolean;
   disabled: string; busy: boolean; onCancel: () => void; onReturn?: () => void; trail?: ItemTrail | null;
   onRecipe?: (id: string, path: string) => void;
   onPool?: (id: string) => void; onSource: () => void;
@@ -16,7 +18,7 @@ export function ItemEditor(p: {
   const values = parsed.model || record?.definition || {};
   const [view, setView] = useState("Properties"), [tag, setTag] = useState("");
   const reason = p.disabled || parsed.reason || (!cap?.editable ? cap?.reason || "Capability unavailable." : "");
-  const evidenceCurrent = !p.dirty || p.validated;
+  const evidenceCurrent = !p.evidenceStale && (!p.dirty || p.validated);
   const edit = (path: (string | number)[], value: unknown) => p.onEdit(s => itemValue(s, path, value), "Edit item property");
   const keywords = values.keywords === undefined ? [] : values.keywords;
   const keywordShape = Array.isArray(keywords) && keywords.every(k => k && typeof k === "object" && !Array.isArray(k));
@@ -31,25 +33,20 @@ export function ItemEditor(p: {
       <code>{p.trail.path} → items[{p.trail.index}].item_id = {p.trail.itemId}</code>
       <small>Declared reference when opened. Pool and structure drafts retained; item publication changes no references.</small>
     </nav>}
-    <div className="tabs">{["Properties", "References", "Recipes", "Use binding", "Factory result"].map(v => <button key={v} className={view === v ? "active" : ""} onClick={() => setView(v)}>{v}</button>)}<button onClick={sourceJump}>Show source</button></div>
+    <div className="tabs">{p.family.descriptor.views.map(key=>({"item-properties":"Properties",references:"References",recipes:"Recipes","use-binding":"Use binding",factory:"Factory result"})[key]).filter((v):v is string=>!!v).map(v => <button key={v} className={view === v ? "active" : ""} onClick={() => setView(v)}>{v}</button>)}<button onClick={sourceJump}>Show source</button></div>
     {reason && <p className="notice warning" data-testid="item-disabled">{reason}</p>}
     {!evidenceCurrent && <p className="notice">References, use binding and factory evidence below belong to the opened source. Validate the exact draft to refresh them.</p>}
     {view === "Properties" && <>
       <div className="edit-actions"><button onClick={p.onUndo} disabled={!!reason || !p.canUndo}>Undo item</button><button onClick={p.onRedo} disabled={!!reason || !p.canRedo}>Redo item</button><small>Raw source and variant-ID edits clear item history.</small></div>
       <p className="muted">{cap?.reason}. Category: {String(values.category ?? "not declared")} · appearance: {String(values.tile ?? "factory default")}</p>
       {cap?.editable ? <fieldset disabled={!!reason} className="item-properties"><legend>Supported component properties</legend>
-        {cap.fields.includes("name") && <label>Name<input aria-label="Item name" value={typeof values.name === "string" ? values.name : ""} onChange={e => edit(["name"], e.target.value)} /></label>}
-        {cap.fields.includes("description") && <label>Description<textarea aria-label="Item description" value={typeof values.description === "string" ? values.description : ""} onChange={e => edit(["description"], e.target.value)} /></label>}
-        {cap.fields.includes("weight") && <label>Weight ({cap.weight_unit})<input aria-label="Item weight (kg)" type="number" min="0" step="any" value={typeof values.weight === "number" ? values.weight : ""} placeholder="Factory default: 0.1" onChange={e => {if(e.target.value !== "" && Number.isFinite(Number(e.target.value))) edit(["weight"], Number(e.target.value));}} /></label>}
-        {cap.fields.includes("stackable") && <label><input aria-label="Group in inventory" type="checkbox" checked={values.stackable === true} onChange={e => edit(["stackable"], e.target.checked)} /> Group in inventory<small>{cap.stack_note}</small></label>}
-        {cap.fields.includes("keywords") && <><h3>Keywords</h3><small>{cap.tier_note}</small>
+        <ContractFields family={p.family} values={values} onChange={edit} />
+        {p.family.descriptor.schema.properties?.keywords && <><h3>Keywords</h3><small>{cap.tier_note}</small>
         {keywordShape ? <table className="pool-table"><thead><tr><th>Tag ID</th><th>Tier</th><th>Action</th></tr></thead><tbody>{keywords.map((kw, i) => <tr key={i}>
-          <td><select aria-label={`Keyword ${i+1}`} value={typeof kw.tag === "string" ? kw.tag : ""} onChange={e => edit(["keywords", i, "tag"], e.target.value)}>
-            {!p.context?.keywords[String(kw.tag)] && <option value={String(kw.tag || "")}>Unknown tag</option>}{Object.keys(p.context?.keywords || {}).sort().map(k => <option key={k}>{k}</option>)}</select></td>
-          <td><input aria-label={`Keyword tier ${i+1}`} type="number" min={cap.tier_min} max={cap.tier_max} step="1" value={typeof kw.tier === "number" ? kw.tier : ""} onChange={e => {if(e.target.value !== "") edit(["keywords", i, "tier"], Number(e.target.value));}} /></td>
+          {Object.entries(p.family.descriptor.schema.properties?.keywords.items?.properties || {}).map(([key,schema])=><td key={key}><ScalarControl schema={schema} value={kw[key]} references={p.family.references} label={`${schema.title} ${i+1}`} onChange={value=>edit(["keywords",i,key],value)} /></td>)}
           <td><button onClick={() => p.onEdit(s => keywordEntry(s, i), "Remove keyword")}>Remove keyword {i+1}</button></td></tr>)}</tbody></table> : <p className="notice warning">Repair keywords in Source; expected an array of records.</p>}
-          <div className="edit-actions"><label>Add keyword<select aria-label="New keyword" value={tag} onChange={e => setTag(e.target.value)}><option value="">Choose tag ID</option>{Object.keys(p.context?.keywords || {}).sort().map(k => <option key={k}>{k}</option>)}</select></label>
-          <button disabled={!keywordShape || !tag} onClick={() => p.onEdit(s => keywordEntry(s, -1, tag), "Add keyword")}>Add keyword</button></div></>}
+          <div className="edit-actions"><label>Add keyword<select aria-label="New keyword" value={tag} onChange={e => setTag(e.target.value)}><option value="">Choose tag ID</option>{(p.family.references[p.family.descriptor.schema.properties?.keywords.items?.properties?.tag["x-reference"] || ""] || []).map(r => <option key={r.id} value={r.id}>{r.label}</option>)}</select></label>
+          <button disabled={!keywordShape || !tag} onClick={() => p.onEdit(s => keywordEntry(s, -1, tag, rowDefaults(p.family.descriptor.schema.properties!.keywords, tag)), "Add keyword")}>Add keyword</button></div></>}
       </fieldset> : <pre className="raw">{JSON.stringify(record?.definition, null, 2)}</pre>}
       <p className="muted small">Unknown fields and nested data remain in Source. IDs are the machine identity; renaming the display name does not change references.</p>
     </>}

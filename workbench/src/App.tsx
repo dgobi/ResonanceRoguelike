@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { Authoring } from "./Authoring";
+import { contentViews } from "./ContentEditor";
+import type { ContentFamily } from "./content";
 import { MapView } from "./MapView";
 import { requestLease } from "./requests";
 import {
@@ -68,11 +70,15 @@ export default function App() {
     [category, setCategory] = useState("");
   const [poolDocument, setPoolDocument] = useState<Inspection | null>(null);
   const [poolActive, setPoolActive] = useState(false), [poolDirty, setPoolDirty] = useState(false);
-  const [itemDocument, setItemDocument] = useState<Inspection | null>(null), [itemActive, setItemActive] = useState(false), [itemDirty, setItemDirty] = useState(false);
-  const [recipeDocument, setRecipeDocument] = useState<Inspection | null>(null), [recipeActive, setRecipeActive] = useState(false), [recipeDirty, setRecipeDirty] = useState(false);
+  const [contentDocuments, setContentDocuments] = useState<Record<string,{document:Inspection; dirty:boolean; selectedId:string}>>({});
+  const [activeContent, setActiveContent] = useState("");
+  const itemDocument = contentDocuments.item?.document, recipeDocument = contentDocuments.recipe?.document;
+  const itemActive = activeContent === "item", recipeActive = activeContent === "recipe";
+  const contentDirty = Object.values(contentDocuments).some(d=>d.dirty);
+  const setItemActive = (active:boolean) => setActiveContent(current=>active ? "item" : current === "item" ? "" : current);
+  const setRecipeActive = (active:boolean) => setActiveContent(current=>active ? "recipe" : current === "recipe" ? "" : current);
   const [creatureDocument, setCreatureDocument] = useState<Inspection | null>(null), [creatureActive, setCreatureActive] = useState(false), [creatureDirty, setCreatureDirty] = useState(false);
   const [selectedCreatureId, setSelectedCreatureId] = useState("");
-  const [selectedRecipeId, setSelectedRecipeId] = useState("");
   const itemReturnFocus = useRef<string | null>(null);
   const recipeReturnRelation = useRef("ingredient");
   useEffect(() => {
@@ -87,12 +93,12 @@ export default function App() {
   const [support, setSupport] = useState("");
   const [catalogPage, setCatalogPage] = useState(0);
   useEffect(()=>setCatalogPage(0),[search,category,support,assets]);
-  const [itemTrail, setItemTrail] = useState<ItemTrail | null>(null), [selectedItemId, setSelectedItemId] = useState("");
+  const [itemTrail, setItemTrail] = useState<ItemTrail | null>(null);
   const [trail, setTrail] = useState<SourceTrail | null>(null), [dependencyVersion, setDependencyVersion] = useState(0);
   const [pending, setPending] = useState<null | (() => void)>(null);
   const [canvasHost, setCanvasHost] = useState<HTMLDivElement | null>(null);
   const dirtyRef = useRef(false);
-  dirtyRef.current = dirty || poolDirty || itemDirty || recipeDirty || creatureDirty;
+  dirtyRef.current = dirty || poolDirty || contentDirty || creatureDirty;
   useEffect(() => {
     const unlisten = listen("authoring-close-requested", () => {
       const close = () => {
@@ -122,8 +128,7 @@ export default function App() {
   function clear() {
     setDirty(false);
     setPoolDocument(null); setPoolActive(false); setPoolDirty(false); setTrail(null);
-    setItemDocument(null); setItemActive(false); setItemDirty(false); setItemTrail(null); setSelectedItemId("");
-    setRecipeDocument(null); setRecipeActive(false); setRecipeDirty(false); setSelectedRecipeId("");
+    setContentDocuments({}); setActiveContent(""); setItemTrail(null);
     setCreatureDocument(null); setCreatureActive(false); setCreatureDirty(false); setSelectedCreatureId("");
     setIdentity(null);
     setAssets([]);
@@ -313,33 +318,24 @@ export default function App() {
       setStatus(`Opened ${asset.path}.`);
     } catch (e) { if (token === epoch.current) setError(asFailure(e)); } finally { if (token === epoch.current) setBusy(""); }
   }
-  async function openItem(id: string, context: ItemTrail | null = null, assetPath?: string, discard = false, reload = false) {
-    const matches = assets.filter(a => a.route === "item_definition" && a.id === id && (!assetPath || a.path === assetPath));
-    const asset = matches[0];
-    if (!matches.length || (matches.length !== 1 && !assetPath)) { setError({code:"ITEM_SOURCE", message:`Item ${id} has ${matches.length} catalogue sources: ${matches.map(a => a.path).join(", ")}`, remedy:"Select a specific source file for read-only collision inspection, or refresh after repairing IDs."}); return; }
-    if (!reload && itemDocument?.path === asset.path) { setItemTrail(context); setSelectedItemId(id); setItemActive(true); setCreatureActive(false); setRecipeActive(false); return; }
-    if (itemDirty && !discard) { setPending(() => () => void openItem(id, context, assetPath, true, reload)); return; }
-    const token = ++epoch.current;
-    setBusy("Opening item definition…"); setError(null);
+  async function openContent(family:string,id:string,assetPath?:string,discard=false,reload=false) {
+    const matches=assets.filter(a=>a.family_id === family && a.id === id && (!assetPath || a.path === assetPath)), asset=matches[0];
+    if (!matches.length || matches.length !== 1 && !assetPath) { setError({code:"CONTENT_SOURCE",message:`${id} has ${matches.length} catalogue sources.`,remedy:"Select a specific source file to inspect ambiguity."}); return; }
+    const existing=contentDocuments[family];
+    const activate=()=>{setActiveContent(family);setCreatureActive(false);};
+    if (!reload && existing?.document.path === asset.path) {
+      setContentDocuments(d=>({...d,[family]:{...d[family],selectedId:id}})); activate(); return;
+    }
+    if(existing?.dirty && !discard) {setPending(()=>()=>void openContent(family,id,assetPath,true,reload));return;}
+    const token=++epoch.current;setBusy("Opening content source…");setError(null);
     try {
-      const r = await call<Inspection>("open_document", {asset: asset.path});
-      if (token !== epoch.current) return;
-      setItemDocument(r.result); setItemDirty(false); setItemActive(true); setCreatureActive(false); setRecipeActive(false); setSelectedItemId(id); setItemTrail(context);
-      setStatus(`Opened ${asset.path}. Factory evidence is separate from use behavior.`);
-    } catch(e) { if(token === epoch.current) setError(asFailure(e)); } finally { if(token === epoch.current) setBusy(""); }
+      const r=await call<Inspection>("open_document",{asset:asset.path});if(token!==epoch.current)return;
+      setContentDocuments(d=>({...d,[family]:{document:r.result,dirty:false,selectedId:id}}));activate();
+      setStatus(`Opened ${asset.path}. Semantic evidence uses the registered game contract.`);
+    } catch(e) {if(token===epoch.current)setError(asFailure(e));} finally {if(token===epoch.current)setBusy("");}
   }
-  async function openRecipe(id: string, assetPath?: string, discard = false, reload = false) {
-    const matches = assets.filter(a=>a.route === "recipe_definition" && a.id === id && (!assetPath || a.path === assetPath)), asset=matches[0];
-    if (!matches.length || matches.length !== 1 && !assetPath) { setError({code:"RECIPE_SOURCE",message:`Recipe ${id} has ${matches.length} sources.`,remedy:"Select a specific source file to inspect ambiguity."}); return; }
-    if (!reload && recipeDocument?.path === asset.path) { setSelectedRecipeId(id); setRecipeActive(true); setCreatureActive(false); return; }
-    if (recipeDirty && !discard) { setPending(()=>()=>void openRecipe(id,assetPath,true,reload)); return; }
-    const token=++epoch.current; setBusy("Opening recipe…"); setError(null);
-    try {
-      const r=await call<Inspection>("open_document",{asset:asset.path});
-      if(token !== epoch.current) return;
-      setRecipeDocument(r.result); setRecipeDirty(false); setSelectedRecipeId(id); setRecipeActive(true); setCreatureActive(false);
-      setStatus(`Opened ${asset.path}. Requirements and observed fixture results are separate evidence.`);
-    } catch(e) { if(token === epoch.current) setError(asFailure(e)); } finally { if(token === epoch.current) setBusy(""); }
+  function openItem(id:string,context:ItemTrail|null=null,assetPath?:string,discard=false,reload=false) {
+    setItemTrail(context);return openContent("item",id,assetPath,discard,reload);
   }
   async function openCreature(id: string, assetPath: string, discard = false, reload = false) {
     const asset = assets.find(a=>a.route === "creature_definition" && a.id === id && a.path === assetPath);
@@ -366,34 +362,18 @@ export default function App() {
     itemReturnFocus.current = recipeDocument?.path || null;
     setRecipeActive(false); setItemActive(true); setCreatureActive(false);
   }
-  async function recipeApplied(asset: string, result: unknown) {
-    const token=epoch.current; setRecipeDirty(false); setReceipt(result); setDependencyVersion(v=>v+1);
-    const catalog=await request<{assets:Asset[]}>("describe"); if(token !== epoch.current) return;
+  async function contentApplied(family:string,asset:string,result:unknown) {
+    const token=epoch.current; setReceipt(result); setDependencyVersion(v=>v+1);
+    const catalog=await request<{assets:Asset[]}>("describe"); if(token!==epoch.current)return;
     setAssets(catalog.result.assets);
-    const r=await call<Inspection>("open_document",{asset}); if(token !== epoch.current) return;
-    verifyReopened(r.result,result); setRecipeDocument(r.result); setSelectedRecipeId(r.result.id);
-    if(itemDocument) {
-      const refreshed=await request<Inspection>("inspect",{asset:itemDocument.path}); if(token !== epoch.current) return;
-      setItemDocument(d=>d?.path===refreshed.result.path && d.sha256===refreshed.result.sha256 ? {...d,item_context:refreshed.result.item_context} : d);
+    const reopened=await call<Inspection>("open_document",{asset}); if(token!==epoch.current)return;
+    verifyReopened(reopened.result,result);
+    setContentDocuments(d=>({...d,[family]:{document:reopened.result,dirty:false,selectedId:reopened.result.id}}));
+    if(poolDocument) {
+      const refreshed=await request<Inspection>("inspect",{asset:poolDocument.path});if(token!==epoch.current)return;
+      setPoolDocument(d=>d?.path===refreshed.result.path && d.sha256===refreshed.result.sha256 ? {...d,pool_context:refreshed.result.pool_context}:d);
     }
-    setStatus(`Recipe variant saved and reopened: ${asset}. New sessions discover this file.`);
-  }
-  async function itemApplied(asset: string, result: unknown) {
-    const token = epoch.current;
-    setItemDirty(false); setReceipt(result); setDependencyVersion(v => v+1);
-    const catalog = await request<{assets: Asset[]}>("describe");
-    if (token !== epoch.current) return;
-    setAssets(catalog.result.assets);
-    if (poolDocument) {
-      const refreshed = await request<Inspection>("inspect", {asset: poolDocument.path});
-      if (token !== epoch.current) return;
-      setPoolDocument(d => d?.path === refreshed.result.path && d.sha256 === refreshed.result.sha256 ? {...d, pool_context: refreshed.result.pool_context} : d);
-    }
-    const r = await call<Inspection>("open_document", {asset});
-    if (token !== epoch.current) return;
-    verifyReopened(r.result, result);
-    setItemDocument(r.result); setSelectedItemId(r.result.id);
-    setStatus(`Item saved and reopened: ${asset}. No pool reference changed.`);
+    setStatus(`Saved and byte-checked reopen: ${asset}. ${reopened.result.family?.descriptor.publication_note || ""}`);
   }
   async function poolApplied(asset: string, result: unknown) {
     const token = epoch.current;
@@ -407,11 +387,6 @@ export default function App() {
     if (token !== epoch.current) return;
     verifyReopened(r.result, result);
     setPoolDocument(r.result);
-    if (itemDocument) {
-      const refreshed = await request<Inspection>("inspect", {asset: itemDocument.path});
-      if (token !== epoch.current) return;
-      setItemDocument(d => d?.path === refreshed.result.path && d.sha256 === refreshed.result.sha256 ? {...d, item_context: refreshed.result.item_context} : d);
-    }
     setStatus(`Pool saved and reopened: ${asset}. No container references changed.`);
   }
   async function applied(asset: string, result: unknown) {
@@ -462,7 +437,7 @@ export default function App() {
         <div className="top-meta">
           <span className="chip">W4C</span>
           <span className="read-only">
-            ◈ {dirty || poolDirty || itemDirty || recipeDirty || creatureDirty ? "Unsaved draft" : "Read-only by default"}
+            ◈ {dirty || poolDirty || contentDirty || creatureDirty ? "Unsaved draft" : "Read-only by default"}
           </span>
         </div>
       </header>
@@ -534,7 +509,7 @@ export default function App() {
                   </p>
                   <code>{identity.runtime.executable}</code>
                   <code>{identity.host_runtime.bridge}</code>
-                  <p>{identity.creature_contract} · {identity.recipe_contract}</p>
+                  <p>{identity.creature_contract} · {identity.families?.map(f=>f.contract).join(" · ")}</p>
                   <p>Project: {identity.project_selection.selected_from}</p>
                   <p>
                     Game SHA {short(identity.source.game_source_sha256)}
@@ -591,7 +566,7 @@ export default function App() {
                   disabled={!!busy || a.route === "plaza"}
                   title={`${a.path} · ${a.provenance} · ${a.validation}${a.editable ? "" : " · read-only"}`}
                   data-asset={a.path}
-                  onClick={() => a.route === "creature_definition" ? void openCreature(a.id,a.path) : a.route === "recipe_definition" ? void openRecipe(a.id,a.path) : a.route === "item_definition" ? void openItem(a.id, null, a.path) : a.route === "contextual_loot_pool" ? void openPool(a.id) : void refresh(a.path)}
+                  onClick={() => a.route === "creature_definition" ? void openCreature(a.id,a.path) : a.family_id ? void openContent(a.family_id,a.id,a.path) : a.route === "contextual_loot_pool" ? void openPool(a.id) : void refresh(a.path)}
                 >
                   <span className="asset-icon">▦</span>
                   <span>
@@ -632,12 +607,10 @@ export default function App() {
             <>
               <div className="building-controls">
                 {poolDocument && <button disabled={!!busy} onClick={() => {setCreatureActive(false);setPoolActive(creatureActive || recipeActive || itemActive || !poolActive); setItemActive(false); setRecipeActive(false);}}>{poolActive && !itemActive && !recipeActive && !creatureActive ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
-                {itemDocument && <button disabled={!!busy} onClick={() => {setCreatureActive(false);setItemActive(creatureActive || recipeActive || !itemActive); setRecipeActive(false);}}>{itemActive && !recipeActive && !creatureActive ? "Hide item" : `Show item ${selectedItemId}`}</button>}
-                {recipeDocument && <button disabled={!!busy} onClick={()=>{setCreatureActive(false);setRecipeActive(creatureActive || !recipeActive);}}>{recipeActive && !creatureActive ? "Hide recipe" : `Show recipe ${selectedRecipeId}`}</button>}
+                {Object.entries(contentDocuments).map(([family,entry])=><button key={family} disabled={!!busy} onClick={()=>{setCreatureActive(false);setActiveContent(activeContent===family && !creatureActive ? "":family);}}>{activeContent===family && !creatureActive ? `Hide ${contentViews[family as ContentFamily["id"]]?.label || family}` : `Show ${family} ${entry.selectedId}`}</button>)}
                 {creatureDocument && <button disabled={!!busy} onClick={()=>setCreatureActive(!creatureActive)}>{creatureActive ? "Hide creature" : `Show creature ${selectedCreatureId}`}</button>}
                 {creatureActive && creatureDocument && <button disabled={!!busy} onClick={()=>void openCreature(selectedCreatureId,creatureDocument.path,false,true)}>Reload creature</button>}
-                {!creatureActive && recipeActive && recipeDocument && <button disabled={!!busy} onClick={()=>void openRecipe(selectedRecipeId,recipeDocument.path,false,true)}>Reload recipe</button>}
-                {!creatureActive && !recipeActive && itemActive && itemDocument && <button disabled={!!busy} onClick={() => void openItem(selectedItemId, itemTrail, itemDocument.path, false, true)}>Reload item</button>}
+                {!creatureActive && activeContent && contentDocuments[activeContent] && <button disabled={!!busy} onClick={()=>void openContent(activeContent,contentDocuments[activeContent].selectedId,contentDocuments[activeContent].document.path,false,true)}>Reload {activeContent}</button>}
                 {!creatureActive && !recipeActive && !itemActive && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
                 <label>
                   Preview seed
@@ -836,17 +809,14 @@ export default function App() {
             document={creatureDocument} onDirty={setCreatureDirty} onApplied={creatureApplied} onError={setError}
             busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={creatureActive} onCancel={()=>void cancel()} selectedCreatureId={selectedCreatureId} dependencyVersion={dependencyVersion} /></div>}
-          {recipeDocument && <div hidden={!recipeActive || creatureActive}><Authoring key={recipeDocument.document_token}
-            document={recipeDocument} onDirty={setRecipeDirty} onApplied={recipeApplied} onError={setError}
+          {Object.entries(contentDocuments).map(([family,entry])=><div key={entry.document.document_token} hidden={activeContent!==family || creatureActive}><Authoring
+            document={entry.document} onDirty={dirty=>setContentDocuments(d=>d[family]?.document.document_token===entry.document.document_token && d[family].dirty!==dirty ? {...d,[family]:{...d[family],dirty}}:d)}
+            onApplied={(path,result)=>contentApplied(family,path,result)} onError={setError}
             busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={recipeActive && !creatureActive} onCancel={()=>void cancel()} selectedRecipeId={selectedRecipeId}
-            onReturn={itemDocument ? returnToItem : undefined} onRecipeItem={(id,path)=>void openItem(id,null,path)} dependencyVersion={dependencyVersion} /></div>}
-          {itemDocument && <div hidden={!itemActive || recipeActive || creatureActive}><Authoring key={itemDocument.document_token}
-            document={itemDocument} onDirty={setItemDirty} onApplied={itemApplied} onError={setError}
-            busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={itemActive && !recipeActive && !creatureActive} onRecipe={(id,path)=>{recipeReturnRelation.current = document.activeElement?.getAttribute("data-recipe-relation") || "ingredient"; void openRecipe(id,path);}} onCancel={() => void cancel()} itemTrail={itemTrail} selectedItemId={selectedItemId}
-            onReturn={poolDocument ? () => {setItemActive(false); setPoolActive(true); setCreatureActive(false);} : undefined}
-            onItemPool={id => void openPool(id, trail)} dependencyVersion={dependencyVersion} /></div>}
+            active={activeContent===family && !creatureActive} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
+            contentNavigation={{selectedId:entry.selectedId,trail:itemTrail,
+              onReturn:family==="recipe" ? itemDocument ? returnToItem:undefined : itemTrail ? ()=>{setItemActive(false);setPoolActive(true);}:undefined,
+              onPool:id=>void openPool(id),onOpen:(target,id,path)=>{recipeReturnRelation.current=document.activeElement?.getAttribute("data-recipe-relation") || "ingredient";void openContent(target,id,path);}}} /></div>)}
           {poolDocument && <div hidden={!poolActive || itemActive || recipeActive || creatureActive}><Authoring key={poolDocument.document_token}
             document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
             busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}

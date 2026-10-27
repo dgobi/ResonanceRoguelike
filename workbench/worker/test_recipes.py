@@ -19,14 +19,14 @@ class RecipeTests(unittest.TestCase):
             path = f"roguelike/data/recipes/{name}.json"; before = (ROOT/path).read_bytes()
             result = invoke("inspect", asset=path)["result"]
             self.assertEqual(result["raw"].encode(),before); self.assertEqual((ROOT/path).read_bytes(),before)
-            record = result["recipe_context"]["records"][0]
+            record = result["family"]["context"]["records"][0]
             self.assertEqual(record["capability"]["execution_class"],kind); self.assertEqual(result["editable"],writable)
             if writable:
-                self.assertIn("burning", result["recipe_context"]["ambient_tags"])
-                self.assertNotIn("burning", result["recipe_context"]["keywords"])
+                self.assertIn("burning", result["family"]["context"]["ambient_tags"])
+                self.assertNotIn("burning", result["family"]["context"]["keywords"])
                 self.assertIsNone(record["probe"])
         item = invoke("inspect",asset="roguelike/data/items/components/clay_pot.json")["result"]
-        relation=next(r for r in item["item_context"]["records"][0]["recipes"] if r["id"]=="bile_coating")
+        relation=next(r for r in item["family"]["context"]["records"][0]["recipes"] if r["id"]=="bile_coating")
         self.assertEqual(relation["fields"],["tools[0]"]); self.assertFalse(relation["produces"])
 
     def test_exact_variant_real_instance_selection_output_and_retained_tools(self):
@@ -35,9 +35,9 @@ class RecipeTests(unittest.TestCase):
         raw["metadata"]={"keep":[[True,None],"literal text"]}
         target=RECIPE.replace("bile_coating.json",raw["id"]+".json")
         draft=json.dumps(raw,indent=2)+"\r\n"
-        result=invoke("preview_draft",asset=target,draft=draft)["result"]
+        result=invoke("preview_draft",asset=target,source_asset=RECIPE,draft=draft)["result"]
         self.assertTrue(result["valid"],result["diagnostics"])
-        probe=result["recipe_context"]["records"][0]["probe"]
+        probe=result["family"]["context"]["records"][0]["probe"]
         self.assertEqual(probe["source_sha256"],hashlib.sha256(draft.encode()).hexdigest())
         yes,no_items,no_ambient=probe["cases"]
         self.assertTrue(yes["eligible"]); self.assertTrue(yes["committed"])
@@ -65,7 +65,7 @@ class RecipeTests(unittest.TestCase):
                 candidate=copy.deepcopy(raw);candidate["components"][0][field]=value;cases.append((candidate,code))
         for candidate,code in cases:
             result=invoke("preview_draft",asset=RECIPE,draft=json.dumps(candidate))["result"]
-            self.assertFalse(result["valid"]); self.assertIsNone(result["recipe_context"])
+            self.assertFalse(result["valid"]); self.assertIsNone(result["family"]["context"])
             self.assertIn(code,[d["code"] for d in result["diagnostics"]],result)
         for text in ('{"id":','{"id":"x","id":"y"}', '\ufeff'+json.dumps(raw), json.dumps(raw).replace('"quantity": 1','"quantity": NaN',1)):
             self.assertFalse(invoke("preview_draft",asset=RECIPE,draft=text)["result"]["valid"])
@@ -80,7 +80,7 @@ class RecipeTests(unittest.TestCase):
             self.assertIn("nested/duplicate.json",next(d for d in result["diagnostics"] if d["code"]=="DUPLICATE_RECIPE")["message"])
             duplicate.write_text(json.dumps([{**raw,"id":"array_recipe"}]))
             result=invoke("inspect",root=root,asset="roguelike/data/recipes/nested/duplicate.json")["result"]
-            self.assertFalse(result["editable"]);self.assertEqual(result["recipe_context"]["records"][0]["pointer"],"/0")
+            self.assertFalse(result["editable"]);self.assertEqual(result["family"]["context"]["records"][0]["pointer"],"/0")
             output=next((root/"roguelike/data/items").rglob("bile_coating.json"))
             definition=json.loads(output.read_bytes()); output.write_text(json.dumps({**definition,"id":"removed_output"}))
             result=invoke("preview_draft",root=root,asset=RECIPE,draft=json.dumps(raw))["result"]

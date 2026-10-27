@@ -16,7 +16,7 @@ use tauri::{Emitter, Manager};
 mod authoring;
 mod startup;
 
-const PROTOCOL: u64 = 7;
+const PROTOCOL: u64 = 8;
 const MAX_OUTPUT: u64 = 16 * 1024 * 1024;
 
 #[derive(Debug, Clone, Serialize)]
@@ -40,10 +40,10 @@ struct Session {
     busy: Option<u64>,
     ready: bool,
     discovered: std::collections::HashSet<String>,
+    discovered_families: std::collections::HashMap<String, String>,
     document: Option<authoring::Document>,
     pool_document: Option<authoring::Document>,
-    item_document: Option<authoring::Document>,
-    recipe_document: Option<authoring::Document>,
+    family_documents: std::collections::HashMap<String, authoring::Document>,
     creature_document: Option<authoring::Document>,
     applying: bool,
 }
@@ -74,10 +74,10 @@ impl Host {
             state.root = None;
             state.ready = false;
             state.discovered.clear();
+            state.discovered_families.clear();
             state.document = None;
             state.pool_document = None;
-            state.item_document = None;
-            state.recipe_document = None;
+            state.family_documents.clear();
             state.creature_document = None;
         }
         cleanup_scratch(&mut state)?;
@@ -477,9 +477,11 @@ fn run_worker(
                 .as_array()
                 .into_iter()
                 .flatten()
-                .filter(|a| a["editable"] == true || a["route"] == "authored_submap" || a["route"] == "item_definition" || a["route"] == "recipe_definition" || a["route"] == "creature_definition")
+                .filter(|a| a["editable"] == true || a["route"] == "authored_submap" || a["family_id"].is_string() || a["route"] == "creature_definition")
                 .filter_map(|a| a["path"].as_str().map(str::to_owned))
                 .collect();
+            state.discovered_families = response["result"]["assets"].as_array().into_iter().flatten()
+                .filter_map(|a| Some((a["path"].as_str()?.to_owned(), a["family_id"].as_str()?.to_owned()))).collect();
         }
     }
     Ok(response)
@@ -490,7 +492,7 @@ fn verify_identity(identity: &Value, root: &Path, bridge: &Path) -> Result<(), F
     let bridge_hash = std::fs::read(bridge).map(|bytes| authoring::hash(&bytes)).unwrap_or_default();
     if !same_root || identity["protocol"] != PROTOCOL || identity["worker_sha256"] != bridge_hash || identity["worker_version"] != env!("CARGO_PKG_VERSION")
         || identity["runtime"]["compatible"] != true || identity["runtime"]["imports_verified"] != true
-        || identity["layout_contract"] != "direct-creatures-1" || identity["creature_contract"] != "revenant-hp-1" || identity["recipe_contract"] != "immediate-components-1"
+        || identity["layout_contract"] != "direct-creatures-1" || identity["creature_contract"] != "revenant-hp-1" || !identity["families"].is_array()
         || identity["contract"] != "g2-2" {
         return Err(failure("HANDSHAKE_MISMATCH", "Worker, source imports or authoring capabilities do not match the selected project.", "Use matching current game, application and worker resources."));
     }
@@ -596,7 +598,7 @@ fn main() {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                 let host = window.state::<Host>();
                 let state = host.inner.lock().unwrap();
-                if state.applying || state.document.is_some() || state.pool_document.is_some() || state.item_document.is_some() || state.recipe_document.is_some() || state.creature_document.is_some() {
+                if state.applying || state.document.is_some() || state.pool_document.is_some() || !state.family_documents.is_empty() || state.creature_document.is_some() {
                     api.prevent_close();
                     let _ = window.emit("authoring-close-requested", ());
                     return;
@@ -656,7 +658,7 @@ mod tests {
     }
     #[test]
     fn strict_envelopes() {
-        assert!(parse_response(br#"{"protocol":7,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
+        assert!(parse_response(br#"{"protocol":8,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
         for bytes in [
             br#"log line\n{}"#.as_slice(),
             br#"{"protocol":1,"id":"x","ok":true,"result":{}}"#,
@@ -673,11 +675,11 @@ mod tests {
         let root = dunce::canonicalize(temp.path()).unwrap();
         let bridge = root.join("bridge.py");
         std::fs::write(&bridge, "bridge fixture").unwrap();
-        let valid = json!({"protocol":7,"worker_version":env!("CARGO_PKG_VERSION"),"source":{"root":root},"worker_sha256":authoring::hash(b"bridge fixture"),
+        let valid = json!({"protocol":8,"worker_version":env!("CARGO_PKG_VERSION"),"source":{"root":root},"worker_sha256":authoring::hash(b"bridge fixture"),
             "runtime":{"compatible":true,"imports_verified":true},"contract":"g2-2",
-            "layout_contract":"direct-creatures-1","recipe_contract":"immediate-components-1","creature_contract":"revenant-hp-1"});
+            "layout_contract":"direct-creatures-1","families":[],"creature_contract":"revenant-hp-1"});
         assert!(verify_identity(&valid, &root, &bridge).is_ok());
-        for pointer in ["/protocol", "/worker_version", "/source/root", "/worker_sha256", "/runtime/compatible", "/runtime/imports_verified", "/contract", "/recipe_contract", "/creature_contract"] {
+        for pointer in ["/protocol", "/worker_version", "/source/root", "/worker_sha256", "/runtime/compatible", "/runtime/imports_verified", "/contract", "/families", "/creature_contract"] {
             let mut bad = valid.clone();
             *bad.pointer_mut(pointer).unwrap() = Value::Null;
             assert_eq!(verify_identity(&bad, &root, &bridge).unwrap_err().code, "HANDSHAKE_MISMATCH");

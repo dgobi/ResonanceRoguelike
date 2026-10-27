@@ -14,6 +14,39 @@ from engine.crafting import _item_has_tag, _item_has_all_tags
 from rendering.tile_registry import TileRegistry
 
 CONTRACT = "component-1"
+SCHEMA = {
+    "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["id"],
+    "properties": {
+        "id": {"type": "string", "title": "Item ID", "readOnly": True},
+        "name": {"type": "string", "title": "Item name", "description": "When absent, the factory uses this item's ID as its name."},
+        "description": {"type": "string", "title": "Item description", "x-control": "multiline", "default": ""},
+        "weight": {"type": "number", "title": "Item weight (kg)", "minimum": 0, "default": 0.1},
+        "stackable": {"type": "boolean", "title": "Group in inventory", "default": False,
+                      "description": "Groups same-ID instances in inventory display. Instances and carried weights remain separate."},
+        "keywords": {"type": "array", "title": "Keywords", "x-control": "ordered-table", "items": {
+            "type": "object", "required": ["tag", "tier"], "properties": {
+                "tag": {"type": "string", "title": "Keyword", "x-reference": "keywords"},
+                "tier": {"type": "integer", "title": "Keyword tier", "minimum": 0, "maximum": 2**53-1, "x-initial": 1}}}},
+    },
+}
+VIEWS = ["item-properties", "references", "recipes", "use-binding", "factory"]
+PUBLICATION_NOTE = "Saved beside the source. Choose the new item ID explicitly in a new pool variant; no pool is reassigned."
+
+
+def reference_options(context):
+    return {"keywords": [dict(id=k, label=k) for k in sorted(context["keywords"])]}
+
+
+def authoring_validate(raw, data, path, data_root):
+    return validate_definition(raw, data, path, definition_sources(data_root, "items"), writable=True)
+
+
+def authoring_evidence(context):
+    observed = context["records"][0]["factory"] if context else None
+    return dict(semantic_verified=bool(observed), factory_verified=bool(observed), factory=observed)
+
+
+LIMITATIONS = "Exact staged bytes loaded and an unowned item instantiated by the actual factory. No use action, pool sampling, world selection or saved instance changed."
 FIELDS = ["name", "description", "weight", "stackable", "keywords"]
 # Known runtime-bearing fields outside an ordinary inert component. Unknown
 # metadata is retained; none is promoted to a supported mechanical control.
@@ -149,3 +182,47 @@ def references(raw, data, source_index):
                                      note="Only the single-item tag conjunction is checked; craftability unverified."))
             except (KeyError, TypeError): pass
     return rows
+
+
+from datetime import datetime, timezone
+from engine.content_authoring import definition_sources
+
+def authoring_context(raw, data, path, data_root, identity, digest, *, observe=False):
+    from engine.item_authoring import capability, use_binding, validate_definition, factory_preview, references
+    sources = definition_sources(data_root, "items")
+    recipes = definition_sources(data_root, "recipes")
+    pools = definition_sources(data_root, "loot_pools")
+    records = []
+    for index, definition in enumerate(raw if isinstance(raw, list) else [raw]):
+        if not isinstance(definition, dict): continue
+        pointer = f"/{index}" if isinstance(raw, list) else ""
+        diagnostics = validate_definition(definition, data, path, sources)
+        cap = capability(definition, path, pointer)
+        ambiguous = any(d["code"] in ("DUPLICATE_ID", "LOADER_IDENTITY") for d in diagnostics)
+        cap["editable"] = cap["editable"] and not ambiguous
+        if ambiguous: cap["reason"] = "Read-only: ambiguous or unloaded source identity. See Validation for every path."
+        observed = None
+        if not any(d["severity"] == "error" for d in diagnostics):
+            try:
+                observed = {**factory_preview(definition, data), "definition_sha256": digest,
+                            "source": identity, "path": path, "pointer": pointer,
+                            "observed_at_utc": datetime.now(timezone.utc).isoformat(),
+                            "loaded_catalog_sha256": data.structure_catalog.identity}
+            except (ValueError, TypeError, KeyError) as error:
+                diagnostics.append(dict(severity="error", code="ITEM_FACTORY", path=path, asset=str(definition.get("id", "")),
+                                        field="", message=str(error), correction="Correct invalid factory fields before publication."))
+        refs = []
+        for pool_id, locations in sorted(pools.items()):
+            for location in locations:
+                entries = location["definition"].get("items", [])
+                for i, entry in enumerate(entries if isinstance(entries, list) else []):
+                    if isinstance(entry, dict) and entry.get("item_id") == definition.get("id"):
+                        refs.append(dict(id=pool_id, path=location["path"], pointer=location["pointer"], index=i,
+                                         field=f"items[{i}].item_id", unique=len(locations) == 1))
+        from engine.recipe_authoring import item_relations
+        records.append(dict(id=definition.get("id", ""), pointer=pointer, definition=definition, capability=cap,
+                            diagnostics=diagnostics, use=use_binding(definition), pools=refs,
+                            recipes=item_relations(definition.get("id"), data, recipes) if not ambiguous else [],
+                            dependencies=references(definition, data, recipes) if not ambiguous else [], factory=observed))
+    return {"records": records, "keywords": data.keywords,
+            "snapshot": "Opened source snapshot; edits require validation for refreshed references, binding and factory evidence."}

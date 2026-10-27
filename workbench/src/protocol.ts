@@ -1,3 +1,5 @@
+export type { ItemContext, RecipeContext, ItemRecord, RecipeRecord, FactoryResult, RecipeProbe, RecipeRelation } from "./familyData";
+import { familyProblem, type ContentFamily } from "./content";
 import { invoke } from "@tauri-apps/api/core";
 import type { Catalog, Cell, Layer } from "./layout";
 export type Failure = { code: string; message: string; remedy: string };
@@ -13,7 +15,7 @@ export type Identity = {
   host_runtime: { mode: string; python: string; bridge: string; resource_directory: string; application: string; override_present: boolean; notice: string | null };
   project_selection: { root: string; selected_from: string; notices: string[] };
   creature_contract: string;
-  recipe_contract: string;
+  families: ContentFamily[];
   protocol: number;
   worker_version: string;
   worker_sha256: string;
@@ -42,6 +44,7 @@ export type Asset = {
   validation: string;
   pointer?: string;
   source_paths?: string[];
+  family_id?: string;
   result_item?: string;
   execution_class?: string;
 };
@@ -60,8 +63,7 @@ export type Diagnostic = {
 };
 export type Inspection = Asset & {
   pool_context?: PoolContext;
-  item_context?: ItemContext;
-  recipe_context?: RecipeContext;
+  family?: ContentFamily;
   creature_context?: CreatureContext;
   route: string;
   description: string;
@@ -79,32 +81,6 @@ export type Inspection = Asset & {
 };
 export type SourceTrail = { id: string; path: string; sourcePath: string; sourceHash: string; index: number; x: number; y: number; decor: string; poolId: string };
 export type ItemTrail = { poolId: string; path: string; index: number; itemId: string; structure?: SourceTrail | null };
-export type FactoryResult = {item_id: string; instance: Record<string, unknown>; comparisons: {field: string; declared: unknown; instance: unknown; equal: boolean}[]; consumer: string; scope: string; definition_sha256: string; source: Source; path: string; observed_at_utc: string; loaded_catalog_sha256: string};
-export type ItemRecord = {
-  id: string; pointer: string; definition: Record<string, unknown>; diagnostics: Diagnostic[];
-  capability: {contract: string; editable: boolean; fields: string[]; reason: string; weight_unit: string; tier_min: number; tier_max: number; tier_note: string; stack_note: string};
-  use: {declared: unknown; status: string; consumer: string; handler: string | null; line: number | null; scope: string; notes: string[]};
-  pools: {id: string; path: string; pointer: string; index: number; field: string; unique: boolean}[];
-  dependencies: {kind: string; field: string; id: string; resolved?: boolean; paths?: string[]; note?: string}[];
-  factory: FactoryResult | null;
-  recipes: RecipeRelation[];
-};
-export type RecipeRelation = {id: string; path: string; pointer: string; produces: boolean; fields: string[]; execution_class: string};
-export type RecipeProbe = {
-  path: string; recipe_id: string; source_sha256: string; source: Source; consumer: string; scope: string; observed_at_utc: string;
-  cases: {preset: string; eligible: boolean; missing: {tag: string; min_tier: number; have: number; need: number; ambient?: boolean; role?: string}[];
-    inventory: {instance: string; item_id: string; source: string; keywords: unknown; consumed_on_use: boolean}[];
-    ambient: unknown[]; selected: string[]; materials: string[]; retained_tools: string[]; before: string[]; after: string[];
-    committed: boolean | null; output: {item_id: string; properties: Record<string, unknown>; in_inventory: boolean} | null}[];
-};
-export type RecipeRecord = {
-  id: string; pointer: string; definition: Record<string, unknown>; diagnostics: Diagnostic[];
-  capability: {contract: string; editable: boolean; reason: string; execution_class: string; fields: string[]; excluded_fields: string[]; tier_min: number; tier_max: number; quantity_max: number; slots_max: number};
-  output: {id: string | null; resolved: boolean; sources: {path: string; pointer: string}[]};
-  candidates: {role: string; index: number; matches: {id: string; path: string; pointer: string; automatic_material: boolean}[]}[];
-  probe: RecipeProbe | null;
-};
-export type RecipeContext = {records: RecipeRecord[]; keywords: Record<string, unknown>; ambient_tags: Record<string, unknown>; categories: string[]; items: {id: string; name: string}[]; visibility: string};
 export type CreatureFactoryResult = {
   creature_id: string; actor_class: string; instance: Record<string, unknown>;
   comparisons: {field: string; declared: unknown; instance: unknown}[];
@@ -118,7 +94,6 @@ export type CreatureContext = {selection: string; records: {
   references: {id: string; path: string; field: string; route: string; x: number; y: number; evidence: string}[];
   factory: CreatureFactoryResult | null;
 }[]};
-export type ItemContext = {records: ItemRecord[]; keywords: Record<string, {display?: string; description?: string}>; snapshot: string};
 export type PoolContext = {
   items: Record<string, {id: string; name: string; resolved: boolean; sources: {path: string; pointer: string; definition: Record<string, unknown>}[]}>;
   references: {id: string; path: string; field: string; x: number; y: number; decor_id: string}[];
@@ -179,13 +154,21 @@ export async function call<T>(
   args?: Record<string, unknown>,
 ): Promise<{ result: T; elapsed: number }> {
   const envelope = await invoke<Envelope<T>>(command, args);
-  if (envelope.protocol !== 7 || typeof envelope.id !== "string")
+  if (envelope.protocol !== 8 || typeof envelope.id !== "string")
     throw {
       code: "PROTOCOL_MISMATCH",
       message: "Unexpected host/worker protocol.",
       remedy: "Rebuild the matching application and worker.",
     };
   if (!envelope.ok) throw envelope.error;
+  const result:unknown = envelope.result;
+  if (result && typeof result === "object" && "family" in result && result.family) {
+    const problem=familyProblem(result.family);
+    // A negotiated unsupported descriptor remains inspectable read-only. Other
+    // malformed transport cannot enter a mounted typed view.
+    if (problem && !("compatible" in Object(result.family) && (result.family as {compatible?:unknown}).compatible === false))
+      throw {code:"CONTENT_ENVELOPE",message:problem,remedy:"Inspect the game-owned contract and reopen its source."};
+  }
   return { result: envelope.result, elapsed: envelope.host_elapsed_ms };
 }
 export function request<T>(op: string, args: Record<string, unknown> = {}) {

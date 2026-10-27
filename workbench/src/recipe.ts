@@ -8,16 +8,16 @@ export function recipeModel(text: string) {
   const result = itemModel(text);
   return {...result, reason: result.reason ? "Correct JSON in Source to resume recipe controls. Your draft is retained." : ""};
 }
-export function recipeRow(text: string, field: string, action: "add" | "remove" | "up" | "down", index: number, tag?: string) {
+export function recipeRow(text: string, field: string, action: "add" | "remove" | "up" | "down", index: number, tag?: string, row: Record<string,unknown> = {tag, min_tier: 1, ...(field === "requires_ambient" ? {} : {quantity: 1})}) {
   const {tree, bom, diagnostics} = syntax(text);
   if (diagnostics.length || tree?.type !== "object") throw new Error("Repair recipe JSON first.");
   const array = findNodeAtLocation(tree, [field]);
-  if (!array && action === "add") return valueEdit(text, [field], [{tag, min_tier: 1, ...(field === "requires_ambient" ? {} : {quantity: 1})}]);
+  if (!array && action === "add") return valueEdit(text, [field], [row]);
   if (array?.type !== "array") throw new Error("Repair the requirement array in Source first.");
   const children = array.children || [];
   if (action === "add") {
     const offset = array.offset + array.length - 1 + bom;
-    return text.slice(0, offset) + (children.length ? "," : "") + JSON.stringify({tag, min_tier: 1, ...(field === "requires_ambient" ? {} : {quantity: 1})}) + text.slice(offset);
+    return text.slice(0, offset) + (children.length ? "," : "") + JSON.stringify(row) + text.slice(offset);
   }
   const node = children[index];
   if (!node) throw new Error("Requirement no longer exists.");

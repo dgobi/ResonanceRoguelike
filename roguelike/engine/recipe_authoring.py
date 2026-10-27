@@ -16,6 +16,45 @@ from engine.item_factory import ItemFactory
 from engine.save_components import ITEM_STATE, snapshot, validate_fields
 
 CONTRACT = "immediate-components-1"
+def requirement_schema(title, reference, physical=True):
+    properties = {
+        "tag": {"type": "string", "title": "Tag", "x-reference": reference},
+        "min_tier": {"type": "integer", "title": "Minimum tier", "minimum": 0, "maximum": 2**53-1, "default": 1},
+    }
+    if physical: properties["quantity"] = {"type": "integer", "title": "Quantity", "minimum": 1, "maximum": 32, "default": 1}
+    return {"type": "array", "title": title, "x-control": "ordered-table",
+            "items": {"type": "object", "required": ["tag"], "properties": properties}}
+
+
+SCHEMA = {"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["id", "components", "result_item"],
+          "properties": {
+    "id": {"type": "string", "title": "Recipe ID", "readOnly": True},
+    "name": {"type": "string", "title": "Recipe name"},
+    "description": {"type": "string", "title": "Recipe description", "x-control": "multiline"},
+    "category": {"type": "string", "title": "Recipe category", "x-reference": "categories"},
+    "known": {"type": "boolean", "title": "Recipe known", "default": True,
+              "description": "Known at startup. False displays an unknown recipe and blocks CraftScreen execution; no learning route is established."},
+    "components": requirement_schema("Required items", "keywords"),
+    "tools": requirement_schema("Tools · retained", "keywords"),
+    "requires_ambient": requirement_schema("Ambient conditions", "ambient_tags", False),
+    "result_item": {"type": "string", "title": "Recipe output item", "x-reference": "items", "x-view": "Output"},
+}}
+VIEWS = ["recipe-requirements", "output", "production-receipt"]
+PUBLICATION_NOTE = "This creates an active recipe variant. New sessions recursively load it; known defaults to true and enables CraftScreen execution when requirements are met. known:false displays an unknown recipe and blocks execution. No learning route or personal-save compatibility is promised."
+LIMITATIONS = "Recipe contract and output factory checked. Probe cases separately report actual eligibility and isolated production exchange; validation is not a claim of ordinary player crafting or acquisition."
+
+
+def reference_options(context):
+    return {**{name: [dict(id=k, label=k) for k in sorted(context[name])] for name in ("keywords", "ambient_tags", "categories")},
+            "items": [dict(id=r["id"], label=r["id"] + " · " + r["name"]) for r in context["items"]]}
+
+
+def authoring_validate(raw, data, path, data_root):
+    return validate_definition(raw, data, path, definition_sources(data_root, "recipes"), definition_sources(data_root, "items"), writable=True)
+
+
+def authoring_evidence(context):
+    return dict(semantic_verified=bool(context and context["records"][0]["probe"]))
 FIELDS = ["name", "description", "category", "known", "components", "tools", "requires_ambient", "result_item"]
 EXCLUDED = ["_deprecated", "requires_single_item", "result_tile", "places_in_world", "processing_turns",
             "processing_source", "processing_decor", "placement_message", "completion_message", "apply_turns"]
@@ -243,3 +282,35 @@ def probe(raw, data, item_sources, path, digest, identity):
                 consumer="engine.crafting.plan_craft -> engine.item_factory.ItemFactory.create -> engine.crafting.commit_craft -> engine.item_transfers.exchange",
                 scope="Synthetic disposable inventory and ambient records; actual production allocation, factory and ownership exchange. No ordinary player controls, CraftScreen knowledge gate, acquisition, world placement, turn or campaign executed.",
                 known_gate=raw.get("known", True), visibility=VISIBILITY)
+
+
+from datetime import datetime, timezone
+from engine.content_authoring import definition_sources
+
+def authoring_context(raw, data, path, data_root, identity, digest, *, observe=False):
+    from engine.recipe_authoring import capability, validate_definition, candidates, probe, ambient_catalog, VISIBILITY
+    sources = definition_sources(data_root, "recipes")
+    items = definition_sources(data_root, "items")
+    records = []
+    for index, definition in enumerate(raw if isinstance(raw, list) else [raw]):
+        if not isinstance(definition, dict): continue
+        pointer = f"/{index}" if isinstance(raw, list) else ""
+        cap = capability(definition, path, pointer)
+        diagnostics = validate_definition(definition, data, path, sources, items)
+        if any(d["code"] in ("RECIPE_ID", "DUPLICATE_RECIPE", "LOADER_IDENTITY") for d in diagnostics):
+            cap["editable"] = False; cap["reason"] = "Not supported: ambiguous or unloaded source. Inspect the diagnostic paths."
+        output_id = definition.get("result_item")
+        output_sources = items.get(output_id, []) if isinstance(output_id, str) else []
+        observed = None
+        if observe and cap["editable"] and not any(d["severity"] == "error" for d in diagnostics):
+            observed = probe(definition, data, items, path, digest, identity)
+            observed["observed_at_utc"] = datetime.now(timezone.utc).isoformat()
+            observed["loaded_catalog_sha256"] = data.structure_catalog.identity
+        records.append(dict(id=definition.get("id", ""), pointer=pointer, definition=definition, capability=cap,
+                            diagnostics=diagnostics, candidates=candidates(definition, data, items), probe=observed,
+                            output=dict(id=output_id, resolved=isinstance(output_id, str) and output_id in data.items and len(output_sources) == 1,
+                                        sources=[dict(path=s["path"], pointer=s["pointer"]) for s in output_sources])))
+    return dict(records=records, keywords=data.keywords, ambient_tags=ambient_catalog(data), visibility=VISIBILITY,
+                categories=sorted({r.get("category") for r in data.recipes.values() if isinstance(r.get("category"), str)}),
+                items=[dict(id=key, name=str(data.items.get(key, {}).get("name", key))) for key, ss in sorted(items.items())
+                       if key in data.items and len([s for k, rows in items.items() if k.casefold() == key.casefold() for s in rows]) == 1])

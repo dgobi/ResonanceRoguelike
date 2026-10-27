@@ -23,7 +23,7 @@ class ItemTests(unittest.TestCase):
             r = invoke("inspect", asset=asset)["result"]
             self.assertEqual(r["raw"].encode(), before)
             self.assertEqual(path.read_bytes(), before); self.assertEqual(path.stat().st_mtime_ns, meta.st_mtime_ns)
-            c = r["item_context"]["records"][0]
+            c = r["family"]["context"]["records"][0]
             self.assertEqual(c["capability"]["editable"], asset == ITEM)
             self.assertIsNotNone(c["factory"], c["diagnostics"])
             self.assertEqual(c["use"]["status"], "Not applicable" if asset == ITEM else "Handler found")
@@ -69,7 +69,7 @@ class ItemTests(unittest.TestCase):
             catalog = invoke("describe", root=root)["result"]["assets"]
             row = next(r for r in catalog if r["id"] == raw["id"])
             self.assertEqual(row["pointer"], "/0"); self.assertFalse(row["editable"])
-            r = invoke("inspect", root=root, asset=row["path"])["result"]["item_context"]["records"][0]
+            r = invoke("inspect", root=root, asset=row["path"])["result"]["family"]["context"]["records"][0]
             self.assertEqual(r["use"]["status"], "Unknown handler"); self.assertIsNone(r["factory"])
 
     def test_exact_new_item_new_pool_and_production_instantiation(self):
@@ -80,7 +80,7 @@ class ItemTests(unittest.TestCase):
             raw["unknown_metadata"] = {"deep": [[None, True], ["authored text", 9]]}
             draft = json.dumps(raw, ensure_ascii=False, indent=2) + "\r\n"
             dest = ITEM.replace("wood_bundle", raw["id"])
-            r = invoke("preview_draft", root=root, asset=dest, draft=draft)["result"]
+            r = invoke("preview_draft", root=root, asset=dest, source_asset=ITEM, draft=draft)["result"]
             self.assertTrue(r["valid"], r); self.assertTrue(r["factory_verified"])
             self.assertEqual(r["draft_sha256"], hashlib.sha256(draft.encode()).hexdigest())
             self.assertEqual(r["factory"]["instance"]["weight"], 1.75)
@@ -94,7 +94,7 @@ class ItemTests(unittest.TestCase):
             self.assertTrue(invoke("preview_draft", root=root, asset=pool_dest, draft=text)["result"]["valid"])
             (root/pool_dest).write_text(text, encoding="utf-8")
             reopened = invoke("inspect", root=root, asset=dest)["result"]
-            c = reopened["item_context"]["records"][0]
+            c = reopened["family"]["context"]["records"][0]
             self.assertEqual(c["factory"]["instance"]["weight"], 1.75)
             self.assertEqual(c["pools"][0]["id"], pool["id"])
             self.assertEqual(reopened["raw"].encode(), draft.encode())

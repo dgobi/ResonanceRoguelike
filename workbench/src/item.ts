@@ -15,16 +15,16 @@ export function itemValue(text: string, path: (string | number)[], value: unknow
   if (node && ["string", "number", "boolean", "null"].includes(node.type) && node.value === value) return text;
   return valueEdit(text, path, value);
 }
-export function keywordEntry(text: string, index: number, tag?: string) {
+export function keywordEntry(text: string, index: number, tag?: string, row: Record<string,unknown> = {tag, tier: 1}) {
   const parsed = itemModel(text);
   if (!parsed.model) throw new Error(parsed.reason);
-  if (parsed.model.keywords === undefined) return valueEdit(text, ["keywords"], [{tag, tier: 1}]);
+  if (parsed.model.keywords === undefined) return valueEdit(text, ["keywords"], [row]);
   const {tree, bom} = syntax(text), array = findNodeAtLocation(tree!, ["keywords"]);
   if (array?.type !== "array") throw new Error("Repair keywords in Source first.");
   const children = array.children || [];
   if (tag !== undefined) {
     const offset = array.offset + array.length - 1 + bom;
-    return text.slice(0, offset) + (children.length ? "," : "") + JSON.stringify({tag, tier: 1}) + text.slice(offset);
+    return text.slice(0, offset) + (children.length ? "," : "") + JSON.stringify(row) + text.slice(offset);
   }
   const node = children[index];
   if (!node) throw new Error("Keyword no longer exists in the current draft.");

@@ -1,0 +1,149 @@
+"""First-party content authoring registration. Gameplay never imports this module.
+
+JSON Schema 2020-12 shape annotations plus the bounded resonance-controls-1
+vocabulary describe controls, not publication authority. Only these explicit
+Python adapters run; descriptors cannot import modules or evaluate expressions.
+"""
+from __future__ import annotations
+import hashlib
+import json
+from dataclasses import dataclass
+from pathlib import PurePosixPath
+
+DIALECT = "https://json-schema.org/draft/2020-12/schema"
+VOCABULARY = "resonance-controls-1"
+
+
+def definition_sources(data_root, family):
+    """Mirror the loader's object/array convention without choosing an ID winner."""
+    sources = {}
+    for path in sorted((data_root / family).rglob("*.json")):
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            continue
+        for index, row in enumerate(raw if isinstance(raw, list) else [raw]):
+            if isinstance(row, dict) and isinstance(row.get("id"), str):
+                sources.setdefault(row["id"], []).append(dict(
+                    path="roguelike/data/" + path.relative_to(data_root).as_posix(),
+                    pointer=f"/{index}" if isinstance(raw, list) else "", definition=row))
+    return sources
+
+
+def schema_problems(schema):
+    """Negotiate the supported subset, never silently omit an unknown control."""
+    errors = []
+    def visit(node, path, depth=0):
+        if not isinstance(node, dict) or depth > 4:
+            errors.append(f"{path}: expected bounded schema object"); return
+        allowed = {"$schema", "type", "title", "description", "default", "readOnly", "minimum", "maximum",
+                   "properties", "required", "items", "additionalProperties", "x-control", "x-reference", "x-view", "x-initial"}
+        for key in node.keys() - allowed: errors.append(f"{path}: unsupported schema keyword {key}")
+        kind = node.get("type")
+        if kind not in ("string", "number", "integer", "boolean", "object", "array"):
+            errors.append(f"{path}: unsupported type {kind}")
+        if node.get("x-control", "scalar") not in ("scalar", "multiline", "ordered-table"):
+            errors.append(f"{path}: unsupported control {node['x-control']}")
+        if kind == "object" and depth not in (0, 2): errors.append(f"{path}: only root and table-row objects are supported")
+        if kind == "array" and (depth != 1 or node.get("x-control") != "ordered-table"):
+            errors.append(f"{path}: only registered ordered tables are supported")
+        if node.get("x-control") == "multiline" and kind != "string": errors.append(f"{path}: multiline requires a string")
+        if "x-reference" in node and kind != "string": errors.append(f"{path}: reference requires a string")
+        for annotation in ("default", "x-initial"):
+            if annotation not in node: continue
+            value = node[annotation]
+            valid = (isinstance(value, str) if kind == "string" else type(value) is bool if kind == "boolean" else
+                     type(value) is int if kind == "integer" else type(value) in (int, float) if kind == "number" else False)
+            if not valid: errors.append(f"{path}: unsupported or mismatched effective default")
+        if kind == "object":
+            props = node.get("properties", {})
+            if not isinstance(props, dict) or len(props) > 64:
+                errors.append(f"{path}: expected at most 64 properties"); return
+            for key, child in props.items(): visit(child, f"{path}.{key}", depth+1)
+            if not isinstance(node.get("required", []), list) or any(k not in props for k in node.get("required", [])):
+                errors.append(f"{path}: invalid required properties")
+        if kind == "array": visit(node.get("items"), path+"[]", depth+1)
+        for key in ("minimum", "maximum"):
+            if key in node and (type(node[key]) not in (float, int) or not -float('inf') < node[key] < float('inf')):
+                errors.append(f"{path}: invalid {key}")
+        if "readOnly" in node and type(node["readOnly"]) is not bool: errors.append(f"{path}: invalid readOnly")
+        for key in ("title", "description", "x-reference", "x-view"):
+            if key in node and not isinstance(node[key], str): errors.append(f"{path}: invalid {key}")
+    if not isinstance(schema, dict) or schema.get("$schema") != DIALECT: errors.append("Unsupported schema dialect")
+    visit(schema, "schema")
+    return errors
+
+
+@dataclass(frozen=True)
+class Family:
+    id: str
+    directory: str
+    module: object
+    operations: tuple[str, ...]
+    write_root: str
+
+    @property
+    def route(self): return self.id + "_definition"
+
+    def matches(self, path):
+        return PurePosixPath(path).parts[:3] == ("roguelike", "data", self.directory)
+
+    def descriptor(self):
+        value = dict(vocabulary=VOCABULARY, schema=self.module.SCHEMA, views=self.module.VIEWS,
+                     policy=dict(operations=list(self.operations), root=self.write_root, identity="id"),
+                     publication_note=self.module.PUBLICATION_NOTE)
+        return value, hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+    def envelope(self, context):
+        descriptor, digest = self.descriptor()
+        problems = schema_problems(descriptor["schema"])
+        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt"}
+        if not isinstance(descriptor["views"], list) or any(v not in allowed_views for v in descriptor["views"]):
+            problems.append("Unsupported specialized view registration")
+        return dict(id=self.id, contract=self.module.CONTRACT, descriptor_sha256=digest,
+                    descriptor=descriptor, compatible=not problems, problems=problems,
+                    references=self.module.reference_options(context) if context else {}, context=context)
+
+    def context(self, *args, **kwargs): return self.module.authoring_context(*args, **kwargs)
+
+    def validate(self, raw, data, path, data_root):
+        return self.module.authoring_validate(raw, data, path, data_root)
+
+    def eligible(self, context):
+        return bool(context and len(context["records"]) == 1 and context["records"][0]["capability"]["editable"])
+
+    def discover(self, root):
+        from generation.structure_contract import read_document, StructureError
+        sources = definition_sources(root / "roguelike/data", self.directory)
+        rows = []
+        for path in sorted((root / "roguelike/data" / self.directory).rglob("*.json")):
+            relative = path.relative_to(root).as_posix()
+            try: raw = read_document(path)
+            except StructureError: raw = {}
+            for index, record in enumerate(raw if isinstance(raw, list) else [raw]):
+                record = record if isinstance(record, dict) else {}
+                pointer = f"/{index}" if isinstance(raw, list) else ""
+                identifier = str(record.get("id", path.stem))
+                locations = [s for k, ss in sources.items() if k.casefold() == identifier.casefold() for s in ss]
+                cap = self.module.capability(record, relative, pointer)
+                rows.append(dict(path=relative, pointer=pointer, id=identifier, name=str(record.get("name", "")),
+                    category=str(record.get("category", "")), result_item=record.get("result_item"),
+                    execution_class=cap.get("execution_class"), route=self.route, family_id=self.id,
+                    editable=cap["editable"] and len(locations) == 1,
+                    provenance="Selected checkout / registered content source",
+                    validation="ambiguous / invalid source" if len(locations) != 1 else "not yet checked",
+                    source_paths=[s["path"] + s["pointer"] for s in locations]))
+        return rows
+
+
+def families():
+    # The sole trusted registration point. No renderer or descriptor imports.
+    from engine import item_authoring, recipe_authoring
+    return (
+        Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/components/"),
+        Family("recipe", "recipes", recipe_authoring, ("variant",), "roguelike/data/recipes/"),
+    )
+
+
+def family_for(path):
+    return next((family for family in families() if family.matches(path)), None)
