@@ -84,7 +84,7 @@ export async function itemJourney(page, root, output, receipt) {
   const savedPool=await readFile(resolve(root,poolTarget)); assert.equal(JSON.parse(savedPool).items[0].item_id,itemId);
   await b(`Open item ${itemId}`).click(); await idle(); await b("References").click();
   assert((await page.getByTestId("item-editor").innerText()).includes(poolId));
-  await b("Factory result").click(); const factory=JSON.parse(await page.getByTestId("item-factory-receipt").textContent());
+  await b("Factory result").click();await b("Validate and construct exact item").click();await idle();const factory=JSON.parse(await page.getByTestId("item-factory-receipt").textContent());
   assert.equal(factory.instance.weight,1.75); assert.equal(factory.item_id,itemId);
   receipt.item_chain={source:building,container_index:3,original_pool:pool,item:itemTarget,pool:poolTarget,factory};
   await shot("reopened-item-pool");
