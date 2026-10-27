@@ -102,6 +102,13 @@ try{
   await inject("");await eb("Retry recovery save").click();await checkpoint();
   receipt.checks.push("failed recovery checkpoint keeps previous complete copy and in-memory draft; failed close flush retains owner; explicit retry succeeds");
   let rows=await list();assert.equal(rows.length,3);
+  const locked=(await inspect(rows[0].key)).record;
+  const competing=spawnSync("cargo",["test","--locked","--manifest-path","src-tauri/Cargo.toml","--","--exact","recovery::tests::checkpoint_child_process"],{
+    windowsHide:true,encoding:"utf8",env:{...process.env,W5D_CHILD_STORE:storage,W5D_CHILD_RECORD:JSON.stringify(locked)},timeout:30000,
+  });
+  assert.notEqual(competing.status,0);assert.match(competing.stdout+competing.stderr,/owned by another running Workbench instance/);
+  assert.deepEqual((await inspect(rows[0].key)).record,locked);
+  receipt.checks.push("a separate native process using the real recovery writer cannot overwrite the running application's locked record");
   for(const row of rows){const {record}=await inspect(row.key);receipt.drafts.push({source:record.source,key:row.key,generation:record.generation,sha256:hash(record.draft),variant_id:record.variant_id,original_token:tokens.get(record.source)});}
   await tab(paths[2]);const accepted=await source();await inject("busy-edit");await editor().locator("textarea.source-editor").fill(accepted+"REJECTED_OPTIMISTIC_SENTINEL");await editIdle();assert.equal(await source(),accepted);
   const itemRow=rows.find(r=>r.source===paths[2]);assert(!(await inspect(itemRow.key)).record.draft.includes("REJECTED_OPTIMISTIC_SENTINEL"));
