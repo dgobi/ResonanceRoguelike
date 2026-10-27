@@ -26,7 +26,7 @@ sys.dont_write_bytecode = True
 # before importing NumPy/tcod; the game's algorithms and data stay unchanged.
 os.environ.update(OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1", MKL_NUM_THREADS="1")
 PROTOCOL = 7
-WORKER_VERSION = "0.7.0"
+WORKER_VERSION = "0.7.1"
 ROUTE = "authored_submap"
 EDIT_ROUTE = "ordinary_building"
 POOL_ROUTE = "contextual_loot_pool"
@@ -109,6 +109,8 @@ def runtime_check():
         versions[name] = actual
         if actual != expected:
             fail("DEPENDENCY_MISMATCH", f"{name}: expected {expected}, found {actual}.", "Use the exact pinned game dependencies.")
+    # Metadata alone does not prove native wheels and their DLLs can load.
+    import pygame, tcod, numpy, cffi
     return {"python": platform.python_version(), "executable": sys.executable, "dependencies": versions, "compatible": True, "numeric_threads": 1}
 
 
@@ -732,6 +734,13 @@ def run(request, root, scratch):
     if RECIPE_CONTRACT != "immediate-components-1":
         fail("CONTRACT_MISMATCH", "Unsupported recipe authoring contract.", "Use matching game and Workbench sources.")
     from generation.structure_preview import preview
+    imported_sources = {}
+    for name in ("config", "engine.data_loader", "generation.structure_contract", "generation.structure_preview", "engine.recipe_authoring", "engine.creature_authoring"):
+        module_path = Path(sys.modules[name].__file__).resolve()
+        if not module_path.is_relative_to(root / "roguelike"):
+            fail("SOURCE_IMPORT_MISMATCH", f"{name} was imported outside the selected project.", "Use the selected current checkout with the pinned isolated interpreter.")
+        imported_sources[name] = module_path.relative_to(root).as_posix()
+    runtime.update(imports_verified=True, game_imports=imported_sources)
     if CONTRACT_VERSION != "g2-2":
         fail("CONTRACT_MISMATCH", f"Unsupported structure contract {CONTRACT_VERSION}.", "Update the Workbench adapter after reviewing this game's contract.")
     op = request["op"]

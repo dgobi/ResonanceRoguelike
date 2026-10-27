@@ -14,6 +14,7 @@ use std::{
 };
 use tauri::{Emitter, Manager};
 mod authoring;
+mod startup;
 
 const PROTOCOL: u64 = 7;
 const MAX_OUTPUT: u64 = 16 * 1024 * 1024;
@@ -37,6 +38,7 @@ struct Session {
     child: Option<Child>,
     scratch: Option<tempfile::TempDir>,
     busy: bool,
+    ready: bool,
     discovered: std::collections::HashSet<String>,
     document: Option<authoring::Document>,
     pool_document: Option<authoring::Document>,
@@ -69,6 +71,7 @@ impl Host {
         state.busy = false;
         if clear {
             state.root = None;
+            state.ready = false;
             state.discovered.clear();
             state.document = None;
             state.pool_document = None;
@@ -98,6 +101,17 @@ fn cleanup_scratch(state: &mut Session) -> Result<(), Failure> {
     Ok(())
 }
 
+const PROJECT_MARKERS: &[&str] = &[
+    "roguelike/engine/data_loader.py", "roguelike/engine/creature_authoring.py",
+    "roguelike/engine/recipe_authoring.py", "roguelike/generation/structure_contract.py",
+    "roguelike/generation/structure_preview.py", "roguelike/data/terrain.json",
+    "requirements-baseline.txt", "workbench/src-tauri/tauri.conf.json",
+];
+const PROJECT_DIRECTORIES: &[&str] = &[
+    "roguelike/data/layouts", "roguelike/data/buildings", "roguelike/data/entities",
+    "roguelike/data/items", "roguelike/data/recipes", "roguelike/data/loot_pools",
+];
+
 fn canonical_root(path: &Path) -> Result<PathBuf, Failure> {
     let canonical = dunce::canonicalize(path).map_err(|e| {
         failure(
@@ -119,17 +133,11 @@ fn canonical_root(path: &Path) -> Result<PathBuf, Failure> {
     } else {
         canonical
     };
-    for file in [
-        "roguelike/engine/data_loader.py",
-        "roguelike/generation/structure_contract.py",
-        "roguelike/generation/structure_preview.py",
-        "roguelike/data/terrain.json",
-        "requirements-baseline.txt",
-    ] {
+    for file in PROJECT_MARKERS {
         let p = dunce::canonicalize(root.join(file)).map_err(|_| {
             failure(
                 "INVALID_PROJECT",
-                format!("Missing {file}"),
+                format!("{}: missing {file}", root.display()),
                 "Choose the Resonance checkout, not a save or unrelated folder.",
             )
         })?;
@@ -141,44 +149,13 @@ fn canonical_root(path: &Path) -> Result<PathBuf, Failure> {
             ));
         }
     }
-    Ok(root)
-}
-
-fn runtime(app: &tauri::AppHandle, root: &Path) -> Result<(PathBuf, PathBuf), Failure> {
-    let resource = app
-        .path()
-        .resource_dir()
-        .map_err(|e| failure("WORKER_MISSING", e, "Rebuild the desktop package."))?;
-    let dev = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../worker");
-    let script = if cfg!(debug_assertions) {
-        dev.join("bridge.py")
-    } else {
-        resource.join("bridge.py")
-    };
-    let packaged = if cfg!(debug_assertions) {
-        dev.join("runtime/python.exe")
-    } else {
-        resource.join("python/python.exe")
-    };
-    let python = if let Some(value) = std::env::var_os("RESONANCE_PYTHON") {
-        let path = PathBuf::from(value);
-        if !path.is_absolute() {
-            return Err(failure(
-                "WORKER_MISSING",
-                "RESONANCE_PYTHON must be an absolute interpreter path.",
-                "Set it in the launching shell, then restart.",
-            ));
+    for directory in PROJECT_DIRECTORIES {
+        let path = dunce::canonicalize(root.join(directory)).map_err(|_| failure("INVALID_PROJECT", format!("{}: missing {directory}", root.display()), "Choose the complete Resonance checkout."))?;
+        if !path.is_dir() || !path.starts_with(&root) {
+            return Err(failure("INVALID_PROJECT", format!("External data directory {directory}"), "Choose a checkout with local data."));
         }
-        path
-    } else if packaged.is_file() {
-        packaged
-    } else {
-        root.join(".venv/Scripts/python.exe")
-    };
-    if !python.is_file() || !script.is_file() {
-        return Err(failure("WORKER_MISSING", format!("Python: {}; bridge: {}", python.display(), script.display()), "Set RESONANCE_PYTHON to the pinned Python 3.11 executable, or build the bundled runtime using scripts/prepare-runtime.ps1; then restart."));
     }
-    Ok((python, script))
+    Ok(root)
 }
 
 #[derive(Deserialize, Default)]
@@ -308,17 +285,20 @@ fn run_worker(
             "Choose a Resonance repository.",
         )
     })?;
-    let (python, script) = runtime(&app, &root)?;
+    if request.op != "identify" && !state.ready {
+        return Err(failure("WORKER_NOT_READY", "No verified worker handshake for this project.", "Reopen the project and resolve the startup problem."));
+    }
+    let runtime = startup::runtime(&app)?;
     // Parent-owned scratch survives until cancellation/exit is reaped, including
     // hard kills. Child tempdirs live here; no game-tree cwd or cache writes.
     let scratch = tempfile::Builder::new()
         .prefix("resonance-w0-host-")
         .tempdir()
         .map_err(|e| failure("TEMP_FAILED", e, "Check the system temporary directory."))?;
-    let mut command = Command::new(python);
+    let mut command = Command::new(&runtime.python);
     command
         .args(["-I", "-B", "-u"])
-        .arg(script)
+        .arg(&runtime.bridge)
         .arg("--root")
         .arg(&root)
         .current_dir(scratch.path())
@@ -455,6 +435,15 @@ fn run_worker(
     }
     let mut response = parse_response(&bytes, &id)?;
     response["host_elapsed_ms"] = json!(start.elapsed().as_millis() as u64);
+    if input["op"] == "identify" && response["ok"] == true {
+        verify_identity(&response["result"], &root, &runtime.bridge)?;
+        let mut state = host.inner.lock().unwrap();
+        if host.epoch.load(Ordering::SeqCst) != expected_epoch {
+            return Err(failure("CANCELLED", "Project changed during handshake.", "Open the current project."));
+        }
+        state.ready = true;
+        response["result"]["host_runtime"] = serde_json::to_value(runtime).unwrap();
+    }
     if input["op"] == "describe" && response["ok"] == true {
         let mut state = host.inner.lock().unwrap();
         if host.epoch.load(Ordering::SeqCst) == expected_epoch {
@@ -470,6 +459,18 @@ fn run_worker(
     Ok(response)
 }
 
+fn verify_identity(identity: &Value, root: &Path, bridge: &Path) -> Result<(), Failure> {
+    let same_root = identity["source"]["root"].as_str().and_then(|p| dunce::canonicalize(p).ok()).is_some_and(|p| p == root);
+    let bridge_hash = std::fs::read(bridge).map(|bytes| authoring::hash(&bytes)).unwrap_or_default();
+    if !same_root || identity["protocol"] != PROTOCOL || identity["worker_sha256"] != bridge_hash || identity["worker_version"] != env!("CARGO_PKG_VERSION")
+        || identity["runtime"]["compatible"] != true || identity["runtime"]["imports_verified"] != true
+        || identity["creature_contract"] != "revenant-hp-1" || identity["recipe_contract"] != "immediate-components-1"
+        || identity["contract"] != "g2-2" {
+        return Err(failure("HANDSHAKE_MISMATCH", "Worker, source imports or authoring capabilities do not match the selected project.", "Use matching current game, application and worker resources."));
+    }
+    Ok(())
+}
+
 #[tauri::command]
 async fn choose_project() -> Option<String> {
     rfd::AsyncFileDialog::new()
@@ -482,17 +483,17 @@ async fn choose_project() -> Option<String> {
 async fn open_project(
     app: tauri::AppHandle,
     host: tauri::State<'_, Host>,
-    path: String,
+    path: Option<String>,
 ) -> Result<Value, Failure> {
     host.cancel(true)?;
-    let root = canonical_root(Path::new(&path))?;
-    host.inner.lock().unwrap().root = Some(root);
+    let (selection, config) = startup::resolve_project(&app, path.as_deref().map(Path::new))?;
+    host.inner.lock().unwrap().root = Some(selection.root.clone());
     let epoch = host.epoch.load(Ordering::SeqCst);
     let host = host.inner().clone();
     tauri::async_runtime::spawn_blocking(move || {
-        run_worker(
+        let mut response = run_worker(
             app,
-            host,
+            host.clone(),
             Request {
                 op: "identify".into(),
                 asset: None,
@@ -502,7 +503,16 @@ async fn open_project(
                 source_asset: None,
             },
             epoch,
-        )
+        )?;
+        if response["ok"] == true {
+            let state = host.inner.lock().unwrap();
+            if host.epoch.load(Ordering::SeqCst) != epoch || !state.ready {
+                return Err(failure("CANCELLED", "Project changed before saving preferences.", "Open the current project."));
+            }
+            startup::save(&config, &selection.root)?;
+            response["result"]["project_selection"] = serde_json::to_value(selection).unwrap();
+        }
+        Ok(response)
     })
     .await
     .map_err(|e| failure("HOST_FAILED", e, "Restart Workbench."))?
@@ -625,6 +635,22 @@ mod tests {
             br#"{} {}"#,
         ] {
             assert!(parse_response(bytes, "x").is_err());
+        }
+    }
+    #[test]
+    fn handshake_requires_selected_imports_matching_bridge_and_capabilities() {
+        let temp = tempfile::tempdir().unwrap();
+        let root = dunce::canonicalize(temp.path()).unwrap();
+        let bridge = root.join("bridge.py");
+        std::fs::write(&bridge, "bridge fixture").unwrap();
+        let valid = json!({"protocol":7,"worker_version":env!("CARGO_PKG_VERSION"),"source":{"root":root},"worker_sha256":authoring::hash(b"bridge fixture"),
+            "runtime":{"compatible":true,"imports_verified":true},"contract":"g2-2",
+            "recipe_contract":"immediate-components-1","creature_contract":"revenant-hp-1"});
+        assert!(verify_identity(&valid, &root, &bridge).is_ok());
+        for pointer in ["/protocol", "/worker_version", "/source/root", "/worker_sha256", "/runtime/compatible", "/runtime/imports_verified", "/contract", "/recipe_contract", "/creature_contract"] {
+            let mut bad = valid.clone();
+            *bad.pointer_mut(pointer).unwrap() = Value::Null;
+            assert_eq!(verify_identity(&bad, &root, &bridge).unwrap_err().code, "HANDSHAKE_MISMATCH");
         }
     }
     #[test]

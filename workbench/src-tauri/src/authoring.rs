@@ -33,7 +33,7 @@ struct Review {
     seed: u32,
     inputs: Option<String>,
 }
-fn hash(bytes: &[u8]) -> String {
+pub(crate) fn hash(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
 }
 fn io_error(e: impl ToString) -> Failure {
@@ -707,7 +707,7 @@ pub async fn apply_document(
             let response = run_worker(app, host.clone(), Request {op:"preview_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),source_asset:is_creature(&doc.relative).then(||doc.relative.clone()),seed:Some(review.seed),..Default::default()}, epoch)?;
             if response["ok"] != true || response["result"]["valid"] != true || response["result"]["draft_sha256"] != hash(review.draft.as_bytes())
                 || response["result"]["route"] != if is_pool(&doc.relative) { "contextual_loot_pool" } else if is_item(&doc.relative) { "item_definition" } else if is_recipe(&doc.relative) { "recipe_definition" } else if is_creature(&doc.relative) { "creature_definition" } else { "ordinary_building" }
-                || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != "0.7.0"
+                || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != env!("CARGO_PKG_VERSION")
                 || (is_item(&doc.relative) && (response["result"]["factory_verified"] != true || response["result"]["item_contract"] != "component-1"))
                 || (is_recipe(&doc.relative) && (!review.variant || response["result"]["recipe_contract"] != "immediate-components-1"))
                 || (is_creature(&doc.relative) && (!review.variant || response["result"]["creature_contract"] != "revenant-hp-1" || response["result"]["factory_verified"] != true))

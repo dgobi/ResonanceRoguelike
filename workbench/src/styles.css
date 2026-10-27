@@ -307,6 +307,11 @@ form button {
 .project-details {
   margin-top: 20px;
 }
+.project-details code {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
 .health {
   color: #a3c7b3;
   font-size: 12px;

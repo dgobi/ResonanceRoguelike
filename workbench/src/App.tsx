@@ -57,7 +57,7 @@ export default function App() {
   const [busy, setBusy] = useState(""),
     [error, setError] = useState<Failure | null>(null),
     [status, setStatus] = useState(
-      "Choose a local Resonance repository to begin.",
+      "Opening the configured Resonance project…",
     ),
     [cell, setCell] = useState<[number, number] | null>(null),
     [seed, setSeed] = useState("20261023"),
@@ -190,15 +190,16 @@ export default function App() {
       );
     }
   }
-  async function open(value: string, discard = false) {
+  useEffect(() => { void open(); }, []);
+  async function open(value?: string, discard = false) {
     if (!discard && protect(() => void open(value, true))) return;
     const token = ++epoch.current;
     clear();
-    setPath(value);
+    setPath(value || "");
     setBusy("Checking repository and runtime…");
     setStatus("Opening repository…");
     try {
-      const info = await call<Identity>("open_project", { path: value });
+      const info = await call<Identity>("open_project", { path: value ?? null });
       if (token !== epoch.current) return;
       setIdentity(info.result);
       setPath(info.result.source.root);
@@ -446,7 +447,7 @@ export default function App() {
           </div>
         </div>
         <div className="top-meta">
-          <span className="chip">W4A · CREATURES</span>
+          <span className="chip">W4B</span>
           <span className="read-only">
             ◈ {dirty || poolDirty || itemDirty || recipeDirty || creatureDirty ? "Unsaved draft" : "Read-only by default"}
           </span>
@@ -463,10 +464,10 @@ export default function App() {
             <div className="eyebrow">01 / PROJECT</div>
             <h2>Source connection</h2>
             <p className="muted">
-              Open the game checkout to inspect its live rules and content.
+              The validated project opens automatically. Change it here to relocate.
             </p>
             <button className="primary full" onClick={pick} disabled={!!busy}>
-              Choose repository <span>↗</span>
+              Change Project <span>↗</span>
             </button>
             <form
               onSubmit={(e) => {
@@ -488,7 +489,10 @@ export default function App() {
             </form>
             {identity && (
               <div className="project-details">
-                <div className="health">● Integration ready</div>
+                <div className="health" data-testid="startup-ready">● Integration ready · {identity.host_runtime.mode} · protocol {identity.protocol}</div>
+                <code data-testid="active-project">{identity.source.root}</code>
+                {identity.project_selection.notices.map((notice, i) => <p className="muted" key={i}>{notice}</p>)}
+                {identity.host_runtime.notice && <p className="muted">{identity.host_runtime.notice}</p>}
                 <dl>
                   <dt>Branch</dt>
                   <dd>{identity.source.branch || "No Git branch"}</dd>
@@ -516,6 +520,9 @@ export default function App() {
                     {identity.protocol}
                   </p>
                   <code>{identity.runtime.executable}</code>
+                  <code>{identity.host_runtime.bridge}</code>
+                  <p>{identity.creature_contract} · {identity.recipe_contract}</p>
+                  <p>Project: {identity.project_selection.selected_from}</p>
                   <p>
                     Game SHA {short(identity.source.game_source_sha256)}
                     <br />
@@ -998,7 +1005,7 @@ export default function App() {
           </strong>
           {error && <p>{error.remedy}</p>}
         </div>
-        <span className="runtime-tag">LOCAL / OFFLINE · W4A</span>
+        <span className="runtime-tag">LOCAL / OFFLINE · W4B</span>
       </footer>
     </main>
   );

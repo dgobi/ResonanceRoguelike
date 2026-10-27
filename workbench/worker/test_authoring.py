@@ -19,6 +19,9 @@ def data_fixture(destination):
         shutil.copy2(p, target)
     shutil.copytree(ROOT / "roguelike/data", destination / "roguelike/data")
     shutil.copy2(ROOT / "requirements-baseline.txt", destination / "requirements-baseline.txt")
+    marker = destination / "workbench/src-tauri/tauri.conf.json"
+    marker.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / "workbench/src-tauri/tauri.conf.json", marker)
     return destination
 
 class AuthoringTests(unittest.TestCase):

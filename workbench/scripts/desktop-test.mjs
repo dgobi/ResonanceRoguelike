@@ -20,6 +20,7 @@ await mkdir(workerTemp);
 const port = 9333;
 const env = {
   ...process.env,
+  RESONANCE_WORKBENCH_CONFIG_DIR: resolve(output, `settings-${Date.now()}`),
   TMP: workerTemp,
   TEMP: workerTemp,
   WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS: `--remote-debugging-port=${port} --remote-debugging-address=127.0.0.1`,
@@ -61,7 +62,7 @@ const receipt = {
 };
 const began = performance.now();
 try {
-  child = spawn(executable, [], {
+  child = spawn(executable, env.RESONANCE_PYTHON ? ["--diagnostic-runtime"] : [], {
     cwd: output,
     env,
     windowsHide: true,
@@ -119,6 +120,7 @@ try {
     assert(!text.includes("A place to understand the world")); assert(!text.includes("Your world, under the lens"));
     await page.screenshot({path: resolve(output, "startup.png")});
   }
+  await page.waitForFunction(() => !document.querySelector(".status-dot.working"), null, {timeout: 45000});
   await page.getByLabel("Repository directory").fill(root);
   const startOpen = performance.now();
   await page

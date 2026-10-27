@@ -1,4 +1,4 @@
-# Resonance Workbench · W4A
+# Resonance Workbench · W4B
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, inert component items,
@@ -397,39 +397,78 @@ the buttons to zoom, and press Home to fit. Arrow keys pan the focused canvas.
 with a deliberately incorrect width. **Cancel** terminates the active worker.
 Authored-layout Source JSON remains read-only; ordinary buildings expose the W1 workflow above.
 
+## Windows launch and project settings
+
+This workstation is preconfigured for `G:\GameDev\RoguelikeProject`. Open
+**Launch Workbench.vbs** in this folder (or the corrected desktop shortcut).
+The application selects the checkout, verifies the bundled Python/bridge and
+protocol 7 capabilities, opens the content browser and generates the initial
+production preview. No source chooser, Python installation or environment
+variable is needed. Installed NSIS distributions use their installed application
+shortcut; installed-shortcut and clean-machine WebView2 provisioning are untested.
+
+A valid saved project wins; otherwise Workbench checks the running application's
+checkout, then the optional workstation fallback in `owner-defaults.json`.
+Every candidate must contain game/Workbench markers and the current data layout;
+the worker verifies its current game imports and capabilities before authoring.
+The interpreter environment is never treated as a source checkout.
+
+**Change Project** deliberately selects another complete checkout. **Repository
+directory / Open directory** also accepts a path. Successful choices are saved
+atomically in `%APPDATA%\com.resonance.workbench\project.json`, outside the game
+and its saves, and survive restarts/updates. Missing or corrupt preferences are
+reported and replaced only after a validated fallback handshake. If no valid
+project exists, the error names the checked path and Change Project remains
+available. Existing unsaved-draft discard/keep controls apply before switching;
+document/review tokens are never carried across roots.
+
+The sidebar shows source root/revision, worker mode and protocol. **Runtime &
+source identity** includes Python/bridge paths, capability versions and selection
+origin. A raw `target/release/deps` executable is unsupported and says so. Keep
+`resonance-workbench.exe`, `bridge.py` and the complete `python/` directory together
+when distributing a portable app. The initial working directory does not matter.
+
+Ordinary release launches always use the bundled worker. A stale
+`RESONANCE_PYTHON` is visibly ignored; deliberate developer overrides require
+`--diagnostic-runtime` (or a development build) and must be absolute existing
+paths. No interpreter path is accepted from frontend IPC or project preferences.
+Diagnostic settings isolation uses the process-only
+`RESONANCE_WORKBENCH_CONFIG_DIR`; normal launches use the per-user location above.
+
 ## Development and builds
 
 Requirements: Windows x64, Node **24.x** (tested 24.15.0), npm (tested 11.12.1),
 Rust/MSVC **1.95.0**, Visual Studio 2022 C++ tools/Windows SDK, and WebView2.
-CPython **3.11** with the root `requirements-baseline.txt` is the development
-runtime. The project's established environment supplies dependencies only;
-imports always come from the selected checkout. Other operating systems are
-unverified; runtime preparation and packaging are Windows-specific in W0.
+CPython **3.11** with exact root `requirements-baseline.txt` dependencies is the
+development runtime. `npm.cmd run dev` uses the existing pinned environment in
+`owner-defaults.json`, falling back to prepared `worker/runtime` if that
+interpreter is absent. The real development bridge imports the selected current
+game. A deliberate `RESONANCE_PYTHON` override receives the same runtime checks.
 
 From `workbench/` in PowerShell:
 
 ```powershell
 npm.cmd ci
-$env:RESONANCE_PYTHON = 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
 npm.cmd run dev
-```
-
-`RESONANCE_PYTHON` is a trusted **launching-shell** setting, never a frontend
-argument. Without it, development uses `worker/runtime/python.exe` if prepared,
-then the selected repository's `.venv/Scripts/python.exe`. A missing runtime has
-an actionable error. Installed/portable release builds use their bundled runtime
-unless this explicit environment override is set.
-
-```powershell
-# Prepare a redistributable CPython 3.11.0 runtime and exact, hash-pinned wheels.
-# First preparation downloads the official Python archive and wheels.
-.\scripts\prepare-runtime.ps1 -Python $env:RESONANCE_PYTHON
-npm.cmd run build                    # executable + resources, no installer
+# First-time build preparation downloads checked Python and wheels:
+.\scripts\prepare-runtime.ps1 -Python 'G:\GameDev\RoguelikeBaseline-20261020\project\.venv\Scripts\python.exe'
+npm.cmd run build                    # executable + complete resources
 npm.cmd run bundle                   # same app plus NSIS installer
+npm.cmd run test:startup             # isolated native startup/restart scenarios
 ```
 
-Outputs: `src-tauri/target/release/resonance-workbench.exe` with `python/` and
-`bridge.py`; installer in `src-tauri/target/release/bundle/nsis/`.
+Production builds verify Python 3.11.0, every pinned dependency and native imports
+before compiling. Missing/incomplete runtime preparation fails the build; owners
+of a complete distribution do not run the preparation script. Both Tauri config
+routes include the runtime. Outputs are
+`src-tauri/target/release/resonance-workbench.exe`, `bridge.py`, `python/`, and
+`src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.1_x64-setup.exe`.
+The startup runner requires this release bundle, a current debug build
+(`cargo build --locked --manifest-path src-tauri/Cargo.toml`), and the test-only
+fault worker (`rustc scripts/fault-worker.rs -o .artifacts/fault-worker.exe`).
+It creates only ignored disposable data/config/binary artifacts and controls its
+own native windows with local CDP events. See [W4B delivery](docs/W4B_DELIVERY.md).
+
 The Python archive and wheel hashes are checked during preparation. npm and
 Cargo lockfiles pin transitive dependencies. `rust-toolchain.toml` fixes the
 compiler. Rebuild downloads require connectivity; **application use is offline**.

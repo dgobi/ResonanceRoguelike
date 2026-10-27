@@ -10,6 +10,10 @@ export type Source = {
   catalog_sha256: string;
 };
 export type Identity = {
+  host_runtime: { mode: string; python: string; bridge: string; resource_directory: string; application: string; override_present: boolean; notice: string | null };
+  project_selection: { root: string; selected_from: string; notices: string[] };
+  creature_contract: string;
+  recipe_contract: string;
   protocol: number;
   worker_version: string;
   worker_sha256: string;

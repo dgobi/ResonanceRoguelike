@@ -35,6 +35,8 @@ class BridgeTests(unittest.TestCase):
         self.assertTrue(response["ok"], response)
         r = response["result"]
         self.assertEqual(r["contract"], "g2-2")
+        self.assertTrue(r["runtime"]["imports_verified"])
+        self.assertEqual(r["runtime"]["game_imports"]["engine.data_loader"], "roguelike/engine/data_loader.py")
         self.assertEqual(r["runtime"]["dependencies"]["tcod"], "19.3.0")
         self.assertEqual(len(r["source"]["game_source_sha256"]), 64)
         self.assertIn("layout editing/saving", r["unavailable"])

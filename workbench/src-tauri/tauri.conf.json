@@ -1,12 +1,12 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Resonance Workbench",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "identifier": "com.resonance.workbench",
   "build": {
     "beforeDevCommand": "npm run web",
     "devUrl": "http://127.0.0.1:1420",
-    "beforeBuildCommand": "npm run build:web",
+    "beforeBuildCommand": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify-runtime.ps1 && npm run build:web",
     "frontendDist": "../dist"
   },
   "app": {
@@ -27,14 +27,23 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis"],
-    "icon": ["icons/icon.ico"],
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "icons/icon.ico"
+    ],
     "resources": {
-      "../worker/bridge.py": "bridge.py"
+      "../worker/bridge.py": "bridge.py",
+      "../worker/runtime/": "python/"
     },
     "windows": {
-      "webviewInstallMode": { "type": "skip" },
-      "nsis": { "installMode": "currentUser" }
+      "webviewInstallMode": {
+        "type": "skip"
+      },
+      "nsis": {
+        "installMode": "currentUser"
+      }
     }
   }
 }
