@@ -44,6 +44,7 @@ struct Session {
     document: Option<authoring::Document>,
     pool_document: Option<authoring::Document>,
     content_documents: std::collections::HashMap<String, authoring::Document>,
+    handoffs: std::collections::HashMap<String, authoring::Handoff>,
     creature_document: Option<authoring::Document>,
     applying: bool,
     pending_project: Option<(u64, ProjectConnection)>,
@@ -93,6 +94,7 @@ impl Host {
             state.document = None;
             state.pool_document = None;
             state.content_documents.clear();
+            state.handoffs.clear();
             state.creature_document = None;
         }
         cleanup_scratch(&mut state)?;
@@ -575,6 +577,7 @@ async fn open_project(
             state.pending_project = None;
             state.document = None; state.pool_document = None;
             state.content_documents.clear(); state.creature_document = None;
+            state.handoffs.clear();
             response["result"]["project_selection"] = serde_json::to_value(selection).unwrap();
         }
         Ok(response)

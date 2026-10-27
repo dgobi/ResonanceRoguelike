@@ -428,14 +428,17 @@ export default function App() {
       });
     }
   }
-  async function contentApplied(owner:string,asset:string,result:unknown) {
+  async function contentApplied(owner:string,asset:string,result:unknown,covered:()=>void=()=>{}) {
+    covered();
     const token=epoch.current; setReceipt(result); setDependencyVersion(v=>v+1);
     const originating=contentRef.current[owner];
     if(!originating)throw new Error("File saved; originating document is no longer open.");
     const catalog=await request<{assets:Asset[]}>("describe"); if(token!==epoch.current)return;
     setAssets(catalog.result.assets);
-    const reopened=await call<Inspection>("open_document",{asset,replaceToken:owner,expectedSha256:(result as {after_sha256:string}).after_sha256}); if(token!==epoch.current)return;
+    covered();
+    const reopened=await call<Inspection>("open_document",{asset,replaceToken:owner,expectedSha256:(result as {after_sha256:string}).after_sha256,handoffId:(result as {handoff_id?:string}).handoff_id}); if(token!==epoch.current)return;
     verifyReopened(reopened.result,result);
+    covered();
     setContentDocuments(d=>installDocument(d,reopened.result,reopened.result.id,owner));
     setActiveContent(active=>active===owner ? reopened.result.document_token! : active);
     if(poolDocument) {
@@ -892,7 +895,7 @@ export default function App() {
             active={creatureActive} onCancel={()=>void cancel()} selectedCreatureId={selectedCreatureId} dependencyVersion={dependencyVersion} /></div>}
           {Object.entries(contentDocuments).map(([token,entry])=><div key={token} data-document-inspector={entry.document.path} hidden={activeContent!==token || creatureActive}><Authoring
             document={entry.document} onDirty={dirty=>setContentDocuments(d=>d[token] && d[token].dirty!==dirty ? {...d,[token]:{...d[token],dirty}}:d)}
-            onApplied={(path,result)=>contentApplied(token,path,result)} onError={setError}
+            onApplied={(path,result,covered)=>contentApplied(token,path,result,covered)} onError={setError}
             subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={activeContent===token && !creatureActive} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
             contentNavigation={{selectedId:entry.selectedId,trail:entry.trail,

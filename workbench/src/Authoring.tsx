@@ -28,6 +28,7 @@ import {
 import { type RequestLease } from "./requests";
 import type { Disk, DiskSubscription } from "./workspace";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
+import { requireCovered, type Candidate } from "./reopen";
 
 type Verdict = {
   valid: boolean;
@@ -65,7 +66,7 @@ export function Authoring({
 }: {
   document: Inspection;
   onDirty: (dirty: boolean) => void;
-  onApplied: (path: string, receipt: unknown) => Promise<void>;
+  onApplied: (path: string, receipt: unknown, covered?: () => void) => Promise<void>;
   onError: (e: Failure | null) => void;
   busy: string;
   beginRequest: (label: string) => RequestLease;
@@ -113,7 +114,9 @@ export function Authoring({
   const [disk, setDisk] = useState<Disk | null>(null),
     [confirm, setConfirm] = useState(false);
   const [localError, setLocalError] = useState("");
-  const [saved, setSaved] = useState<{path:string; after_sha256:string} | null>(null);
+  const [saved, setSaved] = useState<({path:string; after_sha256:string; handoff_id?:string} & {candidate:Candidate}) | null>(null);
+  const intent = useRef({variant,variantId});
+  intent.current = {variant,variantId};
   const [evidenceVersion, setEvidenceVersion] = useState(dependencyVersion);
   const [previewEvidence,setPreviewEvidence]=useState<{frame:FamilyPreview;text:string;version:number;dependencies:number;stale:boolean}|null>(null);
   const [focus, setFocus] = useState<{ cell: Cell; layer: Layer } | null>(null);
@@ -280,6 +283,7 @@ export function Authoring({
   async function apply() {
     if (pendingEdit || applying.current || !verdict?.review_token) return;
     applying.current = true;
+    const candidate = {text:latest.current,...intent.current};
     setConfirm(false);
     const request = beginRequest("Revalidating and applying one file…");
     onError(null);
@@ -295,9 +299,9 @@ export function Authoring({
         confirmed: true,
       });
       if (!request.current()) return;
-      setSaved(r.result);
+      setSaved({...r.result,candidate});
       setVerdict(null);
-      await onApplied(r.result.path, r.result);
+      await onApplied(r.result.path, r.result, () => requireCovered(candidate,{text:latest.current,...intent.current}));
     } catch (e) {
       if (request.current()) {
         onError(asFailure(e));
@@ -313,7 +317,13 @@ export function Authoring({
     if (!saved) return;
     const request = beginRequest("Reopening saved file…");
     onError(null);
-    try { await onApplied(saved.path, saved); }
+    try {
+      const covered=()=>requireCovered(saved.candidate,{text:latest.current,...intent.current});
+      covered();
+      await revocation.current;
+      covered();
+      await onApplied(saved.path, saved, covered);
+    }
     catch (e) { if (request.current()) onError(asFailure(e)); }
     finally { request.finish(); }
   }

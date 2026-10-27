@@ -34,13 +34,13 @@ export async function workspaceJourney(page,root,output,receipt) {
   };
   // Observe the real host sweep. A one-shot transport rejection after a real
   // successful write exercises the saved/reopen-failed UI without altering files.
-  await page.evaluate(()=>{
+  await page.evaluate(lost=>{
     const original=window.fetch.bind(window);
     window.w5c={sweeps:[],active:0,maxActive:0,failReopen:false};
     window.fetch=async(input,init)=>{
       const url=new URL(String(input),location.href),command=url.hostname==="ipc.localhost" ? decodeURIComponent(url.pathname.slice(1)):"";
       const args=command==="open_document" ? JSON.parse(typeof init.body==="string" ? init.body:new TextDecoder().decode(init.body)):null;
-      if(command==="open_document" && args?.expectedSha256 && window.w5c.failReopen){window.w5c.failReopen=false;return new Response(JSON.stringify({code:"TEST_REOPEN_FAILURE",message:"Injected verified-reopen transport failure.",remedy:"Retry verified reopen."}),{headers:{"Content-Type":"application/json","Tauri-Response":"error"}});}
+      if(command==="open_document" && args?.expectedSha256 && window.w5c.failReopen){window.w5c.failReopen=false;if(lost){const response=await original(input,init);window.w5c.lostResponse=await response.clone().json();}return new Response(JSON.stringify({code:"TEST_REOPEN_FAILURE",message:"Injected verified-reopen transport failure.",remedy:"Retry verified reopen."}),{headers:{"Content-Type":"application/json","Tauri-Response":"error"}});}
       if(command!=="workspace_disk")return original(input,init);
       const started=performance.now();window.w5c.active++;window.w5c.maxActive=Math.max(window.w5c.maxActive,window.w5c.active);
       try{const response=await original(input,init),result=await response.clone().json();if(result.ok)window.w5c.sweeps.push({started,wall_ms:performance.now()-started,...result.result});
@@ -48,7 +48,7 @@ export async function workspaceJourney(page,root,output,receipt) {
         return response;}
       finally{window.w5c.active--;}
     };
-  });
+  },process.env.W5D_REOPEN_REGRESSION === "lost");
   const measure=async count=>{
     const before=await page.evaluate(()=>({time:performance.now(),index:window.w5c.sweeps.length}));
     await page.waitForTimeout(6800);
@@ -138,7 +138,21 @@ export async function workspaceJourney(page,root,output,receipt) {
   assert.equal(await source(),drafts.get(paths[2]));await tab(paths[4]);
   await editor().getByTestId("saved-reopen-failed").waitFor();assert.equal(await source(),drafts.get(paths[4]));
   const target=paths[4].replace("lab_note_primary_a",ids.get(paths[4]));const saved=await readFile(resolve(root,target));assert.equal(digest(saved),verdict.draft_sha256);
-  assert.equal((await ipc("apply_document",{token:tokens.get(paths[4]),reviewToken:verdict.review_token,confirmed:true})).error.code,"REVIEW_REQUIRED");
+  assert(["REVIEW_REQUIRED","UNKNOWN_DOCUMENT"].includes((await ipc("apply_document",{token:tokens.get(paths[4]),reviewToken:verdict.review_token,confirmed:true})).error.code));
+  if(process.env.W5D_REOPEN_REGRESSION === "newer") {
+    const newer=drafts.get(paths[4])+" \n\t";
+    await editor().locator("textarea.source-editor").fill(newer);await editIdle();
+    assert.equal(await source(),newer);
+    await eb("Retry verified reopen").click();await idle();
+    assert.equal(await source(),newer,"Retry must preserve accepted post-publication text");
+    assert.match(await page.locator("footer").innerText(),/NEWER_DRAFT/);
+    await page.getByLabel("Reader title",{exact:true}).filter({visible:true}).fill("Accepted structured work after publication");await editIdle();
+    const structured=await source();assert.match(structured,/Accepted structured work/);
+    await eb("Retry verified reopen").click();await idle();assert.equal(await source(),structured);
+    receipt.checks.push("raw and structured edits accepted after save survive a refused reopen");
+    await b("Close project").click();await b("Discard and continue").click();await idle();await b("Open directory").click();await idle();
+    return;
+  }
   await eb("Retry verified reopen").click();await idle();assert.equal((await source()).replace(/\r\n/g,"\n"),saved.toString().replace(/\r\n/g,"\n"));
   assert.equal(await editor().getByTestId("saved-reopen-failed").count(),0);
   assert.doesNotMatch(await page.locator("footer").innerText(),/TEST_REOPEN_FAILURE/);

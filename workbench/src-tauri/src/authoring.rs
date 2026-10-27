@@ -94,6 +94,24 @@ struct Review {
     seed: u32,
     inputs: Option<String>,
 }
+// Session-local completed write identity. It cannot authorize another write.
+#[derive(Clone)]
+pub struct Handoff {
+    source: String,
+    revision: u64,
+    path: String,
+    sha256: String,
+    replacement: Option<String>,
+}
+fn handoff_owner(state: &mut Session, id: &str, asset: &str, expected: Option<&str>) -> Result<(String, bool), Failure> {
+    let h = state.handoffs.get(id).cloned().ok_or_else(unknown_document)?;
+    if file_key(asset) != file_key(&h.path) || expected != Some(h.sha256.as_str()) { return Err(conflict()); }
+    let token = h.replacement.as_ref().unwrap_or(&h.source);
+    let doc = current_document(state, token).ok_or_else(unknown_document)?;
+    let revision = if h.replacement.is_some() { 0 } else { h.revision };
+    if doc.revision != revision { return Err(failure("NEWER_DRAFT", "Published candidate no longer covers this document.", "Keep or copy the newer draft before deliberate reconciliation.")); }
+    Ok((token.clone(), h.replacement.is_some()))
+}
 pub(crate) fn hash(bytes: &[u8]) -> String {
     format!("{:x}", Sha256::digest(bytes))
 }
@@ -380,15 +398,20 @@ pub async fn open_document(
     asset: String,
     replace_token: Option<String>,
     expected_sha256: Option<String>,
+    handoff_id: Option<String>,
 ) -> Result<Value, Failure> {
     let operation = Operation::begin(&host)?;
     let host = host.inner().clone();
     tauri::async_runtime::spawn_blocking(move || {
-        let (root, asset, discovered_family, previous) = {
+        let (root, asset, discovered_family, previous, replace_token, already_reopened) = {
             let mut state = host.inner.lock().unwrap();
             operation.check(&state)?;
             let asset = discovered_path(&state, &asset)?;
             let family = state.discovered_families.get(&asset).cloned();
+            let (replace_token, already_reopened) = if let Some(id) = &handoff_id {
+                let (token, done) = handoff_owner(&mut state, id, &asset, expected_sha256.as_deref())?;
+                (Some(token), done)
+            } else { (replace_token, false) };
             let previous = replacement_snapshot(&mut state, replace_token.as_deref())?;
             if family.is_some() {
                 if replace_token.is_none() {
@@ -401,12 +424,17 @@ pub async fn open_document(
             (state
                 .root
                 .clone()
-                .ok_or_else(|| io_error("No project open."))?, asset, family, previous)
+                .ok_or_else(|| io_error("No project open."))?, asset, family, previous, replace_token, already_reopened)
         };
         let path = checked_target(&root, &asset, false)?;
         let original = read_source(&path)?;
         if expected_sha256.as_ref().is_some_and(|expected| *expected != hash(&original)) {
             return Err(conflict());
+        }
+        if already_reopened {
+            let mut state=host.inner.lock().unwrap(); operation.check(&state)?;
+            check_replacement(&mut state, previous.as_ref())?;
+            return Ok(envelope(previous.unwrap().inspection));
         }
         let evidence_inputs = if dependency_bound(&asset) { Some(input_stamp(&root)?) } else { None };
         let mut response = run_worker(
@@ -464,6 +492,7 @@ pub async fn open_document(
         if registered {
             if let Some(previous) = previous { state.content_documents.retain(|_, d| d.token != previous.token); }
             state.content_documents.insert(file_key(&document.relative), document);
+            if let Some(id)=handoff_id { state.handoffs.get_mut(&id).ok_or_else(unknown_document)?.replacement=Some(token); }
         }
         else {
             let slot = if is_pool(&document.relative) { &mut state.pool_document } else if is_creature(&document.relative) { &mut state.creature_document } else { &mut state.document };
@@ -909,7 +938,7 @@ pub async fn apply_document(
     let (operation, root, doc, review) = admit_apply(&host, &token, &review_token, confirmed, || {})?;
     let host = host.inner().clone();
     tauri::async_runtime::spawn_blocking(move || {
-        let result = (|| {
+        let mut result = (|| {
             let target = checked_target(&root, &doc.relative, false)?;
             let _pins = pin_inputs(&root, &target)?;
             let source_lock = pin_source(&target)?;
@@ -939,6 +968,14 @@ pub async fn apply_document(
         let mut state = host.inner.lock().unwrap();
         operation.check(&state)?;
         revoke_all(&mut state);
+        if let Ok(receipt)=&mut result {
+            if doc.family.is_some() {
+                let id=uuid::Uuid::new_v4().to_string();
+                state.handoffs.insert(id.clone(),Handoff {source:doc.token.clone(),revision:doc.revision,
+                    path:review.destination.clone(),sha256:hash(review.draft.as_bytes()),replacement:None});
+                receipt["handoff_id"]=json!(id);
+            }
+        }
         drop(state);
         result.map(envelope)
     }).await.map_err(io_error)?
@@ -1032,6 +1069,25 @@ mod tests {
             state.discovered.extend(documents.iter().map(|d|d.relative.clone()));
         }
         (root,host,documents)
+    }
+    #[test]
+    fn completed_handoff_rejects_newer_drafts_and_reacquires_only_its_successor() {
+        let (_root,host,docs)=workspace_fixture();
+        let first=&docs[0]; let mut state=host.inner.lock().unwrap();
+        let h=Handoff {source:first.token.clone(),revision:first.revision,path:first.relative.clone(),sha256:hash(&first.original),replacement:None};
+        state.handoffs.insert("fact".into(),h.clone());
+        assert_eq!(handoff_owner(&mut state,"fact",&h.path,Some(&h.sha256)).unwrap(),(first.token.clone(),false));
+        current_document(&mut state,&first.token).unwrap().revision+=1;
+        assert_eq!(handoff_owner(&mut state,"fact",&h.path,Some(&h.sha256)).unwrap_err().code,"NEWER_DRAFT");
+        let mut replacement=first.clone();replacement.token="successor".into();replacement.revision=0;
+        state.content_documents.insert(file_key(&h.path),replacement);
+        state.handoffs.get_mut("fact").unwrap().replacement=Some("successor".into());
+        assert!(replacement_snapshot(&mut state,Some(&first.token)).is_err());
+        for _ in 0..2 {assert_eq!(handoff_owner(&mut state,"fact",&h.path,Some(&h.sha256)).unwrap(),("successor".into(),true));}
+        assert!(handoff_owner(&mut state,"fact",&docs[1].relative,Some(&h.sha256)).is_err());
+        assert!(handoff_owner(&mut state,"fact",&h.path,Some("forged")).is_err());
+        current_document(&mut state,"successor").unwrap().revision+=1;
+        assert!(handoff_owner(&mut state,"fact",&h.path,Some(&h.sha256)).is_err());
     }
     #[test]
     fn workspace_six_file_owners_aliases_and_cross_document_authority() {
