@@ -1051,6 +1051,8 @@ pre {
   .workspace.authoring-workspace {
     grid-template-columns: 220px minmax(420px, 1fr) 340px;
   }
+  .placement-actors { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; }
+  .placement-actors th, .placement-actors td { padding: 8px; border-bottom: 1px solid #354248; overflow-wrap: anywhere; }
   .layout-details {
     grid-template-columns: 1fr;
   }

@@ -3,6 +3,7 @@ import { LayoutCanvas, type Tool } from "./LayoutCanvas";
 import { MapView } from "./MapView";
 import {
   containerEditable,
+  creatureEditable, addCreature, editCreature, removeCreature,
   diagnosticCell,
   editContainer,
   layoutModel,
@@ -16,8 +17,11 @@ import type { Diagnostic, Preview } from "./protocol";
 
 type Props = {
   draft: string;
+  authoredSubmap?: boolean;
+  sourcePath?: string;
   catalog?: Catalog;
   disabled: string;
+  previewDisabled: boolean;
   diagnostics: Diagnostic[];
   preview: Preview | null;
   diskPreview: Preview | null;
@@ -38,7 +42,7 @@ type Props = {
 export function LayoutEditor(p: Props) {
   const parsed = useMemo(() => layoutModel(p.draft), [p.draft]),
     m = parsed.model;
-  const [layer, setLayer] = useState<Layer>("terrain"),
+  const [layer, setLayer] = useState<Layer>(p.authoredSubmap ? "specials" : "terrain"),
     [tool, setTool] = useState<Tool>("select"),
     [view, setView] = useState("source");
   const [visible, setVisible] = useState<Record<Layer, boolean>>({
@@ -53,6 +57,7 @@ export function LayoutEditor(p: Props) {
     [glyph, setGlyph] = useState(""),
     [decor, setDecor] = useState("");
   const [runtimeCell, setRuntimeCell] = useState<Cell | null>(null);
+  const [placing, setPlacing] = useState(false), [creatureId, setCreatureId] = useState("");
   const [lastFocus, setLastFocus] = useState(p.focus);
   if (p.focus !== lastFocus) {
     setLastFocus(p.focus);
@@ -96,11 +101,16 @@ export function LayoutEditor(p: Props) {
   );
   function select(c: Cell) {
     setSelected(c);
-    const i = specials.findIndex((s) => s.x === c[0] && s.y === c[1]);
+    if (p.authoredSubmap && placing && !disabled && creatureId) {
+      p.onEdit(source => addCreature(source,c,creatureId), "Add creature");
+      setSpecialIndex(specials.length); setPlacing(false); return;
+    }
+    const at = specials.map((s,i)=>({s,i})).filter(({s})=>s.x===c[0] && s.y===c[1]);
+    const i = (at.find(({s})=>creatureEditable(s)) || at[0])?.i ?? -1;
     setSpecialIndex(i >= 0 ? i : null);
   }
   function stroke(cells: Cell[]) {
-    if (activeDisabled || layer === "specials" || !m || !p.catalog) return;
+    if (p.authoredSubmap || activeDisabled || layer === "specials" || !m || !p.catalog) return;
     const empty = Object.keys(m.legend).find((g) => m.legend[g] === null);
     const value =
       layer === "terrain"
@@ -150,7 +160,7 @@ export function LayoutEditor(p: Props) {
           <button
             className="primary"
             disabled={
-              (!!p.disabled && p.disabled !== "Begin edit to paint.") ||
+              p.previewDisabled ||
               !!parsed.reason ||
               p.previewBusy
             }
@@ -163,6 +173,7 @@ export function LayoutEditor(p: Props) {
           </button>
         </div>
       </div>
+      {p.authoredSubmap && <p className="notice">Direct creature placement · source x,y. Terrain, decor, arrival and other records are read-only. Markers are provisional until production validation. Saving a layout does not automatically make it appear in a new campaign.</p>}
       <div className="layout-views tabs">
         <button
           className={view === "source" ? "active" : ""}
@@ -214,7 +225,7 @@ export function LayoutEditor(p: Props) {
                   className={tool === t ? "active" : ""}
                   disabled={
                     ["pencil", "erase", "rectangle"].includes(t) &&
-                    (!!activeDisabled ||
+                    (p.authoredSubmap || !!activeDisabled ||
                       layer === "specials" ||
                       (t === "erase" &&
                         layer === "terrain" &&
@@ -246,6 +257,13 @@ export function LayoutEditor(p: Props) {
               Redo canvas
             </button>
           </div>
+          {p.authoredSubmap && <div className="layout-toolbar">
+            <label>Existing creature<select aria-label="Placement creature" value={creatureId} disabled={!!disabled} onChange={e=>setCreatureId(e.target.value)}>
+              <option value="">Choose creature…</option>{p.catalog?.creatures?.map(c=><option key={c.id} value={c.id}>{c.id} · {c.name}</option>)}
+            </select></label>
+            <button disabled={!!disabled || !creatureId} className={placing ? "active" : ""} onClick={()=>{setPlacing(!placing);setTool("select");setLayer("specials");setVisible(v=>({...v,specials:true}));}}>{placing ? "Cancel placement" : "Place creature"}</button>
+            {placing && <span>Click a source cell. Validate to check admission.</span>}
+          </div>}
           <div className="layer-visibility">
             {(["terrain", "decor", "specials"] as Layer[]).map((l) => (
               <label key={l}>
@@ -278,6 +296,8 @@ export function LayoutEditor(p: Props) {
                 tool={tool}
                 disabled={!!activeDisabled}
                 selected={selected}
+                hovered={hover}
+                authoredSubmap={p.authoredSubmap}
                 focusCell={p.focus?.cell || null}
                 problems={problems}
                 onSelect={select}
@@ -286,6 +306,7 @@ export function LayoutEditor(p: Props) {
                 onGesture={p.onGesture}
                 onError={p.onError}
                 onShortcut={(key) => {
+                  if (p.authoredSubmap && ["b","e","r"].includes(key)) return;
                   if (key === "undo") p.onUndo();
                   else if (key === "redo") p.onRedo();
                   else
@@ -323,7 +344,7 @@ export function LayoutEditor(p: Props) {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </label>
-              {layer === "terrain" ? (
+              {layer === "terrain" && !p.authoredSubmap ? (
                 <label>
                   Existing legend glyph
                   <select
@@ -343,7 +364,7 @@ export function LayoutEditor(p: Props) {
                     ))}
                   </select>
                 </label>
-              ) : layer === "decor" ? (
+              ) : layer === "decor" && !p.authoredSubmap ? (
                 <label>
                   Live decor ID
                   <select
@@ -384,9 +405,9 @@ export function LayoutEditor(p: Props) {
                 </label>
               )}
               <p className="muted small">
-                Terrain leaves other layers intact. Decor replaces only the
+                {p.authoredSubmap ? "Creature records use source-array indices. Select overlapping records individually above. Generated arrival and physical stairs are reserved by the game." : <>Terrain leaves other layers intact. Decor replaces only the
                 selected native cell. A null terrain glyph retains the test
-                context’s ground. Weighted glyphs resolve in production preview.
+                context’s ground. Weighted glyphs resolve in production preview.</>}
               </p>
               <p className="muted small">
                 Raw/property edits clear canvas history. Undo applies only to
@@ -406,20 +427,22 @@ export function LayoutEditor(p: Props) {
                     {m.legend[at.glyph] ?? "underlying terrain"}
                   </code>
                   <br />
-                  Decor: <code>{JSON.stringify(at.decor)}</code>
+                  {p.authoredSubmap ? "Inactive decor_layer (not used by this route)" : "Decor"}: <code>{JSON.stringify(at.decor)}</code>
                 </p>
               )}
               {s && specialIndex !== null && p.catalog ? (
                 <>
                   <code>
-                    special_tiles[{specialIndex}] · {s.type ?? s.kind}
+                    {p.sourcePath} · special_tiles[{specialIndex}] · {s.type ?? s.kind}
                   </code>
                   {containerEditable(s) && <div className="source-links">
                     {(s.loot_pools || []).map((id, i) => <button key={i} disabled={p.previewBusy}
                       onClick={() => p.onPool?.(id, specialIndex, s)}>Open pool {id}</button>)}
                     <small>Declared draft references. Apply container edit before opening a changed selection.</small>
                   </div>}
-                  {containerEditable(s) ? (
+                  {p.authoredSubmap && creatureEditable(s) ? <CreatureFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled}
+                    onApply={value=>p.onEdit(source=>editCreature(source,specialIndex,value),"Move / edit creature")}
+                    onDelete={()=>{p.onEdit(source=>removeCreature(source,specialIndex),"Delete creature");setSpecialIndex(null);}} /> : containerEditable(s) && !p.authoredSubmap ? (
                     <ContainerFields
                       key={`${specialIndex}:${JSON.stringify(s)}`}
                       record={s}
@@ -483,6 +506,13 @@ export function LayoutEditor(p: Props) {
           {shown && (
             <>
               <p className="muted">{shown.context}</p>
+              {p.authoredSubmap && <>
+                <p data-testid="scene-coordinates">Scene origin ({shown.origin.join(", ")}) · actual arrival ({shown.spawn.join(", ")}) · {shown.actors.length} instantiated actor(s).</p>
+                <table className="placement-actors"><thead><tr><th>Source record / creature</th><th>Source x,y</th><th>Scene x,y</th><th>Actual class / count</th></tr></thead><tbody>
+                  {shown.population_receipts?.filter(r=>r.kind==="creature").map(r=><tr key={r.record_id}><td>#{r.source_index} · {r.creature_definition?.id}</td><td>{r.source_xy.join(", ")}</td><td>{r.xy.join(", ")}</td><td>{r.actor_classes?.join(", ")} · {r.actual_count}</td></tr>)}
+                </tbody></table>
+                <details><summary>Instantiated actors and provenance</summary><pre className="raw" data-testid="placement-receipt">{JSON.stringify({source_path:shown.source_path,source_sha256:shown.source_sha256,draft_sha256:shown.draft_sha256,source:shown.source,seed:shown.seed,scene_seed:shown.scene_seed,scene_address:shown.scene_address,origin:shown.origin,spawn:shown.spawn,stairs:shown.stairs,access:shown.access,access_source:shown.access_source,actors:shown.population_receipts?.filter(r=>r.kind==="creature")},null,2)}</pre></details>
+              </>}
               <p className="muted">
                 Seed {shown.seed} · scene {shown.scene_seed} ·{" "}
                 {shown.generation_revision} · {shown.elapsed_ms} ms generation
@@ -524,6 +554,23 @@ export function LayoutEditor(p: Props) {
       )}
     </section>
   );
+}
+
+function CreatureFields({record, catalog, disabled, onApply, onDelete}: {
+  record: Special; catalog: Catalog; disabled: boolean;
+  onApply: (v:{x:number;y:number;creature_id:string})=>void; onDelete:()=>void;
+}) {
+  const [x,setX]=useState(String(record.x)), [y,setY]=useState(String(record.y)), [id,setId]=useState(String(record.creature_id || ""));
+  return <fieldset className="container-fields" disabled={disabled}><legend>Direct creature · source coordinates</legend>
+    <label>Creature ID<select aria-label="Marker creature ID" value={id} onChange={e=>setId(e.target.value)}>
+      {!catalog.creatures?.some(c=>c.id===id) && <option value={id}>{id} · unresolved</option>}
+      {catalog.creatures?.map(c=><option key={c.id} value={c.id}>{c.id}</option>)}
+    </select></label>
+    <div className="coordinate-fields"><label>Source X<input aria-label="Creature source X" type="number" step="1" value={x} onChange={e=>setX(e.target.value)}/></label>
+    <label>Source Y<input aria-label="Creature source Y" type="number" step="1" value={y} onChange={e=>setY(e.target.value)}/></label></div>
+    <button disabled={!x || !y || !Number.isInteger(Number(x)) || !Number.isInteger(Number(y)) || !catalog.creatures?.some(c=>c.id===id)} onClick={()=>onApply({x:Number(x),y:Number(y),creature_id:id})}>Apply creature edit</button>
+    <button onClick={onDelete}>Delete creature</button><small>Initial occupancy is checked by production validation. Invalid placements stay in the draft.</small>
+  </fieldset>;
 }
 
 function ContainerFields({

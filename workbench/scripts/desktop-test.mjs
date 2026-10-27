@@ -43,9 +43,9 @@ if (faultModes.includes(mode)) {
   env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
   env.WORKBENCH_FAULT = mode;
 }
-if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-") || mode.startsWith("recipe-worker-") || mode.startsWith("creature-worker-")) {
+if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-") || mode.startsWith("recipe-worker-") || mode.startsWith("creature-worker-") || mode.startsWith("submap-worker-")) {
   env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
-  env.WORKBENCH_FAULT = mode.replace("pool-worker-", "draft-worker-").replace("item-worker-", "draft-worker-").replace("recipe-worker-", "draft-worker-").replace("creature-worker-", "draft-worker-");
+  env.WORKBENCH_FAULT = mode.replace("submap-worker-", "draft-worker-").replace("pool-worker-", "draft-worker-").replace("item-worker-", "draft-worker-").replace("recipe-worker-", "draft-worker-").replace("creature-worker-", "draft-worker-");
   env.WORKBENCH_REAL_PYTHON = resolve(
     workbench,
     "src-tauri/target/release/python/python.exe",
@@ -158,12 +158,13 @@ try {
         "fresh native process reopens original valid source after interruption",
       );
     }
-  } else if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-") || mode.startsWith("recipe-worker-") || mode.startsWith("creature-worker-")) {
+  } else if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-") || mode.startsWith("recipe-worker-") || mode.startsWith("creature-worker-") || mode.startsWith("submap-worker-")) {
     const poolFault = mode.startsWith("pool-worker-");
     const itemFault = mode.startsWith("item-worker-");
     const recipeFault = mode.startsWith("recipe-worker-");
     const creatureFault = mode.startsWith("creature-worker-");
-    const asset = creatureFault ? "roguelike/data/entities/creatures/hollow_revenant.json" : recipeFault ? "roguelike/data/recipes/bile_coating.json" : itemFault ? "roguelike/data/items/components/wood_bundle.json" : poolFault ? "roguelike/data/loot_pools/alchemist_reagents.json" : "roguelike/data/buildings/commercial/apothecary_a.json";
+    const submapFault = mode.startsWith("submap-worker-");
+    const asset = submapFault ? "roguelike/docs/examples/g17_authored_creature_room.json" : creatureFault ? "roguelike/data/entities/creatures/hollow_revenant.json" : recipeFault ? "roguelike/data/recipes/bile_coating.json" : itemFault ? "roguelike/data/items/components/wood_bundle.json" : poolFault ? "roguelike/data/loot_pools/alchemist_reagents.json" : "roguelike/data/buildings/commercial/apothecary_a.json";
     const before = await readFile(resolve(root, asset));
     await page
       .locator('[data-testid="map"][data-ready="true"]')
@@ -172,9 +173,10 @@ try {
     await page.locator(`[data-asset="${asset}"]`).click();
     await page.waitForFunction(() => !document.querySelector(".busy-overlay"));
     await page.getByRole("button", { name: "Begin edit", exact: true }).click();
-    await page
-      .getByLabel(creatureFault ? "Creature name" : recipeFault ? "Recipe description" : itemFault ? "Item description" : "Description", { exact: true })
-      .fill("Unsaved draft for worker failure control");
+    if (submapFault) await page.getByRole("button",{name:"Source",exact:true}).click();
+    const draftControl = submapFault ? page.locator("#draft-json") : page.getByLabel(creatureFault ? "Creature name" : recipeFault ? "Recipe description" : itemFault ? "Item description" : "Description", {exact:true});
+    const unsaved = submapFault ? (await draftControl.inputValue())+" " : "Unsaved draft for worker failure control";
+    await draftControl.fill(unsaved);
     const start = performance.now();
     await page
       .getByRole("button", { name: poolFault || itemFault || recipeFault || creatureFault ? "Validate draft" : "Preview draft", exact: true })
@@ -199,10 +201,10 @@ try {
     }
     receipt.draft_fault_elapsed_ms = Math.round(performance.now() - start);
     assert.equal(await page.getByTestId("draft-verdict").count(), 0);
-    assert.equal(await page.getByLabel(creatureFault ? "Creature name" : recipeFault ? "Recipe description" : itemFault ? "Item description" : "Description", {exact:true}).inputValue(), "Unsaved draft for worker failure control");
+    assert.equal(await draftControl.inputValue(),unsaved);
     assert.equal(
       await page
-        .getByRole("button", { name: recipeFault || creatureFault ? "Apply variant" : "Review & apply", exact: true })
+        .getByRole("button", { name: recipeFault || creatureFault || submapFault ? "Apply variant" : "Review & apply", exact: true })
         .isDisabled(),
       true,
     );
@@ -488,6 +490,10 @@ try {
     if (mode === "visual") {
       const { visualJourney } = await import("./visual-journey.mjs");
       await visualJourney(page, root, output, receipt, context);
+    }
+    if (mode === "submaps") {
+      const {submapJourney} = await import("./submap-journey.mjs");
+      await submapJourney(page,root,output,receipt,context);
     }
     if (mode === "pools") {
       const { poolJourney } = await import("./pool-journey.mjs");

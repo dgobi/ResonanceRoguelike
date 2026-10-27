@@ -116,6 +116,7 @@ try {
     assert.equal((await ipc(page,'validate_document',{token:oldToken,draft:opened.result.raw,variantId:null})).error?.code,'UNKNOWN_DOCUMENT');entry.old_token_revoked=true;
   });
   await run('changed-project-restart',{config:ownerConfig,project:fixture});
+  if (!process.env.WORKBENCH_STARTUP_SMOKE) {
   await writeFile(resolve(ownerConfig,'project.json'),JSON.stringify({version:1,project_root:resolve(output,'missing project')}));
   await run('stale-setting',{config:ownerConfig},async(page,entry)=>{assert((await page.locator('.project-details').textContent()).includes('is unavailable'));entry.safe_fallback=true;});
   await writeFile(resolve(ownerConfig,'project.json'),'{invalid');await run('corrupt-setting',{config:ownerConfig});
@@ -133,6 +134,7 @@ try {
   if(process.env.WORKBENCH_OWNER_SHORTCUT) {
     await run('corrected-owner-shortcut',{shortcut:process.env.WORKBENCH_OWNER_SHORTCUT,realConfig:true});
     await run('corrected-owner-shortcut-restart',{shortcut:process.env.WORKBENCH_OWNER_SHORTCUT,realConfig:true});
+  }
   }
   assert.deepEqual(await readFile(resolve(root,source)),before);receipt.protected_creature_sha256=createHash('sha256').update(before).digest('hex');receipt.passed=true;
 } catch(error) {receipt.passed=false;receipt.error=String(error.stack||error);process.exitCode=1;}

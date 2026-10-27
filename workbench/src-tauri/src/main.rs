@@ -191,7 +191,7 @@ fn validate_request(request: &Request) -> Result<(), Failure> {
         let layout = parts.len() == 4
             && parts[..3] == ["roguelike", "data", "layouts"]
             && authoring::valid_filename(parts[3]);
-        if !layout && !authoring::is_pool(asset) && !authoring::is_item(asset) && !authoring::is_recipe(asset) && !authoring::is_creature(asset) && authoring::relative_building(asset).is_err() {
+        if !layout && asset != authoring::G17_EXAMPLE && !authoring::is_pool(asset) && !authoring::is_item(asset) && !authoring::is_recipe(asset) && !authoring::is_creature(asset) && authoring::relative_building(asset).is_err() {
             return Err(failure(
                 "PATH_ESCAPE",
                 "Asset is outside the W0 layout route.",
@@ -451,7 +451,7 @@ fn run_worker(
                 .as_array()
                 .into_iter()
                 .flatten()
-                .filter(|a| a["editable"] == true || a["route"] == "item_definition" || a["route"] == "recipe_definition" || a["route"] == "creature_definition")
+                .filter(|a| a["editable"] == true || a["route"] == "authored_submap" || a["route"] == "item_definition" || a["route"] == "recipe_definition" || a["route"] == "creature_definition")
                 .filter_map(|a| a["path"].as_str().map(str::to_owned))
                 .collect();
         }
@@ -464,7 +464,7 @@ fn verify_identity(identity: &Value, root: &Path, bridge: &Path) -> Result<(), F
     let bridge_hash = std::fs::read(bridge).map(|bytes| authoring::hash(&bytes)).unwrap_or_default();
     if !same_root || identity["protocol"] != PROTOCOL || identity["worker_sha256"] != bridge_hash || identity["worker_version"] != env!("CARGO_PKG_VERSION")
         || identity["runtime"]["compatible"] != true || identity["runtime"]["imports_verified"] != true
-        || identity["creature_contract"] != "revenant-hp-1" || identity["recipe_contract"] != "immediate-components-1"
+        || identity["layout_contract"] != "direct-creatures-1" || identity["creature_contract"] != "revenant-hp-1" || identity["recipe_contract"] != "immediate-components-1"
         || identity["contract"] != "g2-2" {
         return Err(failure("HANDSHAKE_MISMATCH", "Worker, source imports or authoring capabilities do not match the selected project.", "Use matching current game, application and worker resources."));
     }
@@ -558,6 +558,7 @@ fn main() {
             close_project,
             authoring::open_document,
             authoring::validate_document,
+            authoring::invalidate_document,
             authoring::apply_document,
             authoring::document_disk,
             authoring::finish_close
@@ -645,7 +646,7 @@ mod tests {
         std::fs::write(&bridge, "bridge fixture").unwrap();
         let valid = json!({"protocol":7,"worker_version":env!("CARGO_PKG_VERSION"),"source":{"root":root},"worker_sha256":authoring::hash(b"bridge fixture"),
             "runtime":{"compatible":true,"imports_verified":true},"contract":"g2-2",
-            "recipe_contract":"immediate-components-1","creature_contract":"revenant-hp-1"});
+            "layout_contract":"direct-creatures-1","recipe_contract":"immediate-components-1","creature_contract":"revenant-hp-1"});
         assert!(verify_identity(&valid, &root, &bridge).is_ok());
         for pointer in ["/protocol", "/worker_version", "/source/root", "/worker_sha256", "/runtime/compatible", "/runtime/imports_verified", "/contract", "/recipe_contract", "/creature_contract"] {
             let mut bad = valid.clone();

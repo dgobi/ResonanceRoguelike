@@ -1,9 +1,71 @@
-# Resonance Workbench · W4B
+# Resonance Workbench · W4C
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, inert component items,
-one immediate recipe family and ordinary revenant variants. The game remains the
+one immediate recipe family, ordinary revenant variants and direct creature
+placement in authored underground layouts. The game remains the
 validation authority. No campaign, running game or Internet service is required.
+
+## Place a creature in an authored underground room
+
+1. Launch **[Launch Workbench.vbs](Launch%20Workbench.vbs)**, then search for
+   `g17_authored_creature_room`. The original under `roguelike/docs/examples/`
+   is a read-only source: **Begin edit** creates an in-memory draft whose only
+   publication destination is a **new** `roguelike/data/layouts/<id>.json`.
+   Supported existing layouts in that immediate directory use the same workflow.
+   `starting_lab`, weighted/legacy layouts, plazas and entrance routes cannot be
+   promoted by raw edits. Ordinary buildings retain W2 painting without creature
+   placement controls. No original layout, example or sidecar can be overwritten.
+2. The existing Pixi canvas shows source `x,y`, terrain glyphs, direct containers,
+   item markers, pink creature diamonds and the intended arrival circle. The
+   selected cell is gold; hover is blue. Terrain, non-creature records, arrival
+   and metadata are read-only context. G17 does **not** consume `decor_layer`;
+   retained values are labelled inactive and are not drawn as realized obstacles.
+   Production preview shows actual decor, physical stairs and generated arrival.
+3. Choose **Existing creature → Place creature**, then click a source cell.
+   Choices are unique loaded non-player creature definitions in the selected
+   project's catalogue, checked with G17. A separately saved W4A variant is
+   available only if actually installed in that catalogue. Click a diamond or
+   use **Placed record** to select an individual array index, including overlaps.
+   Edit **Creature ID**, **Source X/Y**, then **Apply creature edit**; use
+   **Delete creature** to remove just that record. Coordinate controls provide a
+   precise alternative to dragging. **Undo canvas / Redo canvas** use W2 history.
+4. **Preview draft** validates these exact unsaved bytes through the current
+   compiler, `create_submap`, placement admission and `CreatureFactory`. Markers
+   alone are provisional. Errors in **Problems** identify the source record/cell;
+   **Locate cell / record** highlights it. Walls, blocking decor/containers,
+   forbidden water, actual arrival, stairs and overlapping actors are rejected,
+   even when a blocking container occurs later in the array. Swimming follows
+   the existing creature definition. Corridor guards are allowed. No actor is
+   moved automatically to make a draft pass, and a rejected draft stays intact.
+5. **Draft production preview** lists actually instantiated actors, original
+   source coordinates, translated scene coordinates, class/count, seed, source
+   and creature-definition hashes. Origin is measured from production output,
+   never hardcoded. Drafts use the explicitly displayed **generated arrival**
+   context, without a separate access sidecar. **Saved production preview** of
+   the G17 documentation example also runs its existing read-only access
+   sidecar; that distinct context and sidecar hash are disclosed in its receipt.
+   Revealed initial occupancy is authoring evidence, not player FOV, AI/combat,
+   encounter balance, persistence or natural world selection.
+6. Choose **Save as new variant**, enter a unique safe ID, **Validate draft**,
+   inspect **Diff**, then **Apply variant → Confirm apply one file**. The same
+   trusted writer rechecks original entitlement, dependencies and reviewed bytes,
+   publishes without clobbering and verifies reopened bytes. Reopen the variant
+   and **Preview draft** to reproduce its actor/arrival context. **Saving a layout
+   does not automatically make it appear in a new campaign.** No `SubMap.layout_id`,
+   settlement profile, personal save or access sidecar is changed.
+
+Raw JSON, canvas, history, diff and validation share one draft. A move changes only
+the chosen scalar spans; other records and metadata retain their values/order.
+Raw or variant-ID edits clear graphical history. Invalid JSON freezes graphical
+mutation and clears current evidence. Edits/seed changes revoke old host review
+tokens, including in-flight results; source/dependency changes require revalidation.
+Clean open/preview/close writes no source bytes. Drafts remain memory-only. Other
+editor families retain their independent parked drafts; replacing the structure
+document follows the existing discard/reload policy.
+
+See [W4C delivery](docs/W4C_DELIVERY.md) for the disposable native publication proof,
+source-bound actor receipt, negative checks and preservation evidence.
 
 ## Author a creature variant
 
@@ -74,8 +136,8 @@ The [example variant](docs/examples/hollow_revenant_w4a.json) and
 [factory receipt](docs/examples/hollow_revenant_w4a.factory.json) are outside the
 active catalogue. Native publication occurs only in disposable ignored test data.
 See [W4A delivery](docs/W4A_DELIVERY.md) for construction and existing G17 placement
-corroboration, native captures, verification and limits. No creature placement UI,
-AI/effect editor, encounter simulator or gameplay/save changes are included.
+corroboration, native captures, verification and limits. W4C adds only the placement workflow above. No AI/effect editor, encounter
+simulator or gameplay/save changes are included.
 
 ## Author an immediate recipe variant
 
@@ -281,7 +343,7 @@ endpoint or multi-file transaction was added.
 2. Search by ID, description/name or relative path, optionally filter by folder.
    All immediate `data/buildings/<category>/*.json` ordinary buildings appear
    deterministically (58 at the W1 source baseline). Plazas are listed as
-   unsupported/read-only; authored layouts retain W0 read-only inspection.
+   unsupported/read-only; authored layouts use the bounded W4C workflow above.
 3. Select a building such as `commercial/apothecary_a.json`. Source, properties,
    diagnostics, file hash, source revision and worker compatibility are visible.
    **Begin edit** opts into one in-memory draft. The **Authored layout** shows
@@ -395,7 +457,8 @@ the buttons to zoom, and press Home to fit. Arrow keys pan the focused canvas.
 **Generate / refresh** reloads source and uses the entered seed.
 **Test invalid disposable fixture** runs the same validator on a temporary copy
 with a deliberately incorrect width. **Cancel** terminates the active worker.
-Authored-layout Source JSON remains read-only; ordinary buildings expose the W1 workflow above.
+The starting laboratory remains read-only. Supported authored submaps expose
+W4C creature-only drafts; ordinary buildings retain the W1/W2 workflow above.
 
 ## Windows launch and project settings
 
@@ -462,7 +525,7 @@ before compiling. Missing/incomplete runtime preparation fails the build; owners
 of a complete distribution do not run the preparation script. Both Tauri config
 routes include the runtime. Outputs are
 `src-tauri/target/release/resonance-workbench.exe`, `bridge.py`, `python/`, and
-`src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.1_x64-setup.exe`.
+`src-tauri/target/release/bundle/nsis/Resonance Workbench_0.8.0_x64-setup.exe`.
 The startup runner requires this release bundle, a current debug build
 (`cargo build --locked --manifest-path src-tauri/Cargo.toml`), and the test-only
 fault worker (`rustc scripts/fault-worker.rs -o .artifacts/fault-worker.exe`).
@@ -530,9 +593,10 @@ CPython runtime without the game dependency wheels.
 
 ## Contract and limits
 
-The protocol is **7**, worker/app **0.7.0**, game structure contract **g2-2**,
+The protocol is **7**, worker/app **0.8.0**, game structure contract **g2-2**,
 item contract **component-1**, recipe contract **immediate-components-1**, and
-creature contract **revenant-hp-1**.
+creature contract **revenant-hp-1**, with Workbench layout capability
+**direct-creatures-1** (existing G17 rules, no game schema change).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
 opaque document token; validation grants a one-draft review token. Apply takes
@@ -540,8 +604,11 @@ that token and explicit confirmation, never an arbitrary destination or trusted
 frontend verdict. W2's validation token is issued only after the exact draft's
 production preview passes; apply repeats that check with the reviewed seed and
 fresh dependencies. Starting replacement validation revokes an older review even
-if the new worker fails or is cancelled. Variants stay beside the discovered source,
-in its building category, immediate loot_pools directory or supported component folder.
+if the new worker fails or is cancelled. Edits also revoke review capabilities
+and advance the host document revision, preventing late jobs from restoring them.
+Variants stay beside the discovered source,
+in its supported content directory. The allowlisted G17 documentation example
+can publish only a new layout in data/layouts, never into documentation.
 There are no frontend filesystem/shell permissions, arbitrary Python evaluation
 or Git mutations. The only frontend capabilities are local close-event listening.
 
@@ -574,9 +641,10 @@ The canonical loader validates the complete structure catalog. A broken unrelate
 catalog definition can block applying a draft until it is repaired. Discovery
 and raw source inspection remain available when the loader reports structural
 errors. Files over 1 MiB and unsafe destination names are outside W1 authoring.
-Other-family visual editing, special creation/deletion, new legend definitions,
-transform tools, other loot families, selection-profile changes, persistent edit history
-and automatic campaign migration remain outside W4A. Deferred physical specials
+Beyond the direct-creature controls described above, other-family visual editing,
+general special creation/deletion, new legend definitions, transform tools, other
+loot families, selection-profile changes, persistent edit history and automatic
+campaign migration remain outside W4C. Deferred physical specials
 are visible and preserved, but block a successful draft preview with an explicit
 unsupported diagnostic. Other live special types are inspect-only on the canvas.
 

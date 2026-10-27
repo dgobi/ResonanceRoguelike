@@ -139,7 +139,7 @@ export default function App() {
     setBusy("Validating source…");
     const editable =
       asset.startsWith("roguelike/data/buildings/") &&
-      !asset.includes("/plaza/");
+      !asset.includes("/plaza/") || (asset.startsWith("roguelike/data/layouts/") && asset != "roguelike/data/layouts/starting_lab.json") || asset === "roguelike/docs/examples/g17_authored_creature_room.json";
     const inspected = editable
       ? await call<Inspection>("open_document", { asset })
       : await request<Inspection>("inspect", { asset });
@@ -185,7 +185,7 @@ export default function App() {
       );
       setStatus(
         result.passed
-          ? "Ready · production validation and initial occupancy passed."
+          ? "Saved source preview passed. Draft results are shown in the editor."
           : "Preview generated with production occupancy failures. Inspect diagnostics.",
       );
     }
@@ -447,7 +447,7 @@ export default function App() {
           </div>
         </div>
         <div className="top-meta">
-          <span className="chip">W4B</span>
+          <span className="chip">W4C</span>
           <span className="read-only">
             ◈ {dirty || poolDirty || itemDirty || recipeDirty || creatureDirty ? "Unsaved draft" : "Read-only by default"}
           </span>
@@ -1005,7 +1005,7 @@ export default function App() {
           </strong>
           {error && <p>{error.remedy}</p>}
         </div>
-        <span className="runtime-tag">LOCAL / OFFLINE · W4B</span>
+        <span className="runtime-tag">LOCAL / OFFLINE · W4C</span>
       </footer>
     </main>
   );

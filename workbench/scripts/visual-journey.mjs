@@ -368,12 +368,12 @@ export async function visualJourney(page, root, output, receipt, context) {
   await idle();
   assert.equal(await button("Review & apply").isDisabled(), false);
   const external = saved.toString() + "\n";
+  // Confirm the review before editing externally: polling can disable the earlier button.
+  await button("Review & apply").click();
   await writeFile(variantPath, external);
-  // Deliberately apply before the idle file check; host still compares bytes.
   const token = JSON.parse(
     await page.getByTestId("draft-receipt").textContent(),
   ).review_token;
-  await button("Review & apply").click();
   await button("Confirm apply one file").click();
   await idle();
   assert.match(

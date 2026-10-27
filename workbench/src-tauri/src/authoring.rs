@@ -23,6 +23,7 @@ pub struct Document {
     review: Option<Review>,
     writable: bool,
     evidence_inputs: Option<String>,
+    revision: u64,
 }
 #[derive(Clone)]
 struct Review {
@@ -86,9 +87,15 @@ pub fn is_creature(s: &str) -> bool {
     p.len() >= 4 && p[..3] == ["roguelike", "data", "entities"]
         && p[3..p.len()-1].iter().all(|s| valid_id(s)) && valid_filename(p[p.len()-1])
 }
-fn dependency_bound(s: &str) -> bool { is_recipe(s) || is_creature(s) }
+pub const G17_EXAMPLE: &str = "roguelike/docs/examples/g17_authored_creature_room.json";
+pub fn is_layout(s: &str) -> bool {
+    let p: Vec<_> = s.split('/').collect();
+    p.len() == 4 && p[..3] == ["roguelike", "data", "layouts"] && valid_filename(p[3])
+}
+fn is_submap(s: &str) -> bool { is_layout(s) || s == G17_EXAMPLE }
+fn dependency_bound(s: &str) -> bool { is_recipe(s) || is_creature(s) || is_layout(s) || s == G17_EXAMPLE }
 fn relative_content(s: &str) -> Result<PathBuf, Failure> {
-    if is_pool(s) || is_item(s) || is_recipe(s) || is_creature(s) { Ok(PathBuf::from(s)) } else { relative_building(s) }
+    if is_pool(s) || is_item(s) || is_recipe(s) || is_creature(s) || is_layout(s) || s == G17_EXAMPLE { Ok(PathBuf::from(s)) } else { relative_building(s) }
 }
 fn no_link(path: &Path) -> Result<(), Failure> {
     let meta = fs::symlink_metadata(path).map_err(io_error)?;
@@ -109,6 +116,7 @@ fn no_link(path: &Path) -> Result<(), Failure> {
     Ok(())
 }
 fn checked_target(root: &Path, relative: &str, new: bool) -> Result<PathBuf, Failure> {
+    if new && relative == G17_EXAMPLE { return Err(failure("PATH_ESCAPE", "Documentation is read-only.", "Save a supported layout variant.")); }
     let rel = relative_content(relative)?;
     let mut path = root.to_path_buf();
     no_link(&path)?;
@@ -189,6 +197,18 @@ fn revoke_review(host: &Host, token: &str) {
         doc.review = None;
     }
 }
+#[tauri::command]
+pub fn invalidate_document(host: tauri::State<'_, Host>, token: String) -> Result<(), Failure> {
+    advance_document(&host, &token)
+}
+fn advance_document(host: &Host, token: &str) -> Result<(), Failure> {
+    let mut state = host.inner.lock().unwrap();
+    if state.applying { return Err(io_error("Publication in progress.")); }
+    let doc = current_document(&mut state, token).ok_or_else(|| io_error("Document changed."))?;
+    doc.revision += 1;
+    doc.review = None;
+    Ok(())
+}
 fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
     state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).chain(state.item_document.as_mut()).chain(state.recipe_document.as_mut()).chain(state.creature_document.as_mut()).find(|d| d.token == token)
 }
@@ -256,7 +276,7 @@ pub async fn open_document(
         if host.epoch.load(Ordering::SeqCst) != epoch {
             return Err(io_error("Project changed."));
         }
-        let writable = if is_creature(&asset) { asset.starts_with("roguelike/data/entities/creatures/") && response["result"]["editable"] == true } else if is_recipe(&asset) { response["result"]["editable"] == true } else { !is_item(&asset) || (asset.starts_with("roguelike/data/items/components/") && response["result"]["editable"] == true) };
+        let writable = if is_submap(&asset) { response["result"]["editable"] == true && response["result"]["layout_contract"] == "direct-creatures-1" } else if is_creature(&asset) { asset.starts_with("roguelike/data/entities/creatures/") && response["result"]["editable"] == true } else if is_recipe(&asset) { response["result"]["editable"] == true } else { !is_item(&asset) || (asset.starts_with("roguelike/data/items/components/") && response["result"]["editable"] == true) };
         let slot = if is_pool(&asset) { &mut state.pool_document } else if is_item(&asset) { &mut state.item_document } else if is_recipe(&asset) { &mut state.recipe_document } else if is_creature(&asset) { &mut state.creature_document } else { &mut state.document };
         *slot = Some(Document {
             token: token.clone(),
@@ -266,6 +286,7 @@ pub async fn open_document(
             review: None,
             writable,
             evidence_inputs,
+            revision: 0,
         });
         response["result"]["document_token"] = json!(token);
         Ok(response)
@@ -280,7 +301,7 @@ fn destination(
     variant_id: Option<&str>,
 ) -> Result<(String, bool), Failure> {
     if !doc.writable {
-        return Err(failure(if is_creature(&doc.relative) { "READ_ONLY_CREATURE" } else if is_recipe(&doc.relative) { "READ_ONLY_RECIPE" } else { "READ_ONLY_ITEM" }, "This source is outside its supported authoring capability.", "Inspect unsupported or ambiguous sources read-only."));
+        return Err(failure(if is_submap(&doc.relative) || doc.relative == G17_EXAMPLE { "READ_ONLY_LAYOUT" } else if is_creature(&doc.relative) { "READ_ONLY_CREATURE" } else if is_recipe(&doc.relative) { "READ_ONLY_RECIPE" } else { "READ_ONLY_ITEM" }, "This source is outside its supported authoring capability.", "Inspect unsupported or ambiguous sources read-only."));
     }
     if draft.len() > MAX_DRAFT {
         return Err(io_error("Draft exceeds 1 MiB."));
@@ -297,7 +318,7 @@ fn destination(
             ));
         }
         Ok((
-            format!("{}/{}.json", doc.relative.rsplit_once('/').unwrap().0, id),
+            format!("{}/{}.json", if doc.relative == G17_EXAMPLE { "roguelike/data/layouts" } else { doc.relative.rsplit_once('/').unwrap().0 }, id),
             true,
         ))
     } else {
@@ -352,7 +373,7 @@ pub async fn validate_document(
                 op: "preview_draft".into(),
                 asset: Some(dest.clone()),
                 draft: Some(draft.clone()),
-                source_asset: is_creature(&doc.relative).then(|| doc.relative.clone()),
+                source_asset: (is_creature(&doc.relative) || is_submap(&doc.relative)).then(|| doc.relative.clone()),
                 seed: Some(seed),
                 ..Default::default()
             },
@@ -367,12 +388,14 @@ pub async fn validate_document(
         let mut state = host.inner.lock().unwrap();
         let current = current_document(&mut state, &token)
             .ok_or_else(|| io_error("Document changed."))?;
+        if current.revision != doc.revision { return Err(failure("DRAFT_CHANGED", "Draft changed during validation.", "Validate the current draft.")); }
         current.review = None;
         current.evidence_inputs = inputs.clone();
         if response["ok"] == true
             && response["result"]["valid"] == true
             && response["result"]["draft_sha256"] == hash(draft.as_bytes())
-            && (!(is_recipe(&doc.relative) || is_creature(&doc.relative)) || variant)
+            && (!(is_recipe(&doc.relative) || is_creature(&doc.relative) || is_submap(&doc.relative)) || variant)
+            && (!is_submap(&doc.relative) || (response["result"]["layout_contract"] == "direct-creatures-1" && response["result"]["population_verified"] == true && response["result"]["route"] == "authored_submap"))
             && (!is_creature(&doc.relative) || (response["result"]["creature_contract"] == "revenant-hp-1" && response["result"]["factory_verified"] == true && response["result"]["route"] == "creature_definition"))
         {
             let review_token = uuid::Uuid::new_v4().to_string();
@@ -452,6 +475,17 @@ fn pin_inputs(root: &Path, target: &Path) -> Result<Vec<File>, Failure> {
     }
     let mut handles = vec![pin(root, true)?];
     walk(&root.join("roguelike"), target, &mut handles, false)?;
+    let examples = root.join("roguelike/docs/examples");
+    if examples.exists() {
+        handles.push(pin(&root.join("roguelike/docs"), true)?);
+        handles.push(pin(&examples, true)?);
+        for name in ["g17_authored_creature_room.json", "g17_authored_creature_room.access.json"] {
+            let p = examples.join(name);
+            if p.exists() && dunce::canonicalize(&p).map_err(io_error)? != dunce::canonicalize(target).map_err(io_error)? {
+                handles.push(pin(&p, false)?);
+            }
+        }
+    }
     Ok(handles)
 }
 
@@ -500,6 +534,16 @@ fn input_stamp(root: &Path) -> Result<String, Failure> {
     }
     let mut digest = Sha256::new();
     walk(&root.join("roguelike"), &mut digest, false)?;
+    // Fixed read-only example inputs; never broaden documentation write access.
+    for relative in [G17_EXAMPLE, "roguelike/docs/examples/g17_authored_creature_room.access.json"] {
+        digest.update(relative.as_bytes());
+        let path = root.join(relative);
+        if path.exists() {
+            let mut cursor = root.to_path_buf();
+            for component in Path::new(relative).components() { cursor.push(component); no_link(&cursor)?; }
+            digest.update(fs::read(path).map_err(io_error)?);
+        }
+    }
     Ok(format!("{:x}", digest.finalize()))
 }
 
@@ -563,6 +607,9 @@ enum Fault {
 }
 
 fn publish(root: &Path, doc: &Document, review: &Review, fault: Fault) -> Result<Value, Failure> {
+    if is_submap(&doc.relative) && !review.variant {
+        return Err(failure("LAYOUT_VARIANT_REQUIRED", "Layout publication requires a new ID/file in layouts/.", "Review a unique layout variant."));
+    }
     if is_creature(&doc.relative) && !review.variant {
         return Err(failure("CREATURE_VARIANT_REQUIRED", "Creature publication requires a new ID and file.", "Review a unique creature variant."));
     }
@@ -704,10 +751,11 @@ pub async fn apply_document(
             if review.inputs.as_ref().is_some_and(|s| *s != stamp) {
                 return Err(failure("SOURCE_CHANGED", "Content dependencies changed since review.", "Validate the retained draft and review again."));
             }
-            let response = run_worker(app, host.clone(), Request {op:"preview_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),source_asset:is_creature(&doc.relative).then(||doc.relative.clone()),seed:Some(review.seed),..Default::default()}, epoch)?;
+            let response = run_worker(app, host.clone(), Request {op:"preview_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),source_asset:(is_creature(&doc.relative) || is_submap(&doc.relative)).then(||doc.relative.clone()),seed:Some(review.seed),..Default::default()}, epoch)?;
             if response["ok"] != true || response["result"]["valid"] != true || response["result"]["draft_sha256"] != hash(review.draft.as_bytes())
-                || response["result"]["route"] != if is_pool(&doc.relative) { "contextual_loot_pool" } else if is_item(&doc.relative) { "item_definition" } else if is_recipe(&doc.relative) { "recipe_definition" } else if is_creature(&doc.relative) { "creature_definition" } else { "ordinary_building" }
+                || response["result"]["route"] != if is_pool(&doc.relative) { "contextual_loot_pool" } else if is_item(&doc.relative) { "item_definition" } else if is_recipe(&doc.relative) { "recipe_definition" } else if is_creature(&doc.relative) { "creature_definition" } else if is_submap(&doc.relative) { "authored_submap" } else { "ordinary_building" }
                 || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != env!("CARGO_PKG_VERSION")
+                || (is_submap(&doc.relative) && (!review.variant || response["result"]["layout_contract"] != "direct-creatures-1" || response["result"]["population_verified"] != true))
                 || (is_item(&doc.relative) && (response["result"]["factory_verified"] != true || response["result"]["item_contract"] != "component-1"))
                 || (is_recipe(&doc.relative) && (!review.variant || response["result"]["recipe_contract"] != "immediate-components-1"))
                 || (is_creature(&doc.relative) && (!review.variant || response["result"]["creature_contract"] != "revenant-hp-1" || response["result"]["factory_verified"] != true))
@@ -739,6 +787,7 @@ pub fn document_disk(host: tauri::State<'_, Host>, token: String) -> Result<Valu
     let path = checked_target(&root, &doc.relative, false)?;
     let bytes = read_source(&path)?;
     let dependencies_changed = if let Some(stamp) = &doc.evidence_inputs { input_stamp(&root)? != *stamp } else { false };
+    if dependencies_changed || bytes != doc.original { revoke_review(&host, &token); }
     let pending: Vec<_> = fs::read_dir(path.parent().unwrap())
         .map_err(io_error)?
         .filter_map(Result::ok)
@@ -773,6 +822,7 @@ mod tests {
             review: None,
             writable: true,
             evidence_inputs: None,
+            revision: 0,
         };
         let review = Review {
             token: "reviewed".into(),
@@ -783,6 +833,43 @@ mod tests {
             inputs: None,
         };
         (root, doc, review)
+    }
+    #[test]
+    fn submap_example_variant_only_and_interrupted_publication() {
+        let (root, mut doc, mut review) = fixture();
+        doc.relative = G17_EXAMPLE.into();
+        let source = root.path().join(G17_EXAMPLE);
+        fs::create_dir_all(source.parent().unwrap()).unwrap(); fs::write(&source, &doc.original).unwrap();
+        fs::create_dir_all(root.path().join("roguelike/data/layouts")).unwrap();
+        assert_eq!(destination(&doc, "{\"id\":\"new_room\"}", Some("new_room")).unwrap(), ("roguelike/data/layouts/new_room.json".into(), true));
+        assert_eq!(publish(root.path(), &doc, &review, Fault::None).unwrap_err().code, "LAYOUT_VARIANT_REQUIRED");
+        review.destination = "roguelike/data/layouts/new_room.json".into(); review.variant = true;
+        for fault in [Fault::BeforeStage,Fault::AfterStage,Fault::BeforeReplace] {
+            assert!(publish(root.path(), &doc, &review, fault).is_err());
+            assert_eq!(fs::read(&source).unwrap(), doc.original);
+            assert_eq!(fs::read_dir(root.path().join("roguelike/data/layouts")).unwrap().count(),0);
+        }
+        publish(root.path(), &doc, &review, Fault::None).unwrap();
+        assert_eq!(fs::read(root.path().join(&review.destination)).unwrap(), review.draft.as_bytes());
+        assert_eq!(publish(root.path(), &doc, &review, Fault::None).unwrap_err().code,"VARIANT_EXISTS");
+        assert_eq!(fs::read(&source).unwrap(),doc.original);
+        for path in ["roguelike/data/layouts/a.json:ads","roguelike/data/layouts/nul.json","roguelike/data/layouts/../a.json","roguelike/data/layouts/nested/a.json","roguelike/saves/a.json","roguelike/docs/examples/new.json"] {assert!(relative_content(path).is_err());}
+        doc.writable=false;
+        assert_eq!(destination(&doc,"{\"id\":\"promoted\"}",Some("promoted")).unwrap_err().code,"READ_ONLY_LAYOUT");
+    }
+    #[test]
+    fn draft_revision_and_sidecar_changes_revoke_evidence() {
+        let (root, mut doc, review)=fixture();
+        doc.review=Some(review);let host=Host::default();
+        {let mut state=host.inner.lock().unwrap();state.root=Some(root.path().to_path_buf());state.document=Some(doc);}
+        advance_document(&host,"trusted").unwrap();
+        let current=session_doc(&host,"trusted").unwrap().1;
+        assert_eq!(current.revision,1);assert!(current.review.is_none());
+        assert!(advance_document(&host,"forged").is_err());
+        let before=input_stamp(root.path()).unwrap();
+        let sidecar=root.path().join("roguelike/docs/examples/g17_authored_creature_room.access.json");
+        fs::create_dir_all(sidecar.parent().unwrap()).unwrap();fs::write(&sidecar,b"{}").unwrap();
+        assert_ne!(input_stamp(root.path()).unwrap(),before);
     }
     #[test]
     fn creature_entitlement_fifth_document_and_variant_only() {

@@ -11,6 +11,7 @@ export type Catalog = {
     { name: string; container: boolean; blocks_movement: boolean }
   >;
   loot_pools: string[];
+  creatures?: { id: string; name: string; path: string }[];
 };
 export type Special = {
   x: number;
@@ -29,6 +30,7 @@ export type Layout = {
   decor_layer?: (string | null)[][];
   special_tiles?: Special[];
   legend_weights?: Record<string, unknown>;
+  player_start?: { x: number; y: number };
   placement?: {
     targets?: { x: number; y: number; kind: string }[];
     entrances?: { x: number; y: number }[];
@@ -211,6 +213,41 @@ export function containerEditable(s: Special): boolean {
       (Array.isArray(s.loot_pools) &&
         s.loot_pools.every((v) => typeof v === "string")))
   );
+}
+
+export function creatureEditable(s: Special): boolean {
+  return (s.type ?? s.kind) === "creature" && !(s.type && s.kind && s.type !== s.kind);
+}
+export function editCreature(source: string, index: number, update: {x: number; y: number; creature_id: string}): string {
+  const {model, reason} = layoutModel(source);
+  if (!model) throw new Error(reason);
+  const record = model.special_tiles?.[index];
+  if (!record || !creatureEditable(record)) throw new Error("Select a direct creature record.");
+  if (![update.x, update.y].every(Number.isInteger) || update.x < 0 || update.y < 0 || update.x >= model.width || update.y >= model.height)
+    throw new Error("Use integer source coordinates inside the grid.");
+  for (const [key, value] of Object.entries(update))
+    if (record[key] !== value) source = valueEdit(source, ["special_tiles", index, key], value);
+  return source;
+}
+export function addCreature(source: string, cell: Cell, creatureId: string): string {
+  const {model, reason} = layoutModel(source);
+  if (!model) throw new Error(reason);
+  const record = {type:"creature", x:cell[0], y:cell[1], creature_id:creatureId};
+  if (!model.special_tiles) return valueEdit(source, ["special_tiles"], [record]);
+  const {tree, bom} = syntax(source), node = findNodeAtLocation(tree!, ["special_tiles"])!;
+  const last = node.children?.at(-1);
+  const offset = (last ? last.offset + last.length : node.offset + 1) + bom;
+  return source.slice(0,offset) + (node.children?.length ? "," : "") + JSON.stringify(record) + source.slice(offset);
+}
+export function removeCreature(source: string, index: number): string {
+  const {model, reason} = layoutModel(source);
+  if (!model) throw new Error(reason);
+  if (!model.special_tiles?.[index] || !creatureEditable(model.special_tiles[index])) throw new Error("Select a direct creature record.");
+  const {tree, bom} = syntax(source), nodes = findNodeAtLocation(tree!, ["special_tiles"])!.children!, node = nodes[index];
+  let start = node.offset, end = start + node.length;
+  if (index < nodes.length-1) end = nodes[index+1].offset;
+  else if (index > 0) start = nodes[index-1].offset + nodes[index-1].length;
+  return source.slice(0,start+bom) + source.slice(end+bom);
 }
 export function editContainer(
   source: string,

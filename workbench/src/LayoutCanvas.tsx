@@ -33,6 +33,8 @@ type Props = {
   tool: Tool;
   disabled: boolean;
   selected: Cell | null;
+  hovered?: Cell | null;
+  authoredSubmap?: boolean;
   focusCell: Cell | null;
   problems: Cell[];
   onSelect: (cell: Cell) => void;
@@ -75,7 +77,7 @@ export function LayoutCanvas(props: Props) {
       }
       host.appendChild(app.canvas);
       app.canvas.tabIndex = 0;
-      app.canvas.setAttribute("aria-label", "Authored building canvas");
+      app.canvas.setAttribute("aria-label", latest.current.authoredSubmap ? "Authored submap canvas" : "Authored building canvas");
       const world = new Container(),
         terrain = new Container(),
         decor = new Graphics(),
@@ -100,6 +102,8 @@ export function LayoutCanvas(props: Props) {
       };
       const mark = () => {
         selection.clear();
+        const h = latest.current.hovered;
+        if (h) selection.rect(h[0]*TILE,h[1]*TILE,TILE,TILE).stroke({width:1/camera.scale,color:0x8bd5ef});
         const c = latest.current.selected;
         if (c)
           selection
@@ -151,7 +155,7 @@ export function LayoutCanvas(props: Props) {
         decor.visible = p.visible.decor;
         specials.visible = p.visible.specials;
         decor.clear();
-        m.decor_layer?.forEach((row, y) =>
+        if (!p.authoredSubmap) m.decor_layer?.forEach((row, y) =>
           row.forEach((v, x) => {
             if (v !== null)
               decor.circle(x * TILE + 12, y * TILE + 12, 3).fill(0xc2ace6);
@@ -159,6 +163,10 @@ export function LayoutCanvas(props: Props) {
         );
         specials.clear();
         m.special_tiles?.forEach((s) => {
+          if ((s.type ?? s.kind) === "creature") {
+            specials.poly([s.x*TILE+8,s.y*TILE+1,s.x*TILE+15,s.y*TILE+8,s.x*TILE+8,s.y*TILE+15,s.x*TILE+1,s.y*TILE+8]).fill(0xed8996);
+            return;
+          }
           const container = (s.type ?? s.kind) === "container";
           specials
             .rect(s.x * TILE + 2, s.y * TILE + 2, 12, 12)
@@ -169,6 +177,10 @@ export function LayoutCanvas(props: Props) {
               .lineTo(s.x * TILE + 13, s.y * TILE + 13)
               .stroke({ width: 1, color: 0x8bd5ef });
         });
+        if (p.authoredSubmap && m.player_start) {
+          const {x,y}=m.player_start;
+          specials.circle(x*TILE+8,y*TILE+8,6).stroke({width:1.5,color:0xffffff});
+        }
         warnings.clear();
         for (const [x, y] of p.problems) {
           warnings
@@ -367,6 +379,7 @@ export function LayoutCanvas(props: Props) {
     props.visible,
     props.problems,
     props.selected,
+    props.hovered,
   ]);
   useEffect(() => {
     if (props.focusCell) controls.current?.focus(props.focusCell);
@@ -400,7 +413,7 @@ export function LayoutCanvas(props: Props) {
       <div ref={element} className="map-canvas" data-testid="layout-map" />
       <div className="map-foot">
         <span>
-          Glyph = terrain · ● decor · □ container · × other record · △ problem
+          Glyph = terrain · ● decor · □ container · ◆ creature · × other record · ○ intended arrival · △ problem
         </span>
         <span>Alt/middle drag: pan · Wheel: zoom</span>
       </div>

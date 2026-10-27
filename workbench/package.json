@@ -1,7 +1,7 @@
 {
   "name": "resonance-workbench",
   "private": true,
-  "version": "0.7.1",
+  "version": "0.8.0",
   "type": "module",
   "engines": {
     "node": ">=24.0.0 <25"
@@ -18,6 +18,7 @@
     "test:desktop": "node scripts/desktop-test.mjs",
     "test:authoring": "node scripts/run-authoring.mjs",
     "test:visual": "node scripts/run-visual.mjs",
+    "test:submaps": "node scripts/run-submaps.mjs",
     "test:pools": "node scripts/run-pools.mjs",
     "test:items": "node scripts/run-items.mjs",
     "test:creatures": "node scripts/run-creatures.mjs",

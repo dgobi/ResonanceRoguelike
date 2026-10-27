@@ -37,7 +37,9 @@ class AuthoringTests(unittest.TestCase):
             self.assertEqual(inspected["raw"].encode("utf-8"), before)
             self.assertEqual(path.read_bytes(), before)
             self.assertEqual((path.stat().st_mtime_ns,path.stat().st_ctime_ns),(stat.st_mtime_ns,stat.st_ctime_ns))
-        self.assertTrue(all(not a["editable"] for a in result["assets"] if a["route"] not in ("ordinary_building", "contextual_loot_pool", "item_definition", "recipe_definition", "creature_definition")))
+        self.assertTrue(all(not a["editable"] for a in result["assets"] if a["route"] not in ("ordinary_building", "contextual_loot_pool", "item_definition", "recipe_definition", "creature_definition", "authored_submap")))
+        self.assertEqual([a["path"] for a in result["assets"] if a["route"] == "authored_submap" and a["editable"]],
+                         ["roguelike/docs/examples/g17_authored_creature_room.json"])
 
     def test_exact_draft_bytes_real_contract_and_route_rejections(self):
         raw = json.loads((ROOT / ASSET).read_text(encoding="utf-8"))

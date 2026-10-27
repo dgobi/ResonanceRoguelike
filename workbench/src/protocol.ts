@@ -133,6 +133,11 @@ export type Feature = {
   items?: unknown[];
 };
 export type Preview = {
+  population_receipts?: {kind:string;record_id:string;source_index:number;source_xy:Cell;xy:Cell;actor_classes?:string[];actual_count:number;creature_definition?:{id:string;sha256:string};actors:unknown[]}[];
+  stairs?: unknown[];
+  access_source?: unknown;
+  source_path?: string;
+  source_sha256?: string;
   valid: boolean;
   passed: boolean;
   width: number;
