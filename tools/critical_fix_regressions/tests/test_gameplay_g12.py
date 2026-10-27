@@ -363,6 +363,8 @@ class ExpeditionRewardsTests(unittest.TestCase):
                         self.assertEqual(r._effective_clip, r._viewport)
                         self.assertGreaterEqual(r._viewport.height, r._line_height)
                         self.assertLess(r._viewport.bottom, r._footer_top)
+                        self.assertTrue(all(r._font.size(hint)[0] <= r._viewport.width for hint in r._footer_lines))
+                        self.assertLessEqual(r._footer_top + 4 + 2 * (r._font.get_linesize() + 2) + r._font.get_linesize(), r._frame.bottom)
                         seen_titles.update(r._visible_title_lines)
                         seen_body.update(r._complete_rows)
                         if r._scroll == r._max_scroll: break

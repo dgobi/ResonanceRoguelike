@@ -296,7 +296,9 @@ class TextReader:
         # width before sizing its height. Later pages get their own layout.
         body = pages[self._page].get("text", "")
         title = self._def.get("title") or ""
-        natural = max([self._font.size(line)[0] for line in body.split("\n")] + [260])
+        scroll_hint = "Up/Down PgUp/PgDn Home/End scroll"
+        natural = max([self._font.size(line)[0] for line in body.split("\n")]
+                      + [260, self._ftitle.size(title)[0], self._font.size(scroll_hint)[0]])
         pw = min(sw - 40, natural + pad * 2)
         width = pw - pad * 2
         rows, lh = self._page_lines(width, engine)
@@ -375,7 +377,8 @@ class TextReader:
         status = f"< > Page {self._page + 1}/{len(pages)}"
         if self._max_scroll:
             status += f"   {round(100 * self._scroll / self._max_scroll)}%"
-        for index, hint in enumerate((status, "Up/Down PgUp/PgDn Home/End scroll", "Esc / Enter close")):
+        self._footer_lines = (status, scroll_hint, "Esc / Enter close")
+        for index, hint in enumerate(self._footer_lines):
             screen.blit(self._font.render(hint, True, self.DIM), (content.left, footer_top + 4 + index * footer_lh))
         screen.set_clip(previous_clip)
         # Concise production evidence; surfaces remain private rendering data.
