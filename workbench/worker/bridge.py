@@ -25,13 +25,14 @@ sys.dont_write_bytecode = True
 # This small preview needs no parallel BLAS. Bound native thread-pool overhead
 # before importing NumPy/tcod; the game's algorithms and data stay unchanged.
 os.environ.update(OPENBLAS_NUM_THREADS="1", OMP_NUM_THREADS="1", MKL_NUM_THREADS="1")
-PROTOCOL = 6
-WORKER_VERSION = "0.6.0"
+PROTOCOL = 7
+WORKER_VERSION = "0.7.0"
 ROUTE = "authored_submap"
 EDIT_ROUTE = "ordinary_building"
 POOL_ROUTE = "contextual_loot_pool"
 ITEM_ROUTE = "item_definition"
 RECIPE_ROUTE = "recipe_definition"
+CREATURE_ROUTE = "creature_definition"
 DEPENDENCIES = {"pygame": "2.6.1", "tcod": "19.3.0", "numpy": "2.4.6",
                 "cffi": "2.1.1", "pycparser": "3.11", "typing_extensions": "4.16.0"}
 MAX_REQUEST = 4 * 1024 * 1024
@@ -148,7 +149,8 @@ def asset_path(root, value, *, new=False):
     pool = len(relative.parts) == 4 and relative.parts[:3] == ("roguelike", "data", "loot_pools")
     item = len(relative.parts) >= 4 and relative.parts[:3] == ("roguelike", "data", "items")
     recipe = len(relative.parts) >= 4 and relative.parts[:3] == ("roguelike", "data", "recipes")
-    if relative.is_absolute() or not (layout or building or pool or item or recipe) or relative.suffix != ".json":
+    creature = len(relative.parts) >= 4 and relative.parts[:3] == ("roguelike", "data", "entities")
+    if relative.is_absolute() or not (layout or building or pool or item or recipe or creature) or relative.suffix != ".json":
         fail("UNSUPPORTED_ASSET", value, "Select an ordinary building, contextual pool or read-only authored layout.")
     path = (root / relative).resolve(strict=not new)
     if not path.is_relative_to(root / "roguelike/data"):
@@ -156,7 +158,7 @@ def asset_path(root, value, *, new=False):
     return path
 
 
-def discover(root):
+def discover(root, data=None):
     """Same immediate-folder convention as StructureCatalog, including invalid candidates."""
     from generation.structure_contract import ELIGIBILITY, read_document, StructureError
     rows = []
@@ -220,6 +222,28 @@ def discover(root):
                 category=str(raw.get("category", "")), result_item=raw.get("result_item"), route=RECIPE_ROUTE,
                 editable=cap["editable"] and len(locations) == 1, execution_class=cap["execution_class"],
                 provenance="Selected checkout / recursive recipe definition", validation="ambiguous / invalid source" if len(locations) != 1 else "not yet checked",
+                source_paths=[s["path"] + s["pointer"] for s in locations]))
+    from engine.creature_authoring import capability as creature_capability, source_matches
+    entities = definition_sources(root / "roguelike/data", "entities")
+    for p in sorted((root / "roguelike/data/entities").rglob("*.json")):
+        relative = p.relative_to(root).as_posix()
+        try:
+            raw = read_document(p)
+            records = list(enumerate(raw)) if isinstance(raw, list) else [(None, raw)]
+        except StructureError:
+            records = [(None, {})]
+        for index, raw in records:
+            raw = raw if isinstance(raw, dict) else {}
+            pointer = "" if index is None else f"/{index}"
+            identifier = str(raw.get("id", p.stem))
+            locations = source_matches(identifier, entities)
+            loaded = bool(data and data.entities.get(identifier) == raw and locations)
+            cap = creature_capability(raw, relative, pointer)
+            rows.append(dict(path=relative, pointer=pointer, id=identifier, name=str(raw.get("name", "")),
+                category="player" if identifier.casefold() == "player" else "creatures" if "/entities/creatures/" in relative else "other entities",
+                route=CREATURE_ROUTE, editable=cap["editable"] and loaded and len(locations) == 1,
+                loaded=loaded, shape=cap["shape"], provenance="Selected checkout / recursive entity definition",
+                validation="loaded" if loaded and len(locations) == 1 else "ambiguous / unloaded source",
                 source_paths=[s["path"] + s["pointer"] for s in locations]))
     return rows
 
@@ -480,10 +504,95 @@ def recipe_validation(request, root, scratch, identity):
                 limitations="Recipe contract and output factory checked. Probe cases separately report actual eligibility and isolated production exchange; validation is not a claim of ordinary player crafting or acquisition.")
 
 
+def creature_indexes(data_root):
+    return {family: definition_sources(data_root, family) for family in ("entities", "items", "bodies", "zones")}
+
+
+def creature_context(raw, data, path, identity, digest, *, observe=False):
+    from engine.creature_authoring import capability, validate_definition, direct_references, factory_preview, SELECTION
+    indexes = creature_indexes(data.root)
+    records = []
+    for index, definition in enumerate(raw if isinstance(raw, list) else [raw]):
+        if not isinstance(definition, dict): continue
+        pointer = f"/{index}" if isinstance(raw, list) else ""
+        cap = capability(definition, path, pointer)
+        try:
+            diagnostics, refs = validate_definition(definition, data, path, indexes)
+        except StructureError as error:
+            diagnostics, refs = [d.json() for d in error.diagnostics], []
+        if any(d["severity"] == "error" for d in diagnostics):
+            cap["editable"] = False
+        observed = None
+        if observe and cap["editable"] and not any(d["severity"] == "error" for d in diagnostics):
+            observed = {**factory_preview(definition, data), "source": identity, "path": path,
+                        "source_sha256": digest, "loaded_catalog_sha256": data.structure_catalog.identity,
+                        "worker_version": WORKER_VERSION, "worker_contract": PROTOCOL,
+                        "worker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                        "observed_at_utc": datetime.now(timezone.utc).isoformat()}
+        records.append(dict(id=definition.get("id", ""), pointer=pointer, definition=definition, capability=cap,
+                            diagnostics=diagnostics, dependencies=refs, factory=observed,
+                            references=direct_references(data, definition.get("id"))))
+    return dict(records=records, selection=SELECTION)
+
+
+def creature_validation(request, root, scratch, identity):
+    from engine.data_loader import DataLoader
+    from engine.creature_authoring import validate_definition, CONTRACT, SCOPE
+    from generation.structure_contract import read_document, StructureError
+    path = asset_path(root, request["asset"], new=True)
+    original_path = asset_path(root, request.get("source_asset"))
+    draft = request.get("draft")
+    if not isinstance(draft, str) or len(draft.encode("utf-8")) > 1024 * 1024:
+        fail("MALFORMED_REQUEST", "Expected creature draft up to 1 MiB.", "Use the supported creature controls.")
+    if path.parent != original_path.parent:
+        fail("PATH_ESCAPE", "Creature variants must stay beside their original source.", "Select a discovered creature source.")
+    copied = scratch / "data"
+    shutil.copytree(root / "roguelike/data", copied)
+    selected = copied / path.relative_to(root / "roguelike/data")
+    digest = hashlib.sha256(draft.encode("utf-8")).hexdigest()
+    diagnostics = []; context = None; syntax = False
+    try:
+        original = read_document(original_path)
+        selected.write_bytes(draft.encode("utf-8"))
+        raw = read_document(selected); syntax = True
+        data = DataLoader(str(copied))
+        indexes = creature_indexes(copied)
+        diagnostics, _ = validate_definition(raw, data, request["asset"], indexes,
+            original=original, original_path=request["source_asset"], writable=True)
+        # Recheck original identity against the live loader, not a modified draft
+        # at a path supplied by the renderer. Host binds source_asset to its token.
+        original_data = DataLoader(str(root / "roguelike/data"))
+        original_problems, _ = validate_definition(original, original_data, request["source_asset"], creature_indexes(original_data.root))
+        diagnostics.extend(original_problems)
+        if not any(d["severity"] == "error" for d in diagnostics):
+            context = creature_context(raw, data, request["asset"], identity, digest, observe=True)
+    except StructureError as error:
+        diagnostics = [d.json() for d in error.diagnostics]
+        if isinstance(error.__cause__, json.JSONDecodeError):
+            for d in diagnostics: d.update(line=error.__cause__.lineno, column=error.__cause__.colno)
+    except (ValueError, TypeError, KeyError, AttributeError) as error:
+        diagnostics.append(dict(code="CREATURE_FACTORY", severity="error", path=request["asset"], asset="", field="",
+            message=str(error), correction="Repair constructor/dependency fields; no factory result was accepted."))
+        context = None
+    for d in diagnostics:
+        d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
+    after = source_identity(root)
+    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+        fail("SOURCE_CHANGED", "Creature dependencies changed during validation.", "Validate again.")
+    observed = context["records"][0]["factory"] if context and context["records"] else None
+    valid = syntax and observed is not None and not any(d["severity"] == "error" for d in diagnostics)
+    return dict(valid=valid, syntax_valid=syntax, contract_valid=valid, references_valid=valid, diagnostics=diagnostics,
+                draft_sha256=digest, path=request["asset"], source=identity, route=CREATURE_ROUTE, contract="g2-2", creature_contract=CONTRACT,
+                worker_version=WORKER_VERSION, worker_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                creature_context=context, factory_verified=bool(observed), preview=None, population_verified=False, limitations=SCOPE)
+
+
 def draft_validation(request, root, scratch, identity):
     from engine.data_loader import DataLoader
     from generation.structure_contract import read_document, compile_structure, StructureError
     path = asset_path(root, request.get("asset"), new=True)
+    if path.is_relative_to(root / "roguelike/data/entities"):
+        return creature_validation(request, root, scratch, identity)
     if path.is_relative_to(root / "roguelike/data/recipes"):
         return recipe_validation(request, root, scratch, identity)
     if path.is_relative_to(root / "roguelike/data/items"):
@@ -617,6 +726,9 @@ def run(request, root, scratch):
     from engine.data_loader import DataLoader
     from generation.structure_contract import CONTRACT_VERSION, CAPABILITIES, compile_structure, read_document, StructureError
     from engine.recipe_authoring import CONTRACT as RECIPE_CONTRACT
+    from engine.creature_authoring import CONTRACT as CREATURE_CONTRACT
+    if CREATURE_CONTRACT != "revenant-hp-1":
+        fail("CONTRACT_MISMATCH", "Unsupported creature authoring contract.", "Use matching game and Workbench sources.")
     if RECIPE_CONTRACT != "immediate-components-1":
         fail("CONTRACT_MISMATCH", "Unsupported recipe authoring contract.", "Use matching game and Workbench sources.")
     from generation.structure_preview import preview
@@ -639,12 +751,13 @@ def run(request, root, scratch):
                 "preview": "generation.structure_preview.preview → engine.scene_generation.create_submap → generation.local_gen.generate_submap",
                 "edit_route": EDIT_ROUTE,
                 "recipe_contract": RECIPE_CONTRACT,
+                "creature_contract": CREATURE_CONTRACT,
                 "unavailable": ["layout editing/saving", "advanced item/recipe editing", "native world selection", "game renderer/FOV", "combat simulation"],
                 "health": "catalog needs repair" if catalog_error else "ready",
                 "diagnostics": [d.json() for d in catalog_error.diagnostics] if catalog_error else []}
     if op == "describe":
         return {"route": ROUTE, "capabilities": CAPABILITIES[ROUTE],
-                "assets": discover(root), "unsupported": ["plaza (read-only)", "entrances", "advanced item editing", "legacy loot tables", "passive/world/legacy recipe editing", "creatures", "generation profiles"]}
+                "assets": discover(root, data), "unsupported": ["plaza (read-only)", "entrances", "advanced item editing", "legacy loot tables", "passive/world/legacy recipe editing", "advanced creature editing/placement", "generation profiles"]}
     path = asset_path(root, request.get("asset"))
     before = path.stat()
     source = path.read_bytes()
@@ -655,6 +768,21 @@ def run(request, root, scratch):
         raw = read_document(path)
     except StructureError as error:
         raw = {}; raw_error = error
+    if path.is_relative_to(root / "roguelike/data/entities"):
+        if op != "inspect" or request.get("invalid_fixture"):
+            fail("UNSUPPORTED_OPERATION", "Creatures use isolated factory validation.", "Open a supported creature and choose Factory result.")
+        context = creature_context(raw, data, request["asset"], identity, hashlib.sha256(source).hexdigest()) if data and not raw_error else None
+        diagnostics = ([d.json() for d in (raw_error or catalog_error).diagnostics] if raw_error or catalog_error else
+                       [d for r in context["records"] for d in r["diagnostics"]])
+        after = source_identity(root)
+        if path.read_bytes() != source or any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+            fail("SOURCE_CHANGED", "Creature or dependency changed during inspection.", "Reopen the creature.")
+        single = raw if isinstance(raw, dict) else {}
+        return dict(id=single.get("id", path.stem), path=request["asset"], route=CREATURE_ROUTE,
+                    description=str(single.get("description", "")), valid=not any(d["severity"] == "error" for d in diagnostics),
+                    editable=bool(context and len(context["records"]) == 1 and context["records"][0]["capability"]["editable"]),
+                    diagnostics=diagnostics, raw=source.decode("utf-8"), sha256=hashlib.sha256(source).hexdigest(),
+                    mtime_ns=str(before.st_mtime_ns), source_unchanged=True, source=identity, creature_context=context)
     if path.is_relative_to(root / "roguelike/data/recipes"):
         if op != "inspect" or request.get("invalid_fixture"):
             fail("UNSUPPORTED_OPERATION", "Recipes use requirements inspection.", "Open a recipe and validate to run the disposable probe.")
@@ -780,7 +908,7 @@ def main():
             fail("MALFORMED_REQUEST", "Expected a correlation ID.", "Supply a short string id.")
         if type(request.get("protocol")) is not int or request["protocol"] != PROTOCOL:
             fail("PROTOCOL_MISMATCH", f"Worker requires protocol {PROTOCOL}.", "Use matching Workbench frontend, host and worker versions.")
-        if request.get("op") not in ("identify", "describe", "inspect", "preview", "validate_draft", "preview_draft") or set(request) - {"id", "protocol", "op", "asset", "seed", "invalid_fixture", "draft"}:
+        if request.get("op") not in ("identify", "describe", "inspect", "preview", "validate_draft", "preview_draft") or set(request) - {"id", "protocol", "op", "asset", "seed", "invalid_fixture", "draft", "source_asset"}:
             fail("MALFORMED_REQUEST", "Unsupported operation or fields.", "Only identify, describe, inspect and preview are available.")
         if len(sys.argv) != 3 or sys.argv[1] != "--root":
             fail("INVALID_PROJECT", "Expected one --root argument.", "Launch through the Workbench host.")

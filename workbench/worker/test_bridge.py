@@ -16,14 +16,14 @@ PYTHON = os.environ.get("RESONANCE_PYTHON", sys.executable)
 
 
 def invoke(op="identify", root=ROOT, python=PYTHON, raw=None, extra_flags=(), **kwargs):
-    request = {"protocol": 6, "id": "test-correlation", "op": op, **kwargs}
+    request = {"protocol": 7, "id": "test-correlation", "op": op, **kwargs}
     completed = subprocess.run([python, "-I", "-B", *extra_flags, str(BRIDGE), "--root", str(root)],
                                input=raw if raw is not None else json.dumps(request), text=True,
                                capture_output=True, timeout=20, creationflags=0x08000000 if os.name == "nt" else 0)
     if completed.returncode:
         raise AssertionError(completed.stderr)
     response = json.loads(completed.stdout)
-    assert response["protocol"] == 6
+    assert response["protocol"] == 7
     if raw is None:
         assert response["id"] == request["id"]
     return response
@@ -86,7 +86,7 @@ class BridgeTests(unittest.TestCase):
     def test_malformed_protocol_and_unsupported_requests(self):
         cases = [("not json", "MALFORMED_REQUEST"), ("[]", "MALFORMED_REQUEST"),
                  ('{"id":"x","protocol":1,"op":"identify"}', "PROTOCOL_MISMATCH"),
-                 ('{"id":"x","protocol":6,"op":"execute","code":"bad"}', "MALFORMED_REQUEST"),
+                 ('{"id":"x","protocol":7,"op":"execute","code":"bad"}', "MALFORMED_REQUEST"),
                  ('{"id":"x","protocol":true,"op":"identify"}', "PROTOCOL_MISMATCH")]
         for raw, code in cases:
             with self.subTest(raw=raw):

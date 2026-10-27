@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { LayoutEditor } from "./LayoutEditor";
 import { PoolEditor } from "./PoolEditor";
 import { RecipeEditor } from "./RecipeEditor";
+import { CreatureEditor } from "./CreatureEditor";
 import { ItemEditor } from "./ItemEditor";
 import {
   CanvasHistory,
@@ -22,6 +23,7 @@ import {
   type ItemTrail,
   type ItemContext,
   type RecipeContext,
+  type CreatureContext,
 } from "./protocol";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
 
@@ -37,6 +39,7 @@ type Verdict = {
   preview?: Preview;
   item_context?: ItemContext;
   recipe_context?: RecipeContext;
+  creature_context?: CreatureContext;
 };
 type Disk = {
   changed: boolean;
@@ -61,7 +64,7 @@ export function Authoring({
   trail,
   onReturn,
   dependencyVersion = 0,
-  onItem, itemTrail, selectedItemId, onItemPool, poolEntryFocus, onRecipe, onRecipeItem, selectedRecipeId,
+  onItem, itemTrail, selectedItemId, onItemPool, poolEntryFocus, onRecipe, onRecipeItem, selectedRecipeId, selectedCreatureId,
 }: {
   document: Inspection;
   onDirty: (dirty: boolean) => void;
@@ -86,11 +89,13 @@ export function Authoring({
   onRecipe?: (id: string, path: string) => void;
   onRecipeItem?: (id: string, path?: string) => void;
   selectedRecipeId?: string;
+  selectedCreatureId?: string;
 }) {
   const pool = document.route === "contextual_loot_pool";
   const item = document.route === "item_definition";
   const recipe = document.route === "recipe_definition";
-  const writable = !(item || recipe) || document.editable;
+  const creature = document.route === "creature_definition";
+  const writable = !(item || recipe || creature) || document.editable;
   const [draft, setDraft] = useState(document.raw),
     [editing, setEditing] = useState(false);
   const [tab, setTab] = useState("properties"),
@@ -145,7 +150,7 @@ export function Authoring({
         });
         if (!stopped) {
           setDisk(d.result);
-          if (recipe && (d.result.dependencies_changed || d.result.changed)) { version.current++; setVerdict(null); setConfirm(false); }
+          if ((recipe || creature) && (d.result.dependencies_changed || d.result.changed)) { version.current++; setVerdict(null); setConfirm(false); }
         }
       } catch (e) {
         if (!stopped) onError(asFailure(e));
@@ -229,7 +234,7 @@ export function Authoring({
         currentVerdict(v, version.current, text, latest.current)
       ) {
         setVerdict(r.result);
-        if (recipe) { setEvidenceVersion(dependencyVersion); setDisk(d=>d ? {...d, dependencies_changed:false} : d); }
+        if (recipe || creature) { setEvidenceVersion(dependencyVersion); setDisk(d=>d ? {...d, dependencies_changed:false} : d); }
         if (!r.result.valid || showDiff)
           setTab(r.result.valid ? "diff" : "problems");
       }
@@ -266,7 +271,7 @@ export function Authoring({
   }
   const reason = !editing
     ? "Begin editing to create a draft."
-    : recipe && !variant
+    : (recipe || creature) && !variant
       ? "Create a unique new variant before publication."
     : !dirty
       ? "No unsaved source changes."
@@ -306,7 +311,14 @@ export function Authoring({
         busy={!!busy} onCancel={onCancel} onReturn={onReturn} onItem={(id,path)=>onRecipeItem?.(id,path)} onSource={()=>setTab("source")}
         onProbe={()=>void validate(false)} onEdit={visualEdit} onUndo={()=>historyStep(false)} onRedo={()=>historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
       /></div>, canvasHost)}
-      {active && !pool && !item && !recipe && canvasHost &&
+      {creature && canvasHost && createPortal(<div hidden={!active}><CreatureEditor
+        draft={draft} path={target} context={verdict?.creature_context || document.creature_context} selectedId={selectedCreatureId}
+        active={active} dirty={dirty} validated={!!verdict?.valid} evidenceStale={!!disk?.changed || !!disk?.dependencies_changed || evidenceVersion !== dependencyVersion}
+        disabled={!writable ? "Read-only creature family or unresolved source." : !editing ? "Begin edit to change creature properties." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
+        busy={!!busy} setBusy={setBusy} onCancel={onCancel} onSource={()=>setTab("source")} onFactory={()=>void validate(false)}
+        onEdit={visualEdit} onUndo={()=>historyStep(false)} onRedo={()=>historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
+      /></div>, canvasHost)}
+      {active && !pool && !item && !recipe && !creature && canvasHost &&
         createPortal(
           <LayoutEditor
             draft={draft}
@@ -362,7 +374,7 @@ export function Authoring({
               : "Read-only · source unchanged"}
       </p>
       <p className="muted small">
-        {recipe ? "recipe_definition" : item ? "item_definition" : pool ? "contextual_loot_pool" : `ordinary_building · ${document.width} × ${document.height} · ${document.special_count} specials`} · file {document.sha256.slice(0, 12)}
+        {creature ? "creature_definition" : recipe ? "recipe_definition" : item ? "item_definition" : pool ? "contextual_loot_pool" : `ordinary_building · ${document.width} × ${document.height} · ${document.special_count} specials`} · file {document.sha256.slice(0, 12)}
       </p>
       {!!disk?.recovery_files.length && (
         <p className="notice warning">
@@ -417,7 +429,7 @@ export function Authoring({
             }}
           />
           <small>
-            {recipe ? "New recipe files are auto-loaded in new sessions. Review the known/deprecated consequences before confirming." : item ? "Saved beside the source. Choose the new item ID explicitly in a new pool variant; no pool is reassigned."
+            {creature ? "Creates a new ID/file beside the source. No worldgen pool, saved actor or authored room is reassigned." : recipe ? "New recipe files are auto-loaded in new sessions. Review the known/deprecated consequences before confirming." : item ? "Saved beside the source. Choose the new item ID explicitly in a new pool variant; no pool is reassigned."
               : pool ? "Saved beside the source. No container is reassigned. Return to a structure variant to link it deliberately."
               : "Saved beside the source. Current procedural selection profiles are unchanged. Legacy flat-pool contexts may discover added files."}
           </small>
@@ -436,7 +448,7 @@ export function Authoring({
       </div>
       {tab === "properties" && (
         <div className="typed-fields">
-          {!item && !recipe && <label>
+          {!item && !recipe && !creature && <label>
             Description
             <textarea
               aria-label="Description"
@@ -450,7 +462,7 @@ export function Authoring({
               onChange={(e) => property("description", e.target.value)}
             />
           </label>}
-          {!pool && !item && !recipe && <label>
+          {!pool && !item && !recipe && !creature && <label>
             Legacy corner-scatter weight
             <input
               aria-label="Legacy corner-scatter weight"
@@ -472,7 +484,7 @@ export function Authoring({
             />
           </label>}
           <p className="muted small">
-            {recipe ? "Recipe controls share this exact source draft, history and validation. Publication creates a new recipe ID/file only. Eligibility and observed output have separate receipts." : item ? "Component controls share this source draft, history and validation. Advanced definitions are read-only. Use References, Use binding and Factory result to distinguish declarations from observed instances."
+            {creature ? "Actor name and effective HP share this exact source draft. All complex fields and description remain read-only; publication requires a unique variant." : recipe ? "Recipe controls share this exact source draft, history and validation. Publication creates a new recipe ID/file only. Eligibility and observed output have separate receipts." : item ? "Component controls share this source draft, history and validation. Advanced definitions are read-only. Use References, Use binding and Factory result to distinguish declarations from observed instances."
               : pool ? "Description is retained metadata. Edit item IDs, weights and roll bounds in the table. Unknown fields remain in Source."
               : <>Description is retained metadata. Weight is a supported nonnegative
             scalar; current planned selection uses separate profiles. Geometry,
@@ -492,11 +504,11 @@ export function Authoring({
       )}
       {tab === "source" && (
         <>
-          <label htmlFor={recipe ? "recipe-draft-json" : item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}>
+          <label htmlFor={creature ? "creature-draft-json" : recipe ? "recipe-draft-json" : item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}>
             {editing ? "Draft JSON" : "Source JSON"}
           </label>
           <textarea
-            id={recipe ? "recipe-draft-json" : item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}
+            id={creature ? "creature-draft-json" : recipe ? "recipe-draft-json" : item ? "item-draft-json" : pool ? "pool-draft-json" : "draft-json"}
             className="source-editor"
             spellCheck={false}
             value={draft}
@@ -533,7 +545,7 @@ export function Authoring({
               </p>
               <p>{d.message}</p>
               <small>{d.correction}</small>
-              {!pool && !item && !recipe && diagnosticCell(d, layoutModel(draft).model) && (
+              {!pool && !item && !recipe && !creature && diagnosticCell(d, layoutModel(draft).model) && (
                 <button
                   onClick={() =>
                     setFocus(diagnosticCell(d, layoutModel(draft).model))
@@ -547,7 +559,7 @@ export function Authoring({
           <p className="muted">
             {dirty && !verdict
               ? "Displayed source diagnostics are from the opened file. Validate the draft for a current verdict."
-              : recipe ? "Recipe checks use the current loader and narrow game-owned contract. Tests use isolated production allocation and ownership exchange." : item ? "Item checks use the current loader, component capability, instance schema and actual factory. No interactive use is executed."
+              : creature ? "Creature checks use the current loader and actual isolated CreatureFactory. No ongoing AI, combat or world selection is executed." : recipe ? "Recipe checks use the current loader and narrow game-owned contract. Tests use isolated production allocation and ownership exchange." : item ? "Item checks use the current loader, component capability, instance schema and actual factory. No interactive use is executed."
               : pool ? "Pool validation uses the current loader and container-pool validator. No population is sampled here."
               : "Draft validation includes a centered production stamp and initial population. Access checks use the declared main entrance when present."}
           </p>
@@ -615,7 +627,7 @@ export function Authoring({
               setConfirm(true);
             }}
           >
-            {recipe ? "Apply variant" : "Review & apply"}
+            {recipe || creature ? "Apply variant" : "Review & apply"}
           </button>
         </div>
       )}
@@ -636,14 +648,14 @@ export function Authoring({
             <h2>Apply this one content file?</h2>
             <code>{target}</code>
             <p>
-              {recipe ? "This creates an active recipe variant. New sessions recursively load it; known defaults to true and enables CraftScreen execution when requirements are met. known:false displays an unknown recipe and blocks execution. No learning route or personal-save compatibility is promised." : item && variant ? "Creates one new item. Existing pools and held instances are unchanged. Deliberately reference it from a new pool variant."
+              {creature ? "This creates one new creature definition. It does not join worldgen pools, replace existing instances, or change any authored room. Complex behavior fields remain read-only." : recipe ? "This creates an active recipe variant. New sessions recursively load it; known defaults to true and enables CraftScreen execution when requirements are met. known:false displays an unknown recipe and blocks execution. No learning route or personal-save compatibility is promised." : item && variant ? "Creates one new item. Existing pools and held instances are unchanged. Deliberately reference it from a new pool variant."
                 : pool && variant ? "Creates one new pool. No structure or world is changed; the pool may remain unused until explicitly referenced."
                 : variant
                 ? "This creates a new definition. It does not add entries to current town or roadside selection profiles. Older flat-pool contexts can discover new definitions."
                 : "This changes the meaning of an existing ID. Saved pending worlds may depend on its old content. Prefer a new variant for changed identity or meaning."}
             </p>
             <p>
-              {recipe ? "Exact recipe bytes and output references passed the narrow game-owned contract. The host checks dependencies and revalidates before publication. Fixture evidence does not establish ordinary player crafting." : item ? "Exact item bytes passed source identity, component rules and real factory construction. The host repeats those checks before publishing."
+              {creature ? "Exact creature bytes passed original source entitlement and real factory construction. The host rechecks current dependencies and the reviewed bytes before publishing." : recipe ? "Exact recipe bytes and output references passed the narrow game-owned contract. The host checks dependencies and revalidates before publication. Fixture evidence does not establish ordinary player crafting." : item ? "Exact item bytes passed source identity, component rules and real factory construction. The host repeats those checks before publishing."
                 : pool ? "Current pool draft passed loader identity, item references and consumer constraints. The host rechecks the exact reviewed bytes and current dependencies before publishing."
                 : <>Current draft: valid contract, references and centered production
               preview. Host rechecks these exact bytes before publishing.

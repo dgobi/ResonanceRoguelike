@@ -22,7 +22,7 @@ for n in range(3):
     start = time.perf_counter()
     process = subprocess.Popen([str(RELEASE / "python/python.exe"), "-I", "-B", "-u", str(RELEASE / "bridge.py"), "--root", str(ROOT)],
                                stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=0x08000000)
-    request = json.dumps({"id": f"measure-{n}", "protocol": 6, "op": "preview", "asset": "roguelike/data/layouts/starting_lab.json", "seed": 20261023}).encode() + b"\n"
+    request = json.dumps({"id": f"measure-{n}", "protocol": 7, "op": "preview", "asset": "roguelike/data/layouts/starting_lab.json", "seed": 20261023}).encode() + b"\n"
     peak_ws = peak_private = 0
     with concurrent.futures.ThreadPoolExecutor() as executor:
         result = executor.submit(process.communicate, request)

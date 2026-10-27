@@ -69,6 +69,8 @@ export default function App() {
   const [poolActive, setPoolActive] = useState(false), [poolDirty, setPoolDirty] = useState(false);
   const [itemDocument, setItemDocument] = useState<Inspection | null>(null), [itemActive, setItemActive] = useState(false), [itemDirty, setItemDirty] = useState(false);
   const [recipeDocument, setRecipeDocument] = useState<Inspection | null>(null), [recipeActive, setRecipeActive] = useState(false), [recipeDirty, setRecipeDirty] = useState(false);
+  const [creatureDocument, setCreatureDocument] = useState<Inspection | null>(null), [creatureActive, setCreatureActive] = useState(false), [creatureDirty, setCreatureDirty] = useState(false);
+  const [selectedCreatureId, setSelectedCreatureId] = useState("");
   const [selectedRecipeId, setSelectedRecipeId] = useState("");
   const itemReturnFocus = useRef<string | null>(null);
   const recipeReturnRelation = useRef("ingredient");
@@ -82,12 +84,14 @@ export default function App() {
     return () => cancelAnimationFrame(frame);
   }, [recipeActive, itemActive]);
   const [support, setSupport] = useState("");
+  const [catalogPage, setCatalogPage] = useState(0);
+  useEffect(()=>setCatalogPage(0),[search,category,support,assets]);
   const [itemTrail, setItemTrail] = useState<ItemTrail | null>(null), [selectedItemId, setSelectedItemId] = useState("");
   const [trail, setTrail] = useState<SourceTrail | null>(null), [dependencyVersion, setDependencyVersion] = useState(0);
   const [pending, setPending] = useState<null | (() => void)>(null);
   const [canvasHost, setCanvasHost] = useState<HTMLDivElement | null>(null);
   const dirtyRef = useRef(false);
-  dirtyRef.current = dirty || poolDirty || itemDirty || recipeDirty;
+  dirtyRef.current = dirty || poolDirty || itemDirty || recipeDirty || creatureDirty;
   useEffect(() => {
     const unlisten = listen("authoring-close-requested", () => {
       const close = () => {
@@ -113,6 +117,7 @@ export default function App() {
     setPoolDocument(null); setPoolActive(false); setPoolDirty(false); setTrail(null);
     setItemDocument(null); setItemActive(false); setItemDirty(false); setItemTrail(null); setSelectedItemId("");
     setRecipeDocument(null); setRecipeActive(false); setRecipeDirty(false); setSelectedRecipeId("");
+    setCreatureDocument(null); setCreatureActive(false); setCreatureDirty(false); setSelectedCreatureId("");
     setIdentity(null);
     setAssets([]);
     setSelected("");
@@ -123,6 +128,7 @@ export default function App() {
     setError(null);
   }
   async function loadAsset(asset: string, token: number, generate = true) {
+    setCreatureActive(false);
     setPoolActive(false);
     setItemActive(false); setRecipeActive(false);
     setSelected(asset);
@@ -287,14 +293,14 @@ export default function App() {
   async function openPool(id: string, context: SourceTrail | null = null, discard = false, reload = false) {
     const matches = assets.filter(a => a.route === "contextual_loot_pool" && a.id === id), asset = matches[0];
     if (matches.length !== 1) { setError({code: "POOL_SOURCE", message: `Pool ${id} resolves to ${matches.length} supported files.`, remedy: "Correct duplicate/missing IDs or refresh the project catalogue."}); return; }
-    if (!reload && poolDocument?.path === asset.path) { setTrail(context); setPoolActive(true); setItemActive(false); setRecipeActive(false); return; }
+    if (!reload && poolDocument?.path === asset.path) { setTrail(context); setPoolActive(true); setCreatureActive(false); setItemActive(false); setRecipeActive(false); return; }
     if (poolDirty && !discard) { setPending(() => () => void openPool(id, context, true, reload)); return; }
     setBusy("Opening contextual pool…"); setError(null);
     const token = ++epoch.current;
     try {
       const r = await call<Inspection>("open_document", {asset: asset.path});
       if (token !== epoch.current) return;
-      setPoolDocument(r.result); setPoolDirty(false); setPoolActive(true); setItemActive(false); setRecipeActive(false); setTrail(context);
+      setPoolDocument(r.result); setPoolDirty(false); setPoolActive(true); setCreatureActive(false); setItemActive(false); setRecipeActive(false); setTrail(context);
       setStatus(`Opened ${asset.path}.`);
     } catch (e) { if (token === epoch.current) setError(asFailure(e)); } finally { if (token === epoch.current) setBusy(""); }
   }
@@ -302,33 +308,54 @@ export default function App() {
     const matches = assets.filter(a => a.route === "item_definition" && a.id === id && (!assetPath || a.path === assetPath));
     const asset = matches[0];
     if (!matches.length || (matches.length !== 1 && !assetPath)) { setError({code:"ITEM_SOURCE", message:`Item ${id} has ${matches.length} catalogue sources: ${matches.map(a => a.path).join(", ")}`, remedy:"Select a specific source file for read-only collision inspection, or refresh after repairing IDs."}); return; }
-    if (!reload && itemDocument?.path === asset.path) { setItemTrail(context); setSelectedItemId(id); setItemActive(true); setRecipeActive(false); return; }
+    if (!reload && itemDocument?.path === asset.path) { setItemTrail(context); setSelectedItemId(id); setItemActive(true); setCreatureActive(false); setRecipeActive(false); return; }
     if (itemDirty && !discard) { setPending(() => () => void openItem(id, context, assetPath, true, reload)); return; }
     const token = ++epoch.current;
     setBusy("Opening item definition…"); setError(null);
     try {
       const r = await call<Inspection>("open_document", {asset: asset.path});
       if (token !== epoch.current) return;
-      setItemDocument(r.result); setItemDirty(false); setItemActive(true); setRecipeActive(false); setSelectedItemId(id); setItemTrail(context);
+      setItemDocument(r.result); setItemDirty(false); setItemActive(true); setCreatureActive(false); setRecipeActive(false); setSelectedItemId(id); setItemTrail(context);
       setStatus(`Opened ${asset.path}. Factory evidence is separate from use behavior.`);
     } catch(e) { if(token === epoch.current) setError(asFailure(e)); } finally { if(token === epoch.current) setBusy(""); }
   }
   async function openRecipe(id: string, assetPath?: string, discard = false, reload = false) {
     const matches = assets.filter(a=>a.route === "recipe_definition" && a.id === id && (!assetPath || a.path === assetPath)), asset=matches[0];
     if (!matches.length || matches.length !== 1 && !assetPath) { setError({code:"RECIPE_SOURCE",message:`Recipe ${id} has ${matches.length} sources.`,remedy:"Select a specific source file to inspect ambiguity."}); return; }
-    if (!reload && recipeDocument?.path === asset.path) { setSelectedRecipeId(id); setRecipeActive(true); return; }
+    if (!reload && recipeDocument?.path === asset.path) { setSelectedRecipeId(id); setRecipeActive(true); setCreatureActive(false); return; }
     if (recipeDirty && !discard) { setPending(()=>()=>void openRecipe(id,assetPath,true,reload)); return; }
     const token=++epoch.current; setBusy("Opening recipe…"); setError(null);
     try {
       const r=await call<Inspection>("open_document",{asset:asset.path});
       if(token !== epoch.current) return;
-      setRecipeDocument(r.result); setRecipeDirty(false); setSelectedRecipeId(id); setRecipeActive(true);
+      setRecipeDocument(r.result); setRecipeDirty(false); setSelectedRecipeId(id); setRecipeActive(true); setCreatureActive(false);
       setStatus(`Opened ${asset.path}. Requirements and observed fixture results are separate evidence.`);
     } catch(e) { if(token === epoch.current) setError(asFailure(e)); } finally { if(token === epoch.current) setBusy(""); }
   }
+  async function openCreature(id: string, assetPath: string, discard = false, reload = false) {
+    const asset = assets.find(a=>a.route === "creature_definition" && a.id === id && a.path === assetPath);
+    if (!asset) return;
+    if (!reload && creatureDocument?.path === asset.path) { setSelectedCreatureId(id); setCreatureActive(true); return; }
+    if (creatureDirty && !discard) { setPending(()=>()=>void openCreature(id,assetPath,true,reload)); return; }
+    const token=++epoch.current; setBusy("Opening creature definition…"); setError(null);
+    try {
+      const r=await call<Inspection>("open_document",{asset:asset.path});
+      if(token !== epoch.current) return;
+      setCreatureDocument(r.result); setCreatureDirty(false); setSelectedCreatureId(id); setCreatureActive(true);
+      setStatus(`Opened ${asset.path}. Factory construction and world selection are separate evidence.`);
+    } catch(e) { if(token === epoch.current) setError(asFailure(e)); } finally { if(token === epoch.current) setBusy(""); }
+  }
+  async function creatureApplied(asset: string, result: unknown) {
+    const token=++epoch.current; setCreatureDirty(false); setReceipt(result); setDependencyVersion(v=>v+1);
+    const catalog=await request<{assets:Asset[]}>("describe"); if(token !== epoch.current) return;
+    setAssets(catalog.result.assets);
+    const r=await call<Inspection>("open_document",{asset}); if(token !== epoch.current) return;
+    verifyReopened(r.result,result); setCreatureDocument(r.result); setSelectedCreatureId(r.result.id);
+    setStatus(`Creature variant saved and reopened: ${asset}. No room, saved actor or worldgen reference changed.`);
+  }
   function returnToItem() {
     itemReturnFocus.current = recipeDocument?.path || null;
-    setRecipeActive(false); setItemActive(true);
+    setRecipeActive(false); setItemActive(true); setCreatureActive(false);
   }
   async function recipeApplied(asset: string, result: unknown) {
     const token=++epoch.current; setRecipeDirty(false); setReceipt(result); setDependencyVersion(v=>v+1);
@@ -419,16 +446,16 @@ export default function App() {
           </div>
         </div>
         <div className="top-meta">
-          <span className="chip">W3C · RECIPES</span>
+          <span className="chip">W4A · CREATURES</span>
           <span className="read-only">
-            ◈ {dirty || poolDirty || itemDirty || recipeDirty ? "Unsaved draft" : "Read-only by default"}
+            ◈ {dirty || poolDirty || itemDirty || recipeDirty || creatureDirty ? "Unsaved draft" : "Read-only by default"}
           </span>
         </div>
       </header>
       <div
         className={
           "workspace " +
-          (inspection?.document_token || poolActive || itemActive || recipeActive ? "authoring-workspace" : "")
+          (inspection?.document_token || poolActive || itemActive || recipeActive || creatureActive ? "authoring-workspace" : "")
         }
       >
         <aside className="sidebar">
@@ -507,8 +534,9 @@ export default function App() {
               Content definitions <span className="count">{assets.length}</span>
             </h2>
             <p className="muted">
-              Buildings, pools, items and recipes
+              Buildings, pools, items, recipes and creatures
             </p>
+            <button className="full" onClick={()=>{setCategory("creatures");setSearch("");}}>Creatures</button>
             <label>
               Search ID, name or path
               <input
@@ -525,7 +553,7 @@ export default function App() {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">All supported content</option>
-                {[...new Set(["recipe_definition", "item_definition", ...assets.map((a) => a.category || a.route)])]
+                {[...new Set(["creature_definition", "recipe_definition", "item_definition", ...assets.map((a) => a.category || a.route)])]
                   .sort()
                   .map((c) => (
                     <option key={c} value={c}>
@@ -536,20 +564,20 @@ export default function App() {
             </label>
             <label>Support<select aria-label="Support status" value={support} onChange={e=>setSupport(e.target.value)}><option value="">All</option><option value="supported">Supported for writing</option><option value="read-only">Read-only</option></select></label>
             <div className="asset-list">
-              {visibleAssets.map((a) => (
+              {visibleAssets.slice(catalogPage * 100, (catalogPage + 1) * 100).map((a) => (
                 <button
                   key={a.path + (a.pointer || "")}
-                  className={"asset " + (a.path === (recipeActive ? recipeDocument?.path : itemActive ? itemDocument?.path : poolActive ? poolDocument?.path : selected) ? "selected" : "")}
+                  className={"asset " + (a.path === (creatureActive ? creatureDocument?.path : recipeActive ? recipeDocument?.path : itemActive ? itemDocument?.path : poolActive ? poolDocument?.path : selected) ? "selected" : "")}
                   disabled={!!busy || a.route === "plaza"}
                   title={`${a.path} · ${a.provenance} · ${a.validation}${a.editable ? "" : " · read-only"}`}
                   data-asset={a.path}
-                  onClick={() => a.route === "recipe_definition" ? void openRecipe(a.id,a.path) : a.route === "item_definition" ? void openItem(a.id, null, a.path) : a.route === "contextual_loot_pool" ? void openPool(a.id) : void refresh(a.path)}
+                  onClick={() => a.route === "creature_definition" ? void openCreature(a.id,a.path) : a.route === "recipe_definition" ? void openRecipe(a.id,a.path) : a.route === "item_definition" ? void openItem(a.id, null, a.path) : a.route === "contextual_loot_pool" ? void openPool(a.id) : void refresh(a.path)}
                 >
                   <span className="asset-icon">▦</span>
                   <span>
                     <strong>{a.id}</strong>
                     <small>
-                      {a.route === "recipe_definition" ? `${a.name} · ${a.execution_class}` : a.route === "item_definition" ? `${a.name} · ${a.category}` : a.route === "contextual_loot_pool" ? "Contextual loot pool" : `${a.width} × ${a.height} · ${a.category || a.route}`}
+                      {a.route === "creature_definition" ? `${a.name} · ${a.category}` : a.route === "recipe_definition" ? `${a.name} · ${a.execution_class}` : a.route === "item_definition" ? `${a.name} · ${a.category}` : a.route === "contextual_loot_pool" ? "Contextual loot pool" : `${a.width} × ${a.height} · ${a.category || a.route}`}
                       <br />
                       {a.path}{a.pointer || ""}
                       <br />
@@ -564,6 +592,7 @@ export default function App() {
                 </button>
               ))}
             </div>
+            {visibleAssets.length > 100 && <div className="edit-actions"><button disabled={catalogPage === 0} onClick={()=>setCatalogPage(v=>v-1)}>Previous page</button><small>{catalogPage+1} / {Math.ceil(visibleAssets.length/100)}</small><button disabled={(catalogPage+1)*100 >= visibleAssets.length} onClick={()=>setCatalogPage(v=>v+1)}>Next page</button></div>}
             {!assets.length && (
               <p className="empty-small">
                 Supported definitions appear here after a successful connection.
@@ -574,20 +603,22 @@ export default function App() {
             <span className="eyebrow">THIS WORKSPACE</span>
             <p>Draft → validate → review → apply</p>
             <small>
-              Structure, pool, item and recipe drafts stay open independently. Campaigns are never opened.
+              Structure, pool, item, recipe and creature drafts stay open independently. Campaigns are never opened.
             </small>
           </section>
         </aside>
         <section className="preview-pane">
-          {(inspection?.document_token || poolActive || itemActive || recipeActive) && (
+          {(inspection?.document_token || poolActive || itemActive || recipeActive || creatureActive) && (
             <>
               <div className="building-controls">
-                {poolDocument && <button disabled={!!busy} onClick={() => {setPoolActive(recipeActive || itemActive || !poolActive); setItemActive(false); setRecipeActive(false);}}>{poolActive && !itemActive ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
-                {itemDocument && <button disabled={!!busy} onClick={() => {setItemActive(recipeActive || !itemActive); setRecipeActive(false);}}>{itemActive && !recipeActive ? "Hide item" : `Show item ${selectedItemId}`}</button>}
-                {recipeDocument && <button disabled={!!busy} onClick={()=>setRecipeActive(!recipeActive)}>{recipeActive ? "Hide recipe" : `Show recipe ${selectedRecipeId}`}</button>}
-                {recipeActive && recipeDocument && <button disabled={!!busy} onClick={()=>void openRecipe(selectedRecipeId,recipeDocument.path,false,true)}>Reload recipe</button>}
-                {!recipeActive && itemActive && itemDocument && <button disabled={!!busy} onClick={() => void openItem(selectedItemId, itemTrail, itemDocument.path, false, true)}>Reload item</button>}
-                {!recipeActive && !itemActive && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
+                {poolDocument && <button disabled={!!busy} onClick={() => {setCreatureActive(false);setPoolActive(creatureActive || recipeActive || itemActive || !poolActive); setItemActive(false); setRecipeActive(false);}}>{poolActive && !itemActive && !recipeActive && !creatureActive ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
+                {itemDocument && <button disabled={!!busy} onClick={() => {setCreatureActive(false);setItemActive(creatureActive || recipeActive || !itemActive); setRecipeActive(false);}}>{itemActive && !recipeActive && !creatureActive ? "Hide item" : `Show item ${selectedItemId}`}</button>}
+                {recipeDocument && <button disabled={!!busy} onClick={()=>{setCreatureActive(false);setRecipeActive(creatureActive || !recipeActive);}}>{recipeActive && !creatureActive ? "Hide recipe" : `Show recipe ${selectedRecipeId}`}</button>}
+                {creatureDocument && <button disabled={!!busy} onClick={()=>setCreatureActive(!creatureActive)}>{creatureActive ? "Hide creature" : `Show creature ${selectedCreatureId}`}</button>}
+                {creatureActive && creatureDocument && <button disabled={!!busy} onClick={()=>void openCreature(selectedCreatureId,creatureDocument.path,false,true)}>Reload creature</button>}
+                {!creatureActive && recipeActive && recipeDocument && <button disabled={!!busy} onClick={()=>void openRecipe(selectedRecipeId,recipeDocument.path,false,true)}>Reload recipe</button>}
+                {!creatureActive && !recipeActive && itemActive && itemDocument && <button disabled={!!busy} onClick={() => void openItem(selectedItemId, itemTrail, itemDocument.path, false, true)}>Reload item</button>}
+                {!creatureActive && !recipeActive && !itemActive && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
                 <label>
                   Preview seed
                   <input
@@ -597,7 +628,7 @@ export default function App() {
                     disabled={!!busy}
                   />
                 </label>
-                <button onClick={() => refresh()} disabled={!!busy || poolActive || itemActive || recipeActive}>
+                <button onClick={() => refresh()} disabled={!!busy || poolActive || itemActive || recipeActive || creatureActive}>
                   ↻ Generate / refresh
                 </button>
               </div>
@@ -613,7 +644,7 @@ export default function App() {
           <div
             className="saved-preview-pane"
             style={{
-              display: inspection?.document_token || poolActive || itemActive || recipeActive ? "none" : "contents",
+              display: inspection?.document_token || poolActive || itemActive || recipeActive || creatureActive ? "none" : "contents",
             }}
           >
             <div className="pane-heading">
@@ -765,7 +796,7 @@ export default function App() {
         </section>
         <aside className="inspector">
           <div className="eyebrow">04 / INSPECTOR</div>
-          {!inspection?.document_token && !poolActive && !itemActive && !recipeActive && (
+          {!inspection?.document_token && !poolActive && !itemActive && !recipeActive && !creatureActive && (
             <div className="tabs">
               <button
                 className={tab === "properties" ? "active" : ""}
@@ -781,25 +812,29 @@ export default function App() {
               </button>
             </div>
           )}
-          {recipeDocument && <div hidden={!recipeActive}><Authoring key={recipeDocument.document_token}
+          {creatureDocument && <div hidden={!creatureActive}><Authoring key={creatureDocument.document_token}
+            document={creatureDocument} onDirty={setCreatureDirty} onApplied={creatureApplied} onError={setError}
+            busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            active={creatureActive} onCancel={()=>void cancel()} selectedCreatureId={selectedCreatureId} dependencyVersion={dependencyVersion} /></div>}
+          {recipeDocument && <div hidden={!recipeActive || creatureActive}><Authoring key={recipeDocument.document_token}
             document={recipeDocument} onDirty={setRecipeDirty} onApplied={recipeApplied} onError={setError}
             busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={recipeActive} onCancel={()=>void cancel()} selectedRecipeId={selectedRecipeId}
+            active={recipeActive && !creatureActive} onCancel={()=>void cancel()} selectedRecipeId={selectedRecipeId}
             onReturn={itemDocument ? returnToItem : undefined} onRecipeItem={(id,path)=>void openItem(id,null,path)} dependencyVersion={dependencyVersion} /></div>}
-          {itemDocument && <div hidden={!itemActive || recipeActive}><Authoring key={itemDocument.document_token}
+          {itemDocument && <div hidden={!itemActive || recipeActive || creatureActive}><Authoring key={itemDocument.document_token}
             document={itemDocument} onDirty={setItemDirty} onApplied={itemApplied} onError={setError}
             busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={itemActive && !recipeActive} onRecipe={(id,path)=>{recipeReturnRelation.current = document.activeElement?.getAttribute("data-recipe-relation") || "ingredient"; void openRecipe(id,path);}} onCancel={() => void cancel()} itemTrail={itemTrail} selectedItemId={selectedItemId}
-            onReturn={poolDocument ? () => {setItemActive(false); setPoolActive(true);} : undefined}
+            active={itemActive && !recipeActive && !creatureActive} onRecipe={(id,path)=>{recipeReturnRelation.current = document.activeElement?.getAttribute("data-recipe-relation") || "ingredient"; void openRecipe(id,path);}} onCancel={() => void cancel()} itemTrail={itemTrail} selectedItemId={selectedItemId}
+            onReturn={poolDocument ? () => {setItemActive(false); setPoolActive(true); setCreatureActive(false);} : undefined}
             onItemPool={id => void openPool(id, trail)} dependencyVersion={dependencyVersion} /></div>}
-          {poolDocument && <div hidden={!poolActive || itemActive || recipeActive}><Authoring key={poolDocument.document_token}
+          {poolDocument && <div hidden={!poolActive || itemActive || recipeActive || creatureActive}><Authoring key={poolDocument.document_token}
             document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
             busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={poolActive && !itemActive && !recipeActive} onCancel={() => void cancel()} trail={trail}
+            active={poolActive && !itemActive && !recipeActive && !creatureActive} onCancel={() => void cancel()} trail={trail}
             onItem={(id, context) => void openItem(id, context)}
             poolEntryFocus={itemTrail?.path === poolDocument.path || itemTrail?.poolId === poolDocument.id ? itemTrail.index : undefined}
             onReturn={() => setPoolActive(false)} dependencyVersion={dependencyVersion} /></div>}
-          <div hidden={poolActive || itemActive || recipeActive}>{inspection?.document_token ? (
+          <div hidden={poolActive || itemActive || recipeActive || creatureActive}>{inspection?.document_token ? (
             <Authoring
               key={inspection.document_token}
               document={inspection}
@@ -812,7 +847,7 @@ export default function App() {
               diskPreview={preview}
               seed={Number(seed)}
               onCancel={() => void cancel()}
-              active={!poolActive && !itemActive && !recipeActive}
+              active={!poolActive && !itemActive && !recipeActive && !creatureActive}
               onPool={(id, context) => void openPool(id, context)}
               dependencyVersion={dependencyVersion}
             />
@@ -963,7 +998,7 @@ export default function App() {
           </strong>
           {error && <p>{error.remedy}</p>}
         </div>
-        <span className="runtime-tag">LOCAL / OFFLINE · W3C</span>
+        <span className="runtime-tag">LOCAL / OFFLINE · W4A</span>
       </footer>
     </main>
   );

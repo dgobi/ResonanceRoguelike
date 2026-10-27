@@ -1,8 +1,81 @@
-# Resonance Workbench · W3C
+# Resonance Workbench · W4A
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
-safely editing ordinary buildings, contextual loot pools, inert component items and one immediate recipe family. The game remains the
+safely editing ordinary buildings, contextual loot pools, inert component items,
+one immediate recipe family and ordinary revenant variants. The game remains the
 validation authority. No campaign, running game or Internet service is required.
+
+## Author a creature variant
+
+1. Choose **Creatures** in the existing content browser. This filters the loaded
+   creature sources, including unsupported advanced definitions. The current
+   catalogue contains 13 non-player creature records and one separate player
+   record. Search by ID/name/path and use the support filter. `hollow_revenant`
+   is currently the one writable source; players, NPC/other entities, special
+   ability creatures, vine-network records and array sources remain read-only.
+2. Open it to inspect the exact source, path, source hash, project revision,
+   supported shape and diagnostics. **Begin edit** enables **Actor name** and
+   **Effective HP**. Name is literal `Actor.name`. Effective HP changes both
+   `base_hp` and `fighter.max_hp` in one undoable operation: the production
+   `CreatureFactory` prefers `base_hp`, and `Fighter` starts current HP at that
+   maximum. The explicit authoring range is 1–1,000,000 integer HP and 1–256
+   characters for the name; these are tooling bounds, not new game rules.
+3. **Read-only fields** retains authored descriptions, AI, attacks, perception,
+   faction/hostility strings, limbs, harvesting, effects, spawn declarations and
+   unknown metadata. The current look UI resolves descriptions by `actor.tile`,
+   so editing a new-ID variant's description would not reliably change displayed
+   prose. Description therefore has no typed control and cannot change through
+   raw publication. This task does not repair or change that gameplay lookup.
+4. Source, typed changes, undo/redo, validation and Diff use the existing single
+   draft. HP edits replace only two scalar spans; other nested data, array order,
+   prose, whitespace and line endings survive. Invalid raw JSON freezes typed
+   controls. Raw and variant-ID edits clear typed history. No-op inspection
+   writes nothing. Raw changes to any field outside ID/name/the two HP fields
+   are rejected; an unsupported source cannot gain entitlement by raw promotion.
+5. **Save as new variant**, enter a unique ID, **Validate draft**, review **Diff**,
+   then **Apply variant → Confirm apply one file**. Publication always creates a
+   new file beside the source in its existing creature directory. Original and
+   saved actors remain unchanged. The host binds original source entitlement,
+   dependencies, exact reviewed bytes and safe paths, repeats game validation,
+   publishes atomically without clobbering, and checks the reopened hash.
+6. **Factory result → Validate and construct exact creature** works on either
+   the exact draft or reopened variant. It copies current data into disposable
+   scratch, loads it with `DataLoader`, and calls the real `CreatureFactory.spawn`.
+   The receipt shows actor identity/class, source-to-component HP/name comparison,
+   Fighter/Perception/AI values, source/dependency hashes, available Git revision,
+   worker contract/version and observation time. No inventory owner, campaign,
+   AI/combat turn or ongoing world is created. This proves construction, not
+   combat balance or natural encounter availability. Invalid drafts, external
+   source/dependency changes and superseded jobs clear current factory evidence.
+7. **Direct layout references** lists saved, direct `authored_submap` creature
+   records with exact paths, fields and coordinates. **Inspect layout** reads that
+   source without replacing a parked building draft. An empty table means no
+   supported direct reference was found, not that every possible use is known.
+   Ordinary buildings, plazas and entrance layouts have no creature-placement
+   entitlement. `spawn_zones` is a declaration with no current Python consumer;
+   actual zone lists, town selectors and resonance rules are separate authorities.
+
+A new variant **does not join worldgen pools, replace existing instances, or
+change an authored room**. Selection/reference changes are separate authoring
+work. Five independent document drafts stay parked through creature navigation;
+saving any file revokes older reviews. No second writer or multi-file transaction
+was added. Catalogue pages render at most 100 rows.
+
+The game-owned read-only contract is `revenant-hp-1`. It checks the original
+single-object source under `entities/creatures/`, the ordinary revenant tile and
+wandering/mirrored-HP shape, and the actual ability registry. It independently
+rejects ambiguous entity IDs/case collisions, duplicate keys and missing required
+dependencies. Tile references use `TileRegistry`. The factory's default
+`body_human` fallback is absent in current data; the shipped Revenant's inline
+limbs take precedence, so this unused fallback is disclosed as a warning.
+Faction/hostile strings are membership labels, not a separate faction registry.
+
+The [example variant](docs/examples/hollow_revenant_w4a.json) and
+[factory receipt](docs/examples/hollow_revenant_w4a.factory.json) are outside the
+active catalogue. Native publication occurs only in disposable ignored test data.
+See [W4A delivery](docs/W4A_DELIVERY.md) for construction and existing G17 placement
+corroboration, native captures, verification and limits. No creature placement UI,
+AI/effect editor, encounter simulator or gameplay/save changes are included.
 
 ## Author an immediate recipe variant
 
@@ -195,7 +268,7 @@ structure preview establishes observed population. Samples do not establish
 frequencies, effect behavior or natural world selection. Item/reference lists
 are catalogue snapshots; reopen after external dependency edits.
 
-The host retains one building, pool, item and recipe capability. Saving any revokes
+The host retains one building, pool, item, recipe and creature capability. Saving any revokes
 all reviews; the frontend clears verdicts while retaining the other drafts.
 Every apply remains one reviewed byte string and one confined target, with fresh
 validation, conflicts and rollback. No general filesystem permission, new write
@@ -382,10 +455,13 @@ npm.cmd run test:visual              # native canvas + exact draft preview + var
 npm.cmd run test:pools               # native container → pool → item and two variants
 npm.cmd run test:items               # native new item → new pool → real factory/population
 npm.cmd run test:recipes             # native item → recipe → variant → production requirements/output
+npm.cmd run test:creatures           # native creature → variant → real factory; five parked drafts
 & $env:RESONANCE_PYTHON -B worker/test_authoring.py
 & $env:RESONANCE_PYTHON -B worker/test_visual.py
 & $env:RESONANCE_PYTHON -B worker/test_pools.py
 & $env:RESONANCE_PYTHON -B worker/test_items.py
+& $env:RESONANCE_PYTHON -B worker/test_recipes.py
+& $env:RESONANCE_PYTHON -B worker/test_creatures.py
 ```
 
 `scripts/desktop-test.mjs` opens a test-owned native window and sends app-local
@@ -415,8 +491,9 @@ CPython runtime without the game dependency wheels.
 
 ## Contract and limits
 
-The protocol is **6**, worker/app **0.6.0**, game structure contract **g2-2**,
-the narrow read-only item adapter contract is **component-1**, and the recipe contract is **immediate-components-1**.
+The protocol is **7**, worker/app **0.7.0**, game structure contract **g2-2**,
+item contract **component-1**, recipe contract **immediate-components-1**, and
+creature contract **revenant-hp-1**.
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
 opaque document token; validation grants a one-draft review token. Apply takes
@@ -460,7 +537,7 @@ and raw source inspection remain available when the loader reports structural
 errors. Files over 1 MiB and unsafe destination names are outside W1 authoring.
 Other-family visual editing, special creation/deletion, new legend definitions,
 transform tools, other loot families, selection-profile changes, persistent edit history
-and automatic campaign migration remain outside W3C. Deferred physical specials
+and automatic campaign migration remain outside W4A. Deferred physical specials
 are visible and preserved, but block a successful draft preview with an explicit
 unsupported diagnostic. Other live special types are inspect-only on the canvas.
 

@@ -15,7 +15,7 @@ use std::{
 use tauri::{Emitter, Manager};
 mod authoring;
 
-const PROTOCOL: u64 = 6;
+const PROTOCOL: u64 = 7;
 const MAX_OUTPUT: u64 = 16 * 1024 * 1024;
 
 #[derive(Debug, Clone, Serialize)]
@@ -42,6 +42,7 @@ struct Session {
     pool_document: Option<authoring::Document>,
     item_document: Option<authoring::Document>,
     recipe_document: Option<authoring::Document>,
+    creature_document: Option<authoring::Document>,
     applying: bool,
 }
 #[derive(Default, Clone)]
@@ -73,6 +74,7 @@ impl Host {
             state.pool_document = None;
             state.item_document = None;
             state.recipe_document = None;
+            state.creature_document = None;
         }
         cleanup_scratch(&mut state)
     }
@@ -187,6 +189,7 @@ struct Request {
     seed: Option<u32>,
     invalid_fixture: Option<bool>,
     draft: Option<String>,
+    source_asset: Option<String>,
 }
 fn validate_request(request: &Request) -> Result<(), Failure> {
     if ![
@@ -211,7 +214,7 @@ fn validate_request(request: &Request) -> Result<(), Failure> {
         let layout = parts.len() == 4
             && parts[..3] == ["roguelike", "data", "layouts"]
             && authoring::valid_filename(parts[3]);
-        if !layout && !authoring::is_pool(asset) && !authoring::is_item(asset) && !authoring::is_recipe(asset) && authoring::relative_building(asset).is_err() {
+        if !layout && !authoring::is_pool(asset) && !authoring::is_item(asset) && !authoring::is_recipe(asset) && !authoring::is_creature(asset) && authoring::relative_building(asset).is_err() {
             return Err(failure(
                 "PATH_ESCAPE",
                 "Asset is outside the W0 layout route.",
@@ -342,6 +345,7 @@ fn run_worker(
     if let Some(value) = request.asset {
         input["asset"] = json!(value);
     }
+    if let Some(value) = request.source_asset { input["source_asset"] = json!(value); }
     if let Some(value) = request.seed {
         input["seed"] = json!(value);
     }
@@ -458,7 +462,7 @@ fn run_worker(
                 .as_array()
                 .into_iter()
                 .flatten()
-                .filter(|a| a["editable"] == true || a["route"] == "item_definition" || a["route"] == "recipe_definition")
+                .filter(|a| a["editable"] == true || a["route"] == "item_definition" || a["route"] == "recipe_definition" || a["route"] == "creature_definition")
                 .filter_map(|a| a["path"].as_str().map(str::to_owned))
                 .collect();
         }
@@ -495,6 +499,7 @@ async fn open_project(
                 seed: None,
                 invalid_fixture: None,
                 draft: None,
+                source_asset: None,
             },
             epoch,
         )
@@ -551,7 +556,7 @@ fn main() {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                 let host = window.state::<Host>();
                 let state = host.inner.lock().unwrap();
-                if state.applying || state.document.is_some() || state.pool_document.is_some() || state.item_document.is_some() {
+                if state.applying || state.document.is_some() || state.pool_document.is_some() || state.item_document.is_some() || state.recipe_document.is_some() || state.creature_document.is_some() {
                     api.prevent_close();
                     let _ = window.emit("authoring-close-requested", ());
                     return;
@@ -594,7 +599,8 @@ mod tests {
                 asset: Some(asset.into()),
                 seed: None,
                 invalid_fixture: None,
-                draft: None
+                draft: None,
+                source_asset: None
             })
             .is_err());
         }
@@ -603,13 +609,14 @@ mod tests {
             asset: None,
             seed: None,
             invalid_fixture: None,
-            draft: None
+            draft: None,
+                source_asset: None
         })
         .is_err());
     }
     #[test]
     fn strict_envelopes() {
-        assert!(parse_response(br#"{"protocol":6,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
+        assert!(parse_response(br#"{"protocol":7,"id":"x","ok":true,"result":{}}"#, "x").is_ok());
         for bytes in [
             br#"log line\n{}"#.as_slice(),
             br#"{"protocol":1,"id":"x","ok":true,"result":{}}"#,

@@ -42,9 +42,9 @@ if (faultModes.includes(mode)) {
   env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
   env.WORKBENCH_FAULT = mode;
 }
-if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-") || mode.startsWith("recipe-worker-")) {
+if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-") || mode.startsWith("recipe-worker-") || mode.startsWith("creature-worker-")) {
   env.RESONANCE_PYTHON = resolve(workbench, ".artifacts/fault-worker.exe");
-  env.WORKBENCH_FAULT = mode.replace("pool-worker-", "draft-worker-").replace("item-worker-", "draft-worker-").replace("recipe-worker-", "draft-worker-");
+  env.WORKBENCH_FAULT = mode.replace("pool-worker-", "draft-worker-").replace("item-worker-", "draft-worker-").replace("recipe-worker-", "draft-worker-").replace("creature-worker-", "draft-worker-");
   env.WORKBENCH_REAL_PYTHON = resolve(
     workbench,
     "src-tauri/target/release/python/python.exe",
@@ -156,11 +156,12 @@ try {
         "fresh native process reopens original valid source after interruption",
       );
     }
-  } else if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-") || mode.startsWith("recipe-worker-")) {
+  } else if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.startsWith("item-worker-") || mode.startsWith("recipe-worker-") || mode.startsWith("creature-worker-")) {
     const poolFault = mode.startsWith("pool-worker-");
     const itemFault = mode.startsWith("item-worker-");
     const recipeFault = mode.startsWith("recipe-worker-");
-    const asset = recipeFault ? "roguelike/data/recipes/bile_coating.json" : itemFault ? "roguelike/data/items/components/wood_bundle.json" : poolFault ? "roguelike/data/loot_pools/alchemist_reagents.json" : "roguelike/data/buildings/commercial/apothecary_a.json";
+    const creatureFault = mode.startsWith("creature-worker-");
+    const asset = creatureFault ? "roguelike/data/entities/creatures/hollow_revenant.json" : recipeFault ? "roguelike/data/recipes/bile_coating.json" : itemFault ? "roguelike/data/items/components/wood_bundle.json" : poolFault ? "roguelike/data/loot_pools/alchemist_reagents.json" : "roguelike/data/buildings/commercial/apothecary_a.json";
     const before = await readFile(resolve(root, asset));
     await page
       .locator('[data-testid="map"][data-ready="true"]')
@@ -170,11 +171,11 @@ try {
     await page.waitForFunction(() => !document.querySelector(".busy-overlay"));
     await page.getByRole("button", { name: "Begin edit", exact: true }).click();
     await page
-      .getByLabel(recipeFault ? "Recipe description" : itemFault ? "Item description" : "Description", { exact: true })
+      .getByLabel(creatureFault ? "Creature name" : recipeFault ? "Recipe description" : itemFault ? "Item description" : "Description", { exact: true })
       .fill("Unsaved draft for worker failure control");
     const start = performance.now();
     await page
-      .getByRole("button", { name: poolFault || itemFault || recipeFault ? "Validate draft" : "Preview draft", exact: true })
+      .getByRole("button", { name: poolFault || itemFault || recipeFault || creatureFault ? "Validate draft" : "Preview draft", exact: true })
       .click();
     if (mode.endsWith("worker-cancel")) {
       await page
@@ -196,10 +197,10 @@ try {
     }
     receipt.draft_fault_elapsed_ms = Math.round(performance.now() - start);
     assert.equal(await page.getByTestId("draft-verdict").count(), 0);
-    assert.equal(await page.getByLabel(recipeFault ? "Recipe description" : itemFault ? "Item description" : "Description", {exact:true}).inputValue(), "Unsaved draft for worker failure control");
+    assert.equal(await page.getByLabel(creatureFault ? "Creature name" : recipeFault ? "Recipe description" : itemFault ? "Item description" : "Description", {exact:true}).inputValue(), "Unsaved draft for worker failure control");
     assert.equal(
       await page
-        .getByRole("button", { name: recipeFault ? "Apply variant" : "Review & apply", exact: true })
+        .getByRole("button", { name: recipeFault || creatureFault ? "Apply variant" : "Review & apply", exact: true })
         .isDisabled(),
       true,
     );
@@ -489,6 +490,10 @@ try {
     if (mode === "pools") {
       const { poolJourney } = await import("./pool-journey.mjs");
       await poolJourney(page, root, output, receipt);
+    }
+    if (mode === "creatures") {
+      const {creatureJourney} = await import("./creature-journey.mjs");
+      await creatureJourney(page,root,output,receipt);
     }
     if (mode === "recipes") {
       const {recipeJourney} = await import("./recipe-journey.mjs");
