@@ -396,19 +396,22 @@ pub fn restore_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,token:St
     let doc=current_document(&mut state,&token).ok_or_else(unknown_document)?;
     let mut record=recovery::with_store(&app,&host,|store|store.read(&key))?;
     check_restore(&root,doc,&record)?;
-    // An interrupted write may precede persistence of its completion fact. An
-    // identical existing target is historical evidence, never write permission.
+    infer_completed_write(&root,&mut record);
+    recovery::with_store(&app,&host,|store|{store.claim(&key)?;store.write(&record)})?;
+    doc.accepted=Some(record.clone());doc.edit_sequence=0;doc.revision+=1;revoke(doc);
+    Ok(json!({"key":key,"generation":record.generation,"draft":record.draft,"variant":record.variant,"variant_id":record.variant_id,"published":record.published}))
+}
+fn infer_completed_write(root:&Path,record:&mut recovery::Record){
+    // A write may precede persistence of its fact. Matching bytes permit only
+    // deliberate read reconciliation, never another write or restored review.
     if record.published.is_none() && record.target!=record.source {
-        if let Ok(bytes)=checked_target(&root,&record.target,false).and_then(|p|read_source(&p)) {
+        if let Ok(bytes)=checked_target(root,&record.target,false).and_then(|p|read_source(&p)) {
             if hash(&bytes)==hash(record.draft.as_bytes()) {
                 record.generation+=1;record.captured_ms=recovery::now();
                 record.published=Some(recovery::Published {path:record.target.clone(),after_sha256:hash(&bytes),generation:record.generation});
             }
         }
     }
-    recovery::with_store(&app,&host,|store|{store.claim(&key)?;store.write(&record)})?;
-    doc.accepted=Some(record.clone());doc.edit_sequence=0;doc.revision+=1;revoke(doc);
-    Ok(json!({"key":key,"generation":record.generation,"draft":record.draft,"variant":record.variant,"variant_id":record.variant_id,"published":record.published}))
 }
 fn check_restore(root:&Path,doc:&Document,record:&recovery::Record)->Result<(),Failure>{
     if doc.revision!=0 || doc.accepted.is_some(){return Err(recovery::error("An open draft already owns this file. Focus it and resolve that draft explicitly."));}
@@ -1245,6 +1248,27 @@ mod tests {
             state.discovered.extend(documents.iter().map(|d|d.relative.clone()));
         }
         (root,host,documents)
+    }
+    #[test]
+    fn publication_before_fact_checkpoint_is_reconciled_as_read_only_evidence(){
+        let (root,host,doc,mut review)=lifecycle_fixture(false);
+        review.draft="{\"id\":\"variant\",\"unknown\":[[1,2]],\"description\":\"exact candidate λ\"}".into();
+        accept_edit(&host,&doc.token,1,review.draft.clone(),true,"variant".into()).unwrap();
+        let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();
+        let storage=tempfile::tempdir().unwrap();recovery::Store::new(storage.path().into()).unwrap().write(&record).unwrap();
+        let written=publish(root.path(),&doc,&review,Fault::None).unwrap();
+        // Simulate exit before recording the successful write, then use the same
+        // helper as restart restoration against the actual published target.
+        drop(host);let store=recovery::Store::new(storage.path().into()).unwrap();let mut recovered=store.read(&record.key()).unwrap();assert!(recovered.published.is_none());
+        let target=root.path().join(&review.destination);let bytes=fs::read(&target).unwrap();let modified=fs::metadata(&target).unwrap().modified().unwrap();
+        infer_completed_write(root.path(),&mut recovered);
+        assert_eq!(recovered.published.as_ref().unwrap().after_sha256,written["after_sha256"].as_str().unwrap());
+        assert_eq!(recovered.published.as_ref().unwrap().generation,recovered.generation);
+        assert_eq!(fs::read(&target).unwrap(),bytes);assert_eq!(fs::metadata(&target).unwrap().modified().unwrap(),modified);
+        assert_eq!(store.read(&record.key()).unwrap().draft,review.draft);
+        let mut ambiguous=record;fs::write(&target,b"different existing target").unwrap();infer_completed_write(root.path(),&mut ambiguous);
+        assert!(ambiguous.published.is_none());assert_eq!(fs::read(&target).unwrap(),b"different existing target");
+        assert_eq!(publish(root.path(),&doc,&review,Fault::None).unwrap_err().code,"VARIANT_EXISTS");
     }
     #[test]
     fn recovery_fresh_source_authority_rejects_changed_missing_unsupported_and_other_project(){
