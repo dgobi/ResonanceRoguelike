@@ -1,13 +1,17 @@
 import { ItemEditor } from "./ItemEditor";
 import { RecipeEditor } from "./RecipeEditor";
+import { TextEditor } from "./TextEditor";
+import type { FamilyPreview } from "./familyData";
 import { familyProblem, type ContentFamily } from "./content";
 import type { ItemTrail } from "./protocol";
 
 export type ContentNavigation = {selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void;
   onPool?: (id:string)=>void; onOpen: (family:string,id:string,path?:string)=>void};
-type Props = {family: ContentFamily; navigation: ContentNavigation; draft:string; path:string; dirty:boolean; validated:boolean;
+export type ContentProps = {family: ContentFamily; navigation: ContentNavigation; draft:string; path:string; dirty:boolean; validated:boolean;
   disabled:string; busy:boolean; evidenceStale:boolean; onCancel:()=>void; onSource:()=>void; onProbe:()=>void;
+  preview:FamilyPreview|null; previewStale:boolean; onPreview:(inputs:Record<string,number>)=>void;
   onEdit:(edit:(text:string)=>string,label:string)=>void; onUndo:()=>void; onRedo:()=>void; canUndo:boolean; canRedo:boolean};
+type Props = ContentProps;
 
 // Specialist views receive the same document commands as ordinary controls.
 // This registration contains presentation only, never mutable review authority.
@@ -16,6 +20,7 @@ export const contentViews = {
     render:(p:Props)=>p.family.id === "item" && <ItemEditor {...p} context={p.family.context || undefined} {...p.navigation} onRecipe={(id,path)=>p.navigation.onOpen("recipe",id,path)} />},
   recipe: {label:"recipe", sourceId:"recipe-draft-json", hint:"Recipe controls share this exact source draft. Eligibility and observed output have separate receipts. Publication creates a new ID/file.",
     render:(p:Props)=>p.family.id === "recipe" && <RecipeEditor {...p} context={p.family.context || undefined} {...p.navigation} onItem={(id,path)=>p.navigation.onOpen("item",id,path)} />},
+  text: {label:"text", sourceId:"text-draft-json", hint:"Reader properties and ordered pages share this exact source. Create a unique variant, preview, validate and deliberately publish.",render:(p:Props)=><TextEditor {...p}/>},
 };
 export function ContentEditor(p:Props) {
   const problem = familyProblem(p.family);

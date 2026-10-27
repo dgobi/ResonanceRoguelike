@@ -530,6 +530,10 @@ try {
         await contractJourney(page,root,output,receipt);
       }
     }
+    if (mode === "texts") {
+      const {textJourney} = await import("./text-journey.mjs");
+      await textJourney(page,root,output,receipt);
+    }
     if (mode === "items") {
       const {itemJourney} = await import("./item-journey.mjs");
       await itemJourney(page, root, output, receipt);

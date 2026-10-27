@@ -10,6 +10,7 @@ export type Source = {
   game_dirty: boolean | null;
   game_source_sha256: string;
   catalog_sha256: string;
+  resources_sha256?: string;
 };
 export type Identity = {
   host_runtime: { mode: string; python: string; bridge: string; resource_directory: string; application: string; override_present: boolean; notice: string | null };

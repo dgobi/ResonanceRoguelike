@@ -143,6 +143,12 @@ All coordinates are layout-relative (0,0 = top-left of layers array).
 `item_id` must exist in `data/items/`. If the item has `on_use: "read"`,
 the `text_id` field sets which text opens when the item is used.
 
+For ordinary found-text variants and marker/condition behavior, see
+[TEXT_AUTHORING.md](TEXT_AUTHORING.md). A saved text does not place an item.
+Authored submaps preserve an explicit readable `letter` with `text_id` because
+their production population route defaults to `map_text=False`; no text-item
+mapping edit is needed.
+
 **Body placement:**
 ```json
 {

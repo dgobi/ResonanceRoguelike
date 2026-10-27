@@ -211,6 +211,7 @@ struct Request {
     invalid_fixture: Option<bool>,
     draft: Option<String>,
     source_asset: Option<String>,
+    preview_inputs: Option<Value>,
 }
 fn validate_request(request: &Request) -> Result<(), Failure> {
     if ![
@@ -235,7 +236,7 @@ fn validate_request(request: &Request) -> Result<(), Failure> {
         let layout = parts.len() == 4
             && parts[..3] == ["roguelike", "data", "layouts"]
             && authoring::valid_filename(parts[3]);
-        if !layout && asset != authoring::G17_EXAMPLE && !authoring::is_pool(asset) && !authoring::is_item(asset) && !authoring::is_recipe(asset) && !authoring::is_creature(asset) && authoring::relative_building(asset).is_err() {
+        if !layout && asset != authoring::G17_EXAMPLE && !authoring::is_pool(asset) && authoring::content_root(asset).is_none() && !authoring::is_creature(asset) && authoring::relative_building(asset).is_err() {
             return Err(failure(
                 "PATH_ESCAPE",
                 "Asset is outside the W0 layout route.",
@@ -255,6 +256,10 @@ fn validate_request(request: &Request) -> Result<(), Failure> {
             "Draft operation or size is invalid.",
             "Use the bounded authoring controls.",
         ));
+    }
+    if request.preview_inputs.as_ref().is_some_and(|v| !v.is_object() || v.to_string().len() > 4096)
+        || (request.preview_inputs.is_some() && request.op != "preview_draft") {
+        return Err(failure("MALFORMED_REQUEST", "Preview inputs must be a bounded object on a draft request.", "Use the registered preview controls."));
     }
     if request.seed.is_some_and(|s| s > i32::MAX as u32)
         || (request.invalid_fixture == Some(true) && request.op != "inspect")
@@ -358,6 +363,7 @@ fn run_worker(
         input["asset"] = json!(value);
     }
     if let Some(value) = request.source_asset { input["source_asset"] = json!(value); }
+    if let Some(value) = request.preview_inputs { input["preview_inputs"] = value; }
     if let Some(value) = request.seed {
         input["seed"] = json!(value);
     }
@@ -534,6 +540,7 @@ async fn open_project(
                 invalid_fixture: None,
                 draft: None,
                 source_asset: None,
+                preview_inputs: None,
             },
         )?;
         if response["ok"] == true {
@@ -642,7 +649,8 @@ mod tests {
                 seed: None,
                 invalid_fixture: None,
                 draft: None,
-                source_asset: None
+                source_asset: None,
+                preview_inputs: None,
             })
             .is_err());
         }
@@ -652,7 +660,8 @@ mod tests {
             seed: None,
             invalid_fixture: None,
             draft: None,
-                source_asset: None
+                source_asset: None,
+                preview_inputs: None,
         })
         .is_err());
     }

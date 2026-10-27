@@ -1,0 +1,68 @@
+# Ordinary found-text authoring
+
+`DataLoader` recursively loads text definitions from `data/texts/*.json` and
+subdirectories. Each Workbench-authored file contains one object with a unique
+nonempty `id` and at least one page object containing a string `text` body.
+`text_item_map.json` is excluded by basename at every depth and is not a text
+publication target. Workbench checks duplicate identities and refuses ambiguous
+or malformed sources instead of accepting the loader's overwrite behavior.
+
+In Workbench, duplicate an eligible ordinary definition using **Save as new
+variant**. The title is the reader heading. Pages can be added, removed and moved;
+moving a page retains its entire object and unknown metadata. A page's `trailing`
+boolean adds “— [text ends here] —”; absent is effectively false and stays absent
+until deliberately changed. Literal authored newlines, blank paragraphs, Unicode,
+quotes and backslashes are preserved through JSON escaping at the source boundary.
+
+The production `engine.text_reader.parse_page` interprets literal `[DAMAGED]` as a
+corruption-glyph span and `[REDACTED]` as a solid block. A player's recovered damage
+text can replace a damaged span in ordinary play. Preview uses fresh empty
+language knowledge, never a personal save. Even ordinary pages consult the saved
+deep-tongue lexicon: known words translate and unknown words can draw glyphs.
+
+Condition is a string, not an enum. With UI art, `pristine`, `worn`, `damaged`,
+`fragmentary` and `burned` choose tints; unknown conditions use the worn tint.
+Without UI art, pristine/worn/damaged/fragmentary choose border colors and other
+conditions use the brown fallback. Shipped `stained` and `weathered` strings remain
+valid. The heading displays the condition in uppercase.
+
+`type`, `reads_as`, `lacunae` and page `damaged` remain inspectable metadata; no
+active Python consumer establishes the behavior their names might imply. They
+are not recalculated from prose. Language/alternate-render fields are inspectable;
+active `deep_tongue` at root or page level, any `teach_words` block and special
+`render_mode` (including alphabet) make a source read-only. Removing them in a
+draft cannot upgrade the original source's entitlement.
+
+Publication deliberately creates a new identity/file. Reopened definitions may be
+inspected or duplicated again. Same-ID revisions are deferred because saved
+recovery uses `(text_id, page_idx, span_idx)`; changing page/span positions under
+an existing identity can change what previous knowledge refers to.
+
+## Binding an existing readable item
+
+Saving a text makes it available to the next data load; it does not select a
+world location or modify any existing object. The existing authored-layout item
+special can bind a text explicitly:
+
+```json
+{"type":"item","item_id":"letter","text_id":"your_new_text_id","x":3,"y":3}
+```
+
+Coordinates must be valid for that separately authored layout, with valid arrival
+and return access. The authored-submap population route defaults to
+`map_text=False`, so an explicit `letter` remains a letter. Its `on_use: "read"`
+resolves `text_id` in `data.texts`. No text-item mapping edit is required. Other
+routes can use `map_text=True` and the existing mapping; Workbench text publication
+does not alter those routes, selection tables, active layouts or personal campaigns.
+
+The registered reference provider reports explicit `text_id` declarations in saved
+items, layouts and buildings plus direct text-item map entries. It does not scan
+saves or infer every dynamic relationship. These are declared references, not
+proof of natural acquisition.
+
+Workbench's reader preview uses actual fonts, UI panels and lexicon in a disposable
+context, with a bounded image for each requested page/scroll position. Preview is
+consumer evidence only. Fresh validation, exact-source review and deliberate
+single-file publication remain required. The W5B physical-letter test separately
+uses production scene construction, normal pickup, inventory use and reader keys
+in a controlled fixture; it does not certify natural world selection or balance.

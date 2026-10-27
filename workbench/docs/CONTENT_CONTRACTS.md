@@ -1,7 +1,7 @@
-# Registered item and immediate-recipe authoring
+# Registered content authoring
 
 `roguelike/engine/content_authoring.py:families` is the explicit first-party
-registration point. The existing `item_authoring.py` and `recipe_authoring.py`
+registration point. `item_authoring.py`, `recipe_authoring.py` and `text_authoring.py`
 adapters own discovery identity, supported source shape, ordinary field metadata,
 reference providers, semantic validation and construction/execution evidence.
 Gameplay does not import these authoring modules. There are no descriptor-driven
@@ -38,9 +38,36 @@ Small authoring annotations:
 | `x-control: scalar` | Ordinary string/number/integer/boolean control |
 | `x-control: multiline` | Description textarea for a string |
 | `x-control: ordered-table` | Registered keyword or requirement table |
+| `x-control: ordered-records` | Reusable ordered object records with descriptor-defined scalar/multiline cells |
+| `x-suggestions` | At most 32 string suggestions; free text remains valid, not a restrictive enum |
 | `x-reference` | Named source-backed reference provider |
 | `x-view` | Place an ordinary field in a registered specialized view |
 | `x-initial` | Explicit initial value when adding a new row; never an effective default for an existing missing key |
+
+W5B adds `ordered-records`; it shares the existing localized array splice/move
+implementation with recipe rows. Creation inserts only explicit `x-initial`
+values, so a new page has text but no unsolicited `trailing:false`. Each operation
+reparses the current source. Moves carry the full source object, including unknown
+metadata. A new desktop build supplies this control vocabulary and reader view;
+W5A's compatible scalar fixed-build proof does not claim otherwise.
+
+An optional trusted family `authoring_preview` adapter receives the validated
+candidate, disposable loaded data, selected project and bounded view inputs.
+The shared `validate_document` command takes optional `previewInputs`; supplying
+them revokes any earlier review and never installs a publication review, even
+when semantic validation passes. A later normal validation is required to apply.
+There is no text-specific IPC command, document slot, worker service or writer.
+PNG frames use the existing bounded JSON output channel (2 MiB per frame beneath
+the host's 16 MiB output cap); data URLs do not broaden filesystem permissions.
+Receipts bind candidate/descriptor/contract, project code/data/resources, runtime
+and page/scroll selection. The conservative dependency stamp still includes all
+Python and data JSON, extended to the saved Fonts/UI resource trees.
+
+Host filesystem admission uses a fixed `CONTENT_ROOTS` table independent of
+descriptors. A family registration still needs an explicitly permitted host root;
+renderer metadata cannot add one. Reserved basenames are rejected at every depth.
+The text registration allows variants under `roguelike/data/texts/` and excludes
+`text_item_map.json`. Generic workspace visibility uses the active family key.
 
 For example, a supported optional boolean can be added to a family's
 `SCHEMA["properties"]` with `type: "boolean"`, its factual title/help and the

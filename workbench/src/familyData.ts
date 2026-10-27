@@ -1,4 +1,24 @@
 import type { Diagnostic, Source } from "./protocol";
+export type TextContext = {
+  records: {id:string; pointer:string; definition:Record<string,unknown>; diagnostics:Diagnostic[];
+    capability:{contract:string; editable:boolean; reason:string}; references:{path:string; pointer:string; kind:string}[]}[];
+  reference_coverage:string; inspection_note:string; binding_note:string;
+};
+export type ReaderFrame = {
+  kind:"reader-frame"; image:string; image_sha256:string; width:number; height:number; inputs:{page:number;scroll:number};
+  page:number;scroll:number;max_scroll:number;viewport_height:number;visible_rows:number[];total_rows:number;marker_types:string[];
+  draft_sha256:string;path:string;source:Source;contract:string;descriptor_sha256:string;runtime:{python:string;dependencies:Record<string,string>};
+  observed_at_utc:string;setup:string;consumer:string;dependencies:string;
+};
+export type FamilyPreview = ReaderFrame;
+export function previewProblem(value: unknown): string {
+  if (!value || typeof value !== "object") return "Missing preview";
+  const v=value as Partial<ReaderFrame>;
+  if(v.kind!=="reader-frame" || typeof v.image!=="string" || v.image.length>2800000 || !/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(v.image)) return "Invalid bounded PNG preview";
+  if(v.width!==960 || v.height!==640 || !v.inputs || ![v.page,v.scroll,v.max_scroll,v.viewport_height,v.total_rows,v.inputs.page,v.inputs.scroll].every(n=>Number.isSafeInteger(n) && Number(n)>=0)) return "Malformed preview coordinates";
+  if(![v.image_sha256,v.draft_sha256,v.descriptor_sha256].every(h=>typeof h==="string" && /^[a-f0-9]{64}$/.test(h)) || !v.source || typeof v.contract!=="string" || typeof v.setup!=="string") return "Malformed preview identity";
+  return "";
+}
 export type FactoryResult = {item_id: string; instance: Record<string, unknown>; comparisons: {field: string; declared: unknown; instance: unknown; equal: boolean}[]; consumer: string; scope: string; definition_sha256: string; source: Source; path: string; observed_at_utc: string; loaded_catalog_sha256: string};
 export type ItemRecord = {
   id: string; pointer: string; definition: Record<string, unknown>; diagnostics: Diagnostic[];

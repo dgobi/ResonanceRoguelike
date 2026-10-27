@@ -14,10 +14,11 @@ DIALECT = "https://json-schema.org/draft/2020-12/schema"
 VOCABULARY = "resonance-controls-1"
 
 
-def definition_sources(data_root, family):
+def definition_sources(data_root, family, excluded=()):
     """Mirror the loader's object/array convention without choosing an ID winner."""
     sources = {}
     for path in sorted((data_root / family).rglob("*.json")):
+        if path.name.casefold() in excluded: continue
         try:
             raw = json.loads(path.read_text(encoding="utf-8"))
         except (ValueError, OSError):
@@ -37,18 +38,22 @@ def schema_problems(schema):
         if not isinstance(node, dict) or depth > 4:
             errors.append(f"{path}: expected bounded schema object"); return
         allowed = {"$schema", "type", "title", "description", "default", "readOnly", "minimum", "maximum",
-                   "properties", "required", "items", "additionalProperties", "x-control", "x-reference", "x-view", "x-initial"}
+                   "properties", "required", "items", "additionalProperties", "x-control", "x-reference", "x-view", "x-initial", "x-suggestions"}
         for key in node.keys() - allowed: errors.append(f"{path}: unsupported schema keyword {key}")
         kind = node.get("type")
         if kind not in ("string", "number", "integer", "boolean", "object", "array"):
             errors.append(f"{path}: unsupported type {kind}")
-        if node.get("x-control", "scalar") not in ("scalar", "multiline", "ordered-table"):
+        if node.get("x-control", "scalar") not in ("scalar", "multiline", "ordered-table", "ordered-records"):
             errors.append(f"{path}: unsupported control {node['x-control']}")
         if kind == "object" and depth not in (0, 2): errors.append(f"{path}: only root and table-row objects are supported")
-        if kind == "array" and (depth != 1 or node.get("x-control") != "ordered-table"):
+        if kind == "array" and (depth != 1 or node.get("x-control") not in ("ordered-table", "ordered-records")):
             errors.append(f"{path}: only registered ordered tables are supported")
         if node.get("x-control") == "multiline" and kind != "string": errors.append(f"{path}: multiline requires a string")
+        if node.get("x-control") in ("ordered-table", "ordered-records") and (kind != "array" or not isinstance(node.get("items"), dict) or node["items"].get("type") != "object"):
+            errors.append(f"{path}: ordered controls require an array of objects")
         if "x-reference" in node and kind != "string": errors.append(f"{path}: reference requires a string")
+        if "x-suggestions" in node and (kind != "string" or not isinstance(node["x-suggestions"], list) or len(node["x-suggestions"]) > 32 or any(not isinstance(v, str) for v in node["x-suggestions"])):
+            errors.append(f"{path}: invalid string suggestions")
         for annotation in ("default", "x-initial"):
             if annotation not in node: continue
             value = node[annotation]
@@ -97,7 +102,7 @@ class Family:
     def envelope(self, context):
         descriptor, digest = self.descriptor()
         problems = schema_problems(descriptor["schema"])
-        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt"}
+        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview"}
         if not isinstance(descriptor["views"], list) or any(v not in allowed_views for v in descriptor["views"]):
             problems.append("Unsupported specialized view registration")
         return dict(id=self.id, contract=self.module.CONTRACT, descriptor_sha256=digest,
@@ -109,14 +114,20 @@ class Family:
     def validate(self, raw, data, path, data_root):
         return self.module.authoring_validate(raw, data, path, data_root)
 
+    def preview(self, raw, data, root, inputs):
+        adapter = getattr(self.module, "authoring_preview", None)
+        if not adapter: raise ValueError("This family has no registered preview adapter.")
+        return adapter(raw, data, root, inputs)
+
     def eligible(self, context):
         return bool(context and len(context["records"]) == 1 and context["records"][0]["capability"]["editable"])
 
     def discover(self, root):
         from generation.structure_contract import read_document, StructureError
-        sources = definition_sources(root / "roguelike/data", self.directory)
+        sources = definition_sources(root / "roguelike/data", self.directory, getattr(self.module, "RESERVED_BASENAMES", ()))
         rows = []
         for path in sorted((root / "roguelike/data" / self.directory).rglob("*.json")):
+            if path.name.casefold() in getattr(self.module, "RESERVED_BASENAMES", ()): continue
             relative = path.relative_to(root).as_posix()
             try: raw = read_document(path)
             except StructureError: raw = {}
@@ -126,7 +137,7 @@ class Family:
                 identifier = str(record.get("id", path.stem))
                 locations = [s for k, ss in sources.items() if k.casefold() == identifier.casefold() for s in ss]
                 cap = self.module.capability(record, relative, pointer)
-                rows.append(dict(path=relative, pointer=pointer, id=identifier, name=str(record.get("name", "")),
+                rows.append(dict(path=relative, pointer=pointer, id=identifier, name=str(record.get("name", record.get("title", ""))),
                     category=str(record.get("category", "")), result_item=record.get("result_item"),
                     execution_class=cap.get("execution_class"), route=self.route, family_id=self.id,
                     editable=cap["editable"] and len(locations) == 1,
@@ -138,10 +149,11 @@ class Family:
 
 def families():
     # The sole trusted registration point. No renderer or descriptor imports.
-    from engine import item_authoring, recipe_authoring
+    from engine import item_authoring, recipe_authoring, text_authoring
     return (
         Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/components/"),
         Family("recipe", "recipes", recipe_authoring, ("variant",), "roguelike/data/recipes/"),
+        Family("text", "texts", text_authoring, ("variant",), "roguelike/data/texts/"),
     )
 
 

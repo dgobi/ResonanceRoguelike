@@ -5,6 +5,7 @@ import { LayoutEditor } from "./LayoutEditor";
 import { PoolEditor } from "./PoolEditor";
 import { ContentEditor, contentViews, type ContentNavigation } from "./ContentEditor";
 import { familyProblem, type ContentFamily } from "./content";
+import { previewProblem, type FamilyPreview } from "./familyData";
 import { CreatureEditor } from "./CreatureEditor";
 import {
   CanvasHistory,
@@ -38,6 +39,7 @@ type Verdict = {
   contract: string;
   preview?: Preview;
   family?: ContentFamily;
+  family_preview?: FamilyPreview | null;
   creature_context?: CreatureContext;
 };
 type Disk = {
@@ -116,6 +118,7 @@ export function Authoring({
     [confirm, setConfirm] = useState(false);
   const [localError, setLocalError] = useState("");
   const [evidenceVersion, setEvidenceVersion] = useState(dependencyVersion);
+  const [previewEvidence,setPreviewEvidence]=useState<{frame:FamilyPreview;text:string;version:number;dependencies:number;stale:boolean}|null>(null);
   const [focus, setFocus] = useState<{ cell: Cell; layer: Layer } | null>(null);
   const history = useRef(new CanvasHistory()),
     gesture = useRef<string | null>(null);
@@ -137,11 +140,12 @@ export function Authoring({
   useEffect(() => {
     version.current++;
     setVerdict(null);
+    setPreviewEvidence(p=>p ? {...p,stale:true} : p);
     setConfirm(false);
       if (submap) revoke();
   }, [dependencyVersion, seed]);
   useEffect(() => { version.current++; setConfirm(false); }, [active]);
-  useEffect(() => { version.current++; setVerdict(null); setConfirm(false); }, [cancelVersion]);
+  useEffect(() => { version.current++; setVerdict(null); setConfirm(false); setPreviewEvidence(p=>p ? {...p,stale:true} : p); }, [cancelVersion]);
   useEffect(() => {
     onDirty(dirty);
   }, [dirty, onDirty]);
@@ -162,7 +166,7 @@ export function Authoring({
         });
         if (!stopped) {
           setDisk(d.result);
-          if ((content || creature || submap) && (d.result.dependencies_changed || d.result.changed)) { version.current++; setVerdict(null); setConfirm(false); }
+          if ((content || creature || submap) && (d.result.dependencies_changed || d.result.changed)) { version.current++; setVerdict(null); setConfirm(false); setPreviewEvidence(p=>p ? {...p,stale:true} : p); }
         }
       } catch (e) {
         if (!stopped) onError(asFailure(e));
@@ -190,6 +194,7 @@ export function Authoring({
     latest.current = text;
     version.current++;
     setDraft(text);
+    setPreviewEvidence(p=>p ? {...p,stale:true} : p);
     setVerdict(null);
     setConfirm(false);
     setLocalError("");
@@ -248,10 +253,11 @@ export function Authoring({
       setLocalError(String(e));
     }
   }
-  async function validate(showDiff = true) {
+  async function validate(showDiff = true, previewInputs?:Record<string,number>) {
     const v = ++version.current,
       text = latest.current;
-    const request = beginRequest("Validating unsaved draft…");
+    const request = beginRequest(previewInputs ? "Rendering registered preview…" : "Validating unsaved draft…");
+    setPreviewEvidence(p=>p ? {...p,stale:true} : p);
     setVerdict(null);
     onError(null);
     try {
@@ -262,12 +268,18 @@ export function Authoring({
         draft: text,
         variantId: variant ? variantId : null,
         seed,
+        previewInputs: previewInputs || null,
       });
       if (
         mounted.current && request.current() &&
         currentVerdict(v, version.current, text, latest.current)
       ) {
         setVerdict(r.result);
+        if(previewInputs && r.result.family_preview) {
+          const problem=previewProblem(r.result.family_preview);
+          if(problem) throw new Error(problem);
+          setPreviewEvidence({frame:r.result.family_preview,text,version:cancelVersion,dependencies:dependencyVersion,stale:false});
+        }
         if (content || creature || submap) { setEvidenceVersion(dependencyVersion); setDisk(d=>d ? {...d, dependencies_changed:false} : d); }
         if (!r.result.valid || showDiff)
           setTab(r.result.valid ? "diff" : "problems");
@@ -344,6 +356,8 @@ export function Authoring({
         evidenceStale={!!disk?.changed || !!disk?.dependencies_changed || evidenceVersion !== dependencyVersion}
         disabled={!writable ? "Read-only source or unsupported capability." : !editing ? "Begin edit to change this definition." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
         busy={!!busy} onCancel={onCancel} onSource={()=>setTab("source")} onProbe={()=>void validate(false)}
+        preview={previewEvidence?.frame || null} previewStale={!previewEvidence || previewEvidence.stale || previewEvidence.text!==draft || previewEvidence.frame.path!==target || previewEvidence.version!==cancelVersion || previewEvidence.dependencies!==dependencyVersion || !!disk?.changed || !!disk?.dependencies_changed}
+        onPreview={inputs=>void validate(false,inputs)}
         onEdit={visualEdit} onUndo={()=>historyStep(false)} onRedo={()=>historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
       /></div>, canvasHost)}
       {creature && canvasHost && createPortal(<div hidden={!active}><CreatureEditor

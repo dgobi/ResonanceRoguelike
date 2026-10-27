@@ -93,10 +93,14 @@ def source_identity(root):
     catalog = hashlib.sha256(json.dumps([
         (p.relative_to(data_root).as_posix(), hashlib.sha256(p.read_bytes()).hexdigest())
         for p in sorted(data_root.rglob("*.json"))], separators=(",", ":")).encode()).hexdigest()
+    resources = hashlib.sha256()
+    for directory in ("assets/Fonts", "assets/ui"):
+        for p in sorted((root / "roguelike" / directory).rglob("*")):
+            if p.is_file(): resources.update(p.relative_to(root).as_posix().encode()); resources.update(p.read_bytes())
     return {"root": str(root), "commit": git("rev-parse", "HEAD") if owned_git else None,
             "branch": git("branch", "--show-current") if owned_git else None,
             "game_dirty": None if status is None else bool(status),
-            "game_source_sha256": digest.hexdigest(), "catalog_sha256": catalog}
+            "game_source_sha256": digest.hexdigest(), "catalog_sha256": catalog, "resources_sha256": resources.hexdigest()}
 
 
 def runtime_check():
@@ -152,11 +156,11 @@ def asset_path(root, value, *, new=False):
     building = (len(relative.parts) == 5 and relative.parts[:3] == ("roguelike", "data", "buildings")
                 and relative.parts[3] in ELIGIBILITY.keys() - {"plaza"})
     pool = len(relative.parts) == 4 and relative.parts[:3] == ("roguelike", "data", "loot_pools")
-    item = len(relative.parts) >= 4 and relative.parts[:3] == ("roguelike", "data", "items")
-    recipe = len(relative.parts) >= 4 and relative.parts[:3] == ("roguelike", "data", "recipes")
+    from engine.content_authoring import family_for
+    family = family_for(value)
     creature = len(relative.parts) >= 4 and relative.parts[:3] == ("roguelike", "data", "entities")
     example = value == G17_EXAMPLE and not new
-    if relative.is_absolute() or not (layout or building or pool or item or recipe or creature or example) or relative.suffix != ".json":
+    if relative.is_absolute() or not (layout or building or pool or family or creature or example) or relative.suffix != ".json":
         fail("UNSUPPORTED_ASSET", value, "Select an ordinary building, contextual pool or read-only authored layout.")
     path = (root / relative).resolve(strict=not new)
     if not path.is_relative_to(root / "roguelike/data") and not (example and path == root / G17_EXAMPLE):
@@ -379,7 +383,7 @@ def layout_validation(request, root, scratch, identity):
     for d in diagnostics:
         d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
     after = source_identity(root)
-    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
         fail("SOURCE_CHANGED", "Source/dependencies changed during validation.", "Revalidate the retained draft.")
     digest = hashlib.sha256(draft.encode()).hexdigest()
     if generated: generated.update(draft_sha256=digest, source_sha256=digest, original_source_sha256=hashlib.sha256(source_path.read_bytes()).hexdigest())
@@ -479,7 +483,7 @@ def pool_validation(request, root, scratch, identity):
     for d in diagnostics:
         d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
     after = source_identity(root)
-    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
         fail("SOURCE_CHANGED", "Dependencies changed during pool validation.", "Validate again.")
     valid = syntax and not any(d["severity"] == "error" for d in diagnostics)
     return {"valid": valid, "syntax_valid": syntax, "contract_valid": valid, "references_valid": valid,
@@ -563,7 +567,7 @@ def creature_validation(request, root, scratch, identity):
     for d in diagnostics:
         d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
     after = source_identity(root)
-    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
         fail("SOURCE_CHANGED", "Creature dependencies changed during validation.", "Validate again.")
     observed = context["records"][0]["factory"] if context and context["records"] else None
     valid = syntax and observed is not None and not any(d["severity"] == "error" for d in diagnostics)
@@ -593,6 +597,7 @@ def family_validation(family, request, root, scratch, identity):
     original = asset_path(root, source_asset)
     digest = hashlib.sha256(draft.encode("utf-8")).hexdigest()
     diagnostics = []; context = None; syntax = False
+    rendered = None
     envelope = family.envelope(None)
     diagnostics += capability_diagnostics(envelope, source_asset)
     copied = scratch / "data"
@@ -612,13 +617,19 @@ def family_validation(family, request, root, scratch, identity):
         if not any(d["severity"] == "error" for d in diagnostics):
             context = family.context(raw, data, request["asset"], copied, identity, digest, observe=True)
             diagnostics += [d for record in context["records"] for d in record["diagnostics"]]
+            if request.get("preview_inputs") is not None and not any(d["severity"] == "error" for d in diagnostics):
+                rendered = family.preview(raw, data, root, request["preview_inputs"])
+                rendered.update(draft_sha256=digest, path=request["asset"], source=identity,
+                                contract=family.module.CONTRACT, descriptor_sha256=envelope["descriptor_sha256"],
+                                runtime=dict(python=platform.python_version(), dependencies=DEPENDENCIES),
+                                observed_at_utc=datetime.now(timezone.utc).isoformat())
     except StructureError as error:
         diagnostics += [d.json() for d in error.diagnostics]
         if isinstance(error.__cause__, json.JSONDecodeError):
             for d in diagnostics: d.update(line=error.__cause__.lineno, column=error.__cause__.colno)
     for d in diagnostics: d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
     after = source_identity(root)
-    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
         fail("SOURCE_CHANGED", "Dependencies changed during validation.", "Reopen and validate again.")
     evidence = family.module.authoring_evidence(context)
     valid = syntax and evidence["semantic_verified"] and not any(d["severity"] == "error" for d in diagnostics)
@@ -627,7 +638,7 @@ def family_validation(family, request, root, scratch, identity):
                 family=family.envelope(context), source_asset=source_asset,
                 source_sha256=hashlib.sha256(original.read_bytes()).hexdigest(),
                 worker_version=WORKER_VERSION, worker_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                path=request["asset"], source=identity, population_verified=False, preview=None,
+                path=request["asset"], source=identity, population_verified=False, preview=None, family_preview=rendered,
                 limitations=family.module.LIMITATIONS, **evidence)
 
 
@@ -691,7 +702,7 @@ def draft_validation(request, root, scratch, identity):
     for d in diagnostics:
         d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
     after = source_identity(root)
-    if any(after[key] != identity[key] for key in ("game_source_sha256", "catalog_sha256")):
+    if any(after[key] != identity[key] for key in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
         fail("SOURCE_CHANGED", "Game source or dependency data changed during draft validation.", "Validate again.")
     if generated:
         generated["draft_sha256"] = hashlib.sha256(draft.encode("utf-8")).hexdigest()
@@ -780,7 +791,7 @@ def run(request, root, scratch):
     from generation.structure_preview import preview
     registered = families()
     imported_sources = {}
-    for name in ("config", "engine.data_loader", "generation.structure_contract", "generation.structure_preview", "engine.content_authoring", "engine.item_authoring", "engine.recipe_authoring", "engine.creature_authoring"):
+    for name in ("config", "engine.data_loader", "generation.structure_contract", "generation.structure_preview", "engine.content_authoring", "engine.creature_authoring", *(f.module.__name__ for f in registered)):
         module_path = Path(sys.modules[name].__file__).resolve()
         if not module_path.is_relative_to(root / "roguelike"):
             fail("SOURCE_IMPORT_MISMATCH", f"{name} was imported outside the selected project.", "Use the selected current checkout with the pinned isolated interpreter.")
@@ -797,7 +808,9 @@ def run(request, root, scratch):
         identity["catalog_sha256"] = data.structure_catalog.identity
     except StructureError as error:
         data = None; catalog_error = error
-        identity["catalog_sha256"] = None
+        # Retain the measured source stamp when the loader rejects a catalog.
+        # Erasing it would misreport unchanged malformed input as SOURCE_CHANGED
+        # and prevent the existing inspect-only repair/diagnostic path.
     if op == "identify":
         return {"worker_version": WORKER_VERSION, "worker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 "protocol": PROTOCOL, "source": identity, "runtime": runtime, "contract": CONTRACT_VERSION,
@@ -830,7 +843,7 @@ def run(request, root, scratch):
         diagnostics = ([d.json() for d in (raw_error or catalog_error).diagnostics] if raw_error or catalog_error else
                        [d for r in context["records"] for d in r["diagnostics"]])
         after = source_identity(root)
-        if path.read_bytes() != source or any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+        if path.read_bytes() != source or any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
             fail("SOURCE_CHANGED", "Creature or dependency changed during inspection.", "Reopen the creature.")
         single = raw if isinstance(raw, dict) else {}
         return dict(id=single.get("id", path.stem), path=request["asset"], route=CREATURE_ROUTE,
@@ -848,7 +861,7 @@ def run(request, root, scratch):
         envelope = family.envelope(context)
         diagnostics += capability_diagnostics(envelope, request["asset"])
         after = source_identity(root)
-        if path.read_bytes() != source or any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")):
+        if path.read_bytes() != source or any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
             fail("SOURCE_CHANGED", "Source or dependency changed during inspection.", "Reopen the document.")
         single = raw if isinstance(raw, dict) else {}
         return dict(id=single.get("id", path.stem), path=request["asset"], route=family.route,
@@ -922,7 +935,7 @@ def run(request, root, scratch):
         if generated is None: return dict(valid=False, diagnostics=problems)
         generated.update(source_sha256=hashlib.sha256(source).hexdigest())
         after = source_identity(root)
-        if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256")) or path.read_bytes() != source or (access_source and sidecar.read_bytes() != access_bytes):
+        if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")) or path.read_bytes() != source or (access_source and sidecar.read_bytes() != access_bytes):
             fail("SOURCE_CHANGED", "Source or access context changed during preview.", "Reopen and preview again.")
         return generated
     # Bound legacy global RNG consumers in this disposable process as well as
@@ -967,7 +980,7 @@ def main():
             fail("MALFORMED_REQUEST", "Expected a correlation ID.", "Supply a short string id.")
         if type(request.get("protocol")) is not int or request["protocol"] != PROTOCOL:
             fail("PROTOCOL_MISMATCH", f"Worker requires protocol {PROTOCOL}.", "Use matching Workbench frontend, host and worker versions.")
-        if request.get("op") not in ("identify", "describe", "inspect", "preview", "validate_draft", "preview_draft") or set(request) - {"id", "protocol", "op", "asset", "seed", "invalid_fixture", "draft", "source_asset"}:
+        if request.get("op") not in ("identify", "describe", "inspect", "preview", "validate_draft", "preview_draft") or set(request) - {"id", "protocol", "op", "asset", "seed", "invalid_fixture", "draft", "source_asset", "preview_inputs"}:
             fail("MALFORMED_REQUEST", "Unsupported operation or fields.", "Only identify, describe, inspect and preview are available.")
         if len(sys.argv) != 3 or sys.argv[1] != "--root":
             fail("INVALID_PROJECT", "Expected one --root argument.", "Launch through the Workbench host.")

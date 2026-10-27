@@ -142,7 +142,7 @@ export default function App() {
   async function loadAsset(asset: string, token: number, generate = true, reopened?: Inspection) {
     setCreatureActive(false);
     setPoolActive(false);
-    setItemActive(false); setRecipeActive(false);
+    setActiveContent("");
     setSelected(asset);
     setFixture(null);
     setInspection(null);
@@ -307,14 +307,14 @@ export default function App() {
   async function openPool(id: string, context: SourceTrail | null = null, discard = false, reload = false) {
     const matches = assets.filter(a => a.route === "contextual_loot_pool" && a.id === id), asset = matches[0];
     if (matches.length !== 1) { setError({code: "POOL_SOURCE", message: `Pool ${id} resolves to ${matches.length} supported files.`, remedy: "Correct duplicate/missing IDs or refresh the project catalogue."}); return; }
-    if (!reload && poolDocument?.path === asset.path) { setTrail(context); setPoolActive(true); setCreatureActive(false); setItemActive(false); setRecipeActive(false); return; }
+    if (!reload && poolDocument?.path === asset.path) { setTrail(context); setPoolActive(true); setCreatureActive(false); setActiveContent(""); return; }
     if (poolDirty && !discard) { setPending(() => () => void openPool(id, context, true, reload)); return; }
     setBusy("Opening contextual pool…"); setError(null);
     const token = ++epoch.current;
     try {
       const r = await call<Inspection>("open_document", {asset: asset.path});
       if (token !== epoch.current) return;
-      setPoolDocument(r.result); setPoolDirty(false); setPoolActive(true); setCreatureActive(false); setItemActive(false); setRecipeActive(false); setTrail(context);
+      setPoolDocument(r.result); setPoolDirty(false); setPoolActive(true); setCreatureActive(false); setActiveContent(""); setTrail(context);
       setStatus(`Opened ${asset.path}.`);
     } catch (e) { if (token === epoch.current) setError(asFailure(e)); } finally { if (token === epoch.current) setBusy(""); }
   }
@@ -458,7 +458,7 @@ export default function App() {
       <div
         className={
           "workspace " +
-          (inspection?.document_token || poolActive || itemActive || recipeActive || creatureActive ? "authoring-workspace" : "")
+          (inspection?.document_token || poolActive || !!activeContent || creatureActive ? "authoring-workspace" : "")
         }
       >
         <aside className="sidebar">
@@ -576,7 +576,7 @@ export default function App() {
               {visibleAssets.slice(catalogPage * 100, (catalogPage + 1) * 100).map((a) => (
                 <button
                   key={a.path + (a.pointer || "")}
-                  className={"asset " + (a.path === (creatureActive ? creatureDocument?.path : recipeActive ? recipeDocument?.path : itemActive ? itemDocument?.path : poolActive ? poolDocument?.path : selected) ? "selected" : "")}
+                  className={"asset " + (a.path === (creatureActive ? creatureDocument?.path : activeContent ? contentDocuments[activeContent]?.document.path : poolActive ? poolDocument?.path : selected) ? "selected" : "")}
                   disabled={!!busy || a.route === "plaza"}
                   title={`${a.path} · ${a.provenance} · ${a.validation}${a.editable ? "" : " · read-only"}`}
                   data-asset={a.path}
@@ -586,7 +586,7 @@ export default function App() {
                   <span>
                     <strong>{a.id}</strong>
                     <small>
-                      {a.route === "creature_definition" ? `${a.name} · ${a.category}` : a.route === "recipe_definition" ? `${a.name} · ${a.execution_class}` : a.route === "item_definition" ? `${a.name} · ${a.category}` : a.route === "contextual_loot_pool" ? "Contextual loot pool" : `${a.width} × ${a.height} · ${a.category || a.route}`}
+                      {a.family_id ? `${a.name || a.id} · ${a.execution_class || a.category || a.family_id}` : a.route === "creature_definition" ? `${a.name} · ${a.category}` : a.route === "contextual_loot_pool" ? "Contextual loot pool" : `${a.width} × ${a.height} · ${a.category || a.route}`}
                       <br />
                       {a.path}{a.pointer || ""}
                       <br />
@@ -617,15 +617,15 @@ export default function App() {
           </section>
         </aside>
         <section className="preview-pane">
-          {(inspection?.document_token || poolActive || itemActive || recipeActive || creatureActive) && (
+          {(inspection?.document_token || poolActive || !!activeContent || creatureActive) && (
             <>
               <div className="building-controls">
-                {poolDocument && <button disabled={!!busy} onClick={() => {setCreatureActive(false);setPoolActive(creatureActive || recipeActive || itemActive || !poolActive); setItemActive(false); setRecipeActive(false);}}>{poolActive && !itemActive && !recipeActive && !creatureActive ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
+                {poolDocument && <button disabled={!!busy} onClick={() => {setCreatureActive(false);setPoolActive(creatureActive || !!activeContent || !poolActive); setActiveContent("");}}>{poolActive && !activeContent && !creatureActive ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
                 {Object.entries(contentDocuments).map(([family,entry])=><button key={family} disabled={!!busy} onClick={()=>{setCreatureActive(false);setActiveContent(activeContent===family && !creatureActive ? "":family);}}>{activeContent===family && !creatureActive ? `Hide ${contentViews[family as ContentFamily["id"]]?.label || family}` : `Show ${family} ${entry.selectedId}`}</button>)}
                 {creatureDocument && <button disabled={!!busy} onClick={()=>setCreatureActive(!creatureActive)}>{creatureActive ? "Hide creature" : `Show creature ${selectedCreatureId}`}</button>}
                 {creatureActive && creatureDocument && <button disabled={!!busy} onClick={()=>void openCreature(selectedCreatureId,creatureDocument.path,false,true)}>Reload creature</button>}
                 {!creatureActive && activeContent && contentDocuments[activeContent] && <button disabled={!!busy} onClick={()=>void openContent(activeContent,contentDocuments[activeContent].selectedId,contentDocuments[activeContent].document.path,false,true,itemTrail)}>Reload {activeContent}</button>}
-                {!creatureActive && !recipeActive && !itemActive && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
+                {!creatureActive && !activeContent && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
                 <label>
                   Preview seed
                   <input
@@ -635,7 +635,7 @@ export default function App() {
                     disabled={!!busy}
                   />
                 </label>
-                <button onClick={() => refresh()} disabled={!!busy || poolActive || itemActive || recipeActive || creatureActive}>
+                <button onClick={() => refresh()} disabled={!!busy || poolActive || !!activeContent || creatureActive}>
                   ↻ Generate / refresh
                 </button>
               </div>
@@ -651,7 +651,7 @@ export default function App() {
           <div
             className="saved-preview-pane"
             style={{
-              display: inspection?.document_token || poolActive || itemActive || recipeActive || creatureActive ? "none" : "contents",
+              display: inspection?.document_token || poolActive || !!activeContent || creatureActive ? "none" : "contents",
             }}
           >
             <div className="pane-heading">
@@ -803,7 +803,7 @@ export default function App() {
         </section>
         <aside className="inspector">
           <div className="eyebrow">04 / INSPECTOR</div>
-          {!inspection?.document_token && !poolActive && !itemActive && !recipeActive && !creatureActive && (
+          {!inspection?.document_token && !poolActive && !activeContent && !creatureActive && (
             <div className="tabs">
               <button
                 className={tab === "properties" ? "active" : ""}
@@ -831,14 +831,14 @@ export default function App() {
             contentNavigation={{selectedId:entry.selectedId,trail:itemTrail,
               onReturn:family==="recipe" ? itemDocument ? returnToItem:undefined : poolDocument ? ()=>{setItemActive(false);setPoolActive(true);setCreatureActive(false);}:undefined,
               onPool:id=>void openPool(id,trail),onOpen:(target,id,path)=>{recipeReturnRelation.current=document.activeElement?.getAttribute("data-recipe-relation") || "ingredient";void openContent(target,id,path);}}} /></div>)}
-          {poolDocument && <div hidden={!poolActive || itemActive || recipeActive || creatureActive}><Authoring key={poolDocument.document_token}
+          {poolDocument && <div hidden={!poolActive || !!activeContent || creatureActive}><Authoring key={poolDocument.document_token}
             document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
             busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={poolActive && !itemActive && !recipeActive && !creatureActive} onCancel={() => void cancel()} trail={trail}
+            active={poolActive && !activeContent && !creatureActive} onCancel={() => void cancel()} trail={trail}
             onItem={(id, context) => void openItem(id, context)}
             poolEntryFocus={itemTrail?.path === poolDocument.path || itemTrail?.poolId === poolDocument.id ? itemTrail.index : undefined}
             onReturn={() => setPoolActive(false)} dependencyVersion={dependencyVersion} /></div>}
-          <div hidden={poolActive || itemActive || recipeActive || creatureActive}>{inspection?.document_token ? (
+          <div hidden={poolActive || !!activeContent || creatureActive}>{inspection?.document_token ? (
             <Authoring
               key={inspection.document_token}
               document={inspection}
@@ -852,7 +852,7 @@ export default function App() {
               diskPreview={preview}
               seed={Number(seed)}
               onCancel={() => void cancel()}
-              active={!poolActive && !itemActive && !recipeActive && !creatureActive}
+              active={!poolActive && !activeContent && !creatureActive}
               onPool={(id, context) => void openPool(id, context)}
               dependencyVersion={dependencyVersion}
             />

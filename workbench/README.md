@@ -1,16 +1,48 @@
-# Resonance Workbench · W5A
+# Resonance Workbench · W5B
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, inert component items,
 one immediate recipe family, ordinary revenant variants and direct creature
-placement in authored underground layouts. The game remains the
+placement in authored underground layouts, and ordinary found-text variants. The game remains the
 validation authority. No campaign, running game or Internet service is required.
 
-Item and immediate-recipe controls now use the selected game's registered content
+Item, immediate-recipe and found-text controls use the selected game's registered content
 contract and the same exact-source document lifecycle. See
 [content contracts](docs/CONTENT_CONTRACTS.md) for the extension seam, supported
 control vocabulary, default handling and publication boundaries. Other editor
 families retain their existing supported operations.
+
+## Author an ordinary found text
+
+Search a supported text (for example `lab_note_primary_b`). Its capability, rather
+than that ID, determines eligibility. Choose **Begin edit → Save as new variant**
+and enter a unique ID. **Pages** edits the heading, condition, multiline bodies and
+optional ending markers; add, move or remove complete page objects. Unknown root
+and page metadata remains available under **Binding and metadata** and **Source**.
+Graphical changes use the same source and Undo/Redo; raw or variant-ID edits reset
+that history. Invalid raw text remains repairable in Source.
+
+**Reader preview → Preview exact text** renders the selected page using the real
+Python reader, saved fonts/UI art and saved lexicon, an ordinary letter and fresh
+empty language knowledge. Choose a page or scroll position, then render again.
+The image is marked stale after changes or replacement requests. Preview is
+bounded to 65,536 body characters on the selected page and a 2,048-character
+title; these are preview limits, not gameplay schema limits. No world or personal
+save is opened. Preview grants no write authority: **Validate draft → Diff →
+Apply variant → Confirm apply one file** obtains a fresh review and publishes one
+new file, followed by a byte-checked reopen.
+
+Only ordinary single-object definitions are writable. Teaching, active root/page
+deep-tongue modes, special render modes, arrays and ambiguous sources remain
+inspectable with explanations. Reopened texts support inspection or another
+variant; same-ID revisions are deferred because recovered knowledge uses page/span
+positions. Saving makes the definition discoverable on a new game data load, but
+does not bind it to an item or place it. See [found-text authoring](../roguelike/docs/TEXT_AUTHORING.md)
+for marker/condition behavior and the existing physical `text_id` binding.
+
+`node scripts/run-texts.mjs` runs the packaged Windows edit/preview/publication
+journey and a separate headless physical-letter pickup/inventory/read proof in
+disposable data. The fixture is never published as a gameplay location.
 
 ## Place a creature in an authored underground room
 
@@ -624,7 +656,8 @@ CPython runtime without the game dependency wheels.
 ## Contract and limits
 
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-2**,
-item contract **component-1**, recipe contract **immediate-components-1**, and
+item contract **component-1**, recipe contract **immediate-components-1**,
+found-text contract **ordinary-found-text-1**, and
 creature contract **revenant-hp-1**, with Workbench layout capability
 **direct-creatures-1** (existing G17 rules, no game schema change).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
@@ -685,7 +718,8 @@ The seed, exact large scene seed (string), catalog/source hashes and context
 identify a repeatable controlled preview; this is not global gameplay replay.
 Refresh after external source/dependency changes. The palette represents the
 catalog at open time; every validation and apply rereads current dependencies.
-A generic schema registry and further W milestones remain separate work.
+The registered content contracts above cover their stated subsets; further W
+milestones remain separate work.
 
 See [W3C delivery and evidence](docs/W3C_DELIVERY.md), [W3B delivery and evidence](docs/W3B_DELIVERY.md), [W3A delivery and evidence](docs/W3A_DELIVERY.md), [W2 delivery and evidence](docs/W2_DELIVERY.md), [W1 delivery](docs/W1_DELIVERY.md)
 and the unchanged historical [W0 delivery](docs/W0_DELIVERY.md).

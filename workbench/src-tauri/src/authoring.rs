@@ -14,6 +14,21 @@ const CATEGORIES: &[&str] = &[
     "storage",
     "wilderness",
 ];
+// Host-owned filesystem registration. Descriptors cannot enlarge these roots.
+// (source root, publication root, reserved basenames)
+const CONTENT_ROOTS: &[(&str, &str, &[&str])] = &[
+    ("roguelike/data/items/", "roguelike/data/items/components/", &[]),
+    ("roguelike/data/recipes/", "roguelike/data/recipes/", &[]),
+    ("roguelike/data/texts/", "roguelike/data/texts/", &["text_item_map.json"]),
+];
+pub fn content_root(source: &str) -> Option<&'static str> {
+    CONTENT_ROOTS.iter().find_map(|(source_root, write_root, reserved)| {
+        let suffix = source.strip_prefix(source_root)?;
+        let parts: Vec<_> = suffix.split('/').collect();
+        (parts[..parts.len()-1].iter().all(|s| valid_id(s)) && valid_filename(parts[parts.len()-1])
+            && !reserved.iter().any(|name| parts[parts.len()-1].eq_ignore_ascii_case(name))).then_some(*write_root)
+    })
+}
 /// Only a verified worker result can supply this policy. Renderer arguments have
 /// no schema/policy fields. Filesystem confinement is independently host-owned.
 #[derive(Clone)]
@@ -42,13 +57,13 @@ impl FamilyPolicy {
             || d["vocabulary"] != "resonance-controls-1" || d["schema"]["$schema"] != "https://json-schema.org/draft/2020-12/schema"
             || d["policy"]["identity"] != "id" || operations.is_empty()
             || operations.iter().any(|op| op != "edit" && op != "variant")
-            || !((is_item(source) && root == "roguelike/data/items/components/") || (is_recipe(source) && root == "roguelike/data/recipes/"))
+            || content_root(source) != Some(root)
         { return None; }
         Some(Self { id:id.into(), route:route.into(), contract:contract.into(), descriptor:d.clone(), digest:digest.into(), root:root.into(), operations })
     }
 }
 fn family_evidence(doc: &Document, result: &Value, variant: bool) -> bool {
-    let Some(policy) = &doc.family else { return !(is_item(&doc.relative) || is_recipe(&doc.relative)); };
+    let Some(policy) = &doc.family else { return content_root(&doc.relative).is_none(); };
     let Some(current) = FamilyPolicy::from_result(result, &doc.relative) else { return false; };
     current.id == policy.id && current.contract == policy.contract && current.digest == policy.digest
         && current.descriptor == policy.descriptor && current.route == policy.route
@@ -116,6 +131,7 @@ pub fn is_pool(s: &str) -> bool {
     let p: Vec<_> = s.split('/').collect();
     p.len() == 4 && p[..3] == ["roguelike", "data", "loot_pools"] && valid_filename(p[3])
 }
+#[cfg(test)]
 pub fn is_item(s: &str) -> bool {
     let p: Vec<_> = s.split('/').collect();
     p.len() >= 4 && p[..3] == ["roguelike", "data", "items"]
@@ -137,9 +153,9 @@ pub fn is_layout(s: &str) -> bool {
     p.len() == 4 && p[..3] == ["roguelike", "data", "layouts"] && valid_filename(p[3])
 }
 fn is_submap(s: &str) -> bool { is_layout(s) || s == G17_EXAMPLE }
-fn dependency_bound(s: &str) -> bool { is_item(s) || is_recipe(s) || is_creature(s) || is_layout(s) || s == G17_EXAMPLE }
+fn dependency_bound(s: &str) -> bool { content_root(s).is_some() || is_creature(s) || is_layout(s) || s == G17_EXAMPLE }
 fn relative_content(s: &str) -> Result<PathBuf, Failure> {
-    if is_pool(s) || is_item(s) || is_recipe(s) || is_creature(s) || is_layout(s) || s == G17_EXAMPLE { Ok(PathBuf::from(s)) } else { relative_building(s) }
+    if is_pool(s) || content_root(s).is_some() || is_creature(s) || is_layout(s) || s == G17_EXAMPLE { Ok(PathBuf::from(s)) } else { relative_building(s) }
 }
 fn no_link(path: &Path) -> Result<(), Failure> {
     let meta = fs::symlink_metadata(path).map_err(io_error)?;
@@ -373,7 +389,7 @@ pub async fn open_document(
         operation.check(&state)?;
         let family = FamilyPolicy::from_result(&response["result"], &asset)
             .filter(|f| discovered_family.as_ref() == Some(&f.id));
-        let writable = if is_item(&asset) || is_recipe(&asset) {
+        let writable = if content_root(&asset).is_some() {
             family.as_ref().is_some_and(|f| asset.starts_with(&f.root)) && response["result"]["editable"] == true
         } else if is_submap(&asset) { response["result"]["editable"] == true && response["result"]["layout_contract"] == "direct-creatures-1" }
         else if is_creature(&asset) { asset.starts_with("roguelike/data/entities/creatures/") && response["result"]["editable"] == true } else { true };
@@ -451,6 +467,7 @@ pub async fn validate_document(
     draft: String,
     variant_id: Option<String>,
     seed: Option<u32>,
+    preview_inputs: Option<Value>,
 ) -> Result<Value, Failure> {
     let (operation, root, doc) = begin_validation(&host, &token)?;
     tauri::async_runtime::spawn_blocking(move || {
@@ -462,6 +479,7 @@ pub async fn validate_document(
         let (dest, variant) = destination(&doc, &draft, variant_id.as_deref())?;
         checked_target(&root, &dest, variant)?;
         let inputs = if dependency_bound(&doc.relative) { Some(input_stamp(&root)?) } else { None };
+        let preview_only = preview_inputs.is_some();
         let mut response = run_worker(
             app,
             &operation,
@@ -471,6 +489,7 @@ pub async fn validate_document(
                 draft: Some(draft.clone()),
                 source_asset: (doc.family.is_some() || is_creature(&doc.relative) || is_submap(&doc.relative)).then(|| doc.relative.clone()),
                 seed: Some(seed),
+                preview_inputs,
                 ..Default::default()
             },
         )?;
@@ -491,6 +510,7 @@ pub async fn validate_document(
         }
         let mut review = None;
         if response["ok"] == true
+            && !preview_only
             && response["result"]["valid"] == true
             && response["result"]["draft_sha256"] == hash(draft.as_bytes())
             && (!(is_creature(&doc.relative) || is_submap(&doc.relative)) || variant)
@@ -635,6 +655,22 @@ fn input_stamp(root: &Path) -> Result<String, Failure> {
     }
     let mut digest = Sha256::new();
     walk(&root.join("roguelike"), &mut digest, false)?;
+    // Production preview resources also invalidate evidence. Keep the existing
+    // conservative Python/data stamp; this only extends its dependency coverage.
+    fn resources(path: &Path, digest: &mut Sha256) -> Result<(), Failure> {
+        no_link(path)?;
+        if path.is_dir() {
+            let mut entries = fs::read_dir(path).map_err(io_error)?.collect::<Result<Vec<_>, _>>().map_err(io_error)?;
+            entries.sort_by_key(|e| e.file_name());
+            for entry in entries { resources(&entry.path(), digest)?; }
+        } else { digest.update(path.to_string_lossy().as_bytes()); digest.update(fs::read(path).map_err(io_error)?); }
+        Ok(())
+    }
+    for relative in ["roguelike/assets/Fonts", "roguelike/assets/ui"] {
+        digest.update(relative.as_bytes());
+        let path = root.join(relative);
+        if path.exists() { no_link(&root.join("roguelike/assets"))?; resources(&path, &mut digest)?; }
+    }
     // Fixed read-only example inputs; never broaden documentation write access.
     for relative in [G17_EXAMPLE, "roguelike/docs/examples/g17_authored_creature_room.access.json"] {
         digest.update(relative.as_bytes());
@@ -889,13 +925,13 @@ mod tests {
         json!({"route":format!("{id}_definition"),"source_asset":doc.relative,"source_sha256":hash(&doc.original),"semantic_verified":true,
             "family":{"id":id,"contract":"compatible-domain-contract","compatible":true,"descriptor_sha256":"a".repeat(64),
                 "descriptor":{"vocabulary":"resonance-controls-1","schema":{"$schema":"https://json-schema.org/draft/2020-12/schema"},
-                    "policy":{"root":if id == "item" {"roguelike/data/items/components/"} else {"roguelike/data/recipes/"},"identity":"id","operations":operations}}}})
+                    "policy":{"root":content_root(&doc.relative).unwrap(),"identity":"id","operations":operations}}}})
     }
     #[test]
     fn registered_policy_binds_identity_descriptor_source_and_operations() {
         let (_,mut doc,_) = fixture();
-        for id in ["item","recipe"] {
-            doc.relative = if id == "item" {"roguelike/data/items/components/sample.json"} else {"roguelike/data/recipes/sample.json"}.into();
+        for (id,path) in [("item","roguelike/data/items/components/sample.json"),("recipe","roguelike/data/recipes/sample.json"),("text","roguelike/data/texts/lab/sample.json")] {
+            doc.relative = path.into();
             let result = family_result(&doc,id,if id == "item" {json!(["edit","variant"])} else {json!(["variant"])});
             doc.family = FamilyPolicy::from_result(&result,&doc.relative);
             assert!(doc.family.is_some()); assert!(family_evidence(&doc,&result,true));
@@ -909,6 +945,26 @@ mod tests {
             altered=result.clone(); altered["family"]["compatible"]=json!(false);
             assert!(FamilyPolicy::from_result(&altered,&doc.relative).is_none());
         }
+    }
+    #[test]
+    fn registered_text_confinement_cancellation_and_resource_freshness() {
+        for path in ["roguelike/data/texts/text_item_map.json", "roguelike/data/texts/lab/text_item_map.json", "roguelike/data/texts/lab/TEXT_ITEM_MAP.json", "roguelike/data/texts/../x.json", "roguelike/data/texts/lab/x.json/evil", "roguelike/data/texts/CON.json"] {
+            assert!(content_root(path).is_none(),"{path}");
+        }
+        let (root,host,item,review)=lifecycle_fixture(false);
+        let mut text=item.clone();text.token="text-token".into();text.relative="roguelike/data/texts/lab/source.json".into();
+        text.family=FamilyPolicy::from_result(&family_result(&text,"text",json!(["variant"])),&text.relative);
+        let mut recipe=item.clone();recipe.token="recipe-token".into();
+        {let mut state=host.inner.lock().unwrap();state.family_documents.insert("text".into(),text.clone());state.family_documents.insert("recipe".into(),recipe.clone());}
+        let (operation,_,snapshot)=begin_validation(&host,&text.token).unwrap();
+        host.cancel(false).unwrap();
+        assert!(install_validation(&operation,&snapshot,None,Some(review)).is_err());
+        assert_eq!(session_doc(&host,&item.token).unwrap().1.original,item.original);
+        assert_eq!(session_doc(&host,&recipe.token).unwrap().1.original,recipe.original);
+        assert!(session_doc(&host,&text.token).unwrap().1.review.is_none());
+        let assets=root.path().join("roguelike/assets/ui");fs::create_dir_all(&assets).unwrap();
+        let before=input_stamp(root.path()).unwrap();fs::write(assets.join("panel.png"),b"frame").unwrap();
+        assert_ne!(input_stamp(root.path()).unwrap(),before);
     }
     #[test]
     fn registered_replacement_cannot_address_new_document_with_old_token() {
