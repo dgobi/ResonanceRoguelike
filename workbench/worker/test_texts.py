@@ -36,6 +36,8 @@ class TextTests(unittest.TestCase):
             self.assertEqual([r["pointer"] for r in declared_references("actual_text", data)], ["/text_id", "/actual_text"])
             (data / "texts/text_item_map.json").write_text(json.dumps({"actual_text": "letter"}))
             self.assertEqual(declared_references("letter", data), [])
+            (data / "texts/text_item_map.json").write_text(json.dumps(["letter"]))
+            self.assertEqual(declared_references("letter", data), [])
 
     def test_corpus_discovery_eligibility_noop_and_registered_lifecycle(self):
         sys.path.insert(0, str(ROOT/"roguelike"))

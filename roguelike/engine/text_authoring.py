@@ -135,7 +135,7 @@ def declared_references(identifier, data_root):
     if mapping.is_file():
         try:
             raw = read_document(mapping)
-            for key in raw:
+            for key in raw.keys():
                 if key == identifier:
                     rows.append(dict(path="roguelike/data/texts/text_item_map.json", pointer="/"+key.replace("~", "~0").replace("/", "~1"), kind="text-item mapping"))
         except (StructureError, AttributeError): pass
