@@ -1,0 +1,453 @@
+{
+  "milestone": "W5B",
+  "observed_utc": "2026-10-27T20:36:53.220583+00:00",
+  "passed": true,
+  "revisions": {
+    "baseline": "0f716fbc7ccfc92ac2c4dd412726a82ede66290e",
+    "branch": "main",
+    "implementation": "89d4fb7cb0675379b2fc3a3a12119933914b348d",
+    "evidence": "Separate following documentation commit; see Git history and final handoff.",
+    "remote_initial_readback": "3d4c0cfdde151fa562bbf1dc2e1e9e5cc35b9a97",
+    "remote_prepublication_readback": "0f716fbc7ccfc92ac2c4dd412726a82ede66290e",
+    "remote_implementation_readback": "89d4fb7cb0675379b2fc3a3a12119933914b348d",
+    "pushed": true,
+    "push_authorized": "Owner explicitly requested commit and push upon completion.",
+    "checkpoints": [
+      "checkpoint/workbench-w5b-start-20261027-a",
+      "checkpoint/workbench-w5b-verified-20261027-a"
+    ]
+  },
+  "w5a_prerequisite": {
+    "migration": "b43dd4fef1ce8a5e7663b15088c244a6c73d2588",
+    "migration_corrections": [
+      "91abc3f11daf794ac62990ae3e4eb7d4c253c9be",
+      "ef9a7b1a0ec506e8bee0e2477cdb98f91f90983b",
+      "b85e12514dc2f173cac0fcd2e65de6b3b58fbafa"
+    ],
+    "extension": "c4997595b6e3e074a0b3998f902878d9fa085f76",
+    "evidence": "0f716fbc7ccfc92ac2c4dd412726a82ede66290e",
+    "receipt_source_hashes_matched": 34,
+    "material_acceptance_gaps": [],
+    "reconciliation": "Complete issued brief/source/delivery/receipt reconciled. Prior fixed-package scalar/consumer evidence reused for unchanged inputs. Initial remote was W4D; a later pre-publication fetch already observed W5A evidence, matching local baseline without divergence."
+  },
+  "architecture": {
+    "family": "engine.text_authoring",
+    "contract": "ordinary-found-text-1",
+    "registry": "engine.content_authoring.families()",
+    "editable_definitions": 51,
+    "unsupported_definitions": 38,
+    "total_definitions": 89,
+    "total_pages": 101,
+    "shared_changes": [
+      "descriptor-driven ordered-records; recipe row splice/move reused",
+      "free string suggestions; explicit creation initial values",
+      "registered preview adapter and bounded view inputs through existing validation",
+      "host-owned generic root allowlist, reserved basename",
+      "generic active-family workspace visibility",
+      "conservative Python/data stamp extended with Fonts/UI resources",
+      "preserve measured catalog stamp when loader errors; keep malformed sources inspectable"
+    ],
+    "new_family_document_slot": false,
+    "new_ipc_command": false,
+    "new_writer": false,
+    "new_worker_service": false,
+    "normal_desktop_build_required": true
+  },
+  "writer": {
+    "baseline": "0f716fbc7ccfc92ac2c4dd412726a82ede66290e",
+    "normalization": "CRLF to LF",
+    "functions": {
+      "pin_inputs_and_source": {
+        "unchanged": true,
+        "sha256": "f3ea02fce019950773a414506e54ab1a6975121788215e1e2b916f260c1f7745"
+      },
+      "publish": {
+        "unchanged": true,
+        "sha256": "aac6df0071f9fa0c95e6d0392dc721f1f291eddf0cfa9cebd66a5417adcef187"
+      }
+    },
+    "input_stamp": "Extended to saved Fonts/UI; not claimed unchanged.",
+    "w4d_cases": 8
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "result": "39 passed across 11 files"
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "result": "passed"
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "result": "34 passed, including all eight w4d_* cases"
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "result": "passed"
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -B -m unittest discover -s worker -p 'test_*.py' -v",
+      "result": "47 collected; 46 passed; embedded-runtime dependency-absence case skipped",
+      "seconds": 622.532
+    },
+    {
+      "command": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe -X utf8 -B -m unittest test_bridge.BridgeTests.test_dependency_absence_structured -v",
+      "cwd": "workbench/worker",
+      "result": "1 passed using existing interpreter only; no development copy created",
+      "seconds": 0.471
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -B -c \"import sys,unittest;sys.path.insert(0,'../tools/critical_fix_regressions/tests');sys.path.insert(0,'../roguelike');unittest.main(module='test_gameplay_g12',argv=['g12','ExpeditionRewardsTests.test_actual_warning_later_page_paragraphs_mixed_span_identity_and_no_turns','ExpeditionRewardsTests.test_long_tokens_glyph_translations_and_complete_alphabet_are_bounded'],verbosity=2)\"",
+      "result": "2 relevant G12 reader regressions passed",
+      "seconds": 0.877
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "result": "release executable/resources and NSIS package built"
+    },
+    {
+      "command": "node scripts/run-texts.mjs",
+      "result": "native text lifecycle and separate physical use passed"
+    },
+    {
+      "command": "npm.cmd run test:items; npm.cmd run test:recipes; npm.cmd run test:submaps",
+      "result": "all three sequential native journeys passed"
+    },
+    {
+      "command": "$env:WORKBENCH_STARTUP_SMOKE='1'; npm.cmd run test:startup",
+      "result": "four supported-launch/restart/project-change checks passed"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "package": {
+    "version": "0.9.0",
+    "protocol": 8,
+    "sha256": {
+      "executable": "3089dcb99f57ee9ba41ef5978dd06997908a8a2bed3a928c6dea46093a8a6b60",
+      "bridge": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+      "source_bridge": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+      "runtime": {
+        "files": 1809,
+        "sha256": "bcec0cde456247d70707d642296f0b1c6fc451a4ebb7efd732d7cba0468235ca"
+      },
+      "frontend": {
+        "files": 11,
+        "sha256": "ddc707f88b09210ff909bec146997dd2699bba495a6d3518bd024a14845aaeca"
+      },
+      "installer": "186cb31e80dd1a66175a65eb288794b101e9ec82ddeafa4ac103018b23e1b206"
+    },
+    "tree_hash_method": "Same method as scripts/run-contracts.mjs: recursive localeCompare entry order; SHA-256 of JSON.stringify([relative/path, file SHA-256] entries).",
+    "clean_machine_install_claim": false
+  },
+  "native": {
+    "texts": {
+      "path": ".artifacts/desktop-texts/receipt.json",
+      "sha256": "3002d7fdbfda3f340c3bf333ffabb8c9ebd8f34c2989cc609d21d45a08357c25",
+      "passed": true,
+      "seconds": 67.512,
+      "worker_sha256": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+      "game_source_sha256": "2acd98a5bdabb977f5b9fbf152d8a26d3409aa5c92ecae49bdca49cb0705c7de",
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": []
+    },
+    "items": {
+      "path": ".artifacts/desktop-items/receipt.json",
+      "sha256": "0dc99a3c0c2e4aa516e25f756614c1f49e01d625332f8798012b2dd4a5cb6eee",
+      "passed": true,
+      "seconds": 132.877,
+      "worker_sha256": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+      "game_source_sha256": "2acd98a5bdabb977f5b9fbf152d8a26d3409aa5c92ecae49bdca49cb0705c7de",
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": []
+    },
+    "recipes": {
+      "path": ".artifacts/desktop-recipes/receipt.json",
+      "sha256": "ea757cd18f03bb970f5a65eb6c29179bf0d273cdccb509b8d8c86cf24791c784",
+      "passed": true,
+      "seconds": 88.391,
+      "worker_sha256": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+      "game_source_sha256": "2acd98a5bdabb977f5b9fbf152d8a26d3409aa5c92ecae49bdca49cb0705c7de",
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": []
+    },
+    "submaps": {
+      "path": ".artifacts/desktop-submaps/receipt.json",
+      "sha256": "9b0e04f3f01b3f36ab5ad16cbffe132b1ef2259ad2a764e4c97a3d00372c15d4",
+      "passed": true,
+      "seconds": 87.912,
+      "worker_sha256": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+      "game_source_sha256": "2acd98a5bdabb977f5b9fbf152d8a26d3409aa5c92ecae49bdca49cb0705c7de",
+      "console_errors": [],
+      "external_requests": [],
+      "temporary_roots_remaining": []
+    }
+  },
+  "startup": {
+    "path": ".artifacts/w4b/startup-1793133107808/receipt.json",
+    "sha256": "7642d1623f8304a4c0862a6399ad1a7c5b0908753b879bbf3d9cffb12e937fd2",
+    "passed": true,
+    "runs": [
+      {
+        "name": "fresh-owner-launch",
+        "entry_point": "G:\\GameDev\\RoguelikeProject\\workbench\\Launch Workbench.vbs",
+        "mode": "bundled",
+        "passed": true,
+        "seconds": 13.369
+      },
+      {
+        "name": "owner-restart",
+        "entry_point": "G:\\GameDev\\RoguelikeProject\\workbench\\Launch Workbench.vbs",
+        "mode": "bundled",
+        "passed": true,
+        "seconds": 7.166
+      },
+      {
+        "name": "change-project",
+        "entry_point": "G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\resonance-workbench.exe",
+        "mode": "bundled",
+        "passed": true,
+        "seconds": 15.538
+      },
+      {
+        "name": "changed-project-restart",
+        "entry_point": "G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\resonance-workbench.exe",
+        "mode": "bundled",
+        "passed": true,
+        "seconds": 6.546
+      }
+    ],
+    "scope": "Supported VBS launcher, saved-choice restart, project change and changed-project restart; isolated settings."
+  },
+  "variant": {
+    "path": "roguelike/data/texts/lab/w5b_found_letter.json",
+    "reviewed_sha256": "5ed718958af32739faf49fe272723ba9e675bf38527a6e693ddcdeb553b17005",
+    "saved_sha256": "5ed718958af32739faf49fe272723ba9e675bf38527a6e693ddcdeb553b17005",
+    "reopened_sha256": "5ed718958af32739faf49fe272723ba9e675bf38527a6e693ddcdeb553b17005"
+  },
+  "reader": {
+    "consumer": "ItemFactory.create → ItemSystem._use_read → TextReader.render",
+    "contract": "ordinary-found-text-1",
+    "dependencies": "saved files",
+    "descriptor_sha256": "3056ee79d193408c932f7aca3986a2850566200a7919e4768d8ac0126a5c5b3f",
+    "draft_sha256": "5ed718958af32739faf49fe272723ba9e675bf38527a6e693ddcdeb553b17005",
+    "height": 640,
+    "image_sha256": "6f7582fbd7a0bd941c60d3b7811f025645caf061a649313deb9f6df2bc378bf7",
+    "inputs": {
+      "page": 1,
+      "scroll": 0
+    },
+    "kind": "reader-frame",
+    "marker_types": [
+      "damaged",
+      "redacted"
+    ],
+    "max_scroll": 0,
+    "observed_at_utc": "2026-10-27T20:35:09.404476+00:00",
+    "page": 1,
+    "path": "roguelike/data/texts/lab/w5b_found_letter.json",
+    "runtime": {
+      "dependencies": {
+        "cffi": "2.1.1",
+        "numpy": "2.4.6",
+        "pycparser": "3.11",
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "typing_extensions": "4.16.0"
+      },
+      "python": "3.11.0"
+    },
+    "scroll": 0,
+    "setup": "Saved letter definition; weathered_temple panel; fresh empty Language (no learned words or recovery); saved lexicon, fonts and UI assets. Disposable reader context; no personal save, time or world generation.",
+    "source": {
+      "branch": null,
+      "catalog_sha256": "5bd33d875fd924bf552cf0879f0ee6b66e821a03afa59508d5e86fb00352f8db",
+      "commit": null,
+      "game_dirty": null,
+      "game_source_sha256": "2acd98a5bdabb977f5b9fbf152d8a26d3409aa5c92ecae49bdca49cb0705c7de",
+      "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+      "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5b\\data-fixture-1793133265649"
+    },
+    "total_rows": 4,
+    "viewport_height": 112,
+    "visible_rows": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "width": 960
+  },
+  "physical": {
+    "path": ".artifacts/desktop-texts/physical/physical-use.json",
+    "sha256": "c6aa06f5ffdb753f7d8d6465e5c6f042d09300e8ddadde53aeb1797b17d530b2",
+    "passed": true,
+    "definition_id": "w5b_found_letter",
+    "title": "Disposable correspondence — æ \"quoted\" revised",
+    "saved_sha256": "5ed718958af32739faf49fe272723ba9e675bf38527a6e693ddcdeb553b17005",
+    "reloaded_exact_definition": true,
+    "population_map_text_default": false,
+    "item_id": "letter",
+    "text_id": "w5b_found_letter",
+    "source_xy": [
+      3,
+      3
+    ],
+    "physical_xy": [
+      38,
+      21
+    ],
+    "arrival": [
+      37,
+      23
+    ],
+    "approach_turns": 3,
+    "pages": [
+      {
+        "index": 0,
+        "body_sha256": "99038290ab5f68692d91f6a058c5c527d3d151ecdbd53b099b908f814582a126",
+        "rows": 91,
+        "max_scroll": 2188,
+        "all_rows_reached": true
+      },
+      {
+        "index": 1,
+        "body_sha256": "6dbc4fbd3a38395b8a9b4a01d63f24f74b2a9a43e4c1a98f2a416fea75ab9800",
+        "rows": 4,
+        "max_scroll": 0,
+        "all_rows_reached": true
+      },
+      {
+        "index": 2,
+        "body_sha256": "de5f0ed2daa34be9cb7718df672c7f355c753039eaafab7f8a28218c247674f2",
+        "rows": 1,
+        "max_scroll": 0,
+        "all_rows_reached": true
+      }
+    ],
+    "pickup_turns": 1,
+    "inventory_use_turns": 1,
+    "reader_navigation_turns": 0,
+    "letter_retained": true,
+    "knowledge_rng_hunger_unchanged_during_reading": true,
+    "saves_written": false,
+    "scope": "Controlled disposable authored submap and existing letter. Production validation, construction, population, pickup, inventory selection/use and reader keys. No natural acquisition, world selection or campaign balance claim."
+  },
+  "preservation": {
+    "passed": true,
+    "baseline": "0f716fbc7ccfc92ac2c4dd412726a82ede66290e",
+    "checked": 8120,
+    "source_bytes_and_mtime_unchanged": true,
+    "save_files": 7,
+    "save_set_unchanged": true,
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "unexpected_changes": 0,
+    "scoped_existing_paths": [
+      "roguelike/docs/LAYOUT_AUTHORING.md",
+      "roguelike/engine/content_authoring.py",
+      "workbench/README.md",
+      "workbench/docs/CONTENT_CONTRACTS.md",
+      "workbench/scripts/desktop-test.mjs",
+      "workbench/src-tauri/src/authoring.rs",
+      "workbench/src-tauri/src/main.rs",
+      "workbench/src/App.tsx",
+      "workbench/src/Authoring.tsx",
+      "workbench/src/ContentEditor.tsx",
+      "workbench/src/ContractControls.tsx",
+      "workbench/src/content.ts",
+      "workbench/src/familyData.ts",
+      "workbench/src/protocol.ts",
+      "workbench/src/recipe.ts",
+      "workbench/src/styles.css",
+      "workbench/worker/bridge.py",
+      "workbench/worker/test_authoring.py"
+    ]
+  },
+  "owner_settings_sha256": "4c8efc27e9b2f11ee6868ca994a76579b7ecb93a84b0f1afbfd4ce72e1101620",
+  "launcher_sha256": "c5f71560f424e9cc718376bfae30970c4c3188a94f25e173dc6674b33bd66d6c",
+  "timing": {
+    "started_utc": "2026-10-27T19:47:24Z",
+    "ended_utc": "2026-10-27T20:36:53.220583+00:00",
+    "wall_seconds": 2968.873,
+    "scope": "Measured implementation/verification/publication interval from baseline capture through receipt generation; preflight before capture and subsequent documentation commit/final push are excluded. Overlapping command durations are not summed."
+  },
+  "final_worktree_source_sha256": {
+    "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+    "roguelike/docs/LAYOUT_AUTHORING.md": "6db7fd3aed5ddc10ccb3e24f02b82366ec9ec42da42ccb08294baa9e25186575",
+    "roguelike/docs/TEXT_AUTHORING.md": "c21a82a6ed67d80e1e0e7e5610fa5986e450eda2b530a869efe9fde9fa5a96a3",
+    "roguelike/engine/content_authoring.py": "0c646940d233bbf64c903e09b04ed1a6cdff36489cf0a181d886f73d68307d87",
+    "roguelike/engine/data_loader.py": "6240d97b546ea813dbc5fc4d2772738bf6cb553f647079ab48ab9a1e0ab3b6ff",
+    "roguelike/engine/display_config.py": "42e08e5e32aa74c96172e5104a14ff09f43fdbb68251a0f2dfd909192a963ba8",
+    "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+    "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+    "roguelike/engine/scene_generation.py": "535bd94b46af998a4236f7aba4e5dde3ccb233300738900cb0c7480c3173732d",
+    "roguelike/engine/text_authoring.py": "01c767907d53722cb2535e9a51cbf8e313a6979dc26e68df5695b3947202ec20",
+    "roguelike/engine/text_reader.py": "fd476b868b6107c8ccf5db67c55127c0a0f20e68b0b8a959c3ebdfc6dcce8071",
+    "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+    "roguelike/generation/structure_preview.py": "904772970f57876707d59cda55c54b0317d42b338996f03cf1be0bdc59326f5b",
+    "roguelike/rendering/ui_registry.py": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058",
+    "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "a6bfa9e470e7cd3f286f4d5310fda87a93a492dad704708c73ce68fdc58c75ca",
+    "workbench/README.md": "baf31ca68f01a6f2a06e542c7dca322cf2748ff7fe1b47bcc360e64bdeab0464",
+    "workbench/docs/CONTENT_CONTRACTS.md": "d361e89476525d224cd531e7e5fc2b04438ec79ffc3df97b9f23ad0474698e7c",
+    "workbench/scripts/desktop-test.mjs": "5a545f77b117c742e332f106dd74678f1c5c838c20e461cbd248ef9c09d862cf",
+    "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+    "workbench/scripts/text-journey.mjs": "c07521734c16e6cf41534eac1aa7867dec49bcbfde0546c45228d6639daddfea",
+    "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+    "workbench/src-tauri/src/authoring.rs": "fd0a84422f92589dba31e009015975df92f1a1d79cb7ade6a6e9cd97a60de9fe",
+    "workbench/src-tauri/src/main.rs": "6b1fac0bdaba2cdd7e9e7e6de235d11af0718336b2b70ce20826addd426cdb39",
+    "workbench/src/App.tsx": "7af4b2a68494d93d70eb4a5ba3d92d26318ef040808055ba4aa6b3bde04de07d",
+    "workbench/src/Authoring.tsx": "8fc42112d49aec762cc6de87a07b4080131ee1e1bae0a163ea49c52a5cee8ef2",
+    "workbench/src/ContentEditor.tsx": "f486d8bfb90377ef4f0261b9ea7dcffc83bc4a93fda982cea36e316fc88ab8c4",
+    "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+    "workbench/src/TextEditor.tsx": "65c73bd9a6497ad90c05ff59a599c2b77f986a58f77f861124a10b4e06e3022d",
+    "workbench/src/content.ts": "0325d536b2cf77663e06553a9c5bed3764f23208f23ff0aca13515382d6bd549",
+    "workbench/src/familyData.ts": "e953dd44c81d17adf447ceefe8bffcfe693ac1cbb6d288eb0dba81ad7e518e9d",
+    "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+    "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+    "workbench/src/protocol.ts": "a79e9deaea83778acc5088e05cb3e6ca71f42e8b2bbfe423753f02bef5b99842",
+    "workbench/src/recipe.ts": "6ac4d85fdc783751f7c65376837af20ddf311b57b6916110e3398b8b4b253d03",
+    "workbench/src/styles.css": "5707b6a1a3b8808e36b16c4bcacaba9362765432f2662cd9e712d98ea37fccc9",
+    "workbench/worker/bridge.py": "1ca1dce3fa8543b1826a311de96d729e67f84f9c660c5f834a731318284f9335",
+    "workbench/worker/test_authoring.py": "63b31599c487800b65eaf02983fe6e946adf878ea6cd2dc48d86739785d57b39",
+    "workbench/worker/test_texts.py": "c59ce93debbb8b4d3ec3fae5f08019377c25fea27a3eab24f0115a1751f1dd2e"
+  },
+  "artifact_sha256": {
+    "frontend.log": "9450ec307042e818346796d74fceec0e4c5c20ae62ab2a9bb20d2b996383c73d",
+    "typecheck.log": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b",
+    "rust.log": "a72ab6ff6927953c640f14f619386c58c9734b8a56aac81e0e9b6d37a1e04df5",
+    "clippy.log": "fdd382025ccd6332fa2c8825d4959fb7d733d56738ed74b561aaab488b56639b",
+    "worker.log": "22df3e348927c93a70678f634a64101648cbbe67fea3d00b233484e04a18ae54",
+    "dependency.log": "b957ed9f4947cf74d488679eba493e4f02f1b8bbafbd8ca0da627720d12e735d",
+    "g12-reader.log": "389b38df55b0df86911c00c95e84fa99346ae5978bd4582c252abd086e2e6818",
+    "bundle.log": "d0abdb956ead354733c607fca62cdef4a7dae40d8fdac80f91e0162b7d87fad2"
+  },
+  "visual_review": {
+    "minimum-window.png": "8a03a13bdabf0a4c1e224d8317086eeeefc4cc8a3a508b99772f5e75f2b846db",
+    "reader-final.png": "06dcae0661b91b2b8135c6f9bf9ffb659f9bbe8095faf688234ea07b3f3a0e78",
+    "reader-long-end.png": "b146c16b461a56f7e499bd90fe9b74f0ebc14e60089755fa6c94539c7f7e8407",
+    "reader-long-top.png": "6ea978b1639a4d88900405a2b870fbd246c93825c0262bbe5057bf96c54febb7",
+    "reader-markers.png": "4515150929d9accc0873e0145554a5f04e7e1b676c7e51abcf1b8435196e6fb0",
+    "text-pages.png": "fba055d49de939606df0ae4c8a190364998cba8e601dd9b0cae19ff5c5b415b2",
+    "text-reopened.png": "ea4bee7cb13d301850af74ac5415e79f0d442aade2b54a04f5885e35ff688426",
+    "text-review.png": "a71c0adada726efa19f29b1cd9f73ac74415f0d59bd13df6d2311cdce4cdbd20"
+  },
+  "limitations": [
+    "Variant-only; no same-ID revisions/save migration.",
+    "Ordinary single-object texts only; no teaching/deep-tongue/special renderer authoring.",
+    "Declared references only, no comprehensive graph.",
+    "Reader preview bounded to 65,536 selected-page characters, 2,048 title characters and 2 MiB PNG; final publication still requires separate validation.",
+    "Physical acquisition is controlled fixture evidence, not natural selection, balance or campaign proof.",
+    "Generated package tested on developer Windows machine; no clean-machine installation claim."
+  ],
+  "development_corrections": [
+    "An in-progress bridge preview-result initialization failure was fixed before final gates; earlier development logs are not acceptance evidence.",
+    "New malformed-source regression exposed erasure of the measured catalog stamp after a loader error; fixed to retain raw inspection and actual diagnostics. Final full worker and packaged native gates rerun.",
+    "Intermediate packaging met a test-owned executable lock; packaging succeeded after process exit, then native checks reran on final package."
+  ]
+}
