@@ -9,3 +9,5 @@ workshop_b_fuel_w3b.json -text whitespace=blank-at-eol,blank-at-eof,space-before
 # Exact native W4A publication bytes; artifact stays outside active data.
 hollow_revenant_w4a.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 hollow_revenant_w4a.factory.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Exact native W4C publication bytes; artifact stays outside active layouts.
+w4c_guard_room.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
