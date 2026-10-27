@@ -24,6 +24,19 @@ def text_fixture(destination):
 
 
 class TextTests(unittest.TestCase):
+    def test_text_references_match_keys_not_same_spelling_carrier_items(self):
+        sys.path.insert(0, str(ROOT / "roguelike"))
+        from engine.text_authoring import declared_references
+        with tempfile.TemporaryDirectory(prefix="w5c-references-") as directory:
+            data = Path(directory)
+            (data / "texts").mkdir(); (data / "items").mkdir()
+            (data / "texts/text_item_map.json").write_text(json.dumps({"actual_text": "letter", "letter": "book"}))
+            (data / "items/carrier.json").write_text(json.dumps({"id": "letter", "text_id": "actual_text"}))
+            self.assertEqual([r["pointer"] for r in declared_references("letter", data)], ["/letter"])
+            self.assertEqual([r["pointer"] for r in declared_references("actual_text", data)], ["/text_id", "/actual_text"])
+            (data / "texts/text_item_map.json").write_text(json.dumps({"actual_text": "letter"}))
+            self.assertEqual(declared_references("letter", data), [])
+
     def test_corpus_discovery_eligibility_noop_and_registered_lifecycle(self):
         sys.path.insert(0, str(ROOT/"roguelike"))
         from engine.text_authoring import capability

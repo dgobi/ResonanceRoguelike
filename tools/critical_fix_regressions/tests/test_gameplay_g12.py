@@ -332,6 +332,60 @@ class ExpeditionRewardsTests(unittest.TestCase):
         self.assertTrue(get_all_phonemes())
         self.assertEqual([p for p,_ in get_all_phonemes()],[f['text'] for row in rows for f in row])
 
+    def test_long_titles_render_full_heading_and_body_inside_frame_above_footer(self):
+        from engine.item_system import ItemSystem
+        from rendering.ui_registry import UIRegistry
+        e = self.e
+        r = self.reader(dict(id='font-setup', pages=[dict(text='')]))
+        old = Path.cwd()
+        try:
+            os.chdir(GAME_ROOT)
+            e.ui_registry = UIRegistry(); e.ui_registry.load()
+        finally:
+            os.chdir(old)
+        phrase = "An Account of the Unquiet Bells and Those Who Kept Them "
+        before = (e.world_time.turn, e.rng.getstate(), copy.deepcopy(e.player.language.__dict__), e.player.needs.hunger)
+        for size in ((960, 640), (480, 320)):
+            for length in (20, 400, 512, 1024, 2048):
+                with self.subTest(size=size, length=length):
+                    title = (phrase * ((length // len(phrase)) + 1))[:length]
+                    definition = dict(id='title_probe', title=title, condition='worn', pages=[dict(text='Readable body sentinel.')])
+                    item = e.item_factory.create('letter'); item.text_id = definition['id']
+                    self.assertTrue(e.player.inventory.add(item))
+                    with patch.dict(e.data.texts, {definition['id']: definition}):
+                        ItemSystem()._use_read(item, e)
+                    surface = pygame.Surface(size)
+                    r.render(surface, e)
+                    seen_titles, seen_body = set(), set()
+                    for _ in range(2000):
+                        self.assertTrue(surface.get_rect().contains(r._frame))
+                        self.assertTrue(r._frame.contains(r._viewport))
+                        self.assertEqual(r._effective_clip, r._viewport)
+                        self.assertGreaterEqual(r._viewport.height, r._line_height)
+                        self.assertLess(r._viewport.bottom, r._footer_top)
+                        seen_titles.update(r._visible_title_lines)
+                        seen_body.update(r._complete_rows)
+                        if r._scroll == r._max_scroll: break
+                        e._handle_key(pygame.K_DOWN); r.render(surface, e)
+                    self.assertEqual(set(range(len(r._title_lines))), seen_titles)
+                    self.assertEqual(title, ''.join(r._title_lines))
+                    self.assertEqual(set(range(len(r._layout_rows))), seen_body)
+                    self.assertTrue(r._complete_rows)
+                    self.assertIn('Readable body sentinel.', ''.join(f['text'] for row in r._layout_rows for f in row))
+                    # Actual body pixels are inside the effective clip, not just nominal row indices.
+                    pixels = pygame.mask.from_threshold(surface.subsurface(r._effective_clip), r.NORMAL, (1, 1, 1, 255))
+                    self.assertGreater(pixels.count(), 0)
+                    surface.set_clip(pygame.Rect(0, 0, 1, 1)); r.render(surface, e)
+                    self.assertEqual(r._visible_rows, [])
+                    surface.set_clip(None)
+                    e._handle_key(pygame.K_HOME); r.render(surface, e)
+                    self.assertEqual(0, r._scroll)
+                    e._handle_key(pygame.K_END); r.render(surface, e)
+                    self.assertTrue(r._complete_rows)
+                    e._handle_key(pygame.K_ESCAPE)
+                    self.assertIn(item, e.player.inventory.items)
+        self.assertEqual(before, (e.world_time.turn, e.rng.getstate(), e.player.language.__dict__, e.player.needs.hunger))
+
 
 if __name__=='__main__':
     if '--cold-witness' in sys.argv:

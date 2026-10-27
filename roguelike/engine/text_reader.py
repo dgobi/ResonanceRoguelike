@@ -328,27 +328,42 @@ class TextReader:
             pygame.draw.rect(screen, self.BG, frame)
             pygame.draw.rect(screen, _BORDERS.get(cond, EARTH_BROWN), frame, 1)
         content = frame.inflate(-pad * 2, -pad * 2)
-        y = content.top
         previous_clip = screen.get_clip()
-        screen.set_clip(content.clip(previous_clip))
-        for line in title_lines:
+        footer_top = content.bottom - footer_h
+        # Keep ordinary headings fixed. An oversized heading joins the same
+        # scrollable content as the body, so it cannot consume the viewport.
+        scrolling_header = header_h > footer_top - content.top - 2 - lh
+        fixed_header = 0 if scrolling_header else header_h
+        viewport = pygame.Rect(content.left, content.top + fixed_header,
+                               content.width, footer_top - content.top - fixed_header - 2)
+        effective_clip = viewport.clip(content).clip(previous_clip)
+        self._viewport_height = viewport.height
+        body_offset = header_h if scrolling_header else 0
+        self._max_scroll = max(0, body_offset + len(rows) * lh - viewport.height)
+        self._scroll = max(0, min(self._max_scroll, self._scroll))
+        screen.set_clip(effective_clip if scrolling_header else
+                        pygame.Rect(content.left, content.top, content.width, header_h).clip(previous_clip))
+        y = content.top - (self._scroll if scrolling_header else 0)
+        self._visible_title_lines = []
+        for index, line in enumerate(title_lines):
             screen.blit(self._ftitle.render(line, True, self.TITLE_C), (content.left, y))
+            if screen.get_clip().contains(pygame.Rect(content.left, y, content.width, self._ftitle.get_linesize())):
+                self._visible_title_lines.append(index)
             y += self._ftitle.get_linesize()
         if self._panel_style != "ziggurat":
             screen.blit(self._font.render(cond.upper(), True, self.DIM), (content.left, y))
             y += self._font.get_linesize() + 8
-        footer_top = content.bottom - footer_h
-        viewport = pygame.Rect(content.left, y, content.width, max(1, footer_top - y - 2))
-        self._viewport_height = viewport.height
-        self._max_scroll = max(0, len(rows) * lh - viewport.height)
-        self._scroll = max(0, min(self._max_scroll, self._scroll))
         self._visible_rows = []
-        screen.set_clip(viewport.clip(content).clip(previous_clip))
+        self._complete_rows = []
+        screen.set_clip(effective_clip)
         for index, row in enumerate(rows):
-            ry = viewport.top + index * lh - self._scroll
-            if ry + lh <= viewport.top or ry >= viewport.bottom:
+            ry = viewport.top + body_offset + index * lh - self._scroll
+            row_rect = pygame.Rect(viewport.left, ry, viewport.width, lh)
+            if not effective_clip.colliderect(row_rect):
                 continue
             self._visible_rows.append(index)
+            if effective_clip.contains(row_rect):
+                self._complete_rows.append(index)
             x = viewport.left
             if self._text_align == "center" or self._panel_style == "ziggurat":
                 x += (width - sum(f["width"] for f in row)) // 2
@@ -366,6 +381,9 @@ class TextReader:
         # Concise production evidence; surfaces remain private rendering data.
         self._layout_rows = rows
         self._viewport = viewport
+        self._effective_clip = effective_clip
+        self._footer_top = footer_top
+        self._title_lines = title_lines
         self._frame = frame
 
 
