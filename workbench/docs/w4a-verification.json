@@ -1,0 +1,483 @@
+{
+  "milestone": "W4A",
+  "passed": true,
+  "recorded_at_utc": "2026-10-27T00:58:02.306954+00:00",
+  "git": {
+    "branch": "main",
+    "baseline_local_origin_and_remote": "6c60982cda4ae0fd08aeb0aeac66edf7fafadd1e",
+    "w3c_implementation": "e76e92a184d7bfd4c6356f2e9ec2e2bb92a683ec",
+    "intervening_commits": [],
+    "implementation_pushed": "c668742eaf0a84c69838568cbb99034456485bb2",
+    "evidence_commit_locator": "git log -1 --format=%H -- workbench/docs/W4A_DELIVERY.md",
+    "final_publication_receipt": "workbench/.artifacts/w4a/final-publication.json",
+    "checkpoints": [
+      "checkpoint/workbench-w4a-start-20261026-a",
+      "checkpoint/workbench-w4a-verified-20261026-a"
+    ]
+  },
+  "environment": {
+    "os": "Windows NT 10.0.26200 x64",
+    "node": "24.15.0",
+    "npm": "11.12.1",
+    "rustc": "1.95.0",
+    "cargo": "1.95.0",
+    "development_python": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "native_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+    "packaged_worker": {
+      "contract": "g2-2",
+      "creature_contract": "revenant-hp-1",
+      "diagnostics": [],
+      "edit_route": "ordinary_building",
+      "health": "ready",
+      "preview": "generation.structure_preview.preview → engine.scene_generation.create_submap → generation.local_gen.generate_submap",
+      "protocol": 7,
+      "recipe_contract": "immediate-components-1",
+      "route": "authored_submap",
+      "runtime": {
+        "compatible": true,
+        "dependencies": {
+          "cffi": "2.1.1",
+          "numpy": "2.4.6",
+          "pycparser": "3.11",
+          "pygame": "2.6.1",
+          "tcod": "19.3.0",
+          "typing_extensions": "4.16.0"
+        },
+        "executable": "\\\\?\\G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\python\\python.exe",
+        "numeric_threads": 1,
+        "python": "3.11.0"
+      },
+      "source": {
+        "branch": null,
+        "catalog_sha256": "4f6ec33a8126d53f8d839223aa97d80c5003af032ddbe1c3eff1974a0cb7bbe1",
+        "commit": null,
+        "game_dirty": null,
+        "game_source_sha256": "ce61e2d93600447728c81559fe98896667387a02bc99592dd7d6297162b0654a",
+        "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w4a\\data-fixture-1793062148555"
+      },
+      "unavailable": [
+        "layout editing/saving",
+        "advanced item/recipe editing",
+        "native world selection",
+        "game renderer/FOV",
+        "combat simulation"
+      ],
+      "validator": "generation.structure_contract.compile_structure",
+      "worker_sha256": "610f29e22ba6f93aefdccc52c0a8d48b77c57f6233eb362c193c8db2872786e4",
+      "worker_version": "0.7.0"
+    }
+  },
+  "source_snapshot": {
+    "root": "G:\\GameDev\\RoguelikeProject",
+    "commit": "6c60982cda4ae0fd08aeb0aeac66edf7fafadd1e",
+    "branch": "main",
+    "game_dirty": true,
+    "game_source_sha256": "ce61e2d93600447728c81559fe98896667387a02bc99592dd7d6297162b0654a",
+    "catalog_sha256": "5bd33d875fd924bf552cf0879f0ee6b66e821a03afa59508d5e86fb00352f8db",
+    "inspected_source_sha256": {
+      "roguelike/engine/data_loader.py": "6240d97b546ea813dbc5fc4d2772738bf6cb553f647079ab48ab9a1e0ab3b6ff",
+      "roguelike/engine/creature_factory.py": "cd3fa4db9716a0d61b1158f2e06037b9ff129d16da703b908de8c657a773a44d",
+      "roguelike/engine/creature_authoring.py": "069c63daad25f739d66d04d48f85c7dd0cd81ed2d110da5c2a5dfc0f5f19ea5c",
+      "roguelike/entities/actor.py": "34600dc6f36d1f3f315f59ec296be4b4f1871bd3031ae582e8fdeda783702822",
+      "roguelike/components/fighter.py": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79",
+      "roguelike/components/perception.py": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a",
+      "roguelike/components/ai.py": "0f39cb721d197ae0ff318972c20b51bf220026e8de31f1b8caded65a28d99924",
+      "roguelike/engine/ai_system.py": "0d72a7d750315d4a6f4c14e512c9ec4039fc86d87a40386976723aa2c8d34412",
+      "roguelike/engine/creature_abilities.py": "c7cbd4f922240bbcfbddf10f11dcd4c27e427af747c067c94d69ddaa488a5cae",
+      "roguelike/engine/effect_lifecycle.py": "8486645aff1c325f67c30f38d4e5ff7852b5e249ed3ea06d69a94deb773c7c04",
+      "roguelike/engine/combat.py": "567a84340d7186d136d6b66ebe003bdc0d22c46313b603324d8eaacb47cc652a",
+      "roguelike/engine/look_mode.py": "2b3d32cdaaaa6304746b9d31e20db0b1d0827f7d11755912f2def25dbfadb04b",
+      "roguelike/engine/save_components.py": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+      "roguelike/engine/save_manager.py": "a32970bc099a7f9dfa6d4b0447d30aa02793c3637a82a5af1b996750d9ae63e7",
+      "roguelike/rendering/tile_registry.py": "9a9f07a3619d03401f6367601f00bd685024e1f0dc691a41c4cdfa0555c9162a",
+      "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+      "roguelike/generation/structure_preview.py": "904772970f57876707d59cda55c54b0317d42b338996f03cf1be0bdc59326f5b",
+      "roguelike/engine/scene_generation.py": "535bd94b46af998a4236f7aba4e5dde3ccb233300738900cb0c7480c3173732d",
+      "roguelike/generation/town_gen.py": "cf9091724825391b18d742e6e459e0640b594eb4ea2490252c130f83d284e424",
+      "roguelike/engine/discharge.py": "d3c36cfc2cfa3fb704ff33dac2bb138780a543af7f92ce5c5fcaaed179e2adcb",
+      "roguelike/data/entities/creatures/hollow_revenant.json": "44b2ee0fb49ab1f172791bf1775ea9c3a707942e2adbfd9e9fb5e176fad80a3b",
+      "roguelike/data/entities/creatures/hollow_knight.json": "f2cc9fc657a7bb9e47ff01b1d7c8ad864bd03ec8d8968e89b7f1fc035f9353de",
+      "roguelike/data/entities/creatures/vine_network.json": "77395c1193ca15e28f81ab83fb241a7a71b9d6ea08889d6b3870b1c95aaf890a",
+      "roguelike/data/entities/player.json": "e335eb5a444cf7f379c6b9242a12f486ca89a76b1e0d04e246652142d6a2ccd7",
+      "roguelike/docs/examples/g17_authored_creature_room.json": "c44f9c5e3dd5c01ffc9e7fd112fc37942b008ec142773fb079086a86ccb4a665",
+      "workbench/worker/bridge.py": "610f29e22ba6f93aefdccc52c0a8d48b77c57f6233eb362c193c8db2872786e4",
+      "workbench/src-tauri/src/authoring.rs": "0835a1e2182026f90d351f8ec242f35145aa953acb201fa35584fe195a04f13f",
+      "workbench/src-tauri/src/main.rs": "8c2684447f90d903b8af12cc19d5db4250c42227586b902b24f77a63e507fd6c",
+      "workbench/src/App.tsx": "023b2cf357a87bca8c89c9f26de4db4744b04fd871b624a816e4d3cc19e22741",
+      "workbench/src/Authoring.tsx": "ba2329444341fcda086db72b3d080760fc9d78de7e8a2f73d46e58b480dd46f0",
+      "workbench/src/CreatureEditor.tsx": "b8dab619866c036132cb5629f45ce1dc5288b0a4a562900890c2e311db4de9ef",
+      "workbench/src/creature.ts": "93342ebcc76d01420236c8576130f11e60dc09c956fc5fde3f69a7d9e09ca286",
+      "workbench/src/protocol.ts": "89fb5042c5ed5b54a66bfc1251162aedcab6e9b16f1edaf5c91cd2a90fbc326f"
+    }
+  },
+  "source_binding_note": "Captured before committing. No runtime code changed between the final native receipt and implementation commit. Disposable native root has no Git identity; matching game-source SHA-256 binds its actual code to this implementation.",
+  "preflight": {
+    "result": {
+      "native": 0,
+      "worker": 0,
+      "rust": 0,
+      "typescript": 0,
+      "seconds": 115.5602569
+    },
+    "typescript_tests": 24,
+    "rust_tests": 16,
+    "recipe_worker_tests": 4,
+    "native": "packaged W3C recipe journey",
+    "reported_historical_counts_not_claimed_as_rerun": true
+  },
+  "verification": [
+    {
+      "exit": 0,
+      "seconds": 1.8895106,
+      "command": "npm.cmd test",
+      "passed": true,
+      "tests_passed": 27
+    },
+    {
+      "exit": 0,
+      "seconds": 5.5342901,
+      "command": "npm.cmd run typecheck",
+      "passed": true
+    },
+    {
+      "exit": 0,
+      "seconds": 4.7448407,
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "passed": true,
+      "tests_passed": 17
+    },
+    {
+      "exit": 0,
+      "seconds": 2.3039318,
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "passed": true
+    },
+    {
+      "command": "python -B -m unittest discover -s worker -p test_*.py -v",
+      "seconds": 436.5541373,
+      "exit": 0,
+      "passed": true,
+      "tests_passed": 34
+    },
+    {
+      "seconds": 47.0749215,
+      "exit": 0,
+      "command": "python -B -m unittest discover -s worker -p test_creatures.py -v",
+      "passed": true,
+      "tests_passed": 5
+    },
+    {
+      "command": "PYTHONPATH=roguelike;tools;tools/critical_fix_regressions/tests python -B -m unittest test_structure_contract test_structure_access test_crafting test_gameplay_g17 -v",
+      "seconds": 14.2513285,
+      "exit": 0,
+      "passed": true,
+      "tests_passed": 34
+    },
+    {
+      "seconds": 92.0706397,
+      "exit": 0,
+      "command": "npm.cmd run bundle",
+      "passed": true
+    },
+    {
+      "exit": 0,
+      "seconds": 130.7018427,
+      "command": "npm.cmd run test:recipes",
+      "passed": true
+    },
+    {
+      "exit": 0,
+      "seconds": 58.8089195,
+      "command": "npm.cmd run test:visual",
+      "passed": true
+    },
+    {
+      "exit": 0,
+      "seconds": 59.0993899,
+      "command": "npm.cmd run test:items",
+      "passed": true
+    },
+    {
+      "exit": 0,
+      "mode": "creature-worker-exit",
+      "seconds": 7.5429505,
+      "command": "WORKBENCH_TEST_MODE=creature-worker-exit npm.cmd run test:desktop",
+      "passed": true
+    },
+    {
+      "exit": 0,
+      "mode": "creature-worker-cancel",
+      "seconds": 7.6927625,
+      "command": "WORKBENCH_TEST_MODE=creature-worker-cancel npm.cmd run test:desktop",
+      "passed": true
+    },
+    {
+      "exit": 0,
+      "mode": "creature-worker-timeout",
+      "seconds": 97.0748245,
+      "command": "WORKBENCH_TEST_MODE=creature-worker-timeout npm.cmd run test:desktop",
+      "passed": true
+    },
+    {
+      "exit": 0,
+      "mode": "protocol-mismatch",
+      "seconds": 1.5714125,
+      "command": "WORKBENCH_TEST_MODE=protocol-mismatch npm.cmd run test:desktop",
+      "passed": true
+    },
+    {
+      "exit": 0,
+      "mode": "malformed-worker",
+      "seconds": 1.6109791,
+      "command": "WORKBENCH_TEST_MODE=malformed-worker npm.cmd run test:desktop",
+      "passed": true
+    },
+    {
+      "command": "npm.cmd run test:creatures",
+      "seconds": 59.827,
+      "timing": "native journey receipt elapsed",
+      "passed": true
+    }
+  ],
+  "commands_context": {
+    "default_cwd": "workbench",
+    "game_test_cwd": "repository root",
+    "game_test_pythonpath": "roguelike;tools;tools/critical_fix_regressions/tests",
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "fault_mode_syntax": "Set $env:WORKBENCH_TEST_MODE before npm.cmd run test:desktop in PowerShell",
+    "fault_helper_command": "rustc scripts/fault-worker.rs -o .artifacts/fault-worker.exe"
+  },
+  "native_creature": {
+    "started_utc": "2026-10-27T00:49:09.075Z",
+    "checks": [
+      "actual Tauri WebView2 window",
+      "WebView network offline",
+      "repository handshake, live asset validation and Pixi rendering",
+      "production arrival click maps to (15,20), stairs_up",
+      "real DIMENSION diagnostic for disposable fixture",
+      "byte-exact view, close and reopen journey",
+      "host traversal rejection",
+      "cancel and retry without app hang",
+      "13 loaded non-player creature records; player, special-ability knight and advanced vine read-only; byte-exact source; close during lookup suppresses late result",
+      "five independent drafts; actual reference source without replacing structure draft; two-span effective HP/name edits and unknown metadata; undo/redo/raw freeze; invalid complex edits denied; stale async and changed-dependency evidence revoked; reviewed no-clobber variant and exact reopened real factory values",
+      "host denies forged document/review, stale external source/dependency, revoked review, concurrent destination, player/advanced raw promotion, protected/traversal/ADS paths and junction; originals and spawn/selection files byte-identical",
+      "fresh project exact variant reopen and factory result; full/minimum native captures and plain rendered chrome",
+      "invalid project visible",
+      "no temporary worker roots remain after native close"
+    ],
+    "console_errors": [],
+    "external_requests": [],
+    "launch_to_shell_ms": 510,
+    "open_to_preview_ms": 3388,
+    "creature_open_ms": 706,
+    "variant": {
+      "path": "roguelike/data/entities/creatures/hollow_revenant_w4a.json",
+      "sha256": "913f9216d3c1693f346a250a9ff1153348ad00610c321f0dbbdd96bc42d013b3"
+    },
+    "passed": true,
+    "temporary_roots_remaining": [],
+    "total_ms": 59827
+  },
+  "factory_evidence": {
+    "artifact": "examples/hollow_revenant_w4a.factory.json",
+    "original_effective_hp": 14,
+    "variant_effective_hp": 19,
+    "variant_initial_hp": 19,
+    "actor_class": "entities.actor.Actor",
+    "source_sha256": "913f9216d3c1693f346a250a9ff1153348ad00610c321f0dbbdd96bc42d013b3",
+    "game_source_sha256": "ce61e2d93600447728c81559fe98896667387a02bc99592dd7d6297162b0654a",
+    "worker_sha256": "610f29e22ba6f93aefdccc52c0a8d48b77c57f6233eb362c193c8db2872786e4",
+    "loaded_catalog_sha256": "1f26ceb5b47125482f117bcd7a81ff8600091fbd4735f843e2c800d588ffa906",
+    "scope": "Factory construction only; no AI/combat turns, difficulty measurement, natural encounter, campaign or saved instance was exercised."
+  },
+  "g17_existing_route": {
+    "example_sha256": "913f9216d3c1693f346a250a9ff1153348ad00610c321f0dbbdd96bc42d013b3",
+    "route": "authored_submap",
+    "source_xy": [
+      7,
+      2
+    ],
+    "origin": [
+      35,
+      18
+    ],
+    "actor_xy": [
+      42,
+      20
+    ],
+    "arrival": [
+      37,
+      23
+    ],
+    "actor_id": "hollow_revenant_w4a",
+    "hp": 19,
+    "max_hp": 19,
+    "passed": true,
+    "candidate_sha256": "eb263291d3960b6e964fa95b49211b701da2fd6f05cb91bbd4ac9158453b9bde",
+    "catalog_sha256": "f97008ab2a494ef49fece364e1ef0117844138fd914fa299cf5462a0ceae8963",
+    "zone_membership_added": false,
+    "scope": "Initial production construction and occupancy only; no encounter, turns, save or natural selection.",
+    "illegal_cell": {
+      "source_xy": [
+        2,
+        5
+      ],
+      "rejected": true,
+      "error": "g17_authored_creature_room special[0]: creature at (37, 23) overlaps an actor, player arrival or physical stair"
+    }
+  },
+  "preservation": {
+    "passed": true,
+    "baseline_head": "7745f72ea5446af22d3f340c30043d3752ef0f54",
+    "source_files_checked": 7972,
+    "save_files_checked": 7,
+    "unchanged_bytes_and_measured_metadata": true,
+    "metadata": [
+      "size",
+      "mtime_ns",
+      "ctime_ns (source only)"
+    ],
+    "save_file_set_unchanged": true,
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "preflight_manifest_sha256": "19101fc94222e5bbbf36c38c1f262215fb1994f6b33b38ff1d65239d6c337d1e",
+    "changes_count": 0
+  },
+  "review_artifacts": {
+    "docs/examples/hollow_revenant_w4a.json": {
+      "sha256": "913f9216d3c1693f346a250a9ff1153348ad00610c321f0dbbdd96bc42d013b3",
+      "bytes": 2172
+    },
+    "docs/examples/hollow_revenant_w4a.factory.json": {
+      "sha256": "ef02b03a773ce2eea03b18a9d4d7120a644dea36a507d3991fec0217ebc4c613",
+      "bytes": 2414
+    },
+    "docs/images/w4a/creature-factory.png": {
+      "sha256": "fcebf8efe09b0f901a58cd53defd781afc6c01c11939e859a24e37e496751406",
+      "bytes": 699782
+    },
+    "docs/images/w4a/creature-minimum-window.png": {
+      "sha256": "77ac1c91a92e9a58daf2bcfe30627e850a3eb9b8500111b6062ca03ea6f45614",
+      "bytes": 202878
+    }
+  },
+  "local_detailed_logs": {
+    ".artifacts/w4a/bundle-final.log": {
+      "sha256": "9b7ef4891144a749ef3fef718c720b103b17f988e783ceb717a78b939b3ac285",
+      "bytes": 2073
+    },
+    ".artifacts/w4a/bundle-iteration.log": {
+      "sha256": "12f1d45562a0f68404686e553b56cea899ba40b6581b985835c120551c97d9d0",
+      "bytes": 2073
+    },
+    ".artifacts/w4a/clippy-final.log": {
+      "sha256": "9157e3aa98a789167ebd0d6f41a4ae76beaab613b8bc03e53b354bd965af3c45",
+      "bytes": 164
+    },
+    ".artifacts/w4a/clippy-iteration.log": {
+      "sha256": "399f9c45c8a6e2639b8f549540077870344480e80bc38a1f94ffe08bc3d1996e",
+      "bytes": 164
+    },
+    ".artifacts/w4a/creature-final.log": {
+      "sha256": "d7387a2c3fc066c779c758bd742f16bf4e1680e2fed20dfeff08311226566063",
+      "bytes": 897
+    },
+    ".artifacts/w4a/creatures-iteration.log": {
+      "sha256": "292a8942c4dd8b73cef056cae8278872e25518186ff08e3bc6ba57667a9056b5",
+      "bytes": 897
+    },
+    ".artifacts/w4a/fault-creature-worker-cancel.log": {
+      "sha256": "8690881a4de2b1cf0129c75fc4415237a4b125a1b420bb30440a63b08cdb7204",
+      "bytes": 956
+    },
+    ".artifacts/w4a/fault-creature-worker-exit.log": {
+      "sha256": "c445395008bc3be46b41d9debc232a21b9710d5b2a014413afdb238c62fb4d23",
+      "bytes": 1022
+    },
+    ".artifacts/w4a/fault-creature-worker-timeout.log": {
+      "sha256": "c7eade181f91bcdf0d57eb7dc2b863e7b095696ef4e4d415f465ca61f4f69112",
+      "bytes": 1032
+    },
+    ".artifacts/w4a/fault-malformed-worker.log": {
+      "sha256": "d9911c138450265655ff8d51e35a9255d6a65039d39ef56cc7cc85162e889043",
+      "bytes": 850
+    },
+    ".artifacts/w4a/fault-protocol-mismatch.log": {
+      "sha256": "d7ef4c2ad491c039d85a1cc4db2ceb6eeece344cbf82762826f20a1eda3a0641",
+      "bytes": 846
+    },
+    ".artifacts/w4a/game-contracts-final.log": {
+      "sha256": "20ef4f1443a4c061f5030de91509c5062fe1be64ea0f734257b2445162736aa4",
+      "bytes": 6021
+    },
+    ".artifacts/w4a/game-contracts.log": {
+      "sha256": "6b478e691b8bdf293db9a8d8819bb78bf77ed112341157ae3eff1bf0eb7cc157",
+      "bytes": 6619
+    },
+    ".artifacts/w4a/native-final.log": {
+      "sha256": "fb3aa11d1518155262293318043bbdf9dfe71474e3406ea9c7148bcc1d684cba",
+      "bytes": 11830
+    },
+    ".artifacts/w4a/native-items.log": {
+      "sha256": "78d80a4f26032d37460ca21af1d81c6e3a3dddd9375d3d5677ad6aafcb697fef",
+      "bytes": 14396
+    },
+    ".artifacts/w4a/native-iteration.log": {
+      "sha256": "5d97978611cd6bdbe3170b64c90786b678a0d6fbb5f2481535274c30ac8d3a66",
+      "bytes": 11752
+    },
+    ".artifacts/w4a/native-recipes.log": {
+      "sha256": "cb14310cddb9eaa864e8135c054411f5c1799a3df61a8750e5432235a109a1cb",
+      "bytes": 20096
+    },
+    ".artifacts/w4a/native-second.log": {
+      "sha256": "de5fcc0added6933a508d93a5d55fddd73682b1dcd4e4933ca1c48a311f9398e",
+      "bytes": 11824
+    },
+    ".artifacts/w4a/native-visual.log": {
+      "sha256": "874d8a16b0b8355c48f12e8be9aff1ad0c7b18a1787d8965ba845fe10d6ebe05",
+      "bytes": 13031
+    },
+    ".artifacts/w4a/preflight-native.log": {
+      "sha256": "fe246e44e3224d4a39dc4422debdc2f5b9decc671d858349b878baba251e7fab",
+      "bytes": 20044
+    },
+    ".artifacts/w4a/preflight-rust.log": {
+      "sha256": "057824e0a34a42069480176fdb8fb4e07802ac1dcf8e9e51e1c112bd80a3dea3",
+      "bytes": 1469
+    },
+    ".artifacts/w4a/preflight-typescript.log": {
+      "sha256": "e4acd734fca3292739c59f08e82c0b4fb0d2d76a19c1729247704aa3d624ba19",
+      "bytes": 284
+    },
+    ".artifacts/w4a/preflight-worker.log": {
+      "sha256": "28ca5e5dbc5ddde3b7bbe410c4c08c112ff31c7a3ae65a41b08b67a6a6dde026",
+      "bytes": 774
+    },
+    ".artifacts/w4a/rust-final.log": {
+      "sha256": "43844cf70772f0540e6f43a66f47976a8b109ed8c5be78404b44b7da68639f16",
+      "bytes": 1644
+    },
+    ".artifacts/w4a/typecheck-final.log": {
+      "sha256": "68abdb9dbe327e50e0f246d7586b0c7c5df02fbbed02f9f2c13a5f2d898c1fd3",
+      "bytes": 59
+    },
+    ".artifacts/w4a/typescript-final.log": {
+      "sha256": "7207c44edec6d74e1f23d7187c953d9afe19c11e5cbd0d9a10ffc3d02664d996",
+      "bytes": 285
+    },
+    ".artifacts/w4a/worker-final.log": {
+      "sha256": "a0a13d33ceb0bbfb6bbed6a62d8d51abf1372b94c6eeb54ccc701a470b47617e",
+      "bytes": 5059
+    }
+  },
+  "limits": [
+    "Factory construction and initial G17 occupancy only; no AI/combat turns, natural selection, campaign, saves or balance measurement.",
+    "No shipped catalogue or selection changes. Example and unknown-metadata sentinel exist only in disposable fixtures and docs.",
+    "NSIS built; installer not installed, signed or clean-machine tested.",
+    "Final diagnostic label correction followed the full 34-worker suite; focused five-worker suite and final native journey reran afterward.",
+    "Initial game-test invocation omitted tools from PYTHONPATH; corrected invocation passed all 34.",
+    "W1/W3A exercised through complete worker/Rust suites and native navigation; no duplicated full native campaign.",
+    "The evidence commit cannot contain its own hash; final publication receipt and handoff identify both commits and the final remote tip."
+  ]
+}

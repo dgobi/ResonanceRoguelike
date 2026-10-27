@@ -1,0 +1,71 @@
+{
+  "actor_class": "entities.actor.Actor",
+  "comparisons": [
+    {
+      "declared": "Hollow Revenant W4A",
+      "field": "name â†’ Actor.name",
+      "instance": "Hollow Revenant W4A"
+    },
+    {
+      "declared": 19,
+      "field": "base_hp â†’ Fighter.max_hp / hp",
+      "instance": 19
+    },
+    {
+      "declared": 19,
+      "field": "fighter.max_hp (fallback, shadowed by base_hp)",
+      "instance": 19
+    }
+  ],
+  "consumer": "engine.data_loader.DataLoader â†’ engine.creature_factory.CreatureFactory.spawn â†’ Actor / Fighter / Perception / AI",
+  "contract": "revenant-hp-1",
+  "creature_id": "hollow_revenant_w4a",
+  "definition_semantic_sha256": "e84a94701dbd0cf1f39d2e7ed6c01c0c59c32be56ed1895271df835ff033a815",
+  "instance": {
+    "ai_class": "WanderingAI",
+    "blocks_movement": true,
+    "fighter": {
+      "armour_value": 1,
+      "body_id": "body_human",
+      "defense": 1,
+      "hp": 19,
+      "limbs": [
+        {
+          "damage_multiplier": 1,
+          "id": "form",
+          "size": 1
+        }
+      ],
+      "max_hp": 19,
+      "power": 3
+    },
+    "inventory": null,
+    "name": "Hollow Revenant W4A",
+    "perception": {
+      "faction": "hollow",
+      "hearing_radius": 6,
+      "hostile_to": [
+        "player"
+      ],
+      "sees_in_dark": true,
+      "sight_radius": 7
+    },
+    "tile": "hollow_revenant"
+  },
+  "loaded_catalog_sha256": "1f26ceb5b47125482f117bcd7a81ff8600091fbd4735f843e2c800d588ffa906",
+  "observed_at_utc": "2026-10-27T00:49:48.071423+00:00",
+  "path": "roguelike/data/entities/creatures/hollow_revenant_w4a.json",
+  "scope": "Factory construction only; no AI/combat turns, difficulty measurement, natural encounter, campaign or saved instance was exercised.",
+  "source": {
+    "branch": null,
+    "catalog_sha256": "1f26ceb5b47125482f117bcd7a81ff8600091fbd4735f843e2c800d588ffa906",
+    "commit": null,
+    "game_dirty": null,
+    "game_source_sha256": "ce61e2d93600447728c81559fe98896667387a02bc99592dd7d6297162b0654a",
+    "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w4a\\data-fixture-1793062148555"
+  },
+  "source_sha256": "913f9216d3c1693f346a250a9ff1153348ad00610c321f0dbbdd96bc42d013b3",
+  "worker_contract": 7,
+  "worker_sha256": "610f29e22ba6f93aefdccc52c0a8d48b77c57f6233eb362c193c8db2872786e4",
+  "worker_version": "0.7.0"
+}
