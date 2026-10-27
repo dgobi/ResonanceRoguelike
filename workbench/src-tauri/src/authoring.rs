@@ -24,6 +24,7 @@ pub struct Document {
     writable: bool,
     evidence_inputs: Option<String>,
     revision: u64,
+    attempt: u64,
 }
 #[derive(Clone)]
 struct Review {
@@ -191,10 +192,18 @@ fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure>
         doc.clone(),
     ))
 }
+fn revoke(doc: &mut Document) {
+    doc.attempt += 1;
+    doc.review = None;
+}
+pub(super) fn revoke_all(state: &mut Session) {
+    for doc in state.document.iter_mut().chain(state.pool_document.iter_mut()).chain(state.item_document.iter_mut()).chain(state.recipe_document.iter_mut()).chain(state.creature_document.iter_mut()) { revoke(doc); }
+}
+#[cfg(test)]
 fn revoke_review(host: &Host, token: &str) {
     let mut state = host.inner.lock().unwrap();
-    if let Some(doc) = current_document(&mut state, token) {
-        doc.review = None;
+    if !state.applying {
+        if let Some(doc) = current_document(&mut state, token) { revoke(doc); }
     }
 }
 #[tauri::command]
@@ -203,10 +212,10 @@ pub fn invalidate_document(host: tauri::State<'_, Host>, token: String) -> Resul
 }
 fn advance_document(host: &Host, token: &str) -> Result<(), Failure> {
     let mut state = host.inner.lock().unwrap();
-    if state.applying { return Err(io_error("Publication in progress.")); }
+    if state.applying { return Err(busy_failure()); }
     let doc = current_document(&mut state, token).ok_or_else(|| io_error("Document changed."))?;
     doc.revision += 1;
-    doc.review = None;
+    revoke(doc);
     Ok(())
 }
 fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
@@ -216,20 +225,62 @@ fn envelope(result: Value) -> Value {
     json!({"protocol":PROTOCOL,"id":uuid::Uuid::new_v4().to_string(),"ok":true,"result":result,"host_elapsed_ms":0})
 }
 
+fn begin_validation(host: &Host, token: &str) -> Result<(Operation, PathBuf, Document), Failure> {
+    let mut state = host.inner.lock().unwrap();
+    // Rejected requests do not revoke anything. Accepted requests revoke before
+    // filesystem/identity/worker checks, including replacements that fail early.
+    if state.busy.is_some() || state.applying { return Err(busy_failure()); }
+    let root = state.root.clone().ok_or_else(|| io_error("No project open."))?;
+    let doc = current_document(&mut state, token).ok_or_else(unknown_document)?;
+    revoke(doc);
+    let doc = doc.clone();
+    let operation = Operation::reserve(host, &mut state, false)?;
+    Ok((operation, root, doc))
+}
+fn unknown_document() -> Failure {
+    failure("UNKNOWN_DOCUMENT", "Document identity is stale or forged.", "Open the definition again from discovery.")
+}
+fn install_validation(operation: &Operation, doc: &Document, inputs: Option<String>, review: Option<Review>) -> Result<(), Failure> {
+    let mut state = operation.host.inner.lock().unwrap();
+    operation.check(&state)?;
+    let current = current_document(&mut state, &doc.token).ok_or_else(unknown_document)?;
+    if current.revision != doc.revision || current.attempt != doc.attempt {
+        return Err(failure("DRAFT_CHANGED", "Draft changed. Validate again.", "Validate the current draft."));
+    }
+    current.review = review;
+    current.evidence_inputs = inputs;
+    Ok(())
+}
+
+fn admit_apply(host: &Host, token: &str, review_token: &str, confirmed: bool, before_reservation: impl FnOnce()) -> Result<(Operation, PathBuf, Document, Review), Failure> {
+    // Test-only callers can pause before admission. There is no snapshot before
+    // this lock: authorization, consumption and transaction inputs are atomic.
+    before_reservation();
+    let mut state = host.inner.lock().unwrap();
+    if state.busy.is_some() || state.applying { return Err(busy_failure()); }
+    let root = state.root.clone().ok_or_else(|| io_error("No project open."))?;
+    let doc = current_document(&mut state, token).ok_or_else(unknown_document)?;
+    let review = doc.review.as_ref().filter(|r| r.token == review_token)
+        .ok_or_else(|| failure("REVIEW_REQUIRED", "A current valid review is required.", "Validate this draft and review the source diff."))?.clone();
+    if !confirmed { return Err(failure("CONFIRMATION_REQUIRED", "Apply must be deliberate.", "Read the diff and confirm this single-file change.")); }
+    doc.review = None;
+    let doc = doc.clone();
+    let operation = Operation::reserve(host, &mut state, true)?;
+    Ok((operation, root, doc, review))
+}
+
 #[tauri::command]
 pub async fn open_document(
     app: tauri::AppHandle,
     host: tauri::State<'_, Host>,
     asset: String,
 ) -> Result<Value, Failure> {
-    let epoch = host.epoch.load(Ordering::SeqCst);
+    let operation = Operation::begin(&host)?;
     let host = host.inner().clone();
     tauri::async_runtime::spawn_blocking(move || {
         let root = {
             let state = host.inner.lock().unwrap();
-            if state.busy || state.applying {
-                return Err(io_error("A request is active."));
-            }
+            operation.check(&state)?;
             if !state.discovered.contains(&asset) {
                 return Err(failure(
                     "UNKNOWN_SOURCE",
@@ -247,13 +298,12 @@ pub async fn open_document(
         let evidence_inputs = if dependency_bound(&asset) { Some(input_stamp(&root)?) } else { None };
         let mut response = run_worker(
             app,
-            host.clone(),
+            &operation,
             Request {
                 op: "inspect".into(),
                 asset: Some(asset.clone()),
                 ..Default::default()
             },
-            epoch,
         )?;
         if response["ok"] != true {
             return Ok(response);
@@ -273,9 +323,7 @@ pub async fn open_document(
         .ok()
         .and_then(|v| v["id"].as_str().map(str::to_owned));
         let mut state = host.inner.lock().unwrap();
-        if host.epoch.load(Ordering::SeqCst) != epoch {
-            return Err(io_error("Project changed."));
-        }
+        operation.check(&state)?;
         let writable = if is_submap(&asset) { response["result"]["editable"] == true && response["result"]["layout_contract"] == "direct-creatures-1" } else if is_creature(&asset) { asset.starts_with("roguelike/data/entities/creatures/") && response["result"]["editable"] == true } else if is_recipe(&asset) { response["result"]["editable"] == true } else { !is_item(&asset) || (asset.starts_with("roguelike/data/items/components/") && response["result"]["editable"] == true) };
         let slot = if is_pool(&asset) { &mut state.pool_document } else if is_item(&asset) { &mut state.item_document } else if is_recipe(&asset) { &mut state.recipe_document } else if is_creature(&asset) { &mut state.creature_document } else { &mut state.document };
         *slot = Some(Document {
@@ -287,6 +335,7 @@ pub async fn open_document(
             writable,
             evidence_inputs,
             revision: 0,
+            attempt: 0,
         });
         response["result"]["document_token"] = json!(token);
         Ok(response)
@@ -344,31 +393,19 @@ pub async fn validate_document(
     variant_id: Option<String>,
     seed: Option<u32>,
 ) -> Result<Value, Failure> {
-    if host.inner.lock().unwrap().applying {
-        return Err(failure(
-            "BUSY",
-            "A file transaction is in progress.",
-            "Wait for its result before validating another draft.",
-        ));
-    }
-    let (root, doc) = session_doc(&host, &token)?;
-    // A failed/cancelled replacement validation must not leave an older review
-    // capability usable, even when failure happens before a worker response.
-    revoke_review(&host, &token);
-    let seed = seed.unwrap_or(20261023);
-    let source_path = checked_target(&root, &doc.relative, false)?;
-    if read_source(&source_path)? != doc.original {
-        return Err(conflict());
-    }
-    let (dest, variant) = destination(&doc, &draft, variant_id.as_deref())?;
-    checked_target(&root, &dest, variant)?;
-    let inputs = if dependency_bound(&doc.relative) { Some(input_stamp(&root)?) } else { None };
-    let epoch = host.epoch.load(Ordering::SeqCst);
-    let host = host.inner().clone();
+    let (operation, root, doc) = begin_validation(&host, &token)?;
     tauri::async_runtime::spawn_blocking(move || {
+        let seed = seed.unwrap_or(20261023);
+        let source_path = checked_target(&root, &doc.relative, false)?;
+        if read_source(&source_path)? != doc.original {
+            return Err(conflict());
+        }
+        let (dest, variant) = destination(&doc, &draft, variant_id.as_deref())?;
+        checked_target(&root, &dest, variant)?;
+        let inputs = if dependency_bound(&doc.relative) { Some(input_stamp(&root)?) } else { None };
         let mut response = run_worker(
             app,
-            host.clone(),
+            &operation,
             Request {
                 op: "preview_draft".into(),
                 asset: Some(dest.clone()),
@@ -377,7 +414,6 @@ pub async fn validate_document(
                 seed: Some(seed),
                 ..Default::default()
             },
-            epoch,
         )?;
         if read_source(&source_path)? != doc.original {
             return Err(conflict());
@@ -385,12 +421,7 @@ pub async fn validate_document(
         if let Some(stamp) = &inputs {
             if input_stamp(&root)? != *stamp { return Err(failure("SOURCE_CHANGED", "Content dependencies changed during validation.", "Validate again.")); }
         }
-        let mut state = host.inner.lock().unwrap();
-        let current = current_document(&mut state, &token)
-            .ok_or_else(|| io_error("Document changed."))?;
-        if current.revision != doc.revision { return Err(failure("DRAFT_CHANGED", "Draft changed during validation.", "Validate the current draft.")); }
-        current.review = None;
-        current.evidence_inputs = inputs.clone();
+        let mut review = None;
         if response["ok"] == true
             && response["result"]["valid"] == true
             && response["result"]["draft_sha256"] == hash(draft.as_bytes())
@@ -399,16 +430,17 @@ pub async fn validate_document(
             && (!is_creature(&doc.relative) || (response["result"]["creature_contract"] == "revenant-hp-1" && response["result"]["factory_verified"] == true && response["result"]["route"] == "creature_definition"))
         {
             let review_token = uuid::Uuid::new_v4().to_string();
-            current.review = Some(Review {
+            review = Some(Review {
                 token: review_token.clone(),
                 draft,
                 destination: dest,
                 variant,
                 seed,
-                inputs,
+                inputs: inputs.clone(),
             });
             response["result"]["review_token"] = json!(review_token);
         }
+        install_validation(&operation, &doc, inputs, review)?;
         Ok(response)
     })
     .await
@@ -713,33 +745,7 @@ pub async fn apply_document(
     review_token: String,
     confirmed: bool,
 ) -> Result<Value, Failure> {
-    let (root, doc) = session_doc(&host, &token)?;
-    let review = doc
-        .review
-        .clone()
-        .filter(|r| r.token == review_token)
-        .ok_or_else(|| {
-            failure(
-                "REVIEW_REQUIRED",
-                "A current valid review is required.",
-                "Validate this draft and review the source diff.",
-            )
-        })?;
-    if !confirmed {
-        return Err(failure(
-            "CONFIRMATION_REQUIRED",
-            "Apply must be deliberate.",
-            "Read the diff and confirm this single-file change.",
-        ));
-    }
-    {
-        let mut state = host.inner.lock().unwrap();
-        if state.busy || state.applying {
-            return Err(io_error("A request is active."));
-        }
-        state.applying = true;
-    }
-    let epoch = host.epoch.load(Ordering::SeqCst);
+    let (operation, root, doc, review) = admit_apply(&host, &token, &review_token, confirmed, || {})?;
     let host = host.inner().clone();
     tauri::async_runtime::spawn_blocking(move || {
         let result = (|| {
@@ -751,7 +757,7 @@ pub async fn apply_document(
             if review.inputs.as_ref().is_some_and(|s| *s != stamp) {
                 return Err(failure("SOURCE_CHANGED", "Content dependencies changed since review.", "Validate the retained draft and review again."));
             }
-            let response = run_worker(app, host.clone(), Request {op:"preview_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),source_asset:(is_creature(&doc.relative) || is_submap(&doc.relative)).then(||doc.relative.clone()),seed:Some(review.seed),..Default::default()}, epoch)?;
+            let response = run_worker(app, &operation, Request {op:"preview_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),source_asset:(is_creature(&doc.relative) || is_submap(&doc.relative)).then(||doc.relative.clone()),seed:Some(review.seed),..Default::default()})?;
             if response["ok"] != true || response["result"]["valid"] != true || response["result"]["draft_sha256"] != hash(review.draft.as_bytes())
                 || response["result"]["route"] != if is_pool(&doc.relative) { "contextual_loot_pool" } else if is_item(&doc.relative) { "item_definition" } else if is_recipe(&doc.relative) { "recipe_definition" } else if is_creature(&doc.relative) { "creature_definition" } else if is_submap(&doc.relative) { "authored_submap" } else { "ordinary_building" }
                 || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != env!("CARGO_PKG_VERSION")
@@ -771,12 +777,9 @@ pub async fn apply_document(
             publish(&root, &doc, &review, Fault::None)
         })();
         let mut state = host.inner.lock().unwrap();
-        state.applying = false;
-        if let Some(current) = &mut state.document { current.review = None; }
-        if let Some(current) = &mut state.pool_document { current.review = None; }
-        if let Some(current) = &mut state.item_document { current.review = None; }
-        if let Some(current) = &mut state.recipe_document { current.review = None; }
-        if let Some(current) = &mut state.creature_document { current.review = None; }
+        operation.check(&state)?;
+        revoke_all(&mut state);
+        drop(state);
         result.map(envelope)
     }).await.map_err(io_error)?
 }
@@ -787,7 +790,14 @@ pub fn document_disk(host: tauri::State<'_, Host>, token: String) -> Result<Valu
     let path = checked_target(&root, &doc.relative, false)?;
     let bytes = read_source(&path)?;
     let dependencies_changed = if let Some(stamp) = &doc.evidence_inputs { input_stamp(&root)? != *stamp } else { false };
-    if dependencies_changed || bytes != doc.original { revoke_review(&host, &token); }
+    if dependencies_changed || bytes != doc.original {
+        let mut state = host.inner.lock().unwrap();
+        if !state.applying {
+            if let Some(current) = current_document(&mut state, &token) {
+                if current.revision == doc.revision && current.attempt == doc.attempt { revoke(current); }
+            }
+        }
+    }
     let pending: Vec<_> = fs::read_dir(path.parent().unwrap())
         .map_err(io_error)?
         .filter_map(Result::ok)
@@ -807,6 +817,147 @@ pub fn finish_close(window: tauri::Window, host: tauri::State<'_, Host>) -> Resu
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn w4d_invalidation_before_reservation_rejects_snapshot() {
+        let (root, mut doc, review) = fixture();
+        let host = Host::default(); doc.review = Some(review.clone());
+        { let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().into()); state.document = Some(doc.clone()); }
+        let (paused, resume) = (Arc::new(std::sync::Barrier::new(2)), Arc::new(std::sync::Barrier::new(2)));
+        let other = host.clone(); let p = paused.clone(); let r = resume.clone();
+        let task = std::thread::spawn(move || admit_apply(&other, "trusted", "reviewed", true, || { p.wait(); r.wait(); }).is_err());
+        paused.wait(); advance_document(&host, "trusted").unwrap(); resume.wait();
+        assert!(task.join().unwrap(), "revoked snapshot was admitted; publication was deliberately not attempted");
+        assert_eq!(fs::read(root.path().join(doc.relative)).unwrap(), doc.original);
+    }
+    #[test]
+    fn w4d_cancel_after_worker_before_install_rejects_result() {
+        let (root, doc, review) = fixture(); let host = Host::default();
+        { let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().into()); state.document = Some(doc.clone()); }
+        let (operation, _, doc) = begin_validation(&host, "trusted").unwrap();
+        host.cancel(false).unwrap();
+        assert!(install_validation(&operation, &doc, None, Some(review)).is_err(), "cancelled completion installed a review token");
+    }
+    #[test]
+    fn w4d_failed_replacement_cannot_restore_old_completion() {
+        let (root, doc, review) = fixture(); let host = Host::default();
+        { let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().into()); state.document = Some(doc.clone()); }
+        let (operation, _, doc) = begin_validation(&host, "trusted").unwrap();
+        revoke_review(&host, "trusted");
+        assert!(destination(&doc, "{}", Some("bad/id")).is_err());
+        assert!(install_validation(&operation, &doc, None, Some(review)).is_err(), "old same-revision completion restored revoked authority");
+    }
+    fn lifecycle_fixture(submap: bool) -> (tempfile::TempDir, Host, Document, Review) {
+        let (root, mut doc, mut review) = fixture();
+        doc.relative = if submap { G17_EXAMPLE } else { "roguelike/data/items/components/sample.json" }.into();
+        let path = root.path().join(&doc.relative);
+        fs::create_dir_all(path.parent().unwrap()).unwrap(); fs::write(path, &doc.original).unwrap();
+        review.variant = true;
+        review.destination = if submap { "roguelike/data/layouts/variant.json" } else { "roguelike/data/items/components/variant.json" }.into();
+        fs::create_dir_all(root.path().join(&review.destination).parent().unwrap()).unwrap();
+        doc.review = Some(review.clone());
+        let host = Host::default();
+        { let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().into()); state.ready = true;
+          if submap { state.document = Some(doc.clone()); } else { state.item_document = Some(doc.clone()); } }
+        (root, host, doc, review)
+    }
+    #[test]
+    fn w4d_live_admission_rejects_edit_replacement_and_project_switch() {
+        for submap in [false, true] {
+            for boundary in ["edit", "replace", "close", "switch", "cancel"] {
+                let (root, host, doc, review) = lifecycle_fixture(submap);
+                let other_root = tempfile::tempdir().unwrap();
+                // Hold an obsolete local snapshot, then pause the real admission helper.
+                let snapshot = session_doc(&host, &doc.token).unwrap().1;
+                let result = admit_apply(&host, &snapshot.token, &review.token, true, || {
+                    match boundary {
+                        "edit" => advance_document(&host, &doc.token).unwrap(),
+                        "replace" => { let mut state = host.inner.lock().unwrap(); current_document(&mut state, &doc.token).unwrap().token = "replacement".into(); }
+                        "close" | "switch" => { host.cancel(true).unwrap(); if boundary == "switch" { host.inner.lock().unwrap().root = Some(other_root.path().into()); } }
+                        _ => { host.cancel(false).unwrap(); }
+                    }
+                });
+                assert!(result.is_err(), "{submap}/{boundary}");
+                assert_eq!(fs::read(root.path().join(&doc.relative)).unwrap(), doc.original);
+                assert!(!root.path().join(&review.destination).exists());
+                assert_eq!(fs::read_dir(other_root.path()).unwrap().count(), 0);
+                if boundary == "edit" || boundary == "cancel" {
+                    let (operation, _, current) = begin_validation(&host, &doc.token).unwrap();
+                    install_validation(&operation, &current, None, Some(review.clone())).unwrap(); drop(operation);
+                    let (_transaction, _, _, _) = admit_apply(&host, &doc.token, &review.token, true, || {}).unwrap();
+                }
+            }
+        }
+    }
+    #[test]
+    fn w4d_late_completion_and_cleanup_cannot_touch_new_owner() {
+        for submap in [false, true] {
+            let (_root, host, doc, review) = lifecycle_fixture(submap);
+            let (old, _, snapshot) = begin_validation(&host, &doc.token).unwrap();
+            // An in-flight replacement is rejected, without changing attempt identity.
+            assert_eq!(begin_validation(&host, &doc.token).err().unwrap().code, "BUSY");
+            assert_eq!(session_doc(&host, &doc.token).unwrap().1.attempt, snapshot.attempt);
+            host.cancel(false).unwrap();
+            let (new, _, current) = begin_validation(&host, &doc.token).unwrap();
+            let mut newest = review.clone(); newest.token = "new-review".into();
+            install_validation(&new, &current, None, Some(newest)).unwrap();
+            assert_eq!(install_validation(&old, &snapshot, Some("obsolete".into()), Some(review)).unwrap_err().code, "CANCELLED");
+            drop(old);
+            let state = host.inner.lock().unwrap(); assert_eq!(state.busy, Some(new.id)); drop(state);
+            let current = session_doc(&host, &doc.token).unwrap().1;
+            assert_eq!(current.review.unwrap().token, "new-review"); assert!(current.evidence_inputs.is_none());
+            drop(new); assert!(host.inner.lock().unwrap().busy.is_none());
+        }
+    }
+    #[test]
+    fn w4d_failed_accepted_replacement_and_edit_revoke_attempt() {
+        for submap in [false, true] {
+            let (_root, host, doc, review) = lifecycle_fixture(submap);
+            let (old, _, snapshot) = begin_validation(&host, &doc.token).unwrap();
+            advance_document(&host, &doc.token).unwrap();
+            assert_eq!(install_validation(&old, &snapshot, None, Some(review.clone())).unwrap_err().code, "DRAFT_CHANGED");
+            host.cancel(false).unwrap();
+            let (replacement, _, current) = begin_validation(&host, &doc.token).unwrap();
+            assert!(destination(&current, "{}", Some("bad/id")).is_err()); drop(replacement);
+            assert!(install_validation(&old, &snapshot, None, Some(review.clone())).is_err()); drop(old);
+            assert!(session_doc(&host, &doc.token).unwrap().1.review.is_none());
+            assert_eq!(admit_apply(&host, &doc.token, &review.token, true, || {}).err().unwrap().code, "REVIEW_REQUIRED");
+            assert_eq!(session_doc(&host, &doc.token).unwrap().1.original, doc.original);
+        }
+    }
+    #[test]
+    fn w4d_reserved_apply_consumes_once_and_refuses_conflicts() {
+        for submap in [false, true] {
+            let (root, host, doc, review) = lifecycle_fixture(submap);
+            let (transaction, selected, snapshot, reviewed) = admit_apply(&host, &doc.token, &review.token, true, || {}).unwrap();
+            assert_eq!(host.cancel(false).unwrap_err().code, "BUSY");
+            assert_eq!(host.cancel(true).unwrap_err().code, "BUSY");
+            assert_eq!(advance_document(&host, &doc.token).unwrap_err().code, "BUSY");
+            assert_eq!(begin_validation(&host, &doc.token).err().unwrap().code, "BUSY");
+            assert_eq!(Operation::begin(&host).err().unwrap().code, "BUSY");
+            assert_eq!(admit_apply(&host, &doc.token, &review.token, true, || {}).err().unwrap().code, "BUSY");
+            assert_eq!(session_doc(&host, &doc.token).unwrap().1.revision, doc.revision);
+            publish(&selected, &snapshot, &reviewed, Fault::None).unwrap(); drop(transaction);
+            assert_eq!(admit_apply(&host, &doc.token, &review.token, true, || {}).err().unwrap().code, "REVIEW_REQUIRED");
+            assert_eq!(fs::read(root.path().join(review.destination)).unwrap(), reviewed.draft.as_bytes());
+            assert_eq!(fs::read(root.path().join(doc.relative)).unwrap(), doc.original);
+        }
+    }
+    #[test]
+    fn w4d_failed_transaction_releases_owner_without_reusing_review() {
+        for submap in [false, true] {
+            for fault in [Fault::BeforeStage, Fault::AfterStage, Fault::BeforeReplace] {
+                let (root, host, doc, review) = lifecycle_fixture(submap);
+                let (transaction, selected, snapshot, reviewed) = admit_apply(&host, &doc.token, &review.token, true, || {}).unwrap();
+                assert!(publish(&selected, &snapshot, &reviewed, fault).is_err()); drop(transaction);
+                assert!(!host.inner.lock().unwrap().applying); assert!(host.inner.lock().unwrap().busy.is_none());
+                assert!(!root.path().join(&review.destination).exists());
+                assert_eq!(admit_apply(&host, &doc.token, &review.token, true, || {}).err().unwrap().code, "REVIEW_REQUIRED");
+                let (next, _, current) = begin_validation(&host, &doc.token).unwrap();
+                install_validation(&next, &current, None, Some(review)).unwrap();
+                assert_eq!(session_doc(&host, &doc.token).unwrap().1.original, doc.original);
+            }
+        }
+    }
     fn fixture() -> (tempfile::TempDir, Document, Review) {
         let root = tempfile::tempdir().unwrap();
         let relative = "roguelike/data/buildings/commercial/sample.json";
@@ -823,6 +974,7 @@ mod tests {
             writable: true,
             evidence_inputs: None,
             revision: 0,
+            attempt: 0,
         };
         let review = Review {
             token: "reviewed".into(),

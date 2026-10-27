@@ -25,6 +25,10 @@ export async function submapJourney(page,root,output,receipt,context) {
   const example=JSON.parse(await page.getByTestId("placement-receipt").textContent());assert(example.access_source.sha256);assert.equal(example.actors[0].actual_count,1);
   await b("Close project").click();await idle();await b("Open directory").click();await idle();await open(asset);
   assert.equal(await source(),originals.get(asset).toString());assert.equal((await stat(resolve(root,asset))).mtimeMs,metadata.mtimeMs);
+  // Park an independent editor draft through cancellation and publication.
+  const item="roguelike/data/items/components/clay_pot.json", itemOriginal=await readFile(resolve(root,item));
+  await open(item);await eb("Begin edit").click();await page.getByLabel("Item weight (kg)").fill("0.7");
+  const parkedItem=await source();await b("Hide item").click();
   await eb("Begin edit").click();await canvas();
   assert(await b("Pencil · B").isDisabled());assert(await b("Fill · R").isDisabled());
   assert(!(await page.getByLabel("Placement creature").innerText()).includes("player"));
@@ -54,7 +58,38 @@ export async function submapJourney(page,root,output,receipt,context) {
   await b("Preview draft").click();await editor().locator('.source-editor').fill(moved+" ");await idle();assert.equal(await page.getByTestId("draft-verdict").count(),0);
   await editor().locator('.source-editor').fill(moved);
   await eb("Save as new variant").click();await page.getByLabel("New variant ID").fill("w4c_guard_room");
-  const finalDraft=await source();await b("Preview draft").click();await idle();
+  const finalDraft=await source();
+  // Hold *real completed host responses* at the renderer boundary. This is a
+  // frontend late-handler test; Rust's pre-install boundary is covered by the
+  // deterministic host helpers, without adding privileged test IPC commands.
+  await page.evaluate(()=>{
+    const original=window.fetch;
+    window.w4dGates=[];
+    window.fetch=async function(input,init) {
+      if(!String(input).endsWith("/validate_document") || window.w4dGates.length>=2) return original.call(this,input,init);
+      const gate={args:JSON.parse(init.body)};window.w4dGates.push(gate);
+      const response=await original.call(this,input,init);gate.response=await response.clone().json();
+      await new Promise(resolve=>{gate.release=resolve;});gate.delivered=true;
+      return response;
+    };
+    window.w4dRestore=()=>{window.fetch=original;};
+  });
+  await b("Preview draft").click();await page.waitForFunction(()=>window.w4dGates[0]?.response);
+  const obsolete=await page.evaluate(()=>({args:window.w4dGates[0].args,result:window.w4dGates[0].response.result}));
+  assert(obsolete.result.review_token);
+  await b("Cancel authoring request").click();await idle();
+  assert.equal(await source(),finalDraft);assert.equal(await page.getByTestId("draft-verdict").count(),0);
+  assert(await eb("Apply variant").isDisabled());
+  assert.equal((await ipc("apply_document",{token:obsolete.args.token,reviewToken:obsolete.result.review_token,confirmed:true})).error?.code,"REVIEW_REQUIRED");
+  await b("Preview draft").click();await page.waitForFunction(()=>window.w4dGates[1]?.response);
+  await page.evaluate(()=>window.w4dGates[0].release());
+  await page.waitForFunction(()=>window.w4dGates[0].delivered);
+  // Flush renderer work deterministically; no timing sleep.
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  assert(await b("Cancel authoring request").isVisible());
+  assert.equal(await page.getByTestId("draft-verdict").count(),0);
+  await page.evaluate(()=>{window.w4dGates[1].release();window.w4dRestore();});await idle();
+  receipt.checks.push("W4D real completed validation held at renderer; accepted cancel revoked host token, exact draft retained, old completion could not restore verdict or clear newer preview; fresh production result accepted");
   let verdict=JSON.parse(await page.getByTestId("draft-receipt").textContent());assert(verdict.valid);assert(verdict.review_token);
   let evidence=JSON.parse(await page.getByTestId("placement-receipt").textContent());
   assert.deepEqual(evidence.actors[0].source_xy,[6,2]);assert.deepEqual(evidence.actors[0].xy,[41,20]);assert.equal(evidence.actors[0].actual_count,1);assert.deepEqual(evidence.actors[0].actor_classes,["Actor"]);
@@ -69,6 +104,10 @@ export async function submapJourney(page,root,output,receipt,context) {
   const saved=await readFile(resolve(root,destination));assert.equal(saved.toString(),finalDraft);assert.equal(await source(),finalDraft);
   await b("Preview draft").click();await idle();evidence=JSON.parse(await page.getByTestId("placement-receipt").textContent());assert.equal(evidence.source_sha256,createHash("sha256").update(saved).digest("hex"));
   receipt.placement=evidence;receipt.variant={path:destination,sha256:evidence.source_sha256};
+  await b("Show item clay_pot").click();assert.equal(await source(),parkedItem);
+  await eb("Discard / Revert").click();await b("Hide item").click();
+  assert.deepEqual(await readFile(resolve(root,item)),itemOriginal);
+  receipt.checks.push("W4D parked item draft survived submap edits, cancellation, fresh preview and publication byte-for-byte; source item unchanged");
   await canvas();await page.getByLabel("Placed record",{exact:true}).selectOption("0");await shot("submap-source");
   receipt.checks.push("read-only example → exact shared marker draft; add/move/delete, undo/redo, raw freeze, stale job rejection, source/scene coordinates, real Actor, minimum-window diagnostics, sidecar invalidation, new-file publish and byte-exact reopen");
   // Exercise native host capabilities directly after completing the visible journey.

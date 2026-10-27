@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { type RequestLease } from "./requests";
 import { creatureModel, creatureValue } from "./creature";
 import { request, asFailure, type CreatureContext, type Inspection } from "./protocol";
 
 export function CreatureEditor(p: {
   draft: string; path: string; context?: CreatureContext; selectedId?: string;
   disabled: string; evidenceStale: boolean; validated: boolean; dirty: boolean; active: boolean;
-  busy: boolean; setBusy: (s: string) => void; onCancel: () => void; onSource: () => void; onFactory: () => void;
+  busy: boolean; beginRequest: (label: string) => RequestLease; cancelVersion: number; onCancel: () => void; onSource: () => void; onFactory: () => void;
   onEdit: (edit: (text: string) => string, label: string) => void;
   onUndo: () => void; onRedo: () => void; canUndo: boolean; canRedo: boolean;
 }) {
@@ -16,13 +17,14 @@ export function CreatureEditor(p: {
   const [view, setView] = useState("Supported fields"), [reference, setReference] = useState<Inspection | null>(null), [error, setError] = useState("");
   const generation = useRef(0);
   useEffect(() => { generation.current++; return () => {generation.current++;}; }, [p.active, p.path]);
+  useEffect(() => { generation.current++; setReference(null); }, [p.cancelVersion]);
   const observed = p.validated && !p.evidenceStale ? record?.factory : null;
   const currentRefs = !p.evidenceStale && (!p.dirty || p.validated);
   async function inspectReference(path: string) {
-    const version = ++generation.current; setReference(null); setError(""); p.setBusy("Inspecting direct layout reference…");
-    try { const r = await request<Inspection>("inspect", {asset:path}); if(version === generation.current) setReference(r.result); }
-    catch(e) { if(version === generation.current) setError(asFailure(e).message); }
-    finally { p.setBusy(""); }
+    const version = ++generation.current; setReference(null); setError(""); const lease = p.beginRequest("Inspecting direct layout reference…");
+    try { const r = await request<Inspection>("inspect", {asset:path}); if(lease.current() && version === generation.current) setReference(r.result); }
+    catch(e) { if(lease.current() && version === generation.current) setError(asFailure(e).message); }
+    finally { lease.finish(); }
   }
   return <section className="item-editor" data-testid="creature-editor">
     <div className="pane-heading"><div><h2>Creature definition</h2><code>{String(values.id || record?.id || "Invalid source")} · {p.path}</code></div>

@@ -3,6 +3,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { Authoring } from "./Authoring";
 import { MapView } from "./MapView";
+import { requestLease } from "./requests";
 import {
   asFailure,
   call,
@@ -112,6 +113,12 @@ export default function App() {
     return false;
   }
   const epoch = useRef(0);
+  const [cancelVersion, setCancelVersion] = useState(0);
+  function beginRequest(label: string) {
+    const lease = requestLease(epoch, () => setBusy(""));
+    setBusy(label);
+    return lease;
+  }
   function clear() {
     setDirty(false);
     setPoolDocument(null); setPoolActive(false); setPoolDirty(false); setTrail(null);
@@ -127,7 +134,7 @@ export default function App() {
     setCell(null);
     setError(null);
   }
-  async function loadAsset(asset: string, token: number, generate = true) {
+  async function loadAsset(asset: string, token: number, generate = true, reopened?: Inspection) {
     setCreatureActive(false);
     setPoolActive(false);
     setItemActive(false); setRecipeActive(false);
@@ -140,7 +147,7 @@ export default function App() {
     const editable =
       asset.startsWith("roguelike/data/buildings/") &&
       !asset.includes("/plaza/") || (asset.startsWith("roguelike/data/layouts/") && asset != "roguelike/data/layouts/starting_lab.json") || asset === "roguelike/docs/examples/g17_authored_creature_room.json";
-    const inspected = editable
+    const inspected = reopened ? {result: reopened} : editable
       ? await call<Inspection>("open_document", { asset })
       : await request<Inspection>("inspect", { asset });
     if (token !== epoch.current) return;
@@ -192,15 +199,15 @@ export default function App() {
   }
   useEffect(() => { void open(); }, []);
   async function open(value?: string, discard = false) {
+    if (busy.includes("applying")) return;
     if (!discard && protect(() => void open(value, true))) return;
     const token = ++epoch.current;
-    clear();
-    setPath(value || "");
     setBusy("Checking repository and runtime…");
     setStatus("Opening repository…");
     try {
       const info = await call<Identity>("open_project", { path: value ?? null });
       if (token !== epoch.current) return;
+      clear();
       setIdentity(info.result);
       setPath(info.result.source.root);
       setBusy("Discovering supported layouts…");
@@ -274,14 +281,15 @@ export default function App() {
   }
   async function cancel(close = false, discard = false) {
     if (close && !discard && protect(() => void cancel(true, true))) return;
-    ++epoch.current;
     try {
       await invoke(close ? "close_project" : "cancel_worker");
     } catch (e) {
       setError(asFailure(e));
-      setBusy("");
       return;
     }
+    ++epoch.current;
+    setCancelVersion(v => v + 1);
+    setError(null);
     setBusy("");
     if (close) clear();
     setStatus(
@@ -347,7 +355,7 @@ export default function App() {
     } catch(e) { if(token === epoch.current) setError(asFailure(e)); } finally { if(token === epoch.current) setBusy(""); }
   }
   async function creatureApplied(asset: string, result: unknown) {
-    const token=++epoch.current; setCreatureDirty(false); setReceipt(result); setDependencyVersion(v=>v+1);
+    const token=epoch.current; setCreatureDirty(false); setReceipt(result); setDependencyVersion(v=>v+1);
     const catalog=await request<{assets:Asset[]}>("describe"); if(token !== epoch.current) return;
     setAssets(catalog.result.assets);
     const r=await call<Inspection>("open_document",{asset}); if(token !== epoch.current) return;
@@ -359,7 +367,7 @@ export default function App() {
     setRecipeActive(false); setItemActive(true); setCreatureActive(false);
   }
   async function recipeApplied(asset: string, result: unknown) {
-    const token=++epoch.current; setRecipeDirty(false); setReceipt(result); setDependencyVersion(v=>v+1);
+    const token=epoch.current; setRecipeDirty(false); setReceipt(result); setDependencyVersion(v=>v+1);
     const catalog=await request<{assets:Asset[]}>("describe"); if(token !== epoch.current) return;
     setAssets(catalog.result.assets);
     const r=await call<Inspection>("open_document",{asset}); if(token !== epoch.current) return;
@@ -371,7 +379,7 @@ export default function App() {
     setStatus(`Recipe variant saved and reopened: ${asset}. New sessions discover this file.`);
   }
   async function itemApplied(asset: string, result: unknown) {
-    const token = ++epoch.current;
+    const token = epoch.current;
     setItemDirty(false); setReceipt(result); setDependencyVersion(v => v+1);
     const catalog = await request<{assets: Asset[]}>("describe");
     if (token !== epoch.current) return;
@@ -388,7 +396,7 @@ export default function App() {
     setStatus(`Item saved and reopened: ${asset}. No pool reference changed.`);
   }
   async function poolApplied(asset: string, result: unknown) {
-    const token = ++epoch.current;
+    const token = epoch.current;
     setPoolDirty(false); setReceipt(result);
     const catalog = await request<{ assets: Asset[] }>("describe");
     if (token !== epoch.current) return;
@@ -407,15 +415,20 @@ export default function App() {
     setStatus(`Pool saved and reopened: ${asset}. No container references changed.`);
   }
   async function applied(asset: string, result: unknown) {
-    setDirty(false);
+    const token = epoch.current;
     setDependencyVersion(v => v + 1);
     setReceipt(result);
     const catalog = await request<{ assets: Asset[] }>("describe");
+    if (token !== epoch.current) return;
     setAssets(catalog.result.assets);
-    await refresh(asset, true);
-    setStatus(
-      `Applied and reopened ${asset}. Current selection profiles unchanged.`,
-    );
+    // Verify before replacing the mounted draft; failure retains its exact text.
+    const reopened = await call<Inspection>("open_document", {asset});
+    if (token !== epoch.current) return;
+    verifyReopened(reopened.result, result);
+    setDirty(false);
+    await loadAsset(asset, token, true, reopened.result);
+    if (token !== epoch.current) return;
+    setStatus(`Applied and reopened ${asset}. Current selection profiles unchanged.`);
   }
   const visibleAssets = assets.filter(
     (a) =>
@@ -821,22 +834,22 @@ export default function App() {
           )}
           {creatureDocument && <div hidden={!creatureActive}><Authoring key={creatureDocument.document_token}
             document={creatureDocument} onDirty={setCreatureDirty} onApplied={creatureApplied} onError={setError}
-            busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={creatureActive} onCancel={()=>void cancel()} selectedCreatureId={selectedCreatureId} dependencyVersion={dependencyVersion} /></div>}
           {recipeDocument && <div hidden={!recipeActive || creatureActive}><Authoring key={recipeDocument.document_token}
             document={recipeDocument} onDirty={setRecipeDirty} onApplied={recipeApplied} onError={setError}
-            busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={recipeActive && !creatureActive} onCancel={()=>void cancel()} selectedRecipeId={selectedRecipeId}
             onReturn={itemDocument ? returnToItem : undefined} onRecipeItem={(id,path)=>void openItem(id,null,path)} dependencyVersion={dependencyVersion} /></div>}
           {itemDocument && <div hidden={!itemActive || recipeActive || creatureActive}><Authoring key={itemDocument.document_token}
             document={itemDocument} onDirty={setItemDirty} onApplied={itemApplied} onError={setError}
-            busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={itemActive && !recipeActive && !creatureActive} onRecipe={(id,path)=>{recipeReturnRelation.current = document.activeElement?.getAttribute("data-recipe-relation") || "ingredient"; void openRecipe(id,path);}} onCancel={() => void cancel()} itemTrail={itemTrail} selectedItemId={selectedItemId}
             onReturn={poolDocument ? () => {setItemActive(false); setPoolActive(true); setCreatureActive(false);} : undefined}
             onItemPool={id => void openPool(id, trail)} dependencyVersion={dependencyVersion} /></div>}
           {poolDocument && <div hidden={!poolActive || itemActive || recipeActive || creatureActive}><Authoring key={poolDocument.document_token}
             document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
-            busy={busy} setBusy={setBusy} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
+            busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={poolActive && !itemActive && !recipeActive && !creatureActive} onCancel={() => void cancel()} trail={trail}
             onItem={(id, context) => void openItem(id, context)}
             poolEntryFocus={itemTrail?.path === poolDocument.path || itemTrail?.poolId === poolDocument.id ? itemTrail.index : undefined}
@@ -849,7 +862,8 @@ export default function App() {
               onApplied={applied}
               onError={setError}
               busy={busy}
-              setBusy={setBusy}
+              beginRequest={beginRequest}
+              cancelVersion={cancelVersion}
               canvasHost={canvasHost}
               diskPreview={preview}
               seed={Number(seed)}

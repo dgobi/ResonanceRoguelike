@@ -26,6 +26,7 @@ import {
   type RecipeContext,
   type CreatureContext,
 } from "./protocol";
+import { type RequestLease } from "./requests";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
 
 type Verdict = {
@@ -55,7 +56,8 @@ export function Authoring({
   onApplied,
   onError,
   busy,
-  setBusy,
+  beginRequest,
+  cancelVersion,
   canvasHost,
   diskPreview,
   seed,
@@ -72,7 +74,8 @@ export function Authoring({
   onApplied: (path: string, receipt: unknown) => Promise<void>;
   onError: (e: Failure | null) => void;
   busy: string;
-  setBusy: (s: string) => void;
+  beginRequest: (label: string) => RequestLease;
+  cancelVersion: number;
   canvasHost: HTMLDivElement | null;
   diskPreview: Preview | null;
   seed: number;
@@ -99,7 +102,16 @@ export function Authoring({
   const submap = document.route === "authored_submap";
   const writable = !(item || recipe || creature || submap) || document.editable;
   const revocation = useRef<Promise<unknown>>(Promise.resolve());
-  function revoke() { revocation.current = revocation.current.then(()=>invoke("invalidate_document", {token:document.document_token})).catch(e=>{if(mounted.current) onError(asFailure(e));}); }
+  function revoke() {
+    const next = revocation.current.catch(() => {}).then(() => invoke("invalidate_document", {token: document.document_token}));
+    revocation.current = next;
+    void next.catch(() => {}); // Callers retain the rejection; no obsolete global error handler.
+    return next;
+  }
+  const acknowledged = useRef(document.raw);
+  const editVersion = useRef(0);
+  const applying = useRef(false);
+  const [pendingEdit, setPendingEdit] = useState(false);
   const [draft, setDraft] = useState(document.raw),
     [editing, setEditing] = useState(false);
   const [tab, setTab] = useState("properties"),
@@ -135,6 +147,7 @@ export function Authoring({
       if (submap) revoke();
   }, [dependencyVersion, seed]);
   useEffect(() => { version.current++; setConfirm(false); }, [active]);
+  useEffect(() => { version.current++; setVerdict(null); setConfirm(false); }, [cancelVersion]);
   useEffect(() => {
     onDirty(dirty);
   }, [dirty, onDirty]);
@@ -169,17 +182,36 @@ export function Authoring({
     };
   }, [document.document_token, busy, onError]);
   function change(text: string, visual = false) {
+    if (applying.current || busy.includes("applying")) return;
+    // WebView textarea events may repeat the same normalized CRLF value on
+    // focus changes. A no-op must not start another acknowledgement/render loop.
+    if (text === latest.current) return;
     if (!visual) {
       history.current.clear();
       gesture.current = null;
     }
-    revoke();
+    const edit = ++editVersion.current;
+    const admitted = revoke();
+    setPendingEdit(true);
     latest.current = text;
     version.current++;
     setDraft(text);
     setVerdict(null);
     setConfirm(false);
     setLocalError("");
+    void admitted.then(() => {
+      acknowledged.current = text;
+      if (mounted.current && editVersion.current === edit) setPendingEdit(false);
+    }, error => {
+      if (mounted.current && editVersion.current === edit) {
+        onError(asFailure(error));
+        latest.current = acknowledged.current;
+        setDraft(acknowledged.current);
+        setPendingEdit(false);
+        history.current.clear();
+        setLocalError("Edit was not accepted. Publication is in progress.");
+      }
+    });
   }
   function visualEdit(edit: (text: string) => string, label: string) {
     if (!editing || disk?.changed || busy.includes("applying")) return;
@@ -225,11 +257,12 @@ export function Authoring({
   async function validate(showDiff = true) {
     const v = ++version.current,
       text = latest.current;
-    setBusy("Validating unsaved draft…");
+    const request = beginRequest("Validating unsaved draft…");
     setVerdict(null);
     onError(null);
     try {
       await revocation.current;
+      if (!request.current() || v !== version.current) return;
       const r = await call<Verdict>("validate_document", {
         token: document.document_token,
         draft: text,
@@ -237,7 +270,7 @@ export function Authoring({
         seed,
       });
       if (
-        mounted.current &&
+        mounted.current && request.current() &&
         currentVerdict(v, version.current, text, latest.current)
       ) {
         setVerdict(r.result);
@@ -246,14 +279,16 @@ export function Authoring({
           setTab(r.result.valid ? "diff" : "problems");
       }
     } catch (e) {
-      if (mounted.current && v === version.current) onError(asFailure(e));
+      if (mounted.current && request.current() && v === version.current) onError(asFailure(e));
     } finally {
-      if (mounted.current) setBusy("");
+      request.finish();
     }
   }
   async function apply() {
+    if (pendingEdit || applying.current || !verdict?.review_token) return;
+    applying.current = true;
     setConfirm(false);
-    setBusy("Revalidating and applying one file…");
+    const request = beginRequest("Revalidating and applying one file…");
     onError(null);
     try {
       const r = await call<{
@@ -266,17 +301,21 @@ export function Authoring({
         reviewToken: verdict?.review_token,
         confirmed: true,
       });
+      if (!request.current()) return;
       onDirty(false);
       await onApplied(r.result.path, r.result);
     } catch (e) {
-      onError(asFailure(e));
-      setVerdict(null);
-      onDirty(latest.current !== document.raw);
+      if (request.current()) {
+        onError(asFailure(e));
+        setVerdict(null);
+        onDirty(latest.current !== document.raw);
+      }
     } finally {
-      setBusy("");
+      applying.current = false;
+      request.finish();
     }
   }
-  const reason = !editing
+  const reason = pendingEdit ? "Waiting for edit acknowledgement." : !editing
     ? "Begin editing to create a draft."
     : (recipe || creature || submap) && !variant
       ? "Create a unique new variant before publication."
@@ -288,13 +327,13 @@ export function Authoring({
           ? "Enter a new variant ID."
           : disk?.changed
             ? "Disk changed: inspect and reload or keep your draft."
-            : !verdict?.valid
+            : !verdict?.valid || !verdict.review_token
               ? "Validate this exact draft before applying."
               : busy
                 ? "Wait for the active request."
                 : "";
   return (
-    <section className="authoring" data-testid="authoring">
+    <section className="authoring" data-testid="authoring" data-edit-pending={pendingEdit}>
       {active && canvasHost && pool && createPortal(<PoolEditor
         draft={draft} path={target} context={document.pool_context}
         disabled={!editing ? "Begin edit to change this pool." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
@@ -322,7 +361,7 @@ export function Authoring({
         draft={draft} path={target} context={verdict?.creature_context || document.creature_context} selectedId={selectedCreatureId}
         active={active} dirty={dirty} validated={!!verdict?.valid} evidenceStale={!!disk?.changed || !!disk?.dependencies_changed || evidenceVersion !== dependencyVersion}
         disabled={!writable ? "Read-only creature family or unresolved source." : !editing ? "Begin edit to change creature properties." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
-        busy={!!busy} setBusy={setBusy} onCancel={onCancel} onSource={()=>setTab("source")} onFactory={()=>void validate(false)}
+        busy={!!busy} beginRequest={beginRequest} cancelVersion={cancelVersion} onCancel={onCancel} onSource={()=>setTab("source")} onFactory={()=>void validate(false)}
         onEdit={visualEdit} onUndo={()=>historyStep(false)} onRedo={()=>historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
       /></div>, canvasHost)}
       {active && !pool && !item && !recipe && !creature && canvasHost &&
@@ -332,7 +371,7 @@ export function Authoring({
             authoredSubmap={submap}
             sourcePath={target}
             catalog={document.catalog}
-            previewDisabled={!writable || !!disk?.changed}
+            previewDisabled={!writable || !!disk?.changed || pendingEdit}
             disabled={
               !writable ? "Read-only source. Open a supported layout in data/layouts to author a variant." : !editing
                 ? submap ? "Begin edit to place creatures." : "Begin edit to paint."
@@ -376,7 +415,7 @@ export function Authoring({
         className={disk?.changed ? "notice warning" : "notice"}
         data-testid="draft-state"
       >
-        {disk?.changed
+        {pendingEdit ? "Edit pending" : disk?.changed
           ? "Externally changed · unsaved draft retained"
           : dirty
             ? "Unsaved draft"
@@ -621,7 +660,7 @@ export function Authoring({
       {editing && (
         <div className="edit-actions">
           <button
-            disabled={!!busy || !dirty}
+            disabled={!!busy || !dirty || pendingEdit}
             title={
               !dirty
                 ? "Change the draft first"

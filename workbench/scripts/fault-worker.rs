@@ -5,8 +5,11 @@ fn main() {
     let request = io::stdin().lock().lines().next().unwrap().unwrap();
     let fault = std::env::var("WORKBENCH_FAULT").unwrap_or_default();
     if fault.starts_with("draft-worker-") {
-        if request.contains("preview_draft") {
+        let inject = request.contains("preview_draft") && std::env::var("WORKBENCH_FAULT_ONCE")
+            .map(|path| std::fs::OpenOptions::new().write(true).create_new(true).open(path).is_ok()).unwrap_or(true);
+        if inject {
             if fault == "draft-worker-exit" { std::process::exit(17); }
+            if fault == "draft-worker-malformed" { println!("unexpected stdout before JSON\n{{}}"); return; }
             std::fs::write("fault-marker.txt", "temporary draft fault fixture").unwrap();
             std::thread::sleep(std::time::Duration::from_secs(120));
             std::process::exit(19);

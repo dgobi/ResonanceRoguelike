@@ -37,7 +37,7 @@ struct Session {
     root: Option<PathBuf>,
     child: Option<Child>,
     scratch: Option<tempfile::TempDir>,
-    busy: bool,
+    busy: Option<u64>,
     ready: bool,
     discovered: std::collections::HashSet<String>,
     document: Option<authoring::Document>,
@@ -54,7 +54,7 @@ struct Host {
     ids: Arc<AtomicU64>,
 }
 impl Host {
-    fn cancel(&self, clear: bool) -> Result<(), Failure> {
+    fn cancel(&self, clear: bool) -> Result<u64, Failure> {
         let mut state = self.inner.lock().unwrap();
         if state.applying {
             return Err(failure(
@@ -63,12 +63,13 @@ impl Host {
                 "Wait for its result before closing or cancelling.",
             ));
         }
-        self.epoch.fetch_add(1, Ordering::SeqCst);
+        let epoch = self.epoch.fetch_add(1, Ordering::SeqCst) + 1;
         if let Some(mut child) = state.child.take() {
             let _ = child.kill();
             let _ = child.wait();
         }
-        state.busy = false;
+        state.busy = None;
+        authoring::revoke_all(&mut state);
         if clear {
             state.root = None;
             state.ready = false;
@@ -79,7 +80,50 @@ impl Host {
             state.recipe_document = None;
             state.creature_document = None;
         }
-        cleanup_scratch(&mut state)
+        cleanup_scratch(&mut state)?;
+        Ok(epoch)
+    }
+}
+
+fn busy_failure() -> Failure {
+    failure("BUSY", "A request is active.", "Wait for its result, or cancel a validation before retrying.")
+}
+
+/// Owns one host request through result installation, not merely child exit.
+/// Cancellation detaches this owner; its late cleanup cannot release a new one.
+struct Operation {
+    host: Host,
+    id: u64,
+    epoch: u64,
+}
+impl Operation {
+    fn reserve(host: &Host, state: &mut Session, applying: bool) -> Result<Self, Failure> {
+        if state.busy.is_some() || state.applying { return Err(busy_failure()); }
+        let id = host.ids.fetch_add(1, Ordering::SeqCst);
+        state.busy = Some(id);
+        state.applying = applying;
+        Ok(Self { host: host.clone(), id, epoch: host.epoch.load(Ordering::SeqCst) })
+    }
+    fn begin(host: &Host) -> Result<Self, Failure> {
+        Self::reserve(host, &mut host.inner.lock().unwrap(), false)
+    }
+    fn check(&self, state: &Session) -> Result<(), Failure> {
+        if self.host.epoch.load(Ordering::SeqCst) != self.epoch || state.busy != Some(self.id) {
+            return Err(failure("CANCELLED", "Request cancelled or replaced.", "Validate the current draft again."));
+        }
+        Ok(())
+    }
+}
+impl Drop for Operation {
+    fn drop(&mut self) {
+        let mut state = self.host.inner.lock().unwrap();
+        if state.busy == Some(self.id) {
+            // Handled errors and unwinding release only this request's resources.
+            if let Some(mut child) = state.child.take() { let _ = child.kill(); let _ = child.wait(); }
+            let _ = cleanup_scratch(&mut state);
+            state.busy = None;
+            state.applying = false;
+        }
     }
 }
 
@@ -257,27 +301,14 @@ fn parse_response(bytes: &[u8], id: &str) -> Result<Value, Failure> {
 
 fn run_worker(
     app: tauri::AppHandle,
-    host: Host,
+    operation: &Operation,
     request: Request,
-    expected_epoch: u64,
 ) -> Result<Value, Failure> {
     validate_request(&request)?;
+    let host = &operation.host;
     let id = format!("w0-{}", host.ids.fetch_add(1, Ordering::SeqCst));
-    let mut state = host.inner.lock().unwrap();
-    if host.epoch.load(Ordering::SeqCst) != expected_epoch {
-        return Err(failure(
-            "CANCELLED",
-            "Project changed.",
-            "Open the new project.",
-        ));
-    }
-    if state.busy {
-        return Err(failure(
-            "BUSY",
-            "A worker request is already running.",
-            "Wait or cancel the current request.",
-        ));
-    }
+    let state = host.inner.lock().unwrap();
+    operation.check(&state)?;
     let root = state.root.clone().ok_or_else(|| {
         failure(
             "NO_PROJECT",
@@ -288,6 +319,7 @@ fn run_worker(
     if request.op != "identify" && !state.ready {
         return Err(failure("WORKER_NOT_READY", "No verified worker handshake for this project.", "Reopen the project and resolve the startup problem."));
     }
+    drop(state);
     let runtime = startup::runtime(&app)?;
     // Parent-owned scratch survives until cancellation/exit is reaped, including
     // hard kills. Child tempdirs live here; no game-tree cwd or cache writes.
@@ -335,16 +367,7 @@ fn run_worker(
     if let Some(value) = request.draft {
         input["draft"] = json!(value);
     }
-    let sent = writeln!(child.stdin.take().unwrap(), "{}", input);
-    if let Err(error) = sent {
-        let _ = child.kill();
-        let _ = child.wait();
-        return Err(failure(
-            "WORKER_EXIT",
-            error,
-            "Inspect the runtime and retry.",
-        ));
-    }
+    let mut stdin = child.stdin.take().unwrap();
     let stdout = child.stdout.take().unwrap();
     let stderr = child.stderr.take().unwrap();
     // Bounded buffers while still draining pipes avoid deadlocks on diagnostics.
@@ -363,26 +386,31 @@ fn run_worker(
     }
     let output_thread = std::thread::spawn(move || drain(stdout));
     let diagnostic_thread = std::thread::spawn(move || drain(stderr));
+    let mut state = host.inner.lock().unwrap();
+    if let Err(error) = operation.check(&state) {
+        drop(state);
+        let _ = child.kill(); let _ = child.wait();
+        let _ = output_thread.join(); let _ = diagnostic_thread.join();
+        return Err(error);
+    }
     state.child = Some(child);
     state.scratch = Some(scratch);
-    state.busy = true;
     drop(state);
     let start = Instant::now();
+    let sent = writeln!(stdin, "{}", input);
+    drop(stdin);
     let outcome = loop {
         let mut state = host.inner.lock().unwrap();
-        if host.epoch.load(Ordering::SeqCst) != expected_epoch {
-            break Err(failure(
-                "CANCELLED",
-                "Worker cancelled; disposable work discarded.",
-                "Run the preview again when ready.",
-            ));
-        }
+        if let Err(error) = operation.check(&state) { break Err(error); }
         let child = state.child.as_mut().unwrap();
+        if let Err(error) = &sent {
+            let _ = child.kill(); let _ = child.wait(); state.child = None;
+            break cleanup_scratch(&mut state).and(Err(failure("WORKER_EXIT", error, "Inspect the runtime and retry.")));
+        }
         if start.elapsed() > Duration::from_secs(90) {
             let _ = child.kill();
             let _ = child.wait();
             state.child = None;
-            state.busy = false;
             if let Err(error) = cleanup_scratch(&mut state) {
                 break Err(error);
             }
@@ -395,14 +423,12 @@ fn run_worker(
         match child.try_wait() {
             Ok(Some(status)) => {
                 state.child = None;
-                state.busy = false;
                 break cleanup_scratch(&mut state).map(|()| status);
             }
             Err(e) => {
                 let _ = child.kill();
                 let _ = child.wait();
                 state.child = None;
-                state.busy = false;
                 if let Err(error) = cleanup_scratch(&mut state) {
                     break Err(error);
                 }
@@ -415,6 +441,7 @@ fn run_worker(
     };
     let bytes = output_thread.join().unwrap_or_default();
     let diagnostics = diagnostic_thread.join().unwrap_or_default();
+    operation.check(&host.inner.lock().unwrap())?;
     let status = outcome?;
     if !status.success() {
         return Err(failure(
@@ -438,15 +465,14 @@ fn run_worker(
     if input["op"] == "identify" && response["ok"] == true {
         verify_identity(&response["result"], &root, &runtime.bridge)?;
         let mut state = host.inner.lock().unwrap();
-        if host.epoch.load(Ordering::SeqCst) != expected_epoch {
-            return Err(failure("CANCELLED", "Project changed during handshake.", "Open the current project."));
-        }
+        operation.check(&state)?;
         state.ready = true;
         response["result"]["host_runtime"] = serde_json::to_value(runtime).unwrap();
     }
     if input["op"] == "describe" && response["ok"] == true {
         let mut state = host.inner.lock().unwrap();
-        if host.epoch.load(Ordering::SeqCst) == expected_epoch {
+        operation.check(&state)?;
+        {
             state.discovered = response["result"]["assets"]
                 .as_array()
                 .into_iter()
@@ -485,15 +511,20 @@ async fn open_project(
     host: tauri::State<'_, Host>,
     path: Option<String>,
 ) -> Result<Value, Failure> {
-    host.cancel(true)?;
+    let epoch = host.cancel(true)?;
     let (selection, config) = startup::resolve_project(&app, path.as_deref().map(Path::new))?;
-    host.inner.lock().unwrap().root = Some(selection.root.clone());
-    let epoch = host.epoch.load(Ordering::SeqCst);
+    let operation = {
+        let mut state = host.inner.lock().unwrap();
+        if host.epoch.load(Ordering::SeqCst) != epoch { return Err(failure("CANCELLED", "Project selection changed.", "Open the current project.")); }
+        let operation = Operation::reserve(&host, &mut state, false)?;
+        state.root = Some(selection.root.clone());
+        operation
+    };
     let host = host.inner().clone();
     tauri::async_runtime::spawn_blocking(move || {
         let mut response = run_worker(
             app,
-            host.clone(),
+            &operation,
             Request {
                 op: "identify".into(),
                 asset: None,
@@ -502,11 +533,11 @@ async fn open_project(
                 draft: None,
                 source_asset: None,
             },
-            epoch,
         )?;
         if response["ok"] == true {
             let state = host.inner.lock().unwrap();
-            if host.epoch.load(Ordering::SeqCst) != epoch || !state.ready {
+            operation.check(&state)?;
+            if !state.ready {
                 return Err(failure("CANCELLED", "Project changed before saving preferences.", "Open the current project."));
             }
             startup::save(&config, &selection.root)?;
@@ -523,8 +554,7 @@ async fn worker_request(
     host: tauri::State<'_, Host>,
     request: Request,
 ) -> Result<Value, Failure> {
-    if host.inner.lock().unwrap().applying
-        || ["validate_draft", "preview_draft"].contains(&request.op.as_str())
+    if ["validate_draft", "preview_draft"].contains(&request.op.as_str())
     {
         return Err(failure(
             "UNSUPPORTED_OPERATION",
@@ -532,19 +562,18 @@ async fn worker_request(
             "Open a discovered building.",
         ));
     }
-    let epoch = host.epoch.load(Ordering::SeqCst);
-    let host = host.inner().clone();
-    tauri::async_runtime::spawn_blocking(move || run_worker(app, host, request, epoch))
+    let operation = Operation::begin(&host)?;
+    tauri::async_runtime::spawn_blocking(move || run_worker(app, &operation, request))
         .await
         .map_err(|e| failure("HOST_FAILED", e, "Restart Workbench."))?
 }
 #[tauri::command]
 fn cancel_worker(host: tauri::State<'_, Host>) -> Result<(), Failure> {
-    host.cancel(false)
+    host.cancel(false).map(|_| ())
 }
 #[tauri::command]
 fn close_project(host: tauri::State<'_, Host>) -> Result<(), Failure> {
-    host.cancel(true)
+    host.cancel(true).map(|_| ())
 }
 
 fn main() {

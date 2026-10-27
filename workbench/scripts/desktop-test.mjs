@@ -2,7 +2,8 @@
 import { chromium } from "playwright-core";
 import { spawn, execFileSync } from "node:child_process";
 import { mkdir, readFile, writeFile, stat, readdir } from "node:fs/promises";
-import { resolve } from "node:path";
+import { resolve, basename } from "node:path";
+import { watch } from "node:fs";
 import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 
@@ -50,6 +51,7 @@ if (mode.startsWith("draft-worker-") || mode.startsWith("pool-worker-") || mode.
     workbench,
     "src-tauri/target/release/python/python.exe",
   );
+  env.WORKBENCH_FAULT_ONCE = resolve(output, `fault-once-${Date.now()}`);
 }
 let child, browser, page;
 const receipt = {
@@ -126,6 +128,10 @@ try {
   await page
     .getByRole("button", { name: "Open directory", exact: true })
     .click();
+  // A previous project remains visible until the host accepts the replacement.
+  // Its already-ready canvas is not evidence that this new open has completed.
+  if (!faultModes.includes(mode) && !["missing-worker", "missing-dependency"].includes(mode))
+    await page.waitForFunction(() => !document.querySelector(".status-dot.working"), null, {timeout:45000});
   if (mode === "interrupted-draft" || mode === "restart-draft") {
     const asset = "roguelike/data/buildings/commercial/workshop_b.json";
     const source = await readFile(resolve(root, asset));
@@ -178,9 +184,17 @@ try {
     const unsaved = submapFault ? (await draftControl.inputValue())+" " : "Unsaved draft for worker failure control";
     await draftControl.fill(unsaved);
     const start = performance.now();
+    // A file event from the diagnostic helper establishes that the owned worker
+    // reached the fault, without racing Cancel against process startup.
+    const faultReached = new Promise(resolveReached => {
+      const watcher=watch(output,(_event,name)=>{
+        if(String(name)===basename(env.WORKBENCH_FAULT_ONCE)) { watcher.close(); resolveReached(); }
+      });
+    });
     await page
       .getByRole("button", { name: poolFault || itemFault || recipeFault || creatureFault ? "Validate draft" : "Preview draft", exact: true })
       .click();
+    await faultReached;
     if (mode.endsWith("worker-cancel")) {
       await page
         .getByRole("button", { name: "Cancel authoring request", exact: true })
@@ -190,7 +204,7 @@ try {
       );
     } else {
       const code =
-        mode.endsWith("worker-exit") ? "WORKER_EXIT" : "WORKER_TIMEOUT";
+        mode.endsWith("worker-exit") ? "WORKER_EXIT" : mode.endsWith("worker-malformed") ? "MALFORMED_WORKER_OUTPUT" : "WORKER_TIMEOUT";
       await page
         .locator("footer")
         .getByText(new RegExp(code))
@@ -215,6 +229,11 @@ try {
     await page.screenshot({
       path: resolve(output, "draft-worker-failure.png"),
     });
+    await page.getByRole("button", {name:poolFault || itemFault || recipeFault || creatureFault ? "Validate draft" : "Preview draft",exact:true}).click();
+    await page.waitForFunction(()=>!document.querySelector(".status-dot.working"),null,{timeout:45000});
+    assert.equal(JSON.parse(await page.getByTestId("draft-receipt").textContent()).valid,true);
+    assert.equal(await draftControl.inputValue(),unsaved);
+    receipt.checks.push("same-session recovery: diagnostic helper forwards the next request to real production validation; retained exact draft passes");
     await page
       .getByRole("button", { name: "Discard / Revert", exact: true })
       .click();

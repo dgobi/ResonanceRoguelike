@@ -431,6 +431,22 @@ balance certification is implied. Failed physical placement/access blocks saving
   authoring request** to terminate a preview worker. Publication itself cannot
   be interrupted halfway through the trusted host transaction.
 
+The shared host retains request ownership through validation result installation.
+A replacement validation is rejected as `BUSY` while a request is active; cancel
+first or wait. An accepted validation immediately revokes its previous review,
+even if the new validation fails. Edits and accepted cancellation revoke earlier
+attempts and review tokens while retaining independent parked drafts. A pending
+edit is labelled until the host acknowledges it; a refused edit restores the
+last acknowledged source text.
+
+Apply checks and consumes the current document's exact reviewed bytes while
+reserving the transaction under the same lock. Cancellation or invalidation
+before that reservation prevents the write. After reservation, Cancel, edit and
+close return `BUSY`; they do not claim the transaction was cancelled. Failed
+publication consumes its review too: validate again before retrying. Existing
+source/dependency checks and the single-file atomic writer remain in effect.
+See [W4D delivery and deterministic boundary evidence](docs/W4D_DELIVERY.md).
+
 The complete [W2 demonstrated variant](docs/examples/apothecary_w2_furnished.json)
 is a review artifact outside the live content catalog. It was created/reopened
 through the native app on disposable current data. Its terrain changes at
