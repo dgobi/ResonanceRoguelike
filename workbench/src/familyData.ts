@@ -46,7 +46,7 @@ export function previewProblem(value: unknown): string {
   if(![v.image_sha256,v.draft_sha256,v.descriptor_sha256].every(h=>typeof h==="string" && /^[a-f0-9]{64}$/.test(h)) || !v.source || typeof v.contract!=="string" || typeof v.setup!=="string") return "Malformed preview identity";
   return "";
 }
-export type FactoryResult = {item_id: string; instance: Record<string, unknown>; comparisons: {field: string; declared: unknown; instance: unknown; equal: boolean}[]; consumer: string; scope: string; definition_sha256: string; source: Source; path: string; observed_at_utc: string; loaded_catalog_sha256: string};
+export type FactoryResult = {item_id: string; instance: Record<string, unknown>; comparisons: {field: string; declared: unknown; present?:boolean; effective_factory_value?:unknown; instance: unknown; equal: boolean}[]; consumer: string; scope: string; definition_sha256: string; source: Source; path: string; observed_at_utc: string; loaded_catalog_sha256: string};
 export type ItemRecord = {
   id: string; pointer: string; definition: Record<string, unknown>; diagnostics: Diagnostic[];
   capability: {contract: string; editable: boolean; supply_class?: string; fields: string[]; reason: string; weight_unit: string; tier_min: number; tier_max: number; tier_note: string; stack_note: string};
