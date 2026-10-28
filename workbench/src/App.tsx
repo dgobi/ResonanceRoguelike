@@ -193,7 +193,7 @@ export default function App() {
   function clear() {
     monitor.current.reset();
     setDirty(false);
-    setPoolDocument(null); setPoolActive(false); setPoolDirty(false); setTrail(null);
+    setPoolDocument(null); setPoolOrigin("");setPoolActive(false); setPoolDirty(false); setTrail(null);
     setContentDocuments({}); setActiveContent(""); setItemTrail(null);
     setIdentity(null);
     setAssets([]);
@@ -372,17 +372,17 @@ export default function App() {
     );
   }
   const [receipt, setReceipt] = useState<unknown>(null);
-  async function openPool(id: string, context: SourceTrail | null = null, discard = false, reload = false) {
+  async function openPool(id: string, context: SourceTrail | null = null, discard = false, reload = false, origin = "") {
     const matches = assets.filter(a => a.route === "contextual_loot_pool" && a.id === id), asset = matches[0];
     if (matches.length !== 1) { setError({code: "POOL_SOURCE", message: `Pool ${id} resolves to ${matches.length} supported files.`, remedy: "Correct duplicate/missing IDs or refresh the project catalogue."}); return; }
-    if (!reload && poolDocument?.path === asset.path) { setTrail(context); setPoolActive(true);  setActiveContent(""); return; }
-    if (poolDirty && !discard) { setPendingFiles([poolDocument!.path]); setPending(() => () => void openPool(id, context, true, reload)); return; }
+    if (!reload && poolDocument?.path === asset.path) { setPoolOrigin(origin);setTrail(context); setPoolActive(true);  setActiveContent(""); return; }
+    if (poolDirty && !discard) { setPendingFiles([poolDocument!.path]); setPending(() => () => void openPool(id, context, true, reload, origin)); return; }
     setBusy("Opening contextual pool…"); setError(null);
     const token = ++epoch.current;
     try {
       const r = await call<Inspection>("open_document", {asset: asset.path});
       if (token !== epoch.current) return;
-      setPoolDocument(r.result); setPoolDirty(false); setPoolActive(true);  setActiveContent(""); setTrail(context);
+      setPoolDocument(r.result);setPoolOrigin(origin); setPoolDirty(false); setPoolActive(true);  setActiveContent(""); setTrail(context);
       setStatus(`Opened ${asset.path}.`);
     } catch (e) { if (token === epoch.current) setError(asFailure(e)); } finally { if (token === epoch.current) setBusy(""); }
   }
@@ -711,7 +711,7 @@ export default function App() {
                   <button disabled={!!busy} onClick={()=>{const entry=contentRef.current[activeContent];void openContent(entry.document.family!.id,entry.selectedId,entry.document.path,false,true,entry.trail,entry.origin);}}>Reload document</button>
                   <button disabled={busy.includes("applying")} onClick={()=>void closeContent(activeContent)}>Close document</button>
                 </>}
-                {!activeContent && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true)}>Reload pool</button>}
+                {!activeContent && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true,poolOrigin)}>Reload pool</button>}
                 <label>
                   Preview seed
                   <input
@@ -910,10 +910,10 @@ export default function App() {
             onApplied={(path,result,covered)=>contentApplied(token,path,result,covered)} onError={setError} registerRecovery={registerRecovery}
             subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={activeContent===token} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
-            onPool={(id,context)=>{setPoolOrigin(token);void openPool(id,context);}}
+            onPool={(id,context)=>void openPool(id,context,false,false,token)}
             contentNavigation={{selectedId:entry.selectedId,trail:entry.trail,
               onReturn:entry.origin ? ()=>returnToOrigin(entry):undefined,returnLabel:entry.origin ? `Return to ${entry.origin.label}`:undefined,
-              onPool:id=>void openPool(id,trail),onOpen:(target,id,path)=>void openContent(target,id,path,false,false,null,{token,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}
+              onPool:id=>void openPool(id,trail,false,false,token),onOpen:(target,id,path)=>void openContent(target,id,path,false,false,null,{token,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}
           {poolDocument && <div hidden={!poolActive || !!activeContent}><Authoring key={poolDocument.document_token}
             document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
             subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
