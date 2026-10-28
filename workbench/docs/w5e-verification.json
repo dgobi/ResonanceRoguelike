@@ -1,0 +1,1391 @@
+{
+  "milestone": "W5E",
+  "passed": true,
+  "observed_utc": "2026-10-28T01:12:27Z",
+  "revisions": {
+    "baseline": "7b737f85f23c3538192a66f334dfe9a7f82c607a",
+    "initial_remote": "7b737f85f23c3538192a66f334dfe9a7f82c607a",
+    "recovery_correction": "4520f22018ad06253e92b406c3eb4bc73c3ba286",
+    "implementation": "714000daa408769697c3af32999f7a9732f9255c",
+    "package_and_frontend_rust_tests": "f283647b2657f457f13abfeb176ed734185ea651",
+    "final_source_and_test_inputs": "cd8a8d7193d89e8d42bedd9ef8d61439c42fdb02",
+    "evidence_ref": "checkpoint/workbench-w5e-verified-20261027-a",
+    "evidence_note": "The annotated checkpoint and external handoff identify the evidence commit and exact remote main. No self-referential evidence commit.",
+    "branch": "main"
+  },
+  "prerequisites": {
+    "baseline": "7b737f85f23c3538192a66f334dfe9a7f82c607a",
+    "w5d_git_source_hashes_reconciled": 61
+  },
+  "environment": {
+    "os": "Windows",
+    "node": "24.15.0",
+    "cargo": "1.95.0",
+    "python": "3.11.0",
+    "pygame": "2.6.1"
+  },
+  "commands": [
+    {
+      "command": "npm.cmd ls --depth=0",
+      "result": "locked direct versions; no dependency changes",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "npm.cmd test",
+      "result": "57 passed / 16 files",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "result": "passed",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "result": "54 passed, including all eight W4D cases",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "result": "passed",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -X faulthandler -B -m unittest discover -s worker -v",
+      "result": "54 passed; one expected dependency-absence skip; 490.336 s",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "src-tauri/target/release/python/python.exe -X utf8 -X faulthandler -B -m unittest discover -s worker -p test_typography.py -v",
+      "result": "7 passed, including 42 reader probes and real glyph negatives",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "result": "release executable, complete pinned Python and NSIS installer",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/run-typography.mjs",
+      "result": "3 native processes; selected fonts, invalid JSON, freshness, publication/reopen and separate production initialization",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/run-recovery.mjs",
+      "result": "5 native processes, abrupt exit and actual competing-process lock exclusion",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "$env:W5D_REOPEN_REGRESSION='lost'; node scripts/run-workspace.mjs",
+      "result": "6 owners; lost successful reopen response and shared monitor",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/run-texts.mjs",
+      "result": "ordinary authoring and physical letter interaction; no campaign saves",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "$env:WORKBENCH_STARTUP_SMOKE='1'; npm.cmd run test:startup",
+      "result": "4 isolated startup/project-change/restart scenarios",
+      "cwd": "workbench",
+      "exit_code": 0
+    },
+    {
+      "command": "G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe -X utf8 -B -m unittest test_bridge.BridgeTests.test_dependency_absence_structured -v",
+      "cwd": "workbench/worker",
+      "exit_code": 0,
+      "result": "1 passed; existing interpreter only, no additional checkout"
+    },
+    {
+      "command": "workbench/src-tauri/target/release/python/python.exe -X utf8 -B -c \"import sys; sys.path[:0]=['roguelike','tools/critical_fix_regressions/tests']; import unittest; unittest.main(module=None)\" test_gameplay_g12.ExpeditionRewardsTests.test_actual_warning_later_page_paragraphs_mixed_span_identity_and_no_turns test_gameplay_g12.ExpeditionRewardsTests.test_long_tokens_glyph_translations_and_complete_alphabet_are_bounded test_gameplay_g12.ExpeditionRewardsTests.test_long_titles_render_full_heading_and_body_inside_frame_above_footer -v",
+      "cwd": "repository root; SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy",
+      "exit_code": 0,
+      "result": "3 passed"
+    }
+  ],
+  "package": {
+    "executable": "6cae5a46fe2bd80959b2ee4b4d118a5f00c181f740e6a50d83f5236b3327273b",
+    "bridge": "e4c8271f5af9e039cce085ba7542a113ef446bb23bd890b763aa7f7a08ff6277",
+    "source_bridge": "e4c8271f5af9e039cce085ba7542a113ef446bb23bd890b763aa7f7a08ff6277",
+    "runtime": {
+      "files": 1903,
+      "sha256": "50b42cb5ac27c2b2695ecaa644927c2ca9b1e0804dd7ba8ce8dd1386b1e46eb8"
+    },
+    "runtime_payload": {
+      "files": 1809,
+      "sha256": "bcec0cde456247d70707d642296f0b1c6fc451a4ebb7efd732d7cba0468235ca"
+    },
+    "frontend": {
+      "files": 11,
+      "sha256": "17705ac89e8b95e72bb90f2752339a26658697157e7d8364ac3ca6eb0e4fcd79"
+    },
+    "installer": "e325f52d794ec09d9a4fc26f1c06734db2c077225aff63f624795d2c69cfd6c5",
+    "runtime_note": "All 1809 shipped runtime files match the pinned source payload. Observed release tree includes 94 extra generated __pycache__ files from diagnostic processes; runtime_payload identifies the installer input, runtime identifies the observed release tree. Tree hash: SHA256 of compact JSON [relative path, SHA256] pairs in recursive Node localeCompare filename order."
+  },
+  "source": {
+    "revision": "cd8a8d7193d89e8d42bedd9ef8d61439c42fdb02",
+    "worktree_sha256": {
+      "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+      "roguelike/data/display/typography.json": "bf91b067f1788fb5047d25e63a5ba31c3557ac85d311b62b0389f3abf1f73204",
+      "roguelike/docs/LAYOUT_AUTHORING.md": "6db7fd3aed5ddc10ccb3e24f02b82366ec9ec42da42ccb08294baa9e25186575",
+      "roguelike/docs/RENDERING.md": "5ba80a645d0cea9dfa6b3616db454690b7c9cafcd657c748ee269e07bff38f16",
+      "roguelike/docs/TEXT_AUTHORING.md": "3d2854eb902ebeaa928c67dd349b6c63618574f7f7d7509f1aa14f80128612fc",
+      "roguelike/engine/content_authoring.py": "138a16518c1df4aca4beabc6db3b4139439a839b373b7f15d66f9c46f8f28304",
+      "roguelike/engine/data_loader.py": "6240d97b546ea813dbc5fc4d2772738bf6cb553f647079ab48ab9a1e0ab3b6ff",
+      "roguelike/engine/display_config.py": "a07f80fad15d1d9622fb7851c8d2eadde6080974eb3f64efba006f60cc6b0546",
+      "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "roguelike/engine/scene_generation.py": "535bd94b46af998a4236f7aba4e5dde3ccb233300738900cb0c7480c3173732d",
+      "roguelike/engine/text_authoring.py": "fb935be3330b4cbc46cd0d2f188c706f012844cd820a36a8220fb44c5adca12f",
+      "roguelike/engine/text_reader.py": "39f73b598f4d568c605987cb0cbc262edbebe7fa613a55e90209f691a6c23afb",
+      "roguelike/engine/typography.py": "360ffa7cd37a9c8c6e4d55bae14b4f8ae0373ddd94b265f036897a4e69c49ea6",
+      "roguelike/engine/typography_authoring.py": "1266e406675dbc788336a3df60073c684d84d75b7d10121fc8f6bc01e31fe01a",
+      "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+      "roguelike/generation/structure_preview.py": "904772970f57876707d59cda55c54b0317d42b338996f03cf1be0bdc59326f5b",
+      "roguelike/rendering/ui_registry.py": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058",
+      "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+      "workbench/README.md": "71ab9342583a36fecfd4db4422571ac44aa35a36b50b51ffde1993112ffc80bc",
+      "workbench/docs/CONTENT_CONTRACTS.md": "8b11a3584a3aec0484bb65d412026fa1b506653c71beea2f2dfbb24f64524717",
+      "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+      "workbench/scripts/contract-journey.mjs": "c66f846cf6054ca3577592b147e17e3ef0b48b92d4d60ae5e6a70a74d0c6cb2b",
+      "workbench/scripts/creature-journey.mjs": "7889a50f23299e435bcd8fb46251ab0dd796cffc5b7e51b862825db7a57d9126",
+      "workbench/scripts/desktop-test.mjs": "7af955a8e4adc6624f7473ffbd78ab8ba0bc5ecd2c0a9c0b157ac319a946038e",
+      "workbench/scripts/item-journey.mjs": "7c4cd6687ab65bf60083b6201935c1a5c294f8864161dccabf1d12aa0de01bed",
+      "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+      "workbench/scripts/recipe-journey.mjs": "7775a0bdc0d3e73ef86fd324040d2048d4ea309d96c5f74ae18d8bf31a4b0818",
+      "workbench/scripts/run-recovery.mjs": "410ea25712dbdf521e4e87526fb98e2e4c465bfcb82282037578044b55ff4c66",
+      "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+      "workbench/scripts/run-typography.mjs": "ae0dd2eb2ce82318bc204e92eec34b67d3f4461ff54c80ae36ced16a2d645aa2",
+      "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+      "workbench/scripts/startup-test.mjs": "ac3838ea8f92abc1cb6a9af8d2dcb14eb721199d15d37bd11bb456639fdecc8b",
+      "workbench/scripts/submap-journey.mjs": "cb3f4ca658fced223b8377cfe241b969efcc09cdd34aebe062c736814132751a",
+      "workbench/scripts/text-journey.mjs": "5cb7459f400acbcfee263ba07f5f304edd070e180e2e7406cd31e2ab39707bd7",
+      "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+      "workbench/scripts/typography-runtime-probe.py": "2466cc4746cadfbdb7d91513dad2a002303f4872cf82cebfe619734eeb84265a",
+      "workbench/scripts/verify-runtime.ps1": "6ed6f9fceecd4c351813c62dfbf1c87f9a66618b7c0c037237f03e3baac2501a",
+      "workbench/scripts/workspace-journey.mjs": "c51137c55da6cfd9325f144495b25d128cbd8d172620fe07eb3b05ba275b766c",
+      "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+      "workbench/src-tauri/src/authoring.rs": "6d12f9a0a05d6133af4ea773e58ee835e10590a584c24b636216435a8f85ca52",
+      "workbench/src-tauri/src/main.rs": "092f49253f1593c26930997d28704f34bb15211276b1ca8f7966d47a6119aadf",
+      "workbench/src-tauri/src/recovery.rs": "f906b571bb1b63638c79fd94fc79cae8a32c0c9e35cd96ad035834d126b8c1d7",
+      "workbench/src-tauri/tauri.bundle.conf.json": "66ed20e3e95362e60f9ffb8c74a7cc6e187847dcfb414d4a54285788bcc668bf",
+      "workbench/src-tauri/tauri.conf.json": "5ae1d6ded1b17e3b91477c799e1cdc698f8f6d6dc56323c1fe8eba70abd84639",
+      "workbench/src/App.tsx": "7db9d9a28ec199880555b230f0bdbf705df4b25d0082eb79b6d91305dc5d2696",
+      "workbench/src/Authoring.tsx": "aa4d32d1bd606c60e9238a4246575fdcde6839f00eb64c6fc0f187db6ae4bf12",
+      "workbench/src/ContentEditor.tsx": "a79f38766932eb67f6a1c4e54a71557804a02f49214c0963ba8a10c95e58adfa",
+      "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+      "workbench/src/ItemEditor.tsx": "f0044fc331d89ae0a471e4545c704e5903cfe8733b033190059b1d73d1176cb0",
+      "workbench/src/RecipeEditor.tsx": "c62697dec01736e67015c935b790392e530b2aee48c9ea9db3a42237c942bd07",
+      "workbench/src/RecoveryPanel.test.tsx": "ea95e83b642be5ea4222ea9a9cb05cdf6ad211e930b6d704fd63950a17537ba1",
+      "workbench/src/RecoveryPanel.tsx": "60cd935daa5166d11491bc44e8f7b11a7bebc123a7d7dc53fe314cb4719ad34f",
+      "workbench/src/TextEditor.tsx": "942826e5795930369fc065ddff779444b69ed96ce461b416ac477d2909ceb0c7",
+      "workbench/src/TypographyEditor.tsx": "80ed2c4a9cb5c8ce96f037879d0e391f8f1dc29ba25e0623925b75df10754186",
+      "workbench/src/content.ts": "f9d31ffbaa2f2f914934dbe6f95228dc3a3b5038e42b16f2bc258c687607ec15",
+      "workbench/src/familyData.ts": "2f714a7e085f28f3283f6c201027918518fdff153a41fe0d420d3ac7a528a656",
+      "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+      "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+      "workbench/src/protocol.ts": "5cb8fecf853d732cbbfa9bc340d4953f60d368ee485b59b5a551ffcc962c4c8d",
+      "workbench/src/recipe.ts": "6ac4d85fdc783751f7c65376837af20ddf311b57b6916110e3398b8b4b253d03",
+      "workbench/src/recovery.test.ts": "8e42eda3aef374e8e44a8f079211de93b689b5abe8ee41c2e4144b4958e4dedf",
+      "workbench/src/recovery.ts": "cdcd2dae4ae7d83534c20b2b8b9e9ceb06094c05811f7adb83219a68c7b07b09",
+      "workbench/src/reopen.test.ts": "1b433d0ad03c397593f488b4e328d86391b3ae1b0371c9ec02a04bed8b717b85",
+      "workbench/src/reopen.ts": "c09f8296097cb19a29f81b9cd72aba6be23fc428b7cb52a1b1c190eaca9fb0b1",
+      "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+      "workbench/src/styles.css": "901a5192a5ecc0185e6f2282c95b756ebe9111c441f14686098f7986e93f7390",
+      "workbench/src/typography.test.tsx": "78b3ad3097d414fdc4eef7352b7f6c60bf536d251f4ffc4b51f472698f2c6e5c",
+      "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+      "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+      "workbench/worker/bridge.py": "e4c8271f5af9e039cce085ba7542a113ef446bb23bd890b763aa7f7a08ff6277",
+      "workbench/worker/requirements.lock": "17cd05554346febe141934ef7757e42d71f91880d2303051196fda0d50d278a7",
+      "workbench/worker/test_authoring.py": "63b31599c487800b65eaf02983fe6e946adf878ea6cd2dc48d86739785d57b39",
+      "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec",
+      "workbench/worker/test_typography.py": "f56486cfed89413842fed3ed49ad195eed4db79800e44546a1c5a4a3a208e77b"
+    },
+    "git_sha256": {
+      "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+      "roguelike/data/display/typography.json": "bf91b067f1788fb5047d25e63a5ba31c3557ac85d311b62b0389f3abf1f73204",
+      "roguelike/docs/LAYOUT_AUTHORING.md": "c7122770d8c75b0a0d80630f7d52722452b01940b3eea7f22a550d2e4a68d07d",
+      "roguelike/docs/RENDERING.md": "b9184616646526f8808dc35bf9a20fb2902af93e96222a7bc6913e1a32a4e422",
+      "roguelike/docs/TEXT_AUTHORING.md": "14fc09b1c1a3af411686139f6f38df7dbebaad0f79305c1fcd604bbc87b78b86",
+      "roguelike/engine/content_authoring.py": "138a16518c1df4aca4beabc6db3b4139439a839b373b7f15d66f9c46f8f28304",
+      "roguelike/engine/data_loader.py": "07625ac2db63a5717c9db166a67cd4a615a2a2a58e5185da4c4686c713cc56cd",
+      "roguelike/engine/display_config.py": "13bbec46d32b7b6f645d1acceba3eabd2b41ef50e336ac5373c69f812a1ce8e8",
+      "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "roguelike/engine/scene_generation.py": "cb4672d5d7309e28108bc63a79c2dc648f1237711d36e69c9fc0d42cbb17dc65",
+      "roguelike/engine/text_authoring.py": "79d41490b67a6043f289b4ef3b1f48e06dd6820b3cbb7810487de447743069ca",
+      "roguelike/engine/text_reader.py": "4ab9ad70c4b1453d7b3f33276f0031d592838290a0b9034b8fb8a27a5f9dcae0",
+      "roguelike/engine/typography.py": "360ffa7cd37a9c8c6e4d55bae14b4f8ae0373ddd94b265f036897a4e69c49ea6",
+      "roguelike/engine/typography_authoring.py": "1266e406675dbc788336a3df60073c684d84d75b7d10121fc8f6bc01e31fe01a",
+      "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+      "roguelike/generation/structure_preview.py": "14ce8d2541b4394b3d4f12c0ff2190b0edc15de43569afc4377bea578a5bf0b3",
+      "roguelike/rendering/ui_registry.py": "e0272edd0c11a393b9ef03f3b8055d1770ef32428d4b7b1e6d66c62afb8b5f2a",
+      "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+      "workbench/README.md": "2b8027c0618e24cfb74c5b14005a2f03818a86da526cefa611ffee1dd01ca7d4",
+      "workbench/docs/CONTENT_CONTRACTS.md": "1fb8dc95b32321d9da6a6c802438c4a11d36af271ad47fd5b800369a014c9614",
+      "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+      "workbench/scripts/contract-journey.mjs": "afe76ecf0def13b2c9871cfeeb732c92ac9c934644fd93542da6ead29f5cdd43",
+      "workbench/scripts/creature-journey.mjs": "ce03afbf22e8c7af1c68103247d8907899bfa641c305342aad2408a99ada53c5",
+      "workbench/scripts/desktop-test.mjs": "967280853e21a56119a7c7675aa309f446e1272dbf0e65da0ce92a813d8e4d8a",
+      "workbench/scripts/item-journey.mjs": "0c3397a52b14e760279f560e928343f61693b424c6bed2c44888c4590e50f14d",
+      "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+      "workbench/scripts/recipe-journey.mjs": "55d5c07ec19396fb5b1d5b750155febaaa8775db8aa9c159e640d49b61845daa",
+      "workbench/scripts/run-recovery.mjs": "410ea25712dbdf521e4e87526fb98e2e4c465bfcb82282037578044b55ff4c66",
+      "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+      "workbench/scripts/run-typography.mjs": "7577c55a5926da27e555638a53d6f95579accd6b6f941f89d077884f7907b713",
+      "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+      "workbench/scripts/startup-test.mjs": "ac3838ea8f92abc1cb6a9af8d2dcb14eb721199d15d37bd11bb456639fdecc8b",
+      "workbench/scripts/submap-journey.mjs": "7d45f7915e4dbe58028e48e16a75c33cd6093ae857b5d50128b3bf6780018bc4",
+      "workbench/scripts/text-journey.mjs": "4ee5165359c8fe82faebd57fb7bd37cfa6c0ab393df3bacc8fbaef4a5597312b",
+      "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+      "workbench/scripts/typography-runtime-probe.py": "2466cc4746cadfbdb7d91513dad2a002303f4872cf82cebfe619734eeb84265a",
+      "workbench/scripts/verify-runtime.ps1": "6ed6f9fceecd4c351813c62dfbf1c87f9a66618b7c0c037237f03e3baac2501a",
+      "workbench/scripts/workspace-journey.mjs": "f44f5dc1de2946cf747ed3b380f201447f494a4441d64898697f29ea6be7c5c6",
+      "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+      "workbench/src-tauri/src/authoring.rs": "0c08cdeb892fb22b0a60859b56a12f7bcd7034659f122c74f1571242b862eec9",
+      "workbench/src-tauri/src/main.rs": "4bbc740a3b1fb150c657de2f2a9af0cdf6a142e5e5bf22409e5e4c0175e8f0aa",
+      "workbench/src-tauri/src/recovery.rs": "f906b571bb1b63638c79fd94fc79cae8a32c0c9e35cd96ad035834d126b8c1d7",
+      "workbench/src-tauri/tauri.bundle.conf.json": "66ed20e3e95362e60f9ffb8c74a7cc6e187847dcfb414d4a54285788bcc668bf",
+      "workbench/src-tauri/tauri.conf.json": "5ae1d6ded1b17e3b91477c799e1cdc698f8f6d6dc56323c1fe8eba70abd84639",
+      "workbench/src/App.tsx": "8feb32b2f7a84058fead9d4ba744782c3083fca6cb5e7d9ea2c96f2c6e13b5f3",
+      "workbench/src/Authoring.tsx": "aa4d32d1bd606c60e9238a4246575fdcde6839f00eb64c6fc0f187db6ae4bf12",
+      "workbench/src/ContentEditor.tsx": "7ec47f8aa8580d03ec9ffef526f159c8216749ad27292345c54cf6af9eb0cdac",
+      "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+      "workbench/src/ItemEditor.tsx": "52f91783f9859ef15cf39593cc24fd986acf969799964fd6de6fe34ec979fe89",
+      "workbench/src/RecipeEditor.tsx": "3fd00a6c662814a255d2626616109d27dc07951589024efebb337ce8fa38d11d",
+      "workbench/src/RecoveryPanel.test.tsx": "ea95e83b642be5ea4222ea9a9cb05cdf6ad211e930b6d704fd63950a17537ba1",
+      "workbench/src/RecoveryPanel.tsx": "60cd935daa5166d11491bc44e8f7b11a7bebc123a7d7dc53fe314cb4719ad34f",
+      "workbench/src/TextEditor.tsx": "942826e5795930369fc065ddff779444b69ed96ce461b416ac477d2909ceb0c7",
+      "workbench/src/TypographyEditor.tsx": "80ed2c4a9cb5c8ce96f037879d0e391f8f1dc29ba25e0623925b75df10754186",
+      "workbench/src/content.ts": "f9d31ffbaa2f2f914934dbe6f95228dc3a3b5038e42b16f2bc258c687607ec15",
+      "workbench/src/familyData.ts": "2f714a7e085f28f3283f6c201027918518fdff153a41fe0d420d3ac7a528a656",
+      "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+      "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+      "workbench/src/protocol.ts": "5cb8fecf853d732cbbfa9bc340d4953f60d368ee485b59b5a551ffcc962c4c8d",
+      "workbench/src/recipe.ts": "51ca1cff61de9dee56e43f61ed2b25a1036d220011162abbf9e93773202c6098",
+      "workbench/src/recovery.test.ts": "8e42eda3aef374e8e44a8f079211de93b689b5abe8ee41c2e4144b4958e4dedf",
+      "workbench/src/recovery.ts": "cdcd2dae4ae7d83534c20b2b8b9e9ceb06094c05811f7adb83219a68c7b07b09",
+      "workbench/src/reopen.test.ts": "1b433d0ad03c397593f488b4e328d86391b3ae1b0371c9ec02a04bed8b717b85",
+      "workbench/src/reopen.ts": "c09f8296097cb19a29f81b9cd72aba6be23fc428b7cb52a1b1c190eaca9fb0b1",
+      "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+      "workbench/src/styles.css": "a1c280b69773798da957a2f4f7b17258df390e5ddb88f23a2ddb4067c0bf598e",
+      "workbench/src/typography.test.tsx": "78b3ad3097d414fdc4eef7352b7f6c60bf536d251f4ffc4b51f472698f2c6e5c",
+      "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+      "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+      "workbench/worker/bridge.py": "3f8326fe8be86a9e9a2e182c45acf2689e804a22eac854afa9911bf5f98c635d",
+      "workbench/worker/requirements.lock": "3e375be2c380dbcc1ba803e2904ccd2e14c71bf00cc3afe7eb2d91a0272ffab0",
+      "workbench/worker/test_authoring.py": "472272dc20a01c76849c282a973e62422aab993222e697b16fd8b901d77ea0b6",
+      "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec",
+      "workbench/worker/test_typography.py": "f56486cfed89413842fed3ed49ad195eed4db79800e44546a1c5a4a3a208e77b"
+    }
+  },
+  "protected_functions_unchanged_from_baseline": {
+    "pin_inputs": "bf6e0df953c06424ad32e8fe16451fdb819e694676deb230d7ef325c9c5d706b",
+    "pin_source": "f0a24ecbc92893b87f72885b93039f5fea1e4a9bce8755f1df9c0df35a18daf9",
+    "input_stamp": "2d74c9b09c66d0a47a0c4268ce46aca17c0d3e37ad5e9aca10f65431c311d4fe",
+    "validate_document": "86e8bef99fb2fcf25e3bc1db85b0d493ade2e58ee195626db760248b6e25a9a2",
+    "admit_apply": "a07ab80e50340e7198b815ec239ff8987ed9be3dead4e98f8c6973f5e46cef3a"
+  },
+  "package_reuse": {
+    "changed_since_build": [
+      "roguelike/engine/typography.py",
+      "workbench/scripts/run-typography.mjs",
+      "workbench/worker/test_typography.py"
+    ],
+    "unchanged_packaged_inputs": [
+      "workbench/src",
+      "workbench/src-tauri/src",
+      "workbench/src-tauri/Cargo.lock",
+      "workbench/src-tauri/Cargo.toml",
+      "workbench/package-lock.json",
+      "workbench/package.json",
+      "workbench/worker/bridge.py",
+      "workbench/worker/requirements.lock",
+      "workbench/src-tauri/tauri.conf.json",
+      "workbench/src-tauri/tauri.bundle.conf.json"
+    ],
+    "note": "Final commit changes only selected-project production typography loading and two regression scripts. The package loads game code from the selected project; final native fixture resolver bytes match final source. Frontend/Rust/package gates bind unchanged packaged inputs. Earlier text/recovery fixture runs use the preceding loader for valid fonts; final typography/native/worker/reader gates cover the corrected loader."
+  },
+  "profile": {
+    "path": "roguelike/data/display/typography.json",
+    "sha256": "bf91b067f1788fb5047d25e63a5ba31c3557ac85d311b62b0389f3abf1f73204",
+    "font_sha256": {
+      "FoulisGreek.ttf": "4bac965186797091370d6cab08f59ab65eeca9606516811d09372fec17958676",
+      "IMFellEnglish-Italic.ttf": "542953606df87ff01db1eab9c70a8cc7834f92b3eb2072c2cd00e16e0f82a43a",
+      "IMFellEnglish-Regular.ttf": "ac506157d2920e96b9f95297207b439cb707fcaff9fb22ecefd23e40e5c338c9",
+      "Junicode-Bold.ttf": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+      "Junicode-BoldItalic.ttf": "10d14e58e0dfb56c5c8aff3418bb1f10b632afad7286244ae2c3b148d142f10d",
+      "Junicode-Italic.ttf": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+      "Junicode.ttf": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d"
+    }
+  },
+  "glyph_negatives": [
+    {
+      "font": "IMFellEnglish-Regular.ttf",
+      "role": "font_ui_tiny",
+      "character": "↑",
+      "codepoint": "U+2191",
+      "freetype_metric": null,
+      "sdl_metric_present": true,
+      "sdl_pixels_equal_missing_sentinel": true
+    },
+    {
+      "font": "Junicode-Bold.ttf",
+      "role": "font_ui_small",
+      "character": "≥",
+      "codepoint": "U+2265",
+      "freetype_metric": null,
+      "sdl_metric_present": true,
+      "sdl_pixels_equal_missing_sentinel": true
+    }
+  ],
+  "native": {
+    "checks": [
+      "selected font-byte and external profile changes revoke actual displayed preview through the shared disk sweep, retaining exact accepted draft",
+      "changed selected font bytes consume a real publication review without a content write; fresh validation restores authority",
+      "three actual native processes retain selected faces then exact invalid JSON; fresh review required",
+      "normal one-file publication and verified reopen match candidate bytes; independent recovery is unchanged",
+      "fresh production font initialization loads published roles; invalid present profile falls back completely without writes",
+      "no variant control and forged variant intent refused by host; actual candidate specimen and reader"
+    ],
+    "processes": [
+      32268,
+      27852,
+      22552
+    ],
+    "drafts": [
+      {
+        "phase": "selected-faces",
+        "key": "24039a0dcda61bbd9b7ba561643c8505942aa5f3749f958f3caebf9493129c88/fd5d5803-2fbf-4877-9d86-3d5d71fb4113",
+        "generation": 5,
+        "sha256": "a663f4f90e723f23740991afe87380dfcfad86628ac790a292225de0e32bb5be"
+      },
+      {
+        "phase": "invalid-json",
+        "key": "24039a0dcda61bbd9b7ba561643c8505942aa5f3749f958f3caebf9493129c88/fd5d5803-2fbf-4877-9d86-3d5d71fb4113",
+        "generation": 6,
+        "sha256": "cb55e284c9da22e24ba5d72e5608532668478925eedf5bdf6977e39cf4032cf6"
+      }
+    ],
+    "preview": {
+      "contract": "game-typography-1",
+      "dependencies": "candidate profile; selected project font bytes; saved reader resources",
+      "descriptor_sha256": "bc7dc67bebb09c7180b7138c46518410d8331209db6438596ee75781652ead82",
+      "diagnostics": [
+        {
+          "asset": "game_typography",
+          "code": "FONT_OPTIONAL_GLYPHS",
+          "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization.",
+          "field": "font_ui_normal",
+          "message": "Bounded optional/decorative glyph gaps: ✓. These are pre-existing default limitations, not a universal Unicode guarantee.",
+          "path": "roguelike/data/display/typography.json",
+          "severity": "warning"
+        },
+        {
+          "asset": "game_typography",
+          "code": "FONT_OPTIONAL_GLYPHS",
+          "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization.",
+          "field": "font_ui_small",
+          "message": "Bounded optional/decorative glyph gaps: ☁ϟ. These are pre-existing default limitations, not a universal Unicode guarantee.",
+          "path": "roguelike/data/display/typography.json",
+          "severity": "warning"
+        },
+        {
+          "asset": "game_typography",
+          "code": "FONT_OPTIONAL_GLYPHS",
+          "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization.",
+          "field": "font_ui_tiny",
+          "message": "Bounded optional/decorative glyph gaps: ○●. These are pre-existing default limitations, not a universal Unicode guarantee.",
+          "path": "roguelike/data/display/typography.json",
+          "severity": "warning"
+        }
+      ],
+      "draft_sha256": "a663f4f90e723f23740991afe87380dfcfad86628ac790a292225de0e32bb5be",
+      "fallback": false,
+      "inputs": {},
+      "kind": "typography-preview",
+      "observed_at_utc": "2026-10-28T01:04:19.860763+00:00",
+      "path": "roguelike/data/display/typography.json",
+      "reader": {
+        "consumer": "ItemFactory.create → ItemSystem._use_read → TextReader.render",
+        "dependencies": "candidate typography / saved reader files",
+        "height": 640,
+        "image_sha256": "4d7a3b4de1a902f3d706d7c9399de5b9c8c60d812263bddea6fef040f9f39c46",
+        "inputs": {
+          "page": 0,
+          "scroll": 0
+        },
+        "kind": "reader-frame",
+        "marker_types": [
+          "damaged",
+          "redacted"
+        ],
+        "max_scroll": 0,
+        "page": 0,
+        "scroll": 0,
+        "setup": "Saved letter definition; weathered_temple panel; isolated Language with 1 known words and no recovery; saved lexicon/UI. Candidate typography. Disposable reader context; no personal save, time or world generation.",
+        "total_rows": 9,
+        "typography": {
+          "diagnostics": [
+            {
+              "asset": "game_typography",
+              "code": "FONT_OPTIONAL_GLYPHS",
+              "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization.",
+              "field": "font_ui_normal",
+              "message": "Bounded optional/decorative glyph gaps: ✓. These are pre-existing default limitations, not a universal Unicode guarantee.",
+              "path": "roguelike/data/display/typography.json",
+              "severity": "warning"
+            },
+            {
+              "asset": "game_typography",
+              "code": "FONT_OPTIONAL_GLYPHS",
+              "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization.",
+              "field": "font_ui_small",
+              "message": "Bounded optional/decorative glyph gaps: ☁ϟ. These are pre-existing default limitations, not a universal Unicode guarantee.",
+              "path": "roguelike/data/display/typography.json",
+              "severity": "warning"
+            },
+            {
+              "asset": "game_typography",
+              "code": "FONT_OPTIONAL_GLYPHS",
+              "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization.",
+              "field": "font_ui_tiny",
+              "message": "Bounded optional/decorative glyph gaps: ○●. These are pre-existing default limitations, not a universal Unicode guarantee.",
+              "path": "roguelike/data/display/typography.json",
+              "severity": "warning"
+            }
+          ],
+          "fallback": false,
+          "roles": [
+            {
+              "fallback": false,
+              "label": "Headings",
+              "requested": "IMFellEnglish-Regular.ttf",
+              "resolved": "roguelike/assets/Fonts/IMFellEnglish-Regular.ttf",
+              "role": "font_ui_large",
+              "sha256": "ac506157d2920e96b9f95297207b439cb707fcaff9fb22ecefd23e40e5c338c9",
+              "size": 22
+            },
+            {
+              "fallback": false,
+              "label": "Ordinary prose",
+              "requested": "IMFellEnglish-Italic.ttf",
+              "resolved": "roguelike/assets/Fonts/IMFellEnglish-Italic.ttf",
+              "role": "font_ui_normal",
+              "sha256": "542953606df87ff01db1eab9c70a8cc7834f92b3eb2072c2cd00e16e0f82a43a",
+              "size": 18
+            },
+            {
+              "fallback": false,
+              "label": "Small details",
+              "requested": "Junicode.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+              "role": "font_ui_small",
+              "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+              "size": 16
+            },
+            {
+              "fallback": false,
+              "label": "Message log",
+              "requested": "Junicode.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+              "role": "font_ui_tiny",
+              "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+              "size": 14
+            },
+            {
+              "fallback": false,
+              "label": "Italic role",
+              "requested": "Junicode-Italic.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+              "role": "font_ui_italic",
+              "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+              "size": 18
+            },
+            {
+              "fallback": false,
+              "label": "Bold role",
+              "requested": "Junicode-Bold.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+              "role": "font_ui_bold",
+              "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+              "size": 18
+            },
+            {
+              "fallback": false,
+              "label": "Large bold role",
+              "requested": "Junicode-Bold.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+              "role": "font_ui_bold_large",
+              "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+              "size": 22
+            },
+            {
+              "fallback": false,
+              "label": "Known Deep Tongue",
+              "requested": "Junicode-Italic.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+              "role": "font_deep",
+              "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+              "size": 18
+            },
+            {
+              "fallback": false,
+              "label": "Damage callout",
+              "requested": "FoulisGreek.ttf",
+              "resolved": "roguelike/assets/Fonts/FoulisGreek.ttf",
+              "role": "font_callout_damage",
+              "sha256": "4bac965186797091370d6cab08f59ab65eeca9606516811d09372fec17958676",
+              "size": 13
+            },
+            {
+              "fallback": false,
+              "label": "Status callout",
+              "requested": "Junicode-Bold.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+              "role": "font_callout_status",
+              "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+              "size": 12
+            },
+            {
+              "fallback": false,
+              "label": "Creature callout",
+              "requested": "Junicode-Bold.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+              "role": "font_callout_creature",
+              "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+              "size": 11
+            },
+            {
+              "fallback": false,
+              "label": "Critical callout",
+              "requested": "Junicode-Bold.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+              "role": "font_callout_crit",
+              "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+              "size": 18
+            },
+            {
+              "fallback": false,
+              "label": "Level-up callout",
+              "requested": "Junicode-Bold.ttf",
+              "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+              "role": "font_callout_levelup",
+              "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+              "size": 21
+            }
+          ]
+        },
+        "viewport_height": 225,
+        "visible_rows": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "width": 960
+      },
+      "roles": [
+        {
+          "fallback": false,
+          "height": 28,
+          "label": "Headings",
+          "requested": "IMFellEnglish-Regular.ttf",
+          "resolved": "roguelike/assets/Fonts/IMFellEnglish-Regular.ttf",
+          "role": "font_ui_large",
+          "sample": "The bells beneath the city",
+          "sha256": "ac506157d2920e96b9f95297207b439cb707fcaff9fb22ecefd23e40e5c338c9",
+          "size": 22,
+          "width": 241
+        },
+        {
+          "fallback": false,
+          "height": 24,
+          "label": "Ordinary prose",
+          "requested": "IMFellEnglish-Italic.ttf",
+          "resolved": "roguelike/assets/Fonts/IMFellEnglish-Italic.ttf",
+          "role": "font_ui_normal",
+          "sample": "Ordinary prose — the cold grey stone remembers.",
+          "sha256": "542953606df87ff01db1eab9c70a8cc7834f92b3eb2072c2cd00e16e0f82a43a",
+          "size": 18,
+          "width": 300
+        },
+        {
+          "fallback": false,
+          "height": 17,
+          "label": "Small details",
+          "requested": "Junicode.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+          "role": "font_ui_small",
+          "sample": "Perk ≥ 2 · Inventory • Map — details",
+          "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+          "size": 16,
+          "width": 228
+        },
+        {
+          "fallback": false,
+          "height": 15,
+          "label": "Message log",
+          "requested": "Junicode.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+          "role": "font_ui_tiny",
+          "sample": "› Damage 4 × 2 − 1 → 7   ↑ 3 more",
+          "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+          "size": 14,
+          "width": 194
+        },
+        {
+          "fallback": false,
+          "height": 19,
+          "label": "Italic role",
+          "requested": "Junicode-Italic.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+          "role": "font_ui_italic",
+          "sample": "The silence after the bells. Aa Bb 0123456789",
+          "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+          "size": 18,
+          "width": 299
+        },
+        {
+          "fallback": false,
+          "height": 18,
+          "label": "Bold role",
+          "requested": "Junicode-Bold.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+          "role": "font_ui_bold",
+          "sample": "The silence after the bells. Aa Bb 0123456789",
+          "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+          "size": 18,
+          "width": 332
+        },
+        {
+          "fallback": false,
+          "height": 22,
+          "label": "Large bold role",
+          "requested": "Junicode-Bold.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+          "role": "font_ui_bold_large",
+          "sample": "The silence after the bells. Aa Bb 0123456789",
+          "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+          "size": 22,
+          "width": 398
+        },
+        {
+          "fallback": false,
+          "height": 20,
+          "label": "Known Deep Tongue",
+          "requested": "Junicode-Italic.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+          "role": "font_deep",
+          "sample": "Known Deep Tongue — stone and silence",
+          "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+          "size": 18,
+          "width": 275
+        },
+        {
+          "fallback": false,
+          "height": 13,
+          "label": "Damage callout",
+          "requested": "FoulisGreek.ttf",
+          "resolved": "roguelike/assets/Fonts/FoulisGreek.ttf",
+          "role": "font_callout_damage",
+          "sample": "-37",
+          "sha256": "4bac965186797091370d6cab08f59ab65eeca9606516811d09372fec17958676",
+          "size": 13,
+          "width": 17
+        },
+        {
+          "fallback": false,
+          "height": 12,
+          "label": "Status callout",
+          "requested": "Junicode-Bold.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+          "role": "font_callout_status",
+          "sample": "SUPPRESSED",
+          "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+          "size": 12,
+          "width": 72
+        },
+        {
+          "fallback": false,
+          "height": 12,
+          "label": "Creature callout",
+          "requested": "Junicode-Bold.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+          "role": "font_callout_creature",
+          "sample": "krrr...",
+          "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+          "size": 11,
+          "width": 29
+        },
+        {
+          "fallback": false,
+          "height": 18,
+          "label": "Critical callout",
+          "requested": "Junicode-Bold.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+          "role": "font_callout_crit",
+          "sample": "CRITICAL 74",
+          "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+          "size": 18,
+          "width": 104
+        },
+        {
+          "fallback": false,
+          "height": 21,
+          "label": "Level-up callout",
+          "requested": "Junicode-Bold.ttf",
+          "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+          "role": "font_callout_levelup",
+          "sample": "LEVEL 2",
+          "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+          "size": 21,
+          "width": 84
+        }
+      ],
+      "runtime": {
+        "dependencies": {
+          "cffi": "2.1.1",
+          "numpy": "2.4.6",
+          "pycparser": "3.11",
+          "pygame": "2.6.1",
+          "tcod": "19.3.0",
+          "typing_extensions": "4.16.0"
+        },
+        "python": "3.11.0"
+      },
+      "setup": "Candidate singleton profile; thirteen production roles plus an isolated ordinary-letter reader with one known Deep Tongue word. Saved lexicon/UI; no world, personal save or time.",
+      "source": {
+        "branch": null,
+        "catalog_sha256": "e68fd411d1f6f79e34070f05f0848cf0ab510f0fb57dd58475b5537b1c8b843b",
+        "commit": null,
+        "game_dirty": null,
+        "game_source_sha256": "69976a4721b1cb633c4e0dc75d8c2163016a884c3f0106f997966145f50e3352",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+        "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5e\\native-1793149446166\\project"
+      },
+      "specimen": {
+        "height": 960,
+        "image_sha256": "0cdb0b38da95d1f1bf0b809c7bb83dbfaedf27bd3fb739d2008cbdd1f9d2a5f4",
+        "width": 960
+      }
+    },
+    "publication": {
+      "reviewed": "a663f4f90e723f23740991afe87380dfcfad86628ac790a292225de0e32bb5be",
+      "saved": "a663f4f90e723f23740991afe87380dfcfad86628ac790a292225de0e32bb5be",
+      "reopened": "a663f4f90e723f23740991afe87380dfcfad86628ac790a292225de0e32bb5be",
+      "profile": "roguelike/data/display/typography.json",
+      "roles": {
+        "id": "game_typography",
+        "metadata": {
+          "exact": [
+            100,
+            null,
+            "λ"
+          ]
+        },
+        "version": 1,
+        "font_ui_large": "IMFellEnglish-Regular.ttf",
+        "font_ui_normal": "IMFellEnglish-Italic.ttf",
+        "font_ui_small": "Junicode.ttf",
+        "font_ui_tiny": "Junicode.ttf",
+        "font_ui_italic": "Junicode-Italic.ttf",
+        "font_ui_bold": "Junicode-Bold.ttf",
+        "font_ui_bold_large": "Junicode-Bold.ttf",
+        "font_deep": "Junicode-Italic.ttf",
+        "font_callout_damage": "FoulisGreek.ttf",
+        "font_callout_status": "Junicode-Bold.ttf",
+        "font_callout_creature": "Junicode-Bold.ttf",
+        "font_callout_crit": "Junicode-Bold.ttf",
+        "font_callout_levelup": "Junicode-Bold.ttf"
+      }
+    },
+    "fresh_game": {
+      "pid": 4496,
+      "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+      "executable": "G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\python\\python.exe",
+      "pygame": "2.6.1",
+      "typography": {
+        "roles": [
+          {
+            "role": "font_ui_large",
+            "label": "Headings",
+            "requested": "IMFellEnglish-Regular.ttf",
+            "resolved": "roguelike/assets/Fonts/IMFellEnglish-Regular.ttf",
+            "sha256": "ac506157d2920e96b9f95297207b439cb707fcaff9fb22ecefd23e40e5c338c9",
+            "size": 22,
+            "fallback": false
+          },
+          {
+            "role": "font_ui_normal",
+            "label": "Ordinary prose",
+            "requested": "IMFellEnglish-Italic.ttf",
+            "resolved": "roguelike/assets/Fonts/IMFellEnglish-Italic.ttf",
+            "sha256": "542953606df87ff01db1eab9c70a8cc7834f92b3eb2072c2cd00e16e0f82a43a",
+            "size": 18,
+            "fallback": false
+          },
+          {
+            "role": "font_ui_small",
+            "label": "Small details",
+            "requested": "Junicode.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+            "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+            "size": 16,
+            "fallback": false
+          },
+          {
+            "role": "font_ui_tiny",
+            "label": "Message log",
+            "requested": "Junicode.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+            "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+            "size": 14,
+            "fallback": false
+          },
+          {
+            "role": "font_ui_italic",
+            "label": "Italic role",
+            "requested": "Junicode-Italic.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+            "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+            "size": 18,
+            "fallback": false
+          },
+          {
+            "role": "font_ui_bold",
+            "label": "Bold role",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 18,
+            "fallback": false
+          },
+          {
+            "role": "font_ui_bold_large",
+            "label": "Large bold role",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 22,
+            "fallback": false
+          },
+          {
+            "role": "font_deep",
+            "label": "Known Deep Tongue",
+            "requested": "Junicode-Italic.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+            "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+            "size": 18,
+            "fallback": false
+          },
+          {
+            "role": "font_callout_damage",
+            "label": "Damage callout",
+            "requested": "FoulisGreek.ttf",
+            "resolved": "roguelike/assets/Fonts/FoulisGreek.ttf",
+            "sha256": "4bac965186797091370d6cab08f59ab65eeca9606516811d09372fec17958676",
+            "size": 13,
+            "fallback": false
+          },
+          {
+            "role": "font_callout_status",
+            "label": "Status callout",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 12,
+            "fallback": false
+          },
+          {
+            "role": "font_callout_creature",
+            "label": "Creature callout",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 11,
+            "fallback": false
+          },
+          {
+            "role": "font_callout_crit",
+            "label": "Critical callout",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 18,
+            "fallback": false
+          },
+          {
+            "role": "font_callout_levelup",
+            "label": "Level-up callout",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 21,
+            "fallback": false
+          }
+        ],
+        "diagnostics": [
+          {
+            "severity": "warning",
+            "code": "FONT_OPTIONAL_GLYPHS",
+            "field": "font_ui_normal",
+            "path": "roguelike/data/display/typography.json",
+            "asset": "game_typography",
+            "message": "Bounded optional/decorative glyph gaps: ✓. These are pre-existing default limitations, not a universal Unicode guarantee.",
+            "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+          },
+          {
+            "severity": "warning",
+            "code": "FONT_OPTIONAL_GLYPHS",
+            "field": "font_ui_small",
+            "path": "roguelike/data/display/typography.json",
+            "asset": "game_typography",
+            "message": "Bounded optional/decorative glyph gaps: ☁ϟ. These are pre-existing default limitations, not a universal Unicode guarantee.",
+            "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+          },
+          {
+            "severity": "warning",
+            "code": "FONT_OPTIONAL_GLYPHS",
+            "field": "font_ui_tiny",
+            "path": "roguelike/data/display/typography.json",
+            "asset": "game_typography",
+            "message": "Bounded optional/decorative glyph gaps: ○●. These are pre-existing default limitations, not a universal Unicode guarantee.",
+            "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+          }
+        ],
+        "fallback": false,
+        "basis": "saved profile",
+        "profile_sha256": "a663f4f90e723f23740991afe87380dfcfad86628ac790a292225de0e32bb5be"
+      },
+      "warnings": [],
+      "profile_sha256": "a663f4f90e723f23740991afe87380dfcfad86628ac790a292225de0e32bb5be",
+      "corruption_alphabet": "ſłðþæœ†‡§¶ı,.;:!?/\\|-_~fijltI1rlicevunmwszxao{}[]()<>",
+      "small_alias": true,
+      "tiny_alias": true,
+      "scope": "Fresh production DisplayConfig initialization plus reader/HUD/perk/callout consumers; no world or personal save"
+    },
+    "invalid_present_profile": {
+      "pid": 19244,
+      "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+      "executable": "G:\\GameDev\\RoguelikeProject\\workbench\\src-tauri\\target\\release\\python\\python.exe",
+      "pygame": "2.6.1",
+      "typography": {
+        "roles": [
+          {
+            "role": "font_ui_large",
+            "label": "Headings",
+            "requested": "IMFellEnglish-Regular.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+            "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+            "size": 22,
+            "fallback": true
+          },
+          {
+            "role": "font_ui_normal",
+            "label": "Ordinary prose",
+            "requested": "IMFellEnglish-Italic.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+            "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+            "size": 18,
+            "fallback": true
+          },
+          {
+            "role": "font_ui_small",
+            "label": "Small details",
+            "requested": "missing.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+            "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+            "size": 16,
+            "fallback": true
+          },
+          {
+            "role": "font_ui_tiny",
+            "label": "Message log",
+            "requested": "Junicode.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode.ttf",
+            "sha256": "d0fa7754c23dbef8443829b5d49cd790ad8b34c931413b600ed6ffd4911a286d",
+            "size": 14,
+            "fallback": true
+          },
+          {
+            "role": "font_ui_italic",
+            "label": "Italic role",
+            "requested": "Junicode-Italic.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+            "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+            "size": 18,
+            "fallback": true
+          },
+          {
+            "role": "font_ui_bold",
+            "label": "Bold role",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 18,
+            "fallback": true
+          },
+          {
+            "role": "font_ui_bold_large",
+            "label": "Large bold role",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 22,
+            "fallback": true
+          },
+          {
+            "role": "font_deep",
+            "label": "Known Deep Tongue",
+            "requested": "Junicode-Italic.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Italic.ttf",
+            "sha256": "28a45fd8a6192ed21312fdb63a29581edfcdf6a488b5bc07ed4b62d7de78941b",
+            "size": 18,
+            "fallback": true
+          },
+          {
+            "role": "font_callout_damage",
+            "label": "Damage callout",
+            "requested": "FoulisGreek.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 13,
+            "fallback": true
+          },
+          {
+            "role": "font_callout_status",
+            "label": "Status callout",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 12,
+            "fallback": true
+          },
+          {
+            "role": "font_callout_creature",
+            "label": "Creature callout",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 11,
+            "fallback": true
+          },
+          {
+            "role": "font_callout_crit",
+            "label": "Critical callout",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 18,
+            "fallback": true
+          },
+          {
+            "role": "font_callout_levelup",
+            "label": "Level-up callout",
+            "requested": "Junicode-Bold.ttf",
+            "resolved": "roguelike/assets/Fonts/Junicode-Bold.ttf",
+            "sha256": "2670f7ec4f6063ea196c706f36d4154ecbeec84653996f1c8a34b6e06ed1f3e9",
+            "size": 21,
+            "fallback": true
+          }
+        ],
+        "diagnostics": [
+          {
+            "severity": "warning",
+            "code": "FONT_FALLBACK",
+            "field": "",
+            "path": "roguelike/data/display/typography.json",
+            "asset": "game_typography",
+            "message": "Typography G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5e\\native-1793149446166\\project\\roguelike\\data\\display\\typography.json: font_ui_small: 'missing.ttf': [WinError 2] The system cannot find the file specified: 'G:\\\\GameDev\\\\RoguelikeProject\\\\workbench\\\\.artifacts\\\\w5e\\\\native-1793149446166\\\\project\\\\roguelike\\\\assets\\\\Fonts\\\\missing.ttf'. Using the complete known-default assignment; repair the profile in Workbench.",
+            "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+          },
+          {
+            "severity": "warning",
+            "code": "FONT_OPTIONAL_GLYPHS",
+            "field": "font_ui_normal",
+            "path": "roguelike/data/display/typography.json",
+            "asset": "game_typography",
+            "message": "Bounded optional/decorative glyph gaps: ✓. These are pre-existing default limitations, not a universal Unicode guarantee.",
+            "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+          },
+          {
+            "severity": "warning",
+            "code": "FONT_OPTIONAL_GLYPHS",
+            "field": "font_ui_small",
+            "path": "roguelike/data/display/typography.json",
+            "asset": "game_typography",
+            "message": "Bounded optional/decorative glyph gaps: ☁ϟ. These are pre-existing default limitations, not a universal Unicode guarantee.",
+            "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+          },
+          {
+            "severity": "warning",
+            "code": "FONT_OPTIONAL_GLYPHS",
+            "field": "font_ui_tiny",
+            "path": "roguelike/data/display/typography.json",
+            "asset": "game_typography",
+            "message": "Bounded optional/decorative glyph gaps: ○●. These are pre-existing default limitations, not a universal Unicode guarantee.",
+            "correction": "Choose a usable project TTF for this role; saved changes apply at next game initialization."
+          }
+        ],
+        "fallback": true,
+        "basis": "invalid saved profile / complete defaults",
+        "profile_sha256": null
+      },
+      "warnings": [
+        "Typography G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5e\\native-1793149446166\\project\\roguelike\\data\\display\\typography.json: font_ui_small: 'missing.ttf': [WinError 2] The system cannot find the file specified: 'G:\\\\GameDev\\\\RoguelikeProject\\\\workbench\\\\.artifacts\\\\w5e\\\\native-1793149446166\\\\project\\\\roguelike\\\\assets\\\\Fonts\\\\missing.ttf'. Using the complete known-default assignment; repair the profile in Workbench."
+      ],
+      "profile_sha256": "16dd60bdf7d585beabfd2966f9ac3c2218385315ee050693290b1dec66999ddc",
+      "corruption_alphabet": "ſłðþæœ†‡§¶ıɣɑɛɔʊ,.;:!?/\\|-_~fijltI1rlicevunmwszxao{}[]()<>",
+      "small_alias": true,
+      "tiny_alias": true,
+      "scope": "Fresh production DisplayConfig initialization plus reader/HUD/perk/callout consumers; no world or personal save"
+    },
+    "errors": []
+  },
+  "recovery": {
+    "checks": [
+      "failed recovery checkpoint keeps previous complete copy and in-memory draft; failed close flush retains owner; explicit retry succeeds",
+      "a separate native process using the real recovery writer cannot overwrite the running application's locked record",
+      "only host-accepted edits become recovery truth; rejected optimistic raw edit rolls back",
+      "two same-family text drafts and one item survive a cold native process restart with independent exact text and intent; legacy drafts cannot be silently kept",
+      "real publication then failed reopen preserves accepted raw and structured newer edits on retry",
+      "successful host replacement with lost response refuses obsolete-owner raw and structured edits; completed fact retained",
+      "cold restart reconciliation reads exact published bytes, retires only covered item generation, and refuses to retire newer text work",
+      "separate abrupt-exit segment retains completed checkpoint; failed worker handshake leaves inspection, comparison and deliberate selected discard available"
+    ],
+    "process_count": 5,
+    "publication": {
+      "path": "roguelike/data/items/components/w5d_draft_2.json",
+      "reviewed": "f5e7033507ca144a742ec6bca19df1512c0b1e3b0808712c80a01b4513d919ba",
+      "saved": "f5e7033507ca144a742ec6bca19df1512c0b1e3b0808712c80a01b4513d919ba",
+      "reopened": "f5e7033507ca144a742ec6bca19df1512c0b1e3b0808712c80a01b4513d919ba",
+      "reconciled_without_apply": true
+    },
+    "abrupt": {
+      "generation": 4,
+      "sha256": "7e43faa08f26df2c7493c7bf5fc564b0f3004dbf1fd924e9a2c2c543cd6f59d6",
+      "restored_sha256": "7e43faa08f26df2c7493c7bf5fc564b0f3004dbf1fd924e9a2c2c543cd6f59d6"
+    }
+  },
+  "workspace": {
+    "checks": [
+      "actual Tauri WebView2 window",
+      "WebView network offline",
+      "repository handshake, live asset validation and Pixi rendering",
+      "production arrival click maps to (15,20), stairs_up",
+      "real DIMENSION diagnostic for disposable fixture",
+      "byte-exact view, close and reopen journey",
+      "host traversal rejection",
+      "cancel and retry without app hang",
+      "a held real freshness response disables conflicting UI actions until release without queueing work",
+      "six independent file owners; exact invalid source; variant targets and undo/redo retained; aliases/repeated opens reuse tokens; shared-item references return to both recipe origins",
+      "targeted close/reload keep/discard and obsolete-token rejection; destination owner collision; one reviewed/saved/reopened variant with deliberate recovery after reopen failure",
+      "individual external conflict and conservative freshness preserve drafts; legacy structure source remains byte-exact; unavailable closed reference origin is explicit",
+      "invalid project visible",
+      "no temporary worker roots remain after native close"
+    ],
+    "variant": {
+      "path": "roguelike/data/texts/lab/w5c_parked_4.json",
+      "reviewed_sha256": "68a52c4b10cd5c93fb99ae7a1a451fadd7dd214d2a153c32145d38ff0245365b",
+      "saved_sha256": "68a52c4b10cd5c93fb99ae7a1a451fadd7dd214d2a153c32145d38ff0245365b",
+      "reopened_sha256": "68a52c4b10cd5c93fb99ae7a1a451fadd7dd214d2a153c32145d38ff0245365b",
+      "reopen_failure": "one-shot transport injection after real publication",
+      "recovery": "verified reopen only"
+    },
+    "monitoring": {
+      "one": {
+        "wall_ms": 6809.300000071526,
+        "sweeps": [
+          {
+            "wall_ms": 110.60000002384186,
+            "elapsed_ms": 107.3482,
+            "dependency_scans": 1,
+            "documents": 1
+          },
+          {
+            "wall_ms": 96.5,
+            "elapsed_ms": 94.0457,
+            "dependency_scans": 1,
+            "documents": 1
+          }
+        ],
+        "max_inflight": 1
+      },
+      "six": {
+        "wall_ms": 6805,
+        "sweeps": [
+          {
+            "wall_ms": 116.60000002384186,
+            "elapsed_ms": 113.10040000000001,
+            "dependency_scans": 1,
+            "documents": 6
+          },
+          {
+            "wall_ms": 127.10000002384186,
+            "elapsed_ms": 123.98960000000001,
+            "dependency_scans": 1,
+            "documents": 6
+          }
+        ],
+        "max_inflight": 1
+      }
+    }
+  },
+  "found_text": {
+    "checks": [
+      "actual Tauri WebView2 window",
+      "WebView network offline",
+      "repository handshake, live asset validation and Pixi rendering",
+      "production arrival click maps to (15,20), stairs_up",
+      "real DIMENSION diagnostic for disposable fixture",
+      "byte-exact view, close and reopen journey",
+      "host traversal rejection",
+      "cancel and retry without app hang",
+      "registered text controls, ordered multiline pages, undo/redo, invalid raw repair, cancellation/stale completion, production preview and stale resources, variant review/apply/hash reopen, parked item/recipe drafts, reserved target and collision refusal, preview cannot authorize publication, real physical letter pickup/inventory/read controls",
+      "invalid project visible",
+      "no temporary worker roots remain after native close"
+    ],
+    "physical_use": {
+      "passed": true,
+      "definition_id": "w5b_found_letter",
+      "title": "Disposable correspondence — æ \"quoted\" revised",
+      "saved_sha256": "5ed718958af32739faf49fe272723ba9e675bf38527a6e693ddcdeb553b17005",
+      "reloaded_exact_definition": true,
+      "population_map_text_default": false,
+      "item_id": "letter",
+      "text_id": "w5b_found_letter",
+      "source_xy": [
+        3,
+        3
+      ],
+      "physical_xy": [
+        38,
+        21
+      ],
+      "arrival": [
+        37,
+        23
+      ],
+      "approach_turns": 3,
+      "pages": [
+        {
+          "index": 0,
+          "body_sha256": "99038290ab5f68692d91f6a058c5c527d3d151ecdbd53b099b908f814582a126",
+          "rows": 91,
+          "max_scroll": 2156,
+          "all_rows_reached": true
+        },
+        {
+          "index": 1,
+          "body_sha256": "6dbc4fbd3a38395b8a9b4a01d63f24f74b2a9a43e4c1a98f2a416fea75ab9800",
+          "rows": 4,
+          "max_scroll": 0,
+          "all_rows_reached": true
+        },
+        {
+          "index": 2,
+          "body_sha256": "de5f0ed2daa34be9cb7718df672c7f355c753039eaafab7f8a28218c247674f2",
+          "rows": 1,
+          "max_scroll": 0,
+          "all_rows_reached": true
+        }
+      ],
+      "pickup_turns": 1,
+      "inventory_use_turns": 1,
+      "reader_navigation_turns": 0,
+      "letter_retained": true,
+      "knowledge_rng_hunger_unchanged_during_reading": true,
+      "saves_written": false,
+      "scope": "Controlled disposable authored submap and existing letter. Production validation, construction, population, pickup, inventory selection/use and reader keys. No natural acquisition, world selection or campaign balance claim."
+    }
+  },
+  "startup": [
+    {
+      "name": "fresh-owner-launch",
+      "passed": true,
+      "ms": 13713
+    },
+    {
+      "name": "owner-restart",
+      "passed": true,
+      "ms": 7739
+    },
+    {
+      "name": "change-project",
+      "passed": true,
+      "ms": 17370
+    },
+    {
+      "name": "changed-project-restart",
+      "passed": true,
+      "ms": 7763
+    }
+  ],
+  "preservation": {
+    "outside_scope_files": 8146,
+    "byte_and_mtime_changes": 0,
+    "personal_save_files": 7,
+    "personal_save_membership_unchanged": true,
+    "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+    "launcher_sha256": "c5f71560f424e9cc718376bfae30970c4c3188a94f25e173dc6674b33bd66d6c",
+    "owner_settings_sha256": "4c8efc27e9b2f11ee6868ca994a76579b7ecb93a84b0f1afbfd4ce72e1101620"
+  },
+  "development_corrections": [
+    "Corrupt-font b\"not a font\" originally caused native access violation in FreeType. Packaged pygame.font constructor can silently return a NULL handle; the production loader now calls size(\"A\"), which safely raises SDL error, before coverage probing. Both strict rejection and whole-default fallback are retained regression fixtures.",
+    "Native assertions now select visible controls among mounted document panels, await the real BUSY interval before checking REVIEW_REQUIRED, and use the restored process token. These preliminary failed runs are not passing evidence.",
+    "Existing variant-only families retain same-source semantic inspection without gaining review authority; a final host correction preserves that existing regression."
+  ],
+  "artifact_sha256": {
+    "workbench/.artifacts/w5e/frontend.log": "1db9bd917c295902d0219f1d60f6e60c02884dd35d0119380a78c330680a7649",
+    "workbench/.artifacts/w5e/typecheck.log": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b",
+    "workbench/.artifacts/w5e/rust-tests.log": "cdff1d0c34369df0069d2235ece6f9299be9a862145b73d69df1998b0e9c7b71",
+    "workbench/.artifacts/w5e/clippy.log": "2e5b35246b92e94a3f3c2b237294fbd57bc864ccd3b5c5a4aa2dbc2e586267d7",
+    "workbench/.artifacts/w5e/worker-suite.log": "8d62a2e91326a0bb318a5ddc44b11450663e6fd0d7f672d67b6aa2ed2bd81a25",
+    "workbench/.artifacts/w5e/packaged-typography-tests.log": "2bbfa253b38e9c43d74ba7c013f55f68863cc9c001207365be72ecb479344490",
+    "workbench/.artifacts/w5e/reader-existing.log": "2492edd78f9406cf0bfdf46cb676cbd14aad308e09024f5760921ffadead328a",
+    "workbench/.artifacts/w5e/dependency-absence.log": "60586d3fb4ad5707504c01dbd224c3a984928e60e7178a84a939ba51f9219581",
+    "workbench/.artifacts/w5e/build-final.log": "e5b8dc52430f37c5b0d67c4faac9c33a44d5a9e282f247c45979d3a7bb4a4061",
+    "workbench/.artifacts/w5e/native-final.log": "e26b7e9f5ddc3e80697d3830d5a8c7d89413ed6666ffe294ead4744114c2d8d1",
+    "workbench/.artifacts/w5e/recovery-native.log": "57c274f17f0aa633694fbf5cbfcea8eb18d0d7e50f64789a73f1a58d622b5a71",
+    "workbench/.artifacts/w5e/workspace-native.log": "2ddb09a08d266df12c965abbaa5597d46015a9e38eda58e2a663ecec210f5903",
+    "workbench/.artifacts/w5e/text-native.log": "f3b8f6a39b9305c763d0ae35c4cf52508044d8f4917e8c3aabe768a59ee10b75",
+    "workbench/.artifacts/w5e/startup.log": "f66c649f837d5a957e7075c491e9a1cd9aa2f0b5dd4ad6108582562961dd7251",
+    "workbench/.artifacts/w5e/preservation.json": "537033a9f9e2cfdba65c169a6552a0b5bc7f2d481ad7a1704a81dd63ae96489e",
+    "workbench/.artifacts/w5e/specimen.png": "0cdb0b38da95d1f1bf0b809c7bb83dbfaedf27bd3fb739d2008cbdd1f9d2a5f4",
+    "workbench/.artifacts/w5e/reader.png": "4d7a3b4de1a902f3d706d7c9399de5b9c8c60d812263bddea6fef040f9f39c46",
+    "workbench/.artifacts/w5e/hud-menu-callouts.png": "6606f904b107c213fee0e90af2d755982e3b0fe20968592d10e540261217ede5",
+    "workbench/.artifacts/w5e/native-1793149446166/receipt.json": "32ee5d6b6ed4c3ff04ed2e671689217e0ff92ba13d2560a1b2b74de0f9d8a1e1",
+    "workbench/.artifacts/w5e/native-1793149446166/candidate-preview.png": "37d3259dadcfa9b80f354b54d43558d01159f369bd9fae982e887eedcaf2bdc9",
+    "workbench/.artifacts/w5e/native-1793149446166/published-reopened.png": "3d6d4b99feae2b75988e332d0c9c63767f455453d082a0675b740822d705e51d",
+    "workbench/.artifacts/w5d/native-1793149391984/receipt.json": "eff7080bbee07f38aa880752cbceea22c875d533a660a97fd4c3720cab71428c",
+    "workbench/.artifacts/desktop-workspace/receipt.json": "7d04e5ef7080cf5a8ee46d4245e9bec9c1ac5ed347c1889d1f3751e310e387ad",
+    "workbench/.artifacts/desktop-texts/receipt.json": "489e9903b3d1be166177010be2b7e967ae188646b93eb357c57257f5c0e51ff7",
+    "workbench/.artifacts/w4b/startup-1793149392111/receipt.json": "85bdb09541612179051a185132ec210c9993d686945e90f24fd846e3a3486282"
+  },
+  "limits": [
+    "Functional ASCII/symbol repertoire and representative layouts only; no universal Unicode or every-screen guarantee. Default missing checkmark/sprint pips/decorative storm symbols remain warnings.",
+    "Unknown-language generated glyphs, bitmap ASCII sheet, zoom, font sizes, imports and live font replacement are outside scope.",
+    "Screens apply saved profiles at next initialization; ordinary text previews use saved dependencies, not another draft.",
+    "Recovery preserves accepted completed checkpoints, not unacknowledged edits or full session/history.",
+    "Native images/logs are ignored local artifacts bound by hashes; no clean-machine installation claim. No wiki or reference-pack changes."
+  ]
+}
