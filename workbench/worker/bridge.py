@@ -33,7 +33,7 @@ POOL_ROUTE = "contextual_loot_pool"
 ITEM_ROUTE = "item_definition"
 RECIPE_ROUTE = "recipe_definition"
 CREATURE_ROUTE = "creature_definition"
-LAYOUT_CONTRACT = "direct-creatures-1"
+LAYOUT_CONTRACT = "authored-room-1"
 G17_EXAMPLE = "roguelike/docs/examples/g17_authored_creature_room.json"
 G17_ACCESS = "roguelike/docs/examples/g17_authored_creature_room.access.json"
 DEPENDENCIES = {"pygame": "2.6.1", "tcod": "19.3.0", "numpy": "2.4.6",
@@ -172,9 +172,7 @@ def discover(root, data=None):
     """Same immediate-folder convention as StructureCatalog, including invalid candidates."""
     from generation.structure_contract import ELIGIBILITY, read_document, StructureError
     rows = []
-    candidates = list((root / "roguelike/data/layouts").glob("*.json"))
-    if (root / G17_EXAMPLE).is_file(): candidates.append(root / G17_EXAMPLE)
-    candidates += list((root / "roguelike/data/buildings").glob("*/*.json"))
+    candidates = list((root / "roguelike/data/buildings").glob("*/*.json"))
     candidates += list((root / "roguelike/data/loot_pools").glob("*.json"))
     for p in sorted(candidates):
         category = p.parent.name if p.parent.parent.name == "buildings" else None
@@ -187,8 +185,6 @@ def discover(root, data=None):
             diagnostics = []
         except StructureError as error:
             raw = {}; diagnostics = [d.json() for d in error.diagnostics]
-        if route == ROUTE:
-            editable = layout_capability(raw, p.relative_to(root).as_posix(), data)
         rows.append({"path": p.relative_to(root).as_posix(), "id": raw.get("id") if isinstance(raw.get("id"), str) else p.stem,
                      "name": str(raw.get("name", raw.get("description", ""))), "category": category,
                      "route": route, "editable": editable,
@@ -199,178 +195,6 @@ def discover(root, data=None):
     from engine.content_authoring import families
     for family in families(): rows.extend(family.discover(root))
     return rows
-
-
-def layout_capability(raw, path, data):
-    """Narrow editor shape/entitlement. All gameplay admission stays in G17."""
-    from generation.structure_contract import compile_structure, StructureError
-    if not data or not isinstance(raw, dict) or not (path.startswith("roguelike/data/layouts/") or path == G17_EXAMPLE):
-        return False
-    if raw.get("id") == "starting_lab" or Path(path).name == "starting_lab.json":
-        return False  # bespoke laboratory initialization is not this authoring route
-    rows = raw.get("layers")
-    if (not isinstance(rows, list) or not rows or not all(isinstance(r, str) for r in rows)
-            or "legend_weights" in raw or not isinstance(raw.get("player_start"), dict)):
-        return False
-    if not isinstance(raw.get("special_tiles", []), list): return False
-    if any(s.get("type", s.get("kind")) not in ("creature", "item", "container")
-           for s in raw.get("special_tiles", []) if isinstance(s, dict)):
-        return False
-    try:
-        entry = compile_structure(raw, ROUTE, data, path=path)
-        return entry.width <= 80 and entry.height <= 43
-    except StructureError:
-        return False
-
-
-def creature_marker(s):
-    return isinstance(s, dict) and s.get("type", s.get("kind")) == "creature"
-
-
-def layout_changes_allowed(original, draft):
-    """Only ID and direct creature records change; context stays exact in value/order.
-
-    Existing records may be deleted. New records have only public scalar fields;
-    retained immutable fields must match an original record in source order.
-    """
-    if not isinstance(draft, dict): return False
-    def same(a, b): return json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)
-    if not same({k:v for k,v in original.items() if k not in ("id", "special_tiles")},
-                {k:v for k,v in draft.items() if k not in ("id", "special_tiles")}): return False
-    old, new = original.get("special_tiles", []), draft.get("special_tiles", [])
-    if not isinstance(new, list): return False
-    def immutable(s): return {k:v for k,v in s.items() if k not in ("x", "y", "creature_id")}
-    # Sequence alignment permits add/delete, but cannot reorder or mutate context.
-    states = {0}
-    for candidate in new:
-        next_states = set()
-        for start in states:
-            pos = start
-            while True:
-                if creature_marker(candidate) and set(candidate) <= {"type", "kind", "x", "y", "creature_id"}:
-                    next_states.add(pos)
-                if pos == len(old): break
-                source = old[pos]
-                if ((creature_marker(source) and creature_marker(candidate) and same(immutable(source), immutable(candidate)))
-                        or (not creature_marker(source) and same(source, candidate))):
-                    next_states.add(pos + 1)
-                if not creature_marker(source): break
-                pos += 1
-        states = next_states
-    return any(all(creature_marker(s) for s in old[pos:]) for pos in states)
-
-
-def layout_catalog(data, root):
-    from generation.structure_contract import Validator
-    creatures = []
-    for identifier, locations in definition_sources(root / "roguelike/data", "entities").items():
-        if len(locations) != 1 or "/entities/creatures/" not in locations[0]["path"]: continue
-        v = Validator(data, "<catalogue>", identifier, ROUTE)
-        v.special(dict(type="creature", x=0, y=0, creature_id=identifier), "special_tiles[0]", 1, 1)
-        if not any(d.severity == "error" for d in v.diagnostics):
-            creatures.append(dict(id=identifier, name=data.entities[identifier].get("name", identifier),
-                                  path=locations[0]["path"]))
-    return {"terrain": {k: {"walkable":bool(v.get("walkable",True)), "transparent":bool(v.get("transparent",True))} for k,v in data.terrain.items()},
-            "decor": {k:{"name":str(v.get("name",k)),"container":v.get("container") is True,"blocks_movement":bool(v.get("blocks_movement",False))} for k,v in data.decoratives.items()},
-            "loot_pools": sorted(data.loot_pools), "creatures": sorted(creatures, key=lambda r:r["id"])}
-
-
-def submap_preview(raw, data, seed, path, identity, *, expectations=None, access_source=None):
-    from generation.structure_preview import preview
-    from generation.context import GenerationError
-    if type(seed) is not int or not 0 <= seed <= 2147483647:
-        fail("MALFORMED_REQUEST", "Invalid preview seed.", "Use an integer from 0 to 2147483647.")
-    random.seed(seed)
-    import numpy as np
-    np.random.seed(seed)
-    start = time.perf_counter()
-    def problem(code, field, message, xy=None):
-        return dict(severity="error", code=code, path=path, asset=raw["id"], field=field,
-                    message=message, correction="Move or correct the source record, then validate again.", source_xy=xy, layer="specials")
-    try:
-        report, local_map, actors = preview(raw, ROUTE, data, seed=seed, path=path,
-                                           expectations=expectations if expectations is not None else {"targets": []})
-    except GenerationError as error:
-        match = re.search(r"special\[(\d+)\]", str(error))
-        index = int(match[1]) if match else None
-        record = raw.get("special_tiles", [])[index] if index is not None and index < len(raw.get("special_tiles", [])) else None
-        return None, [problem("PRODUCTION_PLACEMENT", f"special_tiles[{index}]" if record else "special_tiles", str(error), [record["x"],record["y"]] if record else None)]
-    ox, oy = report["origin"]
-    problems = [problem("ACCESS", r["target"], "Production access check failed.", [r["xy"][0]-ox,r["xy"][1]-oy] if "xy" in r else None) for r in report["access"] if not r["passed"]]
-    problems += [problem(r["code"], "special_tiles", json.dumps(r), [r["xy"][0]-ox,r["xy"][1]-oy]) for r in report["occupant_diagnostics"]]
-    # These are receipts from create_submap/populate, never synthetic map markers.
-    for row in report["population_receipts"]:
-        if row["kind"] == "creature":
-            index = int(re.search(r"special\[(\d+)\]", row["record_id"])[1])
-            row.update(source_index=index, actor_classes=[type(a).__name__ for a in actors if (a.x,a.y) == tuple(row["xy"])])
-            locations = definition_sources(Path(data.root), "entities").get(row["creature_definition"]["id"], [])
-            row["creature_definition"]["sources"] = [dict(path=s["path"], pointer=s["pointer"],
-                file_sha256=hashlib.sha256((Path(data.root) / s["path"].removeprefix("roguelike/data/")).read_bytes()).hexdigest()) for s in locations]
-    rows = report["terrain"]
-    result = {**report, "valid": not problems, "passed": report["passed"] and not problems,
-        "width":local_map.width,"height":local_map.height,"source":identity,"scene_seed":str(report["scene_seed"]),
-        "candidate_sha256":report["candidate_identity"],"source_path":path,
-        "legend":{t:{"walkable":bool(data.terrain[t].get("walkable",True)),"transparent":bool(data.terrain[t].get("transparent",True))} for t in sorted({t for row in rows for t in row})},
-        "terrain_sha256":hashlib.sha256(json.dumps(rows,separators=(",",":")).encode()).hexdigest(),
-        "elapsed_ms":round((time.perf_counter()-start)*1000,2),"access_source":access_source or {"kind":"generated arrival","expectations":{"targets":[]}},
-        "context":"Controlled authored_submap: compiler → create_submap → generate_submap → CreatureFactory. Centering/translation only; actual generated arrival reserved.",
-        "rendering":"Revealed initial scene and actually instantiated actors. No campaign, AI/combat, balance, persistence or natural selection proof."}
-    return result, problems
-
-
-def layout_validation(request, root, scratch, identity):
-    from engine.data_loader import DataLoader
-    from generation.structure_contract import read_document, compile_structure, StructureError
-    source_path = asset_path(root, request.get("source_asset"))
-    source = read_document(source_path)
-    original_data = DataLoader(str(root / "roguelike/data"))
-    if not layout_capability(source, request["source_asset"], original_data):
-        fail("READ_ONLY_LAYOUT", "Original source has no direct-creature editing entitlement.", "Choose a supported authored submap from discovery.")
-    path = asset_path(root, request["asset"], new=request["asset"] != G17_EXAMPLE)
-    if path.parent != root / "roguelike/data/layouts" and not (path == source_path and request["source_asset"] == G17_EXAMPLE):
-        fail("PATH_ESCAPE", "Layout variants stay in layouts/.", "Use a new safe layout ID.")
-    draft = request.get("draft")
-    if not isinstance(draft, str) or len(draft.encode()) > 1024*1024:
-        fail("MALFORMED_REQUEST", "Expected a bounded UTF-8 draft.", "Keep the draft under 1 MiB.")
-    copied = scratch / "data"
-    shutil.copytree(root / "roguelike/data", copied)
-    selected = copied / "layouts" / path.name
-    selected.write_bytes(draft.encode())
-    diagnostics = []; generated = None; syntax = False; contract = False
-    try:
-        raw = read_document(selected); syntax = True
-        compile_structure(raw, ROUTE, original_data, path=request["asset"])
-        # StructureCatalog also enforces unique layout IDs. Reject case aliases explicitly.
-        for p in copied.joinpath("layouts").glob("*.json"):
-            if p != selected and str(read_document(p).get("id", "")).casefold() == str(raw.get("id", "")).casefold():
-                fail("DUPLICATE_ID", "Layout ID already exists (including case aliases).", "Choose a unique layout ID.")
-        data = DataLoader(str(copied))
-        compiled = compile_structure(raw, ROUTE, data, path=request["asset"])
-        if not layout_changes_allowed(source, raw):
-            fail("LAYOUT_FIELD", "Only direct creature records and the new variant ID may change.", "Restore terrain, arrival, other specials and immutable metadata.")
-        eligible = {r["id"] for r in layout_catalog(data, root)["creatures"]}
-        if any(creature_marker(s) and s.get("creature_id") not in eligible for s in raw.get("special_tiles", [])):
-            fail("CREATURE_SOURCE", "Creature does not resolve to one eligible catalogue source.", "Choose an existing unique non-player creature from this project's catalogue.")
-        diagnostics = [d.json() for d in compiled.diagnostics]; contract = True
-        generated, problems = submap_preview(raw, data, request.get("seed", 20261023), request["asset"], identity)
-        diagnostics.extend(problems)
-    except StructureError as error:
-        diagnostics = [d.json() for d in error.diagnostics]
-        if isinstance(error.__cause__, json.JSONDecodeError):
-            for d in diagnostics: d.update(line=error.__cause__.lineno,column=error.__cause__.colno)
-    for d in diagnostics:
-        d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
-    after = source_identity(root)
-    if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
-        fail("SOURCE_CHANGED", "Source/dependencies changed during validation.", "Revalidate the retained draft.")
-    digest = hashlib.sha256(draft.encode()).hexdigest()
-    if generated: generated.update(draft_sha256=digest, source_sha256=digest, original_source_sha256=hashlib.sha256(source_path.read_bytes()).hexdigest())
-    valid = bool(generated and generated["passed"] and not any(d["severity"] == "error" for d in diagnostics))
-    return dict(valid=valid, syntax_valid=syntax, contract_valid=contract, references_valid=contract,
-        placement_verified=valid, population_verified=valid, layout_contract=LAYOUT_CONTRACT, route=ROUTE,
-        diagnostics=diagnostics, draft_sha256=digest, path=request["asset"], preview=generated if valid else None,
-        source=identity, contract="g2-2", worker_version=WORKER_VERSION, worker_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        limitations="Exact draft compiled and initial placement/factory construction observed. Saving a layout does not automatically make it appear in a new campaign.")
 
 
 def definition_sources(data_root, family):
@@ -491,11 +315,11 @@ def family_validation(family, request, root, scratch, identity):
     from engine.data_loader import DataLoader
     from engine.content_authoring import family_for
     from generation.structure_contract import read_document, StructureError
-    path = asset_path(root, request["asset"], new=True)
+    source_asset = request.get("source_asset") or request["asset"]
+    path = asset_path(root, request["asset"], new=request["asset"] != source_asset)
     draft = request.get("draft")
     if not isinstance(draft, str) or len(draft.encode("utf-8")) > 1024 * 1024:
         fail("MALFORMED_REQUEST", "Expected UTF-8 draft up to 1 MiB.", "Use a bounded definition.")
-    source_asset = request.get("source_asset") or request["asset"]
     source_family = family_for(source_asset)
     if not source_family or source_family.id != family.id:
         fail("SOURCE_ENTITLEMENT", "Candidate and original must belong to the same registered family.", "Open the original discovered source.")
@@ -503,7 +327,7 @@ def family_validation(family, request, root, scratch, identity):
     digest = hashlib.sha256(draft.encode("utf-8")).hexdigest()
     diagnostics = []; context = None; syntax = False
     rendered = None
-    original_operations = [] if family.id == "creature" else list(family.operations)
+    original_operations = []
     envelope = family.envelope(None)
     diagnostics += capability_diagnostics(envelope, source_asset)
     copied = scratch / "data"
@@ -512,20 +336,20 @@ def family_validation(family, request, root, scratch, identity):
         original_data = DataLoader(str(root / "roguelike/data"))
         original_context = family.context(original_raw, original_data, source_asset, root / "roguelike/data", identity, hashlib.sha256(original.read_bytes()).hexdigest(), resource_root=root)
         original_operations = family.operations_for(original_context)
-        unchanged_inspection = family.id == "creature" and source_asset == request["asset"] and draft.encode("utf-8") == original.read_bytes()
+        unchanged_inspection = getattr(family.module, "READONLY_CONSTRUCTION", False) and source_asset == request["asset"] and draft.encode("utf-8") == original.read_bytes()
         if not family.eligible(original_context) and not unchanged_inspection:
             diagnostics.append(dict(severity="error", code="SOURCE_ENTITLEMENT", path=source_asset, asset="", field="",
                 message="Original discovered source is read-only; changing candidate shape cannot upgrade it.", correction="Choose a supported unambiguous original source."))
         shutil.copytree(root / "roguelike/data", copied)
-        selected = copied / path.relative_to(root / "roguelike/data")
+        selected = copied / family.staging_path(request["asset"])
         selected.write_bytes(draft.encode("utf-8"))
         raw = read_document(selected); syntax = True
         data = DataLoader(str(copied))
-        if family.id == "creature" and not unchanged_inspection:
-            diagnostics += family.module.authorize_candidate(original_raw, raw, source_asset, request["asset"])
+        if not unchanged_inspection:
+            diagnostics += family.authorize(original_raw, raw, source_asset, request["asset"], data)
         diagnostics += family.validate(raw, data, request["asset"], copied, resource_root=root)
         if not any(d["severity"] == "error" for d in diagnostics):
-            context = family.context(raw, data, request["asset"], copied, identity, digest, observe=True, resource_root=root)
+            context = family.context(raw, data, request["asset"], copied, identity, digest, observe=True, resource_root=root, seed=request.get("seed"))
             diagnostics += [d for record in context["records"] for d in record["diagnostics"]]
             if request.get("preview_inputs") is not None and not any(d["severity"] == "error" for d in diagnostics):
                 rendered = family.preview(raw, data, root, request["preview_inputs"])
@@ -543,28 +367,30 @@ def family_validation(family, request, root, scratch, identity):
     if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
         fail("SOURCE_CHANGED", "Dependencies changed during validation.", "Reopen and validate again.")
     evidence = family.module.authoring_evidence(context)
+    if evidence.get("preview"):
+        evidence["preview"].update(original_source_path=source_asset,original_source_sha256=hashlib.sha256(original.read_bytes()).hexdigest(),
+                                  layout_contract=envelope["contract"],descriptor_sha256=envelope["descriptor_sha256"],
+                                  runtime=dict(python=platform.python_version(),dependencies=DEPENDENCIES))
     valid = syntax and evidence["semantic_verified"] and not any(d["severity"] == "error" for d in diagnostics)
-    return dict(valid=valid, syntax_valid=syntax, contract_valid=valid, references_valid=valid,
+    result = dict(valid=valid, syntax_valid=syntax, contract_valid=valid, references_valid=valid,
                 diagnostics=diagnostics, draft_sha256=digest, route=family.route, contract="g2-2",
                 family=family.envelope(context, operations=original_operations), source_asset=source_asset,
                 source_sha256=hashlib.sha256(original.read_bytes()).hexdigest(),
                 worker_version=WORKER_VERSION, worker_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 path=request["asset"], source=identity, population_verified=False, preview=None, family_preview=rendered,
-                limitations=family.module.LIMITATIONS, **evidence)
+                limitations=family.module.LIMITATIONS)
+    result.update(evidence)
+    return result
 
 
 def draft_validation(request, root, scratch, identity):
     from engine.data_loader import DataLoader
     from generation.structure_contract import read_document, compile_structure, StructureError
-    if request.get("asset") == G17_EXAMPLE:
-        return layout_validation(request, root, scratch, identity)
-    path = asset_path(root, request.get("asset"), new=True)
-    if path.parent == root / "roguelike/data/layouts":
-        return layout_validation(request, root, scratch, identity)
     from engine.content_authoring import family_for
     family = family_for(request["asset"])
     if family:
         return family_validation(family, request, root, scratch, identity)
+    path = asset_path(root, request.get("asset"), new=True)
     if path.parent.name == "loot_pools":
         return pool_validation(request, root, scratch, identity)
     if path.parent.parent.name != "buildings":
@@ -727,7 +553,7 @@ def run(request, root, scratch):
                 "families": [f.envelope(None) for f in registered],
                 "creature_contract": CREATURE_CONTRACT,
                 "layout_contract": LAYOUT_CONTRACT,
-                "unavailable": ["authored-submap terrain/decor editing", "advanced item/recipe editing", "native world selection", "game renderer/FOV", "combat simulation"],
+                "unavailable": ["authored-submap inactive decor-layer authoring", "advanced item/recipe editing", "native world selection", "game renderer/FOV", "combat simulation"],
                 "health": "catalog needs repair" if catalog_error else "ready",
                 "diagnostics": [d.json() for d in catalog_error.diagnostics] if catalog_error else []}
     if op == "describe":
@@ -745,9 +571,13 @@ def run(request, root, scratch):
         raw = {}; raw_error = error
     family = family_for(request["asset"])
     if family:
-        if op != "inspect" or request.get("invalid_fixture"):
+        spatial = family.route == ROUTE
+        if op not in (("inspect", "preview") if spatial else ("inspect",)):
             fail("UNSUPPORTED_OPERATION", "Registered content uses exact-source validation.", "Open the source and validate its draft.")
-        context = family.context(raw, data, request["asset"], root / "roguelike/data", identity, hashlib.sha256(source).hexdigest(), observe=family.id == "creature", resource_root=root) if data and not raw_error else None
+        if request.get("invalid_fixture"):
+            if not spatial or op != "inspect": fail("UNSUPPORTED_OPERATION", "Invalid fixture requires a spatial inspection.", "Inspect the room.")
+            raw = dict(raw, width=len(raw["layers"][0])+1)
+        context = family.context(raw, data, request["asset"], root / "roguelike/data", identity, hashlib.sha256(source).hexdigest(), observe=getattr(family.module, "OBSERVE_INSPECTION", False), resource_root=root, seed=request.get("seed")) if data and not raw_error else None
         diagnostics = ([d.json() for d in (raw_error or catalog_error).diagnostics] if raw_error or catalog_error else
                        [d for r in context["records"] for d in r["diagnostics"]])
         envelope = family.envelope(context)
@@ -756,11 +586,16 @@ def run(request, root, scratch):
         if path.read_bytes() != source or any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
             fail("SOURCE_CHANGED", "Source or dependency changed during inspection.", "Reopen the document.")
         single = raw if isinstance(raw, dict) else {}
+        if op == "preview":
+            result = context.get("preview") if context else None
+            return result or dict(valid=False,diagnostics=diagnostics)
         return dict(id=single.get("id", path.stem), path=request["asset"], route=family.route,
                     description=str(single.get("description", "")), valid=not any(d["severity"] == "error" for d in diagnostics),
                     editable=family.eligible(context) and envelope["compatible"], family=envelope,
-                    diagnostics=diagnostics, raw=source.decode("utf-8"), sha256=hashlib.sha256(source).hexdigest(),
-                    mtime_ns=str(before.st_mtime_ns), source_unchanged=True, source=identity)
+                    diagnostics=unique_diagnostics(diagnostics), raw=json.dumps(raw,indent=2) if request.get("invalid_fixture") else source.decode("utf-8"), sha256=hashlib.sha256(source).hexdigest(),
+                    mtime_ns=str(before.st_mtime_ns), source_unchanged=True, source=identity,
+                    width=single.get("width",len(single.get("layers",[""])[0])),height=single.get("height",len(single.get("layers",[]))),
+                    special_count=len(single.get("special_tiles",[])), **family.module.authoring_evidence(context))
     if path.parent.name == "loot_pools":
         if op != "inspect" or request.get("invalid_fixture"):
             fail("UNSUPPORTED_OPERATION", "Pool inspection does not generate a map.", "Preview a building to observe its actual containers.")
@@ -806,30 +641,14 @@ def run(request, root, scratch):
                 "raw": source.decode("utf-8") if not invalid else json.dumps(raw, indent=2), "invalid_fixture": invalid,
                 "sha256": hashlib.sha256(source).hexdigest(), "mtime_ns": str(before.st_mtime_ns),
                 "source_unchanged": True, "source": identity,
-                "editable": route == EDIT_ROUTE or layout_capability(raw, request["asset"], data),
+                "editable": route == EDIT_ROUTE,
                 "layout_contract": LAYOUT_CONTRACT if route == ROUTE else None,
-                "catalog": layout_catalog(data, root) if data else None}
+                "catalog": __import__("engine.room_authoring",fromlist=["catalog"]).catalog(data, root / "roguelike/data") if data else None}
     if not valid:
         return {"valid": False, "diagnostics": diagnostics}
     seed = request.get("seed", 20261023)
     if type(seed) is not int or not 0 <= seed <= 2147483647:
         fail("MALFORMED_REQUEST", "Seed must be an integer between 0 and 2147483647.", "Enter a supported seed.")
-    if route == ROUTE and raw.get("id") != "starting_lab":
-        expectations = access_source = None
-        if request["asset"] == G17_EXAMPLE:
-            sidecar = root / G17_ACCESS
-            if sidecar.resolve() != sidecar or not sidecar.is_file():
-                fail("PATH_ESCAPE", "Example access context is missing or linked.", "Restore the original G17 sidecar.")
-            access_bytes = sidecar.read_bytes()
-            expectations = read_document(sidecar)
-            access_source = dict(path=G17_ACCESS, sha256=hashlib.sha256(access_bytes).hexdigest(), expectations=expectations)
-        generated, problems = submap_preview(raw, data, seed, request["asset"], identity, expectations=expectations, access_source=access_source)
-        if generated is None: return dict(valid=False, diagnostics=problems)
-        generated.update(source_sha256=hashlib.sha256(source).hexdigest())
-        after = source_identity(root)
-        if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")) or path.read_bytes() != source or (access_source and sidecar.read_bytes() != access_bytes):
-            fail("SOURCE_CHANGED", "Source or access context changed during preview.", "Reopen and preview again.")
-        return generated
     # Bound legacy global RNG consumers in this disposable process as well as
     # passing the production GenerationContext seed. No gameplay replay promise.
     random.seed(seed)

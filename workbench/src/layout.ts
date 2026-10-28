@@ -8,11 +8,15 @@ export type Catalog = {
   terrain: Record<string, { walkable: boolean; transparent: boolean }>;
   decor: Record<
     string,
-    { name: string; container: boolean; blocks_movement: boolean }
+    { name: string; container: boolean; blocks_movement: boolean; path?:string; resolved?:boolean }
   >;
   loot_pools: string[];
-  creatures?: { id: string; name: string; path: string }[];
+  creatures?: ReferenceChoice[];
+  items?: ReferenceChoice[];
+  texts?: ReferenceChoice[];
+  pools?: ReferenceChoice[];
 };
+export type ReferenceChoice = {id:string;name:string;path:string;paths?:string[];resolved?:boolean;readable?:boolean};
 export type Special = {
   x: number;
   y: number;
@@ -31,6 +35,9 @@ export type Layout = {
   special_tiles?: Special[];
   legend_weights?: Record<string, unknown>;
   player_start?: { x: number; y: number };
+  exit_direction?: string;
+  exit_x?: number;
+  exit_y?: number;
   placement?: {
     targets?: { x: number; y: number; kind: string }[];
     entrances?: { x: number; y: number }[];
@@ -129,6 +136,73 @@ export function layoutModel(text: string): {
   return { model: { ...r, width: w, height: h }, reason: "" };
 }
 
+export function appendValue(source:string,path:(string|number)[],value:unknown):string {
+  const {tree,bom,diagnostics}=syntax(source);
+  if(diagnostics.length || !tree)throw Error("Correct strict JSON before visual editing.");
+  const node=findNodeAtLocation(tree,path);
+  if(!node)return valueEdit(source,path,[value]);
+  if(node.type!=="array")throw Error("Expected an ordered source array.");
+  const last=node.children?.at(-1),offset=(last ? last.offset+last.length : node.offset+1)+bom;
+  return source.slice(0,offset)+(last ? "," : "")+JSON.stringify(value)+source.slice(offset);
+}
+export function removeValue(source:string,path:(string|number)[]):string {
+  const {tree,bom,diagnostics}=syntax(source);
+  if(diagnostics.length || !tree)throw Error("Correct strict JSON before visual editing.");
+  const parent=findNodeAtLocation(tree,path.slice(0,-1)),key=path.at(-1);
+  if(!parent)throw Error("Missing source parent.");
+  const nodes=parent.children || [],index=parent.type==="array" ? Number(key) : nodes.findIndex(n=>n.children?.[0].value===key);
+  const node=nodes[index];if(!node)return source;
+  let start=node.offset,end=start+node.length;
+  if(index<nodes.length-1)end=nodes[index+1].offset;
+  else if(index>0)start=nodes[index-1].offset+nodes[index-1].length;
+  return source.slice(0,start+bom)+source.slice(end+bom);
+}
+export const recordKind=(s:Special)=>String(s.type??s.kind);
+export const directEditable=(s:Special)=>["item","container","creature"].includes(recordKind(s)) && !(s.type && s.kind && s.type!==s.kind);
+export function addRecord(source:string,cell:Cell,kind:"item"|"container"|"creature",id:string):string {
+  const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
+  if(cell[0]<0||cell[1]<0||cell[0]>=model.width||cell[1]>=model.height)throw Error("Choose a source cell within the room.");
+  return appendValue(source,["special_tiles"],{type:kind,x:cell[0],y:cell[1],...({item:{item_id:id},creature:{creature_id:id},container:{decor_id:id,loot_pools:[]}}[kind])});
+}
+export function editItem(source:string,index:number,update:{x:number;y:number;item_id:string;text_id?:string}):string {
+  const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
+  const row=model.special_tiles?.[index];if(!row||recordKind(row)!=="item"||!directEditable(row))throw Error("Select a direct item record.");
+  if(![update.x,update.y].every(Number.isInteger)||update.x<0||update.y<0||update.x>=model.width||update.y>=model.height)throw Error("Use integer source coordinates within the room.");
+  for(const [key,value] of Object.entries(update))if(value!==undefined && row[key]!==value)source=valueEdit(source,["special_tiles",index,key],value);
+  if(update.text_id===undefined && "text_id" in row)source=removeValue(source,["special_tiles",index,"text_id"]);
+  return source;
+}
+export function deleteRecord(source:string,index:number):string {
+  const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
+  if(!model.special_tiles?.[index]||!directEditable(model.special_tiles[index]))throw Error("Select a supported direct record.");
+  return removeValue(source,["special_tiles",index]);
+}
+export function resizeRoom(source:string,width:number,height:number,fill:string):string {
+  const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
+  if(![width,height].every(Number.isInteger)||width<1||height<1||width>80||height>43)throw Error("Resize within 1–80 × 1–43.");
+  if(!(fill in model.legend)||Array.from(fill).length!==1)throw Error("Choose an existing fill glyph.");
+  const raw=JSON.parse(source.replace(/^\uFEFF/,""));
+  if(raw.decor_layer!==undefined)throw Error("Retained inactive decor_layer locks resizing; it will not be cropped or normalized.");
+  function protectedCoordinates(value:unknown,path:string){
+    if(!value||typeof value!=="object")return;
+    if(Array.isArray(value)){value.forEach((v,i)=>protectedCoordinates(v,`${path}[${i}]`));return;}
+    const r=value as Record<string,unknown>;
+    if(Number.isInteger(r.x)&&Number.isInteger(r.y) && (Number(r.x)>=width||Number(r.y)>=height))throw Error(`Resize strands ${path} at (${r.x}, ${r.y}); resolve it first.`);
+    Object.entries(r).forEach(([k,v])=>protectedCoordinates(v,`${path}.${k}`));
+  }
+  protectedCoordinates(raw,"room");
+  if((raw.exit_x!==undefined&&raw.exit_x>=width)||(raw.exit_y!==undefined&&raw.exit_y>=height))throw Error("Resize strands retained exit coordinates; resolve them first.");
+  for(let y=0;y<Math.min(height,model.height);y++){
+    const row=Array.from(model.layers[y]),next=row.slice(0,width).join("")+fill.repeat(Math.max(0,width-row.length));
+    if(next!==model.layers[y])source=stringCharacters(source,["layers",y],next);
+  }
+  for(let y=model.height-1;y>=height;y--)source=removeValue(source,["layers",y]);
+  for(let y=model.height;y<height;y++)source=appendValue(source,["layers"],fill.repeat(width));
+  if("width" in raw)source=valueEdit(source,["width"],width);
+  if("height" in raw)source=valueEdit(source,["height"],height);
+  return source;
+}
+
 export function valueEdit(
   source: string,
   path: (string | number)[],
@@ -154,6 +228,29 @@ export function valueEdit(
     `${parent.children?.length ? "," : ""}${JSON.stringify(path.at(-1))}:${text}` +
     source.slice(offset)
   );
+}
+
+// A row is a JSON string, whose source spans need not match character offsets.
+// Keep untouched escape spellings (including surrogate pairs) when painting or
+// resizing another cell in that row. The compiler indexes Unicode characters.
+export function stringCharacters(source:string,path:(string|number)[],value:string):string {
+  const {tree,bom,diagnostics}=syntax(source),node=tree&&findNodeAtLocation(tree,path);
+  if(diagnostics.length||node?.type!=="string")throw Error("Expected a strict JSON string row.");
+  const start=node.offset+bom+1,end=node.offset+bom+node.length-1,body=source.slice(start,end),tokens:{raw:string;value:string}[]=[];
+  for(let i=0;i<body.length;){
+    const a=i;
+    if(body[i]==="\\"){
+      if(body[i+1]==="u"){
+        const code=parseInt(body.slice(i+2,i+6),16);i+=6;
+        if(code>=0xd800&&code<=0xdbff&&body.slice(i,i+2)==="\\u"){
+          const low=parseInt(body.slice(i+2,i+6),16);if(low>=0xdc00&&low<=0xdfff)i+=6;
+        }
+      }else i+=2;
+    }else i+=String.fromCodePoint(body.codePointAt(i)!).length;
+    const raw=body.slice(a,i);tokens.push({raw,value:JSON.parse('"'+raw+'"') as string});
+  }
+  const next=Array.from(value).map((char,i)=>tokens[i]?.value===char?tokens[i].raw:JSON.stringify(char).slice(1,-1)).join("");
+  return source.slice(0,start)+next+source.slice(end);
 }
 
 export function paint(
@@ -185,7 +282,7 @@ export function paint(
     }
     for (const [y, row] of rows)
       if (row.join("") !== model.layers[y])
-        source = valueEdit(source, ["layers", y], row.join(""));
+        source = stringCharacters(source, ["layers", y], row.join(""));
   } else {
     if (!model.decor_layer) {
       if (value === null || !unique.length) return source;

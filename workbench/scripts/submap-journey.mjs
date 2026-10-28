@@ -10,10 +10,10 @@ export async function submapJourney(page,root,output,receipt,context) {
   const protectedPaths=[asset,asset.replace(".json",".access.json"),"roguelike/data/layouts/starting_lab.json","roguelike/data/generation/settlement_profiles.json"];
   const originals=new Map(await Promise.all(protectedPaths.map(async p=>[p,await readFile(resolve(root,p))])));
   const metadata=await stat(resolve(root,asset));
-  const b=name=>page.getByRole("button",{name,exact:true});
+  const b=name=>page.getByRole("button",{name,exact:true}).filter({visible:true});
   const editor=()=>page.locator('.authoring:visible');
   const eb=name=>editor().getByRole("button",{name,exact:true});
-  const idle=()=>page.waitForFunction(()=>!document.querySelector('.busy-overlay'));
+  const idle=()=>page.waitForFunction(()=>!document.querySelector('.status-dot.working'));
   const ipc=(command,args={})=>page.evaluate(async({command,args})=>{try{return await window.__TAURI_INTERNALS__.invoke(command,args);}catch(error){return {error};}},{command,args});
   async function open(path){await page.getByLabel("Search ID, name or path").fill(path);await page.locator(`[data-asset="${path}"]`).click();await idle();}
   async function source(){await eb("Source").click();return (await editor().locator('.source-editor').inputValue()).replace(/\r?\n/g,"\r\n");}
@@ -22,16 +22,16 @@ export async function submapJourney(page,root,output,receipt,context) {
   const shot=name=>page.screenshot({path:resolve(output,`${name}.png`)});
   await open(asset);assert.equal(await source(),originals.get(asset).toString());
   await b("Saved production preview").click();await page.getByTestId("placement-receipt").waitFor({state:"attached"});
-  const example=JSON.parse(await page.getByTestId("placement-receipt").textContent());assert(example.access_source.sha256);assert.equal(example.actors[0].actual_count,1);
+  const example=JSON.parse(await page.getByTestId("placement-receipt").textContent());assert.match(example.access_source.kind,/derived/);assert.equal(example.records[0].actual_count,1);
   await b("Close project").click();await idle();await b("Open directory").click();await idle();await open(asset);
   assert.equal(await source(),originals.get(asset).toString());assert.equal((await stat(resolve(root,asset))).mtimeMs,metadata.mtimeMs);
   // Park an independent editor draft through cancellation and publication.
   const item="roguelike/data/items/components/clay_pot.json", itemOriginal=await readFile(resolve(root,item));
   await open(item);await eb("Begin edit").click();await page.getByLabel("Item weight (kg)").fill("0.7");
-  const parkedItem=await source();await b("Show structure").click();
+  const parkedItem=await source();await page.locator(`[data-document-tab="${asset}"]`).click();
   await eb("Begin edit").click();await canvas();
   assert(await b("Pencil · B").isDisabled());assert(await b("Fill · R").isDisabled());
-  assert(!(await page.getByLabel("Placement creature").innerText()).includes("player"));
+  assert(await page.getByLabel("Placement creature").locator('option[value="player"]').isDisabled());
   await clickCell(7,2);await page.getByLabel("Creature source X").fill("6");await b("Apply creature edit").click();
   const moved=await source();assert.equal(moved,originals.get(asset).toString().replace('"x": 7, "y": 2, "creature_id"','"x": 6, "y": 2, "creature_id"'));
   await b("Undo canvas").click();assert.equal(await source(),originals.get(asset).toString());await b("Redo canvas").click();assert.equal(await source(),moved);
@@ -92,7 +92,7 @@ export async function submapJourney(page,root,output,receipt,context) {
   receipt.checks.push("W4D real completed validation held at renderer; accepted cancel revoked host token, exact draft retained, old completion could not restore verdict or clear newer preview; fresh production result accepted");
   let verdict=JSON.parse(await page.getByTestId("draft-receipt").textContent());assert(verdict.valid);assert(verdict.review_token);
   let evidence=JSON.parse(await page.getByTestId("placement-receipt").textContent());
-  assert.deepEqual(evidence.actors[0].source_xy,[6,2]);assert.deepEqual(evidence.actors[0].xy,[41,20]);assert.equal(evidence.actors[0].actual_count,1);assert.deepEqual(evidence.actors[0].actor_classes,["Actor"]);
+  assert.deepEqual(evidence.records[0].source_xy,[6,2]);assert.deepEqual(evidence.records[0].xy,[41,20]);assert.equal(evidence.records[0].actual_count,1);assert.deepEqual(evidence.records[0].actor_classes,["Actor"]);
   assert.equal(evidence.draft_sha256,createHash("sha256").update(finalDraft).digest("hex"));await shot("submap-instantiated");
   // An observed sidecar/dependency change invalidates the same host evidence;
   // the sidecar is read-only context, never a second publication output.
@@ -101,15 +101,15 @@ export async function submapJourney(page,root,output,receipt,context) {
   await writeFile(sidecar,sidecarBytes);await b("Preview draft").click();await idle();
   await eb("Diff").click();assert((await page.getByTestId("source-diff").innerText()).includes("w4c_guard_room"));
   await eb("Apply variant").click();await b("Confirm apply one file").click();await idle();
-  const saved=await readFile(resolve(root,destination));assert.equal(saved.toString(),finalDraft);assert.equal(await source(),finalDraft);
+  await page.getByText(/Saved and byte-checked reopen:/).waitFor({timeout:60000});const saved=await readFile(resolve(root,destination));assert.equal(saved.toString(),finalDraft);assert.equal(await source(),finalDraft);
   await b("Preview draft").click();await idle();evidence=JSON.parse(await page.getByTestId("placement-receipt").textContent());assert.equal(evidence.source_sha256,createHash("sha256").update(saved).digest("hex"));
   receipt.placement=evidence;receipt.variant={path:destination,sha256:evidence.source_sha256};
   await page.locator('[data-document-tab$="/clay_pot.json"]').click();assert.equal(await source(),parkedItem);
-  await eb("Discard / Revert").click();await b("Show structure").click();
+  await eb("Discard / Revert").click();await page.locator(`[data-document-tab="${destination}"]`).click();
   assert.deepEqual(await readFile(resolve(root,item)),itemOriginal);
   receipt.checks.push("W4D parked item draft survived submap edits, cancellation, fresh preview and publication byte-for-byte; source item unchanged");
   await canvas();await page.getByLabel("Placed record",{exact:true}).selectOption("0");await shot("submap-source");
-  receipt.checks.push("read-only example → exact shared marker draft; add/move/delete, undo/redo, raw freeze, stale job rejection, source/scene coordinates, real Actor, minimum-window diagnostics, sidecar invalidation, new-file publish and byte-exact reopen");
+  receipt.checks.push("protected template → exact registered marker draft; add/move/delete, undo/redo, raw freeze, stale job rejection, source/scene coordinates, real Actor, minimum-window diagnostics, sidecar invalidation, new-file publish and byte-exact reopen");
   // Exercise native host capabilities directly after completing the visible journey.
   const doc=(await ipc("open_document",{asset:destination})).result;
   const draftFor=id=>JSON.stringify({...JSON.parse(doc.raw),id});
@@ -135,6 +135,6 @@ export async function submapJourney(page,root,output,receipt,context) {
   for(const [path,bytes] of originals)assert.deepEqual(await readFile(resolve(root,path)),bytes,path);
   receipt.checks.push("native trusted writer rejects stale/forged/revoked reviews, external source and creature changes, destination races, starting_lab promotion, traversal/ADS/docs writes and layout junction; originals unchanged");
   await b("Close project").click();await idle();await b("Open directory").click();await idle();await open(destination);assert.equal(await source(),finalDraft);
-  await b("Preview draft").click();await idle();assert.equal(JSON.parse(await page.getByTestId("placement-receipt").textContent()).actors[0].actual_count,1);
+  await b("Preview draft").click();await idle();assert.equal(JSON.parse(await page.getByTestId("placement-receipt").textContent()).records[0].actual_count,1);
   receipt.checks.push("project close/reopen reproduces exact saved variant and production actor with no sidecar output or campaign selection");
 }

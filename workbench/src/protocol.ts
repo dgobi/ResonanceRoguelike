@@ -109,8 +109,14 @@ export type Feature = {
   blocking?: boolean;
   items?: unknown[];
 };
+export type ScenePopulationReceipt={kind:string;record_id:string;source_index:number;source_xy:Cell;xy:Cell;actor_classes?:string[];actual_count:number;
+  item_id?:string|null;text_id?:string|null;text_override_present?:boolean;decor_id?:string|null;loot_pools?:string[]|null;relocated?:boolean;
+  creature_definition?:{id:string;sha256:string};objects:unknown[];actors:unknown[]};
 export type Preview = {
-  population_receipts?: {kind:string;record_id:string;source_index:number;source_xy:Cell;xy:Cell;actor_classes?:string[];actual_count:number;creature_definition?:{id:string;sha256:string};actors:unknown[]}[];
+  authored_start?: Cell | null;
+  population_receipts?: ScenePopulationReceipt[];
+  layout_contract?:string;
+  descriptor_sha256?:string;
   stairs?: unknown[];
   access_source?: unknown;
   source_path?: string;

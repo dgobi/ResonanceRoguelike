@@ -2,7 +2,7 @@
 
 `roguelike/engine/content_authoring.py:families` is the explicit first-party
 registration point. `item_authoring.py`, `recipe_authoring.py`, `text_authoring.py`,
-`typography_authoring.py` and `creature_authoring.py`
+`typography_authoring.py`, `creature_authoring.py` and `room_authoring.py`
 adapters own discovery identity, supported source shape, ordinary field metadata,
 reference providers, semantic validation and construction/execution evidence.
 Gameplay does not import these authoring modules. There are no descriptor-driven
@@ -51,6 +51,13 @@ with object rows and scalar cells. Arbitrary nested-object forms, schema unions,
 conditionals, `$ref` resolution and general recursive schemas are unsupported.
 Unknown JSON metadata is preserved by the source editor, independently of the
 descriptor's enumerated authoring controls.
+
+Descriptors now declare `production_route` explicitly. Registration chooses that
+route; it is not inferred from the family name. Every inspected family supplies
+an effective operation subset, narrowed by its original source capability. The
+host freezes that subset and compares it with fresh original-source policy at
+validation/apply. Trusted adapter authorization compares original and candidate
+fields; a candidate or recovery envelope cannot expand source permission.
 
 Small authoring annotations:
 
@@ -203,3 +210,48 @@ or schema invalidate applicable evidence through existing code/data freshness.
 See the [creature guide](../../roguelike/docs/CREATURE_AUTHORING.md) for bounds,
 construction/reference meanings and saved-instance activation semantics. Recipe
 and text variant-only rules are unchanged.
+
+## Registered spatial rooms (W5G)
+
+`authored-room-1` registers family `room` on production route `authored_submap`.
+Eligible single-object ordinary sources immediately under `data/layouts/` support
+same-ID edits at the exact existing file and new-ID variants beside it. The exact
+G17 documentation template supports unfinished drafting and new-ID variants in
+`data/layouts/`, with no documentation writes. `starting_lab` is protected by
+identity and source filename. Unsupported/ambiguous originals cannot be promoted
+by deleting fields or changing candidate identity. Nested layouts are excluded
+because the production catalogue discovers only immediate files.
+
+The shared host independently admits those immediate destinations and that one
+documentation source exception. `variant_directory` supplies the same host-owned
+template → layouts mapping for publication and recovery intent. An unfinished
+`variant:false` template draft retains its logical source without inventing an ID;
+stored invalid text and incomplete target inputs never authorize a write. A
+published fact must name an immediate layout file. Other documentation sources
+are not admitted. The worker stages the template candidate inside disposable
+layout data while retaining its logical source/target paths and original hash.
+
+The registered spatial view uses the existing `LayoutCanvas`, `MapView`, exact
+draft/history and shared lifecycle. Structured map receipts are a typed scene
+result, separate from the reader/typography PNG union. A room review requires
+compiler, factory/population and derived static access evidence for the exact
+candidate, fresh original policy and saved dependencies. Apply repeats those
+checks with the reviewed seed. No second writer, recovery service or sidecar is
+introduced. Map receipts distinguish source/translated positions, authored start,
+actual arrival, relocated items and their exact transient ownership, constructed
+carrier/text/actor identities, selected pools and realized container contents.
+
+References use recursive object/array indices for items/texts/creatures/pools;
+decor uses its actual list registry. Choices identify sources, readability and
+missing/ambiguous definitions. Parked dependency drafts are excluded from room
+validation. Save dependencies first, then validate/publish the room. Source,
+dependency and request freshness binding remains shared with W4D/W5F.
+
+Recovery admission is deliberately broader than publication admission. An
+eligible text/recipe/template can recover accepted exact text before choosing a
+variant, including invalid JSON. Explicit forbidden variants remain refused;
+fresh source eligibility/baseline, generation, ownership and claim-before-read
+checks remain mandatory. A restored preview or review grants no authority.
+
+See [structure authoring](../../roguelike/docs/STRUCTURE_AUTHORING.md) for the
+route's actual geometry, carrier, arrival and saved-scene semantics.

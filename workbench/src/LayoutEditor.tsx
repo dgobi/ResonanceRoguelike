@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
 import { LayoutCanvas, type Tool } from "./LayoutCanvas";
 import { MapView } from "./MapView";
+import {RoomGeometry,ItemFields} from "./RoomControls";
 import {
   containerEditable,
   creatureEditable, addCreature, editCreature, removeCreature,
+  addRecord,deleteRecord,recordKind,
   diagnosticCell,
   editContainer,
   layoutModel,
@@ -15,7 +17,7 @@ import {
 } from "./layout";
 import type { Diagnostic, Preview } from "./protocol";
 
-type Props = {
+export type LayoutProps = {
   draft: string;
   authoredSubmap?: boolean;
   sourcePath?: string;
@@ -38,8 +40,9 @@ type Props = {
   onError: (e: unknown) => void;
   focus: { cell: Cell; layer: Layer } | null;
   onPool?: (id: string, index: number, record: Special) => void;
+  onLinked?: (family:string,id:string,path?:string)=>void;
 };
-export function LayoutEditor(p: Props) {
+export function LayoutEditor(p: LayoutProps) {
   const parsed = useMemo(() => layoutModel(p.draft), [p.draft]),
     m = parsed.model;
   const [layer, setLayer] = useState<Layer>(p.authoredSubmap ? "specials" : "terrain"),
@@ -58,6 +61,8 @@ export function LayoutEditor(p: Props) {
     [decor, setDecor] = useState("");
   const [runtimeCell, setRuntimeCell] = useState<Cell | null>(null);
   const [placing, setPlacing] = useState(false), [creatureId, setCreatureId] = useState("");
+  const [placementKind,setPlacementKind]=useState<"creature"|"item"|"container">("creature"),[itemId,setItemId]=useState(""),[containerId,setContainerId]=useState("crate");
+  const placementId=placementKind==="creature"?creatureId:placementKind==="item"?itemId:containerId;
   const [lastFocus, setLastFocus] = useState(p.focus);
   if (p.focus !== lastFocus) {
     setLastFocus(p.focus);
@@ -101,8 +106,8 @@ export function LayoutEditor(p: Props) {
   );
   function select(c: Cell) {
     setSelected(c);
-    if (p.authoredSubmap && placing && !disabled && creatureId) {
-      p.onEdit(source => addCreature(source,c,creatureId), "Add creature");
+    if (p.authoredSubmap && placing && !disabled && placementId) {
+      p.onEdit(source => placementKind==="creature"?addCreature(source,c,placementId):addRecord(source,c,placementKind,placementId), `Add ${placementKind}`);
       setSpecialIndex(specials.length); setPlacing(false); return;
     }
     const at = specials.map((s,i)=>({s,i})).filter(({s})=>s.x===c[0] && s.y===c[1]);
@@ -110,7 +115,7 @@ export function LayoutEditor(p: Props) {
     setSpecialIndex(i >= 0 ? i : null);
   }
   function stroke(cells: Cell[]) {
-    if (p.authoredSubmap || activeDisabled || layer === "specials" || !m || !p.catalog) return;
+    if (activeDisabled || layer === "specials" || p.authoredSubmap && layer==="decor" || !m || !p.catalog) return;
     const empty = Object.keys(m.legend).find((g) => m.legend[g] === null);
     const value =
       layer === "terrain"
@@ -173,7 +178,7 @@ export function LayoutEditor(p: Props) {
           </button>
         </div>
       </div>
-      {p.authoredSubmap && <p className="notice">Direct creature placement · source x,y. Terrain, decor, arrival and other records are read-only. Markers are provisional until production validation. Saving a layout does not automatically make it appear in a new campaign.</p>}
+      {p.authoredSubmap && <p className="notice">Authored underground room · source x,y. Terrain, arrival and direct contents share exact Source, history and durable recovery. Markers are provisional until production validation. Floor items can overlap; actor and container occupancy have separate game rules.</p>}
       <div className="layout-views tabs">
         <button
           className={view === "source" ? "active" : ""}
@@ -205,7 +210,7 @@ export function LayoutEditor(p: Props) {
                 onChange={(e) => setLayer(e.target.value as Layer)}
               >
                 <option value="terrain">Terrain / legend</option>
-                <option value="decor">Decor</option>
+                {!p.authoredSubmap && <option value="decor">Decor</option>}
                 <option value="specials">Placed records</option>
               </select>
             </label>
@@ -225,7 +230,7 @@ export function LayoutEditor(p: Props) {
                   className={tool === t ? "active" : ""}
                   disabled={
                     ["pencil", "erase", "rectangle"].includes(t) &&
-                    (p.authoredSubmap || !!activeDisabled ||
+                    (!!activeDisabled ||
                       layer === "specials" ||
                       (t === "erase" &&
                         layer === "terrain" &&
@@ -258,10 +263,11 @@ export function LayoutEditor(p: Props) {
             </button>
           </div>
           {p.authoredSubmap && <div className="layout-toolbar">
-            <label>Existing creature<select aria-label="Placement creature" value={creatureId} disabled={!!disabled} onChange={e=>setCreatureId(e.target.value)}>
-              <option value="">Choose creature…</option>{p.catalog?.creatures?.map(c=><option key={c.id} value={c.id}>{c.id} · {c.name}</option>)}
-            </select></label>
-            <button disabled={!!disabled || !creatureId} className={placing ? "active" : ""} onClick={()=>{setPlacing(!placing);setTool("select");setLayer("specials");setVisible(v=>({...v,specials:true}));}}>{placing ? "Cancel placement" : "Place creature"}</button>
+            <label>Record kind<select aria-label="Placement kind" value={placementKind} onChange={e=>{setPlacementKind(e.target.value as typeof placementKind);setPlacing(false);}}>{["creature","item","container"].map(k=><option key={k}>{k}</option>)}</select></label>
+            {placementKind==="creature"?<label>Existing creature<select aria-label="Placement creature" value={creatureId} disabled={!!disabled} onChange={e=>setCreatureId(e.target.value)}>
+              <option value="">Choose creature…</option>{p.catalog?.creatures?.map(c=><option key={c.id} value={c.id} disabled={c.resolved===false}>{c.id} · {c.name} · {c.path}{c.resolved===false?" · ambiguous / unsupported":""}</option>)}
+            </select></label>:placementKind==="item"?<label>Existing item<select aria-label="Placement item" value={itemId} disabled={!!disabled} onChange={e=>setItemId(e.target.value)}><option value="">Choose item…</option>{p.catalog?.items?.map(c=><option key={c.id} value={c.id} disabled={!c.resolved}>{c.id} · {c.name} · {c.path}{c.readable?" · readable":""}{!c.resolved?" · ambiguous / unsupported":""}</option>)}</select></label>:<label>Container decor<select aria-label="Placement container" value={containerId} disabled={!!disabled} onChange={e=>setContainerId(e.target.value)}>{Object.entries(p.catalog?.decor??{}).filter(([,r])=>r.container).map(([id,r])=><option key={id} value={id} disabled={r.resolved===false}>{id} · {r.path}{r.resolved===false?" · ambiguous":""}</option>)}</select></label>}
+            <button disabled={!!disabled || !placementId} className={placing ? "active" : ""} onClick={()=>{setPlacing(!placing);setTool("select");setLayer("specials");setVisible(v=>({...v,specials:true}));}}>{placing ? "Cancel placement" : `Place ${placementKind}`}</button>
             {placing && <span>Click a source cell. Validate to check admission.</span>}
           </div>}
           <div className="layer-visibility">
@@ -306,7 +312,6 @@ export function LayoutEditor(p: Props) {
                 onGesture={p.onGesture}
                 onError={p.onError}
                 onShortcut={(key) => {
-                  if (p.authoredSubmap && ["b","e","r"].includes(key)) return;
                   if (key === "undo") p.onUndo();
                   else if (key === "redo") p.onRedo();
                   else
@@ -344,7 +349,7 @@ export function LayoutEditor(p: Props) {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </label>
-              {layer === "terrain" && !p.authoredSubmap ? (
+              {layer === "terrain" ? (
                 <label>
                   Existing legend glyph
                   <select
@@ -358,8 +363,8 @@ export function LayoutEditor(p: Props) {
                         value={g}
                         disabled={id !== null && !p.catalog?.terrain[id]}
                       >
-                        {JSON.stringify(g)} → {id ?? "leave underlying terrain"}
-                        {m?.legend_weights?.[g] ? " · weighted at runtime" : ""}
+                        {JSON.stringify(g)} → {id ?? (p.authoredSubmap?"initial wall fill":"leave underlying terrain")}
+                        {!p.authoredSubmap && m?.legend_weights?.[g] ? " · weighted at runtime" : ""}
                       </option>
                     ))}
                   </select>
@@ -440,13 +445,15 @@ export function LayoutEditor(p: Props) {
                       onClick={() => p.onPool?.(id, specialIndex, s)}>Open pool {id}</button>)}
                     <small>Declared draft references. Apply container edit before opening a changed selection.</small>
                   </div>}
+                  {p.authoredSubmap && <div className="source-links">{[["creature",s.creature_id,p.catalog.creatures],["item",s.item_id,p.catalog.items],["text",s.text_id,p.catalog.texts]].map(([family,id,choices])=>{const row=(choices as Catalog["items"])?.find(r=>r.id===id&&r.resolved!==false);return typeof id==="string"&&<button key={String(family)} disabled={!row||p.previewBusy} onClick={()=>p.onLinked?.(String(family),id,row?.path)}>Open linked {String(family)} {id}{!row?" · missing / ambiguous":""}</button>;})}</div>}
                   {p.authoredSubmap && creatureEditable(s) ? <CreatureFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled}
                     onApply={value=>p.onEdit(source=>editCreature(source,specialIndex,value),"Move / edit creature")}
-                    onDelete={()=>{p.onEdit(source=>removeCreature(source,specialIndex),"Delete creature");setSpecialIndex(null);}} /> : containerEditable(s) && !p.authoredSubmap ? (
+                    onDelete={()=>{p.onEdit(source=>removeCreature(source,specialIndex),"Delete creature");setSpecialIndex(null);}} /> : p.authoredSubmap && recordKind(s)==="item" ? <ItemFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled} index={specialIndex} onEdit={p.onEdit} onDelete={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete item");setSpecialIndex(null);}}/> : containerEditable(s) ? (
                     <ContainerFields
                       key={`${specialIndex}:${JSON.stringify(s)}`}
                       record={s}
                       catalog={p.catalog}
+                      followTargets={!p.authoredSubmap}
                       disabled={!!disabled}
                       onApply={(value, follow) =>
                         p.onEdit(
@@ -462,6 +469,7 @@ export function LayoutEditor(p: Props) {
                       preserved; edit supported details in Source.
                     </p>
                   )}
+                  {p.authoredSubmap&&containerEditable(s)&&<button disabled={!!disabled} onClick={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete container");setSpecialIndex(null);}}>Delete container</button>}
                   <details>
                     <summary>Complete source record</summary>
                     <pre className="raw">{JSON.stringify(s, null, 2)}</pre>
@@ -470,6 +478,7 @@ export function LayoutEditor(p: Props) {
               ) : null}
             </div>
           </div>
+          {p.authoredSubmap&&m&&p.catalog&&<RoomGeometry model={m} draft={p.draft} catalog={p.catalog} disabled={!!disabled} onEdit={p.onEdit}/>}
         </>
       ) : (
         <>
@@ -507,11 +516,11 @@ export function LayoutEditor(p: Props) {
             <>
               <p className="muted">{shown.context}</p>
               {p.authoredSubmap && <>
-                <p data-testid="scene-coordinates">Scene origin ({shown.origin.join(", ")}) · actual arrival ({shown.spawn.join(", ")}) · {shown.actors.length} instantiated actor(s).</p>
+                <p data-testid="scene-coordinates">Scene origin ({shown.origin.join(", ")}) · authored start ({shown.authored_start?.join(", ")}) · actual arrival ({shown.spawn.join(", ")}) · {shown.actors.length} instantiated actor(s).</p>
                 <table className="placement-actors"><thead><tr><th>Source record / creature</th><th>Source x,y</th><th>Scene x,y</th><th>Actual class / count</th></tr></thead><tbody>
                   {shown.population_receipts?.filter(r=>r.kind==="creature").map(r=><tr key={r.record_id}><td>#{r.source_index} · {r.creature_definition?.id}</td><td>{r.source_xy.join(", ")}</td><td>{r.xy.join(", ")}</td><td>{r.actor_classes?.join(", ")} · {r.actual_count}</td></tr>)}
                 </tbody></table>
-                <details><summary>Instantiated actors and provenance</summary><pre className="raw" data-testid="placement-receipt">{JSON.stringify({source_path:shown.source_path,source_sha256:shown.source_sha256,draft_sha256:shown.draft_sha256,source:shown.source,seed:shown.seed,scene_seed:shown.scene_seed,scene_address:shown.scene_address,origin:shown.origin,spawn:shown.spawn,stairs:shown.stairs,access:shown.access,access_source:shown.access_source,actors:shown.population_receipts?.filter(r=>r.kind==="creature")},null,2)}</pre></details>
+                <details open><summary>Realized contents, arrival and static access</summary><pre className="raw" data-testid="placement-receipt">{JSON.stringify({source_path:shown.source_path,source_sha256:shown.source_sha256,draft_sha256:shown.draft_sha256,source:shown.source,seed:shown.seed,scene_seed:shown.scene_seed,scene_address:shown.scene_address,origin:shown.origin,authored_start:shown.authored_start,spawn:shown.spawn,stairs:shown.stairs,access:shown.access,access_source:shown.access_source,records:shown.population_receipts},null,2)}</pre></details>
               </>}
               <p className="muted">
                 Seed {shown.seed} · scene {shown.scene_seed} ·{" "}
@@ -564,11 +573,11 @@ function CreatureFields({record, catalog, disabled, onApply, onDelete}: {
   return <fieldset className="container-fields" disabled={disabled}><legend>Direct creature · source coordinates</legend>
     <label>Creature ID<select aria-label="Marker creature ID" value={id} onChange={e=>setId(e.target.value)}>
       {!catalog.creatures?.some(c=>c.id===id) && <option value={id}>{id} · unresolved</option>}
-      {catalog.creatures?.map(c=><option key={c.id} value={c.id}>{c.id}</option>)}
+      {catalog.creatures?.map(c=><option key={c.id} value={c.id} disabled={c.resolved===false}>{c.id} · {c.path}{c.resolved===false?" · ambiguous / unsupported":""}</option>)}
     </select></label>
     <div className="coordinate-fields"><label>Source X<input aria-label="Creature source X" type="number" step="1" value={x} onChange={e=>setX(e.target.value)}/></label>
     <label>Source Y<input aria-label="Creature source Y" type="number" step="1" value={y} onChange={e=>setY(e.target.value)}/></label></div>
-    <button disabled={!x || !y || !Number.isInteger(Number(x)) || !Number.isInteger(Number(y)) || !catalog.creatures?.some(c=>c.id===id)} onClick={()=>onApply({x:Number(x),y:Number(y),creature_id:id})}>Apply creature edit</button>
+    <button disabled={!x || !y || !Number.isInteger(Number(x)) || !Number.isInteger(Number(y)) || !catalog.creatures?.some(c=>c.id===id&&c.resolved!==false)} onClick={()=>onApply({x:Number(x),y:Number(y),creature_id:id})}>Apply creature edit</button>
     <button onClick={onDelete}>Delete creature</button><small>Initial occupancy is checked by production validation. Invalid placements stay in the draft.</small>
   </fieldset>;
 }
@@ -578,10 +587,12 @@ function ContainerFields({
   catalog,
   disabled,
   onApply,
+  followTargets=true,
 }: {
   record: Special;
   catalog: Catalog;
   disabled: boolean;
+  followTargets?:boolean;
   onApply: (
     v: { x: number; y: number; decor_id: string; loot_pools: string[] },
     follow: boolean,
@@ -597,7 +608,7 @@ function ContainerFields({
     y !== "" &&
     Number.isInteger(Number(x)) &&
     Number.isInteger(Number(y)) &&
-    catalog.decor[decor]?.container &&
+    catalog.decor[decor]?.container && catalog.decor[decor]?.resolved!==false &&
     pools.every((p) => catalog.loot_pools.includes(p));
   return (
     <fieldset className="container-fields" disabled={disabled}>
@@ -634,8 +645,8 @@ function ContainerFields({
           )}
           {Object.entries(catalog.decor)
             .filter(([, r]) => r.container)
-            .map(([id]) => (
-              <option key={id}>{id}</option>
+            .map(([id,r]) => (
+              <option key={id} value={id} disabled={r.resolved===false}>{id}{r.path?` · ${r.path}`:""}{r.resolved===false?" · ambiguous":""}</option>
             ))}
         </select>
       </label>
@@ -653,7 +664,7 @@ function ContainerFields({
               <option value={pool}>{pool} · invalid reference</option>
             )}
             {catalog.loot_pools.map((id) => (
-              <option key={id}>{id}</option>
+              <option key={id} value={id}>{id}{catalog.pools?.find(r=>r.id===id)?.path?` · ${catalog.pools.find(r=>r.id===id)?.path}`:""}</option>
             ))}
           </select>
           <button
@@ -670,21 +681,21 @@ function ContainerFields({
       >
         Add existing pool
       </button>
-      <label className="check-label">
+      {followTargets&&<label className="check-label">
         <input
           type="checkbox"
           checked={follow}
           onChange={(e) => setFollow(e.target.checked)}
         />
         Move matching container access targets with this record
-      </label>
+      </label>}
       <button
         className="primary full"
         disabled={!valid}
         onClick={() =>
           onApply(
             { x: Number(x), y: Number(y), decor_id: decor, loot_pools: pools },
-            follow,
+            follow&&followTargets,
           )
         }
       >

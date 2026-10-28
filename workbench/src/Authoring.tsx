@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { LayoutEditor } from "./LayoutEditor";
+import { LayoutEditor,type LayoutProps } from "./LayoutEditor";
 import { PoolEditor } from "./PoolEditor";
 import { ContentEditor, contentViews, type ContentNavigation } from "./ContentEditor";
 import { sourceOperations, familyProblem, type ContentFamily } from "./content";
@@ -150,7 +150,10 @@ export function Authoring({
     setVerdict(null);
     setPreviewEvidence(p=>p ? {...p,stale:true} : p);
     setConfirm(false);
-      if (submap) revoke();
+      // Registered documents use shared host invalidation. Advancing their edit
+      // revision here would invalidate a just-completed publication handoff when
+      // contentApplied refreshes dependencies before verified reopen.
+      if (submap && !content) revoke();
   }, [dependencyVersion, seed]);
   useEffect(() => { setConfirm(false); }, [active]);
   useEffect(() => { version.current++; setVerdict(null); setConfirm(false); setPreviewEvidence(p=>p ? {...p,stale:true} : p); }, [cancelVersion]);
@@ -365,7 +368,7 @@ export function Authoring({
   }
   const reason = saved ? "File saved. Retry verified reopen before publishing again." : pendingEdit ? "Waiting for edit acknowledgement." : !editing
     ? "Begin editing to create a draft."
-    : (variantOnly || submap) && !variant
+    : variantOnly && !variant
       ? "Create a unique new variant before publication."
     : !dirty
       ? "No unsaved source changes."
@@ -380,6 +383,15 @@ export function Authoring({
               : busy
                 ? "Wait for the active request."
                 : "";
+  const roomContext=content?.id==="room" ? content.context : null;
+  const roomCandidate=verdict?.family?.id==="room" ? verdict.family.context : null;
+  const spatial:LayoutProps={draft,authoredSubmap:submap,sourcePath:target,catalog:roomCandidate?.catalog||roomContext?.catalog||document.catalog,
+    disabled:!writable?"Read-only source or unsupported room shape.":!editing?"Begin edit to shape this room.":disk?.changed?"Disk changed: reload or reconcile in Source before editing.":busy.includes("applying")?"Publication in progress.":"",
+    previewDisabled:!writable||!!disk?.changed||pendingEdit,diagnostics:verdict?.diagnostics||(!dirty?document.diagnostics:[]),
+    preview:verdict?.preview||null,diskPreview:disk?.changed||disk?.dependencies_changed||evidenceVersion!==dependencyVersion?null:roomContext?.preview||diskPreview,previewHash:verdict?.draft_sha256,
+    previewBusy:!!busy,onPreview:()=>void validate(false),onCancel,onEdit:visualEdit,onGesture:canvasGesture,onUndo:()=>historyStep(false),onRedo:()=>historyStep(true),
+    canUndo:!!history.current.undoStack.length,canRedo:!!history.current.redoStack.length,onError:e=>setLocalError(String(e)),focus,
+    onLinked:contentNavigation?.onOpen,onPool:(id,index,record)=>onPool?.(id,{id:String(values.id||document.id),path:target,index,x:record.x,y:record.y,sourcePath:document.path,sourceHash:document.sha256,decor:record.decor_id||"crate",poolId:id})};
   return (
     <section className="authoring" data-testid="authoring" data-edit-pending={pendingEdit}>
       {content && <p className="notice" data-testid="recovery-status">
@@ -403,6 +415,7 @@ export function Authoring({
         focusEntry={poolEntryFocus}
       />, canvasHost)}
       {content && canvasHost && createPortal(<div hidden={!active}><ContentEditor
+        spatial={submap?spatial:undefined}
         sourceFamily={content} variant={variant} active={active} cancelVersion={cancelVersion} beginRequest={beginRequest}
         family={verdict?.family || content} navigation={contentNavigation || {onOpen:()=>{}}}
         draft={draft} path={target} dirty={dirty} validated={!!verdict?.valid}
@@ -459,7 +472,7 @@ export function Authoring({
         )}
       <h2>{document.id}</h2>
       <code className="filepath">{document.path}</code>
-      {submap && document.path.includes("/docs/examples/") && <p className="notice">Read-only G17 example. Begin edit creates an in-memory creature draft; publication can only create a new file in data/layouts. Saved preview uses the example sidecar; draft preview uses the actual generated arrival.</p>}
+      {submap && document.path.includes("/docs/examples/") && <p className="notice">Protected G17 source template. Unfinished exact drafts recover before choosing a variant; only a deliberate new ID can publish into data/layouts. Access checks derive from each realized candidate.</p>}
       <p
         className={disk?.changed ? "notice warning" : "notice"}
         data-testid="draft-state"
@@ -641,7 +654,7 @@ export function Authoring({
               </p>
               <p>{d.message}</p>
               <small>{d.correction}</small>
-              {!pool && !content && !creature && diagnosticCell(d, layoutModel(draft).model) && (
+              {!pool && (!content || submap) && !creature && diagnosticCell(d, layoutModel(draft).model) && (
                 <button
                   onClick={() =>
                     setFocus(diagnosticCell(d, layoutModel(draft).model))
@@ -723,7 +736,7 @@ export function Authoring({
               setConfirm(true);
             }}
           >
-            {variantOnly || submap ? "Apply variant" : "Review & apply"}
+            {variantOnly ? "Apply variant" : "Review & apply"}
           </button>
         </div>
       )}
@@ -744,7 +757,7 @@ export function Authoring({
             <h2>Apply this one content file?</h2>
             <code>{target}</code>
             <p>
-              {submap ? "This creates one new authored layout file. Saving a layout does not automatically make it appear in a new campaign. Existing source, arrival context and world selection are unchanged." : content ? content.descriptor.publication_note
+              {content ? content.descriptor.publication_note
                 : pool && variant ? "Creates one new pool. No structure or world is changed; the pool may remain unused until explicitly referenced."
                 : variant
                 ? "This creates a new definition. It does not add entries to current town or roadside selection profiles. Older flat-pool contexts can discover new definitions."

@@ -10,7 +10,7 @@ from generation.structure_contract import compile_structure, ELIGIBILITY
 from generation.access import reachable, enterable
 
 
-def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, path='<draft>', expectations=None):
+def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, path='<draft>', expectations=None, derive_access=False):
     from engine.item_factory import ItemFactory
     from engine.creature_factory import CreatureFactory
     from engine.scene_generation import populate, create_submap
@@ -26,7 +26,7 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
     m=LocalMap(80,43,generation_context=context)
     m.tiles[:]=make_tile('grass',True,True)
     ox,oy=40-entry.width//2,21-entry.height//2
-    actors=[]; specs=[]; spawn=None; receipts=[]
+    actors=[]; specs=[]; spawn=None; receipts=[]; owned_access=[]; authored_start=None
     factory,creatures=ItemFactory(data),CreatureFactory(data)
     if route=='ordinary_building':
         specs=_stamp_building_at(m,entry.definition,ox,oy,data.terrain,flip_v=flip_v,data=data)
@@ -45,6 +45,8 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
         world=SimpleNamespace(seed=seed)
         result=create_submap(world,0,0,submap,bound,ItemFactory(bound),CreatureFactory(bound),80,43)
         m,actors,spawn=result.local_map,result.actors,result.spawn
+        authored_start=result.authored_start
+        if derive_access: owned_access=direct_access(m,data,result.receipts,spawn)
         from engine.save_manager import _serialize_entity
         from engine.save_components import serialize_item
         for receipt in result.receipts:
@@ -53,7 +55,8 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
                                for d, items in receipt['objects']] if receipt['kind'] == 'container'
                               else [serialize_item(i) for i in receipt['objects']])
             row['actors'] = [_serialize_entity(a) for a in receipt.get('actors', [])]
-            row['actual_count'] = len(row['actors'])
+            row['actual_count'] = len(row['actors']) if receipt['kind']=='creature' else len(row['objects'])
+            row['actor_classes'] = [type(a).__name__ for a in receipt.get('actors', [])]
             receipts.append(row)
     m.generation_revision=GENERATION_REVISION
     report=snapshot(m,actors,data)
@@ -63,12 +66,43 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
                   source_diagnostics=[d.json() for d in entry.diagnostics])
     if route == 'authored_submap':
         report.update(population_receipts=receipts, scene_seed=m.generation_context.scene_seed,
+                      authored_start=list(authored_start) if authored_start else None,
                       scene_address=list(m.generation_context.address),
                       inspection='Revealed static authoring geometry and initial occupancy; hostile actors remain hostile. No encounter balance claim.')
     if spawn is not None: report['spawn']=list(spawn)
-    report['access']=check_access(m,data,expectations,origin=(ox,oy),height=entry.height,flip_v=flip_v,spawn=spawn)
+    report['access']=owned_access if derive_access else check_access(m,data,expectations,origin=(ox,oy),height=entry.height,flip_v=flip_v,spawn=spawn)
     report['passed']=all(row['passed'] for row in report['access']) and not report['occupant_diagnostics']
     return report,m,actors
+
+
+def direct_access(m,data,receipts,spawn):
+    """Bounded static access to these exact population-owned objects, not ID matches."""
+    from engine.interaction_cursor import InteractionCursor
+    reached=reachable(m,spawn,data)
+    results=[dict(target='actual arrival',kind='arrival',xy=list(spawn),passed=tuple(spawn) in reached)]
+    visible=m.visible.copy()
+    try:
+        m.visible[:]=True
+        for receipt in receipts:
+            kind=receipt['kind']
+            if kind not in ('item','container'): continue
+            xy=tuple(receipt['xy']); approaches=[]; owned=receipt_owned(receipt,m)
+            if kind=='container':
+                for point in sorted(reached):
+                    if max(abs(point[0]-xy[0]),abs(point[1]-xy[1]))>1: continue
+                    proxy=SimpleNamespace(local_map=m,player=SimpleNamespace(x=point[0],y=point[1]))
+                    if InteractionCursor.can_reach(proxy,*xy): approaches.append(list(point))
+                passed=owned and bool(approaches)
+            else:
+                passed=owned and xy in reached
+                if receipt.get('text_id'):
+                    passed=passed and all(getattr(i,'on_use',None)=='read' and getattr(i,'text_id',None)==receipt['text_id'] for i in receipt['objects'])
+            results.append(dict(target=receipt['record_id'],kind=kind,source_xy=receipt['source_xy'],xy=list(xy),receipt_owned=owned,
+                                relocated=receipt.get('relocated',False),passed=passed,approaches=approaches))
+        stairs=[(x,y) for x in range(m.width) for y in range(m.height) if str(m.tiles[x,y]['terrain'])=='stairs_up']
+        results.append(dict(target='usable return stair',kind='stairs_up',passed=any(xy in reached for xy in stairs),stairs=[list(xy) for xy in stairs]))
+    finally: m.visible[:]=visible
+    return results
 
 
 def snapshot(m,actors,data):

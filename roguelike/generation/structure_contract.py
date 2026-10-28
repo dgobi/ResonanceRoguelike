@@ -191,7 +191,7 @@ class Validator:
             self.reference(row.get('item_id'),'items',field+'.item_id')
             if 'text_id' in row:
                 ok=self.reference(row['text_id'],'texts',field+'.text_id')
-                if ok and self.data is not None:
+                if ok and self.data is not None and self.route != 'authored_submap':
                     self.reference(self.data.text_item_map.get(row['text_id'],'letter'),'items',field+'.text_item_map')
         elif kind == 'container':
             identifier=row.get('decor_id','crate')

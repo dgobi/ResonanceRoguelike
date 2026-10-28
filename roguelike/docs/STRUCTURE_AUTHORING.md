@@ -1,5 +1,96 @@
 # Make a building or layout for Resonance
 
+## W5G: build, recover and revise a supported underground room
+
+Workbench family `room`, contract `authored-room-1`, uses the production
+`authored_submap` route. Open the G17 template, Begin edit, choose Save as new
+variant and a unique safe ID. The template remains protected documentation;
+publication creates only `data/layouts/<new-id>.json`. An eligible saved ordinary
+room immediately in that folder also supports same-ID revision at its exact file.
+Both the `starting_lab` identity and `starting_lab.json` source are protected.
+Malformed, ambiguous and unsupported shapes have specific read-only reasons.
+Weighted/scene/deferred-special sources are inspect-only in this editor.
+
+Terrain brush, rectangle and erase operate on the actual `layers` strings. Add or
+change one-character legend mappings to existing terrain or explicit null. On
+this route null leaves the initial wall fill; it is not empty floor. Unicode
+character coordinates match the compiler; untouched escapes, line endings,
+significant spaces, ordering and nested metadata retain their exact source spans.
+Invalid raw JSON remains exact/recoverable and pauses unsafe visual tools.
+
+Resize is an explicit top-left anchored operation within 80×43. It retains source
+coordinates, extends right/bottom with the chosen glyph or deliberately crops
+terrain there. It refuses stranded records, arrivals or retained coordinates;
+inactive decor layers are never cropped/normalized. Existing optional width and
+height stay matching, and absent dimensions remain absent. One accepted resize
+is one history operation. Resizing changes centering and may change position-
+derived random inputs; a retained seed does not promise unchanged loot.
+
+The white source marker edits `player_start`. The game uses its existing arrival
+selector for every authored layout, including closed-door starts with no
+creatures. Preview retains authored and actual map coordinates separately. After
+population, actual arrival must be in bounds, walkable, free of blocking decor,
+containers and actor occupancy, and connected to a usable return stair. The
+selector's centre fallback is checked; it is not proof of safety. Cached-scene
+movement policy remains unchanged.
+
+Paint explicit `stairs_up` terrain for a return. Any explicit up stair suppresses
+all fallback exit fields. Otherwise north/south uses `exit_y` and the horizontal
+midpoint; east/west uses `exit_x` and the vertical midpoint. Direction does not
+choose a map edge. Inspect the actual produced stair and reachability.
+`decor_layer`, `legend_weights`, top-level `stairs_up`, `type`, `rotatable` and
+`tags` retain their values but do not activate those behaviors on this route.
+Containers supply the supported physical furnishings; there is no decor paint tool.
+
+Direct records support add/select/move/edit/delete in source-array order:
+
+| Record | Actual consumer |
+| --- | --- |
+| creature: x, y, creature_id | One unique non-player factory Actor; existing occupancy/admission rules |
+| item: x, y, item_id | One factory object per record, with legitimate item/item and item/actor overlap |
+| readable item: optional text_id | Explicit item_id remains the carrier; population uses map_text=False and assigns text_id on that instance |
+| container: x, y, decor_id, ordered loot_pools | Actual container decor and independent contextual pool rolls |
+
+An absent text override differs from an authored binding. New bindings require a
+uniquely saved carrier whose constructed `on_use` is `read`, plus a saved text.
+`text_id` on an inert object does not make it readable. Underground authoring does
+not use `text_item_map` carrier substitution; ordinary buildings retain that
+mapping-enabled route. Historical inert bindings remain inspectable. The narrow
+validator mapping correction preserves ordinary-building behavior.
+
+Overlapping records stay individually selectable. Duplicate containers,
+overlapping Actors, creatures on actual arrival/physical stairs, missing/ambiguous
+dependencies and blocked access fail. Item relocation uses the game's existing
+bounded placement behavior; receipts report source and actual position and prove
+ownership of that exact object. Source markers do not silently move. Static
+access tests floor/readable objects at their realized locations, containers from
+a reachable legal interaction approach and the return. It grants visibility only
+inside that static check, and proves neither player FOV nor future/combat safety.
+The fixed G17 example/sidecar remain reference inputs; edited candidates derive
+their own targets rather than inheriting obsolete coordinates.
+
+Linked creature/text/item sources open in shared tabs with a return to the room
+and record. Contextual pool navigation retains its existing memory-only draft
+scope. Save each linked dependency first, refresh/revalidate and publish the room
+as one file; unsaved overlays and multi-file transactions are unsupported.
+Two room drafts and other registered files have independent exact history and
+durable recovery, including invalid JSON and template drafts before variant
+selection. Restoration rechecks current source/policy/baseline and ownership and
+requires fresh validation. It never restores review authority.
+
+**Activation:** Saved layout changes load at the next game/catalogue initialization
+and apply when a scene using that layout is first generated. This can include an
+unvisited submap in an existing campaign. Already generated scenes use their saved
+map/population and stored entry metadata; Workbench does not regenerate or migrate
+them. A new layout ID joins no world selector automatically.
+
+Layout definition ID, source filename and `SubMap.submap_id` are separate
+identities. Distinct disposable instances must have distinct submap IDs even if
+they use the same layout. Owned cached scenes return before layout lookup;
+`generated=True` with missing cache still refuses regeneration. This guarantees
+layout/scene ownership, not insulation from established current-definition reads
+for creatures/items/texts (including W5F hybrid Actor restoration).
+
 ## G17: one creature in an authored underground room
 
 The complete editable [room](examples/g17_authored_creature_room.json) and

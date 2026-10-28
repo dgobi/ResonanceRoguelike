@@ -89,15 +89,16 @@ class Family:
     exact_file: str | None = None
 
     @property
-    def route(self): return self.id + "_definition"
+    def route(self): return getattr(self.module, "PRODUCTION_ROUTE", self.id + "_definition")
 
     def matches(self, path):
+        if hasattr(self.module, "matches"): return self.module.matches(path)
         if self.exact_file: return path == self.exact_file
         prefix = ("roguelike", "data", *PurePosixPath(self.directory).parts)
         return PurePosixPath(path).parts[:len(prefix)] == prefix
 
     def descriptor(self):
-        value = dict(vocabulary=VOCABULARY, schema=self.module.SCHEMA, views=self.module.VIEWS,
+        value = dict(vocabulary=VOCABULARY, schema=self.module.SCHEMA, views=self.module.VIEWS, production_route=self.route,
                      policy=dict(operations=list(self.operations), root=self.write_root, identity="id"),
                      publication_note=self.module.PUBLICATION_NOTE)
         return value, hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
@@ -105,7 +106,7 @@ class Family:
     def envelope(self, context, *, operations=None):
         descriptor, digest = self.descriptor()
         problems = schema_problems(descriptor["schema"])
-        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory"}
+        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory", "room-spatial"}
         if not isinstance(descriptor["views"], list) or any(v not in allowed_views for v in descriptor["views"]):
             problems.append("Unsupported specialized view registration")
         return dict(id=self.id, contract=self.module.CONTRACT, descriptor_sha256=digest,
@@ -114,12 +115,22 @@ class Family:
                     effective_operations=self.operations_for(context) if operations is None else operations)
 
     def operations_for(self, context):
-        if self.id != "creature": return list(self.operations)
         if not context or len(context["records"]) != 1: return []
-        return [op for op in context["records"][0]["capability"].get("operations", []) if op in self.operations]
+        if not self.eligible(context): return []
+        return [op for op in context["records"][0]["capability"].get("operations", self.operations) if op in self.operations]
 
-    def context(self, *args, resource_root=None, **kwargs):
+    def staging_path(self, asset):
+        """Trusted registration maps logical documentation identity into scratch data."""
+        mapper = getattr(self.module, "staging_path", None)
+        return mapper(asset) if mapper else PurePosixPath(asset).relative_to("roguelike/data").as_posix()
+
+    def authorize(self, original, candidate, source, target, data):
+        adapter = getattr(self.module, "authorize_candidate", None)
+        return adapter(original, candidate, source, target, data=data) if adapter else []
+
+    def context(self, *args, resource_root=None, seed=None, **kwargs):
         if getattr(self.module, "USES_FONT_RESOURCES", False): kwargs["resource_root"] = resource_root
+        if getattr(self.module, "USES_SCENE_SEED", False): kwargs["seed"] = seed if seed is not None else 20261023
         return self.module.authoring_context(*args, **kwargs)
 
     def validate(self, raw, data, path, data_root, *, resource_root=None):
@@ -137,9 +148,12 @@ class Family:
 
     def discover(self, root):
         from generation.structure_contract import read_document, StructureError
-        sources = definition_sources(root / "roguelike/data", self.directory, getattr(self.module, "RESERVED_BASENAMES", ()))
+        indexer = getattr(self.module, "source_index", None)
+        sources = indexer(root / "roguelike/data") if indexer else definition_sources(root / "roguelike/data", self.directory, getattr(self.module, "RESERVED_BASENAMES", ()))
         rows = []
-        for path in sorted((root / "roguelike/data" / self.directory).rglob("*.json")):
+        discover_paths = getattr(self.module, "discover_paths", None)
+        paths = discover_paths(root) if discover_paths else (root / "roguelike/data" / self.directory).rglob("*.json")
+        for path in sorted(paths):
             if self.exact_file and path != root / self.exact_file: continue
             if path.name.casefold() in getattr(self.module, "RESERVED_BASENAMES", ()): continue
             relative = path.relative_to(root).as_posix()
@@ -164,8 +178,9 @@ class Family:
 
 def families():
     # The sole trusted registration point. No renderer or descriptor imports.
-    from engine import item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring
+    from engine import item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring, room_authoring
     return (
+        Family("room", "layouts", room_authoring, ("edit", "variant"), "roguelike/data/layouts/"),
         Family("creature", "entities", creature_authoring, ("edit", "variant"), "roguelike/data/entities/creatures/"),
         Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/components/"),
         Family("recipe", "recipes", recipe_authoring, ("variant",), "roguelike/data/recipes/"),

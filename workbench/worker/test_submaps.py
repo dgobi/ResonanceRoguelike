@@ -35,7 +35,8 @@ class SubmapTests(unittest.TestCase):
     def test_actual_actor_translation_definition_hash_and_single_file_reopen(self):
         opened = invoke("inspect", root=self.root, asset=ASSET)["result"]
         self.assertTrue(opened["editable"])
-        self.assertNotIn("player", [c["id"] for c in opened["catalog"]["creatures"]])
+        self.assertFalse(next(c for c in opened["family"]["context"]["catalog"]["creatures"] if c["id"]=="player")["resolved"])
+        self.assertEqual(opened["family"]["effective_operations"],["edit","variant"])
         self.assertEqual(opened["raw"].encode(), self.original)
         raw=copy.deepcopy(self.raw);raw["special_tiles"][0]["x"]=6
         result=self.check(raw)["result"];self.assertTrue(result["valid"],result)
@@ -71,13 +72,12 @@ class SubmapTests(unittest.TestCase):
         for text in ('{"id":', '[]', 'null'):
             r=invoke("preview_draft",root=self.root,asset=ASSET,source_asset=ASSET,draft=text)
             self.assertTrue(r["ok"],r);self.assertFalse(r["result"]["valid"])
-        for field,value in [("player_start",{"x":1,"y":1}), ("metadata",{})]:
-            r=copy.deepcopy(self.raw);r[field]=value
-            self.assertEqual(self.check(r)["error"]["code"],"LAYOUT_FIELD")
+        r=copy.deepcopy(self.raw);r["player_start"]={"x":1,"y":1}
+        self.assertTrue(self.check(r)["result"]["valid"])
         r=copy.deepcopy(self.raw);r["special_tiles"][1]["x"]=6
-        self.assertEqual(self.check(r)["error"]["code"],"LAYOUT_FIELD")
+        self.assertTrue(self.check(r)["result"]["valid"])
         r=copy.deepcopy(self.raw);r["metadata"]["nested"][0]=1
-        self.assertEqual(self.check(r)["error"]["code"],"LAYOUT_FIELD")
+        self.assertIn("ROOM_FIELD",[d["code"] for d in self.check(r)["result"]["diagnostics"]])
 
     def test_production_occupancy_order_arrival_stairs_decor_water_and_corridor(self):
         # All context changes happen before opening, never via marker draft mutation.
@@ -111,14 +111,18 @@ class SubmapTests(unittest.TestCase):
     def test_source_entitlement_example_and_unsupported_source_cannot_promote(self):
         self.assertTrue(invoke("inspect",asset=EXAMPLE)["result"]["editable"])
         example=invoke("preview",asset=EXAMPLE)["result"]
-        self.assertTrue(example["passed"]);self.assertTrue(example["access_source"]["sha256"])
+        self.assertTrue(example["passed"]);self.assertTrue(all(r["passed"] for r in example["access"]))
         self.raw["legend_weights"]={};self.save()
-        self.assertFalse(invoke("inspect",root=self.root,asset=ASSET)["result"]["editable"])
+        self.assertTrue(invoke("inspect",root=self.root,asset=ASSET)["result"]["editable"])
         raw=copy.deepcopy(self.raw);raw.pop("legend_weights")
-        self.assertEqual(self.check(raw)["error"]["code"],"READ_ONLY_LAYOUT")
+        self.assertIn("ROOM_FIELD",[d["code"] for d in self.check(raw)["result"]["diagnostics"]])
+        self.raw["special_tiles"].append(dict(type="empty",x=1,y=1));self.save()
+        self.assertFalse(invoke("inspect",root=self.root,asset=ASSET)["result"]["editable"])
+        raw=copy.deepcopy(self.raw);raw["special_tiles"].pop()
+        self.assertIn("SOURCE_ENTITLEMENT",[d["code"] for d in self.check(raw)["result"]["diagnostics"]])
         for asset in ["roguelike/data/layouts/starting_lab.json"]:
             response=invoke("preview_draft",asset="roguelike/data/layouts/forged.json",source_asset=asset,draft=json.dumps(raw))
-            self.assertFalse(response["ok"])
+            self.assertTrue(response["ok"]);self.assertFalse(response["result"]["valid"])
 
 
 if __name__ == "__main__": unittest.main()

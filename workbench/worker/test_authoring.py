@@ -63,7 +63,8 @@ class AuthoringTests(unittest.TestCase):
             r=invoke("validate_draft",asset=ASSET,draft=draft)["result"]
             self.assertFalse(r["valid"]);self.assertFalse(r["syntax_valid"])
             if draft.startswith('{\n'): self.assertEqual(r["diagnostics"][0]["line"],2)
-        self.assertFalse(invoke("validate_draft",asset="roguelike/data/layouts/starting_lab.json",draft="{}")['ok'])
+        readonly=invoke("validate_draft",asset="roguelike/data/layouts/starting_lab.json",draft="{}")
+        self.assertTrue(readonly['ok']);self.assertFalse(readonly['result']['valid']);self.assertFalse(readonly['result']['semantic_verified'])
 
     def test_unique_variant_and_repair_invalid_source_without_live_overwrite(self):
         with tempfile.TemporaryDirectory(prefix="w1-data-test-") as directory:

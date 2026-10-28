@@ -65,6 +65,8 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
         kind, x, y = spec['kind'], spec['x'], spec['y']
         observation = dict(record_id=spec.get('record_id', f'spawn[{index}]'), source=source,
                            kind=kind, source_xy=spec.get('source_xy', [x,y]), selected_branch=spec.get('selected_branch'), objects=[])
+        observation.update(source_index=index, item_id=spec.get('item_id'), text_id=spec.get('text_id'),
+                           text_override_present='text_id' in spec, decor_id=spec.get('decor_id'), loot_pools=spec.get('loot_pools'))
         observations.append(observation)
         if kind in ('body', 'stele'):
             deferred.append(dict(source=source, kind=kind, x=x, y=y))
@@ -85,6 +87,7 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
         if not valid:
             raise GenerationError(f'{source}: {kind} anchor ({x},{y}) is out of bounds or not walkable')
         observation['xy'] = [x,y]
+        observation['relocated'] = [x,y] != [spec['x'],spec['y']]
         first_plan = len(plans)
         if kind == 'item':
             plans.append(('item', x, y, item(spec.get('item_id', ''), x, y, source, spec.get('text_id', ''))))
@@ -147,6 +150,7 @@ class SceneResult:
     spawn: tuple
     metadata: object
     receipts: list = field(default_factory=list)
+    authored_start: tuple | None = None
 
 
 def create_surface(world, chunk, data, item_factory, creature_factory, width, height):
@@ -181,7 +185,7 @@ def create_submap(world, wx, wy, submap, data, item_factory, creature_factory, w
     context = GenerationContext(world.seed, submap.seed, (wx, wy, submap.submap_id))
     local_map, specs = generate_submap(staged, width, height, data.terrain, data=data, context=context)
     arrival = staged.entry_x, staged.entry_y
-    if submap.layout_id and any(s['kind'] == 'creature' for s in specs):
+    if submap.layout_id:
         # Entry can be a closed door. Share the engine's actual arrival selector
         # (which does not access self), rather than reserving only player_start.
         from engine.engine import Engine
@@ -189,10 +193,12 @@ def create_submap(world, wx, wy, submap, data, item_factory, creature_factory, w
     receipts = []
     actors = populate(data, item_factory, creature_factory, local_map, specs, receipts=receipts,
                       authored_arrival=arrival if submap.layout_id else None)
-    if not local_map.in_bounds(staged.entry_x, staged.entry_y) or not _enterable(local_map, (staged.entry_x, staged.entry_y), data):
+    if not local_map.in_bounds(staged.entry_x, staged.entry_y):
         raise GenerationError(f'{submap.submap_id}: invalid arrival')
     from collections import deque
-    if actors and not _enterable(local_map, arrival, data):
+    if (not local_map.in_bounds(*arrival) or not local_map.walkable[arrival]
+            or not _enterable(local_map, arrival, data) or arrival in local_map.container_state
+            or any((actor.x,actor.y)==arrival for actor in actors)):
         raise GenerationError(f'{submap.submap_id}: invalid actual player arrival {arrival}')
     reached, pending = {arrival}, deque([arrival])
     while pending:
@@ -207,7 +213,7 @@ def create_submap(world, wx, wy, submap, data, item_factory, creature_factory, w
         raise GenerationError(f'{submap.submap_id}: no usable return stair from arrival')
     local_map.generation_revision = GENERATION_REVISION
     local_map.generation_complete = True
-    return SceneResult(local_map, actors, arrival, staged, receipts)
+    return SceneResult(local_map, actors, arrival, staged, receipts, (staged.entry_x,staged.entry_y))
 
 
 def _enterable(local_map, xy, data):

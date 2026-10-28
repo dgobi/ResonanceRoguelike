@@ -39,7 +39,7 @@ class BridgeTests(unittest.TestCase):
         self.assertEqual(r["runtime"]["game_imports"]["engine.data_loader"], "roguelike/engine/data_loader.py")
         self.assertEqual(r["runtime"]["dependencies"]["tcod"], "19.3.0")
         self.assertEqual(len(r["source"]["game_source_sha256"]), 64)
-        self.assertEqual(r["layout_contract"], "direct-creatures-1")
+        self.assertEqual(r["layout_contract"], "authored-room-1")
 
     def test_catalog_and_shipped_validation(self):
         r = invoke("describe")["result"]

@@ -57,7 +57,7 @@ publication/restart journey. See [W5E delivery](docs/W5E_DELIVERY.md) for eviden
 
 ## Work with several content files
 
-Open registered item, immediate-recipe, ordinary-text, typography and creature files from
+Open registered item, immediate-recipe, ordinary-text, typography, creature and room files from
 the catalogue. The document strip shows each ID, file path and a dot for unsaved
 source. Opening the same file again, including through a reference, selects its
 existing draft. Switching documents preserves exact source (even invalid JSON),
@@ -183,66 +183,68 @@ for marker/condition behavior and the existing physical `text_id` binding.
 journey and a separate headless physical-letter pickup/inventory/read proof in
 disposable data. The fixture is never published as a gameplay location.
 
-## Place a creature in an authored underground room
+## Build and revise an authored underground room
 
-1. Launch **[Launch Workbench.vbs](Launch%20Workbench.vbs)**, then search for
-   `g17_authored_creature_room`. The original under `roguelike/docs/examples/`
-   is a read-only source: **Begin edit** creates an in-memory draft whose only
-   publication destination is a **new** `roguelike/data/layouts/<id>.json`.
-   Supported existing layouts in that immediate directory use the same workflow.
-   `starting_lab`, weighted/legacy layouts, plazas and entrance routes cannot be
-   promoted by raw edits. Ordinary buildings retain W2 painting without creature
-   placement controls. No original layout, example or sidecar can be overwritten.
-2. The existing Pixi canvas shows source `x,y`, terrain glyphs, direct containers,
-   item markers, pink creature diamonds and the intended arrival circle. The
-   selected cell is gold; hover is blue. Terrain, non-creature records, arrival
-   and metadata are read-only context. G17 does **not** consume `decor_layer`;
-   retained values are labelled inactive and are not drawn as realized obstacles.
-   Production preview shows actual decor, physical stairs and generated arrival.
-3. Choose **Existing creature → Place creature**, then click a source cell.
-   Choices are unique loaded non-player creature definitions in the selected
-   project's catalogue, checked with G17. A separately saved W4A variant is
-   available only if actually installed in that catalogue. Click a diamond or
-   use **Placed record** to select an individual array index, including overlaps.
-   Edit **Creature ID**, **Source X/Y**, then **Apply creature edit**; use
-   **Delete creature** to remove just that record. Coordinate controls provide a
-   precise alternative to dragging. **Undo canvas / Redo canvas** use W2 history.
-4. **Preview draft** validates these exact unsaved bytes through the current
-   compiler, `create_submap`, placement admission and `CreatureFactory`. Markers
-   alone are provisional. Errors in **Problems** identify the source record/cell;
-   **Locate cell / record** highlights it. Walls, blocking decor/containers,
-   forbidden water, actual arrival, stairs and overlapping actors are rejected,
-   even when a blocking container occurs later in the array. Swimming follows
-   the existing creature definition. Corridor guards are allowed. No actor is
-   moved automatically to make a draft pass, and a rejected draft stays intact.
-5. **Draft production preview** lists actually instantiated actors, original
-   source coordinates, translated scene coordinates, class/count, seed, source
-   and creature-definition hashes. Origin is measured from production output,
-   never hardcoded. Drafts use the explicitly displayed **generated arrival**
-   context, without a separate access sidecar. **Saved production preview** of
-   the G17 documentation example also runs its existing read-only access
-   sidecar; that distinct context and sidecar hash are disclosed in its receipt.
-   Revealed initial occupancy is authoring evidence, not player FOV, AI/combat,
-   encounter balance, persistence or natural world selection.
-6. Choose **Save as new variant**, enter a unique safe ID, **Validate draft**,
-   inspect **Diff**, then **Apply variant → Confirm apply one file**. The same
-   trusted writer rechecks original entitlement, dependencies and reviewed bytes,
-   publishes without clobbering and verifies reopened bytes. Reopen the variant
-   and **Preview draft** to reproduce its actor/arrival context. **Saving a layout
-   does not automatically make it appear in a new campaign.** No `SubMap.layout_id`,
-   settlement profile, personal save or access sidecar is changed.
+1. Open `g17_authored_creature_room` from the catalogue. **Begin edit** shares
+   exact Source, history, Diff, Problems, preview and durable recovery. Unfinished
+   drafts recover before choosing a variant, including invalid JSON. Choose
+   **Save as new variant** and a unique safe ID to publish into `data/layouts/`.
+2. In **Authored layout**, choose Terrain and an existing legend glyph; use
+   pencil, rectangle or erase. **Legend mapping** adds/changes a one-character
+   mapping to existing terrain or null. Null retains initial wall fill.
+3. **Room geometry, arrival and return** exposes deliberate top-left anchored
+   resize (80×43 maximum), authored `player_start` and factual fallback return
+   settings. The impact is stated before resizing; stranded coordinates and
+   inactive decor layers are refused. Optional dimensions stay absent until
+   deliberately authored. Explicit painted `stairs_up` suppresses fallback
+   fields; north/south uses exit_y and horizontal midpoint, east/west uses exit_x
+   and vertical midpoint. Preview shows the actual produced return.
+4. Choose creature, item or container placement and click a source cell. Select
+   overlapping records individually through **Placed record**. Edit coordinates,
+   creature/item ID, an optional saved readable text or container decor/ordered
+   pools. Each item record creates one physical factory object; item/item and
+   item/actor overlaps can be valid. Duplicate containers and actor occupancy
+   conflicts fail production validation.
+5. A readable binding requires an existing carrier whose constructed on_use is
+   read. Underground population retains the explicit item_id and assigns text_id
+   on that instance; it does not substitute a text_item_map carrier. No override
+   retains the carrier's definition defaults. Reference choices identify saved
+   sources and ambiguous/missing definitions. Open linked creature/text/item tabs
+   and return to the same room/record; contextual pool navigation remains available.
+6. Save linked dependencies first. **Preview draft** runs the exact candidate
+   through compiler → layout generation → create_submap → factories/population.
+   Inspect source/translated positions, authored/actual arrival, receipt-owned
+   relocated items, actual carrier/text/actor IDs, selected pools and contents,
+   return stairs and static access. These revealed initial checks prove neither
+   FOV, combat balance, future safety nor natural selection. Resizing can change
+   position-derived loot even with the same preview seed.
+7. Validate and deliberately apply one room file, then inspect byte-checked reopen.
+   Eligible ordinary single-object saved rooms immediately under `data/layouts/`
+   support **Review & apply** at the same exact ID/file, as well as new variants.
+   The original G17 template, starting_lab identity/source and unsupported or
+   ambiguous sources stay protected. Nested layout publication is unsupported.
 
-Raw JSON, canvas, history, diff and validation share one draft. A move changes only
-the chosen scalar spans; other records and metadata retain their values/order.
-Raw or variant-ID edits clear graphical history. Invalid JSON freezes graphical
-mutation and clears current evidence. Edits/seed changes revoke old host review
-tokens, including in-flight results; source/dependency changes require revalidation.
-Clean open/preview/close writes no source bytes. These legacy layout drafts remain memory-only. Other
-editor families retain their independent parked drafts; replacing the structure
-document follows the existing discard/reload policy.
+Two rooms and another registered document can remain independent across tabs,
+close/reload, cancellation and cold recovery. Restoration checks current source
+eligibility/baseline, generation and ownership; previews/reviews are never restored
+as authority. Invalid JSON pauses unsafe visual edits. Graphical changes preserve
+unaffected bytes, escapes, unknown metadata and significant spaces. Inactive
+`decor_layer`, `legend_weights`, top-level `stairs_up`, `type`, `rotatable` and
+`tags` remain visible; containers are this route's physical furnishing tool.
 
-See [W4C delivery](docs/W4C_DELIVERY.md) for the disposable native publication proof,
-source-bound actor receipt, negative checks and preservation evidence.
+Saved layout changes load at the next game/catalogue initialization and apply
+when a scene using that layout is first generated. This can include an unvisited
+submap in an existing campaign. Already generated scenes use their saved
+map/population and stored entry metadata; Workbench does not regenerate or migrate
+them. A new layout ID joins no world selector automatically. Layout ID, source
+filename and SubMap instance ID are distinct. Existing current-definition reads
+for creatures/items/texts keep their established semantics.
+
+See the [current room/structure guide](../roguelike/docs/STRUCTURE_AUTHORING.md),
+[contract guidance](docs/CONTENT_CONTRACTS.md) and [W5G delivery](docs/W5G_DELIVERY.md).
+`node scripts/run-rooms.mjs` exercises packaged controls, restart, linked navigation,
+publication/revision and real interaction/cold SaveManager ownership in disposable
+roots. It never opens personal campaigns or controls the owner's desktop.
 
 ## Inspect and author creatures
 
@@ -484,7 +486,7 @@ structure preview establishes observed population. Samples do not establish
 frequencies, effect behavior or natural world selection. Item/reference lists
 are catalogue snapshots; reopen after external dependency edits.
 
-The host retains individual registered item/recipe/text/typography/creature owners and legacy building and pool slots. Saving any revokes
+The host retains individual registered item/recipe/text/typography/creature/room owners and legacy building and pool slots. Saving any revokes
 all reviews; the frontend clears verdicts while retaining the other drafts.
 Every apply remains one reviewed byte string and one confined target, with fresh
 validation, conflicts and rollback. No general filesystem permission, new write
@@ -630,7 +632,7 @@ the buttons to zoom, and press Home to fit. Arrow keys pan the focused canvas.
 **Test invalid disposable fixture** runs the same validator on a temporary copy
 with a deliberately incorrect width. **Cancel** terminates the active worker.
 The starting laboratory remains read-only. Supported authored submaps expose
-W4C creature-only drafts; ordinary buildings retain the W1/W2 workflow above.
+registered room controls and recovery; ordinary buildings retain the W1/W2 workflow above.
 
 ## Windows launch and project settings
 
@@ -730,6 +732,7 @@ npm.cmd run test:pools               # native container → pool → item and tw
 npm.cmd run test:items               # native new item → new pool → real factory/population
 npm.cmd run test:recipes             # native item → recipe → variant → production requirements/output
 npm.cmd run test:creatures           # native creatures → cold recovery → publication → layout
+node scripts/run-rooms.mjs          # registered rooms → real controls/recovery/revision/cold game ownership
 node scripts/run-workspace.mjs       # six registered owners, legacy draft, targeted lifecycle
 & $env:RESONANCE_PYTHON -B worker/test_authoring.py
 & $env:RESONANCE_PYTHON -B worker/test_visual.py
@@ -770,7 +773,7 @@ The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-2**,
 item contract **component-1**, recipe contract **immediate-components-1**,
 found-text contract **ordinary-found-text-1**, and
 creature contract **creature-common-1**, with Workbench layout capability
-**direct-creatures-1** (existing G17 rules, no game schema change).
+**authored-room-1** on the existing `authored_submap` route (game structure contract remains g2-2).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
 opaque document token; validation grants a one-draft review token. Apply takes

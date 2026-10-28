@@ -17,6 +17,8 @@ from generation.structure_contract import read_document, StructureError
 from rendering.tile_registry import TileRegistry
 
 CONTRACT = "creature-common-1"
+OBSERVE_INSPECTION = True
+READONLY_CONSTRUCTION = True
 HP_MAX = 1_000_000
 FIELDS = ["name", "description", "base_hp", "fighter.max_hp", "armour_value", "damage_dice",
           "damage_bonus", "attack_verb", "perception.sight_radius", "perception.sees_in_dark",
@@ -98,7 +100,7 @@ def unchanged_data(raw, *, variant=False):
     return value
 
 
-def authorize_candidate(original, candidate, source_path, target_path):
+def authorize_candidate(original, candidate, source_path, target_path, *, data=None):
     cap = capability(original, source_path); variant = source_path != target_path; problems = []
     def issue(code, message):
         problems.append(dict(code=code, severity="error", path=target_path, asset=str(candidate.get("id", "")) if isinstance(candidate, dict) else "",

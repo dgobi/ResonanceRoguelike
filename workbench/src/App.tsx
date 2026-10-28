@@ -74,6 +74,7 @@ export default function App() {
     [category, setCategory] = useState("");
   const [poolDocument, setPoolDocument] = useState<Inspection | null>(null);
   const [poolActive, setPoolActive] = useState(false), [poolDirty, setPoolDirty] = useState(false);
+  const [poolOrigin,setPoolOrigin]=useState("");
   const [contentDocuments, renderDocuments] = useState<Documents>({});
   const contentRef = useRef(contentDocuments);
   const recoveryControls=useRef(new Map<string,RecoveryControl>());
@@ -909,6 +910,7 @@ export default function App() {
             onApplied={(path,result,covered)=>contentApplied(token,path,result,covered)} onError={setError} registerRecovery={registerRecovery}
             subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={activeContent===token} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
+            onPool={(id,context)=>{setPoolOrigin(token);void openPool(id,context);}}
             contentNavigation={{selectedId:entry.selectedId,trail:entry.trail,
               onReturn:entry.origin ? ()=>returnToOrigin(entry):undefined,returnLabel:entry.origin ? `Return to ${entry.origin.label}`:undefined,
               onPool:id=>void openPool(id,trail),onOpen:(target,id,path)=>void openContent(target,id,path,false,false,null,{token,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}
@@ -918,7 +920,7 @@ export default function App() {
             active={poolActive && !activeContent} onCancel={() => void cancel()} trail={trail}
             onItem={(id, context) => void openItem(id, context)}
             poolEntryFocus={itemTrail?.path === poolDocument.path || itemTrail?.poolId === poolDocument.id ? itemTrail.index : undefined}
-            onReturn={() => setPoolActive(false)} dependencyVersion={dependencyVersion} /></div>}
+            onReturn={() => {if(contentRef.current[poolOrigin])activateContent(poolOrigin);else setPoolActive(false);}} dependencyVersion={dependencyVersion} /></div>}
           <div hidden={poolActive || !!activeContent}>{inspection?.document_token ? (
             <Authoring
               key={inspection.document_token}
