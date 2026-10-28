@@ -1,0 +1,2095 @@
+{
+  "milestone": "W5G",
+  "passed": true,
+  "observed_utc": "2026-10-28T05:12:23.082657+00:00",
+  "revisions": {
+    "baseline": "f2c85fa791092601f16411062024f9dba4e976ff",
+    "initial_remote": "f2c85fa791092601f16411062024f9dba4e976ff",
+    "repair": "f02b41ef4df96af4810bd26e7ae4c408a1f92707",
+    "implementation": "1b5b853a1030d890f3386e70e7e33f8b275f619c",
+    "malformed_inspection": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+    "pool_return": "9a5675a49473d544ad82e5614042112f905c0ab1",
+    "package_inputs": "cffe43efd8f8b6c231c7295fea5594ac460677d6",
+    "test_inputs": "353010ebfa5216e0e6d813860fcdc403b14c559d",
+    "evidence_ref": "checkpoint/workbench-w5g-verified-20261027",
+    "evidence_note": "Verified annotated checkpoint and external handoff identify the final evidence commit/remote main; no self-hash commit loop.",
+    "branch": "main"
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "exit_code": 0,
+      "result": "65 passed / 17 files",
+      "log": {
+        "path": "workbench/.artifacts/w5g/frontend-final.log",
+        "sha256": "5ff4367b465ddf345d1ab51a21dd1de3c857e5bce502fa100c8030f4c050d6ed"
+      }
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "exit_code": 0,
+      "result": "passed",
+      "log": {
+        "path": "workbench/.artifacts/w5g/typecheck-final.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "result": "57 passed; W4D faults and W5G host recovery/operation regressions included",
+      "log": {
+        "path": "workbench/.artifacts/w5g/host-final.log",
+        "sha256": "99bf4dddbf92da593a89f2519d856f096c07862ff94550357a7ae89eab713624"
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "result": "passed; warnings denied",
+      "log": {
+        "path": "workbench/.artifacts/w5g/clippy-final.log",
+        "sha256": "ab889da860b6c2d9fc1819dcbb8bd94f100d151663304a8e571cb21f98519f2e"
+      }
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -X faulthandler -B -m unittest discover -s worker -v",
+      "exit_code": 0,
+      "result": "66 passed, one expected dependency-absence skip",
+      "log": {
+        "path": "workbench/.artifacts/w5g/worker-stable.log",
+        "sha256": "4fb66ec76c82dc08c5bfa84d8c8ad8227169d221eff4669033772654453b12a5"
+      }
+    },
+    {
+      "command": "standard Python 3.11: test_bridge.BridgeTests.test_dependency_absence_structured",
+      "exit_code": 0,
+      "result": "missing-dependency control passes separately",
+      "log": {
+        "path": "workbench/.artifacts/w5g/missing-dependency.log",
+        "sha256": "607491b418902b373282f2ffeaa1021bf9baab9846ea25c7c838a7a4b38e02af"
+      }
+    },
+    {
+      "command": "standard Python 3.11 + pinned payload: effect persistence, combat, scene ownership, G17, access, authoring destinations, three reader cases",
+      "exit_code": 0,
+      "result": "55 passed; tools directory included on PYTHONPATH for the historical G17 input",
+      "log": {
+        "path": "workbench/.artifacts/w5g/production-final.log",
+        "sha256": "3416dc70e655fef266a061e8904fbcb64c4a3c6346111a46d428d25421f17820"
+      }
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "exit_code": 0,
+      "result": "Windows release and NSIS; complete pinned runtime verified; locked dependencies",
+      "log": {
+        "path": "workbench/.artifacts/w5g/package-delivery.log",
+        "sha256": "669af1ca22ec2443e69ef132c5e4980174c792585cf6d4186bfe008ccaa6c50a"
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5g/run-workspace.mjs.log",
+        "sha256": "6babde582fa3a4a2b9cc100e63482c6890c4a932a601f79065b8bd360e909275"
+      },
+      "first_attempt_exit_code": 0,
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+      "tested_executable_sha256": "1daded232f59f2f8bb42d3551242fac8401535bdfd79f9590b8ebb4607dc18b9"
+    },
+    {
+      "command": "node scripts/run-recovery.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5g/recovery-final.log",
+        "sha256": "26872dd3f23d14f79382478aa13c93e0277c6a449f412649a66ed4de91f617a6"
+      },
+      "first_attempt_exit_code": 1,
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+      "tested_executable_sha256": "1daded232f59f2f8bb42d3551242fac8401535bdfd79f9590b8ebb4607dc18b9"
+    },
+    {
+      "command": "node scripts/run-texts.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5g/run-texts.mjs.log",
+        "sha256": "b3df9cc26151db87e8f2e4db05c7b267ae01c1a1dbc3fe8b0590d5ce16872d8d"
+      },
+      "first_attempt_exit_code": 0,
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+      "tested_executable_sha256": "1daded232f59f2f8bb42d3551242fac8401535bdfd79f9590b8ebb4607dc18b9"
+    },
+    {
+      "command": "node scripts/run-typography.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5g/run-typography.mjs.log",
+        "sha256": "e63fe05c4df0f86c04f69ad895ec0d4de1b3c318fc8f5706f8e96986564ebc55"
+      },
+      "first_attempt_exit_code": 0,
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+      "tested_executable_sha256": "1daded232f59f2f8bb42d3551242fac8401535bdfd79f9590b8ebb4607dc18b9"
+    },
+    {
+      "command": "node scripts/run-submaps.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5g/submaps-final.log",
+        "sha256": "0581027876296c2efb4feda640bf69f0468403ebd8edf858a3c4c88b57e4c69d"
+      },
+      "first_attempt_exit_code": 1,
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+      "tested_executable_sha256": "1daded232f59f2f8bb42d3551242fac8401535bdfd79f9590b8ebb4607dc18b9"
+    },
+    {
+      "command": "node scripts/run-items.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5g/run-items.mjs.log",
+        "sha256": "80d704e65ebc7842d9ad52b583f97fe3bfde422e3aed6f1ff8b9abdac13695bb"
+      },
+      "first_attempt_exit_code": 0,
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+      "tested_executable_sha256": "1daded232f59f2f8bb42d3551242fac8401535bdfd79f9590b8ebb4607dc18b9"
+    },
+    {
+      "command": "node scripts/run-recipes.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5g/run-recipes.mjs.log",
+        "sha256": "1322b9709981a8a3cc9a8f6171e1d2288a8ddef82332813c803cb027747ef362"
+      },
+      "first_attempt_exit_code": 0,
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+      "tested_executable_sha256": "1daded232f59f2f8bb42d3551242fac8401535bdfd79f9590b8ebb4607dc18b9"
+    },
+    {
+      "command": "node scripts/run-creature-common.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5g/run-creature-common.mjs.log",
+        "sha256": "f23b302e1b0a4e87fddeb2bb2506ec8d7697d1f62f27fd603c83027d1dc646d2"
+      },
+      "first_attempt_exit_code": 0,
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+      "tested_executable_sha256": "1daded232f59f2f8bb42d3551242fac8401535bdfd79f9590b8ebb4607dc18b9"
+    },
+    {
+      "command": "node scripts/run-recovery-unfinished.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5g/run-recovery-unfinished.mjs.log",
+        "sha256": "bfa02642d84e296597684190b03446a7b0d81f63e81b0af4268521d05a35f514"
+      },
+      "first_attempt_exit_code": 0,
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e",
+      "tested_executable_sha256": "1daded232f59f2f8bb42d3551242fac8401535bdfd79f9590b8ebb4607dc18b9"
+    },
+    {
+      "command": "W5D_REOPEN_REGRESSION=lost node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "result": "lost publication-reopen response regression passes",
+      "log": {
+        "path": "workbench/.artifacts/w5g/workspace-lost.log",
+        "sha256": "a0baf90bdc26204ccd733ffee180b8f7d81214fb1679afd3bd93ade99ddadc90"
+      },
+      "package_inputs": "4df9ea10c4b0e723effbe85eaeeacdc0b9347c9e"
+    },
+    {
+      "command": "WORKBENCH_STARTUP_SMOKE=1 node scripts/startup-test.mjs",
+      "exit_code": 0,
+      "result": "final package: four isolated launch/project-change/restart scenarios pass",
+      "log": {
+        "path": "workbench/.artifacts/w5g/startup-delivery.log",
+        "sha256": "7d66123d7e39e6c625472e4f92412dc4c49fa9508852361350bd6cb82275bf42"
+      }
+    },
+    {
+      "command": "node scripts/run-rooms.mjs",
+      "exit_code": 0,
+      "result": "final package: two actual native processes, abrupt accepted-draft recovery, linked/mixed building-pool controls, two publications and exact reopen; real engine before/after processes",
+      "log": {
+        "path": "workbench/.artifacts/w5g/native-rooms-delivery.log",
+        "sha256": "32db6101b1cdb61a5c9ef29dd55a0ab3f34f1749b7e650a0f146c0fce459b899"
+      }
+    },
+    {
+      "command": "node scripts/run-pools.mjs",
+      "exit_code": 0,
+      "result": "final package focused compatibility rerun",
+      "log": {
+        "path": "workbench/.artifacts/w5g/pools-delivery.log",
+        "sha256": "66ba8c098dc85bdc8ecfd0f2f1f240d0fc1541acc6cd2e0c82de4e0842cd0d05"
+      }
+    },
+    {
+      "command": "node scripts/run-submaps.mjs",
+      "exit_code": 0,
+      "result": "final package focused compatibility rerun",
+      "log": {
+        "path": "workbench/.artifacts/w5g/submaps-delivery.log",
+        "sha256": "6181c71563714d9d02a73d6a3aa18e9e7d5127c0aa7c5b3bdd05bfe6176ef0a6"
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs (W5D_REOPEN_REGRESSION=lost)",
+      "exit_code": 0,
+      "result": "final package focused compatibility rerun",
+      "log": {
+        "path": "workbench/.artifacts/w5g/workspace-delivery.log",
+        "sha256": "2996feb78149e9a1f3b56db5e59e00ba4b2db616e06f34843456033e50188d93"
+      }
+    },
+    {
+      "command": "packaged Python scripts/creature-runtime-probe.py disposable-project disposable-results",
+      "exit_code": 0,
+      "result": "retained W5F actual identity, AI/attack/pursuit, special dispatch and fresh-process injured-Wight restoration",
+      "log": {
+        "path": "workbench/.artifacts/w5g/creature-runtime.log",
+        "sha256": "fb12b4e644c2fdafc11a017ff8a51e970ce4a3852961c5381e3fa4dd555db2ff"
+      }
+    }
+  ],
+  "package": {
+    "executable_sha256": "1c20b71f85d236a46ccad93ed0f5551d169fc768da41d48d8a5417058e566816",
+    "source_bridge_sha256": "ba12b75856eebb4ffbc419cd213d200f879e7b7f3957cebd15690a2724c61d98",
+    "bridge_sha256": "ba12b75856eebb4ffbc419cd213d200f879e7b7f3957cebd15690a2724c61d98",
+    "runtime_payload": {
+      "files": 1809,
+      "sha256": "2a10490163471057e9a8104393a014aba12201bd35181d726bad97e77f62eeb2"
+    },
+    "observed_runtime": {
+      "files": 1809,
+      "sha256": "2a10490163471057e9a8104393a014aba12201bd35181d726bad97e77f62eeb2"
+    },
+    "frontend": {
+      "files": 11,
+      "sha256": "3597de1a9f685490ca45a9a0c4a9e5246db1f236afdc20b56b3257a082138ba9"
+    },
+    "installer_sha256": "78ac51b898174572f8f71dd33aec0d411817ac5f902a7e4bf77585b23c13d0d4"
+  },
+  "source": {
+    "revision": "353010ebfa5216e0e6d813860fcdc403b14c559d",
+    "worktree_sha256": {
+      "roguelike/components/ai.py": "d2b07138454923132659c1fc28783e7a7e3cd760b70621a26bfab8bcbb858f01",
+      "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+      "roguelike/components/perception.py": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a",
+      "roguelike/data/display/typography.json": "bf91b067f1788fb5047d25e63a5ba31c3557ac85d311b62b0389f3abf1f73204",
+      "roguelike/data/zones/dungeon/barrow.json": "66fd0580090053471a0b3d523242a893b54ce7d8c4700e0a4cbb1696f2f7da25",
+      "roguelike/docs/CREATURES.md": "9aa9290ffb303829b315af9ef29e8c4cfb55ff0a6a4947e81bb10613dcbce655",
+      "roguelike/docs/CREATURE_AUTHORING.md": "ee434bd2e21ff3618ce09f6ca3f39b9b421be9646d6df04e9cce40aa75100ccc",
+      "roguelike/docs/DATA_REFERENCE.md": "61085a6434e03ec4aa30cb1785e1a257061ae911b1c7c332302d1fe0839137e6",
+      "roguelike/docs/LAYOUT_AUTHORING.md": "6db7fd3aed5ddc10ccb3e24f02b82366ec9ec42da42ccb08294baa9e25186575",
+      "roguelike/docs/RENDERING.md": "5ba80a645d0cea9dfa6b3616db454690b7c9cafcd657c748ee269e07bff38f16",
+      "roguelike/docs/STRUCTURE_AUTHORING.md": "5544bb67c658eb8fb970ec3a24d4341eb4c34d402c7a9f0f39ec07a9495e1310",
+      "roguelike/docs/TEXT_AUTHORING.md": "3d2854eb902ebeaa928c67dd349b6c63618574f7f7d7509f1aa14f80128612fc",
+      "roguelike/engine/ai_system.py": "0d72a7d750315d4a6f4c14e512c9ec4039fc86d87a40386976723aa2c8d34412",
+      "roguelike/engine/content_authoring.py": "d48bef48522dd6db2f57cf811d42fdf40946b603108c39aac1c77f3538c08ae9",
+      "roguelike/engine/creature_abilities.py": "c7cbd4f922240bbcfbddf10f11dcd4c27e427af747c067c94d69ddaa488a5cae",
+      "roguelike/engine/creature_authoring.py": "00a3aa1f6e5994f5e35c38b5a8b7f6a31abd152580c9f86fc6fef3b6e9c478c4",
+      "roguelike/engine/creature_factory.py": "cd3fa4db9716a0d61b1158f2e06037b9ff129d16da703b908de8c657a773a44d",
+      "roguelike/engine/data_loader.py": "6240d97b546ea813dbc5fc4d2772738bf6cb553f647079ab48ab9a1e0ab3b6ff",
+      "roguelike/engine/display_config.py": "a07f80fad15d1d9622fb7851c8d2eadde6080974eb3f64efba006f60cc6b0546",
+      "roguelike/engine/effect_lifecycle.py": "8486645aff1c325f67c30f38d4e5ff7852b5e249ed3ea06d69a94deb773c7c04",
+      "roguelike/engine/engine.py": "e8011b5cac15538631e0af2cc8f36195249860f2a8166f579f382b579b36fdd9",
+      "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "roguelike/engine/look_mode.py": "e1024b587e42ad00789cd6b66ae8c858dfdeb92c9eb872301d692e42c4b0c6fb",
+      "roguelike/engine/room_authoring.py": "890d3b71809c8c09930a81601750f681b174f3c07410ff5fbaed773aea4da407",
+      "roguelike/engine/save_components.py": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+      "roguelike/engine/save_manager.py": "a32970bc099a7f9dfa6d4b0447d30aa02793c3637a82a5af1b996750d9ae63e7",
+      "roguelike/engine/scene_generation.py": "37ddb007210f4fa00d01ce7d31b99bacdf2fdb8c7635e295a417e4c5fdf3b11c",
+      "roguelike/engine/text_authoring.py": "fb935be3330b4cbc46cd0d2f188c706f012844cd820a36a8220fb44c5adca12f",
+      "roguelike/engine/text_reader.py": "39f73b598f4d568c605987cb0cbc262edbebe7fa613a55e90209f691a6c23afb",
+      "roguelike/engine/typography.py": "360ffa7cd37a9c8c6e4d55bae14b4f8ae0373ddd94b265f036897a4e69c49ea6",
+      "roguelike/engine/typography_authoring.py": "1266e406675dbc788336a3df60073c684d84d75b7d10121fc8f6bc01e31fe01a",
+      "roguelike/generation/structure_contract.py": "ac0c717125fe8e951b852b4efc1989427e9fe0ac840e8be3ffda7da4939a59fe",
+      "roguelike/generation/structure_preview.py": "ce7a902c51b7db69e127083677554be153258c7fad208f87c9ecad3a55e4b8a4",
+      "roguelike/rendering/ui_registry.py": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058",
+      "tools/critical_fix_regressions/tests/test_combat_routes.py": "f8b0b22b9f1c2fc95c43992f4ea4807091735e02400e566a5e58c751a909dcf6",
+      "tools/critical_fix_regressions/tests/test_effect_persistence.py": "6c116aa535a9f3e042640f851c95d521f54693b61af8764a6e852453c035a594",
+      "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+      "tools/critical_fix_regressions/tests/test_generation_ownership.py": "6da916446c011c58aa370843f0bf838fa97841af73c1b17e34df281be508696a",
+      "workbench/README.md": "77339db58bb004046b833c1ceab8e3b4f9c88bb537d9d3030312af43fe053428",
+      "workbench/docs/CONTENT_CONTRACTS.md": "d6ef1ed3be2c579fda8cfef4da4bb1ff85945519feeed4e915fccf5cf04445e9",
+      "workbench/docs/W5E_DELIVERY.md": "c19d55e990bbb2c6bfdf9d2cd7082520d1e5a466a7d1a5605a8d53c54f2d9a0b",
+      "workbench/docs/W5G_REPAIR.md": "22d608dc935a6244a3ceea27fdd0fec37de4b18118af6c766c96cef37204f5cd",
+      "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+      "workbench/scripts/capture-room-evidence.mjs": "1e9339e99fec6de9c4c4bc612869f7830b07a0ea3b6f112924f9bb86a3ada953",
+      "workbench/scripts/contract-journey.mjs": "c66f846cf6054ca3577592b147e17e3ef0b48b92d4d60ae5e6a70a74d0c6cb2b",
+      "workbench/scripts/creature-runtime-probe.py": "1493f428982635d59ebfce18b6ecc8098603e80231b8314ef7a5c578102acc80",
+      "workbench/scripts/desktop-test.mjs": "d2a13783085a6f5654be4d17eae4bd201d23a1376bb4949f39f9fb7d0a4581fe",
+      "workbench/scripts/item-journey.mjs": "67ccfae71282487cd7cdea66cfc9f8525b836c41b74190556fc094ab139a5c97",
+      "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+      "workbench/scripts/recipe-journey.mjs": "7775a0bdc0d3e73ef86fd324040d2048d4ea309d96c5f74ae18d8bf31a4b0818",
+      "workbench/scripts/room-runtime-probe.py": "dffac8fa7a5691eaf5029d8db0e106da697a95cd1e6080ce4362c4fdc3acf3c0",
+      "workbench/scripts/run-creature-common.mjs": "07d302d795bde1af572d84400c9e290c2722343770e9d1c65432b27cfc0a75c2",
+      "workbench/scripts/run-creatures.mjs": "23f25ced7830775ea15966b00616c09388d640ab1f20fb60aaab995d1d2bd751",
+      "workbench/scripts/run-recovery-unfinished.mjs": "ce386546e81cb5ecaab9330bbbf555315045d3f61110bfd552ea2420193ee501",
+      "workbench/scripts/run-recovery.mjs": "a7caf537962f9c155751941426841efd02945dfb37f637277b87dee0b2c56408",
+      "workbench/scripts/run-rooms.mjs": "62de035f2866cc12c549993983ca3bb8fd2da14df045bc307294f34e9ff45ee8",
+      "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+      "workbench/scripts/run-typography.mjs": "ae0dd2eb2ce82318bc204e92eec34b67d3f4461ff54c80ae36ced16a2d645aa2",
+      "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+      "workbench/scripts/startup-test.mjs": "8161a1060b43c720dea381bcadabdc3b1f044e2302535ce0721876a721f5c698",
+      "workbench/scripts/submap-journey.mjs": "acba5cf67b8ade4405b06ccffa708d9aafc3c6b9390b4a1cab0fb1a89118c50d",
+      "workbench/scripts/text-journey.mjs": "5cb7459f400acbcfee263ba07f5f304edd070e180e2e7406cd31e2ab39707bd7",
+      "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+      "workbench/scripts/typography-runtime-probe.py": "2466cc4746cadfbdb7d91513dad2a002303f4872cf82cebfe619734eeb84265a",
+      "workbench/scripts/verify-runtime.ps1": "6ed6f9fceecd4c351813c62dfbf1c87f9a66618b7c0c037237f03e3baac2501a",
+      "workbench/scripts/w5g-preservation.py": "d180369f0965c861a0e3b518ab077c88f1d99f84be96608816d4ea7560670aad",
+      "workbench/scripts/w5g-receipt.py": "07cb87087e71cb0fd20667cfd0108a932e5e73eb71badc79427f1bd0c30d3d24",
+      "workbench/scripts/workspace-journey.mjs": "1217ddf35cdfb6557d31070af8fcae7ead0c30c0c702777405c6d27c04b6dd7a",
+      "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+      "workbench/src-tauri/src/authoring.rs": "4a2162e232fd8a70a09a462d07b7d573c69882e59bd418b79b117d4ec9a522b8",
+      "workbench/src-tauri/src/main.rs": "8354f9e3af7fc3a4e700165d9e112fc11e701362caf6d3230a3e38f8a0a3d7a3",
+      "workbench/src-tauri/src/recovery.rs": "16fcffb765ca186488422ed0658ac99341a4746d3f10893e4c213c4f7d56e662",
+      "workbench/src-tauri/tauri.bundle.conf.json": "66ed20e3e95362e60f9ffb8c74a7cc6e187847dcfb414d4a54285788bcc668bf",
+      "workbench/src-tauri/tauri.conf.json": "5ae1d6ded1b17e3b91477c799e1cdc698f8f6d6dc56323c1fe8eba70abd84639",
+      "workbench/src/App.tsx": "d6a8c4440015ea5dcd930d19f8f9ed53f4a88a15c8fb4022958d8bdf499f15d7",
+      "workbench/src/Authoring.tsx": "3ca6acc4201ec27591dc8b37dd6ec617111d4a37b899fb4771929a163f995a10",
+      "workbench/src/ContentEditor.tsx": "0ab31b659e262e6e1c2ec8bd5aa884c8387a674d475532720a855b28bae7bd75",
+      "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+      "workbench/src/CreatureEditor.tsx": "703a8b45ab97ab3cf9ac9d1cc2f7a16e281e0639d665e4fe633df15c75a40f2d",
+      "workbench/src/ItemEditor.tsx": "f0044fc331d89ae0a471e4545c704e5903cfe8733b033190059b1d73d1176cb0",
+      "workbench/src/LayoutCanvas.tsx": "878ea8508426e67fa2a9c7d12f004666c80fc044ea1ca9c9493ea7015bf6132e",
+      "workbench/src/LayoutEditor.tsx": "8fc23d4c04dd0692003eca8d116725245d0e6132bff2bc843f77c7df27014eff",
+      "workbench/src/MapView.tsx": "0720549f8bc71d17716d71703419e1badb0762d99bbe387dc97d32b8fb796b0d",
+      "workbench/src/RecipeEditor.tsx": "c62697dec01736e67015c935b790392e530b2aee48c9ea9db3a42237c942bd07",
+      "workbench/src/RecoveryPanel.test.tsx": "ea95e83b642be5ea4222ea9a9cb05cdf6ad211e930b6d704fd63950a17537ba1",
+      "workbench/src/RecoveryPanel.tsx": "873703b9f68c0989f17f39456fa5b282d646ed587e879b8f41fb472be278b007",
+      "workbench/src/RoomControls.tsx": "364dec9de2806bde4d7f10b66605473b4d318035aad3d6ef6ef0f19b375257a2",
+      "workbench/src/TextEditor.tsx": "942826e5795930369fc065ddff779444b69ed96ce461b416ac477d2909ceb0c7",
+      "workbench/src/TypographyEditor.tsx": "80ed2c4a9cb5c8ce96f037879d0e391f8f1dc29ba25e0623925b75df10754186",
+      "workbench/src/content.ts": "a5456fd7ffa2b63ccb39036af8f32f7ac7a74f5b15e725c5236d33fdf076b60c",
+      "workbench/src/creature.test.ts": "6bfaf57ec2b7e257439f4a22dc8cd7a32a6d0d8570d9f085ac9a603114400309",
+      "workbench/src/creature.ts": "ab8cf858987fc578a6b760033f2e5f0f8c4ed245528ad5a2f6594af04a5f93ea",
+      "workbench/src/familyData.ts": "2f714a7e085f28f3283f6c201027918518fdff153a41fe0d420d3ac7a528a656",
+      "workbench/src/layout.ts": "aa52feb1f3d02867ebe37165fabb85f8ab1ea2c37457e7814d9ed9f69ee5506d",
+      "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+      "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+      "workbench/src/protocol.ts": "369409a7ad535b34e89f9ba6b54a1cb6297cb8b64227dd628431759c32c9124f",
+      "workbench/src/recipe.ts": "6ac4d85fdc783751f7c65376837af20ddf311b57b6916110e3398b8b4b253d03",
+      "workbench/src/recovery.test.ts": "8e42eda3aef374e8e44a8f079211de93b689b5abe8ee41c2e4144b4958e4dedf",
+      "workbench/src/recovery.ts": "cdcd2dae4ae7d83534c20b2b8b9e9ceb06094c05811f7adb83219a68c7b07b09",
+      "workbench/src/reopen.test.ts": "1b433d0ad03c397593f488b4e328d86391b3ae1b0371c9ec02a04bed8b717b85",
+      "workbench/src/reopen.ts": "c09f8296097cb19a29f81b9cd72aba6be23fc428b7cb52a1b1c190eaca9fb0b1",
+      "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+      "workbench/src/room.test.ts": "d537fa58f0d8f51a240faf9f80213afdc85b0429d1b48a56226dfb0e0692fbdd",
+      "workbench/src/styles.css": "901a5192a5ecc0185e6f2282c95b756ebe9111c441f14686098f7986e93f7390",
+      "workbench/src/typography.test.tsx": "5556896ef0e66c90669e56a24e6f379b725853671e05b5c6b5c381df61a8b8aa",
+      "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+      "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+      "workbench/worker/bridge.py": "ba12b75856eebb4ffbc419cd213d200f879e7b7f3957cebd15690a2724c61d98",
+      "workbench/worker/requirements.lock": "17cd05554346febe141934ef7757e42d71f91880d2303051196fda0d50d278a7",
+      "workbench/worker/test_authoring.py": "c0ee827fc7c23df8893a3453aac53f1f7ee930436421562a4b72ef3114feee26",
+      "workbench/worker/test_bridge.py": "abce8a8dcf8b34142b47f423bb607950ec71ed0a619ea0f90c7834e6e6afe30c",
+      "workbench/worker/test_creatures.py": "d69785bc377221dda4c6fd8ca745c4744c93e3508f547c35501ded0173e00e3d",
+      "workbench/worker/test_creatures_w5f.py": "495cd8ad09a93cde25083df30a2e541c9651a73c480b98f89a7fe7cddb0d24eb",
+      "workbench/worker/test_rooms_w5g.py": "dbe98a463330a031ca1680e07098fc92d58382184e7a5ac4edaa45ee7e472cf5",
+      "workbench/worker/test_submaps.py": "e4d799fc3210bf629716fdb807d81a78992c2629c665aed297b11ac39c29f055",
+      "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec",
+      "workbench/worker/test_typography.py": "f56486cfed89413842fed3ed49ad195eed4db79800e44546a1c5a4a3a208e77b",
+      "workbench/worker/test_visual.py": "60cd3fafad75536c2d75d0af3e03d3122e2c459b6e64e97404aee931b81937c1"
+    },
+    "git_sha256": {
+      "roguelike/components/ai.py": "3c56d5cbea74361709e8a21e19881145708686596c651d8d958b5b6a1cbd9361",
+      "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+      "roguelike/components/perception.py": "9c5659774b55aa58e6c424e2e5783eaab304b8400da7a1f09c85b84100189af3",
+      "roguelike/data/display/typography.json": "bf91b067f1788fb5047d25e63a5ba31c3557ac85d311b62b0389f3abf1f73204",
+      "roguelike/data/zones/dungeon/barrow.json": "06570a46ea1016a8dc6a0fdf80ea259a6d98d9ae84c5e39e6cd29a186df96047",
+      "roguelike/docs/CREATURES.md": "9aa9290ffb303829b315af9ef29e8c4cfb55ff0a6a4947e81bb10613dcbce655",
+      "roguelike/docs/CREATURE_AUTHORING.md": "ee434bd2e21ff3618ce09f6ca3f39b9b421be9646d6df04e9cce40aa75100ccc",
+      "roguelike/docs/DATA_REFERENCE.md": "61085a6434e03ec4aa30cb1785e1a257061ae911b1c7c332302d1fe0839137e6",
+      "roguelike/docs/LAYOUT_AUTHORING.md": "c7122770d8c75b0a0d80630f7d52722452b01940b3eea7f22a550d2e4a68d07d",
+      "roguelike/docs/RENDERING.md": "b9184616646526f8808dc35bf9a20fb2902af93e96222a7bc6913e1a32a4e422",
+      "roguelike/docs/STRUCTURE_AUTHORING.md": "81f18c9b028bb493078e7faced331712e80089a833ac0302a42ed37a813a4b89",
+      "roguelike/docs/TEXT_AUTHORING.md": "14fc09b1c1a3af411686139f6f38df7dbebaad0f79305c1fcd604bbc87b78b86",
+      "roguelike/engine/ai_system.py": "114ff37a2e5330f2df7d48ed43ea0462fb9657362f575b039e12444a8319b866",
+      "roguelike/engine/content_authoring.py": "d48bef48522dd6db2f57cf811d42fdf40946b603108c39aac1c77f3538c08ae9",
+      "roguelike/engine/creature_abilities.py": "fdc88753da9597345cbe2e8e0c8d85112cca8b0f259b93c919066447afae208a",
+      "roguelike/engine/creature_authoring.py": "00a3aa1f6e5994f5e35c38b5a8b7f6a31abd152580c9f86fc6fef3b6e9c478c4",
+      "roguelike/engine/creature_factory.py": "2f671a6e27844f102ecd3b49796f827cfc49e7dd8918adb6d912cfc5f8f05c7e",
+      "roguelike/engine/data_loader.py": "07625ac2db63a5717c9db166a67cd4a615a2a2a58e5185da4c4686c713cc56cd",
+      "roguelike/engine/display_config.py": "13bbec46d32b7b6f645d1acceba3eabd2b41ef50e336ac5373c69f812a1ce8e8",
+      "roguelike/engine/effect_lifecycle.py": "ff3f792fe4f739489bba398745cee733754024d763ec2afc5729f4108ad09b1b",
+      "roguelike/engine/engine.py": "e8011b5cac15538631e0af2cc8f36195249860f2a8166f579f382b579b36fdd9",
+      "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "roguelike/engine/look_mode.py": "93f962881e1bf16a8b8261677509f5be5f3f8bad873b0aedf037b1d57d571fa2",
+      "roguelike/engine/room_authoring.py": "890d3b71809c8c09930a81601750f681b174f3c07410ff5fbaed773aea4da407",
+      "roguelike/engine/save_components.py": "b2df939decdb283814a4c4ba94ec9c6d5339a0d05f78fad909e859d6f3475228",
+      "roguelike/engine/save_manager.py": "92c70cc9158e232aa42abaf33697a3eb25cf6b74e29259d56e3d2149dd157cc2",
+      "roguelike/engine/scene_generation.py": "7012f8f6e2c81d88d9b9867b219df7ee4769c9cfbdea1224358f95839dfedee5",
+      "roguelike/engine/text_authoring.py": "79d41490b67a6043f289b4ef3b1f48e06dd6820b3cbb7810487de447743069ca",
+      "roguelike/engine/text_reader.py": "4ab9ad70c4b1453d7b3f33276f0031d592838290a0b9034b8fb8a27a5f9dcae0",
+      "roguelike/engine/typography.py": "360ffa7cd37a9c8c6e4d55bae14b4f8ae0373ddd94b265f036897a4e69c49ea6",
+      "roguelike/engine/typography_authoring.py": "1266e406675dbc788336a3df60073c684d84d75b7d10121fc8f6bc01e31fe01a",
+      "roguelike/generation/structure_contract.py": "ac0c717125fe8e951b852b4efc1989427e9fe0ac840e8be3ffda7da4939a59fe",
+      "roguelike/generation/structure_preview.py": "81887a724ec4f43cf0fc1420f589df4381da38f514e482cd902c4fe3285b4459",
+      "roguelike/rendering/ui_registry.py": "e0272edd0c11a393b9ef03f3b8055d1770ef32428d4b7b1e6d66c62afb8b5f2a",
+      "tools/critical_fix_regressions/tests/test_combat_routes.py": "f34f65204acf35aa771cf18fdcd4103cea7e4d1de2ddff74acbf54f4781f9209",
+      "tools/critical_fix_regressions/tests/test_effect_persistence.py": "ad39e8d71f319da16f35b75d476e8e8a2c879388d33533db73d24ea540e5d612",
+      "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+      "tools/critical_fix_regressions/tests/test_generation_ownership.py": "87709e7cb392acdfbc47255865b941833f88b97fbfbc47f87bb494fff307760d",
+      "workbench/README.md": "bcc036bd1e98868749378039e6e46857a7334203c7cb757123674168da2ae0f1",
+      "workbench/docs/CONTENT_CONTRACTS.md": "d6ef1ed3be2c579fda8cfef4da4bb1ff85945519feeed4e915fccf5cf04445e9",
+      "workbench/docs/W5E_DELIVERY.md": "c19d55e990bbb2c6bfdf9d2cd7082520d1e5a466a7d1a5605a8d53c54f2d9a0b",
+      "workbench/docs/W5G_REPAIR.md": "22d608dc935a6244a3ceea27fdd0fec37de4b18118af6c766c96cef37204f5cd",
+      "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+      "workbench/scripts/capture-room-evidence.mjs": "1e9339e99fec6de9c4c4bc612869f7830b07a0ea3b6f112924f9bb86a3ada953",
+      "workbench/scripts/contract-journey.mjs": "afe76ecf0def13b2c9871cfeeb732c92ac9c934644fd93542da6ead29f5cdd43",
+      "workbench/scripts/creature-runtime-probe.py": "1493f428982635d59ebfce18b6ecc8098603e80231b8314ef7a5c578102acc80",
+      "workbench/scripts/desktop-test.mjs": "00ee9874ea1ecd75eab9cee4729712e883bb3b4844b7a25b28d2dde29c78498a",
+      "workbench/scripts/item-journey.mjs": "b24a8e5d69f2a74c7f039fe39a8e6db36ccdfef4a872e54f62a20a7b3a9b963e",
+      "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+      "workbench/scripts/recipe-journey.mjs": "55d5c07ec19396fb5b1d5b750155febaaa8775db8aa9c159e640d49b61845daa",
+      "workbench/scripts/room-runtime-probe.py": "dffac8fa7a5691eaf5029d8db0e106da697a95cd1e6080ce4362c4fdc3acf3c0",
+      "workbench/scripts/run-creature-common.mjs": "07d302d795bde1af572d84400c9e290c2722343770e9d1c65432b27cfc0a75c2",
+      "workbench/scripts/run-creatures.mjs": "23f25ced7830775ea15966b00616c09388d640ab1f20fb60aaab995d1d2bd751",
+      "workbench/scripts/run-recovery-unfinished.mjs": "ce386546e81cb5ecaab9330bbbf555315045d3f61110bfd552ea2420193ee501",
+      "workbench/scripts/run-recovery.mjs": "a7caf537962f9c155751941426841efd02945dfb37f637277b87dee0b2c56408",
+      "workbench/scripts/run-rooms.mjs": "62de035f2866cc12c549993983ca3bb8fd2da14df045bc307294f34e9ff45ee8",
+      "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+      "workbench/scripts/run-typography.mjs": "7577c55a5926da27e555638a53d6f95579accd6b6f941f89d077884f7907b713",
+      "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+      "workbench/scripts/startup-test.mjs": "8161a1060b43c720dea381bcadabdc3b1f044e2302535ce0721876a721f5c698",
+      "workbench/scripts/submap-journey.mjs": "5352788b3ca670c1ae66c8664065c77c799652b57ae691efb0328b55b9b13463",
+      "workbench/scripts/text-journey.mjs": "4ee5165359c8fe82faebd57fb7bd37cfa6c0ab393df3bacc8fbaef4a5597312b",
+      "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+      "workbench/scripts/typography-runtime-probe.py": "2466cc4746cadfbdb7d91513dad2a002303f4872cf82cebfe619734eeb84265a",
+      "workbench/scripts/verify-runtime.ps1": "6ed6f9fceecd4c351813c62dfbf1c87f9a66618b7c0c037237f03e3baac2501a",
+      "workbench/scripts/w5g-preservation.py": "d180369f0965c861a0e3b518ab077c88f1d99f84be96608816d4ea7560670aad",
+      "workbench/scripts/w5g-receipt.py": "07cb87087e71cb0fd20667cfd0108a932e5e73eb71badc79427f1bd0c30d3d24",
+      "workbench/scripts/workspace-journey.mjs": "9d612643066d32c89097778508643d467d96c754f3441787e013a82ba182cbde",
+      "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+      "workbench/src-tauri/src/authoring.rs": "4a2162e232fd8a70a09a462d07b7d573c69882e59bd418b79b117d4ec9a522b8",
+      "workbench/src-tauri/src/main.rs": "8354f9e3af7fc3a4e700165d9e112fc11e701362caf6d3230a3e38f8a0a3d7a3",
+      "workbench/src-tauri/src/recovery.rs": "16fcffb765ca186488422ed0658ac99341a4746d3f10893e4c213c4f7d56e662",
+      "workbench/src-tauri/tauri.bundle.conf.json": "66ed20e3e95362e60f9ffb8c74a7cc6e187847dcfb414d4a54285788bcc668bf",
+      "workbench/src-tauri/tauri.conf.json": "5ae1d6ded1b17e3b91477c799e1cdc698f8f6d6dc56323c1fe8eba70abd84639",
+      "workbench/src/App.tsx": "d6a8c4440015ea5dcd930d19f8f9ed53f4a88a15c8fb4022958d8bdf499f15d7",
+      "workbench/src/Authoring.tsx": "3ca6acc4201ec27591dc8b37dd6ec617111d4a37b899fb4771929a163f995a10",
+      "workbench/src/ContentEditor.tsx": "0ab31b659e262e6e1c2ec8bd5aa884c8387a674d475532720a855b28bae7bd75",
+      "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+      "workbench/src/CreatureEditor.tsx": "703a8b45ab97ab3cf9ac9d1cc2f7a16e281e0639d665e4fe633df15c75a40f2d",
+      "workbench/src/ItemEditor.tsx": "52f91783f9859ef15cf39593cc24fd986acf969799964fd6de6fe34ec979fe89",
+      "workbench/src/LayoutCanvas.tsx": "5fa1731608a6fba73ae73336d60625a185dd57941d81521b3d7a7eb27cef2581",
+      "workbench/src/LayoutEditor.tsx": "8fc23d4c04dd0692003eca8d116725245d0e6132bff2bc843f77c7df27014eff",
+      "workbench/src/MapView.tsx": "0720549f8bc71d17716d71703419e1badb0762d99bbe387dc97d32b8fb796b0d",
+      "workbench/src/RecipeEditor.tsx": "3fd00a6c662814a255d2626616109d27dc07951589024efebb337ce8fa38d11d",
+      "workbench/src/RecoveryPanel.test.tsx": "ea95e83b642be5ea4222ea9a9cb05cdf6ad211e930b6d704fd63950a17537ba1",
+      "workbench/src/RecoveryPanel.tsx": "873703b9f68c0989f17f39456fa5b282d646ed587e879b8f41fb472be278b007",
+      "workbench/src/RoomControls.tsx": "364dec9de2806bde4d7f10b66605473b4d318035aad3d6ef6ef0f19b375257a2",
+      "workbench/src/TextEditor.tsx": "942826e5795930369fc065ddff779444b69ed96ce461b416ac477d2909ceb0c7",
+      "workbench/src/TypographyEditor.tsx": "80ed2c4a9cb5c8ce96f037879d0e391f8f1dc29ba25e0623925b75df10754186",
+      "workbench/src/content.ts": "a5456fd7ffa2b63ccb39036af8f32f7ac7a74f5b15e725c5236d33fdf076b60c",
+      "workbench/src/creature.test.ts": "6bfaf57ec2b7e257439f4a22dc8cd7a32a6d0d8570d9f085ac9a603114400309",
+      "workbench/src/creature.ts": "ab8cf858987fc578a6b760033f2e5f0f8c4ed245528ad5a2f6594af04a5f93ea",
+      "workbench/src/familyData.ts": "2f714a7e085f28f3283f6c201027918518fdff153a41fe0d420d3ac7a528a656",
+      "workbench/src/layout.ts": "aa52feb1f3d02867ebe37165fabb85f8ab1ea2c37457e7814d9ed9f69ee5506d",
+      "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+      "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+      "workbench/src/protocol.ts": "369409a7ad535b34e89f9ba6b54a1cb6297cb8b64227dd628431759c32c9124f",
+      "workbench/src/recipe.ts": "51ca1cff61de9dee56e43f61ed2b25a1036d220011162abbf9e93773202c6098",
+      "workbench/src/recovery.test.ts": "8e42eda3aef374e8e44a8f079211de93b689b5abe8ee41c2e4144b4958e4dedf",
+      "workbench/src/recovery.ts": "cdcd2dae4ae7d83534c20b2b8b9e9ceb06094c05811f7adb83219a68c7b07b09",
+      "workbench/src/reopen.test.ts": "1b433d0ad03c397593f488b4e328d86391b3ae1b0371c9ec02a04bed8b717b85",
+      "workbench/src/reopen.ts": "c09f8296097cb19a29f81b9cd72aba6be23fc428b7cb52a1b1c190eaca9fb0b1",
+      "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+      "workbench/src/room.test.ts": "d537fa58f0d8f51a240faf9f80213afdc85b0429d1b48a56226dfb0e0692fbdd",
+      "workbench/src/styles.css": "a1c280b69773798da957a2f4f7b17258df390e5ddb88f23a2ddb4067c0bf598e",
+      "workbench/src/typography.test.tsx": "5556896ef0e66c90669e56a24e6f379b725853671e05b5c6b5c381df61a8b8aa",
+      "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+      "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+      "workbench/worker/bridge.py": "24360c5544574c26654f2b7cb348388973f39084954e78398c82f10bacc37de2",
+      "workbench/worker/requirements.lock": "3e375be2c380dbcc1ba803e2904ccd2e14c71bf00cc3afe7eb2d91a0272ffab0",
+      "workbench/worker/test_authoring.py": "a378b84c1630f123f0785d4518563e054385e79a0e09a29a2d83313f7c878092",
+      "workbench/worker/test_bridge.py": "abce8a8dcf8b34142b47f423bb607950ec71ed0a619ea0f90c7834e6e6afe30c",
+      "workbench/worker/test_creatures.py": "d69785bc377221dda4c6fd8ca745c4744c93e3508f547c35501ded0173e00e3d",
+      "workbench/worker/test_creatures_w5f.py": "495cd8ad09a93cde25083df30a2e541c9651a73c480b98f89a7fe7cddb0d24eb",
+      "workbench/worker/test_rooms_w5g.py": "dbe98a463330a031ca1680e07098fc92d58382184e7a5ac4edaa45ee7e472cf5",
+      "workbench/worker/test_submaps.py": "e4d799fc3210bf629716fdb807d81a78992c2629c665aed297b11ac39c29f055",
+      "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec",
+      "workbench/worker/test_typography.py": "f56486cfed89413842fed3ed49ad195eed4db79800e44546a1c5a4a3a208e77b",
+      "workbench/worker/test_visual.py": "60cd3fafad75536c2d75d0af3e03d3122e2c459b6e64e97404aee931b81937c1"
+    }
+  },
+  "source_audit": {
+    "native_game_python_matches": true,
+    "native_fonts_ui_resources_match": true,
+    "game_source_sha256": "3f4f8efb0b84475b709a8993c747fa7bd23b198016b7693b4858cab97a658667",
+    "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5"
+  },
+  "preservation": {
+    "unchanged": 8142,
+    "scoped_changes": [
+      "roguelike/docs/STRUCTURE_AUTHORING.md",
+      "roguelike/engine/content_authoring.py",
+      "roguelike/engine/creature_authoring.py",
+      "roguelike/engine/room_authoring.py",
+      "roguelike/engine/scene_generation.py",
+      "roguelike/generation/structure_contract.py",
+      "roguelike/generation/structure_preview.py",
+      "workbench/README.md",
+      "workbench/docs/CONTENT_CONTRACTS.md",
+      "workbench/docs/W5G_REPAIR.md",
+      "workbench/scripts/capture-room-evidence.mjs",
+      "workbench/scripts/room-runtime-probe.py",
+      "workbench/scripts/run-recovery-unfinished.mjs",
+      "workbench/scripts/run-recovery.mjs",
+      "workbench/scripts/run-rooms.mjs",
+      "workbench/scripts/submap-journey.mjs",
+      "workbench/scripts/w5g-preservation.py",
+      "workbench/scripts/w5g-receipt.py",
+      "workbench/scripts/workspace-journey.mjs",
+      "workbench/src-tauri/src/authoring.rs",
+      "workbench/src-tauri/src/main.rs",
+      "workbench/src-tauri/src/recovery.rs",
+      "workbench/src/App.tsx",
+      "workbench/src/Authoring.tsx",
+      "workbench/src/ContentEditor.tsx",
+      "workbench/src/LayoutCanvas.tsx",
+      "workbench/src/LayoutEditor.tsx",
+      "workbench/src/MapView.tsx",
+      "workbench/src/RecoveryPanel.tsx",
+      "workbench/src/RoomControls.tsx",
+      "workbench/src/content.ts",
+      "workbench/src/layout.ts",
+      "workbench/src/protocol.ts",
+      "workbench/src/room.test.ts",
+      "workbench/worker/bridge.py",
+      "workbench/worker/test_authoring.py",
+      "workbench/worker/test_bridge.py",
+      "workbench/worker/test_creatures_w5f.py",
+      "workbench/worker/test_rooms_w5g.py",
+      "workbench/worker/test_submaps.py",
+      "workbench/worker/test_visual.py"
+    ],
+    "failures": []
+  },
+  "native_rooms": {
+    "started_utc": "2026-10-28T05:02:54.860Z",
+    "processes": [
+      26236,
+      31300
+    ],
+    "checks": [
+      "create saved found-text and ordinary creature variants using existing controls",
+      "accepted three independent unfinished drafts, terminating the actual app process",
+      "room → pool → room, then building → pool → building; independent room draft retained exactly",
+      "published exact first room; exercising production interaction and SaveManager before revision",
+      "published same-ID revision; fresh process reload compares owned old scene and new distinct instance",
+      "verified untouched template, source creature/text, protected laboratory, other drafts and exact reopen bytes"
+    ],
+    "drafts": [
+      {
+        "path": "roguelike/docs/examples/g17_authored_creature_room.json",
+        "phase": "before-variant-invalid",
+        "generation": 1,
+        "key": "4e730445535b0baab0114f4b328c39b3656ee55d64ebfc40ae22712689455386/1fc4587b-d879-424f-bdcd-7cae43b6e375",
+        "sha256": "38a19d62f50f5672b156b348790566eccaa610e52526a63cb078ae2818ef9ca7",
+        "variant": false,
+        "target": "roguelike/docs/examples/g17_authored_creature_room.json"
+      },
+      {
+        "path": "roguelike/data/layouts/w5g_other_source.json",
+        "phase": "second-invalid",
+        "generation": 1,
+        "key": "4e730445535b0baab0114f4b328c39b3656ee55d64ebfc40ae22712689455386/475fac2e-72bd-4017-ae4a-ec64425d0db9",
+        "sha256": "dbadd6a347cf086ee029a0cef18b028f234f28592ba8492a201156405cc3f8cd",
+        "variant": false,
+        "target": "roguelike/data/layouts/w5g_other_source.json"
+      },
+      {
+        "path": "roguelike/data/items/components/clay_pot.json",
+        "phase": "third-invalid",
+        "generation": 1,
+        "key": "4e730445535b0baab0114f4b328c39b3656ee55d64ebfc40ae22712689455386/c44f7bce-d661-4247-8375-6fd3221150ec",
+        "sha256": "d5eb06114e1df241a0528f38eae962738271679e6e57b72e673cbea29ea8af95",
+        "variant": false,
+        "target": "roguelike/data/items/components/clay_pot.json"
+      },
+      {
+        "path": "roguelike/docs/examples/g17_authored_creature_room.json",
+        "phase": "assembled-room",
+        "generation": 15,
+        "key": "4e730445535b0baab0114f4b328c39b3656ee55d64ebfc40ae22712689455386/1fc4587b-d879-424f-bdcd-7cae43b6e375",
+        "sha256": "9b792c570c6314408719355b7bc1a64c079969fe0e0856c149bf5f5613068986",
+        "variant": true,
+        "target": "roguelike/data/layouts/w5g_native_room.json"
+      },
+      {
+        "path": "roguelike/docs/examples/g17_authored_creature_room.json",
+        "phase": "after-building-pool-return",
+        "generation": 15,
+        "key": "4e730445535b0baab0114f4b328c39b3656ee55d64ebfc40ae22712689455386/1fc4587b-d879-424f-bdcd-7cae43b6e375",
+        "sha256": "9b792c570c6314408719355b7bc1a64c079969fe0e0856c149bf5f5613068986",
+        "variant": true,
+        "target": "roguelike/data/layouts/w5g_native_room.json"
+      },
+      {
+        "path": "roguelike/data/layouts/w5g_native_room.json",
+        "phase": "same-id-revision",
+        "generation": 3,
+        "key": "4e730445535b0baab0114f4b328c39b3656ee55d64ebfc40ae22712689455386/e19d6397-a683-42e4-8fa8-bce26ec98032",
+        "sha256": "d694f76d88ae29ab15f73d4beacdbcea5b62f0ee3a8effd6b8ebeb6fe5ac8d0f",
+        "variant": false,
+        "target": "roguelike/data/layouts/w5g_native_room.json"
+      }
+    ],
+    "baseline": {
+      "roguelike/docs/examples/g17_authored_creature_room.json": "c44f9c5e3dd5c01ffc9e7fd112fc37942b008ec142773fb079086a86ccb4a665",
+      "roguelike/data/layouts/w5g_other_source.json": "f1f37ada693b8d786c26cc1df9fdfadfc5b9e7ca6493e9a4298231b403f63829",
+      "roguelike/data/items/components/clay_pot.json": "de984e71a817a89dc5f0d6a7c837908542c8b032753997372be40613d55bafda",
+      "roguelike/data/texts/lab/lab_note_primary_b.json": "bba129300e7b41d0f652f707848f90c7544096e3cf6ab3a3a48af45b49338421",
+      "roguelike/data/entities/creatures/hollow_revenant.json": "44b2ee0fb49ab1f172791bf1775ea9c3a707942e2adbfd9e9fb5e176fad80a3b",
+      "roguelike/data/layouts/starting_lab.json": "76fe4388fb10d68269d2132c2ae1d2391efa0bd560f27cc73874ee46e46d20ff",
+      "roguelike/data/buildings/commercial/apothecary_a.json": "821d77d2bd86112a1fc2b1260abda737d19b86ef09f1229880242f98b407c036"
+    },
+    "text": {
+      "path": "roguelike/data/texts/lab/w5g_native_text.json",
+      "sha256": "c97a14384c5bd724fc3558fbf1307f92166513cea67732e574de47185111cdfc"
+    },
+    "creature": {
+      "path": "roguelike/data/entities/creatures/w5g_native_actor.json",
+      "sha256": "5d26d2edbdc5710671846d08ef737e32c330444c1775b84baac3b38ff12f47a9"
+    },
+    "publication_v1": {
+      "path": "roguelike/data/layouts/w5g_native_room.json",
+      "sha256": "9b792c570c6314408719355b7bc1a64c079969fe0e0856c149bf5f5613068986",
+      "source_sha256": "c44f9c5e3dd5c01ffc9e7fd112fc37942b008ec142773fb079086a86ccb4a665"
+    },
+    "publication_v2": {
+      "path": "roguelike/data/layouts/w5g_native_room.json",
+      "sha256": "d694f76d88ae29ab15f73d4beacdbcea5b62f0ee3a8effd6b8ebeb6fe5ac8d0f"
+    },
+    "engine_before": {
+      "passed": true,
+      "pid": 18272,
+      "layout_sha256": "9b792c570c6314408719355b7bc1a64c079969fe0e0856c149bf5f5613068986",
+      "saved_generation": "g-59c5b2354dfc41ee909393186ae93c87",
+      "authored_start": [
+        37,
+        23
+      ],
+      "actual_arrival": [
+        37,
+        23
+      ],
+      "carrier_id": "letter",
+      "text_id": "w5g_native_text",
+      "physical_inventory_owner": true,
+      "container_source": [
+        5,
+        4
+      ],
+      "container_pools": [
+        "storage_tools"
+      ],
+      "transferred_item_id": "tallow_torch",
+      "equipped_fixture_light": "tallow_torch",
+      "ai_class": "WanderingAI",
+      "actor_id": "w5g_native_actor",
+      "actual_ai_attack": true,
+      "route": "normal descent → walk → pickup → inventory/use → actual reader; container interaction/transfer; actual AI turn; normal ascent → SaveManager.save"
+    },
+    "engine_after": {
+      "passed": true,
+      "pid": 31196,
+      "layout_sha256": "d694f76d88ae29ab15f73d4beacdbcea5b62f0ee3a8effd6b8ebeb6fe5ac8d0f",
+      "old_scene_exact": true,
+      "inventory_owned_once": true,
+      "old_actor_hp": 7,
+      "owned_instance": "w5g-owned-instance",
+      "new_instance": "w5g-unvisited-instance",
+      "new_authored_start": [
+        38,
+        23
+      ],
+      "new_arrival": [
+        38,
+        23
+      ],
+      "new_geometry_observed": true,
+      "new_contents_observed": true,
+      "missing_cache_refused": true,
+      "route": "fresh process → DataLoader revised layout only → SaveManager.load → normal revisit without generation → distinct untouched SubMap using same layout ID → missing-cache refusal"
+    },
+    "receipt": {
+      "path": "workbench/.artifacts/w5g/rooms-native-1793163774575/receipt.json",
+      "sha256": "f0ad4d4f91b5a5248df077c808e9bb6e00fbc06986471fb872b01ee9e43211a9"
+    },
+    "preview_v1": {
+      "origin": [
+        34,
+        17
+      ],
+      "authored_start": [
+        37,
+        23
+      ],
+      "actual_arrival": [
+        37,
+        23
+      ],
+      "stairs": [
+        {
+          "link": null,
+          "terrain": "stairs_up",
+          "x": 36,
+          "y": 23
+        }
+      ],
+      "access": [
+        {
+          "kind": "arrival",
+          "passed": true,
+          "target": "actual arrival",
+          "xy": [
+            37,
+            23
+          ]
+        },
+        {
+          "approaches": [],
+          "kind": "item",
+          "passed": true,
+          "receipt_owned": true,
+          "relocated": false,
+          "source_xy": [
+            7,
+            2
+          ],
+          "target": "w5g_native_room@34,17,0:special[1]",
+          "xy": [
+            41,
+            19
+          ]
+        },
+        {
+          "approaches": [
+            [
+              41,
+              20
+            ],
+            [
+              41,
+              21
+            ],
+            [
+              41,
+              22
+            ],
+            [
+              42,
+              20
+            ],
+            [
+              42,
+              22
+            ],
+            [
+              43,
+              20
+            ],
+            [
+              43,
+              21
+            ],
+            [
+              43,
+              22
+            ]
+          ],
+          "kind": "container",
+          "passed": true,
+          "receipt_owned": true,
+          "relocated": false,
+          "source_xy": [
+            8,
+            4
+          ],
+          "target": "w5g_native_room@34,17,0:special[2]",
+          "xy": [
+            42,
+            21
+          ]
+        },
+        {
+          "approaches": [],
+          "kind": "item",
+          "passed": true,
+          "receipt_owned": true,
+          "relocated": false,
+          "source_xy": [
+            3,
+            6
+          ],
+          "target": "w5g_native_room@34,17,0:special[3]",
+          "xy": [
+            37,
+            23
+          ]
+        },
+        {
+          "approaches": [
+            [
+              38,
+              20
+            ],
+            [
+              38,
+              21
+            ],
+            [
+              38,
+              22
+            ],
+            [
+              39,
+              20
+            ],
+            [
+              39,
+              22
+            ],
+            [
+              40,
+              20
+            ],
+            [
+              40,
+              21
+            ],
+            [
+              40,
+              22
+            ]
+          ],
+          "kind": "container",
+          "passed": true,
+          "receipt_owned": true,
+          "relocated": false,
+          "source_xy": [
+            5,
+            4
+          ],
+          "target": "w5g_native_room@34,17,0:special[4]",
+          "xy": [
+            39,
+            21
+          ]
+        },
+        {
+          "kind": "stairs_up",
+          "passed": true,
+          "stairs": [
+            [
+              36,
+              23
+            ]
+          ],
+          "target": "usable return stair"
+        }
+      ],
+      "records": [
+        {
+          "record_id": "w5g_native_room@34,17,0:special[0]",
+          "source_index": 0,
+          "kind": "creature",
+          "source_xy": [
+            9,
+            2
+          ],
+          "xy": [
+            43,
+            19
+          ],
+          "relocated": false,
+          "item_id": null,
+          "text_id": null,
+          "text_override_present": false,
+          "decor_id": null,
+          "loot_pools": null,
+          "actual_count": 1,
+          "actor_classes": [
+            "Actor"
+          ],
+          "creature_definition": {
+            "id": "w5g_native_actor",
+            "sha256": "b31bbe21495bc6e3fa3bc5aef4b19611e7dbba10bf3d1379c2ae0eed36ee8531"
+          },
+          "objects": []
+        },
+        {
+          "record_id": "w5g_native_room@34,17,0:special[1]",
+          "source_index": 1,
+          "kind": "item",
+          "source_xy": [
+            7,
+            2
+          ],
+          "xy": [
+            41,
+            19
+          ],
+          "relocated": false,
+          "item_id": "wood_bundle",
+          "text_id": null,
+          "text_override_present": false,
+          "decor_id": null,
+          "loot_pools": null,
+          "actual_count": 1,
+          "actor_classes": [],
+          "creature_definition": null,
+          "objects": [
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "A loose bundle of dry branches. Snapped from dead fall.",
+              "drink_message": null,
+              "eat_message": null,
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "wood_bundle",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "fuel",
+                  "tier": 1
+                },
+                {
+                  "tag": "fibrous",
+                  "tier": 1
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "bundle of wood",
+              "nutrition": null,
+              "on_use": null,
+              "qualities": {},
+              "source_creature": null,
+              "stackable": false,
+              "temporary_essence": [],
+              "text_id": "",
+              "tile": "generic_item",
+              "turns_lit": 0,
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "record_id": "w5g_native_room@34,17,0:special[2]",
+          "source_index": 2,
+          "kind": "container",
+          "source_xy": [
+            8,
+            4
+          ],
+          "xy": [
+            42,
+            21
+          ],
+          "relocated": false,
+          "item_id": null,
+          "text_id": null,
+          "text_override_present": false,
+          "decor_id": "crate",
+          "loot_pools": [
+            "storage_tools"
+          ],
+          "actual_count": 1,
+          "actor_classes": [],
+          "creature_definition": null,
+          "objects": [
+            {
+              "decor_id": "crate",
+              "items": [
+                {
+                  "_temp_av_bonus": 0,
+                  "_temp_av_hits": 0,
+                  "burn_turns": 1800,
+                  "consumed_on_use": false,
+                  "count": 1,
+                  "decay_timer": null,
+                  "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+                  "drink_message": null,
+                  "eat_message": null,
+                  "harvest_from": null,
+                  "heal_amount": null,
+                  "hydration": null,
+                  "item_id": "oil_lantern",
+                  "item_state_version": 1,
+                  "keywords": [
+                    {
+                      "tag": "waxy",
+                      "tier": 1
+                    },
+                    {
+                      "tag": "fuel",
+                      "tier": 2
+                    }
+                  ],
+                  "light_data": {
+                    "color": [
+                      220,
+                      200,
+                      120
+                    ],
+                    "falloff": 1.5,
+                    "flicker": false,
+                    "radius": 10
+                  },
+                  "liquid": null,
+                  "liquid_volume": 0,
+                  "name": "Oil Lantern",
+                  "nutrition": null,
+                  "on_use": "equip_light",
+                  "qualities": {},
+                  "source_creature": null,
+                  "stackable": false,
+                  "temporary_essence": [],
+                  "text_id": "",
+                  "tile": "oil_lantern",
+                  "turns_lit": 0,
+                  "weight": 0.6
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "record_id": "w5g_native_room@34,17,0:special[3]",
+          "source_index": 3,
+          "kind": "item",
+          "source_xy": [
+            3,
+            6
+          ],
+          "xy": [
+            37,
+            23
+          ],
+          "relocated": false,
+          "item_id": "letter",
+          "text_id": "w5g_native_text",
+          "text_override_present": true,
+          "decor_id": null,
+          "loot_pools": null,
+          "actual_count": 1,
+          "actor_classes": [],
+          "creature_definition": null,
+          "objects": [
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "Folded paper. Someone meant to send this.",
+              "drink_message": null,
+              "eat_message": null,
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "letter",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "fibrous",
+                  "tier": 1
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "a letter",
+              "nutrition": null,
+              "on_use": "read",
+              "qualities": {},
+              "source_creature": null,
+              "stackable": false,
+              "temporary_essence": [],
+              "text_id": "w5g_native_text",
+              "tile": "document",
+              "turns_lit": 0,
+              "weight": 0.02
+            }
+          ]
+        },
+        {
+          "record_id": "w5g_native_room@34,17,0:special[4]",
+          "source_index": 4,
+          "kind": "container",
+          "source_xy": [
+            5,
+            4
+          ],
+          "xy": [
+            39,
+            21
+          ],
+          "relocated": false,
+          "item_id": null,
+          "text_id": null,
+          "text_override_present": false,
+          "decor_id": "crate",
+          "loot_pools": [
+            "storage_tools"
+          ],
+          "actual_count": 1,
+          "actor_classes": [],
+          "creature_definition": null,
+          "objects": [
+            {
+              "decor_id": "crate",
+              "items": [
+                {
+                  "_temp_av_bonus": 0,
+                  "_temp_av_hits": 0,
+                  "burn_turns": 600,
+                  "consumed_on_use": false,
+                  "count": 1,
+                  "decay_timer": null,
+                  "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+                  "drink_message": null,
+                  "eat_message": null,
+                  "harvest_from": null,
+                  "heal_amount": null,
+                  "hydration": null,
+                  "item_id": "tallow_torch",
+                  "item_state_version": 1,
+                  "keywords": [
+                    {
+                      "tag": "waxy",
+                      "tier": 1
+                    },
+                    {
+                      "tag": "fibrous",
+                      "tier": 1
+                    },
+                    {
+                      "tag": "fuel",
+                      "tier": 1
+                    }
+                  ],
+                  "light_data": {
+                    "color": [
+                      255,
+                      180,
+                      60
+                    ],
+                    "falloff": 1.8,
+                    "flicker": true,
+                    "radius": 8
+                  },
+                  "liquid": null,
+                  "liquid_volume": 0,
+                  "name": "Tallow Torch",
+                  "nutrition": null,
+                  "on_use": "equip_light",
+                  "qualities": {},
+                  "source_creature": null,
+                  "stackable": false,
+                  "temporary_essence": [],
+                  "text_id": "",
+                  "tile": "tallow_torch",
+                  "turns_lit": 0,
+                  "weight": 0.3
+                },
+                {
+                  "_temp_av_bonus": 0,
+                  "_temp_av_hits": 0,
+                  "burn_turns": null,
+                  "consumed_on_use": false,
+                  "count": 1,
+                  "decay_timer": null,
+                  "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+                  "drink_message": null,
+                  "eat_message": null,
+                  "harvest_from": null,
+                  "heal_amount": null,
+                  "hydration": null,
+                  "item_id": "clay_pot",
+                  "item_state_version": 1,
+                  "keywords": [
+                    {
+                      "tag": "vessel",
+                      "tier": 1
+                    },
+                    {
+                      "tag": "heatproof",
+                      "tier": 1
+                    }
+                  ],
+                  "light_data": null,
+                  "liquid": null,
+                  "liquid_volume": 0,
+                  "name": "clay pot",
+                  "nutrition": null,
+                  "on_use": null,
+                  "qualities": {},
+                  "source_creature": null,
+                  "stackable": false,
+                  "temporary_essence": [],
+                  "text_id": "",
+                  "tile": "generic_item",
+                  "turns_lit": 0,
+                  "weight": 0.6
+                },
+                {
+                  "_temp_av_bonus": 0,
+                  "_temp_av_hits": 0,
+                  "burn_turns": null,
+                  "consumed_on_use": true,
+                  "count": 1,
+                  "decay_timer": null,
+                  "description": "A sharp-edged chip knocked from a larger piece of flint.",
+                  "drink_message": null,
+                  "eat_message": null,
+                  "harvest_from": null,
+                  "heal_amount": null,
+                  "hydration": null,
+                  "item_id": "flint_shard",
+                  "item_state_version": 1,
+                  "keywords": [
+                    {
+                      "tag": "cutting",
+                      "tier": 1
+                    }
+                  ],
+                  "light_data": null,
+                  "liquid": null,
+                  "liquid_volume": 0,
+                  "name": "flint shard",
+                  "nutrition": null,
+                  "on_use": null,
+                  "qualities": {},
+                  "source_creature": null,
+                  "stackable": false,
+                  "temporary_essence": [],
+                  "text_id": "",
+                  "tile": "generic_item",
+                  "turns_lit": 0,
+                  "weight": 0.2
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "preview_v2": {
+      "origin": [
+        34,
+        17
+      ],
+      "authored_start": [
+        38,
+        23
+      ],
+      "actual_arrival": [
+        38,
+        23
+      ],
+      "stairs": [
+        {
+          "link": null,
+          "terrain": "stairs_up",
+          "x": 36,
+          "y": 23
+        }
+      ],
+      "access": [
+        {
+          "kind": "arrival",
+          "passed": true,
+          "target": "actual arrival",
+          "xy": [
+            38,
+            23
+          ]
+        },
+        {
+          "approaches": [],
+          "kind": "item",
+          "passed": true,
+          "receipt_owned": true,
+          "relocated": false,
+          "source_xy": [
+            7,
+            2
+          ],
+          "target": "w5g_native_room@34,17,0:special[1]",
+          "xy": [
+            41,
+            19
+          ]
+        },
+        {
+          "approaches": [
+            [
+              41,
+              20
+            ],
+            [
+              41,
+              21
+            ],
+            [
+              41,
+              22
+            ],
+            [
+              42,
+              20
+            ],
+            [
+              42,
+              22
+            ],
+            [
+              43,
+              20
+            ],
+            [
+              43,
+              21
+            ],
+            [
+              43,
+              22
+            ]
+          ],
+          "kind": "container",
+          "passed": true,
+          "receipt_owned": true,
+          "relocated": false,
+          "source_xy": [
+            8,
+            4
+          ],
+          "target": "w5g_native_room@34,17,0:special[2]",
+          "xy": [
+            42,
+            21
+          ]
+        },
+        {
+          "approaches": [],
+          "kind": "item",
+          "passed": true,
+          "receipt_owned": true,
+          "relocated": false,
+          "source_xy": [
+            3,
+            6
+          ],
+          "target": "w5g_native_room@34,17,0:special[3]",
+          "xy": [
+            37,
+            23
+          ]
+        },
+        {
+          "approaches": [
+            [
+              38,
+              20
+            ],
+            [
+              38,
+              21
+            ],
+            [
+              38,
+              22
+            ],
+            [
+              39,
+              20
+            ],
+            [
+              39,
+              22
+            ],
+            [
+              40,
+              20
+            ],
+            [
+              40,
+              21
+            ],
+            [
+              40,
+              22
+            ]
+          ],
+          "kind": "container",
+          "passed": true,
+          "receipt_owned": true,
+          "relocated": false,
+          "source_xy": [
+            5,
+            4
+          ],
+          "target": "w5g_native_room@34,17,0:special[4]",
+          "xy": [
+            39,
+            21
+          ]
+        },
+        {
+          "approaches": [],
+          "kind": "item",
+          "passed": true,
+          "receipt_owned": true,
+          "relocated": false,
+          "source_xy": [
+            1,
+            1
+          ],
+          "target": "w5g_native_room@34,17,0:special[5]",
+          "xy": [
+            35,
+            18
+          ]
+        },
+        {
+          "kind": "stairs_up",
+          "passed": true,
+          "stairs": [
+            [
+              36,
+              23
+            ]
+          ],
+          "target": "usable return stair"
+        }
+      ],
+      "records": [
+        {
+          "record_id": "w5g_native_room@34,17,0:special[0]",
+          "source_index": 0,
+          "kind": "creature",
+          "source_xy": [
+            9,
+            2
+          ],
+          "xy": [
+            43,
+            19
+          ],
+          "relocated": false,
+          "item_id": null,
+          "text_id": null,
+          "text_override_present": false,
+          "decor_id": null,
+          "loot_pools": null,
+          "actual_count": 1,
+          "actor_classes": [
+            "Actor"
+          ],
+          "creature_definition": {
+            "id": "w5g_native_actor",
+            "sha256": "b31bbe21495bc6e3fa3bc5aef4b19611e7dbba10bf3d1379c2ae0eed36ee8531"
+          },
+          "objects": []
+        },
+        {
+          "record_id": "w5g_native_room@34,17,0:special[1]",
+          "source_index": 1,
+          "kind": "item",
+          "source_xy": [
+            7,
+            2
+          ],
+          "xy": [
+            41,
+            19
+          ],
+          "relocated": false,
+          "item_id": "wood_bundle",
+          "text_id": null,
+          "text_override_present": false,
+          "decor_id": null,
+          "loot_pools": null,
+          "actual_count": 1,
+          "actor_classes": [],
+          "creature_definition": null,
+          "objects": [
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "A loose bundle of dry branches. Snapped from dead fall.",
+              "drink_message": null,
+              "eat_message": null,
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "wood_bundle",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "fuel",
+                  "tier": 1
+                },
+                {
+                  "tag": "fibrous",
+                  "tier": 1
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "bundle of wood",
+              "nutrition": null,
+              "on_use": null,
+              "qualities": {},
+              "source_creature": null,
+              "stackable": false,
+              "temporary_essence": [],
+              "text_id": "",
+              "tile": "generic_item",
+              "turns_lit": 0,
+              "weight": 1
+            }
+          ]
+        },
+        {
+          "record_id": "w5g_native_room@34,17,0:special[2]",
+          "source_index": 2,
+          "kind": "container",
+          "source_xy": [
+            8,
+            4
+          ],
+          "xy": [
+            42,
+            21
+          ],
+          "relocated": false,
+          "item_id": null,
+          "text_id": null,
+          "text_override_present": false,
+          "decor_id": "crate",
+          "loot_pools": [
+            "storage_tools"
+          ],
+          "actual_count": 1,
+          "actor_classes": [],
+          "creature_definition": null,
+          "objects": [
+            {
+              "decor_id": "crate",
+              "items": [
+                {
+                  "_temp_av_bonus": 0,
+                  "_temp_av_hits": 0,
+                  "burn_turns": 1800,
+                  "consumed_on_use": false,
+                  "count": 1,
+                  "decay_timer": null,
+                  "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+                  "drink_message": null,
+                  "eat_message": null,
+                  "harvest_from": null,
+                  "heal_amount": null,
+                  "hydration": null,
+                  "item_id": "oil_lantern",
+                  "item_state_version": 1,
+                  "keywords": [
+                    {
+                      "tag": "waxy",
+                      "tier": 1
+                    },
+                    {
+                      "tag": "fuel",
+                      "tier": 2
+                    }
+                  ],
+                  "light_data": {
+                    "color": [
+                      220,
+                      200,
+                      120
+                    ],
+                    "falloff": 1.5,
+                    "flicker": false,
+                    "radius": 10
+                  },
+                  "liquid": null,
+                  "liquid_volume": 0,
+                  "name": "Oil Lantern",
+                  "nutrition": null,
+                  "on_use": "equip_light",
+                  "qualities": {},
+                  "source_creature": null,
+                  "stackable": false,
+                  "temporary_essence": [],
+                  "text_id": "",
+                  "tile": "oil_lantern",
+                  "turns_lit": 0,
+                  "weight": 0.6
+                },
+                {
+                  "_temp_av_bonus": 0,
+                  "_temp_av_hits": 0,
+                  "burn_turns": 600,
+                  "consumed_on_use": false,
+                  "count": 1,
+                  "decay_timer": null,
+                  "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+                  "drink_message": null,
+                  "eat_message": null,
+                  "harvest_from": null,
+                  "heal_amount": null,
+                  "hydration": null,
+                  "item_id": "tallow_torch",
+                  "item_state_version": 1,
+                  "keywords": [
+                    {
+                      "tag": "waxy",
+                      "tier": 1
+                    },
+                    {
+                      "tag": "fibrous",
+                      "tier": 1
+                    },
+                    {
+                      "tag": "fuel",
+                      "tier": 1
+                    }
+                  ],
+                  "light_data": {
+                    "color": [
+                      255,
+                      180,
+                      60
+                    ],
+                    "falloff": 1.8,
+                    "flicker": true,
+                    "radius": 8
+                  },
+                  "liquid": null,
+                  "liquid_volume": 0,
+                  "name": "Tallow Torch",
+                  "nutrition": null,
+                  "on_use": "equip_light",
+                  "qualities": {},
+                  "source_creature": null,
+                  "stackable": false,
+                  "temporary_essence": [],
+                  "text_id": "",
+                  "tile": "tallow_torch",
+                  "turns_lit": 0,
+                  "weight": 0.3
+                },
+                {
+                  "_temp_av_bonus": 0,
+                  "_temp_av_hits": 0,
+                  "burn_turns": null,
+                  "consumed_on_use": false,
+                  "count": 1,
+                  "decay_timer": null,
+                  "description": "Iron, poorly kept. It will serve.",
+                  "drink_message": null,
+                  "eat_message": null,
+                  "harvest_from": null,
+                  "heal_amount": null,
+                  "hydration": null,
+                  "item_id": "crude_blade",
+                  "item_state_version": 1,
+                  "keywords": [
+                    {
+                      "tag": "cutting",
+                      "tier": 1
+                    }
+                  ],
+                  "light_data": null,
+                  "liquid": null,
+                  "liquid_volume": 0,
+                  "name": "a crude blade",
+                  "nutrition": null,
+                  "on_use": "equip_toggle",
+                  "qualities": {},
+                  "source_creature": null,
+                  "stackable": false,
+                  "temporary_essence": [],
+                  "text_id": "",
+                  "tile": "generic_item",
+                  "turns_lit": 0,
+                  "weight": 1.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "record_id": "w5g_native_room@34,17,0:special[3]",
+          "source_index": 3,
+          "kind": "item",
+          "source_xy": [
+            3,
+            6
+          ],
+          "xy": [
+            37,
+            23
+          ],
+          "relocated": false,
+          "item_id": "letter",
+          "text_id": "w5g_native_text",
+          "text_override_present": true,
+          "decor_id": null,
+          "loot_pools": null,
+          "actual_count": 1,
+          "actor_classes": [],
+          "creature_definition": null,
+          "objects": [
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "Folded paper. Someone meant to send this.",
+              "drink_message": null,
+              "eat_message": null,
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "letter",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "fibrous",
+                  "tier": 1
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "a letter",
+              "nutrition": null,
+              "on_use": "read",
+              "qualities": {},
+              "source_creature": null,
+              "stackable": false,
+              "temporary_essence": [],
+              "text_id": "w5g_native_text",
+              "tile": "document",
+              "turns_lit": 0,
+              "weight": 0.02
+            }
+          ]
+        },
+        {
+          "record_id": "w5g_native_room@34,17,0:special[4]",
+          "source_index": 4,
+          "kind": "container",
+          "source_xy": [
+            5,
+            4
+          ],
+          "xy": [
+            39,
+            21
+          ],
+          "relocated": false,
+          "item_id": null,
+          "text_id": null,
+          "text_override_present": false,
+          "decor_id": "crate",
+          "loot_pools": [
+            "storage_tools"
+          ],
+          "actual_count": 1,
+          "actor_classes": [],
+          "creature_definition": null,
+          "objects": [
+            {
+              "decor_id": "crate",
+              "items": [
+                {
+                  "_temp_av_bonus": 0,
+                  "_temp_av_hits": 0,
+                  "burn_turns": 600,
+                  "consumed_on_use": false,
+                  "count": 1,
+                  "decay_timer": null,
+                  "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+                  "drink_message": null,
+                  "eat_message": null,
+                  "harvest_from": null,
+                  "heal_amount": null,
+                  "hydration": null,
+                  "item_id": "tallow_torch",
+                  "item_state_version": 1,
+                  "keywords": [
+                    {
+                      "tag": "waxy",
+                      "tier": 1
+                    },
+                    {
+                      "tag": "fibrous",
+                      "tier": 1
+                    },
+                    {
+                      "tag": "fuel",
+                      "tier": 1
+                    }
+                  ],
+                  "light_data": {
+                    "color": [
+                      255,
+                      180,
+                      60
+                    ],
+                    "falloff": 1.8,
+                    "flicker": true,
+                    "radius": 8
+                  },
+                  "liquid": null,
+                  "liquid_volume": 0,
+                  "name": "Tallow Torch",
+                  "nutrition": null,
+                  "on_use": "equip_light",
+                  "qualities": {},
+                  "source_creature": null,
+                  "stackable": false,
+                  "temporary_essence": [],
+                  "text_id": "",
+                  "tile": "tallow_torch",
+                  "turns_lit": 0,
+                  "weight": 0.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "record_id": "w5g_native_room@34,17,0:special[5]",
+          "source_index": 5,
+          "kind": "item",
+          "source_xy": [
+            1,
+            1
+          ],
+          "xy": [
+            35,
+            18
+          ],
+          "relocated": false,
+          "item_id": "wood_bundle",
+          "text_id": null,
+          "text_override_present": false,
+          "decor_id": null,
+          "loot_pools": null,
+          "actual_count": 1,
+          "actor_classes": [],
+          "creature_definition": null,
+          "objects": [
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "A loose bundle of dry branches. Snapped from dead fall.",
+              "drink_message": null,
+              "eat_message": null,
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "wood_bundle",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "fuel",
+                  "tier": 1
+                },
+                {
+                  "tag": "fibrous",
+                  "tier": 1
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "bundle of wood",
+              "nutrition": null,
+              "on_use": null,
+              "qualities": {},
+              "source_creature": null,
+              "stackable": false,
+              "temporary_essence": [],
+              "text_id": "",
+              "tile": "generic_item",
+              "turns_lit": 0,
+              "weight": 1
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "screenshots": {
+    "receipt": {
+      "path": "workbench/.artifacts/w5g/rooms-native-1793163774575/screenshots/receipt.json",
+      "sha256": "fdbc4b20012ab8c58d5a182414bbab980554c56c71d2a4a58efa3c8e4ae5e406"
+    },
+    "images": [
+      {
+        "path": "workbench/.artifacts/w5g/rooms-native-1793163774575/completed-room-preview.png",
+        "sha256": "864a49e8e4e9b3dca267995d282fa2a6b1d3691ff9c71d5b42913c9113734b64"
+      },
+      {
+        "path": "workbench/.artifacts/w5g/rooms-native-1793163774575/room-problems-and-results.png",
+        "sha256": "7f9e09b18c2f4bdeab3ee50d2265d6b6ba0508318b470abcd561c6d7a0c85269"
+      },
+      {
+        "path": "workbench/.artifacts/w5g/rooms-native-1793163774575/engine/actual-room-reader.png",
+        "sha256": "86d451c03f33bba283a94612e5809f393b73f12eaf2d62422e6f4135eb8cda9a"
+      },
+      {
+        "path": "workbench/.artifacts/w5g/rooms-native-1793163774575/screenshots/completed-source-room.png",
+        "sha256": "1a0a5c7df059dc9fa6bb470445b8a9f02906dc9219c090f6f2bda8beacff0633"
+      },
+      {
+        "path": "workbench/.artifacts/w5g/rooms-native-1793163774575/screenshots/completed-realized-room.png",
+        "sha256": "e209806bf1c1243a9d2a5d60d2b777a14563ac62597bd11a2116fdfb4850be2f"
+      }
+    ]
+  },
+  "retained_creature_runtime": {
+    "receipt": {
+      "path": "workbench/.artifacts/w5g/creature-runtime/results/runtime-result.json",
+      "sha256": "bcadb6dc4a4f8246a3360f8151056118c4caf29e6d87399a6ea93e5d0d920ac0"
+    },
+    "result": {
+      "passed": true,
+      "pid": 30572,
+      "restore": {
+        "pid": 25884,
+        "restored": {
+          "name": "Barrow Wight",
+          "hp": 7,
+          "max_hp": 20,
+          "armour": 3,
+          "sight": 7,
+          "dark": true,
+          "wander": 5,
+          "stable_id": "barrow_wight",
+          "ai": "AmbushAI"
+        },
+        "fresh": {
+          "name": "W5F fresh Wight",
+          "hp": 41,
+          "max_hp": 41,
+          "armour": 9,
+          "sight": 2,
+          "dark": false,
+          "wander": 3,
+          "stable_id": "barrow_wight",
+          "ai": "AmbushAI"
+        },
+        "current_definition": {
+          "description": "W5F current definition prose",
+          "damage_dice": "1d1",
+          "damage_bonus": 4,
+          "attack_verb": "W5F tests thee",
+          "speed": 1.25,
+          "pursuit_timeout": 2
+        },
+        "ability_corruption_delta": 0.005,
+        "pulse": true,
+        "route": "fresh process → DataLoader → _deserialize_entities → LookMode → Engine._advance_turn / actual AI attack and wight dispatch"
+      },
+      "variant": {
+        "id": "w5f_probe_variant",
+        "tile": "hollow_revenant",
+        "definition_sha256": "eb6ca9cc099b01e2c95324be352e3f025f38a0b60179751042659f900889faa1",
+        "visible_description": "W5F own description",
+        "ghost_description": "W5F own description (Last known position.)",
+        "rendered_details": [
+          "HP",
+          "14/14",
+          "It is faster than you.",
+          "Weak to: W5F own knowledge",
+          "Essence:",
+          "  Dissolution  --",
+          "  Quickening   +",
+          "  Binding      ++",
+          "  Severance    ++",
+          "  Consumption  --",
+          "  Revelation   ++",
+          "Tab / N · P to cycle  (2/2)   ESC / X to close"
+        ],
+        "callouts": [
+          "W5F inherited literal"
+        ],
+        "controlled_damage": 5,
+        "active_timeout": true,
+        "offmap_timeout": true,
+        "speed_accumulator": 0.25
+      },
+      "disguised_special_identity": true,
+      "identical_tile_no_special_binding": true,
+      "limits": "Controlled production routes with seeded RNG and disposable inputs; no natural selection or balance claim. Save format/restoration unchanged."
+    }
+  },
+  "source_policy_coverage": {
+    "ordinary_room": [
+      "edit",
+      "variant"
+    ],
+    "exact_documentation_template": [
+      "recover unfinished intent",
+      "variant to immediate layouts only"
+    ],
+    "protected_laboratory": [],
+    "malformed_ambiguous_unsupported": [],
+    "text_recipe": [
+      "recover unfinished intent",
+      "variant"
+    ],
+    "special_creatures_typography": [
+      "edit; explicit variant intent refused"
+    ]
+  },
+  "provenance": "All recorded final gates rerun locally on Windows. Native app uses app-local CDP only, disposable data/settings/recovery roots. Engine before/after PIDs differ and use real SaveManager save/load. Static preview, actual interactions and source analysis remain distinct.",
+  "verification_notes": [
+    "Initial native run found and corrected registered-room publication handoff invalidation; final exact reopen passes.",
+    "Runtime fixture equips a real tallow torch for actual FOV/interaction; static access does not establish player FOV.",
+    "An initial 55-case production command omitted tools on PYTHONPATH; final command includes it and all 55 pass.",
+    "Earlier W1/W4C test expectations were updated for registered room admission and explicit same-ID operations. Existing W4D stale/cancel/reserved-publication tests remain present.",
+    "Earlier full worker runs used superseded W1/W2 expectations. The final stable full run above uses the current tests.",
+    "Native recovery waits for the selected mounted file and retries only no-write BUSY contention. The adapted submap gate checks the native option disabled property, retains all stale/cancel/reserved publication checks and uses registered tabs.",
+    "The broad native compatibility matrix binds package inputs 4df9ea1. After narrow pool-origin and canvas-teardown fixes, the final package repeats the full room/cold-engine journey, ordinary pools, submap fault coverage, lost-reopen workspace and four startup scenarios. Game Python, host and bridge inputs are unchanged by those final frontend fixes."
+  ],
+  "limits": [
+    "Bounded direct item/container/creature rooms only; weighted, scene, deferred-special sources and inactive decor authoring remain inspect-only.",
+    "No natural world assignment, campaign migration, unsaved dependency overlays, multi-file transaction or new simulation/playtest service.",
+    "Activation affects first generation after catalogue initialization, including unvisited existing-campaign submaps; owned scenes are retained. Established current-definition reads remain unchanged.",
+    "No wiki/reference-pack rebuild, owner-plan commit, personal campaign scan or desktop takeover."
+  ]
+}
