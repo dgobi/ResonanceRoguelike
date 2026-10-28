@@ -51,6 +51,7 @@ import shutil
 for name in ('natural-exterior.png','natural-room.png','natural-reader.png','natural-return.png','assignment-sample.png'):
     shutil.copy2(native_path.parent/name,evidence/name)
 preview=native['preview'];sample={k:preview[k] for k in ('profile_path','profile_sha256','contract','descriptor_sha256','runtime','source','seed','width','height','plan_mode','generation_revision','target_type','authored_chance','matching_count','authored_count','procedural_count','truncated')}
+sample['selected_examples']=preview['rows'][:3]
 result=dict(milestone='W5I',passed=True,observed_utc=datetime.now(timezone.utc).isoformat(),
  revisions=dict(reviewed_start='ba66670604ddde091918a6009d92ed4ab1c56612',initial_remote='ba66670604ddde091918a6009d92ed4ab1c56612',
                 implementation=git('rev-parse','6484a59'),package_inputs=git('rev-parse','2df8413'),test_inputs=git('rev-parse','HEAD'),
