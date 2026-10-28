@@ -124,7 +124,13 @@ export async function submapJourney(page,root,output,receipt,context) {
   const definition=resolve(root,"roguelike/data/entities/creatures/hollow_revenant.json"),defBytes=await readFile(definition);
   checked=await validate();await writeFile(definition,defBytes.toString()+" ");assert.equal((await apply(checked)).error?.code,"SOURCE_CHANGED");await writeFile(definition,defBytes);
   checked=await validate();await ipc("validate_document",{token:doc.document_token,draft:'{"id":',variantId:null});assert.equal((await apply(checked)).error?.code,"REVIEW_REQUIRED");
-  checked=await validate("w4c_collision");const collision=resolve(root,"roguelike/data/layouts/w4c_collision.json");await writeFile(collision,"{}");assert(["SOURCE_CHANGED","VARIANT_EXISTS"].includes((await apply(checked)).error?.code));await unlink(collision);
+  checked=await validate("w4c_collision");const collision=resolve(root,"roguelike/data/layouts/w4c_collision.json");await writeFile(collision,"{}");
+  let collisionResult=await apply(checked);
+  for(let retry=0;collisionResult.error?.code==="BUSY"&&retry<3;retry++){await idle();collisionResult=await apply(checked);}
+  // The monitor may revoke the review before apply reaches its independent
+  // source/destination check. Every accepted denial must preserve the raced file.
+  assert(["SOURCE_CHANGED","VARIANT_EXISTS","REVIEW_REQUIRED"].includes(collisionResult.error?.code),JSON.stringify(collisionResult));
+  assert.equal(await readFile(collision,"utf8"),"{}");receipt.concurrent_layout_denial=collisionResult.error.code;await unlink(collision);
   const ro=(await ipc("open_document",{asset:"roguelike/data/layouts/starting_lab.json"})).result;
   assert.equal((await ipc("validate_document",{token:ro.document_token,draft:draftFor("promoted"),variantId:"promoted"})).error?.code,"READ_ONLY_LAYOUT");
   for(const asset of ["roguelike/saves/x.json","roguelike/data/layouts/../x.json","roguelike/data/layouts/x.json:ads","roguelike/docs/examples/other.json"])
