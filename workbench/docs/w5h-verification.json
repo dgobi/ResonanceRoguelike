@@ -1,0 +1,966 @@
+{
+  "milestone": "W5H",
+  "passed": true,
+  "observed_utc": "2026-10-28T06:39:12.758231+00:00",
+  "revisions": {
+    "baseline": "3ee22ef3c77cd56df75441076873840ef3b66fc7",
+    "initial_remote": "3ee22ef3c77cd56df75441076873840ef3b66fc7",
+    "repair": "03b19ad",
+    "implementation": "68bb14bdac7245d5d6e62a27b10225ac7c58ff23",
+    "package_inputs": "68bb14bdac7245d5d6e62a27b10225ac7c58ff23",
+    "final_game_inputs": "3282b0570a7839140a0361ec4fb1f7431944c4e9",
+    "test_inputs": "05bca75c52fa29ee2983a9d39721cb2314dd65f8",
+    "evidence_ref": "checkpoint/workbench-w5h-verified-20261028",
+    "branch": "main",
+    "note": "Verified annotated evidence checkpoint and external remote-SHA handoff identify evidence without a self-hash loop. Package-to-test differences are verification changes plus the selected-project Python preflight correction; game code is captured from the project, not bundled in the executable."
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "exit_code": 0,
+      "result": "65 passed / 17 files",
+      "log": {
+        "path": "workbench/.artifacts/w5h-frontend-final.log",
+        "sha256": "2cb6d3bc6b5ddf41159f8d744c772c04c8d26eaf1533413e64abeae8377aa252"
+      }
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "exit_code": 0,
+      "result": "passed",
+      "log": {
+        "path": "workbench/.artifacts/w5h-typecheck-final.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      }
+    },
+    {
+      "command": "node scripts/test-geometry.mjs",
+      "exit_code": 0,
+      "result": "actual mounted controls pass Source, Undo/Redo, companion coordinates, pending proposals and defaults",
+      "log": {
+        "path": "workbench/.artifacts/w5h-geometry-final.log",
+        "sha256": "4391efa92644fe61b359d06a62cf8b7ec2cb994a05d83bbbe92982d11d90979c"
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "result": "66 passed; retained W4D/W5D/W5G plus real owned-process faults",
+      "log": {
+        "path": "workbench/.artifacts/w5h-host-final.log",
+        "sha256": "50f03dd2c32f8a7e858cb3f7368738bc5df8db146d6ae1c18844c534c2a65b24"
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "result": "passed; warnings denied",
+      "log": {
+        "path": "workbench/.artifacts/w5h-clippy-final.log",
+        "sha256": "97737f1326d4becb96594d6d4c92bd2a12e69b71e4c7f4de09275ff1fe92dbd9"
+      }
+    },
+    {
+      "command": "worker/runtime/python.exe -I -B -m unittest discover -s worker -v",
+      "exit_code": 0,
+      "result": "66 passed; one expected dependency-absence skip / 67 cases",
+      "log": {
+        "path": "workbench/.artifacts/w5h-worker-final.log",
+        "sha256": "bffbc51a7f840a9bad5ec120cf405165190b68c7ce384f861e476cd29140e495"
+      }
+    },
+    {
+      "command": "standard Python: test_bridge.BridgeTests.test_dependency_absence_structured",
+      "exit_code": 0,
+      "result": "negative dependency control passes separately",
+      "log": {
+        "path": "workbench/.artifacts/w5h-missing-dependency.log",
+        "sha256": "33c0442e395749e869606208a1af4df171f005da62d4c79b606d2eafa528f52c"
+      }
+    },
+    {
+      "command": "pinned development Python: persistence/combat/scene/G17/access/destinations/readers and room-session injection",
+      "exit_code": 0,
+      "result": "58 passed; includes three new explicit session tests and three retained reader cases",
+      "log": {
+        "path": "workbench/.artifacts/w5h-production-final.log",
+        "sha256": "af2e2b7e415f21b4ee57b2f2fee0f5e0e6582ba1cac774f3881200199af3a48a"
+      }
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "exit_code": 0,
+      "result": "Windows x64 release and NSIS; complete pinned embedded runtime",
+      "log": {
+        "path": "workbench/.artifacts/w5h-package-final.log",
+        "sha256": "1afb421fdfa1044aa997a472159773787dbc6aa96f1005b07aef0a52547d8555"
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "result": "lost-reopen workspace passes on final executable",
+      "log": {
+        "path": "workbench/.artifacts/w5h-workspace-final.log",
+        "sha256": "e4adbeeba22e12e9bb9a40211878a3a4427cc96fc44ad8d722e5e721ca596ca6"
+      }
+    },
+    {
+      "command": "node scripts/run-pools.mjs",
+      "exit_code": 0,
+      "result": "ordinary pools passes on final executable",
+      "log": {
+        "path": "workbench/.artifacts/w5h-pools-final.log",
+        "sha256": "b3e96ac0fd09eb0d2cecf967cf02300abc1cd8ca11c434ab1911879e57256de2"
+      }
+    },
+    {
+      "command": "node scripts/run-submaps.mjs",
+      "exit_code": 0,
+      "result": "registered submap scheduling/publication faults passes on final executable",
+      "log": {
+        "path": "workbench/.artifacts/w5h-submaps-final.log",
+        "sha256": "b36aa68080073c91733b3935aaa1a7d46c75172af6b2a66e7ddf8c90905bbb62"
+      }
+    },
+    {
+      "command": "node scripts/startup-test.mjs",
+      "exit_code": 0,
+      "result": "four startup/project replacement/restart scenarios passes on final executable",
+      "log": {
+        "path": "workbench/.artifacts/w5h-startup-final.log",
+        "sha256": "5dbcc5d94395bf4665b1cd4b477c0da479729a60fb35398cdb572c1b2fae4eae"
+      }
+    },
+    {
+      "command": "node scripts/run-room-tests.mjs",
+      "exit_code": 0,
+      "result": "packaged author/play/reset/revise, cold load, failures, switch, normal/abrupt exit and cleanup pass",
+      "log": {
+        "path": "workbench/.artifacts/w5h-native-final.log",
+        "sha256": "cc06115f0acae0a579256ab0e3a25f1a09aeeb866190fe43b38719486856e401"
+      }
+    },
+    {
+      "command": "node scripts/check-room-preflight.mjs <disposable journey project>",
+      "exit_code": 0,
+      "result": "unusable ordinary starting light refuses replacement of running game; actual optional UI fallback is disclosed",
+      "log": {
+        "path": "workbench/.artifacts/w5h-preflight-final.log",
+        "sha256": "e1dea81f67680e608eee544b6d9b8ceba85ba77493d4c61b5b6f2dc9b4990eb7"
+      }
+    },
+    {
+      "command": "worker/runtime/python.exe -I -B scripts/standalone-room-regression.py <disposable project> <evidence>",
+      "exit_code": 0,
+      "result": "ordinary 128x128 main, first actual frame, default save owner and production save/load pass headlessly",
+      "log": {
+        "path": "workbench/.artifacts/w5h-standalone-final.log",
+        "sha256": "2e53e38bed07c9b4d6dba98a83c8ac21e0a5e56d84ca800a401dbf349f6316f4"
+      }
+    }
+  ],
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "124f65030d3c82f624796f3c04d04bfadceb64e6dbe5a5272737bf6ad9a075a8"
+    },
+    "installer": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "d2cbd7069b41ca3ea9d2e5b1a7860f5ff42a7b05b79ddd98b45bfc5da0a4f195"
+    },
+    "bridge": {
+      "path": "workbench/worker/bridge.py",
+      "sha256": "ba12b75856eebb4ffbc419cd213d200f879e7b7f3957cebd15690a2724c61d98"
+    },
+    "source_release_bridge_equal": true,
+    "runtime_files": 1809,
+    "source_release_captured_runtime_equal": true
+  },
+  "source": {
+    "revision": "05bca75c52fa29ee2983a9d39721cb2314dd65f8",
+    "files": [
+      {
+        "path": "roguelike/docs/ROOM_TEST_RUNTIME.md",
+        "git_sha256": "50222882a3d2ed68fbeffa4dff88b6a44e1ece5846f69e133999b1491c71fb94",
+        "working_sha256": "50222882a3d2ed68fbeffa4dff88b6a44e1ece5846f69e133999b1491c71fb94"
+      },
+      {
+        "path": "roguelike/docs/STRUCTURE_AUTHORING.md",
+        "git_sha256": "2325412410d369db5d3e37ef7755a2ec67c453a95de1c2b8fbb2a1dbd449778e",
+        "working_sha256": "bb1ec7abe5cbb5bfaa6e64f0be8fc9f0893e5094e35ba34bf009df9c274f6296"
+      },
+      {
+        "path": "roguelike/docs/owner/RUNTIME_MAP.md",
+        "git_sha256": "dc79b75e25bf6c5e3cb83afa99cde556fdcae9ff31d33300366fc0d854d9856a",
+        "working_sha256": "2acc22f02c1466b144f4639943f0dbfdf346f8902b6f8629fe67e4b3c10a6d66"
+      },
+      {
+        "path": "roguelike/engine/engine.py",
+        "git_sha256": "10298b82d26f0dbb3ee862e4c915b8ec6d4be4001886e0db403c1dc6b1a83544",
+        "working_sha256": "10298b82d26f0dbb3ee862e4c915b8ec6d4be4001886e0db403c1dc6b1a83544"
+      },
+      {
+        "path": "roguelike/engine/player_setup.py",
+        "git_sha256": "0ccf782001d72d2c2ba717fdac95826b92b546b2d5bfbbdac4349bd0c6aa013c",
+        "working_sha256": "6bfb6a2b4b8aec50a9715cc37abd52a77c953f8f5b6fedefd0c856d0fea14f10"
+      },
+      {
+        "path": "roguelike/engine/room_test_diagnostics.py",
+        "git_sha256": "51ec49c045e7b37b25f62e9bdde0ee667d106d573bbc4e79756e8c85d6a7bde6",
+        "working_sha256": "51ec49c045e7b37b25f62e9bdde0ee667d106d573bbc4e79756e8c85d6a7bde6"
+      },
+      {
+        "path": "roguelike/engine/save_manager.py",
+        "git_sha256": "28628c17329f66b962d1cef09843e60c0b184ac2474c9667c2de8e481da94842",
+        "working_sha256": "19e244226a5f8117318595a8431b6694a8777c153ecc855f127e147fa912741b"
+      },
+      {
+        "path": "roguelike/main.py",
+        "git_sha256": "579c50e5411bdd72ce3838013204d05ecd39fe2faf0f0c70c10d3c2179b1f13b",
+        "working_sha256": "0fc1ed01bd64b641c392dff70a2823bd06f5a6461032c4f3cea43eaef7dc4991"
+      },
+      {
+        "path": "roguelike/room_test.py",
+        "git_sha256": "2964a29baf4b4b4e6bff0565f7d7ee98e489f312a12dbd899d2d39fcb5c6623b",
+        "working_sha256": "2964a29baf4b4b4e6bff0565f7d7ee98e489f312a12dbd899d2d39fcb5c6623b"
+      },
+      {
+        "path": "tools/critical_fix_regressions/tests/test_room_test_session.py",
+        "git_sha256": "3a768ff88de3ef015cdcd5f32ba16bc2d248926417454df1b8725a115738224c",
+        "working_sha256": "3a768ff88de3ef015cdcd5f32ba16bc2d248926417454df1b8725a115738224c"
+      },
+      {
+        "path": "workbench/README.md",
+        "git_sha256": "a9775199f743f53e7a01c049ee46cafe18e7ebc9126c7ba114e047afd4806d95",
+        "working_sha256": "40240d519eb2aab3504e0c1808d515517ca50cc237a67edf106079d491d78ee7"
+      },
+      {
+        "path": "workbench/docs/W5H_REPAIR.md",
+        "git_sha256": "8a3a87dfa6bb8175f0a7d2e5695f1b03e0523883a39c3bc6f9f5754ee19d40f3",
+        "working_sha256": "8a3a87dfa6bb8175f0a7d2e5695f1b03e0523883a39c3bc6f9f5754ee19d40f3"
+      },
+      {
+        "path": "workbench/scripts/check-room-preflight.mjs",
+        "git_sha256": "24736b7c3d3f0a9e325cc4a5748b223db056fc70522d4a93cc84d06d61856851",
+        "working_sha256": "24736b7c3d3f0a9e325cc4a5748b223db056fc70522d4a93cc84d06d61856851"
+      },
+      {
+        "path": "workbench/scripts/fixtures/geometry.html",
+        "git_sha256": "4970d66f02d6e2dac49f06c599ffcae110cf6ef611f4a079da98cd1952d4297c",
+        "working_sha256": "4970d66f02d6e2dac49f06c599ffcae110cf6ef611f4a079da98cd1952d4297c"
+      },
+      {
+        "path": "workbench/scripts/fixtures/geometry.tsx",
+        "git_sha256": "b7ed8def2c56b73ff29bd380125dc877919f35d846775bb810001b9b712e46f6",
+        "working_sha256": "b7ed8def2c56b73ff29bd380125dc877919f35d846775bb810001b9b712e46f6"
+      },
+      {
+        "path": "workbench/scripts/room-session-audit.py",
+        "git_sha256": "42a88502fd415329d97258bc68623cefa8e5cd5b52474436b47f2dd40b44e763",
+        "working_sha256": "42a88502fd415329d97258bc68623cefa8e5cd5b52474436b47f2dd40b44e763"
+      },
+      {
+        "path": "workbench/scripts/run-room-tests.mjs",
+        "git_sha256": "39f1723123aff2140781dc5563ed12d808c3d051fecd6f9fc937095bcdc47825",
+        "working_sha256": "5912c9bc62fce6a6d2b312559165a36bbee492fda63755566aacbfb0b49e818b"
+      },
+      {
+        "path": "workbench/scripts/standalone-room-regression.py",
+        "git_sha256": "eb8db5c0e9be1a47d9e2caac307f518532c4bf7c82bc0981f718effe22c00338",
+        "working_sha256": "eb8db5c0e9be1a47d9e2caac307f518532c4bf7c82bc0981f718effe22c00338"
+      },
+      {
+        "path": "workbench/scripts/submap-journey.mjs",
+        "git_sha256": "1e391769893d3150eb0f0b7876d7ee635a3bcc1f64b95721dbf7293d04569107",
+        "working_sha256": "53cb8d49a06db557757fd567988d4fc0e65b8f06b3cc1b9df1c6f0b7fd1330bb"
+      },
+      {
+        "path": "workbench/scripts/test-geometry.mjs",
+        "git_sha256": "47937f0018c02ddaa442e16de7ccc45f349ce52173b4bd86e7e9e8e524d740c0",
+        "working_sha256": "47937f0018c02ddaa442e16de7ccc45f349ce52173b4bd86e7e9e8e524d740c0"
+      },
+      {
+        "path": "workbench/scripts/w5h-receipt.py",
+        "git_sha256": "269c9ec791f8ca98e39d9cf95c061dd7fb66622bcaf78b354d1a0d01473e31bb",
+        "working_sha256": "269c9ec791f8ca98e39d9cf95c061dd7fb66622bcaf78b354d1a0d01473e31bb"
+      },
+      {
+        "path": "workbench/src-tauri/Cargo.toml",
+        "git_sha256": "19694ba548444b219aaea0117c4904825bcf3c9091182d5b28688bfdedfcf5f5",
+        "working_sha256": "19694ba548444b219aaea0117c4904825bcf3c9091182d5b28688bfdedfcf5f5"
+      },
+      {
+        "path": "workbench/src-tauri/src/authoring.rs",
+        "git_sha256": "ea3d562337a798bc5b9142f6d3dc1a440559cb13b14a5e3eead9eb09ceff8c45",
+        "working_sha256": "ea3d562337a798bc5b9142f6d3dc1a440559cb13b14a5e3eead9eb09ceff8c45"
+      },
+      {
+        "path": "workbench/src-tauri/src/main.rs",
+        "git_sha256": "1a9de30c03dc539f284ee5c2f2ec6ac5273360cbd1808882a9f16c20a796d66d",
+        "working_sha256": "1a9de30c03dc539f284ee5c2f2ec6ac5273360cbd1808882a9f16c20a796d66d"
+      },
+      {
+        "path": "workbench/src-tauri/src/room_test.rs",
+        "git_sha256": "1da68cfdbdff2ce252b4675e62760523e4ede2c0e6db29dc0d5d6e1ddb0fbfdb",
+        "working_sha256": "889a7c940c5c91e489cb1e264893c55fb04044d2a9acefd0199c0e89738656c0"
+      },
+      {
+        "path": "workbench/src/App.tsx",
+        "git_sha256": "ef8e2609605cac29803d9c055c1cecc2368161eda379b2f1c1bb60a0bc6ff311",
+        "working_sha256": "ef8e2609605cac29803d9c055c1cecc2368161eda379b2f1c1bb60a0bc6ff311"
+      },
+      {
+        "path": "workbench/src/Authoring.tsx",
+        "git_sha256": "d95f6471169d5c354af8fa4fda715d2e8c6a4cb0a6046301b3d3b9edeb75d2e2",
+        "working_sha256": "d95f6471169d5c354af8fa4fda715d2e8c6a4cb0a6046301b3d3b9edeb75d2e2"
+      },
+      {
+        "path": "workbench/src/RoomControls.tsx",
+        "git_sha256": "267ab36ed7f43b3229f19c31f6bd71f0f6dbba8755d12b7848ee8a426139f127",
+        "working_sha256": "267ab36ed7f43b3229f19c31f6bd71f0f6dbba8755d12b7848ee8a426139f127"
+      },
+      {
+        "path": "workbench/src/RoomTestPanel.tsx",
+        "git_sha256": "0b84293a28175a600be085b3b6cd9056f79730ba5fec6b1cb1e86452a1e7997d",
+        "working_sha256": "0b84293a28175a600be085b3b6cd9056f79730ba5fec6b1cb1e86452a1e7997d"
+      }
+    ],
+    "native_game_and_rendering_files_match_working_tree": [
+      "roguelike/assets/Fonts/FoulisGreek.ttf",
+      "roguelike/assets/Fonts/IMFellEnglish-Italic.ttf",
+      "roguelike/assets/Fonts/IMFellEnglish-Regular.ttf",
+      "roguelike/assets/Fonts/Junicode-Bold.ttf",
+      "roguelike/assets/Fonts/Junicode-BoldItalic.ttf",
+      "roguelike/assets/Fonts/Junicode-Italic.ttf",
+      "roguelike/assets/Fonts/Junicode.ttf",
+      "roguelike/assets/Fonts/dejavu10x10_gs_tc.png",
+      "roguelike/assets/Fonts/dejavu16x16_gs_tc.png",
+      "roguelike/assets/sprites/HexanyCreatures.png",
+      "roguelike/assets/sprites/PixelAsciiSpritesheet.png",
+      "roguelike/assets/sprites/creatures.png",
+      "roguelike/assets/sprites/lofi_1bit_char.png",
+      "roguelike/assets/sprites/lofi_1bit_obj.png",
+      "roguelike/assets/sprites/objects.png",
+      "roguelike/assets/sprites/terrain.png",
+      "roguelike/assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png",
+      "roguelike/assets/sprites/walls.png",
+      "roguelike/assets/ui/assembly.png",
+      "roguelike/assets/ui/bone_breakers.png",
+      "roguelike/assets/ui/northern_wastes.png",
+      "roguelike/assets/ui/polis_sanctuary.png",
+      "roguelike/assets/ui/simple.png",
+      "roguelike/assets/ui/simple2.png",
+      "roguelike/assets/ui/spacing_guild.png",
+      "roguelike/assets/ui/spikecore.png",
+      "roguelike/assets/ui/star_fleet.png",
+      "roguelike/assets/ui/thorny_growth.png",
+      "roguelike/assets/ui/weathered_temple.png",
+      "roguelike/assets/ui/ziggurat.png",
+      "roguelike/components/__init__.py",
+      "roguelike/components/ai.py",
+      "roguelike/components/corruption.py",
+      "roguelike/components/equipment.py",
+      "roguelike/components/fighter.py",
+      "roguelike/components/inventory.py",
+      "roguelike/components/language.py",
+      "roguelike/components/level.py",
+      "roguelike/components/light_source.py",
+      "roguelike/components/needs.py",
+      "roguelike/components/perception.py",
+      "roguelike/components/perks.py",
+      "roguelike/config.py",
+      "roguelike/engine/__init__.py",
+      "roguelike/engine/ai_system.py",
+      "roguelike/engine/checkpoints.py",
+      "roguelike/engine/combat.py",
+      "roguelike/engine/content_authoring.py",
+      "roguelike/engine/crafting.py",
+      "roguelike/engine/creature_abilities.py",
+      "roguelike/engine/creature_authoring.py",
+      "roguelike/engine/creature_factory.py",
+      "roguelike/engine/data_loader.py",
+      "roguelike/engine/debug.py",
+      "roguelike/engine/designer.py",
+      "roguelike/engine/discharge.py",
+      "roguelike/engine/display_config.py",
+      "roguelike/engine/effect_lifecycle.py",
+      "roguelike/engine/engine.py",
+      "roguelike/engine/health_screen.py",
+      "roguelike/engine/hooks.py",
+      "roguelike/engine/interaction_cursor.py",
+      "roguelike/engine/inventory_screen.py",
+      "roguelike/engine/item_authoring.py",
+      "roguelike/engine/item_factory.py",
+      "roguelike/engine/item_system.py",
+      "roguelike/engine/item_transfers.py",
+      "roguelike/engine/language_system.py",
+      "roguelike/engine/look_mode.py",
+      "roguelike/engine/loot_roller.py",
+      "roguelike/engine/loot_table.py",
+      "roguelike/engine/message_log.py",
+      "roguelike/engine/movesets.py",
+      "roguelike/engine/palette.py",
+      "roguelike/engine/perk_handlers.py",
+      "roguelike/engine/player_setup.py",
+      "roguelike/engine/reality_bubble.py",
+      "roguelike/engine/recipe_authoring.py",
+      "roguelike/engine/resonance_system.py",
+      "roguelike/engine/room_authoring.py",
+      "roguelike/engine/room_test_diagnostics.py",
+      "roguelike/engine/save_components.py",
+      "roguelike/engine/save_manager.py",
+      "roguelike/engine/scene_generation.py",
+      "roguelike/engine/starting_location.py",
+      "roguelike/engine/structure_placer.py",
+      "roguelike/engine/text_authoring.py",
+      "roguelike/engine/text_reader.py",
+      "roguelike/engine/turn_queue.py",
+      "roguelike/engine/typography.py",
+      "roguelike/engine/typography_authoring.py",
+      "roguelike/engine/ui.py",
+      "roguelike/engine/vine_system.py",
+      "roguelike/engine/visual_events.py",
+      "roguelike/engine/weather.py",
+      "roguelike/engine/world_time.py",
+      "roguelike/entities/__init__.py",
+      "roguelike/entities/actor.py",
+      "roguelike/entities/entity.py",
+      "roguelike/entities/item.py",
+      "roguelike/generation/__init__.py",
+      "roguelike/generation/access.py",
+      "roguelike/generation/compound_integrity.py",
+      "roguelike/generation/compound_preview.py",
+      "roguelike/generation/compounds.py",
+      "roguelike/generation/context.py",
+      "roguelike/generation/country_network.py",
+      "roguelike/generation/decor_utils.py",
+      "roguelike/generation/entrance_gen.py",
+      "roguelike/generation/exterior_access.py",
+      "roguelike/generation/feature_carving.py",
+      "roguelike/generation/floor_object_utils.py",
+      "roguelike/generation/layout_stamper.py",
+      "roguelike/generation/local_gen.py",
+      "roguelike/generation/network_metrics.py",
+      "roguelike/generation/network_preview.py",
+      "roguelike/generation/parent_selection.py",
+      "roguelike/generation/placement.py",
+      "roguelike/generation/plan_integrity.py",
+      "roguelike/generation/plan_preview.py",
+      "roguelike/generation/planned_dressing.py",
+      "roguelike/generation/planned_scene.py",
+      "roguelike/generation/poi_preview.py",
+      "roguelike/generation/poi_selection.py",
+      "roguelike/generation/ports.py",
+      "roguelike/generation/region_gen.py",
+      "roguelike/generation/road_network.py",
+      "roguelike/generation/scene_adapters.py",
+      "roguelike/generation/settlement_context.py",
+      "roguelike/generation/settlement_layout.py",
+      "roguelike/generation/settlement_preview.py",
+      "roguelike/generation/settlement_selection.py",
+      "roguelike/generation/spawn_specs.py",
+      "roguelike/generation/structure_contract.py",
+      "roguelike/generation/structure_preview.py",
+      "roguelike/generation/town_gen.py",
+      "roguelike/generation/wfc.py",
+      "roguelike/generation/wilderness.py",
+      "roguelike/generation/world_gen.py",
+      "roguelike/generation/world_plan.py",
+      "roguelike/main.py",
+      "roguelike/rendering/__init__.py",
+      "roguelike/rendering/biome_icons.py",
+      "roguelike/rendering/callouts.py",
+      "roguelike/rendering/coords.py",
+      "roguelike/rendering/craft_screen.py",
+      "roguelike/rendering/decor.py",
+      "roguelike/rendering/glyph_gen.py",
+      "roguelike/rendering/lexicon_screen.py",
+      "roguelike/rendering/particles.py",
+      "roguelike/rendering/perk_screen.py",
+      "roguelike/rendering/renderer.py",
+      "roguelike/rendering/sprite_registry.py",
+      "roguelike/rendering/tile_registry.py",
+      "roguelike/rendering/ui_registry.py",
+      "roguelike/room_test.py",
+      "roguelike/world/__init__.py",
+      "roguelike/world/local_map.py",
+      "roguelike/world/name_gen.py",
+      "roguelike/world/region.py",
+      "roguelike/world/world_map.py",
+      "roguelike/world/world_myth.py"
+    ]
+  },
+  "snapshots": {
+    "first": {
+      "snapshot_id": "4735b3fc-4e19-4333-bf3d-c163d4a47296",
+      "captured_ms": 1793168698019,
+      "room_id": "w5h_native_room",
+      "room_path": "roguelike/data/layouts/w5h_native_room.json",
+      "room_sha256": "c7d18e9ee1622af8b600109cbe86be151ba4d62795759e8381127ac48c0e1ffa",
+      "manifest_sha256": "0d97512df36e587c5983943370c5bde9e04f7c6f2664307a3279b70d99ab5651",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5",
+      "seed": 20261027,
+      "profile": "ordinary-player-v1: body_player; 60 base HP from body definition; normal needs/carrying/AI; tallow_torch, crow_jerky, water_flask, crude_blade, leather_jack, moist_pebble",
+      "descriptor_sha256": "063fc96c5c32d9eb88ffa0ae4a15a598f6a0770785c54b5b71df2dd02c016ee6"
+    },
+    "latest": {
+      "snapshot_id": "e7c886f5-9fed-4ae4-9d56-ebe3b8100aae",
+      "captured_ms": 1793168750084,
+      "room_id": "w5h_native_room",
+      "room_path": "roguelike/data/layouts/w5h_native_room.json",
+      "room_sha256": "f1ada5153b544a08f44b9abeb1742b064cb8f5c51f4101a9c1f9bf2b88cf7e4a",
+      "manifest_sha256": "ffe4444c1d9d3049b91020fa27f62839041c41daec42b7b80f86ec97818f76ae",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5",
+      "seed": 20261027,
+      "profile": "ordinary-player-v1: body_player; 60 base HP from body definition; normal needs/carrying/AI; tallow_torch, crow_jerky, water_flask, crude_blade, leather_jack, moist_pebble",
+      "descriptor_sha256": "063fc96c5c32d9eb88ffa0ae4a15a598f6a0770785c54b5b71df2dd02c016ee6"
+    },
+    "captured_input_count": 531,
+    "reset_manifest_seed_profile_retained": true,
+    "full_manifests": [
+      {
+        "path": "workbench/.artifacts/w5h/native-1793168656956/first-capture.json",
+        "sha256": "081c8f2a4bda8dd8fa959542352ae80933539a130351133c8fb6e8e9ca67b9ed"
+      },
+      {
+        "path": "workbench/.artifacts/w5h/native-1793168656956/reset.json",
+        "sha256": "7b6c01f44ebcabdb84f6e12c5c111d6c928d43d5b8783c2b035afa0fc7b0a42d"
+      },
+      {
+        "path": "workbench/.artifacts/w5h/native-1793168656956/latest.json",
+        "sha256": "552b7a1d2954d5d2e195346dcade8e52dfbfdc49dedaae4a656562260ec0908a"
+      }
+    ]
+  },
+  "native": {
+    "receipt": {
+      "path": "workbench/.artifacts/w5h/native-1793168656956/receipt.json",
+      "sha256": "663286c39850f9f41d58e71440b7b2ba4caadd726f51162f5d132abf224a5e2f"
+    },
+    "checks": [
+      "save ordinary creature variant and authored room through supported controls",
+      "launch saved room in captured pinned runtime and wait for real rendered frame",
+      "normal app-local keys: look, acquire/read exact letter, container transfer, actual AI turns, stairs",
+      "normal F5/F9 and genuine fresh-process bootstrap load in explicit test root",
+      "dirty target refused; reset captured bytes despite later unsaved room draft",
+      "publish same-ID revision during gameplay; frozen test retains old code/data/fonts/sprites",
+      "normal game quit and host Stop leave captured reset available and editor usable",
+      "fresh captured validation refuses missing assets, path escape, ambiguous room and invalid saved dependency without losing prior test",
+      "refused: missing required sprite",
+      "refused: external sprite reference",
+      "refused: ambiguous room identity",
+      "refused: invalid saved readable dependency",
+      "refused: conflicting source",
+      "cancel capture, reject duplicate launch, reap unexpected exit and retire game on project replacement",
+      "abrupt packaged host termination kills owned game; next capture cleans only abandoned payload of this installation"
+    ],
+    "saved_v1": "c7d18e9ee1622af8b600109cbe86be151ba4d62795759e8381127ac48c0e1ffa",
+    "saved_v2": "f1ada5153b544a08f44b9abeb1742b064cb8f5c51f4101a9c1f9bf2b88cf7e4a",
+    "initial_arrival": [
+      37,
+      23
+    ],
+    "revised_arrival": [
+      38,
+      23
+    ],
+    "changed_object": {
+      "x": 35,
+      "y": 18,
+      "items": [
+        {
+          "item_id": "wood_bundle",
+          "item_state_version": 1,
+          "name": "bundle of wood",
+          "tile": "generic_item",
+          "weight": 1,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A loose bundle of dry branches. Snapped from dead fall.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "fuel",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ]
+    },
+    "changed_terrain": "flagstone",
+    "first_session": "576cc923-4b4f-49fc-b05b-ed2ac949b3e2",
+    "reset_session": "92cbe17b-8b56-44f4-b1e3-c74f0ddca17e",
+    "first_save_root": "C:\\Users\\dango\\AppData\\Local\\Temp\\ResonanceWorkbenchRoomTests\\session-gjPXLM\\state-576cc923-4b4f-49fc-b05b-ed2ac949b3e2",
+    "reader_text_id": "lab_note_primary_b",
+    "container": {
+      "before": {
+        "x": 39,
+        "y": 21,
+        "state": "closed",
+        "items": [
+          {
+            "item_id": "oil_lantern",
+            "item_state_version": 1,
+            "name": "Oil Lantern",
+            "tile": "oil_lantern",
+            "weight": 0.6,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_light",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": 1800,
+            "turns_lit": 0,
+            "light_data": {
+              "radius": 10,
+              "color": [
+                220,
+                200,
+                120
+              ],
+              "falloff": 1.5,
+              "flicker": false
+            },
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "clay_pot",
+            "item_state_version": 1,
+            "name": "clay pot",
+            "tile": "generic_item",
+            "weight": 0.6,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      "after": {
+        "x": 39,
+        "y": 21,
+        "state": "open",
+        "items": [
+          {
+            "item_id": "clay_pot",
+            "item_state_version": 1,
+            "name": "clay pot",
+            "tile": "generic_item",
+            "weight": 0.6,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      "transferred": {
+        "item_id": "oil_lantern",
+        "item_state_version": 1,
+        "name": "Oil Lantern",
+        "tile": "oil_lantern",
+        "weight": 0.6,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 1800,
+        "turns_lit": 0,
+        "light_data": {
+          "radius": 10,
+          "color": [
+            220,
+            200,
+            120
+          ],
+          "falloff": 1.5,
+          "flicker": false
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A small iron vessel with a wick. Burns cleaner than a torch and longer. The light it produces is steadier and somehow less reassuring.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 2
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    },
+    "ai": {
+      "before": [
+        {
+          "id": "w5h_actor",
+          "x": 43,
+          "y": 18,
+          "hp": 14,
+          "ai": "AIState.WANDERING"
+        }
+      ],
+      "after": [
+        {
+          "id": "w5h_actor",
+          "x": 45,
+          "y": 19,
+          "hp": 14,
+          "ai": "AIState.WANDERING"
+        }
+      ],
+      "turn": 492
+    },
+    "cold_pid": 19804,
+    "cold_save_access_events": 68,
+    "cold_save_audit_confined": true,
+    "missing_owned_cache_refused": {
+      "removed": 2,
+      "exit_code": 1,
+      "diagnostics": "Traceback (most recent call last):\r\n  File \"G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\room-session-audit.py\", line 26, in <module>\r\n    room_test.main()\r\n  File \"C:\\Users\\dango\\AppData\\Local\\Temp\\ResonanceWorkbenchRoomTests\\session-gjPXLM\\payload\\roguelike\\room_test.py\", line 228, in main\r\n    engine=build_engine(config,load=args.load)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\dango\\AppData\\Local\\Temp\\ResonanceWorkbenchRoomTests\\session-gjPXLM\\payload\\roguelike\\room_test.py\", line 170, in build_engine\r\n    startup, seed = saves.startup_state()\r\n                    ^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\dango\\AppData\\Local\\Temp\\ResonanceWorkbenchRoomTests\\session-gjPXLM\\payload\\roguelike\\engine\\save_manager.py\", line 283, in startup_state\r\n    raise SaveFormatError('No recoverable checkpoint: ' + '; '.join(errors))\r\nengine.save_manager.SaveFormatError: No recoverable checkpoint: g-ef0579c4880a4718a2164823580f09af: Checkpoint file set mismatch (missing scene or metadata)\r\n"
+    },
+    "parked": {
+      "key": "30ac33054e82a4533d0f744a1f19ff71316ffdaaa656bbd51976d0b85b1c9033/83c4dbd3-f131-4597-8b74-264ae824aa6e",
+      "generation": 1,
+      "draft": "{\"parked\":\"independent λ\","
+    },
+    "normal_exit": true,
+    "unexpected_exit": 1,
+    "project_switch": {
+      "pid": 22212,
+      "retired": true
+    },
+    "abrupt": {
+      "host_pid": 27424,
+      "game_pid": 17008,
+      "game_exited": true,
+      "sentinel_pid": 24620,
+      "sentinel_alive": true
+    }
+  },
+  "preflight": {
+    "receipt": {
+      "path": "workbench/.artifacts/w5h/preflight-1793169339264/receipt.json",
+      "sha256": "aa6b605efbc73c18294b4d5e1e549c55c218f2071dfa25ee7108517091b83e3d"
+    },
+    "required_light_running_process_preserved": true,
+    "optional_ui_fallback_disclosed": true
+  },
+  "standalone": {
+    "receipt": {
+      "path": "workbench/.artifacts/w5h/standalone-final/receipt.json",
+      "sha256": "31580e5999a7a88878cfb7fc562da967cba3b488c49a2573e735e5ae7177107d"
+    },
+    "world": [
+      128,
+      128
+    ],
+    "ordinary_default_save_path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\native-1793168656956\\project\\roguelike\\saves\\slot_0",
+    "scene": [
+      15,
+      20,
+      "sub_83_15_0"
+    ],
+    "save_load": true,
+    "audit_events": 75,
+    "verification_hook": "Only Engine.run frame observer is supplied by a test wrapper; ordinary main construction, defaults, actual loop and SaveManager execute."
+  },
+  "preservation": {
+    "inventory": {
+      "path": "workbench/.artifacts/w5h/preservation-before.json",
+      "sha256": "7c4d63107dd4f5a6d8d9c67977932c87d5b8e1065c7bf0000ec862fd1b497d59"
+    },
+    "captured": 8198,
+    "unchanged_hash_and_mtime": 8191,
+    "expected_final_task_changes": [
+      "roguelike/docs/ROOM_TEST_RUNTIME.md",
+      "roguelike/engine/player_setup.py",
+      "roguelike/room_test.py",
+      "tools/critical_fix_regressions/tests/test_room_test_session.py",
+      "workbench/scripts/run-room-tests.mjs",
+      "workbench/scripts/submap-journey.mjs",
+      "workbench/src-tauri/src/room_test.rs"
+    ],
+    "owner_plan": {
+      "sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+      "mtime_ns": 1792988983533416900
+    },
+    "personal_save_roots_excluded": true
+  },
+  "images": [
+    {
+      "path": "workbench/.artifacts/w5h/native-1793168656956/actual-foyer.png",
+      "sha256": "8764e99b17422adf25e814de2feebaf706530289d4bdbfc7fa51ba78b235e002"
+    },
+    {
+      "path": "workbench/.artifacts/w5h/native-1793168656956/actual-reader.png",
+      "sha256": "c7db7c6099b0ac7bcd27a9a365beef37a48e977bfed7cafabea7e942d7ab2cdf"
+    },
+    {
+      "path": "workbench/.artifacts/w5h/native-1793168656956/actual-revised-room.png",
+      "sha256": "590ab8fa447f3003a6fcdcb573821cb605869fb2fc82299562cbccb9890e6a22"
+    },
+    {
+      "path": "workbench/.artifacts/w5h/native-1793168656956/cold-loaded-room.png",
+      "sha256": "45f71adba69038bebe9d090aea0b6b1cc18a56645ec4ed7d1e3bf6aeb542e7c9"
+    },
+    {
+      "path": "workbench/.artifacts/w5h/native-1793168656956/editor-revision-running.png",
+      "sha256": "a6432c4ea3ae79cb74ac5f7df1b7c584835f05f9b29d51410fe9e3ca362aa5cd"
+    },
+    {
+      "path": "workbench/.artifacts/w5h/native-1793168656956/editor-running.png",
+      "sha256": "53b25c66045da9d3f5802f5e944d293119d39984da6c7ab0e281663530cf5203"
+    },
+    {
+      "path": "workbench/.artifacts/w5h/native-1793168656956/game-arrival.png",
+      "sha256": "1c35252e88345717df761b8742910a780a296832b5ecf10a88a92edcae35780f"
+    },
+    {
+      "path": "workbench/.artifacts/w5h/preflight-1793169339264/actual-ui-fallback.png",
+      "sha256": "2dac6292258b27e56ec66ca9488adf60610647f231be1adcf5027a098d287691"
+    },
+    {
+      "path": "workbench/.artifacts/w5h/standalone-final/ordinary-startup.png",
+      "sha256": "326354aa03eba5ae91b76ea322e480956cb0f42e9808a3e0ec27ff2603132264"
+    }
+  ],
+  "provenance": "Locally executed Windows gates. Mounted headless browser controls, headless validation/default-main tests, app-local packaged WebView controls, actual pygame game frames and audited cold processes are distinguished. Historical W5G review/independent rerun claims are retained as historical basis, not relabelled current observations.",
+  "notes": [
+    "Early geometry harness assertion needed to wait for React effects.",
+    "A real launch admission correction explicitly distinguishes acknowledged retained publication handoffs from unfinished ones.",
+    "Early native diagnostic frame replacement hit a transient Windows reader lock; bounded retry/skip preserves gameplay.",
+    "The cold fixture clears the deliberate prior Stop marker before invoking supported --load.",
+    "The revised-object assertion uses production center minus half-layout centering, including odd width.",
+    "An early production command used a Python whose isolated subprocess lacked pygame; the configured pinned development interpreter passes all retained cases.",
+    "An early worker run overlapped source edits; the final stable full suite is rerun after the final Python correction.",
+    "Native harnesses account for Node signalCode on forced Windows exit and retry only no-write BUSY monitor contention; conflict-denial checks also assert exact competing bytes.",
+    "Final Rust test source adds a startup-failure fixture; packaged production Rust/TS/bridge remain the package revision. The final Python preflight correction is captured from the selected project and is exercised by the final native/worker/production runs."
+  ],
+  "limits": [
+    "Only eligible saved ordinary immediate layouts, one fixed profile/seed and one game per Workbench instance.",
+    "Controlled foyer/assigned room; no natural assignment, encounter-balance claim, deterministic combat replay, unsaved overlays, multi-file writes or persistent test library.",
+    "Game capture requires the packaged/prepared embedded Windows runtime; mutable development virtual environments are refused clearly.",
+    "No wiki/reference-pack rebuild or owner-plan commit; no personal save content is used for tests. Capture enumeration never descends save trees."
+  ]
+}
