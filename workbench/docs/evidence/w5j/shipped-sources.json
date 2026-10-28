@@ -1,0 +1,929 @@
+{
+  "contract": "usable-supplies-1",
+  "total": 79,
+  "admitted": 42,
+  "classes": {
+    "material": 30,
+    "food": 9,
+    "treatment": 1,
+    "drink": 2
+  },
+  "sources": [
+    {
+      "id": "leather_cap",
+      "path": "roguelike/data/items/armor/leather_cap.json",
+      "pointer": "",
+      "category": "armor",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "fc0303665d17798b1860466125834485d4ef3b909331923a333c46d2d4e10852"
+    },
+    {
+      "id": "leather_jack",
+      "path": "roguelike/data/items/armor/leather_jack.json",
+      "pointer": "",
+      "category": "armor",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "016fd65939997f756c2555d8b25cab33957790d5b199beefc06066655eb8a366"
+    },
+    {
+      "id": "animal_bone",
+      "path": "roguelike/data/items/butchery/animal_bone.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "89ea616602338a48f54627896dc96679504fec3dc46619488af7ecd20efd669f"
+    },
+    {
+      "id": "animal_sinew",
+      "path": "roguelike/data/items/butchery/animal_sinew.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "3891a0a3e8b52d0a46c1f2556895ef1817778fa0aee4a46652163ed94c88b717"
+    },
+    {
+      "id": "briar_sap",
+      "path": "roguelike/data/items/butchery/briar_sap.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "23a631aafe4b502956d68548d0548ecdad602cdd1cb466b68a5eff00c06c7b7e"
+    },
+    {
+      "id": "compressed_marrow",
+      "path": "roguelike/data/items/butchery/compressed_marrow.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "aee452ad6991edd99aa6950e8621bba74688ad1a9b00c0bc148e176d16b34037"
+    },
+    {
+      "id": "crow_bile",
+      "path": "roguelike/data/items/butchery/crow_bile.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "6313c5fd5db9cb74f31731d751c19c66e17d5743757713881d33b1711c1874d8"
+    },
+    {
+      "id": "crow_flight_membrane",
+      "path": "roguelike/data/items/butchery/crow_flight_membrane.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "4c144d9b56af217e97bf0ab705cc0678edd1a304a1b79f2db64489daa37709b8"
+    },
+    {
+      "id": "crow_meat",
+      "path": "roguelike/data/items/butchery/crow_meat.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "74cbc54da52ef4bd6e0042c536f8c4c18a026889ae7357bcb4a0d36a907f5959"
+    },
+    {
+      "id": "crude_viscera",
+      "path": "roguelike/data/items/butchery/crude_viscera.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "1ade4ceaca1a72a5be79137cccb272663ebcaa2c688a5fb43c86105dadecbf7e"
+    },
+    {
+      "id": "fibrous_thorn_mass",
+      "path": "roguelike/data/items/butchery/fibrous_thorn_mass.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "8aae39b9c153802842f2ae997ddd496b2b54dcd9481c69007b49dbfb547deafe"
+    },
+    {
+      "id": "grave_dust",
+      "path": "roguelike/data/items/butchery/grave_dust.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "6cbc9651163391f81f72c2fa38877f4342a43f7b7fd389ea81ad6306fa4db314"
+    },
+    {
+      "id": "inner_stone_core",
+      "path": "roguelike/data/items/butchery/inner_stone_core.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "8db9a245f9dec277282ca68b3e50738586179df065276dddf93efdc7619e9813"
+    },
+    {
+      "id": "raw_meat_common",
+      "path": "roguelike/data/items/butchery/raw_meat_common.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "becf3bd00fd72f7b0b2d47bdad37be991f5a9e558c6e27afdc5b6e4a3aef61dd"
+    },
+    {
+      "id": "resonant_bone_fragment",
+      "path": "roguelike/data/items/butchery/resonant_bone_fragment.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "bb8f371b9cb0a407237fad89a6f2891a207cf37a62bf0f8372c6edaeed146cdb"
+    },
+    {
+      "id": "revenant_husk",
+      "path": "roguelike/data/items/butchery/revenant_husk.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "f844901dc31e437fd25d110580303cc98dcc9a492d586dfbdacbf08f831ac785"
+    },
+    {
+      "id": "stalker_meat",
+      "path": "roguelike/data/items/butchery/stalker_meat.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "b413071657b73dfe5a23de8d1cd5754563a9a51b40be3030ee993f1ab34ea0a6"
+    },
+    {
+      "id": "stalker_musk_gland",
+      "path": "roguelike/data/items/butchery/stalker_musk_gland.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "64a44298e06f010337fed63c208e84d6016e41394e703aebd4170709413b79c6"
+    },
+    {
+      "id": "stone_carapace_fragment",
+      "path": "roguelike/data/items/butchery/stone_carapace_fragment.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "ec944d45d0ef0a9c84f97f61e07bfe43c04b99e3b3977927b2f720d9c87ab839"
+    },
+    {
+      "id": "wight_essence_residue",
+      "path": "roguelike/data/items/butchery/wight_essence_residue.json",
+      "pointer": "",
+      "category": "butchery",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "1e5669138ad8904c06bc7961ad395b79ace6214de6e4e4a4a216f5df65978b12"
+    },
+    {
+      "id": "clay_lump",
+      "path": "roguelike/data/items/components/clay_lump.json",
+      "pointer": "",
+      "category": "component",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "62c58a94820a64dc738b1b15d8679c50149618ddf059f301fcce10ca88030fda"
+    },
+    {
+      "id": "clay_pot",
+      "path": "roguelike/data/items/components/clay_pot.json",
+      "pointer": "",
+      "category": "component",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "de984e71a817a89dc5f0d6a7c837908542c8b032753997372be40613d55bafda"
+    },
+    {
+      "id": "flint_shard",
+      "path": "roguelike/data/items/components/flint_shard.json",
+      "pointer": "",
+      "category": "component",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "16cc4095508eb310a795678af955c607cdc453ab6dc2625faeeab72cf22a09b8"
+    },
+    {
+      "id": "wood_bundle",
+      "path": "roguelike/data/items/components/wood_bundle.json",
+      "pointer": "",
+      "category": "component",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "bd829ed18e6f0956372fda95b2d53b32b57506134591e7403c82533a69b9c1a8"
+    },
+    {
+      "id": "bile_coating",
+      "path": "roguelike/data/items/consumables/bile_coating.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "6d54e0cbb335ef64da19f5e9050c4a0060868c72dc7a70379bf87067760746f5"
+    },
+    {
+      "id": "bitter_herb",
+      "path": "roguelike/data/items/consumables/bitter_herb.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "sha256": "e8b34e87a49382b64ee9ce7d9c0e584830ed67e958256a3081f17dca5a3d92c7"
+    },
+    {
+      "id": "bone_dust_draught",
+      "path": "roguelike/data/items/consumables/bone_dust_draught.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "c2994fe99fef7be56df1d7fe506f4bb892435325061eb23a80d9e052101054da"
+    },
+    {
+      "id": "briar_binding_oil",
+      "path": "roguelike/data/items/consumables/briar_binding_oil.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "c8b27853b4c8a1d80978c8fbc396e181806f83c9fead628675e81ed482b2b585"
+    },
+    {
+      "id": "coldbell_cutting",
+      "path": "roguelike/data/items/consumables/coldbell_cutting.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "sha256": "6a3dd37a39aa7bf31cb96bae64fe82690c4090f772251c52b2acb8db0487c592"
+    },
+    {
+      "id": "coldbell_extract",
+      "path": "roguelike/data/items/consumables/coldbell_extract.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "12df5996f9c10621d2e84d0cdd3af43857ba73d5286afbe2f7cec84233b03a2d"
+    },
+    {
+      "id": "cooked_meat",
+      "path": "roguelike/data/items/consumables/cooked_meat.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "sha256": "25bba135cf3c7a3e859a663c7737af5c9f8f21bfff0bec9c2d3dd024841ab6ad"
+    },
+    {
+      "id": "crow_jerky",
+      "path": "roguelike/data/items/consumables/crow_jerky.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "sha256": "49f65f227cb45a2d50001b7380bed1ed8700d2bddcd7afa2524fbe621a5cef6a"
+    },
+    {
+      "id": "dried_aromatic_herb",
+      "path": "roguelike/data/items/consumables/dried_aromatic_herb.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "08c7cf677a5bb10bd966255268ac7faebdf720318a567512eafbd2433df93f91"
+    },
+    {
+      "id": "dried_bitter_herb",
+      "path": "roguelike/data/items/consumables/dried_bitter_herb.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "9a6ea6ce5cc1888de92fa49fa4fc2571df733a94e957fb5f3432d864ab0ef893"
+    },
+    {
+      "id": "dried_coldbell",
+      "path": "roguelike/data/items/consumables/dried_coldbell.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "0db649cf9ec6233c633f64d37d9b91f2bba834cff474ff31f5216675e7229b72"
+    },
+    {
+      "id": "dried_murk_violet",
+      "path": "roguelike/data/items/consumables/dried_murk_violet.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "339b624541aff9dc3a7060d9ac4a5ded6d67a591082ef5362de43a26b252c38a"
+    },
+    {
+      "id": "dried_pilgrims_woe",
+      "path": "roguelike/data/items/consumables/dried_pilgrims_woe.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "b0985e29302f1efe617e0bbf535191c2514e2110287c4ef792df93cadd4e8dde"
+    },
+    {
+      "id": "dried_provisions",
+      "path": "roguelike/data/items/consumables/dried_provisions.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "sha256": "5cd2f0d01c3b95046b1c75453c00b0ee3ed1b493cc54ec348bfec768b67d91aa"
+    },
+    {
+      "id": "dried_resonant_herb",
+      "path": "roguelike/data/items/consumables/dried_resonant_herb.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "15960ca4d34ba7b0d957b27923fb2de3409fc24bfc3d0ffc8af77090a9ff1c9f"
+    },
+    {
+      "id": "dried_soporific_herb",
+      "path": "roguelike/data/items/consumables/dried_soporific_herb.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "30d03448f2939fcd1718d2c390c74c661449f4274c082d41215abf63c1c9fe1e"
+    },
+    {
+      "id": "empty_water_skin",
+      "path": "roguelike/data/items/consumables/empty_water_skin.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "material",
+      "operations": [],
+      "reason": "Canonical empty skin is reference-only: exact-ID filling creates canonical water_skin.",
+      "sha256": "923f7e0f00bfd528e3f8b55f523258d45eff1e9c8ba2235d56c182dcebed19d3"
+    },
+    {
+      "id": "herbal_dressing",
+      "path": "roguelike/data/items/consumables/herbal_dressing.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "treatment",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary treatment",
+      "sha256": "b98aaacf395fd0c7d7bfbc573de350d98f3777254dd7d804ca729fd54bd0a016"
+    },
+    {
+      "id": "hungering_oil",
+      "path": "roguelike/data/items/consumables/hungering_oil.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "10b2b07a06e65518523daddc349b93498928df2b19d25adb5a2de34c41dd7578"
+    },
+    {
+      "id": "lab_note",
+      "path": "roguelike/data/items/consumables/lab_note.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "112603b2fcd8037862186bd182af93fed80b7cbc3d87504d82c183654be6a08e"
+    },
+    {
+      "id": "marrow_seal",
+      "path": "roguelike/data/items/consumables/marrow_seal.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "ec065f8c26f4f7df2f199d957182abe43b1865f3a6fd9693aaaf6de44a03cc74"
+    },
+    {
+      "id": "murk_violet_stem",
+      "path": "roguelike/data/items/consumables/murk_violet_stem.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "sha256": "16d3807eb68a248c93a92b3d0bea0fdcff63fb99ad54255f041ad9ac10bb235a"
+    },
+    {
+      "id": "musk_pellet",
+      "path": "roguelike/data/items/consumables/musk_pellet.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "91cabd2c8955ad961279019b206fe0f7dec42bd32def4b7536f9ecfba1f2985c"
+    },
+    {
+      "id": "perk_vessel",
+      "path": "roguelike/data/items/consumables/perk_vessel.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "1cac2cad3cc5716251fd84d59b4776404d2b8d3e9948b855ae58e2fb89e86cef"
+    },
+    {
+      "id": "pilgrims_woe_petals",
+      "path": "roguelike/data/items/consumables/pilgrims_woe_petals.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "sha256": "548eed03bd96f6537a52d54a20b43e616f32faf390d4b6dfc71e672cc289730e"
+    },
+    {
+      "id": "prophets_eye_cap",
+      "path": "roguelike/data/items/consumables/prophets_eye_cap.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "sha256": "97bb771d3c85568f83d12dc9c85ecb0809c5d07e8d7b40462a8086939623429b"
+    },
+    {
+      "id": "resonant_bone_tincture",
+      "path": "roguelike/data/items/consumables/resonant_bone_tincture.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "a154d09b8ecf1575819c45f68ce6f472620a2042e99c3109da2e76c4a56d2201"
+    },
+    {
+      "id": "resonant_tincture",
+      "path": "roguelike/data/items/consumables/resonant_tincture.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "drink",
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "db3e14427edc628305f906e9529ec028009d3bb4d9202f3178a305992393e64b"
+    },
+    {
+      "id": "salt_pouch",
+      "path": "roguelike/data/items/consumables/salt_pouch.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "sha256": "b5b4e05d8bb55536656385238aca306886f885facf9e2aad82aa4a776bb9a520"
+    },
+    {
+      "id": "stalker_unguent",
+      "path": "roguelike/data/items/consumables/stalker_unguent.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "44466ebf542cad41d789e2b72c0c69c64718a47044fead6104f86caa9fa01289"
+    },
+    {
+      "id": "sulphur_cap_fragment",
+      "path": "roguelike/data/items/consumables/sulphur_cap_fragment.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "sha256": "2bad850af8b8e89b88b06b932f2befc3c4519173aeff8b5242b6a6fee8144258"
+    },
+    {
+      "id": "water_flask",
+      "path": "roguelike/data/items/consumables/water_flask.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "drink",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary drink",
+      "sha256": "7e8ae901480953d1ab4cb6fe8966a76db4a2895df19521283df75d2ca427649d"
+    },
+    {
+      "id": "water_skin",
+      "path": "roguelike/data/items/consumables/water_skin.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": "drink",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary drink",
+      "sha256": "b91897ee4cf71aeaa40b0fe86bcfde908aef7f1bea9b8a838f0fc886f37f2d2b"
+    },
+    {
+      "id": "wight_concentrate",
+      "path": "roguelike/data/items/consumables/wight_concentrate.json",
+      "pointer": "",
+      "category": "consumable",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "2ac4b6f89c1de924a9ca3d9b5f0f7b683e79b33a8f373a738e411291b5b0f767"
+    },
+    {
+      "id": "book",
+      "path": "roguelike/data/items/documents/book.json",
+      "pointer": "",
+      "category": "document",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "3527688f8968d83870b7db433376f361946795c2d107ee5fd85407360aeb3920"
+    },
+    {
+      "id": "inscription",
+      "path": "roguelike/data/items/documents/inscription.json",
+      "pointer": "",
+      "category": "document",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "7827e2cefbb429595bd8c2766e012cccf5dd8143f0c7d06117c3b568c787fe24"
+    },
+    {
+      "id": "letter",
+      "path": "roguelike/data/items/documents/letter.json",
+      "pointer": "",
+      "category": "document",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "9cf4a00af66ad2d1ac0ba0b4c89302ffa8fab5daed8977e9cb38312d6abef514"
+    },
+    {
+      "id": "research_note",
+      "path": "roguelike/data/items/documents/research_note.json",
+      "pointer": "",
+      "category": "document",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "0bad078178f482984bcdea6cfd2828739d340cb2a60301da82b3a51c943c6c58"
+    },
+    {
+      "id": "stone_marker",
+      "path": "roguelike/data/items/documents/stone_marker.json",
+      "pointer": "",
+      "category": "document",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "8745408c739013ebb23ee8811c66e6205e86846fb627dac4ea73912721e60692"
+    },
+    {
+      "id": "tablet",
+      "path": "roguelike/data/items/documents/tablet.json",
+      "pointer": "",
+      "category": "document",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "ae800cef6595246dbc74fb829e6517d3888367d4d17c7667c1debff57048cbb8"
+    },
+    {
+      "id": "component_satchel",
+      "path": "roguelike/data/items/equipment/satchel/component_satchel.json",
+      "pointer": "",
+      "category": "equipment",
+      "supply_class": "material",
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "1e07ec7945fe79ae6fdbb9fb1ddf25b96c8ac4f5b14ec65c710e57ef112083dc"
+    },
+    {
+      "id": "herbalist_pouch",
+      "path": "roguelike/data/items/equipment/satchel/herbalist_pouch.json",
+      "pointer": "",
+      "category": "equipment",
+      "supply_class": "material",
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "eafd8ded510a828da955783fefb7c4a99d189f9692511d0b0f809dfff014794e"
+    },
+    {
+      "id": "leather_satchel",
+      "path": "roguelike/data/items/equipment/satchel/leather_satchel.json",
+      "pointer": "",
+      "category": "equipment",
+      "supply_class": "material",
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "a2bc7f244fa2a35d6f7c7a084d8ae7253df57c8d2a82d4b690375d6d664d43f3"
+    },
+    {
+      "id": "faceted_ward",
+      "path": "roguelike/data/items/shields/faceted_ward.json",
+      "pointer": "",
+      "category": "shield",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "b7a1144cbe27d9a7cfc2e28b34b3cd6e894e2b9904d7d7abe04ac6db1be4e791"
+    },
+    {
+      "id": "corpse",
+      "path": "roguelike/data/items/special/corpse_placeholder.json",
+      "pointer": "",
+      "category": "special",
+      "supply_class": "material",
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "d06ba5fc44a10a30d44344516a6447fab74bf7255a281adbc3bf5955a2834f53"
+    },
+    {
+      "id": "moist_pebble",
+      "path": "roguelike/data/items/talismans/moist_pebble.json",
+      "pointer": "",
+      "category": "talisman",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "fe13ebc6d1df742b8d9da478e4c0a2be6e8ac1b0b15319dc1f2dbcd0f903d156"
+    },
+    {
+      "id": "oil_lantern",
+      "path": "roguelike/data/items/tools/oil_lantern.json",
+      "pointer": "",
+      "category": "tool",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "038825ec331ea210f9726b44b64f49ef5524dbe5fa05b7bf6a08f027d015bfb4"
+    },
+    {
+      "id": "tallow_torch",
+      "path": "roguelike/data/items/tools/tallow_torch.json",
+      "pointer": "",
+      "category": "tool",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "35dce605a06573ffdcb48ac8b3968ed7fbf6af1d1b2d0b17021c75c735258f34"
+    },
+    {
+      "id": "binding_knife",
+      "path": "roguelike/data/items/weapons/binding_knife.json",
+      "pointer": "",
+      "category": "weapon",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "786602a4f5f7f344f46fe78ecd1969e0c5cfbb8110199e804777f1bb98571fa4"
+    },
+    {
+      "id": "crude_blade",
+      "path": "roguelike/data/items/weapons/crude_blade.json",
+      "pointer": "",
+      "category": "weapon",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "93bca1f86753cd5b53e315fd8a6be8188b05b31ac1471ae6b59ec915672246b7"
+    },
+    {
+      "id": "debug_blade",
+      "path": "roguelike/data/items/weapons/debug_blade.json",
+      "pointer": "",
+      "category": "weapon",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "4e7df78aee66e966c66941343cb6e0b9d738933d648ec2c1a8a173c5bd4ec542"
+    },
+    {
+      "id": "dissolution_blade",
+      "path": "roguelike/data/items/weapons/dissolution_blade.json",
+      "pointer": "",
+      "category": "weapon",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "02e385a9d7699fbdcba2e704218323e886009c0d6abc7e2f06861743b798d744"
+    },
+    {
+      "id": "heavy_blade",
+      "path": "roguelike/data/items/weapons/heavy_blade.json",
+      "pointer": "",
+      "category": "weapon",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "79b57a465b496b880f7a246fa3051d1604359e8e12574ee0dbf0d644fbf60fff"
+    },
+    {
+      "id": "revelation_lens",
+      "path": "roguelike/data/items/weapons/revelation_lens.json",
+      "pointer": "",
+      "category": "weapon",
+      "supply_class": "material",
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "d62711dbb642cdcca99eabafd78a9de97bf2b7270ddb8b3f5a6ae365c7d9171e"
+    },
+    {
+      "id": "severance_blade",
+      "path": "roguelike/data/items/weapons/severance_blade.json",
+      "pointer": "",
+      "category": "weapon",
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "sha256": "afdaba42bfdbf8cc4e97ec16db21849d67d9f0c1373d7de3951734f9a54af7b4"
+    }
+  ]
+}

@@ -31,7 +31,10 @@ async function apply(variant=false){await eb(variant?'Apply variant':'Review & a
 async function status(){const r=await ipc('room_test_action',{action:'status'});assert(!r.error,JSON.stringify(r));return r;}
 async function until(fn,timeout=60000){const start=Date.now();for(;;){const v=await fn();if(v)return v;assert(Date.now()-start<timeout,'Timed out');await new Promise(r=>setTimeout(r,100));}}
 async function running(previous){const began=Date.now();return until(async()=>{const s=await status();if(!s.preparing&&Date.now()-began>1000){const alert=page.getByTestId('room-test-panel').getByRole('alert');if(await alert.count())assert.fail(await alert.innerText());assert(!s.last_action_error&&!s.error,JSON.stringify(s));assert.notEqual(s.status,'failed',JSON.stringify(s));}return s.status==='running'&&!s.preparing&&s.session_id!==previous?s:null;},100000);}
-async function observe(){return JSON.parse(await readFile(resolve(session.state_root,'observation.json'),'utf8'));}
+async function observe(){const o=JSON.parse(await readFile(resolve(session.state_root,'observation.json'),'utf8'));
+ // W5J transient process identities are evidence for live selection, never saved state.
+ for(const item of [...o.inventory,...o.floor.flatMap(r=>r.items)])delete item.instance;
+ return o;}
 let eventId=0;
 async function key(key,text='',capture=false){const id=++eventId;const path=resolve(session.state_root,'event.json');await writeFile(path+'.tmp',JSON.stringify({id,key,text,capture}));await rename(path+'.tmp',path);return until(async()=>{if(!cold){const s=await status();assert.notEqual(s.status,'failed',s.diagnostics||JSON.stringify(s));}try{const o=await observe();return o.applied===id?o:null;}catch{return null;}});}
 async function screenshot(name){await key(undefined,'',true);await copyFile(resolve(session.state_root,'frame.png'),resolve(output,name));}
