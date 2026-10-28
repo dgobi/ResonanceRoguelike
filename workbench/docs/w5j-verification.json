@@ -1,0 +1,412 @@
+{
+  "milestone": "W5J",
+  "passed": true,
+  "observed_utc": "2026-10-28T18:27:17.233251+00:00",
+  "revisions": {
+    "reviewed_start": "9068855894c2ce53e4617dd0f5f696fbab0bbb4a",
+    "initial_remote": "9068855894c2ce53e4617dd0f5f696fbab0bbb4a",
+    "implementation": "d36f6231c1eaa51b8bd4d620b5439a46a5499a58",
+    "package_inputs": "d71e27a4586b370f9f894fcca142e64b6d32f34e",
+    "evidence_inputs": "77ee87303205a3331e8f9846985a3053d731d81e",
+    "final_delivery_ref": "checkpoint/workbench-w5j-verified-20261028",
+    "note": "Final evidence/delivery commit identity is resolved by this Git ref and exact remote-main readback in the handoff; it cannot embed its own hash. Package bytes bind the earlier package-input commit."
+  },
+  "contract": "usable-supplies-1",
+  "corpus": {
+    "path": "workbench/docs/evidence/w5j/shipped-sources.json",
+    "sha256": "0fac2241f804a889083750418c55d317f4d7877be1febd982ea27cc9fa1fd05d"
+  },
+  "observations": {
+    "path": "workbench/docs/evidence/w5j/observations.json",
+    "sha256": "741e9989c16eb4545df33be0e84d011bc71f0a3930854d7af491c5aabe009e43"
+  },
+  "environments": {
+    "pinned": {
+      "executable": "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+      "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "dependencies": {
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "numpy": "2.4.6",
+        "cffi": "2.1.1",
+        "pycparser": "3.11",
+        "typing_extensions": "4.16.0"
+      }
+    },
+    "development": {
+      "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "dependencies": {
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "numpy": "2.4.6",
+        "cffi": "2.1.1",
+        "pycparser": "3.11",
+        "typing_extensions": "4.16.0"
+      }
+    }
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "exit_code": 0,
+      "outcome": "68 tests pass",
+      "log": {
+        "path": "workbench/.artifacts/w5j/frontend.log",
+        "sha256": "427dc3a6de1470c17e4ebb7268bc66f60303291c807d1c7d9e2b1bed9fc3178f"
+      }
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "exit_code": 0,
+      "outcome": "passes",
+      "log": {
+        "path": "workbench/.artifacts/w5j/typecheck.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "outcome": "68 tests pass",
+      "log": {
+        "path": "workbench/.artifacts/w5j/host.log",
+        "sha256": "54c5bb16a3597369ef369917bbbc15fc28eda93c8ba8ba279736f4c7c0612692"
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "outcome": "passes; warnings denied",
+      "log": {
+        "path": "workbench/.artifacts/w5j/clippy.log",
+        "sha256": "6d3e4097497feb0fb3401efdca10fceef8a675b7e4d8360f61e92c82f53efd74"
+      }
+    },
+    {
+      "command": "Configured development Python with absolute PYTHONPATH game/tests/tools: unittest test_usable_supplies test_authored_assignment test_gameplay_g15 test_effect_persistence test_generation_ownership test_gameplay_g17 test_room_test_session test_combat_routes -v",
+      "exit_code": 0,
+      "outcome": "66 tests pass",
+      "log": {
+        "path": "workbench/.artifacts/w5j/production-verified.log",
+        "sha256": "00bc017cba00fce9fb6e344e219eeb02ad8fc973fc876f66a457545bd332f651"
+      }
+    },
+    {
+      "command": "worker/runtime/python.exe -I -B -m unittest discover -s worker -v",
+      "exit_code": 0,
+      "outcome": "72 cases; 71 pass, one expected embedded dependency-absence skip",
+      "log": {
+        "path": "workbench/.artifacts/w5j/worker.log",
+        "sha256": "bf136ff96cbd5c1338330043f6d771199313d0228b0aef29bd366a51c1c89f49"
+      }
+    },
+    {
+      "command": "Standard Python: unittest test_bridge.BridgeTests.test_dependency_absence_structured",
+      "exit_code": 0,
+      "outcome": "negative control passes",
+      "log": {
+        "path": "workbench/.artifacts/w5j/missing-dependency.log",
+        "sha256": "aa3d1bdf042f3a640731220a7d9cfb3c79b900b294a441460312fde93a476469"
+      }
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "exit_code": 0,
+      "outcome": "Windows executable and NSIS pass",
+      "log": {
+        "path": "workbench/.artifacts/w5j/package-final.log",
+        "sha256": "976eb009f4b68d931ccb972f0a495f0ac862564f2d0b0f7366581f559f75b14f"
+      }
+    },
+    {
+      "command": "node scripts/run-supplies.mjs",
+      "exit_code": 0,
+      "outcome": "packaged supplies journey passes",
+      "log": {
+        "path": "workbench/.artifacts/w5j/native-final.log",
+        "sha256": "8ec783fe380df47653bb2620d9ea0cfaff3b993da2c7e74fc34929d5eb467aaa"
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "outcome": "packaged shared lifecycle passes",
+      "log": {
+        "path": "workbench/.artifacts/w5j/workspace.log",
+        "sha256": "f12dad043ecf9afec23f6a0549a4bae8e7b3105b0573c3a8d9b14b5d64a0d223"
+      }
+    },
+    {
+      "command": "node scripts/run-room-tests.mjs",
+      "exit_code": 0,
+      "outcome": "packaged capture/reset/cold-load/lifecycle passes",
+      "log": {
+        "path": "workbench/.artifacts/w5j/room-session.log",
+        "sha256": "64012c12fc697cc494ae373a740b7b5cd08c2aa3308fe36e43779d495fcbc9b2"
+      }
+    },
+    {
+      "command": "Pinned Python: standalone-room-regression.py (fresh disposable inputs)",
+      "exit_code": 0,
+      "outcome": "ordinary 128x128 startup and default disposable save/load pass",
+      "log": {
+        "path": "workbench/.artifacts/w5j/ordinary-final.log",
+        "sha256": "4cd9b637b48535ad6e465280daf2c8ba98bc45eca485c09e7e8089730d6fc423"
+      }
+    }
+  ],
+  "failed_attempts": [
+    {
+      "log": {
+        "path": "workbench/.artifacts/w5j/native.log",
+        "sha256": "c8e1c12f8e08046f5de0833064fc435adbcdac6fa13f2116ecd6437cd26a31aa"
+      },
+      "counted_as_pass": false
+    },
+    {
+      "log": {
+        "path": "workbench/.artifacts/w5j/native-attempt2.log",
+        "sha256": "d1fcd4760555762f4089df9c989d6a936766f2cb478ff6e13559cebc9a059aea"
+      },
+      "counted_as_pass": false
+    },
+    {
+      "log": {
+        "path": "workbench/.artifacts/w5j/room-session-attempt1.log",
+        "sha256": "3b993dbb0e23f1f2e60ddd588ea7787290bb24567f77d18e6ff4097f8dcf739e"
+      },
+      "counted_as_pass": false
+    },
+    {
+      "log": {
+        "path": "workbench/.artifacts/w5j/production.log",
+        "sha256": "e03891e50c3a85731cf43d0fb2b5427c0d0419bfaed59f0cae901e3e19a33b08"
+      },
+      "counted_as_pass": false
+    }
+  ],
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "5e0f9ebd8c202f54864f5bac1f1ac8f2efd18d34714941229d861537913ec6e2"
+    },
+    "installer": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "079e37909e75cd8c569a21c3718addadd0a1cac5e42873422e33f9150fe9ae34"
+    },
+    "bundled_runtime_files": 1809,
+    "bundled_runtime_matches": true,
+    "bundled_bridge_matches": true
+  },
+  "source_hashes": {
+    "roguelike/docs/AUTHORED_SUBMAP_SELECTION.md": {
+      "working_sha256": "188ab731adad338d330a5f7d6da1fd6da1eb0c676fcae3e7bd282060cd21eb6b",
+      "git_sha256": "188ab731adad338d330a5f7d6da1fd6da1eb0c676fcae3e7bd282060cd21eb6b"
+    },
+    "roguelike/docs/ITEM_AUTHORING.md": {
+      "working_sha256": "05ac8a1877beb786b4e4e62289135b5846effb7989ccbce486ca7de13246d2d3",
+      "git_sha256": "05ac8a1877beb786b4e4e62289135b5846effb7989ccbce486ca7de13246d2d3"
+    },
+    "roguelike/docs/ROOM_TEST_RUNTIME.md": {
+      "working_sha256": "b2f403815a2bd992708331ff93ac4eec620ddc1c2f3f600a0b2ec10fc95ba750",
+      "git_sha256": "b2f403815a2bd992708331ff93ac4eec620ddc1c2f3f600a0b2ec10fc95ba750"
+    },
+    "roguelike/docs/owner/CONTENT_ROUTES.md": {
+      "working_sha256": "cbd18875937df645d58d9d5624f73b2438ad9f176be557ae8d0547c8a8df7e6b",
+      "git_sha256": "cbd18875937df645d58d9d5624f73b2438ad9f176be557ae8d0547c8a8df7e6b"
+    },
+    "roguelike/engine/content_authoring.py": {
+      "working_sha256": "598cb2e9f677b8c68e587bb94c2d7d70c19b880c3e207c30b2c0dfe92ab71d8b",
+      "git_sha256": "813c81743da5425d6f455f0a9675e7f2cf293696e152d74d9661de241deaec35"
+    },
+    "roguelike/engine/inventory_screen.py": {
+      "working_sha256": "ad2f6efffff891cb05511ca3f33da9980bf92ee584e68bab2cd7a1bee6d7885f",
+      "git_sha256": "0f826e48d9263f6725367c6d6be0f98e3e2bed0a31d9d7181a3cb8ad2727feea"
+    },
+    "roguelike/engine/item_authoring.py": {
+      "working_sha256": "a5691090cf9f57fbb71768ada0ed0567e0c184d98d3a916beeb16bfce00c133f",
+      "git_sha256": "a5691090cf9f57fbb71768ada0ed0567e0c184d98d3a916beeb16bfce00c133f"
+    },
+    "roguelike/engine/room_test_diagnostics.py": {
+      "working_sha256": "eac00e5b1663902ad4155ef3bcf7cfd39028b48065d6272d8869402d1ac6992b",
+      "git_sha256": "eac00e5b1663902ad4155ef3bcf7cfd39028b48065d6272d8869402d1ac6992b"
+    },
+    "roguelike/generation/authored_submap_selection.py": {
+      "working_sha256": "265862e4b182d0a4d4a7a36d3cb9aaad57a8775d2956cfc5caa8cc277cac5fe9",
+      "git_sha256": "265862e4b182d0a4d4a7a36d3cb9aaad57a8775d2956cfc5caa8cc277cac5fe9"
+    },
+    "roguelike/generation/structure_contract.py": {
+      "working_sha256": "a68cc976f8577b5bc741a5037947242666c12eae2dfbe2aa2cdc262feb80b48a",
+      "git_sha256": "a68cc976f8577b5bc741a5037947242666c12eae2dfbe2aa2cdc262feb80b48a"
+    },
+    "tools/critical_fix_regressions/tests/test_authored_assignment.py": {
+      "working_sha256": "50d0bc59b6ec010bc07572eb7b2947e29fc3fe66c4335ef5c7ea93f273795e80",
+      "git_sha256": "84dbf74495b5c963c58e5275f633ea6d90577fa209e7c5b2ffb921536d063fc6"
+    },
+    "tools/critical_fix_regressions/tests/test_usable_supplies.py": {
+      "working_sha256": "26a23da624a2f658c39328852c01a37c83a3fa8962cc708f558ae98c61d0bf22",
+      "git_sha256": "26a23da624a2f658c39328852c01a37c83a3fa8962cc708f558ae98c61d0bf22"
+    },
+    "workbench/README.md": {
+      "working_sha256": "86c48bf33bfa037aa415b8819ccf9c7839a7c2e37c5b70bd6c742e69ff50c4bd",
+      "git_sha256": "52d417fbd7ba4003f02f00836431c43b4072ddcbf1adb3b7bd8a74162edb2190"
+    },
+    "workbench/docs/CONTENT_CONTRACTS.md": {
+      "working_sha256": "2524724fb6c797bb72d6df540fb9d6e2a8f1ef027829bff920f141e6fd255edb",
+      "git_sha256": "2524724fb6c797bb72d6df540fb9d6e2a8f1ef027829bff920f141e6fd255edb"
+    },
+    "workbench/scripts/run-assignments.mjs": {
+      "working_sha256": "a560f6baa84c63fa0a83a12f02a7e3d0e3aa13ae082b5b105b6b8ebf81064e7e",
+      "git_sha256": "8654deeddee56d35891a867e42789d2d952b3d97480f1337a06dbcba6949741a"
+    },
+    "workbench/scripts/run-room-tests.mjs": {
+      "working_sha256": "783b2a82c9f55fa04f7b1408c1cf8e6f9d6117fbc4eeaa8caa2ca9dfeb6c6729",
+      "git_sha256": "f7da2f5a2bc0f97ca98c71f3ac15bd465c8d24271c683103f4bc038705e60384"
+    },
+    "workbench/scripts/run-supplies.mjs": {
+      "working_sha256": "9b0e21bcf71295cb0ce0b9cf440a627ed15b78378e14265f2f37a674bf48423a",
+      "git_sha256": "ce33855245ee7cc5cf239a95b19a9e175cd8d8e1fc097ab90b50cdc889990b95"
+    },
+    "workbench/scripts/supplies-corpus.py": {
+      "working_sha256": "750ee48056fe4ea4d95e5f39eb569e5eedddac028fb4073130d7a7d157df5b3c",
+      "git_sha256": "750ee48056fe4ea4d95e5f39eb569e5eedddac028fb4073130d7a7d157df5b3c"
+    },
+    "workbench/scripts/supplies-persistence.py": {
+      "working_sha256": "b3987d46abd1db5a5070c8f79dbfbfb55749bd9e8e71c3a396495572669fd2fb",
+      "git_sha256": "b3987d46abd1db5a5070c8f79dbfbfb55749bd9e8e71c3a396495572669fd2fb"
+    },
+    "workbench/scripts/w5j-preservation.py": {
+      "working_sha256": "fec27dfe0622723bd1097b93664bb02f01aca0b0841a90b7856a1d31eb2bd9c3",
+      "git_sha256": "979b0b69eb53779b1790253e4ced05940bb4f409e3693b6aeafdb7581ccec848"
+    },
+    "workbench/scripts/w5j-receipt.py": {
+      "working_sha256": "94fc0ba54c5a6bcdc7e1878b5e16ed6943370dc08b5a70aca2680ad5b85a777c",
+      "git_sha256": "94fc0ba54c5a6bcdc7e1878b5e16ed6943370dc08b5a70aca2680ad5b85a777c"
+    },
+    "workbench/src-tauri/src/authoring.rs": {
+      "working_sha256": "6cbbbf785a5e438c646da7a8ecba7f4e535bc689899a7608a5f3c450282e5841",
+      "git_sha256": "670921e274badbc2bb13559549a6a7aa88dfc65006b703c763e9a93a2e6e7065"
+    },
+    "workbench/src-tauri/src/recovery.rs": {
+      "working_sha256": "e3ab5845b476ca1711102c5cd279e2c7ccb5c2d13046b8d9474736058b3b244f",
+      "git_sha256": "228e723f81ee89badd78485356ba8a763fed90f8daee06236ff7a190ce00e674"
+    },
+    "workbench/src/ContentEditor.tsx": {
+      "working_sha256": "436da56a391c1251bf67c705f5c7a04ee6d79c84b6ebc98863629b3ed965de4b",
+      "git_sha256": "c94199543a492b87216f2f68a1e2b7b5feca1b86e25333ca9a4a6ae43463c76e"
+    },
+    "workbench/src/ContractControls.tsx": {
+      "working_sha256": "fbd4a0e788f436065972a95efd2fd8081a298f6ddd968f2ad21e908c415d6f69",
+      "git_sha256": "fbd4a0e788f436065972a95efd2fd8081a298f6ddd968f2ad21e908c415d6f69"
+    },
+    "workbench/src/ItemEditor.tsx": {
+      "working_sha256": "d316eeea5921a49db46253608355d8bda9a402295ce15704ba1a21620f819c2e",
+      "git_sha256": "31edd5e737df9c69babc15a993e2459ebb69e09bf9bee76fa632696b26037d66"
+    },
+    "workbench/src/familyData.ts": {
+      "working_sha256": "55a2d48ee3cf86cf13676d95fb8bafd1d35cb92a2e3af6c03b88b9ee4063e754",
+      "git_sha256": "beb32adc6702159c1ade22a6f499e25982c1c1db9a10515a5fcf4c05abc48457"
+    },
+    "workbench/src/item.test.ts": {
+      "working_sha256": "f8bd1c92067edd4dd883e050ed1e3f554db9167e24646474ca2c1c345f61837b",
+      "git_sha256": "f8bd1c92067edd4dd883e050ed1e3f554db9167e24646474ca2c1c345f61837b"
+    },
+    "workbench/worker/test_items.py": {
+      "working_sha256": "167e428d8d51622f3eecd9a565dafeecbec75b41aedacb25244f39783bca161b",
+      "git_sha256": "167e428d8d51622f3eecd9a565dafeecbec75b41aedacb25244f39783bca161b"
+    },
+    "workbench/worker/test_supplies.py": {
+      "working_sha256": "8ce73855ef9bd2dd6ba7326c66b01a5a859aa561c2f5490a32b0dd15c69fbad9",
+      "git_sha256": "8ce73855ef9bd2dd6ba7326c66b01a5a859aa561c2f5490a32b0dd15c69fbad9"
+    }
+  },
+  "shipped_assignment": {
+    "id": "authored_submap_selection",
+    "version": 1,
+    "enabled": false,
+    "target_type": "barrow",
+    "authored_chance": 0.0,
+    "candidates": []
+  },
+  "preservation": {
+    "unchanged": 8203,
+    "scoped_changes": [
+      "roguelike/docs/AUTHORED_SUBMAP_SELECTION.md",
+      "roguelike/docs/ITEM_AUTHORING.md",
+      "roguelike/docs/ROOM_TEST_RUNTIME.md",
+      "roguelike/docs/owner/CONTENT_ROUTES.md",
+      "roguelike/engine/content_authoring.py",
+      "roguelike/engine/inventory_screen.py",
+      "roguelike/engine/item_authoring.py",
+      "roguelike/engine/room_test_diagnostics.py",
+      "roguelike/generation/authored_submap_selection.py",
+      "roguelike/generation/structure_contract.py",
+      "tools/critical_fix_regressions/tests/test_authored_assignment.py",
+      "tools/critical_fix_regressions/tests/test_usable_supplies.py",
+      "workbench/README.md",
+      "workbench/docs/CONTENT_CONTRACTS.md",
+      "workbench/docs/evidence/w5j/.gitattributes",
+      "workbench/docs/evidence/w5j/shipped-sources.json",
+      "workbench/scripts/run-assignments.mjs",
+      "workbench/scripts/run-room-tests.mjs",
+      "workbench/scripts/run-supplies.mjs",
+      "workbench/scripts/supplies-corpus.py",
+      "workbench/scripts/supplies-persistence.py",
+      "workbench/scripts/w5j-preservation.py",
+      "workbench/scripts/w5j-receipt.py",
+      "workbench/src-tauri/src/authoring.rs",
+      "workbench/src-tauri/src/recovery.rs",
+      "workbench/src/ContentEditor.tsx",
+      "workbench/src/ContractControls.tsx",
+      "workbench/src/ItemEditor.tsx",
+      "workbench/src/familyData.ts",
+      "workbench/src/item.test.ts",
+      "workbench/worker/test_items.py",
+      "workbench/worker/test_supplies.py"
+    ],
+    "failures": [],
+    "owner_plan": "Untracked and byte/mtime preserved",
+    "canonical_native_fixture_matches": true,
+    "game_fixture_matches": true
+  },
+  "screenshots": {
+    "workbench-drink.png": {
+      "path": "workbench/docs/evidence/w5j/workbench-drink.png",
+      "sha256": "9ff1324632490715c9ca3afe37a4a4024b54e3cee83d4deff11b4b92858778fc"
+    },
+    "workbench-room.png": {
+      "path": "workbench/docs/evidence/w5j/workbench-room.png",
+      "sha256": "1b8194248cbad9ce19cf7d0685dfc29e9595b4485fd7b8d80fa41049d8ee08c6"
+    },
+    "game-return-visible.png": {
+      "path": "workbench/docs/evidence/w5j/game-return-visible.png",
+      "sha256": "d22c66d7782efe83e504a7a463c36702ab3674be0ce6ace6240b986c54ebb8fe"
+    },
+    "game-treatment.png": {
+      "path": "workbench/docs/evidence/w5j/game-treatment.png",
+      "sha256": "683bdffa51f9e75493af6d52544b26b70ebce9b8ac0e570a9e3fef9f64aa325a"
+    },
+    "game-revised.png": {
+      "path": "workbench/docs/evidence/w5j/game-revised.png",
+      "sha256": "0b8e842c5e839a4782c71eb89eb4f0da04d5c731e12eeb7bc4d87221bfbf3585"
+    }
+  },
+  "room_session": {
+    "path": "workbench/.artifacts/w5h/native-1793211437852/receipt.json",
+    "sha256": "1c23ff5884d88b09b1023ca6e92247d7672a09dca0457b7cf4419126dcc9573a"
+  },
+  "corrections": [
+    "An early focused worker run overlapped source edits and correctly rejected SOURCE_CHANGED; stable final full suite follows frozen game code.",
+    "The first broad game invocation named two nonexistent modules and used embedded Python whose cold children ignored PYTHONPATH; corrected to actual test module names and configured development environment (66 pass).",
+    "Native harness waits for asynchronous Revert completion and selects the actual shared apply label. Failed attempts are retained, not counted as successful journeys.",
+    "W5H persistence observation comparison now omits W5J transient instance identities; saved item values and ownership remain fully compared across F9/cold load.",
+    "Initial standalone fixture optional docs copy collided with an existing directory; the final fresh fixture uses dirs_exist_ok and passes startup/save/load."
+  ],
+  "limits": [
+    "Controlled needs/injury and staged room entrance; no balance, unaided discovery or normal-start pacing claim.",
+    "No new equipment/effects, recipe processing, filling mechanics, migration, asset creation or wiki work. New definitions require explicit saved references."
+  ]
+}

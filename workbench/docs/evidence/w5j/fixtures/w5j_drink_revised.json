@@ -1,0 +1,21 @@
+{
+  "id": "w5j_drink",
+  "name": "W5J trail drink",
+  "description": "A quarter-need drink with a saved return.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.3,
+  "stackable": false,
+  "on_use": "drink",
+  "hydration": 0.5,
+  "empty_form": "w5j_material",
+  "liquid": "water",
+  "liquid_volume": 0.5,
+  "keywords": [
+    {
+      "tag": "drinkable",
+      "tier": 1
+    }
+  ],
+  "_essence_note": "Water passes through everything. It takes and is taken. The consumption is reciprocal — it feeds and is consumed in the feeding."
+,"drink_message":"W5J revised drink message."}

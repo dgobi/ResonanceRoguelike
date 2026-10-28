@@ -1,0 +1,2372 @@
+{
+  "native_source": {
+    "path": "workbench/.artifacts/w5j/native-1793211242077/receipt.json",
+    "sha256": "097646d396ead4a1d947f58590a87c11182c863284f3374a621ac93b962d1d62"
+  },
+  "saved": {
+    "w5j_material": {
+      "source": "roguelike/data/items/components/w5j_material.json",
+      "path": "workbench/docs/evidence/w5j/fixtures/w5j_material.json",
+      "sha256": "7876d68c96b2c7634f815faee4db610b58da422d3ed2a207f9c81112f422baee"
+    },
+    "w5j_food_a": {
+      "source": "roguelike/data/items/consumables/w5j_food_a.json",
+      "path": "workbench/docs/evidence/w5j/fixtures/w5j_food_a.json",
+      "sha256": "02943f108ae1ba2488e0858bf89916240f438f5a8969d94ef17c865354d6951e"
+    },
+    "w5j_food_b": {
+      "source": "roguelike/data/items/consumables/w5j_food_b.json",
+      "path": "workbench/docs/evidence/w5j/fixtures/w5j_food_b.json",
+      "sha256": "e7038dabcdda637262e840600406f83f6f6b0cd3fc36f90ecb5fe65a8f37c752"
+    },
+    "w5j_drink": {
+      "source": "roguelike/data/items/consumables/w5j_drink.json",
+      "path": "workbench/docs/evidence/w5j/fixtures/w5j_drink.json",
+      "sha256": "4ea1ad19eeb862f89f671fae15d1248fafea3b3a5f48d07fe8c199effdcbeff8"
+    },
+    "w5j_treatment": {
+      "source": "roguelike/data/items/consumables/w5j_treatment.json",
+      "path": "workbench/docs/evidence/w5j/fixtures/w5j_treatment.json",
+      "sha256": "3113c03d71550d598770bf87175b94ae47e7ad54f71e10ebfa99a84986f0e4cc"
+    },
+    "w5j_food_a_revised": {
+      "source": "roguelike/data/items/consumables/w5j_food_a.json",
+      "path": "workbench/docs/evidence/w5j/fixtures/w5j_food_a_revised.json",
+      "sha256": "74a6d23f9e4117670b1110e3bbad00f6451f52e3ac8e978e7a38192f63f06080"
+    },
+    "w5j_drink_revised": {
+      "source": "roguelike/data/items/consumables/w5j_drink.json",
+      "path": "workbench/docs/evidence/w5j/fixtures/w5j_drink_revised.json",
+      "sha256": "2dda947bf367e33ee269b7069a103a1eb5fa4de4f4b827e7d5e0b1ea80fb65b0"
+    },
+    "w5j_material_revised": {
+      "source": "roguelike/data/items/components/w5j_material.json",
+      "path": "workbench/docs/evidence/w5j/fixtures/w5j_material_revised.json",
+      "sha256": "a5a033c43aa2309d1319b75f87119de765ab58eadb2517d1a5a12863f56435ab"
+    },
+    "room": {
+      "source": "roguelike/data/layouts/w5j_supplies_room.json",
+      "path": "workbench/docs/evidence/w5j/fixtures/room.json",
+      "sha256": "4407ac12dd31948437a921c29962baa74e42d42afb3cf3dc09b39d6a4f6e9d58"
+    }
+  },
+  "recovery": {
+    "invalid_sha256": "2432cc068be8e85e4c33023fe38489c4bc33ed64da6494d11208086b8c70d272",
+    "parked_sha256": "99131612fd0ff09bfece27ad07f57030b7ff5384a566fcc230f858ae820c5e50",
+    "new_process": 19284,
+    "no_review": true
+  },
+  "conflict": {
+    "code": "EXTERNAL_MODIFICATION_CONFLICT",
+    "competing_sha256": "9db474d8e701d847341b4b91563b244dcea042da2167d494ed0f02ba55a7f720",
+    "preserved": true
+  },
+  "return_navigation": {
+    "draft_sha256": "52527c659c88fe55835f3d07df1ac014db0b13d10789601ea163e866963ad76e",
+    "retained": true
+  },
+  "acquisition": [
+    {
+      "item_id": "w5j_material",
+      "instance": "2211542527632",
+      "name": "W5J cordwood",
+      "weight": 0.25,
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "consumed_on_use": false,
+      "keywords": [
+        {
+          "tag": "fuel",
+          "tier": 2
+        },
+        {
+          "tag": "fibrous",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "item_id": "w5j_food_a",
+      "instance": "2211542530896",
+      "name": "W5J herb ration",
+      "weight": 0.05,
+      "nutrition": 0.35,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "W5J herb ration restores you.",
+      "drink_message": null,
+      "consumed_on_use": true,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "bitter",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "item_id": "w5j_food_a",
+      "instance": "2211542522960",
+      "name": "W5J herb ration",
+      "weight": 0.05,
+      "nutrition": 0.35,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "W5J herb ration restores you.",
+      "drink_message": null,
+      "consumed_on_use": true,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "bitter",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "item_id": "w5j_food_b",
+      "instance": "2211566693776",
+      "name": "W5J roast ration",
+      "weight": 0.1,
+      "nutrition": 180,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "W5J roast ration restores you.",
+      "drink_message": null,
+      "consumed_on_use": true,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 2
+        },
+        {
+          "tag": "vital",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "item_id": "w5j_drink",
+      "instance": "2211543593616",
+      "name": "W5J trail drink",
+      "weight": 0.3,
+      "nutrition": null,
+      "hydration": 0.25,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": "W5J trail drink restores you.",
+      "consumed_on_use": true,
+      "keywords": [
+        {
+          "tag": "drinkable",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "item_id": "w5j_drink",
+      "instance": "2211543597520",
+      "name": "W5J trail drink",
+      "weight": 0.3,
+      "nutrition": null,
+      "hydration": 0.25,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": "W5J trail drink restores you.",
+      "consumed_on_use": true,
+      "keywords": [
+        {
+          "tag": "drinkable",
+          "tier": 1
+        }
+      ]
+    },
+    {
+      "item_id": "w5j_treatment",
+      "instance": "2211542680976",
+      "name": "W5J field dressing",
+      "weight": 0.05,
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": 7,
+      "eat_message": null,
+      "drink_message": null,
+      "consumed_on_use": true,
+      "keywords": []
+    },
+    {
+      "item_id": "w5j_treatment",
+      "instance": "2211542683344",
+      "name": "W5J field dressing",
+      "weight": 0.05,
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": 7,
+      "eat_message": null,
+      "drink_message": null,
+      "consumed_on_use": true,
+      "keywords": []
+    }
+  ],
+  "disclosed_fixture": {
+    "hunger": 0.8,
+    "thirst": 0.8,
+    "hp": 45,
+    "max_hp": 60,
+    "scope": "Initial need/injury only; subsequent effects, ownership and time are ordinary."
+  },
+  "uses": [
+    {
+      "id": "w5j_food_a",
+      "selected": "2211542530896",
+      "siblings": [
+        "2211542522960"
+      ],
+      "selected_values": {
+        "item_id": "w5j_food_a",
+        "instance": "2211542530896",
+        "name": "W5J herb ration",
+        "weight": 0.05,
+        "nutrition": 0.35,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5J herb ration restores you.",
+        "drink_message": null,
+        "consumed_on_use": true,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ]
+      },
+      "before": {
+        "needs": {
+          "hunger": 0.8,
+          "thirst": 0.8
+        },
+        "hp": 45,
+        "turn": 499,
+        "calls": 19
+      },
+      "after": {
+        "needs": {
+          "hunger": 0.45100000000000007,
+          "thirst": 0.8013750000000001
+        },
+        "hp": 45,
+        "turn": 500,
+        "calls": 20,
+        "inventory": [
+          {
+            "item_id": "tallow_torch",
+            "instance": "2211527158160",
+            "name": "Tallow Torch",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2211567414224",
+            "name": "Crow Jerky",
+            "weight": 0.2,
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ]
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2211542333008",
+            "name": "Water Flask",
+            "weight": 0.5,
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2211542332944",
+            "name": "a crude blade",
+            "weight": 1.5,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2211542332688",
+            "name": "a leather jack",
+            "weight": 3,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2211542334032",
+            "name": "moist pebble",
+            "weight": 0.1,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_material",
+            "instance": "2211542527632",
+            "name": "W5J cordwood",
+            "weight": 0.25,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "fuel",
+                "tier": 2
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_food_a",
+            "instance": "2211542522960",
+            "name": "W5J herb ration",
+            "weight": 0.05,
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "W5J herb ration restores you.",
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_food_b",
+            "instance": "2211566693776",
+            "name": "W5J roast ration",
+            "weight": 0.1,
+            "nutrition": 180,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "W5J roast ration restores you.",
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              },
+              {
+                "tag": "vital",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543593616",
+            "name": "W5J trail drink",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": 0.25,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": "W5J trail drink restores you.",
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543597520",
+            "name": "W5J trail drink",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": 0.25,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": "W5J trail drink restores you.",
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542680976",
+            "name": "W5J field dressing",
+            "weight": 0.05,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 7,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": []
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542683344",
+            "name": "W5J field dressing",
+            "weight": 0.05,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 7,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": []
+          }
+        ],
+        "rows": [
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Weapons"
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2211542332944",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Armour & Shields"
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2211542332688",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Consumables"
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2211542333008",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_food_b",
+            "instance": "2211566693776",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543593616",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543597520",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542680976",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542683344",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2211567414224",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_food_a",
+            "instance": "2211542522960",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Components"
+          },
+          {
+            "item_id": "w5j_material",
+            "instance": "2211542527632",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Tools"
+          },
+          {
+            "item_id": "tallow_torch",
+            "instance": "2211527158160",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Miscellaneous"
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2211542334032",
+            "header": false,
+            "label": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5j_food_b",
+      "selected": "2211566693776",
+      "siblings": [],
+      "selected_values": {
+        "item_id": "w5j_food_b",
+        "instance": "2211566693776",
+        "name": "W5J roast ration",
+        "weight": 0.1,
+        "nutrition": 180,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5J roast ration restores you.",
+        "drink_message": null,
+        "consumed_on_use": true,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ]
+      },
+      "before": {
+        "needs": {
+          "hunger": 0.45100000000000007,
+          "thirst": 0.8013750000000001
+        },
+        "hp": 45,
+        "turn": 500,
+        "calls": 20
+      },
+      "after": {
+        "needs": {
+          "hunger": 0.2720000000000001,
+          "thirst": 0.8027500000000001
+        },
+        "hp": 45,
+        "turn": 501,
+        "calls": 21,
+        "inventory": [
+          {
+            "item_id": "tallow_torch",
+            "instance": "2211527158160",
+            "name": "Tallow Torch",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2211567414224",
+            "name": "Crow Jerky",
+            "weight": 0.2,
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ]
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2211542333008",
+            "name": "Water Flask",
+            "weight": 0.5,
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2211542332944",
+            "name": "a crude blade",
+            "weight": 1.5,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2211542332688",
+            "name": "a leather jack",
+            "weight": 3,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2211542334032",
+            "name": "moist pebble",
+            "weight": 0.1,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_material",
+            "instance": "2211542527632",
+            "name": "W5J cordwood",
+            "weight": 0.25,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "fuel",
+                "tier": 2
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_food_a",
+            "instance": "2211542522960",
+            "name": "W5J herb ration",
+            "weight": 0.05,
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "W5J herb ration restores you.",
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543593616",
+            "name": "W5J trail drink",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": 0.25,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": "W5J trail drink restores you.",
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543597520",
+            "name": "W5J trail drink",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": 0.25,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": "W5J trail drink restores you.",
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542680976",
+            "name": "W5J field dressing",
+            "weight": 0.05,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 7,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": []
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542683344",
+            "name": "W5J field dressing",
+            "weight": 0.05,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 7,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": []
+          }
+        ],
+        "rows": [
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Weapons"
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2211542332944",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Armour & Shields"
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2211542332688",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Consumables"
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2211542333008",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543593616",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543597520",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542680976",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542683344",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2211567414224",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_food_a",
+            "instance": "2211542522960",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Components"
+          },
+          {
+            "item_id": "w5j_material",
+            "instance": "2211542527632",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Tools"
+          },
+          {
+            "item_id": "tallow_torch",
+            "instance": "2211527158160",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Miscellaneous"
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2211542334032",
+            "header": false,
+            "label": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5j_drink",
+      "selected": "2211543593616",
+      "siblings": [
+        "2211543597520"
+      ],
+      "selected_values": {
+        "item_id": "w5j_drink",
+        "instance": "2211543593616",
+        "name": "W5J trail drink",
+        "weight": 0.3,
+        "nutrition": null,
+        "hydration": 0.25,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": "W5J trail drink restores you.",
+        "consumed_on_use": true,
+        "keywords": [
+          {
+            "tag": "drinkable",
+            "tier": 1
+          }
+        ]
+      },
+      "before": {
+        "needs": {
+          "hunger": 0.2720000000000001,
+          "thirst": 0.8027500000000001
+        },
+        "hp": 45,
+        "turn": 501,
+        "calls": 21
+      },
+      "after": {
+        "needs": {
+          "hunger": 0.2730000000000001,
+          "thirst": 0.5541250000000001
+        },
+        "hp": 45,
+        "turn": 502,
+        "calls": 22,
+        "inventory": [
+          {
+            "item_id": "tallow_torch",
+            "instance": "2211527158160",
+            "name": "Tallow Torch",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2211567414224",
+            "name": "Crow Jerky",
+            "weight": 0.2,
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ]
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2211542333008",
+            "name": "Water Flask",
+            "weight": 0.5,
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2211542332944",
+            "name": "a crude blade",
+            "weight": 1.5,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2211542332688",
+            "name": "a leather jack",
+            "weight": 3,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2211542334032",
+            "name": "moist pebble",
+            "weight": 0.1,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_material",
+            "instance": "2211542527632",
+            "name": "W5J cordwood",
+            "weight": 0.25,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "fuel",
+                "tier": 2
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_food_a",
+            "instance": "2211542522960",
+            "name": "W5J herb ration",
+            "weight": 0.05,
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "W5J herb ration restores you.",
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543597520",
+            "name": "W5J trail drink",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": 0.25,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": "W5J trail drink restores you.",
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542680976",
+            "name": "W5J field dressing",
+            "weight": 0.05,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 7,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": []
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542683344",
+            "name": "W5J field dressing",
+            "weight": 0.05,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 7,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": []
+          },
+          {
+            "item_id": "empty_water_skin",
+            "instance": "2211542334608",
+            "name": "empty water skin",
+            "weight": 0.2,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              }
+            ]
+          }
+        ],
+        "rows": [
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Weapons"
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2211542332944",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Armour & Shields"
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2211542332688",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Consumables"
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2211542333008",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543597520",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542680976",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542683344",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "empty_water_skin",
+            "instance": "2211542334608",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2211567414224",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_food_a",
+            "instance": "2211542522960",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Components"
+          },
+          {
+            "item_id": "w5j_material",
+            "instance": "2211542527632",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Tools"
+          },
+          {
+            "item_id": "tallow_torch",
+            "instance": "2211527158160",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Miscellaneous"
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2211542334032",
+            "header": false,
+            "label": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5j_treatment",
+      "selected": "2211542680976",
+      "siblings": [
+        "2211542683344"
+      ],
+      "selected_values": {
+        "item_id": "w5j_treatment",
+        "instance": "2211542680976",
+        "name": "W5J field dressing",
+        "weight": 0.05,
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": 7,
+        "eat_message": null,
+        "drink_message": null,
+        "consumed_on_use": true,
+        "keywords": []
+      },
+      "before": {
+        "needs": {
+          "hunger": 0.2730000000000001,
+          "thirst": 0.5541250000000001
+        },
+        "hp": 45,
+        "turn": 502,
+        "calls": 22
+      },
+      "after": {
+        "needs": {
+          "hunger": 0.2740000000000001,
+          "thirst": 0.5555000000000001
+        },
+        "hp": 52,
+        "turn": 503,
+        "calls": 23,
+        "inventory": [
+          {
+            "item_id": "tallow_torch",
+            "instance": "2211527158160",
+            "name": "Tallow Torch",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2211567414224",
+            "name": "Crow Jerky",
+            "weight": 0.2,
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ]
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2211542333008",
+            "name": "Water Flask",
+            "weight": 0.5,
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2211542332944",
+            "name": "a crude blade",
+            "weight": 1.5,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2211542332688",
+            "name": "a leather jack",
+            "weight": 3,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2211542334032",
+            "name": "moist pebble",
+            "weight": 0.1,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_material",
+            "instance": "2211542527632",
+            "name": "W5J cordwood",
+            "weight": 0.25,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "fuel",
+                "tier": 2
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_food_a",
+            "instance": "2211542522960",
+            "name": "W5J herb ration",
+            "weight": 0.05,
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "W5J herb ration restores you.",
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543597520",
+            "name": "W5J trail drink",
+            "weight": 0.3,
+            "nutrition": null,
+            "hydration": 0.25,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": "W5J trail drink restores you.",
+            "consumed_on_use": true,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ]
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542683344",
+            "name": "W5J field dressing",
+            "weight": 0.05,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": 7,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": true,
+            "keywords": []
+          },
+          {
+            "item_id": "empty_water_skin",
+            "instance": "2211542334608",
+            "name": "empty water skin",
+            "weight": 0.2,
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "consumed_on_use": false,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              }
+            ]
+          }
+        ],
+        "rows": [
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Weapons"
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2211542332944",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Armour & Shields"
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2211542332688",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Consumables"
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2211542333008",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_drink",
+            "instance": "2211543597520",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_treatment",
+            "instance": "2211542683344",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "empty_water_skin",
+            "instance": "2211542334608",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2211567414224",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5j_food_a",
+            "instance": "2211542522960",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Components"
+          },
+          {
+            "item_id": "w5j_material",
+            "instance": "2211542527632",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Tools"
+          },
+          {
+            "item_id": "tallow_torch",
+            "instance": "2211527158160",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Miscellaneous"
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2211542334032",
+            "header": false,
+            "label": ""
+          }
+        ]
+      }
+    }
+  ],
+  "captures": {
+    "original": {
+      "captured_ms": 1793211508430,
+      "contract": "workbench-room-test-1",
+      "descriptor_sha256": "063fc96c5c32d9eb88ffa0ae4a15a598f6a0770785c54b5b71df2dd02c016ee6",
+      "manifest_sha256": "b91e8e7cb32c65636700027496b1e8252693cfdef3d120718c13125ade8c93d5",
+      "profile": "ordinary-player-v1: body_player; 60 base HP from body definition; normal needs/carrying/AI; tallow_torch, crow_jerky, water_flask, crude_blade, leather_jack, moist_pebble",
+      "project": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5j\\native-1793211242077\\project",
+      "room_id": "w5j_supplies_room",
+      "room_path": "roguelike/data/layouts/w5j_supplies_room.json",
+      "room_sha256": "4407ac12dd31948437a921c29962baa74e42d42afb3cf3dc09b39d6a4f6e9d58",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5",
+      "seed": 20261027,
+      "snapshot_id": "770301e3-3305-4f64-80ae-259c3b5c03fb"
+    },
+    "reset": {
+      "captured_ms": 1793211508430,
+      "contract": "workbench-room-test-1",
+      "descriptor_sha256": "063fc96c5c32d9eb88ffa0ae4a15a598f6a0770785c54b5b71df2dd02c016ee6",
+      "manifest_sha256": "b91e8e7cb32c65636700027496b1e8252693cfdef3d120718c13125ade8c93d5",
+      "profile": "ordinary-player-v1: body_player; 60 base HP from body definition; normal needs/carrying/AI; tallow_torch, crow_jerky, water_flask, crude_blade, leather_jack, moist_pebble",
+      "project": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5j\\native-1793211242077\\project",
+      "room_id": "w5j_supplies_room",
+      "room_path": "roguelike/data/layouts/w5j_supplies_room.json",
+      "room_sha256": "4407ac12dd31948437a921c29962baa74e42d42afb3cf3dc09b39d6a4f6e9d58",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5",
+      "seed": 20261027,
+      "snapshot_id": "770301e3-3305-4f64-80ae-259c3b5c03fb"
+    },
+    "latest": {
+      "captured_ms": 1793211673303,
+      "contract": "workbench-room-test-1",
+      "descriptor_sha256": "063fc96c5c32d9eb88ffa0ae4a15a598f6a0770785c54b5b71df2dd02c016ee6",
+      "manifest_sha256": "89d849aa25996d3568c3269bb8560d81c6068b232f61501f89d29d7dba141254",
+      "profile": "ordinary-player-v1: body_player; 60 base HP from body definition; normal needs/carrying/AI; tallow_torch, crow_jerky, water_flask, crude_blade, leather_jack, moist_pebble",
+      "project": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5j\\native-1793211242077\\project",
+      "room_id": "w5j_supplies_room",
+      "room_path": "roguelike/data/layouts/w5j_supplies_room.json",
+      "room_sha256": "4407ac12dd31948437a921c29962baa74e42d42afb3cf3dc09b39d6a4f6e9d58",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5",
+      "seed": 20261027,
+      "snapshot_id": "41f4fbdb-9da1-4bc9-aab6-a54b52f43d31"
+    }
+  },
+  "compatibility_before": {
+    "passed": true,
+    "pid": 33112,
+    "source_hashes": {
+      "roguelike/data/items/components/w5j_material.json": "7876d68c96b2c7634f815faee4db610b58da422d3ed2a207f9c81112f422baee",
+      "roguelike/data/items/consumables/w5j_drink.json": "4ea1ad19eeb862f89f671fae15d1248fafea3b3a5f48d07fe8c199effdcbeff8",
+      "roguelike/data/items/consumables/w5j_food_a.json": "02943f108ae1ba2488e0858bf89916240f438f5a8969d94ef17c865354d6951e",
+      "roguelike/data/items/consumables/w5j_food_b.json": "e7038dabcdda637262e840600406f83f6f6b0cd3fc36f90ecb5fe65a8f37c752",
+      "roguelike/data/items/consumables/w5j_treatment.json": "3113c03d71550d598770bf87175b94ae47e7ad54f71e10ebfa99a84986f0e4cc"
+    },
+    "save_root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5j\\native-1793211242077\\compatibility\\saves\\slot_0",
+    "inventory": [
+      {
+        "item_id": "tallow_torch",
+        "item_state_version": 1,
+        "name": "Tallow Torch",
+        "tile": "tallow_torch",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 600,
+        "turns_lit": 18,
+        "light_data": {
+          "radius": 8,
+          "color": [
+            255,
+            180,
+            60
+          ],
+          "falloff": 1.8,
+          "flicker": true
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      {
+        "item_id": "w5j_material",
+        "item_state_version": 1,
+        "name": "W5J cordwood",
+        "tile": "generic_item",
+        "weight": 0.25,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Authored fuel with an explicit material choice.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "fuel",
+            "tier": 2
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      {
+        "item_id": "w5j_food_a",
+        "item_state_version": 1,
+        "name": "W5J herb ration",
+        "tile": "generic_item",
+        "weight": 0.05,
+        "stackable": true,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.35,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5J herb ration restores you.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Fraction-dose field meal.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      {
+        "item_id": "w5j_food_a",
+        "item_state_version": 1,
+        "name": "W5J herb ration",
+        "tile": "generic_item",
+        "weight": 0.05,
+        "stackable": true,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.35,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5J herb ration restores you.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Fraction-dose field meal.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      {
+        "item_id": "w5j_food_b",
+        "item_state_version": 1,
+        "name": "W5J roast ration",
+        "tile": "generic_item",
+        "weight": 0.1,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 180,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5J roast ration restores you.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Independent points-dose meal.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      {
+        "item_id": "w5j_drink",
+        "item_state_version": 1,
+        "name": "W5J trail drink",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "drink",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": 0.25,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": "W5J trail drink restores you.",
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": "water",
+        "liquid_volume": 0.5,
+        "qualities": {},
+        "description": "A quarter-need drink with a saved return.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "drinkable",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      {
+        "item_id": "w5j_drink",
+        "item_state_version": 1,
+        "name": "W5J trail drink",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "drink",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": 0.25,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": "W5J trail drink restores you.",
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": "water",
+        "liquid_volume": 0.5,
+        "qualities": {},
+        "description": "A quarter-need drink with a saved return.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "drinkable",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      {
+        "item_id": "w5j_treatment",
+        "item_state_version": 1,
+        "name": "W5J field dressing",
+        "tile": "generic_item",
+        "weight": 0.05,
+        "stackable": false,
+        "count": 1,
+        "on_use": "heal_minor",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": 7,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Seven HP of ordinary treatment.",
+        "harvest_from": null,
+        "keywords": [],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      {
+        "item_id": "w5j_treatment",
+        "item_state_version": 1,
+        "name": "W5J field dressing",
+        "tile": "generic_item",
+        "weight": 0.05,
+        "stackable": false,
+        "count": 1,
+        "on_use": "heal_minor",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": 7,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Seven HP of ordinary treatment.",
+        "harvest_from": null,
+        "keywords": [],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    ],
+    "material": {
+      "owned": true,
+      "fuel_tier": 2,
+      "automatic": false,
+      "explicit": true
+    },
+    "scene": {
+      "terrain": "59a67459362bcdcec414ccfae5c67831b5c4054f4575bfc8f5a9b41e0e7aba87",
+      "floor": []
+    },
+    "scope": "Controlled compatibility room entrance; ordinary walk/pickup; production material predicates; ordinary SaveManager.save. UI-authored definitions unchanged."
+  },
+  "compatibility_after": {
+    "passed": true,
+    "pid": 33908,
+    "source_hashes": {
+      "roguelike/data/items/components/w5j_material.json": "a5a033c43aa2309d1319b75f87119de765ab58eadb2517d1a5a12863f56435ab",
+      "roguelike/data/items/consumables/w5j_drink.json": "2dda947bf367e33ee269b7069a103a1eb5fa4de4f4b827e7d5e0b1ea80fb65b0",
+      "roguelike/data/items/consumables/w5j_food_a.json": "74a6d23f9e4117670b1110e3bbad00f6451f52e3ac8e978e7a38192f63f06080",
+      "roguelike/data/items/consumables/w5j_food_b.json": "e7038dabcdda637262e840600406f83f6f6b0cd3fc36f90ecb5fe65a8f37c752",
+      "roguelike/data/items/consumables/w5j_treatment.json": "3113c03d71550d598770bf87175b94ae47e7ad54f71e10ebfa99a84986f0e4cc"
+    },
+    "save_root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5j\\native-1793211242077\\compatibility\\saves\\slot_0",
+    "stored_inventory_exact": true,
+    "removed_objects_stay_removed": true,
+    "old_drink": {
+      "item_id": "w5j_drink",
+      "item_state_version": 1,
+      "name": "W5J trail drink",
+      "tile": "generic_item",
+      "weight": 0.3,
+      "stackable": false,
+      "count": 1,
+      "on_use": "drink",
+      "text_id": "",
+      "nutrition": null,
+      "hydration": 0.25,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": "W5J trail drink restores you.",
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": "water",
+      "liquid_volume": 0.5,
+      "qualities": {},
+      "description": "A quarter-need drink with a saved return.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "drinkable",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    "new_drink": {
+      "item_id": "w5j_drink",
+      "item_state_version": 1,
+      "name": "W5J trail drink",
+      "tile": "generic_item",
+      "weight": 0.3,
+      "stackable": false,
+      "count": 1,
+      "on_use": "drink",
+      "text_id": "",
+      "nutrition": null,
+      "hydration": 0.5,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": "W5J revised drink message.",
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": "water",
+      "liquid_volume": 0.5,
+      "qualities": {},
+      "description": "A quarter-need drink with a saved return.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "drinkable",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    "return_item": {
+      "item_id": "w5j_material",
+      "item_state_version": 1,
+      "name": "W5J revised cordwood",
+      "tile": "generic_item",
+      "weight": 0.4,
+      "stackable": false,
+      "count": 1,
+      "on_use": null,
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "Authored fuel with an explicit material choice.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "fuel",
+          "tier": 2
+        },
+        {
+          "tag": "fibrous",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": false,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    "old_material": {
+      "item_id": "w5j_material",
+      "item_state_version": 1,
+      "name": "W5J cordwood",
+      "tile": "generic_item",
+      "weight": 0.25,
+      "stackable": false,
+      "count": 1,
+      "on_use": null,
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "Authored fuel with an explicit material choice.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "fuel",
+          "tier": 2
+        },
+        {
+          "tag": "fibrous",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": false,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0
+    },
+    "sibling_retained": true,
+    "before_thirst": 0.8,
+    "after_thirst": 0.5513750000000001,
+    "turn_delta": 1,
+    "action_calls": 1,
+    "scope": "Fresh process/catalogue; SaveManager.load; exact persisted copied values/ownership; old hydration/message, current empty_form and current newly constructed return."
+  },
+  "save_audit": {
+    "before_events": 52,
+    "after_events": 33,
+    "explicit_disposable_ownership": true
+  },
+  "checks": [
+    "invalid supply and independent shared draft survive native restart without review authority",
+    "typed controls create material, two independent foods, drink and treatment; review/apply/exact reopen",
+    "real external modification conflict preserves competing bytes and unrelated dirty document",
+    "saved IDs placed with ordinary room placement controls and exact room publication",
+    "latest saved capture; ordinary walking/pickup acquires exact authored floor instances",
+    "ordinary inventory input uses two foods, exchanged drink and treatment; selected identities and action counts",
+    "same-ID supply revisions through typed controls; reset retains earlier capture; latest constructs revisions"
+  ],
+  "screenshots": {
+    "workbench-drink.png": {
+      "path": "workbench/docs/evidence/w5j/workbench-drink.png",
+      "sha256": "9ff1324632490715c9ca3afe37a4a4024b54e3cee83d4deff11b4b92858778fc"
+    },
+    "workbench-room.png": {
+      "path": "workbench/docs/evidence/w5j/workbench-room.png",
+      "sha256": "1b8194248cbad9ce19cf7d0685dfc29e9595b4485fd7b8d80fa41049d8ee08c6"
+    },
+    "game-return-visible.png": {
+      "path": "workbench/docs/evidence/w5j/game-return-visible.png",
+      "sha256": "d22c66d7782efe83e504a7a463c36702ab3674be0ce6ace6240b986c54ebb8fe"
+    },
+    "game-treatment.png": {
+      "path": "workbench/docs/evidence/w5j/game-treatment.png",
+      "sha256": "683bdffa51f9e75493af6d52544b26b70ebce9b8ac0e570a9e3fef9f64aa325a"
+    },
+    "game-revised.png": {
+      "path": "workbench/docs/evidence/w5j/game-revised.png",
+      "sha256": "0b8e842c5e839a4782c71eb89eb4f0da04d5c731e12eeb7bc4d87221bfbf3585"
+    }
+  },
+  "scope": "Packaged Windows controls; ordinary app-local pygame input; separate-process ordinary saved-instance compatibility. Controlled initial needs/injury and staged room entrance, no balance/pacing claim."
+}

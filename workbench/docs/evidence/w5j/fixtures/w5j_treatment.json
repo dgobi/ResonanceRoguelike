@@ -1,0 +1,11 @@
+{
+  "id": "w5j_treatment",
+  "name": "W5J field dressing",
+  "description": "Seven HP of ordinary treatment.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": false,
+  "on_use": "heal_minor",
+  "heal_amount": 7
+}

@@ -1,0 +1,16 @@
+{
+  "id": "w5j_food_b",
+  "name": "W5J roast ration",
+  "description": "Independent points-dose meal.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": false,
+  "on_use": "eat",
+  "nutrition": 180,
+  "eat_message": "W5J roast ration restores you.",
+  "keywords": [
+    {"tag": "edible", "tier": 2},
+    {"tag": "vital", "tier": 1}
+  ]
+}

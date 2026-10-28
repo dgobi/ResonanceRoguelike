@@ -1,0 +1,26 @@
+{
+  "id": "w5j_supplies_room",
+  "width": 13,
+  "height": 9,
+  "layers": [
+    "#############",
+    "#...........#",
+    "#...........#",
+    "#...........#",
+    "#...........#",
+    "#...........#",
+    "#.<.........#",
+    "#...........#",
+    "#############"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 6
+  },
+  "special_tiles": [{"type":"item","x":2,"y":3,"item_id":"w5j_material"},{"type":"item","x":3,"y":3,"item_id":"w5j_food_a"},{"type":"item","x":4,"y":3,"item_id":"w5j_food_a"},{"type":"item","x":5,"y":3,"item_id":"w5j_food_b"},{"type":"item","x":6,"y":3,"item_id":"w5j_drink"},{"type":"item","x":7,"y":3,"item_id":"w5j_drink"},{"type":"item","x":8,"y":3,"item_id":"w5j_treatment"},{"type":"item","x":9,"y":3,"item_id":"w5j_treatment"}]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "w5j_food_a",
+  "name": "W5J herb ration",
+  "description": "Fraction-dose field meal.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 0.35,
+  "eat_message": "W5J herb ration restores you.",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "bitter",
+      "tier": 1
+    }
+  ]
+}

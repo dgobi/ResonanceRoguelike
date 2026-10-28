@@ -1,0 +1,18 @@
+{
+  "id": "w5j_material",
+  "name": "W5J cordwood",
+  "category": "component",
+  "description": "Authored fuel with an explicit material choice.",
+  "weight": 0.25,
+  "keywords": [
+    {
+      "tag": "fuel",
+      "tier": 2
+    },
+    {
+      "tag": "fibrous",
+      "tier": 1
+    }
+  ]
+,"tile":"generic_item","consumed_on_use":false, "w5j_metadata":{"nested":[null,true,["retained",9]]}
+}
