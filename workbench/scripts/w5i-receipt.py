@@ -23,6 +23,7 @@ for name,command,pattern in [
  ('production-verified.log','configured development Python: session/persistence/combat/scene/G17/access/destinations (PYTHONPATH game, tests, tools)',r'Ran 60 tests[\s\S]*OK'),
  ('worker-stable.log','pinned runtime: python -I -B -m unittest discover -s worker -v',r'Ran 70 tests[\s\S]*OK'),
  ('assignment-worker-verified.log','pinned runtime: unittest test_assignment.py',r'Ran 3 tests[\s\S]*OK'),
+ ('missing-dependency.log','standard development Python: test_dependency_absence_structured',r'Ran 1 test[\s\S]*OK'),
  ('package-verified.log','npm.cmd run bundle -- -- --locked',r'Finished 1 bundle'),
  ('native-final-evidence.log','node scripts/run-assignments.mjs',r'"passed":true'),
  ('workspace.log','node scripts/run-workspace.mjs',r'"passed": true'),
@@ -47,7 +48,7 @@ assert runtime_rows==packaged_rows
 assert digest(release/'bridge.py')==digest(ROOT/'workbench/worker/bridge.py')
 evidence=ROOT/'workbench/docs/evidence/w5i';evidence.mkdir(parents=True,exist_ok=True)
 import shutil
-for name in ('natural-exterior.png','natural-room.png','natural-reader.png','assignment-sample.png'):
+for name in ('natural-exterior.png','natural-room.png','natural-reader.png','natural-return.png','assignment-sample.png'):
     shutil.copy2(native_path.parent/name,evidence/name)
 preview=native['preview'];sample={k:preview[k] for k in ('profile_path','profile_sha256','contract','descriptor_sha256','runtime','source','seed','width','height','plan_mode','generation_revision','target_type','authored_chance','matching_count','authored_count','procedural_count','truncated')}
 result=dict(milestone='W5I',passed=True,observed_utc=datetime.now(timezone.utc).isoformat(),
@@ -74,10 +75,10 @@ result=dict(milestone='W5I',passed=True,observed_utc=datetime.now(timezone.utc).
  'Packaging overlapped a test launch, causing an NSIS file-sharing failure; final package completes before all final native observations.',
  'Initial freshness harness reused a cancelled/stale preview and omitted confirmed on conflict IPC; final evidence obtains a fresh preview before the dependency edit and requires semantic refusal from confirmed apply.',
  'Initial natural staging was within the exterior shell; final staging excludes the complete production protected entrance footprint.',
- 'Worker run during numeric source correction had one source-ownership failure; final stable full worker suite runs after production code is frozen.'],
+ 'Worker run interleaved a numeric source correction and had one missing-result test error; final stable full worker suite runs after production code is frozen.'],
  limits=['Local Windows observations and headless/app-local production rendering; no independent rerun is claimed.',
  'Natural entry stages the normal player outside the real entrance to avoid a world walk. It proves local access/use/return, not unaided discovery, pacing, balance or whole-game fun.',
  'One fixed profile and one ordinary type at a time. No whole-world play launcher, batch generation, unsaved overlays, campaign migration or new population layer.',
- 'Detailed disposable manifests/saves/logs remain ignored locally; four concise rendered evidence frames are committed. Wiki/reference pack and owner plan are unchanged.'])
+ 'Detailed disposable manifests/saves/logs remain ignored locally; five concise rendered evidence frames are committed. Wiki/reference pack and owner plan are unchanged.'])
 out=ROOT/'workbench/docs/w5i-verification.json';out.write_text(json.dumps(result,indent=2,ensure_ascii=True)+'\n',encoding='utf-8')
 print(json.dumps(dict(passed=True,receipt=str(out),native=str(native_path),sample={k:sample[k] for k in ('seed','matching_count','authored_count','procedural_count')},runtime_files=len(runtime_rows))))
