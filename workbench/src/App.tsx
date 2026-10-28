@@ -2,6 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { Authoring } from "./Authoring";
+import {RoomTestPanel} from './RoomTestPanel';
 import {RecoveryPanel,type RecoveryRow} from "./RecoveryPanel";
 import type {RecoveryControl,RecoveredDraft} from "./recovery";
 import {reconcileRead} from "./reopen";
@@ -888,6 +889,7 @@ export default function App() {
           </div>
         </section>
         <aside className="inspector">
+          <RoomTestPanel document={activeContent ? contentDocuments[activeContent]?.document : undefined} dirty={!!(activeContent&&contentDocuments[activeContent]?.dirty)} dependencyVersion={dependencyVersion}/>
           <div className="eyebrow">04 / INSPECTOR</div>
           {!inspection?.document_token && !poolActive && !activeContent && (
             <div className="tabs">

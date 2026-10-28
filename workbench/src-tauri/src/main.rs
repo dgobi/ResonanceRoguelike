@@ -16,6 +16,7 @@ use tauri::{Emitter, Manager};
 mod authoring;
 mod startup;
 mod recovery;
+mod room_test;
 
 const PROTOCOL: u64 = 8;
 const MAX_OUTPUT: u64 = 16 * 1024 * 1024;
@@ -69,6 +70,7 @@ struct Host {
     epoch: Arc<AtomicU64>,
     ids: Arc<AtomicU64>,
     recovery: Arc<Mutex<Option<recovery::Store>>>,
+    games: room_test::Games,
 }
 impl Host {
     fn cancel(&self, clear: bool) -> Result<u64, Failure> {
@@ -543,6 +545,7 @@ async fn open_project(
     // Retain open drafts until the new project has passed its handshake and
     // preferences were saved. Cancellation or refusal restores the old root.
     authoring::flush_registered(&app,&host)?;
+    host.games.stop(true)?;
     let epoch = host.cancel(false)?;
     let (selection, config) = startup::resolve_project(&app, path.as_deref().map(Path::new))?;
     let operation = {
@@ -616,6 +619,7 @@ fn cancel_worker(host: tauri::State<'_, Host>) -> Result<(), Failure> {
 #[tauri::command]
 fn close_project(app:tauri::AppHandle,host: tauri::State<'_, Host>) -> Result<(), Failure> {
     authoring::flush_registered(&app,&host)?;
+    host.games.stop(true)?;
     host.cancel(true).map(|_| ())
 }
 
@@ -628,6 +632,7 @@ fn main() {
             worker_request,
             cancel_worker,
             close_project,
+            room_test::room_test_action,
             authoring::open_document,
             authoring::validate_document,
             authoring::invalidate_document,
@@ -660,6 +665,7 @@ fn main() {
                 event,
                 tauri::WindowEvent::CloseRequested { .. } | tauri::WindowEvent::Destroyed
             ) {
+                let _=window.state::<Host>().games.stop(true);
                 if let Err(error) = window.state::<Host>().cancel(true) {
                     eprintln!("{}: {}", error.code, error.message);
                 }

@@ -237,12 +237,12 @@ class ChunkCache:
 
 class SaveManager:
     """Whole-slot generations with bounded recovery and isolated working caches."""
-    def __init__(self, slot: int = 0) -> None:
+    def __init__(self, slot: int = 0, *, save_root: Path | None = None) -> None:
         from engine.checkpoints import CheckpointStore
         if type(slot) is not int or not 0 <= slot <= 999:
             raise SaveFormatError('Slot must be an integer from 0 to 999')
         self.slot = slot
-        self.save_path = Path(SAVE_DIR).absolute() / f'slot_{slot}'
+        self.save_path = Path(SAVE_DIR if save_root is None else save_root).absolute() / f'slot_{slot}'
         self.store = CheckpointStore(self.save_path)
         self.cache = ChunkCache(self.save_path)
         self.generation = None

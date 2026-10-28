@@ -393,7 +393,7 @@ export function Authoring({
     canUndo:!!history.current.undoStack.length,canRedo:!!history.current.redoStack.length,onError:e=>setLocalError(String(e)),focus,
     onLinked:contentNavigation?.onOpen,onPool:(id,index,record)=>onPool?.(id,{id:String(values.id||document.id),path:target,index,x:record.x,y:record.y,sourcePath:document.path,sourceHash:document.sha256,decor:record.decor_id||"crate",poolId:id})};
   return (
-    <section className="authoring" data-testid="authoring" data-edit-pending={pendingEdit}>
+    <section className="authoring" data-testid="authoring" data-document-token={document.document_token} data-edit-pending={pendingEdit}>
       {content && <p className="notice" data-testid="recovery-status">
         {recoveryStatus?.state==="pending" ? "Recovery pending · checkpoints within 500 ms of accepted edits" : recoveryStatus?.state==="error" ? `Unable to save recovery: ${recoveryStatus.message}` : recoveryStatus?.state==="saved" ? `Recovery checkpoint saved · generation ${recoveryStatus.generation}` : "Recovery available for accepted registered document edits"}
         {recoveryStatus?.state==="error" && <button onClick={()=>void flushRecovery().catch(e=>onError(asFailure(e)))}>Retry recovery save</button>}

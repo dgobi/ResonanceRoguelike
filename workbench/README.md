@@ -246,6 +246,47 @@ See the [current room/structure guide](../roguelike/docs/STRUCTURE_AUTHORING.md)
 publication/revision and real interaction/cold SaveManager ownership in disposable
 roots. It never opens personal campaigns or controls the owner's desktop.
 
+## Test a saved room in the actual game (W5H)
+
+After publishing and byte-checked reopen of an eligible ordinary room directly in
+`roguelike/data/layouts/`, select **Test room** in the inspector. The template must
+first become an ordinary saved variant. Protected, ambiguous and unsupported
+sources cannot launch. Save/reopen or reconcile an unsaved/conflicting target;
+other parked drafts remain open and are excluded from the capture.
+
+The host captures saved game code/data, typography, glyph/font/UI resources,
+sprite map/sheets and the packaged pinned runtime. It validates those exact bytes
+and checks final saved-input freshness. The status discloses room/hash, capture
+time, seed, player profile, snapshot/runtime manifests and session identity. A
+running game retains its captured inputs while editing, validation and publication
+remain available. Publication/focus checks disclose newer saved inputs.
+
+- **Stop** cancels preparation or stops and reaps this instance's owned game.
+- **Reset current test** starts fresh state with the same captured bytes, seed
+  and normal player profile, even when later live room edits remain unsaved.
+- **Test latest saved version** deliberately captures current saved inputs and
+  starts fresh. Capture/validation failure retains the previous captured test.
+
+The ordinary player has a lit/equipped tallow torch and the normal six starter
+items. Controls, reader, containers, AI, needs, combat, FOV and F5/F9 use the actual
+game loop. A small physical foyer and one explicitly assigned room bound travel;
+this is separate from natural-world selection and encounter-balance evidence.
+Quit/death ends the test; use Reset to start again. F5/F9 and caches belong solely
+to the explicit disposable session. See [room-test runtime ownership](../roguelike/docs/ROOM_TEST_RUNTIME.md).
+
+One game runs per Workbench instance, independently of the request worker.
+Closing/replacing the project retires the test while preserving existing draft
+close/recovery rules. Windows Job Objects kill owned children on abrupt host exit.
+Normal cleanup removes owned payload/state; a later capture also removes up to
+four abandoned payloads owned by dead processes of this exact installation.
+Live and foreign installation sessions remain untouched. Test capture restoration
+after application restart is not supported.
+
+`node scripts/run-room-tests.mjs` runs the packaged author/play/revise journey
+with app-local game events and disposable inputs. The opt-in host diagnostic
+environment flag is `RESONANCE_WORKBENCH_ROOM_TEST_AUTOMATION=1`; ordinary launches
+do not expose its keyboard/frame files. No desktop control is used.
+
 ## Inspect and author creatures
 
 1. Choose **Creatures**, then open a source. The thirteen creature sources include

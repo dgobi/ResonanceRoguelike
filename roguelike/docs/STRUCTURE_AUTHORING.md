@@ -1,5 +1,21 @@
 # Make a building or layout for Resonance
 
+## W5H: play the saved room while revising it
+
+After saving/reopening an eligible ordinary room, Workbench **Test room** captures
+saved dependencies and actual renderer resources into a disposable game session.
+Play with ordinary controls, F5/F9, lighting, reader, containers and AI. Ascend to
+the small foyer and return through physical stairs. **Reset current test** keeps
+captured inputs/seed/profile and restores fresh gameplay even if live edits are
+unsaved. **Test latest saved version** captures the deliberately saved revision.
+A running test retains its old bytes after publication. Other parked drafts stay
+independent and are excluded. See [runtime and save ownership](ROOM_TEST_RUNTIME.md).
+
+Geometry forms rebase when their authoritative source fields change, including
+Source and Undo/Redo. Unrelated painting and mounted document switching preserve
+partially entered proposals. Removed/unsupported resize-fill entries are replaced
+by a valid saved legend choice; applying one action remains one history entry.
+
 ## W5G: build, recover and revise a supported underground room
 
 Workbench family `room`, contract `authored-room-1`, uses the production

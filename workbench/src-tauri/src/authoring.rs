@@ -113,6 +113,28 @@ pub struct Handoff {
     path: String,
     sha256: String,
     replacement: Option<String>,
+    acknowledged: bool,
+}
+
+/// Launch admission uses accepted host intent and the saved baseline, never
+/// renderer cleanliness or an authoring review token.
+pub fn room_test_source(host:&Host, token:&str) -> Result<(PathBuf,String,Vec<u8>),Failure> {
+    let mut state=host.inner.lock().unwrap();
+    if state.applying || state.closing || state.pending_project.is_some() || !state.ready {return Err(busy_failure());}
+    let root=state.root.clone().ok_or_else(unknown_document)?;
+    if state.handoffs.values().any(|h| !h.acknowledged && (h.source==token || h.replacement.as_deref()==Some(token))) {
+        return Err(failure("ROOM_HANDOFF","Publication reopen is unresolved.","Complete verified reopen before testing the saved room."));
+    }
+    let doc=current_document(&mut state,token).ok_or_else(unknown_document)?;
+    if !is_layout(&doc.relative) || doc.family.as_ref().is_none_or(|f|f.id!="room" || f.route!="authored_submap" || f.contract!="authored-room-1" || !f.operations.iter().any(|op|op=="edit")) || !doc.writable {
+        return Err(failure("ROOM_INELIGIBLE","Only an eligible saved ordinary room can run.","Save the template as an ordinary room variant; select its reopened document."));
+    }
+    if doc.accepted.as_ref().is_some_and(|r|r.draft.as_bytes()!=doc.original || r.variant || r.published.is_some()) {
+        return Err(failure("ROOM_DIRTY","The target room has an unsaved draft or unresolved publication.","Save and reopen, or deliberately discard/reconcile this room draft. Other parked drafts may stay open."));
+    }
+    let bytes=read_source(&checked_target(&root,&doc.relative,false)?)?;
+    if bytes!=doc.original {return Err(conflict());}
+    Ok((root,doc.relative.clone(),bytes))
 }
 fn handoff_owner(state: &mut Session, id: &str, asset: &str, expected: Option<&str>) -> Result<(String, bool), Failure> {
     let h = state.handoffs.get(id).cloned().ok_or_else(unknown_document)?;
@@ -486,6 +508,7 @@ pub fn acknowledge_reopen(app:tauri::AppHandle,host:tauri::State<'_,Host>,handof
         recovery::with_store(&app,&host,|store|store.retire(&r.key(),r.generation))?;
         doc.accepted=None;
     }
+    state.handoffs.get_mut(&handoff_id).unwrap().acknowledged=true;
     Ok(())
 }
 fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
@@ -1199,7 +1222,7 @@ pub async fn apply_document(
             if doc.family.is_some() {
                 let id=uuid::Uuid::new_v4().to_string();
                 state.handoffs.insert(id.clone(),Handoff {source:doc.token.clone(),revision:doc.revision,
-                    path:review.destination.clone(),sha256:hash(review.draft.as_bytes()),replacement:None});
+                      path:review.destination.clone(),sha256:hash(review.draft.as_bytes()),replacement:None,acknowledged:false});
                 receipt["handoff_id"]=json!(id);
                 if let Some(current)=current_document(&mut state,&doc.token) {
                     if let Some(record)=&mut current.accepted {
@@ -1282,6 +1305,7 @@ pub fn document_disk(host: tauri::State<'_, Host>, token: String) -> Result<Valu
 #[tauri::command]
 pub fn finish_close(window: tauri::Window, host: tauri::State<'_, Host>) -> Result<(), Failure> {
     flush_registered(window.app_handle(),&host)?;
+    host.games.stop(true)?;
     host.cancel(true)?;
     window.destroy().map_err(io_error)
 }
@@ -1547,7 +1571,7 @@ mod tests {
     fn completed_handoff_rejects_newer_drafts_and_reacquires_only_its_successor() {
         let (_root,host,docs)=workspace_fixture();
         let first=&docs[0]; let mut state=host.inner.lock().unwrap();
-        let h=Handoff {source:first.token.clone(),revision:first.revision,path:first.relative.clone(),sha256:hash(&first.original),replacement:None};
+        let h=Handoff {source:first.token.clone(),revision:first.revision,path:first.relative.clone(),sha256:hash(&first.original),replacement:None,acknowledged:false};
         state.handoffs.insert("fact".into(),h.clone());
         assert_eq!(handoff_owner(&mut state,"fact",&h.path,Some(&h.sha256)).unwrap(),(first.token.clone(),false));
         current_document(&mut state,&first.token).unwrap().revision+=1;
@@ -1752,6 +1776,26 @@ mod tests {
         { let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().into()); state.ready = true;
           if submap { state.document = Some(doc.clone()); } else { state.content_documents.insert(file_key(&doc.relative), doc.clone()); } }
         (root, host, doc, review)
+    }
+    #[test]
+    fn room_launch_admission_binds_saved_host_intent_and_completed_handoff(){
+        let (root,host,mut doc,_)=lifecycle_fixture(false);
+        doc.relative="roguelike/data/layouts/sample.json".into();
+        let path=root.path().join(&doc.relative);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(&path,&doc.original).unwrap();
+        let mut result=family_result(&doc,"room",json!(["edit","variant"]));result["family"]["contract"]=json!("authored-room-1");
+        doc.family=FamilyPolicy::from_result(&result,&doc.relative);
+        {let mut state=host.inner.lock().unwrap();state.content_documents.clear();state.content_documents.insert(file_key(&doc.relative),doc.clone());}
+        assert!(room_test_source(&host,&doc.token).is_ok());
+        accept_edit(&host,&doc.token,1,"{unfinished".into(),false,String::new()).unwrap();
+        assert_eq!(room_test_source(&host,&doc.token).unwrap_err().code,"ROOM_DIRTY");
+        accept_edit(&host,&doc.token,2,String::from_utf8(doc.original.clone()).unwrap(),false,String::new()).unwrap();assert!(room_test_source(&host,&doc.token).is_ok());
+        fs::write(&path,b"external").unwrap();assert_eq!(room_test_source(&host,&doc.token).unwrap_err().code,"EXTERNAL_MODIFICATION_CONFLICT");fs::write(&path,&doc.original).unwrap();
+        {let mut state=host.inner.lock().unwrap();state.handoffs.insert("handoff".into(),Handoff{source:"old-owner".into(),revision:0,path:doc.relative.clone(),sha256:hash(&doc.original),replacement:Some(doc.token.clone()),acknowledged:false});}
+        assert_eq!(room_test_source(&host,&doc.token).unwrap_err().code,"ROOM_HANDOFF");
+        host.inner.lock().unwrap().handoffs.get_mut("handoff").unwrap().acknowledged=true;assert!(room_test_source(&host,&doc.token).is_ok());
+        {let mut state=host.inner.lock().unwrap();current_document(&mut state,&doc.token).unwrap().relative=G17_EXAMPLE.into();}
+        assert_eq!(room_test_source(&host,&doc.token).unwrap_err().code,"ROOM_INELIGIBLE");
+        assert!(room_test_source(&host,"forged-token").is_err());
     }
     #[test]
     fn w4d_live_admission_rejects_edit_replacement_and_project_switch() {

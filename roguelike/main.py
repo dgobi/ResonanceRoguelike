@@ -76,34 +76,9 @@ def main() -> None:
         publish_metadata(chunk, result.metadata)
         chunk.generation_revision = surface_map.generation_revision
 
-    player = Actor(x=start_x, y=start_y, tile="player", name="Player")
-    body_def = data.bodies.get("body_player", {})
-    base_hp  = body_def.get("base_hp", 60)
-    player.fighter         = Fighter(max_hp=base_hp, power=5, defense=1)
-    player.fighter.body_id = "body_player"
-    player.needs      = Needs()
-    player.corruption = Corruption()
-    player.inventory  = Inventory(capacity=20.0)
-    player.language   = Language()
-    player.perks      = Perks()
-    player.equipment  = Equipment()
-    player.level      = LevelComponent()
-    player.true_sight   = False
-    player.dodge_chance = 0.05   # 5% base dodge — read by combat system
-
-    # Starting inventory
-    torch        = item_factory.create("tallow_torch")
-    jerky        = item_factory.create("crow_jerky")
-    flask        = item_factory.create("water_flask")
-    crude_blade  = item_factory.create("crude_blade")
-    leather_jack = item_factory.create("leather_jack")
-    pebble       = item_factory.create("moist_pebble")   # talisman — for testability
-    if torch:        player.inventory.add(torch)
-    if jerky:        player.inventory.add(jerky)
-    if flask:        player.inventory.add(flask)
-    if crude_blade:  player.inventory.add(crude_blade)
-    if leather_jack: player.inventory.add(leather_jack)
-    if pebble:       player.inventory.add(pebble)
+    from engine.player_setup import create_player
+    player = create_player(data, item_factory, start_x, start_y)
+    torch = next((i for i in player.inventory.items if i.item_id == "tallow_torch"), None)
 
     engine = Engine(
         player=player,

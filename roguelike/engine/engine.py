@@ -242,6 +242,11 @@ class Engine:
         world_y:   int,
         data:      "DataLoader",
         display:   DisplayConfig,
+        *,
+        save_manager: SaveManager | None = None,
+        debug_mode: bool | None = None,
+        session_label: str = "Roguelike",
+        bounded_room_test: bool = False,
     ) -> None:
         self.player    = player
         self.local_map = local_map
@@ -259,7 +264,9 @@ class Engine:
         self.overmap_cam_y    = world_y
         self.overmap_cursor_x = world_x
         self.overmap_cursor_y = world_y
-        self.debug            = DebugOverlay() if DEBUG_MODE else None
+        self.debug            = DebugOverlay() if (DEBUG_MODE if debug_mode is None else debug_mode) else None
+        self.session_label = session_label
+        self.bounded_room_test = bounded_room_test
         self.ai_system        = AISystem()
         self.creature_factory = CreatureFactory(data)
         self._held_key:        int | None = None
@@ -268,7 +275,7 @@ class Engine:
         self.world_time       = WorldTime()
         self.look_mode          = LookMode()
         self.interaction_cursor = InteractionCursor()
-        self.save_manager     = SaveManager(slot=0)
+        self.save_manager     = SaveManager(slot=0) if save_manager is None else save_manager
         self.item_factory     = ItemFactory(data)
         self.item_system      = ItemSystem()
         self.inventory_screen = InventoryScreen()
@@ -560,14 +567,14 @@ class Engine:
     #  Main loop
     # ------------------------------------------------------------------ #
 
-    def run(self) -> None:
+    def run(self, *, on_frame=None) -> None:
         pygame.init()
 
         screen = pygame.display.set_mode(
             (1280, 720),
             pygame.RESIZABLE,
         )
-        pygame.display.set_caption("Roguelike")
+        pygame.display.set_caption(self.session_label)
 
         self.display.init()
 
@@ -690,6 +697,8 @@ class Engine:
             if self._player_is_dead:
                 self._render_death_screen(screen)
                 pygame.display.flip()
+                if on_frame is not None:
+                    on_frame(self, screen)
                 clock.tick(60)
                 continue
 
@@ -1269,6 +1278,8 @@ class Engine:
                     self._discharge_flash = (r, g, b, a)
 
             pygame.display.flip()
+            if on_frame is not None:
+                on_frame(self, screen)
             clock.tick(60)
 
     # ------------------------------------------------------------------ #
@@ -1910,7 +1921,7 @@ class Engine:
             self.overmap_cam_x = self.overmap_cursor_x
             self.overmap_cam_y = self.overmap_cursor_y
         elif key in (pygame.K_RETURN, pygame.K_KP_ENTER):
-            if DEBUG_MODE:
+            if self.debug:
                 self._teleport_to_overmap_cursor()
             else:
                 self.log.add(
@@ -2078,6 +2089,9 @@ class Engine:
     # ------------------------------------------------------------------ #
 
     def _transition_chunk(self, dx: int, dy: int) -> None:
+        if self.bounded_room_test:
+            self.log.add("Disposable room test: travel is limited to the room and its foyer.", STONE_BLUE)
+            return
         # Clear screen-space particles — their absolute pixel coords become
         # invalid when the camera shifts to a new chunk.
         self.particle_system.particles.clear()

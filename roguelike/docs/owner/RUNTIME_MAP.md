@@ -4,6 +4,14 @@ Purpose: follow one player action from a definition into state, time and present
 
 ## Where execution starts
 
+Workbench's bounded [room-test entry](../ROOM_TEST_RUNTIME.md), `room_test.py`,
+validates frozen saved inputs and injects an explicit SaveManager before any
+startup/cache probing. It shares normal player construction through
+`engine/player_setup.py`, builds a physical foyer and assigned room instance,
+enters through production descent and runs the actual Engine loop. F5/F9, quit
+and death remain within that disposable session. This path performs no campaign
+generation and does not change ordinary standalone save defaults.
+
 [`roguelike/main.py`](../../main.py) `main()` constructs `DisplayConfig`, `DataLoader`, `TileRegistry`, the 128×128 `WorldMap`, a generated surface map, the player components and six starter items. It constructs `Engine`, lights the torch, then either calls `SaveManager.load` or `_start_in_lab`. Loading happens **after** starter construction and Engine setup. That ordering matters: incomplete replacement inherits starter state.
 
 `_start_in_lab` uses `generation/local_gen.py::generate_submap`, materializes layout specs with `Engine._spawn_layout_entities`, stores the surface in the surface cache, then selects the lab map, entity list and player position. `engine/starting_location.py::generate_starting_lab` is a retained alternate helper, not this bootstrap's path.
