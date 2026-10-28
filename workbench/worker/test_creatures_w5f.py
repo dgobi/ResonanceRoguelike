@@ -47,6 +47,13 @@ class CreatureCommonTests(unittest.TestCase):
         self.assertEqual(record["factory"]["special_binding"], "barrow_wight")
         self.assertFalse(record["factory"]["ability_executed"])
         self.assertTrue(all(d["severity"] == "info" for d in opened["diagnostics"]))
+        validated = invoke("preview_draft", asset=WIGHT, source_asset=WIGHT, draft=opened["raw"])["result"]
+        self.assertEqual(validated["diagnostics"], opened["diagnostics"])
+        from bridge import unique_diagnostics
+        diagnostic = opened["diagnostics"][0]
+        changed_field = dict(diagnostic, field="another_field")
+        changed_severity = dict(diagnostic, severity="warning")
+        self.assertEqual(unique_diagnostics([diagnostic, diagnostic, changed_field, changed_severity]), [diagnostic, changed_field, changed_severity])
         self.assertTrue(any(r["route"] == "zone_creatures" and r["path"].endswith("/barrow.json") for r in record["references"]))
         self.assertEqual(len(ca.source_matches("BARROW", self.indexes["zones"])), 1)
         with tempfile.TemporaryDirectory(prefix="w5f-reference-") as folder:

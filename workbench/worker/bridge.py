@@ -477,6 +477,16 @@ def capability_diagnostics(envelope, path):
                  message=message, correction="Use a compatible game-owned descriptor; inspect exact Source.") for message in envelope["problems"]]
 
 
+def unique_diagnostics(diagnostics):
+    """Remove only exact shared-path duplicates, including all location metadata."""
+    seen = set(); result = []
+    for diagnostic in diagnostics:
+        key = json.dumps(diagnostic, sort_keys=True, ensure_ascii=False)
+        if key not in seen:
+            seen.add(key); result.append(diagnostic)
+    return result
+
+
 def family_validation(family, request, root, scratch, identity):
     from engine.data_loader import DataLoader
     from engine.content_authoring import family_for
@@ -528,6 +538,7 @@ def family_validation(family, request, root, scratch, identity):
         if isinstance(error.__cause__, json.JSONDecodeError):
             for d in diagnostics: d.update(line=error.__cause__.lineno, column=error.__cause__.colno)
     for d in diagnostics: d["path"] = d["path"].replace(str(copied), "roguelike/data").replace("\\", "/")
+    diagnostics = unique_diagnostics(diagnostics)
     after = source_identity(root)
     if any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
         fail("SOURCE_CHANGED", "Dependencies changed during validation.", "Reopen and validate again.")

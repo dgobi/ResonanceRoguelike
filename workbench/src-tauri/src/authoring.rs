@@ -321,7 +321,7 @@ fn accept_edit(host:&Host, token:&str, sequence:u64, draft:String, variant:bool,
     let root=state.root.clone().ok_or_else(unknown_document)?;
     let doc=current_document(&mut state,token).ok_or_else(unknown_document)?;
     let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Only eligible registered documents have durable drafts."))?;
-    if variant && !family.operations.iter().any(|op|op=="variant") || doc.relative==TYPOGRAPHY && !variant_id.is_empty(){
+    if !draft_intent_allowed(family,variant) || doc.relative==TYPOGRAPHY && !variant_id.is_empty(){
         return Err(recovery::error("This family is edit-only; recovery cannot retain a variant target."));
     }
     if sequence<=doc.edit_sequence || sequence>9_007_199_254_740_990{return Err(recovery::error("Obsolete or invalid edit acknowledgement refused."));}
@@ -434,12 +434,18 @@ fn check_restore(root:&Path,doc:&Document,record:&recovery::Record)->Result<(),F
     if doc.revision!=0 || doc.accepted.is_some(){return Err(recovery::error("An open draft already owns this file. Focus it and resolve that draft explicitly."));}
     let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Current source/contract is not editable. Recovery remains inspectable and copyable."))?;
     if recovery::project_key(root)!=recovery::project_key(&record.project) || file_key(&doc.relative)!=file_key(&record.source)
-        || family.id!=record.family || !family.operations.iter().any(|op|op==if record.variant {"variant"} else {"edit"})
+        || family.id!=record.family || !draft_intent_allowed(family,record.variant)
         || hash(&doc.original)!=record.source_sha256
         || read_source(&checked_target(root,&doc.relative,false)?)?!=doc.original {
         return Err(recovery::error("Source or project changed. Keep and compare both versions; no baseline was adopted."));
     }
     Ok(())
+}
+// Accepted unfinished intent is not a publication request. In particular a
+// variant-only source has useful exact drafts before a target is chosen.
+// Explicit variant intent still requires that operation on the original source.
+fn draft_intent_allowed(family:&FamilyPolicy,variant:bool)->bool {
+    !family.operations.is_empty() && (!variant || family.operations.iter().any(|op|op=="variant"))
 }
 #[tauri::command]
 pub fn reconcile_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,token:String,key:String,generation:u64)->Result<(),Failure>{
@@ -1282,6 +1288,52 @@ pub fn finish_close(window: tauri::Window, host: tauri::State<'_, Host>) -> Resu
 #[cfg(test)]
 mod tests {
     use super::*;
+    fn actual_family_result(op:&str,asset:&str,draft:Option<&str>,source:Option<&str>)->Value {
+        use std::io::Write;
+        let workbench=Path::new(env!("CARGO_MANIFEST_DIR")).parent().unwrap();
+        let root=workbench.parent().unwrap();
+        let python=workbench.join("worker/runtime/python.exe");
+        let mut command=std::process::Command::new(python);
+        command.args(["-I","-B"]).arg(workbench.join("worker/bridge.py")).arg("--root").arg(root)
+            .stdin(std::process::Stdio::piped()).stdout(std::process::Stdio::piped()).stderr(std::process::Stdio::piped());
+        #[cfg(windows)] {use std::os::windows::process::CommandExt;command.creation_flags(0x08000000);}
+        let mut child=command.spawn().unwrap();
+        let request=json!({"protocol":8,"id":"w5g-real-policy","op":op,"asset":asset,"draft":draft,"source_asset":source,"seed":20261027});
+        child.stdin.take().unwrap().write_all(request.to_string().as_bytes()).unwrap();
+        let output=child.wait_with_output().unwrap();
+        let response:Value=serde_json::from_slice(&output.stdout).expect("actual worker JSON");
+        assert_eq!(response["ok"],true,"{response} {}",String::from_utf8_lossy(&output.stderr));
+        response["result"].clone()
+    }
+    #[test]
+    fn w5g_real_variant_only_text_and_recipe_restore_unfinished_intent() {
+        for (id,source) in [("text","roguelike/data/texts/lab/lab_note_primary_b.json"),("recipe","roguelike/data/recipes/bile_coating.json")] {
+            let result=actual_family_result("inspect",source,None,None);
+            let (root,mut doc,_)=fixture();doc.relative=source.into();doc.original=result["raw"].as_str().unwrap().as_bytes().to_vec();
+            doc.id=result["id"].as_str().map(str::to_owned);doc.review=None;
+            doc.family=FamilyPolicy::from_result(&result,source);
+            assert_eq!(doc.family.as_ref().unwrap().id,id);
+            assert_eq!(doc.family.as_ref().unwrap().operations,["variant"]);
+            let path=root.path().join(source);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(path,&doc.original).unwrap();
+            let host=Host::default();{let mut state=host.inner.lock().unwrap();state.root=Some(root.path().into());state.ready=true;state.content_documents.insert(file_key(source),doc.clone());}
+            for (sequence,text) in [(1,String::from_utf8(doc.original.clone()).unwrap()+"\r\n"),(2,"\u{feff}{\r\n \"unfinished\": [\"λ\",".into())] {
+                accept_edit(&host,&doc.token,sequence,text.clone(),false,"".into()).unwrap();
+                let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();
+                assert!(!record.variant);assert_eq!(record.target,source);assert_eq!(record.variant_id,"");
+                let storage=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(storage.path().into()).unwrap();store.write(&record).unwrap();store.release_all();
+                let mut restarted=recovery::Store::new(storage.path().into()).unwrap();let mut fresh=doc.clone();fresh.token="cold-owner".into();
+                restore_claimed(&mut restarted,root.path(),&mut fresh,&record.key(),record.generation).unwrap();
+                assert_eq!(fresh.accepted.as_ref().unwrap().draft,text);assert!(!fresh.accepted.as_ref().unwrap().variant);assert!(fresh.review.is_none());
+                assert!(!family_evidence(&fresh,&result,false)); // restoration grants no same-ID publication
+                let mut competitor=recovery::Store::new(storage.path().into()).unwrap();assert!(competitor.acquired(&record.key(),record.generation,|_,_|Ok(())).is_err());
+            }
+            let mut candidate:Value=serde_json::from_slice(&doc.original).unwrap();candidate["id"]=json!("w5g_repaired_variant");let draft=candidate.to_string();
+            accept_edit(&host,&doc.token,3,draft.clone(),true,"w5g_repaired_variant".into()).unwrap();
+            let (target,variant)=destination(&doc,&draft,Some("w5g_repaired_variant")).unwrap();assert!(variant);
+            let validated=actual_family_result("preview_draft",&target,Some(&draft),Some(source));
+            assert_eq!(validated["valid"],true,"{validated}");assert!(family_evidence(&doc,&validated,true));assert!(!family_evidence(&doc,&validated,false));
+        }
+    }
     #[test]
     fn creature_original_operations_bind_review_recovery_and_publication() {
         let (root,host,old,mut review)=lifecycle_fixture(false);
