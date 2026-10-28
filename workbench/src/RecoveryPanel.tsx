@@ -25,7 +25,7 @@ export function RecoveryPanel({open,onClose,onRestore,onError,refreshVersion}:{o
   if(!open)return null;
   return <div className="modal-shade"><section className="confirmation recovery-panel" role="dialog" aria-label="Recover drafts">
     <h2>Recover drafts</h2>
-    <p>Creature, item, recipe, found-text and game typography drafts. Stored copies remain readable when the project or worker is unavailable. Recovery requires fresh validation before publication.</p>
+    <p>Room, creature, item, recipe, found-text and game typography drafts. Stored copies remain readable when the project or worker is unavailable. Recovery requires fresh validation before publication.</p>
     <button onClick={()=>void refresh()} disabled={busy}>Refresh recovery list</button>
     {!rows.length && <p>No durable drafts in this recovery store.</p>}
     <div className="recovery-list">{rows.map(row=><button key={row.key} data-recovery-key={row.key} aria-current={selected?.key===row.key ? "true":undefined} onClick={()=>void select(row)} disabled={busy}>
@@ -33,7 +33,7 @@ export function RecoveryPanel({open,onClose,onRestore,onError,refreshVersion}:{o
     </button>)}</div>
     {notices.map(n=><p className="notice warning" key={n}>{n}</p>)}
     {detail && selected && <div data-testid="recovery-detail">
-      <p>{detail.status}. Historical contract: {detail.record.contract}. Variant: {detail.record.variant ? detail.record.variant_id : "existing source"}.</p>
+      <p>{detail.status}. Historical contract: {detail.record.contract}. Intent: {detail.record.variant ? `new variant ${detail.record.variant_id}` : "source draft; no new variant chosen"}.</p>
       <label>Recovered exact draft<textarea aria-label="Recovered exact draft" className="source-editor" readOnly value={detail.record.draft}/></label>
       <div className="edit-actions"><button onClick={()=>void navigator.clipboard.writeText(detail.record.draft).catch(e=>onError(asFailure(e)))}>Copy recovered draft</button>
       <button disabled={busy} onClick={()=>void act(selected,()=>onRestore(selected))}>Recover selected draft</button>

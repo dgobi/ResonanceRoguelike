@@ -593,7 +593,7 @@ export function Authoring({
             />
           </label>}
           <p className="muted small">
-            {submap ? "Creature-only mode uses the same source draft, history and validation. Terrain, decor, arrival, other specials and unknown metadata stay read-only. Validation uses the real generated arrival; no separate access sidecar is required." : content ? view?.hint
+            {submap ? "Room terrain, arrival and direct contents share this exact source draft, history and recovery. Validation observes actual arrival, population and static access; no access sidecar is written." : content ? view?.hint
               : pool ? "Description is retained metadata. Edit item IDs, weights and roll bounds in the table. Unknown fields remain in Source."
               : <>Description is retained metadata. Weight is a supported nonnegative
             scalar; current planned selection uses separate profiles. Geometry,

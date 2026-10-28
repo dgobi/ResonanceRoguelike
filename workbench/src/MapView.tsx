@@ -105,6 +105,7 @@ export function MapView({
       world.addChild(selection);
       let camera: Camera = fitCamera(host.clientWidth, host.clientHeight);
       function apply() {
+        if(disposed || !app.renderer || world.destroyed || !host.clientWidth || !host.clientHeight)return;
         world.position.set(camera.x, camera.y);
         world.scale.set(camera.scale);
         setZoom(Math.round(camera.scale * 100));
@@ -112,6 +113,7 @@ export function MapView({
         app.render();
       }
       function fit() {
+        if(disposed || !app.renderer || !host.clientWidth || !host.clientHeight)return;
         camera = fitCamera(host.clientWidth, host.clientHeight);
         apply();
       }
@@ -134,6 +136,7 @@ export function MapView({
         return [e.clientX - r.left, e.clientY - r.top];
       }
       function inspect(px: number, py: number) {
+        if(disposed || selection.destroyed || !app.renderer)return;
         const cell = screenToCell(px, py, camera);
         callbacks.current.onCell(cell);
         selection.clear();
@@ -144,6 +147,7 @@ export function MapView({
         app.render();
       }
       const down = (e: PointerEvent) => {
+        if(disposed || !app.renderer)return;
         if (e.button !== 0) return;
         dragging = true;
         last = point(e);
@@ -195,6 +199,7 @@ export function MapView({
       app.canvas.addEventListener("wheel", wheel, { passive: false });
       app.canvas.addEventListener("keydown", key);
       const resize = new ResizeObserver(() => {
+        if(disposed || !app.renderer || !host.clientWidth || !host.clientHeight)return;
         app.renderer.resize(host.clientWidth, host.clientHeight);
         fit();
       });
@@ -213,9 +218,7 @@ export function MapView({
         app.canvas.removeEventListener("keydown", key);
       };
     }
-    init().catch((e) => {
-      if (!disposed) callbacks.current.onError(e);
-    });
+    init().catch((e) => {if (!disposed) callbacks.current.onError(e);});
     return () => {
       disposed = true;
       cleanup();

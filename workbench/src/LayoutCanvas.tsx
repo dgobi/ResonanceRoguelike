@@ -94,6 +94,7 @@ export function LayoutCanvas(props: Props) {
         latest.current.model.height,
       );
       const apply = () => {
+        if(disposed || !app.renderer || world.destroyed || !host.clientWidth || !host.clientHeight)return;
         world.position.set(camera.x, camera.y);
         world.scale.set(camera.scale);
         host.dataset.camera = JSON.stringify(camera);
@@ -101,6 +102,7 @@ export function LayoutCanvas(props: Props) {
         app.render();
       };
       const mark = () => {
+        if(disposed || selection.destroyed)return;
         selection.clear();
         const h = latest.current.hovered;
         if (h) selection.rect(h[0]*TILE,h[1]*TILE,TILE,TILE).stroke({width:1/camera.scale,color:0x8bd5ef});
@@ -111,6 +113,7 @@ export function LayoutCanvas(props: Props) {
             .stroke({ width: 2 / camera.scale, color: 0xffe2a1 });
       };
       const draw = () => {
+        if(disposed || !app.renderer || world.destroyed)return;
         const p = latest.current,
           m = p.model;
         host.dataset.shape = JSON.stringify([m.width, m.height]);
@@ -198,6 +201,7 @@ export function LayoutCanvas(props: Props) {
         apply();
       };
       const fit = () => {
+        if(disposed || !app.renderer || !host.clientWidth || !host.clientHeight)return;
         camera = fitCamera(
           host.clientWidth,
           host.clientHeight,
@@ -249,6 +253,7 @@ export function LayoutCanvas(props: Props) {
         first = lastCell = null;
       };
       const down = (e: PointerEvent) => {
+        if(disposed)return;
         if (e.button !== 0 && e.button !== 1) return;
         app.canvas.focus();
         app.canvas.setPointerCapture(e.pointerId);
@@ -272,6 +277,7 @@ export function LayoutCanvas(props: Props) {
         }
       };
       const move = (e: PointerEvent) => {
+        if(disposed)return;
         const pt = point(e),
           p = latest.current;
         if (panning) {
@@ -300,6 +306,7 @@ export function LayoutCanvas(props: Props) {
         }
       };
       const up = (e: PointerEvent) => {
+        if(disposed)return;
         const c = cell(point(e));
         if (
           active &&
@@ -312,6 +319,7 @@ export function LayoutCanvas(props: Props) {
         end();
       };
       const wheel = (e: WheelEvent) => {
+        if(disposed)return;
         e.preventDefault();
         end();
         const pt = point(e);
@@ -319,6 +327,7 @@ export function LayoutCanvas(props: Props) {
         apply();
       };
       const key = (e: KeyboardEvent) => {
+        if(disposed)return;
         if (
           (e.ctrlKey || e.metaKey) &&
           ["z", "y"].includes(e.key.toLowerCase())
@@ -348,6 +357,7 @@ export function LayoutCanvas(props: Props) {
       app.canvas.addEventListener("wheel", wheel, { passive: false });
       app.canvas.addEventListener("keydown", key);
       const observer = new ResizeObserver(() => {
+        if(disposed || !app.renderer || !host.clientWidth || !host.clientHeight)return;
         app.renderer.resize(
           host.clientWidth,
           host.clientHeight,
@@ -362,9 +372,17 @@ export function LayoutCanvas(props: Props) {
       cleanup = () => {
         observer.disconnect();
         controls.current = null;
+        app.canvas.removeEventListener("pointerdown",down);
+        app.canvas.removeEventListener("pointermove",move);
+        app.canvas.removeEventListener("pointerup",up);
+        app.canvas.removeEventListener("pointercancel",end);
+        app.canvas.removeEventListener("lostpointercapture",end);
+        app.canvas.removeEventListener("blur",end);
+        app.canvas.removeEventListener("wheel",wheel);
+        app.canvas.removeEventListener("keydown",key);
       };
     }
-    void init().catch((e) => latest.current.onError(e));
+    void init().catch((e) => {if(!disposed)latest.current.onError(e);});
     return () => {
       disposed = true;
       cleanup();

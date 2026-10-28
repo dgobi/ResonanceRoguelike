@@ -690,7 +690,7 @@ export default function App() {
             <span className="eyebrow">THIS WORKSPACE</span>
             <p>Draft → validate → review → apply</p>
             <small>
-              Multiple creature, item, recipe, text and typography drafts share tabs and recovery alongside structure and pool drafts. Campaigns are never opened.
+              Multiple room, creature, item, recipe, text and typography drafts share tabs and recovery alongside structure and pool drafts. Campaigns are never opened.
             </small>
           </section>
         </aside>
