@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import {editItem, resizeRoom, valueEdit, type Catalog, type Layout, type Special} from "./layout";
 
 type Edit=(operation:(source:string)=>string,label:string)=>void;
@@ -7,6 +7,14 @@ export function RoomGeometry({model:m,draft,catalog,disabled,onEdit}:{model:Layo
  const [glyph,setGlyph]=useState(""),[terrain,setTerrain]=useState("__null__");
  const [x,setX]=useState(String(m.player_start?.x??0)),[y,setY]=useState(String(m.player_start?.y??0));
  const [direction,setDirection]=useState(m.exit_direction??"south"),[exitX,setExitX]=useState(String(m.exit_x??m.width-2)),[exitY,setExitY]=useState(String(m.exit_y??m.height-2));
+ // Rebase each proposal only when its authoritative fields change. Draft bytes
+ // also change during painting; using them as a key would lose pending input.
+ useEffect(()=>{setWidth(String(m.width));setHeight(String(m.height));},[m.width,m.height]);
+ useEffect(()=>{setX(String(m.player_start?.x??0));setY(String(m.player_start?.y??0));},[m.player_start?.x,m.player_start?.y]);
+ const effectiveExitX=m.exit_x??m.width-2,effectiveExitY=m.exit_y??m.height-2;
+ useEffect(()=>{setDirection(m.exit_direction??"south");setExitX(String(effectiveExitX));setExitY(String(effectiveExitY));},[m.exit_direction,m.exit_x,m.exit_y,effectiveExitX,effectiveExitY]);
+ const fills=Object.keys(m.legend).filter(g=>m.legend[g]===null||!!catalog.terrain[m.legend[g]!]);
+ const activeFill=fills.includes(fill)?fill:fills[0]??"";
  const raw=JSON.parse(draft.replace(/^\uFEFF/,""));
  const coordinate=(a:string,b:string)=>a!==""&&b!==""&&[Number(a),Number(b)].every(Number.isInteger)&&Number(a)>=0&&Number(b)>=0&&Number(a)<m.width&&Number(b)<m.height;
  return <details className="room-geometry" open><summary>Room geometry, arrival and return</summary>
@@ -19,9 +27,9 @@ export function RoomGeometry({model:m,draft,catalog,disabled,onEdit}:{model:Layo
   <fieldset disabled={disabled}><legend>Deliberate rectangular resize · current {m.width} × {m.height}</legend>
    <label>Width<input aria-label="Room width" type="number" min="1" max="80" value={width} onChange={e=>setWidth(e.target.value)}/></label>
    <label>Height<input aria-label="Room height" type="number" min="1" max="43" value={height} onChange={e=>setHeight(e.target.value)}/></label>
-   <label>Fill glyph<select aria-label="Resize fill glyph" value={fill} onChange={e=>setFill(e.target.value)}>{Object.keys(m.legend).map(g=><option key={g} value={g}>{JSON.stringify(g)} → {m.legend[g]??"initial wall"}</option>)}</select></label>
+   <label>Fill glyph<select aria-label="Resize fill glyph" value={activeFill} onChange={e=>setFill(e.target.value)}>{fills.map(g=><option key={g} value={g}>{JSON.stringify(g)} → {m.legend[g]??"initial wall"}</option>)}</select></label>
    <p>Top-left source anchor: retain coordinates and significant spaces; extend right/bottom with the selected glyph, or deliberately crop terrain at right/bottom. Records, arrivals and metadata are never moved or cropped. A resize that strands retained coordinates is refused. Inactive decor layers lock resizing. Centering and position-derived loot can change, including with the same preview seed.</p>
-   <button onClick={()=>onEdit(s=>resizeRoom(s,Number(width),Number(height),fill),"Resize room (top-left anchor)")}>Apply resize (top-left anchor)</button>
+   <button disabled={!activeFill} onClick={()=>onEdit(s=>resizeRoom(s,Number(width),Number(height),activeFill),"Resize room (top-left anchor)")}>Apply resize (top-left anchor)</button>
   </fieldset>
   <fieldset disabled={disabled}><legend>Authored player_start · source coordinates</legend>
    <label>X<input aria-label="Arrival X" type="number" value={x} onChange={e=>setX(e.target.value)}/></label><label>Y<input aria-label="Arrival Y" type="number" value={y} onChange={e=>setY(e.target.value)}/></label>
