@@ -13,7 +13,7 @@ const profile="roguelike/data/display/typography.json",other="roguelike/data/tex
 let baseline=(await readFile(resolve(root,profile),"utf8")).replace(/\r?\n/g,"\r\n").replace('  "version": 1,','  "metadata": {"exact":[1e2, null, "λ"]},\r\n  "version": 1,');
 await writeFile(resolve(root,profile),baseline);
 await writeFile(resolve(settings,"project.json"),JSON.stringify({version:1,project_root:root}));
-const executable=resolve("src-tauri/target/release/resonance-workbench.exe"),hash=b=>createHash("sha256").update(b).digest("hex");
+const executable=resolve("src-tauri/target/release/resonance-workbench.exe"),packagedPython=resolve("src-tauri/target/release/python/python.exe"),hash=b=>createHash("sha256").update(b).digest("hex");
 const receipt={started_utc:new Date().toISOString(),package_sha256:hash(await readFile(executable)),root,settings,storage,checks:[],processes:[],drafts:[],errors:[]};
 let child,browser,page,launches=0;
 const b=name=>page.getByRole("button",{name,exact:true}),editor=()=>page.locator('[data-testid="authoring"]:visible'),eb=name=>editor().getByRole("button",{name,exact:true});
@@ -40,19 +40,19 @@ async function stop(abrupt=false){
 async function keepClose(){await b("Close project").click();await b("Keep for Recovery and Close").click();await page.getByRole("dialog",{name:"Unsaved draft"}).waitFor({state:"hidden"});await idle();}
 async function recover(row){await b("Recover drafts").click();await page.locator(`[data-recovery-key="${row.key}"]`).click();await page.getByTestId("recovery-detail").waitFor();await b("Recover selected draft").click();await page.getByRole("dialog",{name:"Recover drafts"}).waitFor({state:"hidden"});await idle();}
 async function validate(){for(let i=0;i<4;i++){await idle();await eb("Validate draft").click();await idle();if(await editor().getByTestId("draft-receipt").count())return JSON.parse(await editor().getByTestId("draft-receipt").textContent());assert.match(await page.locator("footer").innerText(),/BUSY/);}throw Error("Validation remained busy");}
-function runtime(){const p=spawnSync(python,["-X","utf8","-B",resolve("scripts/typography-runtime-probe.py"),root],{windowsHide:true,encoding:"utf8",timeout:30000});assert.equal(p.status,0,p.stderr);return JSON.parse(p.stdout.trim().split(/\r?\n/).at(-1));}
+function runtime(){const p=spawnSync(packagedPython,["-X","utf8","-B",resolve("scripts/typography-runtime-probe.py"),root],{windowsHide:true,encoding:"utf8",timeout:30000});assert.equal(p.status,0,p.stderr);return JSON.parse(p.stdout.trim().split(/\r?\n/).at(-1));}
 try{
   await launch();await open(profile);let doc=(await ipc("open_document",{asset:profile})).result;const oldToken=doc.document_token;
   await eb("Begin edit").click();assert.equal(await eb("Save as new variant").count(),0);
   await page.getByLabel("Headings",{exact:true}).selectOption("IMFellEnglish-Regular.ttf");await editIdle();
   await page.getByLabel("Ordinary prose",{exact:true}).selectOption("IMFellEnglish-Italic.ttf");await editIdle();
   await page.getByLabel("Damage callout",{exact:true}).selectOption("FoulisGreek.ttf");await editIdle();
-  await eb("Undo typography").click();await editIdle();assert.equal(await page.getByLabel("Damage callout",{exact:true}).inputValue(),"Junicode-Bold.ttf");
-  await eb("Redo typography").click();await editIdle();await checkpoint();
+  await b("Undo typography").click();await editIdle();assert.equal(await page.getByLabel("Damage callout",{exact:true}).inputValue(),"Junicode-Bold.ttf");
+  await b("Redo typography").click();await editIdle();await checkpoint();
   let row=(await list()).find(r=>r.source===profile),record=await inspect(row.key),accepted=record.draft;
   assert(accepted.includes('"metadata": {"exact":[1e2, null, "λ"]}'));
   let reverted=accepted.replace('"font_ui_large": "IMFellEnglish-Regular.ttf"','"font_ui_large": "Junicode.ttf"').replace('"font_ui_normal": "IMFellEnglish-Italic.ttf"','"font_ui_normal": "Junicode.ttf"').replace('"font_callout_damage": "FoulisGreek.ttf"','"font_callout_damage": "Junicode-Bold.ttf"');assert.equal(reverted,baseline);
-  await eb("Game preview").click();await eb("Preview game typography").click();await idle();
+  await b("Game preview").click();await b("Preview game typography").click();await idle();
   await page.getByTestId("typography-preview-state").getByText("Current production typography preview").waitFor();
   receipt.preview=JSON.parse(await page.getByTestId("typography-preview-receipt").textContent());assert.equal(receipt.preview.draft_sha256,hash(accepted));
   await page.screenshot({path:resolve(output,"candidate-preview.png")});

@@ -1320,6 +1320,20 @@ mod tests {
         accept_edit(&host,&doc.token,2,"newer exact draft".into(),true,"variant".into()).unwrap();
         let newer=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();store.write(&newer).unwrap();assert_eq!(store.read(&record.key()).unwrap(),newer);assert_eq!(newer.published,record.published);
     }
+    #[test]
+    fn reconcile_claimed_rechecks_inspected_generation_and_accepts_exact_unrecorded_write(){
+        let (root,host,doc,mut review)=lifecycle_fixture(false);review.draft="{\"id\":\"variant\",\"description\":\"exact saved bytes\"}".into();
+        accept_edit(&host,&doc.token,1,review.draft.clone(),true,"variant".into()).unwrap();let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();let key=record.key();
+        publish(root.path(),&doc,&review,Fault::None).unwrap();let target=root.path().join(&review.destination);let before=fs::metadata(&target).unwrap().modified().unwrap();
+        let dir=tempfile::tempdir().unwrap();let mut a=recovery::Store::new(dir.path().into()).unwrap();let mut b=recovery::Store::new(dir.path().into()).unwrap();a.write(&record).unwrap();a.release(&key);
+        let mut state=host.inner.lock().unwrap();state.content_documents.clear();let mut saved=doc.clone();saved.token="saved".into();saved.relative=review.destination.clone();saved.original=review.draft.as_bytes().to_vec();state.content_documents.insert(file_key(&saved.relative),saved);
+        let mut advanced=record.clone();advanced.generation+=1;b.write(&advanced).unwrap();b.release(&key);
+        assert!(reconcile_claimed(&mut a,&mut state,"saved",&key,record.generation).is_err());b.claim(&key).unwrap();b.release(&key);
+        assert_eq!(a.read(&key).unwrap(),advanced);assert!(advanced.published.is_none());
+        reconcile_claimed(&mut a,&mut state,"saved",&key,advanced.generation).unwrap();assert!(a.read(&key).is_err());
+        assert_eq!(fs::read(&target).unwrap(),review.draft.as_bytes());assert_eq!(fs::metadata(&target).unwrap().modified().unwrap(),before);
+        assert!(reconcile_claimed(&mut b,&mut state,"saved",&key,advanced.generation).is_err());assert!(b.read(&key).is_err());
+    }
     fn workspace_fixture() -> (tempfile::TempDir, Host, Vec<Document>) {
         let (root, host, first, _) = lifecycle_fixture(false);
         let mut documents = vec![first.clone()];
