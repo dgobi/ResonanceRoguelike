@@ -1,5 +1,6 @@
 # engine/engine.py
 from __future__ import annotations
+from engine.effect_lifecycle import creature_id
 import enum
 import json
 import pygame
@@ -2145,7 +2146,7 @@ class Engine:
             _eai_tp = getattr(_ep, "ai", None)
             if _eai_tp is None or _eai_tp.state not in _pursuing_tp:
                 continue
-            _can_cross_tp = self.data.entities.get(_ep.tile, {}).get("can_cross_chunks", False)
+            _can_cross_tp = self.data.entities.get(creature_id(_ep), {}).get("can_cross_chunks", False)
             if not _can_cross_tp:
                 continue
             # Allow re-extraction even with arrival cooldown — prevents losing
@@ -2512,7 +2513,7 @@ class Engine:
                 continue
             if not getattr(_e, "is_alive", True):
                 continue
-            _cdef = self.data.entities.get(_e.tile, {})
+            _cdef = self.data.entities.get(creature_id(_e), {})
             if not _cdef.get("can_cross_chunks", False):
                 continue
             _dist = max(abs(_e.x - _stair_x), abs(_e.y - _stair_y))
@@ -2532,7 +2533,7 @@ class Engine:
                 continue
             if not getattr(_lpe_sd, "is_alive", True):
                 continue
-            _lpcd_sd = self.data.entities.get(_lpe_sd.tile, {})
+            _lpcd_sd = self.data.entities.get(creature_id(_lpe_sd), {})
             if not _lpcd_sd.get("can_cross_chunks", False):
                 continue
             _lpt_sd = getattr(_lpeai_sd, "pursuit_turns_without_contact", 0)
@@ -2643,7 +2644,7 @@ class Engine:
                 continue
             if not getattr(_e, "is_alive", True):
                 continue
-            _cdef2 = self.data.entities.get(_e.tile, {})
+            _cdef2 = self.data.entities.get(creature_id(_e), {})
             if not _cdef2.get("can_cross_chunks", False):
                 continue
             _dist2 = max(abs(_e.x - _stair_x2), abs(_e.y - _stair_y2))
@@ -2664,7 +2665,7 @@ class Engine:
                 continue
             if not getattr(_lpe_su, "is_alive", True):
                 continue
-            _lpcd_su = self.data.entities.get(_lpe_su.tile, {})
+            _lpcd_su = self.data.entities.get(creature_id(_lpe_su), {})
             if not _lpcd_su.get("can_cross_chunks", False):
                 continue
             _lpt_su = getattr(_lpeai_su, "pursuit_turns_without_contact", 0)
@@ -2799,7 +2800,7 @@ class Engine:
             _lky = getattr(_e, "_last_known_py", None)
             if _lkx is None:
                 continue
-            _cdef = self.data.entities.get(_e.tile, {})
+            _cdef = self.data.entities.get(creature_id(_e), {})
             if not _cdef.get("can_cross_chunks", False):
                 # Non-mobile: clamp inside bounds
                 _e.x = max(0, min(MAP_WIDTH  - 1, _e.x))
@@ -2866,7 +2867,7 @@ class Engine:
             if _new_wx == self.world_x and _new_wy == self.world_y:
                 # Arriving in player's current chunk — defer arrival
                 _entry_x, _entry_y = self._last_chunk_entry
-                _cdef_cc = self.data.entities.get(_te.tile, {})
+                _cdef_cc = self.data.entities.get(creature_id(_te), {})
                 _delay_cc = _cdef_cc.get("chunk_cross_delay", 6)
                 _already_pending_cc = any(
                     id(p["entity"]) == id(_te)
@@ -3056,7 +3057,7 @@ class Engine:
 
             # Timeout accounting (replaces _update_state() incrementing the counter).
             _eai.pursuit_turns_without_contact += 1
-            _lp_cdef = self.data.entities.get(_entity.tile, {})
+            _lp_cdef = self.data.entities.get(creature_id(_entity), {})
             _lp_timeout = _lp_cdef.get("pursuit_timeout", 20)
             if _eai.pursuit_turns_without_contact >= _lp_timeout:
                 _eai.state = _AIState_lp.WANDERING  # triggers timeout/return-to-cache next tick
@@ -3178,7 +3179,7 @@ class Engine:
         # Defer promoted pursuers — they arrive after a delay, not immediately.
         _arrive_x, _arrive_y = self._last_chunk_entry
         for _pe in _to_promote:
-            _cdef_pe = self.data.entities.get(_pe.tile, {})
+            _cdef_pe = self.data.entities.get(creature_id(_pe), {})
             _delay = _cdef_pe.get("chunk_cross_delay", 6)
             # Skip if already pending
             _already_pending = any(

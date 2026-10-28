@@ -122,7 +122,7 @@ perk menu and callout consumers with the published map. An invalid present profi
 then produces complete-default fallback without rewriting its bytes.
 
 The 42 reader fixtures span all seven faces, 960×640/480×320 and title lengths
-20/512/2048. They check reachable complete rows, clipping, scrolling, surface
+20/512/2048. They accumulate `_visible_rows` across scroll steps and check clipping, scrolling, surface
 heights and footer separation. Bounded HUD/message-log, perk-list and all callout
 role/alias fixtures exercise actual consumers. These are isolated production
 rendering fixtures, not a full campaign or every-screen layout certification.

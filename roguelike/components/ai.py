@@ -1,5 +1,6 @@
 # components/ai.py
 from __future__ import annotations
+from engine.effect_lifecycle import creature_id
 import random
 import enum
 from typing import TYPE_CHECKING
@@ -139,7 +140,7 @@ class AI:
                 if engine is not None:
                     _cdef = getattr(engine, "data", None)
                     if _cdef is not None:
-                        _timeout = _cdef.entities.get(actor.tile, {}).get(
+                        _timeout = _cdef.entities.get(creature_id(actor), {}).get(
                             "pursuit_timeout", 20
                         )
                 if self.pursuit_turns_without_contact >= _timeout:
@@ -162,7 +163,7 @@ class AI:
                     if _lm2 is not None:
                         try:
                             _stile = str(_lm2.tiles["terrain"][actor.x, actor.y])
-                            _cdef2 = engine.data.entities.get(actor.tile, {})
+                            _cdef2 = engine.data.entities.get(creature_id(actor), {})
                             if _stile in ("stairs_down", "stairs_up") and _cdef2.get("can_use_stairs", False):
                                 actor._pending_stair_use = _stile
                                 _used_stair = True
@@ -175,7 +176,7 @@ class AI:
                     )
                     _can_cross_bdry = False
                     if engine is not None and _at_boundary:
-                        _cdb = engine.data.entities.get(actor.tile, {})
+                        _cdb = engine.data.entities.get(creature_id(actor), {})
                         _can_cross_bdry = _cdb.get("can_cross_chunks", False)
                     if not _can_cross_bdry:
                         # Reached last known position — trail lost
@@ -194,7 +195,7 @@ class AI:
                 if _lk_near_edge:
                     _can_cross_edge = False
                     if engine is not None:
-                        _cde = engine.data.entities.get(actor.tile, {})
+                        _cde = engine.data.entities.get(creature_id(actor), {})
                         _can_cross_edge = _cde.get("can_cross_chunks", False)
                     if not _can_cross_edge:
                         actor._last_known_px = None
@@ -906,7 +907,7 @@ def _fire_creature_callout(actor, engine, prev_state, new_state) -> None:
     if not getattr(engine.display, "CALLOUT_CREATURE_SOUNDS", True):
         return
 
-    creature_def   = engine.data.entities.get(actor.tile, {})
+    creature_def   = engine.data.entities.get(creature_id(actor), {})
     callout_sounds = creature_def.get("callout_sounds", {})
     if not callout_sounds:
         return

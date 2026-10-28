@@ -1,6 +1,7 @@
 # engine/look_mode.py
 # UI RULES: read docs/UI_RULES.md before modifying this file.
 from __future__ import annotations
+from engine.effect_lifecycle import creature_id
 import pygame
 from typing import TYPE_CHECKING
 from config import UI_PANEL_INSET
@@ -264,7 +265,7 @@ class LookMode:
                 # Get description from data
                 if kind == "creature":
                     creature_def = engine.data.entities.get(
-                        entity.tile, {}
+                        creature_id(entity), {}
                     )
                     entry["description"] = creature_def.get(
                         "description",
@@ -289,7 +290,7 @@ class LookMode:
                 if lkx == x and lky == y:
                     has_ai = getattr(entity, "ai", None) is not None
                     if has_ai:
-                        creature_def = engine.data.entities.get(entity.tile, {})
+                        creature_def = engine.data.entities.get(creature_id(entity), {})
                         things.append({
                             "type":        "creature",
                             "name":        f"{entity.name} (last seen)",
@@ -732,7 +733,7 @@ class LookMode:
                 y += 14
 
                 # Speed comparison — directly after HP
-                creature_def   = engine.data.entities.get(getattr(entity, "tile", ""), {})
+                creature_def   = engine.data.entities.get(creature_id(entity), {})
                 _spd = creature_def.get("speed", 1.0)
                 if _spd < 0.5:
                     _spd_text = "It moves as though mired. You could walk away."
@@ -761,7 +762,7 @@ class LookMode:
 
                 # Revealed knowledge (from revelation_lens or creature_knowledge)
                 _ck = getattr(engine, "creature_knowledge", {}).get(
-                    getattr(entity, "tile", ""), {})
+                    creature_id(entity), {})
                 _show_ck = DEBUG_MODE or _ck
                 if not _show_ck:
                     _perks_ck = getattr(engine.player, "perks", None)
