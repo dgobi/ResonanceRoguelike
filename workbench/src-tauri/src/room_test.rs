@@ -316,6 +316,17 @@ mod tests {
         games.stop(false).unwrap();assert!(games.inner.lock().unwrap().process.is_none());assert_eq!(games.status()["reaped"],true);assert!(sentinel.child.try_wait().unwrap().is_none());
         let old=games.generation.load(Ordering::SeqCst);games.stop(true).unwrap();assert!(games.check(old).is_err());
     }
+    #[test]
+    fn startup_failure_is_not_readiness_and_retains_captured_version(){
+        assert!(Owned::spawn(&mut Command::new("w5h-nonexistent-executable-7f13.exe")).is_err());
+        let temp=tempfile::tempdir().unwrap();let runtime_root=PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../worker/runtime");
+        let runtime=inventory(&runtime_root,true,&||Ok(())).unwrap();copy_verified(&runtime_root,&temp.path().join("runtime"),&runtime,&||Ok(())).unwrap();
+        put(temp.path(),"payload/roguelike/room_test.py",b"raise RuntimeError('W5H controlled startup failure')\n");
+        let identity=json!({"snapshot_id":"failed-start-snapshot","contract":CONTRACT});let capture=Arc::new(Capture{temp,project:PathBuf::new(),source:String::new(),files:Files::new(),runtime,identity});
+        let games=Games::default();games.launch(capture.clone(),0).unwrap();let start=Instant::now();
+        loop{let state=games.status();if state["status"]=="failed"{assert_eq!(state["reaped"],true);assert!(state["readiness"].is_null());assert_eq!(state["captured"]["snapshot_id"],"failed-start-snapshot");assert!(state["diagnostics"].as_str().unwrap().contains("controlled startup failure"));break;}assert!(start.elapsed()<Duration::from_secs(10));std::thread::sleep(Duration::from_millis(25));}
+        games.stop(true).unwrap();
+    }
     #[cfg(windows)]
     #[test]
     fn job_owner_child(){

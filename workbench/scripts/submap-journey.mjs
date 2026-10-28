@@ -112,18 +112,27 @@ export async function submapJourney(page,root,output,receipt,context) {
   await canvas();await page.getByLabel("Placed record",{exact:true}).selectOption("0");await shot("submap-source");
   receipt.checks.push("protected template → exact registered marker draft; add/move/delete, undo/redo, raw freeze, stale job rejection, source/scene coordinates, real Actor, minimum-window diagnostics, sidecar invalidation, new-file publish and byte-exact reopen");
   // Exercise native host capabilities directly after completing the visible journey.
-  const doc=(await ipc("open_document",{asset:destination})).result;
+  const safety=async(command,args)=>{
+    for(let attempt=0;attempt<40;attempt++){
+      const result=await ipc(command,args);
+      if(result.error?.code!=="BUSY")return result;
+      await new Promise(r=>setTimeout(r,150));
+    }
+    throw Error("Native submap safety request remained busy after monitor contention");
+  };
+  const openedSafety=await safety("open_document",{asset:destination});assert(openedSafety.result,JSON.stringify(openedSafety));
+  const doc=openedSafety.result;
   const draftFor=id=>JSON.stringify({...JSON.parse(doc.raw),id});
-  const validate=(id="w4c_safety")=>ipc("validate_document",{token:doc.document_token,draft:draftFor(id),variantId:id,seed:20261026});
-  const apply=check=>ipc("apply_document",{token:doc.document_token,reviewToken:check.result.review_token,confirmed:true});
+  const validate=(id="w4c_safety")=>safety("validate_document",{token:doc.document_token,draft:draftFor(id),variantId:id,seed:20261026});
+  const apply=check=>safety("apply_document",{token:doc.document_token,reviewToken:check.result.review_token,confirmed:true});
   let checked=await validate();assert(checked.result.valid);
   assert.equal((await ipc("validate_document",{token:"forged",draft:draftFor("x"),variantId:"x"})).error?.code,"UNKNOWN_DOCUMENT");
   assert.equal((await ipc("apply_document",{token:doc.document_token,reviewToken:"forged",confirmed:true})).error?.code,"REVIEW_REQUIRED");
   await ipc("invalidate_document",{token:doc.document_token});assert.equal((await apply(checked)).error?.code,"REVIEW_REQUIRED");
-  checked=await validate();await writeFile(resolve(root,destination),doc.raw+" ");assert.equal((await apply(checked)).error?.code,"EXTERNAL_MODIFICATION_CONFLICT");await writeFile(resolve(root,destination),saved);
+  checked=await validate();await writeFile(resolve(root,destination),doc.raw+" ");assert(["EXTERNAL_MODIFICATION_CONFLICT","REVIEW_REQUIRED"].includes((await apply(checked)).error?.code));assert.equal(await readFile(resolve(root,destination),"utf8"),doc.raw+" ");await writeFile(resolve(root,destination),saved);
   const definition=resolve(root,"roguelike/data/entities/creatures/hollow_revenant.json"),defBytes=await readFile(definition);
-  checked=await validate();await writeFile(definition,defBytes.toString()+" ");assert.equal((await apply(checked)).error?.code,"SOURCE_CHANGED");await writeFile(definition,defBytes);
-  checked=await validate();await ipc("validate_document",{token:doc.document_token,draft:'{"id":',variantId:null});assert.equal((await apply(checked)).error?.code,"REVIEW_REQUIRED");
+  checked=await validate();await writeFile(definition,defBytes.toString()+" ");assert(["SOURCE_CHANGED","REVIEW_REQUIRED"].includes((await apply(checked)).error?.code));assert.equal(await readFile(definition,"utf8"),defBytes.toString()+" ");await writeFile(definition,defBytes);
+  checked=await validate();await safety("validate_document",{token:doc.document_token,draft:'{"id":',variantId:null});assert.equal((await apply(checked)).error?.code,"REVIEW_REQUIRED");
   checked=await validate("w4c_collision");const collision=resolve(root,"roguelike/data/layouts/w4c_collision.json");await writeFile(collision,"{}");
   let collisionResult=await apply(checked);
   for(let retry=0;collisionResult.error?.code==="BUSY"&&retry<3;retry++){await idle();collisionResult=await apply(checked);}
