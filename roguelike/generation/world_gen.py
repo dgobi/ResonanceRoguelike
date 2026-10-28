@@ -57,18 +57,20 @@ SUBMAP_TYPES: dict[str, dict[str, int]] = {
 
 def generate_world(world_map: WorldMap, data, rng: random.Random,
                    name_gen=None, *, plan_mode='shared-v1', planning_settings=None, planning_metrics=None) -> WorldMap:
+    from generation.authored_submap_selection import resolve
+    assignment = resolve(data)
     # The candidate is published only after geography, plans and references pass.
     candidate=WorldMap(world_map.width,world_map.height); candidate.seed=world_map.seed
     if plan_mode == 'shared-v1':
         from generation.wilderness import make_policy, SCHEMA
         candidate.surface_schema = SCHEMA
         candidate.surface_policy = make_policy(data.wilderness_profiles, data)
-    _generate_world(candidate,data,random.Random(candidate.seed),name_gen,plan_mode,planning_settings,planning_metrics)
+    _generate_world(candidate,data,random.Random(candidate.seed),name_gen,plan_mode,planning_settings,planning_metrics,assignment)
     world_map.__dict__.update(candidate.__dict__)
     return world_map
 
 
-def _generate_world(world_map, data, rng, name_gen, plan_mode, planning_settings, planning_metrics):
+def _generate_world(world_map, data, rng, name_gen, plan_mode, planning_settings, planning_metrics, assignment):
     """
     Full world generation pipeline.
     Steps run in strict order — each step depends on the previous.
@@ -109,7 +111,7 @@ def _generate_world(world_map, data, rng, name_gen, plan_mode, planning_settings
 
     # Post-processing — zones, submaps, names, myth
     _assign_zones(world_map)
-    _assign_submaps(world_map, rng)
+    _assign_submaps(world_map, rng, assignment)
     if plan_mode=='shared-v1':
         from generation.world_plan import build_plan,publish_plan
         publish_plan(world_map,build_plan(world_map,data,planning_settings,planning_metrics))
@@ -1141,7 +1143,7 @@ def _assign_zones(world_map: WorldMap) -> None:
                                                [("heath", 1.0)]))
 
 
-def _assign_submaps(world_map: WorldMap, rng: random.Random) -> None:
+def _assign_submaps(world_map: WorldMap, rng: random.Random, assignment=None) -> None:
     """Assign random dungeon submaps to eligible chunks."""
     for (wx, wy), chunk in world_map.chunks.items():
         if chunk.submaps:
@@ -1158,7 +1160,9 @@ def _assign_submaps(world_map: WorldMap, rng: random.Random) -> None:
                                     weights=list(types_map.values()), k=1)[0]
         sseed     = sub_rng.randint(0, 999999)
         sname, _  = assign_chunk_name("dungeon", sseed)
-        chunk.add_submap(stype, sname, sseed)
+        submap = chunk.add_submap(stype, sname, sseed)
+        if assignment is not None:
+            submap.layout_id = assignment.choose(world_map.seed, wx, wy, submap)
 
 
 def _assign_names(world_map: WorldMap) -> None:

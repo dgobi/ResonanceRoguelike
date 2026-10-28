@@ -913,7 +913,7 @@ export default function App() {
             subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={activeContent===token} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
             onPool={(id,context)=>void openPool(id,context,false,false,token)}
-            contentNavigation={{selectedId:entry.selectedId,trail:entry.trail,
+            contentNavigation={{selectedId:entry.selectedId,trail:entry.trail,relatedRoom:entry.document.family?.id==="assignment" && entry.origin ? contentDocuments[entry.origin.token]?.selectedId : undefined,
               onReturn:entry.origin ? ()=>returnToOrigin(entry):undefined,returnLabel:entry.origin ? `Return to ${entry.origin.label}`:undefined,
               onPool:id=>void openPool(id,trail,false,false,token),onOpen:(target,id,path)=>void openContent(target,id,path,false,false,null,{token,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}
           {poolDocument && <div hidden={!poolActive || !!activeContent}><Authoring key={poolDocument.document_token}

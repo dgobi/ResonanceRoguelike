@@ -88,21 +88,8 @@ def validate_definition(raw, data, path, inventory):
         if len(locations) != 1 or locations[0]["path"] != path or locations[0]["pointer"]:
             error("DUPLICATE_TEXT", "id", "Identity is ambiguous or not a single discoverable definition: " + ", ".join(s["path"] + s["pointer"] for s in locations))
         if data.texts.get(identifier) != raw: error("TEXT_LOADER_IDENTITY", "id", "Loaded text differs from this exact definition.")
-    for field in ("title", "condition", "type", "reads_as"):
-        if field in raw and not isinstance(raw[field], str): error("TEXT_STRING", field, "Expected a string.")
-    if "lacunae" in raw and type(raw["lacunae"]) is not bool: error("TEXT_BOOLEAN", "lacunae", "Expected a boolean.")
-    pages = raw.get("pages")
-    if not isinstance(pages, list) or not pages:
-        error("TEXT_PAGES", "pages", "At least one page object is required.")
-    else:
-        from engine.text_reader import parse_page
-        for index, page in enumerate(pages):
-            field = f"pages[{index}]"
-            if not isinstance(page, dict): error("TEXT_PAGE", field, "Expected a page object."); continue
-            if not isinstance(page.get("text"), str): error("TEXT_BODY", field+".text", "Expected a string body.")
-            else: parse_page(page["text"])  # Production interpretation, never a parallel marker grammar.
-            for key in ("trailing", "damaged"):
-                if key in page and type(page[key]) is not bool: error("TEXT_BOOLEAN", field+"."+key, "Expected a boolean.")
+    from engine.text_contract import validate_payload
+    diagnostics += validate_payload(raw, data, path)
     return diagnostics
 
 

@@ -14,21 +14,7 @@ DIALECT = "https://json-schema.org/draft/2020-12/schema"
 VOCABULARY = "resonance-controls-1"
 
 
-def definition_sources(data_root, family, excluded=()):
-    """Mirror the loader's object/array convention without choosing an ID winner."""
-    sources = {}
-    for path in sorted((data_root / family).rglob("*.json")):
-        if path.name.casefold() in excluded: continue
-        try:
-            raw = json.loads(path.read_text(encoding="utf-8"))
-        except (ValueError, OSError):
-            continue
-        for index, row in enumerate(raw if isinstance(raw, list) else [raw]):
-            if isinstance(row, dict) and isinstance(row.get("id"), str):
-                sources.setdefault(row["id"], []).append(dict(
-                    path="roguelike/data/" + path.relative_to(data_root).as_posix(),
-                    pointer=f"/{index}" if isinstance(raw, list) else "", definition=row))
-    return sources
+from engine.definition_sources import definition_sources
 
 
 def schema_problems(schema):
@@ -106,7 +92,7 @@ class Family:
     def envelope(self, context, *, operations=None):
         descriptor, digest = self.descriptor()
         problems = schema_problems(descriptor["schema"])
-        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory", "room-spatial"}
+        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory", "room-spatial", "world-assignment"}
         if not isinstance(descriptor["views"], list) or any(v not in allowed_views for v in descriptor["views"]):
             problems.append("Unsupported specialized view registration")
         return dict(id=self.id, contract=self.module.CONTRACT, descriptor_sha256=digest,
@@ -178,8 +164,9 @@ class Family:
 
 def families():
     # The sole trusted registration point. No renderer or descriptor imports.
-    from engine import item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring, room_authoring
+    from engine import item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring, room_authoring, assignment_authoring
     return (
+        Family("assignment", "generation", assignment_authoring, ("edit",), assignment_authoring.PROFILE, assignment_authoring.PROFILE),
         Family("room", "layouts", room_authoring, ("edit", "variant"), "roguelike/data/layouts/"),
         Family("creature", "entities", creature_authoring, ("edit", "variant"), "roguelike/data/entities/creatures/"),
         Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/components/"),

@@ -1,5 +1,16 @@
 # Make a building or layout for Resonance
 
+## W5I: enroll a saved room for ordinary new-world assignment
+
+From an eligible saved ordinary room, **World assignment** opens the one shared
+edit-only profile. Save dependencies first, deliberately configure membership,
+enablement, type, chance and weights, then validate/review/apply/reopen. The shipped
+profile stays disabled. **Preview saved assignments** uses ordinary production
+128 × 128 new-world generation and saved inputs, with linked selected instances.
+See the [assignment contract and activation policies](AUTHORED_SUBMAP_SELECTION.md).
+Profile edits affect new worlds only; same-ID room-definition edits still affect
+pending first construction under W5G. Generated scenes retain their owned state.
+
 ## W5H: play the saved room while revising it
 
 After saving/reopening an eligible ordinary room, Workbench **Test room** captures

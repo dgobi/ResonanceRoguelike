@@ -20,7 +20,7 @@ export function ScalarControl(p: {schema: FieldSchema; value: unknown; reference
     onChange={e=>{if(e.target.value !== "" && Number.isFinite(Number(e.target.value))) p.onChange(Number(e.target.value));}} />;
 }
 
-export function OrderedRecords(p:{family:ContentFamily;values:Record<string,unknown>;disabled:boolean;onEdit:(edit:(text:string)=>string,label:string)=>void}) {
+export function OrderedRecords(p:{family:ContentFamily;values:Record<string,unknown>;disabled:boolean;allowEmpty?:boolean;onEdit:(edit:(text:string)=>string,label:string)=>void}) {
   return <>{Object.entries(p.family.descriptor.schema.properties || {}).filter(([,s])=>s["x-control"]==="ordered-records").map(([field,schema])=>{
     const rows=p.values[field];
     const valid=Array.isArray(rows) && rows.every(r=>r && typeof r==="object" && !Array.isArray(r));
@@ -29,7 +29,7 @@ export function OrderedRecords(p:{family:ContentFamily;values:Record<string,unkn
         {Object.entries(schema.items?.properties || {}).map(([key,s])=><label key={key}>{s.title || key}<ScalarControl schema={s} value={row[key]} references={p.family.references} label={`${s.title || key} ${i+1}`} onChange={value=>p.onEdit(text=>itemValue(text,[field,i,key],value),`Edit ${field} ${i+1}`)}/>
           {row[key]===undefined && <small>Absent in source{s.default!==undefined ? ` · effective default: ${s.default}` : ""}</small>}{s.description && <small>{s.description}</small>}
         </label>)}
-        <div className="edit-actions">{(["up","down","remove"] as const).map(action=><button key={action} aria-label={`${action} ${field} ${i+1}`} disabled={action==="up" && i===0 || action==="down" && i===rows.length-1 || action==="remove" && rows.length===1} onClick={()=>p.onEdit(text=>recordRow(text,field,action,i),`${action} ${field}`)}>{action==="up" ? "Move up" : action==="down" ? "Move down" : "Remove"}</button>)}</div>
+        <div className="edit-actions">{(["up","down","remove"] as const).map(action=><button key={action} aria-label={`${action} ${field} ${i+1}`} disabled={action==="up" && i===0 || action==="down" && i===rows.length-1 || action==="remove" && rows.length===1 && !p.allowEmpty} onClick={()=>p.onEdit(text=>recordRow(text,field,action,i),`${action} ${field}`)}>{action==="up" ? "Move up" : action==="down" ? "Move down" : "Remove"}</button>)}</div>
         {Object.keys(row).some(k=>!(k in (schema.items?.properties || {}))) && <details><summary>Preserved record metadata</summary><pre className="raw">{JSON.stringify(Object.fromEntries(Object.entries(row).filter(([k])=>!(k in (schema.items?.properties || {})))),null,2)}</pre></details>}
       </fieldset>)}
       <button disabled={p.disabled || !valid} onClick={()=>p.onEdit(text=>recordRow(text,field,"add",-1,recordDefaults(schema)),`Add ${field}`)}>Add {field} record</button>

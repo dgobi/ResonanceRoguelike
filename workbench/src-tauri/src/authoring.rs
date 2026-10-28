@@ -23,8 +23,10 @@ const CONTENT_ROOTS: &[(&str, &str, &[&str])] = &[
     ("roguelike/data/texts/", "roguelike/data/texts/", &["text_item_map.json"]),
 ];
 pub const TYPOGRAPHY: &str = "roguelike/data/display/typography.json";
+pub const ASSIGNMENT: &str = "roguelike/data/generation/authored_submap_selection.json";
 pub fn content_root(source: &str) -> Option<&'static str> {
     if source == TYPOGRAPHY { return Some(TYPOGRAPHY); }
+    if source == ASSIGNMENT { return Some(ASSIGNMENT); }
     if is_layout(source) || source == G17_EXAMPLE { return Some("roguelike/data/layouts/"); }
     CONTENT_ROOTS.iter().find_map(|(source_root, write_root, reserved)| {
         let suffix = source.strip_prefix(source_root)?;
@@ -63,6 +65,7 @@ impl FamilyPolicy {
             || operations.iter().any(|op| op != "edit" && op != "variant")
             || content_root(source) != Some(root)
             || (source == TYPOGRAPHY && (id != "typography" || operations != ["edit"]))
+            || (source == ASSIGNMENT && (id != "assignment" || route != "assignment_definition" || contract != "authored-submap-selection-1" || operations != ["edit"]))
         { return None; }
         let effective = f["effective_operations"].as_array()?.iter().map(|v|v.as_str().map(str::to_owned)).collect::<Option<Vec<_>>>()?;
         if effective.iter().any(|op| !operations.contains(op))
@@ -346,7 +349,7 @@ fn accept_edit(host:&Host, token:&str, sequence:u64, draft:String, variant:bool,
     let root=state.root.clone().ok_or_else(unknown_document)?;
     let doc=current_document(&mut state,token).ok_or_else(unknown_document)?;
     let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Only eligible registered documents have durable drafts."))?;
-    if !draft_intent_allowed(family,variant) || doc.relative==TYPOGRAPHY && !variant_id.is_empty(){
+    if !draft_intent_allowed(family,variant) || (doc.relative==TYPOGRAPHY || doc.relative==ASSIGNMENT) && !variant_id.is_empty(){
         return Err(recovery::error("This family is edit-only; recovery cannot retain a variant target."));
     }
     if sequence<=doc.edit_sequence || sequence>9_007_199_254_740_990{return Err(recovery::error("Obsolete or invalid edit acknowledgement refused."));}
@@ -757,6 +760,9 @@ fn destination(
     if doc.relative==TYPOGRAPHY && raw.is_object() && (raw["id"]!="game_typography" || raw["version"].as_u64()!=Some(1)) {
         return Err(failure("IDENTITY_CHANGE","Typography requires fixed id game_typography and integer version 1.","Restore the fixed identity/version."));
     }
+    if doc.relative==ASSIGNMENT && raw.is_object() && (raw["id"]!="authored_submap_selection" || raw["version"].as_u64()!=Some(1)) {
+        return Err(failure("IDENTITY_CHANGE","Assignment requires fixed id authored_submap_selection and integer version 1.","Restore the fixed identity/version."));
+    }
     if let Some(id) = variant_id {
         if !valid_id(id) || raw["id"].as_str() != Some(id) || doc.id.as_ref().is_some_and(|original|original.eq_ignore_ascii_case(id)) {
             return Err(failure(
@@ -804,6 +810,9 @@ pub async fn validate_document(
         checked_target(&root, &dest, variant)?;
         let inputs = if dependency_bound(&doc.relative) { Some(input_stamp(&root)?) } else { None };
         let preview_only = preview_inputs.is_some();
+        if doc.relative==ASSIGNMENT && preview_only && (draft.as_bytes()!=doc.original || doc.accepted.as_ref().is_some_and(|r|r.draft.as_bytes()!=doc.original || r.variant)) {
+            return Err(failure("ASSIGNMENT_UNSAVED","Preview uses saved assignments and saved dependencies.","Apply and byte-check reopen the profile first; parked drafts are excluded."));
+        }
         let mut response = run_worker(
             app,
             &operation,
@@ -1067,9 +1076,9 @@ enum Fault {
 }
 
 fn publish(root: &Path, doc: &Document, review: &Review, fault: Fault) -> Result<Value, Failure> {
-    if doc.relative==TYPOGRAPHY {
+    if doc.relative==TYPOGRAPHY || doc.relative==ASSIGNMENT {
         let (target,variant)=destination(doc,&review.draft,review.variant.then_some("forbidden"))?;
-        if target!=review.destination || variant {return Err(failure("OPERATION_POLICY","Typography has one fixed target.","Review the canonical profile."));}
+        if target!=review.destination || variant {return Err(failure("OPERATION_POLICY","This profile has one fixed target.","Review the canonical profile."));}
     }
     if is_submap(&doc.relative) && ((!review.variant && (doc.relative==G17_EXAMPLE || doc.family.is_none())) || !is_layout(&review.destination)) {
         return Err(failure("LAYOUT_VARIANT_REQUIRED", "Layout publication requires a new ID/file in layouts/.", "Review a unique layout variant."));
@@ -1445,6 +1454,33 @@ mod tests {
         let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();assert_eq!(record.target,TYPOGRAPHY);
         let dir=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(dir.path().into()).unwrap();store.write(&record).unwrap();
         let mut forged=record.clone();forged.target="roguelike/data/display/other.json".into();assert!(forged.validate().is_err());
+        forged=record.clone();forged.variant=true;assert!(forged.validate().is_err());
+        forged=record.clone();forged.family="item".into();assert!(forged.validate().is_err());
+        store.release(&record.key());let mut restored=doc.clone();restore_claimed(&mut store,root.path(),&mut restored,&record.key(),record.generation).unwrap();assert!(restored.review.is_none());assert_eq!(restored.accepted.unwrap().draft,record.draft);
+        review.destination="roguelike/data/items/components/elsewhere.json".into();review.variant=false;review.draft=draft.into();assert!(publish(root.path(),&doc,&review,Fault::None).is_err());assert_eq!(fs::read(&path).unwrap(),doc.original);
+        let before=input_stamp(root.path()).unwrap();fs::write(&path,draft).unwrap();assert_ne!(input_stamp(root.path()).unwrap(),before);
+        let fonts=root.path().join("roguelike/assets/Fonts");fs::create_dir_all(&fonts).unwrap();fs::write(fonts.join("selected.ttf"),b"selected font bytes").unwrap();let before=input_stamp(root.path()).unwrap();fs::write(fonts.join("selected.ttf"),b"changed bytes").unwrap();assert_ne!(input_stamp(root.path()).unwrap(),before);
+    }
+    #[test]
+    fn assignment_fixed_file_recovery_identity_and_freshness_are_host_enforced(){
+        let (root,host,old,mut review)=lifecycle_fixture(false);
+        let mut doc=old.clone();doc.relative=ASSIGNMENT.into();doc.id=Some("authored_submap_selection".into());
+        doc.original=b"{\"id\":\"authored_submap_selection\",\"version\":1}".to_vec();
+        let family=doc.family.as_mut().unwrap();family.id="assignment".into();family.route="assignment_definition".into();family.root=ASSIGNMENT.into();family.operations=vec!["edit".into()];
+        let path=root.path().join(ASSIGNMENT);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(&path,&doc.original).unwrap();
+        {let mut state=host.inner.lock().unwrap();state.content_documents.clear();state.content_documents.insert(file_key(ASSIGNMENT),doc.clone());}
+        assert_eq!(content_root(ASSIGNMENT),Some(ASSIGNMENT));
+        for path in ["roguelike/data/generation/other.json","roguelike/data/generation/authored_submap_selection.JSON","roguelike/data/generation/nested/authored_submap_selection.json","roguelike/assets/Fonts/typography.json"]{assert!(content_root(path).is_none());assert!(checked_target(root.path(),path,true).is_err());}
+        let draft="{\"id\":\"authored_submap_selection\",\"version\":1,\"metadata\":true}";
+        assert_eq!(destination(&doc,draft,None).unwrap(),(ASSIGNMENT.into(),false));
+        assert!(destination(&doc,draft,Some("other")).is_err());
+        for invalid in ["{\"id\":\"other\",\"version\":1}","{\"id\":\"authored_submap_selection\",\"version\":2}","{\"id\":\"authored_submap_selection\",\"version\":true}"]{assert!(destination(&doc,invalid,None).is_err());}
+        assert!(accept_edit(&host,&doc.token,1,draft.into(),true,"other".into()).is_err());
+        assert!(accept_edit(&host,&doc.token,1,draft.into(),false,"other".into()).is_err());
+        accept_edit(&host,&doc.token,1,"{invalid exact assignment λ".into(),false,"".into()).unwrap();
+        let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();assert_eq!(record.target,ASSIGNMENT);
+        let dir=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(dir.path().into()).unwrap();store.write(&record).unwrap();
+        let mut forged=record.clone();forged.target="roguelike/data/generation/other.json".into();assert!(forged.validate().is_err());
         forged=record.clone();forged.variant=true;assert!(forged.validate().is_err());
         forged=record.clone();forged.family="item".into();assert!(forged.validate().is_err());
         store.release(&record.key());let mut restored=doc.clone();restore_claimed(&mut store,root.path(),&mut restored,&record.key(),record.generation).unwrap();assert!(restored.review.is_none());assert_eq!(restored.accepted.unwrap().draft,record.draft);

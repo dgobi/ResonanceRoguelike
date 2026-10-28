@@ -16,7 +16,8 @@ export type Descriptor = {
 };
 export type References = Record<string, {id: string; label: string}[]>;
 type CommonFamily = {contract: string; descriptor_sha256: string; descriptor: Descriptor; compatible: boolean; problems: string[]; references: References; effective_operations?: ("edit" | "variant")[]};
-export type ContentFamily = CommonFamily & ({id: "item"; context: ItemContext | null} | {id: "recipe"; context: RecipeContext | null} | {id: "text"; context: TextContext | null} | {id:"typography";context:TypographyContext|null} | {id:"creature";context:CreatureContext|null} | {id:"room";context:RoomContext|null});
+export type ContentFamily = CommonFamily & ({id:"assignment";context:AssignmentContext|null} | {id: "item"; context: ItemContext | null} | {id: "recipe"; context: RecipeContext | null} | {id: "text"; context: TextContext | null} | {id:"typography";context:TypographyContext|null} | {id:"creature";context:CreatureContext|null} | {id:"room";context:RoomContext|null});
+export type AssignmentContext={records:{id:string;definition:Record<string,unknown>;capability:{editable:boolean;reason:string};diagnostics:Diagnostic[]}[];rooms:{id:string;label:string;path:string;eligible:boolean;reason:string}[]};
 export type RoomContext={records:{id:string;definition:Record<string,unknown>;capability:{editable:boolean;reason:string;operations:("edit"|"variant")[]};diagnostics:Diagnostic[]}[];catalog:Catalog;preview:Preview|null};
 
 const object = (value: unknown): value is Record<string, unknown> => !!value && typeof value === "object" && !Array.isArray(value);
@@ -46,7 +47,7 @@ export function schemaProblem(value: unknown, path = "schema", depth = 0): strin
   return "";
 }
 export function familyProblem(value: unknown): string {
-  if (!object(value) || !["item","recipe","text","typography","creature","room"].includes(String(value.id))) return "Unregistered content family";
+  if (!object(value) || !["item","recipe","text","typography","creature","room","assignment"].includes(String(value.id))) return "Unregistered content family";
   if (typeof value.contract !== "string" || typeof value.descriptor_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(value.descriptor_sha256)) return "Malformed family identity";
   if (!object(value.descriptor)) return "Missing descriptor";
   const d = value.descriptor;
@@ -55,7 +56,7 @@ export function familyProblem(value: unknown): string {
   if(value.id==="room"&&d.production_route!=="authored_submap")return "Room requires its registered authored_submap production route";
   if ((value.id === "creature" || value.id === "room") && (!Array.isArray(value.effective_operations) || value.effective_operations.some(op=>!(d.policy as {operations:unknown[]}).operations.includes(op)))) return "Missing or invalid original-source operations";
   if (!Array.isArray(d.views) || d.views.some(v=>typeof v!=="string") || typeof d.publication_note !== "string") return "Malformed view registration";
-  const views = {item:["item-properties","references","recipes","use-binding","factory"], recipe:["recipe-requirements","output","production-receipt"], text:["text-pages","text-references","reader-preview"],typography:["typography-roles","typography-preview"],creature:["creature-properties","creature-references","creature-factory"],room:["room-spatial"]}[String(value.id)] || [];
+  const views = {item:["item-properties","references","recipes","use-binding","factory"], recipe:["recipe-requirements","output","production-receipt"], text:["text-pages","text-references","reader-preview"],typography:["typography-roles","typography-preview"],creature:["creature-properties","creature-references","creature-factory"],room:["room-spatial"],assignment:["world-assignment"]}[String(value.id)] || [];
   if (d.views.some(v=>!views.includes(String(v)))) return "Unsupported specialized view registration";
   if (!object(value.references) || Object.values(value.references).some(rows=>!Array.isArray(rows) || rows.length>10000 || rows.some(r=>!object(r) || typeof r.id!=="string" || typeof r.label!=="string"))) return "Malformed reference provider";
   if (!Array.isArray(value.problems) || value.problems.some(p=>typeof p!=="string") || typeof value.compatible!=="boolean") return "Malformed capability result";

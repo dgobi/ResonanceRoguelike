@@ -17,10 +17,22 @@ export type TypographyPreview = Pick<ReaderFrame,"draft_sha256"|"path"|"source"|
   roles:{role:string;label:string;requested:string;resolved:string;sha256:string;size:number;fallback:false;sample:string;width:number;height:number}[];
   diagnostics:Diagnostic[];fallback:false;
 };
-export type FamilyPreview = ReaderFrame | TypographyPreview;
+export type AssignmentPreview = Pick<ReaderFrame,"draft_sha256"|"path"|"source"|"contract"|"descriptor_sha256"|"runtime"|"observed_at_utc"|"setup"|"dependencies"> & {
+  kind:"assignment-preview";inputs:{seed:number};seed:number;width:number;height:number;plan_mode:string;generation_revision:string;
+  profile_path:string;profile_sha256:string;target_type:string;authored_chance:number;enabled:boolean;matching_count:number;authored_count:number;procedural_count:number;truncated:number;
+  rows:{chunk:[number,number];submap_id:string;type:string;seed:number;layout_id:string;path:string}[];
+};
+export type FamilyPreview = ReaderFrame | TypographyPreview | AssignmentPreview;
 const png=(v:Partial<PngFrame>|undefined,width:number,height:number)=>!!v && v.width===width && v.height===height && typeof v.image==="string" && v.image.length<=2800000 && /^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(v.image) && typeof v.image_sha256==="string" && /^[a-f0-9]{64}$/.test(v.image_sha256);
 export function previewProblem(value: unknown): string {
   if (!value || typeof value !== "object") return "Missing preview";
+  if((value as {kind?:string}).kind==="assignment-preview"){
+    const v=value as Partial<AssignmentPreview>;
+    if(v.width!==128||v.height!==128||v.plan_mode!=="shared-v1"||v.contract!=="authored-submap-selection-1"||v.profile_path!=="roguelike/data/generation/authored_submap_selection.json"||!v.source||!v.inputs||v.seed!==v.inputs.seed||typeof v.enabled!=="boolean"||!["barrow","cave","vault"].includes(String(v.target_type))||typeof v.authored_chance!=="number"||v.authored_chance<0||v.authored_chance>1)return "Malformed assignment preview identity";
+    if(![v.profile_sha256,v.draft_sha256,v.descriptor_sha256].every(h=>typeof h==="string"&&/^[a-f0-9]{64}$/.test(h))||![v.seed,v.matching_count,v.authored_count,v.procedural_count,v.truncated].every(n=>Number.isSafeInteger(n)&&Number(n)>=0)||Number(v.authored_count)+Number(v.procedural_count)!==v.matching_count)return "Malformed assignment counts/source";
+    if(!Array.isArray(v.rows)||v.rows.length>100||v.rows.length+Number(v.truncated)!==v.authored_count||v.rows.some(r=>!Array.isArray(r.chunk)||r.chunk.length!==2||r.chunk.some(n=>!Number.isSafeInteger(n)||n<0||n>=128)||typeof r.submap_id!=="string"||r.type!==v.target_type||!Number.isSafeInteger(r.seed)||typeof r.layout_id!=="string"||!/^roguelike\/data\/layouts\/[^/]+\.json$/.test(r.path)))return "Malformed assignment rows";
+    return "";
+  }
   if((value as {kind?:string}).kind==="typography-preview"){
     const v=value as Partial<TypographyPreview>;
     if(!png(v.specimen,960,960) || !png(v.reader,960,640) || v.fallback!==false || !v.inputs || Object.keys(v.inputs).length) return "Invalid typography preview frames";

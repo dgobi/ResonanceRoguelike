@@ -1,5 +1,22 @@
 # Registered content authoring
 
+W5I also registers `assignment_authoring.py` as edit-only family `assignment`,
+contract `authored-submap-selection-1`, at the exact host-owned file
+`roguelike/data/generation/authored_submap_selection.json`. No other generation
+file is admitted. It shares document tokens, source/history, recovery, freshness,
+one-time reviews and publication/reopen. Recovery cannot invent a target or restore
+authority. The game module `generation/authored_submap_selection.py` owns policy
+validation/selection; `generation/authored_rooms.py`, `engine/definition_sources.py`
+and `engine/text_contract.py` share eligibility/compiler/reference payload rules
+without importing editor descriptors.
+
+The registered `assignment-preview` is metadata, separate from scene/PNG results.
+The existing explicit preview request requires the exact saved profile and accepted
+host intent, reads saved dependencies, calls ordinary `generate_world`, and never
+installs a review. Its bounded instance table discloses truncation. Shared source,
+dependency, project and operation ownership checks reject stale/cancelled delivery.
+See the [game assignment guide](../../roguelike/docs/AUTHORED_SUBMAP_SELECTION.md).
+
 `roguelike/engine/content_authoring.py:families` is the explicit first-party
 registration point. `item_authoring.py`, `recipe_authoring.py`, `text_authoring.py`,
 `typography_authoring.py`, `creature_authoring.py` and `room_authoring.py`

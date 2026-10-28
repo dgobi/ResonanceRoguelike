@@ -1,3 +1,4 @@
+import {AssignmentEditor} from "./AssignmentEditor";
 import { CreatureEditor } from "./CreatureEditor";
 import type { RequestLease } from "./requests";
 import { ItemEditor } from "./ItemEditor";
@@ -9,7 +10,7 @@ import type { FamilyPreview } from "./familyData";
 import { familyProblem, type ContentFamily } from "./content";
 import type { ItemTrail } from "./protocol";
 
-export type ContentNavigation = {selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void; returnLabel?: string;
+export type ContentNavigation = {relatedRoom?:string;selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void; returnLabel?: string;
   onPool?: (id:string)=>void; onOpen: (family:string,id:string,path?:string)=>void};
 export type ContentProps = {sourceFamily:ContentFamily; variant:boolean; active:boolean; cancelVersion:number; beginRequest:(label:string)=>RequestLease; family: ContentFamily; navigation: ContentNavigation; draft:string; path:string; dirty:boolean; validated:boolean;
   spatial?:LayoutProps;
@@ -21,7 +22,8 @@ type Props = ContentProps;
 // Specialist views receive the same document commands as ordinary controls.
 // This registration contains presentation only, never mutable review authority.
 export const contentViews = {
-  room:{label:"room",sourceId:"room-draft-json",hint:"Terrain, arrival, direct contents and linked references share this exact source, history and recovery. Validate realized geometry, population and static access before publication.",render:(p:Props)=><section data-testid="room-editor"><p className="notice">{p.family.descriptor.publication_note}</p>{p.navigation.onReturn&&<button onClick={p.navigation.onReturn}>{p.navigation.returnLabel}</button>}<button onClick={p.onSource}>Show room source</button>{p.sourceFamily.id==="room"&&p.sourceFamily.context?.records[0]?.capability.reason&&<p className="notice warning">{p.sourceFamily.context.records[0].capability.reason}</p>}{p.spatial&&<LayoutEditor {...p.spatial}/>}</section>},
+  assignment:{label:"assignment",sourceId:"assignment-draft-json",hint:"One fixed saved assignment profile; independent document history, recovery and publication.",render:(p:Props)=><AssignmentEditor {...p}/>},
+  room:{label:"room",sourceId:"room-draft-json",hint:"Terrain, arrival, direct contents and linked references share this exact source, history and recovery. Validate realized geometry, population and static access before publication.",render:(p:Props)=><section data-testid="room-editor"><p className="notice">{p.family.descriptor.publication_note}</p>{p.navigation.onReturn&&<button onClick={p.navigation.onReturn}>{p.navigation.returnLabel}</button>}<button onClick={p.onSource}>Show room source</button><p>{p.sourceFamily.effective_operations?.includes("edit") ? "Saved ordinary room" : "Room source; publish an eligible ordinary variant before assignment"}{p.dirty ? " · independent unsaved definition draft" : ""}. Assignment choices apply to new worlds; same-ID definition edits still apply to pending scenes.</p><button disabled={!p.sourceFamily.effective_operations?.includes("edit")} onClick={()=>p.navigation.onOpen("assignment","authored_submap_selection","roguelike/data/generation/authored_submap_selection.json")}>World assignment</button>{p.sourceFamily.id==="room"&&p.sourceFamily.context?.records[0]?.capability.reason&&<p className="notice warning">{p.sourceFamily.context.records[0].capability.reason}</p>}{p.spatial&&<LayoutEditor {...p.spatial}/>}</section>},
   creature:{label:"creature",sourceId:"creature-draft-json",hint:"Common Actor controls share exact Source, history, recovery and publication. Special bindings retain their stable ID.",render:(p:Props)=><CreatureEditor {...p}/>},
   item: {label:"item", sourceId:"item-draft-json", hint:"Component controls share this exact source draft. References, use binding and factory results distinguish declarations from observed instances.",
     render:(p:Props)=>p.family.id === "item" && <ItemEditor {...p} context={p.family.context || undefined} {...p.navigation} onRecipe={(id,path)=>p.navigation.onOpen("recipe",id,path)} />},

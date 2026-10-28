@@ -759,6 +759,21 @@ and the Git revision/working-tree status is explicitly unavailable.
 
 ## Verification
 
+W5I adds a saved room's **World assignment** route to the fixed edit-only profile.
+Save/reopen room dependencies first; **Add this room** only stages a candidate.
+Deliberately choose enablement, existing type, chance and relative weights, then
+validate, review and apply one file. The shipped policy remains disabled.
+**Preview saved assignments** explicitly runs ordinary 128 × 128 production world
+generation from saved inputs with a seed. Candidate membership, saved enabled
+membership and selected instances are shown separately. Other drafts remain
+independent. Profile choices affect new worlds; same-ID room revisions still affect
+pending first construction, while generated scenes keep saved mutations.
+See the [assignment guide](../roguelike/docs/AUTHORED_SUBMAP_SELECTION.md) and
+[W5I evidence](docs/W5I_DELIVERY.md). Repeat the packaged journey with
+`node scripts/run-assignments.mjs`; it includes disclosed natural entrance staging
+and separate cold-process checks. This adds a seventh registered family; historical
+milestone coverage below retains its original scope.
+
 ```powershell
 npm.cmd run build:web                # also typechecks; needed for cargo tests
 npm.cmd test

@@ -1,0 +1,8 @@
+{
+  "id": "authored_submap_selection",
+  "version": 1,
+  "enabled": false,
+  "target_type": "barrow",
+  "authored_chance": 0.0,
+  "candidates": []
+}
