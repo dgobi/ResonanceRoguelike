@@ -7,6 +7,9 @@ def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def git(*args):return subprocess.check_output(['git',*args],cwd=ROOT,text=True).strip()
 def ref(p):return dict(path=p.relative_to(ROOT).as_posix(),sha256=digest(p))
+def environment(executable):
+    code="import sys,platform,json,importlib.metadata as m;print(json.dumps(dict(executable=sys.executable,python=sys.version,platform=platform.platform(),dependencies={k:m.version(k) for k in ['pygame','tcod','numpy','cffi','pycparser','typing_extensions']})))"
+    return json.loads(subprocess.check_output([str(executable),'-I','-B','-c',code],text=True))
 def passed_latest(pattern):
     rows=sorted(ROOT.glob(pattern),key=lambda p:p.stat().st_mtime_ns)
     for p in reversed(rows):
@@ -73,11 +76,13 @@ for name in git('diff','--name-only','checkpoint/workbench-w5j-start-20261028','
     if p.is_file() and not name.startswith('workbench/docs/evidence/'):
         sources[name]=dict(working_sha256=digest(p),git_sha256=hashlib.sha256(subprocess.check_output(['git','show','HEAD:'+name],cwd=ROOT)).hexdigest())
 receipt=dict(milestone='W5J',passed=True,observed_utc=datetime.now(timezone.utc).isoformat(),
-    revisions=dict(reviewed_start=git('rev-parse','checkpoint/workbench-w5j-start-20261028'),initial_remote='9068855894c2ce53e4617dd0f5f696fbab0bbb4a',implementation='d36f623',
+    revisions=dict(reviewed_start=git('rev-parse','checkpoint/workbench-w5j-start-20261028'),initial_remote='9068855894c2ce53e4617dd0f5f696fbab0bbb4a',implementation=git('rev-parse','d36f623'),
         package_inputs=git('rev-parse','checkpoint/workbench-w5j-final-package-20261028'),evidence_inputs=git('rev-parse','HEAD'),final_delivery_ref='checkpoint/workbench-w5j-verified-20261028',
         note='Final evidence/delivery commit identity is resolved by this Git ref and exact remote-main readback in the handoff; it cannot embed its own hash. Package bytes bind the earlier package-input commit.'),
     contract='usable-supplies-1',corpus=ref(EVID/'shipped-sources.json'),observations=ref(EVID/'observations.json'),
-    commands=commands,package=dict(executable=ref(release/'resonance-workbench.exe'),installer=ref(release/'bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe'),
+    environments=dict(pinned=environment(runtime/'python.exe'),development=environment(Path('G:/GameDev/RoguelikeBaseline-20261020/project/.venv/Scripts/python.exe'))),
+    commands=commands,failed_attempts=[dict(log=ref(ART/name),counted_as_pass=False) for name in ('native.log','native-attempt2.log','room-session-attempt1.log','production.log')],
+    package=dict(executable=ref(release/'resonance-workbench.exe'),installer=ref(release/'bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe'),
         bundled_runtime_files=len(runtime_files),bundled_runtime_matches=True,bundled_bridge_matches=True),
     source_hashes=sources,shipped_assignment=read(ROOT/'roguelike/data/generation/authored_submap_selection.json'),
     preservation=dict(**preservation,owner_plan='Untracked and byte/mtime preserved',canonical_native_fixture_matches=True,game_fixture_matches=True),

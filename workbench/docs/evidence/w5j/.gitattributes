@@ -1,0 +1,2 @@
+# Accepted fixture bytes include original/mixed line endings; never normalize.
+fixtures/*.json -text
