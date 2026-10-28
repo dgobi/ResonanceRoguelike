@@ -14,8 +14,7 @@ const base="roguelike/data/entities/creatures/",wight=base+"barrow_wight.json",o
 const variantId="w5f_native_variant",variantPath=base+variantId+".json";
 let ordinaryBaseline=(await readFile(resolve(root,ordinary),"utf8")).replace(/\r?\n/g,"\r\n").replace('  "base_hp":','  "w5f_metadata": {"exact":[1e2, null, "λ"]},\r\n  "base_hp":');
 await writeFile(resolve(root,ordinary),ordinaryBaseline);
-const wightBaseline="\ufeff"+await readFile(resolve(root,wight),"utf8");
-await writeFile(resolve(root,wight),wightBaseline);
+const wightBaseline=await readFile(resolve(root,wight),"utf8");
 await writeFile(resolve(settings,"project.json"),JSON.stringify({version:1,project_root:root}));
 const executable=resolve("src-tauri/target/release/resonance-workbench.exe"),hash=b=>createHash("sha256").update(b).digest("hex");
 const receipt={started_utc:new Date().toISOString(),root,settings,storage,package_sha256:hash(await readFile(executable)),processes:[],checks:[],drafts:[],errors:[]};
