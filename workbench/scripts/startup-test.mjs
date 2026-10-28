@@ -96,10 +96,14 @@ try {
     await page.getByLabel('Search ID, name or path').fill(source);await page.locator(`[data-asset="${source}"]`).click();
     await page.waitForFunction(()=>!document.querySelector('.status-dot.working'));
     await page.getByRole('button',{name:'Factory result',exact:true}).click();await page.getByRole('button',{name:'Validate and construct exact creature',exact:true}).click();
+    // W5F inspection already contains a construction receipt. Wait for the new
+    // requested validation, not merely that earlier receipt, before another IPC.
+    await page.getByTestId('draft-receipt').waitFor({state:'attached',timeout:30000});
+    await page.waitForFunction(()=>!document.querySelector('.status-dot.working'));
     await page.getByTestId('creature-factory-receipt').waitFor({state:'attached',timeout:30000});
     entry.factory=JSON.parse(await page.getByTestId('creature-factory-receipt').textContent());assert.equal(entry.factory.instance.fighter.hp,14);assert.equal(entry.factory.instance.fighter.max_hp,14);
     const preview=await ipc(page,'worker_request',{request:{op:'preview',asset:'roguelike/data/layouts/starting_lab.json',seed:20261023}});
-    assert(preview.ok && preview.result.passed);entry.preview={passed:preview.result.passed,origin:preview.result.origin,spawn:preview.result.spawn,source:preview.result.source};
+    assert(preview.ok && preview.result.passed,JSON.stringify(preview));entry.preview={passed:preview.result.passed,origin:preview.result.origin,spawn:preview.result.spawn,source:preview.result.source};
   });
   await run('owner-restart',{config:ownerConfig,launcher:true},async(page,entry)=>{assert((await page.locator('.project-details').textContent()).includes('saved project'));entry.saved_project_restored=true;});
   await run('change-project',{config:ownerConfig},async(page,entry)=>{
