@@ -78,6 +78,11 @@ class RoomTests(unittest.TestCase):
         item=json.loads((self.root/"roguelike/data/items/components/wood_bundle.json").read_bytes());item["id"]="WOOD_BUNDLE"
         (self.root/"roguelike/data/items/components/alias.json").write_text(json.dumps(item),encoding="utf-8")
         self.assertFalse(self.check(self.raw)["valid"])
+    def test_malformed_original_is_inspectable_with_specific_diagnostics(self):
+        for raw in (dict(id="w5g_room",layers=[]),dict(id="w5g_room",layers=None,special_tiles=None),[]):
+            (self.root/SOURCE).write_text(json.dumps(raw),encoding="utf-8")
+            response=invoke("inspect",root=self.root,asset=SOURCE);self.assertTrue(response["ok"],response)
+            self.assertFalse(response["result"]["editable"]);self.assertFalse(response["result"]["valid"]);self.assertTrue(response["result"]["diagnostics"])
     def test_explicit_and_fallback_return_precedence_and_blocked_return(self):
         raw=copy.deepcopy(self.raw);raw.update(exit_direction="north",exit_x=1,exit_y=1)
         p=self.check(raw)["preview"];self.assertEqual([(s["x"],s["y"]) for s in p["stairs"] if s["terrain"]=="stairs_up"],[(37,23)])

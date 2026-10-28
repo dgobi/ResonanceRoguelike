@@ -586,6 +586,9 @@ def run(request, root, scratch):
         if path.read_bytes() != source or any(after[k] != identity[k] for k in ("game_source_sha256", "catalog_sha256", "resources_sha256")):
             fail("SOURCE_CHANGED", "Source or dependency changed during inspection.", "Reopen the document.")
         single = raw if isinstance(raw, dict) else {}
+        layers = single.get("layers")
+        width = len(layers[0]) if isinstance(layers,list) and layers and isinstance(layers[0],str) else None
+        height = len(layers) if isinstance(layers,list) else None
         if op == "preview":
             result = context.get("preview") if context else None
             return result or dict(valid=False,diagnostics=diagnostics)
@@ -594,8 +597,8 @@ def run(request, root, scratch):
                     editable=family.eligible(context) and envelope["compatible"], family=envelope,
                     diagnostics=unique_diagnostics(diagnostics), raw=json.dumps(raw,indent=2) if request.get("invalid_fixture") else source.decode("utf-8"), sha256=hashlib.sha256(source).hexdigest(),
                     mtime_ns=str(before.st_mtime_ns), source_unchanged=True, source=identity,
-                    width=single.get("width",len(single.get("layers",[""])[0])),height=single.get("height",len(single.get("layers",[]))),
-                    special_count=len(single.get("special_tiles",[])), **family.module.authoring_evidence(context))
+                    width=single.get("width",width),height=single.get("height",height),
+                    special_count=len(single["special_tiles"]) if isinstance(single.get("special_tiles"),list) else 0, **family.module.authoring_evidence(context))
     if path.parent.name == "loot_pools":
         if op != "inspect" or request.get("invalid_fixture"):
             fail("UNSUPPORTED_OPERATION", "Pool inspection does not generate a map.", "Preview a building to observe its actual containers.")
