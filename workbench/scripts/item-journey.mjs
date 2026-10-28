@@ -13,6 +13,20 @@ export async function itemJourney(page, root, output, receipt) {
   const editor=()=>page.locator('[data-testid="authoring"]:visible');
   const b=name=>page.getByRole("button",{name,exact:true}), eb=name=>editor().getByRole("button",{name,exact:true});
   const idle=()=>page.waitForFunction(()=>!document.querySelector(".status-dot.working"),null,{timeout:30000});
+  async function confirmReviewed(path) {
+    for(let attempt=0;attempt<4;attempt++) {
+      await b("Confirm apply one file").click();await idle();
+      const status=await page.locator("footer").innerText();
+      if(status.includes(path)&&/Saved and byte-checked reopen:|Pool saved and reopened:/.test(status))return;
+      // A background workspace sweep can own the host slot. BUSY performs no
+      // write and clears the UI review; obtain fresh authority before retrying.
+      assert.match(status,/BUSY/);receipt.apply_busy_retries=(receipt.apply_busy_retries||0)+1;
+      await eb("Validate draft").click();await idle();
+      assert(JSON.parse(await editor().getByTestId("draft-receipt").textContent()).review_token);
+      await eb("Review & apply").click();
+    }
+    throw Error("Publication remained BUSY; no verified reopen");
+  }
   const source=async()=>{await eb("Source").click();return editor().locator("textarea.source-editor").inputValue();};
   const open=async path=>{await page.getByLabel("Search ID, name or path").fill(path);await page.locator(`[data-asset="${path}"]`).click();await idle();};
   const shot=async name=>{const text=await page.locator("body").innerText();for(const s of ["A place to understand the world","Your world, under the lens"]) assert(!text.includes(s));await page.screenshot({path:resolve(output,name+".png")});};
@@ -74,13 +88,13 @@ export async function itemJourney(page, root, output, receipt) {
   const validated=JSON.parse(await editor().getByTestId("draft-receipt").textContent());
   assert.equal(validated.valid,true,JSON.stringify(validated.diagnostics)); assert.equal(validated.factory.item_id,itemId); assert.equal(validated.factory.instance.weight,1.75);
   await b("Factory result").click(); await shot("item-factory");
-  await eb("Review & apply").click(); await shot("item-review"); await b("Confirm apply one file").click(); await idle();
+  await eb("Review & apply").click(); await shot("item-review"); await confirmReviewed(itemTarget);
   const savedItem=await readFile(resolve(root,itemTarget)); assert.equal(savedItem.toString().replace(/\r\n/g,"\n"),staged.replace(/\r\n/g,"\n"));
   const savedRaw=JSON.parse(savedItem); assert.equal(savedRaw.weight,1.75); assert.equal(savedRaw.keywords[0].tier,2); assert.deepEqual(savedRaw.w3b_metadata,JSON.parse(tiered).w3b_metadata);
   await b(/^Return to pool /).click(); assert.equal(await source(),parkedPool);
   await page.getByLabel("Item ID 1",{exact:true}).selectOption(itemId);
   await eb("Save as new variant").click(); await editor().getByLabel("New variant ID").fill(poolId);
-  await eb("Validate draft").click(); await idle(); await eb("Review & apply").click(); await b("Confirm apply one file").click(); await idle();
+  await eb("Validate draft").click(); await idle(); await eb("Review & apply").click(); await confirmReviewed(poolTarget);
   const savedPool=await readFile(resolve(root,poolTarget)); assert.equal(JSON.parse(savedPool).items[0].item_id,itemId);
   await b(`Open item ${itemId}`).click(); await idle(); await b("References").click();
   assert((await page.getByTestId("item-editor").filter({visible:true}).innerText()).includes(poolId));
