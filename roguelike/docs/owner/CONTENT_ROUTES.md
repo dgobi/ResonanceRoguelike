@@ -1,5 +1,10 @@
 # B3 persistence route update
 
+W5J adds supported supplies authoring through the existing item/room lifecycle.
+See [item authoring](../ITEM_AUTHORING.md) for copied saved-instance fields versus
+session-definition `empty_form`, dose units/defaults, protected references and
+fresh-catalogue activation. This adds no save-schema migration.
+
 Gameplay content and assets are unchanged by B3. Persistence routes are now:
 nondebug F5 and surface-boundary autosave -> whole generation publication;
 stairs/eviction -> session cache only; bootstrap/F9 -> validated generation

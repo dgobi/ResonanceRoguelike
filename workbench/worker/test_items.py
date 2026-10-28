@@ -16,7 +16,9 @@ class ItemTests(unittest.TestCase):
         rows = [a for a in assets if a["route"] == "item_definition"]
         self.assertEqual(len(rows), 79)
         self.assertEqual([r["path"] for r in rows], sorted(r["path"] for r in rows))
-        self.assertEqual({r["id"] for r in rows if r["editable"]}, {"wood_bundle", "flint_shard", "clay_lump", "clay_pot"})
+        from collections import Counter
+        self.assertEqual(len([r for r in rows if r["editable"]]),42)
+        self.assertEqual(Counter(r['category'] for r in rows if r['editable']),dict(component=4,butchery=18,consumable=20))
         for asset in (ITEM, "roguelike/data/items/tools/tallow_torch.json", "roguelike/data/items/weapons/binding_knife.json",
                       "roguelike/data/items/consumables/resonant_tincture.json"):
             path = ROOT / asset; before = path.read_bytes(); meta = path.stat()

@@ -1,5 +1,10 @@
 # Assign saved rooms to new worlds
 
+Freshness compares saved raw rooms with their catalogue raw entries, compiled
+rooms with loaded compiled definitions, exact source paths and original byte
+hashes. Implicit container `decor_id: crate` / `loot_pools: []` defaults stay valid
+without rewriting source. A genuine post-load source edit still requires reloading.
+
 The fixed `data/generation/authored_submap_selection.json` profile uses contract
 `authored-submap-selection-1`, identity `authored_submap_selection`, integer
 version 1. The shipped profile is disabled, with zero chance and no candidates.

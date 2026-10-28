@@ -8,6 +8,7 @@ export function ItemEditor(p: {
   family: ContentFamily; evidenceStale: boolean; draft: string; path: string; context?: ItemContext; selectedId?: string; dirty: boolean; validated: boolean;
   disabled: string; busy: boolean; onCancel: () => void; onReturn?: () => void; returnLabel?: string; trail?: ItemTrail | null;
   onRecipe?: (id: string, path: string) => void;
+  onItem?: (id:string,path:string)=>void;
   onPool?: (id: string) => void; onSource: () => void; onProbe: () => void;
   onEdit: (edit: (text: string) => string, label: string) => void;
   onUndo: () => void; onRedo: () => void; canUndo: boolean; canRedo: boolean;
@@ -39,8 +40,11 @@ export function ItemEditor(p: {
     {view === "Properties" && <>
       <div className="edit-actions"><button onClick={p.onUndo} disabled={!!reason || !p.canUndo}>Undo item</button><button onClick={p.onRedo} disabled={!!reason || !p.canRedo}>Redo item</button><small>Raw source and variant-ID edits clear item history.</small></div>
       <p className="muted">{cap?.reason}. Category: {String(values.category ?? "not declared")} · appearance: {String(values.tile ?? "factory default")}</p>
-      {cap?.editable ? <fieldset disabled={!!reason} className="item-properties"><legend>Supported component properties</legend>
+      {cap?.editable ? <fieldset disabled={!!reason} className="item-properties"><legend>Common supply properties · {cap.supply_class}</legend>
         <ContractFields family={p.family} values={values} onChange={edit} />
+        {cap.supply_class && cap.supply_class!=="material" && <><h3>{cap.supply_class} use</h3><ContractFields family={p.family} values={values} view={cap.supply_class} nullableFields={["nutrition","hydration","heal_amount","eat_message","drink_message","empty_form"]} onChange={edit}/></>}
+        {record?.effective_use && <p className="notice" data-testid="effective-dose">{evidenceCurrent ? "Validated saved-input interpretation: " : "Opened-source interpretation; validate edits: "}{record.effective_use.explanation}</p>}
+        {record?.return_item && <p className="notice">Saved return: <button disabled={p.busy || !evidenceCurrent} onClick={()=>p.onItem?.(record.return_item!.id,record.return_item!.path)}>Open return {record.return_item.id}</button><small>{record.return_item.label} · {record.return_item.editable ? "Editable source" : "Reference-only source"}</small></p>}
         {p.family.descriptor.schema.properties?.keywords && <><h3>Keywords</h3><small>{cap.tier_note}</small>
         {keywordShape ? <table className="pool-table"><thead><tr><th>Tag ID</th><th>Tier</th><th>Action</th></tr></thead><tbody>{keywords.map((kw, i) => <tr key={i}>
           {Object.entries(p.family.descriptor.schema.properties?.keywords.items?.properties || {}).map(([key,schema])=><td key={key}><ScalarControl schema={schema} value={kw[key]} references={p.family.references} label={`${schema.title} ${i+1}`} onChange={value=>edit(["keywords",i,key],value)} /></td>)}
@@ -49,6 +53,7 @@ export function ItemEditor(p: {
           <button disabled={!keywordShape || !tag} onClick={() => p.onEdit(s => keywordEntry(s, -1, tag, rowDefaults(p.family.descriptor.schema.properties!.keywords, tag)), "Add keyword")}>Add keyword</button></div></>}
       </fieldset> : <pre className="raw">{JSON.stringify(record?.definition, null, 2)}</pre>}
       <p className="muted small">Unknown fields and nested data remain in Source. IDs are the machine identity; renaming the display name does not change references.</p>
+      <p className="muted small">Category and use identity stay fixed to the original source. Harvest/gather metadata does not enroll variants in discovery. Liquid metadata does not enable partial-volume drinking. Saving a variant does not migrate owned instances. Reset keeps its captured inputs; Test latest saved version captures saved revisions.</p>
     </>}
     {view === "References" && <><h3>Referenced by pools · declared JSON references</h3>
       <p className="muted small">Saved contextual pool files only. This is not an acquisition or world-selection guarantee.</p>
@@ -58,7 +63,7 @@ export function ItemEditor(p: {
     {view === "Recipes" && <><p>Opened item/source snapshot. Exact declared output references and potential ingredient predicates are distinct from availability or successful crafting.</p>
       {[true,false].map(produces=><section key={String(produces)}><h3>{produces ? "Produces this item" : "Potential ingredient matches"}</h3><table className="pool-table"><thead><tr><th>Recipe / source</th><th>Evidence</th><th>Execution class</th></tr></thead><tbody>{record?.recipes?.filter(r=>produces ? r.produces : r.fields.length>0).map(r=><tr key={r.path+r.pointer}><td><button data-recipe-link={r.path} data-recipe-relation={produces ? "output" : "ingredient"} disabled={p.busy} onClick={()=>p.onRecipe?.(r.id,r.path)}>{r.id}</button><code>{r.path}{r.pointer}</code></td><td>{produces ? "Declared result_item reference" : "Potential tag match"}<small>{produces ? "Exact item ID" : r.fields.join(", ")}</small></td><td>{r.execution_class}</td></tr>)}</tbody></table></section>)}<p>Tag/tier predicates only. Quantities, reusable-material choices, knowledge, access and ambient conditions are unverified.</p></>}
     {view === "Use binding" && <><h3>{record?.use.status || "Unavailable"}</h3><dl><dt>Declared on_use</dt><dd>{JSON.stringify(record?.use.declared ?? null)}</dd><dt>Actual consumer</dt><dd>{record?.use.consumer}</dd><dt>Handler</dt><dd>{record?.use.handler || "None"}{record?.use.line ? ` · source line ${record.use.line}` : ""}</dd></dl><p>{record?.use.scope}</p>{record?.use.notes.map(n => <p className="notice" key={n}>{n}</p>)}<p>Ordinary interactive use was not executed.</p></>}
-    {view === "Factory result" && <><button disabled={p.busy || !cap?.editable || !!parsed.reason} onClick={p.onProbe}>Validate and construct exact item</button>{record?.factory && evidenceCurrent ? <><h3>Observed factory instance</h3><p>{record.factory.consumer}</p><p>{record.factory.scope}</p><code>{record.factory.path} · exact source {record.factory.definition_sha256.slice(0,12)}<br />Game {record.factory.source.game_source_sha256.slice(0,12)} · catalogue {record.factory.source.catalog_sha256?.slice(0,12)}</code>
+    {view === "Factory result" && <><button disabled={p.busy || !cap?.editable || !!parsed.reason} onClick={p.onProbe}>Validate and construct exact item</button>{record?.factory && evidenceCurrent ? <><h3>Unowned factory construction</h3><p>{record.factory.consumer}</p><p>{record.factory.scope}</p><code>{record.factory.path} · exact source {record.factory.definition_sha256.slice(0,12)}<br />Game {record.factory.source.game_source_sha256.slice(0,12)} · catalogue {record.factory.source.catalog_sha256?.slice(0,12)}</code>
       <small>Observed {record.factory.observed_at_utc} · loaded catalogue {record.factory.loaded_catalog_sha256.slice(0,12)}</small>
       <table className="pool-table"><thead><tr><th>Property</th><th>Declared</th><th>Instance</th></tr></thead><tbody>{record.factory.comparisons.map(r => <tr key={r.field}><td>{r.field}</td><td>{JSON.stringify(r.declared)}</td><td>{JSON.stringify(r.instance)} · {r.equal ? "matches" : "differs"}</td></tr>)}</tbody></table>
       <details><summary>Factory receipt</summary><pre className="raw" data-testid="item-factory-receipt">{JSON.stringify(record.factory,null,2)}</pre></details></> : <p>No current factory result. Validate the draft or repair the source diagnostics.</p>}</>}

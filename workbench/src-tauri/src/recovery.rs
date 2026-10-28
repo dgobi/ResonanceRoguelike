@@ -63,6 +63,9 @@ impl Record {
                  || !self.target.starts_with("roguelike/data/entities/creatures/")
                  || self.published.as_ref().is_some_and(|p|!p.path.starts_with("roguelike/data/entities/creatures/"))))
             || crate::authoring::content_root(&self.source).is_none()
+            || ((self.family=="item" || self.source.starts_with("roguelike/data/items/")) &&
+                (self.family!="item" || !crate::authoring::supplies_path(&self.source)
+                 || self.published.as_ref().is_some_and(|p|!crate::authoring::supplies_path(&p.path))))
             || self.source_sha256 != hash(self.baseline.as_bytes())
             || self.target != intent_target(&self.source,self.variant,&self.variant_id)
             || self.published.as_ref().is_some_and(|p| crate::authoring::content_root(&p.path).is_none() || p.after_sha256.len()!=64 || p.generation>self.generation)

@@ -328,6 +328,7 @@ class StructureCatalog:
     def __init__(self,data):
         self.root=Path(data.root).resolve()
         self.entries=[]
+        self.source_hashes={}
         self.diagnostics=[]
         records=[]; identifiers={}
         for folder,route in [('buildings','ordinary_building'),('entrances','interior_entrance'),('layouts','authored_submap')]:
@@ -342,6 +343,7 @@ class StructureCatalog:
                 profile='plaza' if category=='plaza' else route
                 try: raw=read_document(path)
                 except StructureError as e: self.diagnostics.extend(e.diagnostics); continue
+                self.source_hashes[str(path.resolve())]=hashlib.sha256(path.read_bytes()).hexdigest()
                 records.append((raw,profile,path,category))
                 if isinstance(raw,dict) and isinstance(raw.get('id'),str):
                     identifiers.setdefault((folder,raw['id']),[]).append(path)

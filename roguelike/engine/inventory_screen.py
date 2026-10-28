@@ -298,7 +298,11 @@ class InventoryScreen:
                     self.selected = min(self.selected, max(0, len(self._flat) - 1))
                     self._clamp_scroll()
                 else:
+                    before_items = tuple(id(item) for item in inv.items)
                     consumed = engine.item_system.use(row_item, engine)
+                    if before_items != tuple(id(item) for item in inv.items):
+                        self._flat = []
+                        self.selected = max(0, self.selected - 1)
                     # heal_minor rejects without an action. Other handlers can
                     # return False after a paid action (e.g. reading/equipping).
                     if row_item.on_use == "heal_minor" and not consumed:

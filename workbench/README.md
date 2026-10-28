@@ -1,7 +1,7 @@
-# Resonance Workbench · W5F
+# Resonance Workbench · W5J
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
-safely editing ordinary buildings, contextual loot pools, inert component items,
+safely editing ordinary buildings, contextual loot pools, materials and usable supplies,
 one immediate recipe family, common Actor fields and ordinary creature variants,
 direct creature placement in authored underground layouts, found-text variants
 and game typography. The game remains the
@@ -12,6 +12,13 @@ contract and the same exact-source document lifecycle. See
 [content contracts](docs/CONTENT_CONTRACTS.md) for the extension seam, supported
 control vocabulary, default handling and publication boundaries. Other editor
 families retain their existing supported operations.
+
+Materials, foods, drinks and treatment share the item lifecycle. Common controls
+precede the original source's use controls; validation explains stored doses from
+saved survival settings. Save/reopen supplies before room placement and **Test
+latest saved version**. Reset retains captured inputs. See the
+[supplies guide](../roguelike/docs/ITEM_AUTHORING.md) for eligible routes, return
+limits and the definition/instance persistence split.
 
 ## Choose game typography
 

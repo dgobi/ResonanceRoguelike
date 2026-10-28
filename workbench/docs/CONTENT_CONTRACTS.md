@@ -1,5 +1,13 @@
 # Registered content authoring
 
+W5J versions the item capability as `usable-supplies-1`: original-source materials,
+`eat`, `drink` and `heal_minor` supplies in components/butchery/consumables. The
+adapter fixes original category/use identity and validates return dependencies.
+The host independently confines operations/recovery to these routes and excludes
+canonical empty-skin editing. Class controls reuse `x-view`; renderer state grants
+no permission. Saved survival and return data remain covered by conservative
+stamps. See [item authoring](../../roguelike/docs/ITEM_AUTHORING.md).
+
 W5I also registers `assignment_authoring.py` as edit-only family `assignment`,
 contract `authored-submap-selection-1`, at the exact host-owned file
 `roguelike/data/generation/authored_submap_selection.json`. No other generation
@@ -161,8 +169,8 @@ paths to supported roots. Renderer-supplied family IDs, schemas and verdicts gra
 no write authority. Python rechecks original source eligibility separately from
 candidate validity. An unsupported source cannot become writable by changing its
 candidate shape. Duplicate IDs, arrays and keyed objects retain their previous
-inspection/publication limits. Items retain eligible component edit/variant
-rules; immediate recipes require a unique new variant.
+inspection/publication limits. Items retain original-source supply class/category
+for edit/variant operations; immediate recipes require a unique new variant.
 
 W4D operation ownership, token/revision/attempt checks, cancellation, one-time
 review consumption and reserved-publication BUSY handling remain active. The

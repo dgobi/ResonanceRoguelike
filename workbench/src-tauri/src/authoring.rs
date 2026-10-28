@@ -18,12 +18,19 @@ const CATEGORIES: &[&str] = &[
 // (source root, publication root, reserved basenames)
 const CONTENT_ROOTS: &[(&str, &str, &[&str])] = &[
     ("roguelike/data/entities/", "roguelike/data/entities/creatures/", &[]),
-    ("roguelike/data/items/", "roguelike/data/items/components/", &[]),
+    ("roguelike/data/items/", "roguelike/data/items/", &[]),
     ("roguelike/data/recipes/", "roguelike/data/recipes/", &[]),
     ("roguelike/data/texts/", "roguelike/data/texts/", &["text_item_map.json"]),
 ];
 pub const TYPOGRAPHY: &str = "roguelike/data/display/typography.json";
 pub const ASSIGNMENT: &str = "roguelike/data/generation/authored_submap_selection.json";
+pub fn supplies_path(source:&str)->bool {
+    let p:Vec<_>=source.split('/').collect();
+    p.len()>=5 && p[..3]==["roguelike","data","items"]
+        && ["components","butchery","consumables"].contains(&p[3])
+        && p[4..p.len()-1].iter().all(|s|valid_id(s)) && valid_filename(p[p.len()-1])
+        && !p[p.len()-1].eq_ignore_ascii_case("empty_water_skin.json")
+}
 pub fn content_root(source: &str) -> Option<&'static str> {
     if source == TYPOGRAPHY { return Some(TYPOGRAPHY); }
     if source == ASSIGNMENT { return Some(ASSIGNMENT); }
@@ -69,6 +76,7 @@ impl FamilyPolicy {
         { return None; }
         let effective = f["effective_operations"].as_array()?.iter().map(|v|v.as_str().map(str::to_owned)).collect::<Option<Vec<_>>>()?;
         if effective.iter().any(|op| !operations.contains(op))
+            || (source.starts_with("roguelike/data/items/") && (id!="item" || route!="item_definition" || (!effective.is_empty() && !supplies_path(source))))
             || (is_submap(source) && (id != "room" || route != "authored_submap"))
             || (is_creature(source) && (id != "creature" || root != "roguelike/data/entities/creatures/")) { return None; }
         Some(Self { id:id.into(), route:route.into(), contract:contract.into(), descriptor:d.clone(), digest:digest.into(), root:root.into(), operations:effective })
@@ -744,6 +752,9 @@ fn destination(
     if !doc.writable {
         return Err(failure(if is_submap(&doc.relative) || doc.relative == G17_EXAMPLE { "READ_ONLY_LAYOUT" } else if is_creature(&doc.relative) { "READ_ONLY_CREATURE" } else if is_recipe(&doc.relative) { "READ_ONLY_RECIPE" } else { "READ_ONLY_ITEM" }, "This source is outside its supported authoring capability.", "Inspect unsupported or ambiguous sources read-only."));
     }
+    if doc.relative.starts_with("roguelike/data/items/") && !supplies_path(&doc.relative) {
+        return Err(failure("READ_ONLY_ITEM","Item writing is confined to supported supplies routes.","Choose a supported original supply source."));
+    }
     if draft.len() > MAX_DRAFT {
         return Err(io_error("Draft exceeds 1 MiB."));
     }
@@ -764,6 +775,9 @@ fn destination(
         return Err(failure("IDENTITY_CHANGE","Assignment requires fixed id authored_submap_selection and integer version 1.","Restore the fixed identity/version."));
     }
     if let Some(id) = variant_id {
+        if doc.relative.starts_with("roguelike/data/items/") && !supplies_path(&format!("{}/{}.json",variant_directory(&doc.relative),id)) {
+            return Err(failure("READ_ONLY_ITEM","Reserved or unsupported supply destination.","Choose a unique ordinary supply ID."));
+        }
         if !valid_id(id) || raw["id"].as_str() != Some(id) || doc.id.as_ref().is_some_and(|original|original.eq_ignore_ascii_case(id)) {
             return Err(failure(
                 "VARIANT_ID",
@@ -2087,6 +2101,28 @@ mod tests {
         assert!(session_doc(&host, "pool").unwrap().1.review.is_some());
         assert!(session_doc(&host, "building").unwrap().1.review.is_some());
         host.cancel(true).unwrap(); assert!(session_doc(&host, "item").is_err());
+    }
+    #[test]
+    fn supplies_routes_are_independent_of_worker_permissions_and_recovery() {
+        let (root,mut doc,_) = fixture();
+        for route in ["components","butchery","consumables"] {
+            doc.relative=format!("roguelike/data/items/{route}/sample.json");doc.writable=true;
+            assert!(supplies_path(&doc.relative));
+            doc.family=FamilyPolicy::from_result(&family_result(&doc,"item",json!(["edit","variant"])),&doc.relative);
+            assert!(doc.family.is_some());
+            assert!(destination(&doc,r#"{"id":"sample"}"#,None).is_ok());
+            assert!(destination(&doc,r#"{"id":"empty_water_skin"}"#,Some("empty_water_skin")).is_err());
+            let record=recovery::Record{version:1,id:uuid::Uuid::new_v4().to_string(),project:root.path().into(),source:doc.relative.clone(),
+                family:"item".into(),contract:"usable-supplies-1".into(),descriptor_sha256:"a".repeat(64),source_sha256:hash(&doc.original),
+                baseline:String::from_utf8(doc.original.clone()).unwrap(),draft:"{invalid".into(),variant:false,variant_id:String::new(),target:doc.relative.clone(),generation:1,captured_ms:1,published:None};
+            assert!(record.validate().is_ok());
+        }
+        for source in ["roguelike/data/items/weapons/sample.json","roguelike/data/items/tools/sample.json","roguelike/data/items/consumables/empty_water_skin.json"] {
+            doc.relative=source.into();doc.writable=true;
+            assert!(!supplies_path(source));
+            assert!(FamilyPolicy::from_result(&family_result(&doc,"item",json!(["edit","variant"])),source).is_none());
+            assert!(destination(&doc,r#"{"id":"sample"}"#,None).is_err());
+        }
     }
     #[test]
     fn item_transaction_noclobber_conflict_and_rollback() {

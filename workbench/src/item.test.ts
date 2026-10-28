@@ -33,4 +33,12 @@ describe("shared item source draft", () => {
     item.clear(); expect(item.undo(edited+" ")).toBe(edited+" ");
     expect(currentVerdict(2,3,source,edited)).toBe(false);
   });
+  it("edits supplies locally while preserving nulls, omitted defaults and nested metadata",()=>{
+    const s='{\r\n "id":"meal", "on_use":"eat", "nutrition":null, "eat_message":null, "harvest_from":"bush", "_essence_note":{"nested":[false,null]}, "keywords":[]\r\n}\r\n';
+    expect(itemValue(s,["nutrition"],.35)).toBe(s.replace('"nutrition":null','"nutrition":0.35'));
+    expect(itemValue(s,["eat_message"],"A meal.")).toBe(s.replace('"eat_message":null','"eat_message":"A meal."'));
+    expect(itemValue(s,["nutrition"],null)).toBe(s);
+    expect(itemValue(s,["tile"],"generic_item")).toContain('"nutrition":null');
+    expect(itemValue(s,["tile"],"generic_item")).not.toContain('"weight"');
+  });
 });

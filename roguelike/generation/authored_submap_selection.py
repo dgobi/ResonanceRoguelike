@@ -101,7 +101,13 @@ def validate(raw, data):
         cap=capability(definition,path)
         if not path.startswith(ROOT) or 'edit' not in cap['operations'] or identifier not in data.layouts:
             diagnostics.append(issue(field+'.layout_id', cap['reason'] or 'Publish the template as an ordinary room first; exact saved identity required.',severity)); continue
-        if data.layouts[identifier] != definition:
+        entry=data.structure_catalog.by_route['authored_submap'].get(identifier)
+        saved_path=(Path(data.root)/Path(path).relative_to('roguelike/data')).resolve()
+        # Compare raw to raw, compiled to compiled, and the original source bytes.
+        # Container defaults belong to the compiler, never to the saved source.
+        if (entry is None or Path(entry.path).resolve()!=saved_path or entry.raw!=definition
+                or entry.definition!=data.layouts[identifier]
+                or data.structure_catalog.source_hashes.get(str(saved_path))!=hashlib.sha256(saved_path.read_bytes()).hexdigest()):
             diagnostics.append(issue(field+'.layout_id', 'Saved room differs from the loaded catalogue; reopen saved inputs before generation.',severity)); continue
         errors=authoring_validate(definition,data,path,data.root)
         for d in errors:

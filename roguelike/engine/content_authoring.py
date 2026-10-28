@@ -169,7 +169,7 @@ def families():
         Family("assignment", "generation", assignment_authoring, ("edit",), assignment_authoring.PROFILE, assignment_authoring.PROFILE),
         Family("room", "layouts", room_authoring, ("edit", "variant"), "roguelike/data/layouts/"),
         Family("creature", "entities", creature_authoring, ("edit", "variant"), "roguelike/data/entities/creatures/"),
-        Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/components/"),
+        Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/"),
         Family("recipe", "recipes", recipe_authoring, ("variant",), "roguelike/data/recipes/"),
         Family("text", "texts", text_authoring, ("variant",), "roguelike/data/texts/"),
         Family("typography", "display", typography_authoring, ("edit",), typography_authoring.PROFILE, typography_authoring.PROFILE),

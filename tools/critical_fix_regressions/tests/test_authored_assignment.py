@@ -111,5 +111,31 @@ class AssignmentTests(unittest.TestCase):
             with patch('generation.authored_submap_selection.resolve',side_effect=AssertionError('policy used during load')): _deserialize_world(recorded,loaded)
             self.assertEqual(_serialize_world(loaded),recorded)
 
+    def test_implicit_container_defaults_keep_exact_source_and_real_world_construction(self):
+        from engine.assignment_authoring import authoring_context
+        from generation.authored_rooms import authoring_validate
+        from generation.structure_preview import preview
+        from engine.scene_generation import create_submap
+        for fields in ({},{'decor_id':'crate'},{'loot_pools':[]},{'decor_id':'crate','loot_pools':[]}):
+            raw=copy.deepcopy(ROOM);raw['special_tiles']=[dict(type='container',x=5,y=3,**fields)]
+            path=self.root/'layouts/assignment_a.json';saved=json.dumps(raw,indent=2).encode();path.write_bytes(saved)
+            with contextlib.redirect_stdout(io.StringIO()): self.data=DataLoader(str(self.root))
+            self.assertFalse([d for d in authoring_validate(raw,self.data,'roguelike/data/layouts/assignment_a.json',self.root) if d['severity']=='error'])
+            self.save(dict(self.profile,candidates=[dict(layout_id='assignment_a',weight=1)]))
+            context=authoring_context(self.profile,self.data,'roguelike/data/generation/authored_submap_selection.json',self.root,{},'x')
+            self.assertTrue(next(r for r in context['rooms'] if r['id']=='assignment_a')['eligible'])
+            self.assertFalse(validate(json.loads((self.root/RELATIVE).read_bytes()),self.data)[1])
+            world=self.world();wx,wy,chosen=next((c.wx,c.wy,sm) for c in world.chunks.values() for sm in c.submaps if sm.layout_id=='assignment_a')
+            # Production new-world assignment feeds the ordinary scene builder.
+            from engine.item_factory import ItemFactory
+            from engine.creature_factory import CreatureFactory
+            with contextlib.redirect_stdout(io.StringIO()): m=create_submap(world,wx,wy,chosen,self.data,ItemFactory(self.data),CreatureFactory(self.data),80,43).local_map
+            self.assertEqual(len(m.container_state),1);self.assertEqual(next(iter(m.container_state.values()))['decor_id'],'crate')
+            self.assertEqual(path.read_bytes(),saved)
+            path.write_bytes(saved+b'\n')
+            self.assertTrue(any('differs' in d['message'] for d in validate(json.loads((self.root/RELATIVE).read_bytes()),self.data)[1]))
+            path.write_bytes(json.dumps(dict(raw,description='real post-load edit')).encode())
+            self.assertTrue(any('differs' in d['message'] for d in validate(json.loads((self.root/RELATIVE).read_bytes()),self.data)[1]))
+
 
 if __name__=='__main__': unittest.main()

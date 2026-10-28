@@ -1,5 +1,12 @@
 # Disposable Workbench room runtime
 
+W5J supplies use the same capture/reset/latest boundary. Save items and room first;
+parked drafts do not overlay capture. Opt-in app-local diagnostics also record
+transient instance identities, selected rows, needs/HP and actual turn-advance
+calls. Its once-only `supplies-injured` fixture sets hunger/thirst to 0.8 and HP to
+max minus 15; subsequent actions run normal input/handlers. This is verification
+setup, not an owner scenario editor. See [supplies](ITEM_AUTHORING.md).
+
 `room_test.py` implements `workbench-room-test-1` for an eligible saved ordinary
 `room` (`authored-room-1`, `authored_submap`). It never invokes `main.py`'s campaign
 startup/restart loop. The native host supplies every path and a unique snapshot
