@@ -91,6 +91,18 @@ impl Store {
         self.claims.insert(key.into(),lock); Ok(())
     }
     pub fn release(&mut self,key:&str){self.claims.remove(key);}
+    // The authoritative read happens only under the process claim. A failed
+    // request may release its own new claim, never one protecting a live owner.
+    pub fn acquired<T>(&mut self,key:&str,generation:u64,action:impl FnOnce(&mut Self,Record)->Result<T,Failure>)->Result<T,Failure>{
+        let owned=self.claims.contains_key(key);self.claim(key)?;
+        let result=(||{
+            let record=self.read(key)?;
+            if record.generation!=generation{return Err(error("Recovery generation changed. Refresh the list."));}
+            action(self,record)
+        })();
+        if result.is_err() && !owned{self.release(key);}
+        result
+    }
     pub fn release_all(&mut self){self.claims.clear();}
     pub fn read(&self,key:&str)->Result<Record,Failure> {
         let path=self.path(key,"json")?;
@@ -177,6 +189,14 @@ mod tests {
         a.write(&two).unwrap();assert!(a.write(&one).is_err());assert!(a.retire(&key,1).is_err());
         a.release(&key);b.claim(&key).unwrap();assert!(a.write(&two).is_err());
         b.retire(&key,2).unwrap();assert!(b.write(&two).is_err());assert!(b.read(&key).is_err());
+    }
+    #[test]
+    fn failed_checkpoint_releases_new_claim_but_preserves_existing_owner(){
+        let dir=tempfile::tempdir().unwrap();let project=tempfile::tempdir().unwrap();let mut a=Store::new(dir.path().into()).unwrap();let mut b=Store::new(dir.path().into()).unwrap();
+        let record=sample(project.path());let key=record.key();a.write(&record).unwrap();a.release(&key);
+        assert!(a.acquired(&key,1,|s,mut r|{r.generation+=1;s.write_at_boundary(&r,true)}).is_err());
+        b.claim(&key).unwrap();b.release(&key);assert_eq!(a.read(&key).unwrap(),record);
+        a.claim(&key).unwrap();assert!(a.acquired(&key,1,|s,mut r|{r.generation+=1;s.write_at_boundary(&r,true)}).is_err());assert!(b.claim(&key).is_err());
     }
     #[test]
     fn independent_records_survive_reopen_and_malformed_neighbors(){

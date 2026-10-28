@@ -164,7 +164,7 @@ export default function App() {
       const catalog=await request<{assets:Asset[]}>("describe");setAssets(catalog.result.assets);
       opened=(await call<Inspection>("open_document",{asset,expectedSha256:expected})).result;
       if(target)await invoke("reconcile_recovery",{token:opened.document_token,key:row.key,generation:row.generation});
-      else opened={...opened,recovery:await invoke<RecoveredDraft>("restore_recovery",{token:opened.document_token,key:row.key})};
+      else opened={...opened,recovery:await invoke<RecoveredDraft>("restore_recovery",{token:opened.document_token,key:row.key,generation:row.generation})};
       setContentDocuments(d=>{const next=installDocument(d,opened!,opened!.id);if(!target)next[opened!.document_token!].dirty=true;return next;});
       activateContent(opened.document_token!);setRecoveryOpen(false);setRecoveryVersion(v=>v+1);
       setError(null);

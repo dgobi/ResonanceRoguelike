@@ -376,30 +376,35 @@ pub fn list_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>)->Result<Va
 #[tauri::command]
 pub fn inspect_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,key:String)->Result<Value,Failure>{
     let record=recovery::with_store(&app,&host,|store|store.read(&key))?;
-    let (status,disk)=recovery_status(&record);Ok(json!({"record":record,"status":status,"disk":disk}))
+    let (status,disk)=recovery_status(&record);Ok(json!({"key":key,"record":record,"status":status,"disk":disk}))
 }
 #[tauri::command]
 pub fn discard_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,key:String,generation:u64)->Result<(),Failure>{
     let state=host.inner.lock().unwrap();
-    if state.content_documents.values().any(|d|d.accepted.as_ref().is_some_and(|r|r.key()==key)) {
-        return Err(recovery::error("This record belongs to an open document. Resolve its draft through that document's close choices."));
+    require_unowned_recovery(&state,&key)?;
+    recovery::with_store(&app,&host,|store|store.acquired(&key,generation,|store,_|store.retire(&key,generation)))
+}
+fn require_unowned_recovery(state:&Session,key:&str)->Result<(),Failure>{
+    if let Some(doc)=state.content_documents.values().find(|d|d.accepted.as_ref().is_some_and(|r|r.key()==key)) {
+        return Err(recovery::error(format!("Recovery belongs to open document {}. Use that owner's verified reopen or close choices; its newer work is preserved.",doc.relative)));
     }
-    recovery::with_store(&app,&host,|store|{
-        if store.read(&key)?.generation!=generation{return Err(recovery::error("Recovery generation changed. Refresh the list."));}
-        store.retire(&key,generation)
-    })
+    Ok(())
 }
 #[tauri::command]
-pub fn restore_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,token:String,key:String)->Result<Value,Failure>{
+pub fn restore_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,token:String,key:String,generation:u64)->Result<Value,Failure>{
     let mut state=host.inner.lock().unwrap();if state.applying || !state.ready{return Err(busy_failure());}
+    require_unowned_recovery(&state,&key)?;
     let root=state.root.clone().ok_or_else(unknown_document)?;
     let doc=current_document(&mut state,&token).ok_or_else(unknown_document)?;
-    let mut record=recovery::with_store(&app,&host,|store|store.read(&key))?;
-    check_restore(&root,doc,&record)?;
-    infer_completed_write(&root,&mut record);
-    recovery::with_store(&app,&host,|store|{store.claim(&key)?;store.write(&record)})?;
-    doc.accepted=Some(record.clone());doc.edit_sequence=0;doc.revision+=1;revoke(doc);
-    Ok(json!({"key":key,"generation":record.generation,"draft":record.draft,"variant":record.variant,"variant_id":record.variant_id,"published":record.published}))
+    recovery::with_store(&app,&host,|store|restore_claimed(store,&root,doc,&key,generation))
+}
+fn restore_claimed(store:&mut recovery::Store,root:&Path,doc:&mut Document,key:&str,generation:u64)->Result<Value,Failure>{
+    store.acquired(key,generation,|store,mut record|{
+        check_restore(root,doc,&record)?;
+        infer_completed_write(root,&mut record);store.write(&record)?;
+        doc.accepted=Some(record.clone());doc.edit_sequence=0;doc.revision+=1;revoke(doc);
+        Ok(json!({"key":key,"generation":record.generation,"draft":record.draft,"variant":record.variant,"variant_id":record.variant_id,"published":record.published}))
+    })
 }
 fn infer_completed_write(root:&Path,record:&mut recovery::Record){
     // A write may precede persistence of its fact. Matching bytes permit only
@@ -426,18 +431,24 @@ fn check_restore(root:&Path,doc:&Document,record:&recovery::Record)->Result<(),F
 #[tauri::command]
 pub fn reconcile_recovery(app:tauri::AppHandle,host:tauri::State<'_,Host>,token:String,key:String,generation:u64)->Result<(),Failure>{
     let mut state=host.inner.lock().unwrap();if state.applying || !state.ready{return Err(busy_failure());}
+    recovery::with_store(&app,&host,|store|reconcile_claimed(store,&mut state,&token,&key,generation))
+}
+fn reconcile_claimed(store:&mut recovery::Store,state:&mut Session,token:&str,key:&str,generation:u64)->Result<(),Failure>{
+    require_unowned_recovery(state,key)?;
     let root=state.root.clone().ok_or_else(unknown_document)?;
-    let doc=current_document(&mut state,&token).ok_or_else(unknown_document)?;
-    let record=recovery::with_store(&app,&host,|store|store.read(&key))?;
+    let doc=current_document(state,token).ok_or_else(unknown_document)?;
+    store.acquired(key,generation,|store,record|{
     let (path,expected)=record.published.as_ref().map(|p|(p.path.as_str(),p.after_sha256.clone())).unwrap_or((&record.target,hash(record.draft.as_bytes())));
     if recovery::project_key(&root)!=recovery::project_key(&record.project) || file_key(&doc.relative)!=file_key(path)
+        || !doc.writable || doc.family.as_ref().is_none_or(|f|f.id!=record.family)
         || doc.revision!=0 || doc.accepted.is_some() || record.generation!=generation
         || hash(&doc.original)!=expected || hash(record.draft.as_bytes())!=expected || record.target!=path
         || record.published.as_ref().is_some_and(|p|p.generation!=record.generation)
         || read_source(&checked_target(&root,path,false)?)?!=doc.original {
         return Err(recovery::error("Saved target does not cover this exact recovery generation. Newer or conflicting work remains available to inspect/copy."));
     }
-    recovery::with_store(&app,&host,|store|store.retire(&key,generation))?;revoke(doc);Ok(())
+    store.retire(key,generation)?;revoke(doc);Ok(())
+    })
 }
 #[tauri::command]
 pub fn acknowledge_reopen(app:tauri::AppHandle,host:tauri::State<'_,Host>,handoff_id:String)->Result<(),Failure>{
@@ -1233,6 +1244,37 @@ pub fn finish_close(window: tauri::Window, host: tauri::State<'_, Host>) -> Resu
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn recovery_acquisition_refuses_deleted_or_advanced_inspection_and_cleans_failed_claim(){
+        let (root,host,doc,_)=lifecycle_fixture(false);
+        accept_edit(&host,&doc.token,1,"exact unfinished".into(),true,"variant".into()).unwrap();
+        let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();let key=record.key();
+        let dir=tempfile::tempdir().unwrap();let mut a=recovery::Store::new(dir.path().into()).unwrap();let mut b=recovery::Store::new(dir.path().into()).unwrap();
+        a.write(&record).unwrap();a.release(&key);let inspected=a.read(&key).unwrap();
+        let mut advanced=record.clone();advanced.generation+=1;b.write(&advanced).unwrap();b.release(&key);
+        let mut fresh=doc.clone();assert!(restore_claimed(&mut a,root.path(),&mut fresh,&key,inspected.generation).is_err());
+        b.claim(&key).unwrap();b.retire(&key,advanced.generation).unwrap();
+        assert!(restore_claimed(&mut a,root.path(),&mut fresh,&key,inspected.generation).is_err());assert!(a.read(&key).is_err());assert!(fresh.accepted.is_none());
+        // A separate fresh key: failed source check releases only the new claim.
+        let mut next=record;next.id=uuid::Uuid::new_v4().to_string();let key=next.key();b.write(&next).unwrap();b.release(&key);
+        fresh.revision=1;assert!(restore_claimed(&mut a,root.path(),&mut fresh,&key,next.generation).is_err());b.claim(&key).unwrap();b.release(&key);
+        a.claim(&key).unwrap();assert!(restore_claimed(&mut a,root.path(),&mut fresh,&key,next.generation).is_err());assert!(b.claim(&key).is_err());
+    }
+    #[test]
+    fn saved_variant_reconciliation_preserves_live_source_owner_and_next_checkpoint(){
+        let (root,host,doc,mut review)=lifecycle_fixture(false);
+        review.draft="{\"id\":\"variant\",\"description\":\"saved\"}".into();
+        accept_edit(&host,&doc.token,1,review.draft.clone(),true,"variant".into()).unwrap();
+        publish(root.path(),&doc,&review,Fault::None).unwrap();
+        let dir=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(dir.path().into()).unwrap();
+        let mut record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();infer_completed_write(root.path(),&mut record);store.write(&record).unwrap();
+        {let mut state=host.inner.lock().unwrap();current_document(&mut state,&doc.token).unwrap().accepted=Some(record.clone());
+          let mut target=doc.clone();target.token="saved-target".into();target.relative=record.target.clone();target.original=review.draft.as_bytes().to_vec();
+          state.content_documents.insert(file_key(&target.relative),target);
+          let error=reconcile_claimed(&mut store,&mut state,"saved-target",&record.key(),record.generation).unwrap_err();assert!(error.message.contains(&doc.relative));}
+        accept_edit(&host,&doc.token,2,"newer exact draft".into(),true,"variant".into()).unwrap();
+        let newer=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();store.write(&newer).unwrap();assert_eq!(store.read(&record.key()).unwrap(),newer);assert_eq!(newer.published,record.published);
+    }
     fn workspace_fixture() -> (tempfile::TempDir, Host, Vec<Document>) {
         let (root, host, first, _) = lifecycle_fixture(false);
         let mut documents = vec![first.clone()];
