@@ -10,6 +10,7 @@ from components.equipment import Equipment
 from components.level import LevelComponent
 
 PROFILE = "ordinary-player-v1: body_player; 60 base HP from body definition; normal needs/carrying/AI; tallow_torch, crow_jerky, water_flask, crude_blade, leather_jack, moist_pebble"
+STARTING_ITEMS = ("tallow_torch", "crow_jerky", "water_flask", "crude_blade", "leather_jack", "moist_pebble")
 
 def create_player(data, item_factory, x, y):
     player = Actor(x=x, y=y, tile="player", name="Player")
@@ -27,7 +28,7 @@ def create_player(data, item_factory, x, y):
     player.true_sight   = False
     player.dodge_chance = 0.05   # 5% base dodge — read by combat system
 
-    for item_id in ("tallow_torch", "crow_jerky", "water_flask", "crude_blade", "leather_jack", "moist_pebble"):
+    for item_id in STARTING_ITEMS:
         item = item_factory.create(item_id)
         if item is not None:
             player.inventory.add(item)

@@ -11,7 +11,7 @@ from engine.data_loader import DataLoader
 from engine.display_config import DisplayConfig
 from engine.engine import Engine
 from engine.item_factory import ItemFactory
-from engine.player_setup import create_player
+from engine.player_setup import create_player,STARTING_ITEMS
 from engine.save_manager import SaveManager
 from rendering.tile_registry import TileRegistry
 from world.local_map import LocalMap,make_tile
@@ -66,6 +66,7 @@ class RoomSessionTests(unittest.TestCase):
     def test_normal_profile_has_equipped_light_and_real_needs(self):
         with tempfile.TemporaryDirectory(prefix='w5h-player-') as directory:
             e=self.engine(SaveManager(save_root=Path(directory)/'saves'))
+            self.assertEqual([i.item_id for i in e.player.inventory.items],list(STARTING_ITEMS))
             torch=next(i for i in e.player.inventory.items if i.item_id=='tallow_torch')
             e.item_system.use(torch,e)
             self.assertTrue(e.player.light_source.active)

@@ -130,6 +130,14 @@ def validate(config):
     pygame.font.init()
     fonts = typography.initialize(root)
     diagnostics += fonts['diagnostics']
+    ui=root/'roguelike/assets/ui'
+    panels=sorted(ui.glob('*.png')) if ui.is_dir() else []
+    if not panels:
+        diagnostics.append(dict(severity='warning',code='UI_FALLBACK',field='assets/ui',message='No saved UI panel images; the game will use its ordinary plain-panel fallback.'))
+    for panel in panels:
+        try:pygame.image.load(str(panel))
+        except (pygame.error,OSError) as error:
+            diagnostics.append(dict(severity='warning',code='UI_FALLBACK',field='assets/ui/'+panel.name,message=f'Panel cannot load; the game will use its ordinary fallback: {error}'))
     return dict(contract=CONTRACT, room_id=raw['id'], room_contract=room_authoring.CONTRACT,
                 descriptor_sha256=family.descriptor()[1], route=family.route,
                 profile=PROFILE, diagnostics=diagnostics, spawn=report['spawn'], preview=report)
@@ -144,7 +152,7 @@ def build_engine(config, *, load=False):
     from engine.engine import Engine
     from engine.item_factory import ItemFactory
     from engine.player_setup import create_player
-    from engine.player_setup import PROFILE
+    from engine.player_setup import PROFILE, STARTING_ITEMS
     from world.local_map import LocalMap
     from world.world_map import WorldMap, Chunk, RegionType, SubMap
     from engine.typography import no_links
@@ -180,6 +188,8 @@ def build_engine(config, *, load=False):
     foyer.set_tile(12,12,'stairs_down',True,True)
     foyer.submap_links[(12,12)] = instance
     player = create_player(data,ItemFactory(data),12,12)
+    if [i.item_id for i in player.inventory.items]!=list(STARTING_ITEMS):
+        raise ValueError('Saved definitions cannot construct all six ordinary starting items required by the disclosed profile')
     engine = Engine(player,foyer,[player],TileRegistry('data/tiles.json',mode=display.render_mode),world,0,0,data,display,
                     save_manager=saves, debug_mode=False, bounded_room_test=True,
                     session_label=f"Workbench disposable room test · {raw['id']} · {config['session_id'][:8]}")
@@ -208,6 +218,10 @@ def main():
     config=read_json(args.session)
     os.chdir(Path(__file__).resolve().parent)
     report=validate(config)
+    if args.validate:
+        preflight=build_engine(config)
+        report['bootstrap_arrival']=[preflight.player.x,preflight.player.y]
+        report['bootstrap_instance']=preflight.current_submap_id
     write_json(config['validation_path'],report)
     if args.validate:
         return

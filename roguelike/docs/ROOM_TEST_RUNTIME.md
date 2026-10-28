@@ -27,6 +27,10 @@ outside the payload. Required sprite sheets and glyph sheets must load. Saved
 typography uses its production complete-profile fallback and reports diagnostics.
 Unrelated loadable unsupported content is retained; required room/readable
 dependencies receive focused checks without a repository-wide cleanup gate.
+The preflight also constructs the actual staged foyer/player, equips its light
+and enters the room through production descent before accepting a replacement.
+Missing ordinary starting items fail that preflight. Optional UI panel absence or
+decoding failure retains the game's plain-panel fallback with explicit warnings.
 
 ## Gameplay and persistence ownership
 
