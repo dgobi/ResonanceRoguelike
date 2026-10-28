@@ -62,20 +62,24 @@ def build():
         chunk=world.get(wx,wy)
         result=create_surface(world,chunk,data,item_factory,CreatureFactory(data),MAP_WIDTH,MAP_HEIGHT);publish_metadata(chunk,result.metadata)
         local=result.local_map;actors=result.actors
-        # Choose a reachable point at least six local tiles from the stair. This
-        # retains the actual entrance shell, approach, doors, terrain and links.
+        # The production placer reserves its entire entrance footprint. Start
+        # outside those cells, retaining the shell, approach, doors and links.
+        protected=set(getattr(local,'protected_cells',set()))
         candidates=sorted(((x,y) for x in range(1,local.width-1) for y in range(1,local.height-1)
-                           if 6<=abs(x-sm.surface_x)+abs(y-sm.surface_y)<=9 and local.walkable[x,y]
+                           if 8<=abs(x-sm.surface_x)+abs(y-sm.surface_y)<=18 and local.walkable[x,y] and (x,y) not in protected
                            and (x,y) not in local.decor and not any((a.x,a.y)==(x,y) for a in actors)),key=lambda xy:(abs(xy[0]-sm.surface_x)+abs(xy[1]-sm.surface_y),xy))
         player=create_player(data,item_factory,0,0)
         e=Engine(player,local,[player]+actors,TileRegistry(str(data.root/'tiles.json')),world,wx,wy,data,DisplayConfig.from_config(),save_manager=saves,debug_mode=False,session_label='W5I natural entrance verification')
         start=next(xy for xy in candidates if action_path(e,xy,(sm.surface_x,sm.surface_y)))
+        assert start not in protected
         player.x,player.y=start;chunk.visited=True;chunk.generation_revision=local.generation_revision
         state=dict(seed=world.seed,dimensions=[world.width,world.height],plan_mode=world.plan_mode,generation_revision=world.generation_revision,
                    selected=dict(chunk=[wx,wy],submap_id=sm.submap_id,type=sm.submap_type,seed=sm.seed,layout_id=sm.layout_id),
                    pending=dict(chunk=list(pending[0]),submap_id=pending[1].submap_id,layout_id=pending[1].layout_id),
                    procedural=dict(chunk=list(procedural[0]),submap_id=procedural[1].submap_id,layout_id=procedural[1].layout_id),
-                   staging=dict(player=list(start),surface_stairs=[sm.surface_x,sm.surface_y],description='Ordinary player staged 6–9 local steps from the genuine production exterior stair. No entrance, destination, SubMap or room replaced.'),
+                   staging=dict(player=list(start),surface_stairs=[sm.surface_x,sm.surface_y],outside_protected_entrance_footprint=True,
+                                description='Ordinary player staged outside the complete production protected entrance footprint, 8–18 local Manhattan tiles from its stair. No entrance, destination, SubMap or room replaced.'),
+                   entrance_diagnostics=getattr(local,'generation_diagnostics',[]),surface_geometry_sha256=scene(local)['terrain'],
                    source_sha256=hashlib.sha256((data.root/'layouts/w5i_room_a.json').read_bytes()).hexdigest(),
                    profile_sha256=hashlib.sha256((data.root/'generation/authored_submap_selection.json').read_bytes()).hexdigest(),
                    world_sha256=hashlib.sha256(json.dumps(_serialize_world(world),sort_keys=True).encode()).hexdigest(),surface_provenance=getattr(local,'surface_provenance',{}))
