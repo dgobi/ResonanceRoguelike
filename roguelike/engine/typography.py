@@ -122,8 +122,15 @@ def load_candidate(root, raw):
         try:
             if name not in cached:
                 path, payload = resource(root, name)
+                # The pinned Windows constructor can leave a NULL font without
+                # raising. size() safely reports SDL_ttf's error; FreeType's
+                # constructor and SDL height access can crash on the same bytes.
+                font = pygame.font.Font(io.BytesIO(payload), size)
+                font.size("A")
                 probe = pygame.freetype.Font(io.BytesIO(payload), size=18, ucs4=True)
                 cached[name] = (path, payload, probe)
+            else:
+                font = pygame.font.Font(io.BytesIO(cached[name][1]), size)
             path, payload, probe = cached[name]
             missing = [c for c, metric in zip(ASCII + symbols, probe.get_metrics(ASCII + symbols)) if metric is None]
             if missing:
@@ -131,7 +138,7 @@ def load_candidate(root, raw):
             optional = OPTIONAL.get(key, "")
             gaps = [c for c, m in zip(optional, probe.get_metrics(optional)) if m is None] if optional else []
             if gaps: diagnostics.append(diagnostic(key, f"Bounded optional/decorative glyph gaps: {''.join(gaps)}. These are pre-existing default limitations, not a universal Unicode guarantee.", "warning", "FONT_OPTIONAL_GLYPHS"))
-            fonts[key] = pygame.font.Font(io.BytesIO(payload), size)
+            fonts[key] = font
             coverage[key] = probe
             resolved.append(dict(role=key, label=label, requested=name, resolved=path.relative_to(root).as_posix(),
                                  sha256=hashlib.sha256(payload).hexdigest(), size=size, fallback=False))

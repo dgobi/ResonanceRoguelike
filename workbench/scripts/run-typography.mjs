@@ -80,7 +80,13 @@ try{
   let fresh=await validate();assert(fresh.valid && fresh.review_token,JSON.stringify(fresh));assert.equal(fresh.draft_sha256,hash(accepted));
   await writeFile(selectedFont,Buffer.concat([fontBytes,Buffer.from([0])]));
   await page.waitForFunction(()=>[...document.querySelectorAll('[data-testid="authoring"]:not([hidden]) button')].some(b=>b.textContent.trim()==="Review & apply" && b.disabled),null,{timeout:15000});
-  const refused=await ipc("apply_document",{token:doc.document_token,reviewToken:fresh.review_token,confirmed:true});assert.equal(refused.error?.code,"REVIEW_REQUIRED");
+  let refused;
+  for(let attempt=0;attempt<30;attempt++){
+    await idle();refused=await ipc("apply_document",{token:doc.document_token,reviewToken:fresh.review_token,confirmed:true});
+    if(refused.error?.code!=="BUSY")break;
+    await new Promise(r=>setTimeout(r,200));
+  }
+  assert.equal(refused.error?.code,"REVIEW_REQUIRED");
   assert.equal(await readFile(resolve(root,profile),"utf8"),baseline);await writeFile(selectedFont,fontBytes);fresh=await validate();assert(fresh.valid && fresh.review_token);
   receipt.checks.push("changed selected font bytes consume a real publication review without a content write; fresh validation restores authority");
   await eb("Review & apply").click();await b("Confirm apply one file").click();await idle();await eb("Begin edit").waitFor();

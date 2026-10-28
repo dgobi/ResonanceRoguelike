@@ -52,7 +52,9 @@ class TypographyTests(unittest.TestCase):
             absent=initialize(root);self.assertFalse((root/PROFILE).exists());self.assertFalse(absent["fallback"])
             self.assertEqual([r["requested"] for r in absent["roles"]],[r[1] for r in ROLES.values()])
             (root/PROFILE).parent.mkdir(parents=True)
-            for raw in ('{invalid',json.dumps(dict(candidate(),font_ui_small="missing.ttf")),json.dumps(dict(defaults(),version=2))):
+            (root/"roguelike/assets/Fonts/corrupt.ttf").write_bytes(b"not a font")
+            for raw in ('{invalid',json.dumps(dict(candidate(),font_ui_small="missing.ttf")),
+                        json.dumps(dict(candidate(),font_ui_large="corrupt.ttf")),json.dumps(dict(defaults(),version=2))):
                 (root/PROFILE).write_text(raw)
                 with warnings.catch_warnings(record=True) as caught: loaded=initialize(root)
                 self.assertTrue(caught);self.assertTrue(loaded["fallback"]);self.assertEqual((root/PROFILE).read_text(),raw)
