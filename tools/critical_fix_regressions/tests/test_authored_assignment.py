@@ -76,7 +76,8 @@ class AssignmentTests(unittest.TestCase):
     def test_invalid_fields_active_references_and_atomic_world_publication(self):
         cases=[dict(self.profile,version=2),dict(self.profile,version=True),dict(self.profile,target_type='lab'),dict(self.profile,enabled=1),
                dict(self.profile,authored_chance=float('nan')),dict(self.profile,authored_chance=2),dict(self.profile,candidates=[])]
-        cases += [dict(self.profile,candidates=[dict(layout_id='assignment_a',weight=w)]) for w in (0,-1,True,float('inf'),float('nan'))]
+        cases += [dict(self.profile,candidates=[dict(layout_id='assignment_a',weight=w)]) for w in (0,-1,True,float('inf'),float('nan'),10**400)]
+        cases.append(dict(self.profile,authored_chance=10**400))
         cases += [dict(self.profile,candidates=[dict(layout_id=identifier,weight=1)]) for identifier in ('missing','starting_lab','g17_authored_creature_room')]
         cases.append(dict(self.profile,candidates=self.profile['candidates']+[dict(layout_id='ASSIGNMENT_A',weight=1)]))
         for raw in cases:

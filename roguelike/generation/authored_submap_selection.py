@@ -31,6 +31,12 @@ def issue(field, message, severity="error", code="ASSIGNMENT_POLICY"):
                 correction="Save eligible rooms and linked contents first; correct this profile field and validate again.")
 
 
+def finite_number(value):
+    if type(value) not in (int, float): return False
+    try: return math.isfinite(value)
+    except OverflowError: return False
+
+
 @dataclass(frozen=True)
 class Policy:
     enabled: bool = False
@@ -68,7 +74,7 @@ def validate(raw, data):
     if type(raw.get('enabled')) is not bool: diagnostics.append(issue('enabled', 'Expected explicit true or false.'))
     if raw.get('target_type') not in TYPES: diagnostics.append(issue('target_type', 'Choose barrow, cave or vault.'))
     chance=raw.get('authored_chance')
-    if type(chance) not in (int,float) or not math.isfinite(chance) or not 0 <= chance <= 1:
+    if not finite_number(chance) or not 0 <= chance <= 1:
         diagnostics.append(issue('authored_chance', 'Expected a finite probability from 0 to 1.'))
     rows=raw.get('candidates'); candidates=[]; seen=set()
     # Inactive references are warnings; structural/type/weight errors stay errors.
@@ -86,7 +92,7 @@ def validate(raw, data):
             diagnostics.append(issue(field+'.layout_id', 'Choose an eligible saved ordinary room.')); continue
         if identifier.casefold() in seen: diagnostics.append(issue(field+'.layout_id', 'Duplicate room identity, including case aliases.'))
         seen.add(identifier.casefold())
-        valid_weight=type(weight) in (int,float) and math.isfinite(weight) and weight > 0
+        valid_weight=finite_number(weight) and weight > 0
         if not valid_weight: diagnostics.append(issue(field+'.weight', 'Expected a finite positive relative weight.'))
         sources=locations(index,identifier)
         if len(sources)!=1:
