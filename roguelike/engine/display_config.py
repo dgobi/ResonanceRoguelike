@@ -163,36 +163,16 @@ class DisplayConfig:
         self.MOVESET_KEY_1: int = pygame.K_q  # First moveset action
         self.MOVESET_KEY_2: int = pygame.K_r  # Second moveset action
 
-    def init(self) -> None:
-        """Call after pygame.init() to load font assets."""
+    def init(self, *, project_root=None, typography_candidate=None) -> None:
+        """Initialize fonts before consumers cache their objects and metrics."""
+        from engine.typography import initialize
+        root = Path(project_root) if project_root is not None else Path(__file__).resolve().parents[2]
+        loaded = initialize(root, typography_candidate)
         self._font_sheet.load()
-
-        base      = "assets/Fonts/Junicode.ttf"
-        bold      = "assets/Fonts/Junicode-Bold.ttf"
-        italic    = "assets/Fonts/Junicode-Italic.ttf"
-
-        self.font_ui_large      = pygame.font.Font(base,   22)
-        self.font_ui_normal     = pygame.font.Font(base,   18)
-        self.font_ui_small      = pygame.font.Font(base,   16)
-        self.font_ui_tiny       = pygame.font.Font(base,   14)
-        self.font_ui_italic     = pygame.font.Font(italic, 18)
-        self.font_ui_bold       = pygame.font.Font(bold,   18)
-        self.font_ui_bold_large = pygame.font.Font(bold,   22)
-        self.font_deep          = pygame.font.Font(italic, 18)
-        # font_deep: italic Junicode as placeholder until custom bitmap font
-        # All deep tongue text renders in night_purple [41,21,70] using this font
-
-        # Callout / floating text sizes
-        CALLOUT_DAMAGE_SIZE   = 13
-        CALLOUT_STATUS_SIZE   = 12
-        CALLOUT_CREATURE_SIZE = 11
-        CALLOUT_CRIT_SIZE     = 18
-
-        self.font_callout_damage   = pygame.font.Font(bold, CALLOUT_DAMAGE_SIZE)
-        self.font_callout_status   = pygame.font.Font(bold, CALLOUT_STATUS_SIZE)
-        self.font_callout_creature = pygame.font.Font(bold, CALLOUT_CREATURE_SIZE)
-        self.font_callout_crit     = pygame.font.Font(bold, CALLOUT_CRIT_SIZE)
-        self.font_callout_levelup  = pygame.font.Font(bold, 21)
+        for role, font in loaded["fonts"].items():
+            setattr(self, role, font)
+        self.font_coverage = loaded["coverage"]
+        self.typography = {key: value for key, value in loaded.items() if key not in ("fonts", "coverage")}
         self.CALLOUT_FONTS = {
             "damage":   self.font_callout_damage,
             "status":   self.font_callout_status,

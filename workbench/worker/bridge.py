@@ -604,7 +604,7 @@ def family_validation(family, request, root, scratch, identity):
     try:
         original_raw = read_document(original)
         original_data = DataLoader(str(root / "roguelike/data"))
-        original_context = family.context(original_raw, original_data, source_asset, root / "roguelike/data", identity, hashlib.sha256(original.read_bytes()).hexdigest())
+        original_context = family.context(original_raw, original_data, source_asset, root / "roguelike/data", identity, hashlib.sha256(original.read_bytes()).hexdigest(), resource_root=root)
         if not family.eligible(original_context):
             diagnostics.append(dict(severity="error", code="SOURCE_ENTITLEMENT", path=source_asset, asset="", field="",
                 message="Original discovered source is read-only; changing candidate shape cannot upgrade it.", correction="Choose a supported unambiguous original source."))
@@ -613,9 +613,9 @@ def family_validation(family, request, root, scratch, identity):
         selected.write_bytes(draft.encode("utf-8"))
         raw = read_document(selected); syntax = True
         data = DataLoader(str(copied))
-        diagnostics += family.validate(raw, data, request["asset"], copied)
+        diagnostics += family.validate(raw, data, request["asset"], copied, resource_root=root)
         if not any(d["severity"] == "error" for d in diagnostics):
-            context = family.context(raw, data, request["asset"], copied, identity, digest, observe=True)
+            context = family.context(raw, data, request["asset"], copied, identity, digest, observe=True, resource_root=root)
             diagnostics += [d for record in context["records"] for d in record["diagnostics"]]
             if request.get("preview_inputs") is not None and not any(d["severity"] == "error" for d in diagnostics):
                 rendered = family.preview(raw, data, root, request["preview_inputs"])
@@ -855,7 +855,7 @@ def run(request, root, scratch):
     if family:
         if op != "inspect" or request.get("invalid_fixture"):
             fail("UNSUPPORTED_OPERATION", "Registered content uses exact-source validation.", "Open the source and validate its draft.")
-        context = family.context(raw, data, request["asset"], root / "roguelike/data", identity, hashlib.sha256(source).hexdigest()) if data and not raw_error else None
+        context = family.context(raw, data, request["asset"], root / "roguelike/data", identity, hashlib.sha256(source).hexdigest(), resource_root=root) if data and not raw_error else None
         diagnostics = ([d.json() for d in (raw_error or catalog_error).diagnostics] if raw_error or catalog_error else
                        [d for r in context["records"] for d in r["diagnostics"]])
         envelope = family.envelope(context)

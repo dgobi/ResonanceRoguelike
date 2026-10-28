@@ -1,6 +1,7 @@
 import { ItemEditor } from "./ItemEditor";
 import { RecipeEditor } from "./RecipeEditor";
 import { TextEditor } from "./TextEditor";
+import { TypographyEditor } from "./TypographyEditor";
 import type { FamilyPreview } from "./familyData";
 import { familyProblem, type ContentFamily } from "./content";
 import type { ItemTrail } from "./protocol";
@@ -21,6 +22,7 @@ export const contentViews = {
   recipe: {label:"recipe", sourceId:"recipe-draft-json", hint:"Recipe controls share this exact source draft. Eligibility and observed output have separate receipts. Publication creates a new ID/file.",
     render:(p:Props)=>p.family.id === "recipe" && <RecipeEditor {...p} context={p.family.context || undefined} {...p.navigation} onItem={(id,path)=>p.navigation.onOpen("item",id,path)} />},
   text: {label:"text", sourceId:"text-draft-json", hint:"Reader properties and ordered pages share this exact source. Create a unique variant, preview, validate and deliberately publish.",render:(p:Props)=><TextEditor {...p}/>},
+  typography:{label:"typography",sourceId:"typography-draft-json",hint:"Shared proportional game roles, fixed sizes. Publish the singleton profile; changes apply at next game initialization.",render:(p:Props)=><TypographyEditor {...p}/>},
 };
 export function ContentEditor(p:Props) {
   const problem = familyProblem(p.family);

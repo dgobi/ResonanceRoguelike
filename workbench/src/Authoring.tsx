@@ -510,7 +510,7 @@ export function Authoring({
           >
             Discard / Revert
           </button>
-          <button
+          {(!content || content.descriptor.policy.operations.includes("variant")) && <button
             disabled={!!busy}
             onClick={() => {
               change(latest.current,false,{...intent.current,variant:!intent.current.variant});
@@ -518,7 +518,7 @@ export function Authoring({
           >
             {" "}
             {variant ? "Use existing target" : "Save as new variant"}
-          </button>
+          </button>}
         </div>
       )}
       {editing && variant && (

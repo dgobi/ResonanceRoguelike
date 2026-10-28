@@ -1,4 +1,4 @@
-# Resonance Workbench · W5D
+# Resonance Workbench · W5E
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, inert component items,
@@ -11,6 +11,48 @@ contract and the same exact-source document lifecycle. See
 [content contracts](docs/CONTENT_CONTRACTS.md) for the extension seam, supported
 control vocabulary, default handling and publication boundaries. Other editor
 families retain their existing supported operations.
+
+## Choose game typography
+
+Search `game_typography` and open `roguelike/data/display/typography.json`.
+Begin edit, then choose **Headings**, **Ordinary prose**, **Damage callout**, or
+another of the thirteen shared roles. Choices come from regular TTF assets in the
+selected project's `roguelike/assets/Fonts`. Each label explains its consumers
+and retained nominal size. Changing an italic/bold role selects a different face,
+without synthesizing a style. Known Deep Tongue text uses a proportional role;
+unknown-language glyph generation is separate.
+
+**Game preview → Preview game typography** renders every role plus a production
+reader using this exact candidate. The receipt names requested/resolved fonts,
+file hashes, sample dimensions, candidate and runtime. Invalid resources or
+unsupported functional glyphs produce diagnostics, never successful default
+output. The preview does not authorize saving: **Validate draft**, review, then
+**Review & apply → Confirm apply one file** publishes the fixed file and verifies
+its reopen. There is no variant operation. **Saved fonts apply at the next game
+initialization**, after which screens cache their objects and metrics.
+
+Structured changes retain unrelated exact source and metadata, with Undo/Redo;
+Source remains available. Keep unfinished choices or invalid JSON for recovery,
+restart, recover and validate again. Recovery restores no prior review authority.
+An otherwise supported profile with an unusable font stays editable for correction;
+malformed/unsupported original documents remain inspect-only.
+
+Other previews, including found text, use the **saved** typography profile and
+saved dependencies. An unsaved typography tab is not a global overlay. The shared
+bounded disk sweep invalidates stale evidence after profile/font changes and
+retains drafts; final publication independently rechecks inputs. It does not
+render or scan fonts on every keystroke.
+
+Absent profile: the game uses all defaults without creating it. Invalid present
+profile: warning and whole-default fallback without modifying content/saves.
+Unavailable default resources: clear startup failure. No system-font substitution,
+font import, asset writes, alternate active profiles or per-save settings.
+See [the production role table and glyph limits](../roguelike/docs/RENDERING.md#proportional-game-typography).
+The defaults' checkmark/sprint-pip and decorative gaps remain warnings; the gate
+covers supported functional symbols, not every Unicode character or screen.
+
+Run `node scripts/run-typography.mjs` for the isolated packaged preview/recovery/
+publication/restart journey. See [W5E delivery](docs/W5E_DELIVERY.md) for evidence.
 
 ## Work with several content files
 
@@ -55,7 +97,7 @@ See [W5C delivery and verification](docs/W5C_DELIVERY.md) for the scoped checks
 and the historical workspace verification. See [W5D delivery](docs/W5D_DELIVERY.md)
 for recovery and reopen evidence.
 
-## Recover unfinished item, recipe and text drafts
+## Recover unfinished item, recipe, text and typography drafts
 
 Accepted exact-source edits and variant intent checkpoint within **500 ms** of the
 first pending accepted edit, plus local write time. Continuous typing does not
@@ -71,6 +113,9 @@ or copy exact draft text, compare its original baseline with current disk, keep 
 for later, or explicitly discard only that copy. Records identify project, source
 file, family, capture time and generation. Other projects stay separate. A record
 currently owned by another application instance cannot be restored or discarded.
+Actions bind to the inspected key and generation; late inspections cannot change
+the target. Discard names project/source/generation. A live source owner also
+prevents saved-target reconciliation: use that owner's verified-reopen flow.
 
 Open the correct project normally, then **Recover selected draft**. Workbench
 freshly discovers the source, checks its current eligibility and compares its

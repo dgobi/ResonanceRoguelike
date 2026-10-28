@@ -163,19 +163,64 @@ Right column:
 
 Loads fonts and configures the pygame window at startup.
 
-### Fonts (Junicode family)
+### Proportional game typography
 
-| Attribute | Style | Size |
-|---|---|---|
-| `font_large` | Regular | 20px |
-| `font_bold_large` | Bold | 20px |
-| `font_normal` | Regular | 16px |
-| `font_small` | Regular | 14px |
-| `font_tiny` | Regular | 12px |
-| `font_italic` | Italic | 16px |
-| `font_deep` | Italic | 16px, night_purple |
+`engine/typography.py` defines the production contract. The single active profile
+is `data/display/typography.json`: fixed `id: "game_typography"`, integer
+`version: 1`, and all thirteen string assignments below. Values are exact TTF
+basenames directly inside `assets/Fonts`. Unknown metadata has no runtime effect.
+Workbench edits this existing file through its ordinary validation/review route.
 
-`font_deep` is used exclusively for Deep Tongue words in the text reader overlay.
+| Attribute / field | Default resource | Nominal size | Shared consumers |
+|---|---|---:|---|
+| `font_ui_large` | `Junicode.ttf` | 22 | Reader and menu headings |
+| `font_ui_normal` | `Junicode.ttf` | 18 | Reader prose/footer and several menus |
+| `font_ui_small` | `Junicode.ttf` | 16 | Perk requirements, inventory and map details |
+| `font_ui_tiny` | `Junicode.ttf` | 14 | Message log, combat formulae and HUD |
+| `font_ui_italic` | `Junicode-Italic.ttf` | 18 | Italic menu and lexicon text; chosen face replaces the role without synthesis |
+| `font_ui_bold` | `Junicode-Bold.ttf` | 18 | Inventory, perk and lexicon titles; chosen face replaces the role without synthesis |
+| `font_ui_bold_large` | `Junicode-Bold.ttf` | 22 | Prominent menu text; chosen face replaces the role without synthesis |
+| `font_deep` | `Junicode-Italic.ttf` | 18 | Known proportional Deep Tongue text; unknown-language glyphs are generated separately |
+| `font_callout_damage` | `Junicode-Bold.ttf` | 13 | Floating damage numbers; small alias |
+| `font_callout_status` | `Junicode-Bold.ttf` | 12 | Floating status effects |
+| `font_callout_creature` | `Junicode-Bold.ttf` | 11 | Creature sounds; tiny alias |
+| `font_callout_crit` | `Junicode-Bold.ttf` | 18 | Critical hit numbers |
+| `font_callout_levelup` | `Junicode-Bold.ttf` | 21 | Level and perk-point announcements |
+
+`CALLOUT_FONTS.small` aliases damage; `tiny` aliases creature. Sizes and aliases
+are fixed. Choosing another face for an italic/bold role replaces the face; no
+synthetic italic/bold is added. Deep Tongue's proportional font is separate from
+procedurally generated unknown-language glyphs.
+
+`DisplayConfig.init()` resolves and loads the complete assignment before screens
+cache fonts and metrics. **Saved changes apply at next game initialization.**
+No active-profile registry, per-save copy or live replacement exists. An absent
+profile uses the complete defaults without creating a file. A present malformed,
+unsupported or unusable profile warns and falls back to the complete defaults;
+it never rewrites the profile or saves. Missing/corrupt default resources cause a
+clear startup failure. Selected fonts use actual file bytes through
+`pygame.font.Font`; system fonts are never substituted. Diagnostics distinguish
+requested face, resolved resource and fallback. Preview candidates fail strictly.
+
+Font resolution rejects absolute/traversing names, links/reparse points, missing
+or corrupt resources, names over 128 characters, files over 16 MiB, and discovery
+over 64 TTFs / 256 directory entries. No OS discovery, downloads or asset writes.
+
+Functional coverage checks use `pygame.freetype.Font(..., ucs4=True).get_metrics`
+on the same bytes; SDL_ttf `Font.metrics` alone can report missing-glyph boxes.
+All roles require printable ASCII. Additional role repertoires come from current
+consumers: normal/deep reader markers and bold lexicon titles require `—`; small
+perk/inventory/map details require `≥ — · •`; tiny log prefixes, scroll indicator
+and combat formulae require `› ↑ → × −`. These are bounded interface checks,
+not universal Unicode coverage. Authored prose remains byte-exact.
+
+The defaults already lack normal `✓` and tiny `○ ●`; decorative storm symbols
+are also outside the blocking gate. Their absence is a warning, not a redesign
+or rejection of defaults. Other authored characters may be missing. Generated
+`[DAMAGED]` text now excludes optional archaic/phonetic characters absent from the
+chosen normal face, keeping the existing ASCII fallback. Thus its generated
+alphabet can change by face; authored pages, span identities, language knowledge,
+damage/recovery and time behavior do not change.
 
 ### Window Layout
 

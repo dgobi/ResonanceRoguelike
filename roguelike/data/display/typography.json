@@ -1,0 +1,17 @@
+{
+  "id": "game_typography",
+  "version": 1,
+  "font_ui_large": "Junicode.ttf",
+  "font_ui_normal": "Junicode.ttf",
+  "font_ui_small": "Junicode.ttf",
+  "font_ui_tiny": "Junicode.ttf",
+  "font_ui_italic": "Junicode-Italic.ttf",
+  "font_ui_bold": "Junicode-Bold.ttf",
+  "font_ui_bold_large": "Junicode-Bold.ttf",
+  "font_deep": "Junicode-Italic.ttf",
+  "font_callout_damage": "Junicode-Bold.ttf",
+  "font_callout_status": "Junicode-Bold.ttf",
+  "font_callout_creature": "Junicode-Bold.ttf",
+  "font_callout_crit": "Junicode-Bold.ttf",
+  "font_callout_levelup": "Junicode-Bold.ttf"
+}

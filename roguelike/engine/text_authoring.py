@@ -167,6 +167,10 @@ def authoring_evidence(context):
 
 
 def authoring_preview(raw, data, root, inputs):
+    return render_reader(raw, data, root, inputs)
+
+
+def render_reader(raw, data, root, inputs, *, typography_candidate=None, known_words=()):
     """One bounded production frame; selection is view state, never content."""
     import base64
     import io
@@ -191,13 +195,13 @@ def authoring_preview(raw, data, root, inputs):
     try:
         os.chdir(root / "roguelike")
         pygame.init(); pygame.display.set_mode((1, 1))
-        display = DisplayConfig.from_config(); display.init()
+        display = DisplayConfig.from_config(); display.init(project_root=root, typography_candidate=typography_candidate)
         registry = UIRegistry(); registry.load()
         if not registry.has("weathered_temple"): raise ValueError("Missing production weathered_temple UI resource.")
         reader = TextReader(); reader.init(display)
         item = ItemFactory(data).create("letter"); item.text_id = raw["id"]
         if data.items["letter"].get("render_mode") or item.on_use != "read": raise ValueError("Saved letter is no longer an ordinary reader item.")
-        engine = SimpleNamespace(data=data, player=SimpleNamespace(language=Language()), text_reader=reader, ui_registry=registry)
+        engine = SimpleNamespace(data=data, player=SimpleNamespace(language=Language(known_deep_words=set(known_words))), text_reader=reader, ui_registry=registry)
         ItemSystem()._use_read(item, engine)
         for _ in range(page): reader.handle_key(pygame.K_RIGHT)
         screen = pygame.Surface((960, 640)); reader.render(screen, engine)
@@ -210,7 +214,7 @@ def authoring_preview(raw, data, root, inputs):
                     width=960, height=640, inputs=inputs, page=reader._page, scroll=reader._scroll, max_scroll=reader._max_scroll,
                     viewport_height=reader._viewport_height, visible_rows=reader._visible_rows, total_rows=len(reader._layout_rows),
                     marker_types=[span["type"] for span in parse_page(raw["pages"][page]["text"]) if span["type"] != "normal"],
-                    setup="Saved letter definition; weathered_temple panel; fresh empty Language (no learned words or recovery); saved lexicon, fonts and UI assets. Disposable reader context; no personal save, time or world generation.",
-                    consumer="ItemFactory.create → ItemSystem._use_read → TextReader.render", dependencies="saved files")
+                    setup=("Saved letter definition; weathered_temple panel; isolated Language with " + str(len(known_words)) + " known words and no recovery; saved lexicon/UI. " + ("Candidate typography." if typography_candidate is not None else "Saved typography profile and font dependencies.") + " Disposable reader context; no personal save, time or world generation."),
+                    consumer="ItemFactory.create → ItemSystem._use_read → TextReader.render", dependencies="candidate typography / saved reader files" if typography_candidate is not None else "saved files", typography=display.typography)
     finally:
         pygame.quit(); os.chdir(old)

@@ -132,7 +132,7 @@ class TextReader:
         self._font      = display.font_ui_normal
         self._font_deep = display.font_deep
         self._ftitle    = display.font_ui_large
-        self._corrupt_pool = self._build_corrupt_pool(self._font)
+        self._corrupt_pool = self._build_corrupt_pool(self._font, getattr(display, "font_coverage", {}).get("font_ui_normal"))
 
     def open_text(
         self,
@@ -431,7 +431,7 @@ class TextReader:
     #  Corruption
     # ------------------------------------------------------------------ #
 
-    def _build_corrupt_pool(self, font: pygame.font.Font) -> str:
+    def _build_corrupt_pool(self, font: pygame.font.Font, coverage=None) -> str:
         candidates = (
             "\u017f\u0142\u00f0\u00fe\u00e6\u0153"   # ſłðþæœ
             "\u2020\u2021\u00a7\u00b6\u0131\u0263"   # †‡§¶ıɣ
@@ -442,8 +442,8 @@ class TextReader:
         )
         pool = []
         for ch in candidates:
-            metrics = font.metrics(ch)
-            if metrics and metrics[0] is not None and metrics[0][4] > 0:
+            metrics = coverage.get_metrics(ch) if coverage is not None else None
+            if metrics and metrics[0] is not None and font.size(ch)[0] > 0:
                 pool.append(ch)
         for ch in ",.;:|/-_~!?":
             if ch not in pool:

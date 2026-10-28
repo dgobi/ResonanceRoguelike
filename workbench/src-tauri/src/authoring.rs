@@ -21,7 +21,9 @@ const CONTENT_ROOTS: &[(&str, &str, &[&str])] = &[
     ("roguelike/data/recipes/", "roguelike/data/recipes/", &[]),
     ("roguelike/data/texts/", "roguelike/data/texts/", &["text_item_map.json"]),
 ];
+pub const TYPOGRAPHY: &str = "roguelike/data/display/typography.json";
 pub fn content_root(source: &str) -> Option<&'static str> {
+    if source == TYPOGRAPHY { return Some(TYPOGRAPHY); }
     CONTENT_ROOTS.iter().find_map(|(source_root, write_root, reserved)| {
         let suffix = source.strip_prefix(source_root)?;
         let parts: Vec<_> = suffix.split('/').collect();
@@ -58,6 +60,7 @@ impl FamilyPolicy {
             || d["policy"]["identity"] != "id" || operations.is_empty()
             || operations.iter().any(|op| op != "edit" && op != "variant")
             || content_root(source) != Some(root)
+            || (source == TYPOGRAPHY && (id != "typography" || operations != ["edit"]))
         { return None; }
         Some(Self { id:id.into(), route:route.into(), contract:contract.into(), descriptor:d.clone(), digest:digest.into(), root:root.into(), operations })
     }
@@ -312,6 +315,9 @@ fn accept_edit(host:&Host, token:&str, sequence:u64, draft:String, variant:bool,
     let root=state.root.clone().ok_or_else(unknown_document)?;
     let doc=current_document(&mut state,token).ok_or_else(unknown_document)?;
     let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Only eligible registered item, recipe and text documents have durable drafts."))?;
+    if variant && !family.operations.iter().any(|op|op=="variant") || doc.relative==TYPOGRAPHY && !variant_id.is_empty(){
+        return Err(recovery::error("This family is edit-only; recovery cannot retain a variant target."));
+    }
     if sequence<=doc.edit_sequence || sequence>9_007_199_254_740_990{return Err(recovery::error("Obsolete or invalid edit acknowledgement refused."));}
     let mut record=doc.accepted.clone().unwrap_or_else(||recovery::Record {
         version:recovery::VERSION,id:uuid::Uuid::new_v4().to_string(),project:root,source:doc.relative.clone(),
@@ -698,6 +704,14 @@ fn destination(
     // Syntax/schema verdict comes from Python; this is only the publication identity rule.
     let raw: Value =
         serde_json::from_str(draft.trim_start_matches('\u{feff}')).unwrap_or(Value::Null);
+    if let Some(family)=&doc.family {
+        if !family.operations.iter().any(|op|op==if variant_id.is_some(){"variant"}else{"edit"}) {
+            return Err(failure("OPERATION_POLICY","This family does not support the requested publication operation.","Use the family's supported edit or variant action."));
+        }
+    }
+    if doc.relative==TYPOGRAPHY && raw.is_object() && (raw["id"]!="game_typography" || raw["version"].as_u64()!=Some(1)) {
+        return Err(failure("IDENTITY_CHANGE","Typography requires fixed id game_typography and integer version 1.","Restore the fixed identity/version."));
+    }
     if let Some(id) = variant_id {
         if !valid_id(id) || raw["id"].as_str() != Some(id) || doc.id.as_deref() == Some(id) {
             return Err(failure(
@@ -1009,6 +1023,10 @@ enum Fault {
 }
 
 fn publish(root: &Path, doc: &Document, review: &Review, fault: Fault) -> Result<Value, Failure> {
+    if doc.relative==TYPOGRAPHY {
+        let (target,variant)=destination(doc,&review.draft,review.variant.then_some("forbidden"))?;
+        if target!=review.destination || variant {return Err(failure("OPERATION_POLICY","Typography has one fixed target.","Review the canonical profile."));}
+    }
     if is_submap(&doc.relative) && !review.variant {
         return Err(failure("LAYOUT_VARIANT_REQUIRED", "Layout publication requires a new ID/file in layouts/.", "Review a unique layout variant."));
     }
@@ -1244,6 +1262,33 @@ pub fn finish_close(window: tauri::Window, host: tauri::State<'_, Host>) -> Resu
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn typography_singleton_policy_recovery_and_freshness_are_host_enforced(){
+        let (root,host,old,mut review)=lifecycle_fixture(false);
+        let mut doc=old.clone();doc.relative=TYPOGRAPHY.into();doc.id=Some("game_typography".into());
+        doc.original=b"{\"id\":\"game_typography\",\"version\":1}".to_vec();
+        let family=doc.family.as_mut().unwrap();family.id="typography".into();family.route="typography_definition".into();family.root=TYPOGRAPHY.into();family.operations=vec!["edit".into()];
+        let path=root.path().join(TYPOGRAPHY);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(&path,&doc.original).unwrap();
+        {let mut state=host.inner.lock().unwrap();state.content_documents.clear();state.content_documents.insert(file_key(TYPOGRAPHY),doc.clone());}
+        assert_eq!(content_root(TYPOGRAPHY),Some(TYPOGRAPHY));
+        for path in ["roguelike/data/display/other.json","roguelike/data/display/typography.JSON","roguelike/data/display/nested/typography.json","roguelike/assets/Fonts/typography.json"]{assert!(content_root(path).is_none());assert!(checked_target(root.path(),path,true).is_err());}
+        let draft="{\"id\":\"game_typography\",\"version\":1,\"metadata\":true}";
+        assert_eq!(destination(&doc,draft,None).unwrap(),(TYPOGRAPHY.into(),false));
+        assert!(destination(&doc,draft,Some("other")).is_err());
+        for invalid in ["{\"id\":\"other\",\"version\":1}","{\"id\":\"game_typography\",\"version\":2}","{\"id\":\"game_typography\",\"version\":true}"]{assert!(destination(&doc,invalid,None).is_err());}
+        assert!(accept_edit(&host,&doc.token,1,draft.into(),true,"other".into()).is_err());
+        assert!(accept_edit(&host,&doc.token,1,draft.into(),false,"other".into()).is_err());
+        accept_edit(&host,&doc.token,1,"{invalid exact typography λ".into(),false,"".into()).unwrap();
+        let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();assert_eq!(record.target,TYPOGRAPHY);
+        let dir=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(dir.path().into()).unwrap();store.write(&record).unwrap();
+        let mut forged=record.clone();forged.target="roguelike/data/display/other.json".into();assert!(forged.validate().is_err());
+        forged=record.clone();forged.variant=true;assert!(forged.validate().is_err());
+        forged=record.clone();forged.family="item".into();assert!(forged.validate().is_err());
+        store.release(&record.key());let mut restored=doc.clone();restore_claimed(&mut store,root.path(),&mut restored,&record.key(),record.generation).unwrap();assert!(restored.review.is_none());assert_eq!(restored.accepted.unwrap().draft,record.draft);
+        review.destination="roguelike/data/items/components/elsewhere.json".into();review.variant=false;review.draft=draft.into();assert!(publish(root.path(),&doc,&review,Fault::None).is_err());assert_eq!(fs::read(&path).unwrap(),doc.original);
+        let before=input_stamp(root.path()).unwrap();fs::write(&path,draft).unwrap();assert_ne!(input_stamp(root.path()).unwrap(),before);
+        let fonts=root.path().join("roguelike/assets/Fonts");fs::create_dir_all(&fonts).unwrap();fs::write(fonts.join("selected.ttf"),b"selected font bytes").unwrap();let before=input_stamp(root.path()).unwrap();fs::write(fonts.join("selected.ttf"),b"changed bytes").unwrap();assert_ne!(input_stamp(root.path()).unwrap(),before);
+    }
     #[test]
     fn recovery_acquisition_refuses_deleted_or_advanced_inspection_and_cleans_failed_claim(){
         let (root,host,doc,_)=lifecycle_fixture(false);

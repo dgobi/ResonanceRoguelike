@@ -1,4 +1,4 @@
-import type { ItemContext, RecipeContext, TextContext } from "./familyData";
+import type { ItemContext, RecipeContext, TextContext, TypographyContext } from "./familyData";
 
 export type FieldSchema = {
   $schema?: string; type: "string" | "number" | "integer" | "boolean" | "object" | "array";
@@ -13,7 +13,7 @@ export type Descriptor = {
 };
 export type References = Record<string, {id: string; label: string}[]>;
 type CommonFamily = {contract: string; descriptor_sha256: string; descriptor: Descriptor; compatible: boolean; problems: string[]; references: References};
-export type ContentFamily = CommonFamily & ({id: "item"; context: ItemContext | null} | {id: "recipe"; context: RecipeContext | null} | {id: "text"; context: TextContext | null});
+export type ContentFamily = CommonFamily & ({id: "item"; context: ItemContext | null} | {id: "recipe"; context: RecipeContext | null} | {id: "text"; context: TextContext | null} | {id:"typography";context:TypographyContext|null});
 
 const object = (value: unknown): value is Record<string, unknown> => !!value && typeof value === "object" && !Array.isArray(value);
 const schemaKeys = new Set(["$schema","type","title","description","default","readOnly","minimum","maximum","properties","required","items","additionalProperties","x-control","x-reference","x-view","x-initial","x-suggestions"]);
@@ -42,14 +42,14 @@ export function schemaProblem(value: unknown, path = "schema", depth = 0): strin
   return "";
 }
 export function familyProblem(value: unknown): string {
-  if (!object(value) || !["item","recipe","text"].includes(String(value.id))) return "Unregistered content family";
+  if (!object(value) || !["item","recipe","text","typography"].includes(String(value.id))) return "Unregistered content family";
   if (typeof value.contract !== "string" || typeof value.descriptor_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(value.descriptor_sha256)) return "Malformed family identity";
   if (!object(value.descriptor)) return "Missing descriptor";
   const d = value.descriptor;
   if (d.vocabulary !== "resonance-controls-1" || !object(d.schema) || d.schema.$schema !== "https://json-schema.org/draft/2020-12/schema") return "Unsupported descriptor/control vocabulary";
   if (!object(d.policy) || d.policy.identity !== "id" || typeof d.policy.root !== "string" || !Array.isArray(d.policy.operations) || d.policy.operations.some(op=>op!=="edit" && op!=="variant")) return "Unsupported publication policy";
   if (!Array.isArray(d.views) || d.views.some(v=>typeof v!=="string") || typeof d.publication_note !== "string") return "Malformed view registration";
-  const views = {item:["item-properties","references","recipes","use-binding","factory"], recipe:["recipe-requirements","output","production-receipt"], text:["text-pages","text-references","reader-preview"]}[String(value.id)] || [];
+  const views = {item:["item-properties","references","recipes","use-binding","factory"], recipe:["recipe-requirements","output","production-receipt"], text:["text-pages","text-references","reader-preview"],typography:["typography-roles","typography-preview"]}[String(value.id)] || [];
   if (d.views.some(v=>!views.includes(String(v)))) return "Unsupported specialized view registration";
   if (!object(value.references) || Object.values(value.references).some(rows=>!Array.isArray(rows) || rows.length>10000 || rows.some(r=>!object(r) || typeof r.id!=="string" || typeof r.label!=="string"))) return "Malformed reference provider";
   if (!Array.isArray(value.problems) || value.problems.some(p=>typeof p!=="string") || typeof value.compatible!=="boolean") return "Malformed capability result";

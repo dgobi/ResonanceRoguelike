@@ -157,3 +157,24 @@ pre-extension game module and the current production module. It runs the existin
 recipe journey, replaces only that disposable project's item authoring module,
 then checks descriptor freshness, the new control, publication/reopen and fixed
 application/resource bytes. It never rewrites the production data catalogue.
+
+## Fixed typography family (W5E)
+
+`typography_authoring.py` registers edit-only `game-typography-1` with ordinary
+scalar/reference controls and typed `typography-preview` (960×960 specimen plus
+960×640 reader), separate from `reader-frame`. `engine/typography.py` owns the
+production roles, parsing, no-link resource resolution, coverage and loading;
+gameplay does not import the adapter. The worker passes the verified project root
+explicitly to resource-aware family adapters while data is staged in scratch.
+
+The registration's optional `exact_file` and independent host `TYPOGRAPHY`
+admission authorize only `roguelike/data/display/typography.json`. Host operation,
+identity/version and recovery-target checks complement semantic validation.
+Descriptors cannot broaden filesystem policy. Recovery supports only this fixed
+source/target and edit intent; invalid JSON remains exact and cannot restore
+validation authority. Unknown fields remain non-executable metadata.
+
+The thirteen assignments and selected byte hashes are included in preview
+receipts. Existing code/data/Fonts/UI stamps remain conservative, shared and
+bounded by the existing monitor. A typography candidate overlays only its own
+isolated preview initialization; found-text previews identify saved typography.

@@ -10,9 +10,24 @@ export type ReaderFrame = {
   draft_sha256:string;path:string;source:Source;contract:string;descriptor_sha256:string;runtime:{python:string;dependencies:Record<string,string>};
   observed_at_utc:string;setup:string;consumer:string;dependencies:string;
 };
-export type FamilyPreview = ReaderFrame;
+export type TypographyContext = {records:{id:string;pointer:string;definition:Record<string,unknown>;diagnostics:Diagnostic[];capability:{contract:string;editable:boolean;reason:string}}[]; fonts:{id:string;label:string;sha256:string}[]};
+type PngFrame = {image:string;image_sha256:string;width:number;height:number};
+export type TypographyPreview = Pick<ReaderFrame,"draft_sha256"|"path"|"source"|"contract"|"descriptor_sha256"|"runtime"|"observed_at_utc"|"setup"|"dependencies"> & {
+  kind:"typography-preview";inputs:Record<string,never>;specimen:PngFrame;reader:PngFrame & {page:number;scroll:number;max_scroll:number;setup:string};
+  roles:{role:string;label:string;requested:string;resolved:string;sha256:string;size:number;fallback:false;sample:string;width:number;height:number}[];
+  diagnostics:Diagnostic[];fallback:false;
+};
+export type FamilyPreview = ReaderFrame | TypographyPreview;
+const png=(v:Partial<PngFrame>|undefined,width:number,height:number)=>!!v && v.width===width && v.height===height && typeof v.image==="string" && v.image.length<=2800000 && /^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(v.image) && typeof v.image_sha256==="string" && /^[a-f0-9]{64}$/.test(v.image_sha256);
 export function previewProblem(value: unknown): string {
   if (!value || typeof value !== "object") return "Missing preview";
+  if((value as {kind?:string}).kind==="typography-preview"){
+    const v=value as Partial<TypographyPreview>;
+    if(!png(v.specimen,960,960) || !png(v.reader,960,640) || v.fallback!==false || !v.inputs || Object.keys(v.inputs).length) return "Invalid typography preview frames";
+    if(!Array.isArray(v.roles) || v.roles.length!==13 || new Set(v.roles.map(r=>r.role)).size!==13 || v.roles.some(r=>!r.role.startsWith("font_") || typeof r.requested!=="string" || typeof r.resolved!=="string" || !/^[a-f0-9]{64}$/.test(r.sha256) || r.fallback!==false || ![r.size,r.width,r.height].every(n=>Number.isSafeInteger(n)&&n>0)))return "Malformed typography role evidence";
+    if(![v.draft_sha256,v.descriptor_sha256].every(h=>typeof h==="string" && /^[a-f0-9]{64}$/.test(h)) || !v.source || typeof v.contract!=="string" || typeof v.setup!=="string" || !Array.isArray(v.diagnostics))return "Malformed typography preview identity";
+    return "";
+  }
   const v=value as Partial<ReaderFrame>;
   if(v.kind!=="reader-frame" || typeof v.image!=="string" || v.image.length>2800000 || !/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(v.image)) return "Invalid bounded PNG preview";
   if(v.width!==960 || v.height!==640 || !v.inputs || ![v.page,v.scroll,v.max_scroll,v.viewport_height,v.total_rows,v.inputs.page,v.inputs.scroll].every(n=>Number.isSafeInteger(n) && Number(n)>=0)) return "Malformed preview coordinates";

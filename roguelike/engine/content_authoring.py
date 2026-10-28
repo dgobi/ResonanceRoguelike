@@ -86,11 +86,13 @@ class Family:
     module: object
     operations: tuple[str, ...]
     write_root: str
+    exact_file: str | None = None
 
     @property
     def route(self): return self.id + "_definition"
 
     def matches(self, path):
+        if self.exact_file: return path == self.exact_file
         return PurePosixPath(path).parts[:3] == ("roguelike", "data", self.directory)
 
     def descriptor(self):
@@ -102,16 +104,20 @@ class Family:
     def envelope(self, context):
         descriptor, digest = self.descriptor()
         problems = schema_problems(descriptor["schema"])
-        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview"}
+        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview"}
         if not isinstance(descriptor["views"], list) or any(v not in allowed_views for v in descriptor["views"]):
             problems.append("Unsupported specialized view registration")
         return dict(id=self.id, contract=self.module.CONTRACT, descriptor_sha256=digest,
                     descriptor=descriptor, compatible=not problems, problems=problems,
                     references=self.module.reference_options(context) if context else {}, context=context)
 
-    def context(self, *args, **kwargs): return self.module.authoring_context(*args, **kwargs)
+    def context(self, *args, resource_root=None, **kwargs):
+        if getattr(self.module, "USES_FONT_RESOURCES", False): kwargs["resource_root"] = resource_root
+        return self.module.authoring_context(*args, **kwargs)
 
-    def validate(self, raw, data, path, data_root):
+    def validate(self, raw, data, path, data_root, *, resource_root=None):
+        if getattr(self.module, "USES_FONT_RESOURCES", False):
+            return self.module.authoring_validate(raw, data, path, data_root, resource_root=resource_root)
         return self.module.authoring_validate(raw, data, path, data_root)
 
     def preview(self, raw, data, root, inputs):
@@ -127,6 +133,7 @@ class Family:
         sources = definition_sources(root / "roguelike/data", self.directory, getattr(self.module, "RESERVED_BASENAMES", ()))
         rows = []
         for path in sorted((root / "roguelike/data" / self.directory).rglob("*.json")):
+            if self.exact_file and path != root / self.exact_file: continue
             if path.name.casefold() in getattr(self.module, "RESERVED_BASENAMES", ()): continue
             relative = path.relative_to(root).as_posix()
             try: raw = read_document(path)
@@ -136,6 +143,7 @@ class Family:
                 pointer = f"/{index}" if isinstance(raw, list) else ""
                 identifier = str(record.get("id", path.stem))
                 locations = [s for k, ss in sources.items() if k.casefold() == identifier.casefold() for s in ss]
+                if self.exact_file: locations = [s for s in locations if s["path"] == self.exact_file]
                 cap = self.module.capability(record, relative, pointer)
                 rows.append(dict(path=relative, pointer=pointer, id=identifier, name=str(record.get("name", record.get("title", ""))),
                     category=str(record.get("category", "")), result_item=record.get("result_item"),
@@ -149,11 +157,12 @@ class Family:
 
 def families():
     # The sole trusted registration point. No renderer or descriptor imports.
-    from engine import item_authoring, recipe_authoring, text_authoring
+    from engine import item_authoring, recipe_authoring, text_authoring, typography_authoring
     return (
         Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/components/"),
         Family("recipe", "recipes", recipe_authoring, ("variant",), "roguelike/data/recipes/"),
         Family("text", "texts", text_authoring, ("variant",), "roguelike/data/texts/"),
+        Family("typography", "display", typography_authoring, ("edit",), typography_authoring.PROFILE, typography_authoring.PROFILE),
     )
 
 

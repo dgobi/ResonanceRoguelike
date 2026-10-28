@@ -11,7 +11,7 @@ export function TextEditor(p:ContentProps) {
   const context=p.family.context, record=context?.records[0], cap=record?.capability;
   const values=parsed.model || record?.definition || {}, pages=Array.isArray(values.pages) ? values.pages : [];
   const reason=p.disabled || (parsed.reason ? "Repair JSON in Source to resume page controls." : "") || (!cap?.editable ? cap?.reason || "Capability unavailable." : "");
-  const frame=p.preview, problem=frame ? previewProblem(frame) : "";
+  const frame=p.preview?.kind==="reader-frame" ? p.preview : null, problem=frame ? previewProblem(frame) : "";
   const selectedPage=Math.min(page,Math.max(0,pages.length-1));
   const stale=p.previewStale || frame?.inputs.page!==selectedPage || frame?.inputs.scroll!==scroll;
   const titles:Record<string,string>={"text-pages":"Pages","text-references":"Binding and metadata","reader-preview":"Reader preview"};
