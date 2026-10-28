@@ -1,0 +1,981 @@
+{
+  "milestone": "W5F",
+  "passed": true,
+  "observed_utc": "2026-10-28T02:41:53.267965+00:00",
+  "revisions": {
+    "baseline": "d942c3d52e53f091a6a2070e947caaf3b3c19b06",
+    "initial_remote": "d942c3d52e53f091a6a2070e947caaf3b3c19b06",
+    "reference_identity_correction": "e10238f9df2fdafca15284630e557ae826ca3dae",
+    "implementation_and_package_inputs": "3a1b4d1df7a0f734f677d1c757bc7c4e8f73c407",
+    "native_creature_inputs": "a3e83be21078a5e57c334780ac043db3547e9c6f",
+    "runtime_probe_inputs": "8a8746221dd30017c2f7ff968513409a0a3937d1",
+    "final_verification_scripts": "a032f7b1348465567ca29b19bff54b9cfbfd9679",
+    "evidence_ref": "checkpoint/workbench-w5f-verified-20261027",
+    "evidence_note": "Annotated checkpoint and external handoff identify the final evidence commit and exact remote main; no self-referential commit hash.",
+    "branch": "main"
+  },
+  "prerequisites": {
+    "w5e_git_hashes_reconciled": 75,
+    "w5e_before_worktree_hashes_reconciled": 75,
+    "baseline": "d942c3d52e53f091a6a2070e947caaf3b3c19b06"
+  },
+  "environment": {
+    "os": "Windows",
+    "node": "24.15.0",
+    "cargo": "1.95.0",
+    "python_packaged": "3.11.0",
+    "python_production_tests": "3.11.0",
+    "pygame": "2.6.1"
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "cwd": "workbench",
+      "result": "59 passed / 16 files",
+      "exit_code": 0,
+      "revision": "3a1b4d1df7a0f734f677d1c757bc7c4e8f73c407",
+      "log": {
+        "path": "workbench/.artifacts/w5f/frontend-final.log",
+        "sha256": "c4042b12ce7f85d5498df9cb015b627fa2e3f84723160d11c6ec65e8d89cc2b8"
+      }
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "cwd": "workbench",
+      "result": "passed",
+      "exit_code": 0,
+      "revision": "3a1b4d1df7a0f734f677d1c757bc7c4e8f73c407",
+      "log": {
+        "path": "workbench/.artifacts/w5f/typecheck-final.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "cwd": "workbench",
+      "result": "55 passed, including existing W4D cases",
+      "exit_code": 0,
+      "revision": "3a1b4d1df7a0f734f677d1c757bc7c4e8f73c407",
+      "log": {
+        "path": "workbench/.artifacts/w5f/rust-final.log",
+        "sha256": "0b880235e647355ebd7bd9354ecc197a52928695220def120463e682b63cd378"
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "cwd": "workbench",
+      "result": "passed",
+      "exit_code": 0,
+      "revision": "3a1b4d1df7a0f734f677d1c757bc7c4e8f73c407",
+      "log": {
+        "path": "workbench/.artifacts/w5f/clippy-final.log",
+        "sha256": "4ba77432d46f2d8980b90c3af6d18310918b4b669ac3213aeebb6eff80478895"
+      }
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -X faulthandler -B -m unittest discover -s worker -v",
+      "cwd": "workbench",
+      "result": "59 passed; one expected missing-dependency skip; 511.046 seconds",
+      "exit_code": 0,
+      "revision": "3a1b4d1df7a0f734f677d1c757bc7c4e8f73c407",
+      "log": {
+        "path": "workbench/.artifacts/w5f/worker-final.log",
+        "sha256": "2f9d177f47f0b5a1c2a7808b5565fcefc0b1839bae1940c055ce29dc8045b82f"
+      }
+    },
+    {
+      "command": "C:/Users/dango/AppData/Local/Programs/Python/Python311/python.exe -X utf8 -B -m unittest test_bridge.BridgeTests.test_dependency_absence_structured -v",
+      "cwd": "workbench/worker",
+      "result": "1 passed with absent game packages",
+      "exit_code": 0,
+      "revision": "3a1b4d1df7a0f734f677d1c757bc7c4e8f73c407",
+      "log": {
+        "path": "workbench/.artifacts/w5f/dependency-negative.log",
+        "sha256": "9420c71af5bfe52f771539d28f2961e90800438e5b616b5122ae4010cb5eba44"
+      }
+    },
+    {
+      "command": "workbench/.artifacts/w5f/production-runtime/Scripts/python.exe -X utf8 -X faulthandler -B -m unittest test_effect_persistence test_combat_routes test_generation_ownership test_gameplay_g12.ExpeditionRewardsTests.test_actual_warning_later_page_paragraphs_mixed_span_identity_and_no_turns test_gameplay_g12.ExpeditionRewardsTests.test_long_tokens_glyph_translations_and_complete_alphabet_are_bounded test_gameplay_g12.ExpeditionRewardsTests.test_long_titles_render_full_heading_and_body_inside_frame_above_footer -v",
+      "cwd": "repository root",
+      "result": "38 passed; dummy SDL; PYTHONPATH game/tests; isolated standard Python 3.11.0 uses pinned Workbench site-packages via .pth",
+      "exit_code": 0,
+      "revision": "3a1b4d1df7a0f734f677d1c757bc7c4e8f73c407",
+      "log": {
+        "path": "workbench/.artifacts/w5f/production-final.log",
+        "sha256": "1d92bd0c9438888115d81335cc79a249330ae64dbf4fc9f87f4568295cab42d9"
+      }
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "cwd": "workbench",
+      "result": "Windows release and NSIS installer completed",
+      "exit_code": 0,
+      "revision": "3a1b4d1df7a0f734f677d1c757bc7c4e8f73c407",
+      "log": {
+        "path": "workbench/.artifacts/w5f/package-final.log",
+        "sha256": "6e7c4ad0f66401e269f11e532e983e679faaaef8d1945c10b016d16c4957fc74"
+      }
+    },
+    {
+      "command": "node scripts/run-creatures.mjs",
+      "cwd": "workbench",
+      "result": "3 actual processes; two creature drafts plus item; invalid JSON, cold/abrupt recovery, special intent refusal, freshness, same-ID/variant publication and layout",
+      "exit_code": 0,
+      "revision": "a3e83be21078a5e57c334780ac043db3547e9c6f",
+      "log": {
+        "path": "workbench/.artifacts/w5f/run-creatures-final.log",
+        "sha256": "c7ac1e7ace57da6be3e4808e2bc68c84d5f96de0dbad2b56f017e282e79334a1"
+      }
+    },
+    {
+      "command": "node scripts/run-recovery.mjs",
+      "cwd": "workbench",
+      "result": "5 native processes; competing lock, recovery and reconciliation",
+      "exit_code": 0,
+      "revision": "a3e83be21078a5e57c334780ac043db3547e9c6f",
+      "log": {
+        "path": "workbench/.artifacts/w5f/run-recovery-final.log",
+        "sha256": "afc3fb04c41f011af035054dcc507d5f9055ec3480b618bb5c60f1caf50b855b"
+      }
+    },
+    {
+      "command": "$env:W5D_REOPEN_REGRESSION=\"lost\"; node scripts/run-workspace.mjs",
+      "cwd": "workbench",
+      "result": "6 owners; retained history/view state and lost successful reopen response",
+      "exit_code": 0,
+      "revision": "a3e83be21078a5e57c334780ac043db3547e9c6f",
+      "log": {
+        "path": "workbench/.artifacts/w5f/run-workspace-final.log",
+        "sha256": "410c1f2fe3a6748b351b456be7abc847f633ae1333c52b29dbc4f2d01cf7c51a"
+      }
+    },
+    {
+      "command": "node scripts/run-texts.mjs",
+      "cwd": "workbench",
+      "result": "exact variant and physical letter interaction",
+      "exit_code": 0,
+      "revision": "a3e83be21078a5e57c334780ac043db3547e9c6f",
+      "log": {
+        "path": "workbench/.artifacts/w5f/run-texts-final.log",
+        "sha256": "820828318e687fa7053c11ad929933a7b0dbacf5b93aaf9a2d223eef477fe0e6"
+      }
+    },
+    {
+      "command": "node scripts/run-typography.mjs",
+      "cwd": "workbench",
+      "result": "3 native processes; preview, recovery, freshness, publication and runtime initialization",
+      "exit_code": 0,
+      "revision": "a3e83be21078a5e57c334780ac043db3547e9c6f",
+      "log": {
+        "path": "workbench/.artifacts/w5f/run-typography-final.log",
+        "sha256": "6a1cf1825561e982a5847cc59cf3e057d654a014f9f921c24784919a8e872993"
+      }
+    },
+    {
+      "command": "node scripts/run-submaps.mjs",
+      "cwd": "workbench",
+      "result": "existing G17 placement/publication/negative routes",
+      "exit_code": 0,
+      "revision": "a3e83be21078a5e57c334780ac043db3547e9c6f",
+      "log": {
+        "path": "workbench/.artifacts/w5f/run-submaps-final.log",
+        "sha256": "843ebcc2378ba9f61fcedc4625068e9430ba04b2709abcdea1b5859ad301076c"
+      }
+    },
+    {
+      "command": "node scripts/run-items.mjs",
+      "cwd": "workbench",
+      "result": "item/pool publication, actual factory/population, source/path/authority negatives",
+      "exit_code": 0,
+      "revision": "40b47c317ade414a871d9f3d0daf6a4bb7a80a0f",
+      "log": {
+        "path": "workbench/.artifacts/w5f/run-items-final.log",
+        "sha256": "8f21d91b7f629f6f587f5bba8ca92fbb6d950957697e99cb068a1ebe76c2fdbb"
+      }
+    },
+    {
+      "command": "node scripts/run-recipes.mjs",
+      "cwd": "workbench",
+      "result": "variant publication, actual production probe and original-source/path/authority negatives",
+      "exit_code": 0,
+      "revision": "a3e83be21078a5e57c334780ac043db3547e9c6f",
+      "log": {
+        "path": "workbench/.artifacts/w5f/run-recipes-final.log",
+        "sha256": "fd0c6292247b3433cd07da26aef1a5132fbdb35cf472109823ec6b42768ba318"
+      }
+    },
+    {
+      "command": "$env:WORKBENCH_STARTUP_SMOKE=\"1\"; node scripts/startup-test.mjs",
+      "cwd": "workbench",
+      "result": "4 isolated startup/project-change/restart scenarios",
+      "exit_code": 0,
+      "revision": "a032f7b1348465567ca29b19bff54b9cfbfd9679",
+      "log": {
+        "path": "workbench/.artifacts/w5f/startup-final.log",
+        "sha256": "8b4ee62074d25c0bbb708f1b46616241fc25b2345a70c40f25d659443d33ee2d"
+      }
+    },
+    {
+      "command": "src-tauri/target/release/python/python.exe -X utf8 -X faulthandler -B scripts/creature-runtime-probe.py .artifacts/w5f/runtime-final2/project .artifacts/w5f/runtime-final2/results",
+      "cwd": "workbench",
+      "result": "real consumer identity/attack/pursuit and fresh-process injured save restore; initial fixture created with test_texts.text_fixture",
+      "exit_code": 0,
+      "revision": "8a8746221dd30017c2f7ff968513409a0a3937d1",
+      "log": {
+        "path": "workbench/.artifacts/w5f/runtime-final.log",
+        "sha256": "2e58e7e88a1aef0edbfd4775e9dd3939b14b3bc07414d7fbee43a101c289a5ce"
+      }
+    },
+    {
+      "command": "src-tauri/target/release/python/python.exe -X utf8 -B scripts/creature-runtime-probe.py .artifacts/w5f/native-1793154259753/project .artifacts/w5f/native-1793154259753/controlled-encounter --published",
+      "cwd": "workbench",
+      "result": "actual native-published variant/layout exercised through production generation and real AmbushAI turn",
+      "exit_code": 0,
+      "revision": "8a8746221dd30017c2f7ff968513409a0a3937d1",
+      "log": {
+        "path": "workbench/.artifacts/w5f/published-final.log",
+        "sha256": "50b3e92b7ba209a82b28df6829a5dd5f1098195d479fb4aa71faceb052dc2a4f"
+      }
+    }
+  ],
+  "package": {
+    "executable_sha256": "d27e4a26bb1fc37ae61abff3e24979d18271a33d45d77af70dc74ba80b5c0863",
+    "bridge_sha256": "73cf34e0d3bce7185db5499752373b1d9b1af94373dd7659a396963c0275dec2",
+    "source_bridge_sha256": "73cf34e0d3bce7185db5499752373b1d9b1af94373dd7659a396963c0275dec2",
+    "runtime_payload": {
+      "files": 1903,
+      "sha256": "53611fa0283739c902656d6a9912c1770e502a602fcfe0b30fed4d9520215cd4"
+    },
+    "observed_runtime": {
+      "files": 1903,
+      "sha256": "53611fa0283739c902656d6a9912c1770e502a602fcfe0b30fed4d9520215cd4"
+    },
+    "frontend": {
+      "files": 11,
+      "sha256": "4ffc64c97539d13315baeb9d5abba6da33ad679679fac2a9a0fa35ac586e1e06"
+    },
+    "installer_sha256": "d236a93a1deeebef1bbbf7effdcc57e3bd00ddffe5c502de9ecd308abb1cee63",
+    "tree_hash_algorithm": "SHA256 of compact JSON [relative POSIX path, SHA256] pairs in Python Path sort order; all pinned source runtime files match release bytes.",
+    "runtime_payload_without_generated_caches": {
+      "files": 1809,
+      "sha256": "2a10490163471057e9a8104393a014aba12201bd35181d726bad97e77f62eeb2"
+    },
+    "runtime_note": "The observed source and release trees contain 94 generated cache files in addition to the 1809 pinned payload files; both are identified. No dependency versions or lockfiles changed."
+  },
+  "source": {
+    "revision": "a032f7b1348465567ca29b19bff54b9cfbfd9679",
+    "worktree_sha256": {
+      "roguelike/components/ai.py": "d2b07138454923132659c1fc28783e7a7e3cd760b70621a26bfab8bcbb858f01",
+      "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+      "roguelike/components/perception.py": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a",
+      "roguelike/data/display/typography.json": "bf91b067f1788fb5047d25e63a5ba31c3557ac85d311b62b0389f3abf1f73204",
+      "roguelike/data/zones/dungeon/barrow.json": "66fd0580090053471a0b3d523242a893b54ce7d8c4700e0a4cbb1696f2f7da25",
+      "roguelike/docs/CREATURES.md": "9aa9290ffb303829b315af9ef29e8c4cfb55ff0a6a4947e81bb10613dcbce655",
+      "roguelike/docs/CREATURE_AUTHORING.md": "ee434bd2e21ff3618ce09f6ca3f39b9b421be9646d6df04e9cce40aa75100ccc",
+      "roguelike/docs/DATA_REFERENCE.md": "61085a6434e03ec4aa30cb1785e1a257061ae911b1c7c332302d1fe0839137e6",
+      "roguelike/docs/LAYOUT_AUTHORING.md": "6db7fd3aed5ddc10ccb3e24f02b82366ec9ec42da42ccb08294baa9e25186575",
+      "roguelike/docs/RENDERING.md": "5ba80a645d0cea9dfa6b3616db454690b7c9cafcd657c748ee269e07bff38f16",
+      "roguelike/docs/TEXT_AUTHORING.md": "3d2854eb902ebeaa928c67dd349b6c63618574f7f7d7509f1aa14f80128612fc",
+      "roguelike/engine/ai_system.py": "0d72a7d750315d4a6f4c14e512c9ec4039fc86d87a40386976723aa2c8d34412",
+      "roguelike/engine/content_authoring.py": "576b87c7f902a2a0bdc355085a1921cb7798344c47ea56e689aa124bff2b0d03",
+      "roguelike/engine/creature_abilities.py": "c7cbd4f922240bbcfbddf10f11dcd4c27e427af747c067c94d69ddaa488a5cae",
+      "roguelike/engine/creature_authoring.py": "c1e15c6cb3604b43f7aeab126f64c8096a750809bcd746cbdbbb9dd5d26af2c9",
+      "roguelike/engine/creature_factory.py": "cd3fa4db9716a0d61b1158f2e06037b9ff129d16da703b908de8c657a773a44d",
+      "roguelike/engine/data_loader.py": "6240d97b546ea813dbc5fc4d2772738bf6cb553f647079ab48ab9a1e0ab3b6ff",
+      "roguelike/engine/display_config.py": "a07f80fad15d1d9622fb7851c8d2eadde6080974eb3f64efba006f60cc6b0546",
+      "roguelike/engine/effect_lifecycle.py": "8486645aff1c325f67c30f38d4e5ff7852b5e249ed3ea06d69a94deb773c7c04",
+      "roguelike/engine/engine.py": "e8011b5cac15538631e0af2cc8f36195249860f2a8166f579f382b579b36fdd9",
+      "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "roguelike/engine/look_mode.py": "e1024b587e42ad00789cd6b66ae8c858dfdeb92c9eb872301d692e42c4b0c6fb",
+      "roguelike/engine/save_components.py": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+      "roguelike/engine/save_manager.py": "a32970bc099a7f9dfa6d4b0447d30aa02793c3637a82a5af1b996750d9ae63e7",
+      "roguelike/engine/scene_generation.py": "535bd94b46af998a4236f7aba4e5dde3ccb233300738900cb0c7480c3173732d",
+      "roguelike/engine/text_authoring.py": "fb935be3330b4cbc46cd0d2f188c706f012844cd820a36a8220fb44c5adca12f",
+      "roguelike/engine/text_reader.py": "39f73b598f4d568c605987cb0cbc262edbebe7fa613a55e90209f691a6c23afb",
+      "roguelike/engine/typography.py": "360ffa7cd37a9c8c6e4d55bae14b4f8ae0373ddd94b265f036897a4e69c49ea6",
+      "roguelike/engine/typography_authoring.py": "1266e406675dbc788336a3df60073c684d84d75b7d10121fc8f6bc01e31fe01a",
+      "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+      "roguelike/generation/structure_preview.py": "904772970f57876707d59cda55c54b0317d42b338996f03cf1be0bdc59326f5b",
+      "roguelike/rendering/ui_registry.py": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058",
+      "tools/critical_fix_regressions/tests/test_combat_routes.py": "f8b0b22b9f1c2fc95c43992f4ea4807091735e02400e566a5e58c751a909dcf6",
+      "tools/critical_fix_regressions/tests/test_effect_persistence.py": "6c116aa535a9f3e042640f851c95d521f54693b61af8764a6e852453c035a594",
+      "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+      "tools/critical_fix_regressions/tests/test_generation_ownership.py": "6da916446c011c58aa370843f0bf838fa97841af73c1b17e34df281be508696a",
+      "workbench/README.md": "9cd5deeb8b1b259de19f62198b1f6d5d24eb70ac170c8f7a3ce804a8f1da5d3a",
+      "workbench/docs/CONTENT_CONTRACTS.md": "49ffee2132c48e3725dfd9b79bc13d9fcab1b3df43700c595480ee341191ef31",
+      "workbench/docs/W5E_DELIVERY.md": "c19d55e990bbb2c6bfdf9d2cd7082520d1e5a466a7d1a5605a8d53c54f2d9a0b",
+      "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+      "workbench/scripts/contract-journey.mjs": "c66f846cf6054ca3577592b147e17e3ef0b48b92d4d60ae5e6a70a74d0c6cb2b",
+      "workbench/scripts/creature-runtime-probe.py": "1493f428982635d59ebfce18b6ecc8098603e80231b8314ef7a5c578102acc80",
+      "workbench/scripts/desktop-test.mjs": "d2a13783085a6f5654be4d17eae4bd201d23a1376bb4949f39f9fb7d0a4581fe",
+      "workbench/scripts/item-journey.mjs": "67ccfae71282487cd7cdea66cfc9f8525b836c41b74190556fc094ab139a5c97",
+      "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+      "workbench/scripts/recipe-journey.mjs": "7775a0bdc0d3e73ef86fd324040d2048d4ea309d96c5f74ae18d8bf31a4b0818",
+      "workbench/scripts/run-creature-common.mjs": "07d302d795bde1af572d84400c9e290c2722343770e9d1c65432b27cfc0a75c2",
+      "workbench/scripts/run-creatures.mjs": "23f25ced7830775ea15966b00616c09388d640ab1f20fb60aaab995d1d2bd751",
+      "workbench/scripts/run-recovery.mjs": "410ea25712dbdf521e4e87526fb98e2e4c465bfcb82282037578044b55ff4c66",
+      "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+      "workbench/scripts/run-typography.mjs": "ae0dd2eb2ce82318bc204e92eec34b67d3f4461ff54c80ae36ced16a2d645aa2",
+      "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+      "workbench/scripts/startup-test.mjs": "8161a1060b43c720dea381bcadabdc3b1f044e2302535ce0721876a721f5c698",
+      "workbench/scripts/submap-journey.mjs": "cb3f4ca658fced223b8377cfe241b969efcc09cdd34aebe062c736814132751a",
+      "workbench/scripts/text-journey.mjs": "5cb7459f400acbcfee263ba07f5f304edd070e180e2e7406cd31e2ab39707bd7",
+      "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+      "workbench/scripts/typography-runtime-probe.py": "2466cc4746cadfbdb7d91513dad2a002303f4872cf82cebfe619734eeb84265a",
+      "workbench/scripts/verify-runtime.ps1": "6ed6f9fceecd4c351813c62dfbf1c87f9a66618b7c0c037237f03e3baac2501a",
+      "workbench/scripts/workspace-journey.mjs": "c51137c55da6cfd9325f144495b25d128cbd8d172620fe07eb3b05ba275b766c",
+      "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+      "workbench/src-tauri/src/authoring.rs": "3f68d652c04ffbd7dfcb8ad9596e7b185a72b83fb50a92f7ee7065828c729979",
+      "workbench/src-tauri/src/main.rs": "cf13d14a1f315eb3f17ae6c8e6fc1fff60b3411cf391849d3270cb13fdd5eab5",
+      "workbench/src-tauri/src/recovery.rs": "36fca9e33f8e6906014d281d2c5e46c80e4de4e2e21d622fb38cc31baeff7e09",
+      "workbench/src-tauri/tauri.bundle.conf.json": "66ed20e3e95362e60f9ffb8c74a7cc6e187847dcfb414d4a54285788bcc668bf",
+      "workbench/src-tauri/tauri.conf.json": "5ae1d6ded1b17e3b91477c799e1cdc698f8f6d6dc56323c1fe8eba70abd84639",
+      "workbench/src/App.tsx": "1d5b299cbc03fca8c0c424cb13518f674e55706e77d31afbe505b09f8928ebd8",
+      "workbench/src/Authoring.tsx": "0a073f95e503e37cab13be2d80eb58ad60107aaac39e63298187b0d712996684",
+      "workbench/src/ContentEditor.tsx": "241e58146db7c3db9bdcb5bfa116e0fa95b5f2704339a0fc067a18b10be7b258",
+      "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+      "workbench/src/CreatureEditor.tsx": "703a8b45ab97ab3cf9ac9d1cc2f7a16e281e0639d665e4fe633df15c75a40f2d",
+      "workbench/src/ItemEditor.tsx": "f0044fc331d89ae0a471e4545c704e5903cfe8733b033190059b1d73d1176cb0",
+      "workbench/src/RecipeEditor.tsx": "c62697dec01736e67015c935b790392e530b2aee48c9ea9db3a42237c942bd07",
+      "workbench/src/RecoveryPanel.test.tsx": "ea95e83b642be5ea4222ea9a9cb05cdf6ad211e930b6d704fd63950a17537ba1",
+      "workbench/src/RecoveryPanel.tsx": "fc7c0484a17d2b89e09168a97699ff1e81f7231485207d5c59d334e9691b29fa",
+      "workbench/src/TextEditor.tsx": "942826e5795930369fc065ddff779444b69ed96ce461b416ac477d2909ceb0c7",
+      "workbench/src/TypographyEditor.tsx": "80ed2c4a9cb5c8ce96f037879d0e391f8f1dc29ba25e0623925b75df10754186",
+      "workbench/src/content.ts": "3fb05f52a1f146d567cbd8cdc5f7c9d6569a1ce1553ed7d46b62cd4b1cf5bf37",
+      "workbench/src/creature.test.ts": "6bfaf57ec2b7e257439f4a22dc8cd7a32a6d0d8570d9f085ac9a603114400309",
+      "workbench/src/creature.ts": "ab8cf858987fc578a6b760033f2e5f0f8c4ed245528ad5a2f6594af04a5f93ea",
+      "workbench/src/familyData.ts": "2f714a7e085f28f3283f6c201027918518fdff153a41fe0d420d3ac7a528a656",
+      "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+      "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+      "workbench/src/protocol.ts": "935c05256a4423c1226c50cb1d855368f9076d3a7508203139a1058001fd5af3",
+      "workbench/src/recipe.ts": "6ac4d85fdc783751f7c65376837af20ddf311b57b6916110e3398b8b4b253d03",
+      "workbench/src/recovery.test.ts": "8e42eda3aef374e8e44a8f079211de93b689b5abe8ee41c2e4144b4958e4dedf",
+      "workbench/src/recovery.ts": "cdcd2dae4ae7d83534c20b2b8b9e9ceb06094c05811f7adb83219a68c7b07b09",
+      "workbench/src/reopen.test.ts": "1b433d0ad03c397593f488b4e328d86391b3ae1b0371c9ec02a04bed8b717b85",
+      "workbench/src/reopen.ts": "c09f8296097cb19a29f81b9cd72aba6be23fc428b7cb52a1b1c190eaca9fb0b1",
+      "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+      "workbench/src/styles.css": "901a5192a5ecc0185e6f2282c95b756ebe9111c441f14686098f7986e93f7390",
+      "workbench/src/typography.test.tsx": "5556896ef0e66c90669e56a24e6f379b725853671e05b5c6b5c381df61a8b8aa",
+      "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+      "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+      "workbench/worker/bridge.py": "73cf34e0d3bce7185db5499752373b1d9b1af94373dd7659a396963c0275dec2",
+      "workbench/worker/requirements.lock": "17cd05554346febe141934ef7757e42d71f91880d2303051196fda0d50d278a7",
+      "workbench/worker/test_authoring.py": "63b31599c487800b65eaf02983fe6e946adf878ea6cd2dc48d86739785d57b39",
+      "workbench/worker/test_creatures.py": "d69785bc377221dda4c6fd8ca745c4744c93e3508f547c35501ded0173e00e3d",
+      "workbench/worker/test_creatures_w5f.py": "30136d0066430a2f403866333b6c8880e2d8cccffc6574f767cca1f091181209",
+      "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec",
+      "workbench/worker/test_typography.py": "f56486cfed89413842fed3ed49ad195eed4db79800e44546a1c5a4a3a208e77b"
+    },
+    "git_sha256": {
+      "roguelike/components/ai.py": "3c56d5cbea74361709e8a21e19881145708686596c651d8d958b5b6a1cbd9361",
+      "roguelike/components/language.py": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4",
+      "roguelike/components/perception.py": "9c5659774b55aa58e6c424e2e5783eaab304b8400da7a1f09c85b84100189af3",
+      "roguelike/data/display/typography.json": "bf91b067f1788fb5047d25e63a5ba31c3557ac85d311b62b0389f3abf1f73204",
+      "roguelike/data/zones/dungeon/barrow.json": "06570a46ea1016a8dc6a0fdf80ea259a6d98d9ae84c5e39e6cd29a186df96047",
+      "roguelike/docs/CREATURES.md": "9aa9290ffb303829b315af9ef29e8c4cfb55ff0a6a4947e81bb10613dcbce655",
+      "roguelike/docs/CREATURE_AUTHORING.md": "ee434bd2e21ff3618ce09f6ca3f39b9b421be9646d6df04e9cce40aa75100ccc",
+      "roguelike/docs/DATA_REFERENCE.md": "61085a6434e03ec4aa30cb1785e1a257061ae911b1c7c332302d1fe0839137e6",
+      "roguelike/docs/LAYOUT_AUTHORING.md": "c7122770d8c75b0a0d80630f7d52722452b01940b3eea7f22a550d2e4a68d07d",
+      "roguelike/docs/RENDERING.md": "b9184616646526f8808dc35bf9a20fb2902af93e96222a7bc6913e1a32a4e422",
+      "roguelike/docs/TEXT_AUTHORING.md": "14fc09b1c1a3af411686139f6f38df7dbebaad0f79305c1fcd604bbc87b78b86",
+      "roguelike/engine/ai_system.py": "114ff37a2e5330f2df7d48ed43ea0462fb9657362f575b039e12444a8319b866",
+      "roguelike/engine/content_authoring.py": "576b87c7f902a2a0bdc355085a1921cb7798344c47ea56e689aa124bff2b0d03",
+      "roguelike/engine/creature_abilities.py": "fdc88753da9597345cbe2e8e0c8d85112cca8b0f259b93c919066447afae208a",
+      "roguelike/engine/creature_authoring.py": "c1e15c6cb3604b43f7aeab126f64c8096a750809bcd746cbdbbb9dd5d26af2c9",
+      "roguelike/engine/creature_factory.py": "2f671a6e27844f102ecd3b49796f827cfc49e7dd8918adb6d912cfc5f8f05c7e",
+      "roguelike/engine/data_loader.py": "07625ac2db63a5717c9db166a67cd4a615a2a2a58e5185da4c4686c713cc56cd",
+      "roguelike/engine/display_config.py": "13bbec46d32b7b6f645d1acceba3eabd2b41ef50e336ac5373c69f812a1ce8e8",
+      "roguelike/engine/effect_lifecycle.py": "ff3f792fe4f739489bba398745cee733754024d763ec2afc5729f4108ad09b1b",
+      "roguelike/engine/engine.py": "e8011b5cac15538631e0af2cc8f36195249860f2a8166f579f382b579b36fdd9",
+      "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "roguelike/engine/look_mode.py": "93f962881e1bf16a8b8261677509f5be5f3f8bad873b0aedf037b1d57d571fa2",
+      "roguelike/engine/save_components.py": "b2df939decdb283814a4c4ba94ec9c6d5339a0d05f78fad909e859d6f3475228",
+      "roguelike/engine/save_manager.py": "92c70cc9158e232aa42abaf33697a3eb25cf6b74e29259d56e3d2149dd157cc2",
+      "roguelike/engine/scene_generation.py": "cb4672d5d7309e28108bc63a79c2dc648f1237711d36e69c9fc0d42cbb17dc65",
+      "roguelike/engine/text_authoring.py": "79d41490b67a6043f289b4ef3b1f48e06dd6820b3cbb7810487de447743069ca",
+      "roguelike/engine/text_reader.py": "4ab9ad70c4b1453d7b3f33276f0031d592838290a0b9034b8fb8a27a5f9dcae0",
+      "roguelike/engine/typography.py": "360ffa7cd37a9c8c6e4d55bae14b4f8ae0373ddd94b265f036897a4e69c49ea6",
+      "roguelike/engine/typography_authoring.py": "1266e406675dbc788336a3df60073c684d84d75b7d10121fc8f6bc01e31fe01a",
+      "roguelike/generation/structure_contract.py": "0dc40faec76014706dad805bbca5bbc5840a455d8b6131565cb14b75c75740fe",
+      "roguelike/generation/structure_preview.py": "14ce8d2541b4394b3d4f12c0ff2190b0edc15de43569afc4377bea578a5bf0b3",
+      "roguelike/rendering/ui_registry.py": "e0272edd0c11a393b9ef03f3b8055d1770ef32428d4b7b1e6d66c62afb8b5f2a",
+      "tools/critical_fix_regressions/tests/test_combat_routes.py": "f34f65204acf35aa771cf18fdcd4103cea7e4d1de2ddff74acbf54f4781f9209",
+      "tools/critical_fix_regressions/tests/test_effect_persistence.py": "ad39e8d71f319da16f35b75d476e8e8a2c879388d33533db73d24ea540e5d612",
+      "tools/critical_fix_regressions/tests/test_gameplay_g12.py": "0a3c240bca58a69e25303ac8b8420824178542d55e82e4dba35db591437a28a2",
+      "tools/critical_fix_regressions/tests/test_generation_ownership.py": "87709e7cb392acdfbc47255865b941833f88b97fbfbc47f87bb494fff307760d",
+      "workbench/README.md": "9cd5deeb8b1b259de19f62198b1f6d5d24eb70ac170c8f7a3ce804a8f1da5d3a",
+      "workbench/docs/CONTENT_CONTRACTS.md": "49ffee2132c48e3725dfd9b79bc13d9fcab1b3df43700c595480ee341191ef31",
+      "workbench/docs/W5E_DELIVERY.md": "c19d55e990bbb2c6bfdf9d2cd7082520d1e5a466a7d1a5605a8d53c54f2d9a0b",
+      "workbench/package-lock.json": "d7fd1b309cbfcb29db6933d10e1464fe9c37997345bc0eb6d3fd30586b9f4423",
+      "workbench/scripts/contract-journey.mjs": "afe76ecf0def13b2c9871cfeeb732c92ac9c934644fd93542da6ead29f5cdd43",
+      "workbench/scripts/creature-runtime-probe.py": "1493f428982635d59ebfce18b6ecc8098603e80231b8314ef7a5c578102acc80",
+      "workbench/scripts/desktop-test.mjs": "00ee9874ea1ecd75eab9cee4729712e883bb3b4844b7a25b28d2dde29c78498a",
+      "workbench/scripts/item-journey.mjs": "b24a8e5d69f2a74c7f039fe39a8e6db36ccdfef4a872e54f62a20a7b3a9b963e",
+      "workbench/scripts/pool-journey.mjs": "70dd938d25a9351a11fe5c40985c2e9dcf82038fb746cb71e902bae6e437253c",
+      "workbench/scripts/recipe-journey.mjs": "55d5c07ec19396fb5b1d5b750155febaaa8775db8aa9c159e640d49b61845daa",
+      "workbench/scripts/run-creature-common.mjs": "07d302d795bde1af572d84400c9e290c2722343770e9d1c65432b27cfc0a75c2",
+      "workbench/scripts/run-creatures.mjs": "23f25ced7830775ea15966b00616c09388d640ab1f20fb60aaab995d1d2bd751",
+      "workbench/scripts/run-recovery.mjs": "410ea25712dbdf521e4e87526fb98e2e4c465bfcb82282037578044b55ff4c66",
+      "workbench/scripts/run-texts.mjs": "82d510dbfd2b4d96aaed0c10c5d8c64e292c05448c537c1bf11cc2768467f951",
+      "workbench/scripts/run-typography.mjs": "7577c55a5926da27e555638a53d6f95579accd6b6f941f89d077884f7907b713",
+      "workbench/scripts/run-workspace.mjs": "b9a14d24772b3a90424a79da13325b386f3f1b013e6e6ed58ab3a5a07a363ed8",
+      "workbench/scripts/startup-test.mjs": "8161a1060b43c720dea381bcadabdc3b1f044e2302535ce0721876a721f5c698",
+      "workbench/scripts/submap-journey.mjs": "7d45f7915e4dbe58028e48e16a75c33cd6093ae857b5d50128b3bf6780018bc4",
+      "workbench/scripts/text-journey.mjs": "4ee5165359c8fe82faebd57fb7bd37cfa6c0ab393df3bacc8fbaef4a5597312b",
+      "workbench/scripts/text-physical-use.py": "0564d08110dbe5e6d2af5c499ce1231a29817d742d58b92913d8ea669eb5745c",
+      "workbench/scripts/typography-runtime-probe.py": "2466cc4746cadfbdb7d91513dad2a002303f4872cf82cebfe619734eeb84265a",
+      "workbench/scripts/verify-runtime.ps1": "6ed6f9fceecd4c351813c62dfbf1c87f9a66618b7c0c037237f03e3baac2501a",
+      "workbench/scripts/workspace-journey.mjs": "f44f5dc1de2946cf747ed3b380f201447f494a4441d64898697f29ea6be7c5c6",
+      "workbench/src-tauri/Cargo.lock": "6f3850d15e82f11757d80749c1a906dc2a2dca48d0286eb044d6165813bc9758",
+      "workbench/src-tauri/src/authoring.rs": "3f68d652c04ffbd7dfcb8ad9596e7b185a72b83fb50a92f7ee7065828c729979",
+      "workbench/src-tauri/src/main.rs": "cf13d14a1f315eb3f17ae6c8e6fc1fff60b3411cf391849d3270cb13fdd5eab5",
+      "workbench/src-tauri/src/recovery.rs": "36fca9e33f8e6906014d281d2c5e46c80e4de4e2e21d622fb38cc31baeff7e09",
+      "workbench/src-tauri/tauri.bundle.conf.json": "66ed20e3e95362e60f9ffb8c74a7cc6e187847dcfb414d4a54285788bcc668bf",
+      "workbench/src-tauri/tauri.conf.json": "5ae1d6ded1b17e3b91477c799e1cdc698f8f6d6dc56323c1fe8eba70abd84639",
+      "workbench/src/App.tsx": "1d5b299cbc03fca8c0c424cb13518f674e55706e77d31afbe505b09f8928ebd8",
+      "workbench/src/Authoring.tsx": "0a073f95e503e37cab13be2d80eb58ad60107aaac39e63298187b0d712996684",
+      "workbench/src/ContentEditor.tsx": "241e58146db7c3db9bdcb5bfa116e0fa95b5f2704339a0fc067a18b10be7b258",
+      "workbench/src/ContractControls.tsx": "3c71c78d68bd23ea24c2a12911015970692df4042b471996c7f553cdae76a740",
+      "workbench/src/CreatureEditor.tsx": "703a8b45ab97ab3cf9ac9d1cc2f7a16e281e0639d665e4fe633df15c75a40f2d",
+      "workbench/src/ItemEditor.tsx": "52f91783f9859ef15cf39593cc24fd986acf969799964fd6de6fe34ec979fe89",
+      "workbench/src/RecipeEditor.tsx": "3fd00a6c662814a255d2626616109d27dc07951589024efebb337ce8fa38d11d",
+      "workbench/src/RecoveryPanel.test.tsx": "ea95e83b642be5ea4222ea9a9cb05cdf6ad211e930b6d704fd63950a17537ba1",
+      "workbench/src/RecoveryPanel.tsx": "fc7c0484a17d2b89e09168a97699ff1e81f7231485207d5c59d334e9691b29fa",
+      "workbench/src/TextEditor.tsx": "942826e5795930369fc065ddff779444b69ed96ce461b416ac477d2909ceb0c7",
+      "workbench/src/TypographyEditor.tsx": "80ed2c4a9cb5c8ce96f037879d0e391f8f1dc29ba25e0623925b75df10754186",
+      "workbench/src/content.ts": "3fb05f52a1f146d567cbd8cdc5f7c9d6569a1ce1553ed7d46b62cd4b1cf5bf37",
+      "workbench/src/creature.test.ts": "6bfaf57ec2b7e257439f4a22dc8cd7a32a6d0d8570d9f085ac9a603114400309",
+      "workbench/src/creature.ts": "ab8cf858987fc578a6b760033f2e5f0f8c4ed245528ad5a2f6594af04a5f93ea",
+      "workbench/src/familyData.ts": "2f714a7e085f28f3283f6c201027918518fdff153a41fe0d420d3ac7a528a656",
+      "workbench/src/orderedRecords.test.tsx": "92efe080ee2a788c030a342d7bb2740b2bcd6192b810bcdac09da37a9e14fc4a",
+      "workbench/src/orderedRecords.ts": "2df7c7d3f1d4d733c15823cba7fc9fa39ace8cf2039f3d109a8cf130525154a6",
+      "workbench/src/protocol.ts": "935c05256a4423c1226c50cb1d855368f9076d3a7508203139a1058001fd5af3",
+      "workbench/src/recipe.ts": "51ca1cff61de9dee56e43f61ed2b25a1036d220011162abbf9e93773202c6098",
+      "workbench/src/recovery.test.ts": "8e42eda3aef374e8e44a8f079211de93b689b5abe8ee41c2e4144b4958e4dedf",
+      "workbench/src/recovery.ts": "cdcd2dae4ae7d83534c20b2b8b9e9ceb06094c05811f7adb83219a68c7b07b09",
+      "workbench/src/reopen.test.ts": "1b433d0ad03c397593f488b4e328d86391b3ae1b0371c9ec02a04bed8b717b85",
+      "workbench/src/reopen.ts": "c09f8296097cb19a29f81b9cd72aba6be23fc428b7cb52a1b1c190eaca9fb0b1",
+      "workbench/src/requests.ts": "b0233b94bbd581d20e029f66b7ee5ca56ac4918a8df85b40f1e35974977fc4d7",
+      "workbench/src/styles.css": "a1c280b69773798da957a2f4f7b17258df390e5ddb88f23a2ddb4067c0bf598e",
+      "workbench/src/typography.test.tsx": "5556896ef0e66c90669e56a24e6f379b725853671e05b5c6b5c381df61a8b8aa",
+      "workbench/src/workspace.test.ts": "48c8924fd770c700e322aa8261560283fa332a6651f96c60cd636f3d7afd4998",
+      "workbench/src/workspace.ts": "0589ce2fbf0b31432faf1d924c86fa2dbc68280b7a8e855cc7c75ca2401de0e5",
+      "workbench/worker/bridge.py": "73cf34e0d3bce7185db5499752373b1d9b1af94373dd7659a396963c0275dec2",
+      "workbench/worker/requirements.lock": "3e375be2c380dbcc1ba803e2904ccd2e14c71bf00cc3afe7eb2d91a0272ffab0",
+      "workbench/worker/test_authoring.py": "472272dc20a01c76849c282a973e62422aab993222e697b16fd8b901d77ea0b6",
+      "workbench/worker/test_creatures.py": "d69785bc377221dda4c6fd8ca745c4744c93e3508f547c35501ded0173e00e3d",
+      "workbench/worker/test_creatures_w5f.py": "30136d0066430a2f403866333b6c8880e2d8cccffc6574f767cca1f091181209",
+      "workbench/worker/test_texts.py": "fc9a5a712b9b2c52ad92eefcf95539c1894e2e6a81186e231437ca79947824ec",
+      "workbench/worker/test_typography.py": "f56486cfed89413842fed3ed49ad195eed4db79800e44546a1c5a4a3a208e77b"
+    }
+  },
+  "preservation": {
+    "before_files": 8168,
+    "outside_scope_files": 8137,
+    "sha256_and_mtime_unchanged": true,
+    "owner_plan": {
+      "sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+      "mtime_ns": 1792988983533416900
+    },
+    "personal_saves": "No personal-save scan or migration; runtime probes use explicit disposable save roots; worker audit rejects personal-save reads."
+  },
+  "source_audit": {
+    "canonical_zone": {
+      "canonical_sha256": "66fd0580090053471a0b3d523242a893b54ce7d8c4700e0a4cbb1696f2f7da25",
+      "retired_sha256": "3c09f624e3241b1973e034aa6d61090087bebf4e62102cfb39797b0b2b0323c9",
+      "unchanged_active_inputs": {
+        "creatures": [
+          {
+            "id": "barrow_wight",
+            "weight": 20,
+            "chance": 0.5
+          },
+          {
+            "id": "grave_thing",
+            "weight": 15,
+            "chance": 0.4
+          }
+        ],
+        "structures": [
+          {
+            "id": "burial_chamber",
+            "weight": 20
+          },
+          {
+            "id": "offering_alcove",
+            "weight": 15
+          },
+          {
+            "id": "sealed_tomb",
+            "weight": 10
+          }
+        ],
+        "ambient_light": 0.0,
+        "category": "dungeon",
+        "tags": [
+          "dungeon",
+          "dead",
+          "ancient",
+          "barrow"
+        ],
+        "ambient_loot": "old_burial_goods",
+        "light_level": "dark"
+      },
+      "direct_path_consumer_search": "No runtime Python or guide path consumer found; terrain_palette has no runtime Python consumer."
+    },
+    "remaining_barrow_sources": [
+      "roguelike/data/zones/dungeon/barrow.json"
+    ],
+    "production_data_changes": [
+      "retired roguelike/data/zones/dungeon/dungeon.json only"
+    ],
+    "w5e_wording": "42-case report narrowed to accumulation of _visible_rows; original tested revision retained",
+    "stable_identity_reads": [
+      "visible/last-known Look descriptions",
+      "creature knowledge and speed/essence details",
+      "active pursuit",
+      "off-map pursuit",
+      "adjacent stair/chunk definition checks",
+      "callouts"
+    ],
+    "unchanged": [
+      "presentation tiles and rendering keys",
+      "ability dispatcher",
+      "save format and restoration policy",
+      "recipe/text variant-only policy"
+    ]
+  },
+  "coverage": {
+    "contract": "creature-common-1",
+    "ordinary_edit_variant": [
+      "drowned_revenant",
+      "grave_thing",
+      "heath_stalker",
+      "highland_bandit",
+      "hollow_revenant",
+      "sewer_thing"
+    ],
+    "special_edit_only": [
+      "barrow_wight",
+      "bog_wraith",
+      "briar_lurker",
+      "hollow_knight",
+      "plague_crow",
+      "stone_lurker"
+    ],
+    "inspect_only": [
+      "vine_network",
+      "player",
+      "unsupported or ambiguous shapes"
+    ],
+    "inspection_sources": 14,
+    "actor_definitions": 12,
+    "controls": [
+      "name",
+      "description",
+      "base_hp + fighter.max_hp (atomic)",
+      "armour_value",
+      "damage_dice",
+      "damage_bonus",
+      "attack_verb",
+      "perception.sight_radius",
+      "perception.sees_in_dark",
+      "wander_radius",
+      "pursuit_timeout",
+      "speed",
+      "ai_type (ordinary new variant only)"
+    ],
+    "negative_checks": [
+      "reserved Player name",
+      "strict NdM and numeric type/finite/bounds",
+      "full-entity namespace duplicates/case collisions",
+      "source promotion",
+      "special clone and forged recovery variant intent",
+      "protected raw fields",
+      "missing active body and malformed harvest shape",
+      "duplicate-zone warning",
+      "host paths/reparse roots",
+      "stale ability-source evidence"
+    ]
+  },
+  "native_creatures": {
+    "receipt": {
+      "path": "workbench/.artifacts/w5f/native-1793154259753/receipt.json",
+      "sha256": "daccd0dd2edc69990d5f6249204a47a6eb0a4bd29df2c85f6954910411a3f131"
+    },
+    "processes": [
+      20924,
+      19496,
+      31268
+    ],
+    "checks": [
+      "three independent family drafts and generations across three actual app processes, including invalid BOM/Unicode source and abrupt process exit",
+      "fresh validation required after recovery; special clone and forged recovery intent refused without deleting text",
+      "ability-source changes revoke evidence; exact same-ID and ordinary variant publication/reopen; unrelated recovery retained",
+      "saved ordinary variant selected, constructed and published through existing authored-submap UI; no selector enrollment"
+    ],
+    "drafts": [
+      {
+        "path": "roguelike/data/entities/creatures/barrow_wight.json",
+        "phase": "common-fields",
+        "key": "3e0c9d90628be4f5a35057f50e25532f16a4ccf5a05f70961f7a24b095b06717/7cbe4c75-e702-41df-a227-de180aa73d61",
+        "generation": 7,
+        "sha256": "7e48dead8167c56baa10a7addac21e7b39c735374eb46a603bd1fe8be3df7536"
+      },
+      {
+        "path": "roguelike/data/entities/creatures/hollow_revenant.json",
+        "phase": "ordinary-variant",
+        "key": "3e0c9d90628be4f5a35057f50e25532f16a4ccf5a05f70961f7a24b095b06717/349085dd-f49d-4d9a-a52d-649779f3d049",
+        "generation": 8,
+        "sha256": "65628f3efa45e7d9edbba23e0587e068f4450dc995d406882e990f61ff07abb5"
+      },
+      {
+        "path": "roguelike/data/items/components/clay_pot.json",
+        "phase": "other-family-invalid",
+        "key": "3e0c9d90628be4f5a35057f50e25532f16a4ccf5a05f70961f7a24b095b06717/047ee133-a513-4560-a300-f190f993219f",
+        "generation": 1,
+        "sha256": "a2b5715f382801ecee8ed73a0c8d7b0d58b2aefc29c4ab45829df6d82904b0c5"
+      },
+      {
+        "path": "roguelike/data/entities/creatures/barrow_wight.json",
+        "phase": "invalid-json",
+        "key": "3e0c9d90628be4f5a35057f50e25532f16a4ccf5a05f70961f7a24b095b06717/7cbe4c75-e702-41df-a227-de180aa73d61",
+        "generation": 8,
+        "sha256": "88f062885d5f8c425adcee87f6a44340f959d0c0936aca1e7b0e0f4ad79b8850"
+      }
+    ],
+    "wight": {
+      "path": "roguelike/data/entities/creatures/barrow_wight.json",
+      "draft_saved_reopened_sha256": "7e48dead8167c56baa10a7addac21e7b39c735374eb46a603bd1fe8be3df7536",
+      "factory": {
+        "ai_class": "AmbushAI",
+        "blocks_movement": true,
+        "fighter": {
+          "armour_value": 6,
+          "body_id": "body_human",
+          "defense": 2,
+          "hp": 37,
+          "limbs": [
+            {
+              "damage_multiplier": 1.5,
+              "id": "head",
+              "size": 1
+            },
+            {
+              "damage_multiplier": 1,
+              "id": "form",
+              "size": 5
+            },
+            {
+              "damage_multiplier": 0.8,
+              "id": "limbs",
+              "size": 3
+            }
+          ],
+          "max_hp": 37,
+          "power": 5
+        },
+        "inventory": null,
+        "name": "W5F native Wight",
+        "perception": {
+          "faction": "hollow",
+          "hearing_radius": 8,
+          "hostile_to": [
+            "player"
+          ],
+          "sees_in_dark": true,
+          "sight_radius": 3
+        },
+        "tile": "barrow_wight",
+        "wander_radius": 5
+      },
+      "special_binding": "barrow_wight",
+      "ability_executed_by_factory": false
+    },
+    "ordinary": {
+      "path": "roguelike/data/entities/creatures/w5f_native_variant.json",
+      "draft_saved_reopened_sha256": "65628f3efa45e7d9edbba23e0587e068f4450dc995d406882e990f61ff07abb5",
+      "factory": {
+        "ai_class": "AmbushAI",
+        "blocks_movement": true,
+        "fighter": {
+          "armour_value": 1,
+          "body_id": "body_human",
+          "defense": 1,
+          "hp": 19,
+          "limbs": [
+            {
+              "damage_multiplier": 1,
+              "id": "form",
+              "size": 1
+            }
+          ],
+          "max_hp": 19,
+          "power": 3
+        },
+        "inventory": null,
+        "name": "W5F native ordinary",
+        "perception": {
+          "faction": "hollow",
+          "hearing_radius": 6,
+          "hostile_to": [
+            "player"
+          ],
+          "sees_in_dark": true,
+          "sight_radius": 7
+        },
+        "tile": "hollow_revenant",
+        "wander_radius": 8
+      },
+      "special_binding": null
+    },
+    "saved_layout_sha256": "fd357faee6a604723d910fb3056446a024e7a8b9ae1ea43d7807cd6222eeeebf",
+    "screenshots": [
+      {
+        "path": "workbench/.artifacts/w5f/native-1793154259753/wight-controls.png",
+        "sha256": "e39764cf1165f8d6f20ee5e0d62d90993ed73995d8f7d57e48432d9cdd00e64c"
+      },
+      {
+        "path": "workbench/.artifacts/w5f/native-1793154259753/wight-minimum.png",
+        "sha256": "73b1d7e9c4448178e519cb6910f121c7cf8d803e2831388db206966805895d16"
+      },
+      {
+        "path": "workbench/.artifacts/w5f/native-1793154259753/variant-factory.png",
+        "sha256": "e2ee91ca7539bddc3c73636b6cc27bde7b218fa7b98876a793b3e95f7f9b6a44"
+      },
+      {
+        "path": "workbench/.artifacts/w5f/native-1793154259753/variant-layout.png",
+        "sha256": "ed919a4cd3137a9c9470d6cb6060948a6fc4a85cb376e9f2e3b27facf515b3f7"
+      }
+    ]
+  },
+  "controlled_runtime": {
+    "receipt": {
+      "path": "workbench/.artifacts/w5f/runtime-final2/results/runtime-result.json",
+      "sha256": "ad5a3e106c3b5e1e7411e39dc25d61bd5efc853aca9b062de767b5417a1afed5"
+    },
+    "observations": {
+      "passed": true,
+      "pid": 30652,
+      "restore": {
+        "pid": 16568,
+        "restored": {
+          "name": "Barrow Wight",
+          "hp": 7,
+          "max_hp": 20,
+          "armour": 3,
+          "sight": 7,
+          "dark": true,
+          "wander": 5,
+          "stable_id": "barrow_wight",
+          "ai": "AmbushAI"
+        },
+        "fresh": {
+          "name": "W5F fresh Wight",
+          "hp": 41,
+          "max_hp": 41,
+          "armour": 9,
+          "sight": 2,
+          "dark": false,
+          "wander": 3,
+          "stable_id": "barrow_wight",
+          "ai": "AmbushAI"
+        },
+        "current_definition": {
+          "description": "W5F current definition prose",
+          "damage_dice": "1d1",
+          "damage_bonus": 4,
+          "attack_verb": "W5F tests thee",
+          "speed": 1.25,
+          "pursuit_timeout": 2
+        },
+        "ability_corruption_delta": 0.005,
+        "pulse": true,
+        "route": "fresh process → DataLoader → _deserialize_entities → LookMode → Engine._advance_turn / actual AI attack and wight dispatch"
+      },
+      "variant": {
+        "id": "w5f_probe_variant",
+        "tile": "hollow_revenant",
+        "definition_sha256": "eb6ca9cc099b01e2c95324be352e3f025f38a0b60179751042659f900889faa1",
+        "visible_description": "W5F own description",
+        "ghost_description": "W5F own description (Last known position.)",
+        "rendered_details": [
+          "HP",
+          "14/14",
+          "It is faster than you.",
+          "Weak to: W5F own knowledge",
+          "Essence:",
+          "  Dissolution  --",
+          "  Quickening   +",
+          "  Binding      ++",
+          "  Severance    ++",
+          "  Consumption  --",
+          "  Revelation   ++",
+          "Tab / N · P to cycle  (2/2)   ESC / X to close"
+        ],
+        "callouts": [
+          "W5F inherited literal"
+        ],
+        "controlled_damage": 5,
+        "active_timeout": true,
+        "offmap_timeout": true,
+        "speed_accumulator": 0.25
+      },
+      "disguised_special_identity": true,
+      "identical_tile_no_special_binding": true,
+      "limits": "Controlled production routes with seeded RNG and disposable inputs; no natural selection or balance claim. Save format/restoration unchanged."
+    },
+    "published_receipt": {
+      "path": "workbench/.artifacts/w5f/native-1793154259753/controlled-encounter/published-result.json",
+      "sha256": "6bd238fde0897fb177cb68d19b357f9d157f49235102bdc0f70b84b11e1433ef"
+    },
+    "published_observations": {
+      "passed": true,
+      "pid": 3428,
+      "layout_sha256": "fd357faee6a604723d910fb3056446a024e7a8b9ae1ea43d7807cd6222eeeebf",
+      "definition_sha256": "65628f3efa45e7d9edbba23e0587e068f4450dc995d406882e990f61ff07abb5",
+      "identity": "w5f_native_variant",
+      "tile": "hollow_revenant",
+      "ai": "AmbushAI",
+      "hp": 19,
+      "description": "This variant has its own description.",
+      "damage": 4,
+      "speed_accumulator": 0.25,
+      "route": "native-published saved layout → production preview/create_submap → actual Actor → Engine._advance_turn / AmbushAI / resolve_attack",
+      "scope": "One controlled turn with saved native inputs; no natural selection or balance claim."
+    }
+  },
+  "existing_native_receipts": {
+    "workspace": {
+      "path": "workbench/.artifacts/desktop-workspace/receipt.json",
+      "sha256": "633814b15b9c55c9479523b6d65033bc5d9475ad24878d7e2cac926b1c0cdfd5",
+      "started_utc": "2026-10-28T02:26:35.044Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "a held real freshness response disables conflicting UI actions until release without queueing work",
+        "six independent file owners; exact invalid source; variant targets and undo/redo retained; aliases/repeated opens reuse tokens; shared-item references return to both recipe origins",
+        "targeted close/reload keep/discard and obsolete-token rejection; destination owner collision; one reviewed/saved/reopened variant with deliberate recovery after reopen failure",
+        "individual external conflict and conservative freshness preserve drafts; legacy structure source remains byte-exact; unavailable closed reference origin is explicit",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ]
+    },
+    "texts": {
+      "path": "workbench/.artifacts/desktop-texts/receipt.json",
+      "sha256": "e7bd156cb67a88ecff483ec49ce56da58d23c1013a5ca55ea05ea50f068f33af",
+      "started_utc": "2026-10-28T02:27:58.433Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "registered text controls, ordered multiline pages, undo/redo, invalid raw repair, cancellation/stale completion, production preview and stale resources, variant review/apply/hash reopen, parked item/recipe drafts, reserved target and collision refusal, preview cannot authorize publication, real physical letter pickup/inventory/read controls",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ]
+    },
+    "submaps": {
+      "path": "workbench/.artifacts/desktop-submaps/receipt.json",
+      "sha256": "4380cd9de1e653ce6b8809354eed098e7a8a08b3cf6259c369ff44114788a59c",
+      "started_utc": "2026-10-28T02:29:47.467Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "W4D real completed validation held at renderer; accepted cancel revoked host token, exact draft retained, old completion could not restore verdict or clear newer preview; fresh production result accepted",
+        "W4D parked item draft survived submap edits, cancellation, fresh preview and publication byte-for-byte; source item unchanged",
+        "read-only example → exact shared marker draft; add/move/delete, undo/redo, raw freeze, stale job rejection, source/scene coordinates, real Actor, minimum-window diagnostics, sidecar invalidation, new-file publish and byte-exact reopen",
+        "native trusted writer rejects stale/forged/revoked reviews, external source and creature changes, destination races, starting_lab promotion, traversal/ADS/docs writes and layout junction; originals unchanged",
+        "project close/reopen reproduces exact saved variant and production actor with no sidecar output or campaign selection",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ]
+    },
+    "items": {
+      "path": "workbench/.artifacts/desktop-items/receipt.json",
+      "sha256": "b824e8edd8885ab1c108b9728d4dd10f774ea6e6083338874fdb10a75bf67530",
+      "started_utc": "2026-10-28T02:34:26.328Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "three advanced item sources open byte-exact read-only; actual dispatch found; declarative tincture effects explicitly unconsumed",
+        "closing/reopening the project during item lookup cannot restore a late item document",
+        "native container → pool → item; three retained drafts and separate histories; exact-span weight/tier edits; invalid raw freeze and late verdict suppression; item and pool variant diff/confirm/save/reopen; actual factory and seeded population observed",
+        "native host rejects stale item review, external source conflict, concurrent destination creation, advanced-item publication, protected paths and internal junction traversal",
+        "fresh project reopen resolves new pool/item and actual instance; original files and selection profile unchanged; plain rendered chrome at full/minimum window",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ]
+    },
+    "recipes": {
+      "path": "workbench/.artifacts/desktop-recipes/receipt.json",
+      "sha256": "6ba3e08d44b1a82e8ae976208df402654de8e0ca325411da323c286343aaf0f7",
+      "started_utc": "2026-10-28T02:36:14.001Z",
+      "checks": [
+        "actual Tauri WebView2 window",
+        "WebView network offline",
+        "repository handshake, live asset validation and Pixi rendering",
+        "production arrival click maps to (15,20), stairs_up",
+        "real DIMENSION diagnostic for disposable fixture",
+        "byte-exact view, close and reopen journey",
+        "host traversal rejection",
+        "cancel and retry without app hang",
+        "current passive, world, deprecated and conjunction recipes inspect read-only; no unsupported controls; closing during recipe lookup suppresses late document",
+        "native W3B item → related recipe; four independent drafts; exact scalar/reorder/undo/raw freeze; late validation rejected; exact new-ID diff/visibility confirmation/publication/hash reopen; actual production allocation, output and exchange; three presets; retained item/pool/structure drafts",
+        "native host denies original-source edits, stale reviews, valid-but-changed item dependencies, concurrent destination, unsupported source capability forgery, traversal/ADS/protected paths and internal junction; no transaction residue",
+        "fresh project reopens exact saved recipe, reruns production probe, follows output item back to producer recipe; minimum-window layout and utilitarian rendered copy verified",
+        "invalid project visible",
+        "no temporary worker roots remain after native close"
+      ]
+    },
+    "recovery": {
+      "path": "workbench/.artifacts/w5f/run-recovery-final.log",
+      "sha256": "afc3fb04c41f011af035054dcc507d5f9055ec3480b618bb5c60f1caf50b855b"
+    },
+    "typography": {
+      "path": "workbench/.artifacts/w5e/native-1793154539779/receipt.json",
+      "sha256": "8cca7f06449a30e51fc9b9472a79765b39ab77f5935b0bf5bbebc8027c58e007"
+    },
+    "startup": {
+      "path": "workbench/.artifacts/w5f/startup-final.log",
+      "sha256": "8b4ee62074d25c0bbb708f1b46616241fc25b2345a70c40f25d659443d33ee2d"
+    }
+  },
+  "verification_provenance": "Executed locally by Codex against this checkout and disposable selected-game projects. Hash/source audits are direct evidence; no new independent reviewer or natural encounter claim.",
+  "verification_notes": [
+    "Initial older production subprocess tests needed standard Python import-path behavior; final 38 tests use an isolated runtime referencing the same pinned dependency files. No assertion was relaxed.",
+    "Production DataLoader rejects BOM-prefixed definitions; invalid BOM/Unicode drafts remain recoverable.",
+    "The final NSIS bundle completed before native execution; an earlier concurrent release-runtime invocation caused a Windows packaging file lock.",
+    "Older item journey now requires verified reopen and retries only no-write BUSY with fresh validation/review."
+  ],
+  "limitations": [
+    "Factory receipts prove construction, not ability execution; controlled game observations are separately recorded.",
+    "Definition changes load on next launch/catalogue initialization; no running-game cache mutation.",
+    "Saved component snapshots remain authoritative; older absent fields keep existing fallback semantics.",
+    "No natural selection, balance, new ability binding, body/harvest editor, NPC/player/vine editor, save migration, personal-save scan or wiki work."
+  ]
+}
