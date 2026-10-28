@@ -64,7 +64,7 @@ def phase():
             assert abs(engine.player.corruption.value - before - 0.005) < 1e-9
             assert any(e.type == "pulse" for e in engine.visual_events.get_active())
             assert any("W5F tests thee" in m.text for m in engine.log.messages)
-            return dict(restored=old, fresh=component_values(fresh), current_definition={k:definition[k] for k in ("description","damage_dice","damage_bonus","attack_verb","speed","pursuit_timeout")},
+            return dict(pid=os.getpid(), restored=old, fresh=component_values(fresh), current_definition={k:definition[k] for k in ("description","damage_dice","damage_bonus","attack_verb","speed","pursuit_timeout")},
                         ability_corruption_delta=engine.player.corruption.value-before, pulse=True,
                         route="fresh process → DataLoader → _deserialize_entities → LookMode → Engine._advance_turn / actual AI attack and wight dispatch")
 
@@ -96,7 +96,7 @@ def phase():
         actor = engine.creature_factory.spawn(variant["id"], 13, 12); engine.entities.append(actor)
         # Distinct tile-linked negative control: it must never supply this actor's prose/callout/details.
         data.entities["hollow_revenant"] = {**data.entities["hollow_revenant"], "description":"WRONG TEMPLATE", "speed":0.1,
-                                          "pursuit_timeout":99, "callout_sounds":{"on_attack":{"text":"WRONG CALLOUT"}}}
+                                          "pursuit_timeout":99, "essence_modifiers":{}, "callout_sounds":{"on_attack":{"text":"WRONG CALLOUT"}}}
         engine.local_map.tiles["visible"][:] = True; engine.local_map.tiles["explored"][:] = True
         visible = next(t for t in engine.look_mode._get_things_at(engine, 13, 12) if t["type"] == "creature")
         assert visible["description"] == variant["description"]
@@ -120,6 +120,7 @@ def phase():
         frame = pygame.Surface((1280,720)); look.render_examine_popup(frame,engine)
         assert any("faster than you" in s for s in rendered), rendered
         assert "Weak to: W5F own knowledge" in rendered and not any("WRONG" in s for s in rendered)
+        assert "  Binding      ++" in rendered, rendered
         pygame.image.save(frame, str(output / "variant-look.png"))
 
         actor.ai.state = AIState.WANDERING; engine.player.dodge_chance = 0
@@ -166,6 +167,41 @@ def phase():
                     limits="Controlled production routes with seeded RNG and disposable inputs; no natural selection or balance claim. Save format/restoration unchanged.")
 
 
-result = phase()
-(output / ("restore-result.json" if "--restore" in sys.argv else "runtime-result.json")).write_text(json.dumps(result,indent=2),encoding="utf-8")
+def published():
+    """Exercise the actual native-published variant through its saved room."""
+    from generation.structure_preview import preview
+    from engine.combat import resolve_attack
+    with contextlib.redirect_stdout(io.StringIO()), patch("engine.save_manager.SAVE_DIR", output / "saves"):
+        data = load_data(); path = root / "roguelike/data/layouts/w5f_native_room.json"
+        raw = json.loads(path.read_bytes())
+        report, local_map, actors = preview(raw, "authored_submap", data, path=str(path))
+        assert report["passed"]
+        actor = next(a for a in actors if creature_id(a) == "w5f_native_variant")
+        definition_path = root / "roguelike/data/entities/creatures/w5f_native_variant.json"
+        definition = data.entities[creature_id(actor)]
+        assert type(actor.ai).__name__ == "AmbushAI" and actor.fighter.max_hp == 19
+        engine = make_engine(data); engine.debug = None; engine.rng = random.Random(164)
+        engine.local_map = local_map; engine.entities = [engine.player, actor]
+        engine.player.x, engine.player.y = actor.x-1, actor.y
+        assert local_map.walkable[engine.player.x, engine.player.y]
+        local_map.tiles["visible"][:] = True; engine.player.dodge_chance = 0
+        shown = next(t for t in engine.look_mode._get_things_at(engine,actor.x,actor.y) if t["type"] == "creature")
+        assert shown["description"] == definition["description"]
+        hp = engine.player.fighter.hp
+        with patch("engine.combat.resolve_attack", wraps=resolve_attack) as attack:
+            engine._advance_turn()
+        assert attack.called and engine.player.fighter.hp < hp
+        assert attack.call_args.kwargs["weapon"]["damage_dice"] == definition["damage_dice"]
+        assert abs(actor.ai.move_accumulator-0.25) < 1e-9
+        return dict(passed=True, pid=os.getpid(), layout_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+                    definition_sha256=hashlib.sha256(definition_path.read_bytes()).hexdigest(),
+                    identity=creature_id(actor), tile=actor.tile, ai=type(actor.ai).__name__, hp=actor.fighter.hp,
+                    description=shown["description"], damage=hp-engine.player.fighter.hp,
+                    speed_accumulator=actor.ai.move_accumulator,
+                    route="native-published saved layout → production preview/create_submap → actual Actor → Engine._advance_turn / AmbushAI / resolve_attack",
+                    scope="One controlled turn with saved native inputs; no natural selection or balance claim.")
+
+
+result = published() if "--published" in sys.argv else phase()
+(output / ("published-result.json" if "--published" in sys.argv else "restore-result.json" if "--restore" in sys.argv else "runtime-result.json")).write_text(json.dumps(result,indent=2),encoding="utf-8")
 print(json.dumps(result))
