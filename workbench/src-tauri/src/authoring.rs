@@ -705,7 +705,9 @@ fn destination(
     let raw: Value =
         serde_json::from_str(draft.trim_start_matches('\u{feff}')).unwrap_or(Value::Null);
     if let Some(family)=&doc.family {
-        if !family.operations.iter().any(|op|op==if variant_id.is_some(){"variant"}else{"edit"}) {
+        // Variant-only families still permit same-source semantic inspection;
+        // family_evidence denies a publication review for that edit operation.
+        if variant_id.is_some() && !family.operations.iter().any(|op|op=="variant") {
             return Err(failure("OPERATION_POLICY","This family does not support the requested publication operation.","Use the family's supported edit or variant action."));
         }
     }
