@@ -1,3 +1,4 @@
+import type { CreatureContext } from "./protocol";
 import type { ItemContext, RecipeContext, TextContext, TypographyContext } from "./familyData";
 
 export type FieldSchema = {
@@ -12,8 +13,8 @@ export type Descriptor = {
   policy: {operations: ("edit" | "variant")[]; root: string; identity: "id"}; publication_note: string;
 };
 export type References = Record<string, {id: string; label: string}[]>;
-type CommonFamily = {contract: string; descriptor_sha256: string; descriptor: Descriptor; compatible: boolean; problems: string[]; references: References};
-export type ContentFamily = CommonFamily & ({id: "item"; context: ItemContext | null} | {id: "recipe"; context: RecipeContext | null} | {id: "text"; context: TextContext | null} | {id:"typography";context:TypographyContext|null});
+type CommonFamily = {contract: string; descriptor_sha256: string; descriptor: Descriptor; compatible: boolean; problems: string[]; references: References; effective_operations?: ("edit" | "variant")[]};
+export type ContentFamily = CommonFamily & ({id: "item"; context: ItemContext | null} | {id: "recipe"; context: RecipeContext | null} | {id: "text"; context: TextContext | null} | {id:"typography";context:TypographyContext|null} | {id:"creature";context:CreatureContext|null});
 
 const object = (value: unknown): value is Record<string, unknown> => !!value && typeof value === "object" && !Array.isArray(value);
 const schemaKeys = new Set(["$schema","type","title","description","default","readOnly","minimum","maximum","properties","required","items","additionalProperties","x-control","x-reference","x-view","x-initial","x-suggestions"]);
@@ -42,14 +43,15 @@ export function schemaProblem(value: unknown, path = "schema", depth = 0): strin
   return "";
 }
 export function familyProblem(value: unknown): string {
-  if (!object(value) || !["item","recipe","text","typography"].includes(String(value.id))) return "Unregistered content family";
+  if (!object(value) || !["item","recipe","text","typography","creature"].includes(String(value.id))) return "Unregistered content family";
   if (typeof value.contract !== "string" || typeof value.descriptor_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(value.descriptor_sha256)) return "Malformed family identity";
   if (!object(value.descriptor)) return "Missing descriptor";
   const d = value.descriptor;
   if (d.vocabulary !== "resonance-controls-1" || !object(d.schema) || d.schema.$schema !== "https://json-schema.org/draft/2020-12/schema") return "Unsupported descriptor/control vocabulary";
   if (!object(d.policy) || d.policy.identity !== "id" || typeof d.policy.root !== "string" || !Array.isArray(d.policy.operations) || d.policy.operations.some(op=>op!=="edit" && op!=="variant")) return "Unsupported publication policy";
+  if (value.id === "creature" && (!Array.isArray(value.effective_operations) || value.effective_operations.some(op=>!(d.policy as {operations:unknown[]}).operations.includes(op)))) return "Missing or invalid original-source operations";
   if (!Array.isArray(d.views) || d.views.some(v=>typeof v!=="string") || typeof d.publication_note !== "string") return "Malformed view registration";
-  const views = {item:["item-properties","references","recipes","use-binding","factory"], recipe:["recipe-requirements","output","production-receipt"], text:["text-pages","text-references","reader-preview"],typography:["typography-roles","typography-preview"]}[String(value.id)] || [];
+  const views = {item:["item-properties","references","recipes","use-binding","factory"], recipe:["recipe-requirements","output","production-receipt"], text:["text-pages","text-references","reader-preview"],typography:["typography-roles","typography-preview"],creature:["creature-properties","creature-references","creature-factory"]}[String(value.id)] || [];
   if (d.views.some(v=>!views.includes(String(v)))) return "Unsupported specialized view registration";
   if (!object(value.references) || Object.values(value.references).some(rows=>!Array.isArray(rows) || rows.length>10000 || rows.some(r=>!object(r) || typeof r.id!=="string" || typeof r.label!=="string"))) return "Malformed reference provider";
   if (!Array.isArray(value.problems) || value.problems.some(p=>typeof p!=="string") || typeof value.compatible!=="boolean") return "Malformed capability result";
@@ -76,3 +78,5 @@ export function rowDefaults(schema: FieldSchema, tag: string): Record<string, un
   }
   return values;
 }
+
+export const sourceOperations = (family:ContentFamily) => family.effective_operations ?? family.descriptor.policy.operations;

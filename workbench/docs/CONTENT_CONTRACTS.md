@@ -1,7 +1,8 @@
 # Registered content authoring
 
 `roguelike/engine/content_authoring.py:families` is the explicit first-party
-registration point. `item_authoring.py`, `recipe_authoring.py` and `text_authoring.py`
+registration point. `item_authoring.py`, `recipe_authoring.py`, `text_authoring.py`,
+`typography_authoring.py` and `creature_authoring.py`
 adapters own discovery identity, supported source shape, ordinary field metadata,
 reference providers, semantic validation and construction/execution evidence.
 Gameplay does not import these authoring modules. There are no descriptor-driven
@@ -15,7 +16,7 @@ canonical project root. Windows case and slash aliases resolve to the same owner
 definition IDs and record pointers are metadata, not ownership keys. Each open
 instance has an opaque token. React keeps one `Authoring` lifecycle mounted per
 token, including hidden specialist views, so switching tabs retains exact source,
-history, variant inputs and view state. Legacy structure/pool/creature slots
+history, variant inputs and view state. Legacy structure/pool slots
 remain included in shared lookup, invalidation and project close.
 
 `open_document` reuses an existing file owner. Explicit reload or verified reopen
@@ -113,7 +114,7 @@ behavior. Invalid syntax keeps exact Source available and freezes unsafe control
 
 ## Authority and freshness
 
-Registered item, recipe and text documents also use the host's versioned recovery
+Registered item, recipe, text, typography and creature documents use the host's versioned recovery
 envelope. It stores exact accepted source/target intent, original baseline and
 historical family/contract identity, never a live token, review, descriptor-granted
 permission, preview or verdict. Restoring requires current discovery, original
@@ -121,7 +122,7 @@ source comparison and fresh host eligibility. Supported descriptor changes are
 inspected again; validation is always fresh. Recovery never creates dependency
 overlays or changes variant-only recipe/text policy. Completed publication facts
 remain separate from newer drafts and permit only verified read reconciliation.
-See the [recovery workflow](../README.md#recover-unfinished-item-recipe-and-text-drafts).
+See the [recovery workflow](../README.md#recover-unfinished-registered-drafts).
 
 Compatibility is the supported vocabulary, not a hardcoded item-contract version
 in the desktop. Freshness binds the original discovered source, descriptor hash,
@@ -178,3 +179,27 @@ The thirteen assignments and selected byte hashes are included in preview
 receipts. Existing code/data/Fonts/UI stamps remain conservative, shared and
 bounded by the existing monitor. A typography candidate overlays only its own
 isolated preview initialization; found-text previews identify saved typography.
+
+## Source-specific creature operations (W5F)
+
+`creature-common-1` registers the maximum `edit`/`variant` operations, plus an
+`effective_operations` subset obtained from verified original inspection. The
+host freezes that subset with the opened source; frontend controls, validation,
+review/apply and recovery all honor it. Candidate context and stored metadata
+cannot enlarge it. Special Actor sources receive only `edit`; ordinary Actor
+sources receive both; unsupported sources receive neither. Exact unchanged
+read-only Actor construction can still be inspected without a publication review.
+
+Nested family matching admits entity discovery, while the host independently
+limits creature writing and recovery targets to `roguelike/data/entities/creatures/`.
+Collisions use the complete entity namespace, including player. The registered
+`creature-properties`, `creature-references` and `creature-factory` views handle
+bounded fighter/perception paths through existing localized source primitives;
+they have no separate document slot, history, persistence service or writer.
+
+Original-source immutable-field comparison and operation-specific identity rules
+are enforced in the game adapter. Changes to source, ability registry, selectors
+or schema invalidate applicable evidence through existing code/data freshness.
+See the [creature guide](../../roguelike/docs/CREATURE_AUTHORING.md) for bounds,
+construction/reference meanings and saved-instance activation semantics. Recipe
+and text variant-only rules are unchanged.

@@ -21,15 +21,15 @@ class CreatureTests(unittest.TestCase):
         rows = [r for r in described if r["route"] == "creature_definition"]
         self.assertEqual(len(rows), 14)
         self.assertEqual(len([r for r in rows if r["category"] == "creatures"]), 13)
-        self.assertEqual([r["id"] for r in rows if r["editable"]], ["hollow_revenant"])
-        for path, editable in ((CREATURE, True), (CREATURE.replace("hollow_revenant", "hollow_knight"), False),
+        self.assertEqual(len([r for r in rows if r["editable"]]), 12)
+        for path, editable in ((CREATURE, True), (CREATURE.replace("hollow_revenant", "hollow_knight"), True),
                                (CREATURE.replace("hollow_revenant", "vine_network"), False), ("roguelike/data/entities/player.json", False)):
             before = (ROOT/path).read_bytes()
             inspected = invoke("inspect", asset=path)["result"]
             self.assertEqual(inspected["raw"].encode(), before)
             self.assertEqual(inspected["editable"], editable)
             self.assertEqual((ROOT/path).read_bytes(), before)
-            self.assertIsNone(inspected["creature_context"]["records"][0]["factory"])
+            self.assertEqual(inspected["family"]["context"]["records"][0]["factory"] is not None, editable)
 
     def test_real_factory_exact_hp_and_source_fidelity(self):
         source = (ROOT/CREATURE).read_bytes().decode()
@@ -37,7 +37,7 @@ class CreatureTests(unittest.TestCase):
         path = CREATURE.replace(".json", "_w4a_test.json")
         result = invoke("preview_draft", asset=path, source_asset=CREATURE, draft=draft)["result"]
         self.assertTrue(result["valid"], result["diagnostics"])
-        record = result["creature_context"]["records"][0]
+        record = result["family"]["context"]["records"][0]
         self.assertEqual(record["definition"], json.loads(draft))
         factory = record["factory"]
         self.assertEqual(factory["source_sha256"], hashlib.sha256(draft.encode()).hexdigest())
@@ -51,7 +51,7 @@ class CreatureTests(unittest.TestCase):
 
     def test_immutable_raw_fields_ranges_duplicate_keys_and_source_promotion(self):
         source = json.loads((ROOT/CREATURE).read_bytes())
-        for key, value in (("description", "cannot change"), ("ai_type", "ambush"), ("tile", "missing"), ("category", "npc"), ("blocks_movement", 1)):
+        for key, value in (("callout_sounds", {}), ("ai_type", "ambush"), ("tile", "missing"), ("category", "npc"), ("blocks_movement", 1)):
             raw = {**source, key:value}
             result = invoke("preview_draft", asset=CREATURE, source_asset=CREATURE, draft=json.dumps(raw))["result"]
             self.assertFalse(result["valid"])
@@ -69,7 +69,7 @@ class CreatureTests(unittest.TestCase):
         raw = copy.deepcopy(source); raw["fighter"]["max_hp"] = 99
         self.assertFalse(invoke("preview_draft", asset=CREATURE, source_asset=CREATURE, draft=json.dumps(raw))["result"]["valid"])
         self.assertFalse(invoke("preview_draft", asset=CREATURE, source_asset=CREATURE.replace("hollow_revenant", "hollow_knight"), draft=json.dumps(source))["result"]["valid"])
-        self.assertFalse(invoke("preview_draft", asset=CREATURE, source_asset="roguelike/data/entities/player.json", draft=json.dumps(source))["ok"])
+        self.assertFalse(invoke("preview_draft", asset=CREATURE, source_asset="roguelike/data/entities/player.json", draft=json.dumps(source))["result"]["valid"])
 
     def test_case_collision_array_malformed_dependency_and_unknown_tile(self):
         with tempfile.TemporaryDirectory(prefix="w4a-creatures-") as directory:
@@ -89,7 +89,7 @@ class CreatureTests(unittest.TestCase):
             item=next((root/"roguelike/data/items").rglob("revenant_husk.json"))
             original=item.read_text();item.write_text(original.replace('"id":', '"id":"duplicate_key", "id":',1))
             r=invoke("preview_draft", root=root, asset=CREATURE, source_asset=CREATURE, draft=json.dumps(raw))["result"]
-            self.assertFalse(r["valid"]);self.assertIsNone(r["creature_context"])
+            self.assertFalse(r["valid"]);self.assertIsNone(r["family"]["context"])
 
     def test_variant_g17_legal_actor_blocked_cell_and_direct_references(self):
         os.environ.update(SDL_VIDEODRIVER="dummy", SDL_AUDIODRIVER="dummy", PYGAME_HIDE_SUPPORT_PROMPT="1")
@@ -111,7 +111,7 @@ class CreatureTests(unittest.TestCase):
             report, _, actors=preview(room,"authored_submap",data,path=str(layout))
             self.assertTrue(report["passed"])
             self.assertEqual([(a._creature_id,a.fighter.max_hp) for a in actors],[(raw["id"],19)])
-            ref=invoke("inspect",root=root,asset=target.relative_to(root).as_posix())["result"]["creature_context"]["records"][0]["references"]
+            ref=invoke("inspect",root=root,asset=target.relative_to(root).as_posix())["result"]["family"]["context"]["records"][0]["references"]
             self.assertEqual(len(ref),1);self.assertEqual(ref[0]["route"],"authored_submap")
             actor_record["x"],actor_record["y"]=2,5  # Existing return stair/arrival.
             with self.assertRaises(GenerationError): preview(room,"authored_submap",data,path=str(layout))

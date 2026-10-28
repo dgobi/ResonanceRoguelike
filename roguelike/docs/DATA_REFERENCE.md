@@ -79,6 +79,10 @@ One JSON file per biome zone. Defines generation parameters, ambient light, and 
 
 ## Entities  (`data/entities/`)
 
+Current common-field controls, stable identity, body/reference policy and saved-instance
+semantics are documented in [Creature authoring](CREATURE_AUTHORING.md). The
+historical reference below is not the current authoring contract.
+
 Subdirectories: `creatures/`, `npcs/`, `player.json`. One JSON per entity type.
 
 ```json

@@ -1,12 +1,13 @@
-# Resonance Workbench · W5E
+# Resonance Workbench · W5F
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, inert component items,
-one immediate recipe family, ordinary revenant variants and direct creature
-placement in authored underground layouts, and ordinary found-text variants. The game remains the
+one immediate recipe family, common Actor fields and ordinary creature variants,
+direct creature placement in authored underground layouts, found-text variants
+and game typography. The game remains the
 validation authority. No campaign, running game or Internet service is required.
 
-Item, immediate-recipe and found-text controls use the selected game's registered content
+Item, immediate-recipe, found-text, typography and creature controls use the selected game's registered content
 contract and the same exact-source document lifecycle. See
 [content contracts](docs/CONTENT_CONTRACTS.md) for the extension seam, supported
 control vocabulary, default handling and publication boundaries. Other editor
@@ -56,7 +57,7 @@ publication/restart journey. See [W5E delivery](docs/W5E_DELIVERY.md) for eviden
 
 ## Work with several content files
 
-Open any number of registered item, immediate-recipe and ordinary-text files from
+Open registered item, immediate-recipe, ordinary-text, typography and creature files from
 the catalogue. The document strip shows each ID, file path and a dot for unsaved
 source. Opening the same file again, including through a reference, selects its
 existing draft. Switching documents preserves exact source (even invalid JSON),
@@ -69,7 +70,7 @@ Discard and continue** prompt. Keeping waits for its latest accepted checkpoint;
 a failed checkpoint keeps the document open. Reload reads
 disk deliberately; Close removes the open instance. A later open gets a new token.
 Project switch and application close list all dirty files, including legacy
-structure, pool and creature drafts. Cancellation preserves them.
+structure and pool drafts. Cancellation preserves them.
 
 Following either of two recipes to an item retains that recipe as the return
 destination and restores the initiating relation's focus. A closed or reloaded
@@ -97,7 +98,7 @@ See [W5C delivery and verification](docs/W5C_DELIVERY.md) for the scoped checks
 and the historical workspace verification. See [W5D delivery](docs/W5D_DELIVERY.md)
 for recovery and reopen evidence.
 
-## Recover unfinished item, recipe, text and typography drafts
+## Recover unfinished registered drafts
 
 Accepted exact-source edits and variant intent checkpoint within **500 ms** of the
 first pending accepted edit, plus local write time. Continuous typing does not
@@ -144,7 +145,7 @@ device/power-loss failure. Diagnostic `RESONANCE_WORKBENCH_RECOVERY_DIR`, or the
 existing isolated config directory's `draft-recovery` child, keeps automated
 checks away from real records. `project.json` remains a project preference only.
 
-Legacy structure, pool and creature drafts remain memory-only. Resolve those
+Legacy structure and pool drafts remain memory-only. Resolve those
 drafts first before keeping registered drafts during project/application close.
 There is no session restoration, unsaved dependency overlay or automatic merge.
 Run `node scripts/run-recovery.mjs` for the disposable packaged restart and
@@ -243,77 +244,46 @@ document follows the existing discard/reload policy.
 See [W4C delivery](docs/W4C_DELIVERY.md) for the disposable native publication proof,
 source-bound actor receipt, negative checks and preservation evidence.
 
-## Author a creature variant
+## Inspect and author creatures
 
-1. Choose **Creatures** in the existing content browser. This filters the loaded
-   creature sources, including unsupported advanced definitions. The current
-   catalogue contains 13 non-player creature records and one separate player
-   record. Search by ID/name/path and use the support filter. `hollow_revenant`
-   is currently the one writable source; players, NPC/other entities, special
-   ability creatures, vine-network records and array sources remain read-only.
-2. Open it to inspect the exact source, path, source hash, project revision,
-   supported shape and diagnostics. **Begin edit** enables **Actor name** and
-   **Effective HP**. Name is literal `Actor.name`. Effective HP changes both
-   `base_hp` and `fighter.max_hp` in one undoable operation: the production
-   `CreatureFactory` prefers `base_hp`, and `Fighter` starts current HP at that
-   maximum. The explicit authoring range is 1–1,000,000 integer HP and 1–256
-   characters for the name; these are tooling bounds, not new game rules.
-3. **Read-only fields** retains authored descriptions, AI, attacks, perception,
-   faction/hostility strings, limbs, harvesting, effects, spawn declarations and
-   unknown metadata. The current look UI resolves descriptions by `actor.tile`,
-   so editing a new-ID variant's description would not reliably change displayed
-   prose. Description therefore has no typed control and cannot change through
-   raw publication. This task does not repair or change that gameplay lookup.
-4. Source, typed changes, undo/redo, validation and Diff use the existing single
-   draft. HP edits replace only two scalar spans; other nested data, array order,
-   prose, whitespace and line endings survive. Invalid raw JSON freezes typed
-   controls. Raw and variant-ID edits clear typed history. No-op inspection
-   writes nothing. Raw changes to any field outside ID/name/the two HP fields
-   are rejected; an unsupported source cannot gain entitlement by raw promotion.
-5. **Save as new variant**, enter a unique ID, **Validate draft**, review **Diff**,
-   then **Apply variant → Confirm apply one file**. Publication always creates a
-   new file beside the source in its existing creature directory. Original and
-   saved actors remain unchanged. The host binds original source entitlement,
-   dependencies, exact reviewed bytes and safe paths, repeats game validation,
-   publishes atomically without clobbering, and checks the reopened hash.
-6. **Factory result → Validate and construct exact creature** works on either
-   the exact draft or reopened variant. It copies current data into disposable
-   scratch, loads it with `DataLoader`, and calls the real `CreatureFactory.spawn`.
-   The receipt shows actor identity/class, source-to-component HP/name comparison,
-   Fighter/Perception/AI values, source/dependency hashes, available Git revision,
-   worker contract/version and observation time. No inventory owner, campaign,
-   AI/combat turn or ongoing world is created. This proves construction, not
-   combat balance or natural encounter availability. Invalid drafts, external
-   source/dependency changes and superseded jobs clear current factory evidence.
-7. **Direct layout references** lists saved, direct `authored_submap` creature
-   records with exact paths, fields and coordinates. **Inspect layout** reads that
-   source without replacing a parked building draft. An empty table means no
-   supported direct reference was found, not that every possible use is known.
-   Ordinary buildings, plazas and entrance layouts have no creature-placement
-   entitlement. `spawn_zones` is a declaration with no current Python consumer;
-   actual zone lists, town selectors and resonance rules are separate authorities.
+1. Choose **Creatures**, then open a source. The thirteen creature sources include
+   twelve supported Actors and the inspect-only vine configuration. The wider
+   entity browser also exposes read-only player/unsupported sources. Six ordinary
+   Actors support same-ID edits and new-ID variants; six Actors with ID-bound
+   abilities support same-ID edits with a specific explanation for no duplication.
+2. **Supported fields** groups name/description, mirrored effective HP, armour,
+   attack dice/bonus/verb, sight/darkvision, wander radius, pursuit timeout and
+   speed. **Begin edit** enables these controls. Only ordinary new variants may
+   choose another registered AI class. Raw edits receive the same bounded checks.
+   ID, tile, same-ID AI, bodies and special/unknown settings remain protected.
+3. **References** distinguishes inline bodies and unused fallbacks, inactive
+   `spawn_zones`, saved layout placements and actual zone creature declarations.
+   Barrow Wight's inline limbs supply its body; no fallback repair is needed.
+   Paths and consumer meanings are shown without claiming observed encounters.
+4. **Factory result** shows actual Actor/Fighter/Perception/AI construction, stable
+   identity, effective values and special binding. Construction alone does not
+   execute abilities. Read-only source policy does not prevent a safe Actor
+   construction preview. Invalid or stale evidence grants no review authority.
+5. Make independent drafts in several tabs. Typed edits preserve untouched source;
+   HP changes both fields in one undoable action. Source/history, accepted-edit
+   checkpoints, invalid-JSON recovery and publication use the shared lifecycle.
+   A recovered draft requires fresh validation. Saving one retains the others.
+6. **Validate draft**, inspect **Diff**, then **Review & apply → Confirm apply one
+   file**. For an ordinary new ID, first choose **Save as new variant**. The host
+   rechecks original operations and exact dependencies, publishes one file, and
+   verifies exact reopened bytes. A variant creates no world-selection entry.
+   It can be selected explicitly in the authored-submap placement route above.
 
-A new variant **does not join worldgen pools, replace existing instances, or
-change an authored room**. Selection/reference changes are separate authoring
-work. Five independent document drafts stay parked through creature navigation;
-saving any file revokes older reviews. No second writer or multi-file transaction
-was added. Catalogue pages render at most 100 rows.
+Changes load at the next game launch/catalogue initialization. Saved actors retain
+stored name, current/max HP, natural armour, sight/darkvision and wander radius;
+current definition-driven description, attack, speed and pursuit values apply
+on reload. New actors receive new constructor values. HP edits do not rescale
+injured saves. Identity, special bindings and the save format remain unchanged.
 
-The game-owned read-only contract is `revenant-hp-1`. It checks the original
-single-object source under `entities/creatures/`, the ordinary revenant tile and
-wandering/mirrored-HP shape, and the actual ability registry. It independently
-rejects ambiguous entity IDs/case collisions, duplicate keys and missing required
-dependencies. Tile references use `TileRegistry`. The factory's default
-`body_human` fallback is absent in current data; the shipped Revenant's inline
-limbs take precedence, so this unused fallback is disclosed as a warning.
-Faction/hostile strings are membership labels, not a separate faction registry.
-
-The [example variant](docs/examples/hollow_revenant_w4a.json) and
-[factory receipt](docs/examples/hollow_revenant_w4a.factory.json) are outside the
-active catalogue. Native publication occurs only in disposable ignored test data.
-See [W4A delivery](docs/W4A_DELIVERY.md) for construction and existing G17 placement
-corroboration, native captures, verification and limits. W4C adds only the placement workflow above. No AI/effect editor, encounter
-simulator or gameplay/save changes are included.
+See the [current creature authoring guide](../roguelike/docs/CREATURE_AUTHORING.md)
+for exact bounds, complete corpus, body/reference rules and the saved-versus-fresh
+matrix, and [W5F delivery](docs/W5F_DELIVERY.md) for verification. W4A's example
+variant and receipt remain historical construction evidence outside active data.
 
 ## Author an immediate recipe variant
 
@@ -514,7 +484,7 @@ structure preview establishes observed population. Samples do not establish
 frequencies, effect behavior or natural world selection. Item/reference lists
 are catalogue snapshots; reopen after external dependency edits.
 
-The host retains individual registered item/recipe/text owners and legacy building, pool and creature slots. Saving any revokes
+The host retains individual registered item/recipe/text/typography/creature owners and legacy building and pool slots. Saving any revokes
 all reviews; the frontend clears verdicts while retaining the other drafts.
 Every apply remains one reviewed byte string and one confined target, with fresh
 validation, conflicts and rollback. No general filesystem permission, new write
@@ -759,7 +729,7 @@ npm.cmd run test:visual              # native canvas + exact draft preview + var
 npm.cmd run test:pools               # native container → pool → item and two variants
 npm.cmd run test:items               # native new item → new pool → real factory/population
 npm.cmd run test:recipes             # native item → recipe → variant → production requirements/output
-npm.cmd run test:creatures           # native creature → variant → real factory
+npm.cmd run test:creatures           # native creatures → cold recovery → publication → layout
 node scripts/run-workspace.mjs       # six registered owners, legacy draft, targeted lifecycle
 & $env:RESONANCE_PYTHON -B worker/test_authoring.py
 & $env:RESONANCE_PYTHON -B worker/test_visual.py
@@ -799,7 +769,7 @@ CPython runtime without the game dependency wheels.
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-2**,
 item contract **component-1**, recipe contract **immediate-components-1**,
 found-text contract **ordinary-found-text-1**, and
-creature contract **revenant-hp-1**, with Workbench layout capability
+creature contract **creature-common-1**, with Workbench layout capability
 **direct-creatures-1** (existing G17 rules, no game schema change).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an

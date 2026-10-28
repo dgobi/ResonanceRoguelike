@@ -1,3 +1,5 @@
+import { CreatureEditor } from "./CreatureEditor";
+import type { RequestLease } from "./requests";
 import { ItemEditor } from "./ItemEditor";
 import { RecipeEditor } from "./RecipeEditor";
 import { TextEditor } from "./TextEditor";
@@ -8,7 +10,7 @@ import type { ItemTrail } from "./protocol";
 
 export type ContentNavigation = {selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void; returnLabel?: string;
   onPool?: (id:string)=>void; onOpen: (family:string,id:string,path?:string)=>void};
-export type ContentProps = {family: ContentFamily; navigation: ContentNavigation; draft:string; path:string; dirty:boolean; validated:boolean;
+export type ContentProps = {sourceFamily:ContentFamily; variant:boolean; active:boolean; cancelVersion:number; beginRequest:(label:string)=>RequestLease; family: ContentFamily; navigation: ContentNavigation; draft:string; path:string; dirty:boolean; validated:boolean;
   disabled:string; busy:boolean; evidenceStale:boolean; onCancel:()=>void; onSource:()=>void; onProbe:()=>void;
   preview:FamilyPreview|null; previewStale:boolean; onPreview:(inputs:Record<string,number>)=>void;
   onEdit:(edit:(text:string)=>string,label:string)=>void; onUndo:()=>void; onRedo:()=>void; canUndo:boolean; canRedo:boolean};
@@ -17,6 +19,7 @@ type Props = ContentProps;
 // Specialist views receive the same document commands as ordinary controls.
 // This registration contains presentation only, never mutable review authority.
 export const contentViews = {
+  creature:{label:"creature",sourceId:"creature-draft-json",hint:"Common Actor controls share exact Source, history, recovery and publication. Special bindings retain their stable ID.",render:(p:Props)=><CreatureEditor {...p}/>},
   item: {label:"item", sourceId:"item-draft-json", hint:"Component controls share this exact source draft. References, use binding and factory results distinguish declarations from observed instances.",
     render:(p:Props)=>p.family.id === "item" && <ItemEditor {...p} context={p.family.context || undefined} {...p.navigation} onRecipe={(id,path)=>p.navigation.onOpen("recipe",id,path)} />},
   recipe: {label:"recipe", sourceId:"recipe-draft-json", hint:"Recipe controls share this exact source draft. Eligibility and observed output have separate receipts. Publication creates a new ID/file.",

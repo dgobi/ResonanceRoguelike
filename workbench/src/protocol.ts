@@ -66,7 +66,6 @@ export type Inspection = Asset & {
   recovery?: import("./recovery").RecoveredDraft;
   pool_context?: PoolContext;
   family?: ContentFamily;
-  creature_context?: CreatureContext;
   route: string;
   description: string;
   special_count: number;
@@ -88,13 +87,13 @@ export type CreatureFactoryResult = {
   creature_id: string; actor_class: string; instance: Record<string, unknown>;
   comparisons: {field: string; declared: unknown; instance: unknown}[];
   source: Source; path: string; source_sha256: string; loaded_catalog_sha256: string;
-  observed_at_utc: string; consumer: string; scope: string; contract: string; worker_version: string;
+  observed_at_utc: string; consumer: string; scope: string; contract: string; worker_version?: string; special_binding: string | null; ability_executed: boolean; body: string;
 };
 export type CreatureContext = {selection: string; records: {
   id: string; pointer: string; definition: Record<string, unknown>; diagnostics: Diagnostic[];
-  capability: {contract: string; editable: boolean; fields: string[]; shape: string; reason: string; hp_min: number; hp_max: number; hp_note: string; description_note: string};
-  dependencies: {kind: string; field: string; id: unknown; resolved: boolean; required: boolean; paths: string[]; note: string}[];
-  references: {id: string; path: string; field: string; route: string; x: number; y: number; evidence: string}[];
+  capability: {contract: string; editable: boolean; constructible:boolean; duplicable:boolean; operations:("edit"|"variant")[]; special_binding:string|null; duplication_reason:string; body_note:string; bounds:Record<string,[number,number]>; ai_types:string[]; fields: string[]; shape: string; reason: string; hp_min: number; hp_max: number; hp_note: string; description_note: string};
+  dependencies: {kind: string; field: string; id: unknown; resolved: boolean; required: boolean; active:boolean; paths: string[]; note: string}[];
+  references: {id: string; path: string; field: string; route: string; x?: number; y?: number; evidence: string}[];
   factory: CreatureFactoryResult | null;
 }[]};
 export type PoolContext = {

@@ -4,9 +4,8 @@ import { createPortal } from "react-dom";
 import { LayoutEditor } from "./LayoutEditor";
 import { PoolEditor } from "./PoolEditor";
 import { ContentEditor, contentViews, type ContentNavigation } from "./ContentEditor";
-import { familyProblem, type ContentFamily } from "./content";
+import { sourceOperations, familyProblem, type ContentFamily } from "./content";
 import { previewProblem, type FamilyPreview } from "./familyData";
-import { CreatureEditor } from "./CreatureEditor";
 import {
   CanvasHistory,
   diagnosticCell,
@@ -23,7 +22,6 @@ import {
   type Preview,
   type SourceTrail,
   type ItemTrail,
-  type CreatureContext,
 } from "./protocol";
 import { type RequestLease } from "./requests";
 import type { Disk, DiskSubscription } from "./workspace";
@@ -43,7 +41,6 @@ type Verdict = {
   preview?: Preview;
   family?: ContentFamily;
   family_preview?: FamilyPreview | null;
-  creature_context?: CreatureContext;
 };
 export function Authoring({
   document,
@@ -93,7 +90,7 @@ export function Authoring({
   const content = document.family;
   const contentProblem = content ? familyProblem(content) : "";
   const view = content ? contentViews[content.id] : undefined;
-  const variantOnly = content && (contentProblem || !content.descriptor.policy.operations.includes("edit"));
+  const variantOnly = content && (contentProblem || !sourceOperations(content).includes("edit"));
   const creature = document.route === "creature_definition";
   const submap = document.route === "authored_submap";
   const writable = !(content || creature || submap) || document.editable && (!content || !familyProblem(content));
@@ -368,7 +365,7 @@ export function Authoring({
   }
   const reason = saved ? "File saved. Retry verified reopen before publishing again." : pendingEdit ? "Waiting for edit acknowledgement." : !editing
     ? "Begin editing to create a draft."
-    : (variantOnly || creature || submap) && !variant
+    : (variantOnly || submap) && !variant
       ? "Create a unique new variant before publication."
     : !dirty
       ? "No unsaved source changes."
@@ -386,7 +383,7 @@ export function Authoring({
   return (
     <section className="authoring" data-testid="authoring" data-edit-pending={pendingEdit}>
       {content && <p className="notice" data-testid="recovery-status">
-        {recoveryStatus?.state==="pending" ? "Recovery pending · checkpoints within 500 ms of accepted edits" : recoveryStatus?.state==="error" ? `Unable to save recovery: ${recoveryStatus.message}` : recoveryStatus?.state==="saved" ? `Recovery checkpoint saved · generation ${recoveryStatus.generation}` : "Recovery available for accepted item, recipe and text edits"}
+        {recoveryStatus?.state==="pending" ? "Recovery pending · checkpoints within 500 ms of accepted edits" : recoveryStatus?.state==="error" ? `Unable to save recovery: ${recoveryStatus.message}` : recoveryStatus?.state==="saved" ? `Recovery checkpoint saved · generation ${recoveryStatus.generation}` : "Recovery available for accepted registered document edits"}
         {recoveryStatus?.state==="error" && <button onClick={()=>void flushRecovery().catch(e=>onError(asFailure(e)))}>Retry recovery save</button>}
       </p>}
       {saved && <div className="notice warning" data-testid="saved-reopen-failed">
@@ -406,6 +403,7 @@ export function Authoring({
         focusEntry={poolEntryFocus}
       />, canvasHost)}
       {content && canvasHost && createPortal(<div hidden={!active}><ContentEditor
+        sourceFamily={content} variant={variant} active={active} cancelVersion={cancelVersion} beginRequest={beginRequest}
         family={verdict?.family || content} navigation={contentNavigation || {onOpen:()=>{}}}
         draft={draft} path={target} dirty={dirty} validated={!!verdict?.valid}
         evidenceStale={!!disk?.changed || !!disk?.dependencies_changed || evidenceVersion !== dependencyVersion}
@@ -413,13 +411,6 @@ export function Authoring({
         busy={!!busy} onCancel={onCancel} onSource={()=>setTab("source")} onProbe={()=>void validate(false)}
         preview={previewEvidence?.frame || null} previewStale={!previewEvidence || previewEvidence.stale || previewEvidence.text!==draft || previewEvidence.frame.path!==target || previewEvidence.version!==cancelVersion || previewEvidence.dependencies!==dependencyVersion || !!disk?.changed || !!disk?.dependencies_changed}
         onPreview={inputs=>void validate(false,inputs)}
-        onEdit={visualEdit} onUndo={()=>historyStep(false)} onRedo={()=>historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
-      /></div>, canvasHost)}
-      {creature && canvasHost && createPortal(<div hidden={!active}><CreatureEditor
-        draft={draft} path={target} context={verdict?.creature_context || document.creature_context} selectedId={selectedCreatureId}
-        active={active} dirty={dirty} validated={!!verdict?.valid} evidenceStale={!!disk?.changed || !!disk?.dependencies_changed || evidenceVersion !== dependencyVersion}
-        disabled={!writable ? "Read-only creature family or unresolved source." : !editing ? "Begin edit to change creature properties." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
-        busy={!!busy} beginRequest={beginRequest} cancelVersion={cancelVersion} onCancel={onCancel} onSource={()=>setTab("source")} onFactory={()=>void validate(false)}
         onEdit={visualEdit} onUndo={()=>historyStep(false)} onRedo={()=>historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
       /></div>, canvasHost)}
       {active && !pool && !content && !creature && canvasHost &&
@@ -510,7 +501,7 @@ export function Authoring({
           >
             Discard / Revert
           </button>
-          {(!content || content.descriptor.policy.operations.includes("variant")) && <button
+          {(!content || sourceOperations(content).includes("variant")) && <button
             disabled={!!busy}
             onClick={() => {
               change(latest.current,false,{...intent.current,variant:!intent.current.variant});
@@ -534,7 +525,7 @@ export function Authoring({
             }}
           />
           <small>
-            {submap ? "Saving a layout does not automatically make it appear in a new campaign. Only a new layout file is created; no access sidecar is written." : creature ? "Creates a new ID/file beside the source. No worldgen pool, saved actor or authored room is reassigned." : content ? content.descriptor.publication_note
+            {submap ? "Saving a layout does not automatically make it appear in a new campaign. Only a new layout file is created; no access sidecar is written." : content ? content.descriptor.publication_note
               : pool ? "Saved beside the source. No container is reassigned. Return to a structure variant to link it deliberately."
               : "Saved beside the source. Current procedural selection profiles are unchanged. Legacy flat-pool contexts may discover added files."}
           </small>
@@ -589,7 +580,7 @@ export function Authoring({
             />
           </label>}
           <p className="muted small">
-            {submap ? "Creature-only mode uses the same source draft, history and validation. Terrain, decor, arrival, other specials and unknown metadata stay read-only. Validation uses the real generated arrival; no separate access sidecar is required." : creature ? "Actor name and effective HP share this exact source draft. All complex fields and description remain read-only; publication requires a unique variant." : content ? view?.hint
+            {submap ? "Creature-only mode uses the same source draft, history and validation. Terrain, decor, arrival, other specials and unknown metadata stay read-only. Validation uses the real generated arrival; no separate access sidecar is required." : content ? view?.hint
               : pool ? "Description is retained metadata. Edit item IDs, weights and roll bounds in the table. Unknown fields remain in Source."
               : <>Description is retained metadata. Weight is a supported nonnegative
             scalar; current planned selection uses separate profiles. Geometry,
@@ -664,7 +655,7 @@ export function Authoring({
           <p className="muted">
             {dirty && !verdict
               ? "Displayed source diagnostics are from the opened file. Validate the draft for a current verdict."
-              : creature ? "Creature checks use the current loader and actual isolated CreatureFactory. No ongoing AI, combat or world selection is executed." : content ? view?.hint : pool ? "Pool validation uses the current loader and container-pool validator. No population is sampled here."
+              : content ? view?.hint : pool ? "Pool validation uses the current loader and container-pool validator. No population is sampled here."
               : submap ? "Draft validation uses the real authored-submap scene, generated arrival and initial actor occupancy. Source cells and translated scene cells are distinct."
               : "Draft validation includes a centered production stamp and initial population. Access checks use the declared main entrance when present."}
           </p>
@@ -732,7 +723,7 @@ export function Authoring({
               setConfirm(true);
             }}
           >
-            {variantOnly || creature || submap ? "Apply variant" : "Review & apply"}
+            {variantOnly || submap ? "Apply variant" : "Review & apply"}
           </button>
         </div>
       )}
@@ -753,7 +744,7 @@ export function Authoring({
             <h2>Apply this one content file?</h2>
             <code>{target}</code>
             <p>
-              {submap ? "This creates one new authored layout file. Saving a layout does not automatically make it appear in a new campaign. Existing source, arrival context and world selection are unchanged." : creature ? "This creates one new creature definition. It does not join worldgen pools, replace existing instances, or change any authored room. Complex behavior fields remain read-only." : content ? content.descriptor.publication_note
+              {submap ? "This creates one new authored layout file. Saving a layout does not automatically make it appear in a new campaign. Existing source, arrival context and world selection are unchanged." : content ? content.descriptor.publication_note
                 : pool && variant ? "Creates one new pool. No structure or world is changed; the pool may remain unused until explicitly referenced."
                 : variant
                 ? "This creates a new definition. It does not add entries to current town or roadside selection profiles. Older flat-pool contexts can discover new definitions."

@@ -2,6 +2,10 @@
 
 # Creature Reference
 
+Current common-field controls, stable identity, body/reference policy and saved-instance
+semantics are documented in [Creature authoring](CREATURE_AUTHORING.md). The
+historical reference below is not the current authoring contract.
+
 All creatures are defined in `roguelike/data/entities/creatures/`. Body definitions are in `roguelike/data/bodies/`. Special abilities are implemented in `roguelike/engine/creature_abilities.py`.
 
 ---

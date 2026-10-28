@@ -7,10 +7,16 @@ export function creatureModel(text: string): {model: Record<string, unknown> | n
   if (!model || typeof model !== "object" || Array.isArray(model)) return {model: null, reason: "One creature object is required. Source retained."};
   return {model, reason: ""};
 }
-export function creatureValue(text: string, field: "name" | "hp", value: string | number): string {
+export function creatureValue(text: string, field: string, value: string | number | boolean): string {
   const {model, reason} = creatureModel(text);
   if (!model) throw new Error(reason);
-  if (field === "name") return model.name === value ? text : valueEdit(text, ["name"], value);
+  const allowed = ["name","description","armour_value","damage_dice","damage_bonus","attack_verb","perception.sight_radius","perception.sees_in_dark","wander_radius","pursuit_timeout","speed","ai_type"];
+  if (field !== "hp") {
+    if (!allowed.includes(field)) throw new Error("Read-only creature field");
+    const path=field.split(".");
+    const current=path.reduce<unknown>((v,k)=>v && typeof v === "object" ? (v as Record<string,unknown>)[k] : undefined,model);
+    return current===value ? text : valueEdit(text,path,value);
+  }
   if (!model.fighter || typeof model.fighter !== "object" || Array.isArray(model.fighter)) throw new Error("Restore the fighter object in Source.");
   // Two persisted authorities, one undoable operation. Never serialize siblings.
   const fighter = model.fighter as Record<string, unknown>;

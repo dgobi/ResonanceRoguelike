@@ -46,7 +46,6 @@ struct Session {
     pool_document: Option<authoring::Document>,
     content_documents: std::collections::HashMap<String, authoring::Document>,
     handoffs: std::collections::HashMap<String, authoring::Handoff>,
-    creature_document: Option<authoring::Document>,
     applying: bool,
     closing: bool,
     pending_project: Option<(u64, ProjectConnection)>,
@@ -100,7 +99,6 @@ impl Host {
             state.pool_document = None;
             state.content_documents.clear();
             state.handoffs.clear();
-            state.creature_document = None;
         }
         cleanup_scratch(&mut state)?;
         Ok(epoch)
@@ -521,7 +519,7 @@ fn verify_identity(identity: &Value, root: &Path, bridge: &Path) -> Result<(), F
     let bridge_hash = std::fs::read(bridge).map(|bytes| authoring::hash(&bytes)).unwrap_or_default();
     if !same_root || identity["protocol"] != PROTOCOL || identity["worker_sha256"] != bridge_hash || identity["worker_version"] != env!("CARGO_PKG_VERSION")
         || identity["runtime"]["compatible"] != true || identity["runtime"]["imports_verified"] != true
-        || identity["layout_contract"] != "direct-creatures-1" || identity["creature_contract"] != "revenant-hp-1" || !identity["families"].is_array()
+        || identity["layout_contract"] != "direct-creatures-1" || !identity["families"].is_array()
         || identity["contract"] != "g2-2" {
         return Err(failure("HANDSHAKE_MISMATCH", "Worker, source imports or authoring capabilities do not match the selected project.", "Use matching current game, application and worker resources."));
     }
@@ -582,7 +580,7 @@ async fn open_project(
             startup::save(&config, &selection.root)?;
             state.pending_project = None;
             state.document = None; state.pool_document = None;
-            state.content_documents.clear(); state.creature_document = None;
+            state.content_documents.clear();
             state.handoffs.clear();
             response["result"]["project_selection"] = serde_json::to_value(selection).unwrap();
             if let Some(store)=host.recovery.lock().unwrap().as_mut(){store.release_all();}
@@ -652,7 +650,7 @@ fn main() {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                 let host = window.state::<Host>();
                 let state = host.inner.lock().unwrap();
-                if state.applying || state.document.is_some() || state.pool_document.is_some() || !state.content_documents.is_empty() || state.creature_document.is_some() {
+                if state.applying || state.document.is_some() || state.pool_document.is_some() || !state.content_documents.is_empty() {
                     api.prevent_close();
                     let _ = window.emit("authoring-close-requested", ());
                     return;
@@ -733,9 +731,9 @@ mod tests {
         std::fs::write(&bridge, "bridge fixture").unwrap();
         let valid = json!({"protocol":8,"worker_version":env!("CARGO_PKG_VERSION"),"source":{"root":root},"worker_sha256":authoring::hash(b"bridge fixture"),
             "runtime":{"compatible":true,"imports_verified":true},"contract":"g2-2",
-            "layout_contract":"direct-creatures-1","families":[],"creature_contract":"revenant-hp-1"});
+            "layout_contract":"direct-creatures-1","families":[],"creature_contract":"creature-common-1"});
         assert!(verify_identity(&valid, &root, &bridge).is_ok());
-        for pointer in ["/protocol", "/worker_version", "/source/root", "/worker_sha256", "/runtime/compatible", "/runtime/imports_verified", "/contract", "/families", "/creature_contract"] {
+        for pointer in ["/protocol", "/worker_version", "/source/root", "/worker_sha256", "/runtime/compatible", "/runtime/imports_verified", "/contract", "/families"] {
             let mut bad = valid.clone();
             *bad.pointer_mut(pointer).unwrap() = Value::Null;
             assert_eq!(verify_identity(&bad, &root, &bridge).unwrap_err().code, "HANDSHAKE_MISMATCH");

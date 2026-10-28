@@ -14,6 +14,10 @@ const executable = resolve(
     resolve(workbench, "src-tauri/target/release/resonance-workbench.exe"),
 );
 const mode = process.env.WORKBENCH_TEST_MODE || "release";
+if (mode === "creatures") {
+  await import("./run-creature-common.mjs");
+  process.exit(0);
+}
 const output = resolve(workbench, ".artifacts", `desktop-${mode}`);
 await mkdir(output, { recursive: true });
 const workerTemp = resolve(output, `worker-temp-${Date.now()}`);
@@ -517,10 +521,6 @@ try {
     if (mode === "pools") {
       const { poolJourney } = await import("./pool-journey.mjs");
       await poolJourney(page, root, output, receipt);
-    }
-    if (mode === "creatures") {
-      const {creatureJourney} = await import("./creature-journey.mjs");
-      await creatureJourney(page,root,output,receipt);
     }
     if (mode === "recipes") {
       const {recipeJourney} = await import("./recipe-journey.mjs");

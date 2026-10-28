@@ -15,7 +15,7 @@ test("ordinary role controls keep exact metadata and independent history",()=>{
   const heading=itemValue(source,["font_ui_large"],"IMFellEnglish-Regular.ttf"),prose=itemValue(heading,["font_ui_normal"],"FoulisGreek.ttf");
   expect(prose).toContain('"metadata": {"exact":[1e2, null, "λ\\n"]}');expect(prose.endsWith("\r\n")).toBe(true);
   const history=new CanvasHistory();history.record(source,heading,"heading");history.record(heading,prose,"prose");expect(history.undo(prose)).toBe(heading);expect(history.undo(heading)).toBe(source);expect(history.redo(source)).toBe(heading);
-  const no=()=>{};const props:ContentProps={family,navigation:{onOpen:no},draft:prose,path:family.descriptor.policy.root,dirty:true,validated:false,disabled:"",busy:false,evidenceStale:false,onCancel:no,onSource:no,onProbe:no,preview:null,previewStale:true,onPreview:no,onEdit:()=>{throw Error("render wrote source");},onUndo:no,onRedo:no,canUndo:true,canRedo:false};
+  const no=()=>{};const props:ContentProps={sourceFamily:family,variant:false,active:true,cancelVersion:0,beginRequest:()=>({current:()=>true,finish:no}),family,navigation:{onOpen:no},draft:prose,path:family.descriptor.policy.root,dirty:true,validated:false,disabled:"",busy:false,evidenceStale:false,onCancel:no,onSource:no,onProbe:no,preview:null,previewStale:true,onPreview:no,onEdit:()=>{throw Error("render wrote source");},onUndo:no,onRedo:no,canUndo:true,canRedo:false};
   const html=renderToStaticMarkup(<TypographyEditor {...props}/>);expect(html).toContain('aria-label="Headings"');expect(html).toContain('aria-label="Ordinary prose"');expect(html).toContain("next game initialization");expect(html).toContain("FoulisGreek.ttf");
 });
 test("typography has a distinct bounded preview shape",()=>{

@@ -28,4 +28,22 @@ describe("ordinary creature exact draft", () => {
     }
     expect(()=>creatureValue('{"base_hp":14}',"hp",19)).toThrow("fighter");
   });
+  it("nested sight and prose edits preserve BOM, key order, escaping and sibling bytes",()=>{
+    const original='\uFEFF'+source.replace(/\r?\n/g,"\r\n").replace('"base_hp": 14','"metadata": {"exact":[1e2, "λ\\n", null]},\r\n  "base_hp": 14');
+    const sight=creatureValue(original,"perception.sight_radius",3);
+    expect(sight).toBe(original.replace(/"sight_radius": \d+/, '"sight_radius": 3'));
+    const description=creatureValue(sight,"description",'New "literal" prose');
+    expect(JSON.parse(description.slice(1)).description).toBe('New "literal" prose');
+    expect(description).toContain('"metadata": {"exact":[1e2, "λ\\n", null]}');
+    expect(description.startsWith('\uFEFF')).toBe(true);
+    expect(()=>creatureValue(description,"tile","barrow_wight")).toThrow("Read-only");
+    expect(()=>creatureValue(description,"perception.faction","player")).toThrow("Read-only");
+  });
+  it("keeps independent source histories for two creatures",()=>{
+    const wight=readFileSync(new URL("../../roguelike/data/entities/creatures/barrow_wight.json",import.meta.url),"utf8");
+    const a=new CanvasHistory(),b=new CanvasHistory();
+    const one=creatureValue(source,"damage_dice","2d5"),two=creatureValue(wight,"hp",37);
+    a.record(source,one,"attack");b.record(wight,two,"hp");
+    expect(a.undo(one)).toBe(source);expect(b.undo(two)).toBe(wight);expect(a.redo(source)).toBe(one);
+  });
 });

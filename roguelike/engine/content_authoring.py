@@ -93,7 +93,8 @@ class Family:
 
     def matches(self, path):
         if self.exact_file: return path == self.exact_file
-        return PurePosixPath(path).parts[:3] == ("roguelike", "data", self.directory)
+        prefix = ("roguelike", "data", *PurePosixPath(self.directory).parts)
+        return PurePosixPath(path).parts[:len(prefix)] == prefix
 
     def descriptor(self):
         value = dict(vocabulary=VOCABULARY, schema=self.module.SCHEMA, views=self.module.VIEWS,
@@ -101,15 +102,21 @@ class Family:
                      publication_note=self.module.PUBLICATION_NOTE)
         return value, hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
-    def envelope(self, context):
+    def envelope(self, context, *, operations=None):
         descriptor, digest = self.descriptor()
         problems = schema_problems(descriptor["schema"])
-        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview"}
+        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory"}
         if not isinstance(descriptor["views"], list) or any(v not in allowed_views for v in descriptor["views"]):
             problems.append("Unsupported specialized view registration")
         return dict(id=self.id, contract=self.module.CONTRACT, descriptor_sha256=digest,
                     descriptor=descriptor, compatible=not problems, problems=problems,
-                    references=self.module.reference_options(context) if context else {}, context=context)
+                    references=self.module.reference_options(context) if context else {}, context=context,
+                    effective_operations=self.operations_for(context) if operations is None else operations)
+
+    def operations_for(self, context):
+        if self.id != "creature": return list(self.operations)
+        if not context or len(context["records"]) != 1: return []
+        return [op for op in context["records"][0]["capability"].get("operations", []) if op in self.operations]
 
     def context(self, *args, resource_root=None, **kwargs):
         if getattr(self.module, "USES_FONT_RESOURCES", False): kwargs["resource_root"] = resource_root
@@ -146,7 +153,7 @@ class Family:
                 if self.exact_file: locations = [s for s in locations if s["path"] == self.exact_file]
                 cap = self.module.capability(record, relative, pointer)
                 rows.append(dict(path=relative, pointer=pointer, id=identifier, name=str(record.get("name", record.get("title", ""))),
-                    category=str(record.get("category", "")), result_item=record.get("result_item"),
+                    category=("player" if identifier.casefold() == "player" else "creatures" if "/entities/creatures/" in relative else "other entities") if self.id == "creature" else str(record.get("category", "")), result_item=record.get("result_item"),
                     execution_class=cap.get("execution_class"), route=self.route, family_id=self.id,
                     editable=cap["editable"] and len(locations) == 1,
                     provenance="Selected checkout / registered content source",
@@ -157,8 +164,9 @@ class Family:
 
 def families():
     # The sole trusted registration point. No renderer or descriptor imports.
-    from engine import item_authoring, recipe_authoring, text_authoring, typography_authoring
+    from engine import item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring
     return (
+        Family("creature", "entities", creature_authoring, ("edit", "variant"), "roguelike/data/entities/creatures/"),
         Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/components/"),
         Family("recipe", "recipes", recipe_authoring, ("variant",), "roguelike/data/recipes/"),
         Family("text", "texts", text_authoring, ("variant",), "roguelike/data/texts/"),

@@ -48,10 +48,14 @@ impl Record {
             || self.project.to_string_lossy().len()>4096 || self.generation==0 || self.generation>9_007_199_254_740_990
             || self.baseline.len()>MAX_DRAFT || self.draft.len()>MAX_DRAFT || self.variant_id.len()>128
             || self.contract.len()>100 || self.contract.is_empty() || self.descriptor_sha256.len()!=64
-            || !["item","recipe","text","typography"].contains(&self.family.as_str())
+            || !["item","recipe","text","typography","creature"].contains(&self.family.as_str())
             || ((self.family=="typography" || self.source==crate::authoring::TYPOGRAPHY) &&
                 (self.family!="typography" || self.source!=crate::authoring::TYPOGRAPHY || self.variant || !self.variant_id.is_empty()
                  || self.target!=crate::authoring::TYPOGRAPHY || self.published.as_ref().is_some_and(|p|p.path!=crate::authoring::TYPOGRAPHY)))
+            || ((self.family=="creature" || self.source.starts_with("roguelike/data/entities/")) &&
+                (self.family!="creature" || !self.source.starts_with("roguelike/data/entities/creatures/")
+                 || !self.target.starts_with("roguelike/data/entities/creatures/")
+                 || self.published.as_ref().is_some_and(|p|!p.path.starts_with("roguelike/data/entities/creatures/"))))
             || crate::authoring::content_root(&self.source).is_none()
             || self.source_sha256 != hash(self.baseline.as_bytes())
             || self.target != intent_target(&self.source,self.variant,&self.variant_id)

@@ -17,6 +17,7 @@ const CATEGORIES: &[&str] = &[
 // Host-owned filesystem registration. Descriptors cannot enlarge these roots.
 // (source root, publication root, reserved basenames)
 const CONTENT_ROOTS: &[(&str, &str, &[&str])] = &[
+    ("roguelike/data/entities/", "roguelike/data/entities/creatures/", &[]),
     ("roguelike/data/items/", "roguelike/data/items/components/", &[]),
     ("roguelike/data/recipes/", "roguelike/data/recipes/", &[]),
     ("roguelike/data/texts/", "roguelike/data/texts/", &["text_item_map.json"]),
@@ -62,14 +63,19 @@ impl FamilyPolicy {
             || content_root(source) != Some(root)
             || (source == TYPOGRAPHY && (id != "typography" || operations != ["edit"]))
         { return None; }
-        Some(Self { id:id.into(), route:route.into(), contract:contract.into(), descriptor:d.clone(), digest:digest.into(), root:root.into(), operations })
+        let effective = if id == "creature" {
+            f["effective_operations"].as_array()?.iter().map(|v|v.as_str().map(str::to_owned)).collect::<Option<Vec<_>>>()?
+        } else { operations.clone() };
+        if effective.iter().any(|op| !operations.contains(op))
+            || (is_creature(source) && (id != "creature" || root != "roguelike/data/entities/creatures/")) { return None; }
+        Some(Self { id:id.into(), route:route.into(), contract:contract.into(), descriptor:d.clone(), digest:digest.into(), root:root.into(), operations:effective })
     }
 }
 fn family_evidence(doc: &Document, result: &Value, variant: bool) -> bool {
     let Some(policy) = &doc.family else { return content_root(&doc.relative).is_none(); };
     let Some(current) = FamilyPolicy::from_result(result, &doc.relative) else { return false; };
     current.id == policy.id && current.contract == policy.contract && current.digest == policy.digest
-        && current.descriptor == policy.descriptor && current.route == policy.route
+        && current.descriptor == policy.descriptor && current.route == policy.route && current.operations == policy.operations
         && policy.operations.iter().any(|op| op == if variant { "variant" } else { "edit" })
         && result["semantic_verified"] == true && result["source_asset"] == doc.relative
         && result["source_sha256"] == hash(&doc.original)
@@ -265,7 +271,7 @@ fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure>
         .as_ref()
         .into_iter()
         .chain(state.pool_document.as_ref())
-        .chain(state.content_documents.values()).chain(state.creature_document.as_ref())
+        .chain(state.content_documents.values())
         .find(|d| d.token == token)
         .ok_or_else(|| {
             failure(
@@ -287,7 +293,7 @@ fn revoke(doc: &mut Document) {
     doc.review = None;
 }
 pub(super) fn revoke_all(state: &mut Session) {
-    for doc in state.document.iter_mut().chain(state.pool_document.iter_mut()).chain(state.content_documents.values_mut()).chain(state.creature_document.iter_mut()) { revoke(doc); }
+    for doc in state.document.iter_mut().chain(state.pool_document.iter_mut()).chain(state.content_documents.values_mut()) { revoke(doc); }
 }
 #[cfg(test)]
 fn revoke_review(host: &Host, token: &str) {
@@ -314,7 +320,7 @@ fn accept_edit(host:&Host, token:&str, sequence:u64, draft:String, variant:bool,
     if draft.len()>MAX_DRAFT || variant_id.len()>128{return Err(recovery::error("Draft or variant ID exceeds the recovery bound."));}
     let root=state.root.clone().ok_or_else(unknown_document)?;
     let doc=current_document(&mut state,token).ok_or_else(unknown_document)?;
-    let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Only eligible registered item, recipe and text documents have durable drafts."))?;
+    let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Only eligible registered documents have durable drafts."))?;
     if variant && !family.operations.iter().any(|op|op=="variant") || doc.relative==TYPOGRAPHY && !variant_id.is_empty(){
         return Err(recovery::error("This family is edit-only; recovery cannot retain a variant target."));
     }
@@ -428,7 +434,8 @@ fn check_restore(root:&Path,doc:&Document,record:&recovery::Record)->Result<(),F
     if doc.revision!=0 || doc.accepted.is_some(){return Err(recovery::error("An open draft already owns this file. Focus it and resolve that draft explicitly."));}
     let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Current source/contract is not editable. Recovery remains inspectable and copyable."))?;
     if recovery::project_key(root)!=recovery::project_key(&record.project) || file_key(&doc.relative)!=file_key(&record.source)
-        || family.id!=record.family || hash(&doc.original)!=record.source_sha256
+        || family.id!=record.family || !family.operations.iter().any(|op|op==if record.variant {"variant"} else {"edit"})
+        || hash(&doc.original)!=record.source_sha256
         || read_source(&checked_target(root,&doc.relative,false)?)?!=doc.original {
         return Err(recovery::error("Source or project changed. Keep and compare both versions; no baseline was adopted."));
     }
@@ -473,7 +480,7 @@ pub fn acknowledge_reopen(app:tauri::AppHandle,host:tauri::State<'_,Host>,handof
     Ok(())
 }
 fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
-    state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).chain(state.content_documents.values_mut()).chain(state.creature_document.as_mut()).find(|d| d.token == token)
+    state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).chain(state.content_documents.values_mut()).find(|d| d.token == token)
 }
 fn envelope(result: Value) -> Value {
     json!({"protocol":PROTOCOL,"id":uuid::Uuid::new_v4().to_string(),"ok":true,"result":result,"host_elapsed_ms":0})
@@ -652,7 +659,7 @@ pub async fn open_document(
         let writable = if content_root(&asset).is_some() {
             family.as_ref().is_some_and(|f| asset.starts_with(&f.root)) && response["result"]["editable"] == true
         } else if is_submap(&asset) { response["result"]["editable"] == true && response["result"]["layout_contract"] == "direct-creatures-1" }
-        else if is_creature(&asset) { asset.starts_with("roguelike/data/entities/creatures/") && response["result"]["editable"] == true } else { true };
+        else { true };
         let registered = discovered_family.is_some();
         if registered { owner_collision(&state, &asset, replace_token.as_deref())?; }
         response["result"]["document_token"] = json!(token);
@@ -681,7 +688,7 @@ pub async fn open_document(
             if let Some(id)=handoff_id { state.handoffs.get_mut(&id).ok_or_else(unknown_document)?.replacement=Some(token); }
         }
         else {
-            let slot = if is_pool(&document.relative) { &mut state.pool_document } else if is_creature(&document.relative) { &mut state.creature_document } else { &mut state.document };
+            let slot = if is_pool(&document.relative) { &mut state.pool_document } else { &mut state.document };
             *slot = Some(document);
         }
         Ok(response)
@@ -695,6 +702,11 @@ fn destination(
     draft: &str,
     variant_id: Option<&str>,
 ) -> Result<(String, bool), Failure> {
+    if !doc.writable && variant_id.is_none() && draft.as_bytes() == doc.original
+        && doc.family.as_ref().is_some_and(|f| f.id == "creature")
+        && doc.inspection["family"]["context"]["records"][0]["capability"]["constructible"] == true {
+        return Ok((doc.relative.clone(), false));
+    }
     if !doc.writable {
         return Err(failure(if is_submap(&doc.relative) || doc.relative == G17_EXAMPLE { "READ_ONLY_LAYOUT" } else if is_creature(&doc.relative) { "READ_ONLY_CREATURE" } else if is_recipe(&doc.relative) { "READ_ONLY_RECIPE" } else { "READ_ONLY_ITEM" }, "This source is outside its supported authoring capability.", "Inspect unsupported or ambiguous sources read-only."));
     }
@@ -783,7 +795,7 @@ pub async fn validate_document(
         if response["ok"] == true {
             if let Some(policy) = &doc.family {
                 if !FamilyPolicy::from_result(&response["result"], &doc.relative).is_some_and(|current|
-                    current.id == policy.id && current.contract == policy.contract && current.digest == policy.digest && current.descriptor == policy.descriptor)
+                    current.id == policy.id && current.contract == policy.contract && current.digest == policy.digest && current.descriptor == policy.descriptor && current.operations == policy.operations)
                 {
                     return Err(failure("CONTRACT_CHANGED", "The opened content descriptor is incompatible or changed.", "Retain the exact draft, then reopen its source to obtain the current contract."));
                 }
@@ -792,12 +804,12 @@ pub async fn validate_document(
         let mut review = None;
         if response["ok"] == true
             && !preview_only
+            && doc.writable
             && response["result"]["valid"] == true
             && response["result"]["draft_sha256"] == hash(draft.as_bytes())
-            && (!(is_creature(&doc.relative) || is_submap(&doc.relative)) || variant)
+            && (!is_submap(&doc.relative) || variant)
             && family_evidence(&doc, &response["result"], variant)
             && (!is_submap(&doc.relative) || (response["result"]["layout_contract"] == "direct-creatures-1" && response["result"]["population_verified"] == true && response["result"]["route"] == "authored_submap"))
-            && (!is_creature(&doc.relative) || (response["result"]["creature_contract"] == "revenant-hp-1" && response["result"]["factory_verified"] == true && response["result"]["route"] == "creature_definition"))
         {
             let review_token = uuid::Uuid::new_v4().to_string();
             review = Some(Review {
@@ -1032,8 +1044,15 @@ fn publish(root: &Path, doc: &Document, review: &Review, fault: Fault) -> Result
     if is_submap(&doc.relative) && !review.variant {
         return Err(failure("LAYOUT_VARIANT_REQUIRED", "Layout publication requires a new ID/file in layouts/.", "Review a unique layout variant."));
     }
-    if is_creature(&doc.relative) && !review.variant {
-        return Err(failure("CREATURE_VARIANT_REQUIRED", "Creature publication requires a new ID and file.", "Review a unique creature variant."));
+    if let Some(family) = &doc.family {
+        if !doc.writable || !family.operations.iter().any(|op| op == if review.variant { "variant" } else { "edit" }) {
+            return Err(failure("OPERATION_POLICY", "Original source does not grant this publication operation.", "Reopen and use its supported operations."));
+        }
+        if family.id == "creature" {
+            let raw:Value=serde_json::from_str(review.draft.trim_start_matches('\u{feff}')).map_err(io_error)?;
+            let (target,variant)=destination(doc,&review.draft,if review.variant {raw["id"].as_str()} else {None})?;
+            if target!=review.destination || variant!=review.variant {return Err(conflict());}
+        }
     }
     if is_recipe(&doc.relative) && !review.variant {
         return Err(failure("RECIPE_VARIANT_REQUIRED", "Recipe publication requires a new ID and file.", "Create and review a unique recipe variant."));
@@ -1155,7 +1174,6 @@ pub async fn apply_document(
                 || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != env!("CARGO_PKG_VERSION")
                 || (is_submap(&doc.relative) && (!review.variant || response["result"]["layout_contract"] != "direct-creatures-1" || response["result"]["population_verified"] != true))
                 || !family_evidence(&doc, &response["result"], review.variant)
-                || (is_creature(&doc.relative) && (!review.variant || response["result"]["creature_contract"] != "revenant-hp-1" || response["result"]["factory_verified"] != true))
                 || (!is_creature(&doc.relative) && !is_pool(&doc.relative) && doc.family.is_none() && response["result"]["preview"]["passed"] != true) {
                 let details = if response["ok"] == true {
                     response["result"]["diagnostics"].as_array().into_iter().flatten().take(3)
@@ -1217,7 +1235,7 @@ fn sweep_disk(operation: &Operation, token: Option<&str>, stamp_fn: impl FnOnce(
     let (root, documents) = {
         let state = operation.host.inner.lock().unwrap();
         operation.check(&state)?;
-        let docs: Vec<_> = state.document.iter().chain(state.pool_document.iter()).chain(state.content_documents.values()).chain(state.creature_document.iter())
+        let docs: Vec<_> = state.document.iter().chain(state.pool_document.iter()).chain(state.content_documents.values())
             .filter(|d| token.is_none_or(|t| t == d.token)).cloned().collect();
         if token.is_some() && docs.is_empty() { return Err(unknown_document()); }
         (state.root.clone().ok_or_else(|| io_error("No project open."))?, docs)
@@ -1264,6 +1282,45 @@ pub fn finish_close(window: tauri::Window, host: tauri::State<'_, Host>) -> Resu
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn creature_original_operations_bind_review_recovery_and_publication() {
+        let (root,host,old,mut review)=lifecycle_fixture(false);
+        let mut doc=old.clone();doc.relative="roguelike/data/entities/creatures/sample.json".into();
+        let source=root.path().join(&doc.relative);fs::create_dir_all(source.parent().unwrap()).unwrap();fs::write(&source,&doc.original).unwrap();
+        let mut result=family_result(&doc,"creature",json!(["edit","variant"]));
+        result["family"]["effective_operations"]=json!(["edit"]);
+        doc.family=FamilyPolicy::from_result(&result,&doc.relative);assert!(doc.family.is_some());
+        assert!(family_evidence(&doc,&result,false));assert!(!family_evidence(&doc,&result,true));
+        let mut forged=result.clone();forged["family"]["effective_operations"]=json!(["edit","variant"]);
+        assert!(!family_evidence(&doc,&forged,true));assert!(!family_evidence(&doc,&forged,false));
+        assert!(destination(&doc,"{\"id\":\"variant\"}",Some("variant")).is_err());
+        {let mut state=host.inner.lock().unwrap();state.content_documents.clear();state.content_documents.insert(file_key(&doc.relative),doc.clone());}
+        assert!(accept_edit(&host,&doc.token,1,"clone".into(),true,"variant".into()).is_err());
+        let exact="\u{feff}{\r\n \"unfinished\": [\"λ\",";
+        accept_edit(&host,&doc.token,1,exact.into(),false,"".into()).unwrap();
+        let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();
+        let dir=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(dir.path().into()).unwrap();
+        store.write(&record).unwrap();store.release(&record.key());
+        let mut fresh=doc.clone();restore_claimed(&mut store,root.path(),&mut fresh,&record.key(),record.generation).unwrap();
+        assert_eq!(fresh.accepted.unwrap().draft,exact);assert!(fresh.review.is_none());store.release(&record.key());
+        let mut bad=record.clone();bad.generation+=1;bad.variant=true;bad.variant_id="clone".into();bad.target=recovery::intent_target(&bad.source,true,"clone");
+        store.write(&bad).unwrap();store.release(&bad.key());fresh=doc.clone();
+        assert!(restore_claimed(&mut store,root.path(),&mut fresh,&bad.key(),bad.generation).is_err());
+        assert_eq!(store.read(&bad.key()).unwrap().draft,exact);
+        review.variant=true;review.destination=bad.target;review.draft="{\"id\":\"clone\"}".into();
+        assert!(publish(root.path(),&doc,&review,Fault::None).is_err());assert_eq!(fs::read(&source).unwrap(),doc.original);
+        for path in ["roguelike/data/entities/../outside.json","roguelike/data/entities/creatures/x.json:ads","roguelike/data/entities/creatures/nul.json","roguelike/saves/x.json"] {assert!(relative_content(path).is_err());}
+        let mut bad=record;bad.family="item".into();assert!(bad.validate().is_err());
+    }
+    #[test]
+    fn creature_readonly_construction_requires_exact_opened_bytes() {
+        let (_,mut doc,_)=fixture();doc.relative="roguelike/data/entities/outside.json".into();doc.writable=false;
+        let mut result=family_result(&doc,"creature",json!(["edit","variant"]));result["family"]["effective_operations"]=json!([]);
+        result["family"]["context"]=json!({"records":[{"capability":{"constructible":true}}]});
+        doc.family=FamilyPolicy::from_result(&result,&doc.relative);doc.inspection=result;
+        let exact=String::from_utf8(doc.original.clone()).unwrap();assert!(destination(&doc,&exact,None).is_ok());
+        assert!(destination(&doc,&(exact.clone()+" "),None).is_err());assert!(destination(&doc,&exact,Some("variant")).is_err());
+    }
     #[test]
     fn typography_singleton_policy_recovery_and_freshness_are_host_enforced(){
         let (root,host,old,mut review)=lifecycle_fixture(false);
@@ -1781,44 +1838,6 @@ mod tests {
         let sidecar=root.path().join("roguelike/docs/examples/g17_authored_creature_room.access.json");
         fs::create_dir_all(sidecar.parent().unwrap()).unwrap();fs::write(&sidecar,b"{}").unwrap();
         assert_ne!(input_stamp(root.path()).unwrap(),before);
-    }
-    #[test]
-    fn creature_entitlement_fifth_document_and_variant_only() {
-        let (root, mut doc, mut review) = fixture();
-        doc.relative = "roguelike/data/entities/creatures/sample.json".into();
-        let path = root.path().join(&doc.relative);
-        fs::create_dir_all(path.parent().unwrap()).unwrap(); fs::write(&path, &doc.original).unwrap();
-        for path in ["roguelike/data/entities/../x.json", "roguelike/data/entities/x.json:ads", "roguelike/data/entities/creatures/nul.json", "roguelike/saves/creatures/x.json"] {
-            assert!(!is_creature(path));
-        }
-        doc.writable = false;
-        assert_eq!(destination(&doc, "{\"id\":\"promoted_player\"}", Some("promoted_player")).unwrap_err().code, "READ_ONLY_CREATURE");
-        doc.writable = true;
-        let host = Host::default();
-        {
-            let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().to_path_buf());
-            let state = &mut *state;
-            for (token, slot) in [("structure", &mut state.document), ("pool", &mut state.pool_document)] {
-                let mut other = doc.clone(); other.token = token.into(); *slot = Some(other);
-            }
-            state.creature_document = Some(doc.clone());
-        }
-        assert!(session_doc(&host, &doc.token).is_ok());
-        { let mut state = host.inner.lock().unwrap(); for key in ["item", "recipe"] {
-            let mut d = doc.clone(); d.token = key.into(); d.relative = format!("roguelike/data/{key}s/sample.json"); state.content_documents.insert(file_key(&d.relative), d);
-        }}
-        for token in ["structure", "pool", "item", "recipe"] { assert!(session_doc(&host, token).is_ok()); }
-        assert_eq!(publish(root.path(), &doc, &review, Fault::None).unwrap_err().code, "CREATURE_VARIANT_REQUIRED");
-        review.variant = true; review.destination = "roguelike/data/entities/creatures/variant.json".into();
-        review.draft = "{\"id\":\"variant\"}".into();
-        for fault in [Fault::BeforeStage, Fault::AfterStage, Fault::BeforeReplace] {
-            assert!(publish(root.path(), &doc, &review, fault).is_err());
-            assert!(!root.path().join(&review.destination).exists());
-            assert_eq!(fs::read(&path).unwrap(), doc.original);
-        }
-        assert!(publish(root.path(), &doc, &review, Fault::None).is_ok());
-        assert_eq!(publish(root.path(), &doc, &review, Fault::None).unwrap_err().code, "VARIANT_EXISTS");
-        assert_eq!(fs::read(&path).unwrap(), doc.original);
     }
     #[test]
     fn paths_and_identity_are_not_renderer_authority() {
