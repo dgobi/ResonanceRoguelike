@@ -1,0 +1,590 @@
+{
+  "milestone": "W5I",
+  "passed": true,
+  "observed_utc": "2026-10-28T17:26:00.941928+00:00",
+  "revisions": {
+    "reviewed_start": "ba66670604ddde091918a6009d92ed4ab1c56612",
+    "initial_remote": "ba66670604ddde091918a6009d92ed4ab1c56612",
+    "implementation": "6484a59d40082169607634788baa807f9f60f0f9",
+    "package_inputs": "2df8413c34ddfba8e01062f0b01104f30167a548",
+    "test_inputs": "b1e630647b2d89bdb06c9dfe05b880daf648ea6b",
+    "evidence_ref": "checkpoint/workbench-w5i-verified-20261028",
+    "branch": "main",
+    "note": "Package Rust/TS/bridge inputs remain the implementation package boundary. The later game numeric-bound diagnostic correction is imported from the selected project; final natural fixture Python hashes all match. Evidence commit/tag and external remote readback avoid a self-hash loop."
+  },
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/frontend-verified.log",
+        "sha256": "20781ee61807bc3528dd75cb5afdba7b41208334088d1e12eb56b48351c2d275"
+      }
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/typecheck-verified.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/host-verified.log",
+        "sha256": "25ed961ccc52c63e0f0d42a5b7d4e5ae719a7383b14f52993ca13ca35ffdadce"
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/clippy-verified.log",
+        "sha256": "36d7347cefc8392ebb44d510eb908d245850865eecbc525fae6eee55b5624008"
+      }
+    },
+    {
+      "command": "configured development Python: unittest test_authored_assignment -v",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/assignment-verified.log",
+        "sha256": "c01ed3a2559d6a950446cd679bf21528435bb08f84ed5f9e167d5c7c2e07e06d"
+      }
+    },
+    {
+      "command": "configured development Python: session/persistence/combat/scene/G17/access/destinations (PYTHONPATH game, tests, tools)",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/production-verified.log",
+        "sha256": "070338de276ab5a169c21cfcb45a6a241514542e8e01327c1383ef8a3a8eefee"
+      }
+    },
+    {
+      "command": "pinned runtime: python -I -B -m unittest discover -s worker -v",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/worker-stable.log",
+        "sha256": "72bef210eeb288d408f1000e74e955c60f015ae36658698964af8ed28977ada6"
+      }
+    },
+    {
+      "command": "pinned runtime: unittest test_assignment.py",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/assignment-worker-verified.log",
+        "sha256": "b177d4222a78eb2580f707ac46a4fde3c60fd43d860a79b4c049244be6d046d4"
+      }
+    },
+    {
+      "command": "standard development Python: test_dependency_absence_structured",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/missing-dependency.log",
+        "sha256": "33839539ab84e88190c02b6c38c1a972c48506f5cb4553403e1625277016eaa1"
+      }
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/package-verified.log",
+        "sha256": "e2fc4bbd744cbf3e5301f080470636a24eb293534619aa84d281b578e6d5c0fd"
+      }
+    },
+    {
+      "command": "node scripts/run-assignments.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/native-final-evidence.log",
+        "sha256": "c26608b24e13fcfbbf3aa5eb393bff6c2eb7621c3a69a715eb5964db65e61446"
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/workspace.log",
+        "sha256": "24dbb755b55cbd6e669f1634478abe61eaec81e5d354ff818a4f1fe903c62d48"
+      }
+    },
+    {
+      "command": "node scripts/run-room-tests.mjs",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/room-session.log",
+        "sha256": "d334b27a17a92a93aa0595749b2e564434c7e7122169d9d39c1abebe15206ab0"
+      }
+    },
+    {
+      "command": "pinned runtime: scripts/standalone-room-regression.py (fresh disposable inputs)",
+      "exit_code": 0,
+      "log": {
+        "path": "workbench/.artifacts/w5i/ordinary.log",
+        "sha256": "080c7e7f93540c7854c466058018810e9d2bc18c91f8947a2f0de0f4ebdf0b31"
+      }
+    }
+  ],
+  "profile_contract": "authored-submap-selection-1",
+  "shipped_profile": {
+    "id": "authored_submap_selection",
+    "version": 1,
+    "enabled": false,
+    "target_type": "barrow",
+    "authored_chance": 0.0,
+    "candidates": []
+  },
+  "saved_reopened": {
+    "room_a": "85a48373c33d1af788e83c6502971f436276cb3de37353f21ee9d76fe8be0633",
+    "room_b": "b7593e0bf1df4c68756532344f61ff3f9e7e1d9b289d054c410a1ab78e130d31",
+    "text": "c72e82113910db70cc84933f59302801d5c8082d683a3f3a57e3e10ce2770e3d",
+    "profile": "9ef3513b1f8d1673f976b5333552682651aa15f4534ff30f6cf6eefd1d42c083",
+    "same_id_room_revision": "b304e38693a1d962375085b084b09dbf2f8d4948e60908fd9853c5c1437a9bc7",
+    "changed_profile": "ba1fe8c446471ce75c7998c74161703f1632dd38681b0671cc8fee0042a6a97c",
+    "note": "Supported packaged controls validate/review/apply, host expected-hash reopen and reopened token/disk hashes; no accepted room/profile file hand-edited. Fault injections are separately labelled."
+  },
+  "sample": {
+    "profile_path": "roguelike/data/generation/authored_submap_selection.json",
+    "profile_sha256": "9ef3513b1f8d1673f976b5333552682651aa15f4534ff30f6cf6eefd1d42c083",
+    "contract": "authored-submap-selection-1",
+    "descriptor_sha256": "248d133f4411a4f0c902d1ac9ff4716760250c324c1cbb11851ec81e9884d3fd",
+    "runtime": {
+      "dependencies": {
+        "cffi": "2.1.1",
+        "numpy": "2.4.6",
+        "pycparser": "3.11",
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "typing_extensions": "4.16.0"
+      },
+      "python": "3.11.0"
+    },
+    "source": {
+      "branch": null,
+      "catalog_sha256": "1528787ff7baeb9ab3a4ee25ecf0dddae234f2b914f38d0db4b3cc6accab367a",
+      "commit": null,
+      "game_dirty": null,
+      "game_source_sha256": "6e03053eec800db2ba2446d98096acf29fdc5abbd851fc89a5e0f9632b09b8a9",
+      "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5",
+      "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5i\\native-1793207495091\\project"
+    },
+    "seed": 20261028,
+    "width": 128,
+    "height": 128,
+    "plan_mode": "shared-v1",
+    "generation_revision": "wg9",
+    "target_type": "barrow",
+    "authored_chance": 0.65,
+    "matching_count": 721,
+    "authored_count": 467,
+    "procedural_count": 254,
+    "truncated": 367,
+    "selected_examples": [
+      {
+        "chunk": [
+          0,
+          11
+        ],
+        "layout_id": "w5i_room_a",
+        "path": "roguelike/data/layouts/w5i_room_a.json",
+        "seed": 264676,
+        "submap_id": "submap_0_11_0",
+        "type": "barrow"
+      },
+      {
+        "chunk": [
+          0,
+          37
+        ],
+        "layout_id": "w5i_room_b",
+        "path": "roguelike/data/layouts/w5i_room_b.json",
+        "seed": 499884,
+        "submap_id": "submap_0_37_0",
+        "type": "barrow"
+      },
+      {
+        "chunk": [
+          0,
+          115
+        ],
+        "layout_id": "w5i_room_a",
+        "path": "roguelike/data/layouts/w5i_room_a.json",
+        "seed": 481902,
+        "submap_id": "submap_0_115_0",
+        "type": "barrow"
+      }
+    ]
+  },
+  "natural": {
+    "seed": 20261028,
+    "dimensions": [
+      128,
+      128
+    ],
+    "plan_mode": "shared-v1",
+    "generation_revision": "wg9",
+    "selected": {
+      "chunk": [
+        0,
+        11
+      ],
+      "submap_id": "submap_0_11_0",
+      "type": "barrow",
+      "seed": 264676,
+      "layout_id": "w5i_room_a"
+    },
+    "pending": {
+      "chunk": [
+        0,
+        115
+      ],
+      "submap_id": "submap_0_115_0",
+      "layout_id": "w5i_room_a"
+    },
+    "procedural": {
+      "chunk": [
+        0,
+        1
+      ],
+      "submap_id": "submap_0_1_0",
+      "layout_id": ""
+    },
+    "staging": {
+      "player": [
+        14,
+        21
+      ],
+      "surface_stairs": [
+        22,
+        21
+      ],
+      "outside_protected_entrance_footprint": true,
+      "description": "Ordinary player staged outside the complete production protected entrance footprint, 8\u201318 local Manhattan tiles from its stair. No entrance, destination, SubMap or room replaced."
+    },
+    "entrance_diagnostics": [
+      {
+        "kind": "entrance",
+        "submap": "submap_0_11_0",
+        "status": "authored-footprint",
+        "access_revision": 1,
+        "access_rejections": 0,
+        "stair": [
+          22,
+          21
+        ]
+      }
+    ],
+    "surface_geometry_sha256": "14f74d5c234f81c13e0fadfcf0250a6551054e69bda1d75f99031a0ff5c5f8bc",
+    "source_sha256": "85a48373c33d1af788e83c6502971f436276cb3de37353f21ee9d76fe8be0633",
+    "profile_sha256": "9ef3513b1f8d1673f976b5333552682651aa15f4534ff30f6cf6eefd1d42c083",
+    "world_sha256": "5711de412bdc17e1085fac17ab6d5ed9c74157f89e98db2f47bc4cdb7da73a8c",
+    "surface_provenance": {
+      "version": 1,
+      "policy_identity": "3cdc17372b930326c9addf8b832a370492f9a0a222ccf2d4df4983403743ec09",
+      "algorithm": "wilderness-fields-v1",
+      "seed_domain": "resonance-wilderness-1",
+      "owner": "wilderness",
+      "biome": "ash_wastes",
+      "access_revision": 1
+    }
+  },
+  "arrival": [
+    38,
+    23
+  ],
+  "readable": {
+    "carrier": "letter",
+    "text_id": "w5i_assignment_text",
+    "title": "W5I natural barrow ledger",
+    "first_page": "W5I: this physical ledger came from an ordinarily assigned barrow. The cold stone remembers."
+  },
+  "persistence": {
+    "f5_f9": true,
+    "cold": {
+      "passed": true,
+      "pid": 25784,
+      "assignments_retained": true,
+      "procedural_pending_retained": true,
+      "owned_scene_exact": true,
+      "picked_item_owned_once": true,
+      "pending_current_definition": true,
+      "pending_arrival": [
+        39,
+        23
+      ],
+      "needed_missing_layout_refused": true,
+      "missing_owned_cache_refused": true,
+      "definition_sha256": "b304e38693a1d962375085b084b09dbf2f8d4948e60908fd9853c5c1437a9bc7"
+    },
+    "absent_profile": {
+      "passed": true,
+      "pid": 26036,
+      "assignments_retained": true,
+      "policy_not_read": true
+    },
+    "invalid_profile": {
+      "passed": true,
+      "pid": 21444,
+      "assignments_retained": true,
+      "policy_not_read": true
+    },
+    "distinction": "Recorded layout IDs persist after profile edits. Current same-ID definitions apply on pending first construction; generated scenes retain saved geometry, contents and mutation."
+  },
+  "ownership": {
+    "cancelled_preview_stale": true,
+    "saved_dependency_staled_fresh_preview": true,
+    "confirmed_conflict": {
+      "code": "EXTERNAL_MODIFICATION_CONFLICT",
+      "message": "The disk bytes differ from the opened source.",
+      "remedy": "Inspect the disk version. Keep your unsaved draft for manual reconciliation, or discard and reload; no forced save is available."
+    },
+    "invalid_recovery_fresh_validation": true,
+    "parked_item_draft_unchanged": true
+  },
+  "packaged_room_session": {
+    "passed": true,
+    "receipt": {
+      "path": "workbench/.artifacts/w5h/native-1793207168777/receipt.json",
+      "sha256": "0128f7ac496d563a68da57abf54ec1adc097a5b3f227fd77e0d9d9b6c190a612"
+    },
+    "scope": "Actual packaged W5H capture/reset/latest-saved, cold load, missing-cache refusal, gameplay, stop/quit/owner-death/project lifecycle."
+  },
+  "artifacts": [
+    {
+      "path": "workbench/.artifacts/w5i/native-1793207495091/receipt.json",
+      "sha256": "30ea43e603b34ac7f0d2066bce07a060267f7b92a3db077045b54ef9ad599f5b"
+    },
+    {
+      "path": "workbench/.artifacts/w5i/ordinary/evidence/receipt.json",
+      "sha256": "afd6f29c69c89447deb53edfac70b09da05636e1f6cd433ebff57d053a0ec31a"
+    },
+    {
+      "path": "workbench/.artifacts/w5i/preservation-after.json",
+      "sha256": "add0521698cb9a249b386c4b21092f85e5b96e0a733d241200fe7264254bfeed"
+    },
+    {
+      "path": "workbench/docs/evidence/w5i/assignment-sample.png",
+      "sha256": "22f629163619b0e452a90222c25d42472acdee88b72a34e306e002f8923355df"
+    },
+    {
+      "path": "workbench/docs/evidence/w5i/natural-exterior.png",
+      "sha256": "d4e19896bfea167cd9f086ca3fe021cb54a99561afc833c88b482db911d544f2"
+    },
+    {
+      "path": "workbench/docs/evidence/w5i/natural-reader.png",
+      "sha256": "259fd90e37c8894552efd15b701ddeffbc87f60108d8e7c6c1cd212680886ca8"
+    },
+    {
+      "path": "workbench/docs/evidence/w5i/natural-return.png",
+      "sha256": "3786173a10c83cd69a2b56ae11c76486be20589da8f39bf2ea40fa5c569fe709"
+    },
+    {
+      "path": "workbench/docs/evidence/w5i/natural-room.png",
+      "sha256": "d471e70e9b2dbabd82cbc82bf3300526f614af503db3e9fd7e545c2142bc74e0"
+    }
+  ],
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "04003bdaabe290dc3192987b101e0193b57c185880db5fdc8e1e0178b16ebe65"
+    },
+    "installer": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "ceaeed2f8cdef5afdbf9e95e612247a6ed44dd17ed83a41e260feb62e7ed8463"
+    },
+    "bridge": {
+      "path": "workbench/src-tauri/target/release/bridge.py",
+      "sha256": "ba12b75856eebb4ffbc419cd213d200f879e7b7f3957cebd15690a2724c61d98"
+    },
+    "runtime_files": 1944,
+    "runtime_manifest_sha256": "cc21a8c4d04aad05a8c4ade7e15c7d9be95591f9b38a69909480652e725460b4",
+    "runtime_all_files_equal": true
+  },
+  "source_hashes": {
+    "roguelike/data/generation/authored_submap_selection.json": {
+      "working_sha256": "5a25ff794d4f95795ad2d7f8d636ada72f7005bbec0ba9b155455e162939e010",
+      "git_sha256": "5a25ff794d4f95795ad2d7f8d636ada72f7005bbec0ba9b155455e162939e010"
+    },
+    "roguelike/docs/AUTHORED_SUBMAP_SELECTION.md": {
+      "working_sha256": "aed4393dab8c7011da7a6b4a9d110c499c23f1f6b58c699d11ea624c92644812",
+      "git_sha256": "aed4393dab8c7011da7a6b4a9d110c499c23f1f6b58c699d11ea624c92644812"
+    },
+    "roguelike/docs/STRUCTURE_AUTHORING.md": {
+      "working_sha256": "0bad0a2efbe0360275b30bc443fd4b22584a5fac3542333b44e82a38eca81b62",
+      "git_sha256": "cd80b69ac2be898f74973d0c94871a07418ee81e1cd407db1c6a0f45763b4a03"
+    },
+    "roguelike/engine/assignment_authoring.py": {
+      "working_sha256": "7e4e7e88773a5dde166ecea7dd680b5174919e38be8396da83166761e4151352",
+      "git_sha256": "2d35a94bcef020eb8511c33edc1c526f5b0c1a9c35ef5142eb08c7b996bf0950"
+    },
+    "roguelike/engine/content_authoring.py": {
+      "working_sha256": "9717d69d1785f616b6e51662874c37dbde08b4d840219ed2f8e15a2dd6b515ff",
+      "git_sha256": "8654da29df7ba23b5112e47f2a4a89c0ae83c805ab3d9d599ddead9dd8972326"
+    },
+    "roguelike/engine/definition_sources.py": {
+      "working_sha256": "16a47addcb620768b13d3433ee90ca11471934d53746247b8e348d57e2e32bbc",
+      "git_sha256": "9cc1e7c2a002b97b296754c6354458b1a98c619934a4c5354cac2218d4df0845"
+    },
+    "roguelike/engine/room_authoring.py": {
+      "working_sha256": "35b47c6dac6d04e310471c12711fcb750bffa833d4a958c27bf8338dca8cf53c",
+      "git_sha256": "9d162b1127594664eca7589af07f30753514d1800119bd052160c3fa111acb36"
+    },
+    "roguelike/engine/text_authoring.py": {
+      "working_sha256": "9a2b6a70cd117c54dbede5fd761160977f4800b4b4069ac811c4c09fe03575d5",
+      "git_sha256": "15a07af45b571abf5de99895d101fa4dd907395038fdbd199fa3edd8350b168d"
+    },
+    "roguelike/engine/text_contract.py": {
+      "working_sha256": "d617d185fe48165d59a01e13846dd42d34a0c9d5aeef17a1e372be6f0909865b",
+      "git_sha256": "d617d185fe48165d59a01e13846dd42d34a0c9d5aeef17a1e372be6f0909865b"
+    },
+    "roguelike/generation/authored_rooms.py": {
+      "working_sha256": "d238f74b466a7a89cadabd3cc2b20143945b40f894b09813e557506438efb93d",
+      "git_sha256": "2e23cecd09f8b804b3331e1b94516835eea245c08384a3c80d8dcd4fc2d3a820"
+    },
+    "roguelike/generation/authored_submap_selection.py": {
+      "working_sha256": "b62341c6fad64d36a084161b4a226354e7940c1eaf98e4de67221a4727fc0360",
+      "git_sha256": "b62341c6fad64d36a084161b4a226354e7940c1eaf98e4de67221a4727fc0360"
+    },
+    "roguelike/generation/world_gen.py": {
+      "working_sha256": "b8706cac694d4c797351e17290b9e5eb3981869d9aa6e62c4f51fa82d30ad251",
+      "git_sha256": "336036ec58ef5b9d03d8a49db3c6268dc6e48ca10f58f14838fb0aa6fce50ebc"
+    },
+    "tools/critical_fix_regressions/tests/test_authored_assignment.py": {
+      "working_sha256": "bf49815c9c70f57eae13b22166097573123175849e0d971dce9ada3fcec8d2b2",
+      "git_sha256": "6011f7554d35abb3a3dd18abfc78ce6970ce599a2814f6af03971814164bcbb2"
+    },
+    "workbench/README.md": {
+      "working_sha256": "4e55cb33ebea82118c5cd6993d6031ca176b34ecbbc932748632f94ea0ac23b3",
+      "git_sha256": "0b709e81fe7584d20a31a1aef20b53d55cddba61564d0518b83b5a3e662f65c1"
+    },
+    "workbench/docs/CONTENT_CONTRACTS.md": {
+      "working_sha256": "94e532b3ad11312ebbe1c92f704b514bdf580ccf26610f5bd0925ccf73e37f61",
+      "git_sha256": "94e532b3ad11312ebbe1c92f704b514bdf580ccf26610f5bd0925ccf73e37f61"
+    },
+    "workbench/scripts/assignment-runtime-probe.py": {
+      "working_sha256": "ce7a107cfa22354f8e6bc66350254304f400ac254a6b629b53e22f4463c96d99",
+      "git_sha256": "ce7a107cfa22354f8e6bc66350254304f400ac254a6b629b53e22f4463c96d99"
+    },
+    "workbench/scripts/run-assignments.mjs": {
+      "working_sha256": "c0a96360dbc04ec988212564ce7b8072e667772621f0e862d6498864c38c58ed",
+      "git_sha256": "52f6242acb1586033f3bbf6526c772c725b974851cb7ca71770c980234d3e432"
+    },
+    "workbench/scripts/w5i-preservation.py": {
+      "working_sha256": "3adb21e6e79f90dffabde639d366566fd72c99f2ef51ec249bc754caa06e29a4",
+      "git_sha256": "3adb21e6e79f90dffabde639d366566fd72c99f2ef51ec249bc754caa06e29a4"
+    },
+    "workbench/scripts/w5i-receipt.py": {
+      "working_sha256": "b05edae7945ca91d26e6b9f9278140db3c69eed523238f4eb57183cd32d8368e",
+      "git_sha256": "b05edae7945ca91d26e6b9f9278140db3c69eed523238f4eb57183cd32d8368e"
+    },
+    "workbench/src-tauri/src/authoring.rs": {
+      "working_sha256": "b705506e6b2d77bd760f873ed0e2bdd5237a9193aa7f86d63a92f67a6799b61b",
+      "git_sha256": "de63d43f5206db92cf642700576b96ba482956bf35648d93acd1c0ecdca7d569"
+    },
+    "workbench/src-tauri/src/recovery.rs": {
+      "working_sha256": "412bfbb632d365ba4d24ed5124a8a5153088a7ea91d58d85739fb60f35091d39",
+      "git_sha256": "164ff43a2908ad5b0e23c1b2673d0fdd5957d201331024d0ca5b46c71080ac67"
+    },
+    "workbench/src/App.tsx": {
+      "working_sha256": "0ff014eabaefc654c6f72f91ca1dc2b7392e3552d724ca95095c86a202b71078",
+      "git_sha256": "3ba132e3ee3e5051cf5fe4819bc12e286d673d51c98f61a4c844c0bc1841cb54"
+    },
+    "workbench/src/AssignmentEditor.tsx": {
+      "working_sha256": "535627621529ab2a113dae82f5c0a150a86c9af07fee5a8f8aedb7bfe48162cb",
+      "git_sha256": "81a3259bd395a61f8b6352cb9c87650beb454f0fb1b769e3e2ca64ae6743a6aa"
+    },
+    "workbench/src/ContentEditor.tsx": {
+      "working_sha256": "db723053e94aa339340c6718c18fed625c2a41680da4f178ded77f33fabcd783",
+      "git_sha256": "f4614227b208223fd82a965e7e184462d429daa4f371415b4cf666d52800b9bb"
+    },
+    "workbench/src/ContractControls.tsx": {
+      "working_sha256": "89f70a0cf3b308e94e3d65cd9da70c40ca85f3767f453c208b5da6ee59b37237",
+      "git_sha256": "89f70a0cf3b308e94e3d65cd9da70c40ca85f3767f453c208b5da6ee59b37237"
+    },
+    "workbench/src/assignment.test.tsx": {
+      "working_sha256": "1177ad7836f8a16d799ffe705dc53666305a25972cb4882aeb6d5f2985eef96d",
+      "git_sha256": "1177ad7836f8a16d799ffe705dc53666305a25972cb4882aeb6d5f2985eef96d"
+    },
+    "workbench/src/content.ts": {
+      "working_sha256": "4fd8348971cc9b36205d1f6360f1e6535106d0030109682781b14db54a5909fd",
+      "git_sha256": "bce24ffacef8ecfdf560b801d5db6bf916d148815b22fb928e19b851e294a6a7"
+    },
+    "workbench/src/familyData.ts": {
+      "working_sha256": "74bf03185ff7df2950aadf02889e2c7398df8417d924ff36f93b6fd34f46af0d",
+      "git_sha256": "c0f401f544b2dae54ce8e306bf6f7586e61b1dde86ba46c66d3a869991d70b83"
+    },
+    "workbench/worker/test_assignment.py": {
+      "working_sha256": "0351ecd449eb3c25bd228b390e12c461e5594bc67a541a2c45f45b7fa93823f4",
+      "git_sha256": "0351ecd449eb3c25bd228b390e12c461e5594bc67a541a2c45f45b7fa93823f4"
+    }
+  },
+  "final_natural_python_inputs": {
+    "files": 139,
+    "manifest_sha256": "9c36cb85919a1d10c82be9ab892e93715b8c9323f253379b026df9cc65c1008e",
+    "differences": []
+  },
+  "preservation": {
+    "unchanged": 8189,
+    "scoped_changes": [
+      "roguelike/data/generation/authored_submap_selection.json",
+      "roguelike/docs/AUTHORED_SUBMAP_SELECTION.md",
+      "roguelike/docs/STRUCTURE_AUTHORING.md",
+      "roguelike/engine/assignment_authoring.py",
+      "roguelike/engine/content_authoring.py",
+      "roguelike/engine/definition_sources.py",
+      "roguelike/engine/room_authoring.py",
+      "roguelike/engine/text_authoring.py",
+      "roguelike/engine/text_contract.py",
+      "roguelike/generation/authored_rooms.py",
+      "roguelike/generation/authored_submap_selection.py",
+      "roguelike/generation/world_gen.py",
+      "tools/critical_fix_regressions/tests/test_authored_assignment.py",
+      "workbench/README.md",
+      "workbench/docs/CONTENT_CONTRACTS.md",
+      "workbench/docs/W5I_DELIVERY.md",
+      "workbench/docs/evidence/w5i/assignment-sample.png",
+      "workbench/docs/evidence/w5i/natural-exterior.png",
+      "workbench/docs/evidence/w5i/natural-reader.png",
+      "workbench/docs/evidence/w5i/natural-return.png",
+      "workbench/docs/evidence/w5i/natural-room.png",
+      "workbench/docs/w5i-verification.json",
+      "workbench/scripts/assignment-runtime-probe.py",
+      "workbench/scripts/run-assignments.mjs",
+      "workbench/scripts/w5i-preservation.py",
+      "workbench/scripts/w5i-receipt.py",
+      "workbench/src-tauri/src/authoring.rs",
+      "workbench/src-tauri/src/recovery.rs",
+      "workbench/src/App.tsx",
+      "workbench/src/AssignmentEditor.tsx",
+      "workbench/src/ContentEditor.tsx",
+      "workbench/src/ContractControls.tsx",
+      "workbench/src/assignment.test.tsx",
+      "workbench/src/content.ts",
+      "workbench/src/familyData.ts",
+      "workbench/worker/test_assignment.py"
+    ],
+    "failures": []
+  },
+  "fault_injections": [
+    "Append whitespace to disposable saved room dependency, then restore exact bytes.",
+    "Competing exact profile bytes after review; direct host apply is refused, then original bytes restored.",
+    "Remove, then corrupt unused disposable profile for separate cold-load checks; restore accepted bytes."
+  ],
+  "prior_attempts": [
+    "Early shared payload validation incorrectly hardened protected starting-lab inspection; scoped to eligible originals and rerun.",
+    "Early restoration fixture used 1x1 dimensions; corrected. Wrong regression module names/PYTHONPATH and embedded child-import setup were corrected with the configured pinned development environment.",
+    "First natural fixture enabled debug bindings, so F5 teleported/F9 dumped state; corrected per-engine debug=False and rerun.",
+    "Windows diagnostic command-file rename briefly hit a reader lock; fixture retries only transient sharing errors. Normal quit does not wait for another frame.",
+    "Packaging overlapped a test launch, causing an NSIS file-sharing failure; final package completes before all final native observations.",
+    "Initial freshness harness reused a cancelled/stale preview and omitted confirmed on conflict IPC; final evidence obtains a fresh preview before the dependency edit and requires semantic refusal from confirmed apply.",
+    "Initial natural staging was within the exterior shell; final staging excludes the complete production protected entrance footprint.",
+    "Worker run interleaved a numeric source correction and had one missing-result test error; final stable full worker suite runs after production code is frozen."
+  ],
+  "limits": [
+    "Local Windows observations and headless/app-local production rendering; no independent rerun is claimed.",
+    "Natural entry stages the normal player outside the real entrance to avoid a world walk. It proves local access/use/return, not unaided discovery, pacing, balance or whole-game fun.",
+    "One fixed profile and one ordinary type at a time. No whole-world play launcher, batch generation, unsaved overlays, campaign migration or new population layer.",
+    "Detailed disposable manifests/saves/logs remain ignored locally; five concise rendered evidence frames are committed. Wiki/reference pack and owner plan are unchanged."
+  ]
+}
