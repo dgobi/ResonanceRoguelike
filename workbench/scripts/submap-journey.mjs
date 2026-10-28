@@ -130,6 +130,9 @@ export async function submapJourney(page,root,output,receipt,context) {
   for(const asset of ["roguelike/saves/x.json","roguelike/data/layouts/../x.json","roguelike/data/layouts/x.json:ads","roguelike/docs/examples/other.json"])
     assert((await ipc("open_document",{asset})).error);
   const layouts=resolve(root,"roguelike/data/layouts"),held=resolve(root,"roguelike/data/layouts-held");assert(layouts.startsWith(resolve(root)+"\\")&&held.startsWith(resolve(root)+"\\"));
+  // Registered repeated opens reuse an existing in-memory owner. Exercise fresh
+  // filesystem admission here, rather than mistaking that reuse for a disk read.
+  const closed=await ipc("close_document",{token:doc.document_token});assert(!closed?.error);
   await rename(layouts,held);await symlink(held,layouts,"junction");
   try{assert.equal((await ipc("open_document",{asset:destination})).error?.code,"PATH_ESCAPE");}finally{await unlink(layouts);await rename(held,layouts);}
   assert(!(await readdir(layouts)).some(p=>p.startsWith('.w1-')));

@@ -91,9 +91,12 @@ export async function workspaceJourney(page,root,output,receipt) {
   await b("Preview exact text").click();await idle();await b("End").click();await b("Preview exact text").click();await idle();
   const frame=JSON.parse(await visible('[data-testid="text-editor"]').getByTestId("reader-preview-receipt").textContent());assert(frame.max_scroll>0);assert.equal(frame.scroll,frame.max_scroll);
   const scrollState=await page.locator(".preview-pane").evaluate(el=>{el.scrollTop=300;return el.scrollTop;});
+  // Let the app receive the browser's scroll event before switching the view.
+  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
   await tab(paths[4]);const invalid='{\n "id": "exact parked invalid", "pages": [';
   await editor().locator("textarea.source-editor").fill(invalid);await editIdle();const invalidBytes=await source();
   await tab(paths[5]);assert.equal(await page.getByLabel("Preview page").filter({visible:true}).inputValue(),"1");
+  await page.waitForFunction(expected=>document.querySelector('.preview-pane').scrollTop===expected,scrollState);
   assert.equal(await page.locator(".preview-pane").evaluate(el=>el.scrollTop),scrollState);
   receipt.view_state={page:1,reader_scroll:frame.scroll,reader_max_scroll:frame.max_scroll,pane_scroll:scrollState,preserved:true};
   assert.match(await page.getByTestId("reader-preview-state").filter({visible:true}).innerText(),/^Current/);
