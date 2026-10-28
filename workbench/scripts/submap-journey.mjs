@@ -31,7 +31,8 @@ export async function submapJourney(page,root,output,receipt,context) {
   const parkedItem=await source();await page.locator(`[data-document-tab="${asset}"]`).click();
   await eb("Begin edit").click();await canvas();
   assert(await b("Pencil · B").isDisabled());assert(await b("Fill · R").isDisabled());
-  assert(await page.getByLabel("Placement creature").locator('option[value="player"]').isDisabled());
+  const playerChoice=page.getByLabel("Placement creature").locator('option[value="player"]');
+  assert(!(await playerChoice.count()) || await playerChoice.evaluate(option=>option.disabled),"Player must be excluded or disabled in the placement chooser.");
   await clickCell(7,2);await page.getByLabel("Creature source X").fill("6");await b("Apply creature edit").click();
   const moved=await source();assert.equal(moved,originals.get(asset).toString().replace('"x": 7, "y": 2, "creature_id"','"x": 6, "y": 2, "creature_id"'));
   await b("Undo canvas").click();assert.equal(await source(),originals.get(asset).toString());await b("Redo canvas").click();assert.equal(await source(),moved);

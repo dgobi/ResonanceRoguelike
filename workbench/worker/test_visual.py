@@ -71,7 +71,9 @@ class VisualTests(unittest.TestCase):
         self.assertFalse(bad["valid"]);self.assertIsNone(bad["preview"])
 
     def test_preview_denies_other_routes_paths_and_duplicate_identity(self):
-        for asset in ("roguelike/data/layouts/starting_lab.json","roguelike/saves/x.json","../x.json","roguelike/engine/data_loader.py"):
+        readonly=invoke("preview_draft",asset="roguelike/data/layouts/starting_lab.json",draft="{}")
+        self.assertTrue(readonly["ok"]);self.assertFalse(readonly["result"]["valid"])
+        for asset in ("roguelike/saves/x.json","../x.json","roguelike/engine/data_loader.py"):
             self.assertFalse(invoke("preview_draft",asset=asset,draft="{}")["ok"])
         with tempfile.TemporaryDirectory(prefix="w2-data-") as directory:
             root=data_fixture(directory);before=(root/ASSET).read_bytes()

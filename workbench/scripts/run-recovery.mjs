@@ -21,7 +21,7 @@ const ipc=(command,args={})=>page.evaluate(async({command,args})=>{try{return aw
 const idle=()=>page.waitForFunction(()=>!document.querySelector(".status-dot.working"),null,{timeout:60000});
 const editIdle=()=>page.waitForFunction(()=>![...document.querySelectorAll('[data-testid="authoring"]')].some(e=>e.dataset.editPending==="true"));
 const source=async()=>{await eb("Source").click();return editor().locator("textarea.source-editor").inputValue();};
-const open=async path=>{await idle();await page.getByLabel("Search ID, name or path").fill(path);await page.locator(`[data-asset="${path}"]`).click();await idle();};
+const open=async path=>{await idle();await page.getByLabel("Search ID, name or path").fill(path);await page.locator(`[data-asset="${path}"]`).click();await page.waitForFunction(path=>document.querySelector('[data-testid="authoring"]:not([hidden]) .filepath')?.textContent===path || [...document.querySelectorAll('[data-testid="authoring"]')].some(e=>e.offsetParent&&e.querySelector('.filepath')?.textContent===path),path);await idle();};
 const tab=path=>page.locator(`[data-document-tab="${path}"]`).click();
 const list=async()=>{const r=await ipc("list_recovery");assert(!r.error,JSON.stringify(r));return r.records;};
 const inspect=async key=>{const r=await ipc("inspect_recovery",{key});assert(!r.error,JSON.stringify(r));return r;};
@@ -46,7 +46,15 @@ async function stop(abrupt=false){
   await ended;await browser?.close().catch(()=>{});child=null;browser=null;
 }
 async function choose(row){await b("Recover drafts").click();await page.locator(`[data-recovery-key="${row.key}"]`).click();await page.getByTestId("recovery-detail").waitFor();}
-async function recover(row){await choose(row);await b("Recover selected draft").click();await page.getByRole("dialog",{name:"Recover drafts",exact:true}).waitFor({state:"hidden"});await idle();}
+async function recover(row){
+  for(let attempt=0;attempt<5;attempt++){
+    await idle();await choose(row);await b("Recover selected draft").click();
+    await page.waitForFunction(()=>{const modal=document.querySelector('[aria-label="Recover drafts"]');return !modal||!modal.querySelector('button.primary')?.disabled&&!document.querySelector('.status-dot.working');});
+    if(!await page.getByRole("dialog",{name:"Recover drafts",exact:true}).count()){await idle();return;}
+    assert.match(await page.locator('footer').innerText(),/BUSY/);await b("Keep for later").click();
+  }
+  throw Error("Recovery remained busy after bounded retries.");
+}
 async function keepCloseProject(){
   await idle();await b("Close project").click();await page.getByRole("dialog",{name:"Unsaved draft"}).waitFor();await b("Keep for Recovery and Close").click();await page.getByRole("dialog",{name:"Unsaved draft"}).waitFor({state:"hidden"});await idle();
 }
