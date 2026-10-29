@@ -1,0 +1,62 @@
+{
+  "scope": "Fresh saved-source inspections after the UI revision. Direct supported room and ordinary-building container occurrences only; no whole-game reachability claim.",
+  "pools": {
+    "w5o_provisions": {
+      "path": "roguelike/data/loot_pools/w5o_provisions.json",
+      "sha256": "abb4e9ba5f1f1be4feddac772864f5dbf3e28b6157da10951f8190e935f78a11",
+      "source": {
+        "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5o\\native-1793304665369\\project",
+        "commit": null,
+        "branch": null,
+        "game_dirty": null,
+        "game_source_sha256": "80a2efe56172f63e623331aed38dc7836305c964c48cb81dd135a0976a4af23e",
+        "catalog_sha256": "d6385781176d82700d11650aa73db839a771a3373010b7b481452ca664aad559",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5"
+      },
+      "references": [
+        {
+          "id": "w5o_loot_room",
+          "path": "roguelike/data/layouts/w5o_loot_room.json",
+          "route": "authored_submap",
+          "field": "special_tiles[0].loot_pools[0]",
+          "x": 5,
+          "y": 6,
+          "decor_id": "crate"
+        }
+      ]
+    },
+    "alchemist_reagents": {
+      "path": "roguelike/data/loot_pools/alchemist_reagents.json",
+      "sha256": "8532ce611fef8422fef962a69895bf2f8076cbe782b055a4ac6296999b80d58f",
+      "source": {
+        "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5o\\native-1793304665369\\project",
+        "commit": null,
+        "branch": null,
+        "game_dirty": null,
+        "game_source_sha256": "80a2efe56172f63e623331aed38dc7836305c964c48cb81dd135a0976a4af23e",
+        "catalog_sha256": "d6385781176d82700d11650aa73db839a771a3373010b7b481452ca664aad559",
+        "resources_sha256": "43bc5d24db19713b877409f52f43076124c2cb97370324bc01717b42a5cf17c5"
+      },
+      "references": [
+        {
+          "id": "apothecary_a",
+          "path": "roguelike/data/buildings/commercial/apothecary_a.json",
+          "route": "ordinary_building",
+          "field": "special_tiles[0].loot_pools[0]",
+          "x": 1,
+          "y": 1,
+          "decor_id": "medicine_chest"
+        },
+        {
+          "id": "apothecary_b",
+          "path": "roguelike/data/buildings/commercial/apothecary_b.json",
+          "route": "ordinary_building",
+          "field": "special_tiles[0].loot_pools[0]",
+          "x": 1,
+          "y": 1,
+          "decor_id": "medicine_chest"
+        }
+      ]
+    }
+  }
+}

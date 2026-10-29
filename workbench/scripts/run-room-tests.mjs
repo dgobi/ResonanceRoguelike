@@ -27,13 +27,14 @@ async function phase(label){console.log(label);receipt.checks.push(label);await 
 async function open(path){await idle();await page.getByLabel('Category / route',{exact:true}).selectOption('');await fill('Search ID, name or path',path);await page.locator(`[data-asset="${path}"]`).click();await page.waitForFunction(path=>[...document.querySelectorAll('[data-testid="authoring"]')].some(e=>e.offsetParent&&e.querySelector('.filepath')?.textContent===path),path);await idle();}
 async function source(){await eb('Source').click();return page.locator('[data-testid="authoring"]:visible textarea.source-editor');}
 async function validate(){await editIdle();await idle();await eb('Validate draft').click();await idle();return JSON.parse(await page.locator('[data-testid="authoring"]:visible [data-testid="draft-receipt"]').textContent());}
-async function apply(variant=false){await eb(variant?'Apply variant':'Review & apply').click();await b('Confirm apply one file').click();await idle();await page.getByText(/Saved and byte-checked reopen:/).waitFor({timeout:60000});}
+async function apply(variant=false){for(let attempt=0;attempt<5;attempt++){if(attempt)assert((await validate()).valid);await eb(variant?'Apply variant':'Review & apply').click();await b('Confirm apply one file').click();await idle();const footer=await page.locator('footer').innerText();if(footer.includes('Saved and byte-checked reopen:'))return;assert.match(footer,/BUSY/);}throw Error('Publication stayed busy');}
 async function status(){const r=await ipc('room_test_action',{action:'status'});assert(!r.error,JSON.stringify(r));return r;}
 async function until(fn,timeout=60000){const start=Date.now();for(;;){const v=await fn();if(v)return v;assert(Date.now()-start<timeout,'Timed out');await new Promise(r=>setTimeout(r,100));}}
 async function running(previous){const began=Date.now();return until(async()=>{const s=await status();if(!s.preparing&&Date.now()-began>1000){const alert=page.getByTestId('room-test-panel').getByRole('alert');if(await alert.count())assert.fail(await alert.innerText());assert(!s.last_action_error&&!s.error,JSON.stringify(s));assert.notEqual(s.status,'failed',JSON.stringify(s));}return s.status==='running'&&!s.preparing&&s.session_id!==previous?s:null;},100000);}
 async function observe(){const o=JSON.parse(await readFile(resolve(session.state_root,'observation.json'),'utf8'));
- // W5J transient process identities are evidence for live selection, never saved state.
- for(const item of [...o.inventory,...o.floor.flatMap(r=>r.items)])delete item.instance;
+ // Transient process identities prove live selection, never saved state. W5O
+ // also exposes container IDs; compare their serialized fields across restore.
+ for(const item of [...o.inventory,...o.floor.flatMap(r=>r.items),...o.containers.flatMap(r=>r.items)])delete item.instance;
  return o;}
 let eventId=0;
 async function publishEvent(command){

@@ -1,0 +1,587 @@
+{
+  "contract": "contextual-loot-1",
+  "production_route": "contextual_loot_pool",
+  "total": 17,
+  "editable": 17,
+  "rows": [
+    {
+      "path": "roguelike/data/loot_pools/alchemist_reagents.json",
+      "pointer": "",
+      "id": "alchemist_reagents",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/alchemist_reagents.json"
+      ],
+      "working_sha256": "8532ce611fef8422fef962a69895bf2f8076cbe782b055a4ac6296999b80d58f",
+      "rows": 6,
+      "count_representation": [
+        2,
+        4
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/alchemist_shop.json",
+      "pointer": "",
+      "id": "alchemist_shop",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/alchemist_shop.json"
+      ],
+      "working_sha256": "69b05bcd0c009955744ae451d25fc16fdd266e093461c44c08e6c733d2864960",
+      "rows": 8,
+      "count_representation": [
+        3,
+        5
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/apothecary_b_treatment.json",
+      "pointer": "",
+      "id": "apothecary_b_treatment",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/apothecary_b_treatment.json"
+      ],
+      "working_sha256": "07a478a03895c7fba3df529fc5cf6690e159c22e00f70419a7975a0d9f32ed59",
+      "rows": 1,
+      "count_representation": [
+        1,
+        1
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/commoner_bedroom.json",
+      "pointer": "",
+      "id": "commoner_bedroom",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/commoner_bedroom.json"
+      ],
+      "working_sha256": "369fa52f5b7ad2a0cad2035246a701f9f3567606bbc1586d28a0f258abb643b8",
+      "rows": 5,
+      "count_representation": [
+        1,
+        2
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": [
+        {
+          "severity": "warning",
+          "code": "INACTIVE_POOL_FIELD",
+          "path": "roguelike/data/loot_pools/commoner_bedroom.json",
+          "asset": "commoner_bedroom",
+          "field": "pool -> loot_pools/commoner_bedroom.items[4].text_pool",
+          "message": "Retained; loot roller does not consume this field.",
+          "correction": "Use a supported item record for explicit text binding."
+        }
+      ]
+    },
+    {
+      "path": "roguelike/data/loot_pools/commoner_kitchen.json",
+      "pointer": "",
+      "id": "commoner_kitchen",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/commoner_kitchen.json"
+      ],
+      "working_sha256": "ef9b711086802231c9706e7fb3aabe4ed818d98d1078c75948c6815ed9a315b8",
+      "rows": 7,
+      "count_representation": [
+        2,
+        4
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/noble_generic.json",
+      "pointer": "",
+      "id": "noble_generic",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/noble_generic.json"
+      ],
+      "working_sha256": "28ce6fd3e01f2a628a02034e41bee585ffe7d7b6d1afbdd6b356474925c9e4be",
+      "rows": 6,
+      "count_representation": [
+        2,
+        3
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/ruins_scatter.json",
+      "pointer": "",
+      "id": "ruins_scatter",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/ruins_scatter.json"
+      ],
+      "working_sha256": "529017c2b174b9174b94414d0f7f43c522b0a2e857df007e5d12c6e987f78b45",
+      "rows": 6,
+      "count_representation": [
+        1,
+        2
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/shrine_equipment.json",
+      "pointer": "",
+      "id": "shrine_equipment",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/shrine_equipment.json"
+      ],
+      "working_sha256": "9697407badc3b7900ad8d425366fbb9bd12bef492dcf5784ab3e7c78277b61b4",
+      "rows": 3,
+      "count_representation": [
+        1,
+        2
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/shrine_offering.json",
+      "pointer": "",
+      "id": "shrine_offering",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/shrine_offering.json"
+      ],
+      "working_sha256": "3606424f4f274729508a148b8ad9bc053ed125b7ff49a13426ec4e9679bcf534",
+      "rows": 4,
+      "count_representation": [
+        1,
+        3
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/storage_general.json",
+      "pointer": "",
+      "id": "storage_general",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/storage_general.json"
+      ],
+      "working_sha256": "9685c6e8de545735750cc82c1695c1a37eead7b9c4fe5647bb31bcabb51816d1",
+      "rows": 8,
+      "count_representation": [
+        3,
+        5
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/storage_tools.json",
+      "pointer": "",
+      "id": "storage_tools",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/storage_tools.json"
+      ],
+      "working_sha256": "b6229dfe0e734067b95c7e6dfecff9f3c23912ef91905d8a0cef9e5b629cc11c",
+      "rows": 5,
+      "count_representation": [
+        1,
+        3
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/tool_shed_b_provisions.json",
+      "pointer": "",
+      "id": "tool_shed_b_provisions",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/tool_shed_b_provisions.json"
+      ],
+      "working_sha256": "818b4ef65002da60834db7c96040b57eb9aa18697bbf1038135d2e423864e59c",
+      "rows": 2,
+      "count_representation": [
+        2,
+        2
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/tool_shed_b_satchel.json",
+      "pointer": "",
+      "id": "tool_shed_b_satchel",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/tool_shed_b_satchel.json"
+      ],
+      "working_sha256": "362725d087c70a51ee984019f633360d3c9861131509350aa6dd256be2328e01",
+      "rows": 1,
+      "count_representation": [
+        1,
+        1
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/tool_shed_b_tools.json",
+      "pointer": "",
+      "id": "tool_shed_b_tools",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/tool_shed_b_tools.json"
+      ],
+      "working_sha256": "7c05f8536069ec78f5144910c08959ba811158e8cfbea86df105ada3928fad1a",
+      "rows": 3,
+      "count_representation": [
+        2,
+        3
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/wilderness_cache.json",
+      "pointer": "",
+      "id": "wilderness_cache",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/wilderness_cache.json"
+      ],
+      "working_sha256": "63ce6e4ba9d35fab66e02dc9b30943bc558c7612d7d160f7c0121fabd3765194",
+      "rows": 6,
+      "count_representation": [
+        2,
+        3
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/workshop_b_fuel.json",
+      "pointer": "",
+      "id": "workshop_b_fuel",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/workshop_b_fuel.json"
+      ],
+      "working_sha256": "22f4e9467b927c4d2fe34aad574b0e1cdf4b5538fb837cdb8ea1f035d3eb038b",
+      "rows": 1,
+      "count_representation": [
+        1,
+        1
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    },
+    {
+      "path": "roguelike/data/loot_pools/workshop_b_musk.json",
+      "pointer": "",
+      "id": "workshop_b_musk",
+      "name": "",
+      "category": "",
+      "result_item": null,
+      "execution_class": null,
+      "route": "contextual_loot_pool",
+      "family_id": "pool",
+      "editable": true,
+      "provenance": "Selected checkout / registered content source",
+      "validation": "not yet checked",
+      "source_paths": [
+        "roguelike/data/loot_pools/workshop_b_musk.json"
+      ],
+      "working_sha256": "e0527c1aad32729b5e8c6df3e5150609da04a456cafed887327825cc6d11eb3d",
+      "rows": 1,
+      "count_representation": [
+        1,
+        1
+      ],
+      "capability": {
+        "editable": true,
+        "reason": "",
+        "operations": [
+          "edit",
+          "variant"
+        ],
+        "shape": "native single pool object"
+      },
+      "diagnostics": []
+    }
+  ],
+  "seeded_compatibility": {
+    "pools": 17,
+    "seeds_per_pool": 100,
+    "samples": 1700,
+    "identical": true,
+    "before_sha256": "6b6cbe33a7d01eb4d62f1e0125ffa625a1ba91612d90b3c0aa6b5c0911c8f22b",
+    "scope": "Actual shipped definitions/factory and random.Random(seed), requested-count and ordered item-ID outputs. Arithmetic-boundary controls are separate focused regressions."
+  }
+}

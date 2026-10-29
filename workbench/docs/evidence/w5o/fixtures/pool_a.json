@@ -1,0 +1,35 @@
+{
+  "id": "w5o_provisions",
+  "description": "Guaranteed two useful meals and a distinguishable residual log.",
+  "roll_count": [
+    3
+  ],
+  "items": [
+    {
+      "item_id": "w5o_biscuit",
+      "row_metadata": {
+        "nested": {
+          "keep": [
+            1,
+            null
+          ]
+        }
+      }
+    },
+    {
+      "item_id": "w5o_biscuit",
+      "weight": 7
+    },
+    {
+      "item_id": "wood_bundle",
+      "weight": 1
+    }
+  ],
+  "owner_metadata": {
+    "nested": [
+      null,
+      "λ"
+    ],
+    "escaped": "\u0072etained"
+  }
+}

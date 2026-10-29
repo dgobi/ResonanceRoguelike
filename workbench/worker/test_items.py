@@ -93,7 +93,7 @@ class ItemTests(unittest.TestCase):
             pool = json.loads(before[POOL]); pool["id"] = "workshop_b_fuel_w3b_test"; pool["items"][0]["item_id"] = raw["id"]
             pool_dest = POOL.replace("workshop_b_fuel", pool["id"])
             text = json.dumps(pool)
-            self.assertTrue(invoke("preview_draft", root=root, asset=pool_dest, draft=text)["result"]["valid"])
+            self.assertTrue(invoke("preview_draft", root=root, asset=pool_dest, source_asset=POOL, draft=text)["result"]["valid"])
             (root/pool_dest).write_text(text, encoding="utf-8")
             reopened = invoke("inspect", root=root, asset=dest)["result"]
             c = reopened["family"]["context"]["records"][0]

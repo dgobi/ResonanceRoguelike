@@ -1,0 +1,36 @@
+Index: roguelike/data/loot_pools/w5o_provisions.json
+===================================================================
+--- roguelike/data/loot_pools/w5o_provisions.json	opened bytes
++++ roguelike/data/loot_pools/w5o_provisions.json	draft bytes
+@@ -1,27 +1,10 @@
+ {
+   "id": "w5o_provisions",
+-  "description": "Guaranteed two useful meals and a distinguishable residual log.",
+-  "roll_count": [
+-    3
+-  ],
++  "description": "Revised fresh salvage: one bone.",
++  "roll_count": [1],
+   "items": [
+     {
+-      "item_id": "w5o_biscuit",
+-      "row_metadata": {
+-        "nested": {
+-          "keep": [
+-            1,
+-            null
+-          ]
+-        }
+-      }
+-    },
+-    {
+-      "item_id": "w5o_biscuit",
+-      "weight": 7
+-    },
+-    {
+-      "item_id": "wood_bundle",
++      "item_id": "animal_bone",
+       "weight": 1
+     }
+   ],
+

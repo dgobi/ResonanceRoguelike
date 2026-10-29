@@ -32,7 +32,9 @@ export async function itemJourney(page, root, output, receipt) {
   const shot=async name=>{const text=await page.locator("body").innerText();for(const s of ["A place to understand the world","Your world, under the lens"]) assert(!text.includes(s));await page.screenshot({path:resolve(output,name+".png")});};
   for(const path of ["roguelike/data/items/tools/tallow_torch.json","roguelike/data/items/weapons/binding_knife.json","roguelike/data/items/consumables/resonant_tincture.json"]) {
     const before=await readFile(resolve(root,path)); await open(path);
-    assert.equal(await eb("Begin edit").isDisabled(),true);
+    // W5M admitted ordinary weapon common fields while preserving retained
+    // essence/movesets. Light and effect-bearing tincture stay reference-only.
+    assert.equal(await eb("Begin edit").isDisabled(),!path.includes("binding_knife"));
     assert.equal((await source()).replace(/\r\n/g,"\n"),before.toString().replace(/\r\n/g,"\n"));
     await b("Use binding").click(); assert((await page.getByTestId("item-editor").filter({visible:true}).innerText()).includes("Handler found"));
     if(path.includes("tincture")) assert((await page.getByTestId("item-editor").filter({visible:true}).innerText()).includes("do not consume"));
@@ -73,7 +75,7 @@ export async function itemJourney(page, root, output, receipt) {
   assert.equal(tiered,changed.replace('"tier": 1','"tier": 2'));
   await shot("item-properties");
   await b(/^Return to pool /).click(); assert.equal(await source(),parkedPool);
-  await b("Return to structure").click(); assert.equal(await source(),parkedBuilding);
+  await b(/^Return to container /).click(); assert.equal(await source(),parkedBuilding);
   await page.locator('[data-document-tab$="/wood_bundle.json"]').click(); assert.equal(await source(),tiered);
   await editor().locator("textarea.source-editor").fill('{"id":');
   assert.equal(await page.getByLabel("Item weight (kg)").isDisabled(),true);
@@ -102,7 +104,7 @@ export async function itemJourney(page, root, output, receipt) {
   assert.equal(factory.instance.weight,1.75); assert.equal(factory.item_id,itemId);
   receipt.item_chain={source:building,container_index:3,original_pool:pool,item:itemTarget,pool:poolTarget,factory};
   await shot("reopened-item-pool");
-  await b(/^Return to pool /).click(); await b("Return to structure").click(); assert.equal(await source(),parkedBuilding);
+  await b(/^Return to pool /).click(); await b(/^Return to container /).click(); assert.equal(await source(),parkedBuilding);
   await page.getByLabel("Active layer").selectOption("specials"); await page.getByLabel("Placed record",{exact:true}).selectOption("3");
   await page.getByLabel("Loot pool 2",{exact:true}).selectOption(poolId); await b("Apply container edit").click();
   await b("Preview draft").click(); await idle();
@@ -115,7 +117,7 @@ export async function itemJourney(page, root, output, receipt) {
   await writeFile(resolve(output,"item-variant.json"),savedItem); await writeFile(resolve(output,"pool-variant.json"),savedPool);
   receipt.variants=[itemTarget,poolTarget].map((path,i)=>({path,sha256:createHash("sha256").update(i?savedPool:savedItem).digest("hex")}));
 
-  const ipc=(command,args)=>page.evaluate(async({command,args})=>{try{return await window.__TAURI_INTERNALS__.invoke(command,args);}catch(error){return {error};}},{command,args});
+  const ipc=async(command,args)=>{for(let attempt=0;attempt<20;attempt++){const result=await page.evaluate(async({command,args})=>{try{return await window.__TAURI_INTERNALS__.invoke(command,args);}catch(error){return {error};}},{command,args});if(result.error?.code!=="BUSY")return result;await page.waitForTimeout(100);}throw Error(`Host remained BUSY: ${command}`);};
   const opened=await ipc("open_document",{asset:itemTarget}), doc=opened.result;
   let checked=await ipc("validate_document",{token:doc.document_token,draft:doc.raw+" ",variantId:null}); assert(checked.result.valid);
   await writeFile(resolve(root,itemTarget),doc.raw+"\n");

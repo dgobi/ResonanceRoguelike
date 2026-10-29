@@ -1,0 +1,127 @@
+{
+  "native_attempts": [
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5o/native-1793302869711/receipt.json",
+        "sha256": "832a3f8499e1f71fb4a74918d54ade692065b1ba5f3c9ccd90605e70f674a31e"
+      },
+      "package_sha256": "ede0b974faf7f8d2d82959ae6a57fe43c04f7628fc5a083c5050916d9e886821",
+      "category": "implementation: unfinished pool recovery target was over-constrained",
+      "failure_excerpt": "Error: Variant intent was not acknowledged\n    at newVariant (file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-loot.mjs:73:365)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-loot.mjs:115:76",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5o/native-1793303027852/receipt.json",
+        "sha256": "1fe615720fedbf7bd80bdb592d20b8068e4276ad04254934a203463fccece854"
+      },
+      "package_sha256": "760cc1f9fbcfaf457fd79800210d23aef0f44a0f1f7b23247a67c166594045fe",
+      "category": "implementation: following receipt overlapped lower pool controls",
+      "failure_excerpt": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add entry', exact: true }).filter({ visible: true })\u001b[22m\n\u001b[2m    - locator resolved to <button>Add entry</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <summary>Applied file · transaction receipt</summary> from <details class=\"context\" data-testid=\"apply-receipt\">…</details> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrollin",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5o/native-1793303249526/receipt.json",
+        "sha256": "a43ad8b0001b36e635383d197408e4441534ab38871ee03acf7de5a9f13d33ca"
+      },
+      "package_sha256": "493d2af2fc205971db392231de3a00515cd5d9fc5590e23830b94fe701eeee7e",
+      "category": "harness: malformed variant is refused by host identity before a worker verdict",
+      "failure_excerpt": "locator.textContent: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"authoring\"]:visible [data-testid=\"draft-receipt\"]')\u001b[22m\n\n    at validate (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-loot.mjs:36:209)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-loot.mjs:132:228",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5o/native-1793303507520/receipt.json",
+        "sha256": "bc8fb95575d1de70d1e47e33116e17430ec15e3c75dabacf4eb200d0e96d3339"
+      },
+      "package_sha256": "432527aa42ff6c98e64e1cb4ff3338b334c304915331fd88edff0c31570879d5",
+      "category": "harness: derive realized coordinates from production receipt rather than assumed centering",
+      "failure_excerpt": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(produced)\n\n    at file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-loot.mjs:142:331",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5o/native-1793303679543/receipt.json",
+        "sha256": "01d29ac9621853f35db3f04c48e48d238ee9473e362dbce250296a32836dee67"
+      },
+      "package_sha256": "432527aa42ff6c98e64e1cb4ff3338b334c304915331fd88edff0c31570879d5",
+      "category": "harness: close the remaining interaction cursor before the two normal quit keys",
+      "failure_excerpt": "AssertionError [ERR_ASSERTION]: Timed out\n    at until (file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-loot.mjs:39:104)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-loot.mjs:154:493",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5o/native-1793303993499/receipt.json",
+        "sha256": "588f25c30352782d3692df2d9aafd5ede0ad66d44e7f0d5790285bba2d9a82e5"
+      },
+      "package_sha256": "432527aa42ff6c98e64e1cb4ff3338b334c304915331fd88edff0c31570879d5",
+      "category": "harness: route ordinary fixture interaction through the main key handler and close both container prompt and cursor before scene travel",
+      "failure_excerpt": "AssertionError [ERR_ASSERTION]: Traceback (most recent call last):\r\n  File \"G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\loot-persistence.py\", line 91, in <module>\r\n    with contextlib.redirect_stdout(io.StringIO()),patch('engine.save_manager.SAVE_DIR',out/'ordinary/saves'):result=run()\r\n                                                                                                                     ^^^^^\r\n  File \"G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\loot-persistence.py\", line 75, in run\r\n    consumed=take(e,'w5o_biscuit');use(e,consumed);acquired=take(e,'w5o_biscuit');copied=serialize_item(acquired)\r\n             ^^^^^^^^^^^^^^^^^^^^^\r\n  File \"G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\loot-persistence.py\", line 50, in take\r\n    browse(e);prompt=e.interaction_cursor._selection_prompt;index=next(i for i,r in enumerate(prom",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5o/native-1793304327822/receipt.json",
+        "sha256": "f6d0b9304f408922fd6a32135be0645492471eb9770d2939c5227d69b91a7fcd"
+      },
+      "package_sha256": "432527aa42ff6c98e64e1cb4ff3338b334c304915331fd88edff0c31570879d5",
+      "category": "harness: route ordinary fixture interaction through the main key handler and close both container prompt and cursor before scene travel",
+      "failure_excerpt": "AssertionError [ERR_ASSERTION]: Traceback (most recent call last):\r\n  File \"G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\loot-persistence.py\", line 91, in <module>\r\n    with contextlib.redirect_stdout(io.StringIO()),patch('engine.save_manager.SAVE_DIR',out/'ordinary/saves'):result=run()\r\n                                                                                                                     ^^^^^\r\n  File \"G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\loot-persistence.py\", line 85, in run\r\n    browse(e);e._handle_key(pygame.K_ESCAPE);assert state(e)==loaded;revisit(e);assert state(e)==loaded\r\n                                                                     ^^^^^^^^^^\r\n  File \"G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\loot-persistence.py\", line 64, in revisit\r\n    walk(e,stairs(e));e._try_ascend();assert e.current_subma",
+      "counted_as_pass": false
+    }
+  ],
+  "passing_receipt": {
+    "path": "workbench/.artifacts/w5o/native-1793304665369/receipt.json",
+    "sha256": "588007b0d54f85be95443251b2e6cf06f45a62296e0484f9999a25d863d6bb02"
+  },
+  "auxiliary_attempts": [
+    {
+      "path": "workbench/.artifacts/w5o/worker-final.log",
+      "sha256": "59eadbb59c39995fd5048dfb2189a18b9719db0f1779bdb7f86fa65929fabb7c"
+    },
+    {
+      "path": "workbench/.artifacts/w5o/worker-root-cwd-attempt.log",
+      "sha256": "b2a360150cd9da0f561051d091b6f7960fd37ad217765f0324fbd6cd0507f574"
+    },
+    {
+      "path": "workbench/.artifacts/w5o/game-final/run.json",
+      "sha256": "233eeda6ef4495f0627703689001a38f9e031748ebe16107acffe837586b489d"
+    },
+    {
+      "path": "workbench/.artifacts/w5o/game-preliminary.log",
+      "sha256": "311a3719054aa6c6af283f1d989959e43a5997cb9cfa0313caba9a47e1f23892"
+    },
+    {
+      "path": "workbench/.artifacts/w5o/room-session-final.log",
+      "sha256": "8ab14bac38992aa3fd3f09ec708601c4bbaaa72c05ddb4406e4332456297aa92"
+    },
+    {
+      "path": "workbench/.artifacts/w5o/items-legacy-expectation-attempt.log",
+      "sha256": "cd7414e097dcdd441c0c92145031b90fc295ae5fd96db99b490c63ab90e3ea38"
+    },
+    {
+      "path": "workbench/.artifacts/w5o/items-busy-attempt.log",
+      "sha256": "1db623a7ab6c23b5c416162ff936534e6467c40bc6e125a540dd41a14e26f35a"
+    },
+    {
+      "path": "workbench/.artifacts/w5o/workspace-port-attempt.log",
+      "sha256": "31e4f438875a49aa55b73a310e84c670e458d42d4441b98befa9849955700e1c"
+    },
+    {
+      "path": "workbench/.artifacts/w5o/game-pre-final-source-note.txt",
+      "sha256": "c145cc4bd4b30f9e1f50586e7841d514dae45a511d2ebe089f29a41d15babccd"
+    }
+  ],
+  "other_excluded_attempts": [
+    "Initial default development Python lacked pygame; full game gate uses the existing pinned verification venv.",
+    "Early full game run crossed final source edits and was stopped; retained under game-final. Only unchanged-source game-final-stable certifies completion.",
+    "First full worker run exposed an old new-pool test without source_asset; adapted and rerun in full without weakening coverage.",
+    "Initial ordinary-main wrapper decoded CP1252 output as UTF-8; final fresh fixture uses explicit UTF-8 interpreter/output.",
+    "An initial room-session publication received the existing transient BUSY refusal. Final harness revalidates the same draft before a bounded retry.",
+    "Room-session comparisons now strip new read-only container memory IDs while retaining every serialized field; they cannot compare process-local addresses across restore.",
+    "Legacy item journey now reflects W5M common-field admission for binding_knife and retries only explicit BUSY refusals at its direct host calls.",
+    "An overlapping desktop-test run shared its fixed debugging port; final legacy item and workspace runs are isolated.",
+    "The worker suite runs from its documented workbench cwd. Root-cwd attempts made an old relative-path fixture assertion misleading; only the full final intended-cwd run counts."
+  ]
+}

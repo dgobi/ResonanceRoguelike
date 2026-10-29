@@ -1,0 +1,18 @@
+{
+  "id": "w5o_provisions",
+  "description": "Revised fresh salvage: one bone.",
+  "roll_count": [1],
+  "items": [
+    {
+      "item_id": "animal_bone",
+      "weight": 1
+    }
+  ],
+  "owner_metadata": {
+    "nested": [
+      null,
+      "λ"
+    ],
+    "escaped": "\u0072etained"
+  }
+}

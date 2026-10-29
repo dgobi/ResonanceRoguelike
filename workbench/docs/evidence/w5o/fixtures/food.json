@@ -1,0 +1,16 @@
+{
+  "id": "w5o_biscuit",
+  "name": "W5O travel biscuit",
+  "description": "Disposable contextual-loot reward.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.05,
+  "stackable": true,
+  "on_use": "eat",
+  "nutrition": 0.2,
+  "eat_message": "The biscuit settles your hunger.",
+  "keywords": [
+    {"tag": "edible", "tier": 2},
+    {"tag": "vital", "tier": 1}
+  ]
+}

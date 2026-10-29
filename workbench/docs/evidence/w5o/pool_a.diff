@@ -1,0 +1,51 @@
+===================================================================
+--- roguelike/data/loot_pools/alchemist_reagents.json	opened bytes
++++ roguelike/data/loot_pools/w5o_provisions.json	draft bytes
+@@ -1,13 +1,35 @@
+ {
+-  "id": "alchemist_reagents",
+-  "description": "Rare reagents found in an alchemist's back room.",
+-  "roll_count": [2, 4],
++  "id": "w5o_provisions",
++  "description": "Guaranteed two useful meals and a distinguishable residual log.",
++  "roll_count": [
++    3
++  ],
+   "items": [
+-    {"item_id": "crow_bile", "weight": 50},
+-    {"item_id": "sulphur_cap_fragment", "weight": 45},
+-    {"item_id": "prophets_eye_cap", "weight": 35},
+-    {"item_id": "murk_violet_stem", "weight": 40},
+-    {"item_id": "resonant_bone_fragment", "weight": 30},
+-    {"item_id": "wight_essence_residue", "weight": 20}
+-  ]
++    {
++      "item_id": "w5o_biscuit",
++      "row_metadata": {
++        "nested": {
++          "keep": [
++            1,
++            null
++          ]
++        }
++      }
++    },
++    {
++      "item_id": "w5o_biscuit",
++      "weight": 7
++    },
++    {
++      "item_id": "wood_bundle",
++      "weight": 1
++    }
++  ],
++  "owner_metadata": {
++    "nested": [
++      null,
++      "λ"
++    ],
++    "escaped": "\u0072etained"
++  }
+ }
+\ No newline at end of file
+

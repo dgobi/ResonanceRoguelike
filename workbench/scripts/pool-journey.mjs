@@ -40,7 +40,7 @@ export async function poolJourney(page, root, output, receipt) {
   await shot("structure-draft"); await cleanCopy();
   const start = performance.now(); await inspectPool(); receipt.pool_open_ms = Math.round(performance.now() - start);
   assert.equal((await source()).replace(/\r\n/g, "\n"), originalPool.toString().replace(/\r\n/g, "\n"));
-  await button("Return to structure").click();
+  await button(/^Return to container /).click();
   assert.equal(await source(), parked);
   await inspectPool();
   assert.deepEqual(await readFile(resolve(root, pool)), originalPool);
@@ -54,13 +54,13 @@ export async function poolJourney(page, root, output, receipt) {
   const editStart = performance.now(); await page.getByLabel("Weight 1", {exact:true}).fill(String(weight)); receipt.table_edit_ms = performance.now() - editStart;
   const afterEdit = await source();
   assert.equal(afterEdit, beforeEdit.replace(`"weight": ${poolRich.items[0].weight}`, `"weight": ${weight}`));
-  await button("Undo table").click(); assert.equal(await source(), beforeEdit);
-  await button("Redo table").click(); assert.equal(await source(), afterEdit);
+  await button("Undo pool").click(); assert.equal(await source(), beforeEdit);
+  await button("Redo pool").click(); assert.equal(await source(), afterEdit);
   await editor().locator("textarea.source-editor").fill('{"id":');
   await page.getByTestId("pool-disabled").filter({hasText:"Correct JSON"}).waitFor();
   assert.equal(await page.getByLabel("Minimum rolls").isDisabled(), true);
   await editor().locator("textarea.source-editor").fill(afterEdit);
-  assert.equal(await button("Undo table").isDisabled(), true);
+  assert.equal(await button("Undo pool").isDisabled(), false);
   assert.equal(await page.getByLabel("Weight 1", {exact:true}).inputValue(), String(weight));
   await button(`Inspect ${poolRich.items[0].item_id}`).click();
   const item = await page.getByTestId("item-inspector").innerText();
@@ -90,7 +90,7 @@ export async function poolJourney(page, root, output, receipt) {
   assert.deepEqual(JSON.parse(savedPool).w3a_metadata, poolRich.w3a_metadata);
   assert.deepEqual(JSON.parse(savedPool).items.slice(1), poolRich.items.slice(1));
   assert.deepEqual(await readFile(resolve(root, building)), originalBuilding);
-  await button("Return to structure").click();
+  await button(/^Return to container /).click();
   assert.equal(await source(), parked);
   await page.getByLabel("Active layer").selectOption("specials");
   await page.getByLabel("Placed record", {exact:true}).selectOption("0");
@@ -140,7 +140,7 @@ export async function poolJourney(page, root, output, receipt) {
   try {
     const changed=JSON.parse(itemBytes); changed.id="w3a_removed_item"; await writeFile(itemPath,JSON.stringify(changed));
     const stale=await ipc("apply_document",{token:doc.document_token,reviewToken:checked.result.review_token,confirmed:true});
-    assert.equal(stale.error?.code,"VALIDATION_FAILED"); assert.deepEqual(await readFile(resolve(root,poolTarget)),savedPool);
+    assert.equal(stale.error?.code,"SOURCE_CHANGED"); assert.deepEqual(await readFile(resolve(root,poolTarget)),savedPool);
   } finally { await writeFile(itemPath,itemBytes); }
   checked=await ipc("validate_document",{token:doc.document_token,draft:doc.raw+" ",variantId:null,seed:20261023});
   assert(checked.result.valid);

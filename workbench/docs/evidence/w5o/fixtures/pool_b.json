@@ -1,0 +1,9 @@
+{
+  "id": "w5o_lights",
+  "description": "One saved reference-only held light.",
+  "items": [
+    {
+      "item_id": "tallow_torch"
+    }
+  ]
+}

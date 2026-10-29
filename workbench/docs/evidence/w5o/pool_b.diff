@@ -1,0 +1,23 @@
+===================================================================
+--- roguelike/data/loot_pools/storage_tools.json	opened bytes
++++ roguelike/data/loot_pools/w5o_lights.json	draft bytes
+@@ -1,12 +1,9 @@
+ {
+-  "id": "storage_tools",
+-  "description": "Tools and implements stored for practical use.",
+-  "roll_count": [1, 3],
++  "id": "w5o_lights",
++  "description": "One saved reference-only held light.",
+   "items": [
+-    {"item_id": "flint_shard", "weight": 50},
+-    {"item_id": "clay_pot", "weight": 40},
+-    {"item_id": "tallow_torch", "weight": 60},
+-    {"item_id": "oil_lantern", "weight": 30},
+-    {"item_id": "crude_blade", "weight": 20}
++    {
++      "item_id": "tallow_torch"
++    }
+   ]
+ }
+\ No newline at end of file
+

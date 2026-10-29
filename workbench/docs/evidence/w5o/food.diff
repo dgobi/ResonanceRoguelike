@@ -1,0 +1,25 @@
+===================================================================
+--- roguelike/data/items/consumables/cooked_meat.json	opened bytes
++++ roguelike/data/items/consumables/w5o_biscuit.json	draft bytes
+@@ -1,14 +1,14 @@
+ {
+-  "id": "cooked_meat",
+-  "name": "cooked meat",
+-  "description": "Meat rendered over open flame until the outside chars and the inside sets. Better than raw. Still not good.",
++  "id": "w5o_biscuit",
++  "name": "W5O travel biscuit",
++  "description": "Disposable contextual-loot reward.",
+   "tile": "generic_item",
+   "category": "consumable",
+-  "weight": 0.3,
++  "weight": 0.05,
+   "stackable": true,
+   "on_use": "eat",
+-  "nutrition": 220,
+-  "eat_message": "Charred. Sustaining. The hunger retreats properly.",
++  "nutrition": 0.2,
++  "eat_message": "The biscuit settles your hunger.",
+   "keywords": [
+     {"tag": "edible", "tier": 2},
+     {"tag": "vital", "tier": 1}
+

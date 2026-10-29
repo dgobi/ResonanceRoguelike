@@ -1,0 +1,52 @@
+===================================================================
+--- roguelike/docs/examples/g17_authored_creature_room.json	opened bytes
++++ roguelike/data/layouts/w5o_loot_room.json	draft bytes
+@@ -1,21 +1,28 @@
+ {
+-  "id": "g17_authored_creature_room",
+-  "width": 11,
+-  "height": 7,
++  "id": "w5o_loot_room",
++  "width": 19,
++  "height": 11,
+   "layers": [
+-    "###########",
+-    "#.........#",
+-    "#.........#",
+-    "#.........#",
+-    "#.........#",
+-    "#.<.......#",
+-    "###########"
++    "###################",
++    "#.................#",
++    "#.................#",
++    "#.................#",
++    "#.................#",
++    "#.................#",
++    "#.................#",
++    "#.................#",
++    "#.<...............#",
++    "#.................#",
++    "###################"
+   ],
+-  "legend": {"#": "wall", ".": "floor", "<": "stairs_up"},
+-  "player_start": {"x": 2, "y": 5},
+-  "special_tiles": [
+-    {"type": "creature", "x": 7, "y": 2, "creature_id": "hollow_revenant"},
+-    {"type": "item", "x": 7, "y": 2, "item_id": "wood_bundle"},
+-    {"type": "container", "x": 8, "y": 4, "decor_id": "crate", "loot_pools": ["storage_tools"]}
+-  ]
+-}
++  "legend": {
++    "#": "wall",
++    ".": "floor",
++    "<": "stairs_up"
++  },
++  "player_start": {
++    "x": 3,
++    "y": 8
++  },
++  "special_tiles": [{"type":"container","x":5,"y":6,"decor_id":"crate","loot_pools":["w5o_provisions","w5o_lights"]}]
++}
+\ No newline at end of file
+
