@@ -85,7 +85,13 @@ async function saved(path){
  assert.equal(hash(Buffer.from(r.result.raw)),hash(bytes));assert.equal(r.result.sha256,hash(bytes));
  return {path,sha256:hash(bytes),definition:JSON.parse(bytes),raw:bytes.toString(),token:r.result.document_token};
 }
-async function recover(row){await b('Recover drafts').click();await page.locator(`[data-recovery-key="${row.key}"]`).click();await b('Recover selected draft').click();await page.getByRole('dialog',{name:'Recover drafts',exact:true}).waitFor({state:'hidden'});await idle();}
+async function recover(row){
+ for(let attempt=0;attempt<5;attempt++){
+  await idle();await b('Recover drafts').click();await idle();await page.locator(`[data-recovery-key="${row.key}"]`).click();await idle();await b('Recover selected draft').click();await idle();
+  const dialog=page.getByRole('dialog',{name:'Recover drafts',exact:true});if(!await dialog.count())return;
+  assert.match(await page.locator('footer').innerText(),/BUSY/);await b('Keep for later').click();
+ }throw Error('Recovery stayed busy');
+}
 async function cell(x,y){const canvas=page.getByTestId('layout-editor').filter({visible:true});await canvas.locator('.layout-views').getByRole('button',{name:'Authored layout',exact:true}).click();const map=page.getByTestId('layout-map').filter({visible:true});await map.scrollIntoViewIfNeeded();const p=await map.evaluate((el,[x,y])=>{const c=JSON.parse(el.dataset.camera),r=el.getBoundingClientRect();return {x:r.x+c.x+(x+.5)*16*c.scale,y:r.y+c.y+(y+.5)*16*c.scale};},[x,y]);await page.mouse.click(p.x,p.y);await editIdle();}
 async function place(id,x,y){await choose('Placement kind','item');await choose('Placement item',id);await b('Place item').click();await cell(x,y);}
 async function selectInventory(id,instance){

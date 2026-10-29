@@ -86,8 +86,15 @@ class HarvestConsumers(unittest.TestCase):
         self.profile(dict(min_cutting_tier=32,yields=[]));corpse=self.corpse()
         before=e.world_time.turn;e.interaction_cursor.enter([(12,12)],12,12);e.interaction_cursor._interact(e)
         self.assertEqual(e.world_time.turn,before+1);self.assertEqual(e._move_debt,0);self.assertIn(corpse,floor.get_floor_objects(e.local_map,12,12))
+        e.player.inventory.add(tool);e.player.equipment.slots["weapon"]=None
+        self.assertTrue(tool.equipped)  # a flag alone, without the slot, grants nothing
+        self.assertTrue(self.commit(corpse));self.assertEqual(e._move_debt,0)
+        self.assertIn(corpse,floor.get_floor_objects(e.local_map,12,12))
         with patch.object(e.player.perks,"has",return_value=True):self.assertTrue(self.commit(corpse))
         self.assertEqual(e._move_debt,36);self.assertFalse(self.outputs())
+        e._move_debt=0;self.profile(dict(min_cutting_tier=32,yields=[dict(item_id="raw_meat_common",quantity_min=0,quantity_max=2)]));corpse=self.corpse()
+        with patch.object(e.player.perks,"has",return_value=True),patch("random.randint",return_value=1):self.assertTrue(self.commit(corpse))
+        self.assertEqual(len(self.outputs()),1);self.assertEqual(e._move_debt,36)
 
     def test_default_null_empty_profile_empty_tier_and_zero_roll(self):
         e=self.e
