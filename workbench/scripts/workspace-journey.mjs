@@ -19,7 +19,13 @@ export async function workspaceJourney(page,root,output,receipt) {
   const source=async()=>{await eb("Source").click();return editor().locator("textarea.source-editor").inputValue();};
   const open=async path=>{await page.getByLabel("Search ID, name or path").fill(path);await page.locator(`[data-asset="${path}"]`).click();await idle();};
   const tab=async path=>{await page.locator(`[data-document-tab="${path}"]`).click();};
-  const ipc=(command,args)=>page.evaluate(async({command,args})=>{try{return await window.__TAURI_INTERNALS__.invoke(command,args);}catch(error){return {error};}},{command,args});
+  const ipc=async(command,args)=>{
+    for(let attempt=0;;attempt++){
+      const result=await page.evaluate(async({command,args})=>{try{return await window.__TAURI_INTERNALS__.invoke(command,args);}catch(error){return {error};}},{command,args});
+      if(command!=="open_document" || result.error?.code!=="BUSY" || attempt>=9)return result;
+      await idle();await page.waitForTimeout(100);
+    }
+  };
   const digest=bytes=>createHash("sha256").update(bytes).digest("hex");
   const validate=async()=>{
     for(let attempt=0;attempt<3;attempt++) {
