@@ -1,13 +1,13 @@
 {
   "milestone": "W5O",
   "passed": true,
-  "observed_utc": "2026-10-29T20:28:23.249035+00:00",
+  "observed_utc": "2026-10-29T20:32:24.406341+00:00",
   "contract": "contextual-loot-1",
   "revisions": {
     "start": "07dffb08dc857518edc6883b11f6ab67b2c2a738",
     "initial_remote": "07dffb08dc857518edc6883b11f6ab67b2c2a738",
     "application_and_package_inputs": "30dac9298c402c1ff4c919312a6f6d97de8d758e",
-    "evidence_inputs": "13c7631f1c11d3e4c79f9d28d1e7dba3641107db",
+    "evidence_inputs": "6ba427aa41b3d5924c5a282b38e7c6996b8e9d49",
     "final_delivery_ref": "checkpoint/workbench-w5o-verified-20261029",
     "note": "A commit cannot include its own SHA. Resolve final delivery ref. The final response and ignored remote-readback.json record exact full local/remote main equality after the commissioned push. Application/package inputs precede harness/evidence commits."
   },
@@ -206,7 +206,7 @@
   },
   "preservation": {
     "path": "workbench/docs/evidence/w5o/preservation.json",
-    "sha256": "0f7189f61191dc79015aefe81939cdd58302666a54ecf9c5acb71da51c25a86f"
+    "sha256": "1f4b9571c89b6ce684cf5fad03f22c5b2a082b36d906005c838299a6e9e446d2"
   },
   "attempts": {
     "path": "workbench/docs/evidence/w5o/attempts.json",
@@ -406,6 +406,45 @@
     "roguelike/generation/structure_contract.py": "10517a45ca56413abfd862e43da65acdf883e128a1a1202de3ce7a1dd8697c1d",
     "roguelike/room_test.py": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603"
   },
+  "verification_source_hashes": {
+    "tools/critical_fix_regressions/tests/test_contextual_loot_w5o.py": {
+      "working_sha256": "ec8acc28aeb074eb251647b128bd4f435a1b2ed5e8710f06bd602810110e63d6",
+      "committed_sha256": "ec8acc28aeb074eb251647b128bd4f435a1b2ed5e8710f06bd602810110e63d6"
+    },
+    "workbench/scripts/item-journey.mjs": {
+      "working_sha256": "c6886804abec4c52d7273d3fd23a61bd4f246c8e4052f673a864b1173df24685",
+      "committed_sha256": "b79aeacaee2a3893df2ff4fed948322ac4bffda44bc4ebe92c3d5f14278c13e0"
+    },
+    "workbench/scripts/loot-persistence.py": {
+      "working_sha256": "77c7923e75d3b658c84ab88a85b336a6f35fb4eed5fd7501c8ebc314eb246ec8",
+      "committed_sha256": "564a6bf389bb2e78f9a5628daf6bc32632bca6a99d547de6997ee4e183343f13"
+    },
+    "workbench/scripts/pool-inventory.py": {
+      "working_sha256": "8a67b349f494b41729da8a2fbaadc5284baea0598b7189c43381f0b1fba7ddae",
+      "committed_sha256": "8a67b349f494b41729da8a2fbaadc5284baea0598b7189c43381f0b1fba7ddae"
+    },
+    "workbench/scripts/pool-journey.mjs": {
+      "working_sha256": "6ac4157f0076f342b0188db949241c50b6262ba404865765c687e39b53eab290",
+      "committed_sha256": "4291ef9f7c56950f7d830be4c1e96bd85c41ba51892c7ca0f386ba2af75feeb8"
+    },
+    "workbench/scripts/run-loot.mjs": {
+      "working_sha256": "29c58e1b3d9fe6c03498d447154ef6dc8a8dc38e9c2cb2790537e30fff57d23f",
+      "committed_sha256": "3257761ecc2b57abcf10ebfd31e00c7ba3a9fefbdb53fc2e51bd08adf3c91929"
+    },
+    "workbench/scripts/run-room-tests.mjs": {
+      "working_sha256": "63f4f4014563d77885df1a3318af84aa4f4991539b56a7304d909ec598880b31",
+      "committed_sha256": "63f4f4014563d77885df1a3318af84aa4f4991539b56a7304d909ec598880b31"
+    },
+    "workbench/scripts/w5o-receipt.py": {
+      "working_sha256": "6ebea069476d2b44cb645fece28132a95d04ecf72fde32b68673fd2e83d00b02",
+      "committed_sha256": "0d4a784f3f2b6051cb38d21dd51638398df6e7cec04c435cf7f0100b0ef72405"
+    },
+    "workbench/worker/test_items.py": {
+      "working_sha256": "ee8d7012c0e9701144285f7d0c71dcc90c39c95673840b46bf84c73479adc31d",
+      "committed_sha256": "ee8d7012c0e9701144285f7d0c71dcc90c39c95673840b46bf84c73479adc31d"
+    }
+  },
+  "verification_source_note": "Execution bytes and index-normalized bytes; final committed blobs are checked before push. Application/package inputs remain at their earlier revision; final named ref resolves harness and evidence.",
   "limits": [
     "Controlled authored room; no natural discovery, survival-balance, complete usage graph or every-special-behavior proof.",
     "Unowned factory validation is distinct from native acquisition/use and independent ordinary-save fresh-catalogue activation.",
