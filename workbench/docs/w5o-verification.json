@@ -1,13 +1,13 @@
 {
   "milestone": "W5O",
   "passed": true,
-  "observed_utc": "2026-10-29T20:32:24.406341+00:00",
+  "observed_utc": "2026-10-29T20:34:14.819548+00:00",
   "contract": "contextual-loot-1",
   "revisions": {
     "start": "07dffb08dc857518edc6883b11f6ab67b2c2a738",
     "initial_remote": "07dffb08dc857518edc6883b11f6ab67b2c2a738",
     "application_and_package_inputs": "30dac9298c402c1ff4c919312a6f6d97de8d758e",
-    "evidence_inputs": "6ba427aa41b3d5924c5a282b38e7c6996b8e9d49",
+    "evidence_inputs": "e553e6124fdde9331f98fd90ecc6d1e0437027f8",
     "final_delivery_ref": "checkpoint/workbench-w5o-verified-20261029",
     "note": "A commit cannot include its own SHA. Resolve final delivery ref. The final response and ignored remote-readback.json record exact full local/remote main equality after the commissioned push. Application/package inputs precede harness/evidence commits."
   },
@@ -436,8 +436,8 @@
       "committed_sha256": "63f4f4014563d77885df1a3318af84aa4f4991539b56a7304d909ec598880b31"
     },
     "workbench/scripts/w5o-receipt.py": {
-      "working_sha256": "6ebea069476d2b44cb645fece28132a95d04ecf72fde32b68673fd2e83d00b02",
-      "committed_sha256": "0d4a784f3f2b6051cb38d21dd51638398df6e7cec04c435cf7f0100b0ef72405"
+      "working_sha256": "b01c74f5af16516425bb81997ca51798f93d0f8a4889c23ad3e87ab98fcf9727",
+      "committed_sha256": "8bd6ec1f4783c88ba507a7ea1260328ec2ad273f6b62001103c7ee224c1a2842"
     },
     "workbench/worker/test_items.py": {
       "working_sha256": "ee8d7012c0e9701144285f7d0c71dcc90c39c95673840b46bf84c73479adc31d",
