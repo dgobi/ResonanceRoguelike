@@ -1,5 +1,6 @@
 """Actual roller and staged scene failures. RNG controls only at arithmetic edges."""
-import copy, random, unittest
+import copy, random, tempfile, unittest
+from pathlib import Path
 from unittest.mock import patch
 from engine.loot_roller import roll_pool, roll_pools
 from engine.item_factory import ItemFactory
@@ -17,6 +18,10 @@ class BoundaryRng:
 class PoolConsumers(unittest.TestCase):
     @classmethod
     def setUpClass(cls): cls.data=load_data()
+    def setUp(self):
+        temporary=tempfile.TemporaryDirectory(prefix='w5o-container-consumer-');self.addCleanup(temporary.cleanup)
+        self.save_root=Path(temporary.name)/'saves'
+        save=patch('engine.save_manager.SAVE_DIR',self.save_root);save.start();self.addCleanup(save.stop)
     def test_zero_positions_exact_boundaries_and_rounded_fallback(self):
         factory=ItemFactory(self.data)
         for weights in ([0,1],[1,0,1],[1,0],[0,1,0,1,0]):
@@ -45,6 +50,8 @@ class PoolConsumers(unittest.TestCase):
         for failure in ('none','type','fields','exception'):
             data=copy.copy(self.data);data.loot_pools={'w5o':dict(roll_count=[1],items=[dict(item_id='wood_bundle')])}
             e=make_engine(data);m=e.local_map
+            self.assertEqual(e.save_manager.save_path,self.save_root/'slot_0')
+            self.assertIsNone(e.save_manager.cache.base_path)
             existing=e.item_factory.create('flint_shard');m.floor_objects[11,11]=[existing]
             before=(dict(m.floor_objects),dict(m.container_state),dict(m.decor))
             original=e.item_factory.create

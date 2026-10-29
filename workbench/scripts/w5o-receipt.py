@@ -41,7 +41,7 @@ for name in ('pool-controls.png','recovered-drafts.png','native-used-loot.png','
     p=EVID/name;shutil.copyfile(native_path.parent/name,p);screenshots[name]=ref(p)
 diffs={}
 for name,text in n['diffs'].items():
-    p=EVID/(name+'.diff');p.write_bytes((text+'\n').encode());diffs[name]=ref(p)
+    p=EVID/(name+'.diff');p.write_bytes((text if text.endswith('\n') else text+'\n').encode());diffs[name]=ref(p)
 ordinary={key:{k:v for k,v in n['ordinary_'+key].items() if k!='save_access_audit'}|dict(save_access_events=len(n['ordinary_'+key]['save_access_audit']),owned_roots_only=True) for key in ('before','after')}
 observations=dict(scope='Controlled disposable authored-room journey. Supported controls publish two native pools and a useful food, then link both to one real container. Source supplies disclosed 19x11 geometry only. Normal loadout/needs/AI/FOV and caller RNG; no fixture health/needs/RNG/object or inventory injection. Read-only process-local IDs bind rolled objects to exact transfer and consumption; cold comparisons use serialized supported fields and ownership, not cross-process memory IDs.',
     package_sha256=n['package_sha256'],native_runner=ref(ROOT/'workbench/scripts/run-loot.mjs'),local_receipt=ref(native_path),checks=n['checks'],screenshots=screenshots,diffs=diffs,
@@ -73,7 +73,8 @@ write(EVID/'attempts.json',dict(native_attempts=attempts,passing_receipt=ref(nat
     'Room-session comparisons now strip new read-only container memory IDs while retaining every serialized field; they cannot compare process-local addresses across restore.',
     'Legacy item journey now reflects W5M common-field admission for binding_knife and retries only explicit BUSY refusals at its direct host calls.',
     'An overlapping desktop-test run shared its fixed debugging port; final legacy item and workspace runs are isolated.',
-    'The worker suite runs from its documented workbench cwd. Root-cwd attempts made an old relative-path fixture assertion misleading; only the full final intended-cwd run counts.']))
+    'The worker suite runs from its documented workbench cwd. Root-cwd attempts made an old relative-path fixture assertion misleading; only the full final intended-cwd run counts.',
+    'The final focused consumer rerun adds an explicit disposable SAVE_DIR before Engine construction and asserts no cache baseline. Its initial broad-suite fixture omitted that constructor isolation and could probe default save metadata; it invoked no save/load. Gameplay/application bytes and existing assertions are unchanged.']))
 for name in ('pool-inventory.json','environment.json','package-source-inputs.json'):
     write(EVID/name,read(ART/name))
 shutil.copyfile(ART/'seeded-before.json',EVID/'seeded-before.json')
@@ -100,6 +101,7 @@ if '--collect' in sys.argv:
 specs=[('npm test','frontend-final.log','79 frontend tests'),('npm run typecheck','typecheck-final.log','TypeScript'),
     ('cargo test --locked --manifest-path workbench/src-tauri/Cargo.toml','host-final.log','69 Rust tests'),('cargo clippy --locked --manifest-path workbench/src-tauri/Cargo.toml -- -D warnings','clippy-final.log','Clippy with warnings denied'),
     ('Pinned verification venv: tools/critical_fix_regressions/verify_fixes.py --evidence workbench/.artifacts/w5o/game-final-stable --timeout 1800','game-final-stable.log','Full game regressions on unchanged committed game source'),
+    ('Pinned runtime: test_contextual_loot_w5o','game-focused-final.log','Three final consumer cases with explicit disposable save root and no cached baseline'),
     ('Pinned runtime: unittest discover -s workbench/worker -v','worker-final-pass.log','Complete worker suite; one expected embedded-runtime dependency-control skip'),
     ('Pinned runtime: test_pools_w5o','worker-focused-final.log','Final bounded pool/source/physical dependency matrix'),('Development Python: test_bridge.py BridgeTests.test_dependency_absence_structured -v','dependency-negative-final.log','Separate missing-dependency negative control'),
     ('npm run bundle -- -- --locked','package-final.log','Locked Windows executable and NSIS'),('node scripts/run-loot.mjs','native-final-pass.log','Packaged connected journey and separate ordinary fresh-catalogue proof'),
@@ -114,8 +116,10 @@ for command,name,outcome in specs:
     if name=='package-final.log':assert 'Finished 1 bundle' in log
     commands.append(dict(command=command,exit_code=0,outcome=outcome,local_log=ref(p)))
 game=read(ART/'game-final-stable/run.json');assert game['source_stable'] and game['passed']
+after_game=[p for p,h in game['source'].items() if digest(ROOT/p)!=h]
+assert after_game==['tools/critical_fix_regressions/tests/test_contextual_loot_w5o.py'],after_game
 main=read(ART/'ordinary-main/receipt.json');assert main['passed'] and main['save_load']
-write(EVID/'gates.json',dict(commands=commands,game_run={k:v for k,v in game.items() if k!='source'},ordinary_main={k:v for k,v in main.items() if k!='save_access_trace'},scope='Only final passing runs count. Failed/excluded attempts are separately retained. No owner desktop control, personal campaign, RNG replacement, wiki or reference-pack gate.'))
+write(EVID/'gates.json',dict(commands=commands,game_run={k:v for k,v in game.items() if k!='source'},final_consumer_harness=dict(changed_since_broad_run=after_game,change='Add explicit temporary SAVE_DIR before construction and assert no cache baseline; retain all assertions and gameplay bytes.',rerun=ref(ART/'game-focused-final.log')),ordinary_main={k:v for k,v in main.items() if k!='save_access_trace'},scope='Passing broad application/game run and final isolated focused consumer rerun are bound separately. Failed/excluded attempts are retained. No desktop control, load/save of a personal campaign, RNG replacement, wiki or reference-pack gate.'))
 paths=set(git('diff','--name-only','checkpoint/workbench-w5o-start-20261029',package_inputs['revision']).splitlines())
 paths.update('roguelike/'+p for p in ('engine/item_factory.py','engine/item_transfers.py','engine/save_components.py','engine/save_manager.py','engine/definition_sources.py','generation/floor_object_utils.py','room_test.py'))
 hashes={p:dict(working_sha256=digest(ROOT/p),committed_sha256=hashlib.sha256(subprocess.check_output(['git','show','HEAD:'+p],cwd=ROOT)).hexdigest()) for p in sorted(paths)}
