@@ -1,7 +1,7 @@
-import { useId } from "react";
+import { useId, useState } from "react";
 import { effectiveValue, recordDefaults, type FieldSchema, type ContentFamily, type References } from "./content";
 import { recordRow } from "./orderedRecords";
-import { itemValue } from "./item";
+import { itemValue, keyedNumber } from "./item";
 
 export function ScalarControl(p: {schema: FieldSchema; value: unknown; references: References; label?: string; disabled?: boolean; nullable?: boolean; onChange: (value: string | number | boolean) => void}) {
   const s = p.schema, value = effectiveValue(s, p.value), label = p.label || s.title || "Value";
@@ -20,8 +20,8 @@ export function ScalarControl(p: {schema: FieldSchema; value: unknown; reference
     onChange={e=>{if(e.target.value !== "" && Number.isFinite(Number(e.target.value))) p.onChange(Number(e.target.value));}} />;
 }
 
-export function OrderedRecords(p:{family:ContentFamily;values:Record<string,unknown>;disabled:boolean;allowEmpty?:boolean;onEdit:(edit:(text:string)=>string,label:string)=>void}) {
-  return <>{Object.entries(p.family.descriptor.schema.properties || {}).filter(([,s])=>s["x-control"]==="ordered-records").map(([field,schema])=>{
+export function OrderedRecords(p:{family:ContentFamily;values:Record<string,unknown>;disabled:boolean;allowEmpty?:boolean;view?:string;onEdit:(edit:(text:string)=>string,label:string)=>void}) {
+  return <>{Object.entries(p.family.descriptor.schema.properties || {}).filter(([,s])=>s["x-control"]==="ordered-records" && s["x-view"]===p.view).map(([field,schema])=>{
     const rows=p.values[field];
     const valid=Array.isArray(rows) && rows.every(r=>r && typeof r==="object" && !Array.isArray(r));
     return <section key={field} className="ordered-records"><h3>{schema.title || field}</h3>
@@ -37,9 +37,26 @@ export function OrderedRecords(p:{family:ContentFamily;values:Record<string,unkn
   })}</>;
 }
 
-export function ContractFields(p: {family: ContentFamily; values: Record<string,unknown>; view?: string; nullableFields?: string[]; onChange: (path: (string|number)[], value: unknown)=>void}) {
+export function KeyedNumberMap(p:{family:ContentFamily;field:string;schema:FieldSchema;value:unknown;disabled:boolean;onEdit:(edit:(text:string)=>string,label:string)=>void}) {
+  const [key,setKey]=useState("");
+  const valid=p.value===undefined || !!p.value && typeof p.value==="object" && !Array.isArray(p.value);
+  const rows=valid ? Object.entries((p.value || {}) as Record<string,unknown>) : [];
+  const options=p.family.references[p.schema["x-reference"] || ""] || [];
+  const numberSchema=typeof p.schema.additionalProperties==="object" ? p.schema.additionalProperties : {type:"number" as const};
+  return <fieldset disabled={p.disabled}><legend>{p.schema.title}</legend><p>{p.schema.description}</p>
+    {p.value===undefined && <small>Absent in source · effective empty map; no reduction.</small>}
+    {!valid ? <p className="notice warning">Repair {p.field} in Source; expected a keyed JSON object.</p> : rows.map(([k,v])=><label key={k}>{k==="all" ? "all · fallback" : `${k} · category override`}
+      <ScalarControl schema={numberSchema} value={v} references={{}} label={`Reduction ${k}`} onChange={value=>p.onEdit(text=>keyedNumber(text,p.field,k,Number(value)),`Change ${k} reduction`)}/>
+      <button aria-label={`Remove reduction ${k}`} onClick={()=>p.onEdit(text=>keyedNumber(text,p.field,k),`Remove ${k} reduction`)}>Remove</button>
+    </label>)}
+    <label>New reduction category<select aria-label="New reduction category" value={key} onChange={e=>setKey(e.target.value)}><option value="">Choose category or fallback</option>{options.filter(o=>!rows.some(([k])=>k===o.id)).map(o=><option key={o.id} value={o.id}>{o.label}</option>)}</select></label>
+    <button disabled={!valid || !key || rows.some(([k])=>k===key)} onClick={()=>{p.onEdit(text=>keyedNumber(text,p.field,key,0),`Add ${key} reduction`);setKey("");}}>Add reduction</button>
+  </fieldset>;
+}
+
+export function ContractFields(p: {family: ContentFamily; values: Record<string,unknown>; view?: string; nullableFields?: string[]; disabledFields?:string[]; onChange: (path: (string|number)[], value: unknown)=>void}) {
   return <>{Object.entries(p.family.descriptor.schema.properties || {}).filter(([,s])=>!s.readOnly && !["array","object"].includes(s.type) && s["x-view"]===p.view).map(([key,s])=><label key={key}>
-    {s.title || key}<ScalarControl schema={s} value={p.values[key]} nullable={p.nullableFields?.includes(key)} references={p.family.references} onChange={value=>p.onChange([key],value)} />
+    {s.title || key}<ScalarControl schema={s} value={p.values[key]} disabled={p.disabledFields?.includes(key)} nullable={p.nullableFields?.includes(key)} references={p.family.references} onChange={value=>p.onChange([key],value)} />
     {p.values[key] === undefined && <small>{s.default === undefined ? "Absent in source" : `Absent in source · effective default: ${String(s.default)}`}</small>}
     {s.description && <small>{s.description}</small>}
     {p.values[key] === null && <small>Explicit null retained; validate for consumer behavior.</small>}

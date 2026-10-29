@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import { itemModel, itemValue, keywordEntry } from "./item";
+import { itemModel, itemValue, keywordEntry, keyedNumber, itemVariant } from "./item";
+import { recordRow } from "./orderedRecords";
 import { CanvasHistory } from "./layout";
 import { currentVerdict } from "./draft";
 
@@ -40,5 +41,31 @@ describe("shared item source draft", () => {
     expect(itemValue(s,["nutrition"],null)).toBe(s);
     expect(itemValue(s,["tile"],"generic_item")).toContain('"nutrition":null');
     expect(itemValue(s,["tile"],"generic_item")).not.toContain('"weight"');
+  });
+  it("edits native reduction objects without serializing siblings, order, CRLF or unknown fields",()=>{
+    const s='{\r\n "id":"bag", "weight_reductions": {"all" : 0.10, "Components":0.35, "Tools": 0}, "meta":{"x":[null]}\r\n}\r\n';
+    const changed=keyedNumber(s,"weight_reductions","Components",.6);
+    expect(changed).toBe(s.replace('"Components":0.35','"Components":0.6'));
+    const removed=keyedNumber(changed,"weight_reductions","Components");
+    expect(JSON.parse(removed).weight_reductions).toEqual({all:.1,Tools:0});expect(removed).toContain('"all" : 0.10');
+    expect(Object.keys(JSON.parse(keyedNumber(removed,"weight_reductions","Consumables",.2)).weight_reductions)).toEqual(["all","Tools","Consumables"]);
+    expect(JSON.parse(keyedNumber('{"id":"b"}',"weight_reductions","all",0)).weight_reductions).toEqual({all:0});
+    expect(JSON.parse(keyedNumber('{"weight_reductions":{"all":0}}',"weight_reductions","all")).weight_reductions).toEqual({});
+    for(const bad of ['{"weight_reductions":null}','{"weight_reductions":[]}','{"weight_reductions":{"all":0,"all":1}}'])expect(()=>keyedNumber(bad,"weight_reductions","all",.1)).toThrow();
+  });
+  it("retains armour row metadata across localized edits, reorder and deliberate additions/removals",()=>{
+    const s='{\r\n "armor_layers":[{"name":"shell","material":"hide","armor_value":2,"coverage":0.70,"meta":[null]}, {"name":"lining","material":"cloth","armor_value":1}],"other":false\r\n}\r\n';
+    const changed=itemValue(s,["armor_layers",0,"armor_value"],3);expect(changed).toBe(s.replace('"armor_value":2','"armor_value":3'));
+    expect(recordRow(recordRow(changed,"armor_layers","down",0),"armor_layers","up",1)).toBe(changed);
+    const added=recordRow(changed,"armor_layers","add",-1,{name:"new layer",material:"leather",armor_value:0});
+    expect(recordRow(added,"armor_layers","remove",2)).toBe(changed);
+    expect(added).toContain('"coverage":0.70,"meta":[null]');
+  });
+  it("materializes an explicit binding only for a deliberate legacy variant",()=>{
+    const s='{\r\n "id":"leather_satchel", "weight_reductions":{"all":0.1}, "meta":null\r\n}\r\n';
+    expect(itemVariant(s,"new_satchel",true)).toContain('"on_use":"equip_toggle"');
+    expect(itemVariant(s,"new_satchel",false)).not.toContain('on_use');
+    const history=new CanvasHistory(),next=itemVariant(s,"new_satchel",true);history.record(s,next,"variant");
+    expect(history.undo(next)).toBe(s);expect(history.redo(s)).toBe(next);
   });
 });

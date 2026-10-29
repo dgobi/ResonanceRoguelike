@@ -15,7 +15,7 @@ from engine.save_components import ITEM_STATE, snapshot, validate_fields
 from engine.crafting import _item_has_tag, _item_has_all_tags
 from rendering.tile_registry import TileRegistry
 
-CONTRACT = "usable-supplies-1"
+CONTRACT = "expedition-items-2"
 SCHEMA = {
     "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "required": ["id"],
     "properties": {
@@ -41,13 +41,17 @@ SCHEMA = {
     },
 }
 VIEWS = ["item-properties", "references", "recipes", "use-binding", "factory"]
-PUBLICATION_NOTE = "Save/reopen each supply first, then reference its saved ID in a room or pool. Saving does not enroll it in loot, harvesting, gathering or crafting. Later construction uses saved definitions; versioned owned instances retain copied fields. A running game keeps its catalogue; empty_form is read from that session's definition at use."
+from engine import equipment_authoring as equipment
+SCHEMA['properties'].update(equipment.SCHEMA)
+PUBLICATION_NOTE = "Save/reopen each item first, then reference its saved ID in a room or pool. Saving does not enroll it in loot, crafting, starting gear or world selection. Owned items retain copied physical fields; combat, armour and carrying use the loaded session definitions. Source saves do not hot-reload a running game. Reset keeps its capture; latest saved captures revisions."
 
 
 def reference_options(context):
     return {"keywords": [dict(id=k, label=k) for k in sorted(context["keywords"])],
             "tiles": [dict(id=k,label=k) for k in context["tiles"]],
-            "return-items": [dict(id="",label="No replacement")] + context["return_items"]}
+            "return-items": [dict(id="",label="No replacement")] + context["return_items"],
+            "armour-slots": [dict(id=k,label=k) for k in equipment.ARMOR_SLOTS],
+            "carrying-categories": [dict(id=k,label='all · fallback' if k=='all' else k+' · override') for k in ('all',*equipment.CATEGORIES)]}
 
 
 def authoring_validate(raw, data, path, data_root):
@@ -71,7 +75,8 @@ ADVANCED = (set(ITEM_STATE) - set(FIELDS) - {
 }) | {"slot", "movesets", "on_use_effects", "damage_dice", "damage_bonus",
       "essence", "essence_strength", "crit_chance", "weight_reductions",
       "provides_burning", "light", "light_radius", "render_mode",
-      "zone_radius", "zone_turns", "effects", "status", "statuses"}
+      "zone_radius", "zone_turns", "effects", "status", "statuses", "armor_layers", "block_chance", "block_value",
+      "essences", "callbacks", "callback", "on_hit", "on_equip"}
 
 
 def capability(raw, path, pointer=""):
@@ -86,9 +91,12 @@ def capability(raw, path, pointer=""):
                  and not (raw.keys() & (set(sum(CLASS_FIELDS.values(),[]))-set(CLASS_FIELDS.get(kind,[]))))
                  and not (raw.keys() & ADVANCED) and not raw.get("text_id")
                  and not raw.get("qualities"))
+    equipment_class, equipment_reason = equipment.classify(raw,path,pointer,forbidden=ADVANCED | set(sum(CLASS_FIELDS.values(),[])) | {'qualities','text_id','liquid','liquid_volume','harvest_from'})
+    if equipment_class: supported = True; kind = equipment_class
     return {"contract": CONTRACT, "editable": bool(supported), "supply_class":kind,
-            "fields": FIELDS + CLASS_FIELDS.get(kind,[]),
-            "reason": ("Canonical empty skin is reference-only: exact-ID filling creates canonical water_skin." if protected else
+            "equipment_class": equipment_class,
+            "fields": FIELDS + CLASS_FIELDS.get(kind,[]) + equipment.FIELDS.get(kind,[]),
+            "reason": (equipment_reason if equipment_class or route in ('weapons','armor','shields','equipment') else "Canonical empty skin is reference-only: exact-ID filling creates canonical water_skin." if protected else
                 "Ordinary inert material" if supported and kind=="material" else "Ordinary "+kind if supported else
                 "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use."),
             "weight_unit": "kg", "tier_min": 0, "tier_max": 2**53-1,
@@ -103,10 +111,15 @@ def authorize_candidate(original, candidate, source, target, *, data=None):
     if not isinstance(candidate, dict):
         return [dict(severity='error', code='ITEM_SHAPE', path=target, asset='', field='',
             message='Expected one item object; array editing is unsupported.', correction='Restore a single item object in Source.')]
-    for field in ('category','on_use'):
+    cap = capability(original,source)
+    equip = cap.get('equipment_class')
+    for field in ('category',) if equip else ('category','on_use'):
         if (field in original)!=(field in candidate) or original.get(field)!=candidate.get(field):
             problems.append(dict(severity='error',code='ITEM_CLASS',path=target,asset=str(candidate.get('id','')),field=field,
                 message='Keep the verified original category and use identity. Start from a source of the desired class.',correction='Restore the original value.'))
+    if equip:
+        for field,message in equipment.authorize(original,candidate,source,target,FIELDS):
+            problems.append(dict(severity='error',code='EQUIPMENT_LOCK',path=target,asset=str(candidate.get('id','')),field=field,message=message,correction='Restore the locked source value or use a compatible new variant.'))
     return problems
 
 
@@ -151,14 +164,16 @@ def effective_use(raw, data):
 
 def use_binding(raw):
     declared = raw.get("on_use")
-    handler = getattr(ItemSystem, f"_use_{declared}", None) if isinstance(declared, str) else None
+    legacy = declared is None and isinstance(raw.get('id'),str) and raw['id'] in equipment.LEGACY_BINDINGS
+    effective = 'equip_toggle' if legacy else declared
+    handler = getattr(ItemSystem, f"_use_{effective}", None) if isinstance(effective, str) else None
     found = callable(handler)
-    return {"declared": declared, "status": "Not applicable" if not declared else "Handler found" if found else "Unknown handler",
+    return {"declared": declared, "present": 'on_use' in raw, "effective":effective,"legacy":legacy,"status": "Legacy exact-ID binding" if legacy else "Not applicable" if not declared else "Handler found" if found else "Unknown handler",
             "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
-            "handler": f"ItemSystem._use_{declared}" if found else None,
+            "handler": f"ItemSystem._use_{effective}" if found else None,
             "line": inspect.getsourcelines(handler)[1] if found else None,
             "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
-            "notes": (["on_use_effects is declared JSON; ItemFactory and ItemSystem do not consume that list."] if "on_use_effects" in raw else []) +
+            "notes": (["Exact shipped ID receives equip_toggle only on ordinary owned use. Same-ID edits preserve the absent/null declaration; new-ID variants must explicitly insert equip_toggle."] if legacy else []) + (["on_use_effects is declared JSON; ItemFactory and ItemSystem do not consume that list."] if "on_use_effects" in raw else []) +
                      (["consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."] if "consumed_on_use" in raw else [])}
 
 
@@ -182,6 +197,9 @@ def validate_definition(raw, data, path, sources, *, writable=False):
         issue("LOADER_IDENTITY", "id", "DataLoader did not load this exact definition from this source.")
     if writable and not capability(raw, path)["editable"]:
         issue("UNSUPPORTED_ITEM", "category", capability(raw, path)["reason"])
+    equipment_class = capability(raw,path).get('equipment_class')
+    if equipment_class:
+        for field,message in equipment.validate(raw,equipment_class,data): issue('EQUIPMENT_FIELD',field,message)
     # Use the actual game instance validators, including bool-vs-number and
     # finite/nonnegative rules. Default fields are supplied by the factory later.
     for field in FIELDS + ["on_use", "qualities", "text_id", "nutrition", "hydration", "heal_amount", "eat_message", "drink_message", "liquid", "liquid_volume", "harvest_from"]:
@@ -238,7 +256,7 @@ def factory_preview(raw, data):
         raise ValueError("Factory output differs from the supported definition fields")
     return {"item_id": item.item_id, "instance": state, "comparisons": comparisons,
             "consumer": "engine.data_loader.DataLoader -> engine.item_factory.ItemFactory.create -> entities.item.Item",
-            "scope": "Observed unowned factory instance. No inventory/use/turn, acquisition, world selection or save migration was executed."}
+            "scope": "Observed unowned factory instance: common copied fields only. Weapon damage, armour layers, shield block values and satchel reductions are not copied into ITEM_STATE. No inventory/use/turn, acquisition, world selection or save migration was executed."}
 
 
 def references(raw, data, source_index):
@@ -321,8 +339,9 @@ def authoring_context(raw, data, path, data_root, identity, digest, *, observe=F
         if observed:
             try: effective=effective_use(definition,data)
             except (ValueError,TypeError,OverflowError): pass
+        equipment_evidence = equipment.interpretation(definition,cap['equipment_class']) if observed and cap.get('equipment_class') else None
         records.append(dict(id=definition.get("id", ""), pointer=pointer, definition=definition, capability=cap,
-                            effective_use=effective,return_item=returned,
+                            effective_use=effective,equipment=equipment_evidence,return_item=returned,
                             diagnostics=diagnostics, use=use_binding(definition), pools=refs,
                             recipes=item_relations(definition.get("id"), data, recipes) if not ambiguous else [],
                             dependencies=references(definition, data, recipes) if not ambiguous else [], factory=observed))

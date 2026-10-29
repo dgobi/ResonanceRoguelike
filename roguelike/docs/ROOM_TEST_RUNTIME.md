@@ -7,6 +7,18 @@ calls. Its once-only `supplies-injured` fixture sets hunger/thirst to 0.8 and HP
 max minus 15; subsequent actions run normal input/handlers. This is verification
 setup, not an owner scenario editor. See [supplies](ITEM_AUTHORING.md).
 
+W5M uses the same capture for saved ordinary equipment. Opt-in observations add
+exact slot-to-inventory-row references, physical/discounted carrying weight,
+effective AV and bounded traces around the **real** combat resolver as invoked by
+ordinary outgoing/incoming callers. The trace returns the original result and
+does not alter RNG or rules. The equipment journey uses no item, slot, AV,
+discount, creature or health injection. Definition/factory evidence remains
+distinct from these owned-use observations. Its separate ordinary-save fixture
+loads in a fresh process/catalogue after a bag revision: copied common fields and
+depleted generated room survive while definition-owned reductions change, including
+over-capacity conservation and ordinary pickup refusal. Immutable captured restore
+is a separate proof. See [equipment ownership](ITEM_AUTHORING.md#equipment-ownership-and-activation).
+
 `room_test.py` implements `workbench-room-test-1` for an eligible saved ordinary
 `room` (`authored-room-2`, `authored_submap`). It never invokes `main.py`'s campaign
 startup/restart loop. The native host supplies every path and a unique snapshot

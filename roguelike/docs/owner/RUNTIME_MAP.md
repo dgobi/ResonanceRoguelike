@@ -49,7 +49,22 @@ Player sprint uses `player_move_accumulator` to skip some simulation advances fo
 4. `Needs.hunger`, a float from 0 full to 1 critical, is authoritative for that component. The handler subtracts the food fraction and clamps at zero. It returns True; the screen removes the same instance and calls `_advance_turn`.
 5. The turn adds the configured hunger tick; the UI derives a label/bar from Needs. The definition was not consumed or changed. [The lesson](OWNER_LESSON.md) checks `0.500 - 0.350 + 0.001 = 0.151` in this forest-backed laboratory.
 
-The invariant is one storage owner per item, with equipment referencing inventory instances. It is a desired contract, not a current guarantee: drop/load paths can leave stale equipped references. State changes belong to their owners; rendering should describe those values. A screenshot of an equipped icon cannot establish ownership.
+The invariant is one storage owner per item, with equipment referencing exact
+owned inventory instances. Current `item_transfers` cleans references and derived
+AV/light on drop, consumption or exchange; restoration resolves explicit inventory
+row references. Same-ID siblings remain distinct. State changes belong to their
+owners; a screenshot of an equipped icon alone cannot establish ownership.
+
+W5M [item authoring](../ITEM_AUTHORING.md) exposes ordinary equipment through the
+registered item family. Inventory Enter calls `ItemSystem.use` and the existing
+`equip_toggle` handler; its false return retains the item after a paid action.
+Physical fields are copied/saved. `_get_equipped_weapon` and incoming AI shield
+selection read the session catalogue; armour AV recomputes at equip/restore;
+`Inventory.reductions_for` reads the current definition only for the exact owned
+equipped bag. A source save does not refresh a running catalogue. A reduced bag
+discount on fresh restore may leave the retained load over capacity; ordinary
+subsequent admission still applies. These are existing rules, not frozen equipment
+statistics or a new save format.
 
 ## Navigation and checks
 

@@ -6,8 +6,8 @@ export type FieldSchema = {
   $schema?: string; type: "string" | "number" | "integer" | "boolean" | "object" | "array";
   title?: string; description?: string; default?: string | number | boolean; readOnly?: boolean;
   minimum?: number; maximum?: number; properties?: Record<string, FieldSchema>; required?: string[];
-  items?: FieldSchema; additionalProperties?: boolean;
-  "x-control"?: "scalar" | "multiline" | "ordered-table" | "ordered-records"; "x-reference"?: string; "x-view"?: string; "x-initial"?: string | number | boolean; "x-suggestions"?: string[];
+  items?: FieldSchema; additionalProperties?: boolean | FieldSchema;
+  "x-control"?: "scalar" | "multiline" | "ordered-table" | "ordered-records" | "keyed-number-map"; "x-reference"?: string; "x-view"?: string; "x-initial"?: string | number | boolean; "x-suggestions"?: string[];
 };
 export type Descriptor = {
   production_route?: string;
@@ -26,12 +26,14 @@ export function schemaProblem(value: unknown, path = "schema", depth = 0): strin
   if (!object(value) || depth > 4) return `${path}: expected bounded schema object`;
   for (const key of Object.keys(value)) if (!schemaKeys.has(key)) return `${path}: unsupported schema keyword ${key}`;
   if (!["string","number","integer","boolean","object","array"].includes(String(value.type))) return `${path}: unsupported type`;
-  if (value["x-control"] !== undefined && !["scalar","multiline","ordered-table","ordered-records"].includes(String(value["x-control"]))) return `${path}: unsupported control`;
-  if (value.type === "object" && depth !== 0 && depth !== 2) return `${path}: only root and table-row objects are supported`;
+  if (value["x-control"] !== undefined && !["scalar","multiline","ordered-table","ordered-records","keyed-number-map"].includes(String(value["x-control"]))) return `${path}: unsupported control`;
+  const keyedMap=value["x-control"]==="keyed-number-map";
+  if(keyedMap && (value.type!=="object" || depth!==1 || typeof value["x-reference"]!=="string" || !object(value.additionalProperties) || value.additionalProperties.type!=="number" || !object(value.properties) || Object.keys(value.properties).length))return `${path}: invalid keyed number map`;
+  if (value.type === "object" && depth !== 0 && depth !== 2 && !keyedMap) return `${path}: only root, keyed maps and table-row objects are supported`;
   if (value.type === "array" && (depth !== 1 || !["ordered-table","ordered-records"].includes(String(value["x-control"])))) return `${path}: only registered ordered records are supported`;
   if (value["x-control"] === "multiline" && value.type !== "string") return `${path}: multiline requires a string`;
   if (["ordered-table","ordered-records"].includes(String(value["x-control"])) && (value.type!=="array" || !object(value.items) || value.items.type!=="object")) return `${path}: ordered controls require an array of objects`;
-  if (value["x-reference"] !== undefined && value.type !== "string") return `${path}: reference requires a string`;
+  if (value["x-reference"] !== undefined && value.type !== "string" && !keyedMap) return `${path}: reference requires a string or keyed map`;
   const suggestions = value["x-suggestions"];
   if (suggestions !== undefined && (value.type !== "string" || !Array.isArray(suggestions) || suggestions.length > 32 || suggestions.some(s=>typeof s !== "string"))) return `${path}: invalid string suggestions`;
   for (const key of ["default","x-initial"]) if (value[key] !== undefined && (value.type === "string" ? typeof value[key] !== "string" : value.type === "boolean" ? typeof value[key] !== "boolean" : value.type === "number" ? typeof value[key] !== "number" || !Number.isFinite(value[key]) : value.type === "integer" ? !Number.isSafeInteger(value[key]) : true)) return `${path}: unsupported or mismatched ${key}`;
@@ -44,6 +46,7 @@ export function schemaProblem(value: unknown, path = "schema", depth = 0): strin
     for (const [key, child] of Object.entries(value.properties)) { const problem = schemaProblem(child, `${path}.${key}`, depth+1); if (problem) return problem; }
   }
   if (value.type === "array") return schemaProblem(value.items, `${path}[]`, depth+1);
+  if(keyedMap)return schemaProblem(value.additionalProperties,`${path}{}`,depth+1);
   return "";
 }
 export function familyProblem(value: unknown): string {

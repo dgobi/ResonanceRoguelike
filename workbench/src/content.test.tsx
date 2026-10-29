@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { ContractFields } from "./ContractControls";
+import { ContractFields, KeyedNumberMap } from "./ContractControls";
 import { effectiveValue, familyProblem, rowDefaults, schemaProblem, type ContentFamily, type FieldSchema } from "./content";
 import { itemValue } from "./item";
 import { recipeRow } from "./recipe";
@@ -48,5 +48,12 @@ describe("registered ordinary controls and exact-source ownership",()=>{
     expect(familyProblem({...family,descriptor:{...family.descriptor,vocabulary:"future"}})).toContain("vocabulary");
     expect(familyProblem({...family,references:{keywords:[{id:3}]}})).toContain("reference");
     expect(familyProblem({...family,id:"forged"})).toContain("Unregistered");
+  });
+  it("negotiates one bounded keyed number object and renders absence without writing defaults",()=>{
+    const map:FieldSchema={type:"object",properties:{},additionalProperties:{type:"number",minimum:0,maximum:1},"x-control":"keyed-number-map","x-reference":"categories",title:"Reductions"};
+    expect(schemaProblem({...schema,properties:{weight_reductions:map}})).toBe("");
+    expect(schemaProblem({...schema,properties:{weight_reductions:{...map,additionalProperties:true}}})).toContain("keyed number map");
+    const html=renderToStaticMarkup(<KeyedNumberMap family={family} field="weight_reductions" schema={map} value={undefined} disabled={false} onEdit={()=>{throw Error("unexpected edit");}}/>);
+    expect(html).toContain("Absent in source");expect(html).toContain("effective empty map");
   });
 });

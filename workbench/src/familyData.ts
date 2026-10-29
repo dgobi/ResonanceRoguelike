@@ -49,10 +49,11 @@ export function previewProblem(value: unknown): string {
 export type FactoryResult = {item_id: string; instance: Record<string, unknown>; comparisons: {field: string; declared: unknown; present?:boolean; effective_factory_value?:unknown; instance: unknown; equal: boolean}[]; consumer: string; scope: string; definition_sha256: string; source: Source; path: string; observed_at_utc: string; loaded_catalog_sha256: string};
 export type ItemRecord = {
   id: string; pointer: string; definition: Record<string, unknown>; diagnostics: Diagnostic[];
-  capability: {contract: string; editable: boolean; supply_class?: string; fields: string[]; reason: string; weight_unit: string; tier_min: number; tier_max: number; tier_note: string; stack_note: string};
+  capability: {contract: string; editable: boolean; supply_class?: string; equipment_class?:string|null; fields: string[]; reason: string; weight_unit: string; tier_min: number; tier_max: number; tier_note: string; stack_note: string};
+  equipment?: {equipment_class:string;slot:string;current_definition_fields:string[];retained:Record<string,unknown>;scope:string;explanation:string;base_range?:number[];summed_av?:number}|null;
   effective_use?: {field:string;explanation:string;stored:unknown;fraction?:number;maximum?:number;configuration_sha256?:string}|null;
   return_item?: {id:string;label:string;path:string;editable:boolean;sha256:string}|null;
-  use: {declared: unknown; status: string; consumer: string; handler: string | null; line: number | null; scope: string; notes: string[]};
+  use: {declared: unknown; present?:boolean;effective?:unknown;legacy?:boolean; status: string; consumer: string; handler: string | null; line: number | null; scope: string; notes: string[]};
   pools: {id: string; path: string; pointer: string; index: number; field: string; unique: boolean}[];
   dependencies: {kind: string; field: string; id: string; resolved?: boolean; paths?: string[]; note?: string}[];
   factory: FactoryResult | null;

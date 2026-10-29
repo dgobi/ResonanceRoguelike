@@ -26,7 +26,7 @@ class SuppliesWorker(unittest.TestCase):
                 candidate=dict(raw,id='w5j_'+raw['id']) if variant else raw
                 target=path.rsplit('/',1)[0]+'/'+candidate['id']+'.json' if variant else path
                 result=invoke('preview_draft',asset=target,source_asset=path,draft=json.dumps(candidate))['result']
-                self.assertTrue(result['valid'],result);self.assertTrue(result['factory_verified']);self.assertEqual(result['family']['contract'],'usable-supplies-1')
+                self.assertTrue(result['valid'],result);self.assertTrue(result['factory_verified']);self.assertEqual(result['family']['contract'],'expedition-items-2')
             candidate=dict(raw,on_use='drink' if raw.get('on_use')!='drink' else 'eat')
             result=invoke('preview_draft',asset=path,draft=json.dumps(candidate))['result']
             self.assertFalse(result['valid']);self.assertIn('ITEM_CLASS',[d['code'] for d in result['diagnostics']])

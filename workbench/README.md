@@ -834,7 +834,7 @@ CPython runtime without the game dependency wheels.
 ## Contract and limits
 
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-3**,
-item contract **usable-supplies-1**, recipe contract **item-preparation-1**,
+item contract **expedition-items-2**, recipe contract **item-preparation-1**,
 found-text contract **ordinary-found-text-1**, and
 creature contract **creature-common-1**, with Workbench layout capability
 **authored-room-2** on the existing `authored_submap` route (game structure contract g2-3).
@@ -916,3 +916,20 @@ checks final decor ownership, actors, arrival, return and contents access withou
 relocating furnishings or publishing partial scene layers. Reset retains its
 capture; latest-saved captures revised furnishings. Already generated ordinary
 saves retain their actual changed decor and removed objects.
+
+### W5M expedition equipment
+
+The registered item family now includes ordinary weapons, armour, shields and
+satchels under `expedition-items-2`, alongside all existing supplies. Class controls
+share exact Source, history, recovery and one-file publication. Legacy new-ID
+variants show their required explicit equip handler in the diff. Armour layers
+retain coverage/metadata; bag reductions remain a keyed JSON object with category
+override/fallback semantics. See [item/equipment guidance](../roguelike/docs/ITEM_AUTHORING.md).
+
+Save/reopen the kit before room placement. The packaged repeatable journey is
+`node scripts/run-equipment.mjs`; it uses normal game input, actual consumers,
+separate cold ownership and fresh-catalogue compatibility. Copied physical values
+and definition-owned statistics have distinct activation boundaries. A source save
+does not hot-reload a game, and a bag reduction decrease can leave an old owned
+load over capacity without losing objects. Reset retains its immutable capture;
+latest saved captures revised definitions.

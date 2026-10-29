@@ -1,6 +1,6 @@
-# Usable supplies authoring (W5J)
+# Expedition item authoring (W5M)
 
-The registered item family uses `usable-supplies-1`. Begin edit changes the same
+The registered item family uses `expedition-items-2`. Begin edit changes the same
 ID; **Save as new variant** creates a distinct ID beside a verified source.
 IDs are machine identities. Display-name edits never redirect references.
 
@@ -9,9 +9,12 @@ One unique single-object source under `data/items/components`, `butchery` or
 and it is an ordinary inert material, `eat` food, `drink` drink or `heal_minor`
 treatment. The original category and use identity stay fixed for both operations.
 Raw Source, recovery and descriptor flags cannot promote unsupported originals.
-Arrays, ambiguous/case-colliding IDs, corpses, equipment, satchels, lights,
+Arrays, ambiguous/case-colliding IDs, corpses, lights,
 readable items, effects and special preparations remain inspect-only. Rules admit
 42 shipped sources: 30 materials, nine foods, two drinks and one treatment.
+Equipment adds six ordinary weapons, two armour definitions, one shield and three
+satchels: 54 of 79 total sources. Run `workbench/scripts/equipment-inventory.py`
+with an output JSON path for operation/class eligibility and exclusion reasons.
 This is an executable inventory, not an ID allowlist.
 
 `empty_water_skin` is reference-only: rain/filling matches its exact ID and creates
@@ -94,6 +97,94 @@ version** captures revisions. See [room test runtime](ROOM_TEST_RUNTIME.md).
 No save-schema bump, global immutable catalogue, survival rebalance or generalized
 vessel mechanics are included. Returned objects are not automatically refillable;
 canonical skin filling does not reproduce a custom drink variant.
+
+## Ordinary equipment controls and publication rules
+
+Equipment uses the same item documents, history, Source, recovery, validation,
+review and single-file apply as supplies. Save/reopen each item before placing
+its saved ID through room or supported pool controls. Independent parked drafts
+never overlay validation or capture. Source and current runtime consumers join
+the conservative dependency stamp; changing either stales review/capture.
+
+| Class and compatible route | Locked category/slot | Editable definition properties |
+| --- | --- | --- |
+| Weapon, `items/weapons` | `weapon` / `weapon` | `damage_dice`, `damage_bonus`, `crit_chance` |
+| Armour, `items/armor` | `armor` / original armour slot | Ordered `armor_layers`: name, material, AV; add, remove, reorder |
+| Shield, `items/shields` | `shield` / `offhand` | `block_chance`, `block_value` |
+| Satchel, `items/equipment/satchel` | `equipment` / `satchel` | Native keyed `weight_reductions` object |
+
+All four also have the common controls above. A deliberate new armour variant may
+choose `armor_head`, `armor_torso`, `armor_arms` or `armor_legs`. Same-ID edits keep
+their slot; other classes keep their class slot in either operation. Raw Source,
+recovery or a descriptor label cannot promote an unsupported original or edit
+locked behavior. Singular essence/strength and well-formed inherited movesets are
+retained read-only; new IDs retain their action IDs and shared cooldown identity.
+The base-attack check does not certify every move. Multi-essence debug equipment,
+held lights, talismans, effects, coatings, corpses and special-use items remain
+inspect-only. Unedited metadata is preserved; it is not an active control.
+
+Ordinary equipment requires `equip_toggle`. Four exact shipped IDs have a legacy
+missing-handler repair on owned use: `revelation_lens`, `leather_satchel`,
+`herbalist_pouch`, `component_satchel`. Use binding distinguishes declared absence
+or null from that effective binding. A new-ID variant deliberately inserts
+`"on_use":"equip_toggle"` in the draft/reviewed diff; candidate validation and
+publication independently require it. Same-ID edits retain the original absent/
+null spelling. Explicit handlers remain explicit. No global fallback or shipped
+definition cleanup is installed.
+
+Publication rejects booleans as numbers, nonfinite values, duplicate JSON keys,
+unresolved tiles/keywords, malformed rows/maps and ambiguous identities. Defaults
+are displayed without inserting keys; explicit null is not omission. Unsupported
+numeric shapes remain inspectable and are never normalized by an unrelated edit.
+
+* Damage expressions are positive `NdM`, 1–100 dice and 1–1,000 sides; the permissive
+  combat parser's fallback cannot authorize new damage. Absent dice use the existing
+  unarmed `1d4` fallback, which ignores a weapon bonus. Bonus is a signed integer
+  within ±2147483647; dice plus bonus must fit that magnitude. This bounds authoring
+  execution, not global gameplay loading or balance.
+* Critical and block chances are finite fractions in `[0,1]`. Weapon critical
+  chance is **additional** to current base 0.05 and the head-hit bonus. Base range
+  uses `combat.roll_dice`; it promises neither turn damage nor encounter balance.
+* Armour has 1–32 layers, nonempty name/material and nonnegative integer AV.
+  Shield reduction is a nonnegative integer. Each and summed item AV fit signed
+  32-bit magnitude. AV uses `_sum_item_av`; coverage and other row metadata survive
+  edits/reordering. Coverage is read-only and does not select protected body parts
+  in current combat. Names/materials do not add material physics. Explicit new rows
+  default to `new layer`, `leather`, AV 0, with no invented coverage.
+* Satchel keys are production inventory labels (`Weapons`, `Armour & Shields`,
+  `Consumables`, `Preparations`, `Components`, `Tools`, `Light Sources`,
+  `Miscellaneous`) plus `all`. Fractions are in `[0,1]`. A category overrides
+  `all`, including zero; it is not added. Missing `all` means zero fallback; `{}`
+  is valid. Add/change/remove preserves the JSON object, remaining key order and
+  unedited bytes. Raw category IDs such as `component` are refused.
+
+## Equipment ownership and activation
+
+Properties and Use binding describe stored definitions and validated binding.
+Factory result is **unowned construction** of copied common fields. Damage,
+armour layers, shield values and bag reductions are not copied into `ITEM_STATE`.
+Neither of those views proves acquisition, ownership, action costs or combat.
+Focused production-consumer checks and the packaged journey provide that evidence.
+
+| Boundary | Existing behavior |
+| --- | --- |
+| Saved physical instance | Retains copied name, description, tile, weight, keywords, grouping, handler and stored instance state. Fresh construction uses current definitions. |
+| Weapon and shield | Ordinary attack callers read the session catalogue, including for an older owned same-ID item. |
+| Armour | AV recomputes from current definitions at equip/restore boundaries. |
+| Satchel | Current-definition reductions apply only while the exact owned bag is equipped. Base instance weights are never rewritten. The gain depends on actual carried categories/load. |
+| Equipment references | Exact owned inventory/save rows; same-ID siblings are distinct. Replacement, drop, consumption and transfer clean up only the selected instance. |
+| Running game | Keeps its loaded catalogue; source publication does not hot-reload it. |
+| Reset / latest saved | Reset uses the original immutable capture; latest saved constructs a new capture from revised saved dependencies. |
+| Generated room | Saved map, ownership and depletion remain authoritative; source revisions do not regenerate it. |
+
+A fresh-catalogue restore with a reduced bag discount can legitimately be over
+capacity. Objects, copied weights and slot references survive; subsequent pickup
+uses the existing admission check. No dropping, migration or save rejection is
+introduced to force the inventory under capacity. Equipping is a paid ordinary
+inventory action that retains the object (`False` from the handler means not
+consumed). Shields displace and deactivate an ordinary lit offhand item while
+retaining that physical item and its burn state. No action, combat, light or
+carrying rules are changed by authoring.
 
 ## Preparation references
 

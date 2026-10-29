@@ -17,6 +17,7 @@ class DiagnosticEvents:
         self.fixture_applied=False
         self.action_calls=0
         self._counting=False
+        self.attacks=[]
 
     def frame(self,e,screen):
         from room_test import write_json
@@ -26,6 +27,20 @@ class DiagnosticEvents:
                 self.action_calls+=1
                 return advance()
             e._advance_turn=counted
+            # Read-only trace around the real resolver, preserving its RNG and
+            # result. Both ordinary callers still supply their own definitions.
+            from dataclasses import asdict
+            from engine import combat
+            resolve=combat.resolve_attack
+            def observed_attack(*args,**kwargs):
+                result=resolve(*args,**kwargs)
+                self.attacks.append(dict(attacker=kwargs.get('attacker_name'),defender=kwargs.get('defender_name'),
+                    weapon=kwargs.get('weapon'),shield=kwargs.get('shield_def'),
+                    equipped={slot:str(id(item)) if item else None for slot,item in e.player.equipment.slots.items()},
+                    result=asdict(result)))
+                self.attacks=self.attacks[-32:]
+                return result
+            combat.resolve_attack=observed_attack
             self._counting=True
         def observed_item(item):
             return dict(serialize_item(item),instance=str(id(item)))
@@ -41,6 +56,9 @@ class DiagnosticEvents:
                 visible_beyond_player_circle=[[x,y] for x in range(m.width) for y in range(m.height) if m.visible[x,y] and (x-e.player.x)**2+(y-e.player.y)**2>e._effective_fov_radius**2]),
             interaction=dict(cursor=[e.interaction_cursor.cursor_x,e.interaction_cursor.cursor_y],candidates=e.interaction_cursor.candidates),
             inventory=[observed_item(i) for i in e.player.inventory.items],
+            equipment={slot:dict(item_id=item.item_id,instance=str(id(item)),inventory_row=next((i for i,owned in enumerate(e.player.inventory.items) if owned is item),None)) if item else None for slot,item in e.player.equipment.slots.items()},
+            carrying=dict(weight=e.player.inventory.current_weight,base_weight=sum(i.weight for i in e.player.inventory.items),capacity=e.player.inventory.capacity,reductions=e.player.inventory.reductions_for()),
+            effective_av=e.player.fighter.effective_av,attacks=self.attacks,
             action_calls=self.action_calls,fixture_applied=self.fixture_applied,
             needs=dict(hunger=e.player.needs.hunger,thirst=e.player.needs.thirst),hp=e.player.fighter.hp,max_hp=e.player.fighter.max_hp,
             inventory_open=inv.open,inventory_selected=inv.selected,

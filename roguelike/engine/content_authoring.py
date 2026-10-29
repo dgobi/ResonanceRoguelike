@@ -29,15 +29,17 @@ def schema_problems(schema):
         kind = node.get("type")
         if kind not in ("string", "number", "integer", "boolean", "object", "array"):
             errors.append(f"{path}: unsupported type {kind}")
-        if node.get("x-control", "scalar") not in ("scalar", "multiline", "ordered-table", "ordered-records"):
+        if node.get("x-control", "scalar") not in ("scalar", "multiline", "ordered-table", "ordered-records", "keyed-number-map"):
             errors.append(f"{path}: unsupported control {node['x-control']}")
-        if kind == "object" and depth not in (0, 2): errors.append(f"{path}: only root and table-row objects are supported")
+        keyed_map = node.get('x-control') == 'keyed-number-map'
+        if keyed_map and (kind != 'object' or depth != 1 or not isinstance(node.get('x-reference'),str) or not isinstance(node.get('additionalProperties'),dict) or node['additionalProperties'].get('type') != 'number' or node.get('properties') != {}): errors.append(f'{path}: keyed-number-map requires one referenced root-field object with numeric values')
+        if kind == "object" and depth not in (0, 2) and not keyed_map: errors.append(f"{path}: only root, keyed maps and table-row objects are supported")
         if kind == "array" and (depth != 1 or node.get("x-control") not in ("ordered-table", "ordered-records")):
             errors.append(f"{path}: only registered ordered tables are supported")
         if node.get("x-control") == "multiline" and kind != "string": errors.append(f"{path}: multiline requires a string")
         if node.get("x-control") in ("ordered-table", "ordered-records") and (kind != "array" or not isinstance(node.get("items"), dict) or node["items"].get("type") != "object"):
             errors.append(f"{path}: ordered controls require an array of objects")
-        if "x-reference" in node and kind != "string": errors.append(f"{path}: reference requires a string")
+        if "x-reference" in node and kind != "string" and not keyed_map: errors.append(f"{path}: reference requires a string or keyed map")
         if "x-suggestions" in node and (kind != "string" or not isinstance(node["x-suggestions"], list) or len(node["x-suggestions"]) > 32 or any(not isinstance(v, str) for v in node["x-suggestions"])):
             errors.append(f"{path}: invalid string suggestions")
         for annotation in ("default", "x-initial"):
@@ -54,6 +56,7 @@ def schema_problems(schema):
             if not isinstance(node.get("required", []), list) or any(k not in props for k in node.get("required", [])):
                 errors.append(f"{path}: invalid required properties")
         if kind == "array": visit(node.get("items"), path+"[]", depth+1)
+        if keyed_map: visit(node.get('additionalProperties'),path+'{}',depth+1)
         for key in ("minimum", "maximum"):
             if key in node and (type(node[key]) not in (float, int) or not -float('inf') < node[key] < float('inf')):
                 errors.append(f"{path}: invalid {key}")

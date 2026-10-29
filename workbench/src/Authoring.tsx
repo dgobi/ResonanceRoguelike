@@ -26,6 +26,7 @@ import {
 import { type RequestLease } from "./requests";
 import type { Disk, DiskSubscription } from "./workspace";
 import { currentVerdict, scalarEdit, sourceDiff, syntax } from "./draft";
+import { itemVariant, itemValue, removeItemProperty } from "./item";
 import { requireCovered, type Candidate } from "./reopen";
 import { Checkpoints, type RegisterRecovery, type RecoveryStatus } from "./recovery";
 
@@ -517,7 +518,12 @@ export function Authoring({
           {(!content || sourceOperations(content).includes("variant")) && <button
             disabled={!!busy}
             onClick={() => {
-              change(latest.current,false,{...intent.current,variant:!intent.current.variant});
+              let text=latest.current;
+              const original=document.family?.id==="item" ? document.family.context?.records[0] : null;
+              if(intent.current.variant && original?.use.legacy){
+                try{text=itemValue(text,["id"],original.id);text=original.use.present ? itemValue(text,["on_use"],original.use.declared) : removeItemProperty(text,["on_use"]);}catch{/* Invalid Source remains exact. */}
+              }
+              change(text,false,{...intent.current,variant:!intent.current.variant});
             }}
           >
             {" "}
@@ -533,7 +539,7 @@ export function Authoring({
             value={variantId}
             disabled={!!busy}
             onChange={(e) => {
-              let text=latest.current;try{text=scalarEdit(text,"id",e.target.value);}catch{/* Keep invalid text exact while retaining target intent. */}
+              let text=latest.current;try{text=document.family?.id==="item" ? itemVariant(text,e.target.value,!!document.family.context?.records[0]?.use.legacy) : scalarEdit(text,"id",e.target.value);}catch{/* Keep invalid text exact while retaining target intent. */}
               change(text,false,{...intent.current,variantId:e.target.value});
             }}
           />

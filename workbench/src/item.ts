@@ -15,6 +15,36 @@ export function itemValue(text: string, path: (string | number)[], value: unknow
   if (node && ["string", "number", "boolean", "null"].includes(node.type) && node.value === value) return text;
   return valueEdit(text, path, value);
 }
+
+// Original source evidence controls the insertion; a renderer class label does
+// not authorize it. The Python adapter independently requires the same binding.
+export function itemVariant(text:string,id:string,legacy:boolean) {
+  const next=itemValue(text,["id"],id);
+  return legacy ? itemValue(next,["on_use"],"equip_toggle") : next;
+}
+
+export function keyedNumber(text:string,field:string,key:string,value?:number) {
+  const parsed=itemModel(text);
+  if(!parsed.model)throw new Error(parsed.reason);
+  const map=parsed.model[field];
+  if(map!==undefined && (!map || typeof map!=="object" || Array.isArray(map)))throw new Error("Repair the keyed number object in Source first.");
+  if(!key)throw new Error("Choose a category key.");
+  if(map===undefined)return value===undefined ? text : valueEdit(text,[field],{[key]:value});
+  return value===undefined ? removeItemProperty(text,[field,key]) : itemValue(text,[field,key],value);
+}
+
+export function removeItemProperty(text:string,path:(string|number)[]) {
+  const {tree,bom,diagnostics}=syntax(text);
+  if(diagnostics.length || !tree)throw new Error("Repair JSON first.");
+  const parent=findNodeAtLocation(tree,path.slice(0,-1));
+  if(parent?.type!=="object")throw new Error("Expected an object.");
+  const props=parent.children || [], index=props.findIndex(p=>p.children?.[0].value===path.at(-1));
+  if(index<0)return text;
+  const node=props[index];let start=node.offset+bom,end=start+node.length;
+  if(index<props.length-1)end=props[index+1].offset+bom;
+  else if(index>0)start=props[index-1].offset+props[index-1].length+bom;
+  return text.slice(0,start)+text.slice(end);
+}
 export function keywordEntry(text: string, index: number, tag?: string, row: Record<string,unknown> = {tag, tier: 1}) {
   const parsed = itemModel(text);
   if (!parsed.model) throw new Error(parsed.reason);

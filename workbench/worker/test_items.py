@@ -17,8 +17,8 @@ class ItemTests(unittest.TestCase):
         self.assertEqual(len(rows), 79)
         self.assertEqual([r["path"] for r in rows], sorted(r["path"] for r in rows))
         from collections import Counter
-        self.assertEqual(len([r for r in rows if r["editable"]]),42)
-        self.assertEqual(Counter(r['category'] for r in rows if r['editable']),dict(component=4,butchery=18,consumable=20))
+        self.assertEqual(len([r for r in rows if r["editable"]]),54)
+        self.assertEqual(Counter(r['category'] for r in rows if r['editable']),dict(component=4,butchery=18,consumable=20,weapon=6,armor=2,shield=1,equipment=3))
         for asset in (ITEM, "roguelike/data/items/tools/tallow_torch.json", "roguelike/data/items/weapons/binding_knife.json",
                       "roguelike/data/items/consumables/resonant_tincture.json"):
             path = ROOT / asset; before = path.read_bytes(); meta = path.stat()
@@ -26,7 +26,7 @@ class ItemTests(unittest.TestCase):
             self.assertEqual(r["raw"].encode(), before)
             self.assertEqual(path.read_bytes(), before); self.assertEqual(path.stat().st_mtime_ns, meta.st_mtime_ns)
             c = r["family"]["context"]["records"][0]
-            self.assertEqual(c["capability"]["editable"], asset == ITEM)
+            self.assertEqual(c["capability"]["editable"], asset == ITEM or 'binding_knife' in asset)
             self.assertIsNotNone(c["factory"], c["diagnostics"])
             self.assertEqual(c["use"]["status"], "Not applicable" if asset == ITEM else "Handler found")
             if asset == ITEM:
