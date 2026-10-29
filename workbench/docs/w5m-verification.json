@@ -1,0 +1,657 @@
+{
+  "milestone": "W5M",
+  "passed": true,
+  "observed_utc": "2026-10-29T06:54:52.171912+00:00",
+  "contract": "expedition-items-2",
+  "revisions": {
+    "start": "a60c66680127112f467611d3986043bb48d0fa33",
+    "initial_remote": "a60c66680127112f467611d3986043bb48d0fa33",
+    "implementation": "829a2acf51539f92af314a6fe1dcab633ea9298d",
+    "package_inputs": "829a2acf51539f92af314a6fe1dcab633ea9298d",
+    "evidence_inputs": "39f3bd50fbdd7bf6d5ddcb46df53575fa44638f0",
+    "final_delivery_ref": "checkpoint/workbench-w5m-verified-20261029",
+    "note": "Final commit cannot embed its own hash. Resolve the final named ref; post-push remote-readback.json and the handoff report exact local/remote main equality. Package runtime inputs are separate from later harness/evidence commits."
+  },
+  "accepted_fixtures": {
+    "w5m_blade": {
+      "path": "workbench/docs/evidence/w5m/fixtures/w5m_blade.json",
+      "sha256": "e70b060e9a5d8c840b19ce74056dda7c09560e858aa0c58ed87391083ab066cd",
+      "published_path": "roguelike/data/items/weapons/w5m_blade.json",
+      "definition": {
+        "id": "w5m_blade",
+        "name": "W5M expedition blade",
+        "description": "Iron, poorly kept. It will serve.",
+        "tile": "generic_item",
+        "category": "weapon",
+        "slot": "weapon",
+        "weight": 1.2,
+        "stackable": false,
+        "damage_dice": "2d6",
+        "damage_bonus": 3,
+        "essence": "Dissolution",
+        "essence_strength": 0.2,
+        "_essence_note": "Iron corrodes. Poor maintenance accelerates it. The dissolution is incidental, not deliberate.",
+        "on_use": "equip_toggle",
+        "consumed_on_use": false,
+        "keywords": [
+          {
+            "tag": "cutting",
+            "tier": 1
+          }
+        ],
+        "movesets": [
+          {
+            "id": "hack",
+            "name": "Hack",
+            "description": "A crude strike. More force than finesse.",
+            "key": "Q",
+            "turn_cost": 1,
+            "cooldown": 4,
+            "range": 1,
+            "damage_mult": 1.3,
+            "callout": "HACK",
+            "effects": {}
+          },
+          {
+            "id": "desperate_slash",
+            "name": "Desperate Slash",
+            "description": "The body finds strength in extremity.",
+            "key": "R",
+            "turn_cost": 0.8,
+            "cooldown": 8,
+            "range": 1,
+            "damage_mult": 1.5,
+            "hp_gate": 0.5,
+            "callout": "DESPERATE",
+            "effects": {
+              "ignore_armour_layers": 1
+            }
+          }
+        ],
+        "crit_chance": 0.12
+      },
+      "identity": "Exact UTF-8 bytes authored, reviewed, single-file published and byte-checked reopened through packaged controls; -text preserves fixture bytes."
+    },
+    "w5m_jack": {
+      "path": "workbench/docs/evidence/w5m/fixtures/w5m_jack.json",
+      "sha256": "cf86edcc04208d455d7373889c62e8f6066a19622f18e4a4c7789fd25f83c057",
+      "published_path": "roguelike/data/items/armor/w5m_jack.json",
+      "definition": {
+        "id": "w5m_jack",
+        "name": "W5M expedition jack",
+        "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+        "tile": "generic_item",
+        "category": "armor",
+        "slot": "armor_torso",
+        "weight": 2,
+        "stackable": false,
+        "armor_layers": [
+          {
+            "name": "leather jack",
+            "coverage": 1,
+            "armor_value": 3,
+            "material": "leather"
+          },
+          {
+            "armor_value": 2,
+            "material": "cloth",
+            "name": "field lining"
+          }
+        ],
+        "essence": "Binding",
+        "essence_strength": 0.3,
+        "_essence_note": "Leather holds shape. It was an animal that held its form. Curing fixes that form permanently.",
+        "on_use": "equip_toggle",
+        "consumed_on_use": false,
+        "keywords": [
+          {
+            "tag": "fibrous",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact UTF-8 bytes authored, reviewed, single-file published and byte-checked reopened through packaged controls; -text preserves fixture bytes."
+    },
+    "w5m_ward": {
+      "path": "workbench/docs/evidence/w5m/fixtures/w5m_ward.json",
+      "sha256": "2524b20fe2b7632443312886b9a7d002737b998db139e12d58e50aa4bd8644ae",
+      "published_path": "roguelike/data/items/shields/w5m_ward.json",
+      "definition": {
+        "id": "w5m_ward",
+        "name": "W5M expedition ward",
+        "tile": "faceted_ward",
+        "type": "shield",
+        "category": "shield",
+        "slot": "offhand",
+        "block_chance": 0.65,
+        "block_value": 4,
+        "weight": 2.4,
+        "description": "A warped disc of verdigris bronze, the metal buckled and re-set so many times the original form is barely legible. A face was once pressed into the front — mouth open, eyes shut. Most of the features have been beaten flat. It turns a blow poorly. It is better than nothing.",
+        "essence": "Binding",
+        "essence_strength": 0.5,
+        "on_use": "equip_toggle",
+        "consumed_on_use": false,
+        "keywords": [
+          {
+            "tag": "binding",
+            "tier": 2
+          },
+          {
+            "tag": "resonant",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact UTF-8 bytes authored, reviewed, single-file published and byte-checked reopened through packaged controls; -text preserves fixture bytes."
+    },
+    "w5m_satchel": {
+      "path": "workbench/docs/evidence/w5m/fixtures/w5m_satchel.json",
+      "sha256": "cedde7e71badca6edc7d696ca765319a44160ca8e01580baa6fb876402c669e5",
+      "published_path": "roguelike/data/items/equipment/satchel/w5m_satchel.json",
+      "definition": {
+        "id": "w5m_satchel",
+        "name": "W5M expedition satchel",
+        "category": "equipment",
+        "slot": "satchel",
+        "tile": "leather_satchel",
+        "weight": 0.7,
+        "description": "Worn leather, stitched at the seams. Carries more than it looks.",
+        "weight_reductions": {
+          "all": 0.2,
+          "Components": 0.75
+        },
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 2
+          }
+        ],
+        "consumed_on_use": false,
+        "on_use": "equip_toggle"
+      },
+      "identity": "Exact UTF-8 bytes authored, reviewed, single-file published and byte-checked reopened through packaged controls; -text preserves fixture bytes."
+    },
+    "room": {
+      "path": "workbench/docs/evidence/w5m/fixtures/room.json",
+      "sha256": "3a1a82669fe54471fe9cb5d54a4d8374de6a5070ca472d0513894dee4948277d",
+      "published_path": "roguelike/data/layouts/w5m_equipment_room.json",
+      "definition": {
+        "id": "w5m_equipment_room",
+        "width": 19,
+        "height": 11,
+        "layers": [
+          "###################",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.<...............#",
+          "#.................#",
+          "###################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 3,
+          "y": 8
+        },
+        "special_tiles": [
+          {
+            "type": "item",
+            "x": 4,
+            "y": 7,
+            "item_id": "w5m_blade"
+          },
+          {
+            "type": "item",
+            "x": 5,
+            "y": 7,
+            "item_id": "w5m_jack"
+          },
+          {
+            "type": "item",
+            "x": 6,
+            "y": 7,
+            "item_id": "w5m_satchel"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 7,
+            "item_id": "w5m_ward"
+          },
+          {
+            "type": "item",
+            "x": 8,
+            "y": 7,
+            "item_id": "w5m_ward"
+          },
+          {
+            "type": "item",
+            "x": 3,
+            "y": 4,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 4,
+            "y": 4,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 5,
+            "y": 4,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 6,
+            "y": 4,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 4,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 8,
+            "y": 4,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 9,
+            "y": 4,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 3,
+            "y": 5,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 4,
+            "y": 5,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 5,
+            "y": 5,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 6,
+            "y": 5,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 5,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 8,
+            "y": 5,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 9,
+            "y": 5,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 3,
+            "y": 3,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "item",
+            "x": 4,
+            "y": 3,
+            "item_id": "wood_bundle"
+          },
+          {
+            "type": "creature",
+            "x": 16,
+            "y": 2,
+            "creature_id": "stone_lurker"
+          }
+        ]
+      },
+      "identity": "Exact UTF-8 bytes authored, reviewed, single-file published and byte-checked reopened through packaged controls; -text preserves fixture bytes."
+    },
+    "satchel_revised": {
+      "path": "workbench/docs/evidence/w5m/fixtures/satchel_revised.json",
+      "sha256": "70f1731ee8b4b863f7fdf1d8527cfb46b9e7df9e082326835322c78029c81d20",
+      "published_path": "roguelike/data/items/equipment/satchel/w5m_satchel.json",
+      "definition": {
+        "id": "w5m_satchel",
+        "name": "W5M revised expedition satchel",
+        "category": "equipment",
+        "slot": "satchel",
+        "tile": "leather_satchel",
+        "weight": 0.7,
+        "description": "Worn leather, stitched at the seams. Carries more than it looks.",
+        "weight_reductions": {
+          "all": 0.05,
+          "Components": 0
+        },
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 2
+          }
+        ],
+        "consumed_on_use": false,
+        "on_use": "equip_toggle"
+      },
+      "identity": "Exact UTF-8 bytes authored, reviewed, single-file published and byte-checked reopened through packaged controls; -text preserves fixture bytes."
+    }
+  },
+  "environment": {
+    "path": "workbench/docs/evidence/w5m/environment.json",
+    "sha256": "6c7deadf80d2ef0b29a660be761f629d7c0f50e3621f9a7a55049f2d87a4fd32"
+  },
+  "inventory": {
+    "path": "workbench/docs/evidence/w5m/item-inventory.json",
+    "sha256": "41dc74e8107357306f3b8711f4513c7f052b0cb0992732b0e066997c84127f3b"
+  },
+  "package_source_inputs": {
+    "path": "workbench/docs/evidence/w5m/package-source-inputs.json",
+    "sha256": "51911527ae6fc32ad1492e7955dab79b491f64fa49ba154acd8925eaec630e94"
+  },
+  "observations": {
+    "path": "workbench/docs/evidence/w5m/observations.json",
+    "sha256": "56e157bcbf9df251ba3514943a9f92931fb1875e6507de8380a7f2ed069bcc69"
+  },
+  "gates": {
+    "path": "workbench/docs/evidence/w5m/gates.json",
+    "sha256": "a0a1c59f491f68cffb520eab648a6102b4bcb56d6e6a73069e62664b1242d7b7"
+  },
+  "preservation": {
+    "path": "workbench/docs/evidence/w5m/preservation.json",
+    "sha256": "5376fe123792729cc0c8b1c217b8f676b5a8b08765685c6968e76def957b8ec7"
+  },
+  "package": {
+    "resonance-workbench.exe": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "2bc781fed5302a79a3e63628a2e869dfe1a3de1e5d420897533caf40caf39348"
+    },
+    "bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "499d0777d3c33bd3272f6af7181b66e916fee7ab5be5246baae9405c3dc8da08"
+    }
+  },
+  "runtime": {
+    "worker/bridge.py": {
+      "path": "workbench/worker/bridge.py",
+      "sha256": "69d276cc2cc69d3992395901eb549106582997f10c9d14b5f090aab9b6c02653"
+    },
+    "worker/runtime/python.exe": {
+      "path": "workbench/worker/runtime/python.exe",
+      "sha256": "bf1b03022cadfc18049a7f0ecf1f3134c7676fcb6ff6c6941ae7f77e21285c73"
+    },
+    "worker/runtime/python311._pth": {
+      "path": "workbench/worker/runtime/python311._pth",
+      "sha256": "c76be49a913db57efc322b4c77ae5ed282e78285a69a70441e011529241507ce"
+    },
+    "worker/requirements.lock": {
+      "path": "workbench/worker/requirements.lock",
+      "sha256": "17cd05554346febe141934ef7757e42d71f91880d2303051196fda0d50d278a7"
+    }
+  },
+  "source_hashes": {
+    "roguelike/components/ai.py": {
+      "working_sha256": "d2b07138454923132659c1fc28783e7a7e3cd760b70621a26bfab8bcbb858f01",
+      "committed_sha256": "3c56d5cbea74361709e8a21e19881145708686596c651d8d958b5b6a1cbd9361"
+    },
+    "roguelike/components/equipment.py": {
+      "working_sha256": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7",
+      "committed_sha256": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7"
+    },
+    "roguelike/components/inventory.py": {
+      "working_sha256": "f8bd45b695fc9c44f0d73fed77f6f998eb46b3e30139ce2d99c6baf16edcec58",
+      "committed_sha256": "d4ff5ae5adb237d481884fec6b79d71d877d5e65a4c785a3230fc11bae01d743"
+    },
+    "roguelike/docs/ITEM_AUTHORING.md": {
+      "working_sha256": "4ee710316be6460ed6114e987268aaae4e4cf65bf2548370917e82b67affdb8e",
+      "committed_sha256": "4ee710316be6460ed6114e987268aaae4e4cf65bf2548370917e82b67affdb8e"
+    },
+    "roguelike/docs/ROOM_TEST_RUNTIME.md": {
+      "working_sha256": "8c131e1768aeb419e9cbe9e8450d494f2b4f185ccc5cb6f0f46ea44b20921380",
+      "committed_sha256": "8c131e1768aeb419e9cbe9e8450d494f2b4f185ccc5cb6f0f46ea44b20921380"
+    },
+    "roguelike/docs/owner/RUNTIME_MAP.md": {
+      "working_sha256": "be44a2c156f9adfb3680127f1e98c7d6fc60c017fdc8803c45b9d0a5e13b5f1f",
+      "committed_sha256": "84cc4fd066b8b988818f38e19687172064a1e8842a569bf1c05ec2e848bc6a85"
+    },
+    "roguelike/engine/combat.py": {
+      "working_sha256": "567a84340d7186d136d6b66ebe003bdc0d22c46313b603324d8eaacb47cc652a",
+      "committed_sha256": "567a84340d7186d136d6b66ebe003bdc0d22c46313b603324d8eaacb47cc652a"
+    },
+    "roguelike/engine/content_authoring.py": {
+      "working_sha256": "724e31e33597f8411ac65206762dcb2497ba89576c23bf8b84b53c74c787c56c",
+      "committed_sha256": "724e31e33597f8411ac65206762dcb2497ba89576c23bf8b84b53c74c787c56c"
+    },
+    "roguelike/engine/data_loader.py": {
+      "working_sha256": "b4da68e7fa96eeeb9d84fed66fcaa2fc2bf94cf6464276a17d1e8d5d0dd67f38",
+      "committed_sha256": "57472c51da21d1dbba6633a563d8236b1fbd02f510a405d645f808876a5f24fb"
+    },
+    "roguelike/engine/engine.py": {
+      "working_sha256": "06ae1ad0e9920ce8fba3975ba3f846f4d0a4c5041ce41e0471860c5d6d1b5d83",
+      "committed_sha256": "06ae1ad0e9920ce8fba3975ba3f846f4d0a4c5041ce41e0471860c5d6d1b5d83"
+    },
+    "roguelike/engine/equipment_authoring.py": {
+      "working_sha256": "6370d9bcfef4c278da4bde14477d006637f9fa3fabbb5b66b8c2c334f5fdb2ff",
+      "committed_sha256": "6370d9bcfef4c278da4bde14477d006637f9fa3fabbb5b66b8c2c334f5fdb2ff"
+    },
+    "roguelike/engine/inventory_screen.py": {
+      "working_sha256": "ad2f6efffff891cb05511ca3f33da9980bf92ee584e68bab2cd7a1bee6d7885f",
+      "committed_sha256": "0f826e48d9263f6725367c6d6be0f98e3e2bed0a31d9d7181a3cb8ad2727feea"
+    },
+    "roguelike/engine/item_authoring.py": {
+      "working_sha256": "e2eca51a596955d0c49ae3bcf230a9789f5c70371eaab3f82d74fd932e2ca9ea",
+      "committed_sha256": "e2eca51a596955d0c49ae3bcf230a9789f5c70371eaab3f82d74fd932e2ca9ea"
+    },
+    "roguelike/engine/item_factory.py": {
+      "working_sha256": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "committed_sha256": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66"
+    },
+    "roguelike/engine/item_system.py": {
+      "working_sha256": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "committed_sha256": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71"
+    },
+    "roguelike/engine/item_transfers.py": {
+      "working_sha256": "d95cdf9f1fc647bc98b02179512def418b4f25092dcfbc5dc308036c9c185afa",
+      "committed_sha256": "d95cdf9f1fc647bc98b02179512def418b4f25092dcfbc5dc308036c9c185afa"
+    },
+    "roguelike/engine/movesets.py": {
+      "working_sha256": "af880b2ca088465dea0a5e3be49e7bbe2a835b93560bdd248ba46f9a8a995a09",
+      "committed_sha256": "af880b2ca088465dea0a5e3be49e7bbe2a835b93560bdd248ba46f9a8a995a09"
+    },
+    "roguelike/engine/player_setup.py": {
+      "working_sha256": "6bfb6a2b4b8aec50a9715cc37abd52a77c953f8f5b6fedefd0c856d0fea14f10",
+      "committed_sha256": "0ccf782001d72d2c2ba717fdac95826b92b546b2d5bfbbdac4349bd0c6aa013c"
+    },
+    "roguelike/engine/room_test_diagnostics.py": {
+      "working_sha256": "80c976649639c0b6a30e1ad3fbfeb4ca7a66096ba10607c0e7816fe0b1184df8",
+      "committed_sha256": "80c976649639c0b6a30e1ad3fbfeb4ca7a66096ba10607c0e7816fe0b1184df8"
+    },
+    "roguelike/engine/save_components.py": {
+      "working_sha256": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+      "committed_sha256": "b2df939decdb283814a4c4ba94ec9c6d5339a0d05f78fad909e859d6f3475228"
+    },
+    "roguelike/engine/save_manager.py": {
+      "working_sha256": "19e244226a5f8117318595a8431b6694a8777c153ecc855f127e147fa912741b",
+      "committed_sha256": "28628c17329f66b962d1cef09843e60c0b184ac2474c9667c2de8e481da94842"
+    },
+    "roguelike/engine/scene_generation.py": {
+      "working_sha256": "5acc7c8c0229a3b9bf77f850f68f00ef382f758f9c83dcbda998dba34492477f",
+      "committed_sha256": "83dfc5c35a9628793d3992598e46b438cc62d4debaa5cabb0f38ae162e2442ba"
+    },
+    "roguelike/entities/item.py": {
+      "working_sha256": "434d25aff6ab3e64624784394c8ca8e1d00eb560f93268af021afb7b24c67d74",
+      "committed_sha256": "013129e034cc4f25d3d6769440905d3ac69eef67aa6dcf9f00f8169630a8b977"
+    },
+    "roguelike/generation/authored_decor.py": {
+      "working_sha256": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52",
+      "committed_sha256": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52"
+    },
+    "roguelike/room_test.py": {
+      "working_sha256": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603",
+      "committed_sha256": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603"
+    },
+    "tools/critical_fix_regressions/tests/test_equipment_w5m.py": {
+      "working_sha256": "dc7387017cd551267f394920836655a7e6f29f479452811803e24598efc589d4",
+      "committed_sha256": "dc7387017cd551267f394920836655a7e6f29f479452811803e24598efc589d4"
+    },
+    "tools/critical_fix_regressions/tests/test_usable_supplies.py": {
+      "working_sha256": "d813d2f4b26635b1714d7ab6a8ca7c01edefadab6f965ff321ba1e8bc146678c",
+      "committed_sha256": "d813d2f4b26635b1714d7ab6a8ca7c01edefadab6f965ff321ba1e8bc146678c"
+    },
+    "workbench/README.md": {
+      "working_sha256": "01cfa75f21e9ea31b011da405494441e70c71591d558b11740edddf311070226",
+      "committed_sha256": "87a86cf67592c3260cab23c75aa64ede43fc073948974624f82d4ec8140a8784"
+    },
+    "workbench/scripts/capture-equipment-binding.mjs": {
+      "working_sha256": "0ad26a669e5eafcc731afbb7b2bdec19469562d50aab7aeb82d32baa889bd268",
+      "committed_sha256": "0ad26a669e5eafcc731afbb7b2bdec19469562d50aab7aeb82d32baa889bd268"
+    },
+    "workbench/scripts/equipment-inventory.py": {
+      "working_sha256": "6bd6292a96c59e1273ac4041113d1d1e77315420a4c0f4e04865dc3b621295ba",
+      "committed_sha256": "6bd6292a96c59e1273ac4041113d1d1e77315420a4c0f4e04865dc3b621295ba"
+    },
+    "workbench/scripts/equipment-persistence.py": {
+      "working_sha256": "6bdae7ec93f9536f20c54bea27cf70730d0bd853bffb885ba829206ffb7ef283",
+      "committed_sha256": "6bdae7ec93f9536f20c54bea27cf70730d0bd853bffb885ba829206ffb7ef283"
+    },
+    "workbench/scripts/run-equipment.mjs": {
+      "working_sha256": "9aa41a2406b781c1e6b80af3e475256ec554d0f202c79630f4a3b0d67f5858c3",
+      "committed_sha256": "0e2a6e6bedf4c48935baa7fe9b2b2687b9c43a22969e4436262449f4403ab8b5"
+    },
+    "workbench/scripts/w5m-preservation.py": {
+      "working_sha256": "b697460cdd2e0a9f38c81c8524559b1765c5f6638c7d216d40ddeae189e8d67a",
+      "committed_sha256": "b697460cdd2e0a9f38c81c8524559b1765c5f6638c7d216d40ddeae189e8d67a"
+    },
+    "workbench/scripts/w5m-readback.py": {
+      "working_sha256": "4002e513c129890ea03c5074fd7a7ff5b249c6e040e72d89a683f7c8bbb763e5",
+      "committed_sha256": "4002e513c129890ea03c5074fd7a7ff5b249c6e040e72d89a683f7c8bbb763e5"
+    },
+    "workbench/scripts/w5m-receipt.py": {
+      "working_sha256": "bb74c69dac2cecd9eab8a1f1e08f36fb81dc1d789f1f38721cc0163bf6a97d54",
+      "committed_sha256": "bb74c69dac2cecd9eab8a1f1e08f36fb81dc1d789f1f38721cc0163bf6a97d54"
+    },
+    "workbench/src-tauri/src/authoring.rs": {
+      "working_sha256": "02840262f7c6c53a4cb7d08809cd52828c208c06db76006d7abc0f3bf1bc4186",
+      "committed_sha256": "02840262f7c6c53a4cb7d08809cd52828c208c06db76006d7abc0f3bf1bc4186"
+    },
+    "workbench/src-tauri/src/recovery.rs": {
+      "working_sha256": "622e236b013b44e113719e834eb74c64562ef6235dca8a6188f1143da7c0f679",
+      "committed_sha256": "5407c4f66d7351e0420d55d62cba57cd7135894da9fb88dc5479183cd68969fc"
+    },
+    "workbench/src/Authoring.tsx": {
+      "working_sha256": "5a84ab0f3f8b53f6e7606ada9357fa58f9f4b426eaccc7f3f27f3fb3b080b3dd",
+      "committed_sha256": "5a84ab0f3f8b53f6e7606ada9357fa58f9f4b426eaccc7f3f27f3fb3b080b3dd"
+    },
+    "workbench/src/ContentEditor.tsx": {
+      "working_sha256": "e6801ad8eccbac5860fa298bba1bae1ce782d781bfbe2979073cd5372efc881f",
+      "committed_sha256": "e6801ad8eccbac5860fa298bba1bae1ce782d781bfbe2979073cd5372efc881f"
+    },
+    "workbench/src/ContractControls.tsx": {
+      "working_sha256": "508f76be03786a6044f305720475e2a496ff039a92c81066712ab6d7991ccd8d",
+      "committed_sha256": "508f76be03786a6044f305720475e2a496ff039a92c81066712ab6d7991ccd8d"
+    },
+    "workbench/src/ItemEditor.tsx": {
+      "working_sha256": "3754ee715657d4d42e357dee03d7166ad51b367c45a89d2bff422768853cf139",
+      "committed_sha256": "c87fc6425a6510a87cecd3570d868d5a4ffae25d851e597aadb4e6b9add82e0e"
+    },
+    "workbench/src/content.test.tsx": {
+      "working_sha256": "3cfea9b9271bed33082d53202783c1f3ca0fec32e67896f80f381f6e3bf74484",
+      "committed_sha256": "3cfea9b9271bed33082d53202783c1f3ca0fec32e67896f80f381f6e3bf74484"
+    },
+    "workbench/src/content.ts": {
+      "working_sha256": "92bea4a4f5f8be4bbfbe52dd6d0a7b0bd4ed3ab121d992d6a9355a5b872ad6d3",
+      "committed_sha256": "92bea4a4f5f8be4bbfbe52dd6d0a7b0bd4ed3ab121d992d6a9355a5b872ad6d3"
+    },
+    "workbench/src/familyData.ts": {
+      "working_sha256": "9c57f781c22279c9d968a96e7b3b328b560d6cae4e46aa80e3e2a35b3983ea64",
+      "committed_sha256": "cac05b7c7a46a9693bb112672efdd3acb2156f254d4788bfb3e55e2d49d58e02"
+    },
+    "workbench/src/item.test.ts": {
+      "working_sha256": "bf3b0f2c1ed16bbca4946dac445c8dbb64d2ebe38c0747c3ffdfdbd56ef00244",
+      "committed_sha256": "bf3b0f2c1ed16bbca4946dac445c8dbb64d2ebe38c0747c3ffdfdbd56ef00244"
+    },
+    "workbench/src/item.ts": {
+      "working_sha256": "2e5acb0fb6e68e5c7ba134850ebfe41ef4a5b2975aaeb928bdb2c9dc369d7c35",
+      "committed_sha256": "2e5acb0fb6e68e5c7ba134850ebfe41ef4a5b2975aaeb928bdb2c9dc369d7c35"
+    },
+    "workbench/worker/test_equipment.py": {
+      "working_sha256": "a0a3950d45014661883625bd6cb7e8b98bd9d8351503a082a9e56317e95eef54",
+      "committed_sha256": "a0a3950d45014661883625bd6cb7e8b98bd9d8351503a082a9e56317e95eef54"
+    },
+    "workbench/worker/test_items.py": {
+      "working_sha256": "c248182f778c336b171e788fa43314148915230512e69f01115d05a3bbdb5ede",
+      "committed_sha256": "c248182f778c336b171e788fa43314148915230512e69f01115d05a3bbdb5ede"
+    },
+    "workbench/worker/test_supplies.py": {
+      "working_sha256": "40c05cb7c3dda07019bd7a0a841eed3f45e3b15a3d19612c208f96c8866a078e",
+      "committed_sha256": "40c05cb7c3dda07019bd7a0a841eed3f45e3b15a3d19612c208f96c8866a078e"
+    }
+  },
+  "captured_game_inputs": {
+    "roguelike/components/ai.py": "d2b07138454923132659c1fc28783e7a7e3cd760b70621a26bfab8bcbb858f01",
+    "roguelike/components/equipment.py": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7",
+    "roguelike/components/inventory.py": "f8bd45b695fc9c44f0d73fed77f6f998eb46b3e30139ce2d99c6baf16edcec58",
+    "roguelike/engine/combat.py": "567a84340d7186d136d6b66ebe003bdc0d22c46313b603324d8eaacb47cc652a",
+    "roguelike/engine/content_authoring.py": "724e31e33597f8411ac65206762dcb2497ba89576c23bf8b84b53c74c787c56c",
+    "roguelike/engine/data_loader.py": "b4da68e7fa96eeeb9d84fed66fcaa2fc2bf94cf6464276a17d1e8d5d0dd67f38",
+    "roguelike/engine/engine.py": "06ae1ad0e9920ce8fba3975ba3f846f4d0a4c5041ce41e0471860c5d6d1b5d83",
+    "roguelike/engine/equipment_authoring.py": "6370d9bcfef4c278da4bde14477d006637f9fa3fabbb5b66b8c2c334f5fdb2ff",
+    "roguelike/engine/inventory_screen.py": "ad2f6efffff891cb05511ca3f33da9980bf92ee584e68bab2cd7a1bee6d7885f",
+    "roguelike/engine/item_authoring.py": "e2eca51a596955d0c49ae3bcf230a9789f5c70371eaab3f82d74fd932e2ca9ea",
+    "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+    "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+    "roguelike/engine/item_transfers.py": "d95cdf9f1fc647bc98b02179512def418b4f25092dcfbc5dc308036c9c185afa",
+    "roguelike/engine/movesets.py": "af880b2ca088465dea0a5e3be49e7bbe2a835b93560bdd248ba46f9a8a995a09",
+    "roguelike/engine/player_setup.py": "6bfb6a2b4b8aec50a9715cc37abd52a77c953f8f5b6fedefd0c856d0fea14f10",
+    "roguelike/engine/room_test_diagnostics.py": "80c976649639c0b6a30e1ad3fbfeb4ca7a66096ba10607c0e7816fe0b1184df8",
+    "roguelike/engine/save_components.py": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+    "roguelike/engine/save_manager.py": "19e244226a5f8117318595a8431b6694a8777c153ecc855f127e147fa912741b",
+    "roguelike/engine/scene_generation.py": "5acc7c8c0229a3b9bf77f850f68f00ef382f758f9c83dcbda998dba34492477f",
+    "roguelike/entities/item.py": "434d25aff6ab3e64624784394c8ca8e1d00eb560f93268af021afb7b24c67d74",
+    "roguelike/generation/authored_decor.py": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52",
+    "roguelike/room_test.py": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603"
+  },
+  "limits": [
+    "One controlled equipment expedition, no unaided discovery, encounter balance or every-moveset certification.",
+    "Factory/definition evidence is distinct from ordinary owned use. Focused numeric tests control RNG; native encounter does not.",
+    "Physical copied fields, unchanged capture restore, revised-catalogue ordinary restore and fresh construction are separately demonstrated.",
+    "No live content, starting kit, enabled profile, gameplay rebalance, save migration, wiki edition or reference-pack change."
+  ]
+}

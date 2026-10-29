@@ -1,0 +1,2 @@
+*.json text eol=lf
+fixtures/*.json -text

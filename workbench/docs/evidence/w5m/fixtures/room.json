@@ -1,0 +1,28 @@
+{
+  "id": "w5m_equipment_room",
+  "width": 19,
+  "height": 11,
+  "layers": [
+    "###################",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.<...............#",
+    "#.................#",
+    "###################"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 8
+  },
+  "special_tiles": [{"type":"item","x":4,"y":7,"item_id":"w5m_blade"},{"type":"item","x":5,"y":7,"item_id":"w5m_jack"},{"type":"item","x":6,"y":7,"item_id":"w5m_satchel"},{"type":"item","x":7,"y":7,"item_id":"w5m_ward"},{"type":"item","x":8,"y":7,"item_id":"w5m_ward"},{"type":"item","x":3,"y":4,"item_id":"wood_bundle"},{"type":"item","x":4,"y":4,"item_id":"wood_bundle"},{"type":"item","x":5,"y":4,"item_id":"wood_bundle"},{"type":"item","x":6,"y":4,"item_id":"wood_bundle"},{"type":"item","x":7,"y":4,"item_id":"wood_bundle"},{"type":"item","x":8,"y":4,"item_id":"wood_bundle"},{"type":"item","x":9,"y":4,"item_id":"wood_bundle"},{"type":"item","x":3,"y":5,"item_id":"wood_bundle"},{"type":"item","x":4,"y":5,"item_id":"wood_bundle"},{"type":"item","x":5,"y":5,"item_id":"wood_bundle"},{"type":"item","x":6,"y":5,"item_id":"wood_bundle"},{"type":"item","x":7,"y":5,"item_id":"wood_bundle"},{"type":"item","x":8,"y":5,"item_id":"wood_bundle"},{"type":"item","x":9,"y":5,"item_id":"wood_bundle"},{"type":"item","x":3,"y":3,"item_id":"wood_bundle"},{"type":"item","x":4,"y":3,"item_id":"wood_bundle"},{"type":"creature","x":16,"y":2,"creature_id":"stone_lurker"}]
+}

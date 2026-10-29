@@ -1,0 +1,19 @@
+{
+  "id": "w5m_jack",
+  "name": "W5M expedition jack",
+  "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+  "tile": "generic_item",
+  "category": "armor",
+  "slot": "armor_torso",
+  "weight": 2,
+  "stackable": false,
+  "armor_layers": [
+    {"name": "leather jack", "coverage": 1.0, "armor_value": 3, "material": "leather"}
+  ,{"armor_value":2,"material":"cloth","name":"field lining"}],
+  "essence": "Binding",
+  "essence_strength": 0.3,
+  "_essence_note": "Leather holds shape. It was an animal that held its form. Curing fixes that form permanently.",
+  "on_use": "equip_toggle",
+  "consumed_on_use": false,
+  "keywords": [{"tag": "fibrous", "tier": 1}]
+}

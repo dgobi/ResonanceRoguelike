@@ -1,0 +1,122 @@
+{
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "exit_code": 0,
+      "outcome": "74 frontend tests pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/frontend-final.log",
+        "sha256": "12b10964908200c52e00486d9c9f1c6e5080857fd50de4abb404d5541f6e9c58"
+      }
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "exit_code": 0,
+      "outcome": "TypeScript passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/typecheck-final.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "outcome": "68 Rust tests pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/host-final.log",
+        "sha256": "17ed636dc25182bf0e8d7d7b119c3b04443bb1fb9e40bf786b42f04915799a68"
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "outcome": "Clippy passes with warnings denied",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/clippy-final.log",
+        "sha256": "2c9b6fe84bb69fcce6efb39a40f678399359f49c0626e1684c9bdb17fbe80512"
+      }
+    },
+    {
+      "command": "Development CPython with pinned bundled libraries and absolute inherited game/tests/tools PYTHONPATH: python -B -m unittest test_equipment_w5m test_furnished_rooms_w5l test_preparation_w5k test_crafting test_gameplay_g12 test_gameplay_g16 test_usable_supplies test_authored_assignment test_gameplay_g15 test_effect_persistence test_generation_ownership test_gameplay_g17 test_room_test_session test_combat_routes -v",
+      "exit_code": 0,
+      "outcome": "115 game tests pass, including real subprocess save/load",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/game-final.log",
+        "sha256": "ae58b9383281d9dec0a63b5e3ba3de4358d1d53c01bddfcad7b0e51afe76aa59"
+      }
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -I -B -m unittest discover -s worker -v",
+      "exit_code": 0,
+      "outcome": "93 worker tests: 92 pass, one expected embedded-runtime skip",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/worker-final.log",
+        "sha256": "aa61f15c48125bd63fc61f7b2a57623f1af1f20f5a81bcb6686d45bf11d73d7e"
+      }
+    },
+    {
+      "command": "Development Python: worker/test_bridge.py BridgeTests.test_dependency_absence_structured -v",
+      "exit_code": 0,
+      "outcome": "Separate missing-dependency control passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/dependency-negative-final.log",
+        "sha256": "6dff2d7ec6d888f08f7548b4d255c32dd7af1fd8b389a4bad552e437b9970296"
+      }
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "exit_code": 0,
+      "outcome": "Windows executable and NSIS complete",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/package-final.log",
+        "sha256": "0e2f73e1c2c299a511f701248bc455aecf87461ba99fb1fbc9c669234ad951f1"
+      }
+    },
+    {
+      "command": "node scripts/run-equipment.mjs",
+      "exit_code": 0,
+      "outcome": "Packaged author/acquire/equip/combat/carry/drop/cold/revise/reset/latest and separate ordinary compatibility pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/native-final.log",
+        "sha256": "1e94fa9df95ef61fca8212b8cfabcf0b7cd172cd497936ded38c7b46bc1a3802"
+      }
+    },
+    {
+      "command": "node scripts/capture-equipment-binding.mjs <final journey receipt>",
+      "exit_code": 0,
+      "outcome": "Actual completed-package frame of a validated unpublished legacy variant; original accepted diff separately retained",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/binding-final.log",
+        "sha256": "ce49356de19689d9c260534a3d6f39c463c4ce405ac65ef04cd5511d0eb751df"
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "outcome": "Shared-document lifecycle passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/workspace-final.log",
+        "sha256": "a22a755af0d508373a26a93f2b2a0ca37128c994b1f830a8387a3f3aa4e4b3bf"
+      }
+    },
+    {
+      "command": "node scripts/run-room-tests.mjs",
+      "exit_code": 0,
+      "outcome": "Packaged capture/cancellation/reset/cold/fault/ownership lifecycle passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/room-session-final.log",
+        "sha256": "43134889f5129daba638e2eaaaf5e014710110483b5e843d002ce8d6060b64a4"
+      }
+    },
+    {
+      "command": "Pinned Python: standalone-room-regression.py <fresh disposable w5h/w5m fixture> <w5m output>",
+      "exit_code": 0,
+      "outcome": "Ordinary 128x128 main/default save/load passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5m/ordinary-final.log",
+        "sha256": "ac9d11f24ea1920bea89bba488b1b2d28572650644b2857b607aa3f92410b2cf"
+      }
+    }
+  ],
+  "earlier_attempts": "Early child import environment, a worker inspection returning no result while implementation files were changing, runner selector and NSIS lock attempts are excluded from passing gates. Final commands use stable source, inherited subprocess imports and completed package inputs."
+}

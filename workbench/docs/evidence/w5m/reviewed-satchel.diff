@@ -1,0 +1,24 @@
+===================================================================
+--- roguelike/data/items/equipment/satchel/leather_satchel.json	opened bytes
++++ roguelike/data/items/equipment/satchel/w5m_satchel.json	draft bytes
+@@ -1,12 +1,12 @@
+ {
+-  "id": "leather_satchel",
+-  "name": "Leather Satchel",
++  "id": "w5m_satchel",
++  "name": "W5M expedition satchel",
+   "category": "equipment",
+   "slot": "satchel",
+   "tile": "leather_satchel",
+-  "weight": 0.8,
++  "weight": 0.7,
+   "description": "Worn leather, stitched at the seams. Carries more than it looks.",
+-  "weight_reductions": {"all": 0.10},
++  "weight_reductions": {"all": 0.2,"Components":0.75},
+   "keywords": [{"tag": "vessel", "tier": 1}, {"tag": "fibrous", "tier": 2}],
+   "consumed_on_use": false
+-}
+\ No newline at end of file
++,"on_use":"equip_toggle"}
+\ No newline at end of file
+

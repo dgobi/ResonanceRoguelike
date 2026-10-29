@@ -1,0 +1,17 @@
+{
+  "id": "w5m_ward",
+  "name": "W5M expedition ward",
+  "tile": "faceted_ward",
+  "type": "shield",
+  "category": "shield",
+  "slot": "offhand",
+  "block_chance": 0.65,
+  "block_value": 4,
+  "weight": 2.4,
+  "description": "A warped disc of verdigris bronze, the metal buckled and re-set so many times the original form is barely legible. A face was once pressed into the front — mouth open, eyes shut. Most of the features have been beaten flat. It turns a blow poorly. It is better than nothing.",
+  "essence": "Binding",
+  "essence_strength": 0.5,
+  "on_use": "equip_toggle",
+  "consumed_on_use": false,
+  "keywords": [{"tag": "binding", "tier": 2}, {"tag": "resonant", "tier": 1}]
+}

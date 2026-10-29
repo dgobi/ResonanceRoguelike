@@ -1,0 +1,12 @@
+{
+  "id": "w5m_satchel",
+  "name": "W5M revised expedition satchel",
+  "category": "equipment",
+  "slot": "satchel",
+  "tile": "leather_satchel",
+  "weight": 0.7,
+  "description": "Worn leather, stitched at the seams. Carries more than it looks.",
+  "weight_reductions": {"all": 0.05,"Components":0},
+  "keywords": [{"tag": "vessel", "tier": 1}, {"tag": "fibrous", "tier": 2}],
+  "consumed_on_use": false
+,"on_use":"equip_toggle"}

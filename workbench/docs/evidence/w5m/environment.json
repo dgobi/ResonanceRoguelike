@@ -1,0 +1,39 @@
+{
+  "pinned": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "executable": "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "bits": 64,
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    }
+  },
+  "game_tests": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "executable": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5l\\test-runtime\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    },
+    "note": "Existing verification-only development venv uses the exact bundled libraries through pinned-game.pth; absolute game/tests/tools PYTHONPATH is inherited by subprocesses."
+  },
+  "node": "v24.15.0",
+  "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+  "target": "Windows x64, locked Tauri/NSIS, app-local CDP and pygame events",
+  "npm": "11.12.1",
+  "rustc": "rustc 1.95.0 (59807616e 2026-04-14)",
+  "missing_dependency_control": {
+    "executable": "C:\\Users\\dango\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "method": "Child interpreter -I -B -S omits site dependencies; structured MISSING_DEPENDENCY asserted without a skip."
+  }
+}

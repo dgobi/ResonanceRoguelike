@@ -1,0 +1,1957 @@
+{
+  "contract": "expedition-items-2",
+  "total": 79,
+  "admitted": 54,
+  "classes": {
+    "material": 30,
+    "weapon": 6,
+    "food": 9,
+    "satchel": 3,
+    "shield": 1,
+    "treatment": 1,
+    "armour": 2,
+    "drink": 2
+  },
+  "rows": [
+    {
+      "id": "animal_bone",
+      "path": "roguelike/data/items/butchery/animal_bone.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "animal_sinew",
+      "path": "roguelike/data/items/butchery/animal_sinew.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "bile_coating",
+      "path": "roguelike/data/items/consumables/bile_coating.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "apply_to_weapon",
+        "present": true,
+        "effective": "apply_to_weapon",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_apply_to_weapon",
+        "line": 319,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "binding_knife",
+      "path": "roguelike/data/items/weapons/binding_knife.json",
+      "pointer": "",
+      "equipment_class": "weapon",
+      "supply_class": "weapon",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary weapon; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "bitter_herb",
+      "path": "roguelike/data/items/consumables/bitter_herb.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "binding": {
+        "declared": "eat",
+        "present": true,
+        "effective": "eat",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_eat",
+        "line": 96,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "bone_dust_draught",
+      "path": "roguelike/data/items/consumables/bone_dust_draught.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "reduce_resonance_exposure",
+        "present": true,
+        "effective": "reduce_resonance_exposure",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_reduce_resonance_exposure",
+        "line": 310,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "book",
+      "path": "roguelike/data/items/documents/book.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "read",
+        "present": true,
+        "effective": "read",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_read",
+        "line": 51,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "briar_binding_oil",
+      "path": "roguelike/data/items/consumables/briar_binding_oil.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "apply_to_weapon",
+        "present": true,
+        "effective": "apply_to_weapon",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_apply_to_weapon",
+        "line": 319,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "briar_sap",
+      "path": "roguelike/data/items/butchery/briar_sap.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "clay_lump",
+      "path": "roguelike/data/items/components/clay_lump.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "clay_pot",
+      "path": "roguelike/data/items/components/clay_pot.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "coldbell_cutting",
+      "path": "roguelike/data/items/consumables/coldbell_cutting.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "binding": {
+        "declared": "eat",
+        "present": true,
+        "effective": "eat",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_eat",
+        "line": 96,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "coldbell_extract",
+      "path": "roguelike/data/items/consumables/coldbell_extract.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "reduce_resonance_exposure",
+        "present": true,
+        "effective": "reduce_resonance_exposure",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_reduce_resonance_exposure",
+        "line": 310,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "component_satchel",
+      "path": "roguelike/data/items/equipment/satchel/component_satchel.json",
+      "pointer": "",
+      "equipment_class": "satchel",
+      "supply_class": "satchel",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary satchel; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": "equip_toggle",
+        "legacy": true,
+        "status": "Legacy exact-ID binding",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "Exact shipped ID receives equip_toggle only on ordinary owned use. Same-ID edits preserve the absent/null declaration; new-ID variants must explicitly insert equip_toggle.",
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "compressed_marrow",
+      "path": "roguelike/data/items/butchery/compressed_marrow.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "cooked_meat",
+      "path": "roguelike/data/items/consumables/cooked_meat.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "binding": {
+        "declared": "eat",
+        "present": true,
+        "effective": "eat",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_eat",
+        "line": 96,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "corpse",
+      "path": "roguelike/data/items/special/corpse_placeholder.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "crow_bile",
+      "path": "roguelike/data/items/butchery/crow_bile.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "crow_flight_membrane",
+      "path": "roguelike/data/items/butchery/crow_flight_membrane.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "crow_jerky",
+      "path": "roguelike/data/items/consumables/crow_jerky.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "binding": {
+        "declared": "eat",
+        "present": true,
+        "effective": "eat",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_eat",
+        "line": 96,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "crow_meat",
+      "path": "roguelike/data/items/butchery/crow_meat.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "crude_blade",
+      "path": "roguelike/data/items/weapons/crude_blade.json",
+      "pointer": "",
+      "equipment_class": "weapon",
+      "supply_class": "weapon",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary weapon; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "crude_viscera",
+      "path": "roguelike/data/items/butchery/crude_viscera.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "debug_blade",
+      "path": "roguelike/data/items/weapons/debug_blade.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Inspect-only unsupported equipment behavior: essences.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "dissolution_blade",
+      "path": "roguelike/data/items/weapons/dissolution_blade.json",
+      "pointer": "",
+      "equipment_class": "weapon",
+      "supply_class": "weapon",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary weapon; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "dried_aromatic_herb",
+      "path": "roguelike/data/items/consumables/dried_aromatic_herb.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "dried_bitter_herb",
+      "path": "roguelike/data/items/consumables/dried_bitter_herb.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "dried_coldbell",
+      "path": "roguelike/data/items/consumables/dried_coldbell.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "dried_murk_violet",
+      "path": "roguelike/data/items/consumables/dried_murk_violet.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "dried_pilgrims_woe",
+      "path": "roguelike/data/items/consumables/dried_pilgrims_woe.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "dried_provisions",
+      "path": "roguelike/data/items/consumables/dried_provisions.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "binding": {
+        "declared": "eat",
+        "present": true,
+        "effective": "eat",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_eat",
+        "line": 96,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "dried_resonant_herb",
+      "path": "roguelike/data/items/consumables/dried_resonant_herb.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "dried_soporific_herb",
+      "path": "roguelike/data/items/consumables/dried_soporific_herb.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "empty_water_skin",
+      "path": "roguelike/data/items/consumables/empty_water_skin.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [],
+      "reason": "Canonical empty skin is reference-only: exact-ID filling creates canonical water_skin.",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "faceted_ward",
+      "path": "roguelike/data/items/shields/faceted_ward.json",
+      "pointer": "",
+      "equipment_class": "shield",
+      "supply_class": "shield",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary shield; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "fibrous_thorn_mass",
+      "path": "roguelike/data/items/butchery/fibrous_thorn_mass.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "flint_shard",
+      "path": "roguelike/data/items/components/flint_shard.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "grave_dust",
+      "path": "roguelike/data/items/butchery/grave_dust.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "heavy_blade",
+      "path": "roguelike/data/items/weapons/heavy_blade.json",
+      "pointer": "",
+      "equipment_class": "weapon",
+      "supply_class": "weapon",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary weapon; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "herbal_dressing",
+      "path": "roguelike/data/items/consumables/herbal_dressing.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "treatment",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary treatment",
+      "binding": {
+        "declared": "heal_minor",
+        "present": true,
+        "effective": "heal_minor",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_heal_minor",
+        "line": 144,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "herbalist_pouch",
+      "path": "roguelike/data/items/equipment/satchel/herbalist_pouch.json",
+      "pointer": "",
+      "equipment_class": "satchel",
+      "supply_class": "satchel",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary satchel; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": "equip_toggle",
+        "legacy": true,
+        "status": "Legacy exact-ID binding",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "Exact shipped ID receives equip_toggle only on ordinary owned use. Same-ID edits preserve the absent/null declaration; new-ID variants must explicitly insert equip_toggle.",
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "hungering_oil",
+      "path": "roguelike/data/items/consumables/hungering_oil.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "apply_to_weapon",
+        "present": true,
+        "effective": "apply_to_weapon",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_apply_to_weapon",
+        "line": 319,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "inner_stone_core",
+      "path": "roguelike/data/items/butchery/inner_stone_core.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "inscription",
+      "path": "roguelike/data/items/documents/inscription.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "read",
+        "present": true,
+        "effective": "read",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_read",
+        "line": 51,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "lab_note",
+      "path": "roguelike/data/items/consumables/lab_note.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "read",
+        "present": true,
+        "effective": "read",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_read",
+        "line": 51,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "leather_cap",
+      "path": "roguelike/data/items/armor/leather_cap.json",
+      "pointer": "",
+      "equipment_class": "armour",
+      "supply_class": "armour",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary armour; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "leather_jack",
+      "path": "roguelike/data/items/armor/leather_jack.json",
+      "pointer": "",
+      "equipment_class": "armour",
+      "supply_class": "armour",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary armour; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "leather_satchel",
+      "path": "roguelike/data/items/equipment/satchel/leather_satchel.json",
+      "pointer": "",
+      "equipment_class": "satchel",
+      "supply_class": "satchel",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary satchel; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": "equip_toggle",
+        "legacy": true,
+        "status": "Legacy exact-ID binding",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "Exact shipped ID receives equip_toggle only on ordinary owned use. Same-ID edits preserve the absent/null declaration; new-ID variants must explicitly insert equip_toggle.",
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "letter",
+      "path": "roguelike/data/items/documents/letter.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "read",
+        "present": true,
+        "effective": "read",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_read",
+        "line": 51,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "marrow_seal",
+      "path": "roguelike/data/items/consumables/marrow_seal.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "apply_to_armor",
+        "present": true,
+        "effective": "apply_to_armor",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_apply_to_armor",
+        "line": 383,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "moist_pebble",
+      "path": "roguelike/data/items/talismans/moist_pebble.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "murk_violet_stem",
+      "path": "roguelike/data/items/consumables/murk_violet_stem.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "binding": {
+        "declared": "eat",
+        "present": true,
+        "effective": "eat",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_eat",
+        "line": 96,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "musk_pellet",
+      "path": "roguelike/data/items/consumables/musk_pellet.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "throw_musk_pellet",
+        "present": true,
+        "effective": "throw_musk_pellet",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_throw_musk_pellet",
+        "line": 428,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "oil_lantern",
+      "path": "roguelike/data/items/tools/oil_lantern.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "equip_light",
+        "present": true,
+        "effective": "equip_light",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_light",
+        "line": 162,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "perk_vessel",
+      "path": "roguelike/data/items/consumables/perk_vessel.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "grant_perk_point",
+        "present": true,
+        "effective": "grant_perk_point",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_grant_perk_point",
+        "line": 231,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "pilgrims_woe_petals",
+      "path": "roguelike/data/items/consumables/pilgrims_woe_petals.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "binding": {
+        "declared": "eat",
+        "present": true,
+        "effective": "eat",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_eat",
+        "line": 96,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "prophets_eye_cap",
+      "path": "roguelike/data/items/consumables/prophets_eye_cap.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "binding": {
+        "declared": "eat",
+        "present": true,
+        "effective": "eat",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_eat",
+        "line": 96,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "raw_meat_common",
+      "path": "roguelike/data/items/butchery/raw_meat_common.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "research_note",
+      "path": "roguelike/data/items/documents/research_note.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "read",
+        "present": true,
+        "effective": "read",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_read",
+        "line": 51,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "resonant_bone_fragment",
+      "path": "roguelike/data/items/butchery/resonant_bone_fragment.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "resonant_bone_tincture",
+      "path": "roguelike/data/items/consumables/resonant_bone_tincture.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "learn_deep_word",
+        "present": true,
+        "effective": "learn_deep_word",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_learn_deep_word",
+        "line": 352,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "resonant_tincture",
+      "path": "roguelike/data/items/consumables/resonant_tincture.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "drink",
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "drink",
+        "present": true,
+        "effective": "drink",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_drink",
+        "line": 115,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "on_use_effects is declared JSON; ItemFactory and ItemSystem do not consume that list."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "revelation_lens",
+      "path": "roguelike/data/items/weapons/revelation_lens.json",
+      "pointer": "",
+      "equipment_class": "weapon",
+      "supply_class": "weapon",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary weapon; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": "equip_toggle",
+        "legacy": true,
+        "status": "Legacy exact-ID binding",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "Exact shipped ID receives equip_toggle only on ordinary owned use. Same-ID edits preserve the absent/null declaration; new-ID variants must explicitly insert equip_toggle.",
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "revenant_husk",
+      "path": "roguelike/data/items/butchery/revenant_husk.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "salt_pouch",
+      "path": "roguelike/data/items/consumables/salt_pouch.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": true,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "severance_blade",
+      "path": "roguelike/data/items/weapons/severance_blade.json",
+      "pointer": "",
+      "equipment_class": "weapon",
+      "supply_class": "weapon",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary weapon; retained essence/movesets are read-only, with shared action-ID cooldowns.",
+      "binding": {
+        "declared": "equip_toggle",
+        "present": true,
+        "effective": "equip_toggle",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_toggle",
+        "line": 240,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "stalker_meat",
+      "path": "roguelike/data/items/butchery/stalker_meat.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "stalker_musk_gland",
+      "path": "roguelike/data/items/butchery/stalker_musk_gland.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "stalker_unguent",
+      "path": "roguelike/data/items/consumables/stalker_unguent.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "apply_stalker_unguent",
+        "present": true,
+        "effective": "apply_stalker_unguent",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_apply_stalker_unguent",
+        "line": 417,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "stone_carapace_fragment",
+      "path": "roguelike/data/items/butchery/stone_carapace_fragment.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "stone_marker",
+      "path": "roguelike/data/items/documents/stone_marker.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "read",
+        "present": true,
+        "effective": "read",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_read",
+        "line": 51,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "sulphur_cap_fragment",
+      "path": "roguelike/data/items/consumables/sulphur_cap_fragment.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "food",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary food",
+      "binding": {
+        "declared": "eat",
+        "present": true,
+        "effective": "eat",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_eat",
+        "line": 96,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "tablet",
+      "path": "roguelike/data/items/documents/tablet.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "read",
+        "present": true,
+        "effective": "read",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_read",
+        "line": 51,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "tallow_torch",
+      "path": "roguelike/data/items/tools/tallow_torch.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "equip_light",
+        "present": true,
+        "effective": "equip_light",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_equip_light",
+        "line": 162,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": [
+          "consumed_on_use controls automatic crafting-material eligibility; use-handler return values govern ordinary use consumption."
+        ]
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "water_flask",
+      "path": "roguelike/data/items/consumables/water_flask.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "drink",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary drink",
+      "binding": {
+        "declared": "drink",
+        "present": true,
+        "effective": "drink",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_drink",
+        "line": 115,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "water_skin",
+      "path": "roguelike/data/items/consumables/water_skin.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "drink",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary drink",
+      "binding": {
+        "declared": "drink",
+        "present": true,
+        "effective": "drink",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_drink",
+        "line": 115,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "wight_concentrate",
+      "path": "roguelike/data/items/consumables/wight_concentrate.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": null,
+      "operations": [],
+      "reason": "Read-only: requires one ordinary material, food, drink or treatment in components/butchery/consumables without equipment, effects or special use.",
+      "binding": {
+        "declared": "consume_wight_concentrate",
+        "present": true,
+        "effective": "consume_wight_concentrate",
+        "legacy": false,
+        "status": "Handler found",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": "ItemSystem._use_consume_wight_concentrate",
+        "line": 404,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "wight_essence_residue",
+      "path": "roguelike/data/items/butchery/wight_essence_residue.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    },
+    {
+      "id": "wood_bundle",
+      "path": "roguelike/data/items/components/wood_bundle.json",
+      "pointer": "",
+      "equipment_class": null,
+      "supply_class": "material",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary inert material",
+      "binding": {
+        "declared": null,
+        "present": false,
+        "effective": null,
+        "legacy": false,
+        "status": "Not applicable",
+        "consumer": "roguelike/engine/item_system.py:ItemSystem.use",
+        "handler": null,
+        "line": null,
+        "scope": "Source-checked dynamic dispatch only. Inventory ownership, equipment repair, turn and handler preconditions are not exercised.",
+        "notes": []
+      },
+      "publication_diagnostics": []
+    }
+  ]
+}
