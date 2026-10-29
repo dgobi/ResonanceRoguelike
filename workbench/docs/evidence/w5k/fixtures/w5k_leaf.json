@@ -1,0 +1,22 @@
+{
+  "id": "w5k_leaf",
+  "name": "W5K bitter sprig",
+  "description": "Two sprigs dry into a field treatment.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.03,
+  "stackable": false,
+  "on_use": "eat",
+  "nutrition": 0.05,
+  "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "bitter",
+      "tier": 1
+    }
+  ]
+}

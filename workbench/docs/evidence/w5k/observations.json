@@ -1,0 +1,6725 @@
+{
+  "scope": "Accepted baseline definitions authored/reopened in packaged Windows controls; continued from their exact bytes after a harness event-file lock. Final process repeats both real preparations, pickup/use, revisions/reset/latest, and separate-process ordinary saves. No external JSON writes are counted as accepted authoring.",
+  "authoring_parent": {
+    "path": "workbench/.artifacts/w5k/native-1793239206578/receipt.json",
+    "sha256": "a0c93418cfbce9b525e732638441d3a3cc199414ebda64263adb0c4ac3745103",
+    "host_pid": 14720,
+    "checks": [
+      "invalid recipe recovery and independent dirty shared document retain exact source without review",
+      "supported supply controls save protected meat, automatic herbs, retained vessel and two usable outputs",
+      "two independent preparation sources authored with component/conjunction/tool and real passive controls",
+      "same-ID immediate recipe permission and real publication; dependency invalidation and external conflict",
+      "room placements reference saved supplies; geometry alone is disclosed Source fixture",
+      "ordinary CraftScreen sole protected component picker, picker cancel and placement cancel spend nothing"
+    ],
+    "interrupted_gameplay_counted_as_completed": false
+  },
+  "completed_journey": {
+    "path": "workbench/.artifacts/w5k/native-1793240644155/receipt.json",
+    "sha256": "b72b97a385174b99f4f125d6b5a79c0c3e350a31fbbb957ceba1e28b5d1ba92b"
+  },
+  "reference_navigation": {
+    "receipt": {
+      "path": "workbench/.artifacts/w5k/references-1793248348786/receipt.json",
+      "sha256": "d11383fbaa275785044e52fb4fd17aa63d765ab1333f8cb1aa62e9dc0f3514af"
+    },
+    "checks": [
+      "Saved conjunction automatic material w5k_leaf opens its exact saved source and returns to w5k_dry",
+      "Saved output w5k_dressing opens its exact saved source and returns to the same recipe"
+    ],
+    "package_sha256": "04aab23023cd8ef7de1e0bc81c758b0e4190995d7df2c0b32b6daa029a6e63ba"
+  },
+  "baseline_restoration": {
+    "scope": "Supported controls restore the earlier accepted version for a final-package replay. Immutable captures are untouched.",
+    "recipe": {
+      "path": "roguelike/data/recipes/w5k_cook.json",
+      "sha256": "17b67e95e9cc4e7c4416d1ea818496fe4a54c85db0c0f0af8c3e14a417e5c99b"
+    },
+    "output": {
+      "path": "roguelike/data/items/consumables/w5k_roast.json",
+      "sha256": "713736230f693f06a6957b695906b604670d340d5aa92342a66be1198198f0fb"
+    }
+  },
+  "saved": {
+    "w5k_meat": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_meat.json",
+      "sha256": "779f1ac4230c4c0a774315c9cc4d2fc5d7a72ab4cc8b2211075e726cfa044365",
+      "published_path": "roguelike/data/items/butchery/w5k_meat.json",
+      "definition": {
+        "id": "w5k_meat",
+        "name": "W5K protected field meat",
+        "description": "Selected deliberately for cooking.",
+        "tile": "generic_item",
+        "category": "butchery",
+        "weight": 0.2,
+        "stackable": false,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "consumed_on_use": false
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_leaf": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_leaf.json",
+      "sha256": "07112ec41eb9e11108834fcbf37810abffc2d51cb92a7c9e4dac83a23686bfeb",
+      "published_path": "roguelike/data/items/consumables/w5k_leaf.json",
+      "definition": {
+        "id": "w5k_leaf",
+        "name": "W5K bitter sprig",
+        "description": "Two sprigs dry into a field treatment.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.03,
+        "stackable": false,
+        "on_use": "eat",
+        "nutrition": 0.05,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_pot": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_pot.json",
+      "sha256": "dade887073a3dd3ea07f3e368ac542a944796137410344fe768400f080387cb3",
+      "published_path": "roguelike/data/items/components/w5k_pot.json",
+      "definition": {
+        "id": "w5k_pot",
+        "name": "W5K field vessel",
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "tile": "generic_item",
+        "category": "component",
+        "weight": 0.3,
+        "stackable": false,
+        "on_use": null,
+        "consumed_on_use": false,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_roast": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_roast.json",
+      "sha256": "713736230f693f06a6957b695906b604670d340d5aa92342a66be1198198f0fb",
+      "published_path": "roguelike/data/items/consumables/w5k_roast.json",
+      "definition": {
+        "id": "w5k_roast",
+        "name": "W5K nourishing roast",
+        "description": "A prepared quarter-need meal.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.1,
+        "stackable": false,
+        "on_use": "eat",
+        "nutrition": 0.25,
+        "eat_message": "W5K roast restores you.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_dressing": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_dressing.json",
+      "sha256": "7e9b243cf0d36489f3795b1e83d6cd7944763190e9ea85f6ed2983fed167d0f8",
+      "published_path": "roguelike/data/items/consumables/w5k_dressing.json",
+      "definition": {
+        "id": "w5k_dressing",
+        "name": "W5K dried field dressing",
+        "description": "A prepared herbal dressing bound in clean linen. Restores up to 12 HP when injured; consumed after one use.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.04,
+        "stackable": false,
+        "on_use": "heal_minor",
+        "heal_amount": 9
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_cook": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_cook.json",
+      "sha256": "17b67e95e9cc4e7c4416d1ea818496fe4a54c85db0c0f0af8c3e14a417e5c99b",
+      "published_path": "roguelike/data/recipes/w5k_cook.json",
+      "definition": {
+        "id": "w5k_cook",
+        "name": "W5K roast meal",
+        "category": "cooking",
+        "description": "Hold raw meat over open flame until it chars. Direct heat required.",
+        "known": true,
+        "components": [
+          {
+            "tag": "vital",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "requires_ambient": [
+          {
+            "tag": "burning",
+            "min_tier": 2
+          }
+        ],
+        "result_item": "w5k_roast",
+        "passive_processing": true,
+        "processing_turns": 3,
+        "processing_source": "cooking",
+        "processing_decor": "cooking_meat",
+        "placement_message": "Set it on the fire.",
+        "tools": [
+          {
+            "tag": "vessel",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "completion_message": "W5K roast ready: {item_name}."
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_dry": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_dry.json",
+      "sha256": "435ce9eed5880d5cda18bf632d5c4552e96e0951784020fa1d2eb7e047a3f7a1",
+      "published_path": "roguelike/data/recipes/w5k_dry.json",
+      "definition": {
+        "id": "w5k_dry",
+        "name": "W5K field dressing",
+        "category": "wildcrafting",
+        "description": "Dry the sprig. The bitterness sharpens. What remains is a better fixative than the fresh form.",
+        "known": true,
+        "requires_single_item": {
+          "tags": [
+            {
+              "tag": "bitter",
+              "min_tier": 1
+            },
+            {
+              "tag": "edible",
+              "min_tier": 1
+            }
+          ],
+          "max_quantity": 2
+        },
+        "requires_ambient": [
+          {
+            "tag": "burning",
+            "min_tier": 1
+          }
+        ],
+        "result_item": "w5k_dressing",
+        "passive_processing": true,
+        "processing_turns": 4,
+        "processing_source": "drying",
+        "processing_decor": "drying_herb",
+        "placement_message": "Where will you spread it to dry?",
+        "tools": [
+          {
+            "tag": "vessel",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "completion_message": "W5K dressing ready: {item_name}."
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_cook_revised": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_cook_revised.json",
+      "sha256": "237febbaf55883d80e41f43d6044963bf1d86c6f8b51174ce2f525d6d8447ea5",
+      "published_path": "roguelike/data/recipes/w5k_cook.json",
+      "definition": {
+        "id": "w5k_cook",
+        "name": "W5K roast meal",
+        "category": "cooking",
+        "description": "Hold raw meat over open flame until it chars. Direct heat required.",
+        "known": true,
+        "components": [
+          {
+            "tag": "vital",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "requires_ambient": [
+          {
+            "tag": "burning",
+            "min_tier": 2
+          }
+        ],
+        "result_item": "w5k_dressing",
+        "passive_processing": true,
+        "processing_turns": 5,
+        "processing_source": "cooking",
+        "processing_decor": "cooking_meat",
+        "placement_message": "Set it on the fire.",
+        "tools": [
+          {
+            "tag": "vessel",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "completion_message": "W5K revised work ready: {item_name}."
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_roast_revised": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_roast_revised.json",
+      "sha256": "259d7a61552b15e0b8576229df8f7221f365633c806442c1dc31079c98dc1ade",
+      "published_path": "roguelike/data/items/consumables/w5k_roast.json",
+      "definition": {
+        "id": "w5k_roast",
+        "name": "W5K revised nourishing roast",
+        "description": "A prepared quarter-need meal.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.1,
+        "stackable": false,
+        "on_use": "eat",
+        "nutrition": 0.6,
+        "eat_message": "W5K roast restores you.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_roast_final": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_roast_final.json",
+      "sha256": "c761870ea685f8a2af2e7929305494e7e430d06c6f6c670f2e97711bcc7f8475",
+      "published_path": "roguelike/data/items/consumables/w5k_roast.json",
+      "definition": {
+        "id": "w5k_roast",
+        "name": "W5K revised nourishing roast",
+        "description": "A prepared quarter-need meal.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.1,
+        "stackable": false,
+        "on_use": "eat",
+        "nutrition": 0.8,
+        "eat_message": "W5K roast restores you.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "room": {
+      "path": "workbench/docs/evidence/w5k/fixtures/room.json",
+      "sha256": "6a9c6ba297089882ceae1d53afcfceb0f715c92522b52e47f240f28413140273",
+      "published_path": "roguelike/data/layouts/w5k_preparation_room.json",
+      "definition": {
+        "id": "w5k_preparation_room",
+        "width": 13,
+        "height": 9,
+        "layers": [
+          "#############",
+          "#...........#",
+          "#...........#",
+          "#...........#",
+          "#...........#",
+          "#...........#",
+          "#.<.........#",
+          "#...........#",
+          "#############"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 3,
+          "y": 6
+        },
+        "special_tiles": [
+          {
+            "type": "item",
+            "x": 2,
+            "y": 3,
+            "item_id": "w5k_meat"
+          },
+          {
+            "type": "item",
+            "x": 3,
+            "y": 3,
+            "item_id": "w5k_meat"
+          },
+          {
+            "type": "item",
+            "x": 4,
+            "y": 3,
+            "item_id": "w5k_leaf"
+          },
+          {
+            "type": "item",
+            "x": 5,
+            "y": 3,
+            "item_id": "w5k_leaf"
+          },
+          {
+            "type": "item",
+            "x": 6,
+            "y": 3,
+            "item_id": "w5k_leaf"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 3,
+            "item_id": "w5k_leaf"
+          },
+          {
+            "type": "item",
+            "x": 8,
+            "y": 3,
+            "item_id": "w5k_pot"
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "immediate_same_id": {
+      "path": "workbench/docs/evidence/w5k/fixtures/immediate_same_id.json",
+      "sha256": "9e27544044e9dc2ab9a7cd1652ae9198011158a3cdf3b669a727ca79cbc3b0d0",
+      "published_path": "roguelike/data/recipes/briar_binding_oil.json",
+      "definition": {
+        "id": "briar_binding_oil",
+        "name": "briar binding oil",
+        "category": "alchemy",
+        "description": "W5K immediate conjunction permission check.",
+        "known": true,
+        "requires_single_item": [
+          {
+            "tag": "viscous",
+            "min_tier": 2
+          },
+          {
+            "tag": "binding",
+            "min_tier": 2
+          }
+        ],
+        "requires_ambient": [
+          {
+            "tag": "burning",
+            "min_tier": 1
+          }
+        ],
+        "result_item": "briar_binding_oil",
+        "passive_processing": false,
+        "tools": [
+          {
+            "tag": "vessel",
+            "min_tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    }
+  },
+  "recovery": {
+    "invalid_sha256": "46e6b2f6b76b8c08e69718a1b44225ce40a137c7acd908bd9ad06c5bad43e8b1",
+    "parked_sha256": "99131612fd0ff09bfece27ad07f57030b7ff5384a566fcc230f858ae820c5e50",
+    "fresh_pid": 14720,
+    "no_review": true
+  },
+  "conflict": {
+    "code": "EXTERNAL_MODIFICATION_CONFLICT",
+    "competing_sha256": "19cba4063abfe955cc1fea3cfd7c84638c3c1170fb65c99be2edb4f21d2cca41",
+    "bytes_preserved": true,
+    "dependency_staled_review": true
+  },
+  "acquired": [
+    {
+      "item_id": "w5k_meat",
+      "item_state_version": 1,
+      "name": "W5K protected field meat",
+      "tile": "generic_item",
+      "weight": 0.2,
+      "stackable": false,
+      "count": 1,
+      "on_use": null,
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "Selected deliberately for cooking.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "vital",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": false,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "2113835770960"
+    },
+    {
+      "item_id": "w5k_meat",
+      "item_state_version": 1,
+      "name": "W5K protected field meat",
+      "tile": "generic_item",
+      "weight": 0.2,
+      "stackable": false,
+      "count": 1,
+      "on_use": null,
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "Selected deliberately for cooking.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "vital",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": false,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "2113835763088"
+    },
+    {
+      "item_id": "w5k_leaf",
+      "item_state_version": 1,
+      "name": "W5K bitter sprig",
+      "tile": "generic_item",
+      "weight": 0.03,
+      "stackable": false,
+      "count": 1,
+      "on_use": "eat",
+      "text_id": "",
+      "nutrition": 0.05,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "Two sprigs dry into a field treatment.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "bitter",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "2113835774352"
+    },
+    {
+      "item_id": "w5k_leaf",
+      "item_state_version": 1,
+      "name": "W5K bitter sprig",
+      "tile": "generic_item",
+      "weight": 0.03,
+      "stackable": false,
+      "count": 1,
+      "on_use": "eat",
+      "text_id": "",
+      "nutrition": 0.05,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "Two sprigs dry into a field treatment.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "bitter",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "2113835775952"
+    },
+    {
+      "item_id": "w5k_leaf",
+      "item_state_version": 1,
+      "name": "W5K bitter sprig",
+      "tile": "generic_item",
+      "weight": 0.03,
+      "stackable": false,
+      "count": 1,
+      "on_use": "eat",
+      "text_id": "",
+      "nutrition": 0.05,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "Two sprigs dry into a field treatment.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "bitter",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "2113836187792"
+    },
+    {
+      "item_id": "w5k_leaf",
+      "item_state_version": 1,
+      "name": "W5K bitter sprig",
+      "tile": "generic_item",
+      "weight": 0.03,
+      "stackable": false,
+      "count": 1,
+      "on_use": "eat",
+      "text_id": "",
+      "nutrition": 0.05,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "Two sprigs dry into a field treatment.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 1
+        },
+        {
+          "tag": "bitter",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "2113836194704"
+    },
+    {
+      "item_id": "w5k_pot",
+      "item_state_version": 1,
+      "name": "W5K field vessel",
+      "tile": "generic_item",
+      "weight": 0.3,
+      "stackable": false,
+      "count": 1,
+      "on_use": null,
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "vessel",
+          "tier": 1
+        },
+        {
+          "tag": "heatproof",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": false,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "2113836188048"
+    }
+  ],
+  "initial_setup": {
+    "player": [
+      39,
+      22
+    ],
+    "fire": {
+      "x": 39,
+      "y": 21,
+      "id": "campfire_lit"
+    },
+    "needs": {
+      "hunger": 0.8,
+      "thirst": 0.8
+    },
+    "hp": 45,
+    "scope": "Once-only production-created heat and needs/injury fixture; no room-decor authoring or pacing claim."
+  },
+  "cooking": {
+    "before": [
+      {
+        "item_id": "tallow_torch",
+        "item_state_version": 1,
+        "name": "Tallow Torch",
+        "tile": "tallow_torch",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 600,
+        "turns_lit": 22,
+        "light_data": {
+          "radius": 8,
+          "color": [
+            255,
+            180,
+            60
+          ],
+          "falloff": 1.8,
+          "flicker": true
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113830873488"
+      },
+      {
+        "item_id": "crow_jerky",
+        "item_state_version": 1,
+        "name": "Crow Jerky",
+        "tile": "food_item",
+        "weight": 0.2,
+        "stackable": true,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.35,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835988496"
+      },
+      {
+        "item_id": "water_flask",
+        "item_state_version": 1,
+        "name": "Water Flask",
+        "tile": "water_flask",
+        "weight": 0.5,
+        "stackable": false,
+        "count": 1,
+        "on_use": "drink",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": 0.5,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": "water",
+        "liquid_volume": 0.5,
+        "qualities": {},
+        "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "drinkable",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835987536"
+      },
+      {
+        "item_id": "crude_blade",
+        "item_state_version": 1,
+        "name": "a crude blade",
+        "tile": "generic_item",
+        "weight": 1.5,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_toggle",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Iron, poorly kept. It will serve.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "cutting",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835986960"
+      },
+      {
+        "item_id": "leather_jack",
+        "item_state_version": 1,
+        "name": "a leather jack",
+        "tile": "generic_item",
+        "weight": 3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_toggle",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "fibrous",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835987472"
+      },
+      {
+        "item_id": "moist_pebble",
+        "item_state_version": 1,
+        "name": "moist pebble",
+        "tile": "pebble",
+        "weight": 0.1,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_toggle",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "resonant",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835987408"
+      },
+      {
+        "item_id": "w5k_meat",
+        "item_state_version": 1,
+        "name": "W5K protected field meat",
+        "tile": "generic_item",
+        "weight": 0.2,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Selected deliberately for cooking.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835770960"
+      },
+      {
+        "item_id": "w5k_meat",
+        "item_state_version": 1,
+        "name": "W5K protected field meat",
+        "tile": "generic_item",
+        "weight": 0.2,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Selected deliberately for cooking.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835763088"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835774352"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835775952"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113836187792"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113836194704"
+      },
+      {
+        "item_id": "w5k_pot",
+        "item_state_version": 1,
+        "name": "W5K field vessel",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113836188048"
+      }
+    ],
+    "spot": [
+      39,
+      21
+    ],
+    "cancel_no_turn": true,
+    "output": {
+      "item_id": "w5k_roast",
+      "item_state_version": 1,
+      "name": "W5K nourishing roast",
+      "tile": "generic_item",
+      "weight": 0.1,
+      "stackable": false,
+      "count": 1,
+      "on_use": "eat",
+      "text_id": "",
+      "nutrition": 0.25,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "W5K roast restores you.",
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "A prepared quarter-need meal.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 2
+        },
+        {
+          "tag": "vital",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "2113834080336"
+    },
+    "confirmed": {
+      "pid": 31360,
+      "turn": 503,
+      "action_calls": 23,
+      "player": [
+        39,
+        22
+      ],
+      "mode": "LOCAL",
+      "needs": {
+        "hunger": 0.801,
+        "thirst": 0.8013750000000001
+      },
+      "hp": 45,
+      "max_hp": 60,
+      "craft": {
+        "open": false,
+        "selected": 5,
+        "choosing": false,
+        "choice_selected": 0,
+        "choice_index": 0,
+        "prompts": [
+          {
+            "comp_index": 0,
+            "options": [
+              {
+                "item_id": "w5k_meat",
+                "count": 2
+              }
+            ]
+          }
+        ],
+        "rows": [
+          {
+            "type": "header",
+            "id": null,
+            "category": "campfire"
+          },
+          {
+            "type": "recipe",
+            "id": "campfire",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "clay_pot",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "cooking"
+          },
+          {
+            "type": "recipe",
+            "id": "cook_meat",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "w5k_cook",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "wildcrafting"
+          },
+          {
+            "type": "recipe",
+            "id": "dry_bitter_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_resonant_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_soporific_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_aromatic_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "musk_pellet",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "w5k_dry",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "alchemy"
+          },
+          {
+            "type": "recipe",
+            "id": "bile_coating",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "bone_dust_draught",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "briar_binding_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "hungering_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "marrow_seal",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_bone_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "stalker_unguent",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "wight_concentrate",
+            "category": null
+          }
+        ]
+      },
+      "placement": {
+        "mode": "campfire",
+        "cursor": [
+          39,
+          21
+        ]
+      },
+      "processing": [
+        {
+          "x": 39,
+          "y": 21,
+          "item_id": "w5k_roast",
+          "turns_remaining": 2,
+          "decor_id": "",
+          "source": "cooking",
+          "completion_message": "W5K roast ready: {item_name}.",
+          "on_fire": true
+        }
+      ],
+      "decor": [
+        {
+          "x": 39,
+          "y": 21,
+          "id": "campfire_lit"
+        }
+      ],
+      "logs": [
+        "Thou takest the W5K bitter sprig.",
+        "Thou takest the W5K bitter sprig.",
+        "Thou takest the W5K field vessel.",
+        "Set it on the fire.",
+        "You decide against it.",
+        "Set it on the fire.",
+        "You set W5K protected field meat to cook.",
+        "The fire takes the edge off."
+      ],
+      "inventory": [
+        {
+          "item_id": "w5k_meat",
+          "item_state_version": 1,
+          "name": "W5K protected field meat",
+          "tile": "generic_item",
+          "weight": 0.2,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Selected deliberately for cooking.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "vital",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113835770960"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113835774352"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113835775952"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113836187792"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113836194704"
+        },
+        {
+          "item_id": "w5k_pot",
+          "item_state_version": 1,
+          "name": "W5K field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113836188048"
+        }
+      ],
+      "floor": []
+    }
+  },
+  "drying": {
+    "spent": [
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835774352"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835775952"
+      }
+    ],
+    "spot": [
+      39,
+      22
+    ],
+    "output": {
+      "item_id": "w5k_dressing",
+      "item_state_version": 1,
+      "name": "W5K dried field dressing",
+      "tile": "generic_item",
+      "weight": 0.04,
+      "stackable": false,
+      "count": 1,
+      "on_use": "heal_minor",
+      "text_id": "",
+      "nutrition": null,
+      "hydration": null,
+      "heal_amount": 9,
+      "eat_message": null,
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "A prepared herbal dressing bound in clean linen. Restores up to 12 HP when injured; consumed after one use.",
+      "harvest_from": null,
+      "keywords": [],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "2113835258384"
+    },
+    "before": {
+      "pid": 31360,
+      "turn": 507,
+      "action_calls": 27,
+      "player": [
+        39,
+        22
+      ],
+      "mode": "LOCAL",
+      "needs": {
+        "hunger": 0.555,
+        "thirst": 0.8068750000000001
+      },
+      "hp": 45,
+      "max_hp": 60,
+      "craft": {
+        "open": false,
+        "selected": 5,
+        "choosing": false,
+        "choice_selected": 0,
+        "choice_index": 0,
+        "prompts": [
+          {
+            "comp_index": 0,
+            "options": [
+              {
+                "item_id": "w5k_meat",
+                "count": 2
+              }
+            ]
+          }
+        ],
+        "rows": [
+          {
+            "type": "header",
+            "id": null,
+            "category": "campfire"
+          },
+          {
+            "type": "recipe",
+            "id": "campfire",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "clay_pot",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "cooking"
+          },
+          {
+            "type": "recipe",
+            "id": "cook_meat",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "w5k_cook",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "wildcrafting"
+          },
+          {
+            "type": "recipe",
+            "id": "dry_bitter_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_resonant_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_soporific_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_aromatic_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "musk_pellet",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "w5k_dry",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "alchemy"
+          },
+          {
+            "type": "recipe",
+            "id": "bile_coating",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "bone_dust_draught",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "briar_binding_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "hungering_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "marrow_seal",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_bone_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "stalker_unguent",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "wight_concentrate",
+            "category": null
+          }
+        ]
+      },
+      "placement": {
+        "mode": "campfire",
+        "cursor": [
+          39,
+          21
+        ]
+      },
+      "processing": [],
+      "decor": [
+        {
+          "x": 39,
+          "y": 21,
+          "id": "campfire_lit"
+        }
+      ],
+      "logs": [
+        "You decide against it.",
+        "Set it on the fire.",
+        "You set W5K protected field meat to cook.",
+        "The fire takes the edge off.",
+        "W5K roast ready: W5K nourishing roast.",
+        "Pick up from where? (movement key, ESC to cancel)",
+        "Thou takest the W5K nourishing roast.",
+        "W5K roast restores you."
+      ],
+      "inventory": [
+        {
+          "item_id": "w5k_meat",
+          "item_state_version": 1,
+          "name": "W5K protected field meat",
+          "tile": "generic_item",
+          "weight": 0.2,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Selected deliberately for cooking.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "vital",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113835770960"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113835774352"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113835775952"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113836187792"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113836194704"
+        },
+        {
+          "item_id": "w5k_pot",
+          "item_state_version": 1,
+          "name": "W5K field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113836188048"
+        }
+      ],
+      "floor": []
+    },
+    "confirmed": {
+      "pid": 31360,
+      "turn": 508,
+      "action_calls": 28,
+      "player": [
+        39,
+        22
+      ],
+      "mode": "LOCAL",
+      "needs": {
+        "hunger": 0.556,
+        "thirst": 0.8082500000000001
+      },
+      "hp": 45,
+      "max_hp": 60,
+      "craft": {
+        "open": false,
+        "selected": 12,
+        "choosing": false,
+        "choice_selected": 0,
+        "choice_index": 0,
+        "prompts": [
+          {
+            "comp_index": 0,
+            "options": [
+              {
+                "item_id": "w5k_meat",
+                "count": 2
+              }
+            ]
+          }
+        ],
+        "rows": [
+          {
+            "type": "header",
+            "id": null,
+            "category": "campfire"
+          },
+          {
+            "type": "recipe",
+            "id": "campfire",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "clay_pot",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "cooking"
+          },
+          {
+            "type": "recipe",
+            "id": "cook_meat",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "w5k_cook",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "wildcrafting"
+          },
+          {
+            "type": "recipe",
+            "id": "dry_bitter_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_resonant_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_soporific_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_aromatic_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "musk_pellet",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "w5k_dry",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "alchemy"
+          },
+          {
+            "type": "recipe",
+            "id": "bile_coating",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "bone_dust_draught",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "briar_binding_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "hungering_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "marrow_seal",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_bone_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "stalker_unguent",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "wight_concentrate",
+            "category": null
+          }
+        ]
+      },
+      "placement": {
+        "mode": "campfire",
+        "cursor": [
+          39,
+          22
+        ]
+      },
+      "processing": [
+        {
+          "x": 39,
+          "y": 22,
+          "item_id": "w5k_dressing",
+          "turns_remaining": 3,
+          "decor_id": "drying_herb",
+          "source": "drying",
+          "completion_message": "W5K dressing ready: {item_name}.",
+          "on_fire": false
+        }
+      ],
+      "decor": [
+        {
+          "x": 39,
+          "y": 21,
+          "id": "campfire_lit"
+        },
+        {
+          "x": 39,
+          "y": 22,
+          "id": "drying_herb"
+        }
+      ],
+      "logs": [
+        "You set W5K protected field meat to cook.",
+        "The fire takes the edge off.",
+        "W5K roast ready: W5K nourishing roast.",
+        "Pick up from where? (movement key, ESC to cancel)",
+        "Thou takest the W5K nourishing roast.",
+        "W5K roast restores you.",
+        "Where will you spread it to dry?",
+        "You spread W5K bitter sprig to dry."
+      ],
+      "inventory": [
+        {
+          "item_id": "w5k_meat",
+          "item_state_version": 1,
+          "name": "W5K protected field meat",
+          "tile": "generic_item",
+          "weight": 0.2,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Selected deliberately for cooking.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "vital",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113835770960"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113836187792"
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113836194704"
+        },
+        {
+          "item_id": "w5k_pot",
+          "item_state_version": 1,
+          "name": "W5K field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "2113836188048"
+        }
+      ],
+      "floor": []
+    }
+  },
+  "uses": [
+    {
+      "id": "w5k_roast",
+      "selected": "2113834080336",
+      "siblings": [],
+      "definition": {
+        "item_id": "w5k_roast",
+        "item_state_version": 1,
+        "name": "W5K nourishing roast",
+        "tile": "generic_item",
+        "weight": 0.1,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.25,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5K roast restores you.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A prepared quarter-need meal.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113834080336"
+      },
+      "before": {
+        "needs": {
+          "hunger": 0.804,
+          "thirst": 0.8055000000000001
+        },
+        "hp": 45,
+        "turn": 506,
+        "calls": 26
+      },
+      "after": {
+        "needs": {
+          "hunger": 0.555,
+          "thirst": 0.8068750000000001
+        },
+        "hp": 45,
+        "turn": 507,
+        "calls": 27,
+        "inventory": [
+          {
+            "item_id": "tallow_torch",
+            "item_state_version": 1,
+            "name": "Tallow Torch",
+            "tile": "tallow_torch",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_light",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": 600,
+            "turns_lit": 27,
+            "light_data": {
+              "radius": 8,
+              "color": [
+                255,
+                180,
+                60
+              ],
+              "falloff": 1.8,
+              "flicker": true
+            },
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113830873488"
+          },
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835988496"
+          },
+          {
+            "item_id": "water_flask",
+            "item_state_version": 1,
+            "name": "Water Flask",
+            "tile": "water_flask",
+            "weight": 0.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "drink",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": "water",
+            "liquid_volume": 0.5,
+            "qualities": {},
+            "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835987536"
+          },
+          {
+            "item_id": "crude_blade",
+            "item_state_version": 1,
+            "name": "a crude blade",
+            "tile": "generic_item",
+            "weight": 1.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Iron, poorly kept. It will serve.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835986960"
+          },
+          {
+            "item_id": "leather_jack",
+            "item_state_version": 1,
+            "name": "a leather jack",
+            "tile": "generic_item",
+            "weight": 3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835987472"
+          },
+          {
+            "item_id": "moist_pebble",
+            "item_state_version": 1,
+            "name": "moist pebble",
+            "tile": "pebble",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835987408"
+          },
+          {
+            "item_id": "w5k_meat",
+            "item_state_version": 1,
+            "name": "W5K protected field meat",
+            "tile": "generic_item",
+            "weight": 0.2,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Selected deliberately for cooking.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "vital",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835770960"
+          },
+          {
+            "item_id": "w5k_leaf",
+            "item_state_version": 1,
+            "name": "W5K bitter sprig",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.05,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Two sprigs dry into a field treatment.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835774352"
+          },
+          {
+            "item_id": "w5k_leaf",
+            "item_state_version": 1,
+            "name": "W5K bitter sprig",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.05,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Two sprigs dry into a field treatment.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835775952"
+          },
+          {
+            "item_id": "w5k_leaf",
+            "item_state_version": 1,
+            "name": "W5K bitter sprig",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.05,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Two sprigs dry into a field treatment.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113836187792"
+          },
+          {
+            "item_id": "w5k_leaf",
+            "item_state_version": 1,
+            "name": "W5K bitter sprig",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.05,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Two sprigs dry into a field treatment.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113836194704"
+          },
+          {
+            "item_id": "w5k_pot",
+            "item_state_version": 1,
+            "name": "W5K field vessel",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113836188048"
+          }
+        ],
+        "rows": [
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Weapons"
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2113835986960",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Armour & Shields"
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2113835987472",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Consumables"
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2113835987536",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5k_leaf",
+            "instance": "2113835774352",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5k_leaf",
+            "instance": "2113835775952",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5k_leaf",
+            "instance": "2113836187792",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5k_leaf",
+            "instance": "2113836194704",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2113835988496",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Components"
+          },
+          {
+            "item_id": "w5k_meat",
+            "instance": "2113835770960",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5k_pot",
+            "instance": "2113836188048",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Tools"
+          },
+          {
+            "item_id": "tallow_torch",
+            "instance": "2113830873488",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Miscellaneous"
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2113835987408",
+            "header": false,
+            "label": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "w5k_dressing",
+      "selected": "2113835258384",
+      "siblings": [],
+      "definition": {
+        "item_id": "w5k_dressing",
+        "item_state_version": 1,
+        "name": "W5K dried field dressing",
+        "tile": "generic_item",
+        "weight": 0.04,
+        "stackable": false,
+        "count": 1,
+        "on_use": "heal_minor",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": 9,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A prepared herbal dressing bound in clean linen. Restores up to 12 HP when injured; consumed after one use.",
+        "harvest_from": null,
+        "keywords": [],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2113835258384"
+      },
+      "before": {
+        "needs": {
+          "hunger": 0.56,
+          "thirst": 0.8137500000000002
+        },
+        "hp": 45,
+        "turn": 512,
+        "calls": 32
+      },
+      "after": {
+        "needs": {
+          "hunger": 0.561,
+          "thirst": 0.8151250000000002
+        },
+        "hp": 54,
+        "turn": 513,
+        "calls": 33,
+        "inventory": [
+          {
+            "item_id": "tallow_torch",
+            "item_state_version": 1,
+            "name": "Tallow Torch",
+            "tile": "tallow_torch",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_light",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": 600,
+            "turns_lit": 33,
+            "light_data": {
+              "radius": 8,
+              "color": [
+                255,
+                180,
+                60
+              ],
+              "falloff": 1.8,
+              "flicker": true
+            },
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113830873488"
+          },
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835988496"
+          },
+          {
+            "item_id": "water_flask",
+            "item_state_version": 1,
+            "name": "Water Flask",
+            "tile": "water_flask",
+            "weight": 0.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "drink",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": "water",
+            "liquid_volume": 0.5,
+            "qualities": {},
+            "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835987536"
+          },
+          {
+            "item_id": "crude_blade",
+            "item_state_version": 1,
+            "name": "a crude blade",
+            "tile": "generic_item",
+            "weight": 1.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Iron, poorly kept. It will serve.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835986960"
+          },
+          {
+            "item_id": "leather_jack",
+            "item_state_version": 1,
+            "name": "a leather jack",
+            "tile": "generic_item",
+            "weight": 3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835987472"
+          },
+          {
+            "item_id": "moist_pebble",
+            "item_state_version": 1,
+            "name": "moist pebble",
+            "tile": "pebble",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835987408"
+          },
+          {
+            "item_id": "w5k_meat",
+            "item_state_version": 1,
+            "name": "W5K protected field meat",
+            "tile": "generic_item",
+            "weight": 0.2,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Selected deliberately for cooking.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "vital",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113835770960"
+          },
+          {
+            "item_id": "w5k_leaf",
+            "item_state_version": 1,
+            "name": "W5K bitter sprig",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.05,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Two sprigs dry into a field treatment.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113836187792"
+          },
+          {
+            "item_id": "w5k_leaf",
+            "item_state_version": 1,
+            "name": "W5K bitter sprig",
+            "tile": "generic_item",
+            "weight": 0.03,
+            "stackable": false,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.05,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Two sprigs dry into a field treatment.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "bitter",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113836194704"
+          },
+          {
+            "item_id": "w5k_pot",
+            "item_state_version": 1,
+            "name": "W5K field vessel",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2113836188048"
+          }
+        ],
+        "rows": [
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Weapons"
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "2113835986960",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Armour & Shields"
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "2113835987472",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Consumables"
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "2113835987536",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5k_leaf",
+            "instance": "2113836187792",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5k_leaf",
+            "instance": "2113836194704",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "2113835988496",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Components"
+          },
+          {
+            "item_id": "w5k_meat",
+            "instance": "2113835770960",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "w5k_pot",
+            "instance": "2113836188048",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Tools"
+          },
+          {
+            "item_id": "tallow_torch",
+            "instance": "2113830873488",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Miscellaneous"
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "2113835987408",
+            "header": false,
+            "label": ""
+          }
+        ]
+      }
+    }
+  ],
+  "captures": {
+    "original": {
+      "captured_ms": 1793240705705,
+      "contract": "workbench-room-test-1",
+      "descriptor_sha256": "063fc96c5c32d9eb88ffa0ae4a15a598f6a0770785c54b5b71df2dd02c016ee6",
+      "manifest_sha256": "67d5852758b5ba23cb0103c8d24a49c6c9f13388bed03fcbe711cbc397b70695",
+      "profile": "ordinary-player-v1: body_player; 60 base HP from body definition; normal needs/carrying/AI; tallow_torch, crow_jerky, water_flask, crude_blade, leather_jack, moist_pebble",
+      "project": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5k\\native-1793239206578\\project",
+      "room_id": "w5k_preparation_room",
+      "room_path": "roguelike/data/layouts/w5k_preparation_room.json",
+      "room_sha256": "6a9c6ba297089882ceae1d53afcfceb0f715c92522b52e47f240f28413140273",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5",
+      "seed": 20261027,
+      "snapshot_id": "6312bcec-60d3-44f8-9262-db4c4da5eee8"
+    },
+    "reset": {
+      "captured_ms": 1793240705705,
+      "contract": "workbench-room-test-1",
+      "descriptor_sha256": "063fc96c5c32d9eb88ffa0ae4a15a598f6a0770785c54b5b71df2dd02c016ee6",
+      "manifest_sha256": "67d5852758b5ba23cb0103c8d24a49c6c9f13388bed03fcbe711cbc397b70695",
+      "profile": "ordinary-player-v1: body_player; 60 base HP from body definition; normal needs/carrying/AI; tallow_torch, crow_jerky, water_flask, crude_blade, leather_jack, moist_pebble",
+      "project": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5k\\native-1793239206578\\project",
+      "room_id": "w5k_preparation_room",
+      "room_path": "roguelike/data/layouts/w5k_preparation_room.json",
+      "room_sha256": "6a9c6ba297089882ceae1d53afcfceb0f715c92522b52e47f240f28413140273",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5",
+      "seed": 20261027,
+      "snapshot_id": "6312bcec-60d3-44f8-9262-db4c4da5eee8"
+    },
+    "latest": {
+      "captured_ms": 1793240777536,
+      "contract": "workbench-room-test-1",
+      "descriptor_sha256": "063fc96c5c32d9eb88ffa0ae4a15a598f6a0770785c54b5b71df2dd02c016ee6",
+      "manifest_sha256": "cccc51e2000caa874baa619c2ffedcd6ed3e989e2fdd99d1a30a61666c5ac91d",
+      "profile": "ordinary-player-v1: body_player; 60 base HP from body definition; normal needs/carrying/AI; tallow_torch, crow_jerky, water_flask, crude_blade, leather_jack, moist_pebble",
+      "project": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5k\\native-1793239206578\\project",
+      "room_id": "w5k_preparation_room",
+      "room_path": "roguelike/data/layouts/w5k_preparation_room.json",
+      "room_sha256": "6a9c6ba297089882ceae1d53afcfceb0f715c92522b52e47f240f28413140273",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5",
+      "seed": 20261027,
+      "snapshot_id": "567dc88e-1620-4be0-b2d0-44738aeb57f9"
+    }
+  },
+  "reset_job": {
+    "pid": 33028,
+    "turn": 503,
+    "action_calls": 23,
+    "player": [
+      39,
+      22
+    ],
+    "mode": "LOCAL",
+    "needs": {
+      "hunger": 0.801,
+      "thirst": 0.8013750000000001
+    },
+    "hp": 45,
+    "max_hp": 60,
+    "craft": {
+      "open": false,
+      "selected": 5,
+      "choosing": false,
+      "choice_selected": 0,
+      "choice_index": 0,
+      "prompts": [
+        {
+          "comp_index": 0,
+          "options": [
+            {
+              "item_id": "w5k_meat",
+              "count": 2
+            }
+          ]
+        }
+      ],
+      "rows": [
+        {
+          "type": "header",
+          "id": null,
+          "category": "campfire"
+        },
+        {
+          "type": "recipe",
+          "id": "campfire",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "clay_pot",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "cooking"
+        },
+        {
+          "type": "recipe",
+          "id": "cook_meat",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5k_cook",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "wildcrafting"
+        },
+        {
+          "type": "recipe",
+          "id": "dry_bitter_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_resonant_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_soporific_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_aromatic_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "musk_pellet",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5k_dry",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "alchemy"
+        },
+        {
+          "type": "recipe",
+          "id": "bile_coating",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "bone_dust_draught",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "briar_binding_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "hungering_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "marrow_seal",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_bone_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "stalker_unguent",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "wight_concentrate",
+          "category": null
+        }
+      ]
+    },
+    "placement": {
+      "mode": "campfire",
+      "cursor": [
+        39,
+        21
+      ]
+    },
+    "processing": [
+      {
+        "x": 39,
+        "y": 21,
+        "item_id": "w5k_roast",
+        "turns_remaining": 2,
+        "decor_id": "",
+        "source": "cooking",
+        "completion_message": "W5K roast ready: {item_name}.",
+        "on_fire": true
+      }
+    ],
+    "decor": [
+      {
+        "x": 39,
+        "y": 21,
+        "id": "campfire_lit"
+      }
+    ],
+    "logs": [
+      "Thou takest the W5K bitter sprig.",
+      "Thou takest the W5K bitter sprig.",
+      "Thou takest the W5K bitter sprig.",
+      "Thou takest the W5K bitter sprig.",
+      "Thou takest the W5K field vessel.",
+      "Set it on the fire.",
+      "You set W5K protected field meat to cook.",
+      "The fire takes the edge off."
+    ],
+    "inventory": [
+      {
+        "item_id": "w5k_meat",
+        "item_state_version": 1,
+        "name": "W5K protected field meat",
+        "tile": "generic_item",
+        "weight": 0.2,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Selected deliberately for cooking.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1995334672720"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1995334675280"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1995334675216"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1995334674192"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1995334361808"
+      },
+      {
+        "item_id": "w5k_pot",
+        "item_state_version": 1,
+        "name": "W5K field vessel",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1995334364240"
+      }
+    ],
+    "floor": []
+  },
+  "latest_job": {
+    "pid": 24248,
+    "turn": 503,
+    "action_calls": 23,
+    "player": [
+      39,
+      22
+    ],
+    "mode": "LOCAL",
+    "needs": {
+      "hunger": 0.801,
+      "thirst": 0.8013750000000001
+    },
+    "hp": 45,
+    "max_hp": 60,
+    "craft": {
+      "open": false,
+      "selected": 5,
+      "choosing": false,
+      "choice_selected": 0,
+      "choice_index": 0,
+      "prompts": [
+        {
+          "comp_index": 0,
+          "options": [
+            {
+              "item_id": "w5k_meat",
+              "count": 2
+            }
+          ]
+        }
+      ],
+      "rows": [
+        {
+          "type": "header",
+          "id": null,
+          "category": "campfire"
+        },
+        {
+          "type": "recipe",
+          "id": "campfire",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "clay_pot",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "cooking"
+        },
+        {
+          "type": "recipe",
+          "id": "cook_meat",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5k_cook",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "wildcrafting"
+        },
+        {
+          "type": "recipe",
+          "id": "dry_bitter_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_resonant_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_soporific_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_aromatic_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "musk_pellet",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5k_dry",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "alchemy"
+        },
+        {
+          "type": "recipe",
+          "id": "bile_coating",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "bone_dust_draught",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "briar_binding_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "hungering_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "marrow_seal",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_bone_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "stalker_unguent",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "wight_concentrate",
+          "category": null
+        }
+      ]
+    },
+    "placement": {
+      "mode": "campfire",
+      "cursor": [
+        39,
+        21
+      ]
+    },
+    "processing": [
+      {
+        "x": 39,
+        "y": 21,
+        "item_id": "w5k_dressing",
+        "turns_remaining": 4,
+        "decor_id": "",
+        "source": "cooking",
+        "completion_message": "W5K revised work ready: {item_name}.",
+        "on_fire": true
+      }
+    ],
+    "decor": [
+      {
+        "x": 39,
+        "y": 21,
+        "id": "campfire_lit"
+      }
+    ],
+    "logs": [
+      "Thou takest the W5K bitter sprig.",
+      "Thou takest the W5K bitter sprig.",
+      "Thou takest the W5K bitter sprig.",
+      "Thou takest the W5K bitter sprig.",
+      "Thou takest the W5K field vessel.",
+      "Set it on the fire.",
+      "You set W5K protected field meat to cook.",
+      "The fire takes the edge off."
+    ],
+    "inventory": [
+      {
+        "item_id": "w5k_meat",
+        "item_state_version": 1,
+        "name": "W5K protected field meat",
+        "tile": "generic_item",
+        "weight": 0.2,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Selected deliberately for cooking.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2388977113232"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2388977110160"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2388977117904"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2388977118928"
+      },
+      {
+        "item_id": "w5k_leaf",
+        "item_state_version": 1,
+        "name": "W5K bitter sprig",
+        "tile": "generic_item",
+        "weight": 0.03,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.05,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Two sprigs dry into a field treatment.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2388977122000"
+      },
+      {
+        "item_id": "w5k_pot",
+        "item_state_version": 1,
+        "name": "W5K field vessel",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2388977116240"
+      }
+    ],
+    "floor": []
+  },
+  "compatibility": {
+    "compatibility_before": {
+      "passed": true,
+      "pid": 9424,
+      "mode": "before",
+      "save_root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5k\\native-1793240644155\\compatibility\\ordinary\\saves\\slot_0",
+      "turn": 500,
+      "inventory": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 20,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_meat",
+          "item_state_version": 1,
+          "name": "W5K protected field meat",
+          "tile": "generic_item",
+          "weight": 0.2,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Selected deliberately for cooking.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "vital",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_pot",
+          "item_state_version": 1,
+          "name": "W5K field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ],
+      "scene": {
+        "terrain": "59a67459362bcdcec414ccfae5c67831b5c4054f4575bfc8f5a9b41e0e7aba87",
+        "floor": [],
+        "processing": [
+          {
+            "x": 39,
+            "y": 21,
+            "item_id": "w5k_roast",
+            "turns_remaining": 2,
+            "decor_id": "",
+            "source": "cooking",
+            "completion_message": "W5K roast ready: {item_name}.",
+            "on_fire": true
+          }
+        ]
+      },
+      "job": {
+        "item_id": "w5k_roast",
+        "turns_remaining": 2,
+        "decor_id": "",
+        "source": "cooking",
+        "completion_message": "W5K roast ready: {item_name}.",
+        "on_fire": true
+      },
+      "scope": "Ordinary movement/pickup and CraftScreen keys; disclosed production heat/needs fixture; exact commitment; first tick; ordinary save. No immutable capture edited.",
+      "save_access_events": 89,
+      "explicit_disposable_ownership": true
+    },
+    "compatibility_after": {
+      "passed": true,
+      "pid": 848,
+      "mode": "after",
+      "save_root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5k\\native-1793240644155\\compatibility\\ordinary\\saves\\slot_0",
+      "turn": 504,
+      "inventory": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 24,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_pot",
+          "item_state_version": 1,
+          "name": "W5K field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_roast",
+          "item_state_version": 1,
+          "name": "W5K revised nourishing roast",
+          "tile": "generic_item",
+          "weight": 0.1,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.6,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "W5K roast restores you.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A prepared quarter-need meal.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 2
+            },
+            {
+              "tag": "vital",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ],
+      "scene": {
+        "terrain": "59a67459362bcdcec414ccfae5c67831b5c4054f4575bfc8f5a9b41e0e7aba87",
+        "floor": [],
+        "processing": [
+          {
+            "x": 39,
+            "y": 21,
+            "item_id": "w5k_dressing",
+            "turns_remaining": 4,
+            "decor_id": "",
+            "source": "cooking",
+            "completion_message": "W5K revised work ready: {item_name}.",
+            "on_fire": true
+          }
+        ]
+      },
+      "old_job": {
+        "item_id": "w5k_roast",
+        "turns_remaining": 2,
+        "decor_id": "",
+        "source": "cooking",
+        "completion_message": "W5K roast ready: {item_name}.",
+        "on_fire": true
+      },
+      "old_output": {
+        "item_id": "w5k_roast",
+        "item_state_version": 1,
+        "name": "W5K revised nourishing roast",
+        "tile": "generic_item",
+        "weight": 0.1,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.6,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5K roast restores you.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A prepared quarter-need meal.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      "new_job": {
+        "item_id": "w5k_dressing",
+        "turns_remaining": 4,
+        "decor_id": "",
+        "source": "cooking",
+        "completion_message": "W5K revised work ready: {item_name}.",
+        "on_fire": true
+      },
+      "scope": "Different PID, fresh catalogue; old job retains captured parameters, output uses revised stored target definition; later work uses revised recipe.",
+      "save_access_events": 82,
+      "explicit_disposable_ownership": true
+    },
+    "missing": {
+      "passed": true,
+      "pid": 11872,
+      "mode": "missing",
+      "save_root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5k\\native-1793240644155\\compatibility\\fault\\saves\\slot_0",
+      "turn": 504,
+      "inventory": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 24,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_meat",
+          "item_state_version": 1,
+          "name": "W5K protected field meat",
+          "tile": "generic_item",
+          "weight": 0.2,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Selected deliberately for cooking.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "vital",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_pot",
+          "item_state_version": 1,
+          "name": "W5K field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ],
+      "scene": {
+        "terrain": "59a67459362bcdcec414ccfae5c67831b5c4054f4575bfc8f5a9b41e0e7aba87",
+        "floor": [],
+        "processing": [
+          {
+            "x": 39,
+            "y": 21,
+            "item_id": "w5k_roast",
+            "turns_remaining": 0,
+            "decor_id": "",
+            "source": "cooking",
+            "completion_message": "W5K roast ready: {item_name}.",
+            "on_fire": true
+          }
+        ]
+      },
+      "job": {
+        "item_id": "w5k_roast",
+        "turns_remaining": 0,
+        "decor_id": "",
+        "source": "cooking",
+        "completion_message": "W5K roast ready: {item_name}.",
+        "on_fire": true
+      },
+      "diagnostics": [
+        {
+          "text": "Preparation of 'w5k_roast' cannot finish: output definition is unavailable. The unfinished work remains.",
+          "count": 1
+        }
+      ],
+      "fault_injection": "Output definition temporarily unavailable only in disposable project; queued work retained, not restarted/refunded.",
+      "save_access_events": 82,
+      "explicit_disposable_ownership": true
+    },
+    "resumed": {
+      "passed": true,
+      "pid": 26076,
+      "mode": "resume",
+      "save_root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5k\\native-1793240644155\\compatibility\\fault\\saves\\slot_0",
+      "turn": 506,
+      "inventory": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 26,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_meat",
+          "item_state_version": 1,
+          "name": "W5K protected field meat",
+          "tile": "generic_item",
+          "weight": 0.2,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Selected deliberately for cooking.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "vital",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_pot",
+          "item_state_version": 1,
+          "name": "W5K field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ],
+      "scene": {
+        "terrain": "59a67459362bcdcec414ccfae5c67831b5c4054f4575bfc8f5a9b41e0e7aba87",
+        "floor": [
+          {
+            "x": 39,
+            "y": 21,
+            "items": [
+              {
+                "item_id": "w5k_roast",
+                "item_state_version": 1,
+                "name": "W5K revised nourishing roast",
+                "tile": "generic_item",
+                "weight": 0.1,
+                "stackable": false,
+                "count": 1,
+                "on_use": "eat",
+                "text_id": "",
+                "nutrition": 0.6,
+                "hydration": null,
+                "heal_amount": null,
+                "eat_message": "W5K roast restores you.",
+                "drink_message": null,
+                "burn_turns": null,
+                "turns_lit": 0,
+                "light_data": null,
+                "liquid": null,
+                "liquid_volume": 0,
+                "qualities": {},
+                "description": "A prepared quarter-need meal.",
+                "harvest_from": null,
+                "keywords": [
+                  {
+                    "tag": "edible",
+                    "tier": 2
+                  },
+                  {
+                    "tag": "vital",
+                    "tier": 1
+                  }
+                ],
+                "decay_timer": null,
+                "source_creature": null,
+                "temporary_essence": [],
+                "consumed_on_use": true,
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0
+              }
+            ]
+          }
+        ],
+        "processing": []
+      },
+      "output": {
+        "item_id": "w5k_roast",
+        "item_state_version": 1,
+        "name": "W5K revised nourishing roast",
+        "tile": "generic_item",
+        "weight": 0.1,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.6,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5K roast restores you.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A prepared quarter-need meal.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      "scope": "Fresh catalogue after restored definition; due zero job completes once through ordinary turn input.",
+      "save_access_events": 56,
+      "explicit_disposable_ownership": true
+    },
+    "compatibility_final": {
+      "passed": true,
+      "pid": 756,
+      "mode": "final",
+      "save_root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5k\\native-1793240644155\\compatibility\\ordinary\\saves\\slot_0",
+      "turn": 511,
+      "inventory": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 31,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_leaf",
+          "item_state_version": 1,
+          "name": "W5K bitter sprig",
+          "tile": "generic_item",
+          "weight": 0.03,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.05,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Two sprigs dry into a field treatment.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "bitter",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_pot",
+          "item_state_version": 1,
+          "name": "W5K field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        },
+        {
+          "item_id": "w5k_roast",
+          "item_state_version": 1,
+          "name": "W5K revised nourishing roast",
+          "tile": "generic_item",
+          "weight": 0.1,
+          "stackable": false,
+          "count": 1,
+          "on_use": "eat",
+          "text_id": "",
+          "nutrition": 0.6,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": "W5K roast restores you.",
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A prepared quarter-need meal.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 2
+            },
+            {
+              "tag": "vital",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": true,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0
+        }
+      ],
+      "scene": {
+        "terrain": "59a67459362bcdcec414ccfae5c67831b5c4054f4575bfc8f5a9b41e0e7aba87",
+        "floor": [],
+        "processing": []
+      },
+      "stored_output": {
+        "item_id": "w5k_roast",
+        "item_state_version": 1,
+        "name": "W5K revised nourishing roast",
+        "tile": "generic_item",
+        "weight": 0.1,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.6,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5K roast restores you.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A prepared quarter-need meal.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      "current_factory": {
+        "item_id": "w5k_roast",
+        "item_state_version": 1,
+        "name": "W5K revised nourishing roast",
+        "tile": "generic_item",
+        "weight": 0.1,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.8,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5K roast restores you.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A prepared quarter-need meal.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      },
+      "treatment_hp_delta": 9,
+      "treatment_turn_delta": 1,
+      "no_duplicate_after_load": true,
+      "removed_material_stays_removed": true,
+      "scope": "Fresh process preserves acquired copied values after same-ID definition revision; finishes revised job, ordinary inventory treatment handler, save/load has no duplicate output or respawned material.",
+      "save_access_events": 138,
+      "explicit_disposable_ownership": true
+    }
+  },
+  "checks": [
+    "continue from exact accepted UI-authored bytes; recover independent dirty shared draft",
+    "ordinary CraftScreen sole protected component picker, picker cancel and placement cancel spend nothing",
+    "conjunction preparation beside fire commits two distinct leaves, retains vessel, produces floor treatment and ordinary use",
+    "same-ID recipe/output revisions through supported controls; old capture reset and latest recipe parameters differ"
+  ],
+  "screenshots": {
+    "workbench-w5k_cook-preparation.png": {
+      "path": "workbench/docs/evidence/w5k/workbench-w5k_cook-preparation.png",
+      "sha256": "1f923c9b2011933c42b71a2563730c4f9801c51888a69bdc3e4bb606b91fd5e6",
+      "observed_process": "authoring parent"
+    },
+    "workbench-w5k_dry.png": {
+      "path": "workbench/docs/evidence/w5k/workbench-w5k_dry.png",
+      "sha256": "57093543e03005c430ebad835972924a4459a5a25c6a3c80d2e296437e9b2f64",
+      "observed_process": "authoring parent"
+    },
+    "workbench-room.png": {
+      "path": "workbench/docs/evidence/w5k/workbench-room.png",
+      "sha256": "9a745af5da736d2b78a4f219c9ba933988e618355fb31e5bcab20291111907ef",
+      "observed_process": "authoring parent"
+    },
+    "game-cooking.png": {
+      "path": "workbench/docs/evidence/w5k/game-cooking.png",
+      "sha256": "3c57a3bc5ae55953d5c2481f14532690772d6f65afe2756c6d6eeb8ccbce57f7",
+      "observed_process": "completed journey"
+    },
+    "game-roast-floor.png": {
+      "path": "workbench/docs/evidence/w5k/game-roast-floor.png",
+      "sha256": "8483986ca3fb6d5d746956e57e4bfb1b2c73cd8b52d0e4f9f633b6401658b002",
+      "observed_process": "completed journey"
+    },
+    "game-drying.png": {
+      "path": "workbench/docs/evidence/w5k/game-drying.png",
+      "sha256": "840bad05f84e4816e9215c3f3a5a01f3bd267ae7bd98a2754869dd0185b89645",
+      "observed_process": "completed journey"
+    },
+    "game-treatment.png": {
+      "path": "workbench/docs/evidence/w5k/game-treatment.png",
+      "sha256": "164b29c64a8e90bd25e7be57f4cc34aff936a272b0cad61bffe2523668d40325",
+      "observed_process": "completed journey"
+    },
+    "game-revised-job.png": {
+      "path": "workbench/docs/evidence/w5k/game-revised-job.png",
+      "sha256": "0dae9f6bb7b41379ffb7fbe03431100aba3a8999e740e5f39d7ec0edbc714627",
+      "observed_process": "completed journey"
+    },
+    "saved-conjunction-references.png": {
+      "path": "workbench/docs/evidence/w5k/saved-conjunction-references.png",
+      "sha256": "55b877eef8501c2d32709c6dc521c1c3403526d5c21fe6d4466995cf24aec249",
+      "observed_process": "final saved-reference navigation"
+    }
+  }
+}

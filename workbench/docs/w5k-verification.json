@@ -1,0 +1,844 @@
+{
+  "milestone": "W5K",
+  "passed": true,
+  "observed_utc": "2026-10-29T04:36:37.779194+00:00",
+  "contract": "item-preparation-1",
+  "revisions": {
+    "reviewed_start": "ce3c7ab6d1b845c2dd41d07a9c91f6ed6d1b1d33",
+    "initial_remote": "ce3c7ab6d1b845c2dd41d07a9c91f6ed6d1b1d33",
+    "implementation": "2dbd2770e66ebeef95181ce8b4ffc6fe0f3eca1b",
+    "package_inputs": "cd13e2a77a23056d1b123d590789fb3e7cb2dfcd",
+    "earlier_package_inputs": "2dbd2770e66ebeef95181ce8b4ffc6fe0f3eca1b",
+    "evidence_inputs": "fb6f8a1fee12d40051596224dbd84db67b401f9c",
+    "final_delivery_ref": "checkpoint/workbench-w5k-verified-20261028",
+    "note": "Final commit cannot embed its own hash. Resolve this named local ref; exact final local/remote-main SHA readback is recorded in the handoff and local remote-readback.json. Package inputs precede later harness/evidence/documentation commits."
+  },
+  "corpus": {
+    "path": "workbench/docs/evidence/w5k/shipped-sources.json",
+    "sha256": "9999351dca8f247d1d37bbd24589c8d95e05e92c61ef27044407daa5deaa541b"
+  },
+  "observations": {
+    "path": "workbench/docs/evidence/w5k/observations.json",
+    "sha256": "14f6dcbecce2336661cd0f7702aa9262dffb05b2a4d818489113be1c698932a1"
+  },
+  "gates": {
+    "path": "workbench/docs/evidence/w5k/gates.json",
+    "sha256": "63e5a5914bd5cb4b21fd49c1403ff901dc99c14a0703fa05acf238728c16097c"
+  },
+  "accepted_fixtures": {
+    "w5k_meat": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_meat.json",
+      "sha256": "779f1ac4230c4c0a774315c9cc4d2fc5d7a72ab4cc8b2211075e726cfa044365",
+      "published_path": "roguelike/data/items/butchery/w5k_meat.json",
+      "definition": {
+        "id": "w5k_meat",
+        "name": "W5K protected field meat",
+        "description": "Selected deliberately for cooking.",
+        "tile": "generic_item",
+        "category": "butchery",
+        "weight": 0.2,
+        "stackable": false,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "consumed_on_use": false
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_leaf": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_leaf.json",
+      "sha256": "07112ec41eb9e11108834fcbf37810abffc2d51cb92a7c9e4dac83a23686bfeb",
+      "published_path": "roguelike/data/items/consumables/w5k_leaf.json",
+      "definition": {
+        "id": "w5k_leaf",
+        "name": "W5K bitter sprig",
+        "description": "Two sprigs dry into a field treatment.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.03,
+        "stackable": false,
+        "on_use": "eat",
+        "nutrition": 0.05,
+        "eat_message": "Bitter. Something in it is faintly wrong. The hunger retreats slightly.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "bitter",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_pot": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_pot.json",
+      "sha256": "dade887073a3dd3ea07f3e368ac542a944796137410344fe768400f080387cb3",
+      "published_path": "roguelike/data/items/components/w5k_pot.json",
+      "definition": {
+        "id": "w5k_pot",
+        "name": "W5K field vessel",
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "tile": "generic_item",
+        "category": "component",
+        "weight": 0.3,
+        "stackable": false,
+        "on_use": null,
+        "consumed_on_use": false,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_roast": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_roast.json",
+      "sha256": "713736230f693f06a6957b695906b604670d340d5aa92342a66be1198198f0fb",
+      "published_path": "roguelike/data/items/consumables/w5k_roast.json",
+      "definition": {
+        "id": "w5k_roast",
+        "name": "W5K nourishing roast",
+        "description": "A prepared quarter-need meal.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.1,
+        "stackable": false,
+        "on_use": "eat",
+        "nutrition": 0.25,
+        "eat_message": "W5K roast restores you.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_dressing": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_dressing.json",
+      "sha256": "7e9b243cf0d36489f3795b1e83d6cd7944763190e9ea85f6ed2983fed167d0f8",
+      "published_path": "roguelike/data/items/consumables/w5k_dressing.json",
+      "definition": {
+        "id": "w5k_dressing",
+        "name": "W5K dried field dressing",
+        "description": "A prepared herbal dressing bound in clean linen. Restores up to 12 HP when injured; consumed after one use.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.04,
+        "stackable": false,
+        "on_use": "heal_minor",
+        "heal_amount": 9
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_cook": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_cook.json",
+      "sha256": "17b67e95e9cc4e7c4416d1ea818496fe4a54c85db0c0f0af8c3e14a417e5c99b",
+      "published_path": "roguelike/data/recipes/w5k_cook.json",
+      "definition": {
+        "id": "w5k_cook",
+        "name": "W5K roast meal",
+        "category": "cooking",
+        "description": "Hold raw meat over open flame until it chars. Direct heat required.",
+        "known": true,
+        "components": [
+          {
+            "tag": "vital",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "requires_ambient": [
+          {
+            "tag": "burning",
+            "min_tier": 2
+          }
+        ],
+        "result_item": "w5k_roast",
+        "passive_processing": true,
+        "processing_turns": 3,
+        "processing_source": "cooking",
+        "processing_decor": "cooking_meat",
+        "placement_message": "Set it on the fire.",
+        "tools": [
+          {
+            "tag": "vessel",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "completion_message": "W5K roast ready: {item_name}."
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_dry": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_dry.json",
+      "sha256": "435ce9eed5880d5cda18bf632d5c4552e96e0951784020fa1d2eb7e047a3f7a1",
+      "published_path": "roguelike/data/recipes/w5k_dry.json",
+      "definition": {
+        "id": "w5k_dry",
+        "name": "W5K field dressing",
+        "category": "wildcrafting",
+        "description": "Dry the sprig. The bitterness sharpens. What remains is a better fixative than the fresh form.",
+        "known": true,
+        "requires_single_item": {
+          "tags": [
+            {
+              "tag": "bitter",
+              "min_tier": 1
+            },
+            {
+              "tag": "edible",
+              "min_tier": 1
+            }
+          ],
+          "max_quantity": 2
+        },
+        "requires_ambient": [
+          {
+            "tag": "burning",
+            "min_tier": 1
+          }
+        ],
+        "result_item": "w5k_dressing",
+        "passive_processing": true,
+        "processing_turns": 4,
+        "processing_source": "drying",
+        "processing_decor": "drying_herb",
+        "placement_message": "Where will you spread it to dry?",
+        "tools": [
+          {
+            "tag": "vessel",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "completion_message": "W5K dressing ready: {item_name}."
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_cook_revised": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_cook_revised.json",
+      "sha256": "237febbaf55883d80e41f43d6044963bf1d86c6f8b51174ce2f525d6d8447ea5",
+      "published_path": "roguelike/data/recipes/w5k_cook.json",
+      "definition": {
+        "id": "w5k_cook",
+        "name": "W5K roast meal",
+        "category": "cooking",
+        "description": "Hold raw meat over open flame until it chars. Direct heat required.",
+        "known": true,
+        "components": [
+          {
+            "tag": "vital",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "requires_ambient": [
+          {
+            "tag": "burning",
+            "min_tier": 2
+          }
+        ],
+        "result_item": "w5k_dressing",
+        "passive_processing": true,
+        "processing_turns": 5,
+        "processing_source": "cooking",
+        "processing_decor": "cooking_meat",
+        "placement_message": "Set it on the fire.",
+        "tools": [
+          {
+            "tag": "vessel",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "completion_message": "W5K revised work ready: {item_name}."
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_roast_revised": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_roast_revised.json",
+      "sha256": "259d7a61552b15e0b8576229df8f7221f365633c806442c1dc31079c98dc1ade",
+      "published_path": "roguelike/data/items/consumables/w5k_roast.json",
+      "definition": {
+        "id": "w5k_roast",
+        "name": "W5K revised nourishing roast",
+        "description": "A prepared quarter-need meal.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.1,
+        "stackable": false,
+        "on_use": "eat",
+        "nutrition": 0.6,
+        "eat_message": "W5K roast restores you.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "w5k_roast_final": {
+      "path": "workbench/docs/evidence/w5k/fixtures/w5k_roast_final.json",
+      "sha256": "c761870ea685f8a2af2e7929305494e7e430d06c6f6c670f2e97711bcc7f8475",
+      "published_path": "roguelike/data/items/consumables/w5k_roast.json",
+      "definition": {
+        "id": "w5k_roast",
+        "name": "W5K revised nourishing roast",
+        "description": "A prepared quarter-need meal.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.1,
+        "stackable": false,
+        "on_use": "eat",
+        "nutrition": 0.8,
+        "eat_message": "W5K roast restores you.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "room": {
+      "path": "workbench/docs/evidence/w5k/fixtures/room.json",
+      "sha256": "6a9c6ba297089882ceae1d53afcfceb0f715c92522b52e47f240f28413140273",
+      "published_path": "roguelike/data/layouts/w5k_preparation_room.json",
+      "definition": {
+        "id": "w5k_preparation_room",
+        "width": 13,
+        "height": 9,
+        "layers": [
+          "#############",
+          "#...........#",
+          "#...........#",
+          "#...........#",
+          "#...........#",
+          "#...........#",
+          "#.<.........#",
+          "#...........#",
+          "#############"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 3,
+          "y": 6
+        },
+        "special_tiles": [
+          {
+            "type": "item",
+            "x": 2,
+            "y": 3,
+            "item_id": "w5k_meat"
+          },
+          {
+            "type": "item",
+            "x": 3,
+            "y": 3,
+            "item_id": "w5k_meat"
+          },
+          {
+            "type": "item",
+            "x": 4,
+            "y": 3,
+            "item_id": "w5k_leaf"
+          },
+          {
+            "type": "item",
+            "x": 5,
+            "y": 3,
+            "item_id": "w5k_leaf"
+          },
+          {
+            "type": "item",
+            "x": 6,
+            "y": 3,
+            "item_id": "w5k_leaf"
+          },
+          {
+            "type": "item",
+            "x": 7,
+            "y": 3,
+            "item_id": "w5k_leaf"
+          },
+          {
+            "type": "item",
+            "x": 8,
+            "y": 3,
+            "item_id": "w5k_pot"
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    },
+    "immediate_same_id": {
+      "path": "workbench/docs/evidence/w5k/fixtures/immediate_same_id.json",
+      "sha256": "9e27544044e9dc2ab9a7cd1652ae9198011158a3cdf3b669a727ca79cbc3b0d0",
+      "published_path": "roguelike/data/recipes/briar_binding_oil.json",
+      "definition": {
+        "id": "briar_binding_oil",
+        "name": "briar binding oil",
+        "category": "alchemy",
+        "description": "W5K immediate conjunction permission check.",
+        "known": true,
+        "requires_single_item": [
+          {
+            "tag": "viscous",
+            "min_tier": 2
+          },
+          {
+            "tag": "binding",
+            "min_tier": 2
+          }
+        ],
+        "requires_ambient": [
+          {
+            "tag": "burning",
+            "min_tier": 1
+          }
+        ],
+        "result_item": "briar_binding_oil",
+        "passive_processing": false,
+        "tools": [
+          {
+            "tag": "vessel",
+            "min_tier": 1
+          }
+        ]
+      },
+      "identity": "Exact accepted UI-authored UTF-8 bytes; Git -text prevents normalization"
+    }
+  },
+  "screenshots": {
+    "workbench-w5k_cook-preparation.png": {
+      "path": "workbench/docs/evidence/w5k/workbench-w5k_cook-preparation.png",
+      "sha256": "1f923c9b2011933c42b71a2563730c4f9801c51888a69bdc3e4bb606b91fd5e6",
+      "observed_process": "authoring parent"
+    },
+    "workbench-w5k_dry.png": {
+      "path": "workbench/docs/evidence/w5k/workbench-w5k_dry.png",
+      "sha256": "57093543e03005c430ebad835972924a4459a5a25c6a3c80d2e296437e9b2f64",
+      "observed_process": "authoring parent"
+    },
+    "workbench-room.png": {
+      "path": "workbench/docs/evidence/w5k/workbench-room.png",
+      "sha256": "9a745af5da736d2b78a4f219c9ba933988e618355fb31e5bcab20291111907ef",
+      "observed_process": "authoring parent"
+    },
+    "game-cooking.png": {
+      "path": "workbench/docs/evidence/w5k/game-cooking.png",
+      "sha256": "3c57a3bc5ae55953d5c2481f14532690772d6f65afe2756c6d6eeb8ccbce57f7",
+      "observed_process": "completed journey"
+    },
+    "game-roast-floor.png": {
+      "path": "workbench/docs/evidence/w5k/game-roast-floor.png",
+      "sha256": "8483986ca3fb6d5d746956e57e4bfb1b2c73cd8b52d0e4f9f633b6401658b002",
+      "observed_process": "completed journey"
+    },
+    "game-drying.png": {
+      "path": "workbench/docs/evidence/w5k/game-drying.png",
+      "sha256": "840bad05f84e4816e9215c3f3a5a01f3bd267ae7bd98a2754869dd0185b89645",
+      "observed_process": "completed journey"
+    },
+    "game-treatment.png": {
+      "path": "workbench/docs/evidence/w5k/game-treatment.png",
+      "sha256": "164b29c64a8e90bd25e7be57f4cc34aff936a272b0cad61bffe2523668d40325",
+      "observed_process": "completed journey"
+    },
+    "game-revised-job.png": {
+      "path": "workbench/docs/evidence/w5k/game-revised-job.png",
+      "sha256": "0dae9f6bb7b41379ffb7fbe03431100aba3a8999e740e5f39d7ec0edbc714627",
+      "observed_process": "completed journey"
+    },
+    "saved-conjunction-references.png": {
+      "path": "workbench/docs/evidence/w5k/saved-conjunction-references.png",
+      "sha256": "55b877eef8501c2d32709c6dc521c1c3403526d5c21fe6d4466995cf24aec249",
+      "observed_process": "final saved-reference navigation"
+    }
+  },
+  "environments": {
+    "toolchain": {
+      "node": "v24.15.0",
+      "npm": "11.12.1",
+      "rustc": "rustc 1.95.0 (59807616e 2026-04-14)",
+      "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+      "git": "git version 2.53.0.windows.2"
+    },
+    "pinned": {
+      "executable": "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+      "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "dependencies": {
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "numpy": "2.4.6",
+        "cffi": "2.1.1",
+        "pycparser": "3.11",
+        "typing_extensions": "4.16.0"
+      }
+    },
+    "development": {
+      "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "dependencies": {
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "numpy": "2.4.6",
+        "cffi": "2.1.1",
+        "pycparser": "3.11",
+        "typing_extensions": "4.16.0"
+      }
+    }
+  },
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "04aab23023cd8ef7de1e0bc81c758b0e4190995d7df2c0b32b6daa029a6e63ba"
+    },
+    "installer": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "e1ed25ad44779ff7e25af252b3e033365dcc70c22d8c9642b2a0e1fc526689bc"
+    },
+    "bridge": {
+      "path": "workbench/src-tauri/target/release/bridge.py",
+      "sha256": "9a3ad01fe838323e7968bcabb4a58ff6a4e9854959e3e19bfafc80d274ade881"
+    },
+    "source_release_bridge_equal": true,
+    "runtime_files": 1809,
+    "runtime_equal": true,
+    "runtime_manifest_sha256": "84d3decf8b3ec4edd637c795bee9ae3d14949e11c28fece4700469f9e5afabba"
+  },
+  "failed_attempts": [
+    {
+      "path": "workbench/.artifacts/w5k/native-attempt1.log",
+      "sha256": "6f924731c78c1ce35984d21eb58cd9ff2a6c34cf149c7fea42dc157ad9e82802",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/native-attempt2.log",
+      "sha256": "5b229c278637594d09eb71220a02b03ee2485a7746308c8387112f8f3be2e5dc",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/native-attempt3.log",
+      "sha256": "7d9f105631155a4c90136340974fa51265ca733424096eb230e6478b62cc2557",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/native-continuation.log",
+      "sha256": "e680dffe75540ffba0f31c9225b3833cca36ae8820a854777bd7182419573dec",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/native-continuation2.log",
+      "sha256": "73830de88ec22644490b446cc5fd99fc4b13b311bdb357ae97c2d12dd7a30ecf",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/worker-final.log",
+      "sha256": "b2e576f40f99a1d66a5a32e8e1ae9839498228de2dbede3fb1afc532e3a4036e",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/host.log",
+      "sha256": "81964efdc6f8b9668fe4318f30797fc27035ac8cfd1cac0084744c9678c40a2c",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/runtime-focused.log",
+      "sha256": "b1a60d0536c1f42e85719dffbe287d0bfca45b5fb1f38fd8cf413df9aa3a2669",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/room-session-final-attempt1.log",
+      "sha256": "7ff5ebf4ae4573256bdb1b959e0aa316cfd9aae18c2ea2b45d1d459577b3711b",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/room-session-final-attempt2.log",
+      "sha256": "ec87b996350311cb9aa2848d7f9bcef73594ea1bccded94c55287d9f95f633d7",
+      "counted_as_pass": false
+    },
+    {
+      "path": "workbench/.artifacts/w5k/workspace-final-attempt1.log",
+      "sha256": "c3bb6f84b574e9955261acc38384e03767ca7108bec56bdfde0b228573536a1f",
+      "counted_as_pass": false
+    }
+  ],
+  "source_hashes": {
+    "roguelike/docs/ITEM_AUTHORING.md": {
+      "working_sha256": "1009f4fd7c6950e4a2916e08a1f407860b810dddd5f2bdb0489ed3728856001b",
+      "committed_sha256": "1009f4fd7c6950e4a2916e08a1f407860b810dddd5f2bdb0489ed3728856001b"
+    },
+    "roguelike/docs/RECIPE_AUTHORING.md": {
+      "working_sha256": "62831a8c364d043bd3aac5c0f2697bb4827d01bd65af487b90d2708df4c3257d",
+      "committed_sha256": "62831a8c364d043bd3aac5c0f2697bb4827d01bd65af487b90d2708df4c3257d"
+    },
+    "roguelike/docs/ROOM_TEST_RUNTIME.md": {
+      "working_sha256": "386775852217d7fe0b5951bd9de0776b42bc518ef1d37fc2ca8c736569a20408",
+      "committed_sha256": "386775852217d7fe0b5951bd9de0776b42bc518ef1d37fc2ca8c736569a20408"
+    },
+    "roguelike/engine/content_authoring.py": {
+      "working_sha256": "6441d38ba7349734974bc0cdfac24e30afbf98184f9de497cebbfb8be28735cf",
+      "committed_sha256": "6441d38ba7349734974bc0cdfac24e30afbf98184f9de497cebbfb8be28735cf"
+    },
+    "roguelike/engine/engine.py": {
+      "working_sha256": "06ae1ad0e9920ce8fba3975ba3f846f4d0a4c5041ce41e0471860c5d6d1b5d83",
+      "committed_sha256": "06ae1ad0e9920ce8fba3975ba3f846f4d0a4c5041ce41e0471860c5d6d1b5d83"
+    },
+    "roguelike/engine/item_authoring.py": {
+      "working_sha256": "df345af9a1712c5be9e6249b26046af43cbc053922ac16d22e31bbe944ec6131",
+      "committed_sha256": "df345af9a1712c5be9e6249b26046af43cbc053922ac16d22e31bbe944ec6131"
+    },
+    "roguelike/engine/processing_text.py": {
+      "working_sha256": "4bf54d89169fdac3bd01f13809e065b8a10e87b45cc106194e67649668474823",
+      "committed_sha256": "4bf54d89169fdac3bd01f13809e065b8a10e87b45cc106194e67649668474823"
+    },
+    "roguelike/engine/recipe_authoring.py": {
+      "working_sha256": "75d88e0c50b583b7e8a460d4b67bf43cc17077d8ba7105e53b3cf79e67548231",
+      "committed_sha256": "75d88e0c50b583b7e8a460d4b67bf43cc17077d8ba7105e53b3cf79e67548231"
+    },
+    "roguelike/engine/room_test_diagnostics.py": {
+      "working_sha256": "053e4a513c36c4d6c1a07f6d0ae3c61915a1a2ec54f80fae2b55019fc50e4ced",
+      "committed_sha256": "053e4a513c36c4d6c1a07f6d0ae3c61915a1a2ec54f80fae2b55019fc50e4ced"
+    },
+    "roguelike/rendering/craft_screen.py": {
+      "working_sha256": "627ee64bc7f3adfe9448103f7e5bf78a8ef2ccde7871fec6754c951e1c4094a7",
+      "committed_sha256": "627ee64bc7f3adfe9448103f7e5bf78a8ef2ccde7871fec6754c951e1c4094a7"
+    },
+    "tools/critical_fix_regressions/tests/test_preparation_w5k.py": {
+      "working_sha256": "846c6ad9a72bbe96a692fc5d43acad8b880c3e2fc1d3392122f2c53ca3394fcd",
+      "committed_sha256": "e4c5128a49e60202d9cde4e0037fe31fc409f06d712c91a3eb37fbc8af6a31c1"
+    },
+    "workbench/README.md": {
+      "working_sha256": "111c9c41def4268ab7cbc0dc8a440a122a129aa78a85feaafef67ff4e523ef23",
+      "committed_sha256": "111c9c41def4268ab7cbc0dc8a440a122a129aa78a85feaafef67ff4e523ef23"
+    },
+    "workbench/docs/CONTENT_CONTRACTS.md": {
+      "working_sha256": "1c1558696b7f726934f95040fbedbfa9eb45cf83d2cca4dce2e99dafbb672b65",
+      "committed_sha256": "1c1558696b7f726934f95040fbedbfa9eb45cf83d2cca4dce2e99dafbb672b65"
+    },
+    "workbench/docs/W5K_DELIVERY.md": {
+      "working_sha256": "e91f3e0c7ad082a44713c304bda4fa37a1db49e4934f16f56a563acbe49d742a",
+      "committed_sha256": "e91f3e0c7ad082a44713c304bda4fa37a1db49e4934f16f56a563acbe49d742a"
+    },
+    "workbench/docs/w5j-verification.json": {
+      "working_sha256": "7d9852fed5310a49ee0706ea087d3c1173fa029f07203fb1e4056e4e847555cb",
+      "committed_sha256": "7d9852fed5310a49ee0706ea087d3c1173fa029f07203fb1e4056e4e847555cb"
+    },
+    "workbench/package.json": {
+      "working_sha256": "4bab8e53ee0661f6a7d477418a19c93950dc552a00c257beed7de1147ed70c31",
+      "committed_sha256": "4bab8e53ee0661f6a7d477418a19c93950dc552a00c257beed7de1147ed70c31"
+    },
+    "workbench/scripts/preparation-corpus.py": {
+      "working_sha256": "1f5c33b8e3453045748aebd2a58cdf8c7f3ac1e43ce624ad67450dff3b31081b",
+      "committed_sha256": "1f5c33b8e3453045748aebd2a58cdf8c7f3ac1e43ce624ad67450dff3b31081b"
+    },
+    "workbench/scripts/preparation-persistence.py": {
+      "working_sha256": "6c700c1bd73b994260dedd249651c493e4ee06c32b77eba861b897a7b9500345",
+      "committed_sha256": "6c700c1bd73b994260dedd249651c493e4ee06c32b77eba861b897a7b9500345"
+    },
+    "workbench/scripts/preparation-references.mjs": {
+      "working_sha256": "ab1924c59b9819745a07f57a99efc2b0a1fa28e358cf89b659f665d416f75065",
+      "committed_sha256": "ab1924c59b9819745a07f57a99efc2b0a1fa28e358cf89b659f665d416f75065"
+    },
+    "workbench/scripts/run-preparation.mjs": {
+      "working_sha256": "84e7f51bbe866f110b3572630446205833d21d961d8344d652ebe87a1cbc797e",
+      "committed_sha256": "84e7f51bbe866f110b3572630446205833d21d961d8344d652ebe87a1cbc797e"
+    },
+    "workbench/scripts/run-room-tests.mjs": {
+      "working_sha256": "ef33e3475aa741c2e007faa6816039703cef0a6068713f325f1a5febbb330d68",
+      "committed_sha256": "ef33e3475aa741c2e007faa6816039703cef0a6068713f325f1a5febbb330d68"
+    },
+    "workbench/scripts/run-workspace.mjs": {
+      "working_sha256": "d6cd4259ea133f603fdffadac5c394f5fba9e827e91a988cc569e20015a4c6d3",
+      "committed_sha256": "d6cd4259ea133f603fdffadac5c394f5fba9e827e91a988cc569e20015a4c6d3"
+    },
+    "workbench/scripts/w5j-receipt.py": {
+      "working_sha256": "453b2ee714acda5e64d24d298be2f34e3b6f78c3d8074e92940fb05446c9f581",
+      "committed_sha256": "453b2ee714acda5e64d24d298be2f34e3b6f78c3d8074e92940fb05446c9f581"
+    },
+    "workbench/scripts/w5k-preservation.py": {
+      "working_sha256": "fa7def4fd7870a7d775d0e26c4088f5f3b8ff6df5a4b5d4281b2a4f5bca47e0e",
+      "committed_sha256": "fa7def4fd7870a7d775d0e26c4088f5f3b8ff6df5a4b5d4281b2a4f5bca47e0e"
+    },
+    "workbench/scripts/w5k-readback.py": {
+      "working_sha256": "260fdc824777cb3e8934865319c1e35290b1efce3a715c8474725b5925a19441",
+      "committed_sha256": "260fdc824777cb3e8934865319c1e35290b1efce3a715c8474725b5925a19441"
+    },
+    "workbench/scripts/w5k-receipt.py": {
+      "working_sha256": "4fceb03043791141751ed0f79c731ba303278ac70f3116c3b99731a4cb64a531",
+      "committed_sha256": "4fceb03043791141751ed0f79c731ba303278ac70f3116c3b99731a4cb64a531"
+    },
+    "workbench/scripts/workspace-journey.mjs": {
+      "working_sha256": "aef7ee34e9a9939c8a9b3d866e63212c7d4b67268df1aca2dedd1aa22bc9f3f7",
+      "committed_sha256": "aef7ee34e9a9939c8a9b3d866e63212c7d4b67268df1aca2dedd1aa22bc9f3f7"
+    },
+    "workbench/src-tauri/src/authoring.rs": {
+      "working_sha256": "18cdd7f5e4181b858509cd09da0327c4134d5568603efdfde909502a0a87ee36",
+      "committed_sha256": "18cdd7f5e4181b858509cd09da0327c4134d5568603efdfde909502a0a87ee36"
+    },
+    "workbench/src/ConjunctionEditor.tsx": {
+      "working_sha256": "5c04a51cb5d780ec54848f750d343f6215eae79661108bfaac47d0e1aba59780",
+      "committed_sha256": "5c04a51cb5d780ec54848f750d343f6215eae79661108bfaac47d0e1aba59780"
+    },
+    "workbench/src/ContentEditor.tsx": {
+      "working_sha256": "a1cbf11b7382c9d4c93f262b5ff40757cfe809242122b799e75acda023a27bd4",
+      "committed_sha256": "a1cbf11b7382c9d4c93f262b5ff40757cfe809242122b799e75acda023a27bd4"
+    },
+    "workbench/src/RecipeEditor.tsx": {
+      "working_sha256": "cfcaac6fc34d22c8cee05ff54634e96f7cc64c7afec26437601ebdb5a6e5a7b7",
+      "committed_sha256": "cfcaac6fc34d22c8cee05ff54634e96f7cc64c7afec26437601ebdb5a6e5a7b7"
+    },
+    "workbench/src/content.ts": {
+      "working_sha256": "4dccb39687f5348453b11918c4e3326f207bd21323f352ea6b6321e69c0dab7a",
+      "committed_sha256": "4dccb39687f5348453b11918c4e3326f207bd21323f352ea6b6321e69c0dab7a"
+    },
+    "workbench/src/orderedRecords.ts": {
+      "working_sha256": "c214f9ac23dab6523169920ac63323e971cb5fea5cc5cb7b0ff3c5341a50a189",
+      "committed_sha256": "c214f9ac23dab6523169920ac63323e971cb5fea5cc5cb7b0ff3c5341a50a189"
+    },
+    "workbench/src/recipe.test.ts": {
+      "working_sha256": "0c364d9323baab94c7676610738c41adfe04ada626255bb5f67bedb015c6556a",
+      "committed_sha256": "0c364d9323baab94c7676610738c41adfe04ada626255bb5f67bedb015c6556a"
+    },
+    "workbench/worker/bridge.py": {
+      "working_sha256": "9a3ad01fe838323e7968bcabb4a58ff6a4e9854959e3e19bfafc80d274ade881",
+      "committed_sha256": "e18ffe01f2a601ddd6b373e89bb2d6798ca32ca46b205f68ae63e57388df3618"
+    },
+    "workbench/worker/test_content_contracts.py": {
+      "working_sha256": "0ad197761f8b5f4bf9e8b4c4a2bad95e46e81f729a65fb40fb5dfa3f5747e6dc",
+      "committed_sha256": "0ad197761f8b5f4bf9e8b4c4a2bad95e46e81f729a65fb40fb5dfa3f5747e6dc"
+    },
+    "workbench/worker/test_preparation.py": {
+      "working_sha256": "d84ea6908ec20a774f0f80ac2458c2547b7020f398fd2f6e855829e0f4329d96",
+      "committed_sha256": "d84ea6908ec20a774f0f80ac2458c2547b7020f398fd2f6e855829e0f4329d96"
+    },
+    "workbench/worker/test_recipes.py": {
+      "working_sha256": "f6fb63706c54c893a8301b9b57818e71d117ffc02c4882f85502a264e82c435b",
+      "committed_sha256": "f6fb63706c54c893a8301b9b57818e71d117ffc02c4882f85502a264e82c435b"
+    },
+    "workbench/worker/test_supplies.py": {
+      "working_sha256": "1cb7ce6b94175ebdf08672cba680acb2da82f861715596eb925d86090b41a7bb",
+      "committed_sha256": "1cb7ce6b94175ebdf08672cba680acb2da82f861715596eb925d86090b41a7bb"
+    }
+  },
+  "native_game_python_matches_working_tree": true,
+  "w5j_portable_readback": {
+    "corpus": {
+      "path": "workbench/docs/evidence/w5j/shipped-sources.json",
+      "sha256": "4aa36fe7399d6498380de4e2ff8f9322a01b9066d46a1aa55c5f27887201d32b",
+      "original_working_crlf_sha256": "0fac2241f804a889083750418c55d317f4d7877be1febd982ea27cc9fa1fd05d",
+      "encoding": "UTF-8, LF; committed bytes at reviewed W5J revision"
+    },
+    "observations": {
+      "path": "workbench/docs/evidence/w5j/observations.json",
+      "sha256": "cc1154371a18572a1d2c1e4c36e309f7e1d85d57ae0a525cfdd8dc09072e219c",
+      "original_working_crlf_sha256": "741e9989c16eb4545df33be0e84d011bc71f0a3930854d7af491c5aabe009e43",
+      "encoding": "UTF-8, LF; committed bytes at reviewed W5J revision"
+    }
+  },
+  "preservation": {
+    "unchanged": 8226,
+    "scoped_changes": [
+      "roguelike/docs/ITEM_AUTHORING.md",
+      "roguelike/docs/RECIPE_AUTHORING.md",
+      "roguelike/docs/ROOM_TEST_RUNTIME.md",
+      "roguelike/engine/content_authoring.py",
+      "roguelike/engine/engine.py",
+      "roguelike/engine/item_authoring.py",
+      "roguelike/engine/processing_text.py",
+      "roguelike/engine/recipe_authoring.py",
+      "roguelike/engine/room_test_diagnostics.py",
+      "roguelike/rendering/craft_screen.py",
+      "tools/critical_fix_regressions/tests/test_preparation_w5k.py",
+      "workbench/README.md",
+      "workbench/docs/CONTENT_CONTRACTS.md",
+      "workbench/docs/w5j-verification.json",
+      "workbench/package.json",
+      "workbench/scripts/preparation-corpus.py",
+      "workbench/scripts/preparation-persistence.py",
+      "workbench/scripts/run-preparation.mjs",
+      "workbench/scripts/run-room-tests.mjs",
+      "workbench/scripts/run-workspace.mjs",
+      "workbench/scripts/w5j-receipt.py",
+      "workbench/scripts/w5k-preservation.py",
+      "workbench/scripts/w5k-receipt.py",
+      "workbench/scripts/workspace-journey.mjs",
+      "workbench/src-tauri/src/authoring.rs",
+      "workbench/src/ConjunctionEditor.tsx",
+      "workbench/src/ContentEditor.tsx",
+      "workbench/src/RecipeEditor.tsx",
+      "workbench/src/content.ts",
+      "workbench/src/orderedRecords.ts",
+      "workbench/src/recipe.test.ts",
+      "workbench/worker/bridge.py",
+      "workbench/worker/test_content_contracts.py",
+      "workbench/worker/test_preparation.py",
+      "workbench/worker/test_recipes.py",
+      "workbench/worker/test_supplies.py"
+    ],
+    "failures": []
+  },
+  "shipped_assignment": {
+    "id": "authored_submap_selection",
+    "version": 1,
+    "enabled": false,
+    "target_type": "barrow",
+    "authored_chance": 0.0,
+    "candidates": []
+  },
+  "corrections": [
+    "Updated historical variant-only/passive-readonly test expectations to the commissioned source policy; recovery/inspection still grants no review.",
+    "Unsupported item-array worker regression uses an eligible unreferenced source so an empty candidate does not first invalidate unrelated room references.",
+    "Native navigation retries only read-only monitor contention; recipe controls reside in the portalled shared panel, not the inspector.",
+    "An interrupted event-file rename hit a transient Windows reader lock. The event publisher retries the same id, so accepted inputs never replay. Accepted exact UI-authored bytes from that process are retained; final gameplay repeats in a new process.",
+    "An incomplete concurrent worker attempt is not counted; final full worker suite runs serially.",
+    "The retained shared-workspace gate retries only read-only open BUSY contention. The room gate records a bounded ordinary-turn AI trajectory rather than assuming two six-turn endpoints differ.",
+    "A temporary Windows locale decoding mistake in edited documentation/test strings was repaired against committed UTF-8; final source diffs and screenshots are checked."
+  ],
+  "limits": [
+    "Controlled initial needs/injury and production-created heat; no balance, pacing, unaided discovery or room-decor authoring claim.",
+    "Conjunctions remain automatic-only. Campfire/world placement, legacy/deprecated sources, new stations/effects/equipment/learning, broad migration/offscreen expansion and wiki work remain excluded.",
+    "Only disposable fixture definitions/save roots were used; live content and shipped assignment profile remain unchanged."
+  ]
+}

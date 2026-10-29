@@ -1,0 +1,11 @@
+{
+  "id": "w5k_dressing",
+  "name": "W5K dried field dressing",
+  "description": "A prepared herbal dressing bound in clean linen. Restores up to 12 HP when injured; consumed after one use.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.04,
+  "stackable": false,
+  "on_use": "heal_minor",
+  "heal_amount": 9
+}

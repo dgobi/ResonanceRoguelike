@@ -1,0 +1,239 @@
+{
+  "contract": "item-preparation-1",
+  "total": 18,
+  "admitted": 15,
+  "classes": {
+    "immediate": 2,
+    "steeping": 4,
+    "cooking": 2,
+    "drying": 5,
+    "rendering": 2
+  },
+  "sources": [
+    {
+      "id": "bile_coating",
+      "path": "roguelike/data/recipes/bile_coating.json",
+      "execution_class": "Immediate item output",
+      "processing_source": null,
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "6ca3308a29b92c2d7a27436073b10f2426f503d4659ae4041105407c956adda6"
+    },
+    {
+      "id": "bone_dust_draught",
+      "path": "roguelike/data/recipes/bone_dust_draught.json",
+      "execution_class": "Passive processing",
+      "processing_source": "steeping",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "00407a35f93cd6eb26b19c980a08ab013b0dfa22ea51067e3ea21ec55f353cf4"
+    },
+    {
+      "id": "briar_binding_oil",
+      "path": "roguelike/data/recipes/briar_binding_oil.json",
+      "execution_class": "Immediate item output",
+      "processing_source": null,
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "ac3182cf0cfdd47254340af9f08fe89183bb0bac8260bf39a11a581f5754e06e"
+    },
+    {
+      "id": "campfire",
+      "path": "roguelike/data/recipes/campfire.json",
+      "execution_class": "World placement",
+      "processing_source": null,
+      "operations": [],
+      "reason": "Not supported: requires one ordinary item-output recipe with real materials, fixed immediate/passive execution and no deprecated, placement or legacy apply_turns fields.",
+      "diagnostics": [],
+      "sha256": "7f72242d3b62475a219fb7da604ee27733ea75840b0764b76aa3944e1a020826"
+    },
+    {
+      "id": "clay_pot",
+      "path": "roguelike/data/recipes/clay_pot.json",
+      "execution_class": "Passive processing",
+      "processing_source": "cooking",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "c78c934a3dbbf9a02320b2aaa4dfd8511f9e1ff83dd8b99898f63692a8d94f35"
+    },
+    {
+      "id": "coldbell_extract_deprecated",
+      "path": "roguelike/data/recipes/coldbell_extract_deprecated.json",
+      "execution_class": "Deprecated / legacy",
+      "processing_source": null,
+      "operations": [],
+      "reason": "Not supported: requires one ordinary item-output recipe with real materials, fixed immediate/passive execution and no deprecated, placement or legacy apply_turns fields.",
+      "diagnostics": [],
+      "sha256": "0161266726f85a7159bd9ef7228c5d073027d4beb648ef6be46d5db5c6b62281"
+    },
+    {
+      "id": "cook_meat",
+      "path": "roguelike/data/recipes/cook_meat.json",
+      "execution_class": "Passive processing",
+      "processing_source": "cooking",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "fa1f592bed47fb5f1d96831c6b12d8ef14df9a83a9c7b2865e60adcd58560f51"
+    },
+    {
+      "id": "dry_bitter_herb",
+      "path": "roguelike/data/recipes/dry_bitter_herb.json",
+      "execution_class": "Passive processing",
+      "processing_source": "drying",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "8f582cffe9f71d24986bcf445815dc916dbddd45d9ab560886787e7dad5c0a24"
+    },
+    {
+      "id": "dry_resonant_herb",
+      "path": "roguelike/data/recipes/dry_coldbell.json",
+      "execution_class": "Passive processing",
+      "processing_source": "drying",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "8789856911db2e3ddd83cbc7a5a37073b248db4a4d1b9e9bc7f86edb5fb5d800"
+    },
+    {
+      "id": "dry_soporific_herb",
+      "path": "roguelike/data/recipes/dry_murk_violet.json",
+      "execution_class": "Passive processing",
+      "processing_source": "drying",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "5c60f6b4a0dea4dd932e719671225c416e50b410cbacd5c9bb26fe99eb9e75d1"
+    },
+    {
+      "id": "dry_aromatic_herb",
+      "path": "roguelike/data/recipes/dry_pilgrims_woe.json",
+      "execution_class": "Passive processing",
+      "processing_source": "drying",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "a21884679120bc0af3cd5918d60e594efbae5ddc2b74db065d9797e5e6f1bdd2"
+    },
+    {
+      "id": "hungering_oil",
+      "path": "roguelike/data/recipes/hungering_oil.json",
+      "execution_class": "Immediate item output",
+      "processing_source": null,
+      "operations": [],
+      "reason": "Not supported: requires one ordinary item-output recipe with real materials, fixed immediate/passive execution and no deprecated, placement or legacy apply_turns fields.",
+      "diagnostics": [],
+      "sha256": "e9910ca1559f9180e93b52c98bf37d2bc94aaef8ad81e66008ba6587a8c8d586"
+    },
+    {
+      "id": "marrow_seal",
+      "path": "roguelike/data/recipes/marrow_seal.json",
+      "execution_class": "Passive processing",
+      "processing_source": "rendering",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "cff7e67bf5b7f8374ca2645e344616d808fa2c72d7aac2e3f8ba7ea50e9bd74b"
+    },
+    {
+      "id": "musk_pellet",
+      "path": "roguelike/data/recipes/musk_pellet.json",
+      "execution_class": "Passive processing",
+      "processing_source": "drying",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "ee23d2212a6ef93eac7306f9d1bb547956ad1eda315140ca3600631649b32bf6"
+    },
+    {
+      "id": "resonant_bone_tincture",
+      "path": "roguelike/data/recipes/resonant_bone_tincture.json",
+      "execution_class": "Passive processing",
+      "processing_source": "steeping",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "fed86250a3c8161ac4a2b044e98baf1e1e9b2dea692240afb7b577a3105e79a4"
+    },
+    {
+      "id": "resonant_tincture",
+      "path": "roguelike/data/recipes/resonant_tincture.json",
+      "execution_class": "Passive processing",
+      "processing_source": "steeping",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "dbffadec361136d40ea3a57be6204291bb101f178739372e438af2324a1f206b"
+    },
+    {
+      "id": "stalker_unguent",
+      "path": "roguelike/data/recipes/stalker_unguent.json",
+      "execution_class": "Passive processing",
+      "processing_source": "rendering",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "eb3805e5fd89aca88a442c99b7d4ac8c1d3c2164b1fcedf630facf64f282db2b"
+    },
+    {
+      "id": "wight_concentrate",
+      "path": "roguelike/data/recipes/wight_concentrate.json",
+      "execution_class": "Passive processing",
+      "processing_source": "steeping",
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Ordinary item output with components and/or automatic conjunction, retained tools and conditions",
+      "diagnostics": [],
+      "sha256": "f61a4d008716883ddddcb189714e01332a54e1b86aea46e96376f62aea66c211"
+    }
+  ]
+}

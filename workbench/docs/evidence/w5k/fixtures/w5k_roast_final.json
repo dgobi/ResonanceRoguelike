@@ -1,0 +1,16 @@
+{
+  "id": "w5k_roast",
+  "name": "W5K revised nourishing roast",
+  "description": "A prepared quarter-need meal.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.1,
+  "stackable": false,
+  "on_use": "eat",
+  "nutrition": 0.8,
+  "eat_message": "W5K roast restores you.",
+  "keywords": [
+    {"tag": "edible", "tier": 2},
+    {"tag": "vital", "tier": 1}
+  ]
+}

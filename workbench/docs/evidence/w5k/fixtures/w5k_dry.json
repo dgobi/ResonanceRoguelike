@@ -1,0 +1,23 @@
+{
+  "id": "w5k_dry",
+  "name": "W5K field dressing",
+  "category": "wildcrafting",
+  "description": "Dry the sprig. The bitterness sharpens. What remains is a better fixative than the fresh form.",
+  "known": true,
+  "requires_single_item": {
+    "tags": [
+      {"tag": "bitter", "min_tier": 1},
+      {"tag": "edible", "min_tier": 1}
+    ],
+    "max_quantity": 2
+  },
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 1}
+  ],
+  "result_item": "w5k_dressing",
+  "passive_processing": true,
+  "processing_turns": 4,
+  "processing_source": "drying",
+  "processing_decor": "drying_herb",
+  "placement_message": "Where will you spread it to dry?"
+,"tools":[{"tag":"vessel","min_tier":1,"quantity":1}],"completion_message":"W5K dressing ready: {item_name}."}

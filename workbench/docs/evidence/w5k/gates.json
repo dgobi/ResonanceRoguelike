@@ -1,0 +1,136 @@
+{
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "exit_code": 0,
+      "outcome": "69 frontend tests pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/frontend.log",
+        "sha256": "220194d42e1a3e316e3e7cc14f23b421b4e0edc8a4740144b58c90656c963782"
+      }
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "exit_code": 0,
+      "outcome": "TypeScript passes; production frontend bundle is also checked by final packaging",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/typecheck-final.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "outcome": "68 Rust tests pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/host-final.log",
+        "sha256": "d93a6e0c5cc750e6076658d3fa0cb726286927ce40aea20774d944bb70feb3c3"
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "outcome": "clippy passes with warnings denied",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/clippy-final.log",
+        "sha256": "945af4b8be34edd3665a614eb49a14874108697c92eb3f172a758543e0f932bf"
+      }
+    },
+    {
+      "command": "Configured development Python, absolute PYTHONPATH game/tests/tools: unittest test_preparation_w5k test_crafting test_gameplay_g12 test_gameplay_g16 test_usable_supplies test_authored_assignment test_gameplay_g15 test_effect_persistence test_generation_ownership test_gameplay_g17 test_room_test_session test_combat_routes -v",
+      "exit_code": 0,
+      "outcome": "101 broad game cases pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/production-final.log",
+        "sha256": "8e57b0ef318be2be76382c4a1741f282b704ea542deb8f24ad4178b8024500a9"
+      }
+    },
+    {
+      "command": "Pinned Python: unittest test_preparation_w5k -v",
+      "exit_code": 0,
+      "outcome": "6 focused repairs pass, including one additional hot/cold owner case added after broad run (102 distinct game cases overall)",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/repairs-final.log",
+        "sha256": "ad525eadea1cdc2fd55975dfa4bd90d9089eb2a8c6a4405efe0d727b084f316d"
+      }
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -I -B -m unittest discover -s worker -v",
+      "exit_code": 0,
+      "outcome": "79 worker cases: 78 pass, expected embedded dependency-absence skip",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/worker-serial-final.log",
+        "sha256": "2d4b67b6717a21f7218761c28ff6916799efbbb9354d6cbf4d49474e28730a98"
+      }
+    },
+    {
+      "command": "Development Python: test_bridge dependency_absence with -S child",
+      "exit_code": 0,
+      "outcome": "Separate missing-dependency negative control passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/missing-dependency.log",
+        "sha256": "9e42ac443c567d91a5bb8b36903ff3a5a50d61a5c84791865bcad4c6557284f7"
+      }
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "exit_code": 0,
+      "outcome": "Windows executable and NSIS pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/package-final.log",
+        "sha256": "075a6c9ad1e550309d9af4ab83a5268f98a5ab24fb63db3d7a9de9e4ec0e73c1"
+      }
+    },
+    {
+      "command": "node scripts/run-preparation.mjs",
+      "exit_code": 0,
+      "outcome": "Packaged preparations/use/revision and cold compatibility pass from accepted authored bytes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/native-final.log",
+        "sha256": "d216de09a717b7cd8003ca92f6b8035291edb9ec9cfd629aed01f10ad9724c53"
+      },
+      "environment": {
+        "RESONANCE_W5K_ACCEPTED_JOURNEY": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5k\\native-1793239206578\\receipt.json",
+        "RESONANCE_W5K_RESTORE_BASELINE": "1",
+        "RESONANCE_W5K_REFRESH_RUNTIME": "1"
+      }
+    },
+    {
+      "command": "node scripts/preparation-references.mjs",
+      "exit_code": 0,
+      "outcome": "Final package follows saved conjunction input/output references and returns to the exact recipe",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/references.log",
+        "sha256": "52b1fc8c877c5f769e44bdf822f13fdb4fd412c6aa63cc6f5ff98a87756d4d4f"
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "outcome": "Packaged shared document lifecycle passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/workspace.log",
+        "sha256": "a63d727d890e10c286516b56809f6179eed5c39c882de1787730b8d0c285e17e"
+      }
+    },
+    {
+      "command": "node scripts/run-room-tests.mjs",
+      "exit_code": 0,
+      "outcome": "Packaged capture/reset/cold-load/lifetime/fault boundaries pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/room-session.log",
+        "sha256": "5a1e48a75505ae13710cddc5896059c285ab078d9949c7311bf73dbda3a966dd"
+      }
+    },
+    {
+      "command": "Pinned Python: standalone-room-regression.py in fresh disposable runtime inputs",
+      "exit_code": 0,
+      "outcome": "Ordinary 128x128 startup/default save/load passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5k/ordinary.log",
+        "sha256": "f27c758d2c0ca35b2b4a5f330405d31c0bc05137d5818278bc5a9ae8d1e662c0"
+      }
+    }
+  ],
+  "provenance": "Locally executed Windows checks. Full logs remain in ignored local artifacts; exact hashes retained. Accessible observations/screenshots/accepted bytes are alongside this summary. No independent native rerun is claimed."
+}

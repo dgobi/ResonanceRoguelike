@@ -1,0 +1,19 @@
+{
+  "id": "w5k_meat",
+  "name": "W5K protected field meat",
+  "description": "Selected deliberately for cooking.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.2,
+  "stackable": false,
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "vital",
+      "tier": 1
+    }
+  ]
+,"consumed_on_use":false}

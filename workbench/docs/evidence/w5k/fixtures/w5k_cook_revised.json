@@ -1,0 +1,19 @@
+{
+  "id": "w5k_cook",
+  "name": "W5K roast meal",
+  "category": "cooking",
+  "description": "Hold raw meat over open flame until it chars. Direct heat required.",
+  "known": true,
+  "components": [
+    {"tag": "vital", "min_tier": 1, "quantity": 1}
+  ],
+  "requires_ambient": [
+    {"tag": "burning", "min_tier": 2}
+  ],
+  "result_item": "w5k_dressing",
+  "passive_processing": true,
+  "processing_turns": 5,
+  "processing_source": "cooking",
+  "processing_decor": "cooking_meat",
+  "placement_message": "Set it on the fire."
+,"tools":[{"tag":"vessel","min_tier":1,"quantity":1}],"completion_message":"W5K revised work ready: {item_name}."}

@@ -1,0 +1,26 @@
+{
+  "id": "w5k_preparation_room",
+  "width": 13,
+  "height": 9,
+  "layers": [
+    "#############",
+    "#...........#",
+    "#...........#",
+    "#...........#",
+    "#...........#",
+    "#...........#",
+    "#.<.........#",
+    "#...........#",
+    "#############"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 6
+  },
+  "special_tiles": [{"type":"item","x":2,"y":3,"item_id":"w5k_meat"},{"type":"item","x":3,"y":3,"item_id":"w5k_meat"},{"type":"item","x":4,"y":3,"item_id":"w5k_leaf"},{"type":"item","x":5,"y":3,"item_id":"w5k_leaf"},{"type":"item","x":6,"y":3,"item_id":"w5k_leaf"},{"type":"item","x":7,"y":3,"item_id":"w5k_leaf"},{"type":"item","x":8,"y":3,"item_id":"w5k_pot"}]
+}
