@@ -1,0 +1,52 @@
+{
+  "id": "w5n_cleaver",
+  "name": "W5N field cleaver",
+  "description": "Iron, poorly kept. It will serve.",
+  "tile": "generic_item",
+  "category": "weapon",
+  "slot": "weapon",
+  "weight": 1.5,
+  "stackable": false,
+  "damage_dice": "2d6",
+  "damage_bonus": 3,
+  "essence": "Dissolution",
+  "essence_strength": 0.2,
+  "_essence_note": "Iron corrodes. Poor maintenance accelerates it. The dissolution is incidental, not deliberate.",
+  "on_use": "equip_toggle",
+  "consumed_on_use": false,
+  "keywords": [
+    {
+      "tag": "cutting",
+      "tier": 1
+    }
+  ],
+  "movesets": [
+    {
+      "id": "hack",
+      "name": "Hack",
+      "description": "A crude strike. More force than finesse.",
+      "key": "Q",
+      "turn_cost": 1.0,
+      "cooldown": 4,
+      "range": 1,
+      "damage_mult": 1.3,
+      "callout": "HACK",
+      "effects": {}
+    },
+    {
+      "id": "desperate_slash",
+      "name": "Desperate Slash",
+      "description": "The body finds strength in extremity.",
+      "key": "R",
+      "turn_cost": 0.8,
+      "cooldown": 8,
+      "range": 1,
+      "damage_mult": 1.5,
+      "hp_gate": 0.5,
+      "callout": "DESPERATE",
+      "effects": {
+        "ignore_armour_layers": 1
+      }
+    }
+  ]
+}

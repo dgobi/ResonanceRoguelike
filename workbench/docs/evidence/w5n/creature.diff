@@ -1,0 +1,45 @@
+===================================================================
+--- roguelike/data/entities/creatures/sewer_thing.json	opened bytes
++++ roguelike/data/entities/creatures/w5n_carrier.json	draft bytes
+@@ -1,13 +1,13 @@
+ {
+-  "id": "sewer_thing",
+-  "name": "Sewer Thing",
++  "id": "w5n_carrier",
++  "name": "W5N marrow carrier",
+   "description": "It has been down here long enough to stop being whatever it was before. It is a sewer thing now. That is sufficient identity.",
+   "tile": "sewer_thing",
+   "blocks_movement": true,
+-  "base_hp": 10,
++  "base_hp": 4,
+   "armour_value": 0,
+   "fighter": {
+-    "max_hp": 10,
++    "max_hp": 4,
+     "power": 3,
+     "defense": 0
+   },
+@@ -21,12 +21,12 @@
+     ]
+   },
+   "ai_type": "wandering",
+-  "wander_radius": 6,
++  "wander_radius": 0,
+   "pursuit_timeout": 15,
+   "spawn_zones": [
+     "undercroft"
+   ],
+-  "damage_dice": "1d4",
++  "damage_dice": "1d1",
+   "damage_bonus": 0,
+   "attack_verb": "lurches toward thee",
+   "blood_type": "red",
+@@ -43,5 +43,5 @@
+     "sheet": "urizen"
+   },
+   "can_cross_chunks": true,
+-  "speed": 0.7
+-}
++  "speed": 0.25
++,"butcher_yield":{"decay_turns":500,"tiers":[{"yields":[{"item_id":"raw_meat_common","quantity_min":1}]},{"min_cutting_tier":2,"yields":[{"item_id":"raw_meat_common","quantity_min":2,"quantity_max":2}]}]}}
+

@@ -1,0 +1,47 @@
+{
+  "id": "w5n_carrier",
+  "name": "W5N marrow carrier",
+  "description": "It has been down here long enough to stop being whatever it was before. It is a sewer thing now. That is sufficient identity.",
+  "tile": "sewer_thing",
+  "blocks_movement": true,
+  "base_hp": 4,
+  "armour_value": 0,
+  "fighter": {
+    "max_hp": 4,
+    "power": 3,
+    "defense": 0
+  },
+  "perception": {
+    "sight_radius": 4,
+    "hearing_radius": 8,
+    "sees_in_dark": true,
+    "faction": "predator",
+    "hostile_to": [
+      "player"
+    ]
+  },
+  "ai_type": "wandering",
+  "wander_radius": 0,
+  "pursuit_timeout": 15,
+  "spawn_zones": [
+    "undercroft"
+  ],
+  "damage_dice": "1d1",
+  "damage_bonus": 0,
+  "attack_verb": "lurches toward thee",
+  "blood_type": "red",
+  "limbs": [
+    {
+      "id": "body",
+      "size": 3,
+      "damage_multiplier": 1.0
+    }
+  ],
+  "corpse_sprite": {
+    "col": 2055,
+    "row": 0,
+    "sheet": "urizen"
+  },
+  "can_cross_chunks": true,
+  "speed": 0.25
+,"butcher_yield":{"decay_turns":900,"tiers":[{"yields":[{"item_id":"animal_bone","quantity_min":1}]},{"min_cutting_tier":2,"yields":[{"item_id":"animal_bone","quantity_min":3,"quantity_max":3}]}]}}

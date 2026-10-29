@@ -1,0 +1,27 @@
+{
+  "unchanged": 8353,
+  "scoped_changes": [
+    "roguelike/docs/CREATURE_AUTHORING.md",
+    "roguelike/docs/ROOM_TEST_RUNTIME.md",
+    "roguelike/docs/owner/RUNTIME_MAP.md",
+    "roguelike/engine/creature_authoring.py",
+    "roguelike/engine/data_loader.py",
+    "roguelike/engine/engine.py",
+    "roguelike/engine/harvesting.py",
+    "roguelike/engine/interaction_cursor.py",
+    "tools/critical_fix_regressions/tests/test_harvest_w5n.py",
+    "workbench/docs/W5M_DELIVERY.md",
+    "workbench/docs/W5N_DELIVERY.md",
+    "workbench/scripts/harvest-inventory.py",
+    "workbench/scripts/harvest-persistence.py",
+    "workbench/scripts/run-harvest.mjs",
+    "workbench/scripts/w5n-preservation.py",
+    "workbench/scripts/w5n-receipt.py",
+    "workbench/src/CreatureEditor.tsx",
+    "workbench/src/CreatureHarvest.tsx",
+    "workbench/src/creatureHarvest.test.ts",
+    "workbench/src/protocol.ts",
+    "workbench/worker/test_harvest.py"
+  ],
+  "failures": []
+}

@@ -1,0 +1,166 @@
+{
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "exit_code": 0,
+      "outcome": "77 frontend tests pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/frontend-final.log",
+        "sha256": "5e76563406da738cf779fcc7db08a9ab6a74934aaf3130ac244cb967a8e03a22"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "exit_code": 0,
+      "outcome": "TypeScript passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/typecheck-final.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "outcome": "68 Rust tests pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/host-final.log",
+        "sha256": "6a55d322756a9055d4013bf03689c10eb89da1ba33c00bcffc6b4f1186f30030"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "outcome": "Clippy passes with warnings denied",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/clippy-final.log",
+        "sha256": "41a3f59b6f1453630904ff3763676dc09b1707854cbfc0536f70239e255f1d39"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "Development pinned-library CPython; inherited absolute game/tests/tools PYTHONPATH: python -B -m unittest test_harvest_w5n test_equipment_w5m test_furnished_rooms_w5l test_preparation_w5k test_crafting test_gameplay_g12 test_gameplay_g16 test_usable_supplies test_authored_assignment test_gameplay_g15 test_effect_persistence test_generation_ownership test_gameplay_g17 test_room_test_session test_combat_routes -v",
+      "exit_code": 0,
+      "outcome": "124 game tests pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/game-final.log",
+        "sha256": "70f57e5fa2eaabf5dc9c7709b8854744b8431d7b5abc9ec77a9a200bb1fe774f"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "Final current consumer cases: pinned-library Python -B -m unittest test_harvest_w5n -v",
+      "exit_code": 0,
+      "outcome": "9 focused consumer cases pass, including final absent-profile and perk-roll assertions",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/game-focused-final.log",
+        "sha256": "84213b11b8f371a1bf5dac4678640b7e605bde5bb8ddeab98095c4cdad038292"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "38d3508119766bfcce4cf70facae3afea1b8b303"
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -I -B -m unittest discover -s worker -v",
+      "exit_code": 0,
+      "outcome": "98 worker cases, one expected embedded-runtime missing-dependency skip",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/worker-final.log",
+        "sha256": "9bfa26a7c87946dd783a0a5ea9faf5efa486bb4775d3f74c6e2daaffc5e0a5e6"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "Development Python: workbench/worker/test_bridge.py BridgeTests.test_dependency_absence_structured -v",
+      "exit_code": 0,
+      "outcome": "Separate missing-dependency control passes without a skip",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/dependency-negative-final.log",
+        "sha256": "3bf989c3cd146c2179b63703b50958285a2d7a524e165da8e59c59892b2b72db"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "exit_code": 0,
+      "outcome": "Windows executable and NSIS complete",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/package-final.log",
+        "sha256": "5bb69c5e11007905fae5507f0b63b0901ace193dbf3c9a3799e44918cea25557"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "node scripts/run-harvest.mjs",
+      "exit_code": 0,
+      "outcome": "Packaged full connected journey, reset/latest and separate ordinary fresh-catalogue compatibility pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/native-final.log",
+        "sha256": "5fa3e60a285b99baa8a97ae2eedfe2b9d960464289de1a7ee16a7a3f2f92969f"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "7508af08a2ca1d3665efcc5f14cc1224471251ae"
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "outcome": "Shared-document lifecycle passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/workspace-final.log",
+        "sha256": "c9c75f6fef2bc71452760a40777f26e1dda3aba5877fbf2729926cf96a762acb"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "node scripts/run-room-tests.mjs",
+      "exit_code": 0,
+      "outcome": "Capture/cancellation/reset/cold/fault/ownership lifecycle passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/room-session-final.log",
+        "sha256": "578321d6e6354f0550884ddce5a03d79467b1d3796aa5e6a0539e0eb76a381e9"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    },
+    {
+      "command": "Pinned Python: standalone-room-regression.py <fresh disposable w5h/w5n fixture> <w5n output>",
+      "exit_code": 0,
+      "outcome": "Ordinary 128x128 main/default save/load passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5n/ordinary-final.log",
+        "sha256": "02cc7b9ab10abcbd61ab26f51eb3cab531a31372b103a62dfdc3d049cc4ce5c6"
+      },
+      "application_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+      "test_source_revision": "9ab99d0befd922191c21e6d9f470545f85a42dbb"
+    }
+  ],
+  "ordinary_main": {
+    "passed": true,
+    "world": [
+      128,
+      128
+    ],
+    "scene": [
+      15,
+      20,
+      "sub_39_35_0"
+    ],
+    "save_path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\w5n-standalone-20261029\\roguelike\\saves\\slot_0",
+    "seed": 382086187,
+    "ordinary_debug_default": true,
+    "save_load": true,
+    "save_access_events": 75,
+    "main_sha256": "0fc1ed01bd64b641c392dff70a2823bd06f5a6461032c4f3cea43eaef7dc4991"
+  },
+  "earlier_attempts": "Only passing final commands count. Application/game bytes are unchanged after the package-input revision. Final focused consumer assertions supplement the broader game run. Earlier harness selector, BUSY admission, CRLF/invalid-fixture and stale quit-control corrections are disclosed in delivery; an early concurrent workspace scroll timeout is excluded after an isolated passing rerun. Test doubles and headless finalization fixtures are distinct from native ordinary play."
+}

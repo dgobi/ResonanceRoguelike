@@ -1,0 +1,89 @@
+{
+  "attempts": [
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5n/native-1793296086081/receipt.json",
+        "sha256": "21520ceb466c76dc9d255dab141c19e2f1900fc5602b487f13b8bc9e105f19e1"
+      },
+      "package_sha256": "c25e9215e343ae11a1181bff4c3309dad35f64d3b4c85b85ff765e39c9d82b46",
+      "category": "publication action selector",
+      "failure_excerpt": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"authoring\"]:visible').getByRole('button', { name: 'Apply variant', exact: true })\u001b[22m\n\n    at apply (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-harvest.mjs:37:88)\n    at reviewed (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-harvest.mjs:108:235)\n    at async file:///G:/GameDev/RoguelikeProjec",
+      "scope": "Excluded harness attempt. Application/game implementation bytes were unchanged; passing final journey uses corrected verification controls."
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5n/native-1793296216105/receipt.json",
+        "sha256": "3afb1e7d7bd17b56350b3178ee5063dde7294662b310aa3761581261f5a861f8"
+      },
+      "package_sha256": "c25e9215e343ae11a1181bff4c3309dad35f64d3b4c85b85ff765e39c9d82b46",
+      "category": "publication action selector",
+      "failure_excerpt": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"authoring\"]:visible').getByRole('button', { name: 'Apply variant', exact: true })\u001b[22m\n\n    at apply (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-harvest.mjs:37:88)\n    at reviewed (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-harvest.mjs:108:235)\n    at async file:///G:/GameDev/RoguelikeProjec",
+      "scope": "Excluded harness attempt. Application/game implementation bytes were unchanged; passing final journey uses corrected verification controls."
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5n/native-1793296298161/receipt.json",
+        "sha256": "b0f5e4737b2de69cba2d2fbb33deb71c838bbd7b901d055b0f0bbff3d6175a41"
+      },
+      "package_sha256": "c25e9215e343ae11a1181bff4c3309dad35f64d3b4c85b85ff765e39c9d82b46",
+      "category": "DOM-normalized CRLF comparison",
+      "failure_excerpt": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ '{\\n' +\n+   '  \"id\": \"w5n_carrier\",\\n' +\n+   '  \"name\": \"W5N marrow carrier\",\\n' +\n+   '  \"description\": \"It has been down here long enough to stop being whatever it was before. It is a sewer thing now. That is sufficient identity.\",\\n' +\n+   '  \"tile\": \"sewer_thing\",\\n' +\n+   '  \"blocks_movement\": true,\\n",
+      "scope": "Excluded harness attempt. Application/game implementation bytes were unchanged; passing final journey uses corrected verification controls."
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5n/native-1793296446785/receipt.json",
+        "sha256": "afc1b2aa9b57250f646d03051b549e17881bfdbfa7df6ebe5e6dbc6b4108c46a"
+      },
+      "package_sha256": "c25e9215e343ae11a1181bff4c3309dad35f64d3b4c85b85ff765e39c9d82b46",
+      "category": "variant admission acknowledgement",
+      "failure_excerpt": "locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('New variant ID', { exact: true }).filter({ visible: true })\u001b[22m\n\n    at fill (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-harvest.mjs:25:86)\n    at G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-harvest.mjs:148:139",
+      "scope": "Excluded harness attempt. Application/game implementation bytes were unchanged; passing final journey uses corrected verification controls."
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5n/native-1793296718578/receipt.json",
+        "sha256": "9daa9f7e16655bd701ea8866c8b858a33ed5ff3dc8a59f34aad1ff5a37909ea7"
+      },
+      "package_sha256": "c25e9215e343ae11a1181bff4c3309dad35f64d3b4c85b85ff765e39c9d82b46",
+      "category": "explicit recovery BUSY refusal",
+      "failure_excerpt": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Recover drafts', exact: true }) to be hidden\u001b[22m\n\u001b[2m    63 × locator resolved to visible <section role=\"dialog\" aria-label=\"Recover drafts\" class=\"confirmation recovery-panel\">…</section>\u001b[22m\n\n    at recover (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-harvest.mjs:88:234)\n    at async fil",
+      "scope": "Excluded harness attempt. Application/game implementation bytes were unchanged; passing final journey uses corrected verification controls."
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5n/native-1793296882551/receipt.json",
+        "sha256": "79c0d6627eca76f660a2f5d311bdba198f368b4f956842a75f857691885eac82"
+      },
+      "package_sha256": "c25e9215e343ae11a1181bff4c3309dad35f64d3b4c85b85ff765e39c9d82b46",
+      "category": "terminal-newline invalid-fixture construction",
+      "failure_excerpt": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert(!(await validate()).valid)\n\n    at file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-harvest.mjs:159:341",
+      "scope": "Excluded harness attempt. Application/game implementation bytes were unchanged; passing final journey uses corrected verification controls."
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5n/native-1793296981530/receipt.json",
+        "sha256": "654ba728a6640440004a8bffd55a63fb18ee738058249df76910413d26685348"
+      },
+      "package_sha256": "c25e9215e343ae11a1181bff4c3309dad35f64d3b4c85b85ff765e39c9d82b46",
+      "category": "publication action selector",
+      "failure_excerpt": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"authoring\"]:visible').getByRole('button', { name: 'Review & apply', exact: true })\u001b[22m\n\n    at apply (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-harvest.mjs:37:88)\n    at reviewed (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-harvest.mjs:115:235)\n    at async file:///G:/GameDev/RoguelikeProje",
+      "scope": "Excluded harness attempt. Application/game implementation bytes were unchanged; passing final journey uses corrected verification controls."
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5n/native-1793297200416/receipt.json",
+        "sha256": "81e6c5de3ab59a0a0380a4cd5d6c5bfc05130e69efa4e8fd22be74fa5724c219"
+      },
+      "package_sha256": "c25e9215e343ae11a1181bff4c3309dad35f64d3b4c85b85ff765e39c9d82b46",
+      "category": "stale quit-control replay/exit acknowledgement",
+      "failure_excerpt": "AssertionError [ERR_ASSERTION]: Timed out\n    at until (file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-harvest.mjs:39:104)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-harvest.mjs:186:1110",
+      "scope": "Excluded harness attempt. Application/game implementation bytes were unchanged; passing final journey uses corrected verification controls."
+    }
+  ],
+  "passing_receipt": {
+    "path": "workbench/.artifacts/w5n/native-1793297498302/receipt.json",
+    "sha256": "47bd0fac34066e17208112fcc3dc8097f8607f7c358f9905176f5f1218039242"
+  },
+  "application_bytes_unchanged": true
+}

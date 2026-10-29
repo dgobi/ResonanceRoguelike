@@ -1,0 +1,11 @@
+Index: roguelike/data/entities/creatures/w5n_carrier.json
+===================================================================
+--- roguelike/data/entities/creatures/w5n_carrier.json	opened bytes
++++ roguelike/data/entities/creatures/w5n_carrier.json	draft bytes
+@@ -44,4 +44,4 @@
+   },
+   "can_cross_chunks": true,
+   "speed": 0.25
+-,"butcher_yield":{"decay_turns":500,"tiers":[{"yields":[{"item_id":"raw_meat_common","quantity_min":1}]},{"min_cutting_tier":2,"yields":[{"item_id":"raw_meat_common","quantity_min":2,"quantity_max":2}]}]}}
++,"butcher_yield":{"decay_turns":900,"tiers":[{"yields":[{"item_id":"animal_bone","quantity_min":1}]},{"min_cutting_tier":2,"yields":[{"item_id":"animal_bone","quantity_min":3,"quantity_max":3}]}]}}
+

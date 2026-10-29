@@ -1,0 +1,571 @@
+{
+  "milestone": "W5N",
+  "passed": true,
+  "observed_utc": "2026-10-29T18:21:24.392088+00:00",
+  "contract": "creature-harvest-2",
+  "revisions": {
+    "start": "838958de0f72054e573651cbc250e9ada8ebb8c0",
+    "initial_remote": "838958de0f72054e573651cbc250e9ada8ebb8c0",
+    "implementation": "9ab99d0befd922191c21e6d9f470545f85a42dbb",
+    "evidence_inputs": "da6341ebbdca3aecf69b836cd500b13ef939a73f",
+    "final_delivery_ref": "checkpoint/workbench-w5n-verified-20261029",
+    "note": "Final commit cannot embed its own hash. Resolve final ref; post-push ignored remote-readback.json and user handoff report exact full local/remote main equality. Application/package inputs precede later evidence commits; working and Git-normalized committed bytes are bound separately."
+  },
+  "commission": {
+    "local_path": "C:/Users/dango/Downloads/CODEX_WORKBENCH_W5N_CREATURE_HARVESTS.md",
+    "sha256": "3a5d5d0ffcbb82d3d0e77f942050f6243e667c82f1159af1cb186d3f4a5040e2"
+  },
+  "accepted_fixtures": {
+    "creature": {
+      "path": "workbench/docs/evidence/w5n/fixtures/creature.json",
+      "sha256": "770506a4cd1ca71a78d208ac98fce3c62ba1ae5152baed6e8a7f5507e8e2bbef",
+      "published_path": "roguelike/data/entities/creatures/w5n_carrier.json",
+      "definition": {
+        "id": "w5n_carrier",
+        "name": "W5N marrow carrier",
+        "description": "It has been down here long enough to stop being whatever it was before. It is a sewer thing now. That is sufficient identity.",
+        "tile": "sewer_thing",
+        "blocks_movement": true,
+        "base_hp": 4,
+        "armour_value": 0,
+        "fighter": {
+          "max_hp": 4,
+          "power": 3,
+          "defense": 0
+        },
+        "perception": {
+          "sight_radius": 4,
+          "hearing_radius": 8,
+          "sees_in_dark": true,
+          "faction": "predator",
+          "hostile_to": [
+            "player"
+          ]
+        },
+        "ai_type": "wandering",
+        "wander_radius": 0,
+        "pursuit_timeout": 15,
+        "spawn_zones": [
+          "undercroft"
+        ],
+        "damage_dice": "1d1",
+        "damage_bonus": 0,
+        "attack_verb": "lurches toward thee",
+        "blood_type": "red",
+        "limbs": [
+          {
+            "id": "body",
+            "size": 3,
+            "damage_multiplier": 1
+          }
+        ],
+        "corpse_sprite": {
+          "col": 2055,
+          "row": 0,
+          "sheet": "urizen"
+        },
+        "can_cross_chunks": true,
+        "speed": 0.25,
+        "butcher_yield": {
+          "decay_turns": 500,
+          "tiers": [
+            {
+              "yields": [
+                {
+                  "item_id": "raw_meat_common",
+                  "quantity_min": 1
+                }
+              ]
+            },
+            {
+              "min_cutting_tier": 2,
+              "yields": [
+                {
+                  "item_id": "raw_meat_common",
+                  "quantity_min": 2,
+                  "quantity_max": 2
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents normalization."
+    },
+    "tool": {
+      "path": "workbench/docs/evidence/w5n/fixtures/tool.json",
+      "sha256": "1d3033aac6832e36df184608314f92ccaca7d989916b62d0cad4302ef7c2b6fd",
+      "published_path": "roguelike/data/items/weapons/w5n_cleaver.json",
+      "definition": {
+        "id": "w5n_cleaver",
+        "name": "W5N field cleaver",
+        "description": "Iron, poorly kept. It will serve.",
+        "tile": "generic_item",
+        "category": "weapon",
+        "slot": "weapon",
+        "weight": 1.5,
+        "stackable": false,
+        "damage_dice": "2d6",
+        "damage_bonus": 3,
+        "essence": "Dissolution",
+        "essence_strength": 0.2,
+        "_essence_note": "Iron corrodes. Poor maintenance accelerates it. The dissolution is incidental, not deliberate.",
+        "on_use": "equip_toggle",
+        "consumed_on_use": false,
+        "keywords": [
+          {
+            "tag": "cutting",
+            "tier": 2
+          }
+        ],
+        "movesets": [
+          {
+            "id": "hack",
+            "name": "Hack",
+            "description": "A crude strike. More force than finesse.",
+            "key": "Q",
+            "turn_cost": 1,
+            "cooldown": 4,
+            "range": 1,
+            "damage_mult": 1.3,
+            "callout": "HACK",
+            "effects": {}
+          },
+          {
+            "id": "desperate_slash",
+            "name": "Desperate Slash",
+            "description": "The body finds strength in extremity.",
+            "key": "R",
+            "turn_cost": 0.8,
+            "cooldown": 8,
+            "range": 1,
+            "damage_mult": 1.5,
+            "hp_gate": 0.5,
+            "callout": "DESPERATE",
+            "effects": {
+              "ignore_armour_layers": 1
+            }
+          }
+        ]
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents normalization."
+    },
+    "creature_revised": {
+      "path": "workbench/docs/evidence/w5n/fixtures/creature_revised.json",
+      "sha256": "aec682de0fb016617ac632568a47a0346c9c4721c5b021c399861f23f8bd5de4",
+      "published_path": "roguelike/data/entities/creatures/w5n_carrier.json",
+      "definition": {
+        "id": "w5n_carrier",
+        "name": "W5N marrow carrier",
+        "description": "It has been down here long enough to stop being whatever it was before. It is a sewer thing now. That is sufficient identity.",
+        "tile": "sewer_thing",
+        "blocks_movement": true,
+        "base_hp": 4,
+        "armour_value": 0,
+        "fighter": {
+          "max_hp": 4,
+          "power": 3,
+          "defense": 0
+        },
+        "perception": {
+          "sight_radius": 4,
+          "hearing_radius": 8,
+          "sees_in_dark": true,
+          "faction": "predator",
+          "hostile_to": [
+            "player"
+          ]
+        },
+        "ai_type": "wandering",
+        "wander_radius": 0,
+        "pursuit_timeout": 15,
+        "spawn_zones": [
+          "undercroft"
+        ],
+        "damage_dice": "1d1",
+        "damage_bonus": 0,
+        "attack_verb": "lurches toward thee",
+        "blood_type": "red",
+        "limbs": [
+          {
+            "id": "body",
+            "size": 3,
+            "damage_multiplier": 1
+          }
+        ],
+        "corpse_sprite": {
+          "col": 2055,
+          "row": 0,
+          "sheet": "urizen"
+        },
+        "can_cross_chunks": true,
+        "speed": 0.25,
+        "butcher_yield": {
+          "decay_turns": 900,
+          "tiers": [
+            {
+              "yields": [
+                {
+                  "item_id": "animal_bone",
+                  "quantity_min": 1
+                }
+              ]
+            },
+            {
+              "min_cutting_tier": 2,
+              "yields": [
+                {
+                  "item_id": "animal_bone",
+                  "quantity_min": 3,
+                  "quantity_max": 3
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents normalization."
+    },
+    "tool_revised": {
+      "path": "workbench/docs/evidence/w5n/fixtures/tool_revised.json",
+      "sha256": "ba8a8eec2f676969b86044ee3f2cf494e329e902f4de6362868daa5495a0e2d5",
+      "published_path": "roguelike/data/items/weapons/w5n_cleaver.json",
+      "definition": {
+        "id": "w5n_cleaver",
+        "name": "W5N field cleaver",
+        "description": "Iron, poorly kept. It will serve.",
+        "tile": "generic_item",
+        "category": "weapon",
+        "slot": "weapon",
+        "weight": 1.5,
+        "stackable": false,
+        "damage_dice": "2d6",
+        "damage_bonus": 3,
+        "essence": "Dissolution",
+        "essence_strength": 0.2,
+        "_essence_note": "Iron corrodes. Poor maintenance accelerates it. The dissolution is incidental, not deliberate.",
+        "on_use": "equip_toggle",
+        "consumed_on_use": false,
+        "keywords": [
+          {
+            "tag": "cutting",
+            "tier": 1
+          }
+        ],
+        "movesets": [
+          {
+            "id": "hack",
+            "name": "Hack",
+            "description": "A crude strike. More force than finesse.",
+            "key": "Q",
+            "turn_cost": 1,
+            "cooldown": 4,
+            "range": 1,
+            "damage_mult": 1.3,
+            "callout": "HACK",
+            "effects": {}
+          },
+          {
+            "id": "desperate_slash",
+            "name": "Desperate Slash",
+            "description": "The body finds strength in extremity.",
+            "key": "R",
+            "turn_cost": 0.8,
+            "cooldown": 8,
+            "range": 1,
+            "damage_mult": 1.5,
+            "hp_gate": 0.5,
+            "callout": "DESPERATE",
+            "effects": {
+              "ignore_armour_layers": 1
+            }
+          }
+        ]
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents normalization."
+    },
+    "room": {
+      "path": "workbench/docs/evidence/w5n/fixtures/room.json",
+      "sha256": "5c0d3b61656d39c44ddd2e3e5b9c263eeaeede81b8e6c510763b0cff78971ade",
+      "published_path": "roguelike/data/layouts/w5n_harvest_room.json",
+      "definition": {
+        "id": "w5n_harvest_room",
+        "width": 19,
+        "height": 11,
+        "layers": [
+          "###################",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.<...............#",
+          "#.................#",
+          "###################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 3,
+          "y": 8
+        },
+        "special_tiles": [
+          {
+            "type": "decor",
+            "x": 8,
+            "y": 5,
+            "decor_id": "campfire_unlit"
+          },
+          {
+            "type": "item",
+            "x": 4,
+            "y": 7,
+            "item_id": "w5n_cleaver"
+          },
+          {
+            "type": "creature",
+            "x": 13,
+            "y": 4,
+            "creature_id": "w5n_carrier"
+          }
+        ]
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents normalization."
+    }
+  },
+  "inventory": {
+    "path": "workbench/docs/evidence/w5n/creature-inventory.json",
+    "sha256": "978c23242be776c03ee9d97ea65a38e755fcf5a125005b573aa68657ad3f2464"
+  },
+  "observations": {
+    "path": "workbench/docs/evidence/w5n/observations.json",
+    "sha256": "b95a4b36f5a364b8ccc0af7615466c06320021775ac37e334606f8fd259f3997"
+  },
+  "captures": {
+    "path": "workbench/docs/evidence/w5n/capture-inputs.json",
+    "sha256": "f351bc014be311af304d8d5d09653a83ddc1f79ae8ddcb8ac64b9e875b455f12"
+  },
+  "environment": {
+    "path": "workbench/docs/evidence/w5n/environment.json",
+    "sha256": "b33c5d68ed9c8d67c086cfde6b37f5eddfa623c2edd1aff82cda45c01c5d0963"
+  },
+  "package_source_inputs": {
+    "path": "workbench/docs/evidence/w5n/package-source-inputs.json",
+    "sha256": "95095d222627a9e252a484407c4ce46513c18bfd420ca5c9ff0ab5245befe26b"
+  },
+  "gates": {
+    "path": "workbench/docs/evidence/w5n/gates.json",
+    "sha256": "71dd0e28f24715a4d45187b1d15f5d7c3c2232c57683f801e5518d12dd3b3e98"
+  },
+  "preservation": {
+    "path": "workbench/docs/evidence/w5n/preservation.json",
+    "sha256": "457150b4942ee44128927c1068b4da56671a538b3f51888d884afe5cb6c0fba7"
+  },
+  "harness_corrections": {
+    "path": "workbench/docs/evidence/w5n/harness-corrections.json",
+    "sha256": "70901088e2406fe5ec98f0db85ac8823a8231d44333c9c5e746d627205fca98d"
+  },
+  "package": {
+    "resonance-workbench.exe": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "c25e9215e343ae11a1181bff4c3309dad35f64d3b4c85b85ff765e39c9d82b46"
+    },
+    "bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "ecf1b05ba43abac84c1232ae796c31f30a7317b502d96a9be05d17ded6f000fd"
+    }
+  },
+  "runtime": {
+    "worker/bridge.py": {
+      "path": "workbench/worker/bridge.py",
+      "sha256": "69d276cc2cc69d3992395901eb549106582997f10c9d14b5f090aab9b6c02653"
+    },
+    "worker/runtime/python.exe": {
+      "path": "workbench/worker/runtime/python.exe",
+      "sha256": "bf1b03022cadfc18049a7f0ecf1f3134c7676fcb6ff6c6941ae7f77e21285c73"
+    },
+    "worker/runtime/python311._pth": {
+      "path": "workbench/worker/runtime/python311._pth",
+      "sha256": "c76be49a913db57efc322b4c77ae5ed282e78285a69a70441e011529241507ce"
+    },
+    "worker/requirements.lock": {
+      "path": "workbench/worker/requirements.lock",
+      "sha256": "17cd05554346febe141934ef7757e42d71f91880d2303051196fda0d50d278a7"
+    }
+  },
+  "source_hashes": {
+    "roguelike/components/equipment.py": {
+      "working_sha256": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7",
+      "committed_sha256": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7"
+    },
+    "roguelike/components/inventory.py": {
+      "working_sha256": "f8bd45b695fc9c44f0d73fed77f6f998eb46b3e30139ce2d99c6baf16edcec58",
+      "committed_sha256": "d4ff5ae5adb237d481884fec6b79d71d877d5e65a4c785a3230fc11bae01d743"
+    },
+    "roguelike/docs/CREATURE_AUTHORING.md": {
+      "working_sha256": "27eefe946e505f83c0082fbbf5ec1597abb0caa64e20a7957b12545e79cdfe1d",
+      "committed_sha256": "27eefe946e505f83c0082fbbf5ec1597abb0caa64e20a7957b12545e79cdfe1d"
+    },
+    "roguelike/docs/ROOM_TEST_RUNTIME.md": {
+      "working_sha256": "06a9ac9e703c77c26bcae65238ededc27c339017bed6cb78c46769d1e17c4f98",
+      "committed_sha256": "06a9ac9e703c77c26bcae65238ededc27c339017bed6cb78c46769d1e17c4f98"
+    },
+    "roguelike/docs/owner/RUNTIME_MAP.md": {
+      "working_sha256": "97e9c17dac82794d64444c66d89643bace2a0fbf9b8433277ce0607bb0c04075",
+      "committed_sha256": "516d992be94b754b1a7e6decb8c96f443c8697096fb41e2b8d09bc51283a7ece"
+    },
+    "roguelike/engine/creature_abilities.py": {
+      "working_sha256": "c7cbd4f922240bbcfbddf10f11dcd4c27e427af747c067c94d69ddaa488a5cae",
+      "committed_sha256": "fdc88753da9597345cbe2e8e0c8d85112cca8b0f259b93c919066447afae208a"
+    },
+    "roguelike/engine/creature_authoring.py": {
+      "working_sha256": "8f7b978485823742e79b166c0de2623a8e9ab66c940254b2e37d66ec6fbcd1de",
+      "committed_sha256": "8f7b978485823742e79b166c0de2623a8e9ab66c940254b2e37d66ec6fbcd1de"
+    },
+    "roguelike/engine/creature_factory.py": {
+      "working_sha256": "cd3fa4db9716a0d61b1158f2e06037b9ff129d16da703b908de8c657a773a44d",
+      "committed_sha256": "2f671a6e27844f102ecd3b49796f827cfc49e7dd8918adb6d912cfc5f8f05c7e"
+    },
+    "roguelike/engine/data_loader.py": {
+      "working_sha256": "600b8c049f8b6b770de0264cb07af14c8f02651a958700970c8402756fbf1f53",
+      "committed_sha256": "5ebf2f05a5c4edbadd89259eeafc4881c6ace2eb055764a6b7ac33094bee0740"
+    },
+    "roguelike/engine/engine.py": {
+      "working_sha256": "c26403be35912feae179694582dfcefd86044bf3061c6312cccca02e7c1fb64a",
+      "committed_sha256": "c26403be35912feae179694582dfcefd86044bf3061c6312cccca02e7c1fb64a"
+    },
+    "roguelike/engine/harvesting.py": {
+      "working_sha256": "36cdc0e97ed59ced3c32425b40dfa5a05888081ec20d002535a7b788c81cec42",
+      "committed_sha256": "36cdc0e97ed59ced3c32425b40dfa5a05888081ec20d002535a7b788c81cec42"
+    },
+    "roguelike/engine/interaction_cursor.py": {
+      "working_sha256": "85a7d708f4683723fd8ec94bbf36f18931ebf59265985ff3beb084c6b1acc165",
+      "committed_sha256": "85a7d708f4683723fd8ec94bbf36f18931ebf59265985ff3beb084c6b1acc165"
+    },
+    "roguelike/engine/item_factory.py": {
+      "working_sha256": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "committed_sha256": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66"
+    },
+    "roguelike/engine/item_system.py": {
+      "working_sha256": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+      "committed_sha256": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71"
+    },
+    "roguelike/engine/item_transfers.py": {
+      "working_sha256": "d95cdf9f1fc647bc98b02179512def418b4f25092dcfbc5dc308036c9c185afa",
+      "committed_sha256": "d95cdf9f1fc647bc98b02179512def418b4f25092dcfbc5dc308036c9c185afa"
+    },
+    "roguelike/engine/player_setup.py": {
+      "working_sha256": "6bfb6a2b4b8aec50a9715cc37abd52a77c953f8f5b6fedefd0c856d0fea14f10",
+      "committed_sha256": "0ccf782001d72d2c2ba717fdac95826b92b546b2d5bfbbdac4349bd0c6aa013c"
+    },
+    "roguelike/engine/room_test_diagnostics.py": {
+      "working_sha256": "80c976649639c0b6a30e1ad3fbfeb4ca7a66096ba10607c0e7816fe0b1184df8",
+      "committed_sha256": "80c976649639c0b6a30e1ad3fbfeb4ca7a66096ba10607c0e7816fe0b1184df8"
+    },
+    "roguelike/engine/save_components.py": {
+      "working_sha256": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+      "committed_sha256": "b2df939decdb283814a4c4ba94ec9c6d5339a0d05f78fad909e859d6f3475228"
+    },
+    "roguelike/engine/save_manager.py": {
+      "working_sha256": "19e244226a5f8117318595a8431b6694a8777c153ecc855f127e147fa912741b",
+      "committed_sha256": "28628c17329f66b962d1cef09843e60c0b184ac2474c9667c2de8e481da94842"
+    },
+    "roguelike/entities/item.py": {
+      "working_sha256": "434d25aff6ab3e64624784394c8ca8e1d00eb560f93268af021afb7b24c67d74",
+      "committed_sha256": "013129e034cc4f25d3d6769440905d3ac69eef67aa6dcf9f00f8169630a8b977"
+    },
+    "roguelike/generation/authored_decor.py": {
+      "working_sha256": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52",
+      "committed_sha256": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52"
+    },
+    "roguelike/generation/floor_object_utils.py": {
+      "working_sha256": "576cc816724f3a8970e5efe6de62e804a3da594b477d52461dfd69804612df55",
+      "committed_sha256": "576cc816724f3a8970e5efe6de62e804a3da594b477d52461dfd69804612df55"
+    },
+    "roguelike/room_test.py": {
+      "working_sha256": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603",
+      "committed_sha256": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603"
+    },
+    "tools/critical_fix_regressions/tests/test_harvest_w5n.py": {
+      "working_sha256": "3e1704dfd83d1d63505e871a45dfdf51ad141f5d622bf35b5faf303087c96c88",
+      "committed_sha256": "3e1704dfd83d1d63505e871a45dfdf51ad141f5d622bf35b5faf303087c96c88"
+    },
+    "workbench/docs/W5M_DELIVERY.md": {
+      "working_sha256": "371c4e64dc16ca84fe19501c401dd4ac72d62c38361006210b2c80e6c2eee9f2",
+      "committed_sha256": "371c4e64dc16ca84fe19501c401dd4ac72d62c38361006210b2c80e6c2eee9f2"
+    },
+    "workbench/scripts/harvest-inventory.py": {
+      "working_sha256": "9887a718cbeec9f718ca5d5f3c73b1770754e8560312348e597add76503102b3",
+      "committed_sha256": "9887a718cbeec9f718ca5d5f3c73b1770754e8560312348e597add76503102b3"
+    },
+    "workbench/scripts/harvest-persistence.py": {
+      "working_sha256": "092104f5c4bd0aeb3c2397c2df2f5eadf5a49520a09a2e41b8700a6903d42dbb",
+      "committed_sha256": "8233b69c9b637f45777b0dd8e75a1453630d8494cbdb54f0d1159ba11e4f1bed"
+    },
+    "workbench/scripts/run-harvest.mjs": {
+      "working_sha256": "391687f967a34bca2178102d708327c63e260e222a3b8af14523c7ad25f6fbb0",
+      "committed_sha256": "391687f967a34bca2178102d708327c63e260e222a3b8af14523c7ad25f6fbb0"
+    },
+    "workbench/scripts/w5n-preservation.py": {
+      "working_sha256": "f3baf28d65d903179be9b46fb9887f7e86405413d5118a151b7febfb80769a3d",
+      "committed_sha256": "f3baf28d65d903179be9b46fb9887f7e86405413d5118a151b7febfb80769a3d"
+    },
+    "workbench/scripts/w5n-receipt.py": {
+      "working_sha256": "0526ff79fe1cea89157c6e6b5315b5a68fe1c09e9baab1023a62184f30553254",
+      "committed_sha256": "0526ff79fe1cea89157c6e6b5315b5a68fe1c09e9baab1023a62184f30553254"
+    },
+    "workbench/src/CreatureEditor.tsx": {
+      "working_sha256": "aee821a0788f9a70d3cc17a4d20e669d4c9c9e1e5fad9c2b1177df745f9bd9d1",
+      "committed_sha256": "aee821a0788f9a70d3cc17a4d20e669d4c9c9e1e5fad9c2b1177df745f9bd9d1"
+    },
+    "workbench/src/CreatureHarvest.tsx": {
+      "working_sha256": "56ac2d0d4fa92d520a81c6240db30d2d5a6c85723eb9956399135e58a9dd4f21",
+      "committed_sha256": "56ac2d0d4fa92d520a81c6240db30d2d5a6c85723eb9956399135e58a9dd4f21"
+    },
+    "workbench/src/creatureHarvest.test.ts": {
+      "working_sha256": "413d0526e25272afcb511889a7dc9d74f18ccb08e01d3ef124bff5d541ed3fcf",
+      "committed_sha256": "413d0526e25272afcb511889a7dc9d74f18ccb08e01d3ef124bff5d541ed3fcf"
+    },
+    "workbench/src/protocol.ts": {
+      "working_sha256": "6ba9fd0b4415b58888fe7240fcfa33d24737971dc17215e893bdf7ba626f84aa",
+      "committed_sha256": "6ba9fd0b4415b58888fe7240fcfa33d24737971dc17215e893bdf7ba626f84aa"
+    },
+    "workbench/worker/test_harvest.py": {
+      "working_sha256": "5c09ae10055ea5077c7c088f5cc2f05f9fb39114511b99b9a240a0d551807591",
+      "committed_sha256": "5c09ae10055ea5077c7c088f5cc2f05f9fb39114511b99b9a240a0d551807591"
+    }
+  },
+  "captured_game_inputs": {
+    "roguelike/components/equipment.py": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7",
+    "roguelike/components/inventory.py": "f8bd45b695fc9c44f0d73fed77f6f998eb46b3e30139ce2d99c6baf16edcec58",
+    "roguelike/engine/creature_abilities.py": "c7cbd4f922240bbcfbddf10f11dcd4c27e427af747c067c94d69ddaa488a5cae",
+    "roguelike/engine/creature_authoring.py": "8f7b978485823742e79b166c0de2623a8e9ab66c940254b2e37d66ec6fbcd1de",
+    "roguelike/engine/creature_factory.py": "cd3fa4db9716a0d61b1158f2e06037b9ff129d16da703b908de8c657a773a44d",
+    "roguelike/engine/data_loader.py": "600b8c049f8b6b770de0264cb07af14c8f02651a958700970c8402756fbf1f53",
+    "roguelike/engine/engine.py": "c26403be35912feae179694582dfcefd86044bf3061c6312cccca02e7c1fb64a",
+    "roguelike/engine/harvesting.py": "36cdc0e97ed59ced3c32425b40dfa5a05888081ec20d002535a7b788c81cec42",
+    "roguelike/engine/interaction_cursor.py": "85a7d708f4683723fd8ec94bbf36f18931ebf59265985ff3beb084c6b1acc165",
+    "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+    "roguelike/engine/item_system.py": "32697f28cefe8af66fca5317e2222b68b28d9131a41ccc7d42ed90db0822ef71",
+    "roguelike/engine/item_transfers.py": "d95cdf9f1fc647bc98b02179512def418b4f25092dcfbc5dc308036c9c185afa",
+    "roguelike/engine/player_setup.py": "6bfb6a2b4b8aec50a9715cc37abd52a77c953f8f5b6fedefd0c856d0fea14f10",
+    "roguelike/engine/room_test_diagnostics.py": "80c976649639c0b6a30e1ad3fbfeb4ca7a66096ba10607c0e7816fe0b1184df8",
+    "roguelike/engine/save_components.py": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+    "roguelike/engine/save_manager.py": "19e244226a5f8117318595a8431b6694a8777c153ecc855f127e147fa912741b",
+    "roguelike/entities/item.py": "434d25aff6ab3e64624784394c8ca8e1d00eb560f93268af021afb7b24c67d74",
+    "roguelike/generation/authored_decor.py": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52",
+    "roguelike/generation/floor_object_utils.py": "576cc816724f3a8970e5efe6de62e804a3da594b477d52461dfd69804612df55",
+    "roguelike/room_test.py": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603"
+  },
+  "limits": [
+    "One controlled authored-room journey; no natural discovery, encounter balance or all-ability certification.",
+    "Native combat and harvest retain ordinary RNG. Only focused branch/fault tests control random quantities.",
+    "Separate headless ordinary compatibility uses disclosed production finalization rather than a second native defeat.",
+    "No content pack, starter redistribution, save migration, decay simulation change, wiki edition or reference-pack refresh."
+  ]
+}

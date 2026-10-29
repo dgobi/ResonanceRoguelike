@@ -1,0 +1,32 @@
+===================================================================
+--- roguelike/data/items/weapons/crude_blade.json	opened bytes
++++ roguelike/data/items/weapons/w5n_cleaver.json	draft bytes
+@@ -1,14 +1,14 @@
+ {
+-  "id": "crude_blade",
+-  "name": "a crude blade",
++  "id": "w5n_cleaver",
++  "name": "W5N field cleaver",
+   "description": "Iron, poorly kept. It will serve.",
+   "tile": "generic_item",
+   "category": "weapon",
+   "slot": "weapon",
+   "weight": 1.5,
+   "stackable": false,
+-  "damage_dice": "1d6",
+-  "damage_bonus": 0,
++  "damage_dice": "2d6",
++  "damage_bonus": 3,
+   "essence": "Dissolution",
+   "essence_strength": 0.2,
+   "_essence_note": "Iron corrodes. Poor maintenance accelerates it. The dissolution is incidental, not deliberate.",
+@@ -17,7 +17,7 @@
+   "keywords": [
+     {
+       "tag": "cutting",
+-      "tier": 1
++      "tier": 2
+     }
+   ],
+   "movesets": [
+

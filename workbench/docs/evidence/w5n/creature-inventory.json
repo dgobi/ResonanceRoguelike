@@ -1,0 +1,1708 @@
+{
+  "contract": "creature-harvest-2",
+  "total": 13,
+  "harvest_admitted": 11,
+  "existing_tables": 9,
+  "rules": {
+    "defaults": {
+      "decay_turns": 200,
+      "min_cutting_tier": 1,
+      "quantity_min": 0,
+      "quantity_max": 1
+    },
+    "max_rows": 64,
+    "max_outputs": 64,
+    "max_tier": 32,
+    "max_decay": 9007199254740991,
+    "meaning": "Absent profile or {}: free refusal; a nonempty profile without tiers: one-turn insufficient-tool refusal. Decay absent: 200 active-map ticks; null: no decay; zero/one: next active tick. Highest qualifying cutting threshold wins; first equal row wins. bone_reader qualifies every row, but cost uses the owned tool's copied tier: max(1, 5 - (actual tier - threshold)). Each output independently rolls an inclusive quantity range, absent 0–1. A selected empty/zero-yield tier consumes the corpse at normal cost."
+  },
+  "rows": [
+    {
+      "id": "barrow_wight",
+      "path": "roguelike/data/entities/creatures/barrow_wight.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": "barrow_wight",
+      "profile_present": true,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/barrow_wight.json",
+          "asset": "barrow_wight",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/barrow_wight.json",
+          "asset": "barrow_wight",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[1]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/barrow_wight.json",
+          "asset": "barrow_wight",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "barrow_wight",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[0].item_id",
+          "id": "grave_dust",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/grave_dust.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[1].item_id",
+          "id": "animal_bone",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_bone.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[0].item_id",
+          "id": "grave_dust",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/grave_dust.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[1].item_id",
+          "id": "compressed_marrow",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/compressed_marrow.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[2].item_id",
+          "id": "wight_essence_residue",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/wight_essence_residue.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[3].item_id",
+          "id": "resonant_bone_fragment",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/resonant_bone_fragment.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "barrow",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/dungeon/barrow.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[1]",
+          "id": "heath",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/heath.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "bog_wraith",
+      "path": "roguelike/data/entities/creatures/bog_wraith.json",
+      "pointer": "",
+      "harvest_editable": false,
+      "operations": [
+        "edit"
+      ],
+      "reason": "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
+      "special_binding": "bog_wraith",
+      "profile_present": false,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/bog_wraith.json",
+          "asset": "bog_wraith",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/bog_wraith.json",
+          "asset": "bog_wraith",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[1]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/bog_wraith.json",
+          "asset": "bog_wraith",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "bog_wraith",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "mere",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/mere.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[1]",
+          "id": "deepwood",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/deepwood.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "briar_lurker",
+      "path": "roguelike/data/entities/creatures/briar_lurker.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": "briar_lurker",
+      "profile_present": true,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/briar_lurker.json",
+          "asset": "briar_lurker",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/briar_lurker.json",
+          "asset": "briar_lurker",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "briar_lurker",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[0].item_id",
+          "id": "fibrous_thorn_mass",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/fibrous_thorn_mass.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[1].item_id",
+          "id": "briar_sap",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/briar_sap.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[0].item_id",
+          "id": "fibrous_thorn_mass",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/fibrous_thorn_mass.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[1].item_id",
+          "id": "briar_sap",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/briar_sap.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "briarwood",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/briarwood.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "drowned_revenant",
+      "path": "roguelike/data/entities/creatures/drowned_revenant.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": null,
+      "profile_present": true,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/drowned_revenant.json",
+          "asset": "drowned_revenant",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/drowned_revenant.json",
+          "asset": "drowned_revenant",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "drowned_revenant",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[0].item_id",
+          "id": "revenant_husk",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/revenant_husk.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[1].item_id",
+          "id": "crude_viscera",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crude_viscera.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[0].item_id",
+          "id": "revenant_husk",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/revenant_husk.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[1].item_id",
+          "id": "crude_viscera",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crude_viscera.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[2].item_id",
+          "id": "compressed_marrow",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/compressed_marrow.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "mere",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/mere.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "grave_thing",
+      "path": "roguelike/data/entities/creatures/grave_thing.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": null,
+      "profile_present": true,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/grave_thing.json",
+          "asset": "grave_thing",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/grave_thing.json",
+          "asset": "grave_thing",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[1]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/grave_thing.json",
+          "asset": "grave_thing",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "grave_thing",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[0].item_id",
+          "id": "grave_dust",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/grave_dust.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[1].item_id",
+          "id": "animal_bone",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_bone.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[0].item_id",
+          "id": "grave_dust",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/grave_dust.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[1].item_id",
+          "id": "compressed_marrow",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/compressed_marrow.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[2].item_id",
+          "id": "resonant_bone_fragment",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/resonant_bone_fragment.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "barrow",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/dungeon/barrow.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[1]",
+          "id": "undercroft",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/settlement/undercroft.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "heath_stalker",
+      "path": "roguelike/data/entities/creatures/heath_stalker.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": null,
+      "profile_present": true,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/heath_stalker.json",
+          "asset": "heath_stalker",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/heath_stalker.json",
+          "asset": "heath_stalker",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[1]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/heath_stalker.json",
+          "asset": "heath_stalker",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "heath_stalker",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[0].item_id",
+          "id": "stalker_meat",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/stalker_meat.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[1].item_id",
+          "id": "animal_sinew",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_sinew.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[2].item_id",
+          "id": "animal_bone",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_bone.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[3].item_id",
+          "id": "crude_viscera",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crude_viscera.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[0].item_id",
+          "id": "stalker_meat",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/stalker_meat.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[1].item_id",
+          "id": "animal_sinew",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_sinew.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[2].item_id",
+          "id": "animal_bone",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_bone.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[3].item_id",
+          "id": "crude_viscera",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crude_viscera.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[4].item_id",
+          "id": "stalker_musk_gland",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/stalker_musk_gland.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "heath",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/heath.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[1]",
+          "id": "highstone",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/highstone.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "highland_bandit",
+      "path": "roguelike/data/entities/creatures/highland_bandit.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": null,
+      "profile_present": true,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/highland_bandit.json",
+          "asset": "highland_bandit",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/highland_bandit.json",
+          "asset": "highland_bandit",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "highland_bandit",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[0].item_id",
+          "id": "raw_meat_common",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/raw_meat_common.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[1].item_id",
+          "id": "animal_bone",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_bone.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[2].item_id",
+          "id": "animal_sinew",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_sinew.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[0].item_id",
+          "id": "raw_meat_common",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/raw_meat_common.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[1].item_id",
+          "id": "animal_bone",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_bone.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[2].item_id",
+          "id": "animal_sinew",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_sinew.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[3].item_id",
+          "id": "crude_viscera",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crude_viscera.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "highstone",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/highstone.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "hollow_knight",
+      "path": "roguelike/data/entities/creatures/hollow_knight.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": "hollow_knight",
+      "profile_present": false,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/hollow_knight.json",
+          "asset": "hollow_knight",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/hollow_knight.json",
+          "asset": "hollow_knight",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[1]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/hollow_knight.json",
+          "asset": "hollow_knight",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[2]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/hollow_knight.json",
+          "asset": "hollow_knight",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "hollow_knight",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "barrow",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/dungeon/barrow.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[1]",
+          "id": "undercroft",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/settlement/undercroft.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[2]",
+          "id": "dead_ground",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/settlement/dead_ground.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "hollow_revenant",
+      "path": "roguelike/data/entities/creatures/hollow_revenant.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": null,
+      "profile_present": true,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/hollow_revenant.json",
+          "asset": "hollow_revenant",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/hollow_revenant.json",
+          "asset": "hollow_revenant",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[1]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/hollow_revenant.json",
+          "asset": "hollow_revenant",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[2]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/hollow_revenant.json",
+          "asset": "hollow_revenant",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "hollow_revenant",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[0].item_id",
+          "id": "revenant_husk",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/revenant_husk.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[1].item_id",
+          "id": "grave_dust",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/grave_dust.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[0].item_id",
+          "id": "revenant_husk",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/revenant_husk.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[1].item_id",
+          "id": "grave_dust",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/grave_dust.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[2].item_id",
+          "id": "compressed_marrow",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/compressed_marrow.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "undercroft",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/settlement/undercroft.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[1]",
+          "id": "dead_ground",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/settlement/dead_ground.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[2]",
+          "id": "vault",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/dungeon/vault.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "plague_crow",
+      "path": "roguelike/data/entities/creatures/plague_crow.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": "plague_crow",
+      "profile_present": true,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/plague_crow.json",
+          "asset": "plague_crow",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/plague_crow.json",
+          "asset": "plague_crow",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[1]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/plague_crow.json",
+          "asset": "plague_crow",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[2]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/plague_crow.json",
+          "asset": "plague_crow",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[3]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/plague_crow.json",
+          "asset": "plague_crow",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "plague_crow",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[0].item_id",
+          "id": "crow_meat",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crow_meat.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[1].item_id",
+          "id": "animal_bone",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_bone.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[2].item_id",
+          "id": "crow_bile",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crow_bile.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[0].item_id",
+          "id": "crow_meat",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crow_meat.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[1].item_id",
+          "id": "animal_bone",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/animal_bone.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[2].item_id",
+          "id": "crow_bile",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crow_bile.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[3].item_id",
+          "id": "crow_flight_membrane",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/crow_flight_membrane.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "dead_ground",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/settlement/dead_ground.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[1]",
+          "id": "mere",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/mere.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[2]",
+          "id": "deepwood",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/deepwood.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[3]",
+          "id": "pale_quarter",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/settlement/pale_quarter.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "sewer_thing",
+      "path": "roguelike/data/entities/creatures/sewer_thing.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit",
+        "variant"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": null,
+      "profile_present": false,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/sewer_thing.json",
+          "asset": "sewer_thing",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/sewer_thing.json",
+          "asset": "sewer_thing",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "sewer_thing",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "undercroft",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/settlement/undercroft.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "stone_lurker",
+      "path": "roguelike/data/entities/creatures/stone_lurker.json",
+      "pointer": "",
+      "harvest_editable": true,
+      "operations": [
+        "edit"
+      ],
+      "reason": "Complete native harvest profile; original non-ephemeral Actor authority.",
+      "special_binding": "stone_lurker",
+      "profile_present": true,
+      "diagnostics": [
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "body_id",
+          "message": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/stone_lurker.json",
+          "asset": "stone_lurker",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        },
+        {
+          "code": "INACTIVE_REFERENCE",
+          "field": "spawn_zones[0]",
+          "message": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/stone_lurker.json",
+          "asset": "stone_lurker",
+          "correction": "Retained as authored; no repair is needed for an unused dependency."
+        }
+      ],
+      "dependencies": [
+        {
+          "kind": "Presentation tile",
+          "field": "tile",
+          "id": "stone_lurker",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [],
+          "note": ""
+        },
+        {
+          "kind": "Unused body fallback",
+          "field": "body_id",
+          "id": "body_human",
+          "resolved": false,
+          "required": false,
+          "active": false,
+          "paths": [],
+          "note": "Absent body_id; factory implicitly supplies body_human. Inline limbs take precedence in combat.get_body_def; this fallback is unused."
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[0].yields[0].item_id",
+          "id": "stone_carapace_fragment",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/stone_carapace_fragment.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[0].item_id",
+          "id": "stone_carapace_fragment",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/stone_carapace_fragment.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[1].yields[1].item_id",
+          "id": "inner_stone_core",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/inner_stone_core.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[2].yields[0].item_id",
+          "id": "stone_carapace_fragment",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/stone_carapace_fragment.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Harvest item",
+          "field": "butcher_yield.tiers[2].yields[1].item_id",
+          "id": "inner_stone_core",
+          "resolved": true,
+          "required": true,
+          "active": true,
+          "paths": [
+            "roguelike/data/items/butchery/inner_stone_core.json"
+          ],
+          "note": ""
+        },
+        {
+          "kind": "Retained inactive metadata",
+          "field": "spawn_zones[0]",
+          "id": "highstone",
+          "resolved": true,
+          "required": false,
+          "active": false,
+          "paths": [
+            "roguelike/data/zones/wilderness/highstone.json"
+          ],
+          "note": "No current runtime Python consumer. Actual zone population reads zone.creatures via CreatureFactory.spawn_for_zone."
+        }
+      ]
+    },
+    {
+      "id": "vine_network",
+      "path": "roguelike/data/entities/creatures/vine_network.json",
+      "pointer": "",
+      "harvest_editable": false,
+      "operations": [],
+      "reason": "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
+      "special_binding": null,
+      "profile_present": false,
+      "diagnostics": [
+        {
+          "code": "INSPECTION_ONLY",
+          "field": "",
+          "message": "Non-Actor configuration: consumed by the vine system, not Actor authoring.",
+          "severity": "info",
+          "path": "roguelike/data/entities/creatures/vine_network.json",
+          "asset": "vine_network",
+          "correction": "Inspect Source; this shape has no creature construction/edit authority."
+        }
+      ],
+      "dependencies": []
+    }
+  ]
+}
