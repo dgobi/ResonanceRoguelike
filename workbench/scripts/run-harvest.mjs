@@ -105,7 +105,7 @@ async function pick(id,which=0){
 }
 const creaturePath=id=>`roguelike/data/entities/creatures/${id}.json`,toolPath='roguelike/data/items/weapons/w5n_cleaver.json';
 const harvest=async()=>{await props();await b('Harvest').click();};
-async function reviewed(variant=false){const verdict=await validate();assert(verdict.valid&&verdict.review_token,JSON.stringify(verdict));await eb('Diff').click();const diff=await editor().getByTestId('source-diff').innerText();await apply(variant);return {verdict,diff};}
+async function reviewed(variant=false){const verdict=await validate();assert(verdict.valid&&verdict.review_token,JSON.stringify(verdict));await eb('Diff').click();const diff=await editor().getByTestId('source-diff').innerText();await apply();return {verdict,diff};}
 async function coldProbe(mode){const r=spawnSync(python,['-I','-B',resolve('scripts/harvest-persistence.py'),root,resolve(output,'compatibility'),mode],{windowsHide:true,encoding:'utf8',timeout:60000});await writeFile(resolve(output,`ordinary-${mode.slice(2)}.log`),r.stdout+r.stderr);assert.equal(r.status,0,r.stdout+r.stderr);return JSON.parse(await readFile(resolve(output,'compatibility',`${mode.slice(2)}.json`),'utf8'));}
 async function furnish(id,x,y){await choose('Placement kind','decor');await choose('Placement decor',id);await b('Place decor').click();await cell(x,y);}
 async function interact(target){let o=await key('e');assert.equal(o.mode,'INTERACTION_CURSOR');for(let i=0;i<5&&!o.interaction.cursor.every((n,i)=>n===target[i]);i++){const [x,y]=o.interaction.cursor;o=await key(x<target[0]?'right':x>target[0]?'left':y<target[1]?'down':'up');}assert.deepEqual(o.interaction.cursor,target);return key('return');}
