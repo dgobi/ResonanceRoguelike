@@ -55,7 +55,7 @@ specs=[('npm.cmd test','frontend-final.log','70 frontend tests pass'),('npm.cmd 
     ('worker/runtime/python.exe -X utf8 -I -B -m unittest discover -s worker -v','worker-final.log','87 worker cases; 86 pass and one expected embedded-runtime skip'),
     ('Development Python: unittest test_bridge.BridgeTests.test_dependency_absence_structured -v','dependency-negative-final.log','Missing-dependency negative control passes'),
     ('npm.cmd run bundle -- -- --locked','package-final.log','Windows executable and NSIS pass'),
-    ('node scripts/run-furnishings.mjs','native-final.log','Final packaged author/enter/prepare/use/cold/revise/reset/latest and separate ordinary-save compatibility pass'),
+    ('node scripts/run-furnishings.mjs','native-delivery.log','Final packaged author/enter/prepare/use/cold/revise/reset/latest with useful container and separate ordinary-save compatibility pass'),
     ('node scripts/capture-furnishing-evidence.mjs <final native receipt>','screenshots-final.log','Read-only final-package source, properties and production receipts'),
     ('node scripts/run-workspace.mjs','workspace-final.log','Packaged shared-document lifecycle passes'),
     ('node scripts/run-room-tests.mjs','room-session-final.log','Packaged capture/cancellation/reset/cold/fault/ownership lifecycle passes'),
@@ -85,7 +85,7 @@ receipt=dict(milestone='W5L',passed=True,observed_utc=datetime.now(timezone.utc)
     package={p:ref(release/p) for p in ('resonance-workbench.exe','bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe')},
     runtime={p:ref(ROOT/'workbench'/p) for p in ('worker/bridge.py','worker/runtime/python.exe','worker/runtime/python311._pth','worker/requirements.lock')},
     source_hashes=hashes,captured_game_inputs=captured_inputs,
-    native_runner_executed=dict(path='workbench/scripts/run-furnishings.mjs',revision=native_revision,sha256=hashlib.sha256(native_runner_bytes).hexdigest(),note='The later evidence-only edit selects the saved preview and scrolls screenshots into view. Its equivalent read-only supplementary capture was executed separately; the original pending-preview image is excluded.'),
+    native_runner_executed=dict(path='workbench/scripts/run-furnishings.mjs',revision=native_revision,sha256=hashlib.sha256(native_runner_bytes).hexdigest(),note='This exact committed runner authored the useful-container fixture. Read-only supplementary screenshots use the same package; earlier pending-preview images are excluded.'),
     limits=['Controlled authored-room proof; no unaided discovery, normal-start pacing or balance claim.','Decor light_emit supplies existing secondary FOV, not new RGB lighting; only campfire_lit supplies preparation heat.','Already saved decor IDs/positions persist; current catalogue properties are not copied.','No wiki/reference rebuild, personal campaign migration, decor registry edits, new stations/fuel rules, selector expansion or enabled live profile.'])
 write(ROOT/'workbench/docs/w5l-verification.json',receipt)
 print(json.dumps(dict(passed=True,sources=len(hashes),fixtures=len(fixtures),screenshots=len(shots),preserved=preserve['unchanged'])))
