@@ -43,7 +43,7 @@ observations=dict(package_sha256=n['package_sha256'],native_runner=ref(ROOT/'wor
     ordinary_before=ordinary('compatibility_before'),ordinary_after=ordinary('compatibility_after'),conflict=n['conflict'],recovery=n['recovery'],screenshots=shots,
     local_receipt=dict(path=str(native_path),sha256=digest(native_path)),errors=n['errors'])
 write(EVID/'observations.json',observations)
-for name in ('item-inventory.json','environment.json','preservation-after.json'):
+for name in ('item-inventory.json','environment.json','package-source-inputs.json','preservation-after.json'):
     value=read(ART/name);write(EVID/('preservation.json' if name=='preservation-after.json' else name),value)
 assert not read(EVID/'preservation.json')['failures']
 specs=[('npm.cmd test','frontend-final.log','74 frontend tests pass'),('npm.cmd run typecheck','typecheck-final.log','TypeScript passes'),
@@ -75,7 +75,7 @@ for p,h in captured.items():assert h==hashes[p]['working_sha256'],p
 for row in n['saved'].values():assert n['capture_v1']['captured']['files'][row['path']]==row['sha256']
 receipt=dict(milestone='W5M',passed=True,observed_utc=datetime.now(timezone.utc).isoformat(),contract='expedition-items-2',
     revisions=dict(start='a60c66680127112f467611d3986043bb48d0fa33',initial_remote='a60c66680127112f467611d3986043bb48d0fa33',implementation=git('rev-parse','829a2ac'),package_inputs=git('rev-parse','checkpoint/workbench-w5m-package-inputs-20261029'),evidence_inputs=git('rev-parse','HEAD'),final_delivery_ref='checkpoint/workbench-w5m-verified-20261029',note='Final commit cannot embed its own hash. Resolve the final named ref; post-push remote-readback.json and the handoff report exact local/remote main equality. Package runtime inputs are separate from later harness/evidence commits.'),
-    accepted_fixtures=fixtures,environment=ref(EVID/'environment.json'),inventory=ref(EVID/'item-inventory.json'),observations=ref(EVID/'observations.json'),gates=ref(EVID/'gates.json'),preservation=ref(EVID/'preservation.json'),
+    accepted_fixtures=fixtures,environment=ref(EVID/'environment.json'),inventory=ref(EVID/'item-inventory.json'),package_source_inputs=ref(EVID/'package-source-inputs.json'),observations=ref(EVID/'observations.json'),gates=ref(EVID/'gates.json'),preservation=ref(EVID/'preservation.json'),
     package={p:ref(release/p) for p in ('resonance-workbench.exe','bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe')},
     runtime={p:ref(ROOT/'workbench'/p) for p in ('worker/bridge.py','worker/runtime/python.exe','worker/runtime/python311._pth','worker/requirements.lock')},source_hashes=hashes,captured_game_inputs=captured,
     limits=['One controlled equipment expedition, no unaided discovery, encounter balance or every-moveset certification.','Factory/definition evidence is distinct from ordinary owned use. Focused numeric tests control RNG; native encounter does not.','Physical copied fields, unchanged capture restore, revised-catalogue ordinary restore and fresh construction are separately demonstrated.','No live content, starting kit, enabled profile, gameplay rebalance, save migration, wiki edition or reference-pack change.'])

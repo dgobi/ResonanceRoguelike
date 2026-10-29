@@ -85,6 +85,11 @@ retaining them. Shield replacement/drop/reacquisition leaves the other sibling's
 slot intact. Equipping the shield deactivates the ordinary lit starting torch;
 the physical torch and accumulated burn state remain.
 
+The accepted satchel's original reviewed diff is retained as plain text. A
+supplementary actual package frame shows a separately validated, unpublished
+legacy variant's inserted handler; it is labelled separately from the accepted
+kit and grants no renewed authority to that earlier publication.
+
 The native encounter uses ordinary randomness and the actual normal/incoming
 attack callers. Read-only traces record the real resolver's original results,
 authored weapon and shield definitions, and exact equipped instances; they do not
