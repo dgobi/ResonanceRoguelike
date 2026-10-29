@@ -1,0 +1,200 @@
+{
+  "commands": [
+    {
+      "command": "npm test",
+      "exit_code": 0,
+      "outcome": "79 frontend tests",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/frontend-final.log",
+        "sha256": "9ecf64bffb7b7a09575f11fd9a993d072256fcd058f63781c8e66ec296abdf28"
+      }
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "outcome": "TypeScript",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/typecheck-final.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path workbench/src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "outcome": "69 Rust tests",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/host-final.log",
+        "sha256": "0ff9ba8d23786443a87a56ba7bc1d46fc35a36385c617f7adef194aa1f5e8b7a"
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path workbench/src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "outcome": "Clippy with warnings denied",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/clippy-final.log",
+        "sha256": "4a9b940b55458656a010724918704291a723aba7463215132aae4299763a0c8c"
+      }
+    },
+    {
+      "command": "Pinned verification venv: tools/critical_fix_regressions/verify_fixes.py --evidence workbench/.artifacts/w5o/game-final-stable --timeout 1800",
+      "exit_code": 0,
+      "outcome": "Full game regressions on unchanged committed game source",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/game-final-stable.log",
+        "sha256": "6527f83c57db2c9e5c856cefaf822626939202e84acb3f12e33c72752296224a"
+      }
+    },
+    {
+      "command": "Pinned runtime: test_contextual_loot_w5o",
+      "exit_code": 0,
+      "outcome": "Three final consumer cases with explicit disposable save root and no cached baseline",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/game-focused-final.log",
+        "sha256": "775aa34b54331d45bdf657e6d8ce5c1360388c6208de2429beb4e42b7b8025d7"
+      }
+    },
+    {
+      "command": "Pinned runtime: unittest discover -s workbench/worker -v",
+      "exit_code": 0,
+      "outcome": "Complete worker suite; one expected embedded-runtime dependency-control skip",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/worker-final-pass.log",
+        "sha256": "1f8015c233ce1b73621940eafc85400425ee39bfbb6065d91d80934fb65580fa"
+      }
+    },
+    {
+      "command": "Pinned runtime: test_pools_w5o",
+      "exit_code": 0,
+      "outcome": "Final bounded pool/source/physical dependency matrix",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/worker-focused-final.log",
+        "sha256": "f3e2ae10fe59eeebe22a2dafea94d1c48577d9477cbdbb98c298ba6e5813882d"
+      }
+    },
+    {
+      "command": "Development Python: test_bridge.py BridgeTests.test_dependency_absence_structured -v",
+      "exit_code": 0,
+      "outcome": "Separate missing-dependency negative control",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/dependency-negative-final.log",
+        "sha256": "311be646105b5b4bbd958a70e5563cfd0474bf0459f5d68b7b60188dbbf24be0"
+      }
+    },
+    {
+      "command": "npm run bundle -- -- --locked",
+      "exit_code": 0,
+      "outcome": "Locked Windows executable and NSIS",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/package-final.log",
+        "sha256": "63847a2ef1014f20db68de0311fdca5680aa271550f24cbee66786d4ef05a200"
+      }
+    },
+    {
+      "command": "node scripts/run-loot.mjs",
+      "exit_code": 0,
+      "outcome": "Packaged connected journey and separate ordinary fresh-catalogue proof",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/native-final-pass.log",
+        "sha256": "d9578247ff5f32970daa4ccef03df6bb1c77dd049bb79b05ab2e08fcec6c1a93"
+      }
+    },
+    {
+      "command": "node scripts/run-pools.mjs",
+      "exit_code": 0,
+      "outcome": "Adapted legacy container/pool/source/publication coverage",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/pools-final.log",
+        "sha256": "1a2f3cb8d7493e7422cca1047d8df015edd3b9702ed04758e88338d6529555b9"
+      }
+    },
+    {
+      "command": "node scripts/run-items.mjs",
+      "exit_code": 0,
+      "outcome": "Adapted existing item/pool return and production coverage",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/items-final.log",
+        "sha256": "786aaba5a0f944f0253ee0d40fdc947ce18efbff5a988170e3575ce9789ee303"
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "outcome": "Shared owners, lifecycle, cancellation and recovery",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/workspace-final.log",
+        "sha256": "8f9e6ff86129ee91de398d50ecb8ad13caf48c73ec31ce454016e80d1ad04faf"
+      }
+    },
+    {
+      "command": "node scripts/run-room-tests.mjs",
+      "exit_code": 0,
+      "outcome": "Capture/reset/latest/cold/fault lifecycle",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/room-session-final-pass.log",
+        "sha256": "8daaf05e006df2fe0df4c4be3dff917cc12d9cc2772484f47efabf776f2df88b"
+      }
+    },
+    {
+      "command": "Pinned runtime: standalone-room-regression.py <fresh disposable fixture> <owned output>",
+      "exit_code": 0,
+      "outcome": "Ordinary 128x128 main/default save-load",
+      "local_log": {
+        "path": "workbench/.artifacts/w5o/ordinary-main-final.log",
+        "sha256": "b4adb706925106158825746674e402dcc1c0987b986fef199b8025eb33154600"
+      }
+    }
+  ],
+  "game_run": {
+    "command": [
+      "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5l\\test-runtime\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\tests",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeProject\\roguelike",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    },
+    "source_stable": true,
+    "exit_code": 0,
+    "passed": true
+  },
+  "final_consumer_harness": {
+    "changed_since_broad_run": [
+      "tools/critical_fix_regressions/tests/test_contextual_loot_w5o.py"
+    ],
+    "change": "Add explicit temporary SAVE_DIR before construction and assert no cache baseline; retain all assertions and gameplay bytes.",
+    "rerun": {
+      "path": "workbench/.artifacts/w5o/game-focused-final.log",
+      "sha256": "775aa34b54331d45bdf657e6d8ce5c1360388c6208de2429beb4e42b7b8025d7"
+    }
+  },
+  "ordinary_main": {
+    "passed": true,
+    "world": [
+      128,
+      128
+    ],
+    "scene": [
+      15,
+      20,
+      "sub_107_63_0"
+    ],
+    "save_path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\w5o-ordinary-1793303763\\roguelike\\saves\\slot_0",
+    "seed": 3283948550,
+    "ordinary_debug_default": true,
+    "save_load": true,
+    "save_access_events": 75,
+    "main_sha256": "0fc1ed01bd64b641c392dff70a2823bd06f5a6461032c4f3cea43eaef7dc4991"
+  },
+  "scope": "Passing broad application/game run and final isolated focused consumer rerun are bound separately. Failed/excluded attempts are retained. No desktop control, load/save of a personal campaign, RNG replacement, wiki or reference-pack gate."
+}

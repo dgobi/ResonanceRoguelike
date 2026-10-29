@@ -122,6 +122,7 @@
     "Room-session comparisons now strip new read-only container memory IDs while retaining every serialized field; they cannot compare process-local addresses across restore.",
     "Legacy item journey now reflects W5M common-field admission for binding_knife and retries only explicit BUSY refusals at its direct host calls.",
     "An overlapping desktop-test run shared its fixed debugging port; final legacy item and workspace runs are isolated.",
-    "The worker suite runs from its documented workbench cwd. Root-cwd attempts made an old relative-path fixture assertion misleading; only the full final intended-cwd run counts."
+    "The worker suite runs from its documented workbench cwd. Root-cwd attempts made an old relative-path fixture assertion misleading; only the full final intended-cwd run counts.",
+    "The final focused consumer rerun adds an explicit disposable SAVE_DIR before Engine construction and asserts no cache baseline. Its initial broad-suite fixture omitted that constructor isolation and could probe default save metadata; it invoked no save/load. Gameplay/application bytes and existing assertions are unchanged."
   ]
 }

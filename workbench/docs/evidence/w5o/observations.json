@@ -49,23 +49,23 @@
   "diffs": {
     "food": {
       "path": "workbench/docs/evidence/w5o/food.diff",
-      "sha256": "cb8c78f04bec45d378e12c0883d55b8b4cf29eec5317fed8db92158159511da1"
+      "sha256": "a69b3c5022fe2ee13726ba8d7ddb38209dc300e1b58b374c39a3cb692a08e3fb"
     },
     "pool_a": {
       "path": "workbench/docs/evidence/w5o/pool_a.diff",
-      "sha256": "e5443dd6724cbaa49ad4ee1b0fd878bd56dcc9a11ab62b2c0da8b2e555efcd30"
+      "sha256": "868e44e579b4db28c6b27daefffc0a47ff3e2c03900ceb86ce28b82ac9ad48f3"
     },
     "pool_b": {
       "path": "workbench/docs/evidence/w5o/pool_b.diff",
-      "sha256": "57834bd6b1449572f5608dab6f968a4d45bf504f6615cf980cef2e67ee9c5a2e"
+      "sha256": "b02895e34cba0f6419ef9f55b234794353a718e8a5ceafe0d9c57b1af83ed351"
     },
     "room": {
       "path": "workbench/docs/evidence/w5o/room.diff",
-      "sha256": "eba4ea3537322902768cfee87f4aeb177053936d4a999dd97e932a2fc2d0b79d"
+      "sha256": "580f764526ad09a5ef813febea484676ee94b16fba36c2b516d277ab618930ad"
     },
     "pool_a_revised": {
       "path": "workbench/docs/evidence/w5o/pool_a_revised.diff",
-      "sha256": "d39f207e684c10aa96692d75e6fcb934fd4d9239c961839522c0231b83a42e0e"
+      "sha256": "84f3dba1fb6c03b724e3f2ec7a188730a217914b233a9d228a0afc8a13721ecc"
     }
   },
   "production": {

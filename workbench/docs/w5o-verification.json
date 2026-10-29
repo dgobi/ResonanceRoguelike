@@ -1,0 +1,415 @@
+{
+  "milestone": "W5O",
+  "passed": true,
+  "observed_utc": "2026-10-29T20:28:23.249035+00:00",
+  "contract": "contextual-loot-1",
+  "revisions": {
+    "start": "07dffb08dc857518edc6883b11f6ab67b2c2a738",
+    "initial_remote": "07dffb08dc857518edc6883b11f6ab67b2c2a738",
+    "application_and_package_inputs": "30dac9298c402c1ff4c919312a6f6d97de8d758e",
+    "evidence_inputs": "13c7631f1c11d3e4c79f9d28d1e7dba3641107db",
+    "final_delivery_ref": "checkpoint/workbench-w5o-verified-20261029",
+    "note": "A commit cannot include its own SHA. Resolve final delivery ref. The final response and ignored remote-readback.json record exact full local/remote main equality after the commissioned push. Application/package inputs precede harness/evidence commits."
+  },
+  "commission": {
+    "local_path": "C:/Users/dango/Downloads/CODEX_WORKBENCH_W5O_CONTEXTUAL_LOOT_AUTHORING.md",
+    "sha256": "48dd1a364ec6aefcff5ec69479ea7199c2df11845ea90f14b021a252f76820de"
+  },
+  "accepted_fixtures": {
+    "food": {
+      "path": "workbench/docs/evidence/w5o/fixtures/food.json",
+      "sha256": "eb7a02eac142c54ddd4db10de3ba10b347cd44f819a1400ac8458d751b5fee7d",
+      "published_path": "roguelike/data/items/consumables/w5o_biscuit.json",
+      "definition": {
+        "id": "w5o_biscuit",
+        "name": "W5O travel biscuit",
+        "description": "Disposable contextual-loot reward.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.05,
+        "stackable": true,
+        "on_use": "eat",
+        "nutrition": 0.2,
+        "eat_message": "The biscuit settles your hunger.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents Git newline normalization."
+    },
+    "pool_a": {
+      "path": "workbench/docs/evidence/w5o/fixtures/pool_a.json",
+      "sha256": "03785d52e0d4e40a5d6e36fbe6a4be8985ce580e2d1c065f43483d850d2f0250",
+      "published_path": "roguelike/data/loot_pools/w5o_provisions.json",
+      "definition": {
+        "id": "w5o_provisions",
+        "description": "Guaranteed two useful meals and a distinguishable residual log.",
+        "roll_count": [
+          3
+        ],
+        "items": [
+          {
+            "item_id": "w5o_biscuit",
+            "row_metadata": {
+              "nested": {
+                "keep": [
+                  1,
+                  null
+                ]
+              }
+            }
+          },
+          {
+            "item_id": "w5o_biscuit",
+            "weight": 7
+          },
+          {
+            "item_id": "wood_bundle",
+            "weight": 1
+          }
+        ],
+        "owner_metadata": {
+          "nested": [
+            null,
+            "λ"
+          ],
+          "escaped": "retained"
+        }
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents Git newline normalization."
+    },
+    "pool_b": {
+      "path": "workbench/docs/evidence/w5o/fixtures/pool_b.json",
+      "sha256": "459558472fac13233602729566d81a7af73207fe7f39aaa0205fa7a194d619a0",
+      "published_path": "roguelike/data/loot_pools/w5o_lights.json",
+      "definition": {
+        "id": "w5o_lights",
+        "description": "One saved reference-only held light.",
+        "items": [
+          {
+            "item_id": "tallow_torch"
+          }
+        ]
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents Git newline normalization."
+    },
+    "pool_a_revised": {
+      "path": "workbench/docs/evidence/w5o/fixtures/pool_a_revised.json",
+      "sha256": "abb4e9ba5f1f1be4feddac772864f5dbf3e28b6157da10951f8190e935f78a11",
+      "published_path": "roguelike/data/loot_pools/w5o_provisions.json",
+      "definition": {
+        "id": "w5o_provisions",
+        "description": "Revised fresh salvage: one bone.",
+        "roll_count": [
+          1
+        ],
+        "items": [
+          {
+            "item_id": "animal_bone",
+            "weight": 1
+          }
+        ],
+        "owner_metadata": {
+          "nested": [
+            null,
+            "λ"
+          ],
+          "escaped": "retained"
+        }
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents Git newline normalization."
+    },
+    "room": {
+      "path": "workbench/docs/evidence/w5o/fixtures/room.json",
+      "sha256": "877f4f6a5f82129ce4447ed20f70ec622ebafd22b400689b85b8e1646299d787",
+      "published_path": "roguelike/data/layouts/w5o_loot_room.json",
+      "definition": {
+        "id": "w5o_loot_room",
+        "width": 19,
+        "height": 11,
+        "layers": [
+          "###################",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.<...............#",
+          "#.................#",
+          "###################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 3,
+          "y": 8
+        },
+        "special_tiles": [
+          {
+            "type": "container",
+            "x": 5,
+            "y": 6,
+            "decor_id": "crate",
+            "loot_pools": [
+              "w5o_provisions",
+              "w5o_lights"
+            ]
+          }
+        ]
+      },
+      "identity": "Exact UI-authored, reviewed, single-file-published UTF-8 bytes; host reopen hash equals saved bytes. Fixture -text prevents Git newline normalization."
+    }
+  },
+  "inventory": {
+    "path": "workbench/docs/evidence/w5o/pool-inventory.json",
+    "sha256": "9f526b2744105a7c759c0acb0d3962155baaf8b04bba1629c703ff4b23119e6a"
+  },
+  "seeded_samples": {
+    "path": "workbench/docs/evidence/w5o/seeded-before.json",
+    "sha256": "6b6cbe33a7d01eb4d62f1e0125ffa625a1ba91612d90b3c0aa6b5c0911c8f22b"
+  },
+  "observations": {
+    "path": "workbench/docs/evidence/w5o/observations.json",
+    "sha256": "96f44027fb29de37e700f164e5b499a7f2b40220a7b37242e75404ba3c6e76a0"
+  },
+  "captures": {
+    "path": "workbench/docs/evidence/w5o/capture-inputs.json",
+    "sha256": "7613fb81381f8b5aa59dc82377fbeef3cd322788d6feae043cc6582a6130d6e4"
+  },
+  "usages": {
+    "path": "workbench/docs/evidence/w5o/declared-usages.json",
+    "sha256": "e5c69dec5cf7f6f476bad2635250b3b9c2bb053e5bcf14af47f47097196e46fb"
+  },
+  "environment": {
+    "path": "workbench/docs/evidence/w5o/environment.json",
+    "sha256": "4c9636dd21e384954ca3c09012c1355300dee120f068295cbc830df9033bb338"
+  },
+  "package_source_inputs": {
+    "path": "workbench/docs/evidence/w5o/package-source-inputs.json",
+    "sha256": "40ee043c698b64d09502cdef360a5e264014420e2442f548c8deaf38550db933"
+  },
+  "gates": {
+    "path": "workbench/docs/evidence/w5o/gates.json",
+    "sha256": "00b3fb0c62e51fbc04a76ccffde5e4d200048b986ac5df953f9e355c6f429a6b"
+  },
+  "preservation": {
+    "path": "workbench/docs/evidence/w5o/preservation.json",
+    "sha256": "0f7189f61191dc79015aefe81939cdd58302666a54ecf9c5acb71da51c25a86f"
+  },
+  "attempts": {
+    "path": "workbench/docs/evidence/w5o/attempts.json",
+    "sha256": "8d293e1ceb5a68eda66a9540afe0ce9a04c3cfdc3f86ef79a4cdde41c8f4b657"
+  },
+  "package": {
+    "resonance-workbench.exe": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "432527aa42ff6c98e64e1cb4ff3338b334c304915331fd88edff0c31570879d5"
+    },
+    "bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "3a2e711c66ff3527c559ae205a88931d3bfa48b9aa7d9c1a7d981e367c740871"
+    }
+  },
+  "runtime": {
+    "worker/bridge.py": {
+      "path": "workbench/worker/bridge.py",
+      "sha256": "6581e11162c0a3496034963bb573c1c19edf3016022d422ced90baaabd307f8e"
+    },
+    "worker/runtime/python.exe": {
+      "path": "workbench/worker/runtime/python.exe",
+      "sha256": "bf1b03022cadfc18049a7f0ecf1f3134c7676fcb6ff6c6941ae7f77e21285c73"
+    },
+    "worker/runtime/python311._pth": {
+      "path": "workbench/worker/runtime/python311._pth",
+      "sha256": "c76be49a913db57efc322b4c77ae5ed282e78285a69a70441e011529241507ce"
+    },
+    "worker/requirements.lock": {
+      "path": "workbench/worker/requirements.lock",
+      "sha256": "17cd05554346febe141934ef7757e42d71f91880d2303051196fda0d50d278a7"
+    }
+  },
+  "source_hashes": {
+    "roguelike/docs/POOL_AUTHORING.md": {
+      "working_sha256": "04c806f97ed77703e0823439be59d11f21d4acbab661adc5dac524ac1d9530f9",
+      "committed_sha256": "04c806f97ed77703e0823439be59d11f21d4acbab661adc5dac524ac1d9530f9"
+    },
+    "roguelike/docs/ROOM_TEST_RUNTIME.md": {
+      "working_sha256": "96a1b110d62a2f1aae91996d987046155aff2098c9c0e644a01c140ca83c74ee",
+      "committed_sha256": "b833d76c1104c14203446a905bdcef813febd24d2e4cc681abb9c54734215ef2"
+    },
+    "roguelike/docs/STRUCTURE_AUTHORING.md": {
+      "working_sha256": "a14c6ee2240cca0d678dc5fca3f58da2a37845abddc42bcd87bff1f084d287e5",
+      "committed_sha256": "a14c6ee2240cca0d678dc5fca3f58da2a37845abddc42bcd87bff1f084d287e5"
+    },
+    "roguelike/engine/content_authoring.py": {
+      "working_sha256": "cb981b28251518dd597e21509c015aaf3c4e0b300e2a215fff1286c799039e5a",
+      "committed_sha256": "cb981b28251518dd597e21509c015aaf3c4e0b300e2a215fff1286c799039e5a"
+    },
+    "roguelike/engine/definition_sources.py": {
+      "working_sha256": "16a47addcb620768b13d3433ee90ca11471934d53746247b8e348d57e2e32bbc",
+      "committed_sha256": "9cc1e7c2a002b97b296754c6354458b1a98c619934a4c5354cac2218d4df0845"
+    },
+    "roguelike/engine/item_factory.py": {
+      "working_sha256": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+      "committed_sha256": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66"
+    },
+    "roguelike/engine/item_transfers.py": {
+      "working_sha256": "d95cdf9f1fc647bc98b02179512def418b4f25092dcfbc5dc308036c9c185afa",
+      "committed_sha256": "d95cdf9f1fc647bc98b02179512def418b4f25092dcfbc5dc308036c9c185afa"
+    },
+    "roguelike/engine/loot_roller.py": {
+      "working_sha256": "5db3302c06f8b8930ee024cb6d0c51ce630b741161560c7848ff31371eb9fca2",
+      "committed_sha256": "5db3302c06f8b8930ee024cb6d0c51ce630b741161560c7848ff31371eb9fca2"
+    },
+    "roguelike/engine/pool_authoring.py": {
+      "working_sha256": "0ea6a156af9916220c973ab10115712cbe6d3e8c41df945fefda0e3febba58e0",
+      "committed_sha256": "0ea6a156af9916220c973ab10115712cbe6d3e8c41df945fefda0e3febba58e0"
+    },
+    "roguelike/engine/room_test_diagnostics.py": {
+      "working_sha256": "c951edaac5423ab2d79294fd6611f19d660197f279426771204e707df22f7dc6",
+      "committed_sha256": "c951edaac5423ab2d79294fd6611f19d660197f279426771204e707df22f7dc6"
+    },
+    "roguelike/engine/save_components.py": {
+      "working_sha256": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+      "committed_sha256": "b2df939decdb283814a4c4ba94ec9c6d5339a0d05f78fad909e859d6f3475228"
+    },
+    "roguelike/engine/save_manager.py": {
+      "working_sha256": "19e244226a5f8117318595a8431b6694a8777c153ecc855f127e147fa912741b",
+      "committed_sha256": "28628c17329f66b962d1cef09843e60c0b184ac2474c9667c2de8e481da94842"
+    },
+    "roguelike/engine/scene_generation.py": {
+      "working_sha256": "961ab05be3de4da49f30b69f49e66b1cd98c868a076e9bce0287cf2c3ce66425",
+      "committed_sha256": "ce3fc60692b72a324b0a56887257f063dca671ed700424e11af2471de46db4b5"
+    },
+    "roguelike/generation/authored_rooms.py": {
+      "working_sha256": "60bbb8c68b782ca176fd4c4394718a177baab3adf1f68742d8a74a57f213016e",
+      "committed_sha256": "c324738785e5712899ee5fbce882d2cfe3fcdad82c56d691984d0ee728718b05"
+    },
+    "roguelike/generation/floor_object_utils.py": {
+      "working_sha256": "576cc816724f3a8970e5efe6de62e804a3da594b477d52461dfd69804612df55",
+      "committed_sha256": "576cc816724f3a8970e5efe6de62e804a3da594b477d52461dfd69804612df55"
+    },
+    "roguelike/generation/structure_contract.py": {
+      "working_sha256": "10517a45ca56413abfd862e43da65acdf883e128a1a1202de3ce7a1dd8697c1d",
+      "committed_sha256": "10517a45ca56413abfd862e43da65acdf883e128a1a1202de3ce7a1dd8697c1d"
+    },
+    "roguelike/room_test.py": {
+      "working_sha256": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603",
+      "committed_sha256": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603"
+    },
+    "tools/critical_fix_regressions/tests/test_contextual_loot_w5o.py": {
+      "working_sha256": "ec8acc28aeb074eb251647b128bd4f435a1b2ed5e8710f06bd602810110e63d6",
+      "committed_sha256": "ec8acc28aeb074eb251647b128bd4f435a1b2ed5e8710f06bd602810110e63d6"
+    },
+    "workbench/README.md": {
+      "working_sha256": "46406cb776780e91b2ba6aa19ac36030d2f223e70890df8a646ee2f3b140f506",
+      "committed_sha256": "2eaaac9cc97ceb85bc1e813ff1cab6274be1b9893b6f43631e72ab6f0080d108"
+    },
+    "workbench/src-tauri/src/authoring.rs": {
+      "working_sha256": "e7527286c921cbe9674c8150b3f4f461144743b0889d9d5a5d62de03794797f4",
+      "committed_sha256": "e7527286c921cbe9674c8150b3f4f461144743b0889d9d5a5d62de03794797f4"
+    },
+    "workbench/src-tauri/src/main.rs": {
+      "working_sha256": "18d23900b5440337cd8d2e3abb72c0179deb78c8c081b29ff0896c1c7530cb98",
+      "committed_sha256": "18d23900b5440337cd8d2e3abb72c0179deb78c8c081b29ff0896c1c7530cb98"
+    },
+    "workbench/src-tauri/src/recovery.rs": {
+      "working_sha256": "bba5180131c8dd8bef65450a89bbd8b1ab25ee9cf202f0c5191ca1c0fab34cae",
+      "committed_sha256": "871dcc8e59a1557fa70edeabc50da034cd298950d2a78de8a13d542324814023"
+    },
+    "workbench/src/App.tsx": {
+      "working_sha256": "b8c26b4550fa47e41d425379d8123accad765c7b3a83960856a6a171b5fb3e2c",
+      "committed_sha256": "56230baf94b4a1e5fa2af168049e63a266013f70413109145b9c6c323e3e1ef4"
+    },
+    "workbench/src/Authoring.tsx": {
+      "working_sha256": "a8b3a8bf8093810833226c8045adc8e9921f26b27db36d16fef7f3ffb99527ed",
+      "committed_sha256": "a8b3a8bf8093810833226c8045adc8e9921f26b27db36d16fef7f3ffb99527ed"
+    },
+    "workbench/src/ContentEditor.tsx": {
+      "working_sha256": "8675787c52b4967d9b6d046c21fa903646c933d87311648ec03409b1a62abcb1",
+      "committed_sha256": "8675787c52b4967d9b6d046c21fa903646c933d87311648ec03409b1a62abcb1"
+    },
+    "workbench/src/LayoutEditor.tsx": {
+      "working_sha256": "6640905002b8c70757930eb847cc5ee0f69fd83056864b1c69494e39e525e785",
+      "committed_sha256": "6640905002b8c70757930eb847cc5ee0f69fd83056864b1c69494e39e525e785"
+    },
+    "workbench/src/PoolEditor.tsx": {
+      "working_sha256": "e0ffd90e981a844d329528b10850a61893f634cacee619198cc4ac095cab0bc7",
+      "committed_sha256": "e0ffd90e981a844d329528b10850a61893f634cacee619198cc4ac095cab0bc7"
+    },
+    "workbench/src/RecoveryPanel.tsx": {
+      "working_sha256": "cc480b1c940ef3d428f893e281bca7138b23a74c085ecfc93fc8081e244c296d",
+      "committed_sha256": "cc480b1c940ef3d428f893e281bca7138b23a74c085ecfc93fc8081e244c296d"
+    },
+    "workbench/src/content.ts": {
+      "working_sha256": "1845b01a649265015ff7f842c775a26689fef391bcdc45ff7305ba5a3209f32f",
+      "committed_sha256": "1845b01a649265015ff7f842c775a26689fef391bcdc45ff7305ba5a3209f32f"
+    },
+    "workbench/src/pool.test.ts": {
+      "working_sha256": "1dd29d733dd0862b96ac30dd5ddce77c1320019bbcb35a0449ce0b44ef2ffaac",
+      "committed_sha256": "1dd29d733dd0862b96ac30dd5ddce77c1320019bbcb35a0449ce0b44ef2ffaac"
+    },
+    "workbench/src/pool.ts": {
+      "working_sha256": "eefa556c269525ae1ad1f7f87946e76f21b1d4bdf9b782f15ccd93cdf815ac64",
+      "committed_sha256": "eefa556c269525ae1ad1f7f87946e76f21b1d4bdf9b782f15ccd93cdf815ac64"
+    },
+    "workbench/src/protocol.ts": {
+      "working_sha256": "258291bbab25c5267082a4192501d95b6a8f3fb32cfc34af13639e7a375a1a5a",
+      "committed_sha256": "258291bbab25c5267082a4192501d95b6a8f3fb32cfc34af13639e7a375a1a5a"
+    },
+    "workbench/src/styles.css": {
+      "working_sha256": "81f243321a6214ef735cbabfbe2f11a23968d1750e30eff525bca8f7e0a32323",
+      "committed_sha256": "e96336e0d12a2b99450f54a24c47e91a99d24bbecbd2c5ee62c9f48e23ee0e8d"
+    },
+    "workbench/src/workspace.ts": {
+      "working_sha256": "caa8f2542c0878611863a7fd40f6601fc751ee663106415d5908108c436dafbe",
+      "committed_sha256": "caa8f2542c0878611863a7fd40f6601fc751ee663106415d5908108c436dafbe"
+    },
+    "workbench/worker/bridge.py": {
+      "working_sha256": "6581e11162c0a3496034963bb573c1c19edf3016022d422ced90baaabd307f8e",
+      "committed_sha256": "96fd4948a7628636dfa83c172fc63f05a7205dce46b6dac5da396d367ec7494e"
+    },
+    "workbench/worker/test_pools.py": {
+      "working_sha256": "4525de74f0b489a38f997cb2cd76886efb993246659603889a8d5f3d26279808",
+      "committed_sha256": "4525de74f0b489a38f997cb2cd76886efb993246659603889a8d5f3d26279808"
+    },
+    "workbench/worker/test_pools_w5o.py": {
+      "working_sha256": "957660b8d12f5f10e2b69c4a09f39c0084b939cad8aa8b33b415ed13c1c3981d",
+      "committed_sha256": "957660b8d12f5f10e2b69c4a09f39c0084b939cad8aa8b33b415ed13c1c3981d"
+    }
+  },
+  "captured_game_inputs": {
+    "roguelike/engine/content_authoring.py": "cb981b28251518dd597e21509c015aaf3c4e0b300e2a215fff1286c799039e5a",
+    "roguelike/engine/definition_sources.py": "16a47addcb620768b13d3433ee90ca11471934d53746247b8e348d57e2e32bbc",
+    "roguelike/engine/item_factory.py": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+    "roguelike/engine/item_transfers.py": "d95cdf9f1fc647bc98b02179512def418b4f25092dcfbc5dc308036c9c185afa",
+    "roguelike/engine/loot_roller.py": "5db3302c06f8b8930ee024cb6d0c51ce630b741161560c7848ff31371eb9fca2",
+    "roguelike/engine/pool_authoring.py": "0ea6a156af9916220c973ab10115712cbe6d3e8c41df945fefda0e3febba58e0",
+    "roguelike/engine/room_test_diagnostics.py": "c951edaac5423ab2d79294fd6611f19d660197f279426771204e707df22f7dc6",
+    "roguelike/engine/save_components.py": "54a206856a465635a2c30d8b3c13e6e24712cd1a3b84d22e9ecf25480e24be0e",
+    "roguelike/engine/save_manager.py": "19e244226a5f8117318595a8431b6694a8777c153ecc855f127e147fa912741b",
+    "roguelike/engine/scene_generation.py": "961ab05be3de4da49f30b69f49e66b1cd98c868a076e9bce0287cf2c3ce66425",
+    "roguelike/generation/authored_rooms.py": "60bbb8c68b782ca176fd4c4394718a177baab3adf1f68742d8a74a57f213016e",
+    "roguelike/generation/floor_object_utils.py": "576cc816724f3a8970e5efe6de62e804a3da594b477d52461dfd69804612df55",
+    "roguelike/generation/structure_contract.py": "10517a45ca56413abfd862e43da65acdf883e128a1a1202de3ce7a1dd8697c1d",
+    "roguelike/room_test.py": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603"
+  },
+  "limits": [
+    "Controlled authored room; no natural discovery, survival-balance, complete usage graph or every-special-behavior proof.",
+    "Unowned factory validation is distinct from native acquisition/use and independent ordinary-save fresh-catalogue activation.",
+    "Focused arithmetic regressions alone control RNG. All 1700 shipped frozen-seed outputs remain identical.",
+    "64 rows is a Workbench publication bound only. No canonical pack, starter redistribution, world assignment, save schema/migration, wiki or reference-pack changes."
+  ]
+}
