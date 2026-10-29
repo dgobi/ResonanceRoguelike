@@ -1,0 +1,16 @@
+{
+  "id": "w5l_roast",
+  "name": "W5L nourishing roast",
+  "description": "Meat rendered over open flame until the outside chars and the inside sets. Better than raw. Still not good.",
+  "tile": "generic_item",
+  "category": "consumable",
+  "weight": 0.3,
+  "stackable": false,
+  "on_use": "eat",
+  "nutrition": 0.25,
+  "eat_message": "W5L roast restores you.",
+  "keywords": [
+    {"tag": "edible", "tier": 2},
+    {"tag": "vital", "tier": 1}
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "w5l_meat",
+  "name": "W5L protected field meat",
+  "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+  "tile": "generic_item",
+  "category": "butchery",
+  "weight": 0.2,
+  "stackable": false,
+  "keywords": [
+    {
+      "tag": "edible",
+      "tier": 1
+    },
+    {
+      "tag": "vital",
+      "tier": 1
+    }
+  ]
+,"consumed_on_use":false}

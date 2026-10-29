@@ -1,0 +1,34 @@
+{
+  "pinned": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "executable": "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "bits": 64,
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    }
+  },
+  "game_tests": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "executable": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5l\\test-runtime\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "bits": 64,
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6",
+      "cffi": "2.1.1",
+      "pycparser": "3.11",
+      "typing_extensions": "4.16.0"
+    }
+  },
+  "node": "v24.15.0",
+  "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)",
+  "target": "Windows x64; locked Tauri/NSIS",
+  "note": "The verification-only development venv points at bundled site-packages using pinned-game.pth, allowing genuine child-process imports. It contains no development checkout/source copy."
+}

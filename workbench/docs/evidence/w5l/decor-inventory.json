@@ -1,0 +1,1094 @@
+{
+  "contract": "authored-room-2",
+  "registry": "roguelike/data/decoratives.json",
+  "total": 72,
+  "admitted": 39,
+  "records": [
+    {
+      "index": 0,
+      "id": "decor_candle",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": "flame_low",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 1,
+      "id": "decor_bone_pile",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 2,
+      "id": "decor_flower_pot",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 3,
+      "id": "decor_hanging_cloth",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 4,
+      "id": "campfire_unlit",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": "light_campfire",
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 5,
+      "id": "campfire_lit",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 5,
+        "cosmetic_fx": "flame_med",
+        "interaction": "extinguish_campfire",
+        "stationary_fire": true,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 6,
+      "id": "blood_pool",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 7,
+      "id": "bone_dust",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 8,
+      "id": "ectoplasm_pool",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 9,
+      "id": "ichor_seep",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 10,
+      "id": "verdigris_fluid",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 11,
+      "id": "corpse",
+      "supported": false,
+      "reason": "Requires a physical corpse with source-creature identity.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 12,
+      "id": "drying_herb",
+      "supported": false,
+      "reason": "Requires an existing processing job; a standalone marker is not work.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": "smoke_incense",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 13,
+      "id": "cooking_meat",
+      "supported": false,
+      "reason": "Requires an existing processing job; a standalone marker is not work.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": "flame_low",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 14,
+      "id": "barrel",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 15,
+      "id": "crate",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 16,
+      "id": "sack",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 17,
+      "id": "coffer",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 18,
+      "id": "cracked_bell",
+      "supported": false,
+      "reason": "Unsupported interaction 'examine_bell'; requires its existing system.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": "pulse_dim",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 19,
+      "id": "intact_bell",
+      "supported": false,
+      "reason": "Unsupported interaction 'examine_bell'; requires its existing system.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": "pulse_glow",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 20,
+      "id": "bell_dead",
+      "supported": false,
+      "reason": "Unsupported interaction 'examine_dead_bell'; requires its existing system.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 21,
+      "id": "waystone_plinth",
+      "supported": false,
+      "reason": "Unsupported interaction 'examine_waystone'; requires its existing system.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 1,
+        "cosmetic_fx": "pulse_dim",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 22,
+      "id": "stele",
+      "supported": false,
+      "reason": "Unsupported interaction 'examine_stele'; requires its existing system.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": "pulse_dim",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 23,
+      "id": "street_lamp_working",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 5,
+        "cosmetic_fx": "flame_low",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 24,
+      "id": "street_lamp_sputtering",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 3,
+        "cosmetic_fx": "flicker",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 25,
+      "id": "street_lamp_dead",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 26,
+      "id": "coldbell_flower",
+      "supported": false,
+      "reason": "Harvesting behavior is outside direct furnishing authoring.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": "sparkle",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 27,
+      "id": "coldbell_flower_depleted",
+      "supported": false,
+      "reason": "Unsupported behavior/property fields: resonance_emit.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 28,
+      "id": "flower_pilgrims_woe",
+      "supported": false,
+      "reason": "Harvesting behavior is outside direct furnishing authoring.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 29,
+      "id": "flower_pilgrims_woe_depleted",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 30,
+      "id": "flower_murk_violet",
+      "supported": false,
+      "reason": "Harvesting behavior is outside direct furnishing authoring.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 31,
+      "id": "flower_murk_violet_depleted",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 32,
+      "id": "shroom_sulphur_cap",
+      "supported": false,
+      "reason": "Harvesting behavior is outside direct furnishing authoring.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 33,
+      "id": "shroom_sulphur_cap_depleted",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 34,
+      "id": "shroom_prophets_eye",
+      "supported": false,
+      "reason": "Harvesting behavior is outside direct furnishing authoring.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 35,
+      "id": "shroom_prophets_eye_depleted",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 36,
+      "id": "cold_hearth",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 37,
+      "id": "wooden_shelf",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 38,
+      "id": "stone_coffer",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 39,
+      "id": "offering_bowl",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 40,
+      "id": "rubble_pile",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 41,
+      "id": "writing_desk",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 42,
+      "id": "medicine_chest",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 43,
+      "id": "bone_box",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 44,
+      "id": "iron_chest",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 45,
+      "id": "clay_pot_cluster",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 46,
+      "id": "tool_rack",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 47,
+      "id": "grain_sack_open",
+      "supported": false,
+      "reason": "Use the container tool: this definition requires real container state and loot ownership.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 48,
+      "id": "meal_on_table",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 49,
+      "id": "overturned_chair",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 50,
+      "id": "wound_cloth",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 51,
+      "id": "child_toy",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 52,
+      "id": "dried_herbs",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 53,
+      "id": "tallow_dip",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 54,
+      "id": "offering_coins",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 55,
+      "id": "measuring_stone",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 56,
+      "id": "bell_rope",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 57,
+      "id": "warning_mark",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 58,
+      "id": "bile_stain",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 59,
+      "id": "shattered_vessel",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 60,
+      "id": "salt_block",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 61,
+      "id": "inscription_stone",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 62,
+      "id": "worn_mat",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 63,
+      "id": "iron_hook",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 64,
+      "id": "carved_post",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 65,
+      "id": "standing_water",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 66,
+      "id": "web_cluster",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 67,
+      "id": "oriented_remains",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 68,
+      "id": "vine_growth",
+      "supported": false,
+      "reason": "Requires its vine-network owner, including network-managed vents without interactable metadata.",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 69,
+      "id": "vine_eyestalk",
+      "supported": false,
+      "reason": "Requires its vine-network owner, including network-managed vents without interactable metadata.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": null,
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 70,
+      "id": "vine_spore_vent",
+      "supported": false,
+      "reason": "Requires its vine-network owner, including network-managed vents without interactable metadata.",
+      "properties": {
+        "blocks_movement": true,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": "gas_overlay",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    },
+    {
+      "index": 71,
+      "id": "dissolution_pool",
+      "supported": true,
+      "reason": "",
+      "properties": {
+        "blocks_movement": false,
+        "declared_blocks_sight": false,
+        "light_emit": 0,
+        "cosmetic_fx": "pulse_dim",
+        "interaction": null,
+        "stationary_fire": false,
+        "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+      }
+    }
+  ],
+  "sources": [
+    "generation/authored_decor.py",
+    "engine/engine.py:_update_fov, _dispatch_interactable, _can_place_on_fire",
+    "engine/vine_system.py",
+    "rendering/renderer.py:_draw_decor_to"
+  ]
+}

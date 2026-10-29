@@ -1,0 +1,122 @@
+{
+  "commands": [
+    {
+      "command": "npm.cmd test",
+      "exit_code": 0,
+      "outcome": "70 frontend tests pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/frontend-final.log",
+        "sha256": "f6d26012efde741d908f2e5fd1e4156efea01554de8c4c3339eee82ae20f2b96"
+      }
+    },
+    {
+      "command": "npm.cmd run typecheck",
+      "exit_code": 0,
+      "outcome": "TypeScript passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/typecheck-final.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b"
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path workbench/src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "outcome": "68 Rust tests pass; these Rust inputs are unchanged in the final package",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/host.log",
+        "sha256": "cc0459e3f068b2e813f4a8cf49e228d04a0354b1ac0469df9e0dc25b41662f47"
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path workbench/src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "outcome": "Pass, warnings denied",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/clippy.log",
+        "sha256": "d7dafebe6f8c11a60460fd16f960fe51a8987af130d1ff5dba5328c2aec9c122"
+      }
+    },
+    {
+      "command": "Development CPython with a .pth pointing to the six pinned bundled libraries; absolute game/tests/tools PYTHONPATH; unittest test_furnished_rooms_w5l test_preparation_w5k test_crafting test_gameplay_g12 test_gameplay_g16 test_usable_supplies test_authored_assignment test_gameplay_g15 test_effect_persistence test_generation_ownership test_gameplay_g17 test_room_test_session test_combat_routes -v",
+      "exit_code": 0,
+      "outcome": "110 game tests pass, including genuine subprocess save/load",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/game-final.log",
+        "sha256": "64c43f435856ef60b5c7da1a22b4320c35c21ca0f6ab90c1a375f826132ba951"
+      }
+    },
+    {
+      "command": "worker/runtime/python.exe -X utf8 -I -B -m unittest discover -s worker -v",
+      "exit_code": 0,
+      "outcome": "87 worker cases; 86 pass and one expected embedded-runtime skip",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/worker-final.log",
+        "sha256": "74aadc09ccd760f75f7be6ee0323e21a1b000db1018d79642513fd3c4d829381"
+      }
+    },
+    {
+      "command": "Development Python: unittest test_bridge.BridgeTests.test_dependency_absence_structured -v",
+      "exit_code": 0,
+      "outcome": "Missing-dependency negative control passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/dependency-negative-final.log",
+        "sha256": "55551efffc13aff742d57d0b2b2f6de9ca26a19bab15863a645856c448df32d3"
+      }
+    },
+    {
+      "command": "npm.cmd run bundle -- -- --locked",
+      "exit_code": 0,
+      "outcome": "Windows executable and NSIS pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/package-final.log",
+        "sha256": "51b4810ef45c9101a7744139d7a8b71062f12bbad53f3c90fe30d50d30ad0e0e"
+      }
+    },
+    {
+      "command": "node scripts/run-furnishings.mjs",
+      "exit_code": 0,
+      "outcome": "Final packaged author/enter/prepare/use/cold/revise/reset/latest with useful container and separate ordinary-save compatibility pass",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/native-delivery.log",
+        "sha256": "60cada9db1086d0b20d17868cd9d89b6bf2373af474e3d4a33b512ee80148b42"
+      }
+    },
+    {
+      "command": "node scripts/capture-furnishing-evidence.mjs <final native receipt>",
+      "exit_code": 0,
+      "outcome": "Read-only final-package source, properties and production receipts",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/screenshots-final.log",
+        "sha256": "6e2e7e3975271106a7961f4b34f1cfeda3d9a50cde7ec9c91681e8b6b2e6fbea"
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "outcome": "Packaged shared-document lifecycle passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/workspace-final.log",
+        "sha256": "d35ec300a4a3eb53f5ab7ed585cb854f07d095268b702f3156992ba70c61a07a"
+      }
+    },
+    {
+      "command": "node scripts/run-room-tests.mjs",
+      "exit_code": 0,
+      "outcome": "Packaged capture/cancellation/reset/cold/fault/ownership lifecycle passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/room-session-final.log",
+        "sha256": "f12afb7f59f33ce95a758a0d89a21e616531fe0bcf32cf7549c09cbc5bb8cec8"
+      }
+    },
+    {
+      "command": "Pinned Python: standalone-room-regression.py in fresh .artifacts/w5h/w5l-ordinary-final runtime inputs",
+      "exit_code": 0,
+      "outcome": "Ordinary 128x128 main startup/default save/load passes",
+      "local_log": {
+        "path": "workbench/.artifacts/w5l/ordinary-final.log",
+        "sha256": "341cd463776b7dcc68bb17a8ed3cb05c45770c5de2bd20ccc5ddd472bfa013cf"
+      }
+    }
+  ],
+  "provenance": "Locally executed Windows checks; full logs remain in ignored local artifacts, hashes retained. Earlier environment/import, initial NSIS lock and clipped-count visual attempts are not passing gates."
+}

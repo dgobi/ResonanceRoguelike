@@ -1,0 +1,5132 @@
+{
+  "scope": "Final packaged controls author all demonstrated furnishings and dependencies. Source establishes disclosed geometry only. Events supply ordinary keys and once-only needs/health setup, never decor/heat. Read-only supplementary screenshots show the revised saved room.",
+  "package_sha256": "44c6e6c08ee40b092ddde00bf5bfe16b94d004ddccf566b9faa6f25c0177ed96",
+  "host_pid": 30636,
+  "checks": [
+    "independent dirty shared document retained while saving dependencies with supported controls",
+    "new room geometry from Source; furnishings, inputs, readable and real container authored with supported controls",
+    "saved furnishing dependency stales real review; external conflict preserves competing room bytes",
+    "invalid furnished draft recovery loses review authority and preserves independent shared draft",
+    "Test room constructs all authored furnishings; ordinary movement verifies blocker and isolated static-light FOV contribution",
+    "ordinary interaction lights authored campfire; normal protected choice, placement, first tick, floor output, pickup and food use",
+    "cold restore in separate pinned process retains exact used state; ordinary-save fixture before room revision",
+    "same-ID furnishing revision through controls; immutable reset versus latest saved capture"
+  ],
+  "production": {
+    "origin": [
+      31,
+      16
+    ],
+    "authored_start": [
+      34,
+      24
+    ],
+    "spawn": [
+      34,
+      24
+    ],
+    "stairs": [
+      {
+        "link": null,
+        "terrain": "stairs_up",
+        "x": 33,
+        "y": 24
+      }
+    ],
+    "population_receipts": [
+      {
+        "actor_classes": [],
+        "actors": [],
+        "actual_count": 1,
+        "decor_id": "worn_mat",
+        "item_id": null,
+        "kind": "decor",
+        "loot_pools": null,
+        "objects": [],
+        "realized_decor": {
+          "blocks_movement": false,
+          "cosmetic_fx": null,
+          "declared_blocks_sight": false,
+          "id": "worn_mat",
+          "interaction": null,
+          "light_emit": 0,
+          "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid.",
+          "stationary_fire": false,
+          "xy": [
+            35,
+            20
+          ]
+        },
+        "record_id": "w5l_furnished_room@31,16,0:special[0]",
+        "relocated": false,
+        "selected_branch": null,
+        "source": "w5l_furnished_room special[0]",
+        "source_asset": "w5l_furnished_room",
+        "source_index": 0,
+        "source_path": "roguelike/data/layouts/w5l_furnished_room.json",
+        "source_xy": [
+          4,
+          4
+        ],
+        "text_id": null,
+        "text_override_present": false,
+        "xy": [
+          35,
+          20
+        ]
+      },
+      {
+        "actor_classes": [],
+        "actors": [],
+        "actual_count": 1,
+        "decor_id": "dried_herbs",
+        "item_id": null,
+        "kind": "decor",
+        "loot_pools": null,
+        "objects": [],
+        "realized_decor": {
+          "blocks_movement": false,
+          "cosmetic_fx": null,
+          "declared_blocks_sight": false,
+          "id": "dried_herbs",
+          "interaction": null,
+          "light_emit": 0,
+          "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid.",
+          "stationary_fire": false,
+          "xy": [
+            34,
+            18
+          ]
+        },
+        "record_id": "w5l_furnished_room@31,16,0:special[1]",
+        "relocated": false,
+        "selected_branch": null,
+        "source": "w5l_furnished_room special[1]",
+        "source_asset": "w5l_furnished_room",
+        "source_index": 1,
+        "source_path": "roguelike/data/layouts/w5l_furnished_room.json",
+        "source_xy": [
+          3,
+          2
+        ],
+        "text_id": null,
+        "text_override_present": false,
+        "xy": [
+          34,
+          18
+        ]
+      },
+      {
+        "actor_classes": [],
+        "actors": [],
+        "actual_count": 1,
+        "decor_id": "street_lamp_working",
+        "item_id": null,
+        "kind": "decor",
+        "loot_pools": null,
+        "objects": [],
+        "realized_decor": {
+          "blocks_movement": true,
+          "cosmetic_fx": "flame_low",
+          "declared_blocks_sight": false,
+          "id": "street_lamp_working",
+          "interaction": null,
+          "light_emit": 5,
+          "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid.",
+          "stationary_fire": false,
+          "xy": [
+            44,
+            18
+          ]
+        },
+        "record_id": "w5l_furnished_room@31,16,0:special[2]",
+        "relocated": false,
+        "selected_branch": null,
+        "source": "w5l_furnished_room special[2]",
+        "source_asset": "w5l_furnished_room",
+        "source_index": 2,
+        "source_path": "roguelike/data/layouts/w5l_furnished_room.json",
+        "source_xy": [
+          13,
+          2
+        ],
+        "text_id": null,
+        "text_override_present": false,
+        "xy": [
+          44,
+          18
+        ]
+      },
+      {
+        "actor_classes": [],
+        "actors": [],
+        "actual_count": 1,
+        "decor_id": "campfire_unlit",
+        "item_id": null,
+        "kind": "decor",
+        "loot_pools": null,
+        "objects": [],
+        "realized_decor": {
+          "blocks_movement": true,
+          "cosmetic_fx": null,
+          "declared_blocks_sight": false,
+          "id": "campfire_unlit",
+          "interaction": "light_campfire",
+          "light_emit": 0,
+          "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid.",
+          "stationary_fire": false,
+          "xy": [
+            39,
+            21
+          ]
+        },
+        "record_id": "w5l_furnished_room@31,16,0:special[3]",
+        "relocated": false,
+        "selected_branch": null,
+        "source": "w5l_furnished_room special[3]",
+        "source_asset": "w5l_furnished_room",
+        "source_index": 3,
+        "source_path": "roguelike/data/layouts/w5l_furnished_room.json",
+        "source_xy": [
+          8,
+          5
+        ],
+        "text_id": null,
+        "text_override_present": false,
+        "xy": [
+          39,
+          21
+        ]
+      },
+      {
+        "actor_classes": [],
+        "actors": [],
+        "actual_count": 1,
+        "decor_id": null,
+        "item_id": "w5l_meat",
+        "kind": "item",
+        "loot_pools": null,
+        "objects": [
+          {
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "burn_turns": null,
+            "consumed_on_use": false,
+            "count": 1,
+            "decay_timer": null,
+            "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+            "drink_message": null,
+            "eat_message": null,
+            "harvest_from": null,
+            "heal_amount": null,
+            "hydration": null,
+            "item_id": "w5l_meat",
+            "item_state_version": 1,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "vital",
+                "tier": 1
+              }
+            ],
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "name": "W5L protected field meat",
+            "nutrition": null,
+            "on_use": null,
+            "qualities": {},
+            "source_creature": null,
+            "stackable": false,
+            "temporary_essence": [],
+            "text_id": "",
+            "tile": "generic_item",
+            "turns_lit": 0,
+            "weight": 0.2
+          }
+        ],
+        "record_id": "w5l_furnished_room@31,16,0:special[4]",
+        "relocated": false,
+        "selected_branch": null,
+        "source": "w5l_furnished_room special[4]",
+        "source_asset": "w5l_furnished_room",
+        "source_index": 4,
+        "source_path": "roguelike/data/layouts/w5l_furnished_room.json",
+        "source_xy": [
+          5,
+          6
+        ],
+        "text_id": null,
+        "text_override_present": false,
+        "xy": [
+          36,
+          22
+        ]
+      },
+      {
+        "actor_classes": [],
+        "actors": [],
+        "actual_count": 1,
+        "decor_id": null,
+        "item_id": "w5l_pot",
+        "kind": "item",
+        "loot_pools": null,
+        "objects": [
+          {
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "burn_turns": null,
+            "consumed_on_use": false,
+            "count": 1,
+            "decay_timer": null,
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "drink_message": null,
+            "eat_message": null,
+            "harvest_from": null,
+            "heal_amount": null,
+            "hydration": null,
+            "item_id": "w5l_pot",
+            "item_state_version": 1,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "name": "W5L retained field vessel",
+            "nutrition": null,
+            "on_use": null,
+            "qualities": {},
+            "source_creature": null,
+            "stackable": false,
+            "temporary_essence": [],
+            "text_id": "",
+            "tile": "generic_item",
+            "turns_lit": 0,
+            "weight": 0.3
+          }
+        ],
+        "record_id": "w5l_furnished_room@31,16,0:special[5]",
+        "relocated": false,
+        "selected_branch": null,
+        "source": "w5l_furnished_room special[5]",
+        "source_asset": "w5l_furnished_room",
+        "source_index": 5,
+        "source_path": "roguelike/data/layouts/w5l_furnished_room.json",
+        "source_xy": [
+          6,
+          6
+        ],
+        "text_id": null,
+        "text_override_present": false,
+        "xy": [
+          37,
+          22
+        ]
+      },
+      {
+        "actor_classes": [],
+        "actors": [],
+        "actual_count": 1,
+        "decor_id": null,
+        "item_id": "letter",
+        "kind": "item",
+        "loot_pools": null,
+        "objects": [
+          {
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "burn_turns": null,
+            "consumed_on_use": true,
+            "count": 1,
+            "decay_timer": null,
+            "description": "Folded paper. Someone meant to send this.",
+            "drink_message": null,
+            "eat_message": null,
+            "harvest_from": null,
+            "heal_amount": null,
+            "hydration": null,
+            "item_id": "letter",
+            "item_state_version": 1,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "name": "a letter",
+            "nutrition": null,
+            "on_use": "read",
+            "qualities": {},
+            "source_creature": null,
+            "stackable": false,
+            "temporary_essence": [],
+            "text_id": "lab_note_primary_b",
+            "tile": "document",
+            "turns_lit": 0,
+            "weight": 0.02
+          }
+        ],
+        "record_id": "w5l_furnished_room@31,16,0:special[6]",
+        "relocated": false,
+        "selected_branch": null,
+        "source": "w5l_furnished_room special[6]",
+        "source_asset": "w5l_furnished_room",
+        "source_index": 6,
+        "source_path": "roguelike/data/layouts/w5l_furnished_room.json",
+        "source_xy": [
+          6,
+          3
+        ],
+        "text_id": "lab_note_primary_b",
+        "text_override_present": true,
+        "xy": [
+          37,
+          19
+        ]
+      },
+      {
+        "actor_classes": [],
+        "actors": [],
+        "actual_count": 1,
+        "decor_id": "crate",
+        "item_id": null,
+        "kind": "container",
+        "loot_pools": [
+          "storage_tools"
+        ],
+        "objects": [
+          {
+            "decor_id": "crate",
+            "items": [
+              {
+                "_temp_av_bonus": 0,
+                "_temp_av_hits": 0,
+                "burn_turns": 600,
+                "consumed_on_use": false,
+                "count": 1,
+                "decay_timer": null,
+                "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+                "drink_message": null,
+                "eat_message": null,
+                "harvest_from": null,
+                "heal_amount": null,
+                "hydration": null,
+                "item_id": "tallow_torch",
+                "item_state_version": 1,
+                "keywords": [
+                  {
+                    "tag": "waxy",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fibrous",
+                    "tier": 1
+                  },
+                  {
+                    "tag": "fuel",
+                    "tier": 1
+                  }
+                ],
+                "light_data": {
+                  "color": [
+                    255,
+                    180,
+                    60
+                  ],
+                  "falloff": 1.8,
+                  "flicker": true,
+                  "radius": 8
+                },
+                "liquid": null,
+                "liquid_volume": 0,
+                "name": "Tallow Torch",
+                "nutrition": null,
+                "on_use": "equip_light",
+                "qualities": {},
+                "source_creature": null,
+                "stackable": false,
+                "temporary_essence": [],
+                "text_id": "",
+                "tile": "tallow_torch",
+                "turns_lit": 0,
+                "weight": 0.3
+              }
+            ]
+          }
+        ],
+        "record_id": "w5l_furnished_room@31,16,0:special[7]",
+        "relocated": false,
+        "selected_branch": null,
+        "source": "w5l_furnished_room special[7]",
+        "source_asset": "w5l_furnished_room",
+        "source_index": 7,
+        "source_path": "roguelike/data/layouts/w5l_furnished_room.json",
+        "source_xy": [
+          15,
+          7
+        ],
+        "text_id": null,
+        "text_override_present": false,
+        "xy": [
+          46,
+          23
+        ]
+      }
+    ],
+    "access": [
+      {
+        "kind": "arrival",
+        "passed": true,
+        "target": "actual arrival",
+        "xy": [
+          34,
+          24
+        ]
+      },
+      {
+        "approaches": [
+          [
+            34,
+            19
+          ],
+          [
+            34,
+            20
+          ],
+          [
+            34,
+            21
+          ],
+          [
+            35,
+            19
+          ],
+          [
+            35,
+            20
+          ],
+          [
+            35,
+            21
+          ],
+          [
+            36,
+            19
+          ],
+          [
+            36,
+            20
+          ],
+          [
+            36,
+            21
+          ]
+        ],
+        "kind": "decor",
+        "passed": true,
+        "receipt_owned": true,
+        "relocated": false,
+        "source_xy": [
+          4,
+          4
+        ],
+        "target": "w5l_furnished_room@31,16,0:special[0]",
+        "xy": [
+          35,
+          20
+        ]
+      },
+      {
+        "approaches": [
+          [
+            33,
+            17
+          ],
+          [
+            33,
+            18
+          ],
+          [
+            33,
+            19
+          ],
+          [
+            34,
+            17
+          ],
+          [
+            34,
+            18
+          ],
+          [
+            34,
+            19
+          ],
+          [
+            35,
+            17
+          ],
+          [
+            35,
+            18
+          ],
+          [
+            35,
+            19
+          ]
+        ],
+        "kind": "decor",
+        "passed": true,
+        "receipt_owned": true,
+        "relocated": false,
+        "source_xy": [
+          3,
+          2
+        ],
+        "target": "w5l_furnished_room@31,16,0:special[1]",
+        "xy": [
+          34,
+          18
+        ]
+      },
+      {
+        "approaches": [
+          [
+            43,
+            17
+          ],
+          [
+            43,
+            18
+          ],
+          [
+            43,
+            19
+          ],
+          [
+            44,
+            17
+          ],
+          [
+            44,
+            19
+          ],
+          [
+            45,
+            17
+          ],
+          [
+            45,
+            18
+          ],
+          [
+            45,
+            19
+          ]
+        ],
+        "kind": "decor",
+        "passed": true,
+        "receipt_owned": true,
+        "relocated": false,
+        "source_xy": [
+          13,
+          2
+        ],
+        "target": "w5l_furnished_room@31,16,0:special[2]",
+        "xy": [
+          44,
+          18
+        ]
+      },
+      {
+        "approaches": [
+          [
+            38,
+            20
+          ],
+          [
+            38,
+            21
+          ],
+          [
+            38,
+            22
+          ],
+          [
+            39,
+            20
+          ],
+          [
+            39,
+            22
+          ],
+          [
+            40,
+            20
+          ],
+          [
+            40,
+            21
+          ],
+          [
+            40,
+            22
+          ]
+        ],
+        "kind": "decor",
+        "passed": true,
+        "receipt_owned": true,
+        "relocated": false,
+        "source_xy": [
+          8,
+          5
+        ],
+        "target": "w5l_furnished_room@31,16,0:special[3]",
+        "xy": [
+          39,
+          21
+        ]
+      },
+      {
+        "approaches": [],
+        "kind": "item",
+        "passed": true,
+        "receipt_owned": true,
+        "relocated": false,
+        "source_xy": [
+          5,
+          6
+        ],
+        "target": "w5l_furnished_room@31,16,0:special[4]",
+        "xy": [
+          36,
+          22
+        ]
+      },
+      {
+        "approaches": [],
+        "kind": "item",
+        "passed": true,
+        "receipt_owned": true,
+        "relocated": false,
+        "source_xy": [
+          6,
+          6
+        ],
+        "target": "w5l_furnished_room@31,16,0:special[5]",
+        "xy": [
+          37,
+          22
+        ]
+      },
+      {
+        "approaches": [],
+        "kind": "item",
+        "passed": true,
+        "receipt_owned": true,
+        "relocated": false,
+        "source_xy": [
+          6,
+          3
+        ],
+        "target": "w5l_furnished_room@31,16,0:special[6]",
+        "xy": [
+          37,
+          19
+        ]
+      },
+      {
+        "approaches": [
+          [
+            45,
+            22
+          ],
+          [
+            45,
+            23
+          ],
+          [
+            45,
+            24
+          ],
+          [
+            46,
+            22
+          ],
+          [
+            46,
+            24
+          ],
+          [
+            47,
+            22
+          ],
+          [
+            47,
+            23
+          ],
+          [
+            47,
+            24
+          ]
+        ],
+        "kind": "container",
+        "passed": true,
+        "receipt_owned": true,
+        "relocated": false,
+        "source_xy": [
+          15,
+          7
+        ],
+        "target": "w5l_furnished_room@31,16,0:special[7]",
+        "xy": [
+          46,
+          23
+        ]
+      },
+      {
+        "kind": "stairs_up",
+        "passed": true,
+        "stairs": [
+          [
+            33,
+            24
+          ]
+        ],
+        "target": "usable return stair"
+      }
+    ],
+    "source_path": "roguelike/data/layouts/w5l_furnished_room.json",
+    "source_sha256": "cc5213e940da2146620c85c618fa275157477afe7107a46dcfcb9bc6e1ccfc50",
+    "draft_sha256": "cc5213e940da2146620c85c618fa275157477afe7107a46dcfcb9bc6e1ccfc50",
+    "passed": true
+  },
+  "blocker": {
+    "before": [
+      43,
+      18
+    ],
+    "after": [
+      43,
+      18
+    ],
+    "target": [
+      44,
+      18
+    ]
+  },
+  "light": {
+    "player": [
+      43,
+      18
+    ],
+    "light": false,
+    "lighting": {
+      "active_radius": 1,
+      "emitters": [
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working",
+          "radius": 5,
+          "visible": true
+        }
+      ],
+      "visible_beyond_player_circle": [
+        [
+          40,
+          16
+        ],
+        [
+          40,
+          17
+        ],
+        [
+          40,
+          18
+        ],
+        [
+          40,
+          19
+        ],
+        [
+          40,
+          20
+        ],
+        [
+          41,
+          16
+        ],
+        [
+          41,
+          17
+        ],
+        [
+          41,
+          18
+        ],
+        [
+          41,
+          19
+        ],
+        [
+          41,
+          20
+        ],
+        [
+          41,
+          21
+        ],
+        [
+          42,
+          16
+        ],
+        [
+          42,
+          17
+        ],
+        [
+          42,
+          19
+        ],
+        [
+          42,
+          20
+        ],
+        [
+          42,
+          21
+        ],
+        [
+          42,
+          22
+        ],
+        [
+          43,
+          16
+        ],
+        [
+          43,
+          20
+        ],
+        [
+          43,
+          21
+        ],
+        [
+          43,
+          22
+        ],
+        [
+          44,
+          16
+        ],
+        [
+          44,
+          17
+        ],
+        [
+          44,
+          19
+        ],
+        [
+          44,
+          20
+        ],
+        [
+          44,
+          21
+        ],
+        [
+          44,
+          22
+        ],
+        [
+          45,
+          16
+        ],
+        [
+          45,
+          17
+        ],
+        [
+          45,
+          18
+        ],
+        [
+          45,
+          19
+        ],
+        [
+          45,
+          20
+        ],
+        [
+          45,
+          21
+        ],
+        [
+          45,
+          22
+        ],
+        [
+          46,
+          16
+        ],
+        [
+          46,
+          17
+        ],
+        [
+          46,
+          18
+        ],
+        [
+          46,
+          19
+        ],
+        [
+          46,
+          20
+        ],
+        [
+          46,
+          21
+        ],
+        [
+          46,
+          22
+        ],
+        [
+          47,
+          16
+        ],
+        [
+          47,
+          17
+        ],
+        [
+          47,
+          18
+        ],
+        [
+          47,
+          19
+        ],
+        [
+          47,
+          20
+        ],
+        [
+          47,
+          21
+        ],
+        [
+          48,
+          16
+        ],
+        [
+          48,
+          17
+        ],
+        [
+          48,
+          18
+        ],
+        [
+          48,
+          19
+        ],
+        [
+          48,
+          20
+        ]
+      ]
+    },
+    "scope": "Actual production secondary FOV beyond the player circle with torch extinguished and campfire initially unlit; no added RGB-decor lighting behavior claimed."
+  },
+  "needs_setup": {
+    "needs": {
+      "hunger": 0.8,
+      "thirst": 0.8
+    },
+    "hp": 45,
+    "scope": "Once-only needs/health setup; no decor/heat event was sent."
+  },
+  "unlit_failure": {
+    "pid": 32496,
+    "player": [
+      39,
+      22
+    ],
+    "turn": 513,
+    "action_calls": 33,
+    "needs": {
+      "hunger": 0.8,
+      "thirst": 0.8
+    },
+    "hp": 45,
+    "max_hp": 60,
+    "mode": "LOCAL",
+    "craft": {
+      "open": false,
+      "selected": 5,
+      "choosing": false,
+      "choice_selected": 0,
+      "choice_index": 0,
+      "prompts": [
+        {
+          "comp_index": 0,
+          "options": [
+            {
+              "item_id": "w5l_meat",
+              "count": 1
+            }
+          ]
+        }
+      ],
+      "rows": [
+        {
+          "type": "header",
+          "id": null,
+          "category": "campfire"
+        },
+        {
+          "type": "recipe",
+          "id": "campfire",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "clay_pot",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "cooking"
+        },
+        {
+          "type": "recipe",
+          "id": "cook_meat",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5l_cook",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "wildcrafting"
+        },
+        {
+          "type": "recipe",
+          "id": "dry_bitter_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_resonant_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_soporific_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_aromatic_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "musk_pellet",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "alchemy"
+        },
+        {
+          "type": "recipe",
+          "id": "bile_coating",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "bone_dust_draught",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "briar_binding_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "hungering_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "marrow_seal",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_bone_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "stalker_unguent",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "wight_concentrate",
+          "category": null
+        }
+      ]
+    },
+    "placement": {
+      "mode": "campfire",
+      "cursor": [
+        0,
+        0
+      ]
+    },
+    "processing": [],
+    "decor": [
+      {
+        "x": 35,
+        "y": 20,
+        "id": "worn_mat"
+      },
+      {
+        "x": 34,
+        "y": 18,
+        "id": "dried_herbs"
+      },
+      {
+        "x": 44,
+        "y": 18,
+        "id": "street_lamp_working"
+      },
+      {
+        "x": 39,
+        "y": 21,
+        "id": "campfire_unlit"
+      },
+      {
+        "x": 46,
+        "y": 23,
+        "id": "crate"
+      }
+    ],
+    "logs": [
+      "You descend into Disposable Workbench room.",
+      "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+      "Thou art beneath the ground. Something is wrong with the world above.",
+      "You extinguish the Tallow Torch.",
+      "You light the Tallow Torch.",
+      "Thou takest the W5L protected field meat.",
+      "Thou takest the W5L retained field vessel.",
+      "Materials, tools or conditions are missing. Passive work needs a stationary fire."
+    ],
+    "lighting": {
+      "active_radius": 6,
+      "emitters": [
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working",
+          "radius": 5,
+          "visible": false
+        }
+      ],
+      "visible_beyond_player_circle": []
+    },
+    "submap": "room-test-instance",
+    "inventory": [
+      {
+        "item_id": "tallow_torch",
+        "item_state_version": 1,
+        "name": "Tallow Torch",
+        "tile": "tallow_torch",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 600,
+        "turns_lit": 32,
+        "light_data": {
+          "radius": 8,
+          "color": [
+            255,
+            180,
+            60
+          ],
+          "falloff": 1.8,
+          "flicker": true
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922047214416"
+      },
+      {
+        "item_id": "w5l_meat",
+        "item_state_version": 1,
+        "name": "W5L protected field meat",
+        "tile": "generic_item",
+        "weight": 0.2,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922021594640"
+      },
+      {
+        "item_id": "w5l_pot",
+        "item_state_version": 1,
+        "name": "W5L retained field vessel",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922021599824"
+      }
+    ],
+    "floor": []
+  },
+  "lit": {
+    "pid": 32496,
+    "player": [
+      39,
+      22
+    ],
+    "turn": 514,
+    "action_calls": 34,
+    "needs": {
+      "hunger": 0.801,
+      "thirst": 0.8013750000000001
+    },
+    "hp": 45,
+    "max_hp": 60,
+    "mode": "LOCAL",
+    "craft": {
+      "open": false,
+      "selected": 5,
+      "choosing": false,
+      "choice_selected": 0,
+      "choice_index": 0,
+      "prompts": [
+        {
+          "comp_index": 0,
+          "options": [
+            {
+              "item_id": "w5l_meat",
+              "count": 1
+            }
+          ]
+        }
+      ],
+      "rows": [
+        {
+          "type": "header",
+          "id": null,
+          "category": "campfire"
+        },
+        {
+          "type": "recipe",
+          "id": "campfire",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "clay_pot",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "cooking"
+        },
+        {
+          "type": "recipe",
+          "id": "cook_meat",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5l_cook",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "wildcrafting"
+        },
+        {
+          "type": "recipe",
+          "id": "dry_bitter_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_resonant_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_soporific_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_aromatic_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "musk_pellet",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "alchemy"
+        },
+        {
+          "type": "recipe",
+          "id": "bile_coating",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "bone_dust_draught",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "briar_binding_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "hungering_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "marrow_seal",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_bone_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "stalker_unguent",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "wight_concentrate",
+          "category": null
+        }
+      ]
+    },
+    "placement": {
+      "mode": "campfire",
+      "cursor": [
+        0,
+        0
+      ]
+    },
+    "processing": [],
+    "decor": [
+      {
+        "x": 35,
+        "y": 20,
+        "id": "worn_mat"
+      },
+      {
+        "x": 34,
+        "y": 18,
+        "id": "dried_herbs"
+      },
+      {
+        "x": 44,
+        "y": 18,
+        "id": "street_lamp_working"
+      },
+      {
+        "x": 39,
+        "y": 21,
+        "id": "campfire_lit"
+      },
+      {
+        "x": 46,
+        "y": 23,
+        "id": "crate"
+      }
+    ],
+    "logs": [
+      "Thou art beneath the ground. Something is wrong with the world above.",
+      "You extinguish the Tallow Torch.",
+      "You light the Tallow Torch.",
+      "Thou takest the W5L protected field meat.",
+      "Thou takest the W5L retained field vessel.",
+      "Materials, tools or conditions are missing. Passive work needs a stationary fire.",
+      "The fire takes.",
+      "The fire takes the edge off."
+    ],
+    "lighting": {
+      "active_radius": 6,
+      "emitters": [
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working",
+          "radius": 5,
+          "visible": false
+        },
+        {
+          "x": 39,
+          "y": 21,
+          "id": "campfire_lit",
+          "radius": 5,
+          "visible": true
+        }
+      ],
+      "visible_beyond_player_circle": []
+    },
+    "submap": "room-test-instance",
+    "inventory": [
+      {
+        "item_id": "tallow_torch",
+        "item_state_version": 1,
+        "name": "Tallow Torch",
+        "tile": "tallow_torch",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 600,
+        "turns_lit": 33,
+        "light_data": {
+          "radius": 8,
+          "color": [
+            255,
+            180,
+            60
+          ],
+          "falloff": 1.8,
+          "flicker": true
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922047214416"
+      },
+      {
+        "item_id": "w5l_meat",
+        "item_state_version": 1,
+        "name": "W5L protected field meat",
+        "tile": "generic_item",
+        "weight": 0.2,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922021594640"
+      },
+      {
+        "item_id": "w5l_pot",
+        "item_state_version": 1,
+        "name": "W5L retained field vessel",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922021599824"
+      }
+    ],
+    "floor": []
+  },
+  "cooking": {
+    "before": {
+      "pid": 32496,
+      "player": [
+        39,
+        22
+      ],
+      "turn": 514,
+      "action_calls": 34,
+      "needs": {
+        "hunger": 0.801,
+        "thirst": 0.8013750000000001
+      },
+      "hp": 45,
+      "max_hp": 60,
+      "mode": "LOCAL",
+      "craft": {
+        "open": true,
+        "selected": 5,
+        "choosing": false,
+        "choice_selected": 0,
+        "choice_index": 0,
+        "prompts": [
+          {
+            "comp_index": 0,
+            "options": [
+              {
+                "item_id": "w5l_meat",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "rows": [
+          {
+            "type": "header",
+            "id": null,
+            "category": "campfire"
+          },
+          {
+            "type": "recipe",
+            "id": "campfire",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "clay_pot",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "cooking"
+          },
+          {
+            "type": "recipe",
+            "id": "cook_meat",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "w5l_cook",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "wildcrafting"
+          },
+          {
+            "type": "recipe",
+            "id": "dry_bitter_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_resonant_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_soporific_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_aromatic_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "musk_pellet",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "alchemy"
+          },
+          {
+            "type": "recipe",
+            "id": "bile_coating",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "bone_dust_draught",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "briar_binding_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "hungering_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "marrow_seal",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_bone_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "stalker_unguent",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "wight_concentrate",
+            "category": null
+          }
+        ]
+      },
+      "placement": {
+        "mode": "campfire",
+        "cursor": [
+          0,
+          0
+        ]
+      },
+      "processing": [],
+      "decor": [
+        {
+          "x": 35,
+          "y": 20,
+          "id": "worn_mat"
+        },
+        {
+          "x": 34,
+          "y": 18,
+          "id": "dried_herbs"
+        },
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working"
+        },
+        {
+          "x": 39,
+          "y": 21,
+          "id": "campfire_lit"
+        },
+        {
+          "x": 46,
+          "y": 23,
+          "id": "crate"
+        }
+      ],
+      "logs": [
+        "Thou art beneath the ground. Something is wrong with the world above.",
+        "You extinguish the Tallow Torch.",
+        "You light the Tallow Torch.",
+        "Thou takest the W5L protected field meat.",
+        "Thou takest the W5L retained field vessel.",
+        "Materials, tools or conditions are missing. Passive work needs a stationary fire.",
+        "The fire takes.",
+        "The fire takes the edge off."
+      ],
+      "lighting": {
+        "active_radius": 6,
+        "emitters": [
+          {
+            "x": 44,
+            "y": 18,
+            "id": "street_lamp_working",
+            "radius": 5,
+            "visible": false
+          },
+          {
+            "x": 39,
+            "y": 21,
+            "id": "campfire_lit",
+            "radius": 5,
+            "visible": true
+          }
+        ],
+        "visible_beyond_player_circle": []
+      },
+      "submap": "room-test-instance",
+      "inventory": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 33,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "1922047214416"
+        },
+        {
+          "item_id": "w5l_meat",
+          "item_state_version": 1,
+          "name": "W5L protected field meat",
+          "tile": "generic_item",
+          "weight": 0.2,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 1
+            },
+            {
+              "tag": "vital",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "1922021594640"
+        },
+        {
+          "item_id": "w5l_pot",
+          "item_state_version": 1,
+          "name": "W5L retained field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "1922021599824"
+        }
+      ],
+      "floor": []
+    },
+    "confirmed": {
+      "pid": 32496,
+      "player": [
+        39,
+        22
+      ],
+      "turn": 515,
+      "action_calls": 35,
+      "needs": {
+        "hunger": 0.802,
+        "thirst": 0.8027500000000001
+      },
+      "hp": 45,
+      "max_hp": 60,
+      "mode": "LOCAL",
+      "craft": {
+        "open": false,
+        "selected": 5,
+        "choosing": false,
+        "choice_selected": 0,
+        "choice_index": 0,
+        "prompts": [
+          {
+            "comp_index": 0,
+            "options": [
+              {
+                "item_id": "w5l_meat",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "rows": [
+          {
+            "type": "header",
+            "id": null,
+            "category": "campfire"
+          },
+          {
+            "type": "recipe",
+            "id": "campfire",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "clay_pot",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "cooking"
+          },
+          {
+            "type": "recipe",
+            "id": "cook_meat",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "w5l_cook",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "wildcrafting"
+          },
+          {
+            "type": "recipe",
+            "id": "dry_bitter_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_resonant_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_soporific_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "dry_aromatic_herb",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "musk_pellet",
+            "category": null
+          },
+          {
+            "type": "header",
+            "id": null,
+            "category": "alchemy"
+          },
+          {
+            "type": "recipe",
+            "id": "bile_coating",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "bone_dust_draught",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "briar_binding_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "hungering_oil",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "marrow_seal",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_bone_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "resonant_tincture",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "stalker_unguent",
+            "category": null
+          },
+          {
+            "type": "recipe",
+            "id": "wight_concentrate",
+            "category": null
+          }
+        ]
+      },
+      "placement": {
+        "mode": "campfire",
+        "cursor": [
+          39,
+          21
+        ]
+      },
+      "processing": [
+        {
+          "x": 39,
+          "y": 21,
+          "item_id": "w5l_roast",
+          "turns_remaining": 2,
+          "decor_id": "",
+          "source": "cooking",
+          "completion_message": "W5L roast ready: {item_name}.",
+          "on_fire": true
+        }
+      ],
+      "decor": [
+        {
+          "x": 35,
+          "y": 20,
+          "id": "worn_mat"
+        },
+        {
+          "x": 34,
+          "y": 18,
+          "id": "dried_herbs"
+        },
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working"
+        },
+        {
+          "x": 39,
+          "y": 21,
+          "id": "campfire_lit"
+        },
+        {
+          "x": 46,
+          "y": 23,
+          "id": "crate"
+        }
+      ],
+      "logs": [
+        "You light the Tallow Torch.",
+        "Thou takest the W5L protected field meat.",
+        "Thou takest the W5L retained field vessel.",
+        "Materials, tools or conditions are missing. Passive work needs a stationary fire.",
+        "The fire takes.",
+        "The fire takes the edge off.",
+        "Set it on the fire.",
+        "You set W5L protected field meat to cook."
+      ],
+      "lighting": {
+        "active_radius": 6,
+        "emitters": [
+          {
+            "x": 44,
+            "y": 18,
+            "id": "street_lamp_working",
+            "radius": 5,
+            "visible": false
+          },
+          {
+            "x": 39,
+            "y": 21,
+            "id": "campfire_lit",
+            "radius": 5,
+            "visible": true
+          }
+        ],
+        "visible_beyond_player_circle": []
+      },
+      "submap": "room-test-instance",
+      "inventory": [
+        {
+          "item_id": "tallow_torch",
+          "item_state_version": 1,
+          "name": "Tallow Torch",
+          "tile": "tallow_torch",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": "equip_light",
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": 600,
+          "turns_lit": 34,
+          "light_data": {
+            "radius": 8,
+            "color": [
+              255,
+              180,
+              60
+            ],
+            "falloff": 1.8,
+            "flicker": true
+          },
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "waxy",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            },
+            {
+              "tag": "fuel",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "1922047214416"
+        },
+        {
+          "item_id": "w5l_pot",
+          "item_state_version": 1,
+          "name": "W5L retained field vessel",
+          "tile": "generic_item",
+          "weight": 0.3,
+          "stackable": false,
+          "count": 1,
+          "on_use": null,
+          "text_id": "",
+          "nutrition": null,
+          "hydration": null,
+          "heal_amount": null,
+          "eat_message": null,
+          "drink_message": null,
+          "burn_turns": null,
+          "turns_lit": 0,
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "qualities": {},
+          "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+          "harvest_from": null,
+          "keywords": [
+            {
+              "tag": "vessel",
+              "tier": 1
+            },
+            {
+              "tag": "heatproof",
+              "tier": 1
+            }
+          ],
+          "decay_timer": null,
+          "source_creature": null,
+          "temporary_essence": [],
+          "consumed_on_use": false,
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "instance": "1922021599824"
+        }
+      ],
+      "floor": []
+    },
+    "output": {
+      "item_id": "w5l_roast",
+      "item_state_version": 1,
+      "name": "W5L nourishing roast",
+      "tile": "generic_item",
+      "weight": 0.3,
+      "stackable": false,
+      "count": 1,
+      "on_use": "eat",
+      "text_id": "",
+      "nutrition": 0.25,
+      "hydration": null,
+      "heal_amount": null,
+      "eat_message": "W5L roast restores you.",
+      "drink_message": null,
+      "burn_turns": null,
+      "turns_lit": 0,
+      "light_data": null,
+      "liquid": null,
+      "liquid_volume": 0,
+      "qualities": {},
+      "description": "Meat rendered over open flame until the outside chars and the inside sets. Better than raw. Still not good.",
+      "harvest_from": null,
+      "keywords": [
+        {
+          "tag": "edible",
+          "tier": 2
+        },
+        {
+          "tag": "vital",
+          "tier": 1
+        }
+      ],
+      "decay_timer": null,
+      "source_creature": null,
+      "temporary_essence": [],
+      "consumed_on_use": true,
+      "_temp_av_bonus": 0,
+      "_temp_av_hits": 0,
+      "instance": "1922020610640"
+    }
+  },
+  "uses": [
+    {
+      "id": "w5l_roast",
+      "selected": "1922020610640",
+      "siblings": [],
+      "definition": {
+        "item_id": "w5l_roast",
+        "item_state_version": 1,
+        "name": "W5L nourishing roast",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "eat",
+        "text_id": "",
+        "nutrition": 0.25,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": "W5L roast restores you.",
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Meat rendered over open flame until the outside chars and the inside sets. Better than raw. Still not good.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922020610640"
+      },
+      "before": {
+        "needs": {
+          "hunger": 0.805,
+          "thirst": 0.8068750000000001
+        },
+        "hp": 45,
+        "turn": 518,
+        "calls": 38
+      },
+      "after": {
+        "needs": {
+          "hunger": 0.556,
+          "thirst": 0.8082500000000001
+        },
+        "hp": 45,
+        "turn": 519,
+        "calls": 39,
+        "inventory": [
+          {
+            "item_id": "tallow_torch",
+            "item_state_version": 1,
+            "name": "Tallow Torch",
+            "tile": "tallow_torch",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_light",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": 600,
+            "turns_lit": 38,
+            "light_data": {
+              "radius": 8,
+              "color": [
+                255,
+                180,
+                60
+              ],
+              "falloff": 1.8,
+              "flicker": true
+            },
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "1922047214416"
+          },
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "1922004312784"
+          },
+          {
+            "item_id": "water_flask",
+            "item_state_version": 1,
+            "name": "Water Flask",
+            "tile": "water_flask",
+            "weight": 0.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "drink",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": "water",
+            "liquid_volume": 0.5,
+            "qualities": {},
+            "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "1922006150288"
+          },
+          {
+            "item_id": "crude_blade",
+            "item_state_version": 1,
+            "name": "a crude blade",
+            "tile": "generic_item",
+            "weight": 1.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Iron, poorly kept. It will serve.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "1922021359120"
+          },
+          {
+            "item_id": "leather_jack",
+            "item_state_version": 1,
+            "name": "a leather jack",
+            "tile": "generic_item",
+            "weight": 3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "1922021359184"
+          },
+          {
+            "item_id": "moist_pebble",
+            "item_state_version": 1,
+            "name": "moist pebble",
+            "tile": "pebble",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "1922021357072"
+          },
+          {
+            "item_id": "w5l_pot",
+            "item_state_version": 1,
+            "name": "W5L retained field vessel",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "1922021599824"
+          }
+        ],
+        "rows": [
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Weapons"
+          },
+          {
+            "item_id": "crude_blade",
+            "instance": "1922021359120",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Armour & Shields"
+          },
+          {
+            "item_id": "leather_jack",
+            "instance": "1922021359184",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Consumables"
+          },
+          {
+            "item_id": "water_flask",
+            "instance": "1922006150288",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": "crow_jerky",
+            "instance": "1922004312784",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Components"
+          },
+          {
+            "item_id": "w5l_pot",
+            "instance": "1922021599824",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Tools"
+          },
+          {
+            "item_id": "tallow_torch",
+            "instance": "1922047214416",
+            "header": false,
+            "label": ""
+          },
+          {
+            "item_id": null,
+            "instance": null,
+            "header": true,
+            "label": "Miscellaneous"
+          },
+          {
+            "item_id": "moist_pebble",
+            "instance": "1922021357072",
+            "header": false,
+            "label": ""
+          }
+        ]
+      }
+    }
+  ],
+  "extinguished": {
+    "pid": 32496,
+    "player": [
+      39,
+      22
+    ],
+    "turn": 520,
+    "action_calls": 40,
+    "needs": {
+      "hunger": 0.557,
+      "thirst": 0.8096250000000002
+    },
+    "hp": 45,
+    "max_hp": 60,
+    "mode": "LOCAL",
+    "craft": {
+      "open": false,
+      "selected": 5,
+      "choosing": false,
+      "choice_selected": 0,
+      "choice_index": 0,
+      "prompts": [
+        {
+          "comp_index": 0,
+          "options": [
+            {
+              "item_id": "w5l_meat",
+              "count": 1
+            }
+          ]
+        }
+      ],
+      "rows": [
+        {
+          "type": "header",
+          "id": null,
+          "category": "campfire"
+        },
+        {
+          "type": "recipe",
+          "id": "campfire",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "clay_pot",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "cooking"
+        },
+        {
+          "type": "recipe",
+          "id": "cook_meat",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5l_cook",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "wildcrafting"
+        },
+        {
+          "type": "recipe",
+          "id": "dry_bitter_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_resonant_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_soporific_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_aromatic_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "musk_pellet",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "alchemy"
+        },
+        {
+          "type": "recipe",
+          "id": "bile_coating",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "bone_dust_draught",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "briar_binding_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "hungering_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "marrow_seal",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_bone_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "stalker_unguent",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "wight_concentrate",
+          "category": null
+        }
+      ]
+    },
+    "placement": {
+      "mode": "campfire",
+      "cursor": [
+        39,
+        21
+      ]
+    },
+    "processing": [],
+    "decor": [
+      {
+        "x": 35,
+        "y": 20,
+        "id": "worn_mat"
+      },
+      {
+        "x": 34,
+        "y": 18,
+        "id": "dried_herbs"
+      },
+      {
+        "x": 44,
+        "y": 18,
+        "id": "street_lamp_working"
+      },
+      {
+        "x": 39,
+        "y": 21,
+        "id": "campfire_unlit"
+      },
+      {
+        "x": 46,
+        "y": 23,
+        "id": "crate"
+      }
+    ],
+    "logs": [
+      "Set it on the fire.",
+      "You set W5L protected field meat to cook.",
+      "W5L roast ready: W5L nourishing roast.",
+      "Pick up from where? (movement key, ESC to cancel)",
+      "Thou takest the W5L nourishing roast.",
+      "W5L roast restores you.",
+      "The fire dies.",
+      "The cold returns."
+    ],
+    "lighting": {
+      "active_radius": 6,
+      "emitters": [
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working",
+          "radius": 5,
+          "visible": false
+        }
+      ],
+      "visible_beyond_player_circle": []
+    },
+    "submap": "room-test-instance",
+    "inventory": [
+      {
+        "item_id": "tallow_torch",
+        "item_state_version": 1,
+        "name": "Tallow Torch",
+        "tile": "tallow_torch",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 600,
+        "turns_lit": 39,
+        "light_data": {
+          "radius": 8,
+          "color": [
+            255,
+            180,
+            60
+          ],
+          "falloff": 1.8,
+          "flicker": true
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922047214416"
+      },
+      {
+        "item_id": "w5l_pot",
+        "item_state_version": 1,
+        "name": "W5L retained field vessel",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922021599824"
+      }
+    ],
+    "floor": []
+  },
+  "saved_state": {
+    "pid": 32496,
+    "player": [
+      34,
+      24
+    ],
+    "turn": 530,
+    "action_calls": 50,
+    "needs": {
+      "hunger": 0.5670000000000001,
+      "thirst": 0.8233750000000003
+    },
+    "hp": 45,
+    "max_hp": 60,
+    "mode": "LOCAL",
+    "craft": {
+      "open": false,
+      "selected": 5,
+      "choosing": false,
+      "choice_selected": 0,
+      "choice_index": 0,
+      "prompts": [
+        {
+          "comp_index": 0,
+          "options": [
+            {
+              "item_id": "w5l_meat",
+              "count": 1
+            }
+          ]
+        }
+      ],
+      "rows": [
+        {
+          "type": "header",
+          "id": null,
+          "category": "campfire"
+        },
+        {
+          "type": "recipe",
+          "id": "campfire",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "clay_pot",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "cooking"
+        },
+        {
+          "type": "recipe",
+          "id": "cook_meat",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5l_cook",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "wildcrafting"
+        },
+        {
+          "type": "recipe",
+          "id": "dry_bitter_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_resonant_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_soporific_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_aromatic_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "musk_pellet",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "alchemy"
+        },
+        {
+          "type": "recipe",
+          "id": "bile_coating",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "bone_dust_draught",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "briar_binding_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "hungering_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "marrow_seal",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_bone_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "stalker_unguent",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "wight_concentrate",
+          "category": null
+        }
+      ]
+    },
+    "placement": {
+      "mode": "campfire",
+      "cursor": [
+        39,
+        21
+      ]
+    },
+    "processing": [],
+    "decor": [
+      {
+        "x": 35,
+        "y": 20,
+        "id": "worn_mat"
+      },
+      {
+        "x": 34,
+        "y": 18,
+        "id": "dried_herbs"
+      },
+      {
+        "x": 44,
+        "y": 18,
+        "id": "street_lamp_working"
+      },
+      {
+        "x": 39,
+        "y": 21,
+        "id": "campfire_unlit"
+      },
+      {
+        "x": 46,
+        "y": 23,
+        "id": "crate"
+      }
+    ],
+    "logs": [
+      "W5L roast restores you.",
+      "The fire dies.",
+      "The cold returns.",
+      "Progress preserved.",
+      "The throat has closed. The world dims at the edges.",
+      "You emerge into the surface.",
+      "You descend into Disposable Workbench room.",
+      "Progress preserved."
+    ],
+    "lighting": {
+      "active_radius": 6,
+      "emitters": [
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working",
+          "radius": 5,
+          "visible": false
+        }
+      ],
+      "visible_beyond_player_circle": []
+    },
+    "submap": "room-test-instance",
+    "inventory": [
+      {
+        "item_id": "tallow_torch",
+        "item_state_version": 1,
+        "name": "Tallow Torch",
+        "tile": "tallow_torch",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 600,
+        "turns_lit": 49,
+        "light_data": {
+          "radius": 8,
+          "color": [
+            255,
+            180,
+            60
+          ],
+          "falloff": 1.8,
+          "flicker": true
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922047214416"
+      },
+      {
+        "item_id": "w5l_pot",
+        "item_state_version": 1,
+        "name": "W5L retained field vessel",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1922021599824"
+      }
+    ],
+    "floor": []
+  },
+  "cold": {
+    "pid": 7940,
+    "player": [
+      34,
+      24
+    ],
+    "turn": 530,
+    "action_calls": 0,
+    "needs": {
+      "hunger": 0.5670000000000001,
+      "thirst": 0.8233750000000003
+    },
+    "hp": 45,
+    "max_hp": 60,
+    "mode": "LOCAL",
+    "craft": {
+      "open": false,
+      "selected": 0,
+      "choosing": false,
+      "choice_selected": 0,
+      "choice_index": 0,
+      "prompts": [],
+      "rows": [
+        {
+          "type": "header",
+          "id": null,
+          "category": "campfire"
+        },
+        {
+          "type": "recipe",
+          "id": "campfire",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "clay_pot",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "cooking"
+        },
+        {
+          "type": "recipe",
+          "id": "cook_meat",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5l_cook",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "wildcrafting"
+        },
+        {
+          "type": "recipe",
+          "id": "dry_bitter_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_resonant_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_soporific_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_aromatic_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "musk_pellet",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "alchemy"
+        },
+        {
+          "type": "recipe",
+          "id": "bile_coating",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "bone_dust_draught",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "briar_binding_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "hungering_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "marrow_seal",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_bone_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "stalker_unguent",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "wight_concentrate",
+          "category": null
+        }
+      ]
+    },
+    "placement": {
+      "mode": "campfire",
+      "cursor": [
+        0,
+        0
+      ]
+    },
+    "processing": [],
+    "decor": [
+      {
+        "x": 35,
+        "y": 20,
+        "id": "worn_mat"
+      },
+      {
+        "x": 34,
+        "y": 18,
+        "id": "dried_herbs"
+      },
+      {
+        "x": 44,
+        "y": 18,
+        "id": "street_lamp_working"
+      },
+      {
+        "x": 39,
+        "y": 21,
+        "id": "campfire_unlit"
+      },
+      {
+        "x": 46,
+        "y": 23,
+        "id": "crate"
+      }
+    ],
+    "logs": [
+      "The world reassembles itself around you.",
+      "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+      "Thou art beneath the ground. Something is wrong with the world above."
+    ],
+    "lighting": {
+      "active_radius": 6,
+      "emitters": [
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working",
+          "radius": 5,
+          "visible": false
+        }
+      ],
+      "visible_beyond_player_circle": []
+    },
+    "submap": "room-test-instance",
+    "inventory": [
+      {
+        "item_id": "tallow_torch",
+        "item_state_version": 1,
+        "name": "Tallow Torch",
+        "tile": "tallow_torch",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 600,
+        "turns_lit": 49,
+        "light_data": {
+          "radius": 8,
+          "color": [
+            255,
+            180,
+            60
+          ],
+          "falloff": 1.8,
+          "flicker": true
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2450799849808"
+      },
+      {
+        "item_id": "w5l_pot",
+        "item_state_version": 1,
+        "name": "W5L retained field vessel",
+        "tile": "generic_item",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": null,
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2452425867472"
+      }
+    ],
+    "floor": []
+  },
+  "cold_save_access_events": 81,
+  "reset": {
+    "pid": 19840,
+    "player": [
+      34,
+      24
+    ],
+    "turn": 480,
+    "action_calls": 0,
+    "needs": {
+      "hunger": 0,
+      "thirst": 0
+    },
+    "hp": 60,
+    "max_hp": 60,
+    "mode": "LOCAL",
+    "craft": {
+      "open": false,
+      "selected": 0,
+      "choosing": false,
+      "choice_selected": 0,
+      "choice_index": 0,
+      "prompts": [],
+      "rows": [
+        {
+          "type": "header",
+          "id": null,
+          "category": "campfire"
+        },
+        {
+          "type": "recipe",
+          "id": "campfire",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "clay_pot",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "cooking"
+        },
+        {
+          "type": "recipe",
+          "id": "cook_meat",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5l_cook",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "wildcrafting"
+        },
+        {
+          "type": "recipe",
+          "id": "dry_bitter_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_resonant_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_soporific_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_aromatic_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "musk_pellet",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "alchemy"
+        },
+        {
+          "type": "recipe",
+          "id": "bile_coating",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "bone_dust_draught",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "briar_binding_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "hungering_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "marrow_seal",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_bone_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "stalker_unguent",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "wight_concentrate",
+          "category": null
+        }
+      ]
+    },
+    "placement": {
+      "mode": "campfire",
+      "cursor": [
+        0,
+        0
+      ]
+    },
+    "processing": [],
+    "decor": [
+      {
+        "x": 35,
+        "y": 20,
+        "id": "worn_mat"
+      },
+      {
+        "x": 34,
+        "y": 18,
+        "id": "dried_herbs"
+      },
+      {
+        "x": 44,
+        "y": 18,
+        "id": "street_lamp_working"
+      },
+      {
+        "x": 39,
+        "y": 21,
+        "id": "campfire_unlit"
+      },
+      {
+        "x": 46,
+        "y": 23,
+        "id": "crate"
+      }
+    ],
+    "logs": [
+      "You light the Tallow Torch.",
+      "You descend into Disposable Workbench room.",
+      "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+      "Thou art beneath the ground. Something is wrong with the world above."
+    ],
+    "lighting": {
+      "active_radius": 6,
+      "emitters": [
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working",
+          "radius": 5,
+          "visible": false
+        }
+      ],
+      "visible_beyond_player_circle": []
+    },
+    "submap": "room-test-instance",
+    "inventory": [
+      {
+        "item_id": "tallow_torch",
+        "item_state_version": 1,
+        "name": "Tallow Torch",
+        "tile": "tallow_torch",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 600,
+        "turns_lit": 0,
+        "light_data": {
+          "radius": 8,
+          "color": [
+            255,
+            180,
+            60
+          ],
+          "falloff": 1.8,
+          "flicker": true
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "2256505819984"
+      }
+    ],
+    "floor": [
+      {
+        "x": 36,
+        "y": 22,
+        "items": [
+          {
+            "item_id": "w5l_meat",
+            "item_state_version": 1,
+            "name": "W5L protected field meat",
+            "tile": "generic_item",
+            "weight": 0.2,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "vital",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2256505365264"
+          }
+        ]
+      },
+      {
+        "x": 37,
+        "y": 22,
+        "items": [
+          {
+            "item_id": "w5l_pot",
+            "item_state_version": 1,
+            "name": "W5L retained field vessel",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "2256505365136"
+          }
+        ]
+      }
+    ]
+  },
+  "latest": {
+    "pid": 3568,
+    "player": [
+      34,
+      24
+    ],
+    "turn": 480,
+    "action_calls": 0,
+    "needs": {
+      "hunger": 0,
+      "thirst": 0
+    },
+    "hp": 60,
+    "max_hp": 60,
+    "mode": "LOCAL",
+    "craft": {
+      "open": false,
+      "selected": 0,
+      "choosing": false,
+      "choice_selected": 0,
+      "choice_index": 0,
+      "prompts": [],
+      "rows": [
+        {
+          "type": "header",
+          "id": null,
+          "category": "campfire"
+        },
+        {
+          "type": "recipe",
+          "id": "campfire",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "clay_pot",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "cooking"
+        },
+        {
+          "type": "recipe",
+          "id": "cook_meat",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "w5l_cook",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "wildcrafting"
+        },
+        {
+          "type": "recipe",
+          "id": "dry_bitter_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_resonant_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_soporific_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "dry_aromatic_herb",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "musk_pellet",
+          "category": null
+        },
+        {
+          "type": "header",
+          "id": null,
+          "category": "alchemy"
+        },
+        {
+          "type": "recipe",
+          "id": "bile_coating",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "bone_dust_draught",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "briar_binding_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "hungering_oil",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "marrow_seal",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_bone_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "resonant_tincture",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "stalker_unguent",
+          "category": null
+        },
+        {
+          "type": "recipe",
+          "id": "wight_concentrate",
+          "category": null
+        }
+      ]
+    },
+    "placement": {
+      "mode": "campfire",
+      "cursor": [
+        0,
+        0
+      ]
+    },
+    "processing": [],
+    "decor": [
+      {
+        "x": 35,
+        "y": 20,
+        "id": "worn_mat"
+      },
+      {
+        "x": 34,
+        "y": 18,
+        "id": "dried_herbs"
+      },
+      {
+        "x": 44,
+        "y": 18,
+        "id": "street_lamp_working"
+      },
+      {
+        "x": 41,
+        "y": 21,
+        "id": "campfire_unlit"
+      },
+      {
+        "x": 46,
+        "y": 23,
+        "id": "crate"
+      }
+    ],
+    "logs": [
+      "You light the Tallow Torch.",
+      "You descend into Disposable Workbench room.",
+      "Stone. Cold stone, and the smell of old air. Thy eyes open to darkness.",
+      "Thou art beneath the ground. Something is wrong with the world above."
+    ],
+    "lighting": {
+      "active_radius": 6,
+      "emitters": [
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working",
+          "radius": 5,
+          "visible": false
+        }
+      ],
+      "visible_beyond_player_circle": []
+    },
+    "submap": "room-test-instance",
+    "inventory": [
+      {
+        "item_id": "tallow_torch",
+        "item_state_version": 1,
+        "name": "Tallow Torch",
+        "tile": "tallow_torch",
+        "weight": 0.3,
+        "stackable": false,
+        "count": 1,
+        "on_use": "equip_light",
+        "text_id": "",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": 600,
+        "turns_lit": 0,
+        "light_data": {
+          "radius": 8,
+          "color": [
+            255,
+            180,
+            60
+          ],
+          "falloff": 1.8,
+          "flicker": true
+        },
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "waxy",
+            "tier": 1
+          },
+          {
+            "tag": "fibrous",
+            "tier": 1
+          },
+          {
+            "tag": "fuel",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": false,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0,
+        "instance": "1566917204816"
+      }
+    ],
+    "floor": [
+      {
+        "x": 36,
+        "y": 22,
+        "items": [
+          {
+            "item_id": "w5l_meat",
+            "item_state_version": 1,
+            "name": "W5L protected field meat",
+            "tile": "generic_item",
+            "weight": 0.2,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 1
+              },
+              {
+                "tag": "vital",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "1566890761872"
+          }
+        ]
+      },
+      {
+        "x": 37,
+        "y": 22,
+        "items": [
+          {
+            "item_id": "w5l_pot",
+            "item_state_version": 1,
+            "name": "W5L retained field vessel",
+            "tile": "generic_item",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": null,
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0,
+            "qualities": {},
+            "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "vessel",
+                "tier": 1
+              },
+              {
+                "tag": "heatproof",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0,
+            "instance": "1566890768272"
+          }
+        ]
+      }
+    ]
+  },
+  "captures": {
+    "capture_v1": {
+      "snapshot_id": "856b4134-53d5-44e5-8401-73b606757535",
+      "manifest_sha256": "30a1f773caae79702685e37c8b341088617fc4b2ddb274eda45a81264280bfd8",
+      "room_sha256": "cc5213e940da2146620c85c618fa275157477afe7107a46dcfcb9bc6e1ccfc50",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5"
+    },
+    "capture_reset": {
+      "snapshot_id": "856b4134-53d5-44e5-8401-73b606757535",
+      "manifest_sha256": "30a1f773caae79702685e37c8b341088617fc4b2ddb274eda45a81264280bfd8",
+      "room_sha256": "cc5213e940da2146620c85c618fa275157477afe7107a46dcfcb9bc6e1ccfc50",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5"
+    },
+    "capture_v2": {
+      "snapshot_id": "86ae052f-db50-4614-ac27-e3f609fe61e4",
+      "manifest_sha256": "26372c05dba76f11fdebf8118b88b3546389ee3d041dcc927f651f3fed911323",
+      "room_sha256": "f9b8030509efe18dc0ffdc3381bd80ca5964d5db3c67271e6c71f877b8d1ab3a",
+      "runtime_sha256": "da918acc87d9602b2c45585e22dfe008f0cd08524627131bd86f2e19db3a86a5"
+    }
+  },
+  "ordinary_before": {
+    "assignment": {
+      "world_size": [
+        32,
+        32
+      ],
+      "seed": 20261028,
+      "count": 42,
+      "selected": {
+        "wx": 0,
+        "wy": 6,
+        "submap_id": "submap_0_6_0",
+        "layout_id": "w5l_furnished_room"
+      },
+      "receipts": [
+        {
+          "id": "worn_mat",
+          "xy": [
+            35,
+            20
+          ],
+          "blocks_movement": false,
+          "declared_blocks_sight": false,
+          "light_emit": 0,
+          "cosmetic_fx": null,
+          "interaction": null,
+          "stationary_fire": false,
+          "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+        },
+        {
+          "id": "dried_herbs",
+          "xy": [
+            34,
+            18
+          ],
+          "blocks_movement": false,
+          "declared_blocks_sight": false,
+          "light_emit": 0,
+          "cosmetic_fx": null,
+          "interaction": null,
+          "stationary_fire": false,
+          "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+        },
+        {
+          "id": "street_lamp_working",
+          "xy": [
+            44,
+            18
+          ],
+          "blocks_movement": true,
+          "declared_blocks_sight": false,
+          "light_emit": 5,
+          "cosmetic_fx": "flame_low",
+          "interaction": null,
+          "stationary_fire": false,
+          "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+        },
+        {
+          "id": "campfire_unlit",
+          "xy": [
+            39,
+            21
+          ],
+          "blocks_movement": true,
+          "declared_blocks_sight": false,
+          "light_emit": 0,
+          "cosmetic_fx": null,
+          "interaction": "light_campfire",
+          "stationary_fire": false,
+          "sight_note": "Sight uses terrain transparency; decor blocks_sight is a declaration, not applied to the FOV grid."
+        }
+      ],
+      "production_spawn": [
+        34,
+        24
+      ],
+      "scope": "Existing disposable profile → ordinary new-world selection → native create_submap. No ordinary-start expedition or frequency claim."
+    },
+    "scene": {
+      "decor": [
+        {
+          "x": 34,
+          "y": 18,
+          "id": "dried_herbs"
+        },
+        {
+          "x": 35,
+          "y": 20,
+          "id": "worn_mat"
+        },
+        {
+          "x": 39,
+          "y": 21,
+          "id": "campfire_lit"
+        },
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working"
+        },
+        {
+          "x": 46,
+          "y": 23,
+          "id": "crate"
+        }
+      ],
+      "floor": [
+        {
+          "x": 36,
+          "y": 22,
+          "items": [
+            {
+              "item_id": "w5l_meat",
+              "item_state_version": 1,
+              "name": "W5L protected field meat",
+              "tile": "generic_item",
+              "weight": 0.2,
+              "stackable": false,
+              "count": 1,
+              "on_use": null,
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": null,
+              "turns_lit": 0,
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "qualities": {},
+              "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+              "harvest_from": null,
+              "keywords": [
+                {
+                  "tag": "edible",
+                  "tier": 1
+                },
+                {
+                  "tag": "vital",
+                  "tier": 1
+                }
+              ],
+              "decay_timer": null,
+              "source_creature": null,
+              "temporary_essence": [],
+              "consumed_on_use": false,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0
+            }
+          ]
+        },
+        {
+          "x": 37,
+          "y": 22,
+          "items": [
+            {
+              "item_id": "w5l_pot",
+              "item_state_version": 1,
+              "name": "W5L retained field vessel",
+              "tile": "generic_item",
+              "weight": 0.3,
+              "stackable": false,
+              "count": 1,
+              "on_use": null,
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": null,
+              "turns_lit": 0,
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "qualities": {},
+              "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+              "harvest_from": null,
+              "keywords": [
+                {
+                  "tag": "vessel",
+                  "tier": 1
+                },
+                {
+                  "tag": "heatproof",
+                  "tier": 1
+                }
+              ],
+              "decay_timer": null,
+              "source_creature": null,
+              "temporary_essence": [],
+              "consumed_on_use": false,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0
+            }
+          ]
+        }
+      ],
+      "containers": [
+        {
+          "state": "closed",
+          "items": [
+            {
+              "item_id": "tallow_torch",
+              "item_state_version": 1,
+              "name": "Tallow Torch",
+              "tile": "tallow_torch",
+              "weight": 0.3,
+              "stackable": false,
+              "count": 1,
+              "on_use": "equip_light",
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": 600,
+              "turns_lit": 0,
+              "light_data": {
+                "radius": 8,
+                "color": [
+                  255,
+                  180,
+                  60
+                ],
+                "falloff": 1.8,
+                "flicker": true
+              },
+              "liquid": null,
+              "liquid_volume": 0,
+              "qualities": {},
+              "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+              "harvest_from": null,
+              "keywords": [
+                {
+                  "tag": "waxy",
+                  "tier": 1
+                },
+                {
+                  "tag": "fibrous",
+                  "tier": 1
+                },
+                {
+                  "tag": "fuel",
+                  "tier": 1
+                }
+              ],
+              "decay_timer": null,
+              "source_creature": null,
+              "temporary_essence": [],
+              "consumed_on_use": false,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0
+            }
+          ],
+          "decor_id": "crate",
+          "x": 46,
+          "y": 23
+        }
+      ],
+      "terrain": "c02b507ac504bdf6360542daa02433a12ddf04e22b72c9b7cf2263de5792a8d6",
+      "processing": []
+    },
+    "inventory": [
+      {
+        "item_id": "letter",
+        "item_state_version": 1,
+        "name": "a letter",
+        "tile": "document",
+        "weight": 0.02,
+        "stackable": false,
+        "count": 1,
+        "on_use": "read",
+        "text_id": "lab_note_primary_b",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Folded paper. Someone meant to send this.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "fibrous",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    ],
+    "source_sha256": "cc5213e940da2146620c85c618fa275157477afe7107a46dcfcb9bc6e1ccfc50",
+    "needs": {
+      "hunger": 0.010000000000000002,
+      "thirst": 0.013749999999999998
+    },
+    "hp": 60,
+    "passed": true,
+    "pid": 18056,
+    "mode": "before",
+    "save_access_events": 53,
+    "explicit_disposable_ownership": true
+  },
+  "ordinary_after": {
+    "source_sha256": "f9b8030509efe18dc0ffdc3381bd80ca5964d5db3c67271e6c71f877b8d1ab3a",
+    "scene": {
+      "decor": [
+        {
+          "x": 34,
+          "y": 18,
+          "id": "dried_herbs"
+        },
+        {
+          "x": 35,
+          "y": 20,
+          "id": "worn_mat"
+        },
+        {
+          "x": 39,
+          "y": 21,
+          "id": "campfire_lit"
+        },
+        {
+          "x": 44,
+          "y": 18,
+          "id": "street_lamp_working"
+        },
+        {
+          "x": 46,
+          "y": 23,
+          "id": "crate"
+        }
+      ],
+      "floor": [
+        {
+          "x": 36,
+          "y": 22,
+          "items": [
+            {
+              "item_id": "w5l_meat",
+              "item_state_version": 1,
+              "name": "W5L protected field meat",
+              "tile": "generic_item",
+              "weight": 0.2,
+              "stackable": false,
+              "count": 1,
+              "on_use": null,
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": null,
+              "turns_lit": 0,
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "qualities": {},
+              "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+              "harvest_from": null,
+              "keywords": [
+                {
+                  "tag": "edible",
+                  "tier": 1
+                },
+                {
+                  "tag": "vital",
+                  "tier": 1
+                }
+              ],
+              "decay_timer": null,
+              "source_creature": null,
+              "temporary_essence": [],
+              "consumed_on_use": false,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0
+            }
+          ]
+        },
+        {
+          "x": 37,
+          "y": 22,
+          "items": [
+            {
+              "item_id": "w5l_pot",
+              "item_state_version": 1,
+              "name": "W5L retained field vessel",
+              "tile": "generic_item",
+              "weight": 0.3,
+              "stackable": false,
+              "count": 1,
+              "on_use": null,
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": null,
+              "turns_lit": 0,
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "qualities": {},
+              "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+              "harvest_from": null,
+              "keywords": [
+                {
+                  "tag": "vessel",
+                  "tier": 1
+                },
+                {
+                  "tag": "heatproof",
+                  "tier": 1
+                }
+              ],
+              "decay_timer": null,
+              "source_creature": null,
+              "temporary_essence": [],
+              "consumed_on_use": false,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0
+            }
+          ]
+        }
+      ],
+      "containers": [
+        {
+          "state": "closed",
+          "items": [
+            {
+              "item_id": "tallow_torch",
+              "item_state_version": 1,
+              "name": "Tallow Torch",
+              "tile": "tallow_torch",
+              "weight": 0.3,
+              "stackable": false,
+              "count": 1,
+              "on_use": "equip_light",
+              "text_id": "",
+              "nutrition": null,
+              "hydration": null,
+              "heal_amount": null,
+              "eat_message": null,
+              "drink_message": null,
+              "burn_turns": 600,
+              "turns_lit": 0,
+              "light_data": {
+                "radius": 8,
+                "color": [
+                  255,
+                  180,
+                  60
+                ],
+                "falloff": 1.8,
+                "flicker": true
+              },
+              "liquid": null,
+              "liquid_volume": 0,
+              "qualities": {},
+              "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+              "harvest_from": null,
+              "keywords": [
+                {
+                  "tag": "waxy",
+                  "tier": 1
+                },
+                {
+                  "tag": "fibrous",
+                  "tier": 1
+                },
+                {
+                  "tag": "fuel",
+                  "tier": 1
+                }
+              ],
+              "decay_timer": null,
+              "source_creature": null,
+              "temporary_essence": [],
+              "consumed_on_use": false,
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0
+            }
+          ],
+          "decor_id": "crate",
+          "x": 46,
+          "y": 23
+        }
+      ],
+      "terrain": "c02b507ac504bdf6360542daa02433a12ddf04e22b72c9b7cf2263de5792a8d6",
+      "processing": []
+    },
+    "inventory": [
+      {
+        "item_id": "letter",
+        "item_state_version": 1,
+        "name": "a letter",
+        "tile": "document",
+        "weight": 0.02,
+        "stackable": false,
+        "count": 1,
+        "on_use": "read",
+        "text_id": "lab_note_primary_b",
+        "nutrition": null,
+        "hydration": null,
+        "heal_amount": null,
+        "eat_message": null,
+        "drink_message": null,
+        "burn_turns": null,
+        "turns_lit": 0,
+        "light_data": null,
+        "liquid": null,
+        "liquid_volume": 0,
+        "qualities": {},
+        "description": "Folded paper. Someone meant to send this.",
+        "harvest_from": null,
+        "keywords": [
+          {
+            "tag": "fibrous",
+            "tier": 1
+          }
+        ],
+        "decay_timer": null,
+        "source_creature": null,
+        "temporary_essence": [],
+        "consumed_on_use": true,
+        "_temp_av_bonus": 0,
+        "_temp_av_hits": 0
+      }
+    ],
+    "old_realized_state_exact": true,
+    "new_constructed_fire": [
+      41,
+      21,
+      "campfire_unlit"
+    ],
+    "removed_object_absent": true,
+    "scope": "Fresh catalogue and process, ordinary owned save independent of immutable captures; old map positions, changed fire ID and removed physical object remain authoritative.",
+    "passed": true,
+    "pid": 18156,
+    "mode": "after",
+    "save_access_events": 33,
+    "explicit_disposable_ownership": true
+  },
+  "conflict": {
+    "competing_sha256": "bc2200d64689539f4bdc27f55eca411e253d6efb69606f62df6ae899b752ddd3",
+    "preserved": true,
+    "saved_decor_dependency_staled_review": true
+  },
+  "recovery": {
+    "furnished_invalid_sha256": "b5b1e934e955a3bad1d57602e65768ca8093f4f9cd3cb3655a05a26ecb7d4328",
+    "parked_sha256": "ad60acf1f4ac54ccbf457d1e6960fb3861418f1b6606c0267462991d8f1e7281",
+    "fresh_pid": 30636
+  },
+  "screenshots": {
+    "game-authored-light.png": {
+      "path": "workbench/docs/evidence/w5l/game-authored-light.png",
+      "sha256": "6b1eb91035a57502b1b4437cc03508e3dbea2cd7645b8a8e22c722277942e0df"
+    },
+    "game-choose-protected-unlit.png": {
+      "path": "workbench/docs/evidence/w5l/game-choose-protected-unlit.png",
+      "sha256": "99df1ad19fc8993a4d41d7c9274ec845d0863b555ba1a74670f6e42363f8d029"
+    },
+    "game-choose-protected-lit.png": {
+      "path": "workbench/docs/evidence/w5l/game-choose-protected-lit.png",
+      "sha256": "f02128d9fe2a2ab94fc6094dd88045e745ba08f86c68a972e3eebaa6556ccc12"
+    },
+    "game-authored-cooking.png": {
+      "path": "workbench/docs/evidence/w5l/game-authored-cooking.png",
+      "sha256": "cb30d6e1e656804331223eacef30de0390ffc79829400ba156199d8077137f71"
+    },
+    "game-floor-output.png": {
+      "path": "workbench/docs/evidence/w5l/game-floor-output.png",
+      "sha256": "d081abd9061a567e3798258257424758764f470250cf598d103b7b8bc1f0bc03"
+    },
+    "game-used-roast.png": {
+      "path": "workbench/docs/evidence/w5l/game-used-roast.png",
+      "sha256": "08adca7691009dfb9859e95ce57e03e8f8c071d81ff3422960315eea01c6e190"
+    },
+    "game-cold-state.png": {
+      "path": "workbench/docs/evidence/w5l/game-cold-state.png",
+      "sha256": "a184c9730646cfec1b147a672e3d7fb19e53716ca2716d055ac84ad03c2c1cf8"
+    },
+    "game-revised-furnishing.png": {
+      "path": "workbench/docs/evidence/w5l/game-revised-furnishing.png",
+      "sha256": "544c2b1fc88a11383abf54421ad19d20a5864f30e3096634cf5bbbbd8d8ab00c"
+    },
+    "completed-source-room.png": {
+      "path": "workbench/docs/evidence/w5l/completed-source-room.png",
+      "sha256": "c8b6a6a69cd3c72d9c06b5c47f552ba0b234fecfbd9c32e0121033e570456e3b"
+    },
+    "completed-realized-room.png": {
+      "path": "workbench/docs/evidence/w5l/completed-realized-room.png",
+      "sha256": "30cb6234eec1acd7eb0b772bc3a72321abae09af8ba893c4e13fc5dfadd2b6d4"
+    },
+    "completed-decor-receipts.png": {
+      "path": "workbench/docs/evidence/w5l/completed-decor-receipts.png",
+      "sha256": "7cf5f0ce93076bd23d6503906da02f17959d4f023305d783ab28dc295ac84993"
+    },
+    "completed-furnishing-properties.png": {
+      "path": "workbench/docs/evidence/w5l/completed-furnishing-properties.png",
+      "sha256": "b0e816a606b7d04406cdace3b9811c054ad423f81c559811a6fa20d85990b1c8"
+    }
+  },
+  "native_receipt": {
+    "local_path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5l\\native-1793252681881\\receipt.json",
+    "sha256": "ee459dfc33b16db2cb09dded38b02c239838dc118f8df5bed361a9e200cc8515"
+  },
+  "errors": []
+}

@@ -1,0 +1,28 @@
+{
+  "id": "w5l_furnished_room",
+  "width": 19,
+  "height": 11,
+  "layers": [
+    "###################",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.................#",
+    "#.<...............#",
+    "#.................#",
+    "###################"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "<": "stairs_up"
+  },
+  "player_start": {
+    "x": 3,
+    "y": 8
+  },
+  "special_tiles": [{"type":"decor","x":4,"y":4,"decor_id":"worn_mat"},{"type":"decor","x":3,"y":2,"decor_id":"dried_herbs"},{"type":"decor","x":13,"y":2,"decor_id":"street_lamp_working"},{"type":"decor","x":8,"y":5,"decor_id":"campfire_unlit"},{"type":"item","x":5,"y":6,"item_id":"w5l_meat"},{"type":"item","x":6,"y":6,"item_id":"w5l_pot"},{"type":"item","x":6,"y":3,"item_id":"letter","text_id":"lab_note_primary_b"},{"type":"container","x":15,"y":7,"decor_id":"crate","loot_pools":["storage_tools"]}]
+}

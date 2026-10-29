@@ -1,0 +1,590 @@
+{
+  "milestone": "W5L",
+  "passed": true,
+  "observed_utc": "2026-10-29T05:55:23.333108+00:00",
+  "contract": "authored-room-2",
+  "route_contract": "g2-3",
+  "revisions": {
+    "start": "417ce1adca5c7b52f24f4201d2ab69cff3d3fbce",
+    "initial_remote": "417ce1adca5c7b52f24f4201d2ab69cff3d3fbce",
+    "implementation": "cdf35c32ef7be8280a6b70554f0020b6a927e6d2",
+    "package_inputs": "ad85b1f424208b9e0f6ab96515f9eb9536cb1cfc",
+    "evidence_inputs": "21667db32ccb9d5b515864a301fc935824c1fb3e",
+    "final_delivery_ref": "checkpoint/workbench-w5l-verified-20261028",
+    "note": "Final commit cannot embed its own SHA. Resolve the named ref; post-push exact local/remote-main readback is in the handoff and ignored remote-readback.json. Package inputs precede evidence-only refinements."
+  },
+  "accepted_fixtures": {
+    "w5l_meat": {
+      "path": "workbench/docs/evidence/w5l/fixtures/w5l_meat.json",
+      "sha256": "afad7cb4c15cf0be65e78abc059070c592167edcf7809d18684dcd259039f9b2",
+      "published_path": "roguelike/data/items/butchery/w5l_meat.json",
+      "definition": {
+        "id": "w5l_meat",
+        "name": "W5L protected field meat",
+        "description": "Cut from something that walked or ran. The muscle is still warm. It will not stay that way.",
+        "tile": "generic_item",
+        "category": "butchery",
+        "weight": 0.2,
+        "stackable": false,
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 1
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ],
+        "consumed_on_use": false
+      },
+      "identity": "Exact UTF-8 bytes authored, saved and byte-checked reopened through packaged controls; -text prevents normalization."
+    },
+    "w5l_pot": {
+      "path": "workbench/docs/evidence/w5l/fixtures/w5l_pot.json",
+      "sha256": "f1304ac7d90652f94ea7a77c6f2447cae091a0ffd8a4780fecc1f1278705970e",
+      "published_path": "roguelike/data/items/components/w5l_pot.json",
+      "definition": {
+        "id": "w5l_pot",
+        "name": "W5L retained field vessel",
+        "description": "A small pot, hand-formed from river clay and fired in open flame. Crude but serviceable. Holds liquids. Survives direct heat.",
+        "tile": "generic_item",
+        "category": "component",
+        "weight": 0.3,
+        "stackable": false,
+        "on_use": null,
+        "consumed_on_use": false,
+        "keywords": [
+          {
+            "tag": "vessel",
+            "tier": 1
+          },
+          {
+            "tag": "heatproof",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact UTF-8 bytes authored, saved and byte-checked reopened through packaged controls; -text prevents normalization."
+    },
+    "w5l_roast": {
+      "path": "workbench/docs/evidence/w5l/fixtures/w5l_roast.json",
+      "sha256": "5b1354fc46db15c8d117e115b5db207bc1df201f420f8fef56cae94c60d9c36c",
+      "published_path": "roguelike/data/items/consumables/w5l_roast.json",
+      "definition": {
+        "id": "w5l_roast",
+        "name": "W5L nourishing roast",
+        "description": "Meat rendered over open flame until the outside chars and the inside sets. Better than raw. Still not good.",
+        "tile": "generic_item",
+        "category": "consumable",
+        "weight": 0.3,
+        "stackable": false,
+        "on_use": "eat",
+        "nutrition": 0.25,
+        "eat_message": "W5L roast restores you.",
+        "keywords": [
+          {
+            "tag": "edible",
+            "tier": 2
+          },
+          {
+            "tag": "vital",
+            "tier": 1
+          }
+        ]
+      },
+      "identity": "Exact UTF-8 bytes authored, saved and byte-checked reopened through packaged controls; -text prevents normalization."
+    },
+    "w5l_cook": {
+      "path": "workbench/docs/evidence/w5l/fixtures/w5l_cook.json",
+      "sha256": "5bb2abe7248d03ce3418a6b27a6598b39a96e68c84f681f48367985b0fd1985b",
+      "published_path": "roguelike/data/recipes/w5l_cook.json",
+      "definition": {
+        "id": "w5l_cook",
+        "name": "W5L roast meal",
+        "category": "cooking",
+        "description": "Hold raw meat over open flame until it chars. Direct heat required.",
+        "known": true,
+        "components": [
+          {
+            "tag": "vital",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "requires_ambient": [
+          {
+            "tag": "burning",
+            "min_tier": 2
+          }
+        ],
+        "result_item": "w5l_roast",
+        "passive_processing": true,
+        "processing_turns": 3,
+        "processing_source": "cooking",
+        "processing_decor": "cooking_meat",
+        "placement_message": "Set it on the fire.",
+        "tools": [
+          {
+            "tag": "vessel",
+            "min_tier": 1,
+            "quantity": 1
+          }
+        ],
+        "completion_message": "W5L roast ready: {item_name}."
+      },
+      "identity": "Exact UTF-8 bytes authored, saved and byte-checked reopened through packaged controls; -text prevents normalization."
+    },
+    "room": {
+      "path": "workbench/docs/evidence/w5l/fixtures/room.json",
+      "sha256": "cc5213e940da2146620c85c618fa275157477afe7107a46dcfcb9bc6e1ccfc50",
+      "published_path": "roguelike/data/layouts/w5l_furnished_room.json",
+      "definition": {
+        "id": "w5l_furnished_room",
+        "width": 19,
+        "height": 11,
+        "layers": [
+          "###################",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.<...............#",
+          "#.................#",
+          "###################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 3,
+          "y": 8
+        },
+        "special_tiles": [
+          {
+            "type": "decor",
+            "x": 4,
+            "y": 4,
+            "decor_id": "worn_mat"
+          },
+          {
+            "type": "decor",
+            "x": 3,
+            "y": 2,
+            "decor_id": "dried_herbs"
+          },
+          {
+            "type": "decor",
+            "x": 13,
+            "y": 2,
+            "decor_id": "street_lamp_working"
+          },
+          {
+            "type": "decor",
+            "x": 8,
+            "y": 5,
+            "decor_id": "campfire_unlit"
+          },
+          {
+            "type": "item",
+            "x": 5,
+            "y": 6,
+            "item_id": "w5l_meat"
+          },
+          {
+            "type": "item",
+            "x": 6,
+            "y": 6,
+            "item_id": "w5l_pot"
+          },
+          {
+            "type": "item",
+            "x": 6,
+            "y": 3,
+            "item_id": "letter",
+            "text_id": "lab_note_primary_b"
+          },
+          {
+            "type": "container",
+            "x": 15,
+            "y": 7,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "identity": "Exact UTF-8 bytes authored, saved and byte-checked reopened through packaged controls; -text prevents normalization."
+    },
+    "room_revised": {
+      "path": "workbench/docs/evidence/w5l/fixtures/room_revised.json",
+      "sha256": "f9b8030509efe18dc0ffdc3381bd80ca5964d5db3c67271e6c71f877b8d1ab3a",
+      "published_path": "roguelike/data/layouts/w5l_furnished_room.json",
+      "definition": {
+        "id": "w5l_furnished_room",
+        "width": 19,
+        "height": 11,
+        "layers": [
+          "###################",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.................#",
+          "#.<...............#",
+          "#.................#",
+          "###################"
+        ],
+        "legend": {
+          "#": "wall",
+          ".": "floor",
+          "<": "stairs_up"
+        },
+        "player_start": {
+          "x": 3,
+          "y": 8
+        },
+        "special_tiles": [
+          {
+            "type": "decor",
+            "x": 4,
+            "y": 4,
+            "decor_id": "worn_mat"
+          },
+          {
+            "type": "decor",
+            "x": 3,
+            "y": 2,
+            "decor_id": "dried_herbs"
+          },
+          {
+            "type": "decor",
+            "x": 13,
+            "y": 2,
+            "decor_id": "street_lamp_working"
+          },
+          {
+            "type": "decor",
+            "x": 10,
+            "y": 5,
+            "decor_id": "campfire_unlit"
+          },
+          {
+            "type": "item",
+            "x": 5,
+            "y": 6,
+            "item_id": "w5l_meat"
+          },
+          {
+            "type": "item",
+            "x": 6,
+            "y": 6,
+            "item_id": "w5l_pot"
+          },
+          {
+            "type": "item",
+            "x": 6,
+            "y": 3,
+            "item_id": "letter",
+            "text_id": "lab_note_primary_b"
+          },
+          {
+            "type": "container",
+            "x": 15,
+            "y": 7,
+            "decor_id": "crate",
+            "loot_pools": [
+              "storage_tools"
+            ]
+          }
+        ]
+      },
+      "identity": "Exact UTF-8 bytes authored, saved and byte-checked reopened through packaged controls; -text prevents normalization."
+    }
+  },
+  "environment": {
+    "path": "workbench/docs/evidence/w5l/environment.json",
+    "sha256": "273b8859bf52a0867b0ab0c9525733a4f956e3db2a7a6338d3fc8a060a74edee"
+  },
+  "inventory": {
+    "path": "workbench/docs/evidence/w5l/decor-inventory.json",
+    "sha256": "333ccff010a7687fd1e6660cbab7421ebe6e6e19c9f340c862bfa403f6c6a02c"
+  },
+  "observations": {
+    "path": "workbench/docs/evidence/w5l/observations.json",
+    "sha256": "f06c55effa2365eea7f1a8a1d9d43733bb24d4b2bf7576d628a59a03a9ebf0db"
+  },
+  "gates": {
+    "path": "workbench/docs/evidence/w5l/gates.json",
+    "sha256": "55c2a2da6b78167b957aee409faf1f0113a7bf60bc55df4d27aabdae4a6d8212"
+  },
+  "preservation": {
+    "path": "workbench/docs/evidence/w5l/preservation.json",
+    "sha256": "47598c35be88d7c1369e5f971cc4fce91b678a5d0f8557b15e762875a0976787"
+  },
+  "package": {
+    "resonance-workbench.exe": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "44c6e6c08ee40b092ddde00bf5bfe16b94d004ddccf566b9faa6f25c0177ed96"
+    },
+    "bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "af28cabf168fefb801b4192ce7fb253d2b2e826dc43994c8d7e66872cd3f44ba"
+    }
+  },
+  "runtime": {
+    "worker/bridge.py": {
+      "path": "workbench/worker/bridge.py",
+      "sha256": "69d276cc2cc69d3992395901eb549106582997f10c9d14b5f090aab9b6c02653"
+    },
+    "worker/runtime/python.exe": {
+      "path": "workbench/worker/runtime/python.exe",
+      "sha256": "bf1b03022cadfc18049a7f0ecf1f3134c7676fcb6ff6c6941ae7f77e21285c73"
+    },
+    "worker/runtime/python311._pth": {
+      "path": "workbench/worker/runtime/python311._pth",
+      "sha256": "c76be49a913db57efc322b4c77ae5ed282e78285a69a70441e011529241507ce"
+    },
+    "worker/requirements.lock": {
+      "path": "workbench/worker/requirements.lock",
+      "sha256": "17cd05554346febe141934ef7757e42d71f91880d2303051196fda0d50d278a7"
+    }
+  },
+  "source_hashes": {
+    "roguelike/data/decoratives.json": {
+      "working_sha256": "387466fed1e323d269ef3c9bcba1e3efb3cf691b97c48c7c08e736db99f697a5",
+      "committed_sha256": "6551cb2fe585e325efd9c69c2509affef3041e9bff9d965fa06e1aa754729c62"
+    },
+    "roguelike/data/generation/authored_submap_selection.json": {
+      "working_sha256": "5a25ff794d4f95795ad2d7f8d636ada72f7005bbec0ba9b155455e162939e010",
+      "committed_sha256": "5a25ff794d4f95795ad2d7f8d636ada72f7005bbec0ba9b155455e162939e010"
+    },
+    "roguelike/docs/AUTHORED_SUBMAP_SELECTION.md": {
+      "working_sha256": "73eefcb68d7aac5c3e54189df4f20a47d93d4fb71cc96c294973877679bfc85e",
+      "committed_sha256": "73eefcb68d7aac5c3e54189df4f20a47d93d4fb71cc96c294973877679bfc85e"
+    },
+    "roguelike/docs/DECORATIVES.md": {
+      "working_sha256": "7c8c212f0aa6c00f8dec8292f447c568376239c089219af9e4b702de0f7e2aa5",
+      "committed_sha256": "7c8c212f0aa6c00f8dec8292f447c568376239c089219af9e4b702de0f7e2aa5"
+    },
+    "roguelike/docs/RECIPE_AUTHORING.md": {
+      "working_sha256": "4504a4aad1195d399118bedcba339ae455d14a9b1f74c69f142b30930cdaa58e",
+      "committed_sha256": "4504a4aad1195d399118bedcba339ae455d14a9b1f74c69f142b30930cdaa58e"
+    },
+    "roguelike/docs/ROOM_TEST_RUNTIME.md": {
+      "working_sha256": "f1d19dd5fa30ea2cee124a5f191f33580f17716641a17535b336a41c02b59ffa",
+      "committed_sha256": "f1d19dd5fa30ea2cee124a5f191f33580f17716641a17535b336a41c02b59ffa"
+    },
+    "roguelike/docs/STRUCTURE_AUTHORING.md": {
+      "working_sha256": "166a6778e4590109c653c17dd2f929d823c06b14e91beb8d9963f6d130d5bf03",
+      "committed_sha256": "166a6778e4590109c653c17dd2f929d823c06b14e91beb8d9963f6d130d5bf03"
+    },
+    "roguelike/engine/crafting.py": {
+      "working_sha256": "9918f2700d60febb881cd4fd61a834476ae175fdeef36e85a3eaeaecd585ff8a",
+      "committed_sha256": "a17804bdc42943500d82d2250fc02114ea554ab97ca642d09c5d45a0a20a45b7"
+    },
+    "roguelike/engine/data_loader.py": {
+      "working_sha256": "b4da68e7fa96eeeb9d84fed66fcaa2fc2bf94cf6464276a17d1e8d5d0dd67f38",
+      "committed_sha256": "57472c51da21d1dbba6633a563d8236b1fbd02f510a405d645f808876a5f24fb"
+    },
+    "roguelike/engine/engine.py": {
+      "working_sha256": "06ae1ad0e9920ce8fba3975ba3f846f4d0a4c5041ce41e0471860c5d6d1b5d83",
+      "committed_sha256": "06ae1ad0e9920ce8fba3975ba3f846f4d0a4c5041ce41e0471860c5d6d1b5d83"
+    },
+    "roguelike/engine/room_authoring.py": {
+      "working_sha256": "fa13cead6af19cfccb60480870c57e29bcdd5e8120884b95e11db68341cba1f7",
+      "committed_sha256": "3b5a168a32d998c999b8d4b0e84d9e9e18c601e67d821699519f42cd8f297771"
+    },
+    "roguelike/engine/room_test_diagnostics.py": {
+      "working_sha256": "d309cc9d6fc85502dfd320b575230db1ecf31f83d3cabe7b11e5524e2e496bb3",
+      "committed_sha256": "d309cc9d6fc85502dfd320b575230db1ecf31f83d3cabe7b11e5524e2e496bb3"
+    },
+    "roguelike/engine/save_manager.py": {
+      "working_sha256": "19e244226a5f8117318595a8431b6694a8777c153ecc855f127e147fa912741b",
+      "committed_sha256": "28628c17329f66b962d1cef09843e60c0b184ac2474c9667c2de8e481da94842"
+    },
+    "roguelike/engine/scene_generation.py": {
+      "working_sha256": "5acc7c8c0229a3b9bf77f850f68f00ef382f758f9c83dcbda998dba34492477f",
+      "committed_sha256": "83dfc5c35a9628793d3992598e46b438cc62d4debaa5cabb0f38ae162e2442ba"
+    },
+    "roguelike/engine/vine_system.py": {
+      "working_sha256": "f1119dcc9685d4a3a4bc36561822cbcc4bc567852da018d571cf184903028362",
+      "committed_sha256": "f1119dcc9685d4a3a4bc36561822cbcc4bc567852da018d571cf184903028362"
+    },
+    "roguelike/generation/access.py": {
+      "working_sha256": "e865d289be5175daace01f9d52f3d1b663a527d10f8d157d63c9dcd1f4a6476b",
+      "committed_sha256": "e865d289be5175daace01f9d52f3d1b663a527d10f8d157d63c9dcd1f4a6476b"
+    },
+    "roguelike/generation/authored_decor.py": {
+      "working_sha256": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52",
+      "committed_sha256": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52"
+    },
+    "roguelike/generation/authored_rooms.py": {
+      "working_sha256": "dbafc4358676b33d0b6def773d5c5e35b7c0c0a329accd2ec7fc95cc99474316",
+      "committed_sha256": "c8a03a7e7fcfa4fb42a52ae6604edd5c702025c54636e6206dd9e195452705aa"
+    },
+    "roguelike/generation/decor_utils.py": {
+      "working_sha256": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93",
+      "committed_sha256": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93"
+    },
+    "roguelike/generation/local_gen.py": {
+      "working_sha256": "5169e86ed0daa58bfbb2dd2bc6357187809ca9b9aafb7b5edbc7704cab5b2c13",
+      "committed_sha256": "08ef2e7cb35d6cf87e8bd19db2a13916cba0dbab6a075fe7c56419d3a6c75b6b"
+    },
+    "roguelike/generation/spawn_specs.py": {
+      "working_sha256": "8ed1075dc6511c7dcc696d60a4acf8e53032160df53516f9bdc9fb786f802349",
+      "committed_sha256": "8ed1075dc6511c7dcc696d60a4acf8e53032160df53516f9bdc9fb786f802349"
+    },
+    "roguelike/generation/structure_contract.py": {
+      "working_sha256": "f31bf7baf675eca81b9120de01f960f9b3e92e3335c5de93a00e8550f3e5eef3",
+      "committed_sha256": "f31bf7baf675eca81b9120de01f960f9b3e92e3335c5de93a00e8550f3e5eef3"
+    },
+    "roguelike/generation/structure_preview.py": {
+      "working_sha256": "f6a714c072172dae4739103e738f400671ed25c475fb20be200854fbfd2e8f82",
+      "committed_sha256": "61e1a492bd215ac2789a47978c5013222dda1c0264f892d4b8d6391866aa5e6e"
+    },
+    "roguelike/rendering/craft_screen.py": {
+      "working_sha256": "520e383b1972ce9f0e0588dd90db4b0553e6c113cde350bf0478474e1da26a67",
+      "committed_sha256": "520e383b1972ce9f0e0588dd90db4b0553e6c113cde350bf0478474e1da26a67"
+    },
+    "roguelike/rendering/renderer.py": {
+      "working_sha256": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08",
+      "committed_sha256": "e718b44430670d60ddd6db7ec245520bfe5f7fb7cfb56712a5504055b6e786c6"
+    },
+    "roguelike/room_test.py": {
+      "working_sha256": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603",
+      "committed_sha256": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603"
+    },
+    "tools/critical_fix_regressions/tests/test_furnished_rooms_w5l.py": {
+      "working_sha256": "e2bb1e25e30aac4fa4925e95a37d0acab719373b20ab083981ec74b3f3f2518c",
+      "committed_sha256": "1c9249dd784a38ed920aa74d48553ec09c67f0c62565e3f14f5d3d96818313de"
+    },
+    "workbench/README.md": {
+      "working_sha256": "22703408b112f9e1b942623dd1e89dc27ebd384971f752db453d16fabdf1b4c3",
+      "committed_sha256": "22703408b112f9e1b942623dd1e89dc27ebd384971f752db453d16fabdf1b4c3"
+    },
+    "workbench/scripts/capture-furnishing-evidence.mjs": {
+      "working_sha256": "d1c9cbac12cbfd941d9094e37ba771f1a0769663cf5a000dd2072aa8fd677b81",
+      "committed_sha256": "d1c9cbac12cbfd941d9094e37ba771f1a0769663cf5a000dd2072aa8fd677b81"
+    },
+    "workbench/scripts/furnishing-inventory.py": {
+      "working_sha256": "bce3b4e923eda2b40cba1b3ffce1823580e6c76ae9c48e1bfc84ec934185a635",
+      "committed_sha256": "bce3b4e923eda2b40cba1b3ffce1823580e6c76ae9c48e1bfc84ec934185a635"
+    },
+    "workbench/scripts/furnishing-persistence.py": {
+      "working_sha256": "bc4dec9fae251a3486c1c0cc761a1225363243a1348c56dc9262ff6ab531f5ad",
+      "committed_sha256": "bc4dec9fae251a3486c1c0cc761a1225363243a1348c56dc9262ff6ab531f5ad"
+    },
+    "workbench/scripts/run-furnishings.mjs": {
+      "working_sha256": "cd1358b508512ed2b856650d74598767a7043147a328c4b68fc34d2549c61ae4",
+      "committed_sha256": "cd1358b508512ed2b856650d74598767a7043147a328c4b68fc34d2549c61ae4"
+    },
+    "workbench/scripts/w5l-preservation.py": {
+      "working_sha256": "d432930fdd1b370d1f73ee61404d45305f67da787a50e11192537a2e8e8edc88",
+      "committed_sha256": "d432930fdd1b370d1f73ee61404d45305f67da787a50e11192537a2e8e8edc88"
+    },
+    "workbench/scripts/w5l-readback.py": {
+      "working_sha256": "297cdbddede8c7268963882cd2ee154d023161b3e925b58cc40a2f9dfff89d12",
+      "committed_sha256": "297cdbddede8c7268963882cd2ee154d023161b3e925b58cc40a2f9dfff89d12"
+    },
+    "workbench/scripts/w5l-receipt.py": {
+      "working_sha256": "391cb42907007430dce61ca5291afe89f6e6eb3395fdcf0ff1009884190de1bd",
+      "committed_sha256": "391cb42907007430dce61ca5291afe89f6e6eb3395fdcf0ff1009884190de1bd"
+    },
+    "workbench/src-tauri/src/authoring.rs": {
+      "working_sha256": "166e9e8bb79695e863d38248bd65c9b596c10045bd0afb4f8e3a770667452b95",
+      "committed_sha256": "166e9e8bb79695e863d38248bd65c9b596c10045bd0afb4f8e3a770667452b95"
+    },
+    "workbench/src-tauri/src/main.rs": {
+      "working_sha256": "90dff25133b73b4e9341ea8e5feb4adb91d6eea4d8c3a89631f794ff1f6a1492",
+      "committed_sha256": "90dff25133b73b4e9341ea8e5feb4adb91d6eea4d8c3a89631f794ff1f6a1492"
+    },
+    "workbench/src-tauri/src/room_test.rs": {
+      "working_sha256": "b740700af1eeb98b6a255bceb5ea61c53abc784ca75f52637be38d3bc3c8e953",
+      "committed_sha256": "394620f34cf3c69e863b3bd080e4316884f2ee070181fd7152d5058bf636433c"
+    },
+    "workbench/src/LayoutCanvas.tsx": {
+      "working_sha256": "7b052d228c0ae5a5524b70ae2dc900720b87d6b43d5aa374ad72c2ca5f02375f",
+      "committed_sha256": "7b052d228c0ae5a5524b70ae2dc900720b87d6b43d5aa374ad72c2ca5f02375f"
+    },
+    "workbench/src/LayoutEditor.tsx": {
+      "working_sha256": "525751ff3a7ad2c3b50d4a3dbdbd86dcd3e81e904cad7a4352767cfc3e800a3b",
+      "committed_sha256": "525751ff3a7ad2c3b50d4a3dbdbd86dcd3e81e904cad7a4352767cfc3e800a3b"
+    },
+    "workbench/src/RoomControls.tsx": {
+      "working_sha256": "c4af83c873cd494ef34fdc371228ee0014d842863f7c183a7409e48dbb8550df",
+      "committed_sha256": "c4af83c873cd494ef34fdc371228ee0014d842863f7c183a7409e48dbb8550df"
+    },
+    "workbench/src/content.ts": {
+      "working_sha256": "697663e16e62e8fd626881ff3cc958d61f9d076720ea1f34ca6038b2d3f1b35d",
+      "committed_sha256": "697663e16e62e8fd626881ff3cc958d61f9d076720ea1f34ca6038b2d3f1b35d"
+    },
+    "workbench/src/layout.ts": {
+      "working_sha256": "7d20d9e8b5580b90cb42da659c58c067d5cdb8385012e5b6c1f1047fb7918c77",
+      "committed_sha256": "7d20d9e8b5580b90cb42da659c58c067d5cdb8385012e5b6c1f1047fb7918c77"
+    },
+    "workbench/src/protocol.ts": {
+      "working_sha256": "7d1ddd4541a4a2be12d1ec8ecec6290e06c9bdeebc9471f90d4a8a6c636ccf20",
+      "committed_sha256": "7d1ddd4541a4a2be12d1ec8ecec6290e06c9bdeebc9471f90d4a8a6c636ccf20"
+    },
+    "workbench/src/room.test.ts": {
+      "working_sha256": "b720f60dd65b2d3e8839a35be58b7b9099f494d72f10a44edb0b1c7a522fc909",
+      "committed_sha256": "b720f60dd65b2d3e8839a35be58b7b9099f494d72f10a44edb0b1c7a522fc909"
+    },
+    "workbench/worker/bridge.py": {
+      "working_sha256": "69d276cc2cc69d3992395901eb549106582997f10c9d14b5f090aab9b6c02653",
+      "committed_sha256": "20db1cc413534df6f015b6dee45aa4e6230d5805981656a4449cfacfe8af210d"
+    },
+    "workbench/worker/test_bridge.py": {
+      "working_sha256": "b3c9a57ecc7ea0a1602fb2e613533d57958f15d939dfea83fde3a9b006d2611f",
+      "committed_sha256": "b3c9a57ecc7ea0a1602fb2e613533d57958f15d939dfea83fde3a9b006d2611f"
+    },
+    "workbench/worker/test_furnishings.py": {
+      "working_sha256": "769d7c98da31f177f8e6da759090310aae4cbc3d2b5008a38df84a6cfdfd3fc1",
+      "committed_sha256": "769d7c98da31f177f8e6da759090310aae4cbc3d2b5008a38df84a6cfdfd3fc1"
+    }
+  },
+  "captured_game_inputs": {
+    "roguelike/data/decoratives.json": "387466fed1e323d269ef3c9bcba1e3efb3cf691b97c48c7c08e736db99f697a5",
+    "roguelike/data/generation/authored_submap_selection.json": "5a25ff794d4f95795ad2d7f8d636ada72f7005bbec0ba9b155455e162939e010",
+    "roguelike/engine/crafting.py": "9918f2700d60febb881cd4fd61a834476ae175fdeef36e85a3eaeaecd585ff8a",
+    "roguelike/engine/data_loader.py": "b4da68e7fa96eeeb9d84fed66fcaa2fc2bf94cf6464276a17d1e8d5d0dd67f38",
+    "roguelike/engine/engine.py": "06ae1ad0e9920ce8fba3975ba3f846f4d0a4c5041ce41e0471860c5d6d1b5d83",
+    "roguelike/engine/room_authoring.py": "fa13cead6af19cfccb60480870c57e29bcdd5e8120884b95e11db68341cba1f7",
+    "roguelike/engine/room_test_diagnostics.py": "d309cc9d6fc85502dfd320b575230db1ecf31f83d3cabe7b11e5524e2e496bb3",
+    "roguelike/engine/save_manager.py": "19e244226a5f8117318595a8431b6694a8777c153ecc855f127e147fa912741b",
+    "roguelike/engine/scene_generation.py": "5acc7c8c0229a3b9bf77f850f68f00ef382f758f9c83dcbda998dba34492477f",
+    "roguelike/engine/vine_system.py": "f1119dcc9685d4a3a4bc36561822cbcc4bc567852da018d571cf184903028362",
+    "roguelike/generation/access.py": "e865d289be5175daace01f9d52f3d1b663a527d10f8d157d63c9dcd1f4a6476b",
+    "roguelike/generation/authored_decor.py": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52",
+    "roguelike/generation/authored_rooms.py": "dbafc4358676b33d0b6def773d5c5e35b7c0c0a329accd2ec7fc95cc99474316",
+    "roguelike/generation/decor_utils.py": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93",
+    "roguelike/generation/local_gen.py": "5169e86ed0daa58bfbb2dd2bc6357187809ca9b9aafb7b5edbc7704cab5b2c13",
+    "roguelike/generation/spawn_specs.py": "8ed1075dc6511c7dcc696d60a4acf8e53032160df53516f9bdc9fb786f802349",
+    "roguelike/generation/structure_contract.py": "f31bf7baf675eca81b9120de01f960f9b3e92e3335c5de93a00e8550f3e5eef3",
+    "roguelike/generation/structure_preview.py": "f6a714c072172dae4739103e738f400671ed25c475fb20be200854fbfd2e8f82",
+    "roguelike/rendering/craft_screen.py": "520e383b1972ce9f0e0588dd90db4b0553e6c113cde350bf0478474e1da26a67",
+    "roguelike/rendering/renderer.py": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08",
+    "roguelike/room_test.py": "9950f8256054d37da17483dd798a9ee2d7f054629866b5c6ac73e9d54fe44603"
+  },
+  "native_runner_executed": {
+    "path": "workbench/scripts/run-furnishings.mjs",
+    "revision": "3c4bb19bed07c4b90e89bdc1bd321a2184c9b5eb",
+    "sha256": "cd1358b508512ed2b856650d74598767a7043147a328c4b68fc34d2549c61ae4",
+    "note": "This exact committed runner authored the useful-container fixture. Read-only supplementary screenshots use the same package; earlier pending-preview images are excluded."
+  },
+  "limits": [
+    "Controlled authored-room proof; no unaided discovery, normal-start pacing or balance claim.",
+    "Decor light_emit supplies existing secondary FOV, not new RGB lighting; only campfire_lit supplies preparation heat.",
+    "Already saved decor IDs/positions persist; current catalogue properties are not copied.",
+    "No wiki/reference rebuild, personal campaign migration, decor registry edits, new stations/fuel rules, selector expansion or enabled live profile."
+  ]
+}
