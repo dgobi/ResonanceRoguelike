@@ -62,7 +62,7 @@ results cannot install into a closed or replacement instance. Reserved publicati
 still refuses close/cancellation with BUSY. Reference return state names an actual
 origin token and retains its relation focus; closed/replaced origins are explicit.
 
-One `workspace_disk` sweep covers live registered and legacy documents. It reserves
+One `workspace_disk` sweep covers all live registered documents, including buildings. It reserves
 the existing operation slot, hashes conservative dependencies once, and reads
 individual files. It never overlaps or queues another sweep. Host installation
 checks epoch/token/revision/attempt; renderer delivery checks the captured local

@@ -375,7 +375,6 @@ export default function App() {
   const opening = useRef(new Map<string, Promise<void>>());
   function activateContent(token:string) { setActiveContent(token); }
   async function openContent(family:string,id:string,assetPath?:string,discard=false,reload=false,trailContext:ItemTrail|null=null,origin?:OpenDocument["origin"],poolTrail?:SourceTrail|null) {
-    if(family==="building" && assetPath){await refresh(assetPath);return;}
     const matches=assets.filter(a=>a.family_id === family && a.id === id && (!assetPath || a.path === assetPath)), asset=matches[0];
     if (!matches.length || matches.length !== 1 && !assetPath) { setError({code:"CONTENT_SOURCE",message:`${id} has ${matches.length} catalogue sources.`,remedy:"Select a specific source file to inspect ambiguity."}); return; }
     const existing=Object.values(contentRef.current).find(d=>d.document.path===asset.path);
@@ -659,7 +658,7 @@ export default function App() {
             <span className="eyebrow">THIS WORKSPACE</span>
             <p>Draft → validate → review → apply</p>
             <small>
-              Multiple pool, room, creature, item, recipe, text and typography drafts share tabs and recovery. Ordinary buildings retain their existing editor. Campaigns are never opened.
+              Building, pool, room, creature, item, recipe, text and typography drafts share tabs and recovery. Campaigns are never opened.
             </small>
           </section>
         </aside>
@@ -882,7 +881,7 @@ export default function App() {
             contentNavigation={{poolTrail:entry.poolTrail,returnLocation:entry.returnLocation,
               onPoolItem:(id,index,text,path)=>void openContent("item",id,undefined,false,false,{poolId:entry.selectedId,path,index,itemId:id,structure:entry.poolTrail},{token,label:`pool ${entry.selectedId} row ${index+1}`,focus:null,location:{text,index,itemId:id}}),selectedId:entry.selectedId,trail:entry.trail,relatedRoom:entry.document.family?.id==="assignment" && entry.origin ? contentDocuments[entry.origin.token]?.selectedId : undefined,
               onReturn:entry.origin ? ()=>returnToOrigin(entry):undefined,returnLabel:entry.origin ? `Return to ${entry.origin.label}`:undefined,
-              onPool:id=>void openPool(id,null,false,false,token),onOpen:(target,id,path)=>void openContent(target,id,path,false,false,null,{token,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}
+              onPool:id=>void openPool(id,null,false,false,token),onOpen:(target,id,path,location)=>void openContent(target,id,path,false,false,null,{token,location,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}
           <div hidden={!!activeContent}>{inspection?.document_token ? (
             <Authoring
               key={inspection.document_token}

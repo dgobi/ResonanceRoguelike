@@ -25,7 +25,7 @@ export function RecoveryPanel({open,onClose,onRestore,onError,refreshVersion}:{o
   if(!open)return null;
   return <div className="modal-shade"><section className="confirmation recovery-panel" role="dialog" aria-label="Recover drafts">
     <h2>Recover drafts</h2>
-    <p>Pool, room, creature, item, recipe, found-text and game typography drafts. Stored copies remain readable when the project or worker is unavailable. Recovery requires fresh validation before publication.</p>
+    <p>Building, pool, room, creature, item, recipe, found-text and game typography drafts. Stored copies remain readable when the project or worker is unavailable. Recovery requires fresh validation before publication.</p>
     <button onClick={()=>void refresh()} disabled={busy}>Refresh recovery list</button>
     {!rows.length && <p>No durable drafts in this recovery store.</p>}
     <div className="recovery-list">{rows.map(row=><button key={row.key} data-recovery-key={row.key} aria-current={selected?.key===row.key ? "true":undefined} onClick={()=>void select(row)} disabled={busy}>

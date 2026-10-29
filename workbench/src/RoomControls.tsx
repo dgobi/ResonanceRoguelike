@@ -1,3 +1,4 @@
+import {companionGoals,matchingGoals} from "./building";
 import {useEffect,useState} from "react";
 import {editItem, editDecor, resizeRoom, valueEdit, type Catalog, type Layout, type Special} from "./layout";
 
@@ -63,16 +64,17 @@ export function DecorFields({record,catalog,disabled,index,onEdit,onDelete}:{rec
  </fieldset>;
 }
 
-export function ItemFields({record,catalog,disabled,index,onEdit,onDelete}:{record:Special;catalog:Catalog;disabled:boolean;index:number;onEdit:Edit;onDelete:()=>void}) {
+export function ItemFields({record,catalog,disabled,index,onEdit,onDelete,surfaceDraft}:{record:Special;catalog:Catalog;disabled:boolean;index:number;onEdit:Edit;onDelete:()=>void;surfaceDraft?:string}) {
+ const [follow,setFollow]=useState(false);
  const [x,setX]=useState(String(record.x)),[y,setY]=useState(String(record.y)),[id,setId]=useState(String(record.item_id??""));
  const [binding,setBinding]=useState("text_id" in record),[text,setText]=useState(String(record.text_id??""));
- const carrier=catalog.items?.find(r=>r.id===id), valid=carrier?.resolved && [Number(x),Number(y)].every(Number.isInteger)&&x!==""&&y!==""&&(!binding||carrier.readable&&catalog.texts?.some(r=>r.id===text&&r.resolved));
+ const carrier=catalog.items?.find(r=>r.id===id), valid=carrier?.resolved && [Number(x),Number(y)].every(Number.isInteger)&&x!==""&&y!==""&&(!binding||(!!surfaceDraft||carrier.readable)&&catalog.texts?.some(r=>r.id===text&&r.resolved));
  return <fieldset disabled={disabled}><legend>Direct item · one actual factory object</legend>
   <label>Item ID<select aria-label="Marker item ID" value={id} onChange={e=>setId(e.target.value)}>{!catalog.items?.some(r=>r.id===id)&&<option value={id}>{id} · missing</option>}{catalog.items?.map(r=><option key={r.id} value={r.id} disabled={!r.resolved}>{r.id} · {r.name} · {r.path}{!r.resolved?" · ambiguous / unsupported":""}{r.readable?" · readable":""}</option>)}</select></label>
   <label>Source X<input aria-label="Item source X" type="number" value={x} onChange={e=>setX(e.target.value)}/></label><label>Source Y<input aria-label="Item source Y" type="number" value={y} onChange={e=>setY(e.target.value)}/></label>
   <label><input aria-label="Override readable text" type="checkbox" checked={binding} onChange={e=>setBinding(e.target.checked)}/>Override text_id on this carrier</label>
   {binding&&<label>Saved text<select aria-label="Marker text ID" value={text} onChange={e=>setText(e.target.value)}><option value="">Choose saved text…</option>{!catalog.texts?.some(r=>r.id===text)&&text&&<option value={text}>{text} · missing</option>}{catalog.texts?.map(r=><option key={r.id} value={r.id} disabled={!r.resolved}>{r.id} · {r.name} · {r.path}{!r.resolved?" · ambiguous":""}</option>)}</select></label>}
-  <p>{binding?carrier?.readable?"Explicit carrier retained; the actual placed readable instance receives this text_id.":"This carrier is inert. Choose a saved readable carrier whose constructed on_use is read, or remove the override.":"No record text override. The carrier keeps its definition's default behavior/binding."} Underground placement does not substitute text_item_map carriers.</p>
-  <button disabled={!valid} onClick={()=>onEdit(s=>editItem(s,index,{x:Number(x),y:Number(y),item_id:id,...(binding?{text_id:text}:{})}),"Move / edit item")}>Apply item edit</button><button onClick={onDelete}>Delete item</button>
+  {surfaceDraft?<><p>Declared item {id}; effective produced carrier {binding?(catalog.text_item_map?.[text]??'letter'):id}; text binding {binding?text:'definition default'}. Surface map_text=True resolves explicit bindings through text_item_map with letter fallback. Validate the actual produced readable.</p><label><input aria-label="Move matching item goals" type="checkbox" checked={follow} onChange={e=>setFollow(e.target.checked)}/>Move matching item/readable goals in this same command</label><p>Companion proposal: {matchingGoals(surfaceDraft,record).map(i=>`placement.targets[${i}] → (${x}, ${y})`).join('; ')||'No exact kind/coordinate matches'}.</p></>:<p>{binding?carrier?.readable?"Explicit carrier retained; the actual placed readable instance receives this text_id.":"This carrier is inert. Choose a saved readable carrier whose constructed on_use is read, or remove the override.":"No record text override. The carrier keeps its definition's default behavior/binding."} Underground placement does not substitute text_item_map carriers.</p>}
+  <button disabled={!valid} onClick={()=>onEdit(s=>editItem(surfaceDraft&&follow?companionGoals(s,record,[Number(x),Number(y)]):s,index,{x:Number(x),y:Number(y),item_id:id,...(binding?{text_id:text}:{})}),"Move / edit item")}>Apply item edit</button>{!surfaceDraft&&<button onClick={onDelete}>Delete item</button>}
  </fieldset>;
 }

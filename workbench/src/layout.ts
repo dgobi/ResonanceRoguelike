@@ -5,6 +5,7 @@ import type { Diagnostic } from "./protocol";
 export type Cell = [number, number];
 export type Layer = "terrain" | "decor" | "specials";
 export type Catalog = {
+  text_item_map?: Record<string,string>;
   terrain: Record<string, { walkable: boolean; transparent: boolean }>;
   decor: Record<
     string,
@@ -32,6 +33,7 @@ export type Layout = {
   layers: string[];
   legend: Record<string, string | null>;
   decor_layer?: (string | null)[][];
+  decor_limitation?: string;
   special_tiles?: Special[];
   legend_weights?: Record<string, unknown>;
   player_start?: { x: number; y: number };
@@ -97,7 +99,7 @@ export function layoutModel(text: string): {
     };
   // Current g2-3 accepts an array of rows, with only string/null cells. Preserve
   // historical array/object cells exactly and make them inspect-only.
-  if (
+  const unsupportedDecor = (
     r.decor_layer !== undefined &&
     (!Array.isArray(r.decor_layer) ||
       r.decor_layer.length !== h ||
@@ -107,12 +109,7 @@ export function layoutModel(text: string): {
           row.length !== w ||
           row.some((v) => v !== null && typeof v !== "string"),
       ))
-  )
-    return {
-      model: null,
-      reason:
-        "Unsupported decor shape retained in Source. g2-3 requires nested rows of ID/null cells; no values were converted.",
-    };
+  );
   if (
     r.special_tiles !== undefined &&
     (!Array.isArray(r.special_tiles) ||
@@ -133,7 +130,7 @@ export function layoutModel(text: string): {
       reason:
         "Resolve special coordinates/record shapes in Source to resume visual editing.",
     };
-  return { model: { ...r, width: w, height: h }, reason: "" };
+  return { model: { ...r, width: w, height: h, ...(unsupportedDecor ? {decor_layer:undefined,decor_limitation:"Unsupported decor representation retained in Source; terrain/records remain editable; decor painting and resize are locked."} : {}) }, reason: "" };
 }
 
 export function appendValue(source:string,path:(string|number)[],value:unknown):string {
@@ -291,6 +288,7 @@ export function paint(
       if (row.join("") !== model.layers[y])
         source = stringCharacters(source, ["layers", y], row.join(""));
   } else {
+    if(model.decor_limitation)throw Error(model.decor_limitation);
     if (!model.decor_layer) {
       if (value === null || !unique.length) return source;
       source = valueEdit(
@@ -459,6 +457,8 @@ export function diagnosticCell(
 ): { cell: Cell; layer: Layer } | null {
   if (!model) return null;
   if (d.source_xy) return { cell: d.source_xy, layer: d.layer || "terrain" };
+  const placed=d.field.match(/^placement\.(entrances|targets)\[(\d+)\]/);
+  if(placed){const rows=placed[1]==="entrances"?model.placement?.entrances:model.placement?.targets;const r=rows?.[Number(placed[2])];if(r)return {cell:[r.x,r.y],layer:"terrain"};}
   const special = d.field.match(/^special_tiles\[(\d+)\]/);
   if (special) {
     const s = model.special_tiles?.[Number(special[1])];

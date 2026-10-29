@@ -30,7 +30,7 @@ class VisualTests(unittest.TestCase):
         raw["placement"]["targets"][2]["x"]=2
         raw["unknown_metadata"]={"nested":[[None,"keep"],[True,3]]}
         draft=json.dumps(raw,indent=2)+"\n";dest=ASSET.replace("apothecary_a","apothecary_w2_furnished")
-        r=invoke("preview_draft",asset=dest,draft=draft,seed=20261023)["result"]
+        r=invoke("preview_draft",source_asset=ASSET,asset=dest,draft=draft,seed=20261023)["result"]
         self.assertTrue(r["valid"],r["diagnostics"])
         p=r["preview"];ox,oy=p["origin"]
         self.assertEqual(p["terrain"][oy+3][ox+3],"worn_stone")
@@ -62,12 +62,12 @@ class VisualTests(unittest.TestCase):
         raw["decor_layer"][14][58]="dried_herbs"
         dest=ASSET.replace("apothecary_a","w2_rectangular")
         draft="\ufeff"+json.dumps(raw,indent=2).replace("\n","\r\n")+"\r\n"
-        r=invoke("preview_draft",asset=dest,draft=draft)["result"]
+        r=invoke("preview_draft",source_asset=ASSET,asset=dest,draft=draft)["result"]
         self.assertTrue(r["valid"],r["diagnostics"]);p=r["preview"];self.assertEqual(p["origin"],[10,13])
         self.assertEqual(p["terrain"][28][68],"floor");self.assertEqual(p["terrain"][28][69],"grass")
         self.assertFalse(p["access_verified"]);self.assertIn("access unverified",p["context"])
         raw["decor_layer"][0][0]=["dried_herbs"]
-        bad=invoke("preview_draft",asset=dest,draft=json.dumps(raw))["result"]
+        bad=invoke("preview_draft",source_asset=ASSET,asset=dest,draft=json.dumps(raw))["result"]
         self.assertFalse(bad["valid"]);self.assertIsNone(bad["preview"])
 
     def test_preview_denies_other_routes_paths_and_duplicate_identity(self):
@@ -77,8 +77,8 @@ class VisualTests(unittest.TestCase):
             self.assertFalse(invoke("preview_draft",asset=asset,draft="{}")["ok"])
         with tempfile.TemporaryDirectory(prefix="w2-data-") as directory:
             root=data_fixture(directory);before=(root/ASSET).read_bytes()
-            result=invoke("preview_draft",root=root,asset=ASSET.replace("apothecary_a","new_variant"),draft=before.decode())["result"]
-            self.assertFalse(result["valid"]);self.assertIn("DUPLICATE_ID",[d["code"] for d in result["diagnostics"]])
+            result=invoke("preview_draft",root=root,source_asset=ASSET,asset=ASSET.replace("apothecary_a","new_variant"),draft=before.decode())["result"]
+            self.assertFalse(result["valid"]);self.assertIn("VARIANT_ID",[d["code"] for d in result["diagnostics"]])
             self.assertEqual((root/ASSET).read_bytes(),before)
 
 if __name__=="__main__":unittest.main(verbosity=2)

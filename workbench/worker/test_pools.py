@@ -71,7 +71,7 @@ class PoolTests(unittest.TestCase):
             (root / pool_path).write_text(draft, encoding="utf-8")
             source = json.loads((root / BUILDING).read_bytes()); source["id"] = "apothecary_w3a_chain"
             source["special_tiles"][0]["loot_pools"] = ["w3a_chain"]
-            v = invoke("preview_draft", root=root, asset=BUILDING.replace("apothecary_a", source["id"]), draft=json.dumps(source), seed=20261023)["result"]
+            v = invoke("preview_draft", root=root, source_asset=BUILDING, asset=BUILDING.replace("apothecary_a", source["id"]), draft=json.dumps(source), seed=20261023)["result"]
             self.assertTrue(v["valid"], v["diagnostics"])
             p = v["preview"]; ox, oy = p["origin"]
             container = next(c for c in p["containers"] if (c["x"], c["y"]) == (ox + 1, oy + 1))
@@ -81,7 +81,7 @@ class PoolTests(unittest.TestCase):
             self.assertEqual((root / BUILDING).read_bytes(), (ROOT / BUILDING).read_bytes())
             # A later duplicate cannot silently redirect a building's pool link.
             (root / "roguelike/data/loot_pools/w3a_duplicate.json").write_text(draft, encoding="utf-8")
-            bad = invoke("preview_draft", root=root, asset=BUILDING.replace("apothecary_a", source["id"]), draft=json.dumps(source))["result"]
+            bad = invoke("preview_draft", root=root, source_asset=BUILDING, asset=BUILDING.replace("apothecary_a", source["id"]), draft=json.dumps(source))["result"]
             self.assertFalse(bad["valid"])
             self.assertIn("POOL_SOURCE", [d["code"] for d in bad["diagnostics"]])
 

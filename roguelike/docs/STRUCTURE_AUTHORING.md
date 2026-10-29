@@ -1557,3 +1557,107 @@ scenes, open no campaigns and do not install a policy. Zero shortcuts remains a
 new G9 world with a disabled resolved result. Saved G8/G9 worlds keep their actual
 resolved roads and visited state. The building painter and G5–G8 workflows remain
 supported and separately exercised by the complete G9 release coordinator.
+
+## W5P surface-building documents
+
+Workbench registers `building` / `surface-building-1` on the existing
+`ordinary_building` route. Immediate single-object
+`data/buildings/<supported-category>/<safe-id>.json` sources are admitted by original
+format/route/identity, not a preview verdict or the 58 shipped IDs. Plazas, entrance
+layouts, arrays and nested sources are outside write authority. Same-ID edits keep
+exact ID/path; deliberate variants require a distinct case-insensitively unique ID
+matching a new filename beside the source. Source/path aliases outside the displayed
+list also block publication. Invalid editable values in an admitted source remain
+repairable using a bounded authoring dependency snapshot; candidate publication and
+game startup still require the complete strict catalogue.
+
+Building, pool and other independent drafts share one keyed document lifecycle.
+Explorer/reference/return opens focus the existing owner. Source, properties,
+painting, placed records and placement controls share exact-source undo/redo.
+Recovery retains exact text, including invalid JSON and unfinished target intent;
+it never restores a review. Save one dependency at a time, then validate the building
+again. Parked drafts never overlay saved dependencies or form a grouped transaction.
+
+The surface geometry controls resize from a fixed top-left anchor within 80 × 43.
+Growing extends right/bottom with an existing glyph; explicit resizing alone crops
+terrain. Significant spaces, escaping, BOM/line-ending policy, absent dimensions,
+unknown keys and unrelated spans remain intact. Declared dimensions update together.
+Active `decor_layer` contains full saved IDs/null: retained cells remain, extensions
+are null, and omission remains absent until an author paints. A crop cannot discard
+non-null decor or strand records, entrance spans, targets or supported coordinate
+metadata. Unknown coordinate-bearing metadata yields an operation limitation;
+unsupported decor locks only decor-dependent operations. South/east declarations
+are not moved on growth: correct their invalid edge and terrain deliberately.
+
+Legend controls add/rebind one character and report how many cells change meaning.
+Removing a mapping requires no retained cells or inactive `legend_weights` reference.
+Ordinary-building null terrain preserves the underlying scene terrain. It does not
+use underground initial-wall semantics. `legend_weights`, `player_start`, `facing`
+and `rotatable` remain inactive here. `district_weights` still belongs to the older
+district-selection consumer and does not edit current shared-plan membership.
+
+Direct item and container controls retain unrelated record metadata and order.
+Containers retain ordered/repeated saved pools and their existing independent rolls.
+Surface direct readables use `populate(map_text=True)`: an explicit text binding
+selects `text_item_map[text_id]` with the existing `letter` fallback. The declared
+item can therefore differ from the effective produced carrier. The inspector and
+actual receipt show both. Reference-only items do not gain definition-editing rights.
+Saved direct/effective item references use unique-source, unowned factory and
+existing ITEM_STATE output checks; W5O pool dependency checks also cover retained
+weighted-container alternatives and larger saved pools. Scene and weighted records
+remain inspectable/production-validated. Surface creature/direct-decor creation is
+not exposed. Deferred body/stele records retain their publication refusal.
+
+Placement controls deliberately create a missing version-one scaffold or edit the
+profile. Scaffold values are authored proposals; most native fields are required,
+not implicit defaults. Eligibility contexts are separate from explicit selection
+membership. Entrances retain ID, source x/y, outward normal, full width, main/service
+role and required flag. N/S spans advance positive X; E/W spans advance positive Y.
+Every span cell and goal is selectable on the authored overlay. Matching container
+or item/readable goals can move with their exact record in one explicit command.
+Deletion lists matching goals and offers an explicit companion removal; otherwise
+retained goals can fail validation. No goal is silently retargeted.
+
+Every distinct permitted quarter-turn/mirror combination (up to eight) goes through
+`placement.transform`, the real compiler, ordinary stamper, population/factories and
+game movement/interaction predicates. Legacy `flip_v` is a separate behavior. All
+required entrance span cells and required native goals are checked from the exterior
+approach of the required entry selected by main role, then deterministic ID. Optional
+goals stay optional. Legal remote profiles with only optional entrances still check
+construction/transforms but disclose access unverified. No-profile sources retain a
+limited direct preview; no entry is invented and no room return stair is required.
+A profile/transform preview is separate from actual lot fit and road connectivity.
+
+Native goals retain exact declared coordinates/kinds. Items can relocate through
+the existing consumer; source, transformed and realized positions remain visible,
+and a failed required declared goal is not moved to match the result. Direct record
+observations bind actual population-receipt objects at realized coordinates, never
+a coincidental same-ID object. Required access failures and the direct-container
+access gate block publication; observations create no extra required native goals.
+Failures, cancellations, edits and saved-dependency changes revoke review authority.
+Final publication repeats every orientation against exact reviewed bytes and fresh
+saved dependencies, then byte-checks reopen through the shared writer.
+
+These are revealed initial production previews, not FOV, ordinary use, player safety,
+natural discovery, selection frequency or balance evidence. Moving/resizing/rotating
+can change position-derived loot with the same seed. A separate controlled
+`planned_preview`/`tools/structure_authoring.py --planned` run can demonstrate real
+selection, fitting, transform and materialization using a disposable in-memory role
+injection while preserving unrelated candidates. It is not saved registration.
+
+Same-ID consumed building, placement, pool, item/factory or other recorded dependency
+changes may reject an already selected pending planned surface through
+`placement.dependencies` / `check_dependencies`. Restore matching definitions or
+start a fresh world: no replanning/migration is performed. Inactive structure
+metadata/formatting keeps its existing semantic dependency behavior. Already
+generated owned surfaces retain saved physical maps, contents, transfers and state;
+this does not freeze every external definition lookup. A missing required owned
+cache still refuses replacement generation/loot. The W5O pending authored-room
+example does not override this planned-surface gate.
+
+A new building ID retains the old definition and changes no explicit
+`settlement_profiles.json`, POI or compound membership. Legacy category-folder pools
+can discover the new file. Preserving the old building under a different ID does
+not insulate it from later same-ID changes to shared pools/items. No canonical
+example pack, world rewrite, selection editor, surface play launcher or wiki rebuild
+is part of this milestone.

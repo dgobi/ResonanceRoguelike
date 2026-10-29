@@ -151,7 +151,13 @@ def main(argv=None):
             expectations=read_document(args.access) if args.access else None
             reports=[]
             with contextlib.redirect_stdout(log):
-                if args.orientations:
+                if args.orientations and route=='ordinary_building':
+                    from generation.building_preview import orientations
+                    if 'placement' not in raw:raise GenerationError('--orientations requires an explicit placement profile')
+                    checked,problems=orientations(raw,data,seed=args.seed,path=str(source),category=category)
+                    reports=checked['orientations']
+                    if problems:raise GenerationError('; '.join(p['message'] for p in problems))
+                elif args.orientations:
                     from generation.placement import transform,NORMALS,entrance_cells
                     if 'placement' not in raw:raise GenerationError('--orientations requires an explicit placement profile')
                     for rotation in raw['placement']['rotations']:

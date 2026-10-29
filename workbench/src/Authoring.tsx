@@ -89,6 +89,7 @@ export function Authoring({
   const view = content ? contentViews[content.id] : undefined;
   const variantOnly = content && (contentProblem || !sourceOperations(content).includes("edit"));
   const creature = document.route === "creature_definition";
+  const building = content?.id==="building";
   const submap = document.route === "authored_submap";
   const writable = !(content || creature || submap) || document.editable && (!content || !familyProblem(content));
   const revocation = useRef<Promise<unknown>>(Promise.resolve());
@@ -206,8 +207,8 @@ export function Authoring({
     // WebView textarea events may repeat the same normalized CRLF value on
     // focus changes. A no-op must not start another acknowledgement/render loop.
     if (text === latest.current && nextIntent.variant===intent.current.variant && nextIntent.variantId===intent.current.variantId) return;
-    if (!visual && pool) history.current.record(latest.current, text, "Edit pool Source / properties");
-    if (!visual && !pool) {
+    if (!visual && (pool || building)) history.current.record(latest.current, text, "Edit Source / properties");
+    if (!visual && !pool && !building) {
       history.current.clear();
       gesture.current = null;
     }
@@ -387,10 +388,10 @@ export function Authoring({
               : busy
                 ? "Wait for the active request."
                 : "";
-  const roomContext=content?.id==="room" ? content.context : null;
-  const roomCandidate=verdict?.family?.id==="room" ? verdict.family.context : null;
+  const roomContext=content?.id==="room" || content?.id==="building" ? content.context : null;
+  const roomCandidate=verdict?.family?.id==="room" || verdict?.family?.id==="building" ? verdict.family.context : null;
   const spatial:LayoutProps={draft,authoredSubmap:submap,sourcePath:target,catalog:roomCandidate?.catalog||roomContext?.catalog||document.catalog,
-    disabled:!writable?"Read-only source or unsupported room shape.":!editing?"Begin edit to shape this room.":disk?.changed?"Disk changed: reload or reconcile in Source before editing.":busy.includes("applying")?"Publication in progress.":"",
+    disabled:!writable?"Read-only source or unsupported room shape.":!editing?"Begin edit to shape this structure.":disk?.changed?"Disk changed: reload or reconcile in Source before editing.":busy.includes("applying")?"Publication in progress.":"",
     previewDisabled:!writable||!!disk?.changed||pendingEdit,diagnostics:verdict?.diagnostics||(!dirty?document.diagnostics:[]),
     preview:verdict?.preview||null,diskPreview:disk?.changed||disk?.dependencies_changed||evidenceVersion!==dependencyVersion?null:roomContext?.preview||diskPreview,previewHash:verdict?.draft_sha256,
     previewBusy:!!busy,onPreview:()=>void validate(false),onCancel,onEdit:visualEdit,onGesture:canvasGesture,onUndo:()=>historyStep(false),onRedo:()=>historyStep(true),
@@ -409,7 +410,7 @@ export function Authoring({
         <button disabled={!!busy} onClick={()=>void recoverReopen()}>Retry verified reopen</button>
       </div>}
       {content && canvasHost && createPortal(<div hidden={!active}><ContentEditor
-        spatial={submap?spatial:undefined}
+        spatial={submap||building?spatial:undefined}
         sourceFamily={content} variant={variant} active={active} cancelVersion={cancelVersion} beginRequest={beginRequest}
         family={verdict?.family || content} navigation={contentNavigation || {onOpen:()=>{}}}
         draft={draft} path={target} dirty={dirty} validated={!!verdict?.valid}
@@ -555,9 +556,10 @@ export function Authoring({
           </button>
         ))}
       </div>
+      {building&&editing&&<div className="edit-actions"><button disabled={!!disk?.changed||busy.includes("applying")||!history.current.undoStack.length} onClick={()=>historyStep(false)}>Undo document</button><button disabled={!!disk?.changed||busy.includes("applying")||!history.current.redoStack.length} onClick={()=>historyStep(true)}>Redo document</button></div>}
       {tab === "properties" && (
         <div className="typed-fields">
-          {!content && !creature && !submap && <label>
+          {(!content || building) && !creature && !submap && <label>
             Description
             <textarea
               aria-label="Description"
@@ -571,7 +573,7 @@ export function Authoring({
               onChange={(e) => property("description", e.target.value)}
             />
           </label>}
-          {!pool && !content && !creature && !submap && <label>
+          {!pool && (!content || building) && !creature && !submap && <label>
             Legacy corner-scatter weight
             <input
               aria-label="Legacy corner-scatter weight"
@@ -654,7 +656,7 @@ export function Authoring({
               </p>
               <p>{d.message}</p>
               <small>{d.correction}</small>
-              {!pool && (!content || submap) && !creature && diagnosticCell(d, layoutModel(draft).model) && (
+              {!pool && (!content || submap || building) && !creature && diagnosticCell(d, layoutModel(draft).model) && (
                 <button
                   onClick={() =>
                     setFocus(diagnosticCell(d, layoutModel(draft).model))

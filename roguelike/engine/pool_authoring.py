@@ -12,7 +12,7 @@ CONTRACT = "contextual-loot-1"
 PRODUCTION_ROUTE = "contextual_loot_pool"
 ROOT = "roguelike/data/loot_pools/"
 MAX_ROWS = 64
-PUBLICATION_NOTE = ("Saves definitions for the next catalogue and first construction of a scene, including an unvisited scene in an existing campaign. "
+PUBLICATION_NOTE = ("Saves definitions for the next catalogue and fresh construction. Pending planned surfaces retain selected semantic dependencies: changed consumed pools/items can reject construction until matching definitions are restored or a fresh world is started. "
     "Generated containers retain their saved physical contents and state; taking or consuming loot persists. Variants change no container reference. "
     "Reset uses the immutable capture; Test latest saved captures current saved dependencies.")
 LIMITATIONS = ("Definition/source validation and unowned factory/persistence checks only; no sample, acquisition or gameplay-use proof. "

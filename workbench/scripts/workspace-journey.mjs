@@ -9,8 +9,8 @@ export async function workspaceJourney(page,root,output,receipt) {
   const paths=["roguelike/data/items/components/wood_bundle.json","roguelike/data/items/components/clay_pot.json",
     "roguelike/data/recipes/bile_coating.json","roguelike/data/recipes/w5c_recipe_source.json",
     "roguelike/data/texts/lab/lab_note_primary_a.json","roguelike/data/texts/lab/lab_note_primary_b.json"];
-  const legacy="roguelike/data/buildings/commercial/workshop_b.json";
-  const originals=new Map(await Promise.all([...paths,legacy].map(async p=>[p,await readFile(resolve(root,p))])));
+  const building="roguelike/data/buildings/commercial/workshop_b.json";
+  const originals=new Map(await Promise.all([...paths,building].map(async p=>[p,await readFile(resolve(root,p))])));
   const b=name=>page.getByRole("button",{name,exact:true}), editor=()=>page.locator('[data-testid="authoring"]:visible');
   const eb=name=>editor().getByRole("button",{name,exact:true});
   const visible=selector=>page.locator(`${selector}:visible`);
@@ -85,8 +85,8 @@ export async function workspaceJourney(page,root,output,receipt) {
   assert(await eb("Validate draft").isDisabled());assert(await b("Reload document").isDisabled());
   await page.evaluate(()=>window.w5c.releaseSweep());await idle();assert(!(await eb("Validate draft").isDisabled()));
   receipt.checks.push("a held real freshness response disables conflicting UI actions until release without queueing work");
-  await open(legacy);await eb("Begin edit").click();const legacyOriginal=await source();
-  await editor().locator("textarea.source-editor").fill(legacyOriginal+" \n");await editIdle();const legacyDraft=await source();
+  await open(building);await eb("Begin edit").click();const buildingOriginal=await source();
+  await editor().locator("textarea.source-editor").fill(buildingOriginal+" \n");await editIdle();const buildingDraft=await source();
   // Each editor and history stays mounted, including Source and variant fields.
   for(let index=0;index<paths.length;index++) {
     const path=paths[index];await tab(path);assert.equal(await source(),drafts.get(path));assert.equal(await editor().getByLabel("New variant ID").inputValue(),ids.get(path));
@@ -115,7 +115,7 @@ export async function workspaceJourney(page,root,output,receipt) {
     const recipeView=visible('[data-testid="recipe-editor"]');
     const details=recipeView.locator("details").filter({has:page.getByRole("button",{name:"clay_pot",exact:true,includeHidden:true})}).first();
     await details.locator("summary").click();const link=details.getByRole("button",{name:"clay_pot",exact:true});await link.click();
-    assert.equal(await source(),drafts.get(paths[1]));assert.equal(await page.locator("[data-document-tab]").count(),6);
+    assert.equal(await source(),drafts.get(paths[1]));assert.equal(await page.locator("[data-document-tab]").count(),7);
     await b(`Return to recipe ${JSON.parse(originals.get(recipe)).id}`).click();
     await page.waitForFunction(el=>document.activeElement===el,await link.elementHandle());
     assert.equal(await source(),drafts.get(recipe));
@@ -126,13 +126,13 @@ export async function workspaceJourney(page,root,output,receipt) {
   // Targeted prompts preserve the target and every other dirty file.
   await b("Close document").click();assert.match(await page.getByRole("dialog").innerText(),/clay_pot.json/);await b("Keep editing").click();assert.equal(await source(),drafts.get(paths[1]));
   await b("Reload document").click();await b("Keep editing").click();assert.equal(await source(),drafts.get(paths[1]));
-  await b("Close project").click();for(const path of [...paths,legacy])assert((await page.getByRole("dialog").innerText()).includes(path));await b("Keep editing").click();
+  await b("Close project").click();for(const path of [...paths,building])assert((await page.getByRole("dialog").innerText()).includes(path));await b("Keep editing").click();
   await tab(paths[5]);await b("Reload document").click();await b("Discard and continue").click();await page.getByRole("dialog",{name:"Unsaved draft"}).waitFor({state:"hidden"});await idle();
   assert.equal((await source()).replace(/\r\n/g,"\n"),originals.get(paths[5]).toString().replace(/\r\n/g,"\n"));
   const reloaded=await ipc("open_document",{asset:paths[5]});assert.notEqual(reloaded.result.document_token,tokens.get(paths[5]));
   assert.equal((await ipc("invalidate_document",{token:tokens.get(paths[5])})).error.code,"FILE_TRANSACTION_FAILED");
   await tab(paths[0]);await b("Close document").click();await b("Discard and continue").click();await page.locator(`[data-document-tab="${paths[0]}"]`).waitFor({state:"detached"});await idle();
-  assert.equal(await page.locator("[data-document-tab]").count(),5);
+  assert.equal(await page.locator("[data-document-tab]").count(),6);
   await open(paths[0]);const reopened=await ipc("open_document",{asset:paths[0]});assert.notEqual(reopened.result.document_token,tokens.get(paths[0]));
   assert((await ipc("validate_document",{token:tokens.get(paths[0]),draft:drafts.get(paths[0]),variantId:ids.get(paths[0])})).error);
   // Host refuses a transition onto another open owner even with valid hash.
@@ -173,11 +173,11 @@ export async function workspaceJourney(page,root,output,receipt) {
   await writeFile(resolve(root,paths[1]),Buffer.concat([originals.get(paths[1]),Buffer.from(" ")]));
   await tab(paths[1]);await editor().getByText("Externally changed · unsaved draft retained",{exact:true}).waitFor({timeout:15000});assert.equal(await source(),drafts.get(paths[1]));
   await writeFile(resolve(root,paths[1]),originals.get(paths[1]));
-  await b("Show structure").click();assert.equal(await source(),legacyDraft);
+  await tab(building);assert.equal(await source(),buildingDraft);
   await tab(paths[3]);await page.locator(".preview-pane").evaluate(el=>el.scrollTop=0);await page.screenshot({path:resolve(output,"six-documents.png")});
   await page.setViewportSize({width:1100,height:740});await tab(paths[1]);assert.equal(await source(),drafts.get(paths[1]));
   await tab(paths[3]);await page.locator(".preview-pane").evaluate(el=>el.scrollTop=0);
-  assert.equal(await page.locator("[data-document-tab]").count(),6);
+  assert.equal(await page.locator("[data-document-tab]").count(),7);
   await page.screenshot({path:resolve(output,"six-documents-minimum.png")});await page.setViewportSize({width:2560,height:1440});
   // Closing the actual origin yields an explicit unavailable-origin message.
   await validate();const details=visible('[data-testid="recipe-editor"]').locator("details").filter({has:page.getByRole("button",{name:"clay_pot",exact:true,includeHidden:true})}).first();
@@ -187,7 +187,7 @@ export async function workspaceJourney(page,root,output,receipt) {
   for(const [path,bytes] of originals)assert.deepEqual(await readFile(resolve(root,path)),bytes,path);
   receipt.checks.push("six independent file owners; exact invalid source; variant targets and undo/redo retained; aliases/repeated opens reuse tokens; shared-item references return to both recipe origins",
     "targeted close/reload keep/discard and obsolete-token rejection; destination owner collision; one reviewed/saved/reopened variant with deliberate recovery after reopen failure",
-    "individual external conflict and conservative freshness preserve drafts; legacy structure source remains byte-exact; unavailable closed reference origin is explicit");
+    "individual external conflict and conservative freshness preserve drafts; registered building source remains byte-exact; unavailable closed reference origin is explicit");
   // Leave no dirty confirmation for the harness's final project-close smoke.
   await b("Close project").click();await b("Discard and continue").click();await page.getByTestId("startup-ready").waitFor({state:"detached"});await idle();
   await b("Open directory").click();await idle();

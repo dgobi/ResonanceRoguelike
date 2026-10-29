@@ -1,3 +1,5 @@
+import {BuildingGeometry,PlacementControls,DeleteSurfaceRecord} from "./BuildingControls";
+import {entranceCells,matchingGoals,type Placement} from "./building";
 import { useMemo, useState } from "react";
 import { LayoutCanvas, type Tool } from "./LayoutCanvas";
 import { MapView } from "./MapView";
@@ -40,7 +42,7 @@ export type LayoutProps = {
   onError: (e: unknown) => void;
   focus: { cell: Cell; layer: Layer; index?:number } | null;
   onPool?: (id: string, index: number, record: Special) => void;
-  onLinked?: (family:string,id:string,path?:string)=>void;
+  onLinked?: (family:string,id:string,path?:string,location?:{text:string;index:number})=>void;
 };
 export function LayoutEditor(p: LayoutProps) {
   const parsed = useMemo(() => layoutModel(p.draft), [p.draft]),
@@ -61,8 +63,10 @@ export function LayoutEditor(p: LayoutProps) {
     [decor, setDecor] = useState("");
   const [runtimeCell, setRuntimeCell] = useState<Cell | null>(null);
   const [placing, setPlacing] = useState(false), [creatureId, setCreatureId] = useState("");
-  const [placementKind,setPlacementKind]=useState<"creature"|"item"|"container"|"decor">("creature"),[itemId,setItemId]=useState(""),[containerId,setContainerId]=useState("crate");
+  const [placementKind,setPlacementKind]=useState<"creature"|"item"|"container"|"decor">(p.authoredSubmap?"creature":"item"),[itemId,setItemId]=useState(""),[containerId,setContainerId]=useState("crate");
   const placementId=placementKind==="creature"?creatureId:placementKind==="item"?itemId:placementKind==="decor"?decor:containerId;
+  const [overlay,setOverlay]=useState("");
+  const [orientation,setOrientation]=useState(0);
   const [lastFocus, setLastFocus] = useState(p.focus);
   if (p.focus !== lastFocus) {
     setLastFocus(p.focus);
@@ -106,10 +110,11 @@ export function LayoutEditor(p: LayoutProps) {
   );
   function select(c: Cell) {
     setSelected(c);
-    if (p.authoredSubmap && placing && !disabled && placementId) {
+    if (placing && !disabled && placementId) {
       p.onEdit(source => placementKind==="creature"?addCreature(source,c,placementId):addRecord(source,c,placementKind,placementId), `Add ${placementKind}`);
       setSpecialIndex(specials.length); setPlacing(false); return;
     }
+    if(!p.authoredSubmap){const profile=m?.placement as Placement|undefined;const ei=profile?.entrances?.findIndex(e=>e&&entranceCells(e).some(([x,y])=>x===c[0]&&y===c[1]));const ti=profile?.targets?.findIndex(t=>t&&t.x===c[0]&&t.y===c[1]);setOverlay(ei!==undefined&&ei>=0?`entrances:${ei}`:ti!==undefined&&ti>=0?`targets:${ti}`:"");}
     const at = specials.map((s,i)=>({s,i})).filter(({s})=>s.x===c[0] && s.y===c[1]);
     const i = (at.find(({s})=>creatureEditable(s)) || at[0])?.i ?? -1;
     setSpecialIndex(i >= 0 ? i : null);
@@ -138,7 +143,8 @@ export function LayoutEditor(p: LayoutProps) {
       tool === "rectangle" ? "Rectangle fill" : "Brush stroke",
     );
   }
-  const shown = view === "draft" ? p.preview : p.diskPreview;
+  const frame = view === "draft" ? p.preview : p.diskPreview;
+  const shown = frame?.orientations ? frame.orientations[orientation] ?? frame.orientations[0] : frame;
   const at =
     selected && m
       ? {
@@ -262,8 +268,8 @@ export function LayoutEditor(p: LayoutProps) {
               Redo canvas
             </button>
           </div>
-          {p.authoredSubmap && <div className="layout-toolbar">
-            <label>Record kind<select aria-label="Placement kind" value={placementKind} onChange={e=>{setPlacementKind(e.target.value as typeof placementKind);setPlacing(false);}}>{["creature","item","container","decor"].map(k=><option key={k}>{k}</option>)}</select></label>
+          {<div className="layout-toolbar">
+            <label>Record kind<select aria-label="Placement kind" value={placementKind} onChange={e=>{setPlacementKind(e.target.value as typeof placementKind);setPlacing(false);}}>{(p.authoredSubmap?["creature","item","container","decor"]:["item","container"]).map(k=><option key={k}>{k}</option>)}</select></label>
             {placementKind==="creature"?<label>Existing creature<select aria-label="Placement creature" value={creatureId} disabled={!!disabled} onChange={e=>setCreatureId(e.target.value)}>
               <option value="">Choose creature…</option>{p.catalog?.creatures?.map(c=><option key={c.id} value={c.id} disabled={c.resolved===false}>{c.id} · {c.name} · {c.path}{c.resolved===false?" · ambiguous / unsupported":""}</option>)}
             </select></label>:placementKind==="item"?<label>Existing item<select aria-label="Placement item" value={itemId} disabled={!!disabled} onChange={e=>setItemId(e.target.value)}><option value="">Choose item…</option>{p.catalog?.items?.map(c=><option key={c.id} value={c.id} disabled={!c.resolved}>{c.id} · {c.name} · {c.path}{c.readable?" · readable":""}{!c.resolved?" · ambiguous / unsupported":""}</option>)}</select></label>:placementKind==="decor"?<label>Saved decor<select aria-label="Placement decor" value={decor} disabled={!!disabled} onChange={e=>{setDecor(e.target.value);setPlacing(false);}}><option value="">Choose furnishing…</option>{Object.entries(p.catalog?.decor??{}).map(([id,r])=><option key={id} value={id}>{id} · {r.name}{!r.supported?" · unavailable":""}</option>)}</select></label>:<label>Container decor<select aria-label="Placement container" value={containerId} disabled={!!disabled} onChange={e=>setContainerId(e.target.value)}>{Object.entries(p.catalog?.decor??{}).filter(([,r])=>r.container).map(([id,r])=><option key={id} value={id} disabled={r.resolved===false}>{id} · {r.path}{r.resolved===false?" · ambiguous":""}</option>)}</select></label>}
@@ -365,7 +371,7 @@ export function LayoutEditor(p: LayoutProps) {
                         disabled={id !== null && !p.catalog?.terrain[id]}
                       >
                         {JSON.stringify(g)} → {id ?? (p.authoredSubmap?"initial wall fill":"leave underlying terrain")}
-                        {!p.authoredSubmap && m?.legend_weights?.[g] ? " · weighted at runtime" : ""}
+                        {!p.authoredSubmap && m?.legend_weights?.[g] ? " · retained inactive legend_weights" : ""}
                       </option>
                     ))}
                   </select>
@@ -413,11 +419,10 @@ export function LayoutEditor(p: LayoutProps) {
               <p className="muted small">
                 {p.authoredSubmap ? "Placed records use source-array indices. Select overlapping records individually above. Generated arrival and physical stairs are reserved by the game." : <>Terrain leaves other layers intact. Decor replaces only the
                 selected native cell. A null terrain glyph retains the test
-                context’s ground. Weighted glyphs resolve in production preview.</>}
+                context’s ground. legend_weights remains inactive on this route.</>}
               </p>
               <p className="muted small">
-                Raw/property edits clear canvas history. Undo applies only to
-                complete visual operations since the last such edit.
+                Source, properties, canvas, records and placement controls share this document’s undo/redo history on the surface building route.
               </p>
             </div>
             <div className="cell-details">
@@ -446,15 +451,16 @@ export function LayoutEditor(p: LayoutProps) {
                       onClick={() => p.onPool?.(id, specialIndex, s)}>Open pool {id}</button>)}
                     <small>Declared draft references. Apply container edit before opening a changed selection.</small>
                   </div>}
-                  {p.authoredSubmap && <div className="source-links">{[["creature",s.creature_id,p.catalog.creatures],["item",s.item_id,p.catalog.items],["text",s.text_id,p.catalog.texts]].map(([family,id,choices])=>{const row=(choices as Catalog["items"])?.find(r=>r.id===id&&r.resolved!==false);return typeof id==="string"&&<button key={String(family)} disabled={!row||p.previewBusy} onClick={()=>p.onLinked?.(String(family),id,row?.path)}>Open linked {String(family)} {id}{!row?" · missing / ambiguous":""}</button>;})}</div>}
+                  {<div className="source-links">{[["creature",s.creature_id,p.catalog.creatures],["item",s.item_id,p.catalog.items],["text",s.text_id,p.catalog.texts]].map(([family,id,choices])=>{const row=(choices as Catalog["items"])?.find(r=>r.id===id&&r.resolved!==false);return typeof id==="string"&&<button key={String(family)} disabled={!row||p.previewBusy} onClick={()=>p.onLinked?.(String(family),id,row?.path,{text:p.draft,index:specialIndex})}>Open linked {String(family)} {id}{!row?" · missing / ambiguous":""}</button>;})}</div>}
                   {p.authoredSubmap && creatureEditable(s) ? <CreatureFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled}
                     onApply={value=>p.onEdit(source=>editCreature(source,specialIndex,value),"Move / edit creature")}
-                    onDelete={()=>{p.onEdit(source=>removeCreature(source,specialIndex),"Delete creature");setSpecialIndex(null);}} /> : p.authoredSubmap && recordKind(s)==="item" ? <ItemFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled} index={specialIndex} onEdit={p.onEdit} onDelete={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete item");setSpecialIndex(null);}}/> : p.authoredSubmap && recordKind(s)==="decor" ? <DecorFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled} index={specialIndex} onEdit={p.onEdit} onDelete={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete decor");setSpecialIndex(null);}}/> : containerEditable(s) ? (
+                    onDelete={()=>{p.onEdit(source=>removeCreature(source,specialIndex),"Delete creature");setSpecialIndex(null);}} /> : recordKind(s)==="item" ? <ItemFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled} surfaceDraft={!p.authoredSubmap?p.draft:undefined} index={specialIndex} onEdit={p.onEdit} onDelete={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete item");setSpecialIndex(null);}}/> : p.authoredSubmap && recordKind(s)==="decor" ? <DecorFields key={`${specialIndex}:${JSON.stringify(s)}`} record={s} catalog={p.catalog} disabled={!!disabled} index={specialIndex} onEdit={p.onEdit} onDelete={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete decor");setSpecialIndex(null);}}/> : containerEditable(s) ? (
                     <ContainerFields
                       key={`${specialIndex}:${JSON.stringify(s)}`}
                       record={s}
                       catalog={p.catalog}
                       followTargets={!p.authoredSubmap}
+                      goalIndices={!p.authoredSubmap?matchingGoals(p.draft,s):[]}
                       disabled={!!disabled}
                       onApply={(value, follow) =>
                         p.onEdit(
@@ -471,6 +477,7 @@ export function LayoutEditor(p: LayoutProps) {
                     </p>
                   )}
                   {p.authoredSubmap&&containerEditable(s)&&<button disabled={!!disabled} onClick={()=>{p.onEdit(source=>deleteRecord(source,specialIndex),"Delete container");setSpecialIndex(null);}}>Delete container</button>}
+                  {!p.authoredSubmap&&["item","container"].includes(recordKind(s))&&<DeleteSurfaceRecord draft={p.draft} record={s} index={specialIndex} disabled={!!disabled} onEdit={p.onEdit} onDeleted={()=>setSpecialIndex(null)}/>}
                   <details>
                     <summary>Complete source record</summary>
                     <pre className="raw">{JSON.stringify(s, null, 2)}</pre>
@@ -479,6 +486,7 @@ export function LayoutEditor(p: LayoutProps) {
               ) : null}
             </div>
           </div>
+          {!p.authoredSubmap&&m&&p.catalog&&<><BuildingGeometry key={`${m.width}:${m.height}`} model={m} draft={p.draft} catalog={p.catalog} disabled={!!disabled} onEdit={p.onEdit}/><PlacementControls draft={p.draft} disabled={!!disabled} onEdit={p.onEdit} selected={overlay} onSelect={(cell,kind,index)=>{setSelected(cell);setOverlay(`${kind}:${index}`);setTool("select");}}/></>}
           {p.authoredSubmap&&m&&p.catalog&&<RoomGeometry model={m} draft={p.draft} catalog={p.catalog} disabled={!!disabled} onEdit={p.onEdit}/>}
         </>
       ) : (
@@ -496,8 +504,10 @@ export function LayoutEditor(p: LayoutProps) {
               <button onClick={p.onCancel}>Cancel preview</button>
             </p>
           )}
+          {shown?.error&&<p className="notice warning">{shown.error}</p>}
+          {frame?.orientations&&<label>Production orientation<select aria-label="Production orientation" value={orientation} onChange={e=>{setOrientation(Number(e.target.value));setRuntimeCell(null);}}>{frame.orientations.map((r,i)=><option key={i} value={i}>{r.rotation}° · mirror {String(r.mirror)} · {r.passed?'passed':'failed'}</option>)}</select><small>Switching views never changes source coordinates or definitions. All permitted combinations are validated together; legacy flip_v is separate.</small></label>}
           <div className="layout-surface">
-            {shown ? (
+            {shown?.terrain ? (
               <MapView
                 preview={shown}
                 onCell={setRuntimeCell}
@@ -513,9 +523,10 @@ export function LayoutEditor(p: LayoutProps) {
               </div>
             )}
           </div>
-          {shown && (
+          {shown?.terrain && (
             <>
               <p className="muted">{shown.context}</p>
+              {!p.authoredSubmap&&<><p>Source coordinates → transformed coordinates → scene origin ({shown.origin.join(", ")}).</p><details open><summary>Realized direct records and native access</summary><pre className="raw" data-testid="building-production-records">{JSON.stringify({records:shown.population_receipts,record_access:shown.record_access,access:shown.access},null,2)}</pre></details></>}
               {p.authoredSubmap && <>
                 <p data-testid="scene-coordinates">Scene origin ({shown.origin.join(", ")}) · authored start ({shown.authored_start?.join(", ")}) · actual arrival ({shown.spawn.join(", ")}) · {shown.actors.length} instantiated actor(s).</p>
                 <table className="placement-actors"><thead><tr><th>Source record / creature</th><th>Source x,y</th><th>Scene x,y</th><th>Actual class / count</th></tr></thead><tbody>
@@ -590,11 +601,13 @@ function ContainerFields({
   disabled,
   onApply,
   followTargets=true,
+  goalIndices=[],
 }: {
   record: Special;
   catalog: Catalog;
   disabled: boolean;
   followTargets?:boolean;
+  goalIndices?:number[];
   onApply: (
     v: { x: number; y: number; decor_id: string; loot_pools: string[] },
     follow: boolean,
@@ -691,6 +704,7 @@ function ContainerFields({
         />
         Move matching container access targets with this record
       </label>}
+      {followTargets&&<p>Companion proposal: {goalIndices.map(i=>`placement.targets[${i}] → (${x}, ${y})`).join("; ")||"No exact matching goals"}. Other goals remain unchanged.</p>}
       <button
         className="primary full"
         disabled={!valid}

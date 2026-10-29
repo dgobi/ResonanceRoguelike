@@ -114,6 +114,7 @@ export type ScenePopulationReceipt={kind:string;record_id:string;source_index:nu
   item_id?:string|null;text_id?:string|null;text_override_present?:boolean;decor_id?:string|null;loot_pools?:string[]|null;relocated?:boolean;
   realized_decor?:{id:string;xy:Cell;blocks_movement:boolean;declared_blocks_sight:boolean;light_emit:number;cosmetic_fx?:string|null;interaction?:string|null;stationary_fire:boolean};creature_definition?:{id:string;sha256:string};objects:unknown[];actors:unknown[]};
 export type Preview = {
+  orientations?: Preview[]; rotation?:number; mirror?:boolean; error?:string; record_access?:unknown[];
   authored_start?: Cell | null;
   population_receipts?: ScenePopulationReceipt[];
   layout_contract?:string;

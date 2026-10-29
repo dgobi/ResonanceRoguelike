@@ -1,4 +1,4 @@
-//! Shared keyed content owners plus the legacy building; publication is one file.
+//! Shared keyed content owners; publication is one file.
 //! Renderer paths and validation verdicts never authorize publication.
 use super::*;
 use sha2::{Digest, Sha256};
@@ -32,6 +32,7 @@ pub fn item_authoring_path(source:&str)->bool {
         && !p[p.len()-1].eq_ignore_ascii_case("empty_water_skin.json")
 }
 pub fn content_root(source: &str) -> Option<&'static str> {
+    if relative_building(source).is_ok() { return Some("roguelike/data/buildings/"); }
     if pool_inspection_path(source) { return Some("roguelike/data/loot_pools/"); }
     if source == TYPOGRAPHY { return Some(TYPOGRAPHY); }
     if source == ASSIGNMENT { return Some(ASSIGNMENT); }
@@ -79,6 +80,7 @@ impl FamilyPolicy {
         if effective.iter().any(|op| !operations.contains(op))
             || (source.starts_with("roguelike/data/items/") && (id!="item" || route!="item_definition" || (!effective.is_empty() && !item_authoring_path(source))))
             || (pool_inspection_path(source) && (id!="pool" || route!="contextual_loot_pool" || contract!="contextual-loot-1" || (!is_pool(source) && !effective.is_empty())))
+            || (relative_building(source).is_ok() && (id!="building" || route!="ordinary_building" || contract!="surface-building-1"))
             || (is_submap(source) && (id != "room" || route != "authored_submap"))
             || (is_creature(source) && (id != "creature" || root != "roguelike/data/entities/creatures/")) { return None; }
         Some(Self { id:id.into(), route:route.into(), contract:contract.into(), descriptor:d.clone(), digest:digest.into(), root:root.into(), operations:effective })
@@ -311,10 +313,7 @@ fn read_source(path: &Path) -> Result<Vec<u8>, Failure> {
 fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure> {
     let state = host.inner.lock().unwrap();
     let doc = state
-        .document
-        .as_ref()
-        .into_iter()
-        .chain(state.content_documents.values())
+        .content_documents.values()
         .find(|d| d.token == token)
         .ok_or_else(|| {
             failure(
@@ -336,7 +335,7 @@ fn revoke(doc: &mut Document) {
     doc.review = None;
 }
 pub(super) fn revoke_all(state: &mut Session) {
-    for doc in state.document.iter_mut().chain(state.content_documents.values_mut()) { revoke(doc); }
+    for doc in state.content_documents.values_mut() { revoke(doc); }
 }
 #[cfg(test)]
 fn revoke_review(host: &Host, token: &str) {
@@ -530,7 +529,7 @@ pub fn acknowledge_reopen(app:tauri::AppHandle,host:tauri::State<'_,Host>,handof
     Ok(())
 }
 fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
-    state.document.as_mut().into_iter().chain(state.content_documents.values_mut()).find(|d| d.token == token)
+    state.content_documents.values_mut().find(|d| d.token == token)
 }
 fn envelope(result: Value) -> Value {
     json!({"protocol":PROTOCOL,"id":uuid::Uuid::new_v4().to_string(),"ok":true,"result":result,"host_elapsed_ms":0})
@@ -737,7 +736,7 @@ pub async fn open_document(
             if let Some(id)=handoff_id { state.handoffs.get_mut(&id).ok_or_else(unknown_document)?.replacement=Some(token); }
         }
         else {
-            state.document = Some(document);
+            return Err(failure("UNREGISTERED_DOCUMENT","Source has no registered owner.","Use read-only inspection for this route."));
         }
         Ok(response)
     })
@@ -1096,6 +1095,9 @@ enum Fault {
 }
 
 fn publish(root: &Path, doc: &Document, review: &Review, fault: Fault) -> Result<Value, Failure> {
+    if relative_building(&doc.relative).is_ok() && doc.family.as_ref().is_none_or(|f|f.id!="building" || f.route!="ordinary_building") {
+        return Err(failure("OPERATION_POLICY","Buildings require their registered owner.","Reopen the registered building."));
+    }
     if is_recipe(&doc.relative) && doc.family.as_ref().is_none_or(|f| f.id != "recipe" || f.root != "roguelike/data/recipes/") {
         return Err(failure("OPERATION_POLICY", "Recipe publication requires its registered source policy.", "Reopen the supported recipe."));
     }
@@ -1294,7 +1296,7 @@ fn sweep_disk(operation: &Operation, token: Option<&str>, stamp_fn: impl FnOnce(
     let (root, documents) = {
         let state = operation.host.inner.lock().unwrap();
         operation.check(&state)?;
-        let docs: Vec<_> = state.document.iter().chain(state.content_documents.values())
+        let docs: Vec<_> = state.content_documents.values()
             .filter(|d| token.is_none_or(|t| t == d.token)).cloned().collect();
         if token.is_some() && docs.is_empty() { return Err(unknown_document()); }
         (state.root.clone().ok_or_else(|| io_error("No project open."))?, docs)
@@ -1347,7 +1349,7 @@ mod tests {
         let (root,host,mut doc,mut review)=lifecycle_fixture(true);
         doc.family=FamilyPolicy::from_result(&family_result(&doc,"room",json!(["variant"])),&doc.relative);
         assert!(doc.family.is_some());
-        {let mut state=host.inner.lock().unwrap();state.document=None;state.content_documents.insert(file_key(&doc.relative),doc.clone());}
+        {let mut state=host.inner.lock().unwrap();state.content_documents.insert(file_key(&doc.relative),doc.clone());}
         let invalid="\u{feff}{\r\n \"room\": [\"λ\",";
         accept_edit(&host,&doc.token,1,invalid.into(),false,"".into()).unwrap();
         let unfinished=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();
@@ -1385,6 +1387,31 @@ mod tests {
         let response:Value=serde_json::from_slice(&output.stdout).expect("actual worker JSON");
         assert_eq!(response["ok"],true,"{response} {}",String::from_utf8_lossy(&output.stderr));
         response["result"].clone()
+    }
+    #[test]
+    fn two_building_owners_and_unrelated_draft_share_recovery_without_alias_owners() {
+        let (root,host,item,_)=lifecycle_fixture(false);
+        let mut buildings=vec![];
+        for (n,source) in ["roguelike/data/buildings/commercial/apothecary_a.json","roguelike/data/buildings/residential/house_small_a.json"].iter().enumerate() {
+            let result=actual_family_result("inspect",source,None,None);
+            let mut doc=item.clone();doc.relative=(*source).into();doc.token=format!("building-{n}");doc.original=result["raw"].as_str().unwrap().as_bytes().to_vec();doc.id=result["id"].as_str().map(str::to_owned);doc.family=FamilyPolicy::from_result(&result,source);doc.inspection=result.clone();doc.review=None;doc.accepted=None;
+            assert_eq!(doc.family.as_ref().unwrap().id,"building");
+            let path=root.path().join(source);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(path,&doc.original).unwrap();
+            host.inner.lock().unwrap().content_documents.insert(file_key(source),doc.clone());buildings.push(doc);
+        }
+        accept_edit(&host,&buildings[0].token,1,"{\"invalid\":".into(),true,"unfinished".into()).unwrap();
+        accept_edit(&host,&buildings[1].token,1,"{\"other\":[]}".into(),false,"".into()).unwrap();
+        accept_edit(&host,&item.token,1,"{\"unrelated\":".into(),false,"".into()).unwrap();
+        let store_root=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(store_root.path().into()).unwrap();
+        for doc in [&buildings[0],&buildings[1],&item] {
+            let accepted=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();store.write(&accepted).unwrap();store.release(&accepted.key());
+            let mut fresh=doc.clone();fresh.accepted=None;fresh.revision=0;
+            restore_claimed(&mut store,root.path(),&mut fresh,&accepted.key(),accepted.generation).unwrap();
+            assert_eq!(fresh.accepted.unwrap().draft,accepted.draft);assert!(fresh.review.is_none());
+        }
+        let state=host.inner.lock().unwrap();assert_eq!(state.content_documents.len(),3);
+        assert!(owner_collision(&state,&buildings[0].relative.to_uppercase(),None).is_err());drop(state);
+        assert!(accept_edit(&host,"renderer-invented-owner",1,"{}".into(),false,"".into()).is_err());
     }
     #[test]
     fn two_pool_owners_and_unrelated_draft_share_recovery_without_alias_owners() {
@@ -1713,12 +1740,12 @@ mod tests {
         for doc in &docs[1..] {assert_eq!(session_doc(&host,&doc.token).unwrap().1.original,doc.original);}
     }
     #[test]
-    fn workspace_sweep_shares_stamp_refuses_overlap_and_includes_legacy() {
+    fn workspace_sweep_shares_stamp_refuses_overlap_and_includes_buildings() {
         let (root,host,docs)=workspace_fixture();
         let stamp=input_stamp(root.path()).unwrap();
         {let mut state=host.inner.lock().unwrap();
             for doc in state.content_documents.values_mut(){doc.evidence_inputs=Some(stamp.clone());}
-            let mut legacy=docs[0].clone();legacy.token="legacy".into();state.document=Some(legacy);
+            let mut legacy=docs[0].clone();legacy.token="legacy".into();legacy.relative="roguelike/data/buildings/commercial/second.json".into(); fs::create_dir_all(root.path().join("roguelike/data/buildings/commercial")).unwrap(); fs::write(root.path().join(&legacy.relative),&legacy.original).unwrap(); state.content_documents.insert(file_key(&legacy.relative),legacy);
         }
         let op=Operation::begin(&host).unwrap();let mut scans=0;
         let result=sweep_disk(&op,None,|r|{scans+=1;assert_eq!(Operation::begin(&host).err().unwrap().code,"BUSY");input_stamp(r)}).unwrap();
@@ -1865,7 +1892,7 @@ mod tests {
         if !submap { doc.family = FamilyPolicy::from_result(&family_result(&doc,"item",json!(["edit","variant"])),&doc.relative); }
         let host = Host::default();
         { let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().into()); state.ready = true;
-          if submap { state.document = Some(doc.clone()); } else { state.content_documents.insert(file_key(&doc.relative), doc.clone()); } }
+          state.content_documents.insert(file_key(&doc.relative), doc.clone()); }
         (root, host, doc, review)
     }
     #[test]
@@ -1993,7 +2020,7 @@ mod tests {
         fs::create_dir_all(path.parent().unwrap()).unwrap();
         let original = b"{\r\n  \"id\":\"sample\", \"unknown\":[[1,2]]\r\n}".to_vec();
         fs::write(path, &original).unwrap();
-        let doc = Document {
+        let mut doc = Document {
             token: "trusted".into(),
             relative: relative.into(),
             original,
@@ -2008,6 +2035,10 @@ mod tests {
             accepted: None,
             edit_sequence: 0,
         };
+        let mut result=family_result(&doc,"building",json!(["edit","variant"]));
+        result["route"]=json!("ordinary_building");result["family"]["descriptor"]["production_route"]=json!("ordinary_building");
+        result["family"]["contract"]=json!("surface-building-1");
+        doc.family=FamilyPolicy::from_result(&result,&doc.relative);
         let review = Review {
             token: "reviewed".into(),
             draft: "{\"id\":\"sample\",\"unknown\":[[1,2]],\"description\":\"edited\"}".into(),
@@ -2022,6 +2053,7 @@ mod tests {
     fn submap_example_variant_only_and_interrupted_publication() {
         let (root, mut doc, mut review) = fixture();
         doc.relative = G17_EXAMPLE.into();
+        doc.family=None;
         let source = root.path().join(G17_EXAMPLE);
         fs::create_dir_all(source.parent().unwrap()).unwrap(); fs::write(&source, &doc.original).unwrap();
         fs::create_dir_all(root.path().join("roguelike/data/layouts")).unwrap();
@@ -2045,7 +2077,7 @@ mod tests {
     fn draft_revision_and_sidecar_changes_revoke_evidence() {
         let (root, mut doc, review)=fixture();
         doc.review=Some(review);let host=Host::default();
-        {let mut state=host.inner.lock().unwrap();state.root=Some(root.path().to_path_buf());state.document=Some(doc);}
+        {let mut state=host.inner.lock().unwrap();state.root=Some(root.path().to_path_buf());state.content_documents.insert(file_key(&doc.relative),doc);}
         advance_document(&host,"trusted").unwrap();
         let current=session_doc(&host,"trusted").unwrap().1;
         assert_eq!(current.revision,1);assert!(current.review.is_none());
@@ -2093,7 +2125,7 @@ mod tests {
         let host = Host::default();
         {
             let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().to_path_buf());
-            let mut a=recipe.clone(); a.token="building".into(); state.document=Some(a);
+            let mut a=recipe.clone(); a.token="building".into(); state.content_documents.insert("building".into(),a);
             let mut a=recipe.clone(); a.token="pool".into(); a.relative="roguelike/data/loot_pools/sample.json".into(); state.content_documents.insert(file_key(&a.relative),a);
             let mut a=recipe.clone(); a.token="item".into(); a.relative="roguelike/data/items/components/sample.json".into(); state.content_documents.insert(file_key(&a.relative),a);
             state.content_documents.insert(file_key(&recipe.relative),recipe.clone());
@@ -2136,7 +2168,7 @@ mod tests {
             let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().to_path_buf());
             let mut structure = item.clone(); structure.token = "building".into();
             let mut pool = item.clone(); pool.token = "pool".into(); pool.relative="roguelike/data/loot_pools/sample.json".into();
-            state.document = Some(structure); state.content_documents.insert(file_key(&pool.relative),pool); state.content_documents.insert(file_key(&item.relative), item);
+            state.content_documents.insert("building".into(),structure); state.content_documents.insert(file_key(&pool.relative),pool); state.content_documents.insert(file_key(&item.relative), item);
         }
         revoke_review(&host, "item");
         assert!(session_doc(&host, "item").unwrap().1.review.is_none());
@@ -2180,7 +2212,7 @@ mod tests {
         fs::write(&path, b"external change").unwrap();
         assert_eq!(publish(root.path(), &doc, &review, Fault::None).unwrap_err().code, "EXTERNAL_MODIFICATION_CONFLICT");
         fs::write(&path, &doc.original).unwrap();
-        review.variant = true; review.destination = "roguelike/data/items/components/new_item.json".into();
+        review.variant = true; review.destination = "roguelike/data/items/components/new_item.json".into(); review.draft=review.draft.replace("sample","new_item");
         publish(root.path(), &doc, &review, Fault::None).unwrap();
         assert_eq!(fs::read(&path).unwrap(), doc.original);
         assert!(publish(root.path(), &doc, &review, Fault::None).is_err());
@@ -2195,7 +2227,7 @@ mod tests {
         {
             let mut state = host.inner.lock().unwrap();
             state.root = Some(root.path().to_path_buf());
-            state.document = Some(doc);
+            state.content_documents.insert(file_key(&doc.relative),doc);
         }
         revoke_review(&host, "forged");
         assert!(session_doc(&host, "trusted").unwrap().1.review.is_some());
@@ -2213,7 +2245,7 @@ mod tests {
         {
             let mut state = host.inner.lock().unwrap();
             state.root = Some(root.path().to_path_buf());
-            state.document = Some(doc);
+            state.content_documents.insert(file_key(&doc.relative),doc);
             state.content_documents.insert(file_key(&pool.relative),pool.clone());
         }
         assert!(session_doc(&host, "trusted").is_ok());
@@ -2354,6 +2386,7 @@ mod tests {
         };
         review.variant = true;
         review.destination = "roguelike/data/buildings/commercial/variant.json".into();
+        review.draft=review.draft.replace("sample","variant");
         publish(root.path(), &updated, &review, Fault::None).unwrap();
         assert!(publish(root.path(), &updated, &review, Fault::None).is_err());
         assert_eq!(fs::read_dir(path.parent().unwrap()).unwrap().count(), 2);

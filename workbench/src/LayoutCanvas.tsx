@@ -1,3 +1,4 @@
+import {entranceCells,type Placement} from "./building";
 import { useEffect, useRef, useState } from "react";
 import {
   Application,
@@ -187,6 +188,10 @@ export function LayoutCanvas(props: Props) {
         if (p.authoredSubmap && m.player_start) {
           const {x,y}=m.player_start;
           specials.circle(x*TILE+8,y*TILE+8,6).stroke({width:1.5,color:0xffffff});
+        }
+        if(!p.authoredSubmap){const profile=m.placement as Placement|undefined;
+          if(Array.isArray(profile?.entrances))for(const e of profile.entrances.filter(e=>e&&Number.isInteger(e.x)&&Number.isInteger(e.y)))for(const [x,y] of entranceCells(e))specials.rect(x*TILE+1,y*TILE+1,TILE-2,TILE-2).stroke({width:2,color:e.required?0x78ecd1:0x7c93a1});
+          if(Array.isArray(profile?.targets))for(const t of profile.targets.filter(t=>t&&Number.isInteger(t.x)&&Number.isInteger(t.y)))specials.circle(t.x*TILE+8,t.y*TILE+8,5).stroke({width:2,color:t.required?0xf2d677:0x7c93a1});
         }
         warnings.clear();
         for (const [x, y] of p.problems) {

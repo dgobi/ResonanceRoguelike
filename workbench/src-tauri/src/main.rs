@@ -43,7 +43,6 @@ struct Session {
     ready: bool,
     discovered: std::collections::HashSet<String>,
     discovered_families: std::collections::HashMap<String, String>,
-    document: Option<authoring::Document>,
     content_documents: std::collections::HashMap<String, authoring::Document>,
     handoffs: std::collections::HashMap<String, authoring::Handoff>,
     applying: bool,
@@ -96,7 +95,6 @@ impl Host {
             state.ready = false;
             state.discovered.clear();
             state.discovered_families.clear();
-            state.document = None;
             state.content_documents.clear();
             state.handoffs.clear();
         }
@@ -580,7 +578,6 @@ async fn open_project(
             }
             startup::save(&config, &selection.root)?;
             state.pending_project = None;
-            state.document = None;
             state.content_documents.clear();
             state.handoffs.clear();
             response["result"]["project_selection"] = serde_json::to_value(selection).unwrap();
@@ -653,7 +650,7 @@ fn main() {
             if let tauri::WindowEvent::CloseRequested { api, .. } = event {
                 let host = window.state::<Host>();
                 let state = host.inner.lock().unwrap();
-                if state.applying || state.document.is_some() || !state.content_documents.is_empty() {
+                if state.applying || !state.content_documents.is_empty() {
                     api.prevent_close();
                     let _ = window.emit("authoring-close-requested", ());
                     return;

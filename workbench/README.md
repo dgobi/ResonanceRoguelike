@@ -64,20 +64,19 @@ publication/restart journey. See [W5E delivery](docs/W5E_DELIVERY.md) for eviden
 
 ## Work with several content files
 
-Open registered item, recipe, ordinary-text, typography, creature and room files from
+Open registered building, pool, item, recipe, ordinary-text, typography, creature and room files from
 the catalogue. The document strip shows each ID, file path and a dot for unsaved
 source. Opening the same file again, including through a reference, selects its
 existing draft. Switching documents preserves exact source (even invalid JSON),
 variant inputs, structured Undo/Redo, selected view/page and scroll position.
-Pool table, Source and property edits share history. Other families retain their documented history policies.
+Building canvas, records, placement, Source and property edits share history. Pool table, Source and property edits share history. Other families retain their documented history policies.
 
 **Close document** and **Reload document** affect the selected file only. A dirty
 registered file is named in the **Keep editing / Keep for Recovery and Close /
 Discard and continue** prompt. Keeping waits for its latest accepted checkpoint;
 a failed checkpoint keeps the document open. Reload reads
 disk deliberately; Close removes the open instance. A later open gets a new token.
-Project switch and application close list all dirty files, including legacy
-ordinary-building drafts. Cancellation preserves them.
+Project switch and application close list all dirty files, including ordinary-building drafts. Cancellation preserves them.
 
 Following either of two recipes to an item retains that recipe as the return
 destination and restores the initiating relation's focus. A closed or reloaded
@@ -841,7 +840,7 @@ catalog definition can block applying a draft until it is repaired. Discovery
 and raw source inspection remain available when the loader reports structural
 errors. Files over 1 MiB and unsafe destination names are outside W1 authoring.
 Beyond the direct-creature controls described above, other-family visual editing,
-general special creation/deletion, new legend definitions, transform tools, other
+other-route general special creation/deletion, transform authoring tools, other
 loot families, selection-profile changes, persistent edit history and automatic
 campaign migration remain outside W4C. Deferred physical specials
 are visible and preserved, but block a successful draft preview with an explicit
@@ -891,3 +890,33 @@ and definition-owned statistics have distinct activation boundaries. A source sa
 does not hot-reload a game, and a bag reduction decrease can leave an old owned
 load over capacity without losing objects. Reset retains its immutable capture;
 latest saved captures revised definitions.
+
+## W5P ordinary surface buildings
+
+Ordinary buildings now use the same keyed document owner, history, durable recovery,
+validation and single-file writer as the other registered families. Open two
+buildings and another definition without replacing drafts. Explorer/reference opens
+focus the existing source owner. Source can retain invalid text and unfinished
+variant intent across host restart; validate again after recovery.
+
+Use the surface canvas to paint terrain/fill/erase and saved full-ID decor, edit
+legend mappings, resize deliberately from the top-left, and add/move/delete direct
+items/readables and containers. Placement controls edit an explicit version-one
+profile, full entrance spans and access goals. Matching goal moves/deletions are
+explicit companion choices with a displayed proposal. Unknown records and metadata
+remain in Source. See [surface authoring](../roguelike/docs/STRUCTURE_AUTHORING.md#w5p-surface-building-documents).
+
+Preview draft checks every distinct permitted rotation/mirror combination using the
+actual game. Select an orientation to inspect source/transformed/scene coordinates,
+actual effective readable carriers, rolled contents and receipt-bound observations.
+A legacy source without a profile has a direct preview with access/transforms
+unverified. A remote optional-entry profile keeps this access limitation. These
+revealed initial previews certify neither lot fit/road connectivity nor play/FOV,
+natural selection or balance. `node scripts/run-buildings.mjs` executes the packaged
+journey in disposable data and a separate controlled planned-placement proof.
+
+Same-ID consumed building/pool/item revisions can reject a pending selected planned
+surface. Generated owned surfaces retain saved maps/contents/state; missing required
+owned caches still refuse regeneration. No migration, replanning or world-profile
+editor is added. A new variant changes no explicit membership, but legacy folder
+selection can discover it; shared dependencies remain shared.

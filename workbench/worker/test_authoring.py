@@ -49,7 +49,7 @@ class AuthoringTests(unittest.TestCase):
         result = invoke("validate_draft", asset=ASSET, draft=draft)["result"]
         self.assertTrue(result["valid"],result)
         self.assertEqual(result["draft_sha256"],hashlib.sha256(draft.encode()).hexdigest())
-        self.assertFalse(result["placement_verified"]); self.assertFalse(result["population_verified"])
+        self.assertTrue(result["placement_verified"]); self.assertTrue(result["population_verified"])
         cases = []
         r=copy.deepcopy(raw);r["legend"]["#"]="not_a_real_terrain";cases.append((r,"TERRAIN_USED"))
         r=copy.deepcopy(raw);r["width"]+=1;cases.append((r,"DIMENSION"))
@@ -72,17 +72,21 @@ class AuthoringTests(unittest.TestCase):
             original=(root/ASSET).read_bytes()
             source=json.loads(original);source["id"]="workshop_w1_test"
             dest="roguelike/data/buildings/commercial/workshop_w1_test.json"
-            r=invoke("validate_draft",root=root,asset=dest,draft=json.dumps(source))["result"]
+            r=invoke("validate_draft",root=root,source_asset=ASSET,asset=dest,draft=json.dumps(source))["result"]
             self.assertTrue(r["valid"],r);self.assertFalse((root/dest).exists())
             source["id"]="apothecary_b"
-            r=invoke("validate_draft",root=root,asset=dest,draft=json.dumps(source))["result"]
-            self.assertFalse(r["valid"]);self.assertIn("DUPLICATE_ID",[d["code"] for d in r["diagnostics"]])
+            r=invoke("validate_draft",root=root,source_asset=ASSET,asset=dest,draft=json.dumps(source))["result"]
+            self.assertFalse(r["valid"]);self.assertIn("VARIANT_ID",[d["code"] for d in r["diagnostics"]])
             (root/ASSET).write_text('{"broken":',encoding="utf-8")
             self.assertTrue(invoke("identify",root=root)["ok"])
             self.assertTrue(invoke("describe",root=root)["ok"])
             self.assertFalse(invoke("inspect",root=root,asset=ASSET)["result"]["valid"])
             r=invoke("validate_draft",root=root,asset=ASSET,draft=original.decode())["result"]
-            self.assertTrue(r["valid"],r)
-            self.assertEqual((root/ASSET).read_text(),'{"broken":')
+            self.assertFalse(r["valid"],r) # malformed original has no operation authority
+            damaged=json.loads(original);damaged['width']+=1
+            (root/ASSET).write_text(json.dumps(damaged),encoding="utf-8")
+            self.assertTrue(invoke("inspect",root=root,asset=ASSET)["result"]["editable"])
+            repaired=invoke("validate_draft",root=root,asset=ASSET,draft=original.decode())["result"]
+            self.assertTrue(repaired["valid"],repaired)
 
 if __name__ == "__main__": unittest.main(verbosity=2)

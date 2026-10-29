@@ -10,7 +10,7 @@ from generation.structure_contract import compile_structure, ELIGIBILITY
 from generation.access import reachable, enterable
 
 
-def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, path='<draft>', expectations=None, derive_access=False):
+def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, path='<draft>', expectations=None, derive_access=False, observe_receipts=False):
     from engine.item_factory import ItemFactory
     from engine.creature_factory import CreatureFactory
     from engine.scene_generation import populate, create_submap
@@ -30,7 +30,7 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
     factory,creatures=ItemFactory(data),CreatureFactory(data)
     if route=='ordinary_building':
         specs=_stamp_building_at(m,entry.definition,ox,oy,data.terrain,flip_v=flip_v,data=data)
-        actors=populate(data,factory,creatures,m,specs,map_text=True)
+        actors=populate(data,factory,creatures,m,specs,map_text=True,receipts=receipts)
     elif route=='plaza':
         _stamp_plaza_def(m,BuildingLoader.from_definition(entry.definition,'plaza'),ox,oy,data.terrain)
     elif route=='interior_entrance':
@@ -72,6 +72,10 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
     if spawn is not None: report['spawn']=list(spawn)
     report['access']=owned_access if derive_access else check_access(m,data,expectations,origin=(ox,oy),height=entry.height,flip_v=flip_v,spawn=spawn)
     report['passed']=all(row['passed'] for row in report['access']) and not report['occupant_diagnostics']
+    if route == 'ordinary_building' and observe_receipts:
+        # Private opt-in transient objects are consumed by the game-owned
+        # orientation adapter before JSON serialization.
+        report['_population_receipts']=receipts
     return report,m,actors
 
 

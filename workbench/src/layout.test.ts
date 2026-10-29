@@ -112,7 +112,7 @@ describe("native-layer visual authoring", () => {
       ["decor_layer", 2, 2],
       ["dried_herbs", { unknown: true }],
     );
-    expect(layoutModel(unsupported).reason).toMatch(/Unsupported decor shape/);
+    expect(layoutModel(unsupported).model?.decor_limitation).toMatch(/Unsupported decor representation/);
     expect(() => paint(unsupported, [[1, 1]], "decor", null)).toThrow();
     expect(JSON.parse(unsupported).decor_layer[2][2]).toEqual([
       "dried_herbs",

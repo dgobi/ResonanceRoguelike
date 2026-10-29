@@ -75,7 +75,9 @@ interaction, transfers and use. Save each dependency and room separately.
 | Activation boundary | Behavior |
 | --- | --- |
 | Source save | Changes definitions for the next catalogue, not an already running catalogue. |
-| First construction | A new catalogue uses current saved pools/items, including a pending scene in an existing campaign. |
+| Fresh construction | A new catalogue uses current saved pools/items. The W5O pending authored-room demonstration covers its room route. |
+| Pending planned surface | Its saved selected semantic closure is checked before construction. A same-ID consumed building, pool or item change can reject it with the existing changed-dependency diagnostic. Restore matching definitions or start a fresh world; no automatic replanning/migration. |
+| New building variant | Retains the old building identity and explicit memberships. Shared pool/item edits can still invalidate the old building's pending selected dependencies. Legacy category-folder selection can discover added building files. |
 | Generated container | Saved physical contents and closed/open/looted state remain authoritative. Opening/revisiting/loading never rerolls. |
 | Taken/consumed item | Exact transfers and consumption persist; removed items do not return. |
 | Existing physical item | Retains supported copied fields; established definition-owned combat/carrying properties keep their separate behavior. |

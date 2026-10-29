@@ -48,7 +48,10 @@ impl Record {
             || self.project.to_string_lossy().len()>4096 || self.generation==0 || self.generation>9_007_199_254_740_990
             || self.baseline.len()>MAX_DRAFT || self.draft.len()>MAX_DRAFT || self.variant_id.len()>128
             || self.contract.len()>100 || self.contract.is_empty() || self.descriptor_sha256.len()!=64
-            || !["pool","item","recipe","text","typography","creature","room","assignment"].contains(&self.family.as_str())
+            || !["building","pool","item","recipe","text","typography","creature","room","assignment"].contains(&self.family.as_str())
+            || ((self.family=="building" || self.source.starts_with("roguelike/data/buildings/")) &&
+                (self.family!="building" || crate::authoring::relative_building(&self.source).is_err()
+                 || self.published.as_ref().is_some_and(|p|crate::authoring::relative_building(&p.path).is_err())))
             || ((self.family=="pool" || self.source.starts_with("roguelike/data/loot_pools/")) &&
                 (self.family!="pool" || !crate::authoring::is_pool(&self.source)
                  || self.published.as_ref().is_some_and(|p|!crate::authoring::is_pool(&p.path))))
