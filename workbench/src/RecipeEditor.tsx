@@ -3,6 +3,7 @@ import { rowDefaults, type ContentFamily } from "./content";
 import { useMemo, useState } from "react";
 import { recipeModel, recipeRow, recipeValue } from "./recipe";
 import type { RecipeContext } from "./protocol";
+import { ConjunctionEditor } from "./ConjunctionEditor";
 
 export function RecipeEditor(p: {
   family: ContentFamily; draft: string; path: string; context?: RecipeContext; selectedId?: string; dirty: boolean; validated: boolean;
@@ -18,7 +19,8 @@ export function RecipeEditor(p: {
   const [tags, setTags] = useState<Record<string,string>>({});
   // This is only a UI guard using the game-owned capability's exclusion list.
   // Python independently rechecks current bytes; this is never a publication verdict.
-  const outside = cap?.excluded_fields.some(k => k in values) || (values.passive_processing !== undefined && values.passive_processing !== false);
+  const passive = values.passive_processing === true;
+  const outside = cap?.excluded_fields.some(k => k in values) || passive !== (record?.definition.passive_processing === true);
   const reason = p.disabled || parsed.reason || (!cap?.editable ? cap?.reason || "Capability unavailable." : outside ? "Not supported: current source has excluded recipe mechanics. Draft retained; inspect Source." : "");
   const evidenceCurrent = !p.evidenceStale && (!p.dirty || p.validated);
   const evidence = p.validated && evidenceCurrent ? record?.probe : null;
@@ -31,13 +33,13 @@ export function RecipeEditor(p: {
       <div className="edit-actions">{p.onReturn && <button onClick={p.onReturn} disabled={p.busy}>{p.returnLabel || "Return to item"}</button>}
         {p.busy && <button onClick={p.onCancel} disabled={p.disabled === "Publication in progress."}>Cancel authoring request</button>}</div></div>
     <p>{cap?.execution_class || "Unknown"} · {cap?.editable ? "Supported family" : "Not supported for writing"}</p>
-    <div className="tabs">{p.family.descriptor.views.map(key=>({"recipe-requirements":"Requirements",output:"Output","production-receipt":"Test requirements"})[key]).filter((v):v is string=>!!v).map(v => <button key={v} className={view === v ? "active" : ""} onClick={() => setView(v)}>{v}</button>)}<button onClick={p.onSource}>Show source</button></div>
+    <div className="tabs">{p.family.descriptor.views.map(key=>({"recipe-requirements":"Requirements","recipe-processing":"Preparation",output:"Output","production-receipt":"Test requirements"})[key]).filter((v):v is string=>!!v).map(v => <button key={v} className={view === v ? "active" : ""} onClick={() => setView(v)}>{v}</button>)}<button onClick={p.onSource}>Show source</button></div>
     {reason && <p className="notice warning" data-testid="recipe-disabled">{reason}</p>}
     <p className="notice">{p.context?.visibility}</p>
     {!evidenceCurrent && <p className="notice warning">Source or dependencies changed. Validate to refresh catalogue matches and requirement evidence; drafts are retained.</p>}
     {view === "Requirements" && <>
       {cap?.editable && <><div className="edit-actions"><button disabled={!!reason || !p.canUndo} onClick={p.onUndo}>Undo recipe</button><button disabled={!!reason || !p.canRedo} onClick={p.onRedo}>Redo recipe</button><small>Raw and variant-ID edits clear recipe history.</small></div>
-      <fieldset disabled={!!reason} className="item-properties"><legend>Immediate recipe properties</legend>
+      <fieldset disabled={!!reason} className="item-properties"><legend>Recipe properties · execution class fixed</legend>
         <ContractFields family={p.family} values={values} onChange={edit} />
       </fieldset></>}
       {!cap?.editable && <p className="asset-description">{String(values.description || "")}</p>}
@@ -57,8 +59,11 @@ export function RecipeEditor(p: {
           {cap?.editable && <div className="edit-actions"><label>Add {title.toLowerCase()}<select disabled={!!reason} aria-label={`New ${field} tag`} value={tags[field] || ""} onChange={e=>setTags({...tags,[field]:e.target.value})}><option value="">Choose tag ID</option>{options.map(r=><option key={r.id} value={r.id}>{r.label}</option>)}</select></label><button disabled={!!reason || !validRows || !tags[field]} onClick={()=>p.onEdit(s=>recipeRow(s,field,"add",-1,tags[field],rowDefaults(schema,tags[field])),"Add requirement")}>Add {field} row</button></div>}
         </section>;
       })}
-      {values.requires_single_item !== undefined && <><h3>Single-item conjunction · read-only</h3><pre className="raw">{JSON.stringify(values.requires_single_item,null,2)}</pre><p>All tags must hold on each physical item. List form uses one item; object form uses max_quantity (default 1).</p>{links("requires_single_item",0).map(m=><button key={m.path+m.pointer} disabled={p.busy} onClick={()=>p.onItem(m.id,m.path)}>{m.id}</button>)}</>}
+      <ConjunctionEditor family={p.family} value={values.requires_single_item} record={record} disabled={!!reason} current={evidenceCurrent} busy={p.busy} onItem={p.onItem} onEdit={p.onEdit}/>
     </>}
+    {view === "Preparation" && (passive ? <><p>Requires a stationary fire in addition to the declared conditions. Placement must pass the ordinary map, occupancy and warmth checks. Confirmation spends materials, retains tools and advances the first processing turn. Finished output is one floor object to collect.</p><fieldset disabled={!!reason}>
+      {Object.entries(p.family.descriptor.schema.properties || {}).filter(([,s])=>s["x-view"]==="Preparation").map(([key,s])=><label key={key}>{s.title}<ScalarControl schema={s} references={p.family.references} value={values[key]} disabled={key==="processing_decor"&&(values.processing_source || "drying")==="cooking"} onChange={v=>edit([key],v)}/>{values[key]===undefined&&<small>Absent in source{s.default!==undefined?` · effective default: ${s.default}`:""}</small>}<small>{s.description}</small>{key==="processing_decor"&&(values.processing_source || "drying")==="cooking"&&<small>Inactive for cooking: the fire is preserved and this marker is ignored.</small>}</label>)}
+      </fieldset><p>Confirmed work captures its output ID, duration, source, marker and completion text. Recipe revisions apply to later work in a fresh catalogue. Completion constructs the recorded output ID from that session's item catalogue.</p></> : <p>Immediate exchange uses the current inventory and advances no turn. This source has no passive preparation parameters.</p>)}
     {view === "Output" && <>
       <h3>Declared output</h3><code>{values.result_item !== undefined ? `result_item = ${JSON.stringify(values.result_item)}` : `result_tile = ${JSON.stringify(values.result_tile)}`}</code>
       {cap?.editable && <fieldset disabled={!!reason}><ContractFields family={p.family} values={values} view="Output" onChange={edit} /></fieldset>}
@@ -70,14 +75,14 @@ export function RecipeEditor(p: {
       <button disabled={p.busy || !cap?.editable || !!parsed.reason || !!outside} onClick={p.onProbe}>Validate and test exact recipe</button>
       <p>Builds synthetic disposable inventory from actual item definitions and explicit ambient records. No campaign is opened.</p>
       {evidence ? <><p>{evidence.scope}</p><code>{evidence.path} · source {evidence.source_sha256.slice(0,12)}<br />Game {evidence.source.game_source_sha256.slice(0,12)} · catalogue {evidence.source.catalog_sha256.slice(0,12)}</code>
-        <label>Fixture<select aria-label="Recipe fixture" value={preset} onChange={e=>setPreset(e.target.value)}><option value="eligible">Candidate inventory + ambient</option><option value="missing_items">No physical inputs</option><option value="missing_ambient">No ambient sources</option></select></label>
+        <label>Fixture<select aria-label="Recipe fixture" value={preset} onChange={e=>setPreset(e.target.value)}><option value="eligible">Candidate inventory + ambient</option><option value="missing_items">No physical inputs</option><option value="missing_ambient">No ambient sources</option><option value="torch_only">Burning only · no stationary fire</option></select></label>
         {sample && <><h3>{sample.eligible ? "Game-owned eligibility: requirements met in this fixture" : "Game-owned eligibility: missing requirements"}</h3>
           <table className="pool-table"><thead><tr><th>Physical instance</th><th>Definition</th><th>Keywords / role</th></tr></thead><tbody>{sample.inventory.map(i=><tr key={i.instance}><td>{i.instance}</td><td>{i.item_id}<small>{i.source}</small></td><td>{JSON.stringify(i.keywords)}<small>{sample.materials.includes(i.instance) ? "Selected material" : sample.retained_tools.includes(i.instance) ? "Selected retained tool" : "Not committed as material"}</small></td></tr>)}</tbody></table>
           <p>Ambient fixture: <code>{JSON.stringify(sample.ambient)}</code></p>
           {sample.missing.map((r,i)=><p className="notice warning" key={i}>{r.ambient ? "Ambient condition" : r.role === "tool" ? "Tool" : "Material"}: {r.tag} ≥ {r.min_tier} · have {r.have}, need {r.need}</p>)}
-          <p>Selected instances: {sample.selected.join(", ") || "None"}</p><p>Production inventory exchange: {sample.committed === null ? "Not attempted (requirements missing)" : sample.committed ? "Accepted in disposable fixture" : "Rejected; materials retained"}</p>
+          <p>Selected instances: {sample.selected.join(", ") || "None"}</p><p>Production inventory exchange: {sample.committed === null ? passive ? "Not attempted · passive allocation/factory probe only; use Test room for placement and completion" : "Not attempted (requirements missing)" : sample.committed ? "Accepted in disposable fixture" : "Rejected; materials retained"}</p>
           <p>Before: {sample.before.join(", ") || "Empty"}<br />After: {sample.after.join(", ") || "Empty"}</p>
-          {sample.output && <><h3>Observed factory output: {sample.output.item_id}</h3><pre className="raw">{JSON.stringify(sample.output,null,2)}</pre></>}
+          {sample.output && <><h3>{passive?"Unowned factory construction":"Observed factory output"}: {sample.output.item_id}</h3><pre className="raw">{JSON.stringify(sample.output,null,2)}</pre></>}
         </>}<details><summary>Production probe receipt</summary><pre className="raw" data-testid="recipe-probe-receipt">{JSON.stringify(evidence,null,2)}</pre></details>
       </> : <p>No current probe evidence. Validate the exact source to run the fixtures.</p>}
     </>}

@@ -1598,25 +1598,43 @@ class Engine:
         """Complete processing in its owning map, once per simulated turn."""
         from generation.floor_object_utils import place_floor_object
         from generation.decor_utils import clear_decor
+        from engine.processing_text import completion_text
+        from engine.save_components import ITEM_STATE, snapshot, validate_fields
+        failures = getattr(self, "_processing_completion_failures", None)
+        if failures is None:
+            failures = self._processing_completion_failures = {}
         for (x, y), record in list(local_map.processing_layer.items()):
-            record["turns_remaining"] -= 1
+            record["turns_remaining"] = max(0, record["turns_remaining"] - 1)
             if record["turns_remaining"] > 0:
                 continue
+            item_id = record.get("item_id", "")
+            failure_key = (id(local_map), x, y)
+            try:
+                # Avoid ItemFactory's repeated missing-definition stdout warning.
+                item = self.item_factory.create(item_id, x, y) if item_id in self.data.items else None
+                if item is None:
+                    raise ValueError("output definition is unavailable")
+                validate_fields(snapshot(item, ITEM_STATE), ITEM_STATE, "processing output")
+            except (ValueError, TypeError, KeyError, OverflowError) as error:
+                problem = (id(record), item_id, str(error))
+                if active and failures.get(failure_key) != problem:
+                    self.log.add(f"Preparation of {item_id!r} cannot finish: {error}. The unfinished work remains.", MSG_DEFAULT)
+                    failures[failure_key] = problem
+                continue
+            messages = getattr(self.data, "processing_messages", {})
+            template = record.get("completion_message") or messages.get(
+                record.get("source", ""), {}).get("complete", "{item_name} is ready.")
+            message = completion_text(template, item.name)
+            place_floor_object(local_map, x, y, item)
+            del local_map.processing_layer[(x, y)]
+            failures.pop(failure_key, None)
             decor_id = record.get("decor_id", "")
             if decor_id and local_map.decor.get((x, y)) == decor_id:
                 clear_decor(local_map, x, y)
-            item_id = record.get("item_id", "")
-            item = self.item_factory.create(item_id, x, y) if item_id else None
-            if item is not None:
-                place_floor_object(local_map, x, y, item)
-                if active:
-                    messages = getattr(self.data, "processing_messages", {})
-                    template = record.get("completion_message") or messages.get(
-                        record.get("source", ""), {}).get("complete", "{item_name} is ready.")
-                    self.log.add(template.format(item_name=item.name), MSG_LORE)
-                    self.callouts.add("ready", self.world_x * MAP_WIDTH + x,
-                                      self.world_y * MAP_HEIGHT + y, LIFE_GREEN, font_size="status")
-            del local_map.processing_layer[(x, y)]
+            if active:
+                self.log.add(message, MSG_LORE)
+                self.callouts.add("ready", self.world_x * MAP_WIDTH + x,
+                                  self.world_y * MAP_HEIGHT + y, LIFE_GREEN, font_size="status")
 
     # ------------------------------------------------------------------ #
     #  Input

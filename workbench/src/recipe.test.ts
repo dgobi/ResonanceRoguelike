@@ -2,8 +2,22 @@ import { describe, expect, it } from "vitest";
 import { recipeModel, recipeRow, recipeValue } from "./recipe";
 import { CanvasHistory } from "./layout";
 import { currentVerdict } from "./draft";
+import { recordRow } from "./orderedRecords";
 
 describe("one exact recipe draft", () => {
+  it("edits both conjunction representations without normalizing defaults or nested metadata",()=>{
+    for(const value of ['[{"tag":"edible","keep":{"x":[true,null]}},{"tag":"bitter"}]','{"tags":[{"tag":"edible","keep":{"x":[true,null]}},{"tag":"bitter"}],"meta":[1]}']) {
+      const text=`{ "id":"herb", "requires_single_item":${value}, "other":true }`;
+      const object=value.startsWith('{'),path:(string|number)[]=object?["requires_single_item","tags"]:["requires_single_item"];
+      const tier=recipeValue(text,[...path,0,"min_tier"],2);
+      expect(tier).toContain('"keep":{"x":[true,null]}');expect(tier).not.toContain('max_quantity');
+      const moved=recordRow(tier,path,"down",0);
+      expect(recordRow(moved,path,"up",1)).toBe(tier);
+      const added=recordRow(text,path,"add",-1,{tag:"resonant"});
+      expect(recordRow(added,path,"remove",2)).toBe(text);
+      if(object)expect(recipeValue(text,["requires_single_item","max_quantity"],2)).toContain('"meta":[1]');
+    }
+  });
   const raw = '\ufeff{\r\n "id":"bile", "description":"Keep this wording.", "components": [{"tag":"caustic", "quantity":1,"metadata":[[1,true]]}, { "tag": "viscous", "quantity":2}], "unknown":{"nested":[null,{"x":3}]}}\r\n';
   it("opens without serialization and changes only the selected scalar", () => {
     expect(recipeModel(raw).model?.id).toBe("bile");

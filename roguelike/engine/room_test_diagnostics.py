@@ -31,6 +31,7 @@ class DiagnosticEvents:
             return dict(serialize_item(item),instance=str(id(item)))
         m=e.local_map
         inv=e.inventory_screen
+        craft=e.craft_screen
         observation=dict(applied=self.applied,pid=__import__('os').getpid(),player=[e.player.x,e.player.y],
             turn=e.world_time.turn,submap=e.current_submap_id,surface_return=[e.surface_return_x,e.surface_return_y],
             dead=e._player_is_dead,mode=e.mode.name,visible=int(m.tiles['visible'].sum()),
@@ -40,6 +41,13 @@ class DiagnosticEvents:
             needs=dict(hunger=e.player.needs.hunger,thirst=e.player.needs.thirst),hp=e.player.fighter.hp,max_hp=e.player.fighter.max_hp,
             inventory_open=inv.open,inventory_selected=inv.selected,
             inventory_rows=[dict(item_id=getattr(item,'item_id',None),instance=str(id(item)) if item else None,header=header,label=label) for item,header,label in inv._flat],
+            craft=dict(open=craft.open,selected=craft.selected,choosing=craft._choosing,
+                choice_selected=craft._choice_selected,choice_index=craft._choice_index,
+                prompts=[dict(comp_index=p['comp_index'],options=[dict(item_id=o['item_id'],count=o['count']) for o in p['options']]) for p in craft._choice_prompts],
+                rows=[dict(type=r['type'],id=r.get('recipe',{}).get('id'),category=r.get('category')) for r in craft._build_flat_items(craft._get_recipes(e))]),
+            placement=dict(mode=e._placement_mode,cursor=[e._placement_cursor_x,e._placement_cursor_y]),
+            processing=[dict(x=x,y=y,**r) for (x,y),r in m.processing_layer.items()],
+            decor=[dict(x=x,y=y,id=d) for (x,y),d in m.decor.items()],
             reader=dict(open=e.text_reader.open,text_id=getattr(e.text_reader,'_text_id',None),definition=getattr(e.text_reader,'_def',None)),
             floor=[dict(x=x,y=y,items=[observed_item(i) for i in rows]) for (x,y),rows in m.floor_objects.items()],
             containers=[dict(x=x,y=y,state=c['state'],items=[serialize_item(i) for i in c['items']]) for (x,y),c in m.container_state.items()],
@@ -58,6 +66,14 @@ class DiagnosticEvents:
         # Disclosed, once-only verification setup. Effects and action accounting
         # after this point run through ordinary game input/handlers unchanged.
         if command.get('fixture')=='supplies-injured' and not self.fixture_applied:
+            e.player.needs.hunger=e.player.needs.thirst=.8
+            e.player.fighter.hp=max(1,e.player.fighter.max_hp-15)
+            self.fixture_applied=True
+        if command.get('fixture')=='preparation-heat' and not self.fixture_applied:
+            # Focused heat fixture, not room-decor authoring. All subsequent
+            # selection, placement, commitment, ticking and use run normally.
+            from generation.decor_utils import place_decor
+            place_decor(e.local_map,e.player.x,e.player.y-1,'campfire_lit')
             e.player.needs.hunger=e.player.needs.thirst=.8
             e.player.fighter.hp=max(1,e.player.fighter.max_hp-15)
             self.fixture_applied=True

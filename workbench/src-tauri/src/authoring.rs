@@ -1090,6 +1090,9 @@ enum Fault {
 }
 
 fn publish(root: &Path, doc: &Document, review: &Review, fault: Fault) -> Result<Value, Failure> {
+    if is_recipe(&doc.relative) && doc.family.as_ref().is_none_or(|f| f.id != "recipe" || f.root != "roguelike/data/recipes/") {
+        return Err(failure("OPERATION_POLICY", "Recipe publication requires its registered source policy.", "Reopen the supported recipe."));
+    }
     if doc.relative==TYPOGRAPHY || doc.relative==ASSIGNMENT {
         let (target,variant)=destination(doc,&review.draft,review.variant.then_some("forbidden"))?;
         if target!=review.destination || variant {return Err(failure("OPERATION_POLICY","This profile has one fixed target.","Review the canonical profile."));}
@@ -1106,9 +1109,6 @@ fn publish(root: &Path, doc: &Document, review: &Review, fault: Fault) -> Result
             let (target,variant)=destination(doc,&review.draft,if review.variant {raw["id"].as_str()} else {None})?;
             if target!=review.destination || variant!=review.variant {return Err(conflict());}
         }
-    }
-    if is_recipe(&doc.relative) && !review.variant {
-        return Err(failure("RECIPE_VARIANT_REQUIRED", "Recipe publication requires a new ID and file.", "Create and review a unique recipe variant."));
     }
     let original_path = checked_target(root, &doc.relative, false)?;
     if read_source(&original_path)? != doc.original {
@@ -1381,14 +1381,14 @@ mod tests {
         response["result"].clone()
     }
     #[test]
-    fn w5g_real_variant_only_text_and_recipe_restore_unfinished_intent() {
+    fn registered_text_and_recipe_restore_unfinished_intent() {
         for (id,source) in [("text","roguelike/data/texts/lab/lab_note_primary_b.json"),("recipe","roguelike/data/recipes/bile_coating.json")] {
             let result=actual_family_result("inspect",source,None,None);
             let (root,mut doc,_)=fixture();doc.relative=source.into();doc.original=result["raw"].as_str().unwrap().as_bytes().to_vec();
             doc.id=result["id"].as_str().map(str::to_owned);doc.review=None;
             doc.family=FamilyPolicy::from_result(&result,source);
             assert_eq!(doc.family.as_ref().unwrap().id,id);
-            assert_eq!(doc.family.as_ref().unwrap().operations,["variant"]);
+            assert_eq!(doc.family.as_ref().unwrap().operations,if id=="recipe" {vec!["edit","variant"]} else {vec!["variant"]});
             let path=root.path().join(source);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(path,&doc.original).unwrap();
             let host=Host::default();{let mut state=host.inner.lock().unwrap();state.root=Some(root.path().into());state.ready=true;state.content_documents.insert(file_key(source),doc.clone());}
             for (sequence,text) in [(1,String::from_utf8(doc.original.clone()).unwrap()+"\r\n"),(2,"\u{feff}{\r\n \"unfinished\": [\"λ\",".into())] {
@@ -1399,14 +1399,14 @@ mod tests {
                 let mut restarted=recovery::Store::new(storage.path().into()).unwrap();let mut fresh=doc.clone();fresh.token="cold-owner".into();
                 restore_claimed(&mut restarted,root.path(),&mut fresh,&record.key(),record.generation).unwrap();
                 assert_eq!(fresh.accepted.as_ref().unwrap().draft,text);assert!(!fresh.accepted.as_ref().unwrap().variant);assert!(fresh.review.is_none());
-                assert!(!family_evidence(&fresh,&result,false)); // restoration grants no same-ID publication
+                assert!(!family_evidence(&fresh,&result,false)); // recovery/inspection carries no validation authority
                 let mut competitor=recovery::Store::new(storage.path().into()).unwrap();assert!(competitor.acquired(&record.key(),record.generation,|_,_|Ok(())).is_err());
             }
             let mut candidate:Value=serde_json::from_slice(&doc.original).unwrap();candidate["id"]=json!("w5g_repaired_variant");let draft=candidate.to_string();
             accept_edit(&host,&doc.token,3,draft.clone(),true,"w5g_repaired_variant".into()).unwrap();
             let (target,variant)=destination(&doc,&draft,Some("w5g_repaired_variant")).unwrap();assert!(variant);
             let validated=actual_family_result("preview_draft",&target,Some(&draft),Some(source));
-            assert_eq!(validated["valid"],true,"{validated}");assert!(family_evidence(&doc,&validated,true));assert!(!family_evidence(&doc,&validated,false));
+            assert_eq!(validated["valid"],true,"{validated}");assert!(family_evidence(&doc,&validated,true));assert_eq!(family_evidence(&doc,&validated,false),id=="recipe");
         }
     }
     #[test]
@@ -2060,7 +2060,8 @@ mod tests {
         revoke_review(&host,"recipe");
         assert!(session_doc(&host,"recipe").unwrap().1.review.is_none());
         for token in ["building","pool","item"] { assert!(session_doc(&host,token).unwrap().1.review.is_some()); }
-        assert_eq!(publish(root.path(),&recipe,&review,Fault::None).unwrap_err().code,"RECIPE_VARIANT_REQUIRED");
+        assert_eq!(publish(root.path(),&recipe,&review,Fault::None).unwrap_err().code,"OPERATION_POLICY");
+        recipe.family=FamilyPolicy::from_result(&family_result(&recipe,"recipe",json!(["edit","variant"])),&recipe.relative);
         review.variant=true; review.destination="roguelike/data/recipes/nested/variant.json".into();
         review.draft="{\"id\":\"variant\"}".into();
         for fault in [Fault::BeforeStage,Fault::AfterStage,Fault::BeforeReplace] {

@@ -92,7 +92,7 @@ class Family:
     def envelope(self, context, *, operations=None):
         descriptor, digest = self.descriptor()
         problems = schema_problems(descriptor["schema"])
-        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory", "room-spatial", "world-assignment"}
+        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "recipe-processing", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory", "room-spatial", "world-assignment"}
         if not isinstance(descriptor["views"], list) or any(v not in allowed_views for v in descriptor["views"]):
             problems.append("Unsupported specialized view registration")
         return dict(id=self.id, contract=self.module.CONTRACT, descriptor_sha256=digest,
@@ -170,7 +170,7 @@ def families():
         Family("room", "layouts", room_authoring, ("edit", "variant"), "roguelike/data/layouts/"),
         Family("creature", "entities", creature_authoring, ("edit", "variant"), "roguelike/data/entities/creatures/"),
         Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/"),
-        Family("recipe", "recipes", recipe_authoring, ("variant",), "roguelike/data/recipes/"),
+        Family("recipe", "recipes", recipe_authoring, ("edit", "variant"), "roguelike/data/recipes/"),
         Family("text", "texts", text_authoring, ("variant",), "roguelike/data/texts/"),
         Family("typography", "display", typography_authoring, ("edit",), typography_authoring.PROFILE, typography_authoring.PROFILE),
     )

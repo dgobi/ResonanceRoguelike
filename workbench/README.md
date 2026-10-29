@@ -2,12 +2,12 @@
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, materials and usable supplies,
-one immediate recipe family, common Actor fields and ordinary creature variants,
+ordinary immediate and passive item-output recipes, common Actor fields and ordinary creature variants,
 direct creature placement in authored underground layouts, found-text variants
 and game typography. The game remains the
 validation authority. No campaign, running game or Internet service is required.
 
-Item, immediate-recipe, found-text, typography and creature controls use the selected game's registered content
+Item, recipe, found-text, typography and creature controls use the selected game's registered content
 contract and the same exact-source document lifecycle. See
 [content contracts](docs/CONTENT_CONTRACTS.md) for the extension seam, supported
 control vocabulary, default handling and publication boundaries. Other editor
@@ -64,7 +64,7 @@ publication/restart journey. See [W5E delivery](docs/W5E_DELIVERY.md) for eviden
 
 ## Work with several content files
 
-Open registered item, immediate-recipe, ordinary-text, typography, creature and room files from
+Open registered item, recipe, ordinary-text, typography, creature and room files from
 the catalogue. The document strip shows each ID, file path and a dot for unsaved
 source. Opening the same file again, including through a reference, selects its
 existing draft. Switching documents preserves exact source (even invalid JSON),
@@ -335,81 +335,82 @@ for exact bounds, complete corpus, body/reference rules and the saved-versus-fre
 matrix, and [W5F delivery](docs/W5F_DELIVERY.md) for verification. W4A's example
 variant and receipt remain historical construction evidence outside active data.
 
-## Author an immediate recipe variant
+## Author material preparation
 
-1. Open an item and choose **Recipes**. **Produces this item** lists exact declared
-   `result_item` references; **Potential ingredient matches** uses current game
-   tag/tier predicates. Each row retains recipe ID and source path. Neither table
-   proves knowledge, quantities, access to ingredients or ambient conditions.
-   The content browser also searches recipe ID/name/category/path/output ID, with
-   route and support filters. Select a source explicitly when IDs collide.
-2. Open `bile_coating`, currently the one shipped writable recipe in this family.
-   **Requirements** retains component order, repeated rows, reusable tools and
-   ambient conditions. Defaults are minimum tier 1 and physical quantity 1.
-   **Output** resolves the declared item and links to its item inspector. Return
-   to an item or use the document buttons to retain structure/pool/item/recipe
-   drafts and their independent histories.
-3. **Begin edit** exposes name, authored description, category, known flag,
-   ordered components/tools, ambient requirements and output item. Item tags come
-   from the loaded keyword catalogue. Ambient tags come from the actual
-   `CraftScreen._build_ambient_sources` collector exercised on disposable loaded
-   decor/light definitions: `burning` is not an item-keyword catalogue entry.
-   Controls support add/remove/reorder and exact scalar-span edits; unknown data,
-   nested records and unedited whitespace remain intact. Invalid raw JSON freezes
-   typed controls while retaining the raw draft. Raw/ID changes clear typed undo.
-4. **Save as new variant**, choose a unique ID, **Validate draft**, inspect the
-   exact **Diff**, then **Apply variant → Confirm apply one file**. Only a new
-   file beside the source is published; recipe originals cannot be overwritten.
-   The host checks source bytes, discovered entitlement, canonical safe paths,
-   current dependencies and the exact reviewed draft, repeats game validation,
-   atomically publishes without clobbering and verifies the reopened hash.
-   External dependency changes revoke current evidence and require revalidation.
-5. Read the visibility confirmation: recipe files in the active directory are
-   recursively loaded in new sessions. `known` defaults to true; false shows an
-   unknown recipe and blocks the crafting UI's attempt. Truthy `_deprecated`
-   hides a recipe from that UI. A published recipe is active content, not an inert
-   draft. This does not add a learning route or promise personal-save compatibility.
-6. **Test requirements → Validate and test exact recipe** also works on the
-   unchanged reopened recipe. The same exact-byte validation runs three presets:
-   candidate inventory plus ambient, no physical inputs, and no ambient sources.
-   A preset is not guaranteed eligible: inspect the actual production verdict.
-   Inputs are synthetic physical instances created from current item definitions;
-   ambient records are synthetic and separate. The receipt records instance IDs,
-   tags, source identity, selected material/tool instances, missing amounts,
-   factory output and before/after inventory. The real `plan_craft`, `ItemFactory`
-   and `commit_craft`/`exchange` execute on a disposable inventory with an explicit
-   capacity. Ordinary player controls, knowledge gate, acquisition, equipment use,
-   world placement, turns and saves are not executed. A `known:false` fixture can
-   satisfy material rules while the real crafting UI still refuses that recipe.
+The registered `item-preparation-1` recipe contract admits 15 of 18 shipped
+sources: two immediate, two cooking, five drying, four steeping and two rendering.
+Open a supported original, **Begin edit**, and either revise its same ID or
+choose **Save as new variant**. **Validate draft → Diff → Review & apply →
+Confirm apply one file** uses the shared source/dependency checks, exact-byte
+review, safe destination, atomic publication and verified reopen. The original
+immediate/passive execution class stays fixed. Source flags cannot promote
+campfire/world-placement, legacy `apply_turns`, deprecated or array sources.
 
-The game-owned `immediate-components-1` capability requires one non-deprecated
-immediate `result_item` object with a nonempty `components` array. Optional tools
-and ambient arrays are supported. Passive work, world/tile placement, conjunctions,
-legacy processing fields and array-of-recipe sources remain source-navigable and
-read-only. The other current immediate recipes contain excluded conjunction or
-legacy fields; their execution class alone is not writing entitlement. Changing
-an ID/category or raw flags cannot promote an unsupported source token.
+**Requirements** edits common fields, ordered components, retained tools and
+ambient conditions. **All tags on each material** edits both existing conjunction
+shapes without converting them: a list requires one automatically eligible item;
+an object requires `max_quantity` distinct items, default one, each satisfying
+all tags. That quantity is a requirement despite its stored name. Conjunctions
+have no explicit-choice channel; protected tag matches are shown separately from
+automatically eligible definitions. Components retain the ordinary affirmative
+picker, including a sole protected matching definition. Every physical item fills
+one slot across conjunctions, components and retained tools.
 
-Authoring bounds: nonnegative exact-integer tiers through `2^53−1`, quantities
-1–32, at most 64 rows per array and 64 physical slots in total. These are explicit
-Workbench bounds, not new gameplay rules. Ambient quantities are ignored by the
-consumer and receive a warning. Categories use current catalogue strings; the
-game groups unrecognized categories under its existing other-category heading.
-No recipe loader, allocation, visibility, campaign or learning policy was changed.
-Native samples are published only in ignored disposable content. The example in
-`docs/examples/` is not installed into the active game catalogue.
+**Preparation** exposes positive processing turns (absent 20), source (absent
+`drying`), a supported saved temporary marker or no marker, literal placement
+prompt and optional completion text. Exactly `cooking` places on fire and ignores
+its marker; drying, steeping and rendering place beside fire. Completion permits
+literal text, `{item_name}` and escaped braces only. Inactive `result_message`
+metadata is preserved. **Output** links the saved unique factory-valid item,
+including items whose advanced use is outside the supply editing contract.
 
-## Author a component item and trace its use
+Save/reopen inputs and outputs before recipe references, then save the room's
+placements. These are deliberate independent single-file transactions; a saved
+unreferenced definition remains if a dependent save fails. Dirty parked drafts
+do not overlay validation or captures. Other open dirty documents retain their
+source/history and recovery while navigating references and publishing.
+
+**Test requirements** discloses synthetic inventory and conditions: candidate
+inputs, missing items, missing ambient and burning-only/torch fixture. Potential
+tag matches do not establish availability, acquisition, knowledge or a full
+allocation. Production allocation runs in every fixture; immediate recipes may
+perform an inventory exchange, while passive probes construct only an unowned
+output. No placement or timer is simulated by validation. `known:false` stays
+active catalogue content but is refused by the ordinary crafting UI.
+
+Use **Test latest saved version** for actual crafting, placement, turns, floor
+output, collection and supply use. Passive work requires a stationary fire in
+addition to declared ambient conditions; an equipped owned burning light cannot
+replace it. Cancelled/invalid placement spends nothing and advances no turn.
+Confirmation spends exact materials, retains tools and advances the first tick;
+a three-turn job then has two remaining. Immediate exchange advances no turn.
+
+Confirmed jobs capture output ID and processing parameters, with no recipe ID.
+Fresh catalogues load saved recipe revisions for later work; old jobs retain
+captured values and construct their stored output ID from the current session
+catalogue. Acquired outputs retain saved copied values. Reset retains the
+immutable capture; latest captures revised saved inputs. Missing/invalid outputs
+leave due jobs and owned markers intact, with a bounded diagnostic; restoring a
+valid definition in a fresh catalogue permits completion. No save migration or
+missing-owned-cache regeneration is added. Active and distinct hot maps tick
+once per simulated turn; cold maps remain frozen.
+
+Workbench bounds are quantities 1–32, tiers 0 through `2^53−1`, 64 rows per list
+and 64 total physical slots. See the [recipe guide](../roguelike/docs/RECIPE_AUTHORING.md)
+and [W5K delivery](docs/W5K_DELIVERY.md) for exact contracts and scoped evidence.
+
+## Author an item and trace its use
 
 1. Search the recursive item catalogue by ID, name or path, or follow **Open item
    `<id>`** from a pool entry. Category filters use the declared game category.
    A structure and pool plus multiple item drafts can remain open independently. **Return to
    pool** restores the original entry and its draft; **Show structure** restores
    the structure. Changing the item name never changes its machine ID.
-2. **Begin edit** is available only for a unique, single-object ordinary inert
-   component under `roguelike/data/items/components/` (including safe nested
-   folders). The current four are `wood_bundle`, `flint_shard`, `clay_lump` and
-   `clay_pot`. Typed fields are `name`, `description`, `weight`, `stackable`,
+2. **Begin edit** is available for 42 unique single-object materials, foods,
+   drinks and treatments under components/butchery/consumables, including safe
+   nested folders. Same-ID edits and deliberate variants retain original source
+   category/use identity. Equipment, special effects and canonical empty-skin
+   editing remain excluded. Common typed fields are `name`, `description`, `weight`, `stackable`,
    `consumed_on_use` and `keywords`. Name/description are literal authored text. Weight is finite and
    nonnegative, in kg per instance. `stackable` groups same-ID inventory display
    rows; it does not merge ownership or multiply an instance's weight. There is
@@ -429,7 +430,7 @@ Native samples are published only in ignored disposable content. The example in
 4. Choose **Save as new variant**, enter a unique ID, review the derived path
    beside the source, **Validate draft**, inspect **Diff**, then **Review & apply
    → Confirm apply one file**. The host reruns the exact staged bytes through
-   `DataLoader`, the game-owned `engine.item_authoring` component capability,
+   `DataLoader`, the game-owned `engine.item_authoring` supplies capability,
    `save_components` field validators, reference checks and `ItemFactory.create`.
    Publication rechecks source/dependency identity, uses the existing single-file
    atomic transaction and reopens the persisted bytes. Duplicate IDs (including
@@ -833,7 +834,7 @@ CPython runtime without the game dependency wheels.
 ## Contract and limits
 
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-2**,
-item contract **component-1**, recipe contract **immediate-components-1**,
+item contract **usable-supplies-1**, recipe contract **item-preparation-1**,
 found-text contract **ordinary-found-text-1**, and
 creature contract **creature-common-1**, with Workbench layout capability
 **authored-room-1** on the existing `authored_submap` route (game structure contract remains g2-2).

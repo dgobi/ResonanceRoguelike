@@ -6,7 +6,11 @@ ROOT=Path(__file__).resolve().parents[2];ART=ROOT/'workbench/.artifacts/w5j';DOC
 def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def git(*args):return subprocess.check_output(['git',*args],cwd=ROOT,text=True).strip()
-def ref(p):return dict(path=p.relative_to(ROOT).as_posix(),sha256=digest(p))
+def ref(p):
+    if p in (EVID/'shipped-sources.json',EVID/'observations.json'):
+        canonical=p.read_bytes().replace(b'\r\n',b'\n')
+        return dict(path=p.relative_to(ROOT).as_posix(),sha256=hashlib.sha256(canonical).hexdigest(),encoding='UTF-8, LF canonical bytes')
+    return dict(path=p.relative_to(ROOT).as_posix(),sha256=digest(p))
 def environment(executable):
     code="import sys,platform,json,importlib.metadata as m;print(json.dumps(dict(executable=sys.executable,python=sys.version,platform=platform.platform(),dependencies={k:m.version(k) for k in ['pygame','tcod','numpy','cffi','pycparser','typing_extensions']})))"
     return json.loads(subprocess.check_output([str(executable),'-I','-B','-c',code],text=True))

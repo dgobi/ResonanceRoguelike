@@ -4,6 +4,19 @@ from test_bridge import ROOT, invoke
 from test_authoring import data_fixture
 
 class SuppliesWorker(unittest.TestCase):
+    def test_unsupported_candidate_shapes_are_located_not_generic_worker_failures(self):
+        path='roguelike/data/items/butchery/crow_meat.json'
+        raw=json.loads((ROOT/path).read_bytes())
+        # Keep the original catalogue valid; only the candidate takes array shape.
+        for candidate in ([raw], [], [{}]):
+            for variant in (False, True):
+                target=path.replace('crow_meat.json','shape_variant.json') if variant else path
+                response=invoke('preview_draft',asset=target,source_asset=path,draft=json.dumps(candidate))
+                self.assertTrue(response['ok'],response)
+                result=response['result'];self.assertFalse(result['valid']);self.assertIsNone(result['family']['context'])
+                diagnostic=next(d for d in result['diagnostics'] if d['code']=='ITEM_SHAPE')
+                self.assertEqual(diagnostic['path'],target);self.assertEqual(diagnostic['field'],'')
+
     def test_four_classes_second_food_and_original_promotion_rejected(self):
         for source,changes in [('components/wood_bundle',dict(weight=.75)),('butchery/animal_bone',dict(name='Second material')),
                 ('consumables/bitter_herb',dict(nutrition=.35)),('consumables/cooked_meat',dict(nutrition=300)),

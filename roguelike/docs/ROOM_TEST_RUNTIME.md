@@ -92,3 +92,13 @@ restored after Workbench restart.
 An opt-in packaged fixture feeds only ordinary pygame keyboard events and captures
 actual frames/observations under the owned mutable root. It is enabled by a native
 process environment flag, never renderer-selected executable/commands/paths.
+
+## Preparation tests
+
+The captured runtime includes saved recipes, item definitions, processing
+messages and relevant code. W5K uses ordinary CraftScreen input and placement,
+then ordinary turns, floor pickup and supply use. Confirmation includes the
+first processing tick. Reset keeps the earlier recipe/item capture; latest-saved
+testing captures revisions. Synthetic authoring probes establish no placement
+or completed preparation. Cold compatibility uses a separate owned ordinary save.
+See [recipe authoring](RECIPE_AUTHORING.md) for captured job/current output rules.

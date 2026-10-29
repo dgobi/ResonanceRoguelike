@@ -265,14 +265,8 @@ class CraftScreen:
 
         ambient = self._build_ambient_sources(engine)
         kw_data = getattr(engine.data, "keywords", {})
-        _, missing = plan_craft(recipe, inv, kw_data, ambient, chosen_items)
-        craftable = not missing
-        if not craftable:
-            engine.log.add("Materials, tools or conditions are missing. Passive work needs a stationary fire.", MSG_DEFAULT)
-            self.open = False
-            return
-
-        # Check for ambiguous components needing player choice
+        # An automatic plan may exclude protected materials. Reach the existing
+        # affirmative picker first, then revalidate the complete selected plan.
         if chosen_items is None:
             prompts = self._find_ambiguous_components(recipe, inv, kw_data)
             if prompts:
@@ -286,7 +280,8 @@ class CraftScreen:
 
         selected, missing = plan_craft(recipe, inv, kw_data, ambient, chosen_items)
         if missing:
-            engine.log.add("The materials are not here.", MSG_DEFAULT)
+            engine.log.add("Materials, tools or conditions are missing. Passive work needs a stationary fire.", MSG_DEFAULT)
+            self.open = False
             return
         if recipe.get("places_in_world"):
             tile_id   = recipe.get("result_tile", "")
@@ -324,7 +319,8 @@ class CraftScreen:
                     if iid not in by_id:
                         by_id[iid] = []
                     by_id[iid].append(item)
-            if len(by_id) > 1:
+            if len(by_id) > 1 or any(not getattr(item, "consumed_on_use", True)
+                                     for items in by_id.values() for item in items):
                 # Build option list
                 options = []
                 for iid, items in by_id.items():

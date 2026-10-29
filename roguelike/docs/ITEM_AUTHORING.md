@@ -94,3 +94,13 @@ version** captures revisions. See [room test runtime](ROOM_TEST_RUNTIME.md).
 No save-schema bump, global immutable catalogue, survival rebalance or generalized
 vessel mechanics are included. Returned objects are not automatically refillable;
 canonical skin filling does not reproduce a custom drink variant.
+
+## Preparation references
+
+Saved materials and usable supplies can be referenced by ordinary item-output
+recipes under `item-preparation-1`; see [recipe authoring](RECIPE_AUTHORING.md).
+Automatic eligibility remains distinct from a tag match. Components can request
+an affirmative protected-material choice; conjunctions remain automatic-only.
+Save/reopen supplies before recipe references and room placements. Preparation
+completion constructs the recorded output ID; already acquired outputs retain
+this guide's copied-value and dynamic-reference policy.

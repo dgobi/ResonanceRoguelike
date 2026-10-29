@@ -100,6 +100,9 @@ def authorize_candidate(original, candidate, source, target, *, data=None):
     # Original eligibility is independently checked by the shared worker. Raw
     # edits cannot change the original class/category, including absent vs null.
     problems=[]
+    if not isinstance(candidate, dict):
+        return [dict(severity='error', code='ITEM_SHAPE', path=target, asset='', field='',
+            message='Expected one item object; array editing is unsupported.', correction='Restore a single item object in Source.')]
     for field in ('category','on_use'):
         if (field in original)!=(field in candidate) or original.get(field)!=candidate.get(field):
             problems.append(dict(severity='error',code='ITEM_CLASS',path=target,asset=str(candidate.get('id','')),field=field,

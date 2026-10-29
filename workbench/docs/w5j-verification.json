@@ -14,11 +14,15 @@
   "contract": "usable-supplies-1",
   "corpus": {
     "path": "workbench/docs/evidence/w5j/shipped-sources.json",
-    "sha256": "0fac2241f804a889083750418c55d317f4d7877be1febd982ea27cc9fa1fd05d"
+    "sha256": "4aa36fe7399d6498380de4e2ff8f9322a01b9066d46a1aa55c5f27887201d32b",
+    "original_working_crlf_sha256": "0fac2241f804a889083750418c55d317f4d7877be1febd982ea27cc9fa1fd05d",
+    "encoding": "UTF-8, LF; committed bytes at reviewed W5J revision"
   },
   "observations": {
     "path": "workbench/docs/evidence/w5j/observations.json",
-    "sha256": "741e9989c16eb4545df33be0e84d011bc71f0a3930854d7af491c5aabe009e43"
+    "sha256": "cc1154371a18572a1d2c1e4c36e309f7e1d85d57ae0a525cfdd8dc09072e219c",
+    "original_working_crlf_sha256": "741e9989c16eb4545df33be0e84d011bc71f0a3930854d7af491c5aabe009e43",
+    "encoding": "UTF-8, LF; committed bytes at reviewed W5J revision"
   },
   "environments": {
     "pinned": {
@@ -403,7 +407,8 @@
     "The first broad game invocation named two nonexistent modules and used embedded Python whose cold children ignored PYTHONPATH; corrected to actual test module names and configured development environment (66 pass).",
     "Native harness waits for asynchronous Revert completion and selects the actual shared apply label. Failed attempts are retained, not counted as successful journeys.",
     "W5H persistence observation comparison now omits W5J transient instance identities; saved item values and ownership remain fully compared across F9/cold load.",
-    "Initial standalone fixture optional docs copy collided with an existing directory; the final fresh fixture uses dirs_exist_ok and passes startup/save/load."
+    "Initial standalone fixture optional docs copy collided with an existing directory; the final fresh fixture uses dirs_exist_ok and passes startup/save/load.",
+    "W5K readback correction only: corpus/observations now identify committed LF bytes; original CRLF working-byte hashes remain explicitly recorded. Historical observations and native-run boundaries are unchanged."
   ],
   "limits": [
     "Controlled needs/injury and staged room entrance; no balance, unaided discovery or normal-start pacing claim.",

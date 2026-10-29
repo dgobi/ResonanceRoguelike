@@ -4,11 +4,12 @@ import { valueEdit } from "./layout";
 
 // Parse afresh for every accepted edit. Whole source slices travel with rows;
 // unknown nested metadata and escaping never round-trip through a form model.
-export function recordRow(text: string, field: string, action: "add" | "remove" | "up" | "down", index: number, row: Record<string,unknown> = {}) {
+export function recordRow(text: string, field: string | (string | number)[], action: "add" | "remove" | "up" | "down", index: number, row: Record<string,unknown> = {}) {
   const {tree, bom, diagnostics} = syntax(text);
   if (diagnostics.length || tree?.type !== "object") throw new Error("Repair JSON first.");
-  const array = findNodeAtLocation(tree, [field]);
-  if (!array && action === "add") return valueEdit(text, [field], [row]);
+  const path = typeof field === "string" ? [field] : field;
+  const array = findNodeAtLocation(tree, path);
+  if (!array && action === "add") return valueEdit(text, path, [row]);
   if (array?.type !== "array") throw new Error("Repair the record array in Source first.");
   const children = array.children || [];
   if (children.some(n=>n.type!=="object")) throw new Error("Repair malformed records in Source first.");

@@ -14,7 +14,7 @@ class RecipeTests(unittest.TestCase):
     def test_source_classes_noop_relationships_and_production_ambient_registry(self):
         rows = [r for r in invoke("describe")["result"]["assets"] if r["route"] == "recipe_definition"]
         self.assertEqual(len(rows), 18)
-        for name, kind, writable in (("bile_coating", "Immediate item output", True), ("cook_meat", "Passive processing", False),
+        for name, kind, writable in (("bile_coating", "Immediate item output", True), ("cook_meat", "Passive processing", True),
                                      ("campfire", "World placement", False), ("coldbell_extract_deprecated", "Deprecated / legacy", False)):
             path = f"roguelike/data/recipes/{name}.json"; before = (ROOT/path).read_bytes()
             result = invoke("inspect", asset=path)["result"]
@@ -39,7 +39,7 @@ class RecipeTests(unittest.TestCase):
         self.assertTrue(result["valid"],result["diagnostics"])
         probe=result["family"]["context"]["records"][0]["probe"]
         self.assertEqual(probe["source_sha256"],hashlib.sha256(draft.encode()).hexdigest())
-        yes,no_items,no_ambient=probe["cases"]
+        yes,no_items,no_ambient,_=probe["cases"]
         self.assertTrue(yes["eligible"]); self.assertTrue(yes["committed"])
         self.assertEqual(len(set(yes["selected"])),4); self.assertEqual(len(yes["materials"]),3)
         self.assertEqual(yes["after"],yes["retained_tools"]+["output-1"])
@@ -55,9 +55,9 @@ class RecipeTests(unittest.TestCase):
         raw=json.loads((ROOT/RECIPE).read_bytes())
         cases=[]
         for field,value,code in (("result_item","no_such_item","OUTPUT_REFERENCE"), ("known",1,"RECIPE_FIELD"),
-                                 ("passive_processing",True,"UNSUPPORTED_RECIPE"), ("_deprecated",False,"UNSUPPORTED_RECIPE"),
+                                 ("passive_processing",True,"RECIPE_CLASS"), ("_deprecated",False,"UNSUPPORTED_RECIPE"),
                                  ("places_in_world",False,"UNSUPPORTED_RECIPE"), ("result_tile","campfire_unlit","UNSUPPORTED_RECIPE"),
-                                 ("requires_single_item",[],"UNSUPPORTED_RECIPE"), ("processing_turns",1,"UNSUPPORTED_RECIPE")):
+                                 ("requires_single_item",[],"CONJUNCTION_SHAPE"), ("processing_turns",1,"UNSUPPORTED_RECIPE")):
             cases.append(({**raw,field:value},code))
         for field,values,code in (("quantity",[0,-1,True,1.5,33],"REQUIREMENT_QUANTITY"),
                                   ("min_tier",[-1,True,1.2,2**53],"REQUIREMENT_TIER"), ("tag",["missing",[]],"KEYWORD_REFERENCE")):

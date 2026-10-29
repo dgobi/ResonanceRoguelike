@@ -1,5 +1,14 @@
 # Registered content authoring
 
+W5K versions recipe authoring as `item-preparation-1`: rules admit ordinary
+immediate and passive item output with components and/or either conjunction
+shape. Specialized conjunction controls preserve representation and metadata;
+processing controls use the verified source/default/marker/template contract.
+The host independently confines both operations to the recipe root and safe
+paths. Passive validation performs allocation/unowned construction only; Test
+room supplies actual placement/completion/use. See the
+[recipe guide](../../roguelike/docs/RECIPE_AUTHORING.md).
+
 W5J versions the item capability as `usable-supplies-1`: original-source materials,
 `eat`, `drink` and `heal_minor` supplies in components/butchery/consumables. The
 adapter fixes original category/use identity and validates return dependencies.
@@ -152,7 +161,7 @@ historical family/contract identity, never a live token, review, descriptor-gran
 permission, preview or verdict. Restoring requires current discovery, original
 source comparison and fresh host eligibility. Supported descriptor changes are
 inspected again; validation is always fresh. Recovery never creates dependency
-overlays or changes variant-only recipe/text policy. Completed publication facts
+overlays or broadens original-source operation policy. Completed publication facts
 remain separate from newer drafts and permit only verified read reconciliation.
 See the [recovery workflow](../README.md#recover-unfinished-registered-drafts).
 
@@ -170,7 +179,7 @@ no write authority. Python rechecks original source eligibility separately from
 candidate validity. An unsupported source cannot become writable by changing its
 candidate shape. Duplicate IDs, arrays and keyed objects retain their previous
 inspection/publication limits. Items retain original-source supply class/category
-for edit/variant operations; immediate recipes require a unique new variant.
+for edit/variant operations; admitted item-output recipes support same-ID edits and new-ID variants with their original execution class fixed.
 
 W4D operation ownership, token/revision/attempt checks, cancellation, one-time
 review consumption and reserved-publication BUSY handling remain active. The
