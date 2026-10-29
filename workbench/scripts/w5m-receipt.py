@@ -63,6 +63,7 @@ for command,name,outcome in specs:
     p=ART/name;text=p.read_text(encoding='utf-8-sig');assert not re.search(r'^FAILED\b|^FAIL:|^ERROR:|^Traceback',text,re.M),name
     if name=='worker-final.log':assert 'Ran 93 tests' in text and 'OK (skipped=1)' in text
     if name=='game-final.log':assert 'Ran 115 tests' in text and '\nOK' in text
+    if name=='dependency-negative-final.log':assert 'Ran 1 test' in text and '\nOK' in text and 'skipped' not in text
     if name=='package-final.log':assert 'Finished 1 bundle' in text
     commands.append(dict(command=command,exit_code=0,outcome=outcome,local_log=ref(p)))
 write(EVID/'gates.json',dict(commands=commands,earlier_attempts='Early child import environment, changing-source worker response, runner selector and NSIS lock attempts are excluded from passing gates. Final commands use stable source, inherited subprocess imports and completed package inputs.'))
