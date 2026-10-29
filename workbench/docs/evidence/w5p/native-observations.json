@@ -1,0 +1,121 @@
+{
+  "scope": "Packaged native WebView events only, in positively owned disposable data/settings/recovery. Saved item/text/pool definitions were reused; the example is not installed canonically. No surface play session or acquisition/use expedition is claimed.",
+  "package_sha256": "a3450d7d3e21b56b74f92fed2f8054c8fd59360afd212cd6dcc5f2049309d55a",
+  "runner_sha256": "0905bb418fe83d308aac281cf4a188aa4ff688daac830464029b3295f636e71f",
+  "local_full_receipt": {
+    "path": "workbench/.artifacts/w5p/native-1793313251900/receipt.json",
+    "sha256": "d981de2ce061d156057cca21f25eeb58ebddcbca710089cbd00c6a7253993167",
+    "bytes": 2807247
+  },
+  "checks": [
+    "Three independent dirty documents; invalid exact Source, shared undo/redo and unfinished variant intent",
+    "Controls shape a furnished asymmetric variant; protected crop refusal, coherent decor resize and deliberate edge correction",
+    "Locate a blocked second doorway cell, correct it, and observe every declared orientation and receipt-owned readable/container",
+    "Linked saved pool/item/readable navigation restores exact record; unrelated drafts and stale-return disclosure",
+    "Saved dependency change revokes earlier review; external conflict preserves competing bytes; byte-checked control revision",
+    "Controlled production planned placement against exact accepted revised bytes"
+  ],
+  "processes": [
+    11116,
+    42684
+  ],
+  "screenshots": {
+    "recovered-drafts.png": {
+      "path": "workbench/docs/evidence/w5p/recovered-drafts.png",
+      "sha256": "16ff497a5182b4df7f949401792a8bf006b033c8665aec59ec46277d9f595a21",
+      "bytes": 373520
+    },
+    "authored-building.png": {
+      "path": "workbench/docs/evidence/w5p/authored-building.png",
+      "sha256": "ea68b90e0697bae46135bf226b0e3b3f570cff3a69e18ebf97dfa4752c7fbdb9",
+      "bytes": 325665
+    },
+    "oriented-production.png": {
+      "path": "workbench/docs/evidence/w5p/oriented-production.png",
+      "sha256": "25952946ad43932e46c7c59198b2efa734eaa683b77ec31a325992d578cad22f",
+      "bytes": 304695
+    },
+    "revised-saved-production.png": {
+      "path": "workbench/docs/evidence/w5p/revised-saved-production.png",
+      "sha256": "3c2f2f9fd3f78624914f4ac8fdf618b8fd7ae72b3cfbd57129fc127cdcb53526",
+      "bytes": 291401
+    }
+  },
+  "recovered": {
+    "roguelike/data/buildings/residential/house_small_a.json": {
+      "draft": "{\"unfinished\":\"λ\",",
+      "variant": true,
+      "variant_id": "w5p_unfinished",
+      "target": "roguelike/data/buildings/residential/w5p_unfinished.json",
+      "generation": 5,
+      "sha256": "8b5d2a7cb962862912b5c14a6259b34224457d9ac414957add506082b11de4d9"
+    },
+    "roguelike/data/buildings/commercial/apothecary_a.json": {
+      "draft": "{\r\n  \"id\": \"apothecary_a\",\r\n  \"category\": \"commercial\",\r\n  \"width\": 11,\r\n  \"height\": 8,\r\n  \"facing\": \"south\",\r\n  \"condition\": \"intact\",\r\n  \"district_weights\": {\r\n    \"market\": 3,\r\n    \"residential\": 2,\r\n    \"tangle\": 3\r\n  },\r\n  \"description\": \"W5P second independent building draft\",\r\n  \"legend\": {\r\n    \"#\": \"wall\",\r\n    \".\": \"floor\",\r\n    \"w\": \"worn_stone\",\r\n    \"+\": \"door_closed\",\r\n    \" \": null\r\n  },\r\n  \"layers\": [\r\n    \"###########\",\r\n    \"#wwwwwwwww#\",\r\n    \"#.........#\",\r\n    \"#.........#\",\r\n    \"#...####..#\",\r\n    \"#...#..w..#\",\r\n    \"#...#.....#\",\r\n    \"####.######\"\r\n  ],\r\n  \"special_tiles\": [\r\n    {\r\n      \"x\": 1,\r\n      \"y\": 1,\r\n      \"type\": \"container\",\r\n      \"decor_id\": \"medicine_chest\",\r\n      \"loot_pools\": [\r\n        \"alchemist_reagents\"\r\n      ]\r\n    },\r\n    {\r\n      \"x\": 9,\r\n      \"y\": 3,\r\n      \"type\": \"container\",\r\n      \"decor_id\": \"clay_pot_cluster\",\r\n      \"loot_pools\": [\r\n        \"alchemist_shop\"\r\n      ]\r\n    },\r\n    {\r\n      \"x\": 5,\r\n      \"y\": 5,\r\n      \"type\": \"container\",\r\n      \"decor_id\": \"writing_desk\",\r\n      \"loot_pools\": [\r\n        \"noble_generic\"\r\n      ]\r\n    }\r\n  ],\r\n  \"decor_layer\": [\r\n    [\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null\r\n    ],\r\n    [\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null\r\n    ],\r\n    [\r\n      null,\r\n      null,\r\n      \"dried_herbs\",\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      \"dried_herbs\",\r\n      null,\r\n      null,\r\n      null\r\n    ],\r\n    [\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null\r\n    ],\r\n    [\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null\r\n    ],\r\n    [\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null\r\n    ],\r\n    [\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null\r\n    ],\r\n    [\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null,\r\n      null\r\n    ]\r\n  ],\r\n  \"placement\": {\r\n    \"version\": 1,\r\n    \"contexts\": [\r\n      \"grid\",\r\n      \"roadside\"\r\n    ],\r\n    \"weight\": 1.0,\r\n    \"rotations\": [\r\n      0,\r\n      180\r\n    ],\r\n    \"mirror_x\": false,\r\n    \"buffer\": 1,\r\n    \"approach\": 2,\r\n    \"road_relation\": \"frontage\",\r\n    \"entrances\": [\r\n      {\r\n        \"id\": \"main\",\r\n        \"x\": 4,\r\n        \"y\": 7,\r\n        \"normal\": \"S\",\r\n        \"width\": 1,\r\n        \"role\": \"main\",\r\n        \"required\": true\r\n      }\r\n    ],\r\n    \"targets\": [\r\n      {\r\n        \"x\": 6,\r\n        \"y\": 6,\r\n        \"kind\": \"floor\",\r\n        \"required\": true\r\n      },\r\n      {\r\n        \"x\": 2,\r\n        \"y\": 3,\r\n        \"kind\": \"floor\",\r\n        \"required\": true\r\n      },\r\n      {\r\n        \"x\": 1,\r\n        \"y\": 1,\r\n        \"kind\": \"container\",\r\n        \"required\": true\r\n      },\r\n      {\r\n        \"x\": 9,\r\n        \"y\": 3,\r\n        \"kind\": \"container\",\r\n        \"required\": true\r\n      },\r\n      {\r\n        \"x\": 5,\r\n        \"y\": 5,\r\n        \"kind\": \"container\",\r\n        \"required\": true\r\n      }\r\n    ]\r\n  }\r\n}\r\n",
+      "variant": false,
+      "variant_id": "",
+      "target": "roguelike/data/buildings/commercial/apothecary_a.json",
+      "generation": 1,
+      "sha256": "743f19c37fcb9e18627c2a7cbad23779aae9d169d5fd44cfeba3203b1a1e70da"
+    },
+    "roguelike/data/items/components/clay_pot.json": {
+      "draft": "{\"unrelated\":\"kept\",",
+      "variant": false,
+      "variant_id": "",
+      "target": "roguelike/data/items/components/clay_pot.json",
+      "generation": 1,
+      "sha256": "04d45fd6366b02b4435e18472d28b8986aef16e74bfe341f67cb6c05f5bb88a9"
+    }
+  },
+  "crop_refusal": true,
+  "grown_edge_failure": [
+    {
+      "asset": "w5p_lodge",
+      "code": "PLACEMENT",
+      "correction": "Use the documented version-one placement profile.",
+      "field": "placement",
+      "message": "placement: entrance normal must point outward from footprint edge",
+      "path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "severity": "error"
+    }
+  ],
+  "blocked_cell": {
+    "asset": "",
+    "code": "ACCESS",
+    "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+    "field": "placement.entrances[0].span[1]",
+    "layer": "terrain",
+    "message": "0° / mirror False: Required native goal/span failed at exact declared coordinates",
+    "mirror": false,
+    "path": "roguelike/data/buildings/residential/w5p_lodge.json",
+    "rotation": 0,
+    "severity": "error",
+    "source_xy": [
+      5,
+      10
+    ]
+  },
+  "stale_return": true,
+  "dependency_revoked": true,
+  "external_conflict": {
+    "preserved": true,
+    "sha256": "5d94c2b9c4e768983307fe61e35cdb4223bb1b9b346cc9f88181dd7a411980d2"
+  },
+  "byte_checked_fixtures": {
+    "building_v1": {
+      "path": "workbench/docs/evidence/w5p/fixtures/building_v1.json",
+      "sha256": "6da242ecd216084c32b32eb601c765fcb0fa1fc3138cfeaf2101ee09847e47f8",
+      "bytes": 3428,
+      "published_path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "note": "Exact UI-authored reviewed/published bytes, verified by host reopen. -text preserves literal UTF-8/CRLF bytes."
+    },
+    "building_v2": {
+      "path": "workbench/docs/evidence/w5p/fixtures/building_v2.json",
+      "sha256": "1062472369789590fa29e7051f7a4991596ca80bf41fd54d1f565754e0209004",
+      "bytes": 3428,
+      "published_path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "note": "Exact UI-authored reviewed/published bytes, verified by host reopen. -text preserves literal UTF-8/CRLF bytes."
+    }
+  },
+  "errors": []
+}

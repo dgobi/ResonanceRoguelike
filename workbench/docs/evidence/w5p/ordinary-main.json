@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "world": [
+    128,
+    128
+  ],
+  "scene": [
+    15,
+    20,
+    "sub_52_30_0"
+  ],
+  "save_path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\ordinary-w5p-1793314390215\\roguelike\\saves\\slot_0",
+  "seed": 3204920688,
+  "ordinary_debug_default": true,
+  "save_load": true,
+  "save_access_events": 75,
+  "main_sha256": "0fc1ed01bd64b641c392dff70a2823bd06f5a6461032c4f3cea43eaef7dc4991",
+  "local_full_receipt": {
+    "path": "workbench/.artifacts/w5p/ordinary-main/receipt.json",
+    "sha256": "b99170eab090b9a0a9e1dbc38e2cfeb7a896626bb71bc4e5d42e0e6d50065127",
+    "bytes": 17206
+  },
+  "scope": "Fresh positively owned ordinary main/default-slot fixture. Audit installed before importing main/constructing Engine. Optional sprite resources are absent in this font/data fixture; no sprite-render fidelity claim."
+}

@@ -1,0 +1,153 @@
+{
+  "ordinary_main": {
+    "path": "workbench/docs/evidence/w5p/ordinary-main.json",
+    "sha256": "d2695cf417c4d60fb68bf610f6f47e7a979c3b3de5bda9fa2a80a0d53dd3c0ee",
+    "bytes": 856
+  },
+  "commands": [
+    {
+      "command": "npm test",
+      "exit_code": 0,
+      "outcome": "85 frontend tests",
+      "log": {
+        "path": "workbench/.artifacts/w5p/frontend-verified.log",
+        "sha256": "9a430cf9de420b2f5ec2c0ca9e17c331d7ba6188b565d91967cb14492b915cab",
+        "bytes": 287
+      }
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0,
+      "outcome": "TypeScript",
+      "log": {
+        "path": "workbench/.artifacts/w5p/typecheck.log",
+        "sha256": "1261d2f780b856a24a85d6db5b2b4c2df5e5a6dc8bc05673ac6bf8c6448d5c5b",
+        "bytes": 59
+      }
+    },
+    {
+      "command": "cargo test --locked --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "outcome": "70 Rust tests",
+      "log": {
+        "path": "workbench/.artifacts/w5p/host-verified.log",
+        "sha256": "d5e11ad2169653942398b48f69c5fa4a2c87c38bbc6fd2f5b21cce0400209723",
+        "bytes": 6573
+      }
+    },
+    {
+      "command": "cargo clippy --locked --manifest-path src-tauri/Cargo.toml -- -D warnings",
+      "exit_code": 0,
+      "outcome": "Warnings denied",
+      "log": {
+        "path": "workbench/.artifacts/w5p/clippy-verified.log",
+        "sha256": "db363cae30b1c336b9c3e18acec2c3dd150e7a42f7c6dd61b2bc3c24ea02ad57",
+        "bytes": 164
+      }
+    },
+    {
+      "command": "Pinned CPython 3.11: unittest discover -s worker -v",
+      "exit_code": 0,
+      "outcome": "108 worker tests; one expected missing-dependency control skip",
+      "log": {
+        "path": "workbench/.artifacts/w5p/worker-verified.log",
+        "sha256": "45df51067cddaef43ee402814c94b7635adbfc35afe168a94987b010ea00f56b",
+        "bytes": 17806
+      }
+    },
+    {
+      "command": "Development interpreter: BridgeTests.test_dependency_absence_structured",
+      "exit_code": 0,
+      "outcome": "Separate missing-dependency negative control",
+      "log": {
+        "path": "workbench/.artifacts/w5p/dependency-negative.log",
+        "sha256": "8b6061cdab6d4a8d6d81d5a346db4d617411062a6e6c3897ca0e462d234de7d5",
+        "bytes": 206
+      }
+    },
+    {
+      "command": "Pinned verification venv: verify_fixes.py --evidence workbench/.artifacts/w5p/game-verified --timeout 1800",
+      "exit_code": 0,
+      "outcome": "334 broad game tests, stable source",
+      "log": {
+        "path": "workbench/.artifacts/w5p/game-verified.log",
+        "sha256": "a725eda3930e9ebc210adcd99b178db50312a2b2f5a02040cd1ab4f42070013a",
+        "bytes": 60450
+      }
+    },
+    {
+      "command": "npm run bundle -- -- --locked",
+      "exit_code": 0,
+      "outcome": "Windows release executable and NSIS",
+      "log": {
+        "path": "workbench/.artifacts/w5p/package-verified.log",
+        "sha256": "13dd599fb7e45246adf1b6ac48f8adc477688e724cf720c79b26001b1ec70b1a",
+        "bytes": 2328
+      }
+    },
+    {
+      "command": "node scripts/run-buildings.mjs",
+      "exit_code": 0,
+      "outcome": "Complete packaged surface-building journey and controlled planned placement",
+      "log": {
+        "path": "workbench/.artifacts/w5p/native-attempt-6.log",
+        "sha256": "034065b539f82f6368e34fd7820d5e7e555ace7ae701fc6414ac055e88b82c6b",
+        "bytes": 779
+      }
+    },
+    {
+      "command": "node scripts/run-workspace.mjs",
+      "exit_code": 0,
+      "outcome": "Seven owners, stale/cancel/reopen/rollback lifecycle",
+      "log": {
+        "path": "workbench/.artifacts/w5p/workspace-verified.log",
+        "sha256": "a86bb712d4bb54498f36ef0c565241a0d0beeb3c453c061d7e4cfec59ce4de4a",
+        "bytes": 52487
+      }
+    },
+    {
+      "command": "node scripts/run-room-tests.mjs",
+      "exit_code": 0,
+      "outcome": "Retained room capture/cancellation/reset/latest/cold/fault lifecycle",
+      "log": {
+        "path": "workbench/.artifacts/w5p/room-session.log",
+        "sha256": "6b1805f3b7970d05b52d9e01586f84804203f0ee965d6b1b8bbe3f5f2ca2833f",
+        "bytes": 1043
+      }
+    },
+    {
+      "command": "Pinned runtime: standalone-room-regression.py <fresh owned fixture> <owned output>",
+      "exit_code": 0,
+      "outcome": "Ordinary 128x128 startup and default-slot save/load; optional sprite fallback warnings, no sprite-render fidelity claim",
+      "log": {
+        "path": "workbench/.artifacts/w5p/ordinary-main.log",
+        "sha256": "b95048f5e0c7d85c1ace6d4363dc6389281f6f48e8792de7623edb7f51a324c9",
+        "bytes": 9208
+      }
+    }
+  ],
+  "game": {
+    "command": [
+      "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5l\\test-runtime\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\tests",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeProject\\roguelike",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    },
+    "source_stable": true,
+    "exit_code": 0,
+    "passed": true
+  },
+  "scope": "Final source-stable gates. All failed/preliminary attempts remain excluded and locally retained."
+}

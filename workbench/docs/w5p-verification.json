@@ -1,0 +1,276 @@
+{
+  "milestone": "W5P",
+  "passed": true,
+  "observed_utc": "2026-10-29T23:02:35.299113+00:00",
+  "contract": "surface-building-1",
+  "revisions": {
+    "start": "0df461cdea49209eb66140e15576ed604efd1502",
+    "initial_remote": "0df461cdea49209eb66140e15576ed604efd1502",
+    "application_and_package_inputs": "750c4db2f7ac3a8d0355026a7dbdb3160c1bc699",
+    "final_delivery_ref": "checkpoint/workbench-w5p-verified-20261029",
+    "note": "Final named ref resolves the evidence/harness delivery. Exact remote main readback is reported after push in the handoff and ignored remote-readback.json."
+  },
+  "commission": {
+    "path": "C:/Users/dango/Downloads/CODEX_WORKBENCH_W5P_SURFACE_BUILDING_AUTHORING.md",
+    "sha256": "81edb8e5c7efd4d7cf0d46d20d708515240db586cb022c9953ca114a4ba77031"
+  },
+  "accepted_fixtures": {
+    "building_v1": {
+      "path": "workbench/docs/evidence/w5p/fixtures/building_v1.json",
+      "sha256": "6da242ecd216084c32b32eb601c765fcb0fa1fc3138cfeaf2101ee09847e47f8",
+      "bytes": 3428,
+      "published_path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "note": "Exact UI-authored reviewed/published bytes, verified by host reopen. -text preserves literal UTF-8/CRLF bytes."
+    },
+    "building_v2": {
+      "path": "workbench/docs/evidence/w5p/fixtures/building_v2.json",
+      "sha256": "1062472369789590fa29e7051f7a4991596ca80bf41fd54d1f565754e0209004",
+      "bytes": 3428,
+      "published_path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "note": "Exact UI-authored reviewed/published bytes, verified by host reopen. -text preserves literal UTF-8/CRLF bytes."
+    }
+  },
+  "inventory": {
+    "path": "workbench/docs/evidence/w5p/building-inventory.json",
+    "sha256": "1ab99ccda1ab401ee5ded047ccb2d2686a43ed5a67c69d21450677a8ed747892",
+    "bytes": 25149
+  },
+  "orientations": {
+    "path": "workbench/docs/evidence/w5p/orientation-access.json",
+    "sha256": "4d02cb416f2d66fe3a512d75be8f4b8ac602679bca92b6afe607e58c2fa2284e",
+    "bytes": 682631
+  },
+  "planned": {
+    "path": "workbench/docs/evidence/w5p/planned-placement.json",
+    "sha256": "ce553185fed91416730e29b131919afe7deb7cb32fb3213ec37de300b943f200",
+    "bytes": 52206
+  },
+  "native": {
+    "path": "workbench/docs/evidence/w5p/native-observations.json",
+    "sha256": "9aecea381c820fb39652037c47ff7cff6b1188095218c58925ff3fe5e72239e4",
+    "bytes": 9426
+  },
+  "gates": {
+    "path": "workbench/docs/evidence/w5p/gates.json",
+    "sha256": "d8fd99312d12d4aa8dd2c1a3e986361aff04af82fdb523ea79e4076321482e01",
+    "bytes": 5335
+  },
+  "preservation": {
+    "path": "workbench/docs/evidence/w5p/preservation.json",
+    "sha256": "6f7dd1b6ab82acf56eab947561dc263ee6e75201daddff3b4767800297b5bfe3",
+    "bytes": 2939
+  },
+  "attempts": {
+    "path": "workbench/docs/evidence/w5p/attempts.json",
+    "sha256": "7a5c4d1dd75469f8e70932a6b5e2351bca226e34780b27bcea94d8f6267e0e69",
+    "bytes": 5043
+  },
+  "environment": {
+    "path": "workbench/docs/evidence/w5p/environment.json",
+    "sha256": "7ffd7b86264b7e24ca4f4fe4c313bee51e7fe53bd78986720e3ddab79196e3f0",
+    "bytes": 1000
+  },
+  "package_source_inputs": {
+    "path": "workbench/docs/evidence/w5p/package-source-inputs.json",
+    "sha256": "fe0bab649c0b443e5a5afc3d469518834f5a2658568c0abdd719728b2672cc7b",
+    "bytes": 18753
+  },
+  "package": {
+    "resonance-workbench.exe": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "a3450d7d3e21b56b74f92fed2f8054c8fd59360afd212cd6dcc5f2049309d55a",
+      "bytes": 10345984
+    },
+    "bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "c157a3cd4774b1f4504cdb222a76136f450d26f16dd42a36b7c22ab9dc8415ed",
+      "bytes": 28485406
+    }
+  },
+  "runtime": {
+    "worker/bridge.py": {
+      "path": "workbench/worker/bridge.py",
+      "sha256": "2e29a52eecd5e048c9f4e6482b800b37be5a38447971d27ffd63267def83cb8c",
+      "bytes": 34705
+    },
+    "worker/runtime/python.exe": {
+      "path": "workbench/worker/runtime/python.exe",
+      "sha256": "bf1b03022cadfc18049a7f0ecf1f3134c7676fcb6ff6c6941ae7f77e21285c73",
+      "bytes": 101760
+    },
+    "worker/runtime/python311._pth": {
+      "path": "workbench/worker/runtime/python311._pth",
+      "sha256": "c76be49a913db57efc322b4c77ae5ed282e78285a69a70441e011529241507ce",
+      "bytes": 36
+    },
+    "worker/requirements.lock": {
+      "path": "workbench/worker/requirements.lock",
+      "sha256": "17cd05554346febe141934ef7757e42d71f91880d2303051196fda0d50d278a7",
+      "bytes": 657
+    }
+  },
+  "source_hashes": {
+    "roguelike/docs/POOL_AUTHORING.md": {
+      "working_sha256": "68aa81d0e9a1918b5ce6070fd9220d38d3986913c704230827ff4e5c13922169",
+      "committed_sha256": "68aa81d0e9a1918b5ce6070fd9220d38d3986913c704230827ff4e5c13922169"
+    },
+    "roguelike/docs/STRUCTURE_AUTHORING.md": {
+      "working_sha256": "f6bee826acf136c175fbc7312fb6470721c0c18c53f4b6f91f87b998a030c84e",
+      "committed_sha256": "461a6541ced8922363da4393e6554803a1a76d7c0cbb79c28354506c634ae8f4"
+    },
+    "roguelike/engine/building_authoring.py": {
+      "working_sha256": "95ca95a4b705af024322c6970c756d1e3287e7946ba0836dd0c3ba3170897c41",
+      "committed_sha256": "891ff292ad792adc65a9004a3569017d705cb4e56b40c60673b7997667a74f7c"
+    },
+    "roguelike/engine/content_authoring.py": {
+      "working_sha256": "bb316dc94712176a6741ec14990c6d5bfcf84a170c665072ef7c9cc9f25e0728",
+      "committed_sha256": "bb316dc94712176a6741ec14990c6d5bfcf84a170c665072ef7c9cc9f25e0728"
+    },
+    "roguelike/engine/pool_authoring.py": {
+      "working_sha256": "e7cb63b82eb1771f8e30561df4cf4d5a021f6b9fc959a20854fea23cd5166a98",
+      "committed_sha256": "e7cb63b82eb1771f8e30561df4cf4d5a021f6b9fc959a20854fea23cd5166a98"
+    },
+    "roguelike/generation/building_preview.py": {
+      "working_sha256": "13537d0e050932c3b8683be5c7f75eeb6981b2e7478a60790b075eb09bb7b1c2",
+      "committed_sha256": "f362a140e72caf98b86e3a3d95fefaf54fd1c460c1c9fae26c293f0064f14e44"
+    },
+    "roguelike/generation/structure_preview.py": {
+      "working_sha256": "e676a74d40bbaaab226639a7bd566a29a9f3246710173539432da2135e45c544",
+      "committed_sha256": "86fce5485dcdf92b6949db22c3a53f1119ee72470926ff5d42dce010c4322fab"
+    },
+    "tools/structure_authoring.py": {
+      "working_sha256": "efee2d0905fee4fa6da3171a0a6d528a8f5deab88dce08127945b355714d3d48",
+      "committed_sha256": "9e56c15c6624b389bfec425ab865e235f2bb55ffd40cbdaf419d77186f78fbfc"
+    },
+    "workbench/README.md": {
+      "working_sha256": "2c91ed3894723c2111b3acf01da723aba658c6d59de0ca30c1700ca6986599f2",
+      "committed_sha256": "66f4b50b63b163fdf70981cb88fad54d0e5c08fc05cbf6629defe2c60fd55191"
+    },
+    "workbench/docs/CONTENT_CONTRACTS.md": {
+      "working_sha256": "da079cada55ba7b33251977805026764bb374875959094293e41b17d691af7d8",
+      "committed_sha256": "da079cada55ba7b33251977805026764bb374875959094293e41b17d691af7d8"
+    },
+    "workbench/scripts/building-inventory.py": {
+      "working_sha256": "1933f1cafcf735169c73ebc55653658b8b11f7570a286dc7b9e8e1fe4313bf0c",
+      "committed_sha256": "1933f1cafcf735169c73ebc55653658b8b11f7570a286dc7b9e8e1fe4313bf0c"
+    },
+    "workbench/scripts/building-planned.py": {
+      "working_sha256": "b26d01e1c7ed41393c992eb31a458b1ae7a6cf89762656642419779d33923637",
+      "committed_sha256": "2e444749df68cef14ff0ef147da9a50bbc57e4d817ffa08864a575291b9ab426"
+    },
+    "workbench/scripts/run-buildings.mjs": {
+      "working_sha256": "0905bb418fe83d308aac281cf4a188aa4ff688daac830464029b3295f636e71f",
+      "committed_sha256": "dc8a6b9be1b32302ab557262fe2b7e12f15ae73c32505b41afe990bde56bd914"
+    },
+    "workbench/src-tauri/src/authoring.rs": {
+      "working_sha256": "7b1de980cfea412f9299046b0a710e6fa5867bebd74eedf3e6a0dc2b3e78c487",
+      "committed_sha256": "ce74e41f4e1e74651a44d6eeac8123bc4900c69a62aaaa5bcb6de4f47ecb8601"
+    },
+    "workbench/src-tauri/src/main.rs": {
+      "working_sha256": "a47cc668446d2de149a263dabd25a00ed828cc8cc4cb0a136d8d8b9dc498c19e",
+      "committed_sha256": "350b183a98959c5373416d7beaa78818acdac2c18ccf837a73e29d36636eaa6a"
+    },
+    "workbench/src-tauri/src/recovery.rs": {
+      "working_sha256": "bb9d5a6fd0a40f9d8edada51d33fcc010d46ca3515e608159ebf477d76f6f7ea",
+      "committed_sha256": "f58404abed1aac36a76e47d2c76a5afcb39dfc3dcf5eac17337096750a9bf244"
+    },
+    "workbench/src/App.tsx": {
+      "working_sha256": "2676a691a260e4bfeb4414dcae5f7256a69710dcf3fa81cef231924843c35a69",
+      "committed_sha256": "8723c3c5a441649f77e2fa0a6c0a436d2e72684c95207ff6450bf10801bfa7b4"
+    },
+    "workbench/src/Authoring.tsx": {
+      "working_sha256": "62abe99a8026ffa391ba3368411f64daa2697b562c23c37db8fac2ac19cd7d66",
+      "committed_sha256": "93e8fcb7fb2b5c4f8effbb1770ce1dfd69f22f0588fcc7b3fe3870257d23d44a"
+    },
+    "workbench/src/BuildingControls.tsx": {
+      "working_sha256": "cc26f59636024f109ac136015accb52307d7a14c49d396959762cb71f3d99bbc",
+      "committed_sha256": "1d53470e7846217e0e33a12579dc0eafa766cf28cc0a0a9bcac8ad87ce16d2ae"
+    },
+    "workbench/src/ContentEditor.tsx": {
+      "working_sha256": "ad1f5c3124f2f1a4559f9a0f865aaf7fa5c498a7be34a5cb55a1699778e90990",
+      "committed_sha256": "bbcf54d025858d5f8dba41769c53c0b5a536b8fb37d1ac014b51b52c5bce2626"
+    },
+    "workbench/src/LayoutCanvas.tsx": {
+      "working_sha256": "ba0ab5ad7e42f400314cfe24d75a4d124415d2fa517e8fa74d6ac5defad92a1d",
+      "committed_sha256": "8ac3da7d1dc3067388d517b648c7833e638cb4279c62b03627187960e3cd341d"
+    },
+    "workbench/src/LayoutEditor.tsx": {
+      "working_sha256": "fe482a6a1633efed63555bf73a1d178d595d5e7aedac90a78cc8a9b172bd4eba",
+      "committed_sha256": "35cca1cc3b672702be356b4f53c99bc78d38238cd29194958fde8195537f62ae"
+    },
+    "workbench/src/RecoveryPanel.tsx": {
+      "working_sha256": "f2aefae8ac4bc88ab206b1cae74f8e51fa84cb6568731601f8003308ef7e7025",
+      "committed_sha256": "15932e83e7d616fe4c6f63d97dfa42a92916730a8d33118d80d19cd97b66fe77"
+    },
+    "workbench/src/RoomControls.tsx": {
+      "working_sha256": "67cf3a715885d2fa53c6f4ba13fd1287d7044a708c7f999a1a12fc61de8bfc77",
+      "committed_sha256": "9d1829277c8c11be4a3f62704e7968b60a14132748a9b6008d4e81398c5f6242"
+    },
+    "workbench/src/building.test.ts": {
+      "working_sha256": "cebf89f4c22f6f6d98864a2320f6fbf036a0d4a3773841cc1dafef14154fb613",
+      "committed_sha256": "cebf89f4c22f6f6d98864a2320f6fbf036a0d4a3773841cc1dafef14154fb613"
+    },
+    "workbench/src/building.ts": {
+      "working_sha256": "c1c6c2de7b92ba05c4405464017c1d012327bd0177a131889936ec738aebafdb",
+      "committed_sha256": "d5763dd405997771c279f2b980a86038483412c2b93f9a1afb2966781df1e1af"
+    },
+    "workbench/src/content.ts": {
+      "working_sha256": "3e7aa3c3e5b4d4652609c8a3b13a43f39bb1ae73612e9606453d6342f8a134d7",
+      "committed_sha256": "e7c282cf9a466a5a7fc7c513e428f6a066658f46190e22860360cdd28507644f"
+    },
+    "workbench/src/layout.test.ts": {
+      "working_sha256": "c82324d4a79cebb8f2b991bdbd98e326f62d8508837aba1d6336e5214460758c",
+      "committed_sha256": "8ae57a0ef2973ac4e2459e138fc0a779b372bbfadebcb45eeef8f0cc38bd9ace"
+    },
+    "workbench/src/layout.ts": {
+      "working_sha256": "85edee8ebff2c34c5ee9dfa63c416aeb1d025619de5cb2d5d1c1b601b3db9e5d",
+      "committed_sha256": "5bb03ec6d1a6a3b3d04beb4dc9d63f006d6a69fc6708d9d44abe5d5e48890af3"
+    },
+    "workbench/src/protocol.ts": {
+      "working_sha256": "df51713cc231316a35f5fa02d0e1c2307b0bf3c8df7dcbc134c35d0e9a255d4a",
+      "committed_sha256": "3d7ccba0791139e1c64c6246e2c285e00f9339e3fde1f7b0cb685284cc4fd953"
+    },
+    "workbench/worker/bridge.py": {
+      "working_sha256": "2e29a52eecd5e048c9f4e6482b800b37be5a38447971d27ffd63267def83cb8c",
+      "committed_sha256": "90cc7fd6c49eba9caa3824ef0885d1b527d35805d7196317470bb90d5b021df8"
+    },
+    "workbench/worker/test_authoring.py": {
+      "working_sha256": "739549f766ac3a71c628c41faf01f7d5268876ec5460d0d8c3dc4d226fb3710b",
+      "committed_sha256": "ae96828ec1c250ad14d7d1a96fa2932df576b3c60155f767a3007077723fc56f"
+    },
+    "workbench/worker/test_buildings_w5p.py": {
+      "working_sha256": "bcc24bb9392776b2c81ebe4afa35e365b709bd46143aa315013a6038508bb511",
+      "committed_sha256": "aa2bf0af116b9d67048e89a0b6d482c9b2b11b2442a86f17b72bd02a539a12a5"
+    },
+    "workbench/worker/test_pools.py": {
+      "working_sha256": "07a147bae55d48c5f978deda808da37861130b9cf49e81874133183c37430511",
+      "committed_sha256": "7cbce5e33007b19935bd80986ea5625310c9007d6014d72e7931a1f15c7091f8"
+    },
+    "workbench/worker/test_visual.py": {
+      "working_sha256": "45c0a0923c1e8bca2fbbcd3d7efdc575da3c5bd28613225fed9edb4c8aa83d5f",
+      "committed_sha256": "9fd60a1081870454b515dc380d3f7ab3d8b2d5f80032656cbeed6adae08463a1"
+    }
+  },
+  "captured_game_inputs": {
+    "path": "workbench/docs/evidence/w5p/captured-game-inputs.json",
+    "sha256": "9f0567ca857e40f41288452d07953344d4aee2587e8f46ee1eef9f886104fe26",
+    "bytes": 2775
+  },
+  "verification_source_hashes": {
+    "workbench/scripts/workspace-journey.mjs": {
+      "working_sha256": "2d64663c87953b5e99da15ffb804135091599cef5bc666040afe6b29b30ab25d",
+      "committed_sha256": "9ca6a7de136c96fe75a2951fa0ba78dd6c830e2317c50a013ae251b45a05ca14"
+    },
+    "workbench/scripts/w5p-receipt.py": {
+      "working_sha256": "289bd5135f2065c302655c72ef9436f0adebb4f1c3ad6a32f253a24f64c78795",
+      "committed_sha256": "88cf4bceea87689fd9f58be5c4b9ec257c4af8f1df23bbf524605cb5c1e8b714"
+    }
+  },
+  "limits": [
+    "Revealed initial production previews; no player FOV, ordinary use, safety, balance or natural-selection frequency claim.",
+    "Controlled grid/residential in-memory injection at one recorded seed is not saved registration. Legacy folder pools can discover added variants.",
+    "No canonical pack, current selection-membership change, world rewrite, surface Test-room launcher, save migration, wiki or reference-pack rebuild.",
+    "Installer built, not installed; Windows is the verified target. Exact-source operation history remains in memory; restart recovery restores text/intent, never old review authority.",
+    "Preservation inventory covers tracked bytes and the owner plan; it does not independently prove every personal path was unread. Existing owned-cache/missing-cache guarantees are exercised by retained game lifecycle coverage."
+  ]
+}

@@ -142,8 +142,15 @@ export async function workspaceJourney(page,root,output,receipt) {
   // exact draft and receipt; recovery only reopens, never repeats publication.
   await tab(paths[4]);await validate();
   const verdict=JSON.parse(await editor().getByTestId("draft-receipt").textContent());assert(verdict.valid && verdict.review_token,JSON.stringify(verdict));
-  await page.evaluate(()=>window.w5c.failReopen=true);
-  await eb("Apply variant").click();await b("Confirm apply one file").click();await tab(paths[2]);await idle();
+  for(let attempt=0;;attempt++) {
+    await idle();await eb("Apply variant").click();
+    const confirm=b("Confirm apply one file");
+    try{await confirm.waitFor({state:"visible",timeout:1500});}
+    catch(error){if(attempt>=4)throw error;receipt.review_retries=(receipt.review_retries||0)+1;await validate();continue;}
+    await page.evaluate(()=>window.w5c.failReopen=true);
+    await confirm.click();break;
+  }
+  await tab(paths[2]);await idle();
   assert.equal(await source(),drafts.get(paths[2]));await tab(paths[4]);
   await editor().getByTestId("saved-reopen-failed").waitFor();assert.equal(await source(),drafts.get(paths[4]));
   const target=paths[4].replace("lab_note_primary_a",ids.get(paths[4]));const saved=await readFile(resolve(root,target));assert.equal(digest(saved),verdict.draft_sha256);

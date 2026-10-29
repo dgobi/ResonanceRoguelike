@@ -1,0 +1,60 @@
+{
+  "native": [
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5p/native-1793312419813/receipt.json",
+        "sha256": "cd9fd62c9b94bdcc3e168c61e74842daeac6280e136de092d267d8a91c540af7",
+        "bytes": 16908
+      },
+      "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog', { name: 'Recover drafts', exact: true }) to be hidden\u001b[22m\n\u001b[2m    64 × locator resolved to visible <section role=\"dialog\" aria-label=\"Recover drafts\" class=\"confirmation recovery-panel\">…</section>\u001b[22m\n\n    at recover (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-buildings.mjs:34:234)\n    at async file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-buildings.mjs:51:94",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5p/native-1793312594298/receipt.json",
+        "sha256": "087b08280a3318700ddbeb922055b13907ae742b4f5496e12b5dd157c9c5b91a",
+        "bytes": 112024
+      },
+      "failure": "TypeError: Cannot read properties of undefined (reading 'source_xy')\n    at file:///G:/GameDev/RoguelikeProject/workbench/scripts/run-buildings.mjs:75:198",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5p/native-1793312711667/receipt.json",
+        "sha256": "d06f4eafafc8af670452b2a25ad38b6b9e91d9783f188e5967159541d5d7e296",
+        "bytes": 112049
+      },
+      "failure": "locator.waitFor: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"authoring\"]:visible').getByTestId('recovery-status').getByText(/Recovery checkpoint saved/) to be visible\u001b[22m\n\n    at captured (G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-buildings.mjs:33:116)\n    at G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-buildings.mjs:70:140",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5p/native-1793312753605/receipt.json",
+        "sha256": "ee0667bb3196a3fc8482b6a3a6d1c9474f462fd25d9ff7355b4b13748f3f1415",
+        "bytes": 1239619
+      },
+      "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-document-tab=\"undefined\"]')\u001b[22m\n\n    at G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-buildings.mjs:81:469",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5p/native-1793312955878/receipt.json",
+        "sha256": "72b07232de01e141f3f93fd001f0187849d92d15d519637b083d945bb33aca7a",
+        "bytes": 1239667
+      },
+      "failure": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText(/Recorded container location is stale/).filter({ visible: true }) to be visible\u001b[22m\n\n    at G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-buildings.mjs:81:534",
+      "counted_as_pass": false
+    }
+  ],
+  "excluded": [
+    "First worker full run: one expected dependency-control skip, one SOURCE_CHANGED during ongoing source edits, and one legacy building variant fixture without original source identity. The latter is adapted; the stable full run is authoritative.",
+    "Early visual/authoring cases reflected legacy source-free variants and no production validation. Updated to enforce registered original authority, preserve BOM according to the structure loader, and retain invalid-value repair without promoting malformed originals.",
+    "First Rust run exposed mock variant drafts that retained the original ID. Fixtures now use a registered building and real variant identity; final 70 tests pass without a legacy slot.",
+    "Native recovery retries only explicit BUSY refusals. Early harness clicks outside an enlarged camera were corrected by using Fit layout; an obsolete runner launched after a wrong-cwd edit failure was stopped in its owned process tree.",
+    "A harness assumed text IDs matched filenames; it now records the actual readable source path. The journey then exposed a real dropped origin location in the frontend wrapper; passthrough is corrected and return after selecting a different record plus stale return both pass.",
+    "A package attempt overlapped an app process and failed NSIS with sharing error 32. The authoritative package completed before the passing native journey; executable hashes match.",
+    "The first 334-test game run passed tests but crossed source edits and has source_stable=false; it is excluded. The final stable rerun is required.",
+    "The shared-workspace journey is adapted from six plus a singleton to seven keyed owners. A confirmation lost during a freshness transition is retried with a new validation; no failed run is counted as passing.",
+    "A focused weighted-coordinate assertion expected the code in the message; the actual compiler correctly returned CHOICE_COORDINATE in its code field. The assertion now checks that field."
+  ]
+}

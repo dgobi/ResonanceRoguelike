@@ -1,0 +1,107 @@
+{
+  "id": "w5p_lodge",
+  "category": "residential",
+  "width": 13,
+  "height": 11,
+  "facing": "south",
+  "condition": "intact",
+  "district_weights": {
+    "residential": 4,
+    "market": 1
+  },
+  "interior_loot_table": "residential_common",
+  "description": "A furnished wayside lodge with a useful supply crate and a readable clue.",
+  "legend": {
+    "#": "wall",
+    ".": "floor",
+    "w": "worn_stone",
+    "f": "flagstone",
+    "+": "door_closed",
+    "D": "door_open",
+    "T": "table",
+    "~": "water",
+    " ": null
+  },
+  "layers": [
+    "#############",
+    "#..........##",
+    "#..........##",
+    "+..........##",
+    "#..........##",
+    "#..........##",
+    "#..........##",
+    "#.ff.......##","#..........##","####++#######","####++#######"
+  ],
+  "special_tiles": [
+    {
+      "x": 1,
+      "y": 6,
+      "type": "item",
+      "item_id": "letter",
+      "text_id": "world_graffiti_a",
+      "note": "Personal letter or note on table"
+    },
+    {
+      "x": 8,
+      "y": 1,
+      "type": "container",
+      "decor_id": "sack",
+      "loot_pools": [
+        "commoner_kitchen"
+      ]
+    },
+    {
+      "x": 2,
+      "y": 2,
+      "type": "item",
+      "item_id": "letter",
+      "text_id": "text_residential_letter",
+      "note": "Letter left near the door"
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "type": "scene",
+      "scene_id": "interrupted_meal",
+      "note": "Meal left mid-course on table"
+    },{"type":"item","x":2,"y":6,"item_id":"wood_bundle"},{"type":"item","x":3,"y":6,"item_id":"wood_bundle","text_id":"world_graffiti_a"},{"type":"container","x":9,"y":6,"decor_id":"crate","loot_pools":["workshop_b_fuel"]}
+  ],
+  "note": "PLACEHOLDER — redesign layers to taste. Door at (4,7) faces south street.",
+  "placement": {
+    "version": 1,
+    "contexts": [
+      "grid",
+      "roadside"
+    ],
+    "weight": 1,
+    "rotations": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "mirror_x": true,
+    "buffer": 1,
+    "approach": 2,
+    "road_relation": "frontage",
+    "entrances": [
+      {
+        "id": "main",
+        "x": 4,
+        "y": 10,
+        "normal": "S",
+        "width": 2,
+        "role": "main",
+        "required": true
+      },{"id":"service","x":0,"y":3,"normal":"W","width":1,"role":"service","required":true}
+    ],
+    "targets": [
+      {
+        "x": 1,
+        "y": 6,
+        "kind": "readable",
+        "required": true
+      },{"x":2,"y":6,"kind":"item","required":true},{"x":3,"y":6,"kind":"readable","required":true},{"x":9,"y":6,"kind":"container","required":true}
+    ]
+  }
+,"decor_layer":[[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,"dried_herbs",null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null]]}

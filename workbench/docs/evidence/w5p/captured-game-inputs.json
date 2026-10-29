@@ -1,0 +1,50 @@
+{
+  "roguelike/engine/building_authoring.py": {
+    "working_sha256": "95ca95a4b705af024322c6970c756d1e3287e7946ba0836dd0c3ba3170897c41",
+    "committed_sha256": "891ff292ad792adc65a9004a3569017d705cb4e56b40c60673b7997667a74f7c"
+  },
+  "roguelike/engine/content_authoring.py": {
+    "working_sha256": "bb316dc94712176a6741ec14990c6d5bfcf84a170c665072ef7c9cc9f25e0728",
+    "committed_sha256": "bb316dc94712176a6741ec14990c6d5bfcf84a170c665072ef7c9cc9f25e0728"
+  },
+  "roguelike/engine/definition_sources.py": {
+    "working_sha256": "16a47addcb620768b13d3433ee90ca11471934d53746247b8e348d57e2e32bbc",
+    "committed_sha256": "9cc1e7c2a002b97b296754c6354458b1a98c619934a4c5354cac2218d4df0845"
+  },
+  "roguelike/engine/item_factory.py": {
+    "working_sha256": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66",
+    "committed_sha256": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66"
+  },
+  "roguelike/engine/pool_authoring.py": {
+    "working_sha256": "e7cb63b82eb1771f8e30561df4cf4d5a021f6b9fc959a20854fea23cd5166a98",
+    "committed_sha256": "e7cb63b82eb1771f8e30561df4cf4d5a021f6b9fc959a20854fea23cd5166a98"
+  },
+  "roguelike/engine/scene_generation.py": {
+    "working_sha256": "961ab05be3de4da49f30b69f49e66b1cd98c868a076e9bce0287cf2c3ce66425",
+    "committed_sha256": "ce3fc60692b72a324b0a56887257f063dca671ed700424e11af2471de46db4b5"
+  },
+  "roguelike/generation/building_preview.py": {
+    "working_sha256": "13537d0e050932c3b8683be5c7f75eeb6981b2e7478a60790b075eb09bb7b1c2",
+    "committed_sha256": "f362a140e72caf98b86e3a3d95fefaf54fd1c460c1c9fae26c293f0064f14e44"
+  },
+  "roguelike/generation/placement.py": {
+    "working_sha256": "2fb1d1c815d042041d63e971a08564dda0337aaae51c0d6a49234a2d11e679ee",
+    "committed_sha256": "2fb1d1c815d042041d63e971a08564dda0337aaae51c0d6a49234a2d11e679ee"
+  },
+  "roguelike/generation/plan_preview.py": {
+    "working_sha256": "c91d0875048f4fb80390763f3abefde8d016d16dc7f8bbda878a833ff647124c",
+    "committed_sha256": "c91d0875048f4fb80390763f3abefde8d016d16dc7f8bbda878a833ff647124c"
+  },
+  "roguelike/generation/planned_scene.py": {
+    "working_sha256": "e2c8905d7b137af32b36ea86af583fb5696723b2814c4d17fa28542e4ae489ce",
+    "committed_sha256": "e2c8905d7b137af32b36ea86af583fb5696723b2814c4d17fa28542e4ae489ce"
+  },
+  "roguelike/generation/structure_contract.py": {
+    "working_sha256": "10517a45ca56413abfd862e43da65acdf883e128a1a1202de3ce7a1dd8697c1d",
+    "committed_sha256": "10517a45ca56413abfd862e43da65acdf883e128a1a1202de3ce7a1dd8697c1d"
+  },
+  "roguelike/generation/structure_preview.py": {
+    "working_sha256": "e676a74d40bbaaab226639a7bd566a29a9f3246710173539432da2135e45c544",
+    "committed_sha256": "86fce5485dcdf92b6949db22c3a53f1119ee72470926ff5d42dce010c4322fab"
+  }
+}
