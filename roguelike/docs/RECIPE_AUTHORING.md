@@ -26,6 +26,13 @@ content shown as unknown and refused by CraftScreen; no learning route is added.
 | requires_single_item object | `tags` all hold on each of `max_quantity` distinct automatic materials. Despite its name, this is required quantity, absent one. |
 | requires_ambient | Conditions, with tier default one; quantity has no physical meaning. |
 
+CraftScreen distinguishes automatic materials from protected matches available
+through **Enter → Choose materials**. Conjunction counts include automatic
+materials only; no conjunction chooser exists. Tools show retained matches.
+Per-row counts are potential matches, not a combined allocation: each physical
+slot requires a distinct instance. Production confirmation rechecks knowledge,
+conditions, placement and exact ownership before spending.
+
 One multi-tag object cannot fill multiple material/tool slots. Repeated rows
 stay separate. There is no conjunction preference channel: protected tag matches
 are not eligible automatic materials. Controls preserve list/object form,

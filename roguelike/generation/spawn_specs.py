@@ -31,9 +31,9 @@ def resolve_special(spec, rng, source, *, route=None):
             raise GenerationError(f'{source}: weighted spawn_table needs a positive finite total')
         chosen = rng.choices(table, weights=weights, k=1)[0]
         kind = chosen.get('type', chosen.get('kind'))
-    if kind == 'creature' and route != 'authored_submap':
+    if kind in ('creature', 'decor') and route != 'authored_submap':
         raise GenerationError(f'{source}: creature requires a direct authored_submap special')
-    if kind not in SUPPORTED | DEFERRED | ({'creature'} if route == 'authored_submap' and chosen is spec else set()):
+    if kind not in SUPPORTED | DEFERRED | ({'creature', 'decor'} if route == 'authored_submap' and chosen is spec else set()):
         raise GenerationError(f'{source}: unsupported special type {kind!r}')
     result = dict(chosen, kind=kind, x=spec.get('x', 0), y=spec.get('y', 0), source=source)
     if kind != 'weighted' and chosen is not spec:

@@ -1,5 +1,5 @@
 import {useEffect,useState} from "react";
-import {editItem, resizeRoom, valueEdit, type Catalog, type Layout, type Special} from "./layout";
+import {editItem, editDecor, resizeRoom, valueEdit, type Catalog, type Layout, type Special} from "./layout";
 
 type Edit=(operation:(source:string)=>string,label:string)=>void;
 export function RoomGeometry({model:m,draft,catalog,disabled,onEdit}:{model:Layout;draft:string;catalog:Catalog;disabled:boolean;onEdit:Edit}) {
@@ -42,8 +42,25 @@ export function RoomGeometry({model:m,draft,catalog,disabled,onEdit}:{model:Layo
    <label>exit_x<input aria-label="Fallback exit X" type="number" value={exitX} onChange={e=>setExitX(e.target.value)}/></label><label>exit_y<input aria-label="Fallback exit Y" type="number" value={exitY} onChange={e=>setExitY(e.target.value)}/></label>
    <button disabled={!coordinate(exitX,exitY)} onClick={()=>onEdit(s=>valueEdit(valueEdit(valueEdit(s,["exit_direction"],direction),["exit_x"],Number(exitX)),["exit_y"],Number(exitY)),"Set fallback exit")}>Apply fallback return</button>
   </fieldset>
-  <details><summary>Retained inactive fields</summary><p>decor_layer, legend_weights, top-level stairs_up, type, rotatable and tags do not activate those behaviors on this route. Containers provide physical furnishings.</p><pre className="raw">{JSON.stringify(Object.fromEntries(["decor_layer","legend_weights","stairs_up","type","rotatable","tags"].map(k=>[k,k in raw?raw[k]:"(absent)"])),null,2)}</pre></details>
+  <details><summary>Retained inactive fields</summary><p>decor_layer, legend_weights, top-level stairs_up, type, rotatable and tags do not activate those behaviors on this route. Use direct decor or container records for furnishings.</p><pre className="raw">{JSON.stringify(Object.fromEntries(["decor_layer","legend_weights","stairs_up","type","rotatable","tags"].map(k=>[k,k in raw?raw[k]:"(absent)"])),null,2)}</pre></details>
  </details>;
+}
+
+export function DecorSummary({id,catalog}:{id:string;catalog:Catalog}) {
+ const row=catalog.decor[id],p=row?.properties;
+ if(!row)return <p>Choose a saved decor definition.</p>;
+ return <div className="decor-summary"><strong>{row.name}</strong><p>{row.description}</p>{p&&<p>{p.blocks_movement?"Blocks movement":"Allows movement"} · declared sight blocking: {String(p.declared_blocks_sight)} · light emission: {p.light_emit} · cosmetic effect: {p.cosmetic_fx||"none"} · interaction: {p.interaction||"none"}. {p.stationary_fire?"Supplies stationary fire for preparation.":id==="campfire_unlit"?"Light through its existing interaction to prepare here.":"No preparation heat."}</p>}{row.supported===false&&<p role="note">{row.reason}</p>}<small>{p?.sight_note} Flame effects alone supply neither light nor preparation heat.</small></div>;
+}
+
+export function DecorFields({record,catalog,disabled,index,onEdit,onDelete}:{record:Special;catalog:Catalog;disabled:boolean;index:number;onEdit:Edit;onDelete:()=>void}) {
+ const [x,setX]=useState(String(record.x)),[y,setY]=useState(String(record.y)),[id,setId]=useState(String(record.decor_id??""));
+ const valid=catalog.decor[id]?.supported&&catalog.decor[id]?.resolved&&x!==""&&y!==""&&[Number(x),Number(y)].every(Number.isInteger);
+ return <fieldset disabled={disabled}><legend>Direct furnishing · one decor slot</legend>
+  <label>Saved decor<select aria-label="Marker decor ID" value={id} onChange={e=>setId(e.target.value)}>{!catalog.decor[id]&&<option value={id}>{id} · missing</option>}{Object.entries(catalog.decor).map(([key,r])=><option key={key} value={key}>{key} · {r.name}{!r.supported?" · unavailable":""}</option>)}</select></label>
+  <DecorSummary id={id} catalog={catalog}/>
+  <label>Source X<input aria-label="Decor source X" type="number" value={x} onChange={e=>setX(e.target.value)}/></label><label>Source Y<input aria-label="Decor source Y" type="number" value={y} onChange={e=>setY(e.target.value)}/></label>
+  <button disabled={!valid} onClick={()=>onEdit(s=>editDecor(s,index,{x:Number(x),y:Number(y),decor_id:id}),"Move / edit decor")}>Apply decor edit</button><button onClick={onDelete}>Delete decor</button>
+ </fieldset>;
 }
 
 export function ItemFields({record,catalog,disabled,index,onEdit,onDelete}:{record:Special;catalog:Catalog;disabled:boolean;index:number;onEdit:Edit;onDelete:()=>void}) {

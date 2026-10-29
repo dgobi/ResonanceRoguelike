@@ -45,6 +45,7 @@ class DataLoader:
         self.ai_config:            dict = self._load("ai_config.json")
         self.processing_messages:  dict = self._load("processing_messages.json")
         _decor_list = self._load_list("decoratives.json")
+        self.decorative_sources = _decor_list
         self.decoratives: dict = {e["id"]: e for e in _decor_list if "id" in e}
         self.loot_pools: dict = self._load_dir("loot_pools")
         print(f"  Loot pools loaded: {len(self.loot_pools)}")

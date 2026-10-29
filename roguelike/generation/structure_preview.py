@@ -55,7 +55,7 @@ def preview(raw, route, data, *, category=None, seed=20261023, flip_v=False, pat
                                for d, items in receipt['objects']] if receipt['kind'] == 'container'
                               else [serialize_item(i) for i in receipt['objects']])
             row['actors'] = [_serialize_entity(a) for a in receipt.get('actors', [])]
-            row['actual_count'] = len(row['actors']) if receipt['kind']=='creature' else len(row['objects'])
+            row['actual_count'] = (1 if receipt['kind']=='decor' and receipt_owned(receipt,m) else len(row['actors']) if receipt['kind']=='creature' else len(row['objects']))
             row['actor_classes'] = [type(a).__name__ for a in receipt.get('actors', [])]
             receipts.append(row)
     m.generation_revision=GENERATION_REVISION
@@ -85,9 +85,9 @@ def direct_access(m,data,receipts,spawn):
         m.visible[:]=True
         for receipt in receipts:
             kind=receipt['kind']
-            if kind not in ('item','container'): continue
+            if kind not in ('item','container','decor'): continue
             xy=tuple(receipt['xy']); approaches=[]; owned=receipt_owned(receipt,m)
-            if kind=='container':
+            if kind in ('container','decor'):
                 for point in sorted(reached):
                     if max(abs(point[0]-xy[0]),abs(point[1]-xy[1]))>1: continue
                     proxy=SimpleNamespace(local_map=m,player=SimpleNamespace(x=point[0],y=point[1]))
@@ -179,6 +179,8 @@ def receipt_owned(receipt,m):
     kind=receipt['kind']
     if kind in ('empty','body','stele'): return True
     xy=tuple(receipt['xy']); values=receipt['objects']
+    if kind=='decor':
+        return m.decor.get(xy)==receipt['decor_id'] and xy not in m.container_state
     if kind=='container':
         state=m.container_state.get(xy)
         return bool(state is not None and len(values)==1 and state['decor_id']==values[0][0]

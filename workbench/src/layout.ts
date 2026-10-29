@@ -8,7 +8,7 @@ export type Catalog = {
   terrain: Record<string, { walkable: boolean; transparent: boolean }>;
   decor: Record<
     string,
-    { name: string; container: boolean; blocks_movement: boolean; path?:string; resolved?:boolean }
+    { name: string; description?:string; container: boolean; blocks_movement: boolean; path?:string; resolved?:boolean; supported?:boolean; reason?:string; properties?:{blocks_movement:boolean;declared_blocks_sight:boolean;light_emit:number;cosmetic_fx?:string|null;interaction?:string|null;stationary_fire:boolean;sight_note:string} }
   >;
   loot_pools: string[];
   creatures?: ReferenceChoice[];
@@ -95,7 +95,7 @@ export function layoutModel(text: string): {
       model: null,
       reason: "Resolve missing or unsupported legend entries in Source.",
     };
-  // Current g2-2 accepts an array of rows, with only string/null cells. Preserve
+  // Current g2-3 accepts an array of rows, with only string/null cells. Preserve
   // historical array/object cells exactly and make them inspect-only.
   if (
     r.decor_layer !== undefined &&
@@ -111,7 +111,7 @@ export function layoutModel(text: string): {
     return {
       model: null,
       reason:
-        "Unsupported decor shape retained in Source. g2-2 requires nested rows of ID/null cells; no values were converted.",
+        "Unsupported decor shape retained in Source. g2-3 requires nested rows of ID/null cells; no values were converted.",
     };
   if (
     r.special_tiles !== undefined &&
@@ -158,11 +158,18 @@ export function removeValue(source:string,path:(string|number)[]):string {
   return source.slice(0,start+bom)+source.slice(end+bom);
 }
 export const recordKind=(s:Special)=>String(s.type??s.kind);
-export const directEditable=(s:Special)=>["item","container","creature"].includes(recordKind(s)) && !(s.type && s.kind && s.type!==s.kind);
-export function addRecord(source:string,cell:Cell,kind:"item"|"container"|"creature",id:string):string {
+export const directEditable=(s:Special)=>["item","container","creature","decor"].includes(recordKind(s)) && !(s.type && s.kind && s.type!==s.kind);
+export function addRecord(source:string,cell:Cell,kind:"item"|"container"|"creature"|"decor",id:string):string {
   const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
   if(cell[0]<0||cell[1]<0||cell[0]>=model.width||cell[1]>=model.height)throw Error("Choose a source cell within the room.");
-  return appendValue(source,["special_tiles"],{type:kind,x:cell[0],y:cell[1],...({item:{item_id:id},creature:{creature_id:id},container:{decor_id:id,loot_pools:[]}}[kind])});
+  return appendValue(source,["special_tiles"],{type:kind,x:cell[0],y:cell[1],...({item:{item_id:id},creature:{creature_id:id},container:{decor_id:id,loot_pools:[]},decor:{decor_id:id}}[kind])});
+}
+export function editDecor(source:string,index:number,update:{x:number;y:number;decor_id:string}):string {
+  const {model,reason}=layoutModel(source);if(!model)throw Error(reason);
+  const row=model.special_tiles?.[index];if(!row||recordKind(row)!=="decor"||!directEditable(row))throw Error("Select a direct decor record.");
+  if(![update.x,update.y].every(Number.isInteger)||update.x<0||update.y<0||update.x>=model.width||update.y>=model.height)throw Error("Use integer source coordinates within the room.");
+  for(const [key,value] of Object.entries(update))if(row[key]!==value)source=valueEdit(source,["special_tiles",index,key],value);
+  return source;
 }
 export function editItem(source:string,index:number,update:{x:number;y:number;item_id:string;text_id?:string}):string {
   const {model,reason}=layoutModel(source);if(!model)throw Error(reason);

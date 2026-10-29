@@ -81,7 +81,7 @@ def validate(config):
     if sys.version_info[:2] != (3,11) or any(importlib.metadata.version(k)!=v for k,v in expected.items()):
         raise ValueError('Room test requires the verified pinned Python 3.11 game runtime')
     family = family_for(config['room_path'])
-    if family is None or family.id != 'room' or family.route != 'authored_submap' or room_authoring.CONTRACT != 'authored-room-1':
+    if family is None or family.id != 'room' or family.route != 'authored_submap' or room_authoring.CONTRACT != 'authored-room-2':
         raise ValueError('Selected project lacks the compatible registered room contract')
     from generation.structure_contract import read_document
     raw = read_document(root / config['room_path'])

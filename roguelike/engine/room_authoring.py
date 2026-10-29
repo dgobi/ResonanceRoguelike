@@ -6,7 +6,7 @@ import re
 from pathlib import Path, PurePosixPath
 from generation.structure_contract import compile_structure, StructureError, read_document, Validator
 
-CONTRACT = "authored-room-1"
+CONTRACT = "authored-room-2"
 TEMPLATE = "roguelike/docs/examples/g17_authored_creature_room.json"
 ROOT = "roguelike/data/layouts/"
 OBSERVE_INSPECTION = True
@@ -20,7 +20,7 @@ VIEWS = ["room-spatial"]
 SCHEMA = {"$schema":"https://json-schema.org/draft/2020-12/schema", "type":"object", "properties":{
     "id":{"type":"string","readOnly":True}, "description":{"type":"string","x-control":"multiline"}}, "additionalProperties":True}
 FIELDS = {"id", "layers", "legend", "width", "height", "player_start", "exit_direction", "exit_x", "exit_y", "special_tiles"}
-RECORD_FIELDS = {"creature":{"x","y","creature_id"}, "item":{"x","y","item_id","text_id"}, "container":{"x","y","decor_id","loot_pools"}}
+RECORD_FIELDS = {"creature":{"x","y","creature_id"}, "item":{"x","y","item_id","text_id"}, "container":{"x","y","decor_id","loot_pools"}, "decor":{"x","y","decor_id"}}
 
 
 from generation.authored_rooms import (matches, staging_path, discover_paths, source_index, locations, capability, issue, catalog, authoring_validate)

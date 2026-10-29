@@ -3,8 +3,10 @@
 # Decorative Tile System
 
 Decoratives are a second visual layer rendered above terrain and below entities.
-They are purely cosmetic and have no game state beyond their presence at a coordinate.
-They persist as long as the chunk is cached and are not serialized.
+The map owns their IDs and positions; cached/saved maps preserve them. Some
+definitions participate in blocking, light, interaction or system-owned state.
+Direct authored-room admission is narrower than registry membership; see the
+[current furnishing contract](STRUCTURE_AUTHORING.md#w5l-furnish-an-underground-room).
 
 ---
 
@@ -15,8 +17,8 @@ They persist as long as the chunk is cached and are not serialized.
 | Storage | `local_map.decor: dict[tuple[int,int], str]` — keyed by `(lx, ly)`, value is `decor_id` |
 | Render order | Above terrain, below entities |
 | Surface | `pygame.SRCALPHA` — background is transparent, floor shows through |
-| Persistence | In-memory only. Lost on chunk unload. Not serialized to save. |
-| Collision | Defined per-entry in `data/decoratives.json` (`blocks_movement`, `blocks_sight`) |
+| Persistence | Map/cache/save owned; current catalogue supplies properties and behavior. |
+| Collision | Movement uses `blocks_movement`; `blocks_sight` is declared, while FOV uses terrain transparency |
 | Sprite | Registered in `data/sprites/sprite_map.json` — same Urizen sheet as tiles |
 
 ---

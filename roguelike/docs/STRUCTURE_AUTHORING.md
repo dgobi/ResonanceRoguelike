@@ -1,5 +1,46 @@
 # Make a building or layout for Resonance
 
+## W5L: furnish an underground room
+
+The `authored-room-2` contract and `g2-3` route capability add one ordered,
+top-level record: `{"type":"decor","x":4,"y":3,"decor_id":"campfire_unlit"}`.
+Use **Placement kind → decor**, inspect a saved definition, then **Place decor**
+and click a source cell. Select its circle or ordered record to change the saved
+reference/coordinates, move or delete it. Unavailable definitions remain
+inspectable with reasons; containers use the existing container tool. Source,
+canvas, history and durable recovery share the same ordered records and exact
+source edits. Resize refuses stranded anchors; inactive grids still lock resize.
+
+Game-owned `generation/authored_decor.py` admits ordinary static scenery,
+blocking props, static light emitters and the existing campfire interaction pair.
+It rejects ambiguous/missing identities, bare containers, job-owned processing
+markers, identity-bearing corpses, vine-network parts (including vents without an
+`interactable` field), harvesting, special interactions and unsupported property
+fields. `scripts/furnishing-inventory.py` discloses every registry record.
+
+Production receipts distinguish decor from physical items/container contents:
+source record/index, source and translated coordinates, resolved ID and actual
+placement are explicit. Whole-candidate validation reserves one decor slot per
+coordinate and checks final actors, actual arrival, usable return and access to
+required contents before publishing ownership layers. Furnishings never relocate;
+existing bounded floor-item relocation and harmless overlaps remain supported.
+Static access uses game movement/interaction predicates and is not safe-play proof.
+
+Properties distinguish movement blocking, declared sight blocking, cosmetic FX,
+light emission and interaction. Current FOV uses terrain transparency, not decor's
+`blocks_sight`. Decor `light_emit` contributes secondary FOV when its emitter is
+visible; the existing RGB light-map pass does not add a decor light source.
+A flame animation alone supplies no light or preparation heat. Exactly
+`campfire_lit` supplies the stationary-fire route; normal interaction lights or
+extinguishes the authored pair. No fuel/station rules are added.
+
+`decor_layer` remains inactive, byte-preserved and diagnosed for authored submaps.
+There is no conversion, new family or world/save revision; ordinary-building grids
+and starting-laboratory candles stay unchanged. Save/reopen each dependency and
+room independently. Existing generated maps own changed decor IDs/positions,
+removed objects and containers; fresh catalogue lookups still supply properties.
+Reset uses its immutable capture, while latest-saved captures revised furnishings.
+
 ## W5I: enroll a saved room for ordinary new-world assignment
 
 From an eligible saved ordinary room, **World assignment** opens the one shared
@@ -29,7 +70,7 @@ by a valid saved legend choice; applying one action remains one history entry.
 
 ## W5G: build, recover and revise a supported underground room
 
-Workbench family `room`, contract `authored-room-1`, uses the production
+Workbench family `room`, contract `authored-room-2`, uses the production
 `authored_submap` route. Open the G17 template, Begin edit, choose Save as new
 variant and a unique safe ID. The template remains protected documentation;
 publication creates only `data/layouts/<new-id>.json`. An eligible saved ordinary
@@ -67,12 +108,13 @@ midpoint; east/west uses `exit_x` and the vertical midpoint. Direction does not
 choose a map edge. Inspect the actual produced stair and reachability.
 `decor_layer`, `legend_weights`, top-level `stairs_up`, `type`, `rotatable` and
 `tags` retain their values but do not activate those behaviors on this route.
-Containers supply the supported physical furnishings; there is no decor paint tool.
+Direct decor records supply supported scenery, lights and the existing campfire pair; containers retain their separate state/loot route. Historical decor grids remain inactive.
 
 Direct records support add/select/move/edit/delete in source-array order:
 
 | Record | Actual consumer |
 | --- | --- |
+| decor: x, y, decor_id | One eligible static furnishing or campfire through `place_decor`; no container contents |
 | creature: x, y, creature_id | One unique non-player factory Actor; existing occupancy/admission rules |
 | item: x, y, item_id | One factory object per record, with legitimate item/item and item/actor overlap |
 | readable item: optional text_id | Explicit item_id remains the carrier; population uses map_text=False and assigns text_id on that instance |

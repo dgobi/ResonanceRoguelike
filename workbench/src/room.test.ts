@@ -1,8 +1,18 @@
 import {describe,it,expect} from "vitest";
-import {addRecord,deleteRecord,editItem,resizeRoom,valueEdit,paint,CanvasHistory,layoutModel} from "./layout";
+import {addRecord,deleteRecord,editItem,editDecor,resizeRoom,valueEdit,paint,CanvasHistory,layoutModel} from "./layout";
 import {sceneProblem} from "./content";
 const source='{\r\n "id":"room", "unknown":{"exact":[1e2,"\\u03bb",null]},\r\n "layers":["#####","#λ .#","#.<.#","#####"], "legend":{"#":"wall","λ":"floor"," ":null,".":"floor","<":"stairs_up"},\r\n "player_start":{"x":2,"y":2,"retained":true}, "special_tiles":[{"type":"item","x":1,"y":1,"item_id":"letter","metadata":{"n":1e2}}]\r\n}';
 describe("registered room exact-source operations",()=>{
+ it("keeps direct furnishings in ordered exact source across add/edit/move/remove/history and resize",()=>{
+  const added=addRecord(source,[3,1],"decor","campfire_unlit");
+  const moved=editDecor(added,1,{x:3,y:2,decor_id:"street_lamp_working"});
+  expect(moved).toContain('"unknown":{"exact":[1e2,"\\u03bb",null]}');expect(moved).toContain('\r\n');
+  expect(JSON.parse(moved).special_tiles[1]).toEqual({type:"decor",x:3,y:2,decor_id:"street_lamp_working"});
+  const history=new CanvasHistory();history.record(added,moved,"Move decor");expect(history.undo(moved)).toBe(added);expect(history.redo(added)).toBe(moved);
+  expect(()=>resizeRoom(moved,3,4,"#")).toThrow(/special_tiles\[1\].*3, 2/);
+  expect(deleteRecord(added,1)).toBe(source);
+  expect(layoutModel(valueEdit(moved,["special_tiles",1,"x"],99)).model).toBeNull();
+ });
  it("uses compiler character coordinates, localized legend/arrival/painting and exact undo",()=>{
   const changed=paint(source,[[1,1]],"terrain",".");expect(JSON.parse(changed).layers[1]).toBe("#. .#");
   let next=valueEdit(changed,["legend","🜁"],"floor");next=valueEdit(next,["player_start","x"],1);
@@ -29,7 +39,7 @@ describe("registered room exact-source operations",()=>{
   expect(paint(astral,[[3,1]],"terrain","#")).toContain('#\\uD83D\\uDD01 ##');expect(resizeRoom(escaped,6,4,"#")).toContain('#\\u03bb .##');
  });
  it("negotiates structured scene results independently of reader PNG frames",()=>{
-  const scene={route:"authored_submap",layout_contract:"authored-room-1",valid:true,passed:true,width:80,height:43,terrain:Array.from({length:43},()=>Array(80).fill("floor")),spawn:[1,1],origin:[0,0],authored_start:[1,1],legend:{floor:{}},scene_seed:"18446744073709551615",population_receipts:[],access:[{target:"return",passed:true}]};
+  const scene={route:"authored_submap",layout_contract:"authored-room-2",valid:true,passed:true,width:80,height:43,terrain:Array.from({length:43},()=>Array(80).fill("floor")),spawn:[1,1],origin:[0,0],authored_start:[1,1],legend:{floor:{}},scene_seed:"18446744073709551615",population_receipts:[],access:[{target:"return",passed:true}]};
   expect(sceneProblem(scene)).toBe("");expect(sceneProblem({...scene,layout_contract:"direct-creatures-1"})).toMatch(/registered scene/);expect(sceneProblem({...scene,population_receipts:[{kind:"item",record_id:"special[0]",source_index:0,objects:[],actors:[],xy:[1]}]})).toMatch(/population/);
  });
 });

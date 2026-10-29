@@ -34,12 +34,12 @@ class BridgeTests(unittest.TestCase):
         response = invoke()
         self.assertTrue(response["ok"], response)
         r = response["result"]
-        self.assertEqual(r["contract"], "g2-2")
+        self.assertEqual(r["contract"], "g2-3")
         self.assertTrue(r["runtime"]["imports_verified"])
         self.assertEqual(r["runtime"]["game_imports"]["engine.data_loader"], "roguelike/engine/data_loader.py")
         self.assertEqual(r["runtime"]["dependencies"]["tcod"], "19.3.0")
         self.assertEqual(len(r["source"]["game_source_sha256"]), 64)
-        self.assertEqual(r["layout_contract"], "authored-room-1")
+        self.assertEqual(r["layout_contract"], "authored-room-2")
 
     def test_catalog_and_shipped_validation(self):
         r = invoke("describe")["result"]

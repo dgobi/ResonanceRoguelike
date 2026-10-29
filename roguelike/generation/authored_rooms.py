@@ -7,11 +7,11 @@ from pathlib import Path, PurePosixPath
 from generation.structure_contract import compile_structure, StructureError, read_document, Validator
 from engine.definition_sources import definition_sources
 
-CONTRACT = "authored-room-1"
+CONTRACT = "authored-room-2"
 TEMPLATE = "roguelike/docs/examples/g17_authored_creature_room.json"
 ROOT = "roguelike/data/layouts/"
 PRODUCTION_ROUTE = "authored_submap"
-RECORD_FIELDS = {'creature': {'x', 'creature_id', 'y'}, 'item': {'x', 'item_id', 'text_id', 'y'}, 'container': {'x', 'loot_pools', 'y', 'decor_id'}}
+RECORD_FIELDS = {'creature': {'x', 'creature_id', 'y'}, 'item': {'x', 'item_id', 'text_id', 'y'}, 'container': {'x', 'loot_pools', 'y', 'decor_id'}, 'decor': {'x', 'y', 'decor_id'}}
 
 def matches(path):
     return path == TEMPLATE or (PurePosixPath(path).parent.as_posix() == ROOT.rstrip("/") and path.endswith(".json"))
@@ -50,7 +50,7 @@ def capability(raw, path, pointer=""):
     elif str(raw.get("id", "")).casefold()=="starting_lab" or Path(path).name.casefold()=="starting_lab.json": reason = "The starting laboratory is protected by identity and source path."
     elif not isinstance(raw.get("layers"),list) or not raw["layers"] or any(not isinstance(r,str) for r in raw["layers"]): reason = "Requires rectangular terrain string layers."
     elif not isinstance(raw.get("player_start"),dict): reason = "Requires an explicit player_start."
-    elif not isinstance(raw.get("special_tiles",[]),list) or any(not isinstance(s,dict) or s.get("type",s.get("kind")) not in RECORD_FIELDS for s in raw.get("special_tiles",[])): reason = "Only direct item, container and creature records are supported. Weighted, scene and deferred specials remain inspect-only."
+    elif not isinstance(raw.get("special_tiles",[]),list) or any(not isinstance(s,dict) or s.get("type",s.get("kind")) not in RECORD_FIELDS for s in raw.get("special_tiles",[])): reason = "Only direct item, container, decor and creature records are supported. Weighted, scene and deferred specials remain inspect-only."
     operations = [] if reason else ["variant"] if path==TEMPLATE else ["edit","variant"]
     return dict(editable=not reason, reason=reason, operations=operations, shape="direct room object")
 
@@ -81,7 +81,8 @@ def catalog(data, data_root):
         choices[key]=rows
     # Decor is a list registry, not recursive object-file discovery.
     decor_rows=json.loads((data_root/"decoratives.json").read_text(encoding="utf-8"))
-    decor={k:dict(name=str(v.get("name",k)),container=v.get("container") is True,blocks_movement=bool(v.get("blocks_movement",False)),path="roguelike/data/decoratives.json",resolved=sum(1 for r in decor_rows if isinstance(r,dict) and str(r.get("id","")).casefold()==k.casefold())==1) for k,v in data.decoratives.items()}
+    from generation.authored_decor import admission
+    decor={k:dict(name=str(v.get("name",k.replace('_',' '))),description=v.get('description',''),container=v.get("container") is True,blocks_movement=bool(v.get("blocks_movement",False)),path="roguelike/data/decoratives.json",resolved=sum(1 for r in decor_rows if isinstance(r,dict) and str(r.get("id","")).casefold()==k.casefold())==1,**admission(data,k)) for k,v in data.decoratives.items()}
     return dict(terrain={k:dict(walkable=bool(v.get("walkable",True)),transparent=bool(v.get("transparent",True))) for k,v in data.terrain.items()},decor=decor,
         loot_pools=[r["id"] for r in choices["pools"] if r["resolved"]], **choices)
 
@@ -133,5 +134,21 @@ def authoring_validate(raw,data,path,data_root):
                 if CreatureFactory(data).spawn(record.get('creature_id'),0,0,random.Random(0)) is None: raise ValueError('Factory returned no actor')
             except (ValueError,KeyError,TypeError,AttributeError) as error:
                 diagnostics.append(issue(path,'ROOM_FACTORY',f+'.creature_id',f'Saved creature cannot be constructed: {error}'))
+    if (not any(d['severity']=='error' for d in diagnostics)
+            and any(isinstance(r,dict) and r.get('type',r.get('kind'))=='decor' for r in raw.get('special_tiles',[]))):
+        # Admission for saved assignment candidates uses the same staged native
+        # construction/access checks as the editor and lazy submap consumer.
+        from generation.structure_preview import preview
+        from generation.context import GenerationError
+        try:
+            preview(raw,PRODUCTION_ROUTE,data,path=path,derive_access=True)
+        except GenerationError as error:
+            import re
+            diagnostic=issue(path,'PRODUCTION_PLACEMENT','special_tiles',str(error))
+            match=re.search(r'special\[(\d+)\]',str(error))
+            if match:
+                n=int(match[1]);record=raw['special_tiles'][n]
+                diagnostic.update(field=f'special_tiles[{n}]',source_xy=[record['x'],record['y']],layer='specials')
+            diagnostics.append(diagnostic)
     return diagnostics
 

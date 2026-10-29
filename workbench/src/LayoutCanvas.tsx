@@ -170,6 +170,10 @@ export function LayoutCanvas(props: Props) {
             specials.poly([s.x*TILE+8,s.y*TILE+1,s.x*TILE+15,s.y*TILE+8,s.x*TILE+8,s.y*TILE+15,s.x*TILE+1,s.y*TILE+8]).fill(0xed8996);
             return;
           }
+          if ((s.type ?? s.kind) === "decor") {
+            specials.circle(s.x*TILE+8,s.y*TILE+8,5).fill(0xc6a2e7);
+            return;
+          }
           const container = (s.type ?? s.kind) === "container";
           specials
             .rect(s.x * TILE + 2, s.y * TILE + 2, 12, 12)

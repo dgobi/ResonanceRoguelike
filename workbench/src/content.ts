@@ -68,7 +68,7 @@ export function familyProblem(value: unknown): string {
 
 export function sceneProblem(value:unknown):string {
   const cell=(v:unknown)=>Array.isArray(v)&&v.length===2&&v.every(n=>Number.isSafeInteger(n));
-  if(!object(value)||value.route!=="authored_submap"||value.layout_contract!=="authored-room-1"||typeof value.valid!=="boolean"||typeof value.passed!=="boolean")return "Malformed registered scene result";
+  if(!object(value)||value.route!=="authored_submap"||value.layout_contract!=="authored-room-2"||typeof value.valid!=="boolean"||typeof value.passed!=="boolean")return "Malformed registered scene result";
   if(value.width!==80||value.height!==43||!Array.isArray(value.terrain)||value.terrain.length!==43||value.terrain.some(r=>!Array.isArray(r)||r.length!==80||r.some(t=>typeof t!=="string")))return "Malformed scene terrain";
   if(!cell(value.spawn)||!cell(value.origin)||!cell(value.authored_start)||!object(value.legend)||typeof value.scene_seed!=="string")return "Malformed scene coordinate identity";
   if(!Array.isArray(value.population_receipts)||value.population_receipts.some(r=>!object(r)||typeof r.record_id!=="string"||typeof r.kind!=="string"||!Number.isSafeInteger(r.source_index)||!Array.isArray(r.objects)||!Array.isArray(r.actors)||(r.kind!=="body"&&r.kind!=="stele"&&r.kind!=="empty"&&(!cell(r.xy)||!cell(r.source_xy)))))return "Malformed scene population receipt";

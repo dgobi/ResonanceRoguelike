@@ -31,10 +31,23 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
                 else resolve_special(raw, context.rng('weighted-special-adapter', index), source, route=route))
         resolved.append((source, spec))
     if route:
+        decor_slots = {xy: 'existing decor' for xy in local_map.decor}
+        for source, spec in resolved:
+            if spec['kind'] not in ('decor', 'container'):
+                continue
+            xy = spec['x'], spec['y']
+            if xy in decor_slots or xy in containers:
+                raise GenerationError(f'{source}: decor slot {xy} conflicts with {decor_slots.get(xy, "existing container")}')
+            decor_slots[xy] = source
         blocked = {xy for xy, decor in local_map.decor.items()
                    if data.decoratives.get(decor, {}).get('blocks_movement', False)}
-        blocked.update((s['x'], s['y']) for _, s in resolved if s['kind'] == 'container'
+        blocked.update((s['x'], s['y']) for _, s in resolved if s['kind'] in ('container', 'decor')
                        and data.decoratives[s.get('decor_id', 'crate')].get('blocks_movement', False))
+        for source, spec in resolved:
+            if spec['kind'] == 'decor' and (spec['x'], spec['y']) in blocked:
+                xy = spec['x'], spec['y']
+                if xy == tuple(authored_arrival) or str(local_map.tiles[xy]['terrain']) in ('stairs_up', 'stairs_down'):
+                    raise GenerationError(f'{source}: blocking decor at realized {xy} invalidates actual arrival or usable return')
         occupied = set()
         for source, spec in resolved:
             if spec['kind'] != 'creature':
@@ -44,7 +57,7 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             if (not local_map.walkable[xy] or xy in blocked or
                     (not data.terrain.get(terrain, {}).get('creature_passable', True)
                      and not data.entities[spec['creature_id']].get('can_swim', False))):
-                raise GenerationError(f'{source}: creature at {xy} is blocked by terrain/decor or creature_passable restriction')
+                raise GenerationError(f'{decor_slots.get(xy, source)}: creature at {xy} is blocked by terrain/decor or creature_passable restriction ({source})')
             if xy in occupied or xy == tuple(authored_arrival) or terrain in ('stairs_up', 'stairs_down'):
                 raise GenerationError(f'{source}: creature at {xy} overlaps an actor, player arrival or physical stair')
             occupied.add(xy)
@@ -91,6 +104,11 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
         first_plan = len(plans)
         if kind == 'item':
             plans.append(('item', x, y, item(spec.get('item_id', ''), x, y, source, spec.get('text_id', ''))))
+        elif kind == 'decor':
+            from generation.authored_decor import admission
+            decor = spec['decor_id']
+            observation['realized_decor'] = dict(id=decor, xy=[x,y], **admission(data,decor)['properties'])
+            plans.append(('decor', x, y, decor))
         elif kind == 'container':
             if (x, y) in containers:
                 raise GenerationError(f'{source}: duplicate container at ({x},{y})')
@@ -129,18 +147,39 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
             observation['actors'] = [actor]
             from generation.placement import digest
             observation['creature_definition'] = dict(id=creature_id, sha256=digest(data.entities[creature_id]))
-        observation['objects'] = [p[3] for p in plans[first_plan:]]
+        observation['objects'] = [p[3] for p in plans[first_plan:] if p[0] != 'decor']
+    if route and any(s['kind'] == 'decor' for _, s in resolved):
+        # Evaluate the complete final layers before any ownership API touches the
+        # candidate. Factories have already succeeded; no scene is published yet.
+        trial = copy.copy(local_map)
+        trial.decor = dict(local_map.decor)
+        trial.container_state = dict(local_map.container_state)
+        trial.floor_objects = {xy:list(items) for xy,items in local_map.floor_objects.items()}
+        apply_plans(trial, plans)
+        from generation.structure_preview import direct_access
+        failed = [r for r in direct_access(trial,data,observations,authored_arrival) if not r['passed']]
+        if failed:
+            anchors = '; '.join(f"{source} at realized ({s['x']},{s['y']})" for source,s in resolved if s['kind']=='decor')
+            raise GenerationError(f'{anchors}: final furnishing/access failure: {failed}')
     # These ownership APIs are reached only after every record and factory succeeds.
-    for kind, x, y, value in plans:
-        if kind == 'item':
-            place_floor_object(local_map, x, y, value)
-        else:
-            place_container(local_map, x, y, *value)
+    apply_plans(local_map, plans)
     if deferred:
         local_map.deferred_generation_records = deferred
     if receipts is not None:
         receipts.extend(observations)
     return actors
+
+
+def apply_plans(local_map, plans):
+    from generation.floor_object_utils import place_floor_object, place_container
+    from generation.decor_utils import place_decor
+    for kind, x, y, value in plans:
+        if kind == 'item':
+            place_floor_object(local_map, x, y, value)
+        elif kind == 'decor':
+            place_decor(local_map, x, y, value)
+        else:
+            place_container(local_map, x, y, *value)
 
 
 @dataclass

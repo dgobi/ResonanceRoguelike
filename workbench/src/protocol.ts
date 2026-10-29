@@ -111,7 +111,7 @@ export type Feature = {
 };
 export type ScenePopulationReceipt={kind:string;record_id:string;source_index:number;source_xy:Cell;xy:Cell;actor_classes?:string[];actual_count:number;
   item_id?:string|null;text_id?:string|null;text_override_present?:boolean;decor_id?:string|null;loot_pools?:string[]|null;relocated?:boolean;
-  creature_definition?:{id:string;sha256:string};objects:unknown[];actors:unknown[]};
+  realized_decor?:{id:string;xy:Cell;blocks_movement:boolean;declared_blocks_sight:boolean;light_emit:number;cosmetic_fx?:string|null;interaction?:string|null;stationary_fire:boolean};creature_definition?:{id:string;sha256:string};objects:unknown[];actors:unknown[]};
 export type Preview = {
   authored_start?: Cell | null;
   population_receipts?: ScenePopulationReceipt[];

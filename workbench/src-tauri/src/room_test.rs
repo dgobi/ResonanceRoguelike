@@ -191,7 +191,7 @@ fn validation(capture:&Capture,check:&impl Fn()->Result<(),Failure>)->Result<Val
             if !code.success(){return Err(error(format!("Captured validation exited {code}: {}",child.diagnostics())));}
             let report=read_value(Path::new(config["validation_path"].as_str().unwrap()));
             let room:Value=serde_json::from_slice(&fs::read(capture.root().join(&capture.source)).map_err(error)?).map_err(error)?;
-            if report["contract"]!=CONTRACT || report["room_contract"]!="authored-room-1" || report["route"]!="authored_submap" || report["room_id"]!=room["id"] || !report["profile"].is_string(){return Err(error("Captured game did not confirm the compatible room-test contract"));}
+            if report["contract"]!=CONTRACT || !matches!(report["room_contract"].as_str(),Some("authored-room-1"|"authored-room-2")) || report["route"]!="authored_submap" || report["room_id"]!=room["id"] || !report["profile"].is_string(){return Err(error("Captured game did not confirm the compatible room-test contract"));}
             return Ok(report);
         }
         if start.elapsed()>Duration::from_secs(60){return Err(error("Captured validation timed out"));}

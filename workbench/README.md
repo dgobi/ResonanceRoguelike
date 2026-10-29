@@ -624,7 +624,7 @@ balance certification is implied. Failed physical placement/access blocks saving
   retain their native weights and resolve only in production preview.
 - Decor uses the current dependency catalog. Erase writes `null`; terrain erase
   requires an existing null-mapped glyph. A missing decor grid is created only
-  when explicitly painting its first cell. Current `g2-2` accepts nested row
+  when explicitly painting its first cell. Current `g2-3` accepts nested row
   arrays with string/null cells. Historical array/object **cells** are preserved
   in Source and freeze visual mutation; they are never stringified or flattened.
 - **Undo canvas / Redo canvas**, or Ctrl+Z / Ctrl+Shift+Z / Ctrl+Y with canvas
@@ -833,11 +833,11 @@ CPython runtime without the game dependency wheels.
 
 ## Contract and limits
 
-The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-2**,
+The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-3**,
 item contract **usable-supplies-1**, recipe contract **item-preparation-1**,
 found-text contract **ordinary-found-text-1**, and
 creature contract **creature-common-1**, with Workbench layout capability
-**authored-room-1** on the existing `authored_submap` route (game structure contract remains g2-2).
+**authored-room-2** on the existing `authored_submap` route (game structure contract g2-3).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an
 opaque document token; validation grants a one-draft review token. Apply takes
@@ -901,3 +901,18 @@ milestones remain separate work.
 
 See [W3C delivery and evidence](docs/W3C_DELIVERY.md), [W3B delivery and evidence](docs/W3B_DELIVERY.md), [W3A delivery and evidence](docs/W3A_DELIVERY.md), [W2 delivery and evidence](docs/W2_DELIVERY.md), [W1 delivery](docs/W1_DELIVERY.md)
 and the unchanged historical [W0 delivery](docs/W0_DELIVERY.md).
+
+### W5L furnished rooms
+
+Room placement now includes direct **decor** records. Inspect the saved furnishing's
+properties/reason, place it on the shared canvas, then select/edit/move/delete it
+using the ordered-record controls. The registry stays read-only. Ordinary static
+scenery, static lights and the existing campfire pair use game-owned admission;
+containers retain the container tool. Historical authored `decor_layer` stays
+inactive. See [the authoritative contract](../roguelike/docs/STRUCTURE_AUTHORING.md#w5l-furnish-an-underground-room).
+
+Save/reopen dependencies before publication or Test room. Production validation
+checks final decor ownership, actors, arrival, return and contents access without
+relocating furnishings or publishing partial scene layers. Reset retains its
+capture; latest-saved captures revised furnishings. Already generated ordinary
+saves retain their actual changed decor and removed objects.

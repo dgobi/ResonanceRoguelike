@@ -8,7 +8,7 @@ max minus 15; subsequent actions run normal input/handlers. This is verification
 setup, not an owner scenario editor. See [supplies](ITEM_AUTHORING.md).
 
 `room_test.py` implements `workbench-room-test-1` for an eligible saved ordinary
-`room` (`authored-room-1`, `authored_submap`). It never invokes `main.py`'s campaign
+`room` (`authored-room-2`, `authored_submap`). It never invokes `main.py`'s campaign
 startup/restart loop. The native host supplies every path and a unique snapshot
 and session identity; renderer requests contain only a supported action and an
 already owned document token.
@@ -102,3 +102,21 @@ first processing tick. Reset keeps the earlier recipe/item capture; latest-saved
 testing captures revisions. Synthetic authoring probes establish no placement
 or completed preparation. Cold compatibility uses a separate owned ordinary save.
 See [recipe authoring](RECIPE_AUTHORING.md) for captured job/current output rules.
+
+## Furnished room tests
+
+W5L captures direct furnishings with the same game-owned admission/construction
+used by preview, assignment admission and native lazy generation. No event supplies
+the demonstration's decor or heat. The existing needs-only fixture may establish
+measurable supply use; ordinary actions apply afterward. Opt-in observations expose
+actual light emitters and visible cells beyond the player's circle, so extinguishing
+the player torch through normal controls can establish the static lamp's FOV
+contribution. This is not an added RGB-lighting rule. Campfire interaction changes
+the map-owned ID and persists through ordinary leave/return and cold saves.
+
+The host can still validate an older immutable `authored-room-1` capture with its
+own captured runner; new captures require the current room contract. Frozen-capture
+restoration and fresh-catalogue compatibility remain separate checks. An already
+generated ordinary save keeps actual old furnishing positions, changed fire state
+and removed objects after a same-ID room revision. Missing owned scene/cache data
+still refuses regeneration.

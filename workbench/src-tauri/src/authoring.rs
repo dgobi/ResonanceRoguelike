@@ -137,7 +137,7 @@ pub fn room_test_source(host:&Host, token:&str) -> Result<(PathBuf,String,Vec<u8
         return Err(failure("ROOM_HANDOFF","Publication reopen is unresolved.","Complete verified reopen before testing the saved room."));
     }
     let doc=current_document(&mut state,token).ok_or_else(unknown_document)?;
-    if !is_layout(&doc.relative) || doc.family.as_ref().is_none_or(|f|f.id!="room" || f.route!="authored_submap" || f.contract!="authored-room-1" || !f.operations.iter().any(|op|op=="edit")) || !doc.writable {
+    if !is_layout(&doc.relative) || doc.family.as_ref().is_none_or(|f|f.id!="room" || f.route!="authored_submap" || f.contract!="authored-room-2" || !f.operations.iter().any(|op|op=="edit")) || !doc.writable {
         return Err(failure("ROOM_INELIGIBLE","Only an eligible saved ordinary room can run.","Save the template as an ordinary room variant; select its reopened document."));
     }
     if doc.accepted.as_ref().is_some_and(|r|r.draft.as_bytes()!=doc.original || r.variant || r.published.is_some()) {
@@ -862,7 +862,7 @@ pub async fn validate_document(
             && response["result"]["valid"] == true
             && response["result"]["draft_sha256"] == hash(draft.as_bytes())
             && family_evidence(&doc, &response["result"], variant)
-            && (!is_submap(&doc.relative) || (response["result"]["layout_contract"] == "authored-room-1" && response["result"]["population_verified"] == true && response["result"]["placement_verified"] == true && response["result"]["preview"]["passed"] == true && response["result"]["route"] == "authored_submap"))
+            && (!is_submap(&doc.relative) || (response["result"]["layout_contract"] == "authored-room-2" && response["result"]["population_verified"] == true && response["result"]["placement_verified"] == true && response["result"]["preview"]["passed"] == true && response["result"]["route"] == "authored_submap"))
         {
             let review_token = uuid::Uuid::new_v4().to_string();
             review = Some(Review {
@@ -1224,8 +1224,8 @@ pub async fn apply_document(
             let response = run_worker(app, &operation, Request {op:"preview_draft".into(),asset:Some(review.destination.clone()),draft:Some(review.draft.clone()),source_asset:(doc.family.is_some() || is_creature(&doc.relative) || is_submap(&doc.relative)).then(||doc.relative.clone()),seed:Some(review.seed),..Default::default()})?;
             if response["ok"] != true || response["result"]["valid"] != true || response["result"]["draft_sha256"] != hash(review.draft.as_bytes())
                 || response["result"]["route"] != if let Some(family) = &doc.family { family.route.as_str() } else if is_pool(&doc.relative) { "contextual_loot_pool" } else if is_creature(&doc.relative) { "creature_definition" } else if is_submap(&doc.relative) { "authored_submap" } else { "ordinary_building" }
-                || response["result"]["contract"] != "g2-2" || response["result"]["worker_version"] != env!("CARGO_PKG_VERSION")
-                || (is_submap(&doc.relative) && (response["result"]["layout_contract"] != "authored-room-1" || response["result"]["population_verified"] != true || response["result"]["placement_verified"] != true || response["result"]["preview"]["passed"] != true))
+                || response["result"]["contract"] != "g2-3" || response["result"]["worker_version"] != env!("CARGO_PKG_VERSION")
+                || (is_submap(&doc.relative) && (response["result"]["layout_contract"] != "authored-room-2" || response["result"]["population_verified"] != true || response["result"]["placement_verified"] != true || response["result"]["preview"]["passed"] != true))
                 || !family_evidence(&doc, &response["result"], review.variant)
                 || (!is_creature(&doc.relative) && !is_pool(&doc.relative) && doc.family.is_none() && response["result"]["preview"]["passed"] != true) {
                 let details = if response["ok"] == true {
@@ -1832,7 +1832,7 @@ mod tests {
         let (root,host,mut doc,_)=lifecycle_fixture(false);
         doc.relative="roguelike/data/layouts/sample.json".into();
         let path=root.path().join(&doc.relative);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(&path,&doc.original).unwrap();
-        let mut result=family_result(&doc,"room",json!(["edit","variant"]));result["family"]["contract"]=json!("authored-room-1");
+        let mut result=family_result(&doc,"room",json!(["edit","variant"]));result["family"]["contract"]=json!("authored-room-2");
         doc.family=FamilyPolicy::from_result(&result,&doc.relative);
         {let mut state=host.inner.lock().unwrap();state.content_documents.clear();state.content_documents.insert(file_key(&doc.relative),doc.clone());}
         assert!(room_test_source(&host,&doc.token).is_ok());

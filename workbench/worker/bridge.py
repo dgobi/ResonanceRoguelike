@@ -33,7 +33,7 @@ POOL_ROUTE = "contextual_loot_pool"
 ITEM_ROUTE = "item_definition"
 RECIPE_ROUTE = "recipe_definition"
 CREATURE_ROUTE = "creature_definition"
-LAYOUT_CONTRACT = "authored-room-1"
+LAYOUT_CONTRACT = "authored-room-2"
 G17_EXAMPLE = "roguelike/docs/examples/g17_authored_creature_room.json"
 G17_ACCESS = "roguelike/docs/examples/g17_authored_creature_room.access.json"
 DEPENDENCIES = {"pygame": "2.6.1", "tcod": "19.3.0", "numpy": "2.4.6",
@@ -291,7 +291,7 @@ def pool_validation(request, root, scratch, identity):
     return {"valid": valid, "syntax_valid": syntax, "contract_valid": valid, "references_valid": valid,
             "placement_verified": False, "population_verified": False, "diagnostics": diagnostics,
             "draft_sha256": hashlib.sha256(draft.encode("utf-8")).hexdigest(), "route": POOL_ROUTE,
-            "contract": "g2-2", "worker_version": WORKER_VERSION, "source": identity, "path": request["asset"],
+            "contract": "g2-3", "worker_version": WORKER_VERSION, "source": identity, "path": request["asset"],
             "worker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "preview": None,
             "limitations": "Exact pool accepted by DataLoader and Validator.pool. No contents sampled here. Link a building variant and run Preview draft for actual container population. Saving a pool does not assign any container or select any structure."}
 
@@ -373,7 +373,7 @@ def family_validation(family, request, root, scratch, identity):
                                   runtime=dict(python=platform.python_version(),dependencies=DEPENDENCIES))
     valid = syntax and evidence["semantic_verified"] and not any(d["severity"] == "error" for d in diagnostics)
     result = dict(valid=valid, syntax_valid=syntax, contract_valid=valid, references_valid=valid,
-                diagnostics=diagnostics, draft_sha256=digest, route=family.route, contract="g2-2",
+                diagnostics=diagnostics, draft_sha256=digest, route=family.route, contract="g2-3",
                 family=family.envelope(context, operations=original_operations), source_asset=source_asset,
                 source_sha256=hashlib.sha256(original.read_bytes()).hexdigest(),
                 worker_version=WORKER_VERSION, worker_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -444,7 +444,7 @@ def draft_validation(request, root, scratch, identity):
     return {"valid": valid, "syntax_valid": syntax, "contract_valid": contract_valid, "references_valid": contract_valid,
             "placement_verified": bool(generated and generated["passed"]), "population_verified": bool(generated and generated["passed"]), "diagnostics": diagnostics,
             "draft_sha256": hashlib.sha256(draft.encode("utf-8")).hexdigest(), "route": EDIT_ROUTE,
-            "contract": "g2-2", "worker_version": WORKER_VERSION,
+            "contract": "g2-3", "worker_version": WORKER_VERSION,
             "worker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "source": identity,
             "path": request["asset"], "preview": generated,
             "limitations": ("Centered direct building stamp and initial population; static access from the declared main entrance to required targets and direct containers when available. No natural selection, rotated placement, player FOV or balance proof."
@@ -530,7 +530,7 @@ def run(request, root, scratch):
             fail("SOURCE_IMPORT_MISMATCH", f"{name} was imported outside the selected project.", "Use the selected current checkout with the pinned isolated interpreter.")
         imported_sources[name] = module_path.relative_to(root).as_posix()
     runtime.update(imports_verified=True, game_imports=imported_sources)
-    if CONTRACT_VERSION != "g2-2":
+    if CONTRACT_VERSION != "g2-3":
         fail("CONTRACT_MISMATCH", f"Unsupported structure contract {CONTRACT_VERSION}.", "Update the Workbench adapter after reviewing this game's contract.")
     op = request["op"]
     if op in ("validate_draft", "preview_draft"):

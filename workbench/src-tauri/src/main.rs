@@ -521,8 +521,8 @@ fn verify_identity(identity: &Value, root: &Path, bridge: &Path) -> Result<(), F
     let bridge_hash = std::fs::read(bridge).map(|bytes| authoring::hash(&bytes)).unwrap_or_default();
     if !same_root || identity["protocol"] != PROTOCOL || identity["worker_sha256"] != bridge_hash || identity["worker_version"] != env!("CARGO_PKG_VERSION")
         || identity["runtime"]["compatible"] != true || identity["runtime"]["imports_verified"] != true
-        || identity["layout_contract"] != "authored-room-1" || !identity["families"].is_array()
-        || identity["contract"] != "g2-2" {
+        || identity["layout_contract"] != "authored-room-2" || !identity["families"].is_array()
+        || identity["contract"] != "g2-3" {
         return Err(failure("HANDSHAKE_MISMATCH", "Worker, source imports or authoring capabilities do not match the selected project.", "Use matching current game, application and worker resources."));
     }
     Ok(())
@@ -736,8 +736,8 @@ mod tests {
         let bridge = root.join("bridge.py");
         std::fs::write(&bridge, "bridge fixture").unwrap();
         let valid = json!({"protocol":8,"worker_version":env!("CARGO_PKG_VERSION"),"source":{"root":root},"worker_sha256":authoring::hash(b"bridge fixture"),
-            "runtime":{"compatible":true,"imports_verified":true},"contract":"g2-2",
-            "layout_contract":"authored-room-1","families":[],"creature_contract":"creature-common-1"});
+            "runtime":{"compatible":true,"imports_verified":true},"contract":"g2-3",
+            "layout_contract":"authored-room-2","families":[],"creature_contract":"creature-common-1"});
         assert!(verify_identity(&valid, &root, &bridge).is_ok());
         for pointer in ["/protocol", "/worker_version", "/source/root", "/worker_sha256", "/runtime/compatible", "/runtime/imports_verified", "/contract", "/families"] {
             let mut bad = valid.clone();

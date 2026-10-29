@@ -12,7 +12,7 @@ import math
 from pathlib import Path
 from generation.context import GenerationError
 
-CONTRACT_VERSION = 'g2-2'
+CONTRACT_VERSION = 'g2-3'
 ROUTES = ('ordinary_building', 'plaza', 'interior_entrance', 'authored_submap')
 ELIGIBILITY = {
     'civic': ['C'], 'religious': ['C'], 'commercial': ['C','N','S','E','W'],
@@ -31,6 +31,7 @@ CAPABILITIES = {
         'selection': 'Uniform variants of entrance_type for supported surface submaps.',
         'transforms': ['normal'], 'inactive': ['variant','connection_point','spawn_offset','edges','decor_layer','special_tiles','player_start']},
     'authored_submap': {'active': ['layers','legend','special_tiles','player_start','exit_direction','exit_x','exit_y'],
+        'decor': 'authored-room-2: direct top-level decor_id; ordinary static scenery/light and the campfire pair, subject to game-owned admission and final access checks. Historical decor_layer remains inactive.',
         'selection': 'Explicit SubMap.layout_id; no ordinary placement pool.',
         'creatures': 'Direct top-level creature_id only; one non-player factory actor; initial occupancy validated before publication.',
         'transforms': ['normal'], 'inactive': ['type','stairs_up','decor_layer','legend_weights','inscription','rotatable','tags']},
@@ -174,6 +175,19 @@ class Validator:
             rows=row.get('spawn_table')
             if self.weights(rows,field+'.spawn_table'):
                 for n,choice in enumerate(rows): self.special(choice,f'{field}.spawn_table[{n}]',width,height,row)
+        elif kind == 'decor':
+            if self.route != 'authored_submap' or parent is not None:
+                self.issue('DECOR_ROUTE',field,'Decor requires a direct authored_submap special.',
+                           'Use a top-level decor record; weighted/nested and other routes are unsupported.')
+            identifier = row.get('decor_id')
+            if self.reference(identifier,'decoratives',field+'.decor_id') and self.data is not None:
+                from generation.authored_decor import admission
+                admitted = admission(self.data, identifier)
+                if not admitted['supported']:
+                    self.issue('DECOR_CAPABILITY',field+'.decor_id',admitted['reason'],
+                               'Choose supported static scenery/light or campfire; use the container tool for containers.')
+            for key in set(row)-{'type','kind','x','y','decor_id','record_id','source','source_xy'}:
+                self.issue('DECOR_FIELD',field+'.'+key,'Unsupported direct decor field.', 'Use x, y and decor_id only.')
         elif kind == 'creature':
             if self.route != 'authored_submap' or parent is not None:
                 self.issue('CREATURE_ROUTE',field,'Creatures require a direct authored_submap special.',

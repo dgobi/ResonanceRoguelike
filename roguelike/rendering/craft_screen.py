@@ -564,6 +564,12 @@ class CraftScreen:
                 _req_hdr = self._font_title.render("Requires:", True, UI_TEXT_BRIGHT)
                 panel.blit(_req_hdr, (_dx, dy))
                 dy += _req_hdr.get_height() + 2
+                for line in _wrap_text(self._font_small, "Counts are potential matches; each slot needs a distinct item.", _cw - 4):
+                    if dy + lh > max_dy:
+                        _detail_overflow = True
+                        break
+                    panel.blit(self._font_small.render(line, True, UI_TEXT_DIM), (_dx, dy))
+                    dy += lh
 
                 # requires_single_item
                 _rsi = sel_recipe.get("requires_single_item")
@@ -594,12 +600,12 @@ class CraftScreen:
                     _on_s = self._font_small.render(f" on one item x {_rsi_qty}", True, self.DIM)
                     panel.blit(_on_s, (_rsi_x, dy))
                     dy += lh
-                    from engine.crafting import _item_has_all_tags
+                    from engine.crafting import _item_has_all_tags, material_candidate
                     _rsi_have = sum(1 for it in (inv.items if inv else [])
-                                    if _item_has_all_tags(it, _rsi_tags))
+                                    if _item_has_all_tags(it, _rsi_tags) and material_candidate(it))
                     _rsi_col = UI_TEXT_BRIGHT if _rsi_have >= _rsi_qty else MSG_DANGER
                     panel.blit(self._font_small.render(
-                        f"    (have: {_rsi_have})", True, _rsi_col), (_dx, dy))
+                        f"    (automatic: {_rsi_have})", True, _rsi_col), (_dx, dy))
                     dy += lh
 
                 # requires_ambient
@@ -641,6 +647,8 @@ class CraftScreen:
                     tool = comp.get("role") == "tool"
                     have = sum(_item_has_tag(i, tag, min_tier) and (tool or material_candidate(i))
                                for i in (inv.items if inv else []))
+                    choice_only = sum(_item_has_tag(i, tag, min_tier) and not material_candidate(i)
+                                      for i in (inv.items if inv else [])) if not tool else 0
                     kw_def    = kw_data.get(tag, {})
                     disp_name = kw_def.get("display", tag)
                     _kw_color_alias = kw_def.get("color", "")
@@ -653,7 +661,8 @@ class CraftScreen:
                     dy += lh
                     have_col  = UI_TEXT_BRIGHT if have >= quantity else MSG_DANGER
                     panel.blit(self._font_small.render(
-                        f"    (have: {have})", True, have_col), (_dx, dy))
+                        (f"    (retained matches: {have})" if tool else
+                         f"    (automatic: {have}; choose: {choice_only})"), True, have_col), (_dx, dy))
                     dy += lh
 
                 dy += 2
@@ -737,6 +746,9 @@ class CraftScreen:
                 verb = "collapse" if cat not in self._collapsed else "expand"
                 hint     = f"[ ENTER ] {verb}     [ ESC / C ] close"
                 hint_col = self.HDR_COL
+            elif sel_recipe and sel_recipe.get('known', True) and self._find_ambiguous_components(sel_recipe, inv, kw_data):
+                hint = "[ ENTER ] Choose materials   [ ESC / C ] close"
+                hint_col = self.SELECTED
             elif sel_recipe and craftable:
                 hint     = "[ ENTER ] craft     [ ESC / C ] close"
                 hint_col = self.OK
