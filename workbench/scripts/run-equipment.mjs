@@ -170,8 +170,8 @@ try{
  const blade=await pick('w5m_blade');await equip('w5m_blade','weapon',blade.instance);await key('escape');
  const jack=await pick('w5m_jack');o=await equip('w5m_jack','armor_torso',jack.instance);assert.equal(o.effective_av,5);await key('escape');
  const satchel=await pick('w5m_satchel');await equip('w5m_satchel','satchel',satchel.instance);await key('escape');
- const ward=await pick('w5m_ward');const lightBefore=await observe();o=await equip('w5m_ward','offhand',ward.instance);assert(lightBefore.light);assert(!o.light);assert(o.inventory.some(i=>i.item_id==='tallow_torch'&&!i.equipped));receipt.light_displacement={before:lightBefore,after:o};await key('escape');
- const sibling=await pick('w5m_ward');o=await equip('w5m_ward','offhand',sibling.instance);assert(!o.inventory.find(i=>i.instance===ward.instance).equipped);
+ const ward=await pick('w5m_ward');const lightBefore=await observe();o=await equip('w5m_ward','offhand',ward.instance);assert(lightBefore.light);assert(!o.light);const torch=o.inventory.find(i=>i.item_id==='tallow_torch');assert(torch);assert(!Object.values(o.equipment).some(v=>v?.instance===torch.instance));receipt.light_displacement={before:lightBefore,after:o};await key('escape');
+ const sibling=await pick('w5m_ward');o=await equip('w5m_ward','offhand',sibling.instance);assert(!Object.values(o.equipment).some(v=>v?.instance===ward.instance));
  await selectInventory('w5m_ward',ward.instance);o=await key('d');assert.equal(o.equipment.offhand.instance,sibling.instance);assert(!o.inventory.some(i=>i.instance===ward.instance));assert(o.floor.flatMap(r=>r.items).some(i=>i.instance===ward.instance));receipt.sibling_cleanup={first:ward,sibling,after:o};await key('escape');
  // Reacquire the dropped sibling through normal pickup; it does not replace the equipped instance.
  await pick('w5m_ward');o=await observe();assert.equal(o.equipment.offhand.instance,sibling.instance);
