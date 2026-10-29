@@ -450,9 +450,9 @@ class CraftScreen:
         _HINT_ROW_H = _fh + 8
         _hint_y = _CPAD + (ph - _CPAD * 2) - _HINT_ROW_H
 
-        # Split: list on top ~50% of content area, detail below
+        # Leave room for material/tool counts above the reserved hint row.
         _content_bottom = _CPAD + (ph - _CPAD * 2)
-        list_bottom = (_cy_top + _content_bottom) // 2
+        list_bottom = _cy_top + int((_content_bottom - _cy_top) * 0.4)
         detail_top  = list_bottom + 6
 
         # ---- Recipe list (scrollable) ----
@@ -528,6 +528,8 @@ class CraftScreen:
             dy  = detail_top + 6
             lh  = self._font_small.get_linesize() + 2
             max_dy = _hint_y - 2  # never draw below hint row
+            detail_clip = panel.get_clip()
+            panel.set_clip(pygame.Rect(_cx, dy, _cw, max(0, max_dy-dy)))
 
             known = sel_recipe.get("known", True)
             if inv is not None and known:
@@ -626,18 +628,14 @@ class CraftScreen:
                         _kw_col = getattr(_pal, _kw_color_alias, self.TEXT)
                     _tag_s = self._font_small.render(
                         f"  [{disp_name} >= {min_tier}]", True, _kw_col)
-                    _nearby_s = self._font_small.render(" (nearby)", True, UI_TEXT_DIM)
+                    _nearby_s = self._font_small.render(" (nearby: present)" if satisfied else " (nearby: not present)", True, UI_TEXT_BRIGHT if satisfied else MSG_DANGER)
                     panel.blit(_tag_s, (_dx, dy))
                     panel.blit(_nearby_s, (_dx + _tag_s.get_width(), dy))
-                    dy += lh
-                    have_col  = UI_TEXT_BRIGHT if satisfied else MSG_DANGER
-                    have_text = "    (present)" if satisfied else "    (not present)"
-                    panel.blit(self._font_small.render(have_text, True, have_col), (_dx, dy))
                     dy += lh
 
                 # Standard components
                 for comp in sel_recipe.get("components", []) + [dict(t, role="tool") for t in sel_recipe.get("tools", [])]:
-                    if dy >= max_dy:
+                    if dy + 2 * lh > max_dy:
                         _detail_overflow = True
                         break
                     tag       = comp["tag"]
@@ -700,6 +698,8 @@ class CraftScreen:
                             panel.blit(_rkw_s, (_kw_x, dy))
                             _kw_x += _rkw_s.get_width() + 6
                         dy += lh
+
+            panel.set_clip(detail_clip)
 
         if _detail_overflow and self._font_small:
             _dind = self._font_small.render("v", True, UI_TEXT_DIM)

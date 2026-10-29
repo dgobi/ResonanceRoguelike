@@ -55,7 +55,7 @@ def admission(data, identifier):
         for key in ('light_emit', 'warmth_radius'):
             value = definition.get(key, 0)
             limit = 2**31-1 if key == 'light_emit' else 2**53-1
-            if type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= limit:
+            if type(value) not in (int, float) or not 0 <= value <= limit or not math.isfinite(value):
                 reason = f'{key} must be a finite nonnegative supported number.'
         if 'visual_fx' in definition and not isinstance(definition['visual_fx'], str):
             reason = 'visual_fx must be an existing static effect name.'

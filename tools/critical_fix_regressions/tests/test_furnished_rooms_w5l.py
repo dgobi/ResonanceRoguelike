@@ -43,6 +43,9 @@ class Furnishings(unittest.TestCase):
         self.assertFalse(admission(self.data,'missing')['supported'])
         data=copy.copy(self.data);data.decoratives={**self.data.decoratives,'worn_mat':dict(id='worn_mat',callback='unsupported')}
         self.assertIn('callback',admission(data,'worn_mat')['reason'])
+        for value in (True,-1,float('inf'),2**10000):
+            data.decoratives={**self.data.decoratives,'worn_mat':dict(id='worn_mat',light_emit=value)}
+            self.assertFalse(admission(data,'worn_mat')['supported'])
         self.assertEqual(admission(self.data,'decor_candle')['properties']['light_emit'],0)
         self.assertFalse(admission(self.data,'street_lamp_working')['properties']['stationary_fire'])
 
@@ -89,6 +92,13 @@ class Furnishings(unittest.TestCase):
         raw=self.room(self.decor(2,2,'worn_mat'),dict(type='item',x=2,y=2,item_id='wood_bundle'),dict(type='item',x=0,y=0,item_id='letter'))
         report,_,_=preview(raw,'authored_submap',self.data,derive_access=True)
         self.assertTrue(report['passed']);self.assertTrue(report['population_receipts'][-1]['relocated'])
+        closed=self.room();closed['legend']['+']='door_closed';closed['layers'][1]='#+....#'
+        before,_,_=preview(closed,'authored_submap',self.data,derive_access=True)
+        self.assertNotEqual(before['spawn'],before['authored_start'])
+        x,y=[a-b for a,b in zip(before['spawn'],before['origin'])]
+        closed['special_tiles']=[self.decor(x,y)]
+        with self.assertRaisesRegex(GenerationError,'actual arrival'):
+            preview(closed,'authored_submap',self.data,derive_access=True)
 
     def test_legacy_grid_is_inactive_old_rooms_and_lab_unchanged(self):
         raw=self.room();baseline,m,_=preview(raw,'authored_submap',self.data,derive_access=True)
@@ -102,8 +112,9 @@ class Furnishings(unittest.TestCase):
 
 
 class RecordingFont:
-    def __init__(self, font, output):self.font,self.output=font,output
-    def render(self,text,*args):self.output.append(text);return self.font.render(text,*args)
+    def __init__(self, font, glyphs):self.font,self.glyphs=font,glyphs
+    def render(self,text,*args):
+        surface=self.font.render(text,*args);self.glyphs[id(surface)]=(surface,text);return surface
     def __getattr__(self,name):return getattr(self.font,name)
 
 
@@ -119,11 +130,19 @@ class CraftPresentation(unittest.TestCase):
         self.meat=self.e.item_factory.create('raw_meat_common');self.e.player.inventory.add(self.meat)
         self.screen=self.e.craft_screen;self.screen.open=True;self.screen.selected=1
     def rendered(self):
-        output=[]
+        output=[];glyphs={}
+        class DrawingSurface(pygame.Surface):
+            def blit(self,source,dest,*args,**kwargs):
+                rect=super().blit(source,dest,*args,**kwargs)
+                # Only completely visible glyphs count as rendered evidence;
+                # font calls clipped by the detail viewport do not count.
+                if id(source) in glyphs and rect.size==source.get_size():output.append(glyphs[id(source)][1])
+                return rect
         for name,size in (('_font_small',12),('_font_normal',14),('_font_title',16)):
-            setattr(self.screen,name,RecordingFont(pygame.font.Font(None,size),output))
+            setattr(self.screen,name,RecordingFont(pygame.font.Font(None,size),glyphs))
         for size in ((1280,720),(800,600)):
-            self.screen.render(pygame.Surface(size),self.e)
+            with patch('rendering.craft_screen.pygame.Surface',DrawingSurface):
+                self.screen.render(DrawingSurface(size),self.e)
         return '\n'.join(output)
     def test_sole_protected_component_visible_choice_and_real_enter(self):
         self.meat.consumed_on_use=False
