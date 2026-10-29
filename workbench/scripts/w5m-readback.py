@@ -12,6 +12,7 @@ for key in ('environment','inventory','observations','gates','preservation'):art
 for row in receipt['accepted_fixtures'].values():artifact(row)
 observations=json.loads(git('show','HEAD:'+receipt['observations']['path']))
 for row in observations['screenshots'].values():artifact(row)
+artifact(observations['accepted_satchel_diff'])
 for path,expected in receipt['source_hashes'].items():
     assert sha(git('show','HEAD:'+path))==expected['committed_sha256'],path
     assert sha((ROOT/path).read_bytes())==expected['working_sha256'],path

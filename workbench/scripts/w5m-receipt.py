@@ -10,6 +10,7 @@ def ref(p):return dict(path=p.relative_to(ROOT).as_posix(),sha256=digest(p))
 def write(p,value):p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes((json.dumps(value,indent=2,ensure_ascii=False)+'\n').encode())
 native_path=next(p for p in sorted(ART.glob('native-*/receipt.json'),key=lambda p:p.stat().st_mtime_ns,reverse=True) if read(p).get('passed'))
 n=read(native_path);release=ROOT/'workbench/src-tauri/target/release'
+binding=read(native_path.parent/'binding-inspection/receipt.json');assert binding['passed'] and binding['package_sha256']==n['package_sha256']
 assert n['package_sha256']==digest(release/'resonance-workbench.exe')
 assert n['capture_v1']['captured']['manifest_sha256']==n['capture_reset']['captured']['manifest_sha256']!=n['capture_v2']['captured']['manifest_sha256']
 assert n['compatibility_before']['pid']!=n['compatibility_after']['pid'];assert n['compatibility_after']['conservation'] and n['compatibility_after']['pickup_refused']
@@ -22,6 +23,8 @@ for name,row in {**n['saved'],'room':n['room'],'satchel_revised':n['revised_bag'
 shots={}
 for name in ('controls-w5m_blade.png','controls-w5m_jack.png','controls-w5m_ward.png','controls-w5m_satchel.png','diff-w5m_satchel.png','game-equipped-kit.png','game-carrying.png','game-combat.png','game-cold-ownership.png'):
     p=EVID/name;shutil.copyfile(native_path.parent/name,p);shots[name]=ref(p)
+p=EVID/'reviewed-handler-insertion.png';shutil.copyfile(native_path.parent/'binding-inspection/reviewed-handler-insertion.png',p);shots[p.name]=ref(p)
+p=EVID/'reviewed-satchel.diff';p.write_bytes((n['diffs']['w5m_satchel']+'\n').encode());accepted_diff=ref(p)
 def state(o):
     keys=('pid','player','turn','action_calls','hp','max_hp','mode','submap','light','lighting','equipment','carrying','effective_av','inventory','actors','attacks','logs')
     result={k:o[k] for k in keys if k in o}
@@ -31,7 +34,7 @@ def ordinary(key):
     value=n[key];return {k:v for k,v in value.items() if k!='save_access_audit'}|dict(save_access_events=len(value['save_access_audit']),explicit_owned_roots=True)
 observations=dict(package_sha256=n['package_sha256'],native_runner=ref(ROOT/'workbench/scripts/run-equipment.mjs'),host_pid=n['host_pid'],checks=n['checks'],
     scope='Packaged controls author the kit and all placements; raw Source establishes disclosed geometry only. No event injects equipment, inventory, slots, AV, discounts, health or creatures. Native encounter uses ordinary randomness; focused consumer tests alone control numeric branches.',
-    reviewed_diffs=n['diffs'],production={k:n['production'][k] for k in ('origin','spawn','authored_start','population_receipts','access','source_path','source_sha256','draft_sha256','passed') if k in n['production']},
+    reviewed_diffs=n['diffs'],accepted_satchel_diff=accepted_diff,binding_inspection=binding,production={k:n['production'][k] for k in ('origin','spawn','authored_start','population_receipts','access','source_path','source_sha256','draft_sha256','passed') if k in n['production']},
     actions=[dict(id=a['id'],selected=a['selected'],slot=a['slot'],before=state(a['before']),after=state(a['after'])) for a in n['actions']],
     light_displacement={k:state(v) for k,v in n['light_displacement'].items()},sibling_cleanup={**n['sibling_cleanup'],'after':state(n['sibling_cleanup']['after'])},
     carrying={k:state(v) for k,v in n['carrying'].items()},combat=state(n['combat']),saved=state(n['saved_state']),cold=state(n['cold']),
@@ -51,6 +54,7 @@ specs=[('npm.cmd test','frontend-final.log','74 frontend tests pass'),('npm.cmd 
     ('Development Python: worker/test_bridge.py BridgeTests.test_dependency_absence_structured -v','dependency-negative-final.log','Separate missing-dependency control passes'),
     ('npm.cmd run bundle -- -- --locked','package-final.log','Windows executable and NSIS complete'),
     ('node scripts/run-equipment.mjs','native-final.log','Packaged author/acquire/equip/combat/carry/drop/cold/revise/reset/latest and separate ordinary compatibility pass'),
+    ('node scripts/capture-equipment-binding.mjs <final journey receipt>','binding-final.log','Actual completed-package frame of a validated unpublished legacy variant; original accepted diff separately retained'),
     ('node scripts/run-workspace.mjs','workspace-final.log','Shared-document lifecycle passes'),
     ('node scripts/run-room-tests.mjs','room-session-final.log','Packaged capture/cancellation/reset/cold/fault/ownership lifecycle passes'),
     ('Pinned Python: standalone-room-regression.py <fresh disposable w5h/w5m fixture> <w5m output>','ordinary-final.log','Ordinary 128x128 main/default save/load passes')]
