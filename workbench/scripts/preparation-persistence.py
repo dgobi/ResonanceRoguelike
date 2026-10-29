@@ -127,9 +127,14 @@ def run():
     assert e.player.fighter.hp==hp+9 and e.world_time.turn==turn+1
     assert not e.player.inventory.contains(dressing);screen.open=False
     save(e);saved_scene=scene(e);saved_inventory=[serialize_item(i) for i in e.player.inventory.items]
-    load(e);e._handle_key(pygame.K_z)
-    assert not e.local_map.processing_layer and not floor_outputs(e,'w5k_dressing') and not floor_outputs(e,'w5k_roast')
+    load(e)
     assert scene(e)==saved_scene;assert [serialize_item(i) for i in e.player.inventory.items]==saved_inventory
+    e._handle_key(pygame.K_z)
+    assert not e.local_map.processing_layer and not floor_outputs(e,'w5k_dressing') and not floor_outputs(e,'w5k_roast')
+    assert scene(e)==saved_scene
+    # Normal time advances the equipped torch's burn counter. Prepared supplies
+    # retain copied values and exact ownership through the additional turn.
+    assert [serialize_item(i) for i in e.player.inventory.items if i.item_id.startswith('w5k_')]==[i for i in saved_inventory if i['item_id'].startswith('w5k_')]
     return result(e,stored_output=serialize_item(roast),current_factory=serialize_item(e.item_factory.create('w5k_roast')),
         treatment_hp_delta=9,treatment_turn_delta=1,no_duplicate_after_load=True,removed_material_stays_removed=True,
         scope='Fresh process preserves acquired copied values after same-ID definition revision; finishes revised job, ordinary inventory treatment handler, save/load has no duplicate output or respawned material.')

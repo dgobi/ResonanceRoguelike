@@ -1,4 +1,4 @@
-# Resonance Workbench · W5J
+# Resonance Workbench · W5K
 
 An independent, local Tauri 2 desktop application for inspecting Resonance and
 safely editing ordinary buildings, contextual loot pools, materials and usable supplies,
@@ -794,7 +794,7 @@ npm.cmd run test:authoring           # disposable data + native apply/reopen/res
 npm.cmd run test:visual              # native canvas + exact draft preview + variant/reopen
 npm.cmd run test:pools               # native container → pool → item and two variants
 npm.cmd run test:items               # native new item → new pool → real factory/population
-npm.cmd run test:recipes             # native item → recipe → variant → production requirements/output
+npm.cmd run test:recipes             # packaged material preparation, actual use, revision and cold compatibility
 npm.cmd run test:creatures           # native creatures → cold recovery → publication → layout
 node scripts/run-rooms.mjs          # registered rooms → real controls/recovery/revision/cold game ownership
 node scripts/run-workspace.mjs       # six registered owners, legacy draft, targeted lifecycle

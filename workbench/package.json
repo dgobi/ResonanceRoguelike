@@ -22,7 +22,7 @@
     "test:pools": "node scripts/run-pools.mjs",
     "test:items": "node scripts/run-items.mjs",
     "test:creatures": "node scripts/run-creatures.mjs",
-    "test:recipes": "node scripts/run-recipes.mjs",
+    "test:recipes": "node scripts/run-preparation.mjs",
     "tauri": "tauri"
   },
   "dependencies": {

@@ -183,7 +183,7 @@ def validate_definition(raw, data, path, sources, item_sources, *, writable=Fals
             issue("REQUIREMENT_ROWS", field, "Expected an ordered requirement array."); continue
         if len(rows) > 64: issue("PROBE_LIMIT", field, "Authoring supports at most 64 rows per array.")
         for i, row in enumerate(rows):
-            prefix = f"{field}[{i}]"
+            prefix = f"requires_single_item.tags[{i}]" if field == "requires_single_item" and isinstance(conjunction, dict) else f"{field}[{i}]"
             if not isinstance(row, dict):
                 issue("REQUIREMENT_ROW", prefix, "Expected a requirement record."); continue
             registry = ambient_tags if field == "requires_ambient" else data.keywords
@@ -348,7 +348,8 @@ def probe(raw, data, item_sources, path, digest, identity):
                           execution="passive allocation and unowned construction only" if raw.get("passive_processing") else "immediate synthetic exchange"))
     return dict(path=path, recipe_id=raw["id"], source_sha256=digest, source=identity, cases=cases,
                 fixture_selection="Per row, automatic material candidates (or any tool); prefer a definition other than the output, then production tag tier and ID. Create distinct physical instances. This fixture selection does not establish acquisition.",
-                consumer="engine.crafting.plan_craft -> engine.item_factory.ItemFactory.create -> engine.crafting.commit_craft -> engine.item_transfers.exchange",
+                consumer=("engine.crafting.plan_craft -> engine.item_factory.ItemFactory.create (unowned; no commitment or processing)" if raw.get("passive_processing") else
+                          "engine.crafting.plan_craft -> engine.item_factory.ItemFactory.create -> engine.crafting.commit_craft -> engine.item_transfers.exchange"),
                 scope="Synthetic disposable inventory and ambient records; production allocation and unowned factory construction. Immediate recipes alone attempt inventory exchange. Passive recipes never commit inputs, place work or simulate turns here. Synthetic conditions do not prove a usable tile. Knowledge is reported separately; no acquisition or ordinary input is executed.",
                 known_gate=raw.get("known", True), visibility=VISIBILITY)
 

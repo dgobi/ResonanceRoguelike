@@ -5,8 +5,8 @@ const root=resolve(".artifacts/w5c",`data-fixture-${Date.now()}`);
 await mkdir(root,{recursive:true});
 const fixture=spawnSync(resolve("worker/runtime/python.exe"),["-X","utf8","-B","-c","import sys;sys.path.insert(0,'worker');from test_texts import text_fixture;text_fixture(sys.argv[1])",root],{stdio:"inherit",windowsHide:true});
 if(fixture.status!==0)process.exit(fixture.status || 1);
-// The shipped corpus has one writable immediate recipe. A second legitimate
-// saved source lives only in this disposable runtime fixture.
+// A distinct saved recipe provides a stable second identity for this shared
+// lifecycle fixture, independent of the expanded shipped recipe corpus.
 const recipe=JSON.parse(await readFile(resolve(root,"roguelike/data/recipes/bile_coating.json"),"utf8"));
 recipe.id="w5c_recipe_source";recipe.name="Workspace second recipe";
 await writeFile(resolve(root,"roguelike/data/recipes/w5c_recipe_source.json"),JSON.stringify(recipe,null,2));

@@ -74,7 +74,7 @@ class ContentContractTests(unittest.TestCase):
             self.assertEqual(result["draft_sha256"], result["source_sha256"])
 
     def test_original_readonly_shape_cannot_be_promoted_or_cross_family_rebound(self):
-        for source, candidate in (("roguelike/data/items/tools/tallow_torch.json", ITEM), ("roguelike/data/recipes/cook_meat.json", RECIPE)):
+        for source, candidate in (("roguelike/data/items/tools/tallow_torch.json", ITEM), ("roguelike/data/recipes/campfire.json", RECIPE)):
             raw = json.loads((ROOT/candidate).read_bytes()); raw["id"] = "w5a_promoted"
             target = candidate.rsplit("/", 1)[0] + "/w5a_promoted.json"
             result = invoke("preview_draft", asset=target, source_asset=source, draft=json.dumps(raw))

@@ -553,12 +553,12 @@ def run(request, root, scratch):
                 "families": [f.envelope(None) for f in registered],
                 "creature_contract": CREATURE_CONTRACT,
                 "layout_contract": LAYOUT_CONTRACT,
-                "unavailable": ["authored-submap inactive decor-layer authoring", "advanced item/recipe editing", "native world selection", "game renderer/FOV", "combat simulation"],
+                "unavailable": ["authored-submap inactive decor-layer authoring", "advanced item/world-placement recipe editing", "native world selection", "game renderer/FOV", "combat simulation"],
                 "health": "catalog needs repair" if catalog_error else "ready",
                 "diagnostics": [d.json() for d in catalog_error.diagnostics] if catalog_error else []}
     if op == "describe":
         return {"route": ROUTE, "capabilities": CAPABILITIES[ROUTE],
-                "assets": discover(root, data), "unsupported": ["plaza (read-only)", "entrances", "advanced item editing", "legacy loot tables", "passive/world/legacy recipe editing", "advanced creature editing", "generation profiles"]}
+                "assets": discover(root, data), "unsupported": ["plaza (read-only)", "entrances", "advanced item editing", "legacy loot tables", "world-placement/legacy/deprecated recipe editing", "advanced creature editing", "generation profiles"]}
     path = asset_path(root, request.get("asset"))
     before = path.stat()
     source = path.read_bytes()

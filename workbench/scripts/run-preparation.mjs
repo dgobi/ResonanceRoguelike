@@ -5,13 +5,17 @@ import {mkdir,readFile,writeFile,copyFile,cp,rename,access,unlink,readdir} from 
 import {resolve,dirname} from 'node:path';
 import {createHash} from 'node:crypto';
 import {chromium} from 'playwright-core';
-const output=resolve('.artifacts/w5k',`native-${Date.now()}`),root=resolve(output,'project'),settings=resolve(output,'settings'),recovery=resolve(output,'recovery');
+const acceptedPath=process.env.RESONANCE_W5K_ACCEPTED_JOURNEY,accepted=acceptedPath?JSON.parse(await readFile(acceptedPath,'utf8')):null;
+const output=resolve('.artifacts/w5k',`native-${Date.now()}`),root=accepted?accepted.root:resolve(output,'project'),settings=resolve(output,'settings'),recovery=accepted?resolve(dirname(acceptedPath),'recovery'):resolve(output,'recovery');
+if(accepted)assert(root.startsWith(resolve('.artifacts/w5k')+String.fromCharCode(92)));
 await mkdir(settings,{recursive:true});
 const python=resolve('worker/runtime/python.exe');
-assert.equal(spawnSync(python,['-I','-B','-c',"import sys;sys.path.insert(0,'worker');from test_texts import text_fixture;text_fixture(sys.argv[1])",root],{stdio:'inherit',windowsHide:true}).status,0);
+if(!accepted){assert.equal(spawnSync(python,['-I','-B','-c',"import sys;sys.path.insert(0,'worker');from test_texts import text_fixture;text_fixture(sys.argv[1])",root],{stdio:'inherit',windowsHide:true}).status,0);
 await cp(resolve('../roguelike/assets/sprites'),resolve(root,'roguelike/assets/sprites'),{recursive:true});
 await mkdir(resolve(root,'roguelike/docs/examples'),{recursive:true});
 for(const name of ['g17_authored_creature_room.json','g17_authored_creature_room.access.json'])await copyFile(resolve('../roguelike/docs/examples',name),resolve(root,'roguelike/docs/examples',name));
+}
+if(accepted&&process.env.RESONANCE_W5K_REFRESH_RUNTIME==='1')await cp(resolve('../roguelike/engine/recipe_authoring.py'),resolve(root,'roguelike/engine/recipe_authoring.py'));
 await writeFile(resolve(settings,'project.json'),JSON.stringify({version:1,project_root:root}));
 const hash=b=>createHash('sha256').update(b).digest('hex'),exe=resolve('src-tauri/target/release/resonance-workbench.exe');
 const receipt={output,root,checks:[],errors:[],package_sha256:hash(await readFile(exe)),started_utc:new Date().toISOString()};
@@ -24,7 +28,14 @@ const idle=()=>page.waitForFunction(()=>!document.querySelector('.status-dot.wor
 const editIdle=()=>page.waitForFunction(()=>![...document.querySelectorAll('[data-testid="authoring"]')].some(e=>e.dataset.editPending==='true'));
 const fill=async(n,v)=>{await page.getByLabel(n,{exact:true}).filter({visible:true}).fill(v);await editIdle();};
 async function phase(label){console.log(label);receipt.checks.push(label);await writeFile(resolve(output,'progress.json'),JSON.stringify(receipt,null,2));}
-async function open(path){await idle();await page.getByLabel('Category / route',{exact:true}).selectOption('');await fill('Search ID, name or path',path);await page.locator(`[data-asset="${path}"]`).click();await page.waitForFunction(path=>[...document.querySelectorAll('[data-testid="authoring"]')].some(e=>e.offsetParent&&e.querySelector('.filepath')?.textContent===path),path);await idle();}
+async function open(path){
+ for(let attempt=0;attempt<5;attempt++){
+  await idle();await page.getByLabel('Category / route',{exact:true}).selectOption('');await fill('Search ID, name or path',path);
+  await page.locator(`[data-asset="${path}"]`).click();
+  try{await page.waitForFunction(path=>[...document.querySelectorAll('[data-testid="authoring"]')].some(e=>e.offsetParent&&e.querySelector('.filepath')?.textContent===path),path,{timeout:5000});await idle();return;}
+  catch(error){if(attempt===4)throw error;const footer=await page.locator('footer').innerText();assert(!/ERROR|PATH_ESCAPE|READ_ONLY/.test(footer),footer);}
+ }
+}
 async function source(){await eb('Source').click();return page.locator('[data-testid="authoring"]:visible textarea.source-editor');}
 async function validate(){await editIdle();await idle();await eb('Validate draft').click();await idle();return JSON.parse(await page.locator('[data-testid="authoring"]:visible [data-testid="draft-receipt"]').textContent());}
 async function apply(variant=false){await eb(variant?'Apply variant':'Review & apply').click();await b('Confirm apply one file').click();await idle();await page.getByText(/Saved and byte-checked reopen:/).waitFor({timeout:60000});}
@@ -33,7 +44,11 @@ async function until(fn,timeout=60000){const start=Date.now();for(;;){const v=aw
 async function running(previous){const began=Date.now();return until(async()=>{const s=await status();if(!s.preparing&&Date.now()-began>1000){const alert=page.getByTestId('room-test-panel').getByRole('alert');if(await alert.count())assert.fail(await alert.innerText());assert(!s.last_action_error&&!s.error,JSON.stringify(s));assert.notEqual(s.status,'failed',JSON.stringify(s));}return s.status==='running'&&!s.preparing&&s.session_id!==previous?s:null;},100000);}
 async function observe(){return JSON.parse(await readFile(resolve(session.state_root,'observation.json'),'utf8'));}
 let eventId=0;
-async function key(key,text='',capture=false){const id=++eventId;const path=resolve(session.state_root,'event.json');await writeFile(path+'.tmp',JSON.stringify({id,key,text,capture}));await rename(path+'.tmp',path);return until(async()=>{if(!cold){const s=await status();assert.notEqual(s.status,'failed',s.diagnostics||JSON.stringify(s));}try{const o=await observe();return o.applied===id?o:null;}catch{return null;}});}
+async function publishEvent(command){
+ const path=resolve(session.state_root,'event.json'),tmp=path+'.tmp';await writeFile(tmp,JSON.stringify(command));
+ for(let attempt=0;;attempt++){try{await rename(tmp,path);return;}catch(error){if(!['EPERM','EACCES','EBUSY'].includes(error.code)||attempt>=99)throw error;await new Promise(r=>setTimeout(r,20));}}
+}
+async function key(key,text='',capture=false){const id=++eventId;await publishEvent({id,key,text,capture});return until(async()=>{if(!cold){const s=await status();assert.notEqual(s.status,'failed',s.diagnostics||JSON.stringify(s));}try{const o=await observe();return o.applied===id?o:null;}catch{return null;}});}
 async function screenshot(name){await key(undefined,'',true);await copyFile(resolve(session.state_root,'frame.png'),resolve(output,name));}
 async function saveStatus(name){const s=await status();await writeFile(resolve(output,`${name}.json`),JSON.stringify(s,null,2));return s;}
 async function start(action='test'){
@@ -99,14 +114,14 @@ async function supply(path,id,category,values,{automatic=true}={}){
 }
 async function recipe(source,id,outputItem,turns,text,quantity){
  await open(recipePath(source));await eb('Begin edit').click();await eb('Save as new variant').click();await fill('New variant ID',id);
- await eb('Requirements').click();await fill('Recipe name',`W5K ${id==='w5k_cook'?'roast meal':'field dressing'}`);
+ await b('Requirements').click();await fill('Recipe name',`W5K ${id==='w5k_cook'?'roast meal':'field dressing'}`);
  await choose('New tools tag','vessel');await b('Add tools row').click();await editIdle();
  if(quantity)await fill('Required conjunction quantity',String(quantity));
- await eb('Preparation').click();await fill('Processing turns',String(turns));await fill('Completion template',text);
+ await b('Preparation').click();await fill('Processing turns',String(turns));await fill('Completion template',text);
  if(source==='cook_meat')assert(await page.getByLabel('Temporary processing marker',{exact:true}).filter({visible:true}).isDisabled());
- await eb('Output').click();await choose('Recipe output item',outputItem);await checkedApply(true);receipt.saved[id]=await saved(recipePath(id));
- await eb('Output').click();await b(`Open output item ${outputItem}`).click();await idle();await b(/^Return to recipe /).click();await idle();
- await eb('Requirements').click();await page.screenshot({path:resolve(output,`workbench-${id}.png`)});
+ await b('Output').click();await choose('Recipe output item',outputItem);await checkedApply(true);receipt.saved[id]=await saved(recipePath(id));
+ await b('Output').click();await b(`Open output item ${outputItem}`).click();await idle();await b(/^Return to recipe /).click();await idle();
+ await b('Preparation').click();await page.screenshot({path:resolve(output,`workbench-${id}-preparation.png`)});await b('Requirements').click();await page.screenshot({path:resolve(output,`workbench-${id}.png`)});
 }
 async function craft(id){
  let o=await observe();if(!o.craft.open)o=await key('c');
@@ -118,7 +133,7 @@ async function pickOutput(spot,id){
  let o=await observe();const target=o.floor.find(r=>r.x===spot[0]&&r.y===spot[1])?.items.find(i=>i.item_id===id);assert(target);
  assert(Math.max(Math.abs(o.player[0]-spot[0]),Math.abs(o.player[1]-spot[1]))<=1);
  o=await key(',');if(!o.inventory.some(i=>i.instance===target.instance)){
-  const dx=spot[0]-o.player[0],dy=spot[1]-o.player[1];const direction=dx===0?(dy<0?'up':'down'):dy===0?(dx<0?'left':'right'):dy<0?(dx<0?'home':'pageup'):(dx<0?'end':'pagedown');
+  const dx=spot[0]-o.player[0],dy=spot[1]-o.player[1];const direction=dx===0?(dy<0?'up':'down'):dy===0?(dx<0?'left':'right'):dy<0?(dx<0?'y':'u'):(dx<0?'b':'n');
   o=await key(direction);
  }
  assert(o.inventory.some(i=>i.instance===target.instance));return {target,observation:o};
@@ -133,19 +148,36 @@ async function capturedJob(){
  for(const tile of o.floor.filter(r=>r.items.some(i=>i.item_id.startsWith('w5k_')))){
   await walk([tile.x,tile.y]);await key(',');
  }
- await walk([39,22]);const id=++eventId;await writeFile(resolve(session.state_root,'event.json'),JSON.stringify({id,fixture:'preparation-heat'}));
+ await walk([39,22]);const id=++eventId;await publishEvent({id,fixture:'preparation-heat'});
  await until(async()=>{const v=await observe();return v.applied===id&&v.fixture_applied;});
  o=await craft('w5k_cook');assert(o.craft.choosing);await key('return');o=await key('return');return o;
 }
 try{
- await launch();receipt.saved={};receipt.uses=[];
+ await launch();receipt.saved={};receipt.uses=[];let other,otherDraft;
+ if(accepted){
+  assert(accepted.room&&accepted.immediate&&Object.keys(accepted.saved).length===7);
+  other=(await ipc('list_recovery')).records.find(r=>r.source==='roguelike/data/texts/lab/lab_note_primary_a.json');assert(other);otherDraft=(await ipc('inspect_recovery',{key:other.key})).record;await recover(other);
+  if(process.env.RESONANCE_W5K_RESTORE_BASELINE==='1'){
+   const row=accepted.saved.w5k_cook;
+   if(hash(await readFile(resolve(root,row.path)))!==row.sha256){
+    await open(row.path);await eb('Begin edit').click();await b('Preparation').click();await fill('Processing turns',String(row.definition.processing_turns));await fill('Completion template',row.definition.completion_message);await b('Output').click();await choose('Recipe output item',row.definition.result_item);await checkedApply();
+   }
+   const food=accepted.saved.w5k_roast;
+   if(hash(await readFile(resolve(root,food.path)))!==food.sha256){await open(food.path);await eb('Begin edit').click();await props();await fill('Stored nutrition',String(food.definition.nutrition));await fill('Item name',food.definition.name);await checkedApply();}
+   receipt.baseline_restoration={recipe:await saved(row.path),output:await saved(food.path),scope:'Supported controls restore the earlier accepted version for a final-package replay. Immutable captures are untouched.'};
+  }
+  for(const row of [...Object.values(accepted.saved),accepted.room,accepted.immediate])assert.equal(hash(await readFile(resolve(root,row.path))),row.sha256);
+  receipt.saved=accepted.saved;receipt.room=accepted.room;receipt.immediate=accepted.immediate;receipt.recovery=accepted.recovery;receipt.conflict=accepted.conflict;
+  receipt.accepted_authoring_continuation={path:resolve(acceptedPath),sha256:hash(await readFile(acceptedPath)),authoring_package_sha256:accepted.package_sha256,gameplay_package_sha256:receipt.package_sha256,runtime_refreshed:process.env.RESONANCE_W5K_REFRESH_RUNTIME==='1',scope:'Exact definitions authored/reopened through supported controls in the preceding packaged process. Its interrupted gameplay is not counted as completed use. This process repeats gameplay and performs revisions/cold checks.'};
+  assert.equal(hash(otherDraft.draft),accepted.recovery.parked_sha256);await open(room);await phase('continue from exact accepted UI-authored bytes; recover independent dirty shared draft');
+ }else{
  await phase('invalid recipe recovery and independent dirty shared document retain exact source without review');
  const base=recipePath('cook_meat'),parked='roguelike/data/texts/lab/lab_note_primary_a.json';
  await open(base);await eb('Begin edit').click();await (await source()).fill('{"w5k_invalid":[null,');await editIdle();
  await editor().getByTestId('recovery-status').getByText(/Recovery checkpoint saved/).waitFor();
  const row=(await ipc('list_recovery')).records.find(r=>r.source===base);assert(row);const invalid=(await ipc('inspect_recovery',{key:row.key})).record;
  await open(parked);await eb('Begin edit').click();await (await source()).fill('{"parked":"independent λ",');await editIdle();
- await editor().getByTestId('recovery-status').getByText(/Recovery checkpoint saved/).waitFor();const other=(await ipc('list_recovery')).records.find(r=>r.source===parked);const otherDraft=(await ipc('inspect_recovery',{key:other.key})).record;
+ await editor().getByTestId('recovery-status').getByText(/Recovery checkpoint saved/).waitFor();other=(await ipc('list_recovery')).records.find(r=>r.source===parked);otherDraft=(await ipc('inspect_recovery',{key:other.key})).record;
  child.kill();await until(async()=>exited(child));await browser.close().catch(()=>{});await launch();
  await recover(other);await recover(row);assert.equal(await (await source()).inputValue(),invalid.draft);assert(await eb('Review & apply').isDisabled());assert(!(await validate()).valid);
  await (await source()).fill(await readFile(resolve(root,base),'utf8'));await editIdle();await eb('Discard / Revert').click();await eb('Begin edit').waitFor();
@@ -160,8 +192,8 @@ try{
  await recipe('cook_meat','w5k_cook','w5k_roast',3,'W5K roast ready: {item_name}.');
  await recipe('dry_bitter_herb','w5k_dry','w5k_dressing',4,'W5K dressing ready: {item_name}.',2);
  await phase('same-ID immediate recipe permission and real publication; dependency invalidation and external conflict');
- await open(recipePath('briar_binding_oil'));await eb('Begin edit').click();await eb('Requirements').click();await fill('Recipe description','W5K immediate conjunction permission check.');await checkedApply();receipt.immediate=await saved(recipePath('briar_binding_oil'));
- await open(recipePath('w5k_cook'));await eb('Begin edit').click();await eb('Preparation').click();await fill('Processing turns','4');const validated=await validate();assert(validated.valid);
+ await open(recipePath('briar_binding_oil'));await eb('Begin edit').click();await b('Requirements').click();await fill('Recipe description','W5K immediate conjunction permission check.');await checkedApply();receipt.immediate=await saved(recipePath('briar_binding_oil'));
+ await open(recipePath('w5k_cook'));await eb('Begin edit').click();await b('Preparation').click();await fill('Processing turns','4');const validated=await validate();assert(validated.valid);
  const dependency=resolve(root,itemPath('w5k_roast')),depBytes=await readFile(dependency);await writeFile(dependency,Buffer.concat([depBytes,Buffer.from('\n')]));
  await until(async()=>await eb('Review & apply').isDisabled(),20000);await writeFile(dependency,depBytes);assert((await validate()).valid);
  await eb('Review & apply').click();const conflict=resolve(root,recipePath('w5k_cook')),original=await readFile(conflict),competing=Buffer.concat([original,Buffer.from('\n')]);await writeFile(conflict,competing);
@@ -173,6 +205,7 @@ try{
  await (await source()).fill(JSON.stringify(geometry,null,2));await editIdle();
  const ids=['w5k_meat','w5k_meat','w5k_leaf','w5k_leaf','w5k_leaf','w5k_leaf','w5k_pot'];for(let i=0;i<ids.length;i++)await place(ids[i],2+i,3);
  await checkedApply(true);receipt.room=await saved(room);await page.screenshot({path:resolve(output,'workbench-room.png')});
+ }
  await start('latest');receipt.capture_v1=await saveStatus('capture-v1');let o=await observe();receipt.initial_floor=o.floor;
  for(const tile of o.floor.filter(r=>r.items.some(i=>i.item_id.startsWith('w5k_')))){
   const item=tile.items[0];await walk([tile.x,tile.y]);o=await key(',');assert(o.inventory.some(i=>i.instance===item.instance));
@@ -180,7 +213,7 @@ try{
  receipt.acquired=o.inventory.filter(i=>i.item_id.startsWith('w5k_'));assert.equal(receipt.acquired.length,7);
  const origin=session.captured.room_path; // capture metadata is retained independently of geometry calculations
  const firePlayer=[Math.floor((80-13)/2)+6,Math.floor((43-9)/2)+5];await walk(firePlayer);
- const fixture=++eventId;await writeFile(resolve(session.state_root,'event.json'),JSON.stringify({id:fixture,fixture:'preparation-heat'}));o=await until(async()=>{const v=await observe();return v.applied===fixture&&v.fixture_applied?v:null;});
+ const fixture=++eventId;await publishEvent({id:fixture,fixture:'preparation-heat'});o=await until(async()=>{const v=await observe();return v.applied===fixture&&v.fixture_applied?v:null;});
  receipt.disclosed_fixture={player:o.player,fire:o.decor.find(r=>r.id==='campfire_lit'),needs:o.needs,hp:o.hp,scope:'Once-only production-created heat and needs/injury fixture; no room-decor authoring or pacing claim.'};
  await phase('ordinary CraftScreen sole protected component picker, picker cancel and placement cancel spend nothing');
  const before=o; o=await craft('w5k_cook');assert(o.craft.choosing);assert.equal(o.craft.prompts[0].options.length,1);assert.equal(o.craft.prompts[0].options[0].item_id,'w5k_meat');
@@ -200,7 +233,7 @@ try{
  for(let i=0;i<3;i++)o=await key('z');assert.equal(o.processing.length,0);const dressing=await pickOutput(drySpot,'w5k_dressing');receipt.drying.output=dressing.target;await use('w5k_dressing',null,9);await screenshot('game-treatment.png');await key('escape');
  receipt.compatibility_before=await coldProbe('--before');
  await phase('same-ID recipe/output revisions through supported controls; old capture reset and latest recipe parameters differ');
- await open(recipePath('w5k_cook'));await eb('Begin edit').click();await eb('Preparation').click();await fill('Processing turns','5');await fill('Completion template','W5K revised work ready: {item_name}.');await eb('Output').click();await choose('Recipe output item','w5k_dressing');await checkedApply();receipt.saved.w5k_cook_revised=await saved(recipePath('w5k_cook'));
+ await open(recipePath('w5k_cook'));await eb('Begin edit').click();await b('Preparation').click();await fill('Processing turns','5');await fill('Completion template','W5K revised work ready: {item_name}.');await b('Output').click();await choose('Recipe output item','w5k_dressing');await checkedApply();receipt.saved.w5k_cook_revised=await saved(recipePath('w5k_cook'));
  await open(itemPath('w5k_roast'));await eb('Begin edit').click();await props();await fill('Stored nutrition','.6');await fill('Item name','W5K revised nourishing roast');await checkedApply();receipt.saved.w5k_roast_revised=await saved(itemPath('w5k_roast'));
  await open(room);await start('reset');receipt.capture_reset=await saveStatus('capture-reset');assert.equal(session.captured.manifest_sha256,receipt.capture_v1.captured.manifest_sha256);
  receipt.reset_job=await capturedJob();assert.equal(receipt.reset_job.processing[0].turns_remaining,2);assert.equal(receipt.reset_job.processing[0].item_id,'w5k_roast');
