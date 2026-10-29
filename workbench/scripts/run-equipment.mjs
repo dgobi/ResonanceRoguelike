@@ -109,11 +109,13 @@ async function variant(source,id,route,fields,custom){
  for(const [label,value] of Object.entries(fields))await fill(label,String(value));
  await page.getByLabel('Group in inventory',{exact:true}).filter({visible:true}).setChecked(false);await editIdle();
  if(custom)await custom();
+ await page.getByLabel(id==='w5m_blade'?'Base damage dice':id==='w5m_jack'?'Layer AV 2':id==='w5m_ward'?'Shield reduction':'Reduction Components',{exact:true}).filter({visible:true}).scrollIntoViewIfNeeded();
  await page.screenshot({path:resolve(output,`controls-${id}.png`)});
  const verdict=await validate();assert(verdict.valid,JSON.stringify(verdict));
  await eb('Diff').click();const diff=await editor().getByTestId('source-diff').innerText();receipt.diffs[id]=diff;
+ if(id==='w5m_satchel')await editor().getByTestId('source-diff').evaluate(el=>{el.scrollTop=el.scrollHeight;});
  await page.screenshot({path:resolve(output,`diff-${id}.png`)});
- await apply(true);receipt.saved[id]=await saved(itemPath(id,route));return receipt.saved[id];
+ await apply();receipt.saved[id]=await saved(itemPath(id,route));return receipt.saved[id];
 }
 async function coldProbe(mode){
  const r=spawnSync(python,['-I','-B',resolve('scripts/equipment-persistence.py'),root,resolve(output,'compatibility'),mode],{windowsHide:true,encoding:'utf8',timeout:60000});
