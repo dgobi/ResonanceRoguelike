@@ -69,7 +69,7 @@ the catalogue. The document strip shows each ID, file path and a dot for unsaved
 source. Opening the same file again, including through a reference, selects its
 existing draft. Switching documents preserves exact source (even invalid JSON),
 variant inputs, structured Undo/Redo, selected view/page and scroll position.
-Raw edits and variant-ID edits still clear that document's structured history.
+Pool table, Source and property edits share history. Other families retain their documented history policies.
 
 **Close document** and **Reload document** affect the selected file only. A dirty
 registered file is named in the **Keep editing / Keep for Recovery and Close /
@@ -77,7 +77,7 @@ Discard and continue** prompt. Keeping waits for its latest accepted checkpoint;
 a failed checkpoint keeps the document open. Reload reads
 disk deliberately; Close removes the open instance. A later open gets a new token.
 Project switch and application close list all dirty files, including legacy
-structure and pool drafts. Cancellation preserves them.
+ordinary-building drafts. Cancellation preserves them.
 
 Following either of two recipes to an item retains that recipe as the return
 destination and restores the initiating relation's focus. A closed or reloaded
@@ -152,7 +152,7 @@ device/power-loss failure. Diagnostic `RESONANCE_WORKBENCH_RECOVERY_DIR`, or the
 existing isolated config directory's `draft-recovery` child, keeps automated
 checks away from real records. `project.json` remains a project preference only.
 
-Legacy structure and pool drafts remain memory-only. Resolve those
+Legacy ordinary-building drafts remain memory-only. Resolve those
 drafts first before keeping registered drafts during project/application close.
 There is no session restoration, unsaved dependency overlay or automatic merge.
 Run `node scripts/run-recovery.mjs` for the disposable packaged restart and
@@ -476,70 +476,28 @@ by the gameplay path. It neither changes item creation semantics nor opens saves
 
 ## Author a container's loot pool
 
-1. Open an ordinary building, select a direct container on the canvas or in
-   **Placed record**, then use **Open pool `<id>`**. This opens the reference
-   actually declared in the draft. Apply pending container-field edits first.
-   The building's unsaved draft stays in memory. Pools can also be searched by
-   ID, description or path in the content browser.
-2. **Begin edit** enables the table. Item selectors use the current game item
-   catalogue. **Inspect `<item_id>`** shows the actual file path, array pointer
-   when applicable, name and complete declared fields, read-only. The source
-   trail records the originating structure/container and its declared pool ID.
-   It does not claim that a newly saved pool has been assigned to that container.
-3. Edit **Item ID**, **Weight**, or inclusive minimum/maximum **Roll count**.
-   **Add entry** and **Remove** preserve remaining entry order. Table and Source
-   share one text-preserving draft. Invalid JSON freezes table mutation.
-   **Undo table / Redo table** apply to table edits; raw/property/variant-ID edits
-   clear that history and retain their own text undo.
-4. Choose **Save as new variant**, enter a unique ID, **Validate draft**, inspect
-   **Diff**, then **Review & apply → Confirm apply one file**. The host repeats
-   validation with current dependencies and compares source bytes before
-   publishing and reopening. The original pool stays unchanged. A pool with no
-   direct-container references is potentially unused.
-5. **Return to structure** restores the retained draft. Create a separate new
-   building variant, explicitly choose the saved pool in **Loot pool 1**, and
-   **Apply container edit**. **Preview draft** runs the exact building through
-   the actual stamper, `scene_generation.populate`, loot roller and item factory.
-   The receipt records seed, source hashes and created contents. Review, apply
-   and reopen the building variant separately.
-6. These are two single-file transactions. If building publication fails, the
-   pool remains valid and may be unused. Correct the building or return to the
-   pool. No selection profile, existing structure or campaign is reassigned.
-   **Reload pool** reopens external changes after the usual discard prompt.
+Contextual pools are registered shared documents: two pools and unrelated drafts
+can be dirty together, with independent recovery and one source owner. Follow a
+room or ordinary-building container to its saved pool and item, then return to
+the recorded location. Changed locations are disclosed stale.
 
-Only immediate `roguelike/data/loot_pools/<safe-id>.json` single-object definitions
-are writable in this family (17 at the W3A baseline; 79 loaded item IDs).
-`data/loot/` is a different legacy family. Nested/array-of-pools files,
-advanced item/recipe editing and a general relationship graph remain unsupported.
+Edit description, omitted/fixed/range counts and ordered rows. Add/remove/reorder,
+restore omitted defaults, and use **Undo pool / Redo pool** across table, Source
+and property edits. Publish a same-ID edit or a distinct safe variant through
+shared validation, diff, one-use review, conflict checks and byte-checked reopen.
+Variants change no container references. Deliberately edit the saved room/building
+container to link one, then preview its actual production contents and use Test
+room for acquisition/use. Saved dependencies alone supply validation and captures.
 
-| Supported field | Current authoritative behavior |
-| --- | --- |
-| `id` | Unique nonempty string; variants require safe filename characters. Existing IDs cannot be renamed in place. |
-| `description` | Retained metadata; authored prose is preserved. |
-| `items` | Ordered array, default `[]`; empty means no loot. Rows require a resolvable `item_id`. Repeated item IDs remain separate entries. |
-| `items[n].weight` | Finite nonnegative relative weight, default `1`; nonempty rows require positive finite total weight. No drop percentages. |
-| `roll_count` | One or two ascending nonnegative integers, maximum `2^53−1`, default `[1,1]`. One value means a fixed count. The table writes two bounds when edited. |
+See the authoritative [pool contract](../roguelike/docs/POOL_AUTHORING.md) for
+source authority, the 64-row publication bound, finite weights/count defaults,
+physical factory checks, partial usage coverage and catalogue/save/reset/latest
+activation boundaries. Pool validation produces no sample. A pool ID or seed alone
+does not describe all position/context-derived production inputs.
 
-The existing game `Validator.pool` owns the rules. The worker additionally checks
-that `DataLoader` loaded the exact definition and that pool/item source IDs are
-unambiguous. The production pool loader does not accept a UTF-8 BOM: inspection
-preserves it, but publication fails rather than silently dropping it. Unknown
-fields remain intact with inactive-field diagnostics. Quantity, conditions and
-text binding are not consumed by this roller.
-
-`roll_pool` draws without replacement **by entry**, caps count to entry count,
-and stops when remaining total weight is zero. Multiple pool references roll
-independently. Displayed defaults are not written on open. Source links are
-declared references; draft verdicts establish consumer acceptance; only the
-structure preview establishes observed population. Samples do not establish
-frequencies, effect behavior or natural world selection. Item/reference lists
-are catalogue snapshots; reopen after external dependency edits.
-
-The host retains individual registered item/recipe/text/typography/creature/room owners and legacy building and pool slots. Saving any revokes
-all reviews; the frontend clears verdicts while retaining the other drafts.
-Every apply remains one reviewed byte string and one confined target, with fresh
-validation, conflicts and rollback. No general filesystem permission, new write
-endpoint or multi-file transaction was added.
+The host uses the existing keyed collection and shared writer. Ordinary buildings
+retain their legacy document lifecycle. There is no second pool slot, alternate
+publication path, unsaved dependency overlay or grouped transaction.
 
 ## Author one building
 

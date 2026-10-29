@@ -95,7 +95,7 @@ class Family:
     def envelope(self, context, *, operations=None):
         descriptor, digest = self.descriptor()
         problems = schema_problems(descriptor["schema"])
-        allowed_views = {"item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "recipe-processing", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory", "room-spatial", "world-assignment"}
+        allowed_views = {"pool-entries", "item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "recipe-processing", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory", "room-spatial", "world-assignment"}
         if not isinstance(descriptor["views"], list) or any(v not in allowed_views for v in descriptor["views"]):
             problems.append("Unsupported specialized view registration")
         return dict(id=self.id, contract=self.module.CONTRACT, descriptor_sha256=digest,
@@ -167,8 +167,9 @@ class Family:
 
 def families():
     # The sole trusted registration point. No renderer or descriptor imports.
-    from engine import item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring, room_authoring, assignment_authoring
+    from engine import pool_authoring, item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring, room_authoring, assignment_authoring
     return (
+        Family("pool", "loot_pools", pool_authoring, ("edit", "variant"), "roguelike/data/loot_pools/"),
         Family("assignment", "generation", assignment_authoring, ("edit",), assignment_authoring.PROFILE, assignment_authoring.PROFILE),
         Family("room", "layouts", room_authoring, ("edit", "variant"), "roguelike/data/layouts/"),
         Family("creature", "entities", creature_authoring, ("edit", "variant"), "roguelike/data/entities/creatures/"),

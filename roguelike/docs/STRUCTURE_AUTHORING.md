@@ -139,8 +139,8 @@ The fixed G17 example/sidecar remain reference inputs; edited candidates derive
 their own targets rather than inheriting obsolete coordinates.
 
 Linked creature/text/item sources open in shared tabs with a return to the room
-and record. Contextual pool navigation retains its existing memory-only draft
-scope. Save each linked dependency first, refresh/revalidate and publish the room
+and record. Contextual pools also use shared owners, history and recovery; see
+the [pool contract](POOL_AUTHORING.md). Save each linked dependency first, refresh/revalidate and publish the room
 as one file; unsaved overlays and multi-file transactions are unsupported.
 Two room drafts and other registered files have independent exact history and
 durable recovery, including invalid JSON and template drafts before variant

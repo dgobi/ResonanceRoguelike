@@ -81,7 +81,7 @@ export type Inspection = Asset & {
   file_identity?: string;
   catalog?: Catalog;
 };
-export type SourceTrail = { id: string; path: string; sourcePath: string; sourceHash: string; index: number; x: number; y: number; decor: string; poolId: string };
+export type SourceTrail = { id: string; path: string; sourcePath: string; sourceHash: string; index: number; x: number; y: number; decor: string; poolId: string; draft?:string };
 export type ItemTrail = { poolId: string; path: string; index: number; itemId: string; structure?: SourceTrail | null };
 export type CreatureFactoryResult = {
   creature_id: string; actor_class: string; instance: Record<string, unknown>;
@@ -97,8 +97,9 @@ export type CreatureContext = {selection: string; records: {
   factory: CreatureFactoryResult | null;
 }[]};
 export type PoolContext = {
+  records: {id:string;definition:Record<string,unknown>;capability:{editable:boolean;reason:string;operations:("edit"|"variant")[]};diagnostics:Diagnostic[]}[];
   items: Record<string, {id: string; name: string; resolved: boolean; sources: {path: string; pointer: string; definition: Record<string, unknown>}[]}>;
-  references: {id: string; path: string; field: string; x: number; y: number; decor_id: string}[];
+  references: {id: string; path: string; route:string; field: string; x: number; y: number; decor_id: string}[];
   consumer: string; validator: string; rules: string;
 };
 export type Feature = {

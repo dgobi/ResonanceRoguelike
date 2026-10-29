@@ -38,12 +38,16 @@ def roll_pool(pool_def: dict, item_factory: "ItemFactory", rng: random.Random | 
             break
         r = rng.random() * total
         cumulative = 0.0
-        chosen_idx = 0
+        chosen_idx = None
         for i, w in enumerate(weights):
             cumulative += w
-            if r <= cumulative:
+            if w > 0 and r < cumulative:
                 chosen_idx = i
                 break
+        if chosen_idx is None:
+            # Multiplication/accumulation can round to the upper boundary. Only
+            # a positive entry can be the final arithmetic fallback.
+            chosen_idx = next(i for i in range(len(weights)-1, -1, -1) if weights[i] > 0)
         chosen = pool.pop(chosen_idx)
         item_id = chosen.get("item_id", "")
         if item_id:

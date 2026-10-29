@@ -1,8 +1,10 @@
 import { applyEdits, modify } from "jsonc-parser";
 import { syntax } from "./draft";
 import { valueEdit } from "./layout";
+import {recordRow} from "./orderedRecords";
+import {removeItemProperty} from "./item";
 
-export type Pool = { id: string; items?: Record<string, unknown>[]; roll_count?: number[] };
+export type Pool = { id: string; description?:unknown; items?: Record<string, unknown>[]; roll_count?: number[] };
 export function poolModel(text: string): { model: Pool | null; reason: string } {
   if (syntax(text).diagnostics.length)
     return { model: null, reason: "Correct JSON in Source to resume the table." };
@@ -25,3 +27,6 @@ export function poolEntry(text: string, index: number, itemId?: string) {
   return bom + applyEdits(body, modify(body, ["items", index], itemId === undefined ? undefined : { item_id: itemId, weight: 1 },
     { formattingOptions: { insertSpaces: true, tabSize: 2, eol: text.includes("\r\n") ? "\r\n" : "\n" } }));
 }
+
+export const poolRow=(text:string,action:"up"|"down",index:number)=>recordRow(text,"items",action,index);
+export const poolDefault=(text:string,path:(string|number)[])=>removeItemProperty(text,path);

@@ -1,4 +1,4 @@
-//! A building and a contextual pool may stay open; each publication is one file.
+//! Shared keyed content owners plus the legacy building; publication is one file.
 //! Renderer paths and validation verdicts never authorize publication.
 use super::*;
 use sha2::{Digest, Sha256};
@@ -32,6 +32,7 @@ pub fn item_authoring_path(source:&str)->bool {
         && !p[p.len()-1].eq_ignore_ascii_case("empty_water_skin.json")
 }
 pub fn content_root(source: &str) -> Option<&'static str> {
+    if pool_inspection_path(source) { return Some("roguelike/data/loot_pools/"); }
     if source == TYPOGRAPHY { return Some(TYPOGRAPHY); }
     if source == ASSIGNMENT { return Some(ASSIGNMENT); }
     if is_layout(source) || source == G17_EXAMPLE { return Some("roguelike/data/layouts/"); }
@@ -77,6 +78,7 @@ impl FamilyPolicy {
         let effective = f["effective_operations"].as_array()?.iter().map(|v|v.as_str().map(str::to_owned)).collect::<Option<Vec<_>>>()?;
         if effective.iter().any(|op| !operations.contains(op))
             || (source.starts_with("roguelike/data/items/") && (id!="item" || route!="item_definition" || (!effective.is_empty() && !item_authoring_path(source))))
+            || (pool_inspection_path(source) && (id!="pool" || route!="contextual_loot_pool" || contract!="contextual-loot-1" || (!is_pool(source) && !effective.is_empty())))
             || (is_submap(source) && (id != "room" || route != "authored_submap"))
             || (is_creature(source) && (id != "creature" || root != "roguelike/data/entities/creatures/")) { return None; }
         Some(Self { id:id.into(), route:route.into(), contract:contract.into(), descriptor:d.clone(), digest:digest.into(), root:root.into(), operations:effective })
@@ -200,6 +202,11 @@ pub fn is_pool(s: &str) -> bool {
     let p: Vec<_> = s.split('/').collect();
     p.len() == 4 && p[..3] == ["roguelike", "data", "loot_pools"] && valid_filename(p[3])
 }
+fn pool_inspection_path(s: &str) -> bool {
+    let Some(suffix)=s.strip_prefix("roguelike/data/loot_pools/") else {return false;};
+    let parts:Vec<_>=suffix.split('/').collect();
+    parts[..parts.len()-1].iter().all(|p|valid_id(p)) && valid_filename(parts[parts.len()-1])
+}
 #[cfg(test)]
 pub fn is_item(s: &str) -> bool {
     let p: Vec<_> = s.split('/').collect();
@@ -225,7 +232,7 @@ fn is_submap(s: &str) -> bool { is_layout(s) || s == G17_EXAMPLE }
 pub fn variant_directory(source:&str)->&str {
     if source==G17_EXAMPLE { "roguelike/data/layouts" } else { source.rsplit_once('/').unwrap().0 }
 }
-fn dependency_bound(s: &str) -> bool { content_root(s).is_some() || is_creature(s) || is_layout(s) || s == G17_EXAMPLE }
+fn dependency_bound(s: &str) -> bool { content_root(s).is_some() || is_creature(s) || is_layout(s) || s == G17_EXAMPLE || relative_building(s).is_ok() }
 fn relative_content(s: &str) -> Result<PathBuf, Failure> {
     if is_pool(s) || content_root(s).is_some() || is_creature(s) || is_layout(s) || s == G17_EXAMPLE { Ok(PathBuf::from(s)) } else { relative_building(s) }
 }
@@ -249,6 +256,7 @@ pub(super) fn no_link(path: &Path) -> Result<(), Failure> {
 }
 fn checked_target(root: &Path, relative: &str, new: bool) -> Result<PathBuf, Failure> {
     if new && relative == G17_EXAMPLE { return Err(failure("PATH_ESCAPE", "Documentation is read-only.", "Save a supported layout variant.")); }
+    if new && pool_inspection_path(relative) && !is_pool(relative) { return Err(failure("PATH_ESCAPE","Pool writes require an immediate safe filename.","Choose a supported pool source.")); }
     let rel = relative_content(relative)?;
     let mut path = root.to_path_buf();
     no_link(&path)?;
@@ -306,7 +314,6 @@ fn session_doc(host: &Host, token: &str) -> Result<(PathBuf, Document), Failure>
         .document
         .as_ref()
         .into_iter()
-        .chain(state.pool_document.as_ref())
         .chain(state.content_documents.values())
         .find(|d| d.token == token)
         .ok_or_else(|| {
@@ -329,7 +336,7 @@ fn revoke(doc: &mut Document) {
     doc.review = None;
 }
 pub(super) fn revoke_all(state: &mut Session) {
-    for doc in state.document.iter_mut().chain(state.pool_document.iter_mut()).chain(state.content_documents.values_mut()) { revoke(doc); }
+    for doc in state.document.iter_mut().chain(state.content_documents.values_mut()) { revoke(doc); }
 }
 #[cfg(test)]
 fn revoke_review(host: &Host, token: &str) {
@@ -523,7 +530,7 @@ pub fn acknowledge_reopen(app:tauri::AppHandle,host:tauri::State<'_,Host>,handof
     Ok(())
 }
 fn current_document<'a>(state: &'a mut Session, token: &str) -> Option<&'a mut Document> {
-    state.document.as_mut().into_iter().chain(state.pool_document.as_mut()).chain(state.content_documents.values_mut()).find(|d| d.token == token)
+    state.document.as_mut().into_iter().chain(state.content_documents.values_mut()).find(|d| d.token == token)
 }
 fn envelope(result: Value) -> Value {
     json!({"protocol":PROTOCOL,"id":uuid::Uuid::new_v4().to_string(),"ok":true,"result":result,"host_elapsed_ms":0})
@@ -730,8 +737,7 @@ pub async fn open_document(
             if let Some(id)=handoff_id { state.handoffs.get_mut(&id).ok_or_else(unknown_document)?.replacement=Some(token); }
         }
         else {
-            let slot = if is_pool(&document.relative) { &mut state.pool_document } else { &mut state.document };
-            *slot = Some(document);
+            state.document = Some(document);
         }
         Ok(response)
     })
@@ -1288,7 +1294,7 @@ fn sweep_disk(operation: &Operation, token: Option<&str>, stamp_fn: impl FnOnce(
     let (root, documents) = {
         let state = operation.host.inner.lock().unwrap();
         operation.check(&state)?;
-        let docs: Vec<_> = state.document.iter().chain(state.pool_document.iter()).chain(state.content_documents.values())
+        let docs: Vec<_> = state.document.iter().chain(state.content_documents.values())
             .filter(|d| token.is_none_or(|t| t == d.token)).cloned().collect();
         if token.is_some() && docs.is_empty() { return Err(unknown_document()); }
         (state.root.clone().ok_or_else(|| io_error("No project open."))?, docs)
@@ -1381,16 +1387,51 @@ mod tests {
         response["result"].clone()
     }
     #[test]
+    fn two_pool_owners_and_unrelated_draft_share_recovery_without_alias_owners() {
+        let (root,host,item,_)=lifecycle_fixture(false);
+        let mut pools=vec![];
+        for (n,source) in ["roguelike/data/loot_pools/alchemist_reagents.json","roguelike/data/loot_pools/storage_tools.json"].iter().enumerate() {
+            let result=actual_family_result("inspect",source,None,None);
+            let mut doc=item.clone();doc.relative=(*source).into();doc.token=format!("pool-{n}");doc.original=result["raw"].as_str().unwrap().as_bytes().to_vec();doc.id=result["id"].as_str().map(str::to_owned);doc.family=FamilyPolicy::from_result(&result,source);doc.inspection=result.clone();doc.review=None;doc.accepted=None;
+            assert_eq!(doc.family.as_ref().unwrap().id,"pool");
+            let path=root.path().join(source);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(path,&doc.original).unwrap();
+            host.inner.lock().unwrap().content_documents.insert(file_key(source),doc.clone());pools.push(doc);
+        }
+        accept_edit(&host,&pools[0].token,1,"{\"invalid\":".into(),true,"unfinished".into()).unwrap();
+        accept_edit(&host,&pools[1].token,1,"{\"other\":[]}".into(),false,"".into()).unwrap();
+        accept_edit(&host,&item.token,1,"{\"unrelated\":".into(),false,"".into()).unwrap();
+        let store_root=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(store_root.path().into()).unwrap();
+        for doc in [&pools[0],&pools[1],&item] {
+            let accepted=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();store.write(&accepted).unwrap();store.release(&accepted.key());
+            let mut fresh=doc.clone();fresh.accepted=None;fresh.revision=0;
+            restore_claimed(&mut store,root.path(),&mut fresh,&accepted.key(),accepted.generation).unwrap();
+            assert_eq!(fresh.accepted.unwrap().draft,accepted.draft);assert!(fresh.review.is_none());
+        }
+        let state=host.inner.lock().unwrap();assert_eq!(state.content_documents.len(),3);
+        assert!(owner_collision(&state,&pools[0].relative.to_uppercase(),None).is_err());drop(state);
+        assert!(accept_edit(&host,"renderer-invented-owner",1,"{}".into(),false,"".into()).is_err());
+    }
+    #[test]
     fn registered_text_and_recipe_restore_unfinished_intent() {
-        for (id,source) in [("text","roguelike/data/texts/lab/lab_note_primary_b.json"),("recipe","roguelike/data/recipes/bile_coating.json")] {
+        for (id,source) in [("pool","roguelike/data/loot_pools/alchemist_reagents.json"),("text","roguelike/data/texts/lab/lab_note_primary_b.json"),("recipe","roguelike/data/recipes/bile_coating.json")] {
             let result=actual_family_result("inspect",source,None,None);
             let (root,mut doc,_)=fixture();doc.relative=source.into();doc.original=result["raw"].as_str().unwrap().as_bytes().to_vec();
             doc.id=result["id"].as_str().map(str::to_owned);doc.review=None;
             doc.family=FamilyPolicy::from_result(&result,source);
             assert_eq!(doc.family.as_ref().unwrap().id,id);
-            assert_eq!(doc.family.as_ref().unwrap().operations,if id=="recipe" {vec!["edit","variant"]} else {vec!["variant"]});
+            assert_eq!(doc.family.as_ref().unwrap().operations,if id=="text" {vec!["variant"]} else {vec!["edit","variant"]});
             let path=root.path().join(source);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(path,&doc.original).unwrap();
             let host=Host::default();{let mut state=host.inner.lock().unwrap();state.root=Some(root.path().into());state.ready=true;state.content_documents.insert(file_key(source),doc.clone());}
+            if id=="pool" {
+                for (sequence,unfinished) in [(1,""),(2,"../unsafe")] {
+                    accept_edit(&host,&doc.token,sequence,"{\"unfinished\":".into(),true,unfinished.into()).unwrap();
+                    let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();record.validate().unwrap();
+                    assert_eq!(record.variant_id,unfinished);assert!(destination(&doc,"{}",Some(unfinished)).is_err());
+                }
+                // Reset only this test-owned accepted intent before the shared
+                // recovery cases; the production owner never rewinds sequence.
+                let mut state=host.inner.lock().unwrap();let live=current_document(&mut state,&doc.token).unwrap();live.accepted=None;live.edit_sequence=0;
+            }
             for (sequence,text) in [(1,String::from_utf8(doc.original.clone()).unwrap()+"\r\n"),(2,"\u{feff}{\r\n \"unfinished\": [\"λ\",".into())] {
                 accept_edit(&host,&doc.token,sequence,text.clone(),false,"".into()).unwrap();
                 let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();
@@ -1406,7 +1447,7 @@ mod tests {
             accept_edit(&host,&doc.token,3,draft.clone(),true,"w5g_repaired_variant".into()).unwrap();
             let (target,variant)=destination(&doc,&draft,Some("w5g_repaired_variant")).unwrap();assert!(variant);
             let validated=actual_family_result("preview_draft",&target,Some(&draft),Some(source));
-            assert_eq!(validated["valid"],true,"{validated}");assert!(family_evidence(&doc,&validated,true));assert_eq!(family_evidence(&doc,&validated,false),id=="recipe");
+            assert_eq!(validated["valid"],true,"{validated}");assert!(family_evidence(&doc,&validated,true));assert_eq!(family_evidence(&doc,&validated,false),id!="text");
         }
     }
     #[test]
@@ -2053,7 +2094,7 @@ mod tests {
         {
             let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().to_path_buf());
             let mut a=recipe.clone(); a.token="building".into(); state.document=Some(a);
-            let mut a=recipe.clone(); a.token="pool".into(); state.pool_document=Some(a);
+            let mut a=recipe.clone(); a.token="pool".into(); a.relative="roguelike/data/loot_pools/sample.json".into(); state.content_documents.insert(file_key(&a.relative),a);
             let mut a=recipe.clone(); a.token="item".into(); a.relative="roguelike/data/items/components/sample.json".into(); state.content_documents.insert(file_key(&a.relative),a);
             state.content_documents.insert(file_key(&recipe.relative),recipe.clone());
         }
@@ -2094,8 +2135,8 @@ mod tests {
         {
             let mut state = host.inner.lock().unwrap(); state.root = Some(root.path().to_path_buf());
             let mut structure = item.clone(); structure.token = "building".into();
-            let mut pool = item.clone(); pool.token = "pool".into();
-            state.document = Some(structure); state.pool_document = Some(pool); state.content_documents.insert(file_key(&item.relative), item);
+            let mut pool = item.clone(); pool.token = "pool".into(); pool.relative="roguelike/data/loot_pools/sample.json".into();
+            state.document = Some(structure); state.content_documents.insert(file_key(&pool.relative),pool); state.content_documents.insert(file_key(&item.relative), item);
         }
         revoke_review(&host, "item");
         assert!(session_doc(&host, "item").unwrap().1.review.is_none());
@@ -2173,13 +2214,16 @@ mod tests {
             let mut state = host.inner.lock().unwrap();
             state.root = Some(root.path().to_path_buf());
             state.document = Some(doc);
-            state.pool_document = Some(pool.clone());
+            state.content_documents.insert(file_key(&pool.relative),pool.clone());
         }
         assert!(session_doc(&host, "trusted").is_ok());
         assert_eq!(session_doc(&host, "pool").unwrap().1.relative, pool.relative);
         revoke_review(&host, "trusted");
         assert!(session_doc(&host, "pool").unwrap().1.review.is_some());
-        for p in ["roguelike/data/loot_pools/nested/a.json", "roguelike/data/loot_pools/../a.json",
+        // Nested saved sources are inspectable but cannot become write targets.
+        assert!(relative_content("roguelike/data/loot_pools/nested/a.json").is_ok());
+        assert_eq!(checked_target(root.path(),"roguelike/data/loot_pools/nested/a.json",true).unwrap_err().code,"PATH_ESCAPE");
+        for p in ["roguelike/data/loot_pools/../a.json",
                   "roguelike/data/loot_pools/con.json", "roguelike/data/loot_pools/a.json:ads",
                   "roguelike/data/loot/a.json", "roguelike/saves/a.json", ".git/a.json", "workbench/docs/a.json"] {
             assert!(relative_content(p).is_err(), "{p}");

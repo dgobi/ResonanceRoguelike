@@ -2,7 +2,6 @@ import { invoke } from "@tauri-apps/api/core";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { LayoutEditor,type LayoutProps } from "./LayoutEditor";
-import { PoolEditor } from "./PoolEditor";
 import { ContentEditor, contentViews, type ContentNavigation } from "./ContentEditor";
 import { sourceOperations, familyProblem, type ContentFamily } from "./content";
 import { previewProblem, type FamilyPreview } from "./familyData";
@@ -21,7 +20,6 @@ import {
   type Failure,
   type Preview,
   type SourceTrail,
-  type ItemTrail,
 } from "./protocol";
 import { type RequestLease } from "./requests";
 import type { Disk, DiskSubscription } from "./workspace";
@@ -60,7 +58,7 @@ export function Authoring({
   trail,
   onReturn,
   dependencyVersion = 0,
-  onItem, poolEntryFocus, contentNavigation, selectedCreatureId,
+  contentNavigation, selectedCreatureId,
   subscribeDisk,
   registerRecovery,
 }: {
@@ -80,8 +78,6 @@ export function Authoring({
   trail?: SourceTrail | null;
   onReturn?: () => void;
   dependencyVersion?: number;
-  onItem?: (id: string, trail: ItemTrail) => void;
-  poolEntryFocus?: number;
   contentNavigation?: ContentNavigation;
   selectedCreatureId?: string;
   subscribeDisk: DiskSubscription;
@@ -127,7 +123,7 @@ export function Authoring({
   if(!checkpoints.current && content)checkpoints.current=new Checkpoints(()=>invoke("checkpoint_document",{token:document.document_token}),setRecoveryStatus);
   const [evidenceVersion, setEvidenceVersion] = useState(dependencyVersion);
   const [previewEvidence,setPreviewEvidence]=useState<{frame:FamilyPreview;text:string;version:number;dependencies:number;stale:boolean}|null>(null);
-  const [focus, setFocus] = useState<{ cell: Cell; layer: Layer } | null>(null);
+  const [focus, setFocus] = useState<{ cell: Cell; layer: Layer; index?:number } | null>(null);
   const history = useRef(new CanvasHistory()),
     gesture = useRef<string | null>(null);
   const [, updateHistory] = useState(0);
@@ -146,6 +142,12 @@ export function Authoring({
   const target = variant
     ? `${document.path === "roguelike/docs/examples/g17_authored_creature_room.json" ? "roguelike/data/layouts" : document.path.slice(0, document.path.lastIndexOf("/"))}/${variantId}.json`
     : document.path;
+  useEffect(()=>{
+    const recorded=contentNavigation?.returnLocation;
+    if(!recorded || recorded.itemId || recorded.text!==latest.current)return;
+    const row=(values.special_tiles as {x:number;y:number}[]|undefined)?.[recorded.index];
+    if(row)setFocus({cell:[row.x,row.y],layer:"specials",index:recorded.index});
+  },[contentNavigation?.returnLocation]);
   useEffect(() => {
     version.current++;
     setVerdict(null);
@@ -204,7 +206,8 @@ export function Authoring({
     // WebView textarea events may repeat the same normalized CRLF value on
     // focus changes. A no-op must not start another acknowledgement/render loop.
     if (text === latest.current && nextIntent.variant===intent.current.variant && nextIntent.variantId===intent.current.variantId) return;
-    if (!visual) {
+    if (!visual && pool) history.current.record(latest.current, text, "Edit pool Source / properties");
+    if (!visual && !pool) {
       history.current.clear();
       gesture.current = null;
     }
@@ -392,7 +395,7 @@ export function Authoring({
     preview:verdict?.preview||null,diskPreview:disk?.changed||disk?.dependencies_changed||evidenceVersion!==dependencyVersion?null:roomContext?.preview||diskPreview,previewHash:verdict?.draft_sha256,
     previewBusy:!!busy,onPreview:()=>void validate(false),onCancel,onEdit:visualEdit,onGesture:canvasGesture,onUndo:()=>historyStep(false),onRedo:()=>historyStep(true),
     canUndo:!!history.current.undoStack.length,canRedo:!!history.current.redoStack.length,onError:e=>setLocalError(String(e)),focus,
-    onLinked:contentNavigation?.onOpen,onPool:(id,index,record)=>onPool?.(id,{id:String(values.id||document.id),path:target,index,x:record.x,y:record.y,sourcePath:document.path,sourceHash:document.sha256,decor:record.decor_id||"crate",poolId:id})};
+    onLinked:contentNavigation?.onOpen,onPool:(id,index,record)=>onPool?.(id,{id:String(values.id||document.id),path:target,index,x:record.x,y:record.y,sourcePath:document.path,sourceHash:document.sha256,draft,decor:record.decor_id||"crate",poolId:id})};
   return (
     <section className="authoring" data-testid="authoring" data-document-token={document.document_token} data-edit-pending={pendingEdit}>
       {content && <p className="notice" data-testid="recovery-status">
@@ -405,16 +408,6 @@ export function Authoring({
         <pre className="raw">{JSON.stringify(saved, null, 2)}</pre>
         <button disabled={!!busy} onClick={()=>void recoverReopen()}>Retry verified reopen</button>
       </div>}
-      {active && canvasHost && pool && createPortal(<PoolEditor
-        draft={draft} path={target} context={document.pool_context}
-        disabled={!editing ? "Begin edit to change this pool." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
-        diagnostics={verdict?.diagnostics || (!dirty ? document.diagnostics : [])}
-        onEdit={visualEdit} onUndo={() => historyStep(false)} onRedo={() => historyStep(true)}
-        canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
-        trail={trail} onReturn={onReturn} busy={!!busy} onCancel={onCancel}
-        onItem={(id, index) => onItem?.(id, {poolId: String(values.id || document.id), path: target, index, itemId: id, structure: trail})}
-        focusEntry={poolEntryFocus}
-      />, canvasHost)}
       {content && canvasHost && createPortal(<div hidden={!active}><ContentEditor
         spatial={submap?spatial:undefined}
         sourceFamily={content} variant={variant} active={active} cancelVersion={cancelVersion} beginRequest={beginRequest}
@@ -465,7 +458,7 @@ export function Authoring({
             focus={focus}
             onPool={(id, index, record) => onPool?.(id, {
               id: String(values.id || document.id), path: target, index, x: record.x, y: record.y,
-              sourcePath: document.path, sourceHash: document.sha256,
+              sourcePath: document.path, sourceHash: document.sha256, draft,
               decor: record.decor_id || "crate", poolId: id,
             })}
           />,
@@ -473,6 +466,7 @@ export function Authoring({
         )}
       <h2>{document.id}</h2>
       <code className="filepath">{document.path}</code>
+      {!content && contentNavigation?.returnLocation && contentNavigation.returnLocation.text!==draft && <p className="notice warning">Recorded container location is stale: this draft changed while away. No different record was selected.</p>}
       {submap && document.path.includes("/docs/examples/") && <p className="notice">Protected G17 source template. Unfinished exact drafts recover before choosing a variant; only a deliberate new ID can publish into data/layouts. Access checks derive from each realized candidate.</p>}
       <p
         className={disk?.changed ? "notice warning" : "notice"}

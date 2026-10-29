@@ -151,7 +151,20 @@ class Validator:
             self.issue('POOL_COUNT',f+'.roll_count','Expected [min,max] nonnegative integer range.','Use a valid ascending range.')
         rows=pool.get('items',[])
         if rows == []: return
-        if not self.weights(rows,f+'.items'): return
+        if not isinstance(rows,list):
+            self.issue('WEIGHTS',f+'.items','Expected an ordered array.','Use [] for an empty pool.'); return
+        weights=[]
+        for n,row in enumerate(rows):
+            if not isinstance(row,dict):
+                self.issue('ROW',f'{f}.items[{n}]','Expected an object.','Use an item entry.'); continue
+            weight=row.get('weight',1)
+            try: valid=type(weight) in (int,float) and math.isfinite(weight) and weight>=0
+            except OverflowError: valid=False
+            if not valid: self.issue('NUMBER',f'{f}.items[{n}].weight','Expected finite nonnegative weight.','Use a finite number >= 0.')
+            else: weights.append(weight)
+        try: positive=bool(weights) and math.isfinite(sum(weights)) and sum(weights)>0
+        except OverflowError: positive=False
+        if not positive: self.issue('WEIGHTS',f+'.items','Total weight must be finite and positive.','Give at least one entry positive weight, even for zero requested draws.')
         for n,row in enumerate(rows):
             if isinstance(row,dict):
                 self.reference(row.get('item_id'),'items',f'{f}.items[{n}].item_id')

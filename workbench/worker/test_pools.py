@@ -47,13 +47,13 @@ class PoolTests(unittest.TestCase):
 
     def test_variant_identity_and_loader_rejection(self):
         raw = json.loads((ROOT / POOL).read_bytes()); dest = POOL.replace("alchemist_reagents", "w3a_unique")
-        duplicate = invoke("preview_draft", asset=dest, draft=json.dumps(raw))["result"]
+        duplicate = invoke("preview_draft", asset=dest, source_asset=POOL, draft=json.dumps(raw))["result"]
         self.assertFalse(duplicate["valid"]); self.assertIn("DUPLICATE_ID", [d["code"] for d in duplicate["diagnostics"]])
         raw["id"] = "w3a_unique"
-        result = invoke("preview_draft", asset=dest, draft=json.dumps(raw))["result"]
+        result = invoke("preview_draft", asset=dest, source_asset=POOL, draft=json.dumps(raw))["result"]
         self.assertTrue(result["valid"], result)
         # The structure reader tolerates BOM, but the production pool loader does not.
-        result = invoke("preview_draft", asset=dest, draft="\ufeff" + json.dumps(raw))["result"]
+        result = invoke("preview_draft", asset=dest, source_asset=POOL, draft="\ufeff" + json.dumps(raw))["result"]
         self.assertFalse(result["valid"]); self.assertIn("LOADER_IDENTITY", [d["code"] for d in result["diagnostics"]])
         self.assertFalse((ROOT / dest).exists())
         for asset in ("roguelike/data/loot/x.json", "roguelike/data/loot_pools/../x.json", "roguelike/data/loot_pools/nested/a.json", "roguelike/saves/a.json"):
@@ -67,7 +67,7 @@ class PoolTests(unittest.TestCase):
             raw = {"id": "w3a_chain", "roll_count": [3, 3], "items": [
                 {"item_id": "wood_bundle", "weight": 1}, {"item_id": "wood_bundle", "weight": 2}, {"item_id": "flint_shard", "weight": 0}]}
             draft = json.dumps(raw)
-            self.assertTrue(invoke("preview_draft", root=root, asset=pool_path, draft=draft)["result"]["valid"])
+            self.assertTrue(invoke("preview_draft", root=root, asset=pool_path, source_asset=POOL, draft=draft)["result"]["valid"])
             (root / pool_path).write_text(draft, encoding="utf-8")
             source = json.loads((root / BUILDING).read_bytes()); source["id"] = "apothecary_w3a_chain"
             source["special_tiles"][0]["loot_pools"] = ["w3a_chain"]

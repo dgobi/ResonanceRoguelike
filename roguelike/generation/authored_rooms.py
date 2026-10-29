@@ -89,6 +89,8 @@ def catalog(data, data_root):
 
 def authoring_validate(raw,data,path,data_root):
     diagnostics=[]; cap=capability(raw,path)
+    from engine.pool_authoring import container_dependencies
+    diagnostics += container_dependencies(raw,data,path,data_root)
     if not cap["editable"]: diagnostics.append(issue(path,"ROOM_SOURCE","",cap["reason"],"warning"))
     try: diagnostics += [d.json() for d in compile_structure(raw,PRODUCTION_ROUTE,data,path=path).diagnostics]
     except StructureError as error: diagnostics += [d.json() for d in error.diagnostics]

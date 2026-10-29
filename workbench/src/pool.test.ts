@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import { poolEntry, poolModel, poolValue } from "./pool";
+import { poolEntry, poolModel, poolValue, poolRow, poolDefault } from "./pool";
 import { CanvasHistory } from "./layout";
 import { currentVerdict } from "./draft";
 
@@ -26,11 +26,26 @@ describe("contextual pool draft", () => {
     }
     expect(currentVerdict(2, 3, source, source + " ")).toBe(false);
   });
-  it("table history cannot undo a later raw-source edit", () => {
+  it("one history covers structured, raw and property edits including invalid text", () => {
     const h = new CanvasHistory(), after = poolValue(source, ["items", 0, "weight"], 9);
     h.record(source, after, "Weight");
     expect(h.undo(after)).toBe(source); expect(h.redo(source)).toBe(after);
-    h.clear(); expect(h.undo(after + " ")).toBe(after + " ");
+    const invalid=after.slice(0,-4);
+    h.record(after,invalid,"Source");expect(h.undo(invalid)).toBe(after);expect(h.undo(after)).toBe(source);
+    expect(h.redo(source)).toBe(after);expect(h.redo(after)).toBe(invalid);
+  });
+  it("moves whole exact row spans with nested metadata, escaping and line endings",()=>{
+    const moved=poolRow(source,"down",0);
+    expect(moved).toBe(source.replace('{"item_id":"wood_bundle", "weight": 5, "note":{"nested":[[null,1]]}}, {"item_id":"wood_bundle","weight":2}', '{"item_id":"wood_bundle","weight":2}, {"item_id":"wood_bundle", "weight": 5, "note":{"nested":[[null,1]]}}'));
+    expect(poolRow(moved,"up",1)).toBe(source);
+  });
+  it("restores omitted defaults deliberately without serializing unrelated fields",()=>{
+    const text='{"id":"x","roll_count":[3],"items":[{"item_id":"tallow_torch","weight":2,"meta":{"λ":"\\u0061"}}],"keep":[null]}';
+    const unweighted=poolDefault(text,["items",0,"weight"]);
+    expect(unweighted).toContain('"meta":{"λ":"\\u0061"}');expect(poolModel(unweighted).model?.roll_count).toEqual([3]);
+    const defaults=poolDefault(unweighted,["roll_count"]);expect(defaults).not.toContain('roll_count');
+    expect(defaults).toContain('"keep":[null]');
+    expect(poolDefault('{"id":"x","items":[]}',["items"])).not.toContain('items');
   });
   it("retains the plain UI wording correction without scanning authored game text", () => {
     const app = readFileSync(new URL("./App.tsx", import.meta.url), "utf8");

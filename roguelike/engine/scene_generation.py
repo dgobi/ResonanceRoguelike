@@ -124,8 +124,18 @@ def populate(data, item_factory, creature_factory, local_map, specs, *, map_text
                 for row in data.loot_pools[pool_id].get('items', []):
                     if row.get('item_id') not in data.items:
                         raise GenerationError(f'{source}: pool {pool_id!r} has missing item {row.get("item_id")!r}')
-            contents = roll_pools(pool_ids, data.loot_pools, item_factory,
-                                  context.rng('container-loot', x, y, decor))
+            # The staged scene must fail if a promised selected object cannot
+            # be constructed. The historical roller's optional-item behavior is
+            # retained for its other consumers.
+            from engine.harvesting import validate_output
+            class ContainerFactory:
+                def create(self, identifier):
+                    return validate_output(item_factory.create(identifier), identifier)
+            try:
+                contents = roll_pools(pool_ids, data.loot_pools, ContainerFactory(),
+                                      context.rng('container-loot', x, y, decor))
+            except Exception as error:
+                raise GenerationError(f'{source}: container item construction failed: {error}') from error
             plans.append(('container', x, y, (decor, contents)))
             containers.add((x, y))
         elif kind == 'scene':

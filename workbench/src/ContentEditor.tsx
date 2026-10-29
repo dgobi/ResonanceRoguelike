@@ -1,3 +1,4 @@
+import {PoolEditor} from "./PoolEditor";
 import {AssignmentEditor} from "./AssignmentEditor";
 import { CreatureEditor } from "./CreatureEditor";
 import type { RequestLease } from "./requests";
@@ -8,9 +9,9 @@ import { TypographyEditor } from "./TypographyEditor";
 import {LayoutEditor,type LayoutProps} from "./LayoutEditor";
 import type { FamilyPreview } from "./familyData";
 import { familyProblem, type ContentFamily } from "./content";
-import type { ItemTrail } from "./protocol";
+import type { ItemTrail, SourceTrail } from "./protocol";
 
-export type ContentNavigation = {relatedRoom?:string;selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void; returnLabel?: string;
+export type ContentNavigation = {poolTrail?:SourceTrail|null;returnLocation?:{text:string;index:number;itemId?:string};onPoolItem?:(id:string,index:number,text:string,path:string)=>void;relatedRoom?:string;selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void; returnLabel?: string;
   onPool?: (id:string)=>void; onOpen: (family:string,id:string,path?:string)=>void};
 export type ContentProps = {sourceFamily:ContentFamily; variant:boolean; active:boolean; cancelVersion:number; beginRequest:(label:string)=>RequestLease; family: ContentFamily; navigation: ContentNavigation; draft:string; path:string; dirty:boolean; validated:boolean;
   spatial?:LayoutProps;
@@ -22,6 +23,7 @@ type Props = ContentProps;
 // Specialist views receive the same document commands as ordinary controls.
 // This registration contains presentation only, never mutable review authority.
 export const contentViews = {
+  pool:{label:"pool",sourceId:"pool-draft-json",hint:"Ordered native pools share Source, history, recovery and publication. Saved dependencies only; validation creates no loot.",render:(p:Props)=>p.family.id==="pool"&&<PoolEditor {...p} context={p.family.context || undefined} diagnostics={p.family.context?.records[0]?.diagnostics || []} trail={p.navigation.poolTrail} onItem={(id,index)=>p.navigation.onPoolItem?.(id,index,p.draft,p.path)} returnLocation={p.navigation.returnLocation} onUsage={(id,path,route)=>p.navigation.onOpen(route==="authored_submap"?"room":"building",id,path)}/>},
   assignment:{label:"assignment",sourceId:"assignment-draft-json",hint:"One fixed saved assignment profile; independent document history, recovery and publication.",render:(p:Props)=><AssignmentEditor {...p}/>},
   room:{label:"room",sourceId:"room-draft-json",hint:"Terrain, arrival, direct contents and linked references share this exact source, history and recovery. Validate realized geometry, population and static access before publication.",render:(p:Props)=><section data-testid="room-editor"><p className="notice">{p.family.descriptor.publication_note}</p>{p.navigation.onReturn&&<button onClick={p.navigation.onReturn}>{p.navigation.returnLabel}</button>}<button onClick={p.onSource}>Show room source</button><p>{p.sourceFamily.effective_operations?.includes("edit") ? "Saved ordinary room" : "Room source; publish an eligible ordinary variant before assignment"}{p.dirty ? " · independent unsaved definition draft" : ""}. Assignment choices apply to new worlds; same-ID definition edits still apply to pending scenes.</p><button disabled={!p.sourceFamily.effective_operations?.includes("edit")} onClick={()=>p.navigation.onOpen("assignment","authored_submap_selection","roguelike/data/generation/authored_submap_selection.json")}>World assignment</button>{p.sourceFamily.id==="room"&&p.sourceFamily.context?.records[0]?.capability.reason&&<p className="notice warning">{p.sourceFamily.context.records[0].capability.reason}</p>}{p.spatial&&<LayoutEditor {...p.spatial}/>}</section>},
   creature:{label:"creature",sourceId:"creature-draft-json",hint:"Common Actor controls share exact Source, history, recovery and publication. Special bindings retain their stable ID.",render:(p:Props)=><CreatureEditor {...p}/>},
@@ -35,5 +37,5 @@ export const contentViews = {
 export function ContentEditor(p:Props) {
   const problem = familyProblem(p.family);
   if (problem) return <section className="item-editor"><p className="notice warning">{problem}. Inspect or repair exact Source.</p><button onClick={p.onSource}>Show source</button></section>;
-  return <>{p.navigation.onReturn&&<button disabled={p.busy} onClick={p.navigation.onReturn}>{p.navigation.returnLabel||"Return to origin"}</button>}{contentViews[p.family.id].render({...p,navigation:{...p.navigation,onReturn:undefined}})}</>;
+  return <>{p.navigation.onReturn&&<button disabled={p.busy} onClick={p.navigation.onReturn}>{p.navigation.returnLabel||"Return to origin"}</button>}{p.family.id!=="pool"&&p.navigation.returnLocation&&p.navigation.returnLocation.text!==p.draft&&<p className="notice warning">Recorded container location is stale: this draft changed while away. No different record was selected.</p>}{contentViews[p.family.id].render({...p,navigation:{...p.navigation,onReturn:undefined}})}</>;
 }

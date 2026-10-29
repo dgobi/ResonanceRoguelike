@@ -140,3 +140,9 @@ restoration and fresh-catalogue compatibility remain separate checks. An already
 generated ordinary save keeps actual old furnishing positions, changed fire state
 and removed objects after a same-ID room revision. Missing owned scene/cache data
 still refuses regeneration.
+
+W5O contextual pools share registered document recovery. Captures retain saved
+pool/item bytes and actual container population inputs. Reset keeps old contents;
+latest saved captures revisions. Ordinary generated containers retain physical
+contents/state across new catalogues while pending scenes consume current saved
+definitions. See [pool activation](POOL_AUTHORING.md).

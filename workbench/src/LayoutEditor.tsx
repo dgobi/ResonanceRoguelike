@@ -38,7 +38,7 @@ export type LayoutProps = {
   canUndo: boolean;
   canRedo: boolean;
   onError: (e: unknown) => void;
-  focus: { cell: Cell; layer: Layer } | null;
+  focus: { cell: Cell; layer: Layer; index?:number } | null;
   onPool?: (id: string, index: number, record: Special) => void;
   onLinked?: (family:string,id:string,path?:string)=>void;
 };
@@ -68,10 +68,10 @@ export function LayoutEditor(p: LayoutProps) {
     setLastFocus(p.focus);
     if (p.focus) {
       setSelected(p.focus.cell);
-      const index =
-        m?.special_tiles?.findIndex(
+      const index = p.focus.index ??
+        (m?.special_tiles?.findIndex(
           (s) => s.x === p.focus!.cell[0] && s.y === p.focus!.cell[1],
-        ) ?? -1;
+        ) ?? -1);
       setSpecialIndex(index >= 0 ? index : null);
       setLayer(p.focus.layer);
       setVisible((v) => ({ ...v, [p.focus!.layer]: true }));

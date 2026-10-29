@@ -73,9 +73,6 @@ export default function App() {
   const [dirty, setDirty] = useState(false),
     [search, setSearch] = useState(""),
     [category, setCategory] = useState("");
-  const [poolDocument, setPoolDocument] = useState<Inspection | null>(null);
-  const [poolActive, setPoolActive] = useState(false), [poolDirty, setPoolDirty] = useState(false);
-  const [poolOrigin,setPoolOrigin]=useState("");
   const [contentDocuments, renderDocuments] = useState<Documents>({});
   const contentRef = useRef(contentDocuments);
   const recoveryControls=useRef(new Map<string,RecoveryControl>());
@@ -90,10 +87,11 @@ export default function App() {
     contentRef.current = next; renderDocuments(next);
   }
   const [activeContent, setActiveContent] = useState("");
+  const [legacyReturn,setLegacyReturn]=useState<OpenDocument["returnLocation"]>();
   const contentDirty = Object.values(contentDocuments).some(d=>d.dirty);
   const scrollPositions = useRef(new Map<string, number[]>());
   useLayoutEffect(() => {
-    const key = activeContent || (poolActive ? "legacy-pool" : "legacy-structure");
+    const key = activeContent || "legacy-structure";
     const surfaces = [...document.querySelectorAll<HTMLElement>(".preview-pane, .inspector")];
     const position = scrollPositions.current.get(key) || [0, 0];
     surfaces.forEach((s,i)=>s.scrollTop=position[i]);
@@ -108,20 +106,19 @@ export default function App() {
       else if(item.right>bounds.right)strip.scrollLeft+=item.right-bounds.right;
     }
     return () => { surfaces.forEach(s=>s.removeEventListener("scroll", remember)); };
-  }, [activeContent, poolActive]);
+  }, [activeContent]);
   const [support, setSupport] = useState("");
   const [catalogPage, setCatalogPage] = useState(0);
   useEffect(()=>setCatalogPage(0),[search,category,support,assets]);
-  const [itemTrail, setItemTrail] = useState<ItemTrail | null>(null);
-  const [trail, setTrail] = useState<SourceTrail | null>(null), [dependencyVersion, setDependencyVersion] = useState(0);
+  const [dependencyVersion, setDependencyVersion] = useState(0);
   const [pending, setPending] = useState<null | (() => void)>(null);
   const [pendingFiles, setPendingFiles] = useState<string[]>([]);
   const dirtyFiles = useRef<string[]>([]);
-  dirtyFiles.current = [dirty ? inspection?.path : null, poolDirty ? poolDocument?.path : null,
+  dirtyFiles.current = [dirty ? inspection?.path : null,
     ...Object.values(contentDocuments).filter(d=>d.dirty).map(d=>d.document.path)].filter((p):p is string=>!!p);
   const [canvasHost, setCanvasHost] = useState<HTMLDivElement | null>(null);
   const dirtyRef = useRef(false);
-  dirtyRef.current = dirty || poolDirty || contentDirty;
+  dirtyRef.current = dirty || contentDirty;
   useEffect(() => {
     const unlisten = listen("authoring-close-requested", () => {
       const close = () => {
@@ -194,8 +191,7 @@ export default function App() {
   function clear() {
     monitor.current.reset();
     setDirty(false);
-    setPoolDocument(null); setPoolOrigin("");setPoolActive(false); setPoolDirty(false); setTrail(null);
-    setContentDocuments({}); setActiveContent(""); setItemTrail(null);
+    setContentDocuments({}); setActiveContent("");
     setIdentity(null);
     setAssets([]);
     setSelected("");
@@ -207,7 +203,6 @@ export default function App() {
   }
   async function loadAsset(asset: string, token: number, generate = true, reopened?: Inspection) {
 
-    setPoolActive(false);
     setActiveContent("");
     setSelected(asset);
     setFixture(null);
@@ -373,30 +368,21 @@ export default function App() {
     );
   }
   const [receipt, setReceipt] = useState<unknown>(null);
-  async function openPool(id: string, context: SourceTrail | null = null, discard = false, reload = false, origin = "") {
-    const matches = assets.filter(a => a.route === "contextual_loot_pool" && a.id === id), asset = matches[0];
-    if (matches.length !== 1) { setError({code: "POOL_SOURCE", message: `Pool ${id} resolves to ${matches.length} supported files.`, remedy: "Correct duplicate/missing IDs or refresh the project catalogue."}); return; }
-    if (!reload && poolDocument?.path === asset.path) { setPoolOrigin(origin);setTrail(context); setPoolActive(true);  setActiveContent(""); return; }
-    if (poolDirty && !discard) { setPendingFiles([poolDocument!.path]); setPending(() => () => void openPool(id, context, true, reload, origin)); return; }
-    setBusy("Opening contextual pool…"); setError(null);
-    const token = ++epoch.current;
-    try {
-      const r = await call<Inspection>("open_document", {asset: asset.path});
-      if (token !== epoch.current) return;
-      setPoolDocument(r.result);setPoolOrigin(origin); setPoolDirty(false); setPoolActive(true);  setActiveContent(""); setTrail(context);
-      setStatus(`Opened ${asset.path}.`);
-    } catch (e) { if (token === epoch.current) setError(asFailure(e)); } finally { if (token === epoch.current) setBusy(""); }
+  function openPool(id:string, context:SourceTrail|null=null, _discard=false, _reload=false, origin="") {
+    const from=origin ? contentRef.current[origin] : undefined;
+    return openContent("pool",id,undefined,false,false,null,{token:from?.document.document_token || "legacy-structure",label:`container ${context?.id || "source"}`,focus:document.activeElement as HTMLElement,location:context?.draft ? {text:context.draft,index:context.index}:undefined},context);
   }
   const opening = useRef(new Map<string, Promise<void>>());
-  function activateContent(token:string) { setActiveContent(token);  setPoolActive(false); }
-  async function openContent(family:string,id:string,assetPath?:string,discard=false,reload=false,trailContext:ItemTrail|null=null,origin?:OpenDocument["origin"]) {
+  function activateContent(token:string) { setActiveContent(token); }
+  async function openContent(family:string,id:string,assetPath?:string,discard=false,reload=false,trailContext:ItemTrail|null=null,origin?:OpenDocument["origin"],poolTrail?:SourceTrail|null) {
+    if(family==="building" && assetPath){await refresh(assetPath);return;}
     const matches=assets.filter(a=>a.family_id === family && a.id === id && (!assetPath || a.path === assetPath)), asset=matches[0];
     if (!matches.length || matches.length !== 1 && !assetPath) { setError({code:"CONTENT_SOURCE",message:`${id} has ${matches.length} catalogue sources.`,remedy:"Select a specific source file to inspect ambiguity."}); return; }
     const existing=Object.values(contentRef.current).find(d=>d.document.path===asset.path);
     const existingToken=existing?.document.document_token;
     const activate=(key:string)=>{
-      setContentDocuments(d=>d[key] ? {...d,[key]:{...d[key],selectedId:id,...(origin ? {origin,trail:trailContext} : trailContext ? {trail:trailContext} : {})}} : d);
-      activateContent(key); if(trailContext)setItemTrail(trailContext);
+      setContentDocuments(d=>d[key] ? {...d,[key]:{...d[key],selectedId:id,...(poolTrail!==undefined ? {poolTrail} : {}),...(origin ? {origin,trail:trailContext} : trailContext ? {trail:trailContext} : {})}} : d);
+      activateContent(key);
     };
     if (!reload && existingToken) {
       activate(existingToken); return;
@@ -415,9 +401,6 @@ export default function App() {
     opening.current.set(key,task);
     try {await task;} finally {if(opening.current.get(key)===task)opening.current.delete(key);}
   }
-  function openItem(id:string,context:ItemTrail|null=null,assetPath?:string,discard=false,reload=false) {
-    return openContent("item",id,assetPath,discard,reload,context,context && poolDocument ? {token:poolDocument.document_token!,label:`pool ${poolDocument.id}`,focus:document.activeElement as HTMLElement}:undefined);
-  }
   async function closeContent(token:string, discard=false) {
     const entry=contentRef.current[token]; if(!entry)return;
     if(entry.dirty && !discard) {setPendingFiles([entry.document.path]);setPending(()=>()=>void closeContent(token,true));return;}
@@ -429,10 +412,10 @@ export default function App() {
   }
   function returnToOrigin(entry:OpenDocument) {
     const origin=entry.origin; if(!origin)return;
-    if(contentRef.current[origin.token]) activateContent(origin.token);
-    else if(poolDocument?.document_token===origin.token) {setActiveContent("");setPoolActive(true);}
+    if(contentRef.current[origin.token]) {setContentDocuments(d=>({...d,[origin.token]:{...d[origin.token],returnLocation:origin.location}}));activateContent(origin.token);}
+    else if(origin.token==="legacy-structure" && inspection) {setLegacyReturn(origin.location);setActiveContent("");}
     else {setError({code:"ORIGIN_UNAVAILABLE",message:`The originating ${origin.label} was closed or replaced.`,remedy:"Open its file deliberately from the catalogue; no other document was selected."});return;}
-    requestAnimationFrame(()=>{if(origin.focus?.isConnected)origin.focus.focus({preventScroll:true});});
+    requestAnimationFrame(()=>{if(!origin.location && origin.focus?.isConnected)origin.focus.focus({preventScroll:true});});
   }
   async function refreshContentContexts(token:number) {
     for (const [key,entry] of Object.entries(contentRef.current)) {
@@ -459,27 +442,12 @@ export default function App() {
       ()=>call<Inspection>("open_document",{asset,replaceToken:owner,expectedSha256:(result as {after_sha256:string}).after_sha256,handoffId}),
       async reopened=>{verifyReopened(reopened.result,result);if(handoffId)await invoke("acknowledge_reopen",{handoffId});},
       reopened=>{setContentDocuments(d=>installDocument(d,reopened.result,reopened.result.id,owner));setActiveContent(active=>active===owner ? reopened.result.document_token! : active);});
-    if(poolDocument) {
-      const refreshed=await request<Inspection>("inspect",{asset:poolDocument.path});if(token!==epoch.current)return;
-      setPoolDocument(d=>d?.path===refreshed.result.path && d.sha256===refreshed.result.sha256 ? {...d,pool_context:refreshed.result.pool_context}:d);
+    if(inspection?.document_token){
+      const refreshed=await request<Inspection>("inspect",{asset:inspection.path});if(token!==epoch.current)return;
+      setInspection(current=>current?.path===refreshed.result.path && current.sha256===refreshed.result.sha256 ? {...current,catalog:refreshed.result.catalog}:current);
     }
     await refreshContentContexts(token);if(token!==epoch.current)return;
     setStatus(`Saved and byte-checked reopen: ${asset}. ${reopened.result.family?.descriptor.publication_note || ""}`);
-  }
-  async function poolApplied(asset: string, result: unknown) {
-    const token = epoch.current;
-    setPoolDirty(false); setReceipt(result);
-    const catalog = await request<{ assets: Asset[] }>("describe");
-    if (token !== epoch.current) return;
-    setAssets(catalog.result.assets);
-    setInspection(d => d?.catalog ? {...d, catalog: {...d.catalog, loot_pools: catalog.result.assets.filter(a => a.route === "contextual_loot_pool").map(a => a.id).sort()}} : d);
-    setDependencyVersion(v => v + 1);
-    const r = await call<Inspection>("open_document", {asset});
-    if (token !== epoch.current) return;
-    verifyReopened(r.result, result);
-    setPoolDocument(r.result);
-    await refreshContentContexts(token);if(token!==epoch.current)return;
-    setStatus(`Pool saved and reopened: ${asset}. No container references changed.`);
   }
   async function applied(asset: string, result: unknown) {
     const token = epoch.current;
@@ -529,14 +497,14 @@ export default function App() {
         <div className="top-meta">
           <span className="chip">W4C</span>
           <span className="read-only">
-            ◈ {dirty || poolDirty || contentDirty ? "Unsaved draft" : "Read-only by default"}
+            ◈ {dirty || contentDirty ? "Unsaved draft" : "Read-only by default"}
           </span>
         </div>
       </header>
       <div
         className={
           "workspace " +
-          (inspection?.document_token || poolActive || !!activeContent ? "authoring-workspace" : "")
+          (inspection?.document_token || !!activeContent ? "authoring-workspace" : "")
         }
       >
         <aside className="sidebar">
@@ -655,7 +623,7 @@ export default function App() {
               {visibleAssets.slice(catalogPage * 100, (catalogPage + 1) * 100).map((a) => (
                 <button
                   key={a.path + (a.pointer || "")}
-                  className={"asset " + (a.path === (activeContent ? contentDocuments[activeContent]?.document.path : poolActive ? poolDocument?.path : selected) ? "selected" : "")}
+                  className={"asset " + (a.path === (activeContent ? contentDocuments[activeContent]?.document.path : selected) ? "selected" : "")}
                   disabled={!!busy || a.route === "plaza"}
                   title={`${a.path} · ${a.provenance} · ${a.validation}${a.editable ? "" : " · read-only"}`}
                   data-asset={a.path}
@@ -669,7 +637,7 @@ export default function App() {
                       <br />
                       {a.path}{a.pointer || ""}
                       <br />
-                      {a.path === poolDocument?.path ? poolDocument.valid ? "Source valid" : "Source invalid" : a.path === inspection?.path
+                      {a.path === inspection?.path
                         ? inspection.valid
                           ? "Source valid"
                           : "Source invalid"
@@ -691,15 +659,14 @@ export default function App() {
             <span className="eyebrow">THIS WORKSPACE</span>
             <p>Draft → validate → review → apply</p>
             <small>
-              Multiple room, creature, item, recipe, text and typography drafts share tabs and recovery alongside structure and pool drafts. Campaigns are never opened.
+              Multiple pool, room, creature, item, recipe, text and typography drafts share tabs and recovery. Ordinary buildings retain their existing editor. Campaigns are never opened.
             </small>
           </section>
         </aside>
         <section className="preview-pane">
-          {(inspection?.document_token || poolActive || !!activeContent) && (
+          {(inspection?.document_token || !!activeContent) && (
             <>
               <div className="building-controls">
-                {poolDocument && <button disabled={!!busy} onClick={() => {setPoolActive(!!activeContent || !poolActive); setActiveContent("");}}>{poolActive && !activeContent ? "Show structure" : `Show pool ${poolDocument.id}`}</button>}
                 <nav className="document-tabs" aria-label="Open content documents">
                   {Object.entries(contentDocuments).map(([token,entry])=><button key={token} data-document-tab={entry.document.path}
                     title={entry.document.path} aria-current={activeContent===token ? "page" : undefined}
@@ -712,7 +679,6 @@ export default function App() {
                   <button disabled={!!busy} onClick={()=>{const entry=contentRef.current[activeContent];void openContent(entry.document.family!.id,entry.selectedId,entry.document.path,false,true,entry.trail,entry.origin);}}>Reload document</button>
                   <button disabled={busy.includes("applying")} onClick={()=>void closeContent(activeContent)}>Close document</button>
                 </>}
-                {!activeContent && poolActive && poolDocument && <button disabled={!!busy} onClick={() => void openPool(poolDocument.id, trail, false, true,poolOrigin)}>Reload pool</button>}
                 <label>
                   Preview seed
                   <input
@@ -722,7 +688,7 @@ export default function App() {
                     disabled={!!busy}
                   />
                 </label>
-                <button onClick={() => refresh()} disabled={!!busy || poolActive || !!activeContent}>
+                <button onClick={() => refresh()} disabled={!!busy || !!activeContent}>
                   ↻ Generate / refresh
                 </button>
               </div>
@@ -738,7 +704,7 @@ export default function App() {
           <div
             className="saved-preview-pane"
             style={{
-              display: inspection?.document_token || poolActive || !!activeContent ? "none" : "contents",
+              display: inspection?.document_token || !!activeContent ? "none" : "contents",
             }}
           >
             <div className="pane-heading">
@@ -891,7 +857,7 @@ export default function App() {
         <aside className="inspector">
           <RoomTestPanel document={activeContent ? contentDocuments[activeContent]?.document : undefined} dirty={!!(activeContent&&contentDocuments[activeContent]?.dirty)} dependencyVersion={dependencyVersion}/>
           <div className="eyebrow">04 / INSPECTOR</div>
-          {!inspection?.document_token && !poolActive && !activeContent && (
+          {!inspection?.document_token && !activeContent && (
             <div className="tabs">
               <button
                 className={tab === "properties" ? "active" : ""}
@@ -913,17 +879,11 @@ export default function App() {
             subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={activeContent===token} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
             onPool={(id,context)=>void openPool(id,context,false,false,token)}
-            contentNavigation={{selectedId:entry.selectedId,trail:entry.trail,relatedRoom:entry.document.family?.id==="assignment" && entry.origin ? contentDocuments[entry.origin.token]?.selectedId : undefined,
+            contentNavigation={{poolTrail:entry.poolTrail,returnLocation:entry.returnLocation,
+              onPoolItem:(id,index,text,path)=>void openContent("item",id,undefined,false,false,{poolId:entry.selectedId,path,index,itemId:id,structure:entry.poolTrail},{token,label:`pool ${entry.selectedId} row ${index+1}`,focus:null,location:{text,index,itemId:id}}),selectedId:entry.selectedId,trail:entry.trail,relatedRoom:entry.document.family?.id==="assignment" && entry.origin ? contentDocuments[entry.origin.token]?.selectedId : undefined,
               onReturn:entry.origin ? ()=>returnToOrigin(entry):undefined,returnLabel:entry.origin ? `Return to ${entry.origin.label}`:undefined,
-              onPool:id=>void openPool(id,trail,false,false,token),onOpen:(target,id,path)=>void openContent(target,id,path,false,false,null,{token,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}
-          {poolDocument && <div hidden={!poolActive || !!activeContent}><Authoring key={poolDocument.document_token}
-            document={poolDocument} onDirty={setPoolDirty} onApplied={poolApplied} onError={setError}
-            subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
-            active={poolActive && !activeContent} onCancel={() => void cancel()} trail={trail}
-            onItem={(id, context) => void openItem(id, context)}
-            poolEntryFocus={itemTrail?.path === poolDocument.path || itemTrail?.poolId === poolDocument.id ? itemTrail.index : undefined}
-            onReturn={() => {if(contentRef.current[poolOrigin])activateContent(poolOrigin);else setPoolActive(false);}} dependencyVersion={dependencyVersion} /></div>}
-          <div hidden={poolActive || !!activeContent}>{inspection?.document_token ? (
+              onPool:id=>void openPool(id,null,false,false,token),onOpen:(target,id,path)=>void openContent(target,id,path,false,false,null,{token,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}
+          <div hidden={!!activeContent}>{inspection?.document_token ? (
             <Authoring
               key={inspection.document_token}
               document={inspection}
@@ -938,8 +898,9 @@ export default function App() {
               diskPreview={preview}
               seed={Number(seed)}
               onCancel={() => void cancel()}
-              active={!poolActive && !activeContent}
+              active={!activeContent}
               onPool={(id, context) => void openPool(id, context)}
+              contentNavigation={{returnLocation:legacyReturn,onOpen:()=>{}}}
               dependencyVersion={dependencyVersion}
             />
           ) : inspection ? (
