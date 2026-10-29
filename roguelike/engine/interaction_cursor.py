@@ -186,14 +186,8 @@ class InteractionCursor:
     @staticmethod
     def _has_cutting_tool(engine: "Engine") -> bool:
         """Equipment refers into inventory; a stale slot or flag is insufficient."""
-        inv = getattr(engine.player, "inventory", None)
-        equip = getattr(engine.player, "equipment", None)
-        if inv is None or equip is None:
-            return False
-        return any(item is not None and inv.contains(item) and item.equipped
-                   and any(isinstance(kw, dict) and kw.get("tag") == "cutting"
-                           and kw.get("tier", 0) >= 1 for kw in item.keywords)
-                   for item in (equip.slots.get("weapon"), equip.slots.get("offhand")))
+        from engine.harvesting import owned_cutters
+        return any(tier >= 1 for _, tier in owned_cutters(engine.player))
 
     def _offer_dismantle(self, engine: "Engine") -> None:
         from generation.floor_object_utils import empty_crate_owner
@@ -261,7 +255,7 @@ class InteractionCursor:
                 if len(items) == 1:
                     _top = items[0]
                     if getattr(_top, "source_creature", None):
-                        acted = engine._interactable_butcher(cx, cy)
+                        acted = engine._interactable_butcher(cx, cy, _top)
                     else:
                         inv = getattr(engine.player, "inventory", None)
                         if inv is not None:
@@ -271,6 +265,8 @@ class InteractionCursor:
                 else:
                     # Multiple items — open selection prompt
                     self._selection_prompt = {
+                        "scene": engine.local_map,
+                        "address": (engine.world_x, engine.world_y, engine.current_submap_id),
                         "items": list(items),
                         "selected": 0,
                         "lx": cx, "ly": cy,
@@ -323,7 +319,8 @@ class InteractionCursor:
                     engine.log.add("That item is no longer here.", MSG_DEFAULT)
                     return
                 if getattr(item, "source_creature", None):
-                    acted = engine._interactable_butcher(lx, ly)
+                    acted = engine._interactable_butcher(lx, ly, item,
+                        scene=prompt.get("scene"), address=prompt.get("address"))
                 else:
                     inv = getattr(engine.player, "inventory", None)
                     if inv is not None:

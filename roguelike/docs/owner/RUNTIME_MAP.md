@@ -68,6 +68,17 @@ statistics or a new save format.
 
 ## Navigation and checks
 
+W5N ordinary butchery carries the selected physical corpse through pickup and both
+cursor routes into `engine/harvesting.py`. It rechecks reachable floor ownership
+and prompt scene, reads current-session harvest definitions by saved
+`source_creature`, and uses only exact owned equipped cutters' copied keywords.
+All valid outputs are staged before publication; failed construction or placement
+rolls back only those new objects and charges no turn/debt. Success consumes only
+the selected corpse and applies the established harvest cost once. A stale
+selection never targets its same-ID sibling. Death copies initial decay, while
+save restoration retains the remaining timer. See [creature/harvest authoring](../CREATURE_AUTHORING.md)
+for defaults, reference validation and catalogue activation boundaries.
+
 From the project root:
 
 ```powershell

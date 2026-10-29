@@ -1,6 +1,6 @@
-# Common creature authoring · W5F
+# Creature and harvest authoring · W5N
 
-Workbench's `creature-common-1` adapter supports the twelve current Actor
+Workbench's `creature-harvest-2` adapter supports the twelve current Actor
 definitions under `data/entities/creatures/`. Open a source, inspect its body,
 binding and references, then **Begin edit**. The exact Source, typed controls,
 Undo/Redo, validation, Diff, recovery and reviewed publication share one document.
@@ -49,7 +49,7 @@ typed controls until corrected.
 `fighter.power` and `fighter.defense` remain visible legacy/fallback values.
 Hearing is constructed/saved but has no active AI consumer. Current AI does not
 call `Perception.is_hostile_to`; membership labels do not promise targeting, and
-an empty hostility list defaults in the constructor. Bodies/limbs, harvest,
+an empty hostility list defaults in the constructor. Bodies/limbs,
 corpse data, essence, effects, ranged blocks, spawn declarations, transition
 flags, callouts and unknown metadata remain exact and read-only.
 
@@ -110,3 +110,77 @@ Sources: `engine/creature_authoring.py`, `engine/creature_factory.py`,
 `components/ai.py`, `engine/engine.py`, `engine/save_manager.py` and
 `engine/save_components.py`. See [W5F delivery](../../workbench/docs/W5F_DELIVERY.md)
 for source-bound verification and the controlled encounter/restore evidence.
+
+## Remains and complete harvest tables
+
+The **Harvest** tab uses the same exact Source, Undo/Redo, recovery and reviewed
+single-file publication as common fields. Eleven original non-ephemeral Actors
+admit harvest edits: nine existing tables plus Sewer Thing and Hollow Knight,
+which can deliberately gain a table. Bog Wraith remains common-field editable
+but cannot gain harvest authority; Vine Network is not an Actor. Admission is
+structural, never an ID whitelist. Original `ephemeral` must be absent or exactly
+false and the original profile absent or supported. Raw edits/recovery cannot
+promote an unsupported original by deleting fields. Six ordinary sources retain
+variants; special creatures retain same-ID edits only. Body/limbs, corpse sprites,
+abilities, effects, spawn declarations and nested unknown metadata stay protected.
+
+Add/remove the profile, choose default/timed/no decay, add/edit/reorder/remove
+tiers and outputs. Defaults are displayed without inserting keys on open.
+Metadata travels with exact source row spans and is read-only. Removing a whole
+profile or row is deliberate. Save/reopen item dependencies before choosing them;
+other dirty documents never overlay reference validation or Test room capture.
+
+| Native declaration | Effective production rule / publication bound |
+| --- | --- |
+| Profile absent / `{}` | Free refusal. An otherwise non-ephemeral Actor still leaves a corpse. Whole-profile null is invalid. |
+| `decay_turns` absent / null | 200 active-map ticks / no decay. Explicit integers 0–9007199254740991; zero/one expires at the next active tick. |
+| `tiers` absent / `[]` in a nonempty profile | No qualifying tier: corpse retained, one paid turn, no extra harvest debt. Null is invalid. |
+| `min_cutting_tier` absent | 1; explicit exact integer 0–32. Highest qualifying threshold wins, with first-row tie precedence. |
+| `yields` absent / `[]` in the selected tier | Successful empty harvest: consumes this corpse at normal cost. Null is invalid. |
+| `item_id` | One unique saved, case-unambiguous, factory-valid persisted item. Constructibility is distinct from permission to edit its behavior; otherwise valid reference-only items are included. Exact source paths appear in References and choices. |
+| Quantities absent | Inclusive independent roll 0–1. Explicit min/max exact integers 0–32, effective min ≤ max, including omitted members. Repeated IDs stay separate rolls. |
+| Aggregate work | At most 64 tiers, 64 outputs per tier and 64 possible physical outputs per tier (sum of effective maxima). |
+
+Booleans, unsafe/nonfinite numbers and malformed/null records are rejected before
+review. These are bounded publication/execution rules, not shipped-balance edits.
+`engine/harvesting.py` owns validation, defaults, selection, copied cutting
+keywords and the runtime transaction. The editor does not calculate a second
+harvesting model. Factory Actor/item construction is unowned evidence and does
+not establish defeat, death finalization, ownership, butchery or usable output.
+
+## Ordinary butchery, decay and save activation
+
+Pickup and both interaction-cursor routes pass the actual corpse instance.
+Commitment rechecks reachable floor ownership and prompt scene/address. Same-ID
+siblings remain distinct; stale selection never chooses a substitute. Legacy
+coordinate-only dispatch requires one unambiguous actual floor corpse; a décor
+marker cannot supply one. Only exact inventory-owned, currently equipped weapon
+or offhand objects supply their **copied instance** cutting keywords. Stale slots,
+flags alone and current definition keywords cannot grant a cutter. Tools remain
+owned and equipped after success. `bone_reader` qualifies all tiers independently
+of a cutter, but does not maximize quantity rolls or change actual cutting tier.
+
+Before consumption, the runtime validates the current profile and selected item
+references, rolls bounded quantities and constructs distinct valid physical
+outputs. It stages everything before floor publication and checks every placement.
+Construction/placement failure, including a partial write, removes only that
+attempt's publications, retains the exact corpse and all prior objects, charges
+no action/debt and reports failure. Retry can produce one complete harvest. RNG
+is not rewound. Success publishes all outputs, removes only the selected corpse,
+reports actual quantities and pays once: `max(1, 5 - (actual tier - threshold))`.
+The threshold cap bounds the bare-hands perk case to 37 turns. Ordinary turn/death
+handling drains debt. A valid zero-roll result is still successful consumption.
+
+| Boundary | Activation |
+| --- | --- |
+| Actor death | Current session definition controls corpse eligibility and initial decay; normal death records stable `source_creature`. |
+| Existing saved corpse | Retains source ID, copied name and remaining `decay_timer`; catalogue changes never reset the timer or regenerate an Actor. |
+| Butchery | Uses the current session's table through `source_creature`. An old corpse can use a revised table after fresh-catalogue restore. Removing the profile can make it unharvestable while retaining stored decay. |
+| Existing tool / harvested item | Retains copied physical fields, keywords and existing dynamic references. Fresh construction uses current definitions. |
+| Running game / Reset / latest saved | Running catalogue stays loaded. Reset reuses the immutable capture; latest saved makes a new capture from saved dependencies. |
+| Scene / decay | Active-map floor ticking and saved ownership/depletion remain authoritative. No offscreen catch-up, extra processing-map corpse ticks or respawn is added. |
+
+No save schema/migration, yield-table snapshot, natural spawn registration or
+global transfer framework is introduced. See [W5N delivery](../../workbench/docs/W5N_DELIVERY.md)
+for the capability inventory, controlled authored-room provenance and separate
+ordinary-save fresh-catalogue proof.

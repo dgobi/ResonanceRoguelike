@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { creatureModel, creatureValue } from "./creature";
 import { request, asFailure, type Inspection } from "./protocol";
 import type { ContentProps } from "./ContentEditor";
+import { CreatureHarvest } from "./CreatureHarvest";
 
 export function CreatureEditor(p: ContentProps) {
   const context=p.family.id==="creature" ? p.family.context : null;
@@ -35,7 +36,7 @@ export function CreatureEditor(p: ContentProps) {
   }
   return <section className="item-editor" data-testid="creature-editor">
     <div className="pane-heading"><div><h2>Creature definition</h2><code>{String(values.id||record?.id||"Invalid source")} · {p.path}</code></div>{p.busy&&<button onClick={p.onCancel}>Cancel authoring request</button>}</div>
-    <div className="tabs">{["Supported fields","Read-only fields","References","Factory result"].map(v=><button key={v} className={view===v?"active":""} onClick={()=>setView(v)}>{v}</button>)}<button onClick={p.onSource}>Show source</button></div>
+    <div className="tabs">{["Supported fields","Harvest","Read-only fields","References","Factory result"].map(v=><button key={v} className={view===v?"active":""} onClick={()=>setView(v)}>{v}</button>)}<button onClick={p.onSource}>Show source</button></div>
     <p>{cap?.reason}</p><p>{cap?.body_note}. {cap?.special_binding ? `Special binding: ${cap.special_binding} (stable ID). Sight does not change its separate ability radius.` : "No ID-bound special ability."}</p>
     {cap?.duplication_reason&&<p className="notice">{cap.duplication_reason}</p>}
     {reason&&<p className="notice warning">{reason}</p>}
@@ -62,7 +63,8 @@ export function CreatureEditor(p: ContentProps) {
       <p className="notice">{p.sourceFamily.descriptor.publication_note}</p>
       <details><summary>Saved actors and read-only behavior</summary><p>Restoration constructs from the current definition, then reapplies stored component snapshots. Name, current/max HP, natural armour, saved sight/darkvision and wander radius retain stored values. Older rows missing a field keep existing factory fallback semantics. No running game cache or saved actor is rewritten.</p><p>Identity, same-ID AI, body structure, tile and special settings remain fixed. An ordinary variant has its deliberately selected AI and no inherited special binding.</p></details>
     </>}
-    {view==="Read-only fields"&&<><p>fighter.power and fighter.defense are legacy/fallback values. Damage dice/bonus and natural armour are the effective controls.</p><p>Hearing is constructed and saved but has no active AI consumer. Current AI does not call Perception.is_hostile_to; faction and hostility membership do not promise targeting behavior, and an empty hostility list defaults in its constructor.</p><p>Bodies, harvest/corpse data, essence, abilities/effects, ranged blocks, spawn metadata, transition flags, callouts and unknown metadata stay exact.</p>{Object.entries(values).filter(([key])=>!["id","name","description","base_hp","armour_value","damage_dice","damage_bonus","attack_verb","wander_radius","pursuit_timeout","speed"].includes(key)).map(([key,value])=><details key={key}><summary>{key}{key==="fighter"||key==="perception"?" · only named common fields are editable":""}</summary><pre className="raw">{JSON.stringify(value,null,2)}</pre></details>)}</>}
+    {view==="Harvest"&&cap&&<><div className="edit-actions"><button disabled={!!reason||!p.canUndo} onClick={p.onUndo}>Undo creature</button><button disabled={!!reason||!p.canRedo} onClick={p.onRedo}>Redo creature</button></div><CreatureHarvest document={p} values={values} cap={cap} disabled={!!reason}/></>}
+    {view==="Read-only fields"&&<><p>fighter.power and fighter.defense are legacy/fallback values. Damage dice/bonus and natural armour are the effective controls.</p><p>Hearing is constructed and saved but has no active AI consumer. Current AI does not call Perception.is_hostile_to; faction and hostility membership do not promise targeting behavior, and an empty hostility list defaults in its constructor.</p><p>Bodies, corpse presentation, essence, abilities/effects, ranged blocks, spawn metadata, transition flags, callouts and unknown metadata stay exact. Harvest controls require the original non-ephemeral Actor entitlement.</p>{Object.entries(values).filter(([key])=>!["id","name","description","base_hp","armour_value","damage_dice","damage_bonus","attack_verb","wander_radius","pursuit_timeout","speed"].includes(key)).map(([key,value])=><details key={key}><summary>{key}{key==="fighter"||key==="perception"?" · only named common fields are editable":""}</summary><pre className="raw">{JSON.stringify(value,null,2)}</pre></details>)}</>}
     {view==="References"&&<><p>{context?.selection}</p>{!currentRefs?<p className="notice">Reference snapshot is stale. Validate or reopen.</p>:<>
       <table className="pool-table"><tbody>{record?.references.map(r=><tr key={r.path+r.field}><td>{r.route==="authored_submap"?<button disabled={p.busy} onClick={()=>void inspectReference(r.path)}>Inspect layout {r.id}</button>:<strong>Zone {r.id} · read-only</strong>}<code>{r.path}</code></td><td>{r.field}<small>{r.evidence}</small></td></tr>)}</tbody></table>
       {!record?.references.length&&<p>No saved inbound declarations found.</p>}

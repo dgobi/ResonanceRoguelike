@@ -15,8 +15,10 @@ from engine.creature_factory import CreatureFactory, AI_TYPES
 from engine.creature_abilities import ABILITY_REGISTRY
 from generation.structure_contract import read_document, StructureError
 from rendering.tile_registry import TileRegistry
+from engine.harvesting import profile_errors, construct_output, RULES
+from engine.item_factory import ItemFactory
 
-CONTRACT = "creature-common-1"
+CONTRACT = "creature-harvest-2"
 OBSERVE_INSPECTION = True
 READONLY_CONSTRUCTION = True
 HP_MAX = 1_000_000
@@ -80,7 +82,10 @@ def capability(raw, path, pointer=""):
                   "Player/NPC definitions are outside the creature authoring contract." if player or any(k in raw for k in ("npc", "dialogue", "is_player")) else
                   "Non-Actor configuration: consumed by the vine system, not Actor authoring." if "spawn_trigger" in raw else
                   "Read-only: unsupported component shape, array source or source outside entities/creatures.")
+    harvest = editable and ("ephemeral" not in raw or raw["ephemeral"] is False) and not profile_errors(raw)
     return dict(contract=CONTRACT, inspectable=True, constructible=bool(shape), editable=editable,
+                harvest_editable=harvest, harvest_rules=RULES,
+                harvest_reason="Complete native harvest profile; original non-ephemeral Actor authority." if harvest else "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
                 duplicable=editable and not special, operations=(["edit"] if special else ["edit", "variant"]) if editable else [],
                 fields=FIELDS, bounds=BOUNDS, ai_types=list(AI_TYPES), hp_min=1, hp_max=HP_MAX,
                 shape="Actor with ID-bound behavior" if special else "ordinary Actor" if shape else "unsupported entity shape",
@@ -91,13 +96,30 @@ def capability(raw, path, pointer=""):
                 description_note="Description and creature knowledge use stable definition identity; tile remains presentation only.")
 
 
-def unchanged_data(raw, *, variant=False):
+def unchanged_data(raw, *, variant=False, harvest=False):
     value = copy.deepcopy(raw)
-    for field in FIELDS + (["id", "ai_type"] if variant else []):
+    for field in FIELDS + (["id", "ai_type"] if variant else []) + (["butcher_yield"] if harvest else []):
         parts = field.split("."); parent = value
         for part in parts[:-1]: parent = parent.get(part, {}) if isinstance(parent, dict) else {}
         if isinstance(parent, dict): parent.pop(parts[-1], None)
     return value
+
+
+def harvest_metadata_allowed(original, candidate):
+    """Controls can delete records/profiles, never edit or invent their metadata."""
+    from collections import Counter
+    def metadata(value, known): return {k:v for k,v in value.items() if k not in known} if isinstance(value, dict) else {}
+    before, after = original.get("butcher_yield", {}), candidate.get("butcher_yield", {})
+    if "butcher_yield" not in candidate: return True  # deliberate whole-profile removal
+    if not same_json(metadata(before, ("decay_turns", "tiers")), metadata(after, ("decay_turns", "tiers"))): return False
+    def signatures(profile, outputs):
+        tiers = profile.get("tiers", []) if isinstance(profile, dict) else []
+        for tier in tiers if isinstance(tiers, list) else []:
+            rows = tier.get("yields", []) if isinstance(tier, dict) and outputs else [tier]
+            for row in rows if isinstance(rows, list) else []:
+                value = metadata(row, ("item_id", "quantity_min", "quantity_max") if outputs else ("min_cutting_tier", "yields"))
+                if value: yield json.dumps(value, sort_keys=True, separators=(",", ":"))
+    return all(not (Counter(signatures(after, level)) - Counter(signatures(before, level))) for level in (False, True))
 
 
 def authorize_candidate(original, candidate, source_path, target_path, *, data=None):
@@ -117,8 +139,10 @@ def authorize_candidate(original, candidate, source_path, target_path, *, data=N
             issue("VARIANT_ID", "A variant needs a different safe ID and matching file beside its source.")
         if isinstance(identifier, str) and identifier in ABILITY_REGISTRY: issue("SPECIAL_ID", "An ordinary variant cannot acquire an ID-bound special ability.")
     elif candidate.get("id") != original.get("id"): issue("IDENTITY_CHANGE", "Same-ID edits retain the exact stable identity.")
-    if not same_json(unchanged_data(original, variant=variant and cap["duplicable"]), unchanged_data(candidate, variant=variant and cap["duplicable"])):
-        issue("READ_ONLY_FIELD", "Only supported common fields may change; identity, tile, components and special/unknown settings remain exact. AI may change only for an ordinary new variant.")
+    if not same_json(unchanged_data(original, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"]), unchanged_data(candidate, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"])):
+        issue("READ_ONLY_FIELD", "Only supported common fields and originally entitled harvest fields may change; identity, tile, ephemeral, components and special settings remain exact. AI may change only for an ordinary new variant.")
+    if cap["harvest_editable"] and not harvest_metadata_allowed(original, candidate):
+        issue("HARVEST_METADATA", "Unknown harvest/profile/tier/output metadata is read-only. It may travel with retained records; new records contain only supported fields.")
     return problems
 
 
@@ -198,12 +222,12 @@ def validate_definition(raw, data, path, indexes):
             or type(v.get("size")) not in (int, float) or not 0 < v["size"] <= 1000
             or type(v.get("damage_multiplier", 1)) not in (int, float) or not 0 <= v.get("damage_multiplier", 1) <= 1000 for v in limbs):
         issue("CREATURE_BODY", "limbs", "Unsupported inline body shape; inspect and repair outside common-field controls.")
-    butcher = raw.get("butcher_yield", {})
-    if (not isinstance(butcher, dict) or not isinstance(butcher.get("tiers", []), list)
-            or any(not isinstance(tier, dict) or not isinstance(tier.get("yields", []), list)
-                   or any(not isinstance(entry, dict) or not isinstance(entry.get("item_id"), str)
-                          for entry in tier.get("yields", [])) for tier in butcher.get("tiers", []))):
-        issue("CREATURE_HARVEST", "butcher_yield", "Unsupported harvest reference shape; inspect and repair outside common-field controls.")
+    def output(identifier):
+        matches = source_matches(identifier, indexes["items"])
+        if len(matches) != 1 or identifier not in data.items or not same_json(matches[0]["definition"], data.items[identifier]):
+            raise ValueError(f"Missing, ambiguous or case-colliding saved item {identifier!r}: " + ", ".join(s["path"] + s["pointer"] for s in matches))
+        return construct_output(data, ItemFactory(data), identifier)
+    for field, message in profile_errors(raw, output): issue("CREATURE_HARVEST", field, message)
     refs = dependencies(raw, data, indexes)
     for ref in refs:
         if not ref["active"]: issue("INACTIVE_REFERENCE", ref["field"], ref["note"], "info", "Retained as authored; no repair is needed for an unused dependency.")
@@ -269,7 +293,14 @@ def authoring_context(raw, data, path, data_root, identity, digest, *, observe=F
                 cap.update(editable=False, duplicable=False, constructible=False, operations=[])
         records.append(dict(id=definition.get("id", ""), pointer=pointer, definition=definition, capability=cap, diagnostics=diagnostics,
                             dependencies=refs, factory=observed, references=direct_references(data, definition.get("id"))))
-    return dict(records=records, selection=SELECTION)
+    options = []
+    for identifier in sorted(data.items):
+        matches = source_matches(identifier, indexes["items"])
+        if len(matches) != 1: continue
+        try: construct_output(data, ItemFactory(data), identifier)
+        except Exception: continue
+        options.append(dict(id=identifier, label=f"{data.items[identifier].get('name', identifier)} · {identifier} · {matches[0]['path']}{matches[0]['pointer']}"))
+    return dict(records=records, selection=SELECTION, harvest_items=options)
 
 
 def authoring_validate(raw, data, path, data_root):
@@ -282,4 +313,4 @@ def authoring_evidence(context):
 
 
 def reference_options(context):
-    return {"ai_types": [dict(id=k, label=cls.__name__) for k, cls in AI_TYPES.items()]}
+    return {"ai_types": [dict(id=k, label=cls.__name__) for k, cls in AI_TYPES.items()], "harvest_items": context.get("harvest_items", [])}

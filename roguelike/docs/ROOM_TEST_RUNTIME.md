@@ -1,5 +1,13 @@
 # Disposable Workbench room runtime
 
+W5N uses the same capture boundary for creature harvest profiles and saved cutters.
+Required furnishing records are asserted in accepted room bytes and production
+state before the packaged defeat/butchery/preparation journey. Normal death creates
+the demonstrated corpse; diagnostics only observe identities and outcomes. Reset
+retains the original table/decay; latest saved captures revisions. A separate
+ordinary save/fresh-catalogue process establishes old-corpse countdown and copied
+tool retention with current-table butchery. See [creature authoring](CREATURE_AUTHORING.md).
+
 W5J supplies use the same capture/reset/latest boundary. Save items and room first;
 parked drafts do not overlay capture. Opt-in app-local diagnostics also record
 transient instance identities, selected rows, needs/HP and actual turn-advance

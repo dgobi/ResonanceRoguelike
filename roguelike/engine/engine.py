@@ -3835,96 +3835,9 @@ class Engine:
             return False
         return handler(x, y)
 
-    def _interactable_butcher(self, x: int, y: int) -> bool:
-        """Butcher a corpse at (x, y). Reads from floor_objects layer."""
-        import random as _brng
-        from generation.floor_object_utils import get_floor_objects as _gfo_b
-        from generation.floor_object_utils import remove_floor_object as _rfo_b
-        from generation.floor_object_utils import place_floor_object as _pfo_b
-        from engine.message_log import MSG_DEFAULT
-
-        # Find corpse item in floor objects
-        _corpse_item = None
-        for _fi in _gfo_b(self.local_map, x, y):
-            if getattr(_fi, "source_creature", None):
-                _corpse_item = _fi
-                break
-        if _corpse_item is None:
-            return False
-
-        creature_id = _corpse_item.source_creature
-        cdef = self.data.entities.get(creature_id, {})
-        by   = cdef.get("butcher_yield")
-        if not by:
-            self.log.add("This cannot be butchered.", MSG_DEFAULT)
-            return False
-
-        # Highest cutting tier across weapon + offhand
-        cutting_tier = 0
-        equip = getattr(self.player, "equipment", None)
-        if equip:
-            for _slot in ("weapon", "offhand"):
-                _it = equip.slots.get(_slot)
-                if _it:
-                    for _kw in getattr(_it, "keywords", []):
-                        if _kw.get("tag") == "cutting":
-                            cutting_tier = max(cutting_tier, _kw.get("tier", 0))
-
-        tiers = by.get("tiers", [])
-        # bone_reader perk: always qualify at max tier regardless of cutting tool
-        _perks = getattr(self.player, "perks", None)
-        if _perks and _perks.has("bone_reader"):
-            qualified = list(tiers)  # all tiers qualify
-        else:
-            qualified = [t for t in tiers if t.get("min_cutting_tier", 1) <= cutting_tier]
-        if not qualified:
-            self.log.add("Thy equipped tool is insufficient for this task.", MSG_DEFAULT)
-            return True
-
-        best = max(qualified, key=lambda t: t.get("min_cutting_tier", 1))
-        min_req = best.get("min_cutting_tier", 1)
-        turn_cost = max(1, 5 - (cutting_tier - min_req))
-        if turn_cost > 1:
-            self._move_debt += turn_cost - 1
-
-        _creature_name = cdef.get("name", creature_id)
-        _tool_names: list[str] = []
-        if equip:
-            for _slot in ("weapon", "offhand"):
-                _it = equip.slots.get(_slot)
-                if _it:
-                    for _kw in getattr(_it, "keywords", []):
-                        if _kw.get("tag") == "cutting":
-                            _tool_names.append(getattr(_it, "name", _slot))
-                            break
-        _tool_str = " and ".join(_tool_names) if _tool_names else "bare hands"
-        self.log.add(f"You butcher the {_creature_name} using {_tool_str}.", MSG_DEFAULT)
-
-        # Roll yields and drop as floor objects at corpse tile
-        _got_any = False
-        for _ydef in best.get("yields", []):
-            _iid  = _ydef.get("item_id", "")
-            _qty  = _brng.randint(
-                _ydef.get("quantity_min", 0),
-                _ydef.get("quantity_max", 1),
-            )
-            if _qty <= 0:
-                continue
-            for _ in range(_qty):
-                _new = self.item_factory.create(_iid, x=x, y=y)
-                if _new:
-                    _pfo_b(self.local_map, x, y, _new)
-            _idef = self.data.items.get(_iid, {})
-            self.log.add(f"  {_idef.get('name', _iid).capitalize()} x{_qty}.", MSG_DEFAULT)
-            _got_any = True
-
-        # Remove corpse floor object
-        _rfo_b(self.local_map, x, y, _corpse_item)
-
-        if not _got_any:
-            self.log.add("  The remains yield nothing useful.", MSG_DEFAULT)
-
-        return True
+    def _interactable_butcher(self, x: int, y: int, corpse=None, *, scene=None, address=None) -> bool:
+        from engine.harvesting import butcher
+        return butcher(self, x, y, corpse, scene=scene, address=address)
 
     def _interactable_light_campfire(self, x: int, y: int) -> bool:
         from generation.decor_utils import place_decor
@@ -5767,8 +5680,8 @@ class Engine:
         _ephemeral = creature_def.get("ephemeral", False)
         if not _ephemeral:
             from generation.floor_object_utils import place_floor_object as _pfo_corpse
-            _by = creature_def.get("butcher_yield", {})
-            _decay = _by.get("decay_turns", 200)
+            from engine.harvesting import decay_turns
+            _decay = decay_turns(creature_def)
             _corpse_item = self.item_factory.create("corpse", entity.x, entity.y)
             if _corpse_item:
                 _corpse_item.name = f"remains of {entity.name}"
@@ -5884,13 +5797,15 @@ class Engine:
             if len(items_here) == 1:
                 _top = items_here[0]
                 if getattr(_top, "source_creature", None):
-                    return self._interactable_butcher(px, py)
+                    return self._interactable_butcher(px, py, _top)
                 else:
                     return self._take_item(_top, inv)
             else:
                 # Multiple items — open interaction cursor with selection prompt
                 self.interaction_cursor.enter([(px, py)], px, py)
                 self.interaction_cursor._selection_prompt = {
+                    "scene": self.local_map,
+                    "address": (self.world_x, self.world_y, self.current_submap_id),
                     "items": list(items_here),
                     "selected": 0,
                     "lx": px, "ly": py,

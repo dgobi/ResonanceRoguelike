@@ -1,5 +1,12 @@
 # W5M — usable expedition equipment
 
+W5N review correction (29 October 2026): the accepted W5M room bytes contain
+equipment, wood and a creature, with no décor record; its ordinary-save observations
+also contain no décor. The furnishing placement sentence below overstates that
+evidence. The harness attempted a mat placement without asserting publication.
+This is a delivery/evidence correction, not a reproduced editor defect. Historical
+fixtures remain unchanged and the equipment results stand.
+
 The existing registered item family now authors an ordinary equipment kit alongside
 all W5J supplies. Weapons, armour, shields and satchels share the same documents,
 Source/history/recovery, validation, reviewed single-file publication, room

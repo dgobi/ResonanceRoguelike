@@ -110,6 +110,10 @@ class DataLoader:
         Files without an 'id' field are skipped with a warning.
         """
         result: dict = {}
+        if subdir == "items":
+            # Loaded-catalogue provenance, retained for safe harvest references.
+            # Never reread working definitions during a running game.
+            self.item_definition_sources = {}
         exclude = exclude or set()
         base = self.root / subdir
 
@@ -129,6 +133,8 @@ class DataLoader:
                         print(f"Warning: {path} has no 'id' field, skipping.")
                         continue
                     result[entry["id"]] = entry
+                    if subdir == "items":
+                        self.item_definition_sources.setdefault(entry["id"], []).append(path.relative_to(self.root).as_posix())
             except Exception as e:
                 print(f"Warning: failed to load {path}: {e}")
 

@@ -91,7 +91,7 @@ export type CreatureFactoryResult = {
 };
 export type CreatureContext = {selection: string; records: {
   id: string; pointer: string; definition: Record<string, unknown>; diagnostics: Diagnostic[];
-  capability: {contract: string; editable: boolean; constructible:boolean; duplicable:boolean; operations:("edit"|"variant")[]; special_binding:string|null; duplication_reason:string; body_note:string; bounds:Record<string,[number,number]>; ai_types:string[]; fields: string[]; shape: string; reason: string; hp_min: number; hp_max: number; hp_note: string; description_note: string};
+  capability: {contract: string; editable: boolean; constructible:boolean; duplicable:boolean; harvest_editable:boolean; harvest_reason:string; harvest_rules:{defaults:Record<string,number>;max_rows:number;max_outputs:number;max_tier:number;max_decay:number;meaning:string}; operations:("edit"|"variant")[]; special_binding:string|null; duplication_reason:string; body_note:string; bounds:Record<string,[number,number]>; ai_types:string[]; fields: string[]; shape: string; reason: string; hp_min: number; hp_max: number; hp_note: string; description_note: string};
   dependencies: {kind: string; field: string; id: unknown; resolved: boolean; required: boolean; active:boolean; paths: string[]; note: string}[];
   references: {id: string; path: string; field: string; route: string; x?: number; y?: number; evidence: string}[];
   factory: CreatureFactoryResult | null;
