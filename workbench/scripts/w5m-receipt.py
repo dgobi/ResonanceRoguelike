@@ -66,7 +66,7 @@ for command,name,outcome in specs:
     if name=='dependency-negative-final.log':assert 'Ran 1 test' in text and '\nOK' in text and 'skipped' not in text
     if name=='package-final.log':assert 'Finished 1 bundle' in text
     commands.append(dict(command=command,exit_code=0,outcome=outcome,local_log=ref(p)))
-write(EVID/'gates.json',dict(commands=commands,earlier_attempts='Early child import environment, changing-source worker response, runner selector and NSIS lock attempts are excluded from passing gates. Final commands use stable source, inherited subprocess imports and completed package inputs.'))
+write(EVID/'gates.json',dict(commands=commands,earlier_attempts='Early child import environment, a worker inspection returning no result while implementation files were changing, runner selector and NSIS lock attempts are excluded from passing gates. Final commands use stable source, inherited subprocess imports and completed package inputs.'))
 paths=set(git('diff','--name-only','checkpoint/workbench-w5m-start-20261029','HEAD').splitlines())
 paths.update('roguelike/'+p for p in ('entities/item.py','engine/item_factory.py','engine/item_system.py','components/inventory.py','components/equipment.py','engine/inventory_screen.py','engine/item_transfers.py','engine/combat.py','engine/engine.py','components/ai.py','engine/movesets.py','engine/save_components.py','engine/save_manager.py','engine/player_setup.py','room_test.py','engine/data_loader.py','engine/scene_generation.py','generation/authored_decor.py'))
 paths={p for p in paths if p and '/docs/evidence/' not in p and not p.endswith(('w5m-verification.json','W5M_DELIVERY.md'))}

@@ -124,7 +124,7 @@ equipment expedition, shared workspace and room-session lifecycle, and ordinary
 assert numeric branches and exercise the actual outgoing/incoming callers,
 inherited moveset dispatch/shared cooldowns, AV, reduction override/fallback/zero,
 exact replacement/drop/transfer/stale selection, light displacement and all four
-legacy bindings. Early environment, changing-source, runner-selector and NSIS-lock
+legacy bindings. Early environment, worker-inspection, runner-selector and NSIS-lock
 attempts are excluded from passing final gates.
 
 The [preservation inventory](evidence/w5m/preservation.json) checks hashes and
