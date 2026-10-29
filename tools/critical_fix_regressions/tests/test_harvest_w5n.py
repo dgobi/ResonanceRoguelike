@@ -157,6 +157,12 @@ class HarvestConsumers(unittest.TestCase):
         self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
         restored=floor.get_floor_objects(e.local_map,12,12);self.assertEqual([serialize_item(i) for i in restored],before)
         self.assertEqual(restored[0].source_creature,"sewer_thing");self.assertEqual(restored[0].decay_timer,8)
+        self.assertIsNone(restored[1].decay_timer)
+        # Deliberate current-table removal makes these saved remains unusable,
+        # without resetting their copied name/source or remaining countdown.
+        self.data.entities["sewer_thing"].pop("butcher_yield")
+        self.assertFalse(e._interactable_butcher(12,12,restored[0]))
+        self.assertEqual([serialize_item(i) for i in restored],before)
         for value in (0,1):
             self.profile(decay_turns=value);corpse=self.corpse();e._advance_turn();self.assertNotIn(corpse,floor.get_floor_objects(e.local_map,12,12))
 
