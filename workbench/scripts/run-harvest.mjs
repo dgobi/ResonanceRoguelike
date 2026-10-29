@@ -22,7 +22,7 @@ const eb=n=>page.locator('[data-testid="authoring"]:visible').getByRole('button'
 const ipc=(command,args={})=>page.evaluate(async({command,args})=>{try{return await window.__TAURI_INTERNALS__.invoke(command,args);}catch(error){return {error};}},{command,args});
 const idle=()=>page.waitForFunction(()=>!document.querySelector('.status-dot.working'),null,{timeout:90000});
 const editIdle=()=>page.waitForFunction(()=>![...document.querySelectorAll('[data-testid="authoring"]')].some(e=>e.dataset.editPending==='true'));
-const fill=async(n,v)=>{await page.getByLabel(n,{exact:true}).filter({visible:true}).fill(v);await editIdle();};
+const fill=async(n,v)=>{for(let attempt=0;attempt<5;attempt++){await idle();const field=page.getByLabel(n,{exact:true}).filter({visible:true});await field.fill(v);await editIdle();const actual=await field.inputValue();if(actual===v||(await field.getAttribute('type')==='number'&&Number(actual)===Number(v)))return;}throw Error(`Edit was not acknowledged: ${n}`);};
 async function phase(label){console.log(label);receipt.checks.push(label);await writeFile(resolve(output,'progress.json'),JSON.stringify(receipt,null,2));}
 async function open(path){
  for(let attempt=0;attempt<5;attempt++){
@@ -69,7 +69,8 @@ async function launch(){
 }
 const editor=()=>page.locator('[data-testid="authoring"]:visible');
 const props=async()=>{await editor().locator('.author-tabs').getByRole('button',{name:'Properties',exact:true}).click();};
-const choose=async(n,v)=>{await page.getByLabel(n,{exact:true}).filter({visible:true}).selectOption(v);await editIdle();};
+const choose=async(n,v)=>{for(let attempt=0;attempt<5;attempt++){await idle();const field=page.getByLabel(n,{exact:true}).filter({visible:true});await field.selectOption(v);await editIdle();if(await field.inputValue()===v)return;}throw Error(`Selection was not acknowledged: ${n}`);};
+async function newVariant(id){for(let attempt=0;attempt<5;attempt++){await idle();if(!await page.getByLabel('New variant ID',{exact:true}).filter({visible:true}).count()){await eb('Save as new variant').click();await editIdle();}if(await page.getByLabel('New variant ID',{exact:true}).filter({visible:true}).count()){await fill('New variant ID',id);return;}}throw Error('Variant intent was not acknowledged');}
 async function checkedApply(variant=false){
  for(let attempt=0;attempt<5;attempt++){
   const v=await validate();assert(v.valid&&v.review_token,JSON.stringify(v));
@@ -136,22 +137,22 @@ try{
  await open(creaturePath('hollow_revenant'));await eb('Begin edit').click();await props();await fill('Creature description','W5N parked independent creature; never captured.');await editor().getByTestId('recovery-status').getByText(/Recovery checkpoint saved/).waitFor();
  const second=(await ipc('list_recovery')).records.find(r=>r.source===creaturePath('hollow_revenant')),secondDraft=(await ipc('inspect_recovery',{key:second.key})).record;
  await phase('ordinary creature variant gains a two-tier profile through supported nested controls');
- await open(creaturePath('sewer_thing'));await eb('Begin edit').click();await eb('Save as new variant').click();await fill('New variant ID','w5n_carrier');await props();
+ await open(creaturePath('sewer_thing'));await eb('Begin edit').click();await newVariant('w5n_carrier');await props();
  for(const [label,value] of Object.entries({'Creature name':'W5N marrow carrier','Effective HP':4,'Natural armour':0,'Damage dice':'1d1','Damage bonus':0,'Wander radius':0,'Speed':.25}))await fill(label,String(value));
  await b('Harvest').click();await b('Add harvest profile').click();await editIdle();await choose('Corpse decay','timed');await fill('Decay turns','500');
  for(let i=1;i<=2;i++){await b('Add harvest tier').click();await editIdle();await fill(`Cutting threshold ${i}`,String(i));await b(`Add output to tier ${i}`).click();await editIdle();await choose(`Harvest item ${i}.1`,'raw_meat_common');await fill(`Minimum quantity ${i}.1`,String(i));await fill(`Maximum quantity ${i}.1`,String(i));}
  await b('Add output to tier 2').click();await editIdle();await choose('Harvest item 2.2','animal_bone');await b('up harvest output 2.2').click();await editIdle();await b('down harvest output 2.1').click();await editIdle();await b('remove harvest output 2.2').click();await editIdle();await b('Undo creature').click();await editIdle();await b('Redo creature').click();await editIdle();
  await b('up harvest tier 2').click();await editIdle();await b('down harvest tier 1').click();await editIdle();await b('Add harvest tier').click();await editIdle();await b('remove harvest tier 3').click();await editIdle();
  await page.screenshot({path:resolve(output,'creature-harvest-controls.png')});const first=await reviewed(true);receipt.diffs.creature=first.diff;receipt.saved.creature=await saved(creaturePath('w5n_carrier'));
- assert.equal(receipt.saved.creature.definition.butcher_yield.tiers.length,2);assert.equal(receipt.saved.creature.definition.butcher_yield.tiers[1].yields.length,1);
+ assert.equal(receipt.saved.creature.definition.base_hp,4);assert.equal(receipt.saved.creature.definition.speed,.25);assert.equal(receipt.saved.creature.definition.damage_dice,'1d1');assert.equal(receipt.saved.creature.definition.butcher_yield.decay_turns,500);assert.equal(receipt.saved.creature.definition.butcher_yield.tiers.length,2);assert.equal(receipt.saved.creature.definition.butcher_yield.tiers[1].yields.length,1);
  await phase('saved obtainable cutting-tool variant through existing equipment controls');
- await open('roguelike/data/items/weapons/crude_blade.json');await eb('Begin edit').click();await eb('Save as new variant').click();await fill('New variant ID','w5n_cleaver');await props();await fill('Item name','W5N field cleaver');await fill('Base damage dice','2d6');await fill('Base damage bonus','3');await fill('Keyword tier 1','2');
- const toolReview=await reviewed(true);receipt.diffs.tool=toolReview.diff;receipt.saved.tool=await saved(toolPath);
+ await open('roguelike/data/items/weapons/crude_blade.json');await eb('Begin edit').click();await newVariant('w5n_cleaver');await props();await fill('Item name','W5N field cleaver');await fill('Base damage dice','2d6');await fill('Base damage bonus','3');await fill('Keyword tier 1','2');
+ const toolReview=await reviewed(true);receipt.diffs.tool=toolReview.diff;receipt.saved.tool=await saved(toolPath);assert.deepEqual(receipt.saved.tool.definition.keywords,[{tag:'cutting',tier:2}]);
  await phase('invalid nested creature recovery restores exact bytes without review authority; other drafts remain intact');
  await open(creaturePath('w5n_carrier'));await eb('Begin edit').click();const invalid=receipt.saved.creature.raw.slice(0,-2);await (await source()).fill(invalid);await editIdle();await editor().getByTestId('recovery-status').getByText(/Recovery checkpoint saved/).waitFor();const recoveryRow=(await ipc('list_recovery')).records.find(r=>r.source===creaturePath('w5n_carrier'));
  child.kill();await until(async()=>exited(child));await browser.close().catch(()=>{});await launch();await recover(other);await recover(second);await recover(recoveryRow);assert.equal(await (await source()).inputValue(),invalid.replace(/\r\n/g,'\n'));assert.equal((await ipc('inspect_recovery',{key:recoveryRow.key})).record.draft,invalid);assert(!(await validate()).valid);assert(await eb('Review & apply').isDisabled());await eb('Discard / Revert').click();receipt.recovery={invalid_sha256:hash(invalid),parked_text_sha256:hash(otherDraft.draft),parked_creature_sha256:hash(secondDraft.draft),review_revoked:true};
  await phase('saved room places obtainable tool, creature and asserted stationary fire through room controls');
- await open(template);await eb('Begin edit').click();await eb('Save as new variant').click();await fill('New variant ID','w5n_harvest_room');
+ await open(template);await eb('Begin edit').click();await newVariant('w5n_harvest_room');
  const geometry={id:'w5n_harvest_room',width:19,height:11,layers:['###################',...Array(7).fill('#.................#'),'#.<...............#','#.................#','###################'],legend:{'#':'wall','.':'floor','<':'stairs_up'},player_start:{x:3,y:8},special_tiles:[]};await (await source()).fill(JSON.stringify(geometry,null,2));await editIdle();
  await furnish('campfire_unlit',8,5);await place('w5n_cleaver',4,7);await choose('Placement kind','creature');await choose('Placement creature','w5n_carrier');await b('Place creature').click();await cell(13,4);
  const roomReview=await reviewed(true);receipt.room=await saved(room);receipt.production=roomReview.verdict.preview;
