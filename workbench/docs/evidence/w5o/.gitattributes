@@ -1,4 +1,4 @@
 *.json text eol=lf
 fixtures/*.json -text
-seeded-before.json -text
+seeded-before.json -text -diff
 *.diff -text

@@ -31,7 +31,7 @@ assert n['capture_v1']['captured']['files'][n['room']['path']]==n['room']['sha25
 for path,record in n['recovery']['records'].items():
     if path.endswith(('w5o_lights.json','lab_note_primary_a.json')):
         assert hashlib.sha256(record['draft'].encode()).hexdigest()!=n['capture_v1']['captured']['files'][path]
-EVID.mkdir(parents=True,exist_ok=True);(EVID/'.gitattributes').write_bytes(b'*.json text eol=lf\nfixtures/*.json -text\nseeded-before.json -text\n*.diff -text\n')
+EVID.mkdir(parents=True,exist_ok=True);(EVID/'.gitattributes').write_bytes(b'*.json text eol=lf\nfixtures/*.json -text\nseeded-before.json -text -diff\n*.diff -text\n')
 fixtures={}
 for name,row in {**n['saved'],'room':n['room']}.items():
     raw=row['raw'].encode();assert hashlib.sha256(raw).hexdigest()==row['sha256'];p=EVID/'fixtures'/(name+'.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(raw)
