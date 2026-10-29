@@ -173,10 +173,12 @@ try{
  await place('w5l_meat',5,6);await place('w5l_pot',6,6);await place('letter',6,3);
  await page.getByLabel('Override readable text',{exact:true}).filter({visible:true}).setChecked(true);await choose('Marker text ID','lab_note_primary_b');await b('Apply item edit').click();await editIdle();
  await choose('Placement kind','container');await choose('Placement container','crate');await b('Place container').click();await cell(15,7);
+ await b('Add existing pool').click();await choose('Loot pool 1','storage_tools');await b('Apply container edit').click();await editIdle();
  const first=await checkedApply(true);receipt.room=await saved(room);receipt.production=first.preview;
  assert.equal(receipt.room.definition.special_tiles.filter(r=>r.type==='decor').length,4);
  assert(first.preview.population_receipts.filter(r=>r.kind==='decor').every(r=>r.actual_count===1&&r.objects.length===0));
- await b('Draft production preview').click();await page.screenshot({path:resolve(output,'workbench-production.png')});await b('Authored layout').click();await page.screenshot({path:resolve(output,'workbench-furnished-room.png')});
+ assert(first.preview.population_receipts.find(r=>r.kind==='container').objects[0].items.length>0);
+ await b('Saved production preview').click();await page.getByTestId('scene-coordinates').waitFor();await page.getByTestId('map').filter({visible:true}).scrollIntoViewIfNeeded();await page.screenshot({path:resolve(output,'workbench-production.png')});await b('Authored layout').click();await page.getByTestId('layout-map').scrollIntoViewIfNeeded();await page.screenshot({path:resolve(output,'workbench-furnished-room.png')});
  await phase('saved furnishing dependency stales real review; external conflict preserves competing room bytes');
  await eb('Begin edit').click();await choose('Placed record','0');await fill('Decor source X','5');await b('Apply decor edit').click();await editIdle();
  assert((await validate()).valid);const dep=resolve(root,'roguelike/data/decoratives.json'),depBytes=await readFile(dep),defs=JSON.parse(depBytes);defs.find(r=>r.id==='worn_mat').description+=' W5L saved dependency probe.';await writeFile(dep,JSON.stringify(defs));

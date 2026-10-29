@@ -27,6 +27,9 @@ template, nested sources, ambiguous IDs and unsupported original source shapes
 cannot be enrolled. Publish a template as a new ordinary variant first.
 Production catalogue/compiler checks, saved reference identities, item/creature
 factories and referenced reader payload checks are shared with the editor.
+Furnished `authored-room-2` candidates additionally share decor admission and
+staged native final occupancy/access checks; bare containers, system-owned markers
+and inactive historical grids acquire no new placement permission.
 Unrelated loadable unsupported content and historical warnings remain available.
 
 Field types, identity/version, duplicate candidate IDs (including case aliases),
