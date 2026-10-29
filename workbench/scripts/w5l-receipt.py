@@ -26,6 +26,7 @@ for name,row in {**n['saved'],'room':n['room'],'room_revised':n['room_revised']}
     p=EVID/'fixtures'/(name+'.json');p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(raw)
     fixtures[name]=dict(**ref(p),published_path=row['path'],definition=row['definition'],identity='Exact UTF-8 bytes authored, saved and byte-checked reopened through packaged controls; -text prevents normalization.')
 shutil.copyfile(ART/'decor-inventory.json',EVID/'decor-inventory.json')
+write(EVID/'environment.json',read(ART/'environment.json'))
 shots={}
 for name in ('game-authored-light.png','game-choose-protected-unlit.png','game-choose-protected-lit.png','game-authored-cooking.png','game-floor-output.png','game-used-roast.png','game-cold-state.png','game-revised-furnishing.png'):
     target=EVID/name;shutil.copyfile(native_path.parent/name,target);shots[name]=ref(target)
@@ -81,7 +82,7 @@ native_runner_bytes=subprocess.check_output(['git','show',native_revision+':work
 release=ROOT/'workbench/src-tauri/target/release'
 receipt=dict(milestone='W5L',passed=True,observed_utc=datetime.now(timezone.utc).isoformat(),contract='authored-room-2',route_contract='g2-3',
     revisions=dict(start='417ce1adca5c7b52f24f4201d2ab69cff3d3fbce',initial_remote='417ce1adca5c7b52f24f4201d2ab69cff3d3fbce',implementation=git('rev-parse','cdf35c3'),package_inputs=git('rev-parse','checkpoint/workbench-w5l-final-package-20261028'),evidence_inputs=git('rev-parse','HEAD'),final_delivery_ref='checkpoint/workbench-w5l-verified-20261028',note='Final commit cannot embed its own SHA. Resolve the named ref; post-push exact local/remote-main readback is in the handoff and ignored remote-readback.json. Package inputs precede evidence-only refinements.'),
-    accepted_fixtures=fixtures,inventory=ref(EVID/'decor-inventory.json'),observations=ref(EVID/'observations.json'),gates=ref(EVID/'gates.json'),preservation=ref(EVID/'preservation.json'),
+    accepted_fixtures=fixtures,environment=ref(EVID/'environment.json'),inventory=ref(EVID/'decor-inventory.json'),observations=ref(EVID/'observations.json'),gates=ref(EVID/'gates.json'),preservation=ref(EVID/'preservation.json'),
     package={p:ref(release/p) for p in ('resonance-workbench.exe','bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe')},
     runtime={p:ref(ROOT/'workbench'/p) for p in ('worker/bridge.py','worker/runtime/python.exe','worker/runtime/python311._pth','worker/requirements.lock')},
     source_hashes=hashes,captured_game_inputs=captured_inputs,
