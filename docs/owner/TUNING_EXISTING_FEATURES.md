@@ -196,3 +196,22 @@ in [Structure Authoring](../../roguelike/docs/STRUCTURE_AUTHORING.md).
 Country and town-street widths are independent; the assigned band's actual width
 governs each building's fit. Existing `town_config.json`, `rotatable`, `facing` and
 legacy weights remain preserved metadata rather than new planner controls.
+
+
+## Local rivals (G21)
+
+Workbench exposes faction and an explicit hostility list only for ordinary
+WanderingAI sources/candidates without ID-bound abilities. Exact labels have
+1–32 lowercase letters/digits/underscores, starting with a letter; lists have at
+most sixteen distinct tokens. `[]` selects nobody. Missing/null lists default to
+`["player"]`; unmatched labels are legal and directional. Saved instances keep
+their saved values. Fresh Bandits and Stalkers recognize each other; generic
+predators and special abilities are unchanged.
+
+Selection requires real sight. An observed target persists unless another observed
+hostile has legal striking contact while it does not. Observed candidates beat a
+hidden trail; last-observed phase + `alert_memory` is the inclusive rival deadline.
+Sounds identify nobody. Rival intent never crosses scenes; actual player pursuit
+retains its established timing and transfer routes. Creature fatalities create
+ordinary harvestable remains without player kill credit. See the creature guide
+and `docs/owner/GAMEPLAY_G21.md` for exact lifecycle and evidence limits.

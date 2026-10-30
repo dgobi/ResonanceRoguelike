@@ -289,3 +289,15 @@ checks remain mandatory. A restored preview or review grants no authority.
 
 See [structure authoring](../../roguelike/docs/STRUCTURE_AUTHORING.md) for the
 route's actual geometry, carrier, arrival and saved-scene semantics.
+
+
+G21 extends the same creature document family as `creature-rivals-3`.
+`relationship_editable` is granted only by an original editable ordinary
+WanderingAI source without an ID-bound ability, and the effective candidate must
+also support it. Typed faction/list edits, Source and recovered drafts share
+original-source entitlement and reviewed single-file publication. Labels are exact
+1–32 character lowercase tokens; lists contain at most sixteen distinct entries.
+`[]` is explicit, omission/null defaults to player, and unresolved labels are legal.
+Unsupported AI/special bindings remain read-only for relationship changes. Current
+factory inspection remains construction evidence; G21's native saved runtime probe
+separately exercises a charged AI phase after publication and reopen.

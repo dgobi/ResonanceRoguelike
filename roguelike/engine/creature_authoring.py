@@ -18,7 +18,12 @@ from rendering.tile_registry import TileRegistry
 from engine.harvesting import profile_errors, construct_output, RULES
 from engine.item_factory import ItemFactory
 
-CONTRACT = "creature-harvest-2"
+CONTRACT = "creature-rivals-3"
+RELATIONSHIP_FIELDS = ['perception.faction', 'perception.hostile_to']
+
+
+def relationship_supported(raw):
+    return raw.get('ai_type', 'wandering') == 'wandering' and raw.get('id') not in ABILITY_REGISTRY
 OBSERVE_INSPECTION = True
 READONLY_CONSTRUCTION = True
 HP_MAX = 1_000_000
@@ -33,7 +38,7 @@ LIMITATIONS = SCOPE
 SELECTION = ("spawn_zones is retained inactive metadata. Zone creature lists and saved authored-submap placements "
              "are separate inbound declarations, not observed encounters or proof of natural world selection. Saving a variant enrolls it nowhere.")
 PUBLICATION_NOTE = ("Changes load at the next game launch/catalogue initialization. Saved actors retain stored name, HP, "
-                    "armour, sight/hearing/darkvision and wander radius. Description, attack, speed and pursuit use the current "
+                    "armour, sight/hearing/darkvision, faction, hostility (including []) and wander radius. Description, attack, speed and pursuit use the current "
                     "definition. HP edits do not rescale injured saves. New actors receive current constructor values; variants require explicit placement.")
 VIEWS = ["creature-properties", "creature-references", "creature-factory"]
 # This registered specialist uses exact-source paths and shared document commands.
@@ -84,10 +89,11 @@ def capability(raw, path, pointer=""):
                   "Read-only: unsupported component shape, array source or source outside entities/creatures.")
     harvest = editable and ("ephemeral" not in raw or raw["ephemeral"] is False) and not profile_errors(raw)
     return dict(contract=CONTRACT, inspectable=True, constructible=bool(shape), editable=editable,
+                relationship_editable=editable and relationship_supported(raw),
                 harvest_editable=harvest, harvest_rules=RULES,
                 harvest_reason="Complete native harvest profile; original non-ephemeral Actor authority." if harvest else "Harvest is protected: the original must be a supported non-ephemeral Actor with absent or supported native profile.",
                 duplicable=editable and not special, operations=(["edit"] if special else ["edit", "variant"]) if editable else [],
-                fields=FIELDS, bounds=BOUNDS, ai_types=list(AI_TYPES), hp_min=1, hp_max=HP_MAX,
+                fields=FIELDS + (RELATIONSHIP_FIELDS if editable and relationship_supported(raw) else []), bounds=BOUNDS, ai_types=list(AI_TYPES), hp_min=1, hp_max=HP_MAX,
                 shape="Actor with ID-bound behavior" if special else "ordinary Actor" if shape else "unsupported entity shape",
                 reason=reason, special_binding=identifier if special else None,
                 duplication_reason="Duplication unavailable: ABILITY_REGISTRY dispatches by stable ID; a new ID would lose this behavior." if special else "",
@@ -96,9 +102,9 @@ def capability(raw, path, pointer=""):
                 description_note="Description and creature knowledge use stable definition identity; tile remains presentation only.")
 
 
-def unchanged_data(raw, *, variant=False, harvest=False):
+def unchanged_data(raw, *, variant=False, harvest=False, relationships=False):
     value = copy.deepcopy(raw)
-    for field in FIELDS + (["id", "ai_type"] if variant else []) + (["butcher_yield"] if harvest else []):
+    for field in FIELDS + (["id", "ai_type"] if variant else []) + (["butcher_yield"] if harvest else []) + (RELATIONSHIP_FIELDS if relationships else []):
         parts = field.split("."); parent = value
         for part in parts[:-1]: parent = parent.get(part, {}) if isinstance(parent, dict) else {}
         if isinstance(parent, dict): parent.pop(parts[-1], None)
@@ -139,7 +145,8 @@ def authorize_candidate(original, candidate, source_path, target_path, *, data=N
             issue("VARIANT_ID", "A variant needs a different safe ID and matching file beside its source.")
         if isinstance(identifier, str) and identifier in ABILITY_REGISTRY: issue("SPECIAL_ID", "An ordinary variant cannot acquire an ID-bound special ability.")
     elif candidate.get("id") != original.get("id"): issue("IDENTITY_CHANGE", "Same-ID edits retain the exact stable identity.")
-    if not same_json(unchanged_data(original, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"]), unchanged_data(candidate, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"])):
+    relationships = cap['relationship_editable'] and relationship_supported(candidate)
+    if not same_json(unchanged_data(original, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships), unchanged_data(candidate, variant=variant and cap["duplicable"], harvest=cap["harvest_editable"], relationships=relationships)):
         issue("READ_ONLY_FIELD", "Only supported common fields and originally entitled harvest fields may change; identity, tile, ephemeral, components and special settings remain exact. AI may change only for an ordinary new variant.")
     if cap["harvest_editable"] and not harvest_metadata_allowed(original, candidate):
         issue("HARVEST_METADATA", "Unknown harvest/profile/tier/output metadata is read-only. It may travel with retained records; new records contain only supported fields.")
@@ -207,8 +214,14 @@ def validate_definition(raw, data, path, indexes):
     for key, default in (("power", 3), ("defense", 0)): integer("fighter." + key, f.get(key, default), 0, HP_MAX)
     for key, default in (("sight_radius", 8), ("hearing_radius", 5)): integer("perception." + key, p.get(key, default), 0, 1000)
     if type(p.get("sees_in_dark", False)) is not bool: issue("CREATURE_FIELD", "perception.sees_in_dark", "Expected a boolean.")
-    if not isinstance(p.get("faction", "hostile"), str) or not isinstance(p.get("hostile_to", ["player"]), list) or any(not isinstance(v, str) for v in p.get("hostile_to", [])):
-        issue("CREATURE_FIELD", "perception", "Faction is a string; hostile_to is a list of strings.")
+    from engine.local_rivals import TOKEN
+    faction, hostile = p.get('faction', 'hostile'), p.get('hostile_to')
+    if not isinstance(faction, str) or not TOKEN.fullmatch(faction):
+        issue('CREATURE_RELATIONSHIP', 'perception.faction', 'Use 1–32 lowercase letters/digits/underscores, beginning with a letter; labels are exact.')
+    if hostile is not None and (not isinstance(hostile, list) or len(hostile) > 16
+            or any(not isinstance(v, str) or not TOKEN.fullmatch(v) for v in hostile)
+            or len(set(hostile)) != len(hostile)):
+        issue('CREATURE_RELATIONSHIP', 'perception.hostile_to', 'Use at most 16 distinct exact faction tokens, or [] for no hostiles; no coercion or deduplication. Omission/null defaults to ["player"].')
     ai = raw.get("ai_type", "wandering")
     if not isinstance(ai, str) or ai not in AI_TYPES: issue("CREATURE_AI", "ai_type", "Choose an existing registered AI class; fallback is not validated behavior.")
     speed = raw.get("speed", 1.0)

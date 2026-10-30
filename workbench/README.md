@@ -302,7 +302,11 @@ do not expose its keyboard/frame files. No desktop control is used.
    abilities support same-ID edits with a specific explanation for no duplication.
 2. **Supported fields** groups name/description, mirrored effective HP, armour,
    attack dice/bonus/verb, sight/hearing/darkvision, wander radius, pursuit timeout and
-   speed. **Begin edit** enables these controls. Only ordinary new variants may
+   speed. Ordinary WanderingAI sources without ID-bound abilities also expose a
+   bounded faction label and explicit add/remove hostility list, including `[]`.
+   Both original source and effective candidate must support this relationship
+   contract; changing a variant to another AI retires relationship editing.
+   **Begin edit** enables these controls. Only ordinary new variants may
    choose another registered AI class. Raw edits receive the same bounded checks.
    ID, tile, same-ID AI, bodies and special/unknown settings remain protected.
 3. **References** distinguishes inline bodies and unused fallbacks, inactive
@@ -324,7 +328,8 @@ do not expose its keyboard/frame files. No desktop control is used.
    It can be selected explicitly in the authored-submap placement route above.
 
 Changes load at the next game launch/catalogue initialization. Saved actors retain
-stored name, current/max HP, natural armour, sight/hearing/darkvision and wander radius;
+stored name, current/max HP, natural armour, sight/hearing/darkvision, faction,
+hostility (including []) and wander radius;
 current definition-driven description, attack, speed and pursuit values apply
 on reload. New actors receive new constructor values. HP edits do not rescale
 injured saves. Identity, special bindings and the save format remain unchanged.
@@ -793,7 +798,7 @@ CPython runtime without the game dependency wheels.
 The protocol is **8**, worker/app **0.9.0**, game structure contract **g2-3**,
 item contract **expedition-items-2**, recipe contract **item-preparation-1**,
 found-text contract **ordinary-found-text-1**, and
-creature contract **creature-common-1**, with Workbench layout capability
+creature contract **creature-rivals-3**, with Workbench layout capability
 **authored-room-2** on the existing `authored_submap` route (game structure contract g2-3).
 W0 identify/describe/inspect/preview requests remain read-only. Draft validation
 is available only through the host's document boundary. Discovery grants an

@@ -1,6 +1,6 @@
 # Creature and harvest authoring Â· W5N
 
-Workbench's `creature-harvest-2` adapter supports the twelve current Actor
+Workbench's `creature-rivals-3` adapter supports the twelve current Actor
 definitions under `data/entities/creatures/`. Open a source, inspect its body,
 binding and references, then **Begin edit**. The exact Source, typed controls,
 Undo/Redo, validation, Diff, recovery and reviewed publication share one document.
@@ -52,11 +52,54 @@ Wandering/circling mobile creatures investigate heard local disturbances after
 genuine sight/trail priority. Interest lasts twelve charged world increments;
 walls block, closed doors attenuate, and larger positive hearing never reduces
 audibility. Ambush/fleeing archetypes retain their special rules; sound never
-wakes a Stone Lurker. Saved actors retain their stored hearing. Current AI does not
-call `Perception.is_hostile_to`; membership labels do not promise targeting, and
-an empty hostility list defaults in the constructor. Bodies/limbs,
+wakes a Stone Lurker. Saved actors retain their stored hearing. Ordinary
+`WanderingAI` actors without ID-bound abilities also use directional faction
+membership for local observed targets. Other archetypes and special-bound actors
+retain their established player behavior. Bodies/limbs,
 corpse data, essence, effects, ranged blocks, spawn declarations, transition
 flags, callouts and unknown metadata remain exact and read-only.
+
+## Local relationships
+
+The six ordinary WanderingAI sources above expose `perception.faction` and
+`perception.hostile_to`. Both the original source and effective candidate must
+support this contract. An ordinary variant changed to another AI has read-only
+relationship fields and cannot publish relationship edits against its source.
+Special-bound creatures remain read-only for these fields.
+
+Faction labels use 1–32 exact lowercase letters, digits or underscores, beginning
+with a letter. Hostility is an explicit list of at most sixteen distinct tokens.
+Add/remove entries or **Clear hostiles** to store `[]`: this means no hostile
+candidates. Omission/null defaults to `["player"]`. Validation never case-folds,
+deduplicates, coerces strings or replaces emptiness. An unmatched label is legal;
+it simply has no matching local candidate. There is no global faction registry.
+
+Fresh Highland Bandits (`outlaw`) list `player, stalker`; fresh Heath Stalkers
+(`stalker`) list `player, outlaw`. Saved actors retain their actual saved faction
+and list, including historical `predator`/player-only values and `[]`. Editing
+a definition does not migrate campaigns or enroll a variant in population tables.
+
+Uncommitted actors choose the nearest actually observed eligible hostile, using
+squared distance then durable individual identity for ties (the real player sorts
+first on an equal initial choice). They retain an observed target unless it lacks
+legal striking contact and another observed hostile has contact. The nearest
+contact then wins. Observed hostiles precede a remembered trail. Rival trails last
+through last-observed world phase + `alert_memory`, inclusively; the following
+phase expires them, including time disrupted or away. Reaching an empty trail
+location also ends it. No hidden coordinates or sound maker identify a rival.
+
+Sight uses actual range, light/darkvision, occupied-terrain concealment and terrain
+occlusion. Sounds remain anonymous fixed sources. Genuine targeting clears sound;
+rival selection retires player transfer intent. Rivalry stays in the active scene;
+actual player pursuit can still cross edges/stairs and meet a rival afterward.
+The scheduler, speeds, legal contact and finite barrier-aware musk remain ordinary.
+
+Creature fatal results create normal physical remains once and grant no player
+kill XP/effects, even after player wounds, luring or disruption. Direct player
+fatal attacks/movesets retain credit. Optional individual IDs and local trail
+state persist without rewriting untouched historical actors. Dead/missing/foreign
+or expired references clear; malformed state and duplicate IDs reject before
+installing a checkpoint. See [G21 evidence](../../docs/owner/GAMEPLAY_G21.md).
 
 ## Body, references and construction
 

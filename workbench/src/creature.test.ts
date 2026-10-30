@@ -37,7 +37,15 @@ describe("ordinary creature exact draft", () => {
     expect(description).toContain('"metadata": {"exact":[1e2, "λ\\n", null]}');
     expect(description.startsWith('\uFEFF')).toBe(true);
     expect(()=>creatureValue(description,"tile","barrow_wight")).toThrow("Read-only");
-    expect(()=>creatureValue(description,"perception.faction","player")).toThrow("Read-only");
+    expect(JSON.parse(creatureValue(description,"perception.faction","outlaw").slice(1)).perception.faction).toBe("outlaw");
+  });
+  it("preserves explicit empty relationships and exact sibling metadata",()=>{
+    const edited=creatureValue(source,"perception.hostile_to",[]);
+    expect(JSON.parse(edited).perception.hostile_to).toEqual([]);
+    const next=creatureValue(edited,"perception.hostile_to",["stalker","unmatched"]);
+    expect(JSON.parse(next).perception.hostile_to).toEqual(["stalker","unmatched"]);
+    const a=JSON.parse(next),b=JSON.parse(source);a.perception.hostile_to=b.perception.hostile_to;
+    expect(a).toEqual(b);
   });
   it("keeps independent source histories for two creatures",()=>{
     const wight=readFileSync(new URL("../../roguelike/data/entities/creatures/barrow_wight.json",import.meta.url),"utf8");
