@@ -1,0 +1,40 @@
+{
+  "declared_utc": "2026-10-30T20:23:07.572091+00:00",
+  "seed": 20261030,
+  "candidates": [
+    {
+      "bandit": [
+        63,
+        121,
+        35,
+        21
+      ],
+      "stalker": [
+        64,
+        121,
+        7,
+        33
+      ],
+      "entry": [
+        42,
+        21
+      ]
+    },
+    {
+      "bandit": [
+        59,
+        116,
+        47,
+        41
+      ],
+      "stalker": [
+        59,
+        117,
+        46,
+        38
+      ]
+    }
+  ],
+  "budget": "One continuation per candidate, 360 charged phases each. Only if both infeasible: at most sixteen additional nearest heath scenes in the same seed, one additional continuation of at most 360 phases. No actor staging or resource/terrain/stat changes after the single disclosed player entry.",
+  "attempts": []
+}

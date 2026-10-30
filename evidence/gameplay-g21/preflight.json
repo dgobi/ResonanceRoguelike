@@ -1,0 +1,34 @@
+{
+  "start_revision": "e142545567ba9f92722c4a6ee2eea92dcbf31a24",
+  "start_checkpoint": "checkpoint/gameplay-g21-start-20261030-a",
+  "authority": [
+    {
+      "path": "C:\\Users\\dango\\Downloads\\CODEX_G21_LOCAL_RIVALS_AND_CONSEQUENCES.md",
+      "sha256": "2c1282d2f18281102f0aae249dd154c18b2a9bdf3fedb2b7510374bdfb690d42"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_EMERGENT_EXPEDITIONS_ARC_COMPASS.md",
+      "sha256": "fc8760bae6ed3145e1e253b55066a383f7931f00153536d04b74df4791dda5d9"
+    },
+    {
+      "path": "C:\\Users\\dango\\Downloads\\RESONANCE_IMPLEMENTATION_PROPOSAL.md",
+      "sha256": "26093f38fb1a479d91819601395df184068de07ab52a25730d6089c95492dcd0"
+    },
+    {
+      "path": "evidence\\worldgen-g11\\before\\review-package\\references\\RESONANCE_PROJECT_COMPASS.md",
+      "sha256": "66c2e37870591317aee376bd3a5529cc1537ac0edd429b7c47378aae2cb42c91"
+    },
+    {
+      "path": "evidence\\worldgen-g11\\before\\review-package\\references\\RESONANCE_WORKFLOW.md",
+      "sha256": "3cc36f2de9e198b19e3e50ff2db3104e583e93e92c4bad2661a8e38c1d6b7aef"
+    },
+    {
+      "path": "evidence\\worldgen-g11\\before\\review-package\\references\\RESONANCE_DECISIONS_AND_STATE.md",
+      "sha256": "413d3012c6479ebf75cb9aa14c925d8c5a52cd06b7d44f9521e6b390ecbe7212"
+    }
+  ],
+  "unrelated_preserved": [
+    "RESONANCE_WORKBENCH_PLAN_PROPOSED_2026-10-25.md"
+  ],
+  "started_evidence_utc": "2026-10-30T20:23:07.572091+00:00"
+}

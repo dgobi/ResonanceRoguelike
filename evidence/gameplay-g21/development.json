@@ -1,0 +1,41 @@
+{
+  "development_runtime": "116 affected G18\u2013G21/harvest/combat tests pass; 21 G21 tests pass after added transfer restore check",
+  "native_development": {
+    "path": ".baseline/g21-dev-play-a/native/result.json",
+    "outcome": "successful first candidate; normal HP60 ->48, turn480 ->536, genuine Bandit transfer and mutual rival intent"
+  },
+  "prepared_development": {
+    "conflict": {
+      "start_turn": 1011,
+      "start_hp": 60,
+      "passage_turn": 1027,
+      "passage_hp": 57,
+      "finish_turn": 1035,
+      "finish_hp": 33
+    },
+    "musk": {
+      "start_turn": 1011,
+      "start_hp": 60,
+      "passage_turn": 1023,
+      "passage_hp": 57,
+      "finish_turn": 1031,
+      "finish_hp": 48
+    },
+    "passive": {
+      "start_turn": 1011,
+      "start_hp": 60,
+      "passage_turn": 1022,
+      "passage_hp": 46,
+      "finish_turn": 1030,
+      "finish_hp": 23
+    }
+  },
+  "controlled_lethal": "Completed in .baseline/g21-dev-play-e; five-phase crude-blade harvest, prior fractional debt retained, genuine cold/revisit depletion",
+  "material_corrections": [
+    "Observed rival target tile must stay reachable to pathfinding; regression added",
+    "Fixture origin corrected using actual authored arrival",
+    "Harvest check retains prior fractional debt instead of demanding zero",
+    "NSIS OS error 32 caused by premature development executable launch; final build/launch are sequential",
+    "Development creature worker run crossed active source edits and produced no review result; final frozen rerun required"
+  ]
+}
