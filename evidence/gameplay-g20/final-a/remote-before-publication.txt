@@ -1,0 +1,2 @@
+27b032d37fed553b1acfc049e2d083f0f3c1ecab	refs/heads/main
+27b032d37fed553b1acfc049e2d083f0f3c1ecab	refs/tags/checkpoint/gameplay-g19-verified-20261029-a

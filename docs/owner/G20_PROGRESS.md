@@ -11,8 +11,8 @@ matches current source exactly; 44 G18/G19 focused tests pass again. Its full
 readback and authority hashes: `evidence/gameplay-g20/preflight.json`.
 Unrelated untracked Workbench proposal is preserved. No campaign is opened.
 
-Current phase: final release correction, then complete affected full gates.
-Last accepted release: G19 SHA above. A/B/C remain implementation checkpoints.
+Current phase: A+B+C fully verified; publish final evidence/report and read back.
+Accepted tested input: `2f3dc7ddece5b4504fc8b99f8e96a109f71d573f`.
 Pre-change tag: `checkpoint/gameplay-g20-start-20261030-a`.
 
 Completed A: bounded sound, source-owned investigation, all four committed
@@ -76,12 +76,19 @@ assignment input, rather than current enabled G20 assignments. Full comparison
 is retained, no archived world or validator changes. Three focused corrections
 pass. Five test files only change; game/package/driver inputs remain unchanged.
 
-Next: commit corrected inputs, run complete unfiltered focused and worker suites
-in `final-b`, with explicit unchanged-input bindings reusing unaffected final-a
-gates. Do not edit any covered input while gates run. Review receipts, complete
-`GAMEPLAY_G20.md`, commit evidence and report, create final verified tag, then push
-main and all G20 checkpoints and read back origin. Source-bound final gates and
-demonstrations remain required; passing development checks are not a delivery.
+Final-b passes all 408 focused tests and 115 worker tests (one expected embedded
+skip covered separately). Frozen source remains stable. It ran 19:07:54–19:30:28
+UTC, 1354.473 seconds overlapping wall time. Explicit unchanged-input bindings
+retain final-a's unfiltered D, package/native and ordinary demonstration passes.
+`GAMEPLAY_G20.md` contains the actual final comparison: lure returned turn1905
+with HP60, musk turn1924 with HP59, both with Ward and coherent saved guard.
+
+Next/final commands: commit scoped final-a/final-b evidence and completed report,
+create `checkpoint/gameplay-g20-verified-20261030-a`, atomically push main plus all
+seven G20 tags, read back origin and compare main/verified SHA to local HEAD.
+Record remote readback and final tested-input equality in
+`.baseline/g20-publication.json`; report full SHA and stop. No implementation or
+verification remains. No task branches/worktrees/desktop input/campaign edits.
 A supplemental original-loop genuine G16 archived null-handler shard is taken,
 saved owned, restored into a fresh Engine and thrown with fields exact. Both
 stages share one Python process; expedition continuations use separate processes.

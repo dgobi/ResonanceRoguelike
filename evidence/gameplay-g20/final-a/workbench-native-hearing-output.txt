@@ -1,0 +1,1 @@
+{"output":"G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\g20\\hearing-final-a","passed":true}

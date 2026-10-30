@@ -1,0 +1,24 @@
+{
+  "name": "preparation-original-loop",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+    "--stage",
+    "preparation",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:43:15.322268+00:00",
+  "end_utc": "2026-10-30T07:43:45.832061+00:00",
+  "seconds": 30.50971309992019,
+  "exit_code": 0,
+  "error": null,
+  "log": "preparation-original-loop-output.txt",
+  "log_sha256": "b3195938bcd81073dd5a5fca59e90a44c2a9ea62b76fdc486cb5e8e190fca4b4",
+  "source_stable": true,
+  "passed": true
+}

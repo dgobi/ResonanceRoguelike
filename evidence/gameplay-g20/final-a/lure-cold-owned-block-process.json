@@ -1,0 +1,29 @@
+{
+  "name": "lure-cold-owned-block",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_owned_check.py",
+    "--checkpoint",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\lure-return\\homeward\\returned-ward.zip",
+    "--route",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json",
+    "--branch",
+    "lure",
+    "--output",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\lure-owned.json",
+    "--block"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:44:59.043107+00:00",
+  "end_utc": "2026-10-30T07:45:02.097104+00:00",
+  "seconds": 3.05312000005506,
+  "exit_code": 0,
+  "error": null,
+  "log": "lure-cold-owned-block-output.txt",
+  "log_sha256": "cffeb13f3ecd587d925994e370e74bb5164ee8c59509999097309cb46a4792e7",
+  "source_stable": true,
+  "passed": true
+}

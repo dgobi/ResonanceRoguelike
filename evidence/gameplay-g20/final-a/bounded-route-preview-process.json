@@ -1,0 +1,24 @@
+{
+  "name": "bounded-route-preview",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_route.py",
+    "--checkpoint",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\preparation\\prepared-return.zip",
+    "--output",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:43:46.619062+00:00",
+  "end_utc": "2026-10-30T07:43:55.979086+00:00",
+  "seconds": 9.360047199996188,
+  "exit_code": 0,
+  "error": null,
+  "log": "bounded-route-preview-output.txt",
+  "log_sha256": "455a231b467adf7b30eeaa9c845a675f515dbb6cb2fec7e627b0529919f6b27a",
+  "source_stable": true,
+  "passed": true
+}

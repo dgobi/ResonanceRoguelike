@@ -1,0 +1,28 @@
+{
+  "name": "destination-original-loop",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+    "--stage",
+    "destination_entry",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\preparation\\prepared-return.zip",
+    "--route",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:43:56.738084+00:00",
+  "end_utc": "2026-10-30T07:44:22.291235+00:00",
+  "seconds": 25.552833100082353,
+  "exit_code": 0,
+  "error": null,
+  "log": "destination-original-loop-output.txt",
+  "log_sha256": "43cdea526ec4975c8605864272d719752b30ff1d6a67bffda05576ffc7f627c1",
+  "source_stable": true,
+  "passed": true
+}

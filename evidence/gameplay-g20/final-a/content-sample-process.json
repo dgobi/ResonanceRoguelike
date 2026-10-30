@@ -1,0 +1,22 @@
+{
+  "name": "content-sample",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_content.py",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\content"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:43:03.430234+00:00",
+  "end_utc": "2026-10-30T07:43:14.513271+00:00",
+  "seconds": 11.083465700037777,
+  "exit_code": 0,
+  "error": null,
+  "log": "content-sample-output.txt",
+  "log_sha256": "18296ba09cdc540113a96de9ecf6039a6844af86047832c95d079bf8b5225573",
+  "source_stable": true,
+  "passed": true
+}

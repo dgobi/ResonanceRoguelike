@@ -1,0 +1,112 @@
+{
+  "branch": "lure",
+  "pid": 23576,
+  "checkpoint_sha256": "9b31bcf27bffafd7b8c9d243295df374a8cd11e21f2d3b33ab8e99aa8e074ec6",
+  "scope": "Cold exact checkpoint/owned scene audit; optional block is a separate controlled fixture, not natural encounter balance.",
+  "cold_snapshot": {
+    "player": "5276a2a265621cd02f360bcd9069049e31bfbc23f9a7b7d6e63bebd7cd9aa750",
+    "world": "104ffc67c7c17911e8a7f19828974832b8b3e8cffe545aa2368ccda1ab60223e",
+    "scene": "bc251ad08bafda9987443bdbf3b16579ea77f4533529fb09c9997b8c39b439f2",
+    "processing": [],
+    "zones": [],
+    "load": 8.889999999999999,
+    "knowledge": {},
+    "words": [],
+    "read": [],
+    "recovered": {}
+  },
+  "altered_room": {
+    "actors": [
+      {
+        "type": "actor",
+        "id": "hollow_revenant",
+        "x": 44,
+        "y": 21,
+        "tile": "hollow_revenant",
+        "name": "Hollow Revenant",
+        "is_alive": true,
+        "blocks_movement": true,
+        "fighter": {
+          "hp": 14,
+          "max_hp": 14,
+          "power": 3,
+          "defense": 1,
+          "body_id": "body_human",
+          "effective_av": 1
+        },
+        "component_state": {
+          "version": 1,
+          "actor": {
+            "chilled_turns": 0,
+            "_sickness_turns": 0,
+            "_last_known_px": null,
+            "_last_known_py": null,
+            "_arrival_cooldown": 0,
+            "_just_arrived": false,
+            "_pending_stair_use": null,
+            "_ability_suppressed_turns": 0,
+            "_disrupted_turns": 0,
+            "_wraith_exposure_turns": 0,
+            "_surface_exit_x": null,
+            "_surface_exit_y": null,
+            "_surface_exit_wx": null,
+            "_surface_exit_wy": null
+          },
+          "ai": {
+            "target_x": 46,
+            "target_y": 20,
+            "memory_turns": 10,
+            "alert_memory": 10
+          }
+        },
+        "ai_type": "WanderingAI",
+        "ai_state": "wandering",
+        "home_x": 41,
+        "home_y": 20,
+        "pursuit_turns_without_contact": 0,
+        "move_accumulator": 0.8000000000000023,
+        "faction": "hollow",
+        "hostile_to": [
+          "player"
+        ],
+        "sight_radius": 7,
+        "hearing_radius": 6,
+        "sees_in_dark": true,
+        "wander_radius": 8,
+        "lurker": null
+      }
+    ],
+    "zones": [],
+    "containers": [
+      {
+        "position": [
+          36,
+          25
+        ],
+        "state": "closed",
+        "items": []
+      }
+    ],
+    "reward_absent": true,
+    "clue_absent": true
+  },
+  "workshop": {
+    "travel_crate_empty": true,
+    "material_crate_dismantled": true
+  },
+  "controlled_block": {
+    "controls": "Acquired owned Ward through paid equip. Isolated clear laboratory patch and one factory adjacent Revenant. Actual two normal speed-budget world phases and real attack resolver. RNG.random fixed at 0.1 to select a positive block, ordinary dice RNG retained. No balance claim.",
+    "results": [
+      {
+        "blocked": true,
+        "reduction": 2,
+        "damage": 12,
+        "hit": true
+      }
+    ],
+    "hp_before": 60,
+    "hp_after": 48,
+    "phases": 2
+  },
+  "passed": true
+}

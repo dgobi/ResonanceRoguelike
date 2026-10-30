@@ -1,0 +1,28 @@
+{
+  "name": "musk-original-loop",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+    "--stage",
+    "musk",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\destination_entry\\common-entry.zip",
+    "--route",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:44:23.122240+00:00",
+  "end_utc": "2026-10-30T07:44:30.920978+00:00",
+  "seconds": 7.798803600016981,
+  "exit_code": 0,
+  "error": null,
+  "log": "musk-original-loop-output.txt",
+  "log_sha256": "732b22ba25396437e56805f75d33c7b898bb2fa3363f2de2ec3d64ba0154c2cf",
+  "source_stable": true,
+  "passed": true
+}

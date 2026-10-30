@@ -1,0 +1,138 @@
+{
+  "passed": true,
+  "scope": "Read-only inspection of frozen final returned archives. The unique original authored guard home coordinates identify its retained actor. Lure leaves it in the room; musk naturally follows upstairs and remains alive in the saved surface. No respawn or forced kill.",
+  "rows": [
+    {
+      "branch": "lure",
+      "archive": "evidence\\gameplay-g20\\final-a\\expedition\\lure-return\\homeward\\returned-ward.zip",
+      "sha256": "9b31bcf27bffafd7b8c9d243295df374a8cd11e21f2d3b33ab8e99aa8e074ec6",
+      "guard": {
+        "scene": "chunks/submap_68_98_0.pkl",
+        "actor": {
+          "type": "actor",
+          "id": "hollow_revenant",
+          "x": 44,
+          "y": 21,
+          "tile": "hollow_revenant",
+          "name": "Hollow Revenant",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 14,
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1,
+            "body_id": "body_human",
+            "effective_av": 1
+          },
+          "component_state": {
+            "version": 1,
+            "actor": {
+              "chilled_turns": 0,
+              "_sickness_turns": 0,
+              "_last_known_px": null,
+              "_last_known_py": null,
+              "_arrival_cooldown": 0,
+              "_just_arrived": false,
+              "_pending_stair_use": null,
+              "_ability_suppressed_turns": 0,
+              "_disrupted_turns": 0,
+              "_wraith_exposure_turns": 0,
+              "_surface_exit_x": null,
+              "_surface_exit_y": null,
+              "_surface_exit_wx": null,
+              "_surface_exit_wy": null
+            },
+            "ai": {
+              "target_x": 46,
+              "target_y": 20,
+              "memory_turns": 10,
+              "alert_memory": 10
+            }
+          },
+          "ai_type": "WanderingAI",
+          "ai_state": "wandering",
+          "home_x": 41,
+          "home_y": 20,
+          "pursuit_turns_without_contact": 0,
+          "move_accumulator": 0.8000000000000023,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "wander_radius": 8,
+          "lurker": null
+        }
+      }
+    },
+    {
+      "branch": "musk",
+      "archive": "evidence\\gameplay-g20\\final-a\\expedition\\musk-return\\homeward\\returned-ward.zip",
+      "sha256": "f59130073311fd4425d4daab3b0be934c6cdc3b68663b146611957b54bddcb08",
+      "guard": {
+        "scene": "chunks/68_98.pkl",
+        "actor": {
+          "type": "actor",
+          "id": "hollow_revenant",
+          "x": 77,
+          "y": 14,
+          "tile": "hollow_revenant",
+          "name": "Hollow Revenant",
+          "is_alive": true,
+          "blocks_movement": true,
+          "fighter": {
+            "hp": 14,
+            "max_hp": 14,
+            "power": 3,
+            "defense": 1,
+            "body_id": "body_human",
+            "effective_av": 1
+          },
+          "component_state": {
+            "version": 1,
+            "actor": {
+              "chilled_turns": 0,
+              "_sickness_turns": 0,
+              "_last_known_px": 79,
+              "_last_known_py": 14,
+              "_arrival_cooldown": 0,
+              "_just_arrived": false,
+              "_pending_stair_use": null,
+              "_ability_suppressed_turns": 0,
+              "_disrupted_turns": 0,
+              "_wraith_exposure_turns": 0,
+              "_surface_exit_x": null,
+              "_surface_exit_y": null,
+              "_surface_exit_wx": null,
+              "_surface_exit_wy": null
+            },
+            "ai": {
+              "target_x": 79,
+              "target_y": 14,
+              "memory_turns": 10,
+              "alert_memory": 10
+            }
+          },
+          "ai_type": "WanderingAI",
+          "ai_state": "wandering",
+          "home_x": 41,
+          "home_y": 20,
+          "pursuit_turns_without_contact": 12,
+          "move_accumulator": 4.218847493575595e-15,
+          "faction": "hollow",
+          "hostile_to": [
+            "player"
+          ],
+          "sight_radius": 7,
+          "hearing_radius": 6,
+          "sees_in_dark": true,
+          "wander_radius": 8,
+          "lurker": null
+        }
+      }
+    }
+  ]
+}

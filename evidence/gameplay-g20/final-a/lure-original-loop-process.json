@@ -1,0 +1,28 @@
+{
+  "name": "lure-original-loop",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+    "--stage",
+    "lure",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\destination_entry\\common-entry.zip",
+    "--route",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:44:23.122240+00:00",
+  "end_utc": "2026-10-30T07:44:30.600982+00:00",
+  "seconds": 7.479170099948533,
+  "exit_code": 0,
+  "error": null,
+  "log": "lure-original-loop-output.txt",
+  "log_sha256": "757544c6dbb9c2d93dedfdd7252c99e2d6caa5040e74cc427bf9aee03b962011",
+  "source_stable": true,
+  "passed": true
+}

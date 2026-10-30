@@ -1,0 +1,665 @@
+{
+  "passed": false,
+  "tested_revision": "bf467c6b725561d11e54cd8b854d65af8748ce88",
+  "started_utc": "2026-10-30T07:39:30.479654+00:00",
+  "source_manifest": "inputs.json",
+  "scope": "A+B+C",
+  "processes": [
+    {
+      "name": "workbench-frontend",
+      "command": [
+        "npm.cmd",
+        "test"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-30T07:39:30.480654+00:00",
+      "end_utc": "2026-10-30T07:39:39.456166+00:00",
+      "seconds": 8.975835300050676,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-frontend-output.txt",
+      "log_sha256": "95ab85d9b10216a2a8e75d1cee4eb68b7719af43750f199288d57478b2efda89",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-typecheck",
+      "command": [
+        "npm.cmd",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-30T07:39:40.192163+00:00",
+      "end_utc": "2026-10-30T07:39:44.042162+00:00",
+      "seconds": 3.8505811999784783,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-typecheck-output.txt",
+      "log_sha256": "77783bf2ca9523ff1e6aa3f5a098f779a50fd8cade5fb2774a4da5c450761c89",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-host",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-30T07:39:44.734164+00:00",
+      "end_utc": "2026-10-30T07:40:30.063885+00:00",
+      "seconds": 45.32963589997962,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-host-output.txt",
+      "log_sha256": "db0f6ab71e487a459d7ba4b603ffbbdaefc2af27d160ffdef81493881c7c2c77",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-30T07:40:30.808742+00:00",
+      "end_utc": "2026-10-30T07:40:36.439891+00:00",
+      "seconds": 5.63163540000096,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-clippy-output.txt",
+      "log_sha256": "c89fd61fc8b37f0ac62ce9bb8d5042abed77e5aa18cbca740c42a4add56a3141",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-bundle",
+      "command": [
+        "npm.cmd",
+        "run",
+        "bundle",
+        "--",
+        "--",
+        "--locked"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-30T07:40:37.191966+00:00",
+      "end_utc": "2026-10-30T07:41:57.537005+00:00",
+      "seconds": 80.3453219999792,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-bundle-output.txt",
+      "log_sha256": "1c6dfd0318c81e9fdbf049e7285b78bb449127d3d1767e83e194f1e21099a641",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "worker-missing-dependency",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "worker",
+        "-p",
+        "test_bridge.py",
+        "-k",
+        "dependency_absence_structured",
+        "-v"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-30T07:41:58.394003+00:00",
+      "end_utc": "2026-10-30T07:41:59.193003+00:00",
+      "seconds": 0.7980583000462502,
+      "exit_code": 0,
+      "error": null,
+      "log": "worker-missing-dependency-output.txt",
+      "log_sha256": "45832251298d0d3978c13d913a901abb122a7a454322bb1d4bf7c0a998883bcb",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "workbench-native-hearing",
+      "command": [
+        "node",
+        "scripts/run-hearing.mjs"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-30T07:41:59.863006+00:00",
+      "end_utc": "2026-10-30T07:42:31.157964+00:00",
+      "seconds": 31.294923900044523,
+      "exit_code": 0,
+      "error": null,
+      "log": "workbench-native-hearing-output.txt",
+      "log_sha256": "fd312d6fb13844df49667c9949471692125949b48798ef8e450fd646a140e448",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "historical-g14",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g15_historical.py",
+        "--baseline",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g19\\pre-edit-historical.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\historical-g14.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:42:34.615963+00:00",
+      "end_utc": "2026-10-30T07:42:37.323964+00:00",
+      "seconds": 2.707835700013675,
+      "exit_code": 0,
+      "error": null,
+      "log": "historical-g14-output.txt",
+      "log_sha256": "421f9059e51ff613f7d9370684355fcd269c55beafe3e8af426d9be03ca90ee4",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "historical-g16",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g17_historical.py",
+        "--baseline",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g17\\pre-edit-historical.json",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\historical-g16.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:42:38.061017+00:00",
+      "end_utc": "2026-10-30T07:42:40.677017+00:00",
+      "seconds": 2.6154333000304177,
+      "exit_code": 0,
+      "error": null,
+      "log": "historical-g16-output.txt",
+      "log_sha256": "080e1858c27ecb06c0c6dc80af389feb8592af51cad940b8a231eae74a79b55b",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "g19-original-loop",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_g19.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\g19-loop"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:42:41.448015+00:00",
+      "end_utc": "2026-10-30T07:42:53.722196+00:00",
+      "seconds": 12.274370800005272,
+      "exit_code": 0,
+      "error": null,
+      "log": "g19-original-loop-output.txt",
+      "log_sha256": "a22418e6f0ca9f9f0cac0a8d9347dae8a0f1e54b455e88227eca484e6ef072ee",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "g20-sound-original-loop",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_g20_sound.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\sound-loop"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:42:54.470193+00:00",
+      "end_utc": "2026-10-30T07:43:02.731237+00:00",
+      "seconds": 8.261255400022492,
+      "exit_code": 0,
+      "error": null,
+      "log": "g20-sound-original-loop-output.txt",
+      "log_sha256": "03debd8a3ec86c2fd06e34519145af28ea91132b596e8940c931ac3dc87fc1d7",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "content-sample",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_content.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\content"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:43:03.430234+00:00",
+      "end_utc": "2026-10-30T07:43:14.513271+00:00",
+      "seconds": 11.083465700037777,
+      "exit_code": 0,
+      "error": null,
+      "log": "content-sample-output.txt",
+      "log_sha256": "18296ba09cdc540113a96de9ecf6039a6844af86047832c95d079bf8b5225573",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "preparation-original-loop",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+        "--stage",
+        "preparation",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:43:15.322268+00:00",
+      "end_utc": "2026-10-30T07:43:45.832061+00:00",
+      "seconds": 30.50971309992019,
+      "exit_code": 0,
+      "error": null,
+      "log": "preparation-original-loop-output.txt",
+      "log_sha256": "b3195938bcd81073dd5a5fca59e90a44c2a9ea62b76fdc486cb5e8e190fca4b4",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "bounded-route-preview",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_route.py",
+        "--checkpoint",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\preparation\\prepared-return.zip",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:43:46.619062+00:00",
+      "end_utc": "2026-10-30T07:43:55.979086+00:00",
+      "seconds": 9.360047199996188,
+      "exit_code": 0,
+      "error": null,
+      "log": "bounded-route-preview-output.txt",
+      "log_sha256": "455a231b467adf7b30eeaa9c845a675f515dbb6cb2fec7e627b0529919f6b27a",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "destination-original-loop",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+        "--stage",
+        "destination_entry",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition",
+        "--resume",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\preparation\\prepared-return.zip",
+        "--route",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:43:56.738084+00:00",
+      "end_utc": "2026-10-30T07:44:22.291235+00:00",
+      "seconds": 25.552833100082353,
+      "exit_code": 0,
+      "error": null,
+      "log": "destination-original-loop-output.txt",
+      "log_sha256": "43cdea526ec4975c8605864272d719752b30ff1d6a67bffda05576ffc7f627c1",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "lure-original-loop",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+        "--stage",
+        "lure",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition",
+        "--resume",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\destination_entry\\common-entry.zip",
+        "--route",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:44:23.122240+00:00",
+      "end_utc": "2026-10-30T07:44:30.600982+00:00",
+      "seconds": 7.479170099948533,
+      "exit_code": 0,
+      "error": null,
+      "log": "lure-original-loop-output.txt",
+      "log_sha256": "757544c6dbb9c2d93dedfdd7252c99e2d6caa5040e74cc427bf9aee03b962011",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "musk-original-loop",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+        "--stage",
+        "musk",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition",
+        "--resume",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\destination_entry\\common-entry.zip",
+        "--route",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:44:23.122240+00:00",
+      "end_utc": "2026-10-30T07:44:30.920978+00:00",
+      "seconds": 7.798803600016981,
+      "exit_code": 0,
+      "error": null,
+      "log": "musk-original-loop-output.txt",
+      "log_sha256": "732b22ba25396437e56805f75d33c7b898bb2fa3363f2de2ec3d64ba0154c2cf",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "lure-cold-revisit-return",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+        "--stage",
+        "homeward",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\lure-return",
+        "--resume",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\lure\\altered-exit.zip",
+        "--route",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:44:31.724977+00:00",
+      "end_utc": "2026-10-30T07:44:58.068107+00:00",
+      "seconds": 26.342650900012814,
+      "exit_code": 0,
+      "error": null,
+      "log": "lure-cold-revisit-return-output.txt",
+      "log_sha256": "434f5ef63cf43284b3614f30b5071a745d3cb1ad87052b24ecc37f011fa262d2",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "musk-cold-revisit-return",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+        "--stage",
+        "homeward",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\musk-return",
+        "--resume",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\musk\\altered-exit.zip",
+        "--route",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:44:31.898979+00:00",
+      "end_utc": "2026-10-30T07:44:58.526106+00:00",
+      "seconds": 26.626302600023337,
+      "exit_code": 0,
+      "error": null,
+      "log": "musk-cold-revisit-return-output.txt",
+      "log_sha256": "6c4d7d683e91906668efd402a6bdb3b7d0273ff4722e48cb4efe5a3512a84117",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "lure-cold-owned-block",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_owned_check.py",
+        "--checkpoint",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\lure-return\\homeward\\returned-ward.zip",
+        "--route",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json",
+        "--branch",
+        "lure",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\lure-owned.json",
+        "--block"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:44:59.043107+00:00",
+      "end_utc": "2026-10-30T07:45:02.097104+00:00",
+      "seconds": 3.05312000005506,
+      "exit_code": 0,
+      "error": null,
+      "log": "lure-cold-owned-block-output.txt",
+      "log_sha256": "cffeb13f3ecd587d925994e370e74bb5164ee8c59509999097309cb46a4792e7",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "musk-cold-owned",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\g20_owned_check.py",
+        "--checkpoint",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\musk-return\\homeward\\returned-ward.zip",
+        "--route",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json",
+        "--branch",
+        "musk",
+        "--output",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\musk-owned.json"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:44:59.401101+00:00",
+      "end_utc": "2026-10-30T07:45:02.437105+00:00",
+      "seconds": 3.035596799920313,
+      "exit_code": 0,
+      "error": null,
+      "log": "musk-cold-owned-output.txt",
+      "log_sha256": "14d61a99a1ca8a3194ea9eef594662b3a4c2267cbfadaeacc284d4217a4799a9",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "production-d",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\verify_d.py",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\.baseline\\gameplay-g20-final-a"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:39:30.480654+00:00",
+      "end_utc": "2026-10-30T07:49:07.452699+00:00",
+      "seconds": 576.9719597999938,
+      "exit_code": 0,
+      "error": null,
+      "log": "production-d-output.txt",
+      "log_sha256": "c0644c1522b550aa597311bef7849fb93bf7c51168494475c3b3138a9cb78f57",
+      "source_stable": true,
+      "passed": true
+    },
+    {
+      "name": "focused",
+      "command": [
+        "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+        "--timeout",
+        "3600",
+        "--evidence",
+        "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\focused"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject",
+      "start_utc": "2026-10-30T07:39:30.479654+00:00",
+      "end_utc": "2026-10-30T07:58:58.328070+00:00",
+      "seconds": 1167.8492614999413,
+      "exit_code": 1,
+      "error": null,
+      "log": "focused-output.txt",
+      "log_sha256": "dcaea59d19f9a47516667f14ed509b640073c7182c7caf144c711ff849171e4f",
+      "source_stable": true,
+      "passed": false
+    },
+    {
+      "name": "workbench-worker",
+      "command": [
+        "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "worker",
+        "-v"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "start_utc": "2026-10-30T07:39:30.480654+00:00",
+      "end_utc": "2026-10-30T07:59:57.373908+00:00",
+      "seconds": 1226.893849199987,
+      "exit_code": 1,
+      "error": null,
+      "log": "workbench-worker-output.txt",
+      "log_sha256": "3ac742fa4ede1adafca4948305822ff01c676c2f091a6cad0673987746bdd59a",
+      "source_stable": true,
+      "passed": false
+    }
+  ],
+  "environment": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    },
+    "tools": {
+      "node": "v24.15.0",
+      "rustc": "rustc 1.95.0 (59807616e 2026-04-14)",
+      "cargo": "cargo 1.95.0 (f2d3ce0bd 2026-03-21)"
+    }
+  },
+  "isolation": "Production checkout in place. Independent gates and native/runtime fixtures own separate disposable save/output roots. No desktop input, campaign or source mutation.",
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "652551c24fb534ac9195223443f950c79fb2a486cc51cd44bb3cc77c971dcc67"
+    },
+    "installers": [
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.1.0_x64-setup.exe",
+        "sha256": "e3ba7d562db3df0b9f04e26f024b2f3c7d732dfc94366aeb89d8c8776811540a"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.2.0_x64-setup.exe",
+        "sha256": "9e87da9a4efda8781557e28dd5b49e0d0243e97315c65ea676e375f3babbdaeb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.3.0_x64-setup.exe",
+        "sha256": "ab49e110dd368aa069d81556ca4aca00f66c6bf0f28778f49fe46602b12529c8"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.4.0_x64-setup.exe",
+        "sha256": "877ce34f8cf1d086047c9ca99d41cb1aa94586408a9fcadd7ca8df8a98897bbb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.5.0_x64-setup.exe",
+        "sha256": "2f620c05945b82e695b5bcb96f075c760e39b6c61bde3425d2749488def8165c"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.6.0_x64-setup.exe",
+        "sha256": "2d5faf3e1e1c97684bc3d1c0f7448c1cddfdf2e926746cd4db3fc44d784730c9"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.0_x64-setup.exe",
+        "sha256": "9edef905e6e5de88d4fa738e76a76b7b7634aa9d8f4086ca6e9ed42a40307675"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.1_x64-setup.exe",
+        "sha256": "70273646bee5d2ae3737916455abe936846df2f8bb573504250344844f9eaffb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.8.0_x64-setup.exe",
+        "sha256": "f548ba9b1a747c04105f8c445a0aeb27c2b5214569a236fc15ed7963f94f24fb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+        "sha256": "202cddb862862162f1d6eba25a6f53e11c19af2f7e136547f545fb28f4259cea"
+      }
+    ]
+  },
+  "production": {
+    "totals": {
+      "checks": 3704,
+      "passed": 3704,
+      "failed": 0,
+      "workers": 159
+    },
+    "runner_negative_controls": 7,
+    "unfiltered": true,
+    "passed": true
+  },
+  "source_stable": true,
+  "finished_utc": "2026-10-30T07:59:58.395006+00:00",
+  "final_wall_seconds": 1229.6770591000095,
+  "failures": [
+    "focused",
+    "workbench-worker"
+  ]
+}

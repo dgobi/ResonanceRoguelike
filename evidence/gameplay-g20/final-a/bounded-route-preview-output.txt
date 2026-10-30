@@ -1,0 +1,33 @@
+[gen] waystones placed in chunk (72,99): 1
+[gen] waystones placed in chunk (77,100): 1
+[gen] waystones placed in chunk (77,101): 1
+{
+  "chosen": [
+    68,
+    98,
+    "submap_68_98_0"
+  ],
+  "estimate": 443,
+  "legs": 6,
+  "previews": 44,
+  "candidates": [
+    {
+      "target": [
+        68,
+        98,
+        "submap_68_98_0"
+      ],
+      "reachable": true,
+      "estimate": 443
+    },
+    {
+      "target": [
+        78,
+        100,
+        "submap_78_100_0"
+      ],
+      "reachable": true,
+      "estimate": 443
+    }
+  ]
+}

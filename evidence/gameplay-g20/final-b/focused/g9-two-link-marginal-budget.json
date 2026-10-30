@@ -1,0 +1,40 @@
+{
+  "controlled_seed": 3,
+  "policy": {
+    "version": 1,
+    "max_shortcuts": 2,
+    "max_added_fraction": 0.25,
+    "min_saved_steps": 1,
+    "min_relative_improvement": 0.01,
+    "candidate_pair_limit": 8,
+    "search_expansion_limit": 8192,
+    "world_expansion_budget": 32768
+  },
+  "accepted": [
+    {
+      "route": "network-shortcut-0",
+      "pair": "capital-gateway|settlement-1",
+      "a": "capital-gateway",
+      "b": "settlement-1",
+      "before_steps": 9513,
+      "after_steps": 1971,
+      "added_unique_steps": 1850
+    },
+    {
+      "route": "network-shortcut-1",
+      "pair": "capital-gateway|settlement-2",
+      "a": "capital-gateway",
+      "b": "settlement-2",
+      "before_steps": 3226,
+      "after_steps": 2586,
+      "added_unique_steps": 1094
+    }
+  ],
+  "overlapping_new_steps": 971,
+  "total_union_steps": 2944,
+  "original_second_pair_distance": 10680,
+  "marginal_second_pair_distance": 3226,
+  "exact_budget_pass": true,
+  "one_step_below_rejected": true,
+  "double_credited_benefit_rejected": true
+}

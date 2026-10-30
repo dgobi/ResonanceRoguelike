@@ -1,0 +1,5 @@
+G:\GameDev\RoguelikeProject\roguelike\engine\engine.py:5016: FutureWarning: Soon the 'tcod' module will no longer hold constants directly.
+Add 'from tcod import libtcodpy' if you haven't already.
+Replace 'tcod.FOV_SYMMETRIC_SHADOWCAST' with 'libtcodpy.FOV_SYMMETRIC_SHADOWCAST'
+  algorithm=tcod.FOV_SYMMETRIC_SHADOWCAST,
+{"passed": true, "stage": "preparation", "checkpoint": "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\preparation\\prepared-return.zip", "finish": {"turn": 1011, "hp": 60, "hunger": 0.5310000000000004, "thirst": 0.1839999999999958, "inventory": ["tallow_torch", "crow_jerky", "crude_blade", "leather_jack", "moist_pebble", "flint_shard", "tallow_torch", "crow_jerky", "water_flask", "letter", "musk_pellet", "empty_water_skin"], "torch": [{"id": "tallow_torch", "used": 25, "total": 600, "lit": true}, {"id": "tallow_torch", "used": 0, "total": 600, "lit": false}]}}

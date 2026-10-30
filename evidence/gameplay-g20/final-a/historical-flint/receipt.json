@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "tested_revision": "bf467c6b725561d11e54cd8b854d65af8748ce88",
+  "source_stable": true,
+  "artifact_sha256": "f8ecbe62e0c43b73c7b435b2f6aef5eb5a6bf90323ec15cc36a4b34688a8d46e",
+  "archive": "evidence\\gameplay-g16\\final-a\\journey\\cold-return\\homeward\\returned-pellet.zip",
+  "archive_sha256": "0867c43c7b39adf64ef13e26dadaccefa82730046021e62c7d1213682685287d",
+  "item": {
+    "item_id": "flint_shard",
+    "item_state_version": 1,
+    "name": "flint shard",
+    "tile": "generic_item",
+    "weight": 0.2,
+    "stackable": false,
+    "count": 1,
+    "on_use": null,
+    "text_id": "",
+    "nutrition": null,
+    "hydration": null,
+    "heal_amount": null,
+    "eat_message": null,
+    "drink_message": null,
+    "burn_turns": null,
+    "turns_lit": 0,
+    "light_data": null,
+    "liquid": null,
+    "liquid_volume": 0.0,
+    "qualities": {},
+    "description": "A sharp-edged chip knocked from a larger piece of flint.",
+    "harvest_from": null,
+    "keywords": [
+      {
+        "tag": "cutting",
+        "tier": 1
+      }
+    ],
+    "decay_timer": null,
+    "source_creature": null,
+    "temporary_essence": [],
+    "consumed_on_use": true,
+    "_temp_av_bonus": 0,
+    "_temp_av_hits": 0
+  },
+  "acquire_turns": 12,
+  "throw_phases": 1,
+  "seconds": 6.694760299986228,
+  "scope": "Archived old physical shard acquired through ordinary container UI, saved as owned, then cold-restored and used with no stored handler mutation. Existing controlled stack fixture covers count and explicit override separately."
+}

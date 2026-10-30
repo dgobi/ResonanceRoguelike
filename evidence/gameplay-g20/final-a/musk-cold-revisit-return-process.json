@@ -1,0 +1,28 @@
+{
+  "name": "musk-cold-revisit-return",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+    "--stage",
+    "homeward",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\musk-return",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\musk\\altered-exit.zip",
+    "--route",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:44:31.898979+00:00",
+  "end_utc": "2026-10-30T07:44:58.526106+00:00",
+  "seconds": 26.626302600023337,
+  "exit_code": 0,
+  "error": null,
+  "log": "musk-cold-revisit-return-output.txt",
+  "log_sha256": "6c4d7d683e91906668efd402a6bdb3b7d0273ff4722e48cb4efe5a3512a84117",
+  "source_stable": true,
+  "passed": true
+}

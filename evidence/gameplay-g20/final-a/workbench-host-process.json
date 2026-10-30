@@ -1,0 +1,20 @@
+{
+  "name": "workbench-host",
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--manifest-path",
+    "src-tauri/Cargo.toml"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-30T07:39:44.734164+00:00",
+  "end_utc": "2026-10-30T07:40:30.063885+00:00",
+  "seconds": 45.32963589997962,
+  "exit_code": 0,
+  "error": null,
+  "log": "workbench-host-output.txt",
+  "log_sha256": "db0f6ab71e487a459d7ba4b603ffbbdaefc2af27d160ffdef81493881c7c2c77",
+  "source_stable": true,
+  "passed": true
+}

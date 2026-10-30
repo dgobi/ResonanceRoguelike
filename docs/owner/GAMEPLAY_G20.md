@@ -1,9 +1,11 @@
 # G20 — Audible encounters and a prepared expedition
 
-Status: A+B+C implementation accepted through focused checks; final frozen release
-verification and publication pending. This status must be replaced from actual
-receipts before delivery. No subsequent numbered brief or creature relationships
-are started. H1 and the full Emergent Expeditions arc remain open.
+Status: A+B+C verified and delivered. No phase is deferred. The verified delivery
+reference is `checkpoint/gameplay-g20-verified-20261030-a`; its full published SHA
+and origin readback are in the completion message and local
+`.baseline/g20-publication.json` (outside this self-referencing commit).
+No subsequent numbered brief or creature relationships are started. H1 and the
+full Emergent Expeditions arc remain open.
 
 ## Starting authority and prerequisite
 
@@ -28,6 +30,11 @@ Named implementation checkpoints: start at G19; phase A
 `feccf26b926b9184128c060291142c5fc4d367c6`. Each has a matching
 `checkpoint/gameplay-g20-…-20261030-a` tag. These focused checkpoints alone are
 not verified releases.
+
+Frozen implementation/package input commit:
+`bf467c6b725561d11e54cd8b854d65af8748ce88`. Corrected test-expectation input:
+`2f3dc7ddece5b4504fc8b99f8e96a109f71d573f`. The latter changes five tests and
+the progress record; all game/data/package/driver bytes remain identical.
 
 ## Delivered rules
 
@@ -75,6 +82,11 @@ rewriting any stored item field or overriding explicit nonempty handlers. The
 canonical flint definition remains G19-exact; inventory and Workbench show the
 current capability and expenditure through guidance. This also preserves genuine
 old workshop dependency fingerprints. Legacy multi-count items lose one unit.
+The supplemental [historical shard proof](../../evidence/gameplay-g20/final-a/historical-flint/receipt.json)
+takes the actual null-handler shard from G16's archived laboratory crate, saves
+it owned, restores it in a fresh Engine and throws it through ordinary UI. Both
+stages share one Python process; destination cold continuations are separate
+processes. A separate controlled stacked-item test covers quantity and overrides.
 
 Musk keeps a radius-three circle and six protected charged phases including the
 throw, leaving five immediately afterward. Shared current-owning-map terrain
@@ -125,8 +137,8 @@ correction and workshop-fallback receipts in `evidence/gameplay-g20/`.
 
 ## Ordinary and controlled demonstrations
 
-Final results will be read from `evidence/gameplay-g20/final-a/`. The final tool
-runs a fresh original-loop ordinary start, physical flint gathering, workshop
+Final demonstrations are in `evidence/gameplay-g20/final-a/`. The final tool
+ran a fresh original-loop ordinary start, physical flint gathering, workshop
 material/supply acquisition, fire/drying and actual musk collection, return to
 the laboratory, then connected travel to the ordinarily assigned destination.
 Normal AI, FOV, carrying, survival and charged actions remain active. Torch use,
@@ -150,6 +162,28 @@ paid torch displacement/extinguishing and relighting, save outside, cold-revisit
 the altered room without generation, and return to the lab with a later paid
 light choice. Neither approach requires a kill or permanent suppression.
 
+The frozen final witness starts at turn 480/HP60. Preparation returns at turn 1011
+after 531 charged phases, with primary torch used 25/600 and spare unused. Common
+destination entry is turn 1433/HP60, hunger .253, thirst .237125, torch used 29.
+Both finite food and water supplies are actually consumed, without refills.
+
+| Final continuation | Exit turn / HP | Returned turn / HP | Hunger / thirst on return | Primary torch used /600 | Spent / retained |
+| --- | --- | --- | --- | --- | --- |
+| Lure and bypass | 1484 /60 | 1905 /60 | .725 / .857125 | 78 | flint / musk |
+| Prepared passage | 1497 /59 | 1924 /59 | .744 / .8825 | 91 | musk / flint |
+
+Both return with the Ward and unused spare torch. The second outing consumes
+894 vs 913 charged phases, a nineteen-phase difference; from initial start the
+total is 1425 vs 1444. Musk's natural one-HP withdrawal hit is retained, without
+forcing a mistake or rerunning for a clean outcome. Its impact leaves exactly
+five phases. Lure moves the guard from (43,18) to (42,18) toward impact (38,19)
+without acquiring a player trail; that guard is hidden at the instant measured.
+Development values differ and are not substituted for this final witness.
+The read-only [guard ownership audit](../../evidence/gameplay-g20/final-a/guard-ownership.json)
+finds exactly one original full-HP guard in each returned archive: lure retains
+it underground, while musk's genuine pursuer follows upstairs and remains in
+the saved (68,98) surface. Neither guard is erased, respawned or forcibly killed.
+
 The separate acquired-Ward continuation stages one adjacent factory Revenant
 and clear lab patch, selects a positive block with RNG.random=.1, retains ordinary
 dice, and advances two normal speed-budget phases through the real attack
@@ -160,14 +194,44 @@ acquisition claim.
 
 ## Verification and publication
 
-Pending frozen receipts: complete unfiltered focused discovery and production D
-with runner negatives, genuine historical archive comparisons, G19/G20 original
-loops, three-seed content sample, both ordinary cold branches, acquired-Ward
-checks, Workbench full worker/frontend/typecheck/Rust/clippy, pinned NSIS build,
-separate missing-dependency control and packaged native hearing. The release
-orchestrator records commands, environment, individual process durations, actual
-overlapping wall time, raw source hashes, Git blob bindings and package hashes.
-The final report will replace this paragraph with observed totals and outcome.
+The first complete frozen set is retained in
+[final-a/release.json](../../evidence/gameplay-g20/final-a/release.json). It ran
+07:39:30–07:59:58 UTC, 1229.677 seconds of overlapping wall time; process durations
+are separate. Production D passes 3704/3704 assertions, 159/159 workers and all
+seven negative controls, without filters. Genuine historical comparisons,
+G19/G20 original loops, content sample, both ordinary cold branches and Ward
+checks pass. Workbench passes 89 frontend tests, TypeScript, 71 Rust tests, clippy
+with warnings denied, pinned NSIS build, separate missing-dependency control and
+packaged native hearing. All 2854 bound inputs remain stable during this set.
+
+That first set is explicitly failed overall: focused 408 found three stale
+expectations and worker 115 found two (plus its expected embedded dependency
+skip, separately tested). Four are counts from the new canonical room, workshop
+and pool. The exact historical pre-G11 whole-world check must bind the disabled
+pre-assignment policy as well as its already bound historical commercial profile;
+it continues comparing the complete archived world without removing differences.
+No runtime or validator correction is needed. All five test fixes are isolated
+in the corrected input commit. The complete unfiltered reruns pass in
+[final-b/release.json](../../evidence/gameplay-g20/final-b/release.json): 408 focused
+tests, 115 worker tests (114 pass and one expected embedded dependency skip;
+the separate development-interpreter control passes). Both preserve frozen
+source. The rerun overlaps 19:07:54–19:30:28 UTC, 1354.473 seconds; focused process
+1143.001 seconds, worker process 1353.911 seconds. No coverage is waived. The
+receipt's phrase about no skipped cases means no additional omission; this
+single existing environment-specific skip remains explicit and covered.
+
+Other final-a checks are retained under explicit unchanged input boundaries in
+`final-b/inputs.json` and its receipt. Game/data, runtime imports, drivers,
+frontend, Rust, bundle bridge/runtime and package inputs are unchanged. Final
+receipts retain commands, environment, duration, raw hashes, Git blob bindings
+and package identity. Source bindings explicitly allow CRLF/LF-only Git
+normalization; process-log hashes describe their executed Windows bytes.
+Active Workbench executable SHA256:
+`652551c24fb534ac9195223443f950c79fb2a486cc51cd44bb3cc77c971dcc67`;
+the newly built 0.9.0 NSIS SHA256 is
+`202cddb862862162f1d6eba25a6f53e11c19af2f7e136547f545fb28f4259cea`.
+Other older installer files listed in the build directory are historical files,
+not newly certified G20 builds.
 
 Development corrections are retained: historical flint source dependency restored
 instead of weakening validation; a test harness initially repeated an ignored
@@ -176,7 +240,13 @@ verified all four; initial route/guard-watching attempts were superseded by the
 disclosed bounded route and immediate bypass. Focused passing checkpoints have
 never been presented as full deliveries.
 
-Remaining publication steps: review frozen results/diff, commit scoped evidence
-and this completion report, create `checkpoint/gameplay-g20-verified-20261030-a`,
-push main and all five G20 checkpoint refs, read back their full remote SHAs.
-No phase is deferred if all pending gates pass. Stop after published A+B+C.
+Clock accounting: after the completed 07:59:58 final-a receipt, the next observed
+tool UTC was 19:04. That unmeasured gap is not included as productive execution
+or gate runtime. Actual resumed/final timestamps remain in final-b and remote
+publication evidence; do not infer elapsed work by summing parallel processes.
+
+The final evidence/report commit changes no tested input. Publication uses an
+atomic push of `main` and all seven G20 checkpoint refs (start, A/B/C, both input
+revisions and verified), followed by exact origin ref readback and a final
+committed-blob/input comparison. The readback receipt retains the full SHA.
+Unrelated owner work and campaigns remain intact. Stop after published A+B+C.

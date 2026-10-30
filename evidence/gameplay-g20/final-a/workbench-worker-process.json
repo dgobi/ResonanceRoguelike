@@ -1,0 +1,25 @@
+{
+  "name": "workbench-worker",
+  "command": [
+    "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "worker",
+    "-v"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-30T07:39:30.480654+00:00",
+  "end_utc": "2026-10-30T07:59:57.373908+00:00",
+  "seconds": 1226.893849199987,
+  "exit_code": 1,
+  "error": null,
+  "log": "workbench-worker-output.txt",
+  "log_sha256": "3ac742fa4ede1adafca4948305822ff01c676c2f091a6cad0673987746bdd59a",
+  "source_stable": true,
+  "passed": false
+}

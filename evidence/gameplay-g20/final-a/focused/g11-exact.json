@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "before_stair": [
+    14,
+    5
+  ],
+  "after_stairs": [
+    [
+      29,
+      5
+    ]
+  ],
+  "contract": {
+    "revision": 1,
+    "chunk": [
+      44,
+      8
+    ],
+    "arrival": [
+      24,
+      10
+    ],
+    "edge": [
+      14,
+      0
+    ],
+    "neighbor": [
+      44,
+      7
+    ],
+    "reciprocal": [
+      14,
+      42
+    ]
+  },
+  "diagnostics": [
+    {
+      "kind": "entrance",
+      "submap": "submap_44_8_0",
+      "status": "authored-footprint",
+      "access_revision": 1,
+      "access_rejections": 20,
+      "stair": [
+        29,
+        5
+      ]
+    }
+  ],
+  "old_seconds": 0.07380769995506853,
+  "new_seconds": 0.11116959992796183,
+  "base_fields_identical": true,
+  "terrain_repairs": [],
+  "neighbor_static_reciprocal": true,
+  "no_eager_neighbors": true
+}

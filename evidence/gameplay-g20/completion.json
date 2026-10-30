@@ -1,0 +1,41 @@
+{
+  "passed": true,
+  "scope": "A+B+C",
+  "tested_revision": "2f3dc7ddece5b4504fc8b99f8e96a109f71d573f",
+  "retained_revision": "bf467c6b725561d11e54cd8b854d65af8748ce88",
+  "inputs": 2854,
+  "focused": 408,
+  "production": {
+    "totals": {
+      "checks": 3704,
+      "passed": 3704,
+      "failed": 0,
+      "workers": 159
+    },
+    "runner_negative_controls": 7,
+    "unfiltered": true,
+    "passed": true
+  },
+  "worker": {
+    "tests": 115,
+    "passed": 114,
+    "expected_skip": 1,
+    "separate_control": true
+  },
+  "frontend": 89,
+  "rust": 71,
+  "source_stable": true,
+  "owner_untracked_proposal": {
+    "path": "RESONANCE_WORKBENCH_PLAN_PROPOSED_2026-10-25.md",
+    "sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a"
+  },
+  "scope_audit": {
+    "wiki_changed": false,
+    "campaign_paths_changed": false
+  },
+  "receipts": {
+    "first_full": "final-a/release.json",
+    "corrected_full": "final-b/release.json"
+  },
+  "clock_note": "Actual UTC timestamps retain observed gap; measured gate wall times are 1229.677 and 1354.473 seconds, not their process-duration sums."
+}

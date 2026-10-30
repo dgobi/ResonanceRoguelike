@@ -1,0 +1,22 @@
+{
+  "name": "g20-sound-original-loop",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g20_sound.py",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\sound-loop"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:42:54.470193+00:00",
+  "end_utc": "2026-10-30T07:43:02.731237+00:00",
+  "seconds": 8.261255400022492,
+  "exit_code": 0,
+  "error": null,
+  "log": "g20-sound-original-loop-output.txt",
+  "log_sha256": "03debd8a3ec86c2fd06e34519145af28ea91132b596e8940c931ac3dc87fc1d7",
+  "source_stable": true,
+  "passed": true
+}

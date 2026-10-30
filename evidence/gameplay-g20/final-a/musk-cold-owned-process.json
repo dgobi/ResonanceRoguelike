@@ -1,0 +1,28 @@
+{
+  "name": "musk-cold-owned",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_owned_check.py",
+    "--checkpoint",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\musk-return\\homeward\\returned-ward.zip",
+    "--route",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json",
+    "--branch",
+    "musk",
+    "--output",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\musk-owned.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:44:59.401101+00:00",
+  "end_utc": "2026-10-30T07:45:02.437105+00:00",
+  "seconds": 3.035596799920313,
+  "exit_code": 0,
+  "error": null,
+  "log": "musk-cold-owned-output.txt",
+  "log_sha256": "14d61a99a1ca8a3194ea9eef594662b3a4c2267cbfadaeacc284d4217a4799a9",
+  "source_stable": true,
+  "passed": true
+}

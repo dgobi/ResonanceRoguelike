@@ -1,0 +1,3610 @@
+{
+  "run_id": "g20-sound-loop",
+  "scenario": "journey",
+  "phase": "loop",
+  "flavor": "candidate",
+  "pid": 29948,
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "argv": [
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g20_sound.py",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\sound-loop"
+  ],
+  "seed": 20261020,
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "os": "Windows-10-10.0.26200-SP0",
+  "environment": {
+    "SDL_VIDEODRIVER": "dummy",
+    "SDL_AUDIODRIVER": "dummy",
+    "PYTHONHASHSEED": "20261020",
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONUTF8": "1",
+    "PYGAME_HIDE_SUPPORT_PROMPT": "1"
+  },
+  "versions": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "checks": [
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G20-A",
+      "property": "ordinary gather depleted source",
+      "expected": "flint_rock_depleted",
+      "observed": "flint_rock_depleted",
+      "passed": true
+    },
+    {
+      "case": "G20-A",
+      "property": "real gather charged at least one phase",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G20-A",
+      "property": "cancel keeps owned shard and world time",
+      "expected": [
+        true,
+        481
+      ],
+      "observed": [
+        true,
+        481
+      ],
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G20-A",
+      "property": "one throw phase and finite consumption",
+      "expected": [
+        482,
+        false
+      ],
+      "observed": [
+        482,
+        false
+      ],
+      "passed": true
+    },
+    {
+      "case": "G20-A",
+      "property": "impact source distinct from hidden player",
+      "expected": [
+        13,
+        16
+      ],
+      "observed": [
+        13,
+        16
+      ],
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G20-A",
+      "property": "normal budget changes guard route",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "G20-A",
+      "property": "investigation has no player trail",
+      "expected": [
+        "investigating",
+        null
+      ],
+      "observed": [
+        "investigating",
+        null
+      ],
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "app-local modifier state",
+      "expected": 0,
+      "observed": 0,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "event accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "original loop dummy SDL",
+      "expected": "dummy",
+      "observed": "dummy",
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "paired release prevents repeats",
+      "expected": null,
+      "observed": null,
+      "passed": true
+    },
+    {
+      "case": "G20-A",
+      "property": "F9 restores source and clock without replay",
+      "expected": {
+        "turn": 483,
+        "timing": [
+          483,
+          0,
+          0.0,
+          false,
+          0.0
+        ],
+        "zones": [],
+        "actors": [
+          {
+            "type": "actor",
+            "id": "hollow_revenant",
+            "x": 16,
+            "y": 15,
+            "tile": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 14,
+              "max_hp": 14,
+              "power": 3,
+              "defense": 1,
+              "body_id": "body_human",
+              "effective_av": 1
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10,
+                "sound_interest": {
+                  "x": 13,
+                  "y": 16,
+                  "deadline": 493,
+                  "strength": 2,
+                  "kind": "flint"
+                }
+              }
+            },
+            "ai_type": "WanderingAI",
+            "ai_state": "investigating",
+            "home_x": 17,
+            "home_y": 15,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.6000000000000001,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "wander_radius": 8,
+            "lurker": null
+          }
+        ],
+        "items": [
+          {
+            "item_id": "tallow_torch",
+            "item_state_version": 1,
+            "name": "Tallow Torch",
+            "tile": "tallow_torch",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_light",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": 600,
+            "turns_lit": 3,
+            "light_data": {
+              "radius": 8,
+              "color": [
+                255,
+                180,
+                60
+              ],
+              "falloff": 1.8,
+              "flicker": true
+            },
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "water_flask",
+            "item_state_version": 1,
+            "name": "Water Flask",
+            "tile": "water_flask",
+            "weight": 0.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "drink",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": "water",
+            "liquid_volume": 0.5,
+            "qualities": {},
+            "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crude_blade",
+            "item_state_version": 1,
+            "name": "a crude blade",
+            "tile": "generic_item",
+            "weight": 1.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Iron, poorly kept. It will serve.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "leather_jack",
+            "item_state_version": 1,
+            "name": "a leather jack",
+            "tile": "generic_item",
+            "weight": 3.0,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "moist_pebble",
+            "item_state_version": 1,
+            "name": "moist pebble",
+            "tile": "pebble",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      "observed": {
+        "turn": 483,
+        "timing": [
+          483,
+          0,
+          0.0,
+          false,
+          0.0
+        ],
+        "zones": [],
+        "actors": [
+          {
+            "type": "actor",
+            "id": "hollow_revenant",
+            "x": 16,
+            "y": 15,
+            "tile": "hollow_revenant",
+            "name": "Hollow Revenant",
+            "is_alive": true,
+            "blocks_movement": true,
+            "fighter": {
+              "hp": 14,
+              "max_hp": 14,
+              "power": 3,
+              "defense": 1,
+              "body_id": "body_human",
+              "effective_av": 1
+            },
+            "component_state": {
+              "version": 1,
+              "actor": {
+                "chilled_turns": 0,
+                "_sickness_turns": 0,
+                "_last_known_px": null,
+                "_last_known_py": null,
+                "_arrival_cooldown": 0,
+                "_just_arrived": false,
+                "_pending_stair_use": null,
+                "_ability_suppressed_turns": 0,
+                "_disrupted_turns": 0,
+                "_wraith_exposure_turns": 0,
+                "_surface_exit_x": null,
+                "_surface_exit_y": null,
+                "_surface_exit_wx": null,
+                "_surface_exit_wy": null
+              },
+              "ai": {
+                "target_x": null,
+                "target_y": null,
+                "memory_turns": 0,
+                "alert_memory": 10,
+                "sound_interest": {
+                  "x": 13,
+                  "y": 16,
+                  "deadline": 493,
+                  "strength": 2,
+                  "kind": "flint"
+                }
+              }
+            },
+            "ai_type": "WanderingAI",
+            "ai_state": "investigating",
+            "home_x": 17,
+            "home_y": 15,
+            "pursuit_turns_without_contact": 0,
+            "move_accumulator": 0.6000000000000001,
+            "faction": "hollow",
+            "hostile_to": [
+              "player"
+            ],
+            "sight_radius": 7,
+            "hearing_radius": 6,
+            "sees_in_dark": true,
+            "wander_radius": 8,
+            "lurker": null
+          }
+        ],
+        "items": [
+          {
+            "item_id": "tallow_torch",
+            "item_state_version": 1,
+            "name": "Tallow Torch",
+            "tile": "tallow_torch",
+            "weight": 0.3,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_light",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": 600,
+            "turns_lit": 3,
+            "light_data": {
+              "radius": 8,
+              "color": [
+                255,
+                180,
+                60
+              ],
+              "falloff": 1.8,
+              "flicker": true
+            },
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "A rush dipped in rendered fat. It smells of the animal it came from. It will burn for a while.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "waxy",
+                "tier": 1
+              },
+              {
+                "tag": "fibrous",
+                "tier": 1
+              },
+              {
+                "tag": "fuel",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crow_jerky",
+            "item_state_version": 1,
+            "name": "Crow Jerky",
+            "tile": "food_item",
+            "weight": 0.2,
+            "stackable": true,
+            "count": 1,
+            "on_use": "eat",
+            "text_id": "",
+            "nutrition": 0.35,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "edible",
+                "tier": 2
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "water_flask",
+            "item_state_version": 1,
+            "name": "Water Flask",
+            "tile": "water_flask",
+            "weight": 0.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "drink",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": 0.5,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": "water",
+            "liquid_volume": 0.5,
+            "qualities": {},
+            "description": "A clay flask of water. It is flat and has the faint taste of the vessel. It is better than nothing, which is the alternative.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "drinkable",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "crude_blade",
+            "item_state_version": 1,
+            "name": "a crude blade",
+            "tile": "generic_item",
+            "weight": 1.5,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Iron, poorly kept. It will serve.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "cutting",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "leather_jack",
+            "item_state_version": 1,
+            "name": "a leather jack",
+            "tile": "generic_item",
+            "weight": 3.0,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Cured hide, stitched with sinew. Old work. It will hold.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "fibrous",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": false,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          },
+          {
+            "item_id": "moist_pebble",
+            "item_state_version": 1,
+            "name": "moist pebble",
+            "tile": "pebble",
+            "weight": 0.1,
+            "stackable": false,
+            "count": 1,
+            "on_use": "equip_toggle",
+            "text_id": "",
+            "nutrition": null,
+            "hydration": null,
+            "heal_amount": null,
+            "eat_message": null,
+            "drink_message": null,
+            "burn_turns": null,
+            "turns_lit": 0,
+            "light_data": null,
+            "liquid": null,
+            "liquid_volume": 0.0,
+            "qualities": {},
+            "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+            "harvest_from": null,
+            "keywords": [
+              {
+                "tag": "resonant",
+                "tier": 1
+              }
+            ],
+            "decay_timer": null,
+            "source_creature": null,
+            "temporary_essence": [],
+            "consumed_on_use": true,
+            "_temp_av_bonus": 0,
+            "_temp_av_hits": 0
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "QUIT accepted",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "E01",
+      "property": "original loop completed bounded driver",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    },
+    {
+      "case": "H02",
+      "property": "actual copied source binding",
+      "expected": true,
+      "observed": true,
+      "passed": true
+    }
+  ],
+  "trace": [
+    {
+      "frame": 0,
+      "position": [
+        15,
+        20
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 480,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 13,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 1,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 105,
+        "unicode": "i",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 2,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 3,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 4,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 5,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 6,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 7,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 8,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 9,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 10,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 101,
+        "unicode": "e",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 11,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "placement_cursor",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 27,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 12,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 105,
+        "unicode": "i",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 13,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 14,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 15,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 16,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 17,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 18,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 19,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 20,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 21,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "local",
+      "inventory": true,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 101,
+        "unicode": "e",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 22,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "placement_cursor",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 23,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "placement_cursor",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 24,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "placement_cursor",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 25,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "placement_cursor",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 26,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "placement_cursor",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741905,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 27,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "placement_cursor",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741903,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 28,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 481,
+      "mode": "placement_cursor",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 13,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 29,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 482,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 122,
+        "unicode": "z",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 30,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 483,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 0,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741886,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 31,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 483,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 1,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 122,
+        "unicode": "z",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 32,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 484,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 1,
+        "load": 0,
+        "configure": 1,
+        "teleport": 0,
+        "dump": 0
+      },
+      "event": {
+        "key": 1073741890,
+        "unicode": "",
+        "mod": 0,
+        "actual_mods": 0
+      }
+    },
+    {
+      "frame": 33,
+      "position": [
+        12,
+        12
+      ],
+      "scene": [
+        73,
+        99,
+        "sub_73_99_0"
+      ],
+      "turn": 483,
+      "mode": "local",
+      "inventory": false,
+      "text": false,
+      "counters": {
+        "save": 1,
+        "load": 1,
+        "configure": 2,
+        "teleport": 0,
+        "dump": 0
+      }
+    }
+  ],
+  "defects": [],
+  "completed": false,
+  "controls": "Controlled laboratory geometry and factory Revenant, normal stats/AI. Stage one natural flint-rock tile, gather through ordinary cursor and RNG (seed 1), inventory selection, targeting, cancellation and throw through app-local keys. Normal FOV, survival, time and rendering remain. No ordinary-world discovery or balance claim; connected outings are separate.",
+  "captures": [
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\sound-loop\\gathered-cutting-shard.png",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\sound-loop\\clatter-investigation.png"
+  ],
+  "checkpoint": {
+    ".sessions/2d2fb373fa0246a68b5d6e1411382cbe/chunks/73_99.pkl": {
+      "bytes": 506175,
+      "sha256": "98f0f397774864df39f3b1f7bd21ed4c9515b6f14737084c317e524db585adae"
+    },
+    ".sessions/2d2fb373fa0246a68b5d6e1411382cbe/chunks/sub_73_99_0.pkl": {
+      "bytes": 501799,
+      "sha256": "cb32b50e593164b286a12a3217922276261cd64b2584c2fe984eaa8baef9b04c"
+    },
+    "generations/g-2d6dc72292af4da8bfbd88f70e4b483b/chunks/73_99.pkl": {
+      "bytes": 506175,
+      "sha256": "98f0f397774864df39f3b1f7bd21ed4c9515b6f14737084c317e524db585adae"
+    },
+    "generations/g-2d6dc72292af4da8bfbd88f70e4b483b/chunks/sub_73_99_0.pkl": {
+      "bytes": 502728,
+      "sha256": "e0252ebcbd311368856ae93dba94dd9fbf3896c28a2916da5783b1de6cb22a73"
+    },
+    "generations/g-2d6dc72292af4da8bfbd88f70e4b483b/manifest.json": {
+      "bytes": 781,
+      "sha256": "4dcd4db02237e31edec72b7fc06356c96cc1c3876b7749ab3925acb54645beca"
+    },
+    "generations/g-2d6dc72292af4da8bfbd88f70e4b483b/meta.json": {
+      "bytes": 150,
+      "sha256": "ed2a569c0b7299c31f0ed1b192122697d16f69bd2c4b3e47a3b324b634b97bad"
+    },
+    "generations/g-2d6dc72292af4da8bfbd88f70e4b483b/player.json": {
+      "bytes": 8862,
+      "sha256": "ef1ec5647a22cc90d25f967249768cc784b876726c2430dec55f81d949ab808c"
+    },
+    "generations/g-2d6dc72292af4da8bfbd88f70e4b483b/world.json": {
+      "bytes": 18021995,
+      "sha256": "5c0e56eafaa15459e91e3157394241c68709448eb27dd2c824bafdc48fb4990e"
+    },
+    "HEAD.json": {
+      "bytes": 101,
+      "sha256": "85d4e2ae849181f685f6fc0fc87139c7981bc5f5f57c743daa24dbde0eee3fbf"
+    },
+    "world.json": {
+      "bytes": 17,
+      "sha256": "906af684c3429b80935e6bc9f507600e16c1945edf0fa35c187b2d951be5305b"
+    }
+  },
+  "expected": {
+    "gear": {
+      "capacity": 20.0,
+      "items": [
+        {
+          "id": "tallow_torch",
+          "fuel": 3,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": true
+        },
+        {
+          "id": "crow_jerky",
+          "fuel": 0,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": false
+        },
+        {
+          "id": "water_flask",
+          "fuel": 0,
+          "liquid": "water",
+          "volume": 0.5,
+          "equipped": false
+        },
+        {
+          "id": "crude_blade",
+          "fuel": 0,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": false
+        },
+        {
+          "id": "leather_jack",
+          "fuel": 0,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": false
+        },
+        {
+          "id": "moist_pebble",
+          "fuel": 0,
+          "liquid": null,
+          "volume": 0.0,
+          "equipped": false
+        }
+      ],
+      "slots": {
+        "weapon": null,
+        "offhand": 0,
+        "armor_head": null,
+        "armor_torso": null,
+        "armor_arms": null,
+        "armor_legs": null,
+        "belt_1": null,
+        "belt_2": null,
+        "belt_3": null,
+        "light": null,
+        "talisman_1": null,
+        "talisman_2": null,
+        "talisman_3": null,
+        "satchel": null
+      },
+      "armor": 0,
+      "light": {
+        "active": true,
+        "item_index": 0,
+        "radius": 8
+      }
+    },
+    "address": [
+      73,
+      99,
+      "sub_73_99_0"
+    ],
+    "scene": {
+      "marker": "wall",
+      "actors": [
+        {
+          "id": "hollow_revenant",
+          "tile": "hollow_revenant",
+          "position": [
+            16,
+            15
+          ],
+          "hp": 14,
+          "hibernating": null,
+          "ambush_ready": false,
+          "triggered": null
+        }
+      ],
+      "floor": [],
+      "container": null,
+      "decor": null,
+      "explored": false,
+      "links": {}
+    },
+    "turn": 483
+  },
+  "completion": true,
+  "frames": 34,
+  "actions": 33,
+  "counters": {
+    "save": 1,
+    "load": 1,
+    "configure": 2,
+    "teleport": 0,
+    "dump": 0
+  },
+  "elapsed_seconds": 7.598202200024389,
+  "evidence_class": "Original Engine.run, real event.post/get, original handlers and renderer",
+  "imported_sources": {
+    "components.ai": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\ai.py",
+      "relative": "components/ai.py",
+      "sha256": "6206bf4ff27e7734c38952fe1b648386e422a294a714567854dd1da586d20ed8"
+    },
+    "components.corruption": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\corruption.py",
+      "relative": "components/corruption.py",
+      "sha256": "70010c3875aa7b42b7285ee98aefb4ee50e2e579d07dfd0f9dafefff326517b1"
+    },
+    "components.equipment": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\equipment.py",
+      "relative": "components/equipment.py",
+      "sha256": "149e467c2e2fb9ba7d24bd146fa9e3a1b05fd8506ee7f607bfa09121105109d7"
+    },
+    "components.fighter": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\fighter.py",
+      "relative": "components/fighter.py",
+      "sha256": "b4924b6458d56c1128951805e22eb6db5c0641b3d1767a54dd9c80cdcfff4f79"
+    },
+    "components.inventory": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\inventory.py",
+      "relative": "components/inventory.py",
+      "sha256": "f8bd45b695fc9c44f0d73fed77f6f998eb46b3e30139ce2d99c6baf16edcec58"
+    },
+    "components.language": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\language.py",
+      "relative": "components/language.py",
+      "sha256": "3c1480fb99b0bab4eb0188c40d76864a9bb6e9e5e771be5e0bfd9f7cb213b4e4"
+    },
+    "components.level": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\level.py",
+      "relative": "components/level.py",
+      "sha256": "001342e1479f20dcdccb0e12f1534172c59c4c20f7f96f2efdaa25263323a652"
+    },
+    "components.light_source": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\light_source.py",
+      "relative": "components/light_source.py",
+      "sha256": "de612dbee3cabda4573e40eabe5e8ee8222e80ac77bb189b5728708dbdeefe7d"
+    },
+    "components.needs": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\needs.py",
+      "relative": "components/needs.py",
+      "sha256": "a5238691b740ee2f5a84adfa4dd26ffa2f277f5a63955a053de4f46ebdef76e4"
+    },
+    "components.perception": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\perception.py",
+      "relative": "components/perception.py",
+      "sha256": "ef6384c112319c18d5b876c108284910f15bd3c61e361998083f533acd102c5a"
+    },
+    "components.perks": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\components\\perks.py",
+      "relative": "components/perks.py",
+      "sha256": "38325a0cc89f0acf23a16e3fb68b13ea3aaf50e3b58d7ec692b051c5c97f0915"
+    },
+    "config": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\config.py",
+      "relative": "config.py",
+      "sha256": "35bd35b4f142c79c2ec891ac64ba218cc5e3f4b7d421fa836faa1eb7d0a279e8"
+    },
+    "engine.ai_system": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\ai_system.py",
+      "relative": "engine/ai_system.py",
+      "sha256": "d4e1ed04002edfeec06fcf09dc6fdd1246d66e85a3bbf64a9162563e0054033a"
+    },
+    "engine.checkpoints": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\checkpoints.py",
+      "relative": "engine/checkpoints.py",
+      "sha256": "5961f6e5c5c0561d95fd37056d55eebdfb90fa1ecde9540ef6c1c97ff9bf7c57"
+    },
+    "engine.combat": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\combat.py",
+      "relative": "engine/combat.py",
+      "sha256": "567a84340d7186d136d6b66ebe003bdc0d22c46313b603324d8eaacb47cc652a"
+    },
+    "engine.crafting": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\crafting.py",
+      "relative": "engine/crafting.py",
+      "sha256": "7d5720bc9d5c2ca8a45af84e406c038e8ec0124967afeb704f394d4bb9f9b57f"
+    },
+    "engine.creature_abilities": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\creature_abilities.py",
+      "relative": "engine/creature_abilities.py",
+      "sha256": "b9273111770c41881831937b1f45d773529c4e5445a406178f495eeb7a28d36b"
+    },
+    "engine.creature_factory": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\creature_factory.py",
+      "relative": "engine/creature_factory.py",
+      "sha256": "cd3fa4db9716a0d61b1158f2e06037b9ff129d16da703b908de8c657a773a44d"
+    },
+    "engine.data_loader": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\data_loader.py",
+      "relative": "engine/data_loader.py",
+      "sha256": "600b8c049f8b6b770de0264cb07af14c8f02651a958700970c8402756fbf1f53"
+    },
+    "engine.debug": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\debug.py",
+      "relative": "engine/debug.py",
+      "sha256": "421f974675864114703c6436c3afabc9e241fdcf92286152155e7c7ccabafad1"
+    },
+    "engine.definition_sources": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\definition_sources.py",
+      "relative": "engine/definition_sources.py",
+      "sha256": "16a47addcb620768b13d3433ee90ca11471934d53746247b8e348d57e2e32bbc"
+    },
+    "engine.display_config": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\display_config.py",
+      "relative": "engine/display_config.py",
+      "sha256": "a07f80fad15d1d9622fb7851c8d2eadde6080974eb3f64efba006f60cc6b0546"
+    },
+    "engine.effect_lifecycle": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\effect_lifecycle.py",
+      "relative": "engine/effect_lifecycle.py",
+      "sha256": "6cb14e4bcfecc1dec6bc5d0b71f07ae68aa93a2ea73e1f221c030822ebdff5ff"
+    },
+    "engine.engine": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\engine.py",
+      "relative": "engine/engine.py",
+      "sha256": "340ec65c65ff19a11e1d2887ee2038bc396b39bc8c43721ec5d91e4a41b4573c"
+    },
+    "engine.harvesting": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\harvesting.py",
+      "relative": "engine/harvesting.py",
+      "sha256": "36cdc0e97ed59ced3c32425b40dfa5a05888081ec20d002535a7b788c81cec42"
+    },
+    "engine.health_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\health_screen.py",
+      "relative": "engine/health_screen.py",
+      "sha256": "2d94f02896ae0ffa93a0ff8c9c4ae1bce500bcf3cc12fbc3a30f0a9a344b2ffd"
+    },
+    "engine.hooks": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\hooks.py",
+      "relative": "engine/hooks.py",
+      "sha256": "8bf5b46ef62f1331edb772b72b4f5b6ec3c1a8c2b392b9e26cbea584a64f4d2a"
+    },
+    "engine.interaction_cursor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\interaction_cursor.py",
+      "relative": "engine/interaction_cursor.py",
+      "sha256": "5208bd5cd3c88c79a1408f7a76e0ffae0e88093373ec843f7611d0697f22ab76"
+    },
+    "engine.inventory_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\inventory_screen.py",
+      "relative": "engine/inventory_screen.py",
+      "sha256": "766a844b28190dcf0556945049bd92915631898c7d0c93439de1945906de74bb"
+    },
+    "engine.item_factory": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\item_factory.py",
+      "relative": "engine/item_factory.py",
+      "sha256": "3e8140aae656852bcbee71cf419cb573f343c512ff930c21baaca9be5edbfa66"
+    },
+    "engine.item_system": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\item_system.py",
+      "relative": "engine/item_system.py",
+      "sha256": "3ebb27b241d605debf0573fc331e853c71efc9191b5db74e33b29eb3b11c9a26"
+    },
+    "engine.item_transfers": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\item_transfers.py",
+      "relative": "engine/item_transfers.py",
+      "sha256": "9fbbae01c75dcf1d9a356cecc7b215b5f5ee10a0ff716f065745aa7fcf7d113e"
+    },
+    "engine.look_mode": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\look_mode.py",
+      "relative": "engine/look_mode.py",
+      "sha256": "e1024b587e42ad00789cd6b66ae8c858dfdeb92c9eb872301d692e42c4b0c6fb"
+    },
+    "engine.loot_roller": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\loot_roller.py",
+      "relative": "engine/loot_roller.py",
+      "sha256": "5db3302c06f8b8930ee024cb6d0c51ce630b741161560c7848ff31371eb9fca2"
+    },
+    "engine.message_log": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\message_log.py",
+      "relative": "engine/message_log.py",
+      "sha256": "c4a3e2049d21665e87aea57b8648624c60929fbab9a55cc751ba6f03af1d9ed3"
+    },
+    "engine.palette": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\palette.py",
+      "relative": "engine/palette.py",
+      "sha256": "646457ba8998f32494169d1833c129fb4c64cab05a94c62eaaec3d696702baab"
+    },
+    "engine.perk_handlers": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\perk_handlers.py",
+      "relative": "engine/perk_handlers.py",
+      "sha256": "f8299dcca9dfdf043fade946957b9e163c97e5b140a1c15cf2e56ec8ec5ae3e8"
+    },
+    "engine.player_setup": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\player_setup.py",
+      "relative": "engine/player_setup.py",
+      "sha256": "6bfb6a2b4b8aec50a9715cc37abd52a77c953f8f5b6fedefd0c856d0fea14f10"
+    },
+    "engine.pool_authoring": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\pool_authoring.py",
+      "relative": "engine/pool_authoring.py",
+      "sha256": "e7cb63b82eb1771f8e30561df4cf4d5a021f6b9fc959a20854fea23cd5166a98"
+    },
+    "engine.processing_text": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\processing_text.py",
+      "relative": "engine/processing_text.py",
+      "sha256": "4bf54d89169fdac3bd01f13809e065b8a10e87b45cc106194e67649668474823"
+    },
+    "engine.reality_bubble": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\reality_bubble.py",
+      "relative": "engine/reality_bubble.py",
+      "sha256": "d52f1f040ef988b70ae5ec9126ec1a95fa3649bfedf4c11da75d0386374dbded"
+    },
+    "engine.resonance_system": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\resonance_system.py",
+      "relative": "engine/resonance_system.py",
+      "sha256": "3211dcbb1062f5082399fd88f90f69f94e8332f7d9cb5290651267c267493da9"
+    },
+    "engine.save_components": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\save_components.py",
+      "relative": "engine/save_components.py",
+      "sha256": "73ccca96e8623e1718200df7dd92d06fa20e8767ee8dbb1f31bd00ebdf06dbc4"
+    },
+    "engine.save_manager": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\save_manager.py",
+      "relative": "engine/save_manager.py",
+      "sha256": "38b60a003d2069fdd2fe6033ed0a57a5f3996112268cdb5c96d90717ec9209ef"
+    },
+    "engine.scene_generation": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\scene_generation.py",
+      "relative": "engine/scene_generation.py",
+      "sha256": "961ab05be3de4da49f30b69f49e66b1cd98c868a076e9bce0287cf2c3ce66425"
+    },
+    "engine.sound": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\sound.py",
+      "relative": "engine/sound.py",
+      "sha256": "155fa3ff9eca6c50c0b5a4e6f2939be79810fe1455046abb1a0b6c5245dd49b2"
+    },
+    "engine.spatial": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\spatial.py",
+      "relative": "engine/spatial.py",
+      "sha256": "16cb14f518747b2402563845494b8db75e49f05a42bc98512a0901d749c54f20"
+    },
+    "engine.text_contract": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\text_contract.py",
+      "relative": "engine/text_contract.py",
+      "sha256": "d617d185fe48165d59a01e13846dd42d34a0c9d5aeef17a1e372be6f0909865b"
+    },
+    "engine.text_reader": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\text_reader.py",
+      "relative": "engine/text_reader.py",
+      "sha256": "39f73b598f4d568c605987cb0cbc262edbebe7fa613a55e90209f691a6c23afb"
+    },
+    "engine.typography": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\typography.py",
+      "relative": "engine/typography.py",
+      "sha256": "360ffa7cd37a9c8c6e4d55bae14b4f8ae0373ddd94b265f036897a4e69c49ea6"
+    },
+    "engine.ui": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\ui.py",
+      "relative": "engine/ui.py",
+      "sha256": "c041403400a300f54ce76e4e36157c91bae1aa60207821654a6d9125afd93655"
+    },
+    "engine.visual_events": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\visual_events.py",
+      "relative": "engine/visual_events.py",
+      "sha256": "9950362cadb9819e25259457ed7061175e9cff5d2b6a23593ec3989251588d3b"
+    },
+    "engine.weather": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\weather.py",
+      "relative": "engine/weather.py",
+      "sha256": "51d4d49731e7687994db79b82dd6fe9e3f8ff0f4e309144be0e735f080108277"
+    },
+    "engine.world_time": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\engine\\world_time.py",
+      "relative": "engine/world_time.py",
+      "sha256": "b4669d0f4cfe4bb037a88b2170d606c29408b758f9f2375fba9ad46d02fbea6c"
+    },
+    "entities.actor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\actor.py",
+      "relative": "entities/actor.py",
+      "sha256": "34600dc6f36d1f3f315f59ec296be4b4f1871bd3031ae582e8fdeda783702822"
+    },
+    "entities.entity": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\entity.py",
+      "relative": "entities/entity.py",
+      "sha256": "652c3124a2af45519a8c57f6aad1e4fe53f68477cdf8411ddb6c337f3f2b5a53"
+    },
+    "entities.item": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\entities\\item.py",
+      "relative": "entities/item.py",
+      "sha256": "d6d7d2b831b6c5cae456a255609a414ea09b490a0fd9660e68baf0d62b7c6f90"
+    },
+    "generation.access": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\access.py",
+      "relative": "generation/access.py",
+      "sha256": "e865d289be5175daace01f9d52f3d1b663a527d10f8d157d63c9dcd1f4a6476b"
+    },
+    "generation.authored_decor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\authored_decor.py",
+      "relative": "generation/authored_decor.py",
+      "sha256": "b5658be3d66deaaa409da9e201e04b3647098c76d76b00fb27eb2c7007eafc52"
+    },
+    "generation.authored_rooms": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\authored_rooms.py",
+      "relative": "generation/authored_rooms.py",
+      "sha256": "60bbb8c68b782ca176fd4c4394718a177baab3adf1f68742d8a74a57f213016e"
+    },
+    "generation.authored_submap_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\authored_submap_selection.py",
+      "relative": "generation/authored_submap_selection.py",
+      "sha256": "265862e4b182d0a4d4a7a36d3cb9aaad57a8775d2956cfc5caa8cc277cac5fe9"
+    },
+    "generation.compound_integrity": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\compound_integrity.py",
+      "relative": "generation/compound_integrity.py",
+      "sha256": "137faddc8535b93396c1adfba995c800ddc9a38f5a9689b12c2962a3a45a33f7"
+    },
+    "generation.compounds": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\compounds.py",
+      "relative": "generation/compounds.py",
+      "sha256": "06deecdbf48880b4e51710eb4ec186dc2a61ab17dd8bd27fededfa94db4cd7f7"
+    },
+    "generation.context": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\context.py",
+      "relative": "generation/context.py",
+      "sha256": "48a06073d60c2883dcad3b3ad3bcd5512ab4b4c89ded3912ad48bd7a83ff0baa"
+    },
+    "generation.country_network": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\country_network.py",
+      "relative": "generation/country_network.py",
+      "sha256": "b8d6ceff95184caae9b116eabb2c5e668d8b6f9d43e50c12c3220a345ac4ae84"
+    },
+    "generation.decor_utils": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\decor_utils.py",
+      "relative": "generation/decor_utils.py",
+      "sha256": "356adab9c7b9919165d3afc9ec9fde3ee852d7df67a7aa5cda4741eb3c815b93"
+    },
+    "generation.entrance_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\entrance_gen.py",
+      "relative": "generation/entrance_gen.py",
+      "sha256": "c6aa0c0364ca06498c6b36dd2dbba36c2b1f6abd56301f8d23b5f4f55f63b6ed"
+    },
+    "generation.exterior_access": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\exterior_access.py",
+      "relative": "generation/exterior_access.py",
+      "sha256": "f2ad48a31391c45029cb7f489913810d2d10110e63db67c0a21aca287fb9fed4"
+    },
+    "generation.floor_object_utils": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\floor_object_utils.py",
+      "relative": "generation/floor_object_utils.py",
+      "sha256": "576cc816724f3a8970e5efe6de62e804a3da594b477d52461dfd69804612df55"
+    },
+    "generation.layout_stamper": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\layout_stamper.py",
+      "relative": "generation/layout_stamper.py",
+      "sha256": "2d60d9316d935c64ca27f44b0c4be397d39b3d98e65d3bba9dd7f1c0c77efdd8"
+    },
+    "generation.local_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\local_gen.py",
+      "relative": "generation/local_gen.py",
+      "sha256": "5169e86ed0daa58bfbb2dd2bc6357187809ca9b9aafb7b5edbc7704cab5b2c13"
+    },
+    "generation.network_metrics": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\network_metrics.py",
+      "relative": "generation/network_metrics.py",
+      "sha256": "5b9cd31a680be379854d5d518d62ab7320b9df62f07138696a2fc28d3f7183e2"
+    },
+    "generation.parent_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\parent_selection.py",
+      "relative": "generation/parent_selection.py",
+      "sha256": "92b2dc7885cfb608fabf0d62d7076ec42cefab3097611a59c55cc11140f8a04c"
+    },
+    "generation.placement": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\placement.py",
+      "relative": "generation/placement.py",
+      "sha256": "2fb1d1c815d042041d63e971a08564dda0337aaae51c0d6a49234a2d11e679ee"
+    },
+    "generation.plan_integrity": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\plan_integrity.py",
+      "relative": "generation/plan_integrity.py",
+      "sha256": "9189392a8ed1c1433f5a59a4ccae7bd37b844e84108a470c7e6c44492dcef8ca"
+    },
+    "generation.planned_dressing": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\planned_dressing.py",
+      "relative": "generation/planned_dressing.py",
+      "sha256": "2360c2fec2983349dafbebd61e281e1ac5204fc9e48f2119ad015097f434387e"
+    },
+    "generation.planned_scene": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\planned_scene.py",
+      "relative": "generation/planned_scene.py",
+      "sha256": "e2c8905d7b137af32b36ea86af583fb5696723b2814c4d17fa28542e4ae489ce"
+    },
+    "generation.poi_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\poi_selection.py",
+      "relative": "generation/poi_selection.py",
+      "sha256": "23078f0e16a0c5cf58a0feff03278e61c72ff4929741fc387423de97e078cca4"
+    },
+    "generation.ports": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\ports.py",
+      "relative": "generation/ports.py",
+      "sha256": "1866817869a7f259ed1b02c0559caeb501037539a44272924b9e88d7d062afb0"
+    },
+    "generation.region_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\region_gen.py",
+      "relative": "generation/region_gen.py",
+      "sha256": "366c2c9d0cfecb25727a201829dac8a4e97216fd695dd5169183a0376be942f4"
+    },
+    "generation.road_network": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\road_network.py",
+      "relative": "generation/road_network.py",
+      "sha256": "ae757cdfb5b41bc02a481e2928464851ab48d8b385cb62c4c5bbeb2a13ebaeeb"
+    },
+    "generation.scene_adapters": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\scene_adapters.py",
+      "relative": "generation/scene_adapters.py",
+      "sha256": "c62d9dfb362e111531f75020750b9e7e938d2fe8e5b467a87b1307afc1ccde5b"
+    },
+    "generation.settlement_context": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\settlement_context.py",
+      "relative": "generation/settlement_context.py",
+      "sha256": "20badd4af5a5f758b50a7145a2eccf40ac6203f046f297226eaaeca5b7d83265"
+    },
+    "generation.settlement_layout": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\settlement_layout.py",
+      "relative": "generation/settlement_layout.py",
+      "sha256": "ee277c46b401e98b0e0184314097841471b6ab895e1884272ca4293e8fbb1686"
+    },
+    "generation.settlement_selection": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\settlement_selection.py",
+      "relative": "generation/settlement_selection.py",
+      "sha256": "2c70e0f480a5424d7d027c35dd37a2060ff6e21561ef5905f32775ba3c11e7fc"
+    },
+    "generation.spawn_specs": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\spawn_specs.py",
+      "relative": "generation/spawn_specs.py",
+      "sha256": "8ed1075dc6511c7dcc696d60a4acf8e53032160df53516f9bdc9fb786f802349"
+    },
+    "generation.structure_contract": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\structure_contract.py",
+      "relative": "generation/structure_contract.py",
+      "sha256": "10517a45ca56413abfd862e43da65acdf883e128a1a1202de3ce7a1dd8697c1d"
+    },
+    "generation.structure_preview": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\structure_preview.py",
+      "relative": "generation/structure_preview.py",
+      "sha256": "e676a74d40bbaaab226639a7bd566a29a9f3246710173539432da2135e45c544"
+    },
+    "generation.town_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\town_gen.py",
+      "relative": "generation/town_gen.py",
+      "sha256": "cf9091724825391b18d742e6e459e0640b594eb4ea2490252c130f83d284e424"
+    },
+    "generation.wilderness": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\wilderness.py",
+      "relative": "generation/wilderness.py",
+      "sha256": "84a5a508c52fb43360470524ba7daff806b45c457c0a92181ae9959386adeff1"
+    },
+    "generation.world_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\world_gen.py",
+      "relative": "generation/world_gen.py",
+      "sha256": "b8706cac694d4c797351e17290b9e5eb3981869d9aa6e62c4f51fa82d30ad251"
+    },
+    "generation.world_plan": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\generation\\world_plan.py",
+      "relative": "generation/world_plan.py",
+      "sha256": "b77cdfe145c2ba1eb13cbf97677e72de37663f7ed2f95c2530354ff7799f587b"
+    },
+    "main": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\main.py",
+      "relative": "main.py",
+      "sha256": "0fc1ed01bd64b641c392dff70a2823bd06f5a6461032c4f3cea43eaef7dc4991"
+    },
+    "rendering.callouts": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\callouts.py",
+      "relative": "rendering/callouts.py",
+      "sha256": "325db657d9c74bea22e5e4200f7860bf2bfc7a816f16e1d53c348eeb5be75c6c"
+    },
+    "rendering.craft_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\craft_screen.py",
+      "relative": "rendering/craft_screen.py",
+      "sha256": "520e383b1972ce9f0e0588dd90db4b0553e6c113cde350bf0478474e1da26a67"
+    },
+    "rendering.decor": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\decor.py",
+      "relative": "rendering/decor.py",
+      "sha256": "406e26318ac3fc0139c83bc2f434100b1158d849a35e792c3ca2c345a8bd9950"
+    },
+    "rendering.glyph_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\glyph_gen.py",
+      "relative": "rendering/glyph_gen.py",
+      "sha256": "b7fde731fbadf2257cd2fa7c8fb3588348cfb929b419f23b8144c98d78037c45"
+    },
+    "rendering.lexicon_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\lexicon_screen.py",
+      "relative": "rendering/lexicon_screen.py",
+      "sha256": "1ebdd83253521a0644ac814152a89eafbb8174f31a9649affc671b622b7323f7"
+    },
+    "rendering.particles": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\particles.py",
+      "relative": "rendering/particles.py",
+      "sha256": "76d7642d530bdf62a0412e1428f43b06aba9b6011327298b0cdcb92eeacf479d"
+    },
+    "rendering.perk_screen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\perk_screen.py",
+      "relative": "rendering/perk_screen.py",
+      "sha256": "76534c9fbae52a85502632cad3720153ceeef2ff1cf8e9b39a0fb4c566d6ee90"
+    },
+    "rendering.renderer": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\renderer.py",
+      "relative": "rendering/renderer.py",
+      "sha256": "092b84d77e19d356ef3d2fa89b8e6b3b020804dbf0312f0b11995b3b6caabc08"
+    },
+    "rendering.sprite_registry": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\sprite_registry.py",
+      "relative": "rendering/sprite_registry.py",
+      "sha256": "814c1a6c4c1d56a0744a93feeccc2bf2a851becd98c3d40d09ddf19e4f997323"
+    },
+    "rendering.tile_registry": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\tile_registry.py",
+      "relative": "rendering/tile_registry.py",
+      "sha256": "9a9f07a3619d03401f6367601f00bd685024e1f0dc691a41c4cdfa0555c9162a"
+    },
+    "rendering.ui_registry": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\rendering\\ui_registry.py",
+      "relative": "rendering/ui_registry.py",
+      "sha256": "00937d4aea64748000b2bed24e68e8b839ea4f9340abae30990a0963a7ff2058"
+    },
+    "world.local_map": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\local_map.py",
+      "relative": "world/local_map.py",
+      "sha256": "a198d0b2d05ec86621d8d75ad27c12b499545edd8ba9f866e413316f1121460a"
+    },
+    "world.name_gen": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\name_gen.py",
+      "relative": "world/name_gen.py",
+      "sha256": "8e5d788c75b1e0d4183e83bb823298a4008d57ab84fda887cd6bb84648397546"
+    },
+    "world.world_map": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\world_map.py",
+      "relative": "world/world_map.py",
+      "sha256": "400e274bf760444bfcaec9aa617212021e9fc42a0826430f2c2edce501a73ba9"
+    },
+    "world.world_myth": {
+      "path": "G:\\GameDev\\RoguelikeProject\\roguelike\\world\\world_myth.py",
+      "relative": "world/world_myth.py",
+      "sha256": "bf9ccc805b376deafd9e43f9f0cc092f2b2b6a1d66e967b2d9ea0ca76be9dc80"
+    }
+  },
+  "passed": true
+}

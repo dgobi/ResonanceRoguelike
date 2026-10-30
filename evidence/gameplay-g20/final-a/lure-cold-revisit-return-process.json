@@ -1,0 +1,28 @@
+{
+  "name": "lure-cold-revisit-return",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g20_journey.py",
+    "--stage",
+    "homeward",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\lure-return",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\lure\\altered-exit.zip",
+    "--route",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g20\\final-a\\expedition\\route.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T07:44:31.724977+00:00",
+  "end_utc": "2026-10-30T07:44:58.068107+00:00",
+  "seconds": 26.342650900012814,
+  "exit_code": 0,
+  "error": null,
+  "log": "lure-cold-revisit-return-output.txt",
+  "log_sha256": "434f5ef63cf43284b3614f30b5071a745d3cb1ad87052b24ecc37f011fa262d2",
+  "source_stable": true,
+  "passed": true
+}
