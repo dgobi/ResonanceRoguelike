@@ -22,7 +22,7 @@ class RegisteredPools(unittest.TestCase):
         self.save(SOURCE,raw);return pool.validate_pool(raw,self.data(),SOURCE,self.data_root,bounded=bounded)
     def test_inventory_and_repairable_values_original_source_policy(self):
         rows=[r for r in invoke('describe')['result']['assets'] if r.get('family_id')=='pool']
-        self.assertEqual(len(rows),17);self.assertTrue(all(r['editable'] for r in rows))
+        self.assertEqual(len(rows),18);self.assertTrue(all(r['editable'] for r in rows))
         raw={'id':'alchemist_reagents','items':None,'roll_count':None};self.save(SOURCE,raw)
         result=invoke('inspect',root=self.root,asset=SOURCE)['result'];self.assertTrue(result['editable']);self.assertFalse(result['valid'])
         fixed={**raw,'items':[]};fixed.pop('roll_count')

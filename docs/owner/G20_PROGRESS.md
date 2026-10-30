@@ -11,7 +11,7 @@ matches current source exactly; 44 G18/G19 focused tests pass again. Its full
 readback and authority hashes: `evidence/gameplay-g20/preflight.json`.
 Unrelated untracked Workbench proposal is preserved. No campaign is opened.
 
-Current phase: C focused acceptance complete; freeze source and run final release.
+Current phase: final release correction, then complete affected full gates.
 Last accepted release: G19 SHA above. A/B/C remain implementation checkpoints.
 Pre-change tag: `checkpoint/gameplay-g20-start-20261030-a`.
 
@@ -66,12 +66,29 @@ also proves stale-source rejection. The true four workshop orientations pass
 (`sample-d35`); the previous harness wrote an ignored root rotation field, so its
 orientation repetitions are not certification. No runtime rotation defect.
 
-Next commands: commit C implementation checkpoint, commit final gate inputs, then
-`python -X utf8 -B tools/verify_g20.py --evidence evidence/gameplay-g20/final-a`.
-Do not edit any covered input while gates run. Review receipts, complete
+Final-a ran 07:39:30–07:59:58 UTC, 1229.677 seconds of overlapping wall time.
+Unfiltered production D passes all 3704 assertions/159 workers/7 negatives.
+Package, frontend/host/clippy, native hearing, historical comparisons, all original
+loops and both cold ordinary expeditions pass. Full focused408 has three stale
+expectations; worker115 has two. Four are canonical counts (+room/workshop/pool).
+The fifth exact pre-G11 whole-world comparison needs its historical disabled
+assignment input, rather than current enabled G20 assignments. Full comparison
+is retained, no archived world or validator changes. Three focused corrections
+pass. Five test files only change; game/package/driver inputs remain unchanged.
+
+Next: commit corrected inputs, run complete unfiltered focused and worker suites
+in `final-b`, with explicit unchanged-input bindings reusing unaffected final-a
+gates. Do not edit any covered input while gates run. Review receipts, complete
 `GAMEPLAY_G20.md`, commit evidence and report, create final verified tag, then push
 main and all G20 checkpoints and read back origin. Source-bound final gates and
 demonstrations remain required; passing development checks are not a delivery.
+A supplemental original-loop genuine G16 archived null-handler shard is taken,
+saved owned, restored into a fresh Engine and thrown with fields exact. Both
+stages share one Python process; expedition continuations use separate processes.
+
+Clock observation: next tool clock after the completed final-a receipt was
+19:04 UTC. That gap is not included in its measured 20.5-minute gate duration
+and is not evidence of productive test execution. Preserve actual timestamps.
 Final obligations: unfiltered focused discovery and production D, negative
 controls, genuine historical comparison, original-loop and cold continuations;
 applicable Workbench contract/worker/frontend/build/native checks; report,

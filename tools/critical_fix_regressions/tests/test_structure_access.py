@@ -58,7 +58,7 @@ class StructureAccessTests(unittest.TestCase):
             e._handle_key(pygame.K_RETURN)
             self.assertIn(item,e.player.inventory.items);self.assertNotIn(item,container['items'])
         selected=registration(doc,self.data,'residential')
-        self.assertTrue(selected['passed']);self.assertEqual(selected['preserved_installed_candidates'],60)
+        self.assertTrue(selected['passed']);self.assertEqual(selected['preserved_installed_candidates'],61)
         self.assertTrue(all(len(p['objects'])==3 for p in selected['placements']))
 
     def test_submap_preview_entry_return_and_real_travel(self):
