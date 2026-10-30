@@ -1,7 +1,9 @@
 # G21 — Local rivals and consequences
 
-Implementation is undergoing final verification; publication is pending. Final
-receipts and remote delivery are recorded before completion.
+Scope verified. Delivery reference: `checkpoint/gameplay-g21-verified-20261030-a`.
+The full delivered SHA and exact origin readback are retained outside this
+self-referencing commit in `.baseline/g21-publication.json` and the completion
+message. No later arc commission is started.
 
 Start: `e142545567ba9f92722c4a6ee2eea92dcbf31a24`, matching reviewed G20.
 `checkpoint/gameplay-g21-start-20261030-a` preserves it. The owner's unrelated
@@ -93,8 +95,10 @@ ordinary live extraction/arrival and meets the native Stalker from `(7,33)` in
 `(64,121)`. Both select and attack each other while the player withdraws. Actor,
 terrain, resource, health and population staging are absent. Full-state scripted
 route assistance and one staged player entry do not establish unaided discovery.
-The initial development formation costs 56 phases and 12 player HP; final values
-must be taken from the frozen witness.
+The frozen witness costs 56 phases and 12 player HP, ending at turn 536 / HP48.
+Both creatures survive their first mutual strikes. Only the first declared pair
+is used; identical source-certification repeats are not additional adaptive
+search attempts. No second candidate or extra sample is used.
 
 Prepared comparisons use the exact genuine G20 prepared-return archive (seed
 20261023), independently restored and staged into one native authored room with
@@ -143,18 +147,81 @@ visited restoration, cold load and F9 remain active, so this binding cannot mask
 saved-perception restoration. The initial final-d focused rerun was superseded
 while narrowing this test-input boundary. Exact archive byte checks, expected whole-scene fingerprints and
 the fingerprint validator remain unchanged; production loading/definitions are
-unchanged. Both corrected targeted checks pass. Final-e reruns all 429 focused
-tests; final-c's other gates may be retained only under exact unchanged-input
-boundaries. No runtime/data/driver/Workbench/package input changes with this fix.
+unchanged. Both corrected targeted checks pass. Final-e passes all 429 focused
+tests; final-c's other gates are retained under exact unchanged-input boundaries.
+No runtime/data/driver/Workbench/package input changes with this fix.
 
 ## Verification and publication
 
-Frozen input revision, exact commands, source bindings, Windows environment,
-actual gate counts, failures, package identity and remote readback are recorded
-in final receipts before this report is marked delivered. No development check
-or Linux diagnostic is substituted for the required Windows release gates.
+Focused input: `3ae7d8c3c4aff3dec9d49f8e6e35ebd30fe138d5`. Retained runtime,
+play and Workbench input: `adb28ac838facfc53cd6426f763e13a165fbe413`. The only
+covered-source differences are two historical focused-test files, listed in
+[final-e inputs](../../evidence/gameplay-g21/final-e/inputs.json). Runtime/data,
+authoritative guides, executed play/production drivers, frontend/worker/Rust,
+bridge/bundled runtime and package inputs remain byte-identical. Retained gates
+do not import the changed regression modules. No changed test input is skipped.
+
+| Required check | Actual final result |
+| --- | --- |
+| Unfiltered focused regressions | 429/429 pass |
+| Unfiltered production D | 3,704/3,704 assertions; 159/159 workers; seven negative controls |
+| Workbench frontend / TypeScript | 90 tests; typecheck passes |
+| Workbench host / clippy | 71 Rust tests; warnings denied |
+| Workbench worker | 117 tests: 116 pass, one existing embedded-interpreter skip; separate development-interpreter dependency control passes |
+| NSIS / native application | Pinned bundle, hearing and reciprocal/directional/unmatched/empty-list publication/reopen/runtime probes pass |
+| Historical / original loops | Genuine G14/G16 archives, G19/G20 loops and all seven G21 stages pass |
+
+Windows x64, CPython 3.11.0, pygame 2.6.1, tcod 19.3.0, NumPy 2.4.6. Commands,
+versions, logs and source bindings are in [final-c](../../evidence/gameplay-g21/final-c/release.json)
+and [final-e](../../evidence/gameplay-g21/final-e/release.json). Both completed sets
+preserve their frozen sources. Final-c remains failed overall because of its two
+historical input expectations; its 21 individually passing unaffected gates are
+explicitly retained. A/B/D remain incomplete diagnostic runs.
+
+Final-c ran 2026-10-30T21:05:31.287329+00:00 through
+21:32:59.095306+00:00, 1,647.927 overlapping wall seconds. Final-e ran
+21:40:39.095481+00:00 through 22:03:20.352082+00:00, 1,361.255 wall seconds.
+Process durations are not summed into wall time; correction/inspection gaps are
+not characterized as execution.
+
+All prepared branches start at turn 1011 / HP60 from identical archived ownership.
+The table ends after passage plus eight ordinary observation phases. A separate
+one-wait F9 restore diagnostic is excluded from comparison deltas.
+
+| Continuation | Passage phases / HP | Final phases / HP | Player attack exposures | Spent / aftermath |
+| --- | --- | --- | --- | --- |
+| Conflict and far flank | 16 /57 | 24 /33 | 12 | No preparation; Bandit corpse, Stalker HP11 |
+| Musk and direct passage | 12 /57 | 20 /48 | 5 | One real pellet; Stalker corpse, Bandit HP8 |
+| Unprepared direct control | 11 /46 | 19 /23 | 12 | No preparation; Stalker corpse, Bandit HP15 |
+
+All three checkpoints have zero player kill XP. Flint remains in all three; both
+unprepared branches retain the pellet. The throw leaves five protected phases,
+with no actor movement/accumulator gain, followed by ordinary recovered combat.
+The genuine prepared ZIP is byte-identical to its published G20 blob; SHA256
+`54e4bd8b0a7913bac1a0b4c755b955b621a8587bef92072bbdf123afac292530`.
+
+Controlled lethal: 0 XP after the creature fatal, 45 after the separate player
+fatal, unchanged after five-phase harvest. Stalker Meat, Sinew, Bone and Viscera
+persist, and prior fractional debt .2 is preserved. A [supplemental cold frame](../../evidence/gameplay-g21/supplement/rendered-cold-revisit/cold-revisit-rendered.png)
+from the original loop shows the retained outputs and separate Bandit remains,
+with zero new phases. The earlier direct-return capture preceded its render and
+is not used as visual proof of the returned room; its state assertions remain valid.
+
+New executable SHA256:
+`74550e2870bf0cb66371f3c7557c72ff2008c6436703b4983033a260c9288a18`.
+New 0.9.0 NSIS SHA256:
+`8d1b76be508a3934f4af95e0434a89faa8d1350b02232844b5f1c4697569237f`.
+Other installer versions in build-directory listings are historical. The owner's
+installed application was not replaced. [Completion metadata](../../evidence/gameplay-g21/completion.json)
+retains provenance, resource, credit, package, source-binding and boundary details.
+
+Publication uses the final report/evidence commit and verified checkpoint, an
+atomic non-force push of `main` and every G21 checkpoint, exact origin readback,
+and a final committed-blob/input audit. The publication receipt is outside the
+commit it identifies. Unrelated owner work remains separate.
 
 Remaining scope limits: one rivalry, ordinary WanderingAI only, active-scene
 combat, finite local memory, no assists or contribution scoring, no global ecology
-or diplomacy. This completes a bounded G21 interaction when its gates and
-publication finish; it does not declare H1 or the whole arc complete.
+or diplomacy. Native entry/route assistance, prepared-room staging and controlled
+lethal HP/RNG are separately disclosed; no unaided discovery or universal balance
+claim is made. G21 does not declare H1 or the whole arc complete.

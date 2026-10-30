@@ -1,0 +1,310 @@
+{
+  "tested_input": "3ae7d8c3c4aff3dec9d49f8e6e35ebd30fe138d5",
+  "native_budget": "evidence/gameplay-g21/native-budget.json",
+  "native": {
+    "seed": 20261030,
+    "phase_delta": 56,
+    "hp_start": 60,
+    "hp_finish": 48,
+    "final_position": [
+      10,
+      20
+    ],
+    "rival_attacks": [
+      {
+        "turn": 536,
+        "attacker": "64,121/:00000001",
+        "attacker_definition": "heath_stalker",
+        "defender": "64,121/:00000002",
+        "defender_definition": "highland_bandit",
+        "selected": {
+          "id": "64,121/:00000002",
+          "owner": "64,121/",
+          "x": 7,
+          "y": 21,
+          "deadline": 546
+        },
+        "committed": true,
+        "hp_before": 16,
+        "hp_after": 15
+      },
+      {
+        "turn": 536,
+        "attacker": "64,121/:00000002",
+        "attacker_definition": "highland_bandit",
+        "defender": "64,121/:00000001",
+        "defender_definition": "heath_stalker",
+        "selected": {
+          "id": "64,121/:00000001",
+          "owner": "64,121/",
+          "x": 8,
+          "y": 22,
+          "deadline": 546
+        },
+        "committed": true,
+        "hp_before": 14,
+        "hp_after": 13
+      }
+    ],
+    "scope": "One disclosed player entry, unchanged native generation and creatures, genuine eastward player pursuit; same route repeated for source certification, no adaptive search or preferred winner resets."
+  },
+  "branches": {
+    "conflict": {
+      "phases_to_passage": 16,
+      "passage_hp": 57,
+      "checkpoint_phases": 24,
+      "checkpoint_hp": 33,
+      "final_position": [
+        50,
+        16
+      ],
+      "xp": 0,
+      "player_attack_exposure": 12,
+      "survivors": [
+        {
+          "definition": "heath_stalker",
+          "hp": 11,
+          "state": "attacking"
+        }
+      ],
+      "remains": [
+        {
+          "xy": [
+            42,
+            19
+          ],
+          "id": "corpse",
+          "source": "highland_bandit",
+          "decay": 131
+        }
+      ],
+      "musk_spent": 0,
+      "note": "Principal continuation through passage plus eight-phase observation. One later unsaved wait is rolled back by the separate F9 diagnostic and excluded from comparison deltas."
+    },
+    "musk": {
+      "phases_to_passage": 12,
+      "passage_hp": 57,
+      "checkpoint_phases": 20,
+      "checkpoint_hp": 48,
+      "final_position": [
+        46,
+        16
+      ],
+      "xp": 0,
+      "player_attack_exposure": 5,
+      "survivors": [
+        {
+          "definition": "highland_bandit",
+          "hp": 8,
+          "state": "attacking"
+        }
+      ],
+      "remains": [
+        {
+          "xy": [
+            43,
+            17
+          ],
+          "id": "corpse",
+          "source": "heath_stalker",
+          "decay": 143
+        }
+      ],
+      "musk_spent": 1,
+      "note": "Principal continuation through passage plus eight-phase observation. One later unsaved wait is rolled back by the separate F9 diagnostic and excluded from comparison deltas."
+    },
+    "passive": {
+      "phases_to_passage": 11,
+      "passage_hp": 46,
+      "checkpoint_phases": 19,
+      "checkpoint_hp": 23,
+      "final_position": [
+        46,
+        16
+      ],
+      "xp": 0,
+      "player_attack_exposure": 12,
+      "survivors": [
+        {
+          "definition": "highland_bandit",
+          "hp": 15,
+          "state": "attacking"
+        }
+      ],
+      "remains": [
+        {
+          "xy": [
+            43,
+            17
+          ],
+          "id": "corpse",
+          "source": "heath_stalker",
+          "decay": 141
+        }
+      ],
+      "musk_spent": 0,
+      "note": "Principal continuation through passage plus eight-phase observation. One later unsaved wait is rolled back by the separate F9 diagnostic and excluded from comparison deltas."
+    }
+  },
+  "prepared": {
+    "archive": "evidence/gameplay-g20/final-a/expedition/preparation/prepared-return.zip",
+    "sha256": "54e4bd8b0a7913bac1a0b4c755b955b621a8587bef92072bbdf123afac292530",
+    "seed": 20261023,
+    "state": {
+      "chunk": [
+        73,
+        99
+      ],
+      "submap": "g21-rival-room",
+      "position": [
+        42,
+        23
+      ],
+      "turn": 1011,
+      "hp": 60,
+      "hunger": 0.5310000000000004,
+      "thirst": 0.1839999999999958,
+      "inventory": [
+        "tallow_torch",
+        "crow_jerky",
+        "crude_blade",
+        "leather_jack",
+        "moist_pebble",
+        "flint_shard",
+        "tallow_torch",
+        "crow_jerky",
+        "water_flask",
+        "letter",
+        "musk_pellet",
+        "empty_water_skin"
+      ],
+      "torch": [
+        {
+          "id": "tallow_torch",
+          "used": 25,
+          "total": 600,
+          "lit": true
+        },
+        {
+          "id": "tallow_torch",
+          "used": 0,
+          "total": 600,
+          "lit": false
+        }
+      ],
+      "offhand": "tallow_torch"
+    },
+    "full_state_receipt": "final-c/play/common/result.json",
+    "published_G20_blob_exact": true
+  },
+  "lethal": {
+    "xp_start": 0,
+    "after_creature_fatal": 0,
+    "after_direct_player_kill": 45,
+    "harvest": {
+      "turns": 5,
+      "debt_before": 0.20000000000000062,
+      "debt_after": 0.20000000000000107,
+      "xp": 45,
+      "outputs": [
+        "stalker_meat",
+        "animal_sinew",
+        "animal_bone",
+        "crude_viscera"
+      ],
+      "cutters": [
+        {
+          "id": "crude_blade",
+          "tier": 1
+        }
+      ]
+    }
+  },
+  "runtime_input": "adb28ac838facfc53cd6426f763e13a165fbe413",
+  "status": "Verified; delivered SHA and remote readback are outside this self-referencing commit in .baseline/g21-publication.json and the completion message.",
+  "delivery_reference": "checkpoint/gameplay-g21-verified-20261030-a",
+  "verification": {
+    "focused": {
+      "tests": 429,
+      "passed": true,
+      "receipt": "final-e/release.json",
+      "source_stable": true
+    },
+    "production": {
+      "totals": {
+        "checks": 3704,
+        "passed": 3704,
+        "failed": 0,
+        "workers": 159
+      },
+      "runner_negative_controls": 7,
+      "unfiltered": true,
+      "passed": true
+    },
+    "workbench": {
+      "frontend": 90,
+      "host_rust": 71,
+      "worker_tests": 117,
+      "worker_passes": 116,
+      "worker_expected_skips": 1,
+      "separate_missing_dependency_control_passed": true,
+      "typecheck": true,
+      "clippy_warnings_denied": true,
+      "nsis": true,
+      "native_hearing": true,
+      "native_relationships": true,
+      "receipt": "final-c/release.json"
+    },
+    "source_bindings": 1055,
+    "total_frozen_inputs": 2864,
+    "retained_gates": 21,
+    "unchanged_input_boundaries": "final-e/inputs.json",
+    "environment": {
+      "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+      "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "dependencies": {
+        "pygame": "2.6.1",
+        "tcod": "19.3.0",
+        "numpy": "2.4.6"
+      }
+    },
+    "complete_first_set": {
+      "start": "2026-10-30T21:05:31.287329+00:00",
+      "finish": "2026-10-30T21:32:59.095306+00:00",
+      "wall_seconds": 1647.9267478000838,
+      "passed": false,
+      "reason": "Two historical test input mismatches; corrected without changing runtime, archives or validator."
+    },
+    "focused_rerun": {
+      "start": "2026-10-30T21:40:39.095481+00:00",
+      "finish": "2026-10-30T22:03:20.352082+00:00",
+      "wall_seconds": 1361.2552928999066
+    }
+  },
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "74550e2870bf0cb66371f3c7557c72ff2008c6436703b4983033a260c9288a18"
+    },
+    "installer": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "8d1b76be508a3934f4af95e0434a89faa8d1350b02232844b5f1c4697569237f"
+    },
+    "installed_owner_application_replaced": false,
+    "older_installers": "Historical artifacts, not certified by this build"
+  },
+  "supplement": {
+    "receipt": "supplement/rendered-cold-revisit/result.json",
+    "rendered_frame": "supplement/rendered-cold-revisit/cold-revisit-rendered.png",
+    "world_phases": 0,
+    "reason": "Separate original-loop cold-load frame replaces the prior pre-render surface capture as visual evidence; no runtime change."
+  },
+  "limits": [
+    "Ordinary WanderingAI without ID-bound abilities; one canonical pair; active-scene rivalry only.",
+    "Historical actors retain saved faction/lists.",
+    "Native entry/route assistance, prepared authored-room staging and controlled lethal HP/RNG are disclosed separately; no unaided discovery or universal balance claim.",
+    "Cold revisit uses native transition methods for a noncanonical fixture; no new canonical entrance.",
+    "Finite comparison deltas exclude the separately restored one-wait F9 diagnostic.",
+    "Package built and checked, owner installation not replaced; H1 and arc completion remain open."
+  ]
+}

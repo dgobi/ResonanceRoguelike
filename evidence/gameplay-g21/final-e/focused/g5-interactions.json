@@ -1,0 +1,19 @@
+{
+  "asset": "apothecary_a",
+  "container": [
+    64,
+    31
+  ],
+  "before": 2,
+  "remaining": 1,
+  "landmark": "waymarker_shelter_a",
+  "authored_waystone": [
+    48,
+    27
+  ],
+  "realized_representation": "decor (legend terrain converted by layout_stamper._set_tile)",
+  "inscription": "waystone_plains_a",
+  "cold_load": true,
+  "f9": true,
+  "controls": "app-local fixture travel/positioning; stationary AI; production interaction, transfer, save and load handlers"
+}

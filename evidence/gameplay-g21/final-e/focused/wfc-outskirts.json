@@ -1,0 +1,52 @@
+[
+  {
+    "seed": 0,
+    "status": "fallback",
+    "attempts_bound": 10
+  },
+  {
+    "seed": 1,
+    "status": "fallback",
+    "attempts_bound": 10
+  },
+  {
+    "seed": 2,
+    "status": "fallback",
+    "attempts_bound": 10
+  },
+  {
+    "seed": 3,
+    "status": "fallback",
+    "attempts_bound": 10
+  },
+  {
+    "seed": 4,
+    "status": "fallback",
+    "attempts_bound": 10
+  },
+  {
+    "seed": 5,
+    "status": "fallback",
+    "attempts_bound": 10
+  },
+  {
+    "seed": 6,
+    "status": "fallback",
+    "attempts_bound": 10
+  },
+  {
+    "seed": 7,
+    "status": "fallback",
+    "attempts_bound": 10
+  },
+  {
+    "seed": 8,
+    "status": "fallback",
+    "attempts_bound": 10
+  },
+  {
+    "seed": 9,
+    "status": "fallback",
+    "attempts_bound": 10
+  }
+]
