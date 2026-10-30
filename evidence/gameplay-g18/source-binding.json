@@ -1,0 +1,75 @@
+{
+  "head": "323f5d7d159711f905895655f62ccefcb94eb9a3",
+  "changed_files": [
+    {
+      "path": "docs/owner/TUNING_EXISTING_FEATURES.md",
+      "working_sha256": "26eee179673267acf4ef54ae8d6ccb46384b975bd1b0797c7425ec2c20e41fc2",
+      "git_sha256": "519a34156ed8adf2a74e9c0235f9a4227d7bcf5db0519607c7ccec311c99f0c0",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/data/items/weapons/heavy_blade.json",
+      "working_sha256": "d310ad88c739248dd92938535753c80e2d1b1f84821a7b821b18db7b6829c426",
+      "git_sha256": "d310ad88c739248dd92938535753c80e2d1b1f84821a7b821b18db7b6829c426",
+      "raw_equal": true,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/crafting.py",
+      "working_sha256": "7d5720bc9d5c2ca8a45af84e406c038e8ec0124967afeb704f394d4bb9f9b57f",
+      "git_sha256": "9fd5716419cbebd1061b627195c3f2fcf82a40e86bf482ff2c18a4fbdfdfb17b",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/engine.py",
+      "working_sha256": "f8984ef6b70df670cc73d140ba6b0ea16a9a5f88e9b89a658f6d12e52e127819",
+      "git_sha256": "f8984ef6b70df670cc73d140ba6b0ea16a9a5f88e9b89a658f6d12e52e127819",
+      "raw_equal": true,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/inventory_screen.py",
+      "working_sha256": "4bb8d72297005ce8b08ae1516fd567d66c98dc34c8a847d1829a08578aaff91b",
+      "git_sha256": "86a72981e8e82f69a3495ff5ee8491d4636f3a4610d08803baac6b7893312092",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/item_system.py",
+      "working_sha256": "18498f29507c74f747ef4e0c497b5a99642158da26c7d5a7d448b082bf9ebb86",
+      "git_sha256": "18498f29507c74f747ef4e0c497b5a99642158da26c7d5a7d448b082bf9ebb86",
+      "raw_equal": true,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/engine/save_components.py",
+      "working_sha256": "be90996df7e82bc0b2e87f98b2e504465620aa85b85c6bffe3377dbd4c06cbc8",
+      "git_sha256": "900099af3a629dac666dad2cc3e7fd7f89a9dd9eb9ace75dd1d30e7393bf698f",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "roguelike/rendering/perk_screen.py",
+      "working_sha256": "76534c9fbae52a85502632cad3720153ceeef2ff1cf8e9b39a0fb4c566d6ee90",
+      "git_sha256": "a9ced8e3635eb97cc85329a64461c1d9186f957d954c261fadeecc379d55c607",
+      "raw_equal": false,
+      "lf_equal": true
+    },
+    {
+      "path": "tools/critical_fix_regressions/tests/test_gameplay_g18.py",
+      "working_sha256": "04aea8bc225f2e73a783ed19621d13f7212f201aa50251ef589a3348b385486e",
+      "git_sha256": "04aea8bc225f2e73a783ed19621d13f7212f201aa50251ef589a3348b385486e",
+      "raw_equal": true,
+      "lf_equal": true
+    },
+    {
+      "path": "tools/verify_g18.py",
+      "working_sha256": "a69cb869900b397fe01cc61873b4e9f681dc2df45b1b3d819506957097b42aef",
+      "git_sha256": "a69cb869900b397fe01cc61873b4e9f681dc2df45b1b3d819506957097b42aef",
+      "raw_equal": true,
+      "lf_equal": true
+    }
+  ]
+}

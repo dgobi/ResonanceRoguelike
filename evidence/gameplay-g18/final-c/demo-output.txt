@@ -1,0 +1,10 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 17
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+{"passed": true, "seconds": 33.18799999996554, "trace": [{"label": "crude blade equipped through inventory", "state": [481, 0, 0.0, false, 0.0], "position": [12, 12], "cooldowns": {}, "hp": 25}, {"label": "legal Desperate Slash", "state": [482, -200000, 0.0, false, 0.0], "position": [12, 12], "cooldowns": {"desperate_slash": 7}, "hp": 25}, {"label": "Press killing blow settled", "state": [484, -200000, 0.0, true, 0.0], "position": [12, 12], "cooldowns": {"desperate_slash": 5, "press": 2}, "hp": 25}, {"label": "blocked input preserves opportunity", "state": [484, -200000, 0.0, true, 0.0], "position": [12, 12], "cooldowns": {"desperate_slash": 5, "press": 2}, "hp": 25}, {"label": "first step uses momentum", "state": [484, -200000, 0.0, false, 0.0], "position": [12, 13], "cooldowns": {"desperate_slash": 5, "press": 2}, "hp": 25}, {"label": "second step pays", "state": [485, -200000, 0.0, false, 0.0], "position": [12, 14], "cooldowns": {"desperate_slash": 4, "press": 1}, "hp": 25}, {"label": "rewound pending then wait expires", "state": [485, -200000, 0.0, false, 0.0], "position": [12, 12], "cooldowns": {"desperate_slash": 4, "press": 1}, "hp": 25}], "checks": 123}

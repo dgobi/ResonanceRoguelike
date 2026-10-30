@@ -1,0 +1,58 @@
+{
+  "starting_revision": "92bc185f0bbf60ee4a69125798ddcff65908b33a",
+  "tested_revision": "323f5d7d159711f905895655f62ccefcb94eb9a3",
+  "development": [
+    {
+      "command": "python -X utf8 -m unittest test_gameplay_g18 -v",
+      "passed": true,
+      "tests": 18,
+      "seconds": 12.698
+    },
+    {
+      "command": "python -X utf8 -m unittest test_gameplay_g18 test_combat_routes test_harvest_w5n test_gameplay_g14 test_gameplay_g15 -v",
+      "passed": false,
+      "tests": 57,
+      "seconds": 39.148,
+      "failures": 1,
+      "reason": "Added harvest fixture selected sewer_thing, which has no authored butcher_yield; corrected to real hollow_revenant; targeted rerun passed."
+    },
+    {
+      "command": "python -X utf8 tools/verify_d.py --evidence evidence/gameplay-g18/final-a/production-d",
+      "passed": false,
+      "reason": "Unchanged b3_worker allowed_roots rejected the disposable run path before gameplay. Final rerun uses .baseline/gameplay-g18-final-b."
+    },
+    {
+      "command": "python -X utf8 tools/verify_g18.py --evidence evidence/gameplay-g18/development-demo",
+      "passed": false,
+      "reason": "Initial driver did not disable debug mode; F5 is intentionally disabled in debug. Final driver configures nondebug before importing engine."
+    },
+    {
+      "command": "cold continuation --cold ROOT -1",
+      "passed": false,
+      "reason": "Restored factory AI killed the low-HP isolated target fixture during cooldown waits; final arithmetic continuation explicitly suppresses AI processing and bounds the wait loop. No production code or cooldown was bypassed."
+    },
+    {
+      "command": "python -X utf8 -m unittest test_gameplay_g18 -v",
+      "passed": true,
+      "tests": 23,
+      "seconds": 13.202
+    },
+    {
+      "command": "final-b full gates",
+      "passed": false,
+      "reason": "Intentionally interrupted after 59 passing D workers when source review found successful phase-free crafting/perk commits retained Press. Added bounded expiry and real-input tests. Final-c reruns all gates without filters."
+    }
+  ],
+  "omitted_claims": [
+    "No natural acquisition or discovery",
+    "No normal-start expedition",
+    "No complete future RNG replay equality",
+    "No Python 3.12 equivalence",
+    "No wiki changes or follow-on arc implementation"
+  ],
+  "owner_work": {
+    "path": "RESONANCE_WORKBENCH_PLAN_PROPOSED_2026-10-25.md",
+    "status": "pre-existing untracked; untouched",
+    "sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a"
+  }
+}

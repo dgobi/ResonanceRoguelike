@@ -1,0 +1,7 @@
+{
+  "turn": 481,
+  "debt": -0.19999999999999996,
+  "hp": 15,
+  "save": false,
+  "error": "component_state.engine._move_debt: invalid or missing number"
+}

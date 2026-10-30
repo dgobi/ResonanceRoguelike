@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "starting_revision": "92bc185f0bbf60ee4a69125798ddcff65908b33a",
+  "tested_revision": "323f5d7d159711f905895655f62ccefcb94eb9a3",
+  "delivery_tag": "checkpoint/gameplay-g18-verified-20261029-a",
+  "source_stable": true,
+  "source_inputs": 822,
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "commands": {
+    "focused": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tools/critical_fix_regressions/verify_fixes.py",
+      "--timeout",
+      "3600",
+      "--evidence",
+      "evidence/gameplay-g18/final-c/focused"
+    ],
+    "production-d": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tools/verify_d.py",
+      "--evidence",
+      ".baseline/gameplay-g18-final-c"
+    ],
+    "demo": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tools/verify_g18.py",
+      "--evidence",
+      "evidence/gameplay-g18/final-c/demo"
+    ],
+    "historical": [
+      "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "tools/g15_historical.py",
+      "--output",
+      "evidence/gameplay-g18/final-c/historical.json",
+      "--baseline",
+      "evidence/gameplay-g18/pre-edit-historical.json"
+    ]
+  },
+  "processes": {
+    "focused": {
+      "finished_utc": "2026-10-30T04:31:19.2021942Z",
+      "started_utc": "2026-10-30T03:58:59.3488892Z",
+      "seconds": 1939.8547669,
+      "exit_code": 0
+    },
+    "production-d": {
+      "exit_code": 0,
+      "finished_utc": "2026-10-30T04:14:30.0006881Z",
+      "seconds": 930.6414034,
+      "started_utc": "2026-10-30T03:58:59.3618587Z"
+    },
+    "demo": {
+      "exit_code": 0,
+      "seconds": 34.5676376,
+      "started_utc": "2026-10-30T03:58:59.3899331Z",
+      "finished_utc": "2026-10-30T03:59:33.9547683Z"
+    },
+    "historical": {
+      "finished_utc": "2026-10-30T03:59:04.9162821Z",
+      "seconds": 5.513101,
+      "started_utc": "2026-10-30T03:58:59.4063001Z",
+      "exit_code": 0
+    }
+  },
+  "focused_tests": 357,
+  "focused_unittest_seconds": 1935.578,
+  "production_totals": {
+    "checks": 3676,
+    "passed": 3676,
+    "failed": 0,
+    "workers": 159
+  },
+  "valid_workers": 159,
+  "negative_controls": 7,
+  "ordinary_workers": 146,
+  "intentional_crash_workers": 13,
+  "production_import_bindings": 14605,
+  "new_focused_tests": 23,
+  "wall_seconds": 1939.853305,
+  "wall_started_utc": "2026-10-30T03:58:59.348889+00:00",
+  "wall_finished_utc": "2026-10-30T04:31:19.202194+00:00",
+  "overlapping_process_durations_not_summed": true,
+  "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+  "dependencies": {
+    "pygame": "2.6.1",
+    "tcod": "19.3.0",
+    "numpy": "2.4.6"
+  },
+  "historical_exact": true,
+  "ordinary_loop_demo": true,
+  "publication": "local only; no push authorization supplied"
+}

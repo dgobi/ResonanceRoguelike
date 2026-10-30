@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "tested_revision": "323f5d7d159711f905895655f62ccefcb94eb9a3",
+  "source_inputs": 822,
+  "all_final_manifests_equal": true,
+  "current_source_matches": true,
+  "production_import_bindings": 14605,
+  "journey_import_bindings": 104,
+  "changed_git_inputs": 10,
+  "working_bytes_match_tested_manifest": true,
+  "git_content_matches_after_explicit_crlf_lf_comparison": true,
+  "final_results": {
+    "focused": true,
+    "production": true,
+    "historical": true,
+    "journey": true
+  }
+}
