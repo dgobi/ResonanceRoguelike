@@ -75,8 +75,22 @@ def orientations(raw,data,*,seed=20261023,path='<draft>',category=None):
                     field=row['target'];found=re.match(r'placement\.(targets|entrances)\[(\d+)\]',field)
                     native=raw['placement'][found[1]][int(found[2])] if found else None
                     span=re.search(r'\.span\[(\d+)\]',field)
-                    xy=list(entrance_cells(native)[int(span[1])]) if span and native else [native['x'],native['y']] if native else None
+                    if span and native:
+                        # Span order is normalized after transformation. Invert the
+                        # failed coordinate, not its index in that normalized span.
+                        tx,ty=row['xy'][0]-ox,row['xy'][1]-oy
+                        sw,sh=len(raw['layers'][0]),len(raw['layers'])
+                        x,y=((tx,ty),(ty,sh-1-tx),(sw-1-tx,sh-1-ty),(sw-1-ty,tx))[rotation//90]
+                        if mirror:x=sw-1-x
+                        xy=[x,y]
+                        native_span=entrance_cells(native).index((x,y))
+                        transformed_field=field
+                        field=re.sub(r'\.span\[\d+\]',f'.span[{native_span}]',field)
+                    else:
+                        xy=[native['x'],native['y']] if native else None
+                        transformed_field=field
                     problem('ACCESS',field,'Required native goal/span failed at exact declared coordinates',xy)
+                    problems[-1].update(transformed_field=transformed_field,transformed_xy=[row['xy'][0]-ox,row['xy'][1]-oy],scene_xy=row['xy'])
             for d in report['source_diagnostics']:
                 if d['code']=='DEFERRED_SPECIAL':problem('UNSUPPORTED_PREVIEW_SPECIAL',d['field'],d['message'])
             report.update(rotation=rotation,mirror=mirror,width=80,height=43,valid=True,scene_seed=str(m.generation_context.scene_seed),scene_address=list(m.generation_context.address),

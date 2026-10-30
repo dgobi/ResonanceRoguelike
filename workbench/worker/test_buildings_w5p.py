@@ -69,6 +69,16 @@ class Buildings(unittest.TestCase):
         data=self.data();blocking=next(k for k,v in data.decoratives.items() if v.get('blocks_movement') and not v.get('container'))
         raw['decor_layer'][0][3]=blocking;self.save(SOURCE,raw)
         r=self.check(raw);self.assertFalse(r['valid']);self.assertTrue(any('.span[1]' in d['field'] and d.get('source_xy') for d in r['diagnostics']),r['diagnostics'])
+        failures=[d for d in r['diagnostics'] if d['code']=='ACCESS' and '.span[' in d['field']]
+        self.assertEqual(len(failures),8)
+        from generation.placement import transform,entrance_cells
+        for d in failures:
+            self.assertEqual(d['source_xy'],[3,0]);self.assertEqual(d['field'],'placement.entrances[0].span[1]')
+            oriented=transform(raw,d['rotation'],d['mirror'])
+            span=int(d['transformed_field'].split('.span[')[1][:-1])
+            self.assertEqual(d['transformed_xy'],list(entrance_cells(oriented['placement']['entrances'][0])[span]))
+            frame=next(f for f in r['preview']['orientations'] if (f['rotation'],f['mirror'])==(d['rotation'],d['mirror']))
+            self.assertEqual(d['scene_xy'],[a+b for a,b in zip(frame['origin'],d['transformed_xy'])])
         raw=example();raw['layers'][3]='#..#....#';self.save(SOURCE,raw);r=self.check(raw);self.assertFalse(r['valid'])
         self.assertTrue(any(d['field']=='placement.targets[0]' for d in r['diagnostics']));record=r['preview']['orientations'][0]['population_receipts'][1];self.assertTrue(record['relocated']);self.assertNotEqual(record['source_xy'],[record['xy'][0]-r['preview']['origin'][0],record['xy'][1]-r['preview']['origin'][1]])
     def test_remote_optional_entry_no_profile_and_transform_refusals(self):
