@@ -16,7 +16,7 @@ from engine.checkpoints import record
 from engine.scene_generation import create_surface
 from engine.save_manager import _serialize_player
 from g1_support import fingerprint
-from test_generation_g10_lifecycle import historical_relationship_inputs
+from test_generation_g10_lifecycle import historical_pending_scene
 
 FIXTURES=Path(__file__).resolve().parents[1]/'fixtures/g11'
 
@@ -37,14 +37,15 @@ class G11Lifecycle(unittest.TestCase):
             for name,expected in b['files'].items():
                 raw=z.read(name);self.assertEqual((len(raw),hashlib.sha256(raw).hexdigest()),(expected['bytes'],expected['sha256']))
         (slot/'HEAD.json').write_text(json.dumps(dict(checkpoint_version=1,current=manifest['generation'],previous=None)))
-        e=make_engine(historical_relationship_inputs(self.data,b))
+        e=make_engine(self.data)
         with patch('generation.world_plan.build_plan',side_effect=AssertionError('replanned')):
             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
             self.assertEqual(e.world_map.surface_policy,b['policy'])
             self.assertEqual(digest(_serialize_player(e)),b['player'])
             self.assertEqual(digest(e.world_map.plan),b['plan_identity'])
             for row in b['scenes']+b['pending']:
-                m,actors=e._prepare_destination(*row['chunk'])
+                m,actors=(historical_pending_scene(e,row,b) if row in b['pending']
+                          else e._prepare_destination(*row['chunk']))
                 self.assertEqual(fingerprint(m,actors),row['fingerprint'])
                 self.assertFalse(hasattr(m,'wilderness_access'))
             m,_=e._prepare_destination(*b['scenes'][0]['chunk'])

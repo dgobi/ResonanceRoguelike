@@ -46,6 +46,15 @@ def historical_relationship_inputs(data, binding):
     return result
 
 
+def historical_pending_scene(engine, row, binding):
+    # Only the unvisited factory invocation gets historical definition inputs.
+    # Archive load, visited deserialization, cold restore and F9 all retain the
+    # current G21 catalogue, so saved-perception restoration cannot be masked.
+    data=historical_relationship_inputs(engine.data,binding)
+    with patch.object(engine,'data',data),patch.object(engine.creature_factory,'data',data):
+        return engine._prepare_destination(*row['chunk'])
+
+
 class G10Lifecycle(unittest.TestCase):
     setUpClass=classmethod(g9.G9Lifecycle.setUpClass.__func__)
     setUp=g9.G9Lifecycle.setUp
@@ -62,13 +71,14 @@ class G10Lifecycle(unittest.TestCase):
             for name,expected in binding['files'].items():
                 raw=z.read(name);self.assertEqual((len(raw),hashlib.sha256(raw).hexdigest()),(expected['bytes'],expected['sha256']))
         (slot/'HEAD.json').write_text(json.dumps(dict(checkpoint_version=1,current=manifest['generation'],previous=None)))
-        e=make_engine(historical_relationship_inputs(self.data,binding))
+        e=make_engine(self.data)
         with patch('generation.world_plan.build_plan',side_effect=AssertionError('replanned')):
             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
             self.assertEqual(e.world_map.surface_schema,0);self.assertIsNone(e.world_map.surface_policy)
             self.assertEqual(digest(e.world_map.plan),binding['plan_identity'])
             for row in binding['scenes']+binding['pending']:
-                m,actors=e._prepare_destination(*row['chunk'])
+                m,actors=(historical_pending_scene(e,row,binding) if row in binding['pending']
+                          else e._prepare_destination(*row['chunk']))
                 self.assertEqual(fingerprint(m,actors),row['fingerprint']);self.assertIsNone(getattr(m,'surface_provenance',None))
             m,_=e._prepare_destination(*binding['scenes'][0]['chunk'])
             self.assertIn(tuple(binding['mutation']['waystone']),m.interacted_waystones)

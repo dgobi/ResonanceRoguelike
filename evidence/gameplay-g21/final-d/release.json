@@ -1,0 +1,90 @@
+{
+  "passed": false,
+  "tested_input_revision": "74d7285a30b3c3ad3c6ec0ecf79277fe9a0c67bf",
+  "retained_runtime_input_revision": "adb28ac838facfc53cd6426f763e13a165fbe413",
+  "started_utc": "2026-10-30T21:37:22.735263+00:00",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+    "--timeout",
+    "3600",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-d\\focused"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "environment": {
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "executable": "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    }
+  },
+  "retained_release": "../final-c/release.json",
+  "source_manifest": "inputs.json",
+  "production": {
+    "totals": {
+      "checks": 3704,
+      "passed": 3704,
+      "failed": 0,
+      "workers": 159
+    },
+    "runner_negative_controls": 7,
+    "unfiltered": true,
+    "passed": true
+  },
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "74550e2870bf0cb66371f3c7557c72ff2008c6436703b4983033a260c9288a18"
+    },
+    "installers": [
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.1.0_x64-setup.exe",
+        "sha256": "e3ba7d562db3df0b9f04e26f024b2f3c7d732dfc94366aeb89d8c8776811540a"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.2.0_x64-setup.exe",
+        "sha256": "9e87da9a4efda8781557e28dd5b49e0d0243e97315c65ea676e375f3babbdaeb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.3.0_x64-setup.exe",
+        "sha256": "ab49e110dd368aa069d81556ca4aca00f66c6bf0f28778f49fe46602b12529c8"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.4.0_x64-setup.exe",
+        "sha256": "877ce34f8cf1d086047c9ca99d41cb1aa94586408a9fcadd7ca8df8a98897bbb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.5.0_x64-setup.exe",
+        "sha256": "2f620c05945b82e695b5bcb96f075c760e39b6c61bde3425d2749488def8165c"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.6.0_x64-setup.exe",
+        "sha256": "2d5faf3e1e1c97684bc3d1c0f7448c1cddfdf2e926746cd4db3fc44d784730c9"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.0_x64-setup.exe",
+        "sha256": "9edef905e6e5de88d4fa738e76a76b7b7634aa9d8f4086ca6e9ed42a40307675"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.7.1_x64-setup.exe",
+        "sha256": "70273646bee5d2ae3737916455abe936846df2f8bb573504250344844f9eaffb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.8.0_x64-setup.exe",
+        "sha256": "f548ba9b1a747c04105f8c445a0aeb27c2b5214569a236fc15ed7963f94f24fb"
+      },
+      {
+        "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+        "sha256": "8d1b76be508a3934f4af95e0434a89faa8d1350b02232844b5f1c4697569237f"
+      }
+    ]
+  },
+  "interrupted_utc": "2026-10-30T21:39:58.735181+00:00",
+  "interruption_reason": "Historical fixture review tightened old-definition binding to pending factory invocations only. Current-catalogue archive load, visited restoration, cold load and F9 remain exercised. No runtime/data/Workbench/driver change. Superseded focused rerun only; final-e reruns all 429 tests with the refined two-file test boundary."
+}

@@ -138,9 +138,12 @@ The complete final-c set passes every gate except two historical pending-scene
 comparisons in the 429-test focused suite. Both expected original G9/G10 factory
 attitudes while generating fresh pending actors from G21 definitions. The tests
 now bind only faction/hostility to each immutable creator revision in an isolated
-DataLoader copy. Exact archive byte checks, expected whole-scene fingerprints and
+DataLoader copy only during unvisited factory calls. Current-catalogue load,
+visited restoration, cold load and F9 remain active, so this binding cannot mask
+saved-perception restoration. The initial final-d focused rerun was superseded
+while narrowing this test-input boundary. Exact archive byte checks, expected whole-scene fingerprints and
 the fingerprint validator remain unchanged; production loading/definitions are
-unchanged. Both corrected targeted checks pass. Final-d reruns all 429 focused
+unchanged. Both corrected targeted checks pass. Final-e reruns all 429 focused
 tests; final-c's other gates may be retained only under exact unchanged-input
 boundaries. No runtime/data/driver/Workbench/package input changes with this fix.
 
