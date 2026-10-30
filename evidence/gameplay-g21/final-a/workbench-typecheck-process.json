@@ -1,0 +1,18 @@
+{
+  "name": "workbench-typecheck",
+  "command": [
+    "npm.cmd",
+    "run",
+    "typecheck"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-30T20:40:39.321094+00:00",
+  "end_utc": "2026-10-30T20:40:47.785267+00:00",
+  "seconds": 8.464146699989215,
+  "exit_code": 0,
+  "error": null,
+  "log": "workbench-typecheck-output.txt",
+  "log_sha256": "77783bf2ca9523ff1e6aa3f5a098f779a50fd8cade5fb2774a4da5c450761c89",
+  "source_stable": true,
+  "passed": true
+}

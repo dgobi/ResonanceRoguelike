@@ -1,0 +1,24 @@
+{
+  "name": "g21-native",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g21_play.py",
+    "--stage",
+    "native",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-a\\play"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T20:48:12.980618+00:00",
+  "end_utc": "2026-10-30T20:48:26.262233+00:00",
+  "seconds": 13.281877300003543,
+  "exit_code": 0,
+  "error": null,
+  "log": "g21-native-output.txt",
+  "log_sha256": "71dbd35b0283e8a0b69ecfb4d9fa419cef39549770050197e1f2fa310059fc9c",
+  "source_stable": true,
+  "passed": true
+}

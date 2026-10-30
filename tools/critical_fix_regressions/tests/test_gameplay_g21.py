@@ -175,6 +175,7 @@ class LocalRivalTests(unittest.TestCase):
         self.decision(a)
         text=' '.join(m.text for m in e.log.messages)
         self.assertIn('strikes at the Heath Stalker',text);self.assertNotIn('at thee',text)
+        self.assertNotRegex(text,r'\b(thy|thou|thee)\b')
         e.local_map.visible[b.x,b.y]=False;before=len(e.log.messages)
         _monster_attack_entity(a,b,e);self.assertEqual(before,len(e.log.messages))
 

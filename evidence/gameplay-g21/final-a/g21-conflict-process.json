@@ -1,0 +1,26 @@
+{
+  "name": "g21-conflict",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g21_play.py",
+    "--stage",
+    "conflict",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-a\\play",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-a\\play\\common\\common.zip"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T20:48:38.418244+00:00",
+  "end_utc": "2026-10-30T20:48:51.921994+00:00",
+  "seconds": 13.503623299999163,
+  "exit_code": 0,
+  "error": null,
+  "log": "g21-conflict-output.txt",
+  "log_sha256": "d979069196e1b7c66483a2ccdb18612e57e5eeadb186881b3eabab256077737c",
+  "source_stable": true,
+  "passed": true
+}

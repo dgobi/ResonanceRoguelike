@@ -1,0 +1,1 @@
+{"output":"G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\g21\\final-rivals-final-a","passed":true}

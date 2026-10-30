@@ -840,7 +840,9 @@ def _monster_attack_entity(monster, target, engine) -> bool:
     from config import DEBUG_MODE as _DEBUG_MODE
     _dbg_appended = False
     for msg, mtype in zip(result.messages, result.message_types):
-        if not observed:
+        # Resolver body prose uses second-person "thy" even with a named
+        # defender. Keep it for player combat; rival feedback is generic.
+        if not is_player:
             continue
         if mtype == "deflect":
             color = STONE_BLUE       # slate_mid — dim
@@ -852,10 +854,14 @@ def _monster_attack_entity(monster, target, engine) -> bool:
             msg = msg + "  " + result.debug_formula
             _dbg_appended = True
         engine.log.add(f"› {msg}", color)
-    if observed and _DEBUG_MODE and not _dbg_appended and result.debug_formula:
+    if is_player and _DEBUG_MODE and not _dbg_appended and result.debug_formula:
         engine.log.add(f"  {result.debug_formula}", OLD_GROWTH)
+    if observed and not is_player and result.damage_dealt == 0:
+        engine.log.add(f"The {target.name} avoids harm.", WORN_STONE)
     if observed and result.damage_number > 0:
-        engine.log.add(f"  {result.damage_number} damage.", DUSTY_ROSE)  # bright red
+        damage_text = (f"  {result.damage_number} damage." if is_player else
+                       f"The {target.name} takes {result.damage_number} damage.")
+        engine.log.add(damage_text, DUSTY_ROSE)  # bright red
         if is_player and getattr(engine.display, "CALLOUT_DAMAGE_NUMBERS", True):
             _num_y = target.y - 0.3 if result.is_crit else float(target.y)
             engine.callouts.add(str(result.damage_number),

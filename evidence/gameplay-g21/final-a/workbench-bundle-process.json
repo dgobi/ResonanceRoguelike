@@ -1,0 +1,21 @@
+{
+  "name": "workbench-bundle",
+  "command": [
+    "npm.cmd",
+    "run",
+    "bundle",
+    "--",
+    "--",
+    "--locked"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-30T20:42:16.347430+00:00",
+  "end_utc": "2026-10-30T20:44:22.334947+00:00",
+  "seconds": 125.98811969999224,
+  "exit_code": 0,
+  "error": null,
+  "log": "workbench-bundle-output.txt",
+  "log_sha256": "f12214da5fbdae6d90bc92654ab8325b10cf82a18e9c40dd1b14dc4fe8930ca5",
+  "source_stable": true,
+  "passed": true
+}

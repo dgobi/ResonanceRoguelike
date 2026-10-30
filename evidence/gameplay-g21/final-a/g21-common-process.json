@@ -1,0 +1,24 @@
+{
+  "name": "g21-common",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g21_play.py",
+    "--stage",
+    "common",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-a\\play"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T20:48:28.403290+00:00",
+  "end_utc": "2026-10-30T20:48:36.370376+00:00",
+  "seconds": 7.9673970999429,
+  "exit_code": 0,
+  "error": null,
+  "log": "g21-common-output.txt",
+  "log_sha256": "0595f28768020472477d42ba3c2a5124f8fd456c7bfa5bdfd9685747b9f47c13",
+  "source_stable": true,
+  "passed": true
+}

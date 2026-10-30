@@ -119,6 +119,11 @@ leave its observed target tile reachable; the first fixture's origin calculation
 mistook default outside-map walls for the authored origin; the first harvest
 assertion incorrectly expected zero rather than preserved fractional debt. These
 were source/harness corrections, not retries for a preferred combat winner.
+Visual inspection of final-a also found second-person resolver body prose in
+rival hit results. That incomplete release run is retained as failed: its
+unfinished owned gate processes were stopped. Rival results now use generic
+target-correct feedback, with an explicit second-person regression assertion;
+all required gates rerun from the corrected frozen input.
 The development package lock failure came from overlapping NSIS and a test launch;
 final packaging and native launch are sequential. Historical archives are immutable.
 

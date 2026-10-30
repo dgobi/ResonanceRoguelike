@@ -1,0 +1,23 @@
+{
+  "name": "workbench-clippy",
+  "command": [
+    "cargo",
+    "clippy",
+    "--locked",
+    "--manifest-path",
+    "src-tauri/Cargo.toml",
+    "--",
+    "-D",
+    "warnings"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-30T20:42:00.284329+00:00",
+  "end_utc": "2026-10-30T20:42:14.006072+00:00",
+  "seconds": 13.722196699935012,
+  "exit_code": 0,
+  "error": null,
+  "log": "workbench-clippy-output.txt",
+  "log_sha256": "06dd52b4bb15dd9e8039caacaecde9a7ecb04cab2258dd273acb8d9486e2635e",
+  "source_stable": true,
+  "passed": true
+}
