@@ -1,7 +1,7 @@
 # G21 — Local rivals and consequences
 
-Implementation ready for frozen verification; publication is pending. This report
-will record the actual final receipts and remote delivery before completion.
+Implementation is undergoing final verification; publication is pending. Final
+receipts and remote delivery are recorded before completion.
 
 Start: `e142545567ba9f92722c4a6ee2eea92dcbf31a24`, matching reviewed G20.
 `checkpoint/gameplay-g21-start-20261030-a` preserves it. The owner's unrelated
@@ -87,7 +87,8 @@ stale rejection and reviewed single-file publication remain shared.
 The native budget declares the two supplied candidate pairs in seed 20261030,
 one continuation each, 360 phases each; at most one further bounded sixteen-scene
 sample only if both fail. The first candidate succeeds, with one player placement
-at `(42,21)` in generated `(63,121)`. Native Bandit `(35,21)` pursues east through
+at `(42,21)` in generated `(63,121)`. The approach retains ordinary bump combat when a creature obstructs movement;
+no injury is manufactured or reset. Native Bandit `(35,21)` pursues east through
 ordinary live extraction/arrival and meets the native Stalker from `(7,33)` in
 `(64,121)`. Both select and attack each other while the player withdraws. Actor,
 terrain, resource, health and population staging are absent. Full-state scripted
@@ -132,6 +133,16 @@ valid saved lists exactly. The incomplete final-b run is retained; final-c
 reruns every required gate after this validation correction.
 The development package lock failure came from overlapping NSIS and a test launch;
 final packaging and native launch are sequential. Historical archives are immutable.
+
+The complete final-c set passes every gate except two historical pending-scene
+comparisons in the 429-test focused suite. Both expected original G9/G10 factory
+attitudes while generating fresh pending actors from G21 definitions. The tests
+now bind only faction/hostility to each immutable creator revision in an isolated
+DataLoader copy. Exact archive byte checks, expected whole-scene fingerprints and
+the fingerprint validator remain unchanged; production loading/definitions are
+unchanged. Both corrected targeted checks pass. Final-d reruns all 429 focused
+tests; final-c's other gates may be retained only under exact unchanged-input
+boundaries. No runtime/data/driver/Workbench/package input changes with this fix.
 
 ## Verification and publication
 

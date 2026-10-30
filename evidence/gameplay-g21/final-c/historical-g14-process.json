@@ -1,0 +1,24 @@
+{
+  "name": "historical-g14",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\g15_historical.py",
+    "--baseline",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g19\\pre-edit-historical.json",
+    "--output",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-c\\historical-g14.json"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T21:09:31.929169+00:00",
+  "end_utc": "2026-10-30T21:09:34.835938+00:00",
+  "seconds": 2.9056871000211686,
+  "exit_code": 0,
+  "error": null,
+  "log": "historical-g14-output.txt",
+  "log_sha256": "328d572b11567472b9dd35dc5bb7f9c0fe1ae377babc6259a8f23ece000ae367",
+  "source_stable": true,
+  "passed": true
+}

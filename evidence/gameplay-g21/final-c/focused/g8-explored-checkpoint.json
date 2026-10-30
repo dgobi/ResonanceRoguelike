@@ -1,0 +1,40 @@
+{
+  "controls": "fixture teleports/positioning; eight ordinary native updates, then stationary turns; actual waystone/prayer/F5/F9 handlers; direct terrain and first-child-container mutations explicitly labeled",
+  "members": [
+    [
+      76,
+      100
+    ],
+    [
+      76,
+      99
+    ],
+    [
+      75,
+      100
+    ],
+    [
+      75,
+      99
+    ]
+  ],
+  "compound": [
+    74,
+    34
+  ],
+  "container_before": 2,
+  "container_after": 0,
+  "native_updates": 8,
+  "save_seconds": 0.8886292999377474,
+  "cold_load_seconds": 0.8534153000218794,
+  "f9_seconds": 1.5472498999442905,
+  "scene_count": 7,
+  "bytes": 21625445,
+  "fingerprints": {
+    "[75, 99]": "ffa26cda455b887ac11f697276688fe6d4d4f3f0728b4050b017875ed08af6ed",
+    "[75, 100]": "aefdcaff04153573076b3d490dfcc95932129b770d17dca83ab5351d26da829a",
+    "[76, 99]": "5423be821b1bb0a37e320656bbe9514a01b7986af76df7d87a131246c1d787e8",
+    "[76, 100]": "932852e3762a476a4083a0605b1b772b08508e3d31c56a8ef3235a86d9741260",
+    "[74, 34]": "f755dd5470d9d57a2fd684e8ed8c57b98602551949b473a443119bb971a4b4b2"
+  }
+}

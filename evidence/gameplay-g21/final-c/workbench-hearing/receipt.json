@@ -1,0 +1,45 @@
+{
+  "started_utc": "2026-10-30T21:07:56.743Z",
+  "package_sha256": "74550e2870bf0cb66371f3c7557c72ff2008c6436703b4983033a260c9288a18",
+  "root": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\g21\\final-hearing-final-c\\runtime-inputs",
+  "checks": [
+    "Typed hearing edit, Source, Undo/Redo, reviewed publication and byte-checked reopen at zero and four",
+    "Actual factory/runtime threshold changes: four-cost flint unheard at zero, heard at four",
+    "Unrelated creature fields preserved; desktop input unused; minimum width has no horizontal overflow"
+  ],
+  "saved": [
+    {
+      "hearing": 0,
+      "sha256": "89579b1560da634b506111a7cb93e210ba7041db4cb2e97b4d5c5017561e73a6",
+      "runtime": {
+        "hearing": 0,
+        "cost": 4,
+        "heard": 0,
+        "interest": null,
+        "source": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\g21\\final-hearing-final-c\\runtime-inputs\\roguelike\\data\\entities\\creatures\\hollow_revenant.json",
+        "scope": "Native saved/reopened definition, real factory and hearing; controlled open geometry."
+      }
+    },
+    {
+      "hearing": 4,
+      "sha256": "f97f28d58e6a6df9901a95d9f2d38dac01dee6b01ad8d5af34b256b0dbcc82d4",
+      "runtime": {
+        "hearing": 4,
+        "cost": 4,
+        "heard": 1,
+        "interest": {
+          "x": 16,
+          "y": 12,
+          "deadline": 492,
+          "strength": 1,
+          "kind": "flint"
+        },
+        "source": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\g21\\final-hearing-final-c\\runtime-inputs\\roguelike\\data\\entities\\creatures\\hollow_revenant.json",
+        "scope": "Native saved/reopened definition, real factory and hearing; controlled open geometry."
+      }
+    }
+  ],
+  "errors": [],
+  "stale_source_rejected": true,
+  "passed": true
+}

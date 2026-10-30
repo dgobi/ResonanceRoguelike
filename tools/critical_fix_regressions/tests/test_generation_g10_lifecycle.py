@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import pickle
+import subprocess
 import unittest
 import zipfile
 from unittest.mock import patch
@@ -19,6 +20,30 @@ from engine.scene_generation import create_surface
 from g1_support import fingerprint
 
 FIXTURES=Path(__file__).resolve().parents[1]/'fixtures/g10'
+
+
+def historical_relationship_inputs(data, binding):
+    """Exact archived pending-generation comparison with its original inputs.
+
+    G21 deliberately changes fresh factory attitudes. Keep the historical whole
+    fingerprint/ZIP validators intact: bind only these two definition fields to
+    the immutable creator revision, never rewrite saved actors or fingerprints.
+    Current fresh targeting is exercised independently by test_gameplay_g21.
+    """
+    root=Path(__file__).resolve().parents[3]
+    result=copy.copy(data);result.entities=copy.deepcopy(data.entities)
+    for identifier in ('highland_bandit','heath_stalker'):
+        path=f'roguelike/data/entities/creatures/{identifier}.json'
+        raw=subprocess.check_output(['git','show',binding['head']+':'+path],cwd=root)
+        expected=binding.get('source',{}).get(path)
+        normalized=raw.replace(b'\r\n',b'\n')
+        if expected is not None:
+            assert expected in {hashlib.sha256(value).hexdigest() for value in
+                                (raw,normalized,normalized.replace(b'\n',b'\r\n'))}
+        original=json.loads(raw)['perception']
+        for field in ('faction','hostile_to'):
+            result.entities[identifier]['perception'][field]=copy.deepcopy(original[field])
+    return result
 
 
 class G10Lifecycle(unittest.TestCase):
@@ -37,7 +62,7 @@ class G10Lifecycle(unittest.TestCase):
             for name,expected in binding['files'].items():
                 raw=z.read(name);self.assertEqual((len(raw),hashlib.sha256(raw).hexdigest()),(expected['bytes'],expected['sha256']))
         (slot/'HEAD.json').write_text(json.dumps(dict(checkpoint_version=1,current=manifest['generation'],previous=None)))
-        e=make_engine(self.data)
+        e=make_engine(historical_relationship_inputs(self.data,binding))
         with patch('generation.world_plan.build_plan',side_effect=AssertionError('replanned')):
             self.assertTrue(e.save_manager.load(e),e.save_manager.last_error)
             self.assertEqual(e.world_map.surface_schema,0);self.assertIsNone(e.world_map.surface_policy)
@@ -47,7 +72,7 @@ class G10Lifecycle(unittest.TestCase):
                 self.assertEqual(fingerprint(m,actors),row['fingerprint']);self.assertIsNone(getattr(m,'surface_provenance',None))
             m,_=e._prepare_destination(*binding['scenes'][0]['chunk'])
             self.assertIn(tuple(binding['mutation']['waystone']),m.interacted_waystones)
-            self.assertTrue(e.save_manager.save(e));reader=make_engine(self.data)
+            self.assertTrue(e.save_manager.save(e));reader=make_engine(e.data)
             self.assertTrue(reader.save_manager.load(reader),reader.save_manager.last_error)
             e.debug=False;e._handle_key_local(pygame.K_F9)
             for owner in (e,reader):

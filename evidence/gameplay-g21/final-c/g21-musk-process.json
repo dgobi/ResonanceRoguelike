@@ -1,0 +1,26 @@
+{
+  "name": "g21-musk",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\verify_g21_play.py",
+    "--stage",
+    "musk",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-c\\play",
+    "--resume",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-c\\play\\common\\common.zip"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T21:10:44.435896+00:00",
+  "end_utc": "2026-10-30T21:10:53.967693+00:00",
+  "seconds": 9.531080799992196,
+  "exit_code": 0,
+  "error": null,
+  "log": "g21-musk-output.txt",
+  "log_sha256": "3478ec4318cb021a9cc359fc6d04132f980964c2c8edff0df6c40d792ac24158",
+  "source_stable": true,
+  "passed": true
+}

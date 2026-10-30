@@ -1,0 +1,24 @@
+{
+  "name": "focused",
+  "command": [
+    "G:\\GameDev\\RoguelikeBaseline-20261020\\project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\verify_fixes.py",
+    "--timeout",
+    "3600",
+    "--evidence",
+    "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-c\\focused"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject",
+  "start_utc": "2026-10-30T21:05:31.287329+00:00",
+  "end_utc": "2026-10-30T21:32:57.928856+00:00",
+  "seconds": 1646.644613499986,
+  "exit_code": 1,
+  "error": null,
+  "log": "focused-output.txt",
+  "log_sha256": "2c76dd3a76d5034516686672163c755bad5f982a8767168e537e85ebdbe3a82a",
+  "source_stable": true,
+  "passed": false
+}

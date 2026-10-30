@@ -1,0 +1,10 @@
+  Deep tongue loaded: 318 words
+  Loot pools loaded: 18
+  Loaded sheet 'urizen': assets/sprites/urizen_onebit_tileset__v2d0-Sheet.png
+  Loaded sheet 'pixel': assets/sprites/PixelAsciiSpritesheet.png
+  Loaded sheet 'hexany_creatures': assets/sprites/HexanyCreatures.png
+  Loaded sheet 'terrain': assets/sprites/terrain.png
+  Loaded sheet 'objects': assets/sprites/objects.png
+  Loaded sheet 'creatures': assets/sprites/creatures.png
+SpriteRegistry: 263 tiles across 6 sheets
+{"passed": true, "stage": "lethal", "checkpoint": "G:\\GameDev\\RoguelikeProject\\evidence\\gameplay-g21\\final-c\\play\\lethal\\depleted.zip"}

@@ -1,0 +1,17 @@
+{
+  "name": "workbench-native-rivals",
+  "command": [
+    "node",
+    "scripts/run-rivals.mjs"
+  ],
+  "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+  "start_utc": "2026-10-30T21:08:33.099331+00:00",
+  "end_utc": "2026-10-30T21:09:29.883462+00:00",
+  "seconds": 56.784407099941745,
+  "exit_code": 0,
+  "error": null,
+  "log": "workbench-native-rivals-output.txt",
+  "log_sha256": "692fa94b1c0f993ca18e8ba5dece439e1034b87652f28b1f0b4998458304ccdd",
+  "source_stable": true,
+  "passed": true
+}

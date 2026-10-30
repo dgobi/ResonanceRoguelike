@@ -1,0 +1,2118 @@
+{
+  "passed": true,
+  "selection": "Supplied 60-scene discovery list plus four targeted cases; not prevalence.",
+  "rows": [
+    {
+      "chunk": [
+        42,
+        100
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          42,
+          100
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          42,
+          99
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.3665342000313103,
+      "roads": 0,
+      "protected": 235
+    },
+    {
+      "chunk": [
+        22,
+        59
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          22,
+          59
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          22,
+          58
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.23065850010607392,
+      "roads": 0,
+      "protected": 1238
+    },
+    {
+      "chunk": [
+        20,
+        65
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          20,
+          65
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          20,
+          64
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.2489635000238195,
+      "roads": 0,
+      "protected": 82
+    },
+    {
+      "chunk": [
+        42,
+        41
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          42,
+          41
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          42,
+          40
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.374972999910824,
+      "roads": 0,
+      "protected": 207
+    },
+    {
+      "chunk": [
+        62,
+        31
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          62,
+          31
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          42
+        ],
+        "neighbor": [
+          62,
+          32
+        ],
+        "reciprocal": [
+          19,
+          0
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.4228673999896273,
+      "roads": 0,
+      "protected": 389
+    },
+    {
+      "chunk": [
+        46,
+        92
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          46,
+          92
+        ],
+        "arrival": [
+          48,
+          19
+        ],
+        "edge": [
+          29,
+          0
+        ],
+        "neighbor": [
+          46,
+          91
+        ],
+        "reciprocal": [
+          29,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.3333942999597639,
+      "roads": 0,
+      "protected": 916
+    },
+    {
+      "chunk": [
+        48,
+        63
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          48,
+          63
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          48,
+          62
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.24046500003896654,
+      "roads": 0,
+      "protected": 1612
+    },
+    {
+      "chunk": [
+        69,
+        102
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          69,
+          102
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          32,
+          0
+        ],
+        "neighbor": [
+          69,
+          101
+        ],
+        "reciprocal": [
+          32,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.3225745999952778,
+      "roads": 0,
+      "protected": 199
+    },
+    {
+      "chunk": [
+        78,
+        31
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          78,
+          31
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          42
+        ],
+        "neighbor": [
+          78,
+          32
+        ],
+        "reciprocal": [
+          19,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.44017789990175515,
+      "roads": 0,
+      "protected": 205
+    },
+    {
+      "chunk": [
+        116,
+        4
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          116,
+          4
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          116,
+          3
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.4370042000664398,
+      "roads": 0,
+      "protected": 240
+    },
+    {
+      "chunk": [
+        88,
+        58
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          88,
+          58
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          88,
+          57
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.41709400003310293,
+      "roads": 0,
+      "protected": 226
+    },
+    {
+      "chunk": [
+        30,
+        42
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          30,
+          42
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          30,
+          41
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.3757593999616802,
+      "roads": 0,
+      "protected": 225
+    },
+    {
+      "chunk": [
+        71,
+        12
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          71,
+          12
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          71,
+          11
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.3937277999939397,
+      "roads": 0,
+      "protected": 371
+    },
+    {
+      "chunk": [
+        22,
+        3
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          22,
+          3
+        ],
+        "arrival": [
+          39,
+          20
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          22,
+          2
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.4056063999887556,
+      "roads": 0,
+      "protected": 402
+    },
+    {
+      "chunk": [
+        28,
+        76
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          28,
+          76
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          28,
+          75
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.37978810002096,
+      "roads": 0,
+      "protected": 358
+    },
+    {
+      "chunk": [
+        82,
+        0
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          82,
+          0
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          42
+        ],
+        "neighbor": [
+          82,
+          1
+        ],
+        "reciprocal": [
+          19,
+          0
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.42214969999622554,
+      "roads": 0,
+      "protected": 336
+    },
+    {
+      "chunk": [
+        85,
+        106
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          85,
+          106
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          85,
+          105
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.47499049990437925,
+      "roads": 0,
+      "protected": 242
+    },
+    {
+      "chunk": [
+        97,
+        112
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          97,
+          112
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          97,
+          111
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.37958069995511323,
+      "roads": 0,
+      "protected": 242
+    },
+    {
+      "chunk": [
+        26,
+        46
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          26,
+          46
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          42
+        ],
+        "neighbor": [
+          26,
+          47
+        ],
+        "reciprocal": [
+          19,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.3203186000464484,
+      "roads": 0,
+      "protected": 220
+    },
+    {
+      "chunk": [
+        124,
+        84
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          124,
+          84
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          124,
+          83
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.32473790005315095,
+      "roads": 0,
+      "protected": 208
+    },
+    {
+      "chunk": [
+        124,
+        113
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          124,
+          113
+        ],
+        "arrival": [
+          41,
+          20
+        ],
+        "edge": [
+          21,
+          0
+        ],
+        "neighbor": [
+          124,
+          112
+        ],
+        "reciprocal": [
+          21,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.40318349993322045,
+      "roads": 0,
+      "protected": 407
+    },
+    {
+      "chunk": [
+        69,
+        11
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          69,
+          11
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          69,
+          10
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.34104430000297725,
+      "roads": 0,
+      "protected": 414
+    },
+    {
+      "chunk": [
+        25,
+        96
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          25,
+          96
+        ],
+        "arrival": [
+          42,
+          24
+        ],
+        "edge": [
+          24,
+          42
+        ],
+        "neighbor": [
+          25,
+          97
+        ],
+        "reciprocal": [
+          24,
+          0
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.27127659996040165,
+      "roads": 0,
+      "protected": 378
+    },
+    {
+      "chunk": [
+        23,
+        34
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          23,
+          34
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          23,
+          33
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.36772910004947335,
+      "roads": 0,
+      "protected": 307
+    },
+    {
+      "chunk": [
+        100,
+        1
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          100,
+          1
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          100,
+          0
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.25357409997377545,
+      "roads": 0,
+      "protected": 231
+    },
+    {
+      "chunk": [
+        0,
+        39
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          0,
+          39
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          42
+        ],
+        "neighbor": [
+          0,
+          40
+        ],
+        "reciprocal": [
+          19,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.2680494000669569,
+      "roads": 0,
+      "protected": 174
+    },
+    {
+      "chunk": [
+        112,
+        116
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          112,
+          116
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          42
+        ],
+        "neighbor": [
+          112,
+          117
+        ],
+        "reciprocal": [
+          19,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.2360327000496909,
+      "roads": 0,
+      "protected": 188
+    },
+    {
+      "chunk": [
+        15,
+        101
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          15,
+          101
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          15,
+          100
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.23118280002381653,
+      "roads": 0,
+      "protected": 222
+    },
+    {
+      "chunk": [
+        122,
+        37
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          122,
+          37
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          122,
+          36
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.23380020004697144,
+      "roads": 0,
+      "protected": 362
+    },
+    {
+      "chunk": [
+        1,
+        24
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          1,
+          24
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          1,
+          23
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.3173747999826446,
+      "roads": 0,
+      "protected": 387
+    },
+    {
+      "chunk": [
+        1,
+        117
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          1,
+          117
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          1,
+          116
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.35864959994796664,
+      "roads": 0,
+      "protected": 333
+    },
+    {
+      "chunk": [
+        16,
+        120
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          16,
+          120
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          16,
+          119
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.18988550000358373,
+      "roads": 0,
+      "protected": 337
+    },
+    {
+      "chunk": [
+        29,
+        117
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          29,
+          117
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          29,
+          116
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.3057197000598535,
+      "roads": 0,
+      "protected": 212
+    },
+    {
+      "chunk": [
+        84,
+        125
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          84,
+          125
+        ],
+        "arrival": [
+          39,
+          20
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          84,
+          124
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.3299793000333011,
+      "roads": 0,
+      "protected": 224
+    },
+    {
+      "chunk": [
+        107,
+        76
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          107,
+          76
+        ],
+        "arrival": [
+          39,
+          22
+        ],
+        "edge": [
+          42,
+          42
+        ],
+        "neighbor": [
+          107,
+          77
+        ],
+        "reciprocal": [
+          42,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.2967044999822974,
+      "roads": 0,
+      "protected": 152
+    },
+    {
+      "chunk": [
+        87,
+        14
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          87,
+          14
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          87,
+          13
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.2550426000962034,
+      "roads": 0,
+      "protected": 174
+    },
+    {
+      "chunk": [
+        44,
+        8
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          44,
+          8
+        ],
+        "arrival": [
+          24,
+          10
+        ],
+        "edge": [
+          14,
+          0
+        ],
+        "neighbor": [
+          44,
+          7
+        ],
+        "reciprocal": [
+          14,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.25105409999378026,
+      "roads": 0,
+      "protected": 171
+    },
+    {
+      "chunk": [
+        127,
+        74
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          127,
+          74
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          42
+        ],
+        "neighbor": [
+          127,
+          75
+        ],
+        "reciprocal": [
+          19,
+          0
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.27775190002284944,
+      "roads": 0,
+      "protected": 352
+    },
+    {
+      "chunk": [
+        71,
+        2
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          71,
+          2
+        ],
+        "arrival": [
+          39,
+          19
+        ],
+        "edge": [
+          20,
+          0
+        ],
+        "neighbor": [
+          71,
+          1
+        ],
+        "reciprocal": [
+          20,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.3190041999332607,
+      "roads": 0,
+      "protected": 392
+    },
+    {
+      "chunk": [
+        4,
+        94
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          4,
+          94
+        ],
+        "arrival": [
+          19,
+          29
+        ],
+        "edge": [
+          6,
+          42
+        ],
+        "neighbor": [
+          4,
+          95
+        ],
+        "reciprocal": [
+          6,
+          0
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.30586129997391254,
+      "roads": 0,
+      "protected": 214
+    },
+    {
+      "chunk": [
+        29,
+        104
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          29,
+          104
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          29,
+          103
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.35839699988719076,
+      "roads": 0,
+      "protected": 185
+    },
+    {
+      "chunk": [
+        108,
+        75
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          108,
+          75
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          42
+        ],
+        "neighbor": [
+          108,
+          76
+        ],
+        "reciprocal": [
+          19,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.3034791999962181,
+      "roads": 0,
+      "protected": 181
+    },
+    {
+      "chunk": [
+        5,
+        82
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          5,
+          82
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          5,
+          81
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.3452570999506861,
+      "roads": 0,
+      "protected": 138
+    },
+    {
+      "chunk": [
+        108,
+        4
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          108,
+          4
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          108,
+          3
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.31739580002613366,
+      "roads": 0,
+      "protected": 201
+    },
+    {
+      "chunk": [
+        76,
+        116
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          76,
+          116
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          76,
+          115
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.34878809994552284,
+      "roads": 0,
+      "protected": 374
+    },
+    {
+      "chunk": [
+        1,
+        6
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          1,
+          6
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          1,
+          5
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.30800119997002184,
+      "roads": 0,
+      "protected": 368
+    },
+    {
+      "chunk": [
+        35,
+        93
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          35,
+          93
+        ],
+        "arrival": [
+          37,
+          17
+        ],
+        "edge": [
+          20,
+          0
+        ],
+        "neighbor": [
+          35,
+          92
+        ],
+        "reciprocal": [
+          20,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.2605492000002414,
+      "roads": 0,
+      "protected": 406
+    },
+    {
+      "chunk": [
+        77,
+        10
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          77,
+          10
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          77,
+          9
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.28751850000116974,
+      "roads": 0,
+      "protected": 357
+    },
+    {
+      "chunk": [
+        64,
+        63
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          64,
+          63
+        ],
+        "arrival": [
+          36,
+          24
+        ],
+        "edge": [
+          18,
+          42
+        ],
+        "neighbor": [
+          64,
+          64
+        ],
+        "reciprocal": [
+          18,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.2533672999124974,
+      "roads": 0,
+      "protected": 800
+    },
+    {
+      "chunk": [
+        63,
+        74
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          63,
+          74
+        ],
+        "arrival": [
+          48,
+          13
+        ],
+        "edge": [
+          35,
+          0
+        ],
+        "neighbor": [
+          63,
+          73
+        ],
+        "reciprocal": [
+          35,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.20688830001745373,
+      "roads": 0,
+      "protected": 164
+    },
+    {
+      "chunk": [
+        84,
+        51
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          84,
+          51
+        ],
+        "arrival": [
+          32,
+          13
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          84,
+          50
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.19763740000780672,
+      "roads": 0,
+      "protected": 162
+    },
+    {
+      "chunk": [
+        60,
+        73
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          60,
+          73
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          42
+        ],
+        "neighbor": [
+          60,
+          74
+        ],
+        "reciprocal": [
+          19,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.24719189992174506,
+      "roads": 0,
+      "protected": 1408
+    },
+    {
+      "chunk": [
+        87,
+        51
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          87,
+          51
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          87,
+          50
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.26986520003993064,
+      "roads": 0,
+      "protected": 222
+    },
+    {
+      "chunk": [
+        54,
+        89
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          54,
+          89
+        ],
+        "arrival": [
+          41,
+          34
+        ],
+        "edge": [
+          43,
+          42
+        ],
+        "neighbor": [
+          54,
+          90
+        ],
+        "reciprocal": [
+          43,
+          0
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.19251079997047782,
+      "roads": 0,
+      "protected": 269
+    },
+    {
+      "chunk": [
+        87,
+        49
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          87,
+          49
+        ],
+        "arrival": [
+          42,
+          12
+        ],
+        "edge": [
+          37,
+          0
+        ],
+        "neighbor": [
+          87,
+          48
+        ],
+        "reciprocal": [
+          37,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.21723039995413274,
+      "roads": 0,
+      "protected": 298
+    },
+    {
+      "chunk": [
+        54,
+        65
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          54,
+          65
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          54,
+          64
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.21434349997434765,
+      "roads": 0,
+      "protected": 341
+    },
+    {
+      "chunk": [
+        65,
+        64
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          65,
+          64
+        ],
+        "arrival": [
+          36,
+          18
+        ],
+        "edge": [
+          5,
+          42
+        ],
+        "neighbor": [
+          65,
+          65
+        ],
+        "reciprocal": [
+          5,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.20581890002358705,
+      "roads": 0,
+      "protected": 49
+    },
+    {
+      "chunk": [
+        65,
+        65
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          65,
+          65
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          5,
+          0
+        ],
+        "neighbor": [
+          65,
+          64
+        ],
+        "reciprocal": [
+          5,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.23340829997323453,
+      "roads": 0,
+      "protected": 29
+    },
+    {
+      "chunk": [
+        64,
+        64
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          64,
+          64
+        ],
+        "arrival": [
+          43,
+          24
+        ],
+        "edge": [
+          36,
+          42
+        ],
+        "neighbor": [
+          64,
+          65
+        ],
+        "reciprocal": [
+          36,
+          0
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.26936559996102005,
+      "roads": 0,
+      "protected": 129
+    },
+    {
+      "chunk": [
+        64,
+        65
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          64,
+          65
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          36,
+          0
+        ],
+        "neighbor": [
+          64,
+          64
+        ],
+        "reciprocal": [
+          36,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.2122535000089556,
+      "roads": 0,
+      "protected": 96
+    },
+    {
+      "chunk": [
+        73,
+        99
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          73,
+          99
+        ],
+        "arrival": [
+          0,
+          20
+        ],
+        "edge": [
+          0,
+          20
+        ],
+        "neighbor": [
+          72,
+          99
+        ],
+        "reciprocal": [
+          79,
+          20
+        ]
+      },
+      "stairs": 1,
+      "seconds": 0.4007020000135526,
+      "roads": 240,
+      "protected": 639
+    },
+    {
+      "chunk": [
+        73,
+        100
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          73,
+          100
+        ],
+        "arrival": [
+          47,
+          5
+        ],
+        "edge": [
+          42,
+          0
+        ],
+        "neighbor": [
+          73,
+          99
+        ],
+        "reciprocal": [
+          42,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.319813699927181,
+      "roads": 0,
+      "protected": 131
+    },
+    {
+      "chunk": [
+        0,
+        64
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          0,
+          64
+        ],
+        "arrival": [
+          40,
+          21
+        ],
+        "edge": [
+          19,
+          0
+        ],
+        "neighbor": [
+          0,
+          63
+        ],
+        "reciprocal": [
+          19,
+          42
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.3126417000312358,
+      "roads": 0,
+      "protected": 189
+    },
+    {
+      "chunk": [
+        50,
+        101
+      ],
+      "contract": {
+        "revision": 1,
+        "chunk": [
+          50,
+          101
+        ],
+        "arrival": [
+          0,
+          20
+        ],
+        "edge": [
+          0,
+          20
+        ],
+        "neighbor": [
+          49,
+          101
+        ],
+        "reciprocal": [
+          79,
+          20
+        ]
+      },
+      "stairs": 0,
+      "seconds": 0.32083970005623996,
+      "roads": 240,
+      "protected": 1120
+    }
+  ]
+}
