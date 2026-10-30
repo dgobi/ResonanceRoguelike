@@ -104,6 +104,22 @@ These files are under `data/items/consumables/`:
 | `wight_concentrate.json` | `true_sight_turns`, `resonance_add`, `corruption_add` | Sight duration and the immediate costs. |
 | `musk_pellet.json` | `zone_radius`, `zone_turns` | Disruption-zone size and duration. |
 
+Musk keeps radius 3 and six protected world phases including the throw: five
+remain immediately afterward, the sixth phase is protected, and normal AI can
+resume on phase seven. Its circular footprint uses the current owning map's
+G19 terrain line: opaque interior cells, closed doors and sealed diagonal
+corners block; the impact cell is included. Door changes affect the next query.
+AI pause, passive/contact suppression and pursuer/crossing checks share this
+coverage. Adjacent paused stair followers retain their source-scene live owner
+instead of being moved immediately to the destination; normal pursuit can resume
+after expiry. Nonplayer AI creatures (including Hollow, Wraith and Lurker) are
+affected; the player is unaffected. No speed credit accumulates during a pause.
+Overlaps are independent finite zones whose coverage forms a union. Actor
+disruption and ability-suppression counters remain independent. Hot maps age
+once per world phase, cold map zones freeze, and inactive serialized actor
+counters retain their existing freeze rule. Sound's absolute deadline continues
+to expire even while its listener is paused or absent; recovery replays no sound.
+
 For a longer bile coating, change its existing entry to:
 
 ```json

@@ -1,7 +1,7 @@
 {
   "id": "musk_pellet",
   "name": "musk pellet",
-  "description": "A dried pellet of stalker musk. Throw to disrupt nearby creatures for six turns. The smell is contained until it breaks.",
+  "description": "Throw to pause nonplayer creatures in a three-tile burst for six world phases, including the throw. Walls, closed doors and sealed corners block it. The smell is contained until it breaks.",
   "tile": "generic_item",
   "category": "consumable",
   "weight": 0.05,

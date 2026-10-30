@@ -24,12 +24,14 @@ from engine.sound import emit, propagation, current_interest, INTEREST_TURNS
 from engine.save_components import serialize_item, validate_actor_runtime, restore_actor_runtime
 from engine.save_manager import _serialize_entity, _deserialize_entities
 from engine.effect_lifecycle import throw_key
+from engine.effect_lifecycle import zone_covers, in_disruption_zone, disrupted, ability_enabled
 from world.local_map import LocalMap, make_tile
 from world.world_map import Chunk, RegionType, SubMap
 
 
 def snapshot(e):
     return dict(turn=e.world_time.turn, timing=timing(e),
+                zones=copy.deepcopy(e.local_map.disruption_zones),
                 actors=[_serialize_entity(a) for a in e.entities if a is not e.player],
                 items=[serialize_item(i) for i in e.player.inventory.items])
 
@@ -369,6 +371,106 @@ class AudibleEncounterTests(unittest.TestCase):
             self.assertNotIn((13,12),e.local_map.container_state)
             self.assertEqual('wood_bundle',e.local_map.floor_objects[13,12][0].item_id)
             cursor();e._handle_key(pygame.K_x);self.assertEqual(1,pulse.call_count)
+
+    def test_musk_coverage_center_circle_actual_map_barriers_and_dynamic_door(self):
+        e=self.e;m=e.local_map;z=dict(x=12,y=12,radius=3,turns_remaining=6)
+        m.disruption_zones=[z];a=self.actor()
+        for xy,covered in (((12,12),True),((15,12),True),((15,13),False),((14,14),True)):
+            a.x,a.y=xy
+            self.assertEqual(covered,zone_covers(m,z,*xy),xy)
+            self.assertEqual(covered,in_disruption_zone(a,m));self.assertEqual(not covered,ability_enabled(a,m))
+        a.x,a.y=14,12
+        other=LocalMap();other.tiles[:]=make_tile('grass',True,True);other.disruption_zones=[copy.deepcopy(z)]
+        for terrain in ('wall','door_closed'):
+            m.set_tile(13,12,terrain,False,False)
+            self.assertFalse(disrupted(a,m));self.assertTrue(ability_enabled(a,m))
+            self.assertTrue(disrupted(a,other))
+        m.set_tile(13,12,'door_open',True,True);self.assertTrue(disrupted(a,m))
+        a.x,a.y=13,13;m.set_tile(13,12,'wall',False,False);m.set_tile(12,13,'wall',False,False)
+        self.assertFalse(disrupted(a,m));m.set_tile(12,13,'flagstone',True,True)
+        self.assertTrue(disrupted(a,m))
+        e.player.x,e.player.y=12,12;self.assertFalse(in_disruption_zone(e.player,m))
+        a._disrupted_turns=2;m.set_tile(12,13,'wall',False,False)
+        self.assertTrue(disrupted(a,m));self.assertEqual(2,a._disrupted_turns)
+
+    def test_real_musk_throw_protects_six_phases_without_banked_credit(self):
+        e=self.e;e.player.x,e.player.y=10,12;a=self.actor(x=13,y=12)
+        a.ai.move_accumulator=.35;e._update_fov()
+        pellet=e.item_factory.create('musk_pellet');e.player.inventory.add(pellet);use(e,pellet)
+        e._placement_cursor_x,e._placement_cursor_y=12,12;start=e.world_time.turn;hp=e.player.fighter.hp
+        with patch.object(a.ai,'take_turn',wraps=a.ai.take_turn) as decision:
+            e._handle_key(pygame.K_RETURN)
+            self.assertEqual(5,e.local_map.disruption_zones[0]['turns_remaining'])
+            self.assertFalse(e.player.inventory.contains(pellet))
+            for _ in range(5):e._handle_key(pygame.K_z)
+            self.assertEqual([],e.local_map.disruption_zones);self.assertEqual(start+6,e.world_time.turn)
+            self.assertEqual(hp,e.player.fighter.hp);self.assertEqual(.35,a.ai.move_accumulator);decision.assert_not_called()
+            e._handle_key(pygame.K_z);decision.assert_called_once()
+
+    def test_overlapping_zones_are_independent_and_keep_other_suppression(self):
+        e=self.e;a=self.actor();a._ability_suppressed_turns=8;a._disrupted_turns=1
+        e.local_map.disruption_zones=[dict(x=12,y=12,radius=3,turns_remaining=n) for n in (2,4)]
+        e._advance_turn();self.assertEqual([1,3],[z['turns_remaining'] for z in e.local_map.disruption_zones])
+        self.assertEqual(0,a._disrupted_turns);self.assertEqual(7,a._ability_suppressed_turns)
+        e._advance_turn();self.assertEqual([2],[z['turns_remaining'] for z in e.local_map.disruption_zones])
+        for _ in range(2):e._advance_turn()
+        self.assertEqual([],e.local_map.disruption_zones);self.assertEqual(4,a._ability_suppressed_turns)
+        self.assertFalse(ability_enabled(a,e.local_map));self.assertFalse(disrupted(a,e.local_map))
+
+    def test_paused_sound_expires_during_three_finite_owned_pellets_without_replay(self):
+        e=self.e;e.player.x,e.player.y=10,12;a=self.actor(x=13,y=12)
+        # Stronger received flint at the actor wins over the farther musk impacts.
+        emit(e,13,12,'flint');deadline=a.ai.sound_interest['deadline']
+        pellet=e.item_factory.create('musk_pellet');pellet.count=3;e.player.inventory.add(pellet)
+        e._update_fov();acc=a.ai.move_accumulator
+        def toss():
+            use(e,pellet);e._placement_cursor_x,e._placement_cursor_y=10,12;e._handle_key(pygame.K_RETURN)
+        with patch.object(a.ai,'take_turn',wraps=a.ai.take_turn) as decision:
+            for n in range(3):
+                toss()
+                if n<2:
+                    for _ in range(4):e._advance_turn()
+            self.assertFalse(e.player.inventory.contains(pellet));self.assertEqual(deadline,a.ai.sound_interest['deadline'])
+            for _ in range(2):e._advance_turn()
+            self.assertIsNone(a.ai.sound_interest);self.assertTrue(in_disruption_zone(a,e.local_map))
+            self.assertEqual(acc,a.ai.move_accumulator);decision.assert_not_called()
+            self.assertTrue(e.save_manager.save(e));expected=snapshot(e)
+            self.assertTrue(e.save_manager.load(e));self.assertEqual(expected,snapshot(e))
+        a=next(a for a in e.entities if a is not e.player)
+        for _ in range(4):e._advance_turn()
+        self.assertIsNone(a.ai.sound_interest);self.assertNotEqual(AIState.INVESTIGATING,a.ai.state)
+
+    def test_fresh_heard_event_during_pause_updates_interest_without_action(self):
+        e=self.e;a=self.actor();e.local_map.disruption_zones=[dict(x=12,y=12,radius=3,turns_remaining=6)]
+        emit(e,16,12,'flint');first=copy.deepcopy(a.ai.sound_interest)
+        e._advance_turn();emit(e,14,12,'combat')
+        self.assertGreater(a.ai.sound_interest['deadline'],first['deadline'])
+        self.assertEqual('combat',a.ai.sound_interest['kind']);self.assertEqual((12,12),(a.x,a.y))
+        self.assertEqual(0,a.ai.move_accumulator)
+        self.assertTrue(e.save_manager.save(e));expected=snapshot(e)
+        proc=subprocess.run([sys.executable,'-X','utf8',str(Path(__file__).resolve()),'--cold',str(self.root)],capture_output=True,text=True,timeout=45,env=dict(os.environ))
+        self.assertEqual(0,proc.returncode,proc.stdout+proc.stderr)
+        self.assertEqual(expected,json.loads(proc.stdout.strip().splitlines()[-1]))
+
+    def test_musk_retains_lurker_bonus_and_adjacent_stair_follower_source_owner(self):
+        e=self.e;e.player.x,e.player.y=12,12;a=self.actor('stone_lurker',13,12)
+        from engine.creature_abilities import _ability_stone_lurker
+        _ability_stone_lurker(a,e);self.assertTrue(a._ambush_ready)
+        e.local_map.disruption_zones=[dict(x=13,y=12,radius=3,turns_remaining=2)]
+        e._advance_turn();e._advance_turn();self.assertTrue(a._ambush_ready)
+        with patch('engine.combat.resolve_attack',return_value=CombatResult(hit=False)):
+            e._advance_turn();self.assertFalse(a._ambush_ready)
+        e.entities=[e.player];a=self.actor(x=13,y=12)
+        a.ai.state=AIState.ATTACKING;a._last_known_px=12;a._last_known_py=12
+        source=e.local_map;source.disruption_zones=[dict(x=13,y=12,radius=3,turns_remaining=6)]
+        sub=SubMap('g20-paused-stair','cave','G20 paused source',19,generated=True,entry_x=12,entry_y=12)
+        e.world_map.get(0,0).submaps.append(sub);source.submap_links[12,12]=sub.submap_id;source.set_tile(12,12,'stairs_down',True,True)
+        underground=LocalMap();underground.tiles[:]=make_tile('grass',True,True)
+        e.save_manager.cache.store_submap(sub.submap_id,underground,[])
+        e._handle_key(pygame.K_PERIOD,'>')
+        self.assertNotIn(a,e.entities);self.assertEqual(1,len(e._live_pursuers))
+        self.assertIs(a,e._live_pursuers[0][0]);self.assertEqual((13,12),(a.x,a.y))
+        e._advance_turn();self.assertNotIn(a,e.entities);self.assertEqual((13,12),(a.x,a.y))
 
 
 if __name__ == '__main__':

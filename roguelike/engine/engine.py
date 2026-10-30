@@ -2571,7 +2571,8 @@ class Engine:
             if not _cdef.get("can_cross_chunks", False):
                 continue
             _dist = max(abs(_e.x - _stair_x), abs(_e.y - _stair_y))
-            if _dist <= 1:
+            from engine.effect_lifecycle import disrupted
+            if _dist <= 1 and not disrupted(_e, self.local_map):
                 self._pending_transfer.append(_e)
                 _hot_ids_stair.add(id(_e))
         self.entities = [_e for _e in self.entities if id(_e) not in _hot_ids_stair]
@@ -2703,7 +2704,8 @@ class Engine:
             if not _cdef2.get("can_cross_chunks", False):
                 continue
             _dist2 = max(abs(_e.x - _stair_x2), abs(_e.y - _stair_y2))
-            if _dist2 <= 1:
+            from engine.effect_lifecycle import disrupted
+            if _dist2 <= 1 and not disrupted(_e, self.local_map):
                 self._pending_transfer.append(_e)
                 _hot_ids_asc.add(id(_e))
         self.entities = [_e for _e in self.entities if id(_e) not in _hot_ids_asc]
@@ -3535,6 +3537,9 @@ class Engine:
                 continue
             _psu = getattr(_e, "_pending_stair_use", None)
             if not _psu:
+                continue
+            from engine.effect_lifecycle import disrupted
+            if disrupted(_e, self.local_map):
                 continue
             _e._pending_stair_use = None
 

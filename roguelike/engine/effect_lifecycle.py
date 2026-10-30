@@ -12,10 +12,26 @@ def creature_id(actor):
     return getattr(actor, '_creature_id', actor.tile)
 
 
+def zone_covers(local_map, zone, x, y):
+    """Finite circular burst intersected with G19's terrain/corner line.
+
+    The impact cell is included; this deliberately isn't distinct-cell melee.
+    Query current terrain on the owning map so a door change takes effect now.
+    """
+    if (zone['turns_remaining'] <= 0 or not local_map.in_bounds(x, y)
+            or (x-zone['x'])**2 + (y-zone['y'])**2 > zone['radius']**2):
+        return False
+    if (x, y) == (zone['x'], zone['y']):
+        return True
+    from engine.spatial import terrain_line
+    return terrain_line(local_map, zone['x'], zone['y'], x, y)
+
+
 def in_disruption_zone(actor, local_map):
-    return any(z['turns_remaining'] > 0 and
-               (actor.x-z['x'])**2 + (actor.y-z['y'])**2 <= z['radius']**2
-               for z in getattr(local_map, 'disruption_zones', []))
+    # Zones pause the existing nonplayer AI set; the player has no AI component.
+    return (getattr(actor, 'ai', None) is not None
+            and any(zone_covers(local_map, z, actor.x, actor.y)
+                    for z in getattr(local_map, 'disruption_zones', [])))
 
 
 def disrupted(actor, local_map):
@@ -228,8 +244,13 @@ def throw_key(engine, key):
     m=engine.local_map
     kind = pending.get('kind', 'musk')
     if kind == 'musk':
-        m.disruption_zones = list(getattr(m,'disruption_zones',[])) + [dict(
-            x=x,y=y,radius=definition.get('zone_radius',3),turns_remaining=definition.get('zone_turns',6))]
+        zone = dict(x=x,y=y,radius=definition.get('zone_radius',3),turns_remaining=definition.get('zone_turns',6))
+        m.disruption_zones = list(getattr(m,'disruption_zones',[])) + [zone]
+        for actor in engine.get_active_entities():
+            if (actor is not engine.player and getattr(actor, 'ai', None) is not None
+                    and getattr(actor, 'is_alive', True) and m.visible[actor.x, actor.y]
+                    and zone_covers(m, zone, actor.x, actor.y)):
+                engine.log.add(f"The {actor.name} falters in the musk.", UI_TEXT_DIM)
     from engine.sound import emit
     emit(engine, x, y, kind, maker=engine.player)
     engine._pending_throw = None
