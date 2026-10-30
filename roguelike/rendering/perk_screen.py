@@ -237,6 +237,7 @@ class PerkScreen:
         cost = pdef.get("cost", 1)
         if perks.has(perk_id) or level_comp.perk_points < cost:
             return
+        engine._free_move_pending = False
         level_comp.perk_points -= cost
         perks.add_perk(perk_id)
         engine._register_player_perks()

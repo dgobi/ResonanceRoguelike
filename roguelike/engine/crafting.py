@@ -211,7 +211,10 @@ def commit_craft(engine, recipe, selected, ambient_sources=None, outputs=()):
                                  chosen_items=getattr(selected, 'choices', None))
     if missing:
         return False
-    return exchange(engine, checked.materials, outputs)
+    committed = exchange(engine, checked.materials, outputs)
+    if committed:
+        engine._free_move_pending = False
+    return committed
 
 
 def attempt_craft(recipe, inv, keyword_data=None, ambient_sources=None, chosen_items=None):

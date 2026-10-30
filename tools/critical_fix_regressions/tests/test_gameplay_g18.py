@@ -275,6 +275,36 @@ class WeaponTimingTests(unittest.TestCase):
         self.assertEqual(before+3,e.world_time.turn); self.assertTrue(e._free_move_pending)
         self.assertEqual(.25,e._move_debt)
 
+    def test_direct_craft_commit_expires_press_but_missing_materials_preserve_it(self):
+        e = self.press(); screen = e.craft_screen
+        from generation.decor_utils import place_decor
+        place_decor(e.local_map,12,13,'campfire_lit')
+        recipe = self.data.recipes['briar_binding_oil']; before = timing(e)
+        def craft():
+            screen.open = True
+            flat = screen._build_flat_items(screen._get_recipes(e))
+            screen.selected = next(n for n,row in enumerate(flat) if row.get('recipe') is recipe)
+            e._handle_key(pygame.K_RETURN)
+        craft(); self.assertEqual(before,timing(e))  # missing actual materials
+        for iid in ('briar_sap','clay_pot'):
+            self.assertTrue(e.player.inventory.add(e.item_factory.create(iid)))
+        craft()
+        self.assertTrue(e.player.inventory.has('briar_binding_oil'))
+        self.assertFalse(e._free_move_pending)
+        self.assertEqual(before[:3],timing(e)[:3])  # established direct crafting is free
+
+    def test_perk_cancel_and_rejection_preserve_press_but_purchase_expires_it(self):
+        e = self.press(); e.perk_screen.open = True
+        e.perk_screen._flat = [('bone_reader',False,'')]; e.perk_screen.selected = 0
+        e.player.level.perk_points = 1; before = timing(e)
+        e._handle_key(pygame.K_RETURN); e._handle_key(pygame.K_ESCAPE)
+        self.assertEqual(before,timing(e))
+        e._handle_key(pygame.K_RETURN); e._handle_key(pygame.K_y)
+        self.assertTrue(e.player.perks.has('bone_reader')); self.assertEqual(0,e.player.level.perk_points)
+        self.assertFalse(e._free_move_pending); self.assertEqual(before[:3],timing(e)[:3])
+        e._free_move_pending = True; before = timing(e); e._handle_key(pygame.K_RETURN)
+        self.assertEqual(before,timing(e))
+
     def test_committed_and_rejected_bump_attacks_resolve_press_differently(self):
         e = self.press(); t = target(e); before = timing(e)
         with patch.object(e.player.fighter,'can_attack',return_value=False): e._handle_key(pygame.K_RIGHT)
