@@ -1,0 +1,287 @@
+{
+  "policy_sha256": "0e799fb31e5e0fd460d846418e5e2d1fce755b80d9d86ca8003710e3489de195",
+  "seed": 20261029,
+  "input_identity": "dd1944a6ff1f0b77df866465c4f70b6b99c0b2742d31925b0c1c46fcfb3f57b5",
+  "plan_identity": "a0e2291af3b3f437ccd8d2f1a4e005137f22ebea4017fcfbd53c972de15cff15",
+  "placement": {
+    "approach": [
+      1720,
+      2168,
+      1722,
+      2172
+    ],
+    "asset": "roadside_shrine_a",
+    "clearance": [
+      1717,
+      2163,
+      1725,
+      2170
+    ],
+    "context": "landmark",
+    "dependency": "roadside_shrine_a",
+    "entrances": [
+      {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 2,
+        "x": 1720,
+        "y": 2168
+      }
+    ],
+    "footprint": [
+      1718,
+      2164,
+      1724,
+      2169
+    ],
+    "frontage_entrance": "main",
+    "id": "landmark-plot-60-building",
+    "join": [
+      1720,
+      2171
+    ],
+    "mirror": false,
+    "origin": [
+      1718,
+      2164
+    ],
+    "owner": "landmark",
+    "required": true,
+    "road": "road-7",
+    "role": "landmark",
+    "rotation": 0,
+    "targets": [
+      {
+        "kind": "container",
+        "required": true,
+        "x": 1720,
+        "y": 2165
+      }
+    ]
+  },
+  "chunk": [
+    21,
+    50
+  ],
+  "scene_address": [
+    21,
+    50,
+    null
+  ],
+  "scene_seed": "652569",
+  "width": 80,
+  "height": 43,
+  "terrain_sha256": "49486f2b26b236ce43c72689a7a170d3a0e5a223e426e26e3b07f0a0e702a87d",
+  "scene_counts": {
+    "decor": 81,
+    "items": 0,
+    "containers": 1,
+    "actors": 1
+  },
+  "records": [
+    {
+      "declared_item_id": null,
+      "declared_kind": "container",
+      "declared_text_id": null,
+      "decor_id": "offering_bowl",
+      "item_id": null,
+      "kind": "container",
+      "loot_pools": [
+        "shrine_offering"
+      ],
+      "native_xy": [
+        2,
+        1
+      ],
+      "objects": [
+        {
+          "decor_id": "offering_bowl",
+          "items": [
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "Perpetually damp. Woven round with twine by hands that knew what they were doing. Certain stones feel different when this is on thy person.",
+              "drink_message": null,
+              "eat_message": null,
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "moist_pebble",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "resonant",
+                  "tier": 1
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "moist pebble",
+              "nutrition": null,
+              "on_use": "equip_toggle",
+              "qualities": {},
+              "source_creature": null,
+              "stackable": false,
+              "temporary_essence": [],
+              "text_id": "",
+              "tile": "pebble",
+              "turns_lit": 0,
+              "weight": 0.1
+            },
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "A stem of coldbell flower, harvested near grey stone. The petals have gone. The stem is pale, faintly waxy, and cold to the touch in ways the temperature does not explain.",
+              "drink_message": null,
+              "eat_message": "Faintly metallic. A small resonance moves through the teeth.",
+              "harvest_from": "coldbell_flower",
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "coldbell_cutting",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "edible",
+                  "tier": 1
+                },
+                {
+                  "tag": "resonant",
+                  "tier": 1
+                },
+                {
+                  "tag": "binding",
+                  "tier": 1
+                },
+                {
+                  "tag": "aromatic",
+                  "tier": 1
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "coldbell cutting",
+              "nutrition": 40,
+              "on_use": "eat",
+              "qualities": {},
+              "source_creature": null,
+              "stackable": true,
+              "temporary_essence": [],
+              "text_id": "",
+              "tile": "generic_item",
+              "turns_lit": 0,
+              "weight": 0.05
+            },
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "A splinter of something old. The tone in it is audible if you press it against your skull and hold still. Do not hold it near bells.",
+              "drink_message": null,
+              "eat_message": null,
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "resonant_bone_fragment",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "resonant",
+                  "tier": 2
+                },
+                {
+                  "tag": "bony",
+                  "tier": 2
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "Resonant Bone Fragment",
+              "nutrition": null,
+              "on_use": null,
+              "qualities": {},
+              "source_creature": null,
+              "stackable": true,
+              "temporary_essence": [],
+              "text_id": "",
+              "tile": "generic_item",
+              "turns_lit": 0,
+              "weight": 0.1
+            }
+          ]
+        }
+      ],
+      "receipt_owned": true,
+      "record_id": "landmark-plot-60-building:roadside_shrine_a@38,14,0:special[0]",
+      "relocated": false,
+      "selected_branch": null,
+      "source": "roadside_shrine_a special[0]",
+      "source_index": 0,
+      "source_xy": [
+        40,
+        15
+      ],
+      "text_id": null,
+      "text_override_present": false,
+      "transformed_xy": [
+        2,
+        1
+      ],
+      "xy": [
+        40,
+        15
+      ]
+    }
+  ],
+  "access": [
+    {
+      "passed": true,
+      "target": "entry",
+      "xy": [
+        40,
+        19
+      ]
+    },
+    {
+      "approaches": [],
+      "kind": "floor",
+      "passed": true,
+      "target": "entrance main span[0]",
+      "xy": [
+        40,
+        18
+      ]
+    },
+    {
+      "approaches": [],
+      "kind": "floor",
+      "passed": true,
+      "target": "entrance main span[1]",
+      "xy": [
+        41,
+        18
+      ]
+    }
+  ],
+  "full_scene": {
+    "path": "workbench/docs/evidence/w5q/landmark-scene.json.gz",
+    "sha256": "a7235057be770b809564046528f930ae7d112c92cf0221cc63c56d74062b0a01",
+    "bytes": 3377
+  },
+  "scope": "Entire chunk shown; only records below are attributed to this selected placement. Revealed static scene; no player interaction claim."
+}

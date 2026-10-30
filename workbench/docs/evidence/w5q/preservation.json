@@ -1,0 +1,31 @@
+{
+  "scope": "Pre-gate inventory of untouched tracked files plus the untracked owner plan; implementation paths already edited are excluded explicitly.",
+  "captured_files": 8451,
+  "later_scoped_harness_changes": [
+    "workbench/scripts/workspace-journey.mjs"
+  ],
+  "unchanged_files": 8450,
+  "excluded_implementation_paths": [
+    "roguelike/docs/STRUCTURE_AUTHORING.md",
+    "roguelike/engine/content_authoring.py",
+    "roguelike/generation/building_preview.py",
+    "roguelike/generation/settlement_selection.py",
+    "workbench/README.md",
+    "workbench/src-tauri/src/authoring.rs",
+    "workbench/src-tauri/src/recovery.rs",
+    "workbench/src/App.tsx",
+    "workbench/src/Authoring.tsx",
+    "workbench/src/ContentEditor.tsx",
+    "workbench/src/MapView.tsx",
+    "workbench/src/content.ts",
+    "workbench/src/familyData.ts",
+    "workbench/src/workspace.ts",
+    "workbench/worker/bridge.py",
+    "workbench/worker/test_buildings_w5p.py"
+  ],
+  "failures": [],
+  "owner_plan_sha256": "bcf41ab230fea7aa43a2a2f26b2826bd6d0d53ec814c788903badc642910f49a",
+  "initial_status": "Only the owner plan was untracked; production main matched remote f34ab95.",
+  "unchanged_canonical_data": true,
+  "limitations": "The pre-gate inventory was captured after implementation edits and explicitly excludes those paths; it is not mislabeled as a full pre-edit byte inventory or proof that every personal path was unread."
+}

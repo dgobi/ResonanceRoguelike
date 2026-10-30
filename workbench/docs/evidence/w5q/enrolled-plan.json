@@ -1,0 +1,2898 @@
+{
+  "captured_selection": {
+    "profiles": {
+      "grid": {
+        "id": "grid-mixed-v1",
+        "minimum": {
+          "civic": 1,
+          "commercial": 1,
+          "residential": 1,
+          "support": 0
+        },
+        "repeat_multiplier": 0.2,
+        "required_fit_budget": 256,
+        "roles": {
+          "civic": [
+            {
+              "asset": "bell_tower_a",
+              "base_weight": 1,
+              "max_per_settlement": 1,
+              "weight": 1
+            }
+          ],
+          "commercial": [
+            {
+              "asset": "apothecary_b",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "market_stall_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "shop_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "workshop_b",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            }
+          ],
+          "residential": [
+            {
+              "asset": "house_hearth_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "house_small_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "house_small_b",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "house_two_room_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "w5p_lodge",
+              "base_weight": 1,
+              "max_per_settlement": 3,
+              "weight": 5
+            }
+          ],
+          "support": [
+            {
+              "asset": "shrine_a",
+              "base_weight": 1,
+              "max_per_settlement": 3,
+              "weight": 1
+            },
+            {
+              "asset": "storehouse_a",
+              "base_weight": 1,
+              "max_per_settlement": 3,
+              "weight": 1
+            },
+            {
+              "asset": "tool_shed_b",
+              "base_weight": 1,
+              "max_per_settlement": 3,
+              "weight": 1
+            }
+          ]
+        },
+        "schedule": [
+          "commercial",
+          "residential",
+          "support",
+          "residential"
+        ]
+      },
+      "landmark": {
+        "id": "landmark-mixed-v1",
+        "minimum": {
+          "landmark": 1
+        },
+        "repeat_multiplier": 0.2,
+        "required_fit_budget": 256,
+        "roles": {
+          "landmark": [
+            {
+              "asset": "hunter_cabin",
+              "base_weight": 1,
+              "max_per_settlement": 1,
+              "weight": 1
+            },
+            {
+              "asset": "roadside_shrine_a",
+              "base_weight": 1,
+              "max_per_settlement": 1,
+              "weight": 1
+            },
+            {
+              "asset": "shepherds_hut_a",
+              "base_weight": 1,
+              "max_per_settlement": 1,
+              "weight": 1
+            },
+            {
+              "asset": "waymarker_shelter_a",
+              "base_weight": 1,
+              "max_per_settlement": 1,
+              "weight": 1
+            }
+          ]
+        },
+        "schedule": [
+          "landmark"
+        ]
+      },
+      "roadside": {
+        "id": "roadside-mixed-v1",
+        "minimum": {
+          "commercial": 1,
+          "residential": 1,
+          "support": 0
+        },
+        "repeat_multiplier": 0.2,
+        "required_fit_budget": 256,
+        "roles": {
+          "commercial": [
+            {
+              "asset": "apothecary_b",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "market_stall_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "shop_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "workshop_b",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            }
+          ],
+          "residential": [
+            {
+              "asset": "house_hearth_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "house_small_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "house_small_b",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            },
+            {
+              "asset": "house_two_room_a",
+              "base_weight": 1,
+              "max_per_settlement": 5,
+              "weight": 1
+            }
+          ],
+          "support": [
+            {
+              "asset": "shrine_a",
+              "base_weight": 1,
+              "max_per_settlement": 3,
+              "weight": 1
+            },
+            {
+              "asset": "storehouse_a",
+              "base_weight": 1,
+              "max_per_settlement": 3,
+              "weight": 1
+            },
+            {
+              "asset": "tool_shed_b",
+              "base_weight": 1,
+              "max_per_settlement": 3,
+              "weight": 1
+            }
+          ]
+        },
+        "schedule": [
+          "commercial",
+          "residential",
+          "support",
+          "residential"
+        ]
+      }
+    },
+    "version": 1
+  },
+  "consumer": "world_gen.generate_world → settlement_selection.resolve → world_plan → create_surface",
+  "dependencies": "Exact saved data and game-code identities in input_files; no campaigns read.",
+  "generation_revision": "wg9",
+  "height": 128,
+  "input_identity": "dd1944a6ff1f0b77df866465c4f70b6b99c0b2742d31925b0c1c46fcfb3f57b5",
+  "kind": "selection-preview",
+  "limitations": "Eligibility, selection and one materialized placement are distinct. No selected instance is a valid result. Absence alone records no fit/cap rejection cause. Existing saved plans are unchanged.",
+  "plan_identity": "a0e2291af3b3f437ccd8d2f1a4e005137f22ebea4017fcfbd53c972de15cff15",
+  "plan_mode": "shared-v1",
+  "planning_seconds": 1.9046522000571713,
+  "profile_path": "roguelike/data/generation/settlement_profiles.json",
+  "profile_sha256": "0e799fb31e5e0fd460d846418e5e2d1fce755b80d9d86ca8003710e3489de195",
+  "recorded_search_count": 4,
+  "recorded_searches": [
+    {
+      "attempts": 3,
+      "budget": 256,
+      "budget_unit": "one transform fit or empty-frontage asset trial",
+      "kind": "required-role-search",
+      "owner": "settlement-0",
+      "rejected": []
+    },
+    {
+      "attempts": 2,
+      "budget": 256,
+      "budget_unit": "one transform fit or empty-frontage asset trial",
+      "kind": "required-role-search",
+      "owner": "settlement-1",
+      "rejected": []
+    },
+    {
+      "attempts": 3,
+      "budget": 256,
+      "budget_unit": "one transform fit or empty-frontage asset trial",
+      "kind": "required-role-search",
+      "owner": "settlement-2",
+      "rejected": []
+    },
+    {
+      "attempts": 2,
+      "budget": 256,
+      "budget_unit": "one transform fit or empty-frontage asset trial",
+      "kind": "required-role-search",
+      "owner": "settlement-3",
+      "rejected": []
+    }
+  ],
+  "resolved_selection_sha256": "9a584db1271745097d1bfd584275d3a0eeb446d155595eceee1b0b20a947cc42",
+  "rows": [
+    {
+      "id": "settlement-0-linked-courts-lot-civic-building",
+      "asset": "bell_tower_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "civic",
+      "path": "roguelike/data/buildings/civic/bell_tower_a.json",
+      "chunk": [
+        21,
+        54
+      ],
+      "origin": [
+        1747,
+        2347
+      ],
+      "rotation": 180,
+      "mirror": true,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1750,
+        "y": 2347
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1750,
+              2347
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-42-1-S-1-building",
+      "asset": "shop_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/shop_a.json",
+      "chunk": [
+        21,
+        54
+      ],
+      "origin": [
+        1745,
+        2332
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1749,
+        "y": 2339
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1749,
+              2339
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-1-23-N-0-building",
+      "asset": "house_small_b",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_b.json",
+      "chunk": [
+        21,
+        54
+      ],
+      "origin": [
+        1689,
+        2347
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1693,
+        "y": 2347
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1693,
+              2347
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-1-3-S-0-building",
+      "asset": "tool_shed_b",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "support",
+      "path": "roguelike/data/buildings/storage/tool_shed_b.json",
+      "chunk": [
+        21,
+        54
+      ],
+      "origin": [
+        1690,
+        2334
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1693,
+        "y": 2339
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1693,
+              2339
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-42-1-S-0-building",
+      "asset": "w5p_lodge",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "chunk": [
+        21,
+        54
+      ],
+      "origin": [
+        1728,
+        2327
+      ],
+      "rotation": 270,
+      "mirror": false,
+      "frontage": {
+        "id": "service",
+        "normal": "S",
+        "required": true,
+        "role": "service",
+        "width": 1,
+        "x": 1731,
+        "y": 2339
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1738,
+              2334
+            ],
+            [
+              1738,
+              2335
+            ]
+          ],
+          "id": "main"
+        },
+        {
+          "cells": [
+            [
+              1731,
+              2339
+            ]
+          ],
+          "id": "service"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-1-44-S-0-building",
+      "asset": "apothecary_b",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/apothecary_b.json",
+      "chunk": [
+        21,
+        55
+      ],
+      "origin": [
+        1689,
+        2375
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1693,
+        "y": 2382
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1693,
+              2382
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-1-66-N-0-building",
+      "asset": "w5p_lodge",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "chunk": [
+        21,
+        55
+      ],
+      "origin": [
+        1686,
+        2390
+      ],
+      "rotation": 90,
+      "mirror": false,
+      "frontage": {
+        "id": "service",
+        "normal": "N",
+        "required": true,
+        "role": "service",
+        "width": 1,
+        "x": 1693,
+        "y": 2390
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1686,
+              2394
+            ],
+            [
+              1686,
+              2395
+            ]
+          ],
+          "id": "main"
+        },
+        {
+          "cells": [
+            [
+              1693,
+              2390
+            ]
+          ],
+          "id": "service"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-26-45-N-0-building",
+      "asset": "house_hearth_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_hearth_a.json",
+      "chunk": [
+        21,
+        55
+      ],
+      "origin": [
+        1714,
+        2369
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1720,
+        "y": 2369
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1720,
+              2369
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-26-66-N-0-building",
+      "asset": "w5p_lodge",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "chunk": [
+        21,
+        55
+      ],
+      "origin": [
+        1713,
+        2390
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 2,
+        "x": 1720,
+        "y": 2390
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1720,
+              2390
+            ],
+            [
+              1721,
+              2390
+            ]
+          ],
+          "id": "main"
+        },
+        {
+          "cells": [
+            [
+              1725,
+              2397
+            ]
+          ],
+          "id": "service"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-26-45-N-1-building",
+      "asset": "shrine_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "support",
+      "path": "roguelike/data/buildings/religious/shrine_a.json",
+      "chunk": [
+        21,
+        55
+      ],
+      "origin": [
+        1742,
+        2369
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1746,
+        "y": 2369
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1746,
+              2369
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-81-3-S-0-building",
+      "asset": "house_hearth_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_hearth_a.json",
+      "chunk": [
+        22,
+        54
+      ],
+      "origin": [
+        1766,
+        2331
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1771,
+        "y": 2339
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1771,
+              2339
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-26-66-N-1-building",
+      "asset": "market_stall_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/market_stall_a.json",
+      "chunk": [
+        21,
+        55
+      ],
+      "origin": [
+        1745,
+        2390
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 4,
+        "x": 1746,
+        "y": 2390
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1746,
+              2390
+            ],
+            [
+              1747,
+              2390
+            ],
+            [
+              1748,
+              2390
+            ],
+            [
+              1749,
+              2390
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-106-23-W-0-building",
+      "asset": "house_two_room_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_two_room_a.json",
+      "chunk": [
+        22,
+        54
+      ],
+      "origin": [
+        1788,
+        2349
+      ],
+      "rotation": 90,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "W",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1788,
+        "y": 2354
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1788,
+              2354
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-106-3-S-0-building",
+      "asset": "house_small_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_a.json",
+      "chunk": [
+        22,
+        54
+      ],
+      "origin": [
+        1794,
+        2332
+      ],
+      "rotation": 0,
+      "mirror": true,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1799,
+        "y": 2339
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1799,
+              2339
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-81-66-N-0-building",
+      "asset": "workshop_b",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/workshop_b.json",
+      "chunk": [
+        22,
+        55
+      ],
+      "origin": [
+        1766,
+        2390
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 2,
+        "x": 1771,
+        "y": 2390
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1771,
+              2390
+            ],
+            [
+              1772,
+              2390
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-81-45-E-0-building",
+      "asset": "house_small_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_a.json",
+      "chunk": [
+        22,
+        55
+      ],
+      "origin": [
+        1773,
+        2371
+      ],
+      "rotation": 270,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "E",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1780,
+        "y": 2376
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1780,
+              2376
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-106-3-S-1-building",
+      "asset": "storehouse_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "support",
+      "path": "roguelike/data/buildings/storage/storehouse_a.json",
+      "chunk": [
+        22,
+        54
+      ],
+      "origin": [
+        1818,
+        2333
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 3,
+        "x": 1823,
+        "y": 2339
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1823,
+              2339
+            ],
+            [
+              1824,
+              2339
+            ],
+            [
+              1825,
+              2339
+            ]
+          ],
+          "id": "main"
+        },
+        {
+          "cells": [
+            [
+              1827,
+              2339
+            ]
+          ],
+          "id": "service"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-106-44-S-0-building",
+      "asset": "house_two_room_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_two_room_a.json",
+      "chunk": [
+        22,
+        55
+      ],
+      "origin": [
+        1794,
+        2375
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1799,
+        "y": 2382
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1799,
+              2382
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-106-66-N-0-building",
+      "asset": "shop_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/shop_a.json",
+      "chunk": [
+        22,
+        55
+      ],
+      "origin": [
+        1794,
+        2390
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1799,
+        "y": 2390
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1799,
+              2390
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-106-44-S-1-building",
+      "asset": "house_small_a",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_a.json",
+      "chunk": [
+        22,
+        55
+      ],
+      "origin": [
+        1819,
+        2375
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1823,
+        "y": 2382
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1823,
+              2382
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-0-linked-courts-lot-106-66-N-1-building",
+      "asset": "tool_shed_b",
+      "owner": "settlement-0",
+      "profile": "grid",
+      "role": "support",
+      "path": "roguelike/data/buildings/storage/tool_shed_b.json",
+      "chunk": [
+        22,
+        55
+      ],
+      "origin": [
+        1819,
+        2390
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 1823,
+        "y": 2390
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1823,
+              2390
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-1-country-frontage-lot-1-1-S-0-building",
+      "asset": "shop_a",
+      "owner": "settlement-1",
+      "profile": "roadside",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/shop_a.json",
+      "chunk": [
+        92,
+        98
+      ],
+      "origin": [
+        7408,
+        4224
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 7412,
+        "y": 4231
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              7412,
+              4231
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-1-country-frontage-lot-1-23-N-0-building",
+      "asset": "house_small_a",
+      "owner": "settlement-1",
+      "profile": "roadside",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_a.json",
+      "chunk": [
+        92,
+        98
+      ],
+      "origin": [
+        7408,
+        4239
+      ],
+      "rotation": 180,
+      "mirror": true,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 7412,
+        "y": 4239
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              7412,
+              4239
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-1-country-frontage-lot-1-1-S-1-building",
+      "asset": "tool_shed_b",
+      "owner": "settlement-1",
+      "profile": "roadside",
+      "role": "support",
+      "path": "roguelike/data/buildings/storage/tool_shed_b.json",
+      "chunk": [
+        92,
+        98
+      ],
+      "origin": [
+        7427,
+        4226
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 7430,
+        "y": 4231
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              7430,
+              4231
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-1-country-frontage-lot-1-23-N-1-building",
+      "asset": "house_small_a",
+      "owner": "settlement-1",
+      "profile": "roadside",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_a.json",
+      "chunk": [
+        92,
+        98
+      ],
+      "origin": [
+        7425,
+        4239
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 7430,
+        "y": 4239
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              7430,
+              4239
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-1-country-frontage-lot-81-1-S-0-building",
+      "asset": "apothecary_b",
+      "owner": "settlement-1",
+      "profile": "roadside",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/apothecary_b.json",
+      "chunk": [
+        93,
+        98
+      ],
+      "origin": [
+        7454,
+        4224
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 7458,
+        "y": 4231
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              7458,
+              4231
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-1-country-frontage-lot-122-20-W-0-building",
+      "asset": "house_two_room_a",
+      "owner": "settlement-1",
+      "profile": "roadside",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_two_room_a.json",
+      "chunk": [
+        93,
+        98
+      ],
+      "origin": [
+        7484,
+        4243
+      ],
+      "rotation": 90,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "W",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 7484,
+        "y": 4248
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              7484,
+              4248
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-civic-building",
+      "asset": "bell_tower_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "civic",
+      "path": "roguelike/data/buildings/civic/bell_tower_a.json",
+      "chunk": [
+        112,
+        118
+      ],
+      "origin": [
+        9027,
+        5099
+      ],
+      "rotation": 180,
+      "mirror": true,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9030,
+        "y": 5099
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9030,
+              5099
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-26-3-S-1-building",
+      "asset": "shop_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/shop_a.json",
+      "chunk": [
+        112,
+        118
+      ],
+      "origin": [
+        9022,
+        5084
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9026,
+        "y": 5091
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9026,
+              5091
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-1-23-N-0-building",
+      "asset": "w5p_lodge",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "chunk": [
+        112,
+        118
+      ],
+      "origin": [
+        8966,
+        5099
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 2,
+        "x": 8973,
+        "y": 5099
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              8973,
+              5099
+            ],
+            [
+              8974,
+              5099
+            ]
+          ],
+          "id": "main"
+        },
+        {
+          "cells": [
+            [
+              8978,
+              5106
+            ]
+          ],
+          "id": "service"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-1-3-S-0-building",
+      "asset": "tool_shed_b",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "support",
+      "path": "roguelike/data/buildings/storage/tool_shed_b.json",
+      "chunk": [
+        112,
+        118
+      ],
+      "origin": [
+        8970,
+        5086
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 8973,
+        "y": 5091
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              8973,
+              5091
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-26-3-S-0-building",
+      "asset": "house_hearth_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_hearth_a.json",
+      "chunk": [
+        112,
+        118
+      ],
+      "origin": [
+        8995,
+        5083
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9000,
+        "y": 5091
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9000,
+              5091
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-1-44-S-0-building",
+      "asset": "apothecary_b",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/apothecary_b.json",
+      "chunk": [
+        112,
+        119
+      ],
+      "origin": [
+        8969,
+        5127
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 8973,
+        "y": 5134
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              8973,
+              5134
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-1-66-N-0-building",
+      "asset": "w5p_lodge",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "chunk": [
+        112,
+        119
+      ],
+      "origin": [
+        8966,
+        5142
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 2,
+        "x": 8973,
+        "y": 5142
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              8973,
+              5142
+            ],
+            [
+              8974,
+              5142
+            ]
+          ],
+          "id": "main"
+        },
+        {
+          "cells": [
+            [
+              8978,
+              5149
+            ]
+          ],
+          "id": "service"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-26-45-N-0-building",
+      "asset": "w5p_lodge",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "chunk": [
+        112,
+        119
+      ],
+      "origin": [
+        8996,
+        5121
+      ],
+      "rotation": 180,
+      "mirror": true,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 2,
+        "x": 9000,
+        "y": 5121
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9000,
+              5121
+            ],
+            [
+              9001,
+              5121
+            ]
+          ],
+          "id": "main"
+        },
+        {
+          "cells": [
+            [
+              8996,
+              5128
+            ]
+          ],
+          "id": "service"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-26-66-N-0-building",
+      "asset": "house_two_room_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_two_room_a.json",
+      "chunk": [
+        112,
+        119
+      ],
+      "origin": [
+        8996,
+        5142
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9000,
+        "y": 5142
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9000,
+              5142
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-26-45-N-1-building",
+      "asset": "shrine_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "support",
+      "path": "roguelike/data/buildings/religious/shrine_a.json",
+      "chunk": [
+        112,
+        119
+      ],
+      "origin": [
+        9022,
+        5121
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9026,
+        "y": 5121
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9026,
+              5121
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-81-3-S-0-building",
+      "asset": "house_small_b",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_b.json",
+      "chunk": [
+        113,
+        118
+      ],
+      "origin": [
+        9048,
+        5085
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9051,
+        "y": 5091
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9051,
+              5091
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-26-66-N-1-building",
+      "asset": "apothecary_b",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/apothecary_b.json",
+      "chunk": [
+        112,
+        119
+      ],
+      "origin": [
+        9020,
+        5142
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9026,
+        "y": 5142
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9026,
+              5142
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-106-23-W-0-building",
+      "asset": "house_two_room_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_two_room_a.json",
+      "chunk": [
+        113,
+        118
+      ],
+      "origin": [
+        9068,
+        5101
+      ],
+      "rotation": 90,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "W",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9068,
+        "y": 5106
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9068,
+              5106
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-106-3-S-0-building",
+      "asset": "house_small_b",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_b.json",
+      "chunk": [
+        113,
+        118
+      ],
+      "origin": [
+        9076,
+        5085
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9079,
+        "y": 5091
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9079,
+              5091
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-81-66-N-0-building",
+      "asset": "market_stall_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/market_stall_a.json",
+      "chunk": [
+        113,
+        119
+      ],
+      "origin": [
+        9050,
+        5142
+      ],
+      "rotation": 180,
+      "mirror": true,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 4,
+        "x": 9051,
+        "y": 5142
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9051,
+              5142
+            ],
+            [
+              9052,
+              5142
+            ],
+            [
+              9053,
+              5142
+            ],
+            [
+              9054,
+              5142
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-81-45-E-0-building",
+      "asset": "house_two_room_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_two_room_a.json",
+      "chunk": [
+        113,
+        119
+      ],
+      "origin": [
+        9053,
+        5124
+      ],
+      "rotation": 270,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "E",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9060,
+        "y": 5128
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9060,
+              5128
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-106-3-S-1-building",
+      "asset": "storehouse_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "support",
+      "path": "roguelike/data/buildings/storage/storehouse_a.json",
+      "chunk": [
+        113,
+        118
+      ],
+      "origin": [
+        9098,
+        5085
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 3,
+        "x": 9103,
+        "y": 5091
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9103,
+              5091
+            ],
+            [
+              9104,
+              5091
+            ],
+            [
+              9105,
+              5091
+            ]
+          ],
+          "id": "main"
+        },
+        {
+          "cells": [
+            [
+              9107,
+              5091
+            ]
+          ],
+          "id": "service"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-106-44-S-0-building",
+      "asset": "house_hearth_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_hearth_a.json",
+      "chunk": [
+        113,
+        119
+      ],
+      "origin": [
+        9074,
+        5126
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9079,
+        "y": 5134
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9079,
+              5134
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-106-66-N-0-building",
+      "asset": "apothecary_b",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/apothecary_b.json",
+      "chunk": [
+        113,
+        119
+      ],
+      "origin": [
+        9073,
+        5142
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9079,
+        "y": 5142
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9079,
+              5142
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-106-44-S-1-building",
+      "asset": "house_hearth_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_hearth_a.json",
+      "chunk": [
+        113,
+        119
+      ],
+      "origin": [
+        9098,
+        5126
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9103,
+        "y": 5134
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9103,
+              5134
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-2-linked-courts-lot-106-66-N-1-building",
+      "asset": "shrine_a",
+      "owner": "settlement-2",
+      "profile": "grid",
+      "role": "support",
+      "path": "roguelike/data/buildings/religious/shrine_a.json",
+      "chunk": [
+        113,
+        119
+      ],
+      "origin": [
+        9099,
+        5142
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 9103,
+        "y": 5142
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              9103,
+              5142
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-3-country-frontage-lot-1-1-E-0-building",
+      "asset": "workshop_b",
+      "owner": "settlement-3",
+      "profile": "roadside",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/workshop_b.json",
+      "chunk": [
+        55,
+        109
+      ],
+      "origin": [
+        4428,
+        4691
+      ],
+      "rotation": 270,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "E",
+        "required": true,
+        "role": "main",
+        "width": 2,
+        "x": 4436,
+        "y": 4696
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              4436,
+              4696
+            ],
+            [
+              4436,
+              4697
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-3-country-frontage-lot-1-23-N-0-building",
+      "asset": "house_small_a",
+      "owner": "settlement-3",
+      "profile": "roadside",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_a.json",
+      "chunk": [
+        55,
+        109
+      ],
+      "origin": [
+        4458,
+        4712
+      ],
+      "rotation": 180,
+      "mirror": true,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 4462,
+        "y": 4712
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              4462,
+              4712
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-3-country-frontage-lot-42-1-S-0-building",
+      "asset": "tool_shed_b",
+      "owner": "settlement-3",
+      "profile": "roadside",
+      "role": "support",
+      "path": "roguelike/data/buildings/storage/tool_shed_b.json",
+      "chunk": [
+        55,
+        109
+      ],
+      "origin": [
+        4459,
+        4699
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 4462,
+        "y": 4704
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              4462,
+              4704
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-3-country-frontage-lot-81-1-S-0-building",
+      "asset": "house_small_b",
+      "owner": "settlement-3",
+      "profile": "roadside",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_small_b.json",
+      "chunk": [
+        56,
+        109
+      ],
+      "origin": [
+        4487,
+        4698
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 4490,
+        "y": 4704
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              4490,
+              4704
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-3-country-frontage-lot-81-23-N-0-building",
+      "asset": "market_stall_a",
+      "owner": "settlement-3",
+      "profile": "roadside",
+      "role": "commercial",
+      "path": "roguelike/data/buildings/commercial/market_stall_a.json",
+      "chunk": [
+        56,
+        109
+      ],
+      "origin": [
+        4489,
+        4712
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 4,
+        "x": 4490,
+        "y": 4712
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              4490,
+              4712
+            ],
+            [
+              4491,
+              4712
+            ],
+            [
+              4492,
+              4712
+            ],
+            [
+              4493,
+              4712
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-3-country-frontage-lot-81-1-S-1-building",
+      "asset": "house_hearth_a",
+      "owner": "settlement-3",
+      "profile": "roadside",
+      "role": "residential",
+      "path": "roguelike/data/buildings/residential/house_hearth_a.json",
+      "chunk": [
+        56,
+        109
+      ],
+      "origin": [
+        4503,
+        4696
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 4508,
+        "y": 4704
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              4508,
+              4704
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "settlement-3-country-frontage-lot-81-23-N-1-building",
+      "asset": "shrine_a",
+      "owner": "settlement-3",
+      "profile": "roadside",
+      "role": "support",
+      "path": "roguelike/data/buildings/religious/shrine_a.json",
+      "chunk": [
+        56,
+        109
+      ],
+      "origin": [
+        4504,
+        4712
+      ],
+      "rotation": 180,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "N",
+        "required": true,
+        "role": "main",
+        "width": 1,
+        "x": 4508,
+        "y": 4712
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              4508,
+              4712
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    },
+    {
+      "id": "landmark-plot-60-building",
+      "asset": "roadside_shrine_a",
+      "owner": "landmark",
+      "profile": "landmark",
+      "role": "landmark",
+      "path": "roguelike/data/buildings/wilderness/roadside_shrine_a.json",
+      "chunk": [
+        21,
+        50
+      ],
+      "origin": [
+        1718,
+        2164
+      ],
+      "rotation": 0,
+      "mirror": false,
+      "frontage": {
+        "id": "main",
+        "normal": "S",
+        "required": true,
+        "role": "main",
+        "width": 2,
+        "x": 1720,
+        "y": 2168
+      },
+      "entrance_cells": [
+        {
+          "cells": [
+            [
+              1720,
+              2168
+            ],
+            [
+              1721,
+              2168
+            ]
+          ],
+          "id": "main"
+        }
+      ]
+    }
+  ],
+  "seed": 20261029,
+  "selected_count": 56,
+  "selection_matches_saved_resolve": true,
+  "setup": "Ordinary 128 × 128 world_gen.generate_world with normal saved generation configuration. Full plan generated before filtering. No candidate/policy injection or parked draft overlay.",
+  "shown_count": 56,
+  "summary": [
+    {
+      "asset": "house_hearth_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/residential/house_hearth_a.json",
+      "profile": "grid",
+      "role": "residential",
+      "selected": 5,
+      "weight": 1
+    },
+    {
+      "asset": "house_small_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/residential/house_small_a.json",
+      "profile": "grid",
+      "role": "residential",
+      "selected": 3,
+      "weight": 1
+    },
+    {
+      "asset": "house_small_b",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/residential/house_small_b.json",
+      "profile": "grid",
+      "role": "residential",
+      "selected": 3,
+      "weight": 1
+    },
+    {
+      "asset": "house_two_room_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/residential/house_two_room_a.json",
+      "profile": "grid",
+      "role": "residential",
+      "selected": 5,
+      "weight": 1
+    },
+    {
+      "asset": "w5p_lodge",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 3,
+      "path": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "profile": "grid",
+      "role": "residential",
+      "selected": 6,
+      "weight": 5
+    },
+    {
+      "asset": "apothecary_b",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/commercial/apothecary_b.json",
+      "profile": "grid",
+      "role": "commercial",
+      "selected": 4,
+      "weight": 1
+    },
+    {
+      "asset": "market_stall_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/commercial/market_stall_a.json",
+      "profile": "grid",
+      "role": "commercial",
+      "selected": 2,
+      "weight": 1
+    },
+    {
+      "asset": "shop_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/commercial/shop_a.json",
+      "profile": "grid",
+      "role": "commercial",
+      "selected": 3,
+      "weight": 1
+    },
+    {
+      "asset": "workshop_b",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/commercial/workshop_b.json",
+      "profile": "grid",
+      "role": "commercial",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "shrine_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 3,
+      "path": "roguelike/data/buildings/religious/shrine_a.json",
+      "profile": "grid",
+      "role": "support",
+      "selected": 3,
+      "weight": 1
+    },
+    {
+      "asset": "storehouse_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 3,
+      "path": "roguelike/data/buildings/storage/storehouse_a.json",
+      "profile": "grid",
+      "role": "support",
+      "selected": 2,
+      "weight": 1
+    },
+    {
+      "asset": "tool_shed_b",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 3,
+      "path": "roguelike/data/buildings/storage/tool_shed_b.json",
+      "profile": "grid",
+      "role": "support",
+      "selected": 3,
+      "weight": 1
+    },
+    {
+      "asset": "bell_tower_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 1,
+      "path": "roguelike/data/buildings/civic/bell_tower_a.json",
+      "profile": "grid",
+      "role": "civic",
+      "selected": 2,
+      "weight": 1
+    },
+    {
+      "asset": "house_hearth_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/residential/house_hearth_a.json",
+      "profile": "roadside",
+      "role": "residential",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "house_small_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/residential/house_small_a.json",
+      "profile": "roadside",
+      "role": "residential",
+      "selected": 3,
+      "weight": 1
+    },
+    {
+      "asset": "house_small_b",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/residential/house_small_b.json",
+      "profile": "roadside",
+      "role": "residential",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "house_two_room_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/residential/house_two_room_a.json",
+      "profile": "roadside",
+      "role": "residential",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "apothecary_b",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/commercial/apothecary_b.json",
+      "profile": "roadside",
+      "role": "commercial",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "market_stall_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/commercial/market_stall_a.json",
+      "profile": "roadside",
+      "role": "commercial",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "shop_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/commercial/shop_a.json",
+      "profile": "roadside",
+      "role": "commercial",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "workshop_b",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 5,
+      "path": "roguelike/data/buildings/commercial/workshop_b.json",
+      "profile": "roadside",
+      "role": "commercial",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "shrine_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 3,
+      "path": "roguelike/data/buildings/religious/shrine_a.json",
+      "profile": "roadside",
+      "role": "support",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "storehouse_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 3,
+      "path": "roguelike/data/buildings/storage/storehouse_a.json",
+      "profile": "roadside",
+      "role": "support",
+      "selected": 0,
+      "weight": 1
+    },
+    {
+      "asset": "tool_shed_b",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 3,
+      "path": "roguelike/data/buildings/storage/tool_shed_b.json",
+      "profile": "roadside",
+      "role": "support",
+      "selected": 2,
+      "weight": 1
+    },
+    {
+      "asset": "hunter_cabin",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 1,
+      "path": "roguelike/data/buildings/wilderness/hunter_cabin.json",
+      "profile": "landmark",
+      "role": "landmark",
+      "selected": 0,
+      "weight": 1
+    },
+    {
+      "asset": "roadside_shrine_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 1,
+      "path": "roguelike/data/buildings/wilderness/roadside_shrine_a.json",
+      "profile": "landmark",
+      "role": "landmark",
+      "selected": 1,
+      "weight": 1
+    },
+    {
+      "asset": "shepherds_hut_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 1,
+      "path": "roguelike/data/buildings/wilderness/shepherds_hut_a.json",
+      "profile": "landmark",
+      "role": "landmark",
+      "selected": 0,
+      "weight": 1
+    },
+    {
+      "asset": "waymarker_shelter_a",
+      "base_weight": 1,
+      "eligible": true,
+      "max_per_settlement": 1,
+      "path": "roguelike/data/buildings/wilderness/waymarker_shelter_a.json",
+      "profile": "landmark",
+      "role": "landmark",
+      "selected": 0,
+      "weight": 1
+    }
+  ],
+  "truncated": 0,
+  "width": 128,
+  "input_manifest": "saved-inputs-enrolled.json",
+  "full_plan": "ordinary-plan-enrolled.json.gz"
+}

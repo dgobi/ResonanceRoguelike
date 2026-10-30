@@ -17,8 +17,10 @@ export async function workspaceJourney(page,root,output,receipt) {
   const idle=()=>page.waitForFunction(()=>!document.querySelector(".status-dot.working") && !window.w5c?.active,null,{timeout:60000});
   const editIdle=()=>page.waitForFunction(()=>![...document.querySelectorAll('[data-testid="authoring"]')].some(e=>e.dataset.editPending==="true"));
   const source=async()=>{await eb("Source").click();return editor().locator("textarea.source-editor").inputValue();};
-  const open=async path=>{await page.getByLabel("Search ID, name or path").fill(path);await page.locator(`[data-asset="${path}"]`).click();await idle();};
-  const tab=async path=>{await page.locator(`[data-document-tab="${path}"]`).click();};
+  const open=async path=>{await idle();await page.getByLabel("Search ID, name or path").fill(path);await page.locator(`[data-asset="${path}"]`).click();await page.waitForFunction(path=>[...document.querySelectorAll("[data-testid=authoring]")].some(e=>e.offsetParent&&e.querySelector(".filepath")?.textContent===path),path);await idle();};
+  // App-local activation must not autoscroll the old pane before its state is captured.
+  const tab=async path=>{await page.locator(`[data-document-tab="${path}"]`).evaluate(el=>el.click());await page.waitForFunction(path=>[...document.querySelectorAll("[data-testid=authoring]")].some(e=>e.offsetParent&&e.querySelector(".filepath")?.textContent===path),path);};
+  const beginEdit=async()=>{for(let i=0;i<5;i++){await idle();if(await eb("Discard / Revert").count())return;await eb("Begin edit").click();try{await eb("Discard / Revert").waitFor({timeout:1500});return;}catch{receipt.begin_edit_retries=(receipt.begin_edit_retries||0)+1;}}assert.fail("Begin edit did not install editing state");};
   const ipc=async(command,args)=>{
     for(let attempt=0;;attempt++){
       const result=await page.evaluate(async({command,args})=>{try{return await window.__TAURI_INTERNALS__.invoke(command,args);}catch(error){return {error};}},{command,args});
@@ -69,7 +71,7 @@ export async function workspaceJourney(page,root,output,receipt) {
   for(let index=0;index<paths.length;index++) {
     const path=paths[index];if(index)await open(path);
     const opened=await ipc("open_document",{asset:path});assert(opened.result,JSON.stringify(opened));tokens.set(path,opened.result.document_token);
-    await eb("Begin edit").click();await eb("Save as new variant").click();
+    await beginEdit();await eb("Save as new variant").click();
     const id=`w5c_parked_${index}`;ids.set(path,id);await editor().getByLabel("New variant ID").fill(id);await editIdle();
     beforeEdits.set(path,await source());
     const field=index<2 ? "Item description" : index<4 ? "Recipe description" : "Reader title";
@@ -85,7 +87,7 @@ export async function workspaceJourney(page,root,output,receipt) {
   assert(await eb("Validate draft").isDisabled());assert(await b("Reload document").isDisabled());
   await page.evaluate(()=>window.w5c.releaseSweep());await idle();assert(!(await eb("Validate draft").isDisabled()));
   receipt.checks.push("a held real freshness response disables conflicting UI actions until release without queueing work");
-  await open(building);await eb("Begin edit").click();const buildingOriginal=await source();
+  await open(building);await beginEdit();const buildingOriginal=await source();
   await editor().locator("textarea.source-editor").fill(buildingOriginal+" \n");await editIdle();const buildingDraft=await source();
   // Each editor and history stays mounted, including Source and variant fields.
   for(let index=0;index<paths.length;index++) {

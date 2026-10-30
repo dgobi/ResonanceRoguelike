@@ -1,0 +1,4 @@
+*.json text eol=lf
+fixtures/*.json -text whitespace=-blank-at-eof,cr-at-eol
+*.json.gz -text
+issued-brief.md -text whitespace=-blank-at-eol,-blank-at-eof,cr-at-eol

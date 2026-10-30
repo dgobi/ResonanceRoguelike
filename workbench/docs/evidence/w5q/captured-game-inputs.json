@@ -1,0 +1,22 @@
+{
+  "roguelike/engine/content_authoring.py": {
+    "native_sha256": "7c101f036ca2e705aa1319d34554cd2c9d601f5917dfc0d8eb1699e1d48ca569",
+    "working_sha256": "7c101f036ca2e705aa1319d34554cd2c9d601f5917dfc0d8eb1699e1d48ca569"
+  },
+  "roguelike/engine/selection_authoring.py": {
+    "native_sha256": "189e2a7d0268e6e0230575fa28e4a5c7cc036f59a1f4b37ba940ed484b199a4a",
+    "working_sha256": "189e2a7d0268e6e0230575fa28e4a5c7cc036f59a1f4b37ba940ed484b199a4a"
+  },
+  "roguelike/generation/building_preview.py": {
+    "native_sha256": "ec19e57a28c0d077d87412cbcfaf2982e134c40cbee3c51af4ed66096b6fe9e5",
+    "working_sha256": "ec19e57a28c0d077d87412cbcfaf2982e134c40cbee3c51af4ed66096b6fe9e5"
+  },
+  "roguelike/generation/selection_preview.py": {
+    "native_sha256": "56801e2069cb1f2c49f8734ec33740f6488d4f681bac9cace270b76dea979bac",
+    "working_sha256": "56801e2069cb1f2c49f8734ec33740f6488d4f681bac9cace270b76dea979bac"
+  },
+  "roguelike/generation/settlement_selection.py": {
+    "native_sha256": "2c70e0f480a5424d7d027c35dd37a2060ff6e21561ef5905f32775ba3c11e7fc",
+    "working_sha256": "2c70e0f480a5424d7d027c35dd37a2060ff6e21561ef5905f32775ba3c11e7fc"
+  }
+}

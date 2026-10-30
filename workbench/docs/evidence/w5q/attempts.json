@@ -1,0 +1,40 @@
+{
+  "native": [
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5q/native-1793320284693/receipt.json",
+        "sha256": "f3fc065108c019f70d6ed370718d05e608c1bdf89a4b11615ff170169b2efcc4",
+        "bytes": 18368
+      },
+      "failure": "locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"authoring\"]:visible').locator('textarea.source-editor')\u001b[22m\n\u001b[2m    - locator resolved to <textarea readonly spellcheck=\"false\" class=\"source-editor\" id=\"item-draft-json-e62f2c3f-071d-4ae8-8324-60f5f0a67e3d\">{↵  \"id\": \"clay_pot\",↵  \"name\": \"clay pot\",↵  \"de…</textarea>\u001b[22m\n\u001b[2m    - fill(\"{\"unrelated\":\"retained λ\",\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not editable\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not editable\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    59 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not editable\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-selection.mjs:54:77",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5q/native-1793320411866/receipt.json",
+        "sha256": "17b6de4fe1c5752d4506bfff9bc23c220933900fae641553288011d10b9c18ae",
+        "bytes": 31679
+      },
+      "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-testid=\"authoring\"]:visible').getByRole('button', { name: 'Undo document', exact: true })\u001b[22m\n\n    at G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-selection.mjs:73:89",
+      "counted_as_pass": false
+    },
+    {
+      "local_receipt": {
+        "path": "workbench/.artifacts/w5q/native-1793320984648/receipt.json",
+        "sha256": "5360b1622c1c17862e0e73220cfdb8dc66a59c0b111000ff91c6e5a206db6374",
+        "bytes": 44264
+      },
+      "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Open building row 5', exact: true }).filter({ visible: true })\u001b[22m\n\u001b[2m    - locator resolved to <button>Open building row 5</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    58 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at G:\\GameDev\\RoguelikeProject\\workbench\\scripts\\run-selection.mjs:79:42",
+      "counted_as_pass": false
+    }
+  ],
+  "excluded": [
+    "Preliminary selector checks exposed incorrect case checking against the shared scratch/data staging path. Corrected before final worker/game gates.",
+    "A focused source-span test exposed add/remove whitespace loss. Selection insertion now preserves the native array trailing span; frontend tests pass.",
+    "The native journey exposed selector Source history clearing. Fixed to use the shared history and allow undo from malformed JSON; final package/native journey verifies it.",
+    "Initial native event readiness and assumed undo button placement were corrected in the app-local harness. A later journey exposed row navigation disabled by the edit fieldset; read-only source navigation is enabled in the final renderer. All failed receipts remain excluded.",
+    "Workspace harness failures included a stale Begin-edit target, Playwright autoscrolling the old pane while clicking its offscreen tab, and one fixture process exiting with Windows status -1073740791 without output. The harness now waits for the intended owner and editing state, and activates tabs through the same app-local click handler without changing the old pane scroll first. Final lifecycle checks pass; no failed attempt is counted.",
+    "An intermediate successful build crossed a frontend/harness edit and was source_stable=false. Only package-links and its matching primary native receipts are used.",
+    "The full worker run crossed frontend/harness-only edits. Exact worker/game Python input hashes are unchanged; its original broad source_stable flag and precise non-consumed changes remain disclosed. No expensive gate was repeated solely to relabel evidence."
+  ]
+}

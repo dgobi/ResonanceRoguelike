@@ -1,0 +1,761 @@
+{
+  "policy_sha256": "0e799fb31e5e0fd460d846418e5e2d1fce755b80d9d86ca8003710e3489de195",
+  "seed": 20261029,
+  "input_identity": "dd1944a6ff1f0b77df866465c4f70b6b99c0b2742d31925b0c1c46fcfb3f57b5",
+  "plan_identity": "a0e2291af3b3f437ccd8d2f1a4e005137f22ebea4017fcfbd53c972de15cff15",
+  "placement": {
+    "approach": [
+      1731,
+      2339,
+      1732,
+      2344
+    ],
+    "asset": "w5p_lodge",
+    "clearance": [
+      1727,
+      2326,
+      1740,
+      2341
+    ],
+    "context": "grid",
+    "dependency": "w5p_lodge",
+    "entrances": [
+      {
+        "id": "main",
+        "normal": "E",
+        "required": true,
+        "role": "main",
+        "width": 2,
+        "x": 1738,
+        "y": 2334
+      },
+      {
+        "id": "service",
+        "normal": "S",
+        "required": true,
+        "role": "service",
+        "width": 1,
+        "x": 1731,
+        "y": 2339
+      }
+    ],
+    "footprint": [
+      1728,
+      2327,
+      1739,
+      2340
+    ],
+    "frontage_entrance": "service",
+    "id": "settlement-0-linked-courts-lot-42-1-S-0-building",
+    "join": [
+      1731,
+      2343
+    ],
+    "mirror": false,
+    "origin": [
+      1728,
+      2327
+    ],
+    "owner": "settlement-0",
+    "required": false,
+    "road": "settlement-0-street-east-west-0",
+    "role": "residential",
+    "rotation": 270,
+    "targets": [
+      {
+        "kind": "readable",
+        "required": true,
+        "x": 1734,
+        "y": 2338
+      },
+      {
+        "kind": "item",
+        "required": true,
+        "x": 1734,
+        "y": 2337
+      },
+      {
+        "kind": "readable",
+        "required": true,
+        "x": 1734,
+        "y": 2336
+      },
+      {
+        "kind": "container",
+        "required": true,
+        "x": 1734,
+        "y": 2330
+      }
+    ]
+  },
+  "chunk": [
+    21,
+    54
+  ],
+  "scene_address": [
+    21,
+    54,
+    null
+  ],
+  "scene_seed": "893766",
+  "width": 80,
+  "height": 43,
+  "terrain_sha256": "d861853490dc1ccd9b1a77158dbce35dcfe4ff310b76ac485025cb5e3735cb8e",
+  "scene_counts": {
+    "decor": 77,
+    "items": 11,
+    "containers": 6,
+    "actors": 3
+  },
+  "records": [
+    {
+      "declared_item_id": "letter",
+      "declared_kind": "item",
+      "declared_text_id": "world_graffiti_a",
+      "decor_id": null,
+      "item_id": "letter",
+      "kind": "item",
+      "loot_pools": null,
+      "native_xy": [
+        1,
+        6
+      ],
+      "objects": [
+        {
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "burn_turns": null,
+          "consumed_on_use": true,
+          "count": 1,
+          "decay_timer": null,
+          "description": "A heavy inscribed fragment. Broken from something larger.",
+          "drink_message": null,
+          "eat_message": null,
+          "harvest_from": null,
+          "heal_amount": null,
+          "hydration": null,
+          "item_id": "inscription",
+          "item_state_version": 1,
+          "keywords": [
+            {
+              "tag": "bony",
+              "tier": 1
+            }
+          ],
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "name": "stone inscription",
+          "nutrition": null,
+          "on_use": "read",
+          "qualities": {},
+          "source_creature": null,
+          "stackable": false,
+          "temporary_essence": [],
+          "text_id": "world_graffiti_a",
+          "tile": "document",
+          "turns_lit": 0,
+          "weight": 2
+        }
+      ],
+      "receipt_owned": true,
+      "record_id": "settlement-0-linked-courts-lot-42-1-S-0-building:w5p_lodge@48,5,0:special[0]",
+      "relocated": false,
+      "selected_branch": null,
+      "source": "w5p_lodge special[0]",
+      "source_index": 9,
+      "source_xy": [
+        54,
+        16
+      ],
+      "text_id": "world_graffiti_a",
+      "text_override_present": true,
+      "transformed_xy": [
+        6,
+        11
+      ],
+      "xy": [
+        54,
+        16
+      ]
+    },
+    {
+      "declared_item_id": null,
+      "declared_kind": "container",
+      "declared_text_id": null,
+      "decor_id": "sack",
+      "item_id": null,
+      "kind": "container",
+      "loot_pools": [
+        "commoner_kitchen"
+      ],
+      "native_xy": [
+        8,
+        1
+      ],
+      "objects": [
+        {
+          "decor_id": "sack",
+          "items": [
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+              "drink_message": null,
+              "eat_message": "Dry and tasteless. It does what it needs to.",
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "dried_provisions",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "edible",
+                  "tier": 2
+                },
+                {
+                  "tag": "binding",
+                  "tier": 1
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "dried provisions",
+              "nutrition": 300,
+              "on_use": "eat",
+              "qualities": {},
+              "source_creature": null,
+              "stackable": false,
+              "temporary_essence": [],
+              "text_id": "",
+              "tile": "generic_item",
+              "turns_lit": 0,
+              "weight": 0.3
+            },
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "Strips of dried crow meat. It tastes exactly as you would expect. It sustains you regardless.",
+              "drink_message": null,
+              "eat_message": null,
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "crow_jerky",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "edible",
+                  "tier": 2
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "Crow Jerky",
+              "nutrition": 0.35,
+              "on_use": "eat",
+              "qualities": {},
+              "source_creature": null,
+              "stackable": true,
+              "temporary_essence": [],
+              "text_id": "",
+              "tile": "food_item",
+              "turns_lit": 0,
+              "weight": 0.2
+            }
+          ]
+        }
+      ],
+      "receipt_owned": true,
+      "record_id": "settlement-0-linked-courts-lot-42-1-S-0-building:w5p_lodge@48,5,0:special[1]",
+      "relocated": false,
+      "selected_branch": null,
+      "source": "w5p_lodge special[1]",
+      "source_index": 10,
+      "source_xy": [
+        49,
+        9
+      ],
+      "text_id": null,
+      "text_override_present": false,
+      "transformed_xy": [
+        1,
+        4
+      ],
+      "xy": [
+        49,
+        9
+      ]
+    },
+    {
+      "declared_item_id": "letter",
+      "declared_kind": "item",
+      "declared_text_id": "text_residential_letter",
+      "decor_id": null,
+      "item_id": "letter",
+      "kind": "item",
+      "loot_pools": null,
+      "native_xy": [
+        2,
+        2
+      ],
+      "objects": [
+        {
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "burn_turns": null,
+          "consumed_on_use": true,
+          "count": 1,
+          "decay_timer": null,
+          "description": "Folded paper. Someone meant to send this.",
+          "drink_message": null,
+          "eat_message": null,
+          "harvest_from": null,
+          "heal_amount": null,
+          "hydration": null,
+          "item_id": "letter",
+          "item_state_version": 1,
+          "keywords": [
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "name": "a letter",
+          "nutrition": null,
+          "on_use": "read",
+          "qualities": {},
+          "source_creature": null,
+          "stackable": false,
+          "temporary_essence": [],
+          "text_id": "text_residential_letter",
+          "tile": "document",
+          "turns_lit": 0,
+          "weight": 0.02
+        }
+      ],
+      "receipt_owned": true,
+      "record_id": "settlement-0-linked-courts-lot-42-1-S-0-building:w5p_lodge@48,5,0:special[2]",
+      "relocated": false,
+      "selected_branch": null,
+      "source": "w5p_lodge special[2]",
+      "source_index": 11,
+      "source_xy": [
+        50,
+        15
+      ],
+      "text_id": "text_residential_letter",
+      "text_override_present": true,
+      "transformed_xy": [
+        2,
+        10
+      ],
+      "xy": [
+        50,
+        15
+      ]
+    },
+    {
+      "declared_item_id": null,
+      "declared_kind": "scene",
+      "declared_text_id": null,
+      "decor_id": null,
+      "item_id": null,
+      "kind": "scene",
+      "loot_pools": null,
+      "native_xy": [
+        5,
+        2
+      ],
+      "objects": [
+        {
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "burn_turns": null,
+          "consumed_on_use": true,
+          "count": 1,
+          "decay_timer": null,
+          "description": "A cloth parcel of preserved travel rations. Salt-stiff, dense, neutral. Someone prepared this for a journey they did not finish.",
+          "drink_message": null,
+          "eat_message": "Dry and tasteless. It does what it needs to.",
+          "harvest_from": null,
+          "heal_amount": null,
+          "hydration": null,
+          "item_id": "dried_provisions",
+          "item_state_version": 1,
+          "keywords": [
+            {
+              "tag": "edible",
+              "tier": 2
+            },
+            {
+              "tag": "binding",
+              "tier": 1
+            }
+          ],
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "name": "dried provisions",
+          "nutrition": 300,
+          "on_use": "eat",
+          "qualities": {},
+          "source_creature": null,
+          "stackable": false,
+          "temporary_essence": [],
+          "text_id": "",
+          "tile": "generic_item",
+          "turns_lit": 0,
+          "weight": 0.3
+        },
+        {
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "burn_turns": null,
+          "consumed_on_use": true,
+          "count": 1,
+          "decay_timer": null,
+          "description": "A leather skin, filled with water. The hide is old but the stitching holds. Something alive is in it still.",
+          "drink_message": "Cold and flat. The thirst retreats.",
+          "eat_message": null,
+          "harvest_from": null,
+          "heal_amount": null,
+          "hydration": 400,
+          "item_id": "water_skin",
+          "item_state_version": 1,
+          "keywords": [
+            {
+              "tag": "drinkable",
+              "tier": 2
+            },
+            {
+              "tag": "vessel",
+              "tier": 1
+            }
+          ],
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "name": "water skin",
+          "nutrition": null,
+          "on_use": "drink",
+          "qualities": {},
+          "source_creature": null,
+          "stackable": false,
+          "temporary_essence": [],
+          "text_id": "",
+          "tile": "generic_item",
+          "turns_lit": 0,
+          "weight": 0.5
+        }
+      ],
+      "receipt_owned": true,
+      "record_id": "settlement-0-linked-courts-lot-42-1-S-0-building:w5p_lodge@48,5,0:special[3]",
+      "relocated": false,
+      "selected_branch": null,
+      "source": "w5p_lodge special[3]",
+      "source_index": 12,
+      "source_xy": [
+        50,
+        12
+      ],
+      "text_id": null,
+      "text_override_present": false,
+      "transformed_xy": [
+        2,
+        7
+      ],
+      "xy": [
+        50,
+        12
+      ]
+    },
+    {
+      "declared_item_id": "wood_bundle",
+      "declared_kind": "item",
+      "declared_text_id": null,
+      "decor_id": null,
+      "item_id": "wood_bundle",
+      "kind": "item",
+      "loot_pools": null,
+      "native_xy": [
+        2,
+        6
+      ],
+      "objects": [
+        {
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "burn_turns": null,
+          "consumed_on_use": true,
+          "count": 1,
+          "decay_timer": null,
+          "description": "A loose bundle of dry branches. Snapped from dead fall.",
+          "drink_message": null,
+          "eat_message": null,
+          "harvest_from": null,
+          "heal_amount": null,
+          "hydration": null,
+          "item_id": "wood_bundle",
+          "item_state_version": 1,
+          "keywords": [
+            {
+              "tag": "fuel",
+              "tier": 1
+            },
+            {
+              "tag": "fibrous",
+              "tier": 1
+            }
+          ],
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "name": "bundle of wood",
+          "nutrition": null,
+          "on_use": null,
+          "qualities": {},
+          "source_creature": null,
+          "stackable": false,
+          "temporary_essence": [],
+          "text_id": "",
+          "tile": "generic_item",
+          "turns_lit": 0,
+          "weight": 1
+        }
+      ],
+      "receipt_owned": true,
+      "record_id": "settlement-0-linked-courts-lot-42-1-S-0-building:w5p_lodge@48,5,0:special[4]",
+      "relocated": false,
+      "selected_branch": null,
+      "source": "w5p_lodge special[4]",
+      "source_index": 13,
+      "source_xy": [
+        54,
+        15
+      ],
+      "text_id": null,
+      "text_override_present": false,
+      "transformed_xy": [
+        6,
+        10
+      ],
+      "xy": [
+        54,
+        15
+      ]
+    },
+    {
+      "declared_item_id": "wood_bundle",
+      "declared_kind": "item",
+      "declared_text_id": "world_graffiti_a",
+      "decor_id": null,
+      "item_id": "wood_bundle",
+      "kind": "item",
+      "loot_pools": null,
+      "native_xy": [
+        3,
+        6
+      ],
+      "objects": [
+        {
+          "_temp_av_bonus": 0,
+          "_temp_av_hits": 0,
+          "burn_turns": null,
+          "consumed_on_use": true,
+          "count": 1,
+          "decay_timer": null,
+          "description": "A heavy inscribed fragment. Broken from something larger.",
+          "drink_message": null,
+          "eat_message": null,
+          "harvest_from": null,
+          "heal_amount": null,
+          "hydration": null,
+          "item_id": "inscription",
+          "item_state_version": 1,
+          "keywords": [
+            {
+              "tag": "bony",
+              "tier": 1
+            }
+          ],
+          "light_data": null,
+          "liquid": null,
+          "liquid_volume": 0,
+          "name": "stone inscription",
+          "nutrition": null,
+          "on_use": "read",
+          "qualities": {},
+          "source_creature": null,
+          "stackable": false,
+          "temporary_essence": [],
+          "text_id": "world_graffiti_a",
+          "tile": "document",
+          "turns_lit": 0,
+          "weight": 2
+        }
+      ],
+      "receipt_owned": true,
+      "record_id": "settlement-0-linked-courts-lot-42-1-S-0-building:w5p_lodge@48,5,0:special[5]",
+      "relocated": false,
+      "selected_branch": null,
+      "source": "w5p_lodge special[5]",
+      "source_index": 14,
+      "source_xy": [
+        54,
+        14
+      ],
+      "text_id": "world_graffiti_a",
+      "text_override_present": true,
+      "transformed_xy": [
+        6,
+        9
+      ],
+      "xy": [
+        54,
+        14
+      ]
+    },
+    {
+      "declared_item_id": null,
+      "declared_kind": "container",
+      "declared_text_id": null,
+      "decor_id": "crate",
+      "item_id": null,
+      "kind": "container",
+      "loot_pools": [
+        "workshop_b_fuel"
+      ],
+      "native_xy": [
+        9,
+        6
+      ],
+      "objects": [
+        {
+          "decor_id": "crate",
+          "items": [
+            {
+              "_temp_av_bonus": 0,
+              "_temp_av_hits": 0,
+              "burn_turns": null,
+              "consumed_on_use": true,
+              "count": 1,
+              "decay_timer": null,
+              "description": "A loose bundle of dry branches. Snapped from dead fall.",
+              "drink_message": null,
+              "eat_message": null,
+              "harvest_from": null,
+              "heal_amount": null,
+              "hydration": null,
+              "item_id": "wood_bundle",
+              "item_state_version": 1,
+              "keywords": [
+                {
+                  "tag": "fuel",
+                  "tier": 1
+                },
+                {
+                  "tag": "fibrous",
+                  "tier": 1
+                }
+              ],
+              "light_data": null,
+              "liquid": null,
+              "liquid_volume": 0,
+              "name": "bundle of wood",
+              "nutrition": null,
+              "on_use": null,
+              "qualities": {},
+              "source_creature": null,
+              "stackable": false,
+              "temporary_essence": [],
+              "text_id": "",
+              "tile": "generic_item",
+              "turns_lit": 0,
+              "weight": 1
+            }
+          ]
+        }
+      ],
+      "receipt_owned": true,
+      "record_id": "settlement-0-linked-courts-lot-42-1-S-0-building:w5p_lodge@48,5,0:special[6]",
+      "relocated": false,
+      "selected_branch": null,
+      "source": "w5p_lodge special[6]",
+      "source_index": 15,
+      "source_xy": [
+        54,
+        8
+      ],
+      "text_id": null,
+      "text_override_present": false,
+      "transformed_xy": [
+        6,
+        3
+      ],
+      "xy": [
+        54,
+        8
+      ]
+    }
+  ],
+  "access": [
+    {
+      "passed": true,
+      "target": "entry",
+      "xy": [
+        51,
+        18
+      ]
+    },
+    {
+      "approaches": [],
+      "kind": "floor",
+      "passed": true,
+      "target": "entrance main span[0]",
+      "xy": [
+        58,
+        12
+      ]
+    },
+    {
+      "approaches": [],
+      "kind": "floor",
+      "passed": true,
+      "target": "entrance main span[1]",
+      "xy": [
+        58,
+        13
+      ]
+    },
+    {
+      "approaches": [],
+      "kind": "floor",
+      "passed": true,
+      "target": "entrance service span[0]",
+      "xy": [
+        51,
+        17
+      ]
+    }
+  ],
+  "full_scene": {
+    "path": "workbench/docs/evidence/w5q/enrolled-scene.json.gz",
+    "sha256": "2dd72ca74060bd61b0ad8e2ce26d3a2a4fd75530fb6934590ebba3c18651720a",
+    "bytes": 5095
+  },
+  "scope": "Entire chunk shown; only records below are attributed to this selected placement. Revealed static scene; no player interaction claim."
+}

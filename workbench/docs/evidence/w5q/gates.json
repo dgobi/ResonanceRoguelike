@@ -1,0 +1,638 @@
+{
+  "commands": [
+    {
+      "command": [
+        "npm.cmd",
+        "test"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "started_utc": "2026-10-30T00:45:57.140903+00:00",
+      "revision": "43506c5b89d1a4ef98c931c1b33718d3203536e7",
+      "exit_code": 0,
+      "seconds": 3.0050724999746308,
+      "source_stable": true,
+      "log": {
+        "path": "workbench/.artifacts/w5q/frontend-links.log",
+        "sha256": "96de5c71a56665915670ce973707155e8cf1bbf98b5ae750252d87904054076c"
+      },
+      "passed": true,
+      "input_manifest": {
+        "path": "workbench/.artifacts/w5q/frontend-links.json",
+        "sha256": "908360d161bc9b36e4a1a7c1d41cb40f22e3c92f026daf98d608e148d0516b3f",
+        "bytes": 83449
+      },
+      "non_consumed_source_changes": [],
+      "consumed_sources_unchanged": true,
+      "scoped_passed": true
+    },
+    {
+      "command": [
+        "npm.cmd",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "started_utc": "2026-10-30T00:46:01.798565+00:00",
+      "revision": "43506c5b89d1a4ef98c931c1b33718d3203536e7",
+      "exit_code": 0,
+      "seconds": 4.658797000069171,
+      "source_stable": true,
+      "log": {
+        "path": "workbench/.artifacts/w5q/typecheck-links.log",
+        "sha256": "77783bf2ca9523ff1e6aa3f5a098f779a50fd8cade5fb2774a4da5c450761c89"
+      },
+      "passed": true,
+      "input_manifest": {
+        "path": "workbench/.artifacts/w5q/typecheck-links.json",
+        "sha256": "7cc90caea2982ecb01a0a1b419c2dcec14f32525776e75f635a43a251c683b65",
+        "bytes": 83466
+      },
+      "non_consumed_source_changes": [],
+      "consumed_sources_unchanged": true,
+      "scoped_passed": true
+    },
+    {
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "started_utc": "2026-10-30T00:31:35.294874+00:00",
+      "revision": "aaa7f0d1890b6ea7ad1f93ae34026800c59da638",
+      "exit_code": 0,
+      "seconds": 42.32187030010391,
+      "source_stable": true,
+      "log": {
+        "path": "workbench/.artifacts/w5q/host.log",
+        "sha256": "20af51ddd743133baf680f89baaa3568143af051b596d6a3fa7f1666a0b80ebb"
+      },
+      "passed": true,
+      "input_manifest": {
+        "path": "workbench/.artifacts/w5q/host.json",
+        "sha256": "589fd7510faf154361bd663f19e0796aeeb86a3fae3f244b55e082e3cbe03c12",
+        "bytes": 83506
+      },
+      "non_consumed_source_changes": [
+        "workbench/scripts/run-selection.mjs",
+        "workbench/scripts/workspace-journey.mjs",
+        "workbench/src/App.tsx",
+        "workbench/src/Authoring.tsx",
+        "workbench/src/SelectionEditor.tsx"
+      ],
+      "consumed_sources_unchanged": true,
+      "scoped_passed": true
+    },
+    {
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--manifest-path",
+        "src-tauri/Cargo.toml",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "started_utc": "2026-10-30T00:32:16.291908+00:00",
+      "revision": "aaa7f0d1890b6ea7ad1f93ae34026800c59da638",
+      "exit_code": 0,
+      "seconds": 5.69663539994508,
+      "source_stable": true,
+      "log": {
+        "path": "workbench/.artifacts/w5q/clippy.log",
+        "sha256": "2ec45609a06d849349e4af7dee6d1ada37cee50d36f77fceb69fd708edfa13d3"
+      },
+      "passed": true,
+      "input_manifest": {
+        "path": "workbench/.artifacts/w5q/clippy.json",
+        "sha256": "a0f6b325e3f9beddb82dc78bcd27713efc5986ebaca7983f6433d946f97262dc",
+        "bytes": 83548
+      },
+      "non_consumed_source_changes": [
+        "workbench/scripts/run-selection.mjs",
+        "workbench/scripts/workspace-journey.mjs",
+        "workbench/src/App.tsx",
+        "workbench/src/Authoring.tsx",
+        "workbench/src/SelectionEditor.tsx"
+      ],
+      "consumed_sources_unchanged": true,
+      "scoped_passed": true
+    },
+    {
+      "command": [
+        "G:\\GameDev\\RoguelikeProject\\workbench\\worker\\runtime\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "worker",
+        "-v"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "started_utc": "2026-10-30T00:30:33.911679+00:00",
+      "revision": "aaa7f0d1890b6ea7ad1f93ae34026800c59da638",
+      "exit_code": 0,
+      "seconds": 1733.2871689000167,
+      "source_stable": false,
+      "log": {
+        "path": "workbench/.artifacts/w5q/worker.log",
+        "sha256": "e036b955779b545c5c0e2411f1763ae92d2fafd6d14a2fefb3c205526fd24fed"
+      },
+      "passed": false,
+      "input_manifest": {
+        "path": "workbench/.artifacts/w5q/worker.json",
+        "sha256": "224309c483ac1fbdba73c7a6d84ef826aefffdb1f86f02e3292748e25070ec0c",
+        "bytes": 83609
+      },
+      "non_consumed_source_changes": [
+        "workbench/scripts/run-selection.mjs",
+        "workbench/scripts/workspace-journey.mjs",
+        "workbench/src/App.tsx",
+        "workbench/src/Authoring.tsx",
+        "workbench/src/SelectionEditor.tsx"
+      ],
+      "consumed_sources_unchanged": true,
+      "scoped_passed": true
+    },
+    {
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "worker",
+        "-p",
+        "test_bridge.py",
+        "-k",
+        "dependency_absence_structured",
+        "-v"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "started_utc": "2026-10-30T00:32:47.636533+00:00",
+      "revision": "aaa7f0d1890b6ea7ad1f93ae34026800c59da638",
+      "exit_code": 0,
+      "seconds": 1.2858723000390455,
+      "source_stable": true,
+      "log": {
+        "path": "workbench/.artifacts/w5q/dependency-negative.log",
+        "sha256": "ef47cb894911296794315d421445cb8d95dcccae352e88789bba26b71262d8f9"
+      },
+      "passed": true,
+      "input_manifest": {
+        "path": "workbench/.artifacts/w5q/dependency-negative.json",
+        "sha256": "ada30fa3158f063a095050ec85dcfa3a8d0d9f055a172417aa625266fe32b830",
+        "bytes": 83640
+      },
+      "non_consumed_source_changes": [
+        "workbench/scripts/run-selection.mjs",
+        "workbench/scripts/workspace-journey.mjs",
+        "workbench/src/App.tsx",
+        "workbench/src/Authoring.tsx",
+        "workbench/src/SelectionEditor.tsx"
+      ],
+      "consumed_sources_unchanged": true,
+      "scoped_passed": true
+    },
+    {
+      "command": [
+        "npm.cmd",
+        "run",
+        "bundle",
+        "--",
+        "--",
+        "--locked"
+      ],
+      "cwd": "G:\\GameDev\\RoguelikeProject\\workbench",
+      "started_utc": "2026-10-30T00:48:52.860431+00:00",
+      "revision": "43506c5b89d1a4ef98c931c1b33718d3203536e7",
+      "exit_code": 0,
+      "seconds": 71.34828390006442,
+      "source_stable": true,
+      "log": {
+        "path": "workbench/.artifacts/w5q/package-links.log",
+        "sha256": "aee4b1b993a1591151816b05a2a46758a6af8bad55920b1314d83fca941a9904"
+      },
+      "passed": true,
+      "input_manifest": {
+        "path": "workbench/.artifacts/w5q/package-links.json",
+        "sha256": "dcbb427cd3a0da69617a0a985f9371f13caeda27b1df2bf5df693d56df70f796",
+        "bytes": 83500
+      },
+      "non_consumed_source_changes": [],
+      "consumed_sources_unchanged": true,
+      "scoped_passed": true
+    }
+  ],
+  "game": {
+    "command": [
+      "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5l\\test-runtime\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "G:\\GameDev\\RoguelikeProject\\tools\\critical_fix_regressions\\tests",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "cwd": "G:\\GameDev\\RoguelikeProject\\roguelike",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    },
+    "source_stable": true,
+    "exit_code": 0,
+    "passed": true
+  },
+  "game_source_manifest_sha256": "0dfe01005598f14850a2cae337ed296ac52fe7b6df19f25f9d6454bfa2888dd2",
+  "native": {
+    "path": "workbench/.artifacts/w5q/native-1793321436921/receipt.json",
+    "sha256": "a152c422a95fb9d3344c4ab3d3dc8916baf901f403c3d1c38ad9436a1a7ee538",
+    "bytes": 907266
+  },
+  "workspace": {
+    "local_receipt": {
+      "path": "workbench/.artifacts/desktop-workspace/receipt.json",
+      "sha256": "c902ee88ea59e78382c633100f285ddd8142ff2c3a277e7226e80e5ce0012574",
+      "bytes": 52651
+    },
+    "checks": [
+      "actual Tauri WebView2 window",
+      "WebView network offline",
+      "repository handshake, live asset validation and Pixi rendering",
+      "production arrival click maps to (15,20), stairs_up",
+      "real DIMENSION diagnostic for disposable fixture",
+      "byte-exact view, close and reopen journey",
+      "host traversal rejection",
+      "cancel and retry without app hang",
+      "a held real freshness response disables conflicting UI actions until release without queueing work",
+      "six independent file owners; exact invalid source; variant targets and undo/redo retained; aliases/repeated opens reuse tokens; shared-item references return to both recipe origins",
+      "targeted close/reload keep/discard and obsolete-token rejection; destination owner collision; one reviewed/saved/reopened variant with deliberate recovery after reopen failure",
+      "individual external conflict and conservative freshness preserve drafts; registered building source remains byte-exact; unavailable closed reference origin is explicit",
+      "invalid project visible",
+      "no temporary worker roots remain after native close"
+    ],
+    "passed": true,
+    "scope": "Actual final release package, app-local seven-owner freshness/cancellation/conflict/rollback/reopen lifecycle. Tab activation avoids automation autoscroll changing the state under test."
+  },
+  "room_session": {
+    "local_receipt": {
+      "path": "workbench/.artifacts/w5h/native-1793321005706/receipt.json",
+      "sha256": "b4e24b6a5df8e71c59208fb18c4e7a6c3acf81641d567385df78a74a86da4031",
+      "bytes": 2537707
+    },
+    "checks": [
+      "save ordinary creature variant and authored room through supported controls",
+      "launch saved room in captured pinned runtime and wait for real rendered frame",
+      "normal app-local keys: look, acquire/read exact letter, container transfer, actual AI turns, stairs",
+      "normal F5/F9 and genuine fresh-process bootstrap load in explicit test root",
+      "dirty target refused; reset captured bytes despite later unsaved room draft",
+      "publish same-ID revision during gameplay; frozen test retains old code/data/fonts/sprites",
+      "normal game quit and host Stop leave captured reset available and editor usable",
+      "fresh captured validation refuses missing assets, path escape, ambiguous room and invalid saved dependency without losing prior test",
+      "refused: missing required sprite",
+      "refused: external sprite reference",
+      "refused: ambiguous room identity",
+      "refused: invalid saved readable dependency",
+      "refused: conflicting source",
+      "cancel capture, reject duplicate launch, reap unexpected exit and retire game on project replacement",
+      "abrupt packaged host termination kills owned game; next capture cleans only abandoned payload of this installation"
+    ],
+    "passed": true,
+    "package_sha256": "8c5209eb52a54b719fca589d7654120e0b2cc5a492967a84d1414be5c6c86f86",
+    "scope": "Passed on the immediately preceding package; the later change only enables read-only selection row navigation. Room host/runtime/game source inputs are unchanged."
+  },
+  "ordinary_main": {
+    "passed": true,
+    "world": [
+      128,
+      128
+    ],
+    "scene": [
+      15,
+      20,
+      "sub_27_54_0"
+    ],
+    "save_path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0",
+    "seed": 1010254780,
+    "ordinary_debug_default": true,
+    "save_load": true,
+    "save_access_events": 75,
+    "main_sha256": "0fc1ed01bd64b641c392dff70a2823bd06f5a6461032c4f3cea43eaef7dc4991",
+    "save_access_trace": [
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks\\.sub_27_54_0.pkl-44a374832d244e4198f6a87043ed890c.tmp"
+      },
+      {
+        "event": "os.rename",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks\\.sub_27_54_0.pkl-44a374832d244e4198f6a87043ed890c.tmp"
+      },
+      {
+        "event": "os.rename",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks\\sub_27_54_0.pkl"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks\\.27_54.pkl-3de4bd07564547a0b173308e4340ffdb.tmp"
+      },
+      {
+        "event": "os.rename",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks\\.27_54.pkl-3de4bd07564547a0b173308e4340ffdb.tmp"
+      },
+      {
+        "event": "os.rename",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks\\27_54.pkl"
+      },
+      {
+        "event": "os.listdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks\\27_54.pkl"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.sessions\\cc4c162f091749a68d6212e05649d1d4\\chunks\\sub_27_54_0.pkl"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\.slot_0.lock"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7\\chunks"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\27_54.pkl"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7\\chunks"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\sub_27_54_0.pkl"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7\\meta.json"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7\\player.json"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7\\world.json"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7\\manifest.json"
+      },
+      {
+        "event": "os.rename",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\.pending-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "os.rename",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\manifest.json"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\27_54.pkl"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\sub_27_54_0.pkl"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\meta.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\player.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\world.json"
+      },
+      {
+        "event": "os.mkdir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.HEAD-17420a4079124afb9e0aff7d7fa4728c.tmp"
+      },
+      {
+        "event": "os.rename",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\.HEAD-17420a4079124afb9e0aff7d7fa4728c.tmp"
+      },
+      {
+        "event": "os.rename",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\HEAD.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\HEAD.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\HEAD.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\manifest.json"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\27_54.pkl"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\sub_27_54_0.pkl"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\meta.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\player.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\world.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\meta.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\world.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\player.json"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\27_54.pkl"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\sub_27_54_0.pkl"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\sub_27_54_0.pkl"
+      },
+      {
+        "event": "os.scandir",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\generations\\g-9aa1eeae56e747b8951121b00f0da1a7\\chunks\\27_54.pkl"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\HEAD.json"
+      },
+      {
+        "event": "open",
+        "path": "G:\\GameDev\\RoguelikeProject\\workbench\\.artifacts\\w5h\\standalone-w5q-1793320462719806300\\project\\roguelike\\saves\\slot_0\\HEAD.json"
+      }
+    ]
+  }
+}

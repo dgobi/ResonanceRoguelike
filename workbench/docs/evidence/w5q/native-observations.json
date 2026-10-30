@@ -1,0 +1,107 @@
+{
+  "package_sha256": "3ea382c4e12d1f64d80556b7785b6645875da4add6cb9a3f569c3e62b99c9897",
+  "runner_sha256": "704a132daf8a705719ad93388f3bac3b88668ad4d3dd1f3efba324ecded834ae",
+  "local_full_receipt": {
+    "path": "workbench/.artifacts/w5q/native-1793321436921/receipt.json",
+    "sha256": "a152c422a95fb9d3344c4ab3d3dc8916baf901f403c3d1c38ad9436a1a7ee538",
+    "bytes": 907266
+  },
+  "checks": [
+    "Three independent exact drafts; fixed no-root-ID selection, building and unrelated item",
+    "Saved building link focuses the single selection owner; explicit add, invalid weight rejection, Source/control history and exact return",
+    "Ordinary saved-policy generation with all competitors; inspect selected authored building and featured landmark",
+    "Deliberate membership removal and same-seed new plan; saved building unchanged and old result historical"
+  ],
+  "samples": [
+    {
+      "seed": 20261029,
+      "selected": 6,
+      "plan_identity": "a0e2291af3b3f437ccd8d2f1a4e005137f22ebea4017fcfbd53c972de15cff15",
+      "input_identity": "dd1944a6ff1f0b77df866465c4f70b6b99c0b2742d31925b0c1c46fcfb3f57b5"
+    }
+  ],
+  "stopping_rule": "Stop at first selection within explicit seeds 20261029, 20261030, 20261031; preserve every outcome and all saved competitors.",
+  "fixtures": {
+    "building": {
+      "path": "workbench/docs/evidence/w5q/fixtures/building.json",
+      "sha256": "0feecaa6be96a21bff9fdeb4cea966d72159740b7991a98b8cbf7420a4201b14",
+      "bytes": 3420,
+      "source_path": "roguelike/data/buildings/residential/w5p_lodge.json"
+    },
+    "policy_enrolled": {
+      "path": "workbench/docs/evidence/w5q/fixtures/policy_enrolled.json",
+      "sha256": "0e799fb31e5e0fd460d846418e5e2d1fce755b80d9d86ca8003710e3489de195",
+      "bytes": 4932,
+      "source_path": "roguelike/data/generation/settlement_profiles.json"
+    },
+    "policy_removed": {
+      "path": "workbench/docs/evidence/w5q/fixtures/policy_removed.json",
+      "sha256": "d34325bb15f2760136ef1d7e8366e86f895a23d00a18cd67a17ee68c2ddb584c",
+      "bytes": 4876,
+      "source_path": "roguelike/data/generation/settlement_profiles.json"
+    }
+  },
+  "screenshots": {
+    "recovered-drafts.png": {
+      "path": "workbench/docs/evidence/w5q/recovered-drafts.png",
+      "sha256": "b62115b80671e8328861ba4f5abfb88776d94b70f61637d12891f2071fc2f704",
+      "bytes": 373840
+    },
+    "selected-building.png": {
+      "path": "workbench/docs/evidence/w5q/selected-building.png",
+      "sha256": "eb5a4121d7713a6148d827de658e727393d93ac54f3017242e45736e50be7120",
+      "bytes": 301978
+    },
+    "removed-same-seed.png": {
+      "path": "workbench/docs/evidence/w5q/removed-same-seed.png",
+      "sha256": "b1a40e242f603ad72fdc2910a32ab4eaaa22aa0695f5da81a2aca4ded23c46ad",
+      "bytes": 443868
+    }
+  },
+  "recovered": {
+    "roguelike/data/buildings/residential/w5p_lodge.json": {
+      "draft": "{\r\n  \"id\": \"w5p_lodge\",\r\n  \"category\": \"residential\",\r\n  \"width\": 13,\r\n  \"height\": 11,\r\n  \"facing\": \"south\",\r\n  \"condition\": \"intact\",\r\n  \"district_weights\": {\r\n    \"residential\": 4,\r\n    \"market\": 1\r\n  },\r\n  \"interior_loot_table\": \"residential_common\",\r\n  \"description\": \"W5Q recoverable building draft with useful supplies and readable.\",\r\n  \"legend\": {\r\n    \"#\": \"wall\",\r\n    \".\": \"floor\",\r\n    \"w\": \"worn_stone\",\r\n    \"f\": \"flagstone\",\r\n    \"+\": \"door_closed\",\r\n    \"D\": \"door_open\",\r\n    \"T\": \"table\",\r\n    \"~\": \"water\",\r\n    \" \": null\r\n  },\r\n  \"layers\": [\r\n    \"#############\",\r\n    \"#..........##\",\r\n    \"#..........##\",\r\n    \"+..........##\",\r\n    \"#..........##\",\r\n    \"#..........##\",\r\n    \"#..........##\",\r\n    \"#.ff.......##\",\"#..........##\",\"####++#######\",\"####++#######\"\r\n  ],\r\n  \"special_tiles\": [\r\n    {\r\n      \"x\": 1,\r\n      \"y\": 6,\r\n      \"type\": \"item\",\r\n      \"item_id\": \"letter\",\r\n      \"text_id\": \"world_graffiti_a\",\r\n      \"note\": \"Personal letter or note on table\"\r\n    },\r\n    {\r\n      \"x\": 8,\r\n      \"y\": 1,\r\n      \"type\": \"container\",\r\n      \"decor_id\": \"sack\",\r\n      \"loot_pools\": [\r\n        \"commoner_kitchen\"\r\n      ]\r\n    },\r\n    {\r\n      \"x\": 2,\r\n      \"y\": 2,\r\n      \"type\": \"item\",\r\n      \"item_id\": \"letter\",\r\n      \"text_id\": \"text_residential_letter\",\r\n      \"note\": \"Letter left near the door\"\r\n    },\r\n    {\r\n      \"x\": 5,\r\n      \"y\": 2,\r\n      \"type\": \"scene\",\r\n      \"scene_id\": \"interrupted_meal\",\r\n      \"note\": \"Meal left mid-course on table\"\r\n    },{\"type\":\"item\",\"x\":2,\"y\":6,\"item_id\":\"wood_bundle\"},{\"type\":\"item\",\"x\":3,\"y\":6,\"item_id\":\"wood_bundle\",\"text_id\":\"world_graffiti_a\"},{\"type\":\"container\",\"x\":9,\"y\":6,\"decor_id\":\"crate\",\"loot_pools\":[\"workshop_b_fuel\"]}\r\n  ],\r\n  \"note\": \"PLACEHOLDER — redesign layers to taste. Door at (4,7) faces south street.\",\r\n  \"placement\": {\r\n    \"version\": 1,\r\n    \"contexts\": [\r\n      \"grid\",\r\n      \"roadside\"\r\n    ],\r\n    \"weight\": 1,\r\n    \"rotations\": [\r\n      0,\r\n      90,\r\n      180,\r\n      270\r\n    ],\r\n    \"mirror_x\": true,\r\n    \"buffer\": 1,\r\n    \"approach\": 2,\r\n    \"road_relation\": \"frontage\",\r\n    \"entrances\": [\r\n      {\r\n        \"id\": \"main\",\r\n        \"x\": 4,\r\n        \"y\": 10,\r\n        \"normal\": \"S\",\r\n        \"width\": 2,\r\n        \"role\": \"main\",\r\n        \"required\": true\r\n      },{\"id\":\"service\",\"x\":0,\"y\":3,\"normal\":\"W\",\"width\":1,\"role\":\"service\",\"required\":true}\r\n    ],\r\n    \"targets\": [\r\n      {\r\n        \"x\": 1,\r\n        \"y\": 6,\r\n        \"kind\": \"readable\",\r\n        \"required\": true\r\n      },{\"x\":2,\"y\":6,\"kind\":\"item\",\"required\":true},{\"x\":3,\"y\":6,\"kind\":\"readable\",\"required\":true},{\"x\":9,\"y\":6,\"kind\":\"container\",\"required\":true}\r\n    ]\r\n  }\r\n,\"decor_layer\":[[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,\"dried_herbs\",null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null],[null,null,null,null,null,null,null,null,null,null,null,null,null]]}\r\n",
+      "variant": false,
+      "variant_id": "",
+      "target": "roguelike/data/buildings/residential/w5p_lodge.json",
+      "sha256": "0feecaa6be96a21bff9fdeb4cea966d72159740b7991a98b8cbf7420a4201b14"
+    },
+    "roguelike/data/generation/settlement_profiles.json": {
+      "draft": "{\r\n \"selection exact λ\\n\": [",
+      "variant": false,
+      "variant_id": "",
+      "target": "roguelike/data/generation/settlement_profiles.json",
+      "sha256": "dedebe754171abc830c1a28b64f064f486df8589a35e0d524a98769d076bb00c"
+    },
+    "roguelike/data/items/components/clay_pot.json": {
+      "draft": "{\"unrelated\":\"retained λ\",",
+      "variant": false,
+      "variant_id": "",
+      "target": "roguelike/data/items/components/clay_pot.json",
+      "sha256": "040def2a2722cc5d66a3bb772b0a5fb64f6dfb13ca43dc59f5348d7c3cd0b964"
+    }
+  },
+  "protected_recovery_rejected": {
+    "code": "PROTECTED_POLICY",
+    "draft_sha256": "c491a981e40bcb4ed3623c78f618fbc14e2e615963bcd183539ababd8b470b86"
+  },
+  "invalid_weight": [
+    {
+      "asset": "",
+      "code": "SELECTION_RULE",
+      "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+      "field": "profiles.grid.roles.residential[4].weight",
+      "message": "settlement selection: profiles.grid.roles.residential[4].weight: w5p_lodge: finite positive weights required",
+      "path": "roguelike/data/generation/settlement_profiles.json",
+      "severity": "error"
+    }
+  ],
+  "stale_membership_return": true,
+  "historical_after_reopen": true,
+  "parked_building": {
+    "draft_sha256": "990413150134e7dfa22b86c12515aa94737d9e4dff4a567b89ee61f795dd4c56",
+    "saved_sha256": "0feecaa6be96a21bff9fdeb4cea966d72159740b7991a98b8cbf7420a4201b14"
+  },
+  "errors": [],
+  "scope": "Actual packaged WebView, new controls, shared publication/reopen and host restart; positively owned disposable data/settings/recovery. No canonical content or campaign reads. Construction observations do not establish player interaction, frequency, balance or fun."
+}

@@ -1,0 +1,28 @@
+{
+  "enrolled": {
+    "seed": 20261029,
+    "plan_identity": "a0e2291af3b3f437ccd8d2f1a4e005137f22ebea4017fcfbd53c972de15cff15",
+    "policy_sha256": "0e799fb31e5e0fd460d846418e5e2d1fce755b80d9d86ca8003710e3489de195",
+    "selected_lodge": 6,
+    "plan_gzip": {
+      "path": "workbench/docs/evidence/w5q/ordinary-plan-enrolled.json.gz",
+      "sha256": "d5430d9627f3c0a251f526c6f74c66efd91ecba557f02cc082312e1ffbc6c703",
+      "bytes": 84869
+    },
+    "saved_resolve_equal": true
+  },
+  "removed": {
+    "seed": 20261029,
+    "plan_identity": "53cf56c5c366d52e116759892eab2d6e8abbb7e9be77ce464084cd264e4609ce",
+    "policy_sha256": "d34325bb15f2760136ef1d7e8366e86f895a23d00a18cd67a17ee68c2ddb584c",
+    "selected_lodge": 0,
+    "plan_gzip": {
+      "path": "workbench/docs/evidence/w5q/ordinary-plan-removed.json.gz",
+      "sha256": "8954ff23528efefa0884c38d3e1851b87461b124773ca3415dd503bc534dcfd0",
+      "bytes": 84517
+    },
+    "saved_resolve_equal": true
+  },
+  "old_captured_policy_still_valid_after_removal": true,
+  "scope": "Supporting replay in a disposable saved-data fixture. Exact accepted policy/building bytes, ordinary generate_world defaults and one already recorded seed; no candidate injection or additional seed search. Full old-plan pending construction is covered separately by the existing G5 save regression."
+}

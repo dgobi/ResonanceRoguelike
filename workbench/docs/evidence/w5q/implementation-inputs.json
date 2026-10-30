@@ -1,0 +1,94 @@
+{
+  "revision": "43506c5b89d1a4ef98c931c1b33718d3203536e7",
+  "files": {
+    "roguelike/docs/STRUCTURE_AUTHORING.md": {
+      "working_sha256": "0119b5fbbbd148ebbef4dcac6d39debc44567f6a70a0039a46fc1fd085e9c667",
+      "committed_sha256": "cb8c51eaf4d690cd101fa76bee30d35d4053f8b97e0f6ac60f5ddd8eb3b8b083"
+    },
+    "roguelike/engine/content_authoring.py": {
+      "working_sha256": "7c101f036ca2e705aa1319d34554cd2c9d601f5917dfc0d8eb1699e1d48ca569",
+      "committed_sha256": "7c101f036ca2e705aa1319d34554cd2c9d601f5917dfc0d8eb1699e1d48ca569"
+    },
+    "roguelike/engine/selection_authoring.py": {
+      "working_sha256": "189e2a7d0268e6e0230575fa28e4a5c7cc036f59a1f4b37ba940ed484b199a4a",
+      "committed_sha256": "189e2a7d0268e6e0230575fa28e4a5c7cc036f59a1f4b37ba940ed484b199a4a"
+    },
+    "roguelike/generation/building_preview.py": {
+      "working_sha256": "ec19e57a28c0d077d87412cbcfaf2982e134c40cbee3c51af4ed66096b6fe9e5",
+      "committed_sha256": "3ddd651bccdde54e1d0eaf2c5b993808c267801c0d52f4aadaf33995466e968c"
+    },
+    "roguelike/generation/selection_preview.py": {
+      "working_sha256": "56801e2069cb1f2c49f8734ec33740f6488d4f681bac9cace270b76dea979bac",
+      "committed_sha256": "56801e2069cb1f2c49f8734ec33740f6488d4f681bac9cace270b76dea979bac"
+    },
+    "roguelike/generation/settlement_selection.py": {
+      "working_sha256": "2c70e0f480a5424d7d027c35dd37a2060ff6e21561ef5905f32775ba3c11e7fc",
+      "committed_sha256": "7d51596a8582039ad74b6a1e077d6c0f41f101d26c0a74ce2eefe2b4d3eaf024"
+    },
+    "workbench/README.md": {
+      "working_sha256": "3804c96e8f29182e99c55d3eab0334fe00bfdd2332ea698e6c2e1c5a779ce112",
+      "committed_sha256": "9cc302c249798a4d6752cc363db305c2d1d0ad52df658f8f7df5093da916a259"
+    },
+    "workbench/src-tauri/src/authoring.rs": {
+      "working_sha256": "7737e475146653b6a8e8649588b39d23a8e7e0d542006d789b8c3fb65bd26211",
+      "committed_sha256": "74268788c44cadb459335193f5e500742f5731a7f8d303ab8c1442bdc077c014"
+    },
+    "workbench/src-tauri/src/recovery.rs": {
+      "working_sha256": "93a0dd0665f43e7307a982810c57f97504cb5ad02666a9b7ed53887098691d37",
+      "committed_sha256": "1fb89d1b3b5544f79d973dc8251b59c114feab08940028aede3b677904c0b341"
+    },
+    "workbench/src/App.tsx": {
+      "working_sha256": "a5b81dbdfb122e16b403e12e7c6d7510264d3767e48fd3be3a68109cccca8f8f",
+      "committed_sha256": "76f05716d8fd6cb0b8f1163d50cac0b011ecd140a0a048fa6ed256bacefc31b3"
+    },
+    "workbench/src/Authoring.tsx": {
+      "working_sha256": "264cf88049e2f66b2cf8ee864c60214d05bd6cb70bbecb91298c9e7db40ee706",
+      "committed_sha256": "8c7c621d4262057e0a98f42cf7bc31752d9640a5ec395ff7c2a6f5dbc6cbd56a"
+    },
+    "workbench/src/ContentEditor.tsx": {
+      "working_sha256": "e3b622ef14f0efdb25c74d4e5b7eb162d0cb757812e2740ca358bfac8f0a0d43",
+      "committed_sha256": "3a4b2f03bc6e6fd05727bee3851b2ef8beb3af8b42065b235481ddf1b25634be"
+    },
+    "workbench/src/MapView.tsx": {
+      "working_sha256": "fdd0aac7c8004a64c17b16ff154484dde99a7f0d1adce49cb0e65537a8cc068f",
+      "committed_sha256": "fdd0aac7c8004a64c17b16ff154484dde99a7f0d1adce49cb0e65537a8cc068f"
+    },
+    "workbench/src/SelectionEditor.tsx": {
+      "working_sha256": "4cc6440808ab8d51ca5af5d140fd46bd8d5278f5943b753786b63e363a49414e",
+      "committed_sha256": "10a709cc66ab5eb1f588b41db0feba2964617f812bcf4646700ff9fc68fbeeef"
+    },
+    "workbench/src/content.ts": {
+      "working_sha256": "0968252c4c289b227c28f18b03f084dafd3f2931430514ff40e65e96ad3c2e82",
+      "committed_sha256": "20700747f6747357ddec2864ee2cca488516e5c93d282430237b786c75f0240f"
+    },
+    "workbench/src/familyData.ts": {
+      "working_sha256": "05afe5e9fcaf367a4c8e9eebd616d21e295461d8dbe15d624e06308fd8b670a0",
+      "committed_sha256": "a791a6fc801b3c0a5a4206ba126698ef28eefd26af6d66021d7faf5520ddd149"
+    },
+    "workbench/src/selection.test.ts": {
+      "working_sha256": "c88340c56a13767b115424f8e470cfc4f56ce7aa727c5109063106584472017e",
+      "committed_sha256": "0cda7b03e7c3fabd985408897a0790ac5b39af7e5e171f84491c68ca883fcb32"
+    },
+    "workbench/src/selection.ts": {
+      "working_sha256": "279e02eef34ce1fdf4389bb077fda5a6b63bfb99e33500c034cecc4c032fa3fa",
+      "committed_sha256": "279e02eef34ce1fdf4389bb077fda5a6b63bfb99e33500c034cecc4c032fa3fa"
+    },
+    "workbench/src/workspace.ts": {
+      "working_sha256": "a3be6956577122ba2dc40bfe90f72af2b57b42fbd24e7da728bc02c0d9e9f233",
+      "committed_sha256": "5d5b5366389cb38acddd256004b3f8e6a7b208ecdde4f9269c1ff87ffdbbdb4e"
+    },
+    "workbench/worker/bridge.py": {
+      "working_sha256": "d971a429e2efad6729eeadb4fd4a3dddaaec89a5d27ac8d3d31218ec07374f95",
+      "committed_sha256": "35fd026d3af8a86970cf6c7bb75f7cdf1c96888fa0f3d6c2fea213a29a60b9e0"
+    },
+    "workbench/worker/test_buildings_w5p.py": {
+      "working_sha256": "92772009059c8532bfb673e6c0d5f11976476ae3716d678c98164bdab7b06486",
+      "committed_sha256": "00079bb7a57ee27daf684ef4ef6b425b474ee112d0dba66b07c12dbef4426532"
+    },
+    "workbench/worker/test_selection_w5q.py": {
+      "working_sha256": "4871e7bb84c810da109be48b9da160a8f919ce9baf453464944e6b2aba7dad53",
+      "committed_sha256": "4871e7bb84c810da109be48b9da160a8f919ce9baf453464944e6b2aba7dad53"
+    }
+  },
+  "newline_note": "Working-byte and Git-normalized byte identities are intentionally recorded separately; accepted fixtures remain exact UTF-8 bytes."
+}

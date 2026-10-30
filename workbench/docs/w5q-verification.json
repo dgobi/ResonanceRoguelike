@@ -1,0 +1,143 @@
+{
+  "recorded_utc": "2026-10-30T01:04:28.546417+00:00",
+  "start_revision": "f34ab95d7ee82735afb61fac41ddb873bab149a3",
+  "entrance_repair_revision": "aaa7f0d1890b6ea7ad1f93ae34026800c59da638",
+  "implementation_package_revision": "43506c5b89d1a4ef98c931c1b33718d3203536e7",
+  "final_delivery_ref": "checkpoint/workbench-w5q-verified-20261029",
+  "issued_brief": {
+    "path": "workbench/docs/evidence/w5q/issued-brief.md",
+    "sha256": "8eaada54e1c530aa0ed9df667192b99fc3c879c93f13838b8efa689f14ca3664",
+    "bytes": 30316
+  },
+  "evidence": {
+    "attempts.json": {
+      "path": "workbench/docs/evidence/w5q/attempts.json",
+      "sha256": "cf7fdd0c329bd76641dddbb54802f95e8524d200b30c396b507fba70f12e7c20",
+      "bytes": 5198
+    },
+    "captured-game-inputs.json": {
+      "path": "workbench/docs/evidence/w5q/captured-game-inputs.json",
+      "sha256": "da99bfcb092eade8ccaa8f7c40f3e1019b3e785f6237b6d24f9d2c3572d14aa0",
+      "bytes": 1159
+    },
+    "enrolled-construction.json": {
+      "path": "workbench/docs/evidence/w5q/enrolled-construction.json",
+      "sha256": "fcd198ab94b1bdc44e62f73c1af5aae8a5cd164ebb0fac2c890a30f40b35617a",
+      "bytes": 19386
+    },
+    "enrolled-plan.json": {
+      "path": "workbench/docs/evidence/w5q/enrolled-plan.json",
+      "sha256": "6f60f70b35f95516662c2c16530d37b5cf5cad06c2a942983149464350d52f21",
+      "bytes": 62441
+    },
+    "entrance-diagnostic.json": {
+      "path": "workbench/docs/evidence/w5q/entrance-diagnostic.json",
+      "sha256": "1f0cc17620690cedf0d19bc558ea1b9c2a1966b5caa7f8a393202be8200c4f0a",
+      "bytes": 6558
+    },
+    "gates.json": {
+      "path": "workbench/docs/evidence/w5q/gates.json",
+      "sha256": "386524f70ac3647b4078107a7a7e5c9ed1a918aa579b848529a6289b77152853",
+      "bytes": 30682
+    },
+    "implementation-inputs.json": {
+      "path": "workbench/docs/evidence/w5q/implementation-inputs.json",
+      "sha256": "806e2c2d4482a07f4fdf743be03195dfd91fb834e53515bab11ab60d22913cb5",
+      "bytes": 5375
+    },
+    "landmark-construction.json": {
+      "path": "workbench/docs/evidence/w5q/landmark-construction.json",
+      "sha256": "be74edc3dfb68cd21110f510b1989ded82d7018d553aeee793bb6000c9b43b6f",
+      "bytes": 7614
+    },
+    "landmark-plan.json": {
+      "path": "workbench/docs/evidence/w5q/landmark-plan.json",
+      "sha256": "3aeeb4be97f8f0d184a4c6f82215304a8e9a5829a23b76db298a4f7822dc3fd5",
+      "bytes": 298
+    },
+    "native-observations.json": {
+      "path": "workbench/docs/evidence/w5q/native-observations.json",
+      "sha256": "ca57d0cf16c343384918757c0b7bb4799dbd4614f2cd8803814efa27103d24d9",
+      "bytes": 8914
+    },
+    "ordinary-replay.json": {
+      "path": "workbench/docs/evidence/w5q/ordinary-replay.json",
+      "sha256": "b646f969847509e97f785508b233d97f26ddacc0be33c74c9651dfb6e845826c",
+      "bytes": 1341
+    },
+    "package-source-inputs.json": {
+      "path": "workbench/docs/evidence/w5q/package-source-inputs.json",
+      "sha256": "5d64e5b8387defa9885f53dcf12b1ac7558ec5955924066bf8a1915a45f8cbdd",
+      "bytes": 19445
+    },
+    "preservation.json": {
+      "path": "workbench/docs/evidence/w5q/preservation.json",
+      "sha256": "5cd0ce8addf6649181813d897785916d17acfeeeb860e82b5b17fed31138cacf",
+      "bytes": 1421
+    },
+    "removed-plan.json": {
+      "path": "workbench/docs/evidence/w5q/removed-plan.json",
+      "sha256": "d2075c3e1c502b3715dc0c5cab14f6905a818aec8987beadfa848d8f14229f41",
+      "bytes": 60749
+    },
+    "room-retained-package-boundary.json": {
+      "path": "workbench/docs/evidence/w5q/room-retained-package-boundary.json",
+      "sha256": "527de38da76f04a14f6ba7488a76e54bacfda8541e7f5255a0150a0b99416978",
+      "bytes": 19617
+    },
+    "saved-inputs-enrolled.json": {
+      "path": "workbench/docs/evidence/w5q/saved-inputs-enrolled.json",
+      "sha256": "e9a914ce22ade633c101db63024052650b232180af95ae2e4ca3f707628f46c4",
+      "bytes": 62146
+    },
+    "saved-inputs-removed.json": {
+      "path": "workbench/docs/evidence/w5q/saved-inputs-removed.json",
+      "sha256": "912d4aa6b948e0592d19e80318843e26c77fc95702ebec11630528c49f7e31be",
+      "bytes": 62146
+    }
+  },
+  "fixtures": {
+    "building": {
+      "path": "workbench/docs/evidence/w5q/fixtures/building.json",
+      "sha256": "0feecaa6be96a21bff9fdeb4cea966d72159740b7991a98b8cbf7420a4201b14",
+      "bytes": 3420,
+      "source_path": "roguelike/data/buildings/residential/w5p_lodge.json"
+    },
+    "policy_enrolled": {
+      "path": "workbench/docs/evidence/w5q/fixtures/policy_enrolled.json",
+      "sha256": "0e799fb31e5e0fd460d846418e5e2d1fce755b80d9d86ca8003710e3489de195",
+      "bytes": 4932,
+      "source_path": "roguelike/data/generation/settlement_profiles.json"
+    },
+    "policy_removed": {
+      "path": "workbench/docs/evidence/w5q/fixtures/policy_removed.json",
+      "sha256": "d34325bb15f2760136ef1d7e8366e86f895a23d00a18cd67a17ee68c2ddb584c",
+      "bytes": 4876,
+      "source_path": "roguelike/data/generation/settlement_profiles.json"
+    }
+  },
+  "package": {
+    "executable": {
+      "path": "workbench/src-tauri/target/release/resonance-workbench.exe",
+      "sha256": "3ea382c4e12d1f64d80556b7785b6645875da4add6cb9a3f569c3e62b99c9897",
+      "bytes": 10345472
+    },
+    "installer": {
+      "path": "workbench/src-tauri/target/release/bundle/nsis/Resonance Workbench_0.9.0_x64-setup.exe",
+      "sha256": "f4b0cc88ace697ba34851894196ef99deede83c67bc3b2f7a7b32107971ab423",
+      "bytes": 28490427
+    }
+  },
+  "runtime": {
+    "node": "v24.15.0",
+    "rust": "rustc 1.95.0 (59807616e 2026-04-14)",
+    "python": "3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]",
+    "dependencies": {
+      "pygame": "2.6.1",
+      "tcod": "19.3.0",
+      "numpy": "2.4.6"
+    }
+  },
+  "activation": "New world plans only; existing captured plans/caches and consumed-dependency gates retain their contracts.",
+  "limits": "Windows verified. Revealed initial production construction and static full-span access; no player interaction, natural discovery frequency, balance, installer UX, other platform, save migration, canonical pack or wiki rebuild."
+}

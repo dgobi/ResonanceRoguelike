@@ -1,0 +1,254 @@
+{
+  "accepted_fixture_sha256": "6da242ecd216084c32b32eb601c765fcb0fa1fc3138cfeaf2101ee09847e47f8",
+  "mutation": "decor_layer[10][5] = campfire_unlit, disposable in-memory candidate only",
+  "positive_orientations": [
+    {
+      "rotation": 0,
+      "mirror": false,
+      "passed": true
+    },
+    {
+      "rotation": 0,
+      "mirror": true,
+      "passed": true
+    },
+    {
+      "rotation": 90,
+      "mirror": false,
+      "passed": true
+    },
+    {
+      "rotation": 90,
+      "mirror": true,
+      "passed": true
+    },
+    {
+      "rotation": 180,
+      "mirror": false,
+      "passed": true
+    },
+    {
+      "rotation": 180,
+      "mirror": true,
+      "passed": true
+    },
+    {
+      "rotation": 270,
+      "mirror": false,
+      "passed": true
+    },
+    {
+      "rotation": 270,
+      "mirror": true,
+      "passed": true
+    }
+  ],
+  "blocked_orientations": [
+    {
+      "severity": "error",
+      "code": "ACCESS",
+      "path": "blocked-accepted-building-v1",
+      "asset": "",
+      "field": "placement.entrances[0].span[1]",
+      "message": "0° / mirror False: Required native goal/span failed at exact declared coordinates",
+      "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+      "source_xy": [
+        5,
+        10
+      ],
+      "layer": "terrain",
+      "rotation": 0,
+      "mirror": false,
+      "transformed_field": "placement.entrances[0].span[1]",
+      "transformed_xy": [
+        5,
+        10
+      ],
+      "scene_xy": [
+        39,
+        26
+      ]
+    },
+    {
+      "severity": "error",
+      "code": "ACCESS",
+      "path": "blocked-accepted-building-v1",
+      "asset": "",
+      "field": "placement.entrances[0].span[1]",
+      "message": "0° / mirror True: Required native goal/span failed at exact declared coordinates",
+      "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+      "source_xy": [
+        5,
+        10
+      ],
+      "layer": "terrain",
+      "rotation": 0,
+      "mirror": true,
+      "transformed_field": "placement.entrances[0].span[0]",
+      "transformed_xy": [
+        7,
+        10
+      ],
+      "scene_xy": [
+        41,
+        26
+      ]
+    },
+    {
+      "severity": "error",
+      "code": "ACCESS",
+      "path": "blocked-accepted-building-v1",
+      "asset": "",
+      "field": "placement.entrances[0].span[1]",
+      "message": "90° / mirror False: Required native goal/span failed at exact declared coordinates",
+      "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+      "source_xy": [
+        5,
+        10
+      ],
+      "layer": "terrain",
+      "rotation": 90,
+      "mirror": false,
+      "transformed_field": "placement.entrances[0].span[1]",
+      "transformed_xy": [
+        0,
+        5
+      ],
+      "scene_xy": [
+        35,
+        20
+      ]
+    },
+    {
+      "severity": "error",
+      "code": "ACCESS",
+      "path": "blocked-accepted-building-v1",
+      "asset": "",
+      "field": "placement.entrances[0].span[1]",
+      "message": "90° / mirror True: Required native goal/span failed at exact declared coordinates",
+      "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+      "source_xy": [
+        5,
+        10
+      ],
+      "layer": "terrain",
+      "rotation": 90,
+      "mirror": true,
+      "transformed_field": "placement.entrances[0].span[0]",
+      "transformed_xy": [
+        0,
+        7
+      ],
+      "scene_xy": [
+        35,
+        22
+      ]
+    },
+    {
+      "severity": "error",
+      "code": "ACCESS",
+      "path": "blocked-accepted-building-v1",
+      "asset": "",
+      "field": "placement.entrances[0].span[1]",
+      "message": "180° / mirror False: Required native goal/span failed at exact declared coordinates",
+      "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+      "source_xy": [
+        5,
+        10
+      ],
+      "layer": "terrain",
+      "rotation": 180,
+      "mirror": false,
+      "transformed_field": "placement.entrances[0].span[0]",
+      "transformed_xy": [
+        7,
+        0
+      ],
+      "scene_xy": [
+        41,
+        16
+      ]
+    },
+    {
+      "severity": "error",
+      "code": "ACCESS",
+      "path": "blocked-accepted-building-v1",
+      "asset": "",
+      "field": "placement.entrances[0].span[1]",
+      "message": "180° / mirror True: Required native goal/span failed at exact declared coordinates",
+      "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+      "source_xy": [
+        5,
+        10
+      ],
+      "layer": "terrain",
+      "rotation": 180,
+      "mirror": true,
+      "transformed_field": "placement.entrances[0].span[1]",
+      "transformed_xy": [
+        5,
+        0
+      ],
+      "scene_xy": [
+        39,
+        16
+      ]
+    },
+    {
+      "severity": "error",
+      "code": "ACCESS",
+      "path": "blocked-accepted-building-v1",
+      "asset": "",
+      "field": "placement.entrances[0].span[1]",
+      "message": "270° / mirror False: Required native goal/span failed at exact declared coordinates",
+      "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+      "source_xy": [
+        5,
+        10
+      ],
+      "layer": "terrain",
+      "rotation": 270,
+      "mirror": false,
+      "transformed_field": "placement.entrances[0].span[0]",
+      "transformed_xy": [
+        10,
+        7
+      ],
+      "scene_xy": [
+        45,
+        22
+      ]
+    },
+    {
+      "severity": "error",
+      "code": "ACCESS",
+      "path": "blocked-accepted-building-v1",
+      "asset": "",
+      "field": "placement.entrances[0].span[1]",
+      "message": "270° / mirror True: Required native goal/span failed at exact declared coordinates",
+      "correction": "Repair this draft field or choose a unique loader-accepted saved source, then validate again.",
+      "source_xy": [
+        5,
+        10
+      ],
+      "layer": "terrain",
+      "rotation": 270,
+      "mirror": true,
+      "transformed_field": "placement.entrances[0].span[1]",
+      "transformed_xy": [
+        10,
+        5
+      ],
+      "scene_xy": [
+        45,
+        20
+      ]
+    }
+  ],
+  "all_rejected": true,
+  "all_source_cells": [
+    5,
+    10
+  ],
+  "scope": "Diagnostic localization and all-span access only; transforms unchanged."
+}
