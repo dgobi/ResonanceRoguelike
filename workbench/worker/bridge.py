@@ -244,28 +244,30 @@ def family_validation(family, request, root, scratch, identity):
     diagnostics += capability_diagnostics(envelope, source_asset)
     copied = scratch / "data"
     try:
-        original_raw = read_document(original)
+        reader = getattr(family.module, "read_source", read_document)
+        original_raw = reader(original)
         from engine.pool_authoring import load_authoring_data
-        original_data = load_authoring_data(root / "roguelike/data") if family.id in ("pool","building") else DataLoader(str(root / "roguelike/data"))
+        original_data = family.module.load_authoring_data(root / "roguelike/data") if family.id == "selection" else load_authoring_data(root / "roguelike/data") if family.id in ("pool","building") else DataLoader(str(root / "roguelike/data"))
         original_context = family.context(original_raw, original_data, source_asset, root / "roguelike/data", identity, hashlib.sha256(original.read_bytes()).hexdigest(), resource_root=root)
         original_operations = family.operations_for(original_context)
         unchanged_inspection = getattr(family.module, "READONLY_CONSTRUCTION", False) and source_asset == request["asset"] and draft.encode("utf-8") == original.read_bytes()
         if not family.eligible(original_context) and not unchanged_inspection:
             diagnostics.append(dict(severity="error", code="SOURCE_ENTITLEMENT", path=source_asset, asset="", field="",
                 message="Original discovered source is read-only; changing candidate shape cannot upgrade it.", correction="Choose a supported unambiguous original source."))
-        if family.id=="building":
+        if family.id in ("building", "selection"):
             from generation.structure_contract import Diagnostic
             if not family.eligible(original_context):
                 raise StructureError([Diagnostic(**{k:d[k] for k in ('severity','code','path','asset','field','message','correction')}) for d in diagnostics])
-            try: authority_candidate=json.loads(draft.lstrip("\ufeff"))
+            try: authority_candidate=json.loads(draft if family.id == "selection" else draft.lstrip("\ufeff"))
             except ValueError: authority_candidate=None
             if authority_candidate is not None:
-                authority=family.authorize(original_raw,authority_candidate,source_asset,request["asset"],original_data)+family.module.target_problems(authority_candidate,source_asset,request["asset"],root/"roguelike/data")
+                authority=family.authorize(original_raw,authority_candidate,source_asset,request["asset"],original_data)
+                if family.id == "building": authority += family.module.target_problems(authority_candidate,source_asset,request["asset"],root/"roguelike/data")
                 if authority: raise StructureError([Diagnostic(**d) for d in authority])
         shutil.copytree(root / "roguelike/data", copied)
         selected = copied / family.staging_path(request["asset"])
         selected.write_bytes(draft.encode("utf-8"))
-        raw = read_document(selected); syntax = True
+        raw = reader(selected); syntax = True
         data = load_authoring_data(copied) if family.id=="pool" else DataLoader(str(copied))
         if not unchanged_inspection:
             diagnostics += family.authorize(original_raw, raw, source_asset, request["asset"], data)
@@ -344,7 +346,12 @@ def run(request, root, scratch):
         return draft_validation(request, root, scratch, identity)
     catalog_error = None
     try:
-        data = DataLoader(str(root / "roguelike/data"))
+        selected_family = family_for(request.get("asset", ""))
+        if selected_family and selected_family.id == "selection" or op in ("identify", "describe"):
+            from engine.selection_authoring import load_authoring_data as selection_data
+            data = selection_data(root / "roguelike/data")
+        else:
+            data = DataLoader(str(root / "roguelike/data"))
         identity["catalog_sha256"] = data.structure_catalog.identity
     except StructureError as error:
         data = None; catalog_error = error
@@ -377,7 +384,8 @@ def run(request, root, scratch):
     category = path.parent.name if route == EDIT_ROUTE else None
     raw_error = None
     try:
-        raw = read_document(path)
+        source_family = family_for(request["asset"])
+        raw = getattr(source_family.module, "read_source", read_document)(path) if source_family else read_document(path)
     except StructureError as error:
         raw = {}; raw_error = error
     family = family_for(request["asset"])

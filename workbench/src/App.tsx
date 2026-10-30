@@ -873,12 +873,12 @@ export default function App() {
             </div>
           )}
           {Object.entries(contentDocuments).map(([token,entry])=><div key={token} data-document-inspector={entry.document.path} hidden={activeContent!==token}><Authoring
-            document={entry.document} onDirty={dirty=>setContentDocuments(d=>d[token] && d[token].dirty!==dirty ? {...d,[token]:{...d[token],dirty}}:d)}
+            document={entry.document} historicalPreviews={entry.previews} onFamilyPreview={frame=>frame.kind==="selection-preview"&&setContentDocuments(d=>d[token] ? {...d,[token]:{...d[token],previews:[...(d[token].previews||[]).slice(-2),frame]}}:d)} onDirty={dirty=>setContentDocuments(d=>d[token] && d[token].dirty!==dirty ? {...d,[token]:{...d[token],dirty}}:d)}
             onApplied={(path,result,covered)=>contentApplied(token,path,result,covered)} onError={setError} registerRecovery={registerRecovery}
             subscribeDisk={monitor.current.subscribe} busy={busy} beginRequest={beginRequest} cancelVersion={cancelVersion} canvasHost={canvasHost} diskPreview={null} seed={Number(seed)}
             active={activeContent===token} onCancel={()=>void cancel()} dependencyVersion={dependencyVersion}
             onPool={(id,context)=>void openPool(id,context,false,false,token)}
-            contentNavigation={{poolTrail:entry.poolTrail,returnLocation:entry.returnLocation,
+            contentNavigation={{relatedBuilding:entry.document.family?.id==="selection" && entry.origin && contentDocuments[entry.origin.token]?.document.family?.id==="building" ? {id:contentDocuments[entry.origin.token].selectedId,dirty:contentDocuments[entry.origin.token].dirty}:undefined,poolTrail:entry.poolTrail,returnLocation:entry.returnLocation,
               onPoolItem:(id,index,text,path)=>void openContent("item",id,undefined,false,false,{poolId:entry.selectedId,path,index,itemId:id,structure:entry.poolTrail},{token,label:`pool ${entry.selectedId} row ${index+1}`,focus:null,location:{text,index,itemId:id}}),selectedId:entry.selectedId,trail:entry.trail,relatedRoom:entry.document.family?.id==="assignment" && entry.origin ? contentDocuments[entry.origin.token]?.selectedId : undefined,
               onReturn:entry.origin ? ()=>returnToOrigin(entry):undefined,returnLabel:entry.origin ? `Return to ${entry.origin.label}`:undefined,
               onPool:id=>void openPool(id,null,false,false,token),onOpen:(target,id,path,location)=>void openContent(target,id,path,false,false,null,{token,location,label:`${entry.document.family!.id} ${entry.selectedId}`,focus:document.activeElement as HTMLElement})}} /></div>)}

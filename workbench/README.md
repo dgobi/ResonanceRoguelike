@@ -920,3 +920,73 @@ surface. Generated owned surfaces retain saved maps/contents/state; missing requ
 owned caches still refuse regeneration. No migration, replanning or world-profile
 editor is added. A new variant changes no explicit membership, but legacy folder
 selection can discover it; shared dependencies remain shared.
+
+## W5Q: saved settlement membership and ordinary-world inspection
+
+Open a saved building and choose **Settlement membership**, or open the fixed
+`roguelike/data/generation/settlement_profiles.json` in Explorer. Both paths focus
+one shared document, with independent Source/control history, exact recovery and
+review/apply/reopen. This native file has `{version, profiles}` and no root ID.
+
+Choose grid/roadside residential, commercial or support, or the featured landmark
+role. **Add this saved building** explicitly stages membership; saving a building
+does not register it. Edit asset, membership weight and whole-settlement cap.
+The civic spent-bell anchor and all profile identities, minima, schedules, repeat
+multipliers and fit budgets are protected, including through Source and recovery.
+Malformed draft text recovers exactly, but validation/apply authority never does.
+Unsupported original shapes/versions remain inspect-only. The selector's UTF-8
+reader rejects a BOM. No editor/derived fields are written to native policy.
+
+Eligibility uses unique actual saved ordinary-building sources, independent of
+folder role or definition editability. The matching grid, roadside or landmark
+placement context is required; remote placement cannot join connected selection.
+A dirty parked building draft stays independent: references use its saved bytes.
+Save/reopen a new variant before referencing its ID. Rows link to exact building
+sources and return to the initiating profile/role/row; changed origin text makes
+that location stale. Use building controls for deliberate eligibility corrections.
+
+Weights must be finite, greater than zero and at most 1,000. Caps are integers
+1–128 across the whole settlement; failed fits consume no cap. Duplicate assets
+across roles within one profile are invalid; the same asset in separate profiles
+is legal. Every role pool must remain nonempty even with a zero minimum, and its
+caps must satisfy the protected minimum. Commercial is a selection role, with no
+new shop/NPC mechanic. Membership weight multiplies saved placement weight and
+the existing repeat penalty; it is not a percentage, frequency estimate or fit
+guarantee. Row order is not priority, and orientations do not multiply weight.
+Remove membership to exclude an asset. The resolver sorts a copy and records
+`base_weight` only in the resolved plan.
+
+Apply and byte-check reopen selection before **Preview saved selection**. One
+explicit seed generates an ordinary 128 × 128 world with normal saved settings
+and all competitors through `world_gen.generate_world`. The full plan is generated
+before filtering observations. Counts/table cover grid, roadside and the existing
+featured landmark, with total/shown/truncated counts and real frontage/entrances.
+Zero selected instances is a valid outcome. No automatic seed search, policy
+injection, narrowing of pools or changes to default generation settings occur.
+Planner failures retain their actual invalid/infeasible/budget-exhausted messages;
+ordinary absence alone cannot identify a fit/cap rejection cause.
+
+**Inspect placement** deterministically replays the exact saved input and plan
+identities, resolves that placement inside the verified plan and calls
+`create_surface` for its actual chunk. The revealed scene includes real terrain,
+decor and contents. Only placement-prefixed production receipts attribute direct
+records, including relocated coordinates and declared/effective readable carriers.
+The receipt binds exact saved data/code hashes, policy bytes, seed, resolved
+selection and plan. One scene is materialized per request within existing limits.
+Edits, dependency changes and cancellation make old results stale; up to three
+recent input identities remain historical through reopen. This is initial static
+construction evidence, not player interaction, FOV, frequency, balance or fun.
+
+Selection publication affects new world plans. Existing saved plans retain their
+captured policy, base weights, selected IDs/roles/transforms and identity; cached
+scenes retain physical state. Membership edits do not retrofit variants or
+regenerate maps. Same-ID consumed building/pool/item edits still face the separate
+pending-surface dependency gate. No save format/migration, canonical content,
+additional POI/compound policy, surface play launcher or wiki rebuild is included.
+
+Autonomous native acceptance: `node scripts/run-selection.mjs`. It uses positively
+owned disposable data/settings/recovery and app-local WebView events. The focused
+worker suite is `worker/test_selection_w5q.py`; existing G3/G5 lifecycle coverage
+remains applicable. The W5P entrance diagnostic now inverts the actual failed
+transformed span cell, with all eight orientations asserting native, transformed
+and scene locations.

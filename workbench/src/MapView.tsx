@@ -29,7 +29,7 @@ export function MapView({
   onCell,
   onError,
 }: {
-  preview: Preview;
+  preview: Pick<Preview,"terrain"|"width"|"height"|"legend"|"decor"|"items"|"containers"|"actors"> & {spawn?:[number,number]};
   onCell: (cell: [number, number] | null) => void;
   onError: (error: unknown) => void;
 }) {

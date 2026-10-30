@@ -7,12 +7,14 @@ from generation.context import GenerationError, stable_seed
 
 
 def validate(config, data=None):
+    location=''
     def require(ok, message):
-        if not ok: raise GenerationError('settlement selection: '+message)
+        if not ok: raise GenerationError('settlement selection: '+(location+': ' if location else '')+message)
     def positive(value): return type(value) in (int,float) and math.isfinite(value) and 0<value<=1000
     require(isinstance(config,dict) and set(config)=={'version','profiles'} and type(config['version']) is int and config['version']==1,'expected version 1 profiles')
     require(isinstance(config['profiles'],dict) and set(config['profiles'])=={'grid','roadside','landmark'},'declare grid, roadside and landmark profiles')
     for context,p in config['profiles'].items():
+        location='profiles.'+context
         require(isinstance(p,dict) and set(p)=={'id','roles','minimum','schedule','repeat_multiplier','required_fit_budget'},context+': incomplete profile')
         require(isinstance(p['id'],str) and bool(p['id']),context+': missing identity')
         roles={'landmark'} if context=='landmark' else {'residential','commercial','support'}|({'civic'} if context=='grid' else set())
@@ -23,19 +25,28 @@ def validate(config, data=None):
         require(isinstance(p['schedule'],list) and bool(p['schedule']) and all(r in roles-{'civic'} for r in p['schedule']),context+': invalid optional schedule')
         seen=set()
         for role,rows in p['roles'].items():
+            role_location=f'profiles.{context}.roles.{role}'
+            location=role_location
             require(type(p['minimum'][role]) is int and 0<=p['minimum'][role]<=8,role+': minimum must be 0..8')
             require(isinstance(rows,list) and bool(rows),role+': empty eligible pool')
-            for row in rows:
+            for n,row in enumerate(rows):
+                location=f'{role_location}[{n}]'
                 keys={'asset','weight','max_per_settlement'}|({'base_weight'} if data is None else set())
                 require(isinstance(row,dict) and set(row)==keys,role+': incomplete asset rule')
+                location=f'{role_location}[{n}].asset'
                 aid=row['asset'];require(isinstance(aid,str) and aid and aid not in seen,role+': duplicate/invalid membership');seen.add(aid)
+                location=f'{role_location}[{n}].weight'
                 require(positive(row['weight']) and (data is not None or positive(row['base_weight'])),aid+': finite positive weights required')
+                location=f'{role_location}[{n}].max_per_settlement'
                 require(type(row['max_per_settlement']) is int and 1<=row['max_per_settlement']<=128,aid+': integer cap must be 1..128')
+                location=f'{role_location}[{n}].asset'
                 if data is not None:
                     raw=data.structures.get(aid); required_context='civic' if role=='civic' else context
                     require(raw is not None and required_context in raw.get('placement',{}).get('contexts',[]),aid+': missing explicit '+required_context+' context')
                     require(raw['placement']['road_relation']!='remote',aid+': connected role cannot use remote relation')
+            location=role_location
             require(sum(r['max_per_settlement'] for r in rows)>=p['minimum'][role],role+': minimum exceeds hard caps')
+        location='profiles.'+context
         if context!='landmark':
             require(p['minimum']['residential']>=1 and p['minimum']['commercial']>=1,context+': residential and commercial minima must be positive')
         if context=='grid':require(p['minimum']['civic']==1 and [r['asset'] for r in p['roles']['civic']]==['bell_tower_a'],'grid requires exactly one spent-bell civic anchor')

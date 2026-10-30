@@ -88,7 +88,7 @@ class Family:
 
     def descriptor(self):
         value = dict(vocabulary=VOCABULARY, schema=self.module.SCHEMA, views=self.module.VIEWS, production_route=self.route,
-                     policy=dict(operations=list(self.operations), root=self.write_root, identity="id"),
+                     policy=dict(operations=list(self.operations), root=self.write_root, identity=getattr(self.module, "IDENTITY_POLICY", "id")),
                      publication_note=self.module.PUBLICATION_NOTE)
         return value, hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
@@ -96,6 +96,7 @@ class Family:
         descriptor, digest = self.descriptor()
         problems = schema_problems(descriptor["schema"])
         allowed_views = {"building-spatial", "pool-entries", "item-properties", "references", "recipes", "use-binding", "factory", "recipe-requirements", "recipe-processing", "output", "production-receipt", "text-pages", "text-references", "reader-preview", "typography-roles", "typography-preview", "creature-properties", "creature-references", "creature-factory", "room-spatial", "world-assignment"}
+        allowed_views.add("settlement-membership")
         if not isinstance(descriptor["views"], list) or any(v not in allowed_views for v in descriptor["views"]):
             problems.append("Unsupported specialized view registration")
         return dict(id=self.id, contract=self.module.CONTRACT, descriptor_sha256=digest,
@@ -146,12 +147,12 @@ class Family:
             if self.exact_file and path != root / self.exact_file: continue
             if path.name.casefold() in getattr(self.module, "RESERVED_BASENAMES", ()): continue
             relative = path.relative_to(root).as_posix()
-            try: raw = read_document(path)
+            try: raw = getattr(self.module, "read_source", read_document)(path)
             except StructureError: raw = {}
             for index, record in enumerate(raw if isinstance(raw, list) else [raw]):
                 record = record if isinstance(record, dict) else {}
                 pointer = f"/{index}" if isinstance(raw, list) else ""
-                identifier = str(record.get("id", path.stem))
+                identifier = getattr(self.module, "DOCUMENT_ID", str(record.get("id", path.stem)))
                 locations = [s for k, ss in sources.items() if k.casefold() == identifier.casefold() for s in ss]
                 if self.exact_file: locations = [s for s in locations if s["path"] == self.exact_file]
                 cap = self.module.capability(record, relative, pointer)
@@ -167,11 +168,12 @@ class Family:
 
 def families():
     # The sole trusted registration point. No renderer or descriptor imports.
-    from engine import building_authoring, pool_authoring, item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring, room_authoring, assignment_authoring
+    from engine import building_authoring, pool_authoring, item_authoring, recipe_authoring, text_authoring, typography_authoring, creature_authoring, room_authoring, assignment_authoring, selection_authoring
     return (
         Family("building", "buildings", building_authoring, ("edit", "variant"), building_authoring.ROOT),
         Family("pool", "loot_pools", pool_authoring, ("edit", "variant"), "roguelike/data/loot_pools/"),
         Family("assignment", "generation", assignment_authoring, ("edit",), assignment_authoring.PROFILE, assignment_authoring.PROFILE),
+        Family("selection", "generation", selection_authoring, ("edit",), selection_authoring.PROFILE, selection_authoring.PROFILE),
         Family("room", "layouts", room_authoring, ("edit", "variant"), "roguelike/data/layouts/"),
         Family("creature", "entities", creature_authoring, ("edit", "variant"), "roguelike/data/entities/creatures/"),
         Family("item", "items", item_authoring, ("edit", "variant"), "roguelike/data/items/"),

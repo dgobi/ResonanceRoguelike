@@ -1,3 +1,4 @@
+import {SelectionEditor} from "./SelectionEditor";
 import {PoolEditor} from "./PoolEditor";
 import {AssignmentEditor} from "./AssignmentEditor";
 import { CreatureEditor } from "./CreatureEditor";
@@ -11,20 +12,21 @@ import type { FamilyPreview } from "./familyData";
 import { familyProblem, type ContentFamily } from "./content";
 import type { ItemTrail, SourceTrail } from "./protocol";
 
-export type ContentNavigation = {poolTrail?:SourceTrail|null;returnLocation?:{text:string;index:number;itemId?:string};onPoolItem?:(id:string,index:number,text:string,path:string)=>void;relatedRoom?:string;selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void; returnLabel?: string;
-  onPool?: (id:string)=>void; onOpen: (family:string,id:string,path?:string,location?:{text:string;index:number})=>void};
+export type ContentNavigation = {poolTrail?:SourceTrail|null;returnLocation?:{text:string;index:number;itemId?:string;profile?:string;role?:string};onPoolItem?:(id:string,index:number,text:string,path:string)=>void;relatedRoom?:string;relatedBuilding?:{id:string;dirty:boolean};selectedId?: string; trail?: ItemTrail | null; onReturn?: ()=>void; returnLabel?: string;
+  onPool?: (id:string)=>void; onOpen: (family:string,id:string,path?:string,location?:{text:string;index:number;profile?:string;role?:string})=>void};
 export type ContentProps = {sourceFamily:ContentFamily; variant:boolean; active:boolean; cancelVersion:number; beginRequest:(label:string)=>RequestLease; family: ContentFamily; navigation: ContentNavigation; draft:string; path:string; dirty:boolean; validated:boolean;
   spatial?:LayoutProps;
   disabled:string; busy:boolean; evidenceStale:boolean; onCancel:()=>void; onSource:()=>void; onProbe:()=>void;
-  preview:FamilyPreview|null; previewStale:boolean; onPreview:(inputs:Record<string,number>)=>void;
+  preview:FamilyPreview|null;historicalPreviews?:FamilyPreview[]; previewStale:boolean; onPreview:(inputs:Record<string,number|string>)=>void;
   onEdit:(edit:(text:string)=>string,label:string)=>void; onUndo:()=>void; onRedo:()=>void; canUndo:boolean; canRedo:boolean};
 type Props = ContentProps;
 
 // Specialist views receive the same document commands as ordinary controls.
 // This registration contains presentation only, never mutable review authority.
 export const contentViews = {
-  building:{label:"building",sourceId:"building-draft-json",hint:"Ordinary surface geometry, active decor, direct contents and explicit placement share Source, history and recovery.",render:(p:Props)=><section data-testid="building-editor"><p className="notice">{p.family.descriptor.publication_note}</p><button onClick={p.onSource}>Show building source</button>{p.spatial&&<LayoutEditor {...p.spatial}/>}</section>},
+  building:{label:"building",sourceId:"building-draft-json",hint:"Ordinary surface geometry, active decor, direct contents and explicit placement share Source, history and recovery.",render:(p:Props)=><section data-testid="building-editor"><p className="notice">{p.family.descriptor.publication_note}</p><button onClick={p.onSource}>Show building source</button><p>Saved building{p.dirty?" · independent parked definition draft; links use saved bytes":""}.</p><button disabled={p.variant} onClick={()=>p.navigation.onOpen("selection","settlement_profiles","roguelike/data/generation/settlement_profiles.json")}>Settlement membership</button>{p.variant&&<p>Save and reopen this variant before referencing its new ID.</p>}{p.spatial&&<LayoutEditor {...p.spatial}/>}</section>},
   pool:{label:"pool",sourceId:"pool-draft-json",hint:"Ordered native pools share Source, history, recovery and publication. Saved dependencies only; validation creates no loot.",render:(p:Props)=>p.family.id==="pool"&&<PoolEditor {...p} context={p.family.context || undefined} diagnostics={p.family.context?.records[0]?.diagnostics || []} trail={p.navigation.poolTrail} onItem={(id,index)=>p.navigation.onPoolItem?.(id,index,p.draft,p.path)} returnLocation={p.navigation.returnLocation} onUsage={(id,path,route)=>p.navigation.onOpen(route==="authored_submap"?"room":"building",id,path)}/>},
+  selection:{label:"selection",sourceId:"selection-draft-json",hint:"Fixed saved settlement membership; new-world selection and actual production construction.",render:(p:Props)=><SelectionEditor {...p}/>},
   assignment:{label:"assignment",sourceId:"assignment-draft-json",hint:"One fixed saved assignment profile; independent document history, recovery and publication.",render:(p:Props)=><AssignmentEditor {...p}/>},
   room:{label:"room",sourceId:"room-draft-json",hint:"Terrain, arrival, direct contents and linked references share this exact source, history and recovery. Validate realized geometry, population and static access before publication.",render:(p:Props)=><section data-testid="room-editor"><p className="notice">{p.family.descriptor.publication_note}</p>{p.navigation.onReturn&&<button onClick={p.navigation.onReturn}>{p.navigation.returnLabel}</button>}<button onClick={p.onSource}>Show room source</button><p>{p.sourceFamily.effective_operations?.includes("edit") ? "Saved ordinary room" : "Room source; publish an eligible ordinary variant before assignment"}{p.dirty ? " · independent unsaved definition draft" : ""}. Assignment choices apply to new worlds; same-ID definition edits still apply to pending scenes.</p><button disabled={!p.sourceFamily.effective_operations?.includes("edit")} onClick={()=>p.navigation.onOpen("assignment","authored_submap_selection","roguelike/data/generation/authored_submap_selection.json")}>World assignment</button>{p.sourceFamily.id==="room"&&p.sourceFamily.context?.records[0]?.capability.reason&&<p className="notice warning">{p.sourceFamily.context.records[0].capability.reason}</p>}{p.spatial&&<LayoutEditor {...p.spatial}/>}</section>},
   creature:{label:"creature",sourceId:"creature-draft-json",hint:"Common Actor controls share exact Source, history, recovery and publication. Special bindings retain their stable ID.",render:(p:Props)=><CreatureEditor {...p}/>},
@@ -38,5 +40,5 @@ export const contentViews = {
 export function ContentEditor(p:Props) {
   const problem = familyProblem(p.family);
   if (problem) return <section className="item-editor"><p className="notice warning">{problem}. Inspect or repair exact Source.</p><button onClick={p.onSource}>Show source</button></section>;
-  return <>{p.navigation.onReturn&&<button disabled={p.busy} onClick={p.navigation.onReturn}>{p.navigation.returnLabel||"Return to origin"}</button>}{p.family.id!=="pool"&&p.navigation.returnLocation&&p.navigation.returnLocation.text!==p.draft&&<p className="notice warning">Recorded container location is stale: this draft changed while away. No different record was selected.</p>}{contentViews[p.family.id].render({...p,navigation:{...p.navigation,onReturn:undefined}})}</>;
+  return <>{p.navigation.onReturn&&<button disabled={p.busy} onClick={p.navigation.onReturn}>{p.navigation.returnLabel||"Return to origin"}</button>}{p.family.id!=="pool"&&p.family.id!=="selection"&&p.navigation.returnLocation&&p.navigation.returnLocation.text!==p.draft&&<p className="notice warning">Recorded container location is stale: this draft changed while away. No different record was selected.</p>}{contentViews[p.family.id].render({...p,navigation:{...p.navigation,onReturn:undefined}})}</>;
 }

@@ -22,10 +22,26 @@ export type AssignmentPreview = Pick<ReaderFrame,"draft_sha256"|"path"|"source"|
   profile_path:string;profile_sha256:string;target_type:string;authored_chance:number;enabled:boolean;matching_count:number;authored_count:number;procedural_count:number;truncated:number;
   rows:{chunk:[number,number];submap_id:string;type:string;seed:number;layout_id:string;path:string}[];
 };
-export type FamilyPreview = ReaderFrame | TypographyPreview | AssignmentPreview;
+export type SelectionPlacement={id:string;asset:string;owner:string;role:string;profile:string;path:string;chunk:[number,number];origin:[number,number];rotation:number;mirror:boolean;frontage_entrance:string;frontage:Record<string,unknown>;entrances:Record<string,unknown>[];entrance_cells:{id:string;cells:[number,number][]}[]};
+export type SelectionPreview = Pick<ReaderFrame,"draft_sha256"|"path"|"source"|"contract"|"descriptor_sha256"|"runtime"|"observed_at_utc"|"setup"|"dependencies"> & {
+  kind:"selection-preview";inputs:{seed:number;placement_id?:string;plan_identity?:string;input_identity?:string};seed:number;width:number;height:number;plan_mode:string;
+  profile_path:string;profile_sha256:string;input_identity:string;input_files:Record<string,string>;plan_identity:string;captured_selection:Record<string,unknown>;resolved_selection_sha256:string;selection_matches_saved_resolve:true;
+  selected_count:number;shown_count:number;truncated:number;rows:SelectionPlacement[];
+  summary:{profile:string;role:string;asset:string;path:string;weight:number;base_weight:number;max_per_settlement:number;selected:number;eligible:true}[];
+  scene:(Pick<import("./protocol").Preview,"terrain"|"width"|"height"|"decor"|"items"|"containers"|"actors"> & {legend:import("./protocol").Preview["legend"];chunk:[number,number];placement:SelectionPlacement;records:Record<string,unknown>[];access:unknown[];note:string;passed:true})|null;
+};
+export type FamilyPreview = ReaderFrame | TypographyPreview | AssignmentPreview | SelectionPreview;
 const png=(v:Partial<PngFrame>|undefined,width:number,height:number)=>!!v && v.width===width && v.height===height && typeof v.image==="string" && v.image.length<=2800000 && /^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(v.image) && typeof v.image_sha256==="string" && /^[a-f0-9]{64}$/.test(v.image_sha256);
 export function previewProblem(value: unknown): string {
   if (!value || typeof value !== "object") return "Missing preview";
+  if((value as {kind?:string}).kind==="selection-preview"){
+    const v=value as Partial<SelectionPreview>,hash=(h:unknown)=>typeof h==="string"&&/^[a-f0-9]{64}$/.test(h);
+    if(v.width!==128||v.height!==128||v.plan_mode!=="shared-v1"||v.contract!=="settlement-membership-1"||v.profile_path!=="roguelike/data/generation/settlement_profiles.json"||!v.source||v.seed!==v.inputs?.seed||v.selection_matches_saved_resolve!==true)return "Malformed saved selection identity";
+    if(![v.profile_sha256,v.draft_sha256,v.descriptor_sha256,v.input_identity,v.plan_identity,v.resolved_selection_sha256].every(hash)||![v.seed,v.selected_count,v.shown_count,v.truncated].every(n=>Number.isSafeInteger(n)&&Number(n)>=0)||Number(v.shown_count)+Number(v.truncated)!==v.selected_count)return "Malformed saved selection binding/counts";
+    if(!v.input_files||Object.entries(v.input_files).some(([p,h])=>!p.startsWith("roguelike/")||!hash(h))||!Array.isArray(v.rows)||v.rows.length>200||v.rows.length!==v.shown_count||v.rows.some(r=>!r.id||!r.asset||!["grid","roadside","landmark"].includes(r.profile)||!r.path.startsWith("roguelike/data/buildings/")||!Array.isArray(r.chunk)||r.chunk.length!==2||!Array.isArray(r.entrance_cells))||!Array.isArray(v.summary))return "Malformed selection rows/dependencies";
+    if(v.scene && (!v.inputs?.placement_id||v.scene.placement.id!==v.inputs.placement_id||v.scene.width!==80||v.scene.height!==43||v.scene.terrain.length!==43||v.scene.terrain.some(r=>r.length!==80)||!v.scene.passed||!Array.isArray(v.scene.records)))return "Malformed selected construction";
+    return "";
+  }
   if((value as {kind?:string}).kind==="assignment-preview"){
     const v=value as Partial<AssignmentPreview>;
     if(v.width!==128||v.height!==128||v.plan_mode!=="shared-v1"||v.contract!=="authored-submap-selection-1"||v.profile_path!=="roguelike/data/generation/authored_submap_selection.json"||!v.source||!v.inputs||v.seed!==v.inputs.seed||typeof v.enabled!=="boolean"||!["barrow","cave","vault"].includes(String(v.target_type))||typeof v.authored_chance!=="number"||v.authored_chance<0||v.authored_chance>1)return "Malformed assignment preview identity";

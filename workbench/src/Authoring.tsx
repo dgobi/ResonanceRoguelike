@@ -60,8 +60,10 @@ export function Authoring({
   dependencyVersion = 0,
   contentNavigation, selectedCreatureId,
   subscribeDisk,
-  registerRecovery,
+  registerRecovery, historicalPreviews, onFamilyPreview,
 }: {
+  historicalPreviews?:FamilyPreview[];
+  onFamilyPreview?:(frame:FamilyPreview)=>void;
   document: Inspection;
   onDirty: (dirty: boolean) => void;
   onApplied: (path: string, receipt: unknown, covered?: () => void) => Promise<void>;
@@ -145,7 +147,7 @@ export function Authoring({
     : document.path;
   useEffect(()=>{
     const recorded=contentNavigation?.returnLocation;
-    if(!recorded || recorded.itemId || recorded.text!==latest.current)return;
+    if(!recorded || recorded.profile || recorded.itemId || recorded.text!==latest.current)return;
     const row=(values.special_tiles as {x:number;y:number}[]|undefined)?.[recorded.index];
     if(row)setFocus({cell:[row.x,row.y],layer:"specials",index:recorded.index});
   },[contentNavigation?.returnLocation]);
@@ -207,8 +209,9 @@ export function Authoring({
     // WebView textarea events may repeat the same normalized CRLF value on
     // focus changes. A no-op must not start another acknowledgement/render loop.
     if (text === latest.current && nextIntent.variant===intent.current.variant && nextIntent.variantId===intent.current.variantId) return;
-    if (!visual && (pool || building)) history.current.record(latest.current, text, "Edit Source / properties");
-    if (!visual && !pool && !building) {
+    const sourceHistory=pool || building || content?.id==="selection";
+    if (!visual && sourceHistory) history.current.record(latest.current, text, "Edit Source / properties");
+    if (!visual && !sourceHistory) {
       history.current.clear();
       gesture.current = null;
     }
@@ -285,7 +288,7 @@ export function Authoring({
       setLocalError(String(e));
     }
   }
-  async function validate(showDiff = true, previewInputs?:Record<string,number>) {
+  async function validate(showDiff = true, previewInputs?:Record<string,number|string>) {
     const v = ++version.current,
       text = latest.current;
     const request = beginRequest(previewInputs ? "Rendering registered preview…" : "Validating unsaved draft…");
@@ -310,6 +313,7 @@ export function Authoring({
         if(previewInputs && r.result.family_preview) {
           const problem=previewProblem(r.result.family_preview);
           if(problem) throw new Error(problem);
+          onFamilyPreview?.(r.result.family_preview);
           setPreviewEvidence({frame:r.result.family_preview,text,version:cancelVersion,dependencies:dependencyVersion,stale:false});
         }
         if (content || creature || submap) { setEvidenceVersion(dependencyVersion); setDisk(d=>d ? {...d, dependencies_changed:false} : d); }
@@ -417,7 +421,7 @@ export function Authoring({
         evidenceStale={!!disk?.changed || !!disk?.dependencies_changed || evidenceVersion !== dependencyVersion}
         disabled={!writable ? "Read-only source or unsupported capability." : !editing ? "Begin edit to change this definition." : disk?.changed ? "Disk changed. Draft retained; reload or reconcile in Source." : busy.includes("applying") ? "Publication in progress." : ""}
         busy={!!busy} onCancel={onCancel} onSource={()=>setTab("source")} onProbe={()=>void validate(false)}
-        preview={previewEvidence?.frame || null} previewStale={!previewEvidence || previewEvidence.stale || previewEvidence.text!==draft || previewEvidence.frame.path!==target || previewEvidence.version!==cancelVersion || previewEvidence.dependencies!==dependencyVersion || !!disk?.changed || !!disk?.dependencies_changed}
+        historicalPreviews={historicalPreviews} preview={previewEvidence?.frame || historicalPreviews?.at(-1) || null} previewStale={!previewEvidence || previewEvidence.stale || previewEvidence.text!==draft || previewEvidence.frame.path!==target || previewEvidence.version!==cancelVersion || previewEvidence.dependencies!==dependencyVersion || !!disk?.changed || !!disk?.dependencies_changed}
         onPreview={inputs=>void validate(false,inputs)}
         onEdit={visualEdit} onUndo={()=>historyStep(false)} onRedo={()=>historyStep(true)} canUndo={!!history.current.undoStack.length} canRedo={!!history.current.redoStack.length}
       /></div>, canvasHost)}
@@ -556,7 +560,7 @@ export function Authoring({
           </button>
         ))}
       </div>
-      {building&&editing&&<div className="edit-actions"><button disabled={!!disk?.changed||busy.includes("applying")||!history.current.undoStack.length} onClick={()=>historyStep(false)}>Undo document</button><button disabled={!!disk?.changed||busy.includes("applying")||!history.current.redoStack.length} onClick={()=>historyStep(true)}>Redo document</button></div>}
+      {(building||content?.id==="selection")&&editing&&<div className="edit-actions"><button disabled={!!disk?.changed||busy.includes("applying")||!history.current.undoStack.length} onClick={()=>historyStep(false)}>Undo document</button><button disabled={!!disk?.changed||busy.includes("applying")||!history.current.redoStack.length} onClick={()=>historyStep(true)}>Redo document</button></div>}
       {tab === "properties" && (
         <div className="typed-fields">
           {(!content || building) && !creature && !submap && <label>

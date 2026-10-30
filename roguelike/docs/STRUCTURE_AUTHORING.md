@@ -1661,3 +1661,28 @@ can discover the new file. Preserving the old building under a different ID does
 not insulate it from later same-ID changes to shared pools/items. No canonical
 example pack, world rewrite, selection editor, surface play launcher or wiki rebuild
 is part of this milestone.
+
+## W5Q saved membership in Workbench
+
+The saved selection document now connects ordinary building authoring to the
+existing grid, roadside and featured-landmark consumers. From a saved building,
+choose **Settlement membership**, then explicitly add its saved ID to an eligible
+role and edit its relative weight and whole-settlement cap. This edits one fixed
+native `generation/settlement_profiles.json` with no root ID. Civic policy,
+minima, schedules, repeat multipliers and required-fit budgets remain protected
+in controls and backend publication. No canonical membership changes are installed.
+
+Save/reopen the policy before an ordinary 128 × 128 explicit-seed sample. The
+preview uses saved definitions, not parked drafts. Inspect an actual selected
+placement to construct its real chunk through `create_surface`; the receipt
+binds the same saved-input and plan identities and attributes contents only by
+placement-owned production record IDs. Grid, roadside and the separately owned
+featured landmark are covered. Full-span diagnostics map failed transformed
+cells back to the exact native source cell in every permitted orientation.
+
+Membership edits affect new plans only: existing saved plans retain their
+captured policy/base weights, selected IDs, roles, transforms and identity.
+Generated caches retain physical state. Consumed same-ID building/pool/item
+changes still face the pending-surface dependency gate. The full operating rules,
+weights/caps, exact recovery, stale-result behavior and limits are documented in
+`workbench/README.md` under W5Q. No new gameplay or save migration is introduced.

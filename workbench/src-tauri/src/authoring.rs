@@ -24,6 +24,7 @@ const CONTENT_ROOTS: &[(&str, &str, &[&str])] = &[
 ];
 pub const TYPOGRAPHY: &str = "roguelike/data/display/typography.json";
 pub const ASSIGNMENT: &str = "roguelike/data/generation/authored_submap_selection.json";
+pub const SELECTION: &str = "roguelike/data/generation/settlement_profiles.json";
 pub fn item_authoring_path(source:&str)->bool {
     let p:Vec<_>=source.split('/').collect();
     p.len()>=5 && p[..3]==["roguelike","data","items"]
@@ -36,6 +37,7 @@ pub fn content_root(source: &str) -> Option<&'static str> {
     if pool_inspection_path(source) { return Some("roguelike/data/loot_pools/"); }
     if source == TYPOGRAPHY { return Some(TYPOGRAPHY); }
     if source == ASSIGNMENT { return Some(ASSIGNMENT); }
+    if source == SELECTION { return Some(SELECTION); }
     if is_layout(source) || source == G17_EXAMPLE { return Some("roguelike/data/layouts/"); }
     CONTENT_ROOTS.iter().find_map(|(source_root, write_root, reserved)| {
         let suffix = source.strip_prefix(source_root)?;
@@ -70,11 +72,12 @@ impl FamilyPolicy {
         if f["compatible"] != true || !valid_id(id) || contract.is_empty() || contract.len() > 100
             || d["production_route"] != route || digest.len() != 64 || !digest.bytes().all(|b| b.is_ascii_hexdigit())
             || d["vocabulary"] != "resonance-controls-1" || d["schema"]["$schema"] != "https://json-schema.org/draft/2020-12/schema"
-            || d["policy"]["identity"] != "id" || operations.is_empty()
+            || d["policy"]["identity"] != if source == SELECTION {"fixed-file"} else {"id"} || operations.is_empty()
             || operations.iter().any(|op| op != "edit" && op != "variant")
             || content_root(source) != Some(root)
             || (source == TYPOGRAPHY && (id != "typography" || operations != ["edit"]))
             || (source == ASSIGNMENT && (id != "assignment" || route != "assignment_definition" || contract != "authored-submap-selection-1" || operations != ["edit"]))
+            || (source == SELECTION && (id != "selection" || route != "settlement_selection" || contract != "settlement-membership-1" || operations != ["edit"]))
         { return None; }
         let effective = f["effective_operations"].as_array()?.iter().map(|v|v.as_str().map(str::to_owned)).collect::<Option<Vec<_>>>()?;
         if effective.iter().any(|op| !operations.contains(op))
@@ -363,7 +366,7 @@ fn accept_edit(host:&Host, token:&str, sequence:u64, draft:String, variant:bool,
     let root=state.root.clone().ok_or_else(unknown_document)?;
     let doc=current_document(&mut state,token).ok_or_else(unknown_document)?;
     let family=doc.family.as_ref().filter(|_|doc.writable).ok_or_else(||recovery::error("Only eligible registered documents have durable drafts."))?;
-    if !draft_intent_allowed(family,variant) || (doc.relative==TYPOGRAPHY || doc.relative==ASSIGNMENT) && !variant_id.is_empty(){
+    if !draft_intent_allowed(family,variant) || (doc.relative==TYPOGRAPHY || doc.relative==ASSIGNMENT || doc.relative==SELECTION) && !variant_id.is_empty(){
         return Err(recovery::error("This family is edit-only; recovery cannot retain a variant target."));
     }
     if sequence<=doc.edit_sequence || sequence>9_007_199_254_740_990{return Err(recovery::error("Obsolete or invalid edit acknowledgement refused."));}
@@ -779,6 +782,24 @@ fn destination(
     if doc.relative==ASSIGNMENT && raw.is_object() && (raw["id"]!="authored_submap_selection" || raw["version"].as_u64()!=Some(1)) {
         return Err(failure("IDENTITY_CHANGE","Assignment requires fixed id authored_submap_selection and integer version 1.","Restore the fixed identity/version."));
     }
+    if doc.relative==SELECTION && raw.is_object() {
+        if draft.starts_with('\u{feff}') {
+            return Err(failure("SELECTION_BOM","The native selector rejects a UTF-8 BOM.","Remove the BOM deliberately in Source; the game loader uses UTF-8."));
+        }
+        let original:Value=serde_json::from_slice(&doc.original).map_err(io_error)?;
+        let mask=|value:&Value| -> Option<Value> {
+            if value.as_object()?.len()!=2 || value["version"].as_u64()!=Some(1) || value["profiles"].as_object()?.len()!=3 {return None;}
+            let mut result=value.clone();
+            for (profile,roles) in [("grid", &["residential","commercial","support"][..]),("roadside", &["residential","commercial","support"][..]),("landmark", &["landmark"][..])] {
+                let tables=result["profiles"][profile]["roles"].as_object_mut()?;
+                for role in roles {let slot=tables.get_mut(*role)?;*slot=Value::Null;}
+            }
+            Some(result)
+        };
+        if mask(&original).is_none() || mask(&raw)!=mask(&original) {
+            return Err(failure("PROTECTED_POLICY","Preserve the native root and all policy outside the seven non-civic membership tables.","Restore civic membership, profile fields, version and root shape before validation."));
+        }
+    }
     if let Some(id) = variant_id {
         if doc.relative.starts_with("roguelike/data/items/") && !item_authoring_path(&format!("{}/{}.json",variant_directory(&doc.relative),id)) {
             return Err(failure("READ_ONLY_ITEM","Reserved or unsupported item destination.","Choose a unique ordinary item ID."));
@@ -829,7 +850,7 @@ pub async fn validate_document(
         checked_target(&root, &dest, variant)?;
         let inputs = if dependency_bound(&doc.relative) { Some(input_stamp(&root)?) } else { None };
         let preview_only = preview_inputs.is_some();
-        if doc.relative==ASSIGNMENT && preview_only && (draft.as_bytes()!=doc.original || doc.accepted.as_ref().is_some_and(|r|r.draft.as_bytes()!=doc.original || r.variant)) {
+        if (doc.relative==ASSIGNMENT || doc.relative==SELECTION) && preview_only && (draft.as_bytes()!=doc.original || doc.accepted.as_ref().is_some_and(|r|r.draft.as_bytes()!=doc.original || r.variant || !r.variant_id.is_empty())) {
             return Err(failure("ASSIGNMENT_UNSAVED","Preview uses saved assignments and saved dependencies.","Apply and byte-check reopen the profile first; parked drafts are excluded."));
         }
         let mut response = run_worker(
@@ -1101,7 +1122,7 @@ fn publish(root: &Path, doc: &Document, review: &Review, fault: Fault) -> Result
     if is_recipe(&doc.relative) && doc.family.as_ref().is_none_or(|f| f.id != "recipe" || f.root != "roguelike/data/recipes/") {
         return Err(failure("OPERATION_POLICY", "Recipe publication requires its registered source policy.", "Reopen the supported recipe."));
     }
-    if doc.relative==TYPOGRAPHY || doc.relative==ASSIGNMENT {
+    if doc.relative==TYPOGRAPHY || doc.relative==ASSIGNMENT || doc.relative==SELECTION {
         let (target,variant)=destination(doc,&review.draft,review.variant.then_some("forbidden"))?;
         if target!=review.destination || variant {return Err(failure("OPERATION_POLICY","This profile has one fixed target.","Review the canonical profile."));}
     }
@@ -1569,6 +1590,39 @@ mod tests {
         review.destination="roguelike/data/items/components/elsewhere.json".into();review.variant=false;review.draft=draft.into();assert!(publish(root.path(),&doc,&review,Fault::None).is_err());assert_eq!(fs::read(&path).unwrap(),doc.original);
         let before=input_stamp(root.path()).unwrap();fs::write(&path,draft).unwrap();assert_ne!(input_stamp(root.path()).unwrap(),before);
         let fonts=root.path().join("roguelike/assets/Fonts");fs::create_dir_all(&fonts).unwrap();fs::write(fonts.join("selected.ttf"),b"selected font bytes").unwrap();let before=input_stamp(root.path()).unwrap();fs::write(fonts.join("selected.ttf"),b"changed bytes").unwrap();assert_ne!(input_stamp(root.path()).unwrap(),before);
+    }
+    #[test]
+    fn selection_no_root_id_fixed_policy_exact_recovery_and_three_independent_owners(){
+        let (root,host,item,_)=lifecycle_fixture(false);
+        let result=actual_family_result("inspect",SELECTION,None,None);
+        let mut doc=item.clone();doc.relative=SELECTION.into();doc.token="selection-owner".into();
+        doc.original=result["raw"].as_str().unwrap().as_bytes().to_vec();doc.id=None;
+        doc.family=FamilyPolicy::from_result(&result,SELECTION);doc.inspection=result.clone();doc.review=None;doc.accepted=None;
+        assert_eq!(doc.family.as_ref().unwrap().id,"selection");
+        assert_eq!(doc.family.as_ref().unwrap().descriptor["policy"]["identity"],"fixed-file");
+        let mut forged=result.clone();forged["family"]["descriptor"]["policy"]["identity"]=json!("id");assert!(FamilyPolicy::from_result(&forged,SELECTION).is_none());
+        let path=root.path().join(SELECTION);fs::create_dir_all(path.parent().unwrap()).unwrap();fs::write(&path,&doc.original).unwrap();
+        let mut building=item.clone();building.token="building-owner".into();
+        {let mut state=host.inner.lock().unwrap();state.content_documents.insert(file_key(SELECTION),doc.clone());state.content_documents.insert("separate-building".into(),building.clone());}
+        for path in ["roguelike/data/generation/Settlement_profiles.json","roguelike/data/generation/settlement_profiles.JSON","roguelike/data/generation/other.json","roguelike/data/generation/nested/settlement_profiles.json","roguelike/data/generation/../settlement_profiles.json"]{assert!(content_root(path).is_none());assert!(checked_target(root.path(),path,false).is_err());}
+        let raw:Value=serde_json::from_slice(&doc.original).unwrap();assert!(raw.get("id").is_none());
+        for (profile,roles) in [("grid",vec!["residential","commercial","support"]),("roadside",vec!["residential","commercial","support"]),("landmark",vec!["landmark"]) ]{
+            for role in roles {let mut candidate=raw.clone();candidate["profiles"][profile]["roles"][role][0]["weight"]=json!(2.5);assert_eq!(destination(&doc,&candidate.to_string(),None).unwrap(),(SELECTION.into(),false));}
+        }
+        for pointer in ["/version","/id","/profiles/grid/roles/civic/0/weight","/profiles/grid/minimum/civic","/profiles/roadside/schedule","/profiles/landmark/required_fit_budget"]{
+            let mut candidate=raw.clone();if pointer=="/id" {candidate["id"]=json!("forged");} else {*candidate.pointer_mut(pointer).unwrap()=json!(999);}
+            assert!(destination(&doc,&candidate.to_string(),None).is_err(),"{pointer}");
+        }
+        assert!(destination(&doc,&raw.to_string(),Some("clone")).is_err());
+        assert!(destination(&doc,&format!("\u{feff}{}",raw),None).is_err());
+        for (variant,id) in [(true,"clone"),(false,"clone")]{assert!(accept_edit(&host,&doc.token,1,"{exact".into(),variant,id.into()).is_err());}
+        let exact="{\r\n  \"invalid λ\\n\": [";
+        accept_edit(&host,&doc.token,1,exact.into(),false,"".into()).unwrap();
+        let record=session_doc(&host,&doc.token).unwrap().1.accepted.unwrap();assert_eq!(record.target,SELECTION);assert_eq!(record.draft,exact);
+        for mutation in 0..4 {let mut bad=record.clone();match mutation {0=>bad.variant=true,1=>bad.variant_id="hidden".into(),2=>bad.target=ASSIGNMENT.into(),_=>bad.family="item".into()};assert!(bad.validate().is_err());}
+        let dir=tempfile::tempdir().unwrap();let mut store=recovery::Store::new(dir.path().into()).unwrap();store.write(&record).unwrap();store.release(&record.key());drop(store);
+        let mut restarted=recovery::Store::new(dir.path().into()).unwrap();let mut restored=doc.clone();restore_claimed(&mut restarted,root.path(),&mut restored,&record.key(),record.generation).unwrap();assert_eq!(restored.accepted.unwrap().draft,exact);assert!(restored.review.is_none());
+        assert_eq!(host.inner.lock().unwrap().content_documents.len(),3);
     }
     #[test]
     fn recovery_acquisition_refuses_deleted_or_advanced_inspection_and_cleans_failed_claim(){

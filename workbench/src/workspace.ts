@@ -2,9 +2,10 @@ import type { Failure, Inspection } from "./protocol";
 
 export type OpenDocument = {
   document: Inspection; dirty: boolean; selectedId: string;
-  origin?: { token: string; label: string; focus: HTMLElement | null; location?:{text:string;index:number;itemId?:string} };
+  origin?: { token: string; label: string; focus: HTMLElement | null; location?:{text:string;index:number;itemId?:string;profile?:string;role?:string} };
+  previews?: import("./familyData").FamilyPreview[];
   poolTrail?: import("./protocol").SourceTrail | null;
-  returnLocation?: {text:string;index:number;itemId?:string};
+  returnLocation?: {text:string;index:number;itemId?:string;profile?:string;role?:string};
   trail?: import("./protocol").ItemTrail | null;
 };
 export type Documents = Record<string, OpenDocument>;
@@ -52,6 +53,6 @@ export function installDocument(current: Documents, document: Inspection, select
   if (!previous && current[token]) return current;
   const next = {...current};
   if (previous) delete next[previous];
-  next[token] = {document, selectedId, dirty: false, origin: previous ? current[previous].origin : undefined, trail: previous ? current[previous].trail : undefined, poolTrail:previous ? current[previous].poolTrail : undefined, returnLocation:previous ? current[previous].returnLocation : undefined};
+  next[token] = {document, selectedId, dirty: false, previews:previous ? current[previous].previews : undefined, origin: previous ? current[previous].origin : undefined, trail: previous ? current[previous].trail : undefined, poolTrail:previous ? current[previous].poolTrail : undefined, returnLocation:previous ? current[previous].returnLocation : undefined};
   return next;
 }
