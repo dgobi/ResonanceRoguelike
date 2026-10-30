@@ -22,6 +22,10 @@ ENGINE_STATE = {
     "_last_exposure_tier": (0, "count"),
     "_last_chunk_entry": ((0, 0), "point"),
 }
+ENGINE_OPTIONAL_STATE = {
+    "_weapon_time_balance": (0, "weapon_balance"),
+    "_free_move_pending": (False, "bool"),
+}
 PLAYER_STATE = {
     "chilled_turns": (0, "count"), "_sickness_turns": (0, "count"),
     "_in_concealment": (False, "bool"), "_wraith_warned": (False, "bool"),
@@ -72,6 +76,8 @@ def _valid(value, kind):
         return type(value) is int and value >= 0
     if kind == "coordinate":
         return type(value) is int
+    if kind == "weapon_balance":
+        return type(value) is int and -1_000_000 < value < 1_000_000
     if kind == "point":
         return isinstance(value, (list, tuple)) and len(value) == 2 and all(type(v) is int for v in value)
     if kind == "number":
@@ -147,19 +153,27 @@ def restore_item(item, row):
 
 
 def serialize_runtime(engine):
-    return {"version": 1, "engine": snapshot(engine, ENGINE_STATE),
+    state = snapshot(engine, ENGINE_STATE)
+    # Neutral additions stay absent, preserving genuine historical fingerprints.
+    state.update({key: value for key, value in snapshot(engine, ENGINE_OPTIONAL_STATE).items()
+                  if type(value) is not type(ENGINE_OPTIONAL_STATE[key][0])
+                  or value != ENGINE_OPTIONAL_STATE[key][0]})
+    return {"version": 1, "engine": state,
             "player": snapshot(engine.player, PLAYER_STATE)}
 
 
 def restore_runtime(engine, data):
     record = data.get("component_state", {})
     restore(engine, record.get("engine", {}), ENGINE_STATE)
+    restore(engine, record.get("engine", {}), ENGINE_OPTIONAL_STATE)
     restore(engine.player, record.get("player", {}), PLAYER_STATE)
 
 
 def validate_components(data):
     if "component_state" in data:
         validate_block(data["component_state"], {"engine": ENGINE_STATE, "player": PLAYER_STATE}, "component_state")
+        validate_fields(data["component_state"]["engine"], ENGINE_OPTIONAL_STATE,
+                        "component_state.engine", complete=False)
     fighter = data.get("fighter")
     if not isinstance(fighter, dict):
         raise ValueError("fighter must be an object")

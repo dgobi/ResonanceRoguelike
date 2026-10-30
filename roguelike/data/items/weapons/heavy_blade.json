@@ -19,7 +19,7 @@
     {
       "id": "press",
       "name": "Press",
-      "description": "The blade carries momentum. On a killing blow, press forward.",
+      "description": "On a killing blow, take one immediate local step for free. Terrain still slows you; another action gives up the step.",
       "key": "Q",
       "turn_cost": 1.0,
       "cooldown": 3,

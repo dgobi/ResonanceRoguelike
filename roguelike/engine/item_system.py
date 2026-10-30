@@ -19,6 +19,7 @@ class ItemSystem:
         Apply item use effect.
         Returns True if the item was consumed/used successfully.
         """
+        self.last_use_committed = False
         inv = getattr(engine.player, "inventory", None)
         if inv is None or not inv.contains(item):
             if item.on_use == "heal_minor":
@@ -42,7 +43,9 @@ class ItemSystem:
             )
             return False
 
-        return handler(item, engine)
+        consumed = handler(item, engine)
+        self.last_use_committed = self.last_use_committed or bool(consumed)
+        return consumed
 
     # ------------------------------------------------------------------ #
     #  Effect handlers
@@ -61,6 +64,7 @@ class ItemSystem:
             engine.log.add(f"[DEBUG] text '{text_id}' not found.", AGED_WOOD)
             return False
         # Check item definition for render_mode — deep_tongue items use ziggurat panel
+        self.last_use_committed = True
         item_def = engine.data.items.get(getattr(item, "item_id", ""), {})
         item_render_mode = item_def.get("render_mode", "")
         if item_render_mode == "deep_tongue":
@@ -127,6 +131,7 @@ class ItemSystem:
                 return False
 
         raw = item.hydration if item.hydration is not None else 400
+        self.last_use_committed = True
         survival = getattr(engine.data, "survival", {})
         t_max = survival.get("thirst", {}).get("max", 800)
         # Values <= 1.0 are legacy float fractions; values > 1.0 are integers to normalise
@@ -170,6 +175,8 @@ class ItemSystem:
 
         if not item.light_data:
             return False
+
+        self.last_use_committed = True
 
         equipment = getattr(engine.player, "equipment", None)
         current   = engine.player.light_source
@@ -305,6 +312,7 @@ class ItemSystem:
                 WORN_STONE,
             )
 
+        self.last_use_committed = True
         return False  # not consumed
 
     def _use_reduce_resonance_exposure(self, item: "Item", engine: "Engine") -> bool:

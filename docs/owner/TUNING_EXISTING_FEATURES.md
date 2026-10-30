@@ -21,16 +21,19 @@ The same file contains `movesets`. To strengthen Severing Cut and shorten its co
 
 Keep each action’s `id` stable: cooldowns are keyed by that ID. Use one action per `key`, `Q` or `R`; the first matching entry wins. Keep `range: 1` for these melee actions. Increasing it does not implement a complete ranged targeting system. Keep `turn_cost: 1.0` when you want ordinary action timing.
 
+Fractional weapon costs accumulate separately from movement/work debt and sprint credit. Starting neutral, five accepted `0.8` actions pay four world phases (the fifth skips); five `1.2` actions pay six (the fifth adds one). The first fast action still pays one. A `0.8` followed by `1.2` returns to neutral in two phases. `1.0` actions and ordinary intervening actions preserve the balance; rejected movesets spend nothing. Misses and dodges are committed attacks. Costs resolve to millionths of a phase before accumulating, so authored decimal boundaries do not drift. Cooldown waits retain their own normal costs, and skipped phases do not tick cooldowns or other turn systems. The balance survives saves.
+
+Heavy Blade’s Press kill pays its attack cost, then offers one immediate adjacent legal step in the same scene. That step waives only its base phase: entry hazards and terrain/needs/work surcharges still apply. Another committed action expires the opportunity, including a wait, attack, inventory use/equipment/reading, interaction, harvesting, sprint activation or successful travel. Inspection, menus, saving, cancellation and rejected inputs preserve it. It cannot stack. A Press step preserves movement-speed credit without earning more, counts against sprint’s physical-move duration, and ticks world-phase bonuses only if a surcharge charges a phase. Pending, consumed and expired states restore exactly; older saves default to no opportunity and neutral weapon balance while preserving their existing positive work debt.
+
 Examples of implemented effects are `reduce_av` in `dissolution_blade.json`, `suppress_ability_turns` in `severance_blade.json`, and `ignore_armour`, `ignore_dodge`, and `reveal_knowledge` in `revelation_lens.json`. These live inside an action’s `effects` object. `destroy_armour` currently subtracts two points from effective armour; it does not remove a separate armour-layer object.
 
 Some existing declarations need code work before their descriptions can be fulfilled:
 
 | Field | Current boundary |
 |---|---|
-| `free_move_on_kill` in `heavy_blade.json` | Sets a pending flag, but movement does not consume that flag to grant a free move. |
 | `pool_turns` in `dissolution_blade.json` | Read into the moveset result but never used to expire the pool. `place_pool` places decor on a kill; it does not establish a timed damage zone. |
 | `ignore_armour_layers` in `crude_blade.json` | Not read by the moveset executor. The implemented bypass is `ignore_armour`. |
-| `on_kill_only` | Not a general condition around every effect. Pool placement and the pending free-move flag have explicit kill checks in the engine. |
+| `on_kill_only` | Not a general condition around every effect. Pool placement and Press’s follow-up have explicit kill checks in the engine. |
 
 Changing those values alone cannot complete the missing behaviour. The relevant code is `engine/movesets.py` and the melee methods in `engine/engine.py`.
 

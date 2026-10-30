@@ -312,6 +312,8 @@ class Engine:
         self.reality_bubble = RealityBubble()
         # Terrain movement debt and concealment
         self._move_debt:             float = 0.0
+        self._weapon_time_balance:  int = 0  # signed millionths of a phase
+        self._free_move_pending:    bool = False
         self._player_in_concealment: bool  = False
         # Warmth system
         self.player_near_fire:       bool  = False
@@ -1353,6 +1355,9 @@ class Engine:
         return self.entities
 
     def _advance_turn(self) -> None:
+        # Paid modal actions also resolve Press. A killing moveset grants its
+        # new opportunity only after all of its phases have finished.
+        self._free_move_pending = False
         from engine.effect_lifecycle import live_actors, finish_turn
         effect_actors = live_actors(self)
         self._effect_aged_ids = set()
@@ -1794,6 +1799,8 @@ class Engine:
         self.player._in_concealment = False
         acted = False
         _was_move = False
+        _press_step = False
+        _moveset_result = None
         # Capture speed before consuming the final sprint move or salve turn.
         _move_speed = self.display.SPRINT_SPEED_MULT if self.sprint_turns_remaining > 0 else 1.0
         if self.player_speed_bonus_turns > 0:
@@ -1809,6 +1816,7 @@ class Engine:
             self.sprint_turns_remaining = self.display.SPRINT_DURATION
             self.sprint_cooldown_remaining = self.display.SPRINT_COOLDOWN
             self.player_move_accumulator = 0.0
+            self._free_move_pending = False
             self.callouts.add("SPRINT", float(self.player.x),
                               float(self.player.y) - 0.3,
                               RESONANCE_LOW, lifetime=1.2,
@@ -1822,9 +1830,8 @@ class Engine:
             dest_y = self.player.y + dy
 
             if not self.local_map.in_bounds(dest_x, dest_y):
-                self._transition_chunk(dx, dy)
-                acted = True
-                _was_move = True
+                acted = bool(self._transition_chunk(dx, dy))
+                _was_move = acted
             elif self.local_map.tiles['terrain'][dest_x, dest_y] == 'door_closed':
                 self.local_map.set_tile(dest_x, dest_y, 'door_open', True, True)
                 self._update_fov()
@@ -1833,11 +1840,11 @@ class Engine:
             elif self.local_map.walkable[dest_x, dest_y]:
                 blocker = self._get_blocking_entity(dest_x, dest_y)
                 if blocker:
-                    self._player_attack(blocker)
-                    acted = True
+                    acted = self._player_attack(blocker)
                 elif self._decor_blocks_movement(dest_x, dest_y):
                     pass  # blocked by decor object (campfire, barrel, etc.)
                 else:
+                    _press_step = self._free_move_pending
                     _prev_x, _prev_y = self.player.x, self.player.y
                     self.player.move(dx, dy)
                     self._update_fov()
@@ -1863,7 +1870,8 @@ class Engine:
                                               font_size="status")
 
         elif key in (self.display.MOVESET_KEY_1, self.display.MOVESET_KEY_2):
-            acted = self._try_moveset_action(key)
+            _moveset_result = self._try_moveset_action(key)
+            acted = bool(_moveset_result)
 
         elif key in WAIT_KEYS:
             acted = True
@@ -1908,19 +1916,30 @@ class Engine:
 
         if acted:
             self._log_scroll = 0
+            self._free_move_pending = False
             # Fractional credit earns skipped enemy phases, never extra ones.
             # Non-movement actions always advance time and never spend this credit.
-            skip_turn = False
-            if _was_move:
+            skip_turn = _press_step
+            if _was_move and not _press_step:
                 self.player_move_accumulator += 1.0 - 1.0 / _move_speed
                 if self.player_move_accumulator >= 1.0 - 1e-9:
                     self.player_move_accumulator = max(0.0, self.player_move_accumulator - 1.0)
                     skip_turn = True
-            if not skip_turn:
+            phases = 0 if skip_turn else 1
+            if _moveset_result:
+                phases = self._weapon_action_phases(_moveset_result.turn_cost)
+            for _ in range(phases):
+                if self._player_is_dead or not self.player.is_alive:
+                    break
                 self._advance_turn()
-            while self._move_debt >= 1.0:
+            while (self._move_debt >= 1.0
+                   and not self._player_is_dead and self.player.is_alive):
                 self._move_debt -= 1.0
                 self._advance_turn()
+            if (_moveset_result and _moveset_result.free_move
+                    and not self._player_is_dead and self.player.is_alive):
+                self._free_move_pending = True
+                self.log.add("Momentum: one free local step. Terrain still slows you; another action gives it up.", MSG_COMBAT_OUT)
         if self.mode == GameMode.LOCAL:
             self._update_context_prompt()
 
@@ -2106,10 +2125,10 @@ class Engine:
     #  Chunk transitions
     # ------------------------------------------------------------------ #
 
-    def _transition_chunk(self, dx: int, dy: int) -> None:
+    def _transition_chunk(self, dx: int, dy: int) -> bool:
         if self.bounded_room_test:
             self.log.add("Disposable room test: travel is limited to the room and its foyer.", STONE_BLUE)
-            return
+            return False
         # Clear screen-space particles — their absolute pixel coords become
         # invalid when the camera shifts to a new chunk.
         self.particle_system.particles.clear()
@@ -2135,15 +2154,15 @@ class Engine:
         new_wy = self.world_y + wy_off
 
         if not self.world_map.in_bounds(new_wx, new_wy):
-            return
+            return False
 
         chunk = self.world_map.get(new_wx, new_wy)
         if not chunk:
-            return
+            return False
 
         prepared = self._prepare_destination(new_wx, new_wy)
         if prepared is None:
-            return
+            return False
         new_map, new_entities = prepared
 
         from engine.effect_lifecycle import reset_wraith_aura
@@ -2440,6 +2459,8 @@ class Engine:
         # Travel writes the session cache; only an explicit save publishes a
         # checkpoint. F9 must still restore the last F5 state after crossing.
         self._update_context_prompt()
+        self._free_move_pending = False
+        return True
 
     # ------------------------------------------------------------------ #
     #  SubMap traversal (stairs)
@@ -2509,6 +2530,8 @@ class Engine:
         if prepared is None:
             return
         new_map, new_entities = prepared
+
+        self._free_move_pending = False
 
         self.particle_system.particles.clear()
         from engine.effect_lifecycle import reset_wraith_aura
@@ -2657,6 +2680,7 @@ class Engine:
         if prepared is None:
             return
         new_map, new_entities = prepared
+        self._free_move_pending = False
         self.particle_system.particles.clear()
         from engine.effect_lifecycle import reset_wraith_aura
         reset_wraith_aura(self)
@@ -5158,28 +5182,31 @@ class Engine:
                 return False
         return True
 
-    def _player_attack(self, target: "Actor") -> None:
+    def _player_attack(self, target: "Actor") -> bool:
         from engine.combat import resolve_attack
         from engine.effect_lifecycle import creature_id, coated_weapon, coating_contact, knight_disruption, ability_enabled
 
         player_fighter = getattr(self.player, "fighter", None)
         target_fighter = getattr(target,      "fighter", None)
         if (not player_fighter or not target_fighter
-                or not self.player.is_alive or not target.is_alive
+                or self._player_is_dead or not self.player.is_alive
+                or player_fighter.is_dead or player_fighter.hp <= 0 or not target.is_alive
                 or target_fighter.is_dead):
-            return
+            return False
 
         # Check impairment
         if not player_fighter.can_attack():
             self.log.add("Thou canst not strike.", AGED_WOOD)
-            return
+            return False
 
         # Check line of sight (wall blocking)
         if not self._has_line_of_sight_adjacent(
             self.local_map, self.player.x, self.player.y, target.x, target.y
         ):
             self.log.add("Something stands between thee and thy mark.", AGED_WOOD)
-            return
+            return False
+
+        self._free_move_pending = False
 
         weapon = self._get_equipped_weapon() or _UNARMED_PROFILE
 
@@ -5202,7 +5229,7 @@ class Engine:
                 )
             if target_fighter.is_dead:
                 self._on_entity_death(target)
-            return
+            return True
 
         creature_def          = self.data.entities.get(creature_id(target), {})
         creature_essence_mods = creature_def.get("essence_modifiers", {})
@@ -5263,6 +5290,7 @@ class Engine:
             self._on_entity_death(target)
 
         self._apply_melee_retaliation(target, result)
+        return True
 
     def _player_weapon_profile(self, weapon: dict, weapon_item) -> dict:
         """Use the same perk and coating modifiers for both melee routes."""
@@ -5346,15 +5374,28 @@ class Engine:
                     self._death_killer = target.name
                     self._on_player_death()
 
-    def _try_moveset_action(self, key: int) -> bool:
-        """Attempt a moveset action (Q or R). Returns True if a turn was spent."""
+    def _weapon_action_phases(self, cost: float) -> int:
+        """Settle decimal costs to millionths; keep a bounded signed residual.
+
+        Whole adjustments truncate toward zero so the first fast action still
+        pays its base phase. Integer boundaries avoid accumulating float drift.
+        Ordinary actions never touch this weapon-only balance.
+        """
+        units = 1_000_000
+        balance = self._weapon_time_balance + round((cost - 1.0) * units)
+        whole = (abs(balance) // units) * (-1 if balance < 0 else 1)
+        self._weapon_time_balance = balance - whole * units
+        return 1 + whole
+
+    def _try_moveset_action(self, key: int):
+        """Return the committed moveset result, or False for a free rejection."""
         from engine.movesets import get_moveset_action, execute_moveset, apply_damage_mult
         from engine.combat import resolve_attack, get_body_def, roll_dice
         from engine.effect_lifecycle import creature_id, coated_weapon, coating_contact, knight_disruption
 
         player_fighter = getattr(self.player, "fighter", None)
         if (self._player_is_dead or not self.player.is_alive
-                or not player_fighter or not player_fighter.can_attack()):
+                or not player_fighter or player_fighter.hp <= 0 or not player_fighter.can_attack()):
             self.log.add("Thou canst not strike.", AGED_WOOD)
             return False
 
@@ -5402,6 +5443,8 @@ class Engine:
             # Blocked by positioning or HP gate — messages already posted
             return False
 
+        self._free_move_pending = False
+
         # Set cooldown
         cooldown = action.get("cooldown", 0)
         if cooldown > 0:
@@ -5410,9 +5453,6 @@ class Engine:
         # Resolve damage via normal combat pipeline with modifiers
         player_fighter = getattr(self.player, "fighter", None)
         target_fighter = getattr(target, "fighter", None)
-        if not player_fighter or not target_fighter:
-            return True
-
         body_def = get_body_def(target_fighter, self.data.bodies)
         creature_def = self.data.entities.get(creature_id(target), {})
         creature_essence_mods = creature_def.get("essence_modifiers", {})
@@ -5519,12 +5559,6 @@ class Engine:
 
         # On-kill effects
         if target_dead:
-            # Free move on kill
-            if ms_result.free_move:
-                self.log.add("The momentum carries.", MSG_COMBAT_OUT)
-                # Player gets one free move — mark it
-                self._free_move_pending = True
-
             # Place pool on kill
             if ms_result.place_pool:
                 from generation.decor_utils import place_decor
@@ -5534,11 +5568,8 @@ class Engine:
 
         self._apply_melee_retaliation(target, result)
 
-        # Move debt from turn cost
-        if ms_result.turn_cost != 1.0:
-            self._move_debt += ms_result.turn_cost - 1.0
-
-        return True
+        ms_result.free_move = bool(ms_result.free_move and target_dead)
+        return ms_result
 
     def _reveal_creature_knowledge(self, target: "Actor") -> None:
         """Reveal one unknown weakness or strength of a creature type."""
@@ -5711,6 +5742,7 @@ class Engine:
             self._wraith_overcorrect_turns -= 1
 
     def _on_player_death(self) -> None:
+        self._free_move_pending = False
         self.trigger_screenshake(6.0)
 
         # Capture the last 5 messages before adding death messages

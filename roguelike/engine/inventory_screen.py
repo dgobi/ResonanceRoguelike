@@ -303,9 +303,9 @@ class InventoryScreen:
                     if before_items != tuple(id(item) for item in inv.items):
                         self._flat = []
                         self.selected = max(0, self.selected - 1)
-                    # heal_minor rejects without an action. Other handlers can
-                    # return False after a paid action (e.g. reading/equipping).
-                    if row_item.on_use == "heal_minor" and not consumed:
+                    # Consumption and commitment differ: reading/equipping pay,
+                    # inspection, rejected use and pending confirmations do not.
+                    if not engine.item_system.last_use_committed:
                         return True
                     if engine._pending_consume or engine._pending_throw:
                         return True  # Opening a confirmation/target command costs no turn.
