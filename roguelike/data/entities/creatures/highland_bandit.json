@@ -17,7 +17,8 @@
     "sees_in_dark": false,
     "faction": "outlaw",
     "hostile_to": [
-      "player"
+      "player",
+      "stalker"
     ]
   },
   "ai_type": "wandering",

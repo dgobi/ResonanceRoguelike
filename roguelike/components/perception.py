@@ -20,7 +20,7 @@ class Perception:
         self.hearing_radius = hearing_radius
         self.sees_in_dark   = sees_in_dark
         self.faction        = faction
-        self.hostile_to     = hostile_to or ["player"]
+        self.hostile_to     = ["player"] if hostile_to is None else list(hostile_to)
 
     def is_hostile_to(self, other_faction: str) -> bool:
         return other_faction in self.hostile_to

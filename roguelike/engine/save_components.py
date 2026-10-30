@@ -247,9 +247,15 @@ def validate_actor_runtime(row, local_map=None):
 
 
 def restore_actor_runtime(actor, row):
+    actor._individual_id = row.get('individual_id')
     record = row.get("component_state", {})
     restore(actor, record.get("actor", {}), ACTOR_STATE)
     restore(actor, record.get("actor", {}), ACTOR_OPTIONAL_STATE)
     if actor.ai is not None:
+        actor.ai.local_target = copy.deepcopy(row.get('local_target'))
+        if actor.ai.local_target is None:
+            from components.ai import AIState
+            if actor.ai.state == AIState.RIVAL:
+                actor.ai.state = AIState.WANDERING
         restore(actor.ai, record.get("ai", {}), AI_STATE)
         restore(actor.ai, record.get("ai", {}), AI_OPTIONAL_STATE)

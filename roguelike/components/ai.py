@@ -20,6 +20,7 @@ class AIState(enum.Enum):
     HUNTING    = "hunting"
     FLEEING    = "fleeing"
     ATTACKING  = "attacking"
+    RIVAL      = "rival"
     WAITING    = "waiting"
 
 
@@ -114,6 +115,9 @@ class AI:
             return
 
         can_see_player = _creature_can_see_player(actor, player, local_map, ambient_light, engine=engine)
+        from engine.local_rivals import supported
+        if supported(actor) and not perception.is_hostile_to('player'):
+            can_see_player = False
 
         dist = _distance(actor, player)
 
@@ -493,7 +497,10 @@ class WanderingAI(AI):
     Default AI. Wanders, hunts when it sees the player.
     Base behaviour for most creatures.
     """
-    pass
+    def take_turn(self, actor, local_map, entities, player, log, rng, ambient_light, engine=None):
+        from engine.local_rivals import take_turn
+        if not take_turn(self, actor, local_map, entities, player, log, rng, ambient_light, engine):
+            super().take_turn(actor, local_map, entities, player, log, rng, ambient_light, engine=engine)
 
 
 class AmbushAI(AI):
@@ -710,6 +717,12 @@ def _monster_attack_entity(monster, target, engine) -> bool:
         return False
 
     is_player = (target is engine.player)
+    from engine.local_rivals import eligible, active, revalidate, visible
+    if not is_player and (not active(engine, monster)
+                          or not eligible(engine, monster, target)
+                          or revalidate(engine, monster) is not target):
+        return False
+    observed = is_player or visible(engine, monster, target)
 
     from engine.effect_lifecycle import creature_id, armor_contact, ability_enabled
 
@@ -766,7 +779,10 @@ def _monster_attack_entity(monster, target, engine) -> bool:
         return True
 
     # Pre-attack announcement
-    engine.log.add(f"The {monster.name} {attack_verb}.", WORN_STONE)
+    if observed:
+        announcement = (f"The {monster.name} {attack_verb}." if is_player else
+                        f"The {monster.name} strikes at the {target.name}.")
+        engine.log.add(announcement, WORN_STONE)
 
     weapon = {
         "damage_dice":      monster_def.get("damage_dice",              "1d4"),
@@ -824,6 +840,8 @@ def _monster_attack_entity(monster, target, engine) -> bool:
     from config import DEBUG_MODE as _DEBUG_MODE
     _dbg_appended = False
     for msg, mtype in zip(result.messages, result.message_types):
+        if not observed:
+            continue
         if mtype == "deflect":
             color = STONE_BLUE       # slate_mid — dim
         elif mtype == "impair":
@@ -834,9 +852,9 @@ def _monster_attack_entity(monster, target, engine) -> bool:
             msg = msg + "  " + result.debug_formula
             _dbg_appended = True
         engine.log.add(f"› {msg}", color)
-    if _DEBUG_MODE and not _dbg_appended and result.debug_formula:
+    if observed and _DEBUG_MODE and not _dbg_appended and result.debug_formula:
         engine.log.add(f"  {result.debug_formula}", OLD_GROWTH)
-    if result.damage_number > 0:
+    if observed and result.damage_number > 0:
         engine.log.add(f"  {result.damage_number} damage.", DUSTY_ROSE)  # bright red
         if is_player and getattr(engine.display, "CALLOUT_DAMAGE_NUMBERS", True):
             _num_y = target.y - 0.3 if result.is_crit else float(target.y)
@@ -910,6 +928,8 @@ def _monster_attack_entity(monster, target, engine) -> bool:
         target.is_alive = False
         if is_player:
             engine._death_killer = monster.name
+        else:
+            engine._on_entity_death(target, killer=monster, observed=observed)
 
     # Ranged attack tween — fires on hit, miss, and deflect alike.
     if _do_ranged:

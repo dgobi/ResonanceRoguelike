@@ -227,11 +227,13 @@ class ChunkCache:
         active = self._chunk_path(address.world_x, address.world_y) if address.submap_id is None else self._submap_path(address.submap_id)
         payloads['chunks/' + active.name] = pickle.dumps(self._cached(local_map, entities), protocol=pickle.HIGHEST_PROTOCOL)
         from world.local_map import LocalMap
+        identities = set()
         for name, raw in payloads.items():
             cached = pickle.loads(raw)
             if not isinstance(cached, CachedChunk) or not isinstance(cached.local_map, LocalMap):
                 raise SaveFormatError(f'Invalid scene: {name}')
             _validate_entities(cached.entities, data, cached.local_map)
+            _claim_individuals(cached.entities, identities)
         return payloads
 
 
@@ -314,6 +316,14 @@ class SaveManager:
             address = SceneAddress.from_player(player_data, world_data)
             _validate_pending_arrivals(player_data, world_data)
             payloads = self.cache.snapshot(address, engine.local_map, engine.entities, engine.data)
+            identities = set()
+            for raw in payloads.values():
+                _claim_individuals(pickle.loads(raw).entities, identities)
+            for category in ('live_pursuers', 'pending_pursuer_arrivals'):
+                for row in player_data.get(category, []):
+                    _validate_entities([row['entity']], engine.data)
+                    _validate_transfer_actor(row['entity'])
+                    _claim_individuals([row['entity']], identities)
             payloads.update({'world.json': encoded(world_data), 'player.json': encoded(player_data),
                 'meta.json': encoded(dict(save_version=SAVE_VERSION, saved_at=datetime.datetime.now().isoformat(),
                     world_x=engine.world_x, world_y=engine.world_y, turn=engine.world_time.turn,
@@ -337,9 +347,11 @@ class SaveManager:
         cold_cache = ChunkCache(self.save_path, base_path=path)
         # All scenes belong to the checkpoint: validate even inactive owners
         # before installing any player/world/cache reference.
+        identities = set()
         for scene in sorted((path / 'chunks').glob('*.pkl')):
             cached = cold_cache._read(scene)
             _validate_entities(cached.entities, engine.data, cached.local_map)
+            _claim_individuals(cached.entities, identities)
             _deserialize_entities(cached.entities, engine)
         cached = address.load(cold_cache)
         if cached is None:
@@ -350,6 +362,8 @@ class SaveManager:
         for owner in ('live_pursuers', 'pending_pursuer_arrivals'):
             for row in player_data.get(owner, []):
                 _validate_entities([row['entity']], engine.data)
+                _validate_transfer_actor(row['entity'])
+                _claim_individuals([row['entity']], identities)
         actors = _deserialize_entities(cached.entities, engine)
         from world.world_map import WorldMap
         world = WorldMap(world_data['width'], world_data['height'])
@@ -1057,6 +1071,8 @@ def _serialize_entity(entity: "Actor") -> dict:
 
     return {
         "type":            "actor",
+        **({"individual_id": entity._individual_id} if getattr(entity, '_individual_id', None) is not None else {}),
+        **({"local_target": copy.deepcopy(ai.local_target)} if getattr(ai, 'local_target', None) is not None else {}),
         "id":              creature_id,
         "x":               entity.x,
         "y":               entity.y,
@@ -1098,12 +1114,38 @@ def _is_player(entity: "Actor") -> bool:
     return entity.name == "Player"
 
 
+def _validate_transfer_actor(row):
+    if row.get('local_target') is not None:
+        raise SaveFormatError('Local rival intent cannot own a player-pursuer transfer')
+
+
+def _claim_individuals(rows, identities):
+    for row in rows:
+        identity = row.get('individual_id')
+        if identity is not None:
+            if identity in identities:
+                raise SaveFormatError('Duplicate individual_id across scene/transfer owners')
+            identities.add(identity)
+
+
 def _validate_entities(rows, data, local_map=None) -> None:
     if not isinstance(rows, list):
         raise SaveFormatError("Scene entities must be an array (possibly empty)")
+    from engine.local_rivals import validate_row
+    identities = set()
+    if local_map is not None:
+        sequence = getattr(local_map, '_rival_identity_sequence', 0)
+        if type(sequence) is not int or not 0 <= sequence < 10**16:
+            raise SaveFormatError('Invalid rival identity sequence')
     for index, row in enumerate(rows):
         if not isinstance(row, dict):
             raise SaveFormatError(f"Actor row {index} must be an object")
+        validate_row(row, local_map)
+        individual = row.get('individual_id')
+        if individual is not None:
+            if individual in identities:
+                raise SaveFormatError('Duplicate individual_id in owning scene')
+            identities.add(individual)
         if not row.get("is_alive", True):
             continue  # Existing corpse representation; broader remains state: B2.
         identity = row.get("id")

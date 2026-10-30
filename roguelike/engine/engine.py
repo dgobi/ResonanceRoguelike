@@ -3538,6 +3538,9 @@ class Engine:
             _psu = getattr(_e, "_pending_stair_use", None)
             if not _psu:
                 continue
+            if getattr(_e.ai, 'local_target', None) is not None:
+                _e._pending_stair_use = None
+                continue
             from engine.effect_lifecycle import disrupted
             if disrupted(_e, self.local_map):
                 continue
@@ -4865,6 +4868,8 @@ class Engine:
         for actor in self.entities:
             if getattr(actor, 'ai', None) is not None:
                 current_interest(actor.ai, self.world_time.turn)
+                from engine.local_rivals import revalidate
+                revalidate(self, actor)
         from engine.engine import GameMode
         
         if getattr(self, "mode", None) == GameMode.OVERMAP:
@@ -5208,7 +5213,7 @@ class Engine:
                     DUSTY_ROSE,
                 )
             if target_fighter.is_dead:
-                self._on_entity_death(target)
+                self._on_entity_death(target, killer=self.player)
             return True
 
         creature_def          = self.data.entities.get(creature_id(target), {})
@@ -5267,7 +5272,7 @@ class Engine:
         self._apply_player_hit_effects(target, result)
 
         if result.defender_dead or target_fighter.is_dead:
-            self._on_entity_death(target)
+            self._on_entity_death(target, killer=self.player)
 
         self._apply_melee_retaliation(target, result)
         return True
@@ -5547,7 +5552,7 @@ class Engine:
                 from generation.decor_utils import place_decor
                 place_decor(self.local_map, target.x, target.y, ms_result.place_pool)
 
-            self._on_entity_death(target)
+            self._on_entity_death(target, killer=self.player)
 
         self._apply_melee_retaliation(target, result)
 
@@ -5651,7 +5656,7 @@ class Engine:
             return
         place_decor(self.local_map, x, y, decor_id)
 
-    def _on_entity_death(self, entity: "Actor") -> None:
+    def _on_entity_death(self, entity: "Actor", *, killer=None, observed=None) -> None:
         from engine.message_log import MSG_DANGER
         from engine.hooks import HookEvent
         from engine.effect_lifecycle import creature_id
@@ -5659,14 +5664,23 @@ class Engine:
         # Fighter death may already be set; this separate flag owns finalization.
         if getattr(entity, "_death_finalized", False):
             return
+        if observed is None:
+            from engine.local_rivals import visible
+            observed = killer is self.player or visible(self, entity)
         entity._death_finalized = True
         target_id = creature_id(entity)
 
-        self.log.add(f"The {entity.name} is destroyed.", MSG_DANGER)
+        if observed:
+            self.log.add(f"The {entity.name} is destroyed.", MSG_DANGER)
         entity.is_alive = False
+        entity.blocks_movement = False
+        from engine.local_rivals import revalidate
+        for observer in self.entities:
+            if getattr(observer, 'ai', None) is not None:
+                revalidate(self, observer)
 
         # on_death creature sound callout
-        if self.display.CALLOUT_CREATURE_SOUNDS:
+        if observed and self.display.CALLOUT_CREATURE_SOUNDS:
             _cdef = self.data.entities.get(target_id, {})
             _csnd = _cdef.get("callout_sounds", {}).get("on_death")
             if _csnd:
@@ -5687,7 +5701,7 @@ class Engine:
             "x": entity.x, "y": entity.y,
             "player": self.player,
             "engine": self,
-        })
+        }) if killer is self.player else []
         _apply_effects(effects, self)
 
         # Ephemeral creatures dissolve — no corpse

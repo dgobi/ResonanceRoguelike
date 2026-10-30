@@ -97,6 +97,7 @@ def emit(engine, x, y, kind, *, maker=None):
         # Actual player trails always win. Ignored events cannot wait behind
         # genuine pursuit or refresh its memory. Sight is rechecked at decision.
         if (getattr(actor, '_last_known_px', None) is not None
+                or getattr(ai, 'local_target', None) is not None
                 or ai.state in (AIState.HUNTING, AIState.ALERTED, AIState.ATTACKING)):
             clear_interest(ai)
             continue

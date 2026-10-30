@@ -80,6 +80,9 @@ class AISystem:
 
             from engine.sound import current_interest
             current_interest(ai, world_time.turn)
+            if engine is not None:
+                from engine.local_rivals import revalidate
+                revalidate(engine, entity)
             if disrupted(entity, local_map):
                 continue
 
@@ -146,6 +149,11 @@ class AISystem:
         if ai is None:
             return
         if not getattr(entity, "is_alive", True):
+            return
+
+        # This route simulates genuine player pursuers only, never local rivals.
+        from components.ai import AIState
+        if ai.state == AIState.RIVAL or getattr(ai, 'local_target', None) is not None:
             return
 
         if disrupted(entity, local_map):

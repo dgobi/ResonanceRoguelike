@@ -15,9 +15,10 @@
     "sight_radius": 12,
     "hearing_radius": 6,
     "sees_in_dark": false,
-    "faction": "predator",
+    "faction": "stalker",
     "hostile_to": [
-      "player"
+      "player",
+      "outlaw"
     ]
   },
   "ai_type": "wandering",
